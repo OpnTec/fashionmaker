@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1100</width>
     <height>700</height>
    </rect>
   </property>
@@ -14,9 +14,37 @@
    <string>Valentina</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" alignment="Qt::AlignTop">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="2">
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>6</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>922</width>
+        <height>582</height>
+       </size>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
      <widget class="QToolBox" name="toolBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -25,42 +53,72 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
-         <height>111</height>
+         <width>154</width>
+         <height>81</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <attribute name="label">
         <string>Точка</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QPushButton" name="pushButton">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="3">
+         <widget class="QToolButton" name="toolButton_5">
           <property name="text">
-           <string>PushButton</string>
+           <string>...</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
-          </attribute>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
+        <item row="0" column="1">
+         <widget class="QToolButton" name="toolButton_2">
           <property name="text">
-           <string>PushButton</string>
+           <string>...</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
-          </attribute>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
+        <item row="0" column="2">
+         <widget class="QToolButton" name="toolButton_3">
           <property name="text">
-           <string>PushButton</string>
+           <string>...</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
-          </attribute>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonSinglePoint">
+          <property name="toolTip">
+           <string>Точка</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Точка</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/spoint.png</normaloff>:/icon/32x32/spoint.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QToolButton" name="toolButton_4">
+          <property name="text">
+           <string>...</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -70,15 +128,21 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>154</width>
          <height>111</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <attribute name="label">
         <string>Лінія</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_4">
           <property name="text">
            <string>PushButton</string>
@@ -88,7 +152,7 @@
           </attribute>
          </widget>
         </item>
-        <item>
+        <item row="1" column="0">
          <widget class="QPushButton" name="pushButton_5">
           <property name="text">
            <string>PushButton</string>
@@ -98,7 +162,7 @@
           </attribute>
          </widget>
         </item>
-        <item>
+        <item row="2" column="0">
          <widget class="QPushButton" name="pushButton_6">
           <property name="text">
            <string>PushButton</string>
@@ -115,15 +179,21 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
-         <height>73</height>
+         <width>154</width>
+         <height>45</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <attribute name="label">
         <string>Сплайн</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_7">
           <property name="text">
            <string>PushButton</string>
@@ -137,15 +207,21 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
-         <height>73</height>
+         <width>154</width>
+         <height>45</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <attribute name="label">
         <string>Дуга</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_8">
           <property name="text">
            <string>PushButton</string>
@@ -156,16 +232,6 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QGraphicsView" name="graphicsView">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>2</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -173,7 +239,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1100</width>
      <height>25</height>
     </rect>
    </property>
@@ -203,6 +269,7 @@
    </attribute>
    <addaction name="actionDraw"/>
    <addaction name="actionDetails"/>
+   <addaction name="actionArrowTool"/>
   </widget>
   <widget class="QToolBar" name="toolBarDraws">
    <property name="windowTitle">
@@ -223,7 +290,7 @@
     <enum>BottomToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <action name="actionNew">
@@ -282,6 +349,16 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/draw.png</normaloff>:/icon/32x32/draw.png</iconset>
+   </property>
    <property name="text">
     <string>Креслення</string>
    </property>
@@ -290,6 +367,13 @@
    </property>
   </action>
   <action name="actionDetails">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/kontur.png</normaloff>:/icon/32x32/kontur.png</iconset>
+   </property>
    <property name="text">
     <string>Деталі</string>
    </property>
@@ -297,17 +381,32 @@
     <string>Режим деталі</string>
    </property>
   </action>
+  <action name="actionArrowTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Інструмент вказівник</string>
+   </property>
+   <property name="toolTip">
+    <string>Інструмент вказівник</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup_2">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="buttonGroup">
    <property name="exclusive">
     <bool>false</bool>
    </property>

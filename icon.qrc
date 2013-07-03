@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/64x64/icon64x64.png</file>
+        <file>icon/32x32/draw.png</file>
+        <file>icon/32x32/kontur.png</file>
+        <file>icon/32x32/spoint.png</file>
+        <file>icon/32x32/arrow_cursor.png</file>
+    </qresource>
+</RCC>

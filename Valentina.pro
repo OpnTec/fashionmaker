@@ -13,8 +13,18 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    widgets/vmaingraphicsscene.cpp \
+    dialogs/dialogsinglepoint.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    widgets/vmaingraphicsscene.h \
+    dialogs/dialogsinglepoint.h \
+    options.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialogs/dialogsinglepoint.ui
+
+RESOURCES += \
+    icon.qrc \
+    cursor.qrc
