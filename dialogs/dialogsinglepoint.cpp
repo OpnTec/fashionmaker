@@ -2,6 +2,7 @@
 #include "ui_dialogsinglepoint.h"
 #include <QShowEvent>
 #include <QPushButton>
+#include <QDebug>
 
 #include "../options.h"
 
@@ -11,21 +12,24 @@ DialogSinglePoint::DialogSinglePoint(QWidget *parent) :
 {
     ui->setupUi(this);
     isInitialized = false;
-    ui->spinBoxX->setRange(0,(qint32)(PaperSize*PrintDPI/25.4));
-    ui->spinBoxY->setRange(0,(qint32)(PaperSize*PrintDPI/25.4));
+    ui->doubleSpinBoxX->setRange(0,PaperSize/PrintDPI*25.4);
+    ui->doubleSpinBoxY->setRange(0,PaperSize/PrintDPI*25.4);
     QPushButton* pOkButton = ui->buttonBox->button(QDialogButtonBox::Ok);
     pOkButton->setEnabled(false);
+    connect(pOkButton, &QPushButton::clicked, this, &DialogSinglePoint::OkOperation);
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NameChanged);
+    QPushButton* pCanselButton = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    connect(pCanselButton, &QPushButton::clicked, this, &DialogSinglePoint::CanselOperation);
 }
 
 void DialogSinglePoint::mousePress(QPointF scenePos){
     if(isInitialized == false){
-        ui->spinBoxX->setValue((qint32)(scenePos.x()*PrintDPI/25.4));
-        ui->spinBoxY->setValue((qint32)(scenePos.y()*PrintDPI/25.4));
+        ui->doubleSpinBoxX->setValue(scenePos.x()/PrintDPI*25.4);
+        ui->doubleSpinBoxY->setValue(scenePos.y()/PrintDPI*25.4);
         this->show();
     } else {
-        ui->spinBoxX->setValue((qint32)(scenePos.x()*PrintDPI/25.4));
-        ui->spinBoxY->setValue((qint32)(scenePos.y()*PrintDPI/25.4));
+        ui->doubleSpinBoxX->setValue(scenePos.x()/PrintDPI*25.4);
+        ui->doubleSpinBoxY->setValue(scenePos.y()/PrintDPI*25.4);
     }
 }
 
@@ -55,7 +59,40 @@ void DialogSinglePoint::NameChanged(){
     }
 }
 
-DialogSinglePoint::~DialogSinglePoint()
-{
+void DialogSinglePoint::CanselOperation(){
+    emit ToolCanseled();
+}
+
+void DialogSinglePoint::OkOperation(){
+    point = QPointF(ui->doubleSpinBoxX->value()*PrintDPI/25.4,
+                    ui->doubleSpinBoxY->value()*PrintDPI/25.4);
+    name = ui->lineEditName->text();
+    emit SinglePointCreated(ui->lineEditName->text(), point);
+}
+
+void DialogSinglePoint::closeEvent ( QCloseEvent * event ){
+    emit ToolCanseled();
+    event->accept();
+}
+
+void DialogSinglePoint::setData(const QString name, const QPointF point){
+    this->name = name;
+    this->point = point;
+    isInitialized = true;
+    ui->lineEditName->setText(name);
+    ui->doubleSpinBoxX->setValue(point.x()/PrintDPI*25.4);
+    ui->doubleSpinBoxY->setValue(point.y()/PrintDPI*25.4);
+}
+
+QString DialogSinglePoint::getName()const{
+    return name;
+}
+
+QPointF DialogSinglePoint::getPoint()const{
+    return point;
+}
+
+DialogSinglePoint::~DialogSinglePoint(){
     delete ui;
 }
+

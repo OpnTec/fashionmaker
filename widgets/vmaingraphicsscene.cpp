@@ -1,4 +1,5 @@
 #include "vmaingraphicsscene.h"
+#include <QDebug>
 
 
 VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene()

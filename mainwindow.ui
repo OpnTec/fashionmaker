@@ -32,8 +32,19 @@
       <property name="mouseTracking">
        <bool>true</bool>
       </property>
+      <property name="sceneRect">
+       <rectf>
+        <x>0.000000000000000</x>
+        <y>0.000000000000000</y>
+        <width>50000.000000000000000</width>
+        <height>50000.000000000000000</height>
+       </rectf>
+      </property>
       <property name="alignment">
        <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+      </property>
+      <property name="renderHints">
+       <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
       </property>
      </widget>
     </item>
@@ -90,6 +101,9 @@
         </item>
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonSinglePoint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="toolTip">
            <string>Точка</string>
           </property>
@@ -258,6 +272,9 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -281,6 +298,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNewDraw"/>
   </widget>
   <widget class="QToolBar" name="toolBarOption">
    <property name="windowTitle">
@@ -320,6 +338,9 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="document-save">
      <normaloff/>
@@ -333,6 +354,9 @@
    </property>
   </action>
   <action name="actionSaveAs">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="document-save-as">
      <normaloff/>
@@ -353,7 +377,7 @@
     <bool>true</bool>
    </property>
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="icon.qrc">
@@ -369,6 +393,9 @@
   <action name="actionDetails">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="icon.qrc">
@@ -397,6 +424,27 @@
    </property>
    <property name="toolTip">
     <string>Інструмент вказівник</string>
+   </property>
+  </action>
+  <action name="actionNewDraw">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/new_draw.png</normaloff>:/icon/32x32/new_draw.png</iconset>
+   </property>
+   <property name="text">
+    <string>Нове креслення</string>
+   </property>
+   <property name="toolTip">
+    <string>Додати нове креслення</string>
+   </property>
+  </action>
+  <action name="actionOptionDraw">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
+   </property>
+   <property name="text">
+    <string>Змінити ім'я креслення</string>
    </property>
   </action>
  </widget>
