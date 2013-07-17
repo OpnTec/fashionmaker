@@ -4,6 +4,8 @@
 #include <QCloseEvent>
 
 #include "../container/vincrementtablerow.h"
+#include "../widgets/delegate.h"
+#include "../widgets/doubledelegate.h"
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogIncrements){
@@ -28,6 +30,11 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
+    SpinBoxDelegate *delegate = new SpinBoxDelegate(ui->tableWidgetIncrement);
+    DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(2, delegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
     FillStandartTable();
     FillIncrementTable();
 
