@@ -19,7 +19,12 @@ SOURCES += main.cpp\
     widgets/vgraphicssimpletextitem.cpp \
     xml/vdomdocument.cpp \
     container/vpointf.cpp \
-    container/vcontainer.cpp
+    container/vcontainer.cpp \
+    tools/vtoolpoint.cpp \
+    container/calculator.cpp \
+    dialogs/dialogincrements.cpp \
+    container/vstandarttablecell.cpp \
+    container/vincrementtablerow.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -29,10 +34,16 @@ HEADERS  += mainwindow.h \
     widgets/vgraphicssimpletextitem.h \
     xml/vdomdocument.h \
     container/vpointf.h \
-    container/vcontainer.h
+    container/vcontainer.h \
+    tools/vtoolpoint.h \
+    container/calculator.h \
+    dialogs/dialogincrements.h \
+    container/vstandarttablecell.h \
+    container/vincrementtablerow.h
 
 FORMS    += mainwindow.ui \
-    dialogs/dialogsinglepoint.ui
+    dialogs/dialogsinglepoint.ui \
+    dialogs/dialogincrements.ui
 
 RESOURCES += \
     icon.qrc \

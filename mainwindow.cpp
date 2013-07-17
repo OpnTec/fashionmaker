@@ -38,8 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::triggeredActionSave);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::triggeredActionOpen);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::triggeredActionNew);
+    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::triggeredActionTable);
 
     data = new VContainer;
+    CreateManTableIGroup ();
 
     doc = new VDomDocument(data);
     doc->CreateEmptyFile();
@@ -87,12 +89,7 @@ void MainWindow::triggeredActionNewDraw(){
     if ( index != -1 ) { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
     }
-    ui->actionSaveAs->setEnabled(true);
-    ui->actionDraw->setEnabled(true);
-    ui->actionDetails->setEnabled(true);
-    ui->toolButtonSinglePoint->setEnabled(true);
-    ui->actionOptionDraw->setEnabled(true);
-    ui->actionSave->setEnabled(true);
+    SetEnableWidgets(true);
 }
 
 void MainWindow::triggeredOptionDraw(){
@@ -179,11 +176,14 @@ void MainWindow::ToolBarOption(){
     QStringList list;
     list << "104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
          << "182" << "188";
-    QComboBox* comboBoxGrow = new QComboBox;
+    QComboBox *comboBoxGrow = new QComboBox;
     comboBoxGrow->clear();
     comboBoxGrow->addItems(list);
     comboBoxGrow->setCurrentIndex(12);
     ui->toolBarOption->addWidget(comboBoxGrow);
+    connect(comboBoxGrow,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::ChangedGrowth);
 
     QLabel * labelSize = new QLabel;
     labelSize->setText(" Розмір: ");
@@ -191,11 +191,14 @@ void MainWindow::ToolBarOption(){
 
     list.clear();
     list << "28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50" << "52" << "54" << "56";
-    QComboBox* comboBoxSize = new QComboBox;
+    QComboBox *comboBoxSize = new QComboBox;
     comboBoxSize->clear();
     comboBoxSize->addItems(list);
     comboBoxSize->setCurrentIndex(11);
     ui->toolBarOption->addWidget(comboBoxSize);
+    connect(comboBoxSize,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::ChangedSize);
 
     ui->toolBarOption->addSeparator();
 
@@ -218,6 +221,9 @@ void MainWindow::ToolBarDraws(){
 
     ui->toolBarDraws->addAction(ui->actionOptionDraw);
     ui->actionOptionDraw->setEnabled(false);
+
+    ui->toolBarDraws->addAction(ui->actionTable);
+    ui->actionTable->setEnabled(false);
 }
 
 void MainWindow::currentDrawChanged( int index ){
@@ -356,10 +362,12 @@ void MainWindow::triggeredActionOpen(){
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
             doc->Parse(Document::FullParse, scene, comboBoxDraws);
+            CreateManTableIGroup ();
             connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
             ui->actionSave->setEnabled(true);
             ui->actionSaveAs->setEnabled(true);
+            ui->actionTable->setEnabled(true);
             QString nameDraw = doc->GetNameActivDraw();
             qint32 index = comboBoxDraws->findText(nameDraw);
             if ( index != -1 ) { // -1 for not found
@@ -375,6 +383,7 @@ void MainWindow::triggeredActionNew(){
     setWindowTitle("Valentina");
     data->Clear();
     doc->clear();
+    CreateManTableIGroup ();
     CanselTool();
     comboBoxDraws->clear();
     fileName.clear();
@@ -387,6 +396,110 @@ void MainWindow::haveChange(){
     if(!fileName.isEmpty()){
         ui->actionSave->setEnabled(true);
     }
+}
+
+void MainWindow::CreateManTableIGroup () const{
+    data->AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
+    data->AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
+    data->AddStandartTableCell("Vtos", VStandartTableCell(1450, 2, 51));
+    data->AddStandartTableCell("Vtosh", VStandartTableCell(1506, 2, 54));
+    data->AddStandartTableCell("Vpt", VStandartTableCell(1438, 3, 52));
+    data->AddStandartTableCell("Vst", VStandartTableCell(1257, -1, 49));
+    data->AddStandartTableCell("Vlt", VStandartTableCell(1102, 0, 43));
+    data->AddStandartTableCell("Vk", VStandartTableCell(503, 0, 22));
+    data->AddStandartTableCell("Vsht", VStandartTableCell(1522, 2, 54));
+    data->AddStandartTableCell("Vzy", VStandartTableCell(1328, 0, 49));
+    data->AddStandartTableCell("Vlop", VStandartTableCell(1320, 0, 49));
+    data->AddStandartTableCell("Vps", VStandartTableCell(811, -1, 36));
+    data->AddStandartTableCell("Osh", VStandartTableCell(404,8, 2));
+    data->AddStandartTableCell("OgI", VStandartTableCell(1034, 36, 4));
+    data->AddStandartTableCell("OgII", VStandartTableCell(1044, 38, 2));
+    data->AddStandartTableCell("OgIII", VStandartTableCell(1000, 40, 0));
+    data->AddStandartTableCell("Ot", VStandartTableCell(780, 40, 0));
+    data->AddStandartTableCell("Ob", VStandartTableCell(984, 30, 10));
+    data->AddStandartTableCell("ObI", VStandartTableCell(964, 24, 12));
+    data->AddStandartTableCell("Obed", VStandartTableCell(566, 18, 6));
+    data->AddStandartTableCell("Ok", VStandartTableCell(386, 8, 8));
+    data->AddStandartTableCell("Oi", VStandartTableCell(380, 8, 6));
+    data->AddStandartTableCell("Osch", VStandartTableCell(234, 4, 4));
+    data->AddStandartTableCell("Os", VStandartTableCell(350, 2, 8));
+    data->AddStandartTableCell("Dsb", VStandartTableCell(1120, 0, 44));
+    data->AddStandartTableCell("Dsp", VStandartTableCell(1110, 0, 43));
+    data->AddStandartTableCell("Dn", VStandartTableCell(826, -3, 37));
+    data->AddStandartTableCell("Dps", VStandartTableCell(316, 4, 7));
+    data->AddStandartTableCell("Dpob", VStandartTableCell(783, 14, 15));
+    data->AddStandartTableCell("Ds", VStandartTableCell(260, 1, 6));
+    data->AddStandartTableCell("Op", VStandartTableCell(316, 12, 0));
+    data->AddStandartTableCell("Ozap", VStandartTableCell(180, 4, 0));
+    data->AddStandartTableCell("Pkis", VStandartTableCell(250, 4, 0));
+    data->AddStandartTableCell("SHp", VStandartTableCell(160, 1, 4));
+    data->AddStandartTableCell("Dlych", VStandartTableCell(500, 2, 15));
+    data->AddStandartTableCell("Dzap", VStandartTableCell(768, 2, 24));
+    data->AddStandartTableCell("DIIIp", VStandartTableCell(970, 2, 29));
+    data->AddStandartTableCell("Vprp", VStandartTableCell(214, 3, 3));
+    data->AddStandartTableCell("Vg", VStandartTableCell(262, 8, 3));
+    data->AddStandartTableCell("Dtp", VStandartTableCell(460, 7, 9));
+    data->AddStandartTableCell("Dp", VStandartTableCell(355, 5, 5));
+    data->AddStandartTableCell("Vprz", VStandartTableCell(208, 3, 5));
+    data->AddStandartTableCell("Dts", VStandartTableCell(438, 2, 10));
+    data->AddStandartTableCell("DtsI", VStandartTableCell(469, 2, 10));
+    data->AddStandartTableCell("Dvcht", VStandartTableCell(929, 9, 19));
+    data->AddStandartTableCell("SHg", VStandartTableCell(370, 14, 4));
+    data->AddStandartTableCell("Cg", VStandartTableCell(224, 6, 0));
+    data->AddStandartTableCell("SHs", VStandartTableCell(416, 10, 2));
+    data->AddStandartTableCell("dpzr", VStandartTableCell(121, 6, 0));
+    data->AddStandartTableCell("Ogol", VStandartTableCell(576, 4, 4));
+    data->AddStandartTableCell("Ssh1", VStandartTableCell(205, 5, 0));
+    data->AddStandartTableCell("St", VStandartTableCell(410, 20, 0));
+    data->AddStandartTableCell("Drzap", VStandartTableCell(594, 3, 19));
+    data->AddStandartTableCell("DbII", VStandartTableCell(1020, 0, 44));
+    data->AddStandartTableCell("Sb", VStandartTableCell(504, 15, 4));
+}
+
+void MainWindow::ChangedSize(const QString & text){
+    qint32 size = text.toInt();
+    data->SetSize(size*10);
+    doc->FullUpdateTree();
+}
+
+void MainWindow::ChangedGrowth(const QString &text){
+    qint32 growth = text.toInt();
+    data->SetGrowth(growth*10);
+    doc->FullUpdateTree();
+}
+
+void MainWindow::SetEnableWidgets(bool enable){
+    ui->actionSaveAs->setEnabled(enable);
+    ui->actionDraw->setEnabled(enable);
+    ui->actionDetails->setEnabled(enable);
+    ui->toolButtonSinglePoint->setEnabled(enable);
+    ui->actionOptionDraw->setEnabled(enable);
+    ui->actionSave->setEnabled(enable);
+    ui->actionTable->setEnabled(enable);
+}
+
+void MainWindow::triggeredActionTable(bool checked){
+    if(checked){
+        dialogTable = new DialogIncrements(data, doc, 0);
+        connect(dialogTable, &DialogIncrements::closedActionTable, this,
+                &MainWindow::closedActionTable);
+        dialogTable->show();
+    } else {
+        ui->actionTable->setChecked(true);
+        dialogTable->activateWindow();
+    }
+}
+
+void MainWindow::closedActionTable(){
+    ui->actionTable->setChecked(false);
+    delete dialogTable;
+}
+
+void MainWindow::closeEvent ( QCloseEvent * event ){
+    if(ui->actionTable->isChecked()==true){
+        delete dialogTable;
+    }
+    event->accept();
 }
 
 MainWindow::~MainWindow(){

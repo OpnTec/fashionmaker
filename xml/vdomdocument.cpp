@@ -61,6 +61,8 @@ void VDomDocument::CreateEmptyFile(){
     this->appendChild(domElement);
     QDomNode xmlNode = this->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
     this->insertBefore(xmlNode, this->firstChild());
+    QDomElement incrElement = this->createElement("increments");
+    domElement.appendChild(incrElement);
 }
 
 bool VDomDocument::CheckNameDraw(const QString& name) const{
@@ -229,8 +231,35 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
                         AddNewDraw(domElement, comboBoxDraws);
                     }
                     ParseDrawElement(scene, domElement, parse);
-                    domNode = domNode.nextSibling();
-                    continue;
+                }
+                if(domElement.tagName()=="increments"){
+                    ParseIncrementsElement(domElement);
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+}
+
+void VDomDocument::ParseIncrementsElement(const QDomNode &node){
+    QDomNode domNode = node.firstChild();
+    while(!domNode.isNull()){
+        if(domNode.isElement()){
+            QDomElement domElement = domNode.toElement();
+            if(!domElement.isNull()){
+                if(domElement.tagName() == "increment"){
+                    QString name,desc;
+                    qint32 base;
+                    qreal ksize, kgrowth;
+                    qint64 id;
+                    id = domElement.attribute("id", "").toLongLong();
+                    name = domElement.attribute("name", "");
+                    base = domElement.attribute("base","").toInt();
+                    ksize = domElement.attribute("ksize","").toDouble();
+                    kgrowth = domElement.attribute("kgrowth","").toDouble();
+                    desc = domElement.attribute("description","");
+                    data->AddIncrementTableRow(name,
+                                               VIncrementTableRow(id, base, ksize, kgrowth, desc));
                 }
             }
         }
@@ -263,6 +292,7 @@ void VDomDocument::AddNewDraw(const QDomElement& node, QComboBox *comboBoxDraws)
                             }
                         }
                     }
+                    comboBoxDraws->addItem(name, true);
                 }
             }
         }

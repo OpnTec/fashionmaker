@@ -57,6 +57,7 @@ private:
                                         Document::Enum parse);
     void        ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                   Document::Enum parse, const QString &type);
+    void        ParseIncrementsElement(const QDomNode& node);
     void        AddNewDraw(const QDomElement &node, QComboBox *comboBoxDraws)const;
 };
 

@@ -8,6 +8,7 @@
 
 #include "widgets/vmaingraphicsscene.h"
 #include "dialogs/dialogsinglepoint.h"
+#include "dialogs/dialogincrements.h"
 #include "tools/vtoolsimplepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
@@ -46,9 +47,14 @@ public slots:
     void                triggeredActionOpen();
     void                triggeredActionNew();
     void                haveChange();
+    void                ChangedSize(const QString &text);
+    void                ChangedGrowth(const QString & text);
+    void                triggeredActionTable(bool checked);
+    void                closedActionTable();
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
+    virtual void        closeEvent ( QCloseEvent * event );
 private:
     Ui::MainWindow      *ui;
     Tools::Enum         tool;
@@ -57,6 +63,7 @@ private:
     QLabel              *helpLabel;
     bool                isInitialized;
     DialogSinglePoint   *dialogSinglePoint;
+    DialogIncrements    *dialogTable;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;
@@ -66,6 +73,8 @@ private:
     void                ToolBarDraws();
     void                CanselTool();
     void                ArrowTool();
+    void                CreateManTableIGroup () const;
+    void                SetEnableWidgets(bool enable);
 };
 
 #endif // MAINWINDOW_H

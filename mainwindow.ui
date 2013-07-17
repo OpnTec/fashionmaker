@@ -447,6 +447,18 @@
     <string>Змінити ім'я креслення</string>
    </property>
   </action>
+  <action name="actionTable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/table.png</normaloff>:/icon/32x32/table.png</iconset>
+   </property>
+   <property name="text">
+    <string>Таблиці змінних</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

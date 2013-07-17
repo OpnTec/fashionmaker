@@ -7,5 +7,6 @@
         <file>icon/32x32/arrow_cursor.png</file>
         <file>icon/32x32/new_draw.png</file>
         <file>icon/32x32/option_draw.png</file>
+        <file>icon/32x32/table.png</file>
     </qresource>
 </RCC>
