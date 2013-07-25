@@ -9,12 +9,8 @@
 #include "../widgets/vmaingraphicsscene.h"
 
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                       QGraphicsItem *parent):QGraphicsEllipseItem(parent){
-    this->doc = doc;
-    this->data = data;
+                       QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsEllipseItem(parent){
     radius = 1.5*PrintDPI/25.4;
-    this->id = id;
-    nameActivDraw = doc->GetNameActivDraw();
     //create circle
     VPointF point = data->GetPoint(id);
     QRectF rec = QRectF(point.x(), point.y(), radius*2, radius*2);
@@ -36,28 +32,23 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
     QPointF p1, p2;
     LineIntersectCircle(rec.center(), radius, QLineF(rec.center(), nameRec.center()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(rec.center(), nameRec.center()));
-    line = new QGraphicsLineItem(QLineF(p1, pRec), this);
-    line->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    lineName = new QGraphicsLineItem(QLineF(p1, pRec), this);
+    lineName->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     if(QLineF(p1, pRec).length() <= 4*PrintDPI/25.4){
-        line->setVisible(false);
+        lineName->setVisible(false);
     } else {
-        line->setVisible(true);
+        lineName->setVisible(true);
     }
-
-    connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VToolPoint::ChangedActivDraw);
-    connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VToolPoint::ChangedNameDraw);
-    connect(this, &VToolPoint::haveLiteChange, this->doc, &VDomDocument::haveLiteChange);
-    connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VToolPoint::FullUpdateFromFile);
 }
 
 void VToolPoint::NameChangePosition(const QPointF pos){
-    VPointF point = data->GetPoint(id);
+    VPointF point = VAbstractTool::data->GetPoint(id);
     QRectF rec = this->rect();
     point.setMx(pos.x() - rec.center().x());
     point.setMy(pos.y() - rec.center().y());
     RefreshLine();
     LiteUpdateFromGui(point.mx(), point.my());
-    data->UpdatePoint(id, point);
+    VAbstractTool::data->UpdatePoint(id, point);
 }
 
 /*
@@ -150,11 +141,11 @@ void VToolPoint::RefreshLine(){
     QRectF rec = this->rect();
     LineIntersectCircle(rec.center(), radius, QLineF(rec.center(), nameRec.center()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(rec.center(), nameRec.center()));
-    line->setLine(QLineF(p1, pRec));
+    lineName->setLine(QLineF(p1, pRec));
     if(QLineF(p1, pRec).length() <= 4*PrintDPI/25.4){
-        line->setVisible(false);
+        lineName->setVisible(false);
     } else {
-        line->setVisible(true);
+        lineName->setVisible(true);
     }
 }
 
@@ -167,12 +158,6 @@ void VToolPoint::LiteUpdateFromGui(qreal mx, qreal my){
     }
 }
 
-void  VToolPoint::ChangedNameDraw(const QString oldName, const QString newName){
-    if(nameActivDraw == oldName){
-        nameActivDraw = newName;
-    }
-}
-
 void VToolPoint::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
         this->setPen(QPen(Qt::black, widthHairLine));
@@ -181,8 +166,8 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemIsSelectable, true);
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         namePoint->setBrush(QBrush(Qt::black));
-        line->setPen(QPen(Qt::black, widthHairLine));
-        ignoreContextMenuEvent = false;
+        lineName->setPen(QPen(Qt::black, widthHairLine));
+        VAbstractTool::ChangedActivDraw(newName);
     } else {
         this->setPen(QPen(Qt::gray, widthHairLine));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -190,8 +175,8 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemIsSelectable, false);
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         namePoint->setBrush(QBrush(Qt::gray));
-        line->setPen(QPen(Qt::gray, widthHairLine));
-        ignoreContextMenuEvent = true;
+        lineName->setPen(QPen(Qt::gray, widthHairLine));
+        VAbstractTool::ChangedActivDraw(newName);
     }
 }
 
@@ -200,30 +185,6 @@ void VToolPoint::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ){
         emit ChoosedPoint(id, Scene::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
-}
-
-void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qreal &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const QString &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(value);
-    domElement.setAttributeNode(domAttr);
 }
 
 void VToolPoint::RefreshBaseGeometry(const QString &name, const qreal &x, const qreal &y, const qreal &mx,
@@ -237,13 +198,6 @@ void VToolPoint::RefreshBaseGeometry(const QString &name, const qreal &x, const 
     namePoint->setPos(QPointF(rec.center().x()+mx, rec.center().y()+my));
 
     RefreshLine();
-}
-
-QString VToolPoint::GetNameLine(qint64 firstPoint, qint64 secondPoint) const{
-    VPointF first = data->GetPoint(firstPoint);
-    VPointF second = data->GetPoint(secondPoint);
-    QString name = QString("Line_%1_%2").arg(first.name(), second.name());
-    return name;
 }
 
 VToolPoint::~VToolPoint(){

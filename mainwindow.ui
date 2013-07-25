@@ -57,7 +57,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -159,7 +159,7 @@
          <x>0</x>
          <y>0</y>
          <width>154</width>
-         <height>111</height>
+         <height>50</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -173,33 +173,26 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>PushButton</string>
+         <widget class="QToolButton" name="toolButtonLine">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButton_5">
           <property name="text">
-           <string>PushButton</string>
+           <string>...</string>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
-          </attribute>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton_6">
-          <property name="text">
-           <string>PushButton</string>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/line.png</normaloff>:/icon/32x32/line.png</iconset>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
-          </attribute>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>

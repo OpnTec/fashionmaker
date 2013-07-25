@@ -17,6 +17,7 @@ public:
 public slots:
     virtual void      FullUpdateFromFile();
     void              ClosedDialogEndLine(int result);
+    virtual void      ChangedActivDraw(const QString newName);
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();

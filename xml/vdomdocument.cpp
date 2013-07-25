@@ -3,6 +3,7 @@
 
 #include "../tools/vtoolsimplepoint.h"
 #include "../tools/vtoolendline.h"
+#include "../tools/vtoolline.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -336,6 +337,9 @@ void VDomDocument::ParseCalculationElement(VMainGraphicsScene *scene, const QDom
             if(domElement.tagName() == "point"){
                 ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""));
             }
+            if(domElement.tagName() == "line"){
+                ParseLineElement(scene, domElement, parse);
+            }
         }
     }
 }
@@ -397,6 +401,24 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                         connect(point, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
+            }
+        }
+    }
+}
+
+void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                    Document::Enum parse){
+    if(!domElement.isNull()){
+        qint64 firstPoint;
+        qint64 secondPoint;
+        if(!domElement.isNull()){
+            firstPoint = domElement.attribute("firstPoint", "").toLongLong();
+            secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+            if(parse == Document::FullParse){
+                qint64 id = data->getNextId();
+                VToolLine *line = new VToolLine(this, data, id, firstPoint, secondPoint, Tool::FromFile);
+                scene->addItem(line);
+                connect(line, &VToolLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
             }
         }
     }

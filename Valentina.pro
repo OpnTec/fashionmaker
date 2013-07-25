@@ -28,7 +28,10 @@ SOURCES += main.cpp\
     widgets/delegate.cpp \
     widgets/doubledelegate.cpp \
     dialogs/dialogendline.cpp \
-    tools/vtoolendline.cpp
+    tools/vtoolendline.cpp \
+    tools/vtoolline.cpp \
+    tools/vabstracttool.cpp \
+    dialogs/dialogline.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -47,12 +50,16 @@ HEADERS  += mainwindow.h \
     widgets/delegate.h \
     widgets/doubledelegate.h \
     dialogs/dialogendline.h \
-    tools/vtoolendline.h
+    tools/vtoolendline.h \
+    tools/vtoolline.h \
+    tools/vabstracttool.h \
+    dialogs/dialogline.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
     dialogs/dialogincrements.ui \
-    dialogs/dialogendline.ui
+    dialogs/dialogendline.ui \
+    dialogs/dialogline.ui
 
 RESOURCES += \
     icon.qrc \

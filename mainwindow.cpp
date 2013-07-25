@@ -12,6 +12,7 @@
 
 #include "options.h"
 #include "tools/vtoolendline.h"
+#include "tools/vtoolline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -43,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this,
             &MainWindow::ToolEndLine);
+    connect(ui->toolButtonLine, &QToolButton::clicked, this,
+            &MainWindow::ToolLine);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -201,6 +204,36 @@ void MainWindow::ClosedDialogEndLine(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolLine(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::LineTool;
+        QPixmap pixmap(":/cursor/line_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogLine = new DialogLine(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogLine, &DialogLine::ChoosedPoint);
+        connect(dialogLine, &DialogLine::DialogClosed, this, &MainWindow::ClosedDialogLine);
+    } else {
+        ui->toolButtonLine->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogLine(int result){
+    if(result == QDialog::Accepted){
+        qint64 firstPoint = dialogLine->getFirstPoint();
+        qint64 secondPoint = dialogLine->getSecondPoint();
+
+        qint64 id = data->getNextId();
+        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, Tool::FromGui);
+        scene->addItem(line);
+        connect(line, &VToolLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -313,6 +346,11 @@ void MainWindow::CanselTool(){
             delete dialogEndLine;
             ui->toolButtonEndLine->setChecked(false);
             scene->clearSelection();
+            break;
+        case Tools::LineTool:
+            delete dialogLine;
+            ui->toolButtonLine->setChecked(false);
+            scene->clearFocus();
             break;
     }
 }
@@ -576,6 +614,7 @@ void MainWindow::closeEvent ( QCloseEvent * event ){
 
 void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonEndLine->setEnabled(enable);
+    ui->toolButtonLine->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

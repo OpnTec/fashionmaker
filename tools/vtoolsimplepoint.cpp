@@ -21,7 +21,7 @@ VToolSimplePoint::VToolSimplePoint (VDomDocument *doc, VContainer *data, qint64 
 }
 
 void VToolSimplePoint::AddToFile(){
-    VPointF point = data->GetPoint(id);
+    VPointF point = VAbstractTool::data->GetPoint(id);
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -58,7 +58,7 @@ void VToolSimplePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
         QAction *selectedAction = menu.exec(event->screenPos());
         if(selectedAction == actionOption){
             DialogSinglePoint *dialogSinglePoint = new DialogSinglePoint;
-            VPointF p = data->GetPoint(id);
+            VPointF p = VAbstractTool::data->GetPoint(id);
             dialogSinglePoint->setData(p.name(), p.toQPointF());
             qint32 result = dialogSinglePoint->exec();
             if(result == QDialog::Accepted){

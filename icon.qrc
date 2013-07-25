@@ -19,5 +19,6 @@
         <file>icon/24x24/arrowLeft.png</file>
         <file>icon/24x24/equal.png</file>
         <file>icon/32x32/segment.png</file>
+        <file>icon/32x32/line.png</file>
     </qresource>
 </RCC>

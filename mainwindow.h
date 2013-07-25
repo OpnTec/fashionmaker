@@ -9,6 +9,7 @@
 #include "widgets/vmaingraphicsscene.h"
 #include "dialogs/dialogsinglepoint.h"
 #include "dialogs/dialogincrements.h"
+#include "dialogs/dialogline.h"
 #include "tools/vtoolsimplepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
@@ -23,7 +24,8 @@ namespace Tools{
     {
         ArrowTool,
         SinglePointTool,
-        EndLineTool
+        EndLineTool,
+        LineTool
     };
 }
 
@@ -55,6 +57,8 @@ public slots:
     void                ClosedActionTable();
     void                ToolEndLine(bool checked);
     void                ClosedDialogEndLine(int result);
+    void                ToolLine(bool checked);
+    void                ClosedDialogLine(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -69,6 +73,7 @@ private:
     DialogSinglePoint   *dialogSinglePoint;
     DialogIncrements    *dialogTable;
     DialogEndLine       *dialogEndLine;
+    DialogLine          *dialogLine;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;
