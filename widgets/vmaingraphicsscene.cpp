@@ -20,3 +20,7 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     emit mousePress(event->scenePos());
     QGraphicsScene::mousePressEvent(event);
 }
+
+void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Type type){
+    emit ChoosedObject(id, type);
+}

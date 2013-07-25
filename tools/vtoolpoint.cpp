@@ -5,8 +5,8 @@
 #include <QGraphicsItem>
 #include <cmath>
 
-#include "../options.h"
 #include "../container/vpointf.h"
+#include "../widgets/vmaingraphicsscene.h"
 
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
                        QGraphicsItem *parent):QGraphicsEllipseItem(parent){
@@ -56,7 +56,7 @@ void VToolPoint::NameChangePosition(const QPointF pos){
     point.setMx(pos.x() - rec.center().x());
     point.setMy(pos.y() - rec.center().y());
     RefreshLine();
-    LiteUpdateFromGui(point.name(), point.mx(), point.my());
+    LiteUpdateFromGui(point.mx(), point.my());
     data->UpdatePoint(id, point);
 }
 
@@ -158,10 +158,9 @@ void VToolPoint::RefreshLine(){
     }
 }
 
-void VToolPoint::LiteUpdateFromGui(const QString& name, qreal mx, qreal my){
+void VToolPoint::LiteUpdateFromGui(qreal mx, qreal my){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("name", name);
         domElement.setAttribute("mx", QString().setNum(mx/PrintDPI*25.4));
         domElement.setAttribute("my", QString().setNum(my/PrintDPI*25.4));
         emit haveLiteChange();
@@ -183,6 +182,7 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         namePoint->setBrush(QBrush(Qt::black));
         line->setPen(QPen(Qt::black, widthHairLine));
+        ignoreContextMenuEvent = false;
     } else {
         this->setPen(QPen(Qt::gray, widthHairLine));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -191,5 +191,61 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         namePoint->setBrush(QBrush(Qt::gray));
         line->setPen(QPen(Qt::gray, widthHairLine));
+        ignoreContextMenuEvent = true;
     }
+}
+
+void VToolPoint::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ){
+    if(event->button() == Qt::LeftButton){
+        emit ChoosedPoint(id, Scene::Point);
+    }
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value){
+    QDomAttr domAttr = doc->createAttribute(name);
+    domAttr.setValue(QString().setNum(value));
+    domElement.setAttributeNode(domAttr);
+}
+
+void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value){
+    QDomAttr domAttr = doc->createAttribute(name);
+    domAttr.setValue(QString().setNum(value));
+    domElement.setAttributeNode(domAttr);
+}
+
+void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const qreal &value){
+    QDomAttr domAttr = doc->createAttribute(name);
+    domAttr.setValue(QString().setNum(value));
+    domElement.setAttributeNode(domAttr);
+}
+
+void VToolPoint::AddAttribute(QDomElement &domElement, const QString &name, const QString &value){
+    QDomAttr domAttr = doc->createAttribute(name);
+    domAttr.setValue(value);
+    domElement.setAttributeNode(domAttr);
+}
+
+void VToolPoint::RefreshBaseGeometry(const QString &name, const qreal &x, const qreal &y, const qreal &mx,
+                                     const qreal &my){
+    QRectF rec = QRectF(x, y, radius*2, radius*2);
+    rec.translate(x-rec.center().x(), y-rec.center().y());
+    this->setRect(rec);
+
+    rec = this->rect();
+    namePoint->setText(name);
+    namePoint->setPos(QPointF(rec.center().x()+mx, rec.center().y()+my));
+
+    RefreshLine();
+}
+
+QString VToolPoint::GetNameLine(qint64 firstPoint, qint64 secondPoint) const{
+    VPointF first = data->GetPoint(firstPoint);
+    VPointF second = data->GetPoint(secondPoint);
+    QString name = QString("Line_%1_%2").arg(first.name(), second.name());
+    return name;
+}
+
+VToolPoint::~VToolPoint(){
+
 }

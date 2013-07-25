@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     container/vstandarttablecell.cpp \
     container/vincrementtablerow.cpp \
     widgets/delegate.cpp \
-    widgets/doubledelegate.cpp
+    widgets/doubledelegate.cpp \
+    dialogs/dialogendline.cpp \
+    tools/vtoolendline.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -43,11 +45,14 @@ HEADERS  += mainwindow.h \
     container/vstandarttablecell.h \
     container/vincrementtablerow.h \
     widgets/delegate.h \
-    widgets/doubledelegate.h
+    widgets/doubledelegate.h \
+    dialogs/dialogendline.h \
+    tools/vtoolendline.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
-    dialogs/dialogincrements.ui
+    dialogs/dialogincrements.ui \
+    dialogs/dialogendline.ui
 
 RESOURCES += \
     icon.qrc \

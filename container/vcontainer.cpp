@@ -102,10 +102,15 @@ void VContainer::Clear(){
     points.clear();
     standartTable.clear();
     incrementTable.clear();
+    lengthLines.clear();
 }
 
 void VContainer::ClearIncrementTable(){
     incrementTable.clear();
+}
+
+void VContainer::ClearLengthLines(){
+    lengthLines.clear();
 }
 
 void VContainer::SetSize(qint32 size){
@@ -131,94 +136,57 @@ bool VContainer::IncrementTableContains(const QString& name){
 qreal VContainer::FindVar(const QString &name, bool *ok)const{
     if(base.contains(name)){
         *ok = true;
-        return base.value(name)/PrintDPI*25.4;
+        return base.value(name);
     }
 
     if(standartTable.contains(name)){
         *ok = true;
-        return GetValueStandartTableCell(name)/PrintDPI*25.4;
+        return GetValueStandartTableCell(name);
     }
     if(incrementTable.contains(name)){
         *ok = true;
-        return GetValueIncrementTableRow(name)/PrintDPI*25.4;
+        return GetValueIncrementTableRow(name);
+    }
+    if(lengthLines.contains(name)){
+        *ok = true;
+        return lengthLines.value(name);
     }
     *ok = false;
     return 0;
 }
 
-void VContainer::FillStandartTable(QTableWidget *table) const{
-    qint32 currentRow = -1;
-    QMapIterator<QString, VStandartTableCell> i(standartTable);
-    while (i.hasNext()) {
-        i.next();
-        VStandartTableCell cell = i.value();
-        currentRow++;
-        table->setRowCount ( standartTable.size() );
-
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        table->setItem(currentRow, 0, item);
-
-        item = new QTableWidgetItem(QString().setNum(GetValueStandartTableCell(i.key())));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 1, item);
-
-        item = new QTableWidgetItem(QString().setNum(cell.GetBase()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 2, item);
-
-        item = new QTableWidgetItem(QString().setNum(cell.GetKsize()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 3, item);
-
-        item = new QTableWidgetItem(QString().setNum(cell.GetKgrowth()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 4, item);
-
-        item = new QTableWidgetItem(cell.GetDescription());
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 5, item);
-    }
+const QMap<qint64, VPointF> *VContainer::DataPoints() const{
+    return &points;
 }
 
-void VContainer::FillIncrementTable(QTableWidget *table) const{
-    qint32 currentRow = -1;
-    QMapIterator<QString, VIncrementTableRow> i(incrementTable);
-    while (i.hasNext()) {
-        i.next();
-        VIncrementTableRow cell = i.value();
-        currentRow++;
-        table->setRowCount ( incrementTable.size() );
+const QMap<QString, qint32> *VContainer::DataBase() const{
+    return &base;
+}
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, cell.getId());
-        table->setItem(currentRow, 0, item);
+const QMap<QString, VStandartTableCell> *VContainer::DataStandartTable() const{
+    return &standartTable;
+}
 
-        item = new QTableWidgetItem(QString().setNum(GetValueIncrementTableRow(i.key())));
-        item->setTextAlignment(Qt::AlignHCenter);
-        // set the item non-editable (view only), and non-selectable
-        Qt::ItemFlags flags = item->flags();
-        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
-        table->setItem(currentRow, 1, item);
+const QMap<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const{
+    return &incrementTable;
+}
 
-        item = new QTableWidgetItem(QString().setNum(cell.getBase()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 2, item);
+const QMap<QString, qreal> *VContainer::DataLengthLines() const{
+    return &lengthLines;
+}
 
-        item = new QTableWidgetItem(QString().setNum(cell.getKsize()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 3, item);
+void VContainer::AddLine(const QString &name, const qreal &value){
+    Q_ASSERT(!name.isEmpty());
+    lengthLines[name] = value/PrintDPI*25.4;
+}
 
-        item = new QTableWidgetItem(QString().setNum(cell.getKgrowth()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 4, item);
-
-        item = new QTableWidgetItem(cell.getDescription());
-        item->setTextAlignment(Qt::AlignHCenter);
-        table->setItem(currentRow, 5, item);
+qreal VContainer::GetLine(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    if(lengthLines.contains(name)){
+        return lengthLines.value(name);
+    } else {
+        qCritical()<<"Не можу знайти лінію за імям = "<<name<<" в таблиці.";
+        throw"Не можу знайти лінію таблиці.";
     }
+    return 0;
 }

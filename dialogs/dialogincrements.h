@@ -34,8 +34,12 @@ private:
     Ui::DialogIncrements *ui;
     VContainer *data;
     VDomDocument *doc;
+    void InitialStandartTable();
+    void InitialIncrementTable();
+    void InitialLinesTable();
     void FillStandartTable();
     void FillIncrementTable();
+    void FillLengthLines();
     void AddIncrementToFile(quint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
                             QString description);
 };

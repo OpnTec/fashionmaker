@@ -20,47 +20,17 @@ VToolSimplePoint::VToolSimplePoint (VDomDocument *doc, VContainer *data, qint64 
     }
 }
 
-void VToolSimplePoint::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        VToolPoint::ChangedActivDraw(newName);
-        ignoreContextMenuEvent = false;
-    } else {
-        VToolPoint::ChangedActivDraw(newName);
-        ignoreContextMenuEvent = true;
-    }
-}
-
 void VToolSimplePoint::AddToFile(){
     VPointF point = data->GetPoint(id);
     QDomElement domElement = doc->createElement("point");
 
-    QDomAttr domAttr = doc->createAttribute("id");
-    domAttr.setValue(QString().setNum(id));
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("type");
-    domAttr.setValue("simple");
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("name");
-    domAttr.setValue(point.name());
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("x");
-    domAttr.setValue(QString().setNum(point.x()/PrintDPI*25.4));
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("y");
-    domAttr.setValue(QString().setNum(point.y()/PrintDPI*25.4));
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("mx");
-    domAttr.setValue(QString().setNum(point.mx()/PrintDPI*25.4));
-    domElement.setAttributeNode(domAttr);
-
-    domAttr = doc->createAttribute("my");
-    domAttr.setValue(QString().setNum(point.my()/PrintDPI*25.4));
-    domElement.setAttributeNode(domAttr);
+    AddAttribute(domElement, "id", id);
+    AddAttribute(domElement, "type", "simple");
+    AddAttribute(domElement, "name", point.name());
+    AddAttribute(domElement, "x", point.x()/PrintDPI*25.4);
+    AddAttribute(domElement, "y", point.y()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
+    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
 
     QDomElement calcElement;
     bool ok = doc->GetActivCalculationElement(calcElement);
@@ -111,13 +81,5 @@ void  VToolSimplePoint::FullUpdateFromFile(){
         mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
         my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
     }
-    QRectF rec = QRectF(x, y, radius*2, radius*2);
-    rec.translate(x-rec.center().x(), y-rec.center().y());
-    this->setRect(rec);
-
-    rec = this->rect();
-    namePoint->setText(name);
-    namePoint->setPos(QPointF(rec.center().x()+mx, rec.center().y()+my));
-
-    RefreshLine();
+    RefreshBaseGeometry(name, x, y, mx, my);
 }

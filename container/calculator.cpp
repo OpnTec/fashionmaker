@@ -12,13 +12,15 @@
 #define FINISHED   10
 #define EOL        9
 
-Calculator::Calculator(VContainer *data){
+Calculator::Calculator(const VContainer *data){
     index = 0;
     this->data = data;
 
 }
 
-qreal Calculator::eval(QString prog){
+qreal Calculator::eval(QString prog, QString *errorMsg){
+    this->errorMsg = errorMsg;
+    this->errorMsg->clear();
     debugFormula.clear();
     this->prog = prog;
     qDebug()<<"Формула: "<<prog;
@@ -187,17 +189,10 @@ void Calculator::serror(qint32 error){
                  "Непарные круглые скобки",
                  "Это не выражение",
                  "Предполагается символ равенства",
-                 "Не переменная",
-                 "Таблица меток переполнена",
-                 "Дублирование меток",
-                 "Неопределенная метка",
-                 "Необходим оператор THEN",
-                 "Необходим оператор TO",
-                 "Уровень вложенности цикла FOR слишком велик",
-                 "NEXT не соответствует FOR",
-                 "Уровень вложенности GOSUB слишком велик",
-                 "RETURN не соответствует GOSUB"
+                 "Не переменная"
      };
+    errorMsg->clear();
+    *errorMsg = e[error];
      qDebug()<<e[error];
 }
 

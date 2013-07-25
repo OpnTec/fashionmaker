@@ -6,4 +6,14 @@
 #define WidthMainLine 0.8*PrintDPI/25.4
 #define widthHairLine WidthMainLine/3
 
+namespace Scene{
+    enum Type
+    {
+        Point,
+        Line,
+        Spline,
+        Arc
+    };
+}
+
 #endif // OPTIONS_H

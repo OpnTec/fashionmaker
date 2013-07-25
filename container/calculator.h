@@ -19,14 +19,15 @@ public:
      * @brief Calculator конструктор класу. Використовується при розрахунку лекала.
      * @param data покажчик на контейнер змінних
      */
-    Calculator(VContainer *data);
+    Calculator(const VContainer *data);
     /**
      * @brief eval виконує розрахунок формули.
      * @param prog рядко в якому зберігається формула.
      * @return значення формули.
      */
-    qreal eval(QString prog);
+    qreal eval(QString prog, QString *errorMsg);
 private:
+    QString *errorMsg;
     /**
      * @brief token теперішня лексема.
      */
@@ -50,7 +51,7 @@ private:
     /**
      * @brief data контейнер усіх змінних.
      */
-    VContainer *data;
+    const VContainer *data;
     /**
      * @brief debugFormula рядок розшифрованої формули.
      */

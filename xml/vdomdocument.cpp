@@ -1,8 +1,11 @@
 #include "vdomdocument.h"
-#include "../tools/vtoolsimplepoint.h"
-#include "../options.h"
-
 #include <QDebug>
+
+#include "../tools/vtoolsimplepoint.h"
+#include "../tools/vtoolendline.h"
+#include "../options.h"
+#include "../container/calculator.h"
+
 
 VDomDocument::VDomDocument(VContainer *data) : QDomDocument() {
     this->data = data;
@@ -214,6 +217,8 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
         nameActivDraw.clear();
         scene->clear();
         comboBoxDraws->clear();
+    } else {
+        data->ClearLengthLines();
     }
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();
@@ -330,11 +335,6 @@ void VDomDocument::ParseCalculationElement(VMainGraphicsScene *scene, const QDom
         if(!domElement.isNull()){
             if(domElement.tagName() == "point"){
                 ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""));
-                qDebug()<<domElement.tagName()<<"type="<<domElement.attribute("type", "")<<
-                          "id="<<domElement.attribute("id", "")<<"x="<<domElement.attribute("x", "")<<
-                          "y="<<domElement.attribute("y", "")<<"mx="<<domElement.attribute("mx", "")<<
-                          "my="<<domElement.attribute("my", "")<<"name="<<domElement.attribute("name", "");
-
             }
         }
     }
@@ -359,6 +359,43 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 if(parse == Document::FullParse){
                     VToolSimplePoint *spoint = new VToolSimplePoint(this, data, id, Tool::FromFile);
                     scene->addItem(spoint);
+                    connect(spoint, &VToolSimplePoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                }
+            }
+        }
+    }
+    if(type == "endLine"){
+        if(!domElement.isNull()){
+            QString name, typeLine, formula;
+            qreal mx=5, my=10;
+            qint64 id, basePointId;
+            qint32 angle;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                typeLine = domElement.attribute("typeLine", "");
+                formula = domElement.attribute("length", "");
+                basePointId = domElement.attribute("basePoint", "").toLongLong();
+                angle = domElement.attribute("angle", "").toInt();
+
+                VPointF basePoint = data->GetPoint(basePointId);
+                QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(formula, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    line.setLength(result*PrintDPI/25.4);
+                    line.setAngle(angle);
+                    data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), name, mx, my));
+                    if(parse == Document::FullParse){
+                        VToolEndLine *point = new VToolEndLine(this, data, id, typeLine, formula, angle,
+                                                               basePointId, Tool::FromFile);
+                        scene->addItem(point);
+                        connect(point, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    }
                 }
             }
         }

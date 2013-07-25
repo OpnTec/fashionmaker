@@ -12,24 +12,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     ui->setupUi(this);
     this->data = data;
     this->doc = doc;
-    ui->tableWidgetStandart->resizeColumnsToContents();
-    ui->tableWidgetStandart->resizeRowsToContents();
-    ui->tableWidgetStandart->verticalHeader()->setDefaultSectionSize(20);
-    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
-    ui->tableWidgetIncrement->resizeColumnsToContents();
-    ui->tableWidgetIncrement->resizeRowsToContents();
-    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
+    InitialStandartTable();
+    InitialIncrementTable();
+    InitialLinesTable();
     SpinBoxDelegate *delegate = new SpinBoxDelegate(ui->tableWidgetIncrement);
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, delegate);
@@ -37,6 +22,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
     FillStandartTable();
     FillIncrementTable();
+    FillLengthLines();
 
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
     connect(ui->toolButtonRemove, &QPushButton::clicked, this,
@@ -52,35 +38,124 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
 }
 
 void DialogIncrements::FillStandartTable(){
-    data->FillStandartTable(ui->tableWidgetStandart);
+    const QMap<QString, VStandartTableCell> *standartTable = data->DataStandartTable();
+    qint32 currentRow = -1;
+    QMapIterator<QString, VStandartTableCell> i(*standartTable);
+    while (i.hasNext()) {
+        i.next();
+        VStandartTableCell cell = i.value();
+        currentRow++;
+        ui->tableWidgetStandart->setRowCount ( standartTable->size() );
+
+        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        ui->tableWidgetStandart->setItem(currentRow, 0, item);
+
+        item = new QTableWidgetItem(QString().setNum(data->GetValueStandartTableCell(i.key())));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetStandart->setItem(currentRow, 1, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.GetBase()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetStandart->setItem(currentRow, 2, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.GetKsize()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetStandart->setItem(currentRow, 3, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.GetKgrowth()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetStandart->setItem(currentRow, 4, item);
+
+        item = new QTableWidgetItem(cell.GetDescription());
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetStandart->setItem(currentRow, 5, item);
+    }
 }
 
 void DialogIncrements::FillIncrementTable(){
-    data->FillIncrementTable(ui->tableWidgetIncrement);
+    const QMap<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
+    qint32 currentRow = -1;
+    QMapIterator<QString, VIncrementTableRow> i(*incrementTable);
+    while (i.hasNext()) {
+        i.next();
+        VIncrementTableRow cell = i.value();
+        currentRow++;
+        ui->tableWidgetIncrement->setRowCount ( incrementTable->size() );
+
+        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        item->setData(Qt::UserRole, cell.getId());
+        ui->tableWidgetIncrement->setItem(currentRow, 0, item);
+
+        item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(i.key())));
+        item->setTextAlignment(Qt::AlignHCenter);
+        // set the item non-editable (view only), and non-selectable
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
+        ui->tableWidgetIncrement->setItem(currentRow, 1, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.getBase()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetIncrement->setItem(currentRow, 2, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.getKsize()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetIncrement->setItem(currentRow, 3, item);
+
+        item = new QTableWidgetItem(QString().setNum(cell.getKgrowth()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetIncrement->setItem(currentRow, 4, item);
+
+        item = new QTableWidgetItem(cell.getDescription());
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetIncrement->setItem(currentRow, 5, item);
+    }
     if(ui->tableWidgetIncrement->rowCount()>0){
         ui->toolButtonRemove->setEnabled(true);
     }
 }
 
+void DialogIncrements::FillLengthLines(){
+    const QMap<QString, qreal> *linesTable = data->DataLengthLines();
+    qint32 currentRow = -1;
+    QMapIterator<QString, qreal> i(*linesTable);
+    while (i.hasNext()) {
+        i.next();
+        qreal length = i.value();
+        currentRow++;
+        ui->tableWidgetLines->setRowCount ( linesTable->size() );
+
+        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        ui->tableWidgetLines->setItem(currentRow, 0, item);
+
+        item = new QTableWidgetItem(QString().setNum(length));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetLines->setItem(currentRow, 1, item);
+   }
+}
+
 void DialogIncrements::FullUpdateFromFile(){
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
                &DialogIncrements::cellChanged);
+
     ui->tableWidgetStandart->clear();
-    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
-    ui->tableWidgetIncrement->clear();
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
+    InitialStandartTable();
     FillStandartTable();
+
+    ui->tableWidgetIncrement->clear();
+    InitialIncrementTable();
     FillIncrementTable();
+
+    ui->tableWidgetLines->clear();
+    InitialLinesTable();
+    FillLengthLines();
+
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
             &DialogIncrements::cellChanged);
 }
@@ -263,6 +338,38 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
 void DialogIncrements::closeEvent ( QCloseEvent * event ){
     emit closedActionTable();
     event->accept();
+}
+
+void DialogIncrements::InitialStandartTable(){
+    ui->tableWidgetStandart->resizeColumnsToContents();
+    ui->tableWidgetStandart->resizeRowsToContents();
+    ui->tableWidgetStandart->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
+}
+
+void DialogIncrements::InitialIncrementTable(){
+    ui->tableWidgetIncrement->resizeColumnsToContents();
+    ui->tableWidgetIncrement->resizeRowsToContents();
+    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem("В розмірі"));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem("В рості"));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem("Опис"));
+}
+
+void DialogIncrements::InitialLinesTable(){
+    ui->tableWidgetLines->resizeColumnsToContents();
+    ui->tableWidgetLines->resizeRowsToContents();
+    ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
+    ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }
 
 void DialogIncrements::clickedButtonOk(){

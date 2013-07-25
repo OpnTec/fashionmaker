@@ -8,5 +8,16 @@
         <file>icon/32x32/new_draw.png</file>
         <file>icon/32x32/option_draw.png</file>
         <file>icon/32x32/table.png</file>
+        <file>icon/24x24/putHere.png</file>
+        <file>icon/24x24/arrowDown.png</file>
+        <file>icon/24x24/arrowUp.png</file>
+        <file>icon/24x24/arrowRightUp.png</file>
+        <file>icon/24x24/arrowRightDown.png</file>
+        <file>icon/24x24/arrowRight.png</file>
+        <file>icon/24x24/arrowLeftUp.png</file>
+        <file>icon/24x24/arrowLeftDown.png</file>
+        <file>icon/24x24/arrowLeft.png</file>
+        <file>icon/24x24/equal.png</file>
+        <file>icon/32x32/segment.png</file>
     </qresource>
 </RCC>

@@ -8,8 +8,10 @@
 #include <QDebug>
 #include <QInputDialog>
 #include <QFileDialog>
+#include <QDebug>
 
 #include "options.h"
+#include "tools/vtoolendline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -25,20 +27,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(scene, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     connect(ui->toolButtonSinglePoint, &QToolButton::clicked, this,
-            &MainWindow::clickedToolButtonSinglePoint);
+            &MainWindow::ToolSinglePoint);
     helpLabel = new QLabel("Створіть новий файл для початку роботи.");
     ui->statusBar->addWidget(helpLabel);
 
-    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::triggeredActionAroowTool);
-    connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::triggeredActionDraw);
-    connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::triggeredActionDetails);
-    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::triggeredActionNewDraw);
-    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::triggeredOptionDraw);
-    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::triggeredActionSaveAs);
-    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::triggeredActionSave);
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::triggeredActionOpen);
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::triggeredActionNew);
-    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::triggeredActionTable);
+    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
+    connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
+    connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
+    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw);
+    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
+    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::ActionSaveAs);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::ActionSave);
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::ActionOpen);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::ActionNew);
+    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
+    connect(ui->toolButtonEndLine, &QToolButton::clicked, this,
+            &MainWindow::ToolEndLine);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -49,9 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fileName.clear();
     changeInFile = false;
+
 }
 
-void MainWindow::triggeredActionNewDraw(){
+void MainWindow::ActionNewDraw(){
     QString nameDraw;
     bool bOk;
     qint32 index;
@@ -90,9 +95,10 @@ void MainWindow::triggeredActionNewDraw(){
         comboBoxDraws->setCurrentIndex(index);
     }
     SetEnableWidgets(true);
+    SetEnableTool(false);
 }
 
-void MainWindow::triggeredOptionDraw(){
+void MainWindow::OptionDraw(){
     QString nameDraw;
     bool bOk;
     qint32 index;
@@ -128,7 +134,7 @@ void MainWindow::triggeredOptionDraw(){
 /*
  * Інструмет базова точка креслення.
  */
-void MainWindow::clickedToolButtonSinglePoint(bool checked){
+void MainWindow::ToolSinglePoint(bool checked){
     if(checked){
         CanselTool();
         tool = Tools::SinglePointTool;
@@ -147,6 +153,52 @@ void MainWindow::clickedToolButtonSinglePoint(bool checked){
     } else { //не даємо користувачу зняти виділення кнопки
         ui->toolButtonSinglePoint->setChecked(true);
     }
+}
+
+void MainWindow::ToolEndLine(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::EndLineTool;
+        QPixmap pixmap(":/cursor/endline_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Заповніть усі поля.");
+        dialogEndLine = new DialogEndLine(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogEndLine,
+                &DialogEndLine::ChoosedPoint);
+        connect(dialogEndLine, &DialogEndLine::DialogClosed, this,
+                &MainWindow::ClosedDialogEndLine);
+        connect(doc, &VDomDocument::FullUpdateFromFile, dialogEndLine, &DialogEndLine::UpdateList);
+    } else {
+        ui->toolButtonEndLine->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogEndLine(int result){
+    if(result == QDialog::Accepted){
+        QString pointName = dialogEndLine->getPointName();
+        QString typeLine = dialogEndLine->getTypeLine();
+        QString formula = dialogEndLine->getFormula();
+        qint32 angle = dialogEndLine->getAngle();
+        qint64 basePointId = dialogEndLine->getBasePointId();
+
+        VPointF basePoint = data->GetPoint(basePointId);
+        QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(formula, &errorMsg);
+        if(errorMsg.isEmpty()){
+            line.setLength(result*PrintDPI/25.4);
+            line.setAngle(angle);
+            qint64 id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, 5, 10));
+            VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle, basePointId,
+                                                   Tool::FromGui);
+            scene->addItem(point);
+            connect(point, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
+
+    }
+    ArrowTool();
 }
 
 void MainWindow::showEvent( QShowEvent *event ){
@@ -230,6 +282,11 @@ void MainWindow::currentDrawChanged( int index ){
     if(index != -1) {
         bool status = qvariant_cast<bool>(comboBoxDraws->itemData(index));
         ui->toolButtonSinglePoint->setEnabled(status);
+        if(ui->toolButtonSinglePoint->isEnabled()==false){
+            SetEnableTool(true);
+        } else {
+            SetEnableTool(false);
+        }
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
     }
 }
@@ -252,6 +309,11 @@ void MainWindow::CanselTool(){
             delete dialogSinglePoint;
             ui->toolButtonSinglePoint->setChecked(false);
             break;
+        case Tools::EndLineTool:
+            delete dialogEndLine;
+            ui->toolButtonEndLine->setChecked(false);
+            scene->clearSelection();
+            break;
     }
 }
 
@@ -264,7 +326,7 @@ void  MainWindow::ArrowTool(){
     helpLabel->setText("");
 }
 
-void MainWindow::triggeredActionAroowTool(){
+void MainWindow::ActionAroowTool(){
     ArrowTool();
 }
 
@@ -285,14 +347,16 @@ void MainWindow::SinglePointCreated(const QString name, const QPointF point){
     qint64 id = data->AddPoint(VPointF(point.x(), point.y(), name, 5, 10));
     VToolSimplePoint *spoint = new VToolSimplePoint(doc, data, id, Tool::FromGui);
     scene->addItem(spoint);
+    connect(spoint, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
     ArrowTool();
     ui->toolButtonSinglePoint->setEnabled(false);
     qint32 index = comboBoxDraws->currentIndex();
     comboBoxDraws->setItemData(index, false);
     ui->actionSave->setEnabled(true);
+    SetEnableTool(true);
 }
 
-void MainWindow::triggeredActionDraw(bool checked){
+void MainWindow::ActionDraw(bool checked){
     if(checked){
         ui->actionDetails->setChecked(false);
     } else {
@@ -300,7 +364,7 @@ void MainWindow::triggeredActionDraw(bool checked){
     }
 }
 
-void MainWindow::triggeredActionDetails(bool checked){
+void MainWindow::ActionDetails(bool checked){
     if(checked){
         ui->actionDraw->setChecked(false);
     } else {
@@ -308,7 +372,7 @@ void MainWindow::triggeredActionDetails(bool checked){
     }
 }
 
-void MainWindow::triggeredActionSaveAs(){
+void MainWindow::ActionSaveAs(){
     QString filters("Lekalo files (*.xml);;All files (*.*)");
     QString defaultFilter("Lekalo files (*.xml)");
     QString fName = QFileDialog::getSaveFileName(this, "Зберегти файл як", QDir::homePath(),
@@ -333,7 +397,7 @@ void MainWindow::triggeredActionSaveAs(){
     changeInFile = false;
 }
 
-void MainWindow::triggeredActionSave(){
+void MainWindow::ActionSave(){
     if(!fileName.isEmpty()){
         QFile file(fileName);
         if(file.open(QIODevice::WriteOnly| QIODevice::Truncate)){
@@ -347,7 +411,7 @@ void MainWindow::triggeredActionSave(){
     }
 }
 
-void MainWindow::triggeredActionOpen(){
+void MainWindow::ActionOpen(){
     QString filter("Lekalo files (*.xml)");
     QString fName = QFileDialog::getOpenFileName(this, tr("Відкрити файл"), QDir::homePath(), filter);
     fileName = fName;
@@ -377,9 +441,14 @@ void MainWindow::triggeredActionOpen(){
         }
         file.close();
     }
+    if(ui->toolButtonSinglePoint->isEnabled()==false){
+        SetEnableTool(true);
+    } else {
+        SetEnableTool(false);
+    }
 }
 
-void MainWindow::triggeredActionNew(){
+void MainWindow::ActionNew(){
     setWindowTitle("Valentina");
     data->Clear();
     doc->clear();
@@ -390,6 +459,7 @@ void MainWindow::triggeredActionNew(){
     ui->toolButtonSinglePoint->setEnabled(true);
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
+    SetEnableTool(false);
 }
 
 void MainWindow::haveChange(){
@@ -474,15 +544,17 @@ void MainWindow::SetEnableWidgets(bool enable){
     ui->actionDetails->setEnabled(enable);
     ui->toolButtonSinglePoint->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    ui->actionSave->setEnabled(enable);
+    if(enable == true && !fileName.isEmpty()){
+        ui->actionSave->setEnabled(enable);
+    }
     ui->actionTable->setEnabled(enable);
 }
 
-void MainWindow::triggeredActionTable(bool checked){
+void MainWindow::ActionTable(bool checked){
     if(checked){
         dialogTable = new DialogIncrements(data, doc, 0);
         connect(dialogTable, &DialogIncrements::closedActionTable, this,
-                &MainWindow::closedActionTable);
+                &MainWindow::ClosedActionTable);
         dialogTable->show();
     } else {
         ui->actionTable->setChecked(true);
@@ -490,7 +562,7 @@ void MainWindow::triggeredActionTable(bool checked){
     }
 }
 
-void MainWindow::closedActionTable(){
+void MainWindow::ClosedActionTable(){
     ui->actionTable->setChecked(false);
     delete dialogTable;
 }
@@ -500,6 +572,10 @@ void MainWindow::closeEvent ( QCloseEvent * event ){
         delete dialogTable;
     }
     event->accept();
+}
+
+void MainWindow::SetEnableTool(bool enable){
+    ui->toolButtonEndLine->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){
