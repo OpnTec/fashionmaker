@@ -4,14 +4,15 @@
 #include <QCloseEvent>
 
 DialogLine::DialogLine(const VContainer *data, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogLine)
+    DialogTool(data, parent), ui(new Ui::DialogLine)
 {
     ui->setupUi(this);
-    this->data = data;
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLine::DialogAccepted);
-    FillComboBox(ui->comboBoxFirstPoint);
-    FillComboBox(ui->comboBoxSecondPoint);
+    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    connect(bCansel, &QPushButton::clicked, this, &DialogLine::DialogRejected);
+    FillComboBoxPoints(ui->comboBoxFirstPoint);
+    FillComboBoxPoints(ui->comboBoxSecondPoint);
     number = 0;
 }
 
@@ -45,26 +46,6 @@ void DialogLine::setFirstPoint(const qint64 &value){
     }
 }
 
-void DialogLine::closeEvent(QCloseEvent *event){
-    DialogClosed(QDialog::Rejected);
-    event->accept();
-}
-
-void DialogLine::showEvent(QShowEvent *event){
-    QDialog::showEvent( event );
-    if( event->spontaneous() ){
-        return;
-    }
-
-    if(isInitialized){
-        return;
-    }
-
-    // do your init stuff here
-
-    isInitialized = true;//перший показ вікна вже відбувся
-}
-
 
 void DialogLine::DialogAccepted(){
     qint32 index = ui->comboBoxFirstPoint->currentIndex();
@@ -73,17 +54,6 @@ void DialogLine::DialogAccepted(){
     secondPoint = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
     DialogClosed(QDialog::Accepted);
 }
-
-void DialogLine::FillComboBox(QComboBox *box){
-    const QMap<qint64, VPointF> *points = data->DataPoints();
-    QMapIterator<qint64, VPointF> i(*points);
-    while (i.hasNext()) {
-        i.next();
-        VPointF point = i.value();
-        box->addItem(point.name(), i.key());
-    }
-}
-
 
 void DialogLine::ChoosedPoint(qint64 id, Scene::Type type){
     if(type == Scene::Point){

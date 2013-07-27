@@ -3,7 +3,8 @@
 #include <QDebug>
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     Tool::Enum typeCreation):VAbstractTool(doc, data, id){
+                     Tool::Enum typeCreation, QGraphicsItem *parent):VAbstractTool(doc, data, id),
+    QGraphicsLineItem(parent){
     connect(this, &VToolLine::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     this->firstPoint = firstPoint;
     this->secondPoint = secondPoint;
@@ -14,9 +15,9 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setAcceptHoverEvents(true);
 
-    QString nameLine = GetNameLine(firstPoint, secondPoint);
-    data->AddLine(nameLine, QLineF(first.toQPointF(), second.toQPointF()).length());
+    AddLine(firstPoint, secondPoint);
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -32,15 +33,17 @@ void VToolLine::FullUpdateFromFile(){
     VPointF first = VAbstractTool::data->GetPoint(firstPoint);
     VPointF second = VAbstractTool::data->GetPoint(secondPoint);
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
-    QString nameLine = GetNameLine(firstPoint, secondPoint);
-    VAbstractTool::data->AddLine(nameLine, QLineF(first.toQPointF(), second.toQPointF()).length());
+    AddLine(firstPoint, secondPoint);
 }
 
-void VToolLine::ClosedDialogLine(int result){
+void VToolLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
-        qint64 firstPoint = dialogLine->getFirstPoint();
-        qint64 secondPoint = dialogLine->getSecondPoint();
-        FullUpdateFromGui(firstPoint, secondPoint);
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            domElement.setAttribute("firstPoint", QString().setNum(dialogLine->getFirstPoint()));
+            domElement.setAttribute("secondPoint", QString().setNum(dialogLine->getSecondPoint()));
+            emit FullUpdateTree();
+        }
     }
     dialogLine.clear();
 }
@@ -48,9 +51,11 @@ void VToolLine::ClosedDialogLine(int result){
 void VToolLine::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
         this->setPen(QPen(Qt::black, widthHairLine));
+        this->setAcceptHoverEvents (true);
         VAbstractTool::ChangedActivDraw(newName);
     } else {
         this->setPen(QPen(Qt::gray, widthHairLine));
+        this->setAcceptHoverEvents (false);
         VAbstractTool::ChangedActivDraw(newName);
     }
 }
@@ -65,7 +70,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                     dialogLine.data(), &DialogLine::ChoosedPoint);
-            connect(dialogLine.data(), &DialogLine::DialogClosed, this, &VToolLine::ClosedDialogLine);
+            connect(dialogLine.data(), &DialogLine::DialogClosed, this, &VToolLine::FullUpdateFromGui);
 
             dialogLine->setFirstPoint(firstPoint);
             dialogLine->setSecondPoint(secondPoint);
@@ -78,9 +83,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VToolLine::AddToFile(){
     QDomElement domElement = doc->createElement("line");
-
     AddAttribute(domElement, "id", id);
-
     AddAttribute(domElement, "firstPoint", firstPoint);
     AddAttribute(domElement, "secondPoint", secondPoint);
 
@@ -93,14 +96,13 @@ void VToolLine::AddToFile(){
     }
 }
 
-void VToolLine::FullUpdateFromGui(qint64 firstPoint, qint64 secondPoint){
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        this->firstPoint = firstPoint;
-        this->secondPoint = secondPoint;
-
-        domElement.setAttribute("firstPoint", QString().setNum(firstPoint));
-        domElement.setAttribute("secondPoint", QString().setNum(secondPoint));
-        emit FullUpdateTree();
-    }
+void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setPen(QPen(Qt::black, widthMainLine));
 }
+
+void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setPen(QPen(Qt::black, widthHairLine));
+}
+

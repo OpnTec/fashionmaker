@@ -8,6 +8,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setAcceptHoverEvents(true);
 }
 
 QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value){
@@ -25,4 +26,14 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
          emit NameChangePosition(newPos);
      }
      return QGraphicsItem::itemChange(change, value);
- }
+}
+
+void VGraphicsSimpleTextItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setBrush(Qt::green);
+}
+
+void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setBrush(Qt::black);
+}

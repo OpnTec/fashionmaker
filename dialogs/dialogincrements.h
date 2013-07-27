@@ -1,7 +1,7 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
-#include <QDialog>
+#include "dialogtool.h"
 #include <QPushButton>
 
 #include "../container/vcontainer.h"
@@ -11,10 +11,9 @@ namespace Ui {
 class DialogIncrements;
 }
 
-class DialogIncrements : public QDialog
+class DialogIncrements : public DialogTool
 {
-    Q_OBJECT
-    
+    Q_OBJECT   
 public:
     explicit DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
     ~DialogIncrements();
@@ -23,13 +22,10 @@ public slots:
     void clickedToolButtonRemove();
     void cellChanged ( qint32 row, qint32 column );
     void FullUpdateFromFile();
-    void clickedButtonOk();
+    virtual void DialogAccepted();
 signals:
     void FullUpdateTree();
     void haveLiteChange();
-    void closedActionTable();
-protected:
-    void closeEvent ( QCloseEvent * event );
 private:
     Ui::DialogIncrements *ui;
     VContainer *data;

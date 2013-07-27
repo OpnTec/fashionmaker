@@ -54,9 +54,15 @@ void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, c
 VAbstractTool::~VAbstractTool(){
 }
 
-QString VAbstractTool::GetNameLine(qint64 firstPoint, qint64 secondPoint) const{
+QString VAbstractTool::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const{
     VPointF first = data->GetPoint(firstPoint);
     VPointF second = data->GetPoint(secondPoint);
-    QString name = QString("Line_%1_%2").arg(first.name(), second.name());
-    return name;
+    return QString("Line_%1_%2").arg(first.name(), second.name());
+}
+
+void VAbstractTool::AddLine(const qint64 &firstPointId, const qint64 &secondPointId) const{
+    QString nameLine = GetNameLine(firstPointId, secondPointId);
+    VPointF firstPoint = data->GetPoint(firstPointId);
+    VPointF secondPoint = data->GetPoint(secondPointId);
+    data->AddLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
 }

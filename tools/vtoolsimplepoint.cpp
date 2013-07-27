@@ -9,11 +9,9 @@
 
 #include "../options.h"
 #include "../container/vpointf.h"
-#include "../dialogs/dialogsinglepoint.h"
 
 VToolSimplePoint::VToolSimplePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent){
-    ignoreContextMenuEvent = false;//don't ignore context menu events;
     connect(this, &VToolSimplePoint::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -41,14 +39,18 @@ void VToolSimplePoint::AddToFile(){
     }
 }
 
-void VToolSimplePoint::FullUpdateFromGui(const QString &name, qreal x, qreal y){
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        domElement.setAttribute("name", name);
-        domElement.setAttribute("x", QString().setNum(x/PrintDPI*25.4));
-        domElement.setAttribute("y", QString().setNum(y/PrintDPI*25.4));
-        emit FullUpdateTree();
+void VToolSimplePoint::FullUpdateFromGui(int result){
+    if(result == QDialog::Accepted){
+        QPointF p = dialogSinglePoint->getPoint();
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            domElement.setAttribute("name", dialogSinglePoint->getName());
+            domElement.setAttribute("x", QString().setNum(p.x()/PrintDPI*25.4));
+            domElement.setAttribute("y", QString().setNum(p.y()/PrintDPI*25.4));
+            emit FullUpdateTree();
+        }
     }
+    dialogSinglePoint.clear();
 }
 
 void VToolSimplePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ){
@@ -57,15 +59,12 @@ void VToolSimplePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
         QAction *actionOption = menu.addAction("Властивості");
         QAction *selectedAction = menu.exec(event->screenPos());
         if(selectedAction == actionOption){
-            DialogSinglePoint *dialogSinglePoint = new DialogSinglePoint;
+            dialogSinglePoint = QSharedPointer<DialogSinglePoint>(new DialogSinglePoint(VAbstractTool::data));
+            connect(dialogSinglePoint.data(), &DialogSinglePoint::DialogClosed, this,
+                    &VToolSimplePoint::FullUpdateFromGui);
             VPointF p = VAbstractTool::data->GetPoint(id);
             dialogSinglePoint->setData(p.name(), p.toQPointF());
-            qint32 result = dialogSinglePoint->exec();
-            if(result == QDialog::Accepted){
-                QPointF p = dialogSinglePoint->getPoint();
-                FullUpdateFromGui(dialogSinglePoint->getName(), p.x(), p.y());
-            }
-            delete dialogSinglePoint;
+            dialogSinglePoint->exec();
         }
     }
 }

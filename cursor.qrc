@@ -3,5 +3,6 @@
         <file>cursor/spoint_cursor.png</file>
         <file>cursor/endline_cursor.png</file>
         <file>cursor/line_cursor.png</file>
+        <file>cursor/alongline_cursor.png</file>
     </qresource>
 </RCC>

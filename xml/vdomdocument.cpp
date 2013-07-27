@@ -4,6 +4,7 @@
 #include "../tools/vtoolsimplepoint.h"
 #include "../tools/vtoolendline.h"
 #include "../tools/vtoolline.h"
+#include "../tools/vtoolalongline.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -367,6 +368,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 }
             }
         }
+        return;
     }
     if(type == "endLine"){
         if(!domElement.isNull()){
@@ -403,6 +405,43 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 }
             }
         }
+        return;
+    }
+    if(type == "alongLine"){
+        if(!domElement.isNull()){
+            QString name, typeLine, formula;
+            qreal mx=5, my=10;
+            qint64 id, firstPointId, secondPointId;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                typeLine = domElement.attribute("typeLine", "");
+                formula = domElement.attribute("length", "");
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+
+                VPointF firstPoint = data->GetPoint(firstPointId);
+                VPointF secondPoint = data->GetPoint(secondPointId);
+                QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(formula, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    line.setLength(result*PrintDPI/25.4);
+                    data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), name, mx, my));
+                    if(parse == Document::FullParse){
+                        VToolAlongLine *point = new VToolAlongLine(this, data, id, formula, firstPointId,
+                                                                   secondPointId, typeLine, Tool::FromGui);
+                        scene->addItem(point);
+                        connect(point, &VToolAlongLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    }
+                }
+            }
+        }
+        return;
     }
 }
 

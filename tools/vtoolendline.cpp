@@ -25,9 +25,7 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
         mainLine->setVisible(true);
     }
 
-    QString nameLine = GetNameLine(basePointId, id);
-    QLineF line = QLineF(basePoint.toQPointF(), point.toQPointF());
-    data->AddLine(nameLine, line.length());
+    AddLine(basePointId, id);
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -52,9 +50,7 @@ void VToolEndLine::FullUpdateFromFile(){
     VPointF basePoint = VAbstractTool::data->GetPoint(basePointId);
     mainLine->setLine(QLineF(basePoint.toQPointF(), point.toQPointF()));
 
-    QString nameLine = GetNameLine(basePointId, id);
-    QLineF line = QLineF(basePoint.toQPointF(), point.toQPointF());
-    VAbstractTool::data->AddLine(nameLine, line.length());
+    AddLine(basePointId, id);
 }
 
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -67,7 +63,8 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                     dialogEndLine.data(), &DialogEndLine::ChoosedPoint);
-            connect(dialogEndLine.data(), &DialogEndLine::DialogClosed, this, &VToolEndLine::ClosedDialogEndLine);
+            connect(dialogEndLine.data(), &DialogEndLine::DialogClosed, this,
+                    &VToolEndLine::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogEndLine.data(), &DialogEndLine::UpdateList);
 
             VPointF p = VAbstractTool::data->GetPoint(id);
@@ -83,26 +80,17 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     }
 }
 
-void VToolEndLine::ClosedDialogEndLine(int result){
+void VToolEndLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
-        QString pointName = dialogEndLine->getPointName();
-        QString typeLine = dialogEndLine->getTypeLine();
-        QString formula = dialogEndLine->getFormula();
-        qint32 angle = dialogEndLine->getAngle();
-        qint64 basePointId = dialogEndLine->getBasePointId();
-
-        VPointF basePoint = VAbstractTool::data->GetPoint(basePointId);
-        QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
-        Calculator cal(VAbstractTool::data);
-        QString errorMsg;
-        qreal result = cal.eval(formula, &errorMsg);
-        if(errorMsg.isEmpty()){
-            line.setLength(result/PrintDPI*25.4);
-            line.setAngle(angle);
-
-            FullUpdateFromGui(pointName, typeLine, formula, angle, basePointId);
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            domElement.setAttribute("name", dialogEndLine->getPointName());
+            domElement.setAttribute("typeLine", dialogEndLine->getTypeLine());
+            domElement.setAttribute("length", dialogEndLine->getFormula());
+            domElement.setAttribute("angle", QString().setNum(dialogEndLine->getAngle()));
+            domElement.setAttribute("basePoint", QString().setNum(dialogEndLine->getBasePointId()));
+            emit FullUpdateTree();
         }
-
     }
     dialogEndLine.clear();
 }
@@ -138,24 +126,5 @@ void VToolEndLine::AddToFile(){
         calcElement.appendChild(domElement);
     } else {
         qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
-    }
-}
-
-void VToolEndLine::FullUpdateFromGui(const QString &name, const QString &typeLine, const QString &formula,
-                                     const qreal &angle, const qint64 &basePointId){
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        this->typeLine = typeLine;
-        this->formula = formula;
-        this->angle = angle;
-        this->basePointId = basePointId;
-
-        domElement.setAttribute("name", name);
-
-        domElement.setAttribute("typeLine", typeLine);
-        domElement.setAttribute("length", formula);
-        domElement.setAttribute("angle", QString().setNum(angle));
-        domElement.setAttribute("basePoint", QString().setNum(basePointId));
-        emit FullUpdateTree();
     }
 }

@@ -4,6 +4,7 @@
 #include "../container/vcontainer.h"
 #include "../xml/vdomdocument.h"
 #include "vtoolpoint.h"
+#include "../dialogs/dialogsinglepoint.h"
 
 class VToolSimplePoint : public VToolPoint
 {
@@ -13,11 +14,12 @@ public:
                                               Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
 public slots:
     virtual void            FullUpdateFromFile();
+    virtual void            FullUpdateFromGui(int result);
 protected:
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void            AddToFile();
 private:
-    void                    FullUpdateFromGui(const QString& name, qreal x, qreal y);
+    QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };
 
 #endif // VTOOLSIMPLEPOINT_H

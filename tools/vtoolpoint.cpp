@@ -19,6 +19,7 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
     this->setPen(QPen(Qt::black, widthHairLine));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setAcceptHoverEvents(true);
 
     //Тексто мітка точки
     namePoint = new VGraphicsSimpleTextItem(point.name(), this);
@@ -166,7 +167,9 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemIsSelectable, true);
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         namePoint->setBrush(QBrush(Qt::black));
+        namePoint->setAcceptHoverEvents(true);
         lineName->setPen(QPen(Qt::black, widthHairLine));
+        this->setAcceptHoverEvents(true);
         VAbstractTool::ChangedActivDraw(newName);
     } else {
         this->setPen(QPen(Qt::gray, widthHairLine));
@@ -175,7 +178,9 @@ void VToolPoint::ChangedActivDraw(const QString newName){
         namePoint->setFlag(QGraphicsItem::ItemIsSelectable, false);
         namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         namePoint->setBrush(QBrush(Qt::gray));
+        namePoint->setAcceptHoverEvents(false);
         lineName->setPen(QPen(Qt::gray, widthHairLine));
+        this->setAcceptHoverEvents (false);
         VAbstractTool::ChangedActivDraw(newName);
     }
 }
@@ -198,6 +203,16 @@ void VToolPoint::RefreshBaseGeometry(const QString &name, const qreal &x, const 
     namePoint->setPos(QPointF(rec.center().x()+mx, rec.center().y()+my));
 
     RefreshLine();
+}
+
+void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setPen(QPen(Qt::black, widthMainLine));
+}
+
+void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+    Q_UNUSED(event);
+    this->setPen(QPen(Qt::black, widthHairLine));
 }
 
 VToolPoint::~VToolPoint(){

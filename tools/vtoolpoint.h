@@ -17,6 +17,7 @@ public:
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            ChangedActivDraw(const QString newName);
+    virtual void            FullUpdateFromGui(int result) = 0;
 protected:
     qreal                   radius;
     VGraphicsSimpleTextItem *namePoint;
@@ -24,7 +25,8 @@ protected:
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     void                    RefreshBaseGeometry(const QString &name, const qreal &x, const qreal &y,
                                                 const qreal &mx, const qreal &my);
-
+    virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     qint32                  LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
                                                 QPointF &p2) const;

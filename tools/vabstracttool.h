@@ -24,6 +24,7 @@ public slots:
     virtual void FullUpdateFromFile()=0;
     void         ChangedNameDraw(const QString oldName, const QString newName);
     virtual void ChangedActivDraw(const QString newName);
+    virtual void FullUpdateFromGui(int result)=0;
 signals:
     void         haveLiteChange();
     void         ChoosedPoint(qint64 id, Scene::Type type);
@@ -39,6 +40,7 @@ protected:
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
-    QString      GetNameLine(qint64 firstPoint, qint64 secondPoint) const;
+    QString      GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    void         AddLine(const qint64 &firstPointId, const qint64 &secondPointId) const;
 };
 #endif // VABSTRACTTOOL_H

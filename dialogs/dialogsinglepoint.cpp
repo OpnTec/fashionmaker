@@ -6,20 +6,19 @@
 
 #include "../options.h"
 
-DialogSinglePoint::DialogSinglePoint(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogSinglePoint)
+DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
+    DialogTool(data, parent), ui(new Ui::DialogSinglePoint)
 {
     ui->setupUi(this);
-    isInitialized = false;
     ui->doubleSpinBoxX->setRange(0,PaperSize/PrintDPI*25.4);
     ui->doubleSpinBoxY->setRange(0,PaperSize/PrintDPI*25.4);
-    QPushButton* pOkButton = ui->buttonBox->button(QDialogButtonBox::Ok);
-    pOkButton->setEnabled(false);
-    connect(pOkButton, &QPushButton::clicked, this, &DialogSinglePoint::OkOperation);
-    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NameChanged);
-    QPushButton* pCanselButton = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(pCanselButton, &QPushButton::clicked, this, &DialogSinglePoint::CanselOperation);
+    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    flagName = false;
+    CheckState();
+    connect(bOk, &QPushButton::clicked, this, &DialogSinglePoint::DialogAccepted);
+    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    connect(bCansel, &QPushButton::clicked, this, &DialogSinglePoint::DialogRejected);
+    connect(ui->lineEditName,&QLineEdit::textChanged, this, &DialogSinglePoint::NamePointChanged);
 }
 
 void DialogSinglePoint::mousePress(QPointF scenePos){
@@ -33,46 +32,11 @@ void DialogSinglePoint::mousePress(QPointF scenePos){
     }
 }
 
-void DialogSinglePoint::showEvent( QShowEvent *event ){
-    QDialog::showEvent( event );
-    if( event->spontaneous() ){
-        return;
-    }
-
-    if(isInitialized){
-        return;
-    }
-
-    // do your init stuff here
-
-    isInitialized = true;//перший показ вікна вже відбувся
-}
-
-void DialogSinglePoint::NameChanged(){
-    QString name = ui->lineEditName->text();
-    if(name.isEmpty() || name.contains(" ")){
-        QPushButton* pOkButton = ui->buttonBox->button(QDialogButtonBox::Ok);
-        pOkButton->setEnabled(false);
-    } else {
-        QPushButton* pOkButton = ui->buttonBox->button(QDialogButtonBox::Ok);
-        pOkButton->setEnabled(true);
-    }
-}
-
-void DialogSinglePoint::CanselOperation(){
-    emit ToolCanseled();
-}
-
-void DialogSinglePoint::OkOperation(){
+void DialogSinglePoint::DialogAccepted(){
     point = QPointF(ui->doubleSpinBoxX->value()*PrintDPI/25.4,
                     ui->doubleSpinBoxY->value()*PrintDPI/25.4);
     name = ui->lineEditName->text();
-    emit SinglePointCreated(ui->lineEditName->text(), point);
-}
-
-void DialogSinglePoint::closeEvent ( QCloseEvent * event ){
-    emit ToolCanseled();
-    event->accept();
+    emit DialogClosed(QDialog::Accepted);
 }
 
 void DialogSinglePoint::setData(const QString name, const QPointF point){

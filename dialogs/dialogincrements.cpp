@@ -8,10 +8,10 @@
 #include "../widgets/doubledelegate.h"
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogIncrements){
+    DialogTool(data, parent), ui(new Ui::DialogIncrements){
     ui->setupUi(this);
-    this->data = data;
     this->doc = doc;
+    this->data = data;
     InitialStandartTable();
     InitialIncrementTable();
     InitialLinesTable();
@@ -33,8 +33,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this,
             &DialogIncrements::FullUpdateFromFile);
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogIncrements::clickedButtonOk);
+    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    connect(bOk, &QPushButton::clicked, this, &DialogIncrements::DialogAccepted);
 }
 
 void DialogIncrements::FillStandartTable(){
@@ -335,11 +335,6 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
     }
 }
 
-void DialogIncrements::closeEvent ( QCloseEvent * event ){
-    emit closedActionTable();
-    event->accept();
-}
-
 void DialogIncrements::InitialStandartTable(){
     ui->tableWidgetStandart->resizeColumnsToContents();
     ui->tableWidgetStandart->resizeRowsToContents();
@@ -372,8 +367,8 @@ void DialogIncrements::InitialLinesTable(){
     ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }
 
-void DialogIncrements::clickedButtonOk(){
-    emit closedActionTable();
+void DialogIncrements::DialogAccepted(){
+    emit DialogClosed(QDialog::Accepted);
 }
 
 DialogIncrements::~DialogIncrements(){

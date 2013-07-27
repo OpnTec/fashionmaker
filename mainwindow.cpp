@@ -13,6 +13,7 @@
 #include "options.h"
 #include "tools/vtoolendline.h"
 #include "tools/vtoolline.h"
+#include "tools/vtoolalongline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -46,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this,
             &MainWindow::ToolLine);
+    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this,
+            &MainWindow::ToolAlongLine);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -145,14 +148,12 @@ void MainWindow::ToolSinglePoint(bool checked){
         QCursor cur(pixmap, 2, 3);
         ui->graphicsView->setCursor(cur);
         helpLabel->setText("Виберіть розташування для точки.");
-        dialogSinglePoint = new DialogSinglePoint;
+        dialogSinglePoint = new DialogSinglePoint(data);
         //покажемо вікно як тільки буде вибрано місце розташування для точки
         connect(scene, &VMainGraphicsScene::mousePress, dialogSinglePoint,
                 &DialogSinglePoint::mousePress);
-        //головне вікно отримає сигнал відміни створення точки
-        connect(dialogSinglePoint, &DialogSinglePoint::ToolCanseled, this, &MainWindow::ToolCanseled);
-        connect(dialogSinglePoint, &DialogSinglePoint::SinglePointCreated, this,
-                &MainWindow::SinglePointCreated);
+        connect(dialogSinglePoint, &DialogSinglePoint::DialogClosed, this,
+                &MainWindow::ClosedDialogSinglePoint);
     } else { //не даємо користувачу зняти виділення кнопки
         ui->toolButtonSinglePoint->setChecked(true);
     }
@@ -230,6 +231,48 @@ void MainWindow::ClosedDialogLine(int result){
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
 
+    }
+    ArrowTool();
+}
+
+void MainWindow::ToolAlongLine(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::AlongLineTool;
+        QPixmap pixmap(":/cursor/alongline_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogAlongLine = new DialogAlongLine(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogAlongLine, &DialogAlongLine::ChoosedPoint);
+        connect(dialogAlongLine, &DialogLine::DialogClosed, this, &MainWindow::ClosedDialogAlongLine);
+    } else {
+        ui->toolButtonAlongLine->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogAlongLine(int result){
+    if(result == QDialog::Accepted){
+        QString formula = dialogAlongLine->getFormula();
+        qint64 firstPointId = dialogAlongLine->getFirstPointId();
+        qint64 secondPointId = dialogAlongLine->getSecondPointId();
+        QString typeLine = dialogAlongLine->getTypeLine();
+        QString pointName = dialogAlongLine->getPointName();
+
+        VPointF firstPoint = data->GetPoint(firstPointId);
+        VPointF secondPoint = data->GetPoint(secondPointId);
+        QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(formula, &errorMsg);
+        if(errorMsg.isEmpty()){
+            line.setLength(result*PrintDPI/25.4);
+            qint64 id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, 5, 10));
+            VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId,
+                                                       typeLine, Tool::FromGui);
+            scene->addItem(point);
+            connect(point, &VToolAlongLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
     }
     ArrowTool();
 }
@@ -352,6 +395,11 @@ void MainWindow::CanselTool(){
             ui->toolButtonLine->setChecked(false);
             scene->clearFocus();
             break;
+        case Tools::AlongLineTool:
+            delete dialogAlongLine;
+            ui->toolButtonAlongLine->setChecked(false);
+            scene->clearFocus();
+            break;
     }
 }
 
@@ -377,21 +425,22 @@ void MainWindow::keyPressEvent ( QKeyEvent * event ){
     QMainWindow::keyPressEvent ( event );
 }
 
-void MainWindow::ToolCanseled(){
+void MainWindow::ClosedDialogSinglePoint(int result){
+    if(result == QDialog::Accepted){
+        QPointF point = dialogSinglePoint->getPoint();
+        QString name = dialogSinglePoint->getName();
+        qint64 id = data->AddPoint(VPointF(point.x(), point.y(), name, 5, 10));
+        VToolSimplePoint *spoint = new VToolSimplePoint(doc, data, id, Tool::FromGui);
+        scene->addItem(spoint);
+        connect(spoint, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        ArrowTool();
+        ui->toolButtonSinglePoint->setEnabled(false);
+        qint32 index = comboBoxDraws->currentIndex();
+        comboBoxDraws->setItemData(index, false);
+        ui->actionSave->setEnabled(true);
+        SetEnableTool(true);
+    }
     ArrowTool();
-}
-
-void MainWindow::SinglePointCreated(const QString name, const QPointF point){
-    qint64 id = data->AddPoint(VPointF(point.x(), point.y(), name, 5, 10));
-    VToolSimplePoint *spoint = new VToolSimplePoint(doc, data, id, Tool::FromGui);
-    scene->addItem(spoint);
-    connect(spoint, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
-    ArrowTool();
-    ui->toolButtonSinglePoint->setEnabled(false);
-    qint32 index = comboBoxDraws->currentIndex();
-    comboBoxDraws->setItemData(index, false);
-    ui->actionSave->setEnabled(true);
-    SetEnableTool(true);
 }
 
 void MainWindow::ActionDraw(bool checked){
@@ -590,8 +639,8 @@ void MainWindow::SetEnableWidgets(bool enable){
 
 void MainWindow::ActionTable(bool checked){
     if(checked){
-        dialogTable = new DialogIncrements(data, doc, 0);
-        connect(dialogTable, &DialogIncrements::closedActionTable, this,
+        dialogTable = new DialogIncrements(data, doc, this);
+        connect(dialogTable, &DialogIncrements::DialogClosed, this,
                 &MainWindow::ClosedActionTable);
         dialogTable->show();
     } else {
@@ -605,16 +654,10 @@ void MainWindow::ClosedActionTable(){
     delete dialogTable;
 }
 
-void MainWindow::closeEvent ( QCloseEvent * event ){
-    if(ui->actionTable->isChecked()==true){
-        delete dialogTable;
-    }
-    event->accept();
-}
-
 void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonEndLine->setEnabled(enable);
     ui->toolButtonLine->setEnabled(enable);
+    ui->toolButtonAlongLine->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

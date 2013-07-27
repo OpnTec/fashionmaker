@@ -16,7 +16,7 @@ public:
                                    QGraphicsItem * parent = 0);
 public slots:
     virtual void      FullUpdateFromFile();
-    void              ClosedDialogEndLine(int result);
+    virtual void      FullUpdateFromGui(int result);
     virtual void      ChangedActivDraw(const QString newName);
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
@@ -28,8 +28,6 @@ private:
     qint64            basePointId;
     QGraphicsLineItem *mainLine;
     QSharedPointer<DialogEndLine> dialogEndLine;
-    void              FullUpdateFromGui(const QString &name, const QString &typeLine, const QString &formula,
-                                        const qreal &angle, const qint64 &basePointId);
 };
 
 #endif // VTOOLENDLINE_H

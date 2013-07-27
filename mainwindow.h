@@ -5,11 +5,13 @@
 #include <QLabel>
 #include <QtXml>
 #include <QComboBox>
+#include <QSharedPointer>
 
 #include "widgets/vmaingraphicsscene.h"
 #include "dialogs/dialogsinglepoint.h"
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialogline.h"
+#include "dialogs/dialogalongline.h"
 #include "tools/vtoolsimplepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
@@ -25,7 +27,8 @@ namespace Tools{
         ArrowTool,
         SinglePointTool,
         EndLineTool,
-        LineTool
+        LineTool,
+        AlongLineTool
     };
 }
 
@@ -41,8 +44,7 @@ public slots:
     void                ActionAroowTool();
     void                ActionDraw(bool checked);
     void                ActionDetails(bool checked);
-    void                ToolCanseled();
-    void                SinglePointCreated(const QString name, const QPointF point);
+    void                ClosedDialogSinglePoint(int result);
     void                ActionNewDraw();
     void                currentDrawChanged( int index );
     void                OptionDraw();
@@ -59,10 +61,11 @@ public slots:
     void                ClosedDialogEndLine(int result);
     void                ToolLine(bool checked);
     void                ClosedDialogLine(int result);
+    void                ToolAlongLine(bool checked);
+    void                ClosedDialogAlongLine(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
-    virtual void        closeEvent ( QCloseEvent * event );
 private:
     Ui::MainWindow      *ui;
     Tools::Enum         tool;
@@ -74,6 +77,7 @@ private:
     DialogIncrements    *dialogTable;
     DialogEndLine       *dialogEndLine;
     DialogLine          *dialogLine;
+    DialogAlongLine     *dialogAlongLine;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;

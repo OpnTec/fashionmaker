@@ -31,7 +31,10 @@ SOURCES += main.cpp\
     tools/vtoolendline.cpp \
     tools/vtoolline.cpp \
     tools/vabstracttool.cpp \
-    dialogs/dialogline.cpp
+    dialogs/dialogline.cpp \
+    tools/vtoolalongline.cpp \
+    dialogs/dialogtool.cpp \
+    dialogs/dialogalongline.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -53,14 +56,26 @@ HEADERS  += mainwindow.h \
     tools/vtoolendline.h \
     tools/vtoolline.h \
     tools/vabstracttool.h \
-    dialogs/dialogline.h
+    dialogs/dialogline.h \
+    tools/vtoolalongline.h \
+    dialogs/dialogtool.h \
+    dialogs/dialogalongline.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
     dialogs/dialogincrements.ui \
     dialogs/dialogendline.ui \
-    dialogs/dialogline.ui
+    dialogs/dialogline.ui \
+    dialogs/dialogalongline.ui
 
 RESOURCES += \
     icon.qrc \
     cursor.qrc
+
+CONFIG(debug, debug|release){
+    # Debug
+    QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic -std=c++0x
+}else{
+    # Release
+    QMAKE_CXXFLAGS += -O1 -std=c++0x
+}
