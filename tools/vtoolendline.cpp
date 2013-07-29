@@ -8,7 +8,6 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
                            const QString &typeLine, const QString &formula, const qint32 &angle,
                            const qint64 &basePointId, Tool::Enum typeCreation,
                            QGraphicsItem *parent):VToolPoint(doc, data, id, parent){
-    connect(this, &VToolEndLine::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     this->typeLine = typeLine;
     this->formula = formula;
     this->angle = angle;
@@ -120,11 +119,5 @@ void VToolEndLine::AddToFile(){
     AddAttribute(domElement, "angle", angle);
     AddAttribute(domElement, "basePoint", basePointId);
 
-    QDomElement calcElement;
-    bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
-        calcElement.appendChild(domElement);
-    } else {
-        qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
-    }
+    AddToCalculation(domElement);
 }

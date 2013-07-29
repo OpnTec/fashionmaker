@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     dialogs/dialogline.cpp \
     tools/vtoolalongline.cpp \
     dialogs/dialogtool.cpp \
-    dialogs/dialogalongline.cpp
+    dialogs/dialogalongline.cpp \
+    tools/vtoolshoulderpoint.cpp \
+    dialogs/dialogshoulderpoint.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -59,14 +61,17 @@ HEADERS  += mainwindow.h \
     dialogs/dialogline.h \
     tools/vtoolalongline.h \
     dialogs/dialogtool.h \
-    dialogs/dialogalongline.h
+    dialogs/dialogalongline.h \
+    tools/vtoolshoulderpoint.h \
+    dialogs/dialogshoulderpoint.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
     dialogs/dialogincrements.ui \
     dialogs/dialogendline.ui \
     dialogs/dialogline.ui \
-    dialogs/dialogalongline.ui
+    dialogs/dialogalongline.ui \
+    dialogs/dialogshoulderpoint.ui
 
 RESOURCES += \
     icon.qrc \

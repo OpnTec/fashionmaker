@@ -62,10 +62,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
 void DialogEndLine::ChoosedPoint(qint64 id, Scene::Type type){
     if(type == Scene::Point){
         VPointF point = data->GetPoint(id);
-        qint32 index = ui->comboBoxBasePoint->findText(point.name());
-        if ( index != -1 ) { // -1 for not found
-            ui->comboBoxBasePoint->setCurrentIndex(index);
-        }
+        ChangeCurrentText(ui->comboBoxBasePoint, point.name());
         this->show();
     }
 }
@@ -85,18 +82,7 @@ QString DialogEndLine::getTypeLine() const{
 
 void DialogEndLine::setTypeLine(const QString &value){
     typeLine = value;
-    if(typeLine == "hair"){
-        qint32 index = ui->comboBoxLineType->findText("Лінія");
-        if(index != -1){
-            ui->comboBoxLineType->setCurrentIndex(index);
-        }
-    }
-    if(typeLine == "none"){
-        qint32 index = ui->comboBoxLineType->findText("Без лінії");
-        if(index != -1){
-            ui->comboBoxLineType->setCurrentIndex(index);
-        }
-    }
+    SetupTypeLine(ui->comboBoxLineType, value);
 }
 
 QString DialogEndLine::getFormula() const{
@@ -117,18 +103,13 @@ void DialogEndLine::setAngle(const qint32 &value){
     ui->spinBoxAngle->setValue(angle);
 }
 
-qint64 DialogEndLine::getBasePointId() const
-{
+qint64 DialogEndLine::getBasePointId() const{
     return basePointId;
 }
 
-void DialogEndLine::setBasePointId(const qint64 &value)
-{
+void DialogEndLine::setBasePointId(const qint64 &value){
     basePointId = value;
-    qint32 index = ui->comboBoxBasePoint->findData(basePointId);
-    if(index != -1){
-        ui->comboBoxBasePoint->setCurrentIndex(index);
-    }
+    ChangeCurrentData(ui->comboBoxBasePoint, value);
 }
 
 void DialogEndLine::DialogAccepted(){

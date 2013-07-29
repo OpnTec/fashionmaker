@@ -14,6 +14,7 @@
 #include "tools/vtoolendline.h"
 #include "tools/vtoolline.h"
 #include "tools/vtoolalongline.h"
+#include "tools/vtoolshoulderpoint.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -49,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolLine);
     connect(ui->toolButtonAlongLine, &QToolButton::clicked, this,
             &MainWindow::ToolAlongLine);
+    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this,
+            &MainWindow::ToolShoulderPoint);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -277,6 +280,53 @@ void MainWindow::ClosedDialogAlongLine(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolShoulderPoint(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::ShoulderPointTool;
+        QPixmap pixmap(":/cursor/shoulder_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogShoulderPoint = new DialogShoulderPoint(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogShoulderPoint,
+                &DialogShoulderPoint::ChoosedPoint);
+        connect(dialogShoulderPoint, &DialogShoulderPoint::DialogClosed, this,
+                &MainWindow::ClosedDialogShoulderPoint);
+    } else {
+        ui->toolButtonShoulderPoint->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogShoulderPoint(int result){
+    if(result == QDialog::Accepted){
+        QString formula = dialogShoulderPoint->getFormula();
+        qint64 p1Line = dialogShoulderPoint->getP1Line();
+        qint64 p2Line = dialogShoulderPoint->getP2Line();
+        qint64 pShoulder = dialogShoulderPoint->getPShoulder();
+        QString typeLine = dialogShoulderPoint->getTypeLine();
+        QString pointName = dialogShoulderPoint->getPointName();
+
+        VPointF firstPoint = data->GetPoint(p1Line);
+        VPointF secondPoint = data->GetPoint(p2Line);
+        VPointF shoulderPoint = data->GetPoint(pShoulder);
+
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(formula, &errorMsg);
+        if(errorMsg.isEmpty()){
+            QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint, secondPoint, shoulderPoint,
+                                                          result*PrintDPI/25.4);
+            qint64 id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, 5, 10));
+            VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula, p1Line,
+                                                               p2Line, pShoulder, Tool::FromGui);
+            scene->addItem(point);
+            connect(point, &VToolShoulderPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -388,17 +438,26 @@ void MainWindow::CanselTool(){
         case Tools::EndLineTool:
             delete dialogEndLine;
             ui->toolButtonEndLine->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
         case Tools::LineTool:
             delete dialogLine;
             ui->toolButtonLine->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
             scene->clearFocus();
             break;
         case Tools::AlongLineTool:
             delete dialogAlongLine;
             ui->toolButtonAlongLine->setChecked(false);
-            scene->clearFocus();
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::ShoulderPointTool:
+            delete dialogShoulderPoint;
+            ui->toolButtonShoulderPoint->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
             break;
     }
 }
@@ -658,6 +717,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonEndLine->setEnabled(enable);
     ui->toolButtonLine->setEnabled(enable);
     ui->toolButtonAlongLine->setEnabled(enable);
+    ui->toolButtonShoulderPoint->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

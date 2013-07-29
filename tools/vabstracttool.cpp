@@ -1,4 +1,5 @@
 #include "vabstracttool.h"
+#include <QDebug>
 
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id){
     this->doc = doc;
@@ -11,6 +12,7 @@ VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id){
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VAbstractTool::ChangedNameDraw);
     connect(this, &VAbstractTool::haveLiteChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
+    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
 }
 
 void VAbstractTool::ChangedNameDraw(const QString oldName, const QString newName){
@@ -65,4 +67,14 @@ void VAbstractTool::AddLine(const qint64 &firstPointId, const qint64 &secondPoin
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     data->AddLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+}
+
+void VAbstractTool::AddToCalculation(const QDomElement &domElement){
+    QDomElement calcElement;
+    bool ok = doc->GetActivCalculationElement(calcElement);
+    if(ok){
+        calcElement.appendChild(domElement);
+    } else {
+        qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
+    }
 }

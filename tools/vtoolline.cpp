@@ -5,7 +5,6 @@
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      Tool::Enum typeCreation, QGraphicsItem *parent):VAbstractTool(doc, data, id),
     QGraphicsLineItem(parent){
-    connect(this, &VToolLine::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     this->firstPoint = firstPoint;
     this->secondPoint = secondPoint;
 
@@ -87,13 +86,7 @@ void VToolLine::AddToFile(){
     AddAttribute(domElement, "firstPoint", firstPoint);
     AddAttribute(domElement, "secondPoint", secondPoint);
 
-    QDomElement calcElement;
-    bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
-        calcElement.appendChild(domElement);
-    } else {
-        qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
-    }
+    AddToCalculation(domElement);
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){

@@ -21,5 +21,6 @@
         <file>icon/32x32/segment.png</file>
         <file>icon/32x32/line.png</file>
         <file>icon/32x32/along_line.png</file>
+        <file>icon/32x32/shoulder.png</file>
     </qresource>
 </RCC>

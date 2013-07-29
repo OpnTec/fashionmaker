@@ -8,7 +8,6 @@ VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, c
                                const qint64 &firstPointId, const qint64 &secondPointId,
                                const QString &typeLine, Tool::Enum typeCreation,
                                QGraphicsItem *parent):VToolPoint(doc, data, id, parent){
-    connect(this, &VToolAlongLine::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     this->typeLine = typeLine;
     this->formula = formula;
     this->firstPointId = firstPointId;
@@ -132,11 +131,5 @@ void VToolAlongLine::AddToFile(){
     AddAttribute(domElement, "firstPoint", firstPointId);
     AddAttribute(domElement, "secondPoint", secondPointId);
 
-    QDomElement calcElement;
-    bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
-        calcElement.appendChild(domElement);
-    } else {
-        qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
-    }
+    AddToCalculation(domElement);
 }

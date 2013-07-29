@@ -85,10 +85,7 @@ qint64 DialogAlongLine::getSecondPointId() const{
 
 void DialogAlongLine::setSecondPointId(const qint64 &value){
     secondPointId = value;
-    qint32 index = ui->comboBoxSecondPoint->findData(secondPointId);
-    if(index != -1){
-        ui->comboBoxSecondPoint->setCurrentIndex(index);
-    }
+    ChangeCurrentData(ui->comboBoxSecondPoint, value);
 }
 
 qint64 DialogAlongLine::getFirstPointId() const{
@@ -97,10 +94,7 @@ qint64 DialogAlongLine::getFirstPointId() const{
 
 void DialogAlongLine::setFirstPointId(const qint64 &value){
     firstPointId = value;
-    qint32 index = ui->comboBoxFirstPoint->findData(firstPointId);
-    if(index != -1){
-        ui->comboBoxFirstPoint->setCurrentIndex(index);
-    }
+    ChangeCurrentData(ui->comboBoxFirstPoint, value);
 }
 
 QString DialogAlongLine::getFormula() const{
@@ -118,18 +112,7 @@ QString DialogAlongLine::getTypeLine() const{
 
 void DialogAlongLine::setTypeLine(const QString &value){
     typeLine = value;
-    if(typeLine == "hair"){
-        qint32 index = ui->comboBoxLineType->findText("Лінія");
-        if(index != -1){
-            ui->comboBoxLineType->setCurrentIndex(index);
-        }
-    }
-    if(typeLine == "none"){
-        qint32 index = ui->comboBoxLineType->findText("Без лінії");
-        if(index != -1){
-            ui->comboBoxLineType->setCurrentIndex(index);
-        }
-    }
+    SetupTypeLine(ui->comboBoxLineType, value);
 }
 
 QString DialogAlongLine::getPointName() const{

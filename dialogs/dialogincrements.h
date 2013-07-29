@@ -28,7 +28,7 @@ signals:
     void haveLiteChange();
 private:
     Ui::DialogIncrements *ui;
-    VContainer *data;
+    VContainer *data; // need because we must change data
     VDomDocument *doc;
     void InitialStandartTable();
     void InitialIncrementTable();

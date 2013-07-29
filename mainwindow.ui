@@ -64,7 +64,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>154</width>
+         <width>156</width>
          <height>81</height>
         </rect>
        </property>
@@ -79,9 +79,25 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="3">
-         <widget class="QToolButton" name="toolButton_5">
+         <widget class="QToolButton" name="toolButtonShoulderPoint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -218,7 +234,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>154</width>
          <height>45</height>
         </rect>
        </property>
@@ -246,7 +262,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>154</width>
          <height>45</height>
         </rect>
        </property>

@@ -12,10 +12,11 @@
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialogline.h"
 #include "dialogs/dialogalongline.h"
+#include "dialogs/dialogshoulderpoint.h"
+#include "dialogs/dialogendline.h"
 #include "tools/vtoolsimplepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
-#include "dialogs/dialogendline.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,7 +29,8 @@ namespace Tools{
         SinglePointTool,
         EndLineTool,
         LineTool,
-        AlongLineTool
+        AlongLineTool,
+        ShoulderPointTool
     };
 }
 
@@ -63,6 +65,8 @@ public slots:
     void                ClosedDialogLine(int result);
     void                ToolAlongLine(bool checked);
     void                ClosedDialogAlongLine(int result);
+    void                ToolShoulderPoint(bool checked);
+    void                ClosedDialogShoulderPoint(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -78,6 +82,7 @@ private:
     DialogEndLine       *dialogEndLine;
     DialogLine          *dialogLine;
     DialogAlongLine     *dialogAlongLine;
+    DialogShoulderPoint *dialogShoulderPoint;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;

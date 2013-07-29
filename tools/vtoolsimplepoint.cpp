@@ -12,7 +12,6 @@
 
 VToolSimplePoint::VToolSimplePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent){
-    connect(this, &VToolSimplePoint::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -30,13 +29,7 @@ void VToolSimplePoint::AddToFile(){
     AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
     AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
 
-    QDomElement calcElement;
-    bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
-        calcElement.appendChild(domElement);
-    } else {
-        qCritical("Не можу знайти тег калькуляції. VToolSimplePoint::AddSimplePoint");
-    }
+    AddToCalculation(domElement);
 }
 
 void VToolSimplePoint::FullUpdateFromGui(int result){

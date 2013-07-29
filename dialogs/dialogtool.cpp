@@ -135,6 +135,35 @@ void DialogTool::ShowLengthLines(){
     listWidget->setCurrentRow (0);
 }
 
+void DialogTool::SetupTypeLine(QComboBox *box, const QString &value){
+    if(value == "hair"){
+        qint32 index = box->findText("Лінія");
+        if(index != -1){
+            box->setCurrentIndex(index);
+        }
+    }
+    if(value == "none"){
+        qint32 index = box->findText("Без лінії");
+        if(index != -1){
+            box->setCurrentIndex(index);
+        }
+    }
+}
+
+void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value){
+    qint32 index = box->findText(value);
+    if(index != -1){
+        box->setCurrentIndex(index);
+    }
+}
+
+void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value){
+    qint32 index = box->findData(value);
+    if(index != -1){
+        box->setCurrentIndex(index);
+    }
+}
+
 void DialogTool::CheckState(){
     Q_CHECK_PTR(bOk);
     bOk->setEnabled(flagFormula & flagName);
@@ -300,6 +329,11 @@ void DialogTool::ValChenged(int row){
         VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
                 .arg(itable.getDescription());
+        labelDescription->setText(desc);
+    }
+    if(radioButtonLengthLine->isChecked()){
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
+                .arg("Довжина лінії");
         labelDescription->setText(desc);
     }
 }

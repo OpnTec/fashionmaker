@@ -5,6 +5,7 @@
 #include "../tools/vtoolendline.h"
 #include "../tools/vtoolline.h"
 #include "../tools/vtoolalongline.h"
+#include "../tools/vtoolshoulderpoint.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -437,6 +438,47 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                                                    secondPointId, typeLine, Tool::FromGui);
                         scene->addItem(point);
                         connect(point, &VToolAlongLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    }
+                }
+            }
+        }
+        return;
+    }
+    if(type == "shoulder"){
+        if(!domElement.isNull()){
+            QString name, typeLine, formula;
+            qreal mx=5, my=10;
+            qint64 id, p1Line, p2Line, pShoulder;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                typeLine = domElement.attribute("typeLine", "");
+                formula = domElement.attribute("length", "");
+                p1Line = domElement.attribute("p1Line", "").toLongLong();
+                p2Line = domElement.attribute("p2Line", "").toLongLong();
+                pShoulder = domElement.attribute("pShoulder", "").toLongLong();
+
+                VPointF firstPoint = data->GetPoint(p1Line);
+                VPointF secondPoint = data->GetPoint(p2Line);
+                VPointF shoulderPoint = data->GetPoint(pShoulder);
+
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(formula, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint, secondPoint, shoulderPoint,
+                                                                  result*PrintDPI/25.4);
+                    data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), name, mx, my));
+                    if(parse == Document::FullParse){
+                        VToolShoulderPoint *point = new VToolShoulderPoint(this, data, id, typeLine, formula,
+                                                                           p1Line, p2Line, pShoulder,
+                                                                           Tool::FromGui);
+                        scene->addItem(point);
+                        connect(point, &VToolShoulderPoint::ChoosedPoint, scene,
+                                &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }

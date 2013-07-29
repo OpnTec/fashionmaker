@@ -70,6 +70,9 @@ protected:
     void             ShowStandartTable();
     void             ShowIncrementTable();
     void             ShowLengthLines();
+    void             SetupTypeLine(QComboBox *box, const QString &value);
+    void             ChangeCurrentText(QComboBox *box, const QString &value);
+    void             ChangeCurrentData(QComboBox *box, const qint64 &value);
 };
 
 #endif // DIALOGTOOL_H
