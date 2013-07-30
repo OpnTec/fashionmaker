@@ -21,6 +21,8 @@ public:
     void                AddStandartTableCell(const QString& name, const VStandartTableCell& cell);
     void                AddIncrementTableRow(const QString& name, const VIncrementTableRow &cell);
     void                AddLine(const QString &name, const qreal &value);
+    void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
+    QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
     void                UpdatePoint(qint64 id, const VPointF& point);
     void                UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell);
     void                UpdateIncrementTableRow(const QString& name, const VIncrementTableRow& cell);
@@ -41,8 +43,7 @@ public:
     const QMap<QString, qint32> *DataBase() const;
     const QMap<QString, VStandartTableCell> *DataStandartTable() const;
     const QMap<QString, VIncrementTableRow> *DataIncrementTable() const;
-    const QMap<QString, qreal> * DataLengthLines() const;
-
+    const QMap<QString, qreal> * DataLengthLines() const;  
 private:
     qint64              _id;
     QMap<QString, qint32> base;

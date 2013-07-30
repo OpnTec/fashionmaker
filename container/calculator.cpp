@@ -176,6 +176,7 @@ qreal Calculator::find_var(QString s){
     bool ok = false;
     qreal value = data->FindVar(s, &ok);
     if(!ok){
+        qDebug()<<s;
         serror(4); /* не переменная */
         return 0;
     }

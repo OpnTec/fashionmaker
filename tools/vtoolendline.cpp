@@ -17,14 +17,13 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
     VPointF basePoint = data->GetPoint(basePointId);
     VPointF point = data->GetPoint(id);
     mainLine = new QGraphicsLineItem(QLineF(basePoint.toQPointF(), point.toQPointF()), this);
+    mainLine->setPen(QPen(Qt::black, widthHairLine));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     if(typeLine == "none"){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
     }
-
-    AddLine(basePointId, id);
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -48,8 +47,11 @@ void VToolEndLine::FullUpdateFromFile(){
     RefreshBaseGeometry(name, point.x(), point.y(), mx, my);
     VPointF basePoint = VAbstractTool::data->GetPoint(basePointId);
     mainLine->setLine(QLineF(basePoint.toQPointF(), point.toQPointF()));
-
-    AddLine(basePointId, id);
+    if(typeLine == "none"){
+        mainLine->setVisible(false);
+    } else {
+        mainLine->setVisible(true);
+    }
 }
 
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){

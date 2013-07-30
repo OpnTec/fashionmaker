@@ -30,9 +30,6 @@ VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, c
             mainLine->setVisible(true);
         }
 
-        AddLine(firstPointId, id);
-        AddLine(id, secondPointId);
-
         if(typeCreation == Tool::FromGui){
             AddToFile();
         }
@@ -57,9 +54,11 @@ void VToolAlongLine::FullUpdateFromFile(){
     VPointF firstPoint = VAbstractTool::data->GetPoint(firstPointId);
     VPointF secondPoint = VAbstractTool::data->GetPoint(secondPointId);
     mainLine->setLine(QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()));
-
-    AddLine(firstPointId, id);
-    AddLine(id, secondPointId);
+    if(typeLine == "none"){
+        mainLine->setVisible(false);
+    } else {
+        mainLine->setVisible(true);
+    }
 }
 
 void VToolAlongLine::FullUpdateFromGui(int result){

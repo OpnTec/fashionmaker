@@ -175,6 +175,19 @@ const QMap<QString, qreal> *VContainer::DataLengthLines() const{
     return &lengthLines;
 }
 
+void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId){
+    QString nameLine = GetNameLine(firstPointId, secondPointId);
+    VPointF firstPoint = GetPoint(firstPointId);
+    VPointF secondPoint = GetPoint(secondPointId);
+    AddLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+}
+
+QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const{
+    VPointF first = GetPoint(firstPoint);
+    VPointF second = GetPoint(secondPoint);
+    return QString("Line_%1_%2").arg(first.name(), second.name());
+}
+
 void VContainer::AddLine(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
     lengthLines[name] = value/PrintDPI*25.4;

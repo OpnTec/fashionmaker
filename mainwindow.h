@@ -14,6 +14,7 @@
 #include "dialogs/dialogalongline.h"
 #include "dialogs/dialogshoulderpoint.h"
 #include "dialogs/dialogendline.h"
+#include "dialogs/dialognormal.h"
 #include "tools/vtoolsimplepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
@@ -30,7 +31,8 @@ namespace Tools{
         EndLineTool,
         LineTool,
         AlongLineTool,
-        ShoulderPointTool
+        ShoulderPointTool,
+        NormalTool
     };
 }
 
@@ -67,6 +69,8 @@ public slots:
     void                ClosedDialogAlongLine(int result);
     void                ToolShoulderPoint(bool checked);
     void                ClosedDialogShoulderPoint(int result);
+    void                ToolNormal(bool checked);
+    void                ClosedDialogNormal(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -83,6 +87,7 @@ private:
     DialogLine          *dialogLine;
     DialogAlongLine     *dialogAlongLine;
     DialogShoulderPoint *dialogShoulderPoint;
+    DialogNormal        *dialogNormal;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;

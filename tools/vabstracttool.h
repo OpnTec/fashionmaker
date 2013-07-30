@@ -40,8 +40,6 @@ protected:
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
-    QString      GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
-    void         AddLine(const qint64 &firstPointId, const qint64 &secondPointId) const;
     void         AddToCalculation(const QDomElement &domElement);
 };
 #endif // VABSTRACTTOOL_H

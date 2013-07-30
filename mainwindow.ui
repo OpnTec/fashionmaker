@@ -65,7 +65,7 @@
          <x>0</x>
          <y>0</y>
          <width>156</width>
-         <height>81</height>
+         <height>104</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -78,29 +78,6 @@
         <string>Точка</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="3">
-         <widget class="QToolButton" name="toolButtonShoulderPoint">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1">
          <widget class="QToolButton" name="toolButtonEndLine">
           <property name="enabled">
@@ -115,8 +92,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>32</width>
+            <height>32</height>
            </size>
           </property>
           <property name="checkable">
@@ -138,8 +115,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>32</width>
+            <height>32</height>
            </size>
           </property>
           <property name="checkable">
@@ -167,8 +144,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>32</width>
+            <height>32</height>
            </size>
           </property>
           <property name="checkable">
@@ -177,9 +154,48 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QToolButton" name="toolButton_4">
+         <widget class="QToolButton" name="toolButtonNormal">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/normal.png</normaloff>:/icon/32x32/normal.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QToolButton" name="toolButtonShoulderPoint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

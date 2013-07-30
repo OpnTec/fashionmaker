@@ -6,6 +6,7 @@
 #include "../tools/vtoolline.h"
 #include "../tools/vtoolalongline.h"
 #include "../tools/vtoolshoulderpoint.h"
+#include "../tools/vtoolnormal.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -397,6 +398,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                     line.setLength(result*PrintDPI/25.4);
                     line.setAngle(angle);
                     data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), name, mx, my));
+                    data->AddLine(basePointId, id);
                     if(parse == Document::FullParse){
                         VToolEndLine *point = new VToolEndLine(this, data, id, typeLine, formula, angle,
                                                                basePointId, Tool::FromFile);
@@ -433,6 +435,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 if(errorMsg.isEmpty()){
                     line.setLength(result*PrintDPI/25.4);
                     data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), name, mx, my));
+                    data->AddLine(firstPointId, id);
+                    data->AddLine(id, secondPointId);
                     if(parse == Document::FullParse){
                         VToolAlongLine *point = new VToolAlongLine(this, data, id, formula, firstPointId,
                                                                    secondPointId, typeLine, Tool::FromGui);
@@ -472,6 +476,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                     QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint, secondPoint, shoulderPoint,
                                                                   result*PrintDPI/25.4);
                     data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), name, mx, my));
+                    data->AddLine(p1Line, id);
+                    data->AddLine(p2Line, id);
                     if(parse == Document::FullParse){
                         VToolShoulderPoint *point = new VToolShoulderPoint(this, data, id, typeLine, formula,
                                                                            p1Line, p2Line, pShoulder,
@@ -479,6 +485,44 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                         scene->addItem(point);
                         connect(point, &VToolShoulderPoint::ChoosedPoint, scene,
                                 &VMainGraphicsScene::ChoosedItem);
+                    }
+                }
+            }
+        }
+        return;
+    }
+    if(type == "normal"){
+        if(!domElement.isNull()){
+            QString name, typeLine, formula;
+            qreal mx=5, my=10, angle;
+            qint64 id, firstPointId, secondPointId;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                typeLine = domElement.attribute("typeLine", "");
+                formula = domElement.attribute("length", "");
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                angle = domElement.attribute("angle", "").toInt();
+
+                VPointF firstPoint = data->GetPoint(firstPointId);
+                VPointF secondPoint = data->GetPoint(secondPointId);
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(formula, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    QPointF fPoint = VToolNormal::FindPoint(firstPoint, secondPoint, result*PrintDPI/25.4,
+                                                            angle);
+                    data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), name, mx, my));
+                    data->AddLine(firstPointId, id);
+                    if(parse == Document::FullParse){
+                        VToolNormal *point = new VToolNormal(this, data, id, typeLine, formula, angle,
+                                                             firstPointId, secondPointId, Tool::FromFile);
+                        scene->addItem(point);
+                        connect(point, &VToolNormal::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }
@@ -495,6 +539,7 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
         if(!domElement.isNull()){
             firstPoint = domElement.attribute("firstPoint", "").toLongLong();
             secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+            data->AddLine(firstPoint, secondPoint);
             if(parse == Document::FullParse){
                 qint64 id = data->getNextId();
                 VToolLine *line = new VToolLine(this, data, id, firstPoint, secondPoint, Tool::FromFile);

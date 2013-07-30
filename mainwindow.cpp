@@ -15,6 +15,7 @@
 #include "tools/vtoolline.h"
 #include "tools/vtoolalongline.h"
 #include "tools/vtoolshoulderpoint.h"
+#include "tools/vtoolnormal.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -52,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolAlongLine);
     connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this,
             &MainWindow::ToolShoulderPoint);
+    connect(ui->toolButtonNormal, &QToolButton::clicked, this,
+            &MainWindow::ToolNormal);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -198,6 +201,7 @@ void MainWindow::ClosedDialogEndLine(int result){
             line.setLength(result*PrintDPI/25.4);
             line.setAngle(angle);
             qint64 id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, 5, 10));
+            data->AddLine(basePointId, id);
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle, basePointId,
                                                    Tool::FromGui);
             scene->addItem(point);
@@ -229,6 +233,7 @@ void MainWindow::ClosedDialogLine(int result){
         qint64 firstPoint = dialogLine->getFirstPoint();
         qint64 secondPoint = dialogLine->getSecondPoint();
 
+        data->AddLine(firstPoint, secondPoint);
         qint64 id = data->getNextId();
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, Tool::FromGui);
         scene->addItem(line);
@@ -271,6 +276,8 @@ void MainWindow::ClosedDialogAlongLine(int result){
         if(errorMsg.isEmpty()){
             line.setLength(result*PrintDPI/25.4);
             qint64 id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, 5, 10));
+            data->AddLine(firstPointId, id);
+            data->AddLine(id, secondPointId);
             VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId,
                                                        typeLine, Tool::FromGui);
             scene->addItem(point);
@@ -318,10 +325,59 @@ void MainWindow::ClosedDialogShoulderPoint(int result){
             QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint, secondPoint, shoulderPoint,
                                                           result*PrintDPI/25.4);
             qint64 id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, 5, 10));
+            data->AddLine(p1Line, id);
+            data->AddLine(p2Line, id);
             VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula, p1Line,
                                                                p2Line, pShoulder, Tool::FromGui);
             scene->addItem(point);
             connect(point, &VToolShoulderPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
+    }
+    ArrowTool();
+}
+
+void MainWindow::ToolNormal(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::NormalTool;
+        QPixmap pixmap(":/cursor/normal_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogNormal = new DialogNormal(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogNormal,
+                &DialogNormal::ChoosedPoint);
+        connect(dialogNormal, &DialogNormal::DialogClosed, this,
+                &MainWindow::ClosedDialogNormal);
+    } else {
+        ui->toolButtonNormal->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogNormal(int result){
+    if(result == QDialog::Accepted){
+        QString formula = dialogNormal->getFormula();
+        qint64 firstPointId = dialogNormal->getFirstPointId();
+        qint64 secondPointId = dialogNormal->getSecondPointId();
+        QString typeLine = dialogNormal->getTypeLine();
+        QString pointName = dialogNormal->getPointName();
+        qint32 angle = dialogNormal->getAngle();
+
+        VPointF firstPoint = data->GetPoint(firstPointId);
+        VPointF secondPoint = data->GetPoint(secondPointId);
+
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(formula, &errorMsg);
+        if(errorMsg.isEmpty()){
+            QPointF fPoint = VToolNormal::FindPoint(firstPoint, secondPoint, result*PrintDPI/25.4,
+                                                           angle);
+            qint64 id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, 5, 10));
+            data->AddLine(firstPointId, id);
+            VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle, firstPointId,
+                                                               secondPointId, Tool::FromGui);
+            scene->addItem(point);
+            connect(point, &VToolNormal::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
         }
     }
     ArrowTool();
@@ -456,6 +512,12 @@ void MainWindow::CanselTool(){
         case Tools::ShoulderPointTool:
             delete dialogShoulderPoint;
             ui->toolButtonShoulderPoint->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::NormalTool:
+            delete dialogNormal;
+            ui->toolButtonNormal->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -718,6 +780,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonLine->setEnabled(enable);
     ui->toolButtonAlongLine->setEnabled(enable);
     ui->toolButtonShoulderPoint->setEnabled(enable);
+    ui->toolButtonNormal->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

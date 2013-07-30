@@ -16,8 +16,6 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
-    AddLine(firstPoint, secondPoint);
-
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -32,7 +30,6 @@ void VToolLine::FullUpdateFromFile(){
     VPointF first = VAbstractTool::data->GetPoint(firstPoint);
     VPointF second = VAbstractTool::data->GetPoint(secondPoint);
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
-    AddLine(firstPoint, secondPoint);
 }
 
 void VToolLine::FullUpdateFromGui(int result){

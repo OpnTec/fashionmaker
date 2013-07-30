@@ -23,9 +23,6 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
         mainLine->setVisible(true);
     }
 
-    AddLine(p1Line, id);
-    AddLine(p2Line, id);
-
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -76,9 +73,6 @@ void VToolShoulderPoint::FullUpdateFromFile(){
     } else {
         mainLine->setVisible(true);
     }
-
-    AddLine(p1Line, id);
-    AddLine(p2Line, id);
 }
 
 void VToolShoulderPoint::FullUpdateFromGui(int result){
