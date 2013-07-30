@@ -192,7 +192,7 @@ void VToolPoint::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ){
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VToolPoint::RefreshBaseGeometry(const QString &name, const qreal &x, const qreal &y, const qreal &mx,
+void VToolPoint::RefreshGeometry(const QString &name, const qreal &x, const qreal &y, const qreal &mx,
                                      const qreal &my){
     QRectF rec = QRectF(x, y, radius*2, radius*2);
     rec.translate(x-rec.center().x(), y-rec.center().y());

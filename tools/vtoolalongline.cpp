@@ -50,7 +50,7 @@ void VToolAlongLine::FullUpdateFromFile(){
         secondPointId = domElement.attribute("secondPoint", "").toLongLong();
     }
     VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshBaseGeometry(name, point.x(), point.y(), mx, my);
+    RefreshGeometry(name, point.x(), point.y(), mx, my);
     VPointF firstPoint = VAbstractTool::data->GetPoint(firstPointId);
     VPointF secondPoint = VAbstractTool::data->GetPoint(secondPointId);
     mainLine->setLine(QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()));
@@ -58,6 +58,16 @@ void VToolAlongLine::FullUpdateFromFile(){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
+    }
+}
+
+void VToolAlongLine::ChangedActivDraw(const QString newName){
+    if(nameActivDraw == newName){
+        mainLine->setPen(QPen(Qt::black, widthHairLine));
+        VToolPoint::ChangedActivDraw(newName);
+    } else {
+        mainLine->setPen(QPen(Qt::gray, widthHairLine));
+        VToolPoint::ChangedActivDraw(newName);
     }
 }
 
@@ -75,16 +85,6 @@ void VToolAlongLine::FullUpdateFromGui(int result){
 
     }
     dialogAlongLine.clear();
-}
-
-void VToolAlongLine::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    }
 }
 
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){

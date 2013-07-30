@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     tools/vtoolshoulderpoint.cpp \
     dialogs/dialogshoulderpoint.cpp \
     tools/vtoolnormal.cpp \
-    dialogs/dialognormal.cpp
+    dialogs/dialognormal.cpp \
+    tools/vtoolbisector.cpp \
+    dialogs/dialogbisector.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -67,7 +69,9 @@ HEADERS  += mainwindow.h \
     tools/vtoolshoulderpoint.h \
     dialogs/dialogshoulderpoint.h \
     tools/vtoolnormal.h \
-    dialogs/dialognormal.h
+    dialogs/dialognormal.h \
+    tools/vtoolbisector.h \
+    dialogs/dialogbisector.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -76,7 +80,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogline.ui \
     dialogs/dialogalongline.ui \
     dialogs/dialogshoulderpoint.ui \
-    dialogs/dialognormal.ui
+    dialogs/dialognormal.ui \
+    dialogs/dialogbisector.ui
 
 RESOURCES += \
     icon.qrc \

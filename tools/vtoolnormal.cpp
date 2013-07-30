@@ -53,7 +53,7 @@ void VToolNormal::FullUpdateFromFile(){
         angle = domElement.attribute("angle", "").toInt();
     }
     VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshBaseGeometry(name, point.x(), point.y(), mx, my);
+    RefreshGeometry(name, point.x(), point.y(), mx, my);
     VPointF firstPoint = VAbstractTool::data->GetPoint(firstPointId);
     mainLine->setLine(QLineF(firstPoint.toQPointF(), point.toQPointF()));
     if(typeLine == "none"){
@@ -131,7 +131,7 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "length", formula);
     AddAttribute(domElement, "angle", angle);
     AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", firstPointId);
+    AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
 }

@@ -65,7 +65,7 @@ void VToolShoulderPoint::FullUpdateFromFile(){
         pShoulder = domElement.attribute("pShoulder", "").toLongLong();
     }
     VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshBaseGeometry(name, point.x(), point.y(), mx, my);
+    RefreshGeometry(name, point.x(), point.y(), mx, my);
     VPointF p1L = VAbstractTool::data->GetPoint(p1Line);
     mainLine->setLine(QLineF(p1L.toQPointF(), point.toQPointF()));
     if(typeLine == "none"){

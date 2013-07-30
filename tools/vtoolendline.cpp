@@ -44,7 +44,7 @@ void VToolEndLine::FullUpdateFromFile(){
         angle = domElement.attribute("angle", "").toInt();
     }
     VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshBaseGeometry(name, point.x(), point.y(), mx, my);
+    RefreshGeometry(name, point.x(), point.y(), mx, my);
     VPointF basePoint = VAbstractTool::data->GetPoint(basePointId);
     mainLine->setLine(QLineF(basePoint.toQPointF(), point.toQPointF()));
     if(typeLine == "none"){

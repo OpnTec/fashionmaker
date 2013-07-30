@@ -7,6 +7,7 @@
 #include "../tools/vtoolalongline.h"
 #include "../tools/vtoolshoulderpoint.h"
 #include "../tools/vtoolnormal.h"
+#include "../tools/vtoolbisector.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -523,6 +524,47 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                                              firstPointId, secondPointId, Tool::FromFile);
                         scene->addItem(point);
                         connect(point, &VToolNormal::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    }
+                }
+            }
+        }
+        return;
+    }
+    if(type == "bisector"){
+        if(!domElement.isNull()){
+            QString name, typeLine, formula;
+            qreal mx=5, my=10;
+            qint64 id, firstPointId, secondPointId, thirdPointId;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                typeLine = domElement.attribute("typeLine", "");
+                formula = domElement.attribute("length", "");
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
+
+                VPointF firstPoint = data->GetPoint(firstPointId);
+                VPointF secondPoint = data->GetPoint(secondPointId);
+                VPointF thirdPoint = data->GetPoint(thirdPointId);
+
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(formula, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    QPointF fPoint = VToolBisector::FindPoint(firstPoint, secondPoint, thirdPoint,
+                                                              result*PrintDPI/25.4);
+                    data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), name, mx, my));
+                    data->AddLine(firstPointId, id);
+                    if(parse == Document::FullParse){
+                        VToolBisector *point = new VToolBisector(this, data, id, typeLine, formula,
+                                                                 firstPointId, secondPointId, thirdPointId,
+                                                                 Tool::FromFile);
+                        scene->addItem(point);
+                        connect(point, &VToolBisector::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }

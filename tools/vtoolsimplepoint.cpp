@@ -73,5 +73,5 @@ void  VToolSimplePoint::FullUpdateFromFile(){
         mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
         my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
     }
-    RefreshBaseGeometry(name, x, y, mx, my);
+    RefreshGeometry(name, x, y, mx, my);
 }

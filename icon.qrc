@@ -23,5 +23,6 @@
         <file>icon/32x32/along_line.png</file>
         <file>icon/32x32/shoulder.png</file>
         <file>icon/32x32/normal.png</file>
+        <file>icon/32x32/bisector.png</file>
     </qresource>
 </RCC>

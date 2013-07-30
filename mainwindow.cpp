@@ -16,6 +16,7 @@
 #include "tools/vtoolalongline.h"
 #include "tools/vtoolshoulderpoint.h"
 #include "tools/vtoolnormal.h"
+#include "tools/vtoolbisector.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -55,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolShoulderPoint);
     connect(ui->toolButtonNormal, &QToolButton::clicked, this,
             &MainWindow::ToolNormal);
+    connect(ui->toolButtonBisector, &QToolButton::clicked, this,
+            &MainWindow::ToolBisector);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -383,6 +386,54 @@ void MainWindow::ClosedDialogNormal(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolBisector(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::BisectorTool;
+        QPixmap pixmap(":/cursor/bisector_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogBisector = new DialogBisector(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogBisector,
+                &DialogBisector::ChoosedPoint);
+        connect(dialogBisector, &DialogBisector::DialogClosed, this,
+                &MainWindow::ClosedDialogBisector);
+    } else {
+        ui->toolButtonBisector->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogBisector(int result){
+    if(result == QDialog::Accepted){
+        QString formula = dialogBisector->getFormula();
+        qint64 firstPointId = dialogBisector->getFirstPointId();
+        qint64 secondPointId = dialogBisector->getSecondPointId();
+        qint64 thirdPointId = dialogBisector->getThirdPointId();
+        QString typeLine = dialogBisector->getTypeLine();
+        QString pointName = dialogBisector->getPointName();
+
+        VPointF firstPoint = data->GetPoint(firstPointId);
+        VPointF secondPoint = data->GetPoint(secondPointId);
+        VPointF thirdPoint = data->GetPoint(thirdPointId);
+
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(formula, &errorMsg);
+        if(errorMsg.isEmpty()){
+            QPointF fPoint = VToolBisector::FindPoint(firstPoint, secondPoint, thirdPoint,
+                                                    result*PrintDPI/25.4);
+            qint64 id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, 5, 10));
+            data->AddLine(secondPointId, id);
+            VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId,
+                                                     secondPointId, thirdPointId, Tool::FromGui);
+            scene->addItem(point);
+            connect(point, &VToolBisector::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -518,6 +569,12 @@ void MainWindow::CanselTool(){
         case Tools::NormalTool:
             delete dialogNormal;
             ui->toolButtonNormal->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::BisectorTool:
+            delete dialogBisector;
+            ui->toolButtonBisector->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -781,6 +838,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonAlongLine->setEnabled(enable);
     ui->toolButtonShoulderPoint->setEnabled(enable);
     ui->toolButtonNormal->setEnabled(enable);
+    ui->toolButtonBisector->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){
