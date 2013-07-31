@@ -63,15 +63,5 @@ void VToolSimplePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
 }
 
 void  VToolSimplePoint::FullUpdateFromFile(){
-    QString name;
-    qreal x, y, mx, my;
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        name = domElement.attribute("name", "");
-        x = domElement.attribute("x", "").toDouble()*PrintDPI/25.4;
-        y = domElement.attribute("y", "").toDouble()*PrintDPI/25.4;
-        mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
-        my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
-    }
-    RefreshGeometry(name, x, y, mx, my);
+    RefreshGeometry();
 }

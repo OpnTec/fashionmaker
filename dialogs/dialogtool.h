@@ -64,7 +64,7 @@ protected:
     void             showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
-    void             CheckState();
+    virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
     void             ShowBase();
     void             ShowStandartTable();

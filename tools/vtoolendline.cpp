@@ -4,26 +4,10 @@
 
 #include "../widgets/vmaingraphicsscene.h"
 
-VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
-                           const QString &typeLine, const QString &formula, const qint32 &angle,
-                           const qint64 &basePointId, Tool::Enum typeCreation,
-                           QGraphicsItem *parent):VToolPoint(doc, data, id, parent){
-    this->typeLine = typeLine;
-    this->formula = formula;
-    this->angle = angle;
-    this->basePointId = basePointId;
-
-    //Лінія, що з'єднує дві точки
-    VPointF basePoint = data->GetPoint(basePointId);
-    VPointF point = data->GetPoint(id);
-    mainLine = new QGraphicsLineItem(QLineF(basePoint.toQPointF(), point.toQPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine));
-    mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
+VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                           const QString &formula, const qint32 &angle, const qint64 &basePointId,
+                           Tool::Enum typeCreation, QGraphicsItem *parent):
+    VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent){
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -31,27 +15,14 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
 }
 
 void VToolEndLine::FullUpdateFromFile(){
-    QString name;
-    qreal mx, my;
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        name = domElement.attribute("name", "");
-        mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
-        my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
         typeLine = domElement.attribute("typeLine", "");
         formula = domElement.attribute("length", "");
         basePointId = domElement.attribute("basePoint", "").toLongLong();
         angle = domElement.attribute("angle", "").toInt();
     }
-    VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshGeometry(name, point.x(), point.y(), mx, my);
-    VPointF basePoint = VAbstractTool::data->GetPoint(basePointId);
-    mainLine->setLine(QLineF(basePoint.toQPointF(), point.toQPointF()));
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
+    RefreshGeometry();
 }
 
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -94,16 +65,6 @@ void VToolEndLine::FullUpdateFromGui(int result){
         }
     }
     dialogEndLine.clear();
-}
-
-void VToolEndLine::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    }
 }
 
 void VToolEndLine::AddToFile(){

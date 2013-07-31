@@ -4,24 +4,9 @@
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                              const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                              const qint64 &thirdPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolPoint(doc, data, id, parent){
-    this->typeLine = typeLine;
-    this->formula = formula;
+    VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent){
     this->firstPointId = firstPointId;
-    this->secondPointId = secondPointId;
     this->thirdPointId = thirdPointId;
-
-    //Лінія, що з'єднує дві точки
-    VPointF basePoint = data->GetPoint(secondPointId);
-    VPointF point = data->GetPoint(id);
-    mainLine = new QGraphicsLineItem(QLineF(basePoint.toQPointF(), point.toQPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine));
-    mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -42,28 +27,15 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 }
 
 void VToolBisector::FullUpdateFromFile(){
-    QString name;
-    qreal mx, my;
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        name = domElement.attribute("name", "");
-        mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
-        my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
         typeLine = domElement.attribute("typeLine", "");
         formula = domElement.attribute("length", "");
         firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+        basePointId = domElement.attribute("secondPoint", "").toLongLong();
         thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
     }
-    VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshGeometry(name, point.x(), point.y(), mx, my);
-    VPointF basePoint = VAbstractTool::data->GetPoint(secondPointId);
-    mainLine->setLine(QLineF(basePoint.toQPointF(), point.toQPointF()));
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
+    RefreshGeometry();
 }
 
 void VToolBisector::FullUpdateFromGui(int result){
@@ -80,16 +52,6 @@ void VToolBisector::FullUpdateFromGui(int result){
         }
     }
     dialogBisector.clear();
-}
-
-void VToolBisector::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    }
 }
 
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -112,7 +74,7 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogBisector->setTypeLine(typeLine);
             dialogBisector->setFormula(formula);
             dialogBisector->setFirstPointId(firstPointId);
-            dialogBisector->setSecondPointId(secondPointId);
+            dialogBisector->setSecondPointId(basePointId);
             dialogBisector->setThirdPointId(thirdPointId);
             dialogBisector->setPointName(p.name());
 
@@ -134,7 +96,7 @@ void VToolBisector::AddToFile(){
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);
     AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, "secondPoint", basePointId);
     AddAttribute(domElement, "thirdPoint", thirdPointId);
 
     AddToCalculation(domElement);

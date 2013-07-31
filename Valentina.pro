@@ -40,7 +40,10 @@ SOURCES += main.cpp\
     tools/vtoolnormal.cpp \
     dialogs/dialognormal.cpp \
     tools/vtoolbisector.cpp \
-    dialogs/dialogbisector.cpp
+    dialogs/dialogbisector.cpp \
+    tools/vtoollinepoint.cpp \
+    tools/vtoollineintersect.cpp \
+    dialogs/dialoglineintersect.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -71,7 +74,10 @@ HEADERS  += mainwindow.h \
     tools/vtoolnormal.h \
     dialogs/dialognormal.h \
     tools/vtoolbisector.h \
-    dialogs/dialogbisector.h
+    dialogs/dialogbisector.h \
+    tools/vtoollinepoint.h \
+    tools/vtoollineintersect.h \
+    dialogs/dialoglineintersect.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -81,7 +87,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogalongline.ui \
     dialogs/dialogshoulderpoint.ui \
     dialogs/dialognormal.ui \
-    dialogs/dialogbisector.ui
+    dialogs/dialogbisector.ui \
+    dialogs/dialoglineintersect.ui
 
 RESOURCES += \
     icon.qrc \

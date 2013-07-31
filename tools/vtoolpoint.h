@@ -23,8 +23,7 @@ protected:
     VGraphicsSimpleTextItem *namePoint;
     QGraphicsLineItem       *lineName;
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    void                    RefreshGeometry(const QString &name, const qreal &x, const qreal &y,
-                                                const qreal &mx, const qreal &my);
+    virtual void            RefreshGeometry();
     virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:

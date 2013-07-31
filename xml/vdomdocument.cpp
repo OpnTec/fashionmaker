@@ -8,6 +8,7 @@
 #include "../tools/vtoolshoulderpoint.h"
 #include "../tools/vtoolnormal.h"
 #include "../tools/vtoolbisector.h"
+#include "../tools/vtoollineintersect.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -565,6 +566,50 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                                                  Tool::FromFile);
                         scene->addItem(point);
                         connect(point, &VToolBisector::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    }
+                }
+            }
+        }
+        return;
+    }
+    if(type == "lineIntersect"){
+        if(!domElement.isNull()){
+            QString name;
+            qreal mx=5, my=10;
+            qint64 id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                name = domElement.attribute("name", "");
+                mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+                my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+
+                p1Line1Id = domElement.attribute("p1Line1", "").toLongLong();
+                p2Line1Id = domElement.attribute("p2Line1", "").toLongLong();
+                p1Line2Id = domElement.attribute("p1Line2", "").toLongLong();
+                p2Line2Id = domElement.attribute("p2Line2", "").toLongLong();
+
+                VPointF p1Line1 = data->GetPoint(p1Line1Id);
+                VPointF p2Line1 = data->GetPoint(p2Line1Id);
+                VPointF p1Line2 = data->GetPoint(p1Line2Id);
+                VPointF p2Line2 = data->GetPoint(p2Line2Id);
+
+                QLineF line1(p1Line1, p2Line1);
+                QLineF line2(p1Line2, p2Line2);
+                QPointF fPoint;
+                QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
+                if(intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection){
+                    data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), name, mx, my));
+                    data->AddLine(p1Line1Id, id);
+                    data->AddLine(id, p2Line1Id);
+                    data->AddLine(p1Line2Id, id);
+                    data->AddLine(id, p2Line2Id);
+                    if(parse == Document::FullParse){
+                        VToolLineIntersect *point = new VToolLineIntersect(this, data, id, p1Line1Id,
+                                                                           p2Line1Id, p1Line2Id,
+                                                                           p2Line2Id, Tool::FromGui);
+                        scene->addItem(point);
+                        connect(point, &VToolLineIntersect::ChoosedPoint, scene,
+                                &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }

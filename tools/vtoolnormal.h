@@ -3,10 +3,10 @@
 
 #include <QSharedPointer>
 
-#include "vtoolpoint.h"
+#include "vtoollinepoint.h"
 #include "../dialogs/dialognormal.h"
 
-class VToolNormal : public VToolPoint
+class VToolNormal : public VToolLinePoint
 {
 public:
                                  VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
@@ -19,17 +19,11 @@ public:
 public slots:
     virtual void                 FullUpdateFromFile();
     virtual void                 FullUpdateFromGui(int result);
-    virtual void                 ChangedActivDraw(const QString newName);
 protected:
     virtual void                 contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void                 AddToFile();
 private:
-    QString                      typeLine;
-    QString                      formula;
-    qint32                       angle;
-    qint64                       firstPointId;
     qint64                       secondPointId;
-    QGraphicsLineItem            *mainLine;
     QSharedPointer<DialogNormal> dialogNormal;
 };
 

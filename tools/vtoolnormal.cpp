@@ -4,24 +4,8 @@
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const QString &formula, const qint32 &angle, const qint64 &firstPointId,
                          const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolPoint(doc, data, id, parent){
-    this->typeLine = typeLine;
-    this->formula = formula;
-    this->angle = angle;
-    this->firstPointId = firstPointId;
+    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent){
     this->secondPointId = secondPointId;
-
-    //Лінія, що з'єднує дві точки
-    VPointF firstPoint = data->GetPoint(firstPointId);
-    VPointF point = data->GetPoint(id);
-    mainLine = new QGraphicsLineItem(QLineF(firstPoint.toQPointF(), point.toQPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine));
-    mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -39,28 +23,15 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 }
 
 void VToolNormal::FullUpdateFromFile(){
-    QString name;
-    qreal mx, my;
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        name = domElement.attribute("name", "");
-        mx = domElement.attribute("mx", "").toDouble()*PrintDPI/25.4;
-        my = domElement.attribute("my", "").toDouble()*PrintDPI/25.4;
         typeLine = domElement.attribute("typeLine", "");
         formula = domElement.attribute("length", "");
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+        basePointId = domElement.attribute("firstPoint", "").toLongLong();
         secondPointId = domElement.attribute("secondPoint", "").toLongLong();
         angle = domElement.attribute("angle", "").toInt();
     }
-    VPointF point = VAbstractTool::data->GetPoint(id);
-    RefreshGeometry(name, point.x(), point.y(), mx, my);
-    VPointF firstPoint = VAbstractTool::data->GetPoint(firstPointId);
-    mainLine->setLine(QLineF(firstPoint.toQPointF(), point.toQPointF()));
-    if(typeLine == "none"){
-        mainLine->setVisible(false);
-    } else {
-        mainLine->setVisible(true);
-    }
+    RefreshGeometry();
 }
 
 void VToolNormal::FullUpdateFromGui(int result){
@@ -77,16 +48,6 @@ void VToolNormal::FullUpdateFromGui(int result){
         }
     }
     dialogNormal.clear();
-}
-
-void VToolNormal::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
-    }
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -108,7 +69,7 @@ void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogNormal->setTypeLine(typeLine);
             dialogNormal->setFormula(formula);
             dialogNormal->setAngle(angle);
-            dialogNormal->setFirstPointId(firstPointId);
+            dialogNormal->setFirstPointId(basePointId);
             dialogNormal->setSecondPointId(secondPointId);
             dialogNormal->setPointName(p.name());
 
@@ -130,7 +91,7 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);
     AddAttribute(domElement, "angle", angle);
-    AddAttribute(domElement, "firstPoint", firstPointId);
+    AddAttribute(domElement, "firstPoint", basePointId);
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);

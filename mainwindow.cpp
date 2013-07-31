@@ -17,6 +17,7 @@
 #include "tools/vtoolshoulderpoint.h"
 #include "tools/vtoolnormal.h"
 #include "tools/vtoolbisector.h"
+#include "tools/vtoollineintersect.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -58,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolNormal);
     connect(ui->toolButtonBisector, &QToolButton::clicked, this,
             &MainWindow::ToolBisector);
+    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this,
+            &MainWindow::ToolLineIntersect);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -434,6 +437,57 @@ void MainWindow::ClosedDialogBisector(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolLineIntersect(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::LineIntersectTool;
+        QPixmap pixmap(":/cursor/intersect_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogLineIntersect = new DialogLineIntersect(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogLineIntersect,
+                &DialogLineIntersect::ChoosedPoint);
+        connect(dialogLineIntersect, &DialogLineIntersect::DialogClosed, this,
+                &MainWindow::ClosedDialogLineIntersect);
+    } else {
+        ui->toolButtonLineIntersect->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogLineIntersect(int result){
+    if(result == QDialog::Accepted){
+        qint64 p1Line1Id = dialogLineIntersect->getP1Line1();
+        qint64 p2Line1Id = dialogLineIntersect->getP2Line1();
+        qint64 p1Line2Id = dialogLineIntersect->getP1Line2();
+        qint64 p2Line2Id = dialogLineIntersect->getP2Line2();
+        QString pointName = dialogLineIntersect->getPointName();
+
+        VPointF p1Line1 = data->GetPoint(p1Line1Id);
+        VPointF p2Line1 = data->GetPoint(p2Line1Id);
+        VPointF p1Line2 = data->GetPoint(p1Line2Id);
+        VPointF p2Line2 = data->GetPoint(p2Line2Id);
+
+        QLineF line1(p1Line1, p2Line1);
+        QLineF line2(p1Line2, p2Line2);
+        QPointF fPoint;
+        QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
+        if(intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection){
+            qint64 id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, 5, 10));
+            data->AddLine(p1Line1Id, id);
+            data->AddLine(id, p2Line1Id);
+            data->AddLine(p1Line2Id, id);
+            data->AddLine(id, p2Line2Id);
+            VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
+                                                               p2Line1Id, p1Line2Id,
+                                                               p2Line2Id, Tool::FromFile);
+            scene->addItem(point);
+            connect(point, &VToolLineIntersect::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -575,6 +629,12 @@ void MainWindow::CanselTool(){
         case Tools::BisectorTool:
             delete dialogBisector;
             ui->toolButtonBisector->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::LineIntersectTool:
+            delete dialogLineIntersect;
+            ui->toolButtonLineIntersect->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -839,6 +899,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonShoulderPoint->setEnabled(enable);
     ui->toolButtonNormal->setEnabled(enable);
     ui->toolButtonBisector->setEnabled(enable);
+    ui->toolButtonLineIntersect->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

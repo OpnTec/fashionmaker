@@ -192,15 +192,15 @@ void VToolPoint::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ){
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VToolPoint::RefreshGeometry(const QString &name, const qreal &x, const qreal &y, const qreal &mx,
-                                     const qreal &my){
-    QRectF rec = QRectF(x, y, radius*2, radius*2);
-    rec.translate(x-rec.center().x(), y-rec.center().y());
+void VToolPoint::RefreshGeometry(){
+    VPointF point = VAbstractTool::data->GetPoint(id);
+    QRectF rec = QRectF(point.x(), point.y(), radius*2, radius*2);
+    rec.translate(point.x()-rec.center().x(), point.y()-rec.center().y());
     this->setRect(rec);
 
     rec = this->rect();
-    namePoint->setText(name);
-    namePoint->setPos(QPointF(rec.center().x()+mx, rec.center().y()+my));
+    namePoint->setText(point.name());
+    namePoint->setPos(QPointF(rec.center().x()+point.mx(), rec.center().y()+point.my()));
 
     RefreshLine();
 }

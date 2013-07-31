@@ -3,10 +3,10 @@
 
 #include <QSharedPointer>
 
-#include "vtoolpoint.h"
+#include "vtoollinepoint.h"
 #include "../dialogs/dialogendline.h"
 
-class VToolEndLine : public VToolPoint
+class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
@@ -17,16 +17,10 @@ public:
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);
-    virtual void      ChangedActivDraw(const QString newName);
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();
 private:
-    QString           typeLine;
-    QString           formula;
-    qint32            angle;
-    qint64            basePointId;
-    QGraphicsLineItem *mainLine;
     QSharedPointer<DialogEndLine> dialogEndLine;
 };
 

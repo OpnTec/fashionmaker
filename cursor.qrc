@@ -7,5 +7,6 @@
         <file>cursor/shoulder_cursor.png</file>
         <file>cursor/normal_cursor.png</file>
         <file>cursor/bisector_cursor.png</file>
+        <file>cursor/intersect_cursor.png</file>
     </qresource>
 </RCC>
