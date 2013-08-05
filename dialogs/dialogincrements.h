@@ -33,9 +33,13 @@ private:
     void InitialStandartTable();
     void InitialIncrementTable();
     void InitialLinesTable();
+    void InitialSplinesTable();
+    void InitialArcsTable();
     void FillStandartTable();
     void FillIncrementTable();
     void FillLengthLines();
+    void FillLengthSplines();
+    void FillLengthArcs();
     void AddIncrementToFile(quint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
                             QString description);
 };

@@ -24,7 +24,7 @@ public:
     QString                 getPointName() const;
     void                    setPointName(const QString &value);
 public slots:
-    virtual void            ChoosedPoint(qint64 id, Scene::Type type);
+    virtual void            ChoosedObject(qint64 id, Scene::Type type);
     virtual void            DialogAccepted();
     void                    P1Line1Changed( int index);
     void                    P2Line1Changed( int index);

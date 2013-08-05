@@ -22,7 +22,7 @@ public:
 signals:
     void             DialogClosed(int result);
 public slots:
-    virtual void     ChoosedPoint(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Type type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     virtual void     DialogRejected();

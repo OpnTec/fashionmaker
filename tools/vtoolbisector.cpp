@@ -63,7 +63,7 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogBisector = QSharedPointer<DialogBisector>(new DialogBisector(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogBisector.data(), &DialogBisector::ChoosedPoint);
+                    dialogBisector.data(), &DialogBisector::ChoosedObject);
             connect(dialogBisector.data(), &DialogBisector::DialogClosed, this,
                     &VToolBisector::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogBisector.data(),

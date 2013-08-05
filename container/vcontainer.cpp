@@ -73,6 +73,20 @@ void VContainer::UpdatePoint(qint64 id, const VPointF& point){
     }
 }
 
+void VContainer::UpdateSpline(qint64 id, const VSpline &spl){
+    splines[id] = spl;
+    if(id > _id){
+        _id = id;
+    }
+}
+
+void VContainer::UpdateArc(qint64 id, const VArc &arc){
+    arcs[id] = arc;
+    if(id > _id){
+        _id = id;
+    }
+}
+
 void VContainer::UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell){
     standartTable[name] = cell;
 }
@@ -103,6 +117,9 @@ void VContainer::Clear(){
     standartTable.clear();
     incrementTable.clear();
     lengthLines.clear();
+    splines.clear();
+    arcs.clear();
+    lengthArcs.clear();
 }
 
 void VContainer::ClearIncrementTable(){
@@ -111,6 +128,14 @@ void VContainer::ClearIncrementTable(){
 
 void VContainer::ClearLengthLines(){
     lengthLines.clear();
+}
+
+void VContainer::ClearLengthSplines(){
+    lengthSplines.clear();
+}
+
+void VContainer::ClearLengthArcs(){
+    lengthArcs.clear();
 }
 
 void VContainer::SetSize(qint32 size){
@@ -159,6 +184,14 @@ const QMap<qint64, VPointF> *VContainer::DataPoints() const{
     return &points;
 }
 
+const QMap<qint64, VSpline> *VContainer::DataSplines() const{
+    return &splines;
+}
+
+const QMap<qint64, VArc> *VContainer::DataArcs() const{
+    return &arcs;
+}
+
 const QMap<QString, qint32> *VContainer::DataBase() const{
     return &base;
 }
@@ -175,11 +208,27 @@ const QMap<QString, qreal> *VContainer::DataLengthLines() const{
     return &lengthLines;
 }
 
+const QMap<QString, qreal> *VContainer::DataLengthSplines() const{
+    return &lengthSplines;
+}
+
 void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId){
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     VPointF firstPoint = GetPoint(firstPointId);
     VPointF secondPoint = GetPoint(secondPointId);
-    AddLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+    AddLengthLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+}
+
+qint64 VContainer::AddSpline(const VSpline &spl){
+    qint64 id = getNextId();
+    splines[id] = spl;
+    return id;
+}
+
+qint64 VContainer::AddArc(const VArc &arc){
+    qint64 id = getNextId();
+    arcs[id] = arc;
+    return id;
 }
 
 QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const{
@@ -188,9 +237,48 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
     return QString("Line_%1_%2").arg(first.name(), second.name());
 }
 
-void VContainer::AddLine(const QString &name, const qreal &value){
+QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const{
+    VPointF first = GetPoint(firstPoint);
+    VPointF second = GetPoint(secondPoint);
+    return QString("Spl_%1_%2").arg(first.name(), second.name());
+}
+
+QString VContainer::GetNameArc(const qint64 &firstPoint, const qint64 &centerPoint,
+                               const qint64 &secondPoint) const{
+    VPointF first = GetPoint(firstPoint);
+    VPointF center = GetPoint(centerPoint);
+    VPointF second = GetPoint(secondPoint);
+    return QString("Arc_%1_%2_%3").arg(first.name(), center.name(), second.name());
+}
+
+void VContainer::AddLengthLine(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
     lengthLines[name] = value/PrintDPI*25.4;
+}
+
+void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId){
+    QString nameLine = GetNameSpline(firstPointId, secondPointId);
+    VPointF firstPoint = GetPoint(firstPointId);
+    VPointF secondPoint = GetPoint(secondPointId);
+    AddLengthSpline(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+}
+
+void VContainer::AddLengthSpline(const QString &name, const qreal &value){
+    Q_ASSERT(!name.isEmpty());
+    lengthSplines[name] = value/PrintDPI*25.4;
+}
+
+void VContainer::AddLengthArc(const qint64 &firstPointId, const qint64 &centerPoint,
+                              const qint64 &secondPointId){
+    QString nameLine = GetNameArc(firstPointId, centerPoint, secondPointId);
+    VPointF firstPoint = GetPoint(firstPointId);
+    VPointF secondPoint = GetPoint(secondPointId);
+    AddLengthArc(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+}
+
+void VContainer::AddLengthArc(const QString &name, const qreal &value){
+    Q_ASSERT(!name.isEmpty());
+    lengthArcs[name] = value/PrintDPI*25.4;
 }
 
 qreal VContainer::GetLine(const QString &name) const{
@@ -202,4 +290,29 @@ qreal VContainer::GetLine(const QString &name) const{
         throw"Не можу знайти лінію таблиці.";
     }
     return 0;
+}
+
+VSpline VContainer::GetSpline(qint64 id) const{
+    if(splines.contains(id)){
+        return splines.value(id);
+    } else {
+        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
+        throw"Не можу знайти сплайн за id.";
+    }
+    return VSpline();
+}
+
+VArc VContainer::GetArc(qint64 id) const{
+    if(arcs.contains(id)){
+        return arcs.value(id);
+    } else {
+        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
+        throw"Не можу знайти дугу за id.";
+    }
+    return VArc();
+}
+
+
+const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
+    return &lengthArcs;
 }

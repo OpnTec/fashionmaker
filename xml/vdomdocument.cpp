@@ -1,7 +1,7 @@
 #include "vdomdocument.h"
 #include <QDebug>
 
-#include "../tools/vtoolsimplepoint.h"
+#include "../tools/vtoolsinglepoint.h"
 #include "../tools/vtoolendline.h"
 #include "../tools/vtoolline.h"
 #include "../tools/vtoolalongline.h"
@@ -9,6 +9,7 @@
 #include "../tools/vtoolnormal.h"
 #include "../tools/vtoolbisector.h"
 #include "../tools/vtoollineintersect.h"
+#include "../tools/vtoolspline.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -225,6 +226,8 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
         comboBoxDraws->clear();
     } else {
         data->ClearLengthLines();
+        data->ClearLengthArcs();
+        data->ClearLengthSplines();
     }
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();
@@ -292,7 +295,7 @@ void VDomDocument::AddNewDraw(const QDomElement& node, QComboBox *comboBoxDraws)
                             QDomElement domElementPoint = domCal.toElement();
                             if(!domElementPoint.isNull()){
                                 if(domElementPoint.tagName() == "point"){
-                                    if(domElementPoint.attribute("type","") == "simple"){
+                                    if(domElementPoint.attribute("type","") == "single"){
                                         comboBoxDraws->addItem(name, false);
                                         return;
                                     } else {
@@ -345,13 +348,16 @@ void VDomDocument::ParseCalculationElement(VMainGraphicsScene *scene, const QDom
             if(domElement.tagName() == "line"){
                 ParseLineElement(scene, domElement, parse);
             }
+            if(domElement.tagName() == "spline"){
+                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""));
+            }
         }
     }
 }
 
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      Document::Enum parse, const QString& type){
-    if(type == "simple"){
+    if(type == "single"){
         if(!domElement.isNull()){
             QString name;
             qreal mx=5, my=10, x, y;
@@ -366,9 +372,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
 
                 data->UpdatePoint(id, VPointF(x, y, name, mx, my));
                 if(parse == Document::FullParse){
-                    VToolSimplePoint *spoint = new VToolSimplePoint(this, data, id, Tool::FromFile);
+                    VToolSinglePoint *spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
                     scene->addItem(spoint);
-                    connect(spoint, &VToolSimplePoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                    connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                 }
             }
         }
@@ -405,7 +411,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                         VToolEndLine *point = new VToolEndLine(this, data, id, typeLine, formula, angle,
                                                                basePointId, Tool::FromFile);
                         scene->addItem(point);
-                        connect(point, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }
@@ -443,7 +449,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                         VToolAlongLine *point = new VToolAlongLine(this, data, id, formula, firstPointId,
                                                                    secondPointId, typeLine, Tool::FromGui);
                         scene->addItem(point);
-                        connect(point, &VToolAlongLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                        connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }
@@ -485,7 +491,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                                                            p1Line, p2Line, pShoulder,
                                                                            Tool::FromGui);
                         scene->addItem(point);
-                        connect(point, &VToolShoulderPoint::ChoosedPoint, scene,
+                        connect(point, &VToolShoulderPoint::ChoosedTool, scene,
                                 &VMainGraphicsScene::ChoosedItem);
                     }
                 }
@@ -524,7 +530,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                         VToolNormal *point = new VToolNormal(this, data, id, typeLine, formula, angle,
                                                              firstPointId, secondPointId, Tool::FromFile);
                         scene->addItem(point);
-                        connect(point, &VToolNormal::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                        connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }
@@ -565,7 +571,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                                                  firstPointId, secondPointId, thirdPointId,
                                                                  Tool::FromFile);
                         scene->addItem(point);
-                        connect(point, &VToolBisector::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                        connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     }
                 }
             }
@@ -606,9 +612,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                     if(parse == Document::FullParse){
                         VToolLineIntersect *point = new VToolLineIntersect(this, data, id, p1Line1Id,
                                                                            p2Line1Id, p1Line2Id,
-                                                                           p2Line2Id, Tool::FromGui);
+                                                                           p2Line2Id, Tool::FromFile);
                         scene->addItem(point);
-                        connect(point, &VToolLineIntersect::ChoosedPoint, scene,
+                        connect(point, &VToolLineIntersect::ChoosedTool, scene,
                                 &VMainGraphicsScene::ChoosedItem);
                     }
                 }
@@ -631,9 +637,39 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
                 qint64 id = data->getNextId();
                 VToolLine *line = new VToolLine(this, data, id, firstPoint, secondPoint, Tool::FromFile);
                 scene->addItem(line);
-                connect(line, &VToolLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+                connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             }
         }
+    }
+}
+
+void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                      Document::Enum parse, const QString &type){
+    if(type == "simple"){
+        if(!domElement.isNull()){
+            qreal angle1, angle2, kAsm1, kAsm2, kCurve;
+            qint64 id, point1, point4;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                point1 = domElement.attribute("point1", "").toLongLong();
+                point4 = domElement.attribute("point4", "").toLongLong();
+                angle1 = domElement.attribute("angle1","").toDouble();
+                angle2 = domElement.attribute("angle2","").toDouble();
+                kAsm1 = domElement.attribute("kAsm1","").toDouble();
+                kAsm2 = domElement.attribute("kAsm2","").toDouble();
+                kCurve = domElement.attribute("kCurve","").toDouble();
+
+                VSpline spline = VSpline(data->DataPoints(), point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
+                data->UpdateSpline(id, spline);
+                data->AddLengthSpline(data->GetNameSpline(point1, point4), spline.GetLength());
+                if(parse == Document::FullParse){
+                    VToolSpline *spl = new VToolSpline(this, data, id, Tool::FromFile);
+                    scene->addItem(spl);
+                    connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                }
+            }
+        }
+        return;
     }
 }
 

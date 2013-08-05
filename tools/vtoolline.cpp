@@ -65,7 +65,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogLine = QSharedPointer<DialogLine>(new DialogLine(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogLine.data(), &DialogLine::ChoosedPoint);
+                    dialogLine.data(), &DialogLine::ChoosedObject);
             connect(dialogLine.data(), &DialogLine::DialogClosed, this, &VToolLine::FullUpdateFromGui);
 
             dialogLine->setFirstPoint(firstPoint);

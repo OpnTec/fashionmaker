@@ -34,7 +34,7 @@ public:
     qint64            getThirdPointId() const;
     void              setThirdPointId(const qint64 &value);
 public slots:
-    virtual void      ChoosedPoint(qint64 id, Scene::Type type);
+    virtual void      ChoosedObject(qint64 id, Scene::Type type);
     virtual void      DialogAccepted();
 private:
     Ui::DialogBisector *ui;

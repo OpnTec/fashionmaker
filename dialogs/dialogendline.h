@@ -31,7 +31,7 @@ public:
     qint64            getBasePointId() const;
     void              setBasePointId(const qint64 &value);
 public slots:
-    virtual void      ChoosedPoint(qint64 id, Scene::Type type);
+    virtual void      ChoosedObject(qint64 id, Scene::Type type);
     virtual void      DialogAccepted();
 private:
     Ui::DialogEndLine *ui;

@@ -1,9 +1,8 @@
 #ifndef VTOOLPOINT_H
 #define VTOOLPOINT_H
 
-#include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
-
+#include <QGraphicsEllipseItem>
 #include "../widgets/vgraphicssimpletextitem.h"
 #include "../options.h"
 #include "vabstracttool.h"
@@ -22,18 +21,18 @@ protected:
     qreal                   radius;
     VGraphicsSimpleTextItem *namePoint;
     QGraphicsLineItem       *lineName;
+    virtual void            RefreshGeometry();  
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void            RefreshGeometry();
     virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
-    qint32                  LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
-                                                QPointF &p2) const;
     QPointF                 LineIntersectRect(QRectF rec, QLineF line) const;
-    QPointF                 ClosestPoint(QLineF line, QPointF p) const;
-    QPointF                 add_vector (QPointF p, QPointF p1, QPointF p2, qreal k) const;  
     void                    LiteUpdateFromGui(qreal mx, qreal my);
     void                    RefreshLine();
+    qint32                  LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
+                                                QPointF &p2) const;
+    QPointF                 ClosestPoint(QLineF line, QPointF p) const;
+    QPointF                 addVector (QPointF p, QPointF p1, QPointF p2, qreal k) const;
 };
 
 #endif // VTOOLPOINT_H

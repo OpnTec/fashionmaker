@@ -1,25 +1,21 @@
 #ifndef VTOOLSIMPLEPOINT_H
 #define VTOOLSIMPLEPOINT_H
 
-#include "../container/vcontainer.h"
-#include "../xml/vdomdocument.h"
-#include "vtoolpoint.h"
-#include "../dialogs/dialogsinglepoint.h"
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
 
-class VToolSimplePoint : public VToolPoint
+#include "../options.h"
+#include "vabstracttool.h"
+
+class VToolSimplePoint: public VAbstractTool, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-                            VToolSimplePoint (VDomDocument *doc, VContainer *data, qint64 id,
-                                              Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
+    VToolSimplePoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
 public slots:
-    virtual void            FullUpdateFromFile();
-    virtual void            FullUpdateFromGui(int result);
+    virtual void            ChangedActivDraw(const QString newName);
 protected:
-    virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void            AddToFile();
-private:
-    QSharedPointer<DialogSinglePoint> dialogSinglePoint;
+    virtual void            RefreshGeometry();
 };
 
 #endif // VTOOLSIMPLEPOINT_H

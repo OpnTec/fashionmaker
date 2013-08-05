@@ -20,7 +20,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabStandart">
       <attribute name="title">
@@ -245,7 +245,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
-        <widget class="QTableWidget" name="tableWidget_2">
+        <widget class="QTableWidget" name="tableWidgetSplines">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -281,7 +281,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
-        <widget class="QTableWidget" name="tableWidget_3">
+        <widget class="QTableWidget" name="tableWidgetArcs">
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>

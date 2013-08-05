@@ -21,7 +21,7 @@ public:
     qint64           getSecondPoint() const;
     void             setSecondPoint(const qint64 &value);
 public slots:
-    void             ChoosedPoint(qint64 id, Scene::Type type);
+    void             ChoosedObject(qint64 id, Scene::Type type);
     virtual void     DialogAccepted();
 private:
     Ui::DialogLine   *ui;

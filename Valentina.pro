@@ -15,7 +15,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     widgets/vmaingraphicsscene.cpp \
     dialogs/dialogsinglepoint.cpp \
-    tools/vtoolsimplepoint.cpp \
     widgets/vgraphicssimpletextitem.cpp \
     xml/vdomdocument.cpp \
     container/vpointf.cpp \
@@ -43,13 +42,18 @@ SOURCES += main.cpp\
     dialogs/dialogbisector.cpp \
     tools/vtoollinepoint.cpp \
     tools/vtoollineintersect.cpp \
-    dialogs/dialoglineintersect.cpp
+    dialogs/dialoglineintersect.cpp \
+    geometry/vspline.cpp \
+    tools/vtoolsinglepoint.cpp \
+    geometry/varc.cpp \
+    widgets/vcontrolpointspline.cpp \
+    tools/vtoolspline.cpp \
+    dialogs/dialogspline.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
     dialogs/dialogsinglepoint.h \
     options.h \
-    tools/vtoolsimplepoint.h \
     widgets/vgraphicssimpletextitem.h \
     xml/vdomdocument.h \
     container/vpointf.h \
@@ -77,7 +81,13 @@ HEADERS  += mainwindow.h \
     dialogs/dialogbisector.h \
     tools/vtoollinepoint.h \
     tools/vtoollineintersect.h \
-    dialogs/dialoglineintersect.h
+    dialogs/dialoglineintersect.h \
+    geometry/vspline.h \
+    tools/vtoolsinglepoint.h \
+    geometry/varc.h \
+    widgets/vcontrolpointspline.h \
+    tools/vtoolspline.h \
+    dialogs/dialogspline.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -88,7 +98,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogshoulderpoint.ui \
     dialogs/dialognormal.ui \
     dialogs/dialogbisector.ui \
-    dialogs/dialoglineintersect.ui
+    dialogs/dialoglineintersect.ui \
+    dialogs/dialogspline.ui
 
 RESOURCES += \
     icon.qrc \

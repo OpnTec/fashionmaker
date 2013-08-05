@@ -29,7 +29,7 @@ public:
     qint64                  getPShoulder() const;
     void                    setPShoulder(const qint64 &value);
 public slots:
-    virtual void            ChoosedPoint(qint64 id, Scene::Type type);
+    virtual void            ChoosedObject(qint64 id, Scene::Type type);
     virtual void            DialogAccepted();
 private:
     Ui::DialogShoulderPoint *ui;

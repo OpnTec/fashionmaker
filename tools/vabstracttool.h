@@ -27,7 +27,7 @@ public slots:
     virtual void FullUpdateFromGui(int result)=0;
 signals:
     void         haveLiteChange();
-    void         ChoosedPoint(qint64 id, Scene::Type type);
+    void         ChoosedTool(qint64 id, Scene::Type type);
     void         FullUpdateTree();
 protected:
     VDomDocument *doc;

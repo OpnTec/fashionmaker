@@ -18,6 +18,8 @@
 #include "tools/vtoolnormal.h"
 #include "tools/vtoolbisector.h"
 #include "tools/vtoollineintersect.h"
+#include "tools/vtoolspline.h"
+#include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -61,6 +63,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolBisector);
     connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this,
             &MainWindow::ToolLineIntersect);
+    connect(ui->toolButtonSpline, &QToolButton::clicked, this,
+            &MainWindow::ToolSpline);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -181,7 +185,7 @@ void MainWindow::ToolEndLine(bool checked){
         helpLabel->setText("Заповніть усі поля.");
         dialogEndLine = new DialogEndLine(data, this);
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogEndLine,
-                &DialogEndLine::ChoosedPoint);
+                &DialogEndLine::ChoosedObject);
         connect(dialogEndLine, &DialogEndLine::DialogClosed, this,
                 &MainWindow::ClosedDialogEndLine);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialogEndLine, &DialogEndLine::UpdateList);
@@ -211,7 +215,7 @@ void MainWindow::ClosedDialogEndLine(int result){
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle, basePointId,
                                                    Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
 
     }
@@ -227,7 +231,7 @@ void MainWindow::ToolLine(bool checked){
         ui->graphicsView->setCursor(cur);
         helpLabel->setText("Виберіть точки.");
         dialogLine = new DialogLine(data, this);
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogLine, &DialogLine::ChoosedPoint);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogLine, &DialogLine::ChoosedObject);
         connect(dialogLine, &DialogLine::DialogClosed, this, &MainWindow::ClosedDialogLine);
     } else {
         ui->toolButtonLine->setChecked(true);
@@ -243,7 +247,7 @@ void MainWindow::ClosedDialogLine(int result){
         qint64 id = data->getNextId();
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, Tool::FromGui);
         scene->addItem(line);
-        connect(line, &VToolLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
 
     }
     ArrowTool();
@@ -258,7 +262,7 @@ void MainWindow::ToolAlongLine(bool checked){
         ui->graphicsView->setCursor(cur);
         helpLabel->setText("Виберіть точки.");
         dialogAlongLine = new DialogAlongLine(data, this);
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogAlongLine, &DialogAlongLine::ChoosedPoint);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogAlongLine, &DialogAlongLine::ChoosedObject);
         connect(dialogAlongLine, &DialogLine::DialogClosed, this, &MainWindow::ClosedDialogAlongLine);
     } else {
         ui->toolButtonAlongLine->setChecked(true);
@@ -287,7 +291,7 @@ void MainWindow::ClosedDialogAlongLine(int result){
             VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId,
                                                        typeLine, Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolAlongLine::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
     }
     ArrowTool();
@@ -303,7 +307,7 @@ void MainWindow::ToolShoulderPoint(bool checked){
         helpLabel->setText("Виберіть точки.");
         dialogShoulderPoint = new DialogShoulderPoint(data, this);
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogShoulderPoint,
-                &DialogShoulderPoint::ChoosedPoint);
+                &DialogShoulderPoint::ChoosedObject);
         connect(dialogShoulderPoint, &DialogShoulderPoint::DialogClosed, this,
                 &MainWindow::ClosedDialogShoulderPoint);
     } else {
@@ -336,7 +340,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result){
             VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula, p1Line,
                                                                p2Line, pShoulder, Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolShoulderPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
     }
     ArrowTool();
@@ -352,7 +356,7 @@ void MainWindow::ToolNormal(bool checked){
         helpLabel->setText("Виберіть точки.");
         dialogNormal = new DialogNormal(data, this);
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogNormal,
-                &DialogNormal::ChoosedPoint);
+                &DialogNormal::ChoosedObject);
         connect(dialogNormal, &DialogNormal::DialogClosed, this,
                 &MainWindow::ClosedDialogNormal);
     } else {
@@ -383,7 +387,7 @@ void MainWindow::ClosedDialogNormal(int result){
             VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle, firstPointId,
                                                                secondPointId, Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolNormal::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
     }
     ArrowTool();
@@ -399,7 +403,7 @@ void MainWindow::ToolBisector(bool checked){
         helpLabel->setText("Виберіть точки.");
         dialogBisector = new DialogBisector(data, this);
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogBisector,
-                &DialogBisector::ChoosedPoint);
+                &DialogBisector::ChoosedObject);
         connect(dialogBisector, &DialogBisector::DialogClosed, this,
                 &MainWindow::ClosedDialogBisector);
     } else {
@@ -431,7 +435,7 @@ void MainWindow::ClosedDialogBisector(int result){
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId,
                                                      secondPointId, thirdPointId, Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolBisector::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
     }
     ArrowTool();
@@ -447,7 +451,7 @@ void MainWindow::ToolLineIntersect(bool checked){
         helpLabel->setText("Виберіть точки.");
         dialogLineIntersect = new DialogLineIntersect(data, this);
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogLineIntersect,
-                &DialogLineIntersect::ChoosedPoint);
+                &DialogLineIntersect::ChoosedObject);
         connect(dialogLineIntersect, &DialogLineIntersect::DialogClosed, this,
                 &MainWindow::ClosedDialogLineIntersect);
     } else {
@@ -480,10 +484,48 @@ void MainWindow::ClosedDialogLineIntersect(int result){
             data->AddLine(id, p2Line2Id);
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
                                                                p2Line1Id, p1Line2Id,
-                                                               p2Line2Id, Tool::FromFile);
+                                                               p2Line2Id, Tool::FromGui);
             scene->addItem(point);
-            connect(point, &VToolLineIntersect::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         }
+    }
+    ArrowTool();
+}
+
+void MainWindow::ToolSpline(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::SplineTool;
+        QPixmap pixmap(":/cursor/spline_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogSpline = new DialogSpline(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogSpline,
+                &DialogSpline::ChoosedObject);
+        connect(dialogSpline, &DialogSpline::DialogClosed, this,
+                &MainWindow::ClosedDialogSpline);
+    } else {
+        ui->toolButtonSpline->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogSpline(int result){
+    if(result == QDialog::Accepted){
+        qint64 p1 = dialogSpline->getP1();
+        qint64 p4 = dialogSpline->getP4();
+        qreal kAsm1 = dialogSpline->getKAsm1();
+        qreal kAsm2 = dialogSpline->getKAsm2();
+        qreal angle1 = dialogSpline->getAngle1();
+        qreal angle2 = dialogSpline->getAngle2();
+        qreal kCurve = dialogSpline->getKCurve();
+
+        VSpline spline = VSpline(data->DataPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
+        qint64 id = data->AddSpline(spline);
+        data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
+        VToolSpline *spl = new VToolSpline(doc, data, id, Tool::FromGui);
+        scene->addItem(spl);
+        connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     }
     ArrowTool();
 }
@@ -638,6 +680,12 @@ void MainWindow::CanselTool(){
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
+        case Tools::SplineTool:
+            delete dialogSpline;
+            ui->toolButtonSpline->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
     }
 }
 
@@ -668,9 +716,9 @@ void MainWindow::ClosedDialogSinglePoint(int result){
         QPointF point = dialogSinglePoint->getPoint();
         QString name = dialogSinglePoint->getName();
         qint64 id = data->AddPoint(VPointF(point.x(), point.y(), name, 5, 10));
-        VToolSimplePoint *spoint = new VToolSimplePoint(doc, data, id, Tool::FromGui);
+        VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
         scene->addItem(spoint);
-        connect(spoint, &VToolPoint::ChoosedPoint, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(spoint, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         ArrowTool();
         ui->toolButtonSinglePoint->setEnabled(false);
         qint32 index = comboBoxDraws->currentIndex();
@@ -900,6 +948,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonNormal->setEnabled(enable);
     ui->toolButtonBisector->setEnabled(enable);
     ui->toolButtonLineIntersect->setEnabled(enable);
+    ui->toolButtonSpline->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

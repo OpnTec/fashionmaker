@@ -17,7 +17,8 @@
 #include "dialogs/dialognormal.h"
 #include "dialogs/dialogbisector.h"
 #include "dialogs/dialoglineintersect.h"
-#include "tools/vtoolsimplepoint.h"
+#include "dialogs/dialogspline.h"
+#include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
 #include "container/vcontainer.h"
 
@@ -36,7 +37,8 @@ namespace Tools{
         ShoulderPointTool,
         NormalTool,
         BisectorTool,
-        LineIntersectTool
+        LineIntersectTool,
+        SplineTool
     };
 }
 
@@ -79,6 +81,8 @@ public slots:
     void                ClosedDialogBisector(int result);
     void                ToolLineIntersect(bool checked);
     void                ClosedDialogLineIntersect(int result);
+    void                ToolSpline(bool checked);
+    void                ClosedDialogSpline(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -98,6 +102,7 @@ private:
     DialogNormal        *dialogNormal;
     DialogBisector      *dialogBisector;
     DialogLineIntersect *dialogLineIntersect;
+    DialogSpline        *dialogSpline;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;

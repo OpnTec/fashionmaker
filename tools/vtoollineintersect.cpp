@@ -49,7 +49,7 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             dialogLineIntersect = QSharedPointer<DialogLineIntersect>(new DialogLineIntersect(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogLineIntersect.data(), &DialogLineIntersect::ChoosedPoint);
+                    dialogLineIntersect.data(), &DialogLineIntersect::ChoosedObject);
             connect(dialogLineIntersect.data(), &DialogLineIntersect::DialogClosed, this,
                     &VToolLineIntersect::FullUpdateFromGui);
 

@@ -59,7 +59,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedPoint(qint64 id, Scene::Type type){
+void DialogEndLine::ChoosedObject(qint64 id, Scene::Type type){
     if(type == Scene::Point){
         VPointF point = data->GetPoint(id);
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());

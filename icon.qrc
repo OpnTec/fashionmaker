@@ -25,5 +25,6 @@
         <file>icon/32x32/normal.png</file>
         <file>icon/32x32/bisector.png</file>
         <file>icon/32x32/intersect.png</file>
+        <file>icon/32x32/spline.png</file>
     </qresource>
 </RCC>

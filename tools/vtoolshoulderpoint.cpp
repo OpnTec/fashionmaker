@@ -75,7 +75,7 @@ void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
                     QSharedPointer<DialogShoulderPoint>(new DialogShoulderPoint(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogShoulderPoint.data(), &DialogShoulderPoint::ChoosedPoint);
+                    dialogShoulderPoint.data(), &DialogShoulderPoint::ChoosedObject);
             connect(dialogShoulderPoint.data(), &DialogShoulderPoint::DialogClosed, this,
                     &VToolShoulderPoint::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogShoulderPoint.data(),

@@ -59,7 +59,7 @@ void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogNormal = QSharedPointer<DialogNormal>(new DialogNormal(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogNormal.data(), &DialogNormal::ChoosedPoint);
+                    dialogNormal.data(), &DialogNormal::ChoosedObject);
             connect(dialogNormal.data(), &DialogNormal::DialogClosed, this,
                     &VToolNormal::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogNormal.data(), &DialogNormal::UpdateList);

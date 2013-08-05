@@ -52,7 +52,7 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogAlongLine = QSharedPointer<DialogAlongLine>(new DialogAlongLine(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogAlongLine.data(), &DialogAlongLine::ChoosedPoint);
+                    dialogAlongLine.data(), &DialogAlongLine::ChoosedObject);
             connect(dialogAlongLine.data(), &DialogAlongLine::DialogClosed, this,
                     &VToolAlongLine::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogAlongLine.data(),

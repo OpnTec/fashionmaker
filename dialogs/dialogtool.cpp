@@ -170,7 +170,7 @@ void DialogTool::CheckState(){
 }
 
 
-void DialogTool::ChoosedPoint(qint64 id, Scene::Type type){
+void DialogTool::ChoosedObject(qint64 id, Scene::Type type){
     Q_UNUSED(id);
     Q_UNUSED(type);
 }

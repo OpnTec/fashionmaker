@@ -137,7 +137,49 @@ void DialogIncrements::FillLengthLines(){
         item = new QTableWidgetItem(QString().setNum(length));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetLines->setItem(currentRow, 1, item);
-   }
+    }
+}
+
+void DialogIncrements::FillLengthSplines(){
+    const QMap<QString, qreal> *splinesTable = data->DataLengthSplines();
+    qint32 currentRow = -1;
+    QMapIterator<QString, qreal> i(*splinesTable);
+    while (i.hasNext()) {
+        i.next();
+        qreal length = i.value();
+        currentRow++;
+        ui->tableWidgetSplines->setRowCount ( splinesTable->size() );
+
+        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        ui->tableWidgetSplines->setItem(currentRow, 0, item);
+
+        item = new QTableWidgetItem(QString().setNum(length));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetSplines->setItem(currentRow, 1, item);
+    }
+}
+
+void DialogIncrements::FillLengthArcs(){
+    const QMap<QString, qreal> *arcsTable = data->DataLengthArcs();
+    qint32 currentRow = -1;
+    QMapIterator<QString, qreal> i(*arcsTable);
+    while (i.hasNext()) {
+        i.next();
+        qreal length = i.value();
+        currentRow++;
+        ui->tableWidgetArcs->setRowCount ( arcsTable->size() );
+
+        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        item->setTextAlignment(Qt::AlignHCenter);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        ui->tableWidgetArcs->setItem(currentRow, 0, item);
+
+        item = new QTableWidgetItem(QString().setNum(length));
+        item->setTextAlignment(Qt::AlignHCenter);
+        ui->tableWidgetArcs->setItem(currentRow, 1, item);
+    }
 }
 
 void DialogIncrements::FullUpdateFromFile(){
@@ -155,6 +197,14 @@ void DialogIncrements::FullUpdateFromFile(){
     ui->tableWidgetLines->clear();
     InitialLinesTable();
     FillLengthLines();
+
+    ui->tableWidgetSplines->clear();
+    InitialSplinesTable();
+    FillLengthSplines();
+
+    ui->tableWidgetArcs->clear();
+    InitialArcsTable();
+    FillLengthArcs();
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
             &DialogIncrements::cellChanged);
@@ -365,6 +415,22 @@ void DialogIncrements::InitialLinesTable(){
     ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
     ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
+}
+
+void DialogIncrements::InitialSplinesTable(){
+    ui->tableWidgetSplines->resizeColumnsToContents();
+    ui->tableWidgetSplines->resizeRowsToContents();
+    ui->tableWidgetSplines->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetSplines->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
+    ui->tableWidgetSplines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
+}
+
+void DialogIncrements::InitialArcsTable(){
+    ui->tableWidgetArcs->resizeColumnsToContents();
+    ui->tableWidgetArcs->resizeRowsToContents();
+    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetArcs->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
+    ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }
 
 void DialogIncrements::DialogAccepted(){

@@ -44,7 +44,7 @@ DialogBisector::~DialogBisector(){
     delete ui;
 }
 
-void DialogBisector::ChoosedPoint(qint64 id, Scene::Type type){
+void DialogBisector::ChoosedObject(qint64 id, Scene::Type type){
     if(type == Scene::Point){
         VPointF point = data->GetPoint(id);
         if(number == 0){

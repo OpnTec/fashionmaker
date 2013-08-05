@@ -34,7 +34,7 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
             dialogEndLine = QSharedPointer<DialogEndLine>(new DialogEndLine(VAbstractTool::data));
 
             connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogEndLine.data(), &DialogEndLine::ChoosedPoint);
+                    dialogEndLine.data(), &DialogEndLine::ChoosedObject);
             connect(dialogEndLine.data(), &DialogEndLine::DialogClosed, this,
                     &VToolEndLine::FullUpdateFromGui);
             connect(doc, &VDomDocument::FullUpdateFromFile, dialogEndLine.data(), &DialogEndLine::UpdateList);
@@ -84,3 +84,4 @@ void VToolEndLine::AddToFile(){
 
     AddToCalculation(domElement);
 }
+
