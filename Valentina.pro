@@ -48,7 +48,9 @@ SOURCES += main.cpp\
     geometry/varc.cpp \
     widgets/vcontrolpointspline.cpp \
     tools/vtoolspline.cpp \
-    dialogs/dialogspline.cpp
+    dialogs/dialogspline.cpp \
+    tools/vtoolarc.cpp \
+    dialogs/dialogarc.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -87,7 +89,9 @@ HEADERS  += mainwindow.h \
     geometry/varc.h \
     widgets/vcontrolpointspline.h \
     tools/vtoolspline.h \
-    dialogs/dialogspline.h
+    dialogs/dialogspline.h \
+    tools/vtoolarc.h \
+    dialogs/dialogarc.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -99,7 +103,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialognormal.ui \
     dialogs/dialogbisector.ui \
     dialogs/dialoglineintersect.ui \
-    dialogs/dialogspline.ui
+    dialogs/dialogspline.ui \
+    dialogs/dialogarc.ui
 
 RESOURCES += \
     icon.qrc \

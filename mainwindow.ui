@@ -57,7 +57,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -341,7 +341,7 @@
          <x>0</x>
          <y>0</y>
          <width>154</width>
-         <height>45</height>
+         <height>58</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -355,9 +355,25 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
-         <widget class="QPushButton" name="pushButton_8">
+         <widget class="QToolButton" name="toolButtonArc">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/arc.png</normaloff>:/icon/32x32/arc.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

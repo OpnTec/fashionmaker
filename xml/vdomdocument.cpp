@@ -10,6 +10,7 @@
 #include "../tools/vtoolbisector.h"
 #include "../tools/vtoollineintersect.h"
 #include "../tools/vtoolspline.h"
+#include "../tools/vtoolarc.h"
 #include "../options.h"
 #include "../container/calculator.h"
 
@@ -228,6 +229,7 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
         data->ClearLengthLines();
         data->ClearLengthArcs();
         data->ClearLengthSplines();
+        data->ClearLineArcs();
     }
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();
@@ -350,6 +352,9 @@ void VDomDocument::ParseCalculationElement(VMainGraphicsScene *scene, const QDom
             }
             if(domElement.tagName() == "spline"){
                 ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""));
+            }
+            if(domElement.tagName() == "arc"){
+                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""));
             }
         }
     }
@@ -666,6 +671,54 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                     VToolSpline *spl = new VToolSpline(this, data, id, Tool::FromFile);
                     scene->addItem(spl);
                     connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                }
+            }
+        }
+        return;
+    }
+}
+
+void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                   Document::Enum parse, const QString &type){
+    if(type == "simple"){
+        if(!domElement.isNull()){
+            QString radius, f1, f2;
+            qint64 id, center;
+            if(!domElement.isNull()){
+                id = domElement.attribute("id", "").toLongLong();
+                center = domElement.attribute("center", "").toLongLong();
+                radius = domElement.attribute("radius", "");
+                f1 = domElement.attribute("angle1", "");
+                f2 = domElement.attribute("angle2","");
+
+                qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
+
+                Calculator cal(data);
+                QString errorMsg;
+                qreal result = cal.eval(radius, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    calcRadius = result*PrintDPI/25.4;
+                }
+
+                errorMsg.clear();
+                result = cal.eval(f1, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    calcF1 = result;
+                }
+
+                errorMsg.clear();
+                result = cal.eval(f2, &errorMsg);
+                if(errorMsg.isEmpty()){
+                    calcF2 = result;
+                }
+
+                VArc arc = VArc(data->DataPoints(), center, calcRadius, radius, calcF1, f1, calcF2, f2 );
+                data->UpdateArc(id, arc);
+                data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
+                if(parse == Document::FullParse){
+                    VToolArc *toolArc = new VToolArc(this, data, id, Tool::FromFile);
+                    scene->addItem(toolArc);
+                    connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                 }
             }
         }

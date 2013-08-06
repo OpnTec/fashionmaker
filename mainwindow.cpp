@@ -19,6 +19,7 @@
 #include "tools/vtoolbisector.h"
 #include "tools/vtoollineintersect.h"
 #include "tools/vtoolspline.h"
+#include "tools/vtoolarc.h"
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -65,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolLineIntersect);
     connect(ui->toolButtonSpline, &QToolButton::clicked, this,
             &MainWindow::ToolSpline);
+    connect(ui->toolButtonArc, &QToolButton::clicked, this,
+            &MainWindow::ToolArc);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -530,6 +533,62 @@ void MainWindow::ClosedDialogSpline(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolArc(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::ArcTool;
+        QPixmap pixmap(":/cursor/arc_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точку центру.");
+        dialogArc = new DialogArc(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogArc,
+                &DialogArc::ChoosedObject);
+        connect(dialogArc, &DialogArc::DialogClosed, this,
+                &MainWindow::ClosedDialogArc);
+    } else {
+        ui->toolButtonSpline->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogArc(int result){
+    if(result == QDialog::Accepted){
+        qint64 center = dialogArc->GetCenter();
+        QString radius = dialogArc->GetRadius();
+        QString f1 = dialogArc->GetF1();
+        QString f2 = dialogArc->GetF2();
+
+        qreal calcRadius, calcF1, calcF2;
+
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(radius, &errorMsg);
+        if(errorMsg.isEmpty()){
+            calcRadius = result*PrintDPI/25.4;
+        }
+
+        errorMsg.clear();
+        result = cal.eval(f1, &errorMsg);
+        if(errorMsg.isEmpty()){
+            calcF1 = result;
+        }
+
+        errorMsg.clear();
+        result = cal.eval(f2, &errorMsg);
+        if(errorMsg.isEmpty()){
+            calcF2 = result;
+        }
+
+        VArc arc = VArc(data->DataPoints(), center, calcRadius, radius, calcF1, f1, calcF2, f2 );
+        qint64 id = data->AddArc(arc);
+        data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
+        VToolArc *toolArc = new VToolArc(doc, data, id, Tool::FromGui);
+        scene->addItem(toolArc);
+        connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -683,6 +742,12 @@ void MainWindow::CanselTool(){
         case Tools::SplineTool:
             delete dialogSpline;
             ui->toolButtonSpline->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::ArcTool:
+            delete dialogArc;
+            ui->toolButtonArc->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -949,6 +1014,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonBisector->setEnabled(enable);
     ui->toolButtonLineIntersect->setEnabled(enable);
     ui->toolButtonSpline->setEnabled(enable);
+    ui->toolButtonArc->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

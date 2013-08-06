@@ -28,6 +28,7 @@ public:
     VStandartTableCell  GetStandartTableCell(const QString& name) const;
     VIncrementTableRow  GetIncrementTableRow(const QString& name) const;
     qreal               GetLine(const QString &name) const;
+    qint32              GetLineArc(const QString &name) const;
     VSpline             GetSpline(qint64 id) const;
     VArc                GetArc(qint64 id) const;
     qint64              getId();
@@ -37,15 +38,16 @@ public:
     void                AddLengthLine(const QString &name, const qreal &value);
     void                AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId);
     void                AddLengthSpline(const QString &name, const qreal &value);
-    void                AddLengthArc(const qint64 &firstPointId, const qint64 &centerPoint, const qint64 &secondPointId);
+    void                AddLengthArc(const qint64 &center, const qint64 &id);
     void                AddLengthArc(const QString &name, const qreal &value);
+    void                AddLineArc(const QString &name, const qint32 &value);
     void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
     qint64              AddSpline(const VSpline& spl);
     qint64              AddArc(const VArc& arc);
     QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLineArc(const qint64 &firstPoint, const qint64 &secondPoint) const;
     QString             GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const;
-    QString             GetNameArc(const qint64 &firstPoint, const qint64 &centerPoint,
-                                   const qint64 &secondPoint) const;
+    QString             GetNameArc(const qint64 &center, const qint64 &id) const;
     void                UpdatePoint(qint64 id, const VPointF& point);
     void                UpdateSpline(qint64 id, const VSpline& spl);
     void                UpdateArc(qint64 id, const VArc& arc);
@@ -58,6 +60,7 @@ public:
     void                ClearLengthLines();
     void                ClearLengthSplines();
     void                ClearLengthArcs();
+    void                ClearLineArcs();
     void                SetSize(qint32 size);
     void                SetGrowth(qint32 growth);
     qint32              size() const;
@@ -75,6 +78,7 @@ public:
     const QMap<QString, qreal> *DataLengthLines() const;
     const QMap<QString, qreal> *DataLengthSplines() const;
     const QMap<QString, qreal> *DataLengthArcs() const;
+    const QMap<QString, qreal> *DataLineArcs() const;
 private:
     qint64              _id;
     QMap<QString, qint32> base;
@@ -82,6 +86,7 @@ private:
     QMap<QString, VStandartTableCell> standartTable;
     QMap<QString, VIncrementTableRow> incrementTable;
     QMap<QString, qreal> lengthLines;
+    QMap<QString, qreal> lineArcs;
     QMap<qint64, VSpline> splines;
     QMap<QString, qreal> lengthSplines;
     QMap<qint64, VArc> arcs;

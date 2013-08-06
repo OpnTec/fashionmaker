@@ -42,7 +42,7 @@ public slots:
     void             Increments();
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
-    void             ValChenged(int row);
+    virtual void     ValChenged(int row);
     void             UpdateList();
 protected:
     const VContainer *data;
@@ -66,13 +66,13 @@ protected:
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
-    void             ShowBase();
-    void             ShowStandartTable();
-    void             ShowIncrementTable();
-    void             ShowLengthLines();
+    template <class key, class val> void ShowVariable(const QMap<key, val> *var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
     void             ChangeCurrentText(QComboBox *box, const QString &value);
     void             ChangeCurrentData(QComboBox *box, const qint64 &value);
+    void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
+    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
+    void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
 };
 
 #endif // DIALOGTOOL_H

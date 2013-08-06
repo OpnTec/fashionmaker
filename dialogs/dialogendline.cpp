@@ -49,7 +49,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEndLine::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogEndLine::ValChenged);
 
-    ShowBase();
+    ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogEndLine::SizeGrowth);
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogEndLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEndLine::Increments);

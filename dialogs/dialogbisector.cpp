@@ -30,7 +30,7 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent) :
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogBisector::ValChenged);
 
-    ShowBase();
+    ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogBisector::SizeGrowth);
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogBisector::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogBisector::Increments);

@@ -29,7 +29,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent) :
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogAlongLine::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogAlongLine::ValChenged);
 
-    ShowBase();
+    ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogAlongLine::SizeGrowth);
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogAlongLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogAlongLine::Increments);

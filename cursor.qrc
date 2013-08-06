@@ -9,5 +9,6 @@
         <file>cursor/bisector_cursor.png</file>
         <file>cursor/intersect_cursor.png</file>
         <file>cursor/spline_cursor.png</file>
+        <file>cursor/arc_cursor.png</file>
     </qresource>
 </RCC>

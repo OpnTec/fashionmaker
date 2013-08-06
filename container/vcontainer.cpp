@@ -120,6 +120,7 @@ void VContainer::Clear(){
     splines.clear();
     arcs.clear();
     lengthArcs.clear();
+    lineArcs.clear();
 }
 
 void VContainer::ClearIncrementTable(){
@@ -136,6 +137,10 @@ void VContainer::ClearLengthSplines(){
 
 void VContainer::ClearLengthArcs(){
     lengthArcs.clear();
+}
+
+void VContainer::ClearLineArcs(){
+    lineArcs.clear();
 }
 
 void VContainer::SetSize(qint32 size){
@@ -175,6 +180,14 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const{
     if(lengthLines.contains(name)){
         *ok = true;
         return lengthLines.value(name);
+    }
+    if(lengthArcs.contains(name)){
+        *ok = true;
+        return lengthArcs.value(name);
+    }
+    if(lineArcs.contains(name)){
+        *ok = true;
+        return lineArcs.value(name);
     }
     *ok = false;
     return 0;
@@ -237,23 +250,26 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
     return QString("Line_%1_%2").arg(first.name(), second.name());
 }
 
+QString VContainer::GetNameLineArc(const qint64 &firstPoint, const qint64 &secondPoint) const{
+    VPointF first = GetPoint(firstPoint);
+    VPointF second = GetPoint(secondPoint);
+    return QString("ArcLine_%1_%2").arg(first.name(), second.name());
+}
+
 QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const{
     VPointF first = GetPoint(firstPoint);
     VPointF second = GetPoint(secondPoint);
     return QString("Spl_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameArc(const qint64 &firstPoint, const qint64 &centerPoint,
-                               const qint64 &secondPoint) const{
-    VPointF first = GetPoint(firstPoint);
-    VPointF center = GetPoint(centerPoint);
-    VPointF second = GetPoint(secondPoint);
-    return QString("Arc_%1_%2_%3").arg(first.name(), center.name(), second.name());
+QString VContainer::GetNameArc(const qint64 &center, const qint64 &id) const{
+    VPointF centerPoint = GetPoint(center);
+    return QString ("Arc(%1)%2").arg(centerPoint.name(), id);
 }
 
 void VContainer::AddLengthLine(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
-    lengthLines[name] = value/PrintDPI*25.4;
+    lengthLines[name] = value;
 }
 
 void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId){
@@ -265,20 +281,21 @@ void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secon
 
 void VContainer::AddLengthSpline(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
-    lengthSplines[name] = value/PrintDPI*25.4;
+    lengthSplines[name] = value;
 }
 
-void VContainer::AddLengthArc(const qint64 &firstPointId, const qint64 &centerPoint,
-                              const qint64 &secondPointId){
-    QString nameLine = GetNameArc(firstPointId, centerPoint, secondPointId);
-    VPointF firstPoint = GetPoint(firstPointId);
-    VPointF secondPoint = GetPoint(secondPointId);
-    AddLengthArc(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+void VContainer::AddLengthArc(const qint64 &center, const qint64 &id){
+    AddLengthArc(GetNameArc(center, id), GetArc(id).GetLength());
 }
 
 void VContainer::AddLengthArc(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
-    lengthArcs[name] = value/PrintDPI*25.4;
+    lengthArcs[name] = value;
+}
+
+void VContainer::AddLineArc(const QString &name, const qint32 &value){
+    Q_ASSERT(!name.isEmpty());
+    lineArcs[name] = value;
 }
 
 qreal VContainer::GetLine(const QString &name) const{
@@ -287,7 +304,18 @@ qreal VContainer::GetLine(const QString &name) const{
         return lengthLines.value(name);
     } else {
         qCritical()<<"Не можу знайти лінію за імям = "<<name<<" в таблиці.";
-        throw"Не можу знайти лінію таблиці.";
+        throw"Не можу знайти лінію в таблиці.";
+    }
+    return 0;
+}
+
+qint32 VContainer::GetLineArc(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    if(lineArcs.contains(name)){
+        return lineArcs.value(name);
+    } else {
+        qCritical()<<"Не можу знайти кут за імям = "<<name<<" в таблиці.";
+        throw"Не можу знайти кут в таблиці.";
     }
     return 0;
 }
@@ -315,4 +343,8 @@ VArc VContainer::GetArc(qint64 id) const{
 
 const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
     return &lengthArcs;
+}
+
+const QMap<QString, qreal> *VContainer::DataLineArcs() const{
+    return &lineArcs;
 }

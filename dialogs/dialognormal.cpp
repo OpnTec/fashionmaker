@@ -47,7 +47,7 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent) :
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogNormal::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogNormal::ValChenged);
 
-    ShowBase();
+    ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogNormal::SizeGrowth);
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogNormal::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogNormal::Increments);

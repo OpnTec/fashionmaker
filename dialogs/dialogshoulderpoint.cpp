@@ -30,7 +30,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogShoulderPoint::ValChenged);
 
-    ShowBase();
+    ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogShoulderPoint::SizeGrowth);
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogShoulderPoint::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogShoulderPoint::Increments);

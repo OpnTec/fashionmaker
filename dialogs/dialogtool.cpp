@@ -24,8 +24,7 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent):QDialog(parent){
     radioButtonLengthLine = 0;
 }
 
-DialogTool::~DialogTool()
-{
+DialogTool::~DialogTool(){
 }
 
 void DialogTool::closeEvent(QCloseEvent *event){
@@ -38,12 +37,9 @@ void DialogTool::showEvent(QShowEvent *event){
     if( event->spontaneous() ){
         return;
     }
-
     if(isInitialized){
         return;
     }
-
-    // do your init stuff here
     isInitialized = true;//перший показ вікна вже відбувся
 }
 
@@ -69,70 +65,6 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const{
     } else {
         return QString("none");
     }
-}
-
-void DialogTool::ShowBase(){
-    Q_CHECK_PTR(listWidget);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    listWidget->clear();
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    const QMap<QString, qint32> *base = data->DataBase();
-    QMapIterator<QString, qint32> i(*base);
-    while (i.hasNext()) {
-        i.next();
-        QListWidgetItem *item = new QListWidgetItem(i.key());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        listWidget->addItem(item);
-    }
-    listWidget->setCurrentRow (0);
-}
-
-void DialogTool::ShowStandartTable(){
-    Q_CHECK_PTR(listWidget);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    listWidget->clear();
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    const QMap<QString, VStandartTableCell> *standartTable = data->DataStandartTable();
-    QMapIterator<QString, VStandartTableCell> i(*standartTable);
-    while (i.hasNext()) {
-        i.next();
-        QListWidgetItem *item = new QListWidgetItem(i.key());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        listWidget->addItem(item);
-    }
-    listWidget->setCurrentRow (0);
-}
-
-void DialogTool::ShowIncrementTable(){
-    Q_CHECK_PTR(listWidget);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    listWidget->clear();
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    const QMap<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
-    QMapIterator<QString, VIncrementTableRow> i(*incrementTable);
-    while (i.hasNext()) {
-        i.next();
-        QListWidgetItem *item = new QListWidgetItem(i.key());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        listWidget->addItem(item);
-    }
-    listWidget->setCurrentRow (0);
-}
-
-void DialogTool::ShowLengthLines(){
-    Q_CHECK_PTR(listWidget);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    listWidget->clear();
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    const QMap<QString, qreal> *linesTable = data->DataLengthLines();
-    QMapIterator<QString, qreal> i(*linesTable);
-    while (i.hasNext()) {
-        i.next();
-        QListWidgetItem *item = new QListWidgetItem(i.key());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        listWidget->addItem(item);
-    }
-    listWidget->setCurrentRow (0);
 }
 
 void DialogTool::SetupTypeLine(QComboBox *box, const QString &value){
@@ -162,6 +94,47 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value){
     if(index != -1){
         box->setCurrentIndex(index);
     }
+}
+
+void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
+    Q_CHECK_PTR(lineEdit);
+    Q_CHECK_PTR(listWidget);
+    QListWidgetItem *item = listWidget->currentItem();
+    QString val = item->text();
+    lineEdit->setText(lineEdit->text().append(val));
+}
+
+void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
+    Q_CHECK_PTR(edit);
+    Q_CHECK_PTR(timer);
+    if(edit->text().isEmpty()){
+        flag = false;
+        CheckState();
+        return;
+    }
+    timer->start(1000);
+}
+
+void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label){
+    Q_CHECK_PTR(edit);
+    Q_CHECK_PTR(timer);
+    Q_CHECK_PTR(label);
+    if(edit->text().isEmpty()){
+        flag = false;
+    } else {
+        Calculator cal(data);
+        QString errorMsg;
+        qreal result = cal.eval(edit->text(),&errorMsg);
+        if(!errorMsg.isEmpty()){
+            label->setText("Помилка.");
+            flag = false;
+        } else {
+            label->setText(QString().setNum(result));
+            flag = true;
+        }
+    }
+    CheckState();
+    timer->stop();
 }
 
 void DialogTool::CheckState(){
@@ -199,12 +172,7 @@ void DialogTool::DialogRejected(){
 void DialogTool::FormulaChanged(){
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if(edit){
-        if(edit->text().isEmpty()){
-            flagFormula = false;
-            CheckState();
-            return;
-        }
-        timerFormula->start(1000);
+        ValFormulaChanged(flagFormula, edit, timerFormula);
     }
 }
 
@@ -251,46 +219,27 @@ void DialogTool::ArrowRightDown(){
 void DialogTool::EvalFormula(){
     Q_CHECK_PTR(lineEditFormula);
     Q_CHECK_PTR(labelResultCalculation);
-    if(lineEditFormula->text().isEmpty()){
-        flagFormula = false;
-    } else {
-        Calculator cal(data);
-        QString errorMsg;
-        qreal result = cal.eval(lineEditFormula->text(),&errorMsg);
-        if(!errorMsg.isEmpty()){
-            labelResultCalculation->setText("Помилка.");
-            flagFormula = false;
-        } else {
-            labelResultCalculation->setText(QString().setNum(result));
-            flagFormula = true;
-        }
-    }
-    CheckState();
-    timerFormula->stop();
+    Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
 void DialogTool::SizeGrowth(){
-    ShowBase();
+    ShowVariable(data->DataBase());
 }
 
 void DialogTool::StandartTable(){
-    ShowStandartTable();
+    ShowVariable(data->DataStandartTable());
 }
 
 void DialogTool::LengthLines(){
-    ShowLengthLines();
+    ShowVariable(data->DataLengthLines());
 }
 
 void DialogTool::Increments(){
-    ShowIncrementTable();
+    ShowVariable(data->DataIncrementTable());
 }
 
 void DialogTool::PutHere(){
-    Q_CHECK_PTR(lineEditFormula);
-    Q_CHECK_PTR(listWidget);
-    QListWidgetItem *item = listWidget->currentItem();
-    QString val = item->text();
-    lineEditFormula->setText(lineEditFormula->text().append(val));
+    PutValHere(lineEditFormula, listWidget);
 }
 
 void DialogTool::PutVal(QListWidgetItem *item){
@@ -305,6 +254,7 @@ void DialogTool::ValChenged(int row){
     Q_CHECK_PTR(radioButtonSizeGrowth);
     Q_CHECK_PTR(radioButtonStandartTable);
     Q_CHECK_PTR(radioButtonIncrements);
+    Q_CHECK_PTR(radioButtonLengthLine);
     if(listWidget->count() == 0){
         return;
     }
@@ -318,23 +268,27 @@ void DialogTool::ValChenged(int row){
             QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg("Розмір");
             labelDescription->setText(desc);
         }
+        return;
     }
     if(radioButtonStandartTable->isChecked()){
         VStandartTableCell stable = data->GetStandartTableCell(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandartTableCell(item->text()))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
+        return;
     }
     if(radioButtonIncrements->isChecked()){
         VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
                 .arg(itable.getDescription());
         labelDescription->setText(desc);
+        return;
     }
     if(radioButtonLengthLine->isChecked()){
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
                 .arg("Довжина лінії");
         labelDescription->setText(desc);
+        return;
     }
 }
 
@@ -343,12 +297,28 @@ void DialogTool::UpdateList(){
     Q_CHECK_PTR(radioButtonStandartTable);
     Q_CHECK_PTR(radioButtonIncrements);
     if(radioButtonSizeGrowth->isChecked()){
-        ShowBase();
+        ShowVariable(data->DataBase());
     }
     if(radioButtonStandartTable->isChecked()){
-        ShowStandartTable();
+        ShowVariable(data->DataStandartTable());
     }
     if(radioButtonIncrements->isChecked()){
-        ShowIncrementTable();
+        ShowVariable(data->DataIncrementTable());
     }
+}
+
+export template <class key, class val>
+void DialogTool::ShowVariable(const QMap<key, val> *var){
+    Q_CHECK_PTR(listWidget);
+    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->clear();
+    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    QMapIterator<key, val> i(*var);
+    while (i.hasNext()) {
+        i.next();
+        QListWidgetItem *item = new QListWidgetItem(i.key());
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        listWidget->addItem(item);
+    }
+    listWidget->setCurrentRow (0);
 }
