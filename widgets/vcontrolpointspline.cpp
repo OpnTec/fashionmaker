@@ -4,9 +4,12 @@
 #include <QGraphicsScene>
 #include <QDebug>
 
-VControlPointSpline::VControlPointSpline(const QPointF &controlPoint, const QPointF &splinePoint,
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
+                                         const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent):QGraphicsEllipseItem(parent){
     radius = 1.5*PrintDPI/25.4;
+    this->indexSpline = indexSpline;
+    this->position = position;
     //create circle
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -48,10 +51,10 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
             newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
             newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
 
-            emit ControlPointChangePosition(newPos);
+            emit ControlPointChangePosition(indexSpline, position, newPos);
             return newPos;
         }
-        emit ControlPointChangePosition(newPos);
+        emit ControlPointChangePosition(indexSpline, position, newPos);
     }
     return QGraphicsItem::itemChange(change, value);
 }
@@ -109,11 +112,25 @@ QPointF VControlPointSpline::addVector(QPointF p, QPointF p1, QPointF p2, qreal 
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
-void VControlPointSpline::RefreshLine(const QPointF &controlPoint, const QPointF &splinePoint){
-//    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-//    rec.translate(0-rec.center().x(), 0-rec.center().y());
-//    this->setRect(rec);
-    QPointF p1, p2;
-    LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
-    controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
+                                      const QPointF &controlPoint, const QPointF &splinePoint){
+    if(this->indexSpline == indexSpline && this->position == pos){
+        QPointF p1, p2;
+        LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+        controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+    }
+}
+
+void VControlPointSpline::setEnabledPoint(bool enable){
+    if(enable == true){
+        this->setPen(QPen(Qt::black, widthHairLine));
+        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        this->setFlag(QGraphicsItem::ItemIsMovable, true);
+        this->setAcceptHoverEvents(true);
+    } else {
+        this->setPen(QPen(Qt::gray, widthHairLine));
+        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
+        this->setFlag(QGraphicsItem::ItemIsMovable, false);
+        this->setAcceptHoverEvents(false);
+    }
 }

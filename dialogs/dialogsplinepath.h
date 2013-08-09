@@ -1,0 +1,38 @@
+#ifndef DIALOGSPLINEPATH_H
+#define DIALOGSPLINEPATH_H
+
+#include "dialogtool.h"
+#include "../container/vcontainer.h"
+#include "../geometry/vsplinepath.h"
+
+namespace Ui {
+class DialogSplinePath;
+}
+
+class DialogSplinePath : public DialogTool
+{
+    Q_OBJECT
+public:
+    explicit DialogSplinePath(const VContainer *data, QWidget *parent = 0);
+    ~DialogSplinePath();
+    VSplinePath      GetPath() const;
+    void             SetPath(const VSplinePath &value);
+public slots:
+    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     DialogAccepted();
+    void             PointChenged(int row);
+    void             currentPointChanged( int index );
+    void             Angle1Changed( int index );
+    void             Angle2Changed( int index );
+    void             KAsm1Changed(qreal d);
+    void             KAsm2Changed(qreal d);
+private:
+    Ui::DialogSplinePath *ui;
+    VSplinePath      path;
+    void             NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
+    void             DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    void             EnableFields();
+    void             SetAngle(qint32 angle);
+};
+
+#endif // DIALOGSPLINEPATH_H

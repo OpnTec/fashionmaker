@@ -8,6 +8,7 @@
 #include "vincrementtablerow.h"
 #include "../geometry/vspline.h"
 #include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
 
 /**
  * @brief The VContainer class
@@ -31,6 +32,7 @@ public:
     qint32              GetLineArc(const QString &name) const;
     VSpline             GetSpline(qint64 id) const;
     VArc                GetArc(qint64 id) const;
+    VSplinePath         GetSplinePath(qint64 id) const;
     qint64              getId();
     qint64              AddPoint(const VPointF& point);
     void                AddStandartTableCell(const QString& name, const VStandartTableCell& cell);
@@ -43,13 +45,16 @@ public:
     void                AddLineArc(const QString &name, const qint32 &value);
     void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
     qint64              AddSpline(const VSpline& spl);
+    qint64              AddSplinePath(const VSplinePath& splPath);
     qint64              AddArc(const VArc& arc);
     QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
     QString             GetNameLineArc(const qint64 &firstPoint, const qint64 &secondPoint) const;
     QString             GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameSplinePath(const VSplinePath &path) const;
     QString             GetNameArc(const qint64 &center, const qint64 &id) const;
     void                UpdatePoint(qint64 id, const VPointF& point);
     void                UpdateSpline(qint64 id, const VSpline& spl);
+    void                UpdateSplinePath(qint64 id, const VSplinePath& splPath);
     void                UpdateArc(qint64 id, const VArc& arc);
     void                UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell);
     void                UpdateIncrementTableRow(const QString& name, const VIncrementTableRow& cell);
@@ -79,6 +84,7 @@ public:
     const QMap<QString, qreal> *DataLengthSplines() const;
     const QMap<QString, qreal> *DataLengthArcs() const;
     const QMap<QString, qreal> *DataLineArcs() const;
+    const QMap<qint64, VSplinePath> *DataSplinePaths() const;
 private:
     qint64              _id;
     QMap<QString, qint32> base;
@@ -91,6 +97,7 @@ private:
     QMap<QString, qreal> lengthSplines;
     QMap<qint64, VArc> arcs;
     QMap<QString, qreal> lengthArcs;
+    QMap<qint64, VSplinePath> splinePaths;
 };
 
 #endif // VCONTAINER_H

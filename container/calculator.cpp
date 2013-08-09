@@ -89,7 +89,7 @@ void Calculator::level5(qreal *result){
     QChar op;
 
     op = '\0';
-    if((token_type==DELIMITER) && token[0]=='+' || token[0]=='-') {
+    if((token_type==DELIMITER) && (token[0]=='+' || token[0]=='-')) {
         op = token[0];
         get_token();
     }

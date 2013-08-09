@@ -12,7 +12,8 @@ namespace Scene{
         Point,
         Line,
         Spline,
-        Arc
+        Arc,
+        SplinePath
     };
 }
 

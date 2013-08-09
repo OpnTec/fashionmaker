@@ -15,13 +15,21 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, Tool::E
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
-    controlPoint1 = new VControlPointSpline(spl.GetP2(), spl.GetPointP1(), this);
+    VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePoint::FirstPoint, spl.GetP2(),
+                                                                 spl.GetPointP1(), this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
-            &VToolSpline::ControlPoint1ChangePosition);
+            &VToolSpline::ControlPointChangePosition);
+    connect(this, &VToolSpline::RefreshLine, controlPoint1, &VControlPointSpline::RefreshLine);
+    connect(this, &VToolSpline::setEnabledPoint, controlPoint1, &VControlPointSpline::setEnabledPoint);
+    controlPoints.append(controlPoint1);
 
-    controlPoint2 = new VControlPointSpline(spl.GetP3(), spl.GetPointP4(), this);
+    VControlPointSpline *controlPoint2 = new VControlPointSpline(1, SplinePoint::LastPoint, spl.GetP3(),
+                                                                 spl.GetPointP4(), this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
-            &VToolSpline::ControlPoint2ChangePosition);
+            &VToolSpline::ControlPointChangePosition);
+    connect(this, &VToolSpline::RefreshLine, controlPoint2, &VControlPointSpline::RefreshLine);
+    connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
+    controlPoints.append(controlPoint2);
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -38,19 +46,19 @@ void VToolSpline::FullUpdateFromGui(int result){
                                dialogSpline->getP4(), dialogSpline->getAngle1(), dialogSpline->getAngle2(),
                                dialogSpline->getKAsm1(), dialogSpline->getKAsm2(), dialogSpline->getKCurve());
 
-        disconnect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPoint1ChangePosition);
-        disconnect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPoint2ChangePosition);
-        controlPoint1->setPos(spl.GetP2());
-        controlPoint2->setPos(spl.GetP3());
-        connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPoint1ChangePosition);
-        connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPoint2ChangePosition);
+        disconnect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSpline::ControlPointChangePosition);
+        disconnect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSpline::ControlPointChangePosition);
+        controlPoints[0]->setPos(spl.GetP2());
+        controlPoints[1]->setPos(spl.GetP3());
+        connect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSpline::ControlPointChangePosition);
+        connect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSpline::ControlPointChangePosition);
 
-        spl = VSpline (VAbstractTool::data->DataPoints(), dialogSpline->getP1(),  controlPoint1->pos(),
-                       controlPoint2->pos(), dialogSpline->getP4(), dialogSpline->getKCurve());
+        spl = VSpline (VAbstractTool::data->DataPoints(), dialogSpline->getP1(),  controlPoints[0]->pos(),
+                       controlPoints[1]->pos(), dialogSpline->getP4(), dialogSpline->getKCurve());
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
             domElement.setAttribute("point1", QString().setNum(spl.GetP1()));
@@ -66,23 +74,15 @@ void VToolSpline::FullUpdateFromGui(int result){
     dialogSpline.clear();
 }
 
-void VToolSpline::ControlPoint1ChangePosition(const QPointF pos){
+void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
+                                              const QPointF pos){
+    Q_UNUSED(indexSpline);
     VSpline spl = VAbstractTool::data->GetSpline(id);
-    spl.ModifiSpl (spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
-        domElement.setAttribute("angle2", QString().setNum(spl.GetAngle2()));
-        domElement.setAttribute("kAsm1", QString().setNum(spl.GetKasm1()));
-        domElement.setAttribute("kAsm2", QString().setNum(spl.GetKasm2()));
-        domElement.setAttribute("kCurve", QString().setNum(spl.GetKcurve()));
-        emit FullUpdateTree();
+    if(position == SplinePoint::FirstPoint){
+        spl.ModifiSpl (spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());
+    } else {
+        spl.ModifiSpl (spl.GetP1(), spl.GetP2(), pos, spl.GetP4(), spl.GetKcurve());
     }
-}
-
-void VToolSpline::ControlPoint2ChangePosition(const QPointF pos){
-    VSpline spl = VAbstractTool::data->GetSpline(id);
-    spl.ModifiSpl (spl.GetP1(), spl.GetP2(), pos, spl.GetP4(), spl.GetKcurve());
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
         domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
@@ -164,10 +164,10 @@ void VToolSpline::RefreshGeometry(){
     this->setPath(path);
     QPointF splinePoint = VAbstractTool::data->GetPoint(spl.GetP1());
     QPointF controlPoint = spl.GetP2();
-    controlPoint1->RefreshLine(controlPoint, splinePoint);
+    emit RefreshLine(1, SplinePoint::FirstPoint, controlPoint, splinePoint);
     splinePoint = VAbstractTool::data->GetPoint(spl.GetP4());
     controlPoint = spl.GetP3();
-    controlPoint2->RefreshLine(controlPoint, splinePoint);
+    emit RefreshLine(1, SplinePoint::LastPoint, controlPoint, splinePoint);
 }
 
 
@@ -176,27 +176,13 @@ void VToolSpline::ChangedActivDraw(const QString newName){
         this->setPen(QPen(Qt::black, widthHairLine));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setAcceptHoverEvents(true);
-        controlPoint1->setPen(QPen(Qt::black, widthHairLine));
-        controlPoint1->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        controlPoint1->setFlag(QGraphicsItem::ItemIsMovable, true);
-        controlPoint1->setAcceptHoverEvents(true);
-        controlPoint2->setPen(QPen(Qt::black, widthHairLine));
-        controlPoint2->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        controlPoint2->setFlag(QGraphicsItem::ItemIsMovable, true);
-        controlPoint2->setAcceptHoverEvents(true);
+        emit setEnabledPoint(true);
         VAbstractTool::ChangedActivDraw(newName);
     } else {
         this->setPen(QPen(Qt::gray, widthHairLine));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setAcceptHoverEvents (false);
-        controlPoint1->setPen(QPen(Qt::gray, widthHairLine));
-        controlPoint1->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        controlPoint1->setFlag(QGraphicsItem::ItemIsMovable, false);
-        controlPoint1->setAcceptHoverEvents(false);
-        controlPoint2->setPen(QPen(Qt::gray, widthHairLine));
-        controlPoint2->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        controlPoint2->setFlag(QGraphicsItem::ItemIsMovable, false);
-        controlPoint2->setAcceptHoverEvents(false);
+        emit setEnabledPoint(false);
         VAbstractTool::ChangedActivDraw(newName);
     }
 }

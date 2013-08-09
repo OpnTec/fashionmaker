@@ -80,6 +80,13 @@ void VContainer::UpdateSpline(qint64 id, const VSpline &spl){
     }
 }
 
+void VContainer::UpdateSplinePath(qint64 id, const VSplinePath &splPath){
+    splinePaths[id] = splPath;
+    if(id > _id){
+        _id = id;
+    }
+}
+
 void VContainer::UpdateArc(qint64 id, const VArc &arc){
     arcs[id] = arc;
     if(id > _id){
@@ -238,6 +245,12 @@ qint64 VContainer::AddSpline(const VSpline &spl){
     return id;
 }
 
+qint64 VContainer::AddSplinePath(const VSplinePath &splPath){
+    qint64 id = getNextId();
+    splinePaths[id] = splPath;
+    return id;
+}
+
 qint64 VContainer::AddArc(const VArc &arc){
     qint64 id = getNextId();
     arcs[id] = arc;
@@ -260,6 +273,21 @@ QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &second
     VPointF first = GetPoint(firstPoint);
     VPointF second = GetPoint(secondPoint);
     return QString("Spl_%1_%2").arg(first.name(), second.name());
+}
+
+QString VContainer::GetNameSplinePath(const VSplinePath &path) const{
+    if(path.Count() == 0){
+        return QString();
+    }
+    QString name("SplPath");
+    for(qint32 i = 1; i <= path.Count(); ++i){
+        VSpline spl = path.GetSpline(i);
+        VPointF first = GetPoint(spl.GetP1());
+        VPointF second = GetPoint(spl.GetP4());
+        QString splName = QString("_%1_%2").arg(first.name(), second.name());
+        name.append(splName);
+    }
+    return name;
 }
 
 QString VContainer::GetNameArc(const qint64 &center, const qint64 &id) const{
@@ -340,6 +368,16 @@ VArc VContainer::GetArc(qint64 id) const{
     return VArc();
 }
 
+VSplinePath VContainer::GetSplinePath(qint64 id) const{
+    if(splinePaths.contains(id)){
+        return splinePaths.value(id);
+    } else {
+        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
+        throw"Не можу знайти дугу за id.";
+    }
+    return VSplinePath();
+}
+
 
 const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
     return &lengthArcs;
@@ -347,4 +385,8 @@ const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
 
 const QMap<QString, qreal> *VContainer::DataLineArcs() const{
     return &lineArcs;
+}
+
+const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
+    return &splinePaths;
 }

@@ -20,6 +20,7 @@
 #include "tools/vtoollineintersect.h"
 #include "tools/vtoolspline.h"
 #include "tools/vtoolarc.h"
+#include "tools/vtoolsplinepath.h"
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -68,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &MainWindow::ToolSpline);
     connect(ui->toolButtonArc, &QToolButton::clicked, this,
             &MainWindow::ToolArc);
+    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this,
+            &MainWindow::ToolSplinePath);
 
     data = new VContainer;
     CreateManTableIGroup ();
@@ -589,6 +592,37 @@ void MainWindow::ClosedDialogArc(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolSplinePath(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::SplinePathTool;
+        QPixmap pixmap(":/cursor/splinepath_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        ui->graphicsView->setCursor(cur);
+        helpLabel->setText("Виберіть точку.");
+        dialogSplinePath = new DialogSplinePath(data, this);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogSplinePath,
+                &DialogSplinePath::ChoosedObject);
+        connect(dialogSplinePath, &DialogSplinePath::DialogClosed, this,
+                &MainWindow::ClosedDialogSplinePath);
+    } else {
+        ui->toolButtonSplinePath->setChecked(true);
+    }
+}
+
+void MainWindow::ClosedDialogSplinePath(int result){
+    if(result == QDialog::Accepted){
+        VSplinePath path = dialogSplinePath->GetPath();
+
+        qint64 id = data->AddSplinePath(path);
+        data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
+        VToolSplinePath *tool = new VToolSplinePath(doc, data, id, Tool::FromGui);
+        scene->addItem(tool);
+        connect(tool, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -598,7 +632,6 @@ void MainWindow::showEvent( QShowEvent *event ){
     if(isInitialized){
         return;
     }
-
     // do your init stuff here
     QScrollBar *horScrollBar = ui->graphicsView->horizontalScrollBar();
     horScrollBar->setValue(horScrollBar->minimum());
@@ -748,6 +781,12 @@ void MainWindow::CanselTool(){
         case Tools::ArcTool:
             delete dialogArc;
             ui->toolButtonArc->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::SplinePathTool:
+            delete dialogSplinePath;
+            ui->toolButtonSplinePath->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -1015,6 +1054,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonLineIntersect->setEnabled(enable);
     ui->toolButtonSpline->setEnabled(enable);
     ui->toolButtonArc->setEnabled(enable);
+    ui->toolButtonSplinePath->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){
