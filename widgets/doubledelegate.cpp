@@ -59,8 +59,8 @@
      const QModelIndex &/* index */) const
  {
      QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
-     editor->setMinimum(-1000);
-     editor->setMaximum(1000);
+     editor->setMinimum(-1000.0);
+     editor->setMaximum(1000.0);
 
      return editor;
  }
@@ -79,7 +79,7 @@
  {
      QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
      spinBox->interpretText();
-     int value = spinBox->value();
+     qreal value = spinBox->value();
 
      model->setData(index, value, Qt::EditRole);
  }

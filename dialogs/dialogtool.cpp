@@ -43,13 +43,16 @@ void DialogTool::showEvent(QShowEvent *event){
     isInitialized = true;//перший показ вікна вже відбувся
 }
 
-void DialogTool::FillComboBoxPoints(QComboBox *box) const{
+void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
+    box->clear();
     const QMap<qint64, VPointF> *points = data->DataPoints();
     QMapIterator<qint64, VPointF> i(*points);
     while (i.hasNext()) {
         i.next();
-        VPointF point = i.value();
-        box->addItem(point.name(), i.key());
+        if(i.key() != id){
+            VPointF point = i.value();
+            box->addItem(point.name(), i.key());
+        }
     }
 }
 
@@ -89,7 +92,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value){
     }
 }
 
-void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value){
+void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value) const{
     qint32 index = box->findData(value);
     if(index != -1){
         box->setCurrentIndex(index);
@@ -135,6 +138,25 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     }
     CheckState();
     timer->stop();
+}
+
+void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value,
+                                   const qint64 &id) const{
+    Q_CHECK_PTR(box);
+    FillComboBoxPoints(box, id);
+    pointId = value;
+    ChangeCurrentData(box, value);
+}
+
+qint64 DialogTool::getCurrentPointId(QComboBox *box) const{
+    Q_CHECK_PTR(box);
+    qint32 index = box->currentIndex();
+    Q_ASSERT(index != -1);
+    if(index != -1){
+        return qvariant_cast<qint64>(box->itemData(index));
+    } else {
+        return -1;
+    }
 }
 
 void DialogTool::CheckState(){
@@ -293,9 +315,9 @@ void DialogTool::ValChenged(int row){
 }
 
 void DialogTool::UpdateList(){
-    Q_CHECK_PTR(radioButtonSizeGrowth);
-    Q_CHECK_PTR(radioButtonStandartTable);
-    Q_CHECK_PTR(radioButtonIncrements);
+    if(radioButtonSizeGrowth == 0 || radioButtonStandartTable == 0 || radioButtonIncrements == 0){
+        return;
+    }
     if(radioButtonSizeGrowth->isChecked()){
         ShowVariable(data->DataBase());
     }

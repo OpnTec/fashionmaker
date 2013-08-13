@@ -28,11 +28,11 @@ public:
     QString           getFormula() const;
     void              setFormula(const QString &value);
     qint64            getFirstPointId() const;
-    void              setFirstPointId(const qint64 &value);
+    void              setFirstPointId(const qint64 &value, const qint64 &id);
     qint64            getSecondPointId() const;
-    void              setSecondPointId(const qint64 &value);
+    void              setSecondPointId(const qint64 &value, const qint64 &id);
     qint64            getThirdPointId() const;
-    void              setThirdPointId(const qint64 &value);
+    void              setThirdPointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void      ChoosedObject(qint64 id, Scene::Type type);
     virtual void      DialogAccepted();

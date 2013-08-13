@@ -15,9 +15,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     InitialStandartTable();
     InitialIncrementTable();
     InitialLinesTable();
-    SpinBoxDelegate *delegate = new SpinBoxDelegate(ui->tableWidgetIncrement);
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
-    ui->tableWidgetIncrement->setItemDelegateForColumn(2, delegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
     FillStandartTable();
@@ -72,6 +71,9 @@ void DialogIncrements::FillStandartTable(){
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 5, item);
     }
+    ui->tableWidgetStandart->resizeColumnsToContents();
+    ui->tableWidgetStandart->resizeRowsToContents();
+    ui->tableWidgetStandart->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FillIncrementTable(){
@@ -117,6 +119,9 @@ void DialogIncrements::FillIncrementTable(){
     if(ui->tableWidgetIncrement->rowCount()>0){
         ui->toolButtonRemove->setEnabled(true);
     }
+    ui->tableWidgetIncrement->resizeColumnsToContents();
+    ui->tableWidgetIncrement->resizeRowsToContents();
+    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FillLengthLines(){
@@ -138,6 +143,9 @@ void DialogIncrements::FillLengthLines(){
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetLines->setItem(currentRow, 1, item);
     }
+    ui->tableWidgetLines->resizeColumnsToContents();
+    ui->tableWidgetLines->resizeRowsToContents();
+    ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FillLengthSplines(){
@@ -159,6 +167,9 @@ void DialogIncrements::FillLengthSplines(){
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetSplines->setItem(currentRow, 1, item);
     }
+    ui->tableWidgetSplines->resizeColumnsToContents();
+    ui->tableWidgetSplines->resizeRowsToContents();
+    ui->tableWidgetSplines->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FillLengthArcs(){
@@ -180,6 +191,9 @@ void DialogIncrements::FillLengthArcs(){
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetArcs->setItem(currentRow, 1, item);
     }
+    ui->tableWidgetArcs->resizeColumnsToContents();
+    ui->tableWidgetArcs->resizeRowsToContents();
+    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FullUpdateFromFile(){
@@ -386,9 +400,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
 }
 
 void DialogIncrements::InitialStandartTable(){
-    ui->tableWidgetStandart->resizeColumnsToContents();
-    ui->tableWidgetStandart->resizeRowsToContents();
-    ui->tableWidgetStandart->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetStandart->setSortingEnabled(false);
     ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
     ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
     ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
@@ -398,9 +410,7 @@ void DialogIncrements::InitialStandartTable(){
 }
 
 void DialogIncrements::InitialIncrementTable(){
-    ui->tableWidgetIncrement->resizeColumnsToContents();
-    ui->tableWidgetIncrement->resizeRowsToContents();
-    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetIncrement->setSortingEnabled(false);
     ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem("Позначення"));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem("Розрах. знач."));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem("Базове знач."));
@@ -410,25 +420,16 @@ void DialogIncrements::InitialIncrementTable(){
 }
 
 void DialogIncrements::InitialLinesTable(){
-    ui->tableWidgetLines->resizeColumnsToContents();
-    ui->tableWidgetLines->resizeRowsToContents();
-    ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
     ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }
 
 void DialogIncrements::InitialSplinesTable(){
-    ui->tableWidgetSplines->resizeColumnsToContents();
-    ui->tableWidgetSplines->resizeRowsToContents();
-    ui->tableWidgetSplines->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetSplines->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
     ui->tableWidgetSplines->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }
 
 void DialogIncrements::InitialArcsTable(){
-    ui->tableWidgetArcs->resizeColumnsToContents();
-    ui->tableWidgetArcs->resizeRowsToContents();
-    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetArcs->setHorizontalHeaderItem(0, new QTableWidgetItem("Лінія"));
     ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem("Довжина"));
 }

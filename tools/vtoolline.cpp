@@ -21,14 +21,46 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     }
 }
 
+void VToolLine::setDialog(){
+    dialogLine->setFirstPoint(firstPoint);
+    dialogLine->setSecondPoint(secondPoint);
+}
+
+void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+                       VContainer *data){
+    qint64 firstPoint = dialog->getFirstPoint();
+    qint64 secondPoint = dialog->getSecondPoint();
+    Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
+}
+
+void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
+                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
+                       Tool::Enum typeCreation){
+    data->AddLine(firstPoint, secondPoint);
+    if(parse != Document::FullParse){
+        QMap<qint64, VDataTool*>* tools = doc->getTools();
+        VDataTool *tool = tools->value(id);
+        tool->VDataTool::setData(data);
+        tools->insert(id, tool);
+    }
+    if(parse == Document::FullParse){
+        qint64 id = data->getNextId();
+        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
+        scene->addItem(line);
+        connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        QMap<qint64, VDataTool*>* tools = doc->getTools();
+        tools->insert(id,line);
+    }
+}
+
 void VToolLine::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
         firstPoint = domElement.attribute("firstPoint", "").toLongLong();
         secondPoint = domElement.attribute("secondPoint", "").toLongLong();
     }
-    VPointF first = VAbstractTool::data->GetPoint(firstPoint);
-    VPointF second = VAbstractTool::data->GetPoint(secondPoint);
+    VPointF first = VAbstractTool::data.GetPoint(firstPoint);
+    VPointF second = VAbstractTool::data.GetPoint(secondPoint);
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
 }
 
@@ -57,23 +89,7 @@ void VToolLine::ChangedActivDraw(const QString newName){
 }
 
 void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    if(!ignoreContextMenuEvent){
-        QMenu menu;
-        QAction *actionOption = menu.addAction("Властивості");
-        QAction *selectedAction = menu.exec(event->screenPos());
-        if(selectedAction == actionOption){
-            dialogLine = QSharedPointer<DialogLine>(new DialogLine(VAbstractTool::data));
-
-            connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogLine.data(), &DialogLine::ChoosedObject);
-            connect(dialogLine.data(), &DialogLine::DialogClosed, this, &VToolLine::FullUpdateFromGui);
-
-            dialogLine->setFirstPoint(firstPoint);
-            dialogLine->setSecondPoint(secondPoint);
-
-            dialogLine->show();
-        }
-    }
+    ContextMenu(dialogLine, this, event);
 }
 
 
@@ -84,6 +100,7 @@ void VToolLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPoint);
 
     AddToCalculation(domElement);
+    emit toolhaveChange();
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){

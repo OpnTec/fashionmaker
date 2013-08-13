@@ -12,13 +12,15 @@
 
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent){
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
 }
 
 void VToolSinglePoint::AddToFile(){
-    VPointF point = VAbstractTool::data->GetPoint(id);
+    VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -30,22 +32,37 @@ void VToolSinglePoint::AddToFile(){
     AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
 
     AddToCalculation(domElement);
+    emit toolhaveChange();
+}
+
+QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value){
+    if (change == ItemPositionChange && scene()) {
+        // value - это новое положение.
+        QPointF newPos = value.toPointF();
+        QRectF rect = scene()->sceneRect();
+        if (!rect.contains(newPos)) {
+            // Сохраняем элемент внутри прямоугольника сцены.
+            newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
+            newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
+            return newPos;
+        }
+    }
+    if (change == ItemPositionHasChanged && scene()) {
+        // value - это новое положение.
+        QPointF newPos = value.toPointF();
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            domElement.setAttribute("x", QString().setNum(newPos.x()/PrintDPI*25.4));
+            domElement.setAttribute("y", QString().setNum(newPos.y()/PrintDPI*25.4));
+            //I don't now why but signal does not work.
+            doc->FullUpdateTree();
+        }
+    }
+    return QGraphicsItem::itemChange(change, value);
 }
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ){
-    if(!ignoreContextMenuEvent){
-        QMenu menu;
-        QAction *actionOption = menu.addAction("Властивості");
-        QAction *selectedAction = menu.exec(event->screenPos());
-        if(selectedAction == actionOption){
-            dialogSinglePoint = QSharedPointer<DialogSinglePoint>(new DialogSinglePoint(VAbstractTool::data));
-            VPointF p = VAbstractTool::data->GetPoint(id);
-            dialogSinglePoint->setData(p.name(), p.toQPointF());
-            connect(dialogSinglePoint.data(), &DialogSinglePoint::DialogClosed, this,
-                    &VToolSinglePoint::FullUpdateFromGui);
-            dialogSinglePoint->exec();
-        }
-    }
+    ContextMenu(dialogSinglePoint, this, event);
 }
 
 void  VToolSinglePoint::FullUpdateFromFile(){
@@ -61,8 +78,19 @@ void VToolSinglePoint::FullUpdateFromGui(int result){
             domElement.setAttribute("name", name);
             domElement.setAttribute("x", QString().setNum(p.x()/PrintDPI*25.4));
             domElement.setAttribute("y", QString().setNum(p.y()/PrintDPI*25.4));
-            emit FullUpdateTree();
+            //I don't now why but signal does not work.
+            doc->FullUpdateTree();
         }
     }
     dialogSinglePoint.clear();
+}
+
+void VToolSinglePoint::ChangedActivDraw(const QString newName){
+    if(nameActivDraw == newName){
+        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        VToolPoint::ChangedActivDraw(newName);
+    } else {
+        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
+        VToolPoint::ChangedActivDraw(newName);
+    }
 }

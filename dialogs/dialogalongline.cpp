@@ -72,10 +72,8 @@ void DialogAlongLine::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPointId = qvariant_cast<qint64>(ui->comboBoxFirstPoint->itemData(index));
-    index = ui->comboBoxSecondPoint->currentIndex();
-    secondPointId = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
+    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -83,18 +81,16 @@ qint64 DialogAlongLine::getSecondPointId() const{
     return secondPointId;
 }
 
-void DialogAlongLine::setSecondPointId(const qint64 &value){
-    secondPointId = value;
-    ChangeCurrentData(ui->comboBoxSecondPoint, value);
+void DialogAlongLine::setSecondPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 qint64 DialogAlongLine::getFirstPointId() const{
     return firstPointId;
 }
 
-void DialogAlongLine::setFirstPointId(const qint64 &value){
-    firstPointId = value;
-    ChangeCurrentData(ui->comboBoxFirstPoint, value);
+void DialogAlongLine::setFirstPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 QString DialogAlongLine::getFormula() const{

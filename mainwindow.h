@@ -1,13 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QMainWindow>
 #include <QLabel>
 #include <QtXml>
 #include <QComboBox>
 #include <QSharedPointer>
+#include <QToolButton>
+#include <QSharedPointer>
 
 #include "widgets/vmaingraphicsscene.h"
+#include "widgets/vmaingraphicsview.h"
 #include "dialogs/dialogsinglepoint.h"
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialogline.h"
@@ -22,6 +26,7 @@
 #include "dialogs/dialogsplinepath.h"
 #include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
+#pragma GCC diagnostic warning "-Weffc++"
 #include "container/vcontainer.h"
 
 namespace Ui {
@@ -100,19 +105,20 @@ private:
     VMainGraphicsScene  *scene;
     QLabel              *mouseCoordinate;
     QLabel              *helpLabel;
+    VMainGraphicsView   *view;
     bool                isInitialized;
     DialogSinglePoint   *dialogSinglePoint;
     DialogIncrements    *dialogTable;
-    DialogEndLine       *dialogEndLine;
-    DialogLine          *dialogLine;
-    DialogAlongLine     *dialogAlongLine;
-    DialogShoulderPoint *dialogShoulderPoint;
-    DialogNormal        *dialogNormal;
-    DialogBisector      *dialogBisector;
-    DialogLineIntersect *dialogLineIntersect;
-    DialogSpline        *dialogSpline;
-    DialogArc           *dialogArc;
-    DialogSplinePath    *dialogSplinePath;
+    QSharedPointer<DialogEndLine>       dialogEndLine;
+    QSharedPointer<DialogLine>          dialogLine;
+    QSharedPointer<DialogAlongLine>     dialogAlongLine;
+    QSharedPointer<DialogShoulderPoint> dialogShoulderPoint;
+    QSharedPointer<DialogNormal>        dialogNormal;
+    QSharedPointer<DialogBisector>      dialogBisector;
+    QSharedPointer<DialogLineIntersect> dialogLineIntersect;
+    QSharedPointer<DialogSpline>        dialogSpline;
+    QSharedPointer<DialogArc>           dialogArc;
+    QSharedPointer<DialogSplinePath>    dialogSplinePath;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;
@@ -122,9 +128,11 @@ private:
     void                ToolBarDraws();
     void                CanselTool();
     void                ArrowTool();
-    void                CreateManTableIGroup () const;
     void                SetEnableWidgets(bool enable);
     void                SetEnableTool(bool enable);
+    template <typename Dialog, typename Func>
+    void SetToolButton(bool checked, Tools::Enum t, const QString &cursor, QSharedPointer<Dialog> &dialog,
+                                   Func closeDialogSlot);
 };
 
 #endif // MAINWINDOW_H

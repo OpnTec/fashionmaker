@@ -23,11 +23,11 @@ public:
     QString                 getFormula() const;
     void                    setFormula(const QString &value);
     qint64                  getP1Line() const;
-    void                    setP1Line(const qint64 &value);
+    void                    setP1Line(const qint64 &value, const qint64 &id);
     qint64                  getP2Line() const;
-    void                    setP2Line(const qint64 &value);
+    void                    setP2Line(const qint64 &value, const qint64 &id);
     qint64                  getPShoulder() const;
-    void                    setPShoulder(const qint64 &value);
+    void                    setPShoulder(const qint64 &value, const qint64 &id);
 public slots:
     virtual void            ChoosedObject(qint64 id, Scene::Type type);
     virtual void            DialogAccepted();

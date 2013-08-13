@@ -8,7 +8,7 @@ VIncrementTableRow::VIncrementTableRow(){
     this->description = QString();
 }
 
-VIncrementTableRow::VIncrementTableRow(qint64 id, qint32 base, qreal ksize, qreal kgrowth,
+VIncrementTableRow::VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,
                                          QString description){
     this->id = id;
     this->base = base;
@@ -41,11 +41,11 @@ void VIncrementTableRow::setKsize(const qreal &value){
     ksize = value;
 }
 
-qint32 VIncrementTableRow::getBase() const{
+qreal VIncrementTableRow::getBase() const{
     return base;
 }
 
-void VIncrementTableRow::setBase(const qint32 &value){
+void VIncrementTableRow::setBase(const qreal &value){
     base = value;
 }
 

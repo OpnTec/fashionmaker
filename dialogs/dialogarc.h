@@ -15,16 +15,16 @@ public:
     explicit DialogArc(const VContainer *data, QWidget *parent = 0);
     ~DialogArc();
     qint64 GetCenter() const;
-    void GetCenter(const qint64 &value);
+    void SetCenter(const qint64 &value);
 
     QString GetRadius() const;
-    void GetRadius(const QString &value);
+    void SetRadius(const QString &value);
 
     QString GetF1() const;
-    void GetF1(const QString &value);
+    void SetF1(const QString &value);
 
     QString GetF2() const;
-    void GetF2(const QString &value);
+    void SetF2(const QString &value);
 
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Type type);

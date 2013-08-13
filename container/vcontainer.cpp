@@ -7,42 +7,54 @@ VContainer::VContainer(){
     _id = 0;
     SetSize(500);
     SetGrowth(1760);
+    CreateManTableIGroup ();
 }
 
-VPointF VContainer::GetPoint(qint64 id) const{
-    if(points.contains(id)){
-        return points.value(id);
+template <typename key, typename val>
+val VContainer::GetObject(const QMap<key,val> &obj, key id)const{
+    if(obj.contains(id)){
+        return obj.value(id);
     } else {
-        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
-        throw"Не можу знайти точку за id.";
+        qCritical()<<"Не можу знайти key = "<<id<<" в таблиці.";
+        throw"Не можу знайти об'єкт за ключем.";
     }
-    return VPointF();
+}
+
+
+VPointF VContainer::GetPoint(qint64 id) const{
+    return GetObject(points, id);
 }
 
 VStandartTableCell VContainer::GetStandartTableCell(const QString &name) const{
-    if(standartTable.contains(name)){
-        return standartTable.value(name);
-    } else {
-        qCritical()<<"Не можу знайти змінну за імям = "<<name<<" в таблиці.";
-        throw"Не можу знайти змінну в стандартній таблиці вимірів за ім'ям.";
-    }
-    return VStandartTableCell();
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(standartTable, name);
 }
 
 VIncrementTableRow VContainer::GetIncrementTableRow(const QString& name) const{
-    if(incrementTable.contains(name)){
-        return incrementTable.value(name);
-    } else {
-        qCritical()<<"Не можу знайти змінну за імям = "<<name<<" в таблиці.";
-        throw"Не можу знайти змінну в таблиці прибавок за ім'ям.";
-    }
-    return VIncrementTableRow();
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(incrementTable, name);
 }
 
-qint64 VContainer::AddPoint(const VPointF& point){
-    qint64 id = getNextId();
-    points[id] = point;
-    return id;
+qreal VContainer::GetLine(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(lengthLines, name);
+}
+
+qint32 VContainer::GetLineArc(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(lineArcs, name);
+}
+
+VSpline VContainer::GetSpline(qint64 id) const{
+    return GetObject(splines, id);
+}
+
+VArc VContainer::GetArc(qint64 id) const{
+    return GetObject(arcs, id);
+}
+
+VSplinePath VContainer::GetSplinePath(qint64 id) const{
+    return GetObject(splinePaths, id);
 }
 
 void VContainer::AddStandartTableCell(const QString& name, const VStandartTableCell& cell){
@@ -62,36 +74,36 @@ qint64 VContainer::getNextId(){
     return _id;
 }
 
+void VContainer::UpdateId(qint64 newId){
+    if(newId > _id){
+        _id = newId;
+    }
+}
+
 void VContainer::RemoveIncrementTableRow(const QString& name){
     incrementTable.remove(name);
 }
 
+template <typename val>
+void VContainer::UpdateObject(QMap<qint64, val> &obj, const qint64 &id, const val& point){
+    obj[id] = point;
+    UpdateId(id);
+}
+
 void VContainer::UpdatePoint(qint64 id, const VPointF& point){
-    points[id] = point;
-    if(id > _id){
-        _id = id;
-    }
+    UpdateObject(points, id, point);
 }
 
 void VContainer::UpdateSpline(qint64 id, const VSpline &spl){
-    splines[id] = spl;
-    if(id > _id){
-        _id = id;
-    }
+    UpdateObject(splines, id, spl);
 }
 
 void VContainer::UpdateSplinePath(qint64 id, const VSplinePath &splPath){
-    splinePaths[id] = splPath;
-    if(id > _id){
-        _id = id;
-    }
+    UpdateObject(splinePaths, id, splPath);
 }
 
 void VContainer::UpdateArc(qint64 id, const VArc &arc){
-    arcs[id] = arc;
-    if(id > _id){
-        _id = id;
-    }
+    UpdateObject(arcs, id, arc);
 }
 
 void VContainer::UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell){
@@ -100,6 +112,25 @@ void VContainer::UpdateStandartTableCell(const QString& name, const VStandartTab
 
 void VContainer::UpdateIncrementTableRow(const QString& name, const VIncrementTableRow& cell){
     incrementTable[name] = cell;
+}
+
+void VContainer::AddLengthSpline(const QString &name, const qreal &value){
+    Q_ASSERT(!name.isEmpty());
+    lengthSplines[name] = value;
+}
+
+void VContainer::AddLengthArc(const qint64 &center, const qint64 &id){
+    AddLengthArc(GetNameArc(center, id), GetArc(id).GetLength());
+}
+
+void VContainer::AddLengthArc(const QString &name, const qreal &value){
+    Q_ASSERT(!name.isEmpty());
+    lengthArcs[name] = value;
+}
+
+void VContainer::AddLineArc(const QString &name, const qint32 &value){
+    Q_ASSERT(!name.isEmpty());
+    lineArcs[name] = value;
 }
 
 qreal VContainer::GetValueStandartTableCell(const QString& name) const{
@@ -128,6 +159,7 @@ void VContainer::Clear(){
     arcs.clear();
     lengthArcs.clear();
     lineArcs.clear();
+    CreateManTableIGroup ();
 }
 
 void VContainer::ClearIncrementTable(){
@@ -232,29 +264,46 @@ const QMap<QString, qreal> *VContainer::DataLengthSplines() const{
     return &lengthSplines;
 }
 
+const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
+    return &lengthArcs;
+}
+
+const QMap<QString, qreal> *VContainer::DataLineArcs() const{
+    return &lineArcs;
+}
+
+const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
+    return &splinePaths;
+}
+
 void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId){
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     VPointF firstPoint = GetPoint(firstPointId);
     VPointF secondPoint = GetPoint(secondPointId);
-    AddLengthLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
+    AddLengthLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length()/PrintDPI*25.4);
+}
+
+template <typename key, typename val>
+qint64 VContainer::AddObject(QMap<key, val> &obj, const val& value){
+    qint64 id = getNextId();
+    obj[id] = value;
+    return id;
+}
+
+qint64 VContainer::AddPoint(const VPointF& point){
+    return AddObject(points, point);
 }
 
 qint64 VContainer::AddSpline(const VSpline &spl){
-    qint64 id = getNextId();
-    splines[id] = spl;
-    return id;
+    return AddObject(splines, spl);
 }
 
 qint64 VContainer::AddSplinePath(const VSplinePath &splPath){
-    qint64 id = getNextId();
-    splinePaths[id] = splPath;
-    return id;
+    return AddObject(splinePaths, splPath);
 }
 
 qint64 VContainer::AddArc(const VArc &arc){
-    qint64 id = getNextId();
-    arcs[id] = arc;
-    return id;
+    return AddObject(arcs, arc);
 }
 
 QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const{
@@ -307,86 +356,60 @@ void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secon
     AddLengthSpline(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length());
 }
 
-void VContainer::AddLengthSpline(const QString &name, const qreal &value){
-    Q_ASSERT(!name.isEmpty());
-    lengthSplines[name] = value;
-}
-
-void VContainer::AddLengthArc(const qint64 &center, const qint64 &id){
-    AddLengthArc(GetNameArc(center, id), GetArc(id).GetLength());
-}
-
-void VContainer::AddLengthArc(const QString &name, const qreal &value){
-    Q_ASSERT(!name.isEmpty());
-    lengthArcs[name] = value;
-}
-
-void VContainer::AddLineArc(const QString &name, const qint32 &value){
-    Q_ASSERT(!name.isEmpty());
-    lineArcs[name] = value;
-}
-
-qreal VContainer::GetLine(const QString &name) const{
-    Q_ASSERT(!name.isEmpty());
-    if(lengthLines.contains(name)){
-        return lengthLines.value(name);
-    } else {
-        qCritical()<<"Не можу знайти лінію за імям = "<<name<<" в таблиці.";
-        throw"Не можу знайти лінію в таблиці.";
-    }
-    return 0;
-}
-
-qint32 VContainer::GetLineArc(const QString &name) const{
-    Q_ASSERT(!name.isEmpty());
-    if(lineArcs.contains(name)){
-        return lineArcs.value(name);
-    } else {
-        qCritical()<<"Не можу знайти кут за імям = "<<name<<" в таблиці.";
-        throw"Не можу знайти кут в таблиці.";
-    }
-    return 0;
-}
-
-VSpline VContainer::GetSpline(qint64 id) const{
-    if(splines.contains(id)){
-        return splines.value(id);
-    } else {
-        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
-        throw"Не можу знайти сплайн за id.";
-    }
-    return VSpline();
-}
-
-VArc VContainer::GetArc(qint64 id) const{
-    if(arcs.contains(id)){
-        return arcs.value(id);
-    } else {
-        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
-        throw"Не можу знайти дугу за id.";
-    }
-    return VArc();
-}
-
-VSplinePath VContainer::GetSplinePath(qint64 id) const{
-    if(splinePaths.contains(id)){
-        return splinePaths.value(id);
-    } else {
-        qCritical()<<"Не можу знайти id = "<<id<<" в таблиці.";
-        throw"Не можу знайти дугу за id.";
-    }
-    return VSplinePath();
-}
-
-
-const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
-    return &lengthArcs;
-}
-
-const QMap<QString, qreal> *VContainer::DataLineArcs() const{
-    return &lineArcs;
-}
-
-const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
-    return &splinePaths;
+void VContainer::CreateManTableIGroup (){
+    AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
+    AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
+    AddStandartTableCell("Vtos", VStandartTableCell(1450, 2, 51));
+    AddStandartTableCell("Vtosh", VStandartTableCell(1506, 2, 54));
+    AddStandartTableCell("Vpt", VStandartTableCell(1438, 3, 52));
+    AddStandartTableCell("Vst", VStandartTableCell(1257, -1, 49));
+    AddStandartTableCell("Vlt", VStandartTableCell(1102, 0, 43));
+    AddStandartTableCell("Vk", VStandartTableCell(503, 0, 22));
+    AddStandartTableCell("Vsht", VStandartTableCell(1522, 2, 54));
+    AddStandartTableCell("Vzy", VStandartTableCell(1328, 0, 49));
+    AddStandartTableCell("Vlop", VStandartTableCell(1320, 0, 49));
+    AddStandartTableCell("Vps", VStandartTableCell(811, -1, 36));
+    AddStandartTableCell("Osh", VStandartTableCell(404,8, 2));
+    AddStandartTableCell("OgI", VStandartTableCell(1034, 36, 4));
+    AddStandartTableCell("OgII", VStandartTableCell(1044, 38, 2));
+    AddStandartTableCell("OgIII", VStandartTableCell(1000, 40, 0));
+    AddStandartTableCell("Ot", VStandartTableCell(780, 40, 0));
+    AddStandartTableCell("Ob", VStandartTableCell(984, 30, 10));
+    AddStandartTableCell("ObI", VStandartTableCell(964, 24, 12));
+    AddStandartTableCell("Obed", VStandartTableCell(566, 18, 6));
+    AddStandartTableCell("Ok", VStandartTableCell(386, 8, 8));
+    AddStandartTableCell("Oi", VStandartTableCell(380, 8, 6));
+    AddStandartTableCell("Osch", VStandartTableCell(234, 4, 4));
+    AddStandartTableCell("Os", VStandartTableCell(350, 2, 8));
+    AddStandartTableCell("Dsb", VStandartTableCell(1120, 0, 44));
+    AddStandartTableCell("Dsp", VStandartTableCell(1110, 0, 43));
+    AddStandartTableCell("Dn", VStandartTableCell(826, -3, 37));
+    AddStandartTableCell("Dps", VStandartTableCell(316, 4, 7));
+    AddStandartTableCell("Dpob", VStandartTableCell(783, 14, 15));
+    AddStandartTableCell("Ds", VStandartTableCell(260, 1, 6));
+    AddStandartTableCell("Op", VStandartTableCell(316, 12, 0));
+    AddStandartTableCell("Ozap", VStandartTableCell(180, 4, 0));
+    AddStandartTableCell("Pkis", VStandartTableCell(250, 4, 0));
+    AddStandartTableCell("SHp", VStandartTableCell(160, 1, 4));
+    AddStandartTableCell("Dlych", VStandartTableCell(500, 2, 15));
+    AddStandartTableCell("Dzap", VStandartTableCell(768, 2, 24));
+    AddStandartTableCell("DIIIp", VStandartTableCell(970, 2, 29));
+    AddStandartTableCell("Vprp", VStandartTableCell(214, 3, 3));
+    AddStandartTableCell("Vg", VStandartTableCell(262, 8, 3));
+    AddStandartTableCell("Dtp", VStandartTableCell(460, 7, 9));
+    AddStandartTableCell("Dp", VStandartTableCell(355, 5, 5));
+    AddStandartTableCell("Vprz", VStandartTableCell(208, 3, 5));
+    AddStandartTableCell("Dts", VStandartTableCell(438, 2, 10));
+    AddStandartTableCell("DtsI", VStandartTableCell(469, 2, 10));
+    AddStandartTableCell("Dvcht", VStandartTableCell(929, 9, 19));
+    AddStandartTableCell("SHg", VStandartTableCell(370, 14, 4));
+    AddStandartTableCell("Cg", VStandartTableCell(224, 6, 0));
+    AddStandartTableCell("SHs", VStandartTableCell(416, 10, 2));
+    AddStandartTableCell("dpzr", VStandartTableCell(121, 6, 0));
+    AddStandartTableCell("Ogol", VStandartTableCell(576, 4, 4));
+    AddStandartTableCell("Ssh1", VStandartTableCell(205, 5, 0));
+    AddStandartTableCell("St", VStandartTableCell(410, 20, 0));
+    AddStandartTableCell("Drzap", VStandartTableCell(594, 3, 19));
+    AddStandartTableCell("DbII", VStandartTableCell(1020, 0, 44));
+    AddStandartTableCell("Sb", VStandartTableCell(504, 15, 4));
 }

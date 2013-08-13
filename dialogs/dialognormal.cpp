@@ -91,10 +91,8 @@ void DialogNormal::DialogAccepted(){
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
     angle = ui->spinBoxAngle->value();
-    qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPointId = qvariant_cast<qint64>(ui->comboBoxFirstPoint->itemData(index));
-    index = ui->comboBoxSecondPoint->currentIndex();
-    secondPointId = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
+    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -102,18 +100,16 @@ qint64 DialogNormal::getSecondPointId() const{
     return secondPointId;
 }
 
-void DialogNormal::setSecondPointId(const qint64 &value){
-    secondPointId = value;
-    ChangeCurrentData(ui->comboBoxSecondPoint, value);
+void DialogNormal::setSecondPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 qint64 DialogNormal::getFirstPointId() const{
     return firstPointId;
 }
 
-void DialogNormal::setFirstPointId(const qint64 &value){
-    firstPointId = value;
-    ChangeCurrentData(ui->comboBoxFirstPoint, value);
+void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 qint32 DialogNormal::getAngle() const{

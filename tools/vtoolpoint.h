@@ -1,11 +1,13 @@
 #ifndef VTOOLPOINT_H
 #define VTOOLPOINT_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QGraphicsLineItem>
 #include <QGraphicsEllipseItem>
 #include "../widgets/vgraphicssimpletextitem.h"
-#include "../options.h"
 #include "vabstracttool.h"
+#pragma GCC diagnostic warning "-Weffc++"
+#include "../options.h"
 
 class VToolPoint: public VAbstractTool, public QGraphicsEllipseItem
 {

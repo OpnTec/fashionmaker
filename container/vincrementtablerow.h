@@ -7,13 +7,13 @@ class VIncrementTableRow
 {
 public:
     VIncrementTableRow();
-    VIncrementTableRow(qint64 id, qint32 base, qreal ksize, qreal kgrowth,
+    VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,
                         QString description = QString());
     qint64 getId() const;
     void setId(const qint64 &value);
 
-    qint32 getBase() const;
-    void setBase(const qint32 &value);
+    qreal getBase() const;
+    void setBase(const qreal &value);
 
     qreal getKsize() const;
     void setKsize(const qreal &value);
@@ -26,7 +26,7 @@ public:
 
 private:
     qint64 id;
-    qint32 base;
+    qreal base;
     qreal ksize;
     qreal kgrowth;
     QString description;

@@ -1,10 +1,12 @@
 #ifndef VABSTRACTTOOL_H
 #define VABSTRACTTOOL_H
 
-#include <QObject>
-
-#include "../container/vcontainer.h"
+#pragma GCC diagnostic ignored "-Weffc++"
+#include <QMenu>
 #include "../xml/vdomdocument.h"
+#include "vdatatool.h"
+#pragma GCC diagnostic warning "-Weffc++"
+#include "../container/vcontainer.h"
 
 namespace Tool{
     enum Enum
@@ -14,24 +16,24 @@ namespace Tool{
     };
 }
 
-class VAbstractTool:public QObject
+class VAbstractTool:public VDataTool
 {
     Q_OBJECT
 public:
-                 VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id);
+                 VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual      ~VAbstractTool();
+    virtual void setDialog();
 public slots:
     virtual void FullUpdateFromFile()=0;
     void         ChangedNameDraw(const QString oldName, const QString newName);
     virtual void ChangedActivDraw(const QString newName);
     virtual void FullUpdateFromGui(int result)=0;
 signals:
-    void         haveLiteChange();
+    void         toolhaveChange();
     void         ChoosedTool(qint64 id, Scene::Type type);
     void         FullUpdateTree();
 protected:
     VDomDocument *doc;
-    VContainer   *data;
     qint64       id;
     bool         ignoreContextMenuEvent;
     QString      nameActivDraw;
@@ -41,5 +43,28 @@ protected:
     void         AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     void         AddToCalculation(const QDomElement &domElement);
+    const VContainer *getData() const;
+    void         setData(const VContainer &value);
+    template <typename Dialog, typename Tool>
+    void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event){
+        if(!ignoreContextMenuEvent){
+            QMenu menu;
+            QAction *actionOption = menu.addAction("Властивості");
+            QAction *selectedAction = menu.exec(event->screenPos());
+            if(selectedAction == actionOption){
+                dialog = QSharedPointer<Dialog>(new Dialog(getData()));
+
+                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
+                        dialog.data(), &Dialog::ChoosedObject);
+                connect(dialog.data(), &Dialog::DialogClosed, tool,
+                        &Tool::FullUpdateFromGui);
+                connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+
+                tool->setDialog();
+
+                dialog->show();
+            }
+        }
+    }
 };
 #endif // VABSTRACTTOOL_H

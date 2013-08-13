@@ -13,7 +13,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    widgets/vmaingraphicsscene.cpp \
     dialogs/dialogsinglepoint.cpp \
     widgets/vgraphicssimpletextitem.cpp \
     xml/vdomdocument.cpp \
@@ -54,7 +53,10 @@ SOURCES += main.cpp\
     geometry/vsplinepoint.cpp \
     geometry/vsplinepath.cpp \
     tools/vtoolsplinepath.cpp \
-    dialogs/dialogsplinepath.cpp
+    dialogs/dialogsplinepath.cpp \
+    widgets/vmaingraphicsscene.cpp \
+    widgets/vmaingraphicsview.cpp \
+    tools/vdatatool.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -99,7 +101,9 @@ HEADERS  += mainwindow.h \
     geometry/vsplinepoint.h \
     geometry/vsplinepath.h \
     tools/vtoolsplinepath.h \
-    dialogs/dialogsplinepath.h
+    dialogs/dialogsplinepath.h \
+    widgets/vmaingraphicsview.h \
+    tools/vdatatool.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -121,7 +125,9 @@ RESOURCES += \
 
 CONFIG(debug, debug|release){
     # Debug
-    QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic -std=c++0x
+    QMAKE_CXXFLAGS += -O0 -isystem "/usr/include/qt5" -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual \
+                      -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Wsign-conversion \
+                      -Winit-self -Wunreachable-code -std=c++0x
 }else{
     # Release
     QMAKE_CXXFLAGS += -O1 -std=c++0x

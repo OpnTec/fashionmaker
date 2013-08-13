@@ -2,7 +2,9 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QVector>
+#pragma GCC diagnostic warning "-Weffc++"
 #include "vspline.h"
 
 namespace SplinePoint{

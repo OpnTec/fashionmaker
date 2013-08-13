@@ -1,16 +1,19 @@
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vabstracttool.h"
 #include <QDebug>
+#pragma GCC diagnostic pop
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id){
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
+    VDataTool(data, parent){
     this->doc = doc;
-    this->data = data;
+
     this->id = id;
     nameActivDraw = doc->GetNameActivDraw();
     ignoreContextMenuEvent = false;//don't ignore context menu events;
 
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VAbstractTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VAbstractTool::ChangedNameDraw);
-    connect(this, &VAbstractTool::haveLiteChange, this->doc, &VDomDocument::haveLiteChange);
+    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
 }
@@ -64,4 +67,15 @@ void VAbstractTool::AddToCalculation(const QDomElement &domElement){
     } else {
         qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
     }
+}
+
+const VContainer *VAbstractTool::getData()const{
+    return &data;
+}
+
+void VAbstractTool::setData(const VContainer &value){
+    data = value;
+}
+
+void VAbstractTool::setDialog(){
 }

@@ -1,7 +1,9 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vtoolpoint.h"
+#pragma GCC diagnostic warning "-Weffc++"
 
 class VToolLinePoint : public VToolPoint
 {

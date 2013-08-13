@@ -1,10 +1,11 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QSharedPointer>
-
 #include "vtoollinepoint.h"
 #include "../dialogs/dialogbisector.h"
+#pragma GCC diagnostic warning "-Weffc++"
 
 class VToolBisector : public VToolLinePoint
 {
@@ -14,6 +15,13 @@ public:
                   const qint64 &thirdPointId, Tool::Enum typeCreation, QGraphicsItem * parent = 0);
     static QPointF    FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                 const QPointF &thirdPoint, const qreal& length);
+    virtual void setDialog();
+    static void Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
+                       VContainer *data);
+    static void Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
+                       const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
+                       const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
+                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

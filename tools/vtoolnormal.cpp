@@ -13,6 +13,67 @@ VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, 
 
 }
 
+void VToolNormal::setDialog(){
+    Q_ASSERT(!dialogNormal.isNull());
+    if(!dialogNormal.isNull()){
+        VPointF p = VAbstractTool::data.GetPoint(id);
+        dialogNormal->setTypeLine(typeLine);
+        dialogNormal->setFormula(formula);
+        dialogNormal->setAngle(angle);
+        dialogNormal->setFirstPointId(basePointId, id);
+        dialogNormal->setSecondPointId(secondPointId, id);
+        dialogNormal->setPointName(p.name());
+    }
+}
+
+void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+                         VContainer *data){
+    QString formula = dialog->getFormula();
+    qint64 firstPointId = dialog->getFirstPointId();
+    qint64 secondPointId = dialog->getSecondPointId();
+    QString typeLine = dialog->getTypeLine();
+    QString pointName = dialog->getPointName();
+    qint32 angle = dialog->getAngle();
+    Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
+           Document::FullParse, Tool::FromGui);
+}
+
+void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
+                         const qint64 &secondPointId, const QString typeLine, const QString pointName,
+                         const qint32 angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                         VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+    VPointF firstPoint = data->GetPoint(firstPointId);
+    VPointF secondPoint = data->GetPoint(secondPointId);
+    Calculator cal(data);
+    QString errorMsg;
+    qreal result = cal.eval(formula, &errorMsg);
+    if(errorMsg.isEmpty()){
+        QPointF fPoint = VToolNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                result*PrintDPI/25.4, angle);
+        qint64 id = _id;
+        if(typeCreation == Tool::FromGui){
+            id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        } else {
+            data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            if(parse != Document::FullParse){
+                QMap<qint64, VDataTool*>* tools = doc->getTools();
+                VDataTool *tool = tools->value(id);
+                tool->VDataTool::setData(data);
+                tools->insert(id, tool);
+            }
+        }
+        data->AddLine(firstPointId, id);
+        if(parse == Document::FullParse){
+            VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
+                                                 firstPointId, secondPointId, typeCreation);
+            scene->addItem(point);
+            connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            QMap<qint64, VDataTool*>* tools = doc->getTools();
+            tools->insert(id,point);
+        }
+    }
+}
+
 QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                                const qint32 &angle){
     QLineF line(firstPoint, secondPoint);
@@ -51,35 +112,11 @@ void VToolNormal::FullUpdateFromGui(int result){
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    if(!ignoreContextMenuEvent){
-        QMenu menu;
-        QAction *actionOption = menu.addAction("Властивості");
-        QAction *selectedAction = menu.exec(event->screenPos());
-        if(selectedAction == actionOption){
-            dialogNormal = QSharedPointer<DialogNormal>(new DialogNormal(VAbstractTool::data));
-
-            connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogNormal.data(), &DialogNormal::ChoosedObject);
-            connect(dialogNormal.data(), &DialogNormal::DialogClosed, this,
-                    &VToolNormal::FullUpdateFromGui);
-            connect(doc, &VDomDocument::FullUpdateFromFile, dialogNormal.data(), &DialogNormal::UpdateList);
-
-            VPointF p = VAbstractTool::data->GetPoint(id);
-
-            dialogNormal->setTypeLine(typeLine);
-            dialogNormal->setFormula(formula);
-            dialogNormal->setAngle(angle);
-            dialogNormal->setFirstPointId(basePointId);
-            dialogNormal->setSecondPointId(secondPointId);
-            dialogNormal->setPointName(p.name());
-
-            dialogNormal->show();
-        }
-    }
+    ContextMenu(dialogNormal, this, event);
 }
 
 void VToolNormal::AddToFile(){
-    VPointF point = VAbstractTool::data->GetPoint(id);
+    VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -95,4 +132,5 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+    emit toolhaveChange();
 }

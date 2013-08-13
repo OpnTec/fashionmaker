@@ -3,27 +3,38 @@
 #include "varc.h"
 #include <QDebug>
 
-VArc::VArc (){
-    f1     = 0;
-    formulaF1 = QString();
-    f2     = 0;
-    formulaF2 = QString();
-    radius = 0;
-    formulaRadius = QString();
-    center = 0;
-    points = 0;
+VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
+    center(0), points(0){
 }
 
 VArc::VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-            qreal f1, QString formulaF1, qreal f2, QString formulaF2 ){
-    this->points = points;
-    this->f1 = f1;
-    this->formulaF1 = formulaF1;
-    this->f2 = f2;
-    this->formulaF2 = formulaF2;
-    this->radius = radius;
-    this->formulaRadius = formulaRadius;
-    this->center = center;
+            qreal f1, QString formulaF1, qreal f2, QString formulaF2 )
+    : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
+      center(center), points(points){
+}
+
+VArc::VArc(const VArc &arc): f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
+    formulaRadius(QString()), center(0), points(0){
+    this->points = arc.GetDataPoints();
+    this->f1 = arc.GetF1();
+    this->formulaF1 = arc.GetFormulaF1();
+    this->f2 = arc.GetF2();
+    this->formulaF2 = arc.GetFormulaF2();
+    this->radius = arc.GetRadius();
+    this->formulaRadius = arc.GetFormulaRadius();
+    this->center = arc.GetCenter();
+}
+
+const VArc &VArc::operator =(const VArc &arc){
+    this->points = arc.GetDataPoints();
+    this->f1 = arc.GetF1();
+    this->formulaF1 = arc.GetFormulaF1();
+    this->f2 = arc.GetF2();
+    this->formulaF2 = arc.GetFormulaF2();
+    this->radius = arc.GetRadius();
+    this->formulaRadius = arc.GetFormulaRadius();
+    this->center = arc.GetCenter();
+    return *this;
 }
 
 qreal VArc::GetF1() const{
@@ -60,7 +71,7 @@ qint64 VArc::GetCenter() const{
 
 QPointF VArc::GetCenterPoint() const{
     if(points->contains(center)){
-        return points->value(center);
+        return points->value(center).toQPointF();
     } else {
         qCritical()<<"Не можу знайти id = "<<center<<" в таблиці.";
         throw"Не можу знайти точку за id.";

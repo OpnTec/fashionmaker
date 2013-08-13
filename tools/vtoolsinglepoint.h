@@ -15,11 +15,13 @@ public:
 public slots:
     virtual void            FullUpdateFromFile();
     virtual void            FullUpdateFromGui(int result);
+    virtual void            ChangedActivDraw(const QString newName);
 signals:
     void                    FullUpdateTree();
 protected:
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void            AddToFile();
+    QVariant                itemChange ( GraphicsItemChange change, const QVariant &value );
 private:
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };

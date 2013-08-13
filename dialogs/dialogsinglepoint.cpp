@@ -1,9 +1,10 @@
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
 #include <QShowEvent>
 #include <QPushButton>
 #include <QDebug>
-
+#pragma GCC diagnostic warning "-Weffc++"
 #include "../options.h"
 
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :

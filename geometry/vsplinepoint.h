@@ -1,8 +1,10 @@
 #ifndef VSPLINEPOINT_H
 #define VSPLINEPOINT_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "QtGlobal"
 #include <QMetaType>
+#pragma GCC diagnostic pop
 
 /**
  * @brief The VSplinePoint клас, що містить у собі інформацію про точки сплайну.

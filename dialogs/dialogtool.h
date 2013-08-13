@@ -1,6 +1,7 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QDialog>
 #include <QComboBox>
 #include <QSpinBox>
@@ -10,6 +11,7 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QTimer>
+#pragma GCC diagnostic warning "-Weffc++"
 #include "../container/vcontainer.h"
 #include "../options.h"
 
@@ -62,17 +64,19 @@ protected:
     QRadioButton     *radioButtonLengthLine;
     void             closeEvent ( QCloseEvent * event );
     void             showEvent( QShowEvent *event );
-    void             FillComboBoxPoints(QComboBox *box)const;
+    void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
     template <class key, class val> void ShowVariable(const QMap<key, val> *var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
     void             ChangeCurrentText(QComboBox *box, const QString &value);
-    void             ChangeCurrentData(QComboBox *box, const qint64 &value);
+    void             ChangeCurrentData(QComboBox *box, const qint64 &value) const;
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
+    void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
+    qint64           getCurrentPointId(QComboBox *box) const;
 };
 
 #endif // DIALOGTOOL_H

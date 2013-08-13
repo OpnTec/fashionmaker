@@ -81,12 +81,9 @@ void DialogShoulderPoint::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    qint32 index = ui->comboBoxP1Line->currentIndex();
-    p1Line = qvariant_cast<qint64>(ui->comboBoxP1Line->itemData(index));
-    index = ui->comboBoxP2Line->currentIndex();
-    p2Line = qvariant_cast<qint64>(ui->comboBoxP2Line->itemData(index));
-    index = ui->comboBoxPShoulder->currentIndex();
-    pShoulder = qvariant_cast<qint64>(ui->comboBoxPShoulder->itemData(index));
+    p1Line = getCurrentPointId(ui->comboBoxP1Line);
+    p2Line = getCurrentPointId(ui->comboBoxP2Line);
+    pShoulder = getCurrentPointId(ui->comboBoxPShoulder);
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -94,28 +91,24 @@ qint64 DialogShoulderPoint::getPShoulder() const{
     return pShoulder;
 }
 
-void DialogShoulderPoint::setPShoulder(const qint64 &value){
-    pShoulder = value;
-    ChangeCurrentData(ui->comboBoxPShoulder, value);
+void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
 qint64 DialogShoulderPoint::getP2Line() const{
     return p2Line;
 }
 
-void DialogShoulderPoint::setP2Line(const qint64 &value){
-    p2Line = value;
-    ChangeCurrentData(ui->comboBoxP2Line, value);
+void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
 qint64 DialogShoulderPoint::getP1Line() const{
     return p1Line;
 }
 
-void DialogShoulderPoint::setP1Line(const qint64 &value)
-{
-    p1Line = value;
-    ChangeCurrentData(ui->comboBoxP1Line, value);
+void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
 
 QString DialogShoulderPoint::getFormula() const{

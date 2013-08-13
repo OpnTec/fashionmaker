@@ -107,9 +107,8 @@ qint64 DialogEndLine::getBasePointId() const{
     return basePointId;
 }
 
-void DialogEndLine::setBasePointId(const qint64 &value){
-    basePointId = value;
-    ChangeCurrentData(ui->comboBoxBasePoint, value);
+void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
 void DialogEndLine::DialogAccepted(){
@@ -117,8 +116,7 @@ void DialogEndLine::DialogAccepted(){
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
     angle = ui->spinBoxAngle->value();
-    qint32 index = ui->comboBoxBasePoint->currentIndex();
-    basePointId = qvariant_cast<qint64>(ui->comboBoxBasePoint->itemData(index));
+    basePointId = getCurrentPointId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

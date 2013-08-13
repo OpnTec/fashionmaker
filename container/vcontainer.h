@@ -1,11 +1,13 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QMap>
 #include <QTableWidget>
 #include "vpointf.h"
 #include "vstandarttablecell.h"
 #include "vincrementtablerow.h"
+#pragma GCC diagnostic warning "-Weffc++"
 #include "../geometry/vspline.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
@@ -85,6 +87,7 @@ public:
     const QMap<QString, qreal> *DataLengthArcs() const;
     const QMap<QString, qreal> *DataLineArcs() const;
     const QMap<qint64, VSplinePath> *DataSplinePaths() const;
+    void  UpdateId(qint64 newId);
 private:
     qint64              _id;
     QMap<QString, qint32> base;
@@ -98,6 +101,10 @@ private:
     QMap<qint64, VArc> arcs;
     QMap<QString, qreal> lengthArcs;
     QMap<qint64, VSplinePath> splinePaths;
+    template <typename key, typename val> val GetObject(const QMap<key,val> &obj, key id) const;
+    template <typename val> void UpdateObject(QMap<qint64, val> &obj, const qint64 &id, const val& point);
+    template <typename key, typename val> qint64 AddObject(QMap<key, val> &obj, const val& value);
+    void CreateManTableIGroup ();
 };
 
 #endif // VCONTAINER_H

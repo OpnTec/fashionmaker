@@ -29,9 +29,9 @@ public:
     qint32           getAngle() const;
     void             setAngle(const qint32 &value);
     qint64           getFirstPointId() const;
-    void             setFirstPointId(const qint64 &value);
+    void             setFirstPointId(const qint64 &value, const qint64 &id);
     qint64           getSecondPointId() const;
-    void             setSecondPointId(const qint64 &value);
+    void             setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Type type);
     virtual void     DialogAccepted();

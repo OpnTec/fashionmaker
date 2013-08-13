@@ -38,8 +38,8 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Type type){
                 number = 0;
                 index = ui->comboBoxP1->currentIndex();
                 qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
-                QPointF p1 = data->GetPoint(p1Id);
-                QPointF p4 = data->GetPoint(id);
+                QPointF p1 = data->GetPoint(p1Id).toQPointF();
+                QPointF p4 = data->GetPoint(id).toQPointF();
                 ui->spinBoxAngle1->setValue(QLineF(p1, p4).angle());
                 ui->spinBoxAngle2->setValue(QLineF(p4, p1).angle());
             }
@@ -51,10 +51,8 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Type type){
 }
 
 void DialogSpline::DialogAccepted(){
-    qint32 index = ui->comboBoxP1->currentIndex();
-    p1 = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
-    index = ui->comboBoxP4->currentIndex();
-    p4 = qvariant_cast<qint64>(ui->comboBoxP4->itemData(index));
+    p1 = getCurrentPointId(ui->comboBoxP1);
+    p4 = getCurrentPointId(ui->comboBoxP4);
     angle1 = ui->spinBoxAngle1->value();
     angle2 = ui->spinBoxAngle2->value();
     kAsm1 = ui->doubleSpinBoxKasm1->value();

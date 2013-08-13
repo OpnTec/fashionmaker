@@ -57,8 +57,8 @@ void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
 //    if ( angle > 180 ){
 //        angle = 360 - angle;
 //    }
-    QPointF point1 = GetPointP1();
-    QPointF point4 = GetPointP4();
+    QPointF point1 = GetPointP1().toQPointF();
+    QPointF point4 = GetPointP4().toQPointF();
     radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
 //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
@@ -75,8 +75,8 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
     this->p2 = p2;
     this->p3 = p3;
     this->p4 = p4;
-    this->angle1 = QLineF ( GetPointP1(), p2 ).angle();
-    this->angle2 = QLineF ( GetPointP4(), p3 ).angle();
+    this->angle1 = QLineF ( GetPointP1().toQPointF(), p2 ).angle();
+    this->angle2 = QLineF ( GetPointP4().toQPointF(), p3 ).angle();
 
     QLineF p1pX(GetPointP1().x(), GetPointP1().y(), GetPointP1().x() + 100, GetPointP1().y());
     p1pX.setAngle( angle1 );
@@ -85,15 +85,15 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
 //    if ( angle >= 180 ){
 //        angle = 360 - angle;
 //    }
-    QPointF point1 = GetPointP1();
-    QPointF point4 = GetPointP4();
+    QPointF point1 = GetPointP1().toQPointF();
+    QPointF point4 = GetPointP4().toQPointF();
     radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
 //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
 
     this->kCurve = kCurve;
-    this->kAsm1 = QLineF ( GetPointP1(), p2 ).length()/L;
-    this->kAsm2 = QLineF ( GetPointP4(), p3 ).length()/L;
+    this->kAsm1 = QLineF ( GetPointP1().toQPointF(), p2 ).length()/L;
+    this->kAsm2 = QLineF ( GetPointP4().toQPointF(), p3 ).length()/L;
 }
 
 //void VSpline::RotationSpl (QPointF pRotate, qreal angle ){
@@ -165,7 +165,7 @@ qreal VSpline::GetAngle2 () const{
 }
 
 qreal VSpline::GetLength () const{
-    return LengthBezier ( GetPointP1(), this->p2, this->p3, GetPointP4());
+    return LengthBezier ( GetPointP1().toQPointF(), this->p2, this->p3, GetPointP4().toQPointF());
 }
 
 QString VSpline::GetName() const{
@@ -274,7 +274,7 @@ void VSpline::PutAlongSpl (QPointF &moveP, qreal move ) const{
 }
 
 QVector<QPointF> VSpline::GetPoints () const{
-    return GetPoints(GetPointP1(), p2, p3, GetPointP4());
+    return GetPoints(GetPointP1().toQPointF(), p2, p3, GetPointP4().toQPointF());
 }
 
 QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4) const{

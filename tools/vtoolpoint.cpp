@@ -13,43 +13,35 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
     radius = 1.5*PrintDPI/25.4;
     //create circle
     VPointF point = data->GetPoint(id);
-    QRectF rec = QRectF(point.x(), point.y(), radius*2, radius*2);
-    rec.translate(point.x()-rec.center().x(), point.y()-rec.center().y());
+    QRectF rec = QRectF(0, 0, radius*2, radius*2);
+    rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
     this->setPen(QPen(Qt::black, widthHairLine));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
+    this->setPos(point.toQPointF());
 
     //Тексто мітка точки
     namePoint = new VGraphicsSimpleTextItem(point.name(), this);
     rec = this->rect();
-    namePoint->setPos(QPointF(rec.center().x()+point.mx(), rec.center().y()+point.my()));
+    namePoint->setPos(QPointF(point.mx(), point.my()));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VToolPoint::NameChangePosition);
 
     //Лінія, що з'єднує точку і мітку
-    QRectF nameRec = namePoint->sceneBoundingRect();
-    QPointF p1, p2;
-    LineIntersectCircle(rec.center(), radius, QLineF(rec.center(), nameRec.center()), p1, p2);
-    QPointF pRec = LineIntersectRect(nameRec, QLineF(rec.center(), nameRec.center()));
-    lineName = new QGraphicsLineItem(QLineF(p1, pRec), this);
-    lineName->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(QLineF(p1, pRec).length() <= 4*PrintDPI/25.4){
-        lineName->setVisible(false);
-    } else {
-        lineName->setVisible(true);
-    }
+    lineName = new QGraphicsLineItem(this);
+    RefreshLine();
 }
 
 void VToolPoint::NameChangePosition(const QPointF pos){
-    VPointF point = VAbstractTool::data->GetPoint(id);
-    QRectF rec = this->rect();
-    point.setMx(pos.x() - rec.center().x());
-    point.setMy(pos.y() - rec.center().y());
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QPointF p = pos - this->pos();
+    point.setMx(p.x());
+    point.setMy(p.y());
     RefreshLine();
     LiteUpdateFromGui(point.mx(), point.my());
-    VAbstractTool::data->UpdatePoint(id, point);
+    VAbstractTool::data.UpdatePoint(id, point);
 }
 
 QPointF VToolPoint::LineIntersectRect(QRectF rec, QLineF line) const{
@@ -79,11 +71,10 @@ QPointF VToolPoint::LineIntersectRect(QRectF rec, QLineF line) const{
 void VToolPoint::RefreshLine(){
     QRectF nameRec = namePoint->sceneBoundingRect();
     QPointF p1, p2;
-    QRectF rec = this->rect();
-    LineIntersectCircle(rec.center(), radius, QLineF(rec.center(), nameRec.center()), p1, p2);
-    QPointF pRec = LineIntersectRect(nameRec, QLineF(rec.center(), nameRec.center()));
-    lineName->setLine(QLineF(p1, pRec));
-    if(QLineF(p1, pRec).length() <= 4*PrintDPI/25.4){
+    LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- pos()), p1, p2);
+    QPointF pRec = LineIntersectRect(nameRec, QLineF(pos(), nameRec.center()));
+    lineName->setLine(QLineF(p1, pRec - pos()));
+    if(QLineF(p1, pRec - pos()).length() <= 4*PrintDPI/25.4){
         lineName->setVisible(false);
     } else {
         lineName->setVisible(true);
@@ -148,7 +139,7 @@ void VToolPoint::LiteUpdateFromGui(qreal mx, qreal my){
     if(domElement.isElement()){
         domElement.setAttribute("mx", QString().setNum(mx/PrintDPI*25.4));
         domElement.setAttribute("my", QString().setNum(my/PrintDPI*25.4));
-        emit haveLiteChange();
+        emit toolhaveChange();
     }
 }
 
@@ -179,14 +170,17 @@ void VToolPoint::ChangedActivDraw(const QString newName){
 }
 
 void VToolPoint::RefreshGeometry(){
-    VPointF point = VAbstractTool::data->GetPoint(id);
-    QRectF rec = QRectF(point.x(), point.y(), radius*2, radius*2);
-    rec.translate(point.x()-rec.center().x(), point.y()-rec.center().y());
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QRectF rec = QRectF(0, 0, radius*2, radius*2);
+    rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-
-    rec = this->rect();
+    this->setPos(point.toQPointF());
+    disconnect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
+               &VToolPoint::NameChangePosition);
     namePoint->setText(point.name());
-    namePoint->setPos(QPointF(rec.center().x()+point.mx(), rec.center().y()+point.my()));
+    namePoint->setPos(QPointF(point.mx(), point.my()));
+    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
+            &VToolPoint::NameChangePosition);
 
     RefreshLine();
 }

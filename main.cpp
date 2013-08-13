@@ -1,6 +1,8 @@
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTextCodec>
+#pragma GCC diagnostic warning "-Weffc++"
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg){
     QByteArray localMsg = msg.toLocal8Bit();

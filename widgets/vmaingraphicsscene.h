@@ -2,6 +2,7 @@
 #define VMAINGRAPHICSSCENE_H
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
 
 #include "../options.h"
@@ -14,7 +15,7 @@ public:
     VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
 public slots:
     void ChoosedItem(qint64 id, Scene::Type type);
-private:
+protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 signals:

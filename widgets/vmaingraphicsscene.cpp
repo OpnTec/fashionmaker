@@ -1,14 +1,13 @@
 #include "vmaingraphicsscene.h"
 #include <QDebug>
+#include <QApplication>
+#include <QScrollBar>
 
-
-VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene()
-{
+VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(){
 }
 
 
-VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent):QGraphicsScene ( sceneRect, parent )
-{
+VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent):QGraphicsScene ( sceneRect, parent ){
 }
 
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event){

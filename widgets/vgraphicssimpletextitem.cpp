@@ -14,15 +14,15 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
 QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value){
      if (change == ItemPositionChange && scene()) {
          // value - это новое положение.
-         QPointF newPos = value.toPointF();
-         QRectF rect = scene()->sceneRect();
-         if (!rect.contains(newPos)) {
-             // Сохраняем элемент внутри прямоугольника сцены.
-             newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
-             newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
-             emit NameChangePosition(newPos);
-             return newPos;
-         }
+         QPointF newPos = value.toPointF() + this->parentItem()->pos();
+//         QRectF rect = scene()->sceneRect();
+//         if (!rect.contains(newPos)) {
+//             // Сохраняем элемент внутри прямоугольника сцены.
+//             newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
+//             newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
+//             emit NameChangePosition(newPos - this->parentItem()->pos());
+//             return newPos - this->parentItem()->pos();
+//         }
          emit NameChangePosition(newPos);
      }
      return QGraphicsItem::itemChange(change, value);

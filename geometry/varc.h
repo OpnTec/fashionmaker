@@ -24,6 +24,8 @@ public:
                   */
                  VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
                        qreal f1, QString formulaF1, qreal f2 , QString formulaF2);
+                 VArc(const VArc &arc);
+                 const VArc& operator= (const VArc &arc);
     /**
      * @brief GetF1 повертає початковий кут дуги.
      * @return повертає кут в градусах.

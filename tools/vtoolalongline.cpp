@@ -44,35 +44,11 @@ void VToolAlongLine::FullUpdateFromGui(int result){
 }
 
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    if(!ignoreContextMenuEvent){
-        QMenu menu;
-        QAction *actionOption = menu.addAction("Властивості");
-        QAction *selectedAction = menu.exec(event->screenPos());
-        if(selectedAction == actionOption){
-            dialogAlongLine = QSharedPointer<DialogAlongLine>(new DialogAlongLine(VAbstractTool::data));
-
-            connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                    dialogAlongLine.data(), &DialogAlongLine::ChoosedObject);
-            connect(dialogAlongLine.data(), &DialogAlongLine::DialogClosed, this,
-                    &VToolAlongLine::FullUpdateFromGui);
-            connect(doc, &VDomDocument::FullUpdateFromFile, dialogAlongLine.data(),
-                    &DialogAlongLine::UpdateList);
-
-            VPointF p = VAbstractTool::data->GetPoint(id);
-
-            dialogAlongLine->setTypeLine(typeLine);
-            dialogAlongLine->setFormula(formula);
-            dialogAlongLine->setFirstPointId(basePointId);
-            dialogAlongLine->setSecondPointId(secondPointId);
-            dialogAlongLine->setPointName(p.name());
-
-            dialogAlongLine->show();
-        }
-    }
+    ContextMenu(dialogAlongLine, this, event);
 }
 
 void VToolAlongLine::AddToFile(){
-    VPointF point = VAbstractTool::data->GetPoint(id);
+    VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -87,4 +63,65 @@ void VToolAlongLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+    emit toolhaveChange();
+}
+
+void VToolAlongLine::setDialog(){
+    Q_ASSERT(!dialogAlongLine.isNull());
+    if(!dialogAlongLine.isNull()){
+        VPointF p = VAbstractTool::data.GetPoint(id);
+        dialogAlongLine->setTypeLine(typeLine);
+        dialogAlongLine->setFormula(formula);
+        dialogAlongLine->setFirstPointId(basePointId, id);
+        dialogAlongLine->setSecondPointId(secondPointId, id);
+        dialogAlongLine->setPointName(p.name());
+    }
+}
+
+void VToolAlongLine::Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene *scene,
+                            VDomDocument *doc, VContainer *data){
+    QString formula = dialog->getFormula();
+    qint64 firstPointId = dialog->getFirstPointId();
+    qint64 secondPointId = dialog->getSecondPointId();
+    QString typeLine = dialog->getTypeLine();
+    QString pointName = dialog->getPointName();
+    Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
+           Document::FullParse, Tool::FromGui);
+}
+
+void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
+                            const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
+                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
+                            VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+    VPointF firstPoint = data->GetPoint(firstPointId);
+    VPointF secondPoint = data->GetPoint(secondPointId);
+    QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
+    Calculator cal(data);
+    QString errorMsg;
+    qreal result = cal.eval(formula, &errorMsg);
+    if(errorMsg.isEmpty()){
+        line.setLength(result*PrintDPI/25.4);
+        qint64 id = _id;
+        if(typeCreation == Tool::FromGui){
+            id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        } else {
+            data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            if(parse != Document::FullParse){
+                QMap<qint64, VDataTool*>* tools = doc->getTools();
+                VDataTool *tool = tools->value(id);
+                tool->VDataTool::setData(data);
+                tools->insert(id, tool);
+            }
+        }
+        data->AddLine(firstPointId, id);
+        data->AddLine(id, secondPointId);
+        if(parse == Document::FullParse){
+            VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,
+                                                       secondPointId, typeLine, typeCreation);
+            scene->addItem(point);
+            connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            QMap<qint64, VDataTool*>* tools = doc->getTools();
+            tools->insert(id,point);
+        }
+    }
 }

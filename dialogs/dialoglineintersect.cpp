@@ -85,14 +85,10 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Type type){
 
 void DialogLineIntersect::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
-    qint32 index = ui->comboBoxP1Line1->currentIndex();
-    p1Line1 = qvariant_cast<qint64>(ui->comboBoxP1Line1->itemData(index));
-    index = ui->comboBoxP2Line1->currentIndex();
-    p2Line1 = qvariant_cast<qint64>(ui->comboBoxP2Line1->itemData(index));
-    index = ui->comboBoxP1Line2->currentIndex();
-    p1Line2 = qvariant_cast<qint64>(ui->comboBoxP1Line2->itemData(index));
-    index = ui->comboBoxP2Line2->currentIndex();
-    p2Line2 = qvariant_cast<qint64>(ui->comboBoxP2Line2->itemData(index));
+    p1Line1 = getCurrentPointId(ui->comboBoxP1Line1);
+    p2Line1 = getCurrentPointId(ui->comboBoxP2Line1);
+    p1Line2 = getCurrentPointId(ui->comboBoxP1Line2);
+    p2Line2 = getCurrentPointId(ui->comboBoxP2Line2);
     emit DialogClosed(QDialog::Accepted);
 }
 

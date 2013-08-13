@@ -107,38 +107,32 @@ qint64 DialogBisector::getFirstPointId() const{
     return firstPointId;
 }
 
-void DialogBisector::setFirstPointId(const qint64 &value){
-    firstPointId = value;
-    ChangeCurrentData(ui->comboBoxFirstPoint, value);
+void DialogBisector::setFirstPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 qint64 DialogBisector::getSecondPointId() const{
     return secondPointId;
 }
 
-void DialogBisector::setSecondPointId(const qint64 &value){
-    secondPointId = value;
-    ChangeCurrentData(ui->comboBoxSecondPoint, value);
+void DialogBisector::setSecondPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 qint64 DialogBisector::getThirdPointId() const{
     return thirdPointId;
 }
 
-void DialogBisector::setThirdPointId(const qint64 &value){
-    thirdPointId = value;
-    ChangeCurrentData(ui->comboBoxThirdPoint, value);
+void DialogBisector::setThirdPointId(const qint64 &value, const qint64 &id){
+    setCurrentPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
 }
 
 void DialogBisector::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPointId = qvariant_cast<qint64>(ui->comboBoxFirstPoint->itemData(index));
-    index = ui->comboBoxSecondPoint->currentIndex();
-    secondPointId = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
-    index = ui->comboBoxThirdPoint->currentIndex();
-    thirdPointId = qvariant_cast<qint64>(ui->comboBoxThirdPoint->itemData(index));
+    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
+    thirdPointId = getCurrentPointId(ui->comboBoxThirdPoint);
     emit DialogClosed(QDialog::Accepted);
 }

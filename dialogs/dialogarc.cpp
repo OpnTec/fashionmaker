@@ -60,7 +60,7 @@ qint64 DialogArc::GetCenter() const{
     return center;
 }
 
-void DialogArc::GetCenter(const qint64 &value){
+void DialogArc::SetCenter(const qint64 &value){
     center = value;
     ChangeCurrentData(ui->comboBoxBasePoint, center);
 }
@@ -69,7 +69,7 @@ QString DialogArc::GetF2() const{
     return f2;
 }
 
-void DialogArc::GetF2(const QString &value){
+void DialogArc::SetF2(const QString &value){
     f2 = value;
     ui->lineEditF2->setText(f2);
 }
@@ -78,7 +78,7 @@ QString DialogArc::GetF1() const{
     return f1;
 }
 
-void DialogArc::GetF1(const QString &value){
+void DialogArc::SetF1(const QString &value){
     f1 = value;
     ui->lineEditF1->setText(f1);
 }
@@ -87,7 +87,7 @@ QString DialogArc::GetRadius() const{
     return radius;
 }
 
-void DialogArc::GetRadius(const QString &value){
+void DialogArc::SetRadius(const QString &value){
     radius = value;
     ui->lineEditRadius->setText(radius);
 }
@@ -108,8 +108,7 @@ void DialogArc::DialogAccepted(){
     radius = ui->lineEditRadius->text();
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
-    qint32 index = ui->comboBoxBasePoint->currentIndex();
-    center = qvariant_cast<qint64>(ui->comboBoxBasePoint->itemData(index));
+    center = getCurrentPointId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }
 
