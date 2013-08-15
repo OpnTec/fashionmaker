@@ -67,6 +67,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         data->AddLine(id, p2Line1Id);
         data->AddLine(p1Line2Id, id);
         data->AddLine(id, p2Line2Id);
+        VAbstractTool::AddRecord(id, Tools::LineIntersectTool, doc);
         if(parse == Document::FullParse){
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
                                                                p2Line1Id, p1Line2Id,
@@ -126,5 +127,4 @@ void VToolLineIntersect::AddToFile(){
     AddAttribute(domElement, "p2Line2", p2Line2);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }

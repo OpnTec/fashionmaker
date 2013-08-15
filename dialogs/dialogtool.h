@@ -62,8 +62,8 @@ protected:
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
-    void             closeEvent ( QCloseEvent * event );
-    void             showEvent( QShowEvent *event );
+    virtual void     closeEvent ( QCloseEvent * event );
+    virtual void     showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();

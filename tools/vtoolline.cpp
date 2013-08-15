@@ -43,6 +43,7 @@ void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 
         tool->VDataTool::setData(data);
         tools->insert(id, tool);
     }
+    VAbstractTool::AddRecord(id, Tools::LineTool, doc);
     if(parse == Document::FullParse){
         qint64 id = data->getNextId();
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
@@ -76,6 +77,18 @@ void VToolLine::FullUpdateFromGui(int result){
     dialogLine.clear();
 }
 
+void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+    if(id == this->id){
+        if(enable == false){
+            this->setPen(QPen(baseColor, widthHairLine));
+            currentColor = baseColor;
+        } else {
+            this->setPen(QPen(color, widthHairLine));
+            currentColor = color;
+        }
+    }
+}
+
 void VToolLine::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
         this->setPen(QPen(Qt::black, widthHairLine));
@@ -100,16 +113,15 @@ void VToolLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPoint);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine));
 }
 
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine));
 }
 

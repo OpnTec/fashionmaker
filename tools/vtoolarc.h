@@ -24,6 +24,7 @@ public slots:
     virtual void                 FullUpdateFromFile();
     virtual void                 FullUpdateFromGui(int result);
     virtual void                 ChangedActivDraw(const QString newName);
+    virtual void                 ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
 protected:
     virtual void                 contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void                 AddToFile();

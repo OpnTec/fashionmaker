@@ -169,6 +169,18 @@ void VToolPoint::ChangedActivDraw(const QString newName){
     }
 }
 
+void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+    if(id == this->id){
+        if(enable == false){
+            this->setPen(QPen(baseColor, widthHairLine));
+            currentColor = baseColor;
+        } else {
+            this->setPen(QPen(color, widthHairLine));
+            currentColor = color;
+        }
+    }
+}
+
 void VToolPoint::RefreshGeometry(){
     VPointF point = VAbstractTool::data.GetPoint(id);
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
@@ -194,12 +206,12 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine));
 }
 
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine));
 }
 
 VToolPoint::~VToolPoint(){

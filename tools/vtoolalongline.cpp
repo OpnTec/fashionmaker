@@ -63,7 +63,6 @@ void VToolAlongLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 void VToolAlongLine::setDialog(){
@@ -113,6 +112,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
                 tools->insert(id, tool);
             }
         }
+        VAbstractTool::AddRecord(id, Tools::AlongLineTool, doc);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
         if(parse == Document::FullParse){
@@ -122,6 +122,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
             connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);
+
         }
     }
 }

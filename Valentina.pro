@@ -56,7 +56,9 @@ SOURCES += main.cpp\
     dialogs/dialogsplinepath.cpp \
     widgets/vmaingraphicsscene.cpp \
     widgets/vmaingraphicsview.cpp \
-    tools/vdatatool.cpp
+    tools/vdatatool.cpp \
+    xml/vtoolrecord.cpp \
+    dialogs/dialoghistory.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -103,7 +105,9 @@ HEADERS  += mainwindow.h \
     tools/vtoolsplinepath.h \
     dialogs/dialogsplinepath.h \
     widgets/vmaingraphicsview.h \
-    tools/vdatatool.h
+    tools/vdatatool.h \
+    xml/vtoolrecord.h \
+    dialogs/dialoghistory.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -117,7 +121,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialoglineintersect.ui \
     dialogs/dialogspline.ui \
     dialogs/dialogarc.ui \
-    dialogs/dialogsplinepath.ui
+    dialogs/dialogsplinepath.ui \
+    dialogs/dialoghistory.ui
 
 RESOURCES += \
     icon.qrc \

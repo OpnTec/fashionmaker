@@ -81,6 +81,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             }
         }
         data->AddLine(firstPointId, id);
+        VAbstractTool::AddRecord(id, Tools::BisectorTool, doc);
         if(parse == Document::FullParse){
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula,
                                                      firstPointId, secondPointId, thirdPointId,
@@ -88,7 +89,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            tools->insert(id,point);   
         }
     }
 }
@@ -142,5 +143,4 @@ void VToolBisector::AddToFile(){
     AddAttribute(domElement, "thirdPoint", thirdPointId);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }

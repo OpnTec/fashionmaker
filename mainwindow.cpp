@@ -21,7 +21,6 @@
 #include "tools/vtoolarc.h"
 #include "tools/vtoolsplinepath.h"
 #pragma GCC diagnostic warning "-Weffc++"
-#include "options.h"
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,11 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
-    //view->setMinimumSize(800, 600);
 
     connect(scene, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
-    connect(ui->toolButtonSinglePoint, &QToolButton::clicked, this,
-            &MainWindow::ToolSinglePoint);
     helpLabel = new QLabel("Створіть новий файл для початку роботи.");
     ui->statusBar->addWidget(helpLabel);
 
@@ -58,30 +54,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::ActionOpen);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::ActionNew);
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
-    connect(ui->toolButtonEndLine, &QToolButton::clicked, this,
-            &MainWindow::ToolEndLine);
-    connect(ui->toolButtonLine, &QToolButton::clicked, this,
-            &MainWindow::ToolLine);
-    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this,
-            &MainWindow::ToolAlongLine);
-    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this,
-            &MainWindow::ToolShoulderPoint);
-    connect(ui->toolButtonNormal, &QToolButton::clicked, this,
-            &MainWindow::ToolNormal);
-    connect(ui->toolButtonBisector, &QToolButton::clicked, this,
-            &MainWindow::ToolBisector);
-    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this,
-            &MainWindow::ToolLineIntersect);
-    connect(ui->toolButtonSpline, &QToolButton::clicked, this,
-            &MainWindow::ToolSpline);
-    connect(ui->toolButtonArc, &QToolButton::clicked, this,
-            &MainWindow::ToolArc);
-    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this,
-            &MainWindow::ToolSplinePath);
+    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
+    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
+    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
+    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
+    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
+    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
+    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
+    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
+    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
+    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
+    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
 
     data = new VContainer;
 
-    doc = new VDomDocument(data);
+    doc = new VDomDocument(data, comboBoxDraws);
     doc->CreateEmptyFile();
     connect(doc, &VDomDocument::haveChange, this, &MainWindow::haveChange);
 
@@ -123,13 +110,28 @@ void MainWindow::ActionNewDraw(){
         qCritical()<<"Помилка створення креслення з ім'ям"<<nameDraw<<".";
         return;//не змогли додати креслення.
     }
-    comboBoxDraws->addItem(nameDraw, true);
+    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+               this, &MainWindow::currentDrawChanged);
+    comboBoxDraws->addItem(nameDraw);
     index = comboBoxDraws->findText(nameDraw);
     if ( index != -1 ) { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
+        currentDrawChanged( index );
     }
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::currentDrawChanged);
+    data->ClearObject();
+    //Create single point
+    qint64 id = data->AddPoint(VPointF((10+comboBoxDraws->count()*5)*PrintDPI/25.4, 10*PrintDPI/25.4, "А", 5,
+                                       10));
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
+    scene->addItem(spoint);
+    connect(spoint, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    QMap<qint64, VDataTool*>* tools = doc->getTools();
+    tools->insert(id, spoint);
+    VAbstractTool::AddRecord(id, Tools::SinglePointTool, doc);
+    SetEnableTool(true);
     SetEnableWidgets(true);
-    SetEnableTool(false);
 }
 
 void MainWindow::OptionDraw(){
@@ -184,49 +186,6 @@ void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &curso
             tButton->setChecked(true);
         }
     }
-}
-
-/*
- * Інструмет базова точка креслення.
- */
-void MainWindow::ToolSinglePoint(bool checked){
-    if(checked){
-        CanselTool();
-        tool = Tools::SinglePointTool;
-        QPixmap pixmap(":/cursor/spoint_cursor.png");
-        QCursor cur(pixmap, 2, 3);
-        view->setCursor(cur);
-        helpLabel->setText("Виберіть розташування для точки.");
-        dialogSinglePoint = new DialogSinglePoint(data);
-        //покажемо вікно як тільки буде вибрано місце розташування для точки
-        connect(scene, &VMainGraphicsScene::mousePress, dialogSinglePoint,
-                &DialogSinglePoint::mousePress);
-        connect(dialogSinglePoint, &DialogSinglePoint::DialogClosed, this,
-                &MainWindow::ClosedDialogSinglePoint);
-    } else { //не даємо користувачу зняти виділення кнопки
-        ui->toolButtonSinglePoint->setChecked(true);
-    }
-}
-
-void MainWindow::ClosedDialogSinglePoint(int result){
-    if(result == QDialog::Accepted){
-        QPointF point = dialogSinglePoint->getPoint();
-        QString name = dialogSinglePoint->getName();
-
-        qint64 id = data->AddPoint(VPointF(point.x(), point.y(), name, 5, 10));
-        VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
-        scene->addItem(spoint);
-        connect(spoint, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id, spoint);
-        ArrowTool();
-        ui->toolButtonSinglePoint->setEnabled(false);
-        qint32 index = comboBoxDraws->currentIndex();
-        comboBoxDraws->setItemData(index, false);
-        ui->actionSave->setEnabled(true);
-        SetEnableTool(true);
-    }
-    ArrowTool();
 }
 
 void MainWindow::ToolEndLine(bool checked){
@@ -423,25 +382,22 @@ void MainWindow::ToolBarDraws(){
 
     ui->toolBarDraws->addAction(ui->actionTable);
     ui->actionTable->setEnabled(false);
+
+    ui->toolBarDraws->addAction(ui->actionHistory);
+    ui->actionHistory->setEnabled(false);
 }
 
 void MainWindow::currentDrawChanged( int index ){
     if(index != -1) {
-        bool status = qvariant_cast<bool>(comboBoxDraws->itemData(index));
-        ui->toolButtonSinglePoint->setEnabled(status);
-        if(ui->toolButtonSinglePoint->isEnabled() == false){
-            SetEnableTool(true);
-        } else {
-            SetEnableTool(false);
-        }
+        doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
     }
 }
 
 void MainWindow::mouseMove(QPointF scenePos){
     QString string = QString("%1, %2")
-                            .arg((qint32)(scenePos.x()/PrintDPI*25.4))
-                            .arg((qint32)(scenePos.y()/PrintDPI*25.4));
+                            .arg(static_cast<qint32>(scenePos.x()/PrintDPI*25.4))
+                            .arg(static_cast<qint32>(scenePos.y()/PrintDPI*25.4));
     mouseCoordinate->setText(string);
 }
 
@@ -452,9 +408,7 @@ void MainWindow::CanselTool(){
             ui->actionArrowTool->setChecked(false);
             break;
         case Tools::SinglePointTool:
-            //Знищимо діалогове вікно.
-            delete dialogSinglePoint;
-            ui->toolButtonSinglePoint->setChecked(false);
+            //Nothing to do here because we can't create this tool from main window.
             break;
         case Tools::EndLineTool:
             dialogEndLine.clear();
@@ -611,30 +565,22 @@ void MainWindow::ActionOpen(){
     QFile file(fileName);
     if(file.open(QIODevice::ReadOnly)){
         if(doc->setContent(&file)){
-            scene->clear();
-            comboBoxDraws->clear();
-//            ui->toolButtonSinglePoint->setEnabled(true);
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
-            doc->Parse(Document::FullParse, scene, comboBoxDraws);
+            doc->Parse(Document::FullParse, scene);
             connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
-            ui->actionSave->setEnabled(true);
-            ui->actionSaveAs->setEnabled(true);
-            ui->actionTable->setEnabled(true);
             QString nameDraw = doc->GetNameActivDraw();
             qint32 index = comboBoxDraws->findText(nameDraw);
             if ( index != -1 ) { // -1 for not found
                 comboBoxDraws->setCurrentIndex(index);
             }
-            if(comboBoxDraws->count() == 1){
-                if(ui->toolButtonSinglePoint->isEnabled()==false){
-                    SetEnableTool(true);
-                } else {
-                    SetEnableTool(false);
-                }
+            if(comboBoxDraws->count() > 0){
+                SetEnableTool(true);
+            } else {
+                SetEnableTool(false);
             }
-
+            SetEnableWidgets(true);
         }
         file.close();
     }
@@ -649,7 +595,6 @@ void MainWindow::ActionNew(){
     CanselTool();
     comboBoxDraws->clear();
     fileName.clear();
-    ui->toolButtonSinglePoint->setEnabled(true);
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
     SetEnableTool(false);
@@ -677,12 +622,12 @@ void MainWindow::SetEnableWidgets(bool enable){
     ui->actionSaveAs->setEnabled(enable);
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
-    ui->toolButtonSinglePoint->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
     if(enable == true && !fileName.isEmpty()){
         ui->actionSave->setEnabled(enable);
     }
     ui->actionTable->setEnabled(enable);
+    ui->actionHistory->setEnabled(enable);
 }
 
 void MainWindow::ActionTable(bool checked){
@@ -700,6 +645,24 @@ void MainWindow::ActionTable(bool checked){
 void MainWindow::ClosedActionTable(){
     ui->actionTable->setChecked(false);
     delete dialogTable;
+}
+
+void MainWindow::ActionHistory(bool checked){
+    if(checked){
+        dialogHistory = new DialogHistory(data, doc, this);
+        dialogHistory->setWindowFlags(Qt::Window);
+        connect(dialogHistory, &DialogHistory::DialogClosed, this,
+                &MainWindow::ClosedActionHistory);
+        dialogHistory->show();
+    } else {
+        ui->actionHistory->setChecked(true);
+        dialogHistory->activateWindow();
+    }
+}
+
+void MainWindow::ClosedActionHistory(){
+    ui->actionHistory->setChecked(false);
+    delete dialogHistory;
 }
 
 void MainWindow::SetEnableTool(bool enable){

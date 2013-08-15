@@ -17,4 +17,22 @@ namespace Scene{
     };
 }
 
+namespace Tools{
+    enum Enum
+    {
+        ArrowTool,
+        SinglePointTool,
+        EndLineTool,
+        LineTool,
+        AlongLineTool,
+        ShoulderPointTool,
+        NormalTool,
+        BisectorTool,
+        LineIntersectTool,
+        SplineTool,
+        ArcTool,
+        SplinePathTool
+    };
+}
+
 #endif // OPTIONS_H

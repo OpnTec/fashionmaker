@@ -1,11 +1,16 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QtGlobal>
 #include <QString>
 #include <QMap>
 #include <QLineF>
 #include <QPointF>
+#pragma GCC diagnostic pop
 #include "vcontainer.h"
 
 /**

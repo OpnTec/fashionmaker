@@ -10,6 +10,7 @@
 #include "../widgets/vmaingraphicsscene.h"
 #include "../tools/vdatatool.h"
 #pragma GCC diagnostic warning "-Weffc++"
+#include "vtoolrecord.h"
 
 namespace Document{
     enum Enum
@@ -23,13 +24,13 @@ class VDomDocument : public QObject, public QDomDocument
 {
     Q_OBJECT
 public:
-                VDomDocument(VContainer *data);
-                VDomDocument(const QString& name, VContainer *data);
-                VDomDocument(const QDomDocumentType& doctype, VContainer *data);
+                VDomDocument(VContainer *data,QComboBox *comboBoxDraws);
+                VDomDocument(const QString& name, VContainer *data,QComboBox *comboBoxDraws);
+                VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws);
                 ~VDomDocument();
     QDomElement elementById(const QString& id);
     void        CreateEmptyFile();
-    void        ChangeActivDraw(const QString& name);
+    void        ChangeActivDraw(const QString& name, Document::Enum parse = Document::FullParse);
     QString     GetNameActivDraw() const;
     bool        GetActivDrawElement(QDomElement &element);
     bool        GetActivCalculationElement(QDomElement &element);
@@ -37,21 +38,31 @@ public:
     bool        GetActivPathsElement(QDomElement &element);
     bool        appendDraw(const QString& name);
     void        SetNameDraw(const QString& name);
-    void        Parse(Document::Enum parse, VMainGraphicsScene *scene, QComboBox *comboBoxDraws);
+    void        Parse(Document::Enum parse, VMainGraphicsScene *scene);
     QMap<qint64, VDataTool*>* getTools();
+    QVector<VToolRecord> *getHistory();
+    qint64 getCursor() const;
+    void setCursor(const qint64 &value);
+    void setCurrentData();
 signals:
     void        ChangedActivDraw(const QString newName);
     void        ChangedNameDraw(const QString oldName, const QString newName);
     void        FullUpdateFromFile();
     void        haveChange();
+    void        ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    void        ChangedCursor(qint64 id);
 public slots:
     void        FullUpdateTree();
     void        haveLiteChange();
+    void        ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
 private:
     QMap<QString, QDomElement> map;
     QString     nameActivDraw;
     VContainer  *data;
     QMap<qint64, VDataTool*> tools;
+    QVector<VToolRecord> history;
+    qint64 cursor;
+    QComboBox *comboBoxDraws;
     bool        find(QDomElement node, const QString& id);
     bool        CheckNameDraw(const QString& name) const;
     void        SetActivDraw(const QString& name);
@@ -69,7 +80,6 @@ private:
     void        ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                  Document::Enum parse, const QString& type);
     void        ParseIncrementsElement(const QDomNode& node);
-    void        AddNewDraw(const QDomElement &node, QComboBox *comboBoxDraws)const;
 };
 
 #endif // VDOMDOCUMENT_H

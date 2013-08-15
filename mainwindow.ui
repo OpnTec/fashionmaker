@@ -51,81 +51,6 @@
         <string>Точка</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="1">
-         <widget class="QToolButton" name="toolButtonEndLine">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/segment.png</normaloff>:/icon/32x32/segment.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QToolButton" name="toolButtonAlongLine">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QToolButton" name="toolButtonSinglePoint">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Точка</string>
-          </property>
-          <property name="statusTip">
-           <string/>
-          </property>
-          <property name="text">
-           <string>Точка</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/spoint.png</normaloff>:/icon/32x32/spoint.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QToolButton" name="toolButtonNormal">
           <property name="enabled">
@@ -172,7 +97,53 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonEndLine">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/segment.png</normaloff>:/icon/32x32/segment.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QToolButton" name="toolButtonAlongLine">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
          <widget class="QToolButton" name="toolButtonBisector">
           <property name="enabled">
            <bool>false</bool>
@@ -202,7 +173,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1074</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -269,7 +240,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1074</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -336,7 +307,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1074</width>
+         <width>87</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +349,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="LayoutView" stretch="">
+     <layout class="QHBoxLayout" name="LayoutView">
       <property name="spacing">
        <number>10</number>
       </property>
@@ -598,6 +569,18 @@
    </property>
    <property name="text">
     <string>Таблиці змінних</string>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/history.png</normaloff>:/icon/32x32/history.png</iconset>
+   </property>
+   <property name="text">
+    <string>History</string>
    </property>
   </action>
  </widget>

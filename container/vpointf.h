@@ -1,10 +1,13 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
 #include <QPointF>
 #include <QString>
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 
 class VPointF
 {

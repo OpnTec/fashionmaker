@@ -91,6 +91,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
         }
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
+        VAbstractTool::AddRecord(id, Tools::ShoulderPointTool, doc);
         if(parse == Document::FullParse){
             VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
                                                                p1Line, p2Line, pShoulder,
@@ -153,5 +154,4 @@ void VToolShoulderPoint::AddToFile(){
     AddAttribute(domElement, "pShoulder", pShoulder);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }

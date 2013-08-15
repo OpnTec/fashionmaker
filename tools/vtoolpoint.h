@@ -19,6 +19,7 @@ public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            ChangedActivDraw(const QString newName);
     virtual void            FullUpdateFromGui(int result) = 0;
+    virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
 protected:
     qreal                   radius;
     VGraphicsSimpleTextItem *namePoint;

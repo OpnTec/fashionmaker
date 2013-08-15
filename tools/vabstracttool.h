@@ -23,11 +23,13 @@ public:
                  VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual      ~VAbstractTool();
     virtual void setDialog();
+    static void AddRecord(const qint64 id, Tools::Enum toolType, VDomDocument *doc);
 public slots:
     virtual void FullUpdateFromFile()=0;
     void         ChangedNameDraw(const QString oldName, const QString newName);
     virtual void ChangedActivDraw(const QString newName);
     virtual void FullUpdateFromGui(int result)=0;
+    virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
 signals:
     void         toolhaveChange();
     void         ChoosedTool(qint64 id, Scene::Type type);
@@ -37,6 +39,8 @@ protected:
     qint64       id;
     bool         ignoreContextMenuEvent;
     QString      nameActivDraw;
+    const Qt::GlobalColor baseColor;
+    Qt::GlobalColor currentColor;
     virtual void AddToFile()=0;
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value);

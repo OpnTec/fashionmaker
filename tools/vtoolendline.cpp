@@ -63,13 +63,14 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             }
         }
         data->AddLine(basePointId, id);
+        VAbstractTool::AddRecord(id, Tools::EndLineTool, doc);
         if(parse == Document::FullParse){
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
                                                    basePointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            tools->insert(id,point);  
         }
     }
 }
@@ -120,6 +121,5 @@ void VToolEndLine::AddToFile(){
     AddAttribute(domElement, "basePoint", basePointId);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 

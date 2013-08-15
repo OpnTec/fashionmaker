@@ -63,6 +63,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
             }
         }
         data->AddLine(firstPointId, id);
+        VAbstractTool::AddRecord(id, Tools::NormalTool, doc);
         if(parse == Document::FullParse){
             VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
                                                  firstPointId, secondPointId, typeCreation);
@@ -132,5 +133,4 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }

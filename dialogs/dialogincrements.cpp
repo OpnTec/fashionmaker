@@ -40,11 +40,11 @@ void DialogIncrements::FillStandartTable(){
     const QMap<QString, VStandartTableCell> *standartTable = data->DataStandartTable();
     qint32 currentRow = -1;
     QMapIterator<QString, VStandartTableCell> i(*standartTable);
+    ui->tableWidgetStandart->setRowCount ( standartTable->size() );
     while (i.hasNext()) {
         i.next();
         VStandartTableCell cell = i.value();
         currentRow++;
-        ui->tableWidgetStandart->setRowCount ( standartTable->size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
         item->setTextAlignment(Qt::AlignHCenter);

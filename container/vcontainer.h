@@ -1,13 +1,16 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QMap>
 #include <QTableWidget>
+#pragma GCC diagnostic pop
 #include "vpointf.h"
 #include "vstandarttablecell.h"
 #include "vincrementtablerow.h"
-#pragma GCC diagnostic warning "-Weffc++"
 #include "../geometry/vspline.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
@@ -22,6 +25,8 @@ public:
                          * @brief VContainer
                          */
                         VContainer();
+                        const VContainer &operator=(const VContainer &data);
+                        void setData(const VContainer &data);
                         /**
      * @brief GetPoint
      * @param id
@@ -63,6 +68,7 @@ public:
     qreal               GetValueStandartTableCell(const QString& name) const;
     qreal               GetValueIncrementTableRow(const QString& name) const;
     void                Clear();
+    void                ClearObject();
     void                ClearIncrementTable();
     void                ClearLengthLines();
     void                ClearLengthSplines();
@@ -89,7 +95,7 @@ public:
     const QMap<qint64, VSplinePath> *DataSplinePaths() const;
     void  UpdateId(qint64 newId);
 private:
-    qint64              _id;
+    static qint64         _id;
     QMap<QString, qint32> base;
     QMap<qint64, VPointF> points;
     QMap<QString, VStandartTableCell> standartTable;

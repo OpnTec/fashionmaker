@@ -12,7 +12,6 @@
 
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
-#include "dialogs/dialogsinglepoint.h"
 #include "dialogs/dialogincrements.h"
 #include "dialogs/dialogline.h"
 #include "dialogs/dialogalongline.h"
@@ -24,31 +23,15 @@
 #include "dialogs/dialogspline.h"
 #include "dialogs/dialogarc.h"
 #include "dialogs/dialogsplinepath.h"
+#include "dialogs/dialoghistory.h"
 #include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
 #pragma GCC diagnostic warning "-Weffc++"
 #include "container/vcontainer.h"
+#include "options.h"
 
 namespace Ui {
 class MainWindow;
-}
-
-namespace Tools{
-    enum Enum
-    {
-        ArrowTool,
-        SinglePointTool,
-        EndLineTool,
-        LineTool,
-        AlongLineTool,
-        ShoulderPointTool,
-        NormalTool,
-        BisectorTool,
-        LineIntersectTool,
-        SplineTool,
-        ArcTool,
-        SplinePathTool
-    };
 }
 
 class MainWindow : public QMainWindow
@@ -59,11 +42,9 @@ public:
                         ~MainWindow();
 public slots:
     void                mouseMove(QPointF scenePos);
-    void                ToolSinglePoint(bool checked);
     void                ActionAroowTool();
     void                ActionDraw(bool checked);
     void                ActionDetails(bool checked);
-    void                ClosedDialogSinglePoint(int result);
     void                ActionNewDraw();
     void                currentDrawChanged( int index );
     void                OptionDraw();
@@ -76,6 +57,8 @@ public slots:
     void                ChangedGrowth(const QString & text);
     void                ActionTable(bool checked);
     void                ClosedActionTable();
+    void                ActionHistory(bool checked);
+    void                ClosedActionHistory();
     void                ToolEndLine(bool checked);
     void                ClosedDialogEndLine(int result);
     void                ToolLine(bool checked);
@@ -107,7 +90,6 @@ private:
     QLabel              *helpLabel;
     VMainGraphicsView   *view;
     bool                isInitialized;
-    DialogSinglePoint   *dialogSinglePoint;
     DialogIncrements    *dialogTable;
     QSharedPointer<DialogEndLine>       dialogEndLine;
     QSharedPointer<DialogLine>          dialogLine;
@@ -119,6 +101,7 @@ private:
     QSharedPointer<DialogSpline>        dialogSpline;
     QSharedPointer<DialogArc>           dialogArc;
     QSharedPointer<DialogSplinePath>    dialogSplinePath;
+    DialogHistory       *dialogHistory;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;

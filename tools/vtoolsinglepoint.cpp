@@ -19,6 +19,14 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
     }
 }
 
+void VToolSinglePoint::setDialog(){
+    Q_ASSERT(!dialogSinglePoint.isNull());
+    if(!dialogSinglePoint.isNull()){
+        VPointF p = VAbstractTool::data.GetPoint(id);
+        dialogSinglePoint->setData(p.name(), p.toQPointF());
+    }
+}
+
 void VToolSinglePoint::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement("point");
@@ -32,7 +40,6 @@ void VToolSinglePoint::AddToFile(){
     AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value){

@@ -127,8 +127,8 @@ bool DialogLineIntersect::CheckIntersecion(){
     VPointF p1L2 = data->GetPoint(p1Line2);
     VPointF p2L2 = data->GetPoint(p2Line2);
 
-    QLineF line1(p1L1, p2L1);
-    QLineF line2(p1L2, p2L2);
+    QLineF line1(p1L1.toQPointF(), p2L1.toQPointF());
+    QLineF line2(p1L2.toQPointF(), p2L2.toQPointF());
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
     if(intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection){

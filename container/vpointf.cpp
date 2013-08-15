@@ -1,26 +1,14 @@
 #include "vpointf.h"
 
-VPointF::VPointF(){
-    _mx = 0;
-    _my = 0;
-    this->_x = 0;
-    this->_y = 0;
+VPointF::VPointF():_name(QString()), _mx(0), _my(0), _x(0), _y(0){
 }
 
-VPointF::VPointF ( const VPointF & point ){
-    _name = point.name();
-    _mx = point.mx();
-    _my = point.my();
-    this->_x = point.x();
-    this->_y = point.y();
+VPointF::VPointF ( const VPointF & point ):_name(point.name()), _mx(point.mx()), _my(point.my()),
+    _x(point.x()), _y(point.y()){
 }
 
-VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my){
-    _name = name;
-    _mx = mx;
-    _my = my;
-    this->_x = x;
-    this->_y = y;
+VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my):_name(name), _mx(mx), _my(my), _x(x),
+    _y(y){
 }
 
 VPointF::~VPointF(){

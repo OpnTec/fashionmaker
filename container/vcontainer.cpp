@@ -3,11 +3,31 @@
 
 #include "../options.h"
 
+qint64 VContainer::_id = 0;
+
 VContainer::VContainer(){
-    _id = 0;
     SetSize(500);
     SetGrowth(1760);
     CreateManTableIGroup ();
+}
+
+const VContainer &VContainer::operator =(const VContainer &data){
+    setData(data);
+    return *this;
+}
+
+void VContainer::setData(const VContainer &data){
+    base = *data.DataBase();
+    points = *data.DataPoints();
+    standartTable = *data.DataStandartTable();
+    incrementTable = *data.DataIncrementTable();
+    lengthLines = *data.DataLengthLines();
+    lineArcs = *data.DataLengthArcs();
+    splines = *data.DataSplines();
+    lengthSplines = *data.DataLengthSplines();
+    arcs = *data.DataArcs();
+    lengthArcs = *data.DataLengthArcs();
+    splinePaths = *data.DataSplinePaths();
 }
 
 template <typename key, typename val>
@@ -151,15 +171,19 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const{
 
 void VContainer::Clear(){
     _id = 0;
-    points.clear();
     standartTable.clear();
     incrementTable.clear();
     lengthLines.clear();
-    splines.clear();
-    arcs.clear();
     lengthArcs.clear();
     lineArcs.clear();
+    ClearObject();
     CreateManTableIGroup ();
+}
+
+void VContainer::ClearObject(){
+    points.clear();
+    splines.clear();
+    arcs.clear();
 }
 
 void VContainer::ClearIncrementTable(){

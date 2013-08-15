@@ -76,6 +76,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
+    VAbstractTool::AddRecord(id, Tools::ArcTool, doc);
     if(parse == Document::FullParse){
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
@@ -117,6 +118,18 @@ void VToolArc::ChangedActivDraw(const QString newName){
     }
 }
 
+void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+    if(id == this->id){
+        if(enable == false){
+            this->setPen(QPen(baseColor, widthHairLine));
+            currentColor = baseColor;
+        } else {
+            this->setPen(QPen(color, widthHairLine));
+            currentColor = color;
+        }
+    }
+}
+
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogArc, this, event);
 }
@@ -133,7 +146,6 @@ void VToolArc::AddToFile(){
     AddAttribute(domElement, "angle2", arc.GetFormulaF2());
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
@@ -145,12 +157,12 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine));
 }
 
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine));
 }
 
 void VToolArc::RefreshGeometry(){

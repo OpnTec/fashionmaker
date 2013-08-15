@@ -81,6 +81,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
+    VAbstractTool::AddRecord(id, Tools::SplineTool, doc);
     if(parse == Document::FullParse){
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
@@ -167,7 +168,6 @@ void VToolSpline::AddToFile(){
     AddAttribute(domElement, "kCurve", spl.GetKcurve());
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
@@ -179,12 +179,12 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine));
 }
 
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine));
 }
 
 void VToolSpline::RefreshGeometry(){
@@ -226,5 +226,17 @@ void VToolSpline::ChangedActivDraw(const QString newName){
         this->setAcceptHoverEvents (false);
         emit setEnabledPoint(false);
         VAbstractTool::ChangedActivDraw(newName);
+    }
+}
+
+void VToolSpline::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+    if(id == this->id){
+        if(enable == false){
+            this->setPen(QPen(baseColor, widthHairLine));
+            currentColor = baseColor;
+        } else {
+            this->setPen(QPen(color, widthHairLine));
+            currentColor = color;
+        }
     }
 }

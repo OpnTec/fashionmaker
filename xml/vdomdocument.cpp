@@ -19,16 +19,20 @@
 
 
 
-VDomDocument::VDomDocument(VContainer *data) : QDomDocument() {
+VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(), cursor(0){
     this->data = data;
+    this->comboBoxDraws = comboBoxDraws;
 }
 
-VDomDocument::VDomDocument(const QString& name, VContainer *data) : QDomDocument(name) {
+VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(name), cursor(0) {
     this->data = data;
+    this->comboBoxDraws = comboBoxDraws;
 }
 
-VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data) : QDomDocument(doctype){
+VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(doctype),
+    cursor(0){
     this->data = data;
+    this->comboBoxDraws = comboBoxDraws;
 }
 
 VDomDocument::~VDomDocument(){
@@ -132,17 +136,12 @@ bool VDomDocument::appendDraw(const QString& name){
     return false;
 }
 
-void VDomDocument::ChangeActivDraw(const QString& name){
+void VDomDocument::ChangeActivDraw(const QString& name, Document::Enum parse){
     if(CheckNameDraw(name) == true){
         this->nameActivDraw = name;
-        VMainGraphicsScene  *scene = new VMainGraphicsScene();
-        QDomElement domElement;
-        bool ok = GetActivDrawElement(domElement);
-        if(ok){
-            ParseDrawElement(scene, domElement, Document::LiteParse);
+        if(parse == Document::FullParse){
+            emit ChangedActivDraw(name);
         }
-        delete scene;
-        emit ChangedActivDraw(name);
     }
 }
 
@@ -225,19 +224,20 @@ bool VDomDocument::GetActivNodeElement(const QString& name, QDomElement &element
     }
 }
 
-void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QComboBox *comboBoxDraws){
+void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene){
     if(parse == Document::FullParse){
         data->Clear();
         nameActivDraw.clear();
         scene->clear();
         comboBoxDraws->clear();
         tools.clear();
-    } else {
-        data->ClearLengthLines();
-        data->ClearLengthArcs();
-        data->ClearLengthSplines();
-        data->ClearLineArcs();
+        cursor = 0;
     }
+    data->ClearLengthLines();
+    data->ClearLengthArcs();
+    data->ClearLengthSplines();
+    data->ClearLineArcs();
+    history.clear();
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();
     while(!domNode.isNull()){
@@ -251,7 +251,9 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
                         } else {
                             ChangeActivDraw(domElement.attribute("name"));
                         }
-                        AddNewDraw(domElement, comboBoxDraws);
+                        comboBoxDraws->addItem(domElement.attribute("name"));
+                    } else {
+                        ChangeActivDraw(domElement.attribute("name"), Document::LiteParse);
                     }
                     ParseDrawElement(scene, domElement, parse);
                 }
@@ -266,6 +268,10 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene, QCombo
 
 QMap<qint64, VDataTool *> *VDomDocument::getTools(){
     return &tools;
+}
+
+QVector<VToolRecord> *VDomDocument::getHistory(){
+    return &history;
 }
 
 void VDomDocument::ParseIncrementsElement(const QDomNode &node){
@@ -295,38 +301,6 @@ void VDomDocument::ParseIncrementsElement(const QDomNode &node){
     }
 }
 
-void VDomDocument::AddNewDraw(const QDomElement& node, QComboBox *comboBoxDraws)const{
-    QString name = node.attribute("name");
-    QDomNode domNode = node.firstChild();
-    if(!domNode.isNull()){
-        if(domNode.isElement()){
-            QDomElement domElement = domNode.toElement();
-            if(!domElement.isNull()){
-                if(domElement.tagName() == "calculation"){
-                    QDomNode domCal = domElement.firstChild();
-                    if(!domCal.isNull()){
-                        if(domCal.isElement()){
-                            QDomElement domElementPoint = domCal.toElement();
-                            if(!domElementPoint.isNull()){
-                                if(domElementPoint.tagName() == "point"){
-                                    if(domElementPoint.attribute("type","") == "single"){
-                                        comboBoxDraws->addItem(name, false);
-                                        return;
-                                    } else {
-                                        comboBoxDraws->addItem(name, true);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    comboBoxDraws->addItem(name, true);
-                }
-            }
-        }
-    }
-}
-
 void VDomDocument::ParseDrawElement(VMainGraphicsScene *scene, const QDomNode& node,
                                     Document::Enum parse){
     QDomNode domNode = node.firstChild();
@@ -335,6 +309,7 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *scene, const QDomNode& n
             QDomElement domElement = domNode.toElement();
             if(!domElement.isNull()){
                 if(domElement.tagName() == "calculation"){
+                    data->ClearObject();
                     ParseCalculationElement(scene, domElement, parse);
                 }
                 if(domElement.tagName() == "modeling"){
@@ -388,6 +363,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
 
             data->UpdatePoint(id, VPointF(x, y, name, mx, my));
+            VAbstractTool::AddRecord(id, Tools::SinglePointTool, this);
             if(parse != Document::FullParse){
                 VToolSinglePoint *spoint = qobject_cast<VToolSinglePoint*>(tools[id]);
                 spoint->VDataTool::setData(data);
@@ -397,7 +373,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VToolSinglePoint *spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
                 scene->addItem(spoint);
                 connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-                tools[id] = spoint;
+                tools[id] = spoint;  
             }
         }
         return;
@@ -568,14 +544,52 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
 
 void VDomDocument::FullUpdateTree(){
     VMainGraphicsScene *scene = new VMainGraphicsScene();
-    QComboBox *comboBoxDraws = new QComboBox();
-    Parse(Document::LiteParse, scene, comboBoxDraws );
+    Parse(Document::LiteParse, scene);
     delete scene;
-    delete comboBoxDraws;
+    setCurrentData();
     emit FullUpdateFromFile();
     emit haveChange();
 }
 
 void VDomDocument::haveLiteChange(){
     emit haveChange();
+}
+
+void VDomDocument::ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable){
+    emit ShowTool(id, color, enable);
+}
+
+qint64 VDomDocument::getCursor() const{
+    return cursor;
+}
+
+void VDomDocument::setCursor(const qint64 &value){
+    cursor = value;
+    emit ChangedCursor(cursor);
+}
+
+void VDomDocument::setCurrentData(){
+    QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
+    nameActivDraw = nameDraw;
+    qint64 id = 0;
+    if(history.size() == 0){
+        return;
+    }
+    for(qint32 i = 0; i < history.size(); ++i){
+        VToolRecord tool = history.at(i);
+        if(tool.getNameDraw() == nameDraw){
+            id = tool.getId();
+        }
+    }
+    if(id == 0){
+        VToolRecord tool = history.at(history.size()-1);
+        id = tool.getId();
+        if(id == 0){
+            return;
+        }
+    }
+    if(tools.size() > 0){
+        VDataTool *vTool = tools.value(id);
+        data->setData(vTool->getData());
+    }
 }

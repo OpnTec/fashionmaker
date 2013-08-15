@@ -67,6 +67,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         }
     }
     data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
+    VAbstractTool::AddRecord(id, Tools::SplinePathTool, doc);
     if(parse == Document::FullParse){
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
@@ -201,6 +202,18 @@ void VToolSplinePath::ChangedActivDraw(const QString newName){
     }
 }
 
+void VToolSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+    if(id == this->id){
+        if(enable == false){
+            this->setPen(QPen(baseColor, widthHairLine));
+            currentColor = baseColor;
+        } else {
+            this->setPen(QPen(color, widthHairLine));
+            currentColor = color;
+        }
+    }
+}
+
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogSplinePath, this, event);
 }
@@ -218,7 +231,6 @@ void VToolSplinePath::AddToFile(){
     }
 
     AddToCalculation(domElement);
-    emit toolhaveChange();
 }
 
 void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint){
@@ -241,12 +253,12 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine));
 }
 
 void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine));
 }
 
 void VToolSplinePath::RefreshGeometry(){
