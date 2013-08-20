@@ -1,13 +1,16 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vtoolendline.h"
 #include <QDebug>
 #include <QMenu>
-
 #include "../widgets/vmaingraphicsscene.h"
+#pragma GCC diagnostic pop
 
 VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                            const QString &formula, const qint32 &angle, const qint64 &basePointId,
                            Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent){
+    VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
+    dialogEndLine(QSharedPointer<DialogEndLine>()){
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -69,6 +72,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
                                                    basePointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);  
         }

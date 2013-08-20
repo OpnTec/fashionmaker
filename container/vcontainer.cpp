@@ -1,11 +1,20 @@
 #include "vcontainer.h"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDebug>
-
+#pragma GCC diagnostic pop
 #include "../options.h"
 
 qint64 VContainer::_id = 0;
 
-VContainer::VContainer(){
+VContainer::VContainer():base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
+    standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
+    lengthLines(QMap<QString, qreal>()), lineArcs(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
+    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), lengthArcs(QMap<QString, qreal>()),
+    splinePaths(QMap<qint64, VSplinePath>()){
     SetSize(500);
     SetGrowth(1760);
     CreateManTableIGroup ();
@@ -60,7 +69,7 @@ qreal VContainer::GetLine(const QString &name) const{
     return GetObject(lengthLines, name);
 }
 
-qint32 VContainer::GetLineArc(const QString &name) const{
+qreal VContainer::GetLineArc(const QString &name) const{
     Q_ASSERT(!name.isEmpty());
     return GetObject(lineArcs, name);
 }
@@ -155,16 +164,16 @@ void VContainer::AddLineArc(const QString &name, const qint32 &value){
 
 qreal VContainer::GetValueStandartTableCell(const QString& name) const{
     VStandartTableCell cell =  GetStandartTableCell(name);
-    qreal k_size 	= ( ( qreal ) (size()/10) - 50.0 ) / 2;
-    qreal k_growth  = ( ( qreal ) (growth()/10) - 176.0 ) / 6;
+    qreal k_size 	= ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
+    qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
     qreal value = cell.GetBase() + k_size*cell.GetKsize() 	+ k_growth*cell.GetKgrowth();
     return value;
 }
 
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const{
     VIncrementTableRow cell =  GetIncrementTableRow(name);
-    qreal k_size 	= ( ( qreal ) (size()/10) - 50.0 ) / 2;
-    qreal k_growth  = ( ( qreal ) (growth()/10) - 176.0 ) / 6;
+    qreal k_size 	= ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
+    qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
     qreal value = cell.getBase() + k_size*cell.getKsize() + k_growth*cell.getKgrowth();
     return value;
 }
@@ -365,7 +374,7 @@ QString VContainer::GetNameSplinePath(const VSplinePath &path) const{
 
 QString VContainer::GetNameArc(const qint64 &center, const qint64 &id) const{
     VPointF centerPoint = GetPoint(center);
-    return QString ("Arc(%1)%2").arg(centerPoint.name(), id);
+    return QString ("Arc(%1)%2").arg(centerPoint.name()).arg(id);
 }
 
 void VContainer::AddLengthLine(const QString &name, const qreal &value){

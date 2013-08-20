@@ -1,10 +1,13 @@
 #ifndef DIALOGENDLINE_H
 #define DIALOGENDLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QTimer>
+#pragma GCC diagnostic pop
 
 #include "../options.h"
 #include "../container/vcontainer.h"
@@ -40,6 +43,8 @@ private:
     QString           formula;
     qint32            angle;
     qint64            basePointId;
+    DialogEndLine(const DialogEndLine &dialog);
+    const DialogEndLine &operator=(const DialogEndLine& dialog);
 };
 
 #endif // DIALOGENDLINE_H

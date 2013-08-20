@@ -1,15 +1,18 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vtoolalongline.h"
-#include "../container/calculator.h"
 #include <QDialog>
 #include <QMenu>
 #include <QDebug>
+#pragma GCC diagnostic pop
+#include "../container/calculator.h"
 
 VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                                const qint64 &firstPointId, const qint64 &secondPointId,
                                const QString &typeLine, Tool::Enum typeCreation,
                                QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent){
-    this->secondPointId = secondPointId;
+    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId),
+    dialogAlongLine(QSharedPointer<DialogAlongLine>()){
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -120,6 +123,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
                                                        secondPointId, typeLine, typeCreation);
             scene->addItem(point);
             connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);
 

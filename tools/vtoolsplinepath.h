@@ -1,12 +1,18 @@
 #ifndef VTOOLSPLINEPATH_H
 #define VTOOLSPLINEPATH_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vabstracttool.h"
-#include "../container/vcontainer.h"
 #include "../xml/vdomdocument.h"
 #include <QGraphicsPathItem>
 #include "../dialogs/dialogsplinepath.h"
 #include "../widgets/vcontrolpointspline.h"
+#pragma GCC diagnostic pop
+#include "../container/vcontainer.h"
 
 class VToolSplinePath:public VAbstractTool, public QGraphicsPathItem
 {

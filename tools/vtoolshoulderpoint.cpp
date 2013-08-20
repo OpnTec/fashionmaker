@@ -1,14 +1,19 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolshoulderpoint.h"
 #include <QDebug>
 #include <QMenu>
+#pragma GCC diagnostic pop
 
 VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
                                        const qint64 &p2Line, const qint64 &pShoulder, Tool::Enum typeCreation,
                                        QGraphicsItem * parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent){
-    this->p2Line = p2Line;
-    this->pShoulder = pShoulder;
+    VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder),
+    dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()){
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -97,8 +102,8 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
                                                                p1Line, p2Line, pShoulder,
                                                                typeCreation);
             scene->addItem(point);
-            connect(point, &VToolShoulderPoint::ChoosedTool, scene,
-                    &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolShoulderPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);
         }

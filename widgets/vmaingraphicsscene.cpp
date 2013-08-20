@@ -1,7 +1,11 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vmaingraphicsscene.h"
 #include <QDebug>
 #include <QApplication>
 #include <QScrollBar>
+#include <QGraphicsItem>
+#pragma GCC diagnostic pop
 
 VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(){
 }
@@ -22,4 +26,8 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
 void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Type type){
     emit ChoosedObject(id, type);
+}
+
+void VMainGraphicsScene::RemoveTool(QGraphicsItem *tool){
+    this->removeItem(tool);
 }

@@ -1,7 +1,10 @@
 #ifndef DIALOGALONGLINE_H
 #define DIALOGALONGLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
+#pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/vcontainer.h"
 #include "../container/calculator.h"
@@ -37,6 +40,8 @@ private:
     QString             formula;
     qint64              firstPointId;
     qint64              secondPointId;
+    DialogAlongLine(const DialogAlongLine &dialog);
+    const DialogAlongLine &operator=(const DialogAlongLine& dialog);
 };
 
 #endif // DIALOGALONGLINE_H

@@ -1,10 +1,18 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolspline.h"
-#include "../geometry/vspline.h"
 #include <QMenu>
 #include <QDebug>
+#pragma GCC diagnostic pop
+#include "../geometry/vspline.h"
+
 
 VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                         QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent){
+                         QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
+    dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
 
     VSpline spl = data->GetSpline(id);
     QPainterPath path;
@@ -86,6 +94,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QMap<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id,spl);
     }

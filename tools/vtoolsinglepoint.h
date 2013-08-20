@@ -1,10 +1,16 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "../container/vcontainer.h"
 #include "../xml/vdomdocument.h"
-#include "vtoolpoint.h"
 #include "../dialogs/dialogsinglepoint.h"
+#include "vtoolpoint.h"
+#pragma GCC diagnostic pop
 
 class VToolSinglePoint : public VToolPoint
 {

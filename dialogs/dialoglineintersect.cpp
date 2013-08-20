@@ -2,14 +2,13 @@
 #include "ui_dialoglineintersect.h"
 
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogLineIntersect)
-{
+    DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()), p1Line1(0),
+    p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true){
     ui->setupUi(this);
     number = 0;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLineIntersect::DialogAccepted);
     flagName = false;
-    flagPoint = true;
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);
     FillComboBoxPoints(ui->comboBoxP1Line1);

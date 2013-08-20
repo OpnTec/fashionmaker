@@ -6,7 +6,8 @@
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                              const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                              const qint64 &thirdPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent){
+    VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
+    thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>()){
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;
 
@@ -88,6 +89,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                                                      typeCreation);
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);   
         }

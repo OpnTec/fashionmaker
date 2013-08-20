@@ -1,4 +1,8 @@
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QLabel>
@@ -9,7 +13,6 @@
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QDebug>
-
 #include "tools/vtoolendline.h"
 #include "tools/vtoolline.h"
 #include "tools/vtoolalongline.h"
@@ -20,15 +23,21 @@
 #include "tools/vtoolspline.h"
 #include "tools/vtoolarc.h"
 #include "tools/vtoolsplinepath.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow)
-{
+    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tools::ArrowTool), scene(0), mouseCoordinate(0),
+    helpLabel(0), view(0), isInitialized(false), dialogTable(0),
+    dialogEndLine(QSharedPointer<DialogEndLine>()), dialogLine(QSharedPointer<DialogLine>()),
+    dialogAlongLine(QSharedPointer<DialogAlongLine>()),
+    dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()), dialogNormal(QSharedPointer<DialogNormal>()),
+    dialogBisector(QSharedPointer<DialogBisector>()),
+    dialogLineIntersect(QSharedPointer<DialogLineIntersect>()),
+    dialogSpline(QSharedPointer<DialogSpline>()),
+    dialogArc(QSharedPointer<DialogArc>()), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
+    dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false){
     ui->setupUi(this);
-    tool = Tools::ArrowTool;
-    isInitialized = false;
     ToolBarOption();
     ToolBarDraws();
     QRectF sceneRect = QRectF(0, 0, PaperSize, PaperSize);

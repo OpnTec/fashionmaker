@@ -28,6 +28,7 @@ public:
                            * @brief VSplinePath конструктор по замовчуванню.
                            */
                           VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve = 1);
+                          VSplinePath(const VSplinePath& splPath);
     /**
      * @brief append додає точку сплайну до шляху.
      * @param point точка.

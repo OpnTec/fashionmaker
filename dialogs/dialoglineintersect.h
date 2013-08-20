@@ -41,6 +41,8 @@ private:
     bool                    flagPoint;
     virtual void            CheckState();
     bool                    CheckIntersecion();
+    DialogLineIntersect(const DialogLineIntersect &dialog);
+    const DialogLineIntersect &operator=(const DialogLineIntersect& dialog);
 };
 
 #endif // DIALOGLINEINTERSECT_H

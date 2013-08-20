@@ -1,7 +1,13 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QGraphicsView>
+#pragma GCC diagnostic pop
 
 class VMainGraphicsView : public QGraphicsView
 {

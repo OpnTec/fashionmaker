@@ -1,11 +1,16 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogline.h"
 #include "ui_dialogline.h"
 #include <QPushButton>
 #include <QCloseEvent>
+#pragma GCC diagnostic pop
 
 DialogLine::DialogLine(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogLine)
-{
+    DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLine::DialogAccepted);

@@ -41,11 +41,17 @@
  #ifndef DOUBLEDELEGATE_H
  #define DOUBLEDELEGATE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
  #include <QItemDelegate>
  #include <QModelIndex>
  #include <QObject>
  #include <QSize>
  #include <QSpinBox>
+#pragma GCC diagnostic pop
 
  class DoubleSpinBoxDelegate : public QItemDelegate
  {

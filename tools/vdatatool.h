@@ -1,9 +1,10 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #include <QObject>
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../container/vcontainer.h"
 
 class VDataTool : public QObject

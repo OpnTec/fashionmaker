@@ -1,7 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QMainWindow>
 #include <QLabel>
 #include <QtXml>
@@ -9,7 +14,6 @@
 #include <QSharedPointer>
 #include <QToolButton>
 #include <QSharedPointer>
-
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
 #include "dialogs/dialogincrements.h"
@@ -26,7 +30,7 @@
 #include "dialogs/dialoghistory.h"
 #include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "container/vcontainer.h"
 #include "options.h"
 
@@ -107,6 +111,8 @@ private:
     QComboBox           *comboBoxDraws;
     QString             fileName;
     bool                changeInFile;
+    MainWindow(const MainWindow &window);
+    const MainWindow &operator=(const MainWindow &window);
     void                ToolBarOption();
     void                ToolBarDraws();
     void                CanselTool();

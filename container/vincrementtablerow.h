@@ -1,7 +1,10 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QString>
+#pragma GCC diagnostic pop
 
 class VIncrementTableRow
 {

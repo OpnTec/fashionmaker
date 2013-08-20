@@ -26,6 +26,8 @@ private:
     Ui::DialogSinglePoint *ui;
     QString               name;
     QPointF               point;
+    DialogSinglePoint(const DialogSinglePoint &dialog);
+    const DialogSinglePoint &operator=(const DialogSinglePoint& dialog);
 };
 
 #endif // DIALOGSINGLEPOINT_H

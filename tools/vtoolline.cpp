@@ -1,13 +1,17 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolline.h"
 #include <QMenu>
 #include <QDebug>
+#pragma GCC diagnostic pop
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      Tool::Enum typeCreation, QGraphicsItem *parent):VAbstractTool(doc, data, id),
-    QGraphicsLineItem(parent){
-    this->firstPoint = firstPoint;
-    this->secondPoint = secondPoint;
-
+    QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
+    dialogLine(QSharedPointer<DialogLine>()){
     //Лінія
     VPointF first = data->GetPoint(firstPoint);
     VPointF second = data->GetPoint(secondPoint);
@@ -49,6 +53,7 @@ void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(line, &VToolLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QMap<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id,line);
     }

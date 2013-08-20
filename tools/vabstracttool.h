@@ -1,11 +1,15 @@
 #ifndef VABSTRACTTOOL_H
 #define VABSTRACTTOOL_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QMenu>
 #include "../xml/vdomdocument.h"
 #include "vdatatool.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../container/vcontainer.h"
 
 namespace Tool{
@@ -34,6 +38,7 @@ signals:
     void         toolhaveChange();
     void         ChoosedTool(qint64 id, Scene::Type type);
     void         FullUpdateTree();
+    void         RemoveTool(QGraphicsItem *tool);
 protected:
     VDomDocument *doc;
     qint64       id;
@@ -49,11 +54,17 @@ protected:
     void         AddToCalculation(const QDomElement &domElement);
     const VContainer *getData() const;
     void         setData(const VContainer &value);
+    virtual void RemoveDataTool();
     template <typename Dialog, typename Tool>
-    void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event){
+    void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
+                     bool showRemove = true){
         if(!ignoreContextMenuEvent){
             QMenu menu;
             QAction *actionOption = menu.addAction("Властивості");
+            QAction *actionRemove;
+            if(showRemove){
+                actionRemove = menu.addAction("Видалити");
+            }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){
                 dialog = QSharedPointer<Dialog>(new Dialog(getData()));
@@ -68,7 +79,26 @@ protected:
 
                 dialog->show();
             }
+            if(selectedAction == actionRemove){
+                RemoveDataTool();//remove form data
+                //remove form xml file
+                QDomElement domElement = doc->elementById(QString().setNum(id));
+                if(domElement.isElement()){
+                    QDomElement calcElement;
+                    bool ok = doc->GetActivCalculationElement(calcElement);
+                    if(ok){
+                        calcElement.removeChild(domElement);
+                        //update xml file
+                        emit FullUpdateTree();
+                        //remove form scene
+                        emit RemoveTool(tool);
+                    }
+                }
+            }
         }
     }
+private:
+    VAbstractTool(const VAbstractTool &tool);
+    const VAbstractTool &operator=(const VAbstractTool &tool);
 };
 #endif // VABSTRACTTOOL_H

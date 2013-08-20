@@ -1,13 +1,14 @@
 #include "vsplinepath.h"
 
-VSplinePath::VSplinePath(){
-    points = 0;
-    kCurve = 1;
+VSplinePath::VSplinePath(): path(QVector<VSplinePoint>()), kCurve(1), points(0){
 }
 
-VSplinePath::VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve){
-    this->points = points;
-    this->kCurve = kCurve;
+VSplinePath::VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve): path(QVector<VSplinePoint>()),
+    kCurve(kCurve), points(points){
+}
+
+VSplinePath::VSplinePath(const VSplinePath &splPath): path(*splPath.GetPoint()),
+    kCurve(splPath.getKCurve()), points( splPath.GetDataPoints()){
 }
 
 void VSplinePath::append(VSplinePoint point){

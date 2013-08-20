@@ -3,6 +3,7 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
 #pragma GCC diagnostic ignored "-Wsign-conversion"
 #pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QtGlobal>
@@ -32,6 +33,8 @@ public:
      */
     qreal eval(QString prog, QString *errorMsg);
 private:
+    Calculator(const Calculator &calc);
+    const Calculator &operator=(const Calculator &calc);
     QString *errorMsg;
     /**
      * @brief token теперішня лексема.

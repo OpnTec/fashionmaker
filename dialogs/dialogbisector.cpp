@@ -2,10 +2,9 @@
 #include "ui_dialogbisector.h"
 
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogBisector)
-{
+    DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
+    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0){
     ui->setupUi(this);
-    number = 0;
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;

@@ -36,6 +36,8 @@ private:
     QString Record(const VToolRecord &tool);
     void InitialTable();
     void ShowPoint();
+    DialogHistory(const DialogHistory &dialog);
+    const DialogHistory &operator=(const DialogHistory& dialog);
 };
 
 #endif // DIALOGHISTORY_H

@@ -1,8 +1,11 @@
 #ifndef VTOOLALONGLINE_H
 #define VTOOLALONGLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "vtoollinepoint.h"
 #include "../dialogs/dialogalongline.h"
+#pragma GCC diagnostic pop
 
 class VToolAlongLine : public VToolLinePoint
 {

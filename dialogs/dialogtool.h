@@ -1,7 +1,11 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDialog>
 #include <QComboBox>
 #include <QSpinBox>
@@ -11,7 +15,7 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QTimer>
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../container/vcontainer.h"
 #include "../options.h"
 
@@ -77,6 +81,8 @@ protected:
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
     qint64           getCurrentPointId(QComboBox *box) const;
+    DialogTool(const DialogTool &dialog);
+    const DialogTool &operator=(const DialogTool &dialog);
 };
 
 #endif // DIALOGTOOL_H

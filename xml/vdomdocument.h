@@ -1,7 +1,11 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDomDocument>
 #include <QMap>
 #include <QObject>
@@ -9,7 +13,7 @@
 #include "../container/vcontainer.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../tools/vdatatool.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "vtoolrecord.h"
 
 namespace Document{
@@ -20,6 +24,8 @@ namespace Document{
     };
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 class VDomDocument : public QObject, public QDomDocument
 {
     Q_OBJECT
@@ -63,6 +69,8 @@ private:
     QVector<VToolRecord> history;
     qint64 cursor;
     QComboBox *comboBoxDraws;
+                VDomDocument(const VDomDocument & doc);
+    const VDomDocument &operator=(const VDomDocument& doc);
     bool        find(QDomElement node, const QString& id);
     bool        CheckNameDraw(const QString& name) const;
     void        SetActivDraw(const QString& name);
@@ -81,5 +89,7 @@ private:
                                  Document::Enum parse, const QString& type);
     void        ParseIncrementsElement(const QDomNode& node);
 };
+
+#pragma GCC diagnostic pop
 
 #endif // VDOMDOCUMENT_H

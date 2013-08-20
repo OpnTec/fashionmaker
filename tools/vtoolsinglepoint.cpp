@@ -1,17 +1,23 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolsinglepoint.h"
 #include <QPen>
 #include <QBrush>
 #include <QDebug>
 #include <QGraphicsItem>
-#include <cmath>
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
-
+#pragma GCC diagnostic pop
+#include <cmath>
 #include "../options.h"
 #include "../container/vpointf.h"
 
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                                    QGraphicsItem * parent ):VToolPoint(doc, data, id, parent){
+                                    QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
+    dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     if(typeCreation == Tool::FromGui){
@@ -69,7 +75,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 }
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ){
-    ContextMenu(dialogSinglePoint, this, event);
+    ContextMenu(dialogSinglePoint, this, event, false);
 }
 
 void  VToolSinglePoint::FullUpdateFromFile(){

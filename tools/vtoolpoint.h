@@ -1,12 +1,16 @@
 #ifndef VTOOLPOINT_H
 #define VTOOLPOINT_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QGraphicsLineItem>
 #include <QGraphicsEllipseItem>
 #include "../widgets/vgraphicssimpletextitem.h"
 #include "vabstracttool.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../options.h"
 
 class VToolPoint: public VAbstractTool, public QGraphicsEllipseItem
@@ -29,6 +33,8 @@ protected:
     virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    VToolPoint(const VToolPoint &tool);
+    const VToolPoint &operator=(const VToolPoint &tool);
     QPointF                 LineIntersectRect(QRectF rec, QLineF line) const;
     void                    LiteUpdateFromGui(qreal mx, qreal my);
     void                    RefreshLine();
@@ -36,6 +42,7 @@ private:
                                                 QPointF &p2) const;
     QPointF                 ClosestPoint(QLineF line, QPointF p) const;
     QPointF                 addVector (QPointF p, QPointF p1, QPointF p2, qreal k) const;
+
 };
 
 #endif // VTOOLPOINT_H

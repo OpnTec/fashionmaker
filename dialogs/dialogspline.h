@@ -41,6 +41,8 @@ private:
     qreal            kAsm1;
     qreal            kAsm2;
     qreal            kCurve;
+    DialogSpline(const DialogSpline &dialog);
+    const DialogSpline &operator=(const DialogSpline& dialog);
 };
 
 #endif // DIALOGSPLINE_H

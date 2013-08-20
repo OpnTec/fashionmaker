@@ -3,41 +3,24 @@
 #include "vspline.h"
 #include <QDebug>
 
-VSpline::VSpline(){
-    p1 = 0;
-    p2 = QPointF();
-    p3 = QPointF();
-    p4 = 0;
-    angle1 = 0;
-    angle2 = 0;
-    points = 0;
-    kAsm1 = 1;
-    kAsm2 = 1;
-    kCurve = 1;
+VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+    kCurve(1), points(0){
 }
 
-VSpline::VSpline ( const VSpline & spline ){
-    p1 = spline.GetP1 ();
-    p2 = spline.GetP2 ();
-    p3 = spline.GetP3 ();
-    p4 = spline.GetP4 ();
-    angle1 = spline.GetAngle1 ();
-    angle2 = spline.GetAngle2 ();
-    points = spline.GetDataPoints();
-    kAsm1 = spline.GetKasm1();
-    kAsm2 = spline.GetKasm2();
-    kCurve = spline.GetKcurve();
+VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()),
+    p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()),
+    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()){
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve){
-    this->points = points;
+                  qreal kAsm1, qreal kAsm2 , qreal kCurve):p1(p1), p2(QPointF()), p3(QPointF()),
+    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve){
-    this->points = points;
+                  qreal kCurve):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+    kCurve(1), points(points){
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
@@ -308,7 +291,7 @@ qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) c
     py.append ( p4.y () );
     qint32 i = 0;
     qreal length = 0.0;
-    /*
+     *
      * Наприклад маємо 10 точок. Від 0 до 9  і останню точку не опрацьовуємо.
      * Тому від 0 до 8(<10-1).
      *
@@ -368,8 +351,8 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     double d3 = fabs(((x3 - x4) * dy - (y3 - y4) * dx));
     double da1, da2, k;
     
-    switch(((int)(d2 > curve_collinearity_epsilon) << 1) +
-           (int)(d3 > curve_collinearity_epsilon))
+    switch((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
+           static_cast<int>(d3 > curve_collinearity_epsilon))
     {
     case 0:
         // All collinear OR p1==p4
@@ -583,8 +566,8 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     
     // Continue subdivision
     //----------------------
-    PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, level + 1, px, py);
-    PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, level + 1, px, py);
+    PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, static_cast<qint16>(level + 1), px, py);
+    PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py);
 }
 
 qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2) const{
@@ -662,7 +645,7 @@ qreal VSpline::calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord
     qreal P1, P2, P3, P4, Bt;
     qreal a, b, c, d, ret_t;
     
-    qreal *t = (qreal *)malloc(3*sizeof(qreal));
+    qreal *t = static_cast<qreal *>(malloc(3*sizeof(qreal)));
     P1 = curve_coord1;
     P2 = curve_coord2;
     P3 = curve_coord3;

@@ -3,10 +3,9 @@
 #include <QMenu>
 
 DialogNormal::DialogNormal(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogNormal)
-{
+    DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
+    formula(QString()), angle(0), firstPointId(0), secondPointId(0){
     ui->setupUi(this);
-    number = 0;
     spinBoxAngle = ui->spinBoxAngle;
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;

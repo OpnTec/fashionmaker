@@ -1,9 +1,10 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #include "vtoolpoint.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 
 class VToolLinePoint : public VToolPoint
 {
@@ -20,6 +21,9 @@ protected:
     qint32            angle;
     qint64            basePointId;
     QGraphicsLineItem *mainLine;
+private:
+    VToolLinePoint(const VToolLinePoint &tool);
+    const VToolLinePoint &operator=(const VToolLinePoint &tool);
 };
 
 #endif // VTOOLLINEPOINT_H

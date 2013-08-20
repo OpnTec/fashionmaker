@@ -1,14 +1,17 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
 #include <QCloseEvent>
 #include <QString>
-
+#pragma GCC diagnostic pop
 #include "../container/vpointf.h"
 #include "../container/calculator.h"
 
 DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogEndLine)
-{
+    DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+    formula(QString()), angle(0), basePointId(0){
     ui->setupUi(this);
     spinBoxAngle = ui->spinBoxAngle;
     listWidget = ui->listWidget;

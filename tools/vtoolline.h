@@ -1,9 +1,15 @@
 #ifndef VTOOLLINE_H
 #define VTOOLLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vabstracttool.h"
 #include "QGraphicsLineItem"
 #include "../dialogs/dialogline.h"
+#pragma GCC diagnostic pop
 
 class VToolLine: public VAbstractTool, public QGraphicsLineItem
 {

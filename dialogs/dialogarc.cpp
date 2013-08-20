@@ -3,12 +3,9 @@
 #include "../container/calculator.h"
 
 DialogArc::DialogArc(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogArc)
-{
+    DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
+    timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString()){
     ui->setupUi(this);
-    flagRadius = false;
-    flagF1 = false;
-    flagF2 = false;
 
     timerRadius = new QTimer(this);
     connect(timerRadius, &QTimer::timeout, this, &DialogArc::EvalRadius);

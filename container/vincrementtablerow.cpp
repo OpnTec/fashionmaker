@@ -1,20 +1,11 @@
 #include "vincrementtablerow.h"
 
-VIncrementTableRow::VIncrementTableRow(){
-    this->id = 0;
-    this->base = 0;
-    this->ksize = 0;
-    this->kgrowth = 0;
-    this->description = QString();
+VIncrementTableRow::VIncrementTableRow():id(0), base(0), ksize(0), kgrowth(0), description(QString()){
 }
 
 VIncrementTableRow::VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,
-                                         QString description){
-    this->id = id;
-    this->base = base;
-    this->ksize = ksize;
-    this->kgrowth = kgrowth;
-    this->description = description;
+                                         QString description):id(id), base(base), ksize(ksize),
+    kgrowth(kgrowth), description(description){
 }
 
 QString VIncrementTableRow::getDescription() const{

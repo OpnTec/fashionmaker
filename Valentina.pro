@@ -130,9 +130,11 @@ RESOURCES += \
 
 CONFIG(debug, debug|release){
     # Debug
-    QMAKE_CXXFLAGS += -O0 -isystem "/usr/include/qt5" -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual \
-                      -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Wsign-conversion \
-                      -Winit-self -Wunreachable-code -std=c++0x
+    QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
+                      -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
+                      -isystem "/usr/include/qt5/QtCore" -O0 -Wall -Wextra -pedantic -Weffc++ \
+                      -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast \
+                      -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -std=c++0x
 }else{
     # Release
     QMAKE_CXXFLAGS += -O1 -std=c++0x

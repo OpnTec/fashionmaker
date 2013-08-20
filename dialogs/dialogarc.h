@@ -55,6 +55,8 @@ private:
     void             EvalF1();
     void             EvalF2();
     void             ShowLineArcs();
+    DialogArc(const DialogArc &dialog);
+    const DialogArc &operator=(const DialogArc& dialog);
 };
 
 #endif // DIALOGARC_H

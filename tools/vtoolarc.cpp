@@ -1,9 +1,16 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolarc.h"
 #include <QMenu>
+#pragma GCC diagnostic pop
 #include "../container/calculator.h"
 
 VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                   QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent){
+                   QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
+    dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetArc(id);
     QPainterPath path;
     path.addPath(arc.GetPath());
@@ -81,6 +88,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(toolArc, &VToolArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QMap<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id,toolArc);
     }

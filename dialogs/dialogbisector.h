@@ -45,6 +45,8 @@ private:
     qint64             firstPointId;
     qint64             secondPointId;
     qint64             thirdPointId;
+    DialogBisector(const DialogBisector &dialog);
+    const DialogBisector &operator=(const DialogBisector& dialog);
 };
 
 #endif // DIALOGBISECTOR_H

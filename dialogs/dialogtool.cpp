@@ -1,27 +1,21 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
 #include <QListWidgetItem>
 #include <QCloseEvent>
+#pragma GCC diagnostic pop
 #include "../container/calculator.h"
 
-DialogTool::DialogTool(const VContainer *data, QWidget *parent):QDialog(parent){
+DialogTool::DialogTool(const VContainer *data, QWidget *parent):QDialog(parent), data(data),
+    isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
+    lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0), radioButtonSizeGrowth(0),
+    radioButtonStandartTable(0), radioButtonIncrements(0), radioButtonLengthLine(0){
     Q_CHECK_PTR(data);
-    this->data = data;
-    flagName = true;
-    flagFormula = true;
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
-    isInitialized = false;
-
-    bOk = 0;
-    spinBoxAngle = 0;
-    lineEditFormula = 0;
-    listWidget = 0;
-    labelResultCalculation = 0;
-    labelDescription = 0;
-    radioButtonSizeGrowth = 0;
-    radioButtonStandartTable = 0;
-    radioButtonIncrements = 0;
-    radioButtonLengthLine = 0;
 }
 
 DialogTool::~DialogTool(){
@@ -329,7 +323,7 @@ void DialogTool::UpdateList(){
     }
 }
 
-export template <class key, class val>
+template <class key, class val>
 void DialogTool::ShowVariable(const QMap<key, val> *var){
     Q_CHECK_PTR(listWidget);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);

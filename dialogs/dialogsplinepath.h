@@ -1,7 +1,13 @@
 #ifndef DIALOGSPLINEPATH_H
 #define DIALOGSPLINEPATH_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
+#pragma GCC diagnostic pop
 #include "../container/vcontainer.h"
 #include "../geometry/vsplinepath.h"
 
@@ -33,6 +39,8 @@ private:
     void             DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void             EnableFields();
     void             SetAngle(qint32 angle);
+    DialogSplinePath(const DialogSplinePath &dialog);
+    const DialogSplinePath &operator=(const DialogSplinePath& dialog);
 };
 
 #endif // DIALOGSPLINEPATH_H

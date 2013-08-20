@@ -1,10 +1,15 @@
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vabstracttool.h"
 #include <QDebug>
 #pragma GCC diagnostic pop
 
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
-    VDataTool(data, parent), baseColor(Qt::black), currentColor(Qt::black){
+    VDataTool(data, parent), doc(doc), id(id), ignoreContextMenuEvent(false), nameActivDraw(QString()),
+    baseColor(Qt::black), currentColor(Qt::black){
     this->doc = doc;
     this->id = id;
     nameActivDraw = doc->GetNameActivDraw();
@@ -93,6 +98,9 @@ const VContainer *VAbstractTool::getData()const{
 
 void VAbstractTool::setData(const VContainer &value){
     data = value;
+}
+
+void VAbstractTool::RemoveDataTool(){
 }
 
 void VAbstractTool::setDialog(){

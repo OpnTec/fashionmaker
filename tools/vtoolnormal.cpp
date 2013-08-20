@@ -1,11 +1,17 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolnormal.h"
 #include <QMenu>
+#pragma GCC diagnostic pop
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                         const QString &formula, const qint32 &angle, const qint64 &firstPointId,
+                         const QString &formula, const qreal &angle, const qint64 &firstPointId,
                          const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent){
-    this->secondPointId = secondPointId;
+    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
+    secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>()){
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -40,7 +46,7 @@ void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScen
 
 void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                          const qint64 &secondPointId, const QString typeLine, const QString pointName,
-                         const qint32 angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                         const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
@@ -69,6 +75,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(point, &VToolNormal::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             tools->insert(id,point);
         }
@@ -76,7 +83,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
 }
 
 QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qint32 &angle){
+                               const qreal &angle){
     QLineF line(firstPoint, secondPoint);
     QLineF normal = line.normalVector();
     normal.setAngle(normal.angle()+angle);

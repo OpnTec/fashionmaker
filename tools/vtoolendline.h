@@ -1,10 +1,12 @@
 #ifndef VTOOLENDLINE_H
 #define VTOOLENDLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <QSharedPointer>
-
 #include "vtoollinepoint.h"
 #include "../dialogs/dialogendline.h"
+#pragma GCC diagnostic pop
 
 class VToolEndLine : public VToolLinePoint
 {

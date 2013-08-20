@@ -1,8 +1,14 @@
 #ifndef VTOOLSHOULDERPOINT_H
 #define VTOOLSHOULDERPOINT_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoollinepoint.h"
 #include "../dialogs/dialogshoulderpoint.h"
+#pragma GCC diagnostic pop
 
 class VToolShoulderPoint : public VToolLinePoint
 {

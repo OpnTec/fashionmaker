@@ -1,16 +1,22 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vtoolpoint.h"
 #include <QPen>
 #include <QBrush>
 #include <QDebug>
 #include <QGraphicsItem>
-#include <cmath>
-
-#include "../container/vpointf.h"
 #include "../widgets/vmaingraphicsscene.h"
+#pragma GCC diagnostic pop
+#include <cmath>
+#include "../container/vpointf.h"
+
 
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                       QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsEllipseItem(parent){
-    radius = 1.5*PrintDPI/25.4;
+                       QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsEllipseItem(parent),
+    radius(1.5*PrintDPI/25.4), namePoint(0), lineName(0){
     //create circle
     VPointF point = data->GetPoint(id);
     QRectF rec = QRectF(0, 0, radius*2, radius*2);

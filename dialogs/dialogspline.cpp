@@ -2,10 +2,9 @@
 #include "ui_dialogspline.h"
 
 DialogSpline::DialogSpline(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogSpline)
-{
+    DialogTool(data, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
+    kAsm1(1), kAsm2(1), kCurve(1){
     ui->setupUi(this);
-    number = 0;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogSpline::DialogAccepted);
 
@@ -40,8 +39,8 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Type type){
                 qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
                 QPointF p1 = data->GetPoint(p1Id).toQPointF();
                 QPointF p4 = data->GetPoint(id).toQPointF();
-                ui->spinBoxAngle1->setValue(QLineF(p1, p4).angle());
-                ui->spinBoxAngle2->setValue(QLineF(p4, p1).angle());
+                ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
+                ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
             }
             if(!isInitialized){
                 this->show();
@@ -94,7 +93,7 @@ qreal DialogSpline::getAngle2() const{
 
 void DialogSpline::setAngle2(const qreal &value){
     angle2 = value;
-    ui->spinBoxAngle2->setValue(value);
+    ui->spinBoxAngle2->setValue(static_cast<qint32>(value));
 }
 
 qreal DialogSpline::getAngle1() const{
@@ -103,7 +102,7 @@ qreal DialogSpline::getAngle1() const{
 
 void DialogSpline::setAngle1(const qreal &value){
     angle1 = value;
-    ui->spinBoxAngle1->setValue(value);
+    ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
 }
 
 qint64 DialogSpline::getP4() const{

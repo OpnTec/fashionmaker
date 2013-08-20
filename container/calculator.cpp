@@ -1,7 +1,12 @@
 #include "calculator.h"
 #include <cmath>
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDebug>
+#pragma GCC diagnostic pop
 
 #define DELIMITER  1
 #define VARIABLE   2
@@ -12,10 +17,8 @@
 #define FINISHED   10
 #define EOL        9
 
-Calculator::Calculator(const VContainer *data){
-    index = 0;
-    this->data = data;
-
+Calculator::Calculator(const VContainer *data):errorMsg(0), token(QString()), tok(0), token_type(0),
+    prog(QString()), index(0), data(data), debugFormula(QString()){
 }
 
 qreal Calculator::eval(QString prog, QString *errorMsg){

@@ -1,10 +1,15 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
+#pragma GCC diagnostic pop
 #include "../geometry/vsplinepoint.h"
 
 DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogSplinePath)
-{
+    DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogSplinePath::DialogAccepted);
@@ -136,8 +141,8 @@ void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAs
     ChangeCurrentData(ui->comboBoxPoint, id);
     ui->doubleSpinBoxKasm1->setValue(kAsm1);
     ui->doubleSpinBoxKasm2->setValue(kAsm2);
-    ui->spinBoxAngle2->setValue(angle2);
-    ui->spinBoxAngle1->setValue(angle1);
+    ui->spinBoxAngle2->setValue(static_cast<qint32>(angle2));
+    ui->spinBoxAngle1->setValue(static_cast<qint32>(angle1));
 
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);

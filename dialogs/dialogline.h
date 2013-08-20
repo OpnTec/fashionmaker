@@ -1,10 +1,17 @@
 #ifndef DIALOGLINE_H
 #define DIALOGLINE_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
+#include <QComboBox>
+#pragma GCC diagnostic pop
 #include "../container/vcontainer.h"
 #include "../options.h"
-#include <QComboBox>
+
 
 namespace Ui {
 class DialogLine;
@@ -28,6 +35,8 @@ private:
     qint32           number;
     qint64           firstPoint;
     qint64           secondPoint;
+    DialogLine(const DialogLine &dialog);
+    const DialogLine &operator=(const DialogLine& dialog);
 };
 
 #endif // DIALOGLINE_H

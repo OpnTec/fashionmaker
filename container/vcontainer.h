@@ -3,6 +3,7 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
 #pragma GCC diagnostic ignored "-Wsign-conversion"
 #pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QMap>
@@ -36,7 +37,7 @@ public:
     VStandartTableCell  GetStandartTableCell(const QString& name) const;
     VIncrementTableRow  GetIncrementTableRow(const QString& name) const;
     qreal               GetLine(const QString &name) const;
-    qint32              GetLineArc(const QString &name) const;
+    qreal               GetLineArc(const QString &name) const;
     VSpline             GetSpline(qint64 id) const;
     VArc                GetArc(qint64 id) const;
     VSplinePath         GetSplinePath(qint64 id) const;

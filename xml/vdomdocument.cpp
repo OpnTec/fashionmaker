@@ -1,4 +1,8 @@
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vdomdocument.h"
 #include <QDebug>
 #include "../tools/vtoolsinglepoint.h"
@@ -12,27 +16,29 @@
 #include "../tools/vtoolspline.h"
 #include "../tools/vtoolarc.h"
 #include "../tools/vtoolsplinepath.h"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/calculator.h"
 #include "../geometry/vsplinepoint.h"
 
 
 
-VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(), cursor(0){
-    this->data = data;
-    this->comboBoxDraws = comboBoxDraws;
+VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(),
+    map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+   comboBoxDraws(comboBoxDraws){
 }
 
-VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(name), cursor(0) {
-    this->data = data;
-    this->comboBoxDraws = comboBoxDraws;
+VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws) :
+    QDomDocument(name), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+    comboBoxDraws(comboBoxDraws){
 }
 
-VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(doctype),
-    cursor(0){
-    this->data = data;
-    this->comboBoxDraws = comboBoxDraws;
+VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws) :
+    QDomDocument(doctype), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+    comboBoxDraws(comboBoxDraws){
 }
 
 VDomDocument::~VDomDocument(){
@@ -434,7 +440,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             QString formula = domElement.attribute("length", "");
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
-            qreal angle = domElement.attribute("angle", "").toInt();
+            qreal angle = domElement.attribute("angle", "").toDouble();
             VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
                                 mx, my, scene, this, data, parse, Tool::FromFile);
         }

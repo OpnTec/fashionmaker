@@ -1,12 +1,12 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wsign-conversion"
 #include <QtGlobal>
 #include <QString>
-#pragma GCC diagnostic warning "-Wsign-conversion"
-#pragma GCC diagnostic warning "-Weffc++"
+#pragma GCC diagnostic pop
 #include "../options.h"
 
 class VToolRecord

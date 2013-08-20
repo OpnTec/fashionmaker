@@ -3,7 +3,8 @@
 
 VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
                                  QGraphicsItem *parent):VAbstractTool(doc, data, id),
-    QGraphicsPathItem(parent){
+    QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
+    controlPoints(QVector<VControlPointSpline *>()){
     VSplinePath splPath = data->GetSplinePath(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
@@ -72,6 +73,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(spl, &VToolSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QMap<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id,spl);
     }

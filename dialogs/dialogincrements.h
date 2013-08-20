@@ -1,11 +1,14 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
 #include <QPushButton>
-
-#include "../container/vcontainer.h"
 #include "../xml/vdomdocument.h"
+#pragma GCC diagnostic pop
+#include "../container/vcontainer.h"
+
 
 namespace Ui {
 class DialogIncrements;
@@ -40,8 +43,10 @@ private:
     void FillLengthLines();
     void FillLengthSplines();
     void FillLengthArcs();
-    void AddIncrementToFile(quint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
+    void AddIncrementToFile(qint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
                             QString description);
+    DialogIncrements(const DialogIncrements &dialog);
+    const DialogIncrements &operator=(const DialogIncrements& dialog);
 };
 
 #endif // DIALOGINCREMENTS_H

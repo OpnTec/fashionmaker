@@ -1,7 +1,13 @@
 #ifndef VSTANDARTTABLECELL_H
 #define VSTANDARTTABLECELL_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QString>
+#pragma GCC diagnostic pop
 
 class VStandartTableCell
 {
