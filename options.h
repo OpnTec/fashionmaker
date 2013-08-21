@@ -31,7 +31,8 @@ namespace Tools{
         LineIntersectTool,
         SplineTool,
         ArcTool,
-        SplinePathTool
+        SplinePathTool,
+        PointOfContact
     };
 }
 

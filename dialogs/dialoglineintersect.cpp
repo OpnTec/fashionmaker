@@ -1,5 +1,11 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialoglineintersect.h"
 #include "ui_dialoglineintersect.h"
+#pragma GCC diagnostic pop
 
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()), p1Line1(0),

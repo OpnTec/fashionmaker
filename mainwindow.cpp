@@ -23,6 +23,7 @@
 #include "tools/vtoolspline.h"
 #include "tools/vtoolarc.h"
 #include "tools/vtoolsplinepath.h"
+#include "tools/vtoolpointofcontact.h"
 #pragma GCC diagnostic pop
 #include "geometry/vspline.h"
 
@@ -36,7 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogLineIntersect(QSharedPointer<DialogLineIntersect>()),
     dialogSpline(QSharedPointer<DialogSpline>()),
     dialogArc(QSharedPointer<DialogArc>()), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
-    dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false){
+    dialogPointOfContact(QSharedPointer<DialogPointOfContact>()), dialogHistory(0),
+    doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false){
     ui->setupUi(this);
     ToolBarOption();
     ToolBarDraws();
@@ -74,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
     connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
     connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
+    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
 
     data = new VContainer;
 
@@ -317,6 +320,18 @@ void MainWindow::ClosedDialogSplinePath(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolPointOfContact(bool checked){
+    SetToolButton(checked, Tools::PointOfContact, ":/cursor/pointcontact_cursor.png", dialogPointOfContact,
+                  &MainWindow::ClosedDialogPointOfContact);
+}
+
+void MainWindow::ClosedDialogPointOfContact(int result){
+    if(result == QDialog::Accepted){
+        VToolPointOfContact::Create(dialogPointOfContact, scene, doc, data);
+    }
+    ArrowTool();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -476,6 +491,12 @@ void MainWindow::CanselTool(){
         case Tools::SplinePathTool:
             dialogSplinePath.clear();
             ui->toolButtonSplinePath->setChecked(false);
+            scene->setFocus(Qt::OtherFocusReason);
+            scene->clearSelection();
+            break;
+        case Tools::PointOfContact:
+            dialogPointOfContact.clear();
+            ui->toolButtonPointOfContact->setChecked(false);
             scene->setFocus(Qt::OtherFocusReason);
             scene->clearSelection();
             break;
@@ -685,6 +706,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonSpline->setEnabled(enable);
     ui->toolButtonArc->setEnabled(enable);
     ui->toolButtonSplinePath->setEnabled(enable);
+    ui->toolButtonPointOfContact->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

@@ -34,7 +34,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent) :
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
-    connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
+    connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
 
     ShowVariable(data->DataBase());
@@ -42,7 +42,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent) :
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogArc::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
-    connect(ui->radioButtonLineArcs, &QRadioButton::clicked, this, &DialogArc::LineArcs);
+    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineArcs);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
@@ -114,7 +114,7 @@ void DialogArc::ValChenged(int row){
         return;
     }
     QListWidgetItem *item = ui->listWidget->item( row );
-    if(ui->radioButtonLineArcs->isChecked()){
+    if(ui->radioButtonLineAngles->isChecked()){
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineArc(item->text()))
                 .arg("Значення кута лінії.");
         ui->labelDescription->setText(desc);
@@ -172,7 +172,7 @@ void DialogArc::ShowLineArcs(){
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QMap<QString, qreal> *lineArcsTable = data->DataLineArcs();
+    const QMap<QString, qreal> *lineArcsTable = data->DataLineAngles();
     QMapIterator<QString, qreal> i(*lineArcsTable);
     while (i.hasNext()) {
         i.next();

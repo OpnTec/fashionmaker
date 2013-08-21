@@ -28,6 +28,7 @@
 #include "dialogs/dialogarc.h"
 #include "dialogs/dialogsplinepath.h"
 #include "dialogs/dialoghistory.h"
+#include "dialogs/dialogpointofcontact.h"
 #include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
 #pragma GCC diagnostic pop
@@ -83,6 +84,8 @@ public slots:
     void                ClosedDialogArc(int result);
     void                ToolSplinePath(bool checked);
     void                ClosedDialogSplinePath(int result);
+    void                ToolPointOfContact(bool checked);
+    void                ClosedDialogPointOfContact(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -105,6 +108,7 @@ private:
     QSharedPointer<DialogSpline>        dialogSpline;
     QSharedPointer<DialogArc>           dialogArc;
     QSharedPointer<DialogSplinePath>    dialogSplinePath;
+    QSharedPointer<DialogPointOfContact>    dialogPointOfContact;
     DialogHistory       *dialogHistory;
     VDomDocument        *doc;
     VContainer          *data;

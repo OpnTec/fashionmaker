@@ -1,6 +1,12 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
 #include <QMenu>
+#pragma GCC diagnostic pop
 
 DialogNormal::DialogNormal(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),

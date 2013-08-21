@@ -58,7 +58,9 @@ SOURCES += main.cpp\
     widgets/vmaingraphicsview.cpp \
     tools/vdatatool.cpp \
     xml/vtoolrecord.cpp \
-    dialogs/dialoghistory.cpp
+    dialogs/dialoghistory.cpp \
+    tools/vtoolpointofcontact.cpp \
+    dialogs/dialogpointofcontact.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -107,7 +109,9 @@ HEADERS  += mainwindow.h \
     widgets/vmaingraphicsview.h \
     tools/vdatatool.h \
     xml/vtoolrecord.h \
-    dialogs/dialoghistory.h
+    dialogs/dialoghistory.h \
+    tools/vtoolpointofcontact.h \
+    dialogs/dialogpointofcontact.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -122,7 +126,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogspline.ui \
     dialogs/dialogarc.ui \
     dialogs/dialogsplinepath.ui \
-    dialogs/dialoghistory.ui
+    dialogs/dialoghistory.ui \
+    dialogs/dialogpointofcontact.ui
 
 RESOURCES += \
     icon.qrc \

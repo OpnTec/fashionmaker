@@ -50,13 +50,13 @@ public:
     void                AddLengthSpline(const QString &name, const qreal &value);
     void                AddLengthArc(const qint64 &center, const qint64 &id);
     void                AddLengthArc(const QString &name, const qreal &value);
-    void                AddLineArc(const QString &name, const qint32 &value);
+    void                AddLineAngle(const QString &name, const qreal &value);
     void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
     qint64              AddSpline(const VSpline& spl);
     qint64              AddSplinePath(const VSplinePath& splPath);
     qint64              AddArc(const VArc& arc);
     QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
-    QString             GetNameLineArc(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const;
     QString             GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const;
     QString             GetNameSplinePath(const VSplinePath &path) const;
     QString             GetNameArc(const qint64 &center, const qint64 &id) const;
@@ -74,7 +74,7 @@ public:
     void                ClearLengthLines();
     void                ClearLengthSplines();
     void                ClearLengthArcs();
-    void                ClearLineArcs();
+    void                ClearLineAngles();
     void                SetSize(qint32 size);
     void                SetGrowth(qint32 growth);
     qint32              size() const;
@@ -92,7 +92,7 @@ public:
     const QMap<QString, qreal> *DataLengthLines() const;
     const QMap<QString, qreal> *DataLengthSplines() const;
     const QMap<QString, qreal> *DataLengthArcs() const;
-    const QMap<QString, qreal> *DataLineArcs() const;
+    const QMap<QString, qreal> *DataLineAngles() const;
     const QMap<qint64, VSplinePath> *DataSplinePaths() const;
     void  UpdateId(qint64 newId);
 private:
@@ -102,7 +102,7 @@ private:
     QMap<QString, VStandartTableCell> standartTable;
     QMap<QString, VIncrementTableRow> incrementTable;
     QMap<QString, qreal> lengthLines;
-    QMap<QString, qreal> lineArcs;
+    QMap<QString, qreal> lineAngles;
     QMap<qint64, VSpline> splines;
     QMap<QString, qreal> lengthSplines;
     QMap<qint64, VArc> arcs;

@@ -30,5 +30,6 @@
         <file>icon/32x32/splinePath.png</file>
         <file>icon/32x32/history.png</file>
         <file>icon/32x32/put_after.png</file>
+        <file>icon/32x32/point_of_contact.png</file>
     </qresource>
 </RCC>

@@ -16,6 +16,7 @@
 #include "../tools/vtoolspline.h"
 #include "../tools/vtoolarc.h"
 #include "../tools/vtoolsplinepath.h"
+#include "../tools/vtoolpointofcontact.h"
 #pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/calculator.h"
@@ -242,7 +243,7 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene){
     data->ClearLengthLines();
     data->ClearLengthArcs();
     data->ClearLengthSplines();
-    data->ClearLineArcs();
+    data->ClearLineAngles();
     history.clear();
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();
@@ -477,6 +478,21 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         }
         return;
     }
+    if(type == "pointOfContact"){
+        if(!domElement.isNull()){
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            QString name = domElement.attribute("name", "");
+            qreal mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+            qreal my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+            QString radius = domElement.attribute("radius", "");
+            qint64 center = domElement.attribute("center", "").toLongLong();
+            qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+            qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+            VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my,
+                                        scene, this, data, parse, Tool::FromFile);
+        }
+        return;
+    }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
@@ -527,7 +543,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                     }
                 }
             }
-            VToolSplinePath::Create(id, path, scene, this, data, Document::FullParse, Tool::FromFile);
+            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
         }
         return;
     }
@@ -576,26 +592,28 @@ void VDomDocument::setCursor(const qint64 &value){
 
 void VDomDocument::setCurrentData(){
     QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
-    nameActivDraw = nameDraw;
-    qint64 id = 0;
-    if(history.size() == 0){
-        return;
-    }
-    for(qint32 i = 0; i < history.size(); ++i){
-        VToolRecord tool = history.at(i);
-        if(tool.getNameDraw() == nameDraw){
-            id = tool.getId();
-        }
-    }
-    if(id == 0){
-        VToolRecord tool = history.at(history.size()-1);
-        id = tool.getId();
-        if(id == 0){
+    if(nameActivDraw != nameDraw){
+        nameActivDraw = nameDraw;
+        qint64 id = 0;
+        if(history.size() == 0){
             return;
         }
-    }
-    if(tools.size() > 0){
-        VDataTool *vTool = tools.value(id);
-        data->setData(vTool->getData());
+        for(qint32 i = 0; i < history.size(); ++i){
+            VToolRecord tool = history.at(i);
+            if(tool.getNameDraw() == nameDraw){
+                id = tool.getId();
+            }
+        }
+        if(id == 0){
+            VToolRecord tool = history.at(history.size()-1);
+            id = tool.getId();
+            if(id == 0){
+                return;
+            }
+        }
+        if(tools.size() > 0){
+            VDataTool *vTool = tools.value(id);
+            data->setData(vTool->getData());
+        }
     }
 }

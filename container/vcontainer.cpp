@@ -12,7 +12,7 @@ qint64 VContainer::_id = 0;
 
 VContainer::VContainer():base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
     standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
-    lengthLines(QMap<QString, qreal>()), lineArcs(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
+    lengthLines(QMap<QString, qreal>()), lineAngles(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
     lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), lengthArcs(QMap<QString, qreal>()),
     splinePaths(QMap<qint64, VSplinePath>()){
     SetSize(500);
@@ -31,7 +31,7 @@ void VContainer::setData(const VContainer &data){
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
-    lineArcs = *data.DataLengthArcs();
+    lineAngles = *data.DataLengthArcs();
     splines = *data.DataSplines();
     lengthSplines = *data.DataLengthSplines();
     arcs = *data.DataArcs();
@@ -71,7 +71,7 @@ qreal VContainer::GetLine(const QString &name) const{
 
 qreal VContainer::GetLineArc(const QString &name) const{
     Q_ASSERT(!name.isEmpty());
-    return GetObject(lineArcs, name);
+    return GetObject(lineAngles, name);
 }
 
 VSpline VContainer::GetSpline(qint64 id) const{
@@ -157,9 +157,9 @@ void VContainer::AddLengthArc(const QString &name, const qreal &value){
     lengthArcs[name] = value;
 }
 
-void VContainer::AddLineArc(const QString &name, const qint32 &value){
+void VContainer::AddLineAngle(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
-    lineArcs[name] = value;
+    lineAngles[name] = value;
 }
 
 qreal VContainer::GetValueStandartTableCell(const QString& name) const{
@@ -184,7 +184,7 @@ void VContainer::Clear(){
     incrementTable.clear();
     lengthLines.clear();
     lengthArcs.clear();
-    lineArcs.clear();
+    lineAngles.clear();
     ClearObject();
     CreateManTableIGroup ();
 }
@@ -211,8 +211,8 @@ void VContainer::ClearLengthArcs(){
     lengthArcs.clear();
 }
 
-void VContainer::ClearLineArcs(){
-    lineArcs.clear();
+void VContainer::ClearLineAngles(){
+    lineAngles.clear();
 }
 
 void VContainer::SetSize(qint32 size){
@@ -257,9 +257,9 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const{
         *ok = true;
         return lengthArcs.value(name);
     }
-    if(lineArcs.contains(name)){
+    if(lineAngles.contains(name)){
         *ok = true;
-        return lineArcs.value(name);
+        return lineAngles.value(name);
     }
     *ok = false;
     return 0;
@@ -301,8 +301,8 @@ const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
     return &lengthArcs;
 }
 
-const QMap<QString, qreal> *VContainer::DataLineArcs() const{
-    return &lineArcs;
+const QMap<QString, qreal> *VContainer::DataLineAngles() const{
+    return &lineAngles;
 }
 
 const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
@@ -314,6 +314,8 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
     VPointF firstPoint = GetPoint(firstPointId);
     VPointF secondPoint = GetPoint(secondPointId);
     AddLengthLine(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).length()/PrintDPI*25.4);
+    nameLine = GetNameLineAngle(firstPointId, secondPointId);
+    AddLineAngle(nameLine, QLineF(firstPoint.toQPointF(), secondPoint.toQPointF()).angle());
 }
 
 template <typename key, typename val>
@@ -345,10 +347,10 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
     return QString("Line_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameLineArc(const qint64 &firstPoint, const qint64 &secondPoint) const{
+QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const{
     VPointF first = GetPoint(firstPoint);
     VPointF second = GetPoint(secondPoint);
-    return QString("ArcLine_%1_%2").arg(first.name(), second.name());
+    return QString("AngleLine_%1_%2").arg(first.name(), second.name());
 }
 
 QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint) const{

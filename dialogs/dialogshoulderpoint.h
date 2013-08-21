@@ -1,7 +1,13 @@
 #ifndef DIALOGSHOULDERPOINT_H
 #define DIALOGSHOULDERPOINT_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
+#pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/vcontainer.h"
 #include "../container/calculator.h"

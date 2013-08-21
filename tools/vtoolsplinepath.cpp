@@ -102,8 +102,8 @@ void VToolSplinePath::FullUpdateFromGui(int result){
 
             spl = VSpline (VAbstractTool::data.DataPoints(), spl.GetP1(),  controlPoints[j-2]->pos(),
                            controlPoints[j-1]->pos(), spl.GetP4(), splPath.getKCurve());
-            CorectControlPoints(spl, splPath, i-1, i, SplinePoint::FirstPoint);
-            CorectControlPoints(spl, splPath, i, i, SplinePoint::LastPoint);
+            CorectControlPoints(spl, splPath, i);
+            CorectControlPoints(spl, splPath, i);
 
             QDomElement domElement = doc->elementById(QString().setNum(id));
             if(domElement.isElement()){
@@ -118,20 +118,16 @@ void VToolSplinePath::FullUpdateFromGui(int result){
 }
 
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
-                                                 const QPointF pos)
-{
-    qint32 index = 0;
+                                                 const QPointF pos){
     VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
     VSpline spl = splPath.GetSpline(indexSpline);
     if(position == SplinePoint::FirstPoint){
         spl.ModifiSpl (spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());
-        index = indexSpline - 1;
     } else {
         spl.ModifiSpl (spl.GetP1(), spl.GetP2(), pos, spl.GetP4(), spl.GetKcurve());
-        index = indexSpline;
     }
 
-    CorectControlPoints(spl, splPath, index, indexSpline, position);
+    CorectControlPoints(spl, splPath, indexSpline);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
         domElement.setAttribute("kCurve", QString().setNum(splPath.getKCurve()));
@@ -140,8 +136,8 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, Spli
     }
 }
 
-void VToolSplinePath::CorectControlPoints(const VSpline &spl, VSplinePath &splPath, qint32 index,
-                                          const qint32 &indexSpline, SplinePoint::Position position){
+void VToolSplinePath::CorectControlPoints(const VSpline &spl, VSplinePath &splPath,
+                                          const qint32 &indexSpline){
     VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePoint::FirstPoint);
     p.SetAngle(spl.GetAngle1());
     p.SetKAsm2(spl.GetKasm1());
@@ -151,26 +147,6 @@ void VToolSplinePath::CorectControlPoints(const VSpline &spl, VSplinePath &splPa
     p.SetAngle(spl.GetAngle2()-180);
     p.SetKAsm1(spl.GetKasm2());
     splPath.UpdatePoint(indexSpline, SplinePoint::LastPoint, p);
-
-    if(index > 0 && index < splPath.CountPoint()-1){
-        if(position == SplinePoint::FirstPoint){
-            VSpline spl = splPath.GetSpline(indexSpline-1);
-            qint32 i = (indexSpline-1)*2-1;
-            disconnect(controlPoints[i], &VControlPointSpline::ControlPointChangePosition, this,
-                       &VToolSplinePath::ControlPointChangePosition);
-            controlPoints[i]->setPos(spl.GetP3());
-            connect(controlPoints[i], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-        } else {
-            VSpline spl = splPath.GetSpline(indexSpline+1);
-            qint32 i = (indexSpline+1)*2-2;
-            disconnect(controlPoints[i], &VControlPointSpline::ControlPointChangePosition, this,
-                       &VToolSplinePath::ControlPointChangePosition);
-            controlPoints[i]->setPos(spl.GetP2());
-            connect(controlPoints[i], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-        }
-    }
 }
 
 void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path){
@@ -271,10 +247,10 @@ void VToolSplinePath::RefreshGeometry(){
     this->setPath(path);
     for(qint32 i = 1; i<=splPath.Count(); ++i){
         VSpline spl = splPath.GetSpline(i);
-        QPointF splinePoint = VAbstractTool::data.GetPoint(spl.GetP1()).toQPointF();
+        QPointF splinePoint = spl.GetPointP1().toQPointF();
         QPointF controlPoint = spl.GetP2();
         emit RefreshLine(i, SplinePoint::FirstPoint, controlPoint, splinePoint);
-        splinePoint = VAbstractTool::data.GetPoint(spl.GetP4()).toQPointF();
+        splinePoint = spl.GetPointP4().toQPointF();
         controlPoint = spl.GetP3();
         emit RefreshLine(i, SplinePoint::LastPoint, controlPoint, splinePoint);
 

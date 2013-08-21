@@ -1,11 +1,16 @@
 #ifndef DIALOGNORMAL_H
 #define DIALOGNORMAL_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QTimer>
-
+#pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/vcontainer.h"
 #include "../container/calculator.h"

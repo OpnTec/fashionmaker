@@ -49,9 +49,8 @@ private:
     void                             RefreshGeometry();
     void                             AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
     void                             UpdatePathPoint(QDomNode& node, VSplinePath &path);
-    void                             CorectControlPoints(const VSpline &spl, VSplinePath &splPath, qint32 index,
-                                                         const qint32 &indexSpline,
-                                                         SplinePoint::Position position);
+    void                             CorectControlPoints(const VSpline &spl, VSplinePath &splPath,
+                                                         const qint32 &indexSpline);
 };
 
 #endif // VTOOLSPLINEPATH_H
