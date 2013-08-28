@@ -1,0 +1,33 @@
+#ifndef VDETAIL_H
+#define VDETAIL_H
+
+#include "vnodedetail.h"
+#include <QVector>
+#include <QString>
+
+class VDetail
+{
+public:
+    VDetail();
+    VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
+    void append(const VNodeDetail &node);
+    void Clear();
+    qint32 CountNode() const;
+    VNodeDetail & operator[](int indx);
+    QString getName() const;
+    void setName(const QString &value);
+
+    qreal getMx() const;
+    void setMx(const qreal &value);
+
+    qreal getMy() const;
+    void setMy(const qreal &value);
+
+private:
+    QVector<VNodeDetail> nodes;
+    QString name;
+    qreal mx;
+    qreal my;
+};
+
+#endif // VDETAIL_H

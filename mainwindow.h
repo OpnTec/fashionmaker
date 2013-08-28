@@ -29,6 +29,7 @@
 #include "dialogs/dialogsplinepath.h"
 #include "dialogs/dialoghistory.h"
 #include "dialogs/dialogpointofcontact.h"
+#include "dialogs/dialogdetail.h"
 #include "tools/vtoolsinglepoint.h"
 #include "xml/vdomdocument.h"
 #pragma GCC diagnostic pop
@@ -86,13 +87,17 @@ public slots:
     void                ClosedDialogSplinePath(int result);
     void                ToolPointOfContact(bool checked);
     void                ClosedDialogPointOfContact(int result);
+    void                ToolDetail(bool checked);
+    void                ClosedDialogDetail(int result);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
 private:
     Ui::MainWindow      *ui;
     Tools::Enum         tool;
-    VMainGraphicsScene  *scene;
+    VMainGraphicsScene  *currentScene;
+    VMainGraphicsScene  *sceneDraw;
+    VMainGraphicsScene  *sceneDetails;
     QLabel              *mouseCoordinate;
     QLabel              *helpLabel;
     VMainGraphicsView   *view;
@@ -109,12 +114,14 @@ private:
     QSharedPointer<DialogArc>           dialogArc;
     QSharedPointer<DialogSplinePath>    dialogSplinePath;
     QSharedPointer<DialogPointOfContact>    dialogPointOfContact;
+    QSharedPointer<DialogDetail>    dialogDetail;
     DialogHistory       *dialogHistory;
     VDomDocument        *doc;
     VContainer          *data;
     QComboBox           *comboBoxDraws;
     QString             fileName;
     bool                changeInFile;
+    Draw::Mode          mode;
     MainWindow(const MainWindow &window);
     const MainWindow &operator=(const MainWindow &window);
     void                ToolBarOption();

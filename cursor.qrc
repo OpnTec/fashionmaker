@@ -11,5 +11,6 @@
         <file>cursor/arc_cursor.png</file>
         <file>cursor/splinepath_cursor.png</file>
         <file>cursor/pointcontact_cursor.png</file>
+        <file>cursor/new_detail_cursor.png</file>
     </qresource>
 </RCC>

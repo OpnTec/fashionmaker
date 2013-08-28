@@ -1,8 +1,9 @@
 #include "vtoolsplinepath.h"
 #include <QMenu>
 
-VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                                 QGraphicsItem *parent):VAbstractTool(doc, data, id),
+VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode,
+                                 Tool::Enum typeCreation,
+                                 QGraphicsItem *parent):VAbstractTool(doc, data, id, mode),
     QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>()){
     VSplinePath splPath = data->GetSplinePath(id);
@@ -32,7 +33,6 @@ VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
         connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
         controlPoints.append(controlPoint);
     }
-
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -47,14 +47,14 @@ void VToolSplinePath::setDialog(){
 }
 
 void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene *scene,
-                             VDomDocument *doc, VContainer *data){
+                             VDomDocument *doc, VContainer *data, Draw::Mode mode){
     VSplinePath path = dialog->GetPath();
-    Create(0, path, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, path, scene, doc, data, Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene *scene,
                              VDomDocument *doc, VContainer *data, Document::Enum parse,
-                             Tool::Enum typeCreation){
+                             Tool::Enum typeCreation, Draw::Mode mode){
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddSplinePath(path);
@@ -63,14 +63,23 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         if(parse != Document::FullParse){
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VDataTool *tool = tools->value(id);
-            tool->VDataTool::setData(data);
-            tools->insert(id, tool);
+            if(tool != 0){
+                tool->VDataTool::setData(data);
+                tools->insert(id, tool);
+                data->IncrementReferens(id, Scene::SplinePath);
+            }
         }
     }
     data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
     VAbstractTool::AddRecord(id, Tools::SplinePathTool, doc);
+    if(mode == Draw::Modeling){
+        const QVector<VSplinePoint> *points = path.GetPoint();
+        for(qint32 i = 0; i<points->size(); ++i){
+            data->IncrementReferens(points->at(i).P(), Scene::Point);
+        }
+    }
     if(parse == Document::FullParse){
-        VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
+        VToolSplinePath *spl = new VToolSplinePath(doc, data, id, mode, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
@@ -208,7 +217,7 @@ void VToolSplinePath::AddToFile(){
         AddPathPoint(domElement, splPath[i]);
     }
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 
 void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint){

@@ -19,15 +19,15 @@ class VToolSpline:public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                                   VToolSpline ( VDomDocument *doc, VContainer *data, qint64 id,
+                                   VToolSpline (VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode,
                                                  Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
     virtual void setDialog();
     static void Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                      VContainer *data);
+                      VContainer *data, Draw::Mode mode);
     static void Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                        const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                       Tool::Enum typeCreation);
+                       Tool::Enum typeCreation, Draw::Mode mode);
 signals:
     void                           RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position,
                                                const QPointF &controlPoint, const QPointF &splinePoint );

@@ -7,18 +7,18 @@
 class VToolPointOfContact : public VToolPoint
 {
 public:
-    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
+    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode,
                         const QString &radius, const qint64 &center, const qint64 &firstPointId,
                         const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static QPointF    FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                                 const QPointF &secondPoint);
     static void Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data);
+                       VDomDocument *doc, VContainer *data, Draw::Mode mode);
     static void Create(const qint64 _id, const QString &radius, const qint64 &center, const qint64 &firstPointId,
                        const qint64 &secondPointId, const QString &pointName,
                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

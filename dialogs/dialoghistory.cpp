@@ -121,6 +121,7 @@ QString DialogHistory::Record(const VToolRecord &tool){
     qint64 p2Line1 = 0;
     qint64 p1Line2 = 0;
     qint64 p2Line2 = 0;
+    qint64 center = 0;
     QDomElement domElement;
     switch( tool.getTypeTool() ){
         case Tools::ArrowTool:
@@ -217,6 +218,18 @@ QString DialogHistory::Record(const VToolRecord &tool){
             }
         }
          break;
+        case Tools::PointOfContact:
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if(domElement.isElement()){
+                center = domElement.attribute("center", "").toLongLong();
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+            }
+            record = QString("%4 - Точка дотику дуги з центром в точці %1 і відрізку %2_%3").arg(data->GetPoint(center).name(),
+                                                                               data->GetPoint(firstPointId).name(),
+                                                                               data->GetPoint(secondPointId).name(),
+                                                                               data->GetPoint(tool.getId()).name());
+            break;
     }
     return record;
 }

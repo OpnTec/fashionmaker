@@ -11,10 +11,14 @@
 qint64 VContainer::_id = 0;
 
 VContainer::VContainer():base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
+    modelingPoints(QMap<qint64, VPointF>()),
     standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
     lengthLines(QMap<QString, qreal>()), lineAngles(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
-    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), lengthArcs(QMap<QString, qreal>()),
-    splinePaths(QMap<qint64, VSplinePath>()){
+    modelingSplines(QMap<qint64, VSpline>()),
+    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), modelingArcs(QMap<qint64, VArc>()),
+    lengthArcs(QMap<QString, qreal>()),
+    splinePaths(QMap<qint64, VSplinePath>()), modelingSplinePaths(QMap<qint64, VSplinePath>()),
+    details(QMap<qint64, VDetail>()){
     SetSize(500);
     SetGrowth(1760);
     CreateManTableIGroup ();
@@ -28,15 +32,20 @@ const VContainer &VContainer::operator =(const VContainer &data){
 void VContainer::setData(const VContainer &data){
     base = *data.DataBase();
     points = *data.DataPoints();
+    modelingPoints = *data.DataModelingPoints();
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
     lineAngles = *data.DataLengthArcs();
     splines = *data.DataSplines();
+    modelingSplines = *data.DataModelingSplines();
     lengthSplines = *data.DataLengthSplines();
     arcs = *data.DataArcs();
+    modelingArcs = *data.DataModelingArcs();
     lengthArcs = *data.DataLengthArcs();
     splinePaths = *data.DataSplinePaths();
+    modelingSplinePaths = *data.DataModelingSplinePaths();
+    details = *data.DataDetails();
 }
 
 template <typename key, typename val>
@@ -52,6 +61,10 @@ val VContainer::GetObject(const QMap<key,val> &obj, key id)const{
 
 VPointF VContainer::GetPoint(qint64 id) const{
     return GetObject(points, id);
+}
+
+VPointF VContainer::GetModelingPoint(qint64 id) const{
+    return GetObject(modelingPoints, id);
 }
 
 VStandartTableCell VContainer::GetStandartTableCell(const QString &name) const{
@@ -78,12 +91,28 @@ VSpline VContainer::GetSpline(qint64 id) const{
     return GetObject(splines, id);
 }
 
+VSpline VContainer::GetModelingSpline(qint64 id) const{
+    return GetObject(modelingSplines, id);
+}
+
 VArc VContainer::GetArc(qint64 id) const{
     return GetObject(arcs, id);
 }
 
+VArc VContainer::GetModelingArc(qint64 id) const{
+    return GetObject(modelingArcs, id);
+}
+
 VSplinePath VContainer::GetSplinePath(qint64 id) const{
     return GetObject(splinePaths, id);
+}
+
+VSplinePath VContainer::GetModelingSplinePath(qint64 id) const{
+    return GetObject(modelingSplinePaths, id);
+}
+
+VDetail VContainer::GetDetail(qint64 id) const{
+    return GetObject(details, id);
 }
 
 void VContainer::AddStandartTableCell(const QString& name, const VStandartTableCell& cell){
@@ -109,6 +138,37 @@ void VContainer::UpdateId(qint64 newId){
     }
 }
 
+void VContainer::IncrementReferens(qint64 id, Scene::Type obj){
+    switch( obj ){
+    case(Scene::Line):
+        break;
+    case(Scene::Point):{
+        VPointF point = GetPoint(id);
+        point.incrementReferens();
+        UpdatePoint(id, point);
+    }
+        break;
+    case(Scene::Arc):{
+        VArc arc = GetArc(id);
+        arc.incrementReferens();
+        UpdateArc(id, arc);
+    }
+        break;
+    case(Scene::Spline):{
+        VSpline spl = GetSpline(id);
+        spl.incrementReferens();
+        UpdateSpline(id, spl);
+    }
+        break;
+    case(Scene::SplinePath):{
+        VSplinePath splPath = GetSplinePath(id);
+        splPath.incrementReferens();
+        UpdateSplinePath(id, splPath);
+    }
+        break;
+    }
+}
+
 void VContainer::RemoveIncrementTableRow(const QString& name){
     incrementTable.remove(name);
 }
@@ -123,16 +183,36 @@ void VContainer::UpdatePoint(qint64 id, const VPointF& point){
     UpdateObject(points, id, point);
 }
 
+void VContainer::UpdateModelingPoint(qint64 id, const VPointF &point){
+    UpdateObject(modelingPoints, id, point);
+}
+
+void VContainer::UpdateDetail(qint64 id, const VDetail &detail){
+    UpdateObject(details, id, detail);
+}
+
 void VContainer::UpdateSpline(qint64 id, const VSpline &spl){
     UpdateObject(splines, id, spl);
+}
+
+void VContainer::UpdateModelingSpline(qint64 id, const VSpline &spl){
+    UpdateObject(modelingSplines, id, spl);
 }
 
 void VContainer::UpdateSplinePath(qint64 id, const VSplinePath &splPath){
     UpdateObject(splinePaths, id, splPath);
 }
 
+void VContainer::UpdateModelingSplinePath(qint64 id, const VSplinePath &splPath){
+    UpdateObject(modelingSplinePaths, id, splPath);
+}
+
 void VContainer::UpdateArc(qint64 id, const VArc &arc){
     UpdateObject(arcs, id, arc);
+}
+
+void VContainer::UpdateModelingArc(qint64 id, const VArc &arc){
+    UpdateObject(modelingArcs, id, arc);
 }
 
 void VContainer::UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell){
@@ -185,6 +265,11 @@ void VContainer::Clear(){
     lengthLines.clear();
     lengthArcs.clear();
     lineAngles.clear();
+    details.clear();
+    modelingArcs.clear();
+    modelingPoints.clear();
+    modelingSplinePaths.clear();
+    modelingSplines.clear();
     ClearObject();
     CreateManTableIGroup ();
 }
@@ -193,6 +278,7 @@ void VContainer::ClearObject(){
     points.clear();
     splines.clear();
     arcs.clear();
+    splinePaths.clear();
 }
 
 void VContainer::ClearIncrementTable(){
@@ -269,12 +355,24 @@ const QMap<qint64, VPointF> *VContainer::DataPoints() const{
     return &points;
 }
 
+const QMap<qint64, VPointF> *VContainer::DataModelingPoints() const{
+    return &modelingPoints;
+}
+
 const QMap<qint64, VSpline> *VContainer::DataSplines() const{
     return &splines;
 }
 
+const QMap<qint64, VSpline> *VContainer::DataModelingSplines() const{
+    return &modelingSplines;
+}
+
 const QMap<qint64, VArc> *VContainer::DataArcs() const{
     return &arcs;
+}
+
+const QMap<qint64, VArc> *VContainer::DataModelingArcs() const{
+    return &modelingArcs;
 }
 
 const QMap<QString, qint32> *VContainer::DataBase() const{
@@ -309,6 +407,14 @@ const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
     return &splinePaths;
 }
 
+const QMap<qint64, VSplinePath> *VContainer::DataModelingSplinePaths() const{
+    return &modelingSplinePaths;
+}
+
+const QMap<qint64, VDetail> *VContainer::DataDetails() const{
+    return &details;
+}
+
 void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId){
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     VPointF firstPoint = GetPoint(firstPointId);
@@ -329,16 +435,36 @@ qint64 VContainer::AddPoint(const VPointF& point){
     return AddObject(points, point);
 }
 
+qint64 VContainer::AddModelingPoint(const VPointF &point){
+    return AddObject(modelingPoints, point);
+}
+
+qint64 VContainer::AddDetail(const VDetail &detail){
+    return AddObject(details, detail);
+}
+
 qint64 VContainer::AddSpline(const VSpline &spl){
     return AddObject(splines, spl);
+}
+
+qint64 VContainer::AddModelingSpline(const VSpline &spl){
+    return AddObject(modelingSplines, spl);
 }
 
 qint64 VContainer::AddSplinePath(const VSplinePath &splPath){
     return AddObject(splinePaths, splPath);
 }
 
+qint64 VContainer::AddModelingSplinePath(const VSplinePath &splPath){
+    return AddObject(modelingSplinePaths, splPath);
+}
+
 qint64 VContainer::AddArc(const VArc &arc){
     return AddObject(arcs, arc);
+}
+
+qint64 VContainer::AddModelingArc(const VArc &arc){
+    return AddObject(modelingArcs, arc);
 }
 
 QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const{

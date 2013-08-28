@@ -8,8 +8,8 @@
 #pragma GCC diagnostic pop
 #include "../container/calculator.h"
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                   QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
+VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, Tool::Enum typeCreation,
+                   QGraphicsItem *parent):VAbstractTool(doc, data, id, mode), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetArc(id);
     QPainterPath path;
@@ -37,17 +37,17 @@ void VToolArc::setDialog(){
 }
 
 void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                      VContainer *data){
+                      VContainer *data, Draw::Mode mode){
     qint64 center = dialog->GetCenter();
     QString radius = dialog->GetRadius();
     QString f1 = dialog->GetF1();
     QString f2 = dialog->GetF2();
-    Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc,
-                      VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                      VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode){
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
     Calculator cal(data);
@@ -78,14 +78,20 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         if(parse != Document::FullParse){
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VDataTool *tool = tools->value(id);
-            tool->VDataTool::setData(data);
-            tools->insert(id, tool);
+            if(tool != 0){
+                tool->VDataTool::setData(data);
+                tools->insert(id, tool);
+                data->IncrementReferens(id, Scene::Arc);
+            }
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
     VAbstractTool::AddRecord(id, Tools::ArcTool, doc);
+    if(mode == Draw::Modeling){
+        data->IncrementReferens(center, Scene::Point);
+    }
     if(parse == Document::FullParse){
-        VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
+        VToolArc *toolArc = new VToolArc(doc, data, id, mode, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(toolArc, &VToolArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
@@ -143,7 +149,12 @@ void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VToolArc::AddToFile(){
-    VArc arc = VAbstractTool::data.GetArc(id);
+    VArc arc;
+    if(mode == Draw::Calculation){
+        arc = VAbstractTool::data.GetArc(id);
+    } else {
+        arc = VAbstractTool::data.GetModelingArc(id);
+    }
     QDomElement domElement = doc->createElement("arc");
 
     AddAttribute(domElement, "id", id);
@@ -153,7 +164,7 @@ void VToolArc::AddToFile(){
     AddAttribute(domElement, "angle1", arc.GetFormulaF1());
     AddAttribute(domElement, "angle2", arc.GetFormulaF2());
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 
 void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){

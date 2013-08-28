@@ -41,15 +41,16 @@ public:
     bool        GetActivDrawElement(QDomElement &element);
     bool        GetActivCalculationElement(QDomElement &element);
     bool        GetActivModelingElement(QDomElement &element);
-    bool        GetActivPathsElement(QDomElement &element);
+    bool        GetActivDetailsElement(QDomElement &element);
     bool        appendDraw(const QString& name);
     void        SetNameDraw(const QString& name);
-    void        Parse(Document::Enum parse, VMainGraphicsScene *scene);
+    void        Parse(Document::Enum parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail);
     QMap<qint64, VDataTool*>* getTools();
     QVector<VToolRecord> *getHistory();
-    qint64 getCursor() const;
-    void setCursor(const qint64 &value);
-    void setCurrentData();
+    qint64      getCursor() const;
+    void        setCursor(const qint64 &value);
+    void        setCurrentData();
+    void        GarbageCollector();
 signals:
     void        ChangedActivDraw(const QString newName);
     void        ChangedNameDraw(const QString oldName, const QString newName);
@@ -75,18 +76,22 @@ private:
     bool        CheckNameDraw(const QString& name) const;
     void        SetActivDraw(const QString& name);
     bool        GetActivNodeElement(const QString& name, QDomElement& element);
-    void        ParseDrawElement(VMainGraphicsScene  *scene,
+    void        ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                  const QDomNode& node, Document::Enum parse);
-    void        ParseCalculationElement(VMainGraphicsScene  *scene, const QDomNode& node,
-                                        Document::Enum parse);
+    void        ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
+                                        const QDomNode& node, Document::Enum parse, Draw::Mode mode);
+    void        ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
+                                   Document::Enum parse);
+    void        ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
+                                   Document::Enum parse);
     void        ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                  Document::Enum parse, const QString &type);
+                                  Document::Enum parse, const QString &type, Draw::Mode mode);
     void        ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                 Document::Enum parse);
+                                 Document::Enum parse, Draw::Mode mode);
     void        ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                 Document::Enum parse, const QString& type);
+                                 Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                 Document::Enum parse, const QString& type);
+                                 Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseIncrementsElement(const QDomNode& node);
 };
 

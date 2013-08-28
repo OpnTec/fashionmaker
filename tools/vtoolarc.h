@@ -18,14 +18,14 @@ class VToolArc :public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+    VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, Tool::Enum typeCreation,
              QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data);
+                       VContainer *data, Draw::Mode mode);
     static void Create(const qint64 _id, const qint64 &center, const QString &radius,
                        const QString &f1, const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode);
 public slots:
     virtual void                 FullUpdateFromFile();
     virtual void                 FullUpdateFromGui(int result);

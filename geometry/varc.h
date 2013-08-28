@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QMap>
 #include "container/vpointf.h"
+#include "vspline.h"
 
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
@@ -23,7 +24,8 @@ public:
                   * @param f2 кінцевий кут в градусах.
                   */
                  VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-                       qreal f1, QString formulaF1, qreal f2 , QString formulaF2);
+                       qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
+                       Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
                  VArc(const VArc &arc);
                  const VArc& operator= (const VArc &arc);
     /**
@@ -71,6 +73,19 @@ public:
      * @return повертає шлях.
      */
     QPainterPath GetPath() const;
+    qreal AngleArc()const;
+    qint32 NumberSplOfArc () const;
+    QVector<QPointF> GetPoints () const;
+    QVector<QPointF> SplOfArc( qint32 number ) const;
+    qint32 referens() const;
+    void incrementReferens();
+    void decrementReferens();
+    Draw::Mode getMode() const;
+    void setMode(const Draw::Mode &value);
+
+    qint64 getIdObject() const;
+    void setIdObject(const qint64 &value);
+
 private:
     /**
      * @brief f1 початковий кут в градусах
@@ -92,6 +107,9 @@ private:
      */
     qint64 center;
     const QMap<qint64, VPointF> *points;
+    qint32 _referens;
+    Draw::Mode mode;
+    qint64 idObject;
 };
 
 #endif // VARC_H

@@ -8,8 +8,8 @@
 #include <QDebug>
 #pragma GCC diagnostic pop
 
-VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     Tool::Enum typeCreation, QGraphicsItem *parent):VAbstractTool(doc, data, id),
+VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, qint64 firstPoint, qint64 secondPoint,
+                     Tool::Enum typeCreation, QGraphicsItem *parent):VAbstractTool(doc, data, id, mode),
     QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
     dialogLine(QSharedPointer<DialogLine>()){
     //Лінія
@@ -31,26 +31,36 @@ void VToolLine::setDialog(){
 }
 
 void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                       VContainer *data){
+                       VContainer *data, Draw::Mode mode){
     qint64 firstPoint = dialog->getFirstPoint();
     qint64 secondPoint = dialog->getSecondPoint();
-    Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                       Tool::Enum typeCreation){
+                       Tool::Enum typeCreation, Draw::Mode mode){
+    Q_CHECK_PTR(scene);
+    Q_CHECK_PTR(doc);
+    Q_CHECK_PTR(data);
     data->AddLine(firstPoint, secondPoint);
     if(parse != Document::FullParse){
         QMap<qint64, VDataTool*>* tools = doc->getTools();
+        Q_CHECK_PTR(tools);
         VDataTool *tool = tools->value(id);
+        Q_CHECK_PTR(tool);
         tool->VDataTool::setData(data);
         tools->insert(id, tool);
     }
     VAbstractTool::AddRecord(id, Tools::LineTool, doc);
+    if(mode == Draw::Modeling){
+        data->IncrementReferens(firstPoint, Scene::Point);
+        data->IncrementReferens(secondPoint, Scene::Point);
+    }
     if(parse == Document::FullParse){
         qint64 id = data->getNextId();
-        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
+        VToolLine *line = new VToolLine(doc, data, id, mode, firstPoint, secondPoint, typeCreation);
+        Q_CHECK_PTR(line);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(line, &VToolLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
@@ -117,7 +127,7 @@ void VToolLine::AddToFile(){
     AddAttribute(domElement, "firstPoint", firstPoint);
     AddAttribute(domElement, "secondPoint", secondPoint);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){

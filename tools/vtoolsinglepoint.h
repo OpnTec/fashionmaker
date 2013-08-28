@@ -17,7 +17,8 @@ class VToolSinglePoint : public VToolPoint
     Q_OBJECT
 public:
                             VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id,
-                                              Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
+                                              Tool::Enum typeCreation,
+                                              QGraphicsItem * parent = 0 );
     virtual void setDialog();
 public slots:
     virtual void            FullUpdateFromFile();

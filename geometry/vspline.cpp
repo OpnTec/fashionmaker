@@ -4,23 +4,25 @@
 #include <QDebug>
 
 VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(0){
+    kCurve(1), points(0), _referens(0), mode(Draw::Calculation), idObject(0){
 }
 
 VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()),
     p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()),
-    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()){
+    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()), _referens(0),
+    mode(spline.getMode()), idObject(spline.getIdObject()){
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve):p1(p1), p2(QPointF()), p3(QPointF()),
-    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points){
+                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
+    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points),
+    _referens(0), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(points){
+                  qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+    kCurve(1), points(points), _referens(0), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
@@ -36,14 +38,14 @@ void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
     QLineF p1pX(GetPointP1().x(), GetPointP1().y(), GetPointP1().x() + 100, GetPointP1().y());
     p1pX.setAngle( angle1 );
     qreal L = 0, radius = 0, angle = 90;
-//    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
-//    if ( angle > 180 ){
-//        angle = 360 - angle;
-//    }
+    //    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
+    //    if ( angle > 180 ){
+    //        angle = 360 - angle;
+    //    }
     QPointF point1 = GetPointP1().toQPointF();
     QPointF point4 = GetPointP4().toQPointF();
     radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
-//    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
+    //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
     QLineF p1p2(GetPointP1().x(), GetPointP1().y(), GetPointP1().x() + L * kAsm1, GetPointP1().y());
     p1p2.setAngle(angle1);
@@ -64,14 +66,14 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
     QLineF p1pX(GetPointP1().x(), GetPointP1().y(), GetPointP1().x() + 100, GetPointP1().y());
     p1pX.setAngle( angle1 );
     qreal L = 0, radius = 0, angle = 90;
-//    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
-//    if ( angle >= 180 ){
-//        angle = 360 - angle;
-//    }
+    //    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
+    //    if ( angle >= 180 ){
+    //        angle = 360 - angle;
+    //    }
     QPointF point1 = GetPointP1().toQPointF();
     QPointF point4 = GetPointP4().toQPointF();
     radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
-//    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
+    //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
 
     this->kCurve = kCurve;
@@ -260,7 +262,7 @@ QVector<QPointF> VSpline::GetPoints () const{
     return GetPoints(GetPointP1().toQPointF(), p2, p3, GetPointP4().toQPointF());
 }
 
-QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4) const{
+QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4){
     QVector<QPointF> pvector;
     QVector<qreal> x;
     QVector<qreal> y;
@@ -309,7 +311,7 @@ qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) c
 
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                               qreal x3, qreal y3, qreal x4, qreal y4,
-                              qint16 level, QVector<qreal> &px, QVector<qreal> &py) const{
+                              qint16 level, QVector<qreal> &px, QVector<qreal> &py){
     const double curve_collinearity_epsilon              	= 1e-30;
     const double curve_angle_tolerance_epsilon           	= 0.01;
     const double m_angle_tolerance = 0.0;
@@ -379,16 +381,16 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                 return;
             }
             if(d2 <= 0)
-                d2 = this->CalcSqDistance(x2, y2, x1, y1);
+                d2 = CalcSqDistance(x2, y2, x1, y1);
             else if(d2 >= 1)
                 d2 = CalcSqDistance(x2, y2, x4, y4);
             else
                 d2 = CalcSqDistance(x2, y2, x1 + d2*dx, y1 + d2*dy);
             
             if(d3 <= 0)
-                d3 = this->CalcSqDistance(x3, y3, x1, y1);
+                d3 = CalcSqDistance(x3, y3, x1, y1);
             else if(d3 >= 1)
-                d3 = this->CalcSqDistance(x3, y3, x4, y4);
+                d3 = CalcSqDistance(x3, y3, x4, y4);
             else
                 d3 = CalcSqDistance(x3, y3, x1 + d3*dx, y1 + d3*dy);
         }
@@ -570,7 +572,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py);
 }
 
-qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2) const{
+qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2){
     qreal dx = x2 - x1;
     qreal dy = y2 - y1;
     return dx * dx + dy * dy;
@@ -584,6 +586,20 @@ QPainterPath VSpline::GetPath() const{
         splinePath.lineTo(points[i]);
     }
     return splinePath;
+}
+
+qint32 VSpline::referens() const{
+    return _referens;
+}
+
+void VSpline::incrementReferens(){
+    ++_referens;
+}
+
+void VSpline::decrementReferens(){
+    if(_referens > 0){
+        --_referens;
+    }
 }
 
 /* Cubic equation solution. Real coefficients case.
@@ -710,3 +726,37 @@ qreal VSpline::param_t (QPointF pBt)const{
 //    P4 = QPointF(P4.x() + Pmirror.x(), P4.y() + Pmirror.y());
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
+
+Draw::Mode VSpline::getMode() const{
+    return mode;
+}
+
+void VSpline::setMode(const Draw::Mode &value){
+    mode = value;
+}
+
+QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qreal angle2, qreal kAsm1,
+                                       qreal kAsm2, qreal kCurve){
+    QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
+    p1pX.setAngle( angle1 );
+    qreal L = 0, radius = 0, angle = 90;
+    radius = QLineF(QPointF(p1.x(), p4.y()),p4).length();
+    L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
+    QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
+    p1p2.setAngle(angle1);
+    QLineF p4p3(p4.x(), p4.y(), p4.x() + L * kAsm2, p4.y());
+    p4p3.setAngle(angle2);
+    QPointF p2 = p1p2.p2();
+    QPointF p3 = p4p3.p2();
+    return GetPoints(p1, p2, p3, p4);
+}
+
+qint64 VSpline::getIdObject() const
+{
+    return idObject;
+}
+
+void VSpline::setIdObject(const qint64 &value)
+{
+    idObject = value;
+}

@@ -7,9 +7,9 @@
 #include <QDebug>
 #pragma GCC diagnostic pop
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, QObject *parent):
     VDataTool(data, parent), doc(doc), id(id), ignoreContextMenuEvent(false), nameActivDraw(QString()),
-    baseColor(Qt::black), currentColor(Qt::black){
+    baseColor(Qt::black), currentColor(Qt::black), mode(mode){
     this->doc = doc;
     this->id = id;
     nameActivDraw = doc->GetNameActivDraw();
@@ -70,24 +70,31 @@ void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, c
 VAbstractTool::~VAbstractTool(){
 }
 
-void VAbstractTool::AddToCalculation(const QDomElement &domElement){
+void VAbstractTool::AddToDraw(const QDomElement &domElement){
     QDomElement calcElement;
-    bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
-        qint64 id = doc->getCursor();
-        if(id <= 0){
+    if(mode == Draw::Modeling){
+        bool ok = doc->GetActivModelingElement(calcElement);
+        if(ok){
             calcElement.appendChild(domElement);
-        } else {
-            QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
-            if(refElement.isElement()){
-                calcElement.insertAfter(domElement,refElement);
-                doc->setCursor(0);
-            } else {
-                qCritical()<<"Не можу знайти елемент після якого потрібно вставляти."<< Q_FUNC_INFO;
-            }
         }
     } else {
-        qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
+        bool ok = doc->GetActivCalculationElement(calcElement);
+        if(ok){
+            qint64 id = doc->getCursor();
+            if(id <= 0){
+                calcElement.appendChild(domElement);
+            } else {
+                QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
+                if(refElement.isElement()){
+                    calcElement.insertAfter(domElement,refElement);
+                    doc->setCursor(0);
+                } else {
+                    qCritical()<<"Не можу знайти елемент після якого потрібно вставляти."<< Q_FUNC_INFO;
+                }
+            }
+        } else {
+            qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
+        }
     }
     emit toolhaveChange();
 }
@@ -98,9 +105,6 @@ const VContainer *VAbstractTool::getData()const{
 
 void VAbstractTool::setData(const VContainer &value){
     data = value;
-}
-
-void VAbstractTool::RemoveDataTool(){
 }
 
 void VAbstractTool::setDialog(){
@@ -122,4 +126,8 @@ void VAbstractTool::AddRecord(const qint64 id, Tools::Enum toolType, VDomDocumen
         }
         history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
     }
+}
+
+void VAbstractTool::ignoreContextMenu(bool enable){
+    ignoreContextMenuEvent = enable;
 }

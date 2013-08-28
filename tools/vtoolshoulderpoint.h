@@ -13,7 +13,7 @@
 class VToolShoulderPoint : public VToolLinePoint
 {
 public:
-    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
+    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode,
                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
                        const qint64 &p2Line, const qint64 &pShoulder, Tool::Enum typeCreation,
                        QGraphicsItem * parent = 0);
@@ -21,11 +21,11 @@ public:
     static QPointF    FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                 const qreal &length);
     static void Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data);
+                       VDomDocument *doc, VContainer *data, Draw::Mode mode);
     static void Create(const qint64 _id, const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
                        const qint64 &pShoulder, const QString &typeLine, const QString &pointName,
                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

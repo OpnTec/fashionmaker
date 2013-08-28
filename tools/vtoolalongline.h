@@ -11,16 +11,16 @@ class VToolAlongLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
+    VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, const QString &formula,
                    const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
                    Tool::Enum typeCreation, QGraphicsItem * parent = 0);
     virtual void      setDialog();
     static void Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data);
+                       VContainer *data, Draw::Mode mode);
     static void Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                        const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

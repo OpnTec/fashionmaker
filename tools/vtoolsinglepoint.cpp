@@ -16,7 +16,8 @@
 #include "../container/vpointf.h"
 
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                                    QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
+                                    QGraphicsItem * parent ):VToolPoint(doc, data, id, Draw::Calculation,
+                                                                        parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
@@ -45,7 +46,7 @@ void VToolSinglePoint::AddToFile(){
     AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
     AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value){

@@ -6,9 +6,9 @@
 #include "vtoollinepoint.h"
 #pragma GCC diagnostic pop
 
-VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode, const QString &typeLine,
                                const QString &formula, const qint64 &basePointId, const qint32 &angle,
-                               QGraphicsItem *parent): VToolPoint(doc, data, id, parent), typeLine(typeLine), formula(formula),
+                               QGraphicsItem *parent): VToolPoint(doc, data, id, mode, parent), typeLine(typeLine), formula(formula),
     angle(angle), basePointId(basePointId), mainLine(0){
     //Лінія, що з'єднує дві точки
     QPointF point1 = data->GetPoint(basePointId).toQPointF();

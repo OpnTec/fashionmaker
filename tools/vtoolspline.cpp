@@ -10,8 +10,9 @@
 #include "../geometry/vspline.h"
 
 
-VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
-                         QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
+VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode,
+                         Tool::Enum typeCreation,
+                         QGraphicsItem *parent):VAbstractTool(doc, data, id, mode), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
 
     VSpline spl = data->GetSpline(id);
@@ -59,7 +60,7 @@ void VToolSpline::setDialog(){
 }
 
 void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data){
+                         VContainer *data, Draw::Mode mode){
     qint64 p1 = dialog->getP1();
     qint64 p4 = dialog->getP4();
     qreal kAsm1 = dialog->getKAsm1();
@@ -68,13 +69,13 @@ void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScen
     qreal angle2 = dialog->getAngle2();
     qreal kCurve = dialog->getKCurve();
     Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
-           Tool::FromGui);
+           Tool::FromGui, mode);
 }
 
 void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                         Tool::Enum typeCreation){
+                         Tool::Enum typeCreation, Draw::Mode mode){
     VSpline spline = VSpline(data->DataPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
@@ -84,14 +85,21 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         if(parse != Document::FullParse){
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VDataTool *tool = tools->value(id);
-            tool->VDataTool::setData(data);
-            tools->insert(id, tool);
+            if(tool != 0){
+                tool->VDataTool::setData(data);
+                tools->insert(id, tool);
+                data->IncrementReferens(id, Scene::Spline);
+            }
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
     VAbstractTool::AddRecord(id, Tools::SplineTool, doc);
+    if(mode == Draw::Modeling){
+        data->IncrementReferens(p1, Scene::Point);
+        data->IncrementReferens(p4, Scene::Point);
+    }
     if(parse == Document::FullParse){
-        VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
+        VToolSpline *spl = new VToolSpline(doc, data, id, mode, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
@@ -163,7 +171,12 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VToolSpline::AddToFile(){
-    VSpline spl = VAbstractTool::data.GetSpline(id);
+    VSpline spl;
+    if(mode == Draw::Calculation){
+        spl = VAbstractTool::data.GetSpline(id);
+    } else {
+        spl = VAbstractTool::data.GetModelingSpline(id);
+    }
     QDomElement domElement = doc->createElement("spline");
 
     AddAttribute(domElement, "id", id);
@@ -176,7 +189,7 @@ void VToolSpline::AddToFile(){
     AddAttribute(domElement, "kAsm2", spl.GetKasm2());
     AddAttribute(domElement, "kCurve", spl.GetKcurve());
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){

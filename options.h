@@ -1,10 +1,15 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include <QtGlobal>
+
 #define PrintDPI 96
 #define PaperSize 50000
-#define widthMainLine 0.8*PrintDPI/25.4
+#define toPixel(mm) ((mm / 25.4) * PrintDPI)
+#define toMM(pix) ((pix / PrintDPI) * 25.4)
+#define widthMainLine toPixel(0.8)
 #define widthHairLine widthMainLine/3
+
 
 namespace Scene{
     enum Type
@@ -32,7 +37,16 @@ namespace Tools{
         SplineTool,
         ArcTool,
         SplinePathTool,
-        PointOfContact
+        PointOfContact,
+        Detail
+    };
+}
+
+namespace Draw{
+    enum Mode
+    {
+        Calculation,
+        Modeling
     };
 }
 

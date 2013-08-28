@@ -7,10 +7,11 @@
 #include <QMenu>
 #pragma GCC diagnostic pop
 
-VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode,
+                         const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
                          const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
+    VToolLinePoint(doc, data, id, mode, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>()){
 
     if(typeCreation == Tool::FromGui){
@@ -33,7 +34,7 @@ void VToolNormal::setDialog(){
 }
 
 void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data){
+                         VContainer *data, Draw::Mode mode){
     QString formula = dialog->getFormula();
     qint64 firstPointId = dialog->getFirstPointId();
     qint64 secondPointId = dialog->getSecondPointId();
@@ -41,13 +42,14 @@ void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScen
     QString pointName = dialog->getPointName();
     qint32 angle = dialog->getAngle();
     Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                          const qint64 &secondPointId, const QString typeLine, const QString pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                         VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                         VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation,
+                         Draw::Mode mode){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     Calculator cal(data);
@@ -64,14 +66,21 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
             if(parse != Document::FullParse){
                 QMap<qint64, VDataTool*>* tools = doc->getTools();
                 VDataTool *tool = tools->value(id);
-                tool->VDataTool::setData(data);
-                tools->insert(id, tool);
+                if(tool != 0){
+                    tool->VDataTool::setData(data);
+                    tools->insert(id, tool);
+                    data->IncrementReferens(id, Scene::Point);
+                }
             }
         }
         data->AddLine(firstPointId, id);
         VAbstractTool::AddRecord(id, Tools::NormalTool, doc);
+        if(mode == Draw::Modeling){
+            data->IncrementReferens(firstPointId, Scene::Point);
+            data->IncrementReferens(secondPointId, Scene::Point);
+        }
         if(parse == Document::FullParse){
-            VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
+            VToolNormal *point = new VToolNormal(doc, data, id, mode, typeLine, formula, angle,
                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -124,7 +133,12 @@ void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VToolNormal::AddToFile(){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -139,5 +153,5 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "firstPoint", basePointId);
     AddAttribute(domElement, "secondPoint", secondPointId);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }

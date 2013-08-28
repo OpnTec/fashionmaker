@@ -60,7 +60,15 @@ SOURCES += main.cpp\
     xml/vtoolrecord.cpp \
     dialogs/dialoghistory.cpp \
     tools/vtoolpointofcontact.cpp \
-    dialogs/dialogpointofcontact.cpp
+    dialogs/dialogpointofcontact.cpp \
+    geometry/vnodedetail.cpp \
+    geometry/vdetail.cpp \
+    dialogs/dialogdetail.cpp \
+    tools/vtooldetail.cpp \
+    tools/vmodelingpoint.cpp \
+    tools/vmodelingspline.cpp \
+    tools/vmodelingarc.cpp \
+    tools/vmodelingsplinepath.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -111,7 +119,15 @@ HEADERS  += mainwindow.h \
     xml/vtoolrecord.h \
     dialogs/dialoghistory.h \
     tools/vtoolpointofcontact.h \
-    dialogs/dialogpointofcontact.h
+    dialogs/dialogpointofcontact.h \
+    geometry/vnodedetail.h \
+    geometry/vdetail.h \
+    dialogs/dialogdetail.h \
+    tools/vtooldetail.h \
+    tools/vmodelingpoint.h \
+    tools/vmodelingspline.h \
+    tools/vmodelingarc.h \
+    tools/vmodelingsplinepath.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -127,7 +143,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogarc.ui \
     dialogs/dialogsplinepath.ui \
     dialogs/dialoghistory.ui \
-    dialogs/dialogpointofcontact.ui
+    dialogs/dialogpointofcontact.ui \
+    dialogs/dialogdetail.ui
 
 RESOURCES += \
     icon.qrc \

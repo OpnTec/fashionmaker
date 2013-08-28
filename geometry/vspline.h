@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QMap>
 #include "container/vpointf.h"
+#include "options.h"
 
 /**
  * @brief VSpline клас, що реалізує сплайн.
@@ -30,7 +31,8 @@ public:
                       * @param kAsm2 коефіцієнт довжини другої напрямної.
                       */
                      VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1,
-                              qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
+                              qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
+                              Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
                      /**
                       * @brief VSpline конструктор.
                       * @param p1 початкова точка сплайну.
@@ -39,7 +41,8 @@ public:
                       * @param p4 кінцева точка сплайну.
                       */
                      VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3,
-                              qint64 p4, qreal kCurve);
+                              qint64 p4, qreal kCurve, Draw::Mode mode = Draw::Calculation,
+                              qint64 idObject = 0);
     /**
      * @brief ModifiSpl модифікує сплайн.
      * @param p1 початкова точка сплайну.
@@ -156,6 +159,16 @@ public:
      * @param Pmirror точка відносно якої відбувається вертикальне дзеркалення сплайну.
      */
 //    void             Mirror(const QPointF Pmirror);
+    qint32 referens() const;
+    void incrementReferens();
+    void decrementReferens();
+    Draw::Mode getMode() const;
+    void setMode(const Draw::Mode &value);
+    static QVector<QPointF> SplinePoints(QPointF p1, QPointF p4, qreal angle1,
+                                         qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
+    qint64 getIdObject() const;
+    void setIdObject(const qint64 &value);
+
 protected:
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.
@@ -165,7 +178,7 @@ protected:
      * @param p4 кінцева точка сплайну.
      * @return список точок.
      */
-    QVector<QPointF> GetPoints ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) const;
+    static QVector<QPointF> GetPoints ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 );
 private:
     /**
      * @brief p1 початкова точка сплайну
@@ -195,6 +208,9 @@ private:
     qreal kAsm2;
     qreal kCurve;
     const QMap<qint64, VPointF> *points;
+    qint32 _referens;
+    Draw::Mode mode;
+    qint64 idObject;
     /**
      * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.
      * @param p1 початкова точка сплайну.
@@ -218,9 +234,9 @@ private:
      * @param px список х координат точок сплайну.
      * @param py список у коодринат сплайну.
      */
-    void             PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
+    static void             PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                                      qreal x3, qreal y3, qreal x4, qreal y4,
-                                     qint16 level, QVector<qreal> &px, QVector<qreal> &py) const;
+                                     qint16 level, QVector<qreal> &px, QVector<qreal> &py);
     /**
      * @brief CalcSqDistance розраховує довжину між точками.
      * @param x1 х координата першої точки.
@@ -229,7 +245,7 @@ private:
      * @param y2 у координата другої точки.
      * @return довжину.
      */
-    qreal            CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2) const;
+    static qreal            CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
     /**
      * @brief Cubic знаходить розв'язок кубічного рівняння.
      * @param x коефіцієнт.

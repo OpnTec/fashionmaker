@@ -14,11 +14,16 @@
 #include "../container/vpointf.h"
 
 
-VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                       QGraphicsItem *parent):VAbstractTool(doc, data, id), QGraphicsEllipseItem(parent),
+VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode,
+                       QGraphicsItem *parent):VAbstractTool(doc, data, id, mode), QGraphicsEllipseItem(parent),
     radius(1.5*PrintDPI/25.4), namePoint(0), lineName(0){
     //create circle
-    VPointF point = data->GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = data->GetPoint(id);
+    } else {
+        point = data->GetModelingPoint(id);
+    }
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -41,7 +46,12 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
 }
 
 void VToolPoint::NameChangePosition(const QPointF pos){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QPointF p = pos - this->pos();
     point.setMx(p.x());
     point.setMy(p.y());
@@ -77,10 +87,10 @@ QPointF VToolPoint::LineIntersectRect(QRectF rec, QLineF line) const{
 void VToolPoint::RefreshLine(){
     QRectF nameRec = namePoint->sceneBoundingRect();
     QPointF p1, p2;
-    LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- pos()), p1, p2);
-    QPointF pRec = LineIntersectRect(nameRec, QLineF(pos(), nameRec.center()));
-    lineName->setLine(QLineF(p1, pRec - pos()));
-    if(QLineF(p1, pRec - pos()).length() <= 4*PrintDPI/25.4){
+    LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
+    QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
+    lineName->setLine(QLineF(p1, pRec - scenePos()));
+    if(QLineF(p1, pRec - scenePos()).length() <= toPixel(4)){
         lineName->setVisible(false);
     } else {
         lineName->setVisible(true);
@@ -188,7 +198,12 @@ void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolPoint::RefreshGeometry(){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);

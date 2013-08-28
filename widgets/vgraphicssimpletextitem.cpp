@@ -5,6 +5,7 @@
 #pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vgraphicssimpletextitem.h"
 #include <QGraphicsScene>
+#include <QEvent>
 #pragma GCC diagnostic pop
 
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent):QGraphicsSimpleTextItem(parent){

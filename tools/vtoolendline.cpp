@@ -6,10 +6,10 @@
 #include "../widgets/vmaingraphicsscene.h"
 #pragma GCC diagnostic pop
 
-VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode, const QString &typeLine,
                            const QString &formula, const qint32 &angle, const qint64 &basePointId,
                            Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
+    VToolLinePoint(doc, data, id, mode, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
 
     if(typeCreation == Tool::FromGui){
@@ -30,20 +30,20 @@ void VToolEndLine::setDialog(){
 }
 
 void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data){
+                          VContainer *data, Draw::Mode mode){
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
     QString formula = dialog->getFormula();
     qint32 angle = dialog->getAngle();
     qint64 basePointId = dialog->getBasePointId();
     Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
-           Tool::FromGui);
+           Tool::FromGui, mode);
 }
 
 void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qint32 &angle, const qint64 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                          VContainer *data, Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode){
 
     VPointF basePoint = data->GetPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
@@ -61,14 +61,20 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             if(parse != Document::FullParse){
                 QMap<qint64, VDataTool*>* tools = doc->getTools();
                 VDataTool *tool = tools->value(id);
-                tool->VDataTool::setData(data);
-                tools->insert(id, tool);
+                if(tool != 0){
+                    tool->VDataTool::setData(data);
+                    tools->insert(id, tool);
+                    data->IncrementReferens(id, Scene::Point);
+                }
             }
         }
         data->AddLine(basePointId, id);
         VAbstractTool::AddRecord(id, Tools::EndLineTool, doc);
+        if(mode == Draw::Modeling){
+            data->IncrementReferens(basePointId, Scene::Point);
+        }
         if(parse == Document::FullParse){
-            VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
+            VToolEndLine *point = new VToolEndLine(doc, data, id, mode, typeLine, formula, angle,
                                                    basePointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -110,7 +116,12 @@ void VToolEndLine::FullUpdateFromGui(int result){
 }
 
 void VToolEndLine::AddToFile(){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -124,6 +135,6 @@ void VToolEndLine::AddToFile(){
     AddAttribute(domElement, "angle", angle);
     AddAttribute(domElement, "basePoint", basePointId);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }
 

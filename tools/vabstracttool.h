@@ -24,10 +24,12 @@ class VAbstractTool:public VDataTool
 {
     Q_OBJECT
 public:
-                 VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+                 VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode,
+                               QObject *parent = 0);
     virtual      ~VAbstractTool();
     virtual void setDialog();
     static void AddRecord(const qint64 id, Tools::Enum toolType, VDomDocument *doc);
+    void ignoreContextMenu(bool enable);
 public slots:
     virtual void FullUpdateFromFile()=0;
     void         ChangedNameDraw(const QString oldName, const QString newName);
@@ -46,15 +48,15 @@ protected:
     QString      nameActivDraw;
     const Qt::GlobalColor baseColor;
     Qt::GlobalColor currentColor;
+    Draw::Mode mode;
     virtual void AddToFile()=0;
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void         AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
-    void         AddToCalculation(const QDomElement &domElement);
+    void         AddToDraw(const QDomElement &domElement);
     const VContainer *getData() const;
     void         setData(const VContainer &value);
-    virtual void RemoveDataTool();
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true){
@@ -80,14 +82,13 @@ protected:
                 dialog->show();
             }
             if(selectedAction == actionRemove){
-                RemoveDataTool();//remove form data
                 //remove form xml file
                 QDomElement domElement = doc->elementById(QString().setNum(id));
                 if(domElement.isElement()){
-                    QDomElement calcElement;
-                    bool ok = doc->GetActivCalculationElement(calcElement);
+                    QDomElement element;
+                    bool ok = doc->GetActivCalculationElement(element);
                     if(ok){
-                        calcElement.removeChild(domElement);
+                        element.removeChild(domElement);
                         //update xml file
                         emit FullUpdateTree();
                         //remove form scene

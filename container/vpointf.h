@@ -1,20 +1,17 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
 #include <QPointF>
 #include <QString>
-#pragma GCC diagnostic pop
+#include "options.h"
 
 class VPointF
 {
 public:
     VPointF();
     VPointF (const VPointF &point );
-    VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my );
+    VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, Draw::Mode mode = Draw::Calculation,
+              qint64 idObject = 0);
     ~VPointF();
     QString name() const;
     qreal mx() const;
@@ -27,6 +24,14 @@ public:
     void setX(const qreal &value);
     qreal y() const;
     void setY(const qreal &value);
+    qint32 referens() const;
+    void incrementReferens();
+    void decrementReferens();
+    Draw::Mode getMode() const;
+    void setMode(const Draw::Mode &value);
+
+    qint64 getIdObject() const;
+    void setIdObject(const qint64 &value);
 
 private:
     QString _name;
@@ -34,6 +39,9 @@ private:
     qreal _my;
     qreal _x;
     qreal _y;
+    qint32 _referens;
+    Draw::Mode mode;
+    qint64 idObject;
 };
 
 #endif // VPOINTF_H

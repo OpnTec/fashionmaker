@@ -1,8 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vdomdocument.h"
 #include <QDebug>
 #include "../tools/vtoolsinglepoint.h"
@@ -17,7 +12,8 @@
 #include "../tools/vtoolarc.h"
 #include "../tools/vtoolsplinepath.h"
 #include "../tools/vtoolpointofcontact.h"
-#pragma GCC diagnostic pop
+#include "../tools/vmodelingpoint.h"
+#include "../tools/vtooldetail.h"
 #include "../options.h"
 #include "../container/calculator.h"
 #include "../geometry/vsplinepoint.h"
@@ -124,7 +120,7 @@ bool VDomDocument::appendDraw(const QString& name){
 
         QDomElement calculationElement = this->createElement("calculation");
         QDomElement modelingElement = this->createElement("modeling");
-        QDomElement pathsElement = this->createElement("paths");
+        QDomElement pathsElement = this->createElement("details");
         drawElement.appendChild(calculationElement);
         drawElement.appendChild(modelingElement);
         drawElement.appendChild(pathsElement);
@@ -203,8 +199,8 @@ bool VDomDocument::GetActivModelingElement(QDomElement &element){
     }
 }
 
-bool VDomDocument::GetActivPathsElement(QDomElement &element){
-    bool ok = GetActivNodeElement("paths", element);
+bool VDomDocument::GetActivDetailsElement(QDomElement &element){
+    bool ok = GetActivNodeElement("details", element);
     if(ok){
         return true;
     } else {
@@ -231,11 +227,12 @@ bool VDomDocument::GetActivNodeElement(const QString& name, QDomElement &element
     }
 }
 
-void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene){
+void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail){
     if(parse == Document::FullParse){
         data->Clear();
         nameActivDraw.clear();
-        scene->clear();
+        sceneDraw->clear();
+        sceneDetail->clear();
         comboBoxDraws->clear();
         tools.clear();
         cursor = 0;
@@ -262,7 +259,7 @@ void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *scene){
                     } else {
                         ChangeActivDraw(domElement.attribute("name"), Document::LiteParse);
                     }
-                    ParseDrawElement(scene, domElement, parse);
+                    ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
                 }
                 if(domElement.tagName()=="increments"){
                     ParseIncrementsElement(domElement);
@@ -308,8 +305,8 @@ void VDomDocument::ParseIncrementsElement(const QDomNode &node){
     }
 }
 
-void VDomDocument::ParseDrawElement(VMainGraphicsScene *scene, const QDomNode& node,
-                                    Document::Enum parse){
+void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+                                    const QDomNode& node, Document::Enum parse){
     QDomNode domNode = node.firstChild();
     while(!domNode.isNull()){
         if(domNode.isElement()){
@@ -317,13 +314,13 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *scene, const QDomNode& n
             if(!domElement.isNull()){
                 if(domElement.tagName() == "calculation"){
                     data->ClearObject();
-                    ParseCalculationElement(scene, domElement, parse);
+                    ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
                 }
                 if(domElement.tagName() == "modeling"){
-
+                    ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
                 }
-                if(domElement.tagName() == "paths"){
-
+                if(domElement.tagName() == "details"){
+                    ParseDetails(sceneDetail, domElement, parse);
                 }
             }
         }
@@ -331,31 +328,102 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *scene, const QDomNode& n
     }
 }
 
-void VDomDocument::ParseCalculationElement(VMainGraphicsScene *scene, const QDomNode& node,
-                                           Document::Enum parse){
+void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+                                           const QDomNode& node, Document::Enum parse, Draw::Mode mode){
+    VMainGraphicsScene *scene = 0;
+    if(mode == Draw::Calculation){
+        scene = sceneDraw;
+    } else {
+        scene = sceneDetail;
+    }
     QDomNodeList nodeList = node.childNodes();
     qint32 num = nodeList.size();
     for(qint32 i = 0; i < num; ++i){
         QDomElement domElement = nodeList.at(i).toElement();
         if(!domElement.isNull()){
             if(domElement.tagName() == "point"){
-                ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""));
+                ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
             }
             if(domElement.tagName() == "line"){
-                ParseLineElement(scene, domElement, parse);
+                ParseLineElement(scene, domElement, parse, mode);
             }
             if(domElement.tagName() == "spline"){
-                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""));
+                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
             }
             if(domElement.tagName() == "arc"){
-                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""));
+                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
             }
         }
     }
 }
 
+void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
+                                      Document::Enum parse){
+    if(!domElement.isNull()){
+        VDetail detail;
+        VDetail oldDetail;
+        qint64 id = domElement.attribute("id", "").toLongLong();
+        detail.setName(domElement.attribute("name", ""));
+        detail.setMx(toPixel(domElement.attribute("mx","").toDouble()));
+        detail.setMy(toPixel(domElement.attribute("my","").toDouble()));
+
+        QDomNodeList nodeList = domElement.childNodes();
+        qint32 num = nodeList.size();
+        for(qint32 i = 0; i < num; ++i){
+            QDomElement element = nodeList.at(i).toElement();
+            if(!element.isNull()){
+                if(element.tagName() == "node"){
+                    qint64 id = element.attribute("id","").toLongLong();
+                    Scene::Type tool;
+                    Draw::Mode mode;
+                    QString t = element.attribute("type","");
+                    if(t == "Point"){
+                        tool = Scene::Point;
+                        VPointF point = data->GetModelingPoint(id);
+                        mode = point.getMode();
+                        oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode));
+                    } else if(t == "Arc"){
+                        tool = Scene::Arc;
+                        VArc arc = data->GetModelingArc(id);
+                        mode = arc.getMode();
+                        oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode));
+                    } else if(t == "Spline"){
+                        tool = Scene::Spline;
+                        VSpline spl = data->GetModelingSpline(id);
+                        mode = spl.getMode();
+                        oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode));
+                    } else if(t == "SplinePath"){
+                        tool = Scene::SplinePath;
+                        VSplinePath splPath = data->GetModelingSplinePath(id);
+                        mode = splPath.getMode();
+                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode));
+                    }
+                    detail.append(VNodeDetail(id, tool, mode));
+                }
+            }
+        }
+        VToolDetail::Create(id, detail, oldDetail, sceneDetail, this, data, parse, Tool::FromFile);
+    }
+}
+
+void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
+                                Document::Enum parse){
+    QDomNode domNode = domElement.firstChild();
+    while(!domNode.isNull()){
+        if(domNode.isElement()){
+            QDomElement domElement = domNode.toElement();
+            if(!domElement.isNull()){
+                if(domElement.tagName() == "detail"){
+                    ParseDetailElement(sceneDetail, domElement, parse);
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+}
+
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     Document::Enum parse, const QString& type){
+                                     Document::Enum parse, const QString& type, Draw::Mode mode){
     if(type == "single"){
         if(!domElement.isNull()){
             QString name;
@@ -396,7 +464,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 basePointId = domElement.attribute("basePoint", "").toLongLong();
             qint32 angle = domElement.attribute("angle", "").toInt();
             VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this, data,
-                                 parse, Tool::FromFile);
+                                 parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -411,7 +479,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
-                                   scene, this, data, parse, Tool::FromFile);
+                                   scene, this, data, parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -427,7 +495,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p2Line = domElement.attribute("p2Line", "").toLongLong();
             qint64 pShoulder = domElement.attribute("pShoulder", "").toLongLong();
             VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my,
-                                       scene, this, data, parse, Tool::FromFile);
+                                       scene, this, data, parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -443,7 +511,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             qreal angle = domElement.attribute("angle", "").toDouble();
             VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
-                                mx, my, scene, this, data, parse, Tool::FromFile);
+                                mx, my, scene, this, data, parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -459,7 +527,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             qint64 thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
             VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
-                                  name, mx, my, scene, this, data, parse, Tool::FromFile);
+                                  name, mx, my, scene, this, data, parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -474,7 +542,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p1Line2Id = domElement.attribute("p1Line2", "").toLongLong();
             qint64 p2Line2Id = domElement.attribute("p2Line2", "").toLongLong();
             VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my, scene,
-                                       this, data, parse, Tool::FromFile);
+                                       this, data, parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -489,24 +557,46 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my,
-                                        scene, this, data, parse, Tool::FromFile);
+                                        scene, this, data, parse, Tool::FromFile, mode);
+        }
+        return;
+    }
+    if(type == "modeling"){
+        if(!domElement.isNull()){
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            qint64 idObject = domElement.attribute("idObject", "").toLongLong();
+            QString tObject = domElement.attribute("typeObject", "");
+            VPointF point;
+            Draw::Mode typeObject;
+            if(tObject == "Calculation"){
+                typeObject = Draw::Calculation;
+                point = data->GetPoint(idObject );
+            } else {
+                typeObject = Draw::Modeling;
+                point = data->GetModelingPoint(idObject);
+            }
+            qreal mx = toPixel(domElement.attribute("mx","").toDouble());
+            qreal my = toPixel(domElement.attribute("my","").toDouble());
+            data->UpdateModelingPoint(id, VPointF(point.x(), point.y(), point.name(), mx, my, typeObject,
+                                                  idObject ));
+            data->IncrementReferens(idObject, Scene::Point);
         }
         return;
     }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                    Document::Enum parse){
+                                    Document::Enum parse, Draw::Mode mode){
     if(!domElement.isNull()){
         qint64 id = domElement.attribute("id", "").toLongLong();
         qint64 firstPoint = domElement.attribute("firstPoint", "").toLongLong();
         qint64 secondPoint = domElement.attribute("secondPoint", "").toLongLong();
-        VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile);
+        VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile, mode);
     }
 }
 
 void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                      Document::Enum parse, const QString &type){
+                                      Document::Enum parse, const QString &type, Draw::Mode mode){
     if(type == "simple"){
         if(!domElement.isNull()){
             qint64 id = domElement.attribute("id", "").toLongLong();
@@ -518,7 +608,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             qreal kAsm2 = domElement.attribute("kAsm2","").toDouble();
             qreal kCurve = domElement.attribute("kCurve","").toDouble();
             VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data,
-                                parse, Tool::FromFile);
+                                parse, Tool::FromFile, mode);
         }
         return;
     }
@@ -543,14 +633,60 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                     }
                 }
             }
-            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
+            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile, mode);
+        }
+        return;
+    }
+    if(type == "modelingSpline"){
+        if(!domElement.isNull()){
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            qint64 idObject = domElement.attribute("idObject", "").toLongLong();
+            QString tObject = domElement.attribute("typeObject", "");
+            VSpline spl;
+            Draw::Mode typeObject;
+            if(tObject == "Calculation"){
+                typeObject = Draw::Calculation;
+                spl = data->GetSpline(idObject);
+            } else {
+                typeObject = Draw::Modeling;
+                spl = data->GetModelingSpline(idObject);
+            }
+            spl.setMode(typeObject);
+            spl.setIdObject(idObject);
+            data->UpdateModelingSpline(id, spl);
+            data->IncrementReferens(spl.GetP1(), Scene::Point);
+            data->IncrementReferens(spl.GetP4(), Scene::Point);
+        }
+        return;
+    }
+    if(type == "modelingPath"){
+        if(!domElement.isNull()){
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            qint64 idObject = domElement.attribute("idObject", "").toLongLong();
+            QString tObject = domElement.attribute("typeObject", "");
+            VSplinePath path;
+            Draw::Mode typeObject;
+            if(tObject == "Calculation"){
+                typeObject = Draw::Calculation;
+                path = data->GetSplinePath(idObject);
+            } else {
+                typeObject = Draw::Modeling;
+                path = data->GetModelingSplinePath(idObject);
+            }
+            path.setMode(typeObject);
+            path.setIdObject(idObject);
+            data->UpdateModelingSplinePath(id, path);
+            const QVector<VSplinePoint> *points = path.GetPoint();
+            for(qint32 i = 0; i<points->size(); ++i){
+                data->IncrementReferens(points->at(i).P(), Scene::Point);
+            }
         }
         return;
     }
 }
 
 void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                   Document::Enum parse, const QString &type){
+                                   Document::Enum parse, const QString &type, Draw::Mode mode){
     if(type == "simple"){
         if(!domElement.isNull()){
             qint64 id = domElement.attribute("id", "").toLongLong();
@@ -558,7 +694,27 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             QString radius = domElement.attribute("radius", "");
             QString f1 = domElement.attribute("angle1", "");
             QString f2 = domElement.attribute("angle2","");
-            VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
+            VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile, mode);
+        }
+        return;
+    }
+    if(type == "modeling"){
+        if(!domElement.isNull()){
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            qint64 idObject = domElement.attribute("idObject", "").toLongLong();
+            QString tObject = domElement.attribute("typeObject", "");
+            VArc arc;
+            Draw::Mode typeObject;
+            if(tObject == "Calculation"){
+                typeObject = Draw::Calculation;
+                arc = data->GetArc(idObject);
+            } else {
+                typeObject = Draw::Modeling;
+                arc = data->GetModelingArc(idObject);
+            }
+            arc.setMode(typeObject);
+            arc.setIdObject(idObject);
+            data->UpdateModelingArc(id, arc);
         }
         return;
     }
@@ -566,7 +722,8 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
 
 void VDomDocument::FullUpdateTree(){
     VMainGraphicsScene *scene = new VMainGraphicsScene();
-    Parse(Document::LiteParse, scene);
+    data->ClearObject();
+    Parse(Document::LiteParse, scene, scene);
     delete scene;
     setCurrentData();
     emit FullUpdateFromFile();
@@ -617,3 +774,74 @@ void VDomDocument::setCurrentData(){
         }
     }
 }
+
+void VDomDocument::GarbageCollector(){
+    const QMap<qint64, VPointF> *points = data->DataPoints();
+    QMapIterator<qint64, VPointF> p(*points);
+    while (p.hasNext()) {
+        p.next();
+        VPointF point = p.value();
+        if(point.referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(p.key()));
+            if(domElement.isElement()){
+                QDomElement element;
+                bool ok = GetActivModelingElement(element);
+                if(ok){
+                    element.removeChild(domElement);
+                }
+            }
+        }
+    }
+
+    const QMap<qint64, VArc> *arc = data->DataArcs();
+    QMapIterator<qint64, VArc> a(*arc);
+    while (a.hasNext()) {
+        a.next();
+        VArc arc = a.value();
+        if(arc.referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(a.key()));
+            if(domElement.isElement()){
+                QDomElement element;
+                bool ok = GetActivModelingElement(element);
+                if(ok){
+                    element.removeChild(domElement);
+                }
+            }
+        }
+    }
+
+    const QMap<qint64, VSpline> *spl = data->DataSplines();
+    QMapIterator<qint64, VSpline> s(*spl);
+    while (s.hasNext()) {
+        s.next();
+        VSpline spl = s.value();
+        if(spl.referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(s.key()));
+            if(domElement.isElement()){
+                QDomElement element;
+                bool ok = GetActivModelingElement(element);
+                if(ok){
+                    element.removeChild(domElement);
+                }
+            }
+        }
+    }
+
+    const QMap<qint64, VSplinePath> *splPath = data->DataSplinePaths();
+    QMapIterator<qint64, VSplinePath> q(*splPath);
+    while (q.hasNext()) {
+        q.next();
+        VSplinePath splPath = q.value();
+        if(splPath.referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(q.key()));
+            if(domElement.isElement()){
+                QDomElement element;
+                bool ok = GetActivModelingElement(element);
+                if(ok){
+                    element.removeChild(domElement);
+                }
+            }
+        }
+    }
+}
+

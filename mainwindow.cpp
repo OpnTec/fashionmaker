@@ -24,12 +24,13 @@
 #include "tools/vtoolarc.h"
 #include "tools/vtoolsplinepath.h"
 #include "tools/vtoolpointofcontact.h"
+#include "tools/vtooldetail.h"
 #pragma GCC diagnostic pop
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tools::ArrowTool), scene(0), mouseCoordinate(0),
-    helpLabel(0), view(0), isInitialized(false), dialogTable(0),
+    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tools::ArrowTool), currentScene(0), sceneDraw(0),
+    sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
     dialogEndLine(QSharedPointer<DialogEndLine>()), dialogLine(QSharedPointer<DialogLine>()),
     dialogAlongLine(QSharedPointer<DialogAlongLine>()),
     dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()), dialogNormal(QSharedPointer<DialogNormal>()),
@@ -37,21 +38,24 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogLineIntersect(QSharedPointer<DialogLineIntersect>()),
     dialogSpline(QSharedPointer<DialogSpline>()),
     dialogArc(QSharedPointer<DialogArc>()), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
-    dialogPointOfContact(QSharedPointer<DialogPointOfContact>()), dialogHistory(0),
-    doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false){
+    dialogPointOfContact(QSharedPointer<DialogPointOfContact>()), dialogDetail(QSharedPointer<DialogDetail>()),
+    dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
+    mode(Draw::Calculation){
     ui->setupUi(this);
     ToolBarOption();
     ToolBarDraws();
     QRectF sceneRect = QRectF(0, 0, PaperSize, PaperSize);
-    scene = new VMainGraphicsScene(sceneRect);
+    sceneDraw = new VMainGraphicsScene(sceneRect);
+    currentScene = sceneDraw;
+    connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+    sceneDetails = new VMainGraphicsScene(sceneRect);
+    connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     view = new VMainGraphicsView();
     ui->LayoutView->addWidget(view);
-    view->setScene(scene);
+    view->setScene(currentScene);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
-
-    connect(scene, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     helpLabel = new QLabel("Створіть новий файл для початку роботи.");
     ui->statusBar->addWidget(helpLabel);
 
@@ -77,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
     connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
+    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
 
     data = new VContainer;
 
@@ -137,8 +142,8 @@ void MainWindow::ActionNewDraw(){
     qint64 id = data->AddPoint(VPointF((10+comboBoxDraws->count()*5)*PrintDPI/25.4, 10*PrintDPI/25.4, "А", 5,
                                        10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
-    scene->addItem(spoint);
-    connect(spoint, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    sceneDraw->addItem(spoint);
+    connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     QMap<qint64, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
     VAbstractTool::AddRecord(id, Tools::SinglePointTool, doc);
@@ -190,7 +195,7 @@ void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &curso
         view->setCursor(cur);
         helpLabel->setText("Виберіть точки.");
         dialog = QSharedPointer<Dialog>(new Dialog(data));
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
     } else {
@@ -207,7 +212,7 @@ void MainWindow::ToolEndLine(bool checked){
 
 void MainWindow::ClosedDialogEndLine(int result){
     if(result == QDialog::Accepted){
-        VToolEndLine::Create(dialogEndLine, scene, doc, data);
+        VToolEndLine::Create(dialogEndLine, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -219,7 +224,7 @@ void MainWindow::ToolLine(bool checked){
 
 void MainWindow::ClosedDialogLine(int result){
     if(result == QDialog::Accepted){
-        VToolLine::Create(dialogLine, scene, doc, data);
+        VToolLine::Create(dialogLine, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -231,7 +236,7 @@ void MainWindow::ToolAlongLine(bool checked){
 
 void MainWindow::ClosedDialogAlongLine(int result){
     if(result == QDialog::Accepted){
-        VToolAlongLine::Create(dialogAlongLine, scene, doc, data);
+        VToolAlongLine::Create(dialogAlongLine, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -243,7 +248,7 @@ void MainWindow::ToolShoulderPoint(bool checked){
 
 void MainWindow::ClosedDialogShoulderPoint(int result){
     if(result == QDialog::Accepted){
-        VToolShoulderPoint::Create(dialogShoulderPoint, scene, doc, data);
+        VToolShoulderPoint::Create(dialogShoulderPoint, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -255,7 +260,7 @@ void MainWindow::ToolNormal(bool checked){
 
 void MainWindow::ClosedDialogNormal(int result){
     if(result == QDialog::Accepted){
-        VToolNormal::Create(dialogNormal, scene, doc, data);
+        VToolNormal::Create(dialogNormal, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -267,7 +272,7 @@ void MainWindow::ToolBisector(bool checked){
 
 void MainWindow::ClosedDialogBisector(int result){
     if(result == QDialog::Accepted){
-        VToolBisector::Create(dialogBisector, scene, doc, data);
+        VToolBisector::Create(dialogBisector, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -279,7 +284,7 @@ void MainWindow::ToolLineIntersect(bool checked){
 
 void MainWindow::ClosedDialogLineIntersect(int result){
     if(result == QDialog::Accepted){
-        VToolLineIntersect::Create(dialogLineIntersect, scene, doc, data);
+        VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -291,7 +296,7 @@ void MainWindow::ToolSpline(bool checked){
 
 void MainWindow::ClosedDialogSpline(int result){
     if(result == QDialog::Accepted){
-        VToolSpline::Create(dialogSpline, scene, doc, data);
+        VToolSpline::Create(dialogSpline, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -303,7 +308,7 @@ void MainWindow::ToolArc(bool checked){
 
 void MainWindow::ClosedDialogArc(int result){
     if(result == QDialog::Accepted){
-        VToolArc::Create(dialogArc, scene, doc, data);
+        VToolArc::Create(dialogArc, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -315,7 +320,7 @@ void MainWindow::ToolSplinePath(bool checked){
 
 void MainWindow::ClosedDialogSplinePath(int result){
     if(result == QDialog::Accepted){
-        VToolSplinePath::Create(dialogSplinePath, scene, doc, data);
+        VToolSplinePath::Create(dialogSplinePath, currentScene, doc, data, mode);
     }
     ArrowTool();
 }
@@ -327,7 +332,34 @@ void MainWindow::ToolPointOfContact(bool checked){
 
 void MainWindow::ClosedDialogPointOfContact(int result){
     if(result == QDialog::Accepted){
-        VToolPointOfContact::Create(dialogPointOfContact, scene, doc, data);
+        VToolPointOfContact::Create(dialogPointOfContact, currentScene, doc, data, mode);
+    }
+    ArrowTool();
+}
+
+void MainWindow::ToolDetail(bool checked){
+    if(checked){
+        CanselTool();
+        tool = Tools::Detail;
+        QPixmap pixmap("://cursor/new_detail_cursor.png");
+        QCursor cur(pixmap, 2, 3);
+        view->setCursor(cur);
+        helpLabel->setText("Виберіть точки.");
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data, mode));
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogDetail.data(),
+                &DialogDetail::ChoosedObject);
+        connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &MainWindow::ClosedDialogDetail);
+        connect(doc, &VDomDocument::FullUpdateFromFile, dialogDetail.data(), &DialogDetail::UpdateList);
+    } else {
+        if(QToolButton *tButton = qobject_cast< QToolButton * >(this->sender())){
+            tButton->setChecked(true);
+        }
+    }
+}
+
+void MainWindow::ClosedDialogDetail(int result){
+    if(result == QDialog::Accepted){
+        VToolDetail::Create(dialogDetail, sceneDetails, doc, data);
     }
     ArrowTool();
 }
@@ -437,68 +469,72 @@ void MainWindow::CanselTool(){
         case Tools::EndLineTool:
             dialogEndLine.clear();
             ui->toolButtonEndLine->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::LineTool:
             dialogLine.clear();
             ui->toolButtonLine->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearFocus();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearFocus();
             break;
         case Tools::AlongLineTool:
             dialogAlongLine.clear();
             ui->toolButtonAlongLine->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::ShoulderPointTool:
             dialogShoulderPoint.clear();
             ui->toolButtonShoulderPoint->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::NormalTool:
             dialogNormal.clear();
             ui->toolButtonNormal->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::BisectorTool:
             dialogBisector.clear();
             ui->toolButtonBisector->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::LineIntersectTool:
             dialogLineIntersect.clear();
             ui->toolButtonLineIntersect->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::SplineTool:
             dialogSpline.clear();
             ui->toolButtonSpline->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::ArcTool:
             dialogArc.clear();
             ui->toolButtonArc->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::SplinePathTool:
             dialogSplinePath.clear();
             ui->toolButtonSplinePath->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
             break;
         case Tools::PointOfContact:
             dialogPointOfContact.clear();
             ui->toolButtonPointOfContact->setChecked(false);
-            scene->setFocus(Qt::OtherFocusReason);
-            scene->clearSelection();
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tools::Detail:
+            dialogDetail.clear();
+            ui->toolButtonNewDetail->setChecked(false);
             break;
     }
 }
@@ -528,6 +564,9 @@ void MainWindow::keyPressEvent ( QKeyEvent * event ){
 void MainWindow::ActionDraw(bool checked){
     if(checked){
         ui->actionDetails->setChecked(false);
+        currentScene = sceneDraw;
+        view->setScene(currentScene);
+        mode = Draw::Calculation;
     } else {
         ui->actionDraw->setChecked(true);
     }
@@ -536,6 +575,9 @@ void MainWindow::ActionDraw(bool checked){
 void MainWindow::ActionDetails(bool checked){
     if(checked){
         ui->actionDraw->setChecked(false);
+        currentScene = sceneDetails;
+        view->setScene(sceneDetails);
+        mode = Draw::Modeling;
     } else {
         ui->actionDetails->setChecked(true);
     }
@@ -559,6 +601,7 @@ void MainWindow::ActionSaveAs(){
 
     QFile file(fileName);
     if(file.open(QIODevice::WriteOnly| QIODevice::Truncate)){
+        doc->GarbageCollector();
         const int Indent = 4;
         QTextStream out(&file);
         doc->save(out, Indent);
@@ -572,6 +615,7 @@ void MainWindow::ActionSave(){
     if(!fileName.isEmpty()){
         QFile file(fileName);
         if(file.open(QIODevice::WriteOnly| QIODevice::Truncate)){
+            doc->GarbageCollector();
             const int Indent = 4;
             QTextStream out(&file);
             doc->save(out, Indent);
@@ -597,7 +641,7 @@ void MainWindow::ActionOpen(){
         if(doc->setContent(&file)){
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
-            doc->Parse(Document::FullParse, scene);
+            doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
             connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
             QString nameDraw = doc->GetNameActivDraw();
@@ -621,7 +665,8 @@ void MainWindow::ActionNew(){
     fileName.clear();
     data->Clear();
     doc->clear();
-    scene->clear();
+    sceneDraw->clear();
+    sceneDetails->clear();
     CanselTool();
     comboBoxDraws->clear();
     fileName.clear();
@@ -707,6 +752,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonArc->setEnabled(enable);
     ui->toolButtonSplinePath->setEnabled(enable);
     ui->toolButtonPointOfContact->setEnabled(enable);
+    ui->toolButtonNewDetail->setEnabled(enable);
 }
 
 MainWindow::~MainWindow(){

@@ -1,14 +1,15 @@
 #include "vpointf.h"
 
-VPointF::VPointF():_name(QString()), _mx(0), _my(0), _x(0), _y(0){
+VPointF::VPointF():_name(QString()), _mx(0), _my(0), _x(0), _y(0), _referens(0), mode(Draw::Calculation),
+    idObject(0){
 }
 
 VPointF::VPointF ( const VPointF & point ):_name(point.name()), _mx(point.mx()), _my(point.my()),
-    _x(point.x()), _y(point.y()){
+    _x(point.x()), _y(point.y()), _referens(0), mode(point.getMode()), idObject(point.getIdObject()){
 }
 
-VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my):_name(name), _mx(mx), _my(my), _x(x),
-    _y(y){
+VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my, Draw::Mode mode, qint64 idObject):_name(name), _mx(mx),
+    _my(my), _x(x), _y(y), _referens(0), mode(mode), idObject(idObject){
 }
 
 VPointF::~VPointF(){
@@ -56,4 +57,36 @@ qreal VPointF::x() const{
 
 void VPointF::setX(const qreal &value){
     _x = value;
+}
+
+qint32 VPointF::referens() const{
+    return _referens;
+}
+
+void VPointF::incrementReferens(){
+    ++_referens;
+}
+
+void VPointF::decrementReferens(){
+    if(_referens > 0){
+        --_referens;
+    }
+}
+
+Draw::Mode VPointF::getMode() const
+{
+    return mode;
+}
+
+void VPointF::setMode(const Draw::Mode &value)
+{
+    mode = value;
+}
+
+qint64 VPointF::getIdObject() const{
+    return idObject;
+}
+
+void VPointF::setIdObject(const qint64 &value){
+    idObject = value;
 }

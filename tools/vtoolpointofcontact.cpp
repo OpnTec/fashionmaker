@@ -1,10 +1,11 @@
 #include "vtoolpointofcontact.h"
 
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                         Draw::Mode mode,
                                          const QString &radius, const qint64 &center,
                                          const qint64 &firstPointId, const qint64 &secondPointId,
                                          Tool::Enum typeCreation, QGraphicsItem *parent)
-    : VToolPoint(doc, data, id, parent), radius(radius), center(center), firstPointId(firstPointId),
+    : VToolPoint(doc, data, id, mode, parent), radius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogPointOfContact(QSharedPointer<DialogPointOfContact>()){
 
     if(typeCreation == Tool::FromGui){
@@ -47,21 +48,21 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 }
 
 void VToolPointOfContact::Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene *scene,
-                                 VDomDocument *doc, VContainer *data){
+                                 VDomDocument *doc, VContainer *data, Draw::Mode mode){
     QString radius = dialog->getRadius();
     qint64 center = dialog->getCenter();
     qint64 firstPointId = dialog->getFirstPoint();
     qint64 secondPointId = dialog->getSecondPoint();
     QString pointName = dialog->getPointName();
     Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const qint64 &center,
                                  const qint64 &firstPointId, const qint64 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                 Document::Enum parse, Tool::Enum typeCreation){
+                                 Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode){
     VPointF centerP = data->GetPoint(center);
     VPointF firstP = data->GetPoint(firstPointId);
     VPointF secondP = data->GetPoint(secondPointId);
@@ -80,13 +81,21 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
             if(parse != Document::FullParse){
                 QMap<qint64, VDataTool*>* tools = doc->getTools();
                 VDataTool *tool = tools->value(id);
-                tool->VDataTool::setData(data);
-                tools->insert(id, tool);
+                if(tool != 0){
+                    tool->VDataTool::setData(data);
+                    tools->insert(id, tool);
+                    data->IncrementReferens(id, Scene::Point);
+                }
             }
         }
         VAbstractTool::AddRecord(id, Tools::PointOfContact, doc);
+        if(mode == Draw::Modeling){
+            data->IncrementReferens(center, Scene::Point);
+            data->IncrementReferens(firstPointId, Scene::Point);
+            data->IncrementReferens(secondPointId, Scene::Point);
+        }
         if(parse == Document::FullParse){
-            VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
+            VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, mode, radius, center,
                                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -128,7 +137,12 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 }
 
 void VToolPointOfContact::AddToFile(){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -142,5 +156,5 @@ void VToolPointOfContact::AddToFile(){
     AddAttribute(domElement, "firstPoint", firstPointId);
     AddAttribute(domElement, "secondPoint", secondPointId);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }

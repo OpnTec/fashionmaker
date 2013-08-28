@@ -3,10 +3,11 @@
 #include <QMenu>
 #pragma GCC diagnostic warning "-Weffc++"
 
-VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                             const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
-                             const qint64 &thirdPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
+VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode,
+                             const QString &typeLine, const QString &formula, const qint64 &firstPointId,
+                             const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Enum typeCreation,
+                             QGraphicsItem *parent):
+    VToolLinePoint(doc, data, id, mode, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
     thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>()){
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;
@@ -43,7 +44,7 @@ void VToolBisector::setDialog(){
 }
 
 void VToolBisector::Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene *scene,
-                           VDomDocument *doc, VContainer *data){
+                           VDomDocument *doc, VContainer *data, Draw::Mode mode){
     QString formula = dialog->getFormula();
     qint64 firstPointId = dialog->getFirstPointId();
     qint64 secondPointId = dialog->getSecondPointId();
@@ -51,14 +52,14 @@ void VToolBisector::Create(QSharedPointer<DialogBisector> &dialog, VMainGraphics
     QString typeLine = dialog->getTypeLine();
     QString pointName = dialog->getPointName();
     Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Tool::FromGui, mode);
 }
 
 void VToolBisector::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                            const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                           Document::Enum parse, Tool::Enum typeCreation){
+                           Document::Enum parse, Tool::Enum typeCreation, Draw::Mode mode){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     VPointF thirdPoint = data->GetPoint(thirdPointId);
@@ -77,14 +78,22 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             if(parse != Document::FullParse){
                 QMap<qint64, VDataTool*>* tools = doc->getTools();
                 VDataTool *tool = tools->value(id);
-                tool->VDataTool::setData(data);
-                tools->insert(id, tool);
+                if(tool != 0){
+                    tool->VDataTool::setData(data);
+                    tools->insert(id, tool);
+                    data->IncrementReferens(id, Scene::Point);
+                }
             }
         }
         data->AddLine(firstPointId, id);
         VAbstractTool::AddRecord(id, Tools::BisectorTool, doc);
+        if(mode == Draw::Modeling){
+            data->IncrementReferens(firstPointId, Scene::Point);
+            data->IncrementReferens(secondPointId, Scene::Point);
+            data->IncrementReferens(thirdPointId, Scene::Point);
+        }
         if(parse == Document::FullParse){
-            VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula,
+            VToolBisector *point = new VToolBisector(doc, data, id, mode, typeLine, formula,
                                                      firstPointId, secondPointId, thirdPointId,
                                                      typeCreation);
             scene->addItem(point);
@@ -129,7 +138,12 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VToolBisector::AddToFile(){
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = VAbstractTool::data.GetPoint(id);
+    } else {
+        point = VAbstractTool::data.GetModelingPoint(id);
+    }
     QDomElement domElement = doc->createElement("point");
 
     AddAttribute(domElement, "id", id);
@@ -144,5 +158,5 @@ void VToolBisector::AddToFile(){
     AddAttribute(domElement, "secondPoint", basePointId);
     AddAttribute(domElement, "thirdPoint", thirdPointId);
 
-    AddToCalculation(domElement);
+    AddToDraw(domElement);
 }

@@ -9,7 +9,7 @@
 class VToolLinePoint : public VToolPoint
 {
 public:
-    VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
+    VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, Draw::Mode mode,
                    const QString &typeLine, const QString &formula,
                    const qint64 &basePointId, const qint32 &angle, QGraphicsItem * parent = 0);
 public slots:
