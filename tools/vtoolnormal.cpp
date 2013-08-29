@@ -68,7 +68,6 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                 VDataTool *tool = tools->value(id);
                 if(tool != 0){
                     tool->VDataTool::setData(data);
-                    tools->insert(id, tool);
                     data->IncrementReferens(id, Scene::Point);
                 }
             }

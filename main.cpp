@@ -1,9 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTextCodec>
-#pragma GCC diagnostic pop
+#include "tablewindow.h"
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg){
     QByteArray localMsg = msg.toLocal8Bit();
@@ -32,6 +30,9 @@ int main(int argc, char *argv[]){
     QApplication app(argc, argv);
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
+    TableWindow table;
+    QObject::connect(&w, &MainWindow::ModelChosen, &table, &TableWindow::ModelChosen);
+    QObject::connect(&table, &TableWindow::closed, &w, &MainWindow::tableClosed);
     w.show();
     
     return app.exec();

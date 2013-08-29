@@ -4,6 +4,7 @@
 #include "vnodedetail.h"
 #include <QVector>
 #include <QString>
+#include <QPainterPath>
 
 class VDetail
 {

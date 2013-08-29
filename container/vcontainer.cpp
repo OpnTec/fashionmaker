@@ -29,6 +29,18 @@ const VContainer &VContainer::operator =(const VContainer &data){
     return *this;
 }
 
+VContainer::VContainer(const VContainer &data):base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
+    modelingPoints(QMap<qint64, VPointF>()),
+    standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
+    lengthLines(QMap<QString, qreal>()), lineAngles(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
+    modelingSplines(QMap<qint64, VSpline>()),
+    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), modelingArcs(QMap<qint64, VArc>()),
+    lengthArcs(QMap<QString, qreal>()),
+    splinePaths(QMap<qint64, VSplinePath>()), modelingSplinePaths(QMap<qint64, VSplinePath>()),
+    details(QMap<qint64, VDetail>()){
+    setData(data);
+}
+
 void VContainer::setData(const VContainer &data){
     base = *data.DataBase();
     points = *data.DataPoints();
@@ -166,6 +178,52 @@ void VContainer::IncrementReferens(qint64 id, Scene::Type obj){
         UpdateSplinePath(id, splPath);
     }
         break;
+    }
+}
+
+QPainterPath VContainer::ContourPath(qint64 idDetail) const{
+    VDetail detail = GetDetail(idDetail);
+    QVector<QPointF> points;
+    for(qint32 i = 0; i< detail.CountNode(); ++i){
+        switch(detail[i].getTypeTool()){
+        case(Scene::Line):
+            break;
+        case(Scene::Point):{
+            VPointF point = GetModelingPoint(detail[i].getId());
+            points.append(point.toQPointF());
+        }
+            break;
+        case(Scene::Arc):{
+            VArc arc = GetModelingArc(detail[i].getId());
+            points << arc.GetPoints();
+        }
+            break;
+        case(Scene::Spline):{
+            VSpline spline = GetModelingSpline(detail[i].getId());
+            points << spline.GetPoints();
+        }
+            break;
+        case(Scene::SplinePath):{
+            VSplinePath splinePath = GetModelingSplinePath(detail[i].getId());
+            points << splinePath.GetPathPoints();
+        }
+            break;
+        }
+    }
+    QPainterPath path;
+    path.moveTo(points[0]);
+    for (qint32 i = 1; i < points.count(); ++i){
+        path.lineTo(points[i]);
+    }
+    path.lineTo(points[0]);
+    return path;
+}
+
+void VContainer::PrepareDetails(QVector<VItem *> &list) const{
+    QMapIterator<qint64, VDetail> iDetail(details);
+    while (iDetail.hasNext()) {
+        iDetail.next();
+        list.append(new VItem(ContourPath(iDetail.key()), list.size()));
     }
 }
 

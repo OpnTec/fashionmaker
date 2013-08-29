@@ -27,32 +27,26 @@ VNodeDetail &VDetail::operator [](int indx){
     return nodes[indx];
 }
 
-qreal VDetail::getMy() const
-{
+qreal VDetail::getMy() const{
     return my;
 }
 
-void VDetail::setMy(const qreal &value)
-{
+void VDetail::setMy(const qreal &value){
     my = value;
 }
 
-qreal VDetail::getMx() const
-{
+qreal VDetail::getMx() const{
     return mx;
 }
 
-void VDetail::setMx(const qreal &value)
-{
+void VDetail::setMx(const qreal &value){
     mx = value;
 }
 
-QString VDetail::getName() const
-{
+QString VDetail::getName() const{
     return name;
 }
 
-void VDetail::setName(const QString &value)
-{
+void VDetail::setName(const QString &value){
     name = value;
 }

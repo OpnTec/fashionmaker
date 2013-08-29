@@ -64,7 +64,6 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
                 VDataTool *tool = tools->value(id);
                 if(tool != 0){
                     tool->VDataTool::setData(data);
-                    tools->insert(id, tool);
                     data->IncrementReferens(id, Scene::Point);
                 }
             }

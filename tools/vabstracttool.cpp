@@ -103,10 +103,6 @@ const VContainer *VAbstractTool::getData()const{
     return &data;
 }
 
-void VAbstractTool::setData(const VContainer &value){
-    data = value;
-}
-
 void VAbstractTool::setDialog(){
 }
 

@@ -51,8 +51,8 @@ void VModelingArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
     }
 }
 
-void VModelingArc::FullUpdateFromGui(int result)
-{
+void VModelingArc::FullUpdateFromGui(int result){
+    Q_UNUSED(result);
 }
 
 void VModelingArc::AddToFile(){

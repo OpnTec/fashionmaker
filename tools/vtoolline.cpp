@@ -50,7 +50,6 @@ void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 
         VDataTool *tool = tools->value(id);
         Q_CHECK_PTR(tool);
         tool->VDataTool::setData(data);
-        tools->insert(id, tool);
     }
     VAbstractTool::AddRecord(id, Tools::LineTool, doc);
     if(mode == Draw::Modeling){

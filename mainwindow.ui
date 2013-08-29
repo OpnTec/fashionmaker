@@ -37,7 +37,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>144</width>
          <height>104</height>
         </rect>
        </property>
@@ -639,6 +639,15 @@
    </property>
    <property name="text">
     <string>History</string>
+   </property>
+  </action>
+  <action name="actionLayout">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
+   </property>
+   <property name="text">
+    <string>Розкладка</string>
    </property>
   </action>
  </widget>

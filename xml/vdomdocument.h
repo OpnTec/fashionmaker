@@ -30,9 +30,11 @@ class VDomDocument : public QObject, public QDomDocument
 {
     Q_OBJECT
 public:
-                VDomDocument(VContainer *data,QComboBox *comboBoxDraws);
-                VDomDocument(const QString& name, VContainer *data,QComboBox *comboBoxDraws);
-                VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws);
+                VDomDocument(VContainer *data,QComboBox *comboBoxDraws, Draw::Mode *mode);
+                VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
+                             Draw::Mode *mode);
+                VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
+                             Draw::Mode *mode);
                 ~VDomDocument();
     QDomElement elementById(const QString& id);
     void        CreateEmptyFile();
@@ -70,6 +72,7 @@ private:
     QVector<VToolRecord> history;
     qint64 cursor;
     QComboBox *comboBoxDraws;
+    Draw::Mode          *mode;
                 VDomDocument(const VDomDocument & doc);
     const VDomDocument &operator=(const VDomDocument& doc);
     bool        find(QDomElement node, const QString& id);

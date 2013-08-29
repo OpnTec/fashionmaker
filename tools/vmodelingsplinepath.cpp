@@ -53,8 +53,8 @@ void VModelingSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable
     }
 }
 
-void VModelingSplinePath::FullUpdateFromGui(int result)
-{
+void VModelingSplinePath::FullUpdateFromGui(int result){
+    Q_UNUSED(result);
 }
 
 void VModelingSplinePath::AddToFile(){

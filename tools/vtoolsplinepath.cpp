@@ -65,7 +65,6 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
             VDataTool *tool = tools->value(id);
             if(tool != 0){
                 tool->VDataTool::setData(data);
-                tools->insert(id, tool);
                 data->IncrementReferens(id, Scene::SplinePath);
             }
         }

@@ -142,14 +142,12 @@ void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetai
             VDataTool *tool = tools->value(id);
             if(tool != 0){
                 tool->VDataTool::setData(data);
-                tools->insert(id, tool);
             }
 
             for(qint32 i = 0; i< newDetail.CountNode(); ++i){
                 VDataTool *tool = tools->value(newDetail[i].getId());
                 if(tool != 0){
                     tool->VDataTool::setData(data);
-                    tools->insert(id, tool);
                 }
             }
         }
@@ -168,8 +166,8 @@ void VToolDetail::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VToolDetail::FullUpdateFromGui(int result)
-{
+void VToolDetail::FullUpdateFromGui(int result){
+    Q_UNUSED(result);
 }
 
 void VToolDetail::AddToFile(){
@@ -213,16 +211,18 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
 
     AddAttribute(nod, "id", node.getId());
     switch(node.getTypeTool()){
-        case(Scene::Point):
+    case(Scene::Line):
+            break;
+    case(Scene::Point):
         AddAttribute(nod, "type", "Point");
             break;
-        case(Scene::Arc):
+    case(Scene::Arc):
         AddAttribute(nod, "type", "Arc");
             break;
-        case(Scene::Spline):
+    case(Scene::Spline):
         AddAttribute(nod, "type", "Spline");
             break;
-        case(Scene::SplinePath):
+    case(Scene::SplinePath):
         AddAttribute(nod, "type", "SplinePath");
         break;
     }
@@ -231,38 +231,6 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
 }
 
 void VToolDetail::RefreshGeometry(){
-    QVector<QPointF> points;
-    VDetail detail = VAbstractTool::data.GetDetail(id);
-    for(qint32 i = 0; i< detail.CountNode(); ++i){
-        switch(detail[i].getTypeTool()){
-        case(Scene::Point):{
-            VPointF point = VAbstractTool::data.GetModelingPoint(detail[i].getId());
-            points.append(point.toQPointF());
-        }
-            break;
-        case(Scene::Arc):{
-            VArc arc = VAbstractTool::data.GetModelingArc(detail[i].getId());
-            points << arc.GetPoints();
-        }
-            break;
-        case(Scene::Spline):{
-            VSpline spline = VAbstractTool::data.GetModelingSpline(detail[i].getId());
-            points << spline.GetPoints();
-        }
-            break;
-        case(Scene::SplinePath):{
-            VSplinePath splinePath = VAbstractTool::data.GetModelingSplinePath(detail[i].getId());
-            points << splinePath.GetPathPoints();
-        }
-            break;
-        }
-    }
-    QPainterPath path;
-    path.moveTo(points[0]);
-    for (qint32 i = 1; i < points.count(); ++i){
-        path.lineTo(points[i]);
-    }
-    path.lineTo(points[0]);
+    QPainterPath path = VAbstractTool::data.ContourPath(id);
     this->setPath(path);
-    //this->setPos(detail.getMx(), detail.getMy());
 }

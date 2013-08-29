@@ -32,8 +32,8 @@ void VModelingPoint::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VModelingPoint::FullUpdateFromGui(int result)
-{
+void VModelingPoint::FullUpdateFromGui(int result){
+    Q_UNUSED(result);
 }
 
 void VModelingPoint::AddToFile(){

@@ -52,8 +52,8 @@ void VModelingSpline::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
     }
 }
 
-void VModelingSpline::FullUpdateFromGui(int result)
-{
+void VModelingSpline::FullUpdateFromGui(int result){
+    Q_UNUSED(result);
 }
 
 void VModelingSpline::AddToFile(){

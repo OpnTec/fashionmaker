@@ -87,7 +87,6 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
             VDataTool *tool = tools->value(id);
             if(tool != 0){
                 tool->VDataTool::setData(data);
-                tools->insert(id, tool);
                 data->IncrementReferens(id, Scene::Spline);
             }
         }

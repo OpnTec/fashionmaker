@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui widgets xml svg printsupport
 
 TARGET = Valentina
 TEMPLATE = app
@@ -68,7 +66,10 @@ SOURCES += main.cpp\
     tools/vmodelingpoint.cpp \
     tools/vmodelingspline.cpp \
     tools/vmodelingarc.cpp \
-    tools/vmodelingsplinepath.cpp
+    tools/vmodelingsplinepath.cpp \
+    widgets/vtablegraphicsview.cpp \
+    widgets/vitem.cpp \
+    tablewindow.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -127,7 +128,10 @@ HEADERS  += mainwindow.h \
     tools/vmodelingpoint.h \
     tools/vmodelingspline.h \
     tools/vmodelingarc.h \
-    tools/vmodelingsplinepath.h
+    tools/vmodelingsplinepath.h \
+    widgets/vtablegraphicsview.h \
+    widgets/vitem.h \
+    tablewindow.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -144,7 +148,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogsplinepath.ui \
     dialogs/dialoghistory.ui \
     dialogs/dialogpointofcontact.ui \
-    dialogs/dialogdetail.ui
+    dialogs/dialogdetail.ui \
+    tablewindow.ui
 
 RESOURCES += \
     icon.qrc \

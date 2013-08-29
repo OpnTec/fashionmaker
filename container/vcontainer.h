@@ -17,6 +17,7 @@
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
 #include "../geometry/vdetail.h"
+#include "../widgets/vitem.h"
 
 /**
  * @brief The VContainer class
@@ -29,6 +30,7 @@ public:
                          */
                         VContainer();
                         const VContainer &operator=(const VContainer &data);
+                        VContainer(const VContainer &data);
                         void setData(const VContainer &data);
                         /**
      * @brief GetPoint
@@ -118,6 +120,8 @@ public:
     const QMap<qint64, VDetail> *DataDetails() const;
     void  UpdateId(qint64 newId);
     void  IncrementReferens(qint64 id, Scene::Type obj);
+    QPainterPath ContourPath(qint64 idDetail) const;
+    void PrepareDetails(QVector<VItem*> & list)const;
 private:
     static qint64         _id;
     QMap<QString, qint32> base;

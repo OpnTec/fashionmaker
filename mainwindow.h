@@ -35,6 +35,7 @@
 #pragma GCC diagnostic pop
 #include "container/vcontainer.h"
 #include "options.h"
+#include "widgets/vitem.h"
 
 namespace Ui {
 class MainWindow;
@@ -64,6 +65,7 @@ public slots:
     void                ActionTable(bool checked);
     void                ClosedActionTable();
     void                ActionHistory(bool checked);
+    void                ActionLayout(bool checked);
     void                ClosedActionHistory();
     void                ToolEndLine(bool checked);
     void                ClosedDialogEndLine(int result);
@@ -89,6 +91,17 @@ public slots:
     void                ClosedDialogPointOfContact(int result);
     void                ToolDetail(bool checked);
     void                ClosedDialogDetail(int result);
+    /**
+     * @brief tableClosed Слот, що виконується при отриманні сигналу закриття вікна укладання
+     *деталей моделі.
+     */
+    void     tableClosed();
+signals:
+    /**
+     * @brief ModelChosen Сигнал, що висилається після розрахунку всіх деталей моделі.
+     * @param listDetails Список детайле моделі.
+     */
+    void     ModelChosen(QVector<VItem*> listDetails);
 protected:
     virtual void        keyPressEvent ( QKeyEvent * event );
     virtual void        showEvent( QShowEvent *event );
@@ -132,7 +145,8 @@ private:
     void                SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
     void SetToolButton(bool checked, Tools::Enum t, const QString &cursor, QSharedPointer<Dialog> &dialog,
-                                   Func closeDialogSlot);
+                       Func closeDialogSlot);
+    void MinimumScrollBar();
 };
 
 #endif // MAINWINDOW_H

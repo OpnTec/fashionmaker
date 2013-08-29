@@ -56,7 +56,6 @@ protected:
     void         AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     void         AddToDraw(const QDomElement &domElement);
     const VContainer *getData() const;
-    void         setData(const VContainer &value);
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true){

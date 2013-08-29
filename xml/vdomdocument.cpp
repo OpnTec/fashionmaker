@@ -20,22 +20,24 @@
 
 
 
-VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws) : QDomDocument(),
+VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Mode *mode) : QDomDocument(),
     map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-   comboBoxDraws(comboBoxDraws){
+    comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
-VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws) :
+VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
+                           Draw::Mode *mode) :
     QDomDocument(name), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-    comboBoxDraws(comboBoxDraws){
+    comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
-VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws) :
+VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
+                           Draw::Mode *mode) :
     QDomDocument(doctype), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-    comboBoxDraws(comboBoxDraws){
+    comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
 VDomDocument::~VDomDocument(){
@@ -748,29 +750,31 @@ void VDomDocument::setCursor(const qint64 &value){
 }
 
 void VDomDocument::setCurrentData(){
-    QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
-    if(nameActivDraw != nameDraw){
-        nameActivDraw = nameDraw;
-        qint64 id = 0;
-        if(history.size() == 0){
-            return;
-        }
-        for(qint32 i = 0; i < history.size(); ++i){
-            VToolRecord tool = history.at(i);
-            if(tool.getNameDraw() == nameDraw){
-                id = tool.getId();
-            }
-        }
-        if(id == 0){
-            VToolRecord tool = history.at(history.size()-1);
-            id = tool.getId();
-            if(id == 0){
+    if(*mode == Draw::Calculation){
+        QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
+        if(nameActivDraw != nameDraw){
+            nameActivDraw = nameDraw;
+            qint64 id = 0;
+            if(history.size() == 0){
                 return;
             }
-        }
-        if(tools.size() > 0){
-            VDataTool *vTool = tools.value(id);
-            data->setData(vTool->getData());
+            for(qint32 i = 0; i < history.size(); ++i){
+                VToolRecord tool = history.at(i);
+                if(tool.getNameDraw() == nameDraw){
+                    id = tool.getId();
+                }
+            }
+            if(id == 0){
+                VToolRecord tool = history.at(history.size()-1);
+                id = tool.getId();
+                if(id == 0){
+                    return;
+                }
+            }
+            if(tools.size() > 0){
+                VDataTool *vTool = tools.value(id);
+                data->setData(vTool->getData());
+            }
         }
     }
 }

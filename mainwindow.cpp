@@ -69,7 +69,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::ActionOpen);
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::ActionNew);
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
-    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
     connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
@@ -85,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     data = new VContainer;
 
-    doc = new VDomDocument(data, comboBoxDraws);
+    doc = new VDomDocument(data, comboBoxDraws, &mode);
     doc->CreateEmptyFile();
     connect(doc, &VDomDocument::haveChange, this, &MainWindow::haveChange);
 
@@ -364,6 +363,11 @@ void MainWindow::ClosedDialogDetail(int result){
     ArrowTool();
 }
 
+void MainWindow::tableClosed(){
+    show();
+    MinimumScrollBar();
+}
+
 void MainWindow::showEvent( QShowEvent *event ){
     QMainWindow::showEvent( event );
     if( event->spontaneous() ){
@@ -374,10 +378,7 @@ void MainWindow::showEvent( QShowEvent *event ){
         return;
     }
     // do your init stuff here
-    QScrollBar *horScrollBar = view->horizontalScrollBar();
-    horScrollBar->setValue(horScrollBar->minimum());
-    QScrollBar *verScrollBar = view->verticalScrollBar();
-    verScrollBar->setValue(verScrollBar->minimum());
+    MinimumScrollBar();
 
     isInitialized = true;//перший показ вікна вже відбувся
 }
@@ -441,6 +442,10 @@ void MainWindow::ToolBarDraws(){
 
     ui->toolBarDraws->addAction(ui->actionHistory);
     ui->actionHistory->setEnabled(false);
+    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
+
+    ui->toolBarDraws->addAction(ui->actionLayout);
+    connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
 }
 
 void MainWindow::currentDrawChanged( int index ){
@@ -567,6 +572,7 @@ void MainWindow::ActionDraw(bool checked){
         currentScene = sceneDraw;
         view->setScene(currentScene);
         mode = Draw::Calculation;
+        doc->setCurrentData();
     } else {
         ui->actionDraw->setChecked(true);
     }
@@ -735,6 +741,14 @@ void MainWindow::ActionHistory(bool checked){
     }
 }
 
+void MainWindow::ActionLayout(bool checked){
+    Q_UNUSED(checked);
+    hide();
+    QVector<VItem*> listDetails;
+    data->PrepareDetails(listDetails);
+    emit ModelChosen(listDetails);
+}
+
 void MainWindow::ClosedActionHistory(){
     ui->actionHistory->setChecked(false);
     delete dialogHistory;
@@ -753,6 +767,13 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonSplinePath->setEnabled(enable);
     ui->toolButtonPointOfContact->setEnabled(enable);
     ui->toolButtonNewDetail->setEnabled(enable);
+}
+
+void MainWindow::MinimumScrollBar(){
+    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    horScrollBar->setValue(horScrollBar->minimum());
+    QScrollBar *verScrollBar = view->verticalScrollBar();
+    verScrollBar->setValue(verScrollBar->minimum());
 }
 
 MainWindow::~MainWindow(){
