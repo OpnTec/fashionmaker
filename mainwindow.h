@@ -13,7 +13,6 @@
 #include <QComboBox>
 #include <QSharedPointer>
 #include <QToolButton>
-#include <QSharedPointer>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
 #include "dialogs/dialogincrements.h"

@@ -1,10 +1,7 @@
 #ifndef DIALOGALONGLINE_H
 #define DIALOGALONGLINE_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
-#pragma GCC diagnostic pop
 #include "../options.h"
 #include "../container/vcontainer.h"
 #include "../container/calculator.h"

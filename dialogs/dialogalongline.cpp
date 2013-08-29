@@ -1,8 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogalongline.h"
 #include "ui_dialogalongline.h"
-#pragma GCC diagnostic pop
 
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),

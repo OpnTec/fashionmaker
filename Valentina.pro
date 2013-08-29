@@ -4,10 +4,13 @@
 #
 #-------------------------------------------------
 
+# Use out-of-source builds (shadow builds)
+
 QT       += core gui widgets xml svg printsupport
 
 TARGET = Valentina
 TEMPLATE = app
+CONFIG   += precompile_header
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -155,11 +158,32 @@ RESOURCES += \
     icon.qrc \
     cursor.qrc
 
+CONFIG -= debug_and_release debug_and_release_target
+
+# directory for executable file
+DESTDIR = bin
+
+# files created moc
+MOC_DIR = moc
+
+# objecs files
+OBJECTS_DIR = obj
+
+# files created rcc
+RCC_DIR = rcc
+
+# files created uic
+UI_DIR = uic
+
+# Use Precompiled headers (PCH)
+PRECOMPILED_HEADER  = stable.h
+
 CONFIG(debug, debug|release){
     # Debug
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
                       -isystem "/usr/include/qt5/QtCore" -O0 -Wall -Wextra -pedantic -Weffc++ \
+                      -isystem "$$OUT_PWD/uic" \
                       -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast \
                       -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -std=c++0x
 }else{
