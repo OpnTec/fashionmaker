@@ -10,7 +10,6 @@ QT       += core gui widgets xml svg printsupport
 
 TARGET = Valentina
 TEMPLATE = app
-CONFIG += precompile_header
 CONFIG -= debug_and_release debug_and_release_target
 
 SOURCES += main.cpp\
