@@ -1,16 +1,12 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
 #include <QCloseEvent>
 #include <QString>
-#pragma GCC diagnostic pop
-#include "../container/vpointf.h"
-#include "../container/calculator.h"
+#include "container/vpointf.h"
+#include "container/calculator.h"
 
-DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+DialogEndLine::DialogEndLine(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
     formula(QString()), angle(0), basePointId(0){
     ui->setupUi(this);
     spinBoxAngle = ui->spinBoxAngle;
@@ -63,8 +59,24 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent) :
 }
 
 void DialogEndLine::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
         this->show();
     }

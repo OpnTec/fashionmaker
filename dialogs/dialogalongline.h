@@ -14,7 +14,8 @@ class DialogAlongLine : public DialogTool
 {
     Q_OBJECT    
 public:
-    explicit            DialogAlongLine(const VContainer *data, QWidget *parent = 0);
+    explicit            DialogAlongLine(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                        QWidget *parent = 0);
                         ~DialogAlongLine();
     QString             getPointName() const;
     void                setPointName(const QString &value);

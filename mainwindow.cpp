@@ -1,8 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QLabel>
@@ -13,19 +8,6 @@
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QDebug>
-#include "tools/vtoolendline.h"
-#include "tools/vtoolline.h"
-#include "tools/vtoolalongline.h"
-#include "tools/vtoolshoulderpoint.h"
-#include "tools/vtoolnormal.h"
-#include "tools/vtoolbisector.h"
-#include "tools/vtoollineintersect.h"
-#include "tools/vtoolspline.h"
-#include "tools/vtoolarc.h"
-#include "tools/vtoolsplinepath.h"
-#include "tools/vtoolpointofcontact.h"
-#include "tools/vtooldetail.h"
-#pragma GCC diagnostic pop
 #include "geometry/vspline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -145,7 +127,7 @@ void MainWindow::ActionNewDraw(){
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     QMap<qint64, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
-    VAbstractTool::AddRecord(id, Tools::SinglePointTool, doc);
+    VDrawTool::AddRecord(id, Tools::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
 }
@@ -193,7 +175,7 @@ void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &curso
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
         helpLabel->setText("Виберіть точки.");
-        dialog = QSharedPointer<Dialog>(new Dialog(data));
+        dialog = QSharedPointer<Dialog>(new Dialog(data, mode));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
@@ -204,6 +186,15 @@ void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &curso
     }
 }
 
+template <typename Tool>
+void MainWindow::AddToolToDetail(Tool *tool, const qint64 &id, Tools::Enum typeTool,
+                                 const qint64 &idDetail){
+    QMap<qint64, VDataTool*>* tools = doc->getTools();
+    VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
+    Q_CHECK_PTR(det);
+    det->AddTool(tool, id, typeTool);
+}
+
 void MainWindow::ToolEndLine(bool checked){
     SetToolButton(checked, Tools::EndLineTool, ":/cursor/endline_cursor.png", dialogEndLine,
                   &MainWindow::ClosedDialogEndLine);
@@ -211,7 +202,12 @@ void MainWindow::ToolEndLine(bool checked){
 
 void MainWindow::ClosedDialogEndLine(int result){
     if(result == QDialog::Accepted){
-        VToolEndLine::Create(dialogEndLine, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolEndLine::Create(dialogEndLine, currentScene, doc, data);
+        } else {
+            VModelingEndLine *endLine = VModelingEndLine::Create(dialogEndLine, doc, data);
+            AddToolToDetail(endLine, endLine->getId(), Tools::EndLineTool, dialogEndLine->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -223,7 +219,12 @@ void MainWindow::ToolLine(bool checked){
 
 void MainWindow::ClosedDialogLine(int result){
     if(result == QDialog::Accepted){
-        VToolLine::Create(dialogLine, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolLine::Create(dialogLine, currentScene, doc, data);
+        } else {
+            VModelingLine *line = VModelingLine::Create(dialogLine, doc, data);
+            AddToolToDetail(line, line->getId(), Tools::LineTool, dialogLine->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -235,7 +236,12 @@ void MainWindow::ToolAlongLine(bool checked){
 
 void MainWindow::ClosedDialogAlongLine(int result){
     if(result == QDialog::Accepted){
-        VToolAlongLine::Create(dialogAlongLine, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolAlongLine::Create(dialogAlongLine, currentScene, doc, data);
+        } else{
+            VModelingAlongLine *point = VModelingAlongLine::Create(dialogAlongLine, doc, data);
+            AddToolToDetail(point, point->getId(), Tools::AlongLineTool, dialogAlongLine->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -247,7 +253,13 @@ void MainWindow::ToolShoulderPoint(bool checked){
 
 void MainWindow::ClosedDialogShoulderPoint(int result){
     if(result == QDialog::Accepted){
-        VToolShoulderPoint::Create(dialogShoulderPoint, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolShoulderPoint::Create(dialogShoulderPoint, currentScene, doc, data);
+        } else {
+            VModelingShoulderPoint *point = VModelingShoulderPoint::Create(dialogShoulderPoint, doc, data);
+            AddToolToDetail(point, point->getId(), Tools::ShoulderPointTool,
+                            dialogShoulderPoint->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -259,7 +271,12 @@ void MainWindow::ToolNormal(bool checked){
 
 void MainWindow::ClosedDialogNormal(int result){
     if(result == QDialog::Accepted){
-        VToolNormal::Create(dialogNormal, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolNormal::Create(dialogNormal, currentScene, doc, data);
+        } else {
+            VModelingNormal *point = VModelingNormal::Create(dialogNormal, doc, data);
+            AddToolToDetail(point, point->getId(), Tools::NormalTool, dialogNormal->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -271,7 +288,12 @@ void MainWindow::ToolBisector(bool checked){
 
 void MainWindow::ClosedDialogBisector(int result){
     if(result == QDialog::Accepted){
-        VToolBisector::Create(dialogBisector, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolBisector::Create(dialogBisector, currentScene, doc, data);
+        } else {
+            VModelingBisector *point = VModelingBisector::Create(dialogBisector, doc, data);
+            AddToolToDetail(point, point->getId(), Tools::BisectorTool, dialogBisector->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -283,7 +305,13 @@ void MainWindow::ToolLineIntersect(bool checked){
 
 void MainWindow::ClosedDialogLineIntersect(int result){
     if(result == QDialog::Accepted){
-        VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data);
+        } else {
+            VModelingLineIntersect *point = VModelingLineIntersect::Create(dialogLineIntersect, doc, data);
+            AddToolToDetail(point, point->getId(), Tools::LineIntersectTool,
+                            dialogLineIntersect->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -295,7 +323,12 @@ void MainWindow::ToolSpline(bool checked){
 
 void MainWindow::ClosedDialogSpline(int result){
     if(result == QDialog::Accepted){
-        VToolSpline::Create(dialogSpline, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolSpline::Create(dialogSpline, currentScene, doc, data);
+        } else {
+            VModelingSpline *spl = VModelingSpline::Create(dialogSpline, doc, data);
+            AddToolToDetail(spl, spl->getId(), Tools::SplineTool, dialogSpline->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -307,7 +340,12 @@ void MainWindow::ToolArc(bool checked){
 
 void MainWindow::ClosedDialogArc(int result){
     if(result == QDialog::Accepted){
-        VToolArc::Create(dialogArc, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolArc::Create(dialogArc, currentScene, doc, data);
+        } else {
+            VModelingArc *arc = VModelingArc::Create(dialogArc, doc, data);
+            AddToolToDetail(arc, arc->getId(), Tools::ArcTool, dialogArc->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -319,7 +357,12 @@ void MainWindow::ToolSplinePath(bool checked){
 
 void MainWindow::ClosedDialogSplinePath(int result){
     if(result == QDialog::Accepted){
-        VToolSplinePath::Create(dialogSplinePath, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolSplinePath::Create(dialogSplinePath, currentScene, doc, data);
+        } else {
+            VModelingSplinePath *spl = VModelingSplinePath::Create(dialogSplinePath, doc, data);
+            AddToolToDetail(spl, spl->getId(), Tools::SplinePathTool, dialogSplinePath->getIdDetail());
+        }
     }
     ArrowTool();
 }
@@ -331,7 +374,14 @@ void MainWindow::ToolPointOfContact(bool checked){
 
 void MainWindow::ClosedDialogPointOfContact(int result){
     if(result == QDialog::Accepted){
-        VToolPointOfContact::Create(dialogPointOfContact, currentScene, doc, data, mode);
+        if(mode == Draw::Calculation){
+            VToolPointOfContact::Create(dialogPointOfContact, currentScene, doc, data);
+        } else {
+            VModelingPointOfContact *point = VModelingPointOfContact::Create(dialogPointOfContact, doc,
+                                                                             data);
+            AddToolToDetail(point, point->getId(), Tools::PointOfContact,
+                            dialogPointOfContact->getIdDetail());
+        }
     }
     ArrowTool();
 }

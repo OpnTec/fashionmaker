@@ -1,7 +1,7 @@
 #include "dialogdetail.h"
 
 DialogDetail::DialogDetail(const VContainer *data, Draw::Mode mode, QWidget *parent) :
-    DialogTool(data, parent), ui(), details(VDetail()), mode(mode){
+    DialogTool(data, mode, parent), ui(), details(VDetail()){
     ui.setupUi(this);
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogDetail::DialogAccepted);
@@ -11,8 +11,32 @@ DialogDetail::DialogDetail(const VContainer *data, Draw::Mode mode, QWidget *par
 }
 
 void DialogDetail::ChoosedObject(qint64 id, Scene::Type type){
-    if(type != Scene::Line){
-        NewItem(id, type, mode);
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
+    if(type != Scene::Line && type != Scene::Detail){
+        switch(type){
+        case(Scene::Arc):
+            NewItem(id, Tools::NodeArc, mode, NodeDetail::Contour);
+            break;
+        case(Scene::Point):
+            NewItem(id, Tools::NodePoint, mode, NodeDetail::Contour);
+            break;
+        case(Scene::Spline):
+            NewItem(id, Tools::NodeSpline, mode, NodeDetail::Contour);
+            break;
+        case(Scene::SplinePath):
+            NewItem(id, Tools::NodeSplinePath, mode, NodeDetail::Contour);
+            break;
+        }
         this->show();
     }
 }
@@ -27,36 +51,54 @@ void DialogDetail::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, Scene::Type typeTool, Draw::Mode mode){
+void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode){
     QString name;
     switch(typeTool){
-        case(Scene::Line):
+    case(Tools::NodePoint):{
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
+        name = point.name();
         break;
-        case(Scene::Point):{
-            VPointF point = data->GetPoint(id);
-            name = point.name();
+    }
+    case(Tools::NodeArc):{
+        VArc arc;
+        if(mode == Draw::Calculation){
+            arc = data->GetArc(id);
+        } else {
+            arc = data->GetModelingArc(id);
         }
-            break;
-        case(Scene::Arc):{
-            VArc arc = data->GetArc(id);
-            name = data->GetNameArc(arc.GetCenter(), id);
+        name = data->GetNameArc(arc.GetCenter(), id, mode);
+        break;
+    }
+    case(Tools::NodeSpline):{
+        VSpline spl;
+        if(mode == Draw::Calculation){
+            spl = data->GetSpline(id);
+        } else {
+            spl = data->GetModelingSpline(id);
         }
-            break;
-        case(Scene::Spline):{
-            VSpline spl = data->GetSpline(id);
-            name = spl.GetName();
+        name = spl.GetName();
+        break;
+    }
+    case(Tools::NodeSplinePath):{
+        VSplinePath splPath;
+        if(mode == Draw::Calculation){
+            splPath = data->GetSplinePath(id);
+        } else {
+            splPath = data->GetModelingSplinePath(id);
         }
-            break;
-        case(Scene::SplinePath):{
-            VSplinePath splPath = data->GetSplinePath(id);
-            name = data->GetNameSplinePath(splPath);
-        }
-            break;
+        name = data->GetNameSplinePath(splPath, mode);
+        break;
+    }
     }
 
     QListWidgetItem *item = new QListWidgetItem(name);
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VNodeDetail node(id, typeTool, mode);
+    VNodeDetail node(id, typeTool, mode, typeNode);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
 }
@@ -69,7 +111,7 @@ void DialogDetail::setDetails(const VDetail &value){
     details = value;
     ui.listWidget->clear();
     for(qint32 i = 0; i < details.CountNode(); ++i){
-        NewItem(details[i].getId(), details[i].getTypeTool(),details[i].getMode());
+        NewItem(details[i].getId(), details[i].getTypeTool(),details[i].getMode(), details[i].getTypeNode());
     }
     details.setName(ui.lineEditNameDetail->text());
     ui.listWidget->setFocus(Qt::OtherFocusReason);

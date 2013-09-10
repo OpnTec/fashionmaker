@@ -1,17 +1,13 @@
 #ifndef DIALOGENDLINE_H
 #define DIALOGENDLINE_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QTimer>
-#pragma GCC diagnostic pop
-
-#include "../options.h"
-#include "../container/vcontainer.h"
-#include "../container/calculator.h"
+#include "options.h"
+#include "container/vcontainer.h"
+#include "container/calculator.h"
 
 namespace Ui {
 class DialogEndLine;
@@ -21,7 +17,8 @@ class DialogEndLine : public DialogTool
 {
     Q_OBJECT 
 public:
-    explicit          DialogEndLine(const VContainer *data, QWidget *parent = 0);
+    explicit          DialogEndLine(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                    QWidget *parent = 0);
                       ~DialogEndLine();
     QString           getPointName() const;
     void              setPointName(const QString &value);

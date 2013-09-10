@@ -1,10 +1,8 @@
 #ifndef DIALOGSINGLEPOINT_H
 #define DIALOGSINGLEPOINT_H
 
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
-#pragma GCC diagnostic warning "-Weffc++"
-#include "../container/vcontainer.h"
+#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogSinglePoint;

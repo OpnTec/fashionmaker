@@ -3,24 +3,36 @@
 
 #include <QtGlobal>
 #include <QMetaType>
-#include "../options.h"
+#include "options.h"
+
+namespace NodeDetail{
+    enum Type
+    {
+        Contour,
+        Modeling
+    };
+}
 
 class VNodeDetail
 {
 public:
     VNodeDetail();
-    VNodeDetail(qint64 id, Scene::Type typeTool, Draw::Mode mode);
+    VNodeDetail(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode);
     VNodeDetail(const VNodeDetail &node);
     qint64 getId() const;
     void setId(const qint64 &value);
-    Scene::Type getTypeTool() const;
-    void setTypeTool(const Scene::Type &value);
+    Tools::Enum getTypeTool() const;
+    void setTypeTool(const Tools::Enum &value);
     Draw::Mode getMode() const;
     void setMode(const Draw::Mode &value);
+    NodeDetail::Type getTypeNode() const;
+    void setTypeNode(const NodeDetail::Type &value);
+
 private:
     qint64 id;
-    Scene::Type typeTool;
+    Tools::Enum typeTool;
     Draw::Mode mode;
+    NodeDetail::Type typeNode;
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)

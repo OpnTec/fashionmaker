@@ -1,13 +1,7 @@
 #ifndef VGRAPHICSSIMPLETEXTITEM_H
 #define VGRAPHICSSIMPLETEXTITEM_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QGraphicsSimpleTextItem>
-#pragma GCC diagnostic pop
 
 class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {

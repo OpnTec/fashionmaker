@@ -1,15 +1,9 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
-#pragma GCC diagnostic pop
-#include "../geometry/vsplinepoint.h"
+#include "geometry/vsplinepoint.h"
 
-DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()){
+DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogSplinePath::DialogAccepted);
@@ -54,6 +48,17 @@ void DialogSplinePath::SetPath(const VSplinePath &value){
 
 
 void DialogSplinePath::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
         NewItem(id, 1, 0, 1);
         this->show();
@@ -116,7 +121,12 @@ void DialogSplinePath::KAsm2Changed(qreal d){
 }
 
 void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2){
-    VPointF point = data->GetPoint(id);
+    VPointF point;
+    if(mode == Draw::Calculation){
+        point = data->GetPoint(id);
+    } else {
+        point = data->GetModelingPoint(id);
+    }
     QListWidgetItem *item = new QListWidgetItem(point.name());
     item->setFont(QFont("Times", 12, QFont::Bold));
     VSplinePoint p(id, kAsm1, angle, kAsm2);

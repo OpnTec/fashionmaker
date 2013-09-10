@@ -1,15 +1,9 @@
 #ifndef DIALOGSPLINEPATH_H
 #define DIALOGSPLINEPATH_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
-#pragma GCC diagnostic pop
-#include "../container/vcontainer.h"
-#include "../geometry/vsplinepath.h"
+#include "container/vcontainer.h"
+#include "geometry/vsplinepath.h"
 
 namespace Ui {
 class DialogSplinePath;
@@ -19,7 +13,8 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogSplinePath(const VContainer *data, QWidget *parent = 0);
+    explicit DialogSplinePath(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                              QWidget *parent = 0);
     ~DialogSplinePath();
     VSplinePath      GetPath() const;
     void             SetPath(const VSplinePath &value);

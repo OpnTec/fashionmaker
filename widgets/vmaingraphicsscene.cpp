@@ -1,11 +1,8 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "vmaingraphicsscene.h"
 #include <QDebug>
 #include <QApplication>
 #include <QScrollBar>
 #include <QGraphicsItem>
-#pragma GCC diagnostic pop
 
 VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(){
 }

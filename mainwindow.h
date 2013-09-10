@@ -1,12 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wold-style-cast"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QMainWindow>
 #include <QLabel>
 #include <QtXml>
@@ -15,26 +9,14 @@
 #include <QToolButton>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
-#include "dialogs/dialogincrements.h"
-#include "dialogs/dialogline.h"
-#include "dialogs/dialogalongline.h"
-#include "dialogs/dialogshoulderpoint.h"
-#include "dialogs/dialogendline.h"
-#include "dialogs/dialognormal.h"
-#include "dialogs/dialogbisector.h"
-#include "dialogs/dialoglineintersect.h"
-#include "dialogs/dialogspline.h"
-#include "dialogs/dialogarc.h"
-#include "dialogs/dialogsplinepath.h"
-#include "dialogs/dialoghistory.h"
-#include "dialogs/dialogpointofcontact.h"
-#include "dialogs/dialogdetail.h"
-#include "tools/vtoolsinglepoint.h"
+#include "widgets/vitem.h"
+#include "dialogs/dialogs.h"
+#include "tools/drawTools/drawtools.h"
+#include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#pragma GCC diagnostic pop
 #include "container/vcontainer.h"
 #include "options.h"
-#include "widgets/vitem.h"
+#include "tools/vtooldetail.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,108 +26,112 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT    
 public:
-    explicit            MainWindow(QWidget *parent = 0);
-                        ~MainWindow();
+    explicit           MainWindow(QWidget *parent = 0);
+                       ~MainWindow();
 public slots:
-    void                mouseMove(QPointF scenePos);
-    void                ActionAroowTool();
-    void                ActionDraw(bool checked);
-    void                ActionDetails(bool checked);
-    void                ActionNewDraw();
-    void                currentDrawChanged( int index );
-    void                OptionDraw();
-    void                ActionSaveAs();
-    void                ActionSave();
-    void                ActionOpen();
-    void                ActionNew();
-    void                haveChange();
-    void                ChangedSize(const QString &text);
-    void                ChangedGrowth(const QString & text);
-    void                ActionTable(bool checked);
-    void                ClosedActionTable();
-    void                ActionHistory(bool checked);
-    void                ActionLayout(bool checked);
-    void                ClosedActionHistory();
-    void                ToolEndLine(bool checked);
-    void                ClosedDialogEndLine(int result);
-    void                ToolLine(bool checked);
-    void                ClosedDialogLine(int result);
-    void                ToolAlongLine(bool checked);
-    void                ClosedDialogAlongLine(int result);
-    void                ToolShoulderPoint(bool checked);
-    void                ClosedDialogShoulderPoint(int result);
-    void                ToolNormal(bool checked);
-    void                ClosedDialogNormal(int result);
-    void                ToolBisector(bool checked);
-    void                ClosedDialogBisector(int result);
-    void                ToolLineIntersect(bool checked);
-    void                ClosedDialogLineIntersect(int result);
-    void                ToolSpline(bool checked);
-    void                ClosedDialogSpline(int result);
-    void                ToolArc(bool checked);
-    void                ClosedDialogArc(int result);
-    void                ToolSplinePath(bool checked);
-    void                ClosedDialogSplinePath(int result);
-    void                ToolPointOfContact(bool checked);
-    void                ClosedDialogPointOfContact(int result);
-    void                ToolDetail(bool checked);
-    void                ClosedDialogDetail(int result);
+    void               mouseMove(QPointF scenePos);
+    void               ActionAroowTool();
+    void               ActionDraw(bool checked);
+    void               ActionDetails(bool checked);
+    void               ActionNewDraw();
+    void               ActionSaveAs();
+    void               ActionSave();
+    void               ActionOpen();
+    void               ActionNew();
+    void               ActionTable(bool checked);
+    void               ActionHistory(bool checked);
+    void               ActionLayout(bool checked);
+    void               currentDrawChanged( int index );
+    void               OptionDraw();
+    void               haveChange();
+    void               ChangedSize(const QString &text);
+    void               ChangedGrowth(const QString & text);
+    void               ClosedActionTable();
+    void               ClosedActionHistory();
+    void               ToolEndLine(bool checked);
+    void               ToolLine(bool checked);
+    void               ToolAlongLine(bool checked);
+    void               ToolShoulderPoint(bool checked);
+    void               ToolNormal(bool checked);
+    void               ToolBisector(bool checked);
+    void               ToolLineIntersect(bool checked);
+    void               ToolSpline(bool checked);
+    void               ToolArc(bool checked);
+    void               ToolSplinePath(bool checked);
+    void               ToolPointOfContact(bool checked);
+    void               ToolDetail(bool checked);
+    void               ClosedDialogEndLine(int result);
+    void               ClosedDialogLine(int result);
+    void               ClosedDialogAlongLine(int result);
+    void               ClosedDialogShoulderPoint(int result);
+    void               ClosedDialogNormal(int result);
+    void               ClosedDialogBisector(int result);
+    void               ClosedDialogLineIntersect(int result);
+    void               ClosedDialogSpline(int result);
+    void               ClosedDialogArc(int result);
+    void               ClosedDialogSplinePath(int result);
+    void               ClosedDialogPointOfContact(int result);
+    void               ClosedDialogDetail(int result);
     /**
      * @brief tableClosed Слот, що виконується при отриманні сигналу закриття вікна укладання
      *деталей моделі.
      */
-    void     tableClosed();
+    void               tableClosed();
 signals:
     /**
      * @brief ModelChosen Сигнал, що висилається після розрахунку всіх деталей моделі.
      * @param listDetails Список детайле моделі.
      */
-    void     ModelChosen(QVector<VItem*> listDetails);
+    void               ModelChosen(QVector<VItem*> listDetails);
 protected:
-    virtual void        keyPressEvent ( QKeyEvent * event );
-    virtual void        showEvent( QShowEvent *event );
+    virtual void       keyPressEvent ( QKeyEvent * event );
+    virtual void       showEvent( QShowEvent *event );
 private:
-    Ui::MainWindow      *ui;
-    Tools::Enum         tool;
-    VMainGraphicsScene  *currentScene;
-    VMainGraphicsScene  *sceneDraw;
-    VMainGraphicsScene  *sceneDetails;
-    QLabel              *mouseCoordinate;
-    QLabel              *helpLabel;
-    VMainGraphicsView   *view;
-    bool                isInitialized;
-    DialogIncrements    *dialogTable;
-    QSharedPointer<DialogEndLine>       dialogEndLine;
-    QSharedPointer<DialogLine>          dialogLine;
-    QSharedPointer<DialogAlongLine>     dialogAlongLine;
-    QSharedPointer<DialogShoulderPoint> dialogShoulderPoint;
-    QSharedPointer<DialogNormal>        dialogNormal;
-    QSharedPointer<DialogBisector>      dialogBisector;
-    QSharedPointer<DialogLineIntersect> dialogLineIntersect;
-    QSharedPointer<DialogSpline>        dialogSpline;
-    QSharedPointer<DialogArc>           dialogArc;
-    QSharedPointer<DialogSplinePath>    dialogSplinePath;
-    QSharedPointer<DialogPointOfContact>    dialogPointOfContact;
-    QSharedPointer<DialogDetail>    dialogDetail;
-    DialogHistory       *dialogHistory;
-    VDomDocument        *doc;
-    VContainer          *data;
-    QComboBox           *comboBoxDraws;
-    QString             fileName;
-    bool                changeInFile;
-    Draw::Mode          mode;
-    MainWindow(const MainWindow &window);
-    const MainWindow &operator=(const MainWindow &window);
-    void                ToolBarOption();
-    void                ToolBarDraws();
-    void                CanselTool();
-    void                ArrowTool();
-    void                SetEnableWidgets(bool enable);
-    void                SetEnableTool(bool enable);
+    Ui::MainWindow     *ui;
+    Tools::Enum        tool;
+    VMainGraphicsScene *currentScene;
+    VMainGraphicsScene *sceneDraw;
+    VMainGraphicsScene *sceneDetails;
+    QLabel             *mouseCoordinate;
+    QLabel             *helpLabel;
+    VMainGraphicsView  *view;
+    bool               isInitialized;
+    DialogIncrements   *dialogTable;
+    QSharedPointer<DialogEndLine>        dialogEndLine;
+    QSharedPointer<DialogLine>           dialogLine;
+    QSharedPointer<DialogAlongLine>      dialogAlongLine;
+    QSharedPointer<DialogShoulderPoint>  dialogShoulderPoint;
+    QSharedPointer<DialogNormal>         dialogNormal;
+    QSharedPointer<DialogBisector>       dialogBisector;
+    QSharedPointer<DialogLineIntersect>  dialogLineIntersect;
+    QSharedPointer<DialogSpline>         dialogSpline;
+    QSharedPointer<DialogArc>            dialogArc;
+    QSharedPointer<DialogSplinePath>     dialogSplinePath;
+    QSharedPointer<DialogPointOfContact> dialogPointOfContact;
+    QSharedPointer<DialogDetail>         dialogDetail;
+    DialogHistory      *dialogHistory;
+    VDomDocument       *doc;
+    VContainer         *data;
+    QComboBox          *comboBoxDraws;
+    QString            fileName;
+    bool               changeInFile;
+    Draw::Mode         mode;
+                       MainWindow(const MainWindow &window);
+    const              MainWindow &operator=(const MainWindow &window);
+    void               ToolBarOption();
+    void               ToolBarDraws();
+    void               CanselTool();
+    void               ArrowTool();
+    void               SetEnableWidgets(bool enable);
+    void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
-    void SetToolButton(bool checked, Tools::Enum t, const QString &cursor, QSharedPointer<Dialog> &dialog,
+    void               SetToolButton(bool checked, Tools::Enum t, const QString &cursor,
+                                     QSharedPointer<Dialog> &dialog,
                        Func closeDialogSlot);
-    void MinimumScrollBar();
+    void               MinimumScrollBar();
+    template <typename Tool>
+    void               AddToolToDetail(Tool *tool, const qint64 &id, Tools::Enum typeTool,
+                                       const qint64 &idDetail);
 };
 
 #endif // MAINWINDOW_H

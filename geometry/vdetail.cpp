@@ -23,6 +23,16 @@ qint32 VDetail::CountNode() const{
     return nodes.size();
 }
 
+bool VDetail::Containes(const qint64 &id) const{
+    for(qint32 i = 0; i < nodes.size(); ++i){
+        VNodeDetail node = nodes[i];
+        if(node.getId() == id){
+            return true;
+        }
+    }
+    return false;
+}
+
 VNodeDetail &VDetail::operator [](int indx){
     return nodes[indx];
 }

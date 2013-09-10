@@ -1,11 +1,6 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDialog>
 #include <QComboBox>
 #include <QSpinBox>
@@ -15,16 +10,18 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QTimer>
-#pragma GCC diagnostic pop
-#include "../container/vcontainer.h"
-#include "../options.h"
+#include "container/vcontainer.h"
+#include "options.h"
 
 class DialogTool : public QDialog
 {
     Q_OBJECT
 public:
-                     DialogTool(const VContainer *data, QWidget *parent = 0);
+                     DialogTool(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                QWidget *parent = 0);
     virtual          ~DialogTool();
+    qint64           getIdDetail() const;
+    void             setIdDetail(const qint64 &value);
 signals:
     void             DialogClosed(int result);
 public slots:
@@ -66,6 +63,9 @@ protected:
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
+    qint64           idDetail;
+    Draw::Mode       mode;
+    bool             CheckObject(const qint64 &id);
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
@@ -81,7 +81,7 @@ protected:
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
     qint64           getCurrentPointId(QComboBox *box) const;
-    DialogTool(const DialogTool &dialog);
+                     DialogTool(const DialogTool &dialog);
     const DialogTool &operator=(const DialogTool &dialog);
 };
 

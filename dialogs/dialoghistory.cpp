@@ -8,7 +8,7 @@
 #include "geometry/vsplinepath.h"
 
 DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0), cursorToolRecordRow(0){
+    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0), cursorToolRecordRow(0){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHistory::DialogAccepted);

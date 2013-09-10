@@ -26,12 +26,12 @@ qreal Calculator::eval(QString prog, QString *errorMsg){
     this->errorMsg->clear();
     debugFormula.clear();
     this->prog = prog;
-    qDebug()<<"Формула: "<<prog;
+    //qDebug()<<"Формула: "<<prog;
     index = 0;
     qreal result = get_exp();
     QString str = QString(" = %1").arg(result, 0, 'f', 3);
     debugFormula.append(str);
-    qDebug()<<"Результат:"<<debugFormula;
+    //qDebug()<<"Результат:"<<debugFormula;
     return result;
 }
 

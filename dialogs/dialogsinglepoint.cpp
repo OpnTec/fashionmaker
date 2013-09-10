@@ -1,18 +1,13 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
 #include <QShowEvent>
 #include <QPushButton>
 #include <QDebug>
-#pragma GCC diagnostic pop
-#include "../options.h"
+#include "options.h"
 
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogSinglePoint), name(QString()), point(QPointF()){
+    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogSinglePoint), name(QString()),
+    point(QPointF()){
     ui->setupUi(this);
     ui->doubleSpinBoxX->setRange(0,PaperSize/PrintDPI*25.4);
     ui->doubleSpinBoxY->setRange(0,PaperSize/PrintDPI*25.4);

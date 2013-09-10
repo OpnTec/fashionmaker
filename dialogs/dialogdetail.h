@@ -3,8 +3,8 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
-#include "../container/vcontainer.h"
-#include "../geometry/vdetail.h"
+#include "container/vcontainer.h"
+#include "geometry/vdetail.h"
 
 class DialogDetail : public DialogTool
 {
@@ -20,8 +20,7 @@ public slots:
 private:
     Ui::DialogDetail ui;
     VDetail details;
-    Draw::Mode mode;
-    void             NewItem(qint64 id, Scene::Type typeTool, Draw::Mode mode);
+    void             NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode);
 };
 
 #endif // DIALOGDETAIL_H

@@ -1,46 +1,14 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vabstracttool.h"
 #include <QDebug>
-#pragma GCC diagnostic pop
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, Draw::Mode mode, QObject *parent):
-    VDataTool(data, parent), doc(doc), id(id), ignoreContextMenuEvent(false), nameActivDraw(QString()),
-    baseColor(Qt::black), currentColor(Qt::black), mode(mode){
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
+    VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black){
     this->doc = doc;
     this->id = id;
-    nameActivDraw = doc->GetNameActivDraw();
-    ignoreContextMenuEvent = false;//don't ignore context menu events;
 
-    connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VAbstractTool::ChangedActivDraw);
-    connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VAbstractTool::ChangedNameDraw);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
-    connect(this->doc, &VDomDocument::ShowTool, this, &VAbstractTool::ShowTool);
-}
-
-void VAbstractTool::ChangedNameDraw(const QString oldName, const QString newName){
-    if(nameActivDraw == oldName){
-        nameActivDraw = newName;
-    }
-}
-
-void VAbstractTool::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
-        ignoreContextMenuEvent = false;
-    } else {
-        ignoreContextMenuEvent = true;
-    }
-}
-
-void VAbstractTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
-    Q_UNUSED(id);
-    Q_UNUSED(color);
-    Q_UNUSED(enable);
 }
 
 void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value){
@@ -70,60 +38,87 @@ void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, c
 VAbstractTool::~VAbstractTool(){
 }
 
-void VAbstractTool::AddToDraw(const QDomElement &domElement){
-    QDomElement calcElement;
-    if(mode == Draw::Modeling){
-        bool ok = doc->GetActivModelingElement(calcElement);
-        if(ok){
-            calcElement.appendChild(domElement);
-        }
+QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line){
+    qreal x1, y1, x2, y2;
+    rec.getCoords(&x1, &y1, &x2, &y2);
+    QPointF point;
+    QLineF::IntersectType type = line.intersect(QLineF(QPointF(x1,y1), QPointF(x1,y2)),&point);
+    if ( type == QLineF::BoundedIntersection ){
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x1,y1), QPointF(x2,y1)),&point);
+    if ( type == QLineF::BoundedIntersection ){
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x1,y2), QPointF(x2,y2)),&point);
+    if ( type == QLineF::BoundedIntersection ){
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x2,y1), QPointF(x2,y2)),&point);
+    if ( type == QLineF::BoundedIntersection ){
+        return point;
+    }
+    Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
+    return point;
+}
+
+qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
+                                          QPointF &p2){
+    const qreal eps = 1e-8;
+    //коефіцієнти для рівняння відрізку
+    qreal a = line.p2().y() - line.p1().y();
+    qreal b = line.p1().x() - line.p2().x();
+    // В даному випадку не використовується.
+    //qreal c = - a * line.p1().x() - b * line.p1().y();
+    // проекция центра окружности на прямую
+    QPointF p = ClosestPoint (line, center);
+    // сколько всего решений?
+    qint32 flag = 0;
+    qreal d = QLineF (center, p).length();
+    if (qAbs (d - radius) <= eps){
+        flag = 1;
     } else {
-        bool ok = doc->GetActivCalculationElement(calcElement);
-        if(ok){
-            qint64 id = doc->getCursor();
-            if(id <= 0){
-                calcElement.appendChild(domElement);
-            } else {
-                QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
-                if(refElement.isElement()){
-                    calcElement.insertAfter(domElement,refElement);
-                    doc->setCursor(0);
-                } else {
-                    qCritical()<<"Не можу знайти елемент після якого потрібно вставляти."<< Q_FUNC_INFO;
-                }
-            }
+        if (radius > d){
+            flag = 2;
         } else {
-            qCritical()<<"Не можу знайти тег калькуляції."<< Q_FUNC_INFO;
+            return 0;
         }
     }
-    emit toolhaveChange();
+    // находим расстояние от проекции до точек пересечения
+    qreal k = sqrt (radius * radius - d * d);
+    qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
+    // добавляем к проекции векторы направленные к точкам пеерсечения
+    p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
+    p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);
+    return flag;
+}
+
+QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p){
+    QLineF lineP2pointFrom = QLineF(line.p2(), p);
+    qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
+    QLineF pointFromlineP2 = QLineF(p, line.p2());
+    pointFromlineP2.setAngle(pointFromlineP2.angle()+angle);
+    QPointF point;
+    QLineF::IntersectType type = pointFromlineP2.intersect(line,&point);
+    if ( type == QLineF::BoundedIntersection ){
+        return point;
+    } else{
+        if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection ){
+            Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
+            return point;
+        }
+    }
+    return point;
+}
+
+QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k){
+    return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
 const VContainer *VAbstractTool::getData()const{
     return &data;
 }
 
-void VAbstractTool::setDialog(){
-}
-
-void VAbstractTool::AddRecord(const qint64 id, Tools::Enum toolType, VDomDocument *doc){
-    qint64 cursor = doc->getCursor();
-    QVector<VToolRecord> *history = doc->getHistory();
-    if(cursor <= 0){
-        history->append(VToolRecord(id, toolType, doc->GetNameActivDraw()));
-    } else {
-        qint32 index = 0;
-        for(qint32 i = 0; i<history->size(); ++i){
-            VToolRecord rec = history->at(i);
-            if(rec.getId() == cursor){
-                index = i;
-                break;
-            }
-        }
-        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
-    }
-}
-
-void VAbstractTool::ignoreContextMenu(bool enable){
-    ignoreContextMenuEvent = enable;
+qint64 VAbstractTool::getId() const{
+    return id;
 }

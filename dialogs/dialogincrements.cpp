@@ -1,16 +1,13 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include <QHeaderView>
 #include <QCloseEvent>
-#include "../widgets/delegate.h"
-#include "../widgets/doubledelegate.h"
-#pragma GCC diagnostic pop
-#include "../container/vincrementtablerow.h"
+#include "widgets/delegate.h"
+#include "widgets/doubledelegate.h"
+#include "container/vincrementtablerow.h"
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc){
+    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc){
     ui->setupUi(this);
     InitialStandartTable();
     InitialIncrementTable();

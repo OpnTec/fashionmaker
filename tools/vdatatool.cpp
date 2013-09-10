@@ -1,7 +1,4 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "vdatatool.h"
-#pragma GCC diagnostic pop
 
 VDataTool::VDataTool(VContainer *data, QObject *parent) :
     QObject(parent), data(*data){

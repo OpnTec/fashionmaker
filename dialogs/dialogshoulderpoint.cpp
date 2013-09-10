@@ -1,14 +1,8 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
-#pragma GCC diagnostic pop
 
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0){
     ui->setupUi(this);
     number = 0;
@@ -52,8 +46,24 @@ DialogShoulderPoint::~DialogShoulderPoint()
 }
 
 void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         if(number == 0){
             qint32 index = ui->comboBoxP1Line->findText(point.name());
             if ( index != -1 ) { // -1 for not found

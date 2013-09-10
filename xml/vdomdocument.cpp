@@ -1,22 +1,12 @@
 #include "vdomdocument.h"
 #include <QDebug>
-#include "../tools/vtoolsinglepoint.h"
-#include "../tools/vtoolendline.h"
-#include "../tools/vtoolline.h"
-#include "../tools/vtoolalongline.h"
-#include "../tools/vtoolshoulderpoint.h"
-#include "../tools/vtoolnormal.h"
-#include "../tools/vtoolbisector.h"
-#include "../tools/vtoollineintersect.h"
-#include "../tools/vtoolspline.h"
-#include "../tools/vtoolarc.h"
-#include "../tools/vtoolsplinepath.h"
-#include "../tools/vtoolpointofcontact.h"
-#include "../tools/vmodelingpoint.h"
-#include "../tools/vtooldetail.h"
-#include "../options.h"
-#include "../container/calculator.h"
-#include "../geometry/vsplinepoint.h"
+#include "tools/drawTools/drawtools.h"
+#include "tools/nodeDetails/nodedetails.h"
+#include "tools/modelingTools/modelingtools.h"
+#include "tools/vtooldetail.h"
+#include "options.h"
+#include "container/calculator.h"
+#include "geometry/vsplinepoint.h"
 
 
 
@@ -376,31 +366,54 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
             if(!element.isNull()){
                 if(element.tagName() == "node"){
                     qint64 id = element.attribute("id","").toLongLong();
-                    Scene::Type tool;
+                    Tools::Enum tool;
                     Draw::Mode mode;
+                    NodeDetail::Type nodeType = NodeDetail::Contour;
                     QString t = element.attribute("type","");
-                    if(t == "Point"){
-                        tool = Scene::Point;
+                    if(t == "NodePoint"){
+                        tool = Tools::NodePoint;
                         VPointF point = data->GetModelingPoint(id);
                         mode = point.getMode();
-                        oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode));
-                    } else if(t == "Arc"){
-                        tool = Scene::Arc;
+                        oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode, NodeDetail::Contour));
+                    } else if(t == "NodeArc"){
+                        tool = Tools::NodeArc;
                         VArc arc = data->GetModelingArc(id);
                         mode = arc.getMode();
-                        oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode));
-                    } else if(t == "Spline"){
-                        tool = Scene::Spline;
+                        oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode, NodeDetail::Contour));
+                    } else if(t == "NodeSpline"){
+                        tool = Tools::NodeSpline;
                         VSpline spl = data->GetModelingSpline(id);
                         mode = spl.getMode();
-                        oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode));
-                    } else if(t == "SplinePath"){
-                        tool = Scene::SplinePath;
+                        oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode, NodeDetail::Contour));
+                    } else if(t == "NodeSplinePath"){
+                        tool = Tools::NodeSplinePath;
                         VSplinePath splPath = data->GetModelingSplinePath(id);
                         mode = splPath.getMode();
-                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode));
+                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode, NodeDetail::Contour));
+                    } else if(t == "AlongLineTool"){
+                        tool = Tools::AlongLineTool;
+                    } else if(t == "ArcTool"){
+                        tool = Tools::ArcTool;
+                    } else if(t == "BisectorTool"){
+                        tool = Tools::BisectorTool;
+                    } else if(t == "EndLineTool"){
+                        tool = Tools::EndLineTool;
+                    } else if(t == "LineIntersectTool"){
+                        tool = Tools::LineIntersectTool;
+                    } else if(t == "LineTool"){
+                        tool = Tools::LineTool;
+                    } else if(t == "NormalTool"){
+                        tool = Tools::NormalTool;
+                    } else if(t == "PointOfContact"){
+                        tool = Tools::PointOfContact;
+                    } else if(t == "ShoulderPointTool"){
+                        tool = Tools::ShoulderPointTool;
+                    } else if(t == "SplinePathTool"){
+                        tool = Tools::SplinePathTool;
+                    } else if(t == "SplineTool"){
+                        tool = Tools::SplineTool;
                     }
-                    detail.append(VNodeDetail(id, tool, mode));
+                    detail.append(VNodeDetail(id, tool, mode, nodeType));
                 }
             }
         }
@@ -428,23 +441,20 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                                      Document::Enum parse, const QString& type, Draw::Mode mode){
     if(type == "single"){
         if(!domElement.isNull()){
-            QString name;
-            qreal mx=5, my=10, x, y;
-            qint64 id;
-
-            id = domElement.attribute("id", "").toLongLong();
-            name = domElement.attribute("name", "");
-            x = domElement.attribute("x","").toDouble()*PrintDPI/25.4;
-            y = domElement.attribute("y","").toDouble()*PrintDPI/25.4;
-            mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
-            my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
+            qint64 id = domElement.attribute("id", "").toLongLong();
+            Q_ASSERT(id > 0);
+            QString name = domElement.attribute("name", "");
+            qreal x = domElement.attribute("x","").toDouble()*PrintDPI/25.4;
+            qreal y = domElement.attribute("y","").toDouble()*PrintDPI/25.4;
+            qreal mx = domElement.attribute("mx","").toDouble()*PrintDPI/25.4;
+            qreal my = domElement.attribute("my","").toDouble()*PrintDPI/25.4;
 
             data->UpdatePoint(id, VPointF(x, y, name, mx, my));
-            VAbstractTool::AddRecord(id, Tools::SinglePointTool, this);
+            VDrawTool::AddRecord(id, Tools::SinglePointTool, this);
             if(parse != Document::FullParse){
-                VToolSinglePoint *spoint = qobject_cast<VToolSinglePoint*>(tools[id]);
-                spoint->VDataTool::setData(data);
-                tools[id] = spoint;
+                VDataTool *tool = tools.value(id);
+                Q_CHECK_PTR(tool);
+                tool->VDataTool::setData(data);
             }
             if(parse == Document::FullParse){
                 VToolSinglePoint *spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
@@ -465,8 +475,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             QString formula = domElement.attribute("length", "");
             qint64 basePointId = domElement.attribute("basePoint", "").toLongLong();
             qint32 angle = domElement.attribute("angle", "").toInt();
-            VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this, data,
-                                 parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this,
+                                     data, parse, Tool::FromFile);
+            } else {
+                VModelingEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, this,
+                                         data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -480,8 +495,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             QString formula = domElement.attribute("length", "");
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
-            VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
-                                   scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
+                                       scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
+                                           this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -496,8 +516,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p1Line = domElement.attribute("p1Line", "").toLongLong();
             qint64 p2Line = domElement.attribute("p2Line", "").toLongLong();
             qint64 pShoulder = domElement.attribute("pShoulder", "").toLongLong();
-            VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my,
-                                       scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my,
+                                           scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx,
+                                               my, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -512,8 +537,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             qreal angle = domElement.attribute("angle", "").toDouble();
-            VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
-                                mx, my, scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
+                                    mx, my, scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
+                                        mx, my, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -528,8 +558,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             qint64 thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
-            VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
-                                  name, mx, my, scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
+                                      name, mx, my, scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
+                                          name, mx, my, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -543,8 +578,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p2Line1Id = domElement.attribute("p2Line1", "").toLongLong();
             qint64 p1Line2Id = domElement.attribute("p1Line2", "").toLongLong();
             qint64 p2Line2Id = domElement.attribute("p2Line2", "").toLongLong();
-            VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my, scene,
-                                       this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my,
+                                           scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my,
+                                               this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -558,8 +598,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 center = domElement.attribute("center", "").toLongLong();
             qint64 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
             qint64 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
-            VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my,
-                                        scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my,
+                                            scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx,
+                                                my, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -581,7 +626,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qreal my = toPixel(domElement.attribute("my","").toDouble());
             data->UpdateModelingPoint(id, VPointF(point.x(), point.y(), point.name(), mx, my, typeObject,
                                                   idObject ));
-            data->IncrementReferens(idObject, Scene::Point);
+            data->IncrementReferens(idObject, Scene::Point, typeObject);
         }
         return;
     }
@@ -593,7 +638,11 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
         qint64 id = domElement.attribute("id", "").toLongLong();
         qint64 firstPoint = domElement.attribute("firstPoint", "").toLongLong();
         qint64 secondPoint = domElement.attribute("secondPoint", "").toLongLong();
-        VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile, mode);
+        if(mode == Draw::Calculation){
+            VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile);
+        } else {
+            VModelingLine::Create(id, firstPoint, secondPoint, this, data, parse, Tool::FromFile);
+        }
     }
 }
 
@@ -609,8 +658,13 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             qreal kAsm1 = domElement.attribute("kAsm1","").toDouble();
             qreal kAsm2 = domElement.attribute("kAsm2","").toDouble();
             qreal kCurve = domElement.attribute("kCurve","").toDouble();
-            VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data,
-                                parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this,
+                                    data, parse, Tool::FromFile);
+            } else {
+                VModelingSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, this,
+                                        data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -635,7 +689,11 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                     }
                 }
             }
-            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingSplinePath::Create(id, path, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -656,8 +714,8 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             spl.setMode(typeObject);
             spl.setIdObject(idObject);
             data->UpdateModelingSpline(id, spl);
-            data->IncrementReferens(spl.GetP1(), Scene::Point);
-            data->IncrementReferens(spl.GetP4(), Scene::Point);
+            data->IncrementReferens(spl.GetP1(), Scene::Point, Draw::Modeling);
+            data->IncrementReferens(spl.GetP4(), Scene::Point, Draw::Modeling);
         }
         return;
     }
@@ -680,7 +738,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             data->UpdateModelingSplinePath(id, path);
             const QVector<VSplinePoint> *points = path.GetPoint();
             for(qint32 i = 0; i<points->size(); ++i){
-                data->IncrementReferens(points->at(i).P(), Scene::Point);
+                data->IncrementReferens(points->at(i).P(), Scene::Point, Draw::Modeling);
             }
         }
         return;
@@ -696,7 +754,11 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             QString radius = domElement.attribute("radius", "");
             QString f1 = domElement.attribute("angle1", "");
             QString f2 = domElement.attribute("angle2","");
-            VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile, mode);
+            if(mode == Draw::Calculation){
+                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingArc::Create(id, center, radius, f1, f2, this, data, parse, Tool::FromFile);
+            }
         }
         return;
     }
@@ -846,6 +908,19 @@ void VDomDocument::GarbageCollector(){
                 }
             }
         }
+    }
+}
+
+void VDomDocument::AddTool(const qint64 &id, VDataTool *tool){
+    tools.insert(id, tool);
+}
+
+void VDomDocument::UpdateToolData(const qint64 &id, VContainer *data){
+    VDataTool *tool = tools.value(id);
+    if(tool != 0){
+        tool->VDataTool::setData(data);
+    } else {
+        qWarning()<<"Can't find tool with id ="<< id<<".";
     }
 }
 

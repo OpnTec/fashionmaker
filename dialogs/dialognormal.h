@@ -1,19 +1,13 @@
 #ifndef DIALOGNORMAL_H
 #define DIALOGNORMAL_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QTimer>
-#pragma GCC diagnostic pop
-#include "../options.h"
-#include "../container/vcontainer.h"
-#include "../container/calculator.h"
+#include "options.h"
+#include "container/vcontainer.h"
+#include "container/calculator.h"
 
 namespace Ui {
 class DialogNormal;
@@ -23,7 +17,8 @@ class DialogNormal : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit         DialogNormal(const VContainer *data, QWidget *parent = 0);
+    explicit         DialogNormal(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                  QWidget *parent = 0);
                      ~DialogNormal();
     QString          getPointName() const;
     void             setPointName(const QString &value);

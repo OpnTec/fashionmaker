@@ -2,8 +2,8 @@
 #include "ui_dialogarc.h"
 #include "../container/calculator.h"
 
-DialogArc::DialogArc(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
+DialogArc::DialogArc(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString()){
     ui->setupUi(this);
 
@@ -94,8 +94,24 @@ delete ui;
 }
 
 void DialogArc::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
         this->show();
     }

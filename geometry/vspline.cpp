@@ -260,6 +260,26 @@ void VSpline::PutAlongSpl (QPointF &moveP, qreal move ) const{
 
 QVector<QPointF> VSpline::GetPoints () const{
     return GetPoints(GetPointP1().toQPointF(), p2, p3, GetPointP4().toQPointF());
+//    QLineF line1(points.at(0).toPoint(), points.at(1).toPoint());
+//    line1.setLength(500);
+//    QLineF line2 = line1;
+//    line2.setAngle(line2.angle()+90);
+//    qreal xk1 = line1.p2().x();
+//    qreal xk0 = line1.p1().x();
+//    qreal y = line2.p2().y();
+//    qreal yk0 = line1.p1().y();
+//    qreal yk1 = line1.p2().y();
+//    qreal x = line2.p2().x();
+//    qreal check = (xk1 - xk0) * (y - yk0) - (yk1 - yk0) * (x - xk0);
+//    if(check > 0){
+//        return points;
+//    } else {
+//        QVector<QPointF> reversePoints;
+//        for (qint32 i = points.size() - 1; i >= 0; --i) {
+//            reversePoints.append(points.at(i));
+//        }
+//        return reversePoints;
+//    }
 }
 
 QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4){

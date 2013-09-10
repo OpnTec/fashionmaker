@@ -1,19 +1,13 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDomDocument>
 #include <QMap>
 #include <QObject>
 #include <QComboBox>
-#include "../container/vcontainer.h"
-#include "../widgets/vmaingraphicsscene.h"
-#include "../tools/vdatatool.h"
-#pragma GCC diagnostic pop
+#include "container/vcontainer.h"
+#include "widgets/vmaingraphicsscene.h"
+#include "tools/vdatatool.h"
 #include "vtoolrecord.h"
 
 namespace Document{
@@ -53,6 +47,8 @@ public:
     void        setCursor(const qint64 &value);
     void        setCurrentData();
     void        GarbageCollector();
+    void        AddTool(const qint64 &id, VDataTool *tool);
+    void        UpdateToolData(const qint64 &id, VContainer *data);
 signals:
     void        ChangedActivDraw(const QString newName);
     void        ChangedNameDraw(const QString oldName, const QString newName);
@@ -92,7 +88,7 @@ private:
     void        ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                  Document::Enum parse, Draw::Mode mode);
     void        ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                 Document::Enum parse, const QString& type, Draw::Mode mode);
+                                   Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                  Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseIncrementsElement(const QDomNode& node);

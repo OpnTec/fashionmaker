@@ -14,6 +14,7 @@ public:
     void append(const VNodeDetail &node);
     void Clear();
     qint32 CountNode() const;
+    bool Containes(const qint64 &id)const;
     VNodeDetail & operator[](int indx);
     QString getName() const;
     void setName(const QString &value);

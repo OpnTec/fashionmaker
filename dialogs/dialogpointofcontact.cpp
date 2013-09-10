@@ -1,13 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogpointofcontact.h"
-#pragma GCC diagnostic pop
 
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0){
     ui.setupUi(this);
     listWidget = ui.listWidget;
@@ -44,8 +38,24 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
 }
 
 void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         if(number == 0){
             qint32 index = ui.comboBoxFirstPoint->findText(point.name());
             if ( index != -1 ) { // -1 for not found

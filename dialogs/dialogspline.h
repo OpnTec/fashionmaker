@@ -2,7 +2,7 @@
 #define DIALOGSPLINE_H
 
 #include "dialogtool.h"
-#include "../container/vcontainer.h"
+#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogSpline;
@@ -12,7 +12,8 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT  
 public:
-    explicit         DialogSpline(const VContainer *data, QWidget *parent = 0);
+    explicit         DialogSpline(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                  QWidget *parent = 0);
                      ~DialogSpline();
     qint64           getP1() const;
     void             setP1(const qint64 &value);

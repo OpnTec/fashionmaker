@@ -1,16 +1,10 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
 #include <QMenu>
-#pragma GCC diagnostic pop
 
-DialogNormal::DialogNormal(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
-    formula(QString()), angle(0), firstPointId(0), secondPointId(0){
+DialogNormal::DialogNormal(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
+    typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0){
     ui->setupUi(this);
     spinBoxAngle = ui->spinBoxAngle;
     listWidget = ui->listWidget;
@@ -68,8 +62,24 @@ DialogNormal::~DialogNormal()
 }
 
 void DialogNormal::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         if(number == 0){
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());
             if ( index != -1 ) { // -1 for not found

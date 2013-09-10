@@ -18,7 +18,8 @@ namespace Scene{
         Line,
         Spline,
         Arc,
-        SplinePath
+        SplinePath,
+        Detail
     };
 }
 
@@ -38,7 +39,11 @@ namespace Tools{
         ArcTool,
         SplinePathTool,
         PointOfContact,
-        Detail
+        Detail,
+        NodePoint,
+        NodeArc,
+        NodeSpline,
+        NodeSplinePath
     };
 }
 

@@ -12,7 +12,7 @@ class DialogArc : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogArc(const VContainer *data, QWidget *parent = 0);
+    explicit DialogArc(const VContainer *data, Draw::Mode mode = Draw::Calculation, QWidget *parent = 0);
     ~DialogArc();
     qint64 GetCenter() const;
     void SetCenter(const qint64 &value);

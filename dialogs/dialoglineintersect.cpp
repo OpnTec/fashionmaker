@@ -1,15 +1,9 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialoglineintersect.h"
 #include "ui_dialoglineintersect.h"
-#pragma GCC diagnostic pop
 
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()), p1Line1(0),
-    p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true){
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+    DialogTool(data, mode, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
+    p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true){
     ui->setupUi(this);
     number = 0;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -31,8 +25,24 @@ DialogLineIntersect::~DialogLineIntersect()
 }
 
 void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Type type){
+    if(idDetail == 0 && mode == Draw::Modeling){
+        if(type == Scene::Detail){
+            idDetail = id;
+            return;
+        }
+    }
+    if(mode == Draw::Modeling){
+        if(!CheckObject(id)){
+            return;
+        }
+    }
     if(type == Scene::Point){
-        VPointF point = data->GetPoint(id);
+        VPointF point;
+        if(mode == Draw::Calculation){
+            point = data->GetPoint(id);
+        } else {
+            point = data->GetModelingPoint(id);
+        }
         if(number == 0){
             qint32 index = ui->comboBoxP1Line1->findText(point.name());
             if ( index != -1 ) { // -1 for not found

@@ -5,10 +5,9 @@
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QTimer>
-
-#include "../options.h"
-#include "../container/vcontainer.h"
-#include "../container/calculator.h"
+#include "options.h"
+#include "container/vcontainer.h"
+#include "container/calculator.h"
 
 namespace Ui {
 class DialogBisector;
@@ -19,7 +18,8 @@ class DialogBisector : public DialogTool
     Q_OBJECT
     
 public:
-    explicit DialogBisector(const VContainer *data, QWidget *parent = 0);
+    explicit DialogBisector(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                            QWidget *parent = 0);
     ~DialogBisector();
     QString           getPointName() const;
     void              setPointName(const QString &value);

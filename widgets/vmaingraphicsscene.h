@@ -1,14 +1,11 @@
 #ifndef VMAINGRAPHICSSCENE_H
 #define VMAINGRAPHICSSCENE_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
-#pragma GCC diagnostic pop
 
-#include "../options.h"
+#include "options.h"
 
 class VMainGraphicsScene : public QGraphicsScene
 {

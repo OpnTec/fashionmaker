@@ -1,13 +1,7 @@
 #ifndef DIALOGLINEINTERSECT_H
 #define DIALOGLINEINTERSECT_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "dialogtool.h"
-#pragma GCC diagnostic pop
 
 namespace Ui {
 class DialogLineIntersect;
@@ -17,7 +11,8 @@ class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit                DialogLineIntersect(const VContainer *data, QWidget *parent = 0);
+    explicit                DialogLineIntersect(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                                                QWidget *parent = 0);
                             ~DialogLineIntersect();
     qint64                  getP1Line1() const;
     void                    setP1Line1(const qint64 &value);

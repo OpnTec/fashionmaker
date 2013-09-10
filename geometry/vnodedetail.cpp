@@ -1,21 +1,22 @@
 #include "vnodedetail.h"
 
-VNodeDetail::VNodeDetail():id(0), typeTool(Scene::Point), mode(Draw::Calculation){
+VNodeDetail::VNodeDetail():id(0), typeTool(Tools::NodePoint), mode(Draw::Calculation),
+    typeNode(NodeDetail::Contour){
 }
 
-VNodeDetail::VNodeDetail(qint64 id, Scene::Type typeTool, Draw::Mode mode):id(id), typeTool(typeTool),
-mode(mode){
+VNodeDetail::VNodeDetail(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode):id(id),
+    typeTool(typeTool), mode(mode), typeNode(typeNode){
 }
 
 VNodeDetail::VNodeDetail(const VNodeDetail &node):id(node.getId()), typeTool(node.getTypeTool()),
-    mode(node.getMode()){
+    mode(node.getMode()), typeNode(node.getTypeNode()){
 }
 
-Scene::Type VNodeDetail::getTypeTool() const{
+Tools::Enum VNodeDetail::getTypeTool() const{
     return typeTool;
 }
 
-void VNodeDetail::setTypeTool(const Scene::Type &value){
+void VNodeDetail::setTypeTool(const Tools::Enum &value){
     typeTool = value;
 }
 
@@ -33,4 +34,12 @@ Draw::Mode VNodeDetail::getMode() const{
 
 void VNodeDetail::setMode(const Draw::Mode &value){
     mode = value;
+}
+
+NodeDetail::Type VNodeDetail::getTypeNode() const{
+    return typeNode;
+}
+
+void VNodeDetail::setTypeNode(const NodeDetail::Type &value){
+    typeNode = value;
 }
