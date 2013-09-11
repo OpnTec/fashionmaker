@@ -157,8 +157,8 @@ void VToolDetail::setDialog(){
     }
 }
 
-void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data){
+void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
+                         VDomDocument *doc, VContainer *data){
     VDetail detail = dialog->getDetails();
     VDetail det;
     for(qint32 i = 0; i< detail.CountNode(); ++i){
@@ -302,7 +302,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
     QDomElement nod = doc->createElement("node");
 
-    AddAttribute(nod, "id", node.getId());
+    AddAttribute(nod, "idObject", node.getId());
     if(node.getTypeNode() == NodeDetail::Contour){
         AddAttribute(nod, "nodeType", "Contour");
     } else {

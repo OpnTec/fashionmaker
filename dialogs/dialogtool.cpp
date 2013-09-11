@@ -3,6 +3,7 @@
 #include <QCloseEvent>
 #include "container/calculator.h"
 #include "geometry/vdetail.h"
+#include <QDebug>
 
 DialogTool::DialogTool(const VContainer *data, Draw::Mode mode, QWidget *parent):QDialog(parent), data(data),
     isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),

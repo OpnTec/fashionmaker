@@ -6,6 +6,20 @@
 #include <QString>
 #include <QPainterPath>
 
+namespace Detail{
+    enum Contour
+    {
+        OpenContour,
+        CloseContour
+    };
+
+    enum Equidistant
+    {
+        OpenEquidistant,
+        CloseEquidistant
+    };
+}
+
 class VDetail
 {
 public:

@@ -771,12 +771,27 @@ QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qre
     return GetPoints(p1, p2, p3, p4);
 }
 
-qint64 VSpline::getIdObject() const
-{
+qint64 VSpline::getIdObject() const{
     return idObject;
 }
 
-void VSpline::setIdObject(const qint64 &value)
-{
+void VSpline::setIdObject(const qint64 &value){
     idObject = value;
+}
+
+const VSpline &VSpline::operator =(const VSpline &spline){
+    this->p1 = spline.GetP1 ();
+    this->p2 = spline.GetP2 ();
+    this->p3 = spline.GetP3 ();
+    this->p4 = spline.GetP4 ();
+    this->angle1 = spline.GetAngle1 ();
+    this->angle2 = spline.GetAngle2 ();
+    this->kAsm1 = spline.GetKasm1();
+    this->kAsm2 = spline.GetKasm2();
+    this->kCurve = spline.GetKcurve();
+    this->points = spline.GetDataPoints();
+    this->_referens = 0;
+    this->mode = spline.getMode();
+    this->idObject = spline.getIdObject();
+    return *this;
 }

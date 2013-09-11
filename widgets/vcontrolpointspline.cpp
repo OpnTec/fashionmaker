@@ -46,18 +46,8 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
 
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value){
     if (change == ItemPositionChange && scene()) {
-        // value - это новое положение.
+        // value - new position.
         QPointF newPos = value.toPointF();
-//        qDebug()<<this->rect();
-//        QRectF rect = scene()->sceneRect();
-//        if (!rect.contains(newPos)) {
-//            // Сохраняем элемент внутри прямоугольника сцены.
-//            newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
-//            newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
-
-//            emit ControlPointChangePosition(indexSpline, position, newPos);
-//            return newPos;
-//        }
         emit ControlPointChangePosition(indexSpline, position, newPos);
     }
     return QGraphicsItem::itemChange(change, value);

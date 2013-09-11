@@ -168,7 +168,7 @@ public:
                                          qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
-
+    const VSpline &operator=(const VSpline &spl);
 protected:
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.

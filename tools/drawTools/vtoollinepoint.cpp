@@ -4,6 +4,7 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
                                const QString &typeLine, const QString &formula, const qint64 &basePointId,
                                const qint32 &angle, QGraphicsItem *parent):VToolPoint(doc, data, id, parent),
     typeLine(typeLine), formula(formula), angle(angle), basePointId(basePointId), mainLine(0){
+    Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     //Лінія, що з'єднує дві точки
     QPointF point1 = data->GetPoint(basePointId).toQPointF();
     QPointF point2 = data->GetPoint(id).toQPointF();

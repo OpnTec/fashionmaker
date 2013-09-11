@@ -78,10 +78,7 @@ VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, con
     } else {
         data->UpdateModelingSpline(id, spline);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            Q_CHECK_PTR(tool);
-            tool->VDataTool::setData(data);
+            doc->UpdateToolData(id, data);
             data->IncrementReferens(id, Scene::Spline, Draw::Modeling);
         }
     }
@@ -136,7 +133,7 @@ void VModelingSpline::FullUpdateFromGui(int result){
 }
 
 void VModelingSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
-                                              const QPointF pos){
+                                                 const QPointF pos){
     Q_UNUSED(indexSpline);
     VSpline spl = VAbstractTool::data.GetModelingSpline(id);
     if(position == SplinePoint::FirstPoint){

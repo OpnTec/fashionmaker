@@ -17,6 +17,5 @@ VContainer VDataTool::getData() const{
 }
 
 void VDataTool::setData(const VContainer *value){
-    data.Clear();
     data = *value;
 }

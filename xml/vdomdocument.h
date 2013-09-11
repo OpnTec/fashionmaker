@@ -78,11 +78,11 @@ private:
     void        ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                  const QDomNode& node, Document::Enum parse);
     void        ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
-                                        const QDomNode& node, Document::Enum parse, Draw::Mode mode);
+                              const QDomNode& node, Document::Enum parse, Draw::Mode mode);
     void        ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                    Document::Enum parse);
     void        ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
-                                   Document::Enum parse);
+                             Document::Enum parse);
     void        ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                   Document::Enum parse, const QString &type, Draw::Mode mode);
     void        ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
@@ -90,8 +90,12 @@ private:
     void        ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                    Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                 Document::Enum parse, const QString& type, Draw::Mode mode);
+                                Document::Enum parse, const QString& type, Draw::Mode mode);
     void        ParseIncrementsElement(const QDomNode& node);
+    qint64      GetParametrId(const QDomElement& domElement) const;
+    qint64      GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
+    QString     GetParametrString(const QDomElement& domElement, const QString &name) const;
+    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;
 };
 
 #pragma GCC diagnostic pop

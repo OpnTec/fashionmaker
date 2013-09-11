@@ -256,13 +256,116 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             break;
         }
     }
+    QPainterPath ekv = Equidistant(points, Detail::CloseEquidistant, toPixel(10));
     QPainterPath path;
     path.moveTo(points[0]);
     for (qint32 i = 1; i < points.count(); ++i){
         path.lineTo(points[i]);
     }
     path.lineTo(points[0]);
+    path.addPath(ekv);
     return path;
+}
+
+QPainterPath VContainer::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
+                                     const qreal &width) const{
+    QPainterPath ekv;
+    QVector<QPointF> ekvPoints;
+    if ( points.size() < 3 ){
+        qDebug()<<"Not enough points for build equidistant.\n";
+        return ekv;
+    }
+    for (qint32 i = 0; i < points.size(); ++i ){
+        if(i != points.size()-1){
+            if(points[i] == points[i+1]){
+                points.remove(i+1);
+            }
+        } else {
+            if(points[i] == points[0]){
+                points.remove(i);
+            }
+        }
+    }
+    if(eqv == Detail::CloseEquidistant){
+        points.append(points.at(0));
+    }
+    for (qint32 i = 0; i < points.size(); ++i ){
+        if ( i == 0 && eqv == Detail::CloseEquidistant){//перша точка, ламана замкнена
+            ekvPoints<<EkvPoint(QLineF(points[points.size()-2], points[points.size()-1]),
+                    QLineF(points[1], points[0]), width);
+            continue;
+        } else if(i == 0 && eqv == Detail::OpenEquidistant){//перша точка, ламана не замкнена
+            ekvPoints.append(SingleParallelPoint(QLineF(points[0], points[1]), 90, width));
+            continue;
+        }
+        if(i == points.size()-1 && eqv == Detail::CloseEquidistant){//остання точка, ламана замкнена
+            ekvPoints.append(ekvPoints.at(0));
+            continue;
+        } else if(i == points.size()-1 && eqv == Detail::OpenEquidistant){//остання точка, ламана не замкнена
+                ekvPoints.append(SingleParallelPoint(QLineF(points[points.size()-1],
+                                                   points[points.size()-2]), -90, width));
+                continue;
+        }
+        //точка яка не лежить ні на початку ні в кінці
+        ekvPoints<<EkvPoint(QLineF(points[i-1], points[i]), QLineF(points[i+1], points[i]), width);
+    }
+    ekv.moveTo(ekvPoints[0]);
+    for (qint32 i = 1; i < ekvPoints.count(); ++i){
+        ekv.lineTo(ekvPoints[i]);
+    }
+    return ekv;
+}
+
+QLineF VContainer::ParallelLine(const QLineF &line, qreal width) const{
+    Q_ASSERT(width > 0);
+    QLineF paralel = QLineF (SingleParallelPoint(line, 90, width),
+                             SingleParallelPoint(QLineF(line.p2(), line.p1()), -90, width));
+    return paralel;
+}
+
+QPointF VContainer::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const{
+    Q_ASSERT(width > 0);
+    QLineF l = line;
+    l.setAngle( l.angle() + angle );
+    l.setLength( width );
+    return l.p2();
+}
+
+QVector<QPointF> VContainer::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width) const{
+    Q_ASSERT(width > 0);
+    QVector<QPointF> points;
+    if(line1.p2() != line2.p2()){
+        qWarning()<<"Last point of two lines must be equal.";
+    }
+    QPointF CrosPoint;
+    QLineF bigLine1 = ParallelLine(line1, width );
+    QLineF bigLine2 = ParallelLine(QLineF(line2.p2(), line2.p1()), width );
+    QLineF::IntersectType type = bigLine1.intersect( bigLine2, &CrosPoint );
+    switch(type){
+    case(QLineF::BoundedIntersection):
+        points.append(CrosPoint);
+        return points;
+        break;
+    case(QLineF::UnboundedIntersection):{
+        QLineF line( line1.p2(), CrosPoint );
+        if(line.length() > width + toPixel(3)){
+            points.append(bigLine1.p2());
+            line.setLength( width );
+            points.append(line.p2() );
+            points.append(bigLine2.p1());
+        } else {
+            points.append(CrosPoint);
+            return points;
+        }
+        break;
+    }
+    case(QLineF::NoIntersection):
+        /*If we have correct lines this means lines lie on a line.*/
+        points.append(bigLine1.p2());
+        return points;
+        break;
+    }
+    return points;
 }
 
 void VContainer::PrepareDetails(QVector<VItem *> &list) const{
@@ -279,6 +382,7 @@ void VContainer::RemoveIncrementTableRow(const QString& name){
 
 template <typename val>
 void VContainer::UpdateObject(QMap<qint64, val> &obj, const qint64 &id, const val& point){
+    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     obj[id] = point;
     UpdateId(id);
 }

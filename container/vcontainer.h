@@ -122,6 +122,11 @@ public:
     void  UpdateId(qint64 newId);
     void  IncrementReferens(qint64 id, Scene::Type obj, Draw::Mode mode = Draw::Calculation);
     QPainterPath ContourPath(qint64 idDetail) const;
+    QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
+                             const qreal &width)const;
+    QLineF ParallelLine(const QLineF &line, qreal width ) const;
+    QPointF SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)const;
+    QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)const;
     void PrepareDetails(QVector<VItem*> & list)const;
 private:
     static qint64         _id;
