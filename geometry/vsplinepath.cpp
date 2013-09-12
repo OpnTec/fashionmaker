@@ -101,14 +101,14 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSp
     }
 }
 
-VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos){
+VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const{
     if(indexSpline < 1 || indexSpline > Count()){
         throw "Такого сплайну немає.";
     }
     if(pos == SplinePoint::FirstPoint){
-        return path[indexSpline-1];
+        return path.at(indexSpline-1);
     } else {
-        return path[indexSpline];
+        return path.at(indexSpline);
     }
 }
 
@@ -133,6 +133,8 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path){
     this->kCurve = path.getKCurve();
     this->mode = path.getMode();
     this->points = path.GetDataPoints();
+    this->_referens = 0;
+    this->idObject = path.getIdObject();
     return *this;
 }
 

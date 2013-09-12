@@ -7,7 +7,7 @@ VDataTool::VDataTool(VContainer *data, QObject *parent) :
 VDataTool::~VDataTool(){
 }
 
-const VDataTool &VDataTool::operator =(const VDataTool &tool){
+VDataTool &VDataTool::operator =(const VDataTool &tool){
    data = tool.getData();
    return *this;
 }

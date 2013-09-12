@@ -43,7 +43,7 @@ public:
     qreal                 GetLength() const;
     const QMap<qint64, VPointF> *GetDataPoints() const;
     void                  UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point);
-    VSplinePoint          GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos);
+    VSplinePoint          GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
     /**
      * @brief Clear очищає шлях сплайнів.
      */

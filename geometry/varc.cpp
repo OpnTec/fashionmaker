@@ -19,7 +19,7 @@ VArc::VArc(const VArc &arc): f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(
     idObject(arc.getIdObject()){
 }
 
-const VArc &VArc::operator =(const VArc &arc){
+VArc &VArc::operator =(const VArc &arc){
     this->points = arc.GetDataPoints();
     this->f1 = arc.GetF1();
     this->formulaF1 = arc.GetFormulaF1();
@@ -29,6 +29,8 @@ const VArc &VArc::operator =(const VArc &arc){
     this->formulaRadius = arc.GetFormulaRadius();
     this->center = arc.GetCenter();
     this->mode = arc.getMode();
+    this->_referens = 0;
+    this->idObject = arc.getIdObject();
     return *this;
 }
 
@@ -168,8 +170,8 @@ QVector<QPointF> VArc::SplOfArc(qint32 number) const{
             anglF2 = f2 - 90 ;
         }
         if ( i + 1 == number ){
-            return VSpline::SplinePoints(GetP1 (), GetP2 (), anglF1, anglF2, 1., 1., 1.);
             f1 = f2;
+            return VSpline::SplinePoints(GetP1 (), GetP2 (), anglF1, anglF2, 1., 1., 1.);
         }
     }
     return QVector<QPointF>();

@@ -88,7 +88,6 @@ void MainWindow::ActionNewDraw(){
     dlg->resize(300,100);
     dlg->setTextValue(nDraw);
     while(1){
-        bOk = false;
         bOk = dlg->exec();
         nameDraw = dlg->textValue();
         if(!bOk || nameDraw.isEmpty()){
@@ -145,7 +144,6 @@ void MainWindow::OptionDraw(){
     dlg->resize(300,100);
     dlg->setTextValue(nDraw);
     while(1){
-        bOk = false;
         bOk = dlg->exec();
         nameDraw = dlg->textValue();
         if(!bOk || nameDraw.isEmpty()){

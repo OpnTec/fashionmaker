@@ -234,29 +234,29 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
 //    CutSpline ( length, curFir, curSec );
 //}
 
-void VSpline::PutAlongSpl (QPointF &moveP, qreal move ) const{
-    if ( GetLength () < move ){
-        qDebug()<<"Довжина більше довжини сплайну.";
-        qDebug()<<GetLength()<<"<"<<move;
-        throw "Довжина більше довжини сплайну.";
-    }
-    if ( move <= 0 ){
-        qDebug()<<"Довжина менше дорівнює нулю.";
-        throw "Довжина менше дорівнює нулю.";
-    }
-    qreal t = 0;
-    if ( move == 0 ){
-        t = 0;
-    } else {
-        t = move / GetLength ();
-        moveP.setX ( pow ( 1 - t, 3 ) * GetPointP1 ().x () + 3 * t * pow ( 1 - t, 2 ) *
-                     GetP2 ().x () + 3 * t * t * ( 1 - t ) * GetP3 ().x () +
-                     pow ( t, 3 ) * GetPointP4 ().x () );
-        moveP.setY ( pow ( 1 - t, 3 ) * GetPointP1 ().y () + 3 * t * pow ( 1 - t, 2 ) *
-                     GetP2 ().y () + 3 * t * t * ( 1 - t ) * GetP3 ().y () +
-                     pow ( t, 3 ) * GetPointP4 ().y () );
-    }
-}
+//void VSpline::PutAlongSpl (QPointF &moveP, qreal move ) const{
+//    if ( GetLength () < move ){
+//        qDebug()<<"Довжина більше довжини сплайну.";
+//        qDebug()<<GetLength()<<"<"<<move;
+//        throw "Довжина більше довжини сплайну.";
+//    }
+//    if ( move <= 0 ){
+//        qDebug()<<"Довжина менше дорівнює нулю.";
+//        throw "Довжина менше дорівнює нулю.";
+//    }
+//    qreal t = 0;
+//    if ( move == 0 ){
+//        t = 0;
+//    } else {
+//        t = move / GetLength ();
+//        moveP.setX ( pow ( 1 - t, 3 ) * GetPointP1 ().x () + 3 * t * pow ( 1 - t, 2 ) *
+//                     GetP2 ().x () + 3 * t * t * ( 1 - t ) * GetP3 ().x () +
+//                     pow ( t, 3 ) * GetPointP4 ().x () );
+//        moveP.setY ( pow ( 1 - t, 3 ) * GetPointP1 ().y () + 3 * t * pow ( 1 - t, 2 ) *
+//                     GetP2 ().y () + 3 * t * t * ( 1 - t ) * GetP3 ().y () +
+//                     pow ( t, 3 ) * GetPointP4 ().y () );
+//    }
+//}
 
 QVector<QPointF> VSpline::GetPoints () const{
     return GetPoints(GetPointP1().toQPointF(), p2, p3, GetPointP4().toQPointF());
@@ -637,7 +637,7 @@ void VSpline::decrementReferens(){
             2 - 1 real root + complex roots imaginary part is zero
                 (i.e. 2 real roots).
 */
-qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c)const{
+qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
     qreal q,r,r2,q3;
     
     q = (a*a - 3.*b)/9.;
@@ -676,56 +676,56 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c)const{
     }
 }
 
-qreal VSpline::calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
-                       qreal curve_coord4, qreal point_coord) const{
-    qreal P1, P2, P3, P4, Bt;
-    qreal a, b, c, d, ret_t;
+//qreal VSpline::calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
+//                       qreal curve_coord4, qreal point_coord) const{
+//    qreal P1, P2, P3, P4, Bt;
+//    qreal a, b, c, d, ret_t;
     
-    qreal *t = static_cast<qreal *>(malloc(3*sizeof(qreal)));
-    P1 = curve_coord1;
-    P2 = curve_coord2;
-    P3 = curve_coord3;
-    P4 = curve_coord4;
-    Bt = point_coord;
+//    qreal *t = static_cast<qreal *>(malloc(3*sizeof(qreal)));
+//    P1 = curve_coord1;
+//    P2 = curve_coord2;
+//    P3 = curve_coord3;
+//    P4 = curve_coord4;
+//    Bt = point_coord;
     
-    a = -P1 + 3*P2 - 3*P3 + P4;
-    b = 3*P1 - 6*P2 + 3*P3;
-    c = -3*P1 + 3*P2;
-    d = -Bt + P1;
+//    a = -P1 + 3*P2 - 3*P3 + P4;
+//    b = 3*P1 - 6*P2 + 3*P3;
+//    c = -3*P1 + 3*P2;
+//    d = -Bt + P1;
     
-    if(Cubic(t, b/a, c/a, d/a) == 3){
-        ret_t = t[2];
-    } else {
-        ret_t = t[0];
-    }
-    /*
-      * Повертається три значення, але експереминтально знайдено що шукане
-      * значення знаходиться в третьому.
-      */
+//    if(Cubic(t, b/a, c/a, d/a) == 3){
+//        ret_t = t[2];
+//    } else {
+//        ret_t = t[0];
+//    }
+//    /*
+//      * Повертається три значення, але експереминтально знайдено що шукане
+//      * значення знаходиться в третьому.
+//      */
     
-    free(t);
-    if(ret_t<0 || ret_t>1){
-        qDebug()<<"Неправильне значення параметра. фунція calc_t";
-        throw"Неправильне значення параметра. фунція calc_t";
-    }
-    return ret_t;
-}
+//    free(t);
+//    if(ret_t<0 || ret_t>1){
+//        qDebug()<<"Неправильне значення параметра. фунція calc_t";
+//        throw"Неправильне значення параметра. фунція calc_t";
+//    }
+//    return ret_t;
+//}
 /*
   * Функція знаходить підходяще значення параметна t якому відповідає точка на сплайні.
   */
-qreal VSpline::param_t (QPointF pBt)const{
-    qreal t_x, t_y;
-    t_x = calc_t (GetPointP1().x(), p2.x(), p3.x(), GetPointP4().x(), pBt.x());
-    t_y = calc_t (GetPointP1().y(), p2.y(), p3.y(), GetPointP4().y(), pBt.y());
-    /*
-      * Порівнюємо значення по х і по у і визначаємо найбільше. Це значення і
-      * буде шуканим.
-      */
-    if(t_x>t_y)
-        return t_x;
-    else
-        return t_y;
-}
+//qreal VSpline::param_t (QPointF pBt)const{
+//    qreal t_x, t_y;
+//    t_x = calc_t (GetPointP1().x(), p2.x(), p3.x(), GetPointP4().x(), pBt.x());
+//    t_y = calc_t (GetPointP1().y(), p2.y(), p3.y(), GetPointP4().y(), pBt.y());
+//    /*
+//      * Порівнюємо значення по х і по у і визначаємо найбільше. Це значення і
+//      * буде шуканим.
+//      */
+//    if(t_x>t_y)
+//        return t_x;
+//    else
+//        return t_y;
+//}
 
 //void VSpline::Mirror(const QPointF Pmirror){
 //    QPointF P1 = p1;
@@ -779,7 +779,7 @@ void VSpline::setIdObject(const qint64 &value){
     idObject = value;
 }
 
-const VSpline &VSpline::operator =(const VSpline &spline){
+VSpline &VSpline::operator =(const VSpline &spline){
     this->p1 = spline.GetP1 ();
     this->p2 = spline.GetP2 ();
     this->p3 = spline.GetP3 ();

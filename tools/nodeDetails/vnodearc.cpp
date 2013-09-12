@@ -15,7 +15,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
 
 VNodeArc *VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
                                    Draw::Mode typeobject, Document::Enum parse, Tool::Enum typeCreation){
-    VNodeArc *arc;
+    VNodeArc *arc = 0;
     if(parse == Document::FullParse){
         arc = new VNodeArc(doc, data, id, idArc, typeobject, typeCreation);
         doc->AddTool(id, arc);

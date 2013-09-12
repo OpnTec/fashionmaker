@@ -2,7 +2,6 @@
 #include "ui_dialogincrements.h"
 #include <QHeaderView>
 #include <QCloseEvent>
-#include "widgets/delegate.h"
 #include "widgets/doubledelegate.h"
 #include "container/vincrementtablerow.h"
 

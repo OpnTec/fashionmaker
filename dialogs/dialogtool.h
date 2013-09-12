@@ -82,7 +82,7 @@ protected:
     void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
     qint64           getCurrentPointId(QComboBox *box) const;
                      DialogTool(const DialogTool &dialog);
-    const DialogTool &operator=(const DialogTool &dialog);
+    DialogTool       &operator=(const DialogTool &dialog);
 };
 
 #endif // DIALOGTOOL_H

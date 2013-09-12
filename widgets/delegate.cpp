@@ -45,14 +45,8 @@
      using a spin box widget.
  */
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
- #include <QtGui>
- #include "delegate.h"
-#pragma GCC diagnostic pop
+#include <QtGui>
+#include "delegate.h"
 
  SpinBoxDelegate::SpinBoxDelegate(QObject *parent)
      : QItemDelegate(parent)

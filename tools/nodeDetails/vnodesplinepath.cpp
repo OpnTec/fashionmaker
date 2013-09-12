@@ -17,7 +17,7 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 VNodeSplinePath *VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id,
                                                  qint64 idSpline, Draw::Mode typeobject, Document::Enum parse,
                                                  Tool::Enum typeCreation){
-    VNodeSplinePath *splPath;
+    VNodeSplinePath *splPath = 0;
     if(parse == Document::FullParse){
         splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
         doc->AddTool(id, splPath);

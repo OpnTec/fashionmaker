@@ -169,7 +169,7 @@ void DialogArc::F2Changed(){
 
 void DialogArc::CheckState(){
     Q_CHECK_PTR(bOk);
-    bOk->setEnabled(flagRadius & flagF1 & flagF2);
+    bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
 void DialogArc::EvalRadius(){

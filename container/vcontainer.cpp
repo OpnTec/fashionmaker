@@ -18,7 +18,7 @@ VContainer::VContainer():base(QMap<QString, qint32>()), points(QMap<qint64, VPoi
     CreateManTableIGroup ();
 }
 
-const VContainer &VContainer::operator =(const VContainer &data){
+VContainer &VContainer::operator =(const VContainer &data){
     setData(data);
     return *this;
 }
@@ -55,7 +55,7 @@ void VContainer::setData(const VContainer &data){
 }
 
 template <typename key, typename val>
-val VContainer::GetObject(const QMap<key,val> &obj, key id)const{
+val VContainer::GetObject(const QMap<key,val> &obj, key id){
     if(obj.contains(id)){
         return obj.value(id);
     } else {
@@ -134,13 +134,13 @@ qint64 VContainer::getId(){
 }
 
 qint64 VContainer::getNextId(){
-    ++_id;
+    this->_id++;
     return _id;
 }
 
 void VContainer::UpdateId(qint64 newId){
-    if(newId > _id){
-        _id = newId;
+    if(newId > this->_id){
+       this->_id = newId;
     }
 }
 
@@ -316,14 +316,14 @@ QPainterPath VContainer::Equidistant(QVector<QPointF> points, const Detail::Equi
     return ekv;
 }
 
-QLineF VContainer::ParallelLine(const QLineF &line, qreal width) const{
+QLineF VContainer::ParallelLine(const QLineF &line, qreal width){
     Q_ASSERT(width > 0);
     QLineF paralel = QLineF (SingleParallelPoint(line, 90, width),
                              SingleParallelPoint(QLineF(line.p2(), line.p1()), -90, width));
     return paralel;
 }
 
-QPointF VContainer::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const{
+QPointF VContainer::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width){
     Q_ASSERT(width > 0);
     QLineF l = line;
     l.setAngle( l.angle() + angle );

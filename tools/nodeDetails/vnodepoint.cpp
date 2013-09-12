@@ -20,7 +20,7 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
 
 VNodePoint *VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                                        Draw::Mode typeobject, Document::Enum parse, Tool::Enum typeCreation){
-    VNodePoint *point;
+    VNodePoint *point = 0;
     if(parse == Document::FullParse){
         point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
         doc->AddTool(id, point);

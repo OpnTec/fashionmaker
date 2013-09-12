@@ -79,7 +79,7 @@ private:
      * @param c символ.
      * @return true - належить рядку, false - не належить рядку.
      */
-    bool StrChr(QString string, QChar c);
+    static bool StrChr(QString string, QChar c);
     /**
      * @brief putback повертає зчитану лексему назад у потік.
      */
@@ -120,13 +120,13 @@ private:
      * @param r перший елемент.
      * @param h другий елемент.
      */
-    void arith(QChar o, qreal *r, qreal *h);
+    static void arith(QChar o, qreal *r, qreal *h);
     /**
      * @brief unary метод зміни знаку.
      * @param o символ знаку.
      * @param r елемент.
      */
-    void unary(QChar o, qreal *r);
+    static void unary(QChar o, qreal *r);
     /**
      * @brief find_var метод знаходить змінну за іменем.
      * @param s ім'я змінної.
@@ -139,19 +139,19 @@ private:
      * @param s ім'я лексеми.
      * @return внутрішній номер лексеми.
      */
-    char look_up(QString s);
+    static char look_up(QString s);
     /**
      * @brief isdelim повертає "істино", якщо с розділювач.
      * @param c символ.
      * @return розділювач, або ні.
      */
-    bool isdelim(QChar c);
+    static bool isdelim(QChar c);
     /**
      * @brief iswhite перевіряє чи с пробіл чи табуляція.
      * @param c символ.
      * @return так або ні.
      */
-    bool iswhite(QChar c);
+    static bool iswhite(QChar c);
 };
 
 #endif // CALCULATOR_H

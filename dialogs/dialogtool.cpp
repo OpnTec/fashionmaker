@@ -175,7 +175,7 @@ qint64 DialogTool::getCurrentPointId(QComboBox *box) const{
 
 void DialogTool::CheckState(){
     Q_CHECK_PTR(bOk);
-    bOk->setEnabled(flagFormula & flagName);
+    bOk->setEnabled(flagFormula && flagName);
 }
 
 

@@ -8,7 +8,7 @@ VModelingLinePoint::VModelingLinePoint(VDomDocument *doc, VContainer *data, cons
     //Лінія, що з'єднує дві точки
     QPointF point1 = data->GetModelingPoint(basePointId).toQPointF();
     QPointF point2 = data->GetModelingPoint(id).toQPointF();
-    mainLine = new QGraphicsLineItem(QLineF(point1 - point2, point2 - point2), this);
+    mainLine = new QGraphicsLineItem(QLineF(point1 - point2, 0), this);
     mainLine->setPen(QPen(Qt::black, widthHairLine));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     if(typeLine == "none"){
@@ -22,7 +22,7 @@ void VModelingLinePoint::RefreshGeometry(){
     VModelingPoint::RefreshPointGeometry(VModelingTool::data.GetModelingPoint(id));
     QPointF point = VModelingTool::data.GetModelingPoint(id).toQPointF();
     QPointF basePoint = VModelingTool::data.GetModelingPoint(basePointId).toQPointF();
-    mainLine->setLine(QLineF(basePoint - point, point - point));
+    mainLine->setLine(QLineF(basePoint - point, 0));
     if(typeLine == "none"){
         mainLine->setVisible(false);
     } else {

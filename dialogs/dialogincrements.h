@@ -1,8 +1,6 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialogtool.h"
 #include <QPushButton>
 #include "xml/vdomdocument.h"

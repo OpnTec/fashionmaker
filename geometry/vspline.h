@@ -143,7 +143,7 @@ public:
      * @param moveP точка яка розміщується на сплайні.
      * @param move довжина від початку сплайну.
      */
-    void             PutAlongSpl ( QPointF &moveP, qreal move ) const;
+//    void             PutAlongSpl ( QPointF &moveP, qreal move ) const;
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.
      * @return список точок.
@@ -168,7 +168,7 @@ public:
                                          qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
-    const VSpline &operator=(const VSpline &spl);
+    VSpline &operator=(const VSpline &spl);
 protected:
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.
@@ -254,7 +254,7 @@ private:
      * @param c коефіцієнт.
      * @return повертає корені рівняння.
      */
-    qint32           Cubic(qreal *x, qreal a, qreal b, qreal c)const;
+    static qint32           Cubic(qreal *x, qreal a, qreal b, qreal c);
     /**
      * @brief calc_t знаходить параметр t якому відповідає точка на сплайні.
      * @param curve_coord1 координата Х або У кривої.
@@ -264,14 +264,14 @@ private:
      * @param point_coord координата Х або У точки на кривій.
      * @return
      */
-    qreal            calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
-                             qreal curve_coord4, qreal point_coord)const;
+//    static qreal            calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
+//                                    qreal curve_coord4, qreal point_coord)const;
     /**
      * @brief param_t  знаходить підходяще значення параметра t якому відповідає точка на сплайні
      * @param pBt точка для якої шукається значення параметра t.
      * @return підходяще значення t.
      */
-    qreal            param_t (QPointF pBt)const;
+//    qreal            param_t (QPointF pBt)const;
 };
 
 #endif // VSPLINE_H

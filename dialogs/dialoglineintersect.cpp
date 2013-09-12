@@ -133,7 +133,7 @@ void DialogLineIntersect::P2Line2Changed(int index){
 
 void DialogLineIntersect::CheckState(){
     Q_CHECK_PTR(bOk);
-    bOk->setEnabled(flagName & flagPoint);
+    bOk->setEnabled(flagName && flagPoint);
 }
 
 bool DialogLineIntersect::CheckIntersecion(){

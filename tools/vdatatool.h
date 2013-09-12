@@ -10,7 +10,7 @@ class VDataTool : public QObject
 public:
     explicit VDataTool(VContainer *data, QObject *parent = 0);
     virtual ~VDataTool();
-    const VDataTool& operator= (const VDataTool &tool);
+    VDataTool& operator= (const VDataTool &tool);
     VContainer getData() const;
     void setData(const VContainer *value);
 

@@ -27,7 +27,7 @@ public:
                        qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
                        Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
                  VArc(const VArc &arc);
-                 const VArc& operator= (const VArc &arc);
+                 VArc& operator= (const VArc &arc);
     /**
      * @brief GetF1 повертає початковий кут дуги.
      * @return повертає кут в градусах.

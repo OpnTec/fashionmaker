@@ -23,7 +23,7 @@ public:
                          * @brief VContainer
                          */
                         VContainer();
-                        const VContainer &operator=(const VContainer &data);
+                        VContainer &operator=(const VContainer &data);
                         VContainer(const VContainer &data);
                         void setData(const VContainer &data);
                         /**
@@ -44,7 +44,7 @@ public:
     VSplinePath         GetSplinePath(qint64 id) const;
     VSplinePath         GetModelingSplinePath(qint64 id) const;
     VDetail             GetDetail(qint64 id) const;
-    qint64              getId();
+    static qint64       getId();
     qint64              AddPoint(const VPointF& point);
     qint64              AddModelingPoint(const VPointF& point);
     qint64              AddDetail(const VDetail& detail);
@@ -101,7 +101,7 @@ public:
     qint32              growth() const;
     qreal               FindVar(const QString& name, bool *ok)const;
     bool                IncrementTableContains(const QString& name);
-    qint64              getNextId();
+    static qint64       getNextId();
     void                RemoveIncrementTableRow(const QString& name);
     const QMap<qint64, VPointF> *DataPoints() const;
     const QMap<qint64, VPointF> *DataModelingPoints() const;
@@ -119,13 +119,13 @@ public:
     const QMap<qint64, VSplinePath> *DataSplinePaths() const;
     const QMap<qint64, VSplinePath> *DataModelingSplinePaths() const;
     const QMap<qint64, VDetail> *DataDetails() const;
-    void  UpdateId(qint64 newId);
+    static void  UpdateId(qint64 newId);
     void  IncrementReferens(qint64 id, Scene::Type obj, Draw::Mode mode = Draw::Calculation);
     QPainterPath ContourPath(qint64 idDetail) const;
     QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
                              const qreal &width)const;
-    QLineF ParallelLine(const QLineF &line, qreal width ) const;
-    QPointF SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)const;
+    static QLineF ParallelLine(const QLineF &line, qreal width );
+    static QPointF SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
     QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)const;
     void PrepareDetails(QVector<VItem*> & list)const;
 private:
@@ -146,9 +146,10 @@ private:
     QMap<qint64, VSplinePath> splinePaths;
     QMap<qint64, VSplinePath> modelingSplinePaths;
     QMap<qint64, VDetail> details;
-    template <typename key, typename val> val GetObject(const QMap<key,val> &obj, key id) const;
-    template <typename val> void UpdateObject(QMap<qint64, val> &obj, const qint64 &id, const val& point);
-    template <typename key, typename val> qint64 AddObject(QMap<key, val> &obj, const val& value);
+    template <typename key, typename val> static val GetObject(const QMap<key,val> &obj, key id);
+    template <typename val> static void UpdateObject(QMap<qint64, val> &obj, const qint64 &id,
+                                                     const val& point);
+    template <typename key, typename val> static qint64 AddObject(QMap<key, val> &obj, const val& value);
     void CreateManTableIGroup ();
     QVector<QPointF> GetReversePoint(const QVector<QPointF> &points)const;
     qreal GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)const;
