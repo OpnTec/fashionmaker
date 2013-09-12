@@ -589,6 +589,9 @@ void MainWindow::CanselTool(){
             dialogDetail.clear();
             ui->toolButtonNewDetail->setChecked(false);
             break;
+        default:
+            qWarning()<<"Get wrong tool type. Ignore.";
+            break;
     }
 }
 

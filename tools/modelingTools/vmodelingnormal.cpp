@@ -34,7 +34,7 @@ VModelingNormal* VModelingNormal::Create(QSharedPointer<DialogNormal> &dialog, V
     qint64 secondPointId = dialog->getSecondPointId();
     QString typeLine = dialog->getTypeLine();
     QString pointName = dialog->getPointName();
-    qint32 angle = dialog->getAngle();
+    qreal angle = dialog->getAngle();
     return Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, doc, data,
                   Document::FullParse, Tool::FromGui);
 }

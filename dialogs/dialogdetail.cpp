@@ -1,4 +1,5 @@
 #include "dialogdetail.h"
+#include <QDebug>
 
 DialogDetail::DialogDetail(const VContainer *data, Draw::Mode mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(), details(VDetail()){
@@ -35,6 +36,9 @@ void DialogDetail::ChoosedObject(qint64 id, Scene::Type type){
             break;
         case(Scene::SplinePath):
             NewItem(id, Tools::NodeSplinePath, mode, NodeDetail::Contour);
+            break;
+        default:
+            qWarning()<<"Get wrong scene object. Ignore.";
             break;
         }
         this->show();
@@ -94,6 +98,9 @@ void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, Nod
         name = data->GetNameSplinePath(splPath, mode);
         break;
     }
+    default:
+        qWarning()<<"Get wrong tools. Ignore.";
+        break;
     }
 
     QListWidgetItem *item = new QListWidgetItem(name);

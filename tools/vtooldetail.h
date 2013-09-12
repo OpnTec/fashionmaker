@@ -43,6 +43,8 @@ private:
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
     void AddNode(QDomElement &domElement, VNodeDetail &node);
+                                   VToolDetail(const VToolDetail &tool);
+    VToolDetail                    &operator=(const VToolDetail &tool);
 };
 
 #endif // VTOOLDETAIL_H

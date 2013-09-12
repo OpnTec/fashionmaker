@@ -1,14 +1,13 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
-#pragma GCC diagnostic pop
 #include "geometry/varc.h"
 #include "geometry/vspline.h"
 #include "geometry/vsplinepath.h"
+#include <QDebug>
 
 DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent) :
-    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0), cursorToolRecordRow(0){
+    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
+    cursorToolRecordRow(0){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHistory::DialogAccepted);
@@ -229,6 +228,9 @@ QString DialogHistory::Record(const VToolRecord &tool){
                                                                                data->GetPoint(firstPointId).name(),
                                                                                data->GetPoint(secondPointId).name(),
                                                                                data->GetPoint(tool.getId()).name());
+            break;
+        default:
+            qWarning()<<"Get wrong tool type. Ignore.";
             break;
     }
     return record;

@@ -9,7 +9,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Mode mode, QWidget *p
     DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
     formula(QString()), angle(0), basePointId(0){
     ui->setupUi(this);
-    spinBoxAngle = ui->spinBoxAngle;
+    spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
@@ -109,13 +109,13 @@ void DialogEndLine::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-qint32 DialogEndLine::getAngle() const{
+qreal DialogEndLine::getAngle() const{
     return angle;
 }
 
-void DialogEndLine::setAngle(const qint32 &value){
+void DialogEndLine::setAngle(const qreal &value){
     angle = value;
-    ui->spinBoxAngle->setValue(angle);
+    ui->doubleSpinBoxAngle->setValue(angle);
 }
 
 qint64 DialogEndLine::getBasePointId() const{
@@ -130,7 +130,7 @@ void DialogEndLine::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    angle = ui->spinBoxAngle->value();
+    angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentPointId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }

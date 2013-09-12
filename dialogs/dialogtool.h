@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QComboBox>
-#include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QListWidget>
@@ -54,7 +54,7 @@ protected:
     bool             flagFormula;
     QTimer           *timerFormula;
     QPushButton      *bOk;
-    QSpinBox         *spinBoxAngle;
+    QDoubleSpinBox   *spinBoxAngle;
     QLineEdit        *lineEditFormula;
     QListWidget      *listWidget;
     QLabel           *labelResultCalculation;

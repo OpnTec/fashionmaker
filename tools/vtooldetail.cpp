@@ -137,6 +137,9 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
+        default:
+            qWarning()<<"Get wrong tool type. Ignore.";
+            break;
         }
     }
     this->setFlag(QGraphicsItem::ItemIsMovable, true);

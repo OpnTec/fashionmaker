@@ -4,7 +4,7 @@
 #include "widgets/vmaingraphicsscene.h"
 
 VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
-                           const QString &formula, const qint32 &angle, const qint64 &basePointId,
+                           const QString &formula, const qreal &angle, const qint64 &basePointId,
                            Tool::Enum typeCreation, QGraphicsItem *parent):
     VModelingLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
@@ -31,7 +31,7 @@ VModelingEndLine *VModelingEndLine::Create(QSharedPointer<DialogEndLine> &dialog
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
     QString formula = dialog->getFormula();
-    qint32 angle = dialog->getAngle();
+    qreal angle = dialog->getAngle();
     qint64 basePointId = dialog->getBasePointId();
     return Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, doc, data, Document::FullParse,
                   Tool::FromGui);
@@ -39,7 +39,7 @@ VModelingEndLine *VModelingEndLine::Create(QSharedPointer<DialogEndLine> &dialog
 
 VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &pointName,
                                            const QString &typeLine, const QString &formula,
-                                           const qint32 &angle, const qint64 &basePointId, const qreal &mx,
+                                           const qreal &angle, const qint64 &basePointId, const qreal &mx,
                                            const qreal &my, VDomDocument *doc, VContainer *data,
                                            Document::Enum parse, Tool::Enum typeCreation){
     VModelingEndLine *point = 0;

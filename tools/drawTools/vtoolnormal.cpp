@@ -34,7 +34,7 @@ void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScen
     qint64 secondPointId = dialog->getSecondPointId();
     QString typeLine = dialog->getTypeLine();
     QString pointName = dialog->getPointName();
-    qint32 angle = dialog->getAngle();
+    qreal angle = dialog->getAngle();
     Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }

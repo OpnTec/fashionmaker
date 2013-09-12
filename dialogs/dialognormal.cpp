@@ -6,7 +6,7 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Mode mode, QWidget *par
     DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0){
     ui->setupUi(this);
-    spinBoxAngle = ui->spinBoxAngle;
+    spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
@@ -105,7 +105,7 @@ void DialogNormal::DialogAccepted(){
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    angle = ui->spinBoxAngle->value();
+    angle = ui->doubleSpinBoxAngle->value();
     firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
@@ -127,13 +127,13 @@ void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-qint32 DialogNormal::getAngle() const{
+qreal DialogNormal::getAngle() const{
     return angle;
 }
 
-void DialogNormal::setAngle(const qint32 &value){
+void DialogNormal::setAngle(const qreal &value){
     angle = value;
-    ui->spinBoxAngle->setValue(angle);
+    ui->doubleSpinBoxAngle->setValue(angle);
 }
 
 QString DialogNormal::getFormula() const{

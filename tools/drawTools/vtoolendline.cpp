@@ -1,10 +1,10 @@
 #include "vtoolendline.h"
 #include <QDebug>
 #include <QMenu>
-#include "../../widgets/vmaingraphicsscene.h"
+#include "widgets/vmaingraphicsscene.h"
 
 VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
-                           const QString &formula, const qint32 &angle, const qint64 &basePointId,
+                           const QString &formula, const qreal &angle, const qint64 &basePointId,
                            Tool::Enum typeCreation, QGraphicsItem *parent):
     VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
@@ -26,19 +26,19 @@ void VToolEndLine::setDialog(){
     }
 }
 
-void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data){
+void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene,
+                          VDomDocument *doc, VContainer *data){
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
     QString formula = dialog->getFormula();
-    qint32 angle = dialog->getAngle();
+    qreal angle = dialog->getAngle();
     qint64 basePointId = dialog->getBasePointId();
     Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
            Tool::FromGui);
 }
 
 void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                          const QString &formula, const qint32 &angle, const qint64 &basePointId,
+                          const QString &formula, const qreal &angle, const qint64 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
                           VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
 

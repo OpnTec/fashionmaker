@@ -134,13 +134,13 @@ qint64 VContainer::getId(){
 }
 
 qint64 VContainer::getNextId(){
-    this->_id++;
+    _id++;
     return _id;
 }
 
 void VContainer::UpdateId(qint64 newId){
-    if(newId > this->_id){
-       this->_id = newId;
+    if(newId > _id){
+       _id = newId;
     }
 }
 
@@ -208,6 +208,9 @@ void VContainer::IncrementReferens(qint64 id, Scene::Type obj, Draw::Mode mode){
         }
     }
         break;
+    default:
+        qWarning()<<"Get wrong scene type.";
+        break;
     }
 }
 
@@ -254,7 +257,10 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             }
         }
             break;
-        }
+        default:
+            qWarning()<<"Get wrong tool type. Ignore.";
+            break;
+        } 
     }
     QPainterPath ekv = Equidistant(points, Detail::CloseEquidistant, toPixel(10));
     QPainterPath path;

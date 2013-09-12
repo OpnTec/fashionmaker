@@ -317,7 +317,7 @@ void TableWindow::PngFile(const QString &name) const{
     QRectF r = paper->rect();
     qreal x=0, y=0, w=0, h=0;
     r.getRect(&x,&y,&w,&h);// Re-shrink the scene to it's bounding contents
-    QImage image(QSize(w, h), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+    QImage image(QSize(static_cast<qint32>(w), static_cast<qint32>(h)), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
     image.fill(Qt::transparent);                                              // Start all pixels transparent
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );

@@ -26,8 +26,8 @@ public:
     void              setTypeLine(const QString &value);
     QString           getFormula() const;
     void              setFormula(const QString &value);
-    qint32            getAngle() const;
-    void              setAngle(const qint32 &value);
+    qreal             getAngle() const;
+    void              setAngle(const qreal &value);
     qint64            getBasePointId() const;
     void              setBasePointId(const qint64 &value, const qint64 &id);
 public slots:
@@ -38,7 +38,7 @@ private:
     QString           pointName;
     QString           typeLine;
     QString           formula;
-    qint32            angle;
+    qreal             angle;
     qint64            basePointId;
     DialogEndLine(const DialogEndLine &dialog);
     const DialogEndLine &operator=(const DialogEndLine& dialog);
