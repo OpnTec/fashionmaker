@@ -354,11 +354,15 @@ QVector<QPointF> VContainer::EkvPoint(const QLineF &line1, const QLineF &line2, 
         break;
     case(QLineF::UnboundedIntersection):{
         QLineF line( line1.p2(), CrosPoint );
-        if(line.length() > width + toPixel(3)){
-            points.append(bigLine1.p2());
-            line.setLength( width );
-            points.append(line.p2() );
-            points.append(bigLine2.p1());
+        if(line.length() > width + toPixel(8)){
+            QLineF l;
+            l = QLineF(bigLine1.p2(), CrosPoint);
+            l.setLength(width);
+            points.append(l.p2());
+
+            l = QLineF(bigLine2.p1(), CrosPoint);
+            l.setLength(width);
+            points.append(l.p2());
         } else {
             points.append(CrosPoint);
             return points;

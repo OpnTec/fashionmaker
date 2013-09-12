@@ -1,12 +1,6 @@
 #include "calculator.h"
 #include <cmath>
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <QDebug>
-#pragma GCC diagnostic pop
 
 #define DELIMITER  1
 #define VARIABLE   2
