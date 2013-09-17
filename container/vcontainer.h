@@ -127,6 +127,7 @@ public:
     static QLineF ParallelLine(const QLineF &line, qreal width );
     static QPointF SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
     QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)const;
+    QVector<QPointF> CheckLoops(const QVector<QPointF> &points) const;
     void PrepareDetails(QVector<VItem*> & list)const;
 private:
     static qint64         _id;

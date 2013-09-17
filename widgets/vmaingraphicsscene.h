@@ -4,7 +4,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
-
 #include "options.h"
 
 class VMainGraphicsScene : public QGraphicsScene

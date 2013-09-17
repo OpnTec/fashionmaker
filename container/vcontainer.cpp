@@ -258,7 +258,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
         }
             break;
         default:
-            qWarning()<<"Get wrong tool type. Ignore.";
+            qWarning()<<"Get wrong tool type. Ignore."<<detail[i].getTypeTool();
             break;
         } 
     }
@@ -315,6 +315,7 @@ QPainterPath VContainer::Equidistant(QVector<QPointF> points, const Detail::Equi
         //точка яка не лежить ні на початку ні в кінці
         ekvPoints<<EkvPoint(QLineF(points[i-1], points[i]), QLineF(points[i+1], points[i]), width);
     }
+    ekvPoints = CheckLoops(ekvPoints);
     ekv.moveTo(ekvPoints[0]);
     for (qint32 i = 1; i < ekvPoints.count(); ++i){
         ekv.lineTo(ekvPoints[i]);
@@ -376,6 +377,52 @@ QVector<QPointF> VContainer::EkvPoint(const QLineF &line1, const QLineF &line2, 
         break;
     }
     return points;
+}
+
+QVector<QPointF> VContainer::CheckLoops(const QVector<QPointF> &points) const{
+    QVector<QPointF> ekvPoints;
+    /*If we got less than 4 points no need seek loops.*/
+    if(points.size() < 4){
+       return ekvPoints;
+    }
+    bool closed = false;
+    if(points.at(0) == points.at(points.size()-1)){
+        closed = true;
+    }
+    qint32 i, j;
+    for(i = 0; i < points.size(); ++i){
+        /*Last three points no need check.*/
+        if(i >= points.size()-3){
+            ekvPoints.append(points.at(i));
+            continue;
+        }
+        QPointF crosPoint;
+        QLineF::IntersectType intersect = QLineF::NoIntersection;
+        QLineF line1(points.at(i),points.at(i+1));
+        for(j = i+2; j < points.size()-1; ++j){
+            QLineF line2(points.at(j),points.at(j+1));
+            intersect = line1.intersect(line2, &crosPoint);
+            if(intersect == QLineF::BoundedIntersection){
+                break;
+            }
+        }
+        if(intersect == QLineF::BoundedIntersection){
+            if(i == 0 && j+1 == points.size()-1 && closed){
+                /*We got closed contour.*/
+                ekvPoints.append(points.at(i));
+            } else {
+                /*We found loop.*/
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(crosPoint);
+                ekvPoints.append(points.at(j+1));
+                i = j + 2;
+            }
+        } else {
+            /*We did not found loop.*/
+            ekvPoints.append(points.at(i));
+        }
+    }
+    return ekvPoints;
 }
 
 void VContainer::PrepareDetails(QVector<VItem *> &list) const{

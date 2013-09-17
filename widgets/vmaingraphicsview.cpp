@@ -1,13 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include "vmaingraphicsview.h"
 #include <QApplication>
 #include <QWheelEvent>
 #include <QScrollBar>
-#pragma GCC diagnostic pop
 
 VMainGraphicsView::VMainGraphicsView(QWidget *parent) :
     QGraphicsView(parent){
