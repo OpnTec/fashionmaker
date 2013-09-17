@@ -620,8 +620,20 @@ void MainWindow::keyPressEvent ( QKeyEvent * event ){
 void MainWindow::ActionDraw(bool checked){
     if(checked){
         ui->actionDetails->setChecked(false);
+        /*Save scroll bars value for previous scene.*/
+        QScrollBar *horScrollBar = view->horizontalScrollBar();
+        currentScene->setHorScrollBar(horScrollBar->value());
+        QScrollBar *verScrollBar = view->verticalScrollBar();
+        currentScene->setVerScrollBar(verScrollBar->value());
+
         currentScene = sceneDraw;
         view->setScene(currentScene);
+        /*Set value for current scene scroll bar.*/
+        horScrollBar = view->horizontalScrollBar();
+        horScrollBar->setValue(currentScene->getHorScrollBar());
+        verScrollBar = view->verticalScrollBar();
+        verScrollBar->setValue(currentScene->getVerScrollBar());
+
         mode = Draw::Calculation;
         doc->setCurrentData();
     } else {
@@ -632,8 +644,19 @@ void MainWindow::ActionDraw(bool checked){
 void MainWindow::ActionDetails(bool checked){
     if(checked){
         ui->actionDraw->setChecked(false);
+        /*Save scroll bars value for previous scene.*/
+        QScrollBar *horScrollBar = view->horizontalScrollBar();
+        currentScene->setHorScrollBar(horScrollBar->value());
+        QScrollBar *verScrollBar = view->verticalScrollBar();
+        currentScene->setVerScrollBar(verScrollBar->value());
+
         currentScene = sceneDetails;
         view->setScene(sceneDetails);
+        /*Set value for current scene scroll bar.*/
+        horScrollBar = view->horizontalScrollBar();
+        horScrollBar->setValue(currentScene->getHorScrollBar());
+        verScrollBar = view->verticalScrollBar();
+        verScrollBar->setValue(currentScene->getVerScrollBar());
         mode = Draw::Modeling;
     } else {
         ui->actionDetails->setChecked(true);
