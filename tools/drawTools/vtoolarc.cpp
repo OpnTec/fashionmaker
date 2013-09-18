@@ -1,6 +1,27 @@
+/****************************************************************************
+ **
+ **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **
+ **  This file is part of Valentina.
+ **
+ **  Tox is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Tox is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
+ **
+ ****************************************************************************/
+
 #include "vtoolarc.h"
 #include <QMenu>
-#include "../../container/calculator.h"
+#include "container/calculator.h"
 
 VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
                    QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),

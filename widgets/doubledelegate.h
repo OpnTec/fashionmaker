@@ -38,37 +38,30 @@
  **
  ****************************************************************************/
 
- #ifndef DOUBLEDELEGATE_H
- #define DOUBLEDELEGATE_H
+#ifndef DOUBLEDELEGATE_H
+#define DOUBLEDELEGATE_H
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
- #include <QItemDelegate>
- #include <QModelIndex>
- #include <QObject>
- #include <QSize>
- #include <QSpinBox>
-#pragma GCC diagnostic pop
+#include <QItemDelegate>
+#include <QModelIndex>
+#include <QObject>
+#include <QSize>
+#include <QSpinBox>
 
- class DoubleSpinBoxDelegate : public QItemDelegate
- {
-     Q_OBJECT
+class DoubleSpinBoxDelegate : public QItemDelegate{
+    Q_OBJECT
 
- public:
-     DoubleSpinBoxDelegate(QObject *parent = 0);
+public:
+    DoubleSpinBoxDelegate(QObject *parent = 0);
 
-     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                           const QModelIndex &index) const;
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                          const QModelIndex &index) const;
 
-     void setEditorData(QWidget *editor, const QModelIndex &index) const;
-     void setModelData(QWidget *editor, QAbstractItemModel *model,
-                       const QModelIndex &index) const;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model,
+                      const QModelIndex &index) const;
 
-     void updateEditorGeometry(QWidget *editor,
-         const QStyleOptionViewItem &option, const QModelIndex &index) const;
- };
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
+                              const QModelIndex &index) const;
+};
 
- #endif
+#endif
