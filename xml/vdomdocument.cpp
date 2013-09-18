@@ -767,8 +767,13 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         spl.setMode(typeObject);
         spl.setIdObject(idObject);
         data->UpdateModelingSpline(id, spl);
-        data->IncrementReferens(spl.GetP1(), Scene::Point, Draw::Modeling);
-        data->IncrementReferens(spl.GetP4(), Scene::Point, Draw::Modeling);
+        if(typeObject == Draw::Calculation){
+            data->IncrementReferens(spl.GetP1(), Scene::Point, Draw::Calculation);
+            data->IncrementReferens(spl.GetP4(), Scene::Point, Draw::Calculation);
+        } else {
+            data->IncrementReferens(spl.GetP1(), Scene::Point, Draw::Modeling);
+            data->IncrementReferens(spl.GetP4(), Scene::Point, Draw::Modeling);
+        }
         return;
     }
     if(type == "modelingPath"){
@@ -789,7 +794,11 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         data->UpdateModelingSplinePath(id, path);
         const QVector<VSplinePoint> *points = path.GetPoint();
         for(qint32 i = 0; i<points->size(); ++i){
-            data->IncrementReferens(points->at(i).P(), Scene::Point, Draw::Modeling);
+            if(typeObject == Draw::Calculation){
+                data->IncrementReferens(points->at(i).P(), Scene::Point, Draw::Calculation);
+            } else {
+                data->IncrementReferens(points->at(i).P(), Scene::Point, Draw::Modeling);
+            }
         }
         return;
     }
