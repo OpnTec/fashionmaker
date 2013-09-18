@@ -11,7 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Curve</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -23,7 +30,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Перша точка </string>
+            <string>First point</string>
            </property>
           </widget>
          </item>
@@ -37,7 +44,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Коефіцієнт довжини першої контрольної точки</string>
+            <string>Length ratio of the first control point</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -58,7 +65,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Кут першої контрольної точки</string>
+            <string>The angle of the first control point</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -83,7 +90,7 @@
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>Друга точка</string>
+            <string>Second point</string>
            </property>
           </widget>
          </item>
@@ -97,7 +104,7 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Коефіцієнт довжини другої контрольної точки</string>
+            <string>Length ratio of the second control point</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -118,7 +125,7 @@
          <item>
           <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>Кут другої контрольної точки</string>
+            <string>The angle of the second control point</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -155,7 +162,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Коефіцієнт кривизни сплайну</string>
+        <string>Coefficient of curvature of the curve</string>
        </property>
       </widget>
      </item>
@@ -192,7 +199,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

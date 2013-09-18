@@ -11,14 +11,30 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Створення розкладки</string>
+   <string>Create a layout</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="sizeConstraint">
      <enum>QLayout::SetMinAndMaxSize</enum>
     </property>
-    <property name="margin">
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="topMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
+    <property name="bottomMargin">
      <number>9</number>
     </property>
    </layout>
@@ -63,10 +79,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Зберегти</string>
+    <string>Save</string>
    </property>
    <property name="toolTip">
-    <string>Зберегти розкладку</string>
+    <string>Save layout</string>
    </property>
   </action>
   <action name="actionNext">
@@ -76,10 +92,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Наступна</string>
+    <string>Next</string>
    </property>
    <property name="toolTip">
-    <string>Наступна деталь</string>
+    <string>Next detail</string>
    </property>
   </action>
   <action name="actionTurn">
@@ -92,10 +108,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Перевернути</string>
+    <string>Turn</string>
    </property>
    <property name="toolTip">
-    <string>Перевернути деталь на 180 градусів</string>
+    <string>Turn the detail 180 degrees</string>
    </property>
   </action>
   <action name="actionStop">
@@ -108,7 +124,7 @@
     <string>Stop</string>
    </property>
    <property name="toolTip">
-    <string>Припинити укладання</string>
+    <string>Stop laying</string>
    </property>
   </action>
   <action name="actionAdd">
@@ -118,10 +134,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Збільшити лист</string>
+    <string>Enlarge letter</string>
    </property>
    <property name="toolTip">
-    <string>Збільшити довжину листа</string>
+    <string>Enlarge the length of sheet</string>
    </property>
   </action>
   <action name="actionRemove">
@@ -134,10 +150,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Зменшити лист</string>
+    <string>Reduce sheet</string>
    </property>
    <property name="toolTip">
-    <string>Зменшити довжину листа</string>
+    <string>Reduce the length of the sheet</string>
    </property>
   </action>
   <action name="actionMirror">
@@ -149,10 +165,10 @@
      <normaloff>:/icon/16x16/mirror.png</normaloff>:/icon/16x16/mirror.png</iconset>
    </property>
    <property name="text">
-    <string>Відзеркалити</string>
+    <string>Mirroring</string>
    </property>
    <property name="toolTip">
-    <string>Дзеркальне зображення деталі</string>
+    <string>Mirroring</string>
    </property>
   </action>
   <action name="actionZoomIn">
@@ -162,10 +178,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Збільшити</string>
+    <string>Zoom In</string>
    </property>
    <property name="toolTip">
-    <string>Збільшити</string>
+    <string>Zoom In</string>
    </property>
   </action>
   <action name="actionZoomOut">
@@ -175,7 +191,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Зменшити</string>
+    <string>Zoom Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom Out</string>
    </property>
   </action>
  </widget>

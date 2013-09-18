@@ -79,12 +79,12 @@ void MainWindow::ActionNewDraw(){
     QString nameDraw;
     bool bOk;
     qint32 index;
-    QString nDraw = QString("Креслення %1").arg(comboBoxDraws->count()+1);
+    QString nDraw = QString(tr("Drawing %1")).arg(comboBoxDraws->count()+1);
     QInputDialog *dlg = new QInputDialog(this);
     dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText("Креслення:");
+    dlg->setLabelText(tr("Drawing:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle("Введіть назву креслення.");
+    dlg->setWindowTitle(tr("Enter a name for the drawing."));
     dlg->resize(300,100);
     dlg->setTextValue(nDraw);
     while(1){
@@ -96,7 +96,7 @@ void MainWindow::ActionNewDraw(){
         }
         index = comboBoxDraws->findText(nameDraw);
         if(index != -1){//we already have this name
-            qCritical()<<"Помилка. Креслення з таким ім'ям вже існує.";
+            qCritical()<<tr("Error. Drawing of same name already exists.");
         } else {
             break;
         }
@@ -104,8 +104,8 @@ void MainWindow::ActionNewDraw(){
     delete dlg;
     bOk = doc->appendDraw(nameDraw);
     if(bOk == false){
-        qCritical()<<"Помилка створення креслення з ім'ям"<<nameDraw<<".";
-        return;//не змогли додати креслення.
+        qCritical()<<tr("Error creating drawing with the name")<<nameDraw<<".";
+        return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &MainWindow::currentDrawChanged);
@@ -138,9 +138,9 @@ void MainWindow::OptionDraw(){
     QString nDraw = doc->GetNameActivDraw();
     QInputDialog *dlg = new QInputDialog(this);
     dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText("Креслення:");
+    dlg->setLabelText(tr("Drawing:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle("Введіть нову назву креслення.");
+    dlg->setWindowTitle(tr("Enter a new name for the drawing."));
     dlg->resize(300,100);
     dlg->setTextValue(nDraw);
     while(1){
@@ -152,7 +152,7 @@ void MainWindow::OptionDraw(){
         }
         index = comboBoxDraws->findText(nameDraw);
         if(index != -1){//we already have this name
-            qCritical()<<"Помилка. Креслення з таким ім'ям вже існує.";
+            qCritical()<<tr("Error. Drawing of same name already exists.");
         } else {
             break;
         }
@@ -428,12 +428,12 @@ void MainWindow::showEvent( QShowEvent *event ){
     // do your init stuff here
     MinimumScrollBar();
 
-    isInitialized = true;//перший показ вікна вже відбувся
+    isInitialized = true;//first show windows are held
 }
 
 void MainWindow::ToolBarOption(){
     QLabel * labelGrowth = new QLabel;
-    labelGrowth->setText("Зріст: ");
+    labelGrowth->setText(tr("Growth: "));
     ui->toolBarOption->addWidget(labelGrowth);
 
     QStringList list;
@@ -449,7 +449,7 @@ void MainWindow::ToolBarOption(){
             this, &MainWindow::ChangedGrowth);
 
     QLabel * labelSize = new QLabel;
-    labelSize->setText(" Розмір: ");
+    labelSize->setText(tr(" Size: "));
     ui->toolBarOption->addWidget(labelSize);
 
     list.clear();
@@ -473,7 +473,7 @@ void MainWindow::ToolBarOption(){
 
 void MainWindow::ToolBarDraws(){
     QLabel * labelNameDraw = new QLabel;
-    labelNameDraw ->setText("Креслення: ");
+    labelNameDraw ->setText(tr("Drawing: "));
     ui->toolBarDraws->addWidget(labelNameDraw);
 
     comboBoxDraws = new QComboBox;
@@ -707,8 +707,8 @@ void MainWindow::ActionSave(){
 }
 
 void MainWindow::ActionOpen(){
-    QString filter("Lekalo files (*.xml)");
-    QString fName = QFileDialog::getOpenFileName(this, tr("Відкрити файл"), QDir::homePath(), filter);
+    QString filter(tr("Lekalo files (*.xml)"));
+    QString fName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
     if(fName.isEmpty())
         return;
     fileName = fName;

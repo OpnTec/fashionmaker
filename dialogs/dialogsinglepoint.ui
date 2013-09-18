@@ -14,7 +14,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Параметри точки</string>
+   <string>Single point</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <property name="modal">
    <bool>false</bool>
@@ -35,14 +42,14 @@
     <item row="1" column="1">
      <widget class="QLabel" name="labelYCor">
       <property name="text">
-       <string>Y координата</string>
+       <string>Y coordinate</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
      <widget class="QLabel" name="labelXCor">
       <property name="text">
-       <string>Х координата</string>
+       <string>X coordinate</string>
       </property>
      </widget>
     </item>
@@ -64,7 +71,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Ім'я точки</string>
+    <string>Point name</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEditName">
@@ -103,7 +110,9 @@
   <tabstop>doubleSpinBoxY</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

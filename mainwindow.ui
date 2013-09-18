@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>Valentina</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="Saho" country="Eritrea"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
@@ -37,7 +44,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>144</width>
+         <width>150</width>
          <height>104</height>
         </rect>
        </property>
@@ -48,7 +55,7 @@
         </sizepolicy>
        </property>
        <attribute name="label">
-        <string>Точка</string>
+        <string>Point</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="1" column="0">
@@ -196,7 +203,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -207,7 +214,7 @@
         </sizepolicy>
        </property>
        <attribute name="label">
-        <string>Лінія</string>
+        <string>Line</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -263,7 +270,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -274,7 +281,7 @@
         </sizepolicy>
        </property>
        <attribute name="label">
-        <string>Сплайн</string>
+        <string>Curve</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -330,7 +337,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -341,7 +348,7 @@
         </sizepolicy>
        </property>
        <attribute name="label">
-        <string>Дуга</string>
+        <string>Arc</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
@@ -379,7 +386,7 @@
         </rect>
        </property>
        <attribute name="label">
-        <string>Деталі</string>
+        <string>Detail</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -488,10 +495,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Новий</string>
+    <string>New</string>
    </property>
    <property name="toolTip">
-    <string>Створити нове лекало</string>
+    <string>Create a new pattern</string>
    </property>
   </action>
   <action name="actionOpen">
@@ -501,10 +508,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Відкрити</string>
+    <string>Open</string>
    </property>
    <property name="toolTip">
-    <string>Відкрити файл з лекалом</string>
+    <string>Open file with pattern</string>
    </property>
   </action>
   <action name="actionSave">
@@ -517,10 +524,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Зберегти</string>
+    <string>Save</string>
    </property>
    <property name="toolTip">
-    <string>Зберегти лекало</string>
+    <string>Save pattern</string>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -533,10 +540,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Зберегти як</string>
+    <string>Save as</string>
    </property>
    <property name="toolTip">
-    <string>Зберегти ще не збережене лекало</string>
+    <string>Save not yet saved pattern</string>
    </property>
   </action>
   <action name="actionDraw">
@@ -554,10 +561,10 @@
      <normaloff>:/icon/32x32/draw.png</normaloff>:/icon/32x32/draw.png</iconset>
    </property>
    <property name="text">
-    <string>Креслення</string>
+    <string>Draw</string>
    </property>
    <property name="toolTip">
-    <string>Режим креслення</string>
+    <string>Draw mode</string>
    </property>
   </action>
   <action name="actionDetails">
@@ -572,10 +579,10 @@
      <normaloff>:/icon/32x32/kontur.png</normaloff>:/icon/32x32/kontur.png</iconset>
    </property>
    <property name="text">
-    <string>Деталі</string>
+    <string>Details</string>
    </property>
    <property name="toolTip">
-    <string>Режим деталі</string>
+    <string>Deatils mode</string>
    </property>
   </action>
   <action name="actionArrowTool">
@@ -590,10 +597,10 @@
      <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
    </property>
    <property name="text">
-    <string>Інструмент вказівник</string>
+    <string>Tools pointer</string>
    </property>
    <property name="toolTip">
-    <string>Інструмент вказівник</string>
+    <string>Tools pointer</string>
    </property>
   </action>
   <action name="actionNewDraw">
@@ -602,10 +609,10 @@
      <normaloff>:/icon/32x32/new_draw.png</normaloff>:/icon/32x32/new_draw.png</iconset>
    </property>
    <property name="text">
-    <string>Нове креслення</string>
+    <string>New drawing</string>
    </property>
    <property name="toolTip">
-    <string>Додати нове креслення</string>
+    <string>Add new drawing</string>
    </property>
   </action>
   <action name="actionOptionDraw">
@@ -614,7 +621,10 @@
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
-    <string>Змінити ім'я креслення</string>
+    <string>Change the name of drawing</string>
+   </property>
+   <property name="toolTip">
+    <string>Change the name of drawing</string>
    </property>
   </action>
   <action name="actionTable">
@@ -626,7 +636,10 @@
      <normaloff>:/icon/32x32/table.png</normaloff>:/icon/32x32/table.png</iconset>
    </property>
    <property name="text">
-    <string>Таблиці змінних</string>
+    <string>Table of variables</string>
+   </property>
+   <property name="toolTip">
+    <string>Tables of variables</string>
    </property>
   </action>
   <action name="actionHistory">
@@ -647,7 +660,10 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Розкладка</string>
+    <string>Layout</string>
+   </property>
+   <property name="toolTip">
+    <string>Create layout</string>
    </property>
   </action>
  </widget>
