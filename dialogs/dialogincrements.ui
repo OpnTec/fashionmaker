@@ -11,7 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Increments</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -20,11 +27,11 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tabStandart">
       <attribute name="title">
-       <string>Табличні розміри</string>
+       <string>Table sizes</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
@@ -73,32 +80,32 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Позначення</string>
+           <string>Denotation</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Розраховане знач.</string>
+           <string>The calculated value</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Базове знач.</string>
+           <string>Base value</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>В розмірах</string>
+           <string>In sizes</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>В ростах</string>
+           <string>In growths</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Опис</string>
+           <string>Description</string>
           </property>
          </column>
         </widget>
@@ -107,7 +114,7 @@
      </widget>
      <widget class="QWidget" name="tabIncrements">
       <attribute name="title">
-       <string>Прибавки</string>
+       <string>Increments</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0" colspan="3">
@@ -147,32 +154,32 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Позначення</string>
+           <string>Denotation</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Розраховане знач.</string>
+           <string>The calculated value</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Базове знач.</string>
+           <string>Base value</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>В розмірах</string>
+           <string>In size</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>В ростах</string>
+           <string>In growth</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Опис</string>
+           <string>Description</string>
           </property>
          </column>
         </widget>
@@ -208,7 +215,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Лінії</string>
+       <string>Lines</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
@@ -230,12 +237,12 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Лінія</string>
+           <string>Line</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Довжина лінії</string>
+           <string>Length of the line</string>
           </property>
          </column>
         </widget>
@@ -244,7 +251,7 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Сплайни</string>
+       <string>Curves</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
@@ -266,12 +273,12 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Сплайн</string>
+           <string>Curve</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Довжина сплайну</string>
+           <string>Length of the curve</string>
           </property>
          </column>
         </widget>
@@ -280,7 +287,7 @@
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Дуги</string>
+       <string>Arcs</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
@@ -302,12 +309,12 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Дуга</string>
+           <string>Arc</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Довжина дуги</string>
+           <string>Length of arc</string>
           </property>
          </column>
         </widget>
@@ -331,7 +338,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -224,3 +224,12 @@ CONFIG(debug, debug|release){
     # Release
     QMAKE_CXXFLAGS += -O1 -std=c++0x
 }
+
+TRANSLATIONS += translations/valentina_ru.ts \
+                translations/valentina_uk.ts
+
+QMAKE_EXTRA_COMPILERS += lrelease
+lrelease.input         = TRANSLATIONS
+lrelease.output        = ${QMAKE_FILE_BASE}.qm
+lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm ${DESTDIR}${QMAKE_FILE_BASE}.qm
+lrelease.CONFIG       += no_link target_predeps

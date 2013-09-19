@@ -14,7 +14,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>History</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -44,7 +51,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Інструмент</string>
+       <string>Tool</string>
       </property>
      </column>
     </widget>
@@ -61,7 +68,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

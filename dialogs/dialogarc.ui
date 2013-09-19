@@ -11,7 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Arc</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -25,7 +32,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Радіус</string>
+        <string>Radius</string>
        </property>
       </widget>
      </item>
@@ -105,7 +112,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Перший кут градус</string>
+        <string>First angle degree</string>
        </property>
       </widget>
      </item>
@@ -185,7 +192,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Другий кут градус</string>
+        <string>Second angle degree</string>
        </property>
       </widget>
      </item>
@@ -269,7 +276,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Центр</string>
+            <string>Center point</string>
            </property>
           </widget>
          </item>
@@ -283,14 +290,14 @@
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Вхідні данні</string>
+            <string>Input data</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
            <property name="text">
-            <string>Розмір і зріст</string>
+            <string>Size and growth</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -300,14 +307,14 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Стандартна таблиця</string>
+            <string>Standart table</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonIncrements">
            <property name="text">
-            <string>Прибавки</string>
+            <string>Increments</string>
            </property>
           </widget>
          </item>
@@ -317,7 +324,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Довжини ліній</string>
+            <string>Length of lines</string>
            </property>
           </widget>
          </item>
@@ -327,7 +334,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Довжини дуг</string>
+            <string>Length of arcs</string>
            </property>
           </widget>
          </item>
@@ -337,7 +344,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Довжини сплайнів</string>
+            <string>Length of arcs</string>
            </property>
           </widget>
          </item>
@@ -347,7 +354,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Кути ліній</string>
+            <string>Angle of lines</string>
            </property>
           </widget>
          </item>

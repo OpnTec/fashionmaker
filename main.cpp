@@ -49,6 +49,16 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 int main(int argc, char *argv[]){
     qInstallMessageHandler(myMessageOutput);
     QApplication app(argc, argv);
+
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+
+    QTranslator appTranslator;
+    appTranslator.load("valentina_" + QLocale::system().name(),".");
+    app.installTranslator(&appTranslator);
+
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
     TableWindow table;
