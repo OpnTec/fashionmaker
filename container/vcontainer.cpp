@@ -22,6 +22,7 @@
 #include "vcontainer.h"
 #include <QDebug>
 #include "options.h"
+#include <exception/vexceptionbadid.h>
 
 qint64 VContainer::_id = 0;
 
@@ -80,8 +81,7 @@ val VContainer::GetObject(const QMap<key,val> &obj, key id){
     if(obj.contains(id)){
         return obj.value(id);
     } else {
-        qCritical()<<"Не можу знайти key = "<<id<<" в таблиці.";
-        throw"Не можу знайти об'єкт за ключем.";
+        throw VExceptionBadId(tr("Can't find object"), id);
     }
 }
 

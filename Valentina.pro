@@ -87,7 +87,14 @@ SOURCES += main.cpp\
     tools/modelingTools/vmodelingpointofcontact.cpp \
     tools/modelingTools/vmodelingshoulderpoint.cpp \
     tools/modelingTools/vmodelingspline.cpp \
-    tools/modelingTools/vmodelingsplinepath.cpp
+    tools/modelingTools/vmodelingsplinepath.cpp \
+    exception/vexception.cpp \
+    exception/vexceptionbadid.cpp \
+    exception/vexceptionwrongparameterid.cpp \
+    exception/vexceptionconversionerror.cpp \
+    exception/vexceptionemptyparameter.cpp \
+    exception/vexceptionobjecterror.cpp \
+    widgets/vapplication.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -170,7 +177,14 @@ HEADERS  += mainwindow.h \
     tools/modelingTools/vmodelingpointofcontact.h \
     tools/modelingTools/vmodelingshoulderpoint.h \
     tools/modelingTools/vmodelingspline.h \
-    tools/modelingTools/vmodelingsplinepath.h
+    tools/modelingTools/vmodelingsplinepath.h \
+    exception/vexception.h \
+    exception/vexceptionbadid.h \
+    exception/vexceptionwrongparameterid.h \
+    exception/vexceptionconversionerror.h \
+    exception/vexceptionemptyparameter.h \
+    exception/vexceptionobjecterror.h \
+    widgets/vapplication.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \

@@ -30,6 +30,11 @@
 #include <QFileDialog>
 #include <QDebug>
 #include "geometry/vspline.h"
+#include <QMessageBox>
+#include "exception/vexceptionobjecterror.h"
+#include "exception/vexceptionconversionerror.h"
+#include "exception/vexceptionemptyparameter.h"
+#include "exception/vexceptionwrongparameterid.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow), tool(Tools::ArrowTool), currentScene(0), sceneDraw(0),
@@ -732,17 +737,68 @@ void MainWindow::ActionOpen(){
     QString fName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
     if(fName.isEmpty())
         return;
-    fileName = fName;
-    QFileInfo info(fileName);
-    QString title(info.fileName());
-    title.append("-Valentina");
-    setWindowTitle(title);
-    QFile file(fileName);
+    QFile file(fName);
+    QString errorMsg;
+    qint32 errorLine = 0;
+    qint32 errorColumn = 0;
     if(file.open(QIODevice::ReadOnly)){
-        if(doc->setContent(&file)){
+        if(doc->setContent(&file, &errorMsg, &errorLine, &errorColumn)){
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
+            try{
             doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+            }
+            catch(const VExceptionObjectError &e){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Error parsing file."));
+                msgBox.setInformativeText(e.ErrorMessage());
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                msgBox.setDetailedText(e.DetailedInformation());
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+                file.close();
+                return;
+            }
+            catch(const VExceptionConversionError &e){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Error can't convert value."));
+                msgBox.setInformativeText(e.ErrorMessage());
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+                file.close();
+                return;
+            }
+            catch(const VExceptionEmptyParameter &e){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Error empty parameter."));
+                msgBox.setInformativeText(e.ErrorMessage());
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                msgBox.setDetailedText(e.DetailedInformation());
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+                file.close();
+                return;
+            }
+            catch(const VExceptionWrongParameterId &e){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Error wrong id."));
+                msgBox.setInformativeText(e.ErrorMessage());
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                msgBox.setDetailedText(e.DetailedInformation());
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+                file.close();
+                return;
+            }
             connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &MainWindow::currentDrawChanged);
             QString nameDraw = doc->GetNameActivDraw();
@@ -756,9 +812,26 @@ void MainWindow::ActionOpen(){
                 SetEnableTool(false);
             }
             SetEnableWidgets(true);
+        } else {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(tr("Error!"));
+            msgBox.setText(tr("Error parsing pattern file."));
+            msgBox.setInformativeText(errorMsg);
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.setDefaultButton(QMessageBox::Ok);
+            QString error = QString(tr("Error in line %1 column %2")).arg(errorLine, errorColumn);
+            msgBox.setDetailedText(error);
+            msgBox.exec();
+            file.close();
+            return;
         }
         file.close();
     }
+    fileName = fName;
+    QFileInfo info(fileName);
+    QString title(info.fileName());
+    title.append("-Valentina");
+    setWindowTitle(title);
 }
 
 void MainWindow::ActionNew(){

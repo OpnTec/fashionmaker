@@ -33,12 +33,14 @@
 #include "geometry/vsplinepath.h"
 #include "geometry/vdetail.h"
 #include "widgets/vitem.h"
+#include <QCoreApplication>
 
 /**
  * @brief The VContainer class
  */
 class VContainer
 {
+    Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
     /**
                          * @brief VContainer
