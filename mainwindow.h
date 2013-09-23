@@ -49,6 +49,7 @@ class MainWindow : public QMainWindow
 public:
     explicit           MainWindow(QWidget *parent = 0);
                        ~MainWindow();
+    void               OpenPattern(const QString &fileName);
 public slots:
     void               mouseMove(QPointF scenePos);
     void               ActionAroowTool();
@@ -107,6 +108,7 @@ signals:
 protected:
     virtual void       keyPressEvent ( QKeyEvent * event );
     virtual void       showEvent( QShowEvent *event );
+    void               Clear();
 private:
     Ui::MainWindow     *ui;
     Tools::Enum        tool;

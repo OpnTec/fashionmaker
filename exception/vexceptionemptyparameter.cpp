@@ -23,8 +23,8 @@
 #include <QDebug>
 
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
-                                                   const QDomElement &domElement): VException(what), name(name),
-    tagText(QString()), tagName(QString()), lineNumber(-1){
+                                                   const QDomElement &domElement): VException(what),
+    name(name), tagText(QString()), tagName(QString()), lineNumber(-1){
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!name.isEmpty(), Q_FUNC_INFO, "Parameter name is empty");
     if(domElement.isText()){
@@ -36,7 +36,7 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
 }
 
 VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e):VException(e),
-    name(e.Name()), tagName(e.TagName()), tagText(e.TagText()), lineNumber(e.LineNumber()){
+    name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){
 }
 
 QString VExceptionEmptyParameter::ErrorMessage() const{
