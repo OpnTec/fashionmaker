@@ -226,6 +226,9 @@ UI_DIR = uic
 # Use Precompiled headers (PCH)
 PRECOMPILED_HEADER = stable.h
 
+TRANSLATIONS += translations/valentina_ru.ts \
+                translations/valentina_uk.ts
+
 CONFIG(debug, debug|release){
     # Debug
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
@@ -237,13 +240,14 @@ CONFIG(debug, debug|release){
 }else{
     # Release
     QMAKE_CXXFLAGS += -O1 -std=c++0x
+
+    QMAKE_EXTRA_COMPILERS += lrelease
+    lrelease.input         = TRANSLATIONS
+    lrelease.output        = ${QMAKE_FILE_BASE}.qm
+    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm ${DESTDIR}${QMAKE_FILE_BASE}.qm
+    lrelease.CONFIG       += no_link target_predeps
 }
 
-TRANSLATIONS += translations/valentina_ru.ts \
-                translations/valentina_uk.ts
 
-QMAKE_EXTRA_COMPILERS += lrelease
-lrelease.input         = TRANSLATIONS
-lrelease.output        = ${QMAKE_FILE_BASE}.qm
-lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm ${DESTDIR}${QMAKE_FILE_BASE}.qm
-lrelease.CONFIG       += no_link target_predeps
+
+
