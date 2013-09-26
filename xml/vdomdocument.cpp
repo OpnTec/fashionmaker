@@ -574,6 +574,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, this,
                                          data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(basePointId, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -599,6 +600,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
                                            this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(firstPointId, Scene::Point, mode);
+            data->IncrementReferens(secondPointId, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -625,6 +628,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx,
                                                my, this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(p1Line, Scene::Point, mode);
+            data->IncrementReferens(p2Line, Scene::Point, mode);
+            data->IncrementReferens(pShoulder, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -651,6 +657,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
                                         mx, my, this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(firstPointId, Scene::Point, mode);
+            data->IncrementReferens(secondPointId, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -677,6 +685,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
                                           name, mx, my, this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(firstPointId, Scene::Point, mode);
+            data->IncrementReferens(secondPointId, Scene::Point, mode);
+            data->IncrementReferens(thirdPointId, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -702,6 +713,10 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my,
                                                this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(p1Line1Id, Scene::Point, mode);
+            data->IncrementReferens(p2Line1Id, Scene::Point, mode);
+            data->IncrementReferens(p1Line2Id, Scene::Point, mode);
+            data->IncrementReferens(p2Line2Id, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -727,6 +742,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 VModelingPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx,
                                                 my, this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(center, Scene::Point, mode);
+            data->IncrementReferens(firstPointId, Scene::Point, mode);
+            data->IncrementReferens(secondPointId, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -777,6 +795,8 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
         } else {
             VModelingLine::Create(id, firstPoint, secondPoint, this, data, parse, Tool::FromFile);
         }
+        data->IncrementReferens(firstPoint, Scene::Point, mode);
+        data->IncrementReferens(secondPoint, Scene::Point, mode);
     }
     catch(const VExceptionBadId &e){
         VExceptionObjectError excep(tr("Error creating or updating line"), domElement);
@@ -807,6 +827,8 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                 VModelingSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, this,
                                         data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(point1, Scene::Point, mode);
+            data->IncrementReferens(point4, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -833,6 +855,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                         qint64 pSpline = GetParametrLongLong(element, "pSpline");
                         VSplinePoint splPoint(pSpline, kAsm1, angle, kAsm2);
                         path.append(splPoint);
+                        data->IncrementReferens(pSpline, Scene::Point, mode);
                     }
                 }
             }
@@ -933,6 +956,7 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             } else {
                 VModelingArc::Create(id, center, radius, f1, f2, this, data, parse, Tool::FromFile);
             }
+            data->IncrementReferens(center, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -958,6 +982,7 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             arc.setMode(typeObject);
             arc.setIdObject(idObject);
             data->UpdateModelingArc(id, arc);
+            data->IncrementReferens(idObject, Scene::Point, mode);
             return;
         }
         catch(const VExceptionBadId &e){
