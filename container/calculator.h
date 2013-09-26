@@ -48,8 +48,7 @@ public:
      */
     qreal eval(QString prog, QString *errorMsg);
 private:
-    Calculator(const Calculator &calc);
-    const Calculator &operator=(const Calculator &calc);
+    Q_DISABLE_COPY(Calculator)
     QString *errorMsg;
     /**
      * @brief token теперішня лексема.

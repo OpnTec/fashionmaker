@@ -54,6 +54,7 @@ public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Type type);
     virtual void     DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogSpline)
     Ui::DialogSpline *ui;
     qint32           number;
     qint64           p1;			// перша точка
@@ -63,8 +64,6 @@ private:
     qreal            kAsm1;
     qreal            kAsm2;
     qreal            kCurve;
-    DialogSpline(const DialogSpline &dialog);
-    const DialogSpline &operator=(const DialogSpline& dialog);
 };
 
 #endif // DIALOGSPLINE_H

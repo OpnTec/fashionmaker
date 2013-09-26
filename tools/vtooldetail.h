@@ -60,12 +60,11 @@ protected:
     QVariant                       itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
 private:
+    Q_DISABLE_COPY(VToolDetail)
     QSharedPointer<DialogDetail>   dialogDetail;
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
     void AddNode(QDomElement &domElement, VNodeDetail &node);
-                                   VToolDetail(const VToolDetail &tool);
-    VToolDetail                    &operator=(const VToolDetail &tool);
 };
 
 #endif // VTOOLDETAIL_H

@@ -58,6 +58,7 @@ public slots:
     virtual void      ChoosedObject(qint64 id, Scene::Type type);
     virtual void      DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogBisector)
     Ui::DialogBisector *ui;
     qint32             number;
     QString            pointName;
@@ -66,8 +67,6 @@ private:
     qint64             firstPointId;
     qint64             secondPointId;
     qint64             thirdPointId;
-    DialogBisector(const DialogBisector &dialog);
-    const DialogBisector &operator=(const DialogBisector& dialog);
 };
 
 #endif // DIALOGBISECTOR_H

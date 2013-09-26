@@ -82,6 +82,7 @@ public slots:
     void        haveLiteChange();
     void        ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
 private:
+    Q_DISABLE_COPY(VDomDocument)
     QMap<QString, QDomElement> map;
     QString     nameActivDraw;
     VContainer  *data;
@@ -90,8 +91,6 @@ private:
     qint64 cursor;
     QComboBox *comboBoxDraws;
     Draw::Mode          *mode;
-                VDomDocument(const VDomDocument & doc);
-    const VDomDocument &operator=(const VDomDocument& doc);
     bool        find(QDomElement node, const QString& id);
     bool        CheckNameDraw(const QString& name) const;
     void        SetActivDraw(const QString& name);

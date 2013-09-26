@@ -54,6 +54,7 @@ public slots:
     virtual void            ChoosedObject(qint64 id, Scene::Type type);
     virtual void            DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogPointOfContact)
     Ui::DialogPointOfContact ui;
     qint32                  number;
     QString                 pointName;
@@ -61,8 +62,6 @@ private:
     qint64                  center;
     qint64                  firstPoint;
     qint64                  secondPoint;
-    DialogPointOfContact(const DialogPointOfContact &dialog);
-    const DialogPointOfContact &operator=(const DialogPointOfContact& dialog);
 };
 
 #endif // DIALOGPOINTOFCONTACT_H

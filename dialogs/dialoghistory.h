@@ -46,6 +46,7 @@ signals:
 protected:
     virtual void     closeEvent ( QCloseEvent * event );
 private:
+    Q_DISABLE_COPY(DialogHistory)
     Ui::DialogHistory *ui;
     VDomDocument *doc;
     qint32 cursorRow;
@@ -54,8 +55,6 @@ private:
     QString Record(const VToolRecord &tool);
     void InitialTable();
     void ShowPoint();
-    DialogHistory(const DialogHistory &dialog);
-    const DialogHistory &operator=(const DialogHistory& dialog);
 };
 
 #endif // DIALOGHISTORY_H

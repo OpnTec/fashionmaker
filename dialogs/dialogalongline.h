@@ -52,6 +52,7 @@ public slots:
     virtual void        ChoosedObject(qint64 id, Scene::Type type);
     virtual void        DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogAlongLine)
     Ui::DialogAlongLine *ui;
     qint32              number;
     QString             pointName;
@@ -59,8 +60,6 @@ private:
     QString             formula;
     qint64              firstPointId;
     qint64              secondPointId;
-    DialogAlongLine(const DialogAlongLine &dialog);
-    const DialogAlongLine &operator=(const DialogAlongLine& dialog);
 };
 
 #endif // DIALOGALONGLINE_H

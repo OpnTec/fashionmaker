@@ -61,6 +61,7 @@ public slots:
 protected:
     virtual void     CheckState();
 private:
+    Q_DISABLE_COPY(DialogArc)
     Ui::DialogArc    *ui;
     bool             flagRadius;
     bool             flagF1;
@@ -76,8 +77,6 @@ private:
     void             EvalF1();
     void             EvalF2();
     void             ShowLineArcs();
-    DialogArc(const DialogArc &dialog);
-    const DialogArc &operator=(const DialogArc& dialog);
 };
 
 #endif // DIALOGARC_H

@@ -57,6 +57,7 @@ public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Type type);
     virtual void     DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogNormal)
     Ui::DialogNormal *ui;
     qint32           number;
     QString          pointName;
@@ -65,8 +66,6 @@ private:
     qreal            angle;
     qint64           firstPointId;
     qint64           secondPointId;
-    DialogNormal(const DialogNormal &dialog);
-    const DialogNormal &operator=(const DialogNormal& dialog);
 };
 
 #endif // DIALOGNORMAL_H

@@ -65,7 +65,6 @@ protected:
     void                  AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     const VContainer      *getData() const;
 private:
-                          VAbstractTool(const VAbstractTool &tool);
-    const VAbstractTool   &operator=(const VAbstractTool &tool);
+    Q_DISABLE_COPY(VAbstractTool)
 };
 #endif // VABSTRACTTOOL_H

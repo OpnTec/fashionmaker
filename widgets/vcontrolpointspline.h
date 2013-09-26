@@ -49,8 +49,7 @@ protected:
     virtual void          hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     QVariant              itemChange ( GraphicsItemChange change, const QVariant &value );
 private:
-    VControlPointSpline(const VControlPointSpline &pSpl);
-    const VControlPointSpline &operator=(const VControlPointSpline &pSpl);
+    Q_DISABLE_COPY(VControlPointSpline)
     qint32                indexSpline;
     SplinePoint::Position position;
     qint32                LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,

@@ -54,6 +54,7 @@ public slots:
     virtual void            ChoosedObject(qint64 id, Scene::Type type);
     virtual void            DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogShoulderPoint)
     Ui::DialogShoulderPoint *ui;
     qint32                  number;
     QString                 pointName;
@@ -62,8 +63,6 @@ private:
     qint64                  p1Line;
     qint64                  p2Line;
     qint64                  pShoulder;
-    DialogShoulderPoint(const DialogShoulderPoint &dialog);
-    const DialogShoulderPoint &operator=(const DialogShoulderPoint& dialog);
 };
 
 #endif // DIALOGSHOULDERPOINT_H

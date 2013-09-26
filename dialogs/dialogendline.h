@@ -55,14 +55,13 @@ public slots:
     virtual void      ChoosedObject(qint64 id, Scene::Type type);
     virtual void      DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogEndLine)
     Ui::DialogEndLine *ui;
     QString           pointName;
     QString           typeLine;
     QString           formula;
     qreal             angle;
     qint64            basePointId;
-    DialogEndLine(const DialogEndLine &dialog);
-    const DialogEndLine &operator=(const DialogEndLine& dialog);
 };
 
 #endif // DIALOGENDLINE_H

@@ -53,6 +53,7 @@ public slots:
     void                    P1Line2Changed( int index);
     void                    P2Line2Changed( int index);
 private:
+    Q_DISABLE_COPY(DialogLineIntersect)
     Ui::DialogLineIntersect *ui;
     qint32                  number;
     QString                 pointName;
@@ -63,8 +64,6 @@ private:
     bool                    flagPoint;
     virtual void            CheckState();
     bool                    CheckIntersecion();
-    DialogLineIntersect(const DialogLineIntersect &dialog);
-    const DialogLineIntersect &operator=(const DialogLineIntersect& dialog);
 };
 
 #endif // DIALOGLINEINTERSECT_H

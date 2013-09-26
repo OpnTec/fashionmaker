@@ -47,12 +47,11 @@ public slots:
     void             ChoosedObject(qint64 id, Scene::Type type);
     virtual void     DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogLine)
     Ui::DialogLine   *ui;
     qint32           number;
     qint64           firstPoint;
     qint64           secondPoint;
-    DialogLine(const DialogLine &dialog);
-    const DialogLine &operator=(const DialogLine& dialog);
 };
 
 #endif // DIALOGLINE_H

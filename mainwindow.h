@@ -111,6 +111,7 @@ protected:
     virtual void       closeEvent( QCloseEvent * event );
     void               Clear();
 private:
+    Q_DISABLE_COPY(MainWindow)
     Ui::MainWindow     *ui;
     Tools::Enum        tool;
     VMainGraphicsScene *currentScene;
@@ -140,8 +141,6 @@ private:
     QString            fileName;
     bool               changeInFile;
     Draw::Mode         mode;
-                       MainWindow(const MainWindow &window);
-    const              MainWindow &operator=(const MainWindow &window);
     void               ToolBarOption();
     void               ToolBarDraws();
     void               CanselTool();

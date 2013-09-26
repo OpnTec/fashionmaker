@@ -69,6 +69,7 @@ public slots:
     virtual void     ValChenged(int row);
     void             UpdateList();
 protected:
+    Q_DISABLE_COPY(DialogTool)
     const VContainer *data;
     bool             isInitialized;
     bool             flagName;
@@ -102,8 +103,6 @@ protected:
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
     qint64           getCurrentPointId(QComboBox *box) const;
-                     DialogTool(const DialogTool &dialog);
-    DialogTool       &operator=(const DialogTool &dialog);
 };
 
 #endif // DIALOGTOOL_H

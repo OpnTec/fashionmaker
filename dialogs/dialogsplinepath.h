@@ -49,14 +49,13 @@ public slots:
     void             KAsm1Changed(qreal d);
     void             KAsm2Changed(qreal d);
 private:
+    Q_DISABLE_COPY(DialogSplinePath)
     Ui::DialogSplinePath *ui;
     VSplinePath      path;
     void             NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
     void             DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void             EnableFields();
     void             SetAngle(qint32 angle);
-    DialogSplinePath(const DialogSplinePath &dialog);
-    const DialogSplinePath &operator=(const DialogSplinePath& dialog);
 };
 
 #endif // DIALOGSPLINEPATH_H
