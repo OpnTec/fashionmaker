@@ -11,6 +11,7 @@ QT       += core gui widgets xml svg printsupport
 TARGET = Valentina
 TEMPLATE = app
 CONFIG -= debug_and_release debug_and_release_target
+CONFIG += c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -236,10 +237,10 @@ CONFIG(debug, debug|release){
                       -isystem "/usr/include/qt5/QtCore" -O0 -Wall -Wextra -pedantic -Weffc++ \
                       -isystem "$$OUT_PWD/uic" \
                       -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast \
-                      -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -std=c++0x
+                      -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code
 }else{
     # Release
-    QMAKE_CXXFLAGS += -O1 -std=c++0x
+    QMAKE_CXXFLAGS += -O1
 
     QMAKE_EXTRA_COMPILERS += lrelease
     lrelease.input         = TRANSLATIONS
