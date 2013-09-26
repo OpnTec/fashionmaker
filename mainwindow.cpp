@@ -155,6 +155,7 @@ void MainWindow::ActionNewDraw(){
     VDrawTool::AddRecord(id, Tools::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
+    changeInFile = true;
 }
 
 void MainWindow::OptionDraw(){
@@ -455,6 +456,41 @@ void MainWindow::showEvent( QShowEvent *event ){
     MinimumScrollBar();
 
     isInitialized = true;//first show windows are held
+}
+
+void MainWindow::closeEvent(QCloseEvent *event){
+    if(changeInFile == true){
+        QMessageBox msgBox;
+        msgBox.setText("The pattern has been modified.");
+        msgBox.setInformativeText("Do you want to save your changes?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setIcon(QMessageBox::Question);
+        int ret = msgBox.exec();
+        switch (ret) {
+        case QMessageBox::Save:
+            // Save was clicked
+            if(fileName.isEmpty()){
+                ActionSaveAs();
+            } else {
+                ActionSave();
+            }
+            event->accept();
+            break;
+        case QMessageBox::Discard:
+            // Don't Save was clicked
+            event->accept();
+            break;
+        case QMessageBox::Cancel:
+            // Cancel was clicked
+            event->ignore();
+            break;
+        default:
+            // should never be reached
+            event->accept();
+            break;
+        }
+    }
 }
 
 void MainWindow::ToolBarOption(){

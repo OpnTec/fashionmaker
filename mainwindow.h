@@ -108,6 +108,7 @@ signals:
 protected:
     virtual void       keyPressEvent ( QKeyEvent * event );
     virtual void       showEvent( QShowEvent *event );
+    virtual void       closeEvent( QCloseEvent * event );
     void               Clear();
 private:
     Ui::MainWindow     *ui;
