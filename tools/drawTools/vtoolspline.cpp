@@ -89,7 +89,7 @@ void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScen
 
 void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                         VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
+                         VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                          Tool::Enum typeCreation){
     VSpline spline = VSpline(data->DataPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
     qint64 id = _id;
@@ -107,7 +107,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
-    VDrawTool::AddRecord(id, Tools::SplineTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
     if(parse == Document::FullParse){
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);

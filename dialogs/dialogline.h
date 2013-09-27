@@ -36,7 +36,7 @@ class DialogLine : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit         DialogLine(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit         DialogLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
                      ~DialogLine();   
     qint64           getFirstPoint() const;
@@ -44,7 +44,7 @@ public:
     qint64           getSecondPoint() const;
     void             setSecondPoint(const qint64 &value);
 public slots:
-    void             ChoosedObject(qint64 id, Scene::Type type);
+    void             ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogLine)

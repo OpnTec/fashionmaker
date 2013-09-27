@@ -43,7 +43,7 @@ public:
                                      const qint64 &secondPointId, const qint64 &thirdPointId,
                                      const QString &typeLine, const QString &pointName, const qreal &mx,
                                      const qreal &my, VDomDocument *doc, VContainer *data,
-                                     Document::Enum parse, Tool::Enum typeCreation);
+                                     const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

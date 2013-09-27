@@ -22,7 +22,7 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
-DialogBisector::DialogBisector(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0){
     ui->setupUi(this);
@@ -64,7 +64,7 @@ DialogBisector::~DialogBisector(){
     delete ui;
 }
 
-void DialogBisector::ChoosedObject(qint64 id, Scene::Type type){
+void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

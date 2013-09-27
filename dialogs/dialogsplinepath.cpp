@@ -23,7 +23,7 @@
 #include "ui_dialogsplinepath.h"
 #include "geometry/vsplinepoint.h"
 
-DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -68,7 +68,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value){
 }
 
 
-void DialogSplinePath::ChoosedObject(qint64 id, Scene::Type type){
+void DialogSplinePath::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

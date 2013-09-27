@@ -26,7 +26,7 @@
 #include "container/vpointf.h"
 #include "container/calculator.h"
 
-DialogEndLine::DialogEndLine(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
     formula(QString()), angle(0), basePointId(0){
     ui->setupUi(this);
@@ -79,7 +79,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Mode mode, QWidget *p
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(qint64 id, Scene::Type type){
+void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

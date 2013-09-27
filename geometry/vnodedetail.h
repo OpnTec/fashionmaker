@@ -26,34 +26,32 @@
 #include <QMetaType>
 #include "options.h"
 
-namespace NodeDetail{
-    enum Type
-    {
-        Contour,
-        Modeling
-    };
+namespace NodeDetail {
+    enum NodeDetail { Contour, Modeling };
+    Q_DECLARE_FLAGS(NodeDetails, NodeDetail)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
 class VNodeDetail
 {
 public:
     VNodeDetail();
-    VNodeDetail(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode);
+    VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode);
     VNodeDetail(const VNodeDetail &node);
     qint64 getId() const;
     void setId(const qint64 &value);
-    Tools::Enum getTypeTool() const;
-    void setTypeTool(const Tools::Enum &value);
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
-    NodeDetail::Type getTypeNode() const;
-    void setTypeNode(const NodeDetail::Type &value);
+    Tool::Tools getTypeTool() const;
+    void setTypeTool(const Tool::Tools &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
+    NodeDetail::NodeDetails getTypeNode() const;
+    void setTypeNode(const NodeDetail::NodeDetails &value);
 
 private:
     qint64 id;
-    Tools::Enum typeTool;
-    Draw::Mode mode;
-    NodeDetail::Type typeNode;
+    Tool::Tools typeTool;
+    Draw::Draws mode;
+    NodeDetail::NodeDetails typeNode;
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)

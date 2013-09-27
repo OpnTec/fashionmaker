@@ -53,7 +53,7 @@ public:
                       */
                      VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1,
                               qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-                              Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
+                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                      /**
                       * @brief VSpline конструктор.
                       * @param p1 початкова точка сплайну.
@@ -62,7 +62,7 @@ public:
                       * @param p4 кінцева точка сплайну.
                       */
                      VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3,
-                              qint64 p4, qreal kCurve, Draw::Mode mode = Draw::Calculation,
+                              qint64 p4, qreal kCurve, Draw::Draws mode = Draw::Calculation,
                               qint64 idObject = 0);
     /**
      * @brief ModifiSpl модифікує сплайн.
@@ -183,8 +183,8 @@ public:
     qint32 referens() const;
     void incrementReferens();
     void decrementReferens();
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
     static QVector<QPointF> SplinePoints(QPointF p1, QPointF p4, qreal angle1,
                                          qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
     qint64 getIdObject() const;
@@ -230,7 +230,7 @@ private:
     qreal kCurve;
     const QMap<qint64, VPointF> *points;
     qint32 _referens;
-    Draw::Mode mode;
+    Draw::Draws mode;
     qint64 idObject;
     /**
      * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.

@@ -82,7 +82,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
                                  const qint64 &firstPointId, const qint64 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                 Document::Enum parse, Tool::Enum typeCreation){
+                                 const Document::Documents &parse, Tool::Enum typeCreation){
     VPointF centerP = data->GetPoint(center);
     VPointF firstP = data->GetPoint(firstPointId);
     VPointF secondP = data->GetPoint(secondPointId);
@@ -107,7 +107,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
                 }
             }
         }
-        VDrawTool::AddRecord(id, Tools::PointOfContact, doc);
+        VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
         if(parse == Document::FullParse){
             VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
                                                                  firstPointId, secondPointId, typeCreation);

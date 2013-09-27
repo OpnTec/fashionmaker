@@ -37,7 +37,7 @@
 #include "exception/vexceptionwrongparameterid.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tools::ArrowTool), currentScene(0), sceneDraw(0),
+    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
     sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
     dialogEndLine(QSharedPointer<DialogEndLine>()), dialogLine(QSharedPointer<DialogLine>()),
     dialogAlongLine(QSharedPointer<DialogAlongLine>()),
@@ -152,7 +152,7 @@ void MainWindow::ActionNewDraw(){
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     QMap<qint64, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
-    VDrawTool::AddRecord(id, Tools::SinglePointTool, doc);
+    VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
     changeInFile = true;
@@ -191,7 +191,7 @@ void MainWindow::OptionDraw(){
 }
 
 template <typename Dialog, typename Func>
-void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &cursor,
+void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
                                QSharedPointer<Dialog> &dialog, Func closeDialogSlot){
     if(checked){
         CanselTool();
@@ -211,8 +211,8 @@ void MainWindow::SetToolButton(bool checked, Tools::Enum t, const QString &curso
     }
 }
 
-template <typename Tool>
-void MainWindow::AddToolToDetail(Tool *tool, const qint64 &id, Tools::Enum typeTool,
+template <typename T>
+void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                  const qint64 &idDetail){
     QMap<qint64, VDataTool*>* tools = doc->getTools();
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
@@ -221,7 +221,7 @@ void MainWindow::AddToolToDetail(Tool *tool, const qint64 &id, Tools::Enum typeT
 }
 
 void MainWindow::ToolEndLine(bool checked){
-    SetToolButton(checked, Tools::EndLineTool, ":/cursor/endline_cursor.png", dialogEndLine,
+    SetToolButton(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", dialogEndLine,
                   &MainWindow::ClosedDialogEndLine);
 }
 
@@ -231,14 +231,14 @@ void MainWindow::ClosedDialogEndLine(int result){
             VToolEndLine::Create(dialogEndLine, currentScene, doc, data);
         } else {
             VModelingEndLine *endLine = VModelingEndLine::Create(dialogEndLine, doc, data);
-            AddToolToDetail(endLine, endLine->getId(), Tools::EndLineTool, dialogEndLine->getIdDetail());
+            AddToolToDetail(endLine, endLine->getId(), Tool::EndLineTool, dialogEndLine->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolLine(bool checked){
-    SetToolButton(checked, Tools::LineTool, ":/cursor/line_cursor.png", dialogLine,
+    SetToolButton(checked, Tool::LineTool, ":/cursor/line_cursor.png", dialogLine,
                   &MainWindow::ClosedDialogLine);
 }
 
@@ -248,14 +248,14 @@ void MainWindow::ClosedDialogLine(int result){
             VToolLine::Create(dialogLine, currentScene, doc, data);
         } else {
             VModelingLine *line = VModelingLine::Create(dialogLine, doc, data);
-            AddToolToDetail(line, line->getId(), Tools::LineTool, dialogLine->getIdDetail());
+            AddToolToDetail(line, line->getId(), Tool::LineTool, dialogLine->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolAlongLine(bool checked){
-    SetToolButton(checked, Tools::AlongLineTool, ":/cursor/alongline_cursor.png", dialogAlongLine,
+    SetToolButton(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", dialogAlongLine,
                   &MainWindow::ClosedDialogAlongLine);
 }
 
@@ -265,14 +265,14 @@ void MainWindow::ClosedDialogAlongLine(int result){
             VToolAlongLine::Create(dialogAlongLine, currentScene, doc, data);
         } else{
             VModelingAlongLine *point = VModelingAlongLine::Create(dialogAlongLine, doc, data);
-            AddToolToDetail(point, point->getId(), Tools::AlongLineTool, dialogAlongLine->getIdDetail());
+            AddToolToDetail(point, point->getId(), Tool::AlongLineTool, dialogAlongLine->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolShoulderPoint(bool checked){
-    SetToolButton(checked, Tools::ShoulderPointTool, ":/cursor/shoulder_cursor.png", dialogShoulderPoint,
+    SetToolButton(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png", dialogShoulderPoint,
                   &MainWindow::ClosedDialogShoulderPoint);
 }
 
@@ -282,7 +282,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result){
             VToolShoulderPoint::Create(dialogShoulderPoint, currentScene, doc, data);
         } else {
             VModelingShoulderPoint *point = VModelingShoulderPoint::Create(dialogShoulderPoint, doc, data);
-            AddToolToDetail(point, point->getId(), Tools::ShoulderPointTool,
+            AddToolToDetail(point, point->getId(), Tool::ShoulderPointTool,
                             dialogShoulderPoint->getIdDetail());
         }
     }
@@ -290,7 +290,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result){
 }
 
 void MainWindow::ToolNormal(bool checked){
-    SetToolButton(checked, Tools::NormalTool, ":/cursor/normal_cursor.png", dialogNormal,
+    SetToolButton(checked, Tool::NormalTool, ":/cursor/normal_cursor.png", dialogNormal,
                   &MainWindow::ClosedDialogNormal);
 }
 
@@ -300,14 +300,14 @@ void MainWindow::ClosedDialogNormal(int result){
             VToolNormal::Create(dialogNormal, currentScene, doc, data);
         } else {
             VModelingNormal *point = VModelingNormal::Create(dialogNormal, doc, data);
-            AddToolToDetail(point, point->getId(), Tools::NormalTool, dialogNormal->getIdDetail());
+            AddToolToDetail(point, point->getId(), Tool::NormalTool, dialogNormal->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolBisector(bool checked){
-    SetToolButton(checked, Tools::BisectorTool, ":/cursor/bisector_cursor.png", dialogBisector,
+    SetToolButton(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png", dialogBisector,
                   &MainWindow::ClosedDialogBisector);
 }
 
@@ -317,14 +317,14 @@ void MainWindow::ClosedDialogBisector(int result){
             VToolBisector::Create(dialogBisector, currentScene, doc, data);
         } else {
             VModelingBisector *point = VModelingBisector::Create(dialogBisector, doc, data);
-            AddToolToDetail(point, point->getId(), Tools::BisectorTool, dialogBisector->getIdDetail());
+            AddToolToDetail(point, point->getId(), Tool::BisectorTool, dialogBisector->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolLineIntersect(bool checked){
-    SetToolButton(checked, Tools::LineIntersectTool, ":/cursor/intersect_cursor.png", dialogLineIntersect,
+    SetToolButton(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png", dialogLineIntersect,
                   &MainWindow::ClosedDialogLineIntersect);
 }
 
@@ -334,7 +334,7 @@ void MainWindow::ClosedDialogLineIntersect(int result){
             VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data);
         } else {
             VModelingLineIntersect *point = VModelingLineIntersect::Create(dialogLineIntersect, doc, data);
-            AddToolToDetail(point, point->getId(), Tools::LineIntersectTool,
+            AddToolToDetail(point, point->getId(), Tool::LineIntersectTool,
                             dialogLineIntersect->getIdDetail());
         }
     }
@@ -342,7 +342,7 @@ void MainWindow::ClosedDialogLineIntersect(int result){
 }
 
 void MainWindow::ToolSpline(bool checked){
-    SetToolButton(checked, Tools::SplineTool, ":/cursor/spline_cursor.png", dialogSpline,
+    SetToolButton(checked, Tool::SplineTool, ":/cursor/spline_cursor.png", dialogSpline,
                   &MainWindow::ClosedDialogSpline);
 }
 
@@ -352,14 +352,14 @@ void MainWindow::ClosedDialogSpline(int result){
             VToolSpline::Create(dialogSpline, currentScene, doc, data);
         } else {
             VModelingSpline *spl = VModelingSpline::Create(dialogSpline, doc, data);
-            AddToolToDetail(spl, spl->getId(), Tools::SplineTool, dialogSpline->getIdDetail());
+            AddToolToDetail(spl, spl->getId(), Tool::SplineTool, dialogSpline->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolArc(bool checked){
-    SetToolButton(checked, Tools::ArcTool, ":/cursor/arc_cursor.png", dialogArc,
+    SetToolButton(checked, Tool::ArcTool, ":/cursor/arc_cursor.png", dialogArc,
                   &MainWindow::ClosedDialogArc);
 }
 
@@ -369,14 +369,14 @@ void MainWindow::ClosedDialogArc(int result){
             VToolArc::Create(dialogArc, currentScene, doc, data);
         } else {
             VModelingArc *arc = VModelingArc::Create(dialogArc, doc, data);
-            AddToolToDetail(arc, arc->getId(), Tools::ArcTool, dialogArc->getIdDetail());
+            AddToolToDetail(arc, arc->getId(), Tool::ArcTool, dialogArc->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolSplinePath(bool checked){
-    SetToolButton(checked, Tools::SplinePathTool, ":/cursor/splinepath_cursor.png", dialogSplinePath,
+    SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png", dialogSplinePath,
                   &MainWindow::ClosedDialogSplinePath);
 }
 
@@ -386,14 +386,14 @@ void MainWindow::ClosedDialogSplinePath(int result){
             VToolSplinePath::Create(dialogSplinePath, currentScene, doc, data);
         } else {
             VModelingSplinePath *spl = VModelingSplinePath::Create(dialogSplinePath, doc, data);
-            AddToolToDetail(spl, spl->getId(), Tools::SplinePathTool, dialogSplinePath->getIdDetail());
+            AddToolToDetail(spl, spl->getId(), Tool::SplinePathTool, dialogSplinePath->getIdDetail());
         }
     }
     ArrowTool();
 }
 
 void MainWindow::ToolPointOfContact(bool checked){
-    SetToolButton(checked, Tools::PointOfContact, ":/cursor/pointcontact_cursor.png", dialogPointOfContact,
+    SetToolButton(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png", dialogPointOfContact,
                   &MainWindow::ClosedDialogPointOfContact);
 }
 
@@ -404,7 +404,7 @@ void MainWindow::ClosedDialogPointOfContact(int result){
         } else {
             VModelingPointOfContact *point = VModelingPointOfContact::Create(dialogPointOfContact, doc,
                                                                              data);
-            AddToolToDetail(point, point->getId(), Tools::PointOfContact,
+            AddToolToDetail(point, point->getId(), Tool::PointOfContact,
                             dialogPointOfContact->getIdDetail());
         }
     }
@@ -414,7 +414,7 @@ void MainWindow::ClosedDialogPointOfContact(int result){
 void MainWindow::ToolDetail(bool checked){
     if(checked){
         CanselTool();
-        tool = Tools::Detail;
+        tool = Tool::Detail;
         QPixmap pixmap("://cursor/new_detail_cursor.png");
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
@@ -575,79 +575,79 @@ void MainWindow::mouseMove(QPointF scenePos){
 void MainWindow::CanselTool(){
     switch( tool )
     {
-        case Tools::ArrowTool:
+        case Tool::ArrowTool:
             ui->actionArrowTool->setChecked(false);
             break;
-        case Tools::SinglePointTool:
+        case Tool::SinglePointTool:
             //Nothing to do here because we can't create this tool from main window.
             break;
-        case Tools::EndLineTool:
+        case Tool::EndLineTool:
             dialogEndLine.clear();
             ui->toolButtonEndLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::LineTool:
+        case Tool::LineTool:
             dialogLine.clear();
             ui->toolButtonLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearFocus();
             break;
-        case Tools::AlongLineTool:
+        case Tool::AlongLineTool:
             dialogAlongLine.clear();
             ui->toolButtonAlongLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::ShoulderPointTool:
+        case Tool::ShoulderPointTool:
             dialogShoulderPoint.clear();
             ui->toolButtonShoulderPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::NormalTool:
+        case Tool::NormalTool:
             dialogNormal.clear();
             ui->toolButtonNormal->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::BisectorTool:
+        case Tool::BisectorTool:
             dialogBisector.clear();
             ui->toolButtonBisector->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::LineIntersectTool:
+        case Tool::LineIntersectTool:
             dialogLineIntersect.clear();
             ui->toolButtonLineIntersect->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::SplineTool:
+        case Tool::SplineTool:
             dialogSpline.clear();
             ui->toolButtonSpline->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::ArcTool:
+        case Tool::ArcTool:
             dialogArc.clear();
             ui->toolButtonArc->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::SplinePathTool:
+        case Tool::SplinePathTool:
             dialogSplinePath.clear();
             ui->toolButtonSplinePath->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::PointOfContact:
+        case Tool::PointOfContact:
             dialogPointOfContact.clear();
             ui->toolButtonPointOfContact->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tools::Detail:
+        case Tool::Detail:
             dialogDetail.clear();
             ui->toolButtonNewDetail->setChecked(false);
             break;
@@ -660,7 +660,7 @@ void MainWindow::CanselTool(){
 void  MainWindow::ArrowTool(){
     CanselTool();
     ui->actionArrowTool->setChecked(true);
-    tool = Tools::ArrowTool;
+    tool = Tool::ArrowTool;
     QCursor cur(Qt::ArrowCursor);
     view->setCursor(cur);
     helpLabel->setText("");

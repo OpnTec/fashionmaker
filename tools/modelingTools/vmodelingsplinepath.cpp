@@ -74,7 +74,7 @@ VModelingSplinePath *VModelingSplinePath::Create(QSharedPointer<DialogSplinePath
 }
 
 VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplinePath &path,
-                                                  VDomDocument *doc, VContainer *data, Document::Enum parse,
+                                                  VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                                   Tool::Enum typeCreation){
     VModelingSplinePath *spl = 0;
     qint64 id = _id;

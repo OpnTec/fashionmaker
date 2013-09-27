@@ -78,7 +78,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                            const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                           Document::Enum parse, Tool::Enum typeCreation){
+                           const Document::Documents &parse, Tool::Enum typeCreation){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     VPointF thirdPoint = data->GetPoint(thirdPointId);
@@ -104,7 +104,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             }
         }
         data->AddLine(firstPointId, id);
-        VDrawTool::AddRecord(id, Tools::BisectorTool, doc);
+        VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
         if(parse == Document::FullParse){
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula,
                                                      firstPointId, secondPointId, thirdPointId,

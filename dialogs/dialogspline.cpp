@@ -22,7 +22,7 @@
 #include "dialogspline.h"
 #include "ui_dialogspline.h"
 
-DialogSpline::DialogSpline(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogSpline::DialogSpline(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
     kAsm1(1), kAsm2(1), kCurve(1){
     ui->setupUi(this);
@@ -41,7 +41,7 @@ DialogSpline::~DialogSpline(){
     delete ui;
 }
 
-void DialogSpline::ChoosedObject(qint64 id, Scene::Type type){
+void DialogSpline::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

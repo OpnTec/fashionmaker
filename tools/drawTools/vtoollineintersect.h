@@ -41,7 +41,7 @@ public:
     static void Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
                        const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void                        FullUpdateFromFile();
     virtual void                        FullUpdateFromGui(int result);

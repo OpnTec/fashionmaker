@@ -86,7 +86,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
                                 const qint64 &p2Line, const qint64 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                Document::Enum parse, Tool::Enum typeCreation){
+                                const Document::Documents &parse, Tool::Enum typeCreation){
     VPointF firstPoint = data->GetPoint(p1Line);
     VPointF secondPoint = data->GetPoint(p2Line);
     VPointF shoulderPoint = data->GetPoint(pShoulder);
@@ -113,7 +113,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
         }
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
-        VDrawTool::AddRecord(id, Tools::ShoulderPointTool, doc);
+        VDrawTool::AddRecord(id, Tool::ShoulderPointTool, doc);
         if(parse == Document::FullParse){
             VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
                                                                p1Line, p2Line, pShoulder,

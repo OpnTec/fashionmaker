@@ -33,7 +33,7 @@ class DialogPointOfContact : public DialogTool
     Q_OBJECT
     
 public:
-    explicit DialogPointOfContact(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
     QString getPointName() const;
     void setPointName(const QString &value);
@@ -51,7 +51,7 @@ public:
     void setSecondPoint(const qint64 &value, const qint64 &id);
 
 public slots:
-    virtual void            ChoosedObject(qint64 id, Scene::Type type);
+    virtual void            ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void            DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogPointOfContact)

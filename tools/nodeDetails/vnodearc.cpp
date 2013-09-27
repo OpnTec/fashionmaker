@@ -21,7 +21,7 @@
 
 #include "vnodearc.h"
 
-VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Mode typeobject,
+VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
                            Tool::Enum typeCreation, QGraphicsItem * parent) :
     VAbstractNode(doc, data, id, idArc, typeobject), QGraphicsPathItem(parent){
     RefreshGeometry();
@@ -35,7 +35,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
 }
 
 VNodeArc *VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
-                                   Draw::Mode typeobject, Document::Enum parse, Tool::Enum typeCreation){
+                                   Draw::Draws typeobject, const Document::Documents &parse, Tool::Enum typeCreation){
     VNodeArc *arc = 0;
     if(parse == Document::FullParse){
         arc = new VNodeArc(doc, data, id, idArc, typeobject, typeCreation);

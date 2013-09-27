@@ -62,7 +62,7 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
                                            const QString &typeLine, const QString &formula,
                                            const qreal &angle, const qint64 &basePointId, const qreal &mx,
                                            const qreal &my, VDomDocument *doc, VContainer *data,
-                                           Document::Enum parse, Tool::Enum typeCreation){
+                                           const Document::Documents &parse, Tool::Enum typeCreation){
     VModelingEndLine *point = 0;
     VPointF basePoint = data->GetModelingPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));

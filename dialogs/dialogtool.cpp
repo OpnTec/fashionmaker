@@ -26,7 +26,7 @@
 #include "geometry/vdetail.h"
 #include <QDebug>
 
-DialogTool::DialogTool(const VContainer *data, Draw::Mode mode, QWidget *parent):QDialog(parent), data(data),
+DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent):QDialog(parent), data(data),
     isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
     lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
     radioButtonSizeGrowth(0), radioButtonStandartTable(0), radioButtonIncrements(0),
@@ -74,14 +74,14 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
         }
         VDetail det = data->GetDetail(idDetail);
         for(qint32 i = 0; i< det.CountNode(); ++i){
-            if(det[i].getTypeTool() == Tools::NodePoint ||
-               det[i].getTypeTool() == Tools::AlongLineTool ||
-               det[i].getTypeTool() == Tools::BisectorTool ||
-               det[i].getTypeTool() == Tools::EndLineTool ||
-               det[i].getTypeTool() == Tools::LineIntersectTool ||
-               det[i].getTypeTool() == Tools::NormalTool ||
-               det[i].getTypeTool() == Tools::PointOfContact ||
-               det[i].getTypeTool() == Tools::ShoulderPointTool){
+            if(det[i].getTypeTool() == Tool::NodePoint ||
+               det[i].getTypeTool() == Tool::AlongLineTool ||
+               det[i].getTypeTool() == Tool::BisectorTool ||
+               det[i].getTypeTool() == Tool::EndLineTool ||
+               det[i].getTypeTool() == Tool::LineIntersectTool ||
+               det[i].getTypeTool() == Tool::NormalTool ||
+               det[i].getTypeTool() == Tool::PointOfContact ||
+               det[i].getTypeTool() == Tool::ShoulderPointTool){
                 if(det[i].getId() != id){
                     VPointF point = data->GetModelingPoint(det[i].getId());
                     box->addItem(point.name(), det[i].getId());
@@ -200,7 +200,7 @@ void DialogTool::CheckState(){
 }
 
 
-void DialogTool::ChoosedObject(qint64 id, Scene::Type type){
+void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type){
     Q_UNUSED(id);
     Q_UNUSED(type);
 }

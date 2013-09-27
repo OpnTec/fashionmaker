@@ -23,7 +23,7 @@
 #include <QDebug>
 
 VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
-                             Draw::Mode typeobject, QObject *parent) :
+                             Draw::Draws typeobject, QObject *parent) :
     VAbstractTool(doc, data, id, parent), idNode(idNode), typeobject(typeobject){
 }
 

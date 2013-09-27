@@ -165,7 +165,7 @@ void VContainer::UpdateId(qint64 newId){
     }
 }
 
-void VContainer::IncrementReferens(qint64 id, Scene::Type obj, Draw::Mode mode){
+void VContainer::IncrementReferens(qint64 id, Scene::Scenes obj, Draw::Draws mode){
     switch( obj ){
     case(Scene::Line):
         break;
@@ -240,12 +240,12 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
     QVector<QPointF> points;
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
-        case(Tools::NodePoint):{
+        case(Tool::NodePoint):{
             VPointF point = GetModelingPoint(detail[i].getId());
             points.append(point.toQPointF());
         }
             break;
-        case(Tools::NodeArc):{
+        case(Tool::NodeArc):{
             VArc arc = GetModelingArc(detail[i].getId());
             qreal len1 = GetLengthContour(points, arc.GetPoints());
             qreal lenReverse = GetLengthContour(points, GetReversePoint(arc.GetPoints()));
@@ -256,7 +256,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             }
         }
             break;
-        case(Tools::NodeSpline):{
+        case(Tool::NodeSpline):{
             VSpline spline = GetModelingSpline(detail[i].getId());
             qreal len1 = GetLengthContour(points, spline.GetPoints());
             qreal lenReverse = GetLengthContour(points, GetReversePoint(spline.GetPoints()));
@@ -267,7 +267,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             }
         }
             break;
-        case(Tools::NodeSplinePath):{
+        case(Tool::NodeSplinePath):{
             VSplinePath splinePath = GetModelingSplinePath(detail[i].getId());
             qreal len1 = GetLengthContour(points, splinePath.GetPathPoints());
             qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath.GetPathPoints()));
@@ -701,7 +701,7 @@ const QMap<qint64, VDetail> *VContainer::DataDetails() const{
     return &details;
 }
 
-void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Mode mode){
+void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Draws mode){
     QString nameLine = GetNameLine(firstPointId, secondPointId, mode);
     VPointF first;
     VPointF second;
@@ -760,7 +760,7 @@ qint64 VContainer::AddModelingArc(const VArc &arc){
     return AddObject(modelingArcs, arc);
 }
 
-QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint, Draw::Mode mode) const{
+QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint, Draw::Draws mode) const{
     VPointF first;
     VPointF second;
     if(mode == Draw::Calculation){
@@ -774,7 +774,7 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
 }
 
 QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint,
-                                     Draw::Mode mode) const{
+                                     Draw::Draws mode) const{
     VPointF first;
     VPointF second;
     if(mode == Draw::Calculation){
@@ -788,7 +788,7 @@ QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &sec
 }
 
 QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint,
-                                  Draw::Mode mode) const{
+                                  Draw::Draws mode) const{
     VPointF first;
     VPointF second;
     if(mode == Draw::Calculation){
@@ -801,7 +801,7 @@ QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &second
     return QString("Spl_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameSplinePath(const VSplinePath &path, Draw::Mode mode) const{
+QString VContainer::GetNameSplinePath(const VSplinePath &path, Draw::Draws mode) const{
     if(path.Count() == 0){
         return QString();
     }
@@ -823,7 +823,7 @@ QString VContainer::GetNameSplinePath(const VSplinePath &path, Draw::Mode mode) 
     return name;
 }
 
-QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, Draw::Mode mode) const{
+QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, Draw::Draws mode) const{
     VPointF centerPoint;
     if(mode == Draw::Calculation){
         centerPoint = GetPoint(center);
@@ -838,7 +838,7 @@ void VContainer::AddLengthLine(const QString &name, const qreal &value){
     lengthLines[name] = value;
 }
 
-void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Mode mode){
+void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Draws mode){
     QString nameLine = GetNameSpline(firstPointId, secondPointId, mode);
     VPointF first;
     VPointF second;

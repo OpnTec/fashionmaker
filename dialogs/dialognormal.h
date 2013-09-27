@@ -38,7 +38,7 @@ class DialogNormal : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit         DialogNormal(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit         DialogNormal(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogNormal();
     QString          getPointName() const;
@@ -54,7 +54,7 @@ public:
     qint64           getSecondPointId() const;
     void             setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogNormal)

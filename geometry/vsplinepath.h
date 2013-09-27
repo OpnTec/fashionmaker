@@ -48,7 +48,7 @@ public:
                            * @brief VSplinePath конструктор по замовчуванню.
                            */
                           VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve = 1,
-                                      Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
+                                      Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                           VSplinePath(const VSplinePath& splPath);
     /**
      * @brief append додає точку сплайну до шляху.
@@ -77,8 +77,8 @@ public:
     qint32 referens() const;
     void incrementReferens();
     void decrementReferens();
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
 
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
@@ -89,7 +89,7 @@ protected:
      */
     QVector<VSplinePoint> path;
     qreal kCurve;
-    Draw::Mode mode;
+    Draw::Draws mode;
     const QMap<qint64, VPointF> *points;
     qint32 _referens;
     qint64 idObject;

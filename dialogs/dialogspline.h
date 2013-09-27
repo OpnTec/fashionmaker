@@ -33,7 +33,7 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT  
 public:
-    explicit         DialogSpline(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit         DialogSpline(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogSpline();
     qint64           getP1() const;
@@ -51,7 +51,7 @@ public:
     qreal            getKCurve() const;
     void             setKCurve(const qreal &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogSpline)

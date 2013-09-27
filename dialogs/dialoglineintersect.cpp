@@ -22,7 +22,7 @@
 #include "dialoglineintersect.h"
 #include "ui_dialoglineintersect.h"
 
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
     p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true){
     ui->setupUi(this);
@@ -45,7 +45,7 @@ DialogLineIntersect::~DialogLineIntersect()
     delete ui;
 }
 
-void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Type type){
+void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

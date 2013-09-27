@@ -22,7 +22,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <QtGlobal>
+#include <QFlags>
 
 #define PrintDPI 96
 #define PaperSize 50000
@@ -31,49 +31,40 @@
 #define widthMainLine toPixel(0.8)
 #define widthHairLine widthMainLine/3
 
-
 namespace Scene{
-    enum Type
-    {
-        Point,
-        Line,
-        Spline,
-        Arc,
-        SplinePath,
-        Detail
-    };
+enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
+Q_DECLARE_FLAGS(Scenes, Scene)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS( Scene::Scenes )
 
-namespace Tools{
-    enum Enum
-    {
-        ArrowTool,
-        SinglePointTool,
-        EndLineTool,
-        LineTool,
-        AlongLineTool,
-        ShoulderPointTool,
-        NormalTool,
-        BisectorTool,
-        LineIntersectTool,
-        SplineTool,
-        ArcTool,
-        SplinePathTool,
-        PointOfContact,
-        Detail,
-        NodePoint,
-        NodeArc,
-        NodeSpline,
-        NodeSplinePath
-    };
+namespace Tool{
+enum Tool {ArrowTool,
+           SinglePointTool,
+           EndLineTool,
+           LineTool,
+           AlongLineTool,
+           ShoulderPointTool,
+           NormalTool,
+           BisectorTool,
+           LineIntersectTool,
+           SplineTool,
+           ArcTool,
+           SplinePathTool,
+           PointOfContact,
+           Detail,
+           NodePoint,
+           NodeArc,
+           NodeSpline,
+           NodeSplinePath
+};
+Q_DECLARE_FLAGS(Tools, Tool)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Tools )
 
-namespace Draw{
-    enum Mode
-    {
-        Calculation,
-        Modeling
-    };
+namespace Draw  {
+    enum Draw { Calculation, Modeling };
+    Q_DECLARE_FLAGS(Draws, Draw)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS(Draw::Draws)
 
 #endif // OPTIONS_H

@@ -58,7 +58,7 @@ void VToolLineIntersect::Create(QSharedPointer<DialogLineIntersect> &dialog, VMa
 void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
                                 const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                                VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                                VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
     VPointF p1Line1 = data->GetPoint(p1Line1Id);
     VPointF p2Line1 = data->GetPoint(p2Line1Id);
     VPointF p1Line2 = data->GetPoint(p1Line2Id);
@@ -87,7 +87,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         data->AddLine(id, p2Line1Id);
         data->AddLine(p1Line2Id, id);
         data->AddLine(id, p2Line2Id);
-        VDrawTool::AddRecord(id, Tools::LineIntersectTool, doc);
+        VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
         if(parse == Document::FullParse){
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
                                                                p2Line1Id, p1Line2Id,

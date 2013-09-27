@@ -35,21 +35,21 @@
 #include "exception/vexceptionobjecterror.h"
 
 
-VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Mode *mode) : QDomDocument(),
+VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode) : QDomDocument(),
     map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
 VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
-                           Draw::Mode *mode) :
+                           Draw::Draws *mode) :
     QDomDocument(name), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
 VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
-                           Draw::Mode *mode) :
+                           Draw::Draws *mode) :
     QDomDocument(doctype), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
@@ -158,7 +158,7 @@ bool VDomDocument::appendDraw(const QString& name){
     return false;
 }
 
-void VDomDocument::ChangeActivDraw(const QString& name, Document::Enum parse){
+void VDomDocument::ChangeActivDraw(const QString& name, Document::Documents parse){
     Q_ASSERT_X(!name.isEmpty(), "ChangeActivDraw", "name draw is empty");
     if(CheckNameDraw(name) == true){
         this->nameActivDraw = name;
@@ -250,7 +250,7 @@ bool VDomDocument::GetActivNodeElement(const QString& name, QDomElement &element
     }
 }
 
-void VDomDocument::Parse(Document::Enum parse, VMainGraphicsScene *sceneDraw,
+void VDomDocument::Parse(Document::Documents parse, VMainGraphicsScene *sceneDraw,
                          VMainGraphicsScene *sceneDetail){
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
@@ -373,7 +373,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
 
 
 void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                    const QDomNode& node, Document::Enum parse){
+                                    const QDomNode& node, const Document::Documents &parse){
     QDomNode domNode = node.firstChild();
     while(!domNode.isNull()){
         if(domNode.isElement()){
@@ -396,7 +396,7 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphics
 }
 
 void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                           const QDomNode& node, Document::Enum parse, Draw::Mode mode){
+                                           const QDomNode& node, const Document::Documents &parse, Draw::Draws mode){
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
     VMainGraphicsScene *scene = 0;
@@ -427,7 +427,7 @@ void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsSce
 }
 
 void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                                      Document::Enum parse){
+                                      const Document::Documents &parse){
     Q_CHECK_PTR(sceneDetail);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try{
@@ -445,52 +445,52 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
             if(!element.isNull()){
                 if(element.tagName() == "node"){
                     qint64 id = GetParametrLongLong(element, "idObject");
-                    Tools::Enum tool;
-                    Draw::Mode mode;
-                    NodeDetail::Type nodeType = NodeDetail::Contour;
+                    Tool::Tools tool;
+                    Draw::Draws mode;
+                    NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
                     QString t = GetParametrString(element, "type");
                     if(t == "NodePoint"){
-                        tool = Tools::NodePoint;
+                        tool = Tool::NodePoint;
                         VPointF point = data->GetModelingPoint(id);
                         mode = point.getMode();
                         oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode, NodeDetail::Contour));
                     } else if(t == "NodeArc"){
-                        tool = Tools::NodeArc;
+                        tool = Tool::NodeArc;
                         VArc arc = data->GetModelingArc(id);
                         mode = arc.getMode();
                         oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode, NodeDetail::Contour));
                     } else if(t == "NodeSpline"){
-                        tool = Tools::NodeSpline;
+                        tool = Tool::NodeSpline;
                         VSpline spl = data->GetModelingSpline(id);
                         mode = spl.getMode();
                         oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode, NodeDetail::Contour));
                     } else if(t == "NodeSplinePath"){
-                        tool = Tools::NodeSplinePath;
+                        tool = Tool::NodeSplinePath;
                         VSplinePath splPath = data->GetModelingSplinePath(id);
                         mode = splPath.getMode();
                         oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode, NodeDetail::Contour));
                     } else if(t == "AlongLineTool"){
-                        tool = Tools::AlongLineTool;
+                        tool = Tool::AlongLineTool;
                     } else if(t == "ArcTool"){
-                        tool = Tools::ArcTool;
+                        tool = Tool::ArcTool;
                     } else if(t == "BisectorTool"){
-                        tool = Tools::BisectorTool;
+                        tool = Tool::BisectorTool;
                     } else if(t == "EndLineTool"){
-                        tool = Tools::EndLineTool;
+                        tool = Tool::EndLineTool;
                     } else if(t == "LineIntersectTool"){
-                        tool = Tools::LineIntersectTool;
+                        tool = Tool::LineIntersectTool;
                     } else if(t == "LineTool"){
-                        tool = Tools::LineTool;
+                        tool = Tool::LineTool;
                     } else if(t == "NormalTool"){
-                        tool = Tools::NormalTool;
+                        tool = Tool::NormalTool;
                     } else if(t == "PointOfContact"){
-                        tool = Tools::PointOfContact;
+                        tool = Tool::PointOfContact;
                     } else if(t == "ShoulderPointTool"){
-                        tool = Tools::ShoulderPointTool;
+                        tool = Tool::ShoulderPointTool;
                     } else if(t == "SplinePathTool"){
-                        tool = Tools::SplinePathTool;
+                        tool = Tool::SplinePathTool;
                     } else if(t == "SplineTool"){
-                        tool = Tools::SplineTool;
+                        tool = Tool::SplineTool;
                     }
                     detail.append(VNodeDetail(id, tool, mode, nodeType));
                 }
@@ -506,7 +506,7 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
 }
 
 void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                                Document::Enum parse){
+                                const Document::Documents &parse){
     Q_CHECK_PTR(sceneDetail);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QDomNode domNode = domElement.firstChild();
@@ -524,7 +524,7 @@ void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomEleme
 }
 
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     Document::Enum parse, const QString& type, Draw::Mode mode){
+                                     const Document::Documents &parse, const QString& type, Draw::Draws mode){
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!type.isEmpty(), Q_FUNC_INFO, "type of point is empty");
@@ -538,7 +538,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qreal my = toPixel(GetParametrDouble(domElement, "my"));
 
             data->UpdatePoint(id, VPointF(x, y, name, mx, my));
-            VDrawTool::AddRecord(id, Tools::SinglePointTool, this);
+            VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
             if(parse != Document::FullParse){
                 UpdateToolData(id, data);
             }
@@ -759,7 +759,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
             QString tObject = GetParametrString(domElement, "typeObject");
             VPointF point;
-            Draw::Mode typeObject;
+            Draw::Draws typeObject;
             if(tObject == "Calculation"){
                 typeObject = Draw::Calculation;
                 point = data->GetPoint(idObject );
@@ -783,7 +783,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                    Document::Enum parse, Draw::Mode mode){
+                                    const Document::Documents &parse, Draw::Draws mode){
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try{
@@ -806,7 +806,7 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
 }
 
 void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                      Document::Enum parse, const QString &type, Draw::Mode mode){
+                                      const Document::Documents &parse, const QString &type, Draw::Draws mode){
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!type.isEmpty(), Q_FUNC_INFO, "type of spline is empty");
@@ -878,7 +878,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
             QString tObject = GetParametrString(domElement, "typeObject");
             VSpline spl;
-            Draw::Mode typeObject;
+            Draw::Draws typeObject;
             if(tObject == "Calculation"){
                 typeObject = Draw::Calculation;
                 spl = data->GetSpline(idObject);
@@ -910,7 +910,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
             QString tObject = GetParametrString(domElement, "typeObject");
             VSplinePath path;
-            Draw::Mode typeObject;
+            Draw::Draws typeObject;
             if(tObject == "Calculation"){
                 typeObject = Draw::Calculation;
                 path = data->GetSplinePath(idObject);
@@ -940,7 +940,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
 }
 
 void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                   Document::Enum parse, const QString &type, Draw::Mode mode){
+                                   const Document::Documents &parse, const QString &type, Draw::Draws mode){
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!type.isEmpty(), Q_FUNC_INFO, "type of spline is empty");
@@ -971,7 +971,7 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
             QString tObject = GetParametrString(domElement, "typeObject");
             VArc arc;
-            Draw::Mode typeObject;
+            Draw::Draws typeObject;
             if(tObject == "Calculation"){
                 typeObject = Draw::Calculation;
                 arc = data->GetArc(idObject);

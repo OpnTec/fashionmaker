@@ -53,7 +53,7 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
 }
 
 void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
+                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                        Tool::Enum typeCreation){
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
@@ -66,7 +66,7 @@ void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 
         Q_CHECK_PTR(tool);
         tool->VDataTool::setData(data);
     }
-    VDrawTool::AddRecord(id, Tools::LineTool, doc);
+    VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if(parse == Document::FullParse){
         qint64 id = data->getNextId();
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);

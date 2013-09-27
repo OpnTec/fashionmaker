@@ -61,7 +61,7 @@ void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsSc
 void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qreal &angle, const qint64 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                          VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
 
     VPointF basePoint = data->GetPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
@@ -86,7 +86,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             }
         }
         data->AddLine(basePointId, id);
-        VDrawTool::AddRecord(id, Tools::EndLineTool, doc);
+        VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
         if(parse == Document::FullParse){
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
                                                    basePointId, typeCreation);

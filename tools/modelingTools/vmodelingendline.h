@@ -40,7 +40,7 @@ public:
     static VModelingEndLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                     const QString &formula, const qreal &angle, const qint64 &basePointId,
                                     const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
-                                    Document::Enum parse, Tool::Enum typeCreation);
+                                    const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

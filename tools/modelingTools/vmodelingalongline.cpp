@@ -113,7 +113,7 @@ VModelingAlongLine *VModelingAlongLine::Create(const qint64 _id, const QString &
                                                const QString &typeLine, const QString &formula,
                                                const qint64 &firstPointId, const qint64 &secondPointId,
                                                const qreal &mx, const qreal &my, VDomDocument *doc,
-                                               VContainer *data, Document::Enum parse,
+                                               VContainer *data, const Document::Documents &parse,
                                                Tool::Enum typeCreation){
     VModelingAlongLine *point = 0;
     VPointF firstPoint = data->GetModelingPoint(firstPointId);

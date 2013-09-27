@@ -21,10 +21,10 @@
 
 #include "vtoolrecord.h"
 
-VToolRecord::VToolRecord():id(0), typeTool(Tools::ArrowTool), nameDraw(QString()){
+VToolRecord::VToolRecord():id(0), typeTool(Tool::ArrowTool), nameDraw(QString()){
 }
 
-VToolRecord::VToolRecord(const qint64 &id, const Tools::Enum &typeTool, const QString &nameDraw):id(id),
+VToolRecord::VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw):id(id),
     typeTool(typeTool), nameDraw(nameDraw){
 }
 
@@ -36,11 +36,11 @@ void VToolRecord::setNameDraw(const QString &value){
     nameDraw = value;
 }
 
-Tools::Enum VToolRecord::getTypeTool() const{
+Tool::Tools VToolRecord::getTypeTool() const{
     return typeTool;
 }
 
-void VToolRecord::setTypeTool(const Tools::Enum &value){
+void VToolRecord::setTypeTool(const Tool::Tools &value){
     typeTool = value;
 }
 

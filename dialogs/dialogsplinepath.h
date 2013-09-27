@@ -34,13 +34,13 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogSplinePath(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                               QWidget *parent = 0);
     ~DialogSplinePath();
     VSplinePath      GetPath() const;
     void             SetPath(const VSplinePath &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
     void             PointChenged(int row);
     void             currentPointChanged( int index );

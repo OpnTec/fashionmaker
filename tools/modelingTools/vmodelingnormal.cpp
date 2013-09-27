@@ -64,7 +64,7 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
                                          const qint64 &firstPointId, const qint64 &secondPointId,
                                          const QString typeLine, const QString pointName,
                                          const qreal angle, const qreal &mx, const qreal &my,
-                                         VDomDocument *doc, VContainer *data, Document::Enum parse,
+                                         VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                          Tool::Enum typeCreation){
     VModelingNormal *point = 0;
     VPointF firstPoint = data->GetModelingPoint(firstPointId);

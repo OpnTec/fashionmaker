@@ -29,7 +29,7 @@ VPointF::VPointF ( const VPointF & point ):_name(point.name()), _mx(point.mx()),
     _x(point.x()), _y(point.y()), _referens(0), mode(point.getMode()), idObject(point.getIdObject()){
 }
 
-VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my, Draw::Mode mode, qint64 idObject):_name(name), _mx(mx),
+VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my, Draw::Draws mode, qint64 idObject):_name(name), _mx(mx),
     _my(my), _x(x), _y(y), _referens(0), mode(mode), idObject(idObject){
 }
 
@@ -94,12 +94,12 @@ void VPointF::decrementReferens(){
     }
 }
 
-Draw::Mode VPointF::getMode() const
+Draw::Draws VPointF::getMode() const
 {
     return mode;
 }
 
-void VPointF::setMode(const Draw::Mode &value)
+void VPointF::setMode(const Draw::Draws &value)
 {
     mode = value;
 }

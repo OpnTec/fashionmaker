@@ -38,7 +38,7 @@ class DialogTool : public QDialog
 {
     Q_OBJECT
 public:
-                     DialogTool(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
     virtual          ~DialogTool();
     qint64           getIdDetail() const;
@@ -46,7 +46,7 @@ public:
 signals:
     void             DialogClosed(int result);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     virtual void     DialogRejected();
@@ -86,7 +86,7 @@ protected:
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
     qint64           idDetail;
-    Draw::Mode       mode;
+    Draw::Draws       mode;
     bool             CheckObject(const qint64 &id);
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );

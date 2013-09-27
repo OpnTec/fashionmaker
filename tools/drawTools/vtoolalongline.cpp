@@ -112,7 +112,7 @@ void VToolAlongLine::Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphi
 void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                             const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                            VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                            VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
@@ -135,7 +135,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
                 }
             }
         }
-        VDrawTool::AddRecord(id, Tools::AlongLineTool, doc);
+        VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
         if(parse == Document::FullParse){

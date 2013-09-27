@@ -35,7 +35,7 @@ public:
     virtual void setDialog();
     static VModelingLine* Create(QSharedPointer<DialogLine> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingLine* Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                                 VDomDocument *doc, VContainer *data, Document::Enum parse,
+                                 VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                  Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();

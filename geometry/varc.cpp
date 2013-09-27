@@ -29,7 +29,7 @@ VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius
 }
 
 VArc::VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-            qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Mode mode, qint64 idObject)
+            qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
       center(center), points(points), _referens(0), mode(mode), idObject(idObject){
 }
@@ -213,12 +213,12 @@ void VArc::decrementReferens(){
 }
 
 
-Draw::Mode VArc::getMode() const
+Draw::Draws VArc::getMode() const
 {
     return mode;
 }
 
-void VArc::setMode(const Draw::Mode &value)
+void VArc::setMode(const Draw::Draws &value)
 {
     mode = value;
 }

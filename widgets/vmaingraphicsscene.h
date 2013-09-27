@@ -40,7 +40,7 @@ public:
     void setVerScrollBar(const qint32 &value);
 
 public slots:
-    void ChoosedItem(qint64 id, Scene::Type type);
+    void ChoosedItem(qint64 id, Scene::Scenes type);
     void RemoveTool(QGraphicsItem *tool);
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
@@ -48,7 +48,7 @@ protected:
 signals:
     void mouseMove(QPointF scenePos);
     void mousePress(QPointF scenePos);
-    void ChoosedObject(qint64 id, Scene::Type type);
+    void ChoosedObject(qint64 id, Scene::Scenes type);
 private:
     qint32 horScrollBar;
     qint32 verScrollBar;

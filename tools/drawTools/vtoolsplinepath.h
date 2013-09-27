@@ -40,7 +40,7 @@ public:
      static void Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene  *scene,
                         VDomDocument *doc, VContainer *data);
      static void Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene  *scene,
-                        VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                        VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
 signals:
     void                             RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
                                                  const QPointF &controlPoint, const QPointF &splinePoint);

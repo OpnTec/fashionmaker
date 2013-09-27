@@ -22,7 +22,6 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
-#include <QtGlobal>
 #include <QString>
 #include "options.h"
 
@@ -30,19 +29,19 @@ class VToolRecord
 {
 public:
     VToolRecord();
-    VToolRecord(const qint64 &id, const Tools::Enum &typeTool, const QString &nameDraw);
+    VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw);
     qint64 getId() const;
     void setId(const qint64 &value);
 
-    Tools::Enum getTypeTool() const;
-    void setTypeTool(const Tools::Enum &value);
+    Tool::Tools getTypeTool() const;
+    void setTypeTool(const Tool::Tools &value);
 
     QString getNameDraw() const;
     void setNameDraw(const QString &value);
 
 private:
     qint64 id;
-    Tools::Enum typeTool;
+    Tool::Tools typeTool;
     QString nameDraw;
 };
 

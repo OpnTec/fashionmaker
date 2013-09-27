@@ -74,7 +74,7 @@ void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGrap
 }
 
 void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene *scene,
-                             VDomDocument *doc, VContainer *data, Document::Enum parse,
+                             VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                              Tool::Enum typeCreation){
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
@@ -91,7 +91,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         }
     }
     data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
-    VDrawTool::AddRecord(id, Tools::SplinePathTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplinePathTool, doc);
     if(parse == Document::FullParse){
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);

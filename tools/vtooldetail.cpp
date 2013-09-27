@@ -26,14 +26,14 @@
 #include "modelingTools/modelingtools.h"
 
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, VDetail &oldDetail,
-                         Tool::Enum typeCreation, Document::Enum parse,
+                         Tool::Enum typeCreation, const Document::Documents &parse,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
       dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
     VDetail detail = data->GetDetail(id);
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
-        case(Tools::NodePoint):{
+        case(Tool::NodePoint):{
             VNodePoint *point = VNodePoint::Create(doc, data, detail[i].getId(), oldDetail[i].getId(),
                                                    detail[i].getMode(), parse, typeCreation);
             connect(point, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -42,7 +42,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             point->setParentItem(this);
             break;
         }
-        case(Tools::NodeArc):{
+        case(Tool::NodeArc):{
             VNodeArc *arc = VNodeArc::Create(doc, data, detail[i].getId(), oldDetail[i].getId(),
                                              detail[i].getMode(), parse, typeCreation);
             connect(arc, &VNodeArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -51,7 +51,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             arc->setParentItem(this);
             break;
         }
-        case(Tools::NodeSpline):{
+        case(Tool::NodeSpline):{
             VNodeSpline *spl = VNodeSpline::Create(doc, data, detail[i].getId(), oldDetail[i].getId(),
                                                    detail[i].getMode(), parse, typeCreation);
             connect(spl, &VNodeSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -60,7 +60,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             spl->setParentItem(this);
             break;
         }
-        case(Tools::NodeSplinePath):{
+        case(Tool::NodeSplinePath):{
             VNodeSplinePath *splPath = VNodeSplinePath::Create(doc, data, detail[i].getId(),
                                                                oldDetail[i].getId(),
                                                                detail[i].getMode(), parse, typeCreation);
@@ -70,7 +70,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             splPath->setParentItem(this);
             break;
         }
-        case(Tools::AlongLineTool):{
+        case(Tool::AlongLineTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingAlongLine *tool = qobject_cast<VModelingAlongLine*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -78,7 +78,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::ArcTool):{
+        case(Tool::ArcTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingArc *tool = qobject_cast<VModelingArc*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -86,7 +86,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::BisectorTool):{
+        case(Tool::BisectorTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingBisector *tool = qobject_cast<VModelingBisector*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -94,7 +94,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::EndLineTool):{
+        case(Tool::EndLineTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingEndLine *tool = qobject_cast<VModelingEndLine*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -102,7 +102,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::LineIntersectTool):{
+        case(Tool::LineIntersectTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingLineIntersect *tool = qobject_cast<VModelingLineIntersect*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -110,7 +110,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::LineTool):{
+        case(Tool::LineTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingLine *tool = qobject_cast<VModelingLine*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -118,7 +118,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::NormalTool):{
+        case(Tool::NormalTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingNormal *tool = qobject_cast<VModelingNormal*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -126,7 +126,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::PointOfContact):{
+        case(Tool::PointOfContact):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingPointOfContact *tool = qobject_cast<VModelingPointOfContact*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -134,7 +134,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::ShoulderPointTool):{
+        case(Tool::ShoulderPointTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingShoulderPoint *tool = qobject_cast<VModelingShoulderPoint*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -142,7 +142,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::SplinePathTool):{
+        case(Tool::SplinePathTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingSplinePath *tool = qobject_cast<VModelingSplinePath*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -150,7 +150,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
-        case(Tools::SplineTool):{
+        case(Tool::SplineTool):{
             QMap<qint64, VDataTool*>* tools = doc->getTools();
             VModelingSpline *tool = qobject_cast<VModelingSpline*>(tools->value(detail[i].getId()));
             Q_CHECK_PTR(tool);
@@ -188,7 +188,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         qint64 id = 0;
         switch(detail[i].getTypeTool()){
-        case(Tools::NodePoint):{
+        case(Tool::NodePoint):{
             VPointF point;
             if(detail[i].getMode() == Draw::Calculation){
                 point = data->GetPoint(detail[i].getId());
@@ -198,7 +198,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             id = data->AddModelingPoint(point);
         }
             break;
-        case(Tools::NodeArc):{
+        case(Tool::NodeArc):{
             VArc arc;
             if(detail[i].getMode() == Draw::Calculation){
                 arc = data->GetArc(detail[i].getId());
@@ -208,7 +208,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             id = data->AddModelingArc(arc);
         }
             break;
-        case(Tools::NodeSpline):{
+        case(Tool::NodeSpline):{
             VSpline spline;
             if(detail[i].getMode() == Draw::Calculation){
                 spline = data->GetSpline(detail[i].getId());
@@ -218,7 +218,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             id = data->AddModelingSpline(spline);
         }
             break;
-        case(Tools::NodeSplinePath):{
+        case(Tool::NodeSplinePath):{
             VSplinePath splinePath;
             if(detail[i].getMode() == Draw::Calculation){
                 splinePath = data->GetSplinePath(detail[i].getId());
@@ -241,7 +241,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
 
 void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetail,
                          VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                         VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddDetail(newDetail);
@@ -333,49 +333,49 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
         AddAttribute(nod, "nodeType", "Modeling");
     }
     switch(node.getTypeTool()){
-    case(Tools::AlongLineTool):
+    case(Tool::AlongLineTool):
         AddAttribute(nod, "type", "AlongLineTool");
         break;
-    case(Tools::ArcTool):
+    case(Tool::ArcTool):
         AddAttribute(nod, "type", "ArcTool");
         break;
-    case(Tools::BisectorTool):
+    case(Tool::BisectorTool):
         AddAttribute(nod, "type", "BisectorTool");
         break;
-    case(Tools::EndLineTool):
+    case(Tool::EndLineTool):
         AddAttribute(nod, "type", "EndLineTool");
         break;
-    case(Tools::LineIntersectTool):
+    case(Tool::LineIntersectTool):
         AddAttribute(nod, "type", "LineIntersectTool");
         break;
-    case(Tools::LineTool):
+    case(Tool::LineTool):
         AddAttribute(nod, "type", "LineTool");
         break;
-    case(Tools::NodeArc):
+    case(Tool::NodeArc):
         AddAttribute(nod, "type", "NodeArc");
         break;
-    case(Tools::NodePoint):
+    case(Tool::NodePoint):
         AddAttribute(nod, "type", "NodePoint");
         break;
-    case(Tools::NodeSpline):
+    case(Tool::NodeSpline):
         AddAttribute(nod, "type", "NodeSpline");
         break;
-    case(Tools::NodeSplinePath):
+    case(Tool::NodeSplinePath):
         AddAttribute(nod, "type", "NodeSplinePath");
         break;
-    case(Tools::NormalTool):
+    case(Tool::NormalTool):
         AddAttribute(nod, "type", "NormalTool");
         break;
-    case(Tools::PointOfContact):
+    case(Tool::PointOfContact):
         AddAttribute(nod, "type", "PointOfContact");
         break;
-    case(Tools::ShoulderPointTool):
+    case(Tool::ShoulderPointTool):
         AddAttribute(nod, "type", "ShoulderPointTool");
         break;
-    case(Tools::SplinePathTool):
+    case(Tool::SplinePathTool):
         AddAttribute(nod, "type", "SplinePathTool");
         break;
-    case(Tools::SplineTool):
+    case(Tool::SplineTool):
         AddAttribute(nod, "type", "SplineTool");
         break;
     default:

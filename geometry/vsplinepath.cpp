@@ -25,7 +25,7 @@ VSplinePath::VSplinePath(): path(QVector<VSplinePoint>()), kCurve(1), mode(Draw:
     _referens(0), idObject(0){
 }
 
-VSplinePath::VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve, Draw::Mode mode, qint64 idObject): path(QVector<VSplinePoint>()),
+VSplinePath::VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject): path(QVector<VSplinePoint>()),
     kCurve(kCurve), mode(mode), points(points), _referens(0), idObject(idObject){
 }
 
@@ -34,11 +34,11 @@ VSplinePath::VSplinePath(const VSplinePath &splPath): path(*splPath.GetPoint()),
     idObject(splPath.getIdObject()){
 }
 
-Draw::Mode VSplinePath::getMode() const{
+Draw::Draws VSplinePath::getMode() const{
     return mode;
 }
 
-void VSplinePath::setMode(const Draw::Mode &value){
+void VSplinePath::setMode(const Draw::Draws &value){
     mode = value;
 }
 

@@ -31,7 +31,7 @@ class VPointF
 public:
     VPointF();
     VPointF (const VPointF &point );
-    VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, Draw::Mode mode = Draw::Calculation,
+    VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, Draw::Draws mode = Draw::Calculation,
               qint64 idObject = 0);
     ~VPointF();
     QString name() const;
@@ -48,8 +48,8 @@ public:
     qint32 referens() const;
     void incrementReferens();
     void decrementReferens();
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
 
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
@@ -61,7 +61,7 @@ private:
     qreal _x;
     qreal _y;
     qint32 _referens;
-    Draw::Mode mode;
+    Draw::Draws mode;
     qint64 idObject;
 };
 

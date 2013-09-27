@@ -59,7 +59,7 @@ VModelingLineIntersect *VModelingLineIntersect::Create(const qint64 _id, const q
                                                        const qint64 &p2Line1Id, const qint64 &p1Line2Id,
                                                        const qint64 &p2Line2Id, const QString &pointName,
                                                        const qreal &mx, const qreal &my, VDomDocument *doc,
-                                                       VContainer *data, Document::Enum parse,
+                                                       VContainer *data, const Document::Documents &parse,
                                                        Tool::Enum typeCreation){
     VModelingLineIntersect *point = 0;
     VPointF p1Line1 = data->GetModelingPoint(p1Line1Id);

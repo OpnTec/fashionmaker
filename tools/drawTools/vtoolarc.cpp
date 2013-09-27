@@ -62,7 +62,7 @@ void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *sce
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc,
-                      VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                      VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
     Calculator cal(data);
@@ -100,7 +100,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
-    VDrawTool::AddRecord(id, Tools::ArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
     if(parse == Document::FullParse){
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);

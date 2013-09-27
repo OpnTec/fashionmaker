@@ -40,7 +40,7 @@ public:
                        VContainer *data);
     static void Create(const qint64 _id, const qint64 &center, const QString &radius,
                        const QString &f1, const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void              FullUpdateFromFile();
     virtual void              FullUpdateFromGui(int result);

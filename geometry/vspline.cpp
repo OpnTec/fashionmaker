@@ -35,14 +35,14 @@ VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
+                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
     p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points),
     _referens(0), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+                  qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
     kCurve(1), points(points), _referens(0), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
@@ -768,11 +768,11 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
 
-Draw::Mode VSpline::getMode() const{
+Draw::Draws VSpline::getMode() const{
     return mode;
 }
 
-void VSpline::setMode(const Draw::Mode &value){
+void VSpline::setMode(const Draw::Draws &value){
     mode = value;
 }
 

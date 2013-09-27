@@ -31,18 +31,18 @@ class VToolDetail: public VAbstractTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, VDetail &oldDetail,
-                Tool::Enum typeCreation, Document::Enum parse, VMainGraphicsScene *scene,
+                Tool::Enum typeCreation, const Document::Documents &parse, VMainGraphicsScene *scene,
                 QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetail,
                        VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
-    template <typename Tool>
-    void AddTool(Tool *tool, const qint64 &id, Tools::Enum typeTool){
+                       VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+    template <typename T>
+    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool){
         tool->setParentItem(this);
-        connect(tool, &Tool::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
+        connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
         VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
         VDetail det = VAbstractTool::data.GetDetail(this->id);
         det.append(node);

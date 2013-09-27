@@ -42,7 +42,7 @@ public:
                                           const qint64 &p2Line, const qint64 &pShoulder,
                                           const QString &typeLine, const QString &pointName,
                                           const qreal &mx, const qreal &my, VDomDocument *doc,
-                                          VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                                          VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

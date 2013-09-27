@@ -36,8 +36,8 @@ public:
     static void Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                       VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                       Tool::Enum typeCreation);
+                       VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                       const Document::Documents &parse, Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      ChangedActivDraw(const QString newName);

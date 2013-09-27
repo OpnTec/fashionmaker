@@ -46,7 +46,7 @@ public:
                   */
                  VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
                        qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
-                       Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
+                       Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                  VArc(const VArc &arc);
                  VArc& operator= (const VArc &arc);
     /**
@@ -101,8 +101,8 @@ public:
     qint32 referens() const;
     void incrementReferens();
     void decrementReferens();
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
 
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
@@ -129,7 +129,7 @@ private:
     qint64 center;
     const QMap<qint64, VPointF> *points;
     qint32 _referens;
-    Draw::Mode mode;
+    Draw::Draws mode;
     qint64 idObject;
 };
 

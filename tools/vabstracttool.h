@@ -51,7 +51,7 @@ public slots:
     virtual void          FullUpdateFromFile()=0;
 signals:
     void                  toolhaveChange();
-    void                  ChoosedTool(qint64 id, Scene::Type type);
+    void                  ChoosedTool(qint64 id, Scene::Scenes type);
     void                  FullUpdateTree();
 protected:
     VDomDocument          *doc;

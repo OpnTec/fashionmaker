@@ -38,7 +38,7 @@ public:
     static VModelingAlongLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                       const QString &formula, const qint64 &firstPointId,
                                       const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                                      VDomDocument *doc, VContainer *data, Document::Enum parse,
+                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                       Tool::Enum typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();

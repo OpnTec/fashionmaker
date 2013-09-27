@@ -21,11 +21,11 @@
 
 #include "vnodedetail.h"
 
-VNodeDetail::VNodeDetail():id(0), typeTool(Tools::NodePoint), mode(Draw::Calculation),
+VNodeDetail::VNodeDetail():id(0), typeTool(Tool::NodePoint), mode(Draw::Calculation),
     typeNode(NodeDetail::Contour){
 }
 
-VNodeDetail::VNodeDetail(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode):id(id),
+VNodeDetail::VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode):id(id),
     typeTool(typeTool), mode(mode), typeNode(typeNode){
 }
 
@@ -33,11 +33,11 @@ VNodeDetail::VNodeDetail(const VNodeDetail &node):id(node.getId()), typeTool(nod
     mode(node.getMode()), typeNode(node.getTypeNode()){
 }
 
-Tools::Enum VNodeDetail::getTypeTool() const{
+Tool::Tools VNodeDetail::getTypeTool() const{
     return typeTool;
 }
 
-void VNodeDetail::setTypeTool(const Tools::Enum &value){
+void VNodeDetail::setTypeTool(const Tool::Tools &value){
     typeTool = value;
 }
 
@@ -49,18 +49,18 @@ void VNodeDetail::setId(const qint64 &value){
     id = value;
 }
 
-Draw::Mode VNodeDetail::getMode() const{
+Draw::Draws VNodeDetail::getMode() const{
     return mode;
 }
 
-void VNodeDetail::setMode(const Draw::Mode &value){
+void VNodeDetail::setMode(const Draw::Draws &value){
     mode = value;
 }
 
-NodeDetail::Type VNodeDetail::getTypeNode() const{
+NodeDetail::NodeDetails VNodeDetail::getTypeNode() const{
     return typeNode;
 }
 
-void VNodeDetail::setTypeNode(const NodeDetail::Type &value){
+void VNodeDetail::setTypeNode(const NodeDetail::NodeDetails &value){
     typeNode = value;
 }

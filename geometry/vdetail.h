@@ -27,19 +27,15 @@
 #include <QString>
 #include <QPainterPath>
 
-namespace Detail{
-    enum Contour
-    {
-        OpenContour,
-        CloseContour
-    };
+namespace Detail {
+    enum Contour { OpenContour, CloseContour };
+    Q_DECLARE_FLAGS(Contours, Contour)
 
-    enum Equidistant
-    {
-        OpenEquidistant,
-        CloseEquidistant
-    };
+    enum Equidistant { OpenEquidistant, CloseEquidistant };
+    Q_DECLARE_FLAGS(Equidistants, Equidistant)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Contours)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 
 class VDetail
 {
