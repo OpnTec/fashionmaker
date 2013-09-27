@@ -138,7 +138,12 @@ void VToolNormal::FullUpdateFromGui(int result){
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogNormal, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogNormal, this, event, false);
+    } else {
+        ContextMenu(dialogNormal, this, event);
+    }
 }
 
 void VToolNormal::AddToFile(){

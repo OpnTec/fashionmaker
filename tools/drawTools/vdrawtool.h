@@ -50,10 +50,13 @@ protected:
                      bool showRemove = true){
         if(!ignoreContextMenuEvent){
             QMenu menu;
-            QAction *actionOption = menu.addAction("Властивості");
+            QAction *actionOption = menu.addAction(tr("Options"));
             QAction *actionRemove;
             if(showRemove){
-                actionRemove = menu.addAction("Видалити");
+                actionRemove = menu.addAction(tr("Delete"));
+            } else {
+                actionRemove = menu.addAction(tr("Delete"));
+                actionRemove->setEnabled(false);
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){

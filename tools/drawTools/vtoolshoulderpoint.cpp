@@ -156,7 +156,12 @@ void VToolShoulderPoint::FullUpdateFromGui(int result){
 }
 
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogShoulderPoint, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogShoulderPoint, this, event, false);
+    } else {
+        ContextMenu(dialogShoulderPoint, this, event);
+    }
 }
 
 void VToolShoulderPoint::AddToFile(){

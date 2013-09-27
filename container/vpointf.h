@@ -33,6 +33,7 @@ public:
     VPointF (const VPointF &point );
     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, Draw::Draws mode = Draw::Calculation,
               qint64 idObject = 0);
+    VPointF &operator=(const VPointF &point);
     ~VPointF();
     QString name() const;
     qreal mx() const;

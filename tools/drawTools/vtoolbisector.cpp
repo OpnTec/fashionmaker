@@ -147,7 +147,12 @@ void VToolBisector::FullUpdateFromGui(int result){
 }
 
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogBisector, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogBisector, this, event, false);
+    } else {
+        ContextMenu(dialogBisector, this, event);
+    }
 }
 
 void VToolBisector::AddToFile(){
