@@ -156,7 +156,12 @@ void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogArc, this, event);
+    VArc arc = VDrawTool::data.GetArc(id);
+    if(arc.referens() > 1){
+        ContextMenu(dialogArc, this, event, false);
+    } else {
+        ContextMenu(dialogArc, this, event);
+    }
 }
 
 void VToolArc::AddToFile(){

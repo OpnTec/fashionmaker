@@ -177,7 +177,12 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePo
 }
 
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogSpline, this, event);
+    VSpline spl = VDrawTool::data.GetSpline(id);
+    if(spl.referens() > 1){
+        ContextMenu(dialogSpline, this, event, false);
+    } else {
+        ContextMenu(dialogSpline, this, event);
+    }
 }
 
 void VToolSpline::AddToFile(){

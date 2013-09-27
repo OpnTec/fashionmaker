@@ -147,7 +147,12 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
 }
 
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogPointOfContact, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogPointOfContact, this, event, false);
+    } else {
+        ContextMenu(dialogPointOfContact, this, event);
+    }
 }
 
 void VToolPointOfContact::AddToFile(){

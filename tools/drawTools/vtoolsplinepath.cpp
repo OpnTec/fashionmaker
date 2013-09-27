@@ -216,7 +216,12 @@ void VToolSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogSplinePath, this, event);
+    VSplinePath path = VDrawTool::data.GetSplinePath(id);
+    if(path.referens() > 1){
+        ContextMenu(dialogSplinePath, this, event, false);
+    } else {
+        ContextMenu(dialogSplinePath, this, event);
+    }
 }
 
 void VToolSplinePath::AddToFile(){

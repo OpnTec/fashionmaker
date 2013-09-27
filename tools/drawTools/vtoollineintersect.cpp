@@ -128,7 +128,12 @@ void VToolLineIntersect::FullUpdateFromGui(int result){
 }
 
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogLineIntersect, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogLineIntersect, this, event, false);
+    } else {
+        ContextMenu(dialogLineIntersect, this, event);
+    }
 }
 
 void VToolLineIntersect::AddToFile(){

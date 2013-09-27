@@ -79,10 +79,9 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             if(parse != Document::FullParse){
                 QMap<qint64, VDataTool*>* tools = doc->getTools();
                 VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                Q_CHECK_PTR(tool);
+                data->IncrementReferens(id, Scene::Point);
+                tool->VDataTool::setData(data);
             }
         }
         data->AddLine(basePointId, id);
@@ -94,6 +93,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             QMap<qint64, VDataTool*>* tools = doc->getTools();
+            Q_CHECK_PTR(tools);
             tools->insert(id,point);  
         }
     }
@@ -111,7 +111,12 @@ void VToolEndLine::FullUpdateFromFile(){
 }
 
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    ContextMenu(dialogEndLine, this, event);
+    VPointF point = VDrawTool::data.GetPoint(id);
+    if(point.referens() > 1){
+        ContextMenu(dialogEndLine, this, event, false);
+    } else {
+        ContextMenu(dialogEndLine, this, event);
+    }
 }
 
 void VToolEndLine::FullUpdateFromGui(int result){
