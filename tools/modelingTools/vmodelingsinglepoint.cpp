@@ -9,7 +9,7 @@
 #include "options.h"
 #include "container/vpointf.h"
 
-VModelingSinglePoint::VModelingSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VModelingSinglePoint::VModelingSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VModelingPoint(doc, data, id, parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);

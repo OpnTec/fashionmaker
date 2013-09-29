@@ -34,13 +34,13 @@ class VModelingSplinePath:public VModelingTool, public QGraphicsPathItem
     Q_OBJECT
 public:
                                      VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
-                                                     Tool::Enum typeCreation,
+                                                     Tool::Sources typeCreation,
                                                      QGraphicsItem * parent = 0);
      virtual void setDialog();
      static VModelingSplinePath* Create(QSharedPointer<DialogSplinePath> &dialog,
                                         VDomDocument *doc, VContainer *data);
      static VModelingSplinePath* Create(const qint64 _id, const VSplinePath &path, VDomDocument *doc,
-                                        VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+                                        VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
 signals:
     void                             RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
                                                  const QPointF &controlPoint, const QPointF &splinePoint);

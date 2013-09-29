@@ -31,7 +31,7 @@ class VModelingPointOfContact : public VModelingPoint
 public:
     VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                         const QString &radius, const qint64 &center, const qint64 &firstPointId,
-                        const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem * parent = 0);
+                        const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static QPointF    FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                                 const QPointF &secondPoint);
@@ -41,7 +41,7 @@ public:
                                            const qint64 &firstPointId, const qint64 &secondPointId,
                                            const QString &pointName, const qreal &mx, const qreal &my,
                                            VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                           Tool::Enum typeCreation);
+                                           Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

@@ -31,14 +31,14 @@ class VToolAlongLine : public VToolLinePoint
 public:
     VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                    const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
-                   Tool::Enum typeCreation, QGraphicsItem * parent = 0);
+                   Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void      setDialog();
     static void Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                        const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+                       VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

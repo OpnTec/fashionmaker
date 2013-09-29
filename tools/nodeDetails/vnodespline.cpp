@@ -22,7 +22,7 @@
 #include "vnodespline.h"
 
 VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 Draw::Draws typeobject, Tool::Enum typeCreation, QGraphicsItem * parent) :
+                                 Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem * parent) :
     VAbstractNode(doc, data, id, idSpline, typeobject), QGraphicsPathItem(parent){
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -35,7 +35,7 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 }
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                         Draw::Draws typeobject, const Document::Documents &parse, Tool::Enum typeCreation){
+                                         Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
     VNodeSpline *spl = 0;
     if(parse == Document::FullParse){
         spl = new VNodeSpline(doc, data, id, idSpline, typeobject, typeCreation);

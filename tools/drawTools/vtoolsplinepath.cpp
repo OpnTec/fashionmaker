@@ -23,7 +23,7 @@
 #include <QMenu>
 
 VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
-                                 Tool::Enum typeCreation,
+                                 Tool::Sources typeCreation,
                                  QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>()){
@@ -75,7 +75,7 @@ void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGrap
 
 void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene *scene,
                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                             Tool::Enum typeCreation){
+                             Tool::Sources typeCreation){
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddSplinePath(path);

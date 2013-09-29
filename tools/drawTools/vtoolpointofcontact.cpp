@@ -24,7 +24,7 @@
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,
                                          const qint64 &firstPointId, const qint64 &secondPointId,
-                                         Tool::Enum typeCreation, QGraphicsItem *parent)
+                                         Tool::Sources typeCreation, QGraphicsItem *parent)
     : VToolPoint(doc, data, id, parent), radius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogPointOfContact(QSharedPointer<DialogPointOfContact>()){
 
@@ -82,7 +82,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
                                  const qint64 &firstPointId, const qint64 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                 const Document::Documents &parse, Tool::Enum typeCreation){
+                                 const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF centerP = data->GetPoint(center);
     VPointF firstP = data->GetPoint(firstPointId);
     VPointF secondP = data->GetPoint(secondPointId);

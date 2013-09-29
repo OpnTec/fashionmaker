@@ -24,7 +24,7 @@
 
 VModelingLineIntersect::VModelingLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, Tool::Enum typeCreation, QGraphicsItem *parent):
+                                       const qint64 &p2Line2, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
     if(typeCreation == Tool::FromGui){
@@ -60,7 +60,7 @@ VModelingLineIntersect *VModelingLineIntersect::Create(const qint64 _id, const q
                                                        const qint64 &p2Line2Id, const QString &pointName,
                                                        const qreal &mx, const qreal &my, VDomDocument *doc,
                                                        VContainer *data, const Document::Documents &parse,
-                                                       Tool::Enum typeCreation){
+                                                       Tool::Sources typeCreation){
     VModelingLineIntersect *point = 0;
     VPointF p1Line1 = data->GetModelingPoint(p1Line1Id);
     VPointF p2Line1 = data->GetModelingPoint(p2Line1Id);

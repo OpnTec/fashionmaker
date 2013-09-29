@@ -23,7 +23,7 @@
 #include <QMenu>
 #include "container/calculator.h"
 
-VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                            QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetModelingArc(id);
@@ -61,7 +61,7 @@ VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocume
 
 VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius,
                                    const QString &f1, const QString &f2, VDomDocument *doc,
-                                   VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
+                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VModelingArc *toolArc = 0;
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 

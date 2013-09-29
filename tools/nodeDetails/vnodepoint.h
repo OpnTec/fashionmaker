@@ -30,9 +30,9 @@ class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
     Q_OBJECT
 public:
     VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
-                   Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
+                   Tool::Sources typeCreation, QGraphicsItem * parent = 0 );
     static VNodePoint *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                                  Draw::Draws typeobject, const Document::Documents &parse, Tool::Enum typeCreation);
+                                  Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void            FullUpdateFromFile();
     void                    NameChangePosition(const QPointF pos);

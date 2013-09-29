@@ -31,7 +31,7 @@ class VModelingShoulderPoint : public VModelingLinePoint
 public:
     VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
-                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Enum typeCreation,
+                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Sources typeCreation,
                        QGraphicsItem * parent = 0);
     virtual void setDialog();
     static QPointF    FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
@@ -42,7 +42,7 @@ public:
                                           const qint64 &p2Line, const qint64 &pShoulder,
                                           const QString &typeLine, const QString &pointName,
                                           const qreal &mx, const qreal &my, VDomDocument *doc,
-                                          VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+                                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

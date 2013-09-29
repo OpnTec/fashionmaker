@@ -25,7 +25,7 @@
 
 VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
-                                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Enum typeCreation,
+                                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Sources typeCreation,
                                        QGraphicsItem * parent):
     VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder),
     dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()){
@@ -86,7 +86,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
                                 const qint64 &p2Line, const qint64 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                const Document::Documents &parse, Tool::Enum typeCreation){
+                                const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF firstPoint = data->GetPoint(p1Line);
     VPointF secondPoint = data->GetPoint(p2Line);
     VPointF shoulderPoint = data->GetPoint(pShoulder);

@@ -31,7 +31,7 @@ class VModelingAlongLine : public VModelingLinePoint
 public:
     VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                    const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
-                   Tool::Enum typeCreation, QGraphicsItem * parent = 0);
+                   Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void      setDialog();
     static VModelingAlongLine* Create(QSharedPointer<DialogAlongLine> &dialog, VDomDocument *doc,
                                       VContainer *data);
@@ -39,7 +39,7 @@ public:
                                       const QString &formula, const qint64 &firstPointId,
                                       const qint64 &secondPointId, const qreal &mx, const qreal &my,
                                       VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                      Tool::Enum typeCreation);
+                                      Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

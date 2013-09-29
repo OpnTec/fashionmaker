@@ -24,7 +24,7 @@
 #include <QDebug>
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     Tool::Enum typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),
+                     Tool::Sources typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
     dialogLine(QSharedPointer<DialogLine>()){
     //Лінія
@@ -54,7 +54,7 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
 
 void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                       Tool::Enum typeCreation){
+                       Tool::Sources typeCreation){
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);

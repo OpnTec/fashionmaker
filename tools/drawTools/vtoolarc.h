@@ -33,14 +33,14 @@ class VToolArc :public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+    VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
              QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 _id, const qint64 &center, const QString &radius,
                        const QString &f1, const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+                       VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void              FullUpdateFromFile();
     virtual void              FullUpdateFromGui(int result);

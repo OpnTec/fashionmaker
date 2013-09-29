@@ -22,7 +22,7 @@
 #include "vnodesplinepath.h"
 
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                         Draw::Draws typeobject, Tool::Enum typeCreation,
+                                         Draw::Draws typeobject, Tool::Sources typeCreation,
                                          QGraphicsItem * parent) :
     VAbstractNode(doc, data, id, idSpline, typeobject), QGraphicsPathItem(parent){
     RefreshGeometry();
@@ -37,7 +37,7 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 
 VNodeSplinePath *VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id,
                                                  qint64 idSpline, Draw::Draws typeobject, const Document::Documents &parse,
-                                                 Tool::Enum typeCreation){
+                                                 Tool::Sources typeCreation){
     VNodeSplinePath *splPath = 0;
     if(parse == Document::FullParse){
         splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);

@@ -26,14 +26,6 @@
 #include "vdatatool.h"
 #include "container/vcontainer.h"
 
-namespace Tool{
-    enum Enum
-    {
-        FromGui,
-        FromFile
-    };
-}
-
 class VAbstractTool:public VDataTool{
     Q_OBJECT
 public:

@@ -33,7 +33,7 @@ public:
                                  VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                                              const QString &typeLine, const QString &formula,
                                              const qreal &angle, const qint64 &firstPointId,
-                                             const qint64 &secondPointId, Tool::Enum typeCreation,
+                                             const qint64 &secondPointId, Tool::Sources typeCreation,
                                              QGraphicsItem * parent = 0);
     virtual void setDialog();
     static VModelingNormal* Create(QSharedPointer<DialogNormal> &dialog, VDomDocument *doc, VContainer *data);
@@ -41,7 +41,7 @@ public:
                                    const qint64 &secondPointId, const QString typeLine,
                                    const QString pointName, const qreal angle, const qreal &mx,
                                    const qreal &my, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                   Tool::Enum typeCreation);
+                                   Tool::Sources typeCreation);
     static QPointF               FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                            const qreal &length, const qreal &angle = 0);
 public slots:

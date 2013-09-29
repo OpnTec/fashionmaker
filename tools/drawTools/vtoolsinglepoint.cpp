@@ -30,7 +30,7 @@
 #include "options.h"
 #include "container/vpointf.h"
 
-VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);

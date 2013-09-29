@@ -58,8 +58,12 @@ enum Tool {ArrowTool,
            NodeSplinePath
 };
 Q_DECLARE_FLAGS(Tools, Tool)
+
+enum Source { FromGui, FromFile };
+Q_DECLARE_FLAGS(Sources, Source)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Tools )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Sources )
 
 namespace Draw  {
     enum Draw { Calculation, Modeling };

@@ -32,7 +32,7 @@ class VModelingBisector : public VModelingLinePoint
 public:
     VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                   const QString &typeLine, const QString &formula, const qint64 &firstPointId,
-                  const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Enum typeCreation,
+                  const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Sources typeCreation,
                   QGraphicsItem * parent = 0);
     static QPointF    FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                 const QPointF &thirdPoint, const qreal& length);
@@ -43,7 +43,7 @@ public:
                                      const qint64 &secondPointId, const qint64 &thirdPointId,
                                      const QString &typeLine, const QString &pointName, const qreal &mx,
                                      const qreal &my, VDomDocument *doc, VContainer *data,
-                                     const Document::Documents &parse, Tool::Enum typeCreation);
+                                     const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);

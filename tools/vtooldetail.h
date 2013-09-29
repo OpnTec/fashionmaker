@@ -31,14 +31,14 @@ class VToolDetail: public VAbstractTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, VDetail &oldDetail,
-                Tool::Enum typeCreation, const Document::Documents &parse, VMainGraphicsScene *scene,
+                Tool::Sources typeCreation, const Document::Documents &parse, VMainGraphicsScene *scene,
                 QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetail,
                        VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation);
+                       VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
     template <typename T>
     void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool){
         tool->setParentItem(this);

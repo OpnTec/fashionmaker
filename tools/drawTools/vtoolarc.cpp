@@ -23,7 +23,7 @@
 #include <QMenu>
 #include "container/calculator.h"
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                    QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetArc(id);
@@ -62,7 +62,7 @@ void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *sce
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc,
-                      VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
+                      VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
     Calculator cal(data);

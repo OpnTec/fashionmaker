@@ -25,7 +25,7 @@
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                         const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
+                         const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>()){
 
@@ -65,7 +65,7 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
                                          const QString typeLine, const QString pointName,
                                          const qreal angle, const qreal &mx, const qreal &my,
                                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                         Tool::Enum typeCreation){
+                                         Tool::Sources typeCreation){
     VModelingNormal *point = 0;
     VPointF firstPoint = data->GetModelingPoint(firstPointId);
     VPointF secondPoint = data->GetModelingPoint(secondPointId);

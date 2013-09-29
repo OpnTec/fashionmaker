@@ -26,7 +26,7 @@
 #include "modelingTools/modelingtools.h"
 
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, VDetail &oldDetail,
-                         Tool::Enum typeCreation, const Document::Documents &parse,
+                         Tool::Sources typeCreation, const Document::Documents &parse,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent),
       dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
@@ -241,7 +241,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
 
 void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetail,
                          VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, Tool::Enum typeCreation){
+                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddDetail(newDetail);

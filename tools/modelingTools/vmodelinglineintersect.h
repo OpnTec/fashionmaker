@@ -33,7 +33,7 @@ public:
                                                           const qint64 &id,
                                                           const qint64 &p1Line1,
                                                           const qint64 &p2Line1, const qint64 &p1Line2,
-                                                          const qint64 &p2Line2, Tool::Enum typeCreation,
+                                                          const qint64 &p2Line2, Tool::Sources typeCreation,
                                                           QGraphicsItem * parent = 0);
     virtual void setDialog();
     static VModelingLineIntersect* Create(QSharedPointer<DialogLineIntersect> &dialog,
@@ -42,7 +42,7 @@ public:
                                           const qint64 &p1Line2Id, const qint64 &p2Line2Id,
                                           const QString &pointName, const qreal &mx, const qreal &my,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                          Tool::Enum typeCreation);
+                                          Tool::Sources typeCreation);
 public slots:
     virtual void                        FullUpdateFromFile();
     virtual void                        FullUpdateFromGui(int result);

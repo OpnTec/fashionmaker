@@ -24,7 +24,7 @@
 
 VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
-                             const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Enum typeCreation,
+                             const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Sources typeCreation,
                              QGraphicsItem *parent):
     VModelingLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
     thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>()){
@@ -79,7 +79,7 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
                                              const qint64 &thirdPointId, const QString &typeLine,
                                              const QString &pointName, const qreal &mx, const qreal &my,
                                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                             Tool::Enum typeCreation){
+                                             Tool::Sources typeCreation){
     VModelingBisector *point = 0;
     VPointF firstPoint = data->GetModelingPoint(firstPointId);
     VPointF secondPoint = data->GetModelingPoint(secondPointId);
