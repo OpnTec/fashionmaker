@@ -26,11 +26,23 @@ VPointF::VPointF():_name(QString()), _mx(0), _my(0), _x(0), _y(0), _referens(0),
 }
 
 VPointF::VPointF ( const VPointF & point ):_name(point.name()), _mx(point.mx()), _my(point.my()),
-    _x(point.x()), _y(point.y()), _referens(0), mode(point.getMode()), idObject(point.getIdObject()){
+    _x(point.x()), _y(point.y()), _referens(point.referens()), mode(point.getMode()), idObject(point.getIdObject()){
 }
 
 VPointF::VPointF (qreal x, qreal y , QString name, qreal mx, qreal my, Draw::Draws mode, qint64 idObject):_name(name), _mx(mx),
     _my(my), _x(x), _y(y), _referens(0), mode(mode), idObject(idObject){
+}
+
+VPointF &VPointF::operator =(const VPointF &point){
+    _name = point.name();
+    _mx = point.mx();
+    _my = point.my();
+    _x = point.x();
+    _y = point.y();
+    _referens = point.referens();
+    mode = point.getMode();
+    idObject = point.getIdObject();
+    return *this;
 }
 
 VPointF::~VPointF(){

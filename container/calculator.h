@@ -23,8 +23,6 @@
 #define CALCULATOR_H
 
 #include <QString>
-#include <QMap>
-#include <QLineF>
 #include "vcontainer.h"
 
 /**

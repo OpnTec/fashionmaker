@@ -370,8 +370,6 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     return param;
 }
 
-
-
 void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document::Documents &parse){
     QDomNode domNode = node.firstChild();

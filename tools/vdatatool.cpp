@@ -33,10 +33,6 @@ VDataTool &VDataTool::operator =(const VDataTool &tool){
    return *this;
 }
 
-VContainer VDataTool::getData() const{
-    return data;
-}
-
 void VDataTool::setData(const VContainer *value){
     data = *value;
 }

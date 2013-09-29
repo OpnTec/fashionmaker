@@ -112,7 +112,7 @@ private:
     qint64      GetParametrId(const QDomElement& domElement) const;
     qint64      GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
     QString     GetParametrString(const QDomElement& domElement, const QString &name) const;
-    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;
+    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;  
 };
 
 #pragma GCC diagnostic pop

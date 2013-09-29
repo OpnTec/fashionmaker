@@ -34,8 +34,7 @@ namespace Tool{
     };
 }
 
-class VAbstractTool:public VDataTool
-{
+class VAbstractTool:public VDataTool{
     Q_OBJECT
 public:
                           VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);

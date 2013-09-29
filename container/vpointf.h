@@ -26,8 +26,7 @@
 #include <QString>
 #include "options.h"
 
-class VPointF
-{
+class VPointF{
 public:
     VPointF();
     VPointF (const VPointF &point );
