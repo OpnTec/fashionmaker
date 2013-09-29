@@ -27,8 +27,8 @@
 class VDataTool : public QObject{
     Q_OBJECT
 public:
-    explicit VDataTool(VContainer *data, QObject *parent = 0);
-    virtual ~VDataTool();
+    explicit VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data){}
+    virtual ~VDataTool(){}
     VDataTool& operator= (const VDataTool &tool);
     VContainer getData() const { return data; }
     void setData(const VContainer *value);
