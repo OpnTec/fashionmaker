@@ -78,20 +78,14 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
         } else {
             data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point, Draw::Modeling);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(basePointId, id, Draw::Modeling);
-        data->IncrementReferens(basePointId, Scene::Point, Draw::Modeling);
         if(parse == Document::FullParse){
             point = new VModelingEndLine(doc, data, id, typeLine, formula, angle, basePointId, typeCreation);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(basePointId);
         }
     }
     return point;

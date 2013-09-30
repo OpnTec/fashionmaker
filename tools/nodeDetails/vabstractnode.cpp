@@ -25,9 +25,7 @@
 VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
                              Draw::Draws typeobject, QObject *parent) :
     VAbstractTool(doc, data, id, parent), idNode(idNode), typeobject(typeobject){
-}
-
-VAbstractNode::~VAbstractNode(){
+    _referens = 0;
 }
 
 void VAbstractNode::AddToModeling(const QDomElement &domElement){
@@ -39,4 +37,20 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement){
         qCritical()<<"Can't find tag Modeling"<< Q_FUNC_INFO;
     }
     emit toolhaveChange();
+}
+
+void VAbstractNode::decrementReferens(){
+    if(_referens > 0){
+        --_referens;
+    }
+    if(_referens <= 0){
+        doc->DecrementReferens(idNode);
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            QDomNode element = domElement.parentNode();
+            if(!element.isNull()){
+                element.removeChild(domElement);
+            }
+        }
+    }
 }

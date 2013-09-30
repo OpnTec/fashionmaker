@@ -25,8 +25,7 @@
 #include "../vabstracttool.h"
 #include <QMenu>
 
-class VDrawTool : public VAbstractTool
-{
+class VDrawTool : public VAbstractTool{
     Q_OBJECT
 public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
@@ -54,9 +53,11 @@ protected:
             QAction *actionRemove;
             if(showRemove){
                 actionRemove = menu.addAction(tr("Delete"));
-            } else {
-                actionRemove = menu.addAction(tr("Delete"));
-                actionRemove->setEnabled(false);
+                if(_referens > 1){
+                    actionRemove->setEnabled(false);
+                } else {
+                    actionRemove->setEnabled(true);
+                }
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){
@@ -73,6 +74,8 @@ protected:
                 dialog->show();
             }
             if(selectedAction == actionRemove){
+                //deincrement referens
+                RemoveReferens();
                 //remove form xml file
                 QDomElement domElement = doc->elementById(QString().setNum(id));
                 if(domElement.isElement()){

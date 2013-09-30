@@ -70,6 +70,9 @@ void VToolSplinePath::setDialog(){
 void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene *scene,
                              VDomDocument *doc, VContainer *data){
     VSplinePath path = dialog->GetPath();
+    for(qint32 i = 0; i < path.CountPoint(); ++i){
+        doc->IncrementReferens(path[i].P());
+    }
     Create(0, path, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
@@ -82,12 +85,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
     } else {
         data->UpdateSplinePath(id, path);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::SplinePath);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
@@ -97,8 +95,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
     }
 }
 
@@ -216,12 +213,7 @@ void VToolSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VSplinePath path = VDrawTool::data.GetSplinePath(id);
-    if(path.referens() > 1){
-        ContextMenu(dialogSplinePath, this, event, false);
-    } else {
-        ContextMenu(dialogSplinePath, this, event);
-    }
+    ContextMenu(dialogSplinePath, this, event);
 }
 
 void VToolSplinePath::AddToFile(){
@@ -265,6 +257,13 @@ void VToolSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolSplinePath::RemoveReferens(){
+    VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
+    for(qint32 i = 0; i < splPath.Count(); ++i){
+        doc->DecrementReferens(splPath[i].P());
+    }
 }
 
 void VToolSplinePath::RefreshGeometry(){

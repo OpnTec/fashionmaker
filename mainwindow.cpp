@@ -729,7 +729,7 @@ void MainWindow::ActionSaveAs(){
     QString filters("Lekalo files (*.xml);;All files (*.*)");
     QString defaultFilter("Lekalo files (*.xml)");
     QString fName = QFileDialog::getSaveFileName(this, "Зберегти файл як", QDir::homePath(),
-                                                    filters, &defaultFilter);
+                                                 filters, &defaultFilter);
     if(fName.isEmpty())
         return;
     if(fName.indexOf(".xml",fName.size()-4)<0){

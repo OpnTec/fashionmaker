@@ -19,24 +19,22 @@
  **
  ****************************************************************************/
 
-#define _USE_MATH_DEFINES
-#include <cmath>
 #include "varc.h"
 #include <QDebug>
 
 VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-    center(0), points(0), _referens(0), mode(Draw::Calculation), idObject(0){
+    center(0), points(0), mode(Draw::Calculation), idObject(0){
 }
 
 VArc::VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
             qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-      center(center), points(points), _referens(0), mode(mode), idObject(idObject){
+      center(center), points(points), mode(mode), idObject(idObject){
 }
 
 VArc::VArc(const VArc &arc): f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
-    center(arc.GetCenter()), points(arc.GetDataPoints()), _referens(0), mode(arc.getMode()),
+    center(arc.GetCenter()), points(arc.GetDataPoints()), mode(arc.getMode()),
     idObject(arc.getIdObject()){
 }
 
@@ -50,7 +48,6 @@ VArc &VArc::operator =(const VArc &arc){
     this->formulaRadius = arc.GetFormulaRadius();
     this->center = arc.GetCenter();
     this->mode = arc.getMode();
-    this->_referens = 0;
     this->idObject = arc.getIdObject();
     return *this;
 }
@@ -198,37 +195,18 @@ QVector<QPointF> VArc::SplOfArc(qint32 number) const{
     return QVector<QPointF>();
 }
 
-qint32 VArc::referens() const{
-    return _referens;
-}
-
-void VArc::incrementReferens(){
-    ++_referens;
-}
-
-void VArc::decrementReferens(){
-    if(_referens > 0){
-        --_referens;
-    }
-}
-
-
-Draw::Draws VArc::getMode() const
-{
+Draw::Draws VArc::getMode() const{
     return mode;
 }
 
-void VArc::setMode(const Draw::Draws &value)
-{
+void VArc::setMode(const Draw::Draws &value){
     mode = value;
 }
 
-qint64 VArc::getIdObject() const
-{
+qint64 VArc::getIdObject() const{
     return idObject;
 }
 
-void VArc::setIdObject(const qint64 &value)
-{
+void VArc::setIdObject(const qint64 &value){
     idObject = value;
 }

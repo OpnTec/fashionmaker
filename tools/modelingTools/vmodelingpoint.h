@@ -26,12 +26,12 @@
 #include "widgets/vgraphicssimpletextitem.h"
 #include "options.h"
 
-class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem
-{
+class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem{
     Q_OBJECT
 public:
-    VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
-    virtual ~VModelingPoint();
+                            VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id,
+                                           QGraphicsItem * parent = 0);
+    virtual                 ~VModelingPoint();
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            FullUpdateFromGui(int result) = 0;
@@ -46,8 +46,7 @@ protected:
     virtual void            RefreshPointGeometry(const VPointF &point);
     void                    RefreshLine();
 private:
-    VModelingPoint(const VModelingPoint &tool);
-    const VModelingPoint &operator=(const VModelingPoint &tool);
+    Q_DISABLE_COPY(VModelingPoint)
 };
 
 #endif // VMODELINGPOINT_H

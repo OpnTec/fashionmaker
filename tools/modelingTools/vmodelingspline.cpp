@@ -100,16 +100,14 @@ VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, con
         data->UpdateModelingSpline(id, spline);
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
-            data->IncrementReferens(id, Scene::Spline, Draw::Modeling);
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4, Draw::Modeling), spline.GetLength());
-    data->IncrementReferens(p1, Scene::Point, Draw::Modeling);
-    data->IncrementReferens(p4, Scene::Point, Draw::Modeling);
     if(parse == Document::FullParse){
         spl = new VModelingSpline(doc, data, id, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
+        doc->IncrementReferens(p1);
+        doc->IncrementReferens(p4);
     }
     return spl;
 }
@@ -209,6 +207,12 @@ void VModelingSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingSpline::RemoveReferens(){
+    VSpline spl = VAbstractTool::data.GetModelingSpline(id);
+    doc->DecrementReferens(spl.GetP1());
+    doc->DecrementReferens(spl.GetP4());
 }
 
 void VModelingSpline::RefreshGeometry(){

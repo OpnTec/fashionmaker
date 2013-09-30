@@ -40,6 +40,7 @@ VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id,
     if(parse == Document::FullParse){
         spl = new VNodeSpline(doc, data, id, idSpline, typeobject, typeCreation);
         doc->AddTool(id, spl);
+        doc->IncrementReferens(idSpline);
     } else {
         doc->UpdateToolData(id, data);
     }

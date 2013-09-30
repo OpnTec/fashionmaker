@@ -35,17 +35,21 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     }
 }
 
-VNodeSplinePath *VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id,
-                                                 qint64 idSpline, Draw::Draws typeobject, const Document::Documents &parse,
-                                                 Tool::Sources typeCreation){
-    VNodeSplinePath *splPath = 0;
+void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+                             Draw::Draws typeobject, const Document::Documents &parse,
+                             Tool::Sources typeCreation){
     if(parse == Document::FullParse){
-        splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
+        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
+        Q_CHECK_PTR(splPath);
         doc->AddTool(id, splPath);
+        VSplinePath path = data->GetModelingSplinePath(id);
+        const QVector<VSplinePoint> *points = path.GetPoint();
+        for(qint32 i = 0; i<points->size(); ++i){
+            doc->IncrementReferens(points->at(i).P());
+        }
     } else {
         doc->UpdateToolData(id, data);
     }
-    return splPath;
 }
 
 void VNodeSplinePath::FullUpdateFromFile(){

@@ -91,12 +91,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     } else {
         data->UpdateArc(id, arc);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::Arc);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
@@ -106,8 +101,8 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(toolArc, &VToolArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,toolArc);
+        doc->AddTool(id, toolArc);
+        doc->IncrementReferens(center);
     }
 }
 
@@ -156,12 +151,7 @@ void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VArc arc = VDrawTool::data.GetArc(id);
-    if(arc.referens() > 1){
-        ContextMenu(dialogArc, this, event, false);
-    } else {
-        ContextMenu(dialogArc, this, event);
-    }
+    ContextMenu(dialogArc, this, event);
 }
 
 void VToolArc::AddToFile(){
@@ -193,6 +183,11 @@ void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolArc::RemoveReferens(){
+    VArc arc = VAbstractTool::data.GetArc(id);
+    doc->DecrementReferens(arc.GetCenter());
 }
 
 void VToolArc::RefreshGeometry(){

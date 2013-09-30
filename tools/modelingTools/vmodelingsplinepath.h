@@ -29,18 +29,18 @@
 #include "widgets/vcontrolpointspline.h"
 #include "container/vcontainer.h"
 
-class VModelingSplinePath:public VModelingTool, public QGraphicsPathItem
-{
+class VModelingSplinePath:public VModelingTool, public QGraphicsPathItem{
     Q_OBJECT
 public:
                                      VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
                                                      Tool::Sources typeCreation,
                                                      QGraphicsItem * parent = 0);
-     virtual void setDialog();
-     static VModelingSplinePath* Create(QSharedPointer<DialogSplinePath> &dialog,
-                                        VDomDocument *doc, VContainer *data);
-     static VModelingSplinePath* Create(const qint64 _id, const VSplinePath &path, VDomDocument *doc,
-                                        VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+     virtual void                    setDialog();
+     static VModelingSplinePath*     Create(QSharedPointer<DialogSplinePath> &dialog,
+                                            VDomDocument *doc, VContainer *data);
+     static VModelingSplinePath*     Create(const qint64 _id, const VSplinePath &path, VDomDocument *doc,
+                                            VContainer *data, const Document::Documents &parse,
+                                            Tool::Sources typeCreation);
 signals:
     void                             RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
                                                  const QPointF &controlPoint, const QPointF &splinePoint);
@@ -57,6 +57,7 @@ protected:
     virtual void                     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void                     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void                     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void                     RemoveReferens();
 private:
     QSharedPointer<DialogSplinePath> dialogSplinePath;
     QVector<VControlPointSpline *>   controlPoints;

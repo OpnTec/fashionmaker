@@ -48,6 +48,7 @@ protected:
     virtual void      AddToFile();
     virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void      RemoveReferens();
 private:
     qint64            firstPoint;
     qint64            secondPoint;

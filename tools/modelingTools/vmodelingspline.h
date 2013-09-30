@@ -30,19 +30,19 @@
 #include "container/vcontainer.h"
 #include "geometry/vsplinepath.h"
 
-class VModelingSpline:public VModelingTool, public QGraphicsPathItem
-{
+class VModelingSpline:public VModelingTool, public QGraphicsPathItem{
     Q_OBJECT
 public:
                                    VModelingSpline (VDomDocument *doc, VContainer *data, qint64 id,
                                                     Tool::Sources typeCreation, QGraphicsItem * parent = 0 );
-    virtual void setDialog();
-    static VModelingSpline* Create(QSharedPointer<DialogSpline> &dialog, VDomDocument *doc,
-                                   VContainer *data);
-    static VModelingSpline* Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
-                                   const qreal kAsm2, const qreal &angle1, const qreal &angle2,
-                                   const qreal &kCurve, VDomDocument *doc, VContainer *data,
-                                   const Document::Documents &parse, Tool::Sources typeCreation);
+    virtual void                   setDialog();
+    static VModelingSpline*        Create(QSharedPointer<DialogSpline> &dialog, VDomDocument *doc,
+                                          VContainer *data);
+    static VModelingSpline*        Create(const qint64 _id, const qint64 &p1, const qint64 &p4,
+                                          const qreal &kAsm1, const qreal kAsm2, const qreal &angle1,
+                                          const qreal &angle2, const qreal &kCurve, VDomDocument *doc,
+                                          VContainer *data, const Document::Documents &parse,
+                                          Tool::Sources typeCreation);
 signals:
     void                           RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position,
                                                const QPointF &controlPoint, const QPointF &splinePoint );
@@ -59,6 +59,7 @@ protected:
     virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void                   hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void                   hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void                   RemoveReferens();
 private:
     QSharedPointer<DialogSpline>   dialogSpline;
     QVector<VControlPointSpline *> controlPoints;

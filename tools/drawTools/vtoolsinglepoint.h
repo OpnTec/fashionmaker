@@ -44,6 +44,7 @@ protected:
     virtual void                      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void                      AddToFile();
     QVariant                          itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void                      decrementReferens();
 private:
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };

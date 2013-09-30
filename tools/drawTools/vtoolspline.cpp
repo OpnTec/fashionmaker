@@ -98,12 +98,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     } else {
         data->UpdateSpline(id, spline);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::Spline);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
@@ -113,8 +108,9 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
+        doc->IncrementReferens(p1);
+        doc->IncrementReferens(p4);
     }
 }
 
@@ -177,12 +173,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePo
 }
 
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VSpline spl = VDrawTool::data.GetSpline(id);
-    if(spl.referens() > 1){
-        ContextMenu(dialogSpline, this, event, false);
-    } else {
-        ContextMenu(dialogSpline, this, event);
-    }
+    ContextMenu(dialogSpline, this, event);
 }
 
 void VToolSpline::AddToFile(){
@@ -217,6 +208,12 @@ void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolSpline::RemoveReferens(){
+    VSpline spl = VAbstractTool::data.GetSpline(id);
+    doc->DecrementReferens(spl.GetP1());
+    doc->DecrementReferens(spl.GetP4());
 }
 
 void VToolSpline::RefreshGeometry(){

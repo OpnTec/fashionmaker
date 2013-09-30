@@ -180,9 +180,6 @@ public:
      * @param Pmirror точка відносно якої відбувається вертикальне дзеркалення сплайну.
      */
 //    void             Mirror(const QPointF Pmirror);
-    qint32 referens() const;
-    void incrementReferens();
-    void decrementReferens();
     Draw::Draws getMode() const;
     void setMode(const Draw::Draws &value);
     static QVector<QPointF> SplinePoints(QPointF p1, QPointF p4, qreal angle1,
@@ -229,7 +226,6 @@ private:
     qreal kAsm2;
     qreal kCurve;
     const QMap<qint64, VPointF> *points;
-    qint32 _referens;
     Draw::Draws mode;
     qint64 idObject;
     /**

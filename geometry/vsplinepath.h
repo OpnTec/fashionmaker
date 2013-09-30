@@ -23,22 +23,21 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
-#include <QVector>
 #include "vspline.h"
 #include "options.h"
+#include <QCoreApplication>
 
 namespace SplinePoint{
-    enum Position
-    {
-        FirstPoint,
-        LastPoint
-    };
+enum Position { FirstPoint, LastPoint };
+Q_DECLARE_FLAGS(Positions, Position)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
 
 /**
  * @brief The VSplinePath клас, що розраховує шлях сплайнів.
  */
 class VSplinePath{
+    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                           /**
                            * @brief VSplinePath конструктор по замовчуванню.
@@ -74,9 +73,6 @@ public:
     const QVector<VSplinePoint> *GetPoint() const;
     VSplinePath& operator=(const VSplinePath &path);
     VSplinePoint & operator[](int indx);
-    qint32 referens() const;
-    void incrementReferens();
-    void decrementReferens();
     Draw::Draws getMode() const;
     void setMode(const Draw::Draws &value);
 
@@ -91,7 +87,6 @@ protected:
     qreal kCurve;
     Draw::Draws mode;
     const QMap<qint64, VPointF> *points;
-    qint32 _referens;
     qint64 idObject;
 };
 

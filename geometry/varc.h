@@ -98,12 +98,8 @@ public:
     qint32 NumberSplOfArc () const;
     QVector<QPointF> GetPoints () const;
     QVector<QPointF> SplOfArc( qint32 number ) const;
-    qint32 referens() const;
-    void incrementReferens();
-    void decrementReferens();
     Draw::Draws getMode() const;
     void setMode(const Draw::Draws &value);
-
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
 
@@ -128,7 +124,6 @@ private:
      */
     qint64 center;
     const QMap<qint64, VPointF> *points;
-    qint32 _referens;
     Draw::Draws mode;
     qint64 idObject;
 };

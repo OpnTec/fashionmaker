@@ -37,8 +37,7 @@ namespace Detail {
 Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Contours)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 
-class VDetail
-{
+class VDetail{
 public:
     VDetail();
     VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
@@ -49,13 +48,10 @@ public:
     VNodeDetail & operator[](int indx);
     QString getName() const;
     void setName(const QString &value);
-
     qreal getMx() const;
     void setMx(const qreal &value);
-
     qreal getMy() const;
     void setMy(const qreal &value);
-
 private:
     QVector<VNodeDetail> nodes;
     QString name;

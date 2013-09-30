@@ -52,6 +52,7 @@ protected:
     virtual void              mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void              hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void              hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void              RemoveReferens();
 private:
     QSharedPointer<DialogArc> dialogArc;
     void                      RefreshGeometry();

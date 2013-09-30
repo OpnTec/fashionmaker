@@ -29,19 +29,19 @@ class VNodeArc :public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
-                 Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    static VNodeArc *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
-                                Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+                 VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
+                          Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
+                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
-    virtual void                 FullUpdateFromFile();
+    virtual void FullUpdateFromFile();
 protected:
-    virtual void                 AddToFile();
-    virtual void                 mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void AddToFile();
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
-    void                         RefreshGeometry();
+    void         RefreshGeometry();
 };
 
-#endif // VNODEARC_H
+#endif // VNODEARC_H4

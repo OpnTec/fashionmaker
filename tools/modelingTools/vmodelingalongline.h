@@ -25,30 +25,30 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogalongline.h"
 
-class VModelingAlongLine : public VModelingLinePoint
-{
+class VModelingAlongLine : public VModelingLinePoint{
     Q_OBJECT
 public:
-    VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
-                   const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
-                   Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    virtual void      setDialog();
-    static VModelingAlongLine* Create(QSharedPointer<DialogAlongLine> &dialog, VDomDocument *doc,
-                                      VContainer *data);
-    static VModelingAlongLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                                      const QString &formula, const qint64 &firstPointId,
-                                      const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                      Tool::Sources typeCreation);
+                                   VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id,
+                                                      const QString &formula, const qint64 &firstPointId,
+                                                      const qint64 &secondPointId, const QString &typeLine,
+                                                      Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void                    setDialog();
+    static VModelingAlongLine*      Create(QSharedPointer<DialogAlongLine> &dialog, VDomDocument *doc,
+                                           VContainer *data);
+    static VModelingAlongLine*      Create(const qint64 _id, const QString &pointName, const QString &typeLine,
+                                           const QString &formula, const qint64 &firstPointId,
+                                           const qint64 &secondPointId, const qreal &mx, const qreal &my,
+                                           VDomDocument *doc, VContainer *data,
+                                           const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
-    virtual void      FullUpdateFromFile();
-    virtual void      FullUpdateFromGui(int result);
+    virtual void                    FullUpdateFromFile();
+    virtual void                    FullUpdateFromGui(int result);
 protected:
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void      AddToFile();
-
+    virtual void                    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void                    AddToFile();
+    virtual void                    RemoveReferens();
 private:
-    qint64            secondPointId;
+    qint64                          secondPointId;
     QSharedPointer<DialogAlongLine> dialogAlongLine;
 };
 

@@ -46,6 +46,7 @@ public slots:
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();
+    virtual void      RemoveReferens();
 private:
     QString           radius;
     qint64            center;

@@ -99,12 +99,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
@@ -114,8 +109,10 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(center);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }
@@ -147,12 +144,7 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
 }
 
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogPointOfContact, this, event, false);
-    } else {
-        ContextMenu(dialogPointOfContact, this, event);
-    }
+    ContextMenu(dialogPointOfContact, this, event);
 }
 
 void VToolPointOfContact::AddToFile(){
@@ -171,4 +163,10 @@ void VToolPointOfContact::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolPointOfContact::RemoveReferens(){
+    doc->DecrementReferens(center);
+    doc->DecrementReferens(firstPointId);
+    doc->DecrementReferens(secondPointId);
 }

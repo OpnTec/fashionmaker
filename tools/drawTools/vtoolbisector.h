@@ -49,6 +49,7 @@ public slots:
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();
+    virtual void      RemoveReferens();
 private:
     qint64            firstPointId;
     qint64            thirdPointId;

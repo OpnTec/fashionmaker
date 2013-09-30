@@ -22,7 +22,6 @@
 #ifndef VSPLINEPOINT_H
 #define VSPLINEPOINT_H
 
-#include "QtGlobal"
 #include <QMetaType>
 
 /**

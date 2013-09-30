@@ -24,6 +24,7 @@
 
 VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
 VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false){
+    _referens = 0;
 }
 
 VModelingTool::~VModelingTool(){
@@ -45,4 +46,20 @@ void VModelingTool::AddToModeling(const QDomElement &domElement){
         qCritical()<<"Can't find tag Modeling"<< Q_FUNC_INFO;
     }
     emit toolhaveChange();
+}
+
+void VModelingTool::decrementReferens(){
+    if(_referens > 0){
+        --_referens;
+    }
+    if(_referens <= 0){
+        RemoveReferens();
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            QDomNode element = domElement.parentNode();
+            if(!element.isNull()){
+                element.removeChild(domElement);
+            }
+        }
+    }
 }

@@ -67,6 +67,8 @@ public:
     void        GarbageCollector();
     void        AddTool(const qint64 &id, VDataTool *tool);
     void        UpdateToolData(const qint64 &id, VContainer *data);
+    void        IncrementReferens(qint64 id) const;
+    void        DecrementReferens(qint64 id) const;
 signals:
     void        ChangedActivDraw(const QString newName);
     void        ChangedNameDraw(const QString oldName, const QString newName);

@@ -24,13 +24,13 @@
 
 #include "vmodelingpoint.h"
 
-class VModelingLinePoint : public VModelingPoint
-{
+class VModelingLinePoint : public VModelingPoint{
     Q_OBJECT
 public:
-    VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
-                   const QString &typeLine, const QString &formula,
-                   const qint64 &basePointId, const qreal &angle, QGraphicsItem * parent = 0);
+                      VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                         const QString &typeLine, const QString &formula,
+                                         const qint64 &basePointId, const qreal &angle,
+                                         QGraphicsItem * parent = 0);
 protected:
     QString           typeLine;
     QString           formula;
@@ -38,9 +38,9 @@ protected:
     qint64            basePointId;
     QGraphicsLineItem *mainLine;
     virtual void      RefreshGeometry();
+    virtual void      RemoveReferens();
 private:
-                      VModelingLinePoint(const VModelingLinePoint &tool);
-    const             VModelingLinePoint &operator=(const VModelingLinePoint &tool);
+    Q_DISABLE_COPY(VModelingLinePoint)
 };
 
 #endif // VMODELINGLINEPOINT_H

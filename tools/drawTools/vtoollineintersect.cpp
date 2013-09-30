@@ -75,12 +75,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(p1Line1Id, id);
@@ -95,8 +90,11 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
             scene->addItem(point);
             connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(p1Line1Id);
+            doc->IncrementReferens(p2Line1Id);
+            doc->IncrementReferens(p1Line2Id);
+            doc->IncrementReferens(p2Line2Id);
         }
     }
 }
@@ -128,12 +126,7 @@ void VToolLineIntersect::FullUpdateFromGui(int result){
 }
 
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogLineIntersect, this, event, false);
-    } else {
-        ContextMenu(dialogLineIntersect, this, event);
-    }
+    ContextMenu(dialogLineIntersect, this, event);
 }
 
 void VToolLineIntersect::AddToFile(){
@@ -152,4 +145,11 @@ void VToolLineIntersect::AddToFile(){
     AddAttribute(domElement, "p2Line2", p2Line2);
 
     AddToCalculation(domElement);
+}
+
+void VToolLineIntersect::RemoveReferens(){
+    doc->DecrementReferens(p1Line1);
+    doc->DecrementReferens(p2Line1);
+    doc->DecrementReferens(p1Line2);
+    doc->DecrementReferens(p2Line2);
 }

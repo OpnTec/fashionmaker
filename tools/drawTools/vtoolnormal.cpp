@@ -78,12 +78,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(firstPointId, id);
@@ -94,8 +89,9 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
             scene->addItem(point);
             connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolNormal::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }
@@ -138,12 +134,7 @@ void VToolNormal::FullUpdateFromGui(int result){
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogNormal, this, event, false);
-    } else {
-        ContextMenu(dialogNormal, this, event);
-    }
+    ContextMenu(dialogNormal, this, event);
 }
 
 void VToolNormal::AddToFile(){
@@ -163,4 +154,9 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolNormal::RemoveReferens(){
+    doc->DecrementReferens(secondPointId);
+    VToolLinePoint::RemoveReferens();
 }

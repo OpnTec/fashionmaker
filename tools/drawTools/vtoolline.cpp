@@ -53,18 +53,14 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
 }
 
 void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                       Tool::Sources typeCreation){
+                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                       const Document::Documents &parse, Tool::Sources typeCreation){
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
     data->AddLine(firstPoint, secondPoint);
     if(parse != Document::FullParse){
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        Q_CHECK_PTR(tools);
-        VDataTool *tool = tools->value(id);
-        Q_CHECK_PTR(tool);
-        tool->VDataTool::setData(data);
+        doc->UpdateToolData(id, data);
     }
     VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if(parse == Document::FullParse){
@@ -74,8 +70,9 @@ void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(line, &VToolLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,line);
+        doc->AddTool(id, line);
+        doc->IncrementReferens(firstPoint);
+        doc->IncrementReferens(secondPoint);
     }
 }
 
@@ -148,5 +145,10 @@ void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolLine::RemoveReferens(){
+    doc->DecrementReferens(firstPoint);
+    doc->DecrementReferens(secondPoint);
 }
 

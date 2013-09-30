@@ -39,16 +39,16 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     }
 }
 
-VNodePoint *VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                                       Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
-    VNodePoint *point = 0;
+void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
+                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
     if(parse == Document::FullParse){
-        point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
+        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
+        Q_CHECK_PTR(point);
         doc->AddTool(id, point);
+        doc->IncrementReferens(idPoint);
     } else {
         doc->UpdateToolData(id, data);
     }
-    return point;
 }
 
 void VNodePoint::FullUpdateFromFile(){

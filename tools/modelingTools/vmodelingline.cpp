@@ -59,20 +59,15 @@ VModelingLine *VModelingLine::Create(const qint64 &id, const qint64 &firstPoint,
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
     data->AddLine(firstPoint, secondPoint, Draw::Modeling);
-    data->IncrementReferens(firstPoint, Scene::Point, Draw::Modeling);
-    data->IncrementReferens(secondPoint, Scene::Point, Draw::Modeling);
     if(parse != Document::FullParse){
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        Q_CHECK_PTR(tools);
-        VDataTool *tool = tools->value(id);
-        Q_CHECK_PTR(tool);
-        tool->VDataTool::setData(data);
+        doc->UpdateToolData(id, data);
     }
     if(parse == Document::FullParse){
         qint64 id = data->getNextId();
         line = new VModelingLine(doc, data, id, firstPoint, secondPoint, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,line);
+        doc->AddTool(id, line);
+        doc->IncrementReferens(firstPoint);
+        doc->IncrementReferens(secondPoint);
     }
     return line;
 }
@@ -121,4 +116,9 @@ void VModelingLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingLine::RemoveReferens(){
+    doc->DecrementReferens(firstPoint);
+    doc->DecrementReferens(secondPoint);
 }

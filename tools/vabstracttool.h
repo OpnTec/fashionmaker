@@ -46,7 +46,7 @@ signals:
     void                  FullUpdateTree();
 protected:
     VDomDocument          *doc;
-    qint64                id;
+    const qint64          id;
     const Qt::GlobalColor baseColor;
     Qt::GlobalColor       currentColor;
     virtual void          AddToFile()=0;
@@ -55,6 +55,7 @@ protected:
     void                  AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void                  AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     const VContainer      *getData() const;
+    virtual void          RemoveReferens(){}
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

@@ -30,11 +30,12 @@ class VAbstractNode : public VAbstractTool
 public:
                  VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
                                Draw::Draws typeobject, QObject *parent = 0 );
-    virtual      ~VAbstractNode();
+    virtual      ~VAbstractNode() {}
 protected:
     qint64       idNode;
-    Draw::Draws   typeobject;
+    Draw::Draws  typeobject;
     void         AddToModeling(const QDomElement &domElement);
+    virtual void decrementReferens();
 };
 
 #endif // VABSTRACTNODE_H

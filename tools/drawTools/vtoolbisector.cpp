@@ -95,12 +95,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(firstPointId, id);
@@ -112,8 +107,10 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);   
+            doc->AddTool(id, point);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
+            doc->IncrementReferens(thirdPointId);
         }
     }
 }
@@ -147,12 +144,7 @@ void VToolBisector::FullUpdateFromGui(int result){
 }
 
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogBisector, this, event, false);
-    } else {
-        ContextMenu(dialogBisector, this, event);
-    }
+    ContextMenu(dialogBisector, this, event);
 }
 
 void VToolBisector::AddToFile(){
@@ -172,4 +164,10 @@ void VToolBisector::AddToFile(){
     AddAttribute(domElement, "thirdPoint", thirdPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolBisector::RemoveReferens(){
+    doc->DecrementReferens(firstPointId);
+    doc->DecrementReferens(thirdPointId);
+    VToolLinePoint::RemoveReferens();
 }

@@ -47,6 +47,7 @@ public slots:
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();
+    virtual void      RemoveReferens();
 private:
     qint64            p2Line;
     qint64            pShoulder;

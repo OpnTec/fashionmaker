@@ -28,17 +28,18 @@
 class VDataTool : public QObject{
     Q_OBJECT
 public:
-    explicit VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(0){}
-    virtual ~VDataTool(){}
-    VDataTool& operator= (const VDataTool &tool);
-    VContainer getData() const { return data; }
-    void setData(const VContainer *value);
-    qint64 referens() const {return _referens;}
-    void incrementReferens(){++_referens;}
-    void decrementReferens(){--_referens;}
+    explicit              VDataTool(VContainer *data, QObject *parent = 0)
+                          : QObject(parent), data(*data), _referens(1){}
+    virtual               ~VDataTool(){}
+    VDataTool             &operator= (const VDataTool &tool);
+    inline VContainer     getData() const { return data; }
+    void                  setData(const VContainer *value);
+    virtual inline qint64 referens() const {return _referens;}
+    virtual inline void   incrementReferens(){++_referens;}
+    virtual void          decrementReferens();
 protected:
-    VContainer   data;
-    qint64 _referens;
+    VContainer            data;
+    qint64                _referens;
 };
 
 #endif // VDATATOOL_H

@@ -65,12 +65,7 @@ void VToolAlongLine::FullUpdateFromGui(int result){
 }
 
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogAlongLine, this, event, false);
-    } else {
-        ContextMenu(dialogAlongLine, this, event);
-    }
+    ContextMenu(dialogAlongLine, this, event);
 }
 
 void VToolAlongLine::AddToFile(){
@@ -89,6 +84,11 @@ void VToolAlongLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolAlongLine::RemoveReferens(){
+    doc->DecrementReferens(secondPointId);
+    VToolLinePoint::RemoveReferens();
 }
 
 void VToolAlongLine::setDialog(){
@@ -132,12 +132,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
         } else {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
@@ -149,9 +144,9 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
             scene->addItem(point);
             connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
-
+            doc->AddTool(id, point);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }

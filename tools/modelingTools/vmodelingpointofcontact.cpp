@@ -102,22 +102,16 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
         } else {
             data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point, Draw::Modeling);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
-        data->IncrementReferens(center, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(firstPointId, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(secondPointId, Scene::Point, Draw::Modeling);
         if(parse == Document::FullParse){
             point = new VModelingPointOfContact(doc, data, id, radius, center, firstPointId, secondPointId,
                                                 typeCreation);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(center);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
     return point;
@@ -169,4 +163,10 @@ void VModelingPointOfContact::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToModeling(domElement);
+}
+
+void VModelingPointOfContact::RemoveReferens(){
+    doc->DecrementReferens(center);
+    doc->DecrementReferens(firstPointId);
+    doc->DecrementReferens(secondPointId);
 }

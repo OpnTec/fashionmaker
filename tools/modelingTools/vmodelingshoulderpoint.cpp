@@ -83,11 +83,12 @@ VModelingShoulderPoint *VModelingShoulderPoint::Create(QSharedPointer<DialogShou
 }
 
 VModelingShoulderPoint *VModelingShoulderPoint::Create(const qint64 _id, const QString &formula,
-                                                        const qint64 &p1Line, const qint64 &p2Line,
-                                                        const qint64 &pShoulder, const QString &typeLine,
-                                                        const QString &pointName, const qreal &mx,
-                                                        const qreal &my, VDomDocument *doc, VContainer *data,
-                                                        const Document::Documents &parse, Tool::Sources typeCreation){
+                                                       const qint64 &p1Line, const qint64 &p2Line,
+                                                       const qint64 &pShoulder, const QString &typeLine,
+                                                       const QString &pointName, const qreal &mx,
+                                                       const qreal &my, VDomDocument *doc, VContainer *data,
+                                                       const Document::Documents &parse,
+                                                       const Tool::Sources &typeCreation){
     VModelingShoulderPoint *point = 0;
     VPointF firstPoint = data->GetModelingPoint(p1Line);
     VPointF secondPoint = data->GetModelingPoint(p2Line);
@@ -105,24 +106,18 @@ VModelingShoulderPoint *VModelingShoulderPoint::Create(const qint64 _id, const Q
         } else {
             data->UpdateModelingPoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point, Draw::Modeling);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(p1Line, id, Draw::Modeling);
         data->AddLine(p2Line, id, Draw::Modeling);
-        data->IncrementReferens(p1Line, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(p2Line, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(pShoulder, Scene::Point, Draw::Modeling);
         if(parse == Document::FullParse){
             point = new VModelingShoulderPoint(doc, data, id, typeLine, formula, p1Line, p2Line, pShoulder,
                                                typeCreation);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(p1Line);
+            doc->IncrementReferens(p2Line);
+            doc->IncrementReferens(pShoulder);
         }
     }
     return point;
@@ -177,4 +172,10 @@ void VModelingShoulderPoint::AddToFile(){
     AddAttribute(domElement, "pShoulder", pShoulder);
 
     AddToModeling(domElement);
+}
+
+void VModelingShoulderPoint::RemoveReferens(){
+    doc->DecrementReferens(p2Line);
+    doc->DecrementReferens(pShoulder);
+    VModelingLinePoint::RemoveReferens();
 }

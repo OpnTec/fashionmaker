@@ -103,12 +103,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(p1Line, id);
@@ -121,8 +116,10 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
             scene->addItem(point);
             connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolShoulderPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(p1Line);
+            doc->IncrementReferens(p2Line);
+            doc->IncrementReferens(pShoulder);
         }
     }
 }
@@ -156,12 +153,7 @@ void VToolShoulderPoint::FullUpdateFromGui(int result){
 }
 
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogShoulderPoint, this, event, false);
-    } else {
-        ContextMenu(dialogShoulderPoint, this, event);
-    }
+    ContextMenu(dialogShoulderPoint, this, event);
 }
 
 void VToolShoulderPoint::AddToFile(){
@@ -181,4 +173,10 @@ void VToolShoulderPoint::AddToFile(){
     AddAttribute(domElement, "pShoulder", pShoulder);
 
     AddToCalculation(domElement);
+}
+
+void VToolShoulderPoint::RemoveReferens(){
+    doc->DecrementReferens(p2Line);
+    doc->DecrementReferens(pShoulder);
+    VToolLinePoint::RemoveReferens();
 }

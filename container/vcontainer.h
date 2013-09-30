@@ -143,7 +143,6 @@ public:
     const QMap<qint64, VSplinePath> *DataModelingSplinePaths() const;
     const QMap<qint64, VDetail> *DataDetails() const;
     static void  UpdateId(qint64 newId);
-    void  IncrementReferens(qint64 id, Scene::Scenes obj, Draw::Draws mode = Draw::Calculation);
     QPainterPath ContourPath(qint64 idDetail) const;
     QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
                              const qreal &width)const;

@@ -22,7 +22,6 @@
 #ifndef VNODEDETAIL_H
 #define VNODEDETAIL_H
 
-#include <QtGlobal>
 #include <QMetaType>
 #include "options.h"
 

@@ -89,6 +89,12 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
     return QGraphicsItem::itemChange(change, value);
 }
 
+void VToolSinglePoint::decrementReferens(){
+    if(_referens > 1){
+        --_referens;
+    }
+}
+
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ){
     ContextMenu(dialogSinglePoint, this, event, false);
 }
