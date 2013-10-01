@@ -24,13 +24,9 @@
 #include <QBrush>
 #include <QDebug>
 #include <QGraphicsItem>
-#include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
-#include <cmath>
-#include "options.h"
-#include "container/vpointf.h"
 
-VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -87,6 +83,12 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         }
     }
     return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolSinglePoint::decrementReferens(){
+    if(_referens > 1){
+        --_referens;
+    }
 }
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ){

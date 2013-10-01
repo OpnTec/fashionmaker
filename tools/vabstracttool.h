@@ -24,18 +24,8 @@
 
 #include "xml/vdomdocument.h"
 #include "vdatatool.h"
-#include "container/vcontainer.h"
 
-namespace Tool{
-    enum Enum
-    {
-        FromGui,
-        FromFile
-    };
-}
-
-class VAbstractTool:public VDataTool
-{
+class VAbstractTool: public VDataTool{
     Q_OBJECT
 public:
                           VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
@@ -51,11 +41,11 @@ public slots:
     virtual void          FullUpdateFromFile()=0;
 signals:
     void                  toolhaveChange();
-    void                  ChoosedTool(qint64 id, Scene::Type type);
+    void                  ChoosedTool(qint64 id, Scene::Scenes type);
     void                  FullUpdateTree();
 protected:
     VDomDocument          *doc;
-    qint64                id;
+    const qint64          id;
     const Qt::GlobalColor baseColor;
     Qt::GlobalColor       currentColor;
     virtual void          AddToFile()=0;
@@ -64,8 +54,8 @@ protected:
     void                  AddAttribute(QDomElement &domElement, const QString &name, const qreal &value);
     void                  AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     const VContainer      *getData() const;
+    virtual void          RemoveReferens(){}
 private:
-                          VAbstractTool(const VAbstractTool &tool);
-    const VAbstractTool   &operator=(const VAbstractTool &tool);
+    Q_DISABLE_COPY(VAbstractTool)
 };
 #endif // VABSTRACTTOOL_H

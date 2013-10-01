@@ -24,7 +24,7 @@
 #include <QPushButton>
 #include <QCloseEvent>
 
-DialogLine::DialogLine(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0){
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -75,7 +75,7 @@ void DialogLine::DialogAccepted(){
     DialogClosed(QDialog::Accepted);
 }
 
-void DialogLine::ChoosedObject(qint64 id, Scene::Type type){
+void DialogLine::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

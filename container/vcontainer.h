@@ -22,13 +22,9 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include <QMap>
 #include <QTableWidget>
-#include "options.h"
-#include "vpointf.h"
 #include "vstandarttablecell.h"
 #include "vincrementtablerow.h"
-#include "geometry/vspline.h"
 #include "geometry/varc.h"
 #include "geometry/vsplinepath.h"
 #include "geometry/vdetail.h"
@@ -75,13 +71,13 @@ public:
     void                AddIncrementTableRow(const QString& name, const VIncrementTableRow &cell);
     void                AddLengthLine(const QString &name, const qreal &value);
     void                AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId,
-                                        Draw::Mode mode = Draw::Calculation);
+                                        Draw::Draws mode = Draw::Calculation);
     void                AddLengthSpline(const QString &name, const qreal &value);
     void                AddLengthArc(const qint64 &center, const qint64 &id);
     void                AddLengthArc(const QString &name, const qreal &value);
     void                AddLineAngle(const QString &name, const qreal &value);
     void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId,
-                                Draw::Mode mode = Draw::Calculation);
+                                Draw::Draws mode = Draw::Calculation);
     qint64              AddSpline(const VSpline& spl);
     qint64              AddModelingSpline(const VSpline& spl);
     qint64              AddSplinePath(const VSplinePath& splPath);
@@ -89,15 +85,15 @@ public:
     qint64              AddArc(const VArc& arc);
     qint64              AddModelingArc(const VArc& arc);
     QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint,
-                                    Draw::Mode mode = Draw::Calculation) const;
+                                    Draw::Draws mode = Draw::Calculation) const;
     QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint,
-                                         Draw::Mode mode = Draw::Calculation) const;
+                                         Draw::Draws mode = Draw::Calculation) const;
     QString             GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint,
-                                      Draw::Mode mode = Draw::Calculation) const;
+                                      Draw::Draws mode = Draw::Calculation) const;
     QString             GetNameSplinePath(const VSplinePath &path,
-                                          Draw::Mode mode = Draw::Calculation) const;
+                                          Draw::Draws mode = Draw::Calculation) const;
     QString             GetNameArc(const qint64 &center, const qint64 &id,
-                                   Draw::Mode mode = Draw::Calculation) const;
+                                   Draw::Draws mode = Draw::Calculation) const;
     void                UpdatePoint(qint64 id, const VPointF& point);
     void                UpdateModelingPoint(qint64 id, const VPointF& point);
     void                UpdateDetail(qint64 id, const VDetail& detail);
@@ -143,7 +139,6 @@ public:
     const QMap<qint64, VSplinePath> *DataModelingSplinePaths() const;
     const QMap<qint64, VDetail> *DataDetails() const;
     static void  UpdateId(qint64 newId);
-    void  IncrementReferens(qint64 id, Scene::Type obj, Draw::Mode mode = Draw::Calculation);
     QPainterPath ContourPath(qint64 idDetail) const;
     QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
                              const qreal &width)const;

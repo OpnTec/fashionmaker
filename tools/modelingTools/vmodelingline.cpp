@@ -20,11 +20,10 @@
  ****************************************************************************/
 
 #include "vmodelingline.h"
-#include <QMenu>
 #include <QDebug>
 
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-                             qint64 secondPoint, Tool::Enum typeCreation, QGraphicsItem *parent):
+                             qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
     secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>()){
     //Лінія
@@ -53,26 +52,21 @@ VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDoc
 }
 
 VModelingLine *VModelingLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                                     VDomDocument *doc, VContainer *data, Document::Enum parse,
-                                     Tool::Enum typeCreation){
+                                     VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                                     Tool::Sources typeCreation){
     VModelingLine *line = 0;
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
     data->AddLine(firstPoint, secondPoint, Draw::Modeling);
-    data->IncrementReferens(firstPoint, Scene::Point, Draw::Modeling);
-    data->IncrementReferens(secondPoint, Scene::Point, Draw::Modeling);
     if(parse != Document::FullParse){
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        Q_CHECK_PTR(tools);
-        VDataTool *tool = tools->value(id);
-        Q_CHECK_PTR(tool);
-        tool->VDataTool::setData(data);
+        doc->UpdateToolData(id, data);
     }
     if(parse == Document::FullParse){
         qint64 id = data->getNextId();
         line = new VModelingLine(doc, data, id, firstPoint, secondPoint, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,line);
+        doc->AddTool(id, line);
+        doc->IncrementReferens(firstPoint);
+        doc->IncrementReferens(secondPoint);
     }
     return line;
 }
@@ -121,4 +115,9 @@ void VModelingLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingLine::RemoveReferens(){
+    doc->DecrementReferens(firstPoint);
+    doc->DecrementReferens(secondPoint);
 }

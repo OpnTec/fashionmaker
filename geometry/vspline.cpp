@@ -19,31 +19,29 @@
  **
  ****************************************************************************/
 
-#define _USE_MATH_DEFINES
-#include <cmath>
 #include "vspline.h"
 #include <QDebug>
 
 VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(0), _referens(0), mode(Draw::Calculation), idObject(0){
+    kCurve(1), points(0), mode(Draw::Calculation), idObject(0){
 }
 
 VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()),
     p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()),
-    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()), _referens(0),
+    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()),
     mode(spline.getMode()), idObject(spline.getIdObject()){
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
+                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
     p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points),
-    _referens(0), mode(mode), idObject(idObject){
+    mode(mode), idObject(idObject){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve, Draw::Mode mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(points), _referens(0), mode(mode), idObject(idObject){
+                  qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0),
+    angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(points), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
@@ -629,20 +627,6 @@ QPainterPath VSpline::GetPath() const{
     return splinePath;
 }
 
-qint32 VSpline::referens() const{
-    return _referens;
-}
-
-void VSpline::incrementReferens(){
-    ++_referens;
-}
-
-void VSpline::decrementReferens(){
-    if(_referens > 0){
-        --_referens;
-    }
-}
-
 /* Cubic equation solution. Real coefficients case.
   
    int Cubic(double *x,double a,double b,double c);
@@ -768,11 +752,11 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
 
-Draw::Mode VSpline::getMode() const{
+Draw::Draws VSpline::getMode() const{
     return mode;
 }
 
-void VSpline::setMode(const Draw::Mode &value){
+void VSpline::setMode(const Draw::Draws &value){
     mode = value;
 }
 
@@ -811,7 +795,6 @@ VSpline &VSpline::operator =(const VSpline &spline){
     this->kAsm2 = spline.GetKasm2();
     this->kCurve = spline.GetKcurve();
     this->points = spline.GetDataPoints();
-    this->_referens = 0;
     this->mode = spline.getMode();
     this->idObject = spline.getIdObject();
     return *this;

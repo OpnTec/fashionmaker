@@ -26,23 +26,22 @@
 #include <QGraphicsPathItem>
 #include "dialogs/dialogdetail.h"
 
-class VToolDetail: public VAbstractTool, public QGraphicsPathItem
-{
+class VToolDetail: public VAbstractTool, public QGraphicsPathItem{
     Q_OBJECT
 public:
-    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, VDetail &oldDetail,
-                Tool::Enum typeCreation, Document::Enum parse, VMainGraphicsScene *scene,
-                QGraphicsItem * parent = 0);
-    virtual void setDialog();
-    static void Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                       VContainer *data);
-    static void Create(const qint64 _id, VDetail &newDetail, VDetail &oldDetail,
-                       VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
-    template <typename Tool>
-    void AddTool(Tool *tool, const qint64 &id, Tools::Enum typeTool){
+                                   VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                               Tool::Sources typeCreation, VMainGraphicsScene *scene,
+                                               QGraphicsItem * parent = 0);
+    virtual void                   setDialog();
+    static void                    Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
+                                          VDomDocument *doc, VContainer *data);
+    static void                    Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScene  *scene,
+                                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                                          Tool::Sources typeCreation);
+    template <typename T>
+    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool){
         tool->setParentItem(this);
-        connect(tool, &Tool::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
+        connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
         VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
         VDetail det = VAbstractTool::data.GetDetail(this->id);
         det.append(node);
@@ -55,17 +54,20 @@ public:
 public slots:
     virtual void                   FullUpdateFromFile ();
     virtual void                   FullUpdateFromGui(int result);
+signals:
+    void                           RemoveTool(QGraphicsItem *tool);
 protected:
     virtual void                   AddToFile ();
     QVariant                       itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void                   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void                   RemoveReferens();
 private:
+    Q_DISABLE_COPY(VToolDetail)
     QSharedPointer<DialogDetail>   dialogDetail;
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
-    void AddNode(QDomElement &domElement, VNodeDetail &node);
-                                   VToolDetail(const VToolDetail &tool);
-    VToolDetail                    &operator=(const VToolDetail &tool);
+    void                           AddNode(QDomElement &domElement, VNodeDetail &node);
 };
 
 #endif // VTOOLDETAIL_H

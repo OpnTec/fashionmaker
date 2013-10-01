@@ -22,7 +22,7 @@
 #include "vnodepoint.h"
 
 VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       Draw::Mode typeobject, Tool::Enum typeCreation, QGraphicsItem *parent)
+                       Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent),
      radius(toPixel(1.5)), namePoint(0), lineName(0){
     namePoint = new VGraphicsSimpleTextItem(this);
@@ -39,16 +39,16 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     }
 }
 
-VNodePoint *VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                                       Draw::Mode typeobject, Document::Enum parse, Tool::Enum typeCreation){
-    VNodePoint *point = 0;
+void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
+                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
     if(parse == Document::FullParse){
-        point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
+        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
+        Q_CHECK_PTR(point);
         doc->AddTool(id, point);
+        doc->IncrementReferens(idPoint);
     } else {
         doc->UpdateToolData(id, data);
     }
-    return point;
 }
 
 void VNodePoint::FullUpdateFromFile(){

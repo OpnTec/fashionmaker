@@ -22,7 +22,7 @@
 #include "dialogdetail.h"
 #include <QDebug>
 
-DialogDetail::DialogDetail(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(), details(VDetail()){
     ui.setupUi(this);
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
@@ -32,7 +32,7 @@ DialogDetail::DialogDetail(const VContainer *data, Draw::Mode mode, QWidget *par
     connect(bCansel, &QPushButton::clicked, this, &DialogDetail::DialogRejected);
 }
 
-void DialogDetail::ChoosedObject(qint64 id, Scene::Type type){
+void DialogDetail::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;
@@ -47,16 +47,16 @@ void DialogDetail::ChoosedObject(qint64 id, Scene::Type type){
     if(type != Scene::Line && type != Scene::Detail){
         switch(type){
         case(Scene::Arc):
-            NewItem(id, Tools::NodeArc, mode, NodeDetail::Contour);
+            NewItem(id, Tool::NodeArc, mode, NodeDetail::Contour);
             break;
         case(Scene::Point):
-            NewItem(id, Tools::NodePoint, mode, NodeDetail::Contour);
+            NewItem(id, Tool::NodePoint, mode, NodeDetail::Contour);
             break;
         case(Scene::Spline):
-            NewItem(id, Tools::NodeSpline, mode, NodeDetail::Contour);
+            NewItem(id, Tool::NodeSpline, mode, NodeDetail::Contour);
             break;
         case(Scene::SplinePath):
-            NewItem(id, Tools::NodeSplinePath, mode, NodeDetail::Contour);
+            NewItem(id, Tool::NodeSplinePath, mode, NodeDetail::Contour);
             break;
         default:
             qWarning()<<"Get wrong scene object. Ignore.";
@@ -76,10 +76,10 @@ void DialogDetail::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, NodeDetail::Type typeNode){
+void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode){
     QString name;
     switch(typeTool){
-    case(Tools::NodePoint):{
+    case(Tool::NodePoint):{
         VPointF point;
         if(mode == Draw::Calculation){
             point = data->GetPoint(id);
@@ -89,7 +89,7 @@ void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, Nod
         name = point.name();
         break;
     }
-    case(Tools::NodeArc):{
+    case(Tool::NodeArc):{
         VArc arc;
         if(mode == Draw::Calculation){
             arc = data->GetArc(id);
@@ -99,7 +99,7 @@ void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, Nod
         name = data->GetNameArc(arc.GetCenter(), id, mode);
         break;
     }
-    case(Tools::NodeSpline):{
+    case(Tool::NodeSpline):{
         VSpline spl;
         if(mode == Draw::Calculation){
             spl = data->GetSpline(id);
@@ -109,7 +109,7 @@ void DialogDetail::NewItem(qint64 id, Tools::Enum typeTool, Draw::Mode mode, Nod
         name = spl.GetName();
         break;
     }
-    case(Tools::NodeSplinePath):{
+    case(Tool::NodeSplinePath):{
         VSplinePath splPath;
         if(mode == Draw::Calculation){
             splPath = data->GetSplinePath(id);

@@ -23,7 +23,6 @@
 #define DIALOGSPLINEPATH_H
 
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 #include "geometry/vsplinepath.h"
 
 namespace Ui {
@@ -34,13 +33,13 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogSplinePath(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                               QWidget *parent = 0);
     ~DialogSplinePath();
     VSplinePath      GetPath() const;
     void             SetPath(const VSplinePath &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
     void             PointChenged(int row);
     void             currentPointChanged( int index );
@@ -49,14 +48,13 @@ public slots:
     void             KAsm1Changed(qreal d);
     void             KAsm2Changed(qreal d);
 private:
+    Q_DISABLE_COPY(DialogSplinePath)
     Ui::DialogSplinePath *ui;
     VSplinePath      path;
     void             NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
     void             DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void             EnableFields();
     void             SetAngle(qint32 angle);
-    DialogSplinePath(const DialogSplinePath &dialog);
-    const DialogSplinePath &operator=(const DialogSplinePath& dialog);
 };
 
 #endif // DIALOGSPLINEPATH_H

@@ -23,22 +23,20 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
-#include <QVector>
 #include "vspline.h"
-#include "options.h"
+#include <QCoreApplication>
 
 namespace SplinePoint{
-    enum Position
-    {
-        FirstPoint,
-        LastPoint
-    };
+enum Position { FirstPoint, LastPoint };
+Q_DECLARE_FLAGS(Positions, Position)
 }
+Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
 
 /**
  * @brief The VSplinePath клас, що розраховує шлях сплайнів.
  */
 class VSplinePath{
+    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                           /**
                            * @brief VSplinePath конструктор по замовчуванню.
@@ -48,7 +46,7 @@ public:
                            * @brief VSplinePath конструктор по замовчуванню.
                            */
                           VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve = 1,
-                                      Draw::Mode mode = Draw::Calculation, qint64 idObject = 0);
+                                      Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                           VSplinePath(const VSplinePath& splPath);
     /**
      * @brief append додає точку сплайну до шляху.
@@ -74,11 +72,8 @@ public:
     const QVector<VSplinePoint> *GetPoint() const;
     VSplinePath& operator=(const VSplinePath &path);
     VSplinePoint & operator[](int indx);
-    qint32 referens() const;
-    void incrementReferens();
-    void decrementReferens();
-    Draw::Mode getMode() const;
-    void setMode(const Draw::Mode &value);
+    Draw::Draws getMode() const;
+    void setMode(const Draw::Draws &value);
 
     qint64 getIdObject() const;
     void setIdObject(const qint64 &value);
@@ -89,9 +84,8 @@ protected:
      */
     QVector<VSplinePoint> path;
     qreal kCurve;
-    Draw::Mode mode;
+    Draw::Draws mode;
     const QMap<qint64, VPointF> *points;
-    qint32 _referens;
     qint64 idObject;
 };
 

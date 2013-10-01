@@ -23,9 +23,7 @@
 #define DIALOGINCREMENTS_H
 
 #include "dialogtool.h"
-#include <QPushButton>
 #include "xml/vdomdocument.h"
-#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogIncrements;
@@ -47,6 +45,7 @@ signals:
     void FullUpdateTree();
     void haveLiteChange();
 private:
+    Q_DISABLE_COPY(DialogIncrements)
     Ui::DialogIncrements *ui;
     VContainer *data; // need because we must change data
     VDomDocument *doc;
@@ -62,8 +61,6 @@ private:
     void FillLengthArcs();
     void AddIncrementToFile(qint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
                             QString description);
-    DialogIncrements(const DialogIncrements &dialog);
-    const DialogIncrements &operator=(const DialogIncrements& dialog);
 };
 
 #endif // DIALOGINCREMENTS_H

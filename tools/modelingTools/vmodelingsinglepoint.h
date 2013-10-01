@@ -11,7 +11,7 @@ class VModelingSinglePoint : public VModelingPoint
     Q_OBJECT
 public:
                                       VModelingSinglePoint (VDomDocument *doc, VContainer *data, qint64 id,
-                                                        Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
+                                                        Tool::Sources typeCreation, QGraphicsItem * parent = 0 );
     virtual void                      setDialog();
 public slots:
     virtual void                      FullUpdateFromFile();

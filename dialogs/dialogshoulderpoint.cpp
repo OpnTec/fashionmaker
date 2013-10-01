@@ -22,7 +22,7 @@
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
 
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0){
     ui->setupUi(this);
@@ -66,7 +66,7 @@ DialogShoulderPoint::~DialogShoulderPoint()
     delete ui;
 }
 
-void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Type type){
+void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

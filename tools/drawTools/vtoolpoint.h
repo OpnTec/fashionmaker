@@ -24,14 +24,13 @@
 
 #include "vdrawtool.h"
 #include "widgets/vgraphicssimpletextitem.h"
-#include "options.h"
 
-class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
-{
+class VToolPoint: public VDrawTool, public QGraphicsEllipseItem{
     Q_OBJECT
 public:
-    VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
-    virtual ~VToolPoint();
+                            VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
+                                       QGraphicsItem * parent = 0);
+    virtual                 ~VToolPoint();
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            ChangedActivDraw(const QString newName);
@@ -48,8 +47,7 @@ protected:
     virtual void            RefreshPointGeometry(const VPointF &point);
     void                    RefreshLine();
 private:
-    VToolPoint(const VToolPoint &tool);
-    const VToolPoint &operator=(const VToolPoint &tool);
+    Q_DISABLE_COPY(VToolPoint)
 };
 
 #endif // VTOOLPOINT_H

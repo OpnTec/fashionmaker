@@ -23,7 +23,7 @@
 #include "ui_dialogarc.h"
 #include "../container/calculator.h"
 
-DialogArc::DialogArc(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString()){
     ui->setupUi(this);
@@ -114,7 +114,7 @@ DialogArc::~DialogArc(){
 delete ui;
 }
 
-void DialogArc::ChoosedObject(qint64 id, Scene::Type type){
+void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

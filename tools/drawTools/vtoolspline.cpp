@@ -20,13 +20,12 @@
  ****************************************************************************/
 
 #include "vtoolspline.h"
-#include <QMenu>
 #include <QDebug>
 #include "geometry/vspline.h"
 
 
 VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id,
-                         Tool::Enum typeCreation,
+                         Tool::Sources typeCreation,
                          QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
 
@@ -89,8 +88,8 @@ void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScen
 
 void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                         VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                         Tool::Enum typeCreation){
+                         VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                         Tool::Sources typeCreation){
     VSpline spline = VSpline(data->DataPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
@@ -98,23 +97,19 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     } else {
         data->UpdateSpline(id, spline);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::Spline);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
-    VDrawTool::AddRecord(id, Tools::SplineTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
     if(parse == Document::FullParse){
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
+        doc->IncrementReferens(p1);
+        doc->IncrementReferens(p4);
     }
 }
 
@@ -177,12 +172,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePo
 }
 
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VSpline spl = VDrawTool::data.GetSpline(id);
-    if(spl.referens() > 1){
-        ContextMenu(dialogSpline, this, event, false);
-    } else {
-        ContextMenu(dialogSpline, this, event);
-    }
+    ContextMenu(dialogSpline, this, event);
 }
 
 void VToolSpline::AddToFile(){
@@ -217,6 +207,12 @@ void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolSpline::RemoveReferens(){
+    VSpline spl = VAbstractTool::data.GetSpline(id);
+    doc->DecrementReferens(spl.GetP1());
+    doc->DecrementReferens(spl.GetP4());
 }
 
 void VToolSpline::RefreshGeometry(){

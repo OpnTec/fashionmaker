@@ -24,7 +24,6 @@
 #include <QBrush>
 #include <QDebug>
 #include <QGraphicsItem>
-#include "container/vpointf.h"
 
 
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,

@@ -36,7 +36,7 @@ VDrawTool::~VDrawTool(){
 void VDrawTool::setDialog(){
 }
 
-void VDrawTool::AddRecord(const qint64 id, Tools::Enum toolType, VDomDocument *doc){
+void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc){
     qint64 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
     if(cursor <= 0){

@@ -26,7 +26,7 @@
 
 VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const qint64 &basePointId,
-                           Tool::Enum typeCreation, QGraphicsItem *parent):
+                           Tool::Sources typeCreation, QGraphicsItem *parent):
     VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
 
@@ -61,7 +61,7 @@ void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsSc
 void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qreal &angle, const qint64 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
 
     VPointF basePoint = data->GetPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
@@ -77,24 +77,19 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
         } else {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                Q_CHECK_PTR(tool);
-                data->IncrementReferens(id, Scene::Point);
-                tool->VDataTool::setData(data);
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(basePointId, id);
-        VDrawTool::AddRecord(id, Tools::EndLineTool, doc);
+        VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
         if(parse == Document::FullParse){
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
                                                    basePointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            Q_CHECK_PTR(tools);
-            tools->insert(id,point);  
+            doc->AddTool(id, point);
+            doc->IncrementReferens(basePointId);
         }
     }
 }
@@ -111,12 +106,7 @@ void VToolEndLine::FullUpdateFromFile(){
 }
 
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogEndLine, this, event, false);
-    } else {
-        ContextMenu(dialogEndLine, this, event);
-    }
+    ContextMenu(dialogEndLine, this, event);
 }
 
 void VToolEndLine::FullUpdateFromGui(int result){

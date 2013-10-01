@@ -26,18 +26,17 @@
 #include "QGraphicsLineItem"
 #include "dialogs/dialogline.h"
 
-class VToolLine: public VDrawTool, public QGraphicsLineItem
-{
+class VToolLine: public VDrawTool, public QGraphicsLineItem{
     Q_OBJECT
 public:
     VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-              qint64 secondPoint, Tool::Enum typeCreation, QGraphicsItem * parent = 0);
+              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                        VContainer *data);
     static void Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
-                       VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data, Document::Enum parse,
-                       Tool::Enum typeCreation);
+                       VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                       const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      ChangedActivDraw(const QString newName);
@@ -48,6 +47,7 @@ protected:
     virtual void      AddToFile();
     virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void      RemoveReferens();
 private:
     qint64            firstPoint;
     qint64            secondPoint;

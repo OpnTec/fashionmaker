@@ -24,7 +24,7 @@
 
 VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, Tool::Enum typeCreation, QGraphicsItem *parent):
+                                       const qint64 &p2Line2, Tool::Sources typeCreation, QGraphicsItem *parent):
     VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
     if(typeCreation == Tool::FromGui){
@@ -58,7 +58,7 @@ void VToolLineIntersect::Create(QSharedPointer<DialogLineIntersect> &dialog, VMa
 void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
                                 const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                                VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                                VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF p1Line1 = data->GetPoint(p1Line1Id);
     VPointF p2Line1 = data->GetPoint(p2Line1Id);
     VPointF p1Line2 = data->GetPoint(p1Line2Id);
@@ -75,19 +75,14 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(p1Line1Id, id);
         data->AddLine(id, p2Line1Id);
         data->AddLine(p1Line2Id, id);
         data->AddLine(id, p2Line2Id);
-        VDrawTool::AddRecord(id, Tools::LineIntersectTool, doc);
+        VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
         if(parse == Document::FullParse){
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
                                                                p2Line1Id, p1Line2Id,
@@ -95,8 +90,11 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
             scene->addItem(point);
             connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(p1Line1Id);
+            doc->IncrementReferens(p2Line1Id);
+            doc->IncrementReferens(p1Line2Id);
+            doc->IncrementReferens(p2Line2Id);
         }
     }
 }
@@ -128,12 +126,7 @@ void VToolLineIntersect::FullUpdateFromGui(int result){
 }
 
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogLineIntersect, this, event, false);
-    } else {
-        ContextMenu(dialogLineIntersect, this, event);
-    }
+    ContextMenu(dialogLineIntersect, this, event);
 }
 
 void VToolLineIntersect::AddToFile(){
@@ -152,4 +145,11 @@ void VToolLineIntersect::AddToFile(){
     AddAttribute(domElement, "p2Line2", p2Line2);
 
     AddToCalculation(domElement);
+}
+
+void VToolLineIntersect::RemoveReferens(){
+    doc->DecrementReferens(p1Line1);
+    doc->DecrementReferens(p2Line1);
+    doc->DecrementReferens(p1Line2);
+    doc->DecrementReferens(p2Line2);
 }

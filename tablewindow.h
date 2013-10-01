@@ -125,6 +125,7 @@ protected:
     void                  showEvent ( QShowEvent * event );
     void                  keyPressEvent ( QKeyEvent * event );
 private:
+    Q_DISABLE_COPY(TableWindow)
     /**
      * @brief ui Змінна для доступу до об'єктів вікна.
      */
@@ -181,8 +182,6 @@ private:
      * @brief sceneRect Мінімальний розмір листа паперу що буде показуватися на сцені.
      */
     QRectF                sceneRect;
-    TableWindow(const TableWindow &window);
-    const TableWindow &operator=(const TableWindow& window);
     void SvgFile(const QString &name)const;
     void PngFile(const QString &name)const;
     void PsFile(const QString &name)const;

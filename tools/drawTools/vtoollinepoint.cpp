@@ -60,3 +60,7 @@ void VToolLinePoint::RefreshGeometry(){
         mainLine->setVisible(true);
     }
 }
+
+void VToolLinePoint::RemoveReferens(){
+    doc->DecrementReferens(basePointId);
+}

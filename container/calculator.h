@@ -22,11 +22,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <QtGlobal>
 #include <QString>
-#include <QMap>
-#include <QLineF>
-#include <QPointF>
 #include "vcontainer.h"
 
 /**
@@ -40,7 +36,7 @@ public:
      * @brief Calculator конструктор класу. Використовується при розрахунку лекала.
      * @param data покажчик на контейнер змінних
      */
-    Calculator(const VContainer *data);
+    explicit Calculator(const VContainer *data);
     /**
      * @brief eval виконує розрахунок формули.
      * @param prog рядко в якому зберігається формула.
@@ -48,8 +44,7 @@ public:
      */
     qreal eval(QString prog, QString *errorMsg);
 private:
-    Calculator(const Calculator &calc);
-    const Calculator &operator=(const Calculator &calc);
+    Q_DISABLE_COPY(Calculator)
     QString *errorMsg;
     /**
      * @brief token теперішня лексема.

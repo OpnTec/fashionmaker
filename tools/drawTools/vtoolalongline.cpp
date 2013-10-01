@@ -21,13 +21,12 @@
 
 #include "vtoolalongline.h"
 #include <QDialog>
-#include <QMenu>
 #include <QDebug>
 #include "container/calculator.h"
 
 VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                                const qint64 &firstPointId, const qint64 &secondPointId,
-                               const QString &typeLine, Tool::Enum typeCreation,
+                               const QString &typeLine, Tool::Sources typeCreation,
                                QGraphicsItem *parent):
     VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId),
     dialogAlongLine(QSharedPointer<DialogAlongLine>()){
@@ -65,12 +64,7 @@ void VToolAlongLine::FullUpdateFromGui(int result){
 }
 
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogAlongLine, this, event, false);
-    } else {
-        ContextMenu(dialogAlongLine, this, event);
-    }
+    ContextMenu(dialogAlongLine, this, event);
 }
 
 void VToolAlongLine::AddToFile(){
@@ -89,6 +83,11 @@ void VToolAlongLine::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolAlongLine::RemoveReferens(){
+    doc->DecrementReferens(secondPointId);
+    VToolLinePoint::RemoveReferens();
 }
 
 void VToolAlongLine::setDialog(){
@@ -117,7 +116,7 @@ void VToolAlongLine::Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphi
 void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                             const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                            VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                            VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
@@ -132,15 +131,10 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
         } else {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tools::AlongLineTool, doc);
+        VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
         data->AddLine(firstPointId, id);
         data->AddLine(id, secondPointId);
         if(parse == Document::FullParse){
@@ -149,9 +143,9 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
             scene->addItem(point);
             connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
-
+            doc->AddTool(id, point);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }

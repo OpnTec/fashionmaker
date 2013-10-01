@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "calculator.h"
-#include <cmath>
 #include <QDebug>
 
 #define DELIMITER  1

@@ -23,7 +23,7 @@
 #define VEXCEPTIONEMPTYPARAMETER_H
 
 #include "vexception.h"
-#include "QDomElement"
+#include <QDomElement>
 
 class VExceptionEmptyParameter : public VException
 {

@@ -27,8 +27,6 @@
 #include <QFileDialog>
 #include "options.h"
 #include <QtSvg/QtSvg>
-#undef PaperSize
-#include <QtPrintSupport/QPrinter>
 
 TableWindow::TableWindow(QWidget *parent) :
     QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
@@ -143,7 +141,7 @@ void TableWindow::StopTable(){
 }
 
 void TableWindow::saveScene(){
-    QString name = QFileDialog::getSaveFileName(0, "Зберегти розкладку", "", "Images (*.png);;Svg files (*.svg);;Ps files (*.ps)");
+    QString name = QFileDialog::getSaveFileName(0, "Зберегти розкладку", "", "Images (*.png);;Svg files (*.svg)");
     if(name.isNull()){
         return;
     }
@@ -164,8 +162,6 @@ void TableWindow::saveScene(){
         SvgFile(name);
     } else if(fi.suffix() == "png"){
         PngFile(name);
-    } else if(fi.suffix() == "ps"){
-        PsFile(name);
     }
 //    if(name.indexOf(".svg",name.size()-4)<0){
 //        name.append(".svg");
@@ -347,29 +343,4 @@ void TableWindow::PngFile(const QString &name) const{
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     currentScene->render(&painter);
     image.save(name);
-}
-
-void TableWindow::PsFile(const QString &name) const{
-
-    QPrinter printer(QPrinter::HighResolution);
-    //printer.setOutputFormat(QPrinter::PostScriptFormat);
-
-    printer.setOutputFileName(name);
-    QRectF r = paper->rect();
-    qreal x=0, y=0, w=0, h=0;
-    r.getRect(&x,&y,&w,&h);
-    printer.setResolution(PrintDPI);
-    qDebug()<<printer.resolution();
-    printer.setPaperSize ( QSizeF(w/printer.resolution()*25.4, h/printer.resolution()*25.4), QPrinter::Millimeter );
-    QPainter painter;
-    if (! painter.begin( &printer )) { // failed to open file
-        qCritical("Не можу відкрити файл %s",qPrintable(name));
-        return;
-    }
-    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    currentScene->render(&painter);
-    painter.end();
 }

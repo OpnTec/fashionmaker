@@ -21,7 +21,7 @@
 
 #include "dialogpointofcontact.h"
 
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0){
     ui.setupUi(this);
@@ -58,7 +58,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Mode mo
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
 }
 
-void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Type type){
+void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

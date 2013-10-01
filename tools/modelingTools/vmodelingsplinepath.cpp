@@ -23,7 +23,7 @@
 #include <QMenu>
 
 VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
-                                 Tool::Enum typeCreation,
+                                 Tool::Sources typeCreation,
                                  QGraphicsItem *parent):VModelingTool(doc, data, id),
     QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>()){
@@ -70,12 +70,15 @@ void VModelingSplinePath::setDialog(){
 VModelingSplinePath *VModelingSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog,
                              VDomDocument *doc, VContainer *data){
     VSplinePath path = dialog->GetPath();
+    for(qint32 i = 0; i < path.CountPoint(); ++i){
+        doc->IncrementReferens(path[i].P());
+    }
     return Create(0, path, doc, data, Document::FullParse, Tool::FromGui);
 }
 
 VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplinePath &path,
-                                                  VDomDocument *doc, VContainer *data, Document::Enum parse,
-                                                  Tool::Enum typeCreation){
+                                                  VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                                                  Tool::Sources typeCreation){
     VModelingSplinePath *spl = 0;
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
@@ -83,22 +86,13 @@ VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplin
     } else {
         data->UpdateModelingSplinePath(id, path);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::SplinePath, Draw::Modeling);
-            }
+            doc->UpdateToolData(id, data);
         }
-    }
-    for(qint32 i = 0; i < path.CountPoint(); ++i){
-        data->IncrementReferens(path.getIdObject(), Scene::Point, Draw::Modeling);
     }
     data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
     if(parse == Document::FullParse){
         spl = new VModelingSplinePath(doc, data, id, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
     }
     return spl;
 }
@@ -233,6 +227,13 @@ void VModelingSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingSplinePath::RemoveReferens(){
+    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    for(qint32 i = 0; i < splPath.Count(); ++i){
+        doc->DecrementReferens(splPath[i].P());
+    }
 }
 
 void VModelingSplinePath::RefreshGeometry(){

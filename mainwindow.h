@@ -35,8 +35,6 @@
 #include "tools/drawTools/drawtools.h"
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#include "container/vcontainer.h"
-#include "options.h"
 #include "tools/vtooldetail.h"
 
 namespace Ui {
@@ -111,8 +109,9 @@ protected:
     virtual void       closeEvent( QCloseEvent * event );
     void               Clear();
 private:
+    Q_DISABLE_COPY(MainWindow)
     Ui::MainWindow     *ui;
-    Tools::Enum        tool;
+    Tool::Tools        tool;
     VMainGraphicsScene *currentScene;
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetails;
@@ -139,9 +138,7 @@ private:
     QComboBox          *comboBoxDraws;
     QString            fileName;
     bool               changeInFile;
-    Draw::Mode         mode;
-                       MainWindow(const MainWindow &window);
-    const              MainWindow &operator=(const MainWindow &window);
+    Draw::Draws         mode;
     void               ToolBarOption();
     void               ToolBarDraws();
     void               CanselTool();
@@ -149,12 +146,12 @@ private:
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
-    void               SetToolButton(bool checked, Tools::Enum t, const QString &cursor,
+    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
                                      QSharedPointer<Dialog> &dialog,
                        Func closeDialogSlot);
     void               MinimumScrollBar();
-    template <typename Tool>
-    void               AddToolToDetail(Tool *tool, const qint64 &id, Tools::Enum typeTool,
+    template <typename T>
+    void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
 };
 

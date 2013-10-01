@@ -23,7 +23,6 @@
 #define DIALOGSPLINE_H
 
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogSpline;
@@ -33,7 +32,7 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT  
 public:
-    explicit         DialogSpline(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit         DialogSpline(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogSpline();
     qint64           getP1() const;
@@ -51,9 +50,10 @@ public:
     qreal            getKCurve() const;
     void             setKCurve(const qreal &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Type type);
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogSpline)
     Ui::DialogSpline *ui;
     qint32           number;
     qint64           p1;			// перша точка
@@ -63,8 +63,6 @@ private:
     qreal            kAsm1;
     qreal            kAsm2;
     qreal            kCurve;
-    DialogSpline(const DialogSpline &dialog);
-    const DialogSpline &operator=(const DialogSpline& dialog);
 };
 
 #endif // DIALOGSPLINE_H

@@ -35,9 +35,12 @@ public:
     void         ignoreContextMenu(bool enable);
 public slots:
     virtual void FullUpdateFromGui(int result)=0;
+signals:
+    void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
     void         AddToModeling(const QDomElement &domElement);
+    virtual void decrementReferens();
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true){
@@ -73,7 +76,7 @@ protected:
                        //update xml file
                        emit FullUpdateTree();
                        //remove form scene
-                       //emit RemoveTool(tool);
+                       emit RemoveTool(tool);
                    }
                }
             }

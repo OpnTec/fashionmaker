@@ -22,8 +22,6 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
-#include "container/vcontainer.h"
-#include "xml/vdomdocument.h"
 #include "dialogs/dialogsinglepoint.h"
 #include "vtoolpoint.h"
 
@@ -32,7 +30,7 @@ class VToolSinglePoint : public VToolPoint
     Q_OBJECT
 public:
                                       VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id,
-                                                        Tool::Enum typeCreation, QGraphicsItem * parent = 0 );
+                                                        Tool::Sources typeCreation, QGraphicsItem * parent = 0 );
     virtual void                      setDialog();
 public slots:
     virtual void                      FullUpdateFromFile();
@@ -44,6 +42,7 @@ protected:
     virtual void                      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void                      AddToFile();
     QVariant                          itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void                      decrementReferens();
 private:
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };

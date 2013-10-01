@@ -26,7 +26,7 @@
 
 
 VModelingSpline::VModelingSpline(VDomDocument *doc, VContainer *data, qint64 id,
-                         Tool::Enum typeCreation,
+                         Tool::Sources typeCreation,
                          QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
 
@@ -90,7 +90,7 @@ VModelingSpline *VModelingSpline::Create(QSharedPointer<DialogSpline> &dialog, V
 VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4,
                                          const qreal &kAsm1, const qreal kAsm2, const qreal &angle1,
                                          const qreal &angle2, const qreal &kCurve, VDomDocument *doc,
-                                         VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VModelingSpline *spl = 0;
     VSpline spline = VSpline(data->DataModelingPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
     qint64 id = _id;
@@ -100,16 +100,14 @@ VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, con
         data->UpdateModelingSpline(id, spline);
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
-            data->IncrementReferens(id, Scene::Spline, Draw::Modeling);
         }
     }
     data->AddLengthSpline(data->GetNameSpline(p1, p4, Draw::Modeling), spline.GetLength());
-    data->IncrementReferens(p1, Scene::Point, Draw::Modeling);
-    data->IncrementReferens(p4, Scene::Point, Draw::Modeling);
     if(parse == Document::FullParse){
         spl = new VModelingSpline(doc, data, id, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,spl);
+        doc->AddTool(id, spl);
+        doc->IncrementReferens(p1);
+        doc->IncrementReferens(p4);
     }
     return spl;
 }
@@ -209,6 +207,12 @@ void VModelingSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingSpline::RemoveReferens(){
+    VSpline spl = VAbstractTool::data.GetModelingSpline(id);
+    doc->DecrementReferens(spl.GetP1());
+    doc->DecrementReferens(spl.GetP4());
 }
 
 void VModelingSpline::RefreshGeometry(){

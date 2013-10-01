@@ -26,7 +26,7 @@
 
 VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const qint64 &basePointId,
-                           Tool::Enum typeCreation, QGraphicsItem *parent):
+                           Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
 
@@ -62,7 +62,7 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
                                            const QString &typeLine, const QString &formula,
                                            const qreal &angle, const qint64 &basePointId, const qreal &mx,
                                            const qreal &my, VDomDocument *doc, VContainer *data,
-                                           Document::Enum parse, Tool::Enum typeCreation){
+                                           const Document::Documents &parse, Tool::Sources typeCreation){
     VModelingEndLine *point = 0;
     VPointF basePoint = data->GetModelingPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
@@ -78,20 +78,14 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
         } else {
             data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point, Draw::Modeling);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(basePointId, id, Draw::Modeling);
-        data->IncrementReferens(basePointId, Scene::Point, Draw::Modeling);
         if(parse == Document::FullParse){
             point = new VModelingEndLine(doc, data, id, typeLine, formula, angle, basePointId, typeCreation);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(basePointId);
         }
     }
     return point;

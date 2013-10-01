@@ -23,7 +23,6 @@
 #define DIALOGSINGLEPOINT_H
 
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogSinglePoint;
@@ -42,11 +41,10 @@ public slots:
     void                  mousePress(QPointF scenePos);
     virtual void          DialogAccepted();
 private:
+    Q_DISABLE_COPY(DialogSinglePoint)
     Ui::DialogSinglePoint *ui;
     QString               name;
     QPointF               point;
-    DialogSinglePoint(const DialogSinglePoint &dialog);
-    const DialogSinglePoint &operator=(const DialogSinglePoint& dialog);
 };
 
 #endif // DIALOGSINGLEPOINT_H

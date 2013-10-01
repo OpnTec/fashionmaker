@@ -42,7 +42,7 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsScene::mousePressEvent(event);
 }
 
-void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Type type){
+void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type){
     emit ChoosedObject(id, type);
 }
 

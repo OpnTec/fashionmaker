@@ -32,7 +32,7 @@ class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit                DialogLineIntersect(const VContainer *data, Draw::Mode mode = Draw::Calculation,
+    explicit                DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                                 QWidget *parent = 0);
                             ~DialogLineIntersect();
     qint64                  getP1Line1() const;
@@ -46,13 +46,14 @@ public:
     QString                 getPointName() const;
     void                    setPointName(const QString &value);
 public slots:
-    virtual void            ChoosedObject(qint64 id, Scene::Type type);
+    virtual void            ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void            DialogAccepted();
     void                    P1Line1Changed( int index);
     void                    P2Line1Changed( int index);
     void                    P1Line2Changed( int index);
     void                    P2Line2Changed( int index);
 private:
+    Q_DISABLE_COPY(DialogLineIntersect)
     Ui::DialogLineIntersect *ui;
     qint32                  number;
     QString                 pointName;
@@ -63,8 +64,6 @@ private:
     bool                    flagPoint;
     virtual void            CheckState();
     bool                    CheckIntersecion();
-    DialogLineIntersect(const DialogLineIntersect &dialog);
-    const DialogLineIntersect &operator=(const DialogLineIntersect& dialog);
 };
 
 #endif // DIALOGLINEINTERSECT_H

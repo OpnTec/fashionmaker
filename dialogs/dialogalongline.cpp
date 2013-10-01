@@ -22,7 +22,7 @@
 #include "dialogalongline.h"
 #include "ui_dialogalongline.h"
 
-DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0){
     ui->setupUi(this);
@@ -64,7 +64,7 @@ DialogAlongLine::~DialogAlongLine()
     delete ui;
 }
 
-void DialogAlongLine::ChoosedObject(qint64 id, Scene::Type type){
+void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

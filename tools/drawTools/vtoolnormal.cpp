@@ -20,12 +20,11 @@
  ****************************************************************************/
 
 #include "vtoolnormal.h"
-#include <QMenu>
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                         const qint64 &secondPointId, Tool::Enum typeCreation, QGraphicsItem *parent):
+                         const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent):
     VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>()){
 
@@ -63,7 +62,7 @@ void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScen
 void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                          const qint64 &secondPointId, const QString typeLine, const QString pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                         VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                         VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     Calculator cal(data);
@@ -78,24 +77,20 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
         data->AddLine(firstPointId, id);
-        VDrawTool::AddRecord(id, Tools::NormalTool, doc);
+        VDrawTool::AddRecord(id, Tool::NormalTool, doc);
         if(parse == Document::FullParse){
             VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolNormal::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }
@@ -138,12 +133,7 @@ void VToolNormal::FullUpdateFromGui(int result){
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogNormal, this, event, false);
-    } else {
-        ContextMenu(dialogNormal, this, event);
-    }
+    ContextMenu(dialogNormal, this, event);
 }
 
 void VToolNormal::AddToFile(){
@@ -163,4 +153,9 @@ void VToolNormal::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolNormal::RemoveReferens(){
+    doc->DecrementReferens(secondPointId);
+    VToolLinePoint::RemoveReferens();
 }

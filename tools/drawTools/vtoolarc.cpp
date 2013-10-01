@@ -20,10 +20,9 @@
  ****************************************************************************/
 
 #include "vtoolarc.h"
-#include <QMenu>
 #include "container/calculator.h"
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                    QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetArc(id);
@@ -62,7 +61,7 @@ void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *sce
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc,
-                      VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                      VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
     Calculator cal(data);
@@ -91,23 +90,18 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     } else {
         data->UpdateArc(id, arc);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::Arc);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
-    VDrawTool::AddRecord(id, Tools::ArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
     if(parse == Document::FullParse){
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(toolArc, &VToolArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,toolArc);
+        doc->AddTool(id, toolArc);
+        doc->IncrementReferens(center);
     }
 }
 
@@ -156,12 +150,7 @@ void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
 }
 
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VArc arc = VDrawTool::data.GetArc(id);
-    if(arc.referens() > 1){
-        ContextMenu(dialogArc, this, event, false);
-    } else {
-        ContextMenu(dialogArc, this, event);
-    }
+    ContextMenu(dialogArc, this, event);
 }
 
 void VToolArc::AddToFile(){
@@ -193,6 +182,11 @@ void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VToolArc::RemoveReferens(){
+    VArc arc = VAbstractTool::data.GetArc(id);
+    doc->DecrementReferens(arc.GetCenter());
 }
 
 void VToolArc::RefreshGeometry(){

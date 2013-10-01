@@ -25,14 +25,13 @@
 #include "../vabstracttool.h"
 #include <QMenu>
 
-class VDrawTool : public VAbstractTool
-{
+class VDrawTool : public VAbstractTool{
     Q_OBJECT
 public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual      ~VDrawTool();
     virtual void setDialog();
-    static void  AddRecord(const qint64 id, Tools::Enum toolType, VDomDocument *doc);
+    static void  AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc);
     void         ignoreContextMenu(bool enable);
 public slots:
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
@@ -51,12 +50,14 @@ protected:
         if(!ignoreContextMenuEvent){
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
-            QAction *actionRemove;
+            QAction *actionRemove = 0;
             if(showRemove){
                 actionRemove = menu.addAction(tr("Delete"));
-            } else {
-                actionRemove = menu.addAction(tr("Delete"));
-                actionRemove->setEnabled(false);
+                if(_referens > 1){
+                    actionRemove->setEnabled(false);
+                } else {
+                    actionRemove->setEnabled(true);
+                }
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){
@@ -73,6 +74,8 @@ protected:
                 dialog->show();
             }
             if(selectedAction == actionRemove){
+                //deincrement referens
+                RemoveReferens();
                 //remove form xml file
                 QDomElement domElement = doc->elementById(QString().setNum(id));
                 if(domElement.isElement()){

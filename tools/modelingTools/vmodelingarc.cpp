@@ -23,7 +23,7 @@
 #include <QMenu>
 #include "container/calculator.h"
 
-VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Enum typeCreation,
+VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                            QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
     VArc arc = data->GetModelingArc(id);
@@ -61,7 +61,7 @@ VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocume
 
 VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius,
                                    const QString &f1, const QString &f2, VDomDocument *doc,
-                                   VContainer *data, Document::Enum parse, Tool::Enum typeCreation){
+                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
     VModelingArc *toolArc = 0;
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -91,20 +91,14 @@ VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const
     } else {
         data->UpdateModelingArc(id, arc);
         if(parse != Document::FullParse){
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            VDataTool *tool = tools->value(id);
-            if(tool != 0){
-                tool->VDataTool::setData(data);
-                data->IncrementReferens(id, Scene::Arc, Draw::Modeling);
-            }
+            doc->UpdateToolData(id, data);
         }
     }
     data->AddLengthArc(data->GetNameArc(center,id, Draw::Modeling), arc.GetLength());
-    data->IncrementReferens(center, Scene::Point, Draw::Modeling);
     if(parse == Document::FullParse){
         toolArc = new VModelingArc(doc, data, id, typeCreation);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
-        tools->insert(id,toolArc);
+        doc->AddTool(id, toolArc);
+        doc->IncrementReferens(center);
     }
     return toolArc;
 }
@@ -160,6 +154,11 @@ void VModelingArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
 void VModelingArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
+}
+
+void VModelingArc::RemoveReferens(){
+    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    doc->DecrementReferens(arc.GetCenter());
 }
 
 void VModelingArc::RefreshGeometry(){

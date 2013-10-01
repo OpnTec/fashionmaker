@@ -22,7 +22,6 @@
 #ifndef VTOOLNORMAL_H
 #define VTOOLNORMAL_H
 
-#include <QSharedPointer>
 #include "vtoollinepoint.h"
 #include "dialogs/dialognormal.h"
 
@@ -33,7 +32,7 @@ public:
                                  VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                                              const QString &typeLine, const QString &formula,
                                              const qreal &angle, const qint64 &firstPointId,
-                                             const qint64 &secondPointId, Tool::Enum typeCreation,
+                                             const qint64 &secondPointId, Tool::Sources typeCreation,
                                              QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
@@ -41,7 +40,7 @@ public:
     static void Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                        const qint64 &secondPointId, const QString typeLine, const QString pointName,
                        const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data, Document::Enum parse, Tool::Enum typeCreation);
+                       VDomDocument *doc, VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
     static QPointF               FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                            const qreal &length, const qreal &angle = 0);
 public slots:
@@ -50,6 +49,7 @@ public slots:
 protected:
     virtual void                 contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void                 AddToFile();
+    virtual void                 RemoveReferens();
 private:
     qint64                       secondPointId;
     QSharedPointer<DialogNormal> dialogNormal;

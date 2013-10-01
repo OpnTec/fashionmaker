@@ -23,7 +23,7 @@
 #include "ui_dialognormal.h"
 #include <QMenu>
 
-DialogNormal::DialogNormal(const VContainer *data, Draw::Mode mode, QWidget *parent) :
+DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0){
     ui->setupUi(this);
@@ -82,7 +82,7 @@ DialogNormal::~DialogNormal()
     delete ui;
 }
 
-void DialogNormal::ChoosedObject(qint64 id, Scene::Type type){
+void DialogNormal::ChoosedObject(qint64 id, Scene::Scenes type){
     if(idDetail == 0 && mode == Draw::Modeling){
         if(type == Scene::Detail){
             idDetail = id;

@@ -24,7 +24,7 @@
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,
                                          const qint64 &firstPointId, const qint64 &secondPointId,
-                                         Tool::Enum typeCreation, QGraphicsItem *parent)
+                                         Tool::Sources typeCreation, QGraphicsItem *parent)
     : VToolPoint(doc, data, id, parent), radius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogPointOfContact(QSharedPointer<DialogPointOfContact>()){
 
@@ -82,7 +82,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
                                  const qint64 &firstPointId, const qint64 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                 Document::Enum parse, Tool::Enum typeCreation){
+                                 const Document::Documents &parse, Tool::Sources typeCreation){
     VPointF centerP = data->GetPoint(center);
     VPointF firstP = data->GetPoint(firstPointId);
     VPointF secondP = data->GetPoint(secondPointId);
@@ -99,23 +99,20 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tools::PointOfContact, doc);
+        VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
         if(parse == Document::FullParse){
             VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
                                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(center);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
 }
@@ -147,12 +144,7 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
 }
 
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
-    VPointF point = VDrawTool::data.GetPoint(id);
-    if(point.referens() > 1){
-        ContextMenu(dialogPointOfContact, this, event, false);
-    } else {
-        ContextMenu(dialogPointOfContact, this, event);
-    }
+    ContextMenu(dialogPointOfContact, this, event);
 }
 
 void VToolPointOfContact::AddToFile(){
@@ -171,4 +163,10 @@ void VToolPointOfContact::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolPointOfContact::RemoveReferens(){
+    doc->DecrementReferens(center);
+    doc->DecrementReferens(firstPointId);
+    doc->DecrementReferens(secondPointId);
 }

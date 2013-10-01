@@ -50,3 +50,7 @@ void VModelingLinePoint::RefreshGeometry(){
         mainLine->setVisible(true);
     }
 }
+
+void VModelingLinePoint::RemoveReferens(){
+    doc->DecrementReferens(basePointId);
+}

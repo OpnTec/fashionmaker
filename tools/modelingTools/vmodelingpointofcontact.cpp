@@ -24,7 +24,7 @@
 VModelingPointOfContact::VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,
                                          const qint64 &firstPointId, const qint64 &secondPointId,
-                                         Tool::Enum typeCreation, QGraphicsItem *parent)
+                                         Tool::Sources typeCreation, QGraphicsItem *parent)
     : VModelingPoint(doc, data, id, parent), radius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogPointOfContact(QSharedPointer<DialogPointOfContact>()){
 
@@ -83,8 +83,8 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
                                                          const qint64 &secondPointId,
                                                          const QString &pointName, const qreal &mx,
                                                          const qreal &my, VDomDocument *doc,
-                                                         VContainer *data, Document::Enum parse,
-                                                         Tool::Enum typeCreation){
+                                                         VContainer *data, const Document::Documents &parse,
+                                                         Tool::Sources typeCreation){
     VModelingPointOfContact *point = 0;
     VPointF centerP = data->GetModelingPoint(center);
     VPointF firstP = data->GetModelingPoint(firstPointId);
@@ -102,22 +102,16 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
         } else {
             data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if(parse != Document::FullParse){
-                QMap<qint64, VDataTool*>* tools = doc->getTools();
-                VDataTool *tool = tools->value(id);
-                if(tool != 0){
-                    tool->VDataTool::setData(data);
-                    data->IncrementReferens(id, Scene::Point, Draw::Modeling);
-                }
+                doc->UpdateToolData(id, data);
             }
         }
-        data->IncrementReferens(center, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(firstPointId, Scene::Point, Draw::Modeling);
-        data->IncrementReferens(secondPointId, Scene::Point, Draw::Modeling);
         if(parse == Document::FullParse){
             point = new VModelingPointOfContact(doc, data, id, radius, center, firstPointId, secondPointId,
                                                 typeCreation);
-            QMap<qint64, VDataTool*>* tools = doc->getTools();
-            tools->insert(id,point);
+            doc->AddTool(id, point);
+            doc->IncrementReferens(center);
+            doc->IncrementReferens(firstPointId);
+            doc->IncrementReferens(secondPointId);
         }
     }
     return point;
@@ -169,4 +163,10 @@ void VModelingPointOfContact::AddToFile(){
     AddAttribute(domElement, "secondPoint", secondPointId);
 
     AddToModeling(domElement);
+}
+
+void VModelingPointOfContact::RemoveReferens(){
+    doc->DecrementReferens(center);
+    doc->DecrementReferens(firstPointId);
+    doc->DecrementReferens(secondPointId);
 }

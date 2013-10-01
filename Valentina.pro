@@ -6,7 +6,7 @@
 
 # Use out-of-source builds (shadow builds)
 
-QT       += core gui widgets xml svg printsupport
+QT       += core gui widgets xml svg
 
 TARGET = Valentina
 TEMPLATE = app
@@ -234,10 +234,10 @@ CONFIG(debug, debug|release){
     # Debug
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
-                      -isystem "/usr/include/qt5/QtCore" -O0 -Wall -Wextra -pedantic -Weffc++ \
-                      -isystem "$$OUT_PWD/uic" \
-                      -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast \
-                      -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code
+                      -isystem "/usr/include/qt5/QtCore" -isystem "$$OUT_PWD/uic" -isystem "$$OUT_PWD/moc/" \
+                      -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
+                      -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
+                      -Wunreachable-code
 }else{
     # Release
     QMAKE_CXXFLAGS += -O1
@@ -249,6 +249,17 @@ CONFIG(debug, debug|release){
     lrelease.CONFIG       += no_link target_predeps
 }
 
-
+message(Qt version: $$[QT_VERSION])
+message(Qt is installed in $$[QT_INSTALL_PREFIX])
+message(Qt resources can be found in the following locations:)
+message(Documentation: $$[QT_INSTALL_DOCS])
+message(Header files: $$[QT_INSTALL_HEADERS])
+message(Libraries: $$[QT_INSTALL_LIBS])
+message(Binary files (executables): $$[QT_INSTALL_BINS])
+message(Plugins: $$[QT_INSTALL_PLUGINS])
+message(Data files: $$[QT_INSTALL_DATA])
+message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
+message(Settings: $$[QT_INSTALL_SETTINGS])
+message(Examples: $$[QT_INSTALL_EXAMPLES])
 
 
