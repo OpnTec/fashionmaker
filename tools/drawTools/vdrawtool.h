@@ -50,7 +50,7 @@ protected:
         if(!ignoreContextMenuEvent){
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
-            QAction *actionRemove;
+            QAction *actionRemove = 0;
             if(showRemove){
                 actionRemove = menu.addAction(tr("Delete"));
                 if(_referens > 1){

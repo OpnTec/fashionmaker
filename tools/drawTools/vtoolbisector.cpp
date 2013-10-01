@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolbisector.h"
-#include <QMenu>
 
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,

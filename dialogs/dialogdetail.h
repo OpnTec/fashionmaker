@@ -24,11 +24,9 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 #include "geometry/vdetail.h"
 
-class DialogDetail : public DialogTool
-{
+class DialogDetail : public DialogTool{
     Q_OBJECT  
 public:
     explicit DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);

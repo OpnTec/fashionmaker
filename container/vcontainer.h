@@ -22,13 +22,9 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include <QMap>
 #include <QTableWidget>
-#include "options.h"
-#include "vpointf.h"
 #include "vstandarttablecell.h"
 #include "vincrementtablerow.h"
-#include "geometry/vspline.h"
 #include "geometry/varc.h"
 #include "geometry/vsplinepath.h"
 #include "geometry/vdetail.h"

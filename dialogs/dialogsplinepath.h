@@ -23,7 +23,6 @@
 #define DIALOGSPLINEPATH_H
 
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 #include "geometry/vsplinepath.h"
 
 namespace Ui {

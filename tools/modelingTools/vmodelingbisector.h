@@ -22,7 +22,6 @@
 #ifndef VMODELINGBISECTOR_H
 #define VMODELINGBISECTOR_H
 
-#include <QSharedPointer>
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogbisector.h"
 

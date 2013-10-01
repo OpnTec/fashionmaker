@@ -22,7 +22,6 @@
 #ifndef VTOOLNORMAL_H
 #define VTOOLNORMAL_H
 
-#include <QSharedPointer>
 #include "vtoollinepoint.h"
 #include "dialogs/dialognormal.h"
 

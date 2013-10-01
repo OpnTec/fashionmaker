@@ -22,12 +22,10 @@
 #ifndef VTOOLENDLINE_H
 #define VTOOLENDLINE_H
 
-#include <QSharedPointer>
 #include "vtoollinepoint.h"
 #include "dialogs/dialogendline.h"
 
-class VToolEndLine : public VToolLinePoint
-{
+class VToolEndLine : public VToolLinePoint{
     Q_OBJECT
 public:
                       VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,

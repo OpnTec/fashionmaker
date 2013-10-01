@@ -32,10 +32,8 @@
 #include <QRadioButton>
 #include <QTimer>
 #include "container/vcontainer.h"
-#include "options.h"
 
-class DialogTool : public QDialog
-{
+class DialogTool : public QDialog{
     Q_OBJECT
 public:
                      DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,

@@ -28,7 +28,6 @@
 #include <QVector>
 #include <QMap>
 #include "container/vpointf.h"
-#include "options.h"
 
 /**
  * @brief VSpline клас, що реалізує сплайн.

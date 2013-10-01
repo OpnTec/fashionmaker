@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingnormal.h"
-#include <QMenu>
 
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,

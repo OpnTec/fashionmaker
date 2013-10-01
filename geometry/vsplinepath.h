@@ -24,7 +24,6 @@
 
 #include "vsplinepoint.h"
 #include "vspline.h"
-#include "options.h"
 #include <QCoreApplication>
 
 namespace SplinePoint{

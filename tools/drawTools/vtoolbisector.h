@@ -22,12 +22,10 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
-#include <QSharedPointer>
 #include "vtoollinepoint.h"
 #include "dialogs/dialogbisector.h"
 
-class VToolBisector : public VToolLinePoint
-{
+class VToolBisector : public VToolLinePoint{
 public:
     VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                   const QString &typeLine, const QString &formula, const qint64 &firstPointId,

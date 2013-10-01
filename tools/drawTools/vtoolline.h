@@ -26,8 +26,7 @@
 #include "QGraphicsLineItem"
 #include "dialogs/dialogline.h"
 
-class VToolLine: public VDrawTool, public QGraphicsLineItem
-{
+class VToolLine: public VDrawTool, public QGraphicsLineItem{
     Q_OBJECT
 public:
     VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,

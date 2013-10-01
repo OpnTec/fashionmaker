@@ -24,7 +24,6 @@
 
 #include "vmodelingtool.h"
 #include "widgets/vgraphicssimpletextitem.h"
-#include "options.h"
 
 class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem{
     Q_OBJECT

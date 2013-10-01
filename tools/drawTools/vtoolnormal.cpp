@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolnormal.h"
-#include <QMenu>
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,

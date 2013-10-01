@@ -24,8 +24,6 @@
 
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
-#include "options.h"
-#include "container/vcontainer.h"
 #include "container/calculator.h"
 
 class DialogPointOfContact : public DialogTool

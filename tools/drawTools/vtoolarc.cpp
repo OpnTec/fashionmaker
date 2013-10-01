@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolarc.h"
-#include <QMenu>
 #include "container/calculator.h"
 
 VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,

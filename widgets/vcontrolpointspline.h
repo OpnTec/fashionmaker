@@ -25,7 +25,6 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
 #include <QObject>
-#include "options.h"
 #include "geometry/vsplinepath.h"
 
 class VControlPointSpline : public QObject, public QGraphicsEllipseItem

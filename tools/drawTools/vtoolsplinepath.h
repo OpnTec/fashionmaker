@@ -23,11 +23,9 @@
 #define VTOOLSPLINEPATH_H
 
 #include "vdrawtool.h"
-#include "xml/vdomdocument.h"
 #include <QGraphicsPathItem>
 #include "dialogs/dialogsplinepath.h"
 #include "widgets/vcontrolpointspline.h"
-#include "container/vcontainer.h"
 
 class VToolSplinePath:public VDrawTool, public QGraphicsPathItem{
     Q_OBJECT

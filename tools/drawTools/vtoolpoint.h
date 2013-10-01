@@ -24,7 +24,6 @@
 
 #include "vdrawtool.h"
 #include "widgets/vgraphicssimpletextitem.h"
-#include "options.h"
 
 class VToolPoint: public VDrawTool, public QGraphicsEllipseItem{
     Q_OBJECT

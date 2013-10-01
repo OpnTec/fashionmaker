@@ -23,11 +23,7 @@
 #define DIALOGENDLINE_H
 
 #include "dialogtool.h"
-#include <QPushButton>
 #include <QListWidgetItem>
-#include <QTimer>
-#include "options.h"
-#include "container/vcontainer.h"
 #include "container/calculator.h"
 
 namespace Ui {

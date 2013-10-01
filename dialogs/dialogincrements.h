@@ -23,9 +23,7 @@
 #define DIALOGINCREMENTS_H
 
 #include "dialogtool.h"
-#include <QPushButton>
 #include "xml/vdomdocument.h"
-#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogIncrements;

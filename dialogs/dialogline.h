@@ -23,10 +23,6 @@
 #define DIALOGLINE_H
 
 #include "dialogtool.h"
-#include <QComboBox>
-#include "container/vcontainer.h"
-#include "options.h"
-
 
 namespace Ui {
 class DialogLine;

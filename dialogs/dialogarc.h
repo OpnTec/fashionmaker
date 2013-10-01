@@ -23,7 +23,6 @@
 #define DIALOGARC_H
 
 #include "dialogtool.h"
-#include "container/vcontainer.h"
 
 namespace Ui {
 class DialogArc;

@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "mainwindow.h"
-#include <QApplication>
+#include "widgets/vapplication.h"
 #include <QTextCodec>
 #include "tablewindow.h"
 
@@ -48,7 +48,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 int main(int argc, char *argv[]){
     qInstallMessageHandler(myMessageOutput);
-    QApplication app(argc, argv);
+    VApplication app(argc, argv);
 
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + QLocale::system().name(),

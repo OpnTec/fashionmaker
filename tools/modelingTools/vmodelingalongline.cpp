@@ -21,7 +21,6 @@
 
 #include "vmodelingalongline.h"
 #include <QDialog>
-#include <QMenu>
 #include <QDebug>
 #include "container/calculator.h"
 

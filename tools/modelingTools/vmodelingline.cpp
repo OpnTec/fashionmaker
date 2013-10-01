@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingline.h"
-#include <QMenu>
 #include <QDebug>
 
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,

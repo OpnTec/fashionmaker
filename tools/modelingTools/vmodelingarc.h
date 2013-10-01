@@ -23,11 +23,9 @@
 #define VMODELINGARC_H
 
 #include "vmodelingtool.h"
-#include "xml/vdomdocument.h"
 #include <QGraphicsPathItem>
 #include "dialogs/dialogarc.h"
 #include "widgets/vcontrolpointspline.h"
-#include "container/vcontainer.h"
 
 class VModelingArc :public VModelingTool, public QGraphicsPathItem{
     Q_OBJECT

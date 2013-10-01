@@ -25,7 +25,6 @@
 #include <QDomDocument>
 #include <QMap>
 #include <QComboBox>
-#include "container/vcontainer.h"
 #include "widgets/vmaingraphicsscene.h"
 #include "tools/vdatatool.h"
 #include "vtoolrecord.h"

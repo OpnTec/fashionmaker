@@ -22,7 +22,6 @@
 #ifndef VMODELINGNORMAL_H
 #define VMODELINGNORMAL_H
 
-#include <QSharedPointer>
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialognormal.h"
 

@@ -23,11 +23,9 @@
 #define VMODELINGSPLINEPATH_H
 
 #include "vmodelingtool.h"
-#include "xml/vdomdocument.h"
 #include <QGraphicsPathItem>
 #include "dialogs/dialogsplinepath.h"
 #include "widgets/vcontrolpointspline.h"
-#include "container/vcontainer.h"
 
 class VModelingSplinePath:public VModelingTool, public QGraphicsPathItem{
     Q_OBJECT

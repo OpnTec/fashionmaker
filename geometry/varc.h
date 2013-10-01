@@ -22,10 +22,6 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include <QPainterPath>
-#include <QVector>
-#include <QMap>
-#include "container/vpointf.h"
 #include "vspline.h"
 
 /**

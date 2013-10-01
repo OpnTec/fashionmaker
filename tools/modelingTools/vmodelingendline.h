@@ -22,7 +22,6 @@
 #ifndef VMODELINGENDLINE_H
 #define VMODELINGENDLINE_H
 
-#include <QSharedPointer>
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogendline.h"
 

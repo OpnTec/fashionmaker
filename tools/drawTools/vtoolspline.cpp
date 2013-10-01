@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolspline.h"
-#include <QMenu>
 #include <QDebug>
 #include "geometry/vspline.h"
 

@@ -35,8 +35,6 @@
 #include "tools/drawTools/drawtools.h"
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#include "container/vcontainer.h"
-#include "options.h"
 #include "tools/vtooldetail.h"
 
 namespace Ui {

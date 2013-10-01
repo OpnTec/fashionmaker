@@ -22,8 +22,6 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
-#include "container/vcontainer.h"
-#include "xml/vdomdocument.h"
 #include "dialogs/dialogsinglepoint.h"
 #include "vtoolpoint.h"
 

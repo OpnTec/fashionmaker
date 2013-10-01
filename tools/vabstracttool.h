@@ -24,7 +24,6 @@
 
 #include "xml/vdomdocument.h"
 #include "vdatatool.h"
-#include "container/vcontainer.h"
 
 class VAbstractTool: public VDataTool{
     Q_OBJECT

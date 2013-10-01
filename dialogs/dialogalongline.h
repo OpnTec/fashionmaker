@@ -23,8 +23,6 @@
 #define DIALOGALONGLINE_H
 
 #include "dialogtool.h"
-#include "options.h"
-#include "container/vcontainer.h"
 #include "container/calculator.h"
 
 namespace Ui {
