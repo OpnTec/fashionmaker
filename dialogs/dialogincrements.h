@@ -59,7 +59,7 @@ private:
     void FillLengthLines();
     void FillLengthSplines();
     void FillLengthArcs();
-    void AddIncrementToFile(qint64 id, QString name, qint32 base, qreal ksize, qreal kgrowth,
+    void AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize, qreal kgrowth,
                             QString description);
 };
 
