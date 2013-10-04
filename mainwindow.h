@@ -153,6 +153,7 @@ private:
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
+    bool               SafeSaveing(const QString &fileName)const;
 };
 
 #endif // MAINWINDOW_H

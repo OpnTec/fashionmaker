@@ -461,8 +461,8 @@ void MainWindow::showEvent( QShowEvent *event ){
 void MainWindow::closeEvent(QCloseEvent *event){
     if(changeInFile == true){
         QMessageBox msgBox;
-        msgBox.setText("The pattern has been modified.");
-        msgBox.setInformativeText("Do you want to save your changes?");
+        msgBox.setText(tr("The pattern has been modified."));
+        msgBox.setInformativeText(tr("Do you want to save your changes?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
         msgBox.setIcon(QMessageBox::Question);
@@ -475,7 +475,13 @@ void MainWindow::closeEvent(QCloseEvent *event){
             } else {
                 ActionSave();
             }
-            event->accept();
+            if(changeInFile){
+                // We did't save file
+                event->ignore();
+            } else {
+                // We have successfully saved the file
+                event->accept();
+            }
             break;
         case QMessageBox::Discard:
             // Don't Save was clicked
@@ -726,9 +732,9 @@ void MainWindow::ActionDetails(bool checked){
 }
 
 void MainWindow::ActionSaveAs(){
-    QString filters("Lekalo files (*.xml);;All files (*.*)");
-    QString defaultFilter("Lekalo files (*.xml)");
-    QString fName = QFileDialog::getSaveFileName(this, "Зберегти файл як", QDir::homePath(),
+    QString filters(tr("Lekalo files (*.xml);;All files (*.*)"));
+    QString defaultFilter(tr("Lekalo files (*.xml)"));
+    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), QDir::homePath(),
                                                  filters, &defaultFilter);
     if(fName.isEmpty())
         return;
@@ -736,35 +742,29 @@ void MainWindow::ActionSaveAs(){
         fName.append(".xml");
     }
     fileName = fName;
-    QFileInfo info(fileName);
-    QString title(info.fileName());
-    title.append("-Valentina");
-    setWindowTitle(title);
 
-    QFile file(fileName);
-    if(file.open(QIODevice::WriteOnly| QIODevice::Truncate)){
-        doc->GarbageCollector();
-        const int Indent = 4;
-        QTextStream out(&file);
-        doc->save(out, Indent);
-        file.close();
-    }
-    ui->actionSave->setEnabled(false);
-    changeInFile = false;
+    ActionSave();
 }
 
 void MainWindow::ActionSave(){
     if(!fileName.isEmpty()){
-        QFile file(fileName);
-        if(file.open(QIODevice::WriteOnly| QIODevice::Truncate)){
-            doc->GarbageCollector();
-            const int Indent = 4;
-            QTextStream out(&file);
-            doc->save(out, Indent);
-            file.close();
+        bool result = SafeSaveing(fileName);
+        if(result){
+            ui->actionSave->setEnabled(false);
+            changeInFile = false;
+            QFileInfo info(fileName);
+            QString title(info.fileName());
+            title.append("-Valentina");
+            setWindowTitle(title);
+        } else {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(tr("Error!"));
+            msgBox.setText(tr("Error saving file. Can't save file."));
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.setDefaultButton(QMessageBox::Ok);
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.exec();
         }
-        ui->actionSave->setEnabled(false);
-        changeInFile = false;
     }
 }
 
@@ -810,6 +810,10 @@ void MainWindow::haveChange(){
     if(!fileName.isEmpty()){
         ui->actionSave->setEnabled(true);
         changeInFile = true;
+        QFileInfo info(fileName);
+        QString title(info.fileName());
+        title.append("*-Valentina");
+        setWindowTitle(title);
     }
 }
 
@@ -900,6 +904,48 @@ void MainWindow::MinimumScrollBar(){
     horScrollBar->setValue(horScrollBar->minimum());
     QScrollBar *verScrollBar = view->verticalScrollBar();
     verScrollBar->setValue(verScrollBar->minimum());
+}
+
+bool MainWindow::SafeSaveing(const QString &fileName) const{
+    if(fileName.isEmpty()){
+        qWarning()<<tr("Got empty file name.");
+        return false;
+    }
+    //Writing in temporary file
+    QFileInfo tempInfo(fileName);
+    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
+    qDebug()<<"file "<<fileName<<"temp file "<<temp;
+    QFile tempFile(temp);
+    if(tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate)){
+        const int Indent = 4;
+        QTextStream out(&tempFile);
+        doc->save(out, Indent);
+        tempFile.close();
+    }
+    //Replace temp file our
+    bool result = false;
+    QFile patternFile(fileName);
+    // We need here temporary file because we need restore pattern after error of copying temp file.
+    QTemporaryFile tempOfPattern;
+    if (tempOfPattern.open()) {
+        patternFile.copy(tempOfPattern.fileName());
+    }
+    if ( !patternFile.exists() || patternFile.remove() ) {
+        if ( !tempFile.copy(patternFile.fileName()) ){
+            qCritical()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
+            tempOfPattern.copy(fileName);
+            result = false;
+        } else {
+            result = true;
+        }
+    } else {
+        qCritical()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
+        result = false;
+    }
+    if(result){
+        tempFile.remove();
+    }
+    return result;
 }
 
 MainWindow::~MainWindow(){
