@@ -153,7 +153,7 @@ void DialogArc::ValChenged(int row){
     QListWidgetItem *item = ui->listWidget->item( row );
     if(ui->radioButtonLineAngles->isChecked()){
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineArc(item->text()))
-                .arg("Значення кута лінії.");
+                .arg(tr("Value angle of line."));
         ui->labelDescription->setText(desc);
         return;
     }

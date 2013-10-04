@@ -59,7 +59,7 @@ void DialogDetail::ChoosedObject(qint64 id, Scene::Scenes type){
             NewItem(id, Tool::NodeSplinePath, mode, NodeDetail::Contour);
             break;
         default:
-            qWarning()<<"Get wrong scene object. Ignore.";
+            qWarning()<<tr("Get wrong scene object. Ignore.");
             break;
         }
         this->show();
@@ -120,7 +120,7 @@ void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, No
         break;
     }
     default:
-        qWarning()<<"Get wrong tools. Ignore.";
+        qWarning()<<tr("Get wrong tools. Ignore.");
         break;
     }
 

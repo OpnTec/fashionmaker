@@ -261,7 +261,7 @@ void DialogIncrements::clickedToolButtonAdd(){
     qint32 num = 1;
     QString name;
     do{
-        name = QString("Позначення %1").arg(num);
+        name = QString(tr("Denotation %1")).arg(num);
         num++;
     }while(data->IncrementTableContains(name));
 
@@ -269,7 +269,7 @@ void DialogIncrements::clickedToolButtonAdd(){
     qreal base = 0;
     qreal ksize = 0;
     qreal kgrowth = 0;
-    QString description = QString("Опис");
+    QString description = QString(tr("Description"));
     VIncrementTableRow incrementRow = VIncrementTableRow(id, base, ksize, kgrowth, description);
     data->AddIncrementTableRow(name, incrementRow);
 
@@ -302,7 +302,7 @@ void DialogIncrements::clickedToolButtonAdd(){
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 4, item);
 
-    item = new QTableWidgetItem("Опис");
+    item = new QTableWidgetItem(tr("Description"));
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 5, item);
 
@@ -428,37 +428,37 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
 
 void DialogIncrements::InitialStandartTable(){
     ui->tableWidgetStandart->setSortingEnabled(false);
-    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Позначення")));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Розрах. знач.")));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Базове знач.")));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("В розмірі")));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("В рості")));
-    ui->tableWidgetStandart->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Опис")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Denotation")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("In growth")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Description")));
 }
 
 void DialogIncrements::InitialIncrementTable(){
     ui->tableWidgetIncrement->setSortingEnabled(false);
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Позначення")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Розрах. знач.")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Базове знач.")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("В розмірі")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("В рості")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Опис")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Denotation")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("In growth")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Description")));
 }
 
 void DialogIncrements::InitialLinesTable(){
-    ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Лінія")));
-    ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Довжина")));
+    ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Line")));
+    ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
 }
 
 void DialogIncrements::InitialSplinesTable(){
-    ui->tableWidgetSplines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Лінія")));
-    ui->tableWidgetSplines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Довжина")));
+    ui->tableWidgetSplines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Curve")));
+    ui->tableWidgetSplines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
 }
 
 void DialogIncrements::InitialArcsTable(){
-    ui->tableWidgetArcs->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Лінія")));
-    ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Довжина")));
+    ui->tableWidgetArcs->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Arc")));
+    ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
 }
 
 void DialogIncrements::DialogAccepted(){

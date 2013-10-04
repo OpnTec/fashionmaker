@@ -52,7 +52,7 @@ void DialogTool::showEvent(QShowEvent *event){
     if(isInitialized){
         return;
     }
-    isInitialized = true;//перший показ вікна вже відбувся
+    isInitialized = true;//first show windows are held
 }
 
 void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
@@ -69,7 +69,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
         }
     } else {
         if(idDetail <= 0){
-            qWarning()<<"Wrong details id."<<Q_FUNC_INFO;
+            qWarning()<<tr("Wrong details id.")<<Q_FUNC_INFO;
             return;
         }
         VDetail det = data->GetDetail(idDetail);
@@ -93,12 +93,12 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
 
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const{
     QStringList list;
-    list<<"Лінія"<<"Без лінії";
+    list<<tr("Line")<<tr("No line");
     box->addItems(list);
 }
 
 QString DialogTool::GetTypeLine(const QComboBox *box) const{
-    if(box->currentText()=="Лінія"){
+    if(box->currentText()==tr("Line")){
         return QString("hair");
     } else {
         return QString("none");
@@ -107,13 +107,13 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const{
 
 void DialogTool::SetupTypeLine(QComboBox *box, const QString &value){
     if(value == "hair"){
-        qint32 index = box->findText("Лінія");
+        qint32 index = box->findText(tr("Line"));
         if(index != -1){
             box->setCurrentIndex(index);
         }
     }
     if(value == "none"){
-        qint32 index = box->findText("Без лінії");
+        qint32 index = box->findText(tr("No line"));
         if(index != -1){
             box->setCurrentIndex(index);
         }
@@ -140,6 +140,7 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
     QListWidgetItem *item = listWidget->currentItem();
     QString val = item->text();
     lineEdit->setText(lineEdit->text().append(val));
+    lineEdit->setFocus();
 }
 
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
@@ -164,7 +165,7 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
         QString errorMsg;
         qreal result = cal.eval(edit->text(),&errorMsg);
         if(!errorMsg.isEmpty()){
-            label->setText("Помилка.");
+            label->setText(tr("Error"));
             flag = false;
         } else {
             label->setText(QString().setNum(result));
@@ -303,6 +304,7 @@ void DialogTool::PutVal(QListWidgetItem *item){
     Q_CHECK_PTR(lineEditFormula);
     QString val = item->text();
     lineEditFormula->setText(lineEditFormula->text().append(val));
+    lineEditFormula->setFocus();
 }
 
 void DialogTool::ValChenged(int row){
@@ -343,7 +345,7 @@ void DialogTool::ValChenged(int row){
     }
     if(radioButtonLengthLine->isChecked()){
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
-                .arg("Довжина лінії");
+                .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
     }
