@@ -26,7 +26,7 @@ VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius
     center(0), points(0), mode(Draw::Calculation), idObject(0){
 }
 
-VArc::VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
+VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
             qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
       center(center), points(points), mode(mode), idObject(idObject){
@@ -108,7 +108,7 @@ QPointF VArc::GetP2 () const{
     return centerP2.p2();
 }
 
-const QMap<qint64, VPointF> *VArc::GetDataPoints() const{
+const QHash<qint64, VPointF> *VArc::GetDataPoints() const{
     return points;
 }
 

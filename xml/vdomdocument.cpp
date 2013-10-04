@@ -36,22 +36,22 @@
 
 
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode) : QDomDocument(),
-    map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
-    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+    map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
 VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
                            Draw::Draws *mode) :
-    QDomDocument(name), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
-    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+    QDomDocument(name), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
 VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
                            Draw::Draws *mode) :
-    QDomDocument(doctype), map(QMap<QString, QDomElement>()), nameActivDraw(QString()), data(data),
-    tools(QMap<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
+    QDomDocument(doctype), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+    tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
 }
 
@@ -296,7 +296,7 @@ void VDomDocument::Parse(Document::Documents parse, VMainGraphicsScene *sceneDra
     }
 }
 
-QMap<qint64, VDataTool *> *VDomDocument::getTools(){
+QHash<qint64, VDataTool *> *VDomDocument::getTools(){
     return &tools;
 }
 
@@ -1035,7 +1035,7 @@ void VDomDocument::setCurrentData(){
 }
 
 void VDomDocument::GarbageCollector(){
-    QMapIterator<qint64, VDataTool*> t(tools);
+    QHashIterator<qint64, VDataTool*> t(tools);
     while (t.hasNext()) {
         t.next();
         VDataTool *tool = t.value();

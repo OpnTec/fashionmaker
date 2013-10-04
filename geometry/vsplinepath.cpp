@@ -26,7 +26,7 @@ VSplinePath::VSplinePath(): path(QVector<VSplinePoint>()), kCurve(1), mode(Draw:
     idObject(0){
 }
 
-VSplinePath::VSplinePath(const QMap<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject): path(QVector<VSplinePoint>()),
+VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject): path(QVector<VSplinePoint>()),
     kCurve(kCurve), mode(mode), points(points), idObject(idObject){
 }
 
@@ -108,7 +108,7 @@ qreal VSplinePath::GetLength() const{
     return length;
 }
 
-const QMap<qint64, VPointF> *VSplinePath::GetDataPoints() const{
+const QHash<qint64, VPointF> *VSplinePath::GetDataPoints() const{
     return points;
 }
 

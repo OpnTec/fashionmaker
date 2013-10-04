@@ -58,8 +58,8 @@ void DialogTool::showEvent(QShowEvent *event){
 void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
     box->clear();
     if(mode == Draw::Calculation){
-        const QMap<qint64, VPointF> *points = data->DataPoints();
-        QMapIterator<qint64, VPointF> i(*points);
+        const QHash<qint64, VPointF> *points = data->DataPoints();
+        QHashIterator<qint64, VPointF> i(*points);
         while (i.hasNext()) {
             i.next();
             if(i.key() != id){
@@ -373,12 +373,12 @@ bool DialogTool::CheckObject(const qint64 &id){
 }
 
 template <class key, class val>
-void DialogTool::ShowVariable(const QMap<key, val> *var){
+void DialogTool::ShowVariable(const QHash<key, val> *var){
     Q_CHECK_PTR(listWidget);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-    QMapIterator<key, val> i(*var);
+    QHashIterator<key, val> i(*var);
     while (i.hasNext()) {
         i.next();
         QListWidgetItem *item = new QListWidgetItem(i.key());

@@ -209,8 +209,8 @@ void DialogArc::ShowLineArcs(){
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QMap<QString, qreal> *lineArcsTable = data->DataLineAngles();
-    QMapIterator<QString, qreal> i(*lineArcsTable);
+    const QHash<QString, qreal> *lineArcsTable = data->DataLineAngles();
+    QHashIterator<QString, qreal> i(*lineArcsTable);
     while (i.hasNext()) {
         i.next();
         QListWidgetItem *item = new QListWidgetItem(i.key());

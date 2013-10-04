@@ -150,7 +150,7 @@ void MainWindow::ActionNewDraw(){
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
-    QMap<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<qint64, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
     SetEnableTool(true);
@@ -214,7 +214,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
 template <typename T>
 void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                  const qint64 &idDetail){
-    QMap<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<qint64, VDataTool*>* tools = doc->getTools();
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
     Q_CHECK_PTR(det);
     det->AddTool(tool, id, typeTool);

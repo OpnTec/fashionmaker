@@ -30,7 +30,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
      sceneDetails(scene){
     VDetail detail = data->GetDetail(id);
-    QMap<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<qint64, VDataTool*>* tools = doc->getTools();
     Q_CHECK_PTR(tools);
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
@@ -248,7 +248,7 @@ void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScen
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(detail, &VToolDetail::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
 }

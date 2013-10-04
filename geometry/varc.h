@@ -40,7 +40,7 @@ public:
                   * @param f1 початковий кут в градусах.
                   * @param f2 кінцевий кут в градусах.
                   */
-                 VArc (const QMap<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
+                 VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
                        qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
                        Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                  VArc(const VArc &arc);
@@ -84,7 +84,7 @@ public:
      * @return точку кінця дуги.
      */
     QPointF      GetP2 () const;
-    const QMap<qint64, VPointF> *GetDataPoints() const;
+    const QHash<qint64, VPointF> *GetDataPoints() const;
     /**
      * @brief GetPath будує шлях по даній дузі.
      * @return повертає шлях.
@@ -119,7 +119,7 @@ private:
      * @brief center центральна точка дуги.
      */
     qint64 center;
-    const QMap<qint64, VPointF> *points;
+    const QHash<qint64, VPointF> *points;
     Draw::Draws mode;
     qint64 idObject;
 };

@@ -26,15 +26,15 @@
 
 qint64 VContainer::_id = 0;
 
-VContainer::VContainer():base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
-    modelingPoints(QMap<qint64, VPointF>()),
-    standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
-    lengthLines(QMap<QString, qreal>()), lineAngles(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
-    modelingSplines(QMap<qint64, VSpline>()),
-    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), modelingArcs(QMap<qint64, VArc>()),
-    lengthArcs(QMap<QString, qreal>()),
-    splinePaths(QMap<qint64, VSplinePath>()), modelingSplinePaths(QMap<qint64, VSplinePath>()),
-    details(QMap<qint64, VDetail>()){
+VContainer::VContainer():base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
+    modelingPoints(QHash<qint64, VPointF>()),
+    standartTable(QHash<QString, VStandartTableCell>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+    lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
+    modelingSplines(QHash<qint64, VSpline>()),
+    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), modelingArcs(QHash<qint64, VArc>()),
+    lengthArcs(QHash<QString, qreal>()),
+    splinePaths(QHash<qint64, VSplinePath>()), modelingSplinePaths(QHash<qint64, VSplinePath>()),
+    details(QHash<qint64, VDetail>()){
     SetSize(500);
     SetGrowth(1760);
     CreateManTableIGroup ();
@@ -45,15 +45,15 @@ VContainer &VContainer::operator =(const VContainer &data){
     return *this;
 }
 
-VContainer::VContainer(const VContainer &data):base(QMap<QString, qint32>()), points(QMap<qint64, VPointF>()),
-    modelingPoints(QMap<qint64, VPointF>()),
-    standartTable(QMap<QString, VStandartTableCell>()), incrementTable(QMap<QString, VIncrementTableRow>()),
-    lengthLines(QMap<QString, qreal>()), lineAngles(QMap<QString, qreal>()), splines(QMap<qint64, VSpline>()),
-    modelingSplines(QMap<qint64, VSpline>()),
-    lengthSplines(QMap<QString, qreal>()), arcs(QMap<qint64, VArc>()), modelingArcs(QMap<qint64, VArc>()),
-    lengthArcs(QMap<QString, qreal>()),
-    splinePaths(QMap<qint64, VSplinePath>()), modelingSplinePaths(QMap<qint64, VSplinePath>()),
-    details(QMap<qint64, VDetail>()){
+VContainer::VContainer(const VContainer &data):base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
+    modelingPoints(QHash<qint64, VPointF>()),
+    standartTable(QHash<QString, VStandartTableCell>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+    lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
+    modelingSplines(QHash<qint64, VSpline>()),
+    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), modelingArcs(QHash<qint64, VArc>()),
+    lengthArcs(QHash<QString, qreal>()),
+    splinePaths(QHash<qint64, VSplinePath>()), modelingSplinePaths(QHash<qint64, VSplinePath>()),
+    details(QHash<qint64, VDetail>()){
     setData(data);
 }
 
@@ -77,14 +77,13 @@ void VContainer::setData(const VContainer &data){
 }
 
 template <typename key, typename val>
-val VContainer::GetObject(const QMap<key,val> &obj, key id){
+val VContainer::GetObject(const QHash<key, val> &obj, key id){
     if(obj.contains(id)){
         return obj.value(id);
     } else {
         throw VExceptionBadId(tr("Can't find object"), id);
     }
 }
-
 
 VPointF VContainer::GetPoint(qint64 id) const{
     return GetObject(points, id);
@@ -377,7 +376,7 @@ QVector<QPointF> VContainer::CheckLoops(const QVector<QPointF> &points) const{
 }
 
 void VContainer::PrepareDetails(QVector<VItem *> &list) const{
-    QMapIterator<qint64, VDetail> iDetail(details);
+    QHashIterator<qint64, VDetail> iDetail(details);
     while (iDetail.hasNext()) {
         iDetail.next();
         list.append(new VItem(ContourPath(iDetail.key()), list.size()));
@@ -389,7 +388,7 @@ void VContainer::RemoveIncrementTableRow(const QString& name){
 }
 
 template <typename val>
-void VContainer::UpdateObject(QMap<qint64, val> &obj, const qint64 &id, const val& point){
+void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, const val& point){
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     obj[id] = point;
     UpdateId(id);
@@ -567,67 +566,67 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const{
     return 0;
 }
 
-const QMap<qint64, VPointF> *VContainer::DataPoints() const{
+const QHash<qint64, VPointF> *VContainer::DataPoints() const{
     return &points;
 }
 
-const QMap<qint64, VPointF> *VContainer::DataModelingPoints() const{
+const QHash<qint64, VPointF> *VContainer::DataModelingPoints() const{
     return &modelingPoints;
 }
 
-const QMap<qint64, VSpline> *VContainer::DataSplines() const{
+const QHash<qint64, VSpline> *VContainer::DataSplines() const{
     return &splines;
 }
 
-const QMap<qint64, VSpline> *VContainer::DataModelingSplines() const{
+const QHash<qint64, VSpline> *VContainer::DataModelingSplines() const{
     return &modelingSplines;
 }
 
-const QMap<qint64, VArc> *VContainer::DataArcs() const{
+const QHash<qint64, VArc> *VContainer::DataArcs() const{
     return &arcs;
 }
 
-const QMap<qint64, VArc> *VContainer::DataModelingArcs() const{
+const QHash<qint64, VArc> *VContainer::DataModelingArcs() const{
     return &modelingArcs;
 }
 
-const QMap<QString, qint32> *VContainer::DataBase() const{
+const QHash<QString, qint32> *VContainer::DataBase() const{
     return &base;
 }
 
-const QMap<QString, VStandartTableCell> *VContainer::DataStandartTable() const{
+const QHash<QString, VStandartTableCell> *VContainer::DataStandartTable() const{
     return &standartTable;
 }
 
-const QMap<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const{
+const QHash<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const{
     return &incrementTable;
 }
 
-const QMap<QString, qreal> *VContainer::DataLengthLines() const{
+const QHash<QString, qreal> *VContainer::DataLengthLines() const{
     return &lengthLines;
 }
 
-const QMap<QString, qreal> *VContainer::DataLengthSplines() const{
+const QHash<QString, qreal> *VContainer::DataLengthSplines() const{
     return &lengthSplines;
 }
 
-const QMap<QString, qreal> *VContainer::DataLengthArcs() const{
+const QHash<QString, qreal> *VContainer::DataLengthArcs() const{
     return &lengthArcs;
 }
 
-const QMap<QString, qreal> *VContainer::DataLineAngles() const{
+const QHash<QString, qreal> *VContainer::DataLineAngles() const{
     return &lineAngles;
 }
 
-const QMap<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
+const QHash<qint64, VSplinePath> *VContainer::DataSplinePaths() const{
     return &splinePaths;
 }
 
-const QMap<qint64, VSplinePath> *VContainer::DataModelingSplinePaths() const{
+const QHash<qint64, VSplinePath> *VContainer::DataModelingSplinePaths() const{
     return &modelingSplinePaths;
 }
 
-const QMap<qint64, VDetail> *VContainer::DataDetails() const{
+const QHash<qint64, VDetail> *VContainer::DataDetails() const{
     return &details;
 }
 
@@ -648,7 +647,7 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
 }
 
 template <typename key, typename val>
-qint64 VContainer::AddObject(QMap<key, val> &obj, const val& value){
+qint64 VContainer::AddObject(QHash<key, val> &obj, const val& value){
     qint64 id = getNextId();
     obj[id] = value;
     return id;

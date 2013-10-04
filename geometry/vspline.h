@@ -26,7 +26,7 @@
 
 #include <QPainterPath>
 #include <QVector>
-#include <QMap>
+#include <QHash>
 #include "container/vpointf.h"
 
 /**
@@ -50,7 +50,7 @@ public:
                       * @param kAsm1 коефіцієнт довжини першої напрямної.
                       * @param kAsm2 коефіцієнт довжини другої напрямної.
                       */
-                     VSpline (const QMap<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1,
+                     VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1,
                               qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
                               Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                      /**
@@ -60,7 +60,7 @@ public:
                       * @param p3 друга контролююча точка сплайну.
                       * @param p4 кінцева точка сплайну.
                       */
-                     VSpline (const QMap<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3,
+                     VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3,
                               qint64 p4, qreal kCurve, Draw::Draws mode = Draw::Calculation,
                               qint64 idObject = 0);
     /**
@@ -136,7 +136,7 @@ public:
     qreal            GetKasm1() const;
     qreal            GetKasm2() const;
     qreal            GetKcurve() const;
-    const QMap<qint64, VPointF> *GetDataPoints() const;
+    const QHash<qint64, VPointF> *GetDataPoints() const;
     /**
      * @brief CrossingSplLine перевіряє перетин сплайну з лінією.
      * @param line лінія з якою перевіряється перетин.
@@ -224,7 +224,7 @@ private:
     qreal kAsm1;
     qreal kAsm2;
     qreal kCurve;
-    const QMap<qint64, VPointF> *points;
+    const QHash<qint64, VPointF> *points;
     Draw::Draws mode;
     qint64 idObject;
     /**

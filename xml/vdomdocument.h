@@ -23,7 +23,7 @@
 #define VDOMDOCUMENT_H
 
 #include <QDomDocument>
-#include <QMap>
+#include <QHash>
 #include <QComboBox>
 #include "widgets/vmaingraphicsscene.h"
 #include "tools/vdatatool.h"
@@ -58,7 +58,7 @@ public:
     bool        appendDraw(const QString& name);
     void        SetNameDraw(const QString& name);
     void        Parse(Document::Documents parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail);
-    QMap<qint64, VDataTool*>* getTools();
+    QHash<qint64, VDataTool*>* getTools();
     QVector<VToolRecord> *getHistory();
     qint64      getCursor() const;
     void        setCursor(const qint64 &value);
@@ -81,10 +81,10 @@ public slots:
     void        ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
 private:
     Q_DISABLE_COPY(VDomDocument)
-    QMap<QString, QDomElement> map;
+    QHash<QString, QDomElement> map;
     QString     nameActivDraw;
     VContainer  *data;
-    QMap<qint64, VDataTool*> tools;
+    QHash<qint64, VDataTool*> tools;
     QVector<VToolRecord> history;
     qint64 cursor;
     QComboBox *comboBoxDraws;

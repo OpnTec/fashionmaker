@@ -55,9 +55,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
 }
 
 void DialogIncrements::FillStandartTable(){
-    const QMap<QString, VStandartTableCell> *standartTable = data->DataStandartTable();
+    const QHash<QString, VStandartTableCell> *standartTable = data->DataStandartTable();
     qint32 currentRow = -1;
-    QMapIterator<QString, VStandartTableCell> i(*standartTable);
+    QHashIterator<QString, VStandartTableCell> i(*standartTable);
     ui->tableWidgetStandart->setRowCount ( standartTable->size() );
     while (i.hasNext()) {
         i.next();
@@ -95,22 +95,31 @@ void DialogIncrements::FillStandartTable(){
 }
 
 void DialogIncrements::FillIncrementTable(){
-    const QMap<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
-    qint32 currentRow = -1;
-    QMapIterator<QString, VIncrementTableRow> i(*incrementTable);
+    const QHash<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
+    QHashIterator<QString, VIncrementTableRow> i(*incrementTable);
+    QMap<qint64, QString> map;
+    //Sorting QHash by id
     while (i.hasNext()) {
         i.next();
         VIncrementTableRow cell = i.value();
+        map.insert(cell.getId(), i.key());
+    }
+
+    qint32 currentRow = -1;
+    QMapIterator<qint64, QString> iMap(map);
+    while (iMap.hasNext()) {
+        iMap.next();
+        VIncrementTableRow cell = incrementTable->value(iMap.value());
         currentRow++;
         ui->tableWidgetIncrement->setRowCount ( incrementTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        QTableWidgetItem *item = new QTableWidgetItem(iMap.value());
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
         item->setData(Qt::UserRole, cell.getId());
         ui->tableWidgetIncrement->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(i.key())));
+        item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(iMap.value())));
         item->setTextAlignment(Qt::AlignHCenter);
         // set the item non-editable (view only), and non-selectable
         Qt::ItemFlags flags = item->flags();
@@ -143,9 +152,9 @@ void DialogIncrements::FillIncrementTable(){
 }
 
 void DialogIncrements::FillLengthLines(){
-    const QMap<QString, qreal> *linesTable = data->DataLengthLines();
+    const QHash<QString, qreal> *linesTable = data->DataLengthLines();
     qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(*linesTable);
+    QHashIterator<QString, qreal> i(*linesTable);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
@@ -167,9 +176,9 @@ void DialogIncrements::FillLengthLines(){
 }
 
 void DialogIncrements::FillLengthSplines(){
-    const QMap<QString, qreal> *splinesTable = data->DataLengthSplines();
+    const QHash<QString, qreal> *splinesTable = data->DataLengthSplines();
     qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(*splinesTable);
+    QHashIterator<QString, qreal> i(*splinesTable);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
@@ -191,9 +200,9 @@ void DialogIncrements::FillLengthSplines(){
 }
 
 void DialogIncrements::FillLengthArcs(){
-    const QMap<QString, qreal> *arcsTable = data->DataLengthArcs();
+    const QHash<QString, qreal> *arcsTable = data->DataLengthArcs();
     qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(*arcsTable);
+    QHashIterator<QString, qreal> i(*arcsTable);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
