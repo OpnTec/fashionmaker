@@ -99,6 +99,11 @@ MainWindow::MainWindow(QWidget *parent) :
     fileName.clear();
     changeInFile = false;
 
+    //Autosaving file each 5 minutes
+    QTimer *timer = new QTimer(this);
+    timer->setTimerType(Qt::VeryCoarseTimer);
+    connect(timer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
+    timer->start(300000);
 }
 
 void MainWindow::ActionNewDraw(){
@@ -946,6 +951,20 @@ bool MainWindow::SafeSaveing(const QString &fileName) const{
         tempFile.remove();
     }
     return result;
+}
+
+void MainWindow::AutoSavePattern(){
+    if(!fileName.isEmpty()){
+        bool result = SafeSaveing(fileName);
+        if(result){
+            ui->actionSave->setEnabled(false);
+            changeInFile = false;
+            QFileInfo info(fileName);
+            QString title(info.fileName());
+            title.append("-Valentina");
+            setWindowTitle(title);
+        }
+    }
 }
 
 MainWindow::~MainWindow(){
