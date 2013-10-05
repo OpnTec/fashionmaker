@@ -126,7 +126,11 @@
       </layout>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget"/>
+      <widget class="QListWidget" name="listWidget">
+       <property name="toolTip">
+        <string>List of points</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

@@ -44,10 +44,16 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Formula calculation of length of line</string>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
+       <property name="toolTip">
+        <string>Calculate formula</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -76,6 +82,9 @@
          <width>87</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Value of length</string>
        </property>
        <property name="text">
         <string>_</string>
@@ -108,6 +117,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
+           <property name="toolTip">
+            <string>Put variable into formula</string>
+           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -240,7 +252,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxLineType"/>
+          <widget class="QComboBox" name="comboBoxLineType">
+           <property name="toolTip">
+            <string>Show line from first point to our point</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -312,7 +328,11 @@
       </layout>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget"/>
+      <widget class="QListWidget" name="listWidget">
+       <property name="toolTip">
+        <string>Variables. Click twice to select.</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

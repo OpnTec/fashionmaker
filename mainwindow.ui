@@ -36,8 +36,11 @@
         <height>0</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string/>
+      </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -54,6 +57,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating points.</string>
+       </property>
        <attribute name="label">
         <string>Point</string>
        </attribute>
@@ -62,6 +68,9 @@
          <widget class="QToolButton" name="toolButtonNormal">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of normal.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -86,6 +95,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Tool point of shoulder.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -108,6 +120,9 @@
          <widget class="QToolButton" name="toolButtonEndLine">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point on the end line.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -132,6 +147,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Tool point along line.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -155,6 +173,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Tool point of bisector.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -177,6 +198,9 @@
          <widget class="QToolButton" name="toolButtonPointOfContact">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of contact.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -213,6 +237,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating lines.</string>
+       </property>
        <attribute name="label">
         <string>Line</string>
        </attribute>
@@ -221,6 +248,9 @@
          <widget class="QToolButton" name="toolButtonLine">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool line.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -244,6 +274,9 @@
          <widget class="QToolButton" name="toolButtonLineIntersect">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of line intersection.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -280,6 +313,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating curves.</string>
+       </property>
        <attribute name="label">
         <string>Curve</string>
        </attribute>
@@ -288,6 +324,9 @@
          <widget class="QToolButton" name="toolButtonSpline">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -311,6 +350,9 @@
          <widget class="QToolButton" name="toolButtonSplinePath">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool path curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -347,6 +389,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating arcs.</string>
+       </property>
        <attribute name="label">
         <string>Arc</string>
        </attribute>
@@ -355,6 +400,9 @@
          <widget class="QToolButton" name="toolButtonArc">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool arc.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -382,8 +430,17 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>427</height>
+         <height>58</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Tools for creating details.</string>
        </property>
        <attribute name="label">
         <string>Detail</string>
@@ -391,6 +448,9 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonNewDetail">
+          <property name="toolTip">
+           <string>Tool new detail.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>

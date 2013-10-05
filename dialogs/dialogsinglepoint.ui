@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>249</width>
+    <width>250</width>
     <height>202</height>
    </rect>
   </property>
@@ -35,8 +35,11 @@
      <height>129</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Coordinates on the sheet</string>
+   </property>
    <property name="title">
-    <string>Координати</string>
+    <string>Coordinates</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="1">
@@ -66,7 +69,7 @@
     <rect>
      <x>170</x>
      <y>10</y>
-     <width>72</width>
+     <width>81</width>
      <height>17</height>
     </rect>
    </property>
