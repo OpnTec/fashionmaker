@@ -430,6 +430,27 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditRadius</tabstop>
+  <tabstop>lineEditF1</tabstop>
+  <tabstop>lineEditF2</tabstop>
+  <tabstop>comboBoxBasePoint</tabstop>
+  <tabstop>radioButtonSizeGrowth</tabstop>
+  <tabstop>radioButtonStandartTable</tabstop>
+  <tabstop>radioButtonIncrements</tabstop>
+  <tabstop>radioButtonLengthLine</tabstop>
+  <tabstop>radioButtonLengthArc</tabstop>
+  <tabstop>radioButtonLengthSpline</tabstop>
+  <tabstop>radioButtonLineAngles</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>toolButtonPutHereRadius</tabstop>
+  <tabstop>toolButtonPutHereF1</tabstop>
+  <tabstop>toolButtonPutHereF2</tabstop>
+  <tabstop>toolButtonEqualRadius</tabstop>
+  <tabstop>toolButtonEqualF1</tabstop>
+  <tabstop>toolButtonEqualF2</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

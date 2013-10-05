@@ -188,6 +188,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboBoxPoint</tabstop>
+  <tabstop>doubleSpinBoxKasm1</tabstop>
+  <tabstop>spinBoxAngle1</tabstop>
+  <tabstop>doubleSpinBoxKasm2</tabstop>
+  <tabstop>spinBoxAngle2</tabstop>
+  <tabstop>doubleSpinBoxKcurve</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

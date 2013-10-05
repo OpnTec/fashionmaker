@@ -355,6 +355,24 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditFormula</tabstop>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>comboBoxP1Line</tabstop>
+  <tabstop>comboBoxP2Line</tabstop>
+  <tabstop>comboBoxPShoulder</tabstop>
+  <tabstop>comboBoxLineType</tabstop>
+  <tabstop>radioButtonSizeGrowth</tabstop>
+  <tabstop>radioButtonStandartTable</tabstop>
+  <tabstop>radioButtonIncrements</tabstop>
+  <tabstop>radioButtonLengthLine</tabstop>
+  <tabstop>radioButtonLengthArc</tabstop>
+  <tabstop>radioButtonLengthSpline</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>toolButtonPutHere</tabstop>
+  <tabstop>toolButtonEqual</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

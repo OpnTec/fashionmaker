@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -728,6 +728,20 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>toolButtonEndLine</tabstop>
+  <tabstop>toolButtonAlongLine</tabstop>
+  <tabstop>toolButtonBisector</tabstop>
+  <tabstop>toolButtonNormal</tabstop>
+  <tabstop>toolButtonShoulderPoint</tabstop>
+  <tabstop>toolButtonPointOfContact</tabstop>
+  <tabstop>toolButtonLine</tabstop>
+  <tabstop>toolButtonLineIntersect</tabstop>
+  <tabstop>toolButtonSpline</tabstop>
+  <tabstop>toolButtonSplinePath</tabstop>
+  <tabstop>toolButtonArc</tabstop>
+  <tabstop>toolButtonNewDetail</tabstop>
+ </tabstops>
  <resources>
   <include location="icon.qrc"/>
  </resources>

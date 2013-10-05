@@ -475,6 +475,31 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditFormula</tabstop>
+  <tabstop>comboBoxBasePoint</tabstop>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>doubleSpinBoxAngle</tabstop>
+  <tabstop>toolButtonArrowRight</tabstop>
+  <tabstop>toolButtonArrowRightUp</tabstop>
+  <tabstop>toolButtonArrowUp</tabstop>
+  <tabstop>toolButtonArrowLeftUp</tabstop>
+  <tabstop>toolButtonArrowLeft</tabstop>
+  <tabstop>toolButtonArrowLeftDown</tabstop>
+  <tabstop>toolButtonArrowDown</tabstop>
+  <tabstop>toolButtonArrowRightDown</tabstop>
+  <tabstop>comboBoxLineType</tabstop>
+  <tabstop>radioButtonSizeGrowth</tabstop>
+  <tabstop>radioButtonStandartTable</tabstop>
+  <tabstop>radioButtonIncrements</tabstop>
+  <tabstop>radioButtonLengthLine</tabstop>
+  <tabstop>radioButtonLengthArc</tabstop>
+  <tabstop>radioButtonLengthSpline</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>toolButtonPutHere</tabstop>
+  <tabstop>toolButtonEqual</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

@@ -338,6 +338,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>tableWidgetStandart</tabstop>
+  <tabstop>tableWidgetIncrement</tabstop>
+  <tabstop>toolButtonAdd</tabstop>
+  <tabstop>toolButtonRemove</tabstop>
+  <tabstop>tableWidgetLines</tabstop>
+  <tabstop>tableWidgetSplines</tabstop>
+  <tabstop>tableWidgetArcs</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>
