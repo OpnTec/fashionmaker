@@ -494,6 +494,37 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAbout_Valentina"/>
+   </widget>
+   <widget class="QMenu" name="menuDrawing">
+    <property name="title">
+     <string>Drawing</string>
+    </property>
+    <addaction name="actionNewDraw"/>
+    <addaction name="actionOptionDraw"/>
+    <addaction name="actionTable"/>
+    <addaction name="actionHistory"/>
+    <addaction name="actionLayout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuDrawing"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -724,6 +755,21 @@
    </property>
    <property name="toolTip">
     <string>Create layout</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionAbout_Valentina">
+   <property name="text">
+    <string>About Valentina</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>

@@ -92,6 +92,8 @@ public slots:
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);
     void               ClosedDialogDetail(int result);
+    void               About();
+    void               AboutQt();
     /**
      * @brief tableClosed Слот, що виконується при отриманні сигналу закриття вікна укладання
      *деталей моделі.

@@ -104,6 +104,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->setTimerType(Qt::VeryCoarseTimer);
     connect(timer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     timer->start(300000);
+
+    connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
+    connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 }
 
 void MainWindow::ActionNewDraw(){
@@ -441,6 +445,14 @@ void MainWindow::ClosedDialogDetail(int result){
         VToolDetail::Create(dialogDetail, sceneDetails, doc, data);
     }
     ArrowTool();
+}
+
+void MainWindow::About(){
+    QMessageBox::about(this, tr("About Valentina"), tr("Valentina v.0.1.0"));
+}
+
+void MainWindow::AboutQt(){
+    QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
 void MainWindow::tableClosed(){
