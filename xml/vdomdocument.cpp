@@ -1034,25 +1034,6 @@ void VDomDocument::setCurrentData(){
     }
 }
 
-void VDomDocument::GarbageCollector(){
-    QHashIterator<qint64, VDataTool*> t(tools);
-    while (t.hasNext()) {
-        t.next();
-        VDataTool *tool = t.value();
-        if(tool->referens() <= 0){
-            QDomElement domElement = elementById(QString().setNum(t.key()));
-            if(domElement.isElement()){
-                QDomNode parent = domElement.parentNode();
-                if(!parent.isNull()){
-                    parent.removeChild(domElement);
-                } else {
-                    qWarning()<<tr("Can't get parent for object id = %1").arg(t.key());
-                }
-            }
-        }
-    }
-}
-
 void VDomDocument::AddTool(const qint64 &id, VDataTool *tool){
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_CHECK_PTR(tool);

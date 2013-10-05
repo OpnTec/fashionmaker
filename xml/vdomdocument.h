@@ -63,7 +63,6 @@ public:
     qint64      getCursor() const;
     void        setCursor(const qint64 &value);
     void        setCurrentData();
-    void        GarbageCollector();
     void        AddTool(const qint64 &id, VDataTool *tool);
     void        UpdateToolData(const qint64 &id, VContainer *data);
     void        IncrementReferens(qint64 id) const;
