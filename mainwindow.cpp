@@ -108,6 +108,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
+
+    ui->toolBox->setCurrentIndex(0);
 }
 
 void MainWindow::ActionNewDraw(){

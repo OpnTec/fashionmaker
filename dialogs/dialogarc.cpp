@@ -194,14 +194,17 @@ void DialogArc::CheckState(){
 }
 
 void DialogArc::EvalRadius(){
+    labelEditFormula = ui->labelEditRadius;
     Eval(ui->lineEditRadius, flagRadius, timerRadius, ui->labelResultRadius);
 }
 
 void DialogArc::EvalF1(){
+    labelEditFormula = ui->labelEditF1;
     Eval(ui->lineEditF1, flagF1, timerF1, ui->labelResultF1);
 }
 
 void DialogArc::EvalF2(){
+    labelEditFormula = ui->labelEditF2;
     Eval(ui->lineEditF2, flagF2, timerF2, ui->labelResultF2);
 }
 

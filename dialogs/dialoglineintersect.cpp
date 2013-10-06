@@ -29,6 +29,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     number = 0;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLineIntersect::DialogAccepted);
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);

@@ -28,8 +28,8 @@
 
 DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent):QDialog(parent), data(data),
     isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
-    lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
-    radioButtonSizeGrowth(0), radioButtonStandartTable(0), radioButtonIncrements(0),
+    lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0), labelEditNamePoint(0),
+    labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0), radioButtonIncrements(0),
     radioButtonLengthLine(0), idDetail(0), mode(mode){
     Q_CHECK_PTR(data);
     timerFormula = new QTimer(this);
@@ -146,9 +146,13 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
     Q_CHECK_PTR(edit);
     Q_CHECK_PTR(timer);
+    Q_CHECK_PTR(labelEditFormula);
     if(edit->text().isEmpty()){
         flag = false;
         CheckState();
+        QPalette palette = labelEditFormula->palette();
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+        labelEditFormula->setPalette(palette);
         return;
     }
     timer->start(1000);
@@ -158,8 +162,11 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     Q_CHECK_PTR(edit);
     Q_CHECK_PTR(timer);
     Q_CHECK_PTR(label);
+    Q_CHECK_PTR(labelEditFormula);
+    QPalette palette = labelEditFormula->palette();
     if(edit->text().isEmpty()){
         flag = false;
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
     } else {
         Calculator cal(data);
         QString errorMsg;
@@ -167,13 +174,16 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
         if(!errorMsg.isEmpty()){
             label->setText(tr("Error"));
             flag = false;
+            palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
         } else {
             label->setText(QString().setNum(result));
             flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76,76,76));
         }
     }
     CheckState();
     timer->stop();
+    labelEditFormula->setPalette(palette);
 }
 
 void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value,
@@ -207,13 +217,20 @@ void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type){
 }
 
 void DialogTool::NamePointChanged(){
+    Q_CHECK_PTR(labelEditNamePoint);
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit){
         QString name = edit->text();
         if(name.isEmpty() || name.contains(" ")){
             flagName = false;
+            QPalette palette = labelEditNamePoint->palette();
+            palette.setColor(labelEditNamePoint->foregroundRole(), Qt::red);
+            labelEditNamePoint->setPalette(palette);
         } else {
             flagName = true;
+            QPalette palette = labelEditNamePoint->palette();
+            palette.setColor(labelEditNamePoint->foregroundRole(), QColor(76,76,76));
+            labelEditNamePoint->setPalette(palette);
         }
     }
     CheckState();

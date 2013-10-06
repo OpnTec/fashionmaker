@@ -79,6 +79,8 @@ protected:
     QListWidget      *listWidget;
     QLabel           *labelResultCalculation;
     QLabel           *labelDescription;
+    QLabel           *labelEditNamePoint;
+    QLabel           *labelEditFormula;
     QRadioButton     *radioButtonSizeGrowth;
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;

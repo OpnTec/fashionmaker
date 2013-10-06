@@ -39,6 +39,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     lineEditFormula = ui->lineEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagFormula = false;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogEndLine::DialogAccepted);

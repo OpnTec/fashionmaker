@@ -33,6 +33,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
     ui->doubleSpinBoxX->setRange(0,PaperSize/PrintDPI*25.4);
     ui->doubleSpinBoxY->setRange(0,PaperSize/PrintDPI*25.4);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    labelEditNamePoint = ui->labelEditName;
     flagName = false;
     CheckState();
     connect(bOk, &QPushButton::clicked, this, &DialogSinglePoint::DialogAccepted);

@@ -36,6 +36,8 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     lineEditFormula = ui->lineEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagFormula = false;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogNormal::DialogAccepted);
