@@ -74,7 +74,7 @@ CREATE_SUBDIRS         = NO
 # Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, Slovak,
 # Slovene, Spanish, Swedish, Ukrainian, and Vietnamese.
 
-OUTPUT_LANGUAGE        = Ukrainian
+OUTPUT_LANGUAGE        = English
 
 # If the BRIEF_MEMBER_DESC tag is set to YES (the default) Doxygen will
 # include brief member descriptions after the members that are listed in
@@ -369,7 +369,7 @@ EXTRACT_PACKAGE        = NO
 # If the EXTRACT_STATIC tag is set to YES all static members of a file
 # will be included in the documentation.
 
-EXTRACT_STATIC         = NO
+EXTRACT_STATIC         = YES
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES classes (and structs)
 # defined locally in source files will be included in the documentation.
