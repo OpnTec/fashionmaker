@@ -25,10 +25,8 @@
 VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement):
     VException(what), tagText(QString()), tagName(QString()), lineNumber(-1), moreInfo(QString()){
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-    if(domElement.isText()){
-        QDomText text = domElement.toText();
-        tagText = text.data();
-    }
+    QTextStream stream(&tagText);
+    domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
 }

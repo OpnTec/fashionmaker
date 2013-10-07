@@ -35,6 +35,7 @@
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongparameterid.h"
+#include "exception/vexceptionuniqueid.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
@@ -1011,7 +1012,7 @@ void MainWindow::OpenPattern(const QString &fileName){
     if(file.open(QIODevice::ReadOnly)){
         if(doc->setContent(&file, &errorMsg, &errorLine, &errorColumn)){
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                    this, &MainWindow::currentDrawChanged);
+                       this, &MainWindow::currentDrawChanged);
             try{
             doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
             }
@@ -1060,6 +1061,20 @@ void MainWindow::OpenPattern(const QString &fileName){
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error wrong id."));
+                msgBox.setInformativeText(e.ErrorMessage());
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                msgBox.setDetailedText(e.DetailedInformation());
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+                file.close();
+                Clear();
+                return;
+            }
+            catch(const VExceptionUniqueId &e){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Error don't unique id."));
                 msgBox.setInformativeText(e.ErrorMessage());
                 msgBox.setStandardButtons(QMessageBox::Ok);
                 msgBox.setDefaultButton(QMessageBox::Ok);

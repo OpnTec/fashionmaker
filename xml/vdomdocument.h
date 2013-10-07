@@ -37,8 +37,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
-class VDomDocument : public QObject, public QDomDocument
-{
+class VDomDocument : public QObject, public QDomDocument{
     Q_OBJECT
 public:
                 VDomDocument(VContainer *data,QComboBox *comboBoxDraws, Draw::Draws *mode);
@@ -112,7 +111,9 @@ private:
     qint64      GetParametrId(const QDomElement& domElement) const;
     qint64      GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
     QString     GetParametrString(const QDomElement& domElement, const QString &name) const;
-    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;  
+    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;
+    void        TestUniqueId() const;
+    void        CollectId(QDomElement node, QVector<qint64> &vector)const;
 };
 
 #pragma GCC diagnostic pop

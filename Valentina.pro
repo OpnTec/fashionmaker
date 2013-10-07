@@ -95,7 +95,8 @@ SOURCES += main.cpp\
     exception/vexceptionconversionerror.cpp \
     exception/vexceptionemptyparameter.cpp \
     exception/vexceptionobjecterror.cpp \
-    widgets/vapplication.cpp
+    widgets/vapplication.cpp \
+    exception/vexceptionuniqueid.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -185,7 +186,8 @@ HEADERS  += mainwindow.h \
     exception/vexceptionconversionerror.h \
     exception/vexceptionemptyparameter.h \
     exception/vexceptionobjecterror.h \
-    widgets/vapplication.h
+    widgets/vapplication.h \
+    exception/vexceptionuniqueid.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \

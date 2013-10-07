@@ -33,7 +33,7 @@
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionobjecterror.h"
-
+#include "exception/vexceptionuniqueid.h"
 
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode) : QDomDocument(),
     map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
@@ -255,6 +255,7 @@ void VDomDocument::Parse(Document::Documents parse, VMainGraphicsScene *sceneDra
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
     if(parse == Document::FullParse){
+        TestUniqueId();
         data->Clear();
         nameActivDraw.clear();
         sceneDraw->clear();
@@ -368,6 +369,28 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
         throw VExceptionConversionError(tr("Can't convert toDouble parameter"), name);
     }
     return param;
+}
+
+void VDomDocument::TestUniqueId() const{
+    QVector<qint64> vector;
+    CollectId(this->documentElement(), vector);
+}
+
+void VDomDocument::CollectId(QDomElement node, QVector<qint64> &vector) const{
+    if (node.hasAttribute("id")) {
+        qint64 id = GetParametrId(node);
+        if(vector.contains(id)){
+            throw VExceptionUniqueId(tr("This id is not unique."), node);
+        }
+        vector.append(id);
+    }
+
+    for (qint32 i=0; i<node.childNodes().length(); ++i) {
+        QDomNode n = node.childNodes().at(i);
+        if (n.isElement()) {
+            CollectId(n.toElement(), vector);
+        }
+    }
 }
 
 void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
