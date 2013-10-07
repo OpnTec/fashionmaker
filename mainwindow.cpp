@@ -437,7 +437,7 @@ void MainWindow::ToolDetail(bool checked){
         QPixmap pixmap("://cursor/new_detail_cursor.png");
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
-        helpLabel->setText(tr("Select points, arcs, curves and details clockwise."));
+        helpLabel->setText(tr("Select points, arcs, curves clockwise."));
         dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data, mode));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogDetail.data(),
                 &DialogDetail::ChoosedObject);
