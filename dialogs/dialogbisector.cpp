@@ -90,6 +90,7 @@ void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of angle"));
                 return;
             }
         }
@@ -98,6 +99,7 @@ void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select third point of angle"));
                 return;
             }
         }
@@ -106,6 +108,7 @@ void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxThirdPoint->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();

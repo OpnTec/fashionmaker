@@ -92,6 +92,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP1Line->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
@@ -100,6 +101,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP2Line->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select point of shoulder"));
                 return;
             }
         }
@@ -108,6 +110,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxPShoulder->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();

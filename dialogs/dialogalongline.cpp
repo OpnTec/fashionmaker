@@ -61,8 +61,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogAlongLine::FormulaChanged);
 }
 
-DialogAlongLine::~DialogAlongLine()
-{
+DialogAlongLine::~DialogAlongLine(){
     delete ui;
 }
 
@@ -90,6 +89,7 @@ void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
@@ -98,6 +98,7 @@ void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();

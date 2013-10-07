@@ -101,6 +101,7 @@ void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
+        emit ToolTip("");
         this->show();
     }
 }

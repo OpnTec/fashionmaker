@@ -71,6 +71,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP1Line1->setCurrentIndex(index);
                 p1Line1 = id;
                 number++;
+                emit ToolTip(tr("Select second point of first line"));
                 return;
             }
         }
@@ -80,6 +81,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP2Line1->setCurrentIndex(index);
                 p2Line1 = id;
                 number++;
+                emit ToolTip(tr("Select first point of second line"));
                 return;
             }
         }
@@ -89,6 +91,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP1Line2->setCurrentIndex(index);
                 p1Line2 = id;
                 number++;
+                emit ToolTip(tr("Select second point of second line"));
                 return;
             }
         }
@@ -98,6 +101,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP2Line2->setCurrentIndex(index);
                 p2Line2 = id;
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 flagPoint = CheckIntersecion();

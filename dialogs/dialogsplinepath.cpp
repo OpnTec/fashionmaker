@@ -82,6 +82,7 @@ void DialogSplinePath::ChoosedObject(qint64 id, Scene::Scenes type){
     }
     if(type == Scene::Point){
         NewItem(id, 1, 0, 1);
+        emit ToolTip(tr("Select point of curve path"));
         this->show();
     }
 }
@@ -93,6 +94,7 @@ void DialogSplinePath::DialogAccepted(){
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
     path.setKCurve(ui->doubleSpinBoxKcurve->value());
+    emit ToolTip("");
     emit DialogClosed(QDialog::Accepted);
 }
 

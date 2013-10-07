@@ -74,6 +74,7 @@ void DialogDetail::DialogAccepted(){
     }
     details.setName(ui.lineEditNameDetail->text());
     emit DialogClosed(QDialog::Accepted);
+    emit ToolTip("");
 }
 
 void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode){

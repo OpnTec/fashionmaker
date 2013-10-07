@@ -43,6 +43,7 @@ public:
     void             setIdDetail(const qint64 &value);
 signals:
     void             DialogClosed(int result);
+    void             ToolTip(const QString &toolTip);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     void             NamePointChanged();

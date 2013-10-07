@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
-    helpLabel = new QLabel("Створіть новий файл для початку роботи.");
+    helpLabel = new QLabel(tr("Create new drawing for start working."));
     ui->statusBar->addWidget(helpLabel);
 
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
@@ -204,17 +204,19 @@ void MainWindow::OptionDraw(){
 
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                               QSharedPointer<Dialog> &dialog, Func closeDialogSlot){
+                               const QString &toolTip, QSharedPointer<Dialog> &dialog,
+                               Func closeDialogSlot){
     if(checked){
         CanselTool();
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
-        helpLabel->setText("Виберіть точки.");
+        helpLabel->setText(toolTip);
         dialog = QSharedPointer<Dialog>(new Dialog(data, mode));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
+        connect(dialog.data(), &Dialog::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
     } else {
         if(QToolButton *tButton = qobject_cast< QToolButton * >(this->sender())){
@@ -233,8 +235,8 @@ void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool
 }
 
 void MainWindow::ToolEndLine(bool checked){
-    SetToolButton(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", dialogEndLine,
-                  &MainWindow::ClosedDialogEndLine);
+    SetToolButton(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+                  dialogEndLine, &MainWindow::ClosedDialogEndLine);
 }
 
 void MainWindow::ClosedDialogEndLine(int result){
@@ -250,8 +252,8 @@ void MainWindow::ClosedDialogEndLine(int result){
 }
 
 void MainWindow::ToolLine(bool checked){
-    SetToolButton(checked, Tool::LineTool, ":/cursor/line_cursor.png", dialogLine,
-                  &MainWindow::ClosedDialogLine);
+    SetToolButton(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
+                  dialogLine, &MainWindow::ClosedDialogLine);
 }
 
 void MainWindow::ClosedDialogLine(int result){
@@ -267,8 +269,8 @@ void MainWindow::ClosedDialogLine(int result){
 }
 
 void MainWindow::ToolAlongLine(bool checked){
-    SetToolButton(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", dialogAlongLine,
-                  &MainWindow::ClosedDialogAlongLine);
+    SetToolButton(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
+                  dialogAlongLine, &MainWindow::ClosedDialogAlongLine);
 }
 
 void MainWindow::ClosedDialogAlongLine(int result){
@@ -284,7 +286,8 @@ void MainWindow::ClosedDialogAlongLine(int result){
 }
 
 void MainWindow::ToolShoulderPoint(bool checked){
-    SetToolButton(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png", dialogShoulderPoint,
+    SetToolButton(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+                  tr("Select first point of line"),  dialogShoulderPoint,
                   &MainWindow::ClosedDialogShoulderPoint);
 }
 
@@ -302,8 +305,8 @@ void MainWindow::ClosedDialogShoulderPoint(int result){
 }
 
 void MainWindow::ToolNormal(bool checked){
-    SetToolButton(checked, Tool::NormalTool, ":/cursor/normal_cursor.png", dialogNormal,
-                  &MainWindow::ClosedDialogNormal);
+    SetToolButton(checked, Tool::NormalTool, ":/cursor/normal_cursor.png",
+                  tr("Select first point of line"), dialogNormal, &MainWindow::ClosedDialogNormal);
 }
 
 void MainWindow::ClosedDialogNormal(int result){
@@ -319,8 +322,8 @@ void MainWindow::ClosedDialogNormal(int result){
 }
 
 void MainWindow::ToolBisector(bool checked){
-    SetToolButton(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png", dialogBisector,
-                  &MainWindow::ClosedDialogBisector);
+    SetToolButton(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png",
+                  tr("Select first point of angle"), dialogBisector, &MainWindow::ClosedDialogBisector);
 }
 
 void MainWindow::ClosedDialogBisector(int result){
@@ -336,7 +339,8 @@ void MainWindow::ClosedDialogBisector(int result){
 }
 
 void MainWindow::ToolLineIntersect(bool checked){
-    SetToolButton(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png", dialogLineIntersect,
+    SetToolButton(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
+                  tr("Select first point of first line"), dialogLineIntersect,
                   &MainWindow::ClosedDialogLineIntersect);
 }
 
@@ -345,7 +349,8 @@ void MainWindow::ClosedDialogLineIntersect(int result){
         if(mode == Draw::Calculation){
             VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data);
         } else {
-            VModelingLineIntersect *point = VModelingLineIntersect::Create(dialogLineIntersect, doc, data);
+            VModelingLineIntersect *point = VModelingLineIntersect::Create(dialogLineIntersect, doc,
+                                                                           data);
             AddToolToDetail(point, point->getId(), Tool::LineIntersectTool,
                             dialogLineIntersect->getIdDetail());
         }
@@ -354,8 +359,8 @@ void MainWindow::ClosedDialogLineIntersect(int result){
 }
 
 void MainWindow::ToolSpline(bool checked){
-    SetToolButton(checked, Tool::SplineTool, ":/cursor/spline_cursor.png", dialogSpline,
-                  &MainWindow::ClosedDialogSpline);
+    SetToolButton(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
+                  tr("Select first point curve"), dialogSpline, &MainWindow::ClosedDialogSpline);
 }
 
 void MainWindow::ClosedDialogSpline(int result){
@@ -371,8 +376,8 @@ void MainWindow::ClosedDialogSpline(int result){
 }
 
 void MainWindow::ToolArc(bool checked){
-    SetToolButton(checked, Tool::ArcTool, ":/cursor/arc_cursor.png", dialogArc,
-                  &MainWindow::ClosedDialogArc);
+    SetToolButton(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
+                  tr("Select point of center of arc"), dialogArc, &MainWindow::ClosedDialogArc);
 }
 
 void MainWindow::ClosedDialogArc(int result){
@@ -388,7 +393,8 @@ void MainWindow::ClosedDialogArc(int result){
 }
 
 void MainWindow::ToolSplinePath(bool checked){
-    SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png", dialogSplinePath,
+    SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
+                  tr("Select point of curve path"), dialogSplinePath,
                   &MainWindow::ClosedDialogSplinePath);
 }
 
@@ -405,7 +411,8 @@ void MainWindow::ClosedDialogSplinePath(int result){
 }
 
 void MainWindow::ToolPointOfContact(bool checked){
-    SetToolButton(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png", dialogPointOfContact,
+    SetToolButton(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
+                  tr("Select first point of line"), dialogPointOfContact,
                   &MainWindow::ClosedDialogPointOfContact);
 }
 
@@ -430,7 +437,7 @@ void MainWindow::ToolDetail(bool checked){
         QPixmap pixmap("://cursor/new_detail_cursor.png");
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
-        helpLabel->setText("Виберіть точки.");
+        helpLabel->setText(tr("Select points, arcs, curves and details clockwise."));
         dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data, mode));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogDetail.data(),
                 &DialogDetail::ChoosedObject);
@@ -456,6 +463,10 @@ void MainWindow::About(){
 
 void MainWindow::AboutQt(){
     QMessageBox::aboutQt(this, tr("About Qt"));
+}
+
+void MainWindow::ShowToolTip(const QString &toolTip){
+    helpLabel->setText(toolTip);
 }
 
 void MainWindow::tableClosed(){
@@ -603,6 +614,7 @@ void MainWindow::CanselTool(){
     {
         case Tool::ArrowTool:
             ui->actionArrowTool->setChecked(false);
+            helpLabel->setText("");
             break;
         case Tool::SinglePointTool:
             //Nothing to do here because we can't create this tool from main window.
@@ -1119,4 +1131,5 @@ void MainWindow::OpenPattern(const QString &fileName){
     QString title(info.fileName());
     title.append("-Valentina");
     setWindowTitle(title);
+    helpLabel->setText("");
 }

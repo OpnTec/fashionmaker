@@ -94,6 +94,7 @@ public slots:
     void               ClosedDialogDetail(int result);
     void               About();
     void               AboutQt();
+    void               ShowToolTip(const QString &toolTip);
     /**
      * @brief tableClosed Слот, що виконується при отриманні сигналу закриття вікна укладання
      *деталей моделі.
@@ -149,8 +150,8 @@ private:
     void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
     void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                                     QSharedPointer<Dialog> &dialog,
-                       Func closeDialogSlot);
+                                     const QString &toolTip,QSharedPointer<Dialog> &dialog,
+                                     Func closeDialogSlot);
     void               MinimumScrollBar();
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,

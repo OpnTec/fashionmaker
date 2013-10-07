@@ -67,6 +67,7 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP1->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select last point of curve"));
                 return;
             }
         }
@@ -75,6 +76,7 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP4->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
                 index = ui->comboBoxP1->currentIndex();
                 qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
                 QPointF p1;
