@@ -44,9 +44,9 @@ void VToolArc::setDialog(){
     if(!dialogArc.isNull()){
         VArc arc = VAbstractTool::data.GetArc(id);
         dialogArc->SetCenter(arc.GetCenter());
-        dialogArc->SetRadius(arc.GetFormulaRadius());
         dialogArc->SetF1(arc.GetFormulaF1());
         dialogArc->SetF2(arc.GetFormulaF2());
+        dialogArc->SetRadius(arc.GetFormulaRadius());
     }
 }
 

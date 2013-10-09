@@ -482,7 +482,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonLengthArc">
            <property name="enabled">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="text">
             <string>Length of arcs</string>
@@ -492,10 +492,10 @@
          <item>
           <widget class="QRadioButton" name="radioButtonLengthSpline">
            <property name="enabled">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="text">
-            <string>Length of arcs</string>
+            <string>Length of curves</string>
            </property>
           </widget>
          </item>

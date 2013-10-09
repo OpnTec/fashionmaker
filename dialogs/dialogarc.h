@@ -53,7 +53,7 @@ public slots:
     void             PutRadius();
     void             PutF1();
     void             PutF2();
-    void             LineArcs();
+    void             LineAngles();
     void             RadiusChanged();
     void             F1Changed();
     void             F2Changed();
@@ -75,7 +75,7 @@ private:
     void             EvalRadius();
     void             EvalF1();
     void             EvalF2();
-    void             ShowLineArcs();
+    void             ShowLineAngles();
 };
 
 #endif // DIALOGARC_H

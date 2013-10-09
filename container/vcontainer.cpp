@@ -64,7 +64,7 @@ void VContainer::setData(const VContainer &data){
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
-    lineAngles = *data.DataLengthArcs();
+    lineAngles = *data.DataLineAngles();
     splines = *data.DataSplines();
     modelingSplines = *data.DataModelingSplines();
     lengthSplines = *data.DataLengthSplines();

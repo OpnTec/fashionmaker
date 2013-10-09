@@ -63,7 +63,7 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogArc::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
-    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineArcs);
+    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineAngles);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
@@ -173,19 +173,22 @@ void DialogArc::PutF2(){
     PutValHere(ui->lineEditF2, ui->listWidget);
 }
 
-void DialogArc::LineArcs(){
-    ShowLineArcs();
+void DialogArc::LineAngles(){
+    ShowLineAngles();
 }
 
 void DialogArc::RadiusChanged(){
+    labelEditFormula = ui->labelEditRadius;
     ValFormulaChanged(flagRadius, ui->lineEditRadius, timerRadius);
 }
 
 void DialogArc::F1Changed(){
+    labelEditFormula = ui->labelEditF1;
     ValFormulaChanged(flagF1, ui->lineEditF1, timerF1);
 }
 
 void DialogArc::F2Changed(){
+    labelEditFormula = ui->labelEditF2;
     ValFormulaChanged(flagF2, ui->lineEditF2, timerF2);
 }
 
@@ -209,12 +212,13 @@ void DialogArc::EvalF2(){
     Eval(ui->lineEditF2, flagF2, timerF2, ui->labelResultF2);
 }
 
-void DialogArc::ShowLineArcs(){
+void DialogArc::ShowLineAngles(){
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QHash<QString, qreal> *lineArcsTable = data->DataLineAngles();
-    QHashIterator<QString, qreal> i(*lineArcsTable);
+    const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
+    Q_CHECK_PTR(lineAnglesTable);
+    QHashIterator<QString, qreal> i(*lineAnglesTable);
     while (i.hasNext()) {
         i.next();
         QListWidgetItem *item = new QListWidgetItem(i.key());
