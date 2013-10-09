@@ -73,8 +73,8 @@ void DialogDetail::DialogAccepted(){
         details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
     details.setName(ui.lineEditNameDetail->text());
-    emit DialogClosed(QDialog::Accepted);
     emit ToolTip("");
+    emit DialogClosed(QDialog::Accepted);
 }
 
 void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode){

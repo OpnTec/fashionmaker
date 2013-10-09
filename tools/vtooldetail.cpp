@@ -189,6 +189,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 point = data->GetModelingPoint(detail[i].getId());
             }
             id = data->AddModelingPoint(point);
+            VNodePoint::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                               Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeArc):{
@@ -199,6 +201,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 arc = data->GetModelingArc(detail[i].getId());
             }
             id = data->AddModelingArc(arc);
+            VNodeArc::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                             Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeSpline):{
@@ -209,6 +213,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 spline = data->GetModelingSpline(detail[i].getId());
             }
             id = data->AddModelingSpline(spline);
+            VNodeSpline::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                                Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeSplinePath):{
@@ -219,6 +225,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 splinePath = data->GetModelingSplinePath(detail[i].getId());
             }
             id = data->AddModelingSplinePath(splinePath);
+            VNodeSplinePath::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                                    Document::FullParse, Tool::FromGui);
         }
             break;
         default:
@@ -328,19 +336,24 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 //        dialog->show();
 //    }
     if(selectedAction == actionRemove){
-        //deincrement referens
-        RemoveReferens();
+
         //remove form xml file
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
             QDomNode element = domElement.parentNode();
             if(!element.isNull()){
+                //deincrement referens
+                RemoveReferens();
                 element.removeChild(domElement);
                 //update xml file
                 emit FullUpdateTree();
                 //remove form scene
                 emit RemoveTool(this);
+            } else {
+                qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
             }
+        } else {
+            qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
         }
     }
 }

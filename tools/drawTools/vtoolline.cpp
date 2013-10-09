@@ -51,19 +51,23 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
     Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
+void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                        const Document::Documents &parse, Tool::Sources typeCreation){
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
-    data->AddLine(firstPoint, secondPoint);
-    if(parse != Document::FullParse){
-        doc->UpdateToolData(id, data);
+    qint64 id = _id;
+    if(typeCreation == Tool::FromGui){
+        id = data->getNextId();
+    } else {
+        if(parse != Document::FullParse){
+            doc->UpdateToolData(id, data);
+        }
     }
+    data->AddLine(firstPoint, secondPoint);
     VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if(parse == Document::FullParse){
-        qint64 id = data->getNextId();
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         Q_CHECK_PTR(line);
         scene->addItem(line);

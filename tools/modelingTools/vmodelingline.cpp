@@ -51,18 +51,22 @@ VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDoc
     return Create(0, firstPoint, secondPoint, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-VModelingLine *VModelingLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
+VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                      Tool::Sources typeCreation){
     VModelingLine *line = 0;
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
-    data->AddLine(firstPoint, secondPoint, Draw::Modeling);
-    if(parse != Document::FullParse){
-        doc->UpdateToolData(id, data);
+    qint64 id = _id;
+    if(typeCreation == Tool::FromGui){
+        id = data->getNextId();
+    } else {
+        if(parse != Document::FullParse){
+            doc->UpdateToolData(id, data);
+        }
     }
+    data->AddLine(firstPoint, secondPoint, Draw::Modeling);
     if(parse == Document::FullParse){
-        qint64 id = data->getNextId();
         line = new VModelingLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
