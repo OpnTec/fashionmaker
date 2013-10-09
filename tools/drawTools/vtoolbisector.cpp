@@ -42,8 +42,10 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
     qreal angle = line1.angleTo(line2);
     if(angle>180){
         angle = 360 - angle;
+        line1.setAngle(line1.angle()-angle/2);
+    } else {
+        line1.setAngle(line1.angle()+angle/2);
     }
-    line1.setAngle(line1.angle()-angle/2);
     line1.setLength(length);
     return line1.p2();
 }
