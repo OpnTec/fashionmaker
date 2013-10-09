@@ -34,7 +34,7 @@ public:
     virtual void setDialog();
     static void Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                        VContainer *data);
-    static void Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
+    static void Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                        const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:

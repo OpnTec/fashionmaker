@@ -34,6 +34,7 @@
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionuniqueid.h"
+#include <QMessageBox>
 
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode) : QDomDocument(),
     map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
@@ -417,7 +418,8 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphics
 }
 
 void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                           const QDomNode& node, const Document::Documents &parse, Draw::Draws mode){
+                                 const QDomNode& node, const Document::Documents &parse,
+                                 Draw::Draws mode){
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
     VMainGraphicsScene *scene = 0;
@@ -545,7 +547,8 @@ void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomEleme
 }
 
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString& type, Draw::Draws mode){
+                                     const Document::Documents &parse, const QString& type,
+                                     Draw::Draws mode){
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!type.isEmpty(), Q_FUNC_INFO, "type of point is empty");
@@ -901,7 +904,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             spl.setMode(typeObject);
             spl.setIdObject(idObject);
             data->UpdateModelingSpline(id, spl);
-            VNodeSpline::Create(this, data, id, idObject,mode, parse, Tool::FromFile);
+            VNodeSpline::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
             return;
         }
         catch(const VExceptionBadId &e){
@@ -1000,10 +1003,23 @@ void VDomDocument::FullUpdateTree(){
         data->ClearObject();
         Parse(Document::LiteParse, scene, scene);
     }
+    catch (const std::bad_alloc &) {
+        delete scene;
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Error parsing file."));
+        msgBox.setInformativeText("std::bad_alloc");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+        return;
+    }
     catch(...){
         delete scene;
         throw;
     }
+
     delete scene;
     setCurrentData();
     emit FullUpdateFromFile();
