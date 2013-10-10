@@ -169,11 +169,20 @@ void VDomDocument::ChangeActivDraw(const QString& name, Document::Documents pars
     }
 }
 
-void VDomDocument::SetNameDraw(const QString& name){
+bool VDomDocument::SetNameDraw(const QString& name){
     Q_ASSERT_X(!name.isEmpty(), "SetNameDraw", "name draw is empty");
     QString oldName = nameActivDraw;
-    nameActivDraw = name;
-    emit ChangedNameDraw(oldName, nameActivDraw);
+    QDomElement element;
+    if(GetActivDrawElement(element)){
+        nameActivDraw = name;
+        element.setAttribute("name", nameActivDraw);
+        emit haveChange();
+        emit ChangedNameDraw(oldName, nameActivDraw);
+        return true;
+    } else {
+        qWarning()<<"Can't find activ draw"<<Q_FUNC_INFO;
+        return false;
+    }
 }
 
 void VDomDocument::SetActivDraw(const QString& name){

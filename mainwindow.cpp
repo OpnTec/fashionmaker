@@ -198,8 +198,12 @@ void MainWindow::OptionDraw(){
     }
     delete dlg;
     index = comboBoxDraws->findText(doc->GetNameActivDraw());
-    doc->SetNameDraw(nameDraw);
-    comboBoxDraws->setItemText(index, nameDraw);
+    if(doc->SetNameDraw(nameDraw)){
+        comboBoxDraws->setItemText(index, nameDraw);
+    } else {
+        QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new name of drawing"));
+    }
+
 }
 
 template <typename Dialog, typename Func>

@@ -55,7 +55,7 @@ public:
     bool        GetActivModelingElement(QDomElement &element);
     bool        GetActivDetailsElement(QDomElement &element);
     bool        appendDraw(const QString& name);
-    void        SetNameDraw(const QString& name);
+    bool        SetNameDraw(const QString& name);
     void        Parse(Document::Documents parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail);
     QHash<qint64, VDataTool*>* getTools();
     QVector<VToolRecord> *getHistory();
