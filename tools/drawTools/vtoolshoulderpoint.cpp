@@ -99,14 +99,16 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line, id);
+            data->AddLine(p2Line, id);
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line, id);
+            data->AddLine(p2Line, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(p1Line, id);
-        data->AddLine(p2Line, id);
         VDrawTool::AddRecord(id, Tool::ShoulderPointTool, doc);
         if(parse == Document::FullParse){
             VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,

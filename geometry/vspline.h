@@ -136,7 +136,7 @@ public:
     qreal            GetKasm1() const;
     qreal            GetKasm2() const;
     qreal            GetKcurve() const;
-    const QHash<qint64, VPointF> *GetDataPoints() const;
+    const QHash<qint64, VPointF> GetDataPoints() const;
     /**
      * @brief CrossingSplLine перевіряє перетин сплайну з лінією.
      * @param line лінія з якою перевіряється перетин.
@@ -224,7 +224,7 @@ private:
     qreal kAsm1;
     qreal kAsm2;
     qreal kCurve;
-    const QHash<qint64, VPointF> *points;
+    QHash<qint64, VPointF> points;
     Draw::Draws mode;
     qint64 idObject;
     /**

@@ -95,6 +95,16 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
+    catch(const VException &e){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Something wrong!!"));
+        msgBox.setInformativeText(e.ErrorMessage());
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+    }
     catch(std::exception& e) {
       qCritical() << "Exception thrown:" << e.what();
     }

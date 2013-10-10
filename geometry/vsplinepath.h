@@ -60,7 +60,7 @@ public:
     QVector<QPointF>      GetPathPoints() const;
     QVector<VSplinePoint> GetSplinePath() const;
     qreal                 GetLength() const;
-    const QHash<qint64, VPointF> *GetDataPoints() const;
+    QHash<qint64, VPointF> GetDataPoints() const;
     void                  UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point);
     VSplinePoint          GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
     /**
@@ -85,7 +85,7 @@ protected:
     QVector<VSplinePoint> path;
     qreal kCurve;
     Draw::Draws mode;
-    const QHash<qint64, VPointF> *points;
+    QHash<qint64, VPointF> points;
     qint64 idObject;
 };
 

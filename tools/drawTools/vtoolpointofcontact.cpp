@@ -96,8 +96,14 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(secondPointId, id);
+            data->AddLine(center, id);
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(secondPointId, id);
+            data->AddLine(center, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }

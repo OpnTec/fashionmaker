@@ -74,13 +74,14 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->AddLine(basePointId, id);
         } else {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->AddLine(basePointId, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(basePointId, id);
         VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
         if(parse == Document::FullParse){
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,

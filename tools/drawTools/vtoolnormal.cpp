@@ -74,13 +74,14 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(firstPointId, id);
         VDrawTool::AddRecord(id, Tool::NormalTool, doc);
         if(parse == Document::FullParse){
             VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,

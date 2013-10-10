@@ -72,16 +72,20 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line1Id, id);
+            data->AddLine(id, p2Line1Id);
+            data->AddLine(p1Line2Id, id);
+            data->AddLine(id, p2Line2Id);
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line1Id, id);
+            data->AddLine(id, p2Line1Id);
+            data->AddLine(p1Line2Id, id);
+            data->AddLine(id, p2Line2Id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(p1Line1Id, id);
-        data->AddLine(id, p2Line1Id);
-        data->AddLine(p1Line2Id, id);
-        data->AddLine(id, p2Line2Id);
         VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
         if(parse == Document::FullParse){
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,

@@ -23,11 +23,13 @@
 #define VARC_H
 
 #include "vspline.h"
+#include <QCoreApplication>
 
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
  */
 class VArc{
+    Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
                  /**
                   * @brief VArc конструктор по замовчуванню.
@@ -84,7 +86,7 @@ public:
      * @return точку кінця дуги.
      */
     QPointF      GetP2 () const;
-    const QHash<qint64, VPointF> *GetDataPoints() const;
+    const QHash<qint64, VPointF> GetDataPoints() const;
     /**
      * @brief GetPath будує шлях по даній дузі.
      * @return повертає шлях.
@@ -119,7 +121,7 @@ private:
      * @brief center центральна точка дуги.
      */
     qint64 center;
-    const QHash<qint64, VPointF> *points;
+    QHash<qint64, VPointF> points;
     Draw::Draws mode;
     qint64 idObject;
 };

@@ -23,7 +23,7 @@
 #include <QDebug>
 
 VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(0), mode(Draw::Calculation), idObject(0){
+    kCurve(1), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){
 }
 
 VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()),
@@ -34,14 +34,14 @@ VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
                   qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
-    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points),
+    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(*points),
     mode(mode), idObject(idObject){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
                   qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0),
-    angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(points), mode(mode), idObject(idObject){
+    angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(*points), mode(mode), idObject(idObject){
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
@@ -129,8 +129,8 @@ qint64 VSpline::GetP1 () const{
 }
 
 VPointF VSpline::GetPointP1() const{
-    if(points->contains(p1)){
-        return points->value(p1);
+    if(points.contains(p1)){
+        return points.value(p1);
     } else {
         qCritical()<<"Не можу знайти id = "<<p1<<" в таблиці.";
         throw"Не можу знайти точку за id.";
@@ -151,8 +151,8 @@ qint64 VSpline::GetP4() const{
 }
 
 VPointF VSpline::GetPointP4() const{
-    if(points->contains(p4)){
-        return points->value(p4);
+    if(points.contains(p4)){
+        return points.value(p4);
     } else {
         qCritical()<<"Не можу знайти id = "<<p4<<" в таблиці.";
         throw"Не можу знайти точку за id.";
@@ -190,7 +190,7 @@ qreal VSpline::GetKcurve() const{
     return kCurve;
 }
 
-const QHash<qint64, VPointF> *VSpline::GetDataPoints() const{
+const QHash<qint64, VPointF> VSpline::GetDataPoints() const{
     return points;
 }
 

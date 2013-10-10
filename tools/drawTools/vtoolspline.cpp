@@ -94,13 +94,14 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddSpline(spline);
+        data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
     } else {
         data->UpdateSpline(id, spline);
+        data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
     VDrawTool::AddRecord(id, Tool::SplineTool, doc);
     if(parse == Document::FullParse){
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);

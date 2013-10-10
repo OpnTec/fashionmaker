@@ -21,15 +21,16 @@
 
 #include "varc.h"
 #include <QDebug>
+#include "exception/vexception.h"
 
 VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-    center(0), points(0), mode(Draw::Calculation), idObject(0){
+    center(0), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){
 }
 
 VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
             qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-      center(center), points(points), mode(mode), idObject(idObject){
+      center(center), points(*points), mode(mode), idObject(idObject){
 }
 
 VArc::VArc(const VArc &arc): f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
@@ -85,11 +86,11 @@ qint64 VArc::GetCenter() const{
 }
 
 QPointF VArc::GetCenterPoint() const{
-    if(points->contains(center)){
-        return points->value(center).toQPointF();
+    if(points.contains(center)){
+        return points.value(center).toQPointF();
     } else {
-        qCritical()<<"Не можу знайти id = "<<center<<" в таблиці.";
-        throw"Не можу знайти точку за id.";
+        QString error = QString(tr("Can't find id = %1 in table.")).arg(center);
+        throw VException(error);
     }
     return QPointF();
 }
@@ -108,7 +109,7 @@ QPointF VArc::GetP2 () const{
     return centerP2.p2();
 }
 
-const QHash<qint64, VPointF> *VArc::GetDataPoints() const{
+const QHash<qint64, VPointF> VArc::GetDataPoints() const{
     return points;
 }
 
@@ -133,9 +134,11 @@ qreal VArc::AngleArc() const{
 qint32 VArc::NumberSplOfArc() const{
     qint32 angArc = static_cast<qint32> (AngleArc ());
     switch( angArc ){
-    case   0:
-        throw "Кут дуги не може бути 0 градусів.";
+    case   0:{
+        QString error = QString(tr("Angle of arc can't be 0 degree."));
+        throw VException(error);
         break;
+    }
     case  90:
         return 1;
     case 180:
@@ -161,7 +164,8 @@ QVector<QPointF> VArc::GetPoints() const{
 QVector<QPointF> VArc::SplOfArc(qint32 number) const{
     qint32 n = NumberSplOfArc ();
     if( number > n ){
-        throw "Дуга не складається з такої кількості сплайнів.";
+        QString error = QString(tr("Arc have not this number of part."));
+        throw VException(error);
     }
     qreal f1 = GetF1 ();
     qreal f2 = GetF2 ();

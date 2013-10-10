@@ -60,12 +60,13 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->getNextId();
+        data->AddLine(firstPoint, secondPoint);
     } else {
+        data->AddLine(firstPoint, secondPoint);
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLine(firstPoint, secondPoint);
     VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if(parse == Document::FullParse){
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);

@@ -128,15 +128,17 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(id, secondPointId);
         } else {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(id, secondPointId);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
-        data->AddLine(firstPointId, id);
-        data->AddLine(id, secondPointId);
         if(parse == Document::FullParse){
             VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,
                                                        secondPointId, typeLine, typeCreation);

@@ -93,13 +93,14 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(firstPointId, id);
         VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
         if(parse == Document::FullParse){
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula,
