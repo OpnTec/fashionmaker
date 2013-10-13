@@ -75,20 +75,22 @@ protected:
 
                 dialog->show();
             }
-            if(selectedAction == actionRemove){
-                //deincrement referens
-                RemoveReferens();
-                //remove form xml file
-                QDomElement domElement = doc->elementById(QString().setNum(id));
-                if(domElement.isElement()){
-                    QDomElement element;
-                    bool ok = doc->GetActivCalculationElement(element);
-                    if(ok){
-                        element.removeChild(domElement);
-                        //update xml file
-                        emit FullUpdateTree();
-                        //remove form scene
-                        emit RemoveTool(tool);
+            if(showRemove){
+                if(selectedAction == actionRemove){
+                    //deincrement referens
+                    RemoveReferens();
+                    //remove form xml file
+                    QDomElement domElement = doc->elementById(QString().setNum(id));
+                    if(domElement.isElement()){
+                        QDomElement element;
+                        bool ok = doc->GetActivCalculationElement(element);
+                        if(ok){
+                            element.removeChild(domElement);
+                            //update xml file
+                            emit FullUpdateTree();
+                            //remove form scene
+                            emit RemoveTool(tool);
+                        }
                     }
                 }
             }

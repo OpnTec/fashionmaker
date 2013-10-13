@@ -137,7 +137,6 @@ qint32 VArc::NumberSplOfArc() const{
     case   0:{
         QString error = QString(tr("Angle of arc can't be 0 degree."));
         throw VException(error);
-        break;
     }
     case  90:
         return 1;
