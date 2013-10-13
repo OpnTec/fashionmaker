@@ -396,15 +396,23 @@ void DialogTool::ShowVariable(const QHash<key, val> *var){
     Q_CHECK_PTR(listWidget);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+
     QHashIterator<key, val> i(*var);
+    QMap<key, val> map;
     while (i.hasNext()) {
         i.next();
-        QListWidgetItem *item = new QListWidgetItem(i.key());
+        map.insert(i.key(), i.value());
+    }
+
+    QMapIterator<key, val> iMap(map);
+    while (iMap.hasNext()) {
+        iMap.next();
+        QListWidgetItem *item = new QListWidgetItem(iMap.key());
         item->setFont(QFont("Times", 12, QFont::Bold));
         listWidget->addItem(item);
     }
     listWidget->setCurrentRow (0);
+    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 }
 
 qint64 DialogTool::getIdDetail() const{
