@@ -55,7 +55,9 @@ public:
     VStandartTableCell  GetStandartTableCell(const QString& name) const;
     VIncrementTableRow  GetIncrementTableRow(const QString& name) const;
     qreal               GetLine(const QString &name) const;
-    qreal               GetLineArc(const QString &name) const;
+    qreal               GetLengthArc(const QString &name) const;
+    qreal               GetLengthSpline(const QString &name) const;
+    qreal               GetLineAngle(const QString &name) const;
     VSpline             GetSpline(qint64 id) const;
     VSpline             GetModelingSpline(qint64 id) const;
     VArc                GetArc(qint64 id) const;

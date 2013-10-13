@@ -62,6 +62,8 @@ public slots:
     void             SizeGrowth();
     void             StandartTable();
     void             LengthLines();
+    void             LengthArcs();
+    void             LengthCurves();
     void             Increments();
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
@@ -86,6 +88,8 @@ protected:
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
+    QRadioButton     *radioButtonLengthArc;
+    QRadioButton     *radioButtonLengthCurve;
     qint64           idDetail;
     Draw::Draws       mode;
     bool             CheckObject(const qint64 &id);

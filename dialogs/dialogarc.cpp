@@ -52,6 +52,8 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
@@ -64,6 +66,8 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
     connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineAngles);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogArc::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogArc::LengthCurves);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
@@ -153,7 +157,7 @@ void DialogArc::ValChenged(int row){
     }
     QListWidgetItem *item = ui->listWidget->item( row );
     if(ui->radioButtonLineAngles->isChecked()){
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineArc(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineAngle(item->text()))
                 .arg(tr("Value angle of line."));
         ui->labelDescription->setText(desc);
         return;

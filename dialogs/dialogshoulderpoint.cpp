@@ -34,6 +34,8 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -58,6 +60,8 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogShoulderPoint::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogShoulderPoint::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogShoulderPoint::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);

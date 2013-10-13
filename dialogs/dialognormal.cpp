@@ -35,6 +35,8 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -74,6 +76,8 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogNormal::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogNormal::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogNormal::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogNormal::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogNormal::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogNormal::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogNormal::FormulaChanged);

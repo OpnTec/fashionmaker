@@ -320,32 +320,14 @@ QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF
 }
 
 qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) const{
-    /*QVector<qreal> px;
-    QVector<qreal> py;
-    QVector<qreal>& wpx = px;
-    QVector<qreal>& wpy = py;
-    px.append ( p1.x () );
-    py.append ( p1.y () );
-    PointBezier_r ( p1.x (), p1.y (), p2.x (), p2.y (),
-                  p3.x (), p3.y (), p4.x (), p4.y (), 0, wpx, wpy);
-    px.append ( p4.x () );
-    py.append ( p4.y () );
-    qint32 i = 0;
-    qreal length = 0.0;
-     *
-     * Наприклад маємо 10 точок. Від 0 до 9  і останню точку не опрацьовуємо.
-     * Тому від 0 до 8(<10-1).
-     *
-    for ( i = 0; i < px.count() - 1; ++i ){
-        length += QLineF ( QPointF ( px[i], py[i] ), QPointF ( px[i+1], py[i+1] ) ).length ();
-    }*/
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);
     splinePath.moveTo(points[0]);
     for (qint32 i = 1; i < points.count(); ++i){
         splinePath.lineTo(points[i]);
     }
-    return splinePath.length();
+    qreal length = toMM(splinePath.length());
+    return length;
 }
 
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,

@@ -30,7 +30,7 @@ DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent
     isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
     lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0), labelEditNamePoint(0),
     labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0), radioButtonIncrements(0),
-    radioButtonLengthLine(0), idDetail(0), mode(mode){
+    radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0), idDetail(0), mode(mode){
     Q_CHECK_PTR(data);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
@@ -309,6 +309,14 @@ void DialogTool::LengthLines(){
     ShowVariable(data->DataLengthLines());
 }
 
+void DialogTool::LengthArcs(){
+    ShowVariable(data->DataLengthArcs());
+}
+
+void DialogTool::LengthCurves(){
+    ShowVariable(data->DataLengthSplines());
+}
+
 void DialogTool::Increments(){
     ShowVariable(data->DataIncrementTable());
 }
@@ -331,17 +339,19 @@ void DialogTool::ValChenged(int row){
     Q_CHECK_PTR(radioButtonStandartTable);
     Q_CHECK_PTR(radioButtonIncrements);
     Q_CHECK_PTR(radioButtonLengthLine);
+    Q_CHECK_PTR(radioButtonLengthArc);
+    Q_CHECK_PTR(radioButtonLengthCurve);
     if(listWidget->count() == 0){
         return;
     }
     QListWidgetItem *item = listWidget->item( row );
     if(radioButtonSizeGrowth->isChecked()){
         if(item->text()=="Р"){
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg("Зріст");
+            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg(tr("Growth"));
             labelDescription->setText(desc);
         }
         if(item->text()=="Сг"){
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg("Розмір");
+            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
             labelDescription->setText(desc);
         }
         return;
@@ -366,12 +376,28 @@ void DialogTool::ValChenged(int row){
         labelDescription->setText(desc);
         return;
     }
+    if(radioButtonLengthArc->isChecked()){
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(item->text()))
+                .arg(tr("Arc length"));
+        labelDescription->setText(desc);
+        return;
+    }
+    if(radioButtonLengthCurve->isChecked()){
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthSpline(item->text()))
+                .arg(tr("Curve length"));
+        labelDescription->setText(desc);
+        return;
+    }
 }
 
 void DialogTool::UpdateList(){
-    if(radioButtonSizeGrowth == 0 || radioButtonStandartTable == 0 || radioButtonIncrements == 0){
-        return;
-    }
+    Q_CHECK_PTR(radioButtonSizeGrowth);
+    Q_CHECK_PTR(radioButtonStandartTable);
+    Q_CHECK_PTR(radioButtonIncrements);
+    Q_CHECK_PTR(radioButtonLengthLine);
+    Q_CHECK_PTR(radioButtonLengthArc);
+    Q_CHECK_PTR(radioButtonLengthCurve);
+
     if(radioButtonSizeGrowth->isChecked()){
         ShowVariable(data->DataBase());
     }
@@ -380,6 +406,15 @@ void DialogTool::UpdateList(){
     }
     if(radioButtonIncrements->isChecked()){
         ShowVariable(data->DataIncrementTable());
+    }
+    if(radioButtonLengthLine->isChecked()){
+        ShowVariable(data->DataLengthLines());
+    }
+    if(radioButtonLengthArc->isChecked()){
+        ShowVariable(data->DataLengthArcs());
+    }
+    if(radioButtonLengthCurve->isChecked()){
+        ShowVariable(data->DataLengthSplines());
     }
 }
 

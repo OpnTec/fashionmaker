@@ -38,6 +38,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -76,6 +78,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogEndLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEndLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEndLine::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogEndLine::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEndLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);

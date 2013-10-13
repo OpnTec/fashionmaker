@@ -32,6 +32,8 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     radioButtonStandartTable = ui.radioButtonStandartTable;
     radioButtonIncrements = ui.radioButtonIncrements;
     radioButtonLengthLine = ui.radioButtonLengthLine;
+    radioButtonLengthArc = ui.radioButtonLengthArc;
+    radioButtonLengthCurve = ui.radioButtonLengthSpline;
     lineEditFormula = ui.lineEditFormula;
     labelEditFormula = ui.labelEditFormula;
     labelEditNamePoint = ui.labelEditNamePoint;
@@ -55,6 +57,8 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     connect(ui.radioButtonStandartTable, &QRadioButton::clicked, this, &DialogPointOfContact::StandartTable);
     connect(ui.radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
     connect(ui.radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
+    connect(ui.radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
+    connect(ui.radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
     connect(ui.toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
     connect(ui.lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);

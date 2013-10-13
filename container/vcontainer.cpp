@@ -108,7 +108,17 @@ qreal VContainer::GetLine(const QString &name) const{
     return GetObject(lengthLines, name);
 }
 
-qreal VContainer::GetLineArc(const QString &name) const{
+qreal VContainer::GetLengthArc(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(lengthArcs, name);
+}
+
+qreal VContainer::GetLengthSpline(const QString &name) const{
+    Q_ASSERT(!name.isEmpty());
+    return GetObject(lengthSplines, name);
+}
+
+qreal VContainer::GetLineAngle(const QString &name) const{
     Q_ASSERT(!name.isEmpty());
     return GetObject(lineAngles, name);
 }
@@ -562,6 +572,10 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const{
         *ok = true;
         return lineAngles.value(name);
     }
+    if(lengthSplines.contains(name)){
+        *ok = true;
+        return lengthSplines.value(name);
+    }
     *ok = false;
     return 0;
 }
@@ -778,7 +792,7 @@ void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secon
         first = GetModelingPoint(firstPointId);
         second = GetModelingPoint(secondPointId);
     }
-    AddLengthSpline(nameLine, QLineF(first.toQPointF(), second.toQPointF()).length());
+    AddLengthSpline(nameLine, toMM(QLineF(first.toQPointF(), second.toQPointF()).length()));
 }
 
 void VContainer::CreateManTableIGroup (){

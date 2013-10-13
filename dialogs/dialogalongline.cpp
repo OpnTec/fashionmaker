@@ -33,6 +33,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -56,6 +58,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogAlongLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogAlongLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogAlongLine::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogAlongLine::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogAlongLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogAlongLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogAlongLine::FormulaChanged);
