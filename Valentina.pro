@@ -11,7 +11,8 @@ QT       += core gui widgets xml svg
 TARGET = Valentina
 TEMPLATE = app
 CONFIG -= debug_and_release debug_and_release_target
-CONFIG += c++11
+CONFIG += c++11 precompile_header
+QMAKE_CXX = ccache g++
 
 SOURCES += main.cpp\
         mainwindow.cpp \
