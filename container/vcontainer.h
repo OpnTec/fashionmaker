@@ -72,8 +72,6 @@ public:
     void                AddStandartTableCell(const QString& name, const VStandartTableCell& cell);
     void                AddIncrementTableRow(const QString& name, const VIncrementTableRow &cell);
     void                AddLengthLine(const QString &name, const qreal &value);
-    void                AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId,
-                                        Draw::Draws mode = Draw::Calculation);
     void                AddLengthSpline(const QString &name, const qreal &value);
     void                AddLengthArc(const qint64 &center, const qint64 &id);
     void                AddLengthArc(const QString &name, const qreal &value);

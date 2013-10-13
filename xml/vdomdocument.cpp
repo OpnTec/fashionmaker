@@ -444,15 +444,19 @@ void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsSce
         if(!domElement.isNull()){
             if(domElement.tagName() == "point"){
                 ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                continue;
             }
             if(domElement.tagName() == "line"){
                 ParseLineElement(scene, domElement, parse, mode);
+                continue;
             }
             if(domElement.tagName() == "spline"){
                 ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                continue;
             }
             if(domElement.tagName() == "arc"){
                 ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                continue;
             }
         }
     }

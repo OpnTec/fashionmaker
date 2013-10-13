@@ -454,7 +454,7 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value){
 }
 
 void VContainer::AddLengthArc(const qint64 &center, const qint64 &id){
-    AddLengthArc(GetNameArc(center, id), GetArc(id).GetLength());
+    AddLengthArc(GetNameArc(center, id), toMM(GetArc(id).GetLength()));
 }
 
 void VContainer::AddLengthArc(const QString &name, const qreal &value){
@@ -655,7 +655,7 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
         first = GetModelingPoint(firstPointId);
         second = GetModelingPoint(secondPointId);
     }
-    AddLengthLine(nameLine, QLineF(first.toQPointF(), second.toQPointF()).length()/PrintDPI*25.4);
+    AddLengthLine(nameLine, toMM(QLineF(first.toQPointF(), second.toQPointF()).length()));
     nameLine = GetNameLineAngle(firstPointId, secondPointId, mode);
     AddLineAngle(nameLine, QLineF(first.toQPointF(), second.toQPointF()).angle());
 }
@@ -773,26 +773,12 @@ QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, Draw::Dra
     } else {
         centerPoint = GetModelingPoint(center);
     }
-    return QString ("Arc(%1)%2").arg(centerPoint.name()).arg(id);
+    return QString ("Arc_%1_%2").arg(centerPoint.name()).arg(id);
 }
 
 void VContainer::AddLengthLine(const QString &name, const qreal &value){
     Q_ASSERT(!name.isEmpty());
     lengthLines[name] = value;
-}
-
-void VContainer::AddLengthSpline(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Draws mode){
-    QString nameLine = GetNameSpline(firstPointId, secondPointId, mode);
-    VPointF first;
-    VPointF second;
-    if(mode == Draw::Calculation){
-        first = GetPoint(firstPointId);
-        second = GetPoint(secondPointId);
-    } else {
-        first = GetModelingPoint(firstPointId);
-        second = GetModelingPoint(secondPointId);
-    }
-    AddLengthSpline(nameLine, toMM(QLineF(first.toQPointF(), second.toQPointF()).length()));
 }
 
 void VContainer::CreateManTableIGroup (){

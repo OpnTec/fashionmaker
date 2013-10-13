@@ -326,8 +326,7 @@ qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) c
     for (qint32 i = 1; i < points.count(); ++i){
         splinePath.lineTo(points[i]);
     }
-    qreal length = toMM(splinePath.length());
-    return length;
+    return splinePath.length();
 }
 
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,

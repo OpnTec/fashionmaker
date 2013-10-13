@@ -68,7 +68,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     QString errorMsg;
     qreal result = cal.eval(radius, &errorMsg);
     if(errorMsg.isEmpty()){
-        calcRadius = result*PrintDPI/25.4;
+        calcRadius = toPixel(result);
     }
 
     errorMsg.clear();
@@ -87,10 +87,10 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddArc(arc);
-        data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
+        data->AddLengthArc(data->GetNameArc(center,id), toMM(arc.GetLength()));
     } else {
         data->UpdateArc(id, arc);
-        data->AddLengthArc(data->GetNameArc(center,id), arc.GetLength());
+        data->AddLengthArc(data->GetNameArc(center,id), toMM(arc.GetLength()));
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
         }
