@@ -78,6 +78,9 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress){
             QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
             QGraphicsView::mousePressEvent(mousePress);
             break;
+        default:
+            QGraphicsView::mousePressEvent(mousePress);
+            break;
         }
     }
 }

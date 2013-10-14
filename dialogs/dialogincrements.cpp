@@ -34,6 +34,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     InitialStandartTable();
     InitialIncrementTable();
     InitialLinesTable();
+    InitialSplinesTable();
+    InitialArcsTable();
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
@@ -41,6 +43,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     FillStandartTable();
     FillIncrementTable();
     FillLengthLines();
+    FillLengthSplines();
+    FillLengthArcs();
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::cellChanged);
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
