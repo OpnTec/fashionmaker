@@ -56,8 +56,8 @@
  QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &/* option */,
      const QModelIndex &/* index */) const{
      QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
-     editor->setMinimum(-1000.0);
-     editor->setMaximum(1000.0);
+     editor->setMinimum(-10000.0);
+     editor->setMaximum(10000.0);
 
      return editor;
  }
