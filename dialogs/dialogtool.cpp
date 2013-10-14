@@ -139,9 +139,10 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
     Q_ASSERT(lineEdit != 0);
     Q_ASSERT(listWidget != 0);
     QListWidgetItem *item = listWidget->currentItem();
-    QString val = item->text();
-    lineEdit->setText(lineEdit->text().append(val));
+    int pos = lineEdit->cursorPosition();
+    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
     lineEdit->setFocus();
+    lineEdit->setCursorPosition(pos + item->text().size());
 }
 
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
@@ -328,9 +329,12 @@ void DialogTool::PutHere(){
 
 void DialogTool::PutVal(QListWidgetItem *item){
     Q_ASSERT(lineEditFormula != 0);
-    QString val = item->text();
-    lineEditFormula->setText(lineEditFormula->text().append(val));
+    Q_ASSERT(item != 0);
+    int pos = lineEditFormula->cursorPosition();
+    lineEditFormula->setText(lineEditFormula->text().insert(lineEditFormula->cursorPosition(),
+                                                            item->text()));
     lineEditFormula->setFocus();
+    lineEditFormula->setCursorPosition(pos + item->text().size());
 }
 
 void DialogTool::ValChenged(int row){

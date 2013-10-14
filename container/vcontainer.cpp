@@ -217,6 +217,8 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             }
         }
             break;
+        case(Tool::SplineTool):
+            break;//Nothing to do, just ignore.
         default:
             qWarning()<<"Get wrong tool type. Ignore."<<detail[i].getTypeTool();
             break;
