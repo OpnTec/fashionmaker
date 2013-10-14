@@ -26,6 +26,7 @@
 #include "widgets/doubledelegate.h"
 #include "container/vincrementtablerow.h"
 #include <QDebug>
+#include "exception/vexception.h"
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
     DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc){
@@ -41,6 +42,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     FillIncrementTable();
     FillLengthLines();
 
+    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::cellChanged);
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
     connect(ui->toolButtonRemove, &QPushButton::clicked, this,
             &DialogIncrements::clickedToolButtonRemove);
@@ -365,8 +367,8 @@ void DialogIncrements::AddIncrementToFile(qint64 id, QString name, qreal base, q
 }
 
 void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
-    QTableWidgetItem *item;
-    QTableWidgetItem *itemName;
+    QTableWidgetItem *item = 0;
+    QTableWidgetItem *itemName = 0;
     qint64 id;
     QDomElement domElement;
     switch(column) {
@@ -386,8 +388,14 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
             id = qvariant_cast<qint64>(itemName->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if(domElement.isElement()){
-                domElement.setAttribute("base", item->text().toDouble());
-                emit FullUpdateTree();
+                bool ok = false;
+                qreal value = item->text().toDouble(&ok);
+                if(ok){
+                    domElement.setAttribute("base", value);
+                    emit FullUpdateTree();
+                } else {
+                    throw VException(tr("Can't convert toDouble value."));
+                }
             }
             break;
         case 3:

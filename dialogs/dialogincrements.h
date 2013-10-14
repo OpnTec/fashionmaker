@@ -29,38 +29,37 @@ namespace Ui {
 class DialogIncrements;
 }
 
-class DialogIncrements : public DialogTool
-{
+class DialogIncrements : public DialogTool{
     Q_OBJECT   
 public:
-    explicit DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
-    ~DialogIncrements();
+                         DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
+                         ~DialogIncrements();
 public slots:
-    void clickedToolButtonAdd();
-    void clickedToolButtonRemove();
-    void cellChanged ( qint32 row, qint32 column );
-    void FullUpdateFromFile();
-    virtual void DialogAccepted();
+    void                 clickedToolButtonAdd();
+    void                 clickedToolButtonRemove();
+    void                 cellChanged ( qint32 row, qint32 column );
+    void                 FullUpdateFromFile();
+    virtual void         DialogAccepted();
 signals:
-    void FullUpdateTree();
-    void haveLiteChange();
+    void                 FullUpdateTree();
+    void                 haveLiteChange();
 private:
     Q_DISABLE_COPY(DialogIncrements)
     Ui::DialogIncrements *ui;
-    VContainer *data; // need because we must change data
-    VDomDocument *doc;
-    void InitialStandartTable();
-    void InitialIncrementTable();
-    void InitialLinesTable();
-    void InitialSplinesTable();
-    void InitialArcsTable();
-    void FillStandartTable();
-    void FillIncrementTable();
-    void FillLengthLines();
-    void FillLengthSplines();
-    void FillLengthArcs();
-    void AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize, qreal kgrowth,
-                            QString description);
+    VContainer           *data; // need because we must change data
+    VDomDocument         *doc;
+    void                 InitialStandartTable();
+    void                 InitialIncrementTable();
+    void                 InitialLinesTable();
+    void                 InitialSplinesTable();
+    void                 InitialArcsTable();
+    void                 FillStandartTable();
+    void                 FillIncrementTable();
+    void                 FillLengthLines();
+    void                 FillLengthSplines();
+    void                 FillLengthArcs();
+    void                 AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize, qreal kgrowth,
+                                            QString description);
 };
 
 #endif // DIALOGINCREMENTS_H
