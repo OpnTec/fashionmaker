@@ -24,30 +24,22 @@
 
 #include <QGraphicsView>
 
-class VMainGraphicsView : public QGraphicsView
-{
+class VMainGraphicsView : public QGraphicsView{
     Q_OBJECT
 public:
     explicit VMainGraphicsView(QWidget *parent = 0);
-    
 signals:
 protected:
     /**
      * @brief wheelEvent обробник повороту колеса мишки.
      * @param event передається подія.
      */
-    void wheelEvent ( QWheelEvent * event );
-    
+    void     wheelEvent ( QWheelEvent * event );
 public slots:
-    /**
-     * @brief ZoomIn збільшує масштаб листа.
-     */
-    void ZoomIn();
-    /**
-     * @brief ZoomOut зменшує масштаб листа.
-     */
-    void ZoomOut();
-    
+    void     scalingTime(qreal x);
+    void     animFinished();
+private:
+    qint32   _numScheduledScalings;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

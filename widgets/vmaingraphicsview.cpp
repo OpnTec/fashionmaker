@@ -23,30 +23,50 @@
 #include <QApplication>
 #include <QWheelEvent>
 #include <QScrollBar>
+#include <QTimeLine>
 
 VMainGraphicsView::VMainGraphicsView(QWidget *parent) :
-    QGraphicsView(parent){
+    QGraphicsView(parent), _numScheduledScalings(0){
     QGraphicsView::setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
 void VMainGraphicsView::wheelEvent(QWheelEvent *event){
+    // If you press CTRL this code will execute
+    int numDegrees = event->delta() / 8;
+    int numSteps = numDegrees / 15;  // see QWheelEvent documentation
+    _numScheduledScalings += numSteps;
+    if (_numScheduledScalings * numSteps < 0){  // if user moved the wheel in another direction, we reset
+        _numScheduledScalings = numSteps;       // previously scheduled scalings
+    }
+
+    QTimeLine *anim = new QTimeLine(350, this);
+    anim->setUpdateInterval(20);
+
+    connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scalingTime);
+    connect(anim, &QTimeLine::finished, this, &VMainGraphicsView::animFinished);
+    anim->start();
+}
+
+void VMainGraphicsView::scalingTime(qreal x){
+    Q_UNUSED(x);
+    qreal factor = 1.0 + qreal(_numScheduledScalings) / 300.0;
     if (QApplication::keyboardModifiers() == Qt::ControlModifier){
-        // Если нажата клавиша CTRL этот код выполнится
-        if ((event->delta())>0){
-            ZoomIn();
-        } else if ((event->delta())<0){
-            ZoomOut();
-        }
+        scale(factor, factor);
     } else {
-       verticalScrollBar()->setValue(verticalScrollBar()->value() - event->delta());
+        if(_numScheduledScalings < 0){
+            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
+        } else {
+            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
+        }
     }
 }
 
-void VMainGraphicsView::ZoomIn(){
-    scale(1.1,1.1);
-}
-
-void VMainGraphicsView::ZoomOut(){
-    scale(1/1.1,1/1.1);
+void VMainGraphicsView::animFinished(){
+    if (_numScheduledScalings > 0){
+        _numScheduledScalings--;
+    } else {
+        _numScheduledScalings++;
+    }
+    sender()->~QObject();
 }
