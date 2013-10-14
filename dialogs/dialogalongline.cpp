@@ -46,6 +46,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogAlongLine::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
+    ui->comboBoxLineType->setCurrentIndex(1);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 

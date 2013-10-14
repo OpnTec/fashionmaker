@@ -92,6 +92,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
 }
 
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const{
+    Q_ASSERT(box != 0);
     QStringList list;
     list<<tr("Line")<<tr("No line");
     box->addItems(list);
