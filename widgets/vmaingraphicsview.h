@@ -29,15 +29,17 @@ class VMainGraphicsView : public QGraphicsView{
 public:
     explicit VMainGraphicsView(QWidget *parent = 0);
 signals:
+public slots:
+    void     scalingTime(qreal x);
+    void     animFinished();
 protected:
     /**
      * @brief wheelEvent обробник повороту колеса мишки.
      * @param event передається подія.
      */
     void     wheelEvent ( QWheelEvent * event );
-public slots:
-    void     scalingTime(qreal x);
-    void     animFinished();
+    void     mousePressEvent(QMouseEvent *mousePress);
+    void     mouseReleaseEvent(QMouseEvent *event);
 private:
     qint32   _numScheduledScalings;
 };

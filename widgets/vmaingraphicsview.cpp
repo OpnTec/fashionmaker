@@ -27,12 +27,12 @@
 
 VMainGraphicsView::VMainGraphicsView(QWidget *parent) :
     QGraphicsView(parent), _numScheduledScalings(0){
-    QGraphicsView::setResizeAnchor(QGraphicsView::AnchorUnderMouse);
-    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
 void VMainGraphicsView::wheelEvent(QWheelEvent *event){
-    // If you press CTRL this code will execute
     int numDegrees = event->delta() / 8;
     int numSteps = numDegrees / 15;  // see QWheelEvent documentation
     _numScheduledScalings += numSteps;
@@ -51,7 +51,7 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event){
 void VMainGraphicsView::scalingTime(qreal x){
     Q_UNUSED(x);
     qreal factor = 1.0 + qreal(_numScheduledScalings) / 300.0;
-    if (QApplication::keyboardModifiers() == Qt::ControlModifier){
+    if (QApplication::keyboardModifiers() == Qt::ControlModifier){// If you press CTRL this code will execute
         scale(factor, factor);
     } else {
         if(_numScheduledScalings < 0){
@@ -69,4 +69,20 @@ void VMainGraphicsView::animFinished(){
         _numScheduledScalings++;
     }
     sender()->~QObject();
+}
+
+void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress){
+    if(mousePress->button() & Qt::LeftButton){
+        switch(QGuiApplication::keyboardModifiers()){
+        case Qt::ControlModifier:
+            QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
+            QGraphicsView::mousePressEvent(mousePress);
+            break;
+        }
+    }
+}
+
+void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event){
+    QGraphicsView::mouseReleaseEvent ( event );
+    QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
 }

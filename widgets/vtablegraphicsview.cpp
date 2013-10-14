@@ -35,10 +35,10 @@ VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent) 
 void VTableGraphicsView::selectionChanged(){
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
     if( listSelectedItems.isEmpty() == true ){
-        qDebug() << "деталь не знайдено";
+        qDebug() << tr("detail don't find");
         emit itemChect(true);
     } else {
-        qDebug() << "деталь знайдено";
+        qDebug() << tr("detail find");
         emit itemChect(false);
     }
 }
