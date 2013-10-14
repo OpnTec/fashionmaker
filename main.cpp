@@ -60,6 +60,7 @@ int main(int argc, char *argv[]){
     app.installTranslator(&appTranslator);
 
     MainWindow w;
+    w.setWindowState(w.windowState() ^ Qt::WindowMaximized);
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
     TableWindow table;
     QObject::connect(&w, &MainWindow::ModelChosen, &table, &TableWindow::ModelChosen);
