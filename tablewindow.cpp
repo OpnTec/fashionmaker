@@ -141,7 +141,7 @@ void TableWindow::StopTable(){
 }
 
 void TableWindow::saveScene(){
-    QString name = QFileDialog::getSaveFileName(0, "Зберегти розкладку", "", "Images (*.png);;Svg files (*.svg)");
+    QString name = QFileDialog::getSaveFileName(0, tr("Save layout"), "", "Images (*.png);;Svg files (*.svg)");
     if(name.isNull()){
         return;
     }
@@ -149,12 +149,11 @@ void TableWindow::saveScene(){
     QBrush *brush = new QBrush();
     brush->setColor( QColor( Qt::white ) );
     currentScene->setBackgroundBrush( *brush );
-    currentScene->clearSelection();                                                  // Selections would also render to the file
+    currentScene->clearSelection(); // Selections would also render to the file
     shadowPaper->setBrush(QBrush(Qt::white));
     shadowPaper->setPen(QPen(Qt::white, 0.1));
     paper->setPen(QPen(Qt::white, 0.1));
     paper->setBrush(QBrush(Qt::white));
-    currentScene->setSceneRect(QRectF(10,10,590,590));
     currentScene->setSceneRect(currentScene->itemsBoundingRect());
 
     QFileInfo fi(name);
@@ -163,9 +162,6 @@ void TableWindow::saveScene(){
     } else if(fi.suffix() == "png"){
         PngFile(name);
     }
-//    if(name.indexOf(".svg",name.size()-4)<0){
-//        name.append(".svg");
-//    }
 
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );

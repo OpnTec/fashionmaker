@@ -43,7 +43,7 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
                         Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
     if(parse == Document::FullParse){
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
-        Q_CHECK_PTR(point);
+        Q_ASSERT(point != 0);
         doc->AddTool(id, point);
         doc->IncrementReferens(idPoint);
     } else {

@@ -40,7 +40,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
                              Tool::Sources typeCreation){
     if(parse == Document::FullParse){
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
-        Q_CHECK_PTR(splPath);
+        Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
         VSplinePath path = data->GetModelingSplinePath(id);
         const QVector<VSplinePoint> *points = path.GetPoint();

@@ -38,7 +38,7 @@ void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idA
                       Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
     if(parse == Document::FullParse){
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeobject, typeCreation);
-        Q_CHECK_PTR(arc);
+        Q_ASSERT(arc != 0);
         doc->AddTool(id, arc);
         doc->IncrementReferens(idArc);
     } else {

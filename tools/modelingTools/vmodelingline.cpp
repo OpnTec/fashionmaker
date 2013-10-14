@@ -55,8 +55,8 @@ VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint
                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                      Tool::Sources typeCreation){
     VModelingLine *line = 0;
-    Q_CHECK_PTR(doc);
-    Q_CHECK_PTR(data);
+    Q_ASSERT(doc != 0);
+    Q_ASSERT(data != 0);
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->getNextId();

@@ -47,8 +47,8 @@ protected:
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true){
-        Q_CHECK_PTR(tool);
-        Q_CHECK_PTR(event);
+        Q_ASSERT(tool != 0);
+        Q_ASSERT(event != 0);
         if(!ignoreContextMenuEvent){
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
