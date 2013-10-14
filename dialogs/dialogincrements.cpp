@@ -315,6 +315,7 @@ void DialogIncrements::clickedToolButtonAdd(){
     ui->toolButtonRemove->setEnabled(true);
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
             &DialogIncrements::cellChanged);
+    emit haveLiteChange();
 }
 
 void DialogIncrements::clickedToolButtonRemove(){
@@ -336,6 +337,7 @@ void DialogIncrements::clickedToolButtonRemove(){
     }
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
             &DialogIncrements::cellChanged);
+    emit haveLiteChange();
 }
 
 void DialogIncrements::AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize,
