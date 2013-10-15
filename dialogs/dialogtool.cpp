@@ -451,8 +451,8 @@ void DialogTool::ShowVariable(const QHash<key, val> *var){
         item->setFont(QFont("Times", 12, QFont::Bold));
         listWidget->addItem(item);
     }
-    listWidget->setCurrentRow (0);
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->setCurrentRow (0);
 }
 
 qint64 DialogTool::getIdDetail() const{
