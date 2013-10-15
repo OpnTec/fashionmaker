@@ -48,6 +48,8 @@ private:
     Ui::DialogIncrements *ui;
     VContainer           *data; // need because we must change data
     VDomDocument         *doc;
+    qint32               row;
+    qint32               column;
     void                 InitialStandartTable();
     void                 InitialIncrementTable();
     void                 InitialLinesTable();

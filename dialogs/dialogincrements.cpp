@@ -29,7 +29,8 @@
 #include "exception/vexception.h"
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
-    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc){
+    DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc),
+    row(0), column(0){
     ui->setupUi(this);
     InitialStandartTable();
     InitialIncrementTable();
@@ -58,6 +59,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
 
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogIncrements::DialogAccepted);
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 void DialogIncrements::FillStandartTable(){
@@ -155,6 +157,7 @@ void DialogIncrements::FillIncrementTable(){
     ui->tableWidgetIncrement->resizeColumnsToContents();
     ui->tableWidgetIncrement->resizeRowsToContents();
     ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
+    ui->tableWidgetIncrement->setCurrentCell( row, column );
 }
 
 void DialogIncrements::FillLengthLines(){
@@ -377,6 +380,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
     QTableWidgetItem *itemName = 0;
     qint64 id;
     QDomElement domElement;
+    this->row = row;
     switch(column) {
         case 0:
             item = ui->tableWidgetIncrement->item(row, 0);
@@ -385,6 +389,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
             if(domElement.isElement()){
                 domElement.setAttribute("name", item->text());
                 data->ClearIncrementTable();
+                this->column = 2;
                 emit FullUpdateTree();
             }
             break;
@@ -398,6 +403,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
                 qreal value = item->text().toDouble(&ok);
                 if(ok){
                     domElement.setAttribute("base", value);
+                    this->column = 3;
                     emit FullUpdateTree();
                 } else {
                     throw VException(tr("Can't convert toDouble value."));
@@ -411,6 +417,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
             domElement = doc->elementById(QString().setNum(id));
             if(domElement.isElement()){
                 domElement.setAttribute("ksize", item->text().toDouble());
+                this->column = 4;
                 emit FullUpdateTree();
             }
             break;
@@ -421,6 +428,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
             domElement = doc->elementById(QString().setNum(id));
             if(domElement.isElement()){
                 domElement.setAttribute("kgrowth", item->text().toDouble());
+                this->column = 5;
                 emit FullUpdateTree();
             }
             break;
@@ -434,6 +442,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
                 VIncrementTableRow incr = data->GetIncrementTableRow(itemName->text());
                 incr.setDescription(item->text());
                 data->UpdateIncrementTableRow(itemName->text(), incr);
+                ui->tableWidgetIncrement->setCurrentCell( row, 0 );
                 emit haveLiteChange();
             }
             break;
