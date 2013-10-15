@@ -162,8 +162,16 @@ void DialogIncrements::FillIncrementTable(){
 
 void DialogIncrements::FillLengthLines(){
     const QHash<QString, qreal> *linesTable = data->DataLengthLines();
+    QHashIterator<QString, qreal> iHash(*linesTable);
+    QMap<QString, qreal> map;
+    //Sorting QHash by name
+    while (iHash.hasNext()) {
+        iHash.next();
+        map.insert(iHash.key(), iHash.value());
+    }
+
     qint32 currentRow = -1;
-    QHashIterator<QString, qreal> i(*linesTable);
+    QMapIterator<QString, qreal> i(map);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
@@ -186,8 +194,16 @@ void DialogIncrements::FillLengthLines(){
 
 void DialogIncrements::FillLengthSplines(){
     const QHash<QString, qreal> *splinesTable = data->DataLengthSplines();
+    QHashIterator<QString, qreal> iHash(*splinesTable);
+    QMap<QString, qreal> map;
+    //Sorting QHash by name
+    while (iHash.hasNext()) {
+        iHash.next();
+        map.insert(iHash.key(), iHash.value());
+    }
+
     qint32 currentRow = -1;
-    QHashIterator<QString, qreal> i(*splinesTable);
+    QMapIterator<QString, qreal> i(map);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
@@ -195,7 +211,7 @@ void DialogIncrements::FillLengthSplines(){
         ui->tableWidgetSplines->setRowCount ( splinesTable->size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetSplines->setItem(currentRow, 0, item);
 
@@ -210,8 +226,16 @@ void DialogIncrements::FillLengthSplines(){
 
 void DialogIncrements::FillLengthArcs(){
     const QHash<QString, qreal> *arcsTable = data->DataLengthArcs();
+    QHashIterator<QString, qreal> iHash(*arcsTable);
+    QMap<QString, qreal> map;
+    //Sorting QHash by name
+    while (iHash.hasNext()) {
+        iHash.next();
+        map.insert(iHash.key(), iHash.value());
+    }
+
     qint32 currentRow = -1;
-    QHashIterator<QString, qreal> i(*arcsTable);
+    QMapIterator<QString, qreal> i(map);
     while (i.hasNext()) {
         i.next();
         qreal length = i.value();
