@@ -38,11 +38,13 @@ public slots:
     virtual void ChangedActivDraw(const QString newName);
     void         ChangedNameDraw(const QString oldName, const QString newName);
     virtual void FullUpdateFromGui(int result)=0;
+    virtual void SetFactor(qreal factor);
 signals:
     void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
     QString      nameActivDraw;
+    static qreal factor;
     void         AddToCalculation(const QDomElement &domElement);
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,

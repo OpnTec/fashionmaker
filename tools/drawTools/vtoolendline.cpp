@@ -69,7 +69,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        line.setLength(result*PrintDPI/25.4);
+        line.setLength(toPixel(result));
         line.setAngle(angle);
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
@@ -89,6 +89,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(basePointId);
         }

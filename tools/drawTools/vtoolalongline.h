@@ -42,6 +42,7 @@ public:
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      FullUpdateFromGui(int result);
+    virtual void      SetFactor(qreal factor);
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();

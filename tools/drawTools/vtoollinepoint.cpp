@@ -30,7 +30,7 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
     QPointF point1 = data->GetPoint(basePointId).toQPointF();
     QPointF point2 = data->GetPoint(id).toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine));
+    mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     if(typeLine == "none"){
         mainLine->setVisible(false);
@@ -41,15 +41,18 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
 
 void VToolLinePoint::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
+        mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
+        currentColor = Qt::black;
         VToolPoint::ChangedActivDraw(newName);
     } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
+        mainLine->setPen(QPen(Qt::gray, widthHairLine/factor));
+        currentColor = Qt::gray;
         VToolPoint::ChangedActivDraw(newName);
     }
 }
 
 void VToolLinePoint::RefreshGeometry(){
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
     VToolPoint::RefreshPointGeometry(VDrawTool::data.GetPoint(id));
     QPointF point = VDrawTool::data.GetPoint(id).toQPointF();
     QPointF basePoint = VDrawTool::data.GetPoint(basePointId).toQPointF();
@@ -63,4 +66,9 @@ void VToolLinePoint::RefreshGeometry(){
 
 void VToolLinePoint::RemoveReferens(){
     doc->DecrementReferens(basePointId);
+}
+
+void VToolLinePoint::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }

@@ -109,6 +109,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(firstPointId);
             doc->IncrementReferens(secondPointId);
@@ -143,6 +144,11 @@ void VToolBisector::FullUpdateFromGui(int result){
         }
     }
     dialogBisector.clear();
+}
+
+void VToolBisector::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }
 
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){

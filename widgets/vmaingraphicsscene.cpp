@@ -25,11 +25,11 @@
 #include <QScrollBar>
 #include <QGraphicsItem>
 
-VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0){
+VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1){
 }
 
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent):
-    QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0){
+    QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1){
 }
 
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event){
@@ -48,6 +48,11 @@ void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type){
 
 void VMainGraphicsScene::RemoveTool(QGraphicsItem *tool){
     this->removeItem(tool);
+}
+
+void VMainGraphicsScene::SetFactor(qreal factor){
+    scaleFactor=scaleFactor*factor;
+    emit NewFactor(scaleFactor);
 }
 
 qint32 VMainGraphicsScene::getVerScrollBar() const{

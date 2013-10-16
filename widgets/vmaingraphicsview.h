@@ -29,6 +29,7 @@ class VMainGraphicsView : public QGraphicsView{
 public:
     explicit VMainGraphicsView(QWidget *parent = 0);
 signals:
+    void     NewFactor(qreal factor);
 public slots:
     void     scalingTime(qreal x);
     void     animFinished();

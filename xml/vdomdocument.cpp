@@ -584,6 +584,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 Q_ASSERT(spoint != 0);
                 scene->addItem(spoint);
                 connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
                 tools[id] = spoint;
             }
             return;

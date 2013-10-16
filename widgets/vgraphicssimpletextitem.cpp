@@ -22,16 +22,22 @@
 #include "vgraphicssimpletextitem.h"
 #include <QGraphicsScene>
 #include <QEvent>
+#include <QDebug>
 
-VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent):QGraphicsSimpleTextItem(parent){
+VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent):QGraphicsSimpleTextItem(parent),
+    fontSize(0){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
+    QFont font = this->font();
+    font.setPointSize(font.pointSize()+3);
+    fontSize = font.pointSize();
+    this->setFont(font);
 }
 
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent){
+    :QGraphicsSimpleTextItem(text, parent), fontSize(0){
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);

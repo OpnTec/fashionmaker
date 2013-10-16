@@ -24,7 +24,8 @@
 
 VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, Tool::Sources typeCreation, QGraphicsItem *parent):
+                                       const qint64 &p2Line2, Tool::Sources typeCreation,
+                                       QGraphicsItem *parent):
     VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
     if(typeCreation == Tool::FromGui){
@@ -57,8 +58,9 @@ void VToolLineIntersect::Create(QSharedPointer<DialogLineIntersect> &dialog, VMa
 
 void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
                                 const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                                VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
+                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                                Tool::Sources typeCreation){
     VPointF p1Line1 = data->GetPoint(p1Line1Id);
     VPointF p2Line1 = data->GetPoint(p2Line1Id);
     VPointF p1Line2 = data->GetPoint(p1Line2Id);
@@ -94,6 +96,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
             scene->addItem(point);
             connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersect::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line1Id);
             doc->IncrementReferens(p2Line1Id);
@@ -129,6 +132,11 @@ void VToolLineIntersect::FullUpdateFromGui(int result){
     dialogLineIntersect.clear();
 }
 
+void VToolLineIntersect::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+}
+
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogLineIntersect, this, event);
 }
@@ -140,8 +148,8 @@ void VToolLineIntersect::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "lineIntersect");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "p1Line1", p1Line1);
     AddAttribute(domElement, "p2Line1", p2Line1);

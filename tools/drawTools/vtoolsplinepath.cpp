@@ -32,7 +32,7 @@ VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     path.addPath(splPath.GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
@@ -96,6 +96,7 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         doc->AddTool(id, spl);
     }
 }
@@ -187,15 +188,17 @@ void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path){
 
 void VToolSplinePath::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine));
+        this->setPen(QPen(Qt::black, widthHairLine/factor));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setAcceptHoverEvents(true);
+        currentColor = Qt::black;
         emit setEnabledPoint(true);
         VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine));
+        this->setPen(QPen(Qt::gray, widthHairLine/factor));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setAcceptHoverEvents (false);
+        currentColor = Qt::gray;
         emit setEnabledPoint(false);
         VDrawTool::ChangedActivDraw(newName);
     }
@@ -204,13 +207,18 @@ void VToolSplinePath::ChangedActivDraw(const QString newName){
 void VToolSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
     if(id == this->id){
         if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine));
+            this->setPen(QPen(baseColor, widthHairLine/factor));
             currentColor = baseColor;
         } else {
-            this->setPen(QPen(color, widthHairLine));
+            this->setPen(QPen(color, widthHairLine/factor));
             currentColor = color;
         }
     }
+}
+
+void VToolSplinePath::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }
 
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -252,12 +260,12 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
 void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
 void VToolSplinePath::RemoveReferens(){
@@ -268,6 +276,7 @@ void VToolSplinePath::RemoveReferens(){
 }
 
 void VToolSplinePath::RefreshGeometry(){
+    this->setPen(QPen(currentColor, widthHairLine/factor));
     VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());

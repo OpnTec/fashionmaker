@@ -36,6 +36,7 @@ public slots:
     virtual void            ChangedActivDraw(const QString newName);
     virtual void            FullUpdateFromGui(int result) = 0;
     virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void            SetFactor(qreal factor);
 protected:
     qreal                   radius;
     VGraphicsSimpleTextItem *namePoint;

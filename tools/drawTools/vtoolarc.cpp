@@ -30,7 +30,7 @@ VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources
     path.addPath(arc.GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
@@ -126,14 +126,16 @@ void VToolArc::FullUpdateFromGui(int result){
 
 void VToolArc::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine));
+        this->setPen(QPen(Qt::black, widthHairLine/factor));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setAcceptHoverEvents(true);
+        currentColor = Qt::black;
         VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine));
+        this->setPen(QPen(Qt::gray, widthHairLine/factor));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setAcceptHoverEvents (false);
+        currentColor = Qt::gray;
         VDrawTool::ChangedActivDraw(newName);
     }
 }
@@ -141,13 +143,18 @@ void VToolArc::ChangedActivDraw(const QString newName){
 void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
     if(id == this->id){
         if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine));
+            this->setPen(QPen(baseColor, widthHairLine/factor));
             currentColor = baseColor;
         } else {
-            this->setPen(QPen(color, widthHairLine));
+            this->setPen(QPen(color, widthHairLine/factor));
             currentColor = color;
         }
     }
+}
+
+void VToolArc::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }
 
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -177,12 +184,12 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
 void VToolArc::RemoveReferens(){
@@ -191,6 +198,7 @@ void VToolArc::RemoveReferens(){
 }
 
 void VToolArc::RefreshGeometry(){
+    this->setPen(QPen(currentColor, widthHairLine/factor));
     VArc arc = VAbstractTool::data.GetArc(id);
     QPainterPath path;
     path.addPath(arc.GetPath());

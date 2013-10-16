@@ -117,6 +117,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
             scene->addItem(point);
             connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolShoulderPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line);
             doc->IncrementReferens(p2Line);
@@ -153,6 +154,11 @@ void VToolShoulderPoint::FullUpdateFromGui(int result){
     dialogShoulderPoint.clear();
 }
 
+void VToolShoulderPoint::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
+}
+
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogShoulderPoint, this, event);
 }
@@ -164,8 +170,8 @@ void VToolShoulderPoint::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "shoulder");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);

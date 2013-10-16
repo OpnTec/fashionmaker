@@ -33,6 +33,7 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
+    this->setPen(QPen(Qt::black, widthHairLine/factor));
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -74,6 +75,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(line, &VToolLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
         doc->IncrementReferens(secondPoint);
@@ -81,14 +83,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
 }
 
 void VToolLine::FullUpdateFromFile(){
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
-        firstPoint = domElement.attribute("firstPoint", "").toLongLong();
-        secondPoint = domElement.attribute("secondPoint", "").toLongLong();
-    }
-    VPointF first = VAbstractTool::data.GetPoint(firstPoint);
-    VPointF second = VAbstractTool::data.GetPoint(secondPoint);
-    this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
+    RefreshGeometry();
 }
 
 void VToolLine::FullUpdateFromGui(int result){
@@ -106,23 +101,30 @@ void VToolLine::FullUpdateFromGui(int result){
 void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
     if(id == this->id){
         if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine));
+            this->setPen(QPen(baseColor, widthHairLine/factor));
             currentColor = baseColor;
         } else {
-            this->setPen(QPen(color, widthHairLine));
+            this->setPen(QPen(color, widthHairLine/factor));
             currentColor = color;
         }
     }
 }
 
+void VToolLine::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
+}
+
 void VToolLine::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine));
+        this->setPen(QPen(Qt::black, widthHairLine/factor));
         this->setAcceptHoverEvents (true);
+        currentColor = Qt::black;
         VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine));
+        this->setPen(QPen(Qt::gray, widthHairLine/factor));
         this->setAcceptHoverEvents (false);
+        currentColor = Qt::gray;
         VDrawTool::ChangedActivDraw(newName);
     }
 }
@@ -143,16 +145,28 @@ void VToolLine::AddToFile(){
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
 void VToolLine::RemoveReferens(){
     doc->DecrementReferens(firstPoint);
     doc->DecrementReferens(secondPoint);
+}
+
+void VToolLine::RefreshGeometry(){
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if(domElement.isElement()){
+        firstPoint = domElement.attribute("firstPoint", "").toLongLong();
+        secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+    }
+    VPointF first = VAbstractTool::data.GetPoint(firstPoint);
+    VPointF second = VAbstractTool::data.GetPoint(secondPoint);
+    this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
+    this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 

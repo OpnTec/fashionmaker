@@ -42,6 +42,7 @@ public:
 public slots:
     void ChoosedItem(qint64 id, Scene::Scenes type);
     void RemoveTool(QGraphicsItem *tool);
+    void SetFactor(qreal factor);
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -49,9 +50,11 @@ signals:
     void mouseMove(QPointF scenePos);
     void mousePress(QPointF scenePos);
     void ChoosedObject(qint64 id, Scene::Scenes type);
+    void NewFactor(qreal factor);
 private:
     qint32 horScrollBar;
     qint32 verScrollBar;
+    qreal  scaleFactor;
 };
 
 #endif // VMAINGRAPHICSSCENE_H

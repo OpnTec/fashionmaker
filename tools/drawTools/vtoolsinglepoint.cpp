@@ -124,3 +124,8 @@ void VToolSinglePoint::ChangedActivDraw(const QString newName){
         VToolPoint::ChangedActivDraw(newName);
     }
 }
+
+void VToolSinglePoint::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+}

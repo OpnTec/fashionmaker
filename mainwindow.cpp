@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view = new VMainGraphicsView();
     ui->LayoutView->addWidget(view);
     view->setScene(currentScene);
+    connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
@@ -162,6 +163,7 @@ void MainWindow::ActionNewDraw(){
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
+    connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<qint64, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);

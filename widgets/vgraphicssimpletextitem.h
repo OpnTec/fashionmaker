@@ -24,18 +24,20 @@
 
 #include <QGraphicsSimpleTextItem>
 
-class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
-{
+class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem{
     Q_OBJECT
 public:
                  VGraphicsSimpleTextItem(QGraphicsItem * parent = 0);
                  VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = 0 );
+    qint32       FontSize()const {return fontSize;}
 signals:
     void         NameChangePosition(const QPointF pos);
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+private:
+    qint32       fontSize;
 };
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H

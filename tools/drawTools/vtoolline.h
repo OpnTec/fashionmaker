@@ -29,19 +29,20 @@
 class VToolLine: public VDrawTool, public QGraphicsLineItem{
     Q_OBJECT
 public:
-    VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    virtual void setDialog();
-    static void Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data);
-    static void Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
-                       VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                       const Document::Documents &parse, Tool::Sources typeCreation);
+                      VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
+                                qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void      setDialog();
+    static void       Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene,
+                             VDomDocument *doc, VContainer *data);
+    static void       Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
+                             VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                             const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void      FullUpdateFromFile();
     virtual void      ChangedActivDraw(const QString newName);
     virtual void      FullUpdateFromGui(int result);
     virtual void      ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void      SetFactor(qreal factor);
 protected:
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void      AddToFile();
@@ -52,6 +53,7 @@ private:
     qint64            firstPoint;
     qint64            secondPoint;
     QSharedPointer<DialogLine> dialogLine;
+    void              RefreshGeometry();
 };
 
 #endif // VTOOLLINE_H

@@ -60,6 +60,7 @@ void VMainGraphicsView::scalingTime(qreal x){
             verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
         }
     }
+    emit NewFactor(factor);
 }
 
 void VMainGraphicsView::animFinished(){

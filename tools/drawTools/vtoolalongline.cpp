@@ -63,6 +63,11 @@ void VToolAlongLine::FullUpdateFromGui(int result){
     dialogAlongLine.clear();
 }
 
+void VToolAlongLine::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
+}
+
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogAlongLine, this, event);
 }
@@ -145,6 +150,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
             scene->addItem(point);
             connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(firstPointId);
             doc->IncrementReferens(secondPointId);

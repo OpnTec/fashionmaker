@@ -32,6 +32,7 @@ public:
                                      const qint64 &basePointId, const qreal &angle, QGraphicsItem * parent = 0);
 public slots:
     virtual void      ChangedActivDraw(const QString newName); 
+    virtual void      SetFactor(qreal factor);
 protected:
     QString           typeLine;
     QString           formula;

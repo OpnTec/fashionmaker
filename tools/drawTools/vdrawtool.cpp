@@ -22,6 +22,8 @@
 #include "vdrawtool.h"
 #include <QDebug>
 
+qreal VDrawTool::factor = 1;
+
 VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent) :
     VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false),
     nameActivDraw(doc->GetNameActivDraw()){
@@ -75,6 +77,12 @@ void VDrawTool::ChangedActivDraw(const QString newName){
 void VDrawTool::ChangedNameDraw(const QString oldName, const QString newName){
     if(nameActivDraw == oldName){
         nameActivDraw = newName;
+    }
+}
+
+void VDrawTool::SetFactor(qreal factor){
+    if(factor <= 2 && factor >= 0.5){
+        this->factor = factor;
     }
 }
 

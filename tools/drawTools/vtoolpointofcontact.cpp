@@ -91,7 +91,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
     QString errorMsg;
     qreal result = cal.eval(radius, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VToolPointOfContact::FindPoint(result*PrintDPI/25.4, centerP.toQPointF(),
+        QPointF fPoint = VToolPointOfContact::FindPoint(toPixel(result), centerP.toQPointF(),
                                                          firstP.toQPointF(), secondP.toQPointF());
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
@@ -115,6 +115,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(center);
             doc->IncrementReferens(firstPointId);
@@ -149,6 +150,11 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
     dialogPointOfContact.clear();
 }
 
+void VToolPointOfContact::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+}
+
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogPointOfContact, this, event);
 }
@@ -160,8 +166,8 @@ void VToolPointOfContact::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "pointOfContact");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "radius", radius);
     AddAttribute(domElement, "center", center);

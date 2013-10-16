@@ -36,6 +36,7 @@ public slots:
     virtual void                      FullUpdateFromFile();
     virtual void                      FullUpdateFromGui(int result);
     virtual void                      ChangedActivDraw(const QString newName);
+    virtual void                      SetFactor(qreal factor);
 signals:
     void                              FullUpdateTree();
 protected:
