@@ -20,6 +20,7 @@
  ****************************************************************************/
 
 #include "vmodelingnormal.h"
+#include "../drawTools/vtoolnormal.h"
 
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,
@@ -72,8 +73,8 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                result*PrintDPI/25.4, angle);
+        QPointF fPoint = VToolNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                toPixel(result), angle);
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -93,15 +94,6 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
         }
     }
     return point;
-}
-
-QPointF VModelingNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qreal &angle){
-    QLineF line(firstPoint, secondPoint);
-    QLineF normal = line.normalVector();
-    normal.setAngle(normal.angle()+angle);
-    normal.setLength(length);
-    return normal.p2();
 }
 
 void VModelingNormal::FullUpdateFromFile(){

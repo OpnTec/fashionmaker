@@ -51,6 +51,11 @@ protected:
             QAction *actionRemove = 0;
             if(showRemove){
                actionRemove = menu.addAction(tr("Delete"));
+               if(_referens > 1){
+                   actionRemove->setEnabled(false);
+               } else {
+                   actionRemove->setEnabled(true);
+               }
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){

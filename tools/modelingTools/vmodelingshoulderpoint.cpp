@@ -21,6 +21,7 @@
 
 #include "vmodelingshoulderpoint.h"
 #include <QDebug>
+#include "../drawTools/vtoolshoulderpoint.h"
 
 VModelingShoulderPoint::VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
@@ -46,27 +47,6 @@ void VModelingShoulderPoint::setDialog(){
         dialogShoulderPoint->setPShoulder(pShoulder, id);
         dialogShoulderPoint->setPointName(p.name());
     }
-}
-
-QPointF VModelingShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                                      const qreal &length){
-    QLineF line = QLineF(p1Line, p2Line);
-        qreal dist = line.length();
-        if(dist>length){
-            qDebug()<<"A3П2="<<length/PrintDPI*25.4<<"А30П ="<<dist/PrintDPI*25.4;
-            throw"Не можу знайти точку плеча. Довжина А3П2 < А3П.";
-        }
-        if(dist==length){
-            return line.p2();
-        }
-        qreal step = 0.01;
-        while(1){
-            line.setLength(line.length()+step);
-            QLineF line2 = QLineF(pShoulder, line.p2());
-            if(line2.length()>=length){
-                return line.p2();
-            }
-        }
 }
 
 VModelingShoulderPoint *VModelingShoulderPoint::Create(QSharedPointer<DialogShoulderPoint> &dialog,
@@ -97,8 +77,8 @@ VModelingShoulderPoint *VModelingShoulderPoint::Create(const qint64 _id, const Q
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                       shoulderPoint.toQPointF(), result*PrintDPI/25.4);
+        QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                       shoulderPoint.toQPointF(), toPixel(result));
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));

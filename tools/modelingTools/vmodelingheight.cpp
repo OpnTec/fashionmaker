@@ -1,4 +1,5 @@
 #include "vmodelingheight.h"
+#include "../drawTools/vtoolheight.h"
 
 VModelingHeight::VModelingHeight(VDomDocument *doc, VContainer *data, const qint64 &id,
                                  const QString &typeLine, const qint64 &basePointId, const qint64 &p1LineId,
@@ -44,7 +45,8 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
     VPointF p1Line = data->GetModelingPoint(p1LineId);
     VPointF p2Line = data->GetModelingPoint(p2LineId);
 
-    QPointF pHeight = FindPoint(QLineF(p1Line.toQPointF(), p2Line.toQPointF()), basePoint.toQPointF());
+    QPointF pHeight = VToolHeight::FindPoint(QLineF(p1Line.toQPointF(), p2Line.toQPointF()),
+                                             basePoint.toQPointF());
     QLineF line = QLineF(basePoint.toQPointF(), pHeight);
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
@@ -112,19 +114,4 @@ void VModelingHeight::AddToFile(){
     AddAttribute(domElement, "p2Line", p2LineId);
 
     AddToModeling(domElement);
-}
-
-QPointF VModelingHeight::FindPoint(const QLineF &line, const QPointF &point){
-    qreal a = 0, b = 0, c = 0;
-    LineCoefficients(line, &a, &b, &c);
-    qreal x = point.x() - b;
-    qreal y = -a + point.y();
-    QLineF l (point, QPointF(x, y));
-    QPointF p;
-    QLineF::IntersectType intersect = line.intersect(l, &p);
-    if(intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection){
-        return p;
-    } else {
-        return QPointF();
-    }
 }

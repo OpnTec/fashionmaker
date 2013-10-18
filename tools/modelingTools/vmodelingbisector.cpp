@@ -21,6 +21,7 @@
 
 #include "vmodelingbisector.h"
 #include <QMenu>
+#include "../drawTools/vtoolbisector.h"
 
 VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
@@ -34,19 +35,6 @@ VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const 
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-}
-
-QPointF VModelingBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
-                                 const QPointF &thirdPoint, const qreal &length){
-    QLineF line1(secondPoint, firstPoint);
-    QLineF line2(secondPoint, thirdPoint);
-    qreal angle = line1.angleTo(line2);
-    if(angle>180){
-        angle = 360 - angle;
-    }
-    line1.setAngle(line1.angle()-angle/2);
-    line1.setLength(length);
-    return line1.p2();
 }
 
 void VModelingBisector::setDialog(){
@@ -89,7 +77,7 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+        QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
                                                   thirdPoint.toQPointF(), result*PrintDPI/25.4);
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){

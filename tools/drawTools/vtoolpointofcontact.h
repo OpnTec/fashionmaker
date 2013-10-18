@@ -25,8 +25,7 @@
 #include "vtoolpoint.h"
 #include "dialogs/dialogpointofcontact.h"
 
-class VToolPointOfContact : public VToolPoint
-{
+class VToolPointOfContact : public VToolPoint{
 public:
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &radius, const qint64 &center,
