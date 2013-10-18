@@ -24,9 +24,10 @@
 #include <QMenu>
 #include "widgets/vmaingraphicsscene.h"
 
-VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
-                           const QString &formula, const qreal &angle, const qint64 &basePointId,
-                           Tool::Sources typeCreation, QGraphicsItem *parent):
+VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                   const QString &typeLine, const QString &formula, const qreal &angle,
+                                   const qint64 &basePointId, Tool::Sources typeCreation,
+                                   QGraphicsItem *parent):
     VModelingLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>()){
 
@@ -37,18 +38,16 @@ VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qi
 
 void VModelingEndLine::setDialog(){
     Q_ASSERT(!dialogEndLine.isNull());
-    if(!dialogEndLine.isNull()){
-        VPointF p = VAbstractTool::data.GetModelingPoint(id);
-        dialogEndLine->setTypeLine(typeLine);
-        dialogEndLine->setFormula(formula);
-        dialogEndLine->setAngle(angle);
-        dialogEndLine->setBasePointId(basePointId, id);
-        dialogEndLine->setPointName(p.name());
-    }
+    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    dialogEndLine->setTypeLine(typeLine);
+    dialogEndLine->setFormula(formula);
+    dialogEndLine->setAngle(angle);
+    dialogEndLine->setBasePointId(basePointId, id);
+    dialogEndLine->setPointName(p.name());
 }
 
 VModelingEndLine *VModelingEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VDomDocument *doc,
-                          VContainer *data){
+                                           VContainer *data){
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
     QString formula = dialog->getFormula();
@@ -70,7 +69,7 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        line.setLength(result*PrintDPI/25.4);
+        line.setLength(toPixel(result));
         line.setAngle(angle);
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
@@ -97,7 +96,7 @@ void VModelingEndLine::FullUpdateFromFile(){
         typeLine = domElement.attribute("typeLine", "");
         formula = domElement.attribute("length", "");
         basePointId = domElement.attribute("basePoint", "").toLongLong();
-        angle = domElement.attribute("angle", "").toInt();
+        angle = domElement.attribute("angle", "").toDouble();
     }
     RefreshGeometry();
 }

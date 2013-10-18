@@ -39,6 +39,7 @@ signals:
     void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
+    bool         ignoreFullUpdate;
     void         AddToModeling(const QDomElement &domElement);
     virtual void decrementReferens();
     template <typename Dialog, typename Tool>
@@ -46,39 +47,44 @@ protected:
                      bool showRemove = true){
         if(!ignoreContextMenuEvent){
             QMenu menu;
-            QAction *actionOption = menu.addAction("Властивості");
-            QAction *actionRemove;
+            QAction *actionOption = menu.addAction(tr("Option"));
+            QAction *actionRemove = 0;
             if(showRemove){
-               actionRemove = menu.addAction("Видалити");
+               actionRemove = menu.addAction(tr("Delete"));
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){
-               dialog = QSharedPointer<Dialog>(new Dialog(getData()));
+                dialog = QSharedPointer<Dialog>(new Dialog(getData()));
 
-               connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
-                       dialog.data(), &Dialog::ChoosedObject);
-               connect(dialog.data(), &Dialog::DialogClosed, tool,
-                       &Tool::FullUpdateFromGui);
-               connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
+                        &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
+                connect(dialog.data(), &Dialog::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                if(!ignoreFullUpdate){
+                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                }
 
                tool->setDialog();
 
                dialog->show();
             }
-            if(selectedAction == actionRemove){
-               //remove form xml file
-               QDomElement domElement = doc->elementById(QString().setNum(id));
-               if(domElement.isElement()){
-                   QDomElement element;
-                   bool ok = doc->GetActivCalculationElement(element);
-                   if(ok){
-                       element.removeChild(domElement);
-                       //update xml file
-                       emit FullUpdateTree();
-                       //remove form scene
-                       emit RemoveTool(tool);
-                   }
-               }
+            if(showRemove){
+                if(selectedAction == actionRemove){
+                    //deincrement referens
+                    RemoveReferens();
+                    //remove form xml file
+                    QDomElement domElement = doc->elementById(QString().setNum(id));
+                    if(domElement.isElement()){
+                        QDomElement element;
+                        bool ok = doc->GetActivCalculationElement(element);
+                        if(ok){
+                            element.removeChild(domElement);
+                            //update xml file
+                            emit FullUpdateTree();
+                            //remove form scene
+                            emit RemoveTool(tool);
+                        }
+                    }
+                }
             }
         }
     }

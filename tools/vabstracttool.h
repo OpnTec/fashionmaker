@@ -35,8 +35,8 @@ public:
                                               QPointF &p2);
     static QPointF        ClosestPoint(QLineF line, QPointF p);
     static QPointF        addVector (QPointF p, QPointF p1, QPointF p2, qreal k);
-    qint64 getId() const;
-
+    qint64                getId() const;
+    static void           LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
 public slots:
     virtual void          FullUpdateFromFile()=0;
 signals:

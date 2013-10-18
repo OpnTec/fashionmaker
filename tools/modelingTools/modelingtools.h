@@ -34,5 +34,6 @@
 #include "vmodelingsinglepoint.h"
 #include "vmodelingspline.h"
 #include "vmodelingsplinepath.h"
+#include "vmodelingheight.h"
 
 #endif // MODELINGTOOLS_H

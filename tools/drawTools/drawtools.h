@@ -34,5 +34,6 @@
 #include "vtoolsinglepoint.h"
 #include "vtoolspline.h"
 #include "vtoolsplinepath.h"
+#include "vtoolheight.h"
 
 #endif // DRAWTOOLS_H

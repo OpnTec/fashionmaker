@@ -250,6 +250,20 @@ QString DialogHistory::Record(const VToolRecord &tool){
                                                                                                          data->GetPoint(secondPointId).name(),
                                                                                                          data->GetPoint(tool.getId()).name());
             break;
+        case Tool::Height:{
+            qint64 p1LineId = 0;
+            qint64 p2LineId = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if(domElement.isElement()){
+                basePointId = domElement.attribute("basePoint", "").toLongLong();
+                p1LineId = domElement.attribute("p1Line", "").toLongLong();
+                p2LineId = domElement.attribute("p2Line", "").toLongLong();
+            }
+            record = QString(tr("Point of perpendical from point %1 to line %2_%3")).arg(data->GetPoint(basePointId).name(),
+                                                                                         data->GetPoint(p1LineId).name(),
+                                                                                         data->GetPoint(p2LineId).name());
+            break;
+        }
         default:
             qWarning()<<tr("Get wrong tool type. Ignore.");
             break;

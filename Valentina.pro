@@ -97,7 +97,10 @@ SOURCES += main.cpp\
     exception/vexceptionemptyparameter.cpp \
     exception/vexceptionobjecterror.cpp \
     widgets/vapplication.cpp \
-    exception/vexceptionuniqueid.cpp
+    exception/vexceptionuniqueid.cpp \
+    tools/drawTools/vtoolheight.cpp \
+    tools/modelingTools/vmodelingheight.cpp \
+    dialogs/dialogheight.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -188,7 +191,10 @@ HEADERS  += mainwindow.h \
     exception/vexceptionemptyparameter.h \
     exception/vexceptionobjecterror.h \
     widgets/vapplication.h \
-    exception/vexceptionuniqueid.h
+    exception/vexceptionuniqueid.h \
+    tools/drawTools/vtoolheight.h \
+    tools/modelingTools/vmodelingheight.h \
+    dialogs/dialogheight.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -206,7 +212,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialoghistory.ui \
     dialogs/dialogpointofcontact.ui \
     dialogs/dialogdetail.ui \
-    tablewindow.ui
+    tablewindow.ui \
+    dialogs/dialogheight.ui
 
 RESOURCES += \
     icon.qrc \

@@ -30,8 +30,7 @@ namespace Ui {
 class DialogEndLine;
 }
 
-class DialogEndLine : public DialogTool
-{
+class DialogEndLine : public DialogTool{
     Q_OBJECT 
 public:
     explicit          DialogEndLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,

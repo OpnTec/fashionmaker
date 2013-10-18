@@ -44,10 +44,10 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogAlongLine(QSharedPointer<DialogAlongLine>()),
     dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()), dialogNormal(QSharedPointer<DialogNormal>()),
     dialogBisector(QSharedPointer<DialogBisector>()),
-    dialogLineIntersect(QSharedPointer<DialogLineIntersect>()),
-    dialogSpline(QSharedPointer<DialogSpline>()),
+    dialogLineIntersect(QSharedPointer<DialogLineIntersect>()), dialogSpline(QSharedPointer<DialogSpline>()),
     dialogArc(QSharedPointer<DialogArc>()), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
-    dialogPointOfContact(QSharedPointer<DialogPointOfContact>()), dialogDetail(QSharedPointer<DialogDetail>()),
+    dialogPointOfContact(QSharedPointer<DialogPointOfContact>()),
+    dialogDetail(QSharedPointer<DialogDetail>()), dialogHeight(QSharedPointer<DialogHeight>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation){
     ui->setupUi(this);
@@ -91,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
+    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
 
     data = new VContainer;
 
@@ -463,6 +464,23 @@ void MainWindow::ClosedDialogDetail(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolHeight(bool checked){
+    SetToolButton(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
+                  dialogHeight, &MainWindow::ClosedDialogHeight);
+}
+
+void MainWindow::ClosedDialogHeight(int result){
+    if(result == QDialog::Accepted){
+        if(mode == Draw::Calculation){
+            VToolHeight::Create(dialogHeight, currentScene, doc, data);
+        } else {
+            VModelingHeight *point = VModelingHeight::Create(dialogHeight, doc, data);
+            AddToolToDetail(point, point->getId(), Tool::Height, dialogHeight->getIdDetail());
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::About(){
     QMessageBox::about(this, tr("About Valentina"), tr("Valentina v.0.1.0"));
 }
@@ -616,88 +634,91 @@ void MainWindow::mouseMove(QPointF scenePos){
 }
 
 void MainWindow::CanselTool(){
-    switch( tool )
-    {
-        case Tool::ArrowTool:
-            ui->actionArrowTool->setChecked(false);
-            helpLabel->setText("");
-            break;
-        case Tool::SinglePointTool:
-            //Nothing to do here because we can't create this tool from main window.
-            break;
-        case Tool::EndLineTool:
-            dialogEndLine.clear();
-            ui->toolButtonEndLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::LineTool:
-            dialogLine.clear();
-            ui->toolButtonLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearFocus();
-            break;
-        case Tool::AlongLineTool:
-            dialogAlongLine.clear();
-            ui->toolButtonAlongLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::ShoulderPointTool:
-            dialogShoulderPoint.clear();
-            ui->toolButtonShoulderPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::NormalTool:
-            dialogNormal.clear();
-            ui->toolButtonNormal->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::BisectorTool:
-            dialogBisector.clear();
-            ui->toolButtonBisector->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::LineIntersectTool:
-            dialogLineIntersect.clear();
-            ui->toolButtonLineIntersect->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::SplineTool:
-            dialogSpline.clear();
-            ui->toolButtonSpline->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::ArcTool:
-            dialogArc.clear();
-            ui->toolButtonArc->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::SplinePathTool:
-            dialogSplinePath.clear();
-            ui->toolButtonSplinePath->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::PointOfContact:
-            dialogPointOfContact.clear();
-            ui->toolButtonPointOfContact->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
-            break;
-        case Tool::Detail:
-            dialogDetail.clear();
-            ui->toolButtonNewDetail->setChecked(false);
-            break;
-        default:
-            qWarning()<<"Get wrong tool type. Ignore.";
-            break;
+    switch( tool ){
+    case Tool::ArrowTool:
+        ui->actionArrowTool->setChecked(false);
+        helpLabel->setText("");
+        break;
+    case Tool::SinglePointTool:
+        //Nothing to do here because we can't create this tool from main window.
+        break;
+    case Tool::EndLineTool:
+        dialogEndLine.clear();
+        ui->toolButtonEndLine->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::LineTool:
+        dialogLine.clear();
+        ui->toolButtonLine->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearFocus();
+        break;
+    case Tool::AlongLineTool:
+        dialogAlongLine.clear();
+        ui->toolButtonAlongLine->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::ShoulderPointTool:
+        dialogShoulderPoint.clear();
+        ui->toolButtonShoulderPoint->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::NormalTool:
+        dialogNormal.clear();
+        ui->toolButtonNormal->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::BisectorTool:
+        dialogBisector.clear();
+        ui->toolButtonBisector->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::LineIntersectTool:
+        dialogLineIntersect.clear();
+        ui->toolButtonLineIntersect->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::SplineTool:
+        dialogSpline.clear();
+        ui->toolButtonSpline->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::ArcTool:
+        dialogArc.clear();
+        ui->toolButtonArc->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::SplinePathTool:
+        dialogSplinePath.clear();
+        ui->toolButtonSplinePath->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::PointOfContact:
+        dialogPointOfContact.clear();
+        ui->toolButtonPointOfContact->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::Detail:
+        dialogDetail.clear();
+        ui->toolButtonNewDetail->setChecked(false);
+        break;
+    case Tool::Height:
+        dialogHeight.clear();
+        ui->toolButtonHeight->setChecked(false);
+        break;
+    default:
+        qWarning()<<"Get wrong tool type. Ignore.";
+        break;
     }
 }
 
@@ -935,6 +956,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonSplinePath->setEnabled(enable);
     ui->toolButtonPointOfContact->setEnabled(enable);
     ui->toolButtonNewDetail->setEnabled(enable);
+    ui->toolButtonHeight->setEnabled(enable);
 }
 
 void MainWindow::MinimumScrollBar(){

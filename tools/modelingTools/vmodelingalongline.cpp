@@ -74,8 +74,8 @@ void VModelingAlongLine::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "alongLine");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);

@@ -806,6 +806,31 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             throw excep;
         }
     }
+    if(type == "height"){
+        try{
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, "name");
+            qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
+            qreal my = toPixel(GetParametrDouble(domElement, "my"));
+            QString typeLine = GetParametrString(domElement, "typeLine");
+            qint64 basePointId = GetParametrLongLong(domElement, "basePoint");
+            qint64 p1LineId = GetParametrLongLong(domElement, "p1Line");
+            qint64 p2LineId = GetParametrLongLong(domElement, "p2Line");
+            if(mode == Draw::Calculation){
+                VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId, mx, my, scene,
+                                    this, data, parse, Tool::FromFile);
+            } else {
+                VModelingHeight::Create(id, name, typeLine,  basePointId, p1LineId, p2LineId, mx, my, this,
+                                        data, parse, Tool::FromFile);
+            }
+            return;
+        }
+        catch(const VExceptionBadId &e){
+            VExceptionObjectError excep(tr("Error creating or updating height"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,

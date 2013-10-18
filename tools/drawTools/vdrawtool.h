@@ -43,6 +43,7 @@ signals:
     void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
+    bool         ignoreFullUpdate;
     QString      nameActivDraw;
     static qreal factor;
     void         AddToCalculation(const QDomElement &domElement);
@@ -67,11 +68,12 @@ protected:
             if(selectedAction == actionOption){
                 dialog = QSharedPointer<Dialog>(new Dialog(getData()));
 
-                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
-                        dialog.data(), &Dialog::ChoosedObject);
-                connect(dialog.data(), &Dialog::DialogClosed, tool,
-                        &Tool::FullUpdateFromGui);
-                connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
+                        &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
+                connect(dialog.data(), &Dialog::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                if(!ignoreFullUpdate){
+                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                }
 
                 tool->setDialog();
 

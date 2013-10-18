@@ -125,6 +125,8 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value){
     qint32 index = box->findText(value);
     if(index != -1){
         box->setCurrentIndex(index);
+    } else {
+        qWarning()<<tr("Can't find point by name")<<value;
     }
 }
 

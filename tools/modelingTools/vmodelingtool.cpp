@@ -23,7 +23,7 @@
 #include <QDebug>
 
 VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
-VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false){
+VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false) {
     _referens = 0;
 }
 

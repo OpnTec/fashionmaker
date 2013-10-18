@@ -37,5 +37,6 @@
 #include "dialogsinglepoint.h"
 #include "dialogspline.h"
 #include "dialogsplinepath.h"
+#include "dialogheight.h"
 
 #endif // DIALOGS_H

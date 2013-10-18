@@ -37,14 +37,12 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
 
 void VToolEndLine::setDialog(){
     Q_ASSERT(!dialogEndLine.isNull());
-    if(!dialogEndLine.isNull()){
-        VPointF p = VAbstractTool::data.GetPoint(id);
-        dialogEndLine->setTypeLine(typeLine);
-        dialogEndLine->setFormula(formula);
-        dialogEndLine->setAngle(angle);
-        dialogEndLine->setBasePointId(basePointId, id);
-        dialogEndLine->setPointName(p.name());
-    }
+    VPointF p = VAbstractTool::data.GetPoint(id);
+    dialogEndLine->setTypeLine(typeLine);
+    dialogEndLine->setFormula(formula);
+    dialogEndLine->setAngle(angle);
+    dialogEndLine->setBasePointId(basePointId, id);
+    dialogEndLine->setPointName(p.name());
 }
 
 void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene,

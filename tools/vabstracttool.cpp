@@ -85,10 +85,8 @@ qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF l
                                           QPointF &p2){
     const qreal eps = 1e-8;
     //коефіцієнти для рівняння відрізку
-    qreal a = line.p2().y() - line.p1().y();
-    qreal b = line.p1().x() - line.p2().x();
-    // В даному випадку не використовується.
-    //qreal c = - a * line.p1().x() - b * line.p1().y();
+    qreal a = 0, b = 0, c = 0;
+    LineCoefficients(line, &a, &b, &c);
     // проекция центра окружности на прямую
     QPointF p = ClosestPoint (line, center);
     // сколько всего решений?
@@ -136,6 +134,13 @@ QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k){
 
 const VContainer *VAbstractTool::getData()const{
     return &data;
+}
+
+void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c){
+    //коефіцієнти для рівняння відрізку
+    *a = line.p2().y() - line.p1().y();
+    *b = line.p1().x() - line.p2().x();
+    *c = - *a * line.p1().x() - *b * line.p1().y();
 }
 
 qint64 VAbstractTool::getId() const{

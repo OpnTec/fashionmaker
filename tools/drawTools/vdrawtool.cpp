@@ -25,7 +25,7 @@
 qreal VDrawTool::factor = 1;
 
 VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent) :
-    VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false),
+    VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
     nameActivDraw(doc->GetNameActivDraw()){
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
