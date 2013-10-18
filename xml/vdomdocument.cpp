@@ -831,6 +831,32 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             throw excep;
         }
     }
+    if(type == "triangle"){
+        try{
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, "name");
+            qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
+            qreal my = toPixel(GetParametrDouble(domElement, "my"));
+            qint64 axisP1Id = GetParametrLongLong(domElement, "axisP1");
+            qint64 axisP2Id = GetParametrLongLong(domElement, "axisP2");
+            qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
+            qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
+
+            if(mode == Draw::Calculation){
+                VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my,
+                                      scene, this, data, parse, Tool::FromFile);
+            } else {
+                VModelingTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my,
+                                          this, data, parse, Tool::FromFile);
+            }
+            return;
+        }
+        catch(const VExceptionBadId &e){
+            VExceptionObjectError excep(tr("Error creating or updating triangle"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,

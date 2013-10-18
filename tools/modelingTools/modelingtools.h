@@ -35,5 +35,6 @@
 #include "vmodelingspline.h"
 #include "vmodelingsplinepath.h"
 #include "vmodelingheight.h"
+#include "vmodelingtriangle.h"
 
 #endif // MODELINGTOOLS_H

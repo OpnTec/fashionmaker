@@ -41,8 +41,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow{
     Q_OBJECT    
 public:
     explicit           MainWindow(QWidget *parent = 0);
@@ -81,6 +80,7 @@ public slots:
     void               ToolPointOfContact(bool checked);
     void               ToolDetail(bool checked);
     void               ToolHeight(bool checked);
+    void               ToolTriangle(bool checked);
     void               ClosedDialogEndLine(int result);
     void               ClosedDialogLine(int result);
     void               ClosedDialogAlongLine(int result);
@@ -94,6 +94,7 @@ public slots:
     void               ClosedDialogPointOfContact(int result);
     void               ClosedDialogDetail(int result);
     void               ClosedDialogHeight(int result);
+    void               ClosedDialogTriangle(int result);
     void               About();
     void               AboutQt();
     void               ShowToolTip(const QString &toolTip);
@@ -138,6 +139,7 @@ private:
     QSharedPointer<DialogPointOfContact> dialogPointOfContact;
     QSharedPointer<DialogDetail>         dialogDetail;
     QSharedPointer<DialogHeight>         dialogHeight;
+    QSharedPointer<DialogTriangle>       dialogTriangle;
     DialogHistory      *dialogHistory;
     VDomDocument       *doc;
     VContainer         *data;

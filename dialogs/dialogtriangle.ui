@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogHeight</class>
- <widget class="QDialog" name="DialogHeight">
+ <class>DialogTriangle</class>
+ <widget class="QDialog" name="DialogTriangle">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>247</width>
+    <width>267</width>
     <height>220</height>
    </rect>
   </property>
@@ -75,46 +75,16 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Base point</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxBasePoint">
-       <property name="toolTip">
-        <string>First point of line</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QLabel" name="label_4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="text">
-        <string>First point of line</string>
+        <string>First point of axis</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxP1Line">
+      <widget class="QComboBox" name="comboBoxAxisP1">
        <property name="toolTip">
         <string>First point of line</string>
        </property>
@@ -126,19 +96,13 @@
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QLabel" name="label_5">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="text">
-        <string>Second point of line</string>
+        <string>Second point of axis</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxP2Line">
+      <widget class="QComboBox" name="comboBoxAxisP2">
        <property name="toolTip">
         <string>First point of line</string>
        </property>
@@ -149,16 +113,34 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>Type line</string>
+        <string>First point</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxLineType">
+      <widget class="QComboBox" name="comboBoxFirstPoint">
        <property name="toolTip">
-        <string>Show line from first point to our point</string>
+        <string>First point of line</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Second point</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBoxSecondPoint">
+       <property name="toolTip">
+        <string>First point of line</string>
        </property>
       </widget>
      </item>
@@ -181,7 +163,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogHeight</receiver>
+   <receiver>DialogTriangle</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -197,7 +179,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogHeight</receiver>
+   <receiver>DialogTriangle</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

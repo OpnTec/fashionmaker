@@ -35,5 +35,6 @@
         <file>icon/32x32/layout.png</file>
         <file>icon/16x16/mirror.png</file>
         <file>icon/32x32/height.png</file>
+        <file>icon/32x32/triangle.png</file>
     </qresource>
 </RCC>

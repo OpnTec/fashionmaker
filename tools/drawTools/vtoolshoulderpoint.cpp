@@ -51,22 +51,22 @@ void VToolShoulderPoint::setDialog(){
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                       const qreal &length){
     QLineF line = QLineF(p1Line, p2Line);
-        qreal dist = line.length();
-        if(dist>length){
-            qDebug()<<"A3П2="<<length/PrintDPI*25.4<<"А30П ="<<dist/PrintDPI*25.4;
-            throw"Не можу знайти точку плеча. Довжина А3П2 < А3П.";
-        }
-        if(dist==length){
+    qreal dist = line.length();
+    if(dist>length){
+        qDebug()<<"A3П2="<<length/PrintDPI*25.4<<"А30П ="<<dist/PrintDPI*25.4;
+        throw"Не можу знайти точку плеча. Довжина А3П2 < А3П.";
+    }
+    if(dist==length){
+        return line.p2();
+    }
+    qreal step = 0.01;
+    while(1){
+        line.setLength(line.length()+step);
+        QLineF line2 = QLineF(pShoulder, line.p2());
+        if(line2.length()>=length){
             return line.p2();
         }
-        qreal step = 0.01;
-        while(1){
-            line.setLength(line.length()+step);
-            QLineF line2 = QLineF(pShoulder, line.p2());
-            if(line2.length()>=length){
-                return line.p2();
-            }
-        }
+    }
 }
 
 void VToolShoulderPoint::Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene *scene,

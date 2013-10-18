@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogArc(QSharedPointer<DialogArc>()), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     dialogPointOfContact(QSharedPointer<DialogPointOfContact>()),
     dialogDetail(QSharedPointer<DialogDetail>()), dialogHeight(QSharedPointer<DialogHeight>()),
+    dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation){
     ui->setupUi(this);
@@ -92,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
+    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
 
     data = new VContainer;
 
@@ -481,6 +483,23 @@ void MainWindow::ClosedDialogHeight(int result){
     ArrowTool();
 }
 
+void MainWindow::ToolTriangle(bool checked){
+    SetToolButton(checked, Tool::Triangle, ":/cursor/triangle_cursor.png", tr("Select first point of axis"),
+              dialogTriangle, &MainWindow::ClosedDialogTriangle);
+}
+
+void MainWindow::ClosedDialogTriangle(int result){
+    if(result == QDialog::Accepted){
+        if(mode == Draw::Calculation){
+            VToolTriangle::Create(dialogTriangle, currentScene, doc, data);
+        } else {
+            VModelingTriangle *point = VModelingTriangle::Create(dialogTriangle, doc, data);
+            AddToolToDetail(point, point->getId(), Tool::Triangle, dialogTriangle->getIdDetail());
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::About(){
     QMessageBox::about(this, tr("About Valentina"), tr("Valentina v.0.1.0"));
 }
@@ -640,6 +659,7 @@ void MainWindow::CanselTool(){
         helpLabel->setText("");
         break;
     case Tool::SinglePointTool:
+        Q_UNREACHABLE();
         //Nothing to do here because we can't create this tool from main window.
         break;
     case Tool::EndLineTool:
@@ -715,6 +735,14 @@ void MainWindow::CanselTool(){
     case Tool::Height:
         dialogHeight.clear();
         ui->toolButtonHeight->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
+    case Tool::Triangle:
+        dialogTriangle.clear();
+        ui->toolButtonTriangle->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
         break;
     default:
         qWarning()<<"Get wrong tool type. Ignore.";
@@ -957,6 +985,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonPointOfContact->setEnabled(enable);
     ui->toolButtonNewDetail->setEnabled(enable);
     ui->toolButtonHeight->setEnabled(enable);
+    ui->toolButtonTriangle->setEnabled(enable);
 }
 
 void MainWindow::MinimumScrollBar(){

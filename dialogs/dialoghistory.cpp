@@ -264,6 +264,21 @@ QString DialogHistory::Record(const VToolRecord &tool){
                                                                                          data->GetPoint(p2LineId).name());
             break;
         }
+        case Tool::Triangle:{
+            qint64 axisP1Id = 0;
+            qint64 axisP2Id = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if(domElement.isElement()){
+                axisP1Id = domElement.attribute("axisP1", "").toLongLong();
+                axisP2Id = domElement.attribute("axisP2", "").toLongLong();
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+            }
+            record = QString(tr("Triangle: axis %1_%2, points %3 and %4")).arg(
+                        data->GetPoint(axisP1Id).name(),data->GetPoint(axisP2Id).name(),
+                        data->GetPoint(firstPointId).name(), data->GetPoint(secondPointId).name());
+            break;
+        }
         default:
             qWarning()<<tr("Get wrong tool type. Ignore.");
             break;

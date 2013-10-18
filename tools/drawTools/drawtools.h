@@ -35,5 +35,6 @@
 #include "vtoolspline.h"
 #include "vtoolsplinepath.h"
 #include "vtoolheight.h"
+#include "vtooltriangle.h"
 
 #endif // DRAWTOOLS_H

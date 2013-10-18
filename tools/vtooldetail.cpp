@@ -150,6 +150,22 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
+        case(Tool::Height):{
+            VModelingHeight *tool = qobject_cast<VModelingHeight*>(tools->value(detail[i].getId()));
+            Q_ASSERT(tool != 0);
+            connect(tool, &VModelingHeight::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(tool, &VModelingHeight::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            tool->setParentItem(this);
+            break;
+        }
+        case(Tool::Triangle):{
+            VModelingTriangle *tool = qobject_cast<VModelingTriangle*>(tools->value(detail[i].getId()));
+            Q_ASSERT(tool != 0);
+            connect(tool, &VModelingTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(tool, &VModelingTriangle::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            tool->setParentItem(this);
+            break;
+        }
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;

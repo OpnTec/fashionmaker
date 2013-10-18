@@ -6,7 +6,6 @@ DialogHeight::DialogHeight(const VContainer *data, Draw::Draws mode, QWidget *pa
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0){
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    flagFormula = true;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHeight::DialogAccepted);
     flagName = false;

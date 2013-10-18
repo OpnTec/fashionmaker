@@ -56,7 +56,8 @@ enum Tool {ArrowTool,
            NodeArc,
            NodeSpline,
            NodeSplinePath,
-           Height
+           Height,
+           Triangle
 };
 Q_DECLARE_FLAGS(Tools, Tool)
 
