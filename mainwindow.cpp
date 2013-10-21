@@ -996,6 +996,21 @@ void MainWindow::MinimumScrollBar(){
 }
 
 bool MainWindow::SafeSaveing(const QString &fileName) const{
+    try{
+        doc->TestUniqueId();
+    }
+    catch(const VExceptionUniqueId &e){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Error don't unique id."));
+        msgBox.setInformativeText(e.ErrorMessage());
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setDetailedText(e.DetailedInformation());
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
     if(fileName.isEmpty()){
         qWarning()<<tr("Got empty file name.");
         return false;
@@ -1038,7 +1053,7 @@ bool MainWindow::SafeSaveing(const QString &fileName) const{
 }
 
 void MainWindow::AutoSavePattern(){
-    if(!fileName.isEmpty()){
+    if(!fileName.isEmpty() && changeInFile == true){
         bool result = SafeSaveing(fileName);
         if(result){
             ui->actionSave->setEnabled(false);

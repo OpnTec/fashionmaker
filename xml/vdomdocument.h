@@ -66,6 +66,7 @@ public:
     void        UpdateToolData(const qint64 &id, VContainer *data);
     void        IncrementReferens(qint64 id) const;
     void        DecrementReferens(qint64 id) const;
+    void        TestUniqueId() const;
 signals:
     void        ChangedActivDraw(const QString newName);
     void        ChangedNameDraw(const QString oldName, const QString newName);
@@ -111,8 +112,7 @@ private:
     qint64      GetParametrId(const QDomElement& domElement) const;
     qint64      GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
     QString     GetParametrString(const QDomElement& domElement, const QString &name) const;
-    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;
-    void        TestUniqueId() const;
+    qreal       GetParametrDouble(const QDomElement& domElement, const QString &name) const;    
     void        CollectId(QDomElement node, QVector<qint64> &vector)const;
 };
 
