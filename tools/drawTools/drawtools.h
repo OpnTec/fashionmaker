@@ -36,5 +36,6 @@
 #include "vtoolsplinepath.h"
 #include "vtoolheight.h"
 #include "vtooltriangle.h"
+#include "vtoolpointofintersection.h"
 
 #endif // DRAWTOOLS_H

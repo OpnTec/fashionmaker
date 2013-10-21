@@ -26,6 +26,7 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
                      Tool::Sources typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
     dialogLine(QSharedPointer<DialogLine>()){
+    ignoreFullUpdate = true;
     //Лінія
     VPointF first = data->GetPoint(firstPoint);
     VPointF second = data->GetPoint(secondPoint);

@@ -28,6 +28,7 @@ VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, cons
                                        QGraphicsItem *parent):
     VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
+    ignoreFullUpdate = true;
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }

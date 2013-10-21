@@ -857,6 +857,30 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             throw excep;
         }
     }
+    if(type == "pointOfIntersection"){
+        try{
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, "name");
+            qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
+            qreal my = toPixel(GetParametrDouble(domElement, "my"));
+            qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
+            qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
+
+            if(mode == Draw::Calculation){
+                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
+                                                 parse, Tool::FromFile);
+            } else {
+                VModelingPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, this, data,
+                                                     parse, Tool::FromFile);
+            }
+            return;
+        }
+        catch(const VExceptionBadId &e){
+            VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,

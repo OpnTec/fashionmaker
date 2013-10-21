@@ -32,7 +32,6 @@ VModelingTriangle *VModelingTriangle::Create(QSharedPointer<DialogTriangle> &dia
     QString pointName = dialog->getPointName();
     return Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, doc, data,
                   Document::FullParse, Tool::FromGui);
-
 }
 
 VModelingTriangle *VModelingTriangle::Create(const qint64 _id, const QString &pointName,

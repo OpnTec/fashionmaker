@@ -5,6 +5,7 @@ VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &
                              const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>()) {
+    ignoreFullUpdate = true;
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -29,7 +30,6 @@ void VToolTriangle::Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphics
     QString pointName = dialog->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
-
 }
 
 void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,

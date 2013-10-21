@@ -26,6 +26,7 @@ VModelingLineIntersect::VModelingLineIntersect(VDomDocument *doc, VContainer *da
                                        const qint64 &p2Line2, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
+    ignoreFullUpdate = true;
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }

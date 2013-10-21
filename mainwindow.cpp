@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogPointOfContact(QSharedPointer<DialogPointOfContact>()),
     dialogDetail(QSharedPointer<DialogDetail>()), dialogHeight(QSharedPointer<DialogHeight>()),
     dialogTriangle(QSharedPointer<DialogTriangle>()),
+    dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation){
     ui->setupUi(this);
@@ -94,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
     connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
+    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
 
     data = new VContainer;
 
@@ -485,7 +487,7 @@ void MainWindow::ClosedDialogHeight(int result){
 
 void MainWindow::ToolTriangle(bool checked){
     SetToolButton(checked, Tool::Triangle, ":/cursor/triangle_cursor.png", tr("Select first point of axis"),
-              dialogTriangle, &MainWindow::ClosedDialogTriangle);
+                  dialogTriangle, &MainWindow::ClosedDialogTriangle);
 }
 
 void MainWindow::ClosedDialogTriangle(int result){
@@ -495,6 +497,26 @@ void MainWindow::ClosedDialogTriangle(int result){
         } else {
             VModelingTriangle *point = VModelingTriangle::Create(dialogTriangle, doc, data);
             AddToolToDetail(point, point->getId(), Tool::Triangle, dialogTriangle->getIdDetail());
+        }
+    }
+    ArrowTool();
+}
+
+void MainWindow::ToolPointOfIntersection(bool checked){
+    SetToolButton(checked, Tool::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
+                  tr("Select point vertically"),
+                  dialogPointOfIntersection, &MainWindow::ClosedDialogPointOfIntersection);
+}
+
+void MainWindow::ClosedDialogPointOfIntersection(int result){
+    if(result == QDialog::Accepted){
+        if(mode == Draw::Calculation){
+            VToolPointOfIntersection::Create(dialogPointOfIntersection, currentScene, doc, data);
+        } else {
+            VModelingPointOfIntersection *point = VModelingPointOfIntersection::Create(dialogPointOfIntersection,
+                                                                                       doc, data);
+            AddToolToDetail(point, point->getId(), Tool::PointOfIntersection,
+                            dialogPointOfIntersection->getIdDetail());
         }
     }
     ArrowTool();
@@ -744,6 +766,12 @@ void MainWindow::CanselTool(){
         currentScene->setFocus(Qt::OtherFocusReason);
         currentScene->clearSelection();
         break;
+    case Tool::PointOfIntersection:
+        dialogPointOfIntersection.clear();
+        ui->toolButtonPointOfIntersection->setChecked(false);
+        currentScene->setFocus(Qt::OtherFocusReason);
+        currentScene->clearSelection();
+        break;
     default:
         qWarning()<<"Get wrong tool type. Ignore.";
         break;
@@ -986,6 +1014,7 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonNewDetail->setEnabled(enable);
     ui->toolButtonHeight->setEnabled(enable);
     ui->toolButtonTriangle->setEnabled(enable);
+    ui->toolButtonPointOfIntersection->setEnabled(enable);
 }
 
 void MainWindow::MinimumScrollBar(){

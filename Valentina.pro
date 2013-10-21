@@ -103,7 +103,10 @@ SOURCES += main.cpp\
     dialogs/dialogheight.cpp \
     tools/drawTools/vtooltriangle.cpp \
     tools/modelingTools/vmodelingtriangle.cpp \
-    dialogs/dialogtriangle.cpp
+    dialogs/dialogtriangle.cpp \
+    dialogs/dialogpointofintersection.cpp \
+    tools/drawTools/vtoolpointofintersection.cpp \
+    tools/modelingTools/vmodelingpointofintersection.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -200,7 +203,10 @@ HEADERS  += mainwindow.h \
     dialogs/dialogheight.h \
     tools/drawTools/vtooltriangle.h \
     tools/modelingTools/vmodelingtriangle.h \
-    dialogs/dialogtriangle.h
+    dialogs/dialogtriangle.h \
+    dialogs/dialogpointofintersection.h \
+    tools/drawTools/vtoolpointofintersection.h \
+    tools/modelingTools/vmodelingpointofintersection.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -220,7 +226,8 @@ FORMS    += mainwindow.ui \
     dialogs/dialogdetail.ui \
     tablewindow.ui \
     dialogs/dialogheight.ui \
-    dialogs/dialogtriangle.ui
+    dialogs/dialogtriangle.ui \
+    dialogs/dialogpointofintersection.ui
 
 RESOURCES += \
     icon.qrc \

@@ -26,6 +26,7 @@ VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qin
                              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
     secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>()){
+    ignoreFullUpdate = true;
     //Лінія
     VPointF first = data->GetModelingPoint(firstPoint);
     VPointF second = data->GetModelingPoint(secondPoint);

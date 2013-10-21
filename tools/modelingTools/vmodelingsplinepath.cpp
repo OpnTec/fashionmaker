@@ -27,6 +27,7 @@ VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qi
                                  QGraphicsItem *parent):VModelingTool(doc, data, id),
     QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>()){
+    ignoreFullUpdate = true;
     VSplinePath splPath = data->GetModelingSplinePath(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());

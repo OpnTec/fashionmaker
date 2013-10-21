@@ -28,6 +28,7 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id,
                          Tool::Sources typeCreation,
                          QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
+    ignoreFullUpdate = true;
 
     VSpline spl = data->GetSpline(id);
     QPainterPath path;
