@@ -63,6 +63,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
         id = data->getNextId();
         data->AddLine(firstPoint, secondPoint);
     } else {
+        data->UpdateId(id);
         data->AddLine(firstPoint, secondPoint);
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);

@@ -74,7 +74,11 @@ QPointF VToolTriangle::FindPoint(const QPointF axisP1, const QPointF axisP2, con
     qreal a = QLineF(axisP2, firstPoint).length();
     qreal b = QLineF(axisP2, secondPoint).length();
     if(c*c == a*a + b*b){
-        return axisP2;
+        QLineF l1(axisP2, firstPoint);
+        QLineF l2(axisP2, secondPoint);
+        if(l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90){
+            return axisP2;
+        }
     }
 
     QLineF line = QLineF(axisP1, axisP2);
@@ -84,10 +88,14 @@ QPointF VToolTriangle::FindPoint(const QPointF axisP1, const QPointF axisP2, con
         a = QLineF(line.p2(), firstPoint).length();
         b = QLineF(line.p2(), secondPoint).length();
         if(static_cast<qint32>(c*c) == static_cast<qint32>(a*a + b*b)){
-            return line.p2();
+            QLineF l1(axisP2, firstPoint);
+            QLineF l2(axisP2, secondPoint);
+            if(l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90){
+                return line.p2();
+            }
         }
         if(c*c < a*a + b*b){
-            return axisP2;
+            return line.p2();
             qWarning()<<tr("Can't find point.")<<Q_FUNC_INFO;
         }
     }

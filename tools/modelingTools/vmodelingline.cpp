@@ -62,6 +62,7 @@ VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint
         id = data->getNextId();
     } else {
         if(parse != Document::FullParse){
+            data->UpdateId(id);
             doc->UpdateToolData(id, data);
         }
     }

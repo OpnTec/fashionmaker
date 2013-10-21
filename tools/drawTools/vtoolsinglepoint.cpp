@@ -29,6 +29,7 @@
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
+    ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     if(typeCreation == Tool::FromGui){
