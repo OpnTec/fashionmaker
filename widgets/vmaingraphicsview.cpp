@@ -53,14 +53,18 @@ void VMainGraphicsView::scalingTime(qreal x){
     qreal factor = 1.0 + qreal(_numScheduledScalings) / 300.0;
     if (QApplication::keyboardModifiers() == Qt::ControlModifier){// If you press CTRL this code will execute
         scale(factor, factor);
+        emit NewFactor(factor);
     } else {
         if(_numScheduledScalings < 0){
             verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
+            emit NewFactor(factor);
         } else {
-            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
+            if(verticalScrollBar()->value() > 0){
+                verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
+                emit NewFactor(factor);
+            }
         }
-    }
-    emit NewFactor(factor);
+    }   
 }
 
 void VMainGraphicsView::animFinished(){
