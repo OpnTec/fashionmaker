@@ -148,7 +148,7 @@ void DialogIncrements::FillIncrementTable(){
         ui->tableWidgetIncrement->setItem(currentRow, 4, item);
 
         item = new QTableWidgetItem(cell.getDescription());
-        item->setTextAlignment(Qt::AlignHCenter);
+        item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetIncrement->setItem(currentRow, 5, item);
     }
     if(ui->tableWidgetIncrement->rowCount()>0){
@@ -156,7 +156,6 @@ void DialogIncrements::FillIncrementTable(){
     }
     ui->tableWidgetIncrement->resizeColumnsToContents();
     ui->tableWidgetIncrement->resizeRowsToContents();
-    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetIncrement->setCurrentCell( row, column );
 }
 
@@ -466,6 +465,8 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column ){
                 VIncrementTableRow incr = data->GetIncrementTableRow(itemName->text());
                 incr.setDescription(item->text());
                 data->UpdateIncrementTableRow(itemName->text(), incr);
+                ui->tableWidgetIncrement->resizeColumnsToContents();
+                ui->tableWidgetIncrement->resizeRowsToContents();
                 ui->tableWidgetIncrement->setCurrentCell( row, 0 );
                 emit haveLiteChange();
             }
@@ -491,6 +492,7 @@ void DialogIncrements::InitialIncrementTable(){
     ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("In growth")));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Description")));
+    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::InitialLinesTable(){
