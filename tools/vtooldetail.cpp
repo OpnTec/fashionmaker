@@ -166,6 +166,14 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             tool->setParentItem(this);
             break;
         }
+        case(Tool::PointOfIntersection):{
+            VModelingPointOfIntersection *tool = qobject_cast<VModelingPointOfIntersection*>(tools->value(detail[i].getId()));
+            Q_ASSERT(tool != 0);
+            connect(tool, &VModelingPointOfIntersection::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(tool, &VModelingPointOfIntersection::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            tool->setParentItem(this);
+            break;
+        }
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
