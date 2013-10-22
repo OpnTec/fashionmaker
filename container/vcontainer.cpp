@@ -232,6 +232,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
     }
     path.lineTo(points[0]);
     path.addPath(ekv);
+    path.setFillRule(Qt::WindingFill);
     return path;
 }
 
