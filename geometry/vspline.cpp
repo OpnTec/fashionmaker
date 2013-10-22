@@ -601,9 +601,13 @@ qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2){
 QPainterPath VSpline::GetPath() const{
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints ();
-    splinePath.moveTo(points[0]);
-    for (qint32 i = 1; i < points.count(); ++i){
-        splinePath.lineTo(points[i]);
+    if(points.count() >= 2){
+        for (qint32 i = 0; i < points.count()-1; ++i){
+            splinePath.moveTo(points[i]);
+            splinePath.lineTo(points[i+1]);
+        }
+    } else {
+        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return splinePath;
 }
