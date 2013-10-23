@@ -206,7 +206,8 @@ HEADERS  += mainwindow.h \
     dialogs/dialogtriangle.h \
     dialogs/dialogpointofintersection.h \
     tools/drawTools/vtoolpointofintersection.h \
-    tools/modelingTools/vmodelingpointofintersection.h
+    tools/modelingTools/vmodelingpointofintersection.h \
+    version.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \

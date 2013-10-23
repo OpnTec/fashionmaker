@@ -36,6 +36,7 @@
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongparameterid.h"
 #include "exception/vexceptionuniqueid.h"
+#include "version.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
@@ -523,7 +524,11 @@ void MainWindow::ClosedDialogPointOfIntersection(int result){
 }
 
 void MainWindow::About(){
-    QMessageBox::about(this, tr("About Valentina"), tr("Valentina v.0.1.0"));
+    QString fullName = QString("Valentina %1").arg(APP_VERSION);
+    QString qtBase(tr("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR));
+    QString buildOn(tr("Built on %3 at %4").arg(__DATE__).arg(__TIME__));
+    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(buildOn).arg(WARRANTY);
+    QMessageBox::about(this, tr("About Valentina"), about);
 }
 
 void MainWindow::AboutQt(){
