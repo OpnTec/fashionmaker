@@ -1099,14 +1099,6 @@ MainWindow::~MainWindow(){
     CanselTool();
     delete ui;
 
-    QFile file("lekalo.xml");
-    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)){
-        const int Indent = 4;
-        QTextStream out(&file);
-        doc->save(out, Indent);
-        file.close();
-    }
-
     delete data;
     if(!doc->isNull()){
         delete doc;
