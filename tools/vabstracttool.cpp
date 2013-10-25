@@ -136,6 +136,14 @@ const VContainer *VAbstractTool::getData()const{
     return &data;
 }
 
+void VAbstractTool::RemoveAllChild(QDomElement &domElement){
+    if ( domElement.hasChildNodes() ){
+        while ( domElement.childNodes().length() >= 1 ){
+            domElement.removeChild( domElement.firstChild() );
+        }
+    }
+}
+
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c){
     //коефіцієнти для рівняння відрізку
     *a = line.p2().y() - line.p1().y();

@@ -296,11 +296,7 @@ void VToolDetail::FullUpdateFromGui(int result){
             domElement.setAttribute("supplement", QString().setNum(det.getSupplement()));
             domElement.setAttribute("closed", QString().setNum(det.getClosed()));
             domElement.setAttribute("width", QString().setNum(det.getWidth()));
-            if ( domElement.hasChildNodes() ){
-                while ( domElement.childNodes().length() >= 1 ){
-                    domElement.removeChild( domElement.firstChild() );
-                }
-            }
+            RemoveAllChild(domElement);
             for(qint32 i = 0; i < det.CountNode(); ++i){
                AddNode(domElement, det[i]);
             }

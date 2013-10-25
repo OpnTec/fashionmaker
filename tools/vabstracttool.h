@@ -55,6 +55,7 @@ protected:
     void                  AddAttribute(QDomElement &domElement, const QString &name, const QString &value);
     const VContainer      *getData() const;
     virtual void          RemoveReferens(){}
+    void                  RemoveAllChild(QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
