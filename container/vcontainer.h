@@ -140,6 +140,7 @@ public:
     const QHash<qint64, VDetail> *DataDetails() const;
     static void  UpdateId(qint64 newId);
     QPainterPath ContourPath(qint64 idDetail) const;
+    QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const;
     QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
                              const qreal &width)const;
     static QLineF ParallelLine(const QLineF &line, qreal width );

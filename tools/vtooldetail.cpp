@@ -192,10 +192,8 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
 
 void VToolDetail::setDialog(){
     Q_ASSERT(!dialogDetail.isNull());
-    if(!dialogDetail.isNull()){
-        VDetail detail = VAbstractTool::data.GetDetail(id);
-        dialogDetail->setDetails(detail);
-    }
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    dialogDetail->setDetails(detail);
 }
 
 void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
@@ -257,7 +255,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
         }
-        VNodeDetail node(id, detail[i].getTypeTool(), detail[i].getMode(), NodeDetail::Contour);
+        VNodeDetail node(id, detail[i].getTypeTool(), Draw::Modeling, NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
@@ -290,7 +288,26 @@ void VToolDetail::FullUpdateFromFile(){
 }
 
 void VToolDetail::FullUpdateFromGui(int result){
-    Q_UNUSED(result);
+    if(result == QDialog::Accepted){
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            VDetail det = dialogDetail->getDetails();
+            domElement.setAttribute("name", det.getName());
+            domElement.setAttribute("supplement", QString().setNum(det.getSupplement()));
+            domElement.setAttribute("closed", QString().setNum(det.getClosed()));
+            domElement.setAttribute("width", QString().setNum(det.getWidth()));
+            if ( domElement.hasChildNodes() ){
+                while ( domElement.childNodes().length() >= 1 ){
+                    domElement.removeChild( domElement.firstChild() );
+                }
+            }
+            for(qint32 i = 0; i < det.CountNode(); ++i){
+               AddNode(domElement, det[i]);
+            }
+            emit FullUpdateTree();
+        }
+    }
+    dialogDetail.clear();
 }
 
 void VToolDetail::AddToFile(){
@@ -299,8 +316,11 @@ void VToolDetail::AddToFile(){
 
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "name", detail.getName());
-    AddAttribute(domElement, "mx", detail.getMx());
-    AddAttribute(domElement, "my", detail.getMy());
+    AddAttribute(domElement, "mx", toMM(detail.getMx()));
+    AddAttribute(domElement, "my", toMM(detail.getMy()));
+    AddAttribute(domElement, "supplement", detail.getSupplement());
+    AddAttribute(domElement, "closed", detail.getClosed());
+    AddAttribute(domElement, "width", detail.getWidth());
 
     for(qint32 i = 0; i < detail.CountNode(); ++i){
        AddNode(domElement, detail[i]);
@@ -338,7 +358,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     QMenu menu;
-    //QAction *actionOption = menu.addAction(tr("Options"));
+    QAction *actionOption = menu.addAction(tr("Options"));
     QAction *actionRemove = menu.addAction(tr("Delete"));
     if(_referens > 1){
         actionRemove->setEnabled(false);
@@ -346,21 +366,15 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
         actionRemove->setEnabled(true);
     }
     QAction *selectedAction = menu.exec(event->screenPos());
-//    if(selectedAction == actionOption){
-//        dialog = QSharedPointer<Dialog>(new Dialog(getData()));
-
-//        connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
-//                dialog.data(), &Dialog::ChoosedObject);
-//        connect(dialog.data(), &Dialog::DialogClosed, tool,
-//                &Tool::FullUpdateFromGui);
-//        connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
-
-//        tool->setDialog();
-
-//        dialog->show();
-//    }
+    if(selectedAction == actionOption){
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(getData(), Draw::Modeling));
+        connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
+                dialogDetail.data(), &DialogDetail::ChoosedObject);
+        connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
+        setDialog();
+        dialogDetail->show();
+    }
     if(selectedAction == actionRemove){
-
         //remove form xml file
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
@@ -393,6 +407,8 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
     QDomElement nod = doc->createElement("node");
 
     AddAttribute(nod, "idObject", node.getId());
+    AddAttribute(nod, "mx", toMM(node.getMx()));
+    AddAttribute(nod, "my", toMM(node.getMy()));
     if(node.getTypeNode() == NodeDetail::Contour){
         AddAttribute(nod, "nodeType", "Contour");
     } else {
@@ -443,6 +459,15 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
         break;
     case(Tool::SplineTool):
         AddAttribute(nod, "type", "SplineTool");
+        break;
+    case(Tool::Height):
+        AddAttribute(nod, "type", "Height");
+        break;
+    case(Tool::Triangle):
+        AddAttribute(nod, "type", "Triangle");
+        break;
+    case(Tool::PointOfIntersection):
+        AddAttribute(nod, "type", "PointOfIntersection");
         break;
     default:
         qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

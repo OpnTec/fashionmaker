@@ -31,26 +31,32 @@ namespace NodeDetail {
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
-class VNodeDetail
-{
+class VNodeDetail{
 public:
-    VNodeDetail();
-    VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode);
-    VNodeDetail(const VNodeDetail &node);
-    qint64 getId() const;
-    void setId(const qint64 &value);
+                VNodeDetail();
+                VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
+                            qreal mx = 0, qreal my = 0);
+                VNodeDetail(const VNodeDetail &node);
+                VNodeDetail &operator=(const VNodeDetail &node);
+    qint64      getId() const;
+    void        setId(const qint64 &value);
     Tool::Tools getTypeTool() const;
-    void setTypeTool(const Tool::Tools &value);
+    void        setTypeTool(const Tool::Tools &value);
     Draw::Draws getMode() const;
-    void setMode(const Draw::Draws &value);
+    void        setMode(const Draw::Draws &value);
     NodeDetail::NodeDetails getTypeNode() const;
-    void setTypeNode(const NodeDetail::NodeDetails &value);
-
+    void        setTypeNode(const NodeDetail::NodeDetails &value);
+    qreal       getMx() const;
+    void        setMx(const qreal &value);
+    qreal       getMy() const;
+    void        setMy(const qreal &value);
 private:
-    qint64 id;
+    qint64      id;
     Tool::Tools typeTool;
     Draw::Draws mode;
     NodeDetail::NodeDetails typeNode;
+    qreal       mx;
+    qreal       my;
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)

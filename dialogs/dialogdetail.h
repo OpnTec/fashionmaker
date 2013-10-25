@@ -29,17 +29,24 @@
 class DialogDetail : public DialogTool{
     Q_OBJECT  
 public:
-    explicit DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
-    VDetail getDetails() const;
-    void setDetails(const VDetail &value);
-
+                     DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
+    VDetail          getDetails() const;
+    void             setDetails(const VDetail &value);
 public slots:
-    virtual void      ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void      DialogAccepted();
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     DialogAccepted();
+    void             BiasXChanged(qreal d);
+    void             BiasYChanged(qreal d);
+    void             ClickedSeams(bool checked);
+    void             ClickedClosed(bool checked);
+    void             ObjectChanged(int row);
 private:
     Ui::DialogDetail ui;
-    VDetail details;
-    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode);
+    VDetail          details;
+    bool             supplement;
+    bool             closed;
+    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+                             qreal my = 0);
 };
 
 #endif // DIALOGDETAIL_H

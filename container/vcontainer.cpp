@@ -177,11 +177,18 @@ void VContainer::UpdateId(qint64 newId){
 QPainterPath VContainer::ContourPath(qint64 idDetail) const{
     VDetail detail = GetDetail(idDetail);
     QVector<QPointF> points;
+    QVector<QPointF> pointsEkv;
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
         case(Tool::NodePoint):{
             VPointF point = GetModelingPoint(detail[i].getId());
             points.append(point.toQPointF());
+            if(detail.getSupplement() == true){
+                QPointF pEkv = point.toQPointF();
+                pEkv.setX(pEkv.x()+detail[i].getMx());
+                pEkv.setY(pEkv.y()+detail[i].getMy());
+                pointsEkv.append(pEkv);
+            }
         }
             break;
         case(Tool::NodeArc):{
@@ -190,8 +197,15 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             qreal lenReverse = GetLengthContour(points, GetReversePoint(arc.GetPoints()));
             if(len1 <= lenReverse){
                 points << arc.GetPoints();
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(arc.GetPoints(), detail[i].getMx(), detail[i].getMy());
+                }
             } else {
                 points << GetReversePoint(arc.GetPoints());
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(GetReversePoint(arc.GetPoints()), detail[i].getMx(),
+                                                detail[i].getMy());
+                }
             }
         }
             break;
@@ -201,8 +215,15 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             qreal lenReverse = GetLengthContour(points, GetReversePoint(spline.GetPoints()));
             if(len1 <= lenReverse){
                 points << spline.GetPoints();
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(spline.GetPoints(), detail[i].getMx(), detail[i].getMy());
+                }
             } else {
                 points << GetReversePoint(spline.GetPoints());
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(GetReversePoint(spline.GetPoints()), detail[i].getMx(),
+                                            detail[i].getMy());
+                }
             }
         }
             break;
@@ -212,8 +233,15 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath.GetPathPoints()));
             if(len1 <= lenReverse){
                 points << splinePath.GetPathPoints();
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(splinePath.GetPathPoints(), detail[i].getMx(), detail[i].getMy());
+                }
             } else {
                 points << GetReversePoint(splinePath.GetPathPoints());
+                if(detail.getSupplement() == true){
+                    pointsEkv << biasPoints(GetReversePoint(splinePath.GetPathPoints()), detail[i].getMx(),
+                                            detail[i].getMy());
+                }
             }
         }
             break;
@@ -224,16 +252,36 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const{
             break;
         } 
     }
-    QPainterPath ekv = Equidistant(points, Detail::CloseEquidistant, toPixel(10));
+
     QPainterPath path;
     path.moveTo(points[0]);
     for (qint32 i = 1; i < points.count(); ++i){
         path.lineTo(points[i]);
     }
     path.lineTo(points[0]);
-    path.addPath(ekv);
-    path.setFillRule(Qt::WindingFill);
+
+    if(detail.getSupplement() == true){
+        QPainterPath ekv;
+        if(detail.getClosed() == true){
+            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, toPixel(detail.getWidth()));
+        } else {
+            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, toPixel(detail.getWidth()));
+        }
+        path.addPath(ekv);
+        path.setFillRule(Qt::WindingFill);
+    }
     return path;
+}
+
+QVector<QPointF> VContainer::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const{
+    QVector<QPointF> p;
+    for(qint32 i = 0; i < points.size(); ++i){
+        QPointF point = points.at(i);
+        point.setX(point.x() + mx);
+        point.setY(point.x() + my);
+        p.append(point);
+    }
+    return p;
 }
 
 QPainterPath VContainer::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,

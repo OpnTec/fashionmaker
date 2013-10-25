@@ -21,16 +21,27 @@
 
 #include "vnodedetail.h"
 
-VNodeDetail::VNodeDetail():id(0), typeTool(Tool::NodePoint), mode(Draw::Calculation),
-    typeNode(NodeDetail::Contour){
+VNodeDetail::VNodeDetail():id(0), typeTool(Tool::NodePoint), mode(Draw::Modeling),
+    typeNode(NodeDetail::Contour), mx(0), my(0){
 }
 
-VNodeDetail::VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode):id(id),
-    typeTool(typeTool), mode(mode), typeNode(typeNode){
+VNodeDetail::VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
+                         qreal mx, qreal my):id(id), typeTool(typeTool), mode(mode), typeNode(typeNode),
+    mx(mx), my(my){
 }
 
 VNodeDetail::VNodeDetail(const VNodeDetail &node):id(node.getId()), typeTool(node.getTypeTool()),
-    mode(node.getMode()), typeNode(node.getTypeNode()){
+    mode(node.getMode()), typeNode(node.getTypeNode()), mx(node.getMx()), my(node.getMy()){
+}
+
+VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node){
+    id = node.getId();
+    typeTool = node.getTypeTool();
+    mode = node.getMode();
+    typeNode = node.getTypeNode();
+    mx = node.getMx();
+    my = node.getMy();
+    return *this;
 }
 
 Tool::Tools VNodeDetail::getTypeTool() const{
@@ -63,4 +74,20 @@ NodeDetail::NodeDetails VNodeDetail::getTypeNode() const{
 
 void VNodeDetail::setTypeNode(const NodeDetail::NodeDetails &value){
     typeNode = value;
+}
+
+qreal VNodeDetail::getMy() const{
+    return my;
+}
+
+void VNodeDetail::setMy(const qreal &value){
+    my = value;
+}
+
+qreal VNodeDetail::getMx() const{
+    return mx;
+}
+
+void VNodeDetail::setMx(const qreal &value){
+    mx = value;
 }

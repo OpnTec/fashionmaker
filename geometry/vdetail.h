@@ -39,24 +39,37 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 
 class VDetail{
 public:
-    VDetail();
-    VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
-    void append(const VNodeDetail &node);
-    void Clear();
-    qint32 CountNode() const;
-    bool Containes(const qint64 &id)const;
+            VDetail();
+            VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
+            VDetail(const VDetail &detail);
+            VDetail &operator=(const VDetail &detail);
+    void    append(const VNodeDetail &node);
+    void    Clear();
+    qint32  CountNode() const;
+    bool    Containes(const qint64 &id)const;
     VNodeDetail & operator[](int indx);
     QString getName() const;
-    void setName(const QString &value);
-    qreal getMx() const;
-    void setMx(const qreal &value);
-    qreal getMy() const;
-    void setMy(const qreal &value);
+    void    setName(const QString &value);
+    qreal   getMx() const;
+    void    setMx(const qreal &value);
+    qreal   getMy() const;
+    void    setMy(const qreal &value);
+    bool    getSupplement() const;
+    void    setSupplement(bool value);
+    bool    getClosed() const;
+    void    setClosed(bool value);
+    qreal   getWidth() const;
+    void    setWidth(const qreal &value);
+    QVector<VNodeDetail> getNodes() const;
+    void    setNodes(const QVector<VNodeDetail> &value);
 private:
     QVector<VNodeDetail> nodes;
     QString name;
-    qreal mx;
-    qreal my;
+    qreal   mx;
+    qreal   my;
+    bool    supplement;
+    bool    closed;
+    qreal   width;
 };
 
 #endif // VDETAIL_H

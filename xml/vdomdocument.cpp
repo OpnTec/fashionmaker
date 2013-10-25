@@ -473,6 +473,9 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
         detail.setName(GetParametrString(domElement, "name"));
         detail.setMx(toPixel(GetParametrDouble(domElement, "mx")));
         detail.setMy(toPixel(GetParametrDouble(domElement, "my")));
+        detail.setSupplement(GetParametrLongLong(domElement, "supplement"));
+        detail.setWidth(GetParametrDouble(domElement, "width"));
+        detail.setClosed(GetParametrLongLong(domElement, "closed"));
 
         QDomNodeList nodeList = domElement.childNodes();
         qint32 num = nodeList.size();
@@ -481,6 +484,8 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
             if(!element.isNull()){
                 if(element.tagName() == "node"){
                     qint64 id = GetParametrLongLong(element, "idObject");
+                    qreal mx = toPixel(GetParametrDouble(element, "mx"));
+                    qreal my = toPixel(GetParametrDouble(element, "my"));
                     Tool::Tools tool;
                     Draw::Draws mode;
                     NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
@@ -527,8 +532,14 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
                         tool = Tool::SplinePathTool;
                     } else if(t == "SplineTool"){
                         tool = Tool::SplineTool;
+                    } else if(t == "Height"){
+                        tool = Tool::Height;
+                    } else if(t == "Triangle"){
+                        tool = Tool::Triangle;
+                    } else if(t == "PointOfIntersection"){
+                        tool = Tool::PointOfIntersection;
                     }
-                    detail.append(VNodeDetail(id, tool, mode, nodeType));
+                    detail.append(VNodeDetail(id, tool, Draw::Modeling, nodeType, mx, my));
                 }
             }
         }
