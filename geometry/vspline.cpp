@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vspline.h"
-#include <QDebug>
 
 VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
     kCurve(1), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){
@@ -33,8 +32,8 @@ VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2
 }
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
-    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(*points),
+                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()),
+    p3(QPointF()), p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(*points),
     mode(mode), idObject(idObject){
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
@@ -124,10 +123,6 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
 //    p4 = QPointF(p4.x()+mx, p4.y()+my);
 //}
 
-qint64 VSpline::GetP1 () const{
-    return p1;
-}
-
 VPointF VSpline::GetPointP1() const{
     if(points.contains(p1)){
         return points.value(p1);
@@ -136,18 +131,6 @@ VPointF VSpline::GetPointP1() const{
         throw"Не можу знайти точку за id.";
     }
     return VPointF();
-}
-
-QPointF VSpline::GetP2 () const{
-    return p2;
-}
-
-QPointF VSpline::GetP3 () const{
-    return p3;
-}
-
-qint64 VSpline::GetP4() const{
-    return p4;
 }
 
 VPointF VSpline::GetPointP4() const{
@@ -160,14 +143,6 @@ VPointF VSpline::GetPointP4() const{
     return VPointF();
 }
 
-qreal VSpline::GetAngle1() const{
-    return angle1;
-}
-
-qreal VSpline::GetAngle2 () const{
-    return angle2;
-}
-
 qreal VSpline::GetLength () const{
     return LengthBezier ( GetPointP1().toQPointF(), this->p2, this->p3, GetPointP4().toQPointF());
 }
@@ -176,22 +151,6 @@ QString VSpline::GetName() const{
     VPointF first = GetPointP1();
     VPointF second = GetPointP4();
     return QString("Spl_%1_%2").arg(first.name(), second.name());
-}
-
-qreal VSpline::GetKasm1() const{
-    return kAsm1;
-}
-
-qreal VSpline::GetKasm2() const{
-    return kAsm2;
-}
-
-qreal VSpline::GetKcurve() const{
-    return kCurve;
-}
-
-const QHash<qint64, VPointF> VSpline::GetDataPoints() const{
-    return points;
 }
 
 QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const{
@@ -737,14 +696,6 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
 
-Draw::Draws VSpline::getMode() const{
-    return mode;
-}
-
-void VSpline::setMode(const Draw::Draws &value){
-    mode = value;
-}
-
 QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qreal angle2, qreal kAsm1,
                                        qreal kAsm2, qreal kCurve){
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
@@ -759,14 +710,6 @@ QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qre
     QPointF p2 = p1p2.p2();
     QPointF p3 = p4p3.p2();
     return GetPoints(p1, p2, p3, p4);
-}
-
-qint64 VSpline::getIdObject() const{
-    return idObject;
-}
-
-void VSpline::setIdObject(const qint64 &value){
-    idObject = value;
 }
 
 VSpline &VSpline::operator =(const VSpline &spline){

@@ -23,7 +23,6 @@
 #define VARC_H
 
 #include "vspline.h"
-#include <QCoreApplication>
 
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
@@ -51,56 +50,55 @@ public:
      * @brief GetF1 повертає початковий кут дуги.
      * @return повертає кут в градусах.
      */
-    QString      GetFormulaF1 () const;
-    qreal        GetF1 () const;
+    inline QString     GetFormulaF1 () const {return formulaF1;}
+    inline qreal       GetF1 () const {return f1;}
     /**
      * @brief GetF2 повертає кінцевий кут дуги.
      * @return повертає кут в градусах.
      */
-    QString      GetFormulaF2 () const;\
-    qreal        GetF2 () const;
+    inline QString     GetFormulaF2 () const {return formulaF2;}
+    inline qreal       GetF2 () const {return f2;}
     /**
      * @brief GetLength повертає довжину дуги.
      * @return повертає довжину дуги.
      */
-    qreal        GetLength () const;
+    inline qreal       GetLength () const {return M_PI * radius/180 * (f2-f1);}
     /**
      * @brief GetRadius повертає радіус дуги.
      * @return повертає радіус дуги.
      */
-    QString      GetFormulaRadius () const;
-    qreal        GetRadius () const;
+    inline QString     GetFormulaRadius () const {return formulaRadius;}
+    inline qreal       GetRadius () const {return radius;}
     /**
      * @brief GetCenter повертає точку центра дуги.
      * @return повертає точку центра дуги.
      */
-    qint64      GetCenter () const;
-    QPointF GetCenterPoint() const;
+    inline qint64      GetCenter () const {return center;}
+    QPointF            GetCenterPoint() const;
     /**
      * @brief GetP1 повертає першу точку з якої починається дуга.
      * @return точку початку дуги.
      */
-    QPointF      GetP1 () const;
+    QPointF            GetP1 () const;
     /**
      * @brief GetP2 повертає другу точку в якій закінчується дуга.
      * @return точку кінця дуги.
      */
-    QPointF      GetP2 () const;
+    QPointF            GetP2 () const;
     const QHash<qint64, VPointF> GetDataPoints() const;
     /**
      * @brief GetPath будує шлях по даній дузі.
      * @return повертає шлях.
      */
-    QPainterPath GetPath() const;
-    qreal AngleArc()const;
-    qint32 NumberSplOfArc () const;
-    QVector<QPointF> GetPoints () const;
-    QVector<QPointF> SplOfArc( qint32 number ) const;
-    Draw::Draws getMode() const;
-    void setMode(const Draw::Draws &value);
-    qint64 getIdObject() const;
-    void setIdObject(const qint64 &value);
-
+    QPainterPath       GetPath() const;
+    qreal              AngleArc() const;
+    qint32             NumberSplOfArc () const;
+    QVector<QPointF>   GetPoints () const;
+    QVector<QPointF>   SplOfArc( qint32 number ) const;
+    inline Draw::Draws getMode() const {return mode;}
+    inline void        setMode(const Draw::Draws &value) {mode = value;}
+    inline qint64      getIdObject() const {return idObject;}
+    inline void        setIdObject(const qint64 &value) {idObject = value;}
 private:
     /**
      * @brief f1 початковий кут в градусах

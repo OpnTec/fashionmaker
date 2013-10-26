@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vsplinepath.h"
-#include "exception/vexception.h"
+#include <exception/vexception.h>
 
 VSplinePath::VSplinePath(): path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation),
     points(QHash<qint64, VPointF>()), idObject(0){
@@ -35,14 +35,6 @@ VSplinePath::VSplinePath(const VSplinePath &splPath): path(*splPath.GetPoint()),
     idObject(splPath.getIdObject()){
 }
 
-Draw::Draws VSplinePath::getMode() const{
-    return mode;
-}
-
-void VSplinePath::setMode(const Draw::Draws &value){
-    mode = value;
-}
-
 void VSplinePath::append(VSplinePoint point){
     path.append(point);
 }
@@ -53,10 +45,6 @@ qint32 VSplinePath::Count() const{
     } else {
         return path.size() - 1;
     }
-}
-
-qint32 VSplinePath::CountPoint() const{
-    return path.size();
 }
 
 VSpline VSplinePath::GetSpline(qint32 index) const{
@@ -94,10 +82,6 @@ QVector<QPointF> VSplinePath::GetPathPoints() const{
     return pathPoints;
 }
 
-QVector<VSplinePoint> VSplinePath::GetSplinePath() const{
-    return path;
-}
-
 qreal VSplinePath::GetLength() const{
     qreal length = 0;
     for(qint32 i = 1; i <= Count(); ++i){
@@ -106,10 +90,6 @@ qreal VSplinePath::GetLength() const{
         length += spl.GetLength();
     }
     return length;
-}
-
-QHash<qint64, VPointF> VSplinePath::GetDataPoints() const{
-    return points;
 }
 
 void VSplinePath::UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point){
@@ -134,22 +114,6 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Positi
     }
 }
 
-void VSplinePath::Clear(){
-    path.clear();
-}
-
-qreal VSplinePath::getKCurve() const{
-    return kCurve;
-}
-
-void VSplinePath::setKCurve(const qreal &value){
-    kCurve = value;
-}
-
-const QVector<VSplinePoint> *VSplinePath::GetPoint() const{
-    return &path;
-}
-
 VSplinePath &VSplinePath::operator =(const VSplinePath &path){
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
@@ -161,12 +125,4 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path){
 
 VSplinePoint & VSplinePath::operator[](int indx){
     return path[indx];
-}
-
-qint64 VSplinePath::getIdObject() const{
-    return idObject;
-}
-
-void VSplinePath::setIdObject(const qint64 &value){
-    idObject = value;
 }

@@ -20,8 +20,7 @@
  ****************************************************************************/
 
 #include "varc.h"
-#include <QDebug>
-#include "exception/vexception.h"
+#include <exception/vexception.h>
 
 VArc::VArc () : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
     center(0), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){
@@ -51,38 +50,6 @@ VArc &VArc::operator =(const VArc &arc){
     this->mode = arc.getMode();
     this->idObject = arc.getIdObject();
     return *this;
-}
-
-qreal VArc::GetF1() const{
-    return f1;
-}
-
-QString VArc::GetFormulaF1() const{
-    return formulaF1;
-}
-
-qreal VArc::GetF2() const{
-    return f2;
-}
-
-QString VArc::GetFormulaF2() const{
-    return formulaF2;
-}
-
-qreal VArc::GetLength () const{
-    return M_PI * radius/180 * (f2-f1);
-}
-
-qreal VArc::GetRadius() const{
-    return radius;
-}
-
-QString VArc::GetFormulaRadius() const{
-    return formulaRadius;
-}
-
-qint64 VArc::GetCenter() const{
-    return center;
 }
 
 QPointF VArc::GetCenterPoint() const{
@@ -196,20 +163,4 @@ QVector<QPointF> VArc::SplOfArc(qint32 number) const{
         }
     }
     return QVector<QPointF>();
-}
-
-Draw::Draws VArc::getMode() const{
-    return mode;
-}
-
-void VArc::setMode(const Draw::Draws &value){
-    mode = value;
-}
-
-qint64 VArc::getIdObject() const{
-    return idObject;
-}
-
-void VArc::setIdObject(const qint64 &value){
-    idObject = value;
 }

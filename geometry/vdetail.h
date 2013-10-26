@@ -23,9 +23,6 @@
 #define VDETAIL_H
 
 #include "vnodedetail.h"
-#include <QVector>
-#include <QString>
-#include <QPainterPath>
 
 namespace Detail {
     enum Contour { OpenContour, CloseContour };
@@ -39,37 +36,37 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 
 class VDetail{
 public:
-            VDetail();
-            VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
-            VDetail(const VDetail &detail);
-            VDetail &operator=(const VDetail &detail);
-    void    append(const VNodeDetail &node);
-    void    Clear();
-    qint32  CountNode() const;
-    bool    Containes(const qint64 &id)const;
-    VNodeDetail & operator[](int indx);
-    QString getName() const;
-    void    setName(const QString &value);
-    qreal   getMx() const;
-    void    setMx(const qreal &value);
-    qreal   getMy() const;
-    void    setMy(const qreal &value);
-    bool    getSupplement() const;
-    void    setSupplement(bool value);
-    bool    getClosed() const;
-    void    setClosed(bool value);
-    qreal   getWidth() const;
-    void    setWidth(const qreal &value);
-    QVector<VNodeDetail> getNodes() const;
-    void    setNodes(const QVector<VNodeDetail> &value);
+                   VDetail();
+                   VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
+                   VDetail(const VDetail &detail);
+                   VDetail &operator=(const VDetail &detail);
+    inline void    append(const VNodeDetail &node) {nodes.append(node);}
+    void           Clear();
+    inline qint32  CountNode() const {return nodes.size();}
+    bool           Containes(const qint64 &id)const;
+    VNodeDetail &  operator[](int indx);
+    inline QString getName() const {return name;}
+    inline void    setName(const QString &value) {name = value;}
+    inline qreal   getMx() const {return mx;}
+    inline void    setMx(const qreal &value) {mx = value;}
+    inline qreal   getMy() const {return my;}
+    inline void    setMy(const qreal &value) {my = value;}
+    inline bool    getSupplement() const {return supplement;}
+    inline void    setSupplement(bool value) {supplement = value;}
+    inline bool    getClosed() const {return closed;}
+    inline void    setClosed(bool value) {closed = value;}
+    inline qreal   getWidth() const {return width;}
+    inline void    setWidth(const qreal &value) {width = value;}
+    inline QVector<VNodeDetail> getNodes() const {return nodes;}
+    inline void    setNodes(const QVector<VNodeDetail> &value) {nodes = value;}
 private:
     QVector<VNodeDetail> nodes;
-    QString name;
-    qreal   mx;
-    qreal   my;
-    bool    supplement;
-    bool    closed;
-    qreal   width;
+    QString        name;
+    qreal          mx;
+    qreal          my;
+    bool           supplement;
+    bool           closed;
+    qreal          width;
 };
 
 #endif // VDETAIL_H

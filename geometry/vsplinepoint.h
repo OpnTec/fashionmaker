@@ -32,62 +32,62 @@ public:
             /**
              * @brief VSplinePoint конструктор по замповчуванню.
              */
-            VSplinePoint();
+                  VSplinePoint();
             /**
              * @brief VSplinePoint конструктор.
              * @param pSpline точка сплайну.
              * @param angle кут дотичної сплайна.
              * @param factor коефіцієнт довжини дотичної.
              */
-            VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
-            VSplinePoint(const VSplinePoint &point);
-            ~VSplinePoint();
+                  VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
+                  VSplinePoint(const VSplinePoint &point);
+                  ~VSplinePoint() {}
     /**
      * @brief P повертає точку.
      * @return точка.
      */
-    qint64 P() const;
-    void SetP(const qint64 &value);
+    inline qint64 P() const {return pSpline;}
+    inline void   SetP(const qint64 &value) {pSpline = value;}
     /**
      * @brief Angle1 повертає кут дотичної сплайна.
      * @return кут в градусах.
      */
-    qreal   Angle1() const;
-    void    SetAngle(const qreal &value);
+    inline qreal  Angle1() const {return angle+180;}
+    inline void   SetAngle(const qreal &value) {angle = value;}
     /**
      * @brief Angle2 повертає кут дотичної сплайна.
      * @return кут в градусах.
      */
-    qreal   Angle2() const;
+    inline qreal  Angle2() const {return angle;}
     /**
      * @brief KAsm1 повертає коефіцієнт довжини дотичної.
      * @return коефіцієнт.
      */
-    qreal   KAsm1() const;
-    void    SetKAsm1(const qreal &value);
+    inline qreal  KAsm1() const {return kAsm1;}
+    inline void   SetKAsm1(const qreal &value) {kAsm1 = value;}
     /**
      * @brief KAsm2 повертає коефіцієнт довжини дотичної.
      * @return коефіцієнт.
      */
-    qreal   KAsm2() const;
-    void    SetKAsm2(const qreal &value);
+    inline qreal  KAsm2() const {return kAsm2;}
+    inline void   SetKAsm2(const qreal &value) {kAsm2 = value;}
 protected:
     /**
      * @brief pSpline точка сплайну.
      */
-    qint64 pSpline;
+    qint64        pSpline;
     /**
      * @brief angle кут дотичної сплайну.
      */
-    qreal   angle;
+    qreal         angle;
     /**
      * @brief kAsm1 коефіцієнт довжини дотичної сплайну.
      */
-    qreal   kAsm1;
+    qreal         kAsm1;
     /**
      * @brief kAsm2 коефіцієнт довжини дотичної сплайну.
      */
-    qreal   kAsm2;
+    qreal         kAsm2;
 };
 
 Q_DECLARE_METATYPE(VSplinePoint)

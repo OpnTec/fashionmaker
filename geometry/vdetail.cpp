@@ -45,10 +45,6 @@ VDetail &VDetail::operator =(const VDetail &detail){
     return *this;
 }
 
-void VDetail::append(const VNodeDetail &node){
-    nodes.append(node);
-}
-
 void VDetail::Clear(){
     nodes.clear();
     name.clear();
@@ -57,10 +53,6 @@ void VDetail::Clear(){
     supplement = true;
     closed = true;
     width = 10;
-}
-
-qint32 VDetail::CountNode() const{
-    return nodes.size();
 }
 
 bool VDetail::Containes(const qint64 &id) const{
@@ -77,58 +69,3 @@ VNodeDetail &VDetail::operator [](int indx){
     return nodes[indx];
 }
 
-qreal VDetail::getMy() const{
-    return my;
-}
-
-void VDetail::setMy(const qreal &value){
-    my = value;
-}
-
-qreal VDetail::getMx() const{
-    return mx;
-}
-
-void VDetail::setMx(const qreal &value){
-    mx = value;
-}
-
-QString VDetail::getName() const{
-    return name;
-}
-
-void VDetail::setName(const QString &value){
-    name = value;
-}
-
-qreal VDetail::getWidth() const{
-    return width;
-}
-
-void VDetail::setWidth(const qreal &value){
-    width = value;
-}
-
-bool VDetail::getClosed() const{
-    return closed;
-}
-
-void VDetail::setClosed(bool value){
-    closed = value;
-}
-
-bool VDetail::getSupplement() const{
-    return supplement;
-}
-
-void VDetail::setSupplement(bool value){
-    supplement = value;
-}
-
-QVector<VNodeDetail> VDetail::getNodes() const{
-    return nodes;
-}
-
-void VDetail::setNodes(const QVector<VNodeDetail> &value){
-    nodes = value;
-}

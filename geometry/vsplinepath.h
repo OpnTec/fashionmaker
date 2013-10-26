@@ -23,8 +23,9 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
+#include <container/vpointf.h>
 #include "vspline.h"
-#include <QCoreApplication>
+#include <QApplication>
 
 namespace SplinePoint{
 enum Position { FirstPoint, LastPoint };
@@ -41,52 +42,52 @@ public:
                           /**
                            * @brief VSplinePath конструктор по замовчуванню.
                            */
-                          VSplinePath();
+                  VSplinePath();
                           /**
                            * @brief VSplinePath конструктор по замовчуванню.
                            */
-                          VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1,
-                                      Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
-                          VSplinePath(const VSplinePath& splPath);
+                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1,
+                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                  VSplinePath(const VSplinePath& splPath);
     /**
      * @brief append додає точку сплайну до шляху.
      * @param point точка.
      */
-    void                  append(VSplinePoint point);
-    qint32                Count() const;
-    qint32                CountPoint() const;
-    VSpline               GetSpline(qint32 index) const;
-    QPainterPath          GetPath() const;
-    QVector<QPointF>      GetPathPoints() const;
-    QVector<VSplinePoint> GetSplinePath() const;
-    qreal                 GetLength() const;
-    QHash<qint64, VPointF> GetDataPoints() const;
-    void                  UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point);
-    VSplinePoint          GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
+    void          append(VSplinePoint point);
+    qint32        Count() const;
+    inline qint32 CountPoint() const {return path.size();}
+    VSpline       GetSpline(qint32 index) const;
+    QPainterPath  GetPath() const;
+    QVector<QPointF> GetPathPoints() const;
+    inline QVector<VSplinePoint> GetSplinePath() const {return path;}
+    qreal         GetLength() const;
+    inline QHash<qint64, VPointF> GetDataPoints() const {return points;}
+    void          UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point);
+    VSplinePoint  GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
     /**
      * @brief Clear очищає шлях сплайнів.
      */
-    void                  Clear();
-    qreal getKCurve() const;
-    void setKCurve(const qreal &value);
-    const QVector<VSplinePoint> *GetPoint() const;
-    VSplinePath& operator=(const VSplinePath &path);
-    VSplinePoint & operator[](int indx);
-    Draw::Draws getMode() const;
-    void setMode(const Draw::Draws &value);
+    inline void   Clear() {path.clear();}
+    inline qreal  getKCurve() const {return kCurve;}
+    inline void   setKCurve(const qreal &value) {kCurve = value;}
+    inline const  QVector<VSplinePoint> *GetPoint() const {return &path;}
+    VSplinePath   &operator=(const VSplinePath &path);
+    VSplinePoint  &operator[](int indx);
+    inline Draw::Draws getMode() const {return mode;}
+    inline void   setMode(const Draw::Draws &value) {mode = value;}
 
-    qint64 getIdObject() const;
-    void setIdObject(const qint64 &value);
+    inline qint64 getIdObject() const {return idObject;}
+    inline void   setIdObject(const qint64 &value) {idObject = value;}
 
 protected:
     /**
      * @brief path вектор з точок сплайна.
      */
     QVector<VSplinePoint> path;
-    qreal kCurve;
-    Draw::Draws mode;
+    qreal         kCurve;
+    Draw::Draws   mode;
     QHash<qint64, VPointF> points;
-    qint64 idObject;
+    qint64        idObject;
 };
 
 #endif // VSPLINEPATH_H
