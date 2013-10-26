@@ -41,8 +41,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
 }
 
-DialogLineIntersect::~DialogLineIntersect()
-{
+DialogLineIntersect::~DialogLineIntersect(){
     delete ui;
 }
 
@@ -179,17 +178,9 @@ bool DialogLineIntersect::CheckIntersecion(){
     }
 }
 
-qint64 DialogLineIntersect::getP2Line2() const{
-    return p2Line2;
-}
-
 void DialogLineIntersect::setP2Line2(const qint64 &value){
     p2Line2 = value;
     ChangeCurrentData(ui->comboBoxP2Line2, value);
-}
-
-qint64 DialogLineIntersect::getP1Line2() const{
-    return p1Line2;
 }
 
 void DialogLineIntersect::setP1Line2(const qint64 &value){
@@ -197,26 +188,14 @@ void DialogLineIntersect::setP1Line2(const qint64 &value){
     ChangeCurrentData(ui->comboBoxP1Line2, value);
 }
 
-qint64 DialogLineIntersect::getP2Line1() const{
-    return p2Line1;
-}
-
 void DialogLineIntersect::setP2Line1(const qint64 &value){
     p2Line1 = value;
     ChangeCurrentData(ui->comboBoxP2Line1, value);
 }
 
-qint64 DialogLineIntersect::getP1Line1() const{
-    return p1Line1;
-}
-
 void DialogLineIntersect::setP1Line1(const qint64 &value){
     p1Line1 = value;
     ChangeCurrentData(ui->comboBoxP1Line1, value);
-}
-
-QString DialogLineIntersect::getPointName() const{
-    return pointName;
 }
 
 void DialogLineIntersect::setPointName(const QString &value){

@@ -24,42 +24,35 @@
 
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
-#include "container/calculator.h"
 
-class DialogPointOfContact : public DialogTool
-{
+class DialogPointOfContact : public DialogTool{
     Q_OBJECT
     
 public:
-    explicit DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                  QWidget *parent = 0);
-    QString getPointName() const;
-    void setPointName(const QString &value);
-
-    QString getRadius() const;
-    void setRadius(const QString &value);
-
-    qint64 getCenter() const;
-    void setCenter(const qint64 &value, const qint64 &id);
-
-    qint64 getFirstPoint() const;
-    void setFirstPoint(const qint64 &value, const qint64 &id);
-
-    qint64 getSecondPoint() const;
-    void setSecondPoint(const qint64 &value, const qint64 &id);
-
+                 DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                                      QWidget *parent = 0);
+    inline QString getPointName() const {return pointName;}
+    void           setPointName(const QString &value);
+    inline QString getRadius() const {return radius;}
+    void           setRadius(const QString &value);
+    inline qint64  getCenter() const {return center;}
+    void           setCenter(const qint64 &value, const qint64 &id);
+    inline qint64  getFirstPoint() const {return firstPoint;}
+    void           setFirstPoint(const qint64 &value, const qint64 &id);
+    inline qint64  getSecondPoint() const {return secondPoint;}
+    void           setSecondPoint(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void            ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void            DialogAccepted();
+    virtual void   ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
     Ui::DialogPointOfContact ui;
-    qint32                  number;
-    QString                 pointName;
-    QString                 radius;
-    qint64                  center;
-    qint64                  firstPoint;
-    qint64                  secondPoint;
+    qint32         number;
+    QString        pointName;
+    QString        radius;
+    qint64         center;
+    qint64         firstPoint;
+    qint64         secondPoint;
 };
 
 #endif // DIALOGPOINTOFCONTACT_H

@@ -20,11 +20,7 @@
  ****************************************************************************/
 
 #include "dialogtool.h"
-#include <QListWidgetItem>
-#include <QCloseEvent>
-#include "container/calculator.h"
-#include "geometry/vdetail.h"
-#include <QDebug>
+#include <container/calculator.h>
 
 DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent):QDialog(parent), data(data),
     isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
@@ -34,9 +30,6 @@ DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent
     Q_ASSERT(data != 0);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
-}
-
-DialogTool::~DialogTool(){
 }
 
 void DialogTool::closeEvent(QCloseEvent *event){
@@ -213,7 +206,6 @@ void DialogTool::CheckState(){
     Q_ASSERT(bOk != 0);
     bOk->setEnabled(flagFormula && flagName);
 }
-
 
 void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type){
     Q_UNUSED(id);
@@ -455,12 +447,4 @@ void DialogTool::ShowVariable(const QHash<key, val> *var){
     }
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->setCurrentRow (0);
-}
-
-qint64 DialogTool::getIdDetail() const{
-    return idDetail;
-}
-
-void DialogTool::setIdDetail(const qint64 &value){
-    idDetail = value;
 }

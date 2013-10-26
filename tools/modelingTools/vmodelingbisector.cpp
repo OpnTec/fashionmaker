@@ -20,8 +20,8 @@
  ****************************************************************************/
 
 #include "vmodelingbisector.h"
-#include <QMenu>
 #include "../drawTools/vtoolbisector.h"
+#include <container/calculator.h>
 
 VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,

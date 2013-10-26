@@ -13,15 +13,15 @@ public:
     explicit         DialogHeight(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogHeight();
-    QString          getPointName() const;
+    inline QString   getPointName() const {return pointName;}
     void             setPointName(const QString &value);
-    QString          getTypeLine() const;
+    inline QString   getTypeLine() const {return typeLine;}
     void             setTypeLine(const QString &value);
-    qint64           getBasePointId() const;
+    inline qint64    getBasePointId() const {return basePointId;}
     void             setBasePointId(const qint64 &value, const qint64 &id);
-    qint64           getP1LineId() const;
+    inline qint64    getP1LineId() const {return p1LineId;}
     void             setP1LineId(const qint64 &value, const qint64 &id);
-    qint64           getP2LineId() const;
+    inline qint64    getP2LineId() const{return p2LineId;}
     void             setP2LineId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);

@@ -28,16 +28,15 @@ namespace Ui {
 class DialogLine;
 }
 
-class DialogLine : public DialogTool
-{
+class DialogLine : public DialogTool{
     Q_OBJECT
 public:
     explicit         DialogLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
                      ~DialogLine();   
-    qint64           getFirstPoint() const;
+    inline qint64    getFirstPoint() const {return firstPoint;}
     void             setFirstPoint(const qint64 &value);
-    qint64           getSecondPoint() const;
+    inline qint64    getSecondPoint() const {return secondPoint;}
     void             setSecondPoint(const qint64 &value);
 public slots:
     void             ChoosedObject(qint64 id, Scene::Scenes type);

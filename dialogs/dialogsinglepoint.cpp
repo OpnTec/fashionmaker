@@ -21,10 +21,6 @@
 
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
-#include <QShowEvent>
-#include <QPushButton>
-#include <QDebug>
-#include "options.h"
 
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
     DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogSinglePoint), name(QString()),
@@ -67,14 +63,6 @@ void DialogSinglePoint::setData(const QString name, const QPointF point){
     ui->lineEditName->setText(name);
     ui->doubleSpinBoxX->setValue(point.x()/PrintDPI*25.4);
     ui->doubleSpinBoxY->setValue(point.y()/PrintDPI*25.4);
-}
-
-QString DialogSinglePoint::getName()const{
-    return name;
-}
-
-QPointF DialogSinglePoint::getPoint()const{
-    return point;
 }
 
 DialogSinglePoint::~DialogSinglePoint(){

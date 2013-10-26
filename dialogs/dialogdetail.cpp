@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "dialogdetail.h"
-#include <QDebug>
 
 DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(), details(VDetail()), supplement(true), closed(true){
@@ -155,10 +154,6 @@ void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, No
             this, &DialogDetail::BiasXChanged);
     connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
-}
-
-VDetail DialogDetail::getDetails() const{
-    return details;
 }
 
 void DialogDetail::setDetails(const VDetail &value){

@@ -78,17 +78,10 @@ void DialogTriangle::DialogAccepted(){
     axisP2Id = getCurrentPointId(ui->comboBoxAxisP2);
     emit DialogClosed(QDialog::Accepted);
 }
-QString DialogTriangle::getPointName() const{
-    return pointName;
-}
 
 void DialogTriangle::setPointName(const QString &value){
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
-}
-
-qint64 DialogTriangle::getSecondPointId() const{
-    return secondPointId;
 }
 
 void DialogTriangle::setSecondPointId(const qint64 &value, const qint64 &id){
@@ -96,26 +89,14 @@ void DialogTriangle::setSecondPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-qint64 DialogTriangle::getFirstPointId() const{
-    return firstPointId;
-}
-
 void DialogTriangle::setFirstPointId(const qint64 &value, const qint64 &id){
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-qint64 DialogTriangle::getAxisP2Id() const{
-    return axisP2Id;
-}
-
 void DialogTriangle::setAxisP2Id(const qint64 &value, const qint64 &id){
     axisP2Id = value;
     setCurrentPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
-}
-
-qint64 DialogTriangle::getAxisP1Id() const{
-    return axisP1Id;
 }
 
 void DialogTriangle::setAxisP1Id(const qint64 &value, const qint64 &id){

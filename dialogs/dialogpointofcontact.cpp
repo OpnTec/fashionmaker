@@ -115,7 +115,6 @@ void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-
 void DialogPointOfContact::DialogAccepted(){
     pointName = ui.lineEditNamePoint->text();
     radius = ui.lineEditFormula->text();
@@ -125,24 +124,12 @@ void DialogPointOfContact::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogPointOfContact::getSecondPoint() const{
-    return secondPoint;
-}
-
 void DialogPointOfContact::setSecondPoint(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
 }
 
-qint64 DialogPointOfContact::getFirstPoint() const{
-    return firstPoint;
-}
-
 void DialogPointOfContact::setFirstPoint(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
-}
-
-qint64 DialogPointOfContact::getCenter() const{
-    return center;
 }
 
 void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id){
@@ -150,17 +137,9 @@ void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id){
     center = value;
 }
 
-QString DialogPointOfContact::getRadius() const{
-    return radius;
-}
-
 void DialogPointOfContact::setRadius(const QString &value){
     radius = value;
     ui.lineEditFormula->setText(radius);
-}
-
-QString DialogPointOfContact::getPointName() const{
-    return pointName;
 }
 
 void DialogPointOfContact::setPointName(const QString &value){

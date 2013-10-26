@@ -23,8 +23,6 @@
 #define DIALOGENDLINE_H
 
 #include "dialogtool.h"
-#include <QListWidgetItem>
-#include "container/calculator.h"
 
 namespace Ui {
 class DialogEndLine;
@@ -36,15 +34,15 @@ public:
     explicit          DialogEndLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                     QWidget *parent = 0);
                       ~DialogEndLine();
-    QString           getPointName() const;
+    inline QString    getPointName() const {return pointName;}
     void              setPointName(const QString &value);
-    QString           getTypeLine() const;
+    inline QString    getTypeLine() const {return typeLine;}
     void              setTypeLine(const QString &value);
-    QString           getFormula() const;
+    inline QString    getFormula() const {return formula;}
     void              setFormula(const QString &value);
-    qreal             getAngle() const;
+    inline qreal      getAngle() const {return angle;}
     void              setAngle(const qreal &value);
-    qint64            getBasePointId() const;
+    inline qint64     getBasePointId() const {return basePointId;}
     void              setBasePointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void      ChoosedObject(qint64 id, Scene::Scenes type);

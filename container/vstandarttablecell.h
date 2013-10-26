@@ -24,19 +24,18 @@
 
 #include <QString>
 
-class VStandartTableCell
-{
+class VStandartTableCell{
 public:
-    VStandartTableCell();
-    VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());
-    qint32 GetBase() const;
-    qreal GetKsize() const;
-    qreal GetKgrowth() const;
+            VStandartTableCell();
+            VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());
+    qint32  GetBase() const;
+    qreal   GetKsize() const;
+    qreal   GetKgrowth() const;
     QString GetDescription() const;
 private:
-    qint32 base;
-    qreal ksize;
-    qreal kgrowth;
+    qint32  base;
+    qreal   ksize;
+    qreal   kgrowth;
     QString description;
 };
 

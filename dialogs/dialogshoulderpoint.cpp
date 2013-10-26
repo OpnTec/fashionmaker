@@ -67,8 +67,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);
 }
 
-DialogShoulderPoint::~DialogShoulderPoint()
-{
+DialogShoulderPoint::~DialogShoulderPoint(){
     delete ui;
 }
 
@@ -133,32 +132,16 @@ void DialogShoulderPoint::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogShoulderPoint::getPShoulder() const{
-    return pShoulder;
-}
-
 void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
-}
-
-qint64 DialogShoulderPoint::getP2Line() const{
-    return p2Line;
 }
 
 void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
-qint64 DialogShoulderPoint::getP1Line() const{
-    return p1Line;
-}
-
 void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
-}
-
-QString DialogShoulderPoint::getFormula() const{
-    return formula;
 }
 
 void DialogShoulderPoint::setFormula(const QString &value){
@@ -166,17 +149,9 @@ void DialogShoulderPoint::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogShoulderPoint::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogShoulderPoint::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogShoulderPoint::getPointName() const{
-    return pointName;
 }
 
 void DialogShoulderPoint::setPointName(const QString &value){

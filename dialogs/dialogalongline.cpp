@@ -121,24 +121,12 @@ void DialogAlongLine::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogAlongLine::getSecondPointId() const{
-    return secondPointId;
-}
-
 void DialogAlongLine::setSecondPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-qint64 DialogAlongLine::getFirstPointId() const{
-    return firstPointId;
-}
-
 void DialogAlongLine::setFirstPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
-}
-
-QString DialogAlongLine::getFormula() const{
-    return formula;
 }
 
 void DialogAlongLine::setFormula(const QString &value){
@@ -146,17 +134,9 @@ void DialogAlongLine::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogAlongLine::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogAlongLine::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogAlongLine::getPointName() const{
-    return pointName;
 }
 
 void DialogAlongLine::setPointName(const QString &value){

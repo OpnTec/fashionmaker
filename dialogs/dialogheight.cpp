@@ -23,17 +23,9 @@ DialogHeight::~DialogHeight(){
     delete ui;
 }
 
-QString DialogHeight::getPointName() const{
-    return pointName;
-}
-
 void DialogHeight::setPointName(const QString &value){
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
-}
-
-QString DialogHeight::getTypeLine() const{
-    return typeLine;
 }
 
 void DialogHeight::setTypeLine(const QString &value){
@@ -41,26 +33,14 @@ void DialogHeight::setTypeLine(const QString &value){
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-qint64 DialogHeight::getBasePointId() const{
-    return basePointId;
-}
-
 void DialogHeight::setBasePointId(const qint64 &value, const qint64 &id){
     basePointId = value;
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
-qint64 DialogHeight::getP1LineId() const{
-    return p1LineId;
-}
-
 void DialogHeight::setP1LineId(const qint64 &value, const qint64 &id){
     p1LineId = value;
     setCurrentPointId(ui->comboBoxP1Line, p1LineId, value, id);
-}
-
-qint64 DialogHeight::getP2LineId() const{
-    return p2LineId;
 }
 
 void DialogHeight::setP2LineId(const qint64 &value, const qint64 &id){

@@ -21,6 +21,7 @@
 
 #include "vmodelingpointofcontact.h"
 #include "../drawTools/vtoolpointofcontact.h"
+#include <container/calculator.h>
 
 VModelingPointOfContact::VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,

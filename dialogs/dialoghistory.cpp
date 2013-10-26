@@ -304,7 +304,6 @@ void DialogHistory::ShowPoint(){
     }
 }
 
-
 void DialogHistory::closeEvent(QCloseEvent *event){
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));

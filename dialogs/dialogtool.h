@@ -23,24 +23,16 @@
 #define DIALOGTOOL_H
 
 #include <QDialog>
-#include <QComboBox>
-#include <QDoubleSpinBox>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QListWidget>
-#include <QLabel>
-#include <QRadioButton>
-#include <QTimer>
-#include "container/vcontainer.h"
+#include <container/vcontainer.h>
 
 class DialogTool : public QDialog{
     Q_OBJECT
 public:
                      DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
-    virtual          ~DialogTool();
-    qint64           getIdDetail() const;
-    void             setIdDetail(const qint64 &value);
+    virtual          ~DialogTool() {}
+    inline qint64    getIdDetail() const {return idDetail;}
+    inline void      setIdDetail(const qint64 &value) {idDetail = value;}
 signals:
     void             DialogClosed(int result);
     void             ToolTip(const QString &toolTip);
@@ -91,7 +83,7 @@ protected:
     QRadioButton     *radioButtonLengthArc;
     QRadioButton     *radioButtonLengthCurve;
     qint64           idDetail;
-    Draw::Draws       mode;
+    Draw::Draws      mode;
     bool             CheckObject(const qint64 &id);
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );

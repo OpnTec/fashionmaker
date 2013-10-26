@@ -24,13 +24,12 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
-#include "geometry/vdetail.h"
 
 class DialogDetail : public DialogTool{
     Q_OBJECT  
 public:
                      DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
-    VDetail          getDetails() const;
+    inline VDetail   getDetails() const {return details;}
     void             setDetails(const VDetail &value);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);

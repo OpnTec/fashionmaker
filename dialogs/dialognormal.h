@@ -23,31 +23,28 @@
 #define DIALOGNORMAL_H
 
 #include "dialogtool.h"
-#include <QListWidgetItem>
-#include "container/calculator.h"
 
 namespace Ui {
 class DialogNormal;
 }
 
-class DialogNormal : public DialogTool
-{
+class DialogNormal : public DialogTool{
     Q_OBJECT
 public:
     explicit         DialogNormal(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogNormal();
-    QString          getPointName() const;
+    inline QString   getPointName() const{return pointName;}
     void             setPointName(const QString &value);
-    QString          getTypeLine() const;
+    inline QString   getTypeLine() const {return typeLine;}
     void             setTypeLine(const QString &value);
-    QString          getFormula() const;
+    inline QString   getFormula() const {return formula;}
     void             setFormula(const QString &value);
-    qreal            getAngle() const;
+    inline qreal     getAngle() const {return angle;}
     void             setAngle(const qreal &value);
-    qint64           getFirstPointId() const;
+    inline qint64    getFirstPointId() const {return firstPointId;}
     void             setFirstPointId(const qint64 &value, const qint64 &id);
-    qint64           getSecondPointId() const;
+    inline qint64    getSecondPointId() const {return secondPointId;}
     void             setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);

@@ -29,32 +29,31 @@ namespace Ui {
 class DialogSplinePath;
 }
 
-class DialogSplinePath : public DialogTool
-{
+class DialogSplinePath : public DialogTool{
     Q_OBJECT
 public:
-    explicit DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                              QWidget *parent = 0);
-    ~DialogSplinePath();
-    VSplinePath      GetPath() const;
-    void             SetPath(const VSplinePath &value);
+                       DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                                        QWidget *parent = 0);
+                       ~DialogSplinePath();
+    inline VSplinePath GetPath() const {return path;}
+    void               SetPath(const VSplinePath &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void     DialogAccepted();
-    void             PointChenged(int row);
-    void             currentPointChanged( int index );
-    void             Angle1Changed( int index );
-    void             Angle2Changed( int index );
-    void             KAsm1Changed(qreal d);
-    void             KAsm2Changed(qreal d);
+    virtual void       ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void       DialogAccepted();
+    void               PointChenged(int row);
+    void               currentPointChanged( int index );
+    void               Angle1Changed( int index );
+    void               Angle2Changed( int index );
+    void               KAsm1Changed(qreal d);
+    void               KAsm2Changed(qreal d);
 private:
     Q_DISABLE_COPY(DialogSplinePath)
     Ui::DialogSplinePath *ui;
-    VSplinePath      path;
-    void             NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
-    void             DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-    void             EnableFields();
-    void             SetAngle(qint32 angle);
+    VSplinePath        path;
+    void               NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
+    void               DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    void               EnableFields();
+    void               SetAngle(qint32 angle);
 };
 
 #endif // DIALOGSPLINEPATH_H

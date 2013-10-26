@@ -121,17 +121,9 @@ void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-QString DialogBisector::getPointName() const{
-    return pointName;
-}
-
 void DialogBisector::setPointName(const QString &value){
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
-}
-
-QString DialogBisector::getTypeLine() const{
-    return typeLine;
 }
 
 void DialogBisector::setTypeLine(const QString &value){
@@ -139,33 +131,17 @@ void DialogBisector::setTypeLine(const QString &value){
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-QString DialogBisector::getFormula() const{
-    return formula;
-}
-
 void DialogBisector::setFormula(const QString &value){
     formula = value;
     ui->lineEditFormula->setText(formula);
-}
-
-qint64 DialogBisector::getFirstPointId() const{
-    return firstPointId;
 }
 
 void DialogBisector::setFirstPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-qint64 DialogBisector::getSecondPointId() const{
-    return secondPointId;
-}
-
 void DialogBisector::setSecondPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
-}
-
-qint64 DialogBisector::getThirdPointId() const{
-    return thirdPointId;
 }
 
 void DialogBisector::setThirdPointId(const qint64 &value, const qint64 &id){

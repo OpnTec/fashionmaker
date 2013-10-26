@@ -21,10 +21,6 @@
 
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
-#include <QCloseEvent>
-#include <QString>
-#include "container/vpointf.h"
-#include "container/calculator.h"
 
 DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
@@ -110,17 +106,9 @@ void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-QString DialogEndLine::getPointName() const{
-    return pointName;
-}
-
 void DialogEndLine::setPointName(const QString &value){
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
-}
-
-QString DialogEndLine::getTypeLine() const{
-    return typeLine;
 }
 
 void DialogEndLine::setTypeLine(const QString &value){
@@ -128,26 +116,14 @@ void DialogEndLine::setTypeLine(const QString &value){
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-QString DialogEndLine::getFormula() const{
-    return formula;
-}
-
 void DialogEndLine::setFormula(const QString &value){
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-qreal DialogEndLine::getAngle() const{
-    return angle;
-}
-
 void DialogEndLine::setAngle(const qreal &value){
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
-}
-
-qint64 DialogEndLine::getBasePointId() const{
-    return basePointId;
 }
 
 void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id){
@@ -163,7 +139,6 @@ void DialogEndLine::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-DialogEndLine::~DialogEndLine()
-{
+DialogEndLine::~DialogEndLine(){
     delete ui;
 }

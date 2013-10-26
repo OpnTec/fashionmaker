@@ -21,6 +21,7 @@
 
 #include "vmodelingnormal.h"
 #include "../drawTools/vtoolnormal.h"
+#include <container/calculator.h>
 
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,

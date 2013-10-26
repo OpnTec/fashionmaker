@@ -21,7 +21,6 @@
 
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
-#include <QMenu>
 
 DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
@@ -83,8 +82,7 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogNormal::FormulaChanged);
 }
 
-DialogNormal::~DialogNormal()
-{
+DialogNormal::~DialogNormal(){
     delete ui;
 }
 
@@ -140,24 +138,12 @@ void DialogNormal::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogNormal::getSecondPointId() const{
-    return secondPointId;
-}
-
 void DialogNormal::setSecondPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-qint64 DialogNormal::getFirstPointId() const{
-    return firstPointId;
-}
-
 void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
-}
-
-qreal DialogNormal::getAngle() const{
-    return angle;
 }
 
 void DialogNormal::setAngle(const qreal &value){
@@ -165,26 +151,14 @@ void DialogNormal::setAngle(const qreal &value){
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
-QString DialogNormal::getFormula() const{
-    return formula;
-}
-
 void DialogNormal::setFormula(const QString &value){
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogNormal::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogNormal::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogNormal::getPointName() const{
-    return pointName;
 }
 
 void DialogNormal::setPointName(const QString &value){

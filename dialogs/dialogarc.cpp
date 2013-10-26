@@ -21,7 +21,6 @@
 
 #include "dialogarc.h"
 #include "ui_dialogarc.h"
-#include "../container/calculator.h"
 
 DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
@@ -78,8 +77,8 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
 }
 
-qint64 DialogArc::GetCenter() const{
-    return center;
+DialogArc::~DialogArc(){
+    delete ui;
 }
 
 void DialogArc::SetCenter(const qint64 &value){
@@ -87,17 +86,9 @@ void DialogArc::SetCenter(const qint64 &value){
     ChangeCurrentData(ui->comboBoxBasePoint, center);
 }
 
-QString DialogArc::GetF2() const{
-    return f2;
-}
-
 void DialogArc::SetF2(const QString &value){
     f2 = value;
     ui->lineEditF2->setText(f2);
-}
-
-QString DialogArc::GetF1() const{
-    return f1;
 }
 
 void DialogArc::SetF1(const QString &value){
@@ -105,17 +96,9 @@ void DialogArc::SetF1(const QString &value){
     ui->lineEditF1->setText(f1);
 }
 
-QString DialogArc::GetRadius() const{
-    return radius;
-}
-
 void DialogArc::SetRadius(const QString &value){
     radius = value;
     ui->lineEditRadius->setText(radius);
-}
-
-DialogArc::~DialogArc(){
-delete ui;
 }
 
 void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){

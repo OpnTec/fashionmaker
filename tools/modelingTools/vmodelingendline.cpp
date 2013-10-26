@@ -20,9 +20,7 @@
  ****************************************************************************/
 
 #include "vmodelingendline.h"
-#include <QDebug>
-#include <QMenu>
-#include "widgets/vmaingraphicsscene.h"
+#include <container/calculator.h>
 
 VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
                                    const QString &typeLine, const QString &formula, const qreal &angle,

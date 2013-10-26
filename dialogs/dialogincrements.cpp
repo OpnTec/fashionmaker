@@ -21,12 +21,8 @@
 
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
-#include <QHeaderView>
-#include <QCloseEvent>
-#include "widgets/doubledelegate.h"
-#include "container/vincrementtablerow.h"
-#include <QDebug>
-#include "exception/vexception.h"
+#include <widgets/doubledelegate.h>
+#include <exception/vexception.h>
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent) :
     DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc),

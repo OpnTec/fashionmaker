@@ -20,6 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolnormal.h"
+#include <container/calculator.h>
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,

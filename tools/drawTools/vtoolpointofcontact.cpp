@@ -20,6 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolpointofcontact.h"
+#include <container/calculator.h>
 
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,

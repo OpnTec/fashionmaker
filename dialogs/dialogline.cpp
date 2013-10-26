@@ -21,8 +21,6 @@
 
 #include "dialogline.h"
 #include "ui_dialogline.h"
-#include <QPushButton>
-#include <QCloseEvent>
 
 DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0){
@@ -40,10 +38,6 @@ DialogLine::~DialogLine(){
     delete ui;
 }
 
-qint64 DialogLine::getSecondPoint() const{
-    return secondPoint;
-}
-
 void DialogLine::setSecondPoint(const qint64 &value){
     secondPoint = value;
     VPointF point = data->GetPoint(value);
@@ -51,10 +45,6 @@ void DialogLine::setSecondPoint(const qint64 &value){
     if(index != -1){
         ui->comboBoxSecondPoint->setCurrentIndex(index);
     }
-}
-
-qint64 DialogLine::getFirstPoint() const{
-    return firstPoint;
 }
 
 void DialogLine::setFirstPoint(const qint64 &value){

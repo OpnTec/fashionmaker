@@ -21,10 +21,6 @@ DialogPointOfIntersection::~DialogPointOfIntersection(){
     delete ui;
 }
 
-qint64 DialogPointOfIntersection::getSecondPointId() const{
-    return secondPointId;
-}
-
 void DialogPointOfIntersection::setSecondPointId(const qint64 &value, const qint64 &id){
     secondPointId = value;
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
@@ -79,17 +75,9 @@ void DialogPointOfIntersection::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogPointOfIntersection::getFirstPointId() const{
-    return firstPointId;
-}
-
 void DialogPointOfIntersection::setFirstPointId(const qint64 &value, const qint64 &id){
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
-}
-
-QString DialogPointOfIntersection::getPointName() const{
-    return pointName;
 }
 
 void DialogPointOfIntersection::setPointName(const QString &value){

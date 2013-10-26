@@ -48,13 +48,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWi
             this, &DialogSplinePath::KAsm2Changed);
 }
 
-DialogSplinePath::~DialogSplinePath()
-{
+DialogSplinePath::~DialogSplinePath(){
     delete ui;
-}
-
-VSplinePath DialogSplinePath::GetPath() const{
-    return path;
 }
 
 void DialogSplinePath::SetPath(const VSplinePath &value){
