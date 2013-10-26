@@ -31,10 +31,6 @@ VExceptionWrongParameterId::VExceptionWrongParameterId(const QString &what, cons
     lineNumber = domElement.lineNumber();
 }
 
-VExceptionWrongParameterId::VExceptionWrongParameterId(const VExceptionWrongParameterId &e):VException(e),
-    tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){
-}
-
 QString VExceptionWrongParameterId::ErrorMessage() const{
     QString error = QString("ExceptionWrongParameterId: %1").arg(what);
     return error;

@@ -21,17 +21,6 @@
 
 #include "vexceptionbadid.h"
 
-VExceptionBadId::VExceptionBadId(const QString &what, const qint64 &id):VException(what), id(id),
-    key(QString()){
-}
-
-VExceptionBadId::VExceptionBadId(const QString &what, const QString &key):VException(what), id(0), key(key)
-{
-}
-
-VExceptionBadId::VExceptionBadId(const VExceptionBadId &e):VException(e), id(e.BadId()), key(e.BadKey()){
-}
-
 QString VExceptionBadId::ErrorMessage() const{
     QString error;
     if(key.isEmpty()){

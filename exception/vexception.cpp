@@ -25,9 +25,6 @@ VException::VException(const QString &what):QException(), what(what){
     Q_ASSERT_X(!what.isEmpty(), Q_FUNC_INFO, "Error message is empty");
 }
 
-VException::VException(const VException &e):what(e.What()){
-}
-
 QString VException::ErrorMessage() const{
     QString error = QString("Exception: %1").arg(what);
     return error;

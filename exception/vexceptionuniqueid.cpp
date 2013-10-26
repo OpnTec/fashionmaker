@@ -1,5 +1,4 @@
 #include "vexceptionuniqueid.h"
-#include <QTextStream>
 
 VExceptionUniqueId::VExceptionUniqueId(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1){

@@ -26,10 +26,6 @@ VExceptionConversionError::VExceptionConversionError(const QString &what, const 
     Q_ASSERT_X(!str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
 }
 
-VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e):
-    VException(e), str(e.String()){
-}
-
 QString VExceptionConversionError::ErrorMessage() const{
     QString error = QString("ExceptionConversionError: %1 %2").arg(what, str);
     return error;

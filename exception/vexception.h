@@ -24,21 +24,19 @@
 #define VEXCEPTION_H
 
 #include <QException>
-#include <QString>
 
-class VException : public QException
-{
+class VException : public QException{
 public:
-    VException(const QString &what);
-    VException(const VException &e);
-    virtual ~VException() noexcept(true){}
-    void raise() const { throw *this; }
-    VException *clone() const { return new VException(*this); }
-    virtual QString ErrorMessage() const;
-    virtual QString DetailedInformation() const { return QString(); }
-    QString What() const {return what;}
+                      VException(const QString &what);
+                      VException(const VException &e):what(e.What()){}
+    virtual           ~VException() noexcept(true){}
+    inline void       raise() const { throw *this; }
+    inline VException *clone() const { return new VException(*this); }
+    virtual QString   ErrorMessage() const;
+    virtual QString   DetailedInformation() const { return QString(); }
+    inline QString    What() const {return what;}
 protected:
-    QString what;
+    QString           what;
 };
 
 #endif // VEXCEPTION_H

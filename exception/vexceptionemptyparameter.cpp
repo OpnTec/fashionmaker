@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vexceptionemptyparameter.h"
-#include <QDebug>
 
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
                                                    const QDomElement &domElement): VException(what),
@@ -31,10 +30,6 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
     domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
-}
-
-VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e):VException(e),
-    name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){
 }
 
 QString VExceptionEmptyParameter::ErrorMessage() const{

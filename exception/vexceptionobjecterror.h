@@ -23,26 +23,25 @@
 #define VEXCEPTIONOBJECTERROR_H
 
 #include "vexception.h"
-#include <QDomElement>
 
-class VExceptionObjectError : public VException
-{
+class VExceptionObjectError : public VException{
 public:
-    VExceptionObjectError(const QString &what, const QDomElement &domElement);
-    VExceptionObjectError(const VExceptionObjectError &e);
-    virtual ~VExceptionObjectError() noexcept(true) {}
+                    VExceptionObjectError(const QString &what, const QDomElement &domElement);
+                    VExceptionObjectError(const VExceptionObjectError &e):VException(e), tagText(e.TagText()),
+                        tagName(e.TagName()), lineNumber(e.LineNumber()), moreInfo(e.MoreInformation()){}
+    virtual         ~VExceptionObjectError() noexcept(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
-    QString TagText() const {return tagText;}
-    QString TagName() const {return tagName;}
-    qint32 LineNumber() const {return lineNumber;}
-    void AddMoreInformation(const QString &info);
-    QString MoreInformation() const {return moreInfo;}
+    inline QString  TagText() const {return tagText;}
+    inline QString  TagName() const {return tagName;}
+    inline qint32   LineNumber() const {return lineNumber;}
+    void            AddMoreInformation(const QString &info);
+    inline QString  MoreInformation() const {return moreInfo;}
 protected:
-    QString tagText;
-    QString tagName;
-    qint32  lineNumber;
-    QString moreInfo;
+    QString         tagText;
+    QString         tagName;
+    qint32          lineNumber;
+    QString         moreInfo;
 };
 
 #endif // VEXCEPTIONOBJECTERROR_H
