@@ -20,10 +20,6 @@
  ****************************************************************************/
 
 #include "vcontrolpointspline.h"
-#include <QPen>
-#include <QBrush>
-#include <QGraphicsScene>
-#include <QDebug>
 
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,

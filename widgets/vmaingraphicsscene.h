@@ -23,38 +23,32 @@
 #define VMAINGRAPHICSSCENE_H
 
 #include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsSceneMouseEvent>
-#include "options.h"
 
-class VMainGraphicsScene : public QGraphicsScene
-{
+class VMainGraphicsScene : public QGraphicsScene{
     Q_OBJECT
 public:
-    VMainGraphicsScene();
-    VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
-    qint32 getHorScrollBar() const;
-    void setHorScrollBar(const qint32 &value);
-
-    qint32 getVerScrollBar() const;
-    void setVerScrollBar(const qint32 &value);
-
+                  VMainGraphicsScene();
+                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
+    inline qint32 getHorScrollBar() const {return horScrollBar;}
+    inline void   setHorScrollBar(const qint32 &value) {horScrollBar = value;}
+    inline qint32 getVerScrollBar() const {return verScrollBar;}
+    inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
 public slots:
-    void ChoosedItem(qint64 id, Scene::Scenes type);
-    void RemoveTool(QGraphicsItem *tool);
-    void SetFactor(qreal factor);
+    void          ChoosedItem(qint64 id, Scene::Scenes type);
+    inline void   RemoveTool(QGraphicsItem *tool) {this->removeItem(tool);}
+    void          SetFactor(qreal factor);
 protected:
-    void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void          mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+    void          mousePressEvent(QGraphicsSceneMouseEvent *event);
 signals:
-    void mouseMove(QPointF scenePos);
-    void mousePress(QPointF scenePos);
-    void ChoosedObject(qint64 id, Scene::Scenes type);
-    void NewFactor(qreal factor);
+    void          mouseMove(QPointF scenePos);
+    void          mousePress(QPointF scenePos);
+    void          ChoosedObject(qint64 id, Scene::Scenes type);
+    void          NewFactor(qreal factor);
 private:
-    qint32 horScrollBar;
-    qint32 verScrollBar;
-    qreal  scaleFactor;
+    qint32        horScrollBar;
+    qint32        verScrollBar;
+    qreal         scaleFactor;
 };
 
 #endif // VMAINGRAPHICSSCENE_H

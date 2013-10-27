@@ -20,11 +20,6 @@
  ****************************************************************************/
 
 #include "vtablegraphicsview.h"
-#include <QDebug>
-#include <QGraphicsItem>
-#include <QGuiApplication>
-#include <QKeyEvent>
-#include <QScrollBar>
 
 VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent) :
     QGraphicsView(pScene, parent){
@@ -41,10 +36,6 @@ void VTableGraphicsView::selectionChanged(){
         qDebug() << tr("detail find");
         emit itemChect(false);
     }
-}
-
-void VTableGraphicsView::rotateItems(){
-    rotateIt();
 }
 
 void VTableGraphicsView::MirrorItem(){
@@ -80,14 +71,6 @@ void VTableGraphicsView::MirrorItem(){
             list.at(i)->moveBy(dx, dy);
         }
     }
-}
-
-void VTableGraphicsView::ZoomIn(){
-    scale(1.1,1.1);
-}
-
-void VTableGraphicsView::ZoomOut(){
-    scale(1/1.1,1/1.1);
 }
 
 void VTableGraphicsView::wheelEvent(QWheelEvent *event){

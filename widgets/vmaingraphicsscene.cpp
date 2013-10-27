@@ -20,10 +20,6 @@
  ****************************************************************************/
 
 #include "vmaingraphicsscene.h"
-#include <QDebug>
-#include <QApplication>
-#include <QScrollBar>
-#include <QGraphicsItem>
 
 VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1){
 }
@@ -46,27 +42,7 @@ void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type){
     emit ChoosedObject(id, type);
 }
 
-void VMainGraphicsScene::RemoveTool(QGraphicsItem *tool){
-    this->removeItem(tool);
-}
-
 void VMainGraphicsScene::SetFactor(qreal factor){
     scaleFactor=scaleFactor*factor;
     emit NewFactor(scaleFactor);
-}
-
-qint32 VMainGraphicsScene::getVerScrollBar() const{
-    return verScrollBar;
-}
-
-void VMainGraphicsScene::setVerScrollBar(const qint32 &value){
-    verScrollBar = value;
-}
-
-qint32 VMainGraphicsScene::getHorScrollBar() const{
-    return horScrollBar;
-}
-
-void VMainGraphicsScene::setHorScrollBar(const qint32 &value){
-    horScrollBar = value;
 }

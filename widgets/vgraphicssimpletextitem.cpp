@@ -20,9 +20,6 @@
  ****************************************************************************/
 
 #include "vgraphicssimpletextitem.h"
-#include <QGraphicsScene>
-#include <QEvent>
-#include <QDebug>
 
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent):QGraphicsSimpleTextItem(parent),
     fontSize(0){

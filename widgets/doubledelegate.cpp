@@ -45,40 +45,35 @@
      using a spin box widget.
  */
 
-#include <QtGui>
 #include "doubledelegate.h"
 
- DoubleSpinBoxDelegate::DoubleSpinBoxDelegate(QObject *parent)
-     : QItemDelegate(parent)
- {
- }
+QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                             const QModelIndex &index ) const{
+    Q_UNUSED(option);
+    Q_UNUSED(index);
+    QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
+    editor->setMinimum(-10000.0);
+    editor->setMaximum(10000.0);
+    return editor;
+}
 
- QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &/* option */,
-     const QModelIndex &/* index */) const{
-     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
-     editor->setMinimum(-10000.0);
-     editor->setMaximum(10000.0);
+void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const{
+    qreal value = index.model()->data(index, Qt::EditRole).toDouble();
 
-     return editor;
- }
+    QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
+    spinBox->setValue(value);
+}
 
- void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const{
-     qreal value = index.model()->data(index, Qt::EditRole).toDouble();
+void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const{
+    QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
+    spinBox->interpretText();
+    qreal value = spinBox->value();
 
-     QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
-     spinBox->setValue(value);
- }
+    model->setData(index, value, Qt::EditRole);
+}
 
- void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
-                                    const QModelIndex &index) const{
-     QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
-     spinBox->interpretText();
-     qreal value = spinBox->value();
-
-     model->setData(index, value, Qt::EditRole);
- }
-
- void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor,
-     const QStyleOptionViewItem &option, const QModelIndex &/* index */) const{
-     editor->setGeometry(option.rect);
+void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
+                                                 const QModelIndex &index) const{
+    Q_UNUSED(index)
+    editor->setGeometry(option.rect);
  }

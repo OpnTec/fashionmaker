@@ -20,17 +20,11 @@
  ****************************************************************************/
 
 #include "vapplication.h"
-#include <QtGui>
-#include <QMessageBox>
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongparameterid.h"
-
-VApplication::VApplication(int & argc, char ** argv) :
-    QApplication(argc, argv){
-}
 
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event){

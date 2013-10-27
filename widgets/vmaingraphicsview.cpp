@@ -20,10 +20,6 @@
  ****************************************************************************/
 
 #include "vmaingraphicsview.h"
-#include <QApplication>
-#include <QWheelEvent>
-#include <QScrollBar>
-#include <QTimeLine>
 
 VMainGraphicsView::VMainGraphicsView(QWidget *parent) :
     QGraphicsView(parent), _numScheduledScalings(0){

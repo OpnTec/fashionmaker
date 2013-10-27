@@ -20,16 +20,6 @@
  ****************************************************************************/
 
 #include "vitem.h"
-#include <QGraphicsScene>
-#include <QDebug>
-#include "options.h"
-
-VItem::VItem():numInOutList(0){
-}
-
-VItem::VItem ( int numInList, QGraphicsItem * parent ):QGraphicsPathItem ( parent ),
-    numInOutList(numInList){
-}
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent ):
     QGraphicsPathItem ( path, parent ), numInOutList(numInList){
@@ -76,8 +66,4 @@ QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value ){
 
 void VItem::LengthChanged(){
     checkItemChange();
-}
-
-void VItem::SetIndexInList( qint32 index ){
-    numInOutList = index;
 }
