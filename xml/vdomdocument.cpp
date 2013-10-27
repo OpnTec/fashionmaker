@@ -20,21 +20,19 @@
  ****************************************************************************/
 
 #include "vdomdocument.h"
-#include <QDebug>
-#include "tools/drawTools/drawtools.h"
-#include "tools/nodeDetails/nodedetails.h"
-#include "tools/modelingTools/modelingtools.h"
-#include "tools/vtooldetail.h"
-#include "options.h"
-#include "container/calculator.h"
-#include "geometry/vsplinepoint.h"
-#include "exception/vexceptionwrongparameterid.h"
-#include "exception/vexceptionconversionerror.h"
-#include "exception/vexceptionemptyparameter.h"
-#include "exception/vexceptionbadid.h"
-#include "exception/vexceptionobjecterror.h"
-#include "exception/vexceptionuniqueid.h"
-#include <QMessageBox>
+#include <exception/vexceptionwrongparameterid.h>
+#include <exception/vexceptionconversionerror.h>
+#include <exception/vexceptionemptyparameter.h>
+#include <exception/vexceptionuniqueid.h>
+#include <tools/vtooldetail.h>
+#include <exception/vexceptionobjecterror.h>
+#include <exception/vexceptionbadid.h>
+#include <tools/drawTools/drawtools.h>
+#include <tools/modelingTools/modelingtools.h>
+#include <tools/nodeDetails/vnodepoint.h>
+#include <tools/nodeDetails/vnodespline.h>
+#include <tools/nodeDetails/vnodesplinepath.h>
+#include <tools/nodeDetails/vnodearc.h>
 
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode) : QDomDocument(),
     map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
@@ -54,9 +52,6 @@ VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QC
     QDomDocument(doctype), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){
-}
-
-VDomDocument::~VDomDocument(){
 }
 
 QDomElement VDomDocument::elementById(const QString& id){
@@ -190,10 +185,6 @@ void VDomDocument::SetActivDraw(const QString& name){
     this->nameActivDraw = name;
 }
 
-QString VDomDocument::GetNameActivDraw() const{
-    return nameActivDraw;
-}
-
 bool VDomDocument::GetActivDrawElement(QDomElement &element){
     if(!nameActivDraw.isEmpty()){
         QDomNodeList elements = this->documentElement().elementsByTagName( "draw" );
@@ -305,14 +296,6 @@ void VDomDocument::Parse(Document::Documents parse, VMainGraphicsScene *sceneDra
         }
         domNode = domNode.nextSibling();
     }
-}
-
-QHash<qint64, VDataTool *> *VDomDocument::getTools(){
-    return &tools;
-}
-
-QVector<VToolRecord> *VDomDocument::getHistory(){
-    return &history;
 }
 
 void VDomDocument::ParseIncrementsElement(const QDomNode &node){
@@ -1132,10 +1115,6 @@ void VDomDocument::haveLiteChange(){
 
 void VDomDocument::ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable){
     emit ShowTool(id, color, enable);
-}
-
-qint64 VDomDocument::getCursor() const{
-    return cursor;
 }
 
 void VDomDocument::setCursor(const qint64 &value){
