@@ -33,7 +33,7 @@ public:
                  /**
                   * @brief VArc конструктор по замовчуванню.
                   */
-                 VArc ();
+                       VArc ();
                  /**
                   * @brief VArc конструктор.
                   * @param center точка центру.
@@ -41,11 +41,11 @@ public:
                   * @param f1 початковий кут в градусах.
                   * @param f2 кінцевий кут в градусах.
                   */
-                 VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-                       qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
-                       Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
-                 VArc(const VArc &arc);
-                 VArc& operator= (const VArc &arc);
+                       VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
+                             qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
+                             Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                       VArc(const VArc &arc);
+                       VArc& operator= (const VArc &arc);
     /**
      * @brief GetF1 повертає початковий кут дуги.
      * @return повертає кут в градусах.
@@ -103,25 +103,25 @@ private:
     /**
      * @brief f1 початковий кут в градусах
      */
-    qreal   f1;			// початковий кут нахилу дуги (градуси)
-    QString formulaF1;
+    qreal              f1;			// початковий кут нахилу дуги (градуси)
+    QString            formulaF1;
     /**
      * @brief f2 кінцевий кут в градусах
      */
-    qreal   f2;			// кінцевий кут нахилу дуги (градуси)
-    QString formulaF2;
+    qreal              f2;			// кінцевий кут нахилу дуги (градуси)
+    QString            formulaF2;
     /**
      * @brief radius радіус дуги.
      */
-    qreal   radius;
-    QString formulaRadius;
+    qreal              radius;
+    QString            formulaRadius;
     /**
      * @brief center центральна точка дуги.
      */
-    qint64 center;
+    qint64             center;
     QHash<qint64, VPointF> points;
-    Draw::Draws mode;
-    qint64 idObject;
+    Draw::Draws        mode;
+    qint64             idObject;
 };
 
 #endif // VARC_H

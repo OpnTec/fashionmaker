@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "calculator.h"
-#include <QDebug>
 
 #define DELIMITER  1
 #define VARIABLE   2

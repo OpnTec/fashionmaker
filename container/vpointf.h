@@ -22,10 +22,6 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include <QPointF>
-#include <QString>
-#include "options.h"
-
 class VPointF{
 public:
     inline             VPointF ()
