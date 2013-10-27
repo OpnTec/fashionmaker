@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingsplinepath.h"
-#include <QMenu>
 
 VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
                                  Tool::Sources typeCreation,

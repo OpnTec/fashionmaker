@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingarc.h"
-#include <QMenu>
 #include "container/calculator.h"
 
 VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,

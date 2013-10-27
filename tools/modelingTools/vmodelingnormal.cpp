@@ -33,7 +33,6 @@ VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-
 }
 
 void VModelingNormal::setDialog(){

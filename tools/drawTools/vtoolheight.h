@@ -3,7 +3,6 @@
 
 #include "vtoollinepoint.h"
 #include "dialogs/dialogheight.h"
-#include <QLineF>
 
 class VToolHeight: public VToolLinePoint{
     Q_OBJECT

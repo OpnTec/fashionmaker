@@ -20,10 +20,7 @@
  ****************************************************************************/
 
 #include "vmodelingspline.h"
-#include <QMenu>
-#include <QDebug>
 #include "geometry/vspline.h"
-
 
 VModelingSpline::VModelingSpline(VDomDocument *doc, VContainer *data, qint64 id,
                          Tool::Sources typeCreation,

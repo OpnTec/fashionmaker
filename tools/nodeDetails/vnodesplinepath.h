@@ -25,15 +25,13 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeSplinePath : public VAbstractNode, public QGraphicsPathItem
-{
+class VNodeSplinePath : public VAbstractNode, public QGraphicsPathItem{
     Q_OBJECT
 public:
                  VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 Draw::Draws typeobject, Tool::Sources typeCreation,
-                                 QGraphicsItem * parent = 0);
-    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+                                 Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                        const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void FullUpdateFromFile();
 protected:

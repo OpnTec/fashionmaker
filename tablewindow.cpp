@@ -21,12 +21,8 @@
 
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
-#include <QCloseEvent>
-#include <QDesktopWidget>
 #include "widgets/vtablegraphicsview.h"
-#include <QFileDialog>
 #include "options.h"
-#include <QtSvg/QtSvg>
 
 TableWindow::TableWindow(QWidget *parent) :
     QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),

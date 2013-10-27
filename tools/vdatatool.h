@@ -22,18 +22,17 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include "container/vcontainer.h"
+#include <container/vcontainer.h>
 
 //We need QObject class because we use qobject_cast.
 class VDataTool : public QObject{
     Q_OBJECT
 public:
-    explicit              VDataTool(VContainer *data, QObject *parent = 0)
-                          : QObject(parent), data(*data), _referens(1){}
+    explicit              VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(1){}
     virtual               ~VDataTool(){}
     VDataTool             &operator= (const VDataTool &tool);
     inline VContainer     getData() const { return data; }
-    void                  setData(const VContainer *value);
+    inline void           setData(const VContainer *value) {data = *value;}
     virtual inline qint64 referens() const {return _referens;}
     virtual inline void   incrementReferens(){++_referens;}
     virtual void          decrementReferens();

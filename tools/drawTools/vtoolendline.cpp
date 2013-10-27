@@ -20,8 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolendline.h"
-#include <QDebug>
-#include <QMenu>
 #include "widgets/vmaingraphicsscene.h"
 #include <container/calculator.h>
 

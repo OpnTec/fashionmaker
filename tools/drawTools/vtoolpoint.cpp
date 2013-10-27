@@ -20,11 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolpoint.h"
-#include <QPen>
-#include <QBrush>
-#include <QDebug>
-#include <QGraphicsItem>
-
 
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
                        QGraphicsItem *parent):VDrawTool(doc, data, id),
@@ -150,7 +145,4 @@ void VToolPoint::RefreshLine(){
     } else {
         lineName->setVisible(true);
     }
-}
-
-VToolPoint::~VToolPoint(){
 }

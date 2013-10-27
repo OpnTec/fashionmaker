@@ -21,16 +21,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QLabel>
-#include <QSpinBox>
-#include <QScrollBar>
-#include <QShowEvent>
-#include <QDebug>
-#include <QInputDialog>
-#include <QFileDialog>
-#include <QDebug>
 #include "geometry/vspline.h"
-#include <QMessageBox>
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"

@@ -27,9 +27,9 @@
 class VToolLinePoint : public VToolPoint{
     Q_OBJECT
 public:
-                      VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                     const QString &typeLine, const QString &formula,
-                                     const qint64 &basePointId, const qreal &angle, QGraphicsItem * parent = 0);
+                      VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                                     const QString &formula, const qint64 &basePointId, const qreal &angle,
+                                     QGraphicsItem * parent = 0);
 public slots:
     virtual void      ChangedActivDraw(const QString newName); 
     virtual void      SetFactor(qreal factor);
@@ -40,7 +40,7 @@ protected:
     qint64            basePointId;
     QGraphicsLineItem *mainLine;
     virtual void      RefreshGeometry();
-    virtual void      RemoveReferens();
+    virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

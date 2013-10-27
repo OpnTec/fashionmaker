@@ -25,8 +25,7 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeArc :public VAbstractNode, public QGraphicsPathItem
-{
+class VNodeArc :public VAbstractNode, public QGraphicsPathItem{
     Q_OBJECT
 public:
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,

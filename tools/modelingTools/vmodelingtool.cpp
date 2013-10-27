@@ -27,16 +27,6 @@ VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullU
     _referens = 0;
 }
 
-VModelingTool::~VModelingTool(){
-}
-
-void VModelingTool::setDialog(){
-}
-
-void VModelingTool::ignoreContextMenu(bool enable){
-    ignoreContextMenuEvent = enable;
-}
-
 void VModelingTool::AddToModeling(const QDomElement &domElement){
     QDomElement modelingElement;
     bool ok = doc->GetActivModelingElement(modelingElement);

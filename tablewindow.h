@@ -23,7 +23,6 @@
 #define TABLEWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
 #include "widgets/vitem.h"
 
 namespace Ui {

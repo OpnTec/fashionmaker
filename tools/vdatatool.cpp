@@ -27,10 +27,6 @@ VDataTool &VDataTool::operator =(const VDataTool &tool){
    return *this;
 }
 
-void VDataTool::setData(const VContainer *value){
-    data = *value;
-}
-
 void VDataTool::decrementReferens(){
     if(_referens > 0){
         --_referens;

@@ -28,9 +28,8 @@
 class VToolPoint: public VDrawTool, public QGraphicsEllipseItem{
     Q_OBJECT
 public:
-                            VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                                       QGraphicsItem * parent = 0);
-    virtual                 ~VToolPoint();
+                            VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
+    virtual                 ~VToolPoint(){}
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            ChangedActivDraw(const QString newName);

@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vdrawtool.h"
-#include <QDebug>
 
 qreal VDrawTool::factor = 1;
 
@@ -30,12 +29,6 @@ VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *pa
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VDomDocument::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-VDrawTool::~VDrawTool(){
-}
-
-void VDrawTool::setDialog(){
 }
 
 void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc){
@@ -54,10 +47,6 @@ void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *d
         }
         history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
     }
-}
-
-void VDrawTool::ignoreContextMenu(bool enable){
-    ignoreContextMenuEvent = enable;
 }
 
 void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){

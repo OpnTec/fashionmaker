@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoollineintersect.h"
-#include <QMenu>
 
 VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,

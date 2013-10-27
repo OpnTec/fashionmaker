@@ -27,9 +27,8 @@
 class VModelingLinePoint : public VModelingPoint{
     Q_OBJECT
 public:
-                      VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                         const QString &typeLine, const QString &formula,
-                                         const qint64 &basePointId, const qreal &angle,
+                      VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                                         const QString &formula, const qint64 &basePointId, const qreal &angle,
                                          QGraphicsItem * parent = 0);
 protected:
     QString           typeLine;
@@ -38,7 +37,7 @@ protected:
     qint64            basePointId;
     QGraphicsLineItem *mainLine;
     virtual void      RefreshGeometry();
-    virtual void      RemoveReferens();
+    virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
 private:
     Q_DISABLE_COPY(VModelingLinePoint)
 };

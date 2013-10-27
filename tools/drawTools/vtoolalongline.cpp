@@ -20,8 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolalongline.h"
-#include <QDialog>
-#include <QDebug>
 #include "container/calculator.h"
 
 VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,

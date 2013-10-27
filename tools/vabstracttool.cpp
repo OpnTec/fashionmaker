@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vabstracttool.h"
-#include <QDebug>
 
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
     VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black){
@@ -132,10 +131,6 @@ QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k){
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
-const VContainer *VAbstractTool::getData()const{
-    return &data;
-}
-
 void VAbstractTool::RemoveAllChild(QDomElement &domElement){
     if ( domElement.hasChildNodes() ){
         while ( domElement.childNodes().length() >= 1 ){
@@ -149,8 +144,4 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
     *a = line.p2().y() - line.p1().y();
     *b = line.p1().x() - line.p2().x();
     *c = - *a * line.p1().x() - *b * line.p1().y();
-}
-
-qint64 VAbstractTool::getId() const{
-    return id;
 }

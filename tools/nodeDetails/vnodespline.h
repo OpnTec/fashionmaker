@@ -25,23 +25,22 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeSpline:public VAbstractNode, public QGraphicsPathItem
-{
+class VNodeSpline:public VAbstractNode, public QGraphicsPathItem{
     Q_OBJECT
 public:
-    VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
-                    Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                   Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+                  VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                              Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                               const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
-    virtual void                   FullUpdateFromFile ();
+    virtual void FullUpdateFromFile ();
 protected:
-    virtual void                   AddToFile ();
-    virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void AddToFile ();
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
-    void                           RefreshGeometry ();
+    void         RefreshGeometry ();
 };
 
 #endif // VNODESPLINE_H

@@ -23,19 +23,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
-#include <QtXml>
-#include <QComboBox>
-#include <QSharedPointer>
-#include <QToolButton>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
 #include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
+#include "tools/vtooldetail.h"
 #include "tools/drawTools/drawtools.h"
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#include "tools/vtooldetail.h"
 
 namespace Ui {
 class MainWindow;

@@ -30,8 +30,7 @@ class VToolNormal : public VToolLinePoint{
 public:
                    VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                               const qint64 &secondPointId, Tool::Sources typeCreation,
-                               QGraphicsItem * parent = 0);
+                               const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static void    Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);

@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingshoulderpoint.h"
-#include <QDebug>
 #include "../drawTools/vtoolshoulderpoint.h"
 #include <container/calculator.h>
 
@@ -34,7 +33,6 @@ VModelingShoulderPoint::VModelingShoulderPoint(VDomDocument *doc, VContainer *da
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-
 }
 
 void VModelingShoulderPoint::setDialog(){

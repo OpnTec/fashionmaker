@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolline.h"
-#include <QDebug>
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      Tool::Sources typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),

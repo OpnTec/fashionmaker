@@ -29,17 +29,15 @@ class VModelingNormal : public VModelingLinePoint{
     Q_OBJECT
 public:
                             VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                            const QString &typeLine, const QString &formula,
-                                            const qreal &angle, const qint64 &firstPointId,
-                                            const qint64 &secondPointId, Tool::Sources typeCreation,
-                                            QGraphicsItem * parent = 0);
+                                            const QString &typeLine, const QString &formula, const qreal &angle,
+                                            const qint64 &firstPointId, const qint64 &secondPointId,
+                                            Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void            setDialog();
     static VModelingNormal* Create(QSharedPointer<DialogNormal> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingNormal* Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
-                                   const qint64 &secondPointId, const QString typeLine,
-                                   const QString pointName, const qreal angle, const qreal &mx,
-                                   const qreal &my, VDomDocument *doc, VContainer *data,
-                                   const Document::Documents &parse, Tool::Sources typeCreation);
+                                   const qint64 &secondPointId, const QString typeLine, const QString pointName,
+                                   const qreal angle, const qreal &mx, const qreal &my, VDomDocument *doc,
+                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
 public slots:
     virtual void            FullUpdateFromFile();
     virtual void            FullUpdateFromGui(int result);

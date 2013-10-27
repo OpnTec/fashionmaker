@@ -24,8 +24,7 @@
 
 #include "../vabstracttool.h"
 
-class VAbstractNode : public VAbstractTool
-{
+class VAbstractNode : public VAbstractTool{
     Q_OBJECT
 public:
                  VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,

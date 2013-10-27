@@ -64,10 +64,6 @@ void VToolLinePoint::RefreshGeometry(){
     }
 }
 
-void VToolLinePoint::RemoveReferens(){
-    doc->DecrementReferens(basePointId);
-}
-
 void VToolLinePoint::SetFactor(qreal factor){
     VDrawTool::SetFactor(factor);
     RefreshGeometry();

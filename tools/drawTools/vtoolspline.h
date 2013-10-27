@@ -41,8 +41,8 @@ public:
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, Tool::Sources typeCreation);
 signals:
-    void         RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position,
-                               const QPointF &controlPoint, const QPointF &splinePoint );
+    void         RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position, const QPointF &controlPoint,
+                               const QPointF &splinePoint );
     void         setEnabledPoint ( bool enable );
 public slots:
     virtual void FullUpdateFromFile ();

@@ -20,8 +20,6 @@
  ****************************************************************************/
 
 #include "vmodelingalongline.h"
-#include <QDialog>
-#include <QDebug>
 #include "container/calculator.h"
 
 VModelingAlongLine::VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id,

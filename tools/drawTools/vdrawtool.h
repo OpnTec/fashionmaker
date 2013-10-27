@@ -23,16 +23,15 @@
 #define VDRAWTOOL_H
 
 #include "../vabstracttool.h"
-#include <QMenu>
 
 class VDrawTool : public VAbstractTool{
     Q_OBJECT
 public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
-    virtual      ~VDrawTool();
-    virtual void setDialog();
+    virtual      ~VDrawTool() {}
+    virtual void setDialog() {}
     static void  AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc);
-    void         ignoreContextMenu(bool enable);
+    void         ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString newName);

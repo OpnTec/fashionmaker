@@ -7,15 +7,16 @@
 class VToolPointOfIntersection : public VToolPoint{
     Q_OBJECT
 public:
-    VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &firstPointId,
-                             const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                 VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                          const qint64 &firstPointId, const qint64 &secondPointId,
+                                          Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static void  Create(QSharedPointer<DialogPointOfIntersection> &dialog, VMainGraphicsScene  *scene,
                         VDomDocument *doc, VContainer *data);
     static void  Create(const qint64 _id, const QString &pointName, const qint64 &firstPointId,
-                        const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, Tool::Sources typeCreation);
+                        const qint64 &secondPointId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                        VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                        Tool::Sources typeCreation);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);

@@ -25,14 +25,13 @@
 #include "../vabstracttool.h"
 #include <QMenu>
 
-class VModelingTool: public VAbstractTool
-{
+class VModelingTool: public VAbstractTool{
     Q_OBJECT
 public:
-    VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
-    virtual      ~VModelingTool();
-    virtual void setDialog();
-    void         ignoreContextMenu(bool enable);
+                 VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+    virtual      ~VModelingTool(){}
+    virtual void setDialog(){}
+    inline void  ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
     virtual void FullUpdateFromGui(int result)=0;
 signals:

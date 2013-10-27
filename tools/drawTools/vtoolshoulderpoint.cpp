@@ -33,7 +33,6 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-
 }
 
 void VToolShoulderPoint::setDialog(){

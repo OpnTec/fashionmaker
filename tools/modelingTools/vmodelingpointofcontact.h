@@ -28,15 +28,13 @@
 class VModelingPointOfContact : public VModelingPoint{
     Q_OBJECT
 public:
-                                    VModelingPointOfContact(VDomDocument *doc, VContainer *data,
-                                                            const qint64 &id, const QString &radius,
-                                                            const qint64 &center, const qint64 &firstPointId,
-                                                            const qint64 &secondPointId,
-                                                            Tool::Sources typeCreation,
-                                                            QGraphicsItem * parent = 0);
+                                    VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                                            const QString &radius, const qint64 &center,
+                                                            const qint64 &firstPointId, const qint64 &secondPointId,
+                                                            Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     virtual void                    setDialog();
-    static VModelingPointOfContact* Create(QSharedPointer<DialogPointOfContact> &dialog,
-                                                VDomDocument *doc, VContainer *data);
+    static VModelingPointOfContact* Create(QSharedPointer<DialogPointOfContact> &dialog, VDomDocument *doc,
+                                           VContainer *data);
     static VModelingPointOfContact* Create(const qint64 _id, const QString &radius, const qint64 &center,
                                            const qint64 &firstPointId, const qint64 &secondPointId,
                                            const QString &pointName, const qreal &mx, const qreal &my,

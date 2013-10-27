@@ -20,11 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolsinglepoint.h"
-#include <QPen>
-#include <QBrush>
-#include <QDebug>
-#include <QGraphicsItem>
-#include <QGraphicsSceneContextMenuEvent>
 
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),

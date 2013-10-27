@@ -21,7 +21,6 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
-#include <QDebug>
 #include "modelingTools/vmodelingtool.h"
 #include "modelingTools/modelingtools.h"
 

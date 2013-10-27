@@ -20,7 +20,6 @@
  ****************************************************************************/
 
 #include "vtoolsplinepath.h"
-#include <QMenu>
 
 VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
                                  Tool::Sources typeCreation,
