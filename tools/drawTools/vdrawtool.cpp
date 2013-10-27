@@ -88,7 +88,7 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement){
                 calcElement.insertAfter(domElement,refElement);
                 doc->setCursor(0);
             } else {
-                qCritical()<<"Не можу знайти елемент після якого потрібно вставляти."<< Q_FUNC_INFO;
+                qCritical()<<tr("Can not find the element after which you want to insert.")<< Q_FUNC_INFO;
             }
         }
     } else {
