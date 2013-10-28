@@ -53,7 +53,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     QLineF line = QLineF(p1Line, p2Line);
     qreal dist = line.length();
     if(dist>length){
-        qDebug()<<"A3П2="<<length/PrintDPI*25.4<<"А30П ="<<dist/PrintDPI*25.4;
+        qDebug()<<"A3П2="<<toMM(length)<<"А30П ="<<toMM(dist);
         throw"Не можу знайти точку плеча. Довжина А3П2 < А3П.";
     }
     if(dist==length){
@@ -95,7 +95,7 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
         QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                       shoulderPoint.toQPointF(), result*PrintDPI/25.4);
+                                                       shoulderPoint.toQPointF(), toPixel(result));
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));

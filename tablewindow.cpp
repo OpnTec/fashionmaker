@@ -35,7 +35,7 @@ TableWindow::TableWindow(QWidget *parent) :
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
-    //sceneRect = QRectF(0, 0, 203*PrintDPI/25.4, 287*PrintDPI/25.4);
+    //sceneRect = QRectF(0, 0, toPixel(203), toPixel(287));
     sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
     currentScene = new QGraphicsScene(sceneRect);
     QBrush *brush = new QBrush();

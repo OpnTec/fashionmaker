@@ -135,8 +135,8 @@ void VModelingLineIntersect::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "lineIntersect");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "p1Line1", p1Line1);
     AddAttribute(domElement, "p2Line1", p2Line1);

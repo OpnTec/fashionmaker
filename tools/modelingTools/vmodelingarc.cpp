@@ -25,14 +25,10 @@
 VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                            QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
-    VArc arc = data->GetModelingArc(id);
-    QPainterPath path;
-    path.addPath(arc.GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(baseColor, widthHairLine));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
+    RefreshGeometry();
 
     if(typeCreation == Tool::FromGui){
         AddToFile();
@@ -68,7 +64,7 @@ VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const
     QString errorMsg;
     qreal result = cal.eval(radius, &errorMsg);
     if(errorMsg.isEmpty()){
-        calcRadius = result*PrintDPI/25.4;
+        calcRadius = toPixel(result);
     }
 
     errorMsg.clear();

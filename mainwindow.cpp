@@ -151,12 +151,11 @@ void MainWindow::ActionNewDraw(){
         comboBoxDraws->setCurrentIndex(index);
         currentDrawChanged( index );
     }
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentDrawChanged);
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &MainWindow::currentDrawChanged);
     data->ClearObject();
     //Create single point
-    qint64 id = data->AddPoint(VPointF((10+comboBoxDraws->count()*5)*PrintDPI/25.4, 10*PrintDPI/25.4, "А", 5,
-                                       10));
+    qint64 id = data->AddPoint(VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
@@ -664,8 +663,8 @@ void MainWindow::currentDrawChanged( int index ){
 
 void MainWindow::mouseMove(QPointF scenePos){
     QString string = QString("%1, %2")
-                            .arg(static_cast<qint32>(scenePos.x()/PrintDPI*25.4))
-                            .arg(static_cast<qint32>(scenePos.y()/PrintDPI*25.4));
+                            .arg(static_cast<qint32>(toMM(scenePos.x())))
+                            .arg(static_cast<qint32>(toMM(scenePos.y())));
     mouseCoordinate->setText(string);
 }
 

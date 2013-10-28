@@ -90,7 +90,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
         QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                  thirdPoint.toQPointF(), result*PrintDPI/25.4);
+                                                  thirdPoint.toQPointF(), toPixel(result));
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -104,9 +104,8 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
         }
         VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
         if(parse == Document::FullParse){
-            VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula,
-                                                     firstPointId, secondPointId, thirdPointId,
-                                                     typeCreation);
+            VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,
+                                                     thirdPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
@@ -163,8 +162,8 @@ void VToolBisector::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "bisector");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);

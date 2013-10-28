@@ -78,7 +78,7 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
         QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                  thirdPoint.toQPointF(), result*PrintDPI/25.4);
+                                                  thirdPoint.toQPointF(), toPixel(result));
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -140,8 +140,8 @@ void VModelingBisector::AddToFile(){
     AddAttribute(domElement, "id", id);
     AddAttribute(domElement, "type", "bisector");
     AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, "mx", toMM(point.mx()));
+    AddAttribute(domElement, "my", toMM(point.my()));
 
     AddAttribute(domElement, "typeLine", typeLine);
     AddAttribute(domElement, "length", formula);
