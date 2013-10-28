@@ -99,6 +99,18 @@ protected:
             }
         }
     }
+    template <typename Item>
+    void ShowItem(Item *item, qint64 id, Qt::GlobalColor color, bool enable){
+        Q_ASSERT(item != 0);
+        if(id == item->id){
+            if(enable == false){
+                currentColor = baseColor;
+            } else {
+                currentColor = color;
+            }
+            item->setPen(QPen(currentColor, widthHairLine/factor));
+        }
+    }
 };
 
 #endif // VDRAWTOOL_H

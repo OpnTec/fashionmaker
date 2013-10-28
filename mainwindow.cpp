@@ -171,7 +171,7 @@ void MainWindow::ActionNewDraw(){
 
 void MainWindow::OptionDraw(){
     QString nameDraw;
-    bool bOk;
+    bool bOk = false;
     qint32 index;
     QString nDraw = doc->GetNameActivDraw();
     QInputDialog *dlg = new QInputDialog(this);
@@ -206,9 +206,8 @@ void MainWindow::OptionDraw(){
 }
 
 template <typename Dialog, typename Func>
-void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                               const QString &toolTip, QSharedPointer<Dialog> &dialog,
-                               Func closeDialogSlot){
+void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+                               QSharedPointer<Dialog> &dialog, Func closeDialogSlot){
     if(checked){
         CanselTool();
         tool = t;
@@ -223,14 +222,14 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
     } else {
         if(QToolButton *tButton = qobject_cast< QToolButton * >(this->sender())){
+            Q_ASSERT(tButton != 0);
             tButton->setChecked(true);
         }
     }
 }
 
 template <typename T>
-void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
-                                 const qint64 &idDetail){
+void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool, const qint64 &idDetail){
     QHash<qint64, VDataTool*>* tools = doc->getTools();
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
     Q_ASSERT(det != 0);

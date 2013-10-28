@@ -100,15 +100,7 @@ void VToolLine::FullUpdateFromGui(int result){
 }
 
 void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
-    if(id == this->id){
-        if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine/factor));
-            currentColor = baseColor;
-        } else {
-            this->setPen(QPen(color, widthHairLine/factor));
-            currentColor = color;
-        }
-    }
+    ShowItem(this, id, color, enable);
 }
 
 void VToolLine::SetFactor(qreal factor){
@@ -117,23 +109,22 @@ void VToolLine::SetFactor(qreal factor){
 }
 
 void VToolLine::ChangedActivDraw(const QString newName){
+    bool selectable = false;
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine/factor));
-        this->setAcceptHoverEvents (true);
+        selectable = true;
         currentColor = Qt::black;
-        VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine/factor));
-        this->setAcceptHoverEvents (false);
+        selectable = false;
         currentColor = Qt::gray;
-        VDrawTool::ChangedActivDraw(newName);
     }
+    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setAcceptHoverEvents (selectable);
+    VDrawTool::ChangedActivDraw(newName);
 }
 
 void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     ContextMenu(dialogLine, this, event);
 }
-
 
 void VToolLine::AddToFile(){
     QDomElement domElement = doc->createElement("line");

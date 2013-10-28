@@ -586,44 +586,44 @@ QPainterPath VSpline::GetPath() const{
             2 - 1 real root + complex roots imaginary part is zero
                 (i.e. 2 real roots).
 */
-qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
-    qreal q,r,r2,q3;
+//qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
+//    qreal q,r,r2,q3;
     
-    q = (a*a - 3.*b)/9.;
-    r = (a*(2.*a*a - 9.*b) + 27.*c)/54.;
-    r2 = r*r;
-    q3 = pow(q,3);
-    if(r2<q3) {
-        qreal t = acos(r/sqrt(q3));
-        a/=3.;
-        q = -2.*sqrt(q);
-        x[0] = q*cos(t/3.)-a;
-        x[1] = q*cos((t + M_2PI)/3.) - a;
-        x[2] = q*cos((t - M_2PI)/3.) - a;
-        return(3);
-    } else {
-        qreal aa,bb;
-        if(r<=0.){
-            r=-r;
-        }
-        aa = -pow(r + sqrt(r2-q3),1./3.);
-        if(aa!=0.){
-            bb=q/aa;
-        } else {
-            bb=0.;
-        }
-        a/=3.;
-        q = aa+bb;
-        r = aa-bb;
-        x[0] = q-a;
-        x[1] = (-0.5)*q-a;
-        x[2] = (sqrt(3.)*0.5)*fabs(r);
-        if(x[2]==0.){
-            return(2);
-        }
-        return(1);
-    }
-}
+//    q = (a*a - 3.*b)/9.;
+//    r = (a*(2.*a*a - 9.*b) + 27.*c)/54.;
+//    r2 = r*r;
+//    q3 = pow(q,3);
+//    if(r2<q3) {
+//        qreal t = acos(r/sqrt(q3));
+//        a/=3.;
+//        q = -2.*sqrt(q);
+//        x[0] = q*cos(t/3.)-a;
+//        x[1] = q*cos((t + M_2PI)/3.) - a;
+//        x[2] = q*cos((t - M_2PI)/3.) - a;
+//        return(3);
+//    } else {
+//        qreal aa,bb;
+//        if(r<=0.){
+//            r=-r;
+//        }
+//        aa = -pow(r + sqrt(r2-q3),1./3.);
+//        if(aa!=0.){
+//            bb=q/aa;
+//        } else {
+//            bb=0.;
+//        }
+//        a/=3.;
+//        q = aa+bb;
+//        r = aa-bb;
+//        x[0] = q-a;
+//        x[1] = (-0.5)*q-a;
+//        x[2] = (sqrt(3.)*0.5)*fabs(r);
+//        if(x[2]==0.){
+//            return(2);
+//        }
+//        return(1);
+//    }
+//}
 
 //qreal VSpline::calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
 //                       qreal curve_coord4, qreal point_coord) const{

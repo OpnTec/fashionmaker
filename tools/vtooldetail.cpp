@@ -25,9 +25,8 @@
 #include "modelingTools/modelingtools.h"
 
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, Tool::Sources typeCreation,
-                         VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
-     sceneDetails(scene){
+                         VMainGraphicsScene *scene, QGraphicsItem *parent) :VAbstractTool(doc, data, id),
+    QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
     VDetail detail = data->GetDetail(id);
     QHash<qint64, VDataTool*>* tools = doc->getTools();
     Q_ASSERT(tools != 0);

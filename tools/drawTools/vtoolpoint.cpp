@@ -54,43 +54,28 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my){
 }
 
 void VToolPoint::ChangedActivDraw(const QString newName){
+    bool selectable = false;
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine/factor));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        this->setAcceptHoverEvents(true);
-        namePoint->setFlag(QGraphicsItem::ItemIsMovable, true);
-        namePoint->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-        namePoint->setBrush(QBrush(Qt::black));
-        namePoint->setAcceptHoverEvents(true);
-        lineName->setPen(QPen(Qt::black, widthHairLine/factor));
+        selectable = true;
         currentColor = Qt::black;
-        VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine/factor));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        this->setAcceptHoverEvents (false);
-        namePoint->setFlag(QGraphicsItem::ItemIsMovable, false);
-        namePoint->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-        namePoint->setBrush(QBrush(Qt::gray));
-        namePoint->setAcceptHoverEvents(false);
-        lineName->setPen(QPen(Qt::gray, widthHairLine/factor));
+        selectable = false;
         currentColor = Qt::gray;
-        VDrawTool::ChangedActivDraw(newName);
     }
+    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
+    this->setAcceptHoverEvents (selectable);
+    namePoint->setFlag(QGraphicsItem::ItemIsMovable, selectable);
+    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
+    namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, selectable);
+    namePoint->setBrush(QBrush(currentColor));
+    namePoint->setAcceptHoverEvents(selectable);
+    lineName->setPen(QPen(currentColor, widthHairLine/factor));
+    VDrawTool::ChangedActivDraw(newName);
 }
 
 void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
-    if(id == this->id){
-        if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine/factor));
-            currentColor = baseColor;
-        } else {
-            this->setPen(QPen(color, widthHairLine/factor));
-            currentColor = color;
-        }
-    }
+    ShowItem(this, id, color, enable);
 }
 
 void VToolPoint::SetFactor(qreal factor){

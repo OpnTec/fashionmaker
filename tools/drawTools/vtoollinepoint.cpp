@@ -41,14 +41,12 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
 
 void VToolLinePoint::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
         currentColor = Qt::black;
-        VToolPoint::ChangedActivDraw(newName);
     } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine/factor));
         currentColor = Qt::gray;
-        VToolPoint::ChangedActivDraw(newName);
     }
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
+    VToolPoint::ChangedActivDraw(newName);
 }
 
 void VToolLinePoint::RefreshGeometry(){

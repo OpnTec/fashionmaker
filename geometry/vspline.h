@@ -257,15 +257,15 @@ private:
      * @return довжину.
      */
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
-    /**
-     * @brief Cubic знаходить розв'язок кубічного рівняння.
-     * @param x коефіцієнт.
-     * @param a коефіцієнт.
-     * @param b коефіцієнт.
-     * @param c коефіцієнт.
-     * @return повертає корені рівняння.
-     */
-    static qint32  Cubic(qreal *x, qreal a, qreal b, qreal c);
+//    /**
+//     * @brief Cubic знаходить розв'язок кубічного рівняння.
+//     * @param x коефіцієнт.
+//     * @param a коефіцієнт.
+//     * @param b коефіцієнт.
+//     * @param c коефіцієнт.
+//     * @return повертає корені рівняння.
+//     */
+//    static qint32  Cubic(qreal *x, qreal a, qreal b, qreal c);
     /**
      * @brief calc_t знаходить параметр t якому відповідає точка на сплайні.
      * @param curve_coord1 координата Х або У кривої.

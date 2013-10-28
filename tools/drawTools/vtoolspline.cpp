@@ -246,33 +246,23 @@ void VToolSpline::RefreshGeometry(){
 
 
 void VToolSpline::ChangedActivDraw(const QString newName){
+    bool selectable = false;
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine/factor));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        this->setAcceptHoverEvents(true);
+        selectable = true;
         currentColor = Qt::black;
-        emit setEnabledPoint(true);
-        VDrawTool::ChangedActivDraw(newName);
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine/factor));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        this->setAcceptHoverEvents (false);
+        selectable = false;
         currentColor = Qt::gray;
-        emit setEnabledPoint(false);
-        VDrawTool::ChangedActivDraw(newName);
     }
+    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
+    this->setAcceptHoverEvents (selectable);
+    emit setEnabledPoint(selectable);
+    VDrawTool::ChangedActivDraw(newName);
 }
 
 void VToolSpline::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
-    if(id == this->id){
-        if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine/factor));
-            currentColor = baseColor;
-        } else {
-            this->setPen(QPen(color, widthHairLine/factor));
-            currentColor = color;
-        }
-    }
+    ShowItem(this, id, color, enable);
 }
 
 void VToolSpline::SetFactor(qreal factor){

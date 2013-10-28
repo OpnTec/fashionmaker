@@ -56,7 +56,6 @@ void VToolAlongLine::FullUpdateFromGui(int result){
             domElement.setAttribute("secondPoint", QString().setNum(dialogAlongLine->getSecondPointId()));
             emit FullUpdateTree();
         }
-
     }
     dialogAlongLine.clear();
 }
