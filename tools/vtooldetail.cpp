@@ -24,14 +24,14 @@
 #include "modelingTools/vmodelingtool.h"
 #include "modelingTools/modelingtools.h"
 
-const QString VToolDetail::TagName = QStringLiteral("detail");
-const QString VToolDetail::TagNode = QStringLiteral("node");
-const QString VToolDetail::AttrSupplement = QStringLiteral("supplement");
-const QString VToolDetail::AttrClosed = QStringLiteral("closed");
-const QString VToolDetail::AttrWidth = QStringLiteral("width");
-const QString VToolDetail::AttrIdObject = QStringLiteral("idObject");
-const QString VToolDetail::AttrNodeType = QStringLiteral("nodeType");
-const QString VToolDetail::NodeTypeContour = QStringLiteral("Contour");
+const QString VToolDetail::TagName          = QStringLiteral("detail");
+const QString VToolDetail::TagNode          = QStringLiteral("node");
+const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
+const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
+const QString VToolDetail::AttrWidth        = QStringLiteral("width");
+const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
+const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
+const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, Tool::Sources typeCreation,
@@ -40,50 +40,39 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     VDetail detail = data->GetDetail(id);
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
-        case(Tool::NodePoint):{
+        case(Tool::NodePoint):
             InitTool<VNodePoint>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeArc):{
+        case(Tool::NodeArc):
             InitTool<VNodeArc>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeSpline):{
+        case(Tool::NodeSpline):
             InitTool<VNodeSpline>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeSplinePath):{
+        case(Tool::NodeSplinePath):
             InitTool<VNodeSplinePath>(scene, detail[i]);
             break;
-        }
-        case(Tool::AlongLineTool):{
+        case(Tool::AlongLineTool):
             InitTool<VModelingAlongLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::ArcTool):{
+        case(Tool::ArcTool):
             InitTool<VModelingArc>(scene, detail[i]);
             break;
-        }
-        case(Tool::BisectorTool):{
+        case(Tool::BisectorTool):
             InitTool<VModelingBisector>(scene, detail[i]);
             break;
-        }
-        case(Tool::EndLineTool):{
+        case(Tool::EndLineTool):
             InitTool<VModelingEndLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::LineIntersectTool):{
+        case(Tool::LineIntersectTool):
             InitTool<VModelingLineIntersect>(scene, detail[i]);
             break;
-        }
-        case(Tool::LineTool):{
+        case(Tool::LineTool):
             InitTool<VModelingLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::NormalTool):{
+        case(Tool::NormalTool):
             InitTool<VModelingNormal>(scene, detail[i]);
             break;
-        }
         case(Tool::PointOfContact):
             InitTool<VModelingPointOfContact>(scene, detail[i]);
             break;
