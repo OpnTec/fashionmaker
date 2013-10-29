@@ -20,9 +20,10 @@
  ****************************************************************************/
 
 #include "vtoolspline.h"
-#include <QDebug>
 #include "geometry/vspline.h"
 
+const QString VToolSpline::TagName = QStringLiteral("spline");
+const QString VToolSpline::ToolType = QStringLiteral("simple");
 
 VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id,
                          Tool::Sources typeCreation,
@@ -141,13 +142,13 @@ void VToolSpline::FullUpdateFromGui(int result){
                        controlPoints[1]->pos(), dialogSpline->getP4(), dialogSpline->getKCurve());
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("point1", QString().setNum(spl.GetP1()));
-            domElement.setAttribute("point4", QString().setNum(spl.GetP4()));
-            domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
-            domElement.setAttribute("angle2", QString().setNum(spl.GetAngle2()));
-            domElement.setAttribute("kAsm1", QString().setNum(spl.GetKasm1()));
-            domElement.setAttribute("kAsm2", QString().setNum(spl.GetKasm2()));
-            domElement.setAttribute("kCurve", QString().setNum(spl.GetKcurve()));
+            domElement.setAttribute(AttrPoint1, QString().setNum(spl.GetP1()));
+            domElement.setAttribute(AttrPoint4, QString().setNum(spl.GetP4()));
+            domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
+            domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
+            domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
+            domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
+            domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
             emit FullUpdateTree();
         }
     }
@@ -165,11 +166,11 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePo
     }
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
-        domElement.setAttribute("angle2", QString().setNum(spl.GetAngle2()));
-        domElement.setAttribute("kAsm1", QString().setNum(spl.GetKasm1()));
-        domElement.setAttribute("kAsm2", QString().setNum(spl.GetKasm2()));
-        domElement.setAttribute("kCurve", QString().setNum(spl.GetKcurve()));
+        domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
+        domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
+        domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
         emit FullUpdateTree();
     }
 }
@@ -180,17 +181,17 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VToolSpline::AddToFile(){
     VSpline spl = VAbstractTool::data.GetSpline(id);
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "simple");
-    AddAttribute(domElement, "point1", spl.GetP1());
-    AddAttribute(domElement, "point4", spl.GetP4());
-    AddAttribute(domElement, "angle1", spl.GetAngle1());
-    AddAttribute(domElement, "angle2", spl.GetAngle2());
-    AddAttribute(domElement, "kAsm1", spl.GetKasm1());
-    AddAttribute(domElement, "kAsm2", spl.GetKasm2());
-    AddAttribute(domElement, "kCurve", spl.GetKcurve());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrPoint1, spl.GetP1());
+    AddAttribute(domElement, AttrPoint4, spl.GetP4());
+    AddAttribute(domElement, AttrAngle1, spl.GetAngle1());
+    AddAttribute(domElement, AttrAngle2, spl.GetAngle2());
+    AddAttribute(domElement, AttrKAsm1, spl.GetKasm1());
+    AddAttribute(domElement, AttrKAsm2, spl.GetKasm2());
+    AddAttribute(domElement, AttrKCurve, spl.GetKcurve());
 
     AddToCalculation(domElement);
 }

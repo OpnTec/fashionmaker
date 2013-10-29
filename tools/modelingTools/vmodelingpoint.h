@@ -30,6 +30,7 @@ class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem{
 public:
                             VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
     virtual                 ~VModelingPoint() {}
+    static const QString    TagName;
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            FullUpdateFromGui(int result) = 0;

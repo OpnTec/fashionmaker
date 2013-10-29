@@ -30,6 +30,10 @@ public:
                  VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
                                Draw::Draws typeobject, QObject *parent = 0 );
     virtual      ~VAbstractNode() {}
+    static const QString AttrIdObject;
+    static const QString AttrTypeObject;
+    static const QString TypeObjectCalculation;
+    static const QString TypeObjectModeling;
 protected:
     qint64       idNode;
     Draw::Draws  typeobject;

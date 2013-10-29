@@ -1,5 +1,7 @@
 #include "vtoolheight.h"
 
+const QString VToolHeight::ToolType = QStringLiteral("height");
+
 VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                          Tool::Sources typeCreation, QGraphicsItem * parent)
@@ -90,10 +92,10 @@ QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point){
 void VToolHeight::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        basePointId = domElement.attribute("basePoint", "").toLongLong();
-        p1LineId = domElement.attribute("p1Line", "").toLongLong();
-        p2LineId = domElement.attribute("p2Line", "").toLongLong();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
+        p1LineId = domElement.attribute(AttrP1Line, "").toLongLong();
+        p2LineId = domElement.attribute(AttrP2Line, "").toLongLong();
     }
     RefreshGeometry();
 
@@ -103,11 +105,11 @@ void VToolHeight::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogHeight->getPointName());
-            domElement.setAttribute("typeLine", dialogHeight->getTypeLine());
-            domElement.setAttribute("basePoint", QString().setNum(dialogHeight->getBasePointId()));
-            domElement.setAttribute("p1Line", QString().setNum(dialogHeight->getP1LineId()));
-            domElement.setAttribute("p2Line", QString().setNum(dialogHeight->getP2LineId()));
+            domElement.setAttribute(AttrName, dialogHeight->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogHeight->getTypeLine());
+            domElement.setAttribute(AttrBasePoint, QString().setNum(dialogHeight->getBasePointId()));
+            domElement.setAttribute(AttrP1Line, QString().setNum(dialogHeight->getP1LineId()));
+            domElement.setAttribute(AttrP2Line, QString().setNum(dialogHeight->getP2LineId()));
             emit FullUpdateTree();
         }
     }
@@ -120,18 +122,18 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VToolHeight::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "height");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "basePoint", basePointId);
-    AddAttribute(domElement, "p1Line", p1LineId);
-    AddAttribute(domElement, "p2Line", p2LineId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrBasePoint, basePointId);
+    AddAttribute(domElement, AttrP1Line, p1LineId);
+    AddAttribute(domElement, AttrP2Line, p2LineId);
 
     AddToCalculation(domElement);
 

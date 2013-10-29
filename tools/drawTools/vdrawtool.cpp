@@ -92,7 +92,7 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement){
             }
         }
     } else {
-        qCritical()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        qCritical()<<tr("Can't find tag Calculation")<< Q_FUNC_INFO;
     }
     emit toolhaveChange();
 }

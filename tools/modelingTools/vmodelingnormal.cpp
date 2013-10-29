@@ -23,6 +23,8 @@
 #include "../drawTools/vtoolnormal.h"
 #include <container/calculator.h>
 
+const QString VModelingNormal::ToolType = QStringLiteral("normal");
+
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
@@ -99,11 +101,11 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
 void VModelingNormal::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        basePointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
-        angle = domElement.attribute("angle", "").toInt();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        angle = domElement.attribute(AttrAngle, "").toInt();
     }
     RefreshGeometry();
 }
@@ -112,12 +114,12 @@ void VModelingNormal::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogNormal->getPointName());
-            domElement.setAttribute("typeLine", dialogNormal->getTypeLine());
-            domElement.setAttribute("length", dialogNormal->getFormula());
-            domElement.setAttribute("angle", QString().setNum(dialogNormal->getAngle()));
-            domElement.setAttribute("firstPoint", QString().setNum(dialogNormal->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogNormal->getSecondPointId()));
+            domElement.setAttribute(AttrName, dialogNormal->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogNormal->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogNormal->getFormula());
+            domElement.setAttribute(AttrAngle, QString().setNum(dialogNormal->getAngle()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogNormal->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogNormal->getSecondPointId()));
             emit FullUpdateTree();
         }
     }
@@ -130,19 +132,19 @@ void VModelingNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VModelingNormal::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "normal");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "angle", angle);
-    AddAttribute(domElement, "firstPoint", basePointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrAngle, angle);
+    AddAttribute(domElement, AttrFirstPoint, basePointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToModeling(domElement);
 }

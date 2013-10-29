@@ -40,6 +40,7 @@ public:
                           const Document::Documents &parse, Tool::Sources typeCreation);
     static QPointF FindPoint(const QPointF axisP1, const QPointF axisP2, const QPointF firstPoint,
                               const QPointF secondPoint);
+    static const QString ToolType;
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   FullUpdateFromGui(int result);

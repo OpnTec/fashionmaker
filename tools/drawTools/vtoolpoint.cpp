@@ -21,6 +21,8 @@
 
 #include "vtoolpoint.h"
 
+const QString VToolPoint::TagName = QStringLiteral("point");
+
 VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
                        QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0){
@@ -47,8 +49,8 @@ void VToolPoint::NameChangePosition(const QPointF pos){
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("mx", QString().setNum(toMM(mx)));
-        domElement.setAttribute("my", QString().setNum(toMM(my)));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }

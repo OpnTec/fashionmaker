@@ -22,6 +22,8 @@
 #include "vtoolbisector.h"
 #include <container/calculator.h>
 
+const QString VToolBisector::ToolType = QStringLiteral("bisector");
+
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
                              const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Sources typeCreation,
@@ -121,11 +123,11 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
 void VToolBisector::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        basePointId = domElement.attribute("secondPoint", "").toLongLong();
-        thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        basePointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        thirdPointId = domElement.attribute(AttrThirdPoint, "").toLongLong();
     }
     RefreshGeometry();
 }
@@ -134,12 +136,12 @@ void VToolBisector::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogBisector->getPointName());
-            domElement.setAttribute("typeLine", dialogBisector->getTypeLine());
-            domElement.setAttribute("length", dialogBisector->getFormula());
-            domElement.setAttribute("firstPoint", QString().setNum(dialogBisector->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogBisector->getSecondPointId()));
-            domElement.setAttribute("thirdPoint", QString().setNum(dialogBisector->getThirdPointId()));
+            domElement.setAttribute(AttrName, dialogBisector->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogBisector->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogBisector->getFormula());
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogBisector->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogBisector->getSecondPointId()));
+            domElement.setAttribute(AttrThirdPoint, QString().setNum(dialogBisector->getThirdPointId()));
             emit FullUpdateTree();
         }
     }
@@ -157,19 +159,19 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VToolBisector::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "bisector");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", basePointId);
-    AddAttribute(domElement, "thirdPoint", thirdPointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrFirstPoint, firstPointId);
+    AddAttribute(domElement, AttrSecondPoint, basePointId);
+    AddAttribute(domElement, AttrThirdPoint, thirdPointId);
 
     AddToCalculation(domElement);
 }

@@ -31,6 +31,7 @@ public:
                  VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                    QGraphicsItem * parent = 0 );
     virtual void setDialog();
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);

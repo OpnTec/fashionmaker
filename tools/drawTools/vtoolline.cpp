@@ -21,6 +21,8 @@
 
 #include "vtoolline.h"
 
+const QString VToolLine::TagName = QStringLiteral("line");
+
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      Tool::Sources typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
@@ -91,8 +93,8 @@ void VToolLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("firstPoint", QString().setNum(dialogLine->getFirstPoint()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogLine->getSecondPoint()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -127,10 +129,10 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VToolLine::AddToFile(){
-    QDomElement domElement = doc->createElement("line");
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "firstPoint", firstPoint);
-    AddAttribute(domElement, "secondPoint", secondPoint);
+    QDomElement domElement = doc->createElement(TagName);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrFirstPoint, firstPoint);
+    AddAttribute(domElement, AttrSecondPoint, secondPoint);
 
     AddToCalculation(domElement);
 }
@@ -153,8 +155,8 @@ void VToolLine::RemoveReferens(){
 void VToolLine::RefreshGeometry(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        firstPoint = domElement.attribute("firstPoint", "").toLongLong();
-        secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+        firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     VPointF first = VAbstractTool::data.GetPoint(firstPoint);
     VPointF second = VAbstractTool::data.GetPoint(secondPoint);

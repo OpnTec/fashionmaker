@@ -24,6 +24,16 @@
 #include "modelingTools/vmodelingtool.h"
 #include "modelingTools/modelingtools.h"
 
+const QString VToolDetail::TagName = QStringLiteral("detail");
+const QString VToolDetail::TagNode = QStringLiteral("node");
+const QString VToolDetail::AttrSupplement = QStringLiteral("supplement");
+const QString VToolDetail::AttrClosed = QStringLiteral("closed");
+const QString VToolDetail::AttrWidth = QStringLiteral("width");
+const QString VToolDetail::AttrIdObject = QStringLiteral("idObject");
+const QString VToolDetail::AttrNodeType = QStringLiteral("nodeType");
+const QString VToolDetail::NodeTypeContour = QStringLiteral("Contour");
+const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
+
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, Tool::Sources typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent) :VAbstractTool(doc, data, id),
     QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
@@ -290,10 +300,10 @@ void VToolDetail::FullUpdateFromGui(int result){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
             VDetail det = dialogDetail->getDetails();
-            domElement.setAttribute("name", det.getName());
-            domElement.setAttribute("supplement", QString().setNum(det.getSupplement()));
-            domElement.setAttribute("closed", QString().setNum(det.getClosed()));
-            domElement.setAttribute("width", QString().setNum(det.getWidth()));
+            domElement.setAttribute(AttrName, det.getName());
+            domElement.setAttribute(AttrSupplement, QString().setNum(det.getSupplement()));
+            domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
+            domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
             RemoveAllChild(domElement);
             for(qint32 i = 0; i < det.CountNode(); ++i){
                AddNode(domElement, det[i]);
@@ -306,15 +316,15 @@ void VToolDetail::FullUpdateFromGui(int result){
 
 void VToolDetail::AddToFile(){
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    QDomElement domElement = doc->createElement("detail");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "name", detail.getName());
-    AddAttribute(domElement, "mx", toMM(detail.getMx()));
-    AddAttribute(domElement, "my", toMM(detail.getMy()));
-    AddAttribute(domElement, "supplement", detail.getSupplement());
-    AddAttribute(domElement, "closed", detail.getClosed());
-    AddAttribute(domElement, "width", detail.getWidth());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrName, detail.getName());
+    AddAttribute(domElement, AttrMx, toMM(detail.getMx()));
+    AddAttribute(domElement, AttrMy, toMM(detail.getMy()));
+    AddAttribute(domElement, AttrSupplement, detail.getSupplement());
+    AddAttribute(domElement, AttrClosed, detail.getClosed());
+    AddAttribute(domElement, AttrWidth, detail.getWidth());
 
     for(qint32 i = 0; i < detail.CountNode(); ++i){
        AddNode(domElement, detail[i]);
@@ -334,8 +344,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         //qDebug()<<newPos;
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("mx", QString().setNum(toMM(newPos.x())));
-            domElement.setAttribute("my", QString().setNum(toMM(newPos.y())));
+            domElement.setAttribute(AttrMx, QString().setNum(toMM(newPos.x())));
+            domElement.setAttribute(AttrMy, QString().setNum(toMM(newPos.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }
@@ -398,70 +408,70 @@ void VToolDetail::RemoveReferens(){
 }
 
 void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
-    QDomElement nod = doc->createElement("node");
+    QDomElement nod = doc->createElement(TagNode);
 
-    AddAttribute(nod, "idObject", node.getId());
-    AddAttribute(nod, "mx", toMM(node.getMx()));
-    AddAttribute(nod, "my", toMM(node.getMy()));
+    AddAttribute(nod, AttrIdObject, node.getId());
+    AddAttribute(nod, AttrMx, toMM(node.getMx()));
+    AddAttribute(nod, AttrMy, toMM(node.getMy()));
     if(node.getTypeNode() == NodeDetail::Contour){
-        AddAttribute(nod, "nodeType", "Contour");
+        AddAttribute(nod, AttrNodeType, NodeTypeContour);
     } else {
-        AddAttribute(nod, "nodeType", "Modeling");
+        AddAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch(node.getTypeTool()){
     case(Tool::AlongLineTool):
-        AddAttribute(nod, "type", "AlongLineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("AlongLineTool"));
         break;
     case(Tool::ArcTool):
-        AddAttribute(nod, "type", "ArcTool");
+        AddAttribute(nod, AttrType, QStringLiteral("ArcTool"));
         break;
     case(Tool::BisectorTool):
-        AddAttribute(nod, "type", "BisectorTool");
+        AddAttribute(nod, AttrType, QStringLiteral("BisectorTool"));
         break;
     case(Tool::EndLineTool):
-        AddAttribute(nod, "type", "EndLineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("EndLineTool"));
         break;
     case(Tool::LineIntersectTool):
-        AddAttribute(nod, "type", "LineIntersectTool");
+        AddAttribute(nod, AttrType, QStringLiteral("LineIntersectTool"));
         break;
     case(Tool::LineTool):
-        AddAttribute(nod, "type", "LineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("LineTool"));
         break;
     case(Tool::NodeArc):
-        AddAttribute(nod, "type", "NodeArc");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeArc"));
         break;
     case(Tool::NodePoint):
-        AddAttribute(nod, "type", "NodePoint");
+        AddAttribute(nod, AttrType, QStringLiteral("NodePoint"));
         break;
     case(Tool::NodeSpline):
-        AddAttribute(nod, "type", "NodeSpline");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
         break;
     case(Tool::NodeSplinePath):
-        AddAttribute(nod, "type", "NodeSplinePath");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
         break;
     case(Tool::NormalTool):
-        AddAttribute(nod, "type", "NormalTool");
+        AddAttribute(nod, AttrType, QStringLiteral("NormalTool"));
         break;
     case(Tool::PointOfContact):
-        AddAttribute(nod, "type", "PointOfContact");
+        AddAttribute(nod, AttrType, QStringLiteral("PointOfContact"));
         break;
     case(Tool::ShoulderPointTool):
-        AddAttribute(nod, "type", "ShoulderPointTool");
+        AddAttribute(nod, AttrType, QStringLiteral("ShoulderPointTool"));
         break;
     case(Tool::SplinePathTool):
-        AddAttribute(nod, "type", "SplinePathTool");
+        AddAttribute(nod, AttrType, QStringLiteral("SplinePathTool"));
         break;
     case(Tool::SplineTool):
-        AddAttribute(nod, "type", "SplineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("SplineTool"));
         break;
     case(Tool::Height):
-        AddAttribute(nod, "type", "Height");
+        AddAttribute(nod, AttrType, QStringLiteral("Height"));
         break;
     case(Tool::Triangle):
-        AddAttribute(nod, "type", "Triangle");
+        AddAttribute(nod, AttrType, QStringLiteral("Triangle"));
         break;
     case(Tool::PointOfIntersection):
-        AddAttribute(nod, "type", "PointOfIntersection");
+        AddAttribute(nod, AttrType, QStringLiteral("PointOfIntersection"));
         break;
     default:
         qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

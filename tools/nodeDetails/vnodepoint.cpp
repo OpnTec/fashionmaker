@@ -21,6 +21,9 @@
 
 #include "vnodepoint.h"
 
+const QString VNodePoint::TagName = QStringLiteral("point");
+const QString VNodePoint::ToolType = QStringLiteral("modeling");
+
 VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                        Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent),
@@ -57,18 +60,18 @@ void VNodePoint::FullUpdateFromFile(){
 
 void VNodePoint::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "modeling");
-    AddAttribute(domElement, "idObject", idNode);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrIdObject, idNode);
     if(typeobject == Draw::Calculation){
-        AddAttribute(domElement, "typeObject", "Calculation");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
     } else {
-        AddAttribute(domElement, "typeObject", "Modeling");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
     }
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
     AddToModeling(domElement);
 }
@@ -104,8 +107,8 @@ void VNodePoint::NameChangePosition(const QPointF pos){
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("mx", QString().setNum(toMM(mx)));
-        domElement.setAttribute("my", QString().setNum(toMM(my)));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }

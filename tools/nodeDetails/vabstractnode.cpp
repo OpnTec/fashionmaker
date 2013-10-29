@@ -22,9 +22,14 @@
 #include "vabstractnode.h"
 #include <QDebug>
 
-VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
-                             Draw::Draws typeobject, QObject *parent) :
-    VAbstractTool(doc, data, id, parent), idNode(idNode), typeobject(typeobject){
+const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
+const QString VAbstractNode::AttrTypeObject = QStringLiteral("typeObject");
+const QString VAbstractNode::TypeObjectCalculation = QStringLiteral("Calculation");
+const QString VAbstractNode::TypeObjectModeling = QStringLiteral("Modeling");
+
+VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, Draw::Draws typeobject,
+                             QObject *parent) : VAbstractTool(doc, data, id, parent), idNode(idNode),
+    typeobject(typeobject){
     _referens = 0;
 }
 
@@ -34,7 +39,7 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement){
     if(ok){
         modelingElement.appendChild(domElement);
     } else {
-        qCritical()<<"Can't find tag Modeling"<< Q_FUNC_INFO;
+        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
     }
     emit toolhaveChange();
 }

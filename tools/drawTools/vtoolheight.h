@@ -39,6 +39,7 @@ public:
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
+    static const QString ToolType;
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   FullUpdateFromGui(int result);

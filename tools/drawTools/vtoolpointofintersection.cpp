@@ -1,5 +1,7 @@
 #include "vtoolpointofintersection.h"
 
+const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfIntersection");
+
 VToolPointOfIntersection::VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                    const qint64 &firstPointId, const qint64 &secondPointId,
                                                    Tool::Sources typeCreation, QGraphicsItem *parent)
@@ -61,8 +63,8 @@ void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName
 void VToolPointOfIntersection::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     VToolPoint::RefreshPointGeometry(VDrawTool::data.GetPoint(id));
 }
@@ -71,9 +73,9 @@ void VToolPointOfIntersection::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogPointOfIntersection->getPointName());
-            domElement.setAttribute("firstPoint", QString().setNum(dialogPointOfIntersection->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogPointOfIntersection->getSecondPointId()));
+            domElement.setAttribute(AttrName, dialogPointOfIntersection->getPointName());
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogPointOfIntersection->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogPointOfIntersection->getSecondPointId()));
             emit FullUpdateTree();
         }
     }
@@ -91,16 +93,16 @@ void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *
 
 void VToolPointOfIntersection::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "pointOfIntersection");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrFirstPoint, firstPointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }

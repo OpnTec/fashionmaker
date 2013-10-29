@@ -21,6 +21,9 @@
 
 #include "vnodesplinepath.h"
 
+const QString VNodeSplinePath::TagName = QStringLiteral("spline");
+const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
+
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                          Draw::Draws typeobject, Tool::Sources typeCreation,
                                          QGraphicsItem * parent) :
@@ -57,15 +60,15 @@ void VNodeSplinePath::FullUpdateFromFile(){
 }
 
 void VNodeSplinePath::AddToFile(){
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "modelingPath");
-    AddAttribute(domElement, "idObject", idNode);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrIdObject, idNode);
     if(typeobject == Draw::Calculation){
-        AddAttribute(domElement, "typeObject", "Calculation");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
     } else {
-        AddAttribute(domElement, "typeObject", "Modeling");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
     }
 
     AddToModeling(domElement);

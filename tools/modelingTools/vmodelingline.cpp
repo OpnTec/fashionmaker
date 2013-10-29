@@ -21,6 +21,8 @@
 
 #include "vmodelingline.h"
 
+const QString VModelingLine::TagName = QStringLiteral("line");
+
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
@@ -79,8 +81,8 @@ VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint
 void VModelingLine::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        firstPoint = domElement.attribute("firstPoint", "").toLongLong();
-        secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+        firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     VPointF first = VAbstractTool::data.GetModelingPoint(firstPoint);
     VPointF second = VAbstractTool::data.GetModelingPoint(secondPoint);
@@ -91,8 +93,8 @@ void VModelingLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("firstPoint", QString().setNum(dialogLine->getFirstPoint()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogLine->getSecondPoint()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -104,10 +106,10 @@ void VModelingLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VModelingLine::AddToFile(){
-    QDomElement domElement = doc->createElement("line");
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "firstPoint", firstPoint);
-    AddAttribute(domElement, "secondPoint", secondPoint);
+    QDomElement domElement = doc->createElement(TagName);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrFirstPoint, firstPoint);
+    AddAttribute(domElement, AttrSecondPoint, secondPoint);
 
     AddToModeling(domElement);
 }

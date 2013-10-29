@@ -41,6 +41,7 @@ public:
                           Tool::Sources typeCreation);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
+    static const QString ToolType;
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   FullUpdateFromGui(int result);

@@ -36,6 +36,8 @@ public:
      static VModelingSplinePath* Create(QSharedPointer<DialogSplinePath> &dialog, VDomDocument *doc, VContainer *data);
      static VModelingSplinePath* Create(const qint64 _id, const VSplinePath &path, VDomDocument *doc,
                                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+     static const QString TagName;
+     static const QString ToolType;
 signals:
     void          RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos, const QPointF &controlPoint,
                               const QPointF &splinePoint);

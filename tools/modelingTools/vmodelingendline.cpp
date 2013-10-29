@@ -22,6 +22,8 @@
 #include "vmodelingendline.h"
 #include <container/calculator.h>
 
+const QString VModelingEndLine::ToolType = QStringLiteral("endLine");
+
 VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
                                    const QString &typeLine, const QString &formula, const qreal &angle,
                                    const qint64 &basePointId, Tool::Sources typeCreation,
@@ -91,10 +93,10 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
 void VModelingEndLine::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        basePointId = domElement.attribute("basePoint", "").toLongLong();
-        angle = domElement.attribute("angle", "").toDouble();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
+        angle = domElement.attribute(AttrAngle, "").toDouble();
     }
     RefreshGeometry();
 }
@@ -107,11 +109,11 @@ void VModelingEndLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogEndLine->getPointName());
-            domElement.setAttribute("typeLine", dialogEndLine->getTypeLine());
-            domElement.setAttribute("length", dialogEndLine->getFormula());
-            domElement.setAttribute("angle", QString().setNum(dialogEndLine->getAngle()));
-            domElement.setAttribute("basePoint", QString().setNum(dialogEndLine->getBasePointId()));
+            domElement.setAttribute(AttrName, dialogEndLine->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogEndLine->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogEndLine->getFormula());
+            domElement.setAttribute(AttrAngle, QString().setNum(dialogEndLine->getAngle()));
+            domElement.setAttribute(AttrBasePoint, QString().setNum(dialogEndLine->getBasePointId()));
             emit FullUpdateTree();
         }
     }
@@ -120,18 +122,18 @@ void VModelingEndLine::FullUpdateFromGui(int result){
 
 void VModelingEndLine::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "endLine");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "angle", angle);
-    AddAttribute(domElement, "basePoint", basePointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrAngle, angle);
+    AddAttribute(domElement, AttrBasePoint, basePointId);
 
     AddToModeling(domElement);
 }

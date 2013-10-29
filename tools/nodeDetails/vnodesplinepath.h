@@ -32,6 +32,8 @@ public:
                                  Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
                         const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
 protected:

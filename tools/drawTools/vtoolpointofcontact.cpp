@@ -22,6 +22,8 @@
 #include "vtoolpointofcontact.h"
 #include <container/calculator.h>
 
+const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
+
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,
                                          const qint64 &firstPointId, const qint64 &secondPointId,
@@ -128,10 +130,10 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
 void VToolPointOfContact::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        radius = domElement.attribute("radius", "");
-        center = domElement.attribute("center", "").toLongLong();
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+        radius = domElement.attribute(AttrRadius, "");
+        center = domElement.attribute(AttrCenter, "").toLongLong();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
@@ -140,11 +142,11 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogPointOfContact->getPointName());
-            domElement.setAttribute("radius", dialogPointOfContact->getRadius());
-            domElement.setAttribute("center", QString().setNum(dialogPointOfContact->getCenter()));
-            domElement.setAttribute("firstPoint", QString().setNum(dialogPointOfContact->getFirstPoint()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogPointOfContact->getSecondPoint()));
+            domElement.setAttribute(AttrName, dialogPointOfContact->getPointName());
+            domElement.setAttribute(AttrRadius, dialogPointOfContact->getRadius());
+            domElement.setAttribute(AttrCenter, QString().setNum(dialogPointOfContact->getCenter()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogPointOfContact->getFirstPoint()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogPointOfContact->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -162,18 +164,18 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void VToolPointOfContact::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "pointOfContact");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "radius", radius);
-    AddAttribute(domElement, "center", center);
-    AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrRadius, radius);
+    AddAttribute(domElement, AttrCenter, center);
+    AddAttribute(domElement, AttrFirstPoint, firstPointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }

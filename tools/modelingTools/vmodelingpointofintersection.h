@@ -18,6 +18,7 @@ public:
                                                 const qreal &mx, const qreal &my, VDomDocument *doc,
                                                 VContainer *data, const Document::Documents &parse,
                                                 Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);

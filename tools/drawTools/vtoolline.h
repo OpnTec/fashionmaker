@@ -37,6 +37,7 @@ public:
     static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ChangedActivDraw(const QString newName);

@@ -22,6 +22,8 @@
 #include "vmodelingpoint.h"
 #include "container/vpointf.h"
 
+const QString VModelingPoint::TagName = QStringLiteral("point");
+
 VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id,
                        QGraphicsItem *parent):VModelingTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0), lineName(0){
@@ -49,8 +51,8 @@ void VModelingPoint::NameChangePosition(const QPointF pos){
 void VModelingPoint::UpdateNamePosition(qreal mx, qreal my){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("mx", QString().setNum(toMM(mx)));
-        domElement.setAttribute("my", QString().setNum(toMM(my)));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }

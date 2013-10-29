@@ -21,6 +21,9 @@
 
 #include "vnodearc.h"
 
+const QString VNodeArc::TagName = QStringLiteral("arc");
+const QString VNodeArc::ToolType = QStringLiteral("modeling");
+
 VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
                            Tool::Sources typeCreation, QGraphicsItem * parent) :
     VAbstractNode(doc, data, id, idArc, typeobject), QGraphicsPathItem(parent){
@@ -51,15 +54,15 @@ void VNodeArc::FullUpdateFromFile(){
 }
 
 void VNodeArc::AddToFile(){
-    QDomElement domElement = doc->createElement("arc");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "modeling");
-    AddAttribute(domElement, "idObject", idNode);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrIdObject, idNode);
     if(typeobject == Draw::Calculation){
-        AddAttribute(domElement, "typeObject", "Calculation");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
     } else {
-        AddAttribute(domElement, "typeObject", "Modeling");
+        AddAttribute(domElement, AttrTypeObject, ToolType );
     }
 
     AddToModeling(domElement);

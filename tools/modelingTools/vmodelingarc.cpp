@@ -22,6 +22,9 @@
 #include "vmodelingarc.h"
 #include "container/calculator.h"
 
+const QString VModelingArc::TagName = QStringLiteral("arc");
+const QString VModelingArc::ToolType = QStringLiteral("simple");
+
 VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                            QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogArc(QSharedPointer<DialogArc>()){
@@ -106,10 +109,10 @@ void VModelingArc::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("center", QString().setNum(dialogArc->GetCenter()));
-            domElement.setAttribute("radius", dialogArc->GetRadius());
-            domElement.setAttribute("angle1", dialogArc->GetF1());
-            domElement.setAttribute("angle2", dialogArc->GetF2());
+            domElement.setAttribute(AttrCenter, QString().setNum(dialogArc->GetCenter()));
+            domElement.setAttribute(AttrRadius, dialogArc->GetRadius());
+            domElement.setAttribute(AttrAngle1, dialogArc->GetF1());
+            domElement.setAttribute(AttrAngle2, dialogArc->GetF2());
             emit FullUpdateTree();
         }
     }
@@ -122,14 +125,14 @@ void VModelingArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VModelingArc::AddToFile(){
     VArc arc = VAbstractTool::data.GetModelingArc(id);
-    QDomElement domElement = doc->createElement("arc");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "simple");
-    AddAttribute(domElement, "center", arc.GetCenter());
-    AddAttribute(domElement, "radius", arc.GetFormulaRadius());
-    AddAttribute(domElement, "angle1", arc.GetFormulaF1());
-    AddAttribute(domElement, "angle2", arc.GetFormulaF2());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrCenter, arc.GetCenter());
+    AddAttribute(domElement, AttrRadius, arc.GetFormulaRadius());
+    AddAttribute(domElement, AttrAngle1, arc.GetFormulaF1());
+    AddAttribute(domElement, AttrAngle2, arc.GetFormulaF2());
 
     AddToModeling(domElement);
 }

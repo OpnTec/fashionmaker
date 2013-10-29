@@ -51,6 +51,15 @@ public:
             AddNode(domElement, node);
         }
     }
+    static const QString           TagName;
+    static const QString           TagNode;
+    static const QString           AttrSupplement;
+    static const QString           AttrClosed;
+    static const QString           AttrWidth;
+    static const QString           AttrIdObject;
+    static const QString           AttrNodeType;
+    static const QString           NodeTypeContour;
+    static const QString           NodeTypeModeling;
 public slots:
     virtual void                   FullUpdateFromFile ();
     virtual void                   FullUpdateFromGui(int result);

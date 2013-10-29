@@ -32,7 +32,7 @@ VModelingLinePoint::VModelingLinePoint(VDomDocument *doc, VContainer *data, cons
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(Qt::black, widthHairLine));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
@@ -44,7 +44,7 @@ void VModelingLinePoint::RefreshGeometry(){
     QPointF point = VModelingTool::data.GetModelingPoint(id).toQPointF();
     QPointF basePoint = VModelingTool::data.GetModelingPoint(basePointId).toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);

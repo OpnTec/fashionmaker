@@ -38,6 +38,7 @@ public:
                         const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);

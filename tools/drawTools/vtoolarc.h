@@ -38,6 +38,8 @@ public:
     static void  Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                         const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);

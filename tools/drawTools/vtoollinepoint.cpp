@@ -32,7 +32,7 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
@@ -55,7 +55,7 @@ void VToolLinePoint::RefreshGeometry(){
     QPointF point = VDrawTool::data.GetPoint(id).toQPointF();
     QPointF basePoint = VDrawTool::data.GetPoint(basePointId).toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);

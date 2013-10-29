@@ -21,6 +21,8 @@
 
 #include "vtoolsinglepoint.h"
 
+const QString VToolSinglePoint::ToolType = QStringLiteral("single");
+
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
                                     QGraphicsItem * parent ):VToolPoint(doc, data, id, parent),
     dialogSinglePoint(QSharedPointer<DialogSinglePoint>()){
@@ -42,15 +44,15 @@ void VToolSinglePoint::setDialog(){
 
 void VToolSinglePoint::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "single");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "x", toMM(point.x()));
-    AddAttribute(domElement, "y", toMM(point.y()));
-    AddAttribute(domElement, "mx", toMM(point.mx()));
-    AddAttribute(domElement, "my", toMM(point.my()));
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrX, toMM(point.x()));
+    AddAttribute(domElement, AttrY, toMM(point.y()));
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
     AddToCalculation(domElement);
 }
@@ -72,8 +74,8 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         QPointF newPos = value.toPointF();
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("x", QString().setNum(toMM(newPos.x())));
-            domElement.setAttribute("y", QString().setNum(toMM(newPos.y())));
+            domElement.setAttribute(AttrX, QString().setNum(toMM(newPos.x())));
+            domElement.setAttribute(AttrY, QString().setNum(toMM(newPos.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }
@@ -101,9 +103,9 @@ void VToolSinglePoint::FullUpdateFromGui(int result){
         QString name = dialogSinglePoint->getName();
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", name);
-            domElement.setAttribute("x", QString().setNum(toMM(p.x())));
-            domElement.setAttribute("y", QString().setNum(toMM(p.y())));
+            domElement.setAttribute(AttrName, name);
+            domElement.setAttribute(AttrX, QString().setNum(toMM(p.x())));
+            domElement.setAttribute(AttrY, QString().setNum(toMM(p.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }
