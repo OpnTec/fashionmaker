@@ -235,21 +235,26 @@ void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool
     det->AddTool(tool, id, typeTool);
 }
 
+template <typename DrawTool, typename ModelingTool, typename Dialog>
+void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result){
+    if(result == QDialog::Accepted){
+        if(mode == Draw::Calculation){
+            DrawTool::Create(dialog, currentScene, doc, data);
+        } else {
+            ModelingTool *endLine = ModelingTool::Create(dialog, doc, data);
+            AddToolToDetail(endLine, endLine->getId(), tool, dialog->getIdDetail());
+        }
+    }
+    ArrowTool();
+}
+
 void MainWindow::ToolEndLine(bool checked){
     SetToolButton(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                   dialogEndLine, &MainWindow::ClosedDialogEndLine);
 }
 
 void MainWindow::ClosedDialogEndLine(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolEndLine::Create(dialogEndLine, currentScene, doc, data);
-        } else {
-            VModelingEndLine *endLine = VModelingEndLine::Create(dialogEndLine, doc, data);
-            AddToolToDetail(endLine, endLine->getId(), Tool::EndLineTool, dialogEndLine->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolEndLine, VModelingEndLine>(dialogEndLine, result);
 }
 
 void MainWindow::ToolLine(bool checked){
@@ -258,15 +263,7 @@ void MainWindow::ToolLine(bool checked){
 }
 
 void MainWindow::ClosedDialogLine(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolLine::Create(dialogLine, currentScene, doc, data);
-        } else {
-            VModelingLine *line = VModelingLine::Create(dialogLine, doc, data);
-            AddToolToDetail(line, line->getId(), Tool::LineTool, dialogLine->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolLine, VModelingLine>(dialogLine, result);
 }
 
 void MainWindow::ToolAlongLine(bool checked){
@@ -275,15 +272,7 @@ void MainWindow::ToolAlongLine(bool checked){
 }
 
 void MainWindow::ClosedDialogAlongLine(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolAlongLine::Create(dialogAlongLine, currentScene, doc, data);
-        } else{
-            VModelingAlongLine *point = VModelingAlongLine::Create(dialogAlongLine, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::AlongLineTool, dialogAlongLine->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolAlongLine, VModelingAlongLine>(dialogAlongLine, result);
 }
 
 void MainWindow::ToolShoulderPoint(bool checked){
@@ -293,16 +282,7 @@ void MainWindow::ToolShoulderPoint(bool checked){
 }
 
 void MainWindow::ClosedDialogShoulderPoint(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolShoulderPoint::Create(dialogShoulderPoint, currentScene, doc, data);
-        } else {
-            VModelingShoulderPoint *point = VModelingShoulderPoint::Create(dialogShoulderPoint, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::ShoulderPointTool,
-                            dialogShoulderPoint->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolShoulderPoint, VModelingShoulderPoint>(dialogShoulderPoint, result);
 }
 
 void MainWindow::ToolNormal(bool checked){
@@ -311,15 +291,7 @@ void MainWindow::ToolNormal(bool checked){
 }
 
 void MainWindow::ClosedDialogNormal(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolNormal::Create(dialogNormal, currentScene, doc, data);
-        } else {
-            VModelingNormal *point = VModelingNormal::Create(dialogNormal, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::NormalTool, dialogNormal->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolNormal, VModelingNormal>(dialogNormal, result);
 }
 
 void MainWindow::ToolBisector(bool checked){
@@ -328,15 +300,7 @@ void MainWindow::ToolBisector(bool checked){
 }
 
 void MainWindow::ClosedDialogBisector(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolBisector::Create(dialogBisector, currentScene, doc, data);
-        } else {
-            VModelingBisector *point = VModelingBisector::Create(dialogBisector, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::BisectorTool, dialogBisector->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolBisector, VModelingBisector>(dialogBisector, result);
 }
 
 void MainWindow::ToolLineIntersect(bool checked){
@@ -346,17 +310,7 @@ void MainWindow::ToolLineIntersect(bool checked){
 }
 
 void MainWindow::ClosedDialogLineIntersect(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolLineIntersect::Create(dialogLineIntersect, currentScene, doc, data);
-        } else {
-            VModelingLineIntersect *point = VModelingLineIntersect::Create(dialogLineIntersect, doc,
-                                                                           data);
-            AddToolToDetail(point, point->getId(), Tool::LineIntersectTool,
-                            dialogLineIntersect->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolLineIntersect, VModelingLineIntersect>(dialogLineIntersect, result);
 }
 
 void MainWindow::ToolSpline(bool checked){
@@ -365,15 +319,7 @@ void MainWindow::ToolSpline(bool checked){
 }
 
 void MainWindow::ClosedDialogSpline(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolSpline::Create(dialogSpline, currentScene, doc, data);
-        } else {
-            VModelingSpline *spl = VModelingSpline::Create(dialogSpline, doc, data);
-            AddToolToDetail(spl, spl->getId(), Tool::SplineTool, dialogSpline->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolSpline, VModelingSpline>(dialogSpline, result);
 }
 
 void MainWindow::ToolArc(bool checked){
@@ -382,15 +328,7 @@ void MainWindow::ToolArc(bool checked){
 }
 
 void MainWindow::ClosedDialogArc(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolArc::Create(dialogArc, currentScene, doc, data);
-        } else {
-            VModelingArc *arc = VModelingArc::Create(dialogArc, doc, data);
-            AddToolToDetail(arc, arc->getId(), Tool::ArcTool, dialogArc->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolArc, VModelingArc>(dialogArc, result);
 }
 
 void MainWindow::ToolSplinePath(bool checked){
@@ -400,15 +338,7 @@ void MainWindow::ToolSplinePath(bool checked){
 }
 
 void MainWindow::ClosedDialogSplinePath(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolSplinePath::Create(dialogSplinePath, currentScene, doc, data);
-        } else {
-            VModelingSplinePath *spl = VModelingSplinePath::Create(dialogSplinePath, doc, data);
-            AddToolToDetail(spl, spl->getId(), Tool::SplinePathTool, dialogSplinePath->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolSplinePath, VModelingSplinePath>(dialogSplinePath, result);
 }
 
 void MainWindow::ToolPointOfContact(bool checked){
@@ -418,17 +348,7 @@ void MainWindow::ToolPointOfContact(bool checked){
 }
 
 void MainWindow::ClosedDialogPointOfContact(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolPointOfContact::Create(dialogPointOfContact, currentScene, doc, data);
-        } else {
-            VModelingPointOfContact *point = VModelingPointOfContact::Create(dialogPointOfContact, doc,
-                                                                             data);
-            AddToolToDetail(point, point->getId(), Tool::PointOfContact,
-                            dialogPointOfContact->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolPointOfContact, VModelingPointOfContact>(dialogPointOfContact, result);
 }
 
 void MainWindow::ToolDetail(bool checked){
@@ -464,15 +384,7 @@ void MainWindow::ToolHeight(bool checked){
 }
 
 void MainWindow::ClosedDialogHeight(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolHeight::Create(dialogHeight, currentScene, doc, data);
-        } else {
-            VModelingHeight *point = VModelingHeight::Create(dialogHeight, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::Height, dialogHeight->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolHeight, VModelingHeight>(dialogHeight, result);
 }
 
 void MainWindow::ToolTriangle(bool checked){
@@ -481,15 +393,7 @@ void MainWindow::ToolTriangle(bool checked){
 }
 
 void MainWindow::ClosedDialogTriangle(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolTriangle::Create(dialogTriangle, currentScene, doc, data);
-        } else {
-            VModelingTriangle *point = VModelingTriangle::Create(dialogTriangle, doc, data);
-            AddToolToDetail(point, point->getId(), Tool::Triangle, dialogTriangle->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolTriangle, VModelingTriangle>(dialogTriangle, result);
 }
 
 void MainWindow::ToolPointOfIntersection(bool checked){
@@ -499,17 +403,7 @@ void MainWindow::ToolPointOfIntersection(bool checked){
 }
 
 void MainWindow::ClosedDialogPointOfIntersection(int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
-            VToolPointOfIntersection::Create(dialogPointOfIntersection, currentScene, doc, data);
-        } else {
-            VModelingPointOfIntersection *point = VModelingPointOfIntersection::Create(dialogPointOfIntersection,
-                                                                                       doc, data);
-            AddToolToDetail(point, point->getId(), Tool::PointOfIntersection,
-                            dialogPointOfIntersection->getIdDetail());
-        }
-    }
-    ArrowTool();
+    ClosedDialog<VToolPointOfIntersection, VModelingPointOfIntersection>(dialogPointOfIntersection, result);
 }
 
 void MainWindow::About(){

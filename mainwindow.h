@@ -159,6 +159,8 @@ private:
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
+    template <typename DrawTool, typename ModelingTool, typename Dialog>
+    void               ClosedDialog(QSharedPointer<Dialog> &dialog, int result);
     bool               SafeSaveing(const QString &fileName)const;
     void               AutoSavePattern();
 };
