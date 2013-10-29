@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,7 +28,7 @@
 #define PaperSize 50000
 #define toPixel(mm) ((mm / 25.4) * PrintDPI)
 #define toMM(pix) ((pix / PrintDPI) * 25.4)
-#define widthMainLine toPixel(0.8)
+#define widthMainLine toPixel(1.2)
 #define widthHairLine widthMainLine/3
 
 namespace Scene{
@@ -55,7 +55,10 @@ enum Tool {ArrowTool,
            NodePoint,
            NodeArc,
            NodeSpline,
-           NodeSplinePath
+           NodeSplinePath,
+           Height,
+           Triangle,
+           PointOfIntersection
 };
 Q_DECLARE_FLAGS(Tools, Tool)
 

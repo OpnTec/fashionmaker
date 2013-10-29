@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,20 +25,18 @@
 #include "../vabstracttool.h"
 #include <QMenu>
 
-class VModelingTool: public VAbstractTool
-{
+class VModelingTool: public VAbstractTool{
     Q_OBJECT
 public:
-    VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
-    virtual      ~VModelingTool();
-    virtual void setDialog();
-    void         ignoreContextMenu(bool enable);
+                 VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+    virtual      ~VModelingTool(){}
+    virtual void setDialog(){}
+    inline void  ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
     virtual void FullUpdateFromGui(int result)=0;
-signals:
-    void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
+    bool         ignoreFullUpdate;
     void         AddToModeling(const QDomElement &domElement);
     virtual void decrementReferens();
     template <typename Dialog, typename Tool>
@@ -46,39 +44,49 @@ protected:
                      bool showRemove = true){
         if(!ignoreContextMenuEvent){
             QMenu menu;
-            QAction *actionOption = menu.addAction("Властивості");
-            QAction *actionRemove;
+            QAction *actionOption = menu.addAction(tr("Option"));
+            QAction *actionRemove = 0;
             if(showRemove){
-               actionRemove = menu.addAction("Видалити");
+               actionRemove = menu.addAction(tr("Delete"));
+               if(_referens > 1){
+                   actionRemove->setEnabled(false);
+               } else {
+                   actionRemove->setEnabled(true);
+               }
             }
             QAction *selectedAction = menu.exec(event->screenPos());
             if(selectedAction == actionOption){
-               dialog = QSharedPointer<Dialog>(new Dialog(getData()));
+                dialog = QSharedPointer<Dialog>(new Dialog(getData()));
 
-               connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
-                       dialog.data(), &Dialog::ChoosedObject);
-               connect(dialog.data(), &Dialog::DialogClosed, tool,
-                       &Tool::FullUpdateFromGui);
-               connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
+                        &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
+                connect(dialog.data(), &Dialog::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                if(!ignoreFullUpdate){
+                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                }
 
                tool->setDialog();
 
                dialog->show();
             }
-            if(selectedAction == actionRemove){
-               //remove form xml file
-               QDomElement domElement = doc->elementById(QString().setNum(id));
-               if(domElement.isElement()){
-                   QDomElement element;
-                   bool ok = doc->GetActivCalculationElement(element);
-                   if(ok){
-                       element.removeChild(domElement);
-                       //update xml file
-                       emit FullUpdateTree();
-                       //remove form scene
-                       emit RemoveTool(tool);
-                   }
-               }
+            if(showRemove){
+                if(selectedAction == actionRemove){
+                    //deincrement referens
+                    RemoveReferens();
+                    //remove form xml file
+                    QDomElement domElement = doc->elementById(QString().setNum(id));
+                    if(domElement.isElement()){
+                        QDomElement element;
+                        bool ok = doc->GetActivCalculationElement(element);
+                        if(ok){
+                            element.removeChild(domElement);
+                            //update xml file
+                            emit FullUpdateTree();
+                            //remove form scene
+                            emit RemoveTool(tool);
+                        }
+                    }
+                }
             }
         }
     }

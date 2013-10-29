@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,14 +25,15 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeArc :public VAbstractNode, public QGraphicsPathItem
-{
+class VNodeArc :public VAbstractNode, public QGraphicsPathItem{
     Q_OBJECT
 public:
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
                           Tool::Sources typeCreation, QGraphicsItem * parent = 0);
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
                         Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
+    static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
 protected:

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,6 +20,9 @@
  ****************************************************************************/
 
 #include "vnodesplinepath.h"
+
+const QString VNodeSplinePath::TagName = QStringLiteral("spline");
+const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                          Draw::Draws typeobject, Tool::Sources typeCreation,
@@ -40,7 +43,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
                              Tool::Sources typeCreation){
     if(parse == Document::FullParse){
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
-        Q_CHECK_PTR(splPath);
+        Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
         VSplinePath path = data->GetModelingSplinePath(id);
         const QVector<VSplinePoint> *points = path.GetPoint();
@@ -57,15 +60,15 @@ void VNodeSplinePath::FullUpdateFromFile(){
 }
 
 void VNodeSplinePath::AddToFile(){
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "modelingPath");
-    AddAttribute(domElement, "idObject", idNode);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrIdObject, idNode);
     if(typeobject == Draw::Calculation){
-        AddAttribute(domElement, "typeObject", "Calculation");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
     } else {
-        AddAttribute(domElement, "typeObject", "Modeling");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
     }
 
     AddToModeling(domElement);

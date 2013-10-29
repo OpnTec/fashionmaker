@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,23 +20,16 @@
  ****************************************************************************/
 
 #include "vexceptionemptyparameter.h"
-#include <QDebug>
 
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
                                                    const QDomElement &domElement): VException(what),
     name(name), tagText(QString()), tagName(QString()), lineNumber(-1){
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(!name.isEmpty(), Q_FUNC_INFO, "Parameter name is empty");
-    if(domElement.isText()){
-        QDomText text = domElement.toText();
-        tagText = text.data();
-    }
+    QTextStream stream(&tagText);
+    domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
-}
-
-VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e):VException(e),
-    name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){
 }
 
 QString VExceptionEmptyParameter::ErrorMessage() const{

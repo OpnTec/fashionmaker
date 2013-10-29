@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,21 +20,23 @@
  ****************************************************************************/
 
 #include "vtoolspline.h"
-#include <QDebug>
 #include "geometry/vspline.h"
 
+const QString VToolSpline::TagName = QStringLiteral("spline");
+const QString VToolSpline::ToolType = QStringLiteral("simple");
 
 VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id,
                          Tool::Sources typeCreation,
                          QGraphicsItem *parent):VDrawTool(doc, data, id), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>()){
+    ignoreFullUpdate = true;
 
     VSpline spl = data->GetSpline(id);
     QPainterPath path;
     path.addPath(spl.GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, widthHairLine));
+    this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
@@ -94,19 +96,21 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     qint64 id = _id;
     if(typeCreation == Tool::FromGui){
         id = data->AddSpline(spline);
+        data->AddLengthSpline(data->GetNameSpline(p1, p4), toMM(spline.GetLength()));
     } else {
         data->UpdateSpline(id, spline);
+        data->AddLengthSpline(data->GetNameSpline(p1, p4), toMM(spline.GetLength()));
         if(parse != Document::FullParse){
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthSpline(data->GetNameSpline(p1, p4), spline.GetLength());
     VDrawTool::AddRecord(id, Tool::SplineTool, doc);
     if(parse == Document::FullParse){
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
         doc->IncrementReferens(p4);
@@ -138,13 +142,13 @@ void VToolSpline::FullUpdateFromGui(int result){
                        controlPoints[1]->pos(), dialogSpline->getP4(), dialogSpline->getKCurve());
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("point1", QString().setNum(spl.GetP1()));
-            domElement.setAttribute("point4", QString().setNum(spl.GetP4()));
-            domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
-            domElement.setAttribute("angle2", QString().setNum(spl.GetAngle2()));
-            domElement.setAttribute("kAsm1", QString().setNum(spl.GetKasm1()));
-            domElement.setAttribute("kAsm2", QString().setNum(spl.GetKasm2()));
-            domElement.setAttribute("kCurve", QString().setNum(spl.GetKcurve()));
+            domElement.setAttribute(AttrPoint1, QString().setNum(spl.GetP1()));
+            domElement.setAttribute(AttrPoint4, QString().setNum(spl.GetP4()));
+            domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
+            domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
+            domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
+            domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
+            domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
             emit FullUpdateTree();
         }
     }
@@ -162,11 +166,11 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePo
     }
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("angle1", QString().setNum(spl.GetAngle1()));
-        domElement.setAttribute("angle2", QString().setNum(spl.GetAngle2()));
-        domElement.setAttribute("kAsm1", QString().setNum(spl.GetKasm1()));
-        domElement.setAttribute("kAsm2", QString().setNum(spl.GetKasm2()));
-        domElement.setAttribute("kCurve", QString().setNum(spl.GetKcurve()));
+        domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
+        domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
+        domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
         emit FullUpdateTree();
     }
 }
@@ -177,17 +181,17 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VToolSpline::AddToFile(){
     VSpline spl = VAbstractTool::data.GetSpline(id);
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "simple");
-    AddAttribute(domElement, "point1", spl.GetP1());
-    AddAttribute(domElement, "point4", spl.GetP4());
-    AddAttribute(domElement, "angle1", spl.GetAngle1());
-    AddAttribute(domElement, "angle2", spl.GetAngle2());
-    AddAttribute(domElement, "kAsm1", spl.GetKasm1());
-    AddAttribute(domElement, "kAsm2", spl.GetKasm2());
-    AddAttribute(domElement, "kCurve", spl.GetKcurve());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrPoint1, spl.GetP1());
+    AddAttribute(domElement, AttrPoint4, spl.GetP4());
+    AddAttribute(domElement, AttrAngle1, spl.GetAngle1());
+    AddAttribute(domElement, AttrAngle2, spl.GetAngle2());
+    AddAttribute(domElement, AttrKAsm1, spl.GetKasm1());
+    AddAttribute(domElement, AttrKAsm2, spl.GetKasm2());
+    AddAttribute(domElement, AttrKCurve, spl.GetKcurve());
 
     AddToCalculation(domElement);
 }
@@ -201,12 +205,12 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine));
+    this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine));
+    this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
 void VToolSpline::RemoveReferens(){
@@ -216,6 +220,7 @@ void VToolSpline::RemoveReferens(){
 }
 
 void VToolSpline::RefreshGeometry(){
+    this->setPen(QPen(currentColor, widthHairLine/factor));
     VSpline spl = VAbstractTool::data.GetSpline(id);
     QPainterPath path;
     path.addPath(spl.GetPath());
@@ -242,29 +247,26 @@ void VToolSpline::RefreshGeometry(){
 
 
 void VToolSpline::ChangedActivDraw(const QString newName){
+    bool selectable = false;
     if(nameActivDraw == newName){
-        this->setPen(QPen(Qt::black, widthHairLine));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        this->setAcceptHoverEvents(true);
-        emit setEnabledPoint(true);
-        VDrawTool::ChangedActivDraw(newName);
+        selectable = true;
+        currentColor = Qt::black;
     } else {
-        this->setPen(QPen(Qt::gray, widthHairLine));
-        this->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        this->setAcceptHoverEvents (false);
-        emit setEnabledPoint(false);
-        VDrawTool::ChangedActivDraw(newName);
+        selectable = false;
+        currentColor = Qt::gray;
     }
+    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
+    this->setAcceptHoverEvents (selectable);
+    emit setEnabledPoint(selectable);
+    VDrawTool::ChangedActivDraw(newName);
 }
 
 void VToolSpline::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
-    if(id == this->id){
-        if(enable == false){
-            this->setPen(QPen(baseColor, widthHairLine));
-            currentColor = baseColor;
-        } else {
-            this->setPen(QPen(color, widthHairLine));
-            currentColor = color;
-        }
-    }
+    ShowItem(this, id, color, enable);
+}
+
+void VToolSpline::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }

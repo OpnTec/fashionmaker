@@ -27,7 +27,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabStandart">
       <attribute name="title">
@@ -149,8 +149,14 @@
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
           <number>45</number>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>false</bool>
          </attribute>
          <column>
           <property name="text">
@@ -338,6 +344,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>tableWidgetStandart</tabstop>
+  <tabstop>tableWidgetIncrement</tabstop>
+  <tabstop>toolButtonAdd</tabstop>
+  <tabstop>toolButtonRemove</tabstop>
+  <tabstop>tableWidgetLines</tabstop>
+  <tabstop>tableWidgetSplines</tabstop>
+  <tabstop>tableWidgetArcs</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

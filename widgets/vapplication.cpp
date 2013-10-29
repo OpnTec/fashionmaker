@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,17 +20,11 @@
  ****************************************************************************/
 
 #include "vapplication.h"
-#include <QtGui>
-#include <QMessageBox>
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongparameterid.h"
-
-VApplication::VApplication(int & argc, char ** argv) :
-    QApplication(argc, argv){
-}
 
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event){
@@ -94,6 +88,16 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.setIcon(QMessageBox::Critical);
         msgBox.exec();
         abort();
+    }
+    catch(const VException &e){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Something wrong!!"));
+        msgBox.setInformativeText(e.ErrorMessage());
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
     }
     catch(std::exception& e) {
       qCritical() << "Exception thrown:" << e.what();

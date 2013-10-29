@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,23 +25,24 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeSpline:public VAbstractNode, public QGraphicsPathItem
-{
+class VNodeSpline:public VAbstractNode, public QGraphicsPathItem{
     Q_OBJECT
 public:
-    VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
-                    Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                   Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+                  VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                              Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                               const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
+    static const QString ToolType;
 public slots:
-    virtual void                   FullUpdateFromFile ();
+    virtual void FullUpdateFromFile ();
 protected:
-    virtual void                   AddToFile ();
-    virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void AddToFile ();
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
-    void                           RefreshGeometry ();
+    void         RefreshGeometry ();
 };
 
 #endif // VNODESPLINE_H

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,22 +24,28 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
-#include "geometry/vdetail.h"
 
 class DialogDetail : public DialogTool{
     Q_OBJECT  
 public:
-    explicit DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
-    VDetail getDetails() const;
-    void setDetails(const VDetail &value);
-
+                     DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
+    inline VDetail   getDetails() const {return details;}
+    void             setDetails(const VDetail &value);
 public slots:
-    virtual void      ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void      DialogAccepted();
+    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     DialogAccepted();
+    void             BiasXChanged(qreal d);
+    void             BiasYChanged(qreal d);
+    void             ClickedSeams(bool checked);
+    void             ClickedClosed(bool checked);
+    void             ObjectChanged(int row);
 private:
     Ui::DialogDetail ui;
-    VDetail details;
-    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode);
+    VDetail          details;
+    bool             supplement;
+    bool             closed;
+    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+                             qreal my = 0);
 };
 
 #endif // DIALOGDETAIL_H

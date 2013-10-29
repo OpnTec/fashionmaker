@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,11 +20,6 @@
  ****************************************************************************/
 
 #include "vtablegraphicsview.h"
-#include <QDebug>
-#include <QGraphicsItem>
-#include <QGuiApplication>
-#include <QKeyEvent>
-#include <QScrollBar>
 
 VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent) :
     QGraphicsView(pScene, parent){
@@ -35,16 +30,12 @@ VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent) 
 void VTableGraphicsView::selectionChanged(){
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
     if( listSelectedItems.isEmpty() == true ){
-        qDebug() << "деталь не знайдено";
+        qDebug() << tr("detail don't find");
         emit itemChect(true);
     } else {
-        qDebug() << "деталь знайдено";
+        qDebug() << tr("detail find");
         emit itemChect(false);
     }
-}
-
-void VTableGraphicsView::rotateItems(){
-    rotateIt();
 }
 
 void VTableGraphicsView::MirrorItem(){
@@ -80,14 +71,6 @@ void VTableGraphicsView::MirrorItem(){
             list.at(i)->moveBy(dx, dy);
         }
     }
-}
-
-void VTableGraphicsView::ZoomIn(){
-    scale(1.1,1.1);
-}
-
-void VTableGraphicsView::ZoomOut(){
-    scale(1/1.1,1/1.1);
 }
 
 void VTableGraphicsView::wheelEvent(QWheelEvent *event){

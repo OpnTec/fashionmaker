@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -67,6 +67,7 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP1->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select last point of curve"));
                 return;
             }
         }
@@ -75,6 +76,7 @@ void DialogSpline::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP4->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
                 index = ui->comboBoxP1->currentIndex();
                 qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
                 QPointF p1;
@@ -107,17 +109,9 @@ void DialogSpline::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qreal DialogSpline::getKCurve() const{
-    return kCurve;
-}
-
 void DialogSpline::setKCurve(const qreal &value){
     kCurve = value;
     ui->doubleSpinBoxKcurve->setValue(value);
-}
-
-qreal DialogSpline::getKAsm2() const{
-    return kAsm2;
 }
 
 void DialogSpline::setKAsm2(const qreal &value){
@@ -125,17 +119,9 @@ void DialogSpline::setKAsm2(const qreal &value){
     ui->doubleSpinBoxKasm2->setValue(value);
 }
 
-qreal DialogSpline::getKAsm1() const{
-    return kAsm1;
-}
-
 void DialogSpline::setKAsm1(const qreal &value){
     kAsm1 = value;
     ui->doubleSpinBoxKasm1->setValue(value);
-}
-
-qreal DialogSpline::getAngle2() const{
-    return angle2;
 }
 
 void DialogSpline::setAngle2(const qreal &value){
@@ -143,26 +129,14 @@ void DialogSpline::setAngle2(const qreal &value){
     ui->spinBoxAngle2->setValue(static_cast<qint32>(value));
 }
 
-qreal DialogSpline::getAngle1() const{
-    return angle1;
-}
-
 void DialogSpline::setAngle1(const qreal &value){
     angle1 = value;
     ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
 }
 
-qint64 DialogSpline::getP4() const{
-    return p4;
-}
-
 void DialogSpline::setP4(const qint64 &value){
     p4 = value;
     ChangeCurrentData(ui->comboBoxP4, value);
-}
-
-qint64 DialogSpline::getP1() const{
-    return p1;
 }
 
 void DialogSpline::setP1(const qint64 &value){

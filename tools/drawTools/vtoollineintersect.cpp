@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,13 +20,16 @@
  ****************************************************************************/
 
 #include "vtoollineintersect.h"
-#include <QMenu>
+
+const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
 VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, Tool::Sources typeCreation, QGraphicsItem *parent):
+                                       const qint64 &p2Line2, Tool::Sources typeCreation,
+                                       QGraphicsItem *parent):
     VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>()){
+    ignoreFullUpdate = true;
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
@@ -57,8 +60,9 @@ void VToolLineIntersect::Create(QSharedPointer<DialogLineIntersect> &dialog, VMa
 
 void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
                                 const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                                VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
+                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                                Tool::Sources typeCreation){
     VPointF p1Line1 = data->GetPoint(p1Line1Id);
     VPointF p2Line1 = data->GetPoint(p2Line1Id);
     VPointF p1Line2 = data->GetPoint(p1Line2Id);
@@ -72,16 +76,20 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line1Id, id);
+            data->AddLine(id, p2Line1Id);
+            data->AddLine(p1Line2Id, id);
+            data->AddLine(id, p2Line2Id);
         } else {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(p1Line1Id, id);
+            data->AddLine(id, p2Line1Id);
+            data->AddLine(p1Line2Id, id);
+            data->AddLine(id, p2Line2Id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
         }
-        data->AddLine(p1Line1Id, id);
-        data->AddLine(id, p2Line1Id);
-        data->AddLine(p1Line2Id, id);
-        data->AddLine(id, p2Line2Id);
         VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
         if(parse == Document::FullParse){
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id,
@@ -90,6 +98,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
             scene->addItem(point);
             connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersect::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line1Id);
             doc->IncrementReferens(p2Line1Id);
@@ -102,10 +111,10 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
 void VToolLineIntersect::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        p1Line1 = domElement.attribute("p1Line1", "").toLongLong();
-        p2Line1 = domElement.attribute("p2Line1", "").toLongLong();
-        p1Line2 = domElement.attribute("p1Line2", "").toLongLong();
-        p2Line2 = domElement.attribute("p2Line2", "").toLongLong();
+        p1Line1 = domElement.attribute(AttrP1Line1, "").toLongLong();
+        p2Line1 = domElement.attribute(AttrP2Line1, "").toLongLong();
+        p1Line2 = domElement.attribute(AttrP1Line2, "").toLongLong();
+        p2Line2 = domElement.attribute(AttrP2Line2, "").toLongLong();
     }
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
@@ -114,15 +123,20 @@ void VToolLineIntersect::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogLineIntersect->getPointName());
-            domElement.setAttribute("p1Line1", QString().setNum(dialogLineIntersect->getP1Line1()));
-            domElement.setAttribute("p2Line1", QString().setNum(dialogLineIntersect->getP2Line1()));
-            domElement.setAttribute("p1Line2", QString().setNum(dialogLineIntersect->getP1Line2()));
-            domElement.setAttribute("p2Line2", QString().setNum(dialogLineIntersect->getP2Line2()));
+            domElement.setAttribute(AttrName, dialogLineIntersect->getPointName());
+            domElement.setAttribute(AttrP1Line1, QString().setNum(dialogLineIntersect->getP1Line1()));
+            domElement.setAttribute(AttrP2Line1, QString().setNum(dialogLineIntersect->getP2Line1()));
+            domElement.setAttribute(AttrP1Line2, QString().setNum(dialogLineIntersect->getP1Line2()));
+            domElement.setAttribute(AttrP2Line2, QString().setNum(dialogLineIntersect->getP2Line2()));
             emit FullUpdateTree();
         }
     }
     dialogLineIntersect.clear();
+}
+
+void VToolLineIntersect::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -131,18 +145,18 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolLineIntersect::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "lineIntersect");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "p1Line1", p1Line1);
-    AddAttribute(domElement, "p2Line1", p2Line1);
-    AddAttribute(domElement, "p1Line2", p1Line2);
-    AddAttribute(domElement, "p2Line2", p2Line2);
+    AddAttribute(domElement, AttrP1Line1, p1Line1);
+    AddAttribute(domElement, AttrP2Line1, p2Line1);
+    AddAttribute(domElement, AttrP1Line2, p1Line2);
+    AddAttribute(domElement, AttrP2Line2, p2Line2);
 
     AddToCalculation(domElement);
 }

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,34 +28,30 @@
 class VToolLineIntersect:public VToolPoint{
     Q_OBJECT
 public:
-                                        VToolLineIntersect(VDomDocument *doc, VContainer *data,
-                                                           const qint64 &id,
-                                                           const qint64 &p1Line1,
-                                                           const qint64 &p2Line1, const qint64 &p1Line2,
-                                                           const qint64 &p2Line2, Tool::Sources typeCreation,
-                                                           QGraphicsItem * parent = 0);
-    virtual void                        setDialog();
-    static void                         Create(QSharedPointer<DialogLineIntersect> &dialog,
-                                               VMainGraphicsScene *scene, VDomDocument *doc,
-                                               VContainer *data);
-    static void                         Create(const qint64 _id, const qint64 &p1Line1Id,
-                                               const qint64 &p2Line1Id, const qint64 &p1Line2Id,
-                                               const qint64 &p2Line2Id, const QString &pointName,
-                                               const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                                               VDomDocument *doc, VContainer *data,
-                                               const Document::Documents &parse, Tool::Sources typeCreation);
+                 VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &p1Line1,
+                                    const qint64 &p2Line1, const qint64 &p1Line2, const qint64 &p2Line2,
+                                    Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void setDialog();
+    static void  Create(QSharedPointer<DialogLineIntersect> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+                        VContainer *data);
+    static void  Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id, const qint64 &p1Line2Id,
+                        const qint64 &p2Line2Id, const QString &pointName, const qreal &mx, const qreal &my,
+                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                        const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
-    virtual void                        FullUpdateFromFile();
-    virtual void                        FullUpdateFromGui(int result);
+    virtual void FullUpdateFromFile();
+    virtual void FullUpdateFromGui(int result);
+    virtual void SetFactor(qreal factor);
 protected:
-    virtual void                        contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void                        AddToFile();
-    virtual void                        RemoveReferens();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void AddToFile();
+    virtual void RemoveReferens();
 private:
-    qint64                              p1Line1;
-    qint64                              p2Line1;
-    qint64                              p1Line2;
-    qint64                              p2Line2;
+    qint64       p1Line1;
+    qint64       p2Line1;
+    qint64       p1Line2;
+    qint64       p2Line2;
     QSharedPointer<DialogLineIntersect> dialogLineIntersect;
 };
 

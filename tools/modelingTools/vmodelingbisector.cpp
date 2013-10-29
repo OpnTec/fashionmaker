@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,7 +20,10 @@
  ****************************************************************************/
 
 #include "vmodelingbisector.h"
-#include <QMenu>
+#include "../drawTools/vtoolbisector.h"
+#include <container/calculator.h>
+
+const QString VModelingBisector::ToolType = QStringLiteral("bisector");
 
 VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
@@ -34,19 +37,6 @@ VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const 
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-}
-
-QPointF VModelingBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
-                                 const QPointF &thirdPoint, const qreal &length){
-    QLineF line1(secondPoint, firstPoint);
-    QLineF line2(secondPoint, thirdPoint);
-    qreal angle = line1.angleTo(line2);
-    if(angle>180){
-        angle = 360 - angle;
-    }
-    line1.setAngle(line1.angle()-angle/2);
-    line1.setLength(length);
-    return line1.p2();
 }
 
 void VModelingBisector::setDialog(){
@@ -89,8 +79,8 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                  thirdPoint.toQPointF(), result*PrintDPI/25.4);
+        QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                  thirdPoint.toQPointF(), toPixel(result));
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -116,11 +106,11 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
 void VModelingBisector::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        basePointId = domElement.attribute("secondPoint", "").toLongLong();
-        thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        basePointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        thirdPointId = domElement.attribute(AttrThirdPoint, "").toLongLong();
     }
     RefreshGeometry();
 }
@@ -129,12 +119,12 @@ void VModelingBisector::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogBisector->getPointName());
-            domElement.setAttribute("typeLine", dialogBisector->getTypeLine());
-            domElement.setAttribute("length", dialogBisector->getFormula());
-            domElement.setAttribute("firstPoint", QString().setNum(dialogBisector->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogBisector->getSecondPointId()));
-            domElement.setAttribute("thirdPoint", QString().setNum(dialogBisector->getThirdPointId()));
+            domElement.setAttribute(AttrName, dialogBisector->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogBisector->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogBisector->getFormula());
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogBisector->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogBisector->getSecondPointId()));
+            domElement.setAttribute(AttrThirdPoint, QString().setNum(dialogBisector->getThirdPointId()));
             emit FullUpdateTree();
         }
     }
@@ -147,19 +137,19 @@ void VModelingBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VModelingBisector::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "bisector");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", basePointId);
-    AddAttribute(domElement, "thirdPoint", thirdPointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrFirstPoint, firstPointId);
+    AddAttribute(domElement, AttrSecondPoint, basePointId);
+    AddAttribute(domElement, AttrThirdPoint, thirdPointId);
 
     AddToModeling(domElement);
 }

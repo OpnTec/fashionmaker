@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,16 +28,15 @@ namespace Ui {
 class DialogLine;
 }
 
-class DialogLine : public DialogTool
-{
+class DialogLine : public DialogTool{
     Q_OBJECT
 public:
     explicit         DialogLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
                      ~DialogLine();   
-    qint64           getFirstPoint() const;
+    inline qint64    getFirstPoint() const {return firstPoint;}
     void             setFirstPoint(const qint64 &value);
-    qint64           getSecondPoint() const;
+    inline qint64    getSecondPoint() const {return secondPoint;}
     void             setSecondPoint(const qint64 &value);
 public slots:
     void             ChoosedObject(qint64 id, Scene::Scenes type);

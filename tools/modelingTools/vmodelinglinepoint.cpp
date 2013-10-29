@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -32,7 +32,7 @@ VModelingLinePoint::VModelingLinePoint(VDomDocument *doc, VContainer *data, cons
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(Qt::black, widthHairLine));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
@@ -44,13 +44,9 @@ void VModelingLinePoint::RefreshGeometry(){
     QPointF point = VModelingTool::data.GetModelingPoint(id).toQPointF();
     QPointF basePoint = VModelingTool::data.GetModelingPoint(basePointId).toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
     }
-}
-
-void VModelingLinePoint::RemoveReferens(){
-    doc->DecrementReferens(basePointId);
 }

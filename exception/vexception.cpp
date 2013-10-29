@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,9 +23,6 @@
 
 VException::VException(const QString &what):QException(), what(what){
     Q_ASSERT_X(!what.isEmpty(), Q_FUNC_INFO, "Error message is empty");
-}
-
-VException::VException(const VException &e):what(e.What()){
 }
 
 QString VException::ErrorMessage() const{

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,25 +23,25 @@
 #define VEXCEPTIONEMPTYPARAMETER_H
 
 #include "vexception.h"
-#include <QDomElement>
 
-class VExceptionEmptyParameter : public VException
-{
+class VExceptionEmptyParameter : public VException{
 public:
-    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
-    VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
-    virtual ~VExceptionEmptyParameter() noexcept(true) {}
+                    VExceptionEmptyParameter(const QString &what, const QString &name,
+                                             const QDomElement &domElement);
+                    VExceptionEmptyParameter(const VExceptionEmptyParameter &e):VException(e), name(e.Name()),
+                        tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
+    virtual         ~VExceptionEmptyParameter() noexcept(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
-    QString Name() const {return name;}
-    QString TagText() const {return tagText;}
-    QString TagName() const {return tagName;}
-    qint32 LineNumber() const {return lineNumber;}
+    inline QString  Name() const {return name;}
+    inline QString  TagText() const {return tagText;}
+    inline QString  TagName() const {return tagName;}
+    inline qint32   LineNumber() const {return lineNumber;}
 protected:
-    QString name;
-    QString tagText;
-    QString tagName;
-    qint32  lineNumber;
+    QString         name;
+    QString         tagText;
+    QString         tagName;
+    qint32          lineNumber;
 };
 
 #endif // VEXCEPTIONEMPTYPARAMETER_H

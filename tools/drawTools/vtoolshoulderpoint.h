@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,32 +25,32 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialogshoulderpoint.h"
 
-class VToolShoulderPoint : public VToolLinePoint
-{
+class VToolShoulderPoint : public VToolLinePoint{
 public:
-    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
-                       const QString &typeLine, const QString &formula, const qint64 &p1Line,
-                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Sources typeCreation,
-                       QGraphicsItem * parent = 0);
-    virtual void setDialog();
-    static QPointF    FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                                const qreal &length);
-    static void Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data);
-    static void Create(const qint64 _id, const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
-                       const qint64 &pShoulder, const QString &typeLine, const QString &pointName,
-                       const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+                   VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                                      const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
+                                      const qint64 &pShoulder, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void   setDialog();
+    static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
+                             const qreal &length);
+    static void    Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
+                          VContainer *data);
+    static void    Create(const qint64 _id, const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
+                          const qint64 &pShoulder, const QString &typeLine, const QString &pointName, const qreal &mx,
+                          const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                          const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
-    virtual void      FullUpdateFromFile();
-    virtual void      FullUpdateFromGui(int result);
+    virtual void   FullUpdateFromFile();
+    virtual void   FullUpdateFromGui(int result);
+    virtual void   SetFactor(qreal factor);
 protected:
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void      AddToFile();
-    virtual void      RemoveReferens();
+    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void   AddToFile();
+    virtual void   RemoveReferens();
 private:
-    qint64            p2Line;
-    qint64            pShoulder;
+    qint64         p2Line;
+    qint64         pShoulder;
     QSharedPointer<DialogShoulderPoint> dialogShoulderPoint;
 };
 

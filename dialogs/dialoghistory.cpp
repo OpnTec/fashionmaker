@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -147,15 +147,15 @@ QString DialogHistory::Record(const VToolRecord &tool){
         case Tool::ArrowTool:
             break;
         case Tool::SinglePointTool:
-            record = QString("%1 - Базова точка").arg(data->GetPoint(tool.getId()).name());
+            record = QString(tr("%1 - Base point")).arg(data->GetPoint(tool.getId()).name());
             break;
         case Tool::EndLineTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if(domElement.isElement()){
                 basePointId = domElement.attribute("basePoint", "").toLongLong();
             }
-            record = QString("%1_%2 - Відрізок з точки %1 до точки %2").arg(data->GetPoint(basePointId).name(),
-                                                                            data->GetPoint(tool.getId()).name());
+            record = QString(tr("%1_%2 - Line from point %1 to point %2")).arg(data->GetPoint(basePointId).name(),
+                                                                               data->GetPoint(tool.getId()).name());
             break;
         case Tool::LineTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -163,8 +163,8 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString("%1_%2 - Лінія з точки %1 до точки %2").arg(data->GetPoint(firstPointId).name(),
-                                                                         data->GetPoint(secondPointId).name());
+            record = QString(tr("%1_%2 - Line from point %1 to point %2")).arg(data->GetPoint(firstPointId).name(),
+                                                                               data->GetPoint(secondPointId).name());
             break;
         case Tool::AlongLineTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -172,12 +172,12 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 basePointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString("%3 - Точка на відрізку %1_%2").arg(data->GetPoint(basePointId).name(),
-                                                                 data->GetPoint(secondPointId).name(),
-                                                                 data->GetPoint(tool.getId()).name());
+            record = QString(tr("%3 - Point along line %1_%2")).arg(data->GetPoint(basePointId).name(),
+                                                                    data->GetPoint(secondPointId).name(),
+                                                                    data->GetPoint(tool.getId()).name());
             break;
         case Tool::ShoulderPointTool:
-            record = QString("%1 - Плечева точка").arg(data->GetPoint(tool.getId()).name());
+            record = QString(tr("%1 - Point of soulder")).arg(data->GetPoint(tool.getId()).name());
             break;
         case Tool::NormalTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -185,9 +185,9 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 basePointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString("%3 - Перпендикуляр до відрузку %1_%2").arg(data->GetPoint(basePointId).name(),
-                                                                         data->GetPoint(secondPointId).name(),
-                                                                         data->GetPoint(tool.getId()).name());
+            record = QString(tr("%3 - Normal to line %1_%2")).arg(data->GetPoint(basePointId).name(),
+                                                                  data->GetPoint(secondPointId).name(),
+                                                                  data->GetPoint(tool.getId()).name());
             break;
         case Tool::BisectorTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -196,10 +196,10 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 basePointId = domElement.attribute("secondPoint", "").toLongLong();
                 thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
             }
-            record = QString("%4 - Бісектриса кута %1_%2_%3").arg(data->GetPoint(firstPointId).name(),
-                                                                  data->GetPoint(basePointId).name(),
-                                                                  data->GetPoint(thirdPointId).name(),
-                                                                  data->GetPoint(tool.getId()).name());
+            record = QString(tr("%4 - Bisector of angle %1_%2_%3")).arg(data->GetPoint(firstPointId).name(),
+                                                                        data->GetPoint(basePointId).name(),
+                                                                        data->GetPoint(thirdPointId).name(),
+                                                                        data->GetPoint(tool.getId()).name());
             break;
         case Tool::LineIntersectTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -209,28 +209,28 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 p1Line2 = domElement.attribute("p1Line2", "").toLongLong();
                 p2Line2 = domElement.attribute("p2Line2", "").toLongLong();
             }
-            record = QString("%5 - Точка перетину відрузку %1_%2 і %3_%4").arg(data->GetPoint(p1Line1).name(),
-                                                                               data->GetPoint(p2Line1).name(),
-                                                                               data->GetPoint(p1Line2).name(),
-                                                                               data->GetPoint(p2Line2).name(),
-                                                                               data->GetPoint(tool.getId()).name());
+            record = QString(tr("%5 - Point of intersection lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
+                                                                                         data->GetPoint(p2Line1).name(),
+                                                                                         data->GetPoint(p1Line2).name(),
+                                                                                         data->GetPoint(p2Line2).name(),
+                                                                                         data->GetPoint(tool.getId()).name());
             break;
         case Tool::SplineTool:{
             VSpline spl = data->GetSpline(tool.getId());
-            record = QString("Сплайн %1_%2").arg(data->GetPoint(spl.GetP1()).name(),
+            record = QString(tr("Curve %1_%2")).arg(data->GetPoint(spl.GetP1()).name(),
                                                  data->GetPoint(spl.GetP4()).name());
         }
         break;
         case Tool::ArcTool:{
             VArc arc = data->GetArc(tool.getId());
-            record = QString("Дуга з центром в точці %1").arg(data->GetPoint(arc.GetCenter()).name());
+            record = QString(tr("Arc with center in point %1")).arg(data->GetPoint(arc.GetCenter()).name());
         }
         break;
         case Tool::SplinePathTool:{
             VSplinePath splPath = data->GetSplinePath(tool.getId());
             QVector<VSplinePoint> points = splPath.GetSplinePath();
             if(points.size() != 0 ){
-                record = QString("Шлях сплайну %1").arg(data->GetPoint(points[0].P()).name());
+                record = QString(tr("Curve point %1")).arg(data->GetPoint(points[0].P()).name());
                 for(qint32 i = 1; i< points.size(); ++i){
                     QString name = QString("_%1").arg(data->GetPoint(points[i].P()).name());
                     record.append(name);
@@ -245,13 +245,42 @@ QString DialogHistory::Record(const VToolRecord &tool){
                 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString("%4 - Точка дотику дуги з центром в точці %1 і відрізку %2_%3").arg(data->GetPoint(center).name(),
-                                                                               data->GetPoint(firstPointId).name(),
-                                                                               data->GetPoint(secondPointId).name(),
-                                                                               data->GetPoint(tool.getId()).name());
+            record = QString(tr("%4 - Point of contact arc with center in point %1 and line %2_%3")).arg(data->GetPoint(center).name(),
+                                                                                                         data->GetPoint(firstPointId).name(),
+                                                                                                         data->GetPoint(secondPointId).name(),
+                                                                                                         data->GetPoint(tool.getId()).name());
             break;
+        case Tool::Height:{
+            qint64 p1LineId = 0;
+            qint64 p2LineId = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if(domElement.isElement()){
+                basePointId = domElement.attribute("basePoint", "").toLongLong();
+                p1LineId = domElement.attribute("p1Line", "").toLongLong();
+                p2LineId = domElement.attribute("p2Line", "").toLongLong();
+            }
+            record = QString(tr("Point of perpendical from point %1 to line %2_%3")).arg(data->GetPoint(basePointId).name(),
+                                                                                         data->GetPoint(p1LineId).name(),
+                                                                                         data->GetPoint(p2LineId).name());
+            break;
+        }
+        case Tool::Triangle:{
+            qint64 axisP1Id = 0;
+            qint64 axisP2Id = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if(domElement.isElement()){
+                axisP1Id = domElement.attribute("axisP1", "").toLongLong();
+                axisP2Id = domElement.attribute("axisP2", "").toLongLong();
+                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
+                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+            }
+            record = QString(tr("Triangle: axis %1_%2, points %3 and %4")).arg(
+                        data->GetPoint(axisP1Id).name(),data->GetPoint(axisP2Id).name(),
+                        data->GetPoint(firstPointId).name(), data->GetPoint(secondPointId).name());
+            break;
+        }
         default:
-            qWarning()<<"Get wrong tool type. Ignore.";
+            qWarning()<<tr("Get wrong tool type. Ignore.");
             break;
     }
     return record;
@@ -260,7 +289,7 @@ QString DialogHistory::Record(const VToolRecord &tool){
 void DialogHistory::InitialTable(){
     ui->tableWidget->setSortingEnabled(false);
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(" "));
-    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Інструмент"));
+    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Tool")));
 }
 
 void DialogHistory::ShowPoint(){
@@ -274,7 +303,6 @@ void DialogHistory::ShowPoint(){
         emit ShowHistoryTool(id, Qt::green, true);
     }
 }
-
 
 void DialogHistory::closeEvent(QCloseEvent *event){
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);

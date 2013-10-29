@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,7 +20,43 @@
  ****************************************************************************/
 
 #include "vabstracttool.h"
-#include <QDebug>
+
+const QString VAbstractTool::AttrId          = QStringLiteral("id");
+const QString VAbstractTool::AttrType        = QStringLiteral("type");
+const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
+const QString VAbstractTool::AttrMy          = QStringLiteral("my");
+const QString VAbstractTool::AttrName        = QStringLiteral("name");
+const QString VAbstractTool::AttrX           = QStringLiteral("x");
+const QString VAbstractTool::AttrY           = QStringLiteral("y");
+const QString VAbstractTool::AttrTypeLine    = QStringLiteral("typeLine");
+const QString VAbstractTool::AttrLength      = QStringLiteral("length");
+const QString VAbstractTool::AttrBasePoint   = QStringLiteral("basePoint");
+const QString VAbstractTool::AttrFirstPoint  = QStringLiteral("firstPoint");
+const QString VAbstractTool::AttrSecondPoint = QStringLiteral("secondPoint");
+const QString VAbstractTool::AttrThirdPoint  = QStringLiteral("thirdPoint");
+const QString VAbstractTool::AttrCenter      = QStringLiteral("center");
+const QString VAbstractTool::AttrRadius      = QStringLiteral("radius");
+const QString VAbstractTool::AttrAngle       = QStringLiteral("angle");
+const QString VAbstractTool::AttrAngle1      = QStringLiteral("angle1");
+const QString VAbstractTool::AttrAngle2      = QStringLiteral("angle2");
+const QString VAbstractTool::AttrP1Line      = QStringLiteral("p1Line");
+const QString VAbstractTool::AttrP2Line      = QStringLiteral("p2Line");
+const QString VAbstractTool::AttrP1Line1     = QStringLiteral("p1Line1");
+const QString VAbstractTool::AttrP2Line1     = QStringLiteral("p2Line1");
+const QString VAbstractTool::AttrP1Line2     = QStringLiteral("p1Line2");
+const QString VAbstractTool::AttrP2Line2     = QStringLiteral("p2Line2");
+const QString VAbstractTool::AttrPShoulder   = QStringLiteral("pShoulder");
+const QString VAbstractTool::AttrPoint1      = QStringLiteral("point1");
+const QString VAbstractTool::AttrPoint4      = QStringLiteral("point4");
+const QString VAbstractTool::AttrKAsm1       = QStringLiteral("kAsm1");
+const QString VAbstractTool::AttrKAsm2       = QStringLiteral("kAsm2");
+const QString VAbstractTool::AttrKCurve      = QStringLiteral("kCurve");
+const QString VAbstractTool::AttrPathPoint   = QStringLiteral("pathPoint");
+const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
+const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
+const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
+const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
+const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
 
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
     VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black){
@@ -28,33 +64,6 @@ VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QOb
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
-}
-
-void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, const qint64 &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, const qint32 &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, const qreal &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(QString().setNum(value));
-    domElement.setAttributeNode(domAttr);
-}
-
-void VAbstractTool::AddAttribute(QDomElement &domElement, const QString &name, const QString &value){
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(value);
-    domElement.setAttributeNode(domAttr);
-}
-
-VAbstractTool::~VAbstractTool(){
 }
 
 QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line){
@@ -77,7 +86,7 @@ QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line){
     if ( type == QLineF::BoundedIntersection ){
         return point;
     }
-    Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
+    Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "There is no point of intersection.");
     return point;
 }
 
@@ -85,10 +94,8 @@ qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF l
                                           QPointF &p2){
     const qreal eps = 1e-8;
     //коефіцієнти для рівняння відрізку
-    qreal a = line.p2().y() - line.p1().y();
-    qreal b = line.p1().x() - line.p2().x();
-    // В даному випадку не використовується.
-    //qreal c = - a * line.p1().x() - b * line.p1().y();
+    qreal a = 0, b = 0, c = 0;
+    LineCoefficients(line, &a, &b, &c);
     // проекция центра окружности на прямую
     QPointF p = ClosestPoint (line, center);
     // сколько всего решений?
@@ -134,10 +141,17 @@ QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k){
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
-const VContainer *VAbstractTool::getData()const{
-    return &data;
+void VAbstractTool::RemoveAllChild(QDomElement &domElement){
+    if ( domElement.hasChildNodes() ){
+        while ( domElement.childNodes().length() >= 1 ){
+            domElement.removeChild( domElement.firstChild() );
+        }
+    }
 }
 
-qint64 VAbstractTool::getId() const{
-    return id;
+void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c){
+    //коефіцієнти для рівняння відрізку
+    *a = line.p2().y() - line.p1().y();
+    *b = line.p1().x() - line.p2().x();
+    *c = - *a * line.p1().x() - *b * line.p1().y();
 }

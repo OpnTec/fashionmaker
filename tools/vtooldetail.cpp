@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,135 +21,79 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
-#include <QDebug>
 #include "modelingTools/vmodelingtool.h"
 #include "modelingTools/modelingtools.h"
 
+const QString VToolDetail::TagName          = QStringLiteral("detail");
+const QString VToolDetail::TagNode          = QStringLiteral("node");
+const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
+const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
+const QString VToolDetail::AttrWidth        = QStringLiteral("width");
+const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
+const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
+const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
+const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
+
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, Tool::Sources typeCreation,
-                         VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
-     sceneDetails(scene){
+                         VMainGraphicsScene *scene, QGraphicsItem *parent) :VAbstractTool(doc, data, id),
+    QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
     VDetail detail = data->GetDetail(id);
-    QMap<qint64, VDataTool*>* tools = doc->getTools();
-    Q_CHECK_PTR(tools);
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
-        case(Tool::NodePoint):{
-            VNodePoint *point = qobject_cast<VNodePoint*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(point);
-            connect(point, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem); 
-            point->setParentItem(this);
+        case(Tool::NodePoint):
+            InitTool<VNodePoint>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeArc):{
-            VNodeArc *arc = qobject_cast<VNodeArc*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(arc);
-            connect(arc, &VNodeArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            arc->setParentItem(this);
+        case(Tool::NodeArc):
+            InitTool<VNodeArc>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeSpline):{
-            VNodeSpline *spl = qobject_cast<VNodeSpline*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(spl);
-            connect(spl, &VNodeSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            spl->setParentItem(this);
+        case(Tool::NodeSpline):
+            InitTool<VNodeSpline>(scene, detail[i]);
             break;
-        }
-        case(Tool::NodeSplinePath):{
-            VNodeSplinePath *splPath = qobject_cast<VNodeSplinePath*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(splPath);
-            connect(splPath, &VNodeSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            splPath->setParentItem(this);
+        case(Tool::NodeSplinePath):
+            InitTool<VNodeSplinePath>(scene, detail[i]);
             break;
-        }
-        case(Tool::AlongLineTool):{
-            VModelingAlongLine *tool = qobject_cast<VModelingAlongLine*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::AlongLineTool):
+            InitTool<VModelingAlongLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::ArcTool):{
-            VModelingArc *tool = qobject_cast<VModelingArc*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::ArcTool):
+            InitTool<VModelingArc>(scene, detail[i]);
             break;
-        }
-        case(Tool::BisectorTool):{
-            VModelingBisector *tool = qobject_cast<VModelingBisector*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::BisectorTool):
+            InitTool<VModelingBisector>(scene, detail[i]);
             break;
-        }
-        case(Tool::EndLineTool):{
-            VModelingEndLine *tool = qobject_cast<VModelingEndLine*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingEndLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingEndLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::EndLineTool):
+            InitTool<VModelingEndLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::LineIntersectTool):{
-            VModelingLineIntersect *tool = qobject_cast<VModelingLineIntersect*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::LineIntersectTool):
+            InitTool<VModelingLineIntersect>(scene, detail[i]);
             break;
-        }
-        case(Tool::LineTool):{
-            VModelingLine *tool = qobject_cast<VModelingLine*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::LineTool):
+            InitTool<VModelingLine>(scene, detail[i]);
             break;
-        }
-        case(Tool::NormalTool):{
-            VModelingNormal *tool = qobject_cast<VModelingNormal*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingNormal::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::NormalTool):
+            InitTool<VModelingNormal>(scene, detail[i]);
             break;
-        }
-        case(Tool::PointOfContact):{
-            VModelingPointOfContact *tool = qobject_cast<VModelingPointOfContact*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::PointOfContact):
+            InitTool<VModelingPointOfContact>(scene, detail[i]);
             break;
-        }
-        case(Tool::ShoulderPointTool):{
-            VModelingShoulderPoint *tool = qobject_cast<VModelingShoulderPoint*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingShoulderPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::ShoulderPointTool):
+            InitTool<VModelingShoulderPoint>(scene, detail[i]);
             break;
-        }
-        case(Tool::SplinePathTool):{
-            VModelingSplinePath *tool = qobject_cast<VModelingSplinePath*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::SplinePathTool):
+            InitTool<VModelingSplinePath>(scene, detail[i]);
             break;
-        }
-        case(Tool::SplineTool):{
-            VModelingSpline *tool = qobject_cast<VModelingSpline*>(tools->value(detail[i].getId()));
-            Q_CHECK_PTR(tool);
-            connect(tool, &VModelingSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::SplineTool):
+            InitTool<VModelingSpline>(scene, detail[i]);
             break;
-        }
+        case(Tool::Height):
+            InitTool<VModelingHeight>(scene, detail[i]);
+            break;
+        case(Tool::Triangle):
+            InitTool<VModelingTriangle>(scene, detail[i]);
+            break;
+        case(Tool::PointOfIntersection):
+            InitTool<VModelingPointOfIntersection>(scene, detail[i]);
+            break;
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
@@ -168,10 +112,8 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
 
 void VToolDetail::setDialog(){
     Q_ASSERT(!dialogDetail.isNull());
-    if(!dialogDetail.isNull()){
-        VDetail detail = VAbstractTool::data.GetDetail(id);
-        dialogDetail->setDetails(detail);
-    }
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    dialogDetail->setDetails(detail);
 }
 
 void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
@@ -189,6 +131,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 point = data->GetModelingPoint(detail[i].getId());
             }
             id = data->AddModelingPoint(point);
+            VNodePoint::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                               Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeArc):{
@@ -199,6 +143,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 arc = data->GetModelingArc(detail[i].getId());
             }
             id = data->AddModelingArc(arc);
+            VNodeArc::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                             Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeSpline):{
@@ -209,6 +155,8 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 spline = data->GetModelingSpline(detail[i].getId());
             }
             id = data->AddModelingSpline(spline);
+            VNodeSpline::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                                Document::FullParse, Tool::FromGui);
         }
             break;
         case(Tool::NodeSplinePath):{
@@ -219,13 +167,15 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 splinePath = data->GetModelingSplinePath(detail[i].getId());
             }
             id = data->AddModelingSplinePath(splinePath);
+            VNodeSplinePath::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
+                                    Document::FullParse, Tool::FromGui);
         }
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
         }
-        VNodeDetail node(id, detail[i].getTypeTool(), detail[i].getMode(), NodeDetail::Contour);
+        VNodeDetail node(id, detail[i].getTypeTool(), Draw::Modeling, NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
@@ -248,7 +198,7 @@ void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScen
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(detail, &VToolDetail::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-        QMap<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
 }
@@ -258,17 +208,35 @@ void VToolDetail::FullUpdateFromFile(){
 }
 
 void VToolDetail::FullUpdateFromGui(int result){
-    Q_UNUSED(result);
+    if(result == QDialog::Accepted){
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if(domElement.isElement()){
+            VDetail det = dialogDetail->getDetails();
+            domElement.setAttribute(AttrName, det.getName());
+            domElement.setAttribute(AttrSupplement, QString().setNum(det.getSupplement()));
+            domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
+            domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
+            RemoveAllChild(domElement);
+            for(qint32 i = 0; i < det.CountNode(); ++i){
+               AddNode(domElement, det[i]);
+            }
+            emit FullUpdateTree();
+        }
+    }
+    dialogDetail.clear();
 }
 
 void VToolDetail::AddToFile(){
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    QDomElement domElement = doc->createElement("detail");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "name", detail.getName());
-    AddAttribute(domElement, "mx", detail.getMx());
-    AddAttribute(domElement, "my", detail.getMy());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrName, detail.getName());
+    AddAttribute(domElement, AttrMx, toMM(detail.getMx()));
+    AddAttribute(domElement, AttrMy, toMM(detail.getMy()));
+    AddAttribute(domElement, AttrSupplement, detail.getSupplement());
+    AddAttribute(domElement, AttrClosed, detail.getClosed());
+    AddAttribute(domElement, AttrWidth, detail.getWidth());
 
     for(qint32 i = 0; i < detail.CountNode(); ++i){
        AddNode(domElement, detail[i]);
@@ -288,8 +256,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         //qDebug()<<newPos;
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("mx", QString().setNum(toMM(newPos.x())));
-            domElement.setAttribute("my", QString().setNum(toMM(newPos.y())));
+            domElement.setAttribute(AttrMx, QString().setNum(toMM(newPos.x())));
+            domElement.setAttribute(AttrMy, QString().setNum(toMM(newPos.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }
@@ -306,7 +274,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
     QMenu menu;
-    //QAction *actionOption = menu.addAction(tr("Options"));
+    QAction *actionOption = menu.addAction(tr("Options"));
     QAction *actionRemove = menu.addAction(tr("Delete"));
     if(_referens > 1){
         actionRemove->setEnabled(false);
@@ -314,33 +282,32 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
         actionRemove->setEnabled(true);
     }
     QAction *selectedAction = menu.exec(event->screenPos());
-//    if(selectedAction == actionOption){
-//        dialog = QSharedPointer<Dialog>(new Dialog(getData()));
-
-//        connect(qobject_cast< VMainGraphicsScene * >(tool->scene()), &VMainGraphicsScene::ChoosedObject,
-//                dialog.data(), &Dialog::ChoosedObject);
-//        connect(dialog.data(), &Dialog::DialogClosed, tool,
-//                &Tool::FullUpdateFromGui);
-//        connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
-
-//        tool->setDialog();
-
-//        dialog->show();
-//    }
+    if(selectedAction == actionOption){
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(getData(), Draw::Modeling));
+        connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
+                dialogDetail.data(), &DialogDetail::ChoosedObject);
+        connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
+        setDialog();
+        dialogDetail->show();
+    }
     if(selectedAction == actionRemove){
-        //deincrement referens
-        RemoveReferens();
         //remove form xml file
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
             QDomNode element = domElement.parentNode();
             if(!element.isNull()){
+                //deincrement referens
+                RemoveReferens();
                 element.removeChild(domElement);
                 //update xml file
                 emit FullUpdateTree();
                 //remove form scene
                 emit RemoveTool(this);
+            } else {
+                qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
             }
+        } else {
+            qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
         }
     }
 }
@@ -353,59 +320,70 @@ void VToolDetail::RemoveReferens(){
 }
 
 void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
-    QDomElement nod = doc->createElement("node");
+    QDomElement nod = doc->createElement(TagNode);
 
-    AddAttribute(nod, "idObject", node.getId());
+    AddAttribute(nod, AttrIdObject, node.getId());
+    AddAttribute(nod, AttrMx, toMM(node.getMx()));
+    AddAttribute(nod, AttrMy, toMM(node.getMy()));
     if(node.getTypeNode() == NodeDetail::Contour){
-        AddAttribute(nod, "nodeType", "Contour");
+        AddAttribute(nod, AttrNodeType, NodeTypeContour);
     } else {
-        AddAttribute(nod, "nodeType", "Modeling");
+        AddAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch(node.getTypeTool()){
     case(Tool::AlongLineTool):
-        AddAttribute(nod, "type", "AlongLineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("AlongLineTool"));
         break;
     case(Tool::ArcTool):
-        AddAttribute(nod, "type", "ArcTool");
+        AddAttribute(nod, AttrType, QStringLiteral("ArcTool"));
         break;
     case(Tool::BisectorTool):
-        AddAttribute(nod, "type", "BisectorTool");
+        AddAttribute(nod, AttrType, QStringLiteral("BisectorTool"));
         break;
     case(Tool::EndLineTool):
-        AddAttribute(nod, "type", "EndLineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("EndLineTool"));
         break;
     case(Tool::LineIntersectTool):
-        AddAttribute(nod, "type", "LineIntersectTool");
+        AddAttribute(nod, AttrType, QStringLiteral("LineIntersectTool"));
         break;
     case(Tool::LineTool):
-        AddAttribute(nod, "type", "LineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("LineTool"));
         break;
     case(Tool::NodeArc):
-        AddAttribute(nod, "type", "NodeArc");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeArc"));
         break;
     case(Tool::NodePoint):
-        AddAttribute(nod, "type", "NodePoint");
+        AddAttribute(nod, AttrType, QStringLiteral("NodePoint"));
         break;
     case(Tool::NodeSpline):
-        AddAttribute(nod, "type", "NodeSpline");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
         break;
     case(Tool::NodeSplinePath):
-        AddAttribute(nod, "type", "NodeSplinePath");
+        AddAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
         break;
     case(Tool::NormalTool):
-        AddAttribute(nod, "type", "NormalTool");
+        AddAttribute(nod, AttrType, QStringLiteral("NormalTool"));
         break;
     case(Tool::PointOfContact):
-        AddAttribute(nod, "type", "PointOfContact");
+        AddAttribute(nod, AttrType, QStringLiteral("PointOfContact"));
         break;
     case(Tool::ShoulderPointTool):
-        AddAttribute(nod, "type", "ShoulderPointTool");
+        AddAttribute(nod, AttrType, QStringLiteral("ShoulderPointTool"));
         break;
     case(Tool::SplinePathTool):
-        AddAttribute(nod, "type", "SplinePathTool");
+        AddAttribute(nod, AttrType, QStringLiteral("SplinePathTool"));
         break;
     case(Tool::SplineTool):
-        AddAttribute(nod, "type", "SplineTool");
+        AddAttribute(nod, AttrType, QStringLiteral("SplineTool"));
+        break;
+    case(Tool::Height):
+        AddAttribute(nod, AttrType, QStringLiteral("Height"));
+        break;
+    case(Tool::Triangle):
+        AddAttribute(nod, AttrType, QStringLiteral("Triangle"));
+        break;
+    case(Tool::PointOfIntersection):
+        AddAttribute(nod, AttrType, QStringLiteral("PointOfIntersection"));
         break;
     default:
         qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
@@ -417,4 +395,15 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
 void VToolDetail::RefreshGeometry(){
     QPainterPath path = VAbstractTool::data.ContourPath(id);
     this->setPath(path);
+}
+
+template <typename Tool>
+void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node){
+    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    Q_ASSERT(tools != 0);
+    Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
+    Q_ASSERT(tool != 0);
+    connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    connect(tool, &Tool::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+    tool->setParentItem(this);
 }

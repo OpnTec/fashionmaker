@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,23 +28,22 @@ namespace Ui {
 class DialogSinglePoint;
 }
 
-class DialogSinglePoint : public DialogTool
-{
+class DialogSinglePoint : public DialogTool{
     Q_OBJECT 
 public:
-    explicit              DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
-    void                  setData(const QString name, const QPointF point);
-    QString               getName()const;
-    QPointF               getPoint()const;
-                          ~DialogSinglePoint();
+                   DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
+    void           setData(const QString name, const QPointF point);
+    inline QString getName()const {return name;}
+    inline QPointF getPoint()const {return point;}
+                   ~DialogSinglePoint();
 public slots:
-    void                  mousePress(QPointF scenePos);
-    virtual void          DialogAccepted();
+    void           mousePress(QPointF scenePos);
+    virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogSinglePoint)
     Ui::DialogSinglePoint *ui;
-    QString               name;
-    QPointF               point;
+    QString        name;
+    QPointF        point;
 };
 
 #endif // DIALOGSINGLEPOINT_H

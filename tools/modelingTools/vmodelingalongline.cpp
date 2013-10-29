@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,9 +20,9 @@
  ****************************************************************************/
 
 #include "vmodelingalongline.h"
-#include <QDialog>
-#include <QDebug>
 #include "container/calculator.h"
+
+const QString VModelingAlongLine::ToolType = QStringLiteral("alongLine");
 
 VModelingAlongLine::VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id,
                                        const QString &formula, const qint64 &firstPointId,
@@ -39,10 +39,10 @@ VModelingAlongLine::VModelingAlongLine(VDomDocument *doc, VContainer *data, qint
 void VModelingAlongLine::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        basePointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     RefreshGeometry();
 }
@@ -51,11 +51,11 @@ void VModelingAlongLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogAlongLine->getPointName());
-            domElement.setAttribute("typeLine", dialogAlongLine->getTypeLine());
-            domElement.setAttribute("length", dialogAlongLine->getFormula());
-            domElement.setAttribute("firstPoint", QString().setNum(dialogAlongLine->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogAlongLine->getSecondPointId()));
+            domElement.setAttribute(AttrName, dialogAlongLine->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogAlongLine->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogAlongLine->getFormula());
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogAlongLine->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogAlongLine->getSecondPointId()));
             emit FullUpdateTree();
         }
 
@@ -69,18 +69,18 @@ void VModelingAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingAlongLine::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "alongLine");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "firstPoint", basePointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrFirstPoint, basePointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToModeling(domElement);
 }

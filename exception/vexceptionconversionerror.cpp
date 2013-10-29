@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,10 +24,6 @@
 VExceptionConversionError::VExceptionConversionError(const QString &what, const QString &str)
     :VException(what), str(str){
     Q_ASSERT_X(!str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
-}
-
-VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e):
-    VException(e), str(e.String()){
 }
 
 QString VExceptionConversionError::ErrorMessage() const{

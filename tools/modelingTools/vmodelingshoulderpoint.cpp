@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,7 +20,10 @@
  ****************************************************************************/
 
 #include "vmodelingshoulderpoint.h"
-#include <QDebug>
+#include "../drawTools/vtoolshoulderpoint.h"
+#include <container/calculator.h>
+
+const QString VModelingShoulderPoint::ToolType = QStringLiteral("shoulder");
 
 VModelingShoulderPoint::VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
@@ -32,7 +35,6 @@ VModelingShoulderPoint::VModelingShoulderPoint(VDomDocument *doc, VContainer *da
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-
 }
 
 void VModelingShoulderPoint::setDialog(){
@@ -46,27 +48,6 @@ void VModelingShoulderPoint::setDialog(){
         dialogShoulderPoint->setPShoulder(pShoulder, id);
         dialogShoulderPoint->setPointName(p.name());
     }
-}
-
-QPointF VModelingShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                                      const qreal &length){
-    QLineF line = QLineF(p1Line, p2Line);
-        qreal dist = line.length();
-        if(dist>length){
-            qDebug()<<"A3П2="<<length/PrintDPI*25.4<<"А30П ="<<dist/PrintDPI*25.4;
-            throw"Не можу знайти точку плеча. Довжина А3П2 < А3П.";
-        }
-        if(dist==length){
-            return line.p2();
-        }
-        qreal step = 0.01;
-        while(1){
-            line.setLength(line.length()+step);
-            QLineF line2 = QLineF(pShoulder, line.p2());
-            if(line2.length()>=length){
-                return line.p2();
-            }
-        }
 }
 
 VModelingShoulderPoint *VModelingShoulderPoint::Create(QSharedPointer<DialogShoulderPoint> &dialog,
@@ -97,8 +78,8 @@ VModelingShoulderPoint *VModelingShoulderPoint::Create(const qint64 _id, const Q
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                       shoulderPoint.toQPointF(), result*PrintDPI/25.4);
+        QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                       shoulderPoint.toQPointF(), toPixel(result));
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -125,11 +106,11 @@ VModelingShoulderPoint *VModelingShoulderPoint::Create(const qint64 _id, const Q
 void VModelingShoulderPoint::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        basePointId = domElement.attribute("p1Line", "").toLongLong();
-        p2Line = domElement.attribute("p2Line", "").toLongLong();
-        pShoulder = domElement.attribute("pShoulder", "").toLongLong();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        basePointId = domElement.attribute(AttrP1Line, "").toLongLong();
+        p2Line = domElement.attribute(AttrP2Line, "").toLongLong();
+        pShoulder = domElement.attribute(AttrPShoulder, "").toLongLong();
     }
     RefreshGeometry();
 }
@@ -138,12 +119,12 @@ void VModelingShoulderPoint::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogShoulderPoint->getPointName());
-            domElement.setAttribute("typeLine", dialogShoulderPoint->getTypeLine());
-            domElement.setAttribute("length", dialogShoulderPoint->getFormula());
-            domElement.setAttribute("p1Line", QString().setNum(dialogShoulderPoint->getP1Line()));
-            domElement.setAttribute("p2Line", QString().setNum(dialogShoulderPoint->getP2Line()));
-            domElement.setAttribute("pShoulder", QString().setNum(dialogShoulderPoint->getPShoulder()));
+            domElement.setAttribute(AttrName, dialogShoulderPoint->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogShoulderPoint->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogShoulderPoint->getFormula());
+            domElement.setAttribute(AttrP1Line, QString().setNum(dialogShoulderPoint->getP1Line()));
+            domElement.setAttribute(AttrP2Line, QString().setNum(dialogShoulderPoint->getP2Line()));
+            domElement.setAttribute(AttrPShoulder, QString().setNum(dialogShoulderPoint->getPShoulder()));
             emit FullUpdateTree();
         }
     }
@@ -156,19 +137,19 @@ void VModelingShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
 
 void VModelingShoulderPoint::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "shoulder");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "p1Line", basePointId);
-    AddAttribute(domElement, "p2Line", p2Line);
-    AddAttribute(domElement, "pShoulder", pShoulder);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrP1Line, basePointId);
+    AddAttribute(domElement, AttrP2Line, p2Line);
+    AddAttribute(domElement, AttrPShoulder, pShoulder);
 
     AddToModeling(domElement);
 }

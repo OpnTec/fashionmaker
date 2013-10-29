@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,33 +25,35 @@
 #include "vtoolpoint.h"
 #include "dialogs/dialogpointofcontact.h"
 
-class VToolPointOfContact : public VToolPoint
-{
+class VToolPointOfContact : public VToolPoint{
 public:
-    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
-                        const QString &radius, const qint64 &center, const qint64 &firstPointId,
-                        const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    virtual void setDialog();
-    static QPointF    FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
-                                const QPointF &secondPoint);
-    static void Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
-                       VDomDocument *doc, VContainer *data);
-    static void Create(const qint64 _id, const QString &radius, const qint64 &center, const qint64 &firstPointId,
-                       const qint64 &secondPointId, const QString &pointName,
-                       const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                       VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+                   VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                       const QString &radius, const qint64 &center,
+                                       const qint64 &firstPointId, const qint64 &secondPointId,
+                                       Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void   setDialog();
+    static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
+                             const QPointF &secondPoint);
+    static void    Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
+                          VDomDocument *doc, VContainer *data);
+    static void    Create(const qint64 _id, const QString &radius, const qint64 &center,
+                          const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
+                          const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
+                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
-    virtual void      FullUpdateFromFile();
-    virtual void      FullUpdateFromGui(int result);
+    virtual void   FullUpdateFromFile();
+    virtual void   FullUpdateFromGui(int result);
+    virtual void   SetFactor(qreal factor);
 protected:
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void      AddToFile();
-    virtual void      RemoveReferens();
+    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void   AddToFile();
+    virtual void   RemoveReferens();
 private:
-    QString           radius;
-    qint64            center;
-    qint64            firstPointId;
-    qint64            secondPointId;
+    QString        radius;
+    qint64         center;
+    qint64         firstPointId;
+    qint64         secondPointId;
     QSharedPointer<DialogPointOfContact> dialogPointOfContact;
 };
 

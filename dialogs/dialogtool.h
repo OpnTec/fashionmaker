@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,26 +23,19 @@
 #define DIALOGTOOL_H
 
 #include <QDialog>
-#include <QComboBox>
-#include <QDoubleSpinBox>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QListWidget>
-#include <QLabel>
-#include <QRadioButton>
-#include <QTimer>
-#include "container/vcontainer.h"
+#include <container/vcontainer.h>
 
 class DialogTool : public QDialog{
     Q_OBJECT
 public:
                      DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                 QWidget *parent = 0);
-    virtual          ~DialogTool();
-    qint64           getIdDetail() const;
-    void             setIdDetail(const qint64 &value);
+    virtual          ~DialogTool() {}
+    inline qint64    getIdDetail() const {return idDetail;}
+    inline void      setIdDetail(const qint64 &value) {idDetail = value;}
 signals:
     void             DialogClosed(int result);
+    void             ToolTip(const QString &toolTip);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     void             NamePointChanged();
@@ -61,6 +54,8 @@ public slots:
     void             SizeGrowth();
     void             StandartTable();
     void             LengthLines();
+    void             LengthArcs();
+    void             LengthCurves();
     void             Increments();
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
@@ -79,12 +74,16 @@ protected:
     QListWidget      *listWidget;
     QLabel           *labelResultCalculation;
     QLabel           *labelDescription;
+    QLabel           *labelEditNamePoint;
+    QLabel           *labelEditFormula;
     QRadioButton     *radioButtonSizeGrowth;
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
+    QRadioButton     *radioButtonLengthArc;
+    QRadioButton     *radioButtonLengthCurve;
     qint64           idDetail;
-    Draw::Draws       mode;
+    Draw::Draws      mode;
     bool             CheckObject(const qint64 &id);
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
@@ -92,7 +91,7 @@ protected:
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
-    template <class key, class val> void ShowVariable(const QMap<key, val> *var);
+    template <class key, class val> void ShowVariable(const QHash<key, val> *var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
     void             ChangeCurrentText(QComboBox *box, const QString &value);
     void             ChangeCurrentData(QComboBox *box, const qint64 &value) const;

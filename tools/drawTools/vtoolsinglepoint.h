@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,24 +25,25 @@
 #include "dialogs/dialogsinglepoint.h"
 #include "vtoolpoint.h"
 
-class VToolSinglePoint : public VToolPoint
-{
+class VToolSinglePoint : public VToolPoint{
     Q_OBJECT
 public:
-                                      VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id,
-                                                        Tool::Sources typeCreation, QGraphicsItem * parent = 0 );
-    virtual void                      setDialog();
+                 VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                                   QGraphicsItem * parent = 0 );
+    virtual void setDialog();
+    static const QString ToolType;
 public slots:
-    virtual void                      FullUpdateFromFile();
-    virtual void                      FullUpdateFromGui(int result);
-    virtual void                      ChangedActivDraw(const QString newName);
+    virtual void FullUpdateFromFile();
+    virtual void FullUpdateFromGui(int result);
+    virtual void ChangedActivDraw(const QString newName);
+    virtual void SetFactor(qreal factor);
 signals:
-    void                              FullUpdateTree();
+    void         FullUpdateTree();
 protected:
-    virtual void                      contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void                      AddToFile();
-    QVariant                          itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void                      decrementReferens();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void AddToFile();
+    QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void decrementReferens();
 private:
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };

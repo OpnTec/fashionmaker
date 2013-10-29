@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,44 +23,42 @@
 #define DIALOGSHOULDERPOINT_H
 
 #include "dialogtool.h"
-#include "container/calculator.h"
 
 namespace Ui {
 class DialogShoulderPoint;
 }
 
-class DialogShoulderPoint : public DialogTool
-{
+class DialogShoulderPoint : public DialogTool{
     Q_OBJECT
 public:
-    explicit                DialogShoulderPoint(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                                QWidget *parent = 0);
-                            ~DialogShoulderPoint();
-    QString                 getPointName() const;
-    void                    setPointName(const QString &value);
-    QString                 getTypeLine() const;
-    void                    setTypeLine(const QString &value);
-    QString                 getFormula() const;
-    void                    setFormula(const QString &value);
-    qint64                  getP1Line() const;
-    void                    setP1Line(const qint64 &value, const qint64 &id);
-    qint64                  getP2Line() const;
-    void                    setP2Line(const qint64 &value, const qint64 &id);
-    qint64                  getPShoulder() const;
-    void                    setPShoulder(const qint64 &value, const qint64 &id);
+                   DialogShoulderPoint(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                                       QWidget *parent = 0);
+                   ~DialogShoulderPoint();
+    inline QString getPointName() const {return pointName;}
+    void           setPointName(const QString &value);
+    inline QString getTypeLine() const {return typeLine;}
+    void           setTypeLine(const QString &value);
+    inline QString getFormula() const {return formula;}
+    void           setFormula(const QString &value);
+    inline qint64  getP1Line() const {return p1Line;}
+    void           setP1Line(const qint64 &value, const qint64 &id);
+    inline qint64  getP2Line() const {return p2Line;}
+    void           setP2Line(const qint64 &value, const qint64 &id);
+    inline qint64  getPShoulder() const {return pShoulder;}
+    void           setPShoulder(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void            ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void            DialogAccepted();
+    virtual void   ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
     Ui::DialogShoulderPoint *ui;
-    qint32                  number;
-    QString                 pointName;
-    QString                 typeLine;
-    QString                 formula;
-    qint64                  p1Line;
-    qint64                  p2Line;
-    qint64                  pShoulder;
+    qint32         number;
+    QString        pointName;
+    QString        typeLine;
+    QString        formula;
+    qint64         p1Line;
+    qint64         p2Line;
+    qint64         pShoulder;
 };
 
 #endif // DIALOGSHOULDERPOINT_H

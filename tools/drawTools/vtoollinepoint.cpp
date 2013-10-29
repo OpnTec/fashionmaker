@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -30,9 +30,9 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
     QPointF point1 = data->GetPoint(basePointId).toQPointF();
     QPointF point2 = data->GetPoint(id).toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine));
+    mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
@@ -41,26 +41,28 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
 
 void VToolLinePoint::ChangedActivDraw(const QString newName){
     if(nameActivDraw == newName){
-        mainLine->setPen(QPen(Qt::black, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
+        currentColor = Qt::black;
     } else {
-        mainLine->setPen(QPen(Qt::gray, widthHairLine));
-        VToolPoint::ChangedActivDraw(newName);
+        currentColor = Qt::gray;
     }
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
+    VToolPoint::ChangedActivDraw(newName);
 }
 
 void VToolLinePoint::RefreshGeometry(){
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
     VToolPoint::RefreshPointGeometry(VDrawTool::data.GetPoint(id));
     QPointF point = VDrawTool::data.GetPoint(id).toQPointF();
     QPointF basePoint = VDrawTool::data.GetPoint(basePointId).toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if(typeLine == "none"){
+    if(typeLine == TypeLineNone){
         mainLine->setVisible(false);
     } else {
         mainLine->setVisible(true);
     }
 }
 
-void VToolLinePoint::RemoveReferens(){
-    doc->DecrementReferens(basePointId);
+void VToolLinePoint::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshGeometry();
 }

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,14 +28,15 @@
 class VToolPoint: public VDrawTool, public QGraphicsEllipseItem{
     Q_OBJECT
 public:
-                            VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                                       QGraphicsItem * parent = 0);
-    virtual                 ~VToolPoint();
+                            VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
+    virtual                 ~VToolPoint(){}
+    static const QString    TagName;
 public slots:
     void                    NameChangePosition(const QPointF pos);
     virtual void            ChangedActivDraw(const QString newName);
     virtual void            FullUpdateFromGui(int result) = 0;
     virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void            SetFactor(qreal factor);
 protected:
     qreal                   radius;
     VGraphicsSimpleTextItem *namePoint;

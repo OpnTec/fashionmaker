@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -33,7 +33,11 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagFormula = false;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogAlongLine::DialogAccepted);
@@ -42,6 +46,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogAlongLine::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
+    ui->comboBoxLineType->setCurrentIndex(1);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
@@ -54,13 +59,14 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogAlongLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogAlongLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogAlongLine::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogAlongLine::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogAlongLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogAlongLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogAlongLine::FormulaChanged);
 }
 
-DialogAlongLine::~DialogAlongLine()
-{
+DialogAlongLine::~DialogAlongLine(){
     delete ui;
 }
 
@@ -88,6 +94,7 @@ void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
@@ -96,6 +103,7 @@ void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();
@@ -113,24 +121,12 @@ void DialogAlongLine::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogAlongLine::getSecondPointId() const{
-    return secondPointId;
-}
-
 void DialogAlongLine::setSecondPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-qint64 DialogAlongLine::getFirstPointId() const{
-    return firstPointId;
-}
-
 void DialogAlongLine::setFirstPointId(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
-}
-
-QString DialogAlongLine::getFormula() const{
-    return formula;
 }
 
 void DialogAlongLine::setFormula(const QString &value){
@@ -138,17 +134,9 @@ void DialogAlongLine::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogAlongLine::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogAlongLine::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogAlongLine::getPointName() const{
-    return pointName;
 }
 
 void DialogAlongLine::setPointName(const QString &value){

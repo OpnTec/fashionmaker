@@ -61,6 +61,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboBoxFirstPoint</tabstop>
+  <tabstop>comboBoxSecondPoint</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

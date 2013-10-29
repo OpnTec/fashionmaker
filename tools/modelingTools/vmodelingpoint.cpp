@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,11 +20,9 @@
  ****************************************************************************/
 
 #include "vmodelingpoint.h"
-#include <QPen>
-#include <QBrush>
-#include <QDebug>
-#include <QGraphicsItem>
 #include "container/vpointf.h"
+
+const QString VModelingPoint::TagName = QStringLiteral("point");
 
 VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id,
                        QGraphicsItem *parent):VModelingTool(doc, data, id),
@@ -53,8 +51,8 @@ void VModelingPoint::NameChangePosition(const QPointF pos){
 void VModelingPoint::UpdateNamePosition(qreal mx, qreal my){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("mx", QString().setNum(toMM(mx)));
-        domElement.setAttribute("my", QString().setNum(toMM(my)));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }
@@ -101,7 +99,4 @@ void VModelingPoint::RefreshLine(){
     } else {
         lineName->setVisible(true);
     }
-}
-
-VModelingPoint::~VModelingPoint(){
 }

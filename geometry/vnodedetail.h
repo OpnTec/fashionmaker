@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -31,26 +31,32 @@ namespace NodeDetail {
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
-class VNodeDetail
-{
+class VNodeDetail{
 public:
-    VNodeDetail();
-    VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode);
-    VNodeDetail(const VNodeDetail &node);
-    qint64 getId() const;
-    void setId(const qint64 &value);
-    Tool::Tools getTypeTool() const;
-    void setTypeTool(const Tool::Tools &value);
-    Draw::Draws getMode() const;
-    void setMode(const Draw::Draws &value);
-    NodeDetail::NodeDetails getTypeNode() const;
-    void setTypeNode(const NodeDetail::NodeDetails &value);
-
+                  VNodeDetail();
+                  VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
+                              qreal mx = 0, qreal my = 0);
+                  VNodeDetail(const VNodeDetail &node);
+                  VNodeDetail &operator=(const VNodeDetail &node);
+    inline qint64 getId() const {return id;}
+    inline void   setId(const qint64 &value) {id = value;}
+    inline Tool::Tools getTypeTool() const {return typeTool;}
+    inline void   setTypeTool(const Tool::Tools &value) {typeTool = value;}
+    inline Draw::Draws getMode() const {return mode;}
+    inline void   setMode(const Draw::Draws &value) {mode = value;}
+    inline NodeDetail::NodeDetails getTypeNode() const {return typeNode;}
+    inline void   setTypeNode(const NodeDetail::NodeDetails &value) {typeNode = value;}
+    inline qreal  getMx() const {return mx;}
+    inline void   setMx(const qreal &value) {mx = value;}
+    inline qreal  getMy() const {return my;}
+    inline void   setMy(const qreal &value) {my = value;}
 private:
-    qint64 id;
-    Tool::Tools typeTool;
-    Draw::Draws mode;
+    qint64        id;
+    Tool::Tools   typeTool;
+    Draw::Draws   mode;
     NodeDetail::NodeDetails typeNode;
+    qreal         mx;
+    qreal         my;
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)

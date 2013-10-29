@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,6 +20,10 @@
  ****************************************************************************/
 
 #include "vmodelingnormal.h"
+#include "../drawTools/vtoolnormal.h"
+#include <container/calculator.h>
+
+const QString VModelingNormal::ToolType = QStringLiteral("normal");
 
 VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,
                          const QString &typeLine,
@@ -31,7 +35,6 @@ VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint
     if(typeCreation == Tool::FromGui){
         AddToFile();
     }
-
 }
 
 void VModelingNormal::setDialog(){
@@ -72,8 +75,8 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VModelingNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                result*PrintDPI/25.4, angle);
+        QPointF fPoint = VToolNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+                                                toPixel(result), angle);
         qint64 id = _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
@@ -95,23 +98,14 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
     return point;
 }
 
-QPointF VModelingNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qreal &angle){
-    QLineF line(firstPoint, secondPoint);
-    QLineF normal = line.normalVector();
-    normal.setAngle(normal.angle()+angle);
-    normal.setLength(length);
-    return normal.p2();
-}
-
 void VModelingNormal::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        typeLine = domElement.attribute("typeLine", "");
-        formula = domElement.attribute("length", "");
-        basePointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
-        angle = domElement.attribute("angle", "").toInt();
+        typeLine = domElement.attribute(AttrTypeLine, "");
+        formula = domElement.attribute(AttrLength, "");
+        basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        angle = domElement.attribute(AttrAngle, "").toInt();
     }
     RefreshGeometry();
 }
@@ -120,12 +114,12 @@ void VModelingNormal::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogNormal->getPointName());
-            domElement.setAttribute("typeLine", dialogNormal->getTypeLine());
-            domElement.setAttribute("length", dialogNormal->getFormula());
-            domElement.setAttribute("angle", QString().setNum(dialogNormal->getAngle()));
-            domElement.setAttribute("firstPoint", QString().setNum(dialogNormal->getFirstPointId()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogNormal->getSecondPointId()));
+            domElement.setAttribute(AttrName, dialogNormal->getPointName());
+            domElement.setAttribute(AttrTypeLine, dialogNormal->getTypeLine());
+            domElement.setAttribute(AttrLength, dialogNormal->getFormula());
+            domElement.setAttribute(AttrAngle, QString().setNum(dialogNormal->getAngle()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogNormal->getFirstPointId()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogNormal->getSecondPointId()));
             emit FullUpdateTree();
         }
     }
@@ -138,19 +132,19 @@ void VModelingNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 
 void VModelingNormal::AddToFile(){
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "normal");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "typeLine", typeLine);
-    AddAttribute(domElement, "length", formula);
-    AddAttribute(domElement, "angle", angle);
-    AddAttribute(domElement, "firstPoint", basePointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrTypeLine, typeLine);
+    AddAttribute(domElement, AttrLength, formula);
+    AddAttribute(domElement, AttrAngle, angle);
+    AddAttribute(domElement, AttrFirstPoint, basePointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToModeling(domElement);
 }

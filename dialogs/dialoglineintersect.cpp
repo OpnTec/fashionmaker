@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -29,6 +29,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     number = 0;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLineIntersect::DialogAccepted);
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);
@@ -40,8 +41,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
 }
 
-DialogLineIntersect::~DialogLineIntersect()
-{
+DialogLineIntersect::~DialogLineIntersect(){
     delete ui;
 }
 
@@ -70,6 +70,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP1Line1->setCurrentIndex(index);
                 p1Line1 = id;
                 number++;
+                emit ToolTip(tr("Select second point of first line"));
                 return;
             }
         }
@@ -79,6 +80,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP2Line1->setCurrentIndex(index);
                 p2Line1 = id;
                 number++;
+                emit ToolTip(tr("Select first point of second line"));
                 return;
             }
         }
@@ -88,6 +90,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP1Line2->setCurrentIndex(index);
                 p1Line2 = id;
                 number++;
+                emit ToolTip(tr("Select second point of second line"));
                 return;
             }
         }
@@ -97,6 +100,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, Scene::Scenes type){
                 ui->comboBoxP2Line2->setCurrentIndex(index);
                 p2Line2 = id;
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 flagPoint = CheckIntersecion();
@@ -153,7 +157,7 @@ void DialogLineIntersect::P2Line2Changed(int index){
 }
 
 void DialogLineIntersect::CheckState(){
-    Q_CHECK_PTR(bOk);
+    Q_ASSERT(bOk != 0);
     bOk->setEnabled(flagName && flagPoint);
 }
 
@@ -174,17 +178,9 @@ bool DialogLineIntersect::CheckIntersecion(){
     }
 }
 
-qint64 DialogLineIntersect::getP2Line2() const{
-    return p2Line2;
-}
-
 void DialogLineIntersect::setP2Line2(const qint64 &value){
     p2Line2 = value;
     ChangeCurrentData(ui->comboBoxP2Line2, value);
-}
-
-qint64 DialogLineIntersect::getP1Line2() const{
-    return p1Line2;
 }
 
 void DialogLineIntersect::setP1Line2(const qint64 &value){
@@ -192,26 +188,14 @@ void DialogLineIntersect::setP1Line2(const qint64 &value){
     ChangeCurrentData(ui->comboBoxP1Line2, value);
 }
 
-qint64 DialogLineIntersect::getP2Line1() const{
-    return p2Line1;
-}
-
 void DialogLineIntersect::setP2Line1(const qint64 &value){
     p2Line1 = value;
     ChangeCurrentData(ui->comboBoxP2Line1, value);
 }
 
-qint64 DialogLineIntersect::getP1Line1() const{
-    return p1Line1;
-}
-
 void DialogLineIntersect::setP1Line1(const qint64 &value){
     p1Line1 = value;
     ChangeCurrentData(ui->comboBoxP1Line1, value);
-}
-
-QString DialogLineIntersect::getPointName() const{
-    return pointName;
 }
 
 void DialogLineIntersect::setPointName(const QString &value){

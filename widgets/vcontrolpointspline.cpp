@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,15 +20,11 @@
  ****************************************************************************/
 
 #include "vcontrolpointspline.h"
-#include <QPen>
-#include <QBrush>
-#include <QGraphicsScene>
-#include <QDebug>
 
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent):QGraphicsEllipseItem(parent),
-    radius(1.5*PrintDPI/25.4), controlLine(0), indexSpline(indexSpline), position(position){
+    radius(toPixel(1.5)), controlLine(0), indexSpline(indexSpline), position(position){
     //create circle
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());

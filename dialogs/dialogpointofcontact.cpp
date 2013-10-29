@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -32,7 +32,11 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     radioButtonStandartTable = ui.radioButtonStandartTable;
     radioButtonIncrements = ui.radioButtonIncrements;
     radioButtonLengthLine = ui.radioButtonLengthLine;
+    radioButtonLengthArc = ui.radioButtonLengthArc;
+    radioButtonLengthCurve = ui.radioButtonLengthSpline;
     lineEditFormula = ui.lineEditFormula;
+    labelEditFormula = ui.labelEditFormula;
+    labelEditNamePoint = ui.labelEditNamePoint;
     flagFormula = false;
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogPointOfContact::DialogAccepted);
@@ -53,6 +57,8 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     connect(ui.radioButtonStandartTable, &QRadioButton::clicked, this, &DialogPointOfContact::StandartTable);
     connect(ui.radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
     connect(ui.radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
+    connect(ui.radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
+    connect(ui.radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
     connect(ui.toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
     connect(ui.lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
@@ -82,6 +88,7 @@ void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui.comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
@@ -90,6 +97,7 @@ void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui.comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select point of center of arc"));
                 return;
             }
         }
@@ -98,6 +106,7 @@ void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui.comboBoxCenter->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();
@@ -105,7 +114,6 @@ void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
         }
     }
 }
-
 
 void DialogPointOfContact::DialogAccepted(){
     pointName = ui.lineEditNamePoint->text();
@@ -116,24 +124,12 @@ void DialogPointOfContact::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogPointOfContact::getSecondPoint() const{
-    return secondPoint;
-}
-
 void DialogPointOfContact::setSecondPoint(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
 }
 
-qint64 DialogPointOfContact::getFirstPoint() const{
-    return firstPoint;
-}
-
 void DialogPointOfContact::setFirstPoint(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
-}
-
-qint64 DialogPointOfContact::getCenter() const{
-    return center;
 }
 
 void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id){
@@ -141,17 +137,9 @@ void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id){
     center = value;
 }
 
-QString DialogPointOfContact::getRadius() const{
-    return radius;
-}
-
 void DialogPointOfContact::setRadius(const QString &value){
     radius = value;
     ui.lineEditFormula->setText(radius);
-}
-
-QString DialogPointOfContact::getPointName() const{
-    return pointName;
 }
 
 void DialogPointOfContact::setPointName(const QString &value){

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,24 +28,19 @@ namespace Ui {
 class DialogArc;
 }
 
-class DialogArc : public DialogTool
-{
+class DialogArc : public DialogTool{
     Q_OBJECT
 public:
-    explicit DialogArc(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
-    ~DialogArc();
-    qint64 GetCenter() const;
-    void SetCenter(const qint64 &value);
-
-    QString GetRadius() const;
-    void SetRadius(const QString &value);
-
-    QString GetF1() const;
-    void SetF1(const QString &value);
-
-    QString GetF2() const;
-    void SetF2(const QString &value);
-
+                     DialogArc(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+                     ~DialogArc();
+    inline qint64    GetCenter() const {return center;}
+    void             SetCenter(const qint64 &value);
+    inline QString   GetRadius() const {return radius;}
+    void             SetRadius(const QString &value);
+    inline QString   GetF1() const {return f1;}
+    void             SetF1(const QString &value);
+    inline QString   GetF2() const {return f2;}
+    void             SetF2(const QString &value);
 public slots:
     virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
     virtual void     DialogAccepted();
@@ -53,7 +48,7 @@ public slots:
     void             PutRadius();
     void             PutF1();
     void             PutF2();
-    void             LineArcs();
+    void             LineAngles();
     void             RadiusChanged();
     void             F1Changed();
     void             F2Changed();
@@ -75,7 +70,7 @@ private:
     void             EvalRadius();
     void             EvalF1();
     void             EvalF2();
-    void             ShowLineArcs();
+    void             ShowLineAngles();
 };
 
 #endif // DIALOGARC_H

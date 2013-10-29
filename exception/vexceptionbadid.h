@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,19 +24,19 @@
 
 #include "vexception.h"
 
-class VExceptionBadId : public VException
-{
+class VExceptionBadId : public VException{
 public:
-    VExceptionBadId(const QString &what, const qint64 &id);
-    VExceptionBadId(const QString &what, const QString &key);
-    VExceptionBadId(const VExceptionBadId &e);
-    virtual ~VExceptionBadId() noexcept(true){}
+                    VExceptionBadId(const QString &what, const qint64 &id):VException(what), id(id),
+                        key(QString()){}
+                    VExceptionBadId(const QString &what, const QString &key):VException(what), id(0), key(key){}
+                    VExceptionBadId(const VExceptionBadId &e):VException(e), id(e.BadId()), key(e.BadKey()){}
+    virtual         ~VExceptionBadId() noexcept(true){}
     virtual QString ErrorMessage() const;
-    qint64 BadId() const {return id; }
-    QString BadKey() const {return key; }
+    inline qint64   BadId() const {return id; }
+    inline QString  BadKey() const {return key; }
 protected:
-    qint64 id;
-    QString key;
+    qint64          id;
+    QString         key;
 };
 
 #endif // VEXCEPTIONBADID_H

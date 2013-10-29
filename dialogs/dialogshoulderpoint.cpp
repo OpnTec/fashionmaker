@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -34,7 +34,11 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagFormula = false;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogShoulderPoint::DialogAccepted);
@@ -56,13 +60,14 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogShoulderPoint::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogShoulderPoint::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogShoulderPoint::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);
 }
 
-DialogShoulderPoint::~DialogShoulderPoint()
-{
+DialogShoulderPoint::~DialogShoulderPoint(){
     delete ui;
 }
 
@@ -90,6 +95,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP1Line->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
@@ -98,6 +104,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxP2Line->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select point of shoulder"));
                 return;
             }
         }
@@ -106,6 +113,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxPShoulder->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();
@@ -124,32 +132,16 @@ void DialogShoulderPoint::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogShoulderPoint::getPShoulder() const{
-    return pShoulder;
-}
-
 void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
-}
-
-qint64 DialogShoulderPoint::getP2Line() const{
-    return p2Line;
 }
 
 void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
-qint64 DialogShoulderPoint::getP1Line() const{
-    return p1Line;
-}
-
 void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id){
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
-}
-
-QString DialogShoulderPoint::getFormula() const{
-    return formula;
 }
 
 void DialogShoulderPoint::setFormula(const QString &value){
@@ -157,17 +149,9 @@ void DialogShoulderPoint::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogShoulderPoint::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogShoulderPoint::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogShoulderPoint::getPointName() const{
-    return pointName;
 }
 
 void DialogShoulderPoint::setPointName(const QString &value){

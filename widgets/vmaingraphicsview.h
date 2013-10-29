@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,30 +24,25 @@
 
 #include <QGraphicsView>
 
-class VMainGraphicsView : public QGraphicsView
-{
+class VMainGraphicsView : public QGraphicsView{
     Q_OBJECT
 public:
     explicit VMainGraphicsView(QWidget *parent = 0);
-    
 signals:
+    void     NewFactor(qreal factor);
+public slots:
+    void     scalingTime(qreal x);
+    void     animFinished();
 protected:
     /**
      * @brief wheelEvent обробник повороту колеса мишки.
      * @param event передається подія.
      */
-    void wheelEvent ( QWheelEvent * event );
-    
-public slots:
-    /**
-     * @brief ZoomIn збільшує масштаб листа.
-     */
-    void ZoomIn();
-    /**
-     * @brief ZoomOut зменшує масштаб листа.
-     */
-    void ZoomOut();
-    
+    void     wheelEvent ( QWheelEvent * event );
+    void     mousePressEvent(QMouseEvent *mousePress);
+    void     mouseReleaseEvent(QMouseEvent *event);
+private:
+    qint32   _numScheduledScalings;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

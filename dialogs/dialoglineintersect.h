@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,22 +28,21 @@ namespace Ui {
 class DialogLineIntersect;
 }
 
-class DialogLineIntersect : public DialogTool
-{
+class DialogLineIntersect : public DialogTool{
     Q_OBJECT
 public:
     explicit                DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                                 QWidget *parent = 0);
                             ~DialogLineIntersect();
-    qint64                  getP1Line1() const;
+    inline qint64           getP1Line1() const {return p1Line1;}
     void                    setP1Line1(const qint64 &value);
-    qint64                  getP2Line1() const;
+    inline qint64           getP2Line1() const {return p2Line1;}
     void                    setP2Line1(const qint64 &value);
-    qint64                  getP1Line2() const;
+    inline qint64           getP1Line2() const {return p1Line2;}
     void                    setP1Line2(const qint64 &value);
-    qint64                  getP2Line2() const;
+    inline qint64           getP2Line2() const {return p2Line2;}
     void                    setP2Line2(const qint64 &value);
-    QString                 getPointName() const;
+    inline QString          getPointName() const {return pointName;}
     void                    setPointName(const QString &value);
 public slots:
     virtual void            ChoosedObject(qint64 id, Scene::Scenes type);

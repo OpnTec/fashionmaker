@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -25,16 +25,10 @@
 VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement):
     VException(what), tagText(QString()), tagName(QString()), lineNumber(-1), moreInfo(QString()){
     Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-    if(domElement.isText()){
-        QDomText text = domElement.toText();
-        tagText = text.data();
-    }
+    QTextStream stream(&tagText);
+    domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
-}
-
-VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e):VException(e),
-    tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()), moreInfo(e.MoreInformation()){
 }
 
 QString VExceptionObjectError::ErrorMessage() const{

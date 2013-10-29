@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,16 +24,15 @@
 
 #include "vexception.h"
 
-class VExceptionConversionError : public VException
-{
+class VExceptionConversionError : public VException{
 public:
-    VExceptionConversionError(const QString &what, const QString &str);
-    VExceptionConversionError(const VExceptionConversionError &e);
-    virtual ~VExceptionConversionError() noexcept(true) {}
+                    VExceptionConversionError(const QString &what, const QString &str);
+                    VExceptionConversionError(const VExceptionConversionError &e):VException(e), str(e.String()){}
+    virtual         ~VExceptionConversionError() noexcept(true) {}
     virtual QString ErrorMessage() const;
-    QString String() const {return str;}
+    inline QString  String() const {return str;}
 protected:
-    QString str;
+    QString         str;
 };
 
 #endif // VEXCEPTIONCONVERSIONERROR_H

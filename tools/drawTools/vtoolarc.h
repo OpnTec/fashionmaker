@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -30,31 +30,32 @@
 class VToolArc :public VDrawTool, public QGraphicsPathItem{
     Q_OBJECT
 public:
-                              VToolArc(VDomDocument *doc, VContainer *data, qint64 id,
-                                       Tool::Sources typeCreation, QGraphicsItem * parent = 0);
-    virtual void              setDialog();
-    static void               Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene,
-                                     VDomDocument *doc,
-                       VContainer *data);
-    static void               Create(const qint64 _id, const qint64 &center, const QString &radius,
-                                     const QString &f1, const QString &f2, VMainGraphicsScene  *scene,
-                                     VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                     Tool::Sources typeCreation);
+                 VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                          QGraphicsItem * parent = 0);
+    virtual void setDialog();
+    static void  Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
+                        VContainer *data);
+    static void  Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
+                        const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                        const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString TagName;
+    static const QString ToolType;
 public slots:
-    virtual void              FullUpdateFromFile();
-    virtual void              FullUpdateFromGui(int result);
-    virtual void              ChangedActivDraw(const QString newName);
-    virtual void              ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void FullUpdateFromFile();
+    virtual void FullUpdateFromGui(int result);
+    virtual void ChangedActivDraw(const QString newName);
+    virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void SetFactor(qreal factor);
 protected:
-    virtual void              contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void              AddToFile();
-    virtual void              mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void              hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void              hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void              RemoveReferens();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void AddToFile();
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void RemoveReferens();
 private:
     QSharedPointer<DialogArc> dialogArc;
-    void                      RefreshGeometry();
+    void         RefreshGeometry();
 };
 
 #endif // VTOOLARC_H

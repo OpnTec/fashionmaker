@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,26 +23,20 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
-#include <QtXml>
-#include <QComboBox>
-#include <QSharedPointer>
-#include <QToolButton>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
 #include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
+#include "tools/vtooldetail.h"
 #include "tools/drawTools/drawtools.h"
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#include "tools/vtooldetail.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow{
     Q_OBJECT    
 public:
     explicit           MainWindow(QWidget *parent = 0);
@@ -80,6 +74,9 @@ public slots:
     void               ToolSplinePath(bool checked);
     void               ToolPointOfContact(bool checked);
     void               ToolDetail(bool checked);
+    void               ToolHeight(bool checked);
+    void               ToolTriangle(bool checked);
+    void               ToolPointOfIntersection(bool checked);
     void               ClosedDialogEndLine(int result);
     void               ClosedDialogLine(int result);
     void               ClosedDialogAlongLine(int result);
@@ -92,6 +89,12 @@ public slots:
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);
     void               ClosedDialogDetail(int result);
+    void               ClosedDialogHeight(int result);
+    void               ClosedDialogTriangle(int result);
+    void               ClosedDialogPointOfIntersection(int result);
+    void               About();
+    void               AboutQt();
+    void               ShowToolTip(const QString &toolTip);
     /**
      * @brief tableClosed Слот, що виконується при отриманні сигналу закриття вікна укладання
      *деталей моделі.
@@ -120,25 +123,28 @@ private:
     VMainGraphicsView  *view;
     bool               isInitialized;
     DialogIncrements   *dialogTable;
-    QSharedPointer<DialogEndLine>        dialogEndLine;
-    QSharedPointer<DialogLine>           dialogLine;
-    QSharedPointer<DialogAlongLine>      dialogAlongLine;
-    QSharedPointer<DialogShoulderPoint>  dialogShoulderPoint;
-    QSharedPointer<DialogNormal>         dialogNormal;
-    QSharedPointer<DialogBisector>       dialogBisector;
-    QSharedPointer<DialogLineIntersect>  dialogLineIntersect;
-    QSharedPointer<DialogSpline>         dialogSpline;
-    QSharedPointer<DialogArc>            dialogArc;
-    QSharedPointer<DialogSplinePath>     dialogSplinePath;
-    QSharedPointer<DialogPointOfContact> dialogPointOfContact;
-    QSharedPointer<DialogDetail>         dialogDetail;
+    QSharedPointer<DialogEndLine>             dialogEndLine;
+    QSharedPointer<DialogLine>                dialogLine;
+    QSharedPointer<DialogAlongLine>           dialogAlongLine;
+    QSharedPointer<DialogShoulderPoint>       dialogShoulderPoint;
+    QSharedPointer<DialogNormal>              dialogNormal;
+    QSharedPointer<DialogBisector>            dialogBisector;
+    QSharedPointer<DialogLineIntersect>       dialogLineIntersect;
+    QSharedPointer<DialogSpline>              dialogSpline;
+    QSharedPointer<DialogArc>                 dialogArc;
+    QSharedPointer<DialogSplinePath>          dialogSplinePath;
+    QSharedPointer<DialogPointOfContact>      dialogPointOfContact;
+    QSharedPointer<DialogDetail>              dialogDetail;
+    QSharedPointer<DialogHeight>              dialogHeight;
+    QSharedPointer<DialogTriangle>            dialogTriangle;
+    QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
     DialogHistory      *dialogHistory;
     VDomDocument       *doc;
     VContainer         *data;
     QComboBox          *comboBoxDraws;
     QString            fileName;
     bool               changeInFile;
-    Draw::Draws         mode;
+    Draw::Draws        mode;
     void               ToolBarOption();
     void               ToolBarDraws();
     void               CanselTool();
@@ -147,12 +153,16 @@ private:
     void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
     void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                                     QSharedPointer<Dialog> &dialog,
-                       Func closeDialogSlot);
+                                     const QString &toolTip,QSharedPointer<Dialog> &dialog,
+                                     Func closeDialogSlot);
     void               MinimumScrollBar();
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
+    template <typename DrawTool, typename ModelingTool, typename Dialog>
+    void               ClosedDialog(QSharedPointer<Dialog> &dialog, int result);
+    bool               SafeSaveing(const QString &fileName)const;
+    void               AutoSavePattern();
 };
 
 #endif // MAINWINDOW_H

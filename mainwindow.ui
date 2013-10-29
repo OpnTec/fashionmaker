@@ -36,8 +36,11 @@
         <height>0</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string/>
+      </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -45,7 +48,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>104</height>
+         <height>150</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -54,60 +57,20 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating points.</string>
+       </property>
        <attribute name="label">
         <string>Point</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QToolButton" name="toolButtonNormal">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/normal.png</normaloff>:/icon/32x32/normal.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QToolButton" name="toolButtonShoulderPoint">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonEndLine">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point on the end line.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -127,17 +90,46 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QToolButton" name="toolButtonAlongLine">
+        <item row="1" column="1">
+         <widget class="QToolButton" name="toolButtonShoulderPoint">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of shoulder.</string>
           </property>
           <property name="text">
            <string>...</string>
           </property>
           <property name="icon">
            <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
+            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QToolButton" name="toolButtonPointOfContact">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of contact.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/point_of_contact.png</normaloff>:/icon/32x32/point_of_contact.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -154,6 +146,9 @@
          <widget class="QToolButton" name="toolButtonBisector">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of bisector.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -173,8 +168,112 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QToolButton" name="toolButtonPointOfContact">
+        <item row="1" column="0">
+         <widget class="QToolButton" name="toolButtonNormal">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of normal.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/normal.png</normaloff>:/icon/32x32/normal.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QToolButton" name="toolButtonAlongLine">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point along line.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QToolButton" name="toolButtonHeight">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of height.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/height.png</normaloff>:/icon/32x32/height.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QToolButton" name="toolButtonTriangle">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool triangle.</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icon.qrc">
+            <normaloff>:/icon/32x32/triangle.png</normaloff>:/icon/32x32/triangle.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QToolButton" name="toolButtonPointOfIntersection">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -183,7 +282,7 @@
           </property>
           <property name="icon">
            <iconset resource="icon.qrc">
-            <normaloff>:/icon/32x32/point_of_contact.png</normaloff>:/icon/32x32/point_of_contact.png</iconset>
+            <normaloff>:/icon/32x32/point_of_intersection.png</normaloff>:/icon/32x32/point_of_intersection.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -213,6 +312,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating lines.</string>
+       </property>
        <attribute name="label">
         <string>Line</string>
        </attribute>
@@ -221,6 +323,9 @@
          <widget class="QToolButton" name="toolButtonLine">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool line.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -244,6 +349,9 @@
          <widget class="QToolButton" name="toolButtonLineIntersect">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool point of line intersection.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -280,6 +388,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating curves.</string>
+       </property>
        <attribute name="label">
         <string>Curve</string>
        </attribute>
@@ -288,6 +399,9 @@
          <widget class="QToolButton" name="toolButtonSpline">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -311,6 +425,9 @@
          <widget class="QToolButton" name="toolButtonSplinePath">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool path curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -347,6 +464,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Tools for creating arcs.</string>
+       </property>
        <attribute name="label">
         <string>Arc</string>
        </attribute>
@@ -355,6 +475,9 @@
          <widget class="QToolButton" name="toolButtonArc">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool arc.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -382,8 +505,17 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>427</height>
+         <height>58</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Tools for creating details.</string>
        </property>
        <attribute name="label">
         <string>Detail</string>
@@ -391,6 +523,9 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonNewDetail">
+          <property name="toolTip">
+           <string>Tool new detail.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -434,6 +569,37 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAbout_Valentina"/>
+   </widget>
+   <widget class="QMenu" name="menuDrawing">
+    <property name="title">
+     <string>Drawing</string>
+    </property>
+    <addaction name="actionNewDraw"/>
+    <addaction name="actionOptionDraw"/>
+    <addaction name="actionTable"/>
+    <addaction name="actionHistory"/>
+    <addaction name="actionLayout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuDrawing"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -666,8 +832,37 @@
     <string>Create layout</string>
    </property>
   </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionAbout_Valentina">
+   <property name="text">
+    <string>About Valentina</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>toolButtonEndLine</tabstop>
+  <tabstop>toolButtonAlongLine</tabstop>
+  <tabstop>toolButtonBisector</tabstop>
+  <tabstop>toolButtonNormal</tabstop>
+  <tabstop>toolButtonShoulderPoint</tabstop>
+  <tabstop>toolButtonPointOfContact</tabstop>
+  <tabstop>toolButtonLine</tabstop>
+  <tabstop>toolButtonLineIntersect</tabstop>
+  <tabstop>toolButtonSpline</tabstop>
+  <tabstop>toolButtonSplinePath</tabstop>
+  <tabstop>toolButtonArc</tabstop>
+  <tabstop>toolButtonNewDetail</tabstop>
+ </tabstops>
  <resources>
   <include location="icon.qrc"/>
  </resources>

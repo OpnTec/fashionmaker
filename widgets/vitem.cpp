@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,16 +20,6 @@
  ****************************************************************************/
 
 #include "vitem.h"
-#include <QGraphicsScene>
-#include <QDebug>
-#include "options.h"
-
-VItem::VItem():numInOutList(0){
-}
-
-VItem::VItem ( int numInList, QGraphicsItem * parent ):QGraphicsPathItem ( parent ),
-    numInOutList(numInList){
-}
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent ):
     QGraphicsPathItem ( path, parent ), numInOutList(numInList){
@@ -76,8 +66,4 @@ QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value ){
 
 void VItem::LengthChanged(){
     checkItemChange();
-}
-
-void VItem::SetIndexInList( qint32 index ){
-    numInOutList = index;
 }

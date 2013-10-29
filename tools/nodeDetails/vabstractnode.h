@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -24,13 +24,16 @@
 
 #include "../vabstracttool.h"
 
-class VAbstractNode : public VAbstractTool
-{
+class VAbstractNode : public VAbstractTool{
     Q_OBJECT
 public:
                  VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
                                Draw::Draws typeobject, QObject *parent = 0 );
     virtual      ~VAbstractNode() {}
+    static const QString AttrIdObject;
+    static const QString AttrTypeObject;
+    static const QString TypeObjectCalculation;
+    static const QString TypeObjectModeling;
 protected:
     qint64       idNode;
     Draw::Draws  typeobject;

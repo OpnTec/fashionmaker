@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,6 +20,9 @@
  ****************************************************************************/
 
 #include "vnodespline.h"
+
+const QString VNodeSpline::TagName = QStringLiteral("spline");
+const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                  Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem * parent) :
@@ -35,7 +38,8 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 }
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                         Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
+                                 Draw::Draws typeobject, const Document::Documents &parse,
+                                 Tool::Sources typeCreation){
     VNodeSpline *spl = 0;
     if(parse == Document::FullParse){
         spl = new VNodeSpline(doc, data, id, idSpline, typeobject, typeCreation);
@@ -52,15 +56,15 @@ void VNodeSpline::FullUpdateFromFile(){
 }
 
 void VNodeSpline::AddToFile(){
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "modelingSpline");
-    AddAttribute(domElement, "idObject", idNode);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrIdObject, idNode);
     if(typeobject == Draw::Calculation){
-        AddAttribute(domElement, "typeObject", "Calculation");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
     } else {
-        AddAttribute(domElement, "typeObject", "Modeling");
+        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
     }
 
     AddToModeling(domElement);

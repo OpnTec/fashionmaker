@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,8 +21,6 @@
 
 #include "dialogline.h"
 #include "ui_dialogline.h"
-#include <QPushButton>
-#include <QCloseEvent>
 
 DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0){
@@ -40,10 +38,6 @@ DialogLine::~DialogLine(){
     delete ui;
 }
 
-qint64 DialogLine::getSecondPoint() const{
-    return secondPoint;
-}
-
 void DialogLine::setSecondPoint(const qint64 &value){
     secondPoint = value;
     VPointF point = data->GetPoint(value);
@@ -51,10 +45,6 @@ void DialogLine::setSecondPoint(const qint64 &value){
     if(index != -1){
         ui->comboBoxSecondPoint->setCurrentIndex(index);
     }
-}
-
-qint64 DialogLine::getFirstPoint() const{
-    return firstPoint;
 }
 
 void DialogLine::setFirstPoint(const qint64 &value){
@@ -99,6 +89,7 @@ void DialogLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                emit ToolTip(tr("Select second point"));
                 return;
             }
         }
@@ -107,6 +98,7 @@ void DialogLine::ChoosedObject(qint64 id, Scene::Scenes type){
             if ( index != -1 ) { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number = 0;
+                emit ToolTip("");
             }
             if(!isInitialized){
                 this->show();

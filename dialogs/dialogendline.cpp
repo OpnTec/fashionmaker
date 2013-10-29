@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,10 +21,6 @@
 
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
-#include <QCloseEvent>
-#include <QString>
-#include "container/vpointf.h"
-#include "container/calculator.h"
 
 DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
@@ -38,7 +34,11 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
     flagFormula = false;
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogEndLine::DialogAccepted);
@@ -74,6 +74,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogEndLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEndLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEndLine::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogEndLine::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEndLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
@@ -99,12 +101,9 @@ void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
+        emit ToolTip("");
         this->show();
     }
-}
-
-QString DialogEndLine::getPointName() const{
-    return pointName;
 }
 
 void DialogEndLine::setPointName(const QString &value){
@@ -112,17 +111,9 @@ void DialogEndLine::setPointName(const QString &value){
     ui->lineEditNamePoint->setText(pointName);
 }
 
-QString DialogEndLine::getTypeLine() const{
-    return typeLine;
-}
-
 void DialogEndLine::setTypeLine(const QString &value){
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-}
-
-QString DialogEndLine::getFormula() const{
-    return formula;
 }
 
 void DialogEndLine::setFormula(const QString &value){
@@ -130,17 +121,9 @@ void DialogEndLine::setFormula(const QString &value){
     ui->lineEditFormula->setText(formula);
 }
 
-qreal DialogEndLine::getAngle() const{
-    return angle;
-}
-
 void DialogEndLine::setAngle(const qreal &value){
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
-}
-
-qint64 DialogEndLine::getBasePointId() const{
-    return basePointId;
 }
 
 void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id){
@@ -156,7 +139,6 @@ void DialogEndLine::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-DialogEndLine::~DialogEndLine()
-{
+DialogEndLine::~DialogEndLine(){
     delete ui;
 }

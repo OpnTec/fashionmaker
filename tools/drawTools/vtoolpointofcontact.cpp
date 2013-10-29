@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,6 +20,9 @@
  ****************************************************************************/
 
 #include "vtoolpointofcontact.h"
+#include <container/calculator.h>
+
+const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
 VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                          const QString &radius, const qint64 &center,
@@ -91,13 +94,19 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
     QString errorMsg;
     qreal result = cal.eval(radius, &errorMsg);
     if(errorMsg.isEmpty()){
-        QPointF fPoint = VToolPointOfContact::FindPoint(result*PrintDPI/25.4, centerP.toQPointF(),
+        QPointF fPoint = VToolPointOfContact::FindPoint(toPixel(result), centerP.toQPointF(),
                                                          firstP.toQPointF(), secondP.toQPointF());
         qint64 id =  _id;
         if(typeCreation == Tool::FromGui){
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(secondPointId, id);
+            data->AddLine(center, id);
         } else {
             data->UpdatePoint(id,VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->AddLine(firstPointId, id);
+            data->AddLine(secondPointId, id);
+            data->AddLine(center, id);
             if(parse != Document::FullParse){
                 doc->UpdateToolData(id, data);
             }
@@ -109,6 +118,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(point, &VToolPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(center);
             doc->IncrementReferens(firstPointId);
@@ -120,10 +130,10 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
 void VToolPointOfContact::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        radius = domElement.attribute("radius", "");
-        center = domElement.attribute("center", "").toLongLong();
-        firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-        secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+        radius = domElement.attribute(AttrRadius, "");
+        center = domElement.attribute(AttrCenter, "").toLongLong();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
@@ -132,15 +142,20 @@ void VToolPointOfContact::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("name", dialogPointOfContact->getPointName());
-            domElement.setAttribute("radius", dialogPointOfContact->getRadius());
-            domElement.setAttribute("center", QString().setNum(dialogPointOfContact->getCenter()));
-            domElement.setAttribute("firstPoint", QString().setNum(dialogPointOfContact->getFirstPoint()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogPointOfContact->getSecondPoint()));
+            domElement.setAttribute(AttrName, dialogPointOfContact->getPointName());
+            domElement.setAttribute(AttrRadius, dialogPointOfContact->getRadius());
+            domElement.setAttribute(AttrCenter, QString().setNum(dialogPointOfContact->getCenter()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogPointOfContact->getFirstPoint()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogPointOfContact->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
     dialogPointOfContact.clear();
+}
+
+void VToolPointOfContact::SetFactor(qreal factor){
+    VDrawTool::SetFactor(factor);
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
@@ -149,18 +164,18 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void VToolPointOfContact::AddToFile(){
     VPointF point = VAbstractTool::data.GetPoint(id);
-    QDomElement domElement = doc->createElement("point");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "pointOfContact");
-    AddAttribute(domElement, "name", point.name());
-    AddAttribute(domElement, "mx", point.mx()/PrintDPI*25.4);
-    AddAttribute(domElement, "my", point.my()/PrintDPI*25.4);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrName, point.name());
+    AddAttribute(domElement, AttrMx, toMM(point.mx()));
+    AddAttribute(domElement, AttrMy, toMM(point.my()));
 
-    AddAttribute(domElement, "radius", radius);
-    AddAttribute(domElement, "center", center);
-    AddAttribute(domElement, "firstPoint", firstPointId);
-    AddAttribute(domElement, "secondPoint", secondPointId);
+    AddAttribute(domElement, AttrRadius, radius);
+    AddAttribute(domElement, AttrCenter, center);
+    AddAttribute(domElement, AttrFirstPoint, firstPointId);
+    AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,23 +23,22 @@
 #define VEXCEPTIONWRONGPARAMETERID_H
 
 #include "vexception.h"
-#include <QDomElement>
 
-class VExceptionWrongParameterId : public VException
-{
+class VExceptionWrongParameterId : public VException{
 public:
-    VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
-    VExceptionWrongParameterId(const VExceptionWrongParameterId &e);
-    virtual ~VExceptionWrongParameterId() noexcept(true){}
+                    VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
+                    VExceptionWrongParameterId(const VExceptionWrongParameterId &e):VException(e),tagText(e.TagText()),
+                        tagName(e.TagName()), lineNumber(e.LineNumber()){}
+    virtual         ~VExceptionWrongParameterId() noexcept(true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
-    QString TagText() const {return tagText;}
-    QString TagName() const {return tagName;}
-    qint32 LineNumber() const {return lineNumber;}
+    inline QString  TagText() const {return tagText;}
+    inline QString  TagName() const {return tagName;}
+    inline qint32   LineNumber() const {return lineNumber;}
 protected:
-    QString tagText;
-    QString tagName;
-    qint32  lineNumber;
+    QString         tagText;
+    QString         tagName;
+    qint32          lineNumber;
 };
 
 #endif // VEXCEPTIONWRONGPARAMETERID_H

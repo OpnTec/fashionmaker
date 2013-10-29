@@ -3,12 +3,11 @@
 
 #include <QApplication>
 
-class VApplication : public QApplication
-{
+class VApplication : public QApplication{
     Q_OBJECT
 public:
-    VApplication(int &argc, char ** argv);
-    virtual ~VApplication() { }
+    VApplication(int &argc, char ** argv): QApplication(argc, argv){}
+    virtual ~VApplication() {}
     virtual bool notify(QObject * receiver, QEvent * event);
 };
 

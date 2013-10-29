@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -51,6 +51,15 @@ public:
             AddNode(domElement, node);
         }
     }
+    static const QString           TagName;
+    static const QString           TagNode;
+    static const QString           AttrSupplement;
+    static const QString           AttrClosed;
+    static const QString           AttrWidth;
+    static const QString           AttrIdObject;
+    static const QString           AttrNodeType;
+    static const QString           NodeTypeContour;
+    static const QString           NodeTypeModeling;
 public slots:
     virtual void                   FullUpdateFromFile ();
     virtual void                   FullUpdateFromGui(int result);
@@ -68,6 +77,8 @@ private:
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
     void                           AddNode(QDomElement &domElement, VNodeDetail &node);
+    template <typename Tool>
+    void                           InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
 };
 
 #endif // VTOOLDETAIL_H

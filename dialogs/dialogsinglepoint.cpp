@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,18 +21,15 @@
 
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
-#include <QShowEvent>
-#include <QPushButton>
-#include <QDebug>
-#include "options.h"
 
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
     DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogSinglePoint), name(QString()),
     point(QPointF()){
     ui->setupUi(this);
-    ui->doubleSpinBoxX->setRange(0,PaperSize/PrintDPI*25.4);
-    ui->doubleSpinBoxY->setRange(0,PaperSize/PrintDPI*25.4);
+    ui->doubleSpinBoxX->setRange(0,toMM(PaperSize));
+    ui->doubleSpinBoxY->setRange(0,toMM(PaperSize));
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    labelEditNamePoint = ui->labelEditName;
     flagName = false;
     CheckState();
     connect(bOk, &QPushButton::clicked, this, &DialogSinglePoint::DialogAccepted);
@@ -43,18 +40,17 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent) :
 
 void DialogSinglePoint::mousePress(QPointF scenePos){
     if(isInitialized == false){
-        ui->doubleSpinBoxX->setValue(scenePos.x()/PrintDPI*25.4);
-        ui->doubleSpinBoxY->setValue(scenePos.y()/PrintDPI*25.4);
+        ui->doubleSpinBoxX->setValue(toMM(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(toMM(scenePos.y()));
         this->show();
     } else {
-        ui->doubleSpinBoxX->setValue(scenePos.x()/PrintDPI*25.4);
-        ui->doubleSpinBoxY->setValue(scenePos.y()/PrintDPI*25.4);
+        ui->doubleSpinBoxX->setValue(toMM(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(toMM(scenePos.y()));
     }
 }
 
 void DialogSinglePoint::DialogAccepted(){
-    point = QPointF(ui->doubleSpinBoxX->value()*PrintDPI/25.4,
-                    ui->doubleSpinBoxY->value()*PrintDPI/25.4);
+    point = QPointF(toPixel(ui->doubleSpinBoxX->value()), toPixel(ui->doubleSpinBoxY->value()));
     name = ui->lineEditName->text();
     emit DialogClosed(QDialog::Accepted);
 }
@@ -64,16 +60,8 @@ void DialogSinglePoint::setData(const QString name, const QPointF point){
     this->point = point;
     isInitialized = true;
     ui->lineEditName->setText(name);
-    ui->doubleSpinBoxX->setValue(point.x()/PrintDPI*25.4);
-    ui->doubleSpinBoxY->setValue(point.y()/PrintDPI*25.4);
-}
-
-QString DialogSinglePoint::getName()const{
-    return name;
-}
-
-QPointF DialogSinglePoint::getPoint()const{
-    return point;
+    ui->doubleSpinBoxX->setValue(toMM(point.x()));
+    ui->doubleSpinBoxY->setValue(toMM(point.y()));
 }
 
 DialogSinglePoint::~DialogSinglePoint(){

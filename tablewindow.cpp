@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,12 +21,8 @@
 
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
-#include <QCloseEvent>
-#include <QDesktopWidget>
 #include "widgets/vtablegraphicsview.h"
-#include <QFileDialog>
 #include "options.h"
-#include <QtSvg/QtSvg>
 
 TableWindow::TableWindow(QWidget *parent) :
     QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
@@ -39,7 +35,7 @@ TableWindow::TableWindow(QWidget *parent) :
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
-    //sceneRect = QRectF(0, 0, 203*PrintDPI/25.4, 287*PrintDPI/25.4);
+    //sceneRect = QRectF(0, 0, toPixel(203), toPixel(287));
     sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
     currentScene = new QGraphicsScene(sceneRect);
     QBrush *brush = new QBrush();
@@ -141,7 +137,7 @@ void TableWindow::StopTable(){
 }
 
 void TableWindow::saveScene(){
-    QString name = QFileDialog::getSaveFileName(0, "Зберегти розкладку", "", "Images (*.png);;Svg files (*.svg)");
+    QString name = QFileDialog::getSaveFileName(0, tr("Save layout"), "", "Images (*.png);;Svg files (*.svg)");
     if(name.isNull()){
         return;
     }
@@ -149,12 +145,11 @@ void TableWindow::saveScene(){
     QBrush *brush = new QBrush();
     brush->setColor( QColor( Qt::white ) );
     currentScene->setBackgroundBrush( *brush );
-    currentScene->clearSelection();                                                  // Selections would also render to the file
+    currentScene->clearSelection(); // Selections would also render to the file
     shadowPaper->setBrush(QBrush(Qt::white));
     shadowPaper->setPen(QPen(Qt::white, 0.1));
     paper->setPen(QPen(Qt::white, 0.1));
     paper->setBrush(QBrush(Qt::white));
-    currentScene->setSceneRect(QRectF(10,10,590,590));
     currentScene->setSceneRect(currentScene->itemsBoundingRect());
 
     QFileInfo fi(name);
@@ -163,9 +158,6 @@ void TableWindow::saveScene(){
     } else if(fi.suffix() == "png"){
         PngFile(name);
     }
-//    if(name.indexOf(".svg",name.size()-4)<0){
-//        name.append(".svg");
-//    }
 
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );

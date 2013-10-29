@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,13 +20,16 @@
  ****************************************************************************/
 
 #include "vmodelingsplinepath.h"
-#include <QMenu>
+
+const QString VModelingSplinePath::TagName = QStringLiteral("spline");
+const QString VModelingSplinePath::ToolType = QStringLiteral("path");
 
 VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
                                  Tool::Sources typeCreation,
                                  QGraphicsItem *parent):VModelingTool(doc, data, id),
     QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>()){
+    ignoreFullUpdate = true;
     VSplinePath splPath = data->GetModelingSplinePath(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
@@ -89,7 +92,7 @@ VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplin
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthSpline(data->GetNameSplinePath(path), path.GetLength());
+    data->AddLengthSpline(data->GetNameSplinePath(path), toMM(path.GetLength()));
     if(parse == Document::FullParse){
         spl = new VModelingSplinePath(doc, data, id, typeCreation);
         doc->AddTool(id, spl);
@@ -125,7 +128,7 @@ void VModelingSplinePath::FullUpdateFromGui(int result){
 
             QDomElement domElement = doc->elementById(QString().setNum(id));
             if(domElement.isElement()){
-                domElement.setAttribute("kCurve", QString().setNum(splPath.getKCurve()));
+                domElement.setAttribute(AttrKCurve, QString().setNum(splPath.getKCurve()));
                 UpdatePathPoint(domElement, splPath);
                 emit FullUpdateTree();
             }
@@ -148,7 +151,7 @@ void VModelingSplinePath::ControlPointChangePosition(const qint32 &indexSpline, 
     CorectControlPoints(spl, splPath, indexSpline);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        domElement.setAttribute("kCurve", QString().setNum(splPath.getKCurve()));
+        domElement.setAttribute(AttrKCurve, QString().setNum(splPath.getKCurve()));
         UpdatePathPoint(domElement, splPath);
         emit FullUpdateTree();
     }
@@ -174,10 +177,10 @@ void VModelingSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path){
         QDomElement domElement = nodeList.at(i).toElement();
         if(!domElement.isNull()){
             VSplinePoint p = path[i];
-            domElement.setAttribute("pSpline", QString().setNum(p.P()));
-            domElement.setAttribute("kAsm1", QString().setNum(p.KAsm1()));
-            domElement.setAttribute("kAsm2", QString().setNum(p.KAsm2()));
-            domElement.setAttribute("angle", QString().setNum(p.Angle2()));
+            domElement.setAttribute(AttrPSpline, QString().setNum(p.P()));
+            domElement.setAttribute(AttrKAsm1, QString().setNum(p.KAsm1()));
+            domElement.setAttribute(AttrKAsm2, QString().setNum(p.KAsm2()));
+            domElement.setAttribute(AttrAngle, QString().setNum(p.Angle2()));
         }
     }
 }
@@ -188,11 +191,11 @@ void VModelingSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void VModelingSplinePath::AddToFile(){
     VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
-    QDomElement domElement = doc->createElement("spline");
+    QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "type", "path");
-    AddAttribute(domElement, "kCurve", splPath.getKCurve());
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrType, ToolType);
+    AddAttribute(domElement, AttrKCurve, splPath.getKCurve());
 
     for(qint32 i = 0; i < splPath.CountPoint(); ++i){
         AddPathPoint(domElement, splPath[i]);
@@ -202,12 +205,12 @@ void VModelingSplinePath::AddToFile(){
 }
 
 void VModelingSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint){
-    QDomElement pathPoint = doc->createElement("pathPoint");
+    QDomElement pathPoint = doc->createElement(AttrPathPoint);
 
-    AddAttribute(pathPoint, "pSpline", splPoint.P());
-    AddAttribute(pathPoint, "kAsm1", splPoint.KAsm1());
-    AddAttribute(pathPoint, "kAsm2", splPoint.KAsm2());
-    AddAttribute(pathPoint, "angle", splPoint.Angle2());
+    AddAttribute(pathPoint, AttrPSpline, splPoint.P());
+    AddAttribute(pathPoint, AttrKAsm1, splPoint.KAsm1());
+    AddAttribute(pathPoint, AttrKAsm2, splPoint.KAsm2());
+    AddAttribute(pathPoint, AttrAngle, splPoint.Angle2());
 
     domElement.appendChild(pathPoint);
 }

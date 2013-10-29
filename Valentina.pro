@@ -11,7 +11,8 @@ QT       += core gui widgets xml svg
 TARGET = Valentina
 TEMPLATE = app
 CONFIG -= debug_and_release debug_and_release_target
-CONFIG += c++11
+CONFIG += c++11 precompile_header
+QMAKE_CXX = ccache g++
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -95,7 +96,17 @@ SOURCES += main.cpp\
     exception/vexceptionconversionerror.cpp \
     exception/vexceptionemptyparameter.cpp \
     exception/vexceptionobjecterror.cpp \
-    widgets/vapplication.cpp
+    widgets/vapplication.cpp \
+    exception/vexceptionuniqueid.cpp \
+    tools/drawTools/vtoolheight.cpp \
+    tools/modelingTools/vmodelingheight.cpp \
+    dialogs/dialogheight.cpp \
+    tools/drawTools/vtooltriangle.cpp \
+    tools/modelingTools/vmodelingtriangle.cpp \
+    dialogs/dialogtriangle.cpp \
+    dialogs/dialogpointofintersection.cpp \
+    tools/drawTools/vtoolpointofintersection.cpp \
+    tools/modelingTools/vmodelingpointofintersection.cpp
 
 HEADERS  += mainwindow.h \
     widgets/vmaingraphicsscene.h \
@@ -185,7 +196,18 @@ HEADERS  += mainwindow.h \
     exception/vexceptionconversionerror.h \
     exception/vexceptionemptyparameter.h \
     exception/vexceptionobjecterror.h \
-    widgets/vapplication.h
+    widgets/vapplication.h \
+    exception/vexceptionuniqueid.h \
+    tools/drawTools/vtoolheight.h \
+    tools/modelingTools/vmodelingheight.h \
+    dialogs/dialogheight.h \
+    tools/drawTools/vtooltriangle.h \
+    tools/modelingTools/vmodelingtriangle.h \
+    dialogs/dialogtriangle.h \
+    dialogs/dialogpointofintersection.h \
+    tools/drawTools/vtoolpointofintersection.h \
+    tools/modelingTools/vmodelingpointofintersection.h \
+    version.h
 
 FORMS    += mainwindow.ui \
     dialogs/dialogsinglepoint.ui \
@@ -203,7 +225,10 @@ FORMS    += mainwindow.ui \
     dialogs/dialoghistory.ui \
     dialogs/dialogpointofcontact.ui \
     dialogs/dialogdetail.ui \
-    tablewindow.ui
+    tablewindow.ui \
+    dialogs/dialogheight.ui \
+    dialogs/dialogtriangle.ui \
+    dialogs/dialogpointofintersection.ui
 
 RESOURCES += \
     icon.qrc \
@@ -245,7 +270,7 @@ CONFIG(debug, debug|release){
     QMAKE_EXTRA_COMPILERS += lrelease
     lrelease.input         = TRANSLATIONS
     lrelease.output        = ${QMAKE_FILE_BASE}.qm
-    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm ${DESTDIR}${QMAKE_FILE_BASE}.qm
+    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm "bin/"${QMAKE_FILE_BASE}.qm
     lrelease.CONFIG       += no_link target_predeps
 }
 
@@ -261,5 +286,3 @@ message(Data files: $$[QT_INSTALL_DATA])
 message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
 message(Settings: $$[QT_INSTALL_SETTINGS])
 message(Examples: $$[QT_INSTALL_EXAMPLES])
-
-

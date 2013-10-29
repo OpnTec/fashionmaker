@@ -24,12 +24,49 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelEditFormula">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>159</red>
+             <green>158</green>
+             <blue>158</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
        </property>
        <property name="text">
         <string>Length</string>
@@ -37,10 +74,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditFormula"/>
+      <widget class="QLineEdit" name="lineEditFormula">
+       <property name="toolTip">
+        <string>Formula calculation of length of line</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
+       <property name="toolTip">
+        <string>Calculate formula</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -76,6 +120,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Value of length</string>
+       </property>
        <property name="text">
         <string>_</string>
        </property>
@@ -90,7 +137,44 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="labelEditNamePoint">
+           <property name="palette">
+            <palette>
+             <active>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </active>
+             <inactive>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </inactive>
+             <disabled>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>159</red>
+                 <green>158</green>
+                 <blue>158</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </disabled>
+            </palette>
+           </property>
            <property name="text">
             <string>Name new point</string>
            </property>
@@ -101,6 +185,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
+           <property name="toolTip">
+            <string>Put variable into formula</string>
+           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -128,7 +215,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxFirstPoint"/>
+          <widget class="QComboBox" name="comboBoxFirstPoint">
+           <property name="toolTip">
+            <string>First point of line</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -142,7 +233,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxSecondPoint"/>
+          <widget class="QComboBox" name="comboBoxSecondPoint">
+           <property name="toolTip">
+            <string>Second point of line</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -156,7 +251,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxLineType"/>
+          <widget class="QComboBox" name="comboBoxLineType">
+           <property name="toolTip">
+            <string>Show line from first point to our point</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -203,7 +302,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonLengthArc">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Length of arcs</string>
@@ -213,7 +312,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonLengthSpline">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Length of curves</string>
@@ -225,7 +324,11 @@
       </layout>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget"/>
+      <widget class="QListWidget" name="listWidget">
+       <property name="toolTip">
+        <string>Variables. Click twice to select.</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -248,6 +351,23 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditFormula</tabstop>
+  <tabstop>toolButtonEqual</tabstop>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>comboBoxFirstPoint</tabstop>
+  <tabstop>comboBoxSecondPoint</tabstop>
+  <tabstop>comboBoxLineType</tabstop>
+  <tabstop>radioButtonSizeGrowth</tabstop>
+  <tabstop>radioButtonStandartTable</tabstop>
+  <tabstop>radioButtonIncrements</tabstop>
+  <tabstop>radioButtonLengthLine</tabstop>
+  <tabstop>radioButtonLengthArc</tabstop>
+  <tabstop>radioButtonLengthSpline</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>toolButtonPutHere</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../icon.qrc"/>
  </resources>

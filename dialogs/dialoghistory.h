@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -29,32 +29,30 @@ namespace Ui {
 class DialogHistory;
 }
 
-class DialogHistory : public DialogTool
-{
+class DialogHistory : public DialogTool{
     Q_OBJECT
-    
 public:
-    explicit DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
-    virtual ~DialogHistory();
+                      DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
+    virtual           ~DialogHistory();
 public slots:
-    virtual void DialogAccepted();
-    void cellClicked(int row, int column);
-    void ChangedCursor(qint64 id);
-    void UpdateHistory();
+    virtual void      DialogAccepted();
+    void              cellClicked(int row, int column);
+    void              ChangedCursor(qint64 id);
+    void              UpdateHistory();
 signals:
-    void ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
+    void              ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
 protected:
-    virtual void     closeEvent ( QCloseEvent * event );
+    virtual void      closeEvent ( QCloseEvent * event );
 private:
     Q_DISABLE_COPY(DialogHistory)
     Ui::DialogHistory *ui;
-    VDomDocument *doc;
-    qint32 cursorRow;
-    qint32 cursorToolRecordRow;
-    void FillTable();
-    QString Record(const VToolRecord &tool);
-    void InitialTable();
-    void ShowPoint();
+    VDomDocument      *doc;
+    qint32            cursorRow;
+    qint32            cursorToolRecordRow;
+    void              FillTable();
+    QString           Record(const VToolRecord &tool);
+    void              InitialTable();
+    void              ShowPoint();
 };
 
 #endif // DIALOGHISTORY_H

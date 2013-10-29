@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,16 +20,12 @@
  ****************************************************************************/
 
 #include "vmaingraphicsscene.h"
-#include <QDebug>
-#include <QApplication>
-#include <QScrollBar>
-#include <QGraphicsItem>
 
-VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0){
+VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1){
 }
 
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent):
-    QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0){
+    QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1){
 }
 
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event){
@@ -46,22 +42,7 @@ void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type){
     emit ChoosedObject(id, type);
 }
 
-void VMainGraphicsScene::RemoveTool(QGraphicsItem *tool){
-    this->removeItem(tool);
-}
-
-qint32 VMainGraphicsScene::getVerScrollBar() const{
-    return verScrollBar;
-}
-
-void VMainGraphicsScene::setVerScrollBar(const qint32 &value){
-    verScrollBar = value;
-}
-
-qint32 VMainGraphicsScene::getHorScrollBar() const{
-    return horScrollBar;
-}
-
-void VMainGraphicsScene::setHorScrollBar(const qint32 &value){
-    horScrollBar = value;
+void VMainGraphicsScene::SetFactor(qreal factor){
+    scaleFactor=scaleFactor*factor;
+    emit NewFactor(scaleFactor);
 }

@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,16 +21,28 @@
 
 #include "vdetail.h"
 
-VDetail::VDetail():nodes(QVector<VNodeDetail>()),name(QString()), mx(0), my(0){
+VDetail::VDetail():nodes(QVector<VNodeDetail>()),name(QString()), mx(0), my(0), supplement(true), closed(true),
+    width(10){
 }
 
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes):nodes(QVector<VNodeDetail>()),
-    name(name), mx(0), my(0){
+    name(name), mx(0), my(0), supplement(true), closed(true), width(10){
     this->nodes = nodes;
 }
 
-void VDetail::append(const VNodeDetail &node){
-    nodes.append(node);
+VDetail::VDetail(const VDetail &detail):nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()),
+    my(detail.getMy()), supplement(detail.getSupplement()), closed(detail.getClosed()), width(detail.getWidth()){
+}
+
+VDetail &VDetail::operator =(const VDetail &detail){
+    nodes = detail.getNodes();
+    name = detail.getName();
+    mx = detail.getMx();
+    my = detail.getMy();
+    supplement = detail.getSupplement();
+    closed = detail.getClosed();
+    width = detail.getWidth();
+    return *this;
 }
 
 void VDetail::Clear(){
@@ -38,10 +50,9 @@ void VDetail::Clear(){
     name.clear();
     mx = 0;
     my = 0;
-}
-
-qint32 VDetail::CountNode() const{
-    return nodes.size();
+    supplement = true;
+    closed = true;
+    width = 10;
 }
 
 bool VDetail::Containes(const qint64 &id) const{
@@ -58,26 +69,3 @@ VNodeDetail &VDetail::operator [](int indx){
     return nodes[indx];
 }
 
-qreal VDetail::getMy() const{
-    return my;
-}
-
-void VDetail::setMy(const qreal &value){
-    my = value;
-}
-
-qreal VDetail::getMx() const{
-    return mx;
-}
-
-void VDetail::setMx(const qreal &value){
-    mx = value;
-}
-
-QString VDetail::getName() const{
-    return name;
-}
-
-void VDetail::setName(const QString &value){
-    name = value;
-}

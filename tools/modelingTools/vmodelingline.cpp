@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -20,12 +20,14 @@
  ****************************************************************************/
 
 #include "vmodelingline.h"
-#include <QDebug>
+
+const QString VModelingLine::TagName = QStringLiteral("line");
 
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
     secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>()){
+    ignoreFullUpdate = true;
     //Лінія
     VPointF first = data->GetModelingPoint(firstPoint);
     VPointF second = data->GetModelingPoint(secondPoint);
@@ -51,18 +53,23 @@ VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDoc
     return Create(0, firstPoint, secondPoint, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-VModelingLine *VModelingLine::Create(const qint64 &id, const qint64 &firstPoint, const qint64 &secondPoint,
+VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                      Tool::Sources typeCreation){
     VModelingLine *line = 0;
-    Q_CHECK_PTR(doc);
-    Q_CHECK_PTR(data);
-    data->AddLine(firstPoint, secondPoint, Draw::Modeling);
-    if(parse != Document::FullParse){
-        doc->UpdateToolData(id, data);
+    Q_ASSERT(doc != 0);
+    Q_ASSERT(data != 0);
+    qint64 id = _id;
+    if(typeCreation == Tool::FromGui){
+        id = data->getNextId();
+    } else {
+        if(parse != Document::FullParse){
+            data->UpdateId(id);
+            doc->UpdateToolData(id, data);
+        }
     }
+    data->AddLine(firstPoint, secondPoint, Draw::Modeling);
     if(parse == Document::FullParse){
-        qint64 id = data->getNextId();
         line = new VModelingLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
@@ -74,8 +81,8 @@ VModelingLine *VModelingLine::Create(const qint64 &id, const qint64 &firstPoint,
 void VModelingLine::FullUpdateFromFile(){
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if(domElement.isElement()){
-        firstPoint = domElement.attribute("firstPoint", "").toLongLong();
-        secondPoint = domElement.attribute("secondPoint", "").toLongLong();
+        firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
+        secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
     VPointF first = VAbstractTool::data.GetModelingPoint(firstPoint);
     VPointF second = VAbstractTool::data.GetModelingPoint(secondPoint);
@@ -86,8 +93,8 @@ void VModelingLine::FullUpdateFromGui(int result){
     if(result == QDialog::Accepted){
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if(domElement.isElement()){
-            domElement.setAttribute("firstPoint", QString().setNum(dialogLine->getFirstPoint()));
-            domElement.setAttribute("secondPoint", QString().setNum(dialogLine->getSecondPoint()));
+            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
+            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -99,10 +106,10 @@ void VModelingLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
 }
 
 void VModelingLine::AddToFile(){
-    QDomElement domElement = doc->createElement("line");
-    AddAttribute(domElement, "id", id);
-    AddAttribute(domElement, "firstPoint", firstPoint);
-    AddAttribute(domElement, "secondPoint", secondPoint);
+    QDomElement domElement = doc->createElement(TagName);
+    AddAttribute(domElement, AttrId, id);
+    AddAttribute(domElement, AttrFirstPoint, firstPoint);
+    AddAttribute(domElement, AttrSecondPoint, secondPoint);
 
     AddToModeling(domElement);
 }

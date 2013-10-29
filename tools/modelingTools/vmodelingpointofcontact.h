@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -28,35 +28,31 @@
 class VModelingPointOfContact : public VModelingPoint{
     Q_OBJECT
 public:
-                                         VModelingPointOfContact(VDomDocument *doc, VContainer *data,
-                                                                 const qint64 &id, const QString &radius,
-                                                                 const qint64 &center,
-                                                                 const qint64 &firstPointId,
-                                                                 const qint64 &secondPointId,
-                                                                 Tool::Sources typeCreation,
-                                                                 QGraphicsItem * parent = 0);
-    virtual void                         setDialog();
-    static QPointF                       FindPoint(const qreal &radius, const QPointF &center,
-                                                   const QPointF &firstPoint, const QPointF &secondPoint);
-    static VModelingPointOfContact*      Create(QSharedPointer<DialogPointOfContact> &dialog,
-                                                VDomDocument *doc, VContainer *data);
-    static VModelingPointOfContact*      Create(const qint64 _id, const QString &radius, const qint64 &center,
-                                                const qint64 &firstPointId, const qint64 &secondPointId,
-                                                const QString &pointName, const qreal &mx, const qreal &my,
-                                                VDomDocument *doc, VContainer *data,
-                                                const Document::Documents &parse, Tool::Sources typeCreation);
+                                    VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
+                                                            const QString &radius, const qint64 &center,
+                                                            const qint64 &firstPointId, const qint64 &secondPointId,
+                                                            Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+    virtual void                    setDialog();
+    static VModelingPointOfContact* Create(QSharedPointer<DialogPointOfContact> &dialog, VDomDocument *doc,
+                                           VContainer *data);
+    static VModelingPointOfContact* Create(const qint64 _id, const QString &radius, const qint64 &center,
+                                           const qint64 &firstPointId, const qint64 &secondPointId,
+                                           const QString &pointName, const qreal &mx, const qreal &my,
+                                           VDomDocument *doc, VContainer *data,
+                                           const Document::Documents &parse, Tool::Sources typeCreation);
+    static const QString ToolType;
 public slots:
-    virtual void                         FullUpdateFromFile();
-    virtual void                         FullUpdateFromGui(int result);
+    virtual void                    FullUpdateFromFile();
+    virtual void                    FullUpdateFromGui(int result);
 protected:
-    virtual void                         contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void                         AddToFile();
-    virtual void                         RemoveReferens();
+    virtual void                    contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void                    AddToFile();
+    virtual void                    RemoveReferens();
 private:
-    QString                              radius;
-    qint64                               center;
-    qint64                               firstPointId;
-    qint64                               secondPointId;
+    QString                         radius;
+    qint64                          center;
+    qint64                          firstPointId;
+    qint64                          secondPointId;
     QSharedPointer<DialogPointOfContact> dialogPointOfContact;
 };
 

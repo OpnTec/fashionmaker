@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,18 +23,8 @@
 #include <QDebug>
 
 VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
-VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false){
+VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false) {
     _referens = 0;
-}
-
-VModelingTool::~VModelingTool(){
-}
-
-void VModelingTool::setDialog(){
-}
-
-void VModelingTool::ignoreContextMenu(bool enable){
-    ignoreContextMenuEvent = enable;
 }
 
 void VModelingTool::AddToModeling(const QDomElement &domElement){

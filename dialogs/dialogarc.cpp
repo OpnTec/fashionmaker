@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -21,7 +21,6 @@
 
 #include "dialogarc.h"
 #include "ui_dialogarc.h"
-#include "../container/calculator.h"
 
 DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) :
     DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
@@ -52,6 +51,8 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
@@ -63,7 +64,9 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogArc::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
-    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineArcs);
+    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineAngles);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogArc::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogArc::LengthCurves);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
@@ -74,8 +77,8 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
 }
 
-qint64 DialogArc::GetCenter() const{
-    return center;
+DialogArc::~DialogArc(){
+    delete ui;
 }
 
 void DialogArc::SetCenter(const qint64 &value){
@@ -83,17 +86,9 @@ void DialogArc::SetCenter(const qint64 &value){
     ChangeCurrentData(ui->comboBoxBasePoint, center);
 }
 
-QString DialogArc::GetF2() const{
-    return f2;
-}
-
 void DialogArc::SetF2(const QString &value){
     f2 = value;
     ui->lineEditF2->setText(f2);
-}
-
-QString DialogArc::GetF1() const{
-    return f1;
 }
 
 void DialogArc::SetF1(const QString &value){
@@ -101,17 +96,9 @@ void DialogArc::SetF1(const QString &value){
     ui->lineEditF1->setText(f1);
 }
 
-QString DialogArc::GetRadius() const{
-    return radius;
-}
-
 void DialogArc::SetRadius(const QString &value){
     radius = value;
     ui->lineEditRadius->setText(radius);
-}
-
-DialogArc::~DialogArc(){
-delete ui;
 }
 
 void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){
@@ -134,6 +121,7 @@ void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
+        emit ToolTip("");
         this->show();
     }
 }
@@ -152,8 +140,8 @@ void DialogArc::ValChenged(int row){
     }
     QListWidgetItem *item = ui->listWidget->item( row );
     if(ui->radioButtonLineAngles->isChecked()){
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineArc(item->text()))
-                .arg("Значення кута лінії.");
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineAngle(item->text()))
+                .arg(tr("Value angle of line."));
         ui->labelDescription->setText(desc);
         return;
     }
@@ -172,45 +160,52 @@ void DialogArc::PutF2(){
     PutValHere(ui->lineEditF2, ui->listWidget);
 }
 
-void DialogArc::LineArcs(){
-    ShowLineArcs();
+void DialogArc::LineAngles(){
+    ShowLineAngles();
 }
 
 void DialogArc::RadiusChanged(){
+    labelEditFormula = ui->labelEditRadius;
     ValFormulaChanged(flagRadius, ui->lineEditRadius, timerRadius);
 }
 
 void DialogArc::F1Changed(){
+    labelEditFormula = ui->labelEditF1;
     ValFormulaChanged(flagF1, ui->lineEditF1, timerF1);
 }
 
 void DialogArc::F2Changed(){
+    labelEditFormula = ui->labelEditF2;
     ValFormulaChanged(flagF2, ui->lineEditF2, timerF2);
 }
 
 void DialogArc::CheckState(){
-    Q_CHECK_PTR(bOk);
+    Q_ASSERT(bOk != 0);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
 void DialogArc::EvalRadius(){
+    labelEditFormula = ui->labelEditRadius;
     Eval(ui->lineEditRadius, flagRadius, timerRadius, ui->labelResultRadius);
 }
 
 void DialogArc::EvalF1(){
+    labelEditFormula = ui->labelEditF1;
     Eval(ui->lineEditF1, flagF1, timerF1, ui->labelResultF1);
 }
 
 void DialogArc::EvalF2(){
+    labelEditFormula = ui->labelEditF2;
     Eval(ui->lineEditF2, flagF2, timerF2, ui->labelResultF2);
 }
 
-void DialogArc::ShowLineArcs(){
+void DialogArc::ShowLineAngles(){
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QMap<QString, qreal> *lineArcsTable = data->DataLineAngles();
-    QMapIterator<QString, qreal> i(*lineArcsTable);
+    const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
+    Q_ASSERT(lineAnglesTable != 0);
+    QHashIterator<QString, qreal> i(*lineAnglesTable);
     while (i.hasNext()) {
         i.next();
         QListWidgetItem *item = new QListWidgetItem(i.key());

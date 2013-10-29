@@ -9,7 +9,7 @@
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -23,32 +23,30 @@
 #define DIALOGALONGLINE_H
 
 #include "dialogtool.h"
-#include "container/calculator.h"
 
 namespace Ui {
 class DialogAlongLine;
 }
 
-class DialogAlongLine : public DialogTool
-{
+class DialogAlongLine : public DialogTool{
     Q_OBJECT    
 public:
-    explicit            DialogAlongLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                        DialogAlongLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                         QWidget *parent = 0);
                         ~DialogAlongLine();
-    QString             getPointName() const;
+    inline QString      getPointName() const {return pointName;}
     void                setPointName(const QString &value);
-    QString             getTypeLine() const;
+    inline QString      getTypeLine() const {return typeLine;}
     void                setTypeLine(const QString &value);
-    QString             getFormula() const;
+    inline QString      getFormula() const {return formula;}
     void                setFormula(const QString &value);
-    qint64              getFirstPointId() const;
+    inline qint64       getFirstPointId() const {return firstPointId;}
     void                setFirstPointId(const qint64 &value, const qint64 &id);
-    qint64              getSecondPointId() const;
+    inline qint64       getSecondPointId() const {return secondPointId;}
     void                setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void        ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void        DialogAccepted();
+    virtual void        DialogAccepted();   
 private:
     Q_DISABLE_COPY(DialogAlongLine)
     Ui::DialogAlongLine *ui;
