@@ -78,6 +78,7 @@ signals:
     void                    toolhaveChange();
     void                    ChoosedTool(qint64 id, Scene::Scenes type);
     void                    FullUpdateTree();
+    void                    RemoveTool(QGraphicsItem *tool);
 protected:
     VDomDocument            *doc;
     const qint64            id;

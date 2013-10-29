@@ -38,8 +38,6 @@ public slots:
     void         ChangedNameDraw(const QString oldName, const QString newName);
     virtual void FullUpdateFromGui(int result)=0;
     virtual void SetFactor(qreal factor);
-signals:
-    void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
     bool         ignoreFullUpdate;

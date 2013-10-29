@@ -38,150 +38,73 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
                          VMainGraphicsScene *scene, QGraphicsItem *parent) :VAbstractTool(doc, data, id),
     QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()), sceneDetails(scene){
     VDetail detail = data->GetDetail(id);
-    QHash<qint64, VDataTool*>* tools = doc->getTools();
-    Q_ASSERT(tools != 0);
     for(qint32 i = 0; i< detail.CountNode(); ++i){
         switch(detail[i].getTypeTool()){
         case(Tool::NodePoint):{
-            VNodePoint *point = qobject_cast<VNodePoint*>(tools->value(detail[i].getId()));
-            Q_ASSERT(point != 0);
-            connect(point, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem); 
-            point->setParentItem(this);
+            InitTool<VNodePoint>(scene, detail[i]);
             break;
         }
         case(Tool::NodeArc):{
-            VNodeArc *arc = qobject_cast<VNodeArc*>(tools->value(detail[i].getId()));
-            Q_ASSERT(arc != 0);
-            connect(arc, &VNodeArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            arc->setParentItem(this);
+            InitTool<VNodeArc>(scene, detail[i]);
             break;
         }
         case(Tool::NodeSpline):{
-            VNodeSpline *spl = qobject_cast<VNodeSpline*>(tools->value(detail[i].getId()));
-            Q_ASSERT(spl != 0);
-            connect(spl, &VNodeSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            spl->setParentItem(this);
+            InitTool<VNodeSpline>(scene, detail[i]);
             break;
         }
         case(Tool::NodeSplinePath):{
-            VNodeSplinePath *splPath = qobject_cast<VNodeSplinePath*>(tools->value(detail[i].getId()));
-            Q_ASSERT(splPath != 0);
-            connect(splPath, &VNodeSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            splPath->setParentItem(this);
+            InitTool<VNodeSplinePath>(scene, detail[i]);
             break;
         }
         case(Tool::AlongLineTool):{
-            VModelingAlongLine *tool = qobject_cast<VModelingAlongLine*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingAlongLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingAlongLine>(scene, detail[i]);
             break;
         }
         case(Tool::ArcTool):{
-            VModelingArc *tool = qobject_cast<VModelingArc*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingArc>(scene, detail[i]);
             break;
         }
         case(Tool::BisectorTool):{
-            VModelingBisector *tool = qobject_cast<VModelingBisector*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingBisector>(scene, detail[i]);
             break;
         }
         case(Tool::EndLineTool):{
-            VModelingEndLine *tool = qobject_cast<VModelingEndLine*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingEndLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingEndLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingEndLine>(scene, detail[i]);
             break;
         }
         case(Tool::LineIntersectTool):{
-            VModelingLineIntersect *tool = qobject_cast<VModelingLineIntersect*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingLineIntersect>(scene, detail[i]);
             break;
         }
         case(Tool::LineTool):{
-            VModelingLine *tool = qobject_cast<VModelingLine*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingLine>(scene, detail[i]);
             break;
         }
         case(Tool::NormalTool):{
-            VModelingNormal *tool = qobject_cast<VModelingNormal*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingNormal::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+            InitTool<VModelingNormal>(scene, detail[i]);
             break;
         }
-        case(Tool::PointOfContact):{
-            VModelingPointOfContact *tool = qobject_cast<VModelingPointOfContact*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::PointOfContact):
+            InitTool<VModelingPointOfContact>(scene, detail[i]);
             break;
-        }
-        case(Tool::ShoulderPointTool):{
-            VModelingShoulderPoint *tool = qobject_cast<VModelingShoulderPoint*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingShoulderPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::ShoulderPointTool):
+            InitTool<VModelingShoulderPoint>(scene, detail[i]);
             break;
-        }
-        case(Tool::SplinePathTool):{
-            VModelingSplinePath *tool = qobject_cast<VModelingSplinePath*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::SplinePathTool):
+            InitTool<VModelingSplinePath>(scene, detail[i]);
             break;
-        }
-        case(Tool::SplineTool):{
-            VModelingSpline *tool = qobject_cast<VModelingSpline*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::SplineTool):
+            InitTool<VModelingSpline>(scene, detail[i]);
             break;
-        }
-        case(Tool::Height):{
-            VModelingHeight *tool = qobject_cast<VModelingHeight*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingHeight::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingHeight::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::Height):
+            InitTool<VModelingHeight>(scene, detail[i]);
             break;
-        }
-        case(Tool::Triangle):{
-            VModelingTriangle *tool = qobject_cast<VModelingTriangle*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingTriangle::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::Triangle):
+            InitTool<VModelingTriangle>(scene, detail[i]);
             break;
-        }
-        case(Tool::PointOfIntersection):{
-            VModelingPointOfIntersection *tool = qobject_cast<VModelingPointOfIntersection*>(tools->value(detail[i].getId()));
-            Q_ASSERT(tool != 0);
-            connect(tool, &VModelingPointOfIntersection::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(tool, &VModelingPointOfIntersection::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
-            tool->setParentItem(this);
+        case(Tool::PointOfIntersection):
+            InitTool<VModelingPointOfIntersection>(scene, detail[i]);
             break;
-        }
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
@@ -483,4 +406,15 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node){
 void VToolDetail::RefreshGeometry(){
     QPainterPath path = VAbstractTool::data.ContourPath(id);
     this->setPath(path);
+}
+
+template <typename Tool>
+void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node){
+    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    Q_ASSERT(tools != 0);
+    Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
+    Q_ASSERT(tool != 0);
+    connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    connect(tool, &Tool::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+    tool->setParentItem(this);
 }

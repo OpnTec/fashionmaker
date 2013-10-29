@@ -34,8 +34,6 @@ public:
     inline void  ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
     virtual void FullUpdateFromGui(int result)=0;
-signals:
-    void         RemoveTool(QGraphicsItem *tool);
 protected:
     bool         ignoreContextMenuEvent;
     bool         ignoreFullUpdate;

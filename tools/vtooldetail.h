@@ -77,6 +77,8 @@ private:
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
     void                           AddNode(QDomElement &domElement, VNodeDetail &node);
+    template <typename Tool>
+    void                           InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
 };
 
 #endif // VTOOLDETAIL_H
