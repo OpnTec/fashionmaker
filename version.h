@@ -4,7 +4,7 @@
 #include <QtCore/QString>
 
 extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 1;
+extern const int MINOR_VERSION = 2;
 extern const int DEBUG_VERSION = 0;
 
 extern const QString APP_VERSION(QStringLiteral("%1.%2.%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION));
