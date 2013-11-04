@@ -24,7 +24,8 @@
 
 #include <QGraphicsView>
 
-class VMainGraphicsView : public QGraphicsView{
+class VMainGraphicsView : public QGraphicsView
+{
     Q_OBJECT
 public:
     explicit VMainGraphicsView(QWidget *parent = 0);

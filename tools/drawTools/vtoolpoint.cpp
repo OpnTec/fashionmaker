@@ -23,9 +23,9 @@
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
-VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                       QGraphicsItem *parent):VDrawTool(doc, data, id),
-    QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0){
+VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
+    QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
+{
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
@@ -36,7 +36,8 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id,
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
-void VToolPoint::NameChangePosition(const QPointF pos){
+void VToolPoint::NameChangePosition(const QPointF pos)
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
@@ -46,21 +47,27 @@ void VToolPoint::NameChangePosition(const QPointF pos){
     VAbstractTool::data.UpdatePoint(id, point);
 }
 
-void VToolPoint::UpdateNamePosition(qreal mx, qreal my){
+void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
         domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }
 
-void VToolPoint::ChangedActivDraw(const QString newName){
+void VToolPoint::ChangedActivDraw(const QString newName)
+{
     bool selectable = false;
-    if(nameActivDraw == newName){
+    if (nameActivDraw == newName)
+    {
         selectable = true;
         currentColor = Qt::black;
-    } else {
+    }
+    else
+    {
         selectable = false;
         currentColor = Qt::gray;
     }
@@ -76,33 +83,40 @@ void VToolPoint::ChangedActivDraw(const QString newName){
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+{
     ShowItem(this, id, color, enable);
 }
 
-void VToolPoint::SetFactor(qreal factor){
+void VToolPoint::SetFactor(qreal factor)
+{
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
-void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
-    if(event->button() == Qt::LeftButton){
+void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         emit ChoosedTool(id, Scene::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
-void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
-void VToolPoint::RefreshPointGeometry(const VPointF &point){
+void VToolPoint::RefreshPointGeometry(const VPointF &point)
+{
     this->setPen(QPen(currentColor, widthHairLine/factor));
     QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -120,16 +134,20 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point){
     RefreshLine();
 }
 
-void VToolPoint::RefreshLine(){
+void VToolPoint::RefreshLine()
+{
     QRectF nameRec = namePoint->sceneBoundingRect();
     QPointF p1, p2;
     LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
     lineName->setPen(QPen(currentColor, widthHairLine/factor));
-    if(QLineF(p1, pRec - scenePos()).length() <= toPixel(4)){
+    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    {
         lineName->setVisible(false);
-    } else {
+    }
+    else
+    {
         lineName->setVisible(true);
     }
 }

@@ -25,7 +25,8 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialognormal.h"
 
-class VModelingNormal : public VModelingLinePoint{
+class VModelingNormal : public VModelingLinePoint
+{
     Q_OBJECT
 public:
                             VModelingNormal(VDomDocument *doc, VContainer *data, const qint64 &id,

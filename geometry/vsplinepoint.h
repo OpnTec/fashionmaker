@@ -27,7 +27,8 @@
 /**
  * @brief The VSplinePoint клас, що містить у собі інформацію про точки сплайну.
  */
-class VSplinePoint{
+class VSplinePoint
+{
 public:
             /**
              * @brief VSplinePoint конструктор по замповчуванню.

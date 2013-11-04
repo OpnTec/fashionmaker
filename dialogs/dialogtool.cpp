@@ -22,60 +22,76 @@
 #include "dialogtool.h"
 #include <container/calculator.h>
 
-DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent):QDialog(parent), data(data),
-    isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0), spinBoxAngle(0),
-    lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0), labelEditNamePoint(0),
-    labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0), radioButtonIncrements(0),
-    radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0), idDetail(0), mode(mode){
+DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
+      spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
+      labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0),
+      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0),
+      idDetail(0), mode(mode)
+{
     Q_ASSERT(data != 0);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
 }
 
-void DialogTool::closeEvent(QCloseEvent *event){
+void DialogTool::closeEvent(QCloseEvent *event)
+{
     DialogClosed(QDialog::Rejected);
     event->accept();
 }
 
-void DialogTool::showEvent(QShowEvent *event){
+void DialogTool::showEvent(QShowEvent *event)
+{
     QDialog::showEvent( event );
-    if( event->spontaneous() ){
+    if ( event->spontaneous() )
+    {
         return;
     }
-    if(isInitialized){
+    if (isInitialized)
+    {
         return;
     }
     isInitialized = true;//first show windows are held
 }
 
-void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
+void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
+{
     box->clear();
-    if(mode == Draw::Calculation){
+    if (mode == Draw::Calculation)
+    {
         const QHash<qint64, VPointF> *points = data->DataPoints();
         QHashIterator<qint64, VPointF> i(*points);
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             i.next();
-            if(i.key() != id){
+            if (i.key() != id)
+            {
                 VPointF point = i.value();
                 box->addItem(point.name(), i.key());
             }
         }
-    } else {
-        if(idDetail <= 0){
+    }
+    else
+    {
+        if (idDetail <= 0)
+        {
             qWarning()<<tr("Wrong details id.")<<Q_FUNC_INFO;
             return;
         }
         VDetail det = data->GetDetail(idDetail);
-        for(qint32 i = 0; i< det.CountNode(); ++i){
-            if(det[i].getTypeTool() == Tool::NodePoint ||
-               det[i].getTypeTool() == Tool::AlongLineTool ||
-               det[i].getTypeTool() == Tool::BisectorTool ||
-               det[i].getTypeTool() == Tool::EndLineTool ||
-               det[i].getTypeTool() == Tool::LineIntersectTool ||
-               det[i].getTypeTool() == Tool::NormalTool ||
-               det[i].getTypeTool() == Tool::PointOfContact ||
-               det[i].getTypeTool() == Tool::ShoulderPointTool){
-                if(det[i].getId() != id){
+        for (qint32 i = 0; i< det.CountNode(); ++i)
+        {
+            if (det[i].getTypeTool() == Tool::NodePoint ||
+                det[i].getTypeTool() == Tool::AlongLineTool ||
+                det[i].getTypeTool() == Tool::BisectorTool ||
+                det[i].getTypeTool() == Tool::EndLineTool ||
+                det[i].getTypeTool() == Tool::LineIntersectTool ||
+                det[i].getTypeTool() == Tool::NormalTool ||
+                det[i].getTypeTool() == Tool::PointOfContact ||
+                det[i].getTypeTool() == Tool::ShoulderPointTool)
+            {
+                if (det[i].getId() != id)
+                {
                     VPointF point = data->GetModelingPoint(det[i].getId());
                     box->addItem(point.name(), det[i].getId());
                 }
@@ -84,53 +100,70 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const{
     }
 }
 
-void DialogTool::FillComboBoxTypeLine(QComboBox *box) const{
+void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
+{
     Q_ASSERT(box != 0);
     QStringList list;
     list<<tr("Line")<<tr("No line");
     box->addItems(list);
 }
 
-QString DialogTool::GetTypeLine(const QComboBox *box) const{
-    if(box->currentText()==tr("Line")){
+QString DialogTool::GetTypeLine(const QComboBox *box) const
+{
+    if (box->currentText()==tr("Line"))
+    {
         return QString("hair");
-    } else {
+    }
+    else
+    {
         return QString("none");
     }
 }
 
-void DialogTool::SetupTypeLine(QComboBox *box, const QString &value){
-    if(value == "hair"){
+void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
+{
+    if (value == "hair")
+    {
         qint32 index = box->findText(tr("Line"));
-        if(index != -1){
+        if (index != -1)
+        {
             box->setCurrentIndex(index);
         }
     }
-    if(value == "none"){
+    if (value == "none")
+    {
         qint32 index = box->findText(tr("No line"));
-        if(index != -1){
+        if (index != -1)
+        {
             box->setCurrentIndex(index);
         }
     }
 }
 
-void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value){
+void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
+{
     qint32 index = box->findText(value);
-    if(index != -1){
+    if (index != -1)
+    {
         box->setCurrentIndex(index);
-    } else {
+    }
+    else
+    {
         qWarning()<<tr("Can't find point by name")<<value;
     }
 }
 
-void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value) const{
+void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value) const
+{
     qint32 index = box->findData(value);
-    if(index != -1){
+    if (index != -1)
+    {
         box->setCurrentIndex(index);
     }
 }
 
-void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
+void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
+{
     Q_ASSERT(lineEdit != 0);
     Q_ASSERT(listWidget != 0);
     QListWidgetItem *item = listWidget->currentItem();
@@ -140,11 +173,13 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget){
     lineEdit->setCursorPosition(pos + item->text().size());
 }
 
-void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
+void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
+{
     Q_ASSERT(edit != 0);
     Q_ASSERT(timer != 0);
     Q_ASSERT(labelEditFormula != 0);
-    if(edit->text().isEmpty()){
+    if (edit->text().isEmpty())
+    {
         flag = false;
         CheckState();
         QPalette palette = labelEditFormula->palette();
@@ -155,27 +190,34 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer){
     timer->start(1000);
 }
 
-void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label){
+void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+{
     Q_ASSERT(edit != 0);
     Q_ASSERT(timer != 0);
     Q_ASSERT(label != 0);
     Q_ASSERT(labelEditFormula != 0);
     QPalette palette = labelEditFormula->palette();
-    if(edit->text().isEmpty()){
+    if (edit->text().isEmpty())
+    {
         flag = false;
         palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-    } else {
+    }
+    else
+    {
         Calculator cal(data);
         QString errorMsg;
-        qreal result = cal.eval(edit->text(),&errorMsg);
-        if(!errorMsg.isEmpty()){
+        qreal result = cal.eval(edit->text(), &errorMsg);
+        if (errorMsg.isEmpty() == false)
+        {
             label->setText(tr("Error"));
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-        } else {
+        }
+        else
+        {
             label->setText(QString().setNum(result));
             flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76,76,76));
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
         }
     }
     CheckState();
@@ -183,145 +225,177 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     labelEditFormula->setPalette(palette);
 }
 
-void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value,
-                                   const qint64 &id) const{
+void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const
+{
     Q_ASSERT(box != 0);
     FillComboBoxPoints(box, id);
     pointId = value;
     ChangeCurrentData(box, value);
 }
 
-qint64 DialogTool::getCurrentPointId(QComboBox *box) const{
+qint64 DialogTool::getCurrentPointId(QComboBox *box) const
+{
     Q_ASSERT(box != 0);
     qint32 index = box->currentIndex();
     Q_ASSERT(index != -1);
-    if(index != -1){
+    if (index != -1)
+    {
         return qvariant_cast<qint64>(box->itemData(index));
-    } else {
+    }
+    else
+    {
         return -1;
     }
 }
 
-void DialogTool::CheckState(){
+void DialogTool::CheckState()
+{
     Q_ASSERT(bOk != 0);
     bOk->setEnabled(flagFormula && flagName);
 }
 
-void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type){
+void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type)
+{
     Q_UNUSED(id);
     Q_UNUSED(type);
 }
 
-void DialogTool::NamePointChanged(){
+void DialogTool::NamePointChanged()
+{
     Q_ASSERT(labelEditNamePoint != 0);
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
-    if (edit){
+    if (edit)
+    {
         QString name = edit->text();
-        if(name.isEmpty() || name.contains(" ")){
+        if (name.isEmpty() || name.contains(" "))
+        {
             flagName = false;
             QPalette palette = labelEditNamePoint->palette();
             palette.setColor(labelEditNamePoint->foregroundRole(), Qt::red);
             labelEditNamePoint->setPalette(palette);
-        } else {
+        }
+        else
+        {
             flagName = true;
             QPalette palette = labelEditNamePoint->palette();
-            palette.setColor(labelEditNamePoint->foregroundRole(), QColor(76,76,76));
+            palette.setColor(labelEditNamePoint->foregroundRole(), QColor(76, 76, 76));
             labelEditNamePoint->setPalette(palette);
         }
     }
     CheckState();
 }
 
-void DialogTool::DialogAccepted(){
+void DialogTool::DialogAccepted()
+{
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogTool::DialogRejected(){
+void DialogTool::DialogRejected()
+{
     emit DialogClosed(QDialog::Rejected);
 }
 
-void DialogTool::FormulaChanged(){
+void DialogTool::FormulaChanged()
+{
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
-    if(edit){
+    if (edit)
+    {
         ValFormulaChanged(flagFormula, edit, timerFormula);
     }
 }
 
-void DialogTool::ArrowUp(){
+void DialogTool::ArrowUp()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(90);
 }
 
-void DialogTool::ArrowDown(){
+void DialogTool::ArrowDown()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(270);
 }
 
-void DialogTool::ArrowLeft(){
+void DialogTool::ArrowLeft()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(180);
 }
 
-void DialogTool::ArrowRight(){
+void DialogTool::ArrowRight()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(0);
 }
 
-void DialogTool::ArrowLeftUp(){
+void DialogTool::ArrowLeftUp()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(135);
 }
 
-void DialogTool::ArrowLeftDown(){
+void DialogTool::ArrowLeftDown()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(225);
 }
 
-void DialogTool::ArrowRightUp(){
+void DialogTool::ArrowRightUp()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(45);
 }
 
-void DialogTool::ArrowRightDown(){
+void DialogTool::ArrowRightDown()
+{
     Q_ASSERT(spinBoxAngle != 0);
     spinBoxAngle->setValue(315);
 }
 
-void DialogTool::EvalFormula(){
+void DialogTool::EvalFormula()
+{
     Q_ASSERT(lineEditFormula != 0);
     Q_ASSERT(labelResultCalculation != 0);
     Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
-void DialogTool::SizeGrowth(){
+void DialogTool::SizeGrowth()
+{
     ShowVariable(data->DataBase());
 }
 
-void DialogTool::StandartTable(){
+void DialogTool::StandartTable()
+{
     ShowVariable(data->DataStandartTable());
 }
 
-void DialogTool::LengthLines(){
+void DialogTool::LengthLines()
+{
     ShowVariable(data->DataLengthLines());
 }
 
-void DialogTool::LengthArcs(){
+void DialogTool::LengthArcs()
+{
     ShowVariable(data->DataLengthArcs());
 }
 
-void DialogTool::LengthCurves(){
+void DialogTool::LengthCurves()
+{
     ShowVariable(data->DataLengthSplines());
 }
 
-void DialogTool::Increments(){
+void DialogTool::Increments()
+{
     ShowVariable(data->DataIncrementTable());
 }
 
-void DialogTool::PutHere(){
+void DialogTool::PutHere()
+{
     PutValHere(lineEditFormula, listWidget);
 }
 
-void DialogTool::PutVal(QListWidgetItem *item){
+void DialogTool::PutVal(QListWidgetItem *item)
+{
     Q_ASSERT(lineEditFormula != 0);
     Q_ASSERT(item != 0);
     int pos = lineEditFormula->cursorPosition();
@@ -331,7 +405,8 @@ void DialogTool::PutVal(QListWidgetItem *item){
     lineEditFormula->setCursorPosition(pos + item->text().size());
 }
 
-void DialogTool::ValChenged(int row){
+void DialogTool::ValChenged(int row)
+{
     Q_ASSERT(listWidget != 0);
     Q_ASSERT(labelDescription != 0);
     Q_ASSERT(radioButtonSizeGrowth != 0);
@@ -340,48 +415,57 @@ void DialogTool::ValChenged(int row){
     Q_ASSERT(radioButtonLengthLine != 0);
     Q_ASSERT(radioButtonLengthArc != 0);
     Q_ASSERT(radioButtonLengthCurve != 0);
-    if(listWidget->count() == 0){
+    if (listWidget->count() == 0)
+    {
         return;
     }
     QListWidgetItem *item = listWidget->item( row );
-    if(radioButtonSizeGrowth->isChecked()){
-        if(item->text()=="Р"){
+    if (radioButtonSizeGrowth->isChecked())
+    {
+        if (item->text()=="Р")
+        {
             QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg(tr("Growth"));
             labelDescription->setText(desc);
         }
-        if(item->text()=="Сг"){
+        if (item->text()=="Сг")
+        {
             QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
             labelDescription->setText(desc);
         }
         return;
     }
-    if(radioButtonStandartTable->isChecked()){
+    if (radioButtonStandartTable->isChecked())
+    {
         VStandartTableCell stable = data->GetStandartTableCell(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandartTableCell(item->text()))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
     }
-    if(radioButtonIncrements->isChecked()){
+    if (radioButtonIncrements->isChecked())
+    {
         VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
                 .arg(itable.getDescription());
         labelDescription->setText(desc);
         return;
     }
-    if(radioButtonLengthLine->isChecked()){
+    if (radioButtonLengthLine->isChecked())
+    {
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
                 .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
     }
-    if(radioButtonLengthArc->isChecked()){
+    if (radioButtonLengthArc->isChecked())
+    {
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(item->text()))
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
     }
-    if(radioButtonLengthCurve->isChecked()){
+    if (radioButtonLengthCurve->isChecked())
+    {
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthSpline(item->text()))
                 .arg(tr("Curve length"));
         labelDescription->setText(desc);
@@ -389,7 +473,8 @@ void DialogTool::ValChenged(int row){
     }
 }
 
-void DialogTool::UpdateList(){
+void DialogTool::UpdateList()
+{
     Q_ASSERT(radioButtonSizeGrowth != 0);
     Q_ASSERT(radioButtonStandartTable != 0);
     Q_ASSERT(radioButtonIncrements != 0);
@@ -397,28 +482,36 @@ void DialogTool::UpdateList(){
     Q_ASSERT(radioButtonLengthArc != 0);
     Q_ASSERT(radioButtonLengthCurve != 0);
 
-    if(radioButtonSizeGrowth->isChecked()){
+    if (radioButtonSizeGrowth->isChecked())
+    {
         ShowVariable(data->DataBase());
     }
-    if(radioButtonStandartTable->isChecked()){
+    if (radioButtonStandartTable->isChecked())
+    {
         ShowVariable(data->DataStandartTable());
     }
-    if(radioButtonIncrements->isChecked()){
+    if (radioButtonIncrements->isChecked())
+    {
         ShowVariable(data->DataIncrementTable());
     }
-    if(radioButtonLengthLine->isChecked()){
+    if (radioButtonLengthLine->isChecked())
+    {
         ShowVariable(data->DataLengthLines());
     }
-    if(radioButtonLengthArc->isChecked()){
+    if (radioButtonLengthArc->isChecked())
+    {
         ShowVariable(data->DataLengthArcs());
     }
-    if(radioButtonLengthCurve->isChecked()){
+    if (radioButtonLengthCurve->isChecked())
+    {
         ShowVariable(data->DataLengthSplines());
     }
 }
 
-bool DialogTool::CheckObject(const qint64 &id){
-    if(mode == Draw::Calculation || idDetail == 0){
+bool DialogTool::CheckObject(const qint64 &id)
+{
+    if (mode == Draw::Calculation || idDetail == 0)
+    {
         return false;
     }
     VDetail det = data->GetDetail(idDetail);
@@ -426,20 +519,23 @@ bool DialogTool::CheckObject(const qint64 &id){
 }
 
 template <class key, class val>
-void DialogTool::ShowVariable(const QHash<key, val> *var){
+void DialogTool::ShowVariable(const QHash<key, val> *var)
+{
     Q_ASSERT(listWidget != 0);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
 
     QHashIterator<key, val> i(*var);
     QMap<key, val> map;
-    while (i.hasNext()) {
+    while (i.hasNext())
+    {
         i.next();
         map.insert(i.key(), i.value());
     }
 
     QMapIterator<key, val> iMap(map);
-    while (iMap.hasNext()) {
+    while (iMap.hasNext())
+    {
         iMap.next();
         QListWidgetItem *item = new QListWidgetItem(iMap.key());
         item->setFont(QFont("Times", 12, QFont::Bold));

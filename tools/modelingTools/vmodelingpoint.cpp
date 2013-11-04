@@ -24,9 +24,9 @@
 
 const QString VModelingPoint::TagName = QStringLiteral("point");
 
-VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id,
-                       QGraphicsItem *parent):VModelingTool(doc, data, id),
-    QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0), lineName(0){
+VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem *parent)
+    :VModelingTool(doc, data, id), QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0), lineName(0)
+{
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
@@ -38,7 +38,8 @@ VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id,
     RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
 }
 
-void VModelingPoint::NameChangePosition(const QPointF pos){
+void VModelingPoint::NameChangePosition(const QPointF pos)
+{
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
@@ -48,33 +49,40 @@ void VModelingPoint::NameChangePosition(const QPointF pos){
     VAbstractTool::data.UpdatePoint(id, point);
 }
 
-void VModelingPoint::UpdateNamePosition(qreal mx, qreal my){
+void VModelingPoint::UpdateNamePosition(qreal mx, qreal my)
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
         domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }
 
-void VModelingPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
-    if(event->button() == Qt::LeftButton){
+void VModelingPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         emit ChoosedTool(id, Scene::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VModelingPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine));
 }
 
-void VModelingPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
 }
 
-void VModelingPoint::RefreshPointGeometry(const VPointF &point){
+void VModelingPoint::RefreshPointGeometry(const VPointF &point)
+{
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -88,15 +96,19 @@ void VModelingPoint::RefreshPointGeometry(const VPointF &point){
     RefreshLine();
 }
 
-void VModelingPoint::RefreshLine(){
+void VModelingPoint::RefreshLine()
+{
     QRectF nameRec = namePoint->sceneBoundingRect();
     QPointF p1, p2;
     LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if(QLineF(p1, pRec - scenePos()).length() <= toPixel(4)){
+    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    {
         lineName->setVisible(false);
-    } else {
+    }
+    else
+    {
         lineName->setVisible(true);
     }
 }

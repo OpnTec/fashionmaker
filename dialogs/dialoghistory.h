@@ -25,11 +25,13 @@
 #include "dialogtool.h"
 #include "xml/vdomdocument.h"
 
-namespace Ui {
-class DialogHistory;
+namespace Ui
+{
+    class DialogHistory;
 }
 
-class DialogHistory : public DialogTool{
+class DialogHistory : public DialogTool
+{
     Q_OBJECT
 public:
                       DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent = 0);

@@ -29,8 +29,8 @@
 #include "exception/vexceptionuniqueid.h"
 #include "version.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
+MainWindow::MainWindow(QWidget *parent)
+    :QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
     sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
     dialogEndLine(QSharedPointer<DialogEndLine>()), dialogLine(QSharedPointer<DialogLine>()),
     dialogAlongLine(QSharedPointer<DialogAlongLine>()),
@@ -43,7 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-    mode(Draw::Calculation){
+    mode(Draw::Calculation)
+{
     ui->setupUi(this);
     ToolBarOption();
     ToolBarDraws();
@@ -111,7 +112,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBox->setCurrentIndex(0);
 }
 
-void MainWindow::ActionNewDraw(){
+void MainWindow::ActionNewDraw()
+{
     QString nameDraw;
     bool bOk;
     qint32 index;
@@ -121,25 +123,31 @@ void MainWindow::ActionNewDraw(){
     dlg->setLabelText(tr("Drawing:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a name for the drawing."));
-    dlg->resize(300,100);
+    dlg->resize(300, 100);
     dlg->setTextValue(nDraw);
-    while(1){
+    while (1)
+    {
         bOk = dlg->exec();
         nameDraw = dlg->textValue();
-        if(!bOk || nameDraw.isEmpty()){
+        if (bOk == false || nameDraw.isEmpty())
+        {
             delete dlg;
             return;
         }
         index = comboBoxDraws->findText(nameDraw);
-        if(index != -1){//we already have this name
+        if (index != -1)
+        {//we already have this name
             qCritical()<<tr("Error. Drawing of same name already exists.");
-        } else {
+        }
+        else
+        {
             break;
         }
     }
     delete dlg;
     bOk = doc->appendDraw(nameDraw);
-    if(bOk == false){
+    if (bOk == false)
+    {
         qCritical()<<tr("Error creating drawing with the name")<<nameDraw<<".";
         return;
     }
@@ -147,7 +155,8 @@ void MainWindow::ActionNewDraw(){
                this, &MainWindow::currentDrawChanged);
     comboBoxDraws->addItem(nameDraw);
     index = comboBoxDraws->findText(nameDraw);
-    if ( index != -1 ) { // -1 for not found
+    if ( index != -1 )
+    { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
         currentDrawChanged( index );
     }
@@ -168,9 +177,9 @@ void MainWindow::ActionNewDraw(){
     changeInFile = true;
 }
 
-void MainWindow::OptionDraw(){
+void MainWindow::OptionDraw()
+{
     QString nameDraw;
-    bool bOk = false;
     qint32 index;
     QString nDraw = doc->GetNameActivDraw();
     QInputDialog *dlg = new QInputDialog(this);
@@ -178,27 +187,35 @@ void MainWindow::OptionDraw(){
     dlg->setLabelText(tr("Drawing:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a new name for the drawing."));
-    dlg->resize(300,100);
+    dlg->resize(300, 100);
     dlg->setTextValue(nDraw);
-    while(1){
-        bOk = dlg->exec();
+    while (1)
+    {
+        bool bOk = dlg->exec();
         nameDraw = dlg->textValue();
-        if(!bOk || nameDraw.isEmpty()){
+        if (bOk == false || nameDraw.isEmpty())
+        {
             delete dlg;
             return;
         }
         index = comboBoxDraws->findText(nameDraw);
-        if(index != -1){//we already have this name
+        if (index != -1)
+        {//we already have this name
             qCritical()<<tr("Error. Drawing of same name already exists.");
-        } else {
+        }
+        else
+        {
             break;
         }
     }
     delete dlg;
     index = comboBoxDraws->findText(doc->GetNameActivDraw());
-    if(doc->SetNameDraw(nameDraw)){
+    if (doc->SetNameDraw(nameDraw))
+    {
         comboBoxDraws->setItemText(index, nameDraw);
-    } else {
+    }
+    else
+    {
         QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new name of drawing"));
     }
 
@@ -206,8 +223,10 @@ void MainWindow::OptionDraw(){
 
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
-                               QSharedPointer<Dialog> &dialog, Func closeDialogSlot){
-    if(checked){
+                               QSharedPointer<Dialog> &dialog, Func closeDialogSlot)
+{
+    if (checked)
+    {
         CanselTool();
         tool = t;
         QPixmap pixmap(cursor);
@@ -219,8 +238,11 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
         connect(dialog.data(), &Dialog::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
-    } else {
-        if(QToolButton *tButton = qobject_cast< QToolButton * >(this->sender())){
+    }
+    else
+    {
+        if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
+        {
             Q_ASSERT(tButton != 0);
             tButton->setChecked(true);
         }
@@ -228,7 +250,8 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
 }
 
 template <typename T>
-void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool, const qint64 &idDetail){
+void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool, const qint64 &idDetail)
+{
     QHash<qint64, VDataTool*>* tools = doc->getTools();
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
     Q_ASSERT(det != 0);
@@ -236,11 +259,16 @@ void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool
 }
 
 template <typename DrawTool, typename ModelingTool, typename Dialog>
-void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result){
-    if(result == QDialog::Accepted){
-        if(mode == Draw::Calculation){
+void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result)
+{
+    if (result == QDialog::Accepted)
+    {
+        if (mode == Draw::Calculation)
+        {
             DrawTool::Create(dialog, currentScene, doc, data);
-        } else {
+        }
+        else
+        {
             ModelingTool *endLine = ModelingTool::Create(dialog, doc, data);
             AddToolToDetail(endLine, endLine->getId(), tool, dialog->getIdDetail());
         }
@@ -248,111 +276,135 @@ void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result){
     ArrowTool();
 }
 
-void MainWindow::ToolEndLine(bool checked){
+void MainWindow::ToolEndLine(bool checked)
+{
     SetToolButton(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                   dialogEndLine, &MainWindow::ClosedDialogEndLine);
 }
 
-void MainWindow::ClosedDialogEndLine(int result){
+void MainWindow::ClosedDialogEndLine(int result)
+{
     ClosedDialog<VToolEndLine, VModelingEndLine>(dialogEndLine, result);
 }
 
-void MainWindow::ToolLine(bool checked){
+void MainWindow::ToolLine(bool checked)
+{
     SetToolButton(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
                   dialogLine, &MainWindow::ClosedDialogLine);
 }
 
-void MainWindow::ClosedDialogLine(int result){
+void MainWindow::ClosedDialogLine(int result)
+{
     ClosedDialog<VToolLine, VModelingLine>(dialogLine, result);
 }
 
-void MainWindow::ToolAlongLine(bool checked){
+void MainWindow::ToolAlongLine(bool checked)
+{
     SetToolButton(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
                   dialogAlongLine, &MainWindow::ClosedDialogAlongLine);
 }
 
-void MainWindow::ClosedDialogAlongLine(int result){
+void MainWindow::ClosedDialogAlongLine(int result)
+{
     ClosedDialog<VToolAlongLine, VModelingAlongLine>(dialogAlongLine, result);
 }
 
-void MainWindow::ToolShoulderPoint(bool checked){
+void MainWindow::ToolShoulderPoint(bool checked)
+{
     SetToolButton(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
                   tr("Select first point of line"),  dialogShoulderPoint,
                   &MainWindow::ClosedDialogShoulderPoint);
 }
 
-void MainWindow::ClosedDialogShoulderPoint(int result){
+void MainWindow::ClosedDialogShoulderPoint(int result)
+{
     ClosedDialog<VToolShoulderPoint, VModelingShoulderPoint>(dialogShoulderPoint, result);
 }
 
-void MainWindow::ToolNormal(bool checked){
+void MainWindow::ToolNormal(bool checked)
+{
     SetToolButton(checked, Tool::NormalTool, ":/cursor/normal_cursor.png",
                   tr("Select first point of line"), dialogNormal, &MainWindow::ClosedDialogNormal);
 }
 
-void MainWindow::ClosedDialogNormal(int result){
+void MainWindow::ClosedDialogNormal(int result)
+{
     ClosedDialog<VToolNormal, VModelingNormal>(dialogNormal, result);
 }
 
-void MainWindow::ToolBisector(bool checked){
+void MainWindow::ToolBisector(bool checked)
+{
     SetToolButton(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png",
                   tr("Select first point of angle"), dialogBisector, &MainWindow::ClosedDialogBisector);
 }
 
-void MainWindow::ClosedDialogBisector(int result){
+void MainWindow::ClosedDialogBisector(int result)
+{
     ClosedDialog<VToolBisector, VModelingBisector>(dialogBisector, result);
 }
 
-void MainWindow::ToolLineIntersect(bool checked){
+void MainWindow::ToolLineIntersect(bool checked)
+{
     SetToolButton(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
                   tr("Select first point of first line"), dialogLineIntersect,
                   &MainWindow::ClosedDialogLineIntersect);
 }
 
-void MainWindow::ClosedDialogLineIntersect(int result){
+void MainWindow::ClosedDialogLineIntersect(int result)
+{
     ClosedDialog<VToolLineIntersect, VModelingLineIntersect>(dialogLineIntersect, result);
 }
 
-void MainWindow::ToolSpline(bool checked){
+void MainWindow::ToolSpline(bool checked)
+{
     SetToolButton(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
                   tr("Select first point curve"), dialogSpline, &MainWindow::ClosedDialogSpline);
 }
 
-void MainWindow::ClosedDialogSpline(int result){
+void MainWindow::ClosedDialogSpline(int result)
+{
     ClosedDialog<VToolSpline, VModelingSpline>(dialogSpline, result);
 }
 
-void MainWindow::ToolArc(bool checked){
+void MainWindow::ToolArc(bool checked)
+{
     SetToolButton(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
                   tr("Select point of center of arc"), dialogArc, &MainWindow::ClosedDialogArc);
 }
 
-void MainWindow::ClosedDialogArc(int result){
+void MainWindow::ClosedDialogArc(int result)
+{
     ClosedDialog<VToolArc, VModelingArc>(dialogArc, result);
 }
 
-void MainWindow::ToolSplinePath(bool checked){
+void MainWindow::ToolSplinePath(bool checked)
+{
     SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
                   tr("Select point of curve path"), dialogSplinePath,
                   &MainWindow::ClosedDialogSplinePath);
 }
 
-void MainWindow::ClosedDialogSplinePath(int result){
+void MainWindow::ClosedDialogSplinePath(int result)
+{
     ClosedDialog<VToolSplinePath, VModelingSplinePath>(dialogSplinePath, result);
 }
 
-void MainWindow::ToolPointOfContact(bool checked){
+void MainWindow::ToolPointOfContact(bool checked)
+{
     SetToolButton(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
                   tr("Select first point of line"), dialogPointOfContact,
                   &MainWindow::ClosedDialogPointOfContact);
 }
 
-void MainWindow::ClosedDialogPointOfContact(int result){
+void MainWindow::ClosedDialogPointOfContact(int result)
+{
     ClosedDialog<VToolPointOfContact, VModelingPointOfContact>(dialogPointOfContact, result);
 }
 
-void MainWindow::ToolDetail(bool checked){
-    if(checked){
+void MainWindow::ToolDetail(bool checked)
+{
+    if (checked)
+    {
         CanselTool();
         tool = Tool::Detail;
         QPixmap pixmap("://cursor/new_detail_cursor.png");
@@ -364,76 +416,95 @@ void MainWindow::ToolDetail(bool checked){
                 &DialogDetail::ChoosedObject);
         connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &MainWindow::ClosedDialogDetail);
         connect(doc, &VDomDocument::FullUpdateFromFile, dialogDetail.data(), &DialogDetail::UpdateList);
-    } else {
-        if(QToolButton *tButton = qobject_cast< QToolButton * >(this->sender())){
+    }
+    else
+    {
+        if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
+        {
             tButton->setChecked(true);
         }
     }
 }
 
-void MainWindow::ClosedDialogDetail(int result){
-    if(result == QDialog::Accepted){
+void MainWindow::ClosedDialogDetail(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         VToolDetail::Create(dialogDetail, sceneDetails, doc, data);
     }
     ArrowTool();
 }
 
-void MainWindow::ToolHeight(bool checked){
+void MainWindow::ToolHeight(bool checked)
+{
     SetToolButton(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
                   dialogHeight, &MainWindow::ClosedDialogHeight);
 }
 
-void MainWindow::ClosedDialogHeight(int result){
+void MainWindow::ClosedDialogHeight(int result)
+{
     ClosedDialog<VToolHeight, VModelingHeight>(dialogHeight, result);
 }
 
-void MainWindow::ToolTriangle(bool checked){
+void MainWindow::ToolTriangle(bool checked)
+{
     SetToolButton(checked, Tool::Triangle, ":/cursor/triangle_cursor.png", tr("Select first point of axis"),
                   dialogTriangle, &MainWindow::ClosedDialogTriangle);
 }
 
-void MainWindow::ClosedDialogTriangle(int result){
+void MainWindow::ClosedDialogTriangle(int result)
+{
     ClosedDialog<VToolTriangle, VModelingTriangle>(dialogTriangle, result);
 }
 
-void MainWindow::ToolPointOfIntersection(bool checked){
+void MainWindow::ToolPointOfIntersection(bool checked)
+{
     SetToolButton(checked, Tool::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
                   tr("Select point vertically"),
                   dialogPointOfIntersection, &MainWindow::ClosedDialogPointOfIntersection);
 }
 
-void MainWindow::ClosedDialogPointOfIntersection(int result){
+void MainWindow::ClosedDialogPointOfIntersection(int result)
+{
     ClosedDialog<VToolPointOfIntersection, VModelingPointOfIntersection>(dialogPointOfIntersection, result);
 }
 
-void MainWindow::About(){
+void MainWindow::About()
+{
     QString fullName = QString("Valentina %1").arg(APP_VERSION);
     QString qtBase(tr("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR));
     QString buildOn(tr("Built on %3 at %4").arg(__DATE__).arg(__TIME__));
-    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(buildOn).arg(WARRANTY);
+    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(
+                buildOn).arg(WARRANTY);
     QMessageBox::about(this, tr("About Valentina"), about);
 }
 
-void MainWindow::AboutQt(){
+void MainWindow::AboutQt()
+{
     QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
-void MainWindow::ShowToolTip(const QString &toolTip){
+void MainWindow::ShowToolTip(const QString &toolTip)
+{
     helpLabel->setText(toolTip);
 }
 
-void MainWindow::tableClosed(){
+void MainWindow::tableClosed()
+{
     show();
     MinimumScrollBar();
 }
 
-void MainWindow::showEvent( QShowEvent *event ){
+void MainWindow::showEvent( QShowEvent *event )
+{
     QMainWindow::showEvent( event );
-    if( event->spontaneous() ){
+    if ( event->spontaneous() )
+    {
         return;
     }
 
-    if(isInitialized){
+    if (isInitialized)
+    {
         return;
     }
     // do your init stuff here
@@ -442,8 +513,10 @@ void MainWindow::showEvent( QShowEvent *event ){
     isInitialized = true;//first show windows are held
 }
 
-void MainWindow::closeEvent(QCloseEvent *event){
-    if(changeInFile == true){
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (changeInFile == true)
+    {
         QMessageBox msgBox;
         msgBox.setText(tr("The pattern has been modified."));
         msgBox.setInformativeText(tr("Do you want to save your changes?"));
@@ -451,50 +524,58 @@ void MainWindow::closeEvent(QCloseEvent *event){
         msgBox.setDefaultButton(QMessageBox::Save);
         msgBox.setIcon(QMessageBox::Question);
         int ret = msgBox.exec();
-        switch (ret) {
-        case QMessageBox::Save:
-            // Save was clicked
-            if(fileName.isEmpty()){
-                ActionSaveAs();
-            } else {
-                ActionSave();
-            }
-            if(changeInFile){
-                // We did't save file
-                event->ignore();
-            } else {
-                // We have successfully saved the file
+        switch (ret)
+        {
+            case QMessageBox::Save:
+                // Save was clicked
+                if (fileName.isEmpty())
+                {
+                    ActionSaveAs();
+                }
+                else
+                {
+                    ActionSave();
+                }
+                if (changeInFile)
+                {
+                    // We did't save file
+                    event->ignore();
+                }
+                else
+                {
+                    // We have successfully saved the file
+                    event->accept();
+                }
+                break;
+            case QMessageBox::Discard:
+                // Don't Save was clicked
                 event->accept();
-            }
-            break;
-        case QMessageBox::Discard:
-            // Don't Save was clicked
-            event->accept();
-            break;
-        case QMessageBox::Cancel:
-            // Cancel was clicked
-            event->ignore();
-            break;
-        default:
-            // should never be reached
-            event->accept();
-            break;
+                break;
+            case QMessageBox::Cancel:
+                // Cancel was clicked
+                event->ignore();
+                break;
+            default:
+                // should never be reached
+                event->accept();
+                break;
         }
     }
 }
 
-void MainWindow::ToolBarOption(){
+void MainWindow::ToolBarOption()
+{
     QLabel * labelGrowth = new QLabel;
     labelGrowth->setText(tr("Growth: "));
     ui->toolBarOption->addWidget(labelGrowth);
 
     QStringList list;
-    list << "104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
-         << "182" << "188";
+    list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
+         <<"182"<<"188";
     QComboBox *comboBoxGrow = new QComboBox;
     comboBoxGrow->clear();
     comboBoxGrow->addItems(list);
-    comboBoxGrow->setCurrentIndex(12);
+    comboBoxGrow->setCurrentIndex(14);
     ui->toolBarOption->addWidget(comboBoxGrow);
     connect(comboBoxGrow,
             static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -505,11 +586,11 @@ void MainWindow::ToolBarOption(){
     ui->toolBarOption->addWidget(labelSize);
 
     list.clear();
-    list << "28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50" << "52" << "54" << "56";
+    list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"<<"56";
     QComboBox *comboBoxSize = new QComboBox;
     comboBoxSize->clear();
     comboBoxSize->addItems(list);
-    comboBoxSize->setCurrentIndex(11);
+    comboBoxSize->setCurrentIndex(14);
     ui->toolBarOption->addWidget(comboBoxSize);
     connect(comboBoxSize,
             static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -523,7 +604,8 @@ void MainWindow::ToolBarOption(){
 
 }
 
-void MainWindow::ToolBarDraws(){
+void MainWindow::ToolBarDraws()
+{
     QLabel * labelNameDraw = new QLabel;
     labelNameDraw ->setText(tr("Drawing: "));
     ui->toolBarDraws->addWidget(labelNameDraw);
@@ -548,125 +630,131 @@ void MainWindow::ToolBarDraws(){
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
 }
 
-void MainWindow::currentDrawChanged( int index ){
-    if(index != -1) {
+void MainWindow::currentDrawChanged( int index )
+{
+    if (index != -1)
+    {
         doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
     }
 }
 
-void MainWindow::mouseMove(QPointF scenePos){
+void MainWindow::mouseMove(QPointF scenePos)
+{
     QString string = QString("%1, %2")
                             .arg(static_cast<qint32>(toMM(scenePos.x())))
                             .arg(static_cast<qint32>(toMM(scenePos.y())));
     mouseCoordinate->setText(string);
 }
 
-void MainWindow::CanselTool(){
-    switch( tool ){
-    case Tool::ArrowTool:
-        ui->actionArrowTool->setChecked(false);
-        helpLabel->setText("");
-        break;
-    case Tool::SinglePointTool:
-        Q_UNREACHABLE();
-        //Nothing to do here because we can't create this tool from main window.
-        break;
-    case Tool::EndLineTool:
-        dialogEndLine.clear();
-        ui->toolButtonEndLine->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::LineTool:
-        dialogLine.clear();
-        ui->toolButtonLine->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearFocus();
-        break;
-    case Tool::AlongLineTool:
-        dialogAlongLine.clear();
-        ui->toolButtonAlongLine->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::ShoulderPointTool:
-        dialogShoulderPoint.clear();
-        ui->toolButtonShoulderPoint->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::NormalTool:
-        dialogNormal.clear();
-        ui->toolButtonNormal->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::BisectorTool:
-        dialogBisector.clear();
-        ui->toolButtonBisector->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::LineIntersectTool:
-        dialogLineIntersect.clear();
-        ui->toolButtonLineIntersect->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::SplineTool:
-        dialogSpline.clear();
-        ui->toolButtonSpline->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::ArcTool:
-        dialogArc.clear();
-        ui->toolButtonArc->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::SplinePathTool:
-        dialogSplinePath.clear();
-        ui->toolButtonSplinePath->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::PointOfContact:
-        dialogPointOfContact.clear();
-        ui->toolButtonPointOfContact->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::Detail:
-        dialogDetail.clear();
-        ui->toolButtonNewDetail->setChecked(false);
-        break;
-    case Tool::Height:
-        dialogHeight.clear();
-        ui->toolButtonHeight->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::Triangle:
-        dialogTriangle.clear();
-        ui->toolButtonTriangle->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    case Tool::PointOfIntersection:
-        dialogPointOfIntersection.clear();
-        ui->toolButtonPointOfIntersection->setChecked(false);
-        currentScene->setFocus(Qt::OtherFocusReason);
-        currentScene->clearSelection();
-        break;
-    default:
-        qWarning()<<"Get wrong tool type. Ignore.";
-        break;
+void MainWindow::CanselTool()
+{
+    switch ( tool )
+    {
+        case Tool::ArrowTool:
+            ui->actionArrowTool->setChecked(false);
+            helpLabel->setText("");
+            break;
+        case Tool::SinglePointTool:
+            Q_UNREACHABLE();
+            //Nothing to do here because we can't create this tool from main window.
+            break;
+        case Tool::EndLineTool:
+            dialogEndLine.clear();
+            ui->toolButtonEndLine->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::LineTool:
+            dialogLine.clear();
+            ui->toolButtonLine->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearFocus();
+            break;
+        case Tool::AlongLineTool:
+            dialogAlongLine.clear();
+            ui->toolButtonAlongLine->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::ShoulderPointTool:
+            dialogShoulderPoint.clear();
+            ui->toolButtonShoulderPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::NormalTool:
+            dialogNormal.clear();
+            ui->toolButtonNormal->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::BisectorTool:
+            dialogBisector.clear();
+            ui->toolButtonBisector->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::LineIntersectTool:
+            dialogLineIntersect.clear();
+            ui->toolButtonLineIntersect->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::SplineTool:
+            dialogSpline.clear();
+            ui->toolButtonSpline->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::ArcTool:
+            dialogArc.clear();
+            ui->toolButtonArc->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::SplinePathTool:
+            dialogSplinePath.clear();
+            ui->toolButtonSplinePath->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::PointOfContact:
+            dialogPointOfContact.clear();
+            ui->toolButtonPointOfContact->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::Detail:
+            dialogDetail.clear();
+            ui->toolButtonNewDetail->setChecked(false);
+            break;
+        case Tool::Height:
+            dialogHeight.clear();
+            ui->toolButtonHeight->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::Triangle:
+            dialogTriangle.clear();
+            ui->toolButtonTriangle->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::PointOfIntersection:
+            dialogPointOfIntersection.clear();
+            ui->toolButtonPointOfIntersection->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        default:
+            qWarning()<<"Get wrong tool type. Ignore.";
+            break;
     }
 }
 
-void  MainWindow::ArrowTool(){
+void  MainWindow::ArrowTool()
+{
     CanselTool();
     ui->actionArrowTool->setChecked(true);
     tool = Tool::ArrowTool;
@@ -675,12 +763,15 @@ void  MainWindow::ArrowTool(){
     helpLabel->setText("");
 }
 
-void MainWindow::ActionAroowTool(){
+void MainWindow::ActionAroowTool()
+{
     ArrowTool();
 }
 
-void MainWindow::keyPressEvent ( QKeyEvent * event ){
-    switch(event->key()){
+void MainWindow::keyPressEvent ( QKeyEvent * event )
+{
+    switch (event->key())
+    {
         case Qt::Key_Escape:
             ArrowTool();
             break;
@@ -688,8 +779,10 @@ void MainWindow::keyPressEvent ( QKeyEvent * event ){
     QMainWindow::keyPressEvent ( event );
 }
 
-void MainWindow::ActionDraw(bool checked){
-    if(checked){
+void MainWindow::ActionDraw(bool checked)
+{
+    if (checked)
+    {
         ui->actionDetails->setChecked(false);
         /*Save scroll bars value for previous scene.*/
         QScrollBar *horScrollBar = view->horizontalScrollBar();
@@ -707,13 +800,17 @@ void MainWindow::ActionDraw(bool checked){
 
         mode = Draw::Calculation;
         doc->setCurrentData();
-    } else {
+    }
+    else
+    {
         ui->actionDraw->setChecked(true);
     }
 }
 
-void MainWindow::ActionDetails(bool checked){
-    if(checked){
+void MainWindow::ActionDetails(bool checked)
+{
+    if (checked)
+    {
         ui->actionDraw->setChecked(false);
         /*Save scroll bars value for previous scene.*/
         QScrollBar *horScrollBar = view->horizontalScrollBar();
@@ -729,19 +826,25 @@ void MainWindow::ActionDetails(bool checked){
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
         mode = Draw::Modeling;
-    } else {
+    }
+    else
+    {
         ui->actionDetails->setChecked(true);
     }
 }
 
-void MainWindow::ActionSaveAs(){
+void MainWindow::ActionSaveAs()
+{
     QString filters(tr("Lekalo files (*.xml);;All files (*.*)"));
     QString defaultFilter(tr("Lekalo files (*.xml)"));
     QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), QDir::homePath(),
                                                  filters, &defaultFilter);
-    if(fName.isEmpty())
+    if (fName.isEmpty())
+    {
         return;
-    if(fName.indexOf(".xml",fName.size()-4)<0){
+    }
+    if (fName.indexOf(".xml", fName.size()-4)<0)
+    {
         fName.append(".xml");
     }
     fileName = fName;
@@ -749,17 +852,22 @@ void MainWindow::ActionSaveAs(){
     ActionSave();
 }
 
-void MainWindow::ActionSave(){
-    if(!fileName.isEmpty()){
+void MainWindow::ActionSave()
+{
+    if (fileName.isEmpty() == false)
+    {
         bool result = SafeSaveing(fileName);
-        if(result){
+        if (result)
+        {
             ui->actionSave->setEnabled(false);
             changeInFile = false;
             QFileInfo info(fileName);
             QString title(info.fileName());
             title.append("-Valentina");
             setWindowTitle(title);
-        } else {
+        }
+        else
+        {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Error!"));
             msgBox.setText(tr("Error saving file. Can't save file."));
@@ -771,14 +879,20 @@ void MainWindow::ActionSave(){
     }
 }
 
-void MainWindow::ActionOpen(){
+void MainWindow::ActionOpen()
+{
     QString filter(tr("Lekalo files (*.xml)"));
     QString fName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
-    if(fName.isEmpty())
+    if (fName.isEmpty())
+    {
         return;
-    if(fileName.isEmpty() && changeInFile == false){
+    }
+    if (fileName.isEmpty() && changeInFile == false)
+    {
         OpenPattern(fName);
-    } else {
+    }
+    else
+    {
         /*Open new copy application*/
         QProcess *v = new QProcess(this);
         QStringList arguments;
@@ -788,7 +902,8 @@ void MainWindow::ActionOpen(){
     }
 }
 
-void MainWindow::Clear(){
+void MainWindow::Clear()
+{
     setWindowTitle("Valentina");
     fileName.clear();
     data->Clear();
@@ -803,14 +918,17 @@ void MainWindow::Clear(){
     SetEnableTool(false);
 }
 
-void MainWindow::ActionNew(){
+void MainWindow::ActionNew()
+{
     QProcess *v = new QProcess(this);
     v->startDetached(QCoreApplication::applicationFilePath ());
     delete v;
 }
 
-void MainWindow::haveChange(){
-    if(!fileName.isEmpty()){
+void MainWindow::haveChange()
+{
+    if (fileName.isEmpty() == false)
+    {
         ui->actionSave->setEnabled(true);
         changeInFile = true;
         QFileInfo info(fileName);
@@ -820,61 +938,75 @@ void MainWindow::haveChange(){
     }
 }
 
-void MainWindow::ChangedSize(const QString & text){
+void MainWindow::ChangedSize(const QString & text)
+{
     qint32 size = text.toInt();
     data->SetSize(size*10);
     doc->FullUpdateTree();
 }
 
-void MainWindow::ChangedGrowth(const QString &text){
+void MainWindow::ChangedGrowth(const QString &text)
+{
     qint32 growth = text.toInt();
     data->SetGrowth(growth*10);
     doc->FullUpdateTree();
 }
 
-void MainWindow::SetEnableWidgets(bool enable){
+void MainWindow::SetEnableWidgets(bool enable)
+{
     ui->actionSaveAs->setEnabled(enable);
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    if(enable == true && !fileName.isEmpty()){
+    if (enable == true && fileName.isEmpty() == false)
+    {
         ui->actionSave->setEnabled(enable);
     }
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
 }
 
-void MainWindow::ActionTable(bool checked){
-    if(checked){
+void MainWindow::ActionTable(bool checked)
+{
+    if (checked)
+    {
         dialogTable = new DialogIncrements(data, doc, this);
         connect(dialogTable, &DialogIncrements::DialogClosed, this,
                 &MainWindow::ClosedActionTable);
         dialogTable->show();
-    } else {
+    }
+    else
+    {
         ui->actionTable->setChecked(true);
         dialogTable->activateWindow();
     }
 }
 
-void MainWindow::ClosedActionTable(){
+void MainWindow::ClosedActionTable()
+{
     ui->actionTable->setChecked(false);
     delete dialogTable;
 }
 
-void MainWindow::ActionHistory(bool checked){
-    if(checked){
+void MainWindow::ActionHistory(bool checked)
+{
+    if (checked)
+    {
         dialogHistory = new DialogHistory(data, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
         connect(dialogHistory, &DialogHistory::DialogClosed, this,
                 &MainWindow::ClosedActionHistory);
         dialogHistory->show();
-    } else {
+    }
+    else
+    {
         ui->actionHistory->setChecked(true);
         dialogHistory->activateWindow();
     }
 }
 
-void MainWindow::ActionLayout(bool checked){
+void MainWindow::ActionLayout(bool checked)
+{
     Q_UNUSED(checked);
     hide();
     QVector<VItem*> listDetails;
@@ -882,12 +1014,14 @@ void MainWindow::ActionLayout(bool checked){
     emit ModelChosen(listDetails);
 }
 
-void MainWindow::ClosedActionHistory(){
+void MainWindow::ClosedActionHistory()
+{
     ui->actionHistory->setChecked(false);
     delete dialogHistory;
 }
 
-void MainWindow::SetEnableTool(bool enable){
+void MainWindow::SetEnableTool(bool enable)
+{
     ui->toolButtonEndLine->setEnabled(enable);
     ui->toolButtonLine->setEnabled(enable);
     ui->toolButtonAlongLine->setEnabled(enable);
@@ -905,18 +1039,22 @@ void MainWindow::SetEnableTool(bool enable){
     ui->toolButtonPointOfIntersection->setEnabled(enable);
 }
 
-void MainWindow::MinimumScrollBar(){
+void MainWindow::MinimumScrollBar()
+{
     QScrollBar *horScrollBar = view->horizontalScrollBar();
     horScrollBar->setValue(horScrollBar->minimum());
     QScrollBar *verScrollBar = view->verticalScrollBar();
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
-bool MainWindow::SafeSaveing(const QString &fileName) const{
-    try{
+bool MainWindow::SafeSaveing(const QString &fileName) const
+{
+    try
+    {
         doc->TestUniqueId();
     }
-    catch(const VExceptionUniqueId &e){
+    catch (const VExceptionUniqueId &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error don't unique id."));
@@ -928,7 +1066,8 @@ bool MainWindow::SafeSaveing(const QString &fileName) const{
         msgBox.exec();
         return false;
     }
-    if(fileName.isEmpty()){
+    if (fileName.isEmpty())
+    {
         qWarning()<<tr("Got empty file name.");
         return false;
     }
@@ -937,7 +1076,8 @@ bool MainWindow::SafeSaveing(const QString &fileName) const{
     QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
     qDebug()<<"file "<<fileName<<"temp file "<<temp;
     QFile tempFile(temp);
-    if(tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate)){
+    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
+    {
         const int Indent = 4;
         QTextStream out(&tempFile);
         doc->save(out, Indent);
@@ -948,31 +1088,42 @@ bool MainWindow::SafeSaveing(const QString &fileName) const{
     QFile patternFile(fileName);
     // We need here temporary file because we need restore pattern after error of copying temp file.
     QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open()) {
+    if (tempOfPattern.open())
+    {
         patternFile.copy(tempOfPattern.fileName());
     }
-    if ( !patternFile.exists() || patternFile.remove() ) {
-        if ( !tempFile.copy(patternFile.fileName()) ){
+    if ( patternFile.exists() == false || patternFile.remove() )
+    {
+        if ( tempFile.copy(patternFile.fileName()) == false )
+        {
             qCritical()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
             tempOfPattern.copy(fileName);
             result = false;
-        } else {
+        }
+        else
+        {
             result = true;
         }
-    } else {
+    }
+    else
+    {
         qCritical()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
         result = false;
     }
-    if(result){
+    if (result)
+    {
         tempFile.remove();
     }
     return result;
 }
 
-void MainWindow::AutoSavePattern(){
-    if(!fileName.isEmpty() && changeInFile == true){
+void MainWindow::AutoSavePattern()
+{
+    if (fileName.isEmpty() == false && changeInFile == true)
+    {
         bool result = SafeSaveing(fileName);
-        if(result){
+        if (result)
+        {
             ui->actionSave->setEnabled(false);
             changeInFile = false;
             QFileInfo info(fileName);
@@ -983,18 +1134,22 @@ void MainWindow::AutoSavePattern(){
     }
 }
 
-MainWindow::~MainWindow(){
+MainWindow::~MainWindow()
+{
     CanselTool();
     delete ui;
 
     delete data;
-    if(!doc->isNull()){
+    if (doc->isNull() == false)
+    {
         delete doc;
     }
 }
 
-void MainWindow::OpenPattern(const QString &fileName){
-    if(fileName.isEmpty()){
+void MainWindow::OpenPattern(const QString &fileName)
+{
+    if (fileName.isEmpty())
+    {
         qWarning()<<tr("Can't open pattern file. File name empty")<<Q_FUNC_INFO;
         return;
     }
@@ -1002,14 +1157,18 @@ void MainWindow::OpenPattern(const QString &fileName){
     QString errorMsg;
     qint32 errorLine = 0;
     qint32 errorColumn = 0;
-    if(file.open(QIODevice::ReadOnly)){
-        if(doc->setContent(&file, &errorMsg, &errorLine, &errorColumn)){
+    if (file.open(QIODevice::ReadOnly))
+    {
+        if (doc->setContent(&file, &errorMsg, &errorLine, &errorColumn))
+        {
             disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                        this, &MainWindow::currentDrawChanged);
-            try{
-            doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+            try
+            {
+                doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
             }
-            catch(const VExceptionObjectError &e){
+            catch (const VExceptionObjectError &e)
+            {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error parsing file."));
@@ -1023,7 +1182,8 @@ void MainWindow::OpenPattern(const QString &fileName){
                 Clear();
                 return;
             }
-            catch(const VExceptionConversionError &e){
+            catch (const VExceptionConversionError &e)
+            {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error can't convert value."));
@@ -1036,7 +1196,8 @@ void MainWindow::OpenPattern(const QString &fileName){
                 Clear();
                 return;
             }
-            catch(const VExceptionEmptyParameter &e){
+            catch (const VExceptionEmptyParameter &e)
+            {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error empty parameter."));
@@ -1050,7 +1211,8 @@ void MainWindow::OpenPattern(const QString &fileName){
                 Clear();
                 return;
             }
-            catch(const VExceptionWrongParameterId &e){
+            catch (const VExceptionWrongParameterId &e)
+            {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error wrong id."));
@@ -1064,7 +1226,8 @@ void MainWindow::OpenPattern(const QString &fileName){
                 Clear();
                 return;
             }
-            catch(const VExceptionUniqueId &e){
+            catch (const VExceptionUniqueId &e)
+            {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Error don't unique id."));
@@ -1082,16 +1245,22 @@ void MainWindow::OpenPattern(const QString &fileName){
                     this, &MainWindow::currentDrawChanged);
             QString nameDraw = doc->GetNameActivDraw();
             qint32 index = comboBoxDraws->findText(nameDraw);
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 comboBoxDraws->setCurrentIndex(index);
             }
-            if(comboBoxDraws->count() > 0){
+            if (comboBoxDraws->count() > 0)
+            {
                 SetEnableTool(true);
-            } else {
+            }
+            else
+            {
                 SetEnableTool(false);
             }
             SetEnableWidgets(true);
-        } else {
+        }
+        else
+        {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Error!"));
             msgBox.setText(tr("Error parsing pattern file."));

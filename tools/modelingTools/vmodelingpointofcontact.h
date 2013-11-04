@@ -25,7 +25,8 @@
 #include "vmodelingpoint.h"
 #include "dialogs/dialogpointofcontact.h"
 
-class VModelingPointOfContact : public VModelingPoint{
+class VModelingPointOfContact : public VModelingPoint
+{
     Q_OBJECT
 public:
                                     VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,

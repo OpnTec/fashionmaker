@@ -25,7 +25,8 @@
 #include "vmodelingpoint.h"
 #include "dialogs/dialoglineintersect.h"
 
-class VModelingLineIntersect:public VModelingPoint{
+class VModelingLineIntersect:public VModelingPoint
+{
     Q_OBJECT
 public:
                                    VModelingLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,

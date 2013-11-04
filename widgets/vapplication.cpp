@@ -27,11 +27,14 @@
 #include "exception/vexceptionwrongparameterid.h"
 
 // reimplemented from QApplication so we can throw exceptions in slots
-bool VApplication::notify(QObject *receiver, QEvent *event){
-    try {
+bool VApplication::notify(QObject *receiver, QEvent *event)
+{
+    try
+    {
       return QApplication::notify(receiver, event);
     }
-    catch(const VExceptionObjectError &e){
+    catch (const VExceptionObjectError &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error parsing file. Program will be terminated."));
@@ -43,7 +46,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
-    catch(const VExceptionBadId &e){
+    catch (const VExceptionBadId &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error bad id. Program will be terminated."));
@@ -54,7 +58,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
-    catch(const VExceptionConversionError &e){
+    catch (const VExceptionConversionError &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error can't convert value. Program will be terminated."));
@@ -65,7 +70,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
-    catch(const VExceptionEmptyParameter &e){
+    catch (const VExceptionEmptyParameter &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error empty parameter. Program will be terminated."));
@@ -77,7 +83,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
-    catch(const VExceptionWrongParameterId &e){
+    catch (const VExceptionWrongParameterId &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error wrong id. Program will be terminated."));
@@ -89,7 +96,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.exec();
         abort();
     }
-    catch(const VException &e){
+    catch (const VException &e)
+    {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Something wrong!!"));
@@ -99,7 +107,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event){
         msgBox.setIcon(QMessageBox::Critical);
         msgBox.exec();
     }
-    catch(std::exception& e) {
+    catch (std::exception& e)
+    {
       qCritical() << "Exception thrown:" << e.what();
     }
     return false;

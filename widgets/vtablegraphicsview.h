@@ -24,7 +24,8 @@
 
 #include <QGraphicsView>
 
-class VTableGraphicsView : public QGraphicsView{
+class VTableGraphicsView : public QGraphicsView
+{
     Q_OBJECT
 public:
     enum typeMove_e { Left, Right, Up, Down };
@@ -51,11 +52,11 @@ public slots:
     /**
      * @brief ZoomIn збільшує масштаб листа.
      */
-    inline void ZoomIn() {scale(1.1,1.1);}
+    inline void ZoomIn() {scale(1.1, 1.1);}
     /**
      * @brief ZoomOut зменшує масштаб листа.
      */
-    inline void ZoomOut() {scale(1/1.1,1/1.1);}
+    inline void ZoomOut() {scale(1/1.1, 1/1.1);}
 protected:
     /**
      * @brief wheelEvent обробник повороту колеса мишки.

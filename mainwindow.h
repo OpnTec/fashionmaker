@@ -32,14 +32,16 @@
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
-class MainWindow : public QMainWindow{
-    Q_OBJECT    
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 public:
-    explicit           MainWindow(QWidget *parent = 0);
+              explicit MainWindow(QWidget *parent = 0);
                        ~MainWindow();
     void               OpenPattern(const QString &fileName);
 public slots:
@@ -152,9 +154,8 @@ private:
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
-    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                                     const QString &toolTip,QSharedPointer<Dialog> &dialog,
-                                     Func closeDialogSlot);
+    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+                                     QSharedPointer<Dialog> &dialog, Func closeDialogSlot);
     void               MinimumScrollBar();
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,

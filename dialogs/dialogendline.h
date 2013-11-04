@@ -24,15 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogEndLine;
+namespace Ui
+{
+    class DialogEndLine;
 }
 
-class DialogEndLine : public DialogTool{
-    Q_OBJECT 
+class DialogEndLine : public DialogTool
+{
+    Q_OBJECT
 public:
-    explicit          DialogEndLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                    QWidget *parent = 0);
+                      DialogEndLine(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                       ~DialogEndLine();
     inline QString    getPointName() const {return pointName;}
     void              setPointName(const QString &value);

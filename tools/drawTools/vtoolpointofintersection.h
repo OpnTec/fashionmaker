@@ -4,7 +4,8 @@
 #include "vtoolpoint.h"
 #include "dialogs/dialogpointofintersection.h"
 
-class VToolPointOfIntersection : public VToolPoint{
+class VToolPointOfIntersection : public VToolPoint
+{
     Q_OBJECT
 public:
                  VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,

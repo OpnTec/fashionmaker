@@ -25,7 +25,8 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogshoulderpoint.h"
 
-class VModelingShoulderPoint : public VModelingLinePoint{
+class VModelingShoulderPoint : public VModelingLinePoint
+{
     Q_OBJECT
 public:
                  VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,

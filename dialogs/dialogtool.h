@@ -25,11 +25,11 @@
 #include <QDialog>
 #include <container/vcontainer.h>
 
-class DialogTool : public QDialog{
+class DialogTool : public QDialog
+{
     Q_OBJECT
 public:
-                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                QWidget *parent = 0);
+                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
     virtual          ~DialogTool() {}
     inline qint64    getIdDetail() const {return idDetail;}
     inline void      setIdDetail(const qint64 &value) {idDetail = value;}

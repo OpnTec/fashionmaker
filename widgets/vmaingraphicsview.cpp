@@ -21,18 +21,21 @@
 
 #include "vmaingraphicsview.h"
 
-VMainGraphicsView::VMainGraphicsView(QWidget *parent) :
-    QGraphicsView(parent), _numScheduledScalings(0){
+VMainGraphicsView::VMainGraphicsView(QWidget *parent)
+    :QGraphicsView(parent), _numScheduledScalings(0)
+{
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
-void VMainGraphicsView::wheelEvent(QWheelEvent *event){
+void VMainGraphicsView::wheelEvent(QWheelEvent *event)
+{
     int numDegrees = event->delta() / 8;
     int numSteps = numDegrees / 15;  // see QWheelEvent documentation
     _numScheduledScalings += numSteps;
-    if (_numScheduledScalings * numSteps < 0){  // if user moved the wheel in another direction, we reset
+    if (_numScheduledScalings * numSteps < 0)
+    {  // if user moved the wheel in another direction, we reset
         _numScheduledScalings = numSteps;       // previously scheduled scalings
     }
 
@@ -44,49 +47,65 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event){
     anim->start();
 }
 
-void VMainGraphicsView::scalingTime(qreal x){
+void VMainGraphicsView::scalingTime(qreal x)
+{
     Q_UNUSED(x);
     qreal factor = 1.0 + qreal(_numScheduledScalings) / 300.0;
-    if (QApplication::keyboardModifiers() == Qt::ControlModifier){// If you press CTRL this code will execute
+    if (QApplication::keyboardModifiers() == Qt::ControlModifier)
+    {// If you press CTRL this code will execute
         scale(factor, factor);
         emit NewFactor(factor);
-    } else {
-        if(_numScheduledScalings < 0){
+    }
+    else
+    {
+        if (_numScheduledScalings < 0)
+        {
             verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
             emit NewFactor(factor);
-        } else {
-            if(verticalScrollBar()->value() > 0){
+        }
+        else
+        {
+            if (verticalScrollBar()->value() > 0)
+            {
                 verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
                 emit NewFactor(factor);
             }
         }
-    }   
+    }
 }
 
-void VMainGraphicsView::animFinished(){
-    if (_numScheduledScalings > 0){
+void VMainGraphicsView::animFinished()
+{
+    if (_numScheduledScalings > 0)
+    {
         _numScheduledScalings--;
-    } else {
+    }
+    else
+    {
         _numScheduledScalings++;
     }
     sender()->~QObject();
 }
 
-void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress){
-    if(mousePress->button() & Qt::LeftButton){
-        switch(QGuiApplication::keyboardModifiers()){
-        case Qt::ControlModifier:
-            QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
-            QGraphicsView::mousePressEvent(mousePress);
-            break;
-        default:
-            QGraphicsView::mousePressEvent(mousePress);
-            break;
+void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
+{
+    if (mousePress->button() & Qt::LeftButton)
+    {
+        switch (QGuiApplication::keyboardModifiers())
+        {
+            case Qt::ControlModifier:
+                QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
+                QGraphicsView::mousePressEvent(mousePress);
+                break;
+            default:
+                QGraphicsView::mousePressEvent(mousePress);
+                break;
         }
     }
 }
 
-void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event){
+void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
+{
     QGraphicsView::mouseReleaseEvent ( event );
     QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
 }

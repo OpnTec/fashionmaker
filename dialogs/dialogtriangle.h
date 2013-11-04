@@ -24,15 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogTriangle;
+namespace Ui
+{
+    class DialogTriangle;
 }
 
-class DialogTriangle : public DialogTool{
+class DialogTriangle : public DialogTool
+{
     Q_OBJECT
 public:
-                   DialogTriangle(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                  QWidget *parent = 0);
+                   DialogTriangle(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                    ~DialogTriangle();
     inline qint64  getAxisP1Id() const {return axisP1Id;}
     void           setAxisP1Id(const qint64 &value, const qint64 &id);

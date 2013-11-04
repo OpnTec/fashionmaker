@@ -24,12 +24,14 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogSinglePoint;
+namespace Ui
+{
+    class DialogSinglePoint;
 }
 
-class DialogSinglePoint : public DialogTool{
-    Q_OBJECT 
+class DialogSinglePoint : public DialogTool
+{
+    Q_OBJECT
 public:
                    DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
     void           setData(const QString name, const QPointF point);

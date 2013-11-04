@@ -25,13 +25,15 @@
 #include <QMetaType>
 #include "options.h"
 
-namespace NodeDetail {
+namespace NodeDetail
+{
     enum NodeDetail { Contour, Modeling };
     Q_DECLARE_FLAGS(NodeDetails, NodeDetail)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
-class VNodeDetail{
+class VNodeDetail
+{
 public:
                   VNodeDetail();
                   VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,

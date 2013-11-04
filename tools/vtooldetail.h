@@ -26,7 +26,8 @@
 #include <QGraphicsPathItem>
 #include "dialogs/dialogdetail.h"
 
-class VToolDetail: public VAbstractTool, public QGraphicsPathItem{
+class VToolDetail: public VAbstractTool, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                                    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
@@ -39,7 +40,8 @@ public:
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                           Tool::Sources typeCreation);
     template <typename T>
-    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool){
+    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool)
+    {
         tool->setParentItem(this);
         connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
         VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
@@ -47,7 +49,8 @@ public:
         det.append(node);
         VAbstractTool::data.UpdateDetail(this->id, det);
         QDomElement domElement = doc->elementById(QString().setNum(this->id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             AddNode(domElement, node);
         }
     }

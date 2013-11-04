@@ -24,13 +24,14 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogBisector;
+namespace Ui
+{
+    class DialogBisector;
 }
 
-class DialogBisector : public DialogTool{
+class DialogBisector : public DialogTool
+{
     Q_OBJECT
-    
 public:
     explicit DialogBisector(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                             QWidget *parent = 0);

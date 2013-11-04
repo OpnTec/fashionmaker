@@ -24,9 +24,10 @@
 const QString VToolLine::TagName = QStringLiteral("line");
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     Tool::Sources typeCreation, QGraphicsItem *parent):VDrawTool(doc, data, id),
-    QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
-    dialogLine(QSharedPointer<DialogLine>()){
+                     Tool::Sources typeCreation, QGraphicsItem *parent)
+    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
+    dialogLine(QSharedPointer<DialogLine>())
+{
     ignoreFullUpdate = true;
     //Лінія
     VPointF first = data->GetPoint(firstPoint);
@@ -37,18 +38,21 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, widthHairLine/factor));
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VToolLine::setDialog(){
+void VToolLine::setDialog()
+{
     dialogLine->setFirstPoint(firstPoint);
     dialogLine->setSecondPoint(secondPoint);
 }
 
 void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                       VContainer *data){
+                       VContainer *data)
+{
     qint64 firstPoint = dialog->getFirstPoint();
     qint64 secondPoint = dialog->getSecondPoint();
     Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
@@ -56,23 +60,29 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
 
 void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                       const Document::Documents &parse, Tool::Sources typeCreation){
+                       const Document::Documents &parse, Tool::Sources typeCreation)
+{
     Q_ASSERT(scene != 0);
     Q_ASSERT(doc != 0);
     Q_ASSERT(data != 0);
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->getNextId();
         data->AddLine(firstPoint, secondPoint);
-    } else {
+    }
+    else
+    {
         data->UpdateId(id);
         data->AddLine(firstPoint, secondPoint);
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
     VDrawTool::AddRecord(id, Tool::LineTool, doc);
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         Q_ASSERT(line != 0);
         scene->addItem(line);
@@ -85,14 +95,18 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
     }
 }
 
-void VToolLine::FullUpdateFromFile(){
+void VToolLine::FullUpdateFromFile()
+{
     RefreshGeometry();
 }
 
-void VToolLine::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolLine::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
             domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
@@ -101,21 +115,27 @@ void VToolLine::FullUpdateFromGui(int result){
     dialogLine.clear();
 }
 
-void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+{
     ShowItem(this, id, color, enable);
 }
 
-void VToolLine::SetFactor(qreal factor){
+void VToolLine::SetFactor(qreal factor)
+{
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
-void VToolLine::ChangedActivDraw(const QString newName){
+void VToolLine::ChangedActivDraw(const QString newName)
+{
     bool selectable = false;
-    if(nameActivDraw == newName){
+    if (nameActivDraw == newName)
+    {
         selectable = true;
         currentColor = Qt::black;
-    } else {
+    }
+    else
+    {
         selectable = false;
         currentColor = Qt::gray;
     }
@@ -124,11 +144,13 @@ void VToolLine::ChangedActivDraw(const QString newName){
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogLine, this, event);
 }
 
-void VToolLine::AddToFile(){
+void VToolLine::AddToFile()
+{
     QDomElement domElement = doc->createElement(TagName);
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrFirstPoint, firstPoint);
@@ -137,24 +159,29 @@ void VToolLine::AddToFile(){
     AddToCalculation(domElement);
 }
 
-void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
-void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine/factor));
 }
 
-void VToolLine::RemoveReferens(){
+void VToolLine::RemoveReferens()
+{
     doc->DecrementReferens(firstPoint);
     doc->DecrementReferens(secondPoint);
 }
 
-void VToolLine::RefreshGeometry(){
+void VToolLine::RefreshGeometry()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
         secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
@@ -163,4 +190,3 @@ void VToolLine::RefreshGeometry(){
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
     this->setPen(QPen(currentColor, widthHairLine/factor));
 }
-

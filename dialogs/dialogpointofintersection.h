@@ -3,12 +3,14 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogPointOfIntersection;
+namespace Ui
+{
+    class DialogPointOfIntersection;
 }
 
-class DialogPointOfIntersection : public DialogTool{
-    Q_OBJECT   
+class DialogPointOfIntersection : public DialogTool
+{
+    Q_OBJECT
 public:
                    DialogPointOfIntersection(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                              QWidget *parent = 0);

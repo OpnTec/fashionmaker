@@ -26,31 +26,33 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                         const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
-    secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>()){
+                         const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
+    secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>())
+{
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 
 }
 
-void VToolNormal::setDialog(){
-    Q_ASSERT(!dialogNormal.isNull());
-    if(!dialogNormal.isNull()){
-        VPointF p = VAbstractTool::data.GetPoint(id);
-        dialogNormal->setTypeLine(typeLine);
-        dialogNormal->setFormula(formula);
-        dialogNormal->setAngle(angle);
-        dialogNormal->setFirstPointId(basePointId, id);
-        dialogNormal->setSecondPointId(secondPointId, id);
-        dialogNormal->setPointName(p.name());
-    }
+void VToolNormal::setDialog()
+{
+    Q_ASSERT(dialogNormal.isNull() == false);
+    VPointF p = VAbstractTool::data.GetPoint(id);
+    dialogNormal->setTypeLine(typeLine);
+    dialogNormal->setFormula(formula);
+    dialogNormal->setAngle(angle);
+    dialogNormal->setFirstPointId(basePointId, id);
+    dialogNormal->setSecondPointId(secondPointId, id);
+    dialogNormal->setPointName(p.name());
 }
 
 void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data){
+                         VContainer *data)
+{
     QString formula = dialog->getFormula();
     qint64 firstPointId = dialog->getFirstPointId();
     qint64 secondPointId = dialog->getSecondPointId();
@@ -65,28 +67,35 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                          const qint64 &secondPointId, const QString typeLine, const QString pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                         Tool::Sources typeCreation){
+                         Tool::Sources typeCreation)
+{
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         QPointF fPoint = VToolNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
                                                 toPixel(result), angle);
         qint64 id = _id;
-        if(typeCreation == Tool::FromGui){
+        if (typeCreation == Tool::FromGui)
+        {
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
-        } else {
+        }
+        else
+        {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
-            if(parse != Document::FullParse){
+            if (parse != Document::FullParse)
+            {
                 doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::NormalTool, doc);
-        if(parse == Document::FullParse){
+        if (parse == Document::FullParse)
+        {
             VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
@@ -101,7 +110,8 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
 }
 
 QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qreal &angle){
+                               const qreal &angle)
+{
     QLineF line(firstPoint, secondPoint);
     QLineF normal = line.normalVector();
     normal.setAngle(normal.angle()+angle);
@@ -109,9 +119,11 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
     return normal.p2();
 }
 
-void VToolNormal::FullUpdateFromFile(){
+void VToolNormal::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
@@ -121,10 +133,13 @@ void VToolNormal::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VToolNormal::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolNormal::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogNormal->getPointName());
             domElement.setAttribute(AttrTypeLine, dialogNormal->getTypeLine());
             domElement.setAttribute(AttrLength, dialogNormal->getFormula());
@@ -137,16 +152,19 @@ void VToolNormal::FullUpdateFromGui(int result){
     dialogNormal.clear();
 }
 
-void VToolNormal::SetFactor(qreal factor){
+void VToolNormal::SetFactor(qreal factor)
+{
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
-void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogNormal, this, event);
 }
 
-void VToolNormal::AddToFile(){
+void VToolNormal::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 
@@ -165,7 +183,8 @@ void VToolNormal::AddToFile(){
     AddToCalculation(domElement);
 }
 
-void VToolNormal::RemoveReferens(){
+void VToolNormal::RemoveReferens()
+{
     doc->DecrementReferens(secondPointId);
     VToolLinePoint::RemoveReferens();
 }

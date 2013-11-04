@@ -43,7 +43,8 @@
 
 #include <QItemDelegate>
 
-class DoubleSpinBoxDelegate : public QItemDelegate{
+class DoubleSpinBoxDelegate : public QItemDelegate
+{
     Q_OBJECT
 public:
             DoubleSpinBoxDelegate(QObject *parent = 0): QItemDelegate(parent){}

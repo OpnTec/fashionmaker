@@ -21,20 +21,21 @@
 
 #include "vdetail.h"
 
-VDetail::VDetail():nodes(QVector<VNodeDetail>()),name(QString()), mx(0), my(0), supplement(true), closed(true),
-    width(10){
-}
+VDetail::VDetail()
+    :nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), supplement(true), closed(true), width(10){}
 
-VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes):nodes(QVector<VNodeDetail>()),
-    name(name), mx(0), my(0), supplement(true), closed(true), width(10){
+VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
+    :nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), supplement(true), closed(true), width(10)
+{
     this->nodes = nodes;
 }
 
-VDetail::VDetail(const VDetail &detail):nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()),
-    my(detail.getMy()), supplement(detail.getSupplement()), closed(detail.getClosed()), width(detail.getWidth()){
-}
+VDetail::VDetail(const VDetail &detail)
+    :nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
+      supplement(detail.getSupplement()), closed(detail.getClosed()), width(detail.getWidth()){}
 
-VDetail &VDetail::operator =(const VDetail &detail){
+VDetail &VDetail::operator =(const VDetail &detail)
+{
     nodes = detail.getNodes();
     name = detail.getName();
     mx = detail.getMx();
@@ -45,7 +46,8 @@ VDetail &VDetail::operator =(const VDetail &detail){
     return *this;
 }
 
-void VDetail::Clear(){
+void VDetail::Clear()
+{
     nodes.clear();
     name.clear();
     mx = 0;
@@ -55,17 +57,20 @@ void VDetail::Clear(){
     width = 10;
 }
 
-bool VDetail::Containes(const qint64 &id) const{
-    for(qint32 i = 0; i < nodes.size(); ++i){
+bool VDetail::Containes(const qint64 &id) const
+{
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
         VNodeDetail node = nodes[i];
-        if(node.getId() == id){
+        if (node.getId() == id)
+        {
             return true;
         }
     }
     return false;
 }
 
-VNodeDetail &VDetail::operator [](int indx){
+VNodeDetail &VDetail::operator [](int indx)
+{
     return nodes[indx];
 }
-

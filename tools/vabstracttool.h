@@ -25,7 +25,8 @@
 #include "vdatatool.h"
 #include <xml/vdomdocument.h>
 
-class VAbstractTool: public VDataTool{
+class VAbstractTool: public VDataTool
+{
     Q_OBJECT
 public:
                             VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
@@ -89,7 +90,8 @@ protected:
     virtual void            RemoveReferens(){}
     void                    RemoveAllChild(QDomElement &domElement);
     template <typename T>
-    void AddAttribute(QDomElement &domElement, const QString &name, const T &value){
+    void AddAttribute(QDomElement &domElement, const QString &name, const T &value)
+    {
         QDomAttr domAttr = doc->createAttribute(name);
         domAttr.setValue(QString().setNum(value));
         domElement.setAttributeNode(domAttr);
@@ -99,7 +101,8 @@ private:
 };
 
 template <>
-inline void VAbstractTool::AddAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value){
+inline void VAbstractTool::AddAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
+{
     QDomAttr domAttr = doc->createAttribute(name);
     domAttr.setValue(value);
     domElement.setAttributeNode(domAttr);

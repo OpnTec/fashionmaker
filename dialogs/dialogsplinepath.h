@@ -25,11 +25,13 @@
 #include "dialogtool.h"
 #include "geometry/vsplinepath.h"
 
-namespace Ui {
-class DialogSplinePath;
+namespace Ui
+{
+    class DialogSplinePath;
 }
 
-class DialogSplinePath : public DialogTool{
+class DialogSplinePath : public DialogTool
+{
     Q_OBJECT
 public:
                        DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,

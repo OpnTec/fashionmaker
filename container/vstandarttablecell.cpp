@@ -21,9 +21,8 @@
 
 #include "vstandarttablecell.h"
 
-VStandartTableCell::VStandartTableCell():base(0), ksize(0), kgrowth(0), description(QString()){
-}
+VStandartTableCell::VStandartTableCell()
+    :base(0), ksize(0), kgrowth(0), description(QString()){}
 
-VStandartTableCell::VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description):base(base),
-    ksize(ksize), kgrowth(kgrowth), description(description){
-}
+VStandartTableCell::VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description)
+    :base(base), ksize(ksize), kgrowth(kgrowth), description(description){}

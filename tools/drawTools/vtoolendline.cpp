@@ -27,17 +27,20 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
 VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const qint64 &basePointId,
-                           Tool::Sources typeCreation, QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
-    dialogEndLine(QSharedPointer<DialogEndLine>()){
+                           Tool::Sources typeCreation, QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
+    dialogEndLine(QSharedPointer<DialogEndLine>())
+{
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VToolEndLine::setDialog(){
-    Q_ASSERT(!dialogEndLine.isNull());
+void VToolEndLine::setDialog()
+{
+    Q_ASSERT(dialogEndLine.isNull() == false);
     VPointF p = VAbstractTool::data.GetPoint(id);
     dialogEndLine->setTypeLine(typeLine);
     dialogEndLine->setFormula(formula);
@@ -46,8 +49,9 @@ void VToolEndLine::setDialog(){
     dialogEndLine->setPointName(p.name());
 }
 
-void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene,
-                          VDomDocument *doc, VContainer *data){
+void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+                          VContainer *data)
+{
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
     QString formula = dialog->getFormula();
@@ -60,29 +64,35 @@ void VToolEndLine::Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsSc
 void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qreal &angle, const qint64 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
-
+                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VPointF basePoint = data->GetPoint(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         line.setLength(toPixel(result));
         line.setAngle(angle);
         qint64 id = _id;
-        if(typeCreation == Tool::FromGui){
+        if (typeCreation == Tool::FromGui)
+        {
             id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             data->AddLine(basePointId, id);
-        } else {
+        }
+        else
+        {
             data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             data->AddLine(basePointId, id);
-            if(parse != Document::FullParse){
+            if (parse != Document::FullParse)
+            {
                 doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
-        if(parse == Document::FullParse){
+        if (parse == Document::FullParse)
+        {
             VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
                                                    basePointId, typeCreation);
             scene->addItem(point);
@@ -95,9 +105,11 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
     }
 }
 
-void VToolEndLine::FullUpdateFromFile(){
+void VToolEndLine::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
@@ -106,14 +118,18 @@ void VToolEndLine::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogEndLine, this, event);
 }
 
-void VToolEndLine::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolEndLine::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogEndLine->getPointName());
             domElement.setAttribute(AttrTypeLine, dialogEndLine->getTypeLine());
             domElement.setAttribute(AttrLength, dialogEndLine->getFormula());
@@ -125,7 +141,8 @@ void VToolEndLine::FullUpdateFromGui(int result){
     dialogEndLine.clear();
 }
 
-void VToolEndLine::AddToFile(){
+void VToolEndLine::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 
@@ -142,4 +159,3 @@ void VToolEndLine::AddToFile(){
 
     AddToCalculation(domElement);
 }
-

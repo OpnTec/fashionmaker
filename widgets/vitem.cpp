@@ -21,29 +21,37 @@
 
 #include "vitem.h"
 
-VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent ):
-    QGraphicsPathItem ( path, parent ), numInOutList(numInList){
+VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
+    :QGraphicsPathItem ( path, parent ), numInOutList(numInList)
+{
 }
 
-void VItem::checkItemChange(){
+void VItem::checkItemChange()
+{
     QRectF rect = parentItem()->sceneBoundingRect();
     QRectF myrect = sceneBoundingRect();
-    if( rect.contains( myrect )==true ){
+    if ( rect.contains( myrect )==true )
+    {
         qDebug()<<"Не виходить за рамки листа";
         setPen(QPen(Qt::black, widthMainLine));
         emit itemOut( numInOutList, false );
-    } else {
+    }
+    else
+    {
         qDebug()<<"Виходить за рамки листа";
         setPen(QPen(Qt::red, widthMainLine));
         emit itemOut( numInOutList, true );
     }
     QList<QGraphicsItem *> list = QGraphicsItem::collidingItems ();
-    if( list.size() - 2 > 0 ){
+    if ( list.size() - 2 > 0 )
+    {
         list.append( this );
         setPen(QPen(Qt::red, widthMainLine));
         qDebug()<<"Деталь перетинається з іншими деталями "<<numInOutList;
         emit itemColliding( list, 1 );//Деталь перетинається з іншими деталями.
-    } else {
+    }
+    else
+    {
         QList<QGraphicsItem *> itemList;
         itemList.append( this );
         qDebug()<<"Деталь більше не перетинається з іншими деталями "<<numInOutList;
@@ -52,18 +60,22 @@ void VItem::checkItemChange(){
     //qDebug()<<"list="<<list.size();
 }
 
-QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value ){
-    if ( change == QGraphicsItem::ItemPositionHasChanged && scene() ) {
+QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
+{
+    if ( change == QGraphicsItem::ItemPositionHasChanged && scene() )
+    {
         checkItemChange();
         return QGraphicsPathItem::itemChange( change, value );
     }
-    if ( change == QGraphicsItem::ItemParentHasChanged && scene() ) {
+    if ( change == QGraphicsItem::ItemParentHasChanged && scene() )
+    {
         checkItemChange();
         return QGraphicsPathItem::itemChange( change, value );
     }
     return QGraphicsPathItem::itemChange( change, value );
 }
 
-void VItem::LengthChanged(){
+void VItem::LengthChanged()
+{
     checkItemChange();
 }

@@ -32,7 +32,8 @@
 /**
  * @brief The VContainer class
  */
-class VContainer{
+class VContainer
+{
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
     /**
@@ -168,7 +169,7 @@ private:
     void               CreateManTableIGroup ();
     QVector<QPointF>   GetReversePoint(const QVector<QPointF> &points)const;
     qreal              GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)const;
-    template <typename key, typename val> static val GetObject(const QHash<key,val> &obj, key id);
+    template <typename key, typename val> static val GetObject(const QHash<key, val> &obj, key id);
     template <typename val> static void UpdateObject(QHash<qint64, val> &obj, const qint64 &id, const val& point);
     template <typename key, typename val> static qint64 AddObject(QHash<key, val> &obj, const val& value);
 };

@@ -24,7 +24,8 @@
 
 #include <QGraphicsSimpleTextItem>
 
-class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem{
+class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
+{
     Q_OBJECT
 public:
                  VGraphicsSimpleTextItem(QGraphicsItem * parent = 0);

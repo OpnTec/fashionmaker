@@ -23,8 +23,10 @@
 
 VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                const QString &typeLine, const QString &formula, const qint64 &basePointId,
-                               const qreal &angle, QGraphicsItem *parent):VToolPoint(doc, data, id, parent),
-    typeLine(typeLine), formula(formula), angle(angle), basePointId(basePointId), mainLine(0){
+                               const qreal &angle, QGraphicsItem *parent)
+    :VToolPoint(doc, data, id, parent), typeLine(typeLine), formula(formula), angle(angle), basePointId(basePointId),
+      mainLine(0)
+{
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     //Лінія, що з'єднує дві точки
     QPointF point1 = data->GetPoint(basePointId).toQPointF();
@@ -32,37 +34,49 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if(typeLine == TypeLineNone){
+    if (typeLine == TypeLineNone)
+    {
         mainLine->setVisible(false);
-    } else {
+    }
+    else
+    {
         mainLine->setVisible(true);
     }
 }
 
-void VToolLinePoint::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
+void VToolLinePoint::ChangedActivDraw(const QString newName)
+{
+    if (nameActivDraw == newName)
+    {
         currentColor = Qt::black;
-    } else {
+    }
+    else
+    {
         currentColor = Qt::gray;
     }
     mainLine->setPen(QPen(currentColor, widthHairLine/factor));
     VToolPoint::ChangedActivDraw(newName);
 }
 
-void VToolLinePoint::RefreshGeometry(){
+void VToolLinePoint::RefreshGeometry()
+{
     mainLine->setPen(QPen(currentColor, widthHairLine/factor));
     VToolPoint::RefreshPointGeometry(VDrawTool::data.GetPoint(id));
     QPointF point = VDrawTool::data.GetPoint(id).toQPointF();
     QPointF basePoint = VDrawTool::data.GetPoint(basePointId).toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if(typeLine == TypeLineNone){
+    if (typeLine == TypeLineNone)
+    {
         mainLine->setVisible(false);
-    } else {
+    }
+    else
+    {
         mainLine->setVisible(true);
     }
 }
 
-void VToolLinePoint::SetFactor(qreal factor){
+void VToolLinePoint::SetFactor(qreal factor)
+{
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }

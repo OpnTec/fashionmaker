@@ -25,7 +25,8 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
-class VNodeSplinePath : public VAbstractNode, public QGraphicsPathItem{
+class VNodeSplinePath : public VAbstractNode, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                  VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,

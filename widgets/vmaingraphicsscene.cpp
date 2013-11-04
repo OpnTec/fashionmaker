@@ -21,28 +21,31 @@
 
 #include "vmaingraphicsscene.h"
 
-VMainGraphicsScene::VMainGraphicsScene():QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1){
-}
+VMainGraphicsScene::VMainGraphicsScene()
+    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1){}
 
-VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent):
-    QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1){
-}
+VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
+    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1){}
 
-void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event){
+void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+{
     emit mouseMove(event->scenePos());
     QGraphicsScene::mouseMoveEvent(event);
 }
 
-void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
+void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
     emit mousePress(event->scenePos());
     QGraphicsScene::mousePressEvent(event);
 }
 
-void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type){
+void VMainGraphicsScene::ChoosedItem(qint64 id, Scene::Scenes type)
+{
     emit ChoosedObject(id, type);
 }
 
-void VMainGraphicsScene::SetFactor(qreal factor){
+void VMainGraphicsScene::SetFactor(qreal factor)
+{
     scaleFactor=scaleFactor*factor;
     emit NewFactor(scaleFactor);
 }

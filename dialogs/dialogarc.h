@@ -24,11 +24,13 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogArc;
+namespace Ui
+{
+    class DialogArc;
 }
 
-class DialogArc : public DialogTool{
+class DialogArc : public DialogTool
+{
     Q_OBJECT
 public:
                      DialogArc(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);

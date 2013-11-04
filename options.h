@@ -31,44 +31,49 @@
 #define widthMainLine toPixel(1.2)
 #define widthHairLine widthMainLine/3
 
-namespace Scene{
-enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
-Q_DECLARE_FLAGS(Scenes, Scene)
+namespace Scene
+{
+    enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
+    Q_DECLARE_FLAGS(Scenes, Scene)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Scene::Scenes )
 
-namespace Tool{
-enum Tool {ArrowTool,
-           SinglePointTool,
-           EndLineTool,
-           LineTool,
-           AlongLineTool,
-           ShoulderPointTool,
-           NormalTool,
-           BisectorTool,
-           LineIntersectTool,
-           SplineTool,
-           ArcTool,
-           SplinePathTool,
-           PointOfContact,
-           Detail,
-           NodePoint,
-           NodeArc,
-           NodeSpline,
-           NodeSplinePath,
-           Height,
-           Triangle,
-           PointOfIntersection
-};
-Q_DECLARE_FLAGS(Tools, Tool)
+namespace Tool
+{
+    enum Tool
+    {
+        ArrowTool,
+        SinglePointTool,
+        EndLineTool,
+        LineTool,
+        AlongLineTool,
+        ShoulderPointTool,
+        NormalTool,
+        BisectorTool,
+        LineIntersectTool,
+        SplineTool,
+        ArcTool,
+        SplinePathTool,
+        PointOfContact,
+        Detail,
+        NodePoint,
+        NodeArc,
+        NodeSpline,
+        NodeSplinePath,
+        Height,
+        Triangle,
+        PointOfIntersection
+    };
+    Q_DECLARE_FLAGS(Tools, Tool)
 
-enum Source { FromGui, FromFile };
-Q_DECLARE_FLAGS(Sources, Source)
+    enum Source { FromGui, FromFile };
+    Q_DECLARE_FLAGS(Sources, Source)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Tools )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Sources )
 
-namespace Draw  {
+namespace Draw
+{
     enum Draw { Calculation, Modeling };
     Q_DECLARE_FLAGS(Draws, Draw)
 }

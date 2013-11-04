@@ -22,22 +22,25 @@
 #include "vexceptionemptyparameter.h"
 
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
-                                                   const QDomElement &domElement): VException(what),
-    name(name), tagText(QString()), tagName(QString()), lineNumber(-1){
-    Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-    Q_ASSERT_X(!name.isEmpty(), Q_FUNC_INFO, "Parameter name is empty");
+                                                   const QDomElement &domElement)
+    : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
+{
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "Parameter name is empty");
     QTextStream stream(&tagText);
     domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
 }
 
-QString VExceptionEmptyParameter::ErrorMessage() const{
+QString VExceptionEmptyParameter::ErrorMessage() const
+{
     QString error = QString("ExceptionEmptyParameter: %1 %2").arg(what, name);
     return error;
 }
 
-QString VExceptionEmptyParameter::DetailedInformation() const{
+QString VExceptionEmptyParameter::DetailedInformation() const
+{
     QString detail = QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText);
     return detail;
 }

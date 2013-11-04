@@ -24,15 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogSpline;
+namespace Ui
+{
+    class DialogSpline;
 }
 
-class DialogSpline : public DialogTool{
-    Q_OBJECT  
+class DialogSpline : public DialogTool
+{
+    Q_OBJECT
 public:
-    explicit      DialogSpline(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                               QWidget *parent = 0);
+                  DialogSpline(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                   ~DialogSpline();
     inline qint64 getP1() const {return p1;}
     void          setP1(const qint64 &value);
@@ -55,10 +56,10 @@ private:
     Q_DISABLE_COPY(DialogSpline)
     Ui::DialogSpline *ui;
     qint32        number;
-    qint64        p1;			// перша точка
-    qint64        p4;			// четверта точка
-    qreal         angle1;		// кут нахилу дотичної в першій точці
-    qreal         angle2;		// кут нахилу дотичної в другій точці
+    qint64        p1;           // перша точка
+    qint64        p4;           // четверта точка
+    qreal         angle1;       // кут нахилу дотичної в першій точці
+    qreal         angle2;       // кут нахилу дотичної в другій точці
     qreal         kAsm1;
     qreal         kAsm2;
     qreal         kCurve;

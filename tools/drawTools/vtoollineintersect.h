@@ -25,7 +25,8 @@
 #include "vtoolpoint.h"
 #include "dialogs/dialoglineintersect.h"
 
-class VToolLineIntersect:public VToolPoint{
+class VToolLineIntersect:public VToolPoint
+{
     Q_OBJECT
 public:
                  VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &p1Line1,

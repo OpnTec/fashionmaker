@@ -30,11 +30,8 @@
 #define FINISHED   10
 #define EOL        9
 
-Calculator::Calculator(const VContainer *data):errorMsg(0), token(QString()), tok(0), token_type(0),
-    prog(QString()), index(0), data(data), debugFormula(QString()){
-}
-
-qreal Calculator::eval(QString prog, QString *errorMsg){
+qreal Calculator::eval(QString prog, QString *errorMsg)
+{
     this->errorMsg = errorMsg;
     this->errorMsg->clear();
     debugFormula.clear();
@@ -48,10 +45,12 @@ qreal Calculator::eval(QString prog, QString *errorMsg){
     return result;
 }
 
-qreal Calculator::get_exp(){
+qreal Calculator::get_exp()
+{
     qreal result = 0;
     get_token();
-    if(token.isEmpty()) {
+    if (token.isEmpty())
+    {
         serror(2);
         return 0;
     }
@@ -62,38 +61,44 @@ qreal Calculator::get_exp(){
 }
 
 /* Сложение или вычитание двух термов */
-void Calculator::level2(qreal *result){
+void Calculator::level2(qreal *result)
+{
     QChar op;
     qreal hold;
 
     level3(result);
-    while((op=token[0]) == '+' || op == '-') {
+    while ((op=token[0]) == '+' || op == '-')
+    {
         get_token();
         level3(&hold);
-        arith(op,result,&hold);
+        arith(op, result, &hold);
     }
 }
 
 /* Вычисление произведения или частного двух фвкторов */
-void Calculator::level3(qreal *result){
+void Calculator::level3(qreal *result)
+{
     QChar op;
     qreal hold;
 
     level4(result);
 
-    while((op = token[0]) == '*' || op == '/' || op == '%') {
+    while ((op = token[0]) == '*' || op == '/' || op == '%')
+    {
         get_token();
         level4(&hold);
-        arith(op,result,&hold);
+        arith(op, result, &hold);
     }
 }
 
 /* Обработка степени числа (целочисленной) */
-void Calculator::level4(qreal *result){
+void Calculator::level4(qreal *result)
+{
     qreal hold;
 
     level5(result);
-    if(token[0] == '^') {
+    if (token[0] == '^')
+    {
         get_token();
         level4(&hold);
         arith('^', result, &hold);
@@ -101,35 +106,45 @@ void Calculator::level4(qreal *result){
 }
 
 /* Унарный + или - */
-void Calculator::level5(qreal *result){
+void Calculator::level5(qreal *result)
+{
     QChar op;
 
     op = '\0';
-    if((token_type==DELIMITER) && (token[0]=='+' || token[0]=='-')) {
+    if ((token_type==DELIMITER) && (token[0]=='+' || token[0]=='-'))
+    {
         op = token[0];
         get_token();
     }
     level6(result);
-    if(op != '\0')
+    if (op != '\0')
+    {
         unary(op, result);
+    }
 }
 
 /* Обработка выражения в круглых скобках */
-void Calculator::level6(qreal *result){
-    if((token[0] == '(') && (token_type == DELIMITER)) {
+void Calculator::level6(qreal *result)
+{
+    if ((token[0] == '(') && (token_type == DELIMITER))
+    {
         get_token();
         level2(result);
-        if(token[0] != ')')
+        if (token[0] != ')')
+        {
             serror(1);
+        }
         get_token();
     } else
         primitive(result);
 }
 
 /* Определение значения переменной по ее имени */
-void Calculator::primitive(qreal *result){
+void Calculator::primitive(qreal *result)
+{
     QString str;
-    switch(token_type) {
+    switch (token_type)
+    {
         case VARIABLE:
             *result = find_var(token);
             str = QString("%1").arg(*result, 0, 'f', 3);
@@ -148,10 +163,12 @@ void Calculator::primitive(qreal *result){
 }
 
 /* Выполнение специфицированной арифметики */
-void Calculator::arith(QChar o, qreal *r, qreal *h){
+void Calculator::arith(QChar o, qreal *r, qreal *h)
+{
     qreal  t;//, ex;
 
-    switch(o.toLatin1()) {
+    switch (o.toLatin1())
+    {
         case '-':
             *r = *r-*h;
             break;
@@ -177,21 +194,26 @@ void Calculator::arith(QChar o, qreal *r, qreal *h){
 //            }
 //            for(t=*h-1; t>0; --t)
 //                *r = (*r) * ex;
-            break;    
-      }
+            break;
+    }
 }
 
 /* Изменение знака */
-void Calculator::unary(QChar o, qreal *r){
-    if(o=='-')
+void Calculator::unary(QChar o, qreal *r)
+{
+    if (o=='-')
+    {
         *r = -(*r);
+    }
 }
 
 /* Поиск значения переменной */
-qreal Calculator::find_var(QString s){
+qreal Calculator::find_var(QString s)
+{
     bool ok = false;
     qreal value = data->FindVar(s, &ok);
-    if(!ok){
+    if (ok == false)
+    {
         qDebug()<<s;
         serror(4); /* не переменная */
         return 0;
@@ -200,23 +222,26 @@ qreal Calculator::find_var(QString s){
 }
 
 /* выдать сообщение об ошибке */
-void Calculator::serror(qint32 error){
-    QString e[]= {
+void Calculator::serror(qint32 error)
+{
+    QString e[]=
+    {
                  "Синтаксическая ошибка",
                  "Непарные круглые скобки",
                  "Это не выражение",
                  "Предполагается символ равенства",
                  "Не переменная"
-     };
+    };
     errorMsg->clear();
     *errorMsg = e[error];
-     qDebug()<<e[error];
+    qDebug()<<e[error];
 }
 
 /* Поиск соответствия внутреннего формата для
                 текущей лексемы в таблице лексем.
              */
-char Calculator::look_up(QString s){
+char Calculator::look_up(QString s)
+{
     QString p;
 
     /* преобразование к нижнему регистру */
@@ -235,37 +260,51 @@ char Calculator::look_up(QString s){
 }
 
 /* Возвращает "истину", если "c" разделитель */
-bool Calculator::isdelim(QChar c){
-    if(StrChr(" ;,+-<>/*%^=()",c) || c=='\n' || c=='\r' || c=='\0')
+bool Calculator::isdelim(QChar c)
+{
+    if (StrChr(" ;,+-<>/*%^=()", c) || c=='\n' || c=='\r' || c=='\0')
+    {
         return true;
+    }
     return false;
 }
 
 /* Возвращает 1, если "с" пробел или табуляция */
-bool Calculator::iswhite(QChar c){
-    if(c==' ' || c=='\t')
+bool Calculator::iswhite(QChar c)
+{
+    if (c==' ' || c=='\t')
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
-void Calculator::get_token(){
+void Calculator::get_token()
+{
     QString *temp;
 
     token_type=0; tok=0;
     token.clear();
     temp=&token;
 
-    if(prog[index]=='\0')  { /* Конец файла */
+    if (prog[index]=='\0')
+    { /* Конец файла */
         token="\0";
         tok=FINISHED;
         token_type=DELIMITER;
         return;
     }
 
-    while(iswhite(prog[index])) ++index;  /* пропуск пробелов */
+    while (iswhite(prog[index]))
+    {
+        ++index;  /* пропуск пробелов */
+    }
 
-    if(prog[index]=='\r') { /* crtl */
+    if (prog[index]=='\r')
+    { /* crtl */
         ++index; ++index;
         tok= EOL; token='\r';
         token.append('\n');token.append("\0");
@@ -273,7 +312,8 @@ void Calculator::get_token(){
         return;
     }
 
-    if(StrChr("+-*^/%=;(),><", prog[index])) { /* разделитель */
+    if (StrChr("+-*^/%=;(),><", prog[index]))
+    { /* разделитель */
         *temp=prog[index];
         index++; /* переход на следующую позицию */
         temp->append("\0");
@@ -281,20 +321,26 @@ void Calculator::get_token(){
         debugFormula.append(token);
         return;
     }
-    if(prog[index]=='"')  { /* строка в кавычках */
+    if (prog[index]=='"')
+    { /* строка в кавычках */
         index++;
-        while(prog[index] != '"' && prog[index] != '\r'){
+        while (prog[index] != '"' && prog[index] != '\r')
+        {
             temp->append(prog[index]);
             index++;
         }
-        if(prog[index]=='\r')
+        if (prog[index]=='\r')
+        {
             serror(1);
+        }
         index++;temp->append("\0");
         token_type=QUOTE;
         return;
     }
-    if(prog[index].isDigit()) { /* число */
-        while(!isdelim(prog[index])){
+    if (prog[index].isDigit())
+    { /* число */
+        while (isdelim(prog[index]) == false)
+        {
             temp->append(prog[index]);
             index++;
         }
@@ -303,8 +349,10 @@ void Calculator::get_token(){
         return;
     }
 
-    if(prog[index].isPrint())  { /* переменная или команда */
-        while(!isdelim(prog[index])){
+    if (prog[index].isPrint())
+    { /* переменная или команда */
+        while (isdelim(prog[index]) == false)
+        {
             temp->append(prog[index]);
             index++;
         }
@@ -313,22 +361,30 @@ void Calculator::get_token(){
     temp->append("\0");
 
     /* Просматривается, если строка есть команда или переменная */
-    if(token_type==STRING) {
+    if (token_type==STRING)
+    {
         tok=look_up(token); /* преобразование во внутренний
                                           формат */
-        if(!tok)
+        if (tok == false)
+        {
             token_type = VARIABLE;
-        else token_type = COMMAND; /* это команда */
-     }
+        }
+        else
+        {
+            token_type = COMMAND; /* это команда */
+        }
+    }
     return;
 }
 
-bool Calculator::StrChr(QString string, QChar c){
+bool Calculator::StrChr(QString string, QChar c)
+{
     return string.contains(c, Qt::CaseInsensitive);
 }
 
 /*  Возвращает лексему обратно во входной поток */
-void Calculator::putback(){
+void Calculator::putback()
+{
     QString t;
     t = token;
     index = index - t.size();

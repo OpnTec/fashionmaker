@@ -28,7 +28,8 @@
 /**
  * @brief VItem клас, що реалізує деталь на сцені.
  */
-class VItem : public QObject, public QGraphicsPathItem{
+class VItem : public QObject, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
     /**

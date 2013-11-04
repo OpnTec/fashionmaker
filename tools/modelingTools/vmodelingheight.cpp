@@ -29,15 +29,18 @@ VModelingHeight::VModelingHeight(VDomDocument *doc, VContainer *data, const qint
                                  const qint64 &p2LineId, Tool::Sources typeCreation,
                                  QGraphicsItem * parent)
     :VModelingLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent),
-      dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId){
+      dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId)
+{
     ignoreFullUpdate = true;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VModelingHeight::setDialog(){
-    Q_ASSERT(!dialogHeight.isNull());
+void VModelingHeight::setDialog()
+{
+    Q_ASSERT(dialogHeight.isNull() == false);
     VPointF p = VAbstractTool::data.GetModelingPoint(id);
     dialogHeight->setTypeLine(typeLine);
     dialogHeight->setBasePointId(basePointId, id);
@@ -46,8 +49,8 @@ void VModelingHeight::setDialog(){
     dialogHeight->setPointName(p.name());
 }
 
-VModelingHeight *VModelingHeight::Create(QSharedPointer<DialogHeight> &dialog, VDomDocument *doc,
-                                         VContainer *data){
+VModelingHeight *VModelingHeight::Create(QSharedPointer<DialogHeight> &dialog, VDomDocument *doc, VContainer *data)
+{
     disconnect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &DialogHeight::UpdateList);
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
@@ -62,7 +65,8 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
                                          const qint64 &basePointId, const qint64 &p1LineId,
                                          const qint64 &p2LineId, const qreal &mx, const qreal &my,
                                          VDomDocument *doc, VContainer *data,
-                                         const Document::Documents &parse, Tool::Sources typeCreation){
+                                         const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VModelingHeight *point = 0;
     VPointF basePoint = data->GetModelingPoint(basePointId);
     VPointF p1Line = data->GetModelingPoint(p1LineId);
@@ -72,16 +76,21 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
                                              basePoint.toQPointF());
     QLineF line = QLineF(basePoint.toQPointF(), pHeight);
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->AddModelingPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
-    } else {
+    }
+    else
+    {
         data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
     data->AddLine(basePointId, id, Draw::Modeling);
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         point = new VModelingHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId, typeCreation);
         doc->AddTool(id, point);
         doc->IncrementReferens(basePointId);
@@ -91,9 +100,11 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
     return point;
 }
 
-void VModelingHeight::FullUpdateFromFile(){
+void VModelingHeight::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         typeLine = domElement.attribute(AttrTypeLine, "");
         basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
         p1LineId = domElement.attribute(AttrP1Line, "").toLongLong();
@@ -102,10 +113,13 @@ void VModelingHeight::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VModelingHeight::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VModelingHeight::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogHeight->getPointName());
             domElement.setAttribute(AttrTypeLine, dialogHeight->getTypeLine());
             domElement.setAttribute(AttrBasePoint, QString().setNum(dialogHeight->getBasePointId()));
@@ -117,11 +131,13 @@ void VModelingHeight::FullUpdateFromGui(int result){
     dialogHeight.clear();
 }
 
-void VModelingHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VModelingHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogHeight, this, event);
 }
 
-void VModelingHeight::AddToFile(){
+void VModelingHeight::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 

@@ -24,7 +24,8 @@
 
 #include <QGraphicsScene>
 
-class VMainGraphicsScene : public QGraphicsScene{
+class VMainGraphicsScene : public QGraphicsScene
+{
     Q_OBJECT
 public:
                   VMainGraphicsScene();

@@ -21,7 +21,8 @@
 
 #include "vpointf.h"
 
-VPointF &VPointF::operator =(const VPointF &point){
+VPointF &VPointF::operator =(const VPointF &point)
+{
     _name = point.name();
     _mx = point.mx();
     _my = point.my();

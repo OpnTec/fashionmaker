@@ -21,9 +21,10 @@
 
 #include "dialogpointofcontact.h"
 
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
-    firstPoint(0), secondPoint(0){
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
+    firstPoint(0), secondPoint(0)
+{
     ui.setupUi(this);
     listWidget = ui.listWidget;
     labelResultCalculation = ui.labelResultCalculation;
@@ -64,58 +65,75 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
 }
 
-void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogPointOfContact::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
-        if(number == 0){
+        if (number == 0)
+        {
             qint32 index = ui.comboBoxFirstPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui.comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
-        if(number == 1){
+        if (number == 1)
+        {
             qint32 index = ui.comboBoxSecondPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui.comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select point of center of arc"));
                 return;
             }
         }
-        if(number == 2){
+        if (number == 2)
+        {
             qint32 index = ui.comboBoxCenter->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui.comboBoxCenter->setCurrentIndex(index);
                 number = 0;
                 emit ToolTip("");
             }
-            if(!isInitialized){
+            if (isInitialized == false)
+            {
                 this->show();
             }
         }
     }
 }
 
-void DialogPointOfContact::DialogAccepted(){
+void DialogPointOfContact::DialogAccepted()
+{
     pointName = ui.lineEditNamePoint->text();
     radius = ui.lineEditFormula->text();
     center = getCurrentPointId(ui.comboBoxCenter);
@@ -124,25 +142,30 @@ void DialogPointOfContact::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogPointOfContact::setSecondPoint(const qint64 &value, const qint64 &id){
+void DialogPointOfContact::setSecondPoint(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
 }
 
-void DialogPointOfContact::setFirstPoint(const qint64 &value, const qint64 &id){
+void DialogPointOfContact::setFirstPoint(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
 }
 
-void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id){
+void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui.comboBoxCenter, center, value, id);
     center = value;
 }
 
-void DialogPointOfContact::setRadius(const QString &value){
+void DialogPointOfContact::setRadius(const QString &value)
+{
     radius = value;
     ui.lineEditFormula->setText(radius);
 }
 
-void DialogPointOfContact::setPointName(const QString &value){
+void DialogPointOfContact::setPointName(const QString &value)
+{
     pointName = value;
     ui.lineEditNamePoint->setText(pointName);
 }

@@ -22,9 +22,10 @@
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
 
-DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
-    formula(QString()), angle(0), basePointId(0){
+DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+    formula(QString()), angle(0), basePointId(0)
+{
     ui->setupUi(this);
     spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
@@ -81,23 +82,32 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
@@ -106,31 +116,37 @@ void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-void DialogEndLine::setPointName(const QString &value){
+void DialogEndLine::setPointName(const QString &value)
+{
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
-void DialogEndLine::setTypeLine(const QString &value){
+void DialogEndLine::setTypeLine(const QString &value)
+{
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-void DialogEndLine::setFormula(const QString &value){
+void DialogEndLine::setFormula(const QString &value)
+{
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-void DialogEndLine::setAngle(const qreal &value){
+void DialogEndLine::setAngle(const qreal &value)
+{
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
-void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id){
+void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
-void DialogEndLine::DialogAccepted(){
+void DialogEndLine::DialogAccepted()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
@@ -139,6 +155,7 @@ void DialogEndLine::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-DialogEndLine::~DialogEndLine(){
+DialogEndLine::~DialogEndLine()
+{
     delete ui;
 }

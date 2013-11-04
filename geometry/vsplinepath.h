@@ -27,16 +27,18 @@
 #include "vspline.h"
 #include <QApplication>
 
-namespace SplinePoint{
-enum Position { FirstPoint, LastPoint };
-Q_DECLARE_FLAGS(Positions, Position)
+namespace SplinePoint
+{
+    enum Position { FirstPoint, LastPoint };
+    Q_DECLARE_FLAGS(Positions, Position)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
 
 /**
  * @brief The VSplinePath клас, що розраховує шлях сплайнів.
  */
-class VSplinePath{
+class VSplinePath
+{
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                           /**

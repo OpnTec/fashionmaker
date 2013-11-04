@@ -22,9 +22,10 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
-DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0){
+DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
+    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
+{
     ui->setupUi(this);
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;
@@ -66,89 +67,113 @@ DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogBisector::FormulaChanged);
 }
 
-DialogBisector::~DialogBisector(){
+DialogBisector::~DialogBisector()
+{
     delete ui;
 }
 
-void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogBisector::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
-        if(number == 0){
+        if (number == 0)
+        {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point of angle"));
                 return;
             }
         }
-        if(number == 1){
+        if (number == 1)
+        {
             qint32 index = ui->comboBoxSecondPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select third point of angle"));
                 return;
             }
         }
-        if(number == 2){
+        if (number == 2)
+        {
             qint32 index = ui->comboBoxThirdPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxThirdPoint->setCurrentIndex(index);
                 number = 0;
                 emit ToolTip("");
             }
-            if(!isInitialized){
+            if (isInitialized == false)
+            {
                 this->show();
             }
         }
     }
 }
 
-void DialogBisector::setPointName(const QString &value){
+void DialogBisector::setPointName(const QString &value)
+{
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
-void DialogBisector::setTypeLine(const QString &value){
+void DialogBisector::setTypeLine(const QString &value)
+{
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-void DialogBisector::setFormula(const QString &value){
+void DialogBisector::setFormula(const QString &value)
+{
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-void DialogBisector::setFirstPointId(const qint64 &value, const qint64 &id){
+void DialogBisector::setFirstPointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-void DialogBisector::setSecondPointId(const qint64 &value, const qint64 &id){
+void DialogBisector::setSecondPointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogBisector::setThirdPointId(const qint64 &value, const qint64 &id){
+void DialogBisector::setThirdPointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
 }
 
-void DialogBisector::DialogAccepted(){
+void DialogBisector::DialogAccepted()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();

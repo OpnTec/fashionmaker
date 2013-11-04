@@ -24,7 +24,8 @@
 
 #include "vnodedetail.h"
 
-namespace Detail {
+namespace Detail
+{
     enum Contour { OpenContour, CloseContour };
     Q_DECLARE_FLAGS(Contours, Contour)
 
@@ -34,7 +35,8 @@ namespace Detail {
 Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Contours)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 
-class VDetail{
+class VDetail
+{
 public:
                    VDetail();
                    VDetail(const QString &name, const QVector<VNodeDetail> &nodes);

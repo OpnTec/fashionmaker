@@ -24,7 +24,8 @@
 
 #include "vmodelingpoint.h"
 
-class VModelingLinePoint : public VModelingPoint{
+class VModelingLinePoint : public VModelingPoint
+{
     Q_OBJECT
 public:
                       VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,

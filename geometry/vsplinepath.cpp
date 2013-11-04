@@ -22,36 +22,41 @@
 #include "vsplinepath.h"
 #include <exception/vexception.h>
 
-VSplinePath::VSplinePath(): path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation),
-    points(QHash<qint64, VPointF>()), idObject(0){
-}
+VSplinePath::VSplinePath()
+    : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0){}
 
-VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject): path(QVector<VSplinePoint>()),
-    kCurve(kCurve), mode(mode), points(*points), idObject(idObject){
-}
+VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject)
+    : path(QVector<VSplinePoint>()), kCurve(kCurve), mode(mode), points(*points), idObject(idObject){}
 
-VSplinePath::VSplinePath(const VSplinePath &splPath): path(*splPath.GetPoint()),
-    kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
-    idObject(splPath.getIdObject()){
-}
+VSplinePath::VSplinePath(const VSplinePath &splPath)
+    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
+    idObject(splPath.getIdObject()){}
 
-void VSplinePath::append(VSplinePoint point){
+void VSplinePath::append(VSplinePoint point)
+{
     path.append(point);
 }
 
-qint32 VSplinePath::Count() const{
-    if(path.size() == 0){
+qint32 VSplinePath::Count() const
+{
+    if (path.size() == 0)
+    {
         return 0;
-    } else {
+    }
+    else
+    {
         return path.size() - 1;
     }
 }
 
-VSpline VSplinePath::GetSpline(qint32 index) const{
-    if(Count()<1){
+VSpline VSplinePath::GetSpline(qint32 index) const
+{
+    if (Count()<1)
+    {
         throw VException(tr("Not enough points to create the spline."));
     }
-    if(index < 1 || index > Count()){
+    if (index < 1 || index > Count())
+    {
         throw VException(tr("This spline is not exist."));
     }
     VSpline spl(&points, path[index-1].P(), path[index].P(), path[index-1].Angle2(), path[index].Angle1(),
@@ -59,9 +64,11 @@ VSpline VSplinePath::GetSpline(qint32 index) const{
     return spl;
 }
 
-QPainterPath VSplinePath::GetPath() const{
+QPainterPath VSplinePath::GetPath() const
+{
     QPainterPath painterPath;
-    for(qint32 i = 1; i <= Count(); ++i){
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
         VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
                 path[i-1].KAsm2(), path[i].KAsm1(), this->kCurve);
         painterPath.addPath(spl.GetPath());
@@ -69,22 +76,27 @@ QPainterPath VSplinePath::GetPath() const{
     return painterPath;
 }
 
-QVector<QPointF> VSplinePath::GetPathPoints() const{
+QVector<QPointF> VSplinePath::GetPathPoints() const
+{
     QVector<QPointF> pathPoints;
-    for(qint32 i = 1; i <= Count(); ++i){
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
         VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
                 path[i-1].KAsm2(), path[i].KAsm1(), this->kCurve);
         QVector<QPointF> splP = spl.GetPoints();
-        for(qint32 j = 0; j < splP.size(); ++j){
+        for (qint32 j = 0; j < splP.size(); ++j)
+        {
             pathPoints.append(splP[j]);
         }
     }
     return pathPoints;
 }
 
-qreal VSplinePath::GetLength() const{
+qreal VSplinePath::GetLength() const
+{
     qreal length = 0;
-    for(qint32 i = 1; i <= Count(); ++i){
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
         VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(), path[i-1].KAsm2(),
                 path[i].KAsm1(), kCurve);
         length += spl.GetLength();
@@ -92,29 +104,40 @@ qreal VSplinePath::GetLength() const{
     return length;
 }
 
-void VSplinePath::UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point){
-    if(indexSpline < 1 || indexSpline > Count()){
+void VSplinePath::UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point)
+{
+    if (indexSpline < 1 || indexSpline > Count())
+    {
         throw VException(tr("This spline is not exist."));
     }
-    if(pos == SplinePoint::FirstPoint){
+    if (pos == SplinePoint::FirstPoint)
+    {
         path[indexSpline-1] = point;
-    } else {
+    }
+    else
+    {
         path[indexSpline] = point;
     }
 }
 
-VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const{
-    if(indexSpline < 1 || indexSpline > Count()){
+VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const
+{
+    if (indexSpline < 1 || indexSpline > Count())
+    {
         throw VException(tr("This spline is not exist."));
     }
-    if(pos == SplinePoint::FirstPoint){
+    if (pos == SplinePoint::FirstPoint)
+    {
         return path.at(indexSpline-1);
-    } else {
+    }
+    else
+    {
         return path.at(indexSpline);
     }
 }
 
-VSplinePath &VSplinePath::operator =(const VSplinePath &path){
+VSplinePath &VSplinePath::operator =(const VSplinePath &path)
+{
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
     this->mode = path.getMode();
@@ -123,6 +146,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path){
     return *this;
 }
 
-VSplinePoint & VSplinePath::operator[](int indx){
+VSplinePoint & VSplinePath::operator[](int indx)
+{
     return path[indx];
 }

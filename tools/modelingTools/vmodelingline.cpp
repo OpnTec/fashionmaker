@@ -26,7 +26,8 @@ const QString VModelingLine::TagName = QStringLiteral("line");
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                              qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
-    secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>()){
+    secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>())
+{
     ignoreFullUpdate = true;
     //Лінія
     VPointF first = data->GetModelingPoint(firstPoint);
@@ -36,18 +37,20 @@ VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qin
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VModelingLine::setDialog(){
+void VModelingLine::setDialog()
+{
     dialogLine->setFirstPoint(firstPoint);
     dialogLine->setSecondPoint(secondPoint);
 }
 
-VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDocument *doc,
-                                     VContainer *data){
+VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDocument *doc, VContainer *data)
+{
     qint64 firstPoint = dialog->getFirstPoint();
     qint64 secondPoint = dialog->getSecondPoint();
     return Create(0, firstPoint, secondPoint, doc, data, Document::FullParse, Tool::FromGui);
@@ -55,21 +58,27 @@ VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDoc
 
 VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                     Tool::Sources typeCreation){
+                                     Tool::Sources typeCreation)
+{
     VModelingLine *line = 0;
     Q_ASSERT(doc != 0);
     Q_ASSERT(data != 0);
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->getNextId();
-    } else {
-        if(parse != Document::FullParse){
+    }
+    else
+    {
+        if (parse != Document::FullParse)
+        {
             data->UpdateId(id);
             doc->UpdateToolData(id, data);
         }
     }
     data->AddLine(firstPoint, secondPoint, Draw::Modeling);
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         line = new VModelingLine(doc, data, id, firstPoint, secondPoint, typeCreation);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
@@ -78,9 +87,11 @@ VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint
     return line;
 }
 
-void VModelingLine::FullUpdateFromFile(){
+void VModelingLine::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
         secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
@@ -89,10 +100,13 @@ void VModelingLine::FullUpdateFromFile(){
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
 }
 
-void VModelingLine::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VModelingLine::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
             domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
@@ -101,11 +115,13 @@ void VModelingLine::FullUpdateFromGui(int result){
     dialogLine.clear();
 }
 
-void VModelingLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VModelingLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogLine, this, event);
 }
 
-void VModelingLine::AddToFile(){
+void VModelingLine::AddToFile()
+{
     QDomElement domElement = doc->createElement(TagName);
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrFirstPoint, firstPoint);
@@ -114,17 +130,20 @@ void VModelingLine::AddToFile(){
     AddToModeling(domElement);
 }
 
-void VModelingLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine));
 }
 
-void VModelingLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
 }
 
-void VModelingLine::RemoveReferens(){
+void VModelingLine::RemoveReferens()
+{
     doc->DecrementReferens(firstPoint);
     doc->DecrementReferens(secondPoint);
 }

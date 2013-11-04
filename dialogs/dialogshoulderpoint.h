@@ -24,11 +24,13 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogShoulderPoint;
+namespace Ui
+{
+    class DialogShoulderPoint;
 }
 
-class DialogShoulderPoint : public DialogTool{
+class DialogShoulderPoint : public DialogTool
+{
     Q_OBJECT
 public:
                    DialogShoulderPoint(const VContainer *data, Draw::Draws mode = Draw::Calculation,

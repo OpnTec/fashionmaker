@@ -25,67 +25,83 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
-                           Tool::Sources typeCreation, QGraphicsItem * parent) :
-    VAbstractNode(doc, data, id, idArc, typeobject), QGraphicsPathItem(parent){
+                   Tool::Sources typeCreation, QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idArc, typeobject), QGraphicsPathItem(parent)
+{
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
-                      Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
-    if(parse == Document::FullParse){
+void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
+                      const Document::Documents &parse, Tool::Sources typeCreation)
+{
+    if (parse == Document::FullParse)
+    {
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeobject, typeCreation);
         Q_ASSERT(arc != 0);
         doc->AddTool(id, arc);
         doc->IncrementReferens(idArc);
-    } else {
+    }
+    else
+    {
         doc->UpdateToolData(id, data);
     }
 }
 
-void VNodeArc::FullUpdateFromFile(){
+void VNodeArc::FullUpdateFromFile()
+{
     RefreshGeometry();
 }
 
-void VNodeArc::AddToFile(){
+void VNodeArc::AddToFile()
+{
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
-    if(typeobject == Draw::Calculation){
+    if (typeobject == Draw::Calculation)
+    {
         AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
-    } else {
+    }
+    else
+    {
         AddAttribute(domElement, AttrTypeObject, ToolType );
     }
 
     AddToModeling(domElement);
 }
 
-void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
-    if(event->button() == Qt::LeftButton){
+void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         emit ChoosedTool(id, Scene::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine));
 }
 
-void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
 }
 
-void VNodeArc::RefreshGeometry(){
+void VNodeArc::RefreshGeometry()
+{
     VArc arc = VAbstractTool::data.GetModelingArc(id);
     QPainterPath path;
     path.addPath(arc.GetPath());

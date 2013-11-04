@@ -28,13 +28,15 @@
  * @brief The Calculator клас калькулятора формул лекал. Виконує розрахунок формул з підставлянням
  * значеннь зміних.
  */
-class Calculator{
+class Calculator
+{
 public:
     /**
      * @brief Calculator конструктор класу. Використовується при розрахунку лекала.
      * @param data покажчик на контейнер змінних
      */
-    explicit    Calculator(const VContainer *data);
+    explicit Calculator(const VContainer *data):errorMsg(0), token(QString()), tok(0), token_type(0), prog(QString()),
+        index(0), data(data), debugFormula(QString()){}
     /**
      * @brief eval виконує розрахунок формули.
      * @param prog рядко в якому зберігається формула.
@@ -143,7 +145,7 @@ private:
     qreal       find_var(QString s);
     void        serror(qint32 error);
     /**
-     * @brief look_up пошук відповідного внутрішнього формату для теперішньої лексеми в таблиці лексем.            текущей лексемы в таблице лексем
+     * @brief look_up пошук відповідного внутрішнього формату для теперішньої лексеми в таблиці лексем.
      * @param s ім'я лексеми.
      * @return внутрішній номер лексеми.
      */

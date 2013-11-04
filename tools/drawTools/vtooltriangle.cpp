@@ -6,15 +6,18 @@ VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &
                              const qint64 &axisP1Id, const qint64 &axisP2Id, const qint64 &firstPointId,
                              const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
-      secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>()) {
+      secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>())
+{
     ignoreFullUpdate = true;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VToolTriangle::setDialog(){
-    Q_ASSERT(!dialogTriangle.isNull());
+void VToolTriangle::setDialog()
+{
+    Q_ASSERT(dialogTriangle.isNull() == false);
     VPointF p = VAbstractTool::data.GetPoint(id);
     dialogTriangle->setAxisP1Id(axisP1Id, id);
     dialogTriangle->setAxisP2Id(axisP2Id, id);
@@ -24,7 +27,8 @@ void VToolTriangle::setDialog(){
 }
 
 void VToolTriangle::Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphicsScene *scene,
-                           VDomDocument *doc, VContainer *data){
+                           VDomDocument *doc, VContainer *data)
+{
     qint64 axisP1Id = dialog->getAxisP1Id();
     qint64 axisP2Id = dialog->getAxisP2Id();
     qint64 firstPointId = dialog->getFirstPointId();
@@ -37,7 +41,8 @@ void VToolTriangle::Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphics
 void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
                            const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                           VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
+                           VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VPointF axisP1 = data->GetPoint(axisP1Id);
     VPointF axisP2 = data->GetPoint(axisP2Id);
     VPointF firstPoint = data->GetPoint(firstPointId);
@@ -46,16 +51,21 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
     QPointF point = FindPoint(axisP1.toQPointF(), axisP2.toQPointF(), firstPoint.toQPointF(),
                               secondPoint.toQPointF());
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->AddPoint(VPointF(point.x(), point.y(), pointName, mx, my));
-    } else {
+    }
+    else
+    {
         data->UpdatePoint(id, VPointF(point.x(), point.y(), pointName, mx, my));
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
     VDrawTool::AddRecord(id, Tool::Triangle, doc);
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
                                                  secondPointId, typeCreation);
         scene->addItem(point);
@@ -71,41 +81,50 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
 }
 
 QPointF VToolTriangle::FindPoint(const QPointF axisP1, const QPointF axisP2, const QPointF firstPoint,
-                                 const QPointF secondPoint){
+                                 const QPointF secondPoint)
+{
     qreal c = QLineF(firstPoint, secondPoint).length();
     qreal a = QLineF(axisP2, firstPoint).length();
     qreal b = QLineF(axisP2, secondPoint).length();
-    if(c*c == a*a + b*b){
+    if (c*c == a*a + b*b)
+    {
         QLineF l1(axisP2, firstPoint);
         QLineF l2(axisP2, secondPoint);
-        if(l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90){
+        if (l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90)
+        {
             return axisP2;
         }
     }
 
     QLineF line = QLineF(axisP1, axisP2);
     qreal step = 0.01;
-    while(1){
+    while (1)
+    {
         line.setLength(line.length()+step);
         a = QLineF(line.p2(), firstPoint).length();
         b = QLineF(line.p2(), secondPoint).length();
-        if(static_cast<qint32>(c*c) == static_cast<qint32>(a*a + b*b)){
+        if (static_cast<qint32>(c*c) == static_cast<qint32>(a*a + b*b))
+        {
             QLineF l1(axisP2, firstPoint);
             QLineF l2(axisP2, secondPoint);
-            if(l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90){
+            if (l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90)
+            {
                 return line.p2();
             }
         }
-        if(c*c < a*a + b*b){
+        if (c*c < a*a + b*b)
+        {
             qWarning()<<tr("Can't find point.")<<Q_FUNC_INFO;
             return line.p2();
         }
     }
 }
 
-void VToolTriangle::FullUpdateFromFile(){
+void VToolTriangle::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         axisP1Id = domElement.attribute(AttrAxisP1, "").toLongLong();
         axisP2Id = domElement.attribute(AttrAxisP2, "").toLongLong();
         firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
@@ -114,10 +133,13 @@ void VToolTriangle::FullUpdateFromFile(){
     VToolPoint::RefreshPointGeometry(VDrawTool::data.GetPoint(id));
 }
 
-void VToolTriangle::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolTriangle::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogTriangle->getPointName());
             domElement.setAttribute(AttrAxisP1, QString().setNum(dialogTriangle->getAxisP1Id()));
             domElement.setAttribute(AttrAxisP2, QString().setNum(dialogTriangle->getAxisP2Id()));
@@ -130,18 +152,21 @@ void VToolTriangle::FullUpdateFromGui(int result){
     dialogTriangle.clear();
 }
 
-void VToolTriangle::RemoveReferens(){
+void VToolTriangle::RemoveReferens()
+{
     doc->DecrementReferens(axisP1Id);
     doc->DecrementReferens(axisP2Id);
     doc->DecrementReferens(firstPointId);
     doc->DecrementReferens(secondPointId);
 }
 
-void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogTriangle, this, event);
 }
 
-void VToolTriangle::AddToFile(){
+void VToolTriangle::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 

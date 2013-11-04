@@ -25,7 +25,8 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogendline.h"
 
-class VModelingEndLine : public VModelingLinePoint{
+class VModelingEndLine : public VModelingLinePoint
+{
     Q_OBJECT
 public:
                              VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,

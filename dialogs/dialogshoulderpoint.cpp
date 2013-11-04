@@ -22,9 +22,10 @@
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
 
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0){
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
+    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0)
+{
     ui->setupUi(this);
     number = 0;
     listWidget = ui->listWidget;
@@ -67,62 +68,80 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);
 }
 
-DialogShoulderPoint::~DialogShoulderPoint(){
+DialogShoulderPoint::~DialogShoulderPoint()
+{
     delete ui;
 }
 
-void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
-        if(number == 0){
+        if (number == 0)
+        {
             qint32 index = ui->comboBoxP1Line->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxP1Line->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
-        if(number == 1){
+        if (number == 1)
+        {
             qint32 index = ui->comboBoxP2Line->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxP2Line->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select point of shoulder"));
                 return;
             }
         }
-        if(number == 2){
+        if (number == 2)
+        {
             qint32 index = ui->comboBoxPShoulder->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxPShoulder->setCurrentIndex(index);
                 number = 0;
                 emit ToolTip("");
             }
-            if(!isInitialized){
+            if (isInitialized == false)
+            {
                 this->show();
             }
         }
     }
 }
 
-void DialogShoulderPoint::DialogAccepted(){
+void DialogShoulderPoint::DialogAccepted()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
@@ -132,29 +151,35 @@ void DialogShoulderPoint::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id){
+void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
-void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id){
+void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
-void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id){
+void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
 
-void DialogShoulderPoint::setFormula(const QString &value){
+void DialogShoulderPoint::setFormula(const QString &value)
+{
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-void DialogShoulderPoint::setTypeLine(const QString &value){
+void DialogShoulderPoint::setTypeLine(const QString &value)
+{
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-void DialogShoulderPoint::setPointName(const QString &value){
+void DialogShoulderPoint::setPointName(const QString &value)
+{
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }

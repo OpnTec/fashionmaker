@@ -25,7 +25,8 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogheight.h"
 
-class VModelingHeight : public VModelingLinePoint{
+class VModelingHeight : public VModelingLinePoint
+{
     Q_OBJECT
 public:
                             VModelingHeight(VDomDocument *doc, VContainer *data, const qint64 &id,

@@ -4,7 +4,8 @@
 #include "vmodelingpoint.h"
 #include "dialogs/dialogpointofintersection.h"
 
-class VModelingPointOfIntersection : public VModelingPoint{
+class VModelingPointOfIntersection : public VModelingPoint
+{
     Q_OBJECT
 public:
                  VModelingPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,

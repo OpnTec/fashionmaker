@@ -24,7 +24,8 @@
 
 #include "../vabstracttool.h"
 
-class VDrawTool : public VAbstractTool{
+class VDrawTool : public VAbstractTool
+{
     Q_OBJECT
 public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
@@ -46,29 +47,37 @@ protected:
     void         AddToCalculation(const QDomElement &domElement);
     template <typename Dialog, typename Tool>
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
-                     bool showRemove = true){
+                     bool showRemove = true)
+    {
         Q_ASSERT(tool != 0);
         Q_ASSERT(event != 0);
-        if(!ignoreContextMenuEvent){
+        if (ignoreContextMenuEvent == false)
+        {
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
             QAction *actionRemove = 0;
-            if(showRemove){
+            if (showRemove)
+            {
                 actionRemove = menu.addAction(tr("Delete"));
-                if(_referens > 1){
+                if (_referens > 1)
+                {
                     actionRemove->setEnabled(false);
-                } else {
+                }
+                else
+                {
                     actionRemove->setEnabled(true);
                 }
             }
             QAction *selectedAction = menu.exec(event->screenPos());
-            if(selectedAction == actionOption){
+            if (selectedAction == actionOption)
+            {
                 dialog = QSharedPointer<Dialog>(new Dialog(getData()));
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
                 connect(dialog.data(), &Dialog::DialogClosed, tool, &Tool::FullUpdateFromGui);
-                if(!ignoreFullUpdate){
+                if (ignoreFullUpdate == false)
+                {
                     connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
                 }
 
@@ -76,16 +85,20 @@ protected:
 
                 dialog->show();
             }
-            if(showRemove){
-                if(selectedAction == actionRemove){
+            if (showRemove)
+            {
+                if (selectedAction == actionRemove)
+                {
                     //deincrement referens
                     RemoveReferens();
                     //remove form xml file
                     QDomElement domElement = doc->elementById(QString().setNum(id));
-                    if(domElement.isElement()){
+                    if (domElement.isElement())
+                    {
                         QDomElement element;
                         bool ok = doc->GetActivCalculationElement(element);
-                        if(ok){
+                        if (ok)
+                        {
                             element.removeChild(domElement);
                             //update xml file
                             emit FullUpdateTree();
@@ -98,12 +111,17 @@ protected:
         }
     }
     template <typename Item>
-    void ShowItem(Item *item, qint64 id, Qt::GlobalColor color, bool enable){
+    void ShowItem(Item *item, qint64 id, Qt::GlobalColor color, bool enable)
+    {
         Q_ASSERT(item != 0);
-        if(id == item->id){
-            if(enable == false){
+        if (id == item->id)
+        {
+            if (enable == false)
+            {
                 currentColor = baseColor;
-            } else {
+            }
+            else
+            {
                 currentColor = color;
             }
             item->setPen(QPen(currentColor, widthHairLine/factor));

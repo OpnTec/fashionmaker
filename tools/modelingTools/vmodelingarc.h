@@ -27,7 +27,8 @@
 #include "dialogs/dialogarc.h"
 #include "widgets/vcontrolpointspline.h"
 
-class VModelingArc :public VModelingTool, public QGraphicsPathItem{
+class VModelingArc :public VModelingTool, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                          VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,

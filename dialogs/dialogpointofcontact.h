@@ -25,9 +25,9 @@
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
 
-class DialogPointOfContact : public DialogTool{
+class DialogPointOfContact : public DialogTool
+{
     Q_OBJECT
-    
 public:
                  DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                       QWidget *parent = 0);

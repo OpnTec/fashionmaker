@@ -22,7 +22,8 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-class VPointF{
+class VPointF
+{
 public:
     inline             VPointF ()
                        :_name(QString()), _mx(0), _my(0), _x(0), _y(0), mode(Draw::Calculation), idObject(0){}

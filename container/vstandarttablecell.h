@@ -22,7 +22,8 @@
 #ifndef VSTANDARTTABLECELL_H
 #define VSTANDARTTABLECELL_H
 
-class VStandartTableCell{
+class VStandartTableCell
+{
 public:
                    VStandartTableCell();
                    VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());

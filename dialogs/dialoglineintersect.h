@@ -24,14 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogLineIntersect;
+namespace Ui
+{
+    class DialogLineIntersect;
 }
 
-class DialogLineIntersect : public DialogTool{
+class DialogLineIntersect : public DialogTool
+{
     Q_OBJECT
 public:
-    explicit                DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                            DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                                 QWidget *parent = 0);
                             ~DialogLineIntersect();
     inline qint64           getP1Line1() const {return p1Line1;}

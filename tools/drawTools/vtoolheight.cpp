@@ -6,15 +6,18 @@ VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, 
                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                          Tool::Sources typeCreation, QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent),
-      dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId){
+      dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId)
+{
     ignoreFullUpdate = true;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VToolHeight::setDialog(){
-    Q_ASSERT(!dialogHeight.isNull());
+void VToolHeight::setDialog()
+{
+    Q_ASSERT(dialogHeight.isNull() == false);
     VPointF p = VAbstractTool::data.GetPoint(id);
     dialogHeight->setTypeLine(typeLine);
     dialogHeight->setBasePointId(basePointId, id);
@@ -24,7 +27,8 @@ void VToolHeight::setDialog(){
 }
 
 void VToolHeight::Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data){
+                         VContainer *data)
+{
     disconnect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &DialogHeight::UpdateList);
     QString pointName = dialog->getPointName();
     QString typeLine = dialog->getTypeLine();
@@ -38,29 +42,35 @@ void VToolHeight::Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScen
 void VToolHeight::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
+                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VPointF basePoint = data->GetPoint(basePointId);
     VPointF p1Line = data->GetPoint(p1LineId);
     VPointF p2Line = data->GetPoint(p2LineId);
 
     QPointF pHeight = FindPoint(QLineF(p1Line.toQPointF(), p2Line.toQPointF()), basePoint.toQPointF());
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->AddPoint(VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
-    } else {
+    }
+    else
+    {
         data->UpdatePoint(id, VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
     VDrawTool::AddRecord(id, Tool::Height, doc);
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         VToolHeight *point = new VToolHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId,
                                              typeCreation);
         scene->addItem(point);
@@ -74,24 +84,30 @@ void VToolHeight::Create(const qint64 _id, const QString &pointName, const QStri
     }
 }
 
-QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point){
+QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
+{
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
     qreal x = point.x() + a;
     qreal y = b + point.y();
-    QLineF l (point, QPointF(x, y));
+    QLineF lin (point, QPointF(x, y));
     QPointF p;
-    QLineF::IntersectType intersect = line.intersect(l, &p);
-    if(intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection){
+    QLineF::IntersectType intersect = line.intersect(lin, &p);
+    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
+    {
         return p;
-    } else {
+    }
+    else
+    {
         return QPointF();
     }
 }
 
-void VToolHeight::FullUpdateFromFile(){
+void VToolHeight::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         typeLine = domElement.attribute(AttrTypeLine, "");
         basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
         p1LineId = domElement.attribute(AttrP1Line, "").toLongLong();
@@ -101,10 +117,13 @@ void VToolHeight::FullUpdateFromFile(){
 
 }
 
-void VToolHeight::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolHeight::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogHeight->getPointName());
             domElement.setAttribute(AttrTypeLine, dialogHeight->getTypeLine());
             domElement.setAttribute(AttrBasePoint, QString().setNum(dialogHeight->getBasePointId()));
@@ -116,11 +135,13 @@ void VToolHeight::FullUpdateFromGui(int result){
     dialogHeight.clear();
 }
 
-void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogHeight, this, event);
 }
 
-void VToolHeight::AddToFile(){
+void VToolHeight::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 

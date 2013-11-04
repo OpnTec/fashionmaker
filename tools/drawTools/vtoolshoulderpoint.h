@@ -25,7 +25,8 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialogshoulderpoint.h"
 
-class VToolShoulderPoint : public VToolLinePoint{
+class VToolShoulderPoint : public VToolLinePoint
+{
 public:
                    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                       const QString &formula, const qint64 &p1Line, const qint64 &p2Line,

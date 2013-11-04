@@ -24,14 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogHeight;
+namespace Ui
+{
+    class DialogHeight;
 }
 
-class DialogHeight : public DialogTool{
+class DialogHeight : public DialogTool
+{
     Q_OBJECT
 public:
-    explicit         DialogHeight(const VContainer *data, Draw::Draws mode = Draw::Calculation,
+                     DialogHeight(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                   QWidget *parent = 0);
                      ~DialogHeight();
     inline QString   getPointName() const {return pointName;}

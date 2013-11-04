@@ -24,14 +24,15 @@
 
 #include "vtoolpoint.h"
 
-class VToolLinePoint : public VToolPoint{
+class VToolLinePoint : public VToolPoint
+{
     Q_OBJECT
 public:
                       VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                      const QString &formula, const qint64 &basePointId, const qreal &angle,
                                      QGraphicsItem * parent = 0);
 public slots:
-    virtual void      ChangedActivDraw(const QString newName); 
+    virtual void      ChangedActivDraw(const QString newName);
     virtual void      SetFactor(qreal factor);
 protected:
     QString           typeLine;

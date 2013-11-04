@@ -24,15 +24,16 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogNormal;
+namespace Ui
+{
+    class DialogNormal;
 }
 
-class DialogNormal : public DialogTool{
+class DialogNormal : public DialogTool
+{
     Q_OBJECT
 public:
-    explicit         DialogNormal(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                  QWidget *parent = 0);
+                     DialogNormal(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                      ~DialogNormal();
     inline QString   getPointName() const{return pointName;}
     void             setPointName(const QString &value);

@@ -21,13 +21,16 @@
 
 #include "vexceptionbadid.h"
 
-QString VExceptionBadId::ErrorMessage() const{
+QString VExceptionBadId::ErrorMessage() const
+{
     QString error;
-    if(key.isEmpty()){
+    if (key.isEmpty())
+    {
         error = QString("ExceptionBadId: %1, id = %2").arg(what).arg(id);
-    } else {
+    }
+    else
+    {
         error = QString("ExceptionBadId: %1, id = %2").arg(what).arg(key);
     }
     return error;
 }
-

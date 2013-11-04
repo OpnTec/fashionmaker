@@ -25,7 +25,8 @@
 
 #include <QException>
 
-class VException : public QException{
+class VException : public QException
+{
 public:
                       VException(const QString &what);
                       VException(const VException &e):what(e.What()){}

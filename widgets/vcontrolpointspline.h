@@ -26,7 +26,8 @@
 #include <QObject>
 #include "geometry/vsplinepath.h"
 
-class VControlPointSpline : public QObject, public QGraphicsEllipseItem{
+class VControlPointSpline : public QObject, public QGraphicsEllipseItem
+{
     Q_OBJECT
 public:
                       VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,

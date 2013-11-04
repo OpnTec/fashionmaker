@@ -22,32 +22,42 @@
 #include "vmodelingtool.h"
 #include <QDebug>
 
-VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
-VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false) {
+VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false)
+{
     _referens = 0;
 }
 
-void VModelingTool::AddToModeling(const QDomElement &domElement){
+void VModelingTool::AddToModeling(const QDomElement &domElement)
+{
     QDomElement modelingElement;
     bool ok = doc->GetActivModelingElement(modelingElement);
-    if(ok){
+    if (ok)
+    {
         modelingElement.appendChild(domElement);
-    } else {
+    }
+    else
+    {
         qCritical()<<"Can't find tag Modeling"<< Q_FUNC_INFO;
     }
     emit toolhaveChange();
 }
 
-void VModelingTool::decrementReferens(){
-    if(_referens > 0){
+void VModelingTool::decrementReferens()
+{
+    if (_referens > 0)
+    {
         --_referens;
     }
-    if(_referens <= 0){
+    if (_referens <= 0)
+    {
         RemoveReferens();
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             QDomNode element = domElement.parentNode();
-            if(!element.isNull()){
+            if (element.isNull() == false)
+            {
                 element.removeChild(domElement);
             }
         }

@@ -25,12 +25,14 @@
 #include "dialogtool.h"
 #include "xml/vdomdocument.h"
 
-namespace Ui {
-class DialogIncrements;
+namespace Ui
+{
+    class DialogIncrements;
 }
 
-class DialogIncrements : public DialogTool{
-    Q_OBJECT   
+class DialogIncrements : public DialogTool
+{
+    Q_OBJECT
 public:
                          DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
                          ~DialogIncrements();

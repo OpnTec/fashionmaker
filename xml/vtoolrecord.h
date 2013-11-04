@@ -22,7 +22,8 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
-class VToolRecord{
+class VToolRecord
+{
 public:
                        VToolRecord();
                        VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw);

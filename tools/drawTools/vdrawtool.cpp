@@ -23,24 +23,31 @@
 
 qreal VDrawTool::factor = 1;
 
-VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent) :
-    VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
-    nameActivDraw(doc->GetNameActivDraw()){
+VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
+    nameActivDraw(doc->GetNameActivDraw())
+{
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VDomDocument::ShowTool, this, &VDrawTool::ShowTool);
 }
 
-void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc){
+void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc)
+{
     qint64 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
-    if(cursor <= 0){
+    if (cursor <= 0)
+    {
         history->append(VToolRecord(id, toolType, doc->GetNameActivDraw()));
-    } else {
+    }
+    else
+    {
         qint32 index = 0;
-        for(qint32 i = 0; i<history->size(); ++i){
+        for (qint32 i = 0; i<history->size(); ++i)
+        {
             VToolRecord rec = history->at(i);
-            if(rec.getId() == cursor){
+            if (rec.getId() == cursor)
+            {
                 index = i;
                 break;
             }
@@ -49,49 +56,68 @@ void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *d
     }
 }
 
-void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable){
+void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+{
     Q_UNUSED(id);
     Q_UNUSED(color);
     Q_UNUSED(enable);
 }
 
-void VDrawTool::ChangedActivDraw(const QString newName){
-    if(nameActivDraw == newName){
+void VDrawTool::ChangedActivDraw(const QString newName)
+{
+    if (nameActivDraw == newName)
+    {
         ignoreContextMenuEvent = false;
-    } else {
+    }
+    else
+    {
         ignoreContextMenuEvent = true;
     }
 }
 
-void VDrawTool::ChangedNameDraw(const QString oldName, const QString newName){
-    if(nameActivDraw == oldName){
+void VDrawTool::ChangedNameDraw(const QString oldName, const QString newName)
+{
+    if (nameActivDraw == oldName)
+    {
         nameActivDraw = newName;
     }
 }
 
-void VDrawTool::SetFactor(qreal factor){
-    if(factor <= 2 && factor >= 0.5){
+void VDrawTool::SetFactor(qreal factor)
+{
+    if (factor <= 2 && factor >= 0.5)
+    {
         this->factor = factor;
     }
 }
 
-void VDrawTool::AddToCalculation(const QDomElement &domElement){
+void VDrawTool::AddToCalculation(const QDomElement &domElement)
+{
     QDomElement calcElement;
     bool ok = doc->GetActivCalculationElement(calcElement);
-    if(ok){
+    if (ok)
+    {
         qint64 id = doc->getCursor();
-        if(id <= 0){
+        if (id <= 0)
+        {
             calcElement.appendChild(domElement);
-        } else {
+        }
+        else
+        {
             QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
-            if(refElement.isElement()){
-                calcElement.insertAfter(domElement,refElement);
+            if (refElement.isElement())
+            {
+                calcElement.insertAfter(domElement, refElement);
                 doc->setCursor(0);
-            } else {
+            }
+            else
+            {
                 qCritical()<<tr("Can not find the element after which you want to insert.")<< Q_FUNC_INFO;
             }
         }
-    } else {
+    }
+    else
+    {
         qCritical()<<tr("Can't find tag Calculation")<< Q_FUNC_INFO;
     }
     emit toolhaveChange();

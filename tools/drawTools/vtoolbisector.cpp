@@ -27,47 +27,53 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
                              const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Sources typeCreation,
-                             QGraphicsItem *parent):
-    VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
-    thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>()){
+                             QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
+    thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>())
+{
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
 QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
-                                 const QPointF &thirdPoint, const qreal &length){
+                                 const QPointF &thirdPoint, const qreal &length)
+{
     QLineF line1(secondPoint, firstPoint);
     QLineF line2(secondPoint, thirdPoint);
     qreal angle = line1.angleTo(line2);
-    if(angle>180){
+    if (angle>180)
+    {
         angle = 360 - angle;
         line1.setAngle(line1.angle()-angle/2);
-    } else {
+    }
+    else
+    {
         line1.setAngle(line1.angle()+angle/2);
     }
     line1.setLength(length);
     return line1.p2();
 }
 
-void VToolBisector::setDialog(){
-    Q_ASSERT(!dialogBisector.isNull());
-    if(!dialogBisector.isNull()){
-        VPointF p = VAbstractTool::data.GetPoint(id);
-        dialogBisector->setTypeLine(typeLine);
-        dialogBisector->setFormula(formula);
-        dialogBisector->setFirstPointId(firstPointId, id);
-        dialogBisector->setSecondPointId(basePointId, id);
-        dialogBisector->setThirdPointId(thirdPointId, id);
-        dialogBisector->setPointName(p.name());
-    }
+void VToolBisector::setDialog()
+{
+    Q_ASSERT(dialogBisector.isNull() == false);
+    VPointF p = VAbstractTool::data.GetPoint(id);
+    dialogBisector->setTypeLine(typeLine);
+    dialogBisector->setFormula(formula);
+    dialogBisector->setFirstPointId(firstPointId, id);
+    dialogBisector->setSecondPointId(basePointId, id);
+    dialogBisector->setThirdPointId(thirdPointId, id);
+    dialogBisector->setPointName(p.name());
 }
 
-void VToolBisector::Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene *scene,
-                           VDomDocument *doc, VContainer *data){
+void VToolBisector::Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+                           VContainer *data)
+{
     QString formula = dialog->getFormula();
     qint64 firstPointId = dialog->getFirstPointId();
     qint64 secondPointId = dialog->getSecondPointId();
@@ -82,7 +88,8 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                            const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                           const Document::Documents &parse, Tool::Sources typeCreation){
+                           const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);
     VPointF thirdPoint = data->GetPoint(thirdPointId);
@@ -90,22 +97,28 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
                                                   thirdPoint.toQPointF(), toPixel(result));
         qint64 id = _id;
-        if(typeCreation == Tool::FromGui){
+        if (typeCreation == Tool::FromGui)
+        {
             id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
-        } else {
+        }
+        else
+        {
             data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
-            if(parse != Document::FullParse){
+            if (parse != Document::FullParse)
+            {
                 doc->UpdateToolData(id, data);
             }
         }
         VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
-        if(parse == Document::FullParse){
+        if (parse == Document::FullParse)
+        {
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,
                                                      thirdPointId, typeCreation);
             scene->addItem(point);
@@ -120,9 +133,11 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
     }
 }
 
-void VToolBisector::FullUpdateFromFile(){
+void VToolBisector::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
         firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
@@ -132,10 +147,13 @@ void VToolBisector::FullUpdateFromFile(){
     RefreshGeometry();
 }
 
-void VToolBisector::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VToolBisector::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogBisector->getPointName());
             domElement.setAttribute(AttrTypeLine, dialogBisector->getTypeLine());
             domElement.setAttribute(AttrLength, dialogBisector->getFormula());
@@ -148,16 +166,19 @@ void VToolBisector::FullUpdateFromGui(int result){
     dialogBisector.clear();
 }
 
-void VToolBisector::SetFactor(qreal factor){
+void VToolBisector::SetFactor(qreal factor)
+{
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
-void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogBisector, this, event);
 }
 
-void VToolBisector::AddToFile(){
+void VToolBisector::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 
@@ -176,7 +197,8 @@ void VToolBisector::AddToFile(){
     AddToCalculation(domElement);
 }
 
-void VToolBisector::RemoveReferens(){
+void VToolBisector::RemoveReferens()
+{
     doc->DecrementReferens(firstPointId);
     doc->DecrementReferens(thirdPointId);
     VToolLinePoint::RemoveReferens();

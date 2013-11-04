@@ -25,8 +25,9 @@
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
 
-class DialogDetail : public DialogTool{
-    Q_OBJECT  
+class DialogDetail : public DialogTool
+{
+    Q_OBJECT
 public:
                      DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
     inline VDetail   getDetails() const {return details;}
@@ -44,8 +45,8 @@ private:
     VDetail          details;
     bool             supplement;
     bool             closed;
-    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode, qreal mx = 0,
-                             qreal my = 0);
+    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
+                             qreal mx = 0, qreal my = 0);
 };
 
 #endif // DIALOGDETAIL_H

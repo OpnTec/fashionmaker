@@ -24,10 +24,11 @@
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
-VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       Draw::Draws typeobject, Tool::Sources typeCreation, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent),
-     radius(toPixel(1.5)), namePoint(0), lineName(0){
+VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
+                       Tool::Sources typeCreation, QGraphicsItem *parent)
+    :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
+      namePoint(0), lineName(0)
+{
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
@@ -37,37 +38,47 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation){
-    if(parse == Document::FullParse){
+void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
+                        const Document::Documents &parse, Tool::Sources typeCreation)
+{
+    if (parse == Document::FullParse)
+    {
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
         Q_ASSERT(point != 0);
         doc->AddTool(id, point);
         doc->IncrementReferens(idPoint);
-    } else {
+    }
+    else
+    {
         doc->UpdateToolData(id, data);
     }
 }
 
-void VNodePoint::FullUpdateFromFile(){
+void VNodePoint::FullUpdateFromFile()
+{
     RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
 }
 
-void VNodePoint::AddToFile(){
+void VNodePoint::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
-    if(typeobject == Draw::Calculation){
+    if (typeobject == Draw::Calculation)
+    {
         AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
-    } else {
+    }
+    else
+    {
         AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
     }
     AddAttribute(domElement, AttrMx, toMM(point.mx()));
@@ -76,25 +87,30 @@ void VNodePoint::AddToFile(){
     AddToModeling(domElement);
 }
 
-void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
-    if(event->button() == Qt::LeftButton){
+void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         emit ChoosedTool(id, Scene::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine));
 }
 
-void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
 }
 
 
-void VNodePoint::NameChangePosition(const QPointF pos){
+void VNodePoint::NameChangePosition(const QPointF pos)
+{
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
@@ -104,16 +120,19 @@ void VNodePoint::NameChangePosition(const QPointF pos){
     VAbstractTool::data.UpdatePoint(id, point);
 }
 
-void VNodePoint::UpdateNamePosition(qreal mx, qreal my){
+void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
         domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }
 
-void VNodePoint::RefreshPointGeometry(const VPointF &point){
+void VNodePoint::RefreshPointGeometry(const VPointF &point)
+{
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -128,15 +147,19 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point){
     RefreshLine();
 }
 
-void VNodePoint::RefreshLine(){
+void VNodePoint::RefreshLine()
+{
     QRectF nameRec = namePoint->sceneBoundingRect();
     QPointF p1, p2;
     LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if(QLineF(p1, pRec - scenePos()).length() <= toPixel(4)){
+    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    {
         lineName->setVisible(false);
-    } else {
+    }
+    else
+    {
         lineName->setVisible(true);
     }
 }

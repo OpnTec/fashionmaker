@@ -3,11 +3,12 @@
 
 #include "vexception.h"
 
-class VExceptionUniqueId : public VException{
+class VExceptionUniqueId : public VException
+{
 public:
                     VExceptionUniqueId(const QString &what, const QDomElement &domElement);
-                    VExceptionUniqueId(const VExceptionUniqueId &e):VException(e), tagText(e.TagText()),
-                        tagName(e.TagName()), lineNumber(e.LineNumber()){}
+                    VExceptionUniqueId(const VExceptionUniqueId &e)
+                        :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
     virtual         ~VExceptionUniqueId() noexcept(true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;

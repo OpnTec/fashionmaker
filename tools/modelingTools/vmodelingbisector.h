@@ -25,7 +25,8 @@
 #include "vmodelinglinepoint.h"
 #include "dialogs/dialogbisector.h"
 
-class VModelingBisector : public VModelingLinePoint{
+class VModelingBisector : public VModelingLinePoint
+{
     Q_OBJECT
 public:
                               VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,

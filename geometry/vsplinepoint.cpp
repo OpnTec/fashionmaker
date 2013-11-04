@@ -21,19 +21,11 @@
 
 #include "vsplinepoint.h"
 
-VSplinePoint::VSplinePoint():pSpline(0), angle(0), kAsm1(1), kAsm2(1){
-}
+VSplinePoint::VSplinePoint()
+    :pSpline(0), angle(0), kAsm1(1), kAsm2(1){}
 
-VSplinePoint::VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle , qreal kAsm2):pSpline(pSpline),
-    angle(angle), kAsm1(kAsm1), kAsm2(kAsm2){
-}
+VSplinePoint::VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle, qreal kAsm2)
+    :pSpline(pSpline), angle(angle), kAsm1(kAsm1), kAsm2(kAsm2){}
 
-VSplinePoint::VSplinePoint(const VSplinePoint &point):pSpline(point.P()), angle(point.Angle2()),
-    kAsm1(point.KAsm1()), kAsm2(point.KAsm2()){
-}
-
-
-
-
-
-
+VSplinePoint::VSplinePoint(const VSplinePoint &point)
+    :pSpline(point.P()), angle(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2()){}

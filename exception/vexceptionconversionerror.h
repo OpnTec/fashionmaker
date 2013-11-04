@@ -24,10 +24,12 @@
 
 #include "vexception.h"
 
-class VExceptionConversionError : public VException{
+class VExceptionConversionError : public VException
+{
 public:
                     VExceptionConversionError(const QString &what, const QString &str);
-                    VExceptionConversionError(const VExceptionConversionError &e):VException(e), str(e.String()){}
+                    VExceptionConversionError(const VExceptionConversionError &e)
+                        :VException(e), str(e.String()){}
     virtual         ~VExceptionConversionError() noexcept(true) {}
     virtual QString ErrorMessage() const;
     inline QString  String() const {return str;}

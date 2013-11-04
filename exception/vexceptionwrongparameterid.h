@@ -24,11 +24,12 @@
 
 #include "vexception.h"
 
-class VExceptionWrongParameterId : public VException{
+class VExceptionWrongParameterId : public VException
+{
 public:
                     VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
-                    VExceptionWrongParameterId(const VExceptionWrongParameterId &e):VException(e),tagText(e.TagText()),
-                        tagName(e.TagName()), lineNumber(e.LineNumber()){}
+                    VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
+                        :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
     virtual         ~VExceptionWrongParameterId() noexcept(true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;

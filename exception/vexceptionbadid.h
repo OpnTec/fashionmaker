@@ -24,12 +24,15 @@
 
 #include "vexception.h"
 
-class VExceptionBadId : public VException{
+class VExceptionBadId : public VException
+{
 public:
-                    VExceptionBadId(const QString &what, const qint64 &id):VException(what), id(id),
-                        key(QString()){}
-                    VExceptionBadId(const QString &what, const QString &key):VException(what), id(0), key(key){}
-                    VExceptionBadId(const VExceptionBadId &e):VException(e), id(e.BadId()), key(e.BadKey()){}
+                    VExceptionBadId(const QString &what, const qint64 &id)
+                        :VException(what), id(id), key(QString()){}
+                    VExceptionBadId(const QString &what, const QString &key)
+                        :VException(what), id(0), key(key){}
+                    VExceptionBadId(const VExceptionBadId &e)
+                        :VException(e), id(e.BadId()), key(e.BadKey()){}
     virtual         ~VExceptionBadId() noexcept(true){}
     virtual QString ErrorMessage() const;
     inline qint64   BadId() const {return id; }

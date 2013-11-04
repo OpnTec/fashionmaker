@@ -25,7 +25,8 @@
 #include "vabstractnode.h"
 #include "widgets/vgraphicssimpletextitem.h"
 
-class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem{
+class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
+{
     Q_OBJECT
 public:
                  VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,

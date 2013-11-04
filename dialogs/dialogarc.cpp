@@ -22,9 +22,10 @@
 #include "dialogarc.h"
 #include "ui_dialogarc.h"
 
-DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-    timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString()){
+DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
+    timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString())
+{
     ui->setupUi(this);
 
     timerRadius = new QTimer(this);
@@ -77,47 +78,61 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent) 
     connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
 }
 
-DialogArc::~DialogArc(){
+DialogArc::~DialogArc()
+{
     delete ui;
 }
 
-void DialogArc::SetCenter(const qint64 &value){
+void DialogArc::SetCenter(const qint64 &value)
+{
     center = value;
     ChangeCurrentData(ui->comboBoxBasePoint, center);
 }
 
-void DialogArc::SetF2(const QString &value){
+void DialogArc::SetF2(const QString &value)
+{
     f2 = value;
     ui->lineEditF2->setText(f2);
 }
 
-void DialogArc::SetF1(const QString &value){
+void DialogArc::SetF1(const QString &value)
+{
     f1 = value;
     ui->lineEditF1->setText(f1);
 }
 
-void DialogArc::SetRadius(const QString &value){
+void DialogArc::SetRadius(const QString &value)
+{
     radius = value;
     ui->lineEditRadius->setText(radius);
 }
 
-void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id)==false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
@@ -126,7 +141,8 @@ void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-void DialogArc::DialogAccepted(){
+void DialogArc::DialogAccepted()
+{
     radius = ui->lineEditRadius->text();
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
@@ -134,12 +150,15 @@ void DialogArc::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogArc::ValChenged(int row){
-    if(ui->listWidget->count() == 0){
+void DialogArc::ValChenged(int row)
+{
+    if (ui->listWidget->count() == 0)
+    {
         return;
     }
     QListWidgetItem *item = ui->listWidget->item( row );
-    if(ui->radioButtonLineAngles->isChecked()){
+    if (ui->radioButtonLineAngles->isChecked())
+    {
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineAngle(item->text()))
                 .arg(tr("Value angle of line."));
         ui->labelDescription->setText(desc);
@@ -148,65 +167,78 @@ void DialogArc::ValChenged(int row){
     DialogTool::ValChenged(row);
 }
 
-void DialogArc::PutRadius(){
+void DialogArc::PutRadius()
+{
     PutValHere(ui->lineEditRadius, ui->listWidget);
 }
 
-void DialogArc::PutF1(){
+void DialogArc::PutF1()
+{
     PutValHere(ui->lineEditF1, ui->listWidget);
 }
 
-void DialogArc::PutF2(){
+void DialogArc::PutF2()
+{
     PutValHere(ui->lineEditF2, ui->listWidget);
 }
 
-void DialogArc::LineAngles(){
+void DialogArc::LineAngles()
+{
     ShowLineAngles();
 }
 
-void DialogArc::RadiusChanged(){
+void DialogArc::RadiusChanged()
+{
     labelEditFormula = ui->labelEditRadius;
     ValFormulaChanged(flagRadius, ui->lineEditRadius, timerRadius);
 }
 
-void DialogArc::F1Changed(){
+void DialogArc::F1Changed()
+{
     labelEditFormula = ui->labelEditF1;
     ValFormulaChanged(flagF1, ui->lineEditF1, timerF1);
 }
 
-void DialogArc::F2Changed(){
+void DialogArc::F2Changed()
+{
     labelEditFormula = ui->labelEditF2;
     ValFormulaChanged(flagF2, ui->lineEditF2, timerF2);
 }
 
-void DialogArc::CheckState(){
+void DialogArc::CheckState()
+{
     Q_ASSERT(bOk != 0);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
-void DialogArc::EvalRadius(){
+void DialogArc::EvalRadius()
+{
     labelEditFormula = ui->labelEditRadius;
     Eval(ui->lineEditRadius, flagRadius, timerRadius, ui->labelResultRadius);
 }
 
-void DialogArc::EvalF1(){
+void DialogArc::EvalF1()
+{
     labelEditFormula = ui->labelEditF1;
     Eval(ui->lineEditF1, flagF1, timerF1, ui->labelResultF1);
 }
 
-void DialogArc::EvalF2(){
+void DialogArc::EvalF2()
+{
     labelEditFormula = ui->labelEditF2;
     Eval(ui->lineEditF2, flagF2, timerF2, ui->labelResultF2);
 }
 
-void DialogArc::ShowLineAngles(){
+void DialogArc::ShowLineAngles()
+{
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
     Q_ASSERT(lineAnglesTable != 0);
     QHashIterator<QString, qreal> i(*lineAnglesTable);
-    while (i.hasNext()) {
+    while (i.hasNext())
+    {
         i.next();
         QListWidgetItem *item = new QListWidgetItem(i.key());
 

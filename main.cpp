@@ -24,29 +24,32 @@
 #include <QTextCodec>
 #include "tablewindow.h"
 
-void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg){
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
     QByteArray localMsg = msg.toLocal8Bit();
-    switch (type) {
-    case QtDebugMsg:
-        fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                context.function);
-        break;
-    case QtWarningMsg:
-        fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                context.function);
-        break;
-    case QtCriticalMsg:
-        fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                context.function);
-        break;
-    case QtFatalMsg:
-        fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                context.function);
-        abort();
+    switch (type)
+    {
+        case QtDebugMsg:
+            fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                    context.function);
+            break;
+        case QtWarningMsg:
+            fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                    context.function);
+            break;
+        case QtCriticalMsg:
+            fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                    context.function);
+            break;
+        case QtFatalMsg:
+            fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                    context.function);
+            abort();
     }
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
     qInstallMessageHandler(myMessageOutput);
     VApplication app(argc, argv);
 
@@ -56,7 +59,7 @@ int main(int argc, char *argv[]){
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-    appTranslator.load("valentina_" + QLocale::system().name(),".");
+    appTranslator.load("valentina_" + QLocale::system().name(), ".");
     app.installTranslator(&appTranslator);
 
     MainWindow w;
@@ -70,23 +73,31 @@ int main(int argc, char *argv[]){
     QString fileName;
     QRegExp rxArgOpenFile("-o");//parameter open file
 
-    if(args.size()>1){
-        for (int i = 1; i < args.size(); ++i) {
-            if (rxArgOpenFile.indexIn(args.at(i)) != -1 ) {
-                if(args.at(i+1).isEmpty() == false){
+    if (args.size()>1)
+    {
+        for (int i = 1; i < args.size(); ++i)
+        {
+            if (rxArgOpenFile.indexIn(args.at(i)) != -1 )
+            {
+                if (args.at(i+1).isEmpty() == false)
+                {
                     fileName =  args.at(i+1);
                     qDebug() << args.at(i)<< ":" << fileName;
                     w.OpenPattern(fileName);
                 }
                 w.show();
                 break;
-            } else {
+            }
+            else
+            {
                 qDebug() << "Uknown arg:" << args.at(i);
                 w.show();
                 break;
             }
         }
-    } else {
+    }
+    else
+    {
         w.show();
     }
     return app.exec();

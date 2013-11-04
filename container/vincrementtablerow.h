@@ -22,7 +22,8 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
-class VIncrementTableRow{
+class VIncrementTableRow
+{
 public:
                    VIncrementTableRow();
                    VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,

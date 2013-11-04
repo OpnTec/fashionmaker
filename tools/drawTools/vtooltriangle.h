@@ -25,7 +25,8 @@
 #include "vtoolpoint.h"
 #include "dialogs/dialogtriangle.h"
 
-class VToolTriangle : public VToolPoint{
+class VToolTriangle : public VToolPoint
+{
     Q_OBJECT
 public:
                    VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,

@@ -25,7 +25,8 @@
 #include "dialogs/dialogsinglepoint.h"
 #include "vtoolpoint.h"
 
-class VToolSinglePoint : public VToolPoint{
+class VToolSinglePoint : public VToolPoint
+{
     Q_OBJECT
 public:
                  VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,

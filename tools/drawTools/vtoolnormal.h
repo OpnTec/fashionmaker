@@ -25,7 +25,8 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialognormal.h"
 
-class VToolNormal : public VToolLinePoint{
+class VToolNormal : public VToolLinePoint
+{
     Q_OBJECT
 public:
                    VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,

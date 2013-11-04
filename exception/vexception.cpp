@@ -21,11 +21,13 @@
 
 #include "vexception.h"
 
-VException::VException(const QString &what):QException(), what(what){
-    Q_ASSERT_X(!what.isEmpty(), Q_FUNC_INFO, "Error message is empty");
+VException::VException(const QString &what):QException(), what(what)
+{
+    Q_ASSERT_X(what.isEmpty() == false, Q_FUNC_INFO, "Error message is empty");
 }
 
-QString VException::ErrorMessage() const{
+QString VException::ErrorMessage() const
+{
     QString error = QString("Exception: %1").arg(what);
     return error;
 }

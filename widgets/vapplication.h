@@ -3,7 +3,8 @@
 
 #include <QApplication>
 
-class VApplication : public QApplication{
+class VApplication : public QApplication
+{
     Q_OBJECT
 public:
     VApplication(int &argc, char ** argv): QApplication(argc, argv){}

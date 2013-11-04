@@ -25,7 +25,8 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialogheight.h"
 
-class VToolHeight: public VToolLinePoint{
+class VToolHeight: public VToolLinePoint
+{
     Q_OBJECT
 public:
                    VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,

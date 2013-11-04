@@ -26,30 +26,32 @@ const QString VModelingArc::TagName = QStringLiteral("arc");
 const QString VModelingArc::ToolType = QStringLiteral("simple");
 
 VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
-                           QGraphicsItem *parent):VModelingTool(doc, data, id), QGraphicsPathItem(parent),
-    dialogArc(QSharedPointer<DialogArc>()){
+                           QGraphicsItem *parent)
+    :VModelingTool(doc, data, id), QGraphicsPathItem(parent), dialogArc(QSharedPointer<DialogArc>())
+{
     this->setPen(QPen(baseColor, widthHairLine));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshGeometry();
 
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VModelingArc::setDialog(){
-    Q_ASSERT(!dialogArc.isNull());
-    if(!dialogArc.isNull()){
-        VArc arc = VAbstractTool::data.GetModelingArc(id);
-        dialogArc->SetCenter(arc.GetCenter());
-        dialogArc->SetRadius(arc.GetFormulaRadius());
-        dialogArc->SetF1(arc.GetFormulaF1());
-        dialogArc->SetF2(arc.GetFormulaF2());
-    }
+void VModelingArc::setDialog()
+{
+    Q_ASSERT(dialogArc.isNull() == false);
+    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    dialogArc->SetCenter(arc.GetCenter());
+    dialogArc->SetRadius(arc.GetFormulaRadius());
+    dialogArc->SetF1(arc.GetFormulaF1());
+    dialogArc->SetF2(arc.GetFormulaF2());
 }
 
-VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocument *doc, VContainer *data){
+VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocument *doc, VContainer *data)
+{
     qint64 center = dialog->GetCenter();
     QString radius = dialog->GetRadius();
     QString f1 = dialog->GetF1();
@@ -59,41 +61,50 @@ VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocume
 
 VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius,
                                    const QString &f1, const QString &f2, VDomDocument *doc,
-                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation){
+                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+{
     VModelingArc *toolArc = 0;
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(radius, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         calcRadius = toPixel(result);
     }
 
     errorMsg.clear();
     result = cal.eval(f1, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         calcF1 = result;
     }
 
     errorMsg.clear();
     result = cal.eval(f2, &errorMsg);
-    if(errorMsg.isEmpty()){
+    if (errorMsg.isEmpty())
+    {
         calcF2 = result;
     }
 
     VArc arc = VArc(data->DataModelingPoints(), center, calcRadius, radius, calcF1, f1, calcF2, f2 );
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->AddModelingArc(arc);
-    } else {
+    }
+    else
+    {
         data->UpdateModelingArc(id, arc);
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthArc(data->GetNameArc(center,id, Draw::Modeling), toMM(arc.GetLength()));
-    if(parse == Document::FullParse){
+    data->AddLengthArc(data->GetNameArc(center, id, Draw::Modeling), toMM(arc.GetLength()));
+    if (parse == Document::FullParse)
+    {
         toolArc = new VModelingArc(doc, data, id, typeCreation);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);
@@ -101,14 +112,18 @@ VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const
     return toolArc;
 }
 
-void VModelingArc::FullUpdateFromFile(){
+void VModelingArc::FullUpdateFromFile()
+{
     RefreshGeometry();
 }
 
-void VModelingArc::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VModelingArc::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrCenter, QString().setNum(dialogArc->GetCenter()));
             domElement.setAttribute(AttrRadius, dialogArc->GetRadius());
             domElement.setAttribute(AttrAngle1, dialogArc->GetF1());
@@ -119,11 +134,13 @@ void VModelingArc::FullUpdateFromGui(int result){
     dialogArc.clear();
 }
 
-void VModelingArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VModelingArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogArc, this, event);
 }
 
-void VModelingArc::AddToFile(){
+void VModelingArc::AddToFile()
+{
     VArc arc = VAbstractTool::data.GetModelingArc(id);
     QDomElement domElement = doc->createElement(TagName);
 
@@ -137,29 +154,35 @@ void VModelingArc::AddToFile(){
     AddToModeling(domElement);
 }
 
-void VModelingArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
-    if(event->button() == Qt::LeftButton){
+void VModelingArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         emit ChoosedTool(id, Scene::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VModelingArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine));
 }
 
-void VModelingArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event){
+void VModelingArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthHairLine));
 }
 
-void VModelingArc::RemoveReferens(){
+void VModelingArc::RemoveReferens()
+{
     VArc arc = VAbstractTool::data.GetModelingArc(id);
     doc->DecrementReferens(arc.GetCenter());
 }
 
-void VModelingArc::RefreshGeometry(){
+void VModelingArc::RefreshGeometry()
+{
     VArc arc = VAbstractTool::data.GetModelingArc(id);
     QPainterPath path;
     path.addPath(arc.GetPath());

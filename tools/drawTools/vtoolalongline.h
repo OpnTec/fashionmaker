@@ -25,7 +25,8 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialogalongline.h"
 
-class VToolAlongLine : public VToolLinePoint{
+class VToolAlongLine : public VToolLinePoint
+{
     Q_OBJECT
 public:
                  VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
@@ -49,7 +50,7 @@ protected:
     virtual void RemoveReferens();
 private:
     qint64       secondPointId;
-    QSharedPointer<DialogAlongLine> dialogAlongLine; 
+    QSharedPointer<DialogAlongLine> dialogAlongLine;
 };
 
 #endif // VTOOLALONGLINE_H

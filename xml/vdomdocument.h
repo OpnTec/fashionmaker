@@ -28,7 +28,8 @@
 #include <tools/vdatatool.h>
 #include "vtoolrecord.h"
 
-namespace Document {
+namespace Document
+{
     enum Document { LiteParse, FullParse};
     Q_DECLARE_FLAGS(Documents, Document)
 }
@@ -36,12 +37,12 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
-class VDomDocument : public QObject, public QDomDocument{
+class VDomDocument : public QObject, public QDomDocument
+{
     Q_OBJECT
 public:
-                   VDomDocument(VContainer *data,QComboBox *comboBoxDraws, Draw::Draws *mode);
-                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
-                                Draw::Draws *mode);
+                   VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
+                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
                    VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
                                 Draw::Draws *mode);
                    ~VDomDocument(){}

@@ -21,14 +21,17 @@
 
 #include "vdatatool.h"
 
-VDataTool &VDataTool::operator =(const VDataTool &tool){
+VDataTool &VDataTool::operator =(const VDataTool &tool)
+{
    data = tool.getData();
    _referens = tool.referens();
    return *this;
 }
 
-void VDataTool::decrementReferens(){
-    if(_referens > 0){
+void VDataTool::decrementReferens()
+{
+    if (_referens > 0)
+    {
         --_referens;
     }
 }

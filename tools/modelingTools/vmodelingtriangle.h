@@ -26,7 +26,8 @@
 #include "../drawTools/vtooltriangle.h"
 #include "dialogs/dialogtriangle.h"
 
-class VModelingTriangle : public VModelingPoint{
+class VModelingTriangle : public VModelingPoint
+{
     Q_OBJECT
 public:
                  VModelingTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,

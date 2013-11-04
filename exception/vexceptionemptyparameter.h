@@ -24,12 +24,13 @@
 
 #include "vexception.h"
 
-class VExceptionEmptyParameter : public VException{
+class VExceptionEmptyParameter : public VException
+{
 public:
-                    VExceptionEmptyParameter(const QString &what, const QString &name,
-                                             const QDomElement &domElement);
-                    VExceptionEmptyParameter(const VExceptionEmptyParameter &e):VException(e), name(e.Name()),
-                        tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
+                    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
+                    VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
+                        :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
+                          lineNumber(e.LineNumber()){}
     virtual         ~VExceptionEmptyParameter() noexcept(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;

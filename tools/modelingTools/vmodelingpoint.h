@@ -25,7 +25,8 @@
 #include "vmodelingtool.h"
 #include "widgets/vgraphicssimpletextitem.h"
 
-class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem{
+class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem
+{
     Q_OBJECT
 public:
                             VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);

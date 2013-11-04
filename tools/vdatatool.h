@@ -25,10 +25,11 @@
 #include <container/vcontainer.h>
 
 //We need QObject class because we use qobject_cast.
-class VDataTool : public QObject{
+class VDataTool : public QObject
+{
     Q_OBJECT
 public:
-    explicit              VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(1){}
+                          VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(1){}
     virtual               ~VDataTool(){}
     VDataTool             &operator= (const VDataTool &tool);
     inline VContainer     getData() const { return data; }

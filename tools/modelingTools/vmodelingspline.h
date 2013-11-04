@@ -28,7 +28,8 @@
 #include "widgets/vcontrolpointspline.h"
 #include "geometry/vsplinepath.h"
 
-class VModelingSpline:public VModelingTool, public QGraphicsPathItem{
+class VModelingSpline:public VModelingTool, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                             VModelingSpline (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,

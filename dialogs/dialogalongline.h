@@ -24,12 +24,14 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogAlongLine;
+namespace Ui
+{
+    class DialogAlongLine;
 }
 
-class DialogAlongLine : public DialogTool{
-    Q_OBJECT    
+class DialogAlongLine : public DialogTool
+{
+    Q_OBJECT
 public:
                         DialogAlongLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                         QWidget *parent = 0);
@@ -46,7 +48,7 @@ public:
     void                setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
     virtual void        ChoosedObject(qint64 id, Scene::Scenes type);
-    virtual void        DialogAccepted();   
+    virtual void        DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogAlongLine)
     Ui::DialogAlongLine *ui;

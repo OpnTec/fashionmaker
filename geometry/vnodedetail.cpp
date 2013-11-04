@@ -21,20 +21,19 @@
 
 #include "vnodedetail.h"
 
-VNodeDetail::VNodeDetail():id(0), typeTool(Tool::NodePoint), mode(Draw::Modeling),
-    typeNode(NodeDetail::Contour), mx(0), my(0){
-}
+VNodeDetail::VNodeDetail()
+    :id(0), typeTool(Tool::NodePoint), mode(Draw::Modeling), typeNode(NodeDetail::Contour), mx(0), my(0){}
 
 VNodeDetail::VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
-                         qreal mx, qreal my):id(id), typeTool(typeTool), mode(mode), typeNode(typeNode),
-    mx(mx), my(my){
-}
+                         qreal mx, qreal my)
+    :id(id), typeTool(typeTool), mode(mode), typeNode(typeNode), mx(mx), my(my){}
 
-VNodeDetail::VNodeDetail(const VNodeDetail &node):id(node.getId()), typeTool(node.getTypeTool()),
-    mode(node.getMode()), typeNode(node.getTypeNode()), mx(node.getMx()), my(node.getMy()){
-}
+VNodeDetail::VNodeDetail(const VNodeDetail &node)
+    :id(node.getId()), typeTool(node.getTypeTool()), mode(node.getMode()), typeNode(node.getTypeNode()),
+      mx(node.getMx()), my(node.getMy()){}
 
-VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node){
+VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
+{
     id = node.getId();
     typeTool = node.getTypeTool();
     mode = node.getMode();

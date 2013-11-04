@@ -28,14 +28,17 @@ VModelingTriangle::VModelingTriangle(VDomDocument *doc, VContainer *data, const 
                                      const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                      Tool::Sources typeCreation, QGraphicsItem *parent)
     :VModelingPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
-      secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>()) {
-    if(typeCreation == Tool::FromGui){
+      secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>())
+{
+    if (typeCreation == Tool::FromGui)
+    {
         AddToFile();
     }
 }
 
-void VModelingTriangle::setDialog(){
-    Q_ASSERT(!dialogTriangle.isNull());
+void VModelingTriangle::setDialog()
+{
+    Q_ASSERT(dialogTriangle.isNull() == false);
     VPointF p = VAbstractTool::data.GetPoint(id);
     dialogTriangle->setAxisP1Id(axisP1Id, id);
     dialogTriangle->setAxisP2Id(axisP2Id, id);
@@ -45,7 +48,8 @@ void VModelingTriangle::setDialog(){
 }
 
 VModelingTriangle *VModelingTriangle::Create(QSharedPointer<DialogTriangle> &dialog, VDomDocument *doc,
-                                             VContainer *data){
+                                             VContainer *data)
+{
     qint64 axisP1Id = dialog->getAxisP1Id();
     qint64 axisP2Id = dialog->getAxisP2Id();
     qint64 firstPointId = dialog->getFirstPointId();
@@ -59,7 +63,8 @@ VModelingTriangle *VModelingTriangle::Create(const qint64 _id, const QString &po
                                              const qint64 &axisP2Id, const qint64 &firstPointId,
                                              const qint64 &secondPointId, const qreal &mx, const qreal &my,
                                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                             Tool::Sources typeCreation){
+                                             Tool::Sources typeCreation)
+{
     VModelingTriangle *tool = 0;
     VPointF axisP1 = data->GetPoint(axisP1Id);
     VPointF axisP2 = data->GetPoint(axisP2Id);
@@ -69,15 +74,20 @@ VModelingTriangle *VModelingTriangle::Create(const qint64 _id, const QString &po
     QPointF point = VToolTriangle::FindPoint(axisP1.toQPointF(), axisP2.toQPointF(), firstPoint.toQPointF(),
                                              secondPoint.toQPointF());
     qint64 id = _id;
-    if(typeCreation == Tool::FromGui){
+    if (typeCreation == Tool::FromGui)
+    {
         id = data->AddPoint(VPointF(point.x(), point.y(), pointName, mx, my));
-    } else {
+    }
+    else
+    {
         data->UpdatePoint(id, VPointF(point.x(), point.y(), pointName, mx, my));
-        if(parse != Document::FullParse){
+        if (parse != Document::FullParse)
+        {
             doc->UpdateToolData(id, data);
         }
     }
-    if(parse == Document::FullParse){
+    if (parse == Document::FullParse)
+    {
         tool = new VModelingTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId, secondPointId, typeCreation);
         doc->AddTool(id, tool);
         doc->IncrementReferens(axisP1Id);
@@ -88,9 +98,11 @@ VModelingTriangle *VModelingTriangle::Create(const qint64 _id, const QString &po
     return tool;
 }
 
-void VModelingTriangle::FullUpdateFromFile(){
+void VModelingTriangle::FullUpdateFromFile()
+{
     QDomElement domElement = doc->elementById(QString().setNum(id));
-    if(domElement.isElement()){
+    if (domElement.isElement())
+    {
         axisP1Id = domElement.attribute(AttrAxisP1, "").toLongLong();
         axisP2Id = domElement.attribute(AttrAxisP2, "").toLongLong();
         firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
@@ -99,10 +111,13 @@ void VModelingTriangle::FullUpdateFromFile(){
     VModelingPoint::RefreshPointGeometry(VModelingTool::data.GetPoint(id));
 }
 
-void VModelingTriangle::FullUpdateFromGui(int result){
-    if(result == QDialog::Accepted){
+void VModelingTriangle::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
         QDomElement domElement = doc->elementById(QString().setNum(id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             domElement.setAttribute(AttrName, dialogTriangle->getPointName());
             domElement.setAttribute(AttrAxisP1, QString().setNum(dialogTriangle->getAxisP1Id()));
             domElement.setAttribute(AttrAxisP2, QString().setNum(dialogTriangle->getAxisP2Id()));
@@ -115,18 +130,21 @@ void VModelingTriangle::FullUpdateFromGui(int result){
     dialogTriangle.clear();
 }
 
-void VModelingTriangle::RemoveReferens(){
+void VModelingTriangle::RemoveReferens()
+{
     doc->DecrementReferens(axisP1Id);
     doc->DecrementReferens(axisP2Id);
     doc->DecrementReferens(firstPointId);
     doc->DecrementReferens(secondPointId);
 }
 
-void VModelingTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event){
+void VModelingTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
     ContextMenu(dialogTriangle, this, event);
 }
 
-void VModelingTriangle::AddToFile(){
+void VModelingTriangle::AddToFile()
+{
     VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 

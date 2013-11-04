@@ -21,8 +21,9 @@
 
 #include "dialogdetail.h"
 
-DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(), details(VDetail()), supplement(true), closed(true){
+DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(), details(VDetail()), supplement(true), closed(true)
+{
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
@@ -42,43 +43,52 @@ DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *pa
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 }
 
-void DialogDetail::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogDetail::ChoosedObject(qint64 id, Scene::Scenes type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type != Scene::Line && type != Scene::Detail){
-        switch(type){
-        case(Scene::Arc):
-            NewItem(id, Tool::NodeArc, mode, NodeDetail::Contour);
-            break;
-        case(Scene::Point):
-            NewItem(id, Tool::NodePoint, mode, NodeDetail::Contour);
-            break;
-        case(Scene::Spline):
-            NewItem(id, Tool::NodeSpline, mode, NodeDetail::Contour);
-            break;
-        case(Scene::SplinePath):
-            NewItem(id, Tool::NodeSplinePath, mode, NodeDetail::Contour);
-            break;
-        default:
-            qWarning()<<tr("Get wrong scene object. Ignore.");
-            break;
+    if (type != Scene::Line && type != Scene::Detail)
+    {
+        switch (type)
+        {
+            case (Scene::Arc):
+                NewItem(id, Tool::NodeArc, mode, NodeDetail::Contour);
+                break;
+            case (Scene::Point):
+                NewItem(id, Tool::NodePoint, mode, NodeDetail::Contour);
+                break;
+            case (Scene::Spline):
+                NewItem(id, Tool::NodeSpline, mode, NodeDetail::Contour);
+                break;
+            case (Scene::SplinePath):
+                NewItem(id, Tool::NodeSplinePath, mode, NodeDetail::Contour);
+                break;
+            default:
+                qWarning()<<tr("Get wrong scene object. Ignore.");
+                break;
         }
         this->show();
     }
 }
 
-void DialogDetail::DialogAccepted(){
+void DialogDetail::DialogAccepted()
+{
     details.Clear();
-    for(qint32 i = 0; i < ui.listWidget->count(); ++i){
+    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
+    {
         QListWidgetItem *item = ui.listWidget->item(i);
         details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
@@ -90,53 +100,71 @@ void DialogDetail::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode, qreal mx,
-                           qreal my){
+void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
+                           qreal mx, qreal my)
+{
     QString name;
-    switch(typeTool){
-    case(Tool::NodePoint):{
-        VPointF point;
-        if(mode == Draw::Calculation){
-            point = data->GetPoint(id);
-        } else {
-            point = data->GetModelingPoint(id);
+    switch (typeTool)
+    {
+        case (Tool::NodePoint):
+        {
+            VPointF point;
+            if (mode == Draw::Calculation)
+            {
+                point = data->GetPoint(id);
+            }
+            else
+            {
+                point = data->GetModelingPoint(id);
+            }
+            name = point.name();
+            break;
         }
-        name = point.name();
-        break;
-    }
-    case(Tool::NodeArc):{
-        VArc arc;
-        if(mode == Draw::Calculation){
-            arc = data->GetArc(id);
-        } else {
-            arc = data->GetModelingArc(id);
+        case (Tool::NodeArc):
+        {
+            VArc arc;
+            if (mode == Draw::Calculation)
+            {
+                arc = data->GetArc(id);
+            }
+            else
+            {
+                arc = data->GetModelingArc(id);
+            }
+            name = data->GetNameArc(arc.GetCenter(), id, mode);
+            break;
         }
-        name = data->GetNameArc(arc.GetCenter(), id, mode);
-        break;
-    }
-    case(Tool::NodeSpline):{
-        VSpline spl;
-        if(mode == Draw::Calculation){
-            spl = data->GetSpline(id);
-        } else {
-            spl = data->GetModelingSpline(id);
+        case (Tool::NodeSpline):
+        {
+            VSpline spl;
+            if (mode == Draw::Calculation)
+            {
+                spl = data->GetSpline(id);
+            }
+            else
+            {
+                spl = data->GetModelingSpline(id);
+            }
+            name = spl.GetName();
+            break;
         }
-        name = spl.GetName();
-        break;
-    }
-    case(Tool::NodeSplinePath):{
-        VSplinePath splPath;
-        if(mode == Draw::Calculation){
-            splPath = data->GetSplinePath(id);
-        } else {
-            splPath = data->GetModelingSplinePath(id);
+        case (Tool::NodeSplinePath):
+        {
+            VSplinePath splPath;
+            if (mode == Draw::Calculation)
+            {
+                splPath = data->GetSplinePath(id);
+            }
+            else
+            {
+                splPath = data->GetModelingSplinePath(id);
+            }
+            name = data->GetNameSplinePath(splPath, mode);
+            break;
         }
-        name = data->GetNameSplinePath(splPath, mode);
-        break;
-    }
-    default:
-        qWarning()<<tr("Get wrong tools. Ignore.");
-        break;
+        default:
+            qWarning()<<tr("Get wrong tools. Ignore.");
+            break;
     }
 
     QListWidgetItem *item = new QListWidgetItem(name);
@@ -156,12 +184,14 @@ void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, No
             this, &DialogDetail::BiasYChanged);
 }
 
-void DialogDetail::setDetails(const VDetail &value){
+void DialogDetail::setDetails(const VDetail &value)
+{
     details = value;
     ui.listWidget->clear();
-    for(qint32 i = 0; i < details.CountNode(); ++i){
-        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getMode(), details[i].getTypeNode(), details[i].getMx(),
-                details[i].getMy());
+    for (qint32 i = 0; i < details.CountNode(); ++i)
+    {
+        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getMode(), details[i].getTypeNode(),
+                details[i].getMx(), details[i].getMy());
     }
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSupplement());
@@ -171,7 +201,8 @@ void DialogDetail::setDetails(const VDetail &value){
     ui.listWidget->setFocus(Qt::OtherFocusReason);
 }
 
-void DialogDetail::BiasXChanged(qreal d){
+void DialogDetail::BiasXChanged(qreal d)
+{
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
@@ -179,7 +210,8 @@ void DialogDetail::BiasXChanged(qreal d){
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
-void DialogDetail::BiasYChanged(qreal d){
+void DialogDetail::BiasYChanged(qreal d)
+{
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
@@ -187,18 +219,22 @@ void DialogDetail::BiasYChanged(qreal d){
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
-void DialogDetail::ClickedSeams(bool checked){
+void DialogDetail::ClickedSeams(bool checked)
+{
     supplement = checked;
     ui.checkBoxClosed->setEnabled(checked);
     ui.doubleSpinBoxSeams->setEnabled(checked);
 }
 
-void DialogDetail::ClickedClosed(bool checked){
+void DialogDetail::ClickedClosed(bool checked)
+{
     closed = checked;
 }
 
-void DialogDetail::ObjectChanged(int row){
-    if(ui.listWidget->count() == 0){
+void DialogDetail::ObjectChanged(int row)
+{
+    if (ui.listWidget->count() == 0)
+    {
         return;
     }
     QListWidgetItem *item = ui.listWidget->item( row );

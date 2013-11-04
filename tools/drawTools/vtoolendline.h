@@ -25,7 +25,8 @@
 #include "vtoollinepoint.h"
 #include "dialogs/dialogendline.h"
 
-class VToolEndLine : public VToolLinePoint{
+class VToolEndLine : public VToolLinePoint
+{
     Q_OBJECT
 public:
                  VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,

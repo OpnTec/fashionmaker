@@ -24,11 +24,13 @@
 
 #include "vexception.h"
 
-class VExceptionObjectError : public VException{
+class VExceptionObjectError : public VException
+{
 public:
                     VExceptionObjectError(const QString &what, const QDomElement &domElement);
-                    VExceptionObjectError(const VExceptionObjectError &e):VException(e), tagText(e.TagText()),
-                        tagName(e.TagName()), lineNumber(e.LineNumber()), moreInfo(e.MoreInformation()){}
+                    VExceptionObjectError(const VExceptionObjectError &e)
+                        :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
+                          moreInfo(e.MoreInformation()){}
     virtual         ~VExceptionObjectError() noexcept(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;

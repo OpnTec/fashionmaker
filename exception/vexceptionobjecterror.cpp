@@ -22,33 +22,41 @@
 #include "vexceptionobjecterror.h"
 #include <QDebug>
 
-VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement):
-    VException(what), tagText(QString()), tagName(QString()), lineNumber(-1), moreInfo(QString()){
-    Q_ASSERT_X(!domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement)
+    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1), moreInfo(QString())
+{
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     QTextStream stream(&tagText);
     domElement.save(stream, 4);
     tagName = domElement.tagName();
     lineNumber = domElement.lineNumber();
 }
 
-QString VExceptionObjectError::ErrorMessage() const{
+QString VExceptionObjectError::ErrorMessage() const
+{
     QString error = QString("ExceptionObjectError: %1").arg(what);
     return error;
 }
 
-QString VExceptionObjectError::DetailedInformation() const{
+QString VExceptionObjectError::DetailedInformation() const
+{
     QString detail;
-    if(!moreInfo.isEmpty()){
+    if (moreInfo.isEmpty() == false)
+    {
         QString i = QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText);
         detail = QString("%1\n%2").arg(moreInfo, i);
-    } else {
+    }
+    else
+    {
         detail = QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText);
     }
     return detail;
 }
 
-void VExceptionObjectError::AddMoreInformation(const QString &info){
-    if(info.isEmpty()){
+void VExceptionObjectError::AddMoreInformation(const QString &info)
+{
+    if (info.isEmpty())
+    {
         qWarning()<<"Error additional information is empty."<<Q_FUNC_INFO;
     }
     this->moreInfo.append(info);

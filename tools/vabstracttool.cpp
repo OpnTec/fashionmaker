@@ -58,40 +58,45 @@ const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent):
-    VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black){
-
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
+{
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
 }
 
-QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line){
+QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
+{
     qreal x1, y1, x2, y2;
     rec.getCoords(&x1, &y1, &x2, &y2);
     QPointF point;
-    QLineF::IntersectType type = line.intersect(QLineF(QPointF(x1,y1), QPointF(x1,y2)),&point);
-    if ( type == QLineF::BoundedIntersection ){
+    QLineF::IntersectType type = line.intersect(QLineF(QPointF(x1, y1), QPointF(x1, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
         return point;
     }
-    type = line.intersect(QLineF(QPointF(x1,y1), QPointF(x2,y1)),&point);
-    if ( type == QLineF::BoundedIntersection ){
+    type = line.intersect(QLineF(QPointF(x1, y1), QPointF(x2, y1)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
         return point;
     }
-    type = line.intersect(QLineF(QPointF(x1,y2), QPointF(x2,y2)),&point);
-    if ( type == QLineF::BoundedIntersection ){
+    type = line.intersect(QLineF(QPointF(x1, y2), QPointF(x2, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
         return point;
     }
-    type = line.intersect(QLineF(QPointF(x2,y1), QPointF(x2,y2)),&point);
-    if ( type == QLineF::BoundedIntersection ){
+    type = line.intersect(QLineF(QPointF(x2, y1), QPointF(x2, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
         return point;
     }
     Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "There is no point of intersection.");
     return point;
 }
 
-qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
-                                          QPointF &p2){
+qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1, QPointF &p2)
+{
     const qreal eps = 1e-8;
     //коефіцієнти для рівняння відрізку
     qreal a = 0, b = 0, c = 0;
@@ -101,12 +106,18 @@ qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF l
     // сколько всего решений?
     qint32 flag = 0;
     qreal d = QLineF (center, p).length();
-    if (qAbs (d - radius) <= eps){
+    if (qAbs (d - radius) <= eps)
+    {
         flag = 1;
-    } else {
-        if (radius > d){
+    }
+    else
+    {
+        if (radius > d)
+        {
             flag = 2;
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -119,17 +130,22 @@ qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF l
     return flag;
 }
 
-QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p){
+QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p)
+{
     QLineF lineP2pointFrom = QLineF(line.p2(), p);
     qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
     QLineF pointFromlineP2 = QLineF(p, line.p2());
     pointFromlineP2.setAngle(pointFromlineP2.angle()+angle);
     QPointF point;
-    QLineF::IntersectType type = pointFromlineP2.intersect(line,&point);
-    if ( type == QLineF::BoundedIntersection ){
+    QLineF::IntersectType type = pointFromlineP2.intersect(line, &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
         return point;
-    } else{
-        if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection ){
+    }
+    else
+    {
+        if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection )
+        {
             Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
             return point;
         }
@@ -137,19 +153,24 @@ QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p){
     return point;
 }
 
-QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k){
+QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k)
+{
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
-void VAbstractTool::RemoveAllChild(QDomElement &domElement){
-    if ( domElement.hasChildNodes() ){
-        while ( domElement.childNodes().length() >= 1 ){
+void VAbstractTool::RemoveAllChild(QDomElement &domElement)
+{
+    if ( domElement.hasChildNodes() )
+    {
+        while ( domElement.childNodes().length() >= 1 )
+        {
             domElement.removeChild( domElement.firstChild() );
         }
     }
 }
 
-void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c){
+void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
+{
     //коефіцієнти для рівняння відрізку
     *a = line.p2().y() - line.p1().y();
     *b = line.p1().x() - line.p2().x();

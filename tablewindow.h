@@ -25,14 +25,16 @@
 #include <QMainWindow>
 #include "widgets/vitem.h"
 
-namespace Ui {
+namespace Ui
+{
     class TableWindow;
 }
 
 /**
  * @brief TableWindow клас вікна створення розкладки.
  */
-class TableWindow : public QMainWindow{
+class TableWindow : public QMainWindow
+{
     Q_OBJECT
 public:
     /**
@@ -47,7 +49,7 @@ public:
      * @brief TableWindow Конструктор класу вікна створення розкладки.
      * @param parent Батько об'єкту. За замовчуванням = 0.
      */
-    explicit              TableWindow(QWidget *parent = 0);
+                 explicit TableWindow(QWidget *parent = 0);
     /**
      * @brief ~TableWindow Деструктор класу вікна.
      */

@@ -27,7 +27,8 @@
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
  */
-class VArc{
+class VArc
+{
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
                  /**
@@ -42,7 +43,7 @@ public:
                   * @param f2 кінцевий кут в градусах.
                   */
                        VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-                             qreal f1, QString formulaF1, qreal f2 , QString formulaF2,
+                             qreal f1, QString formulaF1, qreal f2, QString formulaF2,
                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
                        VArc(const VArc &arc);
                        VArc& operator= (const VArc &arc);
@@ -103,12 +104,12 @@ private:
     /**
      * @brief f1 початковий кут в градусах
      */
-    qreal              f1;			// початковий кут нахилу дуги (градуси)
+    qreal              f1;          // початковий кут нахилу дуги (градуси)
     QString            formulaF1;
     /**
      * @brief f2 кінцевий кут в градусах
      */
-    qreal              f2;			// кінцевий кут нахилу дуги (градуси)
+    qreal              f2;          // кінцевий кут нахилу дуги (градуси)
     QString            formulaF2;
     /**
      * @brief radius радіус дуги.

@@ -27,7 +27,8 @@
 #include "dialogs/dialogarc.h"
 #include "widgets/vcontrolpointspline.h"
 
-class VToolArc :public VDrawTool, public QGraphicsPathItem{
+class VToolArc :public VDrawTool, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                  VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
