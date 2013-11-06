@@ -23,7 +23,7 @@
 #define VMODELINGSHOULDERPOINT_H
 
 #include "vmodelinglinepoint.h"
-#include "dialogs/dialogshoulderpoint.h"
+#include "../../dialogs/dialogshoulderpoint.h"
 
 class VModelingShoulderPoint : public VModelingLinePoint
 {

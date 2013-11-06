@@ -24,8 +24,8 @@
 
 #include "vmodelingtool.h"
 #include <QGraphicsPathItem>
-#include "dialogs/dialogarc.h"
-#include "widgets/vcontrolpointspline.h"
+#include "../../dialogs/dialogarc.h"
+#include "../../widgets/vcontrolpointspline.h"
 
 class VModelingArc :public VModelingTool, public QGraphicsPathItem
 {

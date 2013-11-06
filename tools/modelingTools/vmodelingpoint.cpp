@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vmodelingpoint.h"
-#include "container/vpointf.h"
+#include "../../container/vpointf.h"
 
 const QString VModelingPoint::TagName = QStringLiteral("point");
 

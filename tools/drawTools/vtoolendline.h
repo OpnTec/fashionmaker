@@ -23,7 +23,7 @@
 #define VTOOLENDLINE_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialogendline.h"
+#include "../../dialogs/dialogendline.h"
 
 class VToolEndLine : public VToolLinePoint
 {

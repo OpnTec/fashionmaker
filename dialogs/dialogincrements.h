@@ -23,7 +23,7 @@
 #define DIALOGINCREMENTS_H
 
 #include "dialogtool.h"
-#include "xml/vdomdocument.h"
+#include "../xml/vdomdocument.h"
 
 namespace Ui
 {

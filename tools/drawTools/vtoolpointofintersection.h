@@ -23,7 +23,7 @@
 #define VTOOLPOINTOFINTERSECTION_H
 
 #include "vtoolpoint.h"
-#include "dialogs/dialogpointofintersection.h"
+#include "../../dialogs/dialogpointofintersection.h"
 
 class VToolPointOfIntersection : public VToolPoint
 {

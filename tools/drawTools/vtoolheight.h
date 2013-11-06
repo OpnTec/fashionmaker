@@ -23,7 +23,7 @@
 #define VTOOLHEIGHT_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialogheight.h"
+#include "../../dialogs/dialogheight.h"
 
 class VToolHeight: public VToolLinePoint
 {

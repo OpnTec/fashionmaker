@@ -23,7 +23,7 @@
 #define VTOOLPOINTOFCONTACT_H
 
 #include "vtoolpoint.h"
-#include "dialogs/dialogpointofcontact.h"
+#include "../../dialogs/dialogpointofcontact.h"
 
 class VToolPointOfContact : public VToolPoint
 {

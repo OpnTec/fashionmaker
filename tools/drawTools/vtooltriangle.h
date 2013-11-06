@@ -23,7 +23,7 @@
 #define VTOOLTRIANGLE_H
 
 #include "vtoolpoint.h"
-#include "dialogs/dialogtriangle.h"
+#include "../../dialogs/dialogtriangle.h"
 
 class VToolTriangle : public VToolPoint
 {

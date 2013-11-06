@@ -24,7 +24,7 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "dialogs/dialogdetail.h"
+#include "../dialogs/dialogdetail.h"
 
 class VToolDetail: public VAbstractTool, public QGraphicsPathItem
 {

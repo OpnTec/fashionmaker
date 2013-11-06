@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolalongline.h"
-#include "container/calculator.h"
+#include "../../container/calculator.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 

@@ -23,7 +23,7 @@
 #define VNODEPOINT_H
 
 #include "vabstractnode.h"
-#include "widgets/vgraphicssimpletextitem.h"
+#include "../../widgets/vgraphicssimpletextitem.h"
 
 class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {

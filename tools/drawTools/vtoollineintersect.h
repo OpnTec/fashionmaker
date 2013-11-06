@@ -23,7 +23,7 @@
 #define VTOOLLINEINTERSECT_H
 
 #include "vtoolpoint.h"
-#include "dialogs/dialoglineintersect.h"
+#include "../../dialogs/dialoglineintersect.h"
 
 class VToolLineIntersect:public VToolPoint
 {

@@ -23,8 +23,8 @@
 #define VTOOLLINE_H
 
 #include "vdrawtool.h"
-#include "QGraphicsLineItem"
-#include "dialogs/dialogline.h"
+#include <QGraphicsLineItem>
+#include "../../dialogs/dialogline.h"
 
 class VToolLine: public VDrawTool, public QGraphicsLineItem
 {

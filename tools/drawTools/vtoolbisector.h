@@ -23,7 +23,7 @@
 #define VTOOLBISECTOR_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialogbisector.h"
+#include "../../dialogs/dialogbisector.h"
 
 class VToolBisector : public VToolLinePoint
 {

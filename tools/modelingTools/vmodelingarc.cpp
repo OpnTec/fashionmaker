@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vmodelingarc.h"
-#include "container/calculator.h"
+#include "../../container/calculator.h"
 
 const QString VModelingArc::TagName = QStringLiteral("arc");
 const QString VModelingArc::ToolType = QStringLiteral("simple");

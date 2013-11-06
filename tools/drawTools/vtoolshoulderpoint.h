@@ -23,7 +23,7 @@
 #define VTOOLSHOULDERPOINT_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialogshoulderpoint.h"
+#include "../../dialogs/dialogshoulderpoint.h"
 
 class VToolShoulderPoint : public VToolLinePoint
 {

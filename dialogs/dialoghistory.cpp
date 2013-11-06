@@ -21,9 +21,9 @@
 
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
-#include "geometry/varc.h"
-#include "geometry/vspline.h"
-#include "geometry/vsplinepath.h"
+#include "../geometry/varc.h"
+#include "../geometry/vspline.h"
+#include "../geometry/vsplinepath.h"
 #include <QDebug>
 
 DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent)

@@ -23,7 +23,7 @@
 #define VMODELINGHEIGHT_H
 
 #include "vmodelinglinepoint.h"
-#include "dialogs/dialogheight.h"
+#include "../../dialogs/dialogheight.h"
 
 class VModelingHeight : public VModelingLinePoint
 {

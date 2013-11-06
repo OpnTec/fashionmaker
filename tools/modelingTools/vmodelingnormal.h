@@ -23,7 +23,7 @@
 #define VMODELINGNORMAL_H
 
 #include "vmodelinglinepoint.h"
-#include "dialogs/dialognormal.h"
+#include "../../dialogs/dialognormal.h"
 
 class VModelingNormal : public VModelingLinePoint
 {

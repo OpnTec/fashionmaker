@@ -23,7 +23,7 @@
 #define VMODELINGALONGLINE_H
 
 #include "vmodelinglinepoint.h"
-#include "dialogs/dialogalongline.h"
+#include "../../dialogs/dialogalongline.h"
 
 class VModelingAlongLine : public VModelingLinePoint
 {

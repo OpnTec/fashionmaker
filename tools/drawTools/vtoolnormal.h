@@ -23,7 +23,7 @@
 #define VTOOLNORMAL_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialognormal.h"
+#include "../../dialogs/dialognormal.h"
 
 class VToolNormal : public VToolLinePoint
 {

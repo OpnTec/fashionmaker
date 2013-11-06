@@ -23,7 +23,7 @@
 #define VMODELINGPOINTOFINTERSECTION_H
 
 #include "vmodelingpoint.h"
-#include "dialogs/dialogpointofintersection.h"
+#include "../../dialogs/dialogpointofintersection.h"
 
 class VModelingPointOfIntersection : public VModelingPoint
 {

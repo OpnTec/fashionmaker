@@ -23,7 +23,7 @@
 #define VNODEDETAIL_H
 
 #include <QMetaType>
-#include "options.h"
+#include "../options.h"
 
 namespace NodeDetail
 {

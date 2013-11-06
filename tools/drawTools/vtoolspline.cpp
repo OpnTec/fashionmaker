@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolspline.h"
-#include "geometry/vspline.h"
+#include "../../geometry/vspline.h"
 
 const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");

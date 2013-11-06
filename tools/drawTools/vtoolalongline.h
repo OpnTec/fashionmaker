@@ -23,7 +23,7 @@
 #define VTOOLALONGLINE_H
 
 #include "vtoollinepoint.h"
-#include "dialogs/dialogalongline.h"
+#include "../../dialogs/dialogalongline.h"
 
 class VToolAlongLine : public VToolLinePoint
 {

@@ -23,7 +23,7 @@
 #define VMODELINGBISECTOR_H
 
 #include "vmodelinglinepoint.h"
-#include "dialogs/dialogbisector.h"
+#include "../../dialogs/dialogbisector.h"
 
 class VModelingBisector : public VModelingLinePoint
 {

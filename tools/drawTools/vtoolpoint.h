@@ -23,7 +23,7 @@
 #define VTOOLPOINT_H
 
 #include "vdrawtool.h"
-#include "widgets/vgraphicssimpletextitem.h"
+#include "../../widgets/vgraphicssimpletextitem.h"
 
 class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
 {

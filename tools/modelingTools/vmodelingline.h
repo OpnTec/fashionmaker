@@ -23,8 +23,8 @@
 #define VMODELINGLINE_H
 
 #include "vmodelingtool.h"
-#include "QGraphicsLineItem"
-#include "dialogs/dialogline.h"
+#include <QGraphicsLineItem>
+#include "../../dialogs/dialogline.h"
 
 class VModelingLine: public VModelingTool, public QGraphicsLineItem
 {

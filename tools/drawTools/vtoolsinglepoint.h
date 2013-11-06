@@ -22,8 +22,8 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
-#include "dialogs/dialogsinglepoint.h"
 #include "vtoolpoint.h"
+#include "../../dialogs/dialogsinglepoint.h"
 
 class VToolSinglePoint : public VToolPoint
 {

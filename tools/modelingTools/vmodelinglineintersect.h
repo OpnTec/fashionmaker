@@ -23,7 +23,7 @@
 #define VMODELINGLINEINTERSECT_H
 
 #include "vmodelingpoint.h"
-#include "dialogs/dialoglineintersect.h"
+#include "../../dialogs/dialoglineintersect.h"
 
 class VModelingLineIntersect:public VModelingPoint
 {

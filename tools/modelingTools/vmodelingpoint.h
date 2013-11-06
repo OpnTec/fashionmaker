@@ -23,7 +23,7 @@
 #define VMODELINGPOINT_H
 
 #include "vmodelingtool.h"
-#include "widgets/vgraphicssimpletextitem.h"
+#include "../../widgets/vgraphicssimpletextitem.h"
 
 class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem
 {

@@ -24,10 +24,10 @@
 
 #include "vstandarttablecell.h"
 #include "vincrementtablerow.h"
-#include "geometry/varc.h"
-#include "geometry/vsplinepath.h"
-#include "geometry/vdetail.h"
-#include "widgets/vitem.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
+#include "../geometry/vdetail.h"
+#include "../widgets/vitem.h"
 
 /**
  * @brief The VContainer class

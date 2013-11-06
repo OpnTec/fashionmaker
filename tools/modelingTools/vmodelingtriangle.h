@@ -24,7 +24,7 @@
 
 #include "vmodelingpoint.h"
 #include "../drawTools/vtooltriangle.h"
-#include "dialogs/dialogtriangle.h"
+#include "../../dialogs/dialogtriangle.h"
 
 class VModelingTriangle : public VModelingPoint
 {

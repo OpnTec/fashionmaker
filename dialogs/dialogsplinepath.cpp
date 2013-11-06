@@ -21,7 +21,7 @@
 
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
-#include "geometry/vsplinepoint.h"
+#include "../geometry/vsplinepoint.h"
 
 DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())

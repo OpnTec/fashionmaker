@@ -23,7 +23,7 @@
 #define VMODELINGPOINTOFCONTACT_H
 
 #include "vmodelingpoint.h"
-#include "dialogs/dialogpointofcontact.h"
+#include "../../dialogs/dialogpointofcontact.h"
 
 class VModelingPointOfContact : public VModelingPoint
 {
