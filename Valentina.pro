@@ -8,231 +8,19 @@
 
 QT       += core gui widgets xml svg
 
-TARGET = Valentina
 TEMPLATE = app
+
+DEBUG_TARGET = Valentinad
+RELEASE_TARGET = Valentina
+
 CONFIG -= debug_and_release debug_and_release_target
 CONFIG += c++11 precompile_header
+
 QMAKE_CXX = ccache g++
+#DEFINES += ...
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    dialogs/dialogsinglepoint.cpp \
-    widgets/vgraphicssimpletextitem.cpp \
-    xml/vdomdocument.cpp \
-    container/vpointf.cpp \
-    container/vcontainer.cpp \
-    tools/drawTools/vtoolpoint.cpp \
-    container/calculator.cpp \
-    dialogs/dialogincrements.cpp \
-    container/vstandarttablecell.cpp \
-    container/vincrementtablerow.cpp \
-    widgets/doubledelegate.cpp \
-    dialogs/dialogendline.cpp \
-    tools/drawTools/vtoolendline.cpp \
-    tools/drawTools/vtoolline.cpp \
-    tools/vabstracttool.cpp \
-    dialogs/dialogline.cpp \
-    tools/drawTools/vtoolalongline.cpp \
-    dialogs/dialogtool.cpp \
-    dialogs/dialogalongline.cpp \
-    tools/drawTools/vtoolshoulderpoint.cpp \
-    dialogs/dialogshoulderpoint.cpp \
-    tools/drawTools/vtoolnormal.cpp \
-    dialogs/dialognormal.cpp \
-    tools/drawTools/vtoolbisector.cpp \
-    dialogs/dialogbisector.cpp \
-    tools/drawTools/vtoollinepoint.cpp \
-    tools/drawTools/vtoollineintersect.cpp \
-    dialogs/dialoglineintersect.cpp \
-    geometry/vspline.cpp \
-    tools/drawTools/vtoolsinglepoint.cpp \
-    geometry/varc.cpp \
-    widgets/vcontrolpointspline.cpp \
-    tools/drawTools/vtoolspline.cpp \
-    dialogs/dialogspline.cpp \
-    tools/drawTools/vtoolarc.cpp \
-    dialogs/dialogarc.cpp \
-    geometry/vsplinepoint.cpp \
-    geometry/vsplinepath.cpp \
-    tools/drawTools/vtoolsplinepath.cpp \
-    dialogs/dialogsplinepath.cpp \
-    widgets/vmaingraphicsscene.cpp \
-    widgets/vmaingraphicsview.cpp \
-    tools/vdatatool.cpp \
-    xml/vtoolrecord.cpp \
-    dialogs/dialoghistory.cpp \
-    tools/drawTools/vtoolpointofcontact.cpp \
-    dialogs/dialogpointofcontact.cpp \
-    geometry/vnodedetail.cpp \
-    geometry/vdetail.cpp \
-    dialogs/dialogdetail.cpp \
-    tools/vtooldetail.cpp \
-    widgets/vtablegraphicsview.cpp \
-    widgets/vitem.cpp \
-    tablewindow.cpp \
-    tools/nodeDetails/vnodearc.cpp \
-    tools/nodeDetails/vnodepoint.cpp \
-    tools/nodeDetails/vnodespline.cpp \
-    tools/nodeDetails/vnodesplinepath.cpp \
-    tools/drawTools/vdrawtool.cpp \
-    tools/nodeDetails/vabstractnode.cpp \
-    tools/modelingTools/vmodelingtool.cpp \
-    tools/modelingTools/vmodelingalongline.cpp \
-    tools/modelingTools/vmodelingarc.cpp \
-    tools/modelingTools/vmodelingbisector.cpp \
-    tools/modelingTools/vmodelingendline.cpp \
-    tools/modelingTools/vmodelingline.cpp \
-    tools/modelingTools/vmodelinglineintersect.cpp \
-    tools/modelingTools/vmodelinglinepoint.cpp \
-    tools/modelingTools/vmodelingnormal.cpp \
-    tools/modelingTools/vmodelingpoint.cpp \
-    tools/modelingTools/vmodelingpointofcontact.cpp \
-    tools/modelingTools/vmodelingshoulderpoint.cpp \
-    tools/modelingTools/vmodelingspline.cpp \
-    tools/modelingTools/vmodelingsplinepath.cpp \
-    exception/vexception.cpp \
-    exception/vexceptionbadid.cpp \
-    exception/vexceptionwrongparameterid.cpp \
-    exception/vexceptionconversionerror.cpp \
-    exception/vexceptionemptyparameter.cpp \
-    exception/vexceptionobjecterror.cpp \
-    widgets/vapplication.cpp \
-    exception/vexceptionuniqueid.cpp \
-    tools/drawTools/vtoolheight.cpp \
-    tools/modelingTools/vmodelingheight.cpp \
-    dialogs/dialogheight.cpp \
-    tools/drawTools/vtooltriangle.cpp \
-    tools/modelingTools/vmodelingtriangle.cpp \
-    dialogs/dialogtriangle.cpp \
-    dialogs/dialogpointofintersection.cpp \
-    tools/drawTools/vtoolpointofintersection.cpp \
-    tools/modelingTools/vmodelingpointofintersection.cpp
-
-HEADERS  += mainwindow.h \
-    widgets/vmaingraphicsscene.h \
-    dialogs/dialogsinglepoint.h \
-    options.h \
-    widgets/vgraphicssimpletextitem.h \
-    xml/vdomdocument.h \
-    container/vpointf.h \
-    container/vcontainer.h \
-    tools/drawTools/vtoolpoint.h \
-    container/calculator.h \
-    dialogs/dialogincrements.h \
-    container/vstandarttablecell.h \
-    container/vincrementtablerow.h \
-    widgets/doubledelegate.h \
-    dialogs/dialogendline.h \
-    tools/drawTools/vtoolendline.h \
-    tools/drawTools/vtoolline.h \
-    tools/vabstracttool.h \
-    dialogs/dialogline.h \
-    tools/drawTools/vtoolalongline.h \
-    dialogs/dialogtool.h \
-    dialogs/dialogalongline.h \
-    tools/drawTools/vtoolshoulderpoint.h \
-    dialogs/dialogshoulderpoint.h \
-    tools/drawTools/vtoolnormal.h \
-    dialogs/dialognormal.h \
-    tools/drawTools/vtoolbisector.h \
-    dialogs/dialogbisector.h \
-    tools/drawTools/vtoollinepoint.h \
-    tools/drawTools/vtoollineintersect.h \
-    dialogs/dialoglineintersect.h \
-    geometry/vspline.h \
-    tools/drawTools/vtoolsinglepoint.h \
-    geometry/varc.h \
-    widgets/vcontrolpointspline.h \
-    tools/drawTools/vtoolspline.h \
-    dialogs/dialogspline.h \
-    tools/drawTools/vtoolarc.h \
-    dialogs/dialogarc.h \
-    geometry/vsplinepoint.h \
-    geometry/vsplinepath.h \
-    tools/drawTools/vtoolsplinepath.h \
-    dialogs/dialogsplinepath.h \
-    widgets/vmaingraphicsview.h \
-    tools/vdatatool.h \
-    xml/vtoolrecord.h \
-    dialogs/dialoghistory.h \
-    tools/drawTools/vtoolpointofcontact.h \
-    dialogs/dialogpointofcontact.h \
-    geometry/vnodedetail.h \
-    geometry/vdetail.h \
-    dialogs/dialogdetail.h \
-    tools/vtooldetail.h \
-    widgets/vtablegraphicsview.h \
-    widgets/vitem.h \
-    tablewindow.h \
-    tools/tools.h \
-    tools/drawTools/drawtools.h \
-    tools/nodeDetails/nodedetails.h \
-    tools/nodeDetails/vnodearc.h \
-    tools/nodeDetails/vnodepoint.h \
-    tools/nodeDetails/vnodespline.h \
-    tools/nodeDetails/vnodesplinepath.h \
-    stable.h \
-    tools/drawTools/vdrawtool.h \
-    tools/nodeDetails/vabstractnode.h \
-    dialogs/dialogs.h \
-    tools/modelingTools/modelingtools.h \
-    tools/modelingTools/vmodelingtool.h \
-    tools/modelingTools/vmodelingalongline.h \
-    tools/modelingTools/vmodelingarc.h \
-    tools/modelingTools/vmodelingbisector.h \
-    tools/modelingTools/vmodelingendline.h \
-    tools/modelingTools/vmodelingline.h \
-    tools/modelingTools/vmodelinglineintersect.h \
-    tools/modelingTools/vmodelinglinepoint.h \
-    tools/modelingTools/vmodelingnormal.h \
-    tools/modelingTools/vmodelingpoint.h \
-    tools/modelingTools/vmodelingpointofcontact.h \
-    tools/modelingTools/vmodelingshoulderpoint.h \
-    tools/modelingTools/vmodelingspline.h \
-    tools/modelingTools/vmodelingsplinepath.h \
-    exception/vexception.h \
-    exception/vexceptionbadid.h \
-    exception/vexceptionwrongparameterid.h \
-    exception/vexceptionconversionerror.h \
-    exception/vexceptionemptyparameter.h \
-    exception/vexceptionobjecterror.h \
-    widgets/vapplication.h \
-    exception/vexceptionuniqueid.h \
-    tools/drawTools/vtoolheight.h \
-    tools/modelingTools/vmodelingheight.h \
-    dialogs/dialogheight.h \
-    tools/drawTools/vtooltriangle.h \
-    tools/modelingTools/vmodelingtriangle.h \
-    dialogs/dialogtriangle.h \
-    dialogs/dialogpointofintersection.h \
-    tools/drawTools/vtoolpointofintersection.h \
-    tools/modelingTools/vmodelingpointofintersection.h \
-    version.h
-
-FORMS    += mainwindow.ui \
-    dialogs/dialogsinglepoint.ui \
-    dialogs/dialogincrements.ui \
-    dialogs/dialogendline.ui \
-    dialogs/dialogline.ui \
-    dialogs/dialogalongline.ui \
-    dialogs/dialogshoulderpoint.ui \
-    dialogs/dialognormal.ui \
-    dialogs/dialogbisector.ui \
-    dialogs/dialoglineintersect.ui \
-    dialogs/dialogspline.ui \
-    dialogs/dialogarc.ui \
-    dialogs/dialogsplinepath.ui \
-    dialogs/dialoghistory.ui \
-    dialogs/dialogpointofcontact.ui \
-    dialogs/dialogdetail.ui \
-    tablewindow.ui \
-    dialogs/dialogheight.ui \
-    dialogs/dialogtriangle.ui \
-    dialogs/dialogpointofintersection.ui
-
-RESOURCES += \
-    icon.qrc \
-    cursor.qrc
+# Precompiled headers (PCH)
+PRECOMPILED_HEADER = stable.h
 
 # directory for executable file
 DESTDIR = bin
@@ -249,14 +37,38 @@ RCC_DIR = rcc
 # files created uic
 UI_DIR = uic
 
-# Use Precompiled headers (PCH)
-PRECOMPILED_HEADER = stable.h
+include(container/container.pri)
+include(dialogs/dialogs.pri)
+include(exception/exception.pri)
+include(geometry/geometry.pri)
+include(tools/tools.pri)
+include(widgets/widgets.pri)
+include(xml/xml.pri)
+
+SOURCES += main.cpp\
+        mainwindow.cpp \
+        tablewindow.cpp \
+
+HEADERS  += mainwindow.h \
+    options.h \
+    tablewindow.h \
+    stable.h \
+    version.h
+
+FORMS    += mainwindow.ui \
+    tablewindow.ui
+
+RESOURCES += \
+    icon.qrc \
+    cursor.qrc
 
 TRANSLATIONS += translations/valentina_ru.ts \
                 translations/valentina_uk.ts
 
 CONFIG(debug, debug|release){
     # Debug
+    TARGET = $$DEBUG_TARGET
+
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
                       -isystem "/usr/include/qt5/QtCore" -isystem "$$OUT_PWD/uic" -isystem "$$OUT_PWD/moc/" \
@@ -265,7 +77,11 @@ CONFIG(debug, debug|release){
                       -Wunreachable-code
 }else{
     # Release
+    TARGET = $$RELEASE_TARGET
+
     QMAKE_CXXFLAGS += -O1
+
+    DEFINES += QT_NO_DEBUG_OUTPUT
 
     QMAKE_EXTRA_COMPILERS += lrelease
     lrelease.input         = TRANSLATIONS

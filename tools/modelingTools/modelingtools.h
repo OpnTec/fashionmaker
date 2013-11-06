@@ -31,7 +31,6 @@
 #include "vmodelingnormal.h"
 #include "vmodelingpointofcontact.h"
 #include "vmodelingshoulderpoint.h"
-#include "vmodelingsinglepoint.h"
 #include "vmodelingspline.h"
 #include "vmodelingsplinepath.h"
 #include "vmodelingheight.h"
