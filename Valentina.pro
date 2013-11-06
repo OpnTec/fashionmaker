@@ -21,6 +21,9 @@ QMAKE_CXX = ccache g++
 
 # Precompiled headers (PCH)
 PRECOMPILED_HEADER = stable.h
+win32-msvc* {
+    PRECOMPILED_SOURCE = stable.cpp
+}
 
 # directory for executable file
 DESTDIR = bin
@@ -48,6 +51,7 @@ include(xml/xml.pri)
 SOURCES += main.cpp\
         mainwindow.cpp \
         tablewindow.cpp \
+        stable.cpp
 
 HEADERS  += mainwindow.h \
     options.h \

@@ -19,25 +19,5 @@
  **
  ****************************************************************************/
 
-#ifndef STABLE_H
-#define STABLE_H
-
-/* I like to include this pragma too,
-so the build log indicates if pre-compiled headers
-were in use. */
-#pragma message("Compiling precompiled headers.\n")
-
-/* Add C includes here */
-
-#if defined __cplusplus
-/* Add C++ includes here */
-#include <QtCore>
-#include <QApplication>
-#include <QtGlobal>
-#include <QtXml>
-#include <QtWidgets>
-#include <QtSvg/QtSvg>
-#include "options.h"
-#endif
-
-#endif // STABLE_H
+// Build the precompiled headers.
+#include "stable.h"
