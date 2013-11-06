@@ -146,7 +146,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     return *this;
 }
 
-VSplinePoint & VSplinePath::operator[](int indx)
+VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
 {
     return path[indx];
 }

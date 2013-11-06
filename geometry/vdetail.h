@@ -46,7 +46,7 @@ public:
     void           Clear();
     inline qint32  CountNode() const {return nodes.size();}
     bool           Containes(const qint64 &id)const;
-    VNodeDetail &  operator[](int indx);
+    VNodeDetail &  operator[](ptrdiff_t indx);
     inline QString getName() const {return name;}
     inline void    setName(const QString &value) {name = value;}
     inline qreal   getMx() const {return mx;}

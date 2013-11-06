@@ -74,7 +74,7 @@ public:
     inline void   setKCurve(const qreal &value) {kCurve = value;}
     inline const  QVector<VSplinePoint> *GetPoint() const {return &path;}
     VSplinePath   &operator=(const VSplinePath &path);
-    VSplinePoint  &operator[](int indx);
+    VSplinePoint  &operator[](ptrdiff_t indx);
     inline Draw::Draws getMode() const {return mode;}
     inline void   setMode(const Draw::Draws &value) {mode = value;}
 

@@ -70,7 +70,7 @@ bool VDetail::Containes(const qint64 &id) const
     return false;
 }
 
-VNodeDetail &VDetail::operator [](int indx)
+VNodeDetail &VDetail::operator [](ptrdiff_t indx)
 {
     return nodes[indx];
 }
