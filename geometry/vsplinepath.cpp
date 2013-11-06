@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vsplinepath.h"
-#include <exception/vexception.h>
+#include "../exception/vexception.h"
 
 VSplinePath::VSplinePath()
     : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0){}

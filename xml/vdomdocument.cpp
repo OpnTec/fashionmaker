@@ -20,19 +20,19 @@
  ****************************************************************************/
 
 #include "vdomdocument.h"
-#include <exception/vexceptionwrongparameterid.h>
-#include <exception/vexceptionconversionerror.h>
-#include <exception/vexceptionemptyparameter.h>
-#include <exception/vexceptionuniqueid.h>
-#include <tools/vtooldetail.h>
-#include <exception/vexceptionobjecterror.h>
-#include <exception/vexceptionbadid.h>
-#include <tools/drawTools/drawtools.h>
-#include <tools/modelingTools/modelingtools.h>
-#include <tools/nodeDetails/vnodepoint.h>
-#include <tools/nodeDetails/vnodespline.h>
-#include <tools/nodeDetails/vnodesplinepath.h>
-#include <tools/nodeDetails/vnodearc.h>
+#include "../exception/vexceptionwrongparameterid.h"
+#include "../exception/vexceptionconversionerror.h"
+#include "../exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionuniqueid.h"
+#include "../tools/vtooldetail.h"
+#include "../exception/vexceptionobjecterror.h"
+#include "../exception/vexceptionbadid.h"
+#include "../tools/drawTools/drawtools.h"
+#include "../tools/modelingTools/modelingtools.h"
+#include "../tools/nodeDetails/vnodepoint.h"
+#include "../tools/nodeDetails/vnodespline.h"
+#include "../tools/nodeDetails/vnodesplinepath.h"
+#include "../tools/nodeDetails/vnodearc.h"
 
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode)
     : QDomDocument(), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),

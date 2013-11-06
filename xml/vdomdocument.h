@@ -23,9 +23,9 @@
 #define VDOMDOCUMENT_H
 
 #include <QDomDocument>
-#include <container/vcontainer.h>
-#include <widgets/vmaingraphicsscene.h>
-#include <tools/vdatatool.h>
+#include "../container/vcontainer.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../tools/vdatatool.h"
 #include "vtoolrecord.h"
 
 namespace Document

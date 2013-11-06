@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolbisector.h"
-#include <container/calculator.h>
+#include "../../container/calculator.h"
 
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 

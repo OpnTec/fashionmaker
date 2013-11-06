@@ -21,7 +21,7 @@
 
 #include "vtoolendline.h"
 #include "widgets/vmaingraphicsscene.h"
-#include <container/calculator.h>
+#include "../../container/calculator.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 

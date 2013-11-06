@@ -23,7 +23,7 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
-#include <container/vpointf.h>
+#include "../container/vpointf.h"
 #include "vspline.h"
 #include <QApplication>
 

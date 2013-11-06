@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "varc.h"
-#include <exception/vexception.h>
+#include "../exception/vexception.h"
 
 VArc::VArc ()
     : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),

@@ -22,7 +22,7 @@
 #ifndef VSPLINE_H
 #define VSPLINE_H
 
-#include <container/vpointf.h>
+#include "../container/vpointf.h"
 
 #define M_2PI   6.28318530717958647692528676655900576
 

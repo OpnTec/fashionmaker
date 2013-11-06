@@ -22,7 +22,7 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include <container/vcontainer.h>
+#include "../container/vcontainer.h"
 
 //We need QObject class because we use qobject_cast.
 class VDataTool : public QObject

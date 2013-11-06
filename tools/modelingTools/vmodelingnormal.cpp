@@ -21,7 +21,7 @@
 
 #include "vmodelingnormal.h"
 #include "../drawTools/vtoolnormal.h"
-#include <container/calculator.h>
+#include "../../container/calculator.h"
 
 const QString VModelingNormal::ToolType = QStringLiteral("normal");
 

@@ -23,7 +23,7 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include <xml/vdomdocument.h>
+#include "../xml/vdomdocument.h"
 
 class VAbstractTool: public VDataTool
 {

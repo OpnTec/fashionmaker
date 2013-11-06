@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vtoolpointofcontact.h"
-#include <container/calculator.h>
+#include "../../container/calculator.h"
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 

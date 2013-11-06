@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "vcontainer.h"
-#include <exception/vexceptionbadid.h>
+#include "../exception/vexceptionbadid.h"
 
 qint64 VContainer::_id = 0;
 

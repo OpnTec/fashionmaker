@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include "dialogtool.h"
-#include <container/calculator.h>
+#include "../container/calculator.h"
 
 DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),

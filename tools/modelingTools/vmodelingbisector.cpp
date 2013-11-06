@@ -21,7 +21,7 @@
 
 #include "vmodelingbisector.h"
 #include "../drawTools/vtoolbisector.h"
-#include <container/calculator.h>
+#include "../../container/calculator.h"
 
 const QString VModelingBisector::ToolType = QStringLiteral("bisector");
 

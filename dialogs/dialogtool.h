@@ -23,7 +23,7 @@
 #define DIALOGTOOL_H
 
 #include <QDialog>
-#include <container/vcontainer.h>
+#include "../container/vcontainer.h"
 
 class DialogTool : public QDialog
 {
