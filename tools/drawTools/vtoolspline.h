@@ -32,7 +32,7 @@ class VToolSpline:public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                 VToolSpline (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                 VToolSpline (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                               QGraphicsItem * parent = 0 );
     virtual void setDialog();
     static void  Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
@@ -40,7 +40,7 @@ public:
     static void  Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                         const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, Tool::Sources typeCreation);
+                        const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 signals:
@@ -52,7 +52,7 @@ public slots:
     virtual void FullUpdateFromGui ( int result );
     void         ControlPointChangePosition ( const qint32 &indexSpline, SplinePoint::Position position,
                                               const QPointF pos);
-    virtual void ChangedActivDraw ( const QString newName );
+    virtual void ChangedActivDraw ( const QString &newName );
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     virtual void SetFactor(qreal factor);
 protected:

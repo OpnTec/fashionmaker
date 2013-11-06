@@ -25,7 +25,7 @@
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogArc(QSharedPointer<DialogArc>())
 {
@@ -66,7 +66,7 @@ void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *sce
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                      const Document::Documents &parse, Tool::Sources typeCreation)
+                      const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -142,7 +142,7 @@ void VToolArc::FullUpdateFromGui(int result)
     dialogArc.clear();
 }
 
-void VToolArc::ChangedActivDraw(const QString newName)
+void VToolArc::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
     if (nameActivDraw == newName)

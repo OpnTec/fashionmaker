@@ -35,7 +35,7 @@ public:
     inline qint32 getVerScrollBar() const {return verScrollBar;}
     inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
 public slots:
-    void          ChoosedItem(qint64 id, Scene::Scenes type);
+    void          ChoosedItem(qint64 id, const Scene::Scenes &type);
     inline void   RemoveTool(QGraphicsItem *tool) {this->removeItem(tool);}
     void          SetFactor(qreal factor);
 protected:

@@ -77,7 +77,7 @@ public:
     void               AddLengthArc(const QString &name, const qreal &value);
     void               AddLineAngle(const QString &name, const qreal &value);
     void               AddLine(const qint64 &firstPointId, const qint64 &secondPointId,
-                               Draw::Draws mode = Draw::Calculation);
+                               const Draw::Draws &mode = Draw::Calculation);
     qint64             AddSpline(const VSpline& spl);
     qint64             AddModelingSpline(const VSpline& spl);
     qint64             AddSplinePath(const VSplinePath& splPath);
@@ -85,14 +85,15 @@ public:
     qint64             AddArc(const VArc& arc);
     qint64             AddModelingArc(const VArc& arc);
     QString            GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint,
-                                   Draw::Draws mode = Draw::Calculation) const;
+                                   const Draw::Draws &mode = Draw::Calculation) const;
     QString            GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint,
-                                        Draw::Draws mode = Draw::Calculation) const;
+                                        const Draw::Draws &mode = Draw::Calculation) const;
     QString            GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint,
-                                     Draw::Draws mode = Draw::Calculation) const;
+                                     const Draw::Draws &mode = Draw::Calculation) const;
     QString            GetNameSplinePath(const VSplinePath &path,
-                                         Draw::Draws mode = Draw::Calculation) const;
-    QString            GetNameArc(const qint64 &center, const qint64 &id, Draw::Draws mode = Draw::Calculation) const;
+                                         const Draw::Draws &mode = Draw::Calculation) const;
+    QString            GetNameArc(const qint64 &center, const qint64 &id,
+                                  const Draw::Draws &mode = Draw::Calculation) const;
     void               UpdatePoint(qint64 id, const VPointF& point);
     void               UpdateModelingPoint(qint64 id, const VPointF& point);
     void               UpdateDetail(qint64 id, const VDetail& detail);

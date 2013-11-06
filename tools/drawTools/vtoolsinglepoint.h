@@ -29,14 +29,14 @@ class VToolSinglePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-                 VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                 VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                    QGraphicsItem * parent = 0 );
     virtual void setDialog();
     static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
     virtual void FullUpdateFromGui(int result);
-    virtual void ChangedActivDraw(const QString newName);
+    virtual void ChangedActivDraw(const QString &newName);
     virtual void SetFactor(qreal factor);
 signals:
     void         FullUpdateTree();

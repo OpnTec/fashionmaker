@@ -25,7 +25,7 @@ const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
-                       Tool::Sources typeCreation, QGraphicsItem *parent)
+                       const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
       namePoint(0), lineName(0)
 {
@@ -45,7 +45,7 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
 }
 
 void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
-                        const Document::Documents &parse, Tool::Sources typeCreation)
+                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)
     {

@@ -31,14 +31,14 @@ class VToolSplinePath:public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                  VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                  VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                   QGraphicsItem * parent = 0);
      virtual void setDialog();
      static void  Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data);
      static void  Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                         Tool::Sources typeCreation);
+                         const Tool::Sources &typeCreation);
      static const QString TagName;
      static const QString ToolType;
 signals:
@@ -50,7 +50,7 @@ public slots:
     virtual void  FullUpdateFromGui(int result);
     void          ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
                                              const QPointF pos);
-    virtual void  ChangedActivDraw(const QString newName);
+    virtual void  ChangedActivDraw(const QString &newName);
     virtual void  ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     virtual void  SetFactor(qreal factor);
 protected:

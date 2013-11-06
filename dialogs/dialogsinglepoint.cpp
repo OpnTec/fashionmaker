@@ -39,7 +39,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NamePointChanged);
 }
 
-void DialogSinglePoint::mousePress(QPointF scenePos)
+void DialogSinglePoint::mousePress(const QPointF &scenePos)
 {
     if (isInitialized == false)
     {
@@ -61,7 +61,7 @@ void DialogSinglePoint::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogSinglePoint::setData(const QString name, const QPointF point)
+void DialogSinglePoint::setData(const QString &name, const QPointF &point)
 {
     this->name = name;
     this->point = point;

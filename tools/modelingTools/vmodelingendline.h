@@ -31,14 +31,14 @@ class VModelingEndLine : public VModelingLinePoint
 public:
                              VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
                                               const QString &typeLine, const QString &formula, const qreal &angle,
-                                              const qint64 &basePointId, Tool::Sources typeCreation,
+                                              const qint64 &basePointId, const Tool::Sources &typeCreation,
                                               QGraphicsItem * parent = 0);
     virtual void             setDialog();
     static VModelingEndLine* Create(QSharedPointer<DialogEndLine> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingEndLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                     const QString &formula, const qreal &angle, const qint64 &basePointId,
                                     const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
-                                    const Document::Documents &parse, Tool::Sources typeCreation);
+                                    const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void             FullUpdateFromFile();

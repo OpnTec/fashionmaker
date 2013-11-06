@@ -50,9 +50,10 @@ private:
     Q_DISABLE_COPY(VControlPointSpline)
     qint32            indexSpline;
     SplinePoint::Position position;
-    qint32            LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1, QPointF &p2) const;
-    QPointF           ClosestPoint(QLineF line, QPointF p) const;
-    QPointF           addVector (QPointF p, QPointF p1, QPointF p2, qreal k) const;
+    qint32            LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
+                                          QPointF &p2) const;
+    QPointF           ClosestPoint(const QLineF &line, const QPointF &p) const;
+    QPointF           addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) const;
 
 };
 

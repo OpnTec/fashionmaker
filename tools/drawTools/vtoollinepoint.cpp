@@ -44,7 +44,7 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
     }
 }
 
-void VToolLinePoint::ChangedActivDraw(const QString newName)
+void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
     {

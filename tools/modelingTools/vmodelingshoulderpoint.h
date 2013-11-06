@@ -31,7 +31,7 @@ class VModelingShoulderPoint : public VModelingLinePoint
 public:
                  VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                         const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
-                                        const qint64 &pShoulder, Tool::Sources typeCreation,
+                                        const qint64 &pShoulder, const Tool::Sources &typeCreation,
                                         QGraphicsItem * parent = 0);
     virtual void setDialog();
     static VModelingShoulderPoint* Create(QSharedPointer<DialogShoulderPoint> &dialog, VDomDocument *doc,

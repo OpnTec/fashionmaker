@@ -25,7 +25,7 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
-                   Tool::Sources typeCreation, QGraphicsItem * parent)
+                   const Tool::Sources &typeCreation, QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idArc, typeobject), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
@@ -40,7 +40,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
 }
 
 void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
-                      const Document::Documents &parse, Tool::Sources typeCreation)
+                      const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)
     {

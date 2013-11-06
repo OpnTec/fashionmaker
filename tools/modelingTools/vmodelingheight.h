@@ -31,14 +31,14 @@ class VModelingHeight : public VModelingLinePoint
 public:
                             VModelingHeight(VDomDocument *doc, VContainer *data, const qint64 &id,
                                             const QString &typeLine, const qint64 &basePointId, const qint64 &p1LineId,
-                                            const qint64 &p2LineId, Tool::Sources typeCreation,
+                                            const qint64 &p2LineId, const Tool::Sources &typeCreation,
                                             QGraphicsItem * parent = 0);
     virtual void            setDialog();
     static VModelingHeight* Create(QSharedPointer<DialogHeight> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingHeight* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                    const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                                    const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
-                                   const Document::Documents &parse, Tool::Sources typeCreation);
+                                   const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void            FullUpdateFromFile();

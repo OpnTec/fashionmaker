@@ -32,14 +32,14 @@ public:
                               VModelingBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                 const QString &typeLine, const QString &formula,
                                                 const qint64 &firstPointId, const qint64 &secondPointId,
-                                                const qint64 &thirdPointId, Tool::Sources typeCreation,
+                                                const qint64 &thirdPointId, const Tool::Sources &typeCreation,
                                                 QGraphicsItem * parent = 0);
     virtual void              setDialog();
     static VModelingBisector* Create(QSharedPointer<DialogBisector> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingBisector* Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                                      const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                                      const QString &pointName, const qreal &mx, const qreal &my, VDomDocument *doc,
-                                     VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+                                     VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void              FullUpdateFromFile();

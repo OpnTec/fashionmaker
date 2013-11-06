@@ -100,8 +100,8 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
-                           qreal mx, qreal my)
+void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::Draws &mode,
+                           const NodeDetail::NodeDetails &typeNode, qreal mx, qreal my)
 {
     QString name;
     switch (typeTool)

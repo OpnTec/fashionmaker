@@ -25,7 +25,7 @@ const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfInters
 
 VToolPointOfIntersection::VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                    const qint64 &firstPointId, const qint64 &secondPointId,
-                                                   Tool::Sources typeCreation, QGraphicsItem *parent)
+                                                   const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId),
       dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>())
 {
@@ -57,7 +57,7 @@ void VToolPointOfIntersection::Create(QSharedPointer<DialogPointOfIntersection> 
 void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName, const qint64 &firstPointId,
                                       const qint64 &secondPointId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                                      const Document::Documents &parse, Tool::Sources typeCreation)
+                                      const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);

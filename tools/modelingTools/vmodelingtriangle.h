@@ -32,13 +32,13 @@ class VModelingTriangle : public VModelingPoint
 public:
                  VModelingTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                    const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                                   Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                   const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static VModelingTriangle* Create(QSharedPointer<DialogTriangle> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingTriangle* Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
                                      const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                      const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
-                                     const Document::Documents &parse, Tool::Sources typeCreation);
+                                     const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();

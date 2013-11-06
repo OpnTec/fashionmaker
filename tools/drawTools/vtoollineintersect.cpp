@@ -25,7 +25,7 @@ const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
 VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, Tool::Sources typeCreation,
+                                       const qint64 &p2Line2, const Tool::Sources &typeCreation,
                                        QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2), dialogLineIntersect(QSharedPointer<DialogLineIntersect>())
@@ -64,7 +64,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
                                 const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                 VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                Tool::Sources typeCreation)
+                                const Tool::Sources &typeCreation)
 {
     VPointF p1Line1 = data->GetPoint(p1Line1Id);
     VPointF p2Line1 = data->GetPoint(p2Line1Id);

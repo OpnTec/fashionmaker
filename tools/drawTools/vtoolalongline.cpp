@@ -26,7 +26,7 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
 VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                                const qint64 &firstPointId, const qint64 &secondPointId,
-                               const QString &typeLine, Tool::Sources typeCreation,
+                               const QString &typeLine, const Tool::Sources &typeCreation,
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId),
     dialogAlongLine(QSharedPointer<DialogAlongLine>())
@@ -131,7 +131,7 @@ void VToolAlongLine::Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphi
 void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                             const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                            VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+                            VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);

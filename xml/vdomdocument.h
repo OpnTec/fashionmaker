@@ -50,7 +50,7 @@ public:
                    ~VDomDocument(){}
     QDomElement    elementById(const QString& id);
     void           CreateEmptyFile();
-    void           ChangeActivDraw(const QString& name, Document::Documents parse = Document::FullParse);
+    void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
     inline QString GetNameActivDraw() const {return nameActivDraw;}
     bool           GetActivDrawElement(QDomElement &element);
     bool           GetActivCalculationElement(QDomElement &element);
@@ -58,7 +58,8 @@ public:
     bool           GetActivDetailsElement(QDomElement &element);
     bool           appendDraw(const QString& name);
     bool           SetNameDraw(const QString& name);
-    void           Parse(Document::Documents parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail);
+    void           Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
+                         VMainGraphicsScene *sceneDetail);
     inline QHash<qint64, VDataTool*>* getTools() {return &tools;}
     inline QVector<VToolRecord> *getHistory() {return &history;}
     inline qint64  getCursor() const {return cursor;}
@@ -70,7 +71,7 @@ public:
     void           DecrementReferens(qint64 id) const;
     void           TestUniqueId() const;
 signals:
-    void           ChangedActivDraw(const QString newName);
+    void           ChangedActivDraw(const QString &newName);
     void           ChangedNameDraw(const QString oldName, const QString newName);
     void           FullUpdateFromFile();
     void           haveChange();
@@ -90,32 +91,32 @@ private:
     qint64         cursor;
     QComboBox      *comboBoxDraws;
     Draw::Draws    *mode;
-    bool           find(QDomElement node, const QString& id);
+    bool           find(const QDomElement &node, const QString& id);
     bool           CheckNameDraw(const QString& name) const;
     void           SetActivDraw(const QString& name);
     bool           GetActivNodeElement(const QString& name, QDomElement& element);
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document::Documents &parse);
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
-                                 const QDomNode& node, const Document::Documents &parse, Draw::Draws mode);
+                                 const QDomNode& node, const Document::Documents &parse, const Draw::Draws &mode);
     void           ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                       const Document::Documents &parse);
     void           ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                 const Document::Documents &parse);
     void           ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString &type, Draw::Draws mode);
+                                     const Document::Documents &parse, const QString &type, const Draw::Draws &mode);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                    const Document::Documents &parse, Draw::Draws mode);
+                                    const Document::Documents &parse, const Draw::Draws &mode);
     void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                      const Document::Documents &parse, const QString& type, Draw::Draws mode);
+                                      const Document::Documents &parse, const QString& type, const Draw::Draws &mode);
     void           ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                   const Document::Documents &parse, const QString& type, Draw::Draws mode);
+                                   const Document::Documents &parse, const QString& type, const Draw::Draws &mode);
     void           ParseIncrementsElement(const QDomNode& node);
     qint64         GetParametrId(const QDomElement& domElement) const;
     qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
     QString        GetParametrString(const QDomElement& domElement, const QString &name) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name) const;
-    void           CollectId(QDomElement node, QVector<qint64> &vector)const;
+    void           CollectId(const QDomElement &node, QVector<qint64> &vector)const;
 };
 
 #ifdef Q_CC_GNU

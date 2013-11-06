@@ -32,14 +32,14 @@ class VModelingSpline:public VModelingTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                            VModelingSpline (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                            VModelingSpline (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                              QGraphicsItem * parent = 0 );
     virtual void            setDialog();
     static VModelingSpline* Create(QSharedPointer<DialogSpline> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingSpline* Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                                    const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                                    VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                   Tool::Sources typeCreation);
+                                   const Tool::Sources &typeCreation);
     static const QString    TagName;
     static const QString    ToolType;
 signals:

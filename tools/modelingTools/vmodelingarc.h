@@ -31,13 +31,13 @@ class VModelingArc :public VModelingTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                         VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+                         VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                       QGraphicsItem * parent = 0);
     virtual void         setDialog();
     static VModelingArc* Create(QSharedPointer<DialogArc> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingArc* Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                                 const QString &f2, VDomDocument *doc, VContainer *data,
-                                const Document::Documents &parse, Tool::Sources typeCreation);
+                                const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:

@@ -24,7 +24,7 @@
 const QString VToolLine::TagName = QStringLiteral("line");
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     Tool::Sources typeCreation, QGraphicsItem *parent)
+                     const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
     dialogLine(QSharedPointer<DialogLine>())
 {
@@ -60,7 +60,7 @@ void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *s
 
 void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                       const Document::Documents &parse, Tool::Sources typeCreation)
+                       const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT(doc != 0);
@@ -126,7 +126,7 @@ void VToolLine::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
-void VToolLine::ChangedActivDraw(const QString newName)
+void VToolLine::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
     if (nameActivDraw == newName)

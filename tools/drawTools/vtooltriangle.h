@@ -31,14 +31,14 @@ class VToolTriangle : public VToolPoint
 public:
                    VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                  const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                                 Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static void    Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);
     static void    Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id, const qint64 &axisP2Id,
                           const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
                           VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                          const Document::Documents &parse, Tool::Sources typeCreation);
+                          const Document::Documents &parse, const Tool::Sources &typeCreation);
     static QPointF FindPoint(const QPointF axisP1, const QPointF axisP2, const QPointF firstPoint,
                               const QPointF secondPoint);
     static const QString ToolType;

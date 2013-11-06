@@ -31,7 +31,7 @@ public:
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &radius, const qint64 &center,
                                        const qint64 &firstPointId, const qint64 &secondPointId,
-                                       Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                       const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
@@ -40,7 +40,7 @@ public:
     static void    Create(const qint64 _id, const QString &radius, const qint64 &center,
                           const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void   FullUpdateFromFile();

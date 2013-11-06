@@ -24,7 +24,7 @@
 const QString VModelingLine::TagName = QStringLiteral("line");
 
 VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-                             qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem *parent):
+                             qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem *parent):
     VModelingTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint),
     secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>())
 {
@@ -58,7 +58,7 @@ VModelingLine *VModelingLine::Create(QSharedPointer<DialogLine> &dialog, VDomDoc
 
 VModelingLine *VModelingLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                      VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                     Tool::Sources typeCreation)
+                                     const Tool::Sources &typeCreation)
 {
     VModelingLine *line = 0;
     Q_ASSERT(doc != 0);

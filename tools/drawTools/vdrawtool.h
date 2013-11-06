@@ -31,12 +31,12 @@ public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual      ~VDrawTool() {}
     virtual void setDialog() {}
-    static void  AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc);
+    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
     void         ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
-    virtual void ChangedActivDraw(const QString newName);
-    void         ChangedNameDraw(const QString oldName, const QString newName);
+    virtual void ChangedActivDraw(const QString &newName);
+    void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGui(int result)=0;
     virtual void SetFactor(qreal factor);
 protected:

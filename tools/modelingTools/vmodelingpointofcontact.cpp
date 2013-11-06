@@ -28,7 +28,7 @@ const QString VModelingPointOfContact::ToolType = QStringLiteral("pointOfContact
 VModelingPointOfContact::VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                  const QString &radius, const qint64 &center,
                                                  const qint64 &firstPointId, const qint64 &secondPointId,
-                                                 Tool::Sources typeCreation, QGraphicsItem *parent)
+                                                 const Tool::Sources &typeCreation, QGraphicsItem *parent)
     : VModelingPoint(doc, data, id, parent), radius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogPointOfContact(QSharedPointer<DialogPointOfContact>())
 {
@@ -67,7 +67,7 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
                                                          const QString &pointName, const qreal &mx,
                                                          const qreal &my, VDomDocument *doc,
                                                          VContainer *data, const Document::Documents &parse,
-                                                         Tool::Sources typeCreation)
+                                                         const Tool::Sources &typeCreation)
 {
     VModelingPointOfContact *point = 0;
     VPointF centerP = data->GetModelingPoint(center);

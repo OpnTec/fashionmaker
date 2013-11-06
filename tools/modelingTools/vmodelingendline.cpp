@@ -26,7 +26,7 @@ const QString VModelingEndLine::ToolType = QStringLiteral("endLine");
 
 VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
                                    const QString &typeLine, const QString &formula, const qreal &angle,
-                                   const qint64 &basePointId, Tool::Sources typeCreation, QGraphicsItem *parent)
+                                   const qint64 &basePointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VModelingLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent),
     dialogEndLine(QSharedPointer<DialogEndLine>())
 {
@@ -62,7 +62,7 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
                                            const QString &typeLine, const QString &formula,
                                            const qreal &angle, const qint64 &basePointId, const qreal &mx,
                                            const qreal &my, VDomDocument *doc, VContainer *data,
-                                           const Document::Documents &parse, Tool::Sources typeCreation)
+                                           const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingEndLine *point = 0;
     VPointF basePoint = data->GetModelingPoint(basePointId);

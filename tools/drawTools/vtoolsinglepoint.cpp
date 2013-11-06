@@ -23,7 +23,7 @@
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
-VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                     QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent), dialogSinglePoint(QSharedPointer<DialogSinglePoint>())
 {
@@ -127,7 +127,7 @@ void VToolSinglePoint::FullUpdateFromGui(int result)
     dialogSinglePoint.clear();
 }
 
-void VToolSinglePoint::ChangedActivDraw(const QString newName)
+void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
     {

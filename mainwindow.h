@@ -45,7 +45,7 @@ public:
                        ~MainWindow();
     void               OpenPattern(const QString &fileName);
 public slots:
-    void               mouseMove(QPointF scenePos);
+    void               mouseMove(const QPointF &scenePos);
     void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);

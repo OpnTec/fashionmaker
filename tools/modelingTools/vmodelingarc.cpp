@@ -25,7 +25,7 @@
 const QString VModelingArc::TagName = QStringLiteral("arc");
 const QString VModelingArc::ToolType = QStringLiteral("simple");
 
-VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                            QGraphicsItem *parent)
     :VModelingTool(doc, data, id), QGraphicsPathItem(parent), dialogArc(QSharedPointer<DialogArc>())
 {
@@ -61,7 +61,7 @@ VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocume
 
 VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius,
                                    const QString &f1, const QString &f2, VDomDocument *doc,
-                                   VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+                                   VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingArc *toolArc = 0;
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;

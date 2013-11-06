@@ -58,7 +58,7 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
     }
 }
 
-void VToolPoint::ChangedActivDraw(const QString newName)
+void VToolPoint::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
     if (nameActivDraw == newName)

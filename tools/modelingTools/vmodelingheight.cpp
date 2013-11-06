@@ -26,7 +26,7 @@ const QString VModelingHeight::ToolType = QStringLiteral("height");
 
 VModelingHeight::VModelingHeight(VDomDocument *doc, VContainer *data, const qint64 &id,
                                  const QString &typeLine, const qint64 &basePointId, const qint64 &p1LineId,
-                                 const qint64 &p2LineId, Tool::Sources typeCreation,
+                                 const qint64 &p2LineId, const Tool::Sources &typeCreation,
                                  QGraphicsItem * parent)
     :VModelingLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent),
       dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId)
@@ -65,7 +65,7 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
                                          const qint64 &basePointId, const qint64 &p1LineId,
                                          const qint64 &p2LineId, const qreal &mx, const qreal &my,
                                          VDomDocument *doc, VContainer *data,
-                                         const Document::Documents &parse, Tool::Sources typeCreation)
+                                         const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingHeight *point = 0;
     VPointF basePoint = data->GetModelingPoint(basePointId);

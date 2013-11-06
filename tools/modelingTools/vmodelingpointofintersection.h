@@ -31,7 +31,7 @@ class VModelingPointOfIntersection : public VModelingPoint
 public:
                  VModelingPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
                                               const qint64 &firstPointId, const qint64 &secondPointId,
-                                              Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                              const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void setDialog();
     static VModelingPointOfIntersection* Create(QSharedPointer<DialogPointOfIntersection> &dialog, VDomDocument *doc,
                                                 VContainer *data);
@@ -39,7 +39,7 @@ public:
                                                 const qint64 &firstPointId, const qint64 &secondPointId,
                                                 const qreal &mx, const qreal &my, VDomDocument *doc,
                                                 VContainer *data, const Document::Documents &parse,
-                                                Tool::Sources typeCreation);
+                                                const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();

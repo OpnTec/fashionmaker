@@ -27,7 +27,7 @@ const QString VModelingAlongLine::ToolType = QStringLiteral("alongLine");
 VModelingAlongLine::VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id,
                                        const QString &formula, const qint64 &firstPointId,
                                        const qint64 &secondPointId, const QString &typeLine,
-                                       Tool::Sources typeCreation, QGraphicsItem *parent)
+                                       const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VModelingLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId),
       dialogAlongLine(QSharedPointer<DialogAlongLine>())
 {
@@ -126,7 +126,7 @@ VModelingAlongLine *VModelingAlongLine::Create(const qint64 _id, const QString &
                                                const QString &formula, const qint64 &firstPointId,
                                                const qint64 &secondPointId, const qreal &mx, const qreal &my,
                                                VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                               Tool::Sources typeCreation)
+                                               const Tool::Sources &typeCreation)
 {
     VModelingAlongLine *point = 0;
     VPointF firstPoint = data->GetModelingPoint(firstPointId);

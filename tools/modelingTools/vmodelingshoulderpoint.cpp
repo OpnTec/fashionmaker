@@ -27,7 +27,7 @@ const QString VModelingShoulderPoint::ToolType = QStringLiteral("shoulder");
 
 VModelingShoulderPoint::VModelingShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
-                                       const qint64 &p2Line, const qint64 &pShoulder, Tool::Sources typeCreation,
+                                       const qint64 &p2Line, const qint64 &pShoulder, const Tool::Sources &typeCreation,
                                        QGraphicsItem * parent)
     :VModelingLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line),
     pShoulder(pShoulder), dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>())

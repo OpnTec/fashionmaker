@@ -25,7 +25,7 @@ const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
-                         Tool::Sources typeCreation, QGraphicsItem * parent)
+                         const Tool::Sources &typeCreation, QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, typeobject), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
@@ -41,7 +41,7 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                  Draw::Draws typeobject, const Document::Documents &parse,
-                                 Tool::Sources typeCreation)
+                                 const Tool::Sources &typeCreation)
 {
     VNodeSpline *spl = 0;
     if (parse == Document::FullParse)

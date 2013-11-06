@@ -34,7 +34,7 @@ const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, Tool::Sources typeCreation,
+VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
       sceneDetails(scene)
@@ -208,7 +208,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
 }
 
 void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)

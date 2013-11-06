@@ -95,7 +95,8 @@ QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
     return point;
 }
 
-qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1, QPointF &p2)
+qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
+                                          QPointF &p2)
 {
     const qreal eps = 1e-8;
     //коефіцієнти для рівняння відрізку
@@ -130,7 +131,7 @@ qint32 VAbstractTool::LineIntersectCircle(QPointF center, qreal radius, QLineF l
     return flag;
 }
 
-QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p)
+QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &p)
 {
     QLineF lineP2pointFrom = QLineF(line.p2(), p);
     qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
@@ -146,14 +147,14 @@ QPointF VAbstractTool::ClosestPoint(QLineF line, QPointF p)
     {
         if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection )
         {
-            Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
+            Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Don't have point of intersection.");
             return point;
         }
     }
     return point;
 }
 
-QPointF VAbstractTool::addVector(QPointF p, QPointF p1, QPointF p2, qreal k)
+QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k)
 {
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
@@ -172,7 +173,8 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     //коефіцієнти для рівняння відрізку
-    *a = line.p2().y() - line.p1().y();
-    *b = line.p1().x() - line.p2().x();
-    *c = - *a * line.p1().x() - *b * line.p1().y();
+    QPointF p1 = line.p1();
+    *a = line.p2().y() - p1.y();
+    *b = p1.x() - line.p2().x();
+    *c = - *a * p1.x() - *b * p1.y();
 }

@@ -72,7 +72,7 @@ QDomElement VDomDocument::elementById(const QString& id)
     return QDomElement();
 }
 
-bool VDomDocument::find(QDomElement node, const QString& id)
+bool VDomDocument::find(const QDomElement &node, const QString& id)
 {
     if (node.hasAttribute("id"))
     {
@@ -175,7 +175,7 @@ bool VDomDocument::appendDraw(const QString& name)
     return false;
 }
 
-void VDomDocument::ChangeActivDraw(const QString& name, Document::Documents parse)
+void VDomDocument::ChangeActivDraw(const QString& name, const Document::Documents &parse)
 {
     Q_ASSERT_X(name.isEmpty() == false, "ChangeActivDraw", "name draw is empty");
     if (CheckNameDraw(name) == true)
@@ -306,7 +306,8 @@ bool VDomDocument::GetActivNodeElement(const QString& name, QDomElement &element
     }
 }
 
-void VDomDocument::Parse(Document::Documents parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail)
+void VDomDocument::Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
+                         VMainGraphicsScene *sceneDetail)
 {
     Q_ASSERT(sceneDraw != 0);
     Q_ASSERT(sceneDetail != 0);
@@ -450,7 +451,7 @@ void VDomDocument::TestUniqueId() const
     CollectId(this->documentElement(), vector);
 }
 
-void VDomDocument::CollectId(QDomElement node, QVector<qint64> &vector) const
+void VDomDocument::CollectId(const QDomElement &node, QVector<qint64> &vector) const
 {
     if (node.hasAttribute("id"))
     {
@@ -503,7 +504,7 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphics
 }
 
 void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                 const QDomNode& node, const Document::Documents &parse, Draw::Draws mode)
+                                 const QDomNode& node, const Document::Documents &parse, const Draw::Draws &mode)
 {
     Q_ASSERT(sceneDraw != 0);
     Q_ASSERT(sceneDetail != 0);
@@ -702,7 +703,7 @@ void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomEleme
 }
 
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString& type, Draw::Draws mode)
+                                     const Document::Documents &parse, const QString& type, const Draw::Draws &mode)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1097,7 +1098,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                    const Document::Documents &parse, Draw::Draws mode)
+                                    const Document::Documents &parse, const Draw::Draws &mode)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1126,7 +1127,7 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
 }
 
 void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                      const Document::Documents &parse, const QString &type, Draw::Draws mode)
+                                      const Document::Documents &parse, const QString &type, const Draw::Draws &mode)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1278,7 +1279,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
 }
 
 void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                   const Document::Documents &parse, const QString &type, Draw::Draws mode)
+                                   const Document::Documents &parse, const QString &type, const Draw::Draws &mode)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");

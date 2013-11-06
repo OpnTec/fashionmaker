@@ -31,12 +31,12 @@ class VModelingLine: public VModelingTool, public QGraphicsLineItem
     Q_OBJECT
 public:
                           VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-                                        qint64 secondPoint, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                        qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void          setDialog();
     static VModelingLine* Create(QSharedPointer<DialogLine> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingLine* Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                  VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                 Tool::Sources typeCreation);
+                                 const Tool::Sources &typeCreation);
     static const QString  TagName;
     static const QString  ToolType;
 public slots:

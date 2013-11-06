@@ -32,7 +32,7 @@ VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *pa
     connect(this->doc, &VDomDocument::ShowTool, this, &VDrawTool::ShowTool);
 }
 
-void VDrawTool::AddRecord(const qint64 id, Tool::Tools toolType, VDomDocument *doc)
+void VDrawTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)
 {
     qint64 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
@@ -63,7 +63,7 @@ void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
     Q_UNUSED(enable);
 }
 
-void VDrawTool::ChangedActivDraw(const QString newName)
+void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
     {
@@ -75,7 +75,7 @@ void VDrawTool::ChangedActivDraw(const QString newName)
     }
 }
 
-void VDrawTool::ChangedNameDraw(const QString oldName, const QString newName)
+void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 {
     if (nameActivDraw == oldName)
     {

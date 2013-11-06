@@ -30,9 +30,9 @@ class VNodeArc :public VAbstractNode, public QGraphicsPathItem
     Q_OBJECT
 public:
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
-                          Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                          const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
-                        Draw::Draws typeobject, const Document::Documents &parse, Tool::Sources typeCreation);
+                        Draw::Draws typeobject, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:

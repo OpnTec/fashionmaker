@@ -31,7 +31,7 @@ class VToolNormal : public VToolLinePoint
 public:
                    VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                               const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                               const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static void    Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);
@@ -39,7 +39,7 @@ public:
                           const qint64 &secondPointId, const QString typeLine, const QString pointName,
                           const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                          Tool::Sources typeCreation);
+                          const Tool::Sources &typeCreation);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;

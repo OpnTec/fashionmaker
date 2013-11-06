@@ -26,7 +26,7 @@ const QString VModelingTriangle::ToolType = QStringLiteral("triangle");
 
 VModelingTriangle::VModelingTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                      const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                                     Tool::Sources typeCreation, QGraphicsItem *parent)
+                                     const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VModelingPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>())
 {
@@ -63,7 +63,7 @@ VModelingTriangle *VModelingTriangle::Create(const qint64 _id, const QString &po
                                              const qint64 &axisP2Id, const qint64 &firstPointId,
                                              const qint64 &secondPointId, const qreal &mx, const qreal &my,
                                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                             Tool::Sources typeCreation)
+                                             const Tool::Sources &typeCreation)
 {
     VModelingTriangle *tool = 0;
     VPointF axisP1 = data->GetPoint(axisP1Id);

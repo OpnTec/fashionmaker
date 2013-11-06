@@ -32,9 +32,10 @@ public:
                             VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual                 ~VAbstractTool() {}
     static QPointF          LineIntersectRect(QRectF rec, QLineF line);
-    static qint32           LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1, QPointF &p2);
-    static QPointF          ClosestPoint(QLineF line, QPointF p);
-    static QPointF          addVector (QPointF p, QPointF p1, QPointF p2, qreal k);
+    static qint32           LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
+                                                QPointF &p2);
+    static QPointF          ClosestPoint(const QLineF &line, const QPointF &p);
+    static QPointF          addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     inline qint64           getId() const {return id;}
     static void             LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
     static const QString    AttrId;

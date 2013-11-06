@@ -34,12 +34,12 @@ class DialogSinglePoint : public DialogTool
     Q_OBJECT
 public:
                    DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
-    void           setData(const QString name, const QPointF point);
+    void           setData(const QString &name, const QPointF &point);
     inline QString getName()const {return name;}
     inline QPointF getPoint()const {return point;}
                    ~DialogSinglePoint();
 public slots:
-    void           mousePress(QPointF scenePos);
+    void           mousePress(const QPointF &scenePos);
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogSinglePoint)

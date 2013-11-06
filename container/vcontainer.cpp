@@ -613,7 +613,7 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
     return 0;
 }
 
-void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId, Draw::Draws mode)
+void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId, const Draw::Draws &mode)
 {
     QString nameLine = GetNameLine(firstPointId, secondPointId, mode);
     VPointF first;
@@ -671,7 +671,7 @@ qint64 VContainer::AddObject(QHash<key, val> &obj, const val& value)
     return id;
 }
 
-QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint, Draw::Draws mode) const
+QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
 {
     VPointF first;
     VPointF second;
@@ -688,7 +688,7 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
     return QString("Line_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint, Draw::Draws mode) const
+QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
 {
     VPointF first;
     VPointF second;
@@ -705,7 +705,7 @@ QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &sec
     return QString("AngleLine_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint, Draw::Draws mode) const
+QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
 {
     VPointF first;
     VPointF second;
@@ -722,7 +722,7 @@ QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &second
     return QString("Spl_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameSplinePath(const VSplinePath &path, Draw::Draws mode) const
+QString VContainer::GetNameSplinePath(const VSplinePath &path, const Draw::Draws &mode) const
 {
     if (path.Count() == 0)
     {
@@ -750,7 +750,7 @@ QString VContainer::GetNameSplinePath(const VSplinePath &path, Draw::Draws mode)
     return name;
 }
 
-QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, Draw::Draws mode) const
+QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, const Draw::Draws &mode) const
 {
     VPointF centerPoint;
     if (mode == Draw::Calculation)

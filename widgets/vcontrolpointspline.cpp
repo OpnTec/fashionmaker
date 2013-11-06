@@ -69,7 +69,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
     return QGraphicsItem::itemChange(change, value);
 }
 
-qint32 VControlPointSpline::LineIntersectCircle(QPointF center, qreal radius, QLineF line, QPointF &p1,
+qint32 VControlPointSpline::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                                 QPointF &p2) const
 {
     const qreal eps = 1e-8;
@@ -107,7 +107,7 @@ qint32 VControlPointSpline::LineIntersectCircle(QPointF center, qreal radius, QL
     return flag;
 }
 
-QPointF VControlPointSpline::ClosestPoint(QLineF line, QPointF p) const
+QPointF VControlPointSpline::ClosestPoint(const QLineF &line, const QPointF &p) const
 {
     QLineF lineP2pointFrom = QLineF(line.p2(), p);
     qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
@@ -130,7 +130,7 @@ QPointF VControlPointSpline::ClosestPoint(QLineF line, QPointF p) const
     return point;
 }
 
-QPointF VControlPointSpline::addVector(QPointF p, QPointF p1, QPointF p2, qreal k) const
+QPointF VControlPointSpline::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) const
 {
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }

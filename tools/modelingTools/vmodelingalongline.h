@@ -32,13 +32,13 @@ public:
                                VModelingAlongLine(VDomDocument *doc, VContainer *data, qint64 id,
                                                   const QString &formula, const qint64 &firstPointId,
                                                   const qint64 &secondPointId, const QString &typeLine,
-                                                  Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                                  const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void               setDialog();
     static VModelingAlongLine* Create(QSharedPointer<DialogAlongLine> &dialog, VDomDocument *doc, VContainer *data);
     static VModelingAlongLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                       const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                                       const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
-                                      const Document::Documents &parse, Tool::Sources typeCreation);
+                                      const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void               FullUpdateFromFile();

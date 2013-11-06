@@ -26,7 +26,7 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
 
 VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                         const qint64 &secondPointId, Tool::Sources typeCreation, QGraphicsItem *parent)
+                         const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>())
 {
@@ -67,7 +67,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                          const qint64 &secondPointId, const QString typeLine, const QString pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                         Tool::Sources typeCreation)
+                         const Tool::Sources &typeCreation)
 {
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);

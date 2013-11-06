@@ -25,7 +25,7 @@
 const QString VModelingSpline::TagName = QStringLiteral("spline");
 const QString VModelingSpline::ToolType = QStringLiteral("simple");
 
-VModelingSpline::VModelingSpline(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VModelingSpline::VModelingSpline(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                  QGraphicsItem *parent)
     :VModelingTool(doc, data, id), QGraphicsPathItem(parent),
     dialogSpline(QSharedPointer<DialogSpline>()), controlPoints(QVector<VControlPointSpline *>())
@@ -91,7 +91,7 @@ VModelingSpline *VModelingSpline::Create(QSharedPointer<DialogSpline> &dialog, V
 VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4,
                                          const qreal &kAsm1, const qreal kAsm2, const qreal &angle1,
                                          const qreal &angle2, const qreal &kCurve, VDomDocument *doc,
-                                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+                                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingSpline *spl = 0;
     VSpline spline = VSpline(data->DataModelingPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);

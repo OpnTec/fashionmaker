@@ -45,8 +45,8 @@ private:
     VDetail          details;
     bool             supplement;
     bool             closed;
-    void             NewItem(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
-                             qreal mx = 0, qreal my = 0);
+    void             NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::Draws &mode,
+                             const NodeDetail::NodeDetails &typeNode, qreal mx = 0, qreal my = 0);
 };
 
 #endif // DIALOGDETAIL_H

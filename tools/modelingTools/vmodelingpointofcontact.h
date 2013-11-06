@@ -32,7 +32,7 @@ public:
                                     VModelingPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                             const QString &radius, const qint64 &center,
                                                             const qint64 &firstPointId, const qint64 &secondPointId,
-                                                            Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                                                            const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void                    setDialog();
     static VModelingPointOfContact* Create(QSharedPointer<DialogPointOfContact> &dialog, VDomDocument *doc,
                                            VContainer *data);
@@ -40,7 +40,7 @@ public:
                                            const qint64 &firstPointId, const qint64 &secondPointId,
                                            const QString &pointName, const qreal &mx, const qreal &my,
                                            VDomDocument *doc, VContainer *data,
-                                           const Document::Documents &parse, Tool::Sources typeCreation);
+                                           const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void                    FullUpdateFromFile();

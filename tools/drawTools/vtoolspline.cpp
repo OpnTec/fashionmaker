@@ -25,7 +25,7 @@
 const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
-VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                          QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogSpline(QSharedPointer<DialogSpline>()),
       controlPoints(QVector<VControlPointSpline *>())
@@ -93,7 +93,7 @@ void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScen
 void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                         const Document::Documents &parse, Tool::Sources typeCreation)
+                         const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VSpline spline = VSpline(data->DataPoints(), p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve);
     qint64 id = _id;
@@ -271,7 +271,7 @@ void VToolSpline::RefreshGeometry()
 }
 
 
-void VToolSpline::ChangedActivDraw(const QString newName)
+void VToolSpline::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
     if (nameActivDraw == newName)

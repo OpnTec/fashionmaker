@@ -25,7 +25,7 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
 
 VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
-                         Tool::Sources typeCreation, QGraphicsItem * parent)
+                         const Tool::Sources &typeCreation, QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent),
       dialogHeight(QSharedPointer<DialogHeight>()), p1LineId(p1LineId), p2LineId(p2LineId)
 {
@@ -63,7 +63,7 @@ void VToolHeight::Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScen
 void VToolHeight::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation)
+                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VPointF basePoint = data->GetPoint(basePointId);
     VPointF p1Line = data->GetPoint(p1LineId);

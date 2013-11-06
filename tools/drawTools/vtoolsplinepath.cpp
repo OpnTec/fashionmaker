@@ -24,7 +24,7 @@
 const QString VToolSplinePath::TagName = QStringLiteral("spline");
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
-VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, Tool::Sources typeCreation,
+VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                  QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>())
@@ -84,7 +84,7 @@ void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGrap
 
 void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene *scene,
                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                             Tool::Sources typeCreation)
+                             const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
@@ -211,7 +211,7 @@ void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path)
     }
 }
 
-void VToolSplinePath::ChangedActivDraw(const QString newName)
+void VToolSplinePath::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
     if (nameActivDraw == newName)

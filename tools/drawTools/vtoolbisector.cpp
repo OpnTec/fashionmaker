@@ -26,7 +26,7 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
 
 VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id,
                              const QString &typeLine, const QString &formula, const qint64 &firstPointId,
-                             const qint64 &secondPointId, const qint64 &thirdPointId, Tool::Sources typeCreation,
+                             const qint64 &secondPointId, const qint64 &thirdPointId, const Tool::Sources &typeCreation,
                              QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0),
     thirdPointId(0), dialogBisector(QSharedPointer<DialogBisector>())
@@ -88,7 +88,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                            const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                           const Document::Documents &parse, Tool::Sources typeCreation)
+                           const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VPointF firstPoint = data->GetPoint(firstPointId);
     VPointF secondPoint = data->GetPoint(secondPointId);

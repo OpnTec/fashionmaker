@@ -31,14 +31,14 @@ class VToolHeight: public VToolLinePoint
 public:
                    VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
-                               Tool::Sources typeCreation, QGraphicsItem * parent = 0);
+                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static void    Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
     static void    Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
-                          VContainer *data, const Document::Documents &parse, Tool::Sources typeCreation);
+                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
 public slots:
