@@ -48,7 +48,7 @@ public:
     inline qint64    getSecondPointId() const {return secondPointId;}
     void             setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void     DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogNormal)

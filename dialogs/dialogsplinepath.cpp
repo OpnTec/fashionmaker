@@ -67,7 +67,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 }
 
 
-void DialogSplinePath::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

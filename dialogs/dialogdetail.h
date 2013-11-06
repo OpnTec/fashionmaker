@@ -33,7 +33,7 @@ public:
     inline VDetail   getDetails() const {return details;}
     void             setDetails(const VDetail &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void     DialogAccepted();
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);

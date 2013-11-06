@@ -43,7 +43,7 @@ DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *pa
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 }
 
-void DialogDetail::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

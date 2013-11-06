@@ -82,7 +82,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogEndLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

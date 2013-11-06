@@ -73,7 +73,7 @@ DialogShoulderPoint::~DialogShoulderPoint()
     delete ui;
 }
 
-void DialogShoulderPoint::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

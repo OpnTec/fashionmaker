@@ -107,7 +107,7 @@ void DialogArc::SetRadius(const QString &value)
     ui->lineEditRadius->setText(radius);
 }
 
-void DialogArc::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogArc::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

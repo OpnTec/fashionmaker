@@ -46,7 +46,7 @@ public:
     inline qint64     getBasePointId() const {return basePointId;}
     void              setBasePointId(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void      ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogEndLine)

@@ -76,7 +76,7 @@ void DialogHeight::setP2LineId(const qint64 &value, const qint64 &id)
     setCurrentPointId(ui->comboBoxP2Line, p2LineId, value, id);
 }
 
-void DialogHeight::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

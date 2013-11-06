@@ -254,7 +254,7 @@ void DialogTool::CheckState()
     bOk->setEnabled(flagFormula && flagName);
 }
 
-void DialogTool::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogTool::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);

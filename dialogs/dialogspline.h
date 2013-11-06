@@ -50,7 +50,7 @@ public:
     inline qreal  getKCurve() const {return kCurve;}
     void          setKCurve(const qreal &value);
 public slots:
-    virtual void  ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void  ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void  DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogSpline)

@@ -72,7 +72,7 @@ DialogAlongLine::~DialogAlongLine()
     delete ui;
 }
 
-void DialogAlongLine::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogAlongLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

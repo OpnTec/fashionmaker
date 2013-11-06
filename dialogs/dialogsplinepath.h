@@ -40,7 +40,7 @@ public:
     inline VSplinePath GetPath() const {return path;}
     void               SetPath(const VSplinePath &value);
 public slots:
-    virtual void       ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void       ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void       DialogAccepted();
     void               PointChenged(int row);
     void               currentPointChanged( int index );

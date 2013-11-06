@@ -37,7 +37,7 @@ signals:
     void             DialogClosed(int result);
     void             ToolTip(const QString &toolTip);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     virtual void     DialogRejected();

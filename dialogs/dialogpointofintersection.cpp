@@ -50,7 +50,7 @@ void DialogPointOfIntersection::setSecondPointId(const qint64 &value, const qint
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogPointOfIntersection::ChoosedObject(qint64 id, Scene::Scenes type)
+void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (idDetail == 0 && mode == Draw::Modeling)
     {

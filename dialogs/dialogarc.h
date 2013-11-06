@@ -44,7 +44,7 @@ public:
     inline QString   GetF2() const {return f2;}
     void             SetF2(const QString &value);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void     DialogAccepted();
     virtual void     ValChenged(int row);
     void             PutRadius();
