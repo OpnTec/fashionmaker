@@ -2,13 +2,92 @@ HEADERS += \
     tools/vtooldetail.h \
     tools/vdatatool.h \
     tools/vabstracttool.h \
-    tools/tools.h
+    tools/tools.h \
+    tools/drawTools/vtooltriangle.h \
+    tools/drawTools/vtoolsplinepath.h \
+    tools/drawTools/vtoolspline.h \
+    tools/drawTools/vtoolsinglepoint.h \
+    tools/drawTools/vtoolshoulderpoint.h \
+    tools/drawTools/vtoolpointofintersection.h \
+    tools/drawTools/vtoolpointofcontact.h \
+    tools/drawTools/vtoolpoint.h \
+    tools/drawTools/vtoolnormal.h \
+    tools/drawTools/vtoollinepoint.h \
+    tools/drawTools/vtoollineintersect.h \
+    tools/drawTools/vtoolline.h \
+    tools/drawTools/vtoolheight.h \
+    tools/drawTools/vtoolendline.h \
+    tools/drawTools/vtoolbisector.h \
+    tools/drawTools/vtoolarc.h \
+    tools/drawTools/vtoolalongline.h \
+    tools/drawTools/vdrawtool.h \
+    tools/drawTools/drawtools.h \
+    tools/modelingTools/vmodelingtriangle.h \
+    tools/modelingTools/vmodelingtool.h \
+    tools/modelingTools/vmodelingsplinepath.h \
+    tools/modelingTools/vmodelingspline.h \
+    tools/modelingTools/vmodelingshoulderpoint.h \
+    tools/modelingTools/vmodelingpointofintersection.h \
+    tools/modelingTools/vmodelingpointofcontact.h \
+    tools/modelingTools/vmodelingpoint.h \
+    tools/modelingTools/vmodelingnormal.h \
+    tools/modelingTools/vmodelinglinepoint.h \
+    tools/modelingTools/vmodelinglineintersect.h \
+    tools/modelingTools/vmodelingline.h \
+    tools/modelingTools/vmodelingheight.h \
+    tools/modelingTools/vmodelingendline.h \
+    tools/modelingTools/vmodelingbisector.h \
+    tools/modelingTools/vmodelingarc.h \
+    tools/modelingTools/vmodelingalongline.h \
+    tools/modelingTools/modelingtools.h \
+    tools/nodeDetails/vnodesplinepath.h \
+    tools/nodeDetails/vnodespline.h \
+    tools/nodeDetails/vnodepoint.h \
+    tools/nodeDetails/vnodearc.h \
+    tools/nodeDetails/vabstractnode.h \
+    tools/nodeDetails/nodedetails.h
 
 SOURCES += \
     tools/vtooldetail.cpp \
     tools/vdatatool.cpp \
-    tools/vabstracttool.cpp
-
-include(drawTools/drawTools.pri)
-include(modelingTools/modelingTools.pri)
-include(nodeDetails/nodeDetails.pri)
+    tools/vabstracttool.cpp \
+    tools/drawTools/vtooltriangle.cpp \
+    tools/drawTools/vtoolsplinepath.cpp \
+    tools/drawTools/vtoolspline.cpp \
+    tools/drawTools/vtoolsinglepoint.cpp \
+    tools/drawTools/vtoolshoulderpoint.cpp \
+    tools/drawTools/vtoolpointofintersection.cpp \
+    tools/drawTools/vtoolpointofcontact.cpp \
+    tools/drawTools/vtoolpoint.cpp \
+    tools/drawTools/vtoolnormal.cpp \
+    tools/drawTools/vtoollinepoint.cpp \
+    tools/drawTools/vtoollineintersect.cpp \
+    tools/drawTools/vtoolline.cpp \
+    tools/drawTools/vtoolheight.cpp \
+    tools/drawTools/vtoolendline.cpp \
+    tools/drawTools/vtoolbisector.cpp \
+    tools/drawTools/vtoolarc.cpp \
+    tools/drawTools/vtoolalongline.cpp \
+    tools/drawTools/vdrawtool.cpp \
+    tools/modelingTools/vmodelingtriangle.cpp \
+    tools/modelingTools/vmodelingtool.cpp \
+    tools/modelingTools/vmodelingsplinepath.cpp \
+    tools/modelingTools/vmodelingspline.cpp \
+    tools/modelingTools/vmodelingshoulderpoint.cpp \
+    tools/modelingTools/vmodelingpointofintersection.cpp \
+    tools/modelingTools/vmodelingpointofcontact.cpp \
+    tools/modelingTools/vmodelingpoint.cpp \
+    tools/modelingTools/vmodelingnormal.cpp \
+    tools/modelingTools/vmodelinglinepoint.cpp \
+    tools/modelingTools/vmodelinglineintersect.cpp \
+    tools/modelingTools/vmodelingline.cpp \
+    tools/modelingTools/vmodelingheight.cpp \
+    tools/modelingTools/vmodelingendline.cpp \
+    tools/modelingTools/vmodelingbisector.cpp \
+    tools/modelingTools/vmodelingarc.cpp \
+    tools/modelingTools/vmodelingalongline.cpp \
+    tools/nodeDetails/vnodesplinepath.cpp \
+    tools/nodeDetails/vnodespline.cpp \
+    tools/nodeDetails/vnodepoint.cpp \
+    tools/nodeDetails/vnodearc.cpp \
+    tools/nodeDetails/vabstractnode.cpp
