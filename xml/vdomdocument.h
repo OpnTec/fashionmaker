@@ -35,8 +35,10 @@ namespace Document
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 class VDomDocument : public QObject, public QDomDocument
 {
     Q_OBJECT
@@ -116,6 +118,8 @@ private:
     void           CollectId(QDomElement node, QVector<qint64> &vector)const;
 };
 
-#pragma GCC diagnostic pop
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VDOMDOCUMENT_H
