@@ -31,7 +31,7 @@ public:
                     VExceptionObjectError(const VExceptionObjectError &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
                           moreInfo(e.MoreInformation()){}
-    virtual         ~VExceptionObjectError() noexcept(true) {}
+    virtual         ~VExceptionObjectError() Q_DECL_NOEXCEPT_EXPR(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     inline QString  TagText() const {return tagText;}

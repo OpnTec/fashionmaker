@@ -30,7 +30,7 @@ public:
                     VExceptionUniqueId(const QString &what, const QDomElement &domElement);
                     VExceptionUniqueId(const VExceptionUniqueId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionUniqueId() noexcept(true){}
+    virtual         ~VExceptionUniqueId() Q_DECL_NOEXCEPT_EXPR(true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     inline QString  TagText() const {return tagText;}

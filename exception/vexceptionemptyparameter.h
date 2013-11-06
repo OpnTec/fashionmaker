@@ -31,7 +31,7 @@ public:
                     VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
                         :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
                           lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionEmptyParameter() noexcept(true) {}
+    virtual         ~VExceptionEmptyParameter() Q_DECL_NOEXCEPT_EXPR(true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     inline QString  Name() const {return name;}

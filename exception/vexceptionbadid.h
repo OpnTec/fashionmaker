@@ -33,7 +33,7 @@ public:
                         :VException(what), id(0), key(key){}
                     VExceptionBadId(const VExceptionBadId &e)
                         :VException(e), id(e.BadId()), key(e.BadKey()){}
-    virtual         ~VExceptionBadId() noexcept(true){}
+    virtual         ~VExceptionBadId() Q_DECL_NOEXCEPT_EXPR(true){}
     virtual QString ErrorMessage() const;
     inline qint64   BadId() const {return id; }
     inline QString  BadKey() const {return key; }

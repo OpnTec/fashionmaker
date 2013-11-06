@@ -30,7 +30,7 @@ public:
                     VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
                     VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionWrongParameterId() noexcept(true){}
+    virtual         ~VExceptionWrongParameterId() Q_DECL_NOEXCEPT_EXPR(true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     inline QString  TagText() const {return tagText;}

@@ -29,8 +29,8 @@ class VException : public QException
 {
 public:
                       VException(const QString &what);
-                      VException(const VException &e):what(e.What()){}
-    virtual           ~VException() noexcept(true){}
+                      VException(const VException &e):what(e.What()){}                
+    virtual           ~VException() Q_DECL_NOEXCEPT_EXPR(true){}
     inline void       raise() const { throw *this; }
     inline VException *clone() const { return new VException(*this); }
     virtual QString   ErrorMessage() const;

@@ -30,7 +30,7 @@ public:
                     VExceptionConversionError(const QString &what, const QString &str);
                     VExceptionConversionError(const VExceptionConversionError &e)
                         :VException(e), str(e.String()){}
-    virtual         ~VExceptionConversionError() noexcept(true) {}
+    virtual         ~VExceptionConversionError() Q_DECL_NOEXCEPT_EXPR(true) {}
     virtual QString ErrorMessage() const;
     inline QString  String() const {return str;}
 protected:
