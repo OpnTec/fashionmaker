@@ -32,7 +32,8 @@ public:
                                    VModelingLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                           const qint64 &p1Line1, const qint64 &p2Line1,
                                                           const qint64 &p1Line2, const qint64 &p2Line2,
-                                                          const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                                          const Tool::Sources &typeCreation,
+                                                          QGraphicsItem * parent = 0);
     virtual void                   setDialog();
     static VModelingLineIntersect* Create(QSharedPointer<DialogLineIntersect> &dialog, VDomDocument *doc,
                                           VContainer *data);

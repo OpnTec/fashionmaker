@@ -36,7 +36,8 @@ public:
      virtual void setDialog();
      static VModelingSplinePath* Create(QSharedPointer<DialogSplinePath> &dialog, VDomDocument *doc, VContainer *data);
      static VModelingSplinePath* Create(const qint64 _id, const VSplinePath &path, VDomDocument *doc,
-                                        VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+                                        VContainer *data, const Document::Documents &parse,
+                                        const Tool::Sources &typeCreation);
      static const QString TagName;
      static const QString ToolType;
 signals:

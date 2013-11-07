@@ -39,7 +39,8 @@ public:
     static VModelingBisector* Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                                      const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                                      const QString &pointName, const qreal &mx, const qreal &my, VDomDocument *doc,
-                                     VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+                                     VContainer *data, const Document::Documents &parse,
+                                     const Tool::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void              FullUpdateFromFile();

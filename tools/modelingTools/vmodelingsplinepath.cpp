@@ -24,8 +24,8 @@
 const QString VModelingSplinePath::TagName = QStringLiteral("spline");
 const QString VModelingSplinePath::ToolType = QStringLiteral("path");
 
-VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
-                                 QGraphicsItem *parent)
+VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
+                                         const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VModelingTool(doc, data, id), QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
     controlPoints(QVector<VControlPointSpline *>())
 {

@@ -30,7 +30,8 @@ class VToolShoulderPoint : public VToolLinePoint
 public:
                    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                       const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
-                                      const qint64 &pShoulder, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                      const qint64 &pShoulder, const Tool::Sources &typeCreation,
+                                      QGraphicsItem * parent = 0);
     virtual void   setDialog();
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);

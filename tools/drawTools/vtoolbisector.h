@@ -30,7 +30,8 @@ class VToolBisector : public VToolLinePoint
 public:
                    VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                  const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
-                                 const qint64 &thirdPointId, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                 const qint64 &thirdPointId, const Tool::Sources &typeCreation,
+                                 QGraphicsItem * parent = 0);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
     virtual void   setDialog();

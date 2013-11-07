@@ -59,9 +59,9 @@ VModelingArc* VModelingArc::Create(QSharedPointer<DialogArc> &dialog, VDomDocume
     return Create(0, center, radius, f1, f2, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius,
-                                   const QString &f1, const QString &f2, VDomDocument *doc,
-                                   VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
+                                   const QString &f2, VDomDocument *doc, VContainer *data,
+                                   const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingArc *toolArc = 0;
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
