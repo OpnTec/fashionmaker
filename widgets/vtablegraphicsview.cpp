@@ -50,9 +50,11 @@ void VTableGraphicsView::MirrorItem()
     {
         for ( qint32 i = 0; i < list.count(); ++i )
         {
-            QRectF itemRectOld = list.at(i)->sceneBoundingRect();
+            QGraphicsItem *item = list.at(i);
+            Q_ASSERT(item != 0);
+            QRectF itemRectOld = item->sceneBoundingRect();
             //Get the current transform
-            QTransform transform(list.at(i)->transform());
+            QTransform transform(item->transform());
 
             qreal m11 = transform.m11();    // Horizontal scaling
             qreal m12 = transform.m12();    // Vertical shearing
@@ -71,12 +73,12 @@ void VTableGraphicsView::MirrorItem()
             transform.setMatrix(m11, m12, m13, m21, m22, m23, m31, m32, m33);
 
             // Set the items transformation
-            list.at(i)->setTransform(transform);
-            QRectF itemRectNew = list.at(i)->sceneBoundingRect();
+            item->setTransform(transform);
+            QRectF itemRectNew = item->sceneBoundingRect();
             qreal dx, dy;
             dx = itemRectOld.center().x()-itemRectNew.center().x();
             dy = itemRectOld.center().y()-itemRectNew.center().y();
-            list.at(i)->moveBy(dx, dy);
+            item->moveBy(dx, dy);
         }
     }
 }
@@ -154,8 +156,10 @@ void VTableGraphicsView::rotateIt()
     {
         for ( qint32 i = 0; i < list.count(); ++i )
         {
-            list.at(i)->setTransformOriginPoint(list.at(i)->boundingRect().center());
-            list.at(i)->setRotation(list.at(i)->rotation() + 180);
+            QGraphicsItem *item = list.at(i);
+            Q_ASSERT(item != 0);
+            item->setTransformOriginPoint(item->boundingRect().center());
+            item->setRotation(item->rotation() + 180);
         }
     }
 }

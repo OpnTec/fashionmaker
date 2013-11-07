@@ -39,8 +39,8 @@ public:
                           const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
                           VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                           const Document::Documents &parse, const Tool::Sources &typeCreation);
-    static QPointF FindPoint(const QPointF axisP1, const QPointF axisP2, const QPointF firstPoint,
-                              const QPointF secondPoint);
+    static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                             const QPointF &secondPoint);
     static const QString ToolType;
 public slots:
     virtual void   FullUpdateFromFile();

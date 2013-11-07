@@ -79,7 +79,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
             return;
         }
         VDetail det = data->GetDetail(idDetail);
-        for (qint32 i = 0; i< det.CountNode(); ++i)
+        for (ptrdiff_t i = 0; i< det.CountNode(); ++i)
         {
             if (det[i].getTypeTool() == Tool::NodePoint ||
                 det[i].getTypeTool() == Tool::AlongLineTool ||

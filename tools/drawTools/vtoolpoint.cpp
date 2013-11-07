@@ -36,7 +36,7 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
     RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
-void VToolPoint::NameChangePosition(const QPointF pos)
+void VToolPoint::NameChangePosition(const QPointF &pos)
 {
     VPointF point = VAbstractTool::data.GetPoint(id);
     QPointF p = pos - this->pos();

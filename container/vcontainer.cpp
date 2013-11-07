@@ -163,7 +163,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
     VDetail detail = GetDetail(idDetail);
     QVector<QPointF> points;
     QVector<QPointF> pointsEkv;
-    for (qint32 i = 0; i< detail.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail[i].getTypeTool())
         {

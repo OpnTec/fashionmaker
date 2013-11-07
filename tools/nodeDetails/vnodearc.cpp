@@ -39,7 +39,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
     }
 }
 
-void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
+void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Draw::Draws &typeobject,
                       const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)

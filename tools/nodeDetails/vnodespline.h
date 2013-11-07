@@ -31,8 +31,9 @@ class VNodeSpline:public VAbstractNode, public QGraphicsPathItem
 public:
                   VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
-    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
-                               const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+                               const Draw::Draws &typeobject, const Document::Documents &parse,
+                               const Tool::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:

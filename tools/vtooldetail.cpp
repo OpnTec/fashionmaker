@@ -40,7 +40,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
       sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
-    for (qint32 i = 0; i< detail.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail[i].getTypeTool())
         {
@@ -127,7 +127,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
 {
     VDetail detail = dialog->getDetails();
     VDetail det;
-    for (qint32 i = 0; i< detail.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         qint64 id = 0;
         switch (detail[i].getTypeTool())
@@ -252,7 +252,7 @@ void VToolDetail::FullUpdateFromGui(int result)
             domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
             domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
             RemoveAllChild(domElement);
-            for (qint32 i = 0; i < det.CountNode(); ++i)
+            for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
             {
                AddNode(domElement, det[i]);
             }
@@ -275,7 +275,7 @@ void VToolDetail::AddToFile()
     AddAttribute(domElement, AttrClosed, detail.getClosed());
     AddAttribute(domElement, AttrWidth, detail.getWidth());
 
-    for (qint32 i = 0; i < detail.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
        AddNode(domElement, detail[i]);
     }
@@ -371,7 +371,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolDetail::RemoveReferens()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    for (qint32 i = 0; i< detail.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         doc->DecrementReferens(detail[i].getId());
     }

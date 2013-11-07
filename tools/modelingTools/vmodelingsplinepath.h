@@ -47,7 +47,7 @@ public slots:
     virtual void  FullUpdateFromFile();
     virtual void  FullUpdateFromGui(int result);
     void          ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
-                                             const QPointF pos);
+                                             const QPointF &pos);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void  AddToFile();

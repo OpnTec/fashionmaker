@@ -163,7 +163,7 @@ void VModelingSpline::FullUpdateFromGui(int result)
 }
 
 void VModelingSpline::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
-                                                 const QPointF pos)
+                                                 const QPointF &pos)
 {
     Q_UNUSED(indexSpline);
     VSpline spl = VAbstractTool::data.GetModelingSpline(id);

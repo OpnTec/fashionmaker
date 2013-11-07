@@ -38,7 +38,7 @@ VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, Q
     RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
 }
 
-void VModelingPoint::NameChangePosition(const QPointF pos)
+void VModelingPoint::NameChangePosition(const QPointF &pos)
 {
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QPointF p = pos - this->pos();

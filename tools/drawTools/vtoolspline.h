@@ -50,8 +50,8 @@ signals:
 public slots:
     virtual void FullUpdateFromFile ();
     virtual void FullUpdateFromGui ( int result );
-    void         ControlPointChangePosition ( const qint32 &indexSpline, SplinePoint::Position position,
-                                              const QPointF pos);
+    void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePoint::Position &position,
+                                             const QPointF &pos);
     virtual void ChangedActivDraw ( const QString &newName );
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     virtual void SetFactor(qreal factor);

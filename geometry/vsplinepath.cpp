@@ -32,7 +32,7 @@ VSplinePath::VSplinePath(const VSplinePath &splPath)
     : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
     idObject(splPath.getIdObject()){}
 
-void VSplinePath::append(VSplinePoint point)
+void VSplinePath::append(const VSplinePoint &point)
 {
     path.append(point);
 }
@@ -104,7 +104,7 @@ qreal VSplinePath::GetLength() const
     return length;
 }
 
-void VSplinePath::UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point)
+void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &pos, const VSplinePoint &point)
 {
     if (indexSpline < 1 || indexSpline > Count())
     {

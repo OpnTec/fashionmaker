@@ -44,7 +44,7 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     }
 }
 
-void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
+void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, const Draw::Draws &typeobject,
                         const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)
@@ -109,7 +109,7 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 
-void VNodePoint::NameChangePosition(const QPointF pos)
+void VNodePoint::NameChangePosition(const QPointF &pos)
 {
     VPointF point = VAbstractTool::data.GetModelingPoint(id);
     QPointF p = pos - this->pos();

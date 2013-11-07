@@ -79,7 +79,8 @@ public:
      * @param p3 друга контролююча точка сплайну.
      * @param p4 кінцева точка сплайну.
      */
-    void           ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCurve);
+    void           ModifiSpl (const qint64 &p1, const QPointF &p2, const QPointF &p3, const qint64 &p4,
+                              const qreal &kCurve);
     /**
      * @brief RotationSpl поворот сплайна навколо точки на кут в градусах проти годиникової стрілки.
      * @param pRotate точка навколо якої повертаємо.
@@ -178,8 +179,8 @@ public:
 //    void         Mirror(const QPointF Pmirror);
     inline Draw::Draws getMode() const {return mode;}
     inline void    setMode(const Draw::Draws &value) {mode = value;}
-    static QVector<QPointF> SplinePoints(QPointF p1, QPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
-                                         qreal kCurve);
+    static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
+                                         qreal kAsm2, qreal kCurve);
     inline qint64  getIdObject() const {return idObject;}
     inline void    setIdObject(const qint64 &value) {idObject = value;}
     VSpline        &operator=(const VSpline &spl);
@@ -192,7 +193,7 @@ protected:
      * @param p4 кінцева точка сплайну.
      * @return список точок.
      */
-    static QVector<QPointF> GetPoints ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 );
+    static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
     /**
      * @brief p1 початкова точка сплайну
@@ -232,7 +233,7 @@ private:
      * @param p4 кінцева точка сплайну.
      * @return дожина сплайну.
      */
-    qreal          LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) const;
+    qreal          LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const;
     /**
      * @brief PointBezier_r знаходить точки сплайну по його чотирьом точках.
      * @param x1 х координата першої точки сплайну.

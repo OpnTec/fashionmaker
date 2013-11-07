@@ -156,8 +156,8 @@ void VToolSplinePath::FullUpdateFromGui(int result)
     dialogSplinePath.clear();
 }
 
-void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
-                                                 const QPointF pos)
+void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
+                                                 const QPointF &pos)
 {
     VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
     VSpline spl = splPath.GetSpline(indexSpline);

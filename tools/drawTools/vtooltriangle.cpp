@@ -101,8 +101,8 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
     }
 }
 
-QPointF VToolTriangle::FindPoint(const QPointF axisP1, const QPointF axisP2, const QPointF firstPoint,
-                                 const QPointF secondPoint)
+QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                                 const QPointF &secondPoint)
 {
     qreal c = QLineF(firstPoint, secondPoint).length();
     qreal a = QLineF(axisP2, firstPoint).length();

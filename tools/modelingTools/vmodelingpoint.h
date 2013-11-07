@@ -33,7 +33,7 @@ public:
     virtual                 ~VModelingPoint() {}
     static const QString    TagName;
 public slots:
-    void                    NameChangePosition(const QPointF pos);
+    void                    NameChangePosition(const QPointF &pos);
     virtual void            FullUpdateFromGui(int result) = 0;
 protected:
     qreal                   radius;

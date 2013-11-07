@@ -40,7 +40,7 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 }
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 Draw::Draws typeobject, const Document::Documents &parse,
+                                 const Draw::Draws &typeobject, const Document::Documents &parse,
                                  const Tool::Sources &typeCreation)
 {
     VNodeSpline *spl = 0;

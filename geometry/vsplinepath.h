@@ -55,7 +55,7 @@ public:
      * @brief append додає точку сплайну до шляху.
      * @param point точка.
      */
-    void          append(VSplinePoint point);
+    void          append(const VSplinePoint &point);
     qint32        Count() const;
     inline qint32 CountPoint() const {return path.size();}
     VSpline       GetSpline(qint32 index) const;
@@ -64,7 +64,7 @@ public:
     inline QVector<VSplinePoint> GetSplinePath() const {return path;}
     qreal         GetLength() const;
     inline QHash<qint64, VPointF> GetDataPoints() const {return points;}
-    void          UpdatePoint(qint32 indexSpline, SplinePoint::Position pos, VSplinePoint point);
+    void          UpdatePoint(qint32 indexSpline, const SplinePoint::Position &pos, const VSplinePoint &point);
     VSplinePoint  GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
     /**
      * @brief Clear очищає шлях сплайнів.

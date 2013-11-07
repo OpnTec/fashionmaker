@@ -76,7 +76,7 @@ void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
     this->p3 = p4p3.p2();
 }
 
-void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCurve)
+void VSpline::ModifiSpl (const qint64 &p1, const QPointF &p2, const QPointF &p3, const qint64 &p4, const qreal &kCurve)
 {
     this->p1 = p1;
     this->p2 = p2;
@@ -278,7 +278,7 @@ QVector<QPointF> VSpline::GetPoints () const
 //    }
 }
 
-QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4)
+QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
 {
     QVector<QPointF> pvector;
     QVector<qreal> x;
@@ -298,7 +298,7 @@ QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF
     return pvector;
 }
 
-qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) const
+qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const
 {
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);
@@ -351,8 +351,8 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     double dx = x4-x1;
     double dy = y4-y1;
     
-    double d2 = fabs(((x2 - x4) * dy - (y2 - y4) * dx));
-    double d3 = fabs(((x3 - x4) * dy - (y3 - y4) * dx));
+    double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
+    double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
     double da1, da2, k;
     
     switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
@@ -747,7 +747,7 @@ QPainterPath VSpline::GetPath() const
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
 
-QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qreal angle2, qreal kAsm1,
+QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                        qreal kAsm2, qreal kCurve)
 {
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());

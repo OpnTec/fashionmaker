@@ -188,7 +188,7 @@ void DialogDetail::setDetails(const VDetail &value)
 {
     details = value;
     ui.listWidget->clear();
-    for (qint32 i = 0; i < details.CountNode(); ++i)
+    for (ptrdiff_t i = 0; i < details.CountNode(); ++i)
     {
         NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getMode(), details[i].getTypeNode(),
                 details[i].getMx(), details[i].getMy());
