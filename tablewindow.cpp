@@ -23,6 +23,7 @@
 #include "ui_tablewindow.h"
 #include "widgets/vtablegraphicsview.h"
 #include "options.h"
+#include <QtSvg>
 
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
@@ -375,6 +376,8 @@ void TableWindow::SvgFile(const QString &name) const
     generator.setTitle(tr("SVG Generator Example Drawing"));
     generator.setDescription(tr("An SVG drawing created by the SVG Generator "
                                "Example provided with Qt."));
+    generator.setResolution(PrintDPI);
+    qDebug()<<"resolution is" << generator.resolution();
     QPainter painter;
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );

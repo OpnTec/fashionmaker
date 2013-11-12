@@ -24,6 +24,8 @@
 
 #include "../container/vpointf.h"
 
+class QString;
+
 #define M_2PI   6.28318530717958647692528676655900576
 
 /**
@@ -184,6 +186,8 @@ public:
     inline qint64  getIdObject() const {return idObject;}
     inline void    setIdObject(const qint64 &value) {idObject = value;}
     VSpline        &operator=(const VSpline &spl);
+    QString        name() const {return _name;}
+    void           setName(const QString &name) {_name = name;}
 protected:
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.
@@ -225,6 +229,7 @@ private:
     QHash<qint64, VPointF> points;
     Draw::Draws    mode;
     qint64         idObject;
+    QString        _name;
     /**
      * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.
      * @param p1 початкова точка сплайну.

@@ -22,20 +22,25 @@
 #include "varc.h"
 #include "../exception/vexception.h"
 
+class QRectF;
+
 VArc::VArc ()
     : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-    center(0), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){}
+      center(0), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}
 
 VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
             qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-      center(center), points(*points), mode(mode), idObject(idObject){}
+      center(center), points(*points), mode(mode), idObject(idObject), _name(QString())
+{
+    _name = QString ("Arc_%1_%2").arg(this->GetCenterVPoint().name()).arg(radius);
+}
 
 VArc::VArc(const VArc &arc)
     : f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
     center(arc.GetCenter()), points(arc.GetDataPoints()), mode(arc.getMode()),
-    idObject(arc.getIdObject()){}
+    idObject(arc.getIdObject()), _name(arc.name()){}
 
 VArc &VArc::operator =(const VArc &arc)
 {
@@ -49,21 +54,27 @@ VArc &VArc::operator =(const VArc &arc)
     this->center = arc.GetCenter();
     this->mode = arc.getMode();
     this->idObject = arc.getIdObject();
+    this->_name = arc.name();
     return *this;
 }
 
 QPointF VArc::GetCenterPoint() const
 {
+    return GetCenterVPoint().toQPointF();
+}
+
+VPointF VArc::GetCenterVPoint() const
+{
     if (points.contains(center))
     {
-        return points.value(center).toQPointF();
+        return points.value(center);
     }
     else
     {
         QString error = QString(tr("Can't find id = %1 in table.")).arg(center);
         throw VException(error);
     }
-    return QPointF();
+    return VPointF();
 }
 
 QPointF VArc::GetP1() const

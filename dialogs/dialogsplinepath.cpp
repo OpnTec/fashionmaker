@@ -101,6 +101,7 @@ void DialogSplinePath::DialogAccepted()
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
     path.setKCurve(ui->doubleSpinBoxKcurve->value());
+    path.setName(data->GetNameSplinePath(path, mode));
     emit ToolTip("");
     emit DialogClosed(QDialog::Accepted);
 }

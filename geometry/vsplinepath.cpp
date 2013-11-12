@@ -23,18 +23,29 @@
 #include "../exception/vexception.h"
 
 VSplinePath::VSplinePath()
-    : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0){}
+    : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0),
+      _name(QString()){}
 
 VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject)
-    : path(QVector<VSplinePoint>()), kCurve(kCurve), mode(mode), points(*points), idObject(idObject){}
+    : path(QVector<VSplinePoint>()), kCurve(kCurve), mode(mode), points(*points), idObject(idObject), _name(QString())
+{}
 
 VSplinePath::VSplinePath(const VSplinePath &splPath)
     : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
-    idObject(splPath.getIdObject()){}
+    idObject(splPath.getIdObject()), _name(splPath.name()){}
 
 void VSplinePath::append(const VSplinePoint &point)
 {
     path.append(point);
+    _name = QString("SplPath");
+    for (qint32 i = 1; i <= this->Count(); ++i)
+    {
+        VSpline spl = this->GetSpline(i);
+        VPointF first = spl.GetPointP1();
+        VPointF second = spl.GetPointP4();
+        QString splName = QString("_%1_%2").arg(first.name(), second.name());
+        _name.append(splName);
+    }
 }
 
 qint32 VSplinePath::Count() const
@@ -143,6 +154,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     this->mode = path.getMode();
     this->points = path.GetDataPoints();
     this->idObject = path.getIdObject();
+    this->_name = path.name();
     return *this;
 }
 

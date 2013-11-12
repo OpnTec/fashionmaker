@@ -23,26 +23,28 @@
 
 VSpline::VSpline()
     :p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1),
-      points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0){}
+      points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}
 
 VSpline::VSpline ( const VSpline & spline )
     :p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()),
       angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()),
-      points(spline.GetDataPoints()), mode(spline.getMode()), idObject(spline.getIdObject()){}
+      points(spline.GetDataPoints()), mode(spline.getMode()), idObject(spline.getIdObject()), _name(spline.name()){}
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
                   qreal kAsm1, qreal kAsm2, qreal kCurve, Draw::Draws mode, qint64 idObject)
     :p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2),
-      kCurve(kCurve), points(*points), mode(mode), idObject(idObject)
+      kCurve(kCurve), points(*points), mode(mode), idObject(idObject), _name(QString())
 {
+    _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
                   qreal kCurve, Draw::Draws mode, qint64 idObject)
     :p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(*points), mode(mode),
-      idObject(idObject)
+      idObject(idObject), _name(QString())
 {
+    _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
@@ -778,5 +780,6 @@ VSpline &VSpline::operator =(const VSpline &spline)
     this->points = spline.GetDataPoints();
     this->mode = spline.getMode();
     this->idObject = spline.getIdObject();
+    this->_name = spline.name();
     return *this;
 }

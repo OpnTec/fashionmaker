@@ -78,7 +78,7 @@ CONFIG(debug, debug|release){
                       -isystem "/usr/include/qt5/QtCore" -isystem "$$OUT_PWD/uic" -isystem "$$OUT_PWD/moc/" \
                       -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                       -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
-                      -Wunreachable-code
+                      -Wunreachable-code -gdwarf-3
 }else{
     # Release
     TARGET = $$RELEASE_TARGET

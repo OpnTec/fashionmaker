@@ -131,7 +131,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             {
                 arc = data->GetModelingArc(id);
             }
-            name = data->GetNameArc(arc.GetCenter(), id, mode);
+            name = arc.name();
             break;
         }
         case (Tool::NodeSpline):
@@ -159,7 +159,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             {
                 splPath = data->GetModelingSplinePath(id);
             }
-            name = data->GetNameSplinePath(splPath, mode);
+            name = splPath.name();
             break;
         }
         default:

@@ -23,6 +23,10 @@
 #define VARC_H
 
 #include "vspline.h"
+class QString;
+class QLineF;
+class QPainterPath;
+class QPointF;
 
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
@@ -76,6 +80,7 @@ public:
      */
     inline qint64      GetCenter () const {return center;}
     QPointF            GetCenterPoint() const;
+    VPointF            GetCenterVPoint() const;
     /**
      * @brief GetP1 повертає першу точку з якої починається дуга.
      * @return точку початку дуги.
@@ -100,6 +105,8 @@ public:
     inline void        setMode(const Draw::Draws &value) {mode = value;}
     inline qint64      getIdObject() const {return idObject;}
     inline void        setIdObject(const qint64 &value) {idObject = value;}
+    QString            name() const {return _name;}
+    void               setName(const QString &name) {_name = name;}
 private:
     /**
      * @brief f1 початковий кут в градусах
@@ -123,6 +130,7 @@ private:
     QHash<qint64, VPointF> points;
     Draw::Draws        mode;
     qint64             idObject;
+    QString            _name;
 };
 
 #endif // VARC_H

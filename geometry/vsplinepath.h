@@ -80,7 +80,8 @@ public:
 
     inline qint64 getIdObject() const {return idObject;}
     inline void   setIdObject(const qint64 &value) {idObject = value;}
-
+    QString       name() const {return _name;}
+    void          setName(const QString &name) {_name = name;}
 protected:
     /**
      * @brief path вектор з точок сплайна.
@@ -90,6 +91,7 @@ protected:
     Draw::Draws   mode;
     QHash<qint64, VPointF> points;
     qint64        idObject;
+    QString       _name;
 };
 
 #endif // VSPLINEPATH_H
