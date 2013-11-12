@@ -125,6 +125,8 @@ void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
                     this->show();
                 }
                 break;
+            default:
+                break;
         }
     }
 }

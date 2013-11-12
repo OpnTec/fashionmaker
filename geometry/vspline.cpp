@@ -364,7 +364,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
             // All collinear OR p1==p4
             //----------------------
             k = dx*dx + dy*dy;
-            if (k == 0)
+            if (k < 0.000000001)
             {
                 d2 = CalcSqDistance(x1, y1, x2, y2);
                 d3 = CalcSqDistance(x4, y4, x3, y3);
@@ -468,7 +468,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                     return;
                 }
 
-                if (m_cusp_limit != 0.0)
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
                 {
                     if (da1 > m_cusp_limit)
                     {
@@ -517,7 +517,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                     return;
                 }
 
-                if (m_cusp_limit != 0.0)
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
                 {
                     if (da1 > m_cusp_limit)
                     {
@@ -573,7 +573,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                     return;
                 }
 
-                if (m_cusp_limit != 0.0)
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
                 {
                     if (da1 > m_cusp_limit)
                     {
@@ -590,6 +590,8 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                     }
                 }
             }
+            break;
+        default:
             break;
     }
     

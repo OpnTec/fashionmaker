@@ -775,6 +775,8 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
         case Qt::Key_Escape:
             ArrowTool();
             break;
+        default:
+            break;
     }
     QMainWindow::keyPressEvent ( event );
 }

@@ -59,7 +59,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
         qDebug()<<"A3П2="<<toMM(length)<<"А30П ="<<toMM(dist);
         throw "Не можу знайти точку плеча. Довжина А3П2 < А3П.";
     }
-    if (dist==length)
+    if (fabs(dist - length) < 0.1)
     {
         return line.p2();
     }

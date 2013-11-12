@@ -424,6 +424,8 @@ QVector<QPointF> VContainer::EkvPoint(const QLineF &line1, const QLineF &line2, 
             points.append(bigLine1.p2());
             return points;
             break;
+        default:
+            break;
     }
     return points;
 }

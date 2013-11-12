@@ -499,6 +499,8 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 emit haveLiteChange();
             }
             break;
+        default:
+            break;
     }
 }
 

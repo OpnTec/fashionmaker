@@ -145,6 +145,8 @@ void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
         case Qt::Key_Down:
             MoveItem(VTableGraphicsView::Down);
             break;
+        default:
+            break;
     }
     QGraphicsView::keyPressEvent ( event );
 }
@@ -184,6 +186,8 @@ void VTableGraphicsView::MoveItem(VTableGraphicsView::typeMove_e move)
         case VTableGraphicsView::Down:
             dx = 0;
             dy = 3;
+            break;
+        default:
             break;
     }
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();

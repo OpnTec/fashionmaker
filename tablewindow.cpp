@@ -330,7 +330,7 @@ void TableWindow::AddLength()
 
 void TableWindow::RemoveLength()
 {
-    if (sceneRect.height()<=currentScene->sceneRect().height()-100)
+    if (sceneRect.height() <= currentScene->sceneRect().height() - 100)
     {
         QRectF rect = currentScene->sceneRect();
         rect.setHeight(rect.height()-toPixel(279));
@@ -341,7 +341,7 @@ void TableWindow::RemoveLength()
         rect = paper->rect();
         rect.setHeight(rect.height()-toPixel(279));
         paper->setRect(rect);
-        if (sceneRect.height()==currentScene->sceneRect().height())
+        if (fabs(sceneRect.height() - currentScene->sceneRect().height()) < 0.01)
         {
             ui->actionRemove->setDisabled(true);
         }

@@ -195,6 +195,8 @@ void Calculator::arith(QChar o, qreal *r, qreal *h)
 //            for(t=*h-1; t>0; --t)
 //                *r = (*r) * ex;
             break;
+        default:
+            break;
     }
 }
 

@@ -58,7 +58,7 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
         s_x = secondPoint.x()-(qAbs(secondPoint.x()-firstPoint.x()))*s;
         s_y = secondPoint.y()-(qAbs(secondPoint.y()-firstPoint.y()))*s;
         distans = QLineF(center.x(), center.y(), s_x, s_y).length();
-        if (ceil(distans*10) == ceil(radius*10))
+        if (fabs(distans*10 - radius*10) < 0.1)
         {
             pArc.rx() = s_x;
             pArc.ry() = s_y;

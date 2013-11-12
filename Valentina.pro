@@ -76,9 +76,16 @@ CONFIG(debug, debug|release){
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
                       -isystem "/usr/include/qt5/QtCore" -isystem "$$OUT_PWD/uic" -isystem "$$OUT_PWD/moc/" \
+                      -isystem "$$OUT_PWD/rcc/" \
                       -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                       -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
-                      -Wunreachable-code -gdwarf-3
+                      -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
+                      -Wformat  -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k\
+                      -Winvalid-pch -Wunsafe-loop-optimizations -Wlong-long -Wmissing-format-attribute \
+                      -Wmissing-include-dirs -Wpacked -Wredundant-decls \
+                      -Wswitch-default -Wswitch-enum -Wuninitialized -Wunused-parameter -Wvariadic-macros \
+                      -Wlogical-op -Wnoexcept \
+                      -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -gdwarf-3
 }else{
     # Release
     TARGET = $$RELEASE_TARGET

@@ -107,11 +107,11 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     qreal c = QLineF(firstPoint, secondPoint).length();
     qreal a = QLineF(axisP2, firstPoint).length();
     qreal b = QLineF(axisP2, secondPoint).length();
-    if (c*c == a*a + b*b)
+    if (fabs(c*c - (a*a + b*b)) < 0.0001)
     {
         QLineF l1(axisP2, firstPoint);
         QLineF l2(axisP2, secondPoint);
-        if (l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90)
+        if (fabs(l1.angleTo(l2) - 90) < 0.1 || fabs(l2.angleTo(l1) - 90) < 0.1)
         {
             return axisP2;
         }
@@ -128,7 +128,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         {
             QLineF l1(axisP2, firstPoint);
             QLineF l2(axisP2, secondPoint);
-            if (l1.angleTo(l2) == 90 || l2.angleTo(l1) == 90)
+            if (fabs(l1.angleTo(l2) - 90) < 0.1 || fabs(l2.angleTo(l1) - 90) < 0.1)
             {
                 return line.p2();
             }
