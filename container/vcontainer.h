@@ -73,7 +73,7 @@ public:
     {incrementTable[name] = cell;}
     void               AddLengthLine(const QString &name, const qreal &value);
     void               AddLengthSpline(const QString &name, const qreal &value);
-    void               AddLengthArc(const qint64 &center, const qint64 &id);
+    void               AddLengthArc(const qint64 &id);
     void               AddLengthArc(const QString &name, const qreal &value);
     void               AddLineAngle(const QString &name, const qreal &value);
     void               AddLine(const qint64 &firstPointId, const qint64 &secondPointId,
@@ -88,12 +88,6 @@ public:
                                    const Draw::Draws &mode = Draw::Calculation) const;
     QString            GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint,
                                         const Draw::Draws &mode = Draw::Calculation) const;
-    QString            GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint,
-                                     const Draw::Draws &mode = Draw::Calculation) const;
-    QString            GetNameSplinePath(const VSplinePath &path,
-                                         const Draw::Draws &mode = Draw::Calculation) const;
-    QString            GetNameArc(const qint64 &center, const qint64 &id,
-                                  const Draw::Draws &mode = Draw::Calculation) const;
     void               UpdatePoint(qint64 id, const VPointF& point);
     void               UpdateModelingPoint(qint64 id, const VPointF& point);
     void               UpdateDetail(qint64 id, const VDetail& detail);

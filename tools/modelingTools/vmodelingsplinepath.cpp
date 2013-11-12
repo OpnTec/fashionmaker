@@ -100,7 +100,7 @@ VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplin
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthSpline(data->GetNameSplinePath(path), toMM(path.GetLength()));
+    data->AddLengthSpline(path.name(), toMM(path.GetLength()));
     if (parse == Document::FullParse)
     {
         spl = new VModelingSplinePath(doc, data, id, typeCreation);

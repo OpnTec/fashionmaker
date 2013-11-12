@@ -90,12 +90,12 @@ void VToolSplinePath::Create(const qint64 _id, const VSplinePath &path, VMainGra
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddSplinePath(path);
-        data->AddLengthSpline(data->GetNameSplinePath(path), toMM(path.GetLength()));
+        data->AddLengthSpline(path.name(), toMM(path.GetLength()));
     }
     else
     {
         data->UpdateSplinePath(id, path);
-        data->AddLengthSpline(data->GetNameSplinePath(path), toMM(path.GetLength()));
+        data->AddLengthSpline(path.name(), toMM(path.GetLength()));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

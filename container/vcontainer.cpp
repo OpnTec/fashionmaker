@@ -511,9 +511,9 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value)
     lengthSplines[name] = value;
 }
 
-void VContainer::AddLengthArc(const qint64 &center, const qint64 &id)
+void VContainer::AddLengthArc(const qint64 &id)
 {
-    AddLengthArc(GetNameArc(center, id), toMM(GetArc(id).GetLength()));
+    AddLengthArc(GetArc(id).name(), toMM(GetArc(id).GetLength()));
 }
 
 void VContainer::AddLengthArc(const QString &name, const qreal &value)
@@ -703,65 +703,6 @@ QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &sec
         second = GetModelingPoint(secondPoint);
     }
     return QString("AngleLine_%1_%2").arg(first.name(), second.name());
-}
-
-QString VContainer::GetNameSpline(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
-{
-    VPointF first;
-    VPointF second;
-    if (mode == Draw::Calculation)
-    {
-        first = GetPoint(firstPoint);
-        second = GetPoint(secondPoint);
-    }
-    else
-    {
-        first = GetModelingPoint(firstPoint);
-        second = GetModelingPoint(secondPoint);
-    }
-    return QString("Spl_%1_%2").arg(first.name(), second.name());
-}
-
-QString VContainer::GetNameSplinePath(const VSplinePath &path, const Draw::Draws &mode) const
-{
-    if (path.Count() == 0)
-    {
-        return QString();
-    }
-    QString name("SplPath");
-    for (qint32 i = 1; i <= path.Count(); ++i)
-    {
-        VSpline spl = path.GetSpline(i);
-        VPointF first;
-        VPointF second;
-        if (mode == Draw::Calculation)
-        {
-            first = GetPoint(spl.GetP1());
-            second = GetPoint(spl.GetP4());
-        }
-        else
-        {
-            first = GetModelingPoint(spl.GetP1());
-            second = GetModelingPoint(spl.GetP4());
-        }
-        QString splName = QString("_%1_%2").arg(first.name(), second.name());
-        name.append(splName);
-    }
-    return name;
-}
-
-QString VContainer::GetNameArc(const qint64 &center, const qint64 &id, const Draw::Draws &mode) const
-{
-    VPointF centerPoint;
-    if (mode == Draw::Calculation)
-    {
-        centerPoint = GetPoint(center);
-    }
-    else
-    {
-        centerPoint = GetModelingPoint(center);
-    }
-    return QString ("Arc_%1_%2").arg(centerPoint.name()).arg(id);
 }
 
 void VContainer::UpdatePoint(qint64 id, const VPointF &point)

@@ -109,7 +109,7 @@ VModelingSpline *VModelingSpline::Create(const qint64 _id, const qint64 &p1, con
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthSpline(data->GetNameSpline(p1, p4, Draw::Modeling), toMM(spline.GetLength()));
+    data->AddLengthSpline(spline.name(), toMM(spline.GetLength()));
     if (parse == Document::FullParse)
     {
         spl = new VModelingSpline(doc, data, id, typeCreation);

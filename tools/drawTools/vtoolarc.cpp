@@ -97,12 +97,12 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddArc(arc);
-        data->AddLengthArc(data->GetNameArc(center, id), toMM(arc.GetLength()));
+        data->AddLengthArc(arc.name(), toMM(arc.GetLength()));
     }
     else
     {
         data->UpdateArc(id, arc);
-        data->AddLengthArc(data->GetNameArc(center, id), toMM(arc.GetLength()));
+        data->AddLengthArc(arc.name(), toMM(arc.GetLength()));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

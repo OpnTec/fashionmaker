@@ -102,7 +102,7 @@ VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthArc(data->GetNameArc(center, id, Draw::Modeling), toMM(arc.GetLength()));
+    data->AddLengthArc(arc.name(), toMM(arc.GetLength()));
     if (parse == Document::FullParse)
     {
         toolArc = new VModelingArc(doc, data, id, typeCreation);
