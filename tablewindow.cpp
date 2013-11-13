@@ -72,7 +72,7 @@ void TableWindow::AddPaper()
     shadowPaper->setBrush(QBrush(Qt::black));
     currentScene->addItem(shadowPaper);
     paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
-    paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+    paper->setPen(QPen(Qt::black, widthMainLine));
     paper->setBrush(QBrush(Qt::white));
     currentScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
@@ -88,13 +88,14 @@ void TableWindow::AddDetail()
         QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>, int)), this,
                          SLOT(itemColliding(QList<QGraphicsItem*>, int)));
         QObject::connect(this, SIGNAL(LengthChanged()), Detail, SLOT(LengthChanged()));
-        Detail->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+        Detail->setPen(QPen(Qt::black, 1));
         Detail->setBrush(QBrush(Qt::white));
         Detail->setPos(paper->boundingRect().center());
         Detail->setFlag(QGraphicsItem::ItemIsMovable, true);
         Detail->setFlag(QGraphicsItem::ItemIsSelectable, true);
         Detail->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-        Detail->setParentItem(paper);
+        Detail->setPaper(paper);
+        currentScene->addItem(Detail);
         Detail->setSelected(true);
         indexDetail++;
         if (indexDetail==listDetails.count())
@@ -160,27 +161,26 @@ void TableWindow::saveScene()
     brush->setColor( QColor( Qt::white ) );
     currentScene->setBackgroundBrush( *brush );
     currentScene->clearSelection(); // Selections would also render to the file
-    shadowPaper->setBrush(QBrush(Qt::white));
-    shadowPaper->setPen(QPen(Qt::white, 0.1));
-    paper->setPen(QPen(Qt::white, 0.1));
-    paper->setBrush(QBrush(Qt::white));
-    currentScene->setSceneRect(currentScene->itemsBoundingRect());
-
+    shadowPaper->setVisible(false);
     QFileInfo fi(name);
     if (fi.suffix() == "svg")
     {
+        paper->setVisible(false);
         SvgFile(name);
+        paper->setVisible(true);
     }
     else if (fi.suffix() == "png")
     {
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
+        paper->setPen(QPen(Qt::black, widthMainLine));
     }
 
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
     currentScene->setBackgroundBrush( *brush );
-    paper->setPen(QPen(Qt::black, widthMainLine));
-    shadowPaper->setBrush(QBrush(Qt::black));
+    shadowPaper->setVisible(true);
+    delete brush;
 }
 
 void TableWindow::itemChect(bool flag)
@@ -254,7 +254,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                             }
                             else
                             {
-                                bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                                bitem->setPen(QPen(Qt::black, widthMainLine));
                             }
                             listCollidingItems.removeAt(i);
                         }
@@ -269,7 +269,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                     }
                     else
                     {
-                        bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                        bitem->setPen(QPen(Qt::black, widthMainLine));
                     }
                     listCollidingItems.clear();
                     collidingItems = true;
@@ -372,7 +372,6 @@ void TableWindow::SvgFile(const QString &name) const
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
-    //generator.setViewBox(QRect(0, 0, 200, 200));
     generator.setTitle(tr("SVG Generator Example Drawing"));
     generator.setDescription(tr("An SVG drawing created by the SVG Generator "
                                "Example provided with Qt."));
@@ -382,7 +381,7 @@ void TableWindow::SvgFile(const QString &name) const
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, 1.2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     currentScene->render(&painter);
     painter.end();
@@ -399,7 +398,7 @@ void TableWindow::PngFile(const QString &name) const
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     currentScene->render(&painter);
     image.save(name);

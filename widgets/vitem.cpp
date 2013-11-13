@@ -20,15 +20,24 @@
  ****************************************************************************/
 
 #include "vitem.h"
+#include <QGraphicsScene>
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
-    :QGraphicsPathItem ( path, parent ), numInOutList(numInList)
+    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(0)
 {
 }
 
 void VItem::checkItemChange()
 {
-    QRectF rect = parentItem()->sceneBoundingRect();
+    QRectF rect;
+    if(paper == 0){
+        qDebug()<<"Don't set paper for detail!!!!";
+        rect = this->scene()->sceneRect();
+    }
+    else
+    {
+        rect = paper->sceneBoundingRect();
+    }
     QRectF myrect = sceneBoundingRect();
     if ( rect.contains( myrect )==true )
     {

@@ -36,14 +36,15 @@ public:
      * @brief VItem конструктор за замовчуванням
      *Конструктор генерує пусту деталь з номером в списку, що дорівнює 0.
      */
-                VItem ():numInOutList(0){}
+                VItem ():numInOutList(0), paper(0){}
     /**
     * @brief VItem конструктор
     * @param numInList номер в списку деталей, що передається у вікно де
     *укладаються деталі.
     * @param parent батьківський об'єкт на сцені для даного. За замовчуванням немає.
     */
-                VItem (int numInList, QGraphicsItem * parent = 0):QGraphicsPathItem (parent), numInOutList(numInList){}
+                VItem (int numInList, QGraphicsItem * parent = 0):QGraphicsPathItem (parent), numInOutList(numInList),
+                    paper(0){}
     /**
     * @brief VItem конструктор
     * @param path зображення що буде показуватися на сцені - об’єкт класу QPainterPath.
@@ -57,6 +58,8 @@ public:
     * @param angle кут в градусах на який повертається деталь.
     */
     void        Rotate ( qreal angle );
+    QGraphicsRectItem *getPaper() const {return paper;}
+    void        setPaper(QGraphicsRectItem *value) {paper = value;}
 public slots:
     /**
      * @brief LengthChanged слот який обробляє сигнал зміни довжини листа.
@@ -82,11 +85,13 @@ protected:
      */
     void        checkItemChange ();
 private:
+    Q_DISABLE_COPY(VItem)
     /**
      * @brief numInOutList для зберігання інформації про колізії від кожної деталі необхідно знати її
      *номер.
      */
     qint32      numInOutList;
+    QGraphicsRectItem*    paper;
 signals:
     /**
      * @brief itemOut сигнал виходу за межі листа. Посилається у будь-якому випадку.
