@@ -87,6 +87,16 @@ void VContainer::setData(const VContainer &data)
     details = *data.DataDetails();
 }
 
+VPointF VContainer::GetPoint(qint64 id) const
+{
+    return GetObject(points, id);
+}
+
+VPointF VContainer::GetModelingPoint(qint64 id) const
+{
+    return GetObject(modelingPoints, id);
+}
+
 template <typename key, typename val>
 val VContainer::GetObject(const QHash<key, val> &obj, key id)
 {
@@ -134,6 +144,41 @@ qreal VContainer::GetLineAngle(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetObject(lineAngles, name);
+}
+
+VSpline VContainer::GetSpline(qint64 id) const
+{
+    return GetObject(splines, id);
+}
+
+VSpline VContainer::GetModelingSpline(qint64 id) const
+{
+    return GetObject(modelingSplines, id);
+}
+
+VArc VContainer::GetArc(qint64 id) const
+{
+    return GetObject(arcs, id);
+}
+
+VArc VContainer::GetModelingArc(qint64 id) const
+{
+    return GetObject(modelingArcs, id);
+}
+
+VSplinePath VContainer::GetSplinePath(qint64 id) const
+{
+    return GetObject(splinePaths, id);
+}
+
+VSplinePath VContainer::GetModelingSplinePath(qint64 id) const
+{
+    return GetObject(modelingSplinePaths, id);
+}
+
+VDetail VContainer::GetDetail(qint64 id) const
+{
+    return GetObject(details, id);
 }
 
 qint64 VContainer::AddPoint(const VPointF &point)

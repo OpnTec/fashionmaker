@@ -55,21 +55,21 @@ public:
      * @param id
      * @return
      */
-    inline VPointF     GetPoint(qint64 id) const {return GetObject(points, id);}
-    inline VPointF     GetModelingPoint(qint64 id) const {return GetObject(modelingPoints, id);}
+    VPointF            GetPoint(qint64 id) const;
+    VPointF            GetModelingPoint(qint64 id) const;
     VStandartTableCell GetStandartTableCell(const QString& name) const;
     VIncrementTableRow GetIncrementTableRow(const QString& name) const;
     qreal              GetLine(const QString &name) const;
     qreal              GetLengthArc(const QString &name) const;
     qreal              GetLengthSpline(const QString &name) const;
     qreal              GetLineAngle(const QString &name) const;
-    inline VSpline     GetSpline(qint64 id) const {return GetObject(splines, id);}
-    inline VSpline     GetModelingSpline(qint64 id) const {return GetObject(modelingSplines, id);}
-    inline VArc        GetArc(qint64 id) const {return GetObject(arcs, id);}
-    inline VArc        GetModelingArc(qint64 id) const {return GetObject(modelingArcs, id);}
-    inline VSplinePath GetSplinePath(qint64 id) const {return GetObject(splinePaths, id);}
-    inline VSplinePath GetModelingSplinePath(qint64 id) const {return GetObject(modelingSplinePaths, id);}
-    inline VDetail     GetDetail(qint64 id) const {return GetObject(details, id);}
+    VSpline            GetSpline(qint64 id) const;
+    VSpline            GetModelingSpline(qint64 id) const;
+    VArc               GetArc(qint64 id) const;
+    VArc               GetModelingArc(qint64 id) const;
+    VSplinePath        GetSplinePath(qint64 id) const;
+    VSplinePath        GetModelingSplinePath(qint64 id) const;
+    VDetail            GetDetail(qint64 id) const;
     static qint64      getId() {return _id;}
     qint64             AddPoint(const VPointF& point);
     qint64             AddModelingPoint(const VPointF& point);
