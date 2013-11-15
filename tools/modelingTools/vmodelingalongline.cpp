@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file vmodelingalongline.cpp
+ **  @file   vmodelingalongline.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date Friday November 15, 2013
+ **  @date   November 15, 2013
  **
  **  @brief
  **  @copyright
