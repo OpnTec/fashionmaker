@@ -16,7 +16,6 @@ RELEASE_TARGET = Valentina
 CONFIG -= debug_and_release debug_and_release_target
 CONFIG += c++11 precompile_header
 
-QMAKE_CXX = ccache g++
 #DEFINES += ...
 
 # Precompiled headers (PCH)
@@ -71,6 +70,7 @@ TRANSLATIONS += translations/valentina_ru.ts \
 
 CONFIG(debug, debug|release){
     # Debug
+    QMAKE_CXX = ccache g++
     TARGET = $$DEBUG_TARGET
 
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
