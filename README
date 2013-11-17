@@ -1,0 +1,38 @@
+Valentina
+==========
+Open source project of creating a pattern making program, whose allow create and modeling patterns of clothing.
+
+Supported Platforms
+===================
+The standalone binary packages support the following platforms:
+
+Windows XP SP2 or later
+Ubuntu Linux 11.10 (32-bit) or later
+
+Building the sources requires Qt 5.0.0 or later.
+
+Compiling Valentina
+====================
+Prerequisites:
+   * Qt 5.0.0 or later
+   * On Windows:
+     -  MinGW or Visual Studio
+
+The installed toolchains have to match the one Qt was compiled with.
+
+You can build Valentina with
+
+    cd $SOURCE_DIRECTORY
+    qmake -r
+    make (or mingw32-make or nmake or jom, depending on your platform)
+
+Installation ("make install") is not needed. 
+
+Note:In order to build and use Valentina, the PATH environment variable needs to be extended:
+
+ PATH               - to locate qmake, moc and other Qt tools
+This is done by adding c:\Qt\%VERSION%\bin to the PATH variable.
+
+For newer versions of Windows, PATH can be extended through the Control Panel|System|Advanced|Environment variables menu.
+
+You may also need to ensure that the locations of your compiler and other build tools are listed in the PATH variable. This will depend on your choice of software development environment.
