@@ -47,7 +47,7 @@ VModelingNormal::VModelingNormal(VDomDocument *doc, VContainer *data, const qint
 void VModelingNormal::setDialog()
 {
     Q_ASSERT(dialogNormal.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogNormal->setTypeLine(typeLine);
     dialogNormal->setFormula(formula);
     dialogNormal->setAngle(angle);
@@ -75,8 +75,8 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
                                          const Tool::Sources &typeCreation)
 {
     VModelingNormal *point = 0;
-    VPointF firstPoint = data->GetModelingPoint(firstPointId);
-    VPointF secondPoint = data->GetModelingPoint(secondPointId);
+    VPointF firstPoint = data->GetPointModeling(firstPointId);
+    VPointF secondPoint = data->GetPointModeling(secondPointId);
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
@@ -87,11 +87,11 @@ VModelingNormal *VModelingNormal::Create(const qint64 _id, const QString &formul
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
@@ -150,7 +150,7 @@ void VModelingNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingNormal::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

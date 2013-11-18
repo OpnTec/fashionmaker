@@ -48,7 +48,7 @@ VModelingHeight::VModelingHeight(VDomDocument *doc, VContainer *data, const qint
 void VModelingHeight::setDialog()
 {
     Q_ASSERT(dialogHeight.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogHeight->setTypeLine(typeLine);
     dialogHeight->setBasePointId(basePointId, id);
     dialogHeight->setP1LineId(p1LineId, id);
@@ -75,9 +75,9 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
                                          const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingHeight *point = 0;
-    VPointF basePoint = data->GetModelingPoint(basePointId);
-    VPointF p1Line = data->GetModelingPoint(p1LineId);
-    VPointF p2Line = data->GetModelingPoint(p2LineId);
+    VPointF basePoint = data->GetPointModeling(basePointId);
+    VPointF p1Line = data->GetPointModeling(p1LineId);
+    VPointF p2Line = data->GetPointModeling(p2LineId);
 
     QPointF pHeight = VToolHeight::FindPoint(QLineF(p1Line.toQPointF(), p2Line.toQPointF()),
                                              basePoint.toQPointF());
@@ -85,11 +85,11 @@ VModelingHeight *VModelingHeight::Create(const qint64 _id, const QString &pointN
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
-        id = data->AddModelingPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        id = data->AddPointModeling(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
     }
     else
     {
-        data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->UpdatePointModeling(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -145,7 +145,7 @@ void VModelingHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingHeight::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

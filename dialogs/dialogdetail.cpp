@@ -122,7 +122,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             }
             else
             {
-                point = data->GetModelingPoint(id);
+                point = data->GetPointModeling(id);
             }
             name = point.name();
             break;
@@ -136,7 +136,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             }
             else
             {
-                arc = data->GetModelingArc(id);
+                arc = data->GetArcModeling(id);
             }
             name = arc.name();
             break;
@@ -150,7 +150,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             }
             else
             {
-                spl = data->GetModelingSpline(id);
+                spl = data->GetSplineModeling(id);
             }
             name = spl.GetName();
             break;
@@ -164,7 +164,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
             }
             else
             {
-                splPath = data->GetModelingSplinePath(id);
+                splPath = data->GetSplinePathModeling(id);
             }
             name = splPath.name();
             break;

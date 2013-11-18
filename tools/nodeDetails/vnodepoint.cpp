@@ -44,7 +44,7 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();
@@ -69,12 +69,12 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
 
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
 }
 
 void VNodePoint::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
@@ -118,7 +118,7 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
     point.setMy(p.y());

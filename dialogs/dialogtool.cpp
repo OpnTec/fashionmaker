@@ -99,7 +99,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
             {
                 if (det[i].getId() != id)
                 {
-                    VPointF point = data->GetModelingPoint(det[i].getId());
+                    VPointF point = data->GetPointModeling(det[i].getId());
                     box->addItem(point.name(), det[i].getId());
                 }
             }

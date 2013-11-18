@@ -106,7 +106,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         else
         {
-            point = data->GetModelingPoint(id);
+            point = data->GetPointModeling(id);
         }
         if (number == 0)
         {

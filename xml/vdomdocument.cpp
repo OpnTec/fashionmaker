@@ -591,28 +591,28 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
                     if (t == "NodePoint")
                     {
                         tool = Tool::NodePoint;
-                        VPointF point = data->GetModelingPoint(id);
+                        VPointF point = data->GetPointModeling(id);
                         mode = point.getMode();
                         oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode, NodeDetail::Contour));
                     }
                     else if (t == "NodeArc")
                     {
                         tool = Tool::NodeArc;
-                        VArc arc = data->GetModelingArc(id);
+                        VArc arc = data->GetArcModeling(id);
                         mode = arc.getMode();
                         oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode, NodeDetail::Contour));
                     }
                     else if (t == "NodeSpline")
                     {
                         tool = Tool::NodeSpline;
-                        VSpline spl = data->GetModelingSpline(id);
+                        VSpline spl = data->GetSplineModeling(id);
                         mode = spl.getMode();
                         oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode, NodeDetail::Contour));
                     }
                     else if (t == "NodeSplinePath")
                     {
                         tool = Tool::NodeSplinePath;
-                        VSplinePath splPath = data->GetModelingSplinePath(id);
+                        VSplinePath splPath = data->GetSplinePathModeling(id);
                         mode = splPath.getMode();
                         oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode, NodeDetail::Contour));
                     }
@@ -993,11 +993,11 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             else
             {
                 typeObject = Draw::Modeling;
-                point = data->GetModelingPoint(idObject);
+                point = data->GetPointModeling(idObject);
             }
             qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
             qreal my = toPixel(GetParametrDouble(domElement, "my"));
-            data->UpdateModelingPoint(id, VPointF(point.x(), point.y(), point.name(), mx, my, typeObject,
+            data->UpdatePointModeling(id, VPointF(point.x(), point.y(), point.name(), mx, my, typeObject,
                                                   idObject ));
             VNodePoint::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
             return;
@@ -1236,11 +1236,11 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             else
             {
                 typeObject = Draw::Modeling;
-                spl = data->GetModelingSpline(idObject);
+                spl = data->GetSplineModeling(idObject);
             }
             spl.setMode(typeObject);
             spl.setIdObject(idObject);
-            data->UpdateModelingSpline(id, spl);
+            data->UpdateSplineModeling(id, spl);
             VNodeSpline::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
             return;
         }
@@ -1268,11 +1268,11 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             else
             {
                 typeObject = Draw::Modeling;
-                path = data->GetModelingSplinePath(idObject);
+                path = data->GetSplinePathModeling(idObject);
             }
             path.setMode(typeObject);
             path.setIdObject(idObject);
-            data->UpdateModelingSplinePath(id, path);
+            data->UpdateSplinePathModeling(id, path);
             VNodeSplinePath::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
             return;
         }
@@ -1336,11 +1336,11 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             else
             {
                 typeObject = Draw::Modeling;
-                arc = data->GetModelingArc(idObject);
+                arc = data->GetArcModeling(idObject);
             }
             arc.setMode(typeObject);
             arc.setIdObject(idObject);
-            data->UpdateModelingArc(id, arc);
+            data->UpdateArcModeling(id, arc);
             VNodeArc::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
             return;
         }

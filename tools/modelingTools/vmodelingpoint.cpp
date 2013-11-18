@@ -42,12 +42,12 @@ VModelingPoint::VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, Q
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
 }
 
 void VModelingPoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
     point.setMy(p.y());

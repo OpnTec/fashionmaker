@@ -83,7 +83,7 @@ void VModelingAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingAlongLine::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
@@ -109,7 +109,7 @@ void VModelingAlongLine::RemoveReferens()
 void VModelingAlongLine::setDialog()
 {
     Q_ASSERT(dialogAlongLine.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogAlongLine->setTypeLine(typeLine);
     dialogAlongLine->setFormula(formula);
     dialogAlongLine->setFirstPointId(basePointId, id);
@@ -136,8 +136,8 @@ VModelingAlongLine *VModelingAlongLine::Create(const qint64 _id, const QString &
                                                const Tool::Sources &typeCreation)
 {
     VModelingAlongLine *point = 0;
-    VPointF firstPoint = data->GetModelingPoint(firstPointId);
-    VPointF secondPoint = data->GetModelingPoint(secondPointId);
+    VPointF firstPoint = data->GetPointModeling(firstPointId);
+    VPointF secondPoint = data->GetPointModeling(secondPointId);
     QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
     Calculator cal(data);
     QString errorMsg;
@@ -148,11 +148,11 @@ VModelingAlongLine *VModelingAlongLine::Create(const qint64 _id, const QString &
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);

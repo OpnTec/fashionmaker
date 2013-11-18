@@ -50,7 +50,7 @@ VModelingArc::VModelingArc(VDomDocument *doc, VContainer *data, qint64 id, const
 void VModelingArc::setDialog()
 {
     Q_ASSERT(dialogArc.isNull() == false);
-    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    VArc arc = VAbstractTool::data.GetArcModeling(id);
     dialogArc->SetCenter(arc.GetCenter());
     dialogArc->SetRadius(arc.GetFormulaRadius());
     dialogArc->SetF1(arc.GetFormulaF1());
@@ -95,15 +95,15 @@ VModelingArc* VModelingArc::Create(const qint64 _id, const qint64 &center, const
         calcF2 = result;
     }
 
-    VArc arc = VArc(data->DataModelingPoints(), center, calcRadius, radius, calcF1, f1, calcF2, f2 );
+    VArc arc = VArc(data->DataPointsModeling(), center, calcRadius, radius, calcF1, f1, calcF2, f2 );
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
-        id = data->AddModelingArc(arc);
+        id = data->AddArcModeling(arc);
     }
     else
     {
-        data->UpdateModelingArc(id, arc);
+        data->UpdateArcModeling(id, arc);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -148,7 +148,7 @@ void VModelingArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingArc::AddToFile()
 {
-    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    VArc arc = VAbstractTool::data.GetArcModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
@@ -184,13 +184,13 @@ void VModelingArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VModelingArc::RemoveReferens()
 {
-    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    VArc arc = VAbstractTool::data.GetArcModeling(id);
     doc->DecrementReferens(arc.GetCenter());
 }
 
 void VModelingArc::RefreshGeometry()
 {
-    VArc arc = VAbstractTool::data.GetModelingArc(id);
+    VArc arc = VAbstractTool::data.GetArcModeling(id);
     QPainterPath path;
     path.addPath(arc.GetPath());
     path.setFillRule( Qt::WindingFill );

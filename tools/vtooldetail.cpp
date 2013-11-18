@@ -148,9 +148,9 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 }
                 else
                 {
-                    point = data->GetModelingPoint(detail[i].getId());
+                    point = data->GetPointModeling(detail[i].getId());
                 }
-                id = data->AddModelingPoint(point);
+                id = data->AddPointModeling(point);
                 VNodePoint::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
                                    Document::FullParse, Tool::FromGui);
             }
@@ -164,9 +164,9 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 }
                 else
                 {
-                    arc = data->GetModelingArc(detail[i].getId());
+                    arc = data->GetArcModeling(detail[i].getId());
                 }
-                id = data->AddModelingArc(arc);
+                id = data->AddArcModeling(arc);
                 VNodeArc::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
                                  Document::FullParse, Tool::FromGui);
             }
@@ -180,9 +180,9 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 }
                 else
                 {
-                    spline = data->GetModelingSpline(detail[i].getId());
+                    spline = data->GetSplineModeling(detail[i].getId());
                 }
-                id = data->AddModelingSpline(spline);
+                id = data->AddSplineModeling(spline);
                 VNodeSpline::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
                                     Document::FullParse, Tool::FromGui);
             }
@@ -196,9 +196,9 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 }
                 else
                 {
-                    splinePath = data->GetModelingSplinePath(detail[i].getId());
+                    splinePath = data->GetSplinePathModeling(detail[i].getId());
                 }
-                id = data->AddModelingSplinePath(splinePath);
+                id = data->AddSplinePathModeling(splinePath);
                 VNodeSplinePath::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
                                         Document::FullParse, Tool::FromGui);
             }

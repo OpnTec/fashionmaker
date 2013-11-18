@@ -79,7 +79,7 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         else
         {
-            point = data->GetModelingPoint(id);
+            point = data->GetPointModeling(id);
         }
         if (number == 0)
         {
@@ -111,8 +111,8 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
                 }
                 else
                 {
-                    p1 = data->GetModelingPoint(p1Id).toQPointF();
-                    p4 = data->GetModelingPoint(id).toQPointF();
+                    p1 = data->GetPointModeling(p1Id).toQPointF();
+                    p4 = data->GetPointModeling(id).toQPointF();
                 }
                 ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
                 ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));

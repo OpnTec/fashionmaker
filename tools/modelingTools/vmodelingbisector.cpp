@@ -51,7 +51,7 @@ VModelingBisector::VModelingBisector(VDomDocument *doc, VContainer *data, const 
 void VModelingBisector::setDialog()
 {
     Q_ASSERT(dialogBisector.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogBisector->setTypeLine(typeLine);
     dialogBisector->setFormula(formula);
     dialogBisector->setFirstPointId(firstPointId, id);
@@ -81,9 +81,9 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
                                              const Tool::Sources &typeCreation)
 {
     VModelingBisector *point = 0;
-    VPointF firstPoint = data->GetModelingPoint(firstPointId);
-    VPointF secondPoint = data->GetModelingPoint(secondPointId);
-    VPointF thirdPoint = data->GetModelingPoint(thirdPointId);
+    VPointF firstPoint = data->GetPointModeling(firstPointId);
+    VPointF secondPoint = data->GetPointModeling(secondPointId);
+    VPointF thirdPoint = data->GetPointModeling(thirdPointId);
 
     Calculator cal(data);
     QString errorMsg;
@@ -95,11 +95,11 @@ VModelingBisector *VModelingBisector::Create(const qint64 _id, const QString &fo
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
@@ -159,7 +159,7 @@ void VModelingBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VModelingBisector::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

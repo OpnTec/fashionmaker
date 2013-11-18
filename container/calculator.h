@@ -47,6 +47,7 @@ public:
     /**
      * @brief eval calculate formula.
      * @param prog string of formula.
+     * @param errorMsg keep error message.
      * @return value of formula.
      */
     qreal       eval(QString prog, QString *errorMsg);

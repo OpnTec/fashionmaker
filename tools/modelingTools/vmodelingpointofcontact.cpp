@@ -48,7 +48,7 @@ VModelingPointOfContact::VModelingPointOfContact(VDomDocument *doc, VContainer *
 void VModelingPointOfContact::setDialog()
 {
     Q_ASSERT(dialogPointOfContact.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogPointOfContact->setRadius(radius);
     dialogPointOfContact->setCenter(center, id);
     dialogPointOfContact->setFirstPoint(firstPointId, id);
@@ -77,9 +77,9 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
                                                          const Tool::Sources &typeCreation)
 {
     VModelingPointOfContact *point = 0;
-    VPointF centerP = data->GetModelingPoint(center);
-    VPointF firstP = data->GetModelingPoint(firstPointId);
-    VPointF secondP = data->GetModelingPoint(secondPointId);
+    VPointF centerP = data->GetPointModeling(center);
+    VPointF firstP = data->GetPointModeling(firstPointId);
+    VPointF secondP = data->GetPointModeling(secondPointId);
 
     Calculator cal(data);
     QString errorMsg;
@@ -91,11 +91,11 @@ VModelingPointOfContact *VModelingPointOfContact::Create(const qint64 _id, const
         qint64 id =  _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
@@ -124,7 +124,7 @@ void VModelingPointOfContact::FullUpdateFromFile()
         firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
         secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
-    RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
 }
 
 void VModelingPointOfContact::FullUpdateFromGui(int result)
@@ -152,7 +152,7 @@ void VModelingPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *e
 
 void VModelingPointOfContact::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

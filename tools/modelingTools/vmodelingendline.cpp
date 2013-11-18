@@ -46,7 +46,7 @@ VModelingEndLine::VModelingEndLine(VDomDocument *doc, VContainer *data, const qi
 void VModelingEndLine::setDialog()
 {
     Q_ASSERT(dialogEndLine.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogEndLine->setTypeLine(typeLine);
     dialogEndLine->setFormula(formula);
     dialogEndLine->setAngle(angle);
@@ -72,7 +72,7 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
                                            const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VModelingEndLine *point = 0;
-    VPointF basePoint = data->GetModelingPoint(basePointId);
+    VPointF basePoint = data->GetPointModeling(basePointId);
     QLineF line = QLineF(basePoint.toQPointF(), QPointF(basePoint.x()+100, basePoint.y()));
     Calculator cal(data);
     QString errorMsg;
@@ -84,11 +84,11 @@ VModelingEndLine *VModelingEndLine::Create(const qint64 _id, const QString &poin
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
@@ -143,7 +143,7 @@ void VModelingEndLine::FullUpdateFromGui(int result)
 
 void VModelingEndLine::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

@@ -173,7 +173,7 @@ void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
     }
     else
     {
-        point = data->GetModelingPoint(id);
+        point = data->GetPointModeling(id);
     }
     QListWidgetItem *item = new QListWidgetItem(point.name());
     item->setFont(QFont("Times", 12, QFont::Bold));

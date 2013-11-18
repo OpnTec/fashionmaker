@@ -46,7 +46,7 @@ VModelingLineIntersect::VModelingLineIntersect(VDomDocument *doc, VContainer *da
 void VModelingLineIntersect::setDialog()
 {
     Q_ASSERT(dialogLineIntersect.isNull() == false);
-    VPointF p = VAbstractTool::data.GetModelingPoint(id);
+    VPointF p = VAbstractTool::data.GetPointModeling(id);
     dialogLineIntersect->setP1Line1(p1Line1);
     dialogLineIntersect->setP2Line1(p2Line1);
     dialogLineIntersect->setP1Line2(p1Line2);
@@ -74,10 +74,10 @@ VModelingLineIntersect *VModelingLineIntersect::Create(const qint64 _id, const q
                                                        const Tool::Sources &typeCreation)
 {
     VModelingLineIntersect *point = 0;
-    VPointF p1Line1 = data->GetModelingPoint(p1Line1Id);
-    VPointF p2Line1 = data->GetModelingPoint(p2Line1Id);
-    VPointF p1Line2 = data->GetModelingPoint(p1Line2Id);
-    VPointF p2Line2 = data->GetModelingPoint(p2Line2Id);
+    VPointF p1Line1 = data->GetPointModeling(p1Line1Id);
+    VPointF p2Line1 = data->GetPointModeling(p2Line1Id);
+    VPointF p1Line2 = data->GetPointModeling(p1Line2Id);
+    VPointF p2Line2 = data->GetPointModeling(p2Line2Id);
 
     QLineF line1(p1Line1.toQPointF(), p2Line1.toQPointF());
     QLineF line2(p1Line2.toQPointF(), p2Line2.toQPointF());
@@ -88,11 +88,11 @@ VModelingLineIntersect *VModelingLineIntersect::Create(const qint64 _id, const q
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddModelingPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddPointModeling(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         }
         else
         {
-            data->UpdateModelingPoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdatePointModeling(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
@@ -126,7 +126,7 @@ void VModelingLineIntersect::FullUpdateFromFile()
         p1Line2 = domElement.attribute(AttrP1Line2, "").toLongLong();
         p2Line2 = domElement.attribute(AttrP2Line2, "").toLongLong();
     }
-    RefreshPointGeometry(VAbstractTool::data.GetModelingPoint(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
 }
 
 void VModelingLineIntersect::FullUpdateFromGui(int result)
@@ -154,7 +154,7 @@ void VModelingLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *ev
 
 void VModelingLineIntersect::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetModelingPoint(id);
+    VPointF point = VAbstractTool::data.GetPointModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);

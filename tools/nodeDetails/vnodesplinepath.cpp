@@ -55,7 +55,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
         Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
-        VSplinePath path = data->GetModelingSplinePath(id);
+        VSplinePath path = data->GetSplinePathModeling(id);
         const QVector<VSplinePoint> *points = path.GetPoint();
         for (qint32 i = 0; i<points->size(); ++i)
         {
@@ -115,7 +115,7 @@ void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodeSplinePath::RefreshGeometry()
 {
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
     path.setFillRule( Qt::WindingFill );

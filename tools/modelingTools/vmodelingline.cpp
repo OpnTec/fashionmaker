@@ -37,8 +37,8 @@ VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qin
 {
     ignoreFullUpdate = true;
     //Лінія
-    VPointF first = data->GetModelingPoint(firstPoint);
-    VPointF second = data->GetModelingPoint(secondPoint);
+    VPointF first = data->GetPointModeling(firstPoint);
+    VPointF second = data->GetPointModeling(secondPoint);
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -102,8 +102,8 @@ void VModelingLine::FullUpdateFromFile()
         firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
         secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
-    VPointF first = VAbstractTool::data.GetModelingPoint(firstPoint);
-    VPointF second = VAbstractTool::data.GetModelingPoint(secondPoint);
+    VPointF first = VAbstractTool::data.GetPointModeling(firstPoint);
+    VPointF second = VAbstractTool::data.GetPointModeling(secondPoint);
     this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
 }
 

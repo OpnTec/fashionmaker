@@ -37,7 +37,7 @@ VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qi
     controlPoints(QVector<VControlPointSpline *>())
 {
     ignoreFullUpdate = true;
-    VSplinePath splPath = data->GetModelingSplinePath(id);
+    VSplinePath splPath = data->GetSplinePathModeling(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
     path.setFillRule( Qt::WindingFill );
@@ -74,7 +74,7 @@ VModelingSplinePath::VModelingSplinePath(VDomDocument *doc, VContainer *data, qi
 void VModelingSplinePath::setDialog()
 {
     Q_ASSERT(dialogSplinePath.isNull() == false);
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     dialogSplinePath->SetPath(splPath);
 }
 
@@ -97,11 +97,11 @@ VModelingSplinePath * VModelingSplinePath::Create(const qint64 _id, const VSplin
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
-        id = data->AddModelingSplinePath(path);
+        id = data->AddSplinePathModeling(path);
     }
     else
     {
-        data->UpdateModelingSplinePath(id, path);
+        data->UpdateSplinePathModeling(id, path);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -141,7 +141,7 @@ void VModelingSplinePath::FullUpdateFromGui(int result)
             connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
                     &VModelingSplinePath::ControlPointChangePosition);
 
-            spl = VSpline (VAbstractTool::data.DataModelingPoints(), spl.GetP1(),  controlPoints[j-2]->pos(),
+            spl = VSpline (VAbstractTool::data.DataPointsModeling(), spl.GetP1(),  controlPoints[j-2]->pos(),
                            controlPoints[j-1]->pos(), spl.GetP4(), splPath.getKCurve());
             CorectControlPoints(spl, splPath, i);
             CorectControlPoints(spl, splPath, i);
@@ -162,7 +162,7 @@ void VModelingSplinePath::FullUpdateFromGui(int result)
 void VModelingSplinePath::ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
                                                  const QPointF &pos)
 {
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     VSpline spl = splPath.GetSpline(indexSpline);
     if (position == SplinePoint::FirstPoint)
     {
@@ -221,7 +221,7 @@ void VModelingSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 void VModelingSplinePath::AddToFile()
 {
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
@@ -271,7 +271,7 @@ void VModelingSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VModelingSplinePath::RemoveReferens()
 {
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     for (qint32 i = 0; i < splPath.Count(); ++i)
     {
         doc->DecrementReferens(splPath[i].P());
@@ -280,7 +280,7 @@ void VModelingSplinePath::RemoveReferens()
 
 void VModelingSplinePath::RefreshGeometry()
 {
-    VSplinePath splPath = VAbstractTool::data.GetModelingSplinePath(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
     path.setFillRule( Qt::WindingFill );
