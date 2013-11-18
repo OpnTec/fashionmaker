@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   vtablegraphicsview.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,43 +24,44 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "vtablegraphicsview.h"
-#include <QDebug>
-#include <QGraphicsItem>
-#include <QGuiApplication>
-#include <QKeyEvent>
-#include <QScrollBar>
 
-VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent) :
-    QGraphicsView(pScene, parent){
+VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
+    :QGraphicsView(pScene, parent)
+{
     QGraphicsView::setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     connect(pScene, &QGraphicsScene::selectionChanged, this, &VTableGraphicsView::selectionChanged);
 }
 
-void VTableGraphicsView::selectionChanged(){
+void VTableGraphicsView::selectionChanged()
+{
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
-    if( listSelectedItems.isEmpty() == true ){
-        qDebug() << "деталь не знайдено";
+    if ( listSelectedItems.isEmpty() == true )
+    {
+        qDebug() << tr("detail don't find");
         emit itemChect(true);
-    } else {
-        qDebug() << "деталь знайдено";
+    }
+    else
+    {
+        qDebug() << tr("detail find");
         emit itemChect(false);
     }
 }
 
-void VTableGraphicsView::rotateItems(){
-    rotateIt();
-}
-
-void VTableGraphicsView::MirrorItem(){
+void VTableGraphicsView::MirrorItem()
+{
     QList<QGraphicsItem *> list = scene()->selectedItems();
-    if(list.size()>0){
-        for( qint32 i = 0; i < list.count(); ++i ){
-            QRectF itemRectOld = list.at(i)->sceneBoundingRect();
+    if (list.size()>0)
+    {
+        for ( qint32 i = 0; i < list.count(); ++i )
+        {
+            QGraphicsItem *item = list.at(i);
+            Q_ASSERT(item != 0);
+            QRectF itemRectOld = item->sceneBoundingRect();
             //Get the current transform
-            QTransform transform(list.at(i)->transform());
+            QTransform transform(item->transform());
 
             qreal m11 = transform.m11();    // Horizontal scaling
             qreal m12 = transform.m12();    // Vertical shearing
@@ -72,110 +80,128 @@ void VTableGraphicsView::MirrorItem(){
             transform.setMatrix(m11, m12, m13, m21, m22, m23, m31, m32, m33);
 
             // Set the items transformation
-            list.at(i)->setTransform(transform);
-            QRectF itemRectNew = list.at(i)->sceneBoundingRect();
+            item->setTransform(transform);
+            QRectF itemRectNew = item->sceneBoundingRect();
             qreal dx, dy;
             dx = itemRectOld.center().x()-itemRectNew.center().x();
             dy = itemRectOld.center().y()-itemRectNew.center().y();
-            list.at(i)->moveBy(dx, dy);
+            item->moveBy(dx, dy);
         }
     }
 }
 
-void VTableGraphicsView::ZoomIn(){
-    scale(1.1,1.1);
-}
-
-void VTableGraphicsView::ZoomOut(){
-    scale(1/1.1,1/1.1);
-}
-
-void VTableGraphicsView::wheelEvent(QWheelEvent *event){
-    if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier){
+void VTableGraphicsView::wheelEvent(QWheelEvent *event)
+{
+    if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
+    {
         // Если нажата клавиша CTRL этот код выполнится
-        if ((event->delta())>0){
+        if ((event->delta())>0)
+        {
             ZoomIn();
-        } else if ((event->delta())<0){
+        }
+        else if ((event->delta())<0)
+        {
             ZoomOut();
         }
-    } else {
+    }
+    else
+    {
        verticalScrollBar()->setValue(verticalScrollBar()->value()-event->delta());
     }
 }
 
-void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress){
-    if(mousePress->button() & Qt::LeftButton){
-        switch(QGuiApplication::keyboardModifiers()){
-        case Qt::ControlModifier:
-            QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
-            QGraphicsView::mousePressEvent(mousePress);
-            break;
-        default:
-            QGraphicsView::mousePressEvent(mousePress);
-            break;
+void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress)
+{
+    if (mousePress->button() & Qt::LeftButton)
+    {
+        switch (QGuiApplication::keyboardModifiers())
+        {
+            case Qt::ControlModifier:
+                QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
+                QGraphicsView::mousePressEvent(mousePress);
+                break;
+            default:
+                QGraphicsView::mousePressEvent(mousePress);
+                break;
         }
     }
 }
 
-void VTableGraphicsView::mouseReleaseEvent(QMouseEvent *event){
+void VTableGraphicsView::mouseReleaseEvent(QMouseEvent *event)
+{
     QGraphicsView::mouseReleaseEvent ( event );
     QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
 }
 
-void VTableGraphicsView::keyPressEvent(QKeyEvent *event){
-    switch(event->key()){
-    case Qt::Key_Space:
-        rotateIt();
-        break;
-    case Qt::Key_Left:
-        MoveItem(VTableGraphicsView::Left);
-        break;
-    case Qt::Key_Right:
-        MoveItem(VTableGraphicsView::Right);
-        break;
-    case Qt::Key_Up:
-        MoveItem(VTableGraphicsView::Up);
-        break;
-    case Qt::Key_Down:
-        MoveItem(VTableGraphicsView::Down);
-        break;
+void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Space:
+            rotateIt();
+            break;
+        case Qt::Key_Left:
+            MoveItem(VTableGraphicsView::Left);
+            break;
+        case Qt::Key_Right:
+            MoveItem(VTableGraphicsView::Right);
+            break;
+        case Qt::Key_Up:
+            MoveItem(VTableGraphicsView::Up);
+            break;
+        case Qt::Key_Down:
+            MoveItem(VTableGraphicsView::Down);
+            break;
+        default:
+            break;
     }
     QGraphicsView::keyPressEvent ( event );
 }
 
-void VTableGraphicsView::rotateIt(){
+void VTableGraphicsView::rotateIt()
+{
     QList<QGraphicsItem *> list = scene()->selectedItems();
-    if(list.size()>0){
-        for( qint32 i = 0; i < list.count(); ++i ){
-            list.at(i)->setTransformOriginPoint(list.at(i)->boundingRect().center());
-            list.at(i)->setRotation(list.at(i)->rotation() + 180);
+    if (list.size()>0)
+    {
+        for ( qint32 i = 0; i < list.count(); ++i )
+        {
+            QGraphicsItem *item = list.at(i);
+            Q_ASSERT(item != 0);
+            item->setTransformOriginPoint(item->boundingRect().center());
+            item->setRotation(item->rotation() + 180);
         }
     }
 }
 
-void VTableGraphicsView::MoveItem(VTableGraphicsView::typeMove_e move){
+void VTableGraphicsView::MoveItem(VTableGraphicsView::typeMove_e move)
+{
     qreal dx = 0, dy = 0;
-    switch(move){
-    case VTableGraphicsView::Left:
-        dx = -3;
-        dy = 0;
-        break;
-    case VTableGraphicsView::Right:
-        dx = 3;
-        dy = 0;
-        break;
-    case VTableGraphicsView::Up:
-        dx = 0;
-        dy = -3;
-        break;
-    case VTableGraphicsView::Down:
-        dx = 0;
-        dy = 3;
-        break;
+    switch (move)
+    {
+        case VTableGraphicsView::Left:
+            dx = -3;
+            dy = 0;
+            break;
+        case VTableGraphicsView::Right:
+            dx = 3;
+            dy = 0;
+            break;
+        case VTableGraphicsView::Up:
+            dx = 0;
+            dy = -3;
+            break;
+        case VTableGraphicsView::Down:
+            dx = 0;
+            dy = 3;
+            break;
+        default:
+            break;
     }
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
-    if(listSelectedItems.size()>0){
-        for( qint32 i = 0; i < listSelectedItems.count(); ++i ){
+    if (listSelectedItems.size()>0)
+    {
+        for ( qint32 i = 0; i < listSelectedItems.count(); ++i )
+        {
             listSelectedItems.at(i)->moveBy(dx, dy);
         }
     }

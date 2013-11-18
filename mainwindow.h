@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   mainwindow.h
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,39 +24,35 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
-#include <QtXml>
-#include <QComboBox>
-#include <QSharedPointer>
-#include <QToolButton>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
 #include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
+#include "tools/vtooldetail.h"
 #include "tools/drawTools/drawtools.h"
 #include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
-#include "tools/vtooldetail.h"
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT    
+    Q_OBJECT
 public:
-    explicit           MainWindow(QWidget *parent = 0);
+              explicit MainWindow(QWidget *parent = 0);
                        ~MainWindow();
     void               OpenPattern(const QString &fileName);
 public slots:
-    void               mouseMove(QPointF scenePos);
+    void               mouseMove(const QPointF &scenePos);
     void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
@@ -80,6 +83,9 @@ public slots:
     void               ToolSplinePath(bool checked);
     void               ToolPointOfContact(bool checked);
     void               ToolDetail(bool checked);
+    void               ToolHeight(bool checked);
+    void               ToolTriangle(bool checked);
+    void               ToolPointOfIntersection(bool checked);
     void               ClosedDialogEndLine(int result);
     void               ClosedDialogLine(int result);
     void               ClosedDialogAlongLine(int result);
@@ -92,6 +98,9 @@ public slots:
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);
     void               ClosedDialogDetail(int result);
+    void               ClosedDialogHeight(int result);
+    void               ClosedDialogTriangle(int result);
+    void               ClosedDialogPointOfIntersection(int result);
     void               About();
     void               AboutQt();
     void               ShowToolTip(const QString &toolTip);
@@ -123,25 +132,28 @@ private:
     VMainGraphicsView  *view;
     bool               isInitialized;
     DialogIncrements   *dialogTable;
-    QSharedPointer<DialogEndLine>        dialogEndLine;
-    QSharedPointer<DialogLine>           dialogLine;
-    QSharedPointer<DialogAlongLine>      dialogAlongLine;
-    QSharedPointer<DialogShoulderPoint>  dialogShoulderPoint;
-    QSharedPointer<DialogNormal>         dialogNormal;
-    QSharedPointer<DialogBisector>       dialogBisector;
-    QSharedPointer<DialogLineIntersect>  dialogLineIntersect;
-    QSharedPointer<DialogSpline>         dialogSpline;
-    QSharedPointer<DialogArc>            dialogArc;
-    QSharedPointer<DialogSplinePath>     dialogSplinePath;
-    QSharedPointer<DialogPointOfContact> dialogPointOfContact;
-    QSharedPointer<DialogDetail>         dialogDetail;
+    QSharedPointer<DialogEndLine>             dialogEndLine;
+    QSharedPointer<DialogLine>                dialogLine;
+    QSharedPointer<DialogAlongLine>           dialogAlongLine;
+    QSharedPointer<DialogShoulderPoint>       dialogShoulderPoint;
+    QSharedPointer<DialogNormal>              dialogNormal;
+    QSharedPointer<DialogBisector>            dialogBisector;
+    QSharedPointer<DialogLineIntersect>       dialogLineIntersect;
+    QSharedPointer<DialogSpline>              dialogSpline;
+    QSharedPointer<DialogArc>                 dialogArc;
+    QSharedPointer<DialogSplinePath>          dialogSplinePath;
+    QSharedPointer<DialogPointOfContact>      dialogPointOfContact;
+    QSharedPointer<DialogDetail>              dialogDetail;
+    QSharedPointer<DialogHeight>              dialogHeight;
+    QSharedPointer<DialogTriangle>            dialogTriangle;
+    QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
     DialogHistory      *dialogHistory;
     VDomDocument       *doc;
     VContainer         *data;
     QComboBox          *comboBoxDraws;
     QString            fileName;
     bool               changeInFile;
-    Draw::Draws         mode;
+    Draw::Draws        mode;
     void               ToolBarOption();
     void               ToolBarDraws();
     void               CanselTool();
@@ -149,13 +161,14 @@ private:
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
     template <typename Dialog, typename Func>
-    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor,
-                                     const QString &toolTip,QSharedPointer<Dialog> &dialog,
-                                     Func closeDialogSlot);
+    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+                                     QSharedPointer<Dialog> &dialog, Func closeDialogSlot);
     void               MinimumScrollBar();
     template <typename T>
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
+    template <typename DrawTool, typename ModelingTool, typename Dialog>
+    void               ClosedDialog(QSharedPointer<Dialog> &dialog, int result);
     bool               SafeSaveing(const QString &fileName)const;
     void               AutoSavePattern();
 };

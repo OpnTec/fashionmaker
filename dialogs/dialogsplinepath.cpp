@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   dialogsplinepath.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,14 +24,15 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
-#include "geometry/vsplinepoint.h"
+#include "../geometry/vsplinepoint.h"
 
-DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()){
+DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
+{
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogSplinePath::DialogAccepted);
@@ -53,14 +61,12 @@ DialogSplinePath::~DialogSplinePath()
     delete ui;
 }
 
-VSplinePath DialogSplinePath::GetPath() const{
-    return path;
-}
-
-void DialogSplinePath::SetPath(const VSplinePath &value){
+void DialogSplinePath::SetPath(const VSplinePath &value)
+{
     this->path = value;
-    ui->listWidget->clear();   
-    for(qint32 i = 0; i < path.CountPoint(); ++i){
+    ui->listWidget->clear();
+    for (qint32 i = 0; i < path.CountPoint(); ++i)
+    {
         NewItem(path[i].P(), path[i].KAsm1(), path[i].Angle2(), path[i].KAsm2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
@@ -68,28 +74,36 @@ void DialogSplinePath::SetPath(const VSplinePath &value){
 }
 
 
-void DialogSplinePath::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         NewItem(id, 1, 0, 1);
         emit ToolTip(tr("Select point of curve path"));
         this->show();
     }
 }
 
-void DialogSplinePath::DialogAccepted(){
+void DialogSplinePath::DialogAccepted()
+{
     path.Clear();
-    for(qint32 i = 0; i < ui->listWidget->count(); ++i){
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
         QListWidgetItem *item = ui->listWidget->item(i);
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
@@ -98,8 +112,10 @@ void DialogSplinePath::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogSplinePath::PointChenged(int row){
-    if(ui->listWidget->count() == 0){
+void DialogSplinePath::PointChenged(int row)
+{
+    if (ui->listWidget->count() == 0)
+    {
         return;
     }
     QListWidgetItem *item = ui->listWidget->item( row );
@@ -108,7 +124,8 @@ void DialogSplinePath::PointChenged(int row){
     EnableFields();
 }
 
-void DialogSplinePath::currentPointChanged(int index){
+void DialogSplinePath::currentPointChanged(int index)
+{
     qint64 id = qvariant_cast<qint64>(ui->comboBoxPoint->itemData(index));
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
@@ -119,15 +136,18 @@ void DialogSplinePath::currentPointChanged(int index){
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::Angle1Changed(int index){
+void DialogSplinePath::Angle1Changed(int index)
+{
     SetAngle(index+180);
 }
 
-void DialogSplinePath::Angle2Changed(int index){
+void DialogSplinePath::Angle2Changed(int index)
+{
     SetAngle(index);
 }
 
-void DialogSplinePath::KAsm1Changed(qreal d){
+void DialogSplinePath::KAsm1Changed(qreal d)
+{
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -135,7 +155,8 @@ void DialogSplinePath::KAsm1Changed(qreal d){
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::KAsm2Changed(qreal d){
+void DialogSplinePath::KAsm2Changed(qreal d)
+{
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -143,11 +164,15 @@ void DialogSplinePath::KAsm2Changed(qreal d){
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2){
+void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
+{
     VPointF point;
-    if(mode == Draw::Calculation){
+    if (mode == Draw::Calculation)
+    {
         point = data->GetPoint(id);
-    } else {
+    }
+    else
+    {
         point = data->GetModelingPoint(id);
     }
     QListWidgetItem *item = new QListWidgetItem(point.name());
@@ -159,7 +184,8 @@ void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
     EnableFields();
 }
 
-void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2){
+void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
+{
     disconnect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &DialogSplinePath::currentPointChanged);
     disconnect(ui->spinBoxAngle1,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
@@ -189,25 +215,29 @@ void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAs
             this, &DialogSplinePath::KAsm2Changed);
 }
 
-void DialogSplinePath::EnableFields(){
+void DialogSplinePath::EnableFields()
+{
     ui->doubleSpinBoxKasm1->setEnabled(true);
     ui->spinBoxAngle1->setEnabled(true);
     ui->doubleSpinBoxKasm2->setEnabled(true);
     ui->spinBoxAngle2->setEnabled(true);
     qint32 row = ui->listWidget->currentRow();
-    if(row == 0){
+    if (row == 0)
+    {
         ui->doubleSpinBoxKasm1->setEnabled(false);
         ui->spinBoxAngle1->setEnabled(false);
         return;
     }
-    if(row == ui->listWidget->count()-1){
+    if (row == ui->listWidget->count()-1)
+    {
         ui->doubleSpinBoxKasm2->setEnabled(false);
         ui->spinBoxAngle2->setEnabled(false);
         return;
     }
 }
 
-void DialogSplinePath::SetAngle(qint32 angle){
+void DialogSplinePath::SetAngle(qint32 angle)
+{
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));

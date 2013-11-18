@@ -495,7 +495,7 @@
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Length of arcs</string>
+            <string>Length of curves</string>
            </property>
           </widget>
          </item>

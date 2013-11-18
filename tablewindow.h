@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   tablewindow.h
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,23 +24,24 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #ifndef TABLEWINDOW_H
 #define TABLEWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
 #include "widgets/vitem.h"
 
-namespace Ui {
+namespace Ui
+{
     class TableWindow;
 }
 
 /**
  * @brief TableWindow клас вікна створення розкладки.
  */
-class TableWindow : public QMainWindow{
+class TableWindow : public QMainWindow
+{
     Q_OBJECT
 public:
     /**
@@ -48,7 +56,7 @@ public:
      * @brief TableWindow Конструктор класу вікна створення розкладки.
      * @param parent Батько об'єкту. За замовчуванням = 0.
      */
-    explicit              TableWindow(QWidget *parent = 0);
+                 explicit TableWindow(QWidget *parent = 0);
     /**
      * @brief ~TableWindow Деструктор класу вікна.
      */

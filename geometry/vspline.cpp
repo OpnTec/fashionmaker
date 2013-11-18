@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   vspline.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,36 +24,40 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "vspline.h"
-#include <QDebug>
 
-VSpline::VSpline():p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-    kCurve(1), points(0), mode(Draw::Calculation), idObject(0){
-}
+VSpline::VSpline()
+    :p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1),
+      points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}
 
-VSpline::VSpline ( const VSpline & spline ):p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()),
-    p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()),
-    kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()), points(spline.GetDataPoints()),
-    mode(spline.getMode()), idObject(spline.getIdObject()){
-}
+VSpline::VSpline ( const VSpline & spline )
+    :p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()),
+      angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()),
+      points(spline.GetDataPoints()), mode(spline.getMode()), idObject(spline.getIdObject()), _name(spline.name()){}
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2 , qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(QPointF()), p3(QPointF()),
-    p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve), points(points),
-    mode(mode), idObject(idObject){
+                  qreal kAsm1, qreal kAsm2, qreal kCurve, Draw::Draws mode, qint64 idObject)
+    :p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2),
+      kCurve(kCurve), points(*points), mode(mode), idObject(idObject), _name(QString())
+{
+    _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve, Draw::Draws mode, qint64 idObject):p1(p1), p2(p2), p3(p3), p4(p4), angle1(0),
-    angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(points), mode(mode), idObject(idObject){
+                  qreal kCurve, Draw::Draws mode, qint64 idObject)
+    :p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(*points), mode(mode),
+      idObject(idObject), _name(QString())
+{
+    _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
 void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                          qreal kAsm1, qreal kAsm2, qreal kCurve){
+                          qreal kAsm1, qreal kAsm2, qreal kCurve)
+{
     this->p1 = p1;
     this->p4 = p4;
     this->angle1 = angle1;
@@ -63,7 +74,7 @@ void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
     //    }
     QPointF point1 = GetPointP1().toQPointF();
     QPointF point4 = GetPointP4().toQPointF();
-    radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
+    radius = QLineF(QPointF(point1.x(), point4.y()), point4).length();
     //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
     QLineF p1p2(GetPointP1().x(), GetPointP1().y(), GetPointP1().x() + L * kAsm1, GetPointP1().y());
@@ -74,7 +85,8 @@ void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
     this->p3 = p4p3.p2();
 }
 
-void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCurve){
+void VSpline::ModifiSpl (const qint64 &p1, const QPointF &p2, const QPointF &p3, const qint64 &p4, const qreal &kCurve)
+{
     this->p1 = p1;
     this->p2 = p2;
     this->p3 = p3;
@@ -91,7 +103,7 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
     //    }
     QPointF point1 = GetPointP1().toQPointF();
     QPointF point4 = GetPointP4().toQPointF();
-    radius = QLineF(QPointF(point1.x(), point4.y()),point4).length();
+    radius = QLineF(QPointF(point1.x(), point4.y()), point4).length();
     //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
 
@@ -124,77 +136,48 @@ void VSpline::ModifiSpl (qint64 p1, QPointF p2, QPointF p3, qint64 p4, qreal kCu
 //    p4 = QPointF(p4.x()+mx, p4.y()+my);
 //}
 
-qint64 VSpline::GetP1 () const{
-    return p1;
-}
-
-VPointF VSpline::GetPointP1() const{
-    if(points->contains(p1)){
-        return points->value(p1);
-    } else {
+VPointF VSpline::GetPointP1() const
+{
+    if (points.contains(p1))
+    {
+        return points.value(p1);
+    }
+    else
+    {
         qCritical()<<"Не можу знайти id = "<<p1<<" в таблиці.";
-        throw"Не можу знайти точку за id.";
+        throw "Не можу знайти точку за id.";
     }
     return VPointF();
 }
 
-QPointF VSpline::GetP2 () const{
-    return p2;
-}
-
-QPointF VSpline::GetP3 () const{
-    return p3;
-}
-
-qint64 VSpline::GetP4() const{
-    return p4;
-}
-
-VPointF VSpline::GetPointP4() const{
-    if(points->contains(p4)){
-        return points->value(p4);
-    } else {
+VPointF VSpline::GetPointP4() const
+{
+    if (points.contains(p4))
+    {
+        return points.value(p4);
+    }
+    else
+    {
         qCritical()<<"Не можу знайти id = "<<p4<<" в таблиці.";
-        throw"Не можу знайти точку за id.";
+        throw "Не можу знайти точку за id.";
     }
     return VPointF();
 }
 
-qreal VSpline::GetAngle1() const{
-    return angle1;
-}
-
-qreal VSpline::GetAngle2 () const{
-    return angle2;
-}
-
-qreal VSpline::GetLength () const{
+qreal VSpline::GetLength () const
+{
     return LengthBezier ( GetPointP1().toQPointF(), this->p2, this->p3, GetPointP4().toQPointF());
 }
 
-QString VSpline::GetName() const{
+QString VSpline::GetName() const
+{
     VPointF first = GetPointP1();
     VPointF second = GetPointP4();
     return QString("Spl_%1_%2").arg(first.name(), second.name());
 }
 
-qreal VSpline::GetKasm1() const{
-    return kAsm1;
-}
-
-qreal VSpline::GetKasm2() const{
-    return kAsm2;
-}
-
-qreal VSpline::GetKcurve() const{
-    return kCurve;
-}
-
-const QHash<qint64, VPointF> *VSpline::GetDataPoints() const{
-    return points;
-}
-
-QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const{
+QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const
+{
     QVector<qreal> px;
     QVector<qreal> py;
     px.append ( GetPointP1 ().x () );
@@ -209,10 +192,12 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
     qint32 i = 0;
     QPointF crosPoint;
     QLineF::IntersectType type = QLineF::NoIntersection;
-    for ( i = 0; i < px.count()-1; ++i ){
+    for ( i = 0; i < px.count()-1; ++i )
+    {
         type = line.intersect(QLineF ( QPointF ( px[i], py[i] ),
                                        QPointF ( px[i+1], py[i+1] )), &crosPoint);
-        if ( type == QLineF::BoundedIntersection ){
+        if ( type == QLineF::BoundedIntersection )
+        {
             *intersectionPoint = crosPoint;
             return type;
         }
@@ -277,7 +262,8 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
 //    }
 //}
 
-QVector<QPointF> VSpline::GetPoints () const{
+QVector<QPointF> VSpline::GetPoints () const
+{
     return GetPoints(GetPointP1().toQPointF(), p2, p3, GetPointP4().toQPointF());
 //    QLineF line1(points.at(0).toPoint(), points.at(1).toPoint());
 //    line1.setLength(500);
@@ -301,7 +287,8 @@ QVector<QPointF> VSpline::GetPoints () const{
 //    }
 }
 
-QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF p4){
+QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
+{
     QVector<QPointF> pvector;
     QVector<qreal> x;
     QVector<qreal> y;
@@ -313,36 +300,20 @@ QVector<QPointF> VSpline::GetPoints (QPointF p1, QPointF p2, QPointF p3, QPointF
                     p3.x (), p3.y (), p4.x (), p4.y (), 0, wx, wy );
     x.append ( p4.x () );
     y.append ( p4.y () );
-    for ( qint32 i = 0; i < x.count(); ++i ){
+    for ( qint32 i = 0; i < x.count(); ++i )
+    {
         pvector.append( QPointF ( x[i], y[i] ) );
     }
     return pvector;
 }
 
-qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) const{
-    /*QVector<qreal> px;
-    QVector<qreal> py;
-    QVector<qreal>& wpx = px;
-    QVector<qreal>& wpy = py;
-    px.append ( p1.x () );
-    py.append ( p1.y () );
-    PointBezier_r ( p1.x (), p1.y (), p2.x (), p2.y (),
-                  p3.x (), p3.y (), p4.x (), p4.y (), 0, wpx, wpy);
-    px.append ( p4.x () );
-    py.append ( p4.y () );
-    qint32 i = 0;
-    qreal length = 0.0;
-     *
-     * Наприклад маємо 10 точок. Від 0 до 9  і останню точку не опрацьовуємо.
-     * Тому від 0 до 8(<10-1).
-     *
-    for ( i = 0; i < px.count() - 1; ++i ){
-        length += QLineF ( QPointF ( px[i], py[i] ), QPointF ( px[i+1], py[i+1] ) ).length ();
-    }*/
+qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const
+{
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);
     splinePath.moveTo(points[0]);
-    for (qint32 i = 1; i < points.count(); ++i){
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
         splinePath.lineTo(points[i]);
     }
     return splinePath.length();
@@ -350,9 +321,10 @@ qreal VSpline::LengthBezier ( QPointF p1, QPointF p2, QPointF p3, QPointF p4 ) c
 
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                               qreal x3, qreal y3, qreal x4, qreal y4,
-                              qint16 level, QVector<qreal> &px, QVector<qreal> &py){
-    const double curve_collinearity_epsilon              	= 1e-30;
-    const double curve_angle_tolerance_epsilon           	= 0.01;
+                              qint16 level, QVector<qreal> &px, QVector<qreal> &py)
+{
+    const double curve_collinearity_epsilon                 = 1e-30;
+    const double curve_angle_tolerance_epsilon              = 0.01;
     const double m_angle_tolerance = 0.0;
     enum curve_recursion_limit_e { curve_recursion_limit = 32 };
     const double m_cusp_limit = 0.0;
@@ -362,7 +334,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     m_distance_tolerance_square = 0.5 / m_approximation_scale;
     m_distance_tolerance_square *= m_distance_tolerance_square;
     
-    if(level > curve_recursion_limit)
+    if (level > curve_recursion_limit)
     {
         return;
     }
@@ -388,221 +360,246 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     double dx = x4-x1;
     double dy = y4-y1;
     
-    double d2 = fabs(((x2 - x4) * dy - (y2 - y4) * dx));
-    double d3 = fabs(((x3 - x4) * dy - (y3 - y4) * dx));
+    double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
+    double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
     double da1, da2, k;
     
-    switch((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
-           static_cast<int>(d3 > curve_collinearity_epsilon))
+    switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
+             static_cast<int>(d3 > curve_collinearity_epsilon))
     {
-    case 0:
-        // All collinear OR p1==p4
-        //----------------------
-        k = dx*dx + dy*dy;
-        if(k == 0)
-        {
-            d2 = CalcSqDistance(x1, y1, x2, y2);
-            d3 = CalcSqDistance(x4, y4, x3, y3);
-        }
-        else
-        {
-            k   = 1 / k;
-            da1 = x2 - x1;
-            da2 = y2 - y1;
-            d2  = k * (da1*dx + da2*dy);
-            da1 = x3 - x1;
-            da2 = y3 - y1;
-            d3  = k * (da1*dx + da2*dy);
-            if(d2 > 0 && d2 < 1 && d3 > 0 && d3 < 1)
-            {
-                // Simple collinear case, 1---2---3---4
-                // We can leave just two endpoints
-                return;
-            }
-            if(d2 <= 0)
-                d2 = CalcSqDistance(x2, y2, x1, y1);
-            else if(d2 >= 1)
-                d2 = CalcSqDistance(x2, y2, x4, y4);
-            else
-                d2 = CalcSqDistance(x2, y2, x1 + d2*dx, y1 + d2*dy);
-            
-            if(d3 <= 0)
-                d3 = CalcSqDistance(x3, y3, x1, y1);
-            else if(d3 >= 1)
-                d3 = CalcSqDistance(x3, y3, x4, y4);
-            else
-                d3 = CalcSqDistance(x3, y3, x1 + d3*dx, y1 + d3*dy);
-        }
-        if(d2 > d3)
-        {
-            if(d2 < m_distance_tolerance_square)
-            {
-                
-                px.append(x2);
-                py.append(y2);
-                //m_points.add(point_d(x2, y2));
-                return;
-            }
-        }
-        else
-        {
-            if(d3 < m_distance_tolerance_square)
-            {
-                
-                px.append(x3);
-                py.append(y3);
-                //m_points.add(point_d(x3, y3));
-                return;
-            }
-        }
-        break;
-    case 1:
-        // p1,p2,p4 are collinear, p3 is significant
-        //----------------------
-        if(d3 * d3 <= m_distance_tolerance_square * (dx*dx + dy*dy))
-        {
-            if(m_angle_tolerance < curve_angle_tolerance_epsilon)
-            {
-                
-                px.append(x23);
-                py.append(y23);
-                //m_points.add(point_d(x23, y23));
-                return;
-            }
-            
-            // Angle Condition
+        case 0:
+            // All collinear OR p1==p4
             //----------------------
-            da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
-            if(da1 >= M_PI)
-                da1 = 2*M_PI - da1;
-            
-            if(da1 < m_angle_tolerance)
+            k = dx*dx + dy*dy;
+            if (k < 0.000000001)
             {
-                
-                px.append(x2);
-                py.append(y2);
-                
-                px.append(x3);
-                py.append(y3);
-                //m_points.add(point_d(x2, y2));
-                //m_points.add(point_d(x3, y3));
-                return;
+                d2 = CalcSqDistance(x1, y1, x2, y2);
+                d3 = CalcSqDistance(x4, y4, x3, y3);
             }
-            
-            if(m_cusp_limit != 0.0)
+            else
             {
-                if(da1 > m_cusp_limit)
+                k   = 1 / k;
+                da1 = x2 - x1;
+                da2 = y2 - y1;
+                d2  = k * (da1*dx + da2*dy);
+                da1 = x3 - x1;
+                da2 = y3 - y1;
+                d3  = k * (da1*dx + da2*dy);
+                if (d2 > 0 && d2 < 1 && d3 > 0 && d3 < 1)
                 {
-                    
+                    // Simple collinear case, 1---2---3---4
+                    // We can leave just two endpoints
+                    return;
+                }
+                if (d2 <= 0)
+                {
+                    d2 = CalcSqDistance(x2, y2, x1, y1);
+                }
+                else if (d2 >= 1)
+                {
+                    d2 = CalcSqDistance(x2, y2, x4, y4);
+                }
+                else
+                {
+                    d2 = CalcSqDistance(x2, y2, x1 + d2*dx, y1 + d2*dy);
+                }
+
+                if (d3 <= 0)
+                {
+                    d3 = CalcSqDistance(x3, y3, x1, y1);
+                }
+                else if (d3 >= 1)
+                {
+                    d3 = CalcSqDistance(x3, y3, x4, y4);
+                }
+                else
+                {
+                    d3 = CalcSqDistance(x3, y3, x1 + d3*dx, y1 + d3*dy);
+                }
+            }
+            if (d2 > d3)
+            {
+                if (d2 < m_distance_tolerance_square)
+                {
+
+                    px.append(x2);
+                    py.append(y2);
+                    //m_points.add(point_d(x2, y2));
+                    return;
+                }
+            }
+            else
+            {
+                if (d3 < m_distance_tolerance_square)
+                {
+
                     px.append(x3);
                     py.append(y3);
                     //m_points.add(point_d(x3, y3));
                     return;
                 }
             }
-        }
-        break;
-        
-    case 2:
-        // p1,p3,p4 are collinear, p2 is significant
-        //----------------------
-        if(d2 * d2 <= m_distance_tolerance_square * (dx*dx + dy*dy))
-        {
-            if(m_angle_tolerance < curve_angle_tolerance_epsilon)
-            {
-                
-                px.append(x23);
-                py.append(y23);
-                //m_points.add(point_d(x23, y23));
-                return;
-            }
-            
-            // Angle Condition
+            break;
+        case 1:
+            // p1,p2,p4 are collinear, p3 is significant
             //----------------------
-            da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
-            if(da1 >= M_PI) da1 = 2*M_PI - da1;
-            
-            if(da1 < m_angle_tolerance)
+            if (d3 * d3 <= m_distance_tolerance_square * (dx*dx + dy*dy))
             {
-                
-                px.append(x2);
-                py.append(y2);
-                
-                px.append(x3);
-                py.append(y3);
-                //m_points.add(point_d(x2, y2));
-                //m_points.add(point_d(x3, y3));
-                return;
-            }
-            
-            if(m_cusp_limit != 0.0)
-            {
-                if(da1 > m_cusp_limit)
+                if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
-                    px.append(x2);
-                    py.append(y2);
-                    
-                    //m_points.add(point_d(x2, y2));
+
+                    px.append(x23);
+                    py.append(y23);
+                    //m_points.add(point_d(x23, y23));
                     return;
                 }
-            }
-        }
-        break;
-        
-    case 3:
-        // Regular case
-        //-----------------
-        if((d2 + d3)*(d2 + d3) <= m_distance_tolerance_square * (dx*dx + dy*dy))
-        {
-            // If the curvature doesn't exceed the distance_tolerance value
-            // we tend to finish subdivisions.
-            //----------------------
-            if(m_angle_tolerance < curve_angle_tolerance_epsilon)
-            {
-                
-                px.append(x23);
-                py.append(y23);
-                //m_points.add(point_d(x23, y23));
-                return;
-            }
-            
-            // Angle & Cusp Condition
-            //----------------------
-            k   = atan2(y3 - y2, x3 - x2);
-            da1 = fabs(k - atan2(y2 - y1, x2 - x1));
-            da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
-            if(da1 >= M_PI) da1 = 2*M_PI - da1;
-            if(da2 >= M_PI) da2 = 2*M_PI - da2;
-            
-            if(da1 + da2 < m_angle_tolerance)
-            {
-                // Finally we can stop the recursion
+
+                // Angle Condition
                 //----------------------
-                
-                px.append(x23);
-                py.append(y23);
-                //m_points.add(point_d(x23, y23));
-                return;
-            }
-            
-            if(m_cusp_limit != 0.0)
-            {
-                if(da1 > m_cusp_limit)
+                da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
+                if (da1 >= M_PI)
                 {
+                    da1 = 2*M_PI - da1;
+                }
+
+                if (da1 < m_angle_tolerance)
+                {
+
                     px.append(x2);
                     py.append(y2);
-                    return;
-                }
-                
-                if(da2 > m_cusp_limit)
-                {
+
                     px.append(x3);
                     py.append(y3);
+                    //m_points.add(point_d(x2, y2));
+                    //m_points.add(point_d(x3, y3));
                     return;
                 }
+
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
+                {
+                    if (da1 > m_cusp_limit)
+                    {
+
+                        px.append(x3);
+                        py.append(y3);
+                        //m_points.add(point_d(x3, y3));
+                        return;
+                    }
+                }
             }
-        }
-        break;
+            break;
+
+        case 2:
+            // p1,p3,p4 are collinear, p2 is significant
+            //----------------------
+            if (d2 * d2 <= m_distance_tolerance_square * (dx*dx + dy*dy))
+            {
+                if (m_angle_tolerance < curve_angle_tolerance_epsilon)
+                {
+
+                    px.append(x23);
+                    py.append(y23);
+                    //m_points.add(point_d(x23, y23));
+                    return;
+                }
+
+                // Angle Condition
+                //----------------------
+                da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
+                if (da1 >= M_PI)
+                {
+                    da1 = 2*M_PI - da1;
+                }
+
+                if (da1 < m_angle_tolerance)
+                {
+
+                    px.append(x2);
+                    py.append(y2);
+
+                    px.append(x3);
+                    py.append(y3);
+                    //m_points.add(point_d(x2, y2));
+                    //m_points.add(point_d(x3, y3));
+                    return;
+                }
+
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
+                {
+                    if (da1 > m_cusp_limit)
+                    {
+                        px.append(x2);
+                        py.append(y2);
+
+                        //m_points.add(point_d(x2, y2));
+                        return;
+                    }
+                }
+            }
+            break;
+
+        case 3:
+            // Regular case
+            //-----------------
+            if ((d2 + d3)*(d2 + d3) <= m_distance_tolerance_square * (dx*dx + dy*dy))
+            {
+                // If the curvature doesn't exceed the distance_tolerance value
+                // we tend to finish subdivisions.
+                //----------------------
+                if (m_angle_tolerance < curve_angle_tolerance_epsilon)
+                {
+
+                    px.append(x23);
+                    py.append(y23);
+                    //m_points.add(point_d(x23, y23));
+                    return;
+                }
+
+                // Angle & Cusp Condition
+                //----------------------
+                k   = atan2(y3 - y2, x3 - x2);
+                da1 = fabs(k - atan2(y2 - y1, x2 - x1));
+                da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
+                if (da1 >= M_PI)
+                {
+                    da1 = 2*M_PI - da1;
+                }
+                if (da2 >= M_PI)
+                {
+                    da2 = 2*M_PI - da2;
+                }
+
+                if (da1 + da2 < m_angle_tolerance)
+                {
+                    // Finally we can stop the recursion
+                    //----------------------
+
+                    px.append(x23);
+                    py.append(y23);
+                    //m_points.add(point_d(x23, y23));
+                    return;
+                }
+
+                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
+                {
+                    if (da1 > m_cusp_limit)
+                    {
+                        px.append(x2);
+                        py.append(y2);
+                        return;
+                    }
+
+                    if (da2 > m_cusp_limit)
+                    {
+                        px.append(x3);
+                        py.append(y3);
+                        return;
+                    }
+                }
+            }
+            break;
+        default:
+            break;
     }
     
     // Continue subdivision
@@ -611,24 +608,33 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py);
 }
 
-qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2){
+qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
+{
     qreal dx = x2 - x1;
     qreal dy = y2 - y1;
     return dx * dx + dy * dy;
 }
 
-QPainterPath VSpline::GetPath() const{
+QPainterPath VSpline::GetPath() const
+{
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints ();
-    splinePath.moveTo(points[0]);
-    for (qint32 i = 1; i < points.count(); ++i){
-        splinePath.lineTo(points[i]);
+    if (points.count() >= 2)
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            splinePath.moveTo(points[i]);
+            splinePath.lineTo(points[i+1]);
+        }
+    }
+    else
+    {
+        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return splinePath;
 }
 
 /* Cubic equation solution. Real coefficients case.
-  
    int Cubic(double *x,double a,double b,double c);
    Parameters:
    x - solution array (size 3). On output:
@@ -642,62 +648,62 @@ QPainterPath VSpline::GetPath() const{
             2 - 1 real root + complex roots imaginary part is zero
                 (i.e. 2 real roots).
 */
-qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
-    qreal q,r,r2,q3;
-    
-    q = (a*a - 3.*b)/9.;
-    r = (a*(2.*a*a - 9.*b) + 27.*c)/54.;
-    r2 = r*r;
-    q3 = pow(q,3);
-    if(r2<q3) {
-        qreal t = acos(r/sqrt(q3));
-        a/=3.;
-        q = -2.*sqrt(q);
-        x[0] = q*cos(t/3.)-a;
-        x[1] = q*cos((t + M_2PI)/3.) - a;
-        x[2] = q*cos((t - M_2PI)/3.) - a;
-        return(3);
-    } else {
-        qreal aa,bb;
-        if(r<=0.){
-            r=-r;
-        }
-        aa = -pow(r + sqrt(r2-q3),1./3.);
-        if(aa!=0.){
-            bb=q/aa;
-        } else {
-            bb=0.;
-        }
-        a/=3.;
-        q = aa+bb;
-        r = aa-bb;
-        x[0] = q-a;
-        x[1] = (-0.5)*q-a;
-        x[2] = (sqrt(3.)*0.5)*fabs(r);
-        if(x[2]==0.){
-            return(2);
-        }
-        return(1);
-    }
-}
-
+//qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
+//    qreal q,r,r2,q3;
+//
+//    q = (a*a - 3.*b)/9.;
+//    r = (a*(2.*a*a - 9.*b) + 27.*c)/54.;
+//    r2 = r*r;
+//    q3 = pow(q,3);
+//    if(r2<q3) {
+//        qreal t = acos(r/sqrt(q3));
+//        a/=3.;
+//        q = -2.*sqrt(q);
+//        x[0] = q*cos(t/3.)-a;
+//        x[1] = q*cos((t + M_2PI)/3.) - a;
+//        x[2] = q*cos((t - M_2PI)/3.) - a;
+//        return(3);
+//    } else {
+//        qreal aa,bb;
+//        if(r<=0.){
+//            r=-r;
+//        }
+//        aa = -pow(r + sqrt(r2-q3),1./3.);
+//        if(aa!=0.){
+//            bb=q/aa;
+//        } else {
+//            bb=0.;
+//        }
+//        a/=3.;
+//        q = aa+bb;
+//        r = aa-bb;
+//        x[0] = q-a;
+//        x[1] = (-0.5)*q-a;
+//        x[2] = (sqrt(3.)*0.5)*fabs(r);
+//        if(x[2]==0.){
+//            return(2);
+//        }
+//        return(1);
+//    }
+//}
+//
 //qreal VSpline::calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3,
 //                       qreal curve_coord4, qreal point_coord) const{
 //    qreal P1, P2, P3, P4, Bt;
 //    qreal a, b, c, d, ret_t;
-    
+//
 //    qreal *t = static_cast<qreal *>(malloc(3*sizeof(qreal)));
 //    P1 = curve_coord1;
 //    P2 = curve_coord2;
 //    P3 = curve_coord3;
 //    P4 = curve_coord4;
 //    Bt = point_coord;
-    
+//
 //    a = -P1 + 3*P2 - 3*P3 + P4;
 //    b = 3*P1 - 6*P2 + 3*P3;
 //    c = -3*P1 + 3*P2;
 //    d = -Bt + P1;
-    
+//
 //    if(Cubic(t, b/a, c/a, d/a) == 3){
 //        ret_t = t[2];
 //    } else {
@@ -707,7 +713,7 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //      * Повертається три значення, але експереминтально знайдено що шукане
 //      * значення знаходиться в третьому.
 //      */
-    
+//
 //    free(t);
 //    if(ret_t<0 || ret_t>1){
 //        qDebug()<<"Неправильне значення параметра. фунція calc_t";
@@ -731,7 +737,7 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //    else
 //        return t_y;
 //}
-
+//
 //void VSpline::Mirror(const QPointF Pmirror){
 //    QPointF P1 = p1;
 //    P1 = QPointF(P1.x() - Pmirror.x(), P1.y() - Pmirror.y());
@@ -752,20 +758,13 @@ qint32 VSpline::Cubic(qreal *x, qreal a, qreal b, qreal c){
 //    this->ModifiSpl(P1, P2, P3, P4);
 //}
 
-Draw::Draws VSpline::getMode() const{
-    return mode;
-}
-
-void VSpline::setMode(const Draw::Draws &value){
-    mode = value;
-}
-
-QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qreal angle2, qreal kAsm1,
-                                       qreal kAsm2, qreal kCurve){
+QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
+                                       qreal kAsm2, qreal kCurve)
+{
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
     p1pX.setAngle( angle1 );
     qreal L = 0, radius = 0, angle = 90;
-    radius = QLineF(QPointF(p1.x(), p4.y()),p4).length();
+    radius = QLineF(QPointF(p1.x(), p4.y()), p4).length();
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
     p1p2.setAngle(angle1);
@@ -776,15 +775,8 @@ QVector<QPointF> VSpline::SplinePoints(QPointF p1, QPointF p4, qreal angle1, qre
     return GetPoints(p1, p2, p3, p4);
 }
 
-qint64 VSpline::getIdObject() const{
-    return idObject;
-}
-
-void VSpline::setIdObject(const qint64 &value){
-    idObject = value;
-}
-
-VSpline &VSpline::operator =(const VSpline &spline){
+VSpline &VSpline::operator =(const VSpline &spline)
+{
     this->p1 = spline.GetP1 ();
     this->p2 = spline.GetP2 ();
     this->p3 = spline.GetP3 ();
@@ -797,5 +789,6 @@ VSpline &VSpline::operator =(const VSpline &spline){
     this->points = spline.GetDataPoints();
     this->mode = spline.getMode();
     this->idObject = spline.getIdObject();
+    this->_name = spline.name();
     return *this;
 }

@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   dialogbisector.h
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,41 +24,39 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #ifndef DIALOGBISECTOR_H
 #define DIALOGBISECTOR_H
 
 #include "dialogtool.h"
-#include <QListWidgetItem>
-#include "container/calculator.h"
 
-namespace Ui {
-class DialogBisector;
+namespace Ui
+{
+    class DialogBisector;
 }
 
 class DialogBisector : public DialogTool
 {
     Q_OBJECT
-    
 public:
     explicit DialogBisector(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                             QWidget *parent = 0);
-    ~DialogBisector();
-    QString           getPointName() const;
+                      ~DialogBisector();
+    QString           getPointName() const {return pointName;}
     void              setPointName(const QString &value);
-    QString           getTypeLine() const;
+    inline QString    getTypeLine() const {return typeLine;}
     void              setTypeLine(const QString &value);
-    QString           getFormula() const;
+    inline QString    getFormula() const {return formula;}
     void              setFormula(const QString &value);
-    qint64            getFirstPointId() const;
+    inline qint64     getFirstPointId() const {return firstPointId;}
     void              setFirstPointId(const qint64 &value, const qint64 &id);
-    qint64            getSecondPointId() const;
+    inline qint64     getSecondPointId() const {return secondPointId;}
     void              setSecondPointId(const qint64 &value, const qint64 &id);
-    qint64            getThirdPointId() const;
+    inline qint64     getThirdPointId() const {return thirdPointId;}
     void              setThirdPointId(const qint64 &value, const qint64 &id);
 public slots:
-    virtual void      ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogBisector)

@@ -12,5 +12,8 @@
         <file>cursor/splinepath_cursor.png</file>
         <file>cursor/pointcontact_cursor.png</file>
         <file>cursor/new_detail_cursor.png</file>
+        <file>cursor/height_cursor.png</file>
+        <file>cursor/triangle_cursor.png</file>
+        <file>cursor/pointofintersect_cursor.png</file>
     </qresource>
 </RCC>

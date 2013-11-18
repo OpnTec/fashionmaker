@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   dialogendline.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,18 +24,15 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
-#include <QCloseEvent>
-#include <QString>
-#include "container/vpointf.h"
-#include "container/calculator.h"
 
-DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
-    formula(QString()), angle(0), basePointId(0){
+DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+    formula(QString()), angle(0), basePointId(0)
+{
     ui->setupUi(this);
     spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
@@ -38,6 +42,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -76,28 +82,39 @@ DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogEndLine::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEndLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEndLine::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogEndLine::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEndLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogEndLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
@@ -106,51 +123,37 @@ void DialogEndLine::ChoosedObject(qint64 id, Scene::Scenes type){
     }
 }
 
-QString DialogEndLine::getPointName() const{
-    return pointName;
-}
-
-void DialogEndLine::setPointName(const QString &value){
+void DialogEndLine::setPointName(const QString &value)
+{
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
-QString DialogEndLine::getTypeLine() const{
-    return typeLine;
-}
-
-void DialogEndLine::setTypeLine(const QString &value){
+void DialogEndLine::setTypeLine(const QString &value)
+{
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-QString DialogEndLine::getFormula() const{
-    return formula;
-}
-
-void DialogEndLine::setFormula(const QString &value){
+void DialogEndLine::setFormula(const QString &value)
+{
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-qreal DialogEndLine::getAngle() const{
-    return angle;
-}
-
-void DialogEndLine::setAngle(const qreal &value){
+void DialogEndLine::setAngle(const qreal &value)
+{
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
-qint64 DialogEndLine::getBasePointId() const{
-    return basePointId;
-}
-
-void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id){
+void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
-void DialogEndLine::DialogAccepted(){
+void DialogEndLine::DialogAccepted()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();

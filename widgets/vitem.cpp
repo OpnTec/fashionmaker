@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   vitem.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,43 +24,50 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "vitem.h"
 #include <QGraphicsScene>
-#include <QDebug>
-#include "options.h"
 
-VItem::VItem():numInOutList(0){
+VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
+    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(0)
+{
 }
 
-VItem::VItem ( int numInList, QGraphicsItem * parent ):QGraphicsPathItem ( parent ),
-    numInOutList(numInList){
-}
-
-VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent ):
-    QGraphicsPathItem ( path, parent ), numInOutList(numInList){
-}
-
-void VItem::checkItemChange(){
-    QRectF rect = parentItem()->sceneBoundingRect();
+void VItem::checkItemChange()
+{
+    QRectF rect;
+    if(paper == 0){
+        qDebug()<<"Don't set paper for detail!!!!";
+        rect = this->scene()->sceneRect();
+    }
+    else
+    {
+        rect = paper->sceneBoundingRect();
+    }
     QRectF myrect = sceneBoundingRect();
-    if( rect.contains( myrect )==true ){
+    if ( rect.contains( myrect )==true )
+    {
         qDebug()<<"Не виходить за рамки листа";
         setPen(QPen(Qt::black, widthMainLine));
         emit itemOut( numInOutList, false );
-    } else {
+    }
+    else
+    {
         qDebug()<<"Виходить за рамки листа";
         setPen(QPen(Qt::red, widthMainLine));
         emit itemOut( numInOutList, true );
     }
     QList<QGraphicsItem *> list = QGraphicsItem::collidingItems ();
-    if( list.size() - 2 > 0 ){
+    if ( list.size() - 2 > 0 )
+    {
         list.append( this );
         setPen(QPen(Qt::red, widthMainLine));
         qDebug()<<"Деталь перетинається з іншими деталями "<<numInOutList;
         emit itemColliding( list, 1 );//Деталь перетинається з іншими деталями.
-    } else {
+    }
+    else
+    {
         QList<QGraphicsItem *> itemList;
         itemList.append( this );
         qDebug()<<"Деталь більше не перетинається з іншими деталями "<<numInOutList;
@@ -62,22 +76,22 @@ void VItem::checkItemChange(){
     //qDebug()<<"list="<<list.size();
 }
 
-QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value ){
-    if ( change == QGraphicsItem::ItemPositionHasChanged && scene() ) {
+QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
+{
+    if ( change == QGraphicsItem::ItemPositionHasChanged && scene() )
+    {
         checkItemChange();
         return QGraphicsPathItem::itemChange( change, value );
     }
-    if ( change == QGraphicsItem::ItemParentHasChanged && scene() ) {
+    if ( change == QGraphicsItem::ItemParentHasChanged && scene() )
+    {
         checkItemChange();
         return QGraphicsPathItem::itemChange( change, value );
     }
     return QGraphicsPathItem::itemChange( change, value );
 }
 
-void VItem::LengthChanged(){
+void VItem::LengthChanged()
+{
     checkItemChange();
-}
-
-void VItem::SetIndexInList( qint32 index ){
-    numInOutList = index;
 }

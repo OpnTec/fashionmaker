@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   vtooldetail.h
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,29 +24,31 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #ifndef VTOOLDETAIL_H
 #define VTOOLDETAIL_H
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "dialogs/dialogdetail.h"
+#include "../dialogs/dialogdetail.h"
 
-class VToolDetail: public VAbstractTool, public QGraphicsPathItem{
+class VToolDetail: public VAbstractTool, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
                                    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                               Tool::Sources typeCreation, VMainGraphicsScene *scene,
+                                               const Tool::Sources &typeCreation, VMainGraphicsScene *scene,
                                                QGraphicsItem * parent = 0);
     virtual void                   setDialog();
     static void                    Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
                                           VDomDocument *doc, VContainer *data);
     static void                    Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                          Tool::Sources typeCreation);
+                                          const Tool::Sources &typeCreation);
     template <typename T>
-    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool){
+    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool)
+    {
         tool->setParentItem(this);
         connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
         VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
@@ -47,10 +56,20 @@ public:
         det.append(node);
         VAbstractTool::data.UpdateDetail(this->id, det);
         QDomElement domElement = doc->elementById(QString().setNum(this->id));
-        if(domElement.isElement()){
+        if (domElement.isElement())
+        {
             AddNode(domElement, node);
         }
     }
+    static const QString           TagName;
+    static const QString           TagNode;
+    static const QString           AttrSupplement;
+    static const QString           AttrClosed;
+    static const QString           AttrWidth;
+    static const QString           AttrIdObject;
+    static const QString           AttrNodeType;
+    static const QString           NodeTypeContour;
+    static const QString           NodeTypeModeling;
 public slots:
     virtual void                   FullUpdateFromFile ();
     virtual void                   FullUpdateFromGui(int result);
@@ -68,6 +87,8 @@ private:
     VMainGraphicsScene             *sceneDetails;
     void                           RefreshGeometry ();
     void                           AddNode(QDomElement &domElement, VNodeDetail &node);
+    template <typename Tool>
+    void                           InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
 };
 
 #endif // VTOOLDETAIL_H

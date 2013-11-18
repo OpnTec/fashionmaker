@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   dialognormal.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,15 +24,15 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
-#include <QMenu>
 
-DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent) :
-    DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0){
+DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent)
+    :DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
+    typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)
+{
     ui->setupUi(this);
     spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
@@ -35,6 +42,8 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     radioButtonStandartTable = ui->radioButtonStandartTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -74,6 +83,8 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogNormal::StandartTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogNormal::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogNormal::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogNormal::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogNormal::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogNormal::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogNormal::FormulaChanged);
@@ -84,49 +95,64 @@ DialogNormal::~DialogNormal()
     delete ui;
 }
 
-void DialogNormal::ChoosedObject(qint64 id, Scene::Scenes type){
-    if(idDetail == 0 && mode == Draw::Modeling){
-        if(type == Scene::Detail){
+void DialogNormal::ChoosedObject(qint64 id, const Scene::Scenes &type)
+{
+    if (idDetail == 0 && mode == Draw::Modeling)
+    {
+        if (type == Scene::Detail)
+        {
             idDetail = id;
             return;
         }
     }
-    if(mode == Draw::Modeling){
-        if(!CheckObject(id)){
+    if (mode == Draw::Modeling)
+    {
+        if (CheckObject(id) == false)
+        {
             return;
         }
     }
-    if(type == Scene::Point){
+    if (type == Scene::Point)
+    {
         VPointF point;
-        if(mode == Draw::Calculation){
+        if (mode == Draw::Calculation)
+        {
             point = data->GetPoint(id);
-        } else {
+        }
+        else
+        {
             point = data->GetModelingPoint(id);
         }
-        if(number == 0){
+        if (number == 0)
+        {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
-        if(number == 1){
+        if (number == 1)
+        {
             qint32 index = ui->comboBoxSecondPoint->findText(point.name());
-            if ( index != -1 ) { // -1 for not found
+            if ( index != -1 )
+            { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number = 0;
                 emit ToolTip("");
             }
-            if(!isInitialized){
+            if (isInitialized == false)
+            {
                 this->show();
             }
         }
     }
 }
 
-void DialogNormal::DialogAccepted(){
+void DialogNormal::DialogAccepted()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
@@ -136,54 +162,36 @@ void DialogNormal::DialogAccepted(){
     emit DialogClosed(QDialog::Accepted);
 }
 
-qint64 DialogNormal::getSecondPointId() const{
-    return secondPointId;
-}
-
-void DialogNormal::setSecondPointId(const qint64 &value, const qint64 &id){
+void DialogNormal::setSecondPointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-qint64 DialogNormal::getFirstPointId() const{
-    return firstPointId;
-}
-
-void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id){
+void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id)
+{
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-qreal DialogNormal::getAngle() const{
-    return angle;
-}
-
-void DialogNormal::setAngle(const qreal &value){
+void DialogNormal::setAngle(const qreal &value)
+{
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
-QString DialogNormal::getFormula() const{
-    return formula;
-}
-
-void DialogNormal::setFormula(const QString &value){
+void DialogNormal::setFormula(const QString &value)
+{
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
-QString DialogNormal::getTypeLine() const{
-    return typeLine;
-}
-
-void DialogNormal::setTypeLine(const QString &value){
+void DialogNormal::setTypeLine(const QString &value)
+{
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-QString DialogNormal::getPointName() const{
-    return pointName;
-}
-
-void DialogNormal::setPointName(const QString &value){
+void DialogNormal::setPointName(const QString &value)
+{
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }

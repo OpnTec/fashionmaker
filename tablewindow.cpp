@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   tablewindow.cpp
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,29 +24,27 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
-#include <QCloseEvent>
-#include <QDesktopWidget>
 #include "widgets/vtablegraphicsview.h"
-#include <QFileDialog>
 #include "options.h"
-#include <QtSvg/QtSvg>
+#include <QtSvg>
 
-TableWindow::TableWindow(QWidget *parent) :
-    QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
+TableWindow::TableWindow(QWidget *parent)
+    :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), currentScene(0),
     paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
-    indexDetail(0), sceneRect(QRectF()){
+    indexDetail(0), sceneRect(QRectF())
+{
     ui->setupUi(this);
     numberDetal = new QLabel("Залишилось 0 деталей.", this);
     colission = new QLabel("Колізій не знайдено.", this);
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
-    //sceneRect = QRectF(0, 0, 203*PrintDPI/25.4, 287*PrintDPI/25.4);
+    //sceneRect = QRectF(0, 0, toPixel(203), toPixel(287));
     sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
     currentScene = new QGraphicsScene(sceneRect);
     QBrush *brush = new QBrush();
@@ -47,7 +52,7 @@ TableWindow::TableWindow(QWidget *parent) :
     brush->setColor( QColor( Qt::gray ) );
     currentScene->setBackgroundBrush( *brush );
     VTableGraphicsView* view = new VTableGraphicsView(currentScene);
-    view->fitInView(view->scene()->sceneRect(),Qt::KeepAspectRatio);
+    view->fitInView(view->scene()->sceneRect(), Qt::KeepAspectRatio);
     ui->horizontalLayout->addWidget(view);
     connect(ui->actionTurn, &QAction::triggered, view, &VTableGraphicsView::rotateItems);
     connect(ui->actionMirror, &QAction::triggered, view, &VTableGraphicsView::MirrorItem);
@@ -61,41 +66,47 @@ TableWindow::TableWindow(QWidget *parent) :
     connect(view, &VTableGraphicsView::itemChect, this, &TableWindow::itemChect);
 }
 
-TableWindow::~TableWindow(){
+TableWindow::~TableWindow()
+{
     delete ui;
 }
 
-void TableWindow::AddPaper(){
+void TableWindow::AddPaper()
+{
     qreal x1, y1, x2, y2;
     sceneRect.getCoords(&x1, &y1, &x2, &y2);
-    shadowPaper = new QGraphicsRectItem(QRectF(x1+4,y1+4,x2+4, y2+4));
+    shadowPaper = new QGraphicsRectItem(QRectF(x1+4, y1+4, x2+4, y2+4));
     shadowPaper->setBrush(QBrush(Qt::black));
     currentScene->addItem(shadowPaper);
-    paper = new QGraphicsRectItem(QRectF(x1,y1,x2, y2));
-    paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+    paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
+    paper->setPen(QPen(Qt::black, widthMainLine));
     paper->setBrush(QBrush(Qt::white));
     currentScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
 }
 
-void TableWindow::AddDetail(){
-    if(indexDetail<listDetails.count()){
+void TableWindow::AddDetail()
+{
+    if (indexDetail<listDetails.count())
+    {
         currentScene->clearSelection();
         VItem* Detail = listDetails[indexDetail];
-        QObject::connect(Detail, SIGNAL(itemOut(int,bool)), this, SLOT(itemOut(int,bool)));
-        QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>,int)), this,
-                         SLOT(itemColliding(QList<QGraphicsItem*>,int)));
+        QObject::connect(Detail, SIGNAL(itemOut(int, bool)), this, SLOT(itemOut(int, bool)));
+        QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>, int)), this,
+                         SLOT(itemColliding(QList<QGraphicsItem*>, int)));
         QObject::connect(this, SIGNAL(LengthChanged()), Detail, SLOT(LengthChanged()));
-        Detail->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+        Detail->setPen(QPen(Qt::black, 1));
         Detail->setBrush(QBrush(Qt::white));
         Detail->setPos(paper->boundingRect().center());
         Detail->setFlag(QGraphicsItem::ItemIsMovable, true);
         Detail->setFlag(QGraphicsItem::ItemIsSelectable, true);
         Detail->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-        Detail->setParentItem(paper);
+        Detail->setPaper(paper);
+        currentScene->addItem(Detail);
         Detail->setSelected(true);
         indexDetail++;
-        if(indexDetail==listDetails.count()){
+        if (indexDetail==listDetails.count())
+        {
             ui->actionSave->setEnabled(true);
         }
     }
@@ -105,7 +116,8 @@ void TableWindow::AddDetail(){
 /*
  * Отримуємо деталі розрахованої моделі для подальшого укладання.
  */
-void TableWindow::ModelChosen(QVector<VItem*> listDetails){
+void TableWindow::ModelChosen(QVector<VItem*> listDetails)
+{
     this->listDetails = listDetails;
     listOutItems = new QBitArray(this->listDetails.count());
     AddPaper();
@@ -114,23 +126,27 @@ void TableWindow::ModelChosen(QVector<VItem*> listDetails){
     show();
 }
 
-void TableWindow::closeEvent(QCloseEvent *event){
+void TableWindow::closeEvent(QCloseEvent *event)
+{
     event->ignore();
     StopTable();
 }
 
-void TableWindow::moveToCenter(){
+void TableWindow::moveToCenter()
+{
     QRect rect = frameGeometry();
     rect.moveCenter(QDesktopWidget().availableGeometry().center());
     move(rect.topLeft());
 }
 
-void TableWindow::showEvent ( QShowEvent * event ){
+void TableWindow::showEvent ( QShowEvent * event )
+{
     QMainWindow::showEvent(event);
     moveToCenter();
 }
 
-void TableWindow::StopTable(){
+void TableWindow::StopTable()
+{
     hide();
     currentScene->clear();
     delete listOutItems;
@@ -140,66 +156,77 @@ void TableWindow::StopTable(){
     emit closed();
 }
 
-void TableWindow::saveScene(){
-    QString name = QFileDialog::getSaveFileName(0, "Зберегти розкладку", "", "Images (*.png);;Svg files (*.svg)");
-    if(name.isNull()){
+void TableWindow::saveScene()
+{
+    QString name = QFileDialog::getSaveFileName(0, tr("Save layout"), "", "Images (*.png);;Svg files (*.svg)");
+    if (name.isNull())
+    {
         return;
     }
 
     QBrush *brush = new QBrush();
     brush->setColor( QColor( Qt::white ) );
     currentScene->setBackgroundBrush( *brush );
-    currentScene->clearSelection();                                                  // Selections would also render to the file
-    shadowPaper->setBrush(QBrush(Qt::white));
-    shadowPaper->setPen(QPen(Qt::white, 0.1));
-    paper->setPen(QPen(Qt::white, 0.1));
-    paper->setBrush(QBrush(Qt::white));
-    currentScene->setSceneRect(QRectF(10,10,590,590));
-    currentScene->setSceneRect(currentScene->itemsBoundingRect());
-
+    currentScene->clearSelection(); // Selections would also render to the file
+    shadowPaper->setVisible(false);
     QFileInfo fi(name);
-    if(fi.suffix() == "svg"){
+    if (fi.suffix() == "svg")
+    {
+        paper->setVisible(false);
         SvgFile(name);
-    } else if(fi.suffix() == "png"){
-        PngFile(name);
+        paper->setVisible(true);
     }
-//    if(name.indexOf(".svg",name.size()-4)<0){
-//        name.append(".svg");
-//    }
+    else if (fi.suffix() == "png")
+    {
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+        PngFile(name);
+        paper->setPen(QPen(Qt::black, widthMainLine));
+    }
 
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
     currentScene->setBackgroundBrush( *brush );
-    paper->setPen(QPen(Qt::black, widthMainLine));
-    shadowPaper->setBrush(QBrush(Qt::black));
+    shadowPaper->setVisible(true);
+    delete brush;
 }
 
-void TableWindow::itemChect(bool flag){
+void TableWindow::itemChect(bool flag)
+{
     ui->actionTurn->setDisabled(flag);
     ui->actionMirror->setDisabled(flag);
 }
 
-void TableWindow::checkNext(){
-    if(outItems == true && collidingItems == true){
+void TableWindow::checkNext()
+{
+    if (outItems == true && collidingItems == true)
+    {
         colission->setText("Колізій не знайдено.");
-        if(indexDetail==listDetails.count()){
+        if (indexDetail==listDetails.count())
+        {
             ui->actionSave->setEnabled(true);
             ui->actionNext->setDisabled(true);
-        } else {
+        }
+        else
+        {
             ui->actionNext->setDisabled(false);
             ui->actionSave->setEnabled(false);
         }
-    } else {
+    }
+    else
+    {
         colission->setText("Знайдено колізії.");
         ui->actionNext->setDisabled(true);
         ui->actionSave->setEnabled(false);
     }
 }
 
-void TableWindow::itemOut(int number, bool flag){
-    listOutItems->setBit(number,flag);
-    for( int i = 0; i < listOutItems->count(); ++i ){
-        if(listOutItems->at(i)==true){
+void TableWindow::itemOut(int number, bool flag)
+{
+    listOutItems->setBit(number, flag);
+    for ( int i = 0; i < listOutItems->count(); ++i )
+    {
+        if (listOutItems->at(i)==true)
+        {
             outItems=false;
             qDebug()<<"itemOut::outItems="<<outItems<<"&& collidingItems"<<collidingItems;
             checkNext();
@@ -210,50 +237,75 @@ void TableWindow::itemOut(int number, bool flag){
     checkNext();
 }
 
-void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number){
+void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
+{
     //qDebug()<<"number="<<number;
-    if(number==0){
-        if(listCollidingItems.isEmpty()==false){
-            if(listCollidingItems.contains(list.at(0))==true){
+    if (number==0)
+    {
+        if (listCollidingItems.isEmpty()==false)
+        {
+            if (listCollidingItems.contains(list.at(0))==true)
+            {
                 listCollidingItems.removeAt(listCollidingItems.indexOf(list.at(0)));
-                if(listCollidingItems.size()>1){
-                    for( int i = 0; i < listCollidingItems.count(); ++i ){
-                        QList<QGraphicsItem *> l = listCollidingItems.at(i)->collidingItems();
-                        if(l.size()-2 <= 0){
+                if (listCollidingItems.size()>1)
+                {
+                    for ( int i = 0; i < listCollidingItems.count(); ++i )
+                    {
+                        QList<QGraphicsItem *> lis = listCollidingItems.at(i)->collidingItems();
+                        if (lis.size()-2 <= 0)
+                        {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
-                            if (bitem == 0){
+                            if (bitem == 0)
+                            {
                                 qDebug()<<"Не можу привести тип об'єкту";
-                            } else {
-                                bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                            }
+                            else
+                            {
+                                bitem->setPen(QPen(Qt::black, widthMainLine));
                             }
                             listCollidingItems.removeAt(i);
                         }
                     }
-                } else if(listCollidingItems.size()==1){
+                }
+                else if (listCollidingItems.size()==1)
+                {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
-                    if (bitem == 0){
+                    if (bitem == 0)
+                    {
                         qDebug()<<"Не можу привести тип об'єкту";
-                    } else {
-                        bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                    }
+                    else
+                    {
+                        bitem->setPen(QPen(Qt::black, widthMainLine));
                     }
                     listCollidingItems.clear();
                     collidingItems = true;
                 }
-            } else {
+            }
+            else
+            {
                 collidingItems = true;
             }
-        } else {
+        }
+        else
+        {
             collidingItems = true;
         }
-    } else if(number==1){
-        if(list.contains(paper)==true){
+    }
+    else if (number==1)
+    {
+        if (list.contains(paper)==true)
+        {
             list.removeAt(list.indexOf(paper));
         }
-        if(list.contains(shadowPaper)==true){
+        if (list.contains(shadowPaper)==true)
+        {
             list.removeAt(list.indexOf(shadowPaper));
         }
-        for( int i = 0; i < list.count(); ++i ){
-            if(listCollidingItems.contains(list.at(i))==false){
+        for ( int i = 0; i < list.count(); ++i )
+        {
+            if (listCollidingItems.contains(list.at(i))==false)
+            {
                 listCollidingItems.append(list.at(i));
             }
         }
@@ -263,11 +315,13 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number){
     checkNext();
 }
 
-void TableWindow::GetNextDetail(){
+void TableWindow::GetNextDetail()
+{
     AddDetail();
 }
 
-void TableWindow::AddLength(){
+void TableWindow::AddLength()
+{
     QRectF rect = currentScene->sceneRect();
     rect.setHeight(rect.height()+toPixel(279));
     currentScene->setSceneRect(rect);
@@ -281,8 +335,10 @@ void TableWindow::AddLength(){
     emit LengthChanged();
 }
 
-void TableWindow::RemoveLength(){
-    if(sceneRect.height()<=currentScene->sceneRect().height()-100){
+void TableWindow::RemoveLength()
+{
+    if (sceneRect.height() <= currentScene->sceneRect().height() - 100)
+    {
         QRectF rect = currentScene->sceneRect();
         rect.setHeight(rect.height()-toPixel(279));
         currentScene->setSceneRect(rect);
@@ -292,18 +348,24 @@ void TableWindow::RemoveLength(){
         rect = paper->rect();
         rect.setHeight(rect.height()-toPixel(279));
         paper->setRect(rect);
-        if(sceneRect.height()==currentScene->sceneRect().height()){
+        if (fabs(sceneRect.height() - currentScene->sceneRect().height()) < 0.01)
+        {
             ui->actionRemove->setDisabled(true);
         }
         emit LengthChanged();
-    } else {
+    }
+    else
+    {
         ui->actionRemove->setDisabled(true);
     }
 }
 
-void TableWindow::keyPressEvent ( QKeyEvent * event ){
-    if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return ){
-        if(ui->actionNext->isEnabled() == true ){
+void TableWindow::keyPressEvent ( QKeyEvent * event )
+{
+    if ( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+    {
+        if (ui->actionNext->isEnabled() == true )
+        {
             AddDetail();
             qDebug()<<"Додали деталь.";
         }
@@ -312,34 +374,38 @@ void TableWindow::keyPressEvent ( QKeyEvent * event ){
 }
 
 
-void TableWindow::SvgFile(const QString &name) const{
+void TableWindow::SvgFile(const QString &name) const
+{
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
-    //generator.setViewBox(QRect(0, 0, 200, 200));
     generator.setTitle(tr("SVG Generator Example Drawing"));
     generator.setDescription(tr("An SVG drawing created by the SVG Generator "
                                "Example provided with Qt."));
+    generator.setResolution(PrintDPI);
+    qDebug()<<"resolution is" << generator.resolution();
     QPainter painter;
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, 1.2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     currentScene->render(&painter);
     painter.end();
 }
 
-void TableWindow::PngFile(const QString &name) const{
+void TableWindow::PngFile(const QString &name) const
+{
     QRectF r = paper->rect();
     qreal x=0, y=0, w=0, h=0;
-    r.getRect(&x,&y,&w,&h);// Re-shrink the scene to it's bounding contents
-    QImage image(QSize(static_cast<qint32>(w), static_cast<qint32>(h)), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+    r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
+    // Create the image with the exact size of the shrunk scene
+    QImage image(QSize(static_cast<qint32>(w), static_cast<qint32>(h)), QImage::Format_ARGB32);
     image.fill(Qt::transparent);                                              // Start all pixels transparent
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     currentScene->render(&painter);
     image.save(name);

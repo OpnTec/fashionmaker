@@ -1,15 +1,22 @@
-/****************************************************************************
+/************************************************************************
  **
- **  Copyright (C) 2013 Valentina project All Rights Reserved.
+ **  @file   dialogtool.h
+ **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @date   November 15, 2013
  **
- **  This file is part of Valentina.
+ **  @brief
+ **  @copyright
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2013 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  Tox is free software: you can redistribute it and/or modify
+ **  Valentina is free software: you can redistribute it and/or modify
  **  it under the terms of the GNU General Public License as published by
  **  the Free Software Foundation, either version 3 of the License, or
  **  (at your option) any later version.
  **
- **  Tox is distributed in the hope that it will be useful,
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
  **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  **  GNU General Public License for more details.
@@ -17,35 +24,27 @@
  **  You should have received a copy of the GNU General Public License
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
- ****************************************************************************/
+ *************************************************************************/
 
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
 #include <QDialog>
-#include <QComboBox>
-#include <QDoubleSpinBox>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QListWidget>
-#include <QLabel>
-#include <QRadioButton>
-#include <QTimer>
-#include "container/vcontainer.h"
+#include "../container/vcontainer.h"
 
-class DialogTool : public QDialog{
+class DialogTool : public QDialog
+{
     Q_OBJECT
 public:
-                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                QWidget *parent = 0);
-    virtual          ~DialogTool();
-    qint64           getIdDetail() const;
-    void             setIdDetail(const qint64 &value);
+                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+    virtual          ~DialogTool() {}
+    inline qint64    getIdDetail() const {return idDetail;}
+    inline void      setIdDetail(const qint64 &value) {idDetail = value;}
 signals:
     void             DialogClosed(int result);
     void             ToolTip(const QString &toolTip);
 public slots:
-    virtual void     ChoosedObject(qint64 id, Scene::Scenes type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     virtual void     DialogRejected();
@@ -62,6 +61,8 @@ public slots:
     void             SizeGrowth();
     void             StandartTable();
     void             LengthLines();
+    void             LengthArcs();
+    void             LengthCurves();
     void             Increments();
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
@@ -86,8 +87,10 @@ protected:
     QRadioButton     *radioButtonStandartTable;
     QRadioButton     *radioButtonIncrements;
     QRadioButton     *radioButtonLengthLine;
+    QRadioButton     *radioButtonLengthArc;
+    QRadioButton     *radioButtonLengthCurve;
     qint64           idDetail;
-    Draw::Draws       mode;
+    Draw::Draws      mode;
     bool             CheckObject(const qint64 &id);
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
