@@ -1,6 +1,8 @@
 Valentina
 ==========
-Open source project of creating a pattern making program, whose allow create and modeling patterns of clothing.
+Open source project of creating a pattern making program, whose allow 
+create and modeling patterns of clothing. 
+Published under GNU GPL v3 license.
 
 Supported Platforms
 ===================
@@ -28,11 +30,15 @@ You can build Valentina with
 
 Installation ("make install") is not needed. 
 
-Note:In order to build and use Valentina, the PATH environment variable needs to be extended:
+Note:In order to build and use Valentina, the PATH environment variable 
+needs to be extended:
 
  PATH               - to locate qmake, moc and other Qt tools
 This is done by adding c:\Qt\%VERSION%\bin to the PATH variable.
 
-For newer versions of Windows, PATH can be extended through the Control Panel|System|Advanced|Environment variables menu.
+For newer versions of Windows, PATH can be extended through the 
+Control Panel|System|Advanced|Environment variables menu.
 
-You may also need to ensure that the locations of your compiler and other build tools are listed in the PATH variable. This will depend on your choice of software development environment.
+You may also need to ensure that the locations of your compiler and 
+other build tools are listed in the PATH variable. This will depend on 
+your choice of software development environment.
