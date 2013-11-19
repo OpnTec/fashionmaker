@@ -32,25 +32,76 @@
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
 
+/**
+ * @brief The VNodeSpline class
+ */
 class VNodeSpline:public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
+                  /**
+                   * @brief VNodeSpline
+                   * @param doc dom document container
+                   * @param data
+                   * @param id
+                   * @param idSpline
+                   * @param typeobject
+                   * @param typeCreation
+                   * @param parent
+                   */
                   VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief Create
+     * @param doc dom document container
+     * @param data
+     * @param id
+     * @param idSpline
+     * @param typeobject
+     * @param parse
+     * @param typeCreation
+     * @return
+     */
     static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                const Draw::Draws &typeobject, const Document::Documents &parse,
                                const Tool::Sources &typeCreation);
+    /**
+     * @brief TagName
+     */
     static const QString TagName;
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile ();
 protected:
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile ();
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    /**
+     * @brief RefreshGeometry
+     */
     void         RefreshGeometry ();
 };
 

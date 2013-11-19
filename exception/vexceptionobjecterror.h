@@ -31,25 +31,77 @@
 
 #include "vexception.h"
 
+/**
+ * @brief The VExceptionObjectError class
+ */
 class VExceptionObjectError : public VException
 {
 public:
+                    /**
+                     * @brief VExceptionObjectError
+                     * @param what
+                     * @param domElement
+                     */
                     VExceptionObjectError(const QString &what, const QDomElement &domElement);
+                    /**
+                     * @brief VExceptionObjectError
+                     * @param e
+                     */
                     VExceptionObjectError(const VExceptionObjectError &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
                           moreInfo(e.MoreInformation()){}
     virtual         ~VExceptionObjectError() Q_DECL_NOEXCEPT_EXPR(true) {}
+    /**
+     * @brief ErrorMessage
+     * @return
+     */
     virtual QString ErrorMessage() const;
+    /**
+     * @brief DetailedInformation
+     * @return
+     */
     virtual QString DetailedInformation() const;
+    /**
+     * @brief TagText
+     * @return
+     */
     inline QString  TagText() const {return tagText;}
+    /**
+     * @brief TagName
+     * @return
+     */
     inline QString  TagName() const {return tagName;}
+    /**
+     * @brief LineNumber
+     * @return
+     */
     inline qint32   LineNumber() const {return lineNumber;}
+    /**
+     * @brief AddMoreInformation
+     * @param info
+     */
     void            AddMoreInformation(const QString &info);
+    /**
+     * @brief MoreInformation
+     * @return
+     */
     inline QString  MoreInformation() const {return moreInfo;}
 protected:
+    /**
+     * @brief tagText
+     */
     QString         tagText;
+    /**
+     * @brief tagName
+     */
     QString         tagName;
+    /**
+     * @brief lineNumber
+     */
     qint32          lineNumber;
+    /**
+     * @brief moreInfo
+     */
     QString         moreInfo;
 };
 

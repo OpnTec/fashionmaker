@@ -32,35 +32,119 @@
 #include "vtoollinepoint.h"
 #include "../../dialogs/dialogbisector.h"
 
+/**
+ * @brief The VToolBisector class
+ */
 class VToolBisector : public VToolLinePoint
 {
 public:
+                   /**
+                    * @brief VToolBisector
+                    * @param doc dom document container
+                    * @param data
+                    * @param id
+                    * @param typeLine
+                    * @param formula
+                    * @param firstPointId
+                    * @param secondPointId
+                    * @param thirdPointId
+                    * @param typeCreation
+                    * @param parent
+                    */
                    VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                  const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
                                  const qint64 &thirdPointId, const Tool::Sources &typeCreation,
                                  QGraphicsItem * parent = 0);
+    /**
+     * @brief FindPoint
+     * @param firstPoint
+     * @param secondPoint
+     * @param thirdPoint
+     * @param length
+     * @return
+     */
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
+    /**
+     * @brief setDialog
+     */
     virtual void   setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void    Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param formula
+     * @param firstPointId
+     * @param secondPointId
+     * @param thirdPointId
+     * @param typeLine
+     * @param pointName
+     * @param mx
+     * @param my
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void    Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
                           const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
                           const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                           const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void   FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void   FullUpdateFromGui(int result);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void   SetFactor(qreal factor);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void   AddToFile();
+    /**
+     * @brief RemoveReferens
+     */
     virtual void   RemoveReferens();
 private:
+    /**
+     * @brief firstPointId
+     */
     qint64         firstPointId;
+    /**
+     * @brief thirdPointId
+     */
     qint64         thirdPointId;
+    /**
+     * @brief dialogBisector
+     */
     QSharedPointer<DialogBisector> dialogBisector;
 };
 

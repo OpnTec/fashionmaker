@@ -54,7 +54,7 @@ public:
     QLabel*               colission;
     /**
      * @brief TableWindow Конструктор класу вікна створення розкладки.
-     * @param parent Батько об'єкту. За замовчуванням = 0.
+     * @param parent parent widget Батько об'єкту. За замовчуванням = 0.
      */
                  explicit TableWindow(QWidget *parent = 0);
     /**
@@ -131,11 +131,15 @@ protected:
      * @param event Подія що отримується.
      */
     void                  showEvent ( QShowEvent * event );
+    /**
+     * @brief keyPressEvent
+     * @param event
+     */
     void                  keyPressEvent ( QKeyEvent * event );
 private:
     Q_DISABLE_COPY(TableWindow)
     /**
-     * @brief ui Змінна для доступу до об'єктів вікна.
+     * @brief ui keeps information about user interface Змінна для доступу до об'єктів вікна.
      */
     Ui::TableWindow*      ui;
     /**
@@ -190,8 +194,20 @@ private:
      * @brief sceneRect Мінімальний розмір листа паперу що буде показуватися на сцені.
      */
     QRectF                sceneRect;
+    /**
+     * @brief SvgFile
+     * @param name
+     */
     void SvgFile(const QString &name)const;
+    /**
+     * @brief PngFile
+     * @param name
+     */
     void PngFile(const QString &name)const;
+    /**
+     * @brief PsFile
+     * @param name
+     */
     void PsFile(const QString &name)const;
 };
 

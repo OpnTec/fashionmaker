@@ -26,23 +26,64 @@
  **
  *************************************************************************/
 
-#ifndef VSTANDARTTABLECELL_H
-#define VSTANDARTTABLECELL_H
+#ifndef VSTANDARTTABLEROW_H
+#define VSTANDARTTABLEROW_H
 
-class VStandartTableCell
+/**
+ * @brief The VStandartTableRow class keep data row of standart table
+ */
+class VStandartTableRow
 {
 public:
-                   VStandartTableCell();
-                   VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());
+                   /**
+                    * @brief VStandartTableRow create empty row
+                    */
+                   VStandartTableRow();
+                   /**
+                    * @brief VStandartTableRow create row
+                    * @param base value in base size and growth
+                    * @param ksize increment in sizes
+                    * @param kgrowth increment in growths
+                    * @param description description of increment
+                    */
+                   VStandartTableRow(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());
+    /**
+     * @brief GetBase return value in base size and growth
+     * @return value
+     */
     inline qint32  GetBase() const {return base;}
+    /**
+     * @brief GetKsize return increment in sizes
+     * @return increment
+     */
     inline qreal   GetKsize() const {return ksize;}
+    /**
+     * @brief GetKgrowth return increment in growths
+     * @return increment
+     */
     inline qreal   GetKgrowth() const {return kgrowth;}
+    /**
+     * @brief GetDescription return description
+     * @return description
+     */
     inline QString GetDescription() const {return description;}
 private:
+    /**
+     * @brief base value in base size and growth
+     */
     qint32         base;
+    /**
+     * @brief ksize increment in sizes
+     */
     qreal          ksize;
+    /**
+     * @brief kgrowth increment in growths
+     */
     qreal          kgrowth;
+    /**
+     * @brief description description measurement
+     */
     QString        description;
 };
 
-#endif // VSTANDARTTABLECELL_H
+#endif // VSTANDARTTABLEROW_H

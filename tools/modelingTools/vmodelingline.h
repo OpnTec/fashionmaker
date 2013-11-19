@@ -33,32 +33,106 @@
 #include <QGraphicsLineItem>
 #include "../../dialogs/dialogline.h"
 
+/**
+ * @brief The VModelingLine class
+ */
 class VModelingLine: public VModelingTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
+                          /**
+                           * @brief VModelingLine
+                           * @param doc dom document container
+                           * @param data
+                           * @param id
+                           * @param firstPoint
+                           * @param secondPoint
+                           * @param typeCreation
+                           * @param parent
+                           */
                           VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                                         qint64 secondPoint, const Tool::Sources &typeCreation,
                                         QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void          setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param doc dom document container
+     * @param data
+     * @return
+     */
     static VModelingLine* Create(QSharedPointer<DialogLine> &dialog, VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param firstPoint
+     * @param secondPoint
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     * @return
+     */
     static VModelingLine* Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                                  VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                  const Tool::Sources &typeCreation);
+    /**
+     * @brief TagName
+     */
     static const QString  TagName;
+    /**
+     * @brief ToolType
+     */
     static const QString  ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void          FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void          FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void          contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void          AddToFile();
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void          hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void          hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief RemoveReferens
+     */
     virtual void          RemoveReferens();
 private:
+    /**
+     * @brief firstPoint
+     */
     qint64                firstPoint;
+    /**
+     * @brief secondPoint
+     */
     qint64                secondPoint;
+    /**
+     * @brief dialogLine
+     */
     QSharedPointer<DialogLine> dialogLine;
 };
 

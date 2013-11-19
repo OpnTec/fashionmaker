@@ -34,37 +34,130 @@
 
 namespace NodeDetail
 {
+    /**
+     * @brief The NodeDetail enum
+     */
     enum NodeDetail { Contour, Modeling };
     Q_DECLARE_FLAGS(NodeDetails, NodeDetail)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
+/**
+ * @brief The VNodeDetail class
+ */
 class VNodeDetail
 {
 public:
+                  /**
+                   * @brief VNodeDetail
+                   */
                   VNodeDetail();
+                  /**
+                   * @brief VNodeDetail
+                   * @param id
+                   * @param typeTool
+                   * @param mode
+                   * @param typeNode
+                   * @param mx
+                   * @param my
+                   */
                   VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
                               qreal mx = 0, qreal my = 0);
+                  /**
+                   * @brief VNodeDetail
+                   * @param node
+                   */
                   VNodeDetail(const VNodeDetail &node);
+                  /**
+                   * @brief operator =
+                   * @param node
+                   * @return
+                   */
                   VNodeDetail &operator=(const VNodeDetail &node);
+    /**
+     * @brief getId
+     * @return
+     */
     inline qint64 getId() const {return id;}
+    /**
+     * @brief setId
+     * @param value
+     */
     inline void   setId(const qint64 &value) {id = value;}
+    /**
+     * @brief getTypeTool
+     * @return
+     */
     inline Tool::Tools getTypeTool() const {return typeTool;}
+    /**
+     * @brief setTypeTool
+     * @param value
+     */
     inline void   setTypeTool(const Tool::Tools &value) {typeTool = value;}
+    /**
+     * @brief getMode
+     * @return
+     */
     inline Draw::Draws getMode() const {return mode;}
+    /**
+     * @brief setMode
+     * @param value
+     */
     inline void   setMode(const Draw::Draws &value) {mode = value;}
+    /**
+     * @brief getTypeNode
+     * @return
+     */
     inline NodeDetail::NodeDetails getTypeNode() const {return typeNode;}
+    /**
+     * @brief setTypeNode
+     * @param value
+     */
     inline void   setTypeNode(const NodeDetail::NodeDetails &value) {typeNode = value;}
+    /**
+     * @brief getMx
+     * @return
+     */
     inline qreal  getMx() const {return mx;}
+    /**
+     * @brief setMx
+     * @param value
+     */
     inline void   setMx(const qreal &value) {mx = value;}
+    /**
+     * @brief getMy
+     * @return
+     */
     inline qreal  getMy() const {return my;}
+    /**
+     * @brief setMy
+     * @param value
+     */
     inline void   setMy(const qreal &value) {my = value;}
 private:
+    /**
+     * @brief id
+     */
     qint64        id;
+    /**
+     * @brief typeTool
+     */
     Tool::Tools   typeTool;
+    /**
+     * @brief mode
+     */
     Draw::Draws   mode;
+    /**
+     * @brief typeNode
+     */
     NodeDetail::NodeDetails typeNode;
+    /**
+     * @brief mx
+     */
     qreal         mx;
+    /**
+     * @brief my
+     */
     qreal         my;
 };
 

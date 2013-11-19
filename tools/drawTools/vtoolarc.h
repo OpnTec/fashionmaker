@@ -34,35 +34,124 @@
 #include "../../dialogs/dialogarc.h"
 #include "../../widgets/vcontrolpointspline.h"
 
+/**
+ * @brief The VToolArc class
+ */
 class VToolArc :public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VToolArc
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                           QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void  Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param center
+     * @param radius
+     * @param f1
+     * @param f2
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void  Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
                         const QString &f2, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief TagName
+     */
     static const QString TagName;
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
     virtual void ChangedActivDraw(const QString &newName);
+    /**
+     * @brief ShowTool
+     * @param id
+     * @param color
+     * @param enable
+     */
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void SetFactor(qreal factor);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief RemoveReferens
+     */
     virtual void RemoveReferens();
 private:
+    /**
+     * @brief dialogArc
+     */
     QSharedPointer<DialogArc> dialogArc;
+    /**
+     * @brief RefreshGeometry
+     */
     void         RefreshGeometry();
 };
 

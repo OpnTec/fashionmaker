@@ -31,20 +31,55 @@
 
 #include "vmodelingpoint.h"
 
+/**
+ * @brief The VModelingLinePoint class
+ */
 class VModelingLinePoint : public VModelingPoint
 {
     Q_OBJECT
 public:
+                      /**
+                       * @brief VModelingLinePoint
+                       * @param doc dom document container
+                       * @param data
+                       * @param id
+                       * @param typeLine
+                       * @param formula
+                       * @param basePointId
+                       * @param angle
+                       * @param parent
+                       */
                       VModelingLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                          const QString &formula, const qint64 &basePointId, const qreal &angle,
                                          QGraphicsItem * parent = 0);
 protected:
+    /**
+     * @brief typeLine
+     */
     QString           typeLine;
+    /**
+     * @brief formula
+     */
     QString           formula;
+    /**
+     * @brief angle
+     */
     qreal             angle;
+    /**
+     * @brief basePointId
+     */
     qint64            basePointId;
+    /**
+     * @brief mainLine
+     */
     QGraphicsLineItem *mainLine;
+    /**
+     * @brief RefreshGeometry
+     */
     virtual void      RefreshGeometry();
+    /**
+     * @brief RemoveReferens
+     */
     virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
 private:
     Q_DISABLE_COPY(VModelingLinePoint)

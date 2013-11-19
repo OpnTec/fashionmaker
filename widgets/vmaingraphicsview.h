@@ -31,15 +31,33 @@
 
 #include <QGraphicsView>
 
+/**
+ * @brief The VMainGraphicsView class
+ */
 class VMainGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
+    /**
+     * @brief VMainGraphicsView
+     * @param parent
+     */
     explicit VMainGraphicsView(QWidget *parent = 0);
 signals:
+    /**
+     * @brief NewFactor
+     * @param factor
+     */
     void     NewFactor(qreal factor);
 public slots:
+    /**
+     * @brief scalingTime
+     * @param x
+     */
     void     scalingTime(qreal x);
+    /**
+     * @brief animFinished
+     */
     void     animFinished();
 protected:
     /**
@@ -47,9 +65,20 @@ protected:
      * @param event передається подія.
      */
     void     wheelEvent ( QWheelEvent * event );
+    /**
+     * @brief mousePressEvent
+     * @param mousePress
+     */
     void     mousePressEvent(QMouseEvent *mousePress);
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
+    /**
+     * @brief _numScheduledScalings
+     */
     qint32   _numScheduledScalings;
 };
 

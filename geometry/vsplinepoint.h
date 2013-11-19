@@ -48,6 +48,10 @@ public:
              * @param factor коефіцієнт довжини дотичної.
              */
                   VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
+                  /**
+                   * @brief VSplinePoint
+                   * @param point
+                   */
                   VSplinePoint(const VSplinePoint &point);
                   ~VSplinePoint() {}
     /**
@@ -55,12 +59,20 @@ public:
      * @return точка.
      */
     inline qint64 P() const {return pSpline;}
+    /**
+     * @brief SetP
+     * @param value
+     */
     inline void   SetP(const qint64 &value) {pSpline = value;}
     /**
      * @brief Angle1 повертає кут дотичної сплайна.
      * @return кут в градусах.
      */
     inline qreal  Angle1() const {return angle+180;}
+    /**
+     * @brief SetAngle
+     * @param value
+     */
     inline void   SetAngle(const qreal &value) {angle = value;}
     /**
      * @brief Angle2 повертає кут дотичної сплайна.
@@ -72,12 +84,20 @@ public:
      * @return коефіцієнт.
      */
     inline qreal  KAsm1() const {return kAsm1;}
+    /**
+     * @brief SetKAsm1
+     * @param value
+     */
     inline void   SetKAsm1(const qreal &value) {kAsm1 = value;}
     /**
      * @brief KAsm2 повертає коефіцієнт довжини дотичної.
      * @return коефіцієнт.
      */
     inline qreal  KAsm2() const {return kAsm2;}
+    /**
+     * @brief SetKAsm2
+     * @param value
+     */
     inline void   SetKAsm2(const qreal &value) {kAsm2 = value;}
 protected:
     /**

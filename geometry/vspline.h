@@ -107,6 +107,10 @@ public:
      * @return перша точка сплайну.
      */
     qint64         GetP1 () const {return p1;}
+    /**
+     * @brief GetPointP1
+     * @return
+     */
     VPointF        GetPointP1() const;
     /**
      * @brief GetP2 повертує першу контрольну точку сплайну.
@@ -123,6 +127,10 @@ public:
      * @return остання точка сплайну.
      */
     inline qint64  GetP4 () const {return p4;}
+    /**
+     * @brief GetPointP4
+     * @return
+     */
     VPointF        GetPointP4 () const;
     /**
      * @brief GetAngle1 повертає кут першої напрямної.
@@ -139,10 +147,30 @@ public:
      * @return довжина сплайну.
      */
     qreal          GetLength () const;
+    /**
+     * @brief GetName
+     * @return
+     */
     QString        GetName () const;
+    /**
+     * @brief GetKasm1
+     * @return
+     */
     inline qreal   GetKasm1() const {return kAsm1;}
+    /**
+     * @brief GetKasm2
+     * @return
+     */
     inline qreal   GetKasm2() const {return kAsm2;}
+    /**
+     * @brief GetKcurve
+     * @return
+     */
     inline qreal   GetKcurve() const {return kCurve;}
+    /**
+     * @brief GetDataPoints
+     * @return
+     */
     inline const QHash<qint64, VPointF> GetDataPoints() const {return points;}
     /**
      * @brief CrossingSplLine перевіряє перетин сплайну з лінією.
@@ -186,14 +214,54 @@ public:
      * @param Pmirror точка відносно якої відбувається вертикальне дзеркалення сплайну.
      */
 //    void         Mirror(const QPointF Pmirror);
+    /**
+     * @brief getMode
+     * @return
+     */
     inline Draw::Draws getMode() const {return mode;}
+    /**
+     * @brief setMode
+     * @param value
+     */
     inline void    setMode(const Draw::Draws &value) {mode = value;}
+    /**
+     * @brief SplinePoints
+     * @param p1
+     * @param p4
+     * @param angle1
+     * @param angle2
+     * @param kAsm1
+     * @param kAsm2
+     * @param kCurve
+     * @return
+     */
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
+    /**
+     * @brief getIdObject
+     * @return
+     */
     inline qint64  getIdObject() const {return idObject;}
+    /**
+     * @brief setIdObject
+     * @param value
+     */
     inline void    setIdObject(const qint64 &value) {idObject = value;}
+    /**
+     * @brief operator =
+     * @param spl
+     * @return
+     */
     VSpline        &operator=(const VSpline &spl);
+    /**
+     * @brief name
+     * @return
+     */
     QString        name() const {return _name;}
+    /**
+     * @brief setName
+     * @param name
+     */
     void           setName(const QString &name) {_name = name;}
 protected:
     /**
@@ -230,12 +298,33 @@ private:
      * @brief angle2 кут в градусах другої напрямної.
      */
     qreal          angle2;      // кут нахилу дотичної в другій точці
+    /**
+     * @brief kAsm1
+     */
     qreal          kAsm1;
+    /**
+     * @brief kAsm2
+     */
     qreal          kAsm2;
+    /**
+     * @brief kCurve
+     */
     qreal          kCurve;
+    /**
+     * @brief points
+     */
     QHash<qint64, VPointF> points;
+    /**
+     * @brief mode
+     */
     Draw::Draws    mode;
+    /**
+     * @brief idObject
+     */
     qint64         idObject;
+    /**
+     * @brief _name
+     */
     QString        _name;
     /**
      * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.

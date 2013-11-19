@@ -32,33 +32,114 @@
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
 
+/**
+ * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
+ */
 class DialogPointOfContact : public DialogTool
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief DialogPointOfContact create dialog
+                  * @param data container with data
+                  * @param mode mode of creation tool
+                  * @param parent parent widget
+                  */
                  DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                       QWidget *parent = 0);
+    /**
+     * @brief getPointName return name of point
+     * @return name
+     */
     inline QString getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name of point
+     * @param value name
+     */
     void           setPointName(const QString &value);
+    /**
+     * @brief getRadius return formula radius of arc
+     * @return formula
+     */
     inline QString getRadius() const {return radius;}
+    /**
+     * @brief setRadius set formula radius of arc
+     * @param value formula
+     */
     void           setRadius(const QString &value);
+    /**
+     * @brief GetCenter return id of center point
+     * @return id
+     */
     inline qint64  getCenter() const {return center;}
+    /**
+     * @brief SetCenter set id of center point
+     * @param value id
+     * @param id don't show this id in list.
+     */
     void           setCenter(const qint64 &value, const qint64 &id);
+    /**
+     * @brief getFirstPoint return id first point
+     * @return id
+     */
     inline qint64  getFirstPoint() const {return firstPoint;}
+    /**
+     * @brief setFirstPoint set id first point
+     * @param value id
+     * @param id don't show this id in list.
+     */
     void           setFirstPoint(const qint64 &value, const qint64 &id);
+    /**
+     * @brief getSecondPoint return id second point
+     * @return id
+     */
     inline qint64  getSecondPoint() const {return secondPoint;}
+    /**
+     * @brief setSecondPoint set id second point
+     * @param value id
+     * @param id don't show this id in list.
+     */
     void           setSecondPoint(const qint64 &value, const qint64 &id);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogPointOfContact ui;
+    /**
+     * @brief number number of handled objects
+     */
     qint32         number;
+    /**
+     * @brief pointName name of point
+     */
     QString        pointName;
+    /**
+     * @brief radius radius of arc
+     */
     QString        radius;
+    /**
+     * @brief center id center point of arc
+     */
     qint64         center;
+    /**
+     * @brief firstPoint id first point of line
+     */
     qint64         firstPoint;
+    /**
+     * @brief secondPoint id second point of line
+     */
     qint64         secondPoint;
 };
 

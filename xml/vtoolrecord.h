@@ -29,20 +29,65 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
+/**
+ * @brief The VToolRecord class
+ */
 class VToolRecord
 {
 public:
+                       /**
+                        * @brief VToolRecord
+                        */
                        VToolRecord();
+                       /**
+                        * @brief VToolRecord
+                        * @param id
+                        * @param typeTool
+                        * @param nameDraw
+                        */
                        VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw);
+    /**
+     * @brief getId
+     * @return
+     */
     inline qint64      getId() const {return id;}
+    /**
+     * @brief setId
+     * @param value
+     */
     inline void        setId(const qint64 &value) {id = value;}
+    /**
+     * @brief getTypeTool
+     * @return
+     */
     inline Tool::Tools getTypeTool() const {return typeTool;}
+    /**
+     * @brief setTypeTool
+     * @param value
+     */
     inline void        setTypeTool(const Tool::Tools &value) {typeTool = value;}
+    /**
+     * @brief getNameDraw
+     * @return
+     */
     inline QString     getNameDraw() const {return nameDraw;}
+    /**
+     * @brief setNameDraw
+     * @param value
+     */
     inline void        setNameDraw(const QString &value) {nameDraw = value;}
 private:
+    /**
+     * @brief id
+     */
     qint64             id;
+    /**
+     * @brief typeTool
+     */
     Tool::Tools        typeTool;
+    /**
+     * @brief nameDraw
+     */
     QString            nameDraw;
 };
 

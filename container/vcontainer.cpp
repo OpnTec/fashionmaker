@@ -34,7 +34,7 @@ qint64 VContainer::_id = 0;
 VContainer::VContainer()
     :base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
     pointsModeling(QHash<qint64, VPointF>()),
-    standartTable(QHash<QString, VStandartTableCell>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+    standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
     lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
     splinesModeling(QHash<qint64, VSpline>()),
     lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), arcsModeling(QHash<qint64, VArc>()),
@@ -56,7 +56,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 VContainer::VContainer(const VContainer &data)
     :base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
     pointsModeling(QHash<qint64, VPointF>()),
-    standartTable(QHash<QString, VStandartTableCell>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+    standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
     lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
     splinesModeling(QHash<qint64, VSpline>()),
     lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), arcsModeling(QHash<qint64, VArc>()),
@@ -110,7 +110,7 @@ val VContainer::GetObject(const QHash<key, val> &obj, key id)
     }
 }
 
-VStandartTableCell VContainer::GetStandartTableCell(const QString &name) const
+VStandartTableRow VContainer::GetStandartTableCell(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetObject(standartTable, name);
@@ -584,7 +584,7 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 
 qreal VContainer::GetValueStandartTableCell(const QString& name) const
 {
-    VStandartTableCell cell =  GetStandartTableCell(name);
+    VStandartTableRow cell =  GetStandartTableCell(name);
     qreal k_size    = ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
     qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
     qreal value = cell.GetBase() + k_size*cell.GetKsize() + k_growth*cell.GetKgrowth();
@@ -812,60 +812,60 @@ void VContainer::AddLengthLine(const QString &name, const qreal &value)
 
 void VContainer::CreateManTableIGroup ()
 {
-    AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
-    AddStandartTableCell("Pkor", VStandartTableCell(84, 0, 3));
-    AddStandartTableCell("Vtos", VStandartTableCell(1450, 2, 51));
-    AddStandartTableCell("Vtosh", VStandartTableCell(1506, 2, 54));
-    AddStandartTableCell("Vpt", VStandartTableCell(1438, 3, 52));
-    AddStandartTableCell("Vst", VStandartTableCell(1257, -1, 49));
-    AddStandartTableCell("Vlt", VStandartTableCell(1102, 0, 43));
-    AddStandartTableCell("Vk", VStandartTableCell(503, 0, 22));
-    AddStandartTableCell("Vsht", VStandartTableCell(1522, 2, 54));
-    AddStandartTableCell("Vzy", VStandartTableCell(1328, 0, 49));
-    AddStandartTableCell("Vlop", VStandartTableCell(1320, 0, 49));
-    AddStandartTableCell("Vps", VStandartTableCell(811, -1, 36));
-    AddStandartTableCell("Ssh", VStandartTableCell(202, 4, 1));
-    AddStandartTableCell("SgI", VStandartTableCell(517, 18, 2));
-    AddStandartTableCell("SgII", VStandartTableCell(522, 19, 1));
-    AddStandartTableCell("SgIII", VStandartTableCell(500, 20, 0));
-    AddStandartTableCell("St", VStandartTableCell(390, 20, 0));
-    AddStandartTableCell("Sb", VStandartTableCell(492, 15, 5));
-    AddStandartTableCell("SbI", VStandartTableCell(482, 12, 6));
-    AddStandartTableCell("Obed", VStandartTableCell(566, 18, 6));
-    AddStandartTableCell("Ok", VStandartTableCell(386, 8, 8));
-    AddStandartTableCell("Oi", VStandartTableCell(380, 8, 6));
-    AddStandartTableCell("Osch", VStandartTableCell(234, 4, 4));
-    AddStandartTableCell("Dsb", VStandartTableCell(1120, 0, 44));
-    AddStandartTableCell("Dsp", VStandartTableCell(1110, 0, 43));
-    AddStandartTableCell("Dn", VStandartTableCell(826, -3, 37));
-    AddStandartTableCell("Dps", VStandartTableCell(316, 4, 7));
-    AddStandartTableCell("Dpob", VStandartTableCell(783, 14, 15));
-    AddStandartTableCell("Ds", VStandartTableCell(260, 1, 6));
-    AddStandartTableCell("Op", VStandartTableCell(316, 12, 0));
-    AddStandartTableCell("Ozap", VStandartTableCell(180, 4, 0));
-    AddStandartTableCell("Pkis", VStandartTableCell(250, 4, 0));
-    AddStandartTableCell("SHp", VStandartTableCell(160, 1, 4));
-    AddStandartTableCell("Dlych", VStandartTableCell(500, 2, 15));
-    AddStandartTableCell("Dzap", VStandartTableCell(768, 2, 24));
-    AddStandartTableCell("DIIIp", VStandartTableCell(970, 2, 29));
-    AddStandartTableCell("Vprp", VStandartTableCell(214, 3, 3));
-    AddStandartTableCell("Vg", VStandartTableCell(262, 8, 3));
-    AddStandartTableCell("Dtp", VStandartTableCell(460, 7, 9));
-    AddStandartTableCell("Dp", VStandartTableCell(355, 5, 5));
-    AddStandartTableCell("Vprz", VStandartTableCell(208, 3, 5));
-    AddStandartTableCell("Dts", VStandartTableCell(438, 2, 10));
-    AddStandartTableCell("DtsI", VStandartTableCell(469, 2, 10));
-    AddStandartTableCell("Dvcht", VStandartTableCell(929, 9, 19));
-    AddStandartTableCell("SHg", VStandartTableCell(370, 14, 4));
-    AddStandartTableCell("Cg", VStandartTableCell(224, 6, 0));
-    AddStandartTableCell("SHs", VStandartTableCell(416, 10, 2));
-    AddStandartTableCell("dpzr", VStandartTableCell(121, 6, 0));
-    AddStandartTableCell("Ogol", VStandartTableCell(576, 4, 4));
-    AddStandartTableCell("Ssh1", VStandartTableCell(205, 5, 0));
-    AddStandartTableCell("St", VStandartTableCell(410, 20, 0));
-    AddStandartTableCell("Drzap", VStandartTableCell(594, 3, 19));
-    AddStandartTableCell("DbII", VStandartTableCell(1020, 0, 44));
-    AddStandartTableCell("Sb", VStandartTableCell(504, 15, 4));
+    AddStandartTableCell("Pkor", VStandartTableRow(84, 0, 3));
+    AddStandartTableCell("Pkor", VStandartTableRow(84, 0, 3));
+    AddStandartTableCell("Vtos", VStandartTableRow(1450, 2, 51));
+    AddStandartTableCell("Vtosh", VStandartTableRow(1506, 2, 54));
+    AddStandartTableCell("Vpt", VStandartTableRow(1438, 3, 52));
+    AddStandartTableCell("Vst", VStandartTableRow(1257, -1, 49));
+    AddStandartTableCell("Vlt", VStandartTableRow(1102, 0, 43));
+    AddStandartTableCell("Vk", VStandartTableRow(503, 0, 22));
+    AddStandartTableCell("Vsht", VStandartTableRow(1522, 2, 54));
+    AddStandartTableCell("Vzy", VStandartTableRow(1328, 0, 49));
+    AddStandartTableCell("Vlop", VStandartTableRow(1320, 0, 49));
+    AddStandartTableCell("Vps", VStandartTableRow(811, -1, 36));
+    AddStandartTableCell("Ssh", VStandartTableRow(202, 4, 1));
+    AddStandartTableCell("SgI", VStandartTableRow(517, 18, 2));
+    AddStandartTableCell("SgII", VStandartTableRow(522, 19, 1));
+    AddStandartTableCell("SgIII", VStandartTableRow(500, 20, 0));
+    AddStandartTableCell("St", VStandartTableRow(390, 20, 0));
+    AddStandartTableCell("Sb", VStandartTableRow(492, 15, 5));
+    AddStandartTableCell("SbI", VStandartTableRow(482, 12, 6));
+    AddStandartTableCell("Obed", VStandartTableRow(566, 18, 6));
+    AddStandartTableCell("Ok", VStandartTableRow(386, 8, 8));
+    AddStandartTableCell("Oi", VStandartTableRow(380, 8, 6));
+    AddStandartTableCell("Osch", VStandartTableRow(234, 4, 4));
+    AddStandartTableCell("Dsb", VStandartTableRow(1120, 0, 44));
+    AddStandartTableCell("Dsp", VStandartTableRow(1110, 0, 43));
+    AddStandartTableCell("Dn", VStandartTableRow(826, -3, 37));
+    AddStandartTableCell("Dps", VStandartTableRow(316, 4, 7));
+    AddStandartTableCell("Dpob", VStandartTableRow(783, 14, 15));
+    AddStandartTableCell("Ds", VStandartTableRow(260, 1, 6));
+    AddStandartTableCell("Op", VStandartTableRow(316, 12, 0));
+    AddStandartTableCell("Ozap", VStandartTableRow(180, 4, 0));
+    AddStandartTableCell("Pkis", VStandartTableRow(250, 4, 0));
+    AddStandartTableCell("SHp", VStandartTableRow(160, 1, 4));
+    AddStandartTableCell("Dlych", VStandartTableRow(500, 2, 15));
+    AddStandartTableCell("Dzap", VStandartTableRow(768, 2, 24));
+    AddStandartTableCell("DIIIp", VStandartTableRow(970, 2, 29));
+    AddStandartTableCell("Vprp", VStandartTableRow(214, 3, 3));
+    AddStandartTableCell("Vg", VStandartTableRow(262, 8, 3));
+    AddStandartTableCell("Dtp", VStandartTableRow(460, 7, 9));
+    AddStandartTableCell("Dp", VStandartTableRow(355, 5, 5));
+    AddStandartTableCell("Vprz", VStandartTableRow(208, 3, 5));
+    AddStandartTableCell("Dts", VStandartTableRow(438, 2, 10));
+    AddStandartTableCell("DtsI", VStandartTableRow(469, 2, 10));
+    AddStandartTableCell("Dvcht", VStandartTableRow(929, 9, 19));
+    AddStandartTableCell("SHg", VStandartTableRow(370, 14, 4));
+    AddStandartTableCell("Cg", VStandartTableRow(224, 6, 0));
+    AddStandartTableCell("SHs", VStandartTableRow(416, 10, 2));
+    AddStandartTableCell("dpzr", VStandartTableRow(121, 6, 0));
+    AddStandartTableCell("Ogol", VStandartTableRow(576, 4, 4));
+    AddStandartTableCell("Ssh1", VStandartTableRow(205, 5, 0));
+    AddStandartTableCell("St", VStandartTableRow(410, 20, 0));
+    AddStandartTableCell("Drzap", VStandartTableRow(594, 3, 19));
+    AddStandartTableCell("DbII", VStandartTableRow(1020, 0, 44));
+    AddStandartTableCell("Sb", VStandartTableRow(504, 15, 4));
 }
 
 QVector<QPointF> VContainer::GetReversePoint(const QVector<QPointF> &points) const

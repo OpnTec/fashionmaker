@@ -29,7 +29,7 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include "vstandarttablecell.h"
+#include "vstandarttablerow.h"
 #include "vincrementtablerow.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
@@ -80,7 +80,7 @@ public:
      * @param name name of standart table row
      * @return row of standart table
      */
-    VStandartTableCell  GetStandartTableCell(const QString& name) const;
+    VStandartTableRow  GetStandartTableCell(const QString& name) const;
     /**
      * @brief GetIncrementTableRow return increment table row by name
      * @param name name of increment table row
@@ -181,7 +181,7 @@ public:
      * @param name name of row of standart table
      * @param cell row of standart table
      */
-    inline void         AddStandartTableCell(const QString& name, const VStandartTableCell& cell)
+    inline void         AddStandartTableCell(const QString& name, const VStandartTableRow& cell)
     {standartTable[name] = cell;}
     /**
      * @brief AddIncrementTableRow add new row of increment table
@@ -340,7 +340,7 @@ public:
      * @param name name of row
      * @param cell row of standart table
      */
-    inline void         UpdateStandartTableCell(const QString& name, const VStandartTableCell& cell)
+    inline void         UpdateStandartTableCell(const QString& name, const VStandartTableRow& cell)
     {standartTable[name] = cell;}
     /**
      * @brief UpdateIncrementTableRow update increment table row by name
@@ -433,82 +433,82 @@ public:
      */
     inline void         RemoveIncrementTableRow(const QString& name) {incrementTable.remove(name);}
     /**
-     * @brief DataPoints return container of points
+     * @brief data container with dataPoints return container of points
      * @return pointer on container of points
      */
     inline const QHash<qint64, VPointF> *DataPoints() const {return &points;}
     /**
-     * @brief DataPointsModeling return container of points modeling
+     * @brief data container with dataPointsModeling return container of points modeling
      * @return pointer on container of points modeling
      */
     inline const QHash<qint64, VPointF> *DataPointsModeling() const {return &pointsModeling;}
     /**
-     * @brief DataSplines return container of splines
+     * @brief data container with dataSplines return container of splines
      * @return pointer on container of splines
      */
     inline const QHash<qint64, VSpline> *DataSplines() const {return &splines;}
     /**
-     * @brief DataSplinesModeling return container of splines modeling
+     * @brief data container with dataSplinesModeling return container of splines modeling
      * @return pointer on container of splines modeling
      */
     inline const QHash<qint64, VSpline> *DataSplinesModeling() const {return &splinesModeling;}
     /**
-     * @brief DataArcs return container of arcs
+     * @brief data container with dataArcs return container of arcs
      * @return pointer on container of arcs
      */
     inline const QHash<qint64, VArc>    *DataArcs() const {return &arcs;}
     /**
-     * @brief DataArcsModeling return container of arcs modeling
+     * @brief data container with dataArcsModeling return container of arcs modeling
      * @return pointer on container of arcs modeling
      */
     inline const QHash<qint64, VArc>    *DataArcsModeling() const {return &arcsModeling;}
     /**
-     * @brief DataBase return container of data
+     * @brief data container with dataBase return container of data
      * @return pointer on container of base data
      */
     inline const QHash<QString, qint32> *DataBase() const {return &base;}
     /**
-     * @brief DataStandartTable return container of standart table
+     * @brief data container with dataStandartTable return container of standart table
      * @return pointer on container of standart table
      */
-    inline const QHash<QString, VStandartTableCell> *DataStandartTable() const {return &standartTable;}
+    inline const QHash<QString, VStandartTableRow> *DataStandartTable() const {return &standartTable;}
     /**
-     * @brief DataIncrementTable return container of increment table
+     * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
      */
     inline const QHash<QString, VIncrementTableRow> *DataIncrementTable() const {return &incrementTable;}
     /**
-     * @brief DataLengthLines return container of lines lengths
+     * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
      */
     inline const QHash<QString, qreal>  *DataLengthLines() const {return &lengthLines;}
     /**
-     * @brief DataLengthSplines return container of splines lengths
+     * @brief data container with dataLengthSplines return container of splines lengths
      * @return pointer on container of splines lengths
      */
     inline const QHash<QString, qreal>  *DataLengthSplines() const {return &lengthSplines;}
     /**
-     * @brief DataLengthArcs return container of arcs length
+     * @brief data container with dataLengthArcs return container of arcs length
      * @return pointer on container of arcs length
      */
     inline const QHash<QString, qreal>  *DataLengthArcs() const {return &lengthArcs;}
     /**
-     * @brief DataLineAngles return container of angles of line
+     * @brief data container with dataLineAngles return container of angles of line
      * @return pointer on container of angles of line
      */
     inline const QHash<QString, qreal>  *DataLineAngles() const {return &lineAngles;}
     /**
-     * @brief DataSplinePaths return container of spline paths
+     * @brief data container with dataSplinePaths return container of spline paths
      * @return pointer on container of spline paths
      */
     inline const QHash<qint64, VSplinePath> *DataSplinePaths() const {return &splinePaths;}
     /**
-     * @brief DataSplinePathsModeling return container of spline paths modeling
+     * @brief data container with dataSplinePathsModeling return container of spline paths modeling
      * @return pointer on container of spline paths modeling
      */
     inline const QHash<qint64, VSplinePath> *DataSplinePathsModeling() const {return &splinePathsModeling;}
     /**
-     * @brief DataDetails return container of details
+     * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
     inline const QHash<qint64, VDetail> *DataDetails() const {return &details;}
@@ -593,7 +593,7 @@ private:
     /**
      * @brief standartTable container of standart table rows
      */
-    QHash<QString, VStandartTableCell> standartTable;
+    QHash<QString, VStandartTableRow> standartTable;
     /**
      * @brief incrementTable
      */

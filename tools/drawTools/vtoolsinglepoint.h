@@ -32,27 +32,81 @@
 #include "vtoolpoint.h"
 #include "../../dialogs/dialogsinglepoint.h"
 
+/**
+ * @brief The VToolSinglePoint class
+ */
 class VToolSinglePoint : public VToolPoint
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VToolSinglePoint
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                    QGraphicsItem * parent = 0 );
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
     virtual void ChangedActivDraw(const QString &newName);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void SetFactor(qreal factor);
 signals:
+    /**
+     * @brief FullUpdateTree
+     */
     void         FullUpdateTree();
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
+    /**
+     * @brief itemChange
+     * @param change
+     * @param value
+     * @return
+     */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    /**
+     * @brief decrementReferens
+     */
     virtual void decrementReferens();
 private:
+    /**
+     * @brief dialogSinglePoint
+     */
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
 };
 

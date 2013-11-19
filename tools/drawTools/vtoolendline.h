@@ -32,28 +32,89 @@
 #include "vtoollinepoint.h"
 #include "../../dialogs/dialogendline.h"
 
+/**
+ * @brief The VToolEndLine class
+ */
 class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VToolEndLine
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param typeLine
+                  * @param formula
+                  * @param angle
+                  * @param basePointId
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                               const QString &formula, const qreal &angle, const qint64 &basePointId,
                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void  Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param typeLine
+     * @param formula
+     * @param angle
+     * @param basePointId
+     * @param mx
+     * @param my
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void  Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                         const QString &formula, const qreal &angle, const qint64 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
 private:
+    /**
+     * @brief dialogEndLine
+     */
     QSharedPointer<DialogEndLine> dialogEndLine;
 };
 

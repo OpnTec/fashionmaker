@@ -36,24 +36,69 @@ namespace Ui
     class DialogLine;
 }
 
+/**
+ * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
+ */
 class DialogLine : public DialogTool
 {
     Q_OBJECT
 public:
+                     /**
+                      * @brief DialogLine create dialog
+                      * @param data container with data
+                      * @param mode mode of creation tool
+                      * @param parent parent widget
+                      */
                      DialogLine(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                      ~DialogLine();
+    /**
+     * @brief getFirstPoint return id first point
+     * @return id
+     */
     inline qint64    getFirstPoint() const {return firstPoint;}
+    /**
+     * @brief setFirstPoint set id first point
+     * @param value id
+     */
     void             setFirstPoint(const qint64 &value);
+    /**
+     * @brief getSecondPoint return id second point
+     * @return id
+     */
     inline qint64    getSecondPoint() const {return secondPoint;}
+    /**
+     * @brief setSecondPoint set id second point
+     * @param value id
+     */
     void             setSecondPoint(const qint64 &value);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     void             ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void     DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogLine)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogLine   *ui;
+    /**
+     * @brief number number of handled objects
+     */
     qint32           number;
+    /**
+     * @brief firstPoint id first point
+     */
     qint64           firstPoint;
+    /**
+     * @brief secondPoint id second point
+     */
     qint64           secondPoint;
 };
 

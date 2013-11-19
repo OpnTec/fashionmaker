@@ -32,31 +32,102 @@
 #include "vtoollinepoint.h"
 #include "../../dialogs/dialogalongline.h"
 
+/**
+ * @brief The VToolAlongLine class
+ */
 class VToolAlongLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VToolAlongLine
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param formula
+                  * @param firstPointId
+                  * @param secondPointId
+                  * @param typeLine
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
                                 const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void  Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param typeLine
+     * @param formula
+     * @param firstPointId
+     * @param secondPointId
+     * @param mx
+     * @param my
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void  Create(const qint64 _id, const QString &pointName, const QString &typeLine, const QString &formula,
                         const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void SetFactor(qreal factor);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
+    /**
+     * @brief RemoveReferens
+     */
     virtual void RemoveReferens();
 private:
+    /**
+     * @brief secondPointId
+     */
     qint64       secondPointId;
+    /**
+     * @brief dialogAlongLine
+     */
     QSharedPointer<DialogAlongLine> dialogAlongLine;
 };
 

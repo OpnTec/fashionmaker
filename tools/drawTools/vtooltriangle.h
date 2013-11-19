@@ -32,36 +32,120 @@
 #include "vtoolpoint.h"
 #include "../../dialogs/dialogtriangle.h"
 
+/**
+ * @brief The VToolTriangle class
+ */
 class VToolTriangle : public VToolPoint
 {
     Q_OBJECT
 public:
+                   /**
+                    * @brief VToolTriangle
+                    * @param doc dom document container
+                    * @param data
+                    * @param id
+                    * @param axisP1Id
+                    * @param axisP2Id
+                    * @param firstPointId
+                    * @param secondPointId
+                    * @param typeCreation
+                    * @param parent
+                    */
                    VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                  const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                  const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void   setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void    Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param axisP1Id
+     * @param axisP2Id
+     * @param firstPointId
+     * @param secondPointId
+     * @param mx
+     * @param my
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void    Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id, const qint64 &axisP2Id,
                           const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
                           VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                           const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief FindPoint
+     * @param axisP1
+     * @param axisP2
+     * @param firstPoint
+     * @param secondPoint
+     * @return
+     */
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void   FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void   FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief RemoveReferens
+     */
     virtual void   RemoveReferens();
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void   AddToFile();
 private:
     Q_DISABLE_COPY(VToolTriangle)
+    /**
+     * @brief axisP1Id
+     */
     qint64         axisP1Id;
+    /**
+     * @brief axisP2Id
+     */
     qint64         axisP2Id;
+    /**
+     * @brief firstPointId
+     */
     qint64         firstPointId;
+    /**
+     * @brief secondPointId
+     */
     qint64         secondPointId;
+    /**
+     * @brief dialogTriangle
+     */
     QSharedPointer<DialogTriangle> dialogTriangle;
 };
 

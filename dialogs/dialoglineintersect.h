@@ -36,41 +36,145 @@ namespace Ui
     class DialogLineIntersect;
 }
 
+/**
+ * @brief The DialogLineIntersect class dialog for ToolLineIntersect. Help create point and edit option.
+ */
 class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
+                            /**
+                             * @brief DialogLineIntersect create dialog
+                             * @param data container with data
+                             * @param mode mode of creation tool
+                             * @param parent parent widget
+                             */
                             DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                                 QWidget *parent = 0);
                             ~DialogLineIntersect();
+    /**
+     * @brief getP1Line1 return id first point of first line
+     * @return id
+     */
     inline qint64           getP1Line1() const {return p1Line1;}
+    /**
+     * @brief setP1Line1 set id first point of first line
+     * @param value id
+     */
     void                    setP1Line1(const qint64 &value);
+    /**
+     * @brief getP2Line1 return id second point of first line
+     * @return id
+     */
     inline qint64           getP2Line1() const {return p2Line1;}
+    /**
+     * @brief setP2Line1 set id second point of first line
+     * @param value id
+     */
     void                    setP2Line1(const qint64 &value);
+    /**
+     * @brief getP1Line2 return id first point of second line
+     * @return id
+     */
     inline qint64           getP1Line2() const {return p1Line2;}
+    /**
+     * @brief setP1Line2 set id first point of second line
+     * @param value id
+     */
     void                    setP1Line2(const qint64 &value);
+    /**
+     * @brief getP2Line2 return id second point of second line
+     * @return id
+     */
     inline qint64           getP2Line2() const {return p2Line2;}
+    /**
+     * @brief setP2Line2 set id second point of second line
+     * @param value id
+     */
     void                    setP2Line2(const qint64 &value);
+    /**
+     * @brief getPointName return name of point
+     * @return
+     */
     inline QString          getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name of point
+     * @param value
+     */
     void                    setPointName(const QString &value);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     virtual void            ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void            DialogAccepted();
+    /**
+     * @brief P1Line1Changed changed first point of first line
+     * @param index index in list
+     */
     void                    P1Line1Changed( int index);
+    /**
+     * @brief P2Line1Changed changed second point of first line
+     * @param index index in list
+     */
     void                    P2Line1Changed( int index);
+    /**
+     * @brief P1Line2Changed changed first point of second line
+     * @param index index in list
+     */
     void                    P1Line2Changed( int index);
+    /**
+     * @brief P2Line2Changed changed second point of second line
+     * @param index index in list
+     */
     void                    P2Line2Changed( int index);
 private:
     Q_DISABLE_COPY(DialogLineIntersect)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogLineIntersect *ui;
+    /**
+     * @brief number number of handled objects
+     */
     qint32                  number;
+    /**
+     * @brief pointName name of point
+     */
     QString                 pointName;
+    /**
+     * @brief p1Line1 id first point of first line
+     */
     qint64                  p1Line1;
+    /**
+     * @brief p2Line1 id second point of first line
+     */
     qint64                  p2Line1;
+    /**
+     * @brief p1Line2 id first point of second line
+     */
     qint64                  p1Line2;
+    /**
+     * @brief p2Line2 id second point of second line
+     */
     qint64                  p2Line2;
+    /**
+     * @brief flagPoint keep state of point
+     */
     bool                    flagPoint;
+    /**
+     * @brief CheckState check state of dialog. Enable or disable button ok.
+     */
     virtual void            CheckState();
+    /**
+     * @brief CheckIntersecion check intersection of points
+     * @return true - line have intersection, false = don't have
+     */
     bool                    CheckIntersecion();
 };
 

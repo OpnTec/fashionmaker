@@ -33,33 +33,110 @@
 #include <QObject>
 #include "../geometry/vsplinepath.h"
 
+/**
+ * @brief The VControlPointSpline class
+ */
 class VControlPointSpline : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
+                      /**
+                       * @brief VControlPointSpline
+                       * @param indexSpline
+                       * @param position
+                       * @param controlPoint
+                       * @param splinePoint
+                       * @param parent
+                       */
                       VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                           const QPointF &controlPoint, const QPointF &splinePoint,
                                           QGraphicsItem * parent = 0);
 signals:
+    /**
+     * @brief ControlPointChangePosition
+     * @param indexSpline
+     * @param position
+     * @param pos
+     */
     void              ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
                                                  const QPointF pos);
 public slots:
+    /**
+     * @brief RefreshLine
+     * @param indexSpline
+     * @param pos
+     * @param controlPoint
+     * @param splinePoint
+     */
     void              RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos, const QPointF &controlPoint,
                                   const QPointF &splinePoint);
+    /**
+     * @brief setEnabledPoint
+     * @param enable
+     */
     void              setEnabledPoint(bool enable);
 protected:
+    /**
+     * @brief radius
+     */
     qreal             radius;
+    /**
+     * @brief controlLine
+     */
     QGraphicsLineItem *controlLine;
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief itemChange
+     * @param change
+     * @param value
+     * @return
+     */
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
 private:
     Q_DISABLE_COPY(VControlPointSpline)
+    /**
+     * @brief indexSpline
+     */
     qint32            indexSpline;
+    /**
+     * @brief position
+     */
     SplinePoint::Position position;
+    /**
+     * @brief LineIntersectCircle
+     * @param center
+     * @param radius
+     * @param line
+     * @param p1
+     * @param p2
+     * @return
+     */
     qint32            LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                           QPointF &p2) const;
+    /**
+     * @brief ClosestPoint
+     * @param line
+     * @param p
+     * @return
+     */
     QPointF           ClosestPoint(const QLineF &line, const QPointF &p) const;
+    /**
+     * @brief addVector
+     * @param p
+     * @param p1
+     * @param p2
+     * @param k
+     * @return
+     */
     QPointF           addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) const;
 
 };

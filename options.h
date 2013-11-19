@@ -40,6 +40,9 @@
 
 namespace Scene
 {
+    /**
+     * @brief The Scene enum
+     */
     enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
     Q_DECLARE_FLAGS(Scenes, Scene)
 }
@@ -47,6 +50,9 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Scene::Scenes )
 
 namespace Tool
 {
+    /**
+     * @brief The Tool enum
+     */
     enum Tool
     {
         ArrowTool,
@@ -73,6 +79,9 @@ namespace Tool
     };
     Q_DECLARE_FLAGS(Tools, Tool)
 
+    /**
+     * @brief The Source enum
+     */
     enum Source { FromGui, FromFile };
     Q_DECLARE_FLAGS(Sources, Source)
 }
@@ -81,6 +90,9 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Sources )
 
 namespace Draw
 {
+    /**
+     * @brief The Draw enum
+     */
     enum Draw { Calculation, Modeling };
     Q_DECLARE_FLAGS(Draws, Draw)
 }

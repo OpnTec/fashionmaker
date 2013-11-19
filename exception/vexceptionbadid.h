@@ -31,21 +31,56 @@
 
 #include "vexception.h"
 
+/**
+ * @brief The VExceptionBadId class
+ */
 class VExceptionBadId : public VException
 {
 public:
+                    /**
+                     * @brief VExceptionBadId
+                     * @param what
+                     * @param id
+                     */
                     VExceptionBadId(const QString &what, const qint64 &id)
                         :VException(what), id(id), key(QString()){}
+                    /**
+                     * @brief VExceptionBadId
+                     * @param what
+                     * @param key
+                     */
                     VExceptionBadId(const QString &what, const QString &key)
                         :VException(what), id(0), key(key){}
+                    /**
+                     * @brief VExceptionBadId
+                     * @param e
+                     */
                     VExceptionBadId(const VExceptionBadId &e)
                         :VException(e), id(e.BadId()), key(e.BadKey()){}
     virtual         ~VExceptionBadId() Q_DECL_NOEXCEPT_EXPR(true){}
+    /**
+     * @brief ErrorMessage
+     * @return
+     */
     virtual QString ErrorMessage() const;
+    /**
+     * @brief BadId
+     * @return
+     */
     inline qint64   BadId() const {return id; }
+    /**
+     * @brief BadKey
+     * @return
+     */
     inline QString  BadKey() const {return key; }
 protected:
+    /**
+     * @brief id
+     */
     qint64          id;
+    /**
+     * @brief key
+     */
     QString         key;
 };
 

@@ -31,24 +31,73 @@
 
 #include "vexception.h"
 
+/**
+ * @brief The VExceptionEmptyParameter class
+ */
 class VExceptionEmptyParameter : public VException
 {
 public:
+                    /**
+                     * @brief VExceptionEmptyParameter
+                     * @param what
+                     * @param name
+                     * @param domElement
+                     */
                     VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
+                    /**
+                     * @brief VExceptionEmptyParameter
+                     * @param e
+                     */
                     VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
                         :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
                           lineNumber(e.LineNumber()){}
     virtual         ~VExceptionEmptyParameter() Q_DECL_NOEXCEPT_EXPR(true) {}
+    /**
+     * @brief ErrorMessage
+     * @return
+     */
     virtual QString ErrorMessage() const;
+    /**
+     * @brief DetailedInformation
+     * @return
+     */
     virtual QString DetailedInformation() const;
+    /**
+     * @brief Name
+     * @return
+     */
     inline QString  Name() const {return name;}
+    /**
+     * @brief TagText
+     * @return
+     */
     inline QString  TagText() const {return tagText;}
+    /**
+     * @brief TagName
+     * @return
+     */
     inline QString  TagName() const {return tagName;}
+    /**
+     * @brief LineNumber
+     * @return
+     */
     inline qint32   LineNumber() const {return lineNumber;}
 protected:
+    /**
+     * @brief name
+     */
     QString         name;
+    /**
+     * @brief tagText
+     */
     QString         tagText;
+    /**
+     * @brief tagName
+     */
     QString         tagName;
+    /**
+     * @brief lineNumber
+     */
     qint32          lineNumber;
 };
 

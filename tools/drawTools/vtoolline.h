@@ -33,35 +33,123 @@
 #include <QGraphicsLineItem>
 #include "../../dialogs/dialogline.h"
 
+/**
+ * @brief The VToolLine class
+ */
 class VToolLine: public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VToolLine
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param firstPoint
+                  * @param secondPoint
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                            qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void  Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param firstPoint
+     * @param secondPoint
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief TagName
+     */
     static const QString TagName;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
     virtual void ChangedActivDraw(const QString &newName);
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief ShowTool
+     * @param id
+     * @param color
+     * @param enable
+     */
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void SetFactor(qreal factor);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief RemoveReferens
+     */
     virtual void RemoveReferens();
 private:
+    /**
+     * @brief firstPoint
+     */
     qint64       firstPoint;
+    /**
+     * @brief secondPoint
+     */
     qint64       secondPoint;
+    /**
+     * @brief dialogLine
+     */
     QSharedPointer<DialogLine> dialogLine;
+    /**
+     * @brief RefreshGeometry
+     */
     void         RefreshGeometry();
 };
 

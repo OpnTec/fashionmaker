@@ -33,33 +33,109 @@
 #include "../drawTools/vtooltriangle.h"
 #include "../../dialogs/dialogtriangle.h"
 
+/**
+ * @brief The VModelingTriangle class
+ */
 class VModelingTriangle : public VModelingPoint
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VModelingTriangle
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param axisP1Id
+                  * @param axisP2Id
+                  * @param firstPointId
+                  * @param secondPointId
+                  * @param typeCreation
+                  * @param parent
+                  */
                  VModelingTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                    const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                    const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param doc dom document container
+     * @param data
+     * @return
+     */
     static VModelingTriangle* Create(QSharedPointer<DialogTriangle> &dialog, VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param axisP1Id
+     * @param axisP2Id
+     * @param firstPointId
+     * @param secondPointId
+     * @param mx
+     * @param my
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     * @return
+     */
     static VModelingTriangle* Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
                                      const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                      const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
                                      const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief RemoveReferens
+     */
     virtual void RemoveReferens();
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void AddToFile();
 private:
     Q_DISABLE_COPY(VModelingTriangle)
+    /**
+     * @brief axisP1Id
+     */
     qint64       axisP1Id;
+    /**
+     * @brief axisP2Id
+     */
     qint64       axisP2Id;
+    /**
+     * @brief firstPointId
+     */
     qint64       firstPointId;
+    /**
+     * @brief secondPointId
+     */
     qint64       secondPointId;
+    /**
+     * @brief dialogTriangle
+     */
     QSharedPointer<DialogTriangle> dialogTriangle;
 };
 

@@ -32,22 +32,63 @@
 #include "../vabstracttool.h"
 #include <QMenu>
 
+/**
+ * @brief The VModelingTool class
+ */
 class VModelingTool: public VAbstractTool
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VModelingTool
+                  * @param doc dom document container
+                  * @param data
+                  * @param id
+                  * @param parent
+                  */
                  VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual      ~VModelingTool(){}
+    /**
+     * @brief setDialog
+     */
     virtual void setDialog(){}
+    /**
+     * @brief ignoreContextMenu
+     * @param enable
+     */
     inline void  ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
 public slots:
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void FullUpdateFromGui(int result)=0;
 protected:
+    /**
+     * @brief ignoreContextMenuEvent
+     */
     bool         ignoreContextMenuEvent;
+    /**
+     * @brief ignoreFullUpdate
+     */
     bool         ignoreFullUpdate;
+    /**
+     * @brief AddToModeling
+     * @param domElement
+     */
     void         AddToModeling(const QDomElement &domElement);
+    /**
+     * @brief decrementReferens
+     */
     virtual void decrementReferens();
     template <typename Dialog, typename Tool>
+    /**
+     * @brief ContextMenu
+     * @param dialog
+     * @param tool
+     * @param event
+     * @param showRemove
+     */
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true)
     {

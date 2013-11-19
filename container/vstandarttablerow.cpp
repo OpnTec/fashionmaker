@@ -26,10 +26,10 @@
  **
  *************************************************************************/
 
-#include "vstandarttablecell.h"
+#include "vstandarttablerow.h"
 
-VStandartTableCell::VStandartTableCell()
+VStandartTableRow::VStandartTableRow()
     :base(0), ksize(0), kgrowth(0), description(QString()){}
 
-VStandartTableCell::VStandartTableCell(qint32 base, qreal ksize, qreal kgrowth, QString description)
+VStandartTableRow::VStandartTableRow(qint32 base, qreal ksize, qreal kgrowth, QString description)
     :base(base), ksize(ksize), kgrowth(kgrowth), description(description){}

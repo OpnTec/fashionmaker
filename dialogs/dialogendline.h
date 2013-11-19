@@ -36,32 +36,108 @@ namespace Ui
     class DialogEndLine;
 }
 
+/**
+ * @brief The DialogEndLine class dialog for ToolEndLine. Help create point and edit option.
+ */
 class DialogEndLine : public DialogTool
 {
     Q_OBJECT
 public:
+                      /**
+                       * @brief DialogEndLine create dialog
+                       * @param data container with data
+                       * @param mode mode of creation tool
+                       * @param parent parent widget
+                       */
                       DialogEndLine(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
                       ~DialogEndLine();
+    /**
+     * @brief getPointName return name of point
+     * @return name
+     */
     inline QString    getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name of point
+     * @param value name
+     */
     void              setPointName(const QString &value);
+    /**
+     * @brief getTypeLine return type of line
+     * @return type
+     */
     inline QString    getTypeLine() const {return typeLine;}
+    /**
+     * @brief setTypeLine set type of line
+     * @param value type
+     */
     void              setTypeLine(const QString &value);
+    /**
+     * @brief getFormula return string of formula
+     * @return formula
+     */
     inline QString    getFormula() const {return formula;}
+    /**
+     * @brief setFormula set string of formula
+     * @param value formula
+     */
     void              setFormula(const QString &value);
+    /**
+     * @brief getAngle return angle of line
+     * @return angle in degree
+     */
     inline qreal      getAngle() const {return angle;}
+    /**
+     * @brief setAngle set angle of line
+     * @param value angle in degree
+     */
     void              setAngle(const qreal &value);
+    /**
+     * @brief getBasePointId return id base point of line
+     * @return id
+     */
     inline qint64     getBasePointId() const {return basePointId;}
+    /**
+     * @brief setBasePointId set id base point of line
+     * @param value id
+     * @param id don't show this id in list
+     */
     void              setBasePointId(const qint64 &value, const qint64 &id);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogEndLine)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogEndLine *ui;
+    /**
+     * @brief pointName name of point
+     */
     QString           pointName;
+    /**
+     * @brief typeLine type of line
+     */
     QString           typeLine;
+    /**
+     * @brief formula formula
+     */
     QString           formula;
+    /**
+     * @brief angle angle of line
+     */
     qreal             angle;
+    /**
+     * @brief basePointId id base point of line
+     */
     qint64            basePointId;
 };
 

@@ -78,7 +78,7 @@ private:
      */
     qint32      index;
     /**
-     * @brief data container of all variables.
+     * @brief data container with data container of all variables.
      */
     const VContainer *data;
     /**

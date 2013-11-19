@@ -37,31 +37,108 @@ namespace Ui
     class DialogSplinePath;
 }
 
+/**
+ * @brief The DialogSplinePath class dialog for ToolSplinePath. Help create spline path and edit option.
+ */
 class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
+                       /**
+                        * @brief DialogSplinePath create dialog
+                        * @param data container with data
+                        * @param mode mode of creation tool
+                        * @param parent parent widget
+                        */
                        DialogSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                         QWidget *parent = 0);
                        ~DialogSplinePath();
+    /**
+     * @brief GetPath return spline path
+     * @return path
+     */
     inline VSplinePath GetPath() const {return path;}
+    /**
+     * @brief SetPath set spline path
+     * @param value path
+     */
     void               SetPath(const VSplinePath &value);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type don't show this id in list
+     */
     virtual void       ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void       DialogAccepted();
+    /**
+     * @brief PointChenged selected another point in list
+     * @param row number of row
+     */
     void               PointChenged(int row);
+    /**
+     * @brief currentPointChanged changed point in combo box
+     * @param index index in list
+     */
     void               currentPointChanged( int index );
+    /**
+     * @brief Angle1Changed changed first angle
+     * @param index index in list
+     */
     void               Angle1Changed( int index );
+    /**
+     * @brief Angle2Changed changed second angle
+     * @param index index in list
+     */
     void               Angle2Changed( int index );
+    /**
+     * @brief KAsm1Changed changed first coefficient asymmetry
+     * @param d value
+     */
     void               KAsm1Changed(qreal d);
+    /**
+     * @brief KAsm2Changed changed second coefficient asymmetry
+     * @param d value
+     */
     void               KAsm2Changed(qreal d);
 private:
     Q_DISABLE_COPY(DialogSplinePath)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogSplinePath *ui;
+    /**
+     * @brief path spline path
+     */
     VSplinePath        path;
+    /**
+     * @brief NewItem add point to list
+     * @param id id
+     * @param kAsm1 first coefficient asymmetry
+     * @param angle angle in degree
+     * @param kAsm2 second coefficient asymmetry
+     */
     void               NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
+    /**
+     * @brief dataPoint show data of point in fields
+     * @param id id
+     * @param kAsm1 first coefficient asymmetry
+     * @param angle1 first angle of spline
+     * @param kAsm2 second coefficient asymmetry
+     * @param angle2 second angle of spline
+     */
     void               DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    /**
+     * @brief EnableFields enable or disable fields
+     */
     void               EnableFields();
+    /**
+     * @brief SetAngle set angle of point
+     * @param angle angle in degree
+     */
     void               SetAngle(qint32 angle);
 };
 

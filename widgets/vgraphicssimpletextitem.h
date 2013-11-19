@@ -31,20 +31,57 @@
 
 #include <QGraphicsSimpleTextItem>
 
+/**
+ * @brief The VGraphicsSimpleTextItem class
+ */
 class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT
 public:
+                 /**
+                  * @brief VGraphicsSimpleTextItem
+                  * @param parent
+                  */
                  VGraphicsSimpleTextItem(QGraphicsItem * parent = 0);
+                 /**
+                  * @brief VGraphicsSimpleTextItem
+                  * @param text
+                  * @param parent
+                  */
                  VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = 0 );
+    /**
+     * @brief FontSize
+     * @return
+     */
     qint32       FontSize()const {return fontSize;}
 signals:
+    /**
+     * @brief NameChangePosition
+     * @param pos
+     */
     void         NameChangePosition(const QPointF pos);
 protected:
+    /**
+     * @brief itemChange
+     * @param change
+     * @param value
+     * @return
+     */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    /**
+     * @brief fontSize
+     */
     qint32       fontSize;
 };
 

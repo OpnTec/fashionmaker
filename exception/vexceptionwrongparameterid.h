@@ -31,21 +31,62 @@
 
 #include "vexception.h"
 
+/**
+ * @brief The VExceptionWrongParameterId class
+ */
 class VExceptionWrongParameterId : public VException
 {
 public:
+                    /**
+                     * @brief VExceptionWrongParameterId
+                     * @param what
+                     * @param domElement
+                     */
                     VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
+                    /**
+                     * @brief VExceptionWrongParameterId
+                     * @param e
+                     */
                     VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
     virtual         ~VExceptionWrongParameterId() Q_DECL_NOEXCEPT_EXPR(true){}
+    /**
+     * @brief ErrorMessage
+     * @return
+     */
     virtual QString ErrorMessage() const;
+    /**
+     * @brief DetailedInformation
+     * @return
+     */
     virtual QString DetailedInformation() const;
+    /**
+     * @brief TagText
+     * @return
+     */
     inline QString  TagText() const {return tagText;}
+    /**
+     * @brief TagName
+     * @return
+     */
     inline QString  TagName() const {return tagName;}
+    /**
+     * @brief LineNumber
+     * @return
+     */
     inline qint32   LineNumber() const {return lineNumber;}
 protected:
+    /**
+     * @brief tagText
+     */
     QString         tagText;
+    /**
+     * @brief tagName
+     */
     QString         tagName;
+    /**
+     * @brief lineNumber
+     */
     qint32          lineNumber;
 };
 

@@ -32,25 +32,79 @@
 #include "vmodelingtool.h"
 #include "../../widgets/vgraphicssimpletextitem.h"
 
+/**
+ * @brief The VModelingPoint class
+ */
 class VModelingPoint: public VModelingTool, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
+                            /**
+                             * @brief VModelingPoint
+                             * @param doc dom document container
+                             * @param data
+                             * @param id
+                             * @param parent
+                             */
                             VModelingPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
     virtual                 ~VModelingPoint() {}
+    /**
+     * @brief TagName
+     */
     static const QString    TagName;
 public slots:
+    /**
+     * @brief NameChangePosition
+     * @param pos
+     */
     void                    NameChangePosition(const QPointF &pos);
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void            FullUpdateFromGui(int result) = 0;
 protected:
+    /**
+     * @brief radius
+     */
     qreal                   radius;
+    /**
+     * @brief namePoint
+     */
     VGraphicsSimpleTextItem *namePoint;
+    /**
+     * @brief lineName
+     */
     QGraphicsLineItem       *lineName;
+    /**
+     * @brief UpdateNamePosition
+     * @param mx
+     * @param my
+     */
     virtual void            UpdateNamePosition(qreal mx, qreal my);
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
     virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief RefreshPointGeometry
+     * @param point
+     */
     virtual void            RefreshPointGeometry(const VPointF &point);
+    /**
+     * @brief RefreshLine
+     */
     void                    RefreshLine();
 private:
     Q_DISABLE_COPY(VModelingPoint)

@@ -29,27 +29,96 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
+/**
+ * @brief The VIncrementTableRow class keep data row of increment table
+ */
 class VIncrementTableRow
 {
 public:
+                   /**
+                    * @brief VIncrementTableRow create enpty row
+                    */
                    VIncrementTableRow();
+                   /**
+                    * @brief VIncrementTableRow create row
+                    * @param id id
+                    * @param base value in base size and growth
+                    * @param ksize increment in sizes
+                    * @param kgrowth increment in growths
+                    * @param description description of increment
+                    */
                    VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,
                                       QString description = QString());
+    /**
+     * @brief getId return id of row
+     * @return id
+     */
     inline qint64  getId() const {return id;}
+    /**
+     * @brief setId set id of row
+     * @param value id
+     */
     inline void    setId(const qint64 &value) {id = value;}
+    /**
+     * @brief getBase return value in base size and growth
+     * @return value
+     */
     inline qreal   getBase() const {return base;}
+    /**
+     * @brief setBase set value in base size and growth
+     * @param value base value
+     */
     inline void    setBase(const qreal &value) {base = value;}
+    /**
+     * @brief getKsize return increment in sizes
+     * @return increment
+     */
     inline qreal   getKsize() const {return ksize;}
+    /**
+     * @brief setKsize set increment in sizes
+     * @param value value of increment
+     */
     inline void    setKsize(const qreal &value) {ksize = value;}
+    /**
+     * @brief getKgrowth return increment in growths
+     * @return increment
+     */
     inline qreal   getKgrowth() const {return kgrowth;}
+    /**
+     * @brief setKgrowth set increment in growths
+     * @param value value of increment
+     */
     inline void    setKgrowth(const qreal &value) {kgrowth = value;}
+    /**
+     * @brief getDescription return description
+     * @return description
+     */
     inline QString getDescription() const {return description;}
+    /**
+     * @brief setDescription set description for row
+     * @param value description
+     */
     inline void    setDescription(const QString &value) {description = value;}
 private:
+    /**
+     * @brief id identificator
+     */
     qint64         id;
+    /**
+     * @brief base value in base size and growth
+     */
     qreal          base;
+    /**
+     * @brief ksize increment in sizes
+     */
     qreal          ksize;
+    /**
+     * @brief kgrowth increment in growths
+     */
     qreal          kgrowth;
+    /**
+     * @brief description description of increment
+     */
     QString        description;
 };
 

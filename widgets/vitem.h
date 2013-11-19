@@ -65,7 +65,15 @@ public:
     * @param angle кут в градусах на який повертається деталь.
     */
     void        Rotate ( qreal angle );
+    /**
+     * @brief getPaper
+     * @return
+     */
     QGraphicsRectItem *getPaper() const {return paper;}
+    /**
+     * @brief setPaper
+     * @param value
+     */
     void        setPaper(QGraphicsRectItem *value) {paper = value;}
 public slots:
     /**
@@ -98,6 +106,9 @@ private:
      *номер.
      */
     qint32      numInOutList;
+    /**
+     * @brief paper
+     */
     QGraphicsRectItem*    paper;
 signals:
     /**

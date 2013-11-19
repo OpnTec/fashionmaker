@@ -36,28 +36,86 @@ namespace Ui
     class DialogPointOfIntersection;
 }
 
+/**
+ * @brief The DialogPointOfIntersection class dialog for ToolPointOfIntersection. Help create point and edit option.
+ */
 class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT
 public:
+                   /**
+                    * @brief DialogPointOfIntersection create dialog
+                    * @param data container with data
+                    * @param mode mode of creation tool
+                    * @param parent parent widget
+                    */
                    DialogPointOfIntersection(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                              QWidget *parent = 0);
                    ~DialogPointOfIntersection();
+    /**
+     * @brief getPointName return name of point
+     * @return name
+     */
     inline QString getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name of point
+     * @param value name
+     */
     void           setPointName(const QString &value);
+    /**
+     * @brief getFirstPointId return id of first point
+     * @return id
+     */
     inline qint64  getFirstPointId() const {return firstPointId;}
+    /**
+     * @brief setFirstPointId set id of first point 
+     * @param value id
+     * @param id don't show this id in list.
+     */
     void           setFirstPointId(const qint64 &value, const qint64 &id);
+    /**
+     * @brief getSecondPointId return id of second point
+     * @return id
+     */
     inline qint64  getSecondPointId() const {return secondPointId;}
+    /**
+     * @brief setSecondPointId set id of second point
+     * @param value id
+     * @param id don't show this id in list.
+     */
     void           setSecondPointId(const qint64 &value, const qint64 &id);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogPointOfIntersection)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogPointOfIntersection *ui;
+    /**
+     * @brief number number of handled objects
+     */
     qint32         number;
+    /**
+     * @brief pointName name of point
+     */
     QString        pointName;
+    /**
+     * @brief firstPointId id first point of line
+     */
     qint64         firstPointId;
+    /**
+     * @brief secondPointId id second point of line
+     */
     qint64         secondPointId;
 };
 

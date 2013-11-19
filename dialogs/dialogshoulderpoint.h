@@ -36,37 +36,129 @@ namespace Ui
     class DialogShoulderPoint;
 }
 
+/**
+ * @brief The DialogShoulderPoint class dialog for ToolShoulderPoint. Help create point and edit option.
+ */
 class DialogShoulderPoint : public DialogTool
 {
     Q_OBJECT
 public:
+                   /**
+                    * @brief DialogShoulderPoint create dialog
+                    * @param data container with data
+                    * @param mode mode of creation tool
+                    * @param parent parent widget
+                    */
                    DialogShoulderPoint(const VContainer *data, Draw::Draws mode = Draw::Calculation,
                                        QWidget *parent = 0);
                    ~DialogShoulderPoint();
+    /**
+     * @brief getPointName return name of point
+     * @return name
+     */
     inline QString getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name of point
+     * @param value name
+     */
     void           setPointName(const QString &value);
+    /**
+     * @brief getTypeLine return type of line
+     * @return type
+     */
     inline QString getTypeLine() const {return typeLine;}
+    /**
+     * @brief setTypeLine set type of line
+     * @param value type
+     */
     void           setTypeLine(const QString &value);
+    /**
+     * @brief getFormula return string of formula
+     * @return formula
+     */
     inline QString getFormula() const {return formula;}
+    /**
+     * @brief setFormula set string of formula
+     * @param value formula
+     */
     void           setFormula(const QString &value);
+    /**
+     * @brief getP1Line return id first point of line
+     * @return id
+     */
     inline qint64  getP1Line() const {return p1Line;}
+    /**
+     * @brief setP1Line set id first point of line
+     * @param value id
+     * @param id don't show this id in list
+     */
     void           setP1Line(const qint64 &value, const qint64 &id);
+    /**
+     * @brief getP2Line return id second point of line
+     * @return id
+     */
     inline qint64  getP2Line() const {return p2Line;}
+    /**
+     * @brief setP2Line set id second point of line
+     * @param value id
+     * @param id don't show this id in list
+     */
     void           setP2Line(const qint64 &value, const qint64 &id);
+    /**
+     * @brief getPShoulder return id shoulder point
+     * @return id
+     */
     inline qint64  getPShoulder() const {return pShoulder;}
+    /**
+     * @brief setPShoulder set id shoulder point
+     * @param value id
+     * @param id don't show this id in list
+     */
     void           setPShoulder(const qint64 &value, const qint64 &id);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of point or detail
+     * @param type type of object
+     */
     virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogShoulderPoint *ui;
+    /**
+     * @brief number number of handled objects
+     */
     qint32         number;
+    /**
+     * @brief pointName name of point
+     */
     QString        pointName;
+    /**
+     * @brief typeLine type of line
+     */
     QString        typeLine;
+    /**
+     * @brief formula formula
+     */
     QString        formula;
+    /**
+     * @brief p1Line id first point of line
+     */
     qint64         p1Line;
+    /**
+     * @brief p2Line id second point of line
+     */
     qint64         p2Line;
+    /**
+     * @brief pShoulder id shoulder point
+     */
     qint64         pShoulder;
 };
 

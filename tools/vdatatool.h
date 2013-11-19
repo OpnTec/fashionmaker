@@ -32,20 +32,57 @@
 #include "../container/vcontainer.h"
 
 //We need QObject class because we use qobject_cast.
+/**
+ * @brief The VDataTool class
+ */
 class VDataTool : public QObject
 {
     Q_OBJECT
 public:
+                          /**
+                           * @brief VDataTool
+                           * @param data
+                           * @param parent
+                           */
                           VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(1){}
     virtual               ~VDataTool(){}
+    /**
+     * @brief operator =
+     * @param tool
+     * @return
+     */
     VDataTool             &operator= (const VDataTool &tool);
+    /**
+     * @brief getData
+     * @return
+     */
     inline VContainer     getData() const { return data; }
+    /**
+     * @brief setData
+     * @param value
+     */
     inline void           setData(const VContainer *value) {data = *value;}
+    /**
+     * @brief referens
+     * @return
+     */
     virtual inline qint64 referens() const {return _referens;}
+    /**
+     * @brief incrementReferens
+     */
     virtual inline void   incrementReferens(){++_referens;}
+    /**
+     * @brief decrementReferens
+     */
     virtual void          decrementReferens();
 protected:
+    /**
+     * @brief data container with data
+     */
     VContainer            data;
+    /**
+     * @brief _referens
+     */
     qint64                _referens;
 };
 

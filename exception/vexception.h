@@ -32,18 +32,51 @@
 
 #include <QException>
 
+/**
+ * @brief The VException class
+ */
 class VException : public QException
 {
 public:
+                      /**
+                       * @brief VException
+                       * @param what
+                       */
                       VException(const QString &what);
+                      /**
+                       * @brief VException
+                       * @param e
+                       */
                       VException(const VException &e):what(e.What()){}
     virtual           ~VException() Q_DECL_NOEXCEPT_EXPR(true){}
+    /**
+     * @brief raise
+     */
     inline void       raise() const { throw *this; }
+    /**
+     * @brief clone
+     * @return
+     */
     inline VException *clone() const { return new VException(*this); }
+    /**
+     * @brief ErrorMessage
+     * @return
+     */
     virtual QString   ErrorMessage() const;
+    /**
+     * @brief DetailedInformation
+     * @return
+     */
     virtual QString   DetailedInformation() const { return QString(); }
+    /**
+     * @brief What
+     * @return
+     */
     inline QString    What() const {return what;}
 protected:
+    /**
+     * @brief what
+     */
     QString           what;
 };
 

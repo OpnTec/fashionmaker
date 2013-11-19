@@ -32,28 +32,89 @@
 #include "vmodelinglinepoint.h"
 #include "../../dialogs/dialogendline.h"
 
+/**
+ * @brief The VModelingEndLine class
+ */
 class VModelingEndLine : public VModelingLinePoint
 {
     Q_OBJECT
 public:
+                             /**
+                              * @brief VModelingEndLine
+                              * @param doc dom document container
+                              * @param data
+                              * @param id
+                              * @param typeLine
+                              * @param formula
+                              * @param angle
+                              * @param basePointId
+                              * @param typeCreation
+                              * @param parent
+                              */
                              VModelingEndLine(VDomDocument *doc, VContainer *data, const qint64 &id,
                                               const QString &typeLine, const QString &formula, const qreal &angle,
                                               const qint64 &basePointId, const Tool::Sources &typeCreation,
                                               QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void             setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param doc dom document container
+     * @param data
+     * @return
+     */
     static VModelingEndLine* Create(QSharedPointer<DialogEndLine> &dialog, VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param typeLine
+     * @param formula
+     * @param angle
+     * @param basePointId
+     * @param mx
+     * @param my
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     * @return
+     */
     static VModelingEndLine* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                     const QString &formula, const qreal &angle, const qint64 &basePointId,
                                     const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
                                     const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void             FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void             FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void             contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void             AddToFile();
 private:
+    /**
+     * @brief dialogEndLine
+     */
     QSharedPointer<DialogEndLine> dialogEndLine;
 };
 

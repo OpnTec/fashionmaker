@@ -31,23 +31,66 @@
 
 #include "vtoolpoint.h"
 
+/**
+ * @brief The VToolLinePoint class
+ */
 class VToolLinePoint : public VToolPoint
 {
     Q_OBJECT
 public:
+                      /**
+                       * @brief VToolLinePoint
+                       * @param doc dom document container
+                       * @param data
+                       * @param id
+                       * @param typeLine
+                       * @param formula
+                       * @param basePointId
+                       * @param angle
+                       * @param parent
+                       */
                       VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                      const QString &formula, const qint64 &basePointId, const qreal &angle,
                                      QGraphicsItem * parent = 0);
 public slots:
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
     virtual void      ChangedActivDraw(const QString &newName);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void      SetFactor(qreal factor);
 protected:
+    /**
+     * @brief typeLine
+     */
     QString           typeLine;
+    /**
+     * @brief formula
+     */
     QString           formula;
+    /**
+     * @brief angle
+     */
     qreal             angle;
+    /**
+     * @brief basePointId
+     */
     qint64            basePointId;
+    /**
+     * @brief mainLine
+     */
     QGraphicsLineItem *mainLine;
+    /**
+     * @brief RefreshGeometry
+     */
     virtual void      RefreshGeometry();
+    /**
+     * @brief RemoveReferens
+     */
     virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
 private:
     Q_DISABLE_COPY(VToolLinePoint)

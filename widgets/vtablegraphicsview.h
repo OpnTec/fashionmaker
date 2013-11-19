@@ -31,10 +31,16 @@
 
 #include <QGraphicsView>
 
+/**
+ * @brief The VTableGraphicsView class
+ */
 class VTableGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
+    /**
+     * @brief The typeMove_e enum
+     */
     enum typeMove_e { Left, Right, Up, Down };
                 VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = 0);
 signals:

@@ -31,12 +31,26 @@
 
 #include <QApplication>
 
+/**
+ * @brief The VApplication class
+ */
 class VApplication : public QApplication
 {
     Q_OBJECT
 public:
+    /**
+     * @brief VApplication
+     * @param argc
+     * @param argv
+     */
     VApplication(int &argc, char ** argv): QApplication(argc, argv){}
     virtual ~VApplication() {}
+    /**
+     * @brief notify
+     * @param receiver
+     * @param event
+     * @return
+     */
     virtual bool notify(QObject * receiver, QEvent * event);
 };
 

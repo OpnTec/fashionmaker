@@ -33,20 +33,58 @@
 #include <QGraphicsPathItem>
 #include "../dialogs/dialogdetail.h"
 
+/**
+ * @brief The VToolDetail class
+ */
 class VToolDetail: public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
+                                   /**
+                                    * @brief VToolDetail
+                                    * @param doc dom document container
+                                    * @param data
+                                    * @param id
+                                    * @param typeCreation
+                                    * @param scene
+                                    * @param parent
+                                    */
                                    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                const Tool::Sources &typeCreation, VMainGraphicsScene *scene,
                                                QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void                   setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void                    Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
                                           VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param newDetail
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void                    Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                           const Tool::Sources &typeCreation);
     template <typename T>
+    /**
+     * @brief AddTool
+     * @param tool
+     * @param id
+     * @param typeTool
+     */
     void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool)
     {
         tool->setParentItem(this);
@@ -61,33 +99,110 @@ public:
             AddNode(domElement, node);
         }
     }
+    /**
+     * @brief TagName
+     */
     static const QString           TagName;
+    /**
+     * @brief TagNode
+     */
     static const QString           TagNode;
+    /**
+     * @brief AttrSupplement
+     */
     static const QString           AttrSupplement;
+    /**
+     * @brief AttrClosed
+     */
     static const QString           AttrClosed;
+    /**
+     * @brief AttrWidth
+     */
     static const QString           AttrWidth;
+    /**
+     * @brief AttrIdObject
+     */
     static const QString           AttrIdObject;
+    /**
+     * @brief AttrNodeType
+     */
     static const QString           AttrNodeType;
+    /**
+     * @brief NodeTypeContour
+     */
     static const QString           NodeTypeContour;
+    /**
+     * @brief NodeTypeModeling
+     */
     static const QString           NodeTypeModeling;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void                   FullUpdateFromFile ();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void                   FullUpdateFromGui(int result);
 signals:
+    /**
+     * @brief RemoveTool
+     * @param tool
+     */
     void                           RemoveTool(QGraphicsItem *tool);
 protected:
+    /**
+     * @brief AddToFile
+     */
     virtual void                   AddToFile ();
+    /**
+     * @brief itemChange
+     * @param change
+     * @param value
+     * @return
+     */
     QVariant                       itemChange ( GraphicsItemChange change, const QVariant &value );
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
     virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void                   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief RemoveReferens
+     */
     virtual void                   RemoveReferens();
 private:
     Q_DISABLE_COPY(VToolDetail)
+    /**
+     * @brief dialogDetail
+     */
     QSharedPointer<DialogDetail>   dialogDetail;
+    /**
+     * @brief sceneDetails
+     */
     VMainGraphicsScene             *sceneDetails;
+    /**
+     * @brief RefreshGeometry
+     */
     void                           RefreshGeometry ();
+    /**
+     * @brief AddNode
+     * @param domElement
+     * @param node
+     */
     void                           AddNode(QDomElement &domElement, VNodeDetail &node);
     template <typename Tool>
+    /**
+     * @brief InitTool
+     * @param scene
+     * @param node
+     */
     void                           InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
 };
 

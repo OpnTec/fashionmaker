@@ -32,30 +32,97 @@
 #include "vmodelinglinepoint.h"
 #include "../../dialogs/dialogheight.h"
 
+/**
+ * @brief The VModelingHeight class
+ */
 class VModelingHeight : public VModelingLinePoint
 {
     Q_OBJECT
 public:
+                            /**
+                             * @brief VModelingHeight
+                             * @param doc dom document container
+                             * @param data
+                             * @param id
+                             * @param typeLine
+                             * @param basePointId
+                             * @param p1LineId
+                             * @param p2LineId
+                             * @param typeCreation
+                             * @param parent
+                             */
                             VModelingHeight(VDomDocument *doc, VContainer *data, const qint64 &id,
                                             const QString &typeLine, const qint64 &basePointId, const qint64 &p1LineId,
                                             const qint64 &p2LineId, const Tool::Sources &typeCreation,
                                             QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void            setDialog();
+    /**
+     * @brief Create
+     * @param dialog
+     * @param doc dom document container
+     * @param data
+     * @return
+     */
     static VModelingHeight* Create(QSharedPointer<DialogHeight> &dialog, VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param pointName
+     * @param typeLine
+     * @param basePointId
+     * @param p1LineId
+     * @param p2LineId
+     * @param mx
+     * @param my
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     * @return
+     */
     static VModelingHeight* Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                                    const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                                    const qreal &mx, const qreal &my, VDomDocument *doc, VContainer *data,
                                    const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void            FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void            FullUpdateFromGui(int result);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void            AddToFile();
 private:
+    /**
+     * @brief dialogHeight
+     */
     QSharedPointer<DialogHeight> dialogHeight;
+    /**
+     * @brief p1LineId
+     */
     qint64                  p1LineId;
+    /**
+     * @brief p2LineId
+     */
     qint64                  p2LineId;
 };
 

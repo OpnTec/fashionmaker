@@ -32,36 +32,124 @@
 #include "vtoolpoint.h"
 #include "../../dialogs/dialogpointofcontact.h"
 
+/**
+ * @brief The VToolPointOfContact class
+ */
 class VToolPointOfContact : public VToolPoint
 {
 public:
+                   /**
+                    * @brief VToolPointOfContact
+                    * @param doc dom document container
+                    * @param data
+                    * @param id
+                    * @param radius
+                    * @param center
+                    * @param firstPointId
+                    * @param secondPointId
+                    * @param typeCreation
+                    * @param parent
+                    */
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &radius, const qint64 &center,
                                        const qint64 &firstPointId, const qint64 &secondPointId,
                                        const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    /**
+     * @brief setDialog
+     */
     virtual void   setDialog();
+    /**
+     * @brief FindPoint
+     * @param radius
+     * @param center
+     * @param firstPoint
+     * @param secondPoint
+     * @return
+     */
     static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
+    /**
+     * @brief Create
+     * @param dialog
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     */
     static void    Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
+    /**
+     * @brief Create
+     * @param _id
+     * @param radius
+     * @param center
+     * @param firstPointId
+     * @param secondPointId
+     * @param pointName
+     * @param mx
+     * @param my
+     * @param scene
+     * @param doc dom document container
+     * @param data
+     * @param parse
+     * @param typeCreation
+     */
     static void    Create(const qint64 _id, const QString &radius, const qint64 &center,
                           const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+    /**
+     * @brief ToolType
+     */
     static const QString ToolType;
 public slots:
+    /**
+     * @brief FullUpdateFromFile
+     */
     virtual void   FullUpdateFromFile();
+    /**
+     * @brief FullUpdateFromGui
+     * @param result
+     */
     virtual void   FullUpdateFromGui(int result);
+    /**
+     * @brief SetFactor
+     * @param factor
+     */
     virtual void   SetFactor(qreal factor);
 protected:
+    /**
+     * @brief contextMenuEvent
+     * @param event
+     */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    /**
+     * @brief AddToFile
+     */
     virtual void   AddToFile();
+    /**
+     * @brief RemoveReferens
+     */
     virtual void   RemoveReferens();
 private:
+    /**
+     * @brief radius
+     */
     QString        radius;
+    /**
+     * @brief center
+     */
     qint64         center;
+    /**
+     * @brief firstPointId
+     */
     qint64         firstPointId;
+    /**
+     * @brief secondPointId
+     */
     qint64         secondPointId;
+    /**
+     * @brief dialogPointOfContact
+     */
     QSharedPointer<DialogPointOfContact> dialogPointOfContact;
 };
 

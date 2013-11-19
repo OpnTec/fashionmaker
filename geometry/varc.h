@@ -42,33 +42,50 @@ class VArc
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
-                 /**
-                  * @brief VArc конструктор по замовчуванню.
-                  */
+                       /**
+                        * @brief VArc конструктор по замовчуванню.
+                        */
                        VArc ();
-                 /**
-                  * @brief VArc конструктор.
-                  * @param center точка центру.
-                  * @param radius радіус.
-                  * @param f1 початковий кут в градусах.
-                  * @param f2 кінцевий кут в градусах.
-                  */
+                       /**
+                        * @brief VArc конструктор.
+                        * @param center точка центру.
+                        * @param radius радіус.
+                        * @param f1 початковий кут в градусах.
+                        * @param f2 кінцевий кут в градусах.
+                        */
                        VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
                              qreal f1, QString formulaF1, qreal f2, QString formulaF2,
                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                       /**
+                        * @brief VArc
+                        * @param arc
+                        */
                        VArc(const VArc &arc);
+                       /**
+                        * @brief operator =
+                        * @param arc
+                        * @return
+                        */
                        VArc& operator= (const VArc &arc);
     /**
      * @brief GetF1 повертає початковий кут дуги.
      * @return повертає кут в градусах.
      */
     inline QString     GetFormulaF1 () const {return formulaF1;}
+    /**
+     * @brief GetF1
+     * @return
+     */
     inline qreal       GetF1 () const {return f1;}
     /**
      * @brief GetF2 повертає кінцевий кут дуги.
      * @return повертає кут в градусах.
      */
     inline QString     GetFormulaF2 () const {return formulaF2;}
+    /**
+     * @brief GetF2
+     * @return
+     */
     inline qreal       GetF2 () const {return f2;}
     /**
      * @brief GetLength повертає довжину дуги.
@@ -80,13 +97,25 @@ public:
      * @return повертає радіус дуги.
      */
     inline QString     GetFormulaRadius () const {return formulaRadius;}
+    /**
+     * @brief GetRadius
+     * @return
+     */
     inline qreal       GetRadius () const {return radius;}
     /**
      * @brief GetCenter повертає точку центра дуги.
      * @return повертає точку центра дуги.
      */
     inline qint64      GetCenter () const {return center;}
+    /**
+     * @brief GetCenterPoint
+     * @return
+     */
     QPointF            GetCenterPoint() const;
+    /**
+     * @brief GetCenterVPoint
+     * @return
+     */
     VPointF            GetCenterVPoint() const;
     /**
      * @brief GetP1 повертає першу точку з якої починається дуга.
@@ -98,45 +127,111 @@ public:
      * @return точку кінця дуги.
      */
     QPointF            GetP2 () const;
+    /**
+     * @brief GetDataPoints
+     * @return
+     */
     const QHash<qint64, VPointF> GetDataPoints() const;
     /**
      * @brief GetPath будує шлях по даній дузі.
      * @return повертає шлях.
      */
     QPainterPath       GetPath() const;
+    /**
+     * @brief AngleArc
+     * @return
+     */
     qreal              AngleArc() const;
+    /**
+     * @brief NumberSplOfArc
+     * @return
+     */
     qint32             NumberSplOfArc () const;
+    /**
+     * @brief GetPoints
+     * @return
+     */
     QVector<QPointF>   GetPoints () const;
+    /**
+     * @brief SplOfArc
+     * @param number
+     * @return
+     */
     QVector<QPointF>   SplOfArc( qint32 number ) const;
+    /**
+     * @brief getMode
+     * @return
+     */
     inline Draw::Draws getMode() const {return mode;}
+    /**
+     * @brief setMode
+     * @param value
+     */
     inline void        setMode(const Draw::Draws &value) {mode = value;}
+    /**
+     * @brief getIdObject
+     * @return
+     */
     inline qint64      getIdObject() const {return idObject;}
+    /**
+     * @brief setIdObject
+     * @param value
+     */
     inline void        setIdObject(const qint64 &value) {idObject = value;}
+    /**
+     * @brief name
+     * @return
+     */
     QString            name() const {return _name;}
+    /**
+     * @brief setName
+     * @param name
+     */
     void               setName(const QString &name) {_name = name;}
 private:
     /**
      * @brief f1 початковий кут в градусах
      */
     qreal              f1;          // початковий кут нахилу дуги (градуси)
+    /**
+     * @brief formulaF1
+     */
     QString            formulaF1;
     /**
      * @brief f2 кінцевий кут в градусах
      */
     qreal              f2;          // кінцевий кут нахилу дуги (градуси)
+    /**
+     * @brief formulaF2
+     */
     QString            formulaF2;
     /**
      * @brief radius радіус дуги.
      */
     qreal              radius;
+    /**
+     * @brief formulaRadius
+     */
     QString            formulaRadius;
     /**
      * @brief center центральна точка дуги.
      */
     qint64             center;
+    /**
+     * @brief points
+     */
     QHash<qint64, VPointF> points;
+    /**
+     * @brief mode
+     */
     Draw::Draws        mode;
+    /**
+     * @brief idObject
+     */
     qint64             idObject;
+    /**
+     * @brief _name
+     */
     QString            _name;
 };
 

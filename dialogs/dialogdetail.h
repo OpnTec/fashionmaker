@@ -32,26 +32,92 @@
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
 
+/**
+ * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.
+ */
 class DialogDetail : public DialogTool
 {
     Q_OBJECT
 public:
+                     /**
+                      * @brief DialogDetail create dialog
+                      * @param data container with data
+                      * @param mode mode of creation tool
+                      * @param parent parent widget
+                      */
                      DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
+    /**
+     * @brief getDetails return detail
+     * @return detail
+     */
     inline VDetail   getDetails() const {return details;}
+    /**
+     * @brief setDetails set detail
+     * @param value detail
+     */
     void             setDetails(const VDetail &value);
 public slots:
+    /**
+     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+     * @param id id of objects (points, arcs, splines, spline paths)
+     * @param type type of object
+     */
     virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
+    /**
+     * @brief DialogAccepted save data and emit signal about closed dialog.
+     */
     virtual void     DialogAccepted();
+    /**
+     * @brief BiasXChanged changed value of offset for object respect to x
+     * @param d value in mm
+     */
     void             BiasXChanged(qreal d);
+    /**
+     * @brief BiasYChanged changed value of offset for object respect to y
+     * @param d value in mm
+     */
     void             BiasYChanged(qreal d);
+    /**
+     * @brief ClickedSeams save supplement of seams for detail
+     * @param checked 1 - need supplement, 0 - don't need supplement
+     */
     void             ClickedSeams(bool checked);
+    /**
+     * @brief ClickedClosed save closed equdistant or not
+     * @param checked 1 - closed, 0 - don't closed
+     */
     void             ClickedClosed(bool checked);
+    /**
+     * @brief ObjectChanged changed new object (point, arc, spline or spline path) form list
+     * @param row number of row
+     */
     void             ObjectChanged(int row);
 private:
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogDetail ui;
+    /**
+     * @brief details detail
+     */
     VDetail          details;
+    /**
+     * @brief supplement keep option supplement of seams
+     */
     bool             supplement;
+    /**
+     * @brief closed keep option about equdistant (closed or not)
+     */
     bool             closed;
+    /**
+     * @brief NewItem add new object (point, arc, spline or spline path) to list
+     * @param id id of object
+     * @param typeTool type of tool
+     * @param mode mode
+     * @param typeNode type of node in detail
+     * @param mx offset respect to x
+     * @param my offset respect to y
+     */
     void             NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::Draws &mode,
                              const NodeDetail::NodeDetails &typeNode, qreal mx = 0, qreal my = 0);
 };
