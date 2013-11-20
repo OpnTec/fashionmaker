@@ -19,9 +19,9 @@ CONFIG += c++11 precompile_header
 #DEFINES += ...
 
 # Precompiled headers (PCH)
-PRECOMPILED_HEADER = stable.h
+PRECOMPILED_HEADER = src/stable.h
 win32-msvc* {
-    PRECOMPILED_SOURCE = stable.cpp
+    PRECOMPILED_SOURCE = src/stable.cpp
 }
 
 # directory for executable file
@@ -39,34 +39,34 @@ RCC_DIR = rcc
 # files created uic
 UI_DIR = uic
 
-include(container/container.pri)
-include(dialogs/dialogs.pri)
-include(exception/exception.pri)
-include(geometry/geometry.pri)
-include(tools/tools.pri)
-include(widgets/widgets.pri)
-include(xml/xml.pri)
+include(src/container/container.pri)
+include(src/dialogs/dialogs.pri)
+include(src/exception/exception.pri)
+include(src/geometry/geometry.pri)
+include(src/tools/tools.pri)
+include(src/widgets/widgets.pri)
+include(src/xml/xml.pri)
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-        tablewindow.cpp \
-        stable.cpp
+SOURCES += src/main.cpp \
+        src/mainwindow.cpp \
+        src/tablewindow.cpp \
+        src/stable.cpp
 
-HEADERS  += mainwindow.h \
-    options.h \
-    tablewindow.h \
-    stable.h \
-    version.h
+HEADERS  += src/mainwindow.h \
+    src/options.h \
+    src/tablewindow.h \
+    src/stable.h \
+    src/version.h
 
-FORMS    += mainwindow.ui \
-    tablewindow.ui
+FORMS    += src/mainwindow.ui \
+    src/tablewindow.ui
 
 RESOURCES += \
-    icon.qrc \
-    cursor.qrc
+    share/resources/icon.qrc \
+    share/resources/cursor.qrc
 
-TRANSLATIONS += translations/valentina_ru.ts \
-                translations/valentina_uk.ts
+TRANSLATIONS += share/translations/valentina_ru.ts \
+                share/translations/valentina_uk.ts
 
 CONFIG(debug, debug|release){
     # Debug
@@ -80,7 +80,7 @@ CONFIG(debug, debug|release){
                       -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                       -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
                       -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
-                      -Wformat  -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k\
+                      -Wformat  -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k \
                       -Winvalid-pch -Wunsafe-loop-optimizations -Wlong-long -Wmissing-format-attribute \
                       -Wmissing-include-dirs -Wpacked -Wredundant-decls \
                       -Wswitch-default -Wswitch-enum -Wuninitialized -Wunused-parameter -Wvariadic-macros \
