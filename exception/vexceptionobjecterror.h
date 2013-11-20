@@ -32,75 +32,75 @@
 #include "vexception.h"
 
 /**
- * @brief The VExceptionObjectError class
+ * @brief The VExceptionObjectError class for exception object error
  */
 class VExceptionObjectError : public VException
 {
 public:
                     /**
-                     * @brief VExceptionObjectError
-                     * @param what
-                     * @param domElement
+                     * @brief VExceptionObjectError exception object error
+                     * @param what string with error
+                     * @param domElement dom element
                      */
                     VExceptionObjectError(const QString &what, const QDomElement &domElement);
                     /**
-                     * @brief VExceptionObjectError
-                     * @param e
+                     * @brief VExceptionObjectError copy constructor
+                     * @param e exception
                      */
                     VExceptionObjectError(const VExceptionObjectError &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
                           moreInfo(e.MoreInformation()){}
     virtual         ~VExceptionObjectError() Q_DECL_NOEXCEPT_EXPR(true) {}
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return main error message
      */
     virtual QString ErrorMessage() const;
     /**
-     * @brief DetailedInformation
-     * @return
+     * @brief DetailedInformation return detailed information about error
+     * @return detailed information
      */
     virtual QString DetailedInformation() const;
     /**
-     * @brief TagText
-     * @return
+     * @brief TagText return tag text
+     * @return tag text
      */
     inline QString  TagText() const {return tagText;}
     /**
-     * @brief TagName
-     * @return
+     * @brief TagName return tag name
+     * @return tag name
      */
     inline QString  TagName() const {return tagName;}
     /**
-     * @brief LineNumber
-     * @return
+     * @brief LineNumber return line number in file
+     * @return line number
      */
     inline qint32   LineNumber() const {return lineNumber;}
     /**
-     * @brief AddMoreInformation
-     * @param info
+     * @brief AddMoreInformation add more information for error
+     * @param info information
      */
     void            AddMoreInformation(const QString &info);
     /**
-     * @brief MoreInformation
-     * @return
+     * @brief MoreInformation return more information for error
+     * @return information
      */
     inline QString  MoreInformation() const {return moreInfo;}
 protected:
     /**
-     * @brief tagText
+     * @brief tagText tag text
      */
     QString         tagText;
     /**
-     * @brief tagName
+     * @brief tagName tag name
      */
     QString         tagName;
     /**
-     * @brief lineNumber
+     * @brief lineNumber line number
      */
     qint32          lineNumber;
     /**
-     * @brief moreInfo
+     * @brief moreInfo more information about error
      */
     QString         moreInfo;
 };

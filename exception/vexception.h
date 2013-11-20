@@ -33,49 +33,49 @@
 #include <QException>
 
 /**
- * @brief The VException class
+ * @brief The VException class parent for all exception. Could be use for abstract exception
  */
 class VException : public QException
 {
 public:
                       /**
-                       * @brief VException
-                       * @param what
+                       * @brief VException constructor exception
+                       * @param what string with error
                        */
                       VException(const QString &what);
                       /**
-                       * @brief VException
-                       * @param e
+                       * @brief VException copy constructor
+                       * @param e exception
                        */
                       VException(const VException &e):what(e.What()){}
     virtual           ~VException() Q_DECL_NOEXCEPT_EXPR(true){}
     /**
-     * @brief raise
+     * @brief raise method raise for exception
      */
     inline void       raise() const { throw *this; }
     /**
-     * @brief clone
-     * @return
+     * @brief clone clone exception
+     * @return new exception
      */
     inline VException *clone() const { return new VException(*this); }
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return error message
      */
     virtual QString   ErrorMessage() const;
     /**
-     * @brief DetailedInformation
-     * @return
+     * @brief DetailedInformation return detailed information about error
+     * @return detailed information
      */
     virtual QString   DetailedInformation() const { return QString(); }
     /**
-     * @brief What
-     * @return
+     * @brief What return string with error
+     * @return string with error
      */
     inline QString    What() const {return what;}
 protected:
     /**
-     * @brief what
+     * @brief what string with error
      */
     QString           what;
 };

@@ -32,54 +32,54 @@
 #include "vexception.h"
 
 /**
- * @brief The VExceptionBadId class
+ * @brief The VExceptionBadId class for exception bad id
  */
 class VExceptionBadId : public VException
 {
 public:
                     /**
-                     * @brief VExceptionBadId
-                     * @param what
-                     * @param id
+                     * @brief VExceptionBadId exception bad id
+                     * @param what string with error
+                     * @param id id
                      */
                     VExceptionBadId(const QString &what, const qint64 &id)
                         :VException(what), id(id), key(QString()){}
                     /**
-                     * @brief VExceptionBadId
-                     * @param what
-                     * @param key
+                     * @brief VExceptionBadId exception bad id
+                     * @param what string with error
+                     * @param key string key
                      */
                     VExceptionBadId(const QString &what, const QString &key)
                         :VException(what), id(0), key(key){}
                     /**
-                     * @brief VExceptionBadId
-                     * @param e
+                     * @brief VExceptionBadId copy constructor
+                     * @param e exception
                      */
                     VExceptionBadId(const VExceptionBadId &e)
                         :VException(e), id(e.BadId()), key(e.BadKey()){}
     virtual         ~VExceptionBadId() Q_DECL_NOEXCEPT_EXPR(true){}
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return main error message
      */
     virtual QString ErrorMessage() const;
     /**
-     * @brief BadId
-     * @return
+     * @brief BadId return bad id
+     * @return id
      */
     inline qint64   BadId() const {return id; }
     /**
-     * @brief BadKey
-     * @return
+     * @brief BadKey return bad key
+     * @return key
      */
     inline QString  BadKey() const {return key; }
 protected:
     /**
-     * @brief id
+     * @brief id id
      */
     qint64          id;
     /**
-     * @brief key
+     * @brief key key
      */
     QString         key;
 };

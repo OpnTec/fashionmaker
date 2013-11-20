@@ -32,37 +32,37 @@
 #include "vexception.h"
 
 /**
- * @brief The VExceptionConversionError class
+ * @brief The VExceptionConversionError class for exception of conversion error
  */
 class VExceptionConversionError : public VException
 {
 public:
                     /**
-                     * @brief VExceptionConversionError
-                     * @param what
-                     * @param str
+                     * @brief VExceptionConversionError exception conversion error
+                     * @param what string with error
+                     * @param str string, where happend error
                      */
                     VExceptionConversionError(const QString &what, const QString &str);
                     /**
-                     * @brief VExceptionConversionError
-                     * @param e
+                     * @brief VExceptionConversionError copy constructor
+                     * @param e exception
                      */
                     VExceptionConversionError(const VExceptionConversionError &e)
                         :VException(e), str(e.String()){}
     virtual         ~VExceptionConversionError() Q_DECL_NOEXCEPT_EXPR(true) {}
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return main error message
      */
     virtual QString ErrorMessage() const;
     /**
-     * @brief String
-     * @return
+     * @brief String return string, where happend error
+     * @return string
      */
     inline QString  String() const {return str;}
 protected:
     /**
-     * @brief str
+     * @brief str string, where happend error
      */
     QString         str;
 };

@@ -32,71 +32,71 @@
 #include "vexception.h"
 
 /**
- * @brief The VExceptionEmptyParameter class
+ * @brief The VExceptionEmptyParameter class for exception empty parameter
  */
 class VExceptionEmptyParameter : public VException
 {
 public:
                     /**
-                     * @brief VExceptionEmptyParameter
-                     * @param what
-                     * @param name
-                     * @param domElement
+                     * @brief VExceptionEmptyParameter exception empty parameter
+                     * @param what string with error
+                     * @param name name of attribute where error
+                     * @param domElement dom element
                      */
                     VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
                     /**
-                     * @brief VExceptionEmptyParameter
-                     * @param e
+                     * @brief VExceptionEmptyParameter copy constructor
+                     * @param e exception
                      */
                     VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
                         :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
                           lineNumber(e.LineNumber()){}
     virtual         ~VExceptionEmptyParameter() Q_DECL_NOEXCEPT_EXPR(true) {}
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return main error message
      */
     virtual QString ErrorMessage() const;
     /**
-     * @brief DetailedInformation
-     * @return
+     * @brief DetailedInformation return detailed information about error
+     * @return detailed information
      */
     virtual QString DetailedInformation() const;
     /**
-     * @brief Name
-     * @return
+     * @brief Name return name of attribute where error
+     * @return name
      */
     inline QString  Name() const {return name;}
     /**
-     * @brief TagText
-     * @return
+     * @brief TagText return tag text
+     * @return tag text
      */
     inline QString  TagText() const {return tagText;}
     /**
-     * @brief TagName
-     * @return
+     * @brief TagName return tag name
+     * @return tag name
      */
     inline QString  TagName() const {return tagName;}
     /**
-     * @brief LineNumber
-     * @return
+     * @brief LineNumber return line number of tag
+     * @return line number
      */
     inline qint32   LineNumber() const {return lineNumber;}
 protected:
     /**
-     * @brief name
+     * @brief name name attribute
      */
     QString         name;
     /**
-     * @brief tagText
+     * @brief tagText tag text
      */
     QString         tagText;
     /**
-     * @brief tagName
+     * @brief tagName tag name
      */
     QString         tagName;
     /**
-     * @brief lineNumber
+     * @brief lineNumber line number
      */
     qint32          lineNumber;
 };

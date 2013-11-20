@@ -32,60 +32,60 @@
 #include "vexception.h"
 
 /**
- * @brief The VExceptionUniqueId class
+ * @brief The VExceptionUniqueId class for exception unique id
  */
 class VExceptionUniqueId : public VException
 {
 public:
                     /**
-                     * @brief VExceptionUniqueId
-                     * @param what
-                     * @param domElement
+                     * @brief VExceptionUniqueId exception unique id
+                     * @param what string with error
+                     * @param domElement dom element
                      */
                     VExceptionUniqueId(const QString &what, const QDomElement &domElement);
                     /**
-                     * @brief VExceptionUniqueId
-                     * @param e
+                     * @brief VExceptionUniqueId copy constructor
+                     * @param e exception
                      */
                     VExceptionUniqueId(const VExceptionUniqueId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
     virtual         ~VExceptionUniqueId() Q_DECL_NOEXCEPT_EXPR(true){}
     /**
-     * @brief ErrorMessage
-     * @return
+     * @brief ErrorMessage return main error message
+     * @return main error message
      */
     virtual QString ErrorMessage() const;
     /**
-     * @brief DetailedInformation
-     * @return
+     * @brief DetailedInformation return detailed information about error
+     * @return detailed information
      */
     virtual QString DetailedInformation() const;
     /**
-     * @brief TagText
-     * @return
+     * @brief TagText return tag text
+     * @return tag text
      */
     inline QString  TagText() const {return tagText;}
     /**
-     * @brief TagName
-     * @return
+     * @brief TagName return tag name
+     * @return tag name
      */
     inline QString  TagName() const {return tagName;}
     /**
-     * @brief LineNumber
-     * @return
+     * @brief LineNumber return line number in file
+     * @return line number
      */
     inline qint32   LineNumber() const {return lineNumber;}
 protected:
     /**
-     * @brief tagText
+     * @brief tagText tag text
      */
     QString         tagText;
     /**
-     * @brief tagName
+     * @brief tagName tag name
      */
     QString         tagName;
     /**
-     * @brief lineNumber
+     * @brief lineNumber line number
      */
     qint32          lineNumber;
 };
