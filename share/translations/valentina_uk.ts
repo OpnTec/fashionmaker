@@ -4,123 +4,123 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="14"/>
         <source>Point along line</source>
         <translation>Точка вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="72"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="79"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="79"/>
         <source>Formula calculation of length of line</source>
         <translation>Формула розрахунку довжини лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="86"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="86"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="89"/>
-        <location filename="../dialogs/dialogalongline.ui" line="192"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="89"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="192"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="124"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="124"/>
         <source>Value of length</source>
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="127"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="127"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="179"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="179"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="189"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="189"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="213"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="213"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="220"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="220"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="231"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="231"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="238"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="238"/>
         <source>Second point of line</source>
         <translation>Друга точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="249"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="249"/>
         <source>Type line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="256"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="256"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="267"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="267"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="274"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="274"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="284"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="284"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="291"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="291"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="298"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="298"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="308"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="308"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="318"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="318"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.ui" line="329"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="329"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogalongline.cpp" line="97"/>
+        <location filename="../../src/dialogs/dialogalongline.cpp" line="117"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -128,143 +128,143 @@
 <context>
     <name>DialogArc</name>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="14"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="72"/>
         <source>Radius</source>
         <translation>Радіус</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="85"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="85"/>
         <source>Formula calculation of radius of arc</source>
         <translation>Формула калькуляції радіуса дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="92"/>
-        <location filename="../dialogs/dialogarc.ui" line="221"/>
-        <location filename="../dialogs/dialogarc.ui" line="350"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="221"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="350"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="95"/>
-        <location filename="../dialogs/dialogarc.ui" line="115"/>
-        <location filename="../dialogs/dialogarc.ui" line="224"/>
-        <location filename="../dialogs/dialogarc.ui" line="244"/>
-        <location filename="../dialogs/dialogarc.ui" line="353"/>
-        <location filename="../dialogs/dialogarc.ui" line="373"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="115"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="224"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="244"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="353"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="373"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="112"/>
-        <location filename="../dialogs/dialogarc.ui" line="241"/>
-        <location filename="../dialogs/dialogarc.ui" line="370"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="112"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="241"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="370"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="144"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="144"/>
         <source>Value of radius</source>
         <translation>Значення радіусу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="147"/>
-        <location filename="../dialogs/dialogarc.ui" line="276"/>
-        <location filename="../dialogs/dialogarc.ui" line="405"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="147"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="276"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="405"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="201"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="201"/>
         <source>First angle degree</source>
         <translation>Перший кут градуси</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="214"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="214"/>
         <source>First angle of arc counterclockwise</source>
         <translation>Перший кут дуги проти годинникової стрілки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="273"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="273"/>
         <source>Value of first angle</source>
         <translation>Значення першого кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="330"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="330"/>
         <source>Second angle degree</source>
         <translation>Другий кут градуси</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="343"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="343"/>
         <source>Second angle of arc counterclockwise</source>
         <translation>Другий кут дуги проти годинникової стрілки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="402"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="402"/>
         <source>Value of second angle</source>
         <translation>Значення другого кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="426"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="426"/>
         <source>Center point</source>
         <translation>Точка центру</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="433"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="433"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центра дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="444"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="444"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="451"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="451"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="461"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="461"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="468"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="468"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="478"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="478"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="488"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="488"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="498"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="498"/>
         <source>Length of curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="508"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="508"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.ui" line="519"/>
+        <location filename="../../src/dialogs/dialogarc.ui" line="519"/>
         <source>Variables</source>
         <translation>Змінні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogarc.cpp" line="144"/>
+        <location filename="../../src/dialogs/dialogarc.cpp" line="170"/>
         <source>Value angle of line.</source>
         <translation>Значення дуги лінії.</translation>
     </message>
@@ -272,138 +272,138 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="14"/>
         <source>Bisector</source>
         <translation>Бісектриса</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="69"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="69"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="82"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="82"/>
         <source>Formula calculation of length of bisector</source>
         <translation>Формула калькуляції довжини бісектриси</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="89"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="89"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="92"/>
-        <location filename="../dialogs/dialogbisector.ui" line="195"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="195"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="121"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="121"/>
         <source>Value of length</source>
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="124"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="124"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="182"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="182"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="192"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="192"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="222"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="222"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="229"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="229"/>
         <source>First point of angle</source>
         <translation>Перша точка кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="246"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="246"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="253"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="253"/>
         <source>Second point of angle</source>
         <translation>Друга точка кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="270"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="270"/>
         <source>Third point</source>
         <translation>Третя точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="277"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="277"/>
         <source>Third point of angle</source>
         <translation>Третя точка кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="288"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="288"/>
         <source>Type line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="295"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="295"/>
         <source>Show line from second point to our point</source>
         <translation>Показати лінію з другої точки кута до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="306"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="306"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="313"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="313"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="323"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="323"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="330"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="330"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="340"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="340"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="350"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="350"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="360"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="360"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.ui" line="371"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="371"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.cpp" line="97"/>
+        <location filename="../../src/dialogs/dialogbisector.cpp" line="117"/>
         <source>Select second point of angle</source>
         <translation>Виберіть другу точку кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogbisector.cpp" line="106"/>
+        <location filename="../../src/dialogs/dialogbisector.cpp" line="128"/>
         <source>Select third point of angle</source>
         <translation>Виберіть третю точку кута</translation>
     </message>
@@ -411,56 +411,56 @@
 <context>
     <name>DialogDetail</name>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="14"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="45"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="45"/>
         <source>Bias X</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміщення по Х</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="72"/>
         <source>Bias Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Зміщення по Y</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="91"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="91"/>
         <source>Option</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="145"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="145"/>
         <source>Name of detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я деталі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="164"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="164"/>
         <source>Supplement for seams</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибавка на шви</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="185"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="185"/>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <source>Name detail</source>
         <translation type="obsolete">Ім&apos;я деталі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.ui" line="204"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="204"/>
         <source>Closed</source>
         <translation>Замкнена</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.cpp" line="72"/>
+        <location filename="../../src/dialogs/dialogdetail.cpp" line="87"/>
         <source>Get wrong scene object. Ignore.</source>
         <translation>Отримано непаравильний об&apos;єкт сцени. Ігноровано.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogdetail.cpp" line="138"/>
+        <location filename="../../src/dialogs/dialogdetail.cpp" line="173"/>
         <source>Get wrong tools. Ignore.</source>
         <translation>Отримано неправильний інструмент. Ігноровано.</translation>
     </message>
@@ -468,121 +468,121 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="14"/>
         <source>Point in the end of line</source>
         <translation>Точка на кінці відрізку</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="72"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="85"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="85"/>
         <source>Formula calculation of length of line</source>
         <translation>Формула розрахунку довжини лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="92"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="95"/>
-        <location filename="../dialogs/dialogendline.ui" line="162"/>
-        <location filename="../dialogs/dialogendline.ui" line="272"/>
-        <location filename="../dialogs/dialogendline.ui" line="289"/>
-        <location filename="../dialogs/dialogendline.ui" line="306"/>
-        <location filename="../dialogs/dialogendline.ui" line="323"/>
-        <location filename="../dialogs/dialogendline.ui" line="346"/>
-        <location filename="../dialogs/dialogendline.ui" line="363"/>
-        <location filename="../dialogs/dialogendline.ui" line="380"/>
-        <location filename="../dialogs/dialogendline.ui" line="397"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="162"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="272"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="289"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="306"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="323"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="346"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="363"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="380"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="397"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="124"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="124"/>
         <source>Value of length</source>
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="127"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="127"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="148"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="148"/>
         <source>Base point</source>
         <translation>Базова точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="155"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="155"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="226"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="226"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="254"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="254"/>
         <source>Angle degree </source>
         <translation>Кут градуси</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="426"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="426"/>
         <source>Angle of line</source>
         <translation>Кут лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="444"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="444"/>
         <source>Type line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="451"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="451"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="462"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="462"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="469"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="469"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="479"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="479"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="486"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="486"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="496"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="496"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="506"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="506"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="516"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="516"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogendline.ui" line="527"/>
+        <location filename="../../src/dialogs/dialogendline.ui" line="527"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
@@ -590,135 +590,135 @@
 <context>
     <name>DialogHeight</name>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Діалог</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="68"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="68"/>
         <source>Name new point</source>
-        <translation type="unfinished">Ім&apos;я нової точки</translation>
+        <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="88"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="88"/>
         <source>Base point</source>
-        <translation type="unfinished">Базова точка</translation>
+        <translation>Базова точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="95"/>
-        <location filename="../dialogs/dialogheight.ui" line="112"/>
-        <location filename="../dialogs/dialogheight.ui" line="119"/>
-        <location filename="../dialogs/dialogheight.ui" line="143"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="112"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="119"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="143"/>
         <source>First point of line</source>
-        <translation type="unfinished">Перша точка лінії</translation>
+        <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="136"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="136"/>
         <source>Second point of line</source>
-        <translation type="unfinished">Друга точка лінії</translation>
+        <translation>Друга точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="154"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="154"/>
         <source>Type line</source>
-        <translation type="unfinished">Тип лінії</translation>
+        <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.ui" line="161"/>
+        <location filename="../../src/dialogs/dialogheight.ui" line="161"/>
         <source>Show line from first point to our point</source>
-        <translation type="unfinished">Показати лінію від першої точки до нашої точки</translation>
+        <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.cpp" line="74"/>
+        <location filename="../../src/dialogs/dialogheight.cpp" line="119"/>
         <source>Select first point of line</source>
-        <translation type="unfinished">Виберість першу точку лінії</translation>
+        <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogheight.cpp" line="79"/>
+        <location filename="../../src/dialogs/dialogheight.cpp" line="124"/>
         <source>Select second point of line</source>
-        <translation type="unfinished">Виберіть другу точку лінії</translation>
+        <translation>Виберіть другу точку лінії</translation>
     </message>
 </context>
 <context>
     <name>DialogHistory</name>
     <message>
-        <location filename="../dialogs/dialoghistory.ui" line="17"/>
+        <location filename="../../src/dialogs/dialoghistory.ui" line="17"/>
         <source>History</source>
         <translation>Історія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.ui" line="54"/>
-        <location filename="../dialogs/dialoghistory.cpp" line="292"/>
+        <location filename="../../src/dialogs/dialoghistory.ui" line="54"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="332"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="150"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="174"/>
         <source>%1 - Base point</source>
         <translation>%1 - Базова точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="157"/>
-        <location filename="../dialogs/dialoghistory.cpp" line="166"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="182"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="192"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Лінія від точки %1 до точки %2</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="175"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="202"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Точка вздовж лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="180"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="207"/>
         <source>%1 - Point of soulder</source>
         <translation>%1 - Точка плеча</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="188"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="216"/>
         <source>%3 - Normal to line %1_%2</source>
         <translation>%3 - Перпедикуляр до лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="199"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="228"/>
         <source>%4 - Bisector of angle %1_%2_%3</source>
         <translation>%4 - Бісектриса кута %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="212"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="242"/>
         <source>%5 - Point of intersection lines %1_%2 and %3_%4</source>
         <translation>%5 - Точка перетину лінії %1_%2 і %3_%4</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="220"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="251"/>
         <source>Curve %1_%2</source>
         <translation>Крива %1_%2</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="226"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="258"/>
         <source>Arc with center in point %1</source>
         <translation>Дуга з центром в точці %1</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="233"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="267"/>
         <source>Curve point %1</source>
         <translation>Точка кривої %1</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="248"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="284"/>
         <source>%4 - Point of contact arc with center in point %1 and line %2_%3</source>
         <translation>%4 - Точка дотику дуги з центром в точці %1 і лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="262"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="299"/>
         <source>Point of perpendical from point %1 to line %2_%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка перпендикуляра з точки %1 до лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="277"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="316"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Трикутник: вісь %1_%2, точки %3 і %4</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoghistory.cpp" line="283"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="322"/>
         <source>Get wrong tool type. Ignore.</source>
         <translation>Отримано неправильний тип інструменту. Ігноруємо.</translation>
     </message>
@@ -726,146 +726,146 @@
 <context>
     <name>DialogIncrements</name>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="14"/>
-        <location filename="../dialogs/dialogincrements.ui" line="117"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="117"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="34"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="34"/>
         <source>Table sizes</source>
         <translation>Таблиця розмірів</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="83"/>
-        <location filename="../dialogs/dialogincrements.ui" line="163"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="475"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="485"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="83"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="163"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="517"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="528"/>
         <source>Denotation</source>
         <translation>Позначення</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="88"/>
-        <location filename="../dialogs/dialogincrements.ui" line="168"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="88"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="168"/>
         <source>The calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="93"/>
-        <location filename="../dialogs/dialogincrements.ui" line="173"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="477"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="487"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="93"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="173"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="519"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="530"/>
         <source>Base value</source>
         <translation>Базове значення</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="98"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="98"/>
         <source>In sizes</source>
         <translation>В розмірах</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="103"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="103"/>
         <source>In growths</source>
         <translation>В ростах</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="108"/>
-        <location filename="../dialogs/dialogincrements.ui" line="188"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="300"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="333"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="480"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="490"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="108"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="188"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="325"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="358"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="522"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="533"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="178"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="478"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="488"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="178"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="520"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="531"/>
         <source>In size</source>
         <translation>В розмірах</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="183"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="479"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="489"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="183"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="521"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="532"/>
         <source>In growth</source>
         <translation>В ростах</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="196"/>
-        <location filename="../dialogs/dialogincrements.ui" line="211"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="196"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="211"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="224"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="224"/>
         <source>Lines</source>
         <translation>Лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="246"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="495"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="246"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="539"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="251"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="251"/>
         <source>Length of the line</source>
         <translation>Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="260"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="260"/>
         <source>Curves</source>
         <translation>Криві</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="282"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="500"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="282"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="545"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="287"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="287"/>
         <source>Length of the curve</source>
         <translation>Довжина кривої</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="296"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="296"/>
         <source>Arcs</source>
         <translation>Дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="318"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="505"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="318"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="551"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.ui" line="323"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="323"/>
         <source>Length of arc</source>
         <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.cpp" line="292"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="317"/>
         <source>Denotation %1</source>
         <translation>Позначення %1</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.cpp" line="428"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="464"/>
         <source>Can&apos;t convert toDouble value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу конвертувати toDouble значення.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.cpp" line="476"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="486"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="518"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="529"/>
         <source>Calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogincrements.cpp" line="496"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="501"/>
-        <location filename="../dialogs/dialogincrements.cpp" line="506"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="540"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="546"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="552"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
@@ -873,22 +873,22 @@
 <context>
     <name>DialogLine</name>
     <message>
-        <location filename="../dialogs/dialogline.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="14"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogline.ui" line="29"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="29"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogline.ui" line="43"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="43"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogline.cpp" line="92"/>
+        <location filename="../../src/dialogs/dialogline.cpp" line="117"/>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
@@ -896,49 +896,49 @@
 <context>
     <name>DialogLineIntersect</name>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="14"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="14"/>
         <source>Point of line intersection</source>
         <translation>Точка перетину ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="72"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="72"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="84"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="84"/>
         <source>First line</source>
         <translation>Перша лінія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="99"/>
-        <location filename="../dialogs/dialoglineintersect.ui" line="136"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="99"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="136"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="109"/>
-        <location filename="../dialogs/dialoglineintersect.ui" line="146"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="109"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="146"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.ui" line="121"/>
+        <location filename="../../src/dialogs/dialoglineintersect.ui" line="121"/>
         <source>Second line</source>
         <translation>Друга лінія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.cpp" line="73"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="93"/>
         <source>Select second point of first line</source>
         <translation>Виберіть другу точка першої лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.cpp" line="83"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="105"/>
         <source>Select first point of second line</source>
         <translation>Виберіть першу точку другої лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialoglineintersect.cpp" line="93"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="117"/>
         <source>Select second point of second line</source>
         <translation>Виберіть другу точку другої лінії</translation>
     </message>
@@ -946,126 +946,126 @@
 <context>
     <name>DialogNormal</name>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="14"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="14"/>
         <source>Normal</source>
         <translation>Перпендикуляр</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="72"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="72"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="85"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="85"/>
         <source>Formula calculation of length of normal</source>
         <translation>Формула розрахунку довжини перпендикуляра</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="92"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="92"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="95"/>
-        <location filename="../dialogs/dialognormal.ui" line="198"/>
-        <location filename="../dialogs/dialognormal.ui" line="294"/>
-        <location filename="../dialogs/dialognormal.ui" line="311"/>
-        <location filename="../dialogs/dialognormal.ui" line="328"/>
-        <location filename="../dialogs/dialognormal.ui" line="345"/>
-        <location filename="../dialogs/dialognormal.ui" line="368"/>
-        <location filename="../dialogs/dialognormal.ui" line="385"/>
-        <location filename="../dialogs/dialognormal.ui" line="402"/>
-        <location filename="../dialogs/dialognormal.ui" line="419"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="95"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="198"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="294"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="311"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="328"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="345"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="368"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="385"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="402"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="419"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="124"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="124"/>
         <source>Value of length</source>
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="127"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="127"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="185"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="185"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="195"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="195"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="225"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="225"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="245"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="245"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="273"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="273"/>
         <source>Additional angle degrees</source>
         <translation>Додатковий кут градуси</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="463"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="463"/>
         <source>Type line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="470"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="470"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="481"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="481"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="488"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="488"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="498"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="498"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="505"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="505"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="515"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="515"/>
         <source>Length of lines</source>
         <translation>Довжини ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="525"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="525"/>
         <source>Length of arcs</source>
         <translation>Довжини дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="535"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="535"/>
         <source>Length of curves</source>
         <translation>Довжини кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.ui" line="546"/>
+        <location filename="../../src/dialogs/dialognormal.ui" line="546"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialognormal.cpp" line="113"/>
+        <location filename="../../src/dialogs/dialognormal.cpp" line="133"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -1073,118 +1073,118 @@
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="14"/>
         <source>Point of contact</source>
         <translation>Точка дотику</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="72"/>
         <source>Radius</source>
         <translation>Радіус</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="85"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="85"/>
         <source>Formula calculation of radius of arc</source>
         <translation>Формула розрахунку радіуса дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="92"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="95"/>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="198"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="198"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="124"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="124"/>
         <source>Value of radius</source>
         <translation>Значення радіусу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="127"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="127"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="185"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="185"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="195"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="195"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="225"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="225"/>
         <source>Center of arc</source>
         <translation>Центер дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="244"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="244"/>
         <source>Slect point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="261"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="261"/>
         <source>Top of the line</source>
         <translation>Початок лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="294"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="294"/>
         <source>End of the line</source>
         <translation>Кінець лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="321"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="321"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="328"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="328"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="338"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="338"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="345"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="345"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="355"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="355"/>
         <source>Length of lines</source>
         <translation>Довжини ліній</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="365"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="365"/>
         <source>Length of arcs</source>
         <translation>Довжини дуг</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="375"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="375"/>
         <source>Length of curves</source>
         <translation>Довжини кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.ui" line="386"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="386"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.cpp" line="91"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="110"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofcontact.cpp" line="100"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="121"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
@@ -1192,153 +1192,153 @@
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Діалог</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="65"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="65"/>
         <source>Name new point</source>
-        <translation type="unfinished">Ім&apos;я нової точки</translation>
+        <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="85"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="85"/>
         <source>Point vertically</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка по вертикалі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="92"/>
         <source>First point of angle</source>
-        <translation type="unfinished">Перша точка кута</translation>
+        <translation>Перша точка кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="109"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="109"/>
         <source>Point horizontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка по горизонталі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.ui" line="116"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="116"/>
         <source>Second point of angle</source>
-        <translation type="unfinished">Друга точка кута</translation>
+        <translation>Друга точка кута</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogpointofintersection.cpp" line="53"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.cpp" line="95"/>
         <source>Select point horizontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть точку горизонталі</translation>
     </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="14"/>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="291"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="291"/>
         <source>Point of shoulder</source>
         <translation>Точка плеча</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="72"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="85"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="85"/>
         <source>Formula calculation of length of line</source>
         <translation>Формула розрахунку довжини лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="92"/>
         <source>Calculate formula</source>
         <translation>Розрахувати формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="95"/>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="198"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="198"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="124"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="124"/>
         <source>Value of length</source>
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="127"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="127"/>
         <source>_</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="185"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="185"/>
         <source>Name new point</source>
         <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="195"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="195"/>
         <source>Put variable into formula</source>
         <translation>Вставити змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="225"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="225"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="258"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="258"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="324"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="324"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="331"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="331"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="342"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="342"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="349"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="349"/>
         <source>Size and growth</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="359"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="359"/>
         <source>Standart table</source>
         <translation>Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="366"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="366"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="376"/>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="386"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="376"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="386"/>
         <source>Length of lines</source>
         <translation>Довжини лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="396"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="396"/>
         <source>Length of curves</source>
         <translation>Довжни кривих</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.ui" line="407"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="407"/>
         <source>Variables. Click twice to select.</source>
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.cpp" line="98"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="118"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogshoulderpoint.cpp" line="107"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="129"/>
         <source>Select point of shoulder</source>
         <translation>Виберіть точку плеча</translation>
     </message>
@@ -1346,7 +1346,7 @@
 <context>
     <name>DialogSinglePoint</name>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="17"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="17"/>
         <source>Single point</source>
         <translation>Точка</translation>
     </message>
@@ -1355,27 +1355,27 @@
         <translation type="obsolete">Координати</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="39"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="39"/>
         <source>Coordinates on the sheet</source>
         <translation>Координати на листі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="42"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="42"/>
         <source>Coordinates</source>
         <translation>Координати</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="48"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="48"/>
         <source>Y coordinate</source>
         <translation>Y координата</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="55"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="55"/>
         <source>X coordinate</source>
         <translation>Х координата</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsinglepoint.ui" line="114"/>
+        <location filename="../../src/dialogs/dialogsinglepoint.ui" line="114"/>
         <source>Point name</source>
         <translation>Ім&apos;я точки</translation>
     </message>
@@ -1383,47 +1383,47 @@
 <context>
     <name>DialogSpline</name>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="14"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="33"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="33"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="47"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="47"/>
         <source>Length ratio of the first control point</source>
         <translation>Коефіцієнт довжини першої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="68"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="68"/>
         <source>The angle of the first control point</source>
         <translation>Кут першої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="93"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="93"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="107"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="107"/>
         <source>Length ratio of the second control point</source>
         <translation>Коефіцієнт довжини другої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="128"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="128"/>
         <source>The angle of the second control point</source>
         <translation>Кут другої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.ui" line="165"/>
+        <location filename="../../src/dialogs/dialogspline.ui" line="165"/>
         <source>Coefficient of curvature of the curve</source>
         <translation>Коефіцієнт кривизни кривої</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogspline.cpp" line="70"/>
+        <location filename="../../src/dialogs/dialogspline.cpp" line="91"/>
         <source>Select last point of curve</source>
         <translation>Виберість останню точку кривої</translation>
     </message>
@@ -1431,47 +1431,47 @@
 <context>
     <name>DialogSplinePath</name>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="14"/>
         <source>Curve path</source>
         <translation>Складна крива</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="33"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="33"/>
         <source>Point of curve</source>
         <translation>Точка кривої</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="47"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="47"/>
         <source>Length ratio of the first control point</source>
         <translation>Коефіцієнт довжини першої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="68"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="68"/>
         <source>The angle of the first control point</source>
         <translation>Кут першої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="89"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="89"/>
         <source>Length ratio of the second control point</source>
         <translation>Коефіцієнт довжини другої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="110"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="110"/>
         <source>The angle of the second control point</source>
         <translation>Кут другої контрольної точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="131"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="131"/>
         <source>List of points</source>
         <translation>Список точок</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.ui" line="154"/>
+        <location filename="../../src/dialogs/dialogsplinepath.ui" line="154"/>
         <source>Coefficient of curvature of the curve</source>
         <translation>Коефіцієнт кривизни кривої</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogsplinepath.cpp" line="80"/>
+        <location filename="../../src/dialogs/dialogsplinepath.cpp" line="97"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -1479,498 +1479,498 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="65"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="85"/>
         <source>Wrong details id.</source>
         <translation>Неправильний id деталі.</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="90"/>
-        <location filename="../dialogs/dialogtool.cpp" line="95"/>
-        <location filename="../dialogs/dialogtool.cpp" line="104"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="114"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="120"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="134"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="90"/>
-        <location filename="../dialogs/dialogtool.cpp" line="110"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="114"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="142"/>
         <source>No line</source>
         <translation>Без лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="122"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="159"/>
         <source>Can&apos;t find point by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти точку за ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="172"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="219"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="349"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="434"/>
         <source>Growth</source>
-        <translation type="unfinished"></translation>
+        <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="353"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="439"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="374"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="463"/>
         <source>Line length</source>
         <translation>Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="380"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="470"/>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtool.cpp" line="386"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="477"/>
         <source>Curve length</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина кривої</translation>
     </message>
 </context>
 <context>
     <name>DialogTriangle</name>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="14"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Діалог</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="68"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="68"/>
         <source>Name new point</source>
-        <translation type="unfinished">Ім&apos;я нової точки</translation>
+        <translation>Ім&apos;я нової точки</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="82"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="82"/>
         <source>First point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Перша точка вісі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="89"/>
-        <location filename="../dialogs/dialogtriangle.ui" line="107"/>
-        <location filename="../dialogs/dialogtriangle.ui" line="125"/>
-        <location filename="../dialogs/dialogtriangle.ui" line="143"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="89"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="107"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="125"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="143"/>
         <source>First point of line</source>
-        <translation type="unfinished">Перша точка лінії</translation>
+        <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="100"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="100"/>
         <source>Second point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Друга точка вісі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="118"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="118"/>
         <source>First point</source>
-        <translation type="unfinished">Перша точка</translation>
+        <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.ui" line="136"/>
+        <location filename="../../src/dialogs/dialogtriangle.ui" line="136"/>
         <source>Second point</source>
-        <translation type="unfinished">Друга точка</translation>
+        <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.cpp" line="49"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="89"/>
         <source>Select second point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть другу точку вісі</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.cpp" line="54"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="94"/>
         <source>Select first point</source>
-        <translation type="unfinished">Виберість першу точку</translation>
+        <translation>Виберість першу точку</translation>
     </message>
     <message>
-        <location filename="../dialogs/dialogtriangle.cpp" line="59"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="99"/>
         <source>Select second point</source>
-        <translation type="unfinished">Виберіть другу точку</translation>
+        <translation>Виберіть другу точку</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../../src/mainwindow.ui" line="14"/>
         <source>Valentina</source>
         <translation>Valentina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="61"/>
+        <location filename="../../src/mainwindow.ui" line="61"/>
         <source>Tools for creating points.</source>
         <translation>Інструмент створення точок.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="64"/>
+        <location filename="../../src/mainwindow.ui" line="64"/>
         <source>Point</source>
         <translation>Точка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="177"/>
+        <location filename="../../src/mainwindow.ui" line="177"/>
         <source>Tool point of normal.</source>
         <translation>Інструмент точка перпендикуляра.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="76"/>
-        <location filename="../mainwindow.ui" line="102"/>
-        <location filename="../mainwindow.ui" line="128"/>
-        <location filename="../mainwindow.ui" line="154"/>
-        <location filename="../mainwindow.ui" line="180"/>
-        <location filename="../mainwindow.ui" line="206"/>
-        <location filename="../mainwindow.ui" line="232"/>
-        <location filename="../mainwindow.ui" line="258"/>
-        <location filename="../mainwindow.ui" line="281"/>
-        <location filename="../mainwindow.ui" line="331"/>
-        <location filename="../mainwindow.ui" line="357"/>
-        <location filename="../mainwindow.ui" line="407"/>
-        <location filename="../mainwindow.ui" line="433"/>
-        <location filename="../mainwindow.ui" line="483"/>
-        <location filename="../mainwindow.ui" line="530"/>
+        <location filename="../../src/mainwindow.ui" line="76"/>
+        <location filename="../../src/mainwindow.ui" line="102"/>
+        <location filename="../../src/mainwindow.ui" line="128"/>
+        <location filename="../../src/mainwindow.ui" line="154"/>
+        <location filename="../../src/mainwindow.ui" line="180"/>
+        <location filename="../../src/mainwindow.ui" line="206"/>
+        <location filename="../../src/mainwindow.ui" line="232"/>
+        <location filename="../../src/mainwindow.ui" line="258"/>
+        <location filename="../../src/mainwindow.ui" line="281"/>
+        <location filename="../../src/mainwindow.ui" line="331"/>
+        <location filename="../../src/mainwindow.ui" line="357"/>
+        <location filename="../../src/mainwindow.ui" line="407"/>
+        <location filename="../../src/mainwindow.ui" line="433"/>
+        <location filename="../../src/mainwindow.ui" line="483"/>
+        <location filename="../../src/mainwindow.ui" line="530"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="99"/>
+        <location filename="../../src/mainwindow.ui" line="99"/>
         <source>Tool point of shoulder.</source>
         <translation>Інструмент точка плеча.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="73"/>
+        <location filename="../../src/mainwindow.ui" line="73"/>
         <source>Tool point on the end line.</source>
         <translation>Інструмент точка на кінці лінії.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="203"/>
+        <location filename="../../src/mainwindow.ui" line="203"/>
         <source>Tool point along line.</source>
         <translation>Інструмент точка вздовж лінії.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="151"/>
+        <location filename="../../src/mainwindow.ui" line="151"/>
         <source>Tool point of bisector.</source>
         <translation>Інструмент точка бісектриси кута.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="125"/>
+        <location filename="../../src/mainwindow.ui" line="125"/>
         <source>Tool point of contact.</source>
         <translation>Інструмент точка дотику.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="229"/>
+        <location filename="../../src/mainwindow.ui" line="229"/>
         <source>Tool point of height.</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструмент точка висоти.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="255"/>
+        <location filename="../../src/mainwindow.ui" line="255"/>
         <source>Tool triangle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструмент трикутник.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="316"/>
+        <location filename="../../src/mainwindow.ui" line="316"/>
         <source>Tools for creating lines.</source>
         <translation>Інструменти для створення ліній.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
+        <location filename="../../src/mainwindow.ui" line="319"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="328"/>
+        <location filename="../../src/mainwindow.ui" line="328"/>
         <source>Tool line.</source>
         <translation>Інструмент лінія.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../../src/mainwindow.ui" line="354"/>
         <source>Tool point of line intersection.</source>
         <translation>Інструмент точка перетину ліній.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../../src/mainwindow.ui" line="392"/>
         <source>Tools for creating curves.</source>
         <translation>Інструменти для створення кривих.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="395"/>
+        <location filename="../../src/mainwindow.ui" line="395"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="404"/>
+        <location filename="../../src/mainwindow.ui" line="404"/>
         <source>Tool curve.</source>
         <translation>Інструмент крива.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="430"/>
+        <location filename="../../src/mainwindow.ui" line="430"/>
         <source>Tool path curve.</source>
         <translation>Інструмент складна крива.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="468"/>
+        <location filename="../../src/mainwindow.ui" line="468"/>
         <source>Tools for creating arcs.</source>
         <translation>Інструменти для створення дуг.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="471"/>
+        <location filename="../../src/mainwindow.ui" line="471"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="480"/>
+        <location filename="../../src/mainwindow.ui" line="480"/>
         <source>Tool arc.</source>
         <translation>Інструмент дуга.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="518"/>
+        <location filename="../../src/mainwindow.ui" line="518"/>
         <source>Tools for creating details.</source>
         <translation>Інструменти для створення деталей.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="521"/>
+        <location filename="../../src/mainwindow.ui" line="521"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="527"/>
+        <location filename="../../src/mainwindow.ui" line="527"/>
         <source>Tool new detail.</source>
         <translation>Інструмент нова деталь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="574"/>
+        <location filename="../../src/mainwindow.ui" line="574"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="585"/>
+        <location filename="../../src/mainwindow.ui" line="585"/>
         <source>Help</source>
         <translation>Допомога</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="592"/>
+        <location filename="../../src/mainwindow.ui" line="592"/>
         <source>Drawing</source>
         <translation>Креслення</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="622"/>
+        <location filename="../../src/mainwindow.ui" line="622"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="636"/>
+        <location filename="../../src/mainwindow.ui" line="636"/>
         <source>toolBar_2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="648"/>
+        <location filename="../../src/mainwindow.ui" line="648"/>
         <source>toolBar_3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="664"/>
+        <location filename="../../src/mainwindow.ui" line="664"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="667"/>
+        <location filename="../../src/mainwindow.ui" line="667"/>
         <source>Create a new pattern</source>
         <translation>Створити нове лекало</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="677"/>
+        <location filename="../../src/mainwindow.ui" line="677"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="680"/>
+        <location filename="../../src/mainwindow.ui" line="680"/>
         <source>Open file with pattern</source>
         <translation>Відкрити файл з лекалами</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="693"/>
+        <location filename="../../src/mainwindow.ui" line="693"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="696"/>
+        <location filename="../../src/mainwindow.ui" line="696"/>
         <source>Save pattern</source>
         <translation>Зберегти лекало</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="709"/>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../../src/mainwindow.ui" line="709"/>
+        <location filename="../../src/mainwindow.cpp" line="849"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="712"/>
+        <location filename="../../src/mainwindow.ui" line="712"/>
         <source>Save not yet saved pattern</source>
         <translation>Зберегти ще не збережене лекало</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="730"/>
+        <location filename="../../src/mainwindow.ui" line="730"/>
         <source>Draw</source>
         <translation>Малювання</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="733"/>
+        <location filename="../../src/mainwindow.ui" line="733"/>
         <source>Draw mode</source>
         <translation>Режим малювання</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="748"/>
+        <location filename="../../src/mainwindow.ui" line="748"/>
         <source>Details</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="751"/>
+        <location filename="../../src/mainwindow.ui" line="751"/>
         <source>Deatils mode</source>
         <translation>Режим деталей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="766"/>
-        <location filename="../mainwindow.ui" line="769"/>
+        <location filename="../../src/mainwindow.ui" line="766"/>
+        <location filename="../../src/mainwindow.ui" line="769"/>
         <source>Tools pointer</source>
         <translation>Інструмент вказівник</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="778"/>
+        <location filename="../../src/mainwindow.ui" line="778"/>
         <source>New drawing</source>
         <translation>Нове креслення</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="781"/>
+        <location filename="../../src/mainwindow.ui" line="781"/>
         <source>Add new drawing</source>
         <translation>Додати нове креслення</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="790"/>
-        <location filename="../mainwindow.ui" line="793"/>
+        <location filename="../../src/mainwindow.ui" line="790"/>
+        <location filename="../../src/mainwindow.ui" line="793"/>
         <source>Change the name of drawing</source>
         <translation>Змінити ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="805"/>
+        <location filename="../../src/mainwindow.ui" line="805"/>
         <source>Table of variables</source>
         <translation>Таблиця змінних</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="808"/>
+        <location filename="../../src/mainwindow.ui" line="808"/>
         <source>Tables of variables</source>
         <translation>Таблиці змінних</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="820"/>
+        <location filename="../../src/mainwindow.ui" line="820"/>
         <source>History</source>
         <translation>Історія</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="829"/>
+        <location filename="../../src/mainwindow.ui" line="829"/>
         <source>Layout</source>
         <translation>Розкладки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="832"/>
+        <location filename="../../src/mainwindow.ui" line="832"/>
         <source>Create layout</source>
         <translation>Створити розкладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="837"/>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../../src/mainwindow.ui" line="837"/>
+        <location filename="../../src/mainwindow.cpp" line="491"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="842"/>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../../src/mainwindow.ui" line="842"/>
+        <location filename="../../src/mainwindow.cpp" line="486"/>
         <source>About Valentina</source>
         <translation>Про Valentina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="847"/>
+        <location filename="../../src/mainwindow.ui" line="847"/>
         <source>Exit</source>
         <translation>Вихід</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../../src/mainwindow.cpp" line="127"/>
         <source>Drawing %1</source>
         <translation>Креслення %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../../src/mainwindow.cpp" line="130"/>
+        <location filename="../../src/mainwindow.cpp" line="194"/>
         <source>Drawing:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="123"/>
+        <location filename="../../src/mainwindow.cpp" line="132"/>
         <source>Enter a name for the drawing.</source>
         <translation>Введіть ім&apos;я креслення.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
-        <location filename="../mainwindow.cpp" line="192"/>
+        <location filename="../../src/mainwindow.cpp" line="147"/>
+        <location filename="../../src/mainwindow.cpp" line="211"/>
         <source>Error. Drawing of same name already exists.</source>
         <translation>Помилка. Креслення з таким ім&apos;ям вже існує.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../../src/mainwindow.cpp" line="158"/>
         <source>Error creating drawing with the name</source>
         <translation>Помилка створення креслення з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../../src/mainwindow.cpp" line="196"/>
         <source>Enter a new name for the drawing.</source>
         <translation>Введіть нове ім&apos;я креслення.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../../src/mainwindow.cpp" line="226"/>
         <source>Error saving change!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка збереження змін!!!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../../src/mainwindow.cpp" line="226"/>
         <source>Can&apos;t save new name of drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу зберегти нове ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="252"/>
-        <location filename="../mainwindow.cpp" line="270"/>
+        <location filename="../../src/mainwindow.cpp" line="288"/>
+        <location filename="../../src/mainwindow.cpp" line="310"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="261"/>
+        <location filename="../../src/mainwindow.cpp" line="299"/>
         <source>Select first point</source>
         <translation>Виберість першу точку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="280"/>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../../src/mainwindow.cpp" line="322"/>
+        <location filename="../../src/mainwindow.cpp" line="334"/>
+        <location filename="../../src/mainwindow.cpp" line="402"/>
         <source>Select first point of line</source>
         <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../../src/mainwindow.cpp" line="345"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../../src/mainwindow.cpp" line="356"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../../src/mainwindow.cpp" line="368"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../../src/mainwindow.cpp" line="379"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../../src/mainwindow.cpp" line="390"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -1983,156 +1983,156 @@
         <translation type="obsolete">Valentina v.0.1.0</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../../src/mainwindow.cpp" line="528"/>
         <source>The pattern has been modified.</source>
         <translation>Лекало було зміненно.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="449"/>
+        <location filename="../../src/mainwindow.cpp" line="529"/>
         <source>Do you want to save your changes?</source>
         <translation>Ви хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../../src/mainwindow.cpp" line="576"/>
         <source>Growth: </source>
         <translation>Зріст:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../../src/mainwindow.cpp" line="592"/>
         <source> Size: </source>
         <translation>Розмір:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../../src/mainwindow.cpp" line="617"/>
         <source>Drawing: </source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="738"/>
+        <location filename="../../src/mainwindow.cpp" line="847"/>
         <source>Lekalo files (*.xml);;All files (*.*)</source>
         <translation>Файли лекала (*.xml);;Всі файли (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="739"/>
-        <location filename="../mainwindow.cpp" line="775"/>
+        <location filename="../../src/mainwindow.cpp" line="848"/>
+        <location filename="../../src/mainwindow.cpp" line="893"/>
         <source>Lekalo files (*.xml)</source>
         <translation>Файл лекала (*.xml)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="765"/>
+        <location filename="../../src/mainwindow.cpp" line="882"/>
         <source>Error saving file. Can&apos;t save file.</source>
         <translation>Помилка збереження файлу. Не можу зберегти файл.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="776"/>
+        <location filename="../../src/mainwindow.cpp" line="894"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="932"/>
+        <location filename="../../src/mainwindow.cpp" line="1080"/>
         <source>Got empty file name.</source>
         <translation>Отримано пусте імя файлу.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="956"/>
+        <location filename="../../src/mainwindow.cpp" line="1108"/>
         <source>Could not copy temp file to pattern file</source>
         <translation>Не можу копіювати тимчасовий файл до файлу лекала</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="963"/>
+        <location filename="../../src/mainwindow.cpp" line="1119"/>
         <source>Could not remove pattern file</source>
         <translation>Не можу видалити файл лекала</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="998"/>
+        <location filename="../../src/mainwindow.cpp" line="1162"/>
         <source>Can&apos;t open pattern file. File name empty</source>
         <translation>Не можу відкрити файл лекала. Пусте ім&apos;я файлу </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="764"/>
-        <location filename="../mainwindow.cpp" line="921"/>
-        <location filename="../mainwindow.cpp" line="1014"/>
-        <location filename="../mainwindow.cpp" line="1028"/>
-        <location filename="../mainwindow.cpp" line="1041"/>
-        <location filename="../mainwindow.cpp" line="1055"/>
-        <location filename="../mainwindow.cpp" line="1069"/>
-        <location filename="../mainwindow.cpp" line="1096"/>
+        <location filename="../../src/mainwindow.cpp" line="881"/>
+        <location filename="../../src/mainwindow.cpp" line="1068"/>
+        <location filename="../../src/mainwindow.cpp" line="1182"/>
+        <location filename="../../src/mainwindow.cpp" line="1197"/>
+        <location filename="../../src/mainwindow.cpp" line="1211"/>
+        <location filename="../../src/mainwindow.cpp" line="1226"/>
+        <location filename="../../src/mainwindow.cpp" line="1241"/>
+        <location filename="../../src/mainwindow.cpp" line="1274"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="63"/>
+        <location filename="../../src/mainwindow.cpp" line="71"/>
         <source>Create new drawing for start working.</source>
         <translation>Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../../src/mainwindow.cpp" line="420"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="382"/>
+        <location filename="../../src/mainwindow.cpp" line="447"/>
         <source>Select base point</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="391"/>
+        <location filename="../../src/mainwindow.cpp" line="458"/>
         <source>Select first point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../../src/mainwindow.cpp" line="470"/>
         <source>Select point vertically</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../../src/mainwindow.cpp" line="482"/>
         <source>Based on Qt %2 (32 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Базується на Qt %2 (32 bit)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../../src/mainwindow.cpp" line="483"/>
         <source>Built on %3 at %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../../src/mainwindow.cpp" line="484"/>
         <source>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1015"/>
+        <location filename="../../src/mainwindow.cpp" line="1183"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1029"/>
+        <location filename="../../src/mainwindow.cpp" line="1198"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1042"/>
+        <location filename="../../src/mainwindow.cpp" line="1212"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1056"/>
+        <location filename="../../src/mainwindow.cpp" line="1227"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="922"/>
-        <location filename="../mainwindow.cpp" line="1070"/>
+        <location filename="../../src/mainwindow.cpp" line="1069"/>
+        <location filename="../../src/mainwindow.cpp" line="1242"/>
         <source>Error don&apos;t unique id.</source>
         <translation>Помилка, не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1097"/>
+        <location filename="../../src/mainwindow.cpp" line="1275"/>
         <source>Error parsing pattern file.</source>
         <translation>Помилка парсінгу файлу лекала.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1101"/>
+        <location filename="../../src/mainwindow.cpp" line="1279"/>
         <source>Error in line %1 column %2</source>
         <translation>Помилка в лінії %1 стовпчик %2</translation>
     </message>
@@ -2140,101 +2140,101 @@
 <context>
     <name>TableWindow</name>
     <message>
-        <location filename="../tablewindow.ui" line="14"/>
+        <location filename="../../src/tablewindow.ui" line="14"/>
         <source>Create a layout</source>
         <translation>Створити розкладку</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="44"/>
+        <location filename="../../src/tablewindow.ui" line="44"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="82"/>
+        <location filename="../../src/tablewindow.ui" line="82"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="85"/>
-        <location filename="../tablewindow.cpp" line="140"/>
+        <location filename="../../src/tablewindow.ui" line="85"/>
+        <location filename="../../src/tablewindow.cpp" line="161"/>
         <source>Save layout</source>
         <translation>Зберегти розкладку</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="95"/>
+        <location filename="../../src/tablewindow.ui" line="95"/>
         <source>Next</source>
         <translation>Наступний</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="98"/>
+        <location filename="../../src/tablewindow.ui" line="98"/>
         <source>Next detail</source>
         <translation>Наступна деталь</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="111"/>
+        <location filename="../../src/tablewindow.ui" line="111"/>
         <source>Turn</source>
         <translation>Повернути</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="114"/>
+        <location filename="../../src/tablewindow.ui" line="114"/>
         <source>Turn the detail 180 degrees</source>
         <translation>Повернути деталь на 180 градусів</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="127"/>
+        <location filename="../../src/tablewindow.ui" line="127"/>
         <source>Stop laying</source>
         <translation>Припинити укладання</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="137"/>
+        <location filename="../../src/tablewindow.ui" line="137"/>
         <source>Enlarge letter</source>
         <translation>Збільшити аркуш</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="140"/>
+        <location filename="../../src/tablewindow.ui" line="140"/>
         <source>Enlarge the length of sheet</source>
         <translation>Збільшити довжину аркушу</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="153"/>
+        <location filename="../../src/tablewindow.ui" line="153"/>
         <source>Reduce sheet</source>
         <translation>Зменшити аркуш</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="156"/>
+        <location filename="../../src/tablewindow.ui" line="156"/>
         <source>Reduce the length of the sheet</source>
         <translation>Зменшити довжину аркушу</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="168"/>
-        <location filename="../tablewindow.ui" line="171"/>
+        <location filename="../../src/tablewindow.ui" line="168"/>
+        <location filename="../../src/tablewindow.ui" line="171"/>
         <source>Mirroring</source>
         <translation>Дзеркальне відображення</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="181"/>
-        <location filename="../tablewindow.ui" line="184"/>
+        <location filename="../../src/tablewindow.ui" line="181"/>
+        <location filename="../../src/tablewindow.ui" line="184"/>
         <source>Zoom In</source>
         <translation>Збільшити</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="194"/>
-        <location filename="../tablewindow.ui" line="197"/>
+        <location filename="../../src/tablewindow.ui" line="194"/>
+        <location filename="../../src/tablewindow.ui" line="197"/>
         <source>Zoom Out</source>
         <translation>Зменшити</translation>
     </message>
     <message>
-        <location filename="../tablewindow.ui" line="124"/>
+        <location filename="../../src/tablewindow.ui" line="124"/>
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../tablewindow.cpp" line="312"/>
+        <location filename="../../src/tablewindow.cpp" line="382"/>
         <source>SVG Generator Example Drawing</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tablewindow.cpp" line="313"/>
+        <location filename="../../src/tablewindow.cpp" line="383"/>
         <source>An SVG drawing created by the SVG Generator Example provided with Qt.</source>
         <translation></translation>
     </message>
@@ -2242,76 +2242,76 @@
 <context>
     <name>VAbstractNode</name>
     <message>
-        <location filename="../tools/nodeDetails/vabstractnode.cpp" line="42"/>
+        <location filename="../../src/tools/nodeDetails/vabstractnode.cpp" line="54"/>
         <source>Can&apos;t find tag Modeling</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти тег Modeling</translation>
     </message>
 </context>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="36"/>
-        <location filename="../widgets/vapplication.cpp" line="48"/>
-        <location filename="../widgets/vapplication.cpp" line="59"/>
-        <location filename="../widgets/vapplication.cpp" line="70"/>
-        <location filename="../widgets/vapplication.cpp" line="82"/>
-        <location filename="../widgets/vapplication.cpp" line="94"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="46"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="59"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="71"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="83"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="96"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="109"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="37"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="47"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="49"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="60"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="60"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="72"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="71"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="84"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Помилка пустий параметр. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="83"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="97"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../widgets/vapplication.cpp" line="95"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="110"/>
         <source>Something wrong!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Щось не так!!</translation>
     </message>
 </context>
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../geometry/varc.cpp" line="59"/>
+        <location filename="../../src/geometry/varc.cpp" line="81"/>
         <source>Can&apos;t find id = %1 in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти id = %1 в таблиці.</translation>
     </message>
     <message>
-        <location filename="../geometry/varc.cpp" line="105"/>
+        <location filename="../../src/geometry/varc.cpp" line="135"/>
         <source>Angle of arc can&apos;t be 0 degree.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кут дуги не може бути 0 градусів.</translation>
     </message>
     <message>
-        <location filename="../geometry/varc.cpp" line="133"/>
+        <location filename="../../src/geometry/varc.cpp" line="167"/>
         <source>Arc have not this number of part.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дуга не має цієї частини.</translation>
     </message>
 </context>
 <context>
     <name>VContainer</name>
     <message>
-        <location filename="../container/vcontainer.cpp" line="82"/>
+        <location filename="../../src/container/vcontainer.cpp" line="109"/>
         <source>Can&apos;t find object</source>
         <translation>Не можу знайти об&apos;єкт</translation>
     </message>
@@ -2319,139 +2319,139 @@
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="328"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="410"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="340"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="424"/>
         <source>Can&apos;t convert toLongLong parameter</source>
         <translation>Не можу конвертувати  toLongLong параметру</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="350"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="436"/>
         <source>Got empty parameter</source>
         <translation>Отримано пустий параметр</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="362"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="450"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="376"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="468"/>
         <source>This id is not unique.</source>
         <translation>Цей id не унікальний.</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="532"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="683"/>
         <source>Error creating or updating detail</source>
         <translation>Помилка створення чи оновлення деталі</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="587"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="748"/>
         <source>Error creating or updating single point</source>
         <translation>Помилка створення чи оновлення простої точки</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="612"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="779"/>
         <source>Error creating or updating point of end line</source>
         <translation>Помилка створення чи оновлення точки кінця відрізку</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="638"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="811"/>
         <source>Error creating or updating point along line</source>
         <translation>Помилка створення чи оновлення точки вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="665"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="844"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Помилка створення чи оновлення точки плеча</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="692"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="877"/>
         <source>Error creating or updating point of normal</source>
         <translation>Помилка створення чи оновлення точки нормалі</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="719"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="910"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Помилка створення чи оновлення точки бісектриси</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="745"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="942"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="771"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="974"/>
         <source>Error creating or updating point of contact</source>
         <translation>Помилка створення чи оновлення точки дотику</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="798"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1007"/>
         <source>Error creating or updating modeling point</source>
         <translation>Помилка створення чи оновлення модельної точки</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="823"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1038"/>
         <source>Error creating or updating height</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка створення чи оновлення висоти</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="849"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1070"/>
         <source>Error creating or updating triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка створення чи оновлення трикутника</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="873"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1100"/>
         <source>Error creating or updating point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка створення чи оновлення точки перетину</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="897"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1130"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="931"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1170"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="968"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1217"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="994"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1249"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="1020"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1281"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="1049"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1317"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="1075"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1349"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="1092"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1369"/>
         <source>Error!</source>
-        <translation type="unfinished">Помилка!</translation>
+        <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../xml/vdomdocument.cpp" line="1093"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1370"/>
         <source>Error parsing file.</source>
-        <translation type="unfinished">Помилка парсингу файла.</translation>
+        <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
         <source>Can&apos;t get parent for object id = %1</source>
@@ -2461,50 +2461,50 @@
 <context>
     <name>VDrawTool</name>
     <message>
-        <location filename="../tools/drawTools/vdrawtool.h" line="54"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.h" line="133"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../tools/drawTools/vdrawtool.h" line="57"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.h" line="137"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../tools/drawTools/vdrawtool.cpp" line="91"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.cpp" line="122"/>
         <source>Can not find the element after which you want to insert.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти елемент після якого ви хочете вставити.</translation>
     </message>
     <message>
-        <location filename="../tools/drawTools/vdrawtool.cpp" line="95"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.cpp" line="128"/>
         <source>Can&apos;t find tag Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти тег Calculation</translation>
     </message>
 </context>
 <context>
     <name>VModelingTool</name>
     <message>
-        <location filename="../tools/modelingTools/vmodelingtool.h" line="47"/>
+        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="98"/>
         <source>Option</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../tools/modelingTools/vmodelingtool.h" line="50"/>
+        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="102"/>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
     <name>VSplinePath</name>
     <message>
-        <location filename="../geometry/vsplinepath.cpp" line="52"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="74"/>
         <source>Not enough points to create the spline.</source>
         <translation>Не достатньо точок для створення кривої.</translation>
     </message>
     <message>
-        <location filename="../geometry/vsplinepath.cpp" line="55"/>
-        <location filename="../geometry/vsplinepath.cpp" line="97"/>
-        <location filename="../geometry/vsplinepath.cpp" line="108"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="78"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="129"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="145"/>
         <source>This spline is not exist.</source>
         <translation>Такий сплайн не існує.</translation>
     </message>
@@ -2512,25 +2512,25 @@
 <context>
     <name>VTableGraphicsView</name>
     <message>
-        <location filename="../widgets/vtablegraphicsview.cpp" line="33"/>
+        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="43"/>
         <source>detail don&apos;t find</source>
-        <translation type="unfinished"></translation>
+        <translation>деталь не знайдено</translation>
     </message>
     <message>
-        <location filename="../widgets/vtablegraphicsview.cpp" line="36"/>
+        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="48"/>
         <source>detail find</source>
-        <translation type="unfinished"></translation>
+        <translation>деталь знайдено</translation>
     </message>
 </context>
 <context>
     <name>VToolDetail</name>
     <message>
-        <location filename="../tools/vtooldetail.cpp" line="277"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="329"/>
         <source>Options</source>
-        <translation type="unfinished">Параметри</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../tools/vtooldetail.cpp" line="278"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="330"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -2538,9 +2538,9 @@
 <context>
     <name>VToolTriangle</name>
     <message>
-        <location filename="../tools/drawTools/vtooltriangle.cpp" line="100"/>
+        <location filename="../../src/tools/drawTools/vtooltriangle.cpp" line="145"/>
         <source>Can&apos;t find point.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можу знайти точку.</translation>
     </message>
 </context>
 </TS>
