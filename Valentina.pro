@@ -67,8 +67,8 @@ CONFIG(debug, debug|release){
 
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
-                      -isystem "/usr/include/qt5/QtCore" -isystem "$$OUT_PWD/uic" -isystem "$$OUT_PWD/moc/" \
-                      -isystem "$$OUT_PWD/rcc/" \
+                      -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" \
+                      -isystem "$${RCC_DIR}" \
                       -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                       -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
                       -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
@@ -89,7 +89,7 @@ CONFIG(debug, debug|release){
     QMAKE_EXTRA_COMPILERS += lrelease
     lrelease.input         = TRANSLATIONS
     lrelease.output        = ${QMAKE_FILE_BASE}.qm
-    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm "bin/"${QMAKE_FILE_BASE}.qm
+    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm "$${DESTDIR}/"${QMAKE_FILE_BASE}.qm
     lrelease.CONFIG       += no_link target_predeps
 }
 
@@ -119,6 +119,13 @@ DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
 target.path = /usr/bin
 translations.path = /usr/share/valentina/translations
-translations.files = bin/*.qm
+translations.files = $${DESTDIR}/*.qm
 INSTALLS += target translations
 }
+
+# Remove generated files at cleaning
+QMAKE_DISTCLEAN += $${DESTDIR}/* \
+                   $${OBJECTS_DIR}/* \
+                   $${UI_DIR}/* \
+                   $${MOC_DIR}/* \
+                   $${RCC_DIR}/*
