@@ -52,9 +52,10 @@ OTHER_FILES += share/resources/valentina.rc \
 TRANSLATIONS += share/translations/valentina_ru.ts \
                 share/translations/valentina_uk.ts
 
+unix:QMAKE_CXX = ccache g++
+
 CONFIG(debug, debug|release){
     # Debug
-    QMAKE_CXX = ccache g++
     TARGET = $$DEBUG_TARGET
 
     CONFIG += precompile_header
