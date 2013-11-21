@@ -39,6 +39,7 @@ RCC_DIR = rcc
 # files created uic
 UI_DIR = uic
 
+include(src/src.pri)
 include(src/container/container.pri)
 include(src/dialogs/dialogs.pri)
 include(src/exception/exception.pri)
@@ -47,23 +48,12 @@ include(src/tools/tools.pri)
 include(src/widgets/widgets.pri)
 include(src/xml/xml.pri)
 
-SOURCES += src/main.cpp \
-        src/mainwindow.cpp \
-        src/tablewindow.cpp \
-        src/stable.cpp
-
-HEADERS  += src/mainwindow.h \
-    src/options.h \
-    src/tablewindow.h \
-    src/stable.h \
-    src/version.h
-
-FORMS    += src/mainwindow.ui \
-    src/tablewindow.ui
-
 RESOURCES += \
     share/resources/icon.qrc \
     share/resources/cursor.qrc
+
+OTHER_FILES += share/resources/valentina.rc \
+    share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina_ru.ts \
                 share/translations/valentina_uk.ts
@@ -113,3 +103,5 @@ message(Data files: $$[QT_INSTALL_DATA])
 message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
 message(Settings: $$[QT_INSTALL_SETTINGS])
 message(Examples: $$[QT_INSTALL_EXAMPLES])
+
+win32:RC_FILE = share/resources/valentina.rc
