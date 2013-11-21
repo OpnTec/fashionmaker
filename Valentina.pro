@@ -14,15 +14,9 @@ DEBUG_TARGET = Valentinad
 RELEASE_TARGET = Valentina
 
 CONFIG -= debug_and_release debug_and_release_target
-CONFIG += c++11 precompile_header
+CONFIG += c++11
 
 #DEFINES += ...
-
-# Precompiled headers (PCH)
-PRECOMPILED_HEADER = src/stable.h
-win32-msvc* {
-    PRECOMPILED_SOURCE = src/stable.cpp
-}
 
 # directory for executable file
 DESTDIR = bin
@@ -62,6 +56,13 @@ CONFIG(debug, debug|release){
     # Debug
     QMAKE_CXX = ccache g++
     TARGET = $$DEBUG_TARGET
+
+    CONFIG += precompile_header
+    # Precompiled headers (PCH)
+    PRECOMPILED_HEADER = src/stable.h
+    win32-msvc* {
+        PRECOMPILED_SOURCE = src/stable.cpp
+    }
 
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
