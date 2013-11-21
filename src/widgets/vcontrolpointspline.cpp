@@ -28,6 +28,8 @@
 
 #include "vcontrolpointspline.h"
 
+#include <QPen>
+
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)

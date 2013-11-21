@@ -29,6 +29,8 @@
 #include "dialogpointofintersection.h"
 #include "ui_dialogpointofintersection.h"
 
+#include <QPushButton>
+
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogPointOfIntersection), number(0), pointName(QString()),
     firstPointId(0), secondPointId(0)

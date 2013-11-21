@@ -29,6 +29,8 @@
 #include "dialogheight.h"
 #include "ui_dialogheight.h"
 
+#include <QPushButton>
+
 DialogHeight::DialogHeight(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)

@@ -30,6 +30,7 @@
 #define VMAINGRAPHICSSCENE_H
 
 #include <QGraphicsScene>
+#include "../options.h"
 
 /**
  * @brief The VMainGraphicsScene class

@@ -32,6 +32,7 @@
 #include "../geometry/vspline.h"
 #include "../geometry/vsplinepath.h"
 #include <QDebug>
+#include <QPushButton>
 
 DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent)
     :DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),

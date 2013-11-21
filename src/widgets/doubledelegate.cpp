@@ -35,6 +35,8 @@
 
 #include "doubledelegate.h"
 
+#include <QDoubleSpinBox>
+
 QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                              const QModelIndex &index ) const
 {

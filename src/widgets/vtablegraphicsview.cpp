@@ -28,6 +28,10 @@
 
 #include "vtablegraphicsview.h"
 
+#include <QDebug>
+#include <QtWidgets>
+#include <QWheelEvent>
+
 VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
     :QGraphicsView(pScene, parent)
 {

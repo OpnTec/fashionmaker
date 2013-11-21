@@ -27,7 +27,10 @@
  *************************************************************************/
 
 #include "vitem.h"
+#include "../options.h"
+
 #include <QGraphicsScene>
+#include <QDebug>
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
     :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(0)

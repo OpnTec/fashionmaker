@@ -31,6 +31,8 @@
 
 #include "vexception.h"
 
+#include <QDomElement>
+
 /**
  * @brief The VExceptionObjectError class for exception object error
  */

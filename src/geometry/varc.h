@@ -30,6 +30,8 @@
 #define VARC_H
 
 #include "vspline.h"
+#include <QCoreApplication>
+#include "../options.h"
 class QString;
 class QLineF;
 class QPainterPath;

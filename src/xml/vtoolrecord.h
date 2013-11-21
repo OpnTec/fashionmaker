@@ -29,6 +29,10 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
+#include "../options.h"
+
+#include <QString>
+
 /**
  * @brief The VToolRecord class
  */

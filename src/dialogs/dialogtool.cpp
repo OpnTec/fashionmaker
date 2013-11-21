@@ -29,6 +29,8 @@
 #include "dialogtool.h"
 #include "../container/calculator.h"
 
+#include <QtWidgets>
+
 DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
       spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),

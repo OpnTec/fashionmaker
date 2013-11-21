@@ -36,6 +36,14 @@
 #include "exception/vexceptionuniqueid.h"
 #include "version.h"
 
+#include <QInputDialog>
+#include <QtCore>
+#include <QDebug>
+#include <QMessageBox>
+#include <QShowEvent>
+#include <QScrollBar>
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
     sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),

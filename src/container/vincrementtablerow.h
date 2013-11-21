@@ -29,6 +29,8 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
+#include <QString>
+
 /**
  * @brief The VIncrementTableRow class keep data row of increment table
  */

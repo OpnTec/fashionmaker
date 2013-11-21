@@ -28,6 +28,8 @@
 
 #include "vnodepoint.h"
 
+#include <QtWidgets>
+
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 

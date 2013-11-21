@@ -29,6 +29,8 @@
 #include "dialogtriangle.h"
 #include "ui_dialogtriangle.h"
 
+#include <QPushButton>
+
 DialogTriangle::DialogTriangle(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
     axisP2Id(0), firstPointId(0), secondPointId(0)

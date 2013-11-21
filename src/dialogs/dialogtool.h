@@ -29,7 +29,12 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
+#include <QComboBox>
 #include <QDialog>
+#include <QDoubleSpinBox>
+#include <QLabel>
+#include <QListWidgetItem>
+#include <QRadioButton>
 #include "../container/vcontainer.h"
 
 /**

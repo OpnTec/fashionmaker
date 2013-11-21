@@ -31,6 +31,8 @@
 
 #include "vexception.h"
 
+#include <QDomElement>
+
 /**
  * @brief The VExceptionEmptyParameter class for exception empty parameter
  */

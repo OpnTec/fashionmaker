@@ -28,6 +28,11 @@
 
 #include "vmaingraphicsview.h"
 
+#include <QTimeLine>
+#include <QWheelEvent>
+#include <QApplication>
+#include <QScrollBar>
+
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     :QGraphicsView(parent), _numScheduledScalings(0)
 {

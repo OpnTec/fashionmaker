@@ -29,6 +29,8 @@
 #ifndef VSTANDARTTABLEROW_H
 #define VSTANDARTTABLEROW_H
 
+#include <QString>
+
 /**
  * @brief The VStandartTableRow class keep data row of standart table
  */

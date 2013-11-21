@@ -29,6 +29,8 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
+#include <QPushButton>
+
 DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)

@@ -29,6 +29,8 @@
 #include "dialogendline.h"
 #include "ui_dialogendline.h"
 
+#include <QPushButton>
+
 DialogEndLine::DialogEndLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
     formula(QString()), angle(0), basePointId(0)

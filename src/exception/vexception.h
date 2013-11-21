@@ -31,6 +31,7 @@
 #define VEXCEPTION_H
 
 #include <QException>
+#include <QString>
 
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception

@@ -28,6 +28,8 @@
 
 #include "vexceptionemptyparameter.h"
 
+#include <QtWidgets>
+
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
                                                    const QDomElement &domElement)
     : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)

@@ -28,6 +28,8 @@
 
 #include "dialogpointofcontact.h"
 
+#include <QPushButton>
+
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0)

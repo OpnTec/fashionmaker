@@ -29,6 +29,7 @@
 #include "mainwindow.h"
 #include "widgets/vapplication.h"
 #include <QTextCodec>
+#include <QtCore>
 #include "tablewindow.h"
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)

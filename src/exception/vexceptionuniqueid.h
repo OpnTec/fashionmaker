@@ -31,6 +31,8 @@
 
 #include "vexception.h"
 
+#include <QDomElement>
+
 /**
  * @brief The VExceptionUniqueId class for exception unique id
  */

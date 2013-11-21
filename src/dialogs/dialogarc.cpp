@@ -29,6 +29,9 @@
 #include "dialogarc.h"
 #include "ui_dialogarc.h"
 
+#include <QPushButton>
+#include <QtWidgets>
+
 DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString())

@@ -29,6 +29,8 @@
 #include "vcontainer.h"
 #include "../exception/vexceptionbadid.h"
 
+#include <QDebug>
+
 qint64 VContainer::_id = 0;
 
 VContainer::VContainer()

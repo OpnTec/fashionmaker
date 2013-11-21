@@ -29,6 +29,10 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
+#include <QPointF>
+#include <QString>
+#include "../options.h"
+
 /**
  * @brief The VPointF class keep data of point.
  */

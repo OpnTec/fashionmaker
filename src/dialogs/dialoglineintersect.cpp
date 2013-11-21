@@ -29,6 +29,8 @@
 #include "dialoglineintersect.h"
 #include "ui_dialoglineintersect.h"
 
+#include <QPushButton>
+
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
     p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true)

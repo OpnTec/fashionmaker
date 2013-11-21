@@ -28,6 +28,8 @@
 
 #include "vspline.h"
 
+#include <QDebug>
+
 VSpline::VSpline()
     :p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1),
       points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}

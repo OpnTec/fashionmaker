@@ -31,6 +31,9 @@
 
 #include "../vabstracttool.h"
 
+#include <QMenu>
+#include <QGraphicsSceneContextMenuEvent>
+
 /**
  * @brief The VDrawTool class
  */

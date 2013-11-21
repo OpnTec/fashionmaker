@@ -29,11 +29,14 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
-#include <QDomDocument>
 #include "../container/vcontainer.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../tools/vdatatool.h"
 #include "vtoolrecord.h"
+
+#include <QComboBox>
+#include <QDomDocument>
+#include <QDebug>
 
 namespace Document
 {

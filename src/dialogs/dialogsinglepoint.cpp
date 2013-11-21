@@ -29,6 +29,8 @@
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
 
+#include <QPushButton>
+
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogSinglePoint), name(QString()),
     point(QPointF())

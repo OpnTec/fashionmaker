@@ -29,6 +29,8 @@
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
 
+#include <QPushButton>
+
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0)

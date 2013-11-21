@@ -29,6 +29,8 @@
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
 
+#include <QPushButton>
+
 DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)

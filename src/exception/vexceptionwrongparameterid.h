@@ -31,6 +31,8 @@
 
 #include "vexception.h"
 
+#include <QDomElement>
+
 /**
  * @brief The VExceptionWrongParameterId class for exception wrong parameter id
  */

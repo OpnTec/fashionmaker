@@ -30,6 +30,7 @@
 #define VMODELINGTOOL_H
 
 #include "../vabstracttool.h"
+#include <QGraphicsSceneContextMenuEvent>
 #include <QMenu>
 
 /**

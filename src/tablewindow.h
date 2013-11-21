@@ -29,6 +29,7 @@
 #ifndef TABLEWINDOW_H
 #define TABLEWINDOW_H
 
+#include <QLabel>
 #include <QMainWindow>
 #include "widgets/vitem.h"
 

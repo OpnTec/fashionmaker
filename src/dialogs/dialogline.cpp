@@ -29,6 +29,8 @@
 #include "dialogline.h"
 #include "ui_dialogline.h"
 
+#include <QPushButton>
+
 DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0)
 {

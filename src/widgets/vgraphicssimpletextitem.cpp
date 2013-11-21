@@ -28,6 +28,8 @@
 
 #include "vgraphicssimpletextitem.h"
 
+#include <QtWidgets>
+
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     :QGraphicsSimpleTextItem(parent), fontSize(0)
 {

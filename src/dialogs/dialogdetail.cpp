@@ -28,6 +28,9 @@
 
 #include "dialogdetail.h"
 
+#include <QPushButton>
+#include <QDebug>
+
 DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(), details(VDetail()), supplement(true), closed(true)
 {

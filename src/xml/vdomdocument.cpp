@@ -41,6 +41,8 @@
 #include "../tools/nodeDetails/vnodesplinepath.h"
 #include "../tools/nodeDetails/vnodearc.h"
 
+#include <QMessageBox>
+
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode)
     : QDomDocument(), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),

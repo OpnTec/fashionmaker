@@ -31,6 +31,9 @@
 
 #include "vnodedetail.h"
 
+#include <QString>
+#include <QVector>
+
 namespace Detail
 {
     /**

@@ -29,6 +29,8 @@
 #include "dialogalongline.h"
 #include "ui_dialogalongline.h"
 
+#include <QPushButton>
+
 DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
     :DialogTool(data, mode, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0)
