@@ -107,3 +107,18 @@ message(Settings: $$[QT_INSTALL_SETTINGS])
 message(Examples: $$[QT_INSTALL_EXAMPLES])
 
 win32:RC_FILE = share/resources/valentina.rc
+
+unix {
+#VARIABLES
+isEmpty(PREFIX) {
+  PREFIX = /usr
+}
+BINDIR = $$PREFIX/bin
+DATADIR =$$PREFIX/share
+DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+#MAKE INSTALL
+target.path = /usr/bin
+translations.path = /usr/share/valentina/translations
+translations.files = bin/*.qm
+INSTALLS += target translations
+}
