@@ -10,8 +10,8 @@ QT       += core gui widgets xml svg
 
 TEMPLATE = app
 
-DEBUG_TARGET = Valentinad
-RELEASE_TARGET = Valentina
+DEBUG_TARGET = valentinad
+RELEASE_TARGET = valentina
 
 CONFIG -= debug_and_release debug_and_release_target
 CONFIG += c++11
@@ -117,10 +117,11 @@ BINDIR = $$PREFIX/bin
 DATADIR =$$PREFIX/share
 DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
-target.path = /usr/bin
-translations.path = /usr/share/valentina/translations
-translations.files = $${DESTDIR}/*.qm
-INSTALLS += target translations
+target.path = $$BINDIR
+translations.path = $$DATADIR/$${TARGET}/translations
+translations.files += $${DESTDIR}/*.qm
+INSTALLS += target \
+    translations
 }
 
 # Remove generated files at cleaning
