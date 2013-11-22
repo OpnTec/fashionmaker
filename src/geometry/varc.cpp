@@ -40,7 +40,10 @@ VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, Q
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
       center(center), points(*points), mode(mode), idObject(idObject), _name(QString())
 {
-    _name = QString ("Arc_%1_%2").arg(this->GetCenterVPoint().name()).arg(radius);
+    /**
+     * @todo Change name of arc in formula. Name now not unique.
+     */
+    _name = QString ("Arc_%1").arg(this->GetCenterVPoint().name());
 }
 
 VArc::VArc(const VArc &arc)
