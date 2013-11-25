@@ -120,7 +120,7 @@
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogalongline.cpp" line="117"/>
+        <location filename="../../src/dialogs/dialogalongline.cpp" line="119"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -264,7 +264,7 @@
         <translation>Змінні</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogarc.cpp" line="170"/>
+        <location filename="../../src/dialogs/dialogarc.cpp" line="173"/>
         <source>Value angle of line.</source>
         <translation>Значення дуги лінії.</translation>
     </message>
@@ -398,12 +398,12 @@
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogbisector.cpp" line="117"/>
+        <location filename="../../src/dialogs/dialogbisector.cpp" line="119"/>
         <source>Select second point of angle</source>
         <translation>Виберіть другу точку кута</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogbisector.cpp" line="128"/>
+        <location filename="../../src/dialogs/dialogbisector.cpp" line="130"/>
         <source>Select third point of angle</source>
         <translation>Виберіть третю точку кута</translation>
     </message>
@@ -455,12 +455,12 @@
         <translation>Замкнена</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.cpp" line="87"/>
+        <location filename="../../src/dialogs/dialogdetail.cpp" line="90"/>
         <source>Get wrong scene object. Ignore.</source>
         <translation>Отримано непаравильний об&apos;єкт сцени. Ігноровано.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.cpp" line="173"/>
+        <location filename="../../src/dialogs/dialogdetail.cpp" line="176"/>
         <source>Get wrong tools. Ignore.</source>
         <translation>Отримано неправильний інструмент. Ігноровано.</translation>
     </message>
@@ -628,12 +628,12 @@
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogheight.cpp" line="119"/>
+        <location filename="../../src/dialogs/dialogheight.cpp" line="121"/>
         <source>Select first point of line</source>
         <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogheight.cpp" line="124"/>
+        <location filename="../../src/dialogs/dialogheight.cpp" line="126"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -647,78 +647,78 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialoghistory.ui" line="54"/>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="332"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="333"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="174"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="175"/>
         <source>%1 - Base point</source>
         <translation>%1 - Базова точка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="182"/>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="192"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="183"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="193"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Лінія від точки %1 до точки %2</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="202"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="203"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Точка вздовж лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="207"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="208"/>
         <source>%1 - Point of soulder</source>
         <translation>%1 - Точка плеча</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="216"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="217"/>
         <source>%3 - Normal to line %1_%2</source>
         <translation>%3 - Перпедикуляр до лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="228"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="229"/>
         <source>%4 - Bisector of angle %1_%2_%3</source>
         <translation>%4 - Бісектриса кута %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="242"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="243"/>
         <source>%5 - Point of intersection lines %1_%2 and %3_%4</source>
         <translation>%5 - Точка перетину лінії %1_%2 і %3_%4</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="251"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="252"/>
         <source>Curve %1_%2</source>
         <translation>Крива %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="258"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="259"/>
         <source>Arc with center in point %1</source>
         <translation>Дуга з центром в точці %1</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="267"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="268"/>
         <source>Curve point %1</source>
         <translation>Точка кривої %1</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="284"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="285"/>
         <source>%4 - Point of contact arc with center in point %1 and line %2_%3</source>
         <translation>%4 - Точка дотику дуги з центром в точці %1 і лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="299"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="300"/>
         <source>Point of perpendical from point %1 to line %2_%3</source>
         <translation>Точка перпендикуляра з точки %1 до лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="316"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="317"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Трикутник: вісь %1_%2, точки %3 і %4</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="322"/>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="323"/>
         <source>Get wrong tool type. Ignore.</source>
         <translation>Отримано неправильний тип інструменту. Ігноруємо.</translation>
     </message>
@@ -739,8 +739,8 @@
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="83"/>
         <location filename="../../src/dialogs/dialogincrements.ui" line="163"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="517"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="528"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="519"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="530"/>
         <source>Denotation</source>
         <translation>Позначення</translation>
     </message>
@@ -753,8 +753,8 @@
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="93"/>
         <location filename="../../src/dialogs/dialogincrements.ui" line="173"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="519"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="530"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="521"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="532"/>
         <source>Base value</source>
         <translation>Базове значення</translation>
     </message>
@@ -771,24 +771,24 @@
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="108"/>
         <location filename="../../src/dialogs/dialogincrements.ui" line="188"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="325"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="358"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="522"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="533"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="327"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="360"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="524"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="535"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="178"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="520"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="531"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="522"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="533"/>
         <source>In size</source>
         <translation>В розмірах</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="183"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="521"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="532"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="523"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="534"/>
         <source>In growth</source>
         <translation>В ростах</translation>
     </message>
@@ -805,7 +805,7 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="246"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="539"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="541"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
@@ -821,7 +821,7 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="282"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="545"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="547"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
@@ -837,7 +837,7 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="318"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="551"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="553"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -847,25 +847,25 @@
         <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="317"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="319"/>
         <source>Denotation %1</source>
         <translation>Позначення %1</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="464"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="466"/>
         <source>Can&apos;t convert toDouble value.</source>
         <translation>Не можу конвертувати toDouble значення.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="518"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="529"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="520"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="531"/>
         <source>Calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="540"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="546"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="552"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="542"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="548"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="554"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
@@ -888,7 +888,7 @@
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogline.cpp" line="117"/>
+        <location filename="../../src/dialogs/dialogline.cpp" line="119"/>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
@@ -928,17 +928,17 @@
         <translation>Друга лінія</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="93"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="95"/>
         <source>Select second point of first line</source>
         <translation>Виберіть другу точка першої лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="105"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="107"/>
         <source>Select first point of second line</source>
         <translation>Виберіть першу точку другої лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="117"/>
+        <location filename="../../src/dialogs/dialoglineintersect.cpp" line="119"/>
         <source>Select second point of second line</source>
         <translation>Виберіть другу точку другої лінії</translation>
     </message>
@@ -1065,7 +1065,7 @@
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialognormal.cpp" line="133"/>
+        <location filename="../../src/dialogs/dialognormal.cpp" line="135"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -1179,12 +1179,12 @@
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="110"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="112"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="121"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="123"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
@@ -1222,7 +1222,7 @@
         <translation>Друга точка кута</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogpointofintersection.cpp" line="95"/>
+        <location filename="../../src/dialogs/dialogpointofintersection.cpp" line="97"/>
         <source>Select point horizontally</source>
         <translation>Виберіть точку горизонталі</translation>
     </message>
@@ -1333,12 +1333,12 @@
         <translation>Змінні. Подвійний клік для вибору.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="118"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="120"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="129"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="131"/>
         <source>Select point of shoulder</source>
         <translation>Виберіть точку плеча</translation>
     </message>
@@ -1423,7 +1423,7 @@
         <translation>Коефіцієнт кривизни кривої</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogspline.cpp" line="91"/>
+        <location filename="../../src/dialogs/dialogspline.cpp" line="93"/>
         <source>Select last point of curve</source>
         <translation>Виберість останню точку кривої</translation>
     </message>
@@ -1471,7 +1471,7 @@
         <translation>Коефіцієнт кривизни кривої</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogsplinepath.cpp" line="97"/>
+        <location filename="../../src/dialogs/dialogsplinepath.cpp" line="99"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -1479,55 +1479,55 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="85"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="87"/>
         <source>Wrong details id.</source>
         <translation>Неправильний id деталі.</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="114"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="120"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="134"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="116"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="122"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="136"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="114"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="142"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="116"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="144"/>
         <source>No line</source>
         <translation>Без лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="159"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="161"/>
         <source>Can&apos;t find point by name</source>
         <translation>Не можу знайти точку за ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="219"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="221"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="434"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="436"/>
         <source>Growth</source>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="439"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="441"/>
         <source>Size</source>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="463"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="465"/>
         <source>Line length</source>
         <translation>Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="470"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="472"/>
         <source>Arc length</source>
         <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="477"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="479"/>
         <source>Curve length</source>
         <translation>Довжина кривої</translation>
     </message>
@@ -1573,17 +1573,17 @@
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtriangle.cpp" line="89"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="91"/>
         <source>Select second point of axis</source>
         <translation>Виберіть другу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtriangle.cpp" line="94"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="96"/>
         <source>Select first point</source>
         <translation>Виберість першу точку</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtriangle.cpp" line="99"/>
+        <location filename="../../src/dialogs/dialogtriangle.cpp" line="101"/>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
@@ -1796,7 +1796,7 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="709"/>
-        <location filename="../../src/mainwindow.cpp" line="849"/>
+        <location filename="../../src/mainwindow.cpp" line="857"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
@@ -1874,13 +1874,13 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="837"/>
-        <location filename="../../src/mainwindow.cpp" line="491"/>
+        <location filename="../../src/mainwindow.cpp" line="499"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="842"/>
-        <location filename="../../src/mainwindow.cpp" line="486"/>
+        <location filename="../../src/mainwindow.cpp" line="494"/>
         <source>About Valentina</source>
         <translation>Про Valentina</translation>
     </message>
@@ -1890,87 +1890,87 @@
         <translation>Вихід</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="127"/>
+        <location filename="../../src/mainwindow.cpp" line="135"/>
         <source>Drawing %1</source>
         <translation>Креслення %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="130"/>
-        <location filename="../../src/mainwindow.cpp" line="194"/>
+        <location filename="../../src/mainwindow.cpp" line="138"/>
+        <location filename="../../src/mainwindow.cpp" line="202"/>
         <source>Drawing:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="132"/>
+        <location filename="../../src/mainwindow.cpp" line="140"/>
         <source>Enter a name for the drawing.</source>
         <translation>Введіть ім&apos;я креслення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="147"/>
-        <location filename="../../src/mainwindow.cpp" line="211"/>
+        <location filename="../../src/mainwindow.cpp" line="155"/>
+        <location filename="../../src/mainwindow.cpp" line="219"/>
         <source>Error. Drawing of same name already exists.</source>
         <translation>Помилка. Креслення з таким ім&apos;ям вже існує.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="158"/>
+        <location filename="../../src/mainwindow.cpp" line="166"/>
         <source>Error creating drawing with the name</source>
         <translation>Помилка створення креслення з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="196"/>
+        <location filename="../../src/mainwindow.cpp" line="204"/>
         <source>Enter a new name for the drawing.</source>
         <translation>Введіть нове ім&apos;я креслення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="226"/>
+        <location filename="../../src/mainwindow.cpp" line="234"/>
         <source>Error saving change!!!</source>
         <translation>Помилка збереження змін!!!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="226"/>
+        <location filename="../../src/mainwindow.cpp" line="234"/>
         <source>Can&apos;t save new name of drawing</source>
         <translation>Не можу зберегти нове ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="288"/>
-        <location filename="../../src/mainwindow.cpp" line="310"/>
+        <location filename="../../src/mainwindow.cpp" line="296"/>
+        <location filename="../../src/mainwindow.cpp" line="318"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="299"/>
+        <location filename="../../src/mainwindow.cpp" line="307"/>
         <source>Select first point</source>
         <translation>Виберість першу точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="322"/>
-        <location filename="../../src/mainwindow.cpp" line="334"/>
-        <location filename="../../src/mainwindow.cpp" line="402"/>
+        <location filename="../../src/mainwindow.cpp" line="330"/>
+        <location filename="../../src/mainwindow.cpp" line="342"/>
+        <location filename="../../src/mainwindow.cpp" line="410"/>
         <source>Select first point of line</source>
         <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="345"/>
+        <location filename="../../src/mainwindow.cpp" line="353"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="356"/>
+        <location filename="../../src/mainwindow.cpp" line="364"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="368"/>
+        <location filename="../../src/mainwindow.cpp" line="376"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="379"/>
+        <location filename="../../src/mainwindow.cpp" line="387"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="390"/>
+        <location filename="../../src/mainwindow.cpp" line="398"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -1983,156 +1983,156 @@
         <translation type="obsolete">Valentina v.0.1.0</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="528"/>
+        <location filename="../../src/mainwindow.cpp" line="536"/>
         <source>The pattern has been modified.</source>
         <translation>Лекало було зміненно.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="529"/>
+        <location filename="../../src/mainwindow.cpp" line="537"/>
         <source>Do you want to save your changes?</source>
         <translation>Ви хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="576"/>
+        <location filename="../../src/mainwindow.cpp" line="584"/>
         <source>Growth: </source>
         <translation>Зріст:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="592"/>
+        <location filename="../../src/mainwindow.cpp" line="600"/>
         <source> Size: </source>
         <translation>Розмір:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="617"/>
+        <location filename="../../src/mainwindow.cpp" line="625"/>
         <source>Drawing: </source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="847"/>
+        <location filename="../../src/mainwindow.cpp" line="855"/>
         <source>Lekalo files (*.xml);;All files (*.*)</source>
         <translation>Файли лекала (*.xml);;Всі файли (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="848"/>
-        <location filename="../../src/mainwindow.cpp" line="893"/>
+        <location filename="../../src/mainwindow.cpp" line="856"/>
+        <location filename="../../src/mainwindow.cpp" line="901"/>
         <source>Lekalo files (*.xml)</source>
         <translation>Файл лекала (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="882"/>
+        <location filename="../../src/mainwindow.cpp" line="890"/>
         <source>Error saving file. Can&apos;t save file.</source>
         <translation>Помилка збереження файлу. Не можу зберегти файл.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="894"/>
+        <location filename="../../src/mainwindow.cpp" line="902"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1080"/>
+        <location filename="../../src/mainwindow.cpp" line="1088"/>
         <source>Got empty file name.</source>
         <translation>Отримано пусте імя файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1108"/>
+        <location filename="../../src/mainwindow.cpp" line="1116"/>
         <source>Could not copy temp file to pattern file</source>
         <translation>Не можу копіювати тимчасовий файл до файлу лекала</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1119"/>
+        <location filename="../../src/mainwindow.cpp" line="1127"/>
         <source>Could not remove pattern file</source>
         <translation>Не можу видалити файл лекала</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1162"/>
+        <location filename="../../src/mainwindow.cpp" line="1170"/>
         <source>Can&apos;t open pattern file. File name empty</source>
         <translation>Не можу відкрити файл лекала. Пусте ім&apos;я файлу </translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="881"/>
-        <location filename="../../src/mainwindow.cpp" line="1068"/>
-        <location filename="../../src/mainwindow.cpp" line="1182"/>
-        <location filename="../../src/mainwindow.cpp" line="1197"/>
-        <location filename="../../src/mainwindow.cpp" line="1211"/>
-        <location filename="../../src/mainwindow.cpp" line="1226"/>
-        <location filename="../../src/mainwindow.cpp" line="1241"/>
-        <location filename="../../src/mainwindow.cpp" line="1274"/>
+        <location filename="../../src/mainwindow.cpp" line="889"/>
+        <location filename="../../src/mainwindow.cpp" line="1076"/>
+        <location filename="../../src/mainwindow.cpp" line="1190"/>
+        <location filename="../../src/mainwindow.cpp" line="1205"/>
+        <location filename="../../src/mainwindow.cpp" line="1219"/>
+        <location filename="../../src/mainwindow.cpp" line="1234"/>
+        <location filename="../../src/mainwindow.cpp" line="1249"/>
+        <location filename="../../src/mainwindow.cpp" line="1282"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="71"/>
+        <location filename="../../src/mainwindow.cpp" line="79"/>
         <source>Create new drawing for start working.</source>
         <translation>Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="420"/>
+        <location filename="../../src/mainwindow.cpp" line="428"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="447"/>
+        <location filename="../../src/mainwindow.cpp" line="455"/>
         <source>Select base point</source>
         <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="458"/>
+        <location filename="../../src/mainwindow.cpp" line="466"/>
         <source>Select first point of axis</source>
         <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="470"/>
+        <location filename="../../src/mainwindow.cpp" line="478"/>
         <source>Select point vertically</source>
         <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="482"/>
+        <location filename="../../src/mainwindow.cpp" line="490"/>
         <source>Based on Qt %2 (32 bit)</source>
         <translation>Базується на Qt %2 (32 bit)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="483"/>
+        <location filename="../../src/mainwindow.cpp" line="491"/>
         <source>Built on %3 at %4</source>
         <translation>Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="484"/>
+        <location filename="../../src/mainwindow.cpp" line="492"/>
         <source>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1183"/>
+        <location filename="../../src/mainwindow.cpp" line="1191"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1198"/>
+        <location filename="../../src/mainwindow.cpp" line="1206"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1212"/>
+        <location filename="../../src/mainwindow.cpp" line="1220"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1227"/>
+        <location filename="../../src/mainwindow.cpp" line="1235"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1069"/>
-        <location filename="../../src/mainwindow.cpp" line="1242"/>
+        <location filename="../../src/mainwindow.cpp" line="1077"/>
+        <location filename="../../src/mainwindow.cpp" line="1250"/>
         <source>Error don&apos;t unique id.</source>
         <translation>Помилка, не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1275"/>
+        <location filename="../../src/mainwindow.cpp" line="1283"/>
         <source>Error parsing pattern file.</source>
         <translation>Помилка парсінгу файлу лекала.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1279"/>
+        <location filename="../../src/mainwindow.cpp" line="1287"/>
         <source>Error in line %1 column %2</source>
         <translation>Помилка в лінії %1 стовпчик %2</translation>
     </message>
@@ -2250,42 +2250,42 @@
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="46"/>
-        <location filename="../../src/widgets/vapplication.cpp" line="59"/>
-        <location filename="../../src/widgets/vapplication.cpp" line="71"/>
-        <location filename="../../src/widgets/vapplication.cpp" line="83"/>
-        <location filename="../../src/widgets/vapplication.cpp" line="96"/>
-        <location filename="../../src/widgets/vapplication.cpp" line="109"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="49"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="62"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="74"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="86"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="99"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="112"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="47"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="50"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="60"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="63"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="72"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="75"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="84"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="87"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Помилка пустий параметр. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="97"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="100"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vapplication.cpp" line="110"/>
+        <location filename="../../src/widgets/vapplication.cpp" line="113"/>
         <source>Something wrong!!</source>
         <translation>Щось не так!!</translation>
     </message>
@@ -2293,17 +2293,17 @@
 <context>
     <name>VArc</name>
     <message>
-        <location filename="../../src/geometry/varc.cpp" line="81"/>
+        <location filename="../../src/geometry/varc.cpp" line="84"/>
         <source>Can&apos;t find id = %1 in table.</source>
         <translation>Не можу знайти id = %1 в таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/geometry/varc.cpp" line="135"/>
+        <location filename="../../src/geometry/varc.cpp" line="138"/>
         <source>Angle of arc can&apos;t be 0 degree.</source>
         <translation>Кут дуги не може бути 0 градусів.</translation>
     </message>
     <message>
-        <location filename="../../src/geometry/varc.cpp" line="167"/>
+        <location filename="../../src/geometry/varc.cpp" line="170"/>
         <source>Arc have not this number of part.</source>
         <translation>Дуга не має цієї частини.</translation>
     </message>
@@ -2311,7 +2311,7 @@
 <context>
     <name>VContainer</name>
     <message>
-        <location filename="../../src/container/vcontainer.cpp" line="109"/>
+        <location filename="../../src/container/vcontainer.cpp" line="111"/>
         <source>Can&apos;t find object</source>
         <translation>Не можу знайти об&apos;єкт</translation>
     </message>
@@ -2319,137 +2319,137 @@
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="410"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="412"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="424"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="426"/>
         <source>Can&apos;t convert toLongLong parameter</source>
         <translation>Не можу конвертувати  toLongLong параметру</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="436"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="438"/>
         <source>Got empty parameter</source>
         <translation>Отримано пустий параметр</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="450"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="452"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="468"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="470"/>
         <source>This id is not unique.</source>
         <translation>Цей id не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="683"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="685"/>
         <source>Error creating or updating detail</source>
         <translation>Помилка створення чи оновлення деталі</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="748"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="750"/>
         <source>Error creating or updating single point</source>
         <translation>Помилка створення чи оновлення простої точки</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="779"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="781"/>
         <source>Error creating or updating point of end line</source>
         <translation>Помилка створення чи оновлення точки кінця відрізку</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="811"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="813"/>
         <source>Error creating or updating point along line</source>
         <translation>Помилка створення чи оновлення точки вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="844"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="846"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Помилка створення чи оновлення точки плеча</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="877"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="879"/>
         <source>Error creating or updating point of normal</source>
         <translation>Помилка створення чи оновлення точки нормалі</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="910"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="912"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Помилка створення чи оновлення точки бісектриси</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="942"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="944"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="974"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="976"/>
         <source>Error creating or updating point of contact</source>
         <translation>Помилка створення чи оновлення точки дотику</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1007"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1009"/>
         <source>Error creating or updating modeling point</source>
         <translation>Помилка створення чи оновлення модельної точки</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1038"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1040"/>
         <source>Error creating or updating height</source>
         <translation>Помилка створення чи оновлення висоти</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1070"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1072"/>
         <source>Error creating or updating triangle</source>
         <translation>Помилка створення чи оновлення трикутника</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1100"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1102"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Помилка створення чи оновлення точки перетину</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1130"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1132"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1170"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1172"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1217"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1219"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1249"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1251"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1281"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1283"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1317"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1319"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1349"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1351"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1369"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1371"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1370"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1372"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
@@ -2461,12 +2461,12 @@
 <context>
     <name>VDrawTool</name>
     <message>
-        <location filename="../../src/tools/drawTools/vdrawtool.h" line="133"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.h" line="136"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../src/tools/drawTools/vdrawtool.h" line="137"/>
+        <location filename="../../src/tools/drawTools/vdrawtool.h" line="140"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -2484,12 +2484,12 @@
 <context>
     <name>VModelingTool</name>
     <message>
-        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="98"/>
+        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="99"/>
         <source>Option</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="102"/>
+        <location filename="../../src/tools/modelingTools/vmodelingtool.h" line="103"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -2512,12 +2512,12 @@
 <context>
     <name>VTableGraphicsView</name>
     <message>
-        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="43"/>
+        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="47"/>
         <source>detail don&apos;t find</source>
         <translation>деталь не знайдено</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="48"/>
+        <location filename="../../src/widgets/vtablegraphicsview.cpp" line="52"/>
         <source>detail find</source>
         <translation>деталь знайдено</translation>
     </message>

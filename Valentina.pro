@@ -113,13 +113,13 @@ unix {
 isEmpty(PREFIX) {
   PREFIX = /usr
 }
-BINDIR = $$PREFIX/bin
+BINDIR = $$PREFIX/local/bin
 DATADIR =$$PREFIX/share
 DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
 target.path = $$BINDIR
 translations.path = $$DATADIR/$${TARGET}/translations
-translations.files += $${DESTDIR}/*.qm
+translations.files = bin/valentina_ru.qm bin/valentina_uk.qm
 INSTALLS += target \
     translations
 }
