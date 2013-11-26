@@ -85,12 +85,6 @@ CONFIG(debug, debug|release){
     QMAKE_CXXFLAGS += -O1
 
     DEFINES += QT_NO_DEBUG_OUTPUT
-
-    QMAKE_EXTRA_COMPILERS += lrelease
-    lrelease.input         = TRANSLATIONS
-    lrelease.output        = ${QMAKE_FILE_BASE}.qm
-    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm "$${DESTDIR}/"${QMAKE_FILE_BASE}.qm
-    lrelease.CONFIG       += no_link target_predeps
 }
 
 message(Qt version: $$[QT_VERSION])
@@ -108,25 +102,33 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 
 win32:RC_FILE = share/resources/valentina.rc
 
-unix {
-#VARIABLES
-isEmpty(PREFIX) {
-  PREFIX = /usr
-}
-BINDIR = $$PREFIX/local/bin
-DATADIR =$$PREFIX/share
-DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-#MAKE INSTALL
-target.path = $$BINDIR
-translations.path = $$DATADIR/$${TARGET}/translations
-translations.files = bin/valentina_ru.qm bin/valentina_uk.qm
-INSTALLS += target \
-    translations
-}
-
 # Remove generated files at cleaning
 QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${OBJECTS_DIR}/* \
                    $${UI_DIR}/* \
                    $${MOC_DIR}/* \
                    $${RCC_DIR}/*
+
+unix {
+#VARIABLES
+isEmpty(PREFIX) {
+  PREFIX = /usr
+}
+BINDIR = $$PREFIX/bin
+DATADIR =$$PREFIX/share
+DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+#MAKE INSTALL
+target.path = $$BINDIR
+desktop.path = $$DATADIR/applications/
+desktop.files += dist/$${TARGET}.desktop
+pixmaps.path = $$DATADIR/pixmaps/
+pixmaps.files += dist/$${TARGET}.png
+INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
+                        share/translations/valentina_uk.qm
+translations.path = $$DATADIR/$${TARGET}/translations/
+translations.files = $$INSTALL_TRANSLATIONS
+INSTALLS += target \
+    desktop \
+    pixmaps \
+    translations
+}
