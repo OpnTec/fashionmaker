@@ -1,0 +1,14 @@
+Source: valentina
+Section: Universe
+Priority: optional
+Maintainer: Roman Telezhinsky <dismine@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), qtbase5-dev (>= 5.0.0), libqt5svg5-dev (>= 5.0.0), ccache (>= 3.1.9), g++ (>= 4.6.0)
+Standards-Version: 3.9.4
+Homepage: https://bitbucket.org/dismine/valentina
+
+Package: valentina
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Pattern making program.
+ Open source project of creating a pattern making program, whose allow 
+ create and modeling patterns of clothing.
