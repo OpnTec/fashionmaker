@@ -69,10 +69,14 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-#ifdef QT_DEBUG
+#ifdef Q_OS_WIN32
     appTranslator.load("valentina_" + QLocale::system().name(), ".");
 #else
-    appTranslator.load("valentina_" + QLocale::system().name(), "/usr/share/valentina/translations");
+    #ifdef QT_DEBUG
+        appTranslator.load("valentina_" + QLocale::system().name(), ".");
+    #else
+        appTranslator.load("valentina_" + QLocale::system().name(), "/usr/share/valentina/translations");
+    #endif
 #endif
     app.installTranslator(&appTranslator);
 
