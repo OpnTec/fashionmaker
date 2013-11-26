@@ -34,6 +34,7 @@
 	  dh_testdir
 	  dh_testroot
 	  dh_installdocs
+	  dh_installchangelogs
 	  dh_installexamples
 	  dh_installman
 	dh_installmenu
