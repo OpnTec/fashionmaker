@@ -1,5 +1,5 @@
-valentina (0.2+1hg20131126-ppa1-1) saucy; urgency=low
+valentina (0.2+1hg20131126-ppa1-3) saucy; urgency=low
 
-  * First test package 
+  * Add new dependions qttools5-dev-tools 
 
- -- Roman Telezhinsky <dismine@gmail.com>  Mon, 25 Nov 2013 13:05:58 +0200
+ -- Roman Telezhinsky <dismine@gmail.com> Tue, 26 Nov 2013 21:28:15 +0200
