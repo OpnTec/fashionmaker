@@ -10,8 +10,7 @@ QT       += core gui widgets xml svg
 
 TEMPLATE = app
 
-DEBUG_TARGET = valentinad
-RELEASE_TARGET = valentina
+TARGET = valentina
 
 CONFIG -= debug_and_release debug_and_release_target
 CONFIG += c++11
@@ -54,17 +53,16 @@ TRANSLATIONS += share/translations/valentina_ru.ts \
 
 unix:QMAKE_CXX = ccache g++
 
+CONFIG += precompile_header
+# Precompiled headers (PCH)
+PRECOMPILED_HEADER = src/stable.h
+win32-msvc* {
+    PRECOMPILED_SOURCE = src/stable.cpp
+}
+
 CONFIG(debug, debug|release){
     # Debug
-    TARGET = $$DEBUG_TARGET
-
-    CONFIG += precompile_header
-    # Precompiled headers (PCH)
-    PRECOMPILED_HEADER = src/stable.h
-    win32-msvc* {
-        PRECOMPILED_SOURCE = src/stable.cpp
-    }
-
+    *-g++{
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
                       -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" \
@@ -78,11 +76,12 @@ CONFIG(debug, debug|release){
                       -Wswitch-default -Wswitch-enum -Wuninitialized -Wunused-parameter -Wvariadic-macros \
                       -Wlogical-op -Wnoexcept \
                       -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -gdwarf-3
+    }
 }else{
     # Release
-    TARGET = $$RELEASE_TARGET
-
+    *-g++{
     QMAKE_CXXFLAGS += -O1
+    }
 
     DEFINES += QT_NO_DEBUG_OUTPUT
 }
