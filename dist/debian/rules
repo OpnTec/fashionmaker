@@ -1,0 +1,50 @@
+#!/usr/bin/make -f
+  APPNAME := valentina
+  builddir:
+	  mkdir -p builddir
+	  
+  builddir/Makefile: builddir
+	lrelease src/src.pro
+	  cd builddir && qmake PREFIX=/usr ../$(APPNAME).pro -r
+  build: build-stamp
+  build-stamp: builddir/Makefile
+	  dh_testdir
+	  # Add here commands to compile the package.
+	  cd builddir && $(MAKE)
+	  touch $@
+  clean:
+	  dh_testdir
+	  dh_testroot
+	  rm -f build-stamp
+	  # Add here commands to clean up after the build process.
+	  rm -rf builddir
+	  dh_clean
+  install: build
+	  dh_testdir
+	  dh_testroot
+	  dh_clean -k
+	  dh_installdirs
+	  # Add here commands to install the package into debian/your_appname
+	  cd builddir && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/tmp install
+  # Build architecture-independent files here.
+  binary-indep: build install
+  # We have nothing to do by default.
+  # Build architecture-dependent files here.
+  binary-arch: build install
+	  dh_testdir
+	  dh_testroot
+	  dh_installdocs
+	  dh_installchangelogs
+	  dh_installexamples
+	  dh_installman
+	dh_installmenu
+	  dh_link
+	  dh_compress
+	  dh_fixperms
+	  dh_installdeb
+	  dh_shlibdeps
+	  dh_gencontrol
+	  dh_md5sums
+	  dh_builddeb
+  binary: binary-indep binary-arch
+  .PHONY: build clean binary-indep binary-arch binary install configure

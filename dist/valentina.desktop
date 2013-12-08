@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Valentina
+GenericName=Pattern making program
+Comment=Open source project of creating a pattern making program, whose allow create and modeling patterns of clothing
+Icon=valentina
+Exec=valentina
+Categories=Qt;Graphics;
+Version=0.2
+Name[uk]=valentina

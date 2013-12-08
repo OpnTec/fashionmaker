@@ -1,0 +1,2 @@
+?package(valentina):needs="X11|text|vc|wm" section="Applications/Graphics"\
+  title="valentina" command="/usr/bin/valentina"
