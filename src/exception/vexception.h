@@ -49,7 +49,7 @@ public:
                        * @param e exception
                        */
                       VException(const VException &e):what(e.What()){}
-    virtual           ~VException() Q_DECL_NOEXCEPT_EXPR(true){}
+    virtual           ~VException() noexcept (true){}
     /**
      * @brief raise method raise for exception
      */

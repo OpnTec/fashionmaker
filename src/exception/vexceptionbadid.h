@@ -57,7 +57,7 @@ public:
                      */
                     VExceptionBadId(const VExceptionBadId &e)
                         :VException(e), id(e.BadId()), key(e.BadKey()){}
-    virtual         ~VExceptionBadId() Q_DECL_NOEXCEPT_EXPR(true){}
+    virtual         ~VExceptionBadId() noexcept (true){}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message

@@ -52,7 +52,7 @@ public:
                     VExceptionObjectError(const VExceptionObjectError &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
                           moreInfo(e.MoreInformation()){}
-    virtual         ~VExceptionObjectError() Q_DECL_NOEXCEPT_EXPR(true) {}
+    virtual         ~VExceptionObjectError() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message
