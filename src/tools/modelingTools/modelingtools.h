@@ -43,5 +43,7 @@
 #include "vmodelingheight.h"
 #include "vmodelingtriangle.h"
 #include "vmodelingpointofintersection.h"
+#include "vmodelingcutspline.h"
+#include "vmodelingcutsplinepath.h"
 
 #endif // MODELINGTOOLS_H

@@ -65,6 +65,7 @@ void DialogTool::showEvent(QShowEvent *event)
 
 void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
 {
+    Q_ASSERT(box != 0);
     box->clear();
     if (mode == Draw::Calculation)
     {
@@ -103,6 +104,99 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
                 {
                     VPointF point = data->GetPointModeling(det[i].getId());
                     box->addItem(point.name(), det[i].getId());
+                }
+            }
+        }
+    }
+}
+
+void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    box->clear();
+    if (mode == Draw::Calculation)
+    {
+        const QHash<qint64, VSpline> *spls = data->DataSplines();
+        QHashIterator<qint64, VSpline> i(*spls);
+        while (i.hasNext())
+        {
+            i.next();
+            if(cut == ComboMode::CutSpline)
+            {
+                if (i.key() != id + 1 && i.key() != id + 2)
+                {
+                    VSpline spl = i.value();
+                    box->addItem(spl.name(), i.key());
+                }
+            }
+            else
+            {
+                if (i.key() != id)
+                {
+                    VSpline spl = i.value();
+                    box->addItem(spl.name(), i.key());
+                }
+            }
+        }
+    }
+    else
+    {
+        if (idDetail <= 0)
+        {
+            qWarning()<<tr("Wrong details id.")<<Q_FUNC_INFO;
+            return;
+        }
+        VDetail det = data->GetDetail(idDetail);
+        for (ptrdiff_t i = 0; i< det.CountNode(); ++i)
+        {
+            if (det[i].getTypeTool() == Tool::SplineTool ||
+                det[i].getTypeTool() == Tool::NodeSpline )
+            {
+                if (det[i].getId() != id)
+                {
+                    VSpline spl = data->GetSplineModeling(det[i].getId());
+                    box->addItem(spl.name(), det[i].getId());
+                }
+            }
+        }
+    }
+}
+
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id) const
+{
+    Q_ASSERT(box != 0);
+    box->clear();
+    if (mode == Draw::Calculation)
+    {
+        const QHash<qint64, VSplinePath> *splPaths = data->DataSplinePaths();
+        QHashIterator<qint64, VSplinePath> i(*splPaths);
+        while (i.hasNext())
+        {
+            i.next();
+            if (i.key() != id)
+            {
+                VSplinePath splPath = i.value();
+                box->addItem(splPath.name(), i.key());
+            }
+        }
+    }
+    else
+    {
+        if (idDetail <= 0)
+        {
+            qWarning()<<tr("Wrong details id.")<<Q_FUNC_INFO;
+            return;
+        }
+        VDetail det = data->GetDetail(idDetail);
+        for (ptrdiff_t i = 0; i< det.CountNode(); ++i)
+        {
+            if (det[i].getTypeTool() == Tool::SplinePathTool ||
+                det[i].getTypeTool() == Tool::NodeSplinePath )
+            {
+                if (det[i].getId() != id)
+                {
+                    VSplinePath splPath = data->GetSplinePathModeling(det[i].getId());
+                    box->addItem(splPath.name(), det[i].getId());
                 }
             }
         }
@@ -158,7 +252,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
     }
     else
     {
-        qWarning()<<tr("Can't find point by name")<<value;
+        qWarning()<<tr("Can't find object by name")<<value;
     }
 }
 
@@ -242,7 +336,25 @@ void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64
     ChangeCurrentData(box, value);
 }
 
-qint64 DialogTool::getCurrentPointId(QComboBox *box) const
+void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
+                                    ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    FillComboBoxSplines(box, id, cut);
+    splineId = value;
+    ChangeCurrentData(box, value);
+}
+
+void DialogTool::setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
+                                        const qint64 &id) const
+{
+    Q_ASSERT(box != 0);
+    FillComboBoxSplinesPath(box, id);
+    splinePathId = value;
+    ChangeCurrentData(box, value);
+}
+
+qint64 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     Q_ASSERT(box != 0);
     qint32 index = box->currentIndex();

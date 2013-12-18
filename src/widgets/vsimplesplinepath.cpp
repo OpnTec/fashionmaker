@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   vsimplesplinepath.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,30 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#include "vsimplesplinepath.h"
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
+VSimpleSplinePath::VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), factor(factor)
+{
+}
 
-#endif // DIALOGS_H
+void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        emit ChoosedTool(id, Scene::SplinePath);
+    }
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    this->setPen(QPen(currentColor, widthMainLine/ *factor));
+}
+
+void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    this->setPen(QPen(currentColor, widthHairLine/ *factor));
+}

@@ -37,6 +37,16 @@
 #include <QRadioButton>
 #include "../container/vcontainer.h"
 
+namespace ComboMode
+{
+    /**
+     * @brief The ComboBoxCutSpline enum
+     */
+    enum ComboBoxCutSpline { CutSpline, NoCutSpline };
+    Q_DECLARE_FLAGS(ComboBoxCutSplines, ComboBoxCutSpline)
+}
+Q_DECLARE_OPERATORS_FOR_FLAGS( ComboMode::ComboBoxCutSplines )
+
 /**
  * @brief The DialogTool class parent for all dialog of tools.
  */
@@ -283,6 +293,14 @@ protected:
      */
     void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
     /**
+     * @brief FillComboBoxSplines fill comboBox list of splines
+     * @param box comboBox
+     * @param id don't show id+1 and id+2 in list
+     */
+    void             FillComboBoxSplines(QComboBox *box, const qint64 &id = 0,
+                                         ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
+    void             FillComboBoxSplinesPath(QComboBox *box, const qint64 &id = 0)const;
+    /**
      * @brief FillComboBoxTypeLine fill comboBox list of type lines
      * @param box comboBox
      */
@@ -351,11 +369,29 @@ protected:
      */
     void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
     /**
+     * @brief setCurrentSplineId set current spline id in combobox
+     * @param box combobox
+     * @param splineId save current spline id
+     * @param value spline id
+     * @param id don't show this id in list
+     */
+    void             setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
+                                        ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
+    /**
+     * @brief setCurrentSplinePathId set current splinePath id in combobox
+     * @param box combobox
+     * @param splinePathId save current splinePath id
+     * @param value splinePath id
+     * @param id don't show this id in list
+     */
+    void             setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
+                                            const qint64 &id) const;
+    /**
      * @brief getCurrentPointId return current point id in combobox
      * @param box combobox
      * @return id or -1 if combobox is empty
      */
-    qint64           getCurrentPointId(QComboBox *box) const;
+    qint64           getCurrentObjectId(QComboBox *box) const;
 };
 
 #endif // DIALOGTOOL_H

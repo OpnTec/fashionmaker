@@ -129,8 +129,8 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
 
 void DialogSpline::DialogAccepted()
 {
-    p1 = getCurrentPointId(ui->comboBoxP1);
-    p4 = getCurrentPointId(ui->comboBoxP4);
+    p1 = getCurrentObjectId(ui->comboBoxP1);
+    p4 = getCurrentObjectId(ui->comboBoxP4);
     angle1 = ui->spinBoxAngle1->value();
     angle2 = ui->spinBoxAngle2->value();
     kAsm1 = ui->doubleSpinBoxKasm1->value();

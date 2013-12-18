@@ -169,3 +169,40 @@ VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
 {
     return path[indx];
 }
+
+QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p3, QPointF &spl2p2) const
+{
+    if(Count() < 2)
+    {
+        throw VException(tr("Can't cut spline path with one point"));
+    }
+
+    //Always need return two spline paths, so we must correct wrong length.
+    qreal fullLength = GetLength();
+    if(length < fullLength * 0.02)
+    {
+        length = fullLength * 0.02;
+        qWarning()<<"Warning!!! Correction length of cutting. Length too small.";
+    }
+    else if ( length > fullLength * 0.98)
+    {
+        length = fullLength * 0.98;
+        qWarning()<<"Warning!!! Correction length of cutting. Length too small.";
+    }
+
+    fullLength = 0;
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
+        VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(), path[i-1].KAsm2(),
+                    path[i].KAsm1(), kCurve);
+        fullLength += spl.GetLength();
+        if(fullLength > length)
+        {
+            p1 = i-1;
+            p2 = i;
+            QPointF spl1p2, spl2p3;
+            return spl.CutSpline(length - (fullLength - spl.GetLength()), spl1p2, spl1p3, spl2p2, spl2p3);
+        }
+    }
+    return QPointF();
+}

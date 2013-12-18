@@ -154,9 +154,9 @@ void DialogShoulderPoint::DialogAccepted()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    p1Line = getCurrentPointId(ui->comboBoxP1Line);
-    p2Line = getCurrentPointId(ui->comboBoxP2Line);
-    pShoulder = getCurrentPointId(ui->comboBoxPShoulder);
+    p1Line = getCurrentObjectId(ui->comboBoxP1Line);
+    p2Line = getCurrentObjectId(ui->comboBoxP2Line);
+    pShoulder = getCurrentObjectId(ui->comboBoxPShoulder);
     emit DialogClosed(QDialog::Accepted);
 }
 

@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogDetail(QSharedPointer<DialogDetail>()), dialogHeight(QSharedPointer<DialogHeight>()),
     dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
+    dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation)
 {
@@ -104,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
     connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
     connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
+    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
+    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
 
     data = new VContainer;
 
@@ -381,6 +384,17 @@ void MainWindow::ClosedDialogSpline(int result)
     ClosedDialog<VToolSpline, VModelingSpline>(dialogSpline, result);
 }
 
+void MainWindow::ToolCutSpline(bool checked)
+{
+    SetToolButton(checked, Tool::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
+                  tr("Select simple curve"), dialogCutSpline, &MainWindow::ClosedDialogCutSpline);
+}
+
+void MainWindow::ClosedDialogCutSpline(int result)
+{
+    ClosedDialog<VToolCutSpline, VModelingCutSpline>(dialogCutSpline, result);
+}
+
 void MainWindow::ToolArc(bool checked)
 {
     SetToolButton(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
@@ -395,13 +409,23 @@ void MainWindow::ClosedDialogArc(int result)
 void MainWindow::ToolSplinePath(bool checked)
 {
     SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
-                  tr("Select point of curve path"), dialogSplinePath,
-                  &MainWindow::ClosedDialogSplinePath);
+                  tr("Select point of curve path"), dialogSplinePath, &MainWindow::ClosedDialogSplinePath);
 }
 
 void MainWindow::ClosedDialogSplinePath(int result)
 {
     ClosedDialog<VToolSplinePath, VModelingSplinePath>(dialogSplinePath, result);
+}
+
+void MainWindow::ToolCutSplinePath(bool checked)
+{
+    SetToolButton(checked, Tool::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
+                  tr("Select curve path"), dialogCutSplinePath, &MainWindow::ClosedDialogCutSplinePath);
+}
+
+void MainWindow::ClosedDialogCutSplinePath(int result)
+{
+    ClosedDialog<VToolCutSplinePath, VModelingCutSplinePath>(dialogCutSplinePath, result);
 }
 
 void MainWindow::ToolPointOfContact(bool checked)
@@ -762,6 +786,18 @@ void MainWindow::CanselTool()
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
+        case Tool::CutSplineTool:
+            dialogCutSpline.clear();
+            ui->toolButtonSplineCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::CutSplinePathTool:
+            dialogCutSplinePath.clear();
+            ui->toolButtonSplinePathCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
@@ -1054,6 +1090,8 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonHeight->setEnabled(enable);
     ui->toolButtonTriangle->setEnabled(enable);
     ui->toolButtonPointOfIntersection->setEnabled(enable);
+    ui->toolButtonSplineCutPoint->setEnabled(enable);
+    ui->toolButtonSplinePathCutPoint->setEnabled(enable);
 }
 
 void MainWindow::MinimumScrollBar()

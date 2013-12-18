@@ -156,7 +156,7 @@ void DialogArc::DialogAccepted()
     radius = ui->lineEditRadius->text();
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
-    center = getCurrentPointId(ui->comboBoxBasePoint);
+    center = getCurrentObjectId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

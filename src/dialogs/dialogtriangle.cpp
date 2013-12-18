@@ -118,10 +118,10 @@ void DialogTriangle::ChoosedObject(qint64 id, const Scene::Scenes &type)
 void DialogTriangle::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
-    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
-    axisP1Id = getCurrentPointId(ui->comboBoxAxisP1);
-    axisP2Id = getCurrentPointId(ui->comboBoxAxisP2);
+    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
+    axisP1Id = getCurrentObjectId(ui->comboBoxAxisP1);
+    axisP2Id = getCurrentObjectId(ui->comboBoxAxisP2);
     emit DialogClosed(QDialog::Accepted);
 }
 

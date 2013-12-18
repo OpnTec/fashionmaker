@@ -155,10 +155,10 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
 void DialogLineIntersect::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
-    p1Line1 = getCurrentPointId(ui->comboBoxP1Line1);
-    p2Line1 = getCurrentPointId(ui->comboBoxP2Line1);
-    p1Line2 = getCurrentPointId(ui->comboBoxP1Line2);
-    p2Line2 = getCurrentPointId(ui->comboBoxP2Line2);
+    p1Line1 = getCurrentObjectId(ui->comboBoxP1Line1);
+    p2Line1 = getCurrentObjectId(ui->comboBoxP2Line1);
+    p1Line2 = getCurrentObjectId(ui->comboBoxP1Line2);
+    p2Line2 = getCurrentObjectId(ui->comboBoxP2Line2);
     emit DialogClosed(QDialog::Accepted);
 }
 

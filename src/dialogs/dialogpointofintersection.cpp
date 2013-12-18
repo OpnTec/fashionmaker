@@ -118,8 +118,8 @@ void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &ty
 void DialogPointOfIntersection::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
-    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
+    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

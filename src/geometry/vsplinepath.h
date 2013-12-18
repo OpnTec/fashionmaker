@@ -186,6 +186,16 @@ public:
      * @param name
      */
     void          setName(const QString &name) {_name = name;}
+    /**
+     * @brief CutSplinePath
+     * @param length
+     * @param p1
+     * @param p2
+     * @param spl1p3
+     * @param spl2p2
+     * @return
+     */
+    QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p3, QPointF &spl2p2) const;
 protected:
     /**
      * @brief path вектор з точок сплайна.

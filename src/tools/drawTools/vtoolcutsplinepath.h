@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vtoolendline.h
+ **  @file   vtoolcutsplinepath.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   15 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,34 +26,19 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLENDLINE_H
-#define VTOOLENDLINE_H
+#ifndef VTOOLCUTSPLINEPATH_H
+#define VTOOLCUTSPLINEPATH_H
 
-#include "vtoollinepoint.h"
-#include "../../dialogs/dialogendline.h"
+#include "vtoolpoint.h"
+#include "../../dialogs/dialogcutsplinepath.h"
+#include "../../widgets/vsimplesplinepath.h"
 
-/**
- * @brief The VToolEndLine class
- */
-class VToolEndLine : public VToolLinePoint
+class VToolCutSplinePath : public VToolPoint
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VToolEndLine
-                  * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param typeLine
-                  * @param formula
-                  * @param angle
-                  * @param basePointId
-                  * @param typeCreation
-                  * @param parent
-                  */
-                 VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                              const QString &formula, const qreal &angle, const qint64 &basePointId,
-                              const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    VToolCutSplinePath(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
+                       const qint64 &splinePathId, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog
      */
@@ -65,16 +50,14 @@ public:
      * @param doc dom document container
      * @param data
      */
-    static void  Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(QSharedPointer<DialogCutSplinePath> &dialog, VMainGraphicsScene  *scene,
+                        VDomDocument *doc, VContainer *data);
     /**
      * @brief Create
      * @param _id
      * @param pointName
-     * @param typeLine
      * @param formula
-     * @param angle
-     * @param basePointId
+     * @param splineId
      * @param mx
      * @param my
      * @param scene
@@ -83,14 +66,15 @@ public:
      * @param parse
      * @param typeCreation
      */
-    static void  Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                        const QString &formula, const qreal &angle, const qint64 &basePointId, const qreal &mx,
-                        const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const qint64 _id, const QString &pointName, const QString &formula,
+                        const qint64 &splinePathId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                        VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                        const Tool::Sources &typeCreation);
     /**
      * @brief ToolType
      */
     static const QString ToolType;
+    static const QString AttrSplinePath;
 public slots:
     /**
      * @brief FullUpdateFromFile
@@ -111,11 +95,28 @@ protected:
      * @brief AddToFile
      */
     virtual void AddToFile();
+    void      RefreshGeometry();
 private:
     /**
-     * @brief dialogEndLine pointer to the dialog
+     * @brief formula keep formula of length
      */
-    QSharedPointer<DialogEndLine> dialogEndLine;
+    QString           formula;
+    /**
+     * @brief splineId keep id of spline
+     */
+    qint64            splinePathId;
+    /**
+     * @brief DialogCutSpline pointer to the tool's dialog
+     */
+    QSharedPointer<DialogCutSplinePath> dialogCutSplinePath;
+    /**
+     * @brief firstSplinePath
+     */
+    VSimpleSplinePath *firstSplinePath;
+    /**
+     * @brief secondSplinePath
+     */
+    VSimpleSplinePath *secondSplinePath;
 };
 
-#endif // VTOOLENDLINE_H
+#endif // VTOOLCUTSPLINEPATH_H

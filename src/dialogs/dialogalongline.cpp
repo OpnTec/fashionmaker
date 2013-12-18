@@ -142,8 +142,8 @@ void DialogAlongLine::DialogAccepted()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
+    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

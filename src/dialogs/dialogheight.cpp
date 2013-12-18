@@ -144,8 +144,8 @@ void DialogHeight::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    basePointId = getCurrentPointId(ui->comboBoxBasePoint);
-    p1LineId = getCurrentPointId(ui->comboBoxP1Line);
-    p2LineId = getCurrentPointId(ui->comboBoxP2Line);
+    basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
+    p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
+    p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
     emit DialogClosed(QDialog::Accepted);
 }

@@ -31,15 +31,12 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionuniqueid.h"
-#include "../tools/vtooldetail.h"
 #include "../exception/vexceptionobjecterror.h"
 #include "../exception/vexceptionbadid.h"
+#include "../tools/vtooldetail.h"
 #include "../tools/drawTools/drawtools.h"
 #include "../tools/modelingTools/modelingtools.h"
-#include "../tools/nodeDetails/vnodepoint.h"
-#include "../tools/nodeDetails/vnodespline.h"
-#include "../tools/nodeDetails/vnodesplinepath.h"
-#include "../tools/nodeDetails/vnodearc.h"
+#include "../tools/nodeDetails/nodedetails.h"
 
 #include <QMessageBox>
 
@@ -1100,6 +1097,64 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         catch (const VExceptionBadId &e)
         {
             VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
+    if (type == "cutSpline")
+    {
+        try
+        {
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, "name");
+            qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
+            qreal my = toPixel(GetParametrDouble(domElement, "my"));
+            QString formula = GetParametrString(domElement, "length");
+            qint64 splineId = GetParametrLongLong(domElement, "spline");
+            if (mode == Draw::Calculation)
+            {
+                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse,
+                                       Tool::FromFile);
+            }
+            else
+            {
+                VModelingCutSpline::Create(id, name, formula, splineId, mx, my, this, data, parse,
+                                           Tool::FromFile);
+            }
+            return;
+        }
+        catch (const VExceptionBadId &e)
+        {
+            VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
+    if (type == "cutSplinePath")
+    {
+        try
+        {
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, "name");
+            qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
+            qreal my = toPixel(GetParametrDouble(domElement, "my"));
+            QString formula = GetParametrString(domElement, "length");
+            qint64 splinePathId = GetParametrLongLong(domElement, "splinePath");
+            if (mode == Draw::Calculation)
+            {
+                VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my, scene, this, data, parse,
+                                           Tool::FromFile);
+            }
+            else
+            {
+                VModelingCutSplinePath::Create(id, name, formula, splinePathId, mx, my, this, data, parse,
+                                               Tool::FromFile);
+            }
+            return;
+        }
+        catch (const VExceptionBadId &e)
+        {
+            VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
             excep.AddMoreInformation(e.ErrorMessage());
             throw excep;
         }

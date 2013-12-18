@@ -160,7 +160,7 @@ void DialogEndLine::DialogAccepted()
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
     angle = ui->doubleSpinBoxAngle->value();
-    basePointId = getCurrentPointId(ui->comboBoxBasePoint);
+    basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

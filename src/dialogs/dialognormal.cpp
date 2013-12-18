@@ -159,8 +159,8 @@ void DialogNormal::DialogAccepted()
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
     angle = ui->doubleSpinBoxAngle->value();
-    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
+    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

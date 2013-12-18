@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   vsimplesplinepath.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef VSIMPLESPLINEPATH_H
+#define VSIMPLESPLINEPATH_H
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
+#include <QGraphicsPathItem>
+#include "../tools/vabstracttool.h"
 
-#endif // DIALOGS_H
+class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
+{
+    Q_OBJECT
+public:
+    VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent = 0);
+protected:
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
+    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+private:
+    qreal *factor;
+};
+
+#endif // VSIMPLESPLINEPATH_H

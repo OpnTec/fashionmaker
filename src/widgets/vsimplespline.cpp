@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   vsimplespline.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#include "vsimplespline.h"
+#include "../options.h"
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
+VSimpleSpline::VSimpleSpline(qint64 id, qreal *factor, Qt::GlobalColor *currentColor, QObject *parent)
+    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
+{
+    setPen(QPen(Qt::black, widthHairLine/ *factor));
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setAcceptHoverEvents(true);
+}
 
-#endif // DIALOGS_H
+void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        emit Choosed(id);
+    }
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+}
+
+void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    this->setPen(QPen(*currentColor, widthHairLine/ *factor));
+}

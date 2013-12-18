@@ -145,9 +145,9 @@ void DialogPointOfContact::DialogAccepted()
 {
     pointName = ui.lineEditNamePoint->text();
     radius = ui.lineEditFormula->text();
-    center = getCurrentPointId(ui.comboBoxCenter);
-    firstPoint = getCurrentPointId(ui.comboBoxFirstPoint);
-    secondPoint = getCurrentPointId(ui.comboBoxSecondPoint);
+    center = getCurrentObjectId(ui.comboBoxCenter);
+    firstPoint = getCurrentObjectId(ui.comboBoxFirstPoint);
+    secondPoint = getCurrentObjectId(ui.comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

@@ -189,6 +189,11 @@ public slots:
      */
     void               ToolSpline(bool checked);
     /**
+     * @brief ToolCutSpline handler tool CutSpline
+     * @param checked true - button is checked
+     */
+    void               ToolCutSpline(bool checked);
+    /**
      * @brief ToolArc
      * @param checked
      */
@@ -198,6 +203,11 @@ public slots:
      * @param checked
      */
     void               ToolSplinePath(bool checked);
+    /**
+     * @brief ToolCutSplinePath handler tool CutSplinePath
+     * @param checked true - button is checked
+     */
+    void               ToolCutSplinePath(bool checked);
     /**
      * @brief ToolPointOfContact
      * @param checked
@@ -274,6 +284,11 @@ public slots:
      */
     void               ClosedDialogSplinePath(int result);
     /**
+     * @brief ClosedDialogCutSplinePath handler close event tool CutSplinePath
+     * @param result result of working of dialog
+     */
+    void               ClosedDialogCutSplinePath(int result);
+    /**
      * @brief ClosedDialogPointOfContact
      * @param result
      */
@@ -298,6 +313,11 @@ public slots:
      * @param result
      */
     void               ClosedDialogPointOfIntersection(int result);
+    /**
+     * @brief ClosedDialogCutSpline handler close event tool CutSpline
+     * @param result result of working of dialog
+     */
+    void               ClosedDialogCutSpline(int result);
     /**
      * @brief About
      */
@@ -444,6 +464,14 @@ private:
      * @brief dialogPointOfIntersection
      */
     QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
+    /**
+     * @brief dialogCutSpline pointer to the dialog tool cut spline
+     */
+    QSharedPointer<DialogCutSpline>           dialogCutSpline;
+    /**
+     * @brief dialogCutSplinePath pointer to the dialog tool cut spline path
+     */
+    QSharedPointer<DialogCutSplinePath>       dialogCutSplinePath;
     /**
      * @brief dialogHistory
      */
