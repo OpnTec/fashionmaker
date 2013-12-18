@@ -42,13 +42,13 @@ VToolCutSpline::VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64
     Q_ASSERT_X(spl1id > 0, Q_FUNC_INFO, "spl1id <= 0");
     Q_ASSERT_X(spl2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
-    firstSpline = new VSimpleSpline(spl1id, &factor, &currentColor);
+    firstSpline = new VSimpleSpline(spl1id, &currentColor, &factor);
     Q_ASSERT(firstSpline != 0);
     RefreshSpline(firstSpline, spl1id, SimpleSpline::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
 
-    secondSpline = new VSimpleSpline(spl2id, &factor, &currentColor);
+    secondSpline = new VSimpleSpline(spl2id, &currentColor, &factor);
     Q_ASSERT(secondSpline != 0);
     RefreshSpline(secondSpline, spl2id, SimpleSpline::FirstPoint);
     secondSpline->setParentItem(this);

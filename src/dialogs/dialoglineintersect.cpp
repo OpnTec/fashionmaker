@@ -43,10 +43,13 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     flagName = false;
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxP1Line1);
-    FillComboBoxPoints(ui->comboBoxP2Line1);
-    FillComboBoxPoints(ui->comboBoxP1Line2);
-    FillComboBoxPoints(ui->comboBoxP2Line2);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxP1Line1);
+        FillComboBoxPoints(ui->comboBoxP2Line1);
+        FillComboBoxPoints(ui->comboBoxP1Line2);
+        FillComboBoxPoints(ui->comboBoxP2Line2);
+    }
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
 }
@@ -63,6 +66,10 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxP1Line1);
+            FillComboBoxPoints(ui->comboBoxP2Line1);
+            FillComboBoxPoints(ui->comboBoxP1Line2);
+            FillComboBoxPoints(ui->comboBoxP2Line2);
             return;
         }
     }

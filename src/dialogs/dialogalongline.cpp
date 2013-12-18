@@ -57,8 +57,11 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     connect(bCansel, &QPushButton::clicked, this, &DialogAlongLine::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
     ui->comboBoxLineType->setCurrentIndex(1);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+    }
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogAlongLine::PutVal);
@@ -88,6 +91,8 @@ void DialogAlongLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
             return;
         }
     }

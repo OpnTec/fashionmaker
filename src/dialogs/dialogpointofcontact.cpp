@@ -54,9 +54,12 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     CheckState();
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogPointOfContact::DialogRejected);
-    FillComboBoxPoints(ui.comboBoxCenter);
-    FillComboBoxPoints(ui.comboBoxFirstPoint);
-    FillComboBoxPoints(ui.comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui.comboBoxCenter);
+        FillComboBoxPoints(ui.comboBoxFirstPoint);
+        FillComboBoxPoints(ui.comboBoxSecondPoint);
+    }
 
     connect(ui.toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
     connect(ui.listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
@@ -81,6 +84,9 @@ void DialogPointOfContact::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui.comboBoxCenter);
+            FillComboBoxPoints(ui.comboBoxFirstPoint);
+            FillComboBoxPoints(ui.comboBoxSecondPoint);
             return;
         }
     }

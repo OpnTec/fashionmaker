@@ -53,7 +53,10 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, Draw::Draws mode, QWidg
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogCutSpline::DialogRejected);
-    FillComboBoxSplines(ui->comboBoxSpline);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxSplines(ui->comboBoxSpline);
+    }
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSpline::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSpline::PutVal);
@@ -100,6 +103,7 @@ void DialogCutSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxSplines(ui->comboBoxSpline);
             return;
         }
     }

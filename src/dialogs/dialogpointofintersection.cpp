@@ -43,8 +43,11 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, Dra
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogPointOfIntersection::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+    }
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersection::NamePointChanged);
 }
 
@@ -66,6 +69,8 @@ void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &ty
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
             return;
         }
     }

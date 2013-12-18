@@ -56,8 +56,11 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogNormal::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+    }
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     connect(ui->toolButtonArrowDown, &QPushButton::clicked, this,
@@ -104,6 +107,8 @@ void DialogNormal::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
             return;
         }
     }

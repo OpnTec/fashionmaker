@@ -553,6 +553,21 @@ void VContainer::PrepareDetails(QVector<VItem *> &list) const
     }
 }
 
+qint64 VContainer::PointConvertToModeling(qint64 id)
+{
+    QHashIterator<qint64, VPointF> pModeling(pointsModeling);
+    while (pModeling.hasNext())
+    {
+        pModeling.next();
+        VPointF p = pModeling.value();
+        if(p.getIdObject() == id)
+        {
+            return pModeling.key();
+        }
+    }
+    return 0;
+}
+
 template <typename val>
 void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, const val& point)
 {

@@ -39,8 +39,11 @@ DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent
     connect(bOk, &QPushButton::clicked, this, &DialogLine::DialogAccepted);
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLine::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+    }
     number = 0;
 }
 
@@ -88,6 +91,8 @@ void DialogLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
             return;
         }
     }

@@ -573,6 +573,7 @@ public:
      * @param list list of details
      */
     void                PrepareDetails(QVector<VItem *> & list) const;
+    qint64              PointConvertToModeling(qint64 id);
 private:
     /**
      * @brief _id current id. New object will have value +1. For full class equal 0.

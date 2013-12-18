@@ -31,13 +31,15 @@
 
 #include "vmodelingpoint.h"
 #include "../../dialogs/dialogcutspline.h"
+#include "../../widgets/vsimplespline.h"
 
 class VModelingCutSpline: public VModelingPoint
 {
     Q_OBJECT
 public:
-    VModelingCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id,const QString &formula,
-                       const qint64 &splineId, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    VModelingCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
+                       const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
+                       const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog
      */
@@ -83,6 +85,11 @@ public slots:
      * @param result
      */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief SplineChoosed
+     * @param id
+     */
+    void SplineChoosed(qint64 id);
 protected:
     /**
      * @brief contextMenuEvent
@@ -107,6 +114,17 @@ private:
      * @brief DialogCutSpline pointer to the tool's dialog
      */
     QSharedPointer<DialogCutSpline> dialogCutSpline;
+    /**
+     * @brief firstSpline
+     */
+    VSimpleSpline *firstSpline;
+    /**
+     * @brief secondSpline
+     */
+    VSimpleSpline *secondSpline;
+    const qint64 spl1id;
+    const qint64 spl2id;
+    void RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr);
 };
 
 #endif // VMODELINGCUTSPLINE_H

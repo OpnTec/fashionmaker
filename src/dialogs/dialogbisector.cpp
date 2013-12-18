@@ -55,9 +55,12 @@ DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogBisector::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxPoints(ui->comboBoxThirdPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+        FillComboBoxPoints(ui->comboBoxThirdPoint);
+    }
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
@@ -88,6 +91,9 @@ void DialogBisector::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
+            FillComboBoxPoints(ui->comboBoxThirdPoint);
             return;
         }
     }

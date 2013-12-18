@@ -271,6 +271,7 @@ template <typename T>
 void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool, const qint64 &idDetail)
 {
     QHash<qint64, VDataTool*>* tools = doc->getTools();
+    Q_ASSERT(tools != 0);
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
     Q_ASSERT(det != 0);
     det->AddTool(tool, id, typeTool);

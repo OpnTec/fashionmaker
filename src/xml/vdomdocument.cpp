@@ -671,6 +671,13 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
                     {
                         tool = Tool::PointOfIntersection;
                     }
+                    else if (t == "CutSplineTool")
+                    {
+                        tool = Tool::CutSplineTool;
+                        nodeType = NodeDetail::Modeling;
+                        detail.append(VNodeDetail(id + 1, Tool::SimpleSpline, Draw::Modeling, nodeType, mx, my));
+                        detail.append(VNodeDetail(id + 2, Tool::SimpleSplinePath, Draw::Modeling, nodeType, mx, my));
+                    }
                     detail.append(VNodeDetail(id, tool, Draw::Modeling, nodeType, mx, my));
                 }
             }

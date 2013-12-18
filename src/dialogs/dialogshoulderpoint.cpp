@@ -57,9 +57,12 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogShoulderPoint::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
-    FillComboBoxPoints(ui->comboBoxP1Line);
-    FillComboBoxPoints(ui->comboBoxP2Line);
-    FillComboBoxPoints(ui->comboBoxPShoulder);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxP1Line);
+        FillComboBoxPoints(ui->comboBoxP2Line);
+        FillComboBoxPoints(ui->comboBoxPShoulder);
+    }
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogShoulderPoint::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
@@ -89,6 +92,9 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxP1Line);
+            FillComboBoxPoints(ui->comboBoxP2Line);
+            FillComboBoxPoints(ui->comboBoxPShoulder);
             return;
         }
     }

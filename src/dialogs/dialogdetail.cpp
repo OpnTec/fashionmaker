@@ -67,6 +67,7 @@ void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
     {
         if (CheckObject(id) == false)
         {
+            qDebug()<<"false";
             return;
         }
     }

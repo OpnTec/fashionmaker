@@ -77,7 +77,9 @@ namespace Tool
         NodeSplinePath,
         Height,
         Triangle,
-        PointOfIntersection
+        PointOfIntersection,
+        SimpleSpline,
+        SimpleSplinePath
     };
     Q_DECLARE_FLAGS(Tools, Tool)
 

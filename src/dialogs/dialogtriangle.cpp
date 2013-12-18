@@ -43,10 +43,13 @@ DialogTriangle::DialogTriangle(const VContainer *data, Draw::Draws mode, QWidget
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogTriangle::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxAxisP1);
-    FillComboBoxPoints(ui->comboBoxAxisP2);
-    FillComboBoxPoints(ui->comboBoxFirstPoint);
-    FillComboBoxPoints(ui->comboBoxSecondPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxAxisP1);
+        FillComboBoxPoints(ui->comboBoxAxisP2);
+        FillComboBoxPoints(ui->comboBoxFirstPoint);
+        FillComboBoxPoints(ui->comboBoxSecondPoint);
+    }
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
 }
 
@@ -62,6 +65,10 @@ void DialogTriangle::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxAxisP1);
+            FillComboBoxPoints(ui->comboBoxAxisP2);
+            FillComboBoxPoints(ui->comboBoxFirstPoint);
+            FillComboBoxPoints(ui->comboBoxSecondPoint);
             return;
         }
     }

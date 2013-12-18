@@ -41,7 +41,10 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWi
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogSplinePath::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxPoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxPoint);
+    }
 
     path = VSplinePath(data->DataPoints());
 
@@ -83,6 +86,7 @@ void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxPoint);
             return;
         }
     }

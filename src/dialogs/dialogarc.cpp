@@ -52,7 +52,10 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent)
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogArc::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxBasePoint);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxBasePoint);
+    }
 
     CheckState();
 
@@ -124,6 +127,7 @@ void DialogArc::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxBasePoint);
             return;
         }
     }

@@ -29,10 +29,17 @@
 #include "vsimplespline.h"
 #include "../options.h"
 
-VSimpleSpline::VSimpleSpline(qint64 id, qreal *factor, Qt::GlobalColor *currentColor, QObject *parent)
+VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
-    setPen(QPen(Qt::black, widthHairLine/ *factor));
+    if(factor == 0)
+    {
+        setPen(QPen(Qt::black, widthHairLine));
+    }
+    else
+    {
+        setPen(QPen(Qt::black, widthHairLine/ *factor));
+    }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
 }
@@ -49,11 +56,25 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+    if(factor == 0)
+    {
+        this->setPen(QPen(*currentColor, widthMainLine));
+    }
+    else
+    {
+        this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+    }
 }
 
 void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(*currentColor, widthHairLine/ *factor));
+    if(factor == 0)
+    {
+        this->setPen(QPen(*currentColor, widthHairLine));
+    }
+    else
+    {
+        this->setPen(QPen(*currentColor, widthHairLine/ *factor));
+    }
 }

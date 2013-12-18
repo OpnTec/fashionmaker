@@ -105,6 +105,15 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
             case (Tool::PointOfIntersection):
                 InitTool<VModelingPointOfIntersection>(scene, detail[i]);
                 break;
+            case (Tool::CutSplineTool):
+                InitTool<VModelingCutSpline>(scene, detail[i]);
+                break;
+            case (Tool::SimpleSpline):
+                //No need init this tool. See CutSplineTool.
+                break;
+            case (Tool::SimpleSplinePath):
+                //No need init this tool. See CutSplineTool.
+                break;
             default:
                 qWarning()<<"Get wrong tool type. Ignore.";
                 break;
@@ -454,6 +463,9 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node)
             break;
         case (Tool::PointOfIntersection):
             AddAttribute(nod, AttrType, QStringLiteral("PointOfIntersection"));
+            break;
+        case (Tool::CutSplineTool):
+            AddAttribute(nod, AttrType, QStringLiteral("CutSplineTool"));
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

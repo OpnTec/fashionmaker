@@ -43,9 +43,12 @@ DialogHeight::DialogHeight(const VContainer *data, Draw::Draws mode, QWidget *pa
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogHeight::DialogRejected);
-    FillComboBoxPoints(ui->comboBoxBasePoint);
-    FillComboBoxPoints(ui->comboBoxP1Line);
-    FillComboBoxPoints(ui->comboBoxP2Line);
+    if(mode == Draw::Calculation)
+    {
+        FillComboBoxPoints(ui->comboBoxBasePoint);
+        FillComboBoxPoints(ui->comboBoxP1Line);
+        FillComboBoxPoints(ui->comboBoxP2Line);
+    }
     FillComboBoxTypeLine(ui->comboBoxLineType);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
 }
@@ -92,6 +95,9 @@ void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
         if (type == Scene::Detail)
         {
             idDetail = id;
+            FillComboBoxPoints(ui->comboBoxBasePoint);
+            FillComboBoxPoints(ui->comboBoxP1Line);
+            FillComboBoxPoints(ui->comboBoxP2Line);
             return;
         }
     }
