@@ -88,7 +88,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Option</string>
+          <string>Options</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -161,7 +161,7 @@
           <item>
            <widget class="QCheckBox" name="checkBoxSeams">
             <property name="text">
-             <string>Supplement for seams</string>
+             <string>Seam allowance</string>
             </property>
             <property name="checked">
              <bool>true</bool>

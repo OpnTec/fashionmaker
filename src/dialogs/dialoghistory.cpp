@@ -240,7 +240,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 p1Line2 = domElement.attribute("p1Line2", "").toLongLong();
                 p2Line2 = domElement.attribute("p2Line2", "").toLongLong();
             }
-            record = QString(tr("%5 - point of intersecting lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
+            record = QString(tr("%5 - intersection of lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
                                                                                          data->GetPoint(p2Line1).name(),
                                                                                          data->GetPoint(p1Line2).name(),
                                                                                          data->GetPoint(p2Line2).name(),
@@ -320,7 +320,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             break;
         }
         default:
-            qWarning()<<tr("Get wrong tool type. Ignore.");
+            qWarning()<<tr("Got wrong tool type. Ignore.");
             break;
     }
     return record;
