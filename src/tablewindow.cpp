@@ -26,6 +26,8 @@
  **
  *************************************************************************/
 
+//TODO: If this class is still relevant, please translate all russian/ukrain text into english
+
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
 #include "widgets/vtablegraphicsview.h"

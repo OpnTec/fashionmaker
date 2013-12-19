@@ -25,6 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+//TODO if this class is still in use: please translate all ukrainian text into english
 
 #include "vcontrolpointspline.h"
 

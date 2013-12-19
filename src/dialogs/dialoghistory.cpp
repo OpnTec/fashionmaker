@@ -205,7 +205,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                                                                     data->GetPoint(tool.getId()).name());
             break;
         case Tool::ShoulderPointTool:
-            record = QString(tr("%1 - Point of soulder")).arg(data->GetPoint(tool.getId()).name());
+            record = QString(tr("%1 - Point of shoulder")).arg(data->GetPoint(tool.getId()).name());
             break;
         case Tool::NormalTool:
             domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -214,7 +214,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 basePointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString(tr("%3 - Normal to line %1_%2")).arg(data->GetPoint(basePointId).name(),
+            record = QString(tr("%3 - normal to line %1_%2")).arg(data->GetPoint(basePointId).name(),
                                                                   data->GetPoint(secondPointId).name(),
                                                                   data->GetPoint(tool.getId()).name());
             break;
@@ -226,7 +226,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 basePointId = domElement.attribute("secondPoint", "").toLongLong();
                 thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
             }
-            record = QString(tr("%4 - Bisector of angle %1_%2_%3")).arg(data->GetPoint(firstPointId).name(),
+            record = QString(tr("%4 - bisector of angle %1_%2_%3")).arg(data->GetPoint(firstPointId).name(),
                                                                         data->GetPoint(basePointId).name(),
                                                                         data->GetPoint(thirdPointId).name(),
                                                                         data->GetPoint(tool.getId()).name());
@@ -240,7 +240,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 p1Line2 = domElement.attribute("p1Line2", "").toLongLong();
                 p2Line2 = domElement.attribute("p2Line2", "").toLongLong();
             }
-            record = QString(tr("%5 - Point of intersection lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
+            record = QString(tr("%5 - point of intersecting lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
                                                                                          data->GetPoint(p2Line1).name(),
                                                                                          data->GetPoint(p1Line2).name(),
                                                                                          data->GetPoint(p2Line2).name(),
@@ -282,7 +282,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 firstPointId = domElement.attribute("firstPoint", "").toLongLong();
                 secondPointId = domElement.attribute("secondPoint", "").toLongLong();
             }
-            record = QString(tr("%4 - Point of contact arc with center in point %1 and line %2_%3")).arg(
+            record = QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")).arg(
                         data->GetPoint(center).name(), data->GetPoint(firstPointId).name(),
                         data->GetPoint(secondPointId).name(), data->GetPoint(tool.getId()).name());
             break;
@@ -297,7 +297,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 p1LineId = domElement.attribute("p1Line", "").toLongLong();
                 p2LineId = domElement.attribute("p2Line", "").toLongLong();
             }
-            record = QString(tr("Point of perpendical from point %1 to line %2_%3")).arg(
+            record = QString(tr("Point of perpendicular from point %1 to line %2_%3")).arg(
                         data->GetPoint(basePointId).name(), data->GetPoint(p1LineId).name(),
                         data->GetPoint(p2LineId).name());
             break;

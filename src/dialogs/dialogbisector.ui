@@ -79,14 +79,14 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Formula calculation of length of bisector</string>
+        <string>Calculation of length of bisector by using the formula</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -179,7 +179,7 @@
             </palette>
            </property>
            <property name="text">
-            <string>Name new point</string>
+            <string>Point label</string>
            </property>
           </widget>
          </item>
@@ -189,7 +189,7 @@
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
            <property name="toolTip">
-            <string>Put variable into formula</string>
+            <string>Insert marked variable into the formula</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -292,7 +292,7 @@
          <item>
           <widget class="QComboBox" name="comboBoxLineType">
            <property name="toolTip">
-            <string>Show line from second point to our point</string>
+            <string>Show line from second point to this point</string>
            </property>
           </widget>
          </item>
@@ -320,7 +320,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Standart table</string>
+            <string>Standard table</string>
            </property>
           </widget>
          </item>
@@ -368,7 +368,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables. Click twice to select.</string>
+        <string>Variables - Click twice to insert into formula</string>
        </property>
       </widget>
      </item>

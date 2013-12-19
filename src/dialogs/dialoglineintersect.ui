@@ -69,7 +69,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Name new point</string>
+        <string>Point label</string>
        </property>
       </widget>
      </item>

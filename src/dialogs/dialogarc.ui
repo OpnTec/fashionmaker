@@ -14,7 +14,7 @@
    <string>Arc</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -82,20 +82,20 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Formula calculation of radius of arc</string>
+        <string>Formula for the calculation of radius of arc</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonPutHereRadius">
        <property name="toolTip">
-        <string>Put variable into formula</string>
+        <string>Insert variable into the formula</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
        </property>
        <property name="iconSize">
@@ -109,13 +109,13 @@
      <item>
       <widget class="QToolButton" name="toolButtonEqualRadius">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
        </property>
        <property name="iconSize">
@@ -218,13 +218,13 @@
      <item>
       <widget class="QToolButton" name="toolButtonPutHereF1">
        <property name="toolTip">
-        <string>Put variable into formula</string>
+        <string>Insert variable into formula</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
        </property>
        <property name="iconSize">
@@ -238,13 +238,13 @@
      <item>
       <widget class="QToolButton" name="toolButtonEqualF1">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
        </property>
        <property name="iconSize">
@@ -347,13 +347,13 @@
      <item>
       <widget class="QToolButton" name="toolButtonPutHereF2">
        <property name="toolTip">
-        <string>Put variable into formula</string>
+        <string>Insert marked variable into formula</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
        </property>
        <property name="iconSize">
@@ -367,13 +367,13 @@
      <item>
       <widget class="QToolButton" name="toolButtonEqualF2">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
        </property>
        <property name="iconSize">
@@ -458,7 +458,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Standart table</string>
+            <string>Standard table</string>
            </property>
           </widget>
          </item>
@@ -563,7 +563,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

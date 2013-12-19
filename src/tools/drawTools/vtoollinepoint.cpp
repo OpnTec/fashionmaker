@@ -35,6 +35,7 @@ VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64
       mainLine(0)
 {
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
+    //TODO please translate comment
     //Лінія, що з'єднує дві точки
     QPointF point1 = data->GetPoint(basePointId).toQPointF();
     QPointF point2 = data->GetPoint(id).toQPointF();

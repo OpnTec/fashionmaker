@@ -96,7 +96,7 @@ protected:
         if (ignoreContextMenuEvent == false)
         {
             QMenu menu;
-            QAction *actionOption = menu.addAction(tr("Option"));
+            QAction *actionOption = menu.addAction(tr("Options"));
             QAction *actionRemove = 0;
             if (showRemove)
             {

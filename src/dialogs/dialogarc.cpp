@@ -170,7 +170,7 @@ void DialogArc::ValChenged(int row)
     if (ui->radioButtonLineAngles->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineAngle(item->text()))
-                .arg(tr("Value angle of line."));
+                .arg(tr("Value of angle of line."));
         ui->labelDescription->setText(desc);
         return;
     }

@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 
+//TODO please translate comments into english
 #include "vabstracttool.h"
 
 const QString VAbstractTool::AttrId          = QStringLiteral("id");

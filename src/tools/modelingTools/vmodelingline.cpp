@@ -36,6 +36,7 @@ VModelingLine::VModelingLine(VDomDocument *doc, VContainer *data, qint64 id, qin
     secondPoint(secondPoint), dialogLine(QSharedPointer<DialogLine>())
 {
     ignoreFullUpdate = true;
+    //TODO translate please
     //Лінія
     VPointF first = data->GetPointModeling(firstPoint);
     VPointF second = data->GetPointModeling(secondPoint);

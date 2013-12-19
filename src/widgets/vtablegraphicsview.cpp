@@ -25,6 +25,7 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+//TODO if this class is still in use: please translate ukrainian text into english
 
 #include "vtablegraphicsview.h"
 
@@ -44,12 +45,12 @@ void VTableGraphicsView::selectionChanged()
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
     if ( listSelectedItems.isEmpty() == true )
     {
-        qDebug() << tr("detail don't find");
+        qDebug() << tr("can't find detail");
         emit itemChect(true);
     }
     else
     {
-        qDebug() << tr("detail find");
+        qDebug() << tr("detail found");
         emit itemChect(false);
     }
 }

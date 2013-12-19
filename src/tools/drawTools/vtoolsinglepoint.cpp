@@ -66,6 +66,7 @@ void VToolSinglePoint::AddToFile()
     AddToCalculation(domElement);
 }
 
+//TODO please translate comments into english
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
