@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
-    helpLabel = new QLabel(tr("Create new drawing for start working."));
+    helpLabel = new QLabel(tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
@@ -137,7 +137,7 @@ void MainWindow::ActionNewDraw()
     dlg->setInputMode( QInputDialog::TextInput );
     dlg->setLabelText(tr("Drawing:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a name for the drawing."));
+    dlg->setWindowTitle(tr("Enter a label for the pattern piece."));
     dlg->resize(300, 100);
     dlg->setTextValue(nDraw);
     while (1)
@@ -152,7 +152,7 @@ void MainWindow::ActionNewDraw()
         index = comboBoxDraws->findText(nameDraw);
         if (index != -1)
         {//we already have this name
-            qCritical()<<tr("Error. Drawing of same name already exists.");
+            qCritical()<<tr("Error. Pattern piece of same label already exists.");
         }
         else
         {
@@ -199,9 +199,9 @@ void MainWindow::OptionDraw()
     QString nDraw = doc->GetNameActivDraw();
     QInputDialog *dlg = new QInputDialog(this);
     dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Drawing:"));
+    dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a new name for the drawing."));
+    dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
     dlg->resize(300, 100);
     dlg->setTextValue(nDraw);
     while (1)
@@ -216,7 +216,7 @@ void MainWindow::OptionDraw()
         index = comboBoxDraws->findText(nameDraw);
         if (index != -1)
         {//we already have this name
-            qCritical()<<tr("Error. Drawing of same name already exists.");
+            qCritical()<<tr("Error. Pattern piece of same name already exists.");
         }
         else
         {
@@ -231,7 +231,7 @@ void MainWindow::OptionDraw()
     }
     else
     {
-        QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new name of drawing"));
+        QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new label of pattern piece"));
     }
 
 }
@@ -1074,7 +1074,7 @@ bool MainWindow::SafeSaveing(const QString &fileName) const
     {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error don't unique id."));
+        msgBox.setText(tr("Error no unique id."));
         msgBox.setInformativeText(e.ErrorMessage());
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.setDefaultButton(QMessageBox::Ok);
@@ -1247,7 +1247,7 @@ void MainWindow::OpenPattern(const QString &fileName)
             {
                 QMessageBox msgBox;
                 msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error don't unique id."));
+                msgBox.setText(tr("Error no unique id."));
                 msgBox.setInformativeText(e.ErrorMessage());
                 msgBox.setStandardButtons(QMessageBox::Ok);
                 msgBox.setDefaultButton(QMessageBox::Ok);

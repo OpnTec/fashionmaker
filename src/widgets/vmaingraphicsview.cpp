@@ -64,7 +64,7 @@ void VMainGraphicsView::scalingTime(qreal x)
     Q_UNUSED(x);
     qreal factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 300.0;
     if (QApplication::keyboardModifiers() == Qt::ControlModifier)
-    {// If you press CTRL this code will execute
+    {// If you press CTRL this code will be executed
         scale(factor, factor);
         emit NewFactor(factor);
     }

@@ -82,14 +82,14 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Formula calculation of radius of arc</string>
+        <string>Formula for calculation of radius of arc</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -182,7 +182,7 @@
             </palette>
            </property>
            <property name="text">
-            <string>Name new point</string>
+            <string>Point label</string>
            </property>
           </widget>
          </item>
@@ -192,7 +192,7 @@
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
            <property name="toolTip">
-            <string>Put variable into formula</string>
+            <string>Insert variable into formula</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -241,7 +241,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Slect point of center of arc</string>
+            <string>Select point of center of arc</string>
            </property>
           </widget>
          </item>
@@ -335,7 +335,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Standart table</string>
+            <string>Standard table</string>
            </property>
           </widget>
          </item>
@@ -383,7 +383,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables. Click twice to select.</string>
+        <string>Variables - Click twice to insert into formula.</string>
        </property>
       </widget>
      </item>

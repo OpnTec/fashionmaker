@@ -217,6 +217,7 @@ qreal Calculator::find_var(QString s)
 
 void Calculator::serror(qint32 error)
 {
+    //TODO please translate text down here into english
     QString e[]=
     {
                  "Синтаксическая ошибка",

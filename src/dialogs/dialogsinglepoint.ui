@@ -111,7 +111,7 @@
     </palette>
    </property>
    <property name="text">
-    <string>Point name</string>
+    <string>Point label</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEditName">

@@ -65,7 +65,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Name new point</string>
+        <string>Point label</string>
        </property>
       </widget>
      </item>
@@ -151,7 +151,7 @@
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Type line</string>
+        <string>Type of line</string>
        </property>
       </widget>
      </item>

@@ -31,7 +31,7 @@
      </property>
      <widget class="QWidget" name="tabStandart">
       <attribute name="title">
-       <string>Table sizes</string>
+       <string>Sizes table</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">

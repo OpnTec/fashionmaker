@@ -82,14 +82,14 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Formula calculation of length of line</string>
+        <string>Formula for calculation of length of line</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -182,7 +182,7 @@
             </palette>
            </property>
            <property name="text">
-            <string>Name new point</string>
+            <string>Point label</string>
            </property>
           </widget>
          </item>
@@ -192,7 +192,7 @@
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
            <property name="toolTip">
-            <string>Put variable into formula</string>
+            <string>Insert variable into formula</string>
            </property>
            <property name="text">
             <string>...</string>
@@ -356,7 +356,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Standart table</string>
+            <string>Standard table</string>
            </property>
           </widget>
          </item>
@@ -404,7 +404,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables. Click twice to select.</string>
+        <string>Variables - Click twice to insert into formula</string>
        </property>
       </widget>
      </item>

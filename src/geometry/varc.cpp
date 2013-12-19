@@ -167,7 +167,7 @@ QVector<QPointF> VArc::SplOfArc(qint32 number) const
     qint32 n = NumberSplOfArc ();
     if ( number > n )
     {
-        QString error = QString(tr("Arc have not this number of part."));
+        QString error = QString(tr("Arc has not this number of parts."));
         throw VException(error);
     }
     qreal f1 = GetF1 ();

@@ -14,7 +14,7 @@
    <string>Point along line</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -76,20 +76,20 @@
      <item>
       <widget class="QLineEdit" name="lineEditFormula">
        <property name="toolTip">
-        <string>Formula calculation of length of line</string>
+        <string>Formula for the calculation of length of line</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
-        <string>Calculate formula</string>
+        <string>Calculate value</string>
        </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
        </property>
        <property name="iconSize">
@@ -176,7 +176,7 @@
             </palette>
            </property>
            <property name="text">
-            <string>Name new point</string>
+            <string>Point label</string>
            </property>
           </widget>
          </item>
@@ -186,13 +186,13 @@
          <item>
           <widget class="QToolButton" name="toolButtonPutHere">
            <property name="toolTip">
-            <string>Put variable into formula</string>
+            <string>Insert variable into the formula</string>
            </property>
            <property name="text">
             <string>...</string>
            </property>
            <property name="icon">
-            <iconset resource="../icon.qrc">
+            <iconset resource="../../share/resources/icon.qrc">
              <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
            </property>
            <property name="iconSize">
@@ -246,14 +246,14 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Type line</string>
+            <string>Type of line</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QComboBox" name="comboBoxLineType">
            <property name="toolTip">
-            <string>Show line from first point to our point</string>
+            <string>Show line from first point to this point</string>
            </property>
           </widget>
          </item>
@@ -281,7 +281,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonStandartTable">
            <property name="text">
-            <string>Standart table</string>
+            <string>Standard table</string>
            </property>
           </widget>
          </item>
@@ -326,7 +326,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables. Click twice to select.</string>
+        <string>Variables - Click twice to insert into formula</string>
        </property>
       </widget>
      </item>
@@ -369,7 +369,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

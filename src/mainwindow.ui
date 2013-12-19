@@ -589,7 +589,7 @@
    </widget>
    <widget class="QMenu" name="menuDrawing">
     <property name="title">
-     <string>Drawing</string>
+     <string>Pattern piece</string>
     </property>
     <addaction name="actionNewDraw"/>
     <addaction name="actionOptionDraw"/>
@@ -775,10 +775,10 @@
      <normaloff>:/icon/32x32/new_draw.png</normaloff>:/icon/32x32/new_draw.png</iconset>
    </property>
    <property name="text">
-    <string>New drawing</string>
+    <string>New pattern piece</string>
    </property>
    <property name="toolTip">
-    <string>Add new drawing</string>
+    <string>Add new pattern piece</string>
    </property>
   </action>
   <action name="actionOptionDraw">
@@ -787,10 +787,10 @@
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
-    <string>Change the name of drawing</string>
+    <string>Change the name of pattern piece</string>
    </property>
    <property name="toolTip">
-    <string>Change the name of drawing</string>
+    <string>Change the name of pattern piece</string>
    </property>
   </action>
   <action name="actionTable">

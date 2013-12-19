@@ -299,6 +299,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 {
     if (change == ItemPositionHasChanged && scene())
     {
+        //TODO please translate into english
         // value - это новое положение.
         QPointF newPos = value.toPointF();
         //qDebug()<<newPos;
