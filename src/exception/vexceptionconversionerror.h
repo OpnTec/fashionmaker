@@ -49,7 +49,7 @@ public:
                      */
                     VExceptionConversionError(const VExceptionConversionError &e)
                         :VException(e), str(e.String()){}
-    virtual         ~VExceptionConversionError() Q_DECL_NOEXCEPT_EXPR(true) {}
+    virtual         ~VExceptionConversionError() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message

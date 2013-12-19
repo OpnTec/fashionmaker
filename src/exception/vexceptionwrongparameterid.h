@@ -51,7 +51,7 @@ public:
                      */
                     VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionWrongParameterId() Q_DECL_NOEXCEPT_EXPR(true){}
+    virtual         ~VExceptionWrongParameterId() noexcept (true){}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message
