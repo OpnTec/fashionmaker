@@ -299,7 +299,8 @@ protected:
      */
     void             FillComboBoxSplines(QComboBox *box, const qint64 &id = 0,
                                          ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
-    void             FillComboBoxSplinesPath(QComboBox *box, const qint64 &id = 0)const;
+    void             FillComboBoxSplinesPath(QComboBox *box, const qint64 &id = 0,
+                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
     /**
      * @brief FillComboBoxTypeLine fill comboBox list of type lines
      * @param box comboBox
@@ -384,8 +385,8 @@ protected:
      * @param value splinePath id
      * @param id don't show this id in list
      */
-    void             setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
-                                            const qint64 &id) const;
+    void             setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value, const qint64 &id,
+                                            ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
     /**
      * @brief getCurrentPointId return current point id in combobox
      * @param box combobox

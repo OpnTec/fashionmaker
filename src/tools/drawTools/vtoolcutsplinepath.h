@@ -31,14 +31,18 @@
 
 #include "vtoolpoint.h"
 #include "../../dialogs/dialogcutsplinepath.h"
-#include "../../widgets/vsimplesplinepath.h"
+#include "../../widgets/vsimplespline.h"
 
+/**
+ * @brief The VToolCutSplinePath class
+ */
 class VToolCutSplinePath : public VToolPoint
 {
     Q_OBJECT
 public:
     VToolCutSplinePath(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
-                       const qint64 &splinePathId, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                       const qint64 &splinePathId, const qint64 &splPath1id, const qint64 &splPath2id,
+                       const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog
      */
@@ -85,6 +89,16 @@ public slots:
      * @param result
      */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief SplineChoosed
+     * @param id
+     */
+    void         SplineChoosed(qint64 id);
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
+    virtual void ChangedActivDraw(const QString &newName);
 protected:
     /**
      * @brief contextMenuEvent
@@ -110,13 +124,16 @@ private:
      */
     QSharedPointer<DialogCutSplinePath> dialogCutSplinePath;
     /**
-     * @brief firstSplinePath
+     * @brief firstSpline
      */
-    VSimpleSplinePath *firstSplinePath;
+    VSimpleSpline *firstSpline;
     /**
-     * @brief secondSplinePath
+     * @brief secondSpline
      */
-    VSimpleSplinePath *secondSplinePath;
+    VSimpleSpline *secondSpline;
+    const qint64 splPath1id;
+    const qint64 splPath2id;
+    void RefreshSpline(VSimpleSpline *spline, qint64 splPathid, SimpleSpline::Translation tr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H

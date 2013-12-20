@@ -195,7 +195,10 @@ public:
      * @param spl2p2
      * @return
      */
-    QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p3, QPointF &spl2p2) const;
+    QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
+                                QPointF &spl2p3) const;
+    QHash<qint64, VPointF> getPoints() const;
+    void setPoints(const QHash<qint64, VPointF> *value);
 protected:
     /**
      * @brief path вектор з точок сплайна.

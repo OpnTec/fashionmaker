@@ -152,17 +152,28 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
             if (det[i].getTypeTool() == Tool::SplineTool ||
                 det[i].getTypeTool() == Tool::NodeSpline )
             {
-                if (det[i].getId() != id)
+                if(cut == ComboMode::CutSpline)
                 {
-                    VSpline spl = data->GetSplineModeling(det[i].getId());
-                    box->addItem(spl.name(), det[i].getId());
+                    if (det[i].getId() != id + 1 && det[i].getId() != id + 2)
+                    {
+                        VSpline spl = data->GetSplineModeling(det[i].getId());
+                        box->addItem(spl.name(), det[i].getId());
+                    }
+                }
+                else
+                {
+                    if (det[i].getId() != id)
+                    {
+                        VSpline spl = data->GetSplineModeling(det[i].getId());
+                        box->addItem(spl.name(), det[i].getId());
+                    }
                 }
             }
         }
     }
 }
 
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_ASSERT(box != 0);
     box->clear();
@@ -173,10 +184,21 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id) const
         while (i.hasNext())
         {
             i.next();
-            if (i.key() != id)
+            if(cut == ComboMode::CutSpline)
             {
-                VSplinePath splPath = i.value();
-                box->addItem(splPath.name(), i.key());
+                if (i.key() != id + 1 && i.key() != id + 2)
+                {
+                    VSplinePath splPath = i.value();
+                    box->addItem(splPath.name(), i.key());
+                }
+            }
+            else
+            {
+                if (i.key() != id)
+                {
+                    VSplinePath splPath = i.value();
+                    box->addItem(splPath.name(), i.key());
+                }
             }
         }
     }
@@ -193,10 +215,21 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id) const
             if (det[i].getTypeTool() == Tool::SplinePathTool ||
                 det[i].getTypeTool() == Tool::NodeSplinePath )
             {
-                if (det[i].getId() != id)
+                if(cut == ComboMode::CutSpline)
                 {
-                    VSplinePath splPath = data->GetSplinePathModeling(det[i].getId());
-                    box->addItem(splPath.name(), det[i].getId());
+                    if (det[i].getId() != id + 1 && det[i].getId() != id + 2)
+                    {
+                        VSplinePath splPath = data->GetSplinePathModeling(det[i].getId());
+                        box->addItem(splPath.name(), det[i].getId());
+                    }
+                }
+                else
+                {
+                    if (det[i].getId() != id)
+                    {
+                        VSplinePath splPath = data->GetSplinePathModeling(det[i].getId());
+                        box->addItem(splPath.name(), det[i].getId());
+                    }
                 }
             }
         }
@@ -346,10 +379,10 @@ void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint
 }
 
 void DialogTool::setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
-                                        const qint64 &id) const
+                                        const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_ASSERT(box != 0);
-    FillComboBoxSplinesPath(box, id);
+    FillComboBoxSplinesPath(box, id, cut);
     splinePathId = value;
     ChangeCurrentData(box, value);
 }

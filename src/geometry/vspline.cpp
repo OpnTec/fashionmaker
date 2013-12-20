@@ -247,12 +247,10 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
     if(length < GetLength()*0.02)
     {
         length = GetLength()*0.02;
-        qWarning()<<"Warning!!! Correction length of cutting. Length too small.";
     }
     else if ( length > GetLength()*0.98)
     {
         length = GetLength()*0.98;
-        qWarning()<<"Warning!!! Correction length of cutting. Length too small.";
     }
 
     // Very stupid way find correct value of t.
