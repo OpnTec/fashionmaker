@@ -21,7 +21,7 @@ CONFIG += c++11
 DESTDIR = bin
 
 # files created moc
-MOC_DIR = moc
+#MOC_DIR = moc
 
 # objecs files
 OBJECTS_DIR = obj
@@ -49,9 +49,12 @@ OTHER_FILES += share/resources/valentina.rc \
     share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina_ru.ts \
-                share/translations/valentina_uk.ts
-
-unix:QMAKE_CXX = ccache g++
+                share/translations/valentina_uk.ts \
+                share/translations/valentina_de.ts
+QMAKE_CXX = g++
+unix {
+QMAKE_CXX = ccache g++
+}
 
 CONFIG += precompile_header
 # Precompiled headers (PCH)
@@ -65,7 +68,8 @@ CONFIG(debug, debug|release){
     *-g++{
     QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                       -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
-                      -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" \
+                      -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" \
+# -isystem "$${MOC_DIR}" \
                       -isystem "$${RCC_DIR}" \
                       -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                       -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
@@ -105,7 +109,7 @@ win32:RC_FILE = share/resources/valentina.rc
 QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${OBJECTS_DIR}/* \
                    $${UI_DIR}/* \
-                   $${MOC_DIR}/* \
+#                   $${MOC_DIR}/* \
                    $${RCC_DIR}/*
 
 unix {
@@ -123,7 +127,8 @@ desktop.files += dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
 pixmaps.files += dist/$${TARGET}.png
 INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
-                        share/translations/valentina_uk.qm
+                        share/translations/valentina_uk.qm \
+                        share/translations/valentina_de.qm \
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 INSTALLS += target \
