@@ -346,30 +346,29 @@ QPainterPath VContainer::Equidistant(QVector<QPointF> points, const Detail::Equi
     }
     for (qint32 i = 0; i < points.size(); ++i )
     {
-        //TODO please translate comments into english
         if ( i == 0 && eqv == Detail::CloseEquidistant)
-        {//перша точка, ламана замкнена
+        {//first point, polyline closed
             ekvPoints<<EkvPoint(QLineF(points[points.size()-2], points[points.size()-1]), QLineF(points[1], points[0]),
                     width);
             continue;
         }
         else if (i == 0 && eqv == Detail::OpenEquidistant)
-        {//перша точка, ламана не замкнена
+        {//first point, polyline doesn't closed
             ekvPoints.append(SingleParallelPoint(QLineF(points[0], points[1]), 90, width));
             continue;
         }
         if (i == points.size()-1 && eqv == Detail::CloseEquidistant)
-        {//остання точка, ламана замкнена
+        {//last point, polyline closed
             ekvPoints.append(ekvPoints.at(0));
             continue;
         }
         else if (i == points.size()-1 && eqv == Detail::OpenEquidistant)
-        {//остання точка, ламана не замкнена
+        {//остання точка, polyline doesn't closed
                 ekvPoints.append(SingleParallelPoint(QLineF(points[points.size()-1], points[points.size()-2]), -90,
                         width));
                 continue;
         }
-        //точка яка не лежить ні на початку ні в кінці
+        //points in the middle of polyline
         ekvPoints<<EkvPoint(QLineF(points[i-1], points[i]), QLineF(points[i+1], points[i]), width);
     }
     ekvPoints = CheckLoops(ekvPoints);

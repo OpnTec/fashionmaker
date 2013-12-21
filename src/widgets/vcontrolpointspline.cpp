@@ -25,7 +25,6 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-//TODO if this class is still in use: please translate all ukrainian text into english
 
 #include "vcontrolpointspline.h"
 
@@ -48,7 +47,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
     this->setAcceptHoverEvents(true);
     this->setPos(controlPoint);
 
-    //Лінія, що з'єднує дві точки
     QPointF p1, p2;
     LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
@@ -83,14 +81,14 @@ qint32 VControlPointSpline::LineIntersectCircle(const QPointF &center, qreal rad
                                                 QPointF &p2) const
 {
     const qreal eps = 1e-8;
-    //коефіцієнти для рівняння відрізку
+    //coefficient for equation of segment
     qreal a = line.p2().y() - line.p1().y();
     qreal b = line.p1().x() - line.p2().x();
-    // В даному випадку не використовується.
+    // In this case does not used.
     //qreal c = - a * line.p1().x() - b * line.p1().y();
-    // проекция центра окружности на прямую
+    // projection center of circle on to line
     QPointF p = ClosestPoint (line, center);
-    // сколько всего решений?
+    // how many solutions?
     qint32 flag = 0;
     qreal d = QLineF (center, p).length();
     if (qAbs (d - radius) <= eps)
@@ -108,10 +106,10 @@ qint32 VControlPointSpline::LineIntersectCircle(const QPointF &center, qreal rad
             return 0;
         }
     }
-    // находим расстояние от проекции до точек пересечения
+    // find distance from projection to points of intersection
     qreal k = sqrt (radius * radius - d * d);
     qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
-    // добавляем к проекции векторы направленные к точкам пеерсечения
+    // add to projection a vectors aimed to points of intersection
     p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
     p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);
     return flag;

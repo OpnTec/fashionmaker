@@ -25,7 +25,6 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-//TODO if this class is still in use: please translate ukrainian text into english
 
 #include "vtablegraphicsview.h"
 
@@ -99,7 +98,7 @@ void VTableGraphicsView::wheelEvent(QWheelEvent *event)
 {
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
     {
-        // Если нажата клавиша CTRL этот код выполнится
+        // If was pressed button CTRL this code will execute
         if ((event->delta())>0)
         {
             ZoomIn();

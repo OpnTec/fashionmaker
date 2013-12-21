@@ -25,7 +25,6 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-//TODO if this class is still in use: please translate all ukrainian text into english
 
 #include "vitem.h"
 #include "../options.h"
@@ -52,13 +51,11 @@ void VItem::checkItemChange()
     QRectF myrect = sceneBoundingRect();
     if ( rect.contains( myrect )==true )
     {
-        qDebug()<<"Не виходить за рамки листа";
         setPen(QPen(Qt::black, widthMainLine));
         emit itemOut( numInOutList, false );
     }
     else
     {
-        qDebug()<<"Виходить за рамки листа";
         setPen(QPen(Qt::red, widthMainLine));
         emit itemOut( numInOutList, true );
     }
@@ -67,15 +64,13 @@ void VItem::checkItemChange()
     {
         list.append( this );
         setPen(QPen(Qt::red, widthMainLine));
-        qDebug()<<"Деталь перетинається з іншими деталями "<<numInOutList;
-        emit itemColliding( list, 1 );//Деталь перетинається з іншими деталями.
+        emit itemColliding( list, 1 );//Detail intersect with other details.
     }
     else
     {
         QList<QGraphicsItem *> itemList;
         itemList.append( this );
-        qDebug()<<"Деталь більше не перетинається з іншими деталями "<<numInOutList;
-        emit itemColliding( itemList, 0 );//Деталь більше не перетинається з іншими деталями.
+        emit itemColliding( itemList, 0 );//Detail doesn't intersect more with other details.
     }
     //qDebug()<<"list="<<list.size();
 }

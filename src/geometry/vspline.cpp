@@ -203,8 +203,7 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
             return type;
         }
     }
-    //TODO please translate into english
-    throw "Не можу знайти точку перетину сплайну з лінією.";
+    throw "Can't found point of intersection spline and line.";
 }
 
 qreal VSpline::LengthT(qreal t) const

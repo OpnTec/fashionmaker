@@ -217,14 +217,13 @@ qreal Calculator::find_var(QString s)
 
 void Calculator::serror(qint32 error)
 {
-    //TODO please translate text down here into english
     QString e[]=
     {
-                 "Синтаксическая ошибка",
-                 "Непарные круглые скобки",
-                 "Это не выражение",
-                 "Предполагается символ равенства",
-                 "Не переменная"
+        "Syntax error",
+        "Parentheses do not match",
+        "This is not the expression",
+        "Assumed the equality symbol",
+        "Do not a variable"
     };
     errorMsg->clear();
     *errorMsg = e[error];

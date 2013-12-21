@@ -66,17 +66,16 @@ void VToolSinglePoint::AddToFile()
     AddToCalculation(domElement);
 }
 
-//TODO please translate comments into english
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
     {
-        // value - это новое положение.
+        // value - this is new position.
         QPointF newPos = value.toPointF();
         QRectF rect = scene()->sceneRect();
         if (rect.contains(newPos) == false)
         {
-            // Сохраняем элемент внутри прямоугольника сцены.
+            // Save element into rect of scene.
             newPos.setX(qMin(rect.right(), qMax(newPos.x(), rect.left())));
             newPos.setY(qMin(rect.bottom(), qMax(newPos.y(), rect.top())));
             return newPos;
@@ -84,7 +83,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
     }
     if (change == ItemPositionHasChanged && scene())
     {
-        // value - это новое положение.
+        // value - this is new position.
         QPointF newPos = value.toPointF();
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())

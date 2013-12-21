@@ -26,7 +26,6 @@
  **
  *************************************************************************/
 
-//TODO please translate comments into english
 #include "vabstracttool.h"
 
 const QString VAbstractTool::AttrId          = QStringLiteral("id");
@@ -107,12 +106,12 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
                                           QPointF &p2)
 {
     const qreal eps = 1e-8;
-    //коефіцієнти для рівняння відрізку
+    //coefficient for equation of segment
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
-    // проекция центра окружности на прямую
+    // projection center of circle on to line
     QPointF p = ClosestPoint (line, center);
-    // сколько всего решений?
+    // how many solutions?
     qint32 flag = 0;
     qreal d = QLineF (center, p).length();
     if (qAbs (d - radius) <= eps)
@@ -130,10 +129,10 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
             return 0;
         }
     }
-    // находим расстояние от проекции до точек пересечения
+    // find distance from projection to points of intersection
     qreal k = sqrt (radius * radius - d * d);
     qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
-    // добавляем к проекции векторы направленные к точкам пеерсечения
+    // add to projection a vectors aimed to points of intersection
     p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
     p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);
     return flag;
@@ -180,7 +179,7 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
 
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
-    //коефіцієнти для рівняння відрізку
+    //coefficient for equation of segment
     QPointF p1 = line.p1();
     *a = line.p2().y() - p1.y();
     *b = p1.x() - line.p2().x();

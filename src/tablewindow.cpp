@@ -26,8 +26,6 @@
  **
  *************************************************************************/
 
-//TODO: If this class is still relevant, please translate all russian/ukrain text into english
-
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
 #include "widgets/vtablegraphicsview.h"
@@ -41,8 +39,8 @@ TableWindow::TableWindow(QWidget *parent)
     indexDetail(0), sceneRect(QRectF())
 {
     ui->setupUi(this);
-    numberDetal = new QLabel("Залишилось 0 деталей.", this);
-    colission = new QLabel("Колізій не знайдено.", this);
+    numberDetal = new QLabel(tr("Left 0 details."), this);
+    colission = new QLabel(tr("Collisions not found."), this);
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
@@ -112,11 +110,11 @@ void TableWindow::AddDetail()
             ui->actionSave->setEnabled(true);
         }
     }
-    numberDetal->setText(QString("Залишилось %1 деталей.").arg(listDetails.count()-indexDetail));
+    numberDetal->setText(QString(tr("Left %1 details.")).arg(listDetails.count()-indexDetail));
 }
 
 /*
- * Отримуємо деталі розрахованої моделі для подальшого укладання.
+ * Get details for creation layout.
  */
 void TableWindow::ModelChosen(QVector<VItem*> listDetails)
 {
@@ -169,7 +167,7 @@ void TableWindow::saveScene()
     QBrush *brush = new QBrush();
     brush->setColor( QColor( Qt::white ) );
     currentScene->setBackgroundBrush( *brush );
-    currentScene->clearSelection(); // Selections would also render to the file
+    currentScene->clearSelection(); // Selections would also render to the file, so need delete them
     shadowPaper->setVisible(false);
     QFileInfo fi(name);
     if (fi.suffix() == "svg")
@@ -202,7 +200,7 @@ void TableWindow::checkNext()
 {
     if (outItems == true && collidingItems == true)
     {
-        colission->setText("Колізій не знайдено.");
+        colission->setText(tr("Collisions not found."));
         if (indexDetail==listDetails.count())
         {
             ui->actionSave->setEnabled(true);
@@ -216,7 +214,7 @@ void TableWindow::checkNext()
     }
     else
     {
-        colission->setText("Знайдено колізії.");
+        colission->setText(tr("Collisions found."));
         ui->actionNext->setDisabled(true);
         ui->actionSave->setEnabled(false);
     }
@@ -257,14 +255,8 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         if (lis.size()-2 <= 0)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
-                            if (bitem == 0)
-                            {
-                                qDebug()<<"Не можу привести тип об'єкту";
-                            }
-                            else
-                            {
-                                bitem->setPen(QPen(Qt::black, widthMainLine));
-                            }
+                            Q_ASSERT(bitem != 0);
+                            bitem->setPen(QPen(Qt::black, widthMainLine));
                             listCollidingItems.removeAt(i);
                         }
                     }
@@ -272,14 +264,8 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 else if (listCollidingItems.size()==1)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
-                    if (bitem == 0)
-                    {
-                        qDebug()<<"Не можу привести тип об'єкту";
-                    }
-                    else
-                    {
-                        bitem->setPen(QPen(Qt::black, widthMainLine));
-                    }
+                    Q_ASSERT(bitem != 0);
+                    bitem->setPen(QPen(Qt::black, widthMainLine));
                     listCollidingItems.clear();
                     collidingItems = true;
                 }
@@ -369,7 +355,7 @@ void TableWindow::keyPressEvent ( QKeyEvent * event )
         if (ui->actionNext->isEnabled() == true )
         {
             AddDetail();
-            qDebug()<<"Додали деталь.";
+            qDebug()<<"Added detail.";
         }
     }
     QMainWindow::keyPressEvent ( event );
