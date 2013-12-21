@@ -135,10 +135,10 @@ void MainWindow::ActionNewDraw()
     QString nameDraw;
     bool bOk;
     qint32 index;
-    QString nDraw = QString(tr("Drawing %1")).arg(comboBoxDraws->count()+1);
+    QString nDraw = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
     QInputDialog *dlg = new QInputDialog(this);
     dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Drawing:"));
+    dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a label for the pattern piece."));
     dlg->resize(300, 100);
@@ -639,7 +639,7 @@ void MainWindow::ToolBarOption()
 void MainWindow::ToolBarDraws()
 {
     QLabel * labelNameDraw = new QLabel;
-    labelNameDraw ->setText(tr("Drawing: "));
+    labelNameDraw ->setText(tr("Pattern Piece: "));
     ui->toolBarDraws->addWidget(labelNameDraw);
 
     comboBoxDraws = new QComboBox;
@@ -792,7 +792,7 @@ void MainWindow::CanselTool()
             currentScene->clearSelection();
             break;
         default:
-            qWarning()<<"Get wrong tool type. Ignore.";
+            qWarning()<<"Got wrong tool type. Ignored.";
             break;
     }
 }
@@ -1213,7 +1213,7 @@ void MainWindow::OpenPattern(const QString &fileName)
 {
     if (fileName.isEmpty())
     {
-        qWarning()<<tr("Can't open pattern file. File name empty")<<Q_FUNC_INFO;
+        qWarning()<<tr("Can't open pattern file. File name is empty")<<Q_FUNC_INFO;
         return;
     }
     QFile file(fileName);
