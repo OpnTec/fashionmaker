@@ -46,10 +46,9 @@ public:
                      /**
                       * @brief DialogArc create dialog
                       * @param data container with data
-                      * @param mode mode of creation tool
                       * @param parent parent widget
                       */
-                     DialogArc(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+                     DialogArc(const VContainer *data, QWidget *parent = 0);
                      ~DialogArc();
     /**
      * @brief GetCenter return id of center point

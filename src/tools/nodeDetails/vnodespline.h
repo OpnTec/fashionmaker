@@ -45,11 +45,10 @@ public:
                    * @param data
                    * @param id
                    * @param idSpline
-                   * @param typeobject
                    * @param typeCreation
                    * @param parent
                    */
-                  VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, Draw::Draws typeobject,
+                  VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief Create
@@ -57,14 +56,12 @@ public:
      * @param data
      * @param id
      * @param idSpline
-     * @param typeobject
      * @param parse
      * @param typeCreation
      * @return
      */
     static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                               const Draw::Draws &typeobject, const Document::Documents &parse,
-                               const Tool::Sources &typeCreation);
+                               const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief TagName
      */

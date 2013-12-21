@@ -30,13 +30,9 @@
 #include <QDebug>
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
-const QString VAbstractNode::AttrTypeObject = QStringLiteral("typeObject");
-const QString VAbstractNode::TypeObjectCalculation = QStringLiteral("Calculation");
-const QString VAbstractNode::TypeObjectModeling = QStringLiteral("Modeling");
 
-VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, Draw::Draws typeobject,
-                             QObject *parent)
-    : VAbstractTool(doc, data, id, parent), idNode(idNode), typeobject(typeobject)
+VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, QObject *parent)
+    : VAbstractTool(doc, data, id, parent), idNode(idNode)
 {
     _referens = 0;
 }

@@ -34,7 +34,7 @@
 #include <QPushButton>
 
 DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent)
-    :DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
+    :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
 {
     ui->setupUi(this);
     InitialStandartTable();

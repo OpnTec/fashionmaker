@@ -64,8 +64,8 @@ public:
      * @param kAsm1 коефіцієнт довжини першої напрямної.
      * @param kAsm2 коефіцієнт довжини другої напрямної.
      */
-    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-             qreal kAsm1, qreal kAsm2, qreal kCurve, Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1,
+             qreal kAsm2, qreal kCurve, qint64 idObject = 0);
     /**
      * @brief VSpline конструктор.
      * @param p1 початкова точка сплайну.
@@ -74,7 +74,7 @@ public:
      * @param p4 кінцева точка сплайну.
      */
     VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-             qreal kCurve, Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+             qreal kCurve, qint64 idObject = 0);
     /**
      * @brief ModifiSpl модифікує сплайн.
      * @param p1 початкова точка сплайну.
@@ -226,16 +226,6 @@ public:
      */
 //    void         Mirror(const QPointF Pmirror);
     /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void    setMode(const Draw::Draws &value) {mode = value;}
-    /**
      * @brief SplinePoints
      * @param p1
      * @param p4
@@ -325,10 +315,6 @@ private:
      * @brief points
      */
     QHash<qint64, VPointF> points;
-    /**
-     * @brief mode
-     */
-    Draw::Draws    mode;
     /**
      * @brief idObject
      */

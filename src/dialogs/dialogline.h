@@ -46,10 +46,9 @@ public:
                      /**
                       * @brief DialogLine create dialog
                       * @param data container with data
-                      * @param mode mode of creation tool
                       * @param parent parent widget
                       */
-                     DialogLine(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+                     DialogLine(const VContainer *data, QWidget *parent = 0);
                      ~DialogLine();
     /**
      * @brief getFirstPoint return id first point

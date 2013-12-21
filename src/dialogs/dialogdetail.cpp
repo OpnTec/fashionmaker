@@ -31,8 +31,8 @@
 #include <QPushButton>
 #include <QDebug>
 
-DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(), details(VDetail()), supplement(true), closed(true)
+DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(), details(VDetail()), supplement(true), closed(true)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
@@ -55,37 +55,21 @@ DialogDetail::DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *pa
 
 void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            qDebug()<<"false";
-            return;
-        }
-    }
     if (type != Scene::Line && type != Scene::Detail)
     {
         switch (type)
         {
             case (Scene::Arc):
-                NewItem(id, Tool::NodeArc, mode, NodeDetail::Contour);
+                NewItem(id, Tool::NodeArc, NodeDetail::Contour);
                 break;
             case (Scene::Point):
-                NewItem(id, Tool::NodePoint, mode, NodeDetail::Contour);
+                NewItem(id, Tool::NodePoint, NodeDetail::Contour);
                 break;
             case (Scene::Spline):
-                NewItem(id, Tool::NodeSpline, mode, NodeDetail::Contour);
+                NewItem(id, Tool::NodeSpline, NodeDetail::Contour);
                 break;
             case (Scene::SplinePath):
-                NewItem(id, Tool::NodeSplinePath, mode, NodeDetail::Contour);
+                NewItem(id, Tool::NodeSplinePath, NodeDetail::Contour);
                 break;
             default:
                 qWarning()<<tr("Get wrong scene object. Ignore.");
@@ -111,65 +95,33 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::Draws &mode,
-                           const NodeDetail::NodeDetails &typeNode, qreal mx, qreal my)
+void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
+                           qreal my)
 {
     QString name;
     switch (typeTool)
     {
         case (Tool::NodePoint):
         {
-            VPointF point;
-            if (mode == Draw::Calculation)
-            {
-                point = data->GetPoint(id);
-            }
-            else
-            {
-                point = data->GetPointModeling(id);
-            }
+            VPointF point = data->GetPoint(id);
             name = point.name();
             break;
         }
         case (Tool::NodeArc):
         {
-            VArc arc;
-            if (mode == Draw::Calculation)
-            {
-                arc = data->GetArc(id);
-            }
-            else
-            {
-                arc = data->GetArcModeling(id);
-            }
+            VArc arc = data->GetArc(id);
             name = arc.name();
             break;
         }
         case (Tool::NodeSpline):
         {
-            VSpline spl;
-            if (mode == Draw::Calculation)
-            {
-                spl = data->GetSpline(id);
-            }
-            else
-            {
-                spl = data->GetSplineModeling(id);
-            }
+            VSpline spl = data->GetSpline(id);
             name = spl.GetName();
             break;
         }
         case (Tool::NodeSplinePath):
         {
-            VSplinePath splPath;
-            if (mode == Draw::Calculation)
-            {
-                splPath = data->GetSplinePath(id);
-            }
-            else
-            {
-                splPath = data->GetSplinePathModeling(id);
-            }
+            VSplinePath splPath = data->GetSplinePath(id);
             name = splPath.name();
             break;
         }
@@ -180,7 +132,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::D
 
     QListWidgetItem *item = new QListWidgetItem(name);
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VNodeDetail node(id, typeTool, mode, typeNode, mx, my);
+    VNodeDetail node(id, typeTool, typeNode, mx, my);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
@@ -201,8 +153,8 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.listWidget->clear();
     for (ptrdiff_t i = 0; i < details.CountNode(); ++i)
     {
-        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getMode(), details[i].getTypeNode(),
-                details[i].getMx(), details[i].getMy());
+        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getTypeNode(), details[i].getMx(),
+                details[i].getMy());
     }
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSupplement());

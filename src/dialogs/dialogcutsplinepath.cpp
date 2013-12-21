@@ -29,8 +29,8 @@
 #include "dialogcutsplinepath.h"
 #include "ui_dialogcutsplinepath.h"
 
-DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
+DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
       splinePathId(0)
 {
     ui->setupUi(this);
@@ -53,10 +53,8 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, Draw::Draws mod
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogCutSplinePath::DialogRejected);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxSplinesPath(ui->comboBoxSplinePath);
-    }
+
+    FillComboBoxSplinesPath(ui->comboBoxSplinePath);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSplinePath::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSplinePath::PutVal);
@@ -98,33 +96,9 @@ void DialogCutSplinePath::setSplinePathId(const qint64 &value, const qint64 &id)
 
 void DialogCutSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxSplines(ui->comboBoxSplinePath);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::SplinePath)
     {
-        VSplinePath splPath;
-        if (mode == Draw::Calculation)
-        {
-            splPath = data->GetSplinePath(id);
-        }
-        else
-        {
-            splPath = data->GetSplinePathModeling(id);
-        }
+        VSplinePath splPath = data->GetSplinePath(id);
         ChangeCurrentText(ui->comboBoxSplinePath, splPath.name());
         emit ToolTip("");
         this->show();

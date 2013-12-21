@@ -61,8 +61,8 @@ public:
                    * @param mx
                    * @param my
                    */
-                  VNodeDetail(qint64 id, Tool::Tools typeTool, Draw::Draws mode, NodeDetail::NodeDetails typeNode,
-                              qreal mx = 0, qreal my = 0);
+                  VNodeDetail(qint64 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+                              qreal my = 0);
                   /**
                    * @brief VNodeDetail
                    * @param node
@@ -94,16 +94,6 @@ public:
      * @param value
      */
     inline void   setTypeTool(const Tool::Tools &value) {typeTool = value;}
-    /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void   setMode(const Draw::Draws &value) {mode = value;}
     /**
      * @brief getTypeNode
      * @return
@@ -143,10 +133,6 @@ private:
      * @brief typeTool
      */
     Tool::Tools   typeTool;
-    /**
-     * @brief mode
-     */
-    Draw::Draws   mode;
     /**
      * @brief typeNode
      */

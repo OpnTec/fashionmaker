@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
+DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0)
 {
     ui->setupUi(this);
@@ -57,11 +57,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, Draw::Draws mode, QWidg
     connect(bCansel, &QPushButton::clicked, this, &DialogAlongLine::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
     ui->comboBoxLineType->setCurrentIndex(1);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxFirstPoint);
-        FillComboBoxPoints(ui->comboBoxSecondPoint);
-    }
+    FillComboBoxPoints(ui->comboBoxFirstPoint);
+    FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogAlongLine::PutVal);
@@ -86,34 +83,9 @@ DialogAlongLine::~DialogAlongLine()
 
 void DialogAlongLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxFirstPoint);
-            FillComboBoxPoints(ui->comboBoxSecondPoint);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());

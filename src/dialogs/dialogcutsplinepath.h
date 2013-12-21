@@ -39,7 +39,7 @@ class DialogCutSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogCutSplinePath(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+    DialogCutSplinePath(const VContainer *data, QWidget *parent = 0);
     ~DialogCutSplinePath();
     /**
      * @brief getPointName return name of point

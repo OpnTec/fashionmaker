@@ -58,8 +58,7 @@ public:
                   /**
                    * @brief VSplinePath конструктор по замовчуванню.
                    */
-                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1,
-                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1, qint64 idObject = 0);
                   /**
                    * @brief VSplinePath
                    * @param splPath
@@ -157,16 +156,6 @@ public:
      */
     VSplinePoint  &operator[](ptrdiff_t indx);
     /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void   setMode(const Draw::Draws &value) {mode = value;}
-    /**
      * @brief getIdObject
      * @return
      */
@@ -208,10 +197,6 @@ protected:
      * @brief kCurve
      */
     qreal         kCurve;
-    /**
-     * @brief mode
-     */
-    Draw::Draws   mode;
     /**
      * @brief points
      */

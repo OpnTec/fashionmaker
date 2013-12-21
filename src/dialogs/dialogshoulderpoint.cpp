@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0)
 {
     ui->setupUi(this);
@@ -57,12 +57,10 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, Draw::Draws mod
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogShoulderPoint::DialogRejected);
     FillComboBoxTypeLine(ui->comboBoxLineType);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxP1Line);
-        FillComboBoxPoints(ui->comboBoxP2Line);
-        FillComboBoxPoints(ui->comboBoxPShoulder);
-    }
+
+    FillComboBoxPoints(ui->comboBoxP1Line);
+    FillComboBoxPoints(ui->comboBoxP2Line);
+    FillComboBoxPoints(ui->comboBoxPShoulder);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogShoulderPoint::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
@@ -87,35 +85,9 @@ DialogShoulderPoint::~DialogShoulderPoint()
 
 void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxP1Line);
-            FillComboBoxPoints(ui->comboBoxP2Line);
-            FillComboBoxPoints(ui->comboBoxPShoulder);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxP1Line->findText(point.name());

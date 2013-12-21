@@ -33,10 +33,10 @@
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
-VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
+VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                        const Tool::Sources &typeCreation, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, typeobject), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
-      namePoint(0), lineName(0)
+    :VAbstractNode(doc, data, id, idPoint), QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0),
+      lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
@@ -46,19 +46,19 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();
     }
 }
 
-void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, const Draw::Draws &typeobject,
+void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                         const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)
     {
-        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeobject, typeCreation);
+        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation);
         Q_ASSERT(point != 0);
         doc->AddTool(id, point);
         doc->IncrementReferens(idPoint);
@@ -71,25 +71,17 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
 
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(VAbstractTool::data.GetPointModeling(id));
+    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
 }
 
 void VNodePoint::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPointModeling(id);
+    VPointF point = VAbstractTool::data.GetPoint(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
-    if (typeobject == Draw::Calculation)
-    {
-        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
-    }
-    else
-    {
-        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
-    }
     AddAttribute(domElement, AttrMx, toMM(point.mx()));
     AddAttribute(domElement, AttrMy, toMM(point.my()));
 
@@ -120,7 +112,7 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF point = VAbstractTool::data.GetPointModeling(id);
+    VPointF point = VAbstractTool::data.GetPoint(id);
     QPointF p = pos - this->pos();
     point.setMx(p.x());
     point.setMy(p.y());

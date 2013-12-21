@@ -35,7 +35,6 @@
 #include "../exception/vexceptionbadid.h"
 #include "../tools/vtooldetail.h"
 #include "../tools/drawTools/drawtools.h"
-#include "../tools/modelingTools/modelingtools.h"
 #include "../tools/nodeDetails/nodedetails.h"
 
 #include <QMessageBox>
@@ -532,22 +531,22 @@ void VDomDocument::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsSce
         {
             if (domElement.tagName() == "point")
             {
-                ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""));
                 continue;
             }
             if (domElement.tagName() == "line")
             {
-                ParseLineElement(scene, domElement, parse, mode);
+                ParseLineElement(scene, domElement, parse);
                 continue;
             }
             if (domElement.tagName() == "spline")
             {
-                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""));
                 continue;
             }
             if (domElement.tagName() == "arc")
             {
-                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""), mode);
+                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""));
                 continue;
             }
         }
@@ -584,101 +583,33 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
                     qreal mx = toPixel(GetParametrDouble(element, "mx"));
                     qreal my = toPixel(GetParametrDouble(element, "my"));
                     Tool::Tools tool;
-                    Draw::Draws mode;
                     NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
                     QString t = GetParametrString(element, "type");
                     if (t == "NodePoint")
                     {
                         tool = Tool::NodePoint;
-                        VPointF point = data->GetPointModeling(id);
-                        mode = point.getMode();
-                        oldDetail.append(VNodeDetail(point.getIdObject(), tool, mode, NodeDetail::Contour));
+                        VPointF point = data->GetPoint(id);
+                        oldDetail.append(VNodeDetail(point.getIdObject(), tool, NodeDetail::Contour));
                     }
                     else if (t == "NodeArc")
                     {
                         tool = Tool::NodeArc;
-                        VArc arc = data->GetArcModeling(id);
-                        mode = arc.getMode();
-                        oldDetail.append(VNodeDetail(arc.getIdObject(), tool, mode, NodeDetail::Contour));
+                        VArc arc = data->GetArc(id);
+                        oldDetail.append(VNodeDetail(arc.getIdObject(), tool, NodeDetail::Contour));
                     }
                     else if (t == "NodeSpline")
                     {
                         tool = Tool::NodeSpline;
-                        VSpline spl = data->GetSplineModeling(id);
-                        mode = spl.getMode();
-                        oldDetail.append(VNodeDetail(spl.getIdObject(), tool, mode, NodeDetail::Contour));
+                        VSpline spl = data->GetSpline(id);
+                        oldDetail.append(VNodeDetail(spl.getIdObject(), tool, NodeDetail::Contour));
                     }
                     else if (t == "NodeSplinePath")
                     {
                         tool = Tool::NodeSplinePath;
-                        VSplinePath splPath = data->GetSplinePathModeling(id);
-                        mode = splPath.getMode();
-                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, mode, NodeDetail::Contour));
+                        VSplinePath splPath = data->GetSplinePath(id);
+                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, NodeDetail::Contour));
                     }
-                    else if (t == "AlongLineTool")
-                    {
-                        tool = Tool::AlongLineTool;
-                    }
-                    else if (t == "ArcTool")
-                    {
-                        tool = Tool::ArcTool;
-                    }
-                    else if (t == "BisectorTool")
-                    {
-                        tool = Tool::BisectorTool;
-                    }
-                    else if (t == "EndLineTool")
-                    {
-                        tool = Tool::EndLineTool;
-                    }
-                    else if (t == "LineIntersectTool")
-                    {
-                        tool = Tool::LineIntersectTool;
-                    }
-                    else if (t == "LineTool")
-                    {
-                        tool = Tool::LineTool;
-                    }
-                    else if (t == "NormalTool")
-                    {
-                        tool = Tool::NormalTool;
-                    }
-                    else if (t == "PointOfContact")
-                    {
-                        tool = Tool::PointOfContact;
-                    }
-                    else if (t == "ShoulderPointTool")
-                    {
-                        tool = Tool::ShoulderPointTool;
-                    }
-                    else if (t == "SplinePathTool")
-                    {
-                        tool = Tool::SplinePathTool;
-                    }
-                    else if (t == "SplineTool")
-                    {
-                        tool = Tool::SplineTool;
-                    }
-                    else if (t == "Height")
-                    {
-                        tool = Tool::Height;
-                    }
-                    else if (t == "Triangle")
-                    {
-                        tool = Tool::Triangle;
-                    }
-                    else if (t == "PointOfIntersection")
-                    {
-                        tool = Tool::PointOfIntersection;
-                    }
-                    else if (t == "CutSplineTool")
-                    {
-                        tool = Tool::CutSplineTool;
-                        nodeType = NodeDetail::Modeling;
-                        detail.append(VNodeDetail(id + 1, Tool::SimpleSpline, Draw::Modeling, nodeType, mx, my));
-                        detail.append(VNodeDetail(id + 2, Tool::SimpleSplinePath, Draw::Modeling, nodeType, mx, my));
-                    }
-                    detail.append(VNodeDetail(id, tool, Draw::Modeling, nodeType, mx, my));
+                    detail.append(VNodeDetail(id, tool, nodeType, mx, my));
                 }
             }
         }
@@ -716,7 +647,7 @@ void VDomDocument::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomEleme
 }
 
 void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString& type, const Draw::Draws &mode)
+                                     const Document::Documents &parse, const QString& type)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -768,16 +699,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             QString formula = GetParametrString(domElement, "length");
             qint64 basePointId = GetParametrLongLong(domElement, "basePoint");
             qreal angle = GetParametrDouble(domElement, "angle");
-            if (mode == Draw::Calculation)
-            {
-                VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this,
-                                     data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, this,
-                                         data, parse, Tool::FromFile);
-            }
+
+            VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this, data, parse,
+                                 Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -800,16 +724,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
-                                       scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my,
-                                           this, data, parse, Tool::FromFile);
-            }
+            VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this, data,
+                                   parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -833,16 +749,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p2Line = GetParametrLongLong(domElement, "p2Line");
             qint64 pShoulder = GetParametrLongLong(domElement, "pShoulder");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my,
-                                           scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx,
-                                               my, this, data, parse, Tool::FromFile);
-            }
+            VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
+                                       data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -866,16 +774,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
             qreal angle = GetParametrDouble(domElement, "angle");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
-                                    mx, my, scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle,
-                                        mx, my, this, data, parse, Tool::FromFile);
-            }
+            VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene, this,
+                                data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -899,16 +799,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
             qint64 thirdPointId = GetParametrLongLong(domElement, "thirdPoint");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
-                                      name, mx, my, scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine,
-                                          name, mx, my, this, data, parse, Tool::FromFile);
-            }
+            VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine, name, mx, my, scene,
+                                  this, data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -931,16 +823,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 p1Line2Id = GetParametrLongLong(domElement, "p1Line2");
             qint64 p2Line2Id = GetParametrLongLong(domElement, "p2Line2");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my,
-                                           scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my,
-                                               this, data, parse, Tool::FromFile);
-            }
+            VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my, scene, this, data,
+                                       parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -963,16 +847,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my,
-                                            scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx,
-                                                my, this, data, parse, Tool::FromFile);
-            }
+            VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
+                                        data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -988,24 +864,11 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
-            QString tObject = GetParametrString(domElement, "typeObject");
-            VPointF point;
-            Draw::Draws typeObject;
-            if (tObject == "Calculation")
-            {
-                typeObject = Draw::Calculation;
-                point = data->GetPoint(idObject );
-            }
-            else
-            {
-                typeObject = Draw::Modeling;
-                point = data->GetPointModeling(idObject);
-            }
+            VPointF point = data->GetPoint(idObject );
             qreal mx = toPixel(GetParametrDouble(domElement, "mx"));
             qreal my = toPixel(GetParametrDouble(domElement, "my"));
-            data->UpdatePointModeling(id, VPointF(point.x(), point.y(), point.name(), mx, my, typeObject,
-                                                  idObject ));
-            VNodePoint::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
+            data->UpdatePoint(id, VPointF(point.x(), point.y(), point.name(), mx, my, idObject ));
+            VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1027,16 +890,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 basePointId = GetParametrLongLong(domElement, "basePoint");
             qint64 p1LineId = GetParametrLongLong(domElement, "p1Line");
             qint64 p2LineId = GetParametrLongLong(domElement, "p2Line");
-            if (mode == Draw::Calculation)
-            {
-                VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId, mx, my, scene,
-                                    this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingHeight::Create(id, name, typeLine,  basePointId, p1LineId, p2LineId, mx, my, this,
-                                        data, parse, Tool::FromFile);
-            }
+
+            VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId, mx, my, scene, this, data, parse,
+                                Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1059,16 +915,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my,
-                                      scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my,
-                                          this, data, parse, Tool::FromFile);
-            }
+            VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this, data,
+                                  parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1089,16 +937,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qint64 firstPointId = GetParametrLongLong(domElement, "firstPoint");
             qint64 secondPointId = GetParametrLongLong(domElement, "secondPoint");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
-                                                 parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, this, data,
-                                                     parse, Tool::FromFile);
-            }
+            VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data, parse,
+                                             Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1118,16 +958,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qreal my = toPixel(GetParametrDouble(domElement, "my"));
             QString formula = GetParametrString(domElement, "length");
             qint64 splineId = GetParametrLongLong(domElement, "spline");
-            if (mode == Draw::Calculation)
-            {
-                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse,
-                                       Tool::FromFile);
-            }
-            else
-            {
-                VModelingCutSpline::Create(id, name, formula, splineId, mx, my, this, data, parse,
-                                           Tool::FromFile);
-            }
+
+            VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1147,16 +979,9 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             qreal my = toPixel(GetParametrDouble(domElement, "my"));
             QString formula = GetParametrString(domElement, "length");
             qint64 splinePathId = GetParametrLongLong(domElement, "splinePath");
-            if (mode == Draw::Calculation)
-            {
-                VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my, scene, this, data, parse,
-                                           Tool::FromFile);
-            }
-            else
-            {
-                VModelingCutSplinePath::Create(id, name, formula, splinePathId, mx, my, this, data, parse,
-                                               Tool::FromFile);
-            }
+
+            VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my, scene, this, data, parse,
+                                       Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1169,7 +994,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                    const Document::Documents &parse, const Draw::Draws &mode)
+                                    const Document::Documents &parse)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1179,15 +1004,7 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
         qint64 firstPoint = GetParametrLongLong(domElement, "firstPoint");
         qint64 secondPoint = GetParametrLongLong(domElement, "secondPoint");
 
-        if (mode == Draw::Calculation)
-        {
-            VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile);
-        }
-        else
-        {
-            VModelingLine::Create(id, firstPoint, secondPoint, this, data, parse, Tool::FromFile);
-        }
-
+        VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1198,7 +1015,7 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
 }
 
 void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                      const Document::Documents &parse, const QString &type, const Draw::Draws &mode)
+                                      const Document::Documents &parse, const QString &type)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1216,17 +1033,8 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             qreal kAsm2 = GetParametrDouble(domElement, "kAsm2");
             qreal kCurve = GetParametrDouble(domElement, "kCurve");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this,
-                                    data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, this,
-                                        data, parse, Tool::FromFile);
-            }
-
+            VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data, parse,
+                                Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1266,14 +1074,8 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                     }
                 }
             }
-            if (mode == Draw::Calculation)
-            {
-                VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingSplinePath::Create(id, path, this, data, parse, Tool::FromFile);
-            }
+
+            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1289,23 +1091,10 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
-            QString tObject = GetParametrString(domElement, "typeObject");
-            VSpline spl;
-            Draw::Draws typeObject;
-            if (tObject == "Calculation")
-            {
-                typeObject = Draw::Calculation;
-                spl = data->GetSpline(idObject);
-            }
-            else
-            {
-                typeObject = Draw::Modeling;
-                spl = data->GetSplineModeling(idObject);
-            }
-            spl.setMode(typeObject);
+            VSpline spl = data->GetSpline(idObject);
             spl.setIdObject(idObject);
-            data->UpdateSplineModeling(id, spl);
-            VNodeSpline::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
+            data->UpdateSpline(id, spl);
+            VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1321,23 +1110,10 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
-            QString tObject = GetParametrString(domElement, "typeObject");
-            VSplinePath path;
-            Draw::Draws typeObject;
-            if (tObject == "Calculation")
-            {
-                typeObject = Draw::Calculation;
-                path = data->GetSplinePath(idObject);
-            }
-            else
-            {
-                typeObject = Draw::Modeling;
-                path = data->GetSplinePathModeling(idObject);
-            }
-            path.setMode(typeObject);
+            VSplinePath path = data->GetSplinePath(idObject);
             path.setIdObject(idObject);
-            data->UpdateSplinePathModeling(id, path);
-            VNodeSplinePath::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
+            data->UpdateSplinePath(id, path);
+            VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1350,7 +1126,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
 }
 
 void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                   const Document::Documents &parse, const QString &type, const Draw::Draws &mode)
+                                   const Document::Documents &parse, const QString &type)
 {
     Q_ASSERT(scene != 0);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1365,14 +1141,7 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             QString f1 = GetParametrString(domElement, "angle1");
             QString f2 = GetParametrString(domElement, "angle2");
 
-            if (mode == Draw::Calculation)
-            {
-                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
-            }
-            else
-            {
-                VModelingArc::Create(id, center, radius, f1, f2, this, data, parse, Tool::FromFile);
-            }
+            VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
 
             return;
         }
@@ -1389,23 +1158,10 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, "idObject");
-            QString tObject = GetParametrString(domElement, "typeObject");
-            VArc arc;
-            Draw::Draws typeObject;
-            if (tObject == "Calculation")
-            {
-                typeObject = Draw::Calculation;
-                arc = data->GetArc(idObject);
-            }
-            else
-            {
-                typeObject = Draw::Modeling;
-                arc = data->GetArcModeling(idObject);
-            }
-            arc.setMode(typeObject);
+            VArc arc = data->GetArc(idObject);
             arc.setIdObject(idObject);
-            data->UpdateArcModeling(id, arc);
-            VNodeArc::Create(this, data, id, idObject, mode, parse, Tool::FromFile);
+            data->UpdateArc(id, arc);
+            VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile);
             return;
         }
         catch (const VExceptionBadId &e)

@@ -46,11 +46,9 @@ public:
                             /**
                              * @brief DialogLineIntersect create dialog
                              * @param data container with data
-                             * @param mode mode of creation tool
                              * @param parent parent widget
                              */
-                            DialogLineIntersect(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                                QWidget *parent = 0);
+                            DialogLineIntersect(const VContainer *data, QWidget *parent = 0);
                             ~DialogLineIntersect();
     /**
      * @brief getP1Line1 return id first point of first line

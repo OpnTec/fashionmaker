@@ -35,7 +35,6 @@ VPointF &VPointF::operator =(const VPointF &point)
     _my = point.my();
     _x = point.x();
     _y = point.y();
-    mode = point.getMode();
     idObject = point.getIdObject();
     return *this;
 }

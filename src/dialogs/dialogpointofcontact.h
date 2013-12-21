@@ -42,11 +42,9 @@ public:
                  /**
                   * @brief DialogPointOfContact create dialog
                   * @param data container with data
-                  * @param mode mode of creation tool
                   * @param parent parent widget
                   */
-                 DialogPointOfContact(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                      QWidget *parent = 0);
+                 DialogPointOfContact(const VContainer *data, QWidget *parent = 0);
     /**
      * @brief getPointName return name of point
      * @return name

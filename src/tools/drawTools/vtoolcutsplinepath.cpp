@@ -94,7 +94,6 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
         QPointF spl1p2, spl1p3, spl2p2, spl2p3;
         qint32 p1 = 0, p2 = 0;
         QPointF point = splPath.CutSplinePath(toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
-        qDebug()<<p1<<p2;
 
         qint64 id = _id;
         qint64 splPath1id = 0;

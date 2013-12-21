@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
+DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)
 {
     ui->setupUi(this);
@@ -56,11 +56,9 @@ DialogNormal::DialogNormal(const VContainer *data, Draw::Draws mode, QWidget *pa
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogNormal::DialogRejected);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxFirstPoint);
-        FillComboBoxPoints(ui->comboBoxSecondPoint);
-    }
+
+    FillComboBoxPoints(ui->comboBoxFirstPoint);
+    FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     connect(ui->toolButtonArrowDown, &QPushButton::clicked, this,
@@ -102,34 +100,9 @@ DialogNormal::~DialogNormal()
 
 void DialogNormal::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxFirstPoint);
-            FillComboBoxPoints(ui->comboBoxSecondPoint);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());

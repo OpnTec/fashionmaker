@@ -79,6 +79,7 @@ protected:
      */
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    Q_DISABLE_COPY(VSimpleSpline)
     /**
      * @brief id
      */

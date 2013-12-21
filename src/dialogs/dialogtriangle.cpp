@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogTriangle::DialogTriangle(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
+DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
     axisP2Id(0), firstPointId(0), secondPointId(0)
 {
     ui->setupUi(this);
@@ -43,13 +43,12 @@ DialogTriangle::DialogTriangle(const VContainer *data, Draw::Draws mode, QWidget
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogTriangle::DialogRejected);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxAxisP1);
-        FillComboBoxPoints(ui->comboBoxAxisP2);
-        FillComboBoxPoints(ui->comboBoxFirstPoint);
-        FillComboBoxPoints(ui->comboBoxSecondPoint);
-    }
+
+    FillComboBoxPoints(ui->comboBoxAxisP1);
+    FillComboBoxPoints(ui->comboBoxAxisP2);
+    FillComboBoxPoints(ui->comboBoxFirstPoint);
+    FillComboBoxPoints(ui->comboBoxSecondPoint);
+
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
 }
 
@@ -60,36 +59,9 @@ DialogTriangle::~DialogTriangle()
 
 void DialogTriangle::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxAxisP1);
-            FillComboBoxPoints(ui->comboBoxAxisP2);
-            FillComboBoxPoints(ui->comboBoxFirstPoint);
-            FillComboBoxPoints(ui->comboBoxSecondPoint);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         switch (number)
         {
             case (0):

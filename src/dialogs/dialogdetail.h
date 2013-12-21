@@ -42,10 +42,9 @@ public:
                      /**
                       * @brief DialogDetail create dialog
                       * @param data container with data
-                      * @param mode mode of creation tool
                       * @param parent parent widget
                       */
-                     DialogDetail(const VContainer *data, Draw::Draws mode, QWidget *parent = 0);
+                     DialogDetail(const VContainer *data, QWidget *parent = 0);
     /**
      * @brief getDetails return detail
      * @return detail
@@ -118,8 +117,8 @@ private:
      * @param mx offset respect to x
      * @param my offset respect to y
      */
-    void             NewItem(qint64 id, const Tool::Tools &typeTool, const Draw::Draws &mode,
-                             const NodeDetail::NodeDetails &typeNode, qreal mx = 0, qreal my = 0);
+    void             NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
+                             qreal mx = 0, qreal my = 0);
 };
 
 #endif // DIALOGDETAIL_H

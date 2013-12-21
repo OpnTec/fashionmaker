@@ -45,23 +45,21 @@ public:
                   * @param data
                   * @param id
                   * @param idSpline
-                  * @param typeobject
                   * @param typeCreation
                   * @param parent
                   */
                  VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 Draw::Draws typeobject, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief Create
      * @param doc dom document container
      * @param data
      * @param id
      * @param idSpline
-     * @param typeobject
      * @param parse
      * @param typeCreation
      */
-    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline, const Draw::Draws &typeobject,
+    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief TagName

@@ -45,11 +45,10 @@ public:
                   * @param data
                   * @param id
                   * @param idArc
-                  * @param typeobject
                   * @param typeCreation
                   * @param parent
                   */
-                 VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, Draw::Draws typeobject,
+                 VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
                           const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief Create
@@ -57,12 +56,11 @@ public:
      * @param data
      * @param id
      * @param idArc
-     * @param typeobject
      * @param parse
      * @param typeCreation
      */
-    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Draw::Draws &typeobject,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Document::Documents &parse,
+                        const Tool::Sources &typeCreation);
     /**
      * @brief TagName
      */

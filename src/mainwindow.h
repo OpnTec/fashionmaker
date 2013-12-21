@@ -36,7 +36,6 @@
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/drawTools/drawtools.h"
-#include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
 
 namespace Ui
@@ -555,7 +554,7 @@ private:
      */
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
-    template <typename DrawTool, typename ModelingTool, typename Dialog>
+    template <typename DrawTool, typename Dialog>
     /**
      * @brief ClosedDialog
      * @param dialog

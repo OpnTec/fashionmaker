@@ -29,9 +29,8 @@
 #include "dialogcutspline.h"
 #include "ui_dialogcutspline.h"
 
-DialogCutSpline::DialogCutSpline(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogCutSpline), pointName(QString()), formula(QString()),
-      splineId(0)
+DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogCutSpline), pointName(QString()), formula(QString()), splineId(0)
 {
     ui->setupUi(this);
     listWidget = ui->listWidget;
@@ -53,10 +52,8 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, Draw::Draws mode, QWidg
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogCutSpline::DialogRejected);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxSplines(ui->comboBoxSpline);
-    }
+
+    FillComboBoxSplines(ui->comboBoxSpline);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSpline::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSpline::PutVal);
@@ -98,33 +95,9 @@ void DialogCutSpline::setSplineId(const qint64 &value, const qint64 &id)
 
 void DialogCutSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxSplines(ui->comboBoxSpline);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Spline)
     {
-        VSpline spl;
-        if (mode == Draw::Calculation)
-        {
-            spl = data->GetSpline(id);
-        }
-        else
-        {
-            spl = data->GetSplineModeling(id);
-        }
+        VSpline spl = data->GetSpline(id);
         ChangeCurrentText(ui->comboBoxSpline, spl.name());
         emit ToolTip("");
         this->show();

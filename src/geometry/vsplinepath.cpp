@@ -30,15 +30,14 @@
 #include "../exception/vexception.h"
 
 VSplinePath::VSplinePath()
-    : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0),
-      _name(QString()){}
+    : path(QVector<VSplinePoint>()), kCurve(1), points(QHash<qint64, VPointF>()), idObject(0), _name(QString()){}
 
-VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject)
-    : path(QVector<VSplinePoint>()), kCurve(kCurve), mode(mode), points(*points), idObject(idObject), _name(QString())
+VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, qint64 idObject)
+    : path(QVector<VSplinePoint>()), kCurve(kCurve), points(*points), idObject(idObject), _name(QString())
 {}
 
 VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
+    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), points(splPath.GetDataPoints()),
     idObject(splPath.getIdObject()), _name(splPath.name()){}
 
 void VSplinePath::append(const VSplinePoint &point)
@@ -158,7 +157,6 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
-    this->mode = path.getMode();
     this->points = path.GetDataPoints();
     this->idObject = path.getIdObject();
     this->_name = path.name();

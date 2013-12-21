@@ -35,14 +35,10 @@ qint64 VContainer::_id = 0;
 
 VContainer::VContainer()
     :base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
-    pointsModeling(QHash<qint64, VPointF>()),
-    standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
     lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
-    splinesModeling(QHash<qint64, VSpline>()),
-    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), arcsModeling(QHash<qint64, VArc>()),
-    lengthArcs(QHash<QString, qreal>()),
-    splinePaths(QHash<qint64, VSplinePath>()), splinePathsModeling(QHash<qint64, VSplinePath>()),
-    details(QHash<qint64, VDetail>())
+    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), lengthArcs(QHash<QString, qreal>()),
+    splinePaths(QHash<qint64, VSplinePath>()), details(QHash<qint64, VDetail>())
 {
     SetSize(500);
     SetGrowth(1760);
@@ -57,14 +53,10 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :base(QHash<QString, qint32>()), points(QHash<qint64, VPointF>()),
-    pointsModeling(QHash<qint64, VPointF>()),
     standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
     lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), splines(QHash<qint64, VSpline>()),
-    splinesModeling(QHash<qint64, VSpline>()),
-    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), arcsModeling(QHash<qint64, VArc>()),
-    lengthArcs(QHash<QString, qreal>()),
-    splinePaths(QHash<qint64, VSplinePath>()), splinePathsModeling(QHash<qint64, VSplinePath>()),
-    details(QHash<qint64, VDetail>())
+    lengthSplines(QHash<QString, qreal>()), arcs(QHash<qint64, VArc>()), lengthArcs(QHash<QString, qreal>()),
+    splinePaths(QHash<qint64, VSplinePath>()), details(QHash<qint64, VDetail>())
 {
     setData(data);
 }
@@ -73,30 +65,21 @@ void VContainer::setData(const VContainer &data)
 {
     base = *data.DataBase();
     points = *data.DataPoints();
-    pointsModeling = *data.DataPointsModeling();
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
     lineAngles = *data.DataLineAngles();
     splines = *data.DataSplines();
-    splinesModeling = *data.DataSplinesModeling();
     lengthSplines = *data.DataLengthSplines();
     arcs = *data.DataArcs();
-    arcsModeling = *data.DataArcsModeling();
     lengthArcs = *data.DataLengthArcs();
     splinePaths = *data.DataSplinePaths();
-    splinePathsModeling = *data.DataSplinePathsModeling();
     details = *data.DataDetails();
 }
 
 VPointF VContainer::GetPoint(qint64 id) const
 {
     return GetObject(points, id);
-}
-
-VPointF VContainer::GetPointModeling(qint64 id) const
-{
-    return GetObject(pointsModeling, id);
 }
 
 template <typename key, typename val>
@@ -153,29 +136,14 @@ VSpline VContainer::GetSpline(qint64 id) const
     return GetObject(splines, id);
 }
 
-VSpline VContainer::GetSplineModeling(qint64 id) const
-{
-    return GetObject(splinesModeling, id);
-}
-
 VArc VContainer::GetArc(qint64 id) const
 {
     return GetObject(arcs, id);
 }
 
-VArc VContainer::GetArcModeling(qint64 id) const
-{
-    return GetObject(arcsModeling, id);
-}
-
 VSplinePath VContainer::GetSplinePath(qint64 id) const
 {
     return GetObject(splinePaths, id);
-}
-
-VSplinePath VContainer::GetSplinePathModeling(qint64 id) const
-{
-    return GetObject(splinePathsModeling, id);
 }
 
 VDetail VContainer::GetDetail(qint64 id) const
@@ -186,11 +154,6 @@ VDetail VContainer::GetDetail(qint64 id) const
 qint64 VContainer::AddPoint(const VPointF &point)
 {
     return AddObject(points, point);
-}
-
-qint64 VContainer::AddPointModeling(const VPointF &point)
-{
-    return AddObject(pointsModeling, point);
 }
 
 qint64 VContainer::AddDetail(const VDetail &detail)
@@ -223,7 +186,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
         {
             case (Tool::NodePoint):
             {
-                VPointF point = GetPointModeling(detail[i].getId());
+                VPointF point = GetPoint(detail[i].getId());
                 points.append(point.toQPointF());
                 if (detail.getSupplement() == true)
                 {
@@ -236,7 +199,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
             break;
             case (Tool::NodeArc):
             {
-                VArc arc = GetArcModeling(detail[i].getId());
+                VArc arc = GetArc(detail[i].getId());
                 qreal len1 = GetLengthContour(points, arc.GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(arc.GetPoints()));
                 if (len1 <= lenReverse)
@@ -259,7 +222,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
             break;
             case (Tool::NodeSpline):
             {
-                VSpline spline = GetSplineModeling(detail[i].getId());
+                VSpline spline = GetSpline(detail[i].getId());
                 qreal len1 = GetLengthContour(points, spline.GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(spline.GetPoints()));
                 if (len1 <= lenReverse)
@@ -283,7 +246,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
             break;
             case (Tool::NodeSplinePath):
             {
-                VSplinePath splinePath = GetSplinePathModeling(detail[i].getId());
+                VSplinePath splinePath = GetSplinePath(detail[i].getId());
                 qreal len1 = GetLengthContour(points, splinePath.GetPathPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath.GetPathPoints()));
                 if (len1 <= lenReverse)
@@ -553,21 +516,6 @@ void VContainer::PrepareDetails(QVector<VItem *> &list) const
     }
 }
 
-qint64 VContainer::PointConvertToModeling(qint64 id)
-{
-    QHashIterator<qint64, VPointF> pModeling(pointsModeling);
-    while (pModeling.hasNext())
-    {
-        pModeling.next();
-        VPointF p = pModeling.value();
-        if(p.getIdObject() == id)
-        {
-            return pModeling.key();
-        }
-    }
-    return 0;
-}
-
 template <typename val>
 void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, const val& point)
 {
@@ -626,10 +574,6 @@ void VContainer::Clear()
     lengthArcs.clear();
     lineAngles.clear();
     details.clear();
-    arcsModeling.clear();
-    pointsModeling.clear();
-    splinePathsModeling.clear();
-    splinesModeling.clear();
     ClearObject();
     CreateManTableIGroup ();
 }
@@ -684,23 +628,13 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
     return 0;
 }
 
-void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId, const Draw::Draws &mode)
+void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId)
 {
-    QString nameLine = GetNameLine(firstPointId, secondPointId, mode);
-    VPointF first;
-    VPointF second;
-    if (mode == Draw::Calculation)
-    {
-        first = GetPoint(firstPointId);
-        second = GetPoint(secondPointId);
-    }
-    else
-    {
-        first = GetPointModeling(firstPointId);
-        second = GetPointModeling(secondPointId);
-    }
+    QString nameLine = GetNameLine(firstPointId, secondPointId);
+    VPointF first = GetPoint(firstPointId);
+    VPointF second = GetPoint(secondPointId);
     AddLengthLine(nameLine, toMM(QLineF(first.toQPointF(), second.toQPointF()).length()));
-    nameLine = GetNameLineAngle(firstPointId, secondPointId, mode);
+    nameLine = GetNameLineAngle(firstPointId, secondPointId);
     AddLineAngle(nameLine, QLineF(first.toQPointF(), second.toQPointF()).angle());
 }
 
@@ -709,29 +643,14 @@ qint64 VContainer::AddSpline(const VSpline &spl)
     return AddObject(splines, spl);
 }
 
-qint64 VContainer::AddSplineModeling(const VSpline &spl)
-{
-    return AddObject(splinesModeling, spl);
-}
-
 qint64 VContainer::AddSplinePath(const VSplinePath &splPath)
 {
     return AddObject(splinePaths, splPath);
 }
 
-qint64 VContainer::AddSplinePathModeling(const VSplinePath &splPath)
-{
-    return AddObject(splinePathsModeling, splPath);
-}
-
 qint64 VContainer::AddArc(const VArc &arc)
 {
     return AddObject(arcs, arc);
-}
-
-qint64 VContainer::AddArcModeling(const VArc &arc)
-{
-    return AddObject(arcsModeling, arc);
 }
 
 template <typename key, typename val>
@@ -742,48 +661,25 @@ qint64 VContainer::AddObject(QHash<key, val> &obj, const val& value)
     return id;
 }
 
-QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
+QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const
 {
-    VPointF first;
-    VPointF second;
-    if (mode == Draw::Calculation)
-    {
-        first = GetPoint(firstPoint);
-        second = GetPoint(secondPoint);
-    }
-    else
-    {
-        first = GetPointModeling(firstPoint);
-        second = GetPointModeling(secondPoint);
-    }
+    VPointF first = GetPoint(firstPoint);
+    VPointF second = GetPoint(secondPoint);
+
     return QString("Line_%1_%2").arg(first.name(), second.name());
 }
 
-QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint, const Draw::Draws &mode) const
+QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const
 {
-    VPointF first;
-    VPointF second;
-    if (mode == Draw::Calculation)
-    {
-        first = GetPoint(firstPoint);
-        second = GetPoint(secondPoint);
-    }
-    else
-    {
-        first = GetPointModeling(firstPoint);
-        second = GetPointModeling(secondPoint);
-    }
+    VPointF first = GetPoint(firstPoint);
+    VPointF second = GetPoint(secondPoint);
+
     return QString("AngleLine_%1_%2").arg(first.name(), second.name());
 }
 
 void VContainer::UpdatePoint(qint64 id, const VPointF &point)
 {
     UpdateObject(points, id, point);
-}
-
-void VContainer::UpdatePointModeling(qint64 id, const VPointF &point)
-{
-    UpdateObject(pointsModeling, id, point);
 }
 
 void VContainer::UpdateDetail(qint64 id, const VDetail &detail)
@@ -796,29 +692,14 @@ void VContainer::UpdateSpline(qint64 id, const VSpline &spl)
     UpdateObject(splines, id, spl);
 }
 
-void VContainer::UpdateSplineModeling(qint64 id, const VSpline &spl)
-{
-    UpdateObject(splinesModeling, id, spl);
-}
-
 void VContainer::UpdateSplinePath(qint64 id, const VSplinePath &splPath)
 {
     UpdateObject(splinePaths, id, splPath);
 }
 
-void VContainer::UpdateSplinePathModeling(qint64 id, const VSplinePath &splPath)
-{
-    UpdateObject(splinePathsModeling, id, splPath);
-}
-
 void VContainer::UpdateArc(qint64 id, const VArc &arc)
 {
     UpdateObject(arcs, id, arc);
-}
-
-void VContainer::UpdateArcModeling(qint64 id, const VArc &arc)
-{
-    UpdateObject(arcsModeling, id, arc);
 }
 
 void VContainer::AddLengthLine(const QString &name, const qreal &value)

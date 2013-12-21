@@ -121,6 +121,7 @@ protected:
     virtual void AddToFile();
     void      RefreshGeometry();
 private:
+    Q_DISABLE_COPY(VToolCutSpline)
     /**
      * @brief formula keep formula of length
      */

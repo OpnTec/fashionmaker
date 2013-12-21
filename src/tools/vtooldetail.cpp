@@ -28,8 +28,6 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
-#include "modelingTools/vmodelingtool.h"
-#include "modelingTools/modelingtools.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -62,60 +60,6 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
                 break;
             case (Tool::NodeSplinePath):
                 InitTool<VNodeSplinePath>(scene, detail[i]);
-                break;
-            case (Tool::AlongLineTool):
-                InitTool<VModelingAlongLine>(scene, detail[i]);
-                break;
-            case (Tool::ArcTool):
-                InitTool<VModelingArc>(scene, detail[i]);
-                break;
-            case (Tool::BisectorTool):
-                InitTool<VModelingBisector>(scene, detail[i]);
-                break;
-            case (Tool::EndLineTool):
-                InitTool<VModelingEndLine>(scene, detail[i]);
-                break;
-            case (Tool::LineIntersectTool):
-                InitTool<VModelingLineIntersect>(scene, detail[i]);
-                break;
-            case (Tool::LineTool):
-                InitTool<VModelingLine>(scene, detail[i]);
-                break;
-            case (Tool::NormalTool):
-                InitTool<VModelingNormal>(scene, detail[i]);
-                break;
-            case (Tool::PointOfContact):
-                InitTool<VModelingPointOfContact>(scene, detail[i]);
-                break;
-            case (Tool::ShoulderPointTool):
-                InitTool<VModelingShoulderPoint>(scene, detail[i]);
-                break;
-            case (Tool::SplinePathTool):
-                InitTool<VModelingSplinePath>(scene, detail[i]);
-                break;
-            case (Tool::SplineTool):
-                InitTool<VModelingSpline>(scene, detail[i]);
-                break;
-            case (Tool::Height):
-                InitTool<VModelingHeight>(scene, detail[i]);
-                break;
-            case (Tool::Triangle):
-                InitTool<VModelingTriangle>(scene, detail[i]);
-                break;
-            case (Tool::PointOfIntersection):
-                InitTool<VModelingPointOfIntersection>(scene, detail[i]);
-                break;
-            case (Tool::CutSplineTool):
-                InitTool<VModelingCutSpline>(scene, detail[i]);
-                break;
-            case (Tool::CutSplinePathTool):
-                InitTool<VModelingCutSpline>(scene, detail[i]);
-                break;
-            case (Tool::SimpleSpline):
-                //No need init this tool. See CutSplineTool.
-                break;
-            case (Tool::SimpleSplinePath):
-                //No need init this tool. See CutSplinePathTool.
                 break;
             default:
                 qWarning()<<"Get wrong tool type. Ignore.";
@@ -153,73 +97,37 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
         {
             case (Tool::NodePoint):
             {
-                VPointF point;
-                if (detail[i].getMode() == Draw::Calculation)
-                {
-                    point = data->GetPoint(detail[i].getId());
-                }
-                else
-                {
-                    point = data->GetPointModeling(detail[i].getId());
-                }
-                id = data->AddPointModeling(point);
-                VNodePoint::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
-                                   Document::FullParse, Tool::FromGui);
+                VPointF point = data->GetPoint(detail[i].getId());
+                id = data->AddPoint(point);
+                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeArc):
             {
-                VArc arc;
-                if (detail[i].getMode() == Draw::Calculation)
-                {
-                    arc = data->GetArc(detail[i].getId());
-                }
-                else
-                {
-                    arc = data->GetArcModeling(detail[i].getId());
-                }
-                id = data->AddArcModeling(arc);
-                VNodeArc::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
-                                 Document::FullParse, Tool::FromGui);
+                VArc arc = data->GetArc(detail[i].getId());
+                id = data->AddArc(arc);
+                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
-                VSpline spline;
-                if (detail[i].getMode() == Draw::Calculation)
-                {
-                    spline = data->GetSpline(detail[i].getId());
-                }
-                else
-                {
-                    spline = data->GetSplineModeling(detail[i].getId());
-                }
-                id = data->AddSplineModeling(spline);
-                VNodeSpline::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
-                                    Document::FullParse, Tool::FromGui);
+                VSpline spline = data->GetSpline(detail[i].getId());
+                id = data->AddSpline(spline);
+                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
-                VSplinePath splinePath;
-                if (detail[i].getMode() == Draw::Calculation)
-                {
-                    splinePath = data->GetSplinePath(detail[i].getId());
-                }
-                else
-                {
-                    splinePath = data->GetSplinePathModeling(detail[i].getId());
-                }
-                id = data->AddSplinePathModeling(splinePath);
-                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), detail[i].getMode(),
-                                        Document::FullParse, Tool::FromGui);
+                VSplinePath splinePath = data->GetSplinePath(detail[i].getId());
+                id = data->AddSplinePath(splinePath);
+                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             default:
                 qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, detail[i].getTypeTool(), Draw::Modeling, NodeDetail::Contour);
+        VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
@@ -351,7 +259,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(getData(), Draw::Modeling));
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(getData()));
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                 dialogDetail.data(), &DialogDetail::ChoosedObject);
         connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
@@ -413,24 +321,6 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node)
     }
     switch (node.getTypeTool())
     {
-        case (Tool::AlongLineTool):
-            AddAttribute(nod, AttrType, QStringLiteral("AlongLineTool"));
-            break;
-        case (Tool::ArcTool):
-            AddAttribute(nod, AttrType, QStringLiteral("ArcTool"));
-            break;
-        case (Tool::BisectorTool):
-            AddAttribute(nod, AttrType, QStringLiteral("BisectorTool"));
-            break;
-        case (Tool::EndLineTool):
-            AddAttribute(nod, AttrType, QStringLiteral("EndLineTool"));
-            break;
-        case (Tool::LineIntersectTool):
-            AddAttribute(nod, AttrType, QStringLiteral("LineIntersectTool"));
-            break;
-        case (Tool::LineTool):
-            AddAttribute(nod, AttrType, QStringLiteral("LineTool"));
-            break;
         case (Tool::NodeArc):
             AddAttribute(nod, AttrType, QStringLiteral("NodeArc"));
             break;
@@ -442,36 +332,6 @@ void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node)
             break;
         case (Tool::NodeSplinePath):
             AddAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
-            break;
-        case (Tool::NormalTool):
-            AddAttribute(nod, AttrType, QStringLiteral("NormalTool"));
-            break;
-        case (Tool::PointOfContact):
-            AddAttribute(nod, AttrType, QStringLiteral("PointOfContact"));
-            break;
-        case (Tool::ShoulderPointTool):
-            AddAttribute(nod, AttrType, QStringLiteral("ShoulderPointTool"));
-            break;
-        case (Tool::SplinePathTool):
-            AddAttribute(nod, AttrType, QStringLiteral("SplinePathTool"));
-            break;
-        case (Tool::SplineTool):
-            AddAttribute(nod, AttrType, QStringLiteral("SplineTool"));
-            break;
-        case (Tool::Height):
-            AddAttribute(nod, AttrType, QStringLiteral("Height"));
-            break;
-        case (Tool::Triangle):
-            AddAttribute(nod, AttrType, QStringLiteral("Triangle"));
-            break;
-        case (Tool::PointOfIntersection):
-            AddAttribute(nod, AttrType, QStringLiteral("PointOfIntersection"));
-            break;
-        case (Tool::CutSplineTool):
-            AddAttribute(nod, AttrType, QStringLiteral("CutSplineTool"));
-            break;
-        case (Tool::CutSplinePathTool):
-            AddAttribute(nod, AttrType, QStringLiteral("CutSplinePathTool"));
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

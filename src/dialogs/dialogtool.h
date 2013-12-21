@@ -57,21 +57,10 @@ public:
                      /**
                       * @brief DialogTool create dialog
                       * @param data container with data
-                      * @param mode mode of creation tool
                       * @param parent parent widget
                       */
-                     DialogTool(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+                     DialogTool(const VContainer *data, QWidget *parent = 0);
     virtual          ~DialogTool() {}
-    /**
-     * @brief getIdDetail return id detail
-     * @return id
-     */
-    inline qint64    getIdDetail() const {return idDetail;}
-    /**
-     * @brief setIdDetail set id detail
-     * @param value id
-     */
-    inline void      setIdDetail(const qint64 &value) {idDetail = value;}
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -262,20 +251,6 @@ protected:
      * @brief radioButtonLengthCurve radio button for lengths of curves variables
      */
     QRadioButton     *radioButtonLengthCurve;
-    /**
-     * @brief idDetail id detail
-     */
-    qint64           idDetail;
-    /**
-     * @brief mode mode
-     */
-    Draw::Draws      mode;
-    /**
-     * @brief CheckObject check if object belongs to detail
-     * @param id id of object (point, arc, spline, spline path)
-     * @return true - belons, false - don't
-     */
-    bool             CheckObject(const qint64 &id);
     /**
      * @brief closeEvent handle when dialog cloded
      * @param event event

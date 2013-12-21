@@ -32,8 +32,8 @@
 
 #include <QPushButton>
 
-DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
+DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -41,10 +41,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, Draw::Draws mode, QWi
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogSplinePath::DialogRejected);
-    if(mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxPoint);
-    }
+
+    FillComboBoxPoints(ui->comboBoxPoint);
 
     path = VSplinePath(data->DataPoints());
 
@@ -81,22 +79,6 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 
 void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxPoint);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
         NewItem(id, 1, 0, 1);
@@ -172,15 +154,7 @@ void DialogSplinePath::KAsm2Changed(qreal d)
 
 void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
 {
-    VPointF point;
-    if (mode == Draw::Calculation)
-    {
-        point = data->GetPoint(id);
-    }
-    else
-    {
-        point = data->GetPointModeling(id);
-    }
+    VPointF point = data->GetPoint(id);
     QListWidgetItem *item = new QListWidgetItem(point.name());
     item->setFont(QFont("Times", 12, QFont::Bold));
     VSplinePoint p(id, kAsm1, angle, kAsm2);
