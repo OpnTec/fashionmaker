@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
+DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
 {
     ui->setupUi(this);
@@ -55,6 +55,7 @@ DialogBisector::DialogBisector(const VContainer *data, Draw::Draws mode, QWidget
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogBisector::DialogRejected);
+
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxPoints(ui->comboBoxThirdPoint);
@@ -83,32 +84,9 @@ DialogBisector::~DialogBisector()
 
 void DialogBisector::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());
@@ -186,8 +164,8 @@ void DialogBisector::DialogAccepted()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->lineEditFormula->text();
-    firstPointId = getCurrentPointId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentPointId(ui->comboBoxSecondPoint);
-    thirdPointId = getCurrentPointId(ui->comboBoxThirdPoint);
+    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
+    thirdPointId = getCurrentObjectId(ui->comboBoxThirdPoint);
     emit DialogClosed(QDialog::Accepted);
 }

@@ -32,7 +32,7 @@
 #include <QPushButton>
 
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
-    :DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogSinglePoint), name(QString()),
+    :DialogTool(data, parent), ui(new Ui::DialogSinglePoint), name(QString()),
     point(QPointF())
 {
     ui->setupUi(this);

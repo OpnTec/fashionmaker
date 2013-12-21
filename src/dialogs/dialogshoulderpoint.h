@@ -46,11 +46,9 @@ public:
                    /**
                     * @brief DialogShoulderPoint create dialog
                     * @param data container with data
-                    * @param mode mode of creation tool
                     * @param parent parent widget
                     */
-                   DialogShoulderPoint(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                       QWidget *parent = 0);
+                   DialogShoulderPoint(const VContainer *data, QWidget *parent = 0);
                    ~DialogShoulderPoint();
     /**
      * @brief getPointName return name of point

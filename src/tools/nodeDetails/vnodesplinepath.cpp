@@ -34,8 +34,8 @@ const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 Draw::Draws typeobject, const Tool::Sources &typeCreation, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline, typeobject), QGraphicsPathItem(parent)
+                                 const Tool::Sources &typeCreation, QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idSpline), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -49,15 +49,14 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 }
 
 void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                             const Draw::Draws &typeobject, const Document::Documents &parse,
-                             const Tool::Sources &typeCreation)
+                             const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     if (parse == Document::FullParse)
     {
-        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeobject, typeCreation);
+        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation);
         Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
-        VSplinePath path = data->GetSplinePathModeling(id);
+        VSplinePath path = data->GetSplinePath(id);
         const QVector<VSplinePoint> *points = path.GetPoint();
         for (qint32 i = 0; i<points->size(); ++i)
         {
@@ -82,14 +81,6 @@ void VNodeSplinePath::AddToFile()
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
-    if (typeobject == Draw::Calculation)
-    {
-        AddAttribute(domElement, AttrTypeObject, TypeObjectCalculation);
-    }
-    else
-    {
-        AddAttribute(domElement, AttrTypeObject, TypeObjectModeling);
-    }
 
     AddToModeling(domElement);
 }
@@ -117,7 +108,7 @@ void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodeSplinePath::RefreshGeometry()
 {
-    VSplinePath splPath = VAbstractTool::data.GetSplinePathModeling(id);
+    VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
     QPainterPath path;
     path.addPath(splPath.GetPath());
     path.setFillRule( Qt::WindingFill );

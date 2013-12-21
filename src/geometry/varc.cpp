@@ -33,12 +33,12 @@ class QRectF;
 
 VArc::VArc ()
     : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-      center(0), points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}
+      center(0), points(QHash<qint64, VPointF>()), idObject(0), _name(QString()){}
 
 VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-            qreal f1, QString formulaF1, qreal f2, QString formulaF2, Draw::Draws mode, qint64 idObject)
+            qreal f1, QString formulaF1, qreal f2, QString formulaF2, qint64 idObject)
     : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-      center(center), points(*points), mode(mode), idObject(idObject), _name(QString())
+      center(center), points(*points), idObject(idObject), _name(QString())
 {
     /**
      * @todo Change name of arc in formula. Name now not unique.
@@ -49,8 +49,7 @@ VArc::VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, Q
 VArc::VArc(const VArc &arc)
     : f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
-    center(arc.GetCenter()), points(arc.GetDataPoints()), mode(arc.getMode()),
-    idObject(arc.getIdObject()), _name(arc.name()){}
+    center(arc.GetCenter()), points(arc.GetDataPoints()), idObject(arc.getIdObject()), _name(arc.name()){}
 
 VArc &VArc::operator =(const VArc &arc)
 {
@@ -62,7 +61,6 @@ VArc &VArc::operator =(const VArc &arc)
     this->radius = arc.GetRadius();
     this->formulaRadius = arc.GetFormulaRadius();
     this->center = arc.GetCenter();
-    this->mode = arc.getMode();
     this->idObject = arc.getIdObject();
     this->_name = arc.name();
     return *this;

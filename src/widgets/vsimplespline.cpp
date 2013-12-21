@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractnode.cpp
+ **  @file   vsimplespline.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,49 +26,55 @@
  **
  *************************************************************************/
 
-#include "vabstractnode.h"
-#include <QDebug>
+#include "vsimplespline.h"
+#include "../options.h"
 
-const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
-
-VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, QObject *parent)
-    : VAbstractTool(doc, data, id, parent), idNode(idNode)
+VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
+    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
-    _referens = 0;
-}
-
-void VAbstractNode::AddToModeling(const QDomElement &domElement)
-{
-    QDomElement modelingElement;
-    bool ok = doc->GetActivModelingElement(modelingElement);
-    if (ok)
+    if(factor == 0)
     {
-        modelingElement.appendChild(domElement);
+        setPen(QPen(Qt::black, widthHairLine));
     }
     else
     {
-        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
+        setPen(QPen(Qt::black, widthHairLine/ *factor));
     }
-    emit toolhaveChange();
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setAcceptHoverEvents(true);
 }
 
-void VAbstractNode::decrementReferens()
+void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (_referens > 0)
+    if (event->button() == Qt::LeftButton)
     {
-        --_referens;
+        emit Choosed(id);
     }
-    if (_referens <= 0)
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    if(factor == 0)
     {
-        doc->DecrementReferens(idNode);
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                element.removeChild(domElement);
-            }
-        }
+        this->setPen(QPen(*currentColor, widthMainLine));
+    }
+    else
+    {
+        this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+    }
+}
+
+void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    if(factor == 0)
+    {
+        this->setPen(QPen(*currentColor, widthHairLine));
+    }
+    else
+    {
+        this->setPen(QPen(*currentColor, widthHairLine/ *factor));
     }
 }

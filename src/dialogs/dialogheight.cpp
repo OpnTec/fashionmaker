@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogHeight::DialogHeight(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
+DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)
 {
     ui->setupUi(this);
@@ -43,6 +43,7 @@ DialogHeight::DialogHeight(const VContainer *data, Draw::Draws mode, QWidget *pa
     CheckState();
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogHeight::DialogRejected);
+
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
@@ -87,32 +88,9 @@ void DialogHeight::setP2LineId(const qint64 &value, const qint64 &id)
 
 void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         switch (number)
         {
             case (0):
@@ -144,8 +122,8 @@ void DialogHeight::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    basePointId = getCurrentPointId(ui->comboBoxBasePoint);
-    p1LineId = getCurrentPointId(ui->comboBoxP1Line);
-    p2LineId = getCurrentPointId(ui->comboBoxP2Line);
+    basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
+    p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
+    p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
     emit DialogClosed(QDialog::Accepted);
 }

@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
     p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true)
 {
     ui->setupUi(this);
@@ -43,6 +43,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, Draw::Draws mod
     flagName = false;
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);
+
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);
     FillComboBoxPoints(ui->comboBoxP1Line2);
@@ -58,32 +59,9 @@ DialogLineIntersect::~DialogLineIntersect()
 
 void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxP1Line1->findText(point.name());
@@ -155,10 +133,10 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
 void DialogLineIntersect::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
-    p1Line1 = getCurrentPointId(ui->comboBoxP1Line1);
-    p2Line1 = getCurrentPointId(ui->comboBoxP2Line1);
-    p1Line2 = getCurrentPointId(ui->comboBoxP1Line2);
-    p2Line2 = getCurrentPointId(ui->comboBoxP2Line2);
+    p1Line1 = getCurrentObjectId(ui->comboBoxP1Line1);
+    p2Line1 = getCurrentObjectId(ui->comboBoxP2Line1);
+    p1Line2 = getCurrentObjectId(ui->comboBoxP1Line2);
+    p2Line2 = getCurrentObjectId(ui->comboBoxP2Line2);
     emit DialogClosed(QDialog::Accepted);
 }
 

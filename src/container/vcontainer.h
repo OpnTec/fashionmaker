@@ -70,12 +70,6 @@ public:
      */
     VPointF             GetPoint(qint64 id) const;
     /**
-     * @brief GetPointModeling return a point modeling by id
-     * @param id id of point modeling
-     * @return point modeling
-     */
-    VPointF             GetPointModeling(qint64 id) const;
-    /**
      * @brief GetStandartTableCell return standart table row by name
      * @param name name of standart table row
      * @return row of standart table
@@ -118,35 +112,17 @@ public:
      */
     VSpline             GetSpline(qint64 id) const;
     /**
-     * @brief GetSplineModeling return spline modeling by id
-     * @param id id of spline modeling
-     * @return spline modeling
-     */
-    VSpline             GetSplineModeling(qint64 id) const;
-    /**
      * @brief GetArc return arc by id
      * @param id id of arc
      * @return arc
      */
     VArc                GetArc(qint64 id) const;
     /**
-     * @brief GetArcModeling return arc modeling by id
-     * @param id id of arc modeling
-     * @return arc modeling
-     */
-    VArc                GetArcModeling(qint64 id) const;
-    /**
      * @brief GetSplinePath return spline path by id
      * @param id id of spline path
      * @return spline path
      */
     VSplinePath         GetSplinePath(qint64 id) const;
-    /**
-     * @brief GetSplinePathModeling return spline path modeling by id
-     * @param id id of spline modeling path
-     * @return spline modeling path
-     */
-    VSplinePath         GetSplinePathModeling(qint64 id) const;
     /**
      * @brief GetDetail return detail by id
      * @param id id of detail
@@ -164,12 +140,6 @@ public:
      * @return return id of new point in container
      */
     qint64              AddPoint(const VPointF& point);
-    /**
-     * @brief AddPointModeling add new point modeling to container
-     * @param point new point modeling
-     * @return return id of new point modeling in container
-     */
-    qint64              AddPointModeling(const VPointF& point);
     /**
      * @brief AddDetail add new detail to container
      * @param detail new detail
@@ -225,8 +195,7 @@ public:
      * @param secondPointId id of second point of line
      * @param mode mode of line
      */
-    void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId,
-                                const Draw::Draws &mode = Draw::Calculation);
+    void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
     /**
      * @brief AddSpline add spline to container
      * @param spl new spline
@@ -234,23 +203,11 @@ public:
      */
     qint64              AddSpline(const VSpline& spl);
     /**
-     * @brief AddSplineModeling add spline modeling to container
-     * @param spl new spline modeling
-     * @return id of spline modeling in container
-     */
-    qint64              AddSplineModeling(const VSpline& spl);
-    /**
      * @brief AddSplinePath add spline path to container
      * @param splPath new spline path
      * @return id of spline path in container
      */
     qint64              AddSplinePath(const VSplinePath& splPath);
-    /**
-     * @brief AddSplinePathModeling add spline path modeling to container
-     * @param splPath new spline path
-     * @return id of spline path in container
-     */
-    qint64              AddSplinePathModeling(const VSplinePath& splPath);
     /**
      * @brief AddArc add arc to container
      * @param arc new arc
@@ -267,32 +224,22 @@ public:
      * @brief GetNameLine return name of line
      * @param firstPoint id of first point of line
      * @param secondPoint id of second point of line
-     * @param mode mode of line
      * @return name of line
      */
-    QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint,
-                                    const Draw::Draws &mode = Draw::Calculation) const;
+    QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
     /**
      * @brief GetNameLineAngle return name of line angle
      * @param firstPoint id of first point of line
      * @param secondPoint id of second point of line
-     * @param mode mode of line
      * @return name of angle of line
      */
-    QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint,
-                                         const Draw::Draws &mode = Draw::Calculation) const;
+    QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const;
     /**
      * @brief UpdatePoint update point by id
      * @param id id of existing point
      * @param point point
      */
     void                UpdatePoint(qint64 id, const VPointF& point);
-    /**
-     * @brief UpdatePointModeling update point modeling by id
-     * @param id id of existing point modeling
-     * @param point point modeling
-     */
-    void                UpdatePointModeling(qint64 id, const VPointF& point);
     /**
      * @brief UpdateDetail update detail by id
      * @param id id of existing detail
@@ -306,23 +253,11 @@ public:
      */
     void                UpdateSpline(qint64 id, const VSpline& spl);
     /**
-     * @brief UpdateSplineModeling update spline modeling by id
-     * @param id id of existing spline modeling
-     * @param spl spline modeling
-     */
-    void                UpdateSplineModeling(qint64 id, const VSpline& spl);
-    /**
      * @brief UpdateSplinePath update spline path by id
      * @param id id of existing spline path
      * @param splPath spline path
      */
     void                UpdateSplinePath(qint64 id, const VSplinePath& splPath);
-    /**
-     * @brief UpdateSplinePathModeling update spline path modeling by id
-     * @param id id of existing spline path modeling
-     * @param splPath spline path modeling
-     */
-    void                UpdateSplinePathModeling(qint64 id, const VSplinePath& splPath);
     /**
      * @brief UpdateArc update arc by id
      * @param id id of existing arc
@@ -438,30 +373,15 @@ public:
      */
     inline const QHash<qint64, VPointF> *DataPoints() const {return &points;}
     /**
-     * @brief data container with dataPointsModeling return container of points modeling
-     * @return pointer on container of points modeling
-     */
-    inline const QHash<qint64, VPointF> *DataPointsModeling() const {return &pointsModeling;}
-    /**
      * @brief data container with dataSplines return container of splines
      * @return pointer on container of splines
      */
     inline const QHash<qint64, VSpline> *DataSplines() const {return &splines;}
     /**
-     * @brief data container with dataSplinesModeling return container of splines modeling
-     * @return pointer on container of splines modeling
-     */
-    inline const QHash<qint64, VSpline> *DataSplinesModeling() const {return &splinesModeling;}
-    /**
      * @brief data container with dataArcs return container of arcs
      * @return pointer on container of arcs
      */
     inline const QHash<qint64, VArc>    *DataArcs() const {return &arcs;}
-    /**
-     * @brief data container with dataArcsModeling return container of arcs modeling
-     * @return pointer on container of arcs modeling
-     */
-    inline const QHash<qint64, VArc>    *DataArcsModeling() const {return &arcsModeling;}
     /**
      * @brief data container with dataBase return container of data
      * @return pointer on container of base data
@@ -502,11 +422,6 @@ public:
      * @return pointer on container of spline paths
      */
     inline const QHash<qint64, VSplinePath> *DataSplinePaths() const {return &splinePaths;}
-    /**
-     * @brief data container with dataSplinePathsModeling return container of spline paths modeling
-     * @return pointer on container of spline paths modeling
-     */
-    inline const QHash<qint64, VSplinePath> *DataSplinePathsModeling() const {return &splinePathsModeling;}
     /**
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
@@ -587,10 +502,6 @@ private:
      */
     QHash<qint64, VPointF> points;
     /**
-     * @brief pointsModeling container of points modeling
-     */
-    QHash<qint64, VPointF> pointsModeling;
-    /**
      * @brief standartTable container of standart table rows
      */
     QHash<QString, VStandartTableRow> standartTable;
@@ -611,10 +522,6 @@ private:
      */
     QHash<qint64, VSpline> splines;
     /**
-     * @brief splinesModeling container of splines modeling
-     */
-    QHash<qint64, VSpline> splinesModeling;
-    /**
      * @brief lengthSplines container of splines length
      */
     QHash<QString, qreal>  lengthSplines;
@@ -623,10 +530,6 @@ private:
      */
     QHash<qint64, VArc>    arcs;
     /**
-     * @brief arcsModeling container of arcs modeling
-     */
-    QHash<qint64, VArc>    arcsModeling;
-    /**
      * @brief lengthArcs container of arcs length
      */
     QHash<QString, qreal>  lengthArcs;
@@ -634,10 +537,6 @@ private:
      * @brief splinePaths container of spline paths
      */
     QHash<qint64, VSplinePath> splinePaths;
-    /**
-     * @brief splinePathsModeling container of spline paths modeling
-     */
-    QHash<qint64, VSplinePath> splinePathsModeling;
     /**
      * @brief details container of details
      */

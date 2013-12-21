@@ -351,7 +351,7 @@ private:
      * @param mode
      */
     void           ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString &type, const Draw::Draws &mode);
+                                     const Document::Documents &parse, const QString &type);
     /**
      * @brief ParseLineElement
      * @param scene
@@ -360,7 +360,7 @@ private:
      * @param mode
      */
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                    const Document::Documents &parse, const Draw::Draws &mode);
+                                    const Document::Documents &parse);
     /**
      * @brief ParseSplineElement
      * @param scene
@@ -370,7 +370,7 @@ private:
      * @param mode
      */
     void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                      const Document::Documents &parse, const QString& type, const Draw::Draws &mode);
+                                      const Document::Documents &parse, const QString& type);
     /**
      * @brief ParseArcElement
      * @param scene
@@ -380,7 +380,7 @@ private:
      * @param mode
      */
     void           ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                   const Document::Documents &parse, const QString& type, const Draw::Draws &mode);
+                                   const Document::Documents &parse, const QString& type);
     /**
      * @brief ParseIncrementsElement
      * @param node

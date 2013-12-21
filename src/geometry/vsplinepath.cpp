@@ -30,15 +30,14 @@
 #include "../exception/vexception.h"
 
 VSplinePath::VSplinePath()
-    : path(QVector<VSplinePoint>()), kCurve(1), mode(Draw::Calculation), points(QHash<qint64, VPointF>()), idObject(0),
-      _name(QString()){}
+    : path(QVector<VSplinePoint>()), kCurve(1), points(QHash<qint64, VPointF>()), idObject(0), _name(QString()){}
 
-VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, Draw::Draws mode, qint64 idObject)
-    : path(QVector<VSplinePoint>()), kCurve(kCurve), mode(mode), points(*points), idObject(idObject), _name(QString())
+VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, qint64 idObject)
+    : path(QVector<VSplinePoint>()), kCurve(kCurve), points(*points), idObject(idObject), _name(QString())
 {}
 
 VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), mode(splPath.getMode()), points(splPath.GetDataPoints()),
+    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), points(splPath.GetDataPoints()),
     idObject(splPath.getIdObject()), _name(splPath.name()){}
 
 void VSplinePath::append(const VSplinePoint &point)
@@ -158,7 +157,6 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
-    this->mode = path.getMode();
     this->points = path.GetDataPoints();
     this->idObject = path.getIdObject();
     this->_name = path.name();
@@ -169,3 +167,49 @@ VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
 {
     return path[indx];
 }
+
+QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
+                                   QPointF &spl2p2, QPointF &spl2p3) const
+{
+    if(Count() < 2)
+    {
+        throw VException(tr("Can't cut spline path with one point"));
+    }
+
+    //Always need return two spline paths, so we must correct wrong length.
+    qreal fullLength = GetLength();
+    if(length < fullLength * 0.02)
+    {
+        length = fullLength * 0.02;
+    }
+    else if ( length > fullLength * 0.98)
+    {
+        length = fullLength * 0.98;
+    }
+
+    fullLength = 0;
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
+        VSpline spl = VSpline(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
+                path[i-1].KAsm2(), path[i].KAsm1(), kCurve);
+        fullLength += spl.GetLength();
+        if(fullLength > length)
+        {
+            p1 = i-1;
+            p2 = i;
+            return spl.CutSpline(length - (fullLength - spl.GetLength()), spl1p2, spl1p3, spl2p2, spl2p3);
+        }
+    }
+    return QPointF();
+}
+
+QHash<qint64, VPointF> VSplinePath::getPoints() const
+{
+    return points;
+}
+
+void VSplinePath::setPoints(const QHash<qint64, VPointF> *value)
+{
+    points = *value;
+}
+

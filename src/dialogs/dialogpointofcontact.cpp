@@ -30,8 +30,8 @@
 
 #include <QPushButton>
 
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0)
 {
     ui.setupUi(this);
@@ -54,6 +54,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
     CheckState();
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogPointOfContact::DialogRejected);
+
     FillComboBoxPoints(ui.comboBoxCenter);
     FillComboBoxPoints(ui.comboBoxFirstPoint);
     FillComboBoxPoints(ui.comboBoxSecondPoint);
@@ -76,32 +77,9 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, Draw::Draws m
 
 void DialogPointOfContact::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui.comboBoxFirstPoint->findText(point.name());
@@ -145,9 +123,9 @@ void DialogPointOfContact::DialogAccepted()
 {
     pointName = ui.lineEditNamePoint->text();
     radius = ui.lineEditFormula->text();
-    center = getCurrentPointId(ui.comboBoxCenter);
-    firstPoint = getCurrentPointId(ui.comboBoxFirstPoint);
-    secondPoint = getCurrentPointId(ui.comboBoxSecondPoint);
+    center = getCurrentObjectId(ui.comboBoxCenter);
+    firstPoint = getCurrentObjectId(ui.comboBoxFirstPoint);
+    secondPoint = getCurrentObjectId(ui.comboBoxSecondPoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

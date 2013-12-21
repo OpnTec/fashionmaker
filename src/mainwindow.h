@@ -36,7 +36,6 @@
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/drawTools/drawtools.h"
-#include "tools/modelingTools/modelingtools.h"
 #include "xml/vdomdocument.h"
 
 namespace Ui
@@ -189,6 +188,11 @@ public slots:
      */
     void               ToolSpline(bool checked);
     /**
+     * @brief ToolCutSpline handler tool CutSpline
+     * @param checked true - button is checked
+     */
+    void               ToolCutSpline(bool checked);
+    /**
      * @brief ToolArc
      * @param checked
      */
@@ -198,6 +202,11 @@ public slots:
      * @param checked
      */
     void               ToolSplinePath(bool checked);
+    /**
+     * @brief ToolCutSplinePath handler tool CutSplinePath
+     * @param checked true - button is checked
+     */
+    void               ToolCutSplinePath(bool checked);
     /**
      * @brief ToolPointOfContact
      * @param checked
@@ -274,6 +283,11 @@ public slots:
      */
     void               ClosedDialogSplinePath(int result);
     /**
+     * @brief ClosedDialogCutSplinePath handler close event tool CutSplinePath
+     * @param result result of working of dialog
+     */
+    void               ClosedDialogCutSplinePath(int result);
+    /**
      * @brief ClosedDialogPointOfContact
      * @param result
      */
@@ -298,6 +312,11 @@ public slots:
      * @param result
      */
     void               ClosedDialogPointOfIntersection(int result);
+    /**
+     * @brief ClosedDialogCutSpline handler close event tool CutSpline
+     * @param result result of working of dialog
+     */
+    void               ClosedDialogCutSpline(int result);
     /**
      * @brief About
      */
@@ -445,6 +464,14 @@ private:
      */
     QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
     /**
+     * @brief dialogCutSpline pointer to the dialog tool cut spline
+     */
+    QSharedPointer<DialogCutSpline>           dialogCutSpline;
+    /**
+     * @brief dialogCutSplinePath pointer to the dialog tool cut spline path
+     */
+    QSharedPointer<DialogCutSplinePath>       dialogCutSplinePath;
+    /**
      * @brief dialogHistory
      */
     DialogHistory      *dialogHistory;
@@ -527,7 +554,7 @@ private:
      */
     void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
                                        const qint64 &idDetail);
-    template <typename DrawTool, typename ModelingTool, typename Dialog>
+    template <typename DrawTool, typename Dialog>
     /**
      * @brief ClosedDialog
      * @param dialog

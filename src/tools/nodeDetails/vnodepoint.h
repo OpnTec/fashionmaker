@@ -45,11 +45,10 @@ public:
                   * @param data
                   * @param id
                   * @param idPoint
-                  * @param typeobject
                   * @param typeCreation
                   * @param parent
                   */
-                 VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, Draw::Draws typeobject,
+                 VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                             const Tool::Sources &typeCreation, QGraphicsItem * parent = 0 );
     /**
      * @brief Create
@@ -57,11 +56,10 @@ public:
      * @param data
      * @param id
      * @param idPoint
-     * @param typeobject
      * @param parse
      * @param typeCreation
      */
-    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint, const Draw::Draws &typeobject,
+    static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief TagName

@@ -44,37 +44,19 @@ public:
                   * @param data
                   * @param id
                   * @param idNode
-                  * @param typeobject
                   * @param parent
                   */
-                 VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode,
-                               Draw::Draws typeobject, QObject *parent = 0 );
+                 VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, QObject *parent = 0 );
     virtual      ~VAbstractNode() {}
     /**
      * @brief AttrIdObject
      */
     static const QString AttrIdObject;
-    /**
-     * @brief AttrTypeObject
-     */
-    static const QString AttrTypeObject;
-    /**
-     * @brief TypeObjectCalculation
-     */
-    static const QString TypeObjectCalculation;
-    /**
-     * @brief TypeObjectModeling
-     */
-    static const QString TypeObjectModeling;
 protected:
     /**
      * @brief idNode
      */
     qint64       idNode;
-    /**
-     * @brief typeobject
-     */
-    Draw::Draws  typeobject;
     /**
      * @brief AddToModeling
      * @param domElement

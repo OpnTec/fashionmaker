@@ -40,39 +40,41 @@ class QString;
 #define M_2PI   6.28318530717958647692528676655900576
 
 /**
- * @brief VSpline клас, що реалізує сплайн.
+ * @brief VSpline class that implements the spline.
  */
 class VSpline
 {
 public:
-                   VSpline();
-                     /**
-                      * @brief VSpline конструктор.
-                      * @param spline сплайн з якого копіюємо.
-                      */
-                   VSpline (const VSpline &spline );
-                     /**
-                      * @brief VSpline конструктор.
-                      * @param p1 початкова точка сплайна.
-                      * @param p4 кінцева точка сплайна.
-                      * @param angle1 кут в градусах першої напрямної.
-                      * @param angle2 кут в градусах другої напрямної.
-                      * @param kCurve коефіцієнт кривизни сплайна.
-                      * @param kAsm1 коефіцієнт довжини першої напрямної.
-                      * @param kAsm2 коефіцієнт довжини другої напрямної.
-                      */
-                   VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                            qreal kAsm1, qreal kAsm2, qreal kCurve, Draw::Draws mode = Draw::Calculation,
-                            qint64 idObject = 0);
-                     /**
-                      * @brief VSpline конструктор.
-                      * @param p1 початкова точка сплайну.
-                      * @param p2 перша контролююча точка сплайну.
-                      * @param p3 друга контролююча точка сплайну.
-                      * @param p4 кінцева точка сплайну.
-                      */
-                   VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                            qreal kCurve, Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+    /**
+     * @brief VSpline default constructor
+     */
+    VSpline();
+    /**
+     * @brief VSpline constructor.
+     * @param spline spline from which the copy.
+     */
+    VSpline (const VSpline &spline );
+    /**
+     * @brief VSpline constructor.
+     * @param p1 початкова точка сплайна.
+     * @param p4 кінцева точка сплайна.
+     * @param angle1 кут в градусах першої напрямної.
+     * @param angle2 кут в градусах другої напрямної.
+     * @param kCurve коефіцієнт кривизни сплайна.
+     * @param kAsm1 коефіцієнт довжини першої напрямної.
+     * @param kAsm2 коефіцієнт довжини другої напрямної.
+     */
+    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1,
+             qreal kAsm2, qreal kCurve, qint64 idObject = 0);
+    /**
+     * @brief VSpline конструктор.
+     * @param p1 початкова точка сплайну.
+     * @param p2 перша контролююча точка сплайну.
+     * @param p3 друга контролююча точка сплайну.
+     * @param p4 кінцева точка сплайну.
+     */
+    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
+             qreal kCurve, qint64 idObject = 0);
     /**
      * @brief ModifiSpl модифікує сплайн.
      * @param p1 початкова точка сплайну.
@@ -84,7 +86,7 @@ public:
      * @param kAsm2 коефіцієнт довжини другої напрямної.
      */
     void           ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
-                                 qreal kCurve);
+                               qreal kCurve);
     /**
      * @brief ModifiSpl модифікує сплайн.
      * @param p1 початкова точка сплайну.
@@ -94,17 +96,17 @@ public:
      */
     void           ModifiSpl (const qint64 &p1, const QPointF &p2, const QPointF &p3, const qint64 &p4,
                               const qreal &kCurve);
-    /**
-     * @brief RotationSpl поворот сплайна навколо точки на кут в градусах проти годиникової стрілки.
-     * @param pRotate точка навколо якої повертаємо.
-     * @param angle кут в градусах.
-     */
+//    /**
+//     * @brief RotationSpl поворот сплайна навколо точки на кут в градусах проти годиникової стрілки.
+//     * @param pRotate точка навколо якої повертаємо.
+//     * @param angle кут в градусах.
+//     */
 //    void         RotationSpl ( QPointF pRotate, qreal angle );
-    /**
-     * @brief BiasSpl зміщує сплайн.
-     * @param mx зміщення по х координаті.
-     * @param my зміщення по у координаті.
-     */
+//    /**
+//     * @brief BiasSpl зміщує сплайн.
+//     * @param mx зміщення по х координаті.
+//     * @param my зміщення по у координаті.
+//     */
 //    void         BiasSpl ( qreal mx, qreal my );
     /**
      * @brief GetP1 повертає першу точку сплайну.
@@ -183,13 +185,18 @@ public:
      * @return результат перевірки.
      */
     QLineF::IntersectType CrossingSplLine(const QLineF &line, QPointF *intersectionPoint ) const;
+    qreal           LengthT(qreal t) const;
     /**
-     * @brief CutSpline розрізає сплайн.
-     * @param length дожина першого сплайну.
-     * @param curFir перший сплайн.
-     * @param curSec другий сплайн.
+     * @brief CutSpline cut spline. GetPointP1() of base spline will return first point for first spline, GetPointP4()
+     * of base spline will return forth point of second spline.
+     * @param length length first spline
+     * @param spl1p2 second point of first spline
+     * @param spl1p3 third point of first spline
+     * @param spl2p2 second point of second spline
+     * @param spl2p3 third point of second spline
+     * @return point of cutting. This point is forth point of first spline and first point of second spline.
      */
-//    void         CutSpline ( qreal length, VSpline* curFir, VSpline* curSec ) const;
+    QPointF         CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     /**
      * @brief CutSpline розрізає сплайн.
      * @param point точка що ділить сплайн.
@@ -218,16 +225,6 @@ public:
      * @param Pmirror точка відносно якої відбувається вертикальне дзеркалення сплайну.
      */
 //    void         Mirror(const QPointF Pmirror);
-    /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void    setMode(const Draw::Draws &value) {mode = value;}
     /**
      * @brief SplinePoints
      * @param p1
@@ -318,10 +315,6 @@ private:
      * @brief points
      */
     QHash<qint64, VPointF> points;
-    /**
-     * @brief mode
-     */
-    Draw::Draws    mode;
     /**
      * @brief idObject
      */

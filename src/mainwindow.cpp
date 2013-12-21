@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogDetail(QSharedPointer<DialogDetail>()), dialogHeight(QSharedPointer<DialogHeight>()),
     dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
+    dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
     dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation)
 {
@@ -104,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
     connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
     connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
+    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
+    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
 
     data = new VContainer;
 
@@ -248,7 +251,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
         helpLabel->setText(toolTip);
-        dialog = QSharedPointer<Dialog>(new Dialog(data, mode));
+        dialog = QSharedPointer<Dialog>(new Dialog(data));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
         connect(dialog.data(), &Dialog::ToolTip, this, &MainWindow::ShowToolTip);
@@ -268,25 +271,18 @@ template <typename T>
 void MainWindow::AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool, const qint64 &idDetail)
 {
     QHash<qint64, VDataTool*>* tools = doc->getTools();
+    Q_ASSERT(tools != 0);
     VToolDetail *det = qobject_cast<VToolDetail*>(tools->value(idDetail));
     Q_ASSERT(det != 0);
     det->AddTool(tool, id, typeTool);
 }
 
-template <typename DrawTool, typename ModelingTool, typename Dialog>
+template <typename DrawTool,  typename Dialog>
 void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result)
 {
     if (result == QDialog::Accepted)
     {
-        if (mode == Draw::Calculation)
-        {
-            DrawTool::Create(dialog, currentScene, doc, data);
-        }
-        else
-        {
-            ModelingTool *endLine = ModelingTool::Create(dialog, doc, data);
-            AddToolToDetail(endLine, endLine->getId(), tool, dialog->getIdDetail());
-        }
+        DrawTool::Create(dialog, currentScene, doc, data);
     }
     ArrowTool();
 }
@@ -299,7 +295,7 @@ void MainWindow::ToolEndLine(bool checked)
 
 void MainWindow::ClosedDialogEndLine(int result)
 {
-    ClosedDialog<VToolEndLine, VModelingEndLine>(dialogEndLine, result);
+    ClosedDialog<VToolEndLine>(dialogEndLine, result);
 }
 
 void MainWindow::ToolLine(bool checked)
@@ -310,7 +306,7 @@ void MainWindow::ToolLine(bool checked)
 
 void MainWindow::ClosedDialogLine(int result)
 {
-    ClosedDialog<VToolLine, VModelingLine>(dialogLine, result);
+    ClosedDialog<VToolLine>(dialogLine, result);
 }
 
 void MainWindow::ToolAlongLine(bool checked)
@@ -321,7 +317,7 @@ void MainWindow::ToolAlongLine(bool checked)
 
 void MainWindow::ClosedDialogAlongLine(int result)
 {
-    ClosedDialog<VToolAlongLine, VModelingAlongLine>(dialogAlongLine, result);
+    ClosedDialog<VToolAlongLine>(dialogAlongLine, result);
 }
 
 void MainWindow::ToolShoulderPoint(bool checked)
@@ -333,7 +329,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
 
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
-    ClosedDialog<VToolShoulderPoint, VModelingShoulderPoint>(dialogShoulderPoint, result);
+    ClosedDialog<VToolShoulderPoint>(dialogShoulderPoint, result);
 }
 
 void MainWindow::ToolNormal(bool checked)
@@ -344,7 +340,7 @@ void MainWindow::ToolNormal(bool checked)
 
 void MainWindow::ClosedDialogNormal(int result)
 {
-    ClosedDialog<VToolNormal, VModelingNormal>(dialogNormal, result);
+    ClosedDialog<VToolNormal>(dialogNormal, result);
 }
 
 void MainWindow::ToolBisector(bool checked)
@@ -355,7 +351,7 @@ void MainWindow::ToolBisector(bool checked)
 
 void MainWindow::ClosedDialogBisector(int result)
 {
-    ClosedDialog<VToolBisector, VModelingBisector>(dialogBisector, result);
+    ClosedDialog<VToolBisector>(dialogBisector, result);
 }
 
 void MainWindow::ToolLineIntersect(bool checked)
@@ -367,7 +363,7 @@ void MainWindow::ToolLineIntersect(bool checked)
 
 void MainWindow::ClosedDialogLineIntersect(int result)
 {
-    ClosedDialog<VToolLineIntersect, VModelingLineIntersect>(dialogLineIntersect, result);
+    ClosedDialog<VToolLineIntersect>(dialogLineIntersect, result);
 }
 
 void MainWindow::ToolSpline(bool checked)
@@ -378,7 +374,18 @@ void MainWindow::ToolSpline(bool checked)
 
 void MainWindow::ClosedDialogSpline(int result)
 {
-    ClosedDialog<VToolSpline, VModelingSpline>(dialogSpline, result);
+    ClosedDialog<VToolSpline>(dialogSpline, result);
+}
+
+void MainWindow::ToolCutSpline(bool checked)
+{
+    SetToolButton(checked, Tool::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
+                  tr("Select simple curve"), dialogCutSpline, &MainWindow::ClosedDialogCutSpline);
+}
+
+void MainWindow::ClosedDialogCutSpline(int result)
+{
+    ClosedDialog<VToolCutSpline>(dialogCutSpline, result);
 }
 
 void MainWindow::ToolArc(bool checked)
@@ -389,19 +396,29 @@ void MainWindow::ToolArc(bool checked)
 
 void MainWindow::ClosedDialogArc(int result)
 {
-    ClosedDialog<VToolArc, VModelingArc>(dialogArc, result);
+    ClosedDialog<VToolArc>(dialogArc, result);
 }
 
 void MainWindow::ToolSplinePath(bool checked)
 {
     SetToolButton(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
-                  tr("Select point of curve path"), dialogSplinePath,
-                  &MainWindow::ClosedDialogSplinePath);
+                  tr("Select point of curve path"), dialogSplinePath, &MainWindow::ClosedDialogSplinePath);
 }
 
 void MainWindow::ClosedDialogSplinePath(int result)
 {
-    ClosedDialog<VToolSplinePath, VModelingSplinePath>(dialogSplinePath, result);
+    ClosedDialog<VToolSplinePath>(dialogSplinePath, result);
+}
+
+void MainWindow::ToolCutSplinePath(bool checked)
+{
+    SetToolButton(checked, Tool::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
+                  tr("Select curve path"), dialogCutSplinePath, &MainWindow::ClosedDialogCutSplinePath);
+}
+
+void MainWindow::ClosedDialogCutSplinePath(int result)
+{
+    ClosedDialog<VToolCutSplinePath>(dialogCutSplinePath, result);
 }
 
 void MainWindow::ToolPointOfContact(bool checked)
@@ -413,7 +430,7 @@ void MainWindow::ToolPointOfContact(bool checked)
 
 void MainWindow::ClosedDialogPointOfContact(int result)
 {
-    ClosedDialog<VToolPointOfContact, VModelingPointOfContact>(dialogPointOfContact, result);
+    ClosedDialog<VToolPointOfContact>(dialogPointOfContact, result);
 }
 
 void MainWindow::ToolDetail(bool checked)
@@ -426,7 +443,7 @@ void MainWindow::ToolDetail(bool checked)
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
         helpLabel->setText(tr("Select points, arcs, curves clockwise."));
-        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data, mode));
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogDetail.data(),
                 &DialogDetail::ChoosedObject);
         connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &MainWindow::ClosedDialogDetail);
@@ -458,7 +475,7 @@ void MainWindow::ToolHeight(bool checked)
 
 void MainWindow::ClosedDialogHeight(int result)
 {
-    ClosedDialog<VToolHeight, VModelingHeight>(dialogHeight, result);
+    ClosedDialog<VToolHeight>(dialogHeight, result);
 }
 
 void MainWindow::ToolTriangle(bool checked)
@@ -469,7 +486,7 @@ void MainWindow::ToolTriangle(bool checked)
 
 void MainWindow::ClosedDialogTriangle(int result)
 {
-    ClosedDialog<VToolTriangle, VModelingTriangle>(dialogTriangle, result);
+    ClosedDialog<VToolTriangle>(dialogTriangle, result);
 }
 
 void MainWindow::ToolPointOfIntersection(bool checked)
@@ -481,7 +498,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 
 void MainWindow::ClosedDialogPointOfIntersection(int result)
 {
-    ClosedDialog<VToolPointOfIntersection, VModelingPointOfIntersection>(dialogPointOfIntersection, result);
+    ClosedDialog<VToolPointOfIntersection>(dialogPointOfIntersection, result);
 }
 
 void MainWindow::About()
@@ -762,6 +779,18 @@ void MainWindow::CanselTool()
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
+        case Tool::CutSplineTool:
+            dialogCutSpline.clear();
+            ui->toolButtonSplineCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::CutSplinePathTool:
+            dialogCutSplinePath.clear();
+            ui->toolButtonSplinePathCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
@@ -816,7 +845,9 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
         mode = Draw::Calculation;
+        SetEnableTool(true);
         doc->setCurrentData();
+        ui->toolBox->setCurrentIndex(0);
     }
     else
     {
@@ -843,6 +874,8 @@ void MainWindow::ActionDetails(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
         mode = Draw::Modeling;
+        SetEnableTool(true);
+        ui->toolBox->setCurrentIndex(4);
     }
     else
     {
@@ -1039,21 +1072,34 @@ void MainWindow::ClosedActionHistory()
 
 void MainWindow::SetEnableTool(bool enable)
 {
-    ui->toolButtonEndLine->setEnabled(enable);
-    ui->toolButtonLine->setEnabled(enable);
-    ui->toolButtonAlongLine->setEnabled(enable);
-    ui->toolButtonShoulderPoint->setEnabled(enable);
-    ui->toolButtonNormal->setEnabled(enable);
-    ui->toolButtonBisector->setEnabled(enable);
-    ui->toolButtonLineIntersect->setEnabled(enable);
-    ui->toolButtonSpline->setEnabled(enable);
-    ui->toolButtonArc->setEnabled(enable);
-    ui->toolButtonSplinePath->setEnabled(enable);
-    ui->toolButtonPointOfContact->setEnabled(enable);
-    ui->toolButtonNewDetail->setEnabled(enable);
-    ui->toolButtonHeight->setEnabled(enable);
-    ui->toolButtonTriangle->setEnabled(enable);
-    ui->toolButtonPointOfIntersection->setEnabled(enable);
+    bool drawTools = false;
+    bool modelingTools = false;
+    if(mode == Draw::Calculation)
+    {
+        drawTools = enable;
+    }
+    else
+    {
+        modelingTools = enable; // Soon we will have some tools for modeling.
+    }
+    //Drawing Tools
+    ui->toolButtonEndLine->setEnabled(drawTools);
+    ui->toolButtonLine->setEnabled(drawTools);
+    ui->toolButtonAlongLine->setEnabled(drawTools);
+    ui->toolButtonShoulderPoint->setEnabled(drawTools);
+    ui->toolButtonNormal->setEnabled(drawTools);
+    ui->toolButtonBisector->setEnabled(drawTools);
+    ui->toolButtonLineIntersect->setEnabled(drawTools);
+    ui->toolButtonSpline->setEnabled(drawTools);
+    ui->toolButtonArc->setEnabled(drawTools);
+    ui->toolButtonSplinePath->setEnabled(drawTools);
+    ui->toolButtonPointOfContact->setEnabled(drawTools);
+    ui->toolButtonNewDetail->setEnabled(drawTools);
+    ui->toolButtonHeight->setEnabled(drawTools);
+    ui->toolButtonTriangle->setEnabled(drawTools);
+    ui->toolButtonPointOfIntersection->setEnabled(drawTools);
+    ui->toolButtonSplineCutPoint->setEnabled(drawTools);
+    ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
 }
 
 void MainWindow::MinimumScrollBar()

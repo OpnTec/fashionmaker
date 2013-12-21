@@ -46,10 +46,9 @@ public:
                    /**
                     * @brief DialogTriangle create dialog
                     * @param data container with data
-                    * @param mode mode of creation tool
                     * @param parent parent widget
                     */
-                   DialogTriangle(const VContainer *data, Draw::Draws mode = Draw::Calculation, QWidget *parent = 0);
+                   DialogTriangle(const VContainer *data, QWidget *parent = 0);
                    ~DialogTriangle();
     /**
      * @brief getAxisP1Id return id first point of axis

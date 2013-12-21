@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vmodelingpointofintersection.h
+ **  @file   vtoolcutsplinepath.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   15 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,23 @@
  **
  *************************************************************************/
 
-#ifndef VMODELINGPOINTOFINTERSECTION_H
-#define VMODELINGPOINTOFINTERSECTION_H
+#ifndef VTOOLCUTSPLINEPATH_H
+#define VTOOLCUTSPLINEPATH_H
 
-#include "vmodelingpoint.h"
-#include "../../dialogs/dialogpointofintersection.h"
+#include "vtoolpoint.h"
+#include "../../dialogs/dialogcutsplinepath.h"
+#include "../../widgets/vsimplespline.h"
 
 /**
- * @brief The VModelingPointOfIntersection class
+ * @brief The VToolCutSplinePath class
  */
-class VModelingPointOfIntersection : public VModelingPoint
+class VToolCutSplinePath : public VToolPoint
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VModelingPointOfIntersection
-                  * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param firstPointId
-                  * @param secondPointId
-                  * @param typeCreation
-                  * @param parent
-                  */
-                 VModelingPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                              const qint64 &firstPointId, const qint64 &secondPointId,
-                                              const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    VToolCutSplinePath(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
+                       const qint64 &splinePathId, const qint64 &splPath1id, const qint64 &splPath2id,
+                       const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog
      */
@@ -59,35 +50,35 @@ public:
     /**
      * @brief Create
      * @param dialog
+     * @param scene
      * @param doc dom document container
      * @param data
-     * @return
      */
-    static VModelingPointOfIntersection* Create(QSharedPointer<DialogPointOfIntersection> &dialog, VDomDocument *doc,
-                                                VContainer *data);
+    static void  Create(QSharedPointer<DialogCutSplinePath> &dialog, VMainGraphicsScene  *scene,
+                        VDomDocument *doc, VContainer *data);
     /**
      * @brief Create
      * @param _id
      * @param pointName
-     * @param firstPointId
-     * @param secondPointId
+     * @param formula
+     * @param splineId
      * @param mx
      * @param my
+     * @param scene
      * @param doc dom document container
      * @param data
      * @param parse
      * @param typeCreation
-     * @return
      */
-    static VModelingPointOfIntersection* Create(const qint64 _id, const QString &pointName,
-                                                const qint64 &firstPointId, const qint64 &secondPointId,
-                                                const qreal &mx, const qreal &my, VDomDocument *doc,
-                                                VContainer *data, const Document::Documents &parse,
-                                                const Tool::Sources &typeCreation);
+    static void  Create(const qint64 _id, const QString &pointName, const QString &formula,
+                        const qint64 &splinePathId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                        VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                        const Tool::Sources &typeCreation);
     /**
      * @brief ToolType
      */
     static const QString ToolType;
+    static const QString AttrSplinePath;
 public slots:
     /**
      * @brief FullUpdateFromFile
@@ -98,11 +89,17 @@ public slots:
      * @param result
      */
     virtual void FullUpdateFromGui(int result);
-protected:
     /**
-     * @brief RemoveReferens
+     * @brief SplineChoosed
+     * @param id
      */
-    virtual void RemoveReferens();
+    void         SplineChoosed(qint64 id);
+    /**
+     * @brief ChangedActivDraw
+     * @param newName
+     */
+    virtual void ChangedActivDraw(const QString &newName);
+protected:
     /**
      * @brief contextMenuEvent
      * @param event
@@ -112,20 +109,32 @@ protected:
      * @brief AddToFile
      */
     virtual void AddToFile();
+    void      RefreshGeometry();
 private:
-    Q_DISABLE_COPY(VModelingPointOfIntersection)
+    Q_DISABLE_COPY(VToolCutSplinePath)
     /**
-     * @brief firstPointId
+     * @brief formula keep formula of length
      */
-    qint64       firstPointId;
+    QString           formula;
     /**
-     * @brief secondPointId
+     * @brief splineId keep id of spline
      */
-    qint64       secondPointId;
+    qint64            splinePathId;
     /**
-     * @brief dialogPointOfIntersection
+     * @brief DialogCutSpline pointer to the tool's dialog
      */
-    QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
+    QSharedPointer<DialogCutSplinePath> dialogCutSplinePath;
+    /**
+     * @brief firstSpline
+     */
+    VSimpleSpline *firstSpline;
+    /**
+     * @brief secondSpline
+     */
+    VSimpleSpline *secondSpline;
+    const qint64 splPath1id;
+    const qint64 splPath2id;
+    void RefreshSpline(VSimpleSpline *spline, qint64 splPathid, SimpleSpline::Translation tr);
 };
 
-#endif // VMODELINGPOINTOFINTERSECTION_H
+#endif // VTOOLCUTSPLINEPATH_H

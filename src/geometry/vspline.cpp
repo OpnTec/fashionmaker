@@ -32,33 +32,32 @@
 
 VSpline::VSpline()
     :p1(0), p2(QPointF()), p3(QPointF()), p4(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1),
-      points(QHash<qint64, VPointF>()), mode(Draw::Calculation), idObject(0), _name(QString()){}
+      points(QHash<qint64, VPointF>()), idObject(0), _name(QString()){}
 
 VSpline::VSpline ( const VSpline & spline )
     :p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()), angle1(spline.GetAngle1 ()),
       angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()), kCurve(spline.GetKcurve()),
-      points(spline.GetDataPoints()), mode(spline.getMode()), idObject(spline.getIdObject()), _name(spline.name()){}
+      points(spline.GetDataPoints()), idObject(spline.getIdObject()), _name(spline.name()){}
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                  qreal kAsm1, qreal kAsm2, qreal kCurve, Draw::Draws mode, qint64 idObject)
+                  qreal kAsm1, qreal kAsm2, qreal kCurve, qint64 idObject)
     :p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1), angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2),
-      kCurve(kCurve), points(*points), mode(mode), idObject(idObject), _name(QString())
+      kCurve(kCurve), points(*points), idObject(idObject), _name(QString())
 {
     _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve );
 }
 
 VSpline::VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-                  qreal kCurve, Draw::Draws mode, qint64 idObject)
-    :p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(*points), mode(mode),
+                  qreal kCurve, qint64 idObject)
+    :p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1), points(*points),
       idObject(idObject), _name(QString())
 {
     _name = QString("Spl_%1_%2").arg(this->GetPointP1().name(), this->GetPointP4().name());
     ModifiSpl ( p1, p2, p3, p4, kCurve);
 }
 
-void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2,
-                          qreal kAsm1, qreal kAsm2, qreal kCurve)
+void VSpline::ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve)
 {
     this->p1 = p1;
     this->p4 = p4;
@@ -208,32 +207,97 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
     throw "Не можу знайти точку перетину сплайну з лінією.";
 }
 
-//void VSpline::CutSpline ( qreal length, VSpline* curFir, VSpline* curSec ) const{
-//    if ( length > GetLength()){
-//        throw"Не правильна довжина нового сплайну\n";
-//    }
-//    qreal parT = length / GetLength();
-//    QLineF seg1_2 ( GetPointP1 (), GetP2 () );
-//    seg1_2.setLength(seg1_2.length () * parT);
-//    QPointF p12 = seg1_2.p2();
-//    QLineF seg2_3 ( GetP2 (), GetP3 () );
-//    seg2_3.setLength(seg2_3.length () * parT);
-//    QPointF p23 = seg2_3.p2();
-//    QLineF seg12_23 ( p12, p23 );
-//    seg12_23.setLength(seg12_23.length () * parT);
-//    QPointF p123 = seg12_23.p2();
-//    QLineF seg3_4 ( GetP3 (), GetPointP4 () );
-//    seg3_4.setLength(seg3_4.length () * parT);
-//    QPointF p34 = seg3_4.p2();
-//    QLineF seg23_34 ( p23, p34 );
-//    seg23_34.setLength(seg23_34.length () * parT);
-//    QPointF p234 = seg23_34.p2();
-//    QLineF seg123_234 ( p123, p234 );
-//    seg123_234.setLength(seg123_234.length () * parT);
-//    QPointF p1234 = seg123_234.p2();
-//    curFir->ModifiSpl ( GetPointP1 (), p12, p123, p1234 );
-//    curSec->ModifiSpl ( p1234, p234, p34, GetPointP4 () );
-//}
+qreal VSpline::LengthT(qreal t) const
+{
+    if(t < 0 || t > 1)
+    {
+        qWarning()<<"Wrong value t.";
+        return 0;
+    }
+    QLineF seg1_2 ( GetPointP1 ().toQPointF(), GetP2 () );
+    seg1_2.setLength(seg1_2.length () * t);
+    QPointF p12 = seg1_2.p2();
+
+    QLineF seg2_3 ( GetP2 (), GetP3 () );
+    seg2_3.setLength(seg2_3.length () * t);
+    QPointF p23 = seg2_3.p2();
+
+    QLineF seg12_23 ( p12, p23 );
+    seg12_23.setLength(seg12_23.length () * t);
+    QPointF p123 = seg12_23.p2();
+
+    QLineF seg3_4 ( GetP3 (), GetPointP4 ().toQPointF() );
+    seg3_4.setLength(seg3_4.length () * t);
+    QPointF p34 = seg3_4.p2();
+
+    QLineF seg23_34 ( p23, p34 );
+    seg23_34.setLength(seg23_34.length () * t);
+    QPointF p234 = seg23_34.p2();
+
+    QLineF seg123_234 ( p123, p234 );
+    seg123_234.setLength(seg123_234.length () * t);
+    QPointF p1234 = seg123_234.p2();
+
+    return LengthBezier ( GetPointP1().toQPointF(), p12, p123, p1234);
+}
+
+QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3 ) const
+{
+    //Always need return two splines, so we must correct wrong length.
+    if(length < GetLength()*0.02)
+    {
+        length = GetLength()*0.02;
+    }
+    else if ( length > GetLength()*0.98)
+    {
+        length = GetLength()*0.98;
+    }
+
+    // Very stupid way find correct value of t.
+    // Better first compare with t = 0.5. Find length of spline.
+    // If length larger, take t = 0.75 and so on.
+    // If length less, take t = 0.25 and so on.
+    qreal parT = 0;
+    qreal step = 0.001;
+    while (1)
+    {
+        parT = parT + step;
+        qreal splLength = LengthT(parT);
+        if(splLength >= length || parT > 1){
+            break;
+        }
+    }
+
+    QLineF seg1_2 ( GetPointP1 ().toQPointF(), GetP2 () );
+    seg1_2.setLength(seg1_2.length () * parT);
+    QPointF p12 = seg1_2.p2();
+
+    QLineF seg2_3 ( GetP2 (), GetP3 () );
+    seg2_3.setLength(seg2_3.length () * parT);
+    QPointF p23 = seg2_3.p2();
+
+    QLineF seg12_23 ( p12, p23 );
+    seg12_23.setLength(seg12_23.length () * parT);
+    QPointF p123 = seg12_23.p2();
+
+    QLineF seg3_4 ( GetP3 (), GetPointP4 ().toQPointF() );
+    seg3_4.setLength(seg3_4.length () * parT);
+    QPointF p34 = seg3_4.p2();
+
+    QLineF seg23_34 ( p23, p34 );
+    seg23_34.setLength(seg23_34.length () * parT);
+    QPointF p234 = seg23_34.p2();
+
+    QLineF seg123_234 ( p123, p234 );
+    seg123_234.setLength(seg123_234.length () * parT);
+    QPointF p1234 = seg123_234.p2();
+
+    spl1p2 = p12;
+    spl1p3 = p123;
+    spl2p2 = p234;
+    spl2p3 = p34;
+    return p1234;
+}
 
 //void VSpline::CutSpline ( QPointF point, VSpline* curFir, VSpline* curSec ) const{
 //    qreal t = param_t (point);
@@ -790,7 +854,6 @@ VSpline &VSpline::operator =(const VSpline &spline)
     this->kAsm2 = spline.GetKasm2();
     this->kCurve = spline.GetKcurve();
     this->points = spline.GetDataPoints();
-    this->mode = spline.getMode();
     this->idObject = spline.getIdObject();
     this->_name = spline.name();
     return *this;

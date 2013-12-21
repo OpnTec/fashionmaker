@@ -31,16 +31,18 @@
 
 #include <QPushButton>
 
-DialogLine::DialogLine(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0)
+DialogLine::DialogLine(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0)
 {
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLine::DialogAccepted);
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogLine::DialogRejected);
+
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+
     number = 0;
 }
 
@@ -83,32 +85,9 @@ void DialogLine::DialogAccepted()
 
 void DialogLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxFirstPoint->findText(point.name());

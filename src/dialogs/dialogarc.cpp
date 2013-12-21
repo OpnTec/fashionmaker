@@ -32,8 +32,8 @@
 #include <QPushButton>
 #include <QtWidgets>
 
-DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
+DialogArc::DialogArc(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(0), timerF1(0), timerF2(0), center(0), radius(QString()), f1(QString()), f2(QString())
 {
     ui->setupUi(this);
@@ -52,6 +52,7 @@ DialogArc::DialogArc(const VContainer *data, Draw::Draws mode, QWidget *parent)
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogArc::DialogRejected);
+
     FillComboBoxPoints(ui->comboBoxBasePoint);
 
     CheckState();
@@ -119,32 +120,10 @@ void DialogArc::SetRadius(const QString &value)
 
 void DialogArc::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id)==false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
+
         ChangeCurrentText(ui->comboBoxBasePoint, point.name());
         emit ToolTip("");
         this->show();
@@ -156,7 +135,7 @@ void DialogArc::DialogAccepted()
     radius = ui->lineEditRadius->text();
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
-    center = getCurrentPointId(ui->comboBoxBasePoint);
+    center = getCurrentObjectId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);
 }
 

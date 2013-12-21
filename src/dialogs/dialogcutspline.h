@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogendline.h
+ **  @file   dialogcutspline.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   15 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,21 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGENDLINE_H
-#define DIALOGENDLINE_H
+#ifndef DIALOGCUTSPLINE_H
+#define DIALOGCUTSPLINE_H
 
 #include "dialogtool.h"
 
-namespace Ui
-{
-    class DialogEndLine;
+namespace Ui {
+class DialogCutSpline;
 }
 
-/**
- * @brief The DialogEndLine class dialog for ToolEndLine. Help create point and edit option.
- */
-class DialogEndLine : public DialogTool
+class DialogCutSpline : public DialogTool
 {
     Q_OBJECT
 public:
-                      /**
-                       * @brief DialogEndLine create dialog
-                       * @param data container with data
-                       * @param parent parent widget
-                       */
-                      DialogEndLine(const VContainer *data, QWidget *parent = 0);
-                      ~DialogEndLine();
+    DialogCutSpline(const VContainer *data, QWidget *parent = 0);
+    ~DialogCutSpline();
     /**
      * @brief getPointName return name of point
      * @return name
@@ -61,16 +52,6 @@ public:
      */
     void              setPointName(const QString &value);
     /**
-     * @brief getTypeLine return type of line
-     * @return type
-     */
-    inline QString    getTypeLine() const {return typeLine;}
-    /**
-     * @brief setTypeLine set type of line
-     * @param value type
-     */
-    void              setTypeLine(const QString &value);
-    /**
      * @brief getFormula return string of formula
      * @return formula
      */
@@ -81,26 +62,16 @@ public:
      */
     void              setFormula(const QString &value);
     /**
-     * @brief getAngle return angle of line
-     * @return angle in degree
-     */
-    inline qreal      getAngle() const {return angle;}
-    /**
-     * @brief setAngle set angle of line
-     * @param value angle in degree
-     */
-    void              setAngle(const qreal &value);
-    /**
-     * @brief getBasePointId return id base point of line
+     * @brief getSplineId return id base point of line
      * @return id
      */
-    inline qint64     getBasePointId() const {return basePointId;}
+    inline qint64     getSplineId() const {return splineId;}
     /**
-     * @brief setBasePointId set id base point of line
+     * @brief setSplineId set id spline
      * @param value id
      * @param id don't show this id in list
      */
-    void              setBasePointId(const qint64 &value, const qint64 &id);
+    void              setSplineId(const qint64 &value, const qint64 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
@@ -113,31 +84,11 @@ public slots:
      */
     virtual void      DialogAccepted();
 private:
-    Q_DISABLE_COPY(DialogEndLine)
-    /**
-     * @brief ui keeps information about user interface
-     */
-    Ui::DialogEndLine *ui;
-    /**
-     * @brief pointName name of point
-     */
+    Q_DISABLE_COPY(DialogCutSpline)
+    Ui::DialogCutSpline *ui;
     QString           pointName;
-    /**
-     * @brief typeLine type of line
-     */
-    QString           typeLine;
-    /**
-     * @brief formula formula
-     */
     QString           formula;
-    /**
-     * @brief angle angle of line
-     */
-    qreal             angle;
-    /**
-     * @brief basePointId id base point of line
-     */
-    qint64            basePointId;
+    qint64            splineId;
 };
 
-#endif // DIALOGENDLINE_H
+#endif // DIALOGCUTSPLINE_H

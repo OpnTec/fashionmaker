@@ -31,8 +31,8 @@
 
 #include <QPushButton>
 
-DialogSpline::DialogSpline(const VContainer *data, Draw::Draws mode, QWidget *parent)
-    :DialogTool(data, mode, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
+DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
+    :DialogTool(data, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
     kAsm1(1), kAsm2(1), kCurve(1)
 {
     ui->setupUi(this);
@@ -41,11 +41,9 @@ DialogSpline::DialogSpline(const VContainer *data, Draw::Draws mode, QWidget *pa
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogSpline::DialogRejected);
-    if (mode == Draw::Calculation)
-    {
-        FillComboBoxPoints(ui->comboBoxP1);
-        FillComboBoxPoints(ui->comboBoxP4);
-    }
+
+    FillComboBoxPoints(ui->comboBoxP1);
+    FillComboBoxPoints(ui->comboBoxP4);
 }
 
 DialogSpline::~DialogSpline()
@@ -55,34 +53,9 @@ DialogSpline::~DialogSpline()
 
 void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if (idDetail == 0 && mode == Draw::Modeling)
-    {
-        if (type == Scene::Detail)
-        {
-            idDetail = id;
-            FillComboBoxPoints(ui->comboBoxP1);
-            FillComboBoxPoints(ui->comboBoxP4);
-            return;
-        }
-    }
-    if (mode == Draw::Modeling)
-    {
-        if (CheckObject(id) == false)
-        {
-            return;
-        }
-    }
     if (type == Scene::Point)
     {
-        VPointF point;
-        if (mode == Draw::Calculation)
-        {
-            point = data->GetPoint(id);
-        }
-        else
-        {
-            point = data->GetPointModeling(id);
-        }
+        VPointF point = data->GetPoint(id);
         if (number == 0)
         {
             qint32 index = ui->comboBoxP1->findText(point.name());
@@ -104,18 +77,10 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
                 emit ToolTip("");
                 index = ui->comboBoxP1->currentIndex();
                 qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
-                QPointF p1;
-                QPointF p4;
-                if (mode == Draw::Calculation)
-                {
-                    p1 = data->GetPoint(p1Id).toQPointF();
-                    p4 = data->GetPoint(id).toQPointF();
-                }
-                else
-                {
-                    p1 = data->GetPointModeling(p1Id).toQPointF();
-                    p4 = data->GetPointModeling(id).toQPointF();
-                }
+
+                QPointF p1 = data->GetPoint(p1Id).toQPointF();
+                QPointF p4 = data->GetPoint(id).toQPointF();
+
                 ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
                 ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
             }
@@ -129,8 +94,8 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
 
 void DialogSpline::DialogAccepted()
 {
-    p1 = getCurrentPointId(ui->comboBoxP1);
-    p4 = getCurrentPointId(ui->comboBoxP4);
+    p1 = getCurrentObjectId(ui->comboBoxP1);
+    p4 = getCurrentObjectId(ui->comboBoxP4);
     angle1 = ui->spinBoxAngle1->value();
     angle2 = ui->spinBoxAngle2->value();
     kAsm1 = ui->doubleSpinBoxKasm1->value();

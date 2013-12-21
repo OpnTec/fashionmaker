@@ -22,30 +22,14 @@ HEADERS += \
     src/tools/drawTools/vtoolalongline.h \
     src/tools/drawTools/vdrawtool.h \
     src/tools/drawTools/drawtools.h \
-    src/tools/modelingTools/vmodelingtriangle.h \
-    src/tools/modelingTools/vmodelingtool.h \
-    src/tools/modelingTools/vmodelingsplinepath.h \
-    src/tools/modelingTools/vmodelingspline.h \
-    src/tools/modelingTools/vmodelingshoulderpoint.h \
-    src/tools/modelingTools/vmodelingpointofintersection.h \
-    src/tools/modelingTools/vmodelingpointofcontact.h \
-    src/tools/modelingTools/vmodelingpoint.h \
-    src/tools/modelingTools/vmodelingnormal.h \
-    src/tools/modelingTools/vmodelinglinepoint.h \
-    src/tools/modelingTools/vmodelinglineintersect.h \
-    src/tools/modelingTools/vmodelingline.h \
-    src/tools/modelingTools/vmodelingheight.h \
-    src/tools/modelingTools/vmodelingendline.h \
-    src/tools/modelingTools/vmodelingbisector.h \
-    src/tools/modelingTools/vmodelingarc.h \
-    src/tools/modelingTools/vmodelingalongline.h \
-    src/tools/modelingTools/modelingtools.h \
     src/tools/nodeDetails/vnodesplinepath.h \
     src/tools/nodeDetails/vnodespline.h \
     src/tools/nodeDetails/vnodepoint.h \
     src/tools/nodeDetails/vnodearc.h \
     src/tools/nodeDetails/vabstractnode.h \
-    src/tools/nodeDetails/nodedetails.h
+    src/tools/nodeDetails/nodedetails.h \
+    src/tools/drawTools/vtoolcutspline.h \
+    src/tools/drawTools/vtoolcutsplinepath.h
 
 SOURCES += \
     src/tools/vtooldetail.cpp \
@@ -69,25 +53,10 @@ SOURCES += \
     src/tools/drawTools/vtoolarc.cpp \
     src/tools/drawTools/vtoolalongline.cpp \
     src/tools/drawTools/vdrawtool.cpp \
-    src/tools/modelingTools/vmodelingtriangle.cpp \
-    src/tools/modelingTools/vmodelingtool.cpp \
-    src/tools/modelingTools/vmodelingsplinepath.cpp \
-    src/tools/modelingTools/vmodelingspline.cpp \
-    src/tools/modelingTools/vmodelingshoulderpoint.cpp \
-    src/tools/modelingTools/vmodelingpointofintersection.cpp \
-    src/tools/modelingTools/vmodelingpointofcontact.cpp \
-    src/tools/modelingTools/vmodelingpoint.cpp \
-    src/tools/modelingTools/vmodelingnormal.cpp \
-    src/tools/modelingTools/vmodelinglinepoint.cpp \
-    src/tools/modelingTools/vmodelinglineintersect.cpp \
-    src/tools/modelingTools/vmodelingline.cpp \
-    src/tools/modelingTools/vmodelingheight.cpp \
-    src/tools/modelingTools/vmodelingendline.cpp \
-    src/tools/modelingTools/vmodelingbisector.cpp \
-    src/tools/modelingTools/vmodelingarc.cpp \
-    src/tools/modelingTools/vmodelingalongline.cpp \
     src/tools/nodeDetails/vnodesplinepath.cpp \
     src/tools/nodeDetails/vnodespline.cpp \
     src/tools/nodeDetails/vnodepoint.cpp \
     src/tools/nodeDetails/vnodearc.cpp \
-    src/tools/nodeDetails/vabstractnode.cpp
+    src/tools/nodeDetails/vabstractnode.cpp \
+    src/tools/drawTools/vtoolcutspline.cpp \
+    src/tools/drawTools/vtoolcutsplinepath.cpp

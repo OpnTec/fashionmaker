@@ -131,7 +131,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         line.setLength(line.length()+step);
         a = QLineF(line.p2(), firstPoint).length();
         b = QLineF(line.p2(), secondPoint).length();
-        if (static_cast<qint32>(c*c) == static_cast<qint32>(a*a + b*b))
+        if (qFuzzyCompare(c*c, a*a + b*b))
         {
             QLineF l1(axisP2, firstPoint);
             QLineF l2(axisP2, secondPoint);
@@ -142,6 +142,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         }
         if (c*c < a*a + b*b)
         {
+            //Still don't know why this code handled. Need to think about that.
             qWarning()<<tr("Can't find point.")<<Q_FUNC_INFO;
             return line.p2();
         }

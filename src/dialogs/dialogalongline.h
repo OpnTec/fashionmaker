@@ -46,11 +46,9 @@ public:
                         /**
                          * @brief DialogAlongLine create dialog
                          * @param data container with data
-                         * @param mode mode of creation tool
                          * @param parent parent widget
                          */
-                        DialogAlongLine(const VContainer *data, Draw::Draws mode = Draw::Calculation,
-                                        QWidget *parent = 0);
+                        DialogAlongLine(const VContainer *data, QWidget *parent = 0);
                         ~DialogAlongLine();
     /**
      * @brief getPointName return name of point

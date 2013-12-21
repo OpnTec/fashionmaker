@@ -31,12 +31,11 @@
 
 #include <QtWidgets>
 
-DialogTool::DialogTool(const VContainer *data, Draw::Draws mode, QWidget *parent)
+DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
       spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
       labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0),
-      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0),
-      idDetail(0), mode(mode)
+      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0)
 {
     Q_ASSERT(data != 0);
     timerFormula = new QTimer(this);
@@ -65,45 +64,72 @@ void DialogTool::showEvent(QShowEvent *event)
 
 void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
 {
+    Q_ASSERT(box != 0);
     box->clear();
-    if (mode == Draw::Calculation)
+    const QHash<qint64, VPointF> *points = data->DataPoints();
+    QHashIterator<qint64, VPointF> i(*points);
+    while (i.hasNext())
     {
-        const QHash<qint64, VPointF> *points = data->DataPoints();
-        QHashIterator<qint64, VPointF> i(*points);
-        while (i.hasNext())
+        i.next();
+        if (i.key() != id)
         {
-            i.next();
+            VPointF point = i.value();
+            box->addItem(point.name(), i.key());
+        }
+    }
+}
+
+void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    box->clear();
+    const QHash<qint64, VSpline> *spls = data->DataSplines();
+    QHashIterator<qint64, VSpline> i(*spls);
+    while (i.hasNext())
+    {
+        i.next();
+        if(cut == ComboMode::CutSpline)
+        {
+            if (i.key() != id + 1 && i.key() != id + 2)
+            {
+                VSpline spl = i.value();
+                box->addItem(spl.name(), i.key());
+            }
+        }
+        else
+        {
             if (i.key() != id)
             {
-                VPointF point = i.value();
-                box->addItem(point.name(), i.key());
+                VSpline spl = i.value();
+                box->addItem(spl.name(), i.key());
             }
         }
     }
-    else
+}
+
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    box->clear();
+    const QHash<qint64, VSplinePath> *splPaths = data->DataSplinePaths();
+    QHashIterator<qint64, VSplinePath> i(*splPaths);
+    while (i.hasNext())
     {
-        if (idDetail <= 0)
+        i.next();
+        if(cut == ComboMode::CutSpline)
         {
-            qWarning()<<tr("Wrong details id.")<<Q_FUNC_INFO;
-            return;
-        }
-        VDetail det = data->GetDetail(idDetail);
-        for (ptrdiff_t i = 0; i< det.CountNode(); ++i)
-        {
-            if (det[i].getTypeTool() == Tool::NodePoint ||
-                det[i].getTypeTool() == Tool::AlongLineTool ||
-                det[i].getTypeTool() == Tool::BisectorTool ||
-                det[i].getTypeTool() == Tool::EndLineTool ||
-                det[i].getTypeTool() == Tool::LineIntersectTool ||
-                det[i].getTypeTool() == Tool::NormalTool ||
-                det[i].getTypeTool() == Tool::PointOfContact ||
-                det[i].getTypeTool() == Tool::ShoulderPointTool)
+            if (i.key() != id + 1 && i.key() != id + 2)
             {
-                if (det[i].getId() != id)
-                {
-                    VPointF point = data->GetPointModeling(det[i].getId());
-                    box->addItem(point.name(), det[i].getId());
-                }
+                VSplinePath splPath = i.value();
+                box->addItem(splPath.name(), i.key());
+            }
+        }
+        else
+        {
+            if (i.key() != id)
+            {
+                VSplinePath splPath = i.value();
+                box->addItem(splPath.name(), i.key());
             }
         }
     }
@@ -158,7 +184,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
     }
     else
     {
-        qWarning()<<tr("Can't find point by name")<<value;
+        qWarning()<<tr("Can't find object by name")<<value;
     }
 }
 
@@ -242,7 +268,25 @@ void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64
     ChangeCurrentData(box, value);
 }
 
-qint64 DialogTool::getCurrentPointId(QComboBox *box) const
+void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
+                                    ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    FillComboBoxSplines(box, id, cut);
+    splineId = value;
+    ChangeCurrentData(box, value);
+}
+
+void DialogTool::setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
+                                        const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+{
+    Q_ASSERT(box != 0);
+    FillComboBoxSplinesPath(box, id, cut);
+    splinePathId = value;
+    ChangeCurrentData(box, value);
+}
+
+qint64 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     Q_ASSERT(box != 0);
     qint32 index = box->currentIndex();
@@ -515,16 +559,6 @@ void DialogTool::UpdateList()
     {
         ShowVariable(data->DataLengthSplines());
     }
-}
-
-bool DialogTool::CheckObject(const qint64 &id)
-{
-    if (mode == Draw::Calculation || idDetail == 0)
-    {
-        return false;
-    }
-    VDetail det = data->GetDetail(idDetail);
-    return det.Containes(id);
 }
 
 template <class key, class val>

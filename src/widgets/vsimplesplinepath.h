@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   modelingtools.h
+ **  @file   vsimplesplinepath.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,22 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef MODELINGTOOLS_H
-#define MODELINGTOOLS_H
+#ifndef VSIMPLESPLINEPATH_H
+#define VSIMPLESPLINEPATH_H
 
-#include "vmodelingalongline.h"
-#include "vmodelingarc.h"
-#include "vmodelingbisector.h"
-#include "vmodelingendline.h"
-#include "vmodelingline.h"
-#include "vmodelinglineintersect.h"
-#include "vmodelingnormal.h"
-#include "vmodelingpointofcontact.h"
-#include "vmodelingshoulderpoint.h"
-#include "vmodelingspline.h"
-#include "vmodelingsplinepath.h"
-#include "vmodelingheight.h"
-#include "vmodelingtriangle.h"
-#include "vmodelingpointofintersection.h"
+#include <QGraphicsPathItem>
+#include "../tools/vabstracttool.h"
 
-#endif // MODELINGTOOLS_H
+class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
+{
+    Q_OBJECT
+public:
+    VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent = 0);
+protected:
+    /**
+     * @brief mouseReleaseEvent
+     * @param event
+     */
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    /**
+     * @brief hoverMoveEvent
+     * @param event
+     */
+    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief hoverLeaveEvent
+     * @param event
+     */
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+private:
+    Q_DISABLE_COPY(VSimpleSplinePath)
+    qreal *factor;
+};
+
+#endif // VSIMPLESPLINEPATH_H

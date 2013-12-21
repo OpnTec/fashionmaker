@@ -58,8 +58,7 @@ public:
                   /**
                    * @brief VSplinePath конструктор по замовчуванню.
                    */
-                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1,
-                              Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1, qint64 idObject = 0);
                   /**
                    * @brief VSplinePath
                    * @param splPath
@@ -157,16 +156,6 @@ public:
      */
     VSplinePoint  &operator[](ptrdiff_t indx);
     /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void   setMode(const Draw::Draws &value) {mode = value;}
-    /**
      * @brief getIdObject
      * @return
      */
@@ -186,6 +175,19 @@ public:
      * @param name
      */
     void          setName(const QString &name) {_name = name;}
+    /**
+     * @brief CutSplinePath
+     * @param length
+     * @param p1
+     * @param p2
+     * @param spl1p3
+     * @param spl2p2
+     * @return
+     */
+    QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
+                                QPointF &spl2p3) const;
+    QHash<qint64, VPointF> getPoints() const;
+    void setPoints(const QHash<qint64, VPointF> *value);
 protected:
     /**
      * @brief path вектор з точок сплайна.
@@ -195,10 +197,6 @@ protected:
      * @brief kCurve
      */
     qreal         kCurve;
-    /**
-     * @brief mode
-     */
-    Draw::Draws   mode;
     /**
      * @brief points
      */

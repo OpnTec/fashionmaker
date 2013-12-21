@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vmodelingtool.cpp
+ **  @file   vsimplesplinepath.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   17 12, 2013
  **
  **  @brief
  **  @copyright
@@ -26,47 +26,30 @@
  **
  *************************************************************************/
 
-#include "vmodelingtool.h"
-#include <QDebug>
+#include "vsimplesplinepath.h"
 
-VModelingTool::VModelingTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false)
+VSimpleSplinePath::VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), factor(factor)
 {
-    _referens = 0;
 }
 
-void VModelingTool::AddToModeling(const QDomElement &domElement)
+void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    QDomElement modelingElement;
-    bool ok = doc->GetActivModelingElement(modelingElement);
-    if (ok)
+    if (event->button() == Qt::LeftButton)
     {
-        modelingElement.appendChild(domElement);
+        emit ChoosedTool(id, Scene::SplinePath);
     }
-    else
-    {
-        qCritical()<<"Can't find tag Modeling"<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VModelingTool::decrementReferens()
+void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (_referens > 0)
-    {
-        --_referens;
-    }
-    if (_referens <= 0)
-    {
-        RemoveReferens();
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                element.removeChild(domElement);
-            }
-        }
-    }
+    Q_UNUSED(event);
+    this->setPen(QPen(currentColor, widthMainLine/ *factor));
+}
+
+void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    this->setPen(QPen(currentColor, widthHairLine/ *factor));
 }

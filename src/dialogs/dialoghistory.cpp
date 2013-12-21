@@ -35,7 +35,7 @@
 #include <QPushButton>
 
 DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent)
-    :DialogTool(data, Draw::Calculation, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
+    :DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
     cursorToolRecordRow(0)
 {
     ui->setupUi(this);

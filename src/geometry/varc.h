@@ -56,8 +56,7 @@ public:
                         * @param f2 кінцевий кут в градусах.
                         */
                        VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-                             qreal f1, QString formulaF1, qreal f2, QString formulaF2,
-                             Draw::Draws mode = Draw::Calculation, qint64 idObject = 0);
+                             qreal f1, QString formulaF1, qreal f2, QString formulaF2, qint64 idObject = 0);
                        /**
                         * @brief VArc
                         * @param arc
@@ -161,16 +160,6 @@ public:
      */
     QVector<QPointF>   SplOfArc( qint32 number ) const;
     /**
-     * @brief getMode
-     * @return
-     */
-    inline Draw::Draws getMode() const {return mode;}
-    /**
-     * @brief setMode
-     * @param value
-     */
-    inline void        setMode(const Draw::Draws &value) {mode = value;}
-    /**
      * @brief getIdObject
      * @return
      */
@@ -223,10 +212,6 @@ private:
      * @brief points
      */
     QHash<qint64, VPointF> points;
-    /**
-     * @brief mode
-     */
-    Draw::Draws        mode;
     /**
      * @brief idObject
      */

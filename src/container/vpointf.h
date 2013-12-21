@@ -43,14 +43,14 @@ public:
      * @brief VPointF creat empty point
      */
     inline             VPointF ()
-                       :_name(QString()), _mx(0), _my(0), _x(0), _y(0), mode(Draw::Calculation), idObject(0){}
+                       :_name(QString()), _mx(0), _my(0), _x(0), _y(0), idObject(0){}
     /**
      * @brief VPointF copy constructor
      * @param point
      */
     inline             VPointF (const VPointF &point )
                        :_name(point.name()), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y()),
-                       mode(point.getMode()), idObject(point.getIdObject()){}
+                       idObject(point.getIdObject()){}
     /**
      * @brief VPointF create new point
      * @param x x coordinate
@@ -58,12 +58,10 @@ public:
      * @param name name of point
      * @param mx offset name respect to x
      * @param my offset name respect to y
-     * @param mode mode of draw
      * @param idObject point modeling keep here id of parent point
      */
-    inline             VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my,
-                                 Draw::Draws mode = Draw::Calculation, qint64 idObject = 0)
-                       :_name(name), _mx(mx), _my(my), _x(x), _y(y), mode(mode), idObject(idObject){}
+    inline             VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject = 0)
+                       :_name(name), _mx(mx), _my(my), _x(x), _y(y), idObject(idObject){}
     /**
      * @brief operator = assignment operator
      * @param point point
@@ -127,16 +125,6 @@ public:
      */
     inline void        setY(const qreal &value){_y = value;}
     /**
-     * @brief getMode return mode of point
-     * @return mode
-     */
-    inline Draw::Draws getMode() const{return mode;}
-    /**
-     * @brief setMode set mode for point
-     * @param value mode
-     */
-    inline void        setMode(const Draw::Draws &value) {mode = value;}
-    /**
      * @brief getIdObject return id of parrent.
      * @return id
      */
@@ -167,10 +155,6 @@ private:
      * @brief _y y coordinate
      */
     qreal              _y;
-    /**
-     * @brief mode mode of point
-     */
-    Draw::Draws        mode;
     /**
      * @brief idObject id of parent. Only for point modeling. All another return 0.
      */
