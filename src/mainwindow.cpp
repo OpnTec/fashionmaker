@@ -845,7 +845,9 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
         mode = Draw::Calculation;
+        SetEnableTool(true);
         doc->setCurrentData();
+        ui->toolBox->setCurrentIndex(0);
     }
     else
     {
@@ -872,6 +874,8 @@ void MainWindow::ActionDetails(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
         mode = Draw::Modeling;
+        SetEnableTool(true);
+        ui->toolBox->setCurrentIndex(4);
     }
     else
     {
@@ -1068,23 +1072,34 @@ void MainWindow::ClosedActionHistory()
 
 void MainWindow::SetEnableTool(bool enable)
 {
-    ui->toolButtonEndLine->setEnabled(enable);
-    ui->toolButtonLine->setEnabled(enable);
-    ui->toolButtonAlongLine->setEnabled(enable);
-    ui->toolButtonShoulderPoint->setEnabled(enable);
-    ui->toolButtonNormal->setEnabled(enable);
-    ui->toolButtonBisector->setEnabled(enable);
-    ui->toolButtonLineIntersect->setEnabled(enable);
-    ui->toolButtonSpline->setEnabled(enable);
-    ui->toolButtonArc->setEnabled(enable);
-    ui->toolButtonSplinePath->setEnabled(enable);
-    ui->toolButtonPointOfContact->setEnabled(enable);
-    ui->toolButtonNewDetail->setEnabled(enable);
-    ui->toolButtonHeight->setEnabled(enable);
-    ui->toolButtonTriangle->setEnabled(enable);
-    ui->toolButtonPointOfIntersection->setEnabled(enable);
-    ui->toolButtonSplineCutPoint->setEnabled(enable);
-    ui->toolButtonSplinePathCutPoint->setEnabled(enable);
+    bool drawTools = false;
+    bool modelingTools = false;
+    if(mode == Draw::Calculation)
+    {
+        drawTools = enable;
+    }
+    else
+    {
+        modelingTools = enable; // Soon we will have some tools for modeling.
+    }
+    //Drawing Tools
+    ui->toolButtonEndLine->setEnabled(drawTools);
+    ui->toolButtonLine->setEnabled(drawTools);
+    ui->toolButtonAlongLine->setEnabled(drawTools);
+    ui->toolButtonShoulderPoint->setEnabled(drawTools);
+    ui->toolButtonNormal->setEnabled(drawTools);
+    ui->toolButtonBisector->setEnabled(drawTools);
+    ui->toolButtonLineIntersect->setEnabled(drawTools);
+    ui->toolButtonSpline->setEnabled(drawTools);
+    ui->toolButtonArc->setEnabled(drawTools);
+    ui->toolButtonSplinePath->setEnabled(drawTools);
+    ui->toolButtonPointOfContact->setEnabled(drawTools);
+    ui->toolButtonNewDetail->setEnabled(drawTools);
+    ui->toolButtonHeight->setEnabled(drawTools);
+    ui->toolButtonTriangle->setEnabled(drawTools);
+    ui->toolButtonPointOfIntersection->setEnabled(drawTools);
+    ui->toolButtonSplineCutPoint->setEnabled(drawTools);
+    ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
 }
 
 void MainWindow::MinimumScrollBar()
