@@ -75,7 +75,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     }
     if (index < 1 || index > Count())
     {
-        throw VException(tr("This spline is not exist."));
+        throw VException(tr("This spline does not exist."));
     }
     VSpline spl(&points, path[index-1].P(), path[index].P(), path[index-1].Angle2(), path[index].Angle1(),
             path[index-1].KAsm2(), path[index].KAsm1(), this->kCurve);
@@ -126,7 +126,7 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &p
 {
     if (indexSpline < 1 || indexSpline > Count())
     {
-        throw VException(tr("This spline is not exist."));
+        throw VException(tr("This spline does not exist."));
     }
     if (pos == SplinePoint::FirstPoint)
     {
@@ -142,7 +142,7 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Positi
 {
     if (indexSpline < 1 || indexSpline > Count())
     {
-        throw VException(tr("This spline is not exist."));
+        throw VException(tr("This spline does not exist."));
     }
     if (pos == SplinePoint::FirstPoint)
     {

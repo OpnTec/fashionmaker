@@ -49,9 +49,11 @@ OTHER_FILES += share/resources/valentina.rc \
     share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina_ru.ts \
-                share/translations/valentina_uk.ts
-
-unix:QMAKE_CXX = ccache g++
+                share/translations/valentina_uk.ts \
+                share/translations/valentina_de.ts
+unix {
+QMAKE_CXX = ccache g++
+}
 
 CONFIG += precompile_header
 # Precompiled headers (PCH)
@@ -123,7 +125,8 @@ desktop.files += dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
 pixmaps.files += dist/$${TARGET}.png
 INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
-                        share/translations/valentina_uk.qm
+                        share/translations/valentina_uk.qm \
+                        share/translations/valentina_de.qm \
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 INSTALLS += target \

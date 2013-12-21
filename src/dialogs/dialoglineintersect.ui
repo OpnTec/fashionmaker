@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
+    <width>370</width>
     <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point of line intersection</string>
+   <string>Intersection of lines</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -173,7 +173,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

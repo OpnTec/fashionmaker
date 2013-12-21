@@ -251,7 +251,7 @@
               </size>
              </property>
              <property name="text">
-              <string>Angle degree </string>
+              <string>Degree of angel</string>
              </property>
             </widget>
            </item>
@@ -272,7 +272,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowRightUp.png</normaloff>:/icon/24x24/arrowRightUp.png</iconset>
                </property>
                <property name="iconSize">
@@ -289,7 +289,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowLeftUp.png</normaloff>:/icon/24x24/arrowLeftUp.png</iconset>
                </property>
                <property name="iconSize">
@@ -306,7 +306,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowLeft.png</normaloff>:/icon/24x24/arrowLeft.png</iconset>
                </property>
                <property name="iconSize">
@@ -323,7 +323,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowRight.png</normaloff>:/icon/24x24/arrowRight.png</iconset>
                </property>
                <property name="iconSize">
@@ -346,7 +346,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowUp.png</normaloff>:/icon/24x24/arrowUp.png</iconset>
                </property>
                <property name="iconSize">
@@ -363,7 +363,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowDown.png</normaloff>:/icon/24x24/arrowDown.png</iconset>
                </property>
                <property name="iconSize">
@@ -380,7 +380,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowLeftDown.png</normaloff>:/icon/24x24/arrowLeftDown.png</iconset>
                </property>
                <property name="iconSize">
@@ -397,7 +397,7 @@
                 <string>...</string>
                </property>
                <property name="icon">
-                <iconset resource="../icon.qrc">
+                <iconset resource="../../share/resources/icon.qrc">
                  <normaloff>:/icon/24x24/arrowRightDown.png</normaloff>:/icon/24x24/arrowRightDown.png</iconset>
                </property>
                <property name="iconSize">
@@ -575,7 +575,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>
