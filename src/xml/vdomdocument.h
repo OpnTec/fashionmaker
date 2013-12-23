@@ -398,21 +398,22 @@ private:
      * @param name
      * @return
      */
-    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
+    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name,
+                                       const QString &defValue) const;
     /**
      * @brief GetParametrString
      * @param domElement
      * @param name
      * @return
      */
-    QString        GetParametrString(const QDomElement& domElement, const QString &name) const;
+    QString        GetParametrString(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     /**
      * @brief GetParametrDouble
      * @param domElement
      * @param name
      * @return
      */
-    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name) const;
+    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     /**
      * @brief CollectId
      * @param node
