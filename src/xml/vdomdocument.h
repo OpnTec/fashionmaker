@@ -200,6 +200,28 @@ public:
      * @brief TestUniqueId
      */
     void           TestUniqueId() const;
+    /**
+     * @brief GetParametrLongLong
+     * @param domElement
+     * @param name
+     * @return
+     */
+    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name,
+                                       const QString &defValue) const;
+    /**
+     * @brief GetParametrString
+     * @param domElement
+     * @param name
+     * @return
+     */
+    QString        GetParametrString(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    /**
+     * @brief GetParametrDouble
+     * @param domElement
+     * @param name
+     * @return
+     */
+    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
 signals:
     /**
      * @brief ChangedActivDraw
@@ -392,28 +414,6 @@ private:
      * @return
      */
     qint64         GetParametrId(const QDomElement& domElement) const;
-    /**
-     * @brief GetParametrLongLong
-     * @param domElement
-     * @param name
-     * @return
-     */
-    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name,
-                                       const QString &defValue) const;
-    /**
-     * @brief GetParametrString
-     * @param domElement
-     * @param name
-     * @return
-     */
-    QString        GetParametrString(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    /**
-     * @brief GetParametrDouble
-     * @param domElement
-     * @param name
-     * @return
-     */
-    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     /**
      * @brief CollectId
      * @param node

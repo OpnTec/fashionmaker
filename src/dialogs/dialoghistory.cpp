@@ -31,6 +31,7 @@
 #include "../geometry/varc.h"
 #include "../geometry/vspline.h"
 #include "../geometry/vsplinepath.h"
+#include "../tools/vabstracttool.h"
 #include <QDebug>
 #include <QPushButton>
 
@@ -178,7 +179,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = domElement.attribute("basePoint", "").toLongLong();
+                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
             }
             record = QString(tr("%1_%2 - Line from point %1 to point %2")).arg(data->GetPoint(basePointId).name(),
                                                                                data->GetPoint(tool.getId()).name());
@@ -187,8 +188,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             record = QString(tr("%1_%2 - Line from point %1 to point %2")).arg(data->GetPoint(firstPointId).name(),
                                                                                data->GetPoint(secondPointId).name());
@@ -197,8 +198,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = domElement.attribute("firstPoint", "").toLongLong();
-                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             record = QString(tr("%3 - Point along line %1_%2")).arg(data->GetPoint(basePointId).name(),
                                                                     data->GetPoint(secondPointId).name(),
@@ -211,8 +212,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = domElement.attribute("firstPoint", "").toLongLong();
-                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             record = QString(tr("%3 - normal to line %1_%2")).arg(data->GetPoint(basePointId).name(),
                                                                   data->GetPoint(secondPointId).name(),
@@ -222,9 +223,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-                basePointId = domElement.attribute("secondPoint", "").toLongLong();
-                thirdPointId = domElement.attribute("thirdPoint", "").toLongLong();
+                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                thirdPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrThirdPoint, "0");
             }
             record = QString(tr("%4 - bisector of angle %1_%2_%3")).arg(data->GetPoint(firstPointId).name(),
                                                                         data->GetPoint(basePointId).name(),
@@ -235,22 +236,22 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                p1Line1 = domElement.attribute("p1Line1", "").toLongLong();
-                p2Line1 = domElement.attribute("p2Line1", "").toLongLong();
-                p1Line2 = domElement.attribute("p1Line2", "").toLongLong();
-                p2Line2 = domElement.attribute("p2Line2", "").toLongLong();
+                p1Line1 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line1, "0");
+                p2Line1 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line1, "0");
+                p1Line2 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line2, "0");
+                p2Line2 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line2, "0");
             }
             record = QString(tr("%5 - intersection of lines %1_%2 and %3_%4")).arg(data->GetPoint(p1Line1).name(),
-                                                                                         data->GetPoint(p2Line1).name(),
-                                                                                         data->GetPoint(p1Line2).name(),
-                                                                                         data->GetPoint(p2Line2).name(),
+                                                                                   data->GetPoint(p2Line1).name(),
+                                                                                   data->GetPoint(p1Line2).name(),
+                                                                                   data->GetPoint(p2Line2).name(),
                                                                                    data->GetPoint(tool.getId()).name());
             break;
         case Tool::SplineTool:
         {
             VSpline spl = data->GetSpline(tool.getId());
             record = QString(tr("Curve %1_%2")).arg(data->GetPoint(spl.GetP1()).name(),
-                                                 data->GetPoint(spl.GetP4()).name());
+                                                    data->GetPoint(spl.GetP4()).name());
         }
         break;
         case Tool::ArcTool:
@@ -278,9 +279,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                center = domElement.attribute("center", "").toLongLong();
-                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                center = doc->GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
+                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             record = QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")).arg(
                         data->GetPoint(center).name(), data->GetPoint(firstPointId).name(),
@@ -293,9 +294,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = domElement.attribute("basePoint", "").toLongLong();
-                p1LineId = domElement.attribute("p1Line", "").toLongLong();
-                p2LineId = domElement.attribute("p2Line", "").toLongLong();
+                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
+                p1LineId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
+                p2LineId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
             }
             record = QString(tr("Point of perpendicular from point %1 to line %2_%3")).arg(
                         data->GetPoint(basePointId).name(), data->GetPoint(p1LineId).name(),
@@ -309,10 +310,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                axisP1Id = domElement.attribute("axisP1", "").toLongLong();
-                axisP2Id = domElement.attribute("axisP2", "").toLongLong();
-                firstPointId = domElement.attribute("firstPoint", "").toLongLong();
-                secondPointId = domElement.attribute("secondPoint", "").toLongLong();
+                axisP1Id = doc->GetParametrLongLong(domElement, VAbstractTool::AttrAxisP1, "0");
+                axisP2Id = doc->GetParametrLongLong(domElement, VAbstractTool::AttrAxisP2, "0");
+                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             record = QString(tr("Triangle: axis %1_%2, points %3 and %4")).arg(
                         data->GetPoint(axisP1Id).name(), data->GetPoint(axisP2Id).name(),
