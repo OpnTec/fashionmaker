@@ -39,8 +39,6 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setAcceptHoverEvents(true);
 
     if (typeCreation == Tool::FromGui)
     {

@@ -1080,7 +1080,7 @@ void MainWindow::SetEnableTool(bool enable)
     }
     else
     {
-        modelingTools = enable; // Soon we will have some tools for modeling.
+        modelingTools = enable;
     }
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -1100,6 +1100,9 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointOfIntersection->setEnabled(drawTools);
     ui->toolButtonSplineCutPoint->setEnabled(drawTools);
     ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
+
+    //Modeling Tools
+    ui->toolButtonUnionDetails->setEnabled(modelingTools);
 }
 
 void MainWindow::MinimumScrollBar()
