@@ -32,6 +32,8 @@
 #include "../geometry/vspline.h"
 #include "../geometry/vsplinepath.h"
 #include "../tools/vabstracttool.h"
+#include "../tools/drawTools/vtoolcutspline.h"
+#include "../tools/drawTools/vtoolcutsplinepath.h"
 #include <QDebug>
 #include <QPushButton>
 
@@ -320,6 +322,42 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         data->GetPoint(firstPointId).name(), data->GetPoint(secondPointId).name());
             break;
         }
+        case Tool::CutSplineTool:
+        {
+            qint64 splineId = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if (domElement.isElement())
+            {
+                splineId = doc->GetParametrLongLong(domElement, VToolCutSpline::AttrSpline, "0");
+            }
+            VSpline spl = data->GetSpline(splineId);
+            record = QString(tr("%1 - cut curve %2_%3")).arg(data->GetPoint(tool.getId()).name(),
+                                                             data->GetPoint(spl.GetP1()).name(),
+                                                             data->GetPoint(spl.GetP4()).name());
+        }
+        break;
+        case Tool::CutSplinePathTool:
+        {
+            qint64 splinePathId = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if (domElement.isElement())
+            {
+                splinePathId = doc->GetParametrLongLong(domElement, VToolCutSplinePath::AttrSplinePath, "0");
+            }
+            VSplinePath splPath = data->GetSplinePath(splinePathId);
+            QVector<VSplinePoint> points = splPath.GetSplinePath();
+            if (points.size() != 0 )
+            {
+                record = QString(tr("%1 - cut curve point %2")).arg(data->GetPoint(tool.getId()).name(),
+                                                                    data->GetPoint(points[0].P()).name());
+                for (qint32 i = 1; i< points.size(); ++i)
+                {
+                    QString name = QString("_%1").arg(data->GetPoint(points[i].P()).name());
+                    record.append(name);
+                }
+            }
+        }
+        break;
         default:
             qWarning()<<tr("Got wrong tool type. Ignore.");
             break;
