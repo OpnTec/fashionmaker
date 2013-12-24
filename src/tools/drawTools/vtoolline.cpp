@@ -49,6 +49,10 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolLine::setDialog()
@@ -164,6 +168,16 @@ void VToolLine::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPoint);
 
     AddToCalculation(domElement);
+}
+
+void VToolLine::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrFirstPoint, firstPoint);
+        domElement.setAttribute(AttrSecondPoint, secondPoint);
+    }
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)

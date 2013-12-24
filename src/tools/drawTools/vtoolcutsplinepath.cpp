@@ -60,6 +60,10 @@ VToolCutSplinePath::VToolCutSplinePath(VDomDocument *doc, VContainer *data, cons
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolCutSplinePath::setDialog()
@@ -287,6 +291,20 @@ void VToolCutSplinePath::AddToFile()
     AddAttribute(domElement, AttrSplinePath, splinePathId);
 
     AddToCalculation(domElement);
+}
+
+void VToolCutSplinePath::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrSplinePath, splinePathId);
+    }
 }
 
 void VToolCutSplinePath::RefreshGeometry()

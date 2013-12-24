@@ -41,6 +41,10 @@ VToolPointOfIntersection::VToolPointOfIntersection(VDomDocument *doc, VContainer
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolPointOfIntersection::setDialog()
@@ -151,4 +155,18 @@ void VToolPointOfIntersection::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolPointOfIntersection::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrName, toMM(point.mx()));
+        domElement.setAttribute(AttrName, toMM(point.my()));
+        domElement.setAttribute(AttrFirstPoint, firstPointId);
+        domElement.setAttribute(AttrSecondPoint, secondPointId);
+    }
 }

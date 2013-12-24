@@ -44,6 +44,10 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
@@ -76,6 +80,15 @@ void VNodeArc::AddToFile()
     AddAttribute(domElement, AttrIdObject, idNode);
 
     AddToModeling(domElement);
+}
+
+void VNodeArc::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+    }
 }
 
 void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

@@ -215,6 +215,24 @@ void VToolDetail::AddToFile()
     }
 }
 
+void VToolDetail::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        VDetail det = VAbstractTool::data.GetDetail(id);
+        domElement.setAttribute(AttrName, det.getName());
+        domElement.setAttribute(AttrSupplement, QString().setNum(det.getSupplement()));
+        domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
+        domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
+        RemoveAllChild(domElement);
+        for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
+        {
+           AddNode(domElement, det[i]);
+        }
+    }
+}
+
 QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged && scene())

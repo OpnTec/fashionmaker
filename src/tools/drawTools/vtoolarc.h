@@ -126,6 +126,10 @@ protected:
      */
     virtual void AddToFile();
     /**
+     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+     */
+    virtual void RefreshDataInFile();
+    /**
      * @brief mouseReleaseEvent
      * @param event
      */

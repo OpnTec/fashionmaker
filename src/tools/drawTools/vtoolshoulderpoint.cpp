@@ -42,6 +42,10 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolShoulderPoint::setDialog()
@@ -209,6 +213,23 @@ void VToolShoulderPoint::AddToFile()
     AddAttribute(domElement, AttrPShoulder, pShoulder);
 
     AddToCalculation(domElement);
+}
+
+void VToolShoulderPoint::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrName, toMM(point.mx()));
+        domElement.setAttribute(AttrName, toMM(point.my()));
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrP1Line, basePointId);
+        domElement.setAttribute(AttrP2Line, p2Line);
+        domElement.setAttribute(AttrPShoulder, pShoulder);
+    }
 }
 
 void VToolShoulderPoint::RemoveReferens()

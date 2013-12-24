@@ -42,6 +42,10 @@ VToolPointOfContact::VToolPointOfContact(VDomDocument *doc, VContainer *data, co
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolPointOfContact::setDialog()
@@ -205,6 +209,22 @@ void VToolPointOfContact::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolPointOfContact::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrRadius, radius);
+        domElement.setAttribute(AttrCenter, center);
+        domElement.setAttribute(AttrFirstPoint, firstPointId);
+        domElement.setAttribute(AttrSecondPoint, secondPointId);
+    }
 }
 
 void VToolPointOfContact::RemoveReferens()

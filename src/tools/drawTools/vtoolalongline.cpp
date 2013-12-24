@@ -43,6 +43,10 @@ VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, c
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolAlongLine::FullUpdateFromFile()
@@ -104,6 +108,22 @@ void VToolAlongLine::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolAlongLine::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrFirstPoint, basePointId);
+        domElement.setAttribute(AttrSecondPoint, secondPointId);
+    }
 }
 
 void VToolAlongLine::RemoveReferens()

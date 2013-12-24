@@ -42,6 +42,10 @@ VToolLineIntersect::VToolLineIntersect(VDomDocument *doc, VContainer *data, cons
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolLineIntersect::setDialog()
@@ -182,6 +186,22 @@ void VToolLineIntersect::AddToFile()
     AddAttribute(domElement, AttrP2Line2, p2Line2);
 
     AddToCalculation(domElement);
+}
+
+void VToolLineIntersect::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrP1Line1, p1Line1);
+        domElement.setAttribute(AttrP2Line1, p2Line1);
+        domElement.setAttribute(AttrP1Line2, p1Line2);
+        domElement.setAttribute(AttrP2Line2, p2Line2);
+    }
 }
 
 void VToolLineIntersect::RemoveReferens()

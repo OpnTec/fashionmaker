@@ -119,6 +119,13 @@ protected:
      * @brief AddToFile
      */
     virtual void AddToFile();
+    /**
+     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+     */
+    virtual void RefreshDataInFile();
+    /**
+     * @brief RefreshGeometry
+     */
     void      RefreshGeometry();
 private:
     Q_DISABLE_COPY(VToolCutSpline)

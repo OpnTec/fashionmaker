@@ -51,6 +51,10 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
@@ -86,6 +90,18 @@ void VNodePoint::AddToFile()
     AddAttribute(domElement, AttrMy, toMM(point.my()));
 
     AddToModeling(domElement);
+}
+
+void VNodePoint::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(point.mx())));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(point.my())));
+    }
 }
 
 void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

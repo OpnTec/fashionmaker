@@ -41,6 +41,10 @@ VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolTriangle::setDialog()
@@ -211,4 +215,20 @@ void VToolTriangle::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolTriangle::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrAxisP1, QString().setNum(axisP1Id));
+        domElement.setAttribute(AttrAxisP2, QString().setNum(axisP2Id));
+        domElement.setAttribute(AttrFirstPoint, QString().setNum(firstPointId));
+        domElement.setAttribute(AttrSecondPoint, QString().setNum(secondPointId));
+    }
 }

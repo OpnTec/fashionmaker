@@ -69,6 +69,10 @@ VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolSplinePath::setDialog()
@@ -269,6 +273,39 @@ void VToolSplinePath::AddToFile()
     }
 
     AddToCalculation(domElement);
+}
+
+void VToolSplinePath::RefreshDataInFile()
+{
+    VSplinePath splPath = VAbstractTool::data.GetSplinePath(id);
+    for (qint32 i = 1; i<=splPath.Count(); ++i)
+    {
+        VSpline spl = splPath.GetSpline(i);
+        qint32 j = i*2;
+        disconnect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        disconnect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        controlPoints[j-2]->setPos(spl.GetP2());
+        controlPoints[j-1]->setPos(spl.GetP3());
+        connect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+
+        spl = VSpline (VAbstractTool::data.DataPoints(), spl.GetP1(),  controlPoints[j-2]->pos(),
+                       controlPoints[j-1]->pos(), spl.GetP4(), splPath.getKCurve());
+        CorectControlPoints(spl, splPath, i);
+        CorectControlPoints(spl, splPath, i);
+
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if (domElement.isElement())
+        {
+            domElement.setAttribute(AttrKCurve, QString().setNum(splPath.getKCurve()));
+            UpdatePathPoint(domElement, splPath);
+        }
+
+    }
 }
 
 void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint)

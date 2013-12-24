@@ -41,6 +41,10 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolSinglePoint::setDialog()
@@ -64,6 +68,20 @@ void VToolSinglePoint::AddToFile()
     AddAttribute(domElement, AttrMy, toMM(point.my()));
 
     AddToCalculation(domElement);
+}
+
+void VToolSinglePoint::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrX, QString().setNum(toMM(point.x())));
+        domElement.setAttribute(AttrY, QString().setNum(toMM(point.y())));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(point.mx())));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(point.my())));
+    }
 }
 
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)

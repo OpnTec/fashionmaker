@@ -44,6 +44,10 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
@@ -77,6 +81,15 @@ void VNodeSpline::AddToFile()
     AddAttribute(domElement, AttrIdObject, idNode);
 
     AddToModeling(domElement);
+}
+
+void VNodeSpline::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+    }
 }
 
 void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

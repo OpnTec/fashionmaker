@@ -68,6 +68,10 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const T
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolSpline::setDialog()
@@ -220,6 +224,22 @@ void VToolSpline::AddToFile()
     AddAttribute(domElement, AttrKCurve, spl.GetKcurve());
 
     AddToCalculation(domElement);
+}
+
+void VToolSpline::RefreshDataInFile()
+{
+    VSpline spl = VAbstractTool::data.GetSpline(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrPoint1, QString().setNum(spl.GetP1()));
+        domElement.setAttribute(AttrPoint4, QString().setNum(spl.GetP4()));
+        domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
+        domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
+        domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
+    }
 }
 
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

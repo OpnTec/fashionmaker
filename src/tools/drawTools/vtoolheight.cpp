@@ -41,6 +41,10 @@ VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, 
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolHeight::setDialog()
@@ -186,4 +190,20 @@ void VToolHeight::AddToFile()
 
     AddToCalculation(domElement);
 
+}
+
+void VToolHeight::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrBasePoint, basePointId);
+        domElement.setAttribute(AttrP1Line, p1LineId);
+        domElement.setAttribute(AttrP2Line, p2LineId);
+    }
 }

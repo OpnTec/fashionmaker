@@ -45,6 +45,10 @@ VToolBisector::VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
@@ -202,6 +206,23 @@ void VToolBisector::AddToFile()
     AddAttribute(domElement, AttrThirdPoint, thirdPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolBisector::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrFirstPoint, firstPointId);
+        domElement.setAttribute(AttrSecondPoint, basePointId);
+        domElement.setAttribute(AttrThirdPoint, thirdPointId);
+    }
 }
 
 void VToolBisector::RemoveReferens()

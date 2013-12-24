@@ -43,6 +43,10 @@ VToolEndLine::VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolEndLine::setDialog()
@@ -165,4 +169,20 @@ void VToolEndLine::AddToFile()
     AddAttribute(domElement, AttrBasePoint, basePointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolEndLine::RefreshDataInFile()
+{
+    VPointF point = VAbstractTool::data.GetPoint(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point.mx()));
+        domElement.setAttribute(AttrMy, toMM(point.my()));
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrAngle, angle);
+        domElement.setAttribute(AttrBasePoint, basePointId);
+    }
 }

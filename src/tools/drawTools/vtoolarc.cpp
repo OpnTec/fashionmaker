@@ -49,6 +49,10 @@ VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::S
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolArc::setDialog()
@@ -197,6 +201,19 @@ void VToolArc::AddToFile()
     AddAttribute(domElement, AttrAngle2, arc.GetFormulaF2());
 
     AddToCalculation(domElement);
+}
+
+void VToolArc::RefreshDataInFile()
+{
+    VArc arc = VAbstractTool::data.GetArc(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrCenter, arc.GetCenter());
+        domElement.setAttribute(AttrRadius, arc.GetFormulaRadius());
+        domElement.setAttribute(AttrAngle1, arc.GetFormulaF1());
+        domElement.setAttribute(AttrAngle2, arc.GetFormulaF2());
+    }
 }
 
 void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
