@@ -30,9 +30,11 @@
 #define VSPLINEPATH_H
 
 #include "vsplinepoint.h"
-#include "../container/vpointf.h"
+#include "vpointf.h"
 #include "vspline.h"
+#include "vgobject.h"
 #include <QApplication>
+#include "../container/vcontainer.h"
 
 namespace SplinePoint
 {
@@ -47,18 +49,14 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
 /**
  * @brief The VSplinePath клас, що розраховує шлях сплайнів.
  */
-class VSplinePath
+class VSplinePath :public VGObject
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                   /**
                    * @brief VSplinePath конструктор по замовчуванню.
                    */
-                  VSplinePath();
-                  /**
-                   * @brief VSplinePath конструктор по замовчуванню.
-                   */
-                  VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve = 1, qint64 idObject = 0);
+                  VSplinePath(qreal kCurve = 1, qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
                   /**
                    * @brief VSplinePath
                    * @param splPath
@@ -106,11 +104,6 @@ public:
      */
     qreal         GetLength() const;
     /**
-     * @brief GetDataPoints
-     * @return
-     */
-    inline QHash<qint64, VPointF> GetDataPoints() const {return points;}
-    /**
      * @brief UpdatePoint
      * @param indexSpline
      * @param pos
@@ -155,26 +148,7 @@ public:
      * @return
      */
     VSplinePoint  &operator[](ptrdiff_t indx);
-    /**
-     * @brief getIdObject
-     * @return
-     */
-    inline qint64 getIdObject() const {return idObject;}
-    /**
-     * @brief setIdObject
-     * @param value
-     */
-    inline void   setIdObject(const qint64 &value) {idObject = value;}
-    /**
-     * @brief name
-     * @return
-     */
-    QString       name() const {return _name;}
-    /**
-     * @brief setName
-     * @param name
-     */
-    void          setName(const QString &name) {_name = name;}
+    const VSplinePoint &at(ptrdiff_t indx) const;
     /**
      * @brief CutSplinePath
      * @param length
@@ -186,8 +160,6 @@ public:
      */
     QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
                                 QPointF &spl2p3) const;
-    QHash<qint64, VPointF> getPoints() const;
-    void setPoints(const QHash<qint64, VPointF> *value);
 protected:
     /**
      * @brief path вектор з точок сплайна.
@@ -197,18 +169,6 @@ protected:
      * @brief kCurve
      */
     qreal         kCurve;
-    /**
-     * @brief points
-     */
-    QHash<qint64, VPointF> points;
-    /**
-     * @brief idObject
-     */
-    qint64        idObject;
-    /**
-     * @brief _name
-     */
-    QString       _name;
 };
 
 #endif // VSPLINEPATH_H

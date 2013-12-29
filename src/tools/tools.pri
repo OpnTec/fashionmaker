@@ -29,7 +29,8 @@ HEADERS += \
     src/tools/nodeDetails/vabstractnode.h \
     src/tools/nodeDetails/nodedetails.h \
     src/tools/drawTools/vtoolcutspline.h \
-    src/tools/drawTools/vtoolcutsplinepath.h
+    src/tools/drawTools/vtoolcutsplinepath.h \
+    src/tools/vtooluniondetails.h
 
 SOURCES += \
     src/tools/vtooldetail.cpp \
@@ -59,4 +60,5 @@ SOURCES += \
     src/tools/nodeDetails/vnodearc.cpp \
     src/tools/nodeDetails/vabstractnode.cpp \
     src/tools/drawTools/vtoolcutspline.cpp \
-    src/tools/drawTools/vtoolcutsplinepath.cpp
+    src/tools/drawTools/vtoolcutsplinepath.cpp \
+    src/tools/vtooluniondetails.cpp

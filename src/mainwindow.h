@@ -35,6 +35,7 @@
 #include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
+#include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "xml/vdomdocument.h"
 
@@ -232,6 +233,7 @@ public slots:
      * @param checked
      */
     void               ToolPointOfIntersection(bool checked);
+    void               ToolUnionDetails(bool checked);
     /**
      * @brief ClosedDialogEndLine
      * @param result
@@ -312,6 +314,7 @@ public slots:
      * @param result
      */
     void               ClosedDialogPointOfIntersection(int result);
+    void               ClosedDialogUnionDetails(int result);
     /**
      * @brief ClosedDialogCutSpline handler close event tool CutSpline
      * @param result result of working of dialog
@@ -367,6 +370,14 @@ private:
      * @brief ui keeps information about user interface
      */
     Ui::MainWindow     *ui;
+    /**
+     * @brief pattern container with data (points, arcs, splines, spline paths, variables)
+     */
+    VContainer        *pattern;
+    /**
+     * @brief doc dom document container
+     */
+    VDomDocument      *doc;
     /**
      * @brief tool
      */
@@ -472,17 +483,13 @@ private:
      */
     QSharedPointer<DialogCutSplinePath>       dialogCutSplinePath;
     /**
+     * @brief dialogUnionDetails
+     */
+    QSharedPointer<DialogUnionDetails>        dialogUnionDetails;
+    /**
      * @brief dialogHistory
      */
     DialogHistory      *dialogHistory;
-    /**
-     * @brief doc dom document container
-     */
-    VDomDocument       *doc;
-    /**
-     * @brief data container with data
-     */
-    VContainer         *data;
     /**
      * @brief comboBoxDraws
      */

@@ -41,6 +41,12 @@ class DialogUnionDetails : public DialogTool
 public:
     explicit         DialogUnionDetails(const VContainer *data, QWidget *parent = 0);
                      ~DialogUnionDetails();
+    inline qint64 getD1() const {return d1;}
+    inline qint64 getD2() const {return d2;}
+    inline qint64 getD1P1() const {return d1P1;}
+    inline qint64 getD1P2() const {return d1P2;}
+    inline qint64 getD2P1() const {return d2P1;}
+    inline qint64 getD2P2() const {return d2P2;}
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save correct data and ignore wrong.
@@ -55,10 +61,6 @@ public slots:
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
     Ui::DialogUnionDetails *ui;
-    /**
-     * @brief details detail
-     */
-    VDetail          details;
     qint64           d1;
     qint64           d2;
     qint64           d1P1;

@@ -35,6 +35,7 @@
 #include "../geometry/vsplinepath.h"
 #include "../geometry/vdetail.h"
 #include "../widgets/vitem.h"
+#include "../geometry/vgobject.h"
 
 /**
  * @brief The VContainer class container of all variables.
@@ -63,24 +64,32 @@ public:
     * @param data container
     */
     void                setData(const VContainer &data);
+    template <typename T>
+    const T GeometricObject(qint64 id) const
+    {
+        const T obj = dynamic_cast<T>(GetObject(gObjects, id));
+        Q_ASSERT(obj != 0);
+        return obj;
+    }
+
     /**
-     * @brief GetPoint returns a point by id
+     * @brief GetGObject returns a point by id
      * @param id id of point
      * @return point
      */
-    VPointF             GetPoint(qint64 id) const;
+    const VGObject *GetGObject(qint64 id) const;
     /**
      * @brief GetStandartTableCell return standart table row by name
      * @param name name of standart table row
      * @return row of standart table
      */
-    VStandartTableRow  GetStandartTableCell(const QString& name) const;
+    const VStandartTableRow *GetStandartTableCell(const QString& name) const;
     /**
      * @brief GetIncrementTableRow return increment table row by name
      * @param name name of increment table row
      * @return row of increment table
      */
-    VIncrementTableRow  GetIncrementTableRow(const QString& name) const;
+    const VIncrementTableRow *GetIncrementTableRow(const QString& name) const;
     /**
      * @brief GetLine return length of line by name
      * @param name name of line
@@ -106,29 +115,11 @@ public:
      */
     qreal               GetLineAngle(const QString &name) const;
     /**
-     * @brief GetSpline return spline by id
-     * @param id id of spline
-     * @return spline
-     */
-    VSpline             GetSpline(qint64 id) const;
-    /**
-     * @brief GetArc return arc by id
-     * @param id id of arc
-     * @return arc
-     */
-    VArc                GetArc(qint64 id) const;
-    /**
-     * @brief GetSplinePath return spline path by id
-     * @param id id of spline path
-     * @return spline path
-     */
-    VSplinePath         GetSplinePath(qint64 id) const;
-    /**
      * @brief GetDetail return detail by id
      * @param id id of detail
      * @return detail
      */
-    VDetail             GetDetail(qint64 id) const;
+    const VDetail *GetDetail(qint64 id) const;
     /**
      * @brief getId return current id
      * @return current id
@@ -139,26 +130,26 @@ public:
      * @param point new point
      * @return return id of new point in container
      */
-    qint64              AddPoint(const VPointF& point);
+    qint64              AddGObject(VGObject *obj);
     /**
      * @brief AddDetail add new detail to container
      * @param detail new detail
      * @return return id of new detail in container
      */
-    qint64              AddDetail(const VDetail& detail);
+    qint64              AddDetail(VDetail *detail);
     /**
      * @brief AddStandartTableCell add new row of standart table
      * @param name name of row of standart table
      * @param cell row of standart table
      */
-    inline void         AddStandartTableCell(const QString& name, const VStandartTableRow& cell)
+    inline void         AddStandartTableCell(const QString& name, VStandartTableRow *cell)
     {standartTable[name] = cell;}
     /**
      * @brief AddIncrementTableRow add new row of increment table
      * @param name name of new row of increment table
      * @param row new row of increment table
      */
-    inline void         AddIncrementTableRow(const QString& name, const VIncrementTableRow &row)
+    inline void         AddIncrementTableRow(const QString& name, VIncrementTableRow *row)
     {incrementTable[name] = row;}
     /**
      * @brief AddLengthLine add length of line to container
@@ -197,30 +188,6 @@ public:
      */
     void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
     /**
-     * @brief AddSpline add spline to container
-     * @param spl new spline
-     * @return  id of spline in container
-     */
-    qint64              AddSpline(const VSpline& spl);
-    /**
-     * @brief AddSplinePath add spline path to container
-     * @param splPath new spline path
-     * @return id of spline path in container
-     */
-    qint64              AddSplinePath(const VSplinePath& splPath);
-    /**
-     * @brief AddArc add arc to container
-     * @param arc new arc
-     * @return id of arc in container in container
-     */
-    qint64              AddArc(const VArc& arc);
-    /**
-     * @brief AddArcModeling add arc modeling to container
-     * @param arc new arc modeling
-     * @return id of new arc modeling in container
-     */
-    qint64              AddArcModeling(const VArc& arc);
-    /**
      * @brief GetNameLine return name of line
      * @param firstPoint id of first point of line
      * @param secondPoint id of second point of line
@@ -239,50 +206,26 @@ public:
      * @param id id of existing point
      * @param point point
      */
-    void                UpdatePoint(qint64 id, const VPointF& point);
+    void                UpdateGObject(qint64 id, VGObject* obj);
     /**
      * @brief UpdateDetail update detail by id
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, const VDetail& detail);
-    /**
-     * @brief UpdateSpline update spline by id
-     * @param id if of existing spline
-     * @param spl spline
-     */
-    void                UpdateSpline(qint64 id, const VSpline& spl);
-    /**
-     * @brief UpdateSplinePath update spline path by id
-     * @param id id of existing spline path
-     * @param splPath spline path
-     */
-    void                UpdateSplinePath(qint64 id, const VSplinePath& splPath);
-    /**
-     * @brief UpdateArc update arc by id
-     * @param id id of existing arc
-     * @param arc arc
-     */
-    void                UpdateArc(qint64 id, const VArc& arc);
-    /**
-     * @brief UpdateArcModeling update arc modeling by id
-     * @param id id of existing arc modeling
-     * @param arc arc modeling
-     */
-    void                UpdateArcModeling(qint64 id, const VArc& arc);
+    void                UpdateDetail(qint64 id, VDetail *detail);
     /**
      * @brief UpdateStandartTableCell update standart table row by name
      * @param name name of row
      * @param cell row of standart table
      */
-    inline void         UpdateStandartTableCell(const QString& name, const VStandartTableRow& cell)
+    inline void         UpdateStandartTableCell(const QString& name, VStandartTableRow *cell)
     {standartTable[name] = cell;}
     /**
      * @brief UpdateIncrementTableRow update increment table row by name
      * @param name name of row
      * @param row row
      */
-    inline void         UpdateIncrementTableRow(const QString& name, const VIncrementTableRow& row)
+    inline void         UpdateIncrementTableRow(const QString& name, VIncrementTableRow *row)
     {incrementTable[name] = row;}
     /**
      * @brief GetValueStandartTableCell return value of standart table row by name
@@ -368,20 +311,10 @@ public:
      */
     inline void         RemoveIncrementTableRow(const QString& name) {incrementTable.remove(name);}
     /**
-     * @brief data container with dataPoints return container of points
-     * @return pointer on container of points
+     * @brief data container with datagObjects return container of gObjects
+     * @return pointer on container of gObjects
      */
-    inline const QHash<qint64, VPointF> *DataPoints() const {return &points;}
-    /**
-     * @brief data container with dataSplines return container of splines
-     * @return pointer on container of splines
-     */
-    inline const QHash<qint64, VSpline> *DataSplines() const {return &splines;}
-    /**
-     * @brief data container with dataArcs return container of arcs
-     * @return pointer on container of arcs
-     */
-    inline const QHash<qint64, VArc>    *DataArcs() const {return &arcs;}
+    inline const QHash<qint64, VGObject*> *DataGObjects() const {return &gObjects;}
     /**
      * @brief data container with dataBase return container of data
      * @return pointer on container of base data
@@ -391,12 +324,12 @@ public:
      * @brief data container with dataStandartTable return container of standart table
      * @return pointer on container of standart table
      */
-    inline const QHash<QString, VStandartTableRow> *DataStandartTable() const {return &standartTable;}
+    inline const QHash<QString, VStandartTableRow *> *DataStandartTable() const {return &standartTable;}
     /**
      * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
      */
-    inline const QHash<QString, VIncrementTableRow> *DataIncrementTable() const {return &incrementTable;}
+    inline const QHash<QString, VIncrementTableRow *> *DataIncrementTable() const {return &incrementTable;}
     /**
      * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
@@ -418,15 +351,10 @@ public:
      */
     inline const QHash<QString, qreal>  *DataLineAngles() const {return &lineAngles;}
     /**
-     * @brief data container with dataSplinePaths return container of spline paths
-     * @return pointer on container of spline paths
-     */
-    inline const QHash<qint64, VSplinePath> *DataSplinePaths() const {return &splinePaths;}
-    /**
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
-    inline const QHash<qint64, VDetail> *DataDetails() const {return &details;}
+    inline const QHash<qint64, VDetail *> *DataDetails() const {return &details;}
     /**
      * @brief UpdateId update id. If new id bigger when current save new like current.
      * @param newId id
@@ -498,17 +426,17 @@ private:
      */
     QHash<QString, qint32> base;
     /**
-     * @brief points container of points
+     * @brief gObjects graphicals objects of pattern.
      */
-    QHash<qint64, VPointF> points;
+    QHash<qint64, VGObject*> gObjects;
     /**
      * @brief standartTable container of standart table rows
      */
-    QHash<QString, VStandartTableRow> standartTable;
+    QHash<QString, VStandartTableRow*> standartTable;
     /**
      * @brief incrementTable
      */
-    QHash<QString, VIncrementTableRow> incrementTable;
+    QHash<QString, VIncrementTableRow*> incrementTable;
     /**
      * @brief lengthLines container of lines lengths
      */
@@ -518,29 +446,17 @@ private:
      */
     QHash<QString, qreal>  lineAngles;
     /**
-     * @brief splines container of splines
-     */
-    QHash<qint64, VSpline> splines;
-    /**
      * @brief lengthSplines container of splines length
      */
     QHash<QString, qreal>  lengthSplines;
-    /**
-     * @brief arcs container of arcs
-     */
-    QHash<qint64, VArc>    arcs;
     /**
      * @brief lengthArcs container of arcs length
      */
     QHash<QString, qreal>  lengthArcs;
     /**
-     * @brief splinePaths container of spline paths
-     */
-    QHash<qint64, VSplinePath> splinePaths;
-    /**
      * @brief details container of details
      */
-    QHash<qint64, VDetail> details;
+    QHash<qint64, VDetail*> details;
     /**
      * @brief CreateManTableIGroup generate man standart table of measurements
      */
@@ -565,7 +481,15 @@ private:
      * @param id id of object
      * @return Object
      */
-    static val GetObject(const QHash<key, val> &obj, key id);
+    const val *GetObject(const QHash<key, val*> &obj, key id) const;
+    template <typename key, typename val>
+    /**
+     * @brief GetObject return object from container
+     * @param obj container
+     * @param id id of object
+     * @return Object
+     */
+    val GetVariable(const QHash<key, val> &obj, key id) const;
     template <typename val>
     /**
      * @brief UpdateObject update object in container
@@ -573,7 +497,7 @@ private:
      * @param id id of existing object
      * @param point object
      */
-    static void UpdateObject(QHash<qint64, val> &obj, const qint64 &id, const val& point);
+    void UpdateObject(QHash<qint64, val *> &obj, const qint64 &id, val* point);
     template <typename key, typename val>
     /**
      * @brief AddObject add object to container
@@ -581,7 +505,7 @@ private:
      * @param value object
      * @return id of object in container
      */
-    static qint64 AddObject(QHash<key, val> &obj, const val& value);
+    static qint64 AddObject(QHash<key, val*> &obj, val *value);
 };
 
 #endif // VCONTAINER_H

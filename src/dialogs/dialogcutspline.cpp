@@ -97,8 +97,8 @@ void DialogCutSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Spline)
     {
-        VSpline spl = data->GetSpline(id);
-        ChangeCurrentText(ui->comboBoxSpline, spl.name());
+        const VSpline *spl = data->GeometricObject<const VSpline *>(id);
+        ChangeCurrentText(ui->comboBoxSpline, spl->name());
         emit ToolTip("");
         this->show();
     }

@@ -155,6 +155,7 @@ public:
      * @return
      */
     inline QHash<qint64, VDataTool*>* getTools() {return &tools;}
+    VDataTool* getTool(const qint64 &id);
     /**
      * @brief getHistory
      * @return
@@ -403,6 +404,8 @@ private:
      */
     void           ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                    const Document::Documents &parse, const QString& type);
+    void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+                                     const Document::Documents &parse, const QString& type);
     /**
      * @brief ParseIncrementsElement
      * @param node

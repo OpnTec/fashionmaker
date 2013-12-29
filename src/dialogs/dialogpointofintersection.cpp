@@ -65,10 +65,10 @@ void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &ty
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui->comboBoxFirstPoint->findText(point.name());
+            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
@@ -79,7 +79,7 @@ void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &ty
         }
         if (number == 1)
         {
-            qint32 index = ui->comboBoxSecondPoint->findText(point.name());
+            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);

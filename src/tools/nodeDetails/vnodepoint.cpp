@@ -46,7 +46,7 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();
@@ -75,32 +75,32 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
 
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
 void VNodePoint::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddToModeling(domElement);
 }
 
 void VNodePoint::RefreshDataInFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
-        domElement.setAttribute(AttrMx, QString().setNum(toMM(point.mx())));
-        domElement.setAttribute(AttrMy, QString().setNum(toMM(point.my())));
+        domElement.setAttribute(AttrIdObject, idNode);
+        domElement.setAttribute(AttrMx, toMM(point->mx()));
+        domElement.setAttribute(AttrMy, toMM(point->my()));
     }
 }
 
@@ -128,13 +128,13 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
     QPointF p = pos - this->pos();
-    point.setMx(p.x());
-    point.setMy(p.y());
+    point->setMx(p.x());
+    point->setMy(p.y());
     RefreshLine();
-    UpdateNamePosition(point.mx(), point.my());
-    VAbstractTool::data.UpdatePoint(id, point);
+    UpdateNamePosition(point->mx(), point->my());
+    VAbstractTool::data.UpdateGObject(id, point);
 }
 
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)

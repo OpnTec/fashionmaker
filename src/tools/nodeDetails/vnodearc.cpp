@@ -114,9 +114,9 @@ void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void VNodeArc::RefreshGeometry()
 {
-    VArc arc = VAbstractTool::data.GetArc(id);
+    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QPainterPath path;
-    path.addPath(arc.GetPath());
+    path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
 }

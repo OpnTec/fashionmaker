@@ -61,10 +61,10 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui->comboBoxP1Line1->findText(point.name());
+            qint32 index = ui->comboBoxP1Line1->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP1Line1->setCurrentIndex(index);
@@ -76,7 +76,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 1)
         {
-            qint32 index = ui->comboBoxP2Line1->findText(point.name());
+            qint32 index = ui->comboBoxP2Line1->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP2Line1->setCurrentIndex(index);
@@ -88,7 +88,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 2)
         {
-            qint32 index = ui->comboBoxP1Line2->findText(point.name());
+            qint32 index = ui->comboBoxP1Line2->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP1Line2->setCurrentIndex(index);
@@ -100,7 +100,7 @@ void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 3)
         {
-            qint32 index = ui->comboBoxP2Line2->findText(point.name());
+            qint32 index = ui->comboBoxP2Line2->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP2Line2->setCurrentIndex(index);
@@ -176,13 +176,13 @@ void DialogLineIntersect::CheckState()
 
 bool DialogLineIntersect::CheckIntersecion()
 {
-    VPointF p1L1 = data->GetPoint(p1Line1);
-    VPointF p2L1 = data->GetPoint(p2Line1);
-    VPointF p1L2 = data->GetPoint(p1Line2);
-    VPointF p2L2 = data->GetPoint(p2Line2);
+    const VPointF *p1L1 = data->GeometricObject<const VPointF *>(p1Line1);
+    const VPointF *p2L1 = data->GeometricObject<const VPointF *>(p2Line1);
+    const VPointF *p1L2 = data->GeometricObject<const VPointF *>(p1Line2);
+    const VPointF *p2L2 = data->GeometricObject<const VPointF *>(p2Line2);
 
-    QLineF line1(p1L1.toQPointF(), p2L1.toQPointF());
-    QLineF line2(p1L2.toQPointF(), p2L2.toQPointF());
+    QLineF line1(p1L1->toQPointF(), p2L1->toQPointF());
+    QLineF line2(p1L2->toQPointF(), p2L2->toQPointF());
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)

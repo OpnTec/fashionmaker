@@ -50,37 +50,37 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
 void VToolSinglePoint::setDialog()
 {
     Q_ASSERT(dialogSinglePoint.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
-    dialogSinglePoint->setData(p.name(), p.toQPointF());
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    dialogSinglePoint->setData(p->name(), p->toQPointF());
 }
 
 void VToolSinglePoint::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrX, toMM(point.x()));
-    AddAttribute(domElement, AttrY, toMM(point.y()));
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrX, toMM(point->x()));
+    AddAttribute(domElement, AttrY, toMM(point->y()));
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddToCalculation(domElement);
 }
 
 void VToolSinglePoint::RefreshDataInFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point.name());
-        domElement.setAttribute(AttrX, QString().setNum(toMM(point.x())));
-        domElement.setAttribute(AttrY, QString().setNum(toMM(point.y())));
-        domElement.setAttribute(AttrMx, QString().setNum(toMM(point.mx())));
-        domElement.setAttribute(AttrMy, QString().setNum(toMM(point.my())));
+        domElement.setAttribute(AttrName, point->name());
+        domElement.setAttribute(AttrX, QString().setNum(toMM(point->x())));
+        domElement.setAttribute(AttrY, QString().setNum(toMM(point->y())));
+        domElement.setAttribute(AttrMx, QString().setNum(toMM(point->mx())));
+        domElement.setAttribute(AttrMy, QString().setNum(toMM(point->my())));
     }
 }
 
@@ -130,7 +130,7 @@ void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
 
 void  VToolSinglePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
 void VToolSinglePoint::FullUpdateFromGui(int result)
@@ -169,5 +169,5 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }

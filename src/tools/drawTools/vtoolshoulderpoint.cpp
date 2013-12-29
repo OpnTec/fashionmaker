@@ -51,13 +51,13 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
 void VToolShoulderPoint::setDialog()
 {
     Q_ASSERT(dialogShoulderPoint.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogShoulderPoint->setTypeLine(typeLine);
     dialogShoulderPoint->setFormula(formula);
     dialogShoulderPoint->setP1Line(basePointId, id);
     dialogShoulderPoint->setP2Line(p2Line, id);
     dialogShoulderPoint->setPShoulder(pShoulder, id);
-    dialogShoulderPoint->setPointName(p.name());
+    dialogShoulderPoint->setPointName(p->name());
 }
 
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
@@ -105,27 +105,27 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
                                 VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                                 const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    VPointF firstPoint = data->GetPoint(p1Line);
-    VPointF secondPoint = data->GetPoint(p2Line);
-    VPointF shoulderPoint = data->GetPoint(pShoulder);
+    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(p1Line);
+    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
+    const VPointF *shoulderPoint = data->GeometricObject<const VPointF *>(pShoulder);
 
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                       shoulderPoint.toQPointF(), toPixel(result));
+        QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
+                                                       shoulderPoint->toQPointF(), toPixel(result));
         qint64 id =  _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(p1Line, id);
             data->AddLine(p2Line, id);
         }
         else
         {
-            data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(p1Line, id);
             data->AddLine(p2Line, id);
             if (parse != Document::FullParse)
@@ -197,14 +197,14 @@ void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolShoulderPoint::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddAttribute(domElement, AttrTypeLine, typeLine);
     AddAttribute(domElement, AttrLength, formula);
@@ -217,13 +217,13 @@ void VToolShoulderPoint::AddToFile()
 
 void VToolShoulderPoint::RefreshDataInFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point.name());
-        domElement.setAttribute(AttrName, toMM(point.mx()));
-        domElement.setAttribute(AttrName, toMM(point.my()));
+        domElement.setAttribute(AttrName, point->name());
+        domElement.setAttribute(AttrName, toMM(point->mx()));
+        domElement.setAttribute(AttrName, toMM(point->my()));
         domElement.setAttribute(AttrTypeLine, typeLine);
         domElement.setAttribute(AttrLength, formula);
         domElement.setAttribute(AttrP1Line, basePointId);

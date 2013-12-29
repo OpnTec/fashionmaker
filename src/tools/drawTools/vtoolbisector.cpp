@@ -73,13 +73,13 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 void VToolBisector::setDialog()
 {
     Q_ASSERT(dialogBisector.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogBisector->setTypeLine(typeLine);
     dialogBisector->setFormula(formula);
     dialogBisector->setFirstPointId(firstPointId, id);
     dialogBisector->setSecondPointId(basePointId, id);
     dialogBisector->setThirdPointId(thirdPointId, id);
-    dialogBisector->setPointName(p.name());
+    dialogBisector->setPointName(p->name());
 }
 
 void VToolBisector::Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -101,26 +101,26 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                            const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    VPointF firstPoint = data->GetPoint(firstPointId);
-    VPointF secondPoint = data->GetPoint(secondPointId);
-    VPointF thirdPoint = data->GetPoint(thirdPointId);
+    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
+    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
+    const VPointF *thirdPoint = data->GeometricObject<const VPointF *>(thirdPointId);
 
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        QPointF fPoint = VToolBisector::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
-                                                  thirdPoint.toQPointF(), toPixel(result));
+        QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
+                                                  thirdPoint->toQPointF(), toPixel(result));
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
         }
         else
         {
-            data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
             if (parse != Document::FullParse)
             {
@@ -190,14 +190,14 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolBisector::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddAttribute(domElement, AttrTypeLine, typeLine);
     AddAttribute(domElement, AttrLength, formula);
@@ -210,13 +210,13 @@ void VToolBisector::AddToFile()
 
 void VToolBisector::RefreshDataInFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrMx, toMM(point.mx()));
-        domElement.setAttribute(AttrMy, toMM(point.my()));
-        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point->mx()));
+        domElement.setAttribute(AttrMy, toMM(point->my()));
+        domElement.setAttribute(AttrName, point->name());
         domElement.setAttribute(AttrTypeLine, typeLine);
         domElement.setAttribute(AttrLength, formula);
         domElement.setAttribute(AttrFirstPoint, firstPointId);

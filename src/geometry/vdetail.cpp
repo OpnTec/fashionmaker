@@ -29,16 +29,16 @@
 #include "vdetail.h"
 
 VDetail::VDetail()
-    :nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), supplement(true), closed(true), width(10){}
+    :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), supplement(true), closed(true), width(10){}
 
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
-    :nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), supplement(true), closed(true), width(10)
+    :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), supplement(true), closed(true), width(10)
 {
     this->nodes = nodes;
 }
 
 VDetail::VDetail(const VDetail &detail)
-    :nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
+    :_id(0), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
       supplement(detail.getSupplement()), closed(detail.getClosed()), width(detail.getWidth()){}
 
 VDetail &VDetail::operator =(const VDetail &detail)
@@ -66,7 +66,7 @@ void VDetail::Clear()
 
 bool VDetail::Containes(const qint64 &id) const
 {
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
         VNodeDetail node = nodes[i];
         if (node.getId() == id)
@@ -81,3 +81,31 @@ VNodeDetail &VDetail::operator [](ptrdiff_t indx)
 {
     return nodes[indx];
 }
+
+const VNodeDetail &VDetail::at(ptrdiff_t indx) const
+{
+    return nodes[indx];
+}
+
+ptrdiff_t VDetail::indexOfNode(const qint64 &id) const
+{
+    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
+    {
+        VNodeDetail node = nodes[i];
+        if (node.getId() == id)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+qint64 VDetail::id() const
+{
+    return _id;
+}
+
+void VDetail::setId(const qint64 &id)
+{
+    _id = id;
+}
+

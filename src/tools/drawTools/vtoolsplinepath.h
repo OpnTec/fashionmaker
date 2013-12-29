@@ -74,7 +74,7 @@ public:
       * @param parse
       * @param typeCreation
       */
-     static void  Create(const qint64 _id, const VSplinePath &path, VMainGraphicsScene  *scene,
+     static void  Create(const qint64 _id, VSplinePath *path, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                          const Tool::Sources &typeCreation);
      /**

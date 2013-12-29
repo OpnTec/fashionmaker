@@ -97,8 +97,8 @@ void DialogEndLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
-        ChangeCurrentText(ui->comboBoxBasePoint, point.name());
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
+        ChangeCurrentText(ui->comboBoxBasePoint, point->name());
         emit ToolTip("");
         this->show();
     }

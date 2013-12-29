@@ -69,14 +69,14 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
 
 void DialogIncrements::FillStandartTable()
 {
-    const QHash<QString, VStandartTableRow> *standartTable = data->DataStandartTable();
+    const QHash<QString, VStandartTableRow *> *standartTable = data->DataStandartTable();
     qint32 currentRow = -1;
-    QHashIterator<QString, VStandartTableRow> i(*standartTable);
+    QHashIterator<QString, VStandartTableRow *> i(*standartTable);
     ui->tableWidgetStandart->setRowCount ( standartTable->size() );
     while (i.hasNext())
     {
         i.next();
-        VStandartTableRow cell = i.value();
+        VStandartTableRow *cell = i.value();
         currentRow++;
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
@@ -88,19 +88,19 @@ void DialogIncrements::FillStandartTable()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 1, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.GetBase()));
+        item = new QTableWidgetItem(QString().setNum(cell->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 2, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.GetKsize()));
+        item = new QTableWidgetItem(QString().setNum(cell->GetKsize()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 3, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.GetKgrowth()));
+        item = new QTableWidgetItem(QString().setNum(cell->GetKgrowth()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 4, item);
 
-        item = new QTableWidgetItem(cell.GetDescription());
+        item = new QTableWidgetItem(cell->GetDescription());
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandart->setItem(currentRow, 5, item);
     }
@@ -111,15 +111,15 @@ void DialogIncrements::FillStandartTable()
 
 void DialogIncrements::FillIncrementTable()
 {
-    const QHash<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
-    QHashIterator<QString, VIncrementTableRow> i(*incrementTable);
+    const QHash<QString, VIncrementTableRow *> *incrementTable = data->DataIncrementTable();
+    QHashIterator<QString, VIncrementTableRow *> i(*incrementTable);
     QMap<qint64, QString> map;
     //Sorting QHash by id
     while (i.hasNext())
     {
         i.next();
-        VIncrementTableRow cell = i.value();
-        map.insert(cell.getId(), i.key());
+        VIncrementTableRow *cell = i.value();
+        map.insert(cell->getId(), i.key());
     }
 
     qint32 currentRow = -1;
@@ -127,14 +127,14 @@ void DialogIncrements::FillIncrementTable()
     while (iMap.hasNext())
     {
         iMap.next();
-        VIncrementTableRow cell = incrementTable->value(iMap.value());
+        VIncrementTableRow *cell = incrementTable->value(iMap.value());
         currentRow++;
         ui->tableWidgetIncrement->setRowCount ( incrementTable->size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(iMap.value());
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, cell.getId());
+        item->setData(Qt::UserRole, cell->getId());
         ui->tableWidgetIncrement->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(iMap.value())));
@@ -145,19 +145,19 @@ void DialogIncrements::FillIncrementTable()
         item->setFlags(flags);
         ui->tableWidgetIncrement->setItem(currentRow, 1, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.getBase()));
+        item = new QTableWidgetItem(QString().setNum(cell->getBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.getKsize()));
+        item = new QTableWidgetItem(QString().setNum(cell->getKsize()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.getKgrowth()));
+        item = new QTableWidgetItem(QString().setNum(cell->getKgrowth()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 4, item);
 
-        item = new QTableWidgetItem(cell.getDescription());
+        item = new QTableWidgetItem(cell->getDescription());
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetIncrement->setItem(currentRow, 5, item);
     }
@@ -325,7 +325,7 @@ void DialogIncrements::clickedToolButtonAdd()
     qreal ksize = 0;
     qreal kgrowth = 0;
     QString description = QString(tr("Description"));
-    VIncrementTableRow incrementRow = VIncrementTableRow(id, base, ksize, kgrowth, description);
+    VIncrementTableRow *incrementRow = new VIncrementTableRow(id, base, ksize, kgrowth, description);
     data->AddIncrementTableRow(name, incrementRow);
 
     AddIncrementToFile(id, name, base, ksize, kgrowth, description);
@@ -499,8 +499,9 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
             if (domElement.isElement())
             {
                 domElement.setAttribute("description", item->text());
-                VIncrementTableRow incr = data->GetIncrementTableRow(itemName->text());
-                incr.setDescription(item->text());
+                VIncrementTableRow *incr = new VIncrementTableRow(*data->GetIncrementTableRow(itemName->text()));
+                Q_ASSERT(incr != 0);
+                incr->setDescription(item->text());
                 data->UpdateIncrementTableRow(itemName->text(), incr);
                 ui->tableWidgetIncrement->resizeColumnsToContents();
                 ui->tableWidgetIncrement->resizeRowsToContents();

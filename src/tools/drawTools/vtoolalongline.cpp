@@ -93,14 +93,14 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolAlongLine::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddAttribute(domElement, AttrTypeLine, typeLine);
     AddAttribute(domElement, AttrLength, formula);
@@ -112,13 +112,13 @@ void VToolAlongLine::AddToFile()
 
 void VToolAlongLine::RefreshDataInFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrMx, toMM(point.mx()));
-        domElement.setAttribute(AttrMy, toMM(point.my()));
-        domElement.setAttribute(AttrName, point.name());
+        domElement.setAttribute(AttrMx, toMM(point->mx()));
+        domElement.setAttribute(AttrMy, toMM(point->my()));
+        domElement.setAttribute(AttrName, point->name());
         domElement.setAttribute(AttrTypeLine, typeLine);
         domElement.setAttribute(AttrLength, formula);
         domElement.setAttribute(AttrFirstPoint, basePointId);
@@ -135,12 +135,12 @@ void VToolAlongLine::RemoveReferens()
 void VToolAlongLine::setDialog()
 {
     Q_ASSERT(dialogAlongLine.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogAlongLine->setTypeLine(typeLine);
     dialogAlongLine->setFormula(formula);
     dialogAlongLine->setFirstPointId(basePointId, id);
     dialogAlongLine->setSecondPointId(secondPointId, id);
-    dialogAlongLine->setPointName(p.name());
+    dialogAlongLine->setPointName(p->name());
 }
 
 void VToolAlongLine::Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene *scene,
@@ -160,9 +160,9 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
                             VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    VPointF firstPoint = data->GetPoint(firstPointId);
-    VPointF secondPoint = data->GetPoint(secondPointId);
-    QLineF line = QLineF(firstPoint.toQPointF(), secondPoint.toQPointF());
+    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
+    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
+    QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
@@ -172,13 +172,13 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddPoint(VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
             data->AddLine(id, secondPointId);
         }
         else
         {
-            data->UpdatePoint(id, VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+            data->UpdateGObject(id, new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
             data->AddLine(id, secondPointId);
             if (parse != Document::FullParse)

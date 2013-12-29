@@ -103,26 +103,26 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDet
     {
         case (Tool::NodePoint):
         {
-            VPointF point = data->GetPoint(id);
-            name = point.name();
+            const VPointF *point = data->GeometricObject<const VPointF *>(id);
+            name = point->name();
             break;
         }
         case (Tool::NodeArc):
         {
-            VArc arc = data->GetArc(id);
-            name = arc.name();
+            const VArc *arc = data->GeometricObject<const VArc *>(id);
+            name = arc->name();
             break;
         }
         case (Tool::NodeSpline):
         {
-            VSpline spl = data->GetSpline(id);
-            name = spl.GetName();
+            const VSpline *spl = data->GeometricObject<const VSpline *>(id);
+            name = spl->name();
             break;
         }
         case (Tool::NodeSplinePath):
         {
-            VSplinePath splPath = data->GetSplinePath(id);
-            name = splPath.name();
+            const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
+            name = splPath->name();
             break;
         }
         default:

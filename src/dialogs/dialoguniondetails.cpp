@@ -30,7 +30,7 @@
 #include "ui_dialoguniondetails.h"
 
 DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogUnionDetails), details(VDetail()), d1(0), d2(0), d1P1(0), d1P2(0),
+    DialogTool(data, parent), ui(new Ui::DialogUnionDetails), d1(0), d2(0), d1P1(0), d1P2(0),
     d2P1(0), d2P2(0), numberD(0), numberP(0)
 {
     ui->setupUi(this);
@@ -59,7 +59,6 @@ void DialogUnionDetails::ChoosedObject(qint64 id, const Scene::Scenes &type)
 
 void DialogUnionDetails::DialogAccepted()
 {
-    emit ToolTip("");
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -69,8 +68,8 @@ bool DialogUnionDetails::CheckObject(const qint64 &id, const qint64 &idDetail) c
     {
         return false;
     }
-    VDetail det = data->GetDetail(idDetail);
-    return det.Containes(id);
+    const VDetail *det = data->GetDetail(idDetail);
+    return det->Containes(id);
 }
 
 void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, qint64 &p1,
@@ -99,6 +98,10 @@ void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &ty
         }
         if (numberP == 1)
         {
+            if(id == p1)
+            {
+                return;
+            }
             p2 = id;
             ++numberD;
             if(numberD > 1)

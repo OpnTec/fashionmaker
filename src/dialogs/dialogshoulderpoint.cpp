@@ -87,10 +87,10 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui->comboBoxP1Line->findText(point.name());
+            qint32 index = ui->comboBoxP1Line->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP1Line->setCurrentIndex(index);
@@ -101,7 +101,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 1)
         {
-            qint32 index = ui->comboBoxP2Line->findText(point.name());
+            qint32 index = ui->comboBoxP2Line->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxP2Line->setCurrentIndex(index);
@@ -112,7 +112,7 @@ void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 2)
         {
-            qint32 index = ui->comboBoxPShoulder->findText(point.name());
+            qint32 index = ui->comboBoxPShoulder->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxPShoulder->setCurrentIndex(index);

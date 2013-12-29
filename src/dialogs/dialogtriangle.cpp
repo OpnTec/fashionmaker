@@ -61,26 +61,26 @@ void DialogTriangle::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)
         {
             case (0):
-                ChangeCurrentText(ui->comboBoxAxisP1, point.name());
+                ChangeCurrentText(ui->comboBoxAxisP1, point->name());
                 number++;
                 emit ToolTip(tr("Select second point of axis"));
                 break;
             case (1):
-                ChangeCurrentText(ui->comboBoxAxisP2, point.name());
+                ChangeCurrentText(ui->comboBoxAxisP2, point->name());
                 number++;
                 emit ToolTip(tr("Select first point"));
                 break;
             case (2):
-                ChangeCurrentText(ui->comboBoxFirstPoint, point.name());
+                ChangeCurrentText(ui->comboBoxFirstPoint, point->name());
                 number++;
                 emit ToolTip(tr("Select second point"));
                 break;
             case (3):
-                ChangeCurrentText(ui->comboBoxSecondPoint, point.name());
+                ChangeCurrentText(ui->comboBoxSecondPoint, point->name());
                 number = 0;
                 emit ToolTip(tr(""));
                 if (isInitialized == false)

@@ -28,6 +28,7 @@
 
 #include "dialogtool.h"
 #include "../container/calculator.h"
+#include "../geometry/vgobject.h"
 
 #include <QtWidgets>
 
@@ -66,15 +67,19 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
 {
     Q_ASSERT(box != 0);
     box->clear();
-    const QHash<qint64, VPointF> *points = data->DataPoints();
-    QHashIterator<qint64, VPointF> i(*points);
+    const QHash<qint64, VGObject*> *objs = data->DataGObjects();
+    QHashIterator<qint64, VGObject*> i(*objs);
     while (i.hasNext())
     {
         i.next();
         if (i.key() != id)
         {
-            VPointF point = i.value();
-            box->addItem(point.name(), i.key());
+            VGObject *obj = i.value();
+            if(obj->getType() == GObject::Point && obj->getMode() == Draw::Calculation)
+            {
+                const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
+                box->addItem(point->name(), i.key());
+            }
         }
     }
 }
@@ -83,8 +88,8 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
 {
     Q_ASSERT(box != 0);
     box->clear();
-    const QHash<qint64, VSpline> *spls = data->DataSplines();
-    QHashIterator<qint64, VSpline> i(*spls);
+    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<qint64, VGObject*> i(*objs);
     while (i.hasNext())
     {
         i.next();
@@ -92,16 +97,24 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
-                VSpline spl = i.value();
-                box->addItem(spl.name(), i.key());
+                VGObject *obj = i.value();
+                if(obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                {
+                    const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
+                    box->addItem(spl->name(), i.key());
+                }
             }
         }
         else
         {
             if (i.key() != id)
             {
-                VSpline spl = i.value();
-                box->addItem(spl.name(), i.key());
+                VGObject *obj = i.value();
+                if(obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                {
+                    const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
+                    box->addItem(spl->name(), i.key());
+                }
             }
         }
     }
@@ -111,8 +124,8 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
 {
     Q_ASSERT(box != 0);
     box->clear();
-    const QHash<qint64, VSplinePath> *splPaths = data->DataSplinePaths();
-    QHashIterator<qint64, VSplinePath> i(*splPaths);
+    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<qint64, VGObject *> i(*objs);
     while (i.hasNext())
     {
         i.next();
@@ -120,16 +133,24 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
-                VSplinePath splPath = i.value();
-                box->addItem(splPath.name(), i.key());
+                VGObject *obj = i.value();
+                if(obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                {
+                    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
+                    box->addItem(splPath->name(), i.key());
+                }
             }
         }
         else
         {
             if (i.key() != id)
             {
-                VSplinePath splPath = i.value();
-                box->addItem(splPath.name(), i.key());
+                VGObject *obj = i.value();
+                if(obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                {
+                    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
+                    box->addItem(splPath->name(), i.key());
+                }
             }
         }
     }
@@ -489,17 +510,17 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonStandartTable->isChecked())
     {
-        VStandartTableRow stable = data->GetStandartTableCell(item->text());
+        const VStandartTableRow *stable = data->GetStandartTableCell(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandartTableCell(item->text()))
-                .arg(stable.GetDescription());
+                .arg(stable->GetDescription());
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonIncrements->isChecked())
     {
-        VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
+        const VIncrementTableRow *itable = data->GetIncrementTableRow(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
-                .arg(itable.getDescription());
+                .arg(itable->getDescription());
         labelDescription->setText(desc);
         return;
     }

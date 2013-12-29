@@ -133,4 +133,4 @@ INSTALLS += target \
     desktop \
     pixmaps \
     translations
-}
+}    
