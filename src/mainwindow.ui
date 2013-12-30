@@ -226,7 +226,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of height.</string>
+           <string>Tool to create a point on the foot of a dropped perpendicular.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -325,7 +325,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool line.</string>
+           <string>Line tool.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -351,7 +351,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of line intersection.</string>
+           <string>Tool to create a point at the intersection of 2 lines.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -401,7 +401,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool curve.</string>
+           <string>Curve tool.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -427,7 +427,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool path curve.</string>
+           <string>Tool for path curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -453,7 +453,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool cut path curve.</string>
+           <string>Tool segment a pathed curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -479,7 +479,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool cut curve.</string>
+           <string>Tool for segmenting a curve.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -529,7 +529,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool arc.</string>
+           <string>Arc tool.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -800,7 +800,7 @@
     <string>Details</string>
    </property>
    <property name="toolTip">
-    <string>Deatils mode</string>
+    <string>Details mode</string>
    </property>
   </action>
   <action name="actionArrowTool">
@@ -815,10 +815,10 @@
      <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
    </property>
    <property name="text">
-    <string>Tools pointer</string>
+    <string>Pointer tools</string>
    </property>
    <property name="toolTip">
-    <string>Tools pointer</string>
+    <string>Pointer tools</string>
    </property>
   </action>
   <action name="actionNewDraw">
@@ -839,10 +839,10 @@
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
-    <string>Change the name of pattern piece</string>
+    <string>Change the label of pattern piece</string>
    </property>
    <property name="toolTip">
-    <string>Change the name of pattern piece</string>
+    <string>Change the label of pattern piece</string>
    </property>
   </action>
   <action name="actionTable">

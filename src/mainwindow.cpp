@@ -166,7 +166,7 @@ void MainWindow::ActionNewDraw()
     bOk = doc->appendDraw(nameDraw);
     if (bOk == false)
     {
-        qCritical()<<tr("Error creating drawing with the name")<<nameDraw<<".";
+        qCritical()<<tr("Error creating pattern with the name ")<<nameDraw<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -598,7 +598,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::ToolBarOption()
 {
     QLabel * labelGrowth = new QLabel;
-    labelGrowth->setText(tr("Growth: "));
+    labelGrowth->setText(tr("Height: "));
     ui->toolBarOption->addWidget(labelGrowth);
 
     QStringList list;

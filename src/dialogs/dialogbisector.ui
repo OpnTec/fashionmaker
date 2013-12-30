@@ -310,7 +310,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
            <property name="text">
-            <string>Size and growth</string>
+            <string>Size and height</string>
            </property>
            <property name="checked">
             <bool>true</bool>

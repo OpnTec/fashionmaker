@@ -477,7 +477,7 @@ void DialogTool::ValChenged(int row)
     {
         if (item->text()=="Р")
         {
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg(tr("Growth"));
+            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg(tr("Height"));
             labelDescription->setText(desc);
         }
         if (item->text()=="Сг")

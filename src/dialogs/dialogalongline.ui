@@ -81,6 +81,26 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolButtonPutHere">
+       <property name="toolTip">
+        <string>Insert variable into the formula</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../share/resources/icon.qrc">
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
         <string>Calculate value</string>
@@ -183,26 +203,6 @@
          <item>
           <widget class="QLineEdit" name="lineEditNamePoint"/>
          </item>
-         <item>
-          <widget class="QToolButton" name="toolButtonPutHere">
-           <property name="toolTip">
-            <string>Insert variable into the formula</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../../share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -271,7 +271,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
            <property name="text">
-            <string>Size and growth</string>
+            <string>Size and height</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -365,7 +365,6 @@
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>toolButtonPutHere</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

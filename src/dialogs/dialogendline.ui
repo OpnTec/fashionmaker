@@ -87,6 +87,23 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolButtonPutHere">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../share/resources/icon.qrc">
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
         <string>Calculate value</string>
@@ -153,23 +170,6 @@
           <widget class="QComboBox" name="comboBoxBasePoint">
            <property name="toolTip">
             <string>First point of line</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="toolButtonPutHere">
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../../share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
            </property>
           </widget>
          </item>
@@ -466,7 +466,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
            <property name="text">
-            <string>Size and growth</string>
+            <string>Size and height</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -524,7 +524,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables - Click twice to insert in formula</string>
+        <string>Variables - Click twice to insert into formula</string>
        </property>
       </widget>
      </item>
@@ -570,7 +570,6 @@
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>toolButtonPutHere</tabstop>
   <tabstop>toolButtonEqual</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>

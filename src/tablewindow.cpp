@@ -39,7 +39,7 @@ TableWindow::TableWindow(QWidget *parent)
     indexDetail(0), sceneRect(QRectF())
 {
     ui->setupUi(this);
-    numberDetal = new QLabel(tr("Left 0 details."), this);
+    numberDetal = new QLabel(tr("0 details left."), this);
     colission = new QLabel(tr("Collisions not found."), this);
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
@@ -110,7 +110,7 @@ void TableWindow::AddDetail()
             ui->actionSave->setEnabled(true);
         }
     }
-    numberDetal->setText(QString(tr("Left %1 details.")).arg(listDetails.count()-indexDetail));
+    numberDetal->setText(QString(tr("%1 details left.")).arg(listDetails.count()-indexDetail));
 }
 
 /*

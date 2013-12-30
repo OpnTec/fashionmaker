@@ -14,7 +14,7 @@
    <string>Point of contact</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -87,6 +87,26 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolButtonPutHere">
+       <property name="toolTip">
+        <string>Insert variable into formula</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../share/resources/icon.qrc">
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolButtonEqual">
        <property name="toolTip">
         <string>Calculate value</string>
@@ -95,7 +115,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icon.qrc">
+        <iconset resource="../../share/resources/icon.qrc">
          <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
        </property>
        <property name="iconSize">
@@ -188,26 +208,6 @@
          </item>
          <item>
           <widget class="QLineEdit" name="lineEditNamePoint"/>
-         </item>
-         <item>
-          <widget class="QToolButton" name="toolButtonPutHere">
-           <property name="toolTip">
-            <string>Insert variable into formula</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../icon.qrc">
-             <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -325,7 +325,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
            <property name="text">
-            <string>Size and growth</string>
+            <string>Size and height</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -421,12 +421,11 @@
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>toolButtonPutHere</tabstop>
   <tabstop>toolButtonEqual</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

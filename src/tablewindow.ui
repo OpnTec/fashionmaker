@@ -137,7 +137,7 @@
     <string>Enlarge letter</string>
    </property>
    <property name="toolTip">
-    <string>Enlarge the length of sheet</string>
+    <string>Enlarge the length of the sheet</string>
    </property>
   </action>
   <action name="actionRemove">
