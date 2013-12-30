@@ -54,7 +54,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 /**
  * @brief The VDetail class
  */
-class VDetail: public QObject
+class VDetail :public QObject
 {
     Q_OBJECT
 public:

@@ -321,6 +321,7 @@ void VDomDocument::Parse(const Document::Documents &parse, VMainGraphicsScene *s
     {
         TestUniqueId();
         data->Clear();
+        data->CreateManTableIGroup();
         nameActivDraw.clear();
         sceneDraw->clear();
         sceneDetail->clear();
@@ -405,7 +406,7 @@ void VDomDocument::ParseIncrementsElement(const QDomNode &node)
                     qreal kgrowth = GetParametrDouble(domElement, "kgrowth", "0");
                     QString desc = GetParametrString(domElement, "description", "Description");
                     data->UpdateId(id);
-                    data->AddIncrementTableRow(name, new VIncrementTableRow(id, base, ksize, kgrowth, desc));
+                    data->AddIncrementTableRow(name, VIncrementTableRow(id, base, ksize, kgrowth, desc));
                 }
             }
         }
@@ -583,16 +584,15 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     try
     {
-        VDetail *detail = new VDetail();
-        Q_ASSERT(detail != 0);
+        VDetail detail;
         VDetail oldDetail;
         qint64 id = GetParametrId(domElement);
-        detail->setName(GetParametrString(domElement, VAbstractTool::AttrName, ""));
-        detail->setMx(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0")));
-        detail->setMy(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0")));
-        detail->setSupplement(GetParametrLongLong(domElement, VToolDetail::AttrSupplement, "1"));
-        detail->setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
-        detail->setClosed(GetParametrLongLong(domElement, VToolDetail::AttrClosed, "1"));
+        detail.setName(GetParametrString(domElement, VAbstractTool::AttrName, ""));
+        detail.setMx(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0")));
+        detail.setMy(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0")));
+        detail.setSupplement(GetParametrLongLong(domElement, VToolDetail::AttrSupplement, "1"));
+        detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
+        detail.setClosed(GetParametrLongLong(domElement, VToolDetail::AttrClosed, "1"));
 
         QDomNodeList nodeList = domElement.childNodes();
         qint32 num = nodeList.size();
@@ -633,7 +633,7 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
 //                        VSplinePath splPath = data->GetSplinePath(id);
 //                        oldDetail.append(VNodeDetail(splPath.getIdObject(), tool, NodeDetail::Contour));
                     }
-                    detail->append(VNodeDetail(id, tool, nodeType, mx, my));
+                    detail.append(VNodeDetail(id, tool, nodeType, mx, my));
                 }
             }
         }
@@ -678,6 +678,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
     if (type == VToolSinglePoint::ToolType)
     {
+        VToolSinglePoint *spoint = 0;
         try
         {
             qint64 id = GetParametrId(domElement);
@@ -695,7 +696,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             }
             if (parse == Document::FullParse)
             {
-                VToolSinglePoint *spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
+                spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
                 Q_ASSERT(spoint != 0);
                 scene->addItem(spoint);
                 connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -708,6 +709,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         {
             VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
             excep.AddMoreInformation(e.ErrorMessage());
+            scene->RemoveTool(spoint);
+            delete spoint;
             throw excep;
         }
     }

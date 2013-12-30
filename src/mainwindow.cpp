@@ -1216,10 +1216,9 @@ MainWindow::~MainWindow()
     delete ui;
 
     delete pattern;
-    if (doc->isNull() == false)
-    {
-        delete doc;
-    }
+    delete doc;
+    delete sceneDetails;
+    delete sceneDraw;
 }
 
 void MainWindow::OpenPattern(const QString &fileName)

@@ -68,8 +68,8 @@ bool DialogUnionDetails::CheckObject(const qint64 &id, const qint64 &idDetail) c
     {
         return false;
     }
-    const VDetail *det = data->GetDetail(idDetail);
-    return det->Containes(id);
+    VDetail det = data->GetDetail(idDetail);
+    return det.Containes(id);
 }
 
 void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, qint64 &p1,

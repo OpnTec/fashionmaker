@@ -68,6 +68,7 @@ const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
 {
+    Q_ASSERT(doc != 0);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);

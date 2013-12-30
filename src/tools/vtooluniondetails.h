@@ -83,7 +83,7 @@ public:
     inline qint64 getD1P2() const{return d1P2;}
     inline qint64 getD2P1() const{return d2P1;}
     inline qint64 getD2P2() const{return d2P2;}
-    void         AddToNewDetail(VContainer *data, VDetail *newDetail, const VDetail &det, const ptrdiff_t &a,
+    void         AddToNewDetail(VContainer *data, VDetail newDetail, const VDetail &det, const ptrdiff_t &a,
                                 const ptrdiff_t &b, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
                                 const qreal &angle = 0) const;
     void         UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &a,

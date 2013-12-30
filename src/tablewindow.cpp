@@ -34,7 +34,7 @@
 
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
-    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), currentScene(0),
+    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
     paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
     indexDetail(0), sceneRect(QRectF())
 {
@@ -46,12 +46,12 @@ TableWindow::TableWindow(QWidget *parent)
     outItems = collidingItems = false;
     //sceneRect = QRectF(0, 0, toPixel(203), toPixel(287));
     sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
-    currentScene = new QGraphicsScene(sceneRect);
-    QBrush *brush = new QBrush();
-    brush->setStyle( Qt::SolidPattern );
-    brush->setColor( QColor( Qt::gray ) );
-    currentScene->setBackgroundBrush( *brush );
-    VTableGraphicsView* view = new VTableGraphicsView(currentScene);
+    tableScene = new QGraphicsScene(sceneRect);
+    QBrush brush;
+    brush.setStyle( Qt::SolidPattern );
+    brush.setColor( QColor( Qt::gray ) );
+    tableScene->setBackgroundBrush( brush );
+    VTableGraphicsView* view = new VTableGraphicsView(tableScene);
     view->fitInView(view->scene()->sceneRect(), Qt::KeepAspectRatio);
     ui->horizontalLayout->addWidget(view);
     connect(ui->actionTurn, &QAction::triggered, view, &VTableGraphicsView::rotateItems);
@@ -68,6 +68,7 @@ TableWindow::TableWindow(QWidget *parent)
 
 TableWindow::~TableWindow()
 {
+    delete tableScene;
     delete ui;
 }
 
@@ -77,11 +78,11 @@ void TableWindow::AddPaper()
     sceneRect.getCoords(&x1, &y1, &x2, &y2);
     shadowPaper = new QGraphicsRectItem(QRectF(x1+4, y1+4, x2+4, y2+4));
     shadowPaper->setBrush(QBrush(Qt::black));
-    currentScene->addItem(shadowPaper);
+    tableScene->addItem(shadowPaper);
     paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
     paper->setPen(QPen(Qt::black, widthMainLine));
     paper->setBrush(QBrush(Qt::white));
-    currentScene->addItem(paper);
+    tableScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
 }
 
@@ -89,7 +90,7 @@ void TableWindow::AddDetail()
 {
     if (indexDetail<listDetails.count())
     {
-        currentScene->clearSelection();
+        tableScene->clearSelection();
         VItem* Detail = listDetails[indexDetail];
         QObject::connect(Detail, SIGNAL(itemOut(int, bool)), this, SLOT(itemOut(int, bool)));
         QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>, int)), this,
@@ -102,7 +103,7 @@ void TableWindow::AddDetail()
         Detail->setFlag(QGraphicsItem::ItemIsSelectable, true);
         Detail->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         Detail->setPaper(paper);
-        currentScene->addItem(Detail);
+        tableScene->addItem(Detail);
         Detail->setSelected(true);
         indexDetail++;
         if (indexDetail==listDetails.count())
@@ -148,7 +149,7 @@ void TableWindow::showEvent ( QShowEvent * event )
 void TableWindow::StopTable()
 {
     hide();
-    currentScene->clear();
+    tableScene->clear();
     delete listOutItems;
     listDetails.clear();
     //sceneRect = QRectF(0, 0, 230*resol/25.9, 327*resol/25.9);
@@ -166,8 +167,8 @@ void TableWindow::saveScene()
 
     QBrush *brush = new QBrush();
     brush->setColor( QColor( Qt::white ) );
-    currentScene->setBackgroundBrush( *brush );
-    currentScene->clearSelection(); // Selections would also render to the file, so need delete them
+    tableScene->setBackgroundBrush( *brush );
+    tableScene->clearSelection(); // Selections would also render to the file, so need delete them
     shadowPaper->setVisible(false);
     QFileInfo fi(name);
     if (fi.suffix() == "svg")
@@ -185,7 +186,7 @@ void TableWindow::saveScene()
 
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
-    currentScene->setBackgroundBrush( *brush );
+    tableScene->setBackgroundBrush( *brush );
     shadowPaper->setVisible(true);
     delete brush;
 }
@@ -310,9 +311,9 @@ void TableWindow::GetNextDetail()
 
 void TableWindow::AddLength()
 {
-    QRectF rect = currentScene->sceneRect();
+    QRectF rect = tableScene->sceneRect();
     rect.setHeight(rect.height()+toPixel(279));
-    currentScene->setSceneRect(rect);
+    tableScene->setSceneRect(rect);
     rect = shadowPaper->rect();
     rect.setHeight(rect.height()+toPixel(279));
     shadowPaper->setRect(rect);
@@ -325,18 +326,18 @@ void TableWindow::AddLength()
 
 void TableWindow::RemoveLength()
 {
-    if (sceneRect.height() <= currentScene->sceneRect().height() - 100)
+    if (sceneRect.height() <= tableScene->sceneRect().height() - 100)
     {
-        QRectF rect = currentScene->sceneRect();
+        QRectF rect = tableScene->sceneRect();
         rect.setHeight(rect.height()-toPixel(279));
-        currentScene->setSceneRect(rect);
+        tableScene->setSceneRect(rect);
         rect = shadowPaper->rect();
         rect.setHeight(rect.height()-toPixel(279));
         shadowPaper->setRect(rect);
         rect = paper->rect();
         rect.setHeight(rect.height()-toPixel(279));
         paper->setRect(rect);
-        if (fabs(sceneRect.height() - currentScene->sceneRect().height()) < 0.01)
+        if (fabs(sceneRect.height() - tableScene->sceneRect().height()) < 0.01)
         {
             ui->actionRemove->setDisabled(true);
         }
@@ -378,7 +379,7 @@ void TableWindow::SvgFile(const QString &name) const
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 1.2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    currentScene->render(&painter);
+    tableScene->render(&painter);
     painter.end();
 }
 
@@ -395,6 +396,6 @@ void TableWindow::PngFile(const QString &name) const
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
-    currentScene->render(&painter);
+    tableScene->render(&painter);
     image.save(name);
 }

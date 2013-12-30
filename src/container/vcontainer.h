@@ -60,6 +60,7 @@ public:
                         * @param data container
                         */
                         VContainer(const VContainer &data);
+                        ~VContainer();
    /**
     * @brief setData copy data from container
     * @param data container
@@ -94,13 +95,13 @@ public:
      * @param name name of standart table row
      * @return row of standart table
      */
-    const VStandartTableRow *GetStandartTableCell(const QString& name) const;
+    const VStandartTableRow GetStandartTableCell(const QString& name) const;
     /**
      * @brief GetIncrementTableRow return increment table row by name
      * @param name name of increment table row
      * @return row of increment table
      */
-    const VIncrementTableRow *GetIncrementTableRow(const QString& name) const;
+    const VIncrementTableRow GetIncrementTableRow(const QString& name) const;
     /**
      * @brief GetLine return length of line by name
      * @param name name of line
@@ -130,7 +131,7 @@ public:
      * @param id id of detail
      * @return detail
      */
-    const VDetail *GetDetail(qint64 id) const;
+    const VDetail GetDetail(qint64 id) const;
     /**
      * @brief getId return current id
      * @return current id
@@ -147,21 +148,20 @@ public:
      * @param detail new detail
      * @return return id of new detail in container
      */
-    qint64              AddDetail(VDetail *detail);
+    qint64              AddDetail(VDetail detail);
     /**
      * @brief AddStandartTableCell add new row of standart table
      * @param name name of row of standart table
      * @param cell row of standart table
      */
-    inline void         AddStandartTableCell(const QString& name, VStandartTableRow *cell)
+    inline void         AddStandartTableCell(const QString& name, VStandartTableRow cell)
     {standartTable[name] = cell;}
     /**
      * @brief AddIncrementTableRow add new row of increment table
      * @param name name of new row of increment table
      * @param row new row of increment table
      */
-    inline void         AddIncrementTableRow(const QString& name, VIncrementTableRow *row)
-    {incrementTable[name] = row;}
+    void                AddIncrementTableRow(const QString& name, VIncrementTableRow row);
     /**
      * @brief AddLengthLine add length of line to container
      * @param name name of line
@@ -223,20 +223,20 @@ public:
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, VDetail *detail);
+    void                UpdateDetail(qint64 id, VDetail detail);
     /**
      * @brief UpdateStandartTableCell update standart table row by name
      * @param name name of row
      * @param cell row of standart table
      */
-    inline void         UpdateStandartTableCell(const QString& name, VStandartTableRow *cell)
+    inline void         UpdateStandartTableCell(const QString& name, VStandartTableRow cell)
     {standartTable[name] = cell;}
     /**
      * @brief UpdateIncrementTableRow update increment table row by name
      * @param name name of row
      * @param row row
      */
-    inline void         UpdateIncrementTableRow(const QString& name, VIncrementTableRow *row)
+    inline void         UpdateIncrementTableRow(const QString& name, VIncrementTableRow row)
     {incrementTable[name] = row;}
     /**
      * @brief GetValueStandartTableCell return value of standart table row by name
@@ -335,12 +335,12 @@ public:
      * @brief data container with dataStandartTable return container of standart table
      * @return pointer on container of standart table
      */
-    inline const QHash<QString, VStandartTableRow *> *DataStandartTable() const {return &standartTable;}
+    inline const QHash<QString, VStandartTableRow> *DataStandartTable() const {return &standartTable;}
     /**
      * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
      */
-    inline const QHash<QString, VIncrementTableRow *> *DataIncrementTable() const {return &incrementTable;}
+    inline const QHash<QString, VIncrementTableRow> *DataIncrementTable() const {return &incrementTable;}
     /**
      * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
@@ -365,7 +365,7 @@ public:
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
-    inline const QHash<qint64, VDetail *> *DataDetails() const {return &details;}
+    inline const QHash<qint64, VDetail> *DataDetails() const {return &details;}
     /**
      * @brief UpdateId update id. If new id bigger when current save new like current.
      * @param newId id
@@ -427,6 +427,10 @@ public:
      * @param list list of details
      */
     void                PrepareDetails(QVector<VItem *> & list) const;
+    /**
+     * @brief CreateManTableIGroup generate man standart table of measurements
+     */
+    void               CreateManTableIGroup ();
 private:
     /**
      * @brief _id current id. New object will have value +1. For full class equal 0.
@@ -443,11 +447,11 @@ private:
     /**
      * @brief standartTable container of standart table rows
      */
-    QHash<QString, VStandartTableRow*> standartTable;
+    QHash<QString, VStandartTableRow> standartTable;
     /**
      * @brief incrementTable
      */
-    QHash<QString, VIncrementTableRow*> incrementTable;
+    QHash<QString, VIncrementTableRow> incrementTable;
     /**
      * @brief lengthLines container of lines lengths
      */
@@ -467,11 +471,7 @@ private:
     /**
      * @brief details container of details
      */
-    QHash<qint64, VDetail*> details;
-    /**
-     * @brief CreateManTableIGroup generate man standart table of measurements
-     */
-    void               CreateManTableIGroup ();
+    QHash<qint64, VDetail> details;
     /**
      * @brief GetReversePoint return revers container of points
      * @param points container with points

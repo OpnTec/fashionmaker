@@ -75,7 +75,7 @@ public:
      * @param parse
      * @param typeCreation
      */
-    static void                    Create(const qint64 _id, VDetail *newDetail, VMainGraphicsScene  *scene,
+    static void                    Create(const qint64 _id, VDetail newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                           const Tool::Sources &typeCreation);
     template <typename T>
@@ -90,8 +90,8 @@ public:
         tool->setParentItem(this);
         connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
         VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
-        VDetail *det = VAbstractTool::data.GetDetail(this->id);
-        det->append(node);
+        VDetail det = VAbstractTool::data.GetDetail(this->id);
+        det.append(node);
         VAbstractTool::data.UpdateDetail(this->id, det);
         QDomElement domElement = doc->elementById(QString().setNum(this->id));
         if (domElement.isElement())

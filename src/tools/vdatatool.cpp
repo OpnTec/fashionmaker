@@ -28,10 +28,15 @@
 
 #include "vdatatool.h"
 
+VDataTool::VDataTool(VContainer *data, QObject *parent): QObject(parent), data(*data), _referens(1)
+{
+    Q_ASSERT(data != 0);
+}
+
 VDataTool &VDataTool::operator =(const VDataTool &tool)
 {
-   data = tool.getData();
-   _referens = tool.referens();
+    data = tool.getData();
+    _referens = tool.referens();
    return *this;
 }
 

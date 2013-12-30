@@ -97,7 +97,7 @@ void VToolUnionDetails::CorectPoints(const VDetail &detail, qint64 &p1, qint64 &
     }
 }
 
-void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail *newDetail, const VDetail &det, const ptrdiff_t &a,
+void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, const VDetail &det, const ptrdiff_t &a,
                                        const ptrdiff_t &b, const qreal &dx, const qreal &dy, const qint64 &pRotate,
                                        const qreal &angle) const
 {
@@ -237,7 +237,7 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail *newDetail, con
                 qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        newDetail->append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
+        newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
     }
 }
 
@@ -395,8 +395,8 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 void VToolUnionDetails::Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                                VContainer *data)
 {
-    VDetail d1 = VDetail(*data->GetDetail(dialog->getD1()));
-    VDetail d2 = VDetail(*data->GetDetail(dialog->getD2()));
+    VDetail d1 = data->GetDetail(dialog->getD1());
+    VDetail d2 = data->GetDetail(dialog->getD2());
     qint64 d1P1 = dialog->getD1P1();
     qint64 d1P2 = dialog->getD1P2();
     qint64 d2P1 = dialog->getD2P1();
@@ -447,8 +447,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
         qint64 d2P1 = unionDetails->getD2P1();
         qint64 d2P2 = unionDetails->getD2P2();
 
-        VDetail *newDetail = new VDetail();
-        Q_ASSERT(newDetail != 0);
+        VDetail newDetail;
         unionDetails->AddToNewDetail(data, newDetail, d1, d1.indexOfNode(d1P1), d1.indexOfNode(d1P2));
 
         const VNodeDetail det1p2 = d1.at(d1.indexOfNode(d1P2));
@@ -468,7 +467,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
         unionDetails->AddToNewDetail(data, newDetail, d2, d2.indexOfNode(d2P1)+1, d2.indexOfNode(d2P2)-1, dx, dy,
                                      d1P2, angle);
 
-        newDetail->setName("Detail");
+        newDetail.setName("Detail");
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Tool::FromTool);
         QHash<qint64, VDataTool*>* tools = doc->getTools();
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));

@@ -44,7 +44,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
       sceneDetails(scene)
 {
-    VDetail detail = VDetail(*data->GetDetail(id));
+    VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail[i].getTypeTool())
@@ -89,8 +89,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                          VContainer *data)
 {
     VDetail detail = dialog->getDetails();
-    VDetail *det = new VDetail();
-    Q_ASSERT(det != 0);
+    VDetail det;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         qint64 id = 0;
@@ -137,13 +136,13 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
                 break;
         }
         VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
-        det->append(node);
+        det.append(node);
     }
-    det->setName(detail.getName());
+    det.setName(detail.getName());
     Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolDetail::Create(const qint64 _id, VDetail *newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolDetail::Create(const qint64 _id, VDetail newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
@@ -228,20 +227,20 @@ void VToolDetail::FullUpdateFromGui(int result)
 
 void VToolDetail::AddToFile()
 {
-    const VDetail *detail = VAbstractTool::data.GetDetail(id);
+    VDetail detail = VAbstractTool::data.GetDetail(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrName, detail->getName());
-    AddAttribute(domElement, AttrMx, toMM(detail->getMx()));
-    AddAttribute(domElement, AttrMy, toMM(detail->getMy()));
-    AddAttribute(domElement, AttrSupplement, detail->getSupplement());
-    AddAttribute(domElement, AttrClosed, detail->getClosed());
-    AddAttribute(domElement, AttrWidth, detail->getWidth());
+    AddAttribute(domElement, AttrName, detail.getName());
+    AddAttribute(domElement, AttrMx, toMM(detail.getMx()));
+    AddAttribute(domElement, AttrMy, toMM(detail.getMy()));
+    AddAttribute(domElement, AttrSupplement, detail.getSupplement());
+    AddAttribute(domElement, AttrClosed, detail.getClosed());
+    AddAttribute(domElement, AttrWidth, detail.getWidth());
 
-    for (ptrdiff_t i = 0; i < detail->CountNode(); ++i)
+    for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
-       AddNode(domElement, detail->at(i));
+       AddNode(domElement, detail.at(i));
     }
 
     QDomElement element;
@@ -257,15 +256,15 @@ void VToolDetail::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        const VDetail *det = VAbstractTool::data.GetDetail(id);
-        domElement.setAttribute(AttrName, det->getName());
-        domElement.setAttribute(AttrSupplement, QString().setNum(det->getSupplement()));
-        domElement.setAttribute(AttrClosed, QString().setNum(det->getClosed()));
-        domElement.setAttribute(AttrWidth, QString().setNum(det->getWidth()));
+        VDetail det = VAbstractTool::data.GetDetail(id);
+        domElement.setAttribute(AttrName, det.getName());
+        domElement.setAttribute(AttrSupplement, QString().setNum(det.getSupplement()));
+        domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
+        domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
         RemoveAllChild(domElement);
-        for (ptrdiff_t i = 0; i < det->CountNode(); ++i)
+        for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
         {
-           AddNode(domElement, det->at(i));
+           AddNode(domElement, det.at(i));
         }
     }
 }
@@ -329,10 +328,10 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolDetail::RemoveReferens()
 {
-    const VDetail *detail = VAbstractTool::data.GetDetail(id);
-    for (ptrdiff_t i = 0; i< detail->CountNode(); ++i)
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        doc->DecrementReferens(detail->at(i).getId());
+        doc->DecrementReferens(detail.at(i).getId());
     }
 }
 

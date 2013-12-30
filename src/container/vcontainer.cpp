@@ -35,9 +35,9 @@ qint64 VContainer::_id = 0;
 
 VContainer::VContainer()
     :base(QHash<QString, qint32>()),  gObjects(QHash<qint64, VGObject *>()),
-      standartTable(QHash<QString, VStandartTableRow *>()), incrementTable(QHash<QString, VIncrementTableRow *>()),
+      standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()),lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail *>())
+      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
 {
     SetSize(500);
     SetGrowth(1760);
@@ -52,11 +52,17 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :base(QHash<QString, qint32>()), gObjects(QHash<qint64, VGObject *>()),
-      standartTable(QHash<QString, VStandartTableRow *>()), incrementTable(QHash<QString, VIncrementTableRow *>()),
+      standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail *>())
+      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
 {
     setData(data);
+}
+
+VContainer::~VContainer()
+{
+    qDeleteAll(gObjects);
+    gObjects.clear();
 }
 
 void VContainer::setData(const VContainer &data)
@@ -73,37 +79,36 @@ void VContainer::setData(const VContainer &data)
         i.next();
         switch(i.value()->getType())
         {
-           case(GObject::Arc):
-        {
+            case(GObject::Arc):
+            {
                 VArc *arc = new VArc(*data.GeometricObject<const VArc *>(i.key()));
                 Q_ASSERT(arc != 0);
-                gObjects.insert(i.key(), arc);
+                UpdateGObject(i.key(), arc);
                 break;
-        }
-           case(GObject::Point):
-        {
+            }
+            case(GObject::Point):
+            {
                 VPointF *point = new VPointF(*data.GeometricObject<const VPointF *>(i.key()));
                 Q_ASSERT(point != 0);
-                gObjects.insert(i.key(), point);
+                UpdateGObject(i.key(), point);
                 break;
-        }
-           case(GObject::Spline):
-        {
+            }
+            case(GObject::Spline):
+            {
                 VSpline *spl = new VSpline(*data.GeometricObject<const VSpline *>(i.key()));
                 Q_ASSERT(spl != 0);
-                gObjects.insert(i.key(), spl);
+                UpdateGObject(i.key(), spl);
                 break;
-        }
-           case(GObject::SplinePath):
-        {
+            }
+            case(GObject::SplinePath):
+            {
                 VSplinePath *path = new VSplinePath(*data.GeometricObject<const VSplinePath *>(i.key()));
                 Q_ASSERT(path != 0);
-                gObjects.insert(i.key(), path);
+                UpdateGObject(i.key(), path);
                 break;
-        }
+            }
         }
     }
-    //gObjects = *data.DataGObjects();
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
@@ -144,16 +149,16 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
     }
 }
 
-const VStandartTableRow *VContainer::GetStandartTableCell(const QString &name) const
+const VStandartTableRow VContainer::GetStandartTableCell(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
-    return GetObject(standartTable, name);
+    return GetVariable(standartTable, name);
 }
 
-const VIncrementTableRow *VContainer::GetIncrementTableRow(const QString& name) const
+const VIncrementTableRow VContainer::GetIncrementTableRow(const QString& name) const
 {
     Q_ASSERT(name.isEmpty()==false);
-    return GetObject(incrementTable, name);
+    return GetVariable(incrementTable, name);
 }
 
 qreal VContainer::GetLine(const QString &name) const
@@ -180,9 +185,9 @@ qreal VContainer::GetLineAngle(const QString &name) const
     return GetVariable(lineAngles, name);
 }
 
-const VDetail *VContainer::GetDetail(qint64 id) const
+const VDetail VContainer::GetDetail(qint64 id) const
 {
-    return GetObject(details, id);
+    return GetVariable(details, id);
 }
 
 qint64 VContainer::AddGObject(VGObject *obj)
@@ -190,9 +195,16 @@ qint64 VContainer::AddGObject(VGObject *obj)
     return AddObject(gObjects, obj);
 }
 
-qint64 VContainer::AddDetail(VDetail *detail)
+qint64 VContainer::AddDetail(VDetail detail)
 {
-    return AddObject(details, detail);
+    qint64 id = getNextId();
+    details[id] = detail;
+    return id;
+}
+
+void VContainer::AddIncrementTableRow(const QString &name, VIncrementTableRow row)
+{
+    incrementTable[name] = row;
 }
 
 qint64 VContainer::getNextId()
@@ -211,100 +223,100 @@ void VContainer::UpdateId(qint64 newId)
 
 QPainterPath VContainer::ContourPath(qint64 idDetail) const
 {
-    const VDetail *detail = GetDetail(idDetail);
+    VDetail detail = GetDetail(idDetail);
     QVector<QPointF> points;
     QVector<QPointF> pointsEkv;
-    for (ptrdiff_t i = 0; i< detail->CountNode(); ++i)
+    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        switch (detail->at(i).getTypeTool())
+        switch (detail.at(i).getTypeTool())
         {
             case (Tool::NodePoint):
             {
-                const VPointF *point = GeometricObject<const VPointF*>(detail->at(i).getId());
+                const VPointF *point = GeometricObject<const VPointF*>(detail.at(i).getId());
                 points.append(point->toQPointF());
-                if (detail->getSupplement() == true)
+                if (detail.getSupplement() == true)
                 {
                     QPointF pEkv = point->toQPointF();
-                    pEkv.setX(pEkv.x()+detail->at(i).getMx());
-                    pEkv.setY(pEkv.y()+detail->at(i).getMy());
+                    pEkv.setX(pEkv.x()+detail.at(i).getMx());
+                    pEkv.setY(pEkv.y()+detail.at(i).getMy());
                     pointsEkv.append(pEkv);
                 }
             }
             break;
             case (Tool::NodeArc):
             {
-                const VArc *arc = GeometricObject<const VArc *>(detail->at(i).getId());
+                const VArc *arc = GeometricObject<const VArc *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, arc->GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(arc->GetPoints()));
                 if (len1 <= lenReverse)
                 {
                     points << arc->GetPoints();
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                        pointsEkv << biasPoints(arc->GetPoints(), detail->at(i).getMx(), detail->at(i).getMy());
+                        pointsEkv << biasPoints(arc->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
                 }
                 else
                 {
                     points << GetReversePoint(arc->GetPoints());
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                        pointsEkv << biasPoints(GetReversePoint(arc->GetPoints()), detail->at(i).getMx(),
-                                                detail->at(i).getMy());
+                        pointsEkv << biasPoints(GetReversePoint(arc->GetPoints()), detail.at(i).getMx(),
+                                                detail.at(i).getMy());
                     }
                 }
             }
             break;
             case (Tool::NodeSpline):
             {
-                const VSpline *spline = GeometricObject<const VSpline *>(detail->at(i).getId());
+                const VSpline *spline = GeometricObject<const VSpline *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, spline->GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(spline->GetPoints()));
                 if (len1 <= lenReverse)
                 {
                     points << spline->GetPoints();
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                        pointsEkv << biasPoints(spline->GetPoints(), detail->at(i).getMx(), detail->at(i).getMy());
+                        pointsEkv << biasPoints(spline->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
                 }
                 else
                 {
                     points << GetReversePoint(spline->GetPoints());
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                        pointsEkv << biasPoints(GetReversePoint(spline->GetPoints()), detail->at(i).getMx(),
-                                                detail->at(i).getMy());
+                        pointsEkv << biasPoints(GetReversePoint(spline->GetPoints()), detail.at(i).getMx(),
+                                                detail.at(i).getMy());
                     }
                 }
             }
             break;
             case (Tool::NodeSplinePath):
             {
-                const VSplinePath *splinePath = GeometricObject<const VSplinePath *>(detail->at(i).getId());
+                const VSplinePath *splinePath = GeometricObject<const VSplinePath *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, splinePath->GetPathPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath->GetPathPoints()));
                 if (len1 <= lenReverse)
                 {
                     points << splinePath->GetPathPoints();
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                     pointsEkv << biasPoints(splinePath->GetPathPoints(), detail->at(i).getMx(), detail->at(i).getMy());
+                     pointsEkv << biasPoints(splinePath->GetPathPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
                 }
                 else
                 {
                     points << GetReversePoint(splinePath->GetPathPoints());
-                    if (detail->getSupplement() == true)
+                    if (detail.getSupplement() == true)
                     {
-                        pointsEkv << biasPoints(GetReversePoint(splinePath->GetPathPoints()), detail->at(i).getMx(),
-                                                detail->at(i).getMy());
+                        pointsEkv << biasPoints(GetReversePoint(splinePath->GetPathPoints()), detail.at(i).getMx(),
+                                                detail.at(i).getMy());
                     }
                 }
             }
             break;
             default:
-                qWarning()<<"Get wrong tool type. Ignore."<<detail->at(i).getTypeTool();
+                qWarning()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
                 break;
         }
     }
@@ -317,16 +329,16 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
     }
     path.lineTo(points[0]);
 
-    if (detail->getSupplement() == true)
+    if (detail.getSupplement() == true)
     {
         QPainterPath ekv;
-        if (detail->getClosed() == true)
+        if (detail.getClosed() == true)
         {
-            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, toPixel(detail->getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, toPixel(detail.getWidth()));
         }
         else
         {
-            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, toPixel(detail->getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, toPixel(detail.getWidth()));
         }
         path.addPath(ekv);
         path.setFillRule(Qt::WindingFill);
@@ -541,7 +553,7 @@ QVector<QPointF> VContainer::CheckLoops(const QVector<QPointF> &points) const
 
 void VContainer::PrepareDetails(QVector<VItem *> &list) const
 {
-    QHashIterator<qint64, VDetail *> idetail(details);
+    QHashIterator<qint64, VDetail> idetail(details);
     while (idetail.hasNext())
     {
         idetail.next();
@@ -589,41 +601,32 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 
 qreal VContainer::GetValueStandartTableCell(const QString& name) const
 {
-    const VStandartTableRow *cell =  GetStandartTableCell(name);
+    VStandartTableRow cell =  GetStandartTableCell(name);
     qreal k_size    = ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
     qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
-    qreal value = cell->GetBase() + k_size*cell->GetKsize() + k_growth*cell->GetKgrowth();
+    qreal value = cell.GetBase() + k_size*cell.GetKsize() + k_growth*cell.GetKgrowth();
     return value;
 }
 
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 {
-    const VIncrementTableRow *cell =  GetIncrementTableRow(name);
+    VIncrementTableRow cell =  GetIncrementTableRow(name);
     qreal k_size    = ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
     qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
-    qreal value = cell->getBase() + k_size*cell->getKsize() + k_growth*cell->getKgrowth();
+    qreal value = cell.getBase() + k_size*cell.getKsize() + k_growth*cell.getKgrowth();
     return value;
 }
 
 void VContainer::Clear()
 {
     _id = 0;
-    if(standartTable.size()>0)
-    {
-        qDeleteAll(standartTable);
-    }
     standartTable.clear();
-    if(incrementTable.size()>0)
-    {
-        qDeleteAll(incrementTable);   
-    }
     incrementTable.clear();
     lengthLines.clear();
     lengthArcs.clear();
     lineAngles.clear();
     details.clear();
     ClearObject();
-    CreateManTableIGroup ();
 }
 
 void VContainer::ClearObject()
@@ -718,9 +721,11 @@ void VContainer::UpdateGObject(qint64 id, VGObject* obj)
     UpdateObject(gObjects, id, obj);
 }
 
-void VContainer::UpdateDetail(qint64 id,VDetail *detail)
+void VContainer::UpdateDetail(qint64 id,VDetail detail)
 {
-    UpdateObject(details, id, detail);
+    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    details[id] = detail;
+    UpdateId(id);
 }
 
 void VContainer::AddLengthLine(const QString &name, const qreal &value)
@@ -731,60 +736,64 @@ void VContainer::AddLengthLine(const QString &name, const qreal &value)
 
 void VContainer::CreateManTableIGroup ()
 {
-    AddStandartTableCell("Pkor", new VStandartTableRow(84, 0, 3));
-    AddStandartTableCell("Pkor", new VStandartTableRow(84, 0, 3));
-    AddStandartTableCell("Vtos", new VStandartTableRow(1450, 2, 51));
-    AddStandartTableCell("Vtosh", new VStandartTableRow(1506, 2, 54));
-    AddStandartTableCell("Vpt", new VStandartTableRow(1438, 3, 52));
-    AddStandartTableCell("Vst", new VStandartTableRow(1257, -1, 49));
-    AddStandartTableCell("Vlt", new VStandartTableRow(1102, 0, 43));
-    AddStandartTableCell("Vk", new VStandartTableRow(503, 0, 22));
-    AddStandartTableCell("Vsht", new VStandartTableRow(1522, 2, 54));
-    AddStandartTableCell("Vzy", new VStandartTableRow(1328, 0, 49));
-    AddStandartTableCell("Vlop", new VStandartTableRow(1320, 0, 49));
-    AddStandartTableCell("Vps", new VStandartTableRow(811, -1, 36));
-    AddStandartTableCell("Ssh", new VStandartTableRow(202, 4, 1));
-    AddStandartTableCell("SgI", new VStandartTableRow(517, 18, 2));
-    AddStandartTableCell("SgII", new VStandartTableRow(522, 19, 1));
-    AddStandartTableCell("SgIII", new VStandartTableRow(500, 20, 0));
-    AddStandartTableCell("St", new VStandartTableRow(390, 20, 0));
-    AddStandartTableCell("Sb", new VStandartTableRow(492, 15, 5));
-    AddStandartTableCell("SbI", new VStandartTableRow(482, 12, 6));
-    AddStandartTableCell("Obed", new VStandartTableRow(566, 18, 6));
-    AddStandartTableCell("Ok", new VStandartTableRow(386, 8, 8));
-    AddStandartTableCell("Oi", new VStandartTableRow(380, 8, 6));
-    AddStandartTableCell("Osch", new VStandartTableRow(234, 4, 4));
-    AddStandartTableCell("Dsb", new VStandartTableRow(1120, 0, 44));
-    AddStandartTableCell("Dsp", new VStandartTableRow(1110, 0, 43));
-    AddStandartTableCell("Dn", new VStandartTableRow(826, -3, 37));
-    AddStandartTableCell("Dps", new VStandartTableRow(316, 4, 7));
-    AddStandartTableCell("Dpob", new VStandartTableRow(783, 14, 15));
-    AddStandartTableCell("Ds", new VStandartTableRow(260, 1, 6));
-    AddStandartTableCell("Op", new VStandartTableRow(316, 12, 0));
-    AddStandartTableCell("Ozap", new VStandartTableRow(180, 4, 0));
-    AddStandartTableCell("Pkis", new VStandartTableRow(250, 4, 0));
-    AddStandartTableCell("SHp", new VStandartTableRow(160, 1, 4));
-    AddStandartTableCell("Dlych", new VStandartTableRow(500, 2, 15));
-    AddStandartTableCell("Dzap", new VStandartTableRow(768, 2, 24));
-    AddStandartTableCell("DIIIp", new VStandartTableRow(970, 2, 29));
-    AddStandartTableCell("Vprp", new VStandartTableRow(214, 3, 3));
-    AddStandartTableCell("Vg", new VStandartTableRow(262, 8, 3));
-    AddStandartTableCell("Dtp", new VStandartTableRow(460, 7, 9));
-    AddStandartTableCell("Dp", new VStandartTableRow(355, 5, 5));
-    AddStandartTableCell("Vprz", new VStandartTableRow(208, 3, 5));
-    AddStandartTableCell("Dts", new VStandartTableRow(438, 2, 10));
-    AddStandartTableCell("DtsI", new VStandartTableRow(469, 2, 10));
-    AddStandartTableCell("Dvcht", new VStandartTableRow(929, 9, 19));
-    AddStandartTableCell("SHg", new VStandartTableRow(370, 14, 4));
-    AddStandartTableCell("Cg", new VStandartTableRow(224, 6, 0));
-    AddStandartTableCell("SHs", new VStandartTableRow(416, 10, 2));
-    AddStandartTableCell("dpzr", new VStandartTableRow(121, 6, 0));
-    AddStandartTableCell("Ogol", new VStandartTableRow(576, 4, 4));
-    AddStandartTableCell("Ssh1", new VStandartTableRow(205, 5, 0));
-    AddStandartTableCell("St", new VStandartTableRow(410, 20, 0));
-    AddStandartTableCell("Drzap", new VStandartTableRow(594, 3, 19));
-    AddStandartTableCell("DbII", new VStandartTableRow(1020, 0, 44));
-    AddStandartTableCell("Sb", new VStandartTableRow(504, 15, 4));
+    AddStandartTableCell("Pkor", VStandartTableRow(84, 0, 3));
+    AddStandartTableCell("Vtos", VStandartTableRow(1450, 2, 51));
+    AddStandartTableCell("Vtosh", VStandartTableRow(1506, 2, 54));
+    AddStandartTableCell("Vpt", VStandartTableRow(1438, 3, 52));
+    AddStandartTableCell("Vst", VStandartTableRow(1257, -1, 49));
+    AddStandartTableCell("Vlt", VStandartTableRow(1102, 0, 43));
+    AddStandartTableCell("Vk", VStandartTableRow(503, 0, 22));
+    AddStandartTableCell("Vsht", VStandartTableRow(1522, 2, 54));
+    AddStandartTableCell("Vzy", VStandartTableRow(1328, 0, 49));
+    AddStandartTableCell("Vlop", VStandartTableRow(1320, 0, 49));
+    AddStandartTableCell("Vps", VStandartTableRow(811, -1, 36));
+    AddStandartTableCell("Ssh", VStandartTableRow(202, 4, 1));
+    AddStandartTableCell("SgI", VStandartTableRow(517, 18, 2));
+    AddStandartTableCell("SgII", VStandartTableRow(522, 19, 1));
+    AddStandartTableCell("SgIII", VStandartTableRow(500, 20, 0));
+    AddStandartTableCell("SbI", VStandartTableRow(482, 12, 6));
+    AddStandartTableCell("Obed", VStandartTableRow(566, 18, 6));
+    AddStandartTableCell("Ok", VStandartTableRow(386, 8, 8));
+    AddStandartTableCell("Oi", VStandartTableRow(380, 8, 6));
+    AddStandartTableCell("Osch", VStandartTableRow(234, 4, 4));
+    AddStandartTableCell("Dsb", VStandartTableRow(1120, 0, 44));
+    AddStandartTableCell("Dsp", VStandartTableRow(1110, 0, 43));
+    AddStandartTableCell("Dn", VStandartTableRow(826, -3, 37));
+    AddStandartTableCell("Dps", VStandartTableRow(316, 4, 7));
+    AddStandartTableCell("Dpob", VStandartTableRow(783, 14, 15));
+    AddStandartTableCell("Ds", VStandartTableRow(260, 1, 6));
+    AddStandartTableCell("Op", VStandartTableRow(316, 12, 0));
+    AddStandartTableCell("Ozap", VStandartTableRow(180, 4, 0));
+    AddStandartTableCell("Pkis", VStandartTableRow(250, 4, 0));
+    AddStandartTableCell("SHp", VStandartTableRow(160, 1, 4));
+    AddStandartTableCell("Dlych", VStandartTableRow(500, 2, 15));
+    AddStandartTableCell("Dzap", VStandartTableRow(768, 2, 24));
+    AddStandartTableCell("DIIIp", VStandartTableRow(970, 2, 29));
+    AddStandartTableCell("Vprp", VStandartTableRow(214, 3, 3));
+    AddStandartTableCell("Vg", VStandartTableRow(262, 8, 3));
+    AddStandartTableCell("Dtp", VStandartTableRow(460, 7, 9));
+    AddStandartTableCell("Dp", VStandartTableRow(355, 5, 5));
+    AddStandartTableCell("Vprz", VStandartTableRow(208, 3, 5));
+    AddStandartTableCell("Dts", VStandartTableRow(438, 2, 10));
+    AddStandartTableCell("DtsI", VStandartTableRow(469, 2, 10));
+    AddStandartTableCell("Dvcht", VStandartTableRow(929, 9, 19));
+    AddStandartTableCell("SHg", VStandartTableRow(370, 14, 4));
+    AddStandartTableCell("Cg", VStandartTableRow(224, 6, 0));
+    AddStandartTableCell("SHs", VStandartTableRow(416, 10, 2));
+    AddStandartTableCell("dpzr", VStandartTableRow(121, 6, 0));
+    AddStandartTableCell("Ogol", VStandartTableRow(576, 4, 4));
+    AddStandartTableCell("Ssh1", VStandartTableRow(205, 5, 0));
+
+    //TODO Posible duplicate. Need check.
+    //AddStandartTableCell("St", VStandartTableRow(410, 20, 0));
+    AddStandartTableCell("St", VStandartTableRow(390, 20, 0));
+
+    AddStandartTableCell("Drzap", VStandartTableRow(594, 3, 19));
+    AddStandartTableCell("DbII", VStandartTableRow(1020, 0, 44));
+
+    //TODO Posible duplicate. Need check.
+    //AddStandartTableCell("Sb", VStandartTableRow(504, 15, 4));
+    AddStandartTableCell("Sb", VStandartTableRow(492, 15, 5));
 }
 
 QVector<QPointF> VContainer::GetReversePoint(const QVector<QPointF> &points) const

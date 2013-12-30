@@ -510,17 +510,17 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonStandartTable->isChecked())
     {
-        const VStandartTableRow *stable = data->GetStandartTableCell(item->text());
+        VStandartTableRow stable = data->GetStandartTableCell(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandartTableCell(item->text()))
-                .arg(stable->GetDescription());
+                .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonIncrements->isChecked())
     {
-        const VIncrementTableRow *itable = data->GetIncrementTableRow(item->text());
+        VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
-                .arg(itable->getDescription());
+                .arg(itable.getDescription());
         labelDescription->setText(desc);
         return;
     }

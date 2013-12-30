@@ -31,5 +31,6 @@
 VStandartTableRow::VStandartTableRow()
     :base(0), ksize(0), kgrowth(0), description(QString()){}
 
-VStandartTableRow::VStandartTableRow(qint32 base, qreal ksize, qreal kgrowth, QString description)
+VStandartTableRow::VStandartTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
+                                     const QString &description)
     :base(base), ksize(ksize), kgrowth(kgrowth), description(description){}
