@@ -45,9 +45,8 @@ namespace GObject
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(GObject::Types)
 
-class VGObject :public QObject
+class VGObject
 {
-    Q_OBJECT
 public:
     VGObject();
     VGObject(const GObject::Type &type, const qint64 &idObject = 0, const Draw::Draws &mode = Draw::Calculation);

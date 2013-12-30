@@ -78,8 +78,8 @@ public:
         {
             throw VExceptionBadId(tr("Can't find object"), id);
         }
-        //T obj = dynamic_cast<T>(gObj);
-        T obj = qobject_cast<T>(gObj);
+        T obj = dynamic_cast<T>(gObj);
+        //T obj = qobject_cast<T>(gObj);
         Q_ASSERT(obj != 0);
         return obj;
     }

@@ -39,7 +39,6 @@
  */
 class VPointF:public VGObject
 {
-    Q_OBJECT
 public:
     /**
      * @brief VPointF creat empty point

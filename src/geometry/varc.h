@@ -42,8 +42,7 @@ class QPainterPath;
  */
 class VArc: public VGObject
 {
-    Q_OBJECT
-    //Q_DECLARE_TR_FUNCTIONS(VArc)
+    Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
                        /**
                         * @brief VArc конструктор по замовчуванню.

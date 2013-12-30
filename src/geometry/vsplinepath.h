@@ -51,8 +51,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
  */
 class VSplinePath :public VGObject
 {
-    Q_OBJECT
-    //Q_DECLARE_TR_FUNCTIONS(VSplinePath)
+    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                   /**
                    * @brief VSplinePath конструктор по замовчуванню.
