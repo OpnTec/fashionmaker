@@ -51,7 +51,8 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
  */
 class VSplinePath :public VGObject
 {
-    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
+    Q_OBJECT
+    //Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
                   /**
                    * @brief VSplinePath конструктор по замовчуванню.
@@ -160,6 +161,7 @@ public:
      */
     QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
                                 QPointF &spl2p3) const;
+    virtual QString name() const{return _name;}
 protected:
     /**
      * @brief path вектор з точок сплайна.

@@ -61,7 +61,7 @@ public:
      * @brief setData
      * @param value
      */
-    inline void           setData(const VContainer *value) {data = *value;}
+    inline void           setData(const VContainer *value){data = *value;}
     /**
      * @brief referens
      * @return

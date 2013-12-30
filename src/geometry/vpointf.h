@@ -39,6 +39,7 @@
  */
 class VPointF:public VGObject
 {
+    Q_OBJECT
 public:
     /**
      * @brief VPointF creat empty point
@@ -114,6 +115,7 @@ public:
      * @param value y coordinate
      */
     inline void        setY(const qreal &value){_y = value;}
+    virtual QString    name() const{return _name;}
 private:
     /**
      * @brief _mx offset name respect to x

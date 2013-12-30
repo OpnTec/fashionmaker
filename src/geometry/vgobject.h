@@ -45,9 +45,9 @@ namespace GObject
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(GObject::Types)
 
-class VGObject
+class VGObject :public QObject
 {
-    Q_DECLARE_TR_FUNCTIONS(VGObject)
+    Q_OBJECT
 public:
     VGObject();
     VGObject(const GObject::Type &type, const qint64 &idObject = 0, const Draw::Draws &mode = Draw::Calculation);
@@ -61,8 +61,8 @@ public:
     Draw::Draws     getMode() const;
     void            setMode(const Draw::Draws &value);
     GObject::Type   getType() const;
-    qint64 id() const;
-    void setId(const qint64 &id);
+    qint64          id() const;
+    void            setId(const qint64 &id);
 protected:
     /**
      * @brief _id id in container. Ned for arcs, spline and spline paths.

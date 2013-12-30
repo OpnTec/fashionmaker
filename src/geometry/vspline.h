@@ -45,6 +45,7 @@ class QString;
  */
 class VSpline :public VGObject
 {
+    Q_OBJECT
 public:
     /**
      * @brief VSpline default constructor

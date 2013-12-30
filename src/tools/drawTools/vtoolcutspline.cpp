@@ -104,8 +104,6 @@ void VToolCutSpline::Create(const qint64 _id, const QString &pointName,
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
             Q_ASSERT(p != 0);
             id = data->AddGObject(p);
-            spl1id = id + 1;
-            spl2id = id + 2;
 
             VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
             Q_ASSERT(spline1);

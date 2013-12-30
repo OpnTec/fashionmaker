@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vcontainer.h"
-#include "../exception/vexceptionbadid.h"
 
 #include <QDebug>
 #include <QtAlgorithms>
@@ -63,7 +62,48 @@ VContainer::VContainer(const VContainer &data)
 void VContainer::setData(const VContainer &data)
 {
     base = *data.DataBase();
-    gObjects = *data.DataGObjects();
+
+    qDeleteAll(gObjects);
+    gObjects.clear();
+    const QHash<qint64, VGObject*> *obj = data.DataGObjects();
+    Q_ASSERT(obj != 0);
+    QHashIterator<qint64, VGObject*> i(*obj);
+    while (i.hasNext())
+    {
+        i.next();
+        switch(i.value()->getType())
+        {
+           case(GObject::Arc):
+        {
+                VArc *arc = new VArc(*data.GeometricObject<const VArc *>(i.key()));
+                Q_ASSERT(arc != 0);
+                gObjects.insert(i.key(), arc);
+                break;
+        }
+           case(GObject::Point):
+        {
+                VPointF *point = new VPointF(*data.GeometricObject<const VPointF *>(i.key()));
+                Q_ASSERT(point != 0);
+                gObjects.insert(i.key(), point);
+                break;
+        }
+           case(GObject::Spline):
+        {
+                VSpline *spl = new VSpline(*data.GeometricObject<const VSpline *>(i.key()));
+                Q_ASSERT(spl != 0);
+                gObjects.insert(i.key(), spl);
+                break;
+        }
+           case(GObject::SplinePath):
+        {
+                VSplinePath *path = new VSplinePath(*data.GeometricObject<const VSplinePath *>(i.key()));
+                Q_ASSERT(path != 0);
+                gObjects.insert(i.key(), path);
+                break;
+        }
+        }
+    }
+    //gObjects = *data.DataGObjects();
     standartTable = *data.DataStandartTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
@@ -79,7 +119,7 @@ const VGObject *VContainer::GetGObject(qint64 id)const
 }
 
 template <typename key, typename val>
-const val *VContainer::GetObject(const QHash<key, val*> &obj, key id) const
+const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
 {
     if (obj.contains(id))
     {
@@ -510,12 +550,15 @@ void VContainer::PrepareDetails(QVector<VItem *> &list) const
 }
 
 template <typename val>
-void VContainer::UpdateObject(QHash<qint64, val *> &obj, const qint64 &id, val *point)
+void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, val point)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_ASSERT(point != 0);
-    point->setId(id);
-    delete GetObject(gObjects, id);
+    point->setId(id);  
+//    if (gObjects.contains(id))
+//    {
+//        delete gObjects.value(id);
+//    }
     obj[id] = point;
     UpdateId(id);
 }
@@ -565,7 +608,15 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 void VContainer::Clear()
 {
     _id = 0;
+    if(standartTable.size()>0)
+    {
+        qDeleteAll(standartTable);
+    }
     standartTable.clear();
+    if(incrementTable.size()>0)
+    {
+        qDeleteAll(incrementTable);   
+    }
     incrementTable.clear();
     lengthLines.clear();
     lengthArcs.clear();
@@ -577,7 +628,10 @@ void VContainer::Clear()
 
 void VContainer::ClearObject()
 {
-    qDeleteAll(gObjects);
+    if(gObjects.size()>0)
+    {
+        qDeleteAll(gObjects);
+    }
     gObjects.clear();
 }
 
@@ -634,7 +688,7 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
 }
 
 template <typename key, typename val>
-qint64 VContainer::AddObject(QHash<key, val*> &obj, val *value)
+qint64 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
     Q_ASSERT(value != 0);
     qint64 id = getNextId();

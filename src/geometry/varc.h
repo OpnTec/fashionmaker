@@ -42,7 +42,8 @@ class QPainterPath;
  */
 class VArc: public VGObject
 {
-    Q_DECLARE_TR_FUNCTIONS(VArc)
+    Q_OBJECT
+    //Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
                        /**
                         * @brief VArc конструктор по замовчуванню.
@@ -144,6 +145,7 @@ public:
      * @return
      */
     QVector<QPointF>   SplOfArc( qint32 number ) const; 
+    virtual QString    name() const{return _name;}
 private:
     /**
      * @brief f1 початковий кут в градусах

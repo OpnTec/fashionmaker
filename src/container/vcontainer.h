@@ -36,6 +36,7 @@
 #include "../geometry/vdetail.h"
 #include "../widgets/vitem.h"
 #include "../geometry/vgobject.h"
+#include "../exception/vexceptionbadid.h"
 
 /**
  * @brief The VContainer class container of all variables.
@@ -67,7 +68,17 @@ public:
     template <typename T>
     const T GeometricObject(qint64 id) const
     {
-        const T obj = dynamic_cast<T>(GetObject(gObjects, id));
+        VGObject *gObj = 0;
+        if (gObjects.contains(id))
+        {
+            gObj = gObjects.value(id);
+        }
+        else
+        {
+            throw VExceptionBadId(tr("Can't find object"), id);
+        }
+        //T obj = dynamic_cast<T>(gObj);
+        T obj = qobject_cast<T>(gObj);
         Q_ASSERT(obj != 0);
         return obj;
     }
@@ -481,7 +492,7 @@ private:
      * @param id id of object
      * @return Object
      */
-    const val *GetObject(const QHash<key, val*> &obj, key id) const;
+    const val GetObject(const QHash<key, val> &obj, key id) const;
     template <typename key, typename val>
     /**
      * @brief GetObject return object from container
@@ -497,7 +508,7 @@ private:
      * @param id id of existing object
      * @param point object
      */
-    void UpdateObject(QHash<qint64, val *> &obj, const qint64 &id, val* point);
+    void UpdateObject(QHash<qint64, val > &obj, const qint64 &id, val point);
     template <typename key, typename val>
     /**
      * @brief AddObject add object to container
@@ -505,7 +516,7 @@ private:
      * @param value object
      * @return id of object in container
      */
-    static qint64 AddObject(QHash<key, val*> &obj, val *value);
+    static qint64 AddObject(QHash<key, val> &obj, val value);
 };
 
 #endif // VCONTAINER_H

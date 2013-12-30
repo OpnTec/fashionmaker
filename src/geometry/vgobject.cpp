@@ -29,17 +29,17 @@
 #include "vgobject.h"
 
 VGObject::VGObject()
-    :_id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Draw::Calculation)
+    :QObject(), _id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Draw::Calculation)
 {
 }
 
 VGObject::VGObject(const GObject::Type &type, const qint64 &idObject, const Draw::Draws &mode)
-    :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
+    :QObject(), _id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
 {
 }
 
 VGObject::VGObject(const VGObject &obj)
-    :_id(obj.id()), type(obj.getType()), idObject(obj.getIdObject()), _name(obj.name()), mode(obj.getMode())
+    :QObject(), _id(obj.id()), type(obj.getType()), idObject(obj.getIdObject()), _name(obj.name()), mode(obj.getMode())
 {
 }
 

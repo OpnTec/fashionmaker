@@ -171,7 +171,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
                                                  const QPointF &pos)
 {
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
-    VSpline spl;
+    VSpline spl = splPath.GetSpline(indexSpline);
     if (position == SplinePoint::FirstPoint)
     {
         spl = VSpline(spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());

@@ -100,6 +100,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(detail[i].getId()));
                 Q_ASSERT(point != 0);
+                point->setMode(Draw::Modeling);
                 id = data->AddGObject(point);
                 VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
@@ -108,6 +109,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             {
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(detail[i].getId()));
                 Q_ASSERT(arc != 0);
+                arc->setMode(Draw::Modeling);
                 id = data->AddGObject(arc);
                 VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
@@ -116,6 +118,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             {
                 VSpline *spline = new VSpline(*data->GeometricObject<const VSpline *>(detail[i].getId()));
                 Q_ASSERT(spline != 0);
+                spline->setMode(Draw::Modeling);
                 id = data->AddGObject(spline);
                 VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
@@ -124,6 +127,7 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
             {
                 VSplinePath *splinePath = new VSplinePath(*data->GeometricObject<const VSplinePath *>(detail[i].getId()));
                 Q_ASSERT(splinePath != 0);
+                splinePath->setMode(Draw::Modeling);
                 id = data->AddGObject(splinePath);
                 VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }

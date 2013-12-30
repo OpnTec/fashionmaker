@@ -130,7 +130,8 @@ void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
 
 void  VToolSinglePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    VPointF point = *VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    RefreshPointGeometry(point);
 }
 
 void VToolSinglePoint::FullUpdateFromGui(int result)
@@ -169,5 +170,5 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<const VPointF *>(id)));
 }

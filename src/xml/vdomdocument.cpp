@@ -461,6 +461,8 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     qreal param = parametr.replace(",", ".").toDouble(&ok);
     if (ok == false)
     {
+        qDebug()<<"defValue"<<defValue;
+        qDebug()<<"parametr"<<parametr;
         throw VExceptionConversionError(tr("Can't convert toDouble parameter"), name);
     }
     return param;
