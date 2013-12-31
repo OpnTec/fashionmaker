@@ -63,7 +63,7 @@ VToolUnionDetails::VToolUnionDetails(VDomDocument *doc, VContainer *data, const 
 
 void VToolUnionDetails::CorectPoints(const VDetail &detail, qint64 &p1, qint64 &p2)
 {
-    if(p1 == p2)
+    if (p1 == p2)
     {
         qWarning()<<"Union points equal.";
         return;
@@ -72,21 +72,21 @@ void VToolUnionDetails::CorectPoints(const VDetail &detail, qint64 &p1, qint64 &
     bool p2flag = false;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        if(detail.at(i).getTypeTool() == Tool::NodePoint)
+        if (detail.at(i).getTypeTool() == Tool::NodePoint)
         {
-            if(p1 == detail.at(i).getId())
+            if (p1 == detail.at(i).getId())
             {
                 p1flag = true;
             }
-            if(p2 == detail.at(i).getId())
+            if (p2 == detail.at(i).getId())
             {
                 p2flag = true;
             }
-            if(p1flag == true && p2flag == false)
+            if (p1flag == true && p2flag == false)
             {
                 return;
             }
-            if(p2flag == true && p1flag == false)
+            if (p2flag == true && p1flag == false)
             {
                 qint64 p = p1;
                 p1 = p2;
@@ -108,7 +108,7 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, cons
         {
             case (Tool::NodePoint):
             {
-                if( qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && (pRotate == 0))
+                if ( qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && (pRotate == 0))
                 {
                     id = det.at(i).getId();
                 }
@@ -125,7 +125,7 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, cons
             break;
             case (Tool::NodeArc):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     id = det.at(i).getId();
                 }
@@ -156,7 +156,7 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, cons
             break;
             case (Tool::NodeSpline):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     id = det.at(i).getId();
                 }
@@ -188,7 +188,7 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, cons
             break;
             case (Tool::NodeSplinePath):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     id = det.at(i).getId();
                 }
@@ -205,22 +205,26 @@ void VToolUnionDetails::AddToNewDetail(VContainer *data, VDetail newDetail, cons
 
                         VPointF *p1 = new VPointF(spline.GetP1());
                         Q_ASSERT(p1 != 0);
-                        BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
                         qint64 idP1 = data->AddGObject(p1);
 
                         VPointF p2 = VPointF(spline.GetP2());
-                        BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
 
                         VPointF p3 = VPointF(spline.GetP3());
-                        BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
 
                         VPointF *p4 = new VPointF(spline.GetP4());
                         Q_ASSERT(p4 != 0);
-                        BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
                         qint64 idP4 = data->AddGObject(p4);
 
                         VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
-                        if(i==1)
+                        if (i==1)
                         {
                             path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
                                                       splinePath->at(i-1).KAsm1()));
@@ -252,7 +256,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
         {
             case (Tool::NodePoint):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     ++idCount;
                 }
@@ -268,7 +272,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
             break;
             case (Tool::NodeArc):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     ++idCount;
                 }
@@ -281,7 +285,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                     BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                     VPointF *center = new VPointF(arc->GetCenter());
                     Q_ASSERT(center != 0);
-                    BiasRotatePoint(center, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                    BiasRotatePoint(center, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                    angle);
 
                     QLineF l1(center->toQPointF(), p1.toQPointF());
                     QLineF l2(center->toQPointF(), p2.toQPointF());
@@ -296,7 +301,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
             break;
             case (Tool::NodeSpline):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     ++idCount;
                 }
@@ -329,7 +334,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
             break;
             case (Tool::NodeSplinePath):
             {
-                if(qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+                if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
                 {
                     ++idCount;
                 }
@@ -346,22 +351,26 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
 
                         VPointF *p1 = new VPointF(spline.GetP1());
                         Q_ASSERT(p1 != 0);
-                        BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
                         qint64 idP1 = data->AddGObject(p1);
 
                         VPointF p2 = VPointF(spline.GetP2());
-                        BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
 
                         VPointF p3 = VPointF(spline.GetP3());
-                        BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
 
                         VPointF *p4 = new VPointF(spline.GetP4());
                         Q_ASSERT(p4 != 0);
-                        BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
+                        BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
+                                        angle);
                         qint64 idP4 = data->AddGObject(p4);
 
                         VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
-                        if(i==1)
+                        if (i==1)
                         {
                             path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
                                                       splinePath->at(i-1).KAsm1()));
@@ -386,10 +395,10 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 {
     point->setX(point->x()+dx);
     point->setY(point->y()+dy);
-    QLineF l(pRotate, point->toQPointF());
-    l.setAngle(angle);
-    point->setX(l.p2().x());
-    point->setY(l.p2().y());
+    QLineF line(pRotate, point->toQPointF());
+    line.setAngle(angle);
+    point->setX(line.p2().x());
+    point->setY(line.p2().y());
 }
 
 void VToolUnionDetails::Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -439,7 +448,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
 
     }
 
-    if(typeCreation == Tool::FromGui)
+    if (typeCreation == Tool::FromGui)
     {
         //Update corected points
         qint64 d1P1 = unionDetails->getD1P1();

@@ -143,7 +143,7 @@ public:
      * @param number
      * @return
      */
-    QVector<QPointF>   SplOfArc( qint32 number ) const; 
+    QVector<QPointF>   SplOfArc( qint32 number ) const;
     virtual QString    name() const{return _name;}
 private:
     /**

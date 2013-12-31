@@ -74,8 +74,8 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
 }
 
 VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, qint64 idObject, Draw::Draws mode)
-    :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-      kCurve(1)
+    :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
+      kAsm2(1), kCurve(1)
 {
     CreateName();
 
@@ -145,7 +145,7 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
 
 qreal VSpline::LengthT(qreal t) const
 {
-    if(t < 0 || t > 1)
+    if (t < 0 || t > 1)
     {
         qWarning()<<"Wrong value t.";
         return 0;
@@ -180,7 +180,7 @@ qreal VSpline::LengthT(qreal t) const
 QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3 ) const
 {
     //Always need return two splines, so we must correct wrong length.
-    if(length < GetLength()*0.02)
+    if (length < GetLength()*0.02)
     {
         length = GetLength()*0.02;
     }
@@ -199,7 +199,8 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
     {
         parT = parT + step;
         qreal splLength = LengthT(parT);
-        if(splLength >= length || parT > 1){
+        if (splLength >= length || parT > 1)
+        {
             break;
         }
     }

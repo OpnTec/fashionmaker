@@ -75,7 +75,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
         if (i.key() != id)
         {
             VGObject *obj = i.value();
-            if(obj->getType() == GObject::Point && obj->getMode() == Draw::Calculation)
+            if (obj->getType() == GObject::Point && obj->getMode() == Draw::Calculation)
             {
                 const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
                 box->addItem(point->name(), i.key());
@@ -93,12 +93,12 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
     while (i.hasNext())
     {
         i.next();
-        if(cut == ComboMode::CutSpline)
+        if (cut == ComboMode::CutSpline)
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if(obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     box->addItem(spl->name(), i.key());
@@ -110,7 +110,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if(obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     box->addItem(spl->name(), i.key());
@@ -129,12 +129,12 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
     while (i.hasNext())
     {
         i.next();
-        if(cut == ComboMode::CutSpline)
+        if (cut == ComboMode::CutSpline)
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if(obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     box->addItem(splPath->name(), i.key());
@@ -146,7 +146,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if(obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     box->addItem(splPath->name(), i.key());

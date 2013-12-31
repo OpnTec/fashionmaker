@@ -259,7 +259,7 @@ void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSp
     QPainterPath path;
     path.addPath(spl->GetPath());
     path.setFillRule( Qt::WindingFill );
-    if(tr == SimpleSpline::FirstPoint)
+    if (tr == SimpleSpline::FirstPoint)
     {
         path.translate(-spl->GetP1().toQPointF().x(), -spl->GetP1().toQPointF().y());
     }

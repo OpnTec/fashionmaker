@@ -31,16 +31,17 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogUnionDetails;
+namespace Ui
+{
+    class DialogUnionDetails;
 }
 
 class DialogUnionDetails : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit         DialogUnionDetails(const VContainer *data, QWidget *parent = 0);
-                     ~DialogUnionDetails();
+    explicit DialogUnionDetails(const VContainer *data, QWidget *parent = 0);
+             ~DialogUnionDetails();
     inline qint64 getD1() const {return d1;}
     inline qint64 getD2() const {return d2;}
     inline qint64 getD1P1() const {return d1P1;}

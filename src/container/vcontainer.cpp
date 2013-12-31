@@ -36,7 +36,7 @@ qint64 VContainer::_id = 0;
 VContainer::VContainer()
     :base(QHash<QString, qint32>()),  gObjects(QHash<qint64, VGObject *>()),
       standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
-      lengthLines(QHash<QString, qreal>()),lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
+      lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
 {
     SetSize(500);
@@ -77,24 +77,24 @@ void VContainer::setData(const VContainer &data)
     while (i.hasNext())
     {
         i.next();
-        switch(i.value()->getType())
+        switch (i.value()->getType())
         {
-            case(GObject::Arc):
+            case (GObject::Arc):
             {
                 CopyGObject<VArc>(data, i.key());
                 break;
             }
-            case(GObject::Point):
+            case (GObject::Point):
             {
                 CopyGObject<VPointF>(data, i.key());
                 break;
             }
-            case(GObject::Spline):
+            case (GObject::Spline):
             {
                 CopyGObject<VSpline>(data, i.key());
                 break;
             }
-            case(GObject::SplinePath):
+            case (GObject::SplinePath):
             {
                 CopyGObject<VSplinePath>(data, i.key());
                 break;
@@ -560,7 +560,7 @@ void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, val poi
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_ASSERT(point != 0);
-    point->setId(id);  
+    point->setId(id);
 //    if (gObjects.contains(id))
 //    {
 //        delete gObjects.value(id);
@@ -625,7 +625,7 @@ void VContainer::Clear()
 
 void VContainer::ClearObject()
 {
-    if(gObjects.size()>0)
+    if (gObjects.size()>0)
     {
         qDeleteAll(gObjects);
     }
@@ -715,7 +715,7 @@ void VContainer::UpdateGObject(qint64 id, VGObject* obj)
     UpdateObject(gObjects, id, obj);
 }
 
-void VContainer::UpdateDetail(qint64 id,VDetail detail)
+void VContainer::UpdateDetail(qint64 id, VDetail detail)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     details[id] = detail;

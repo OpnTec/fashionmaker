@@ -32,7 +32,7 @@
 VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
-    if(factor == 0)
+    if (factor == 0)
     {
         setPen(QPen(Qt::black, widthHairLine));
     }
@@ -56,7 +56,7 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if(factor == 0)
+    if (factor == 0)
     {
         this->setPen(QPen(*currentColor, widthMainLine));
     }
@@ -69,7 +69,7 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if(factor == 0)
+    if (factor == 0)
     {
         this->setPen(QPen(*currentColor, widthHairLine));
     }

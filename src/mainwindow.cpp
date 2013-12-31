@@ -1084,7 +1084,7 @@ void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
     bool modelingTools = false;
-    if(mode == Draw::Calculation)
+    if (mode == Draw::Calculation)
     {
         drawTools = enable;
     }

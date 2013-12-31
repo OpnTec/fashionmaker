@@ -31,8 +31,9 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogCutSplinePath;
+namespace Ui
+{
+    class DialogCutSplinePath;
 }
 
 class DialogCutSplinePath : public DialogTool

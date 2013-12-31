@@ -47,7 +47,7 @@ DialogUnionDetails::~DialogUnionDetails()
 
 void DialogUnionDetails::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
-    if(numberD == 0)
+    if (numberD == 0)
     {
         ChoosedDetail(id, type, d1, d1P1, d1P2);
     }
@@ -98,13 +98,13 @@ void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &ty
         }
         if (numberP == 1)
         {
-            if(id == p1)
+            if (id == p1)
             {
                 return;
             }
             p2 = id;
             ++numberD;
-            if(numberD > 1)
+            if (numberD > 1)
             {
                 ++numberP;
                 emit ToolTip("");

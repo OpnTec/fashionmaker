@@ -111,4 +111,3 @@ void VDetail::setId(const qint64 &id)
 {
     _id = id;
 }
-
