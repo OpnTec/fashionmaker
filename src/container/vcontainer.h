@@ -61,6 +61,13 @@ public:
                         */
                         VContainer(const VContainer &data);
                         ~VContainer();
+    template <typename T>
+    void CopyGObject(const VContainer &data, const qint64 &id)
+    {
+        T *obj = new T(*data.GeometricObject<const T *>(id));
+        Q_ASSERT(obj != 0);
+        UpdateGObject(id, obj);
+    }
    /**
     * @brief setData copy data from container
     * @param data container
@@ -79,7 +86,6 @@ public:
             throw VExceptionBadId(tr("Can't find object"), id);
         }
         T obj = dynamic_cast<T>(gObj);
-        //T obj = qobject_cast<T>(gObj);
         Q_ASSERT(obj != 0);
         return obj;
     }

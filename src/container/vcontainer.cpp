@@ -81,32 +81,26 @@ void VContainer::setData(const VContainer &data)
         {
             case(GObject::Arc):
             {
-                VArc *arc = new VArc(*data.GeometricObject<const VArc *>(i.key()));
-                Q_ASSERT(arc != 0);
-                UpdateGObject(i.key(), arc);
+                CopyGObject<VArc>(data, i.key());
                 break;
             }
             case(GObject::Point):
             {
-                VPointF *point = new VPointF(*data.GeometricObject<const VPointF *>(i.key()));
-                Q_ASSERT(point != 0);
-                UpdateGObject(i.key(), point);
+                CopyGObject<VPointF>(data, i.key());
                 break;
             }
             case(GObject::Spline):
             {
-                VSpline *spl = new VSpline(*data.GeometricObject<const VSpline *>(i.key()));
-                Q_ASSERT(spl != 0);
-                UpdateGObject(i.key(), spl);
+                CopyGObject<VSpline>(data, i.key());
                 break;
             }
             case(GObject::SplinePath):
             {
-                VSplinePath *path = new VSplinePath(*data.GeometricObject<const VSplinePath *>(i.key()));
-                Q_ASSERT(path != 0);
-                UpdateGObject(i.key(), path);
+                CopyGObject<VSplinePath>(data, i.key());
                 break;
             }
+            default:
+            qWarning()<<"Don't know how copy this type.";
         }
     }
     standartTable = *data.DataStandartTable();
