@@ -56,6 +56,15 @@ public:
      * @brief setDialog
      */
     virtual void                   setDialog();
+    template<typename T>
+    static qint64 CreateNode(VContainer *data, const qint64 &id)
+    {
+        T *node = new T(*data->GeometricObject<const T *>(id));
+        Q_ASSERT(node != 0);
+        node->setMode(Draw::Modeling);
+        return data->AddGObject(node);
+    }
+
     /**
      * @brief Create
      * @param dialog

@@ -97,37 +97,25 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
         {
             case (Tool::NodePoint):
             {
-                VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(detail[i].getId()));
-                Q_ASSERT(point != 0);
-                point->setMode(Draw::Modeling);
-                id = data->AddGObject(point);
+                id = CreateNode<VPointF>(data, detail[i].getId());
                 VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeArc):
             {
-                VArc *arc = new VArc(*data->GeometricObject<const VArc *>(detail[i].getId()));
-                Q_ASSERT(arc != 0);
-                arc->setMode(Draw::Modeling);
-                id = data->AddGObject(arc);
+                id = CreateNode<VArc>(data, detail[i].getId());
                 VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
-                VSpline *spline = new VSpline(*data->GeometricObject<const VSpline *>(detail[i].getId()));
-                Q_ASSERT(spline != 0);
-                spline->setMode(Draw::Modeling);
-                id = data->AddGObject(spline);
+                id = CreateNode<VSpline>(data, detail[i].getId());
                 VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
-                VSplinePath *splinePath = new VSplinePath(*data->GeometricObject<const VSplinePath *>(detail[i].getId()));
-                Q_ASSERT(splinePath != 0);
-                splinePath->setMode(Draw::Modeling);
-                id = data->AddGObject(splinePath);
+                id = CreateNode<VSplinePath>(data, detail[i].getId());
                 VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;

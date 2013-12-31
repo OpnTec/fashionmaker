@@ -234,7 +234,7 @@ signals:
      * @param oldName
      * @param newName
      */
-    void           ChangedNameDraw(const QString oldName, const QString newName);
+    void           ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
      * @brief FullUpdateFromFile
      */
