@@ -64,13 +64,14 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
                                       const qreal &length)
 {
     QLineF line = QLineF(p1Line, p2Line);
+    qreal toolLength = length;
     qreal dist = line.length();
-    if (dist>length)
+    if (dist>toolLength)
     {
-        qDebug()<<"A3П2="<<toMM(length)<<"А30П ="<<toMM(dist);
-        throw "Не можу знайти точку плеча. Довжина А3П2 < А3П.";
+        qWarning()<<"Correction of length in shoulder point tool. Parameter length too small.";
+        toolLength = dist;
     }
-    if (fabs(dist - length) < 0.1)
+    if (qFuzzyCompare(dist, toolLength))
     {
         return line.p2();
     }
@@ -79,7 +80,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     {
         line.setLength(line.length()+step);
         QLineF line2 = QLineF(pShoulder, line.p2());
-        if (line2.length()>=length)
+        if (line2.length()>=toolLength)
         {
             return line.p2();
         }
