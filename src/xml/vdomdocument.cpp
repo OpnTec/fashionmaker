@@ -1375,6 +1375,8 @@ void VDomDocument::DecrementReferens(qint64 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     VDataTool *tool = tools.value(id);
-    Q_ASSERT(tool != 0);
-    tool->decrementReferens();
+    if(tool != 0)
+    {
+        tool->decrementReferens();
+    }
 }
