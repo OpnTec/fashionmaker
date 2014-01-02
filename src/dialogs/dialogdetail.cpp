@@ -168,6 +168,7 @@ void DialogDetail::BiasXChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
+    Q_ASSERT(item != 0);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMx(toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
@@ -177,6 +178,7 @@ void DialogDetail::BiasYChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
+    Q_ASSERT(item != 0);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMy(toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
