@@ -48,19 +48,12 @@ public:
                   * @param id
                   * @param parent
                   */
-                 VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+                 VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
     virtual      ~VDrawTool() {}
     /**
      * @brief setDialog
      */
     virtual void setDialog() {}
-    /**
-     * @brief AddRecord
-     * @param id
-     * @param toolType
-     * @param doc dom document container
-     */
-    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
     /**
      * @brief ignoreContextMenu
      * @param enable

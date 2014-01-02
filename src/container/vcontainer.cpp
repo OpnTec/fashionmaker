@@ -561,10 +561,11 @@ void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, val poi
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_ASSERT(point != 0);
     point->setId(id);
-//    if (gObjects.contains(id))
-//    {
-//        delete gObjects.value(id);
-//    }
+    if (gObjects.contains(id))
+    {
+        delete gObjects.value(id);
+        gObjects.remove(id);
+    }
     obj[id] = point;
     UpdateId(id);
 }
@@ -620,16 +621,33 @@ void VContainer::Clear()
     lengthArcs.clear();
     lineAngles.clear();
     details.clear();
-    ClearObject();
+    ClearGObjects();
 }
 
-void VContainer::ClearObject()
+void VContainer::ClearGObjects()
 {
     if (gObjects.size()>0)
     {
         qDeleteAll(gObjects);
     }
     gObjects.clear();
+}
+
+void VContainer::ClearCalculationGObjects()
+{
+    if (gObjects.size()>0)
+    {
+        QHashIterator<qint64, VGObject*> i(gObjects);
+        while (i.hasNext())
+        {
+            i.next();
+            if (i.value()->getMode() == Draw::Calculation)
+            {
+                delete i.value();
+                gObjects.remove(i.key());
+            }
+        }
+    }
 }
 
 qreal VContainer::FindVar(const QString &name, bool *ok)const

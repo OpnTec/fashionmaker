@@ -34,8 +34,8 @@ const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Tool::Sources &typeCreation, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline), QGraphicsPathItem(parent)
+                                 const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idSpline, idTool), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -51,18 +51,26 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 }
 
 void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                             const Document::Documents &parse, const Tool::Sources &typeCreation)
+                             const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool)
 {
+    VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
     if (parse == Document::FullParse)
     {
-        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation);
+        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool);
         Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
         const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
         const QVector<VSplinePoint> *points = path->GetPoint();
         for (qint32 i = 0; i<points->size(); ++i)
         {
-            doc->IncrementReferens(points->at(i).P().id());
+            if(idTool != 0)
+            {
+                doc->IncrementReferens(idTool);
+            }
+            else
+            {
+                doc->IncrementReferens(points->at(i).P().id());
+            }
         }
     }
     else
@@ -83,6 +91,10 @@ void VNodeSplinePath::AddToFile()
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
+    if (idTool != 0)
+    {
+        AddAttribute(domElement, AttrIdTool, idTool);
+    }
 
     AddToModeling(domElement);
 }
@@ -93,6 +105,10 @@ void VNodeSplinePath::RefreshDataInFile()
     if (domElement.isElement())
     {
         domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+        if (idTool != 0)
+        {
+            domElement.setAttribute(AttrIdTool, idTool);
+        }
     }
 }
 

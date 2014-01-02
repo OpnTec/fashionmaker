@@ -402,6 +402,20 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
         }
         break;
+        //Because "history" not only show history of pattern, but help restore current data for each pattern's piece, we
+        //need add record about details and nodes, but don't show them.
+        case Tool::Detail:
+            break;
+        case Tool::UnionDetails:
+            break;
+        case Tool::NodeArc:
+            break;
+        case Tool::NodePoint:
+            break;
+        case Tool::NodeSpline:
+            break;
+        case Tool::NodeSplinePath:
+            break;
         default:
             qWarning()<<tr("Got wrong tool type. Ignore.");
             break;

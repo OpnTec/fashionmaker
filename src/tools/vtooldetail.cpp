@@ -81,8 +81,8 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
 void VToolDetail::setDialog()
 {
     Q_ASSERT(dialogDetail.isNull() == false);
-    const VDetail *detail = VAbstractTool::data.GeometricObject<const VDetail *>(id);
-    dialogDetail->setDetails(*detail);
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    dialogDetail->setDetails(detail);
 }
 
 void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -146,6 +146,7 @@ void VToolDetail::Create(const qint64 _id, VDetail newDetail, VMainGraphicsScene
             doc->UpdateToolData(id, data);
         }
     }
+    VAbstractTool::AddRecord(id, Tool::Detail, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -170,7 +171,7 @@ void VToolDetail::Remove()
             RemoveReferens();
             element.removeChild(domElement);
             //update xml file
-            emit FullUpdateTree();
+            //emit FullUpdateTree();
             //remove form scene
             emit RemoveTool(this);
         }
@@ -310,7 +311,30 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        Remove();
+        //remove form xml file
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if (domElement.isElement())
+        {
+            QDomNode element = domElement.parentNode();
+            if (element.isNull() == false)
+            {
+                //deincrement referens
+                RemoveReferens();
+                element.removeChild(domElement);
+                //update xml file
+                emit FullUpdateTree();
+                //remove form scene
+                emit RemoveTool(this);
+            }
+            else
+            {
+                qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
+            }
+        }
+        else
+        {
+            qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
+        }
     }
 }
 

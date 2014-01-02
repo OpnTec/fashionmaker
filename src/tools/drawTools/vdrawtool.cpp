@@ -30,37 +30,13 @@
 
 qreal VDrawTool::factor = 1;
 
-VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
+VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id)
+    :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
     nameActivDraw(doc->GetNameActivDraw())
 {
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VDomDocument::ShowTool, this, &VDrawTool::ShowTool);
-}
-
-void VDrawTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)
-{
-    qint64 cursor = doc->getCursor();
-    QVector<VToolRecord> *history = doc->getHistory();
-    if (cursor <= 0)
-    {
-        history->append(VToolRecord(id, toolType, doc->GetNameActivDraw()));
-    }
-    else
-    {
-        qint32 index = 0;
-        for (qint32 i = 0; i<history->size(); ++i)
-        {
-            VToolRecord rec = history->at(i);
-            if (rec.getId() == cursor)
-            {
-                index = i;
-                break;
-            }
-        }
-        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
-    }
 }
 
 void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)

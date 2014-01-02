@@ -65,8 +65,8 @@ const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id)
+    :VDataTool(data), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
 {
     Q_ASSERT(doc != 0);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
@@ -185,4 +185,28 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
     *a = line.p2().y() - p1.y();
     *b = p1.x() - line.p2().x();
     *c = - *a * p1.x() - *b * p1.y();
+}
+
+void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)
+{
+    qint64 cursor = doc->getCursor();
+    QVector<VToolRecord> *history = doc->getHistory();
+    if (cursor <= 0)
+    {
+        history->append(VToolRecord(id, toolType, doc->GetNameActivDraw()));
+    }
+    else
+    {
+        qint32 index = 0;
+        for (qint32 i = 0; i<history->size(); ++i)
+        {
+            VToolRecord rec = history->at(i);
+            if (rec.getId() == cursor)
+            {
+                index = i;
+                break;
+            }
+        }
+        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
+    }
 }

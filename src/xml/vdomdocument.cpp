@@ -40,20 +40,20 @@
 
 #include <QMessageBox>
 
-VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode)
-    : QDomDocument(), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent)
+    : QObject(parent), QDomDocument(), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){}
 
-VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws,
-                           Draw::Draws *mode)
-    :QDomDocument(name), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode,
+                           QObject *parent)
+    :QObject(parent), QDomDocument(name), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){}
 
 VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
-                           Draw::Draws *mode)
-    :QDomDocument(doctype), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
+                           Draw::Draws *mode, QObject *parent)
+    :QObject(parent), QDomDocument(doctype), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
     comboBoxDraws(comboBoxDraws), mode(mode){}
 
@@ -76,6 +76,23 @@ QDomElement VDomDocument::elementById(const QString& id)
     }
 
     return QDomElement();
+}
+
+void VDomDocument::removeAllChilds(QDomElement &element)
+{
+    QDomNode domNode = element.firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                element.removeChild(domElement);
+            }
+        }
+        domNode = element.firstChild();
+    }
 }
 
 bool VDomDocument::find(const QDomElement &node, const QString& id)
@@ -510,7 +527,7 @@ void VDomDocument::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphics
             {
                 if (domElement.tagName() == "calculation")
                 {
-                    data->ClearObject();
+                    data->ClearCalculationGObjects();
                     ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
                 }
                 if (domElement.tagName() == "modeling")
@@ -891,12 +908,13 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
             const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
             qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
             qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
             data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
                                                 Draw::Modeling));
-            VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile);
+            VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1122,11 +1140,12 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
             VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
             Q_ASSERT(spl != 0);
             spl->setIdObject(idObject);
             data->UpdateGObject(id, spl);
-            VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile);
+            VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1142,11 +1161,12 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
             VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
             Q_ASSERT(path != 0);
             path->setIdObject(idObject);
             data->UpdateGObject(id, path);
-            VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile);
+            VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1191,11 +1211,12 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
         {
             qint64 id = GetParametrId(domElement);
             qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
             VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
             Q_ASSERT(arc != 0);
             arc->setIdObject(idObject);
             data->UpdateGObject(id, arc);
-            VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile);
+            VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
         }
         catch (const VExceptionBadId &e)
@@ -1218,14 +1239,12 @@ void VDomDocument::ParseToolsElement(VMainGraphicsScene *scene, const QDomElemen
         try
         {
             qint64 id = GetParametrId(domElement);
-            qint64 d1P1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrD1P1, "0");
-            qint64 d1P2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrD1P2, "0");
-            qint64 d2P1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrD2P1, "0");
-            qint64 d2P2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrD2P2, "0");
+            qint64 indexD1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD1, "-1");
+            qint64 indexD2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD2, "-1");
 
             QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
-            VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, d1P1, d1P2, d2P1, d2P2, scene, this, data, parse,
+            VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
                                       Tool::FromFile);
 
             return;
@@ -1245,7 +1264,7 @@ void VDomDocument::FullUpdateTree()
     Q_ASSERT(scene != 0);
     try
     {
-        data->ClearObject();
+        data->ClearGObjects();
         Parse(Document::LiteParse, scene, scene);
     }
     catch (const std::bad_alloc &)

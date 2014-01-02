@@ -34,8 +34,8 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
-                   QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idArc), QGraphicsPathItem(parent)
+                   const qint64 &idTool, QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idArc, idTool), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -51,14 +51,22 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
 }
 
 void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
-                      const Tool::Sources &typeCreation)
+                      const Tool::Sources &typeCreation, const qint64 &idTool)
 {
+    VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation);
+        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool);
         Q_ASSERT(arc != 0);
         doc->AddTool(id, arc);
-        doc->IncrementReferens(idArc);
+        if(idTool != 0)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            doc->IncrementReferens(idArc);
+        }
     }
     else
     {
@@ -78,6 +86,10 @@ void VNodeArc::AddToFile()
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
+    if (idTool != 0)
+    {
+        AddAttribute(domElement, AttrIdTool, idTool);
+    }
 
     AddToModeling(domElement);
 }
@@ -87,7 +99,11 @@ void VNodeArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+        domElement.setAttribute(AttrIdObject, idNode);
+        if (idTool != 0)
+        {
+            domElement.setAttribute(AttrIdTool, idTool);
+        }
     }
 }
 

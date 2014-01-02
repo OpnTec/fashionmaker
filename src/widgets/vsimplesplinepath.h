@@ -36,7 +36,7 @@ class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent = 0);
+    VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor);
 protected:
     /**
      * @brief mouseReleaseEvent

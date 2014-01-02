@@ -46,7 +46,7 @@ public:
                              * @param id
                              * @param parent
                              */
-                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id);
     virtual                 ~VAbstractTool() {}
     /**
      * @brief LineIntersectRect
@@ -239,6 +239,13 @@ public:
      * @brief TypeLineLine
      */
     static const QString    TypeLineLine;
+    /**
+     * @brief AddRecord
+     * @param id
+     * @param toolType
+     * @param doc dom document container
+     */
+    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile

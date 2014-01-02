@@ -42,12 +42,10 @@ class DialogUnionDetails : public DialogTool
 public:
     explicit DialogUnionDetails(const VContainer *data, QWidget *parent = 0);
              ~DialogUnionDetails();
-    inline qint64 getD1() const {return d1;}
-    inline qint64 getD2() const {return d2;}
-    inline qint64 getD1P1() const {return d1P1;}
-    inline qint64 getD1P2() const {return d1P2;}
-    inline qint64 getD2P1() const {return d2P1;}
-    inline qint64 getD2P2() const {return d2P2;}
+    inline qint64    getD1() const {return d1;}
+    inline qint64    getD2() const {return d2;}
+    inline ptrdiff_t getIndexD1() const {return indexD1;}
+    inline ptrdiff_t getIndexD2() const {return indexD2;}
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save correct data and ignore wrong.
@@ -62,17 +60,16 @@ public slots:
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
     Ui::DialogUnionDetails *ui;
+    ptrdiff_t        indexD1;
+    ptrdiff_t        indexD2;
     qint64           d1;
     qint64           d2;
-    qint64           d1P1;
-    qint64           d1P2;
-    qint64           d2P1;
-    qint64           d2P2;
-    qint32           numberD;
-    qint32           numberP;
+    qint32           numberD; // number of detail, what we already have
+    qint32           numberP; // number of points, what we already have
+    qint64           p1;
+    qint64           p2;
     bool             CheckObject(const qint64 &id, const qint64 &idDetail) const;
-    void             ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, qint64 &p1,
-                                   qint64 &p2);
+    void             ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, ptrdiff_t &index);
 };
 
 #endif // DIALOGUNIONDETAILS_H

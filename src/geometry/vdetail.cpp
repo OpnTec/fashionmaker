@@ -111,3 +111,75 @@ void VDetail::setId(const qint64 &id)
 {
     _id = id;
 }
+
+bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
+{
+    ptrdiff_t i = indexOfNode(p1);
+    ptrdiff_t j1 = 0, j2 = 0;
+
+    if (i == nodes.size() - 1)
+    {
+        j1 = i-1;
+        j2 = 0;
+    }
+    else if (i == 0)
+    {
+        j1 = nodes.size() - 1;
+        j2 = i + 1;
+    }
+    else
+    {
+        j1 = i - 1;
+        j2 = i + 1;
+    }
+
+    if (nodes.at(j1).getId() == p2 || nodes.at(j2).getId() == p2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
+{
+    if (OnEdge(p1, p2) == false)
+    {
+        qWarning()<<"Points don't on edge.";
+        return -1;
+    }
+
+    ptrdiff_t i = indexOfNode(p1);
+    ptrdiff_t j = indexOfNode(p2);
+
+    ptrdiff_t min = qMin(i, j);
+
+    if (min == 0 && (i == nodes.size() - 1 || j == nodes.size() - 1))
+    {
+        return nodes.size() - 1;
+    }
+    else
+    {
+        return min;
+    }
+}
+
+void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2) const
+{
+    if (index <= 0 || index > nodes.size())
+    {
+        qWarning()<<"Wrong edge index";
+        return;
+    }
+    p1 = nodes.at(index);
+    if (index + 1 > nodes.size() - 1)
+    {
+        p2 = nodes.at(0);
+    }
+    else
+    {
+        p2 = nodes.at(index+1);
+    }
+}

@@ -37,7 +37,7 @@ class VToolUnionDetails : public VAbstractTool
     Q_OBJECT
 public:
     VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
-                      const qint64 &d1P1, const qint64 &d1P2, const qint64 &d2P1, const qint64 &d2P2,
+                      const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
                       const Tool::Sources &typeCreation);
     virtual void setDialog() {}
     /**
@@ -59,9 +59,9 @@ public:
      * @param typeCreation
      */
     static void  Create(const qint64 _id, const VDetail &d1,  const VDetail &d2, const qint64 &d1id, const qint64 &d2id,
-                        const qint64 &d1P1, const qint64 &d1P2, const qint64 &d2P1, const qint64 &d2P2,
-                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+                        const ptrdiff_t &indexD1, const ptrdiff_t &indexD2, VMainGraphicsScene *scene,
+                        VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                        const Tool::Sources &typeCreation);
     static QVector<VDetail> GetDetailFromFile(VDomDocument *doc, const QDomElement &domElement);
     /**
      * @brief TagName
@@ -70,27 +70,21 @@ public:
     static const QString ToolType;
     static const QString TagDetail;
     static const QString TagNode;
-    static const QString AttrD1P1;
-    static const QString AttrD1P2;
-    static const QString AttrD2P1;
-    static const QString AttrD2P2;
+    static const QString AttrIndexD1;
+    static const QString AttrIndexD2;
     static const QString AttrIdObject;
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
 
-    inline qint64 getD1P1() const{return d1P1;}
-    inline qint64 getD1P2() const{return d1P2;}
-    inline qint64 getD2P1() const{return d2P1;}
-    inline qint64 getD2P2() const{return d2P2;}
-    void         AddToNewDetail(VContainer *data, VDetail newDetail, const VDetail &det, const ptrdiff_t &a,
-                                const ptrdiff_t &b, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
-                                const qreal &angle = 0) const;
-    void         UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &a,
-                              const ptrdiff_t &b, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
-                              const qreal &angle = 0) const;
-    void         BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                 const qreal angle)const;
+    static void  AddToNewDetail(VDomDocument *doc, VContainer *data, VDetail &newDetail, const VDetail &det,
+                                const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0, const qreal &dy = 0,
+                                const qint64 &pRotate = 0, const qreal &angle = 0);
+    static void  UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
+                              qint64 &idCount, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
+                              const qreal &angle = 0);
+    static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
+                                 const qreal angle);
 public slots:
     /**
      * @brief FullUpdateFromFile
@@ -109,17 +103,12 @@ private:
     Q_DISABLE_COPY(VToolUnionDetails)
     VDetail      d1;
     VDetail      d2;
-    qint64       d1P1;
-    qint64       d1P2;
-    qint64       d2P1;
-    qint64       d2P2;
+    ptrdiff_t    indexD1;
+    ptrdiff_t    indexD2;
     void         AddDetail(QDomElement &domElement, VDetail &d);
-    void         AddNode(QDomElement &domElement, VNodeDetail &node);
-    QDomNode     UpdateDetail(QDomNode &domNode, VDetail &d);
-    void         UpdateNode(QDomNode &domNode, VNodeDetail &node);
+    void         AddNode(QDomElement &domElement, const VNodeDetail &node);
+    QDomNode     UpdateDetail(const QDomNode &domNode, const VDetail &d);
     void         AddToModeling(const QDomElement &domElement);
-    void         CorectPoints(const VDetail &detail, qint64 &p1, qint64 &p2);
-
 };
 
 #endif // VTOOLUNIONDETAILS_H

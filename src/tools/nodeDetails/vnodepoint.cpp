@@ -34,8 +34,8 @@ const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       const Tool::Sources &typeCreation, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint), QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0),
+                       const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem *parent)
+    :VAbstractNode(doc, data, id, idPoint, idTool), QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0),
       lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
@@ -58,14 +58,22 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
 }
 
 void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation)
+                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool)
 {
+    VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
     {
-        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation);
+        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool);
         Q_ASSERT(point != 0);
         doc->AddTool(id, point);
-        doc->IncrementReferens(idPoint);
+        if(idTool != 0)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            doc->IncrementReferens(idPoint);
+        }
     }
     else
     {
@@ -88,6 +96,10 @@ void VNodePoint::AddToFile()
     AddAttribute(domElement, AttrIdObject, idNode);
     AddAttribute(domElement, AttrMx, toMM(point->mx()));
     AddAttribute(domElement, AttrMy, toMM(point->my()));
+    if (idTool != 0)
+    {
+        AddAttribute(domElement, AttrIdTool, idTool);
+    }
 
     AddToModeling(domElement);
 }
@@ -101,6 +113,10 @@ void VNodePoint::RefreshDataInFile()
         domElement.setAttribute(AttrIdObject, idNode);
         domElement.setAttribute(AttrMx, toMM(point->mx()));
         domElement.setAttribute(AttrMy, toMM(point->my()));
+        if (idTool != 0)
+        {
+            domElement.setAttribute(AttrIdTool, idTool);
+        }
     }
 }
 

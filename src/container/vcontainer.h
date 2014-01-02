@@ -263,7 +263,8 @@ public:
     /**
      * @brief ClearObject points, splines, arcs, spline paths will be cleared.
      */
-    void                ClearObject();
+    void                ClearGObjects();
+    void                ClearCalculationGObjects();
     /**
      * @brief ClearIncrementTable clear increment table
      */

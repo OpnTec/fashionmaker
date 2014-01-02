@@ -30,8 +30,8 @@
 #include "ui_dialoguniondetails.h"
 
 DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogUnionDetails), d1(0), d2(0), d1P1(0), d1P2(0),
-    d2P1(0), d2P2(0), numberD(0), numberP(0)
+    DialogTool(data, parent), ui(new Ui::DialogUnionDetails), indexD1(0), indexD2(0), d1(0), d2(0),  numberD(0),
+    numberP(0), p1(0), p2(0)
 {
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -49,11 +49,11 @@ void DialogUnionDetails::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (numberD == 0)
     {
-        ChoosedDetail(id, type, d1, d1P1, d1P2);
+        ChoosedDetail(id, type, d1, indexD1);
     }
     else
     {
-        ChoosedDetail(id, type, d2, d2P1, d2P2);
+        ChoosedDetail(id, type, d2, indexD2);
     }
 }
 
@@ -72,8 +72,7 @@ bool DialogUnionDetails::CheckObject(const qint64 &id, const qint64 &idDetail) c
     return det.Containes(id);
 }
 
-void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, qint64 &p1,
-                                       qint64 &p2)
+void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, ptrdiff_t &index)
 {
     if (idDetail == 0)
     {
@@ -95,25 +94,41 @@ void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &ty
             p1 = id;
             ++numberP;
             emit ToolTip(tr("Select second point"));
+            return;
         }
         if (numberP == 1)
         {
             if (id == p1)
             {
+                emit ToolTip(tr("Select another second point"));
                 return;
             }
-            p2 = id;
-            ++numberD;
-            if (numberD > 1)
+            VDetail d = data->GetDetail(idDetail);
+            if (d.OnEdge(p1, id))
             {
-                ++numberP;
-                emit ToolTip("");
-                this->show();
+                p2 = id;
+                index = d.Edge(p1, p2);
+                ++numberD;
+                if (numberD > 1)
+                {
+                    ++numberP;
+                    emit ToolTip("");
+                    this->show();
+                    return;
+                }
+                else
+                {
+                    numberP = 0;
+                    p1 = 0;
+                    p2 = 0;
+                    emit ToolTip(tr("Select detail"));
+                    return;
+                }
             }
             else
             {
-                numberP = 0;
-                emit ToolTip(tr("Select detail"));
+                emit ToolTip(tr("Select another second point"));
+                return;
             }
         }
     }

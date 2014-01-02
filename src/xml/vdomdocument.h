@@ -66,7 +66,7 @@ public:
                     * @param comboBoxDraws
                     * @param mode
                     */
-                   VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
+                   VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent = 0);
                    /**
                     * @brief VDomDocument
                     * @param name
@@ -74,7 +74,8 @@ public:
                     * @param comboBoxDraws
                     * @param mode
                     */
-                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
+                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode,
+                                QObject *parent = 0);
                    /**
                     * @brief VDomDocument
                     * @param doc dom document containertype
@@ -83,7 +84,7 @@ public:
                     * @param mode
                     */
                    VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
-                                Draw::Draws *mode);
+                                Draw::Draws *mode, QObject *parent = 0);
                    ~VDomDocument(){}
     /**
      * @brief elementById
@@ -91,6 +92,7 @@ public:
      * @return
      */
     QDomElement    elementById(const QString& id);
+    void           removeAllChilds(QDomElement &element);
     /**
      * @brief CreateEmptyFile
      */

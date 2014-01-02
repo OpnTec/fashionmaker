@@ -34,8 +34,8 @@ const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                         const Tool::Sources &typeCreation, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline), QGraphicsPathItem(parent)
+                         const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idSpline, idTool), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -51,14 +51,23 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 }
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Document::Documents &parse, const Tool::Sources &typeCreation)
+                                 const Document::Documents &parse, const Tool::Sources &typeCreation,
+                                 const qint64 &idTool)
 {
+    VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = 0;
     if (parse == Document::FullParse)
     {
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation);
+        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool);
         doc->AddTool(id, spl);
-        doc->IncrementReferens(idSpline);
+        if(idTool != 0)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            doc->IncrementReferens(idSpline);
+        }
     }
     else
     {
@@ -79,6 +88,10 @@ void VNodeSpline::AddToFile()
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
     AddAttribute(domElement, AttrIdObject, idNode);
+    if (idTool != 0)
+    {
+        AddAttribute(domElement, AttrIdTool, idTool);
+    }
 
     AddToModeling(domElement);
 }
@@ -89,6 +102,10 @@ void VNodeSpline::RefreshDataInFile()
     if (domElement.isElement())
     {
         domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+        if (idTool != 0)
+        {
+            domElement.setAttribute(AttrIdTool, idTool);
+        }
     }
 }
 

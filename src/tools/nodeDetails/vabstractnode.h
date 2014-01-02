@@ -46,17 +46,20 @@ public:
                   * @param idNode
                   * @param parent
                   */
-                 VAbstractNode(VDomDocument *doc, VContainer *data, qint64 id, qint64 idNode, QObject *parent = 0 );
+                 VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
+                               const qint64 &idTool);
     virtual      ~VAbstractNode() {}
     /**
      * @brief AttrIdObject
      */
     static const QString AttrIdObject;
+    static const QString AttrIdTool;
 protected:
     /**
      * @brief idNode
      */
     qint64       idNode;
+    qint64       idTool;
     /**
      * @brief AddToModeling
      * @param domElement

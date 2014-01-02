@@ -49,7 +49,7 @@ public:
                   * @param parent
                   */
                  VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                            const Tool::Sources &typeCreation, QGraphicsItem * parent = 0 );
+                            const Tool::Sources &typeCreation, const qint64 &idTool = 0, QGraphicsItem * parent = 0 );
     /**
      * @brief Create
      * @param doc dom document container
@@ -60,7 +60,7 @@ public:
      * @param typeCreation
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool = 0);
     /**
      * @brief TagName
      */

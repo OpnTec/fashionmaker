@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
     dialogUnionDetails(QSharedPointer<DialogUnionDetails>()),
     dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-    mode(Draw::Calculation)
+    mode(Draw::Calculation), currentDrawIndex(0)
 {
     ui->setupUi(this);
     ToolBarOption();
@@ -179,7 +179,7 @@ void MainWindow::ActionNewDraw()
     }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &MainWindow::currentDrawChanged);
-    pattern->ClearObject();
+    pattern->ClearGObjects();
     //Create single point
     qint64 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
@@ -504,6 +504,8 @@ void MainWindow::ToolUnionDetails(bool checked)
 {
     SetToolButton(checked, Tool::UnionDetails, ":/cursor/union_cursor.png",
                   tr("Select detail"), dialogUnionDetails, &MainWindow::ClosedDialogUnionDetails);
+    //Must disconnect this signal here.
+    disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogUnionDetails.data(), &DialogUnionDetails::UpdateList);
 }
 
 void MainWindow::ClosedDialogUnionDetails(int result)
@@ -801,6 +803,12 @@ void MainWindow::CanselTool()
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
+        case Tool::UnionDetails:
+            dialogUnionDetails.clear();
+            ui->toolButtonUnionDetails->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
         default:
             qWarning()<<"Get wrong tool type. Ignore.";
             break;
@@ -854,6 +862,8 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
+        comboBoxDraws->setCurrentIndex(currentDrawIndex);
+
         mode = Draw::Calculation;
         SetEnableTool(true);
         doc->setCurrentData();
@@ -883,6 +893,10 @@ void MainWindow::ActionDetails(bool checked)
         horScrollBar->setValue(currentScene->getHorScrollBar());
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
+
+        currentDrawIndex = comboBoxDraws->currentIndex();
+        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
+
         mode = Draw::Modeling;
         SetEnableTool(true);
         ui->toolBox->setCurrentIndex(4);

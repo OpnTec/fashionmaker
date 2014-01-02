@@ -506,6 +506,7 @@ private:
      * @brief mode
      */
     Draw::Draws        mode;
+    qint32             currentDrawIndex;
     /**
      * @brief ToolBarOption
      */
