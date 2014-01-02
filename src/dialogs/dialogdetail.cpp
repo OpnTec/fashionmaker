@@ -135,6 +135,7 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDet
     VNodeDetail node(id, typeTool, typeNode, mx, my);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
+    ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
     disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
     disconnect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
