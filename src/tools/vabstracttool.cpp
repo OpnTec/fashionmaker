@@ -65,8 +65,8 @@ const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id)
-    :VDataTool(data), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
+VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
 {
     Q_ASSERT(doc != 0);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);

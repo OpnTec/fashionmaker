@@ -34,8 +34,8 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
-                   const qint64 &idTool, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idArc, idTool), QGraphicsPathItem(parent)
+                   const qint64 &idTool, QObject *qoParent, QGraphicsItem *parent)
+    :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -51,17 +51,21 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
 }
 
 void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
-                      const Tool::Sources &typeCreation, const qint64 &idTool)
+                      const Tool::Sources &typeCreation, const qint64 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool);
+        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
         Q_ASSERT(arc != 0);
         doc->AddTool(id, arc);
         if(idTool != 0)
         {
             doc->IncrementReferens(idTool);
+            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            VDataTool *tool = doc->getTool(idTool);
+            Q_ASSERT(tool != 0);
+            arc->setParent(tool);
         }
         else
         {

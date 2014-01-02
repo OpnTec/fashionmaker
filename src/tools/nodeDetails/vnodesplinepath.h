@@ -49,7 +49,7 @@ public:
                   * @param parent
                   */
                  VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Tool::Sources &typeCreation, const qint64 &idTool = 0,
+                                 const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                                  QGraphicsItem * parent = 0);
     /**
      * @brief Create
@@ -61,7 +61,8 @@ public:
      * @param typeCreation
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool = 0);
+                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool = 0,
+                        QObject *parent = 0);
     /**
      * @brief TagName
      */

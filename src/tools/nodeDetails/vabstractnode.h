@@ -47,7 +47,7 @@ public:
                   * @param parent
                   */
                  VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
-                               const qint64 &idTool);
+                               const qint64 &idTool, QObject *parent = 0);
     virtual      ~VAbstractNode() {}
     /**
      * @brief AttrIdObject

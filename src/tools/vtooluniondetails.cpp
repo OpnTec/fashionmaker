@@ -43,8 +43,8 @@ const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
 VToolUnionDetails::VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1,
                                      const VDetail &d2, const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
-                                     const Tool::Sources &typeCreation)
-    :VAbstractTool(doc, data, id), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
+                                     const Tool::Sources &typeCreation, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
 {
     if (typeCreation == Tool::FromGui)
     {
@@ -56,9 +56,9 @@ VToolUnionDetails::VToolUnionDetails(VDomDocument *doc, VContainer *data, const 
     }
 }
 
-void VToolUnionDetails::AddToNewDetail(VDomDocument *doc, VContainer *data, VDetail &newDetail, const VDetail &det,
-                                       const ptrdiff_t &i, const qint64 &idTool, const qreal &dx, const qreal &dy,
-                                       const qint64 &pRotate, const qreal &angle)
+void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContainer *data, VDetail &newDetail,
+                                       const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx,
+                                       const qreal &dy, const qint64 &pRotate, const qreal &angle)
 {
     qint64 id = 0, idObject = 0;
     switch (det.at(i).getTypeTool())
@@ -81,7 +81,7 @@ void VToolUnionDetails::AddToNewDetail(VDomDocument *doc, VContainer *data, VDet
                 Q_ASSERT(point1 != 0);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool);
+                VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
         }
         break;
@@ -119,7 +119,7 @@ void VToolUnionDetails::AddToNewDetail(VDomDocument *doc, VContainer *data, VDet
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool);
+                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
         }
         break;
@@ -158,7 +158,7 @@ void VToolUnionDetails::AddToNewDetail(VDomDocument *doc, VContainer *data, VDet
                 Q_ASSERT(spl1 != 0);
                 spl1->setMode(Draw::Modeling);
                 idObject = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool);
+                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
         }
         break;
@@ -215,7 +215,7 @@ void VToolUnionDetails::AddToNewDetail(VDomDocument *doc, VContainer *data, VDet
                 Q_ASSERT(path1 != 0);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool);
+                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
         }
         break;
@@ -390,6 +390,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                                VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                                const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
+    VToolUnionDetails *unionDetails = 0;
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
@@ -405,7 +406,8 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
     VAbstractTool::AddRecord(id, Tool::UnionDetails, doc);
     if (parse == Document::FullParse)
     {
-        VToolUnionDetails *unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation);
+        //Scene doesn't show this tool, so doc will destroy this object.
+        unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, doc);
         QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, unionDetails);
         for (ptrdiff_t i = 0; i < d1.CountNode(); ++i)
@@ -429,7 +431,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
 
         do
         {
-            AddToNewDetail(doc, data, newDetail, d1, i, id);
+            AddToNewDetail(unionDetails, doc, data, newDetail, d1, i, id);
             ++i;
             if (i > indexD1 && pointsD2 < nD2-2)
             {
@@ -483,7 +485,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     {
                         j=0;
                     }
-                    AddToNewDetail(doc, data, newDetail, d2, j, id, dx, dy, det1p1.getId(), angle);
+                    AddToNewDetail(unionDetails, doc, data, newDetail, d2, j, id, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
                 } while (pointsD2 < nD2);

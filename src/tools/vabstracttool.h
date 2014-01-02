@@ -46,7 +46,7 @@ public:
                              * @param id
                              * @param parent
                              */
-                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id);
+                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual                 ~VAbstractTool() {}
     /**
      * @brief LineIntersectRect

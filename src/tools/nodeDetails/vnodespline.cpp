@@ -34,8 +34,9 @@ const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                         const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline, idTool), QGraphicsPathItem(parent)
+                         const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+                         QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -52,17 +53,21 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
 
 VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                                  const Document::Documents &parse, const Tool::Sources &typeCreation,
-                                 const qint64 &idTool)
+                                 const qint64 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = 0;
     if (parse == Document::FullParse)
     {
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool);
+        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
         doc->AddTool(id, spl);
         if(idTool != 0)
         {
             doc->IncrementReferens(idTool);
+            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            VDataTool *tool = doc->getTool(idTool);
+            Q_ASSERT(tool != 0);
+            spl->setParent(tool);
         }
         else
         {

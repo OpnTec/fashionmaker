@@ -34,9 +34,10 @@ const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, idTool), QGraphicsEllipseItem(parent), radius(toPixel(1.5)), namePoint(0),
-      lineName(0)
+                       const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+                       QGraphicsItem *parent)
+    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
+      namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
@@ -58,17 +59,24 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
 }
 
 void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool)
+                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
+                        QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
     {
-        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool);
+        //TODO Need create garbage collector and remove all nodes, that we don't use.
+        //Better check garbage before each saving file. Check only modeling tags.
+        VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
         Q_ASSERT(point != 0);
         doc->AddTool(id, point);
         if(idTool != 0)
         {
             doc->IncrementReferens(idTool);
+            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            VDataTool *tool = doc->getTool(idTool);
+            Q_ASSERT(tool != 0);
+            point->setParent(tool);
         }
         else
         {

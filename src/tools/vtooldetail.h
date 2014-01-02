@@ -84,7 +84,7 @@ public:
      * @param parse
      * @param typeCreation
      */
-    static void                    Create(const qint64 _id, VDetail newDetail, VMainGraphicsScene  *scene,
+    static void                    Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                                           const Tool::Sources &typeCreation);
     template <typename T>

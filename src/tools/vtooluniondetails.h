@@ -38,7 +38,7 @@ class VToolUnionDetails : public VAbstractTool
 public:
     VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
                       const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
-                      const Tool::Sources &typeCreation);
+                      const Tool::Sources &typeCreation, QObject *parent = 0);
     virtual void setDialog() {}
     /**
      * @brief Create
@@ -77,9 +77,9 @@ public:
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
 
-    static void  AddToNewDetail(VDomDocument *doc, VContainer *data, VDetail &newDetail, const VDetail &det,
-                                const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0, const qreal &dy = 0,
-                                const qint64 &pRotate = 0, const qreal &angle = 0);
+    static void  AddToNewDetail(QObject *tool, VDomDocument *doc, VContainer *data, VDetail &newDetail,
+                                const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0,
+                                const qreal &dy = 0, const qint64 &pRotate = 0, const qreal &angle = 0);
     static void  UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
                               qint64 &idCount, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
                               const qreal &angle = 0);

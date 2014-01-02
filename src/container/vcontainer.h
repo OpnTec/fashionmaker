@@ -160,7 +160,7 @@ public:
      * @param name name of row of standart table
      * @param cell row of standart table
      */
-    inline void         AddStandartTableCell(const QString& name, VStandartTableRow cell)
+    inline void         AddStandartTableCell(const QString& name, const VStandartTableRow &cell)
     {standartTable[name] = cell;}
     /**
      * @brief AddIncrementTableRow add new row of increment table

@@ -34,8 +34,9 @@ const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Tool::Sources &typeCreation, const qint64 &idTool, QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline, idTool), QGraphicsPathItem(parent)
+                                 const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+                                 QGraphicsItem * parent)
+    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, widthHairLine));
@@ -51,12 +52,13 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 }
 
 void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                             const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool)
+                             const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
+                             QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
     if (parse == Document::FullParse)
     {
-        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool);
+        VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
         Q_ASSERT(splPath != 0);
         doc->AddTool(id, splPath);
         const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
@@ -66,6 +68,10 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
             if(idTool != 0)
             {
                 doc->IncrementReferens(idTool);
+                //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+                VDataTool *tool = doc->getTool(idTool);
+                Q_ASSERT(tool != 0);
+                splPath->setParent(tool);
             }
             else
             {
