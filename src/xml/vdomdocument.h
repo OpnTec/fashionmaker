@@ -66,7 +66,7 @@ public:
                     * @param comboBoxDraws
                     * @param mode
                     */
-                   VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
+                   VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent = 0);
                    /**
                     * @brief VDomDocument
                     * @param name
@@ -74,7 +74,8 @@ public:
                     * @param comboBoxDraws
                     * @param mode
                     */
-                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode);
+                   VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode,
+                                QObject *parent = 0);
                    /**
                     * @brief VDomDocument
                     * @param doc dom document containertype
@@ -83,7 +84,7 @@ public:
                     * @param mode
                     */
                    VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
-                                Draw::Draws *mode);
+                                Draw::Draws *mode, QObject *parent = 0);
                    ~VDomDocument(){}
     /**
      * @brief elementById
@@ -91,6 +92,7 @@ public:
      * @return
      */
     QDomElement    elementById(const QString& id);
+    void           removeAllChilds(QDomElement &element);
     /**
      * @brief CreateEmptyFile
      */
@@ -155,6 +157,7 @@ public:
      * @return
      */
     inline QHash<qint64, VDataTool*>* getTools() {return &tools;}
+    VDataTool* getTool(const qint64 &id);
     /**
      * @brief getHistory
      * @return
@@ -200,6 +203,28 @@ public:
      * @brief TestUniqueId
      */
     void           TestUniqueId() const;
+    /**
+     * @brief GetParametrLongLong
+     * @param domElement
+     * @param name
+     * @return
+     */
+    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name,
+                                       const QString &defValue) const;
+    /**
+     * @brief GetParametrString
+     * @param domElement
+     * @param name
+     * @return
+     */
+    QString        GetParametrString(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    /**
+     * @brief GetParametrDouble
+     * @param domElement
+     * @param name
+     * @return
+     */
+    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
 signals:
     /**
      * @brief ChangedActivDraw
@@ -211,7 +236,7 @@ signals:
      * @param oldName
      * @param newName
      */
-    void           ChangedNameDraw(const QString oldName, const QString newName);
+    void           ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
      * @brief FullUpdateFromFile
      */
@@ -381,6 +406,8 @@ private:
      */
     void           ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                    const Document::Documents &parse, const QString& type);
+    void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+                                     const Document::Documents &parse, const QString& type);
     /**
      * @brief ParseIncrementsElement
      * @param node
@@ -392,27 +419,6 @@ private:
      * @return
      */
     qint64         GetParametrId(const QDomElement& domElement) const;
-    /**
-     * @brief GetParametrLongLong
-     * @param domElement
-     * @param name
-     * @return
-     */
-    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name) const;
-    /**
-     * @brief GetParametrString
-     * @param domElement
-     * @param name
-     * @return
-     */
-    QString        GetParametrString(const QDomElement& domElement, const QString &name) const;
-    /**
-     * @brief GetParametrDouble
-     * @param domElement
-     * @param name
-     * @return
-     */
-    qreal          GetParametrDouble(const QDomElement& domElement, const QString &name) const;
     /**
      * @brief CollectId
      * @param node

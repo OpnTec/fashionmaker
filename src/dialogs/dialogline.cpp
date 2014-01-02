@@ -54,8 +54,8 @@ DialogLine::~DialogLine()
 void DialogLine::setSecondPoint(const qint64 &value)
 {
     secondPoint = value;
-    VPointF point = data->GetPoint(value);
-    qint32 index = ui->comboBoxSecondPoint->findText(point.name());
+    const VPointF *point = data->GeometricObject<const VPointF *>(value);
+    qint32 index = ui->comboBoxSecondPoint->findText(point->name());
     if (index != -1)
     {
         ui->comboBoxSecondPoint->setCurrentIndex(index);
@@ -65,8 +65,8 @@ void DialogLine::setSecondPoint(const qint64 &value)
 void DialogLine::setFirstPoint(const qint64 &value)
 {
     firstPoint = value;
-    VPointF point = data->GetPoint(value);
-    qint32 index = ui->comboBoxFirstPoint->findText(point.name());
+    const VPointF *point = data->GeometricObject<const VPointF *>(value);
+    qint32 index = ui->comboBoxFirstPoint->findText(point->name());
     if (index != -1)
     {
         ui->comboBoxFirstPoint->setCurrentIndex(index);
@@ -87,10 +87,10 @@ void DialogLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui->comboBoxFirstPoint->findText(point.name());
+            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
@@ -101,7 +101,7 @@ void DialogLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
         }
         if (number == 1)
         {
-            qint32 index = ui->comboBoxSecondPoint->findText(point.name());
+            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);

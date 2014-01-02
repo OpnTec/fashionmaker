@@ -72,7 +72,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     RefreshGeometry();
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
     {
        AddToFile();
     }
@@ -97,29 +97,25 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
         {
             case (Tool::NodePoint):
             {
-                VPointF point = data->GetPoint(detail[i].getId());
-                id = data->AddPoint(point);
+                id = CreateNode<VPointF>(data, detail[i].getId());
                 VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeArc):
             {
-                VArc arc = data->GetArc(detail[i].getId());
-                id = data->AddArc(arc);
+                id = CreateNode<VArc>(data, detail[i].getId());
                 VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
-                VSpline spline = data->GetSpline(detail[i].getId());
-                id = data->AddSpline(spline);
+                id = CreateNode<VSpline>(data, detail[i].getId());
                 VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
-                VSplinePath splinePath = data->GetSplinePath(detail[i].getId());
-                id = data->AddSplinePath(splinePath);
+                id = CreateNode<VSplinePath>(data, detail[i].getId());
                 VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
             }
             break;
@@ -134,11 +130,11 @@ void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScen
     Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
     {
         id = data->AddDetail(newDetail);
     }
@@ -150,6 +146,7 @@ void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScen
             doc->UpdateToolData(id, data);
         }
     }
+    VAbstractTool::AddRecord(id, Tool::Detail, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -158,6 +155,34 @@ void VToolDetail::Create(const qint64 _id, VDetail &newDetail, VMainGraphicsScen
         connect(detail, &VToolDetail::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
+    }
+}
+
+void VToolDetail::Remove()
+{
+    //remove form xml file
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        QDomNode element = domElement.parentNode();
+        if (element.isNull() == false)
+        {
+            //deincrement referens
+            RemoveReferens();
+            element.removeChild(domElement);
+            //update xml file
+            //emit FullUpdateTree();
+            //remove form scene
+            emit RemoveTool(this);
+        }
+        else
+        {
+            qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
+        }
+    }
+    else
+    {
+        qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
     }
 }
 
@@ -204,7 +229,7 @@ void VToolDetail::AddToFile()
 
     for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
-       AddNode(domElement, detail[i]);
+       AddNode(domElement, detail.at(i));
     }
 
     QDomElement element;
@@ -212,6 +237,24 @@ void VToolDetail::AddToFile()
     if (ok)
     {
         element.appendChild(domElement);
+    }
+}
+
+void VToolDetail::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        VDetail det = VAbstractTool::data.GetDetail(id);
+        domElement.setAttribute(AttrName, det.getName());
+        domElement.setAttribute(AttrSupplement, QString().setNum(det.getSupplement()));
+        domElement.setAttribute(AttrClosed, QString().setNum(det.getClosed()));
+        domElement.setAttribute(AttrWidth, QString().setNum(det.getWidth()));
+        RemoveAllChild(domElement);
+        for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
+        {
+           AddNode(domElement, det.at(i));
+        }
     }
 }
 
@@ -300,11 +343,11 @@ void VToolDetail::RemoveReferens()
     VDetail detail = VAbstractTool::data.GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        doc->DecrementReferens(detail[i].getId());
+        doc->DecrementReferens(detail.at(i).getId());
     }
 }
 
-void VToolDetail::AddNode(QDomElement &domElement, VNodeDetail &node)
+void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 

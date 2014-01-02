@@ -48,7 +48,9 @@ public:
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VStandartTableRow(qint32 base, qreal ksize, qreal kgrowth, QString description = QString());
+                   VStandartTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
+                                     const QString &description = QString());
+                   ~VStandartTableRow(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value

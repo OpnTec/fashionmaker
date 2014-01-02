@@ -78,7 +78,7 @@ public:
      */
     inline qint64  getFirstPointId() const {return firstPointId;}
     /**
-     * @brief setFirstPointId set id of first point 
+     * @brief setFirstPointId set id of first point
      * @param value id
      * @param id don't show this point in list
      */

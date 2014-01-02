@@ -41,17 +41,21 @@ VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, 
     {
         AddToFile();
     }
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolHeight::setDialog()
 {
     Q_ASSERT(dialogHeight.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogHeight->setTypeLine(typeLine);
     dialogHeight->setBasePointId(basePointId, id);
     dialogHeight->setP1LineId(p1LineId, id);
     dialogHeight->setP2LineId(p2LineId, id);
-    dialogHeight->setPointName(p.name());
+    dialogHeight->setPointName(p->name());
 }
 
 void VToolHeight::Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -72,22 +76,22 @@ void VToolHeight::Create(const qint64 _id, const QString &pointName, const QStri
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    VPointF basePoint = data->GetPoint(basePointId);
-    VPointF p1Line = data->GetPoint(p1LineId);
-    VPointF p2Line = data->GetPoint(p2LineId);
+    const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
+    const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
+    const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
 
-    QPointF pHeight = FindPoint(QLineF(p1Line.toQPointF(), p2Line.toQPointF()), basePoint.toQPointF());
+    QPointF pHeight = FindPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()), basePoint->toQPointF());
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
-        id = data->AddPoint(VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
     }
     else
     {
-        data->UpdatePoint(id, VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
@@ -170,14 +174,14 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolHeight::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddAttribute(domElement, AttrTypeLine, typeLine);
     AddAttribute(domElement, AttrBasePoint, basePointId);
@@ -186,4 +190,20 @@ void VToolHeight::AddToFile()
 
     AddToCalculation(domElement);
 
+}
+
+void VToolHeight::RefreshDataInFile()
+{
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point->name());
+        domElement.setAttribute(AttrMx, toMM(point->mx()));
+        domElement.setAttribute(AttrMy, toMM(point->my()));
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrBasePoint, basePointId);
+        domElement.setAttribute(AttrP1Line, p1LineId);
+        domElement.setAttribute(AttrP2Line, p2LineId);
+    }
 }

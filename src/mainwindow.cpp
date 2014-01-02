@@ -45,8 +45,8 @@
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), tool(Tool::ArrowTool), currentScene(0), sceneDraw(0),
-    sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
+      sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
     dialogEndLine(QSharedPointer<DialogEndLine>()), dialogLine(QSharedPointer<DialogLine>()),
     dialogAlongLine(QSharedPointer<DialogAlongLine>()),
     dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>()), dialogNormal(QSharedPointer<DialogNormal>()),
@@ -58,8 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
     dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
     dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
-    dialogHistory(0), doc(0), data(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-    mode(Draw::Calculation)
+    dialogUnionDetails(QSharedPointer<DialogUnionDetails>()),
+    dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
+    mode(Draw::Calculation), currentDrawIndex(0)
 {
     ui->setupUi(this);
     ToolBarOption();
@@ -107,15 +108,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
     connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
     connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
+    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
 
-    data = new VContainer;
+    pattern = new VContainer();
 
-    doc = new VDomDocument(data, comboBoxDraws, &mode);
+    doc = new VDomDocument(pattern, comboBoxDraws, &mode);
     doc->CreateEmptyFile();
     connect(doc, &VDomDocument::haveChange, this, &MainWindow::haveChange);
-
-    fileName.clear();
-    changeInFile = false;
 
     //Autosaving file each 5 minutes
     QTimer *timer = new QTimer(this);
@@ -180,10 +179,10 @@ void MainWindow::ActionNewDraw()
     }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &MainWindow::currentDrawChanged);
-    data->ClearObject();
+    pattern->ClearGObjects();
     //Create single point
-    qint64 id = data->AddPoint(VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, data, id, Tool::FromGui);
+    qint64 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -251,7 +250,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
         helpLabel->setText(toolTip);
-        dialog = QSharedPointer<Dialog>(new Dialog(data));
+        dialog = QSharedPointer<Dialog>(new Dialog(pattern));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
         connect(dialog.data(), &Dialog::DialogClosed, this, closeDialogSlot);
         connect(dialog.data(), &Dialog::ToolTip, this, &MainWindow::ShowToolTip);
@@ -282,7 +281,7 @@ void MainWindow::ClosedDialog(QSharedPointer<Dialog> &dialog, int result)
 {
     if (result == QDialog::Accepted)
     {
-        DrawTool::Create(dialog, currentScene, doc, data);
+        DrawTool::Create(dialog, currentScene, doc, pattern);
     }
     ArrowTool();
 }
@@ -443,7 +442,7 @@ void MainWindow::ToolDetail(bool checked)
         QCursor cur(pixmap, 2, 3);
         view->setCursor(cur);
         helpLabel->setText(tr("Select points, arcs, curves clockwise."));
-        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(data));
+        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(pattern));
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogDetail.data(),
                 &DialogDetail::ChoosedObject);
         connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &MainWindow::ClosedDialogDetail);
@@ -462,7 +461,7 @@ void MainWindow::ClosedDialogDetail(int result)
 {
     if (result == QDialog::Accepted)
     {
-        VToolDetail::Create(dialogDetail, sceneDetails, doc, data);
+        VToolDetail::Create(dialogDetail, sceneDetails, doc, pattern);
     }
     ArrowTool();
 }
@@ -499,6 +498,19 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 void MainWindow::ClosedDialogPointOfIntersection(int result)
 {
     ClosedDialog<VToolPointOfIntersection>(dialogPointOfIntersection, result);
+}
+
+void MainWindow::ToolUnionDetails(bool checked)
+{
+    SetToolButton(checked, Tool::UnionDetails, ":/cursor/union_cursor.png",
+                  tr("Select detail"), dialogUnionDetails, &MainWindow::ClosedDialogUnionDetails);
+    //Must disconnect this signal here.
+    disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogUnionDetails.data(), &DialogUnionDetails::UpdateList);
+}
+
+void MainWindow::ClosedDialogUnionDetails(int result)
+{
+    ClosedDialog<VToolUnionDetails>(dialogUnionDetails, result);
 }
 
 void MainWindow::About()
@@ -791,6 +803,12 @@ void MainWindow::CanselTool()
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
+        case Tool::UnionDetails:
+            dialogUnionDetails.clear();
+            ui->toolButtonUnionDetails->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
         default:
             qWarning()<<"Got wrong tool type. Ignored.";
             break;
@@ -844,6 +862,8 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
+        comboBoxDraws->setCurrentIndex(currentDrawIndex);
+
         mode = Draw::Calculation;
         SetEnableTool(true);
         doc->setCurrentData();
@@ -873,6 +893,10 @@ void MainWindow::ActionDetails(bool checked)
         horScrollBar->setValue(currentScene->getHorScrollBar());
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
+
+        currentDrawIndex = comboBoxDraws->currentIndex();
+        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
+
         mode = Draw::Modeling;
         SetEnableTool(true);
         ui->toolBox->setCurrentIndex(4);
@@ -956,7 +980,7 @@ void MainWindow::Clear()
 {
     setWindowTitle("Valentina");
     fileName.clear();
-    data->Clear();
+    pattern->Clear();
     doc->clear();
     sceneDraw->clear();
     sceneDetails->clear();
@@ -991,14 +1015,14 @@ void MainWindow::haveChange()
 void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
-    data->SetSize(size*10);
+    pattern->SetSize(size*10);
     doc->FullUpdateTree();
 }
 
 void MainWindow::ChangedGrowth(const QString &text)
 {
     qint32 growth = text.toInt();
-    data->SetGrowth(growth*10);
+    pattern->SetGrowth(growth*10);
     doc->FullUpdateTree();
 }
 
@@ -1020,7 +1044,7 @@ void MainWindow::ActionTable(bool checked)
 {
     if (checked)
     {
-        dialogTable = new DialogIncrements(data, doc, this);
+        dialogTable = new DialogIncrements(pattern, doc, this);
         connect(dialogTable, &DialogIncrements::DialogClosed, this,
                 &MainWindow::ClosedActionTable);
         dialogTable->show();
@@ -1042,7 +1066,7 @@ void MainWindow::ActionHistory(bool checked)
 {
     if (checked)
     {
-        dialogHistory = new DialogHistory(data, doc, this);
+        dialogHistory = new DialogHistory(pattern, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
         connect(dialogHistory, &DialogHistory::DialogClosed, this,
                 &MainWindow::ClosedActionHistory);
@@ -1060,7 +1084,7 @@ void MainWindow::ActionLayout(bool checked)
     Q_UNUSED(checked);
     hide();
     QVector<VItem*> listDetails;
-    data->PrepareDetails(listDetails);
+    pattern->PrepareDetails(listDetails);
     emit ModelChosen(listDetails);
 }
 
@@ -1074,13 +1098,13 @@ void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
     bool modelingTools = false;
-    if(mode == Draw::Calculation)
+    if (mode == Draw::Calculation)
     {
         drawTools = enable;
     }
     else
     {
-        modelingTools = enable; // Soon we will have some tools for modeling.
+        modelingTools = enable;
     }
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
@@ -1100,6 +1124,9 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointOfIntersection->setEnabled(drawTools);
     ui->toolButtonSplineCutPoint->setEnabled(drawTools);
     ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
+
+    //Modeling Tools
+    ui->toolButtonUnionDetails->setEnabled(modelingTools);
 }
 
 void MainWindow::MinimumScrollBar()
@@ -1202,11 +1229,10 @@ MainWindow::~MainWindow()
     CanselTool();
     delete ui;
 
-    delete data;
-    if (doc->isNull() == false)
-    {
-        delete doc;
-    }
+    delete pattern;
+    delete doc;
+    delete sceneDetails;
+    delete sceneDraw;
 }
 
 void MainWindow::OpenPattern(const QString &fileName)

@@ -29,16 +29,15 @@
 #include "vsplinepath.h"
 #include "../exception/vexception.h"
 
-VSplinePath::VSplinePath()
-    : path(QVector<VSplinePoint>()), kCurve(1), points(QHash<qint64, VPointF>()), idObject(0), _name(QString()){}
-
-VSplinePath::VSplinePath(const QHash<qint64, VPointF> *points, qreal kCurve, qint64 idObject)
-    : path(QVector<VSplinePoint>()), kCurve(kCurve), points(*points), idObject(idObject), _name(QString())
-{}
+VSplinePath::VSplinePath(qreal kCurve, qint64 idObject, Draw::Draws mode)
+    : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve)
+{
+}
 
 VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : path(*splPath.GetPoint()), kCurve(splPath.getKCurve()), points(splPath.GetDataPoints()),
-    idObject(splPath.getIdObject()), _name(splPath.name()){}
+    : VGObject(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve())
+{
+}
 
 void VSplinePath::append(const VSplinePoint &point)
 {
@@ -47,8 +46,8 @@ void VSplinePath::append(const VSplinePoint &point)
     for (qint32 i = 1; i <= this->Count(); ++i)
     {
         VSpline spl = this->GetSpline(i);
-        VPointF first = spl.GetPointP1();
-        VPointF second = spl.GetPointP4();
+        VPointF first = spl.GetP1();
+        VPointF second = spl.GetP4();
         QString splName = QString("_%1_%2").arg(first.name(), second.name());
         _name.append(splName);
     }
@@ -76,7 +75,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     {
         throw VException(tr("This spline does not exist."));
     }
-    VSpline spl(&points, path[index-1].P(), path[index].P(), path[index-1].Angle2(), path[index].Angle1(),
+    VSpline spl(path[index-1].P(), path[index].P(), path[index-1].Angle2(), path[index].Angle1(),
             path[index-1].KAsm2(), path[index].KAsm1(), this->kCurve);
     return spl;
 }
@@ -86,7 +85,7 @@ QPainterPath VSplinePath::GetPath() const
     QPainterPath painterPath;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
+        VSpline spl(path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
                 path[i-1].KAsm2(), path[i].KAsm1(), this->kCurve);
         painterPath.addPath(spl.GetPath());
     }
@@ -98,8 +97,9 @@ QVector<QPointF> VSplinePath::GetPathPoints() const
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
+        VSpline spl(path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
                 path[i-1].KAsm2(), path[i].KAsm1(), this->kCurve);
+        //TODO Use QVector<T> & QVector::operator+=(const QVector<T> & other) instead for.
         QVector<QPointF> splP = spl.GetPoints();
         for (qint32 j = 0; j < splP.size(); ++j)
         {
@@ -114,7 +114,7 @@ qreal VSplinePath::GetLength() const
     qreal length = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(), path[i-1].KAsm2(),
+        VSpline spl(path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(), path[i-1].KAsm2(),
                 path[i].KAsm1(), kCurve);
         length += spl.GetLength();
     }
@@ -155,11 +155,9 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Positi
 
 VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
+    VGObject::operator=(path);
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
-    this->points = path.GetDataPoints();
-    this->idObject = path.getIdObject();
-    this->_name = path.name();
     return *this;
 }
 
@@ -168,17 +166,22 @@ VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
     return path[indx];
 }
 
+const VSplinePoint &VSplinePath::at(ptrdiff_t indx) const
+{
+    return path[indx];
+}
+
 QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
                                    QPointF &spl2p2, QPointF &spl2p3) const
 {
-    if(Count() < 2)
+    if (Count() < 2)
     {
         throw VException(tr("Can't cut spline path with one point"));
     }
 
     //Always need return two spline paths, so we must correct wrong length.
     qreal fullLength = GetLength();
-    if(length < fullLength * 0.02)
+    if (length < fullLength * 0.02)
     {
         length = fullLength * 0.02;
     }
@@ -190,10 +193,10 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     fullLength = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl = VSpline(&points, path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
-                path[i-1].KAsm2(), path[i].KAsm1(), kCurve);
+        VSpline spl = VSpline(path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(), path[i-1].KAsm2(),
+                path[i].KAsm1(), kCurve);
         fullLength += spl.GetLength();
-        if(fullLength > length)
+        if (fullLength > length)
         {
             p1 = i-1;
             p2 = i;
@@ -202,14 +205,3 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     }
     return QPointF();
 }
-
-QHash<qint64, VPointF> VSplinePath::getPoints() const
-{
-    return points;
-}
-
-void VSplinePath::setPoints(const QHash<qint64, VPointF> *value)
-{
-    points = *value;
-}
-

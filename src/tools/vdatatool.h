@@ -44,7 +44,7 @@ public:
                            * @param data
                            * @param parent
                            */
-                          VDataTool(VContainer *data, QObject *parent = 0): QObject(parent), data(*data), _referens(1){}
+                          VDataTool(VContainer *data, QObject *parent = 0);
     virtual               ~VDataTool(){}
     /**
      * @brief operator =
@@ -61,7 +61,7 @@ public:
      * @brief setData
      * @param value
      */
-    inline void           setData(const VContainer *value) {data = *value;}
+    inline void           setData(const VContainer *value){data = *value;}
     /**
      * @brief referens
      * @return

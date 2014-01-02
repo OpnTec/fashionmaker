@@ -104,6 +104,7 @@ public:
      * @return
      */
     VNodeDetail &  operator[](ptrdiff_t indx);
+    const VNodeDetail & at ( ptrdiff_t indx ) const;
     /**
      * @brief getName
      * @return
@@ -174,7 +175,14 @@ public:
      * @param value
      */
     inline void    setNodes(const QVector<VNodeDetail> &value) {nodes = value;}
+    ptrdiff_t      indexOfNode(const qint64 &id) const;
+    qint64         id() const;
+    void           setId(const qint64 &id);
+    bool           OnEdge(const qint64 &p1, const qint64 &p2)const;
+    ptrdiff_t      Edge(const qint64 &p1, const qint64 &p2)const;
+    void           NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2)const;
 private:
+    qint64         _id;
     /**
      * @brief nodes
      */

@@ -239,6 +239,13 @@ public:
      * @brief TypeLineLine
      */
     static const QString    TypeLineLine;
+    /**
+     * @brief AddRecord
+     * @param id
+     * @param toolType
+     * @param doc dom document container
+     */
+    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile
@@ -285,6 +292,10 @@ protected:
      * @brief AddToFile
      */
     virtual void            AddToFile()=0;
+    /**
+     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+     */
+    virtual void            RefreshDataInFile()=0;
     /**
      * @brief getData
      * @return

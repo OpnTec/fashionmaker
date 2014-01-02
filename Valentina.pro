@@ -126,11 +126,11 @@ pixmaps.path = $$DATADIR/pixmaps/
 pixmaps.files += dist/$${TARGET}.png
 INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
                         share/translations/valentina_uk.qm \
-                        share/translations/valentina_de.qm \
+                        share/translations/valentina_de.qm
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 INSTALLS += target \
     desktop \
     pixmaps \
     translations
-}
+}    

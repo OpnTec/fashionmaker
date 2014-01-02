@@ -42,19 +42,22 @@ VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, 
     {
         AddToFile();
     }
-
+    else
+    {
+        RefreshDataInFile();
+    }
 }
 
 void VToolNormal::setDialog()
 {
     Q_ASSERT(dialogNormal.isNull() == false);
-    VPointF p = VAbstractTool::data.GetPoint(id);
+    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogNormal->setTypeLine(typeLine);
     dialogNormal->setFormula(formula);
     dialogNormal->setAngle(angle);
     dialogNormal->setFirstPointId(basePointId, id);
     dialogNormal->setSecondPointId(secondPointId, id);
-    dialogNormal->setPointName(p.name());
+    dialogNormal->setPointName(p->name());
 }
 
 void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -76,24 +79,24 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                          const Tool::Sources &typeCreation)
 {
-    VPointF firstPoint = data->GetPoint(firstPointId);
-    VPointF secondPoint = data->GetPoint(secondPointId);
+    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
+    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        QPointF fPoint = VToolNormal::FindPoint(firstPoint.toQPointF(), secondPoint.toQPointF(),
+        QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                 toPixel(result), angle);
         qint64 id = _id;
         if (typeCreation == Tool::FromGui)
         {
-            id = data->AddPoint(VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
         }
         else
         {
-            data->UpdatePoint(id, VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
             if (parse != Document::FullParse)
             {
@@ -172,14 +175,14 @@ void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 void VToolNormal::AddToFile()
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     AddAttribute(domElement, AttrId, id);
     AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point.name());
-    AddAttribute(domElement, AttrMx, toMM(point.mx()));
-    AddAttribute(domElement, AttrMy, toMM(point.my()));
+    AddAttribute(domElement, AttrName, point->name());
+    AddAttribute(domElement, AttrMx, toMM(point->mx()));
+    AddAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddAttribute(domElement, AttrTypeLine, typeLine);
     AddAttribute(domElement, AttrLength, formula);
@@ -188,6 +191,23 @@ void VToolNormal::AddToFile()
     AddAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
+}
+
+void VToolNormal::RefreshDataInFile()
+{
+    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrName, point->name());
+        domElement.setAttribute(AttrMx, toMM(point->mx()));
+        domElement.setAttribute(AttrMy, toMM(point->my()));
+        domElement.setAttribute(AttrTypeLine, typeLine);
+        domElement.setAttribute(AttrLength, formula);
+        domElement.setAttribute(AttrAngle, angle);
+        domElement.setAttribute(AttrFirstPoint, basePointId);
+        domElement.setAttribute(AttrSecondPoint, secondPointId);
+    }
 }
 
 void VToolNormal::RemoveReferens()

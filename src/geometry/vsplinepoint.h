@@ -30,6 +30,7 @@
 #define VSPLINEPOINT_H
 
 #include <QMetaType>
+#include "vpointf.h"
 
 /**
  * @brief The VSplinePoint клас, що містить у собі інформацію про точки сплайну.
@@ -47,7 +48,7 @@ public:
              * @param angle кут дотичної сплайна.
              * @param factor коефіцієнт довжини дотичної.
              */
-                  VSplinePoint(qint64 pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
+                  VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
                   /**
                    * @brief VSplinePoint
                    * @param point
@@ -58,12 +59,12 @@ public:
      * @brief P повертає точку.
      * @return точка.
      */
-    inline qint64 P() const {return pSpline;}
+    inline VPointF P() const {return pSpline;}
     /**
      * @brief SetP
      * @param value
      */
-    inline void   SetP(const qint64 &value) {pSpline = value;}
+    inline void   SetP(const VPointF &value) {pSpline = value;}
     /**
      * @brief Angle1 повертає кут дотичної сплайна.
      * @return кут в градусах.
@@ -103,7 +104,7 @@ protected:
     /**
      * @brief pSpline точка сплайну.
      */
-    qint64        pSpline;
+    VPointF        pSpline;
     /**
      * @brief angle кут дотичної сплайну.
      */

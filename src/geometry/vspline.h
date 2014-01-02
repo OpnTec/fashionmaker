@@ -29,7 +29,8 @@
 #ifndef VSPLINE_H
 #define VSPLINE_H
 
-#include "../container/vpointf.h"
+#include "vpointf.h"
+#include "vgobject.h"
 
 #include <QHash>
 #include <QLineF>
@@ -42,7 +43,7 @@ class QString;
 /**
  * @brief VSpline class that implements the spline.
  */
-class VSpline
+class VSpline :public VGObject
 {
 public:
     /**
@@ -64,8 +65,8 @@ public:
      * @param kAsm1 коефіцієнт довжини першої напрямної.
      * @param kAsm2 коефіцієнт довжини другої напрямної.
      */
-    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1,
-             qreal kAsm2, qreal kCurve, qint64 idObject = 0);
+    VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
+             qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
     /**
      * @brief VSpline конструктор.
      * @param p1 початкова точка сплайну.
@@ -73,51 +74,13 @@ public:
      * @param p3 друга контролююча точка сплайну.
      * @param p4 кінцева точка сплайну.
      */
-    VSpline (const QHash<qint64, VPointF> *points, qint64 p1, QPointF p2, QPointF p3, qint64 p4,
-             qreal kCurve, qint64 idObject = 0);
-    /**
-     * @brief ModifiSpl модифікує сплайн.
-     * @param p1 початкова точка сплайну.
-     * @param p4 кінцева точка сплайну.
-     * @param angle1 кут в градусах першої напрямної.
-     * @param angle2 кут в градусах другої напрямної.
-     * @param kCurve коефіцієнт кривизни сплайну.
-     * @param kAsm1 коефіцієнт довжини першої напрямної.
-     * @param kAsm2 коефіцієнт довжини другої напрямної.
-     */
-    void           ModifiSpl ( qint64 p1, qint64 p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
-                               qreal kCurve);
-    /**
-     * @brief ModifiSpl модифікує сплайн.
-     * @param p1 початкова точка сплайну.
-     * @param p2 перша контролююча точка сплайну.
-     * @param p3 друга контролююча точка сплайну.
-     * @param p4 кінцева точка сплайну.
-     */
-    void           ModifiSpl (const qint64 &p1, const QPointF &p2, const QPointF &p3, const qint64 &p4,
-                              const qreal &kCurve);
-//    /**
-//     * @brief RotationSpl поворот сплайна навколо точки на кут в градусах проти годиникової стрілки.
-//     * @param pRotate точка навколо якої повертаємо.
-//     * @param angle кут в градусах.
-//     */
-//    void         RotationSpl ( QPointF pRotate, qreal angle );
-//    /**
-//     * @brief BiasSpl зміщує сплайн.
-//     * @param mx зміщення по х координаті.
-//     * @param my зміщення по у координаті.
-//     */
-//    void         BiasSpl ( qreal mx, qreal my );
+    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, qint64 idObject = 0,
+             Draw::Draws mode = Draw::Calculation);
     /**
      * @brief GetP1 повертає першу точку сплайну.
      * @return перша точка сплайну.
      */
-    qint64         GetP1 () const {return p1;}
-    /**
-     * @brief GetPointP1
-     * @return
-     */
-    VPointF        GetPointP1() const;
+    VPointF        GetP1 () const {return p1;}
     /**
      * @brief GetP2 повертує першу контрольну точку сплайну.
      * @return перша контрольна точка сплайну.
@@ -132,12 +95,7 @@ public:
      * @brief GetP4 повертає останню точку сплайну.
      * @return остання точка сплайну.
      */
-    inline qint64  GetP4 () const {return p4;}
-    /**
-     * @brief GetPointP4
-     * @return
-     */
-    VPointF        GetPointP4 () const;
+    inline VPointF GetP4 () const {return p4;}
     /**
      * @brief GetAngle1 повертає кут першої напрямної.
      * @return кут в градусах.
@@ -154,10 +112,10 @@ public:
      */
     qreal          GetLength () const;
     /**
-     * @brief GetName
+     * @brief name
      * @return
      */
-    QString        GetName () const;
+    QString        name () const;
     /**
      * @brief GetKasm1
      * @return
@@ -173,11 +131,6 @@ public:
      * @return
      */
     inline qreal   GetKcurve() const {return kCurve;}
-    /**
-     * @brief GetDataPoints
-     * @return
-     */
-    inline const QHash<qint64, VPointF> GetDataPoints() const {return points;}
     /**
      * @brief CrossingSplLine перевіряє перетин сплайну з лінією.
      * @param line лінія з якою перевіряється перетин.
@@ -198,19 +151,6 @@ public:
      */
     QPointF         CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     /**
-     * @brief CutSpline розрізає сплайн.
-     * @param point точка що ділить сплайн.
-     * @param curFir перший сплайн.
-     * @param curSec другий сплайн.
-     */
-//    void         CutSpline (QPointF point, VSpline* curFir, VSpline* curSec ) const;
-    /**
-     * @brief PutAlongSpl розміщає точку на сплайні.
-     * @param moveP точка яка розміщується на сплайні.
-     * @param move довжина від початку сплайну.
-     */
-//    void         PutAlongSpl ( QPointF &moveP, qreal move ) const;
-    /**
      * @brief GetPoints повертає точки з яких складається сплайн.
      * @return список точок.
      */
@@ -220,11 +160,6 @@ public:
      * @return шлях.
      */
     QPainterPath   GetPath() const;
-    /**
-     * @brief Mirror вертикальне дзеркалення сплайну відносно точки.
-     * @param Pmirror точка відносно якої відбувається вертикальне дзеркалення сплайну.
-     */
-//    void         Mirror(const QPointF Pmirror);
     /**
      * @brief SplinePoints
      * @param p1
@@ -239,31 +174,11 @@ public:
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
     /**
-     * @brief getIdObject
-     * @return
-     */
-    inline qint64  getIdObject() const {return idObject;}
-    /**
-     * @brief setIdObject
-     * @param value
-     */
-    inline void    setIdObject(const qint64 &value) {idObject = value;}
-    /**
      * @brief operator =
      * @param spl
      * @return
      */
     VSpline        &operator=(const VSpline &spl);
-    /**
-     * @brief name
-     * @return
-     */
-    QString        name() const {return _name;}
-    /**
-     * @brief setName
-     * @param name
-     */
-    void           setName(const QString &name) {_name = name;}
 protected:
     /**
      * @brief GetPoints повертає точки з яких складається сплайн.
@@ -278,7 +193,7 @@ private:
     /**
      * @brief p1 початкова точка сплайну
      */
-    qint64         p1;          // перша точка
+    VPointF        p1;          // перша точка
     /**
      * @brief p2 перша контрольна точка сплайну.
      */
@@ -290,7 +205,7 @@ private:
     /**
      * @brief p4 кінцеві точка сплайну.
      */
-    qint64         p4;          // четверта точка
+    VPointF        p4;          // четверта точка
     /**
      * @brief angle1 кут в градусах першої напрямної.
      */
@@ -311,18 +226,6 @@ private:
      * @brief kCurve
      */
     qreal          kCurve;
-    /**
-     * @brief points
-     */
-    QHash<qint64, VPointF> points;
-    /**
-     * @brief idObject
-     */
-    qint64         idObject;
-    /**
-     * @brief _name
-     */
-    QString        _name;
     /**
      * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.
      * @param p1 початкова точка сплайну.
@@ -357,32 +260,7 @@ private:
      * @return довжину.
      */
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
-//    /**
-//     * @brief Cubic знаходить розв'язок кубічного рівняння.
-//     * @param x коефіцієнт.
-//     * @param a коефіцієнт.
-//     * @param b коефіцієнт.
-//     * @param c коефіцієнт.
-//     * @return повертає корені рівняння.
-//     */
-//    static qint32  Cubic(qreal *x, qreal a, qreal b, qreal c);
-    /**
-     * @brief calc_t знаходить параметр t якому відповідає точка на сплайні.
-     * @param curve_coord1 координата Х або У кривої.
-     * @param curve_coord2 координата Х або У кривої.
-     * @param curve_coord3 координата Х або У кривої.
-     * @param curve_coord4 координата Х або У кривої.
-     * @param point_coord координата Х або У точки на кривій.
-     * @return
-     */
-//    static qreal calc_t (qreal curve_coord1, qreal curve_coord2, qreal curve_coord3, qreal curve_coord4,
-//                         qreal point_coord)const;
-    /**
-     * @brief param_t  знаходить підходяще значення параметра t якому відповідає точка на сплайні
-     * @param pBt точка для якої шукається значення параметра t.
-     * @return підходяще значення t.
-     */
-//    qreal        param_t (QPointF pBt)const;
+    void           CreateName();
 };
 
 #endif // VSPLINE_H

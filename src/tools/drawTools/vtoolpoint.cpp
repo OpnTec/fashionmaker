@@ -40,18 +40,19 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
 void VToolPoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF point = VAbstractTool::data.GetPoint(id);
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    Q_ASSERT(point != 0);
     QPointF p = pos - this->pos();
-    point.setMx(p.x());
-    point.setMy(p.y());
+    point->setMx(p.x());
+    point->setMy(p.y());
     RefreshLine();
-    UpdateNamePosition(point.mx(), point.my());
-    VAbstractTool::data.UpdatePoint(id, point);
+    UpdateNamePosition(point->mx(), point->my());
+    VAbstractTool::data.UpdateGObject(id, point);
 }
 
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
@@ -59,8 +60,8 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
-        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
+        domElement.setAttribute(AttrMx, toMM(mx));
+        domElement.setAttribute(AttrMy, toMM(my));
         emit toolhaveChange();
     }
 }
@@ -98,7 +99,7 @@ void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
 void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(VAbstractTool::data.GetPoint(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
 void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

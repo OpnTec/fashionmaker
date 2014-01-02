@@ -77,14 +77,15 @@ namespace Tool
         NodeSplinePath,
         Height,
         Triangle,
-        PointOfIntersection
+        PointOfIntersection,
+        UnionDetails
     };
     Q_DECLARE_FLAGS(Tools, Tool)
 
     /**
      * @brief The Source enum
      */
-    enum Source { FromGui, FromFile };
+    enum Source { FromGui, FromFile, FromTool };
     Q_DECLARE_FLAGS(Sources, Source)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Tools )

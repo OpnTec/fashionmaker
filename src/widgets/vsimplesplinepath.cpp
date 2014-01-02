@@ -28,8 +28,8 @@
 
 #include "vsimplesplinepath.h"
 
-VSimpleSplinePath::VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), factor(factor)
+VSimpleSplinePath::VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor)
+    :VAbstractTool(doc, data, id), factor(factor)
 {
 }
 

@@ -28,13 +28,18 @@
 
 #include "vpointf.h"
 
+VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject, Draw::Draws mode)
+    :VGObject(GObject::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
+{
+    this->_name = name;
+}
+
 VPointF &VPointF::operator =(const VPointF &point)
 {
-    _name = point.name();
+    VGObject::operator=(point);
     _mx = point.mx();
     _my = point.my();
     _x = point.x();
     _y = point.y();
-    idObject = point.getIdObject();
     return *this;
 }

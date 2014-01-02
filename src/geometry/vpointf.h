@@ -32,36 +32,36 @@
 #include <QPointF>
 #include <QString>
 #include "../options.h"
+#include "vgobject.h"
 
 /**
  * @brief The VPointF class keep data of point.
  */
-class VPointF
+class VPointF:public VGObject
 {
 public:
     /**
      * @brief VPointF creat empty point
      */
     inline             VPointF ()
-                       :_name(QString()), _mx(0), _my(0), _x(0), _y(0), idObject(0){}
+                       :VGObject(GObject::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0){}
     /**
      * @brief VPointF copy constructor
      * @param point
      */
     inline             VPointF (const VPointF &point )
-                       :_name(point.name()), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y()),
-                       idObject(point.getIdObject()){}
+                       :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y()){}
+    inline             VPointF (const QPointF &point )
+                       :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y()){}
     /**
      * @brief VPointF create new point
      * @param x x coordinate
      * @param y y coordinate
-     * @param name name of point
      * @param mx offset name respect to x
      * @param my offset name respect to y
-     * @param idObject point modeling keep here id of parent point
      */
-    inline             VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject = 0)
-                       :_name(name), _mx(mx), _my(my), _x(x), _y(y), idObject(idObject){}
+     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject = 0,
+               Draw::Draws mode = Draw::Calculation);
     /**
      * @brief operator = assignment operator
      * @param point point
@@ -69,11 +69,6 @@ public:
      */
     VPointF            &operator=(const VPointF &point);
                        ~VPointF(){}
-    /**
-     * @brief name return name of point
-     * @return name
-     */
-    inline QString     name() const { return _name;}
     /**
      * @brief mx return offset name respect to x
      * @return offset
@@ -84,11 +79,6 @@ public:
      * @return offset
      */
     inline qreal       my() const {return _my;}
-    /**
-     * @brief setName set name of point
-     * @param name name
-     */
-    inline void        setName(const QString &name) {_name = name;}
     /**
      * @brief setMx set offset name respect to x
      * @param mx offset
@@ -124,21 +114,8 @@ public:
      * @param value y coordinate
      */
     inline void        setY(const qreal &value){_y = value;}
-    /**
-     * @brief getIdObject return id of parrent.
-     * @return id
-     */
-    inline qint64      getIdObject() const {return idObject;}
-    /**
-     * @brief setIdObject set id of parent
-     * @param value id
-     */
-    inline void        setIdObject(const qint64 &value) {idObject = value;}
+    virtual QString    name() const{return _name;}
 private:
-    /**
-     * @brief _name name of point
-     */
-    QString            _name;
     /**
      * @brief _mx offset name respect to x
      */
@@ -155,10 +132,6 @@ private:
      * @brief _y y coordinate
      */
     qreal              _y;
-    /**
-     * @brief idObject id of parent. Only for point modeling. All another return 0.
-     */
-    qint64             idObject;
 };
 
 #endif // VPOINTF_H

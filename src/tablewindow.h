@@ -158,7 +158,7 @@ private:
     /**
      * @brief currentScene Зберігається покажчик на сцену.
      */
-    QGraphicsScene*       currentScene;
+    QGraphicsScene*       tableScene;
     /**
      * @brief paper Зберігається покажчик на прямокутник що імітує листа паперу.
      */

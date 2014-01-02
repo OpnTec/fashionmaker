@@ -49,7 +49,8 @@ public:
                   * @param parent
                   */
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
-                          const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                          const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
+                          QGraphicsItem * parent = 0);
     /**
      * @brief Create
      * @param doc dom document container
@@ -60,7 +61,7 @@ public:
      * @param typeCreation
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Document::Documents &parse,
-                        const Tool::Sources &typeCreation);
+                        const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *parent = 0);
     /**
      * @brief TagName
      */
@@ -79,6 +80,10 @@ protected:
      * @brief AddToFile
      */
     virtual void AddToFile();
+    /**
+     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+     */
+    virtual void RefreshDataInFile();
     /**
      * @brief mouseReleaseEvent
      * @param event

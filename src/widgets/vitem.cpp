@@ -40,7 +40,8 @@ VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
 void VItem::checkItemChange()
 {
     QRectF rect;
-    if(paper == 0){
+    if (paper == 0)
+    {
         qDebug()<<"Don't set paper for detail!!!!";
         rect = this->scene()->sceneRect();
     }

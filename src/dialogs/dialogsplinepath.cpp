@@ -44,8 +44,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxPoint);
 
-    path = VSplinePath(data->DataPoints());
-
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChenged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
@@ -70,7 +68,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
-        NewItem(path[i].P(), path[i].KAsm1(), path[i].Angle2(), path[i].KAsm2());
+        NewItem(path[i].P().id(), path[i].KAsm1(), path[i].Angle2(), path[i].KAsm2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
@@ -108,7 +106,7 @@ void DialogSplinePath::PointChenged(int row)
     }
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
-    DataPoint(p.P(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
+    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     EnableFields();
 }
 
@@ -118,8 +116,9 @@ void DialogSplinePath::currentPointChanged(int index)
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
-    p.SetP(id);
-    DataPoint(p.P(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
+    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+    p.SetP(*point);
+    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     EnableFields();
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
@@ -154,11 +153,11 @@ void DialogSplinePath::KAsm2Changed(qreal d)
 
 void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
 {
-    VPointF point = data->GetPoint(id);
-    QListWidgetItem *item = new QListWidgetItem(point.name());
+    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+    QListWidgetItem *item = new QListWidgetItem(point->name());
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VSplinePoint p(id, kAsm1, angle, kAsm2);
-    DataPoint(id, kAsm1, angle+180, kAsm2, angle);
+    VSplinePoint p(*point, kAsm1, angle, kAsm2);
+    DataPoint(point->id(), kAsm1, angle+180, kAsm2, angle);
     item->setData(Qt::UserRole, QVariant::fromValue(p));
     ui->listWidget->addItem(item);
     EnableFields();
@@ -222,6 +221,6 @@ void DialogSplinePath::SetAngle(qint32 angle)
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
     p.SetAngle(angle);
-    DataPoint(p.P(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
+    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }

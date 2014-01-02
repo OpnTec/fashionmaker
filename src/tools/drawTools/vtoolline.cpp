@@ -36,10 +36,10 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     dialogLine(QSharedPointer<DialogLine>())
 {
     ignoreFullUpdate = true;
-    //Лінія
-    VPointF first = data->GetPoint(firstPoint);
-    VPointF second = data->GetPoint(secondPoint);
-    this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
+    //Line
+    const VPointF *first = data->GeometricObject<const VPointF *>(firstPoint);
+    const VPointF *second = data->GeometricObject<const VPointF *>(secondPoint);
+    this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
@@ -48,6 +48,10 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();
+    }
+    else
+    {
+        RefreshDataInFile();
     }
 }
 
@@ -166,6 +170,16 @@ void VToolLine::AddToFile()
     AddToCalculation(domElement);
 }
 
+void VToolLine::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        domElement.setAttribute(AttrFirstPoint, firstPoint);
+        domElement.setAttribute(AttrSecondPoint, secondPoint);
+    }
+}
+
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -192,8 +206,8 @@ void VToolLine::RefreshGeometry()
         firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
         secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
     }
-    VPointF first = VAbstractTool::data.GetPoint(firstPoint);
-    VPointF second = VAbstractTool::data.GetPoint(secondPoint);
-    this->setLine(QLineF(first.toQPointF(), second.toQPointF()));
+    const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
+    const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
+    this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     this->setPen(QPen(currentColor, widthHairLine/factor));
 }

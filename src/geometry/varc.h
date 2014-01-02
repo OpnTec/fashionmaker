@@ -29,18 +29,18 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include "vspline.h"
+#include "vgobject.h"
 #include <QCoreApplication>
 #include "../options.h"
+#include "vpointf.h"
 class QString;
 class QLineF;
 class QPainterPath;
-class QPointF;
 
 /**
  * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
  */
-class VArc
+class VArc: public VGObject
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
@@ -55,8 +55,8 @@ public:
                         * @param f1 початковий кут в градусах.
                         * @param f2 кінцевий кут в градусах.
                         */
-                       VArc (const QHash<qint64, VPointF> *points, qint64 center, qreal radius, QString formulaRadius,
-                             qreal f1, QString formulaF1, qreal f2, QString formulaF2, qint64 idObject = 0);
+                       VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
+                             QString formulaF2, qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
                        /**
                         * @brief VArc
                         * @param arc
@@ -107,32 +107,17 @@ public:
      * @brief GetCenter повертає точку центра дуги.
      * @return повертає точку центра дуги.
      */
-    inline qint64      GetCenter () const {return center;}
-    /**
-     * @brief GetCenterPoint
-     * @return
-     */
-    QPointF            GetCenterPoint() const;
-    /**
-     * @brief GetCenterVPoint
-     * @return
-     */
-    VPointF            GetCenterVPoint() const;
+    inline VPointF     GetCenter () const {return center;}
     /**
      * @brief GetP1 повертає першу точку з якої починається дуга.
      * @return точку початку дуги.
      */
-    QPointF            GetP1 () const;
+    QPointF GetP1() const;
     /**
      * @brief GetP2 повертає другу точку в якій закінчується дуга.
      * @return точку кінця дуги.
      */
     QPointF            GetP2 () const;
-    /**
-     * @brief GetDataPoints
-     * @return
-     */
-    const QHash<qint64, VPointF> GetDataPoints() const;
     /**
      * @brief GetPath будує шлях по даній дузі.
      * @return повертає шлях.
@@ -159,26 +144,7 @@ public:
      * @return
      */
     QVector<QPointF>   SplOfArc( qint32 number ) const;
-    /**
-     * @brief getIdObject
-     * @return
-     */
-    inline qint64      getIdObject() const {return idObject;}
-    /**
-     * @brief setIdObject
-     * @param value
-     */
-    inline void        setIdObject(const qint64 &value) {idObject = value;}
-    /**
-     * @brief name
-     * @return
-     */
-    QString            name() const {return _name;}
-    /**
-     * @brief setName
-     * @param name
-     */
-    void               setName(const QString &name) {_name = name;}
+    virtual QString    name() const{return _name;}
 private:
     /**
      * @brief f1 початковий кут в градусах
@@ -207,19 +173,7 @@ private:
     /**
      * @brief center центральна точка дуги.
      */
-    qint64             center;
-    /**
-     * @brief points
-     */
-    QHash<qint64, VPointF> points;
-    /**
-     * @brief idObject
-     */
-    qint64             idObject;
-    /**
-     * @brief _name
-     */
-    QString            _name;
+    VPointF            center;
 };
 
 #endif // VARC_H

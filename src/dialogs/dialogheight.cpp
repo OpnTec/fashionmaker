@@ -90,21 +90,21 @@ void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        VPointF point = data->GetPoint(id);
+        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)
         {
             case (0):
-                ChangeCurrentText(ui->comboBoxBasePoint, point.name());
+                ChangeCurrentText(ui->comboBoxBasePoint, point->name());
                 number++;
                 emit ToolTip(tr("Select first point of line"));
                 break;
             case (1):
-                ChangeCurrentText(ui->comboBoxP1Line, point.name());
+                ChangeCurrentText(ui->comboBoxP1Line, point->name());
                 number++;
                 emit ToolTip(tr("Select second point of line"));
                 break;
             case (2):
-                ChangeCurrentText(ui->comboBoxP2Line, point.name());
+                ChangeCurrentText(ui->comboBoxP2Line, point->name());
                 number = 0;
                 emit ToolTip(tr(""));
                 if (isInitialized == false)
