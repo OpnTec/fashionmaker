@@ -145,7 +145,7 @@ void VToolCutSpline::Create(const qint64 _id, const QString &pointName,
             VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolPoint::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(point, &VToolPoint::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
             doc->AddTool(id, point);
             doc->AddTool(spl1id, point);

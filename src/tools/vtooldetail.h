@@ -160,7 +160,7 @@ signals:
      * @brief RemoveTool
      * @param tool
      */
-    void                           RemoveTool(QGraphicsItem *tool);
+    void                           SceneRemoveTool(QGraphicsItem *tool);
 protected:
     /**
      * @brief AddToFile
@@ -176,7 +176,7 @@ protected:
      * @param value
      * @return
      */
-    QVariant                       itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual QVariant               itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
      * @brief mouseReleaseEvent
      * @param event
@@ -191,6 +191,7 @@ protected:
      * @brief RemoveReferens
      */
     virtual void                   RemoveReferens();
+    virtual void                   keyReleaseEvent(QKeyEvent * event);
 private:
     Q_DISABLE_COPY(VToolDetail)
     /**

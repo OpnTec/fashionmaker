@@ -134,7 +134,7 @@ void VToolBisector::Create(const qint64 _id, const QString &formula, const qint6
                                                      thirdPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolBisector::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(point, &VToolBisector::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(firstPointId);

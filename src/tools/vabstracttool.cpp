@@ -178,6 +178,33 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
     }
 }
 
+void VAbstractTool::DeleteTool(QGraphicsItem *tool)
+{
+    if (_referens <= 1)
+    {
+        //remove from xml file
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if (domElement.isElement())
+        {
+            QDomNode element = domElement.parentNode();
+            if (element.isNull() == false)
+            {
+                RemoveReferens();//deincrement referens
+                element.removeChild(domElement);//remove form file
+                emit SceneRemoveTool(tool);//remove form scene
+            }
+            else
+            {
+                qWarning()<<"parent isNull"<<Q_FUNC_INFO;
+            }
+        }
+        else
+        {
+            qWarning()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
+        }
+    }
+}
+
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     //coefficient for equation of segment

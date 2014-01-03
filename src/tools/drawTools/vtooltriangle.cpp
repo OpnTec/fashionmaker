@@ -102,7 +102,7 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
                                                  secondPointId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(point, &VToolTriangle::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(point, &VToolTriangle::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolTriangle::SetFactor);
         doc->AddTool(id, point);
         doc->IncrementReferens(axisP1Id);

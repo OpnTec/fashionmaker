@@ -43,6 +43,7 @@ VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::S
     this->setPath(path);
     this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
     if (typeCreation == Tool::FromGui)
@@ -127,7 +128,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(toolArc, &VToolArc::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(toolArc, &VToolArc::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);
     }
@@ -243,6 +244,37 @@ void VToolArc::RemoveReferens()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     doc->DecrementReferens(arc->GetCenter().id());
+}
+
+QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolArc::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolArc::RefreshGeometry()

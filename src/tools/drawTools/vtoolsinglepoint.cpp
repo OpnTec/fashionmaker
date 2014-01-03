@@ -37,6 +37,7 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
     ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, false);
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();

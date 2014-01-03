@@ -46,6 +46,7 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const T
     this->setPath(path);
     this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
     VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePoint::FirstPoint, spl->GetP2(),
@@ -131,7 +132,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(spl, &VToolSpline::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(spl, &VToolSpline::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
@@ -272,6 +273,37 @@ void VToolSpline::RemoveReferens()
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     doc->DecrementReferens(spl->GetP1().id());
     doc->DecrementReferens(spl->GetP4().id());
+}
+
+QVariant VToolSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolSpline::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolSpline::RefreshGeometry()

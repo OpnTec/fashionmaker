@@ -44,6 +44,7 @@ VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     this->setPath(path);
     this->setPen(QPen(Qt::black, widthHairLine/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
     for (qint32 i = 1; i<=splPath->Count(); ++i)
@@ -118,7 +119,7 @@ void VToolSplinePath::Create(const qint64 _id, VSplinePath *path, VMainGraphicsS
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(spl, &VToolSplinePath::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(spl, &VToolSplinePath::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         doc->AddTool(id, spl);
     }
@@ -348,6 +349,37 @@ void VToolSplinePath::RemoveReferens()
     {
         doc->DecrementReferens(splPath[i].P().id());
     }
+}
+
+QVariant VToolSplinePath::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolSplinePath::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolSplinePath::RefreshGeometry()

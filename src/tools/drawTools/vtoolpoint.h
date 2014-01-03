@@ -123,6 +123,8 @@ protected:
      * @brief RefreshLine
      */
     void                    RefreshLine();
+    virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void            keyReleaseEvent(QKeyEvent * event);
 private:
     Q_DISABLE_COPY(VToolPoint)
 };

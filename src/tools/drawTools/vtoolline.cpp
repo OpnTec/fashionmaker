@@ -42,6 +42,7 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, widthHairLine/factor));
 
@@ -98,7 +99,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
         Q_ASSERT(line != 0);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(line, &VToolLine::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(line, &VToolLine::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
@@ -196,6 +197,37 @@ void VToolLine::RemoveReferens()
 {
     doc->DecrementReferens(firstPoint);
     doc->DecrementReferens(secondPoint);
+}
+
+QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolLine::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolLine::RefreshGeometry()

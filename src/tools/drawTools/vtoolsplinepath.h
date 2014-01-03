@@ -54,7 +54,7 @@ public:
      /**
       * @brief setDialog
       */
-     virtual void setDialog();
+     virtual void    setDialog();
      /**
       * @brief Create
       * @param dialog
@@ -93,81 +93,83 @@ signals:
      * @param controlPoint
      * @param splinePoint
      */
-    void          RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
-                              const QPointF &controlPoint, const QPointF &splinePoint);
+    void             RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
+                                 const QPointF &controlPoint, const QPointF &splinePoint);
     /**
      * @brief setEnabledPoint
      * @param enable
      */
-    void          setEnabledPoint(bool enable);
+    void             setEnabledPoint(bool enable);
 public slots:
     /**
      * @brief FullUpdateFromFile
      */
-    virtual void  FullUpdateFromFile();
+    virtual void     FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui
      * @param result
      */
-    virtual void  FullUpdateFromGui(int result);
+    virtual void     FullUpdateFromGui(int result);
     /**
      * @brief ControlPointChangePosition
      * @param indexSpline
      * @param position
      * @param pos
      */
-    void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
-                                             const QPointF &pos);
+    void             ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
+                                                const QPointF &pos);
     /**
      * @brief ChangedActivDraw
      * @param newName
      */
-    virtual void  ChangedActivDraw(const QString &newName);
+    virtual void     ChangedActivDraw(const QString &newName);
     /**
      * @brief ShowTool
      * @param id
      * @param color
      * @param enable
      */
-    virtual void  ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor
      * @param factor
      */
-    virtual void  SetFactor(qreal factor);
+    virtual void     SetFactor(qreal factor);
 protected:
     /**
      * @brief contextMenuEvent
      * @param event
      */
-    virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
      * @brief AddToFile
      */
-    virtual void  AddToFile();
+    virtual void     AddToFile();
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void RefreshDataInFile();
+    virtual void     RefreshDataInFile();
     /**
      * @brief mouseReleaseEvent
      * @param event
      */
-    virtual void  mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
      * @brief hoverMoveEvent
      * @param event
      */
-    virtual void  hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent
      * @param event
      */
-    virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief RemoveReferens
      */
-    virtual void  RemoveReferens();
+    virtual void     RemoveReferens();
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void     keyReleaseEvent(QKeyEvent * event);
 private:
     /**
      * @brief dialogSplinePath
@@ -180,26 +182,26 @@ private:
     /**
      * @brief RefreshGeometry
      */
-    void          RefreshGeometry();
+    void             RefreshGeometry();
     /**
      * @brief AddPathPoint
      * @param domElement
      * @param splPoint
      */
-    void          AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
+    void             AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
     /**
      * @brief UpdatePathPoint
      * @param node
      * @param path
      */
-    void          UpdatePathPoint(QDomNode& node, VSplinePath &path);
+    void             UpdatePathPoint(QDomNode& node, VSplinePath &path);
     /**
      * @brief CorectControlPoints
      * @param spl
      * @param splPath
      * @param indexSpline
      */
-    void          CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
+    void             CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
 };
 
 #endif // VTOOLSPLINEPATH_H

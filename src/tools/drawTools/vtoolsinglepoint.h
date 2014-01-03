@@ -107,6 +107,11 @@ protected:
      * @brief decrementReferens
      */
     virtual void decrementReferens();
+    /**
+     * @brief DeleteTool delete tool from file and scene. This tool can't be deleted by now.
+     * @param tool tool what me delete.
+     */
+    virtual void DeleteTool(QGraphicsItem *tool){Q_UNUSED(tool)}
 private:
     /**
      * @brief dialogSinglePoint

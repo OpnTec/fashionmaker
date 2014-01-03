@@ -72,6 +72,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     RefreshGeometry();
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
     {
        AddToFile();
@@ -152,7 +153,7 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(detail, &VToolDetail::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+        connect(detail, &VToolDetail::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
@@ -160,30 +161,7 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
 
 void VToolDetail::Remove()
 {
-    //remove form xml file
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        QDomNode element = domElement.parentNode();
-        if (element.isNull() == false)
-        {
-            //deincrement referens
-            RemoveReferens();
-            element.removeChild(domElement);
-            //update xml file
-            //emit FullUpdateTree();
-            //remove form scene
-            emit RemoveTool(this);
-        }
-        else
-        {
-            qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
-        }
-    }
-    else
-    {
-        qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
-    }
+
 }
 
 void VToolDetail::FullUpdateFromFile()
@@ -274,7 +252,34 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
             doc->FullUpdateTree();
         }
     }
+
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
     return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolDetail::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -311,30 +316,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        //remove form xml file
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                //deincrement referens
-                RemoveReferens();
-                element.removeChild(domElement);
-                //update xml file
-                emit FullUpdateTree();
-                //remove form scene
-                emit RemoveTool(this);
-            }
-            else
-            {
-                qWarning()<<"parentNode isNull"<<Q_FUNC_INFO;
-            }
-        }
-        else
-        {
-            qWarning()<<"Can't get element by id = "<<id<<Q_FUNC_INFO;
-        }
+        DeleteTool(this);
     }
 }
 
@@ -397,6 +379,6 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
     Q_ASSERT(tool != 0);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-    connect(tool, &Tool::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+    connect(tool, &Tool::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
     tool->setParentItem(this);
 }

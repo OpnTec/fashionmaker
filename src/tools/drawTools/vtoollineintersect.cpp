@@ -116,7 +116,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
                                                                p2Line2Id, typeCreation);
             scene->addItem(point);
             connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolLineIntersect::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(point, &VToolLineIntersect::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersect::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line1Id);

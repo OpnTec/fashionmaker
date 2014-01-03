@@ -270,7 +270,7 @@ signals:
      * @brief RemoveTool
      * @param tool
      */
-    void                    RemoveTool(QGraphicsItem *tool);
+    void                    SceneRemoveTool(QGraphicsItem *tool);
 protected:
     /**
      * @brief doc dom document container
@@ -310,6 +310,7 @@ protected:
      * @param domElement
      */
     void                    RemoveAllChild(QDomElement &domElement);
+    virtual void            DeleteTool(QGraphicsItem *tool);
     template <typename T>
     /**
      * @brief AddAttribute

@@ -140,7 +140,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
                                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolPointOfContact::RemoveTool, scene, &VMainGraphicsScene::RemoveTool);
+            connect(point, &VToolPointOfContact::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(center);

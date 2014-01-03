@@ -39,6 +39,7 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
             &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
@@ -158,4 +159,35 @@ void VToolPoint::RefreshLine()
     {
         lineName->setVisible(true);
     }
+}
+
+QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        if (value == true)
+        {
+            // do stuff if selected
+            this->setFocus();
+        }
+        else
+        {
+            // do stuff if not selected
+        }
+    }
+
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void VToolPoint::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            DeleteTool(this);
+            break;
+        default:
+            break;
+    }
+    QGraphicsItem::keyReleaseEvent ( event );
 }
