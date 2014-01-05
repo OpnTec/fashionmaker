@@ -1144,6 +1144,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
             Q_ASSERT(spl != 0);
             spl->setIdObject(idObject);
+            spl->setMode(Draw::Modeling);
             data->UpdateGObject(id, spl);
             VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
@@ -1165,6 +1166,7 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
             VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
             Q_ASSERT(path != 0);
             path->setIdObject(idObject);
+            path->setMode(Draw::Modeling);
             data->UpdateGObject(id, path);
             VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
@@ -1215,6 +1217,7 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
             VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
             Q_ASSERT(arc != 0);
             arc->setIdObject(idObject);
+            arc->setMode(Draw::Modeling);
             data->UpdateGObject(id, arc);
             VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             return;
