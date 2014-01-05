@@ -52,6 +52,7 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
     }
 
     QTimeLine *anim = new QTimeLine(350, this);
+    Q_ASSERT(anim != 0);
     anim->setUpdateInterval(20);
 
     connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scalingTime);
@@ -62,9 +63,10 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 void VMainGraphicsView::scalingTime(qreal x)
 {
     Q_UNUSED(x);
-    qreal factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 300.0;
+    qreal factor = 1.0;
     if (QApplication::keyboardModifiers() == Qt::ControlModifier)
     {// If you press CTRL this code will be executed
+        factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 300.0;
         scale(factor, factor);
         emit NewFactor(factor);
     }
