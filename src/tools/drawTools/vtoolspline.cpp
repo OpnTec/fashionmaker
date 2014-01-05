@@ -132,7 +132,6 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(spl, &VToolSpline::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);

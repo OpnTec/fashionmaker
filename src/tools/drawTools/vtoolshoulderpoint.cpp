@@ -142,7 +142,6 @@ void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const 
                                                                typeCreation);
             scene->addItem(point);
             connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolShoulderPoint::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line);

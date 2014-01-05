@@ -94,7 +94,6 @@ void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName
                                                                        secondPointId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPointOfIntersection::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(point, &VToolPointOfIntersection::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfIntersection::SetFactor);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);

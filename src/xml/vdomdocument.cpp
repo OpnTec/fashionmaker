@@ -726,7 +726,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
         {
             VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
             excep.AddMoreInformation(e.ErrorMessage());
-            scene->RemoveTool(spoint);
+            scene->removeItem(spoint);
             delete spoint;
             throw excep;
         }

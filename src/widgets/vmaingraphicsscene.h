@@ -77,11 +77,6 @@ public slots:
      */
     void          ChoosedItem(qint64 id, const Scene::Scenes &type);
     /**
-     * @brief RemoveTool
-     * @param tool
-     */
-    inline void   RemoveTool(QGraphicsItem *tool) {this->removeItem(tool);}
-    /**
      * @brief SetFactor
      * @param factor
      */

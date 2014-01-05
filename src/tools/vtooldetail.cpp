@@ -153,7 +153,6 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(detail, &VToolDetail::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         QHash<qint64, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
@@ -161,7 +160,7 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
 
 void VToolDetail::Remove()
 {
-
+    DeleteTool(this);
 }
 
 void VToolDetail::FullUpdateFromFile()
@@ -379,6 +378,5 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
     Q_ASSERT(tool != 0);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-    connect(tool, &Tool::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
     tool->setParentItem(this);
 }

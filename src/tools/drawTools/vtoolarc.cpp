@@ -128,7 +128,6 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(toolArc, &VToolArc::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);
     }

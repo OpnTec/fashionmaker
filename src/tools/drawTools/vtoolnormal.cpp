@@ -110,7 +110,6 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
                                                  firstPointId, secondPointId, typeCreation);
             scene->addItem(point);
             connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(point, &VToolNormal::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolNormal::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(firstPointId);

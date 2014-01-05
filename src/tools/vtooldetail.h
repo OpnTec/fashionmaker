@@ -155,12 +155,6 @@ public slots:
      * @param result
      */
     virtual void                   FullUpdateFromGui(int result);
-signals:
-    /**
-     * @brief RemoveTool
-     * @param tool
-     */
-    void                           SceneRemoveTool(QGraphicsItem *tool);
 protected:
     /**
      * @brief AddToFile

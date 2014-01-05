@@ -266,11 +266,6 @@ signals:
      * @brief FullUpdateTree
      */
     void                    FullUpdateTree();
-    /**
-     * @brief RemoveTool
-     * @param tool
-     */
-    void                    SceneRemoveTool(QGraphicsItem *tool);
 protected:
     /**
      * @brief doc dom document container

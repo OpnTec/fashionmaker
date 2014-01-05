@@ -99,7 +99,6 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
         Q_ASSERT(line != 0);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(line, &VToolLine::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);

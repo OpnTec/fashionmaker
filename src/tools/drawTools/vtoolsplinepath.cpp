@@ -119,7 +119,6 @@ void VToolSplinePath::Create(const qint64 _id, VSplinePath *path, VMainGraphicsS
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(spl, &VToolSplinePath::SceneRemoveTool, scene, &VMainGraphicsScene::RemoveTool);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         doc->AddTool(id, spl);
     }

@@ -189,9 +189,21 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
             QDomNode element = domElement.parentNode();
             if (element.isNull() == false)
             {
-                RemoveReferens();//deincrement referens
-                element.removeChild(domElement);//remove form file
-                emit SceneRemoveTool(tool);//remove form scene
+                if (element.isElement())
+                {
+                    RemoveReferens();//deincrement referens
+                    element.removeChild(domElement);//remove form file
+                    QGraphicsScene *scene = tool->scene();
+                    if(scene != 0)//some tools haven't scene
+                    {
+                        scene->removeItem(tool);//remove form scene
+                    }
+                    emit toolhaveChange();//set enabled save button
+                }
+                else
+                {
+                    qWarning()<<"parent isn't element"<<Q_FUNC_INFO;
+                }
             }
             else
             {
