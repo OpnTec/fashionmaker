@@ -368,6 +368,8 @@ protected:
      * @return id or -1 if combobox is empty
      */
     qint64           getCurrentObjectId(QComboBox *box) const;
+private:
+    void             FillList(QComboBox *box, const QMap<QString, qint64> &list)const;
 };
 
 #endif // DIALOGTOOL_H

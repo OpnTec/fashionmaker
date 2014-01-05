@@ -66,9 +66,9 @@ void DialogTool::showEvent(QShowEvent *event)
 void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
 {
     Q_ASSERT(box != 0);
-    box->clear();
     const QHash<qint64, VGObject*> *objs = data->DataGObjects();
     QHashIterator<qint64, VGObject*> i(*objs);
+    QMap<QString, qint64> list;
     while (i.hasNext())
     {
         i.next();
@@ -78,18 +78,19 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
             if (obj->getType() == GObject::Point && obj->getMode() == Draw::Calculation)
             {
                 const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
-                box->addItem(point->name(), i.key());
+                list[point->name()] = i.key();
             }
         }
     }
+    FillList(box, list);
 }
 
 void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_ASSERT(box != 0);
-    box->clear();
     const QHash<qint64, VGObject *> *objs = data->DataGObjects();
     QHashIterator<qint64, VGObject*> i(*objs);
+    QMap<QString, qint64> list;
     while (i.hasNext())
     {
         i.next();
@@ -101,7 +102,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
                 if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
-                    box->addItem(spl->name(), i.key());
+                    list[spl->name()] = i.key();
                 }
             }
         }
@@ -113,19 +114,20 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
                 if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
-                    box->addItem(spl->name(), i.key());
+                    list[spl->name()] = i.key();
                 }
             }
         }
     }
+    FillList(box, list);
 }
 
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_ASSERT(box != 0);
-    box->clear();
     const QHash<qint64, VGObject *> *objs = data->DataGObjects();
     QHashIterator<qint64, VGObject *> i(*objs);
+    QMap<QString, qint64> list;
     while (i.hasNext())
     {
         i.next();
@@ -137,7 +139,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
                 if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
-                    box->addItem(splPath->name(), i.key());
+                    list[splPath->name()] = i.key();
                 }
             }
         }
@@ -149,11 +151,12 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
                 if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
-                    box->addItem(splPath->name(), i.key());
+                    list[splPath->name()] = i.key();
                 }
             }
         }
     }
+    FillList(box, list);
 }
 
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
@@ -319,6 +322,19 @@ qint64 DialogTool::getCurrentObjectId(QComboBox *box) const
     else
     {
         return -1;
+    }
+}
+
+void DialogTool::FillList(QComboBox *box, const QMap<QString, qint64> &list) const
+{
+    Q_ASSERT(box != 0);
+    box->clear();
+
+    QMapIterator<QString, qint64> iter(list);
+    while (iter.hasNext())
+    {
+        iter.next();
+        box->addItem(iter.key(), iter.value());
     }
 }
 
