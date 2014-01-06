@@ -316,7 +316,7 @@ void DialogIncrements::clickedToolButtonAdd()
     QString name;
     do
     {
-        name = QString(tr("Denotation %1")).arg(num);
+        name = QString(tr("Name %1")).arg(num);
         num++;
     } while (data->IncrementTableContains(name));
 
@@ -516,7 +516,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
 void DialogIncrements::InitialStandartTable()
 {
     ui->tableWidgetStandart->setSortingEnabled(false);
-    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Denotation")));
+    ui->tableWidgetStandart->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Name")));
     ui->tableWidgetStandart->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
     ui->tableWidgetStandart->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
     ui->tableWidgetStandart->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
@@ -527,7 +527,7 @@ void DialogIncrements::InitialStandartTable()
 void DialogIncrements::InitialIncrementTable()
 {
     ui->tableWidgetIncrement->setSortingEnabled(false);
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Denotation")));
+    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Name")));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
     ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
