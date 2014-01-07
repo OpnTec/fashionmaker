@@ -80,7 +80,7 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Denotation</string>
+           <string>Name</string>
           </property>
          </column>
          <column>
@@ -160,7 +160,7 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Denotation</string>
+           <string>Name</string>
           </property>
          </column>
          <column>

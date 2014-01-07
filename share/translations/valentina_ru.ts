@@ -949,7 +949,7 @@
         <location filename="../../src/dialogs/dialogincrements.ui" line="163"/>
         <location filename="../../src/dialogs/dialogincrements.cpp" line="519"/>
         <location filename="../../src/dialogs/dialogincrements.cpp" line="530"/>
-        <source>Denotation</source>
+        <source>Name</source>
         <translation>Обозначение</translation>
     </message>
     <message>
@@ -1056,7 +1056,7 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.cpp" line="319"/>
-        <source>Denotation %1</source>
+        <source>Name %1</source>
         <translation>Обозначение %1</translation>
     </message>
     <message>
