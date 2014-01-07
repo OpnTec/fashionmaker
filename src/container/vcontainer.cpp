@@ -215,6 +215,34 @@ void VContainer::UpdateId(qint64 newId)
     }
 }
 
+QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &points) const
+{
+    QVector<QPointF> correctPoints;
+    if(points.size()<4)//Better don't check if only three points. We can destroy equidistant.
+    {
+        qWarning()<<"Only three points.";
+        return points;
+    }
+    for(qint32 i = 0; i <points.size(); ++i)
+    {
+        if(i == points.size()-1)
+        {
+            correctPoints.append(points.at(i));
+            continue;
+        }
+        if(points.at(i) == points.at(i+1))
+        {
+            correctPoints.append(points.at(i));
+            ++i;
+        }
+        else
+        {
+            correctPoints.append(points.at(i));
+        }
+    }
+    return correctPoints;
+}
+
 QPainterPath VContainer::ContourPath(qint64 idDetail) const
 {
     VDetail detail = GetDetail(idDetail);
@@ -322,6 +350,8 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
         path.lineTo(points[i]);
     }
     path.lineTo(points[0]);
+
+    pointsEkv = CorrectEquidistantPoints(pointsEkv);
 
     if (detail.getSupplement() == true)
     {

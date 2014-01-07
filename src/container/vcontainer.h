@@ -378,6 +378,7 @@ public:
      * @param newId id
      */
     static void         UpdateId(qint64 newId);
+    QVector<QPointF>    CorrectEquidistantPoints(const QVector<QPointF> &points) const;
     /**
      * @brief ContourPath create painter path for detail
      * @param idDetail id of detail
@@ -440,7 +441,7 @@ public:
     void               CreateManTableIGroup ();
 private:
     /**
-     * @brief _id current id. New object will have value +1. For full class equal 0.
+     * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static qint64          _id;
     /**
