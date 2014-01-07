@@ -525,6 +525,7 @@ void MainWindow::ToolUnionDetails(bool checked)
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
     ClosedDialog<VToolUnionDetails>(dialogUnionDetails, result);
+    doc->FullUpdateTree();
 }
 
 void MainWindow::About()

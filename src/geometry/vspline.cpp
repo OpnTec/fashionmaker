@@ -53,17 +53,11 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
     this->kAsm1 = kAsm1;
     this->kAsm2 = kAsm2;
     this->kCurve = kCurve;
-    QLineF p1pX(GetP1().x(), GetP1().y(), GetP1().x() + 100, GetP1().y());
-    p1pX.setAngle( angle1 );
+
     qreal L = 0, radius = 0, angle = 90;
-    //    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
-    //    if ( angle > 180 ){
-    //        angle = 360 - angle;
-    //    }
     QPointF point1 = GetP1().toQPointF();
     QPointF point4 = GetP4().toQPointF();
-    radius = QLineF(QPointF(point1.x(), point4.y()), point4).length();
-    //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
+    radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
     QLineF p1p2(GetP1().x(), GetP1().y(), GetP1().x() + L * kAsm1, GetP1().y());
     p1p2.setAngle(angle1);
@@ -86,17 +80,10 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
     this->angle1 = QLineF ( GetP1().toQPointF(), p2 ).angle();
     this->angle2 = QLineF ( GetP4().toQPointF(), p3 ).angle();
 
-    QLineF p1pX(GetP1().x(), GetP1().y(), GetP1().x() + 100, GetP1().y());
-    p1pX.setAngle( angle1 );
     qreal L = 0, radius = 0, angle = 90;
-    //    angle = QLineF(GetPointP1(), p1pX.p2()).angleTo(QLineF(GetPointP1(), GetPointP4()));
-    //    if ( angle >= 180 ){
-    //        angle = 360 - angle;
-    //    }
     QPointF point1 = GetP1().toQPointF();
     QPointF point4 = GetP4().toQPointF();
-    radius = QLineF(QPointF(point1.x(), point4.y()), point4).length();
-    //    radius = QLineF(GetPointP1(), GetPointP4()).length() / 2 / sin( angle * M_PI / 180.0 );
+    radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
     L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
 
     this->kCurve = kCurve;
