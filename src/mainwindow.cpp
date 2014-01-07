@@ -477,6 +477,7 @@ void MainWindow::ClosedDialogDetail(int result)
         VToolDetail::Create(dialogDetail, sceneDetails, doc, pattern);
     }
     ArrowTool();
+    doc->FullUpdateTree();
 }
 
 void MainWindow::ToolHeight(bool checked)
@@ -875,7 +876,7 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
-        comboBoxDraws->setCurrentIndex(currentDrawIndex);
+        comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
 
         mode = Draw::Calculation;
         SetEnableTool(true);
@@ -907,7 +908,7 @@ void MainWindow::ActionDetails(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
-        currentDrawIndex = comboBoxDraws->currentIndex();
+        currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
 
         mode = Draw::Modeling;

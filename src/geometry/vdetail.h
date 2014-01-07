@@ -87,6 +87,7 @@ public:
      * @brief Clear
      */
     void           Clear();
+    void           ClearNodes();
     /**
      * @brief CountNode
      * @return
@@ -181,6 +182,7 @@ public:
     bool           OnEdge(const qint64 &p1, const qint64 &p2)const;
     ptrdiff_t      Edge(const qint64 &p1, const qint64 &p2)const;
     void           NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2)const;
+    VDetail        RemoveEdge(const ptrdiff_t &index) const;
 private:
     qint64         _id;
     /**
@@ -211,6 +213,8 @@ private:
      * @brief width
      */
     qreal          width;
+    QVector<VNodeDetail> listNodePoint()const;
+    ptrdiff_t      indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id) const;
 };
 
 #endif // VDETAIL_H

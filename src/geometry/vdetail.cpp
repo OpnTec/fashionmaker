@@ -67,6 +67,11 @@ void VDetail::Clear()
     width = 10;
 }
 
+void VDetail::ClearNodes()
+{
+    nodes.clear();
+}
+
 bool VDetail::Containes(const qint64 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
@@ -92,16 +97,9 @@ const VNodeDetail &VDetail::at(ptrdiff_t indx) const
 
 ptrdiff_t VDetail::indexOfNode(const qint64 &id) const
 {
-    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
-    {
-        VNodeDetail node = nodes[i];
-        if (node.getId() == id)
-        {
-            return i;
-        }
-    }
-    return -1;
+    return indexOfNode(nodes, id);
 }
+
 qint64 VDetail::id() const
 {
     return _id;
@@ -114,17 +112,23 @@ void VDetail::setId(const qint64 &id)
 
 bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
 {
-    ptrdiff_t i = indexOfNode(p1);
+    QVector<VNodeDetail> list = listNodePoint();
+    if(list.size() < 3)
+    {
+        qWarning()<<"Not enough points.";
+        return false;
+    }
+    ptrdiff_t i = indexOfNode(list, p1);
     ptrdiff_t j1 = 0, j2 = 0;
 
-    if (i == nodes.size() - 1)
+    if (i == list.size() - 1)
     {
         j1 = i-1;
         j2 = 0;
     }
     else if (i == 0)
     {
-        j1 = nodes.size() - 1;
+        j1 = list.size() - 1;
         j2 = i + 1;
     }
     else
@@ -133,7 +137,7 @@ bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
         j2 = i + 1;
     }
 
-    if (nodes.at(j1).getId() == p2 || nodes.at(j2).getId() == p2)
+    if (list.at(j1).getId() == p2 || list.at(j2).getId() == p2)
     {
         return true;
     }
@@ -151,14 +155,15 @@ ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
         return -1;
     }
 
-    ptrdiff_t i = indexOfNode(p1);
-    ptrdiff_t j = indexOfNode(p2);
+    QVector<VNodeDetail> list = listNodePoint();
+    ptrdiff_t i = indexOfNode(list, p1);
+    ptrdiff_t j = indexOfNode(list, p2);
 
     ptrdiff_t min = qMin(i, j);
 
-    if (min == 0 && (i == nodes.size() - 1 || j == nodes.size() - 1))
+    if (min == 0 && (i == list.size() - 1 || j == list.size() - 1))
     {
-        return nodes.size() - 1;
+        return list.size() - 1;
     }
     else
     {
@@ -168,18 +173,87 @@ ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
 
 void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
-    if (index <= 0 || index > nodes.size())
+    QVector<VNodeDetail> list = listNodePoint();
+    if (index < 0 || index > list.size())
     {
-        qWarning()<<"Wrong edge index";
+        qWarning()<<"Wrong edge index index ="<<index;
         return;
     }
-    p1 = nodes.at(index);
-    if (index + 1 > nodes.size() - 1)
+    p1 = list.at(index);
+    if (index + 1 > list.size() - 1)
     {
-        p2 = nodes.at(0);
+        p2 = list.at(0);
     }
     else
     {
-        p2 = nodes.at(index+1);
+        p2 = list.at(index+1);
     }
+}
+
+VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
+{
+    VDetail det(*this);
+    det.ClearNodes();
+
+    QVector<VNodeDetail> list = this->listNodePoint();
+    qint32 edge = list.size();
+    ptrdiff_t k = 0;
+    for(ptrdiff_t i=0; i<edge; ++i)
+    {
+        if(i == index)
+        {
+            det.append(this->at(k));
+            ++k;
+        }
+        else
+        {
+            VNodeDetail p1;
+            VNodeDetail p2;
+            this->NodeOnEdge(i, p1, p2);
+            ptrdiff_t j1 = this->indexOfNode(p1.getId());
+            ptrdiff_t j2 = this->indexOfNode(p2.getId());
+            if(j2 == 0)
+            {
+                j2 = this->CountNode()-1;
+                if(j1 == j2)
+                {
+                    det.append(this->at(j1));
+                    ++k;
+                    continue;
+                }
+            }
+            for(ptrdiff_t j=j1; j<j2; ++j)
+            {
+                det.append(this->at(j));
+                ++k;
+            }
+        }
+    }
+    return det;
+}
+
+QVector<VNodeDetail> VDetail::listNodePoint() const
+{
+    QVector<VNodeDetail> list;
+    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes[i].getTypeTool() == Tool::NodePoint)
+        {
+            list.append(nodes[i]);
+        }
+    }
+    return list;
+}
+
+ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id) const
+{
+    for (ptrdiff_t i = 0; i < list.size(); ++i)
+    {
+        if (list[i].getId() == id)
+        {
+            return i;
+        }
+    }
+    qWarning()<<"Can't find node.";
+    return -1;
 }

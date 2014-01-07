@@ -112,12 +112,12 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                                  QString().setNum(l2.angle()));
                 Q_ASSERT(arc1 != 0);
                 arc1->setMode(Draw::Modeling);
-                idObject = data->AddGObject(arc1);
+                id = data->AddGObject(arc1);
 
                 VArc *arc2 = new VArc(*arc1);
                 Q_ASSERT(arc2 != 0);
                 arc2->setMode(Draw::Modeling);
-                id = data->AddGObject(arc2);
+                idObject = data->AddGObject(arc2);
 
                 VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
@@ -152,12 +152,12 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve());
                 Q_ASSERT(spl != 0);
                 spl->setMode(Draw::Modeling);
-                id = data->AddGObject(spl);
+                idObject = data->AddGObject(spl);
 
                 VSpline *spl1 = new VSpline(*spl);
                 Q_ASSERT(spl1 != 0);
                 spl1->setMode(Draw::Modeling);
-                idObject = data->AddGObject(spl1);
+                id = data->AddGObject(spl1);
                 VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
         }
@@ -263,7 +263,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
-                qint64 idCenter = data->AddGObject(center);
+                ++idCount;
+                data->UpdateGObject(idDetail+idCount, center);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
                 Q_ASSERT(arc1);
@@ -284,7 +285,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                 VPointF *p1 = new VPointF(spline->GetP1());
                 Q_ASSERT(p1 != 0);
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                qint64 idP1 = data->AddGObject(p1);
+                ++idCount;
+                data->UpdateGObject(idDetail+idCount, p1);
 
                 VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
@@ -295,7 +297,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                 VPointF *p4 = new VPointF(spline->GetP4());
                 Q_ASSERT(p4 != 0);
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                qint64 idP4 = data->AddGObject(p4);
+                ++idCount;
+                data->UpdateGObject(idDetail+idCount, p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve());
                 Q_ASSERT(spl != 0);
@@ -325,7 +328,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                     Q_ASSERT(p1 != 0);
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    qint64 idP1 = data->AddGObject(p1);
+                    ++idCount;
+                    data->UpdateGObject(idDetail+idCount, p1);
 
                     VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
@@ -339,7 +343,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                     Q_ASSERT(p4 != 0);
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    qint64 idP4 = data->AddGObject(p4);
+                    ++idCount;
+                    data->UpdateGObject(idDetail+idCount, p4);
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
@@ -423,43 +428,47 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
 
     if (typeCreation == Tool::FromGui)
     {
+        VDetail uD1 = d1.RemoveEdge(indexD1);
+        VDetail uD2 = d2.RemoveEdge(indexD2);
         qint32 j = 0, i = 0;
-        qint32 nD1 = d1.CountNode();
-        qint32 nD2 = d2.CountNode();
+        qint32 nD1 = uD1.CountNode();
+        qint32 nD2 = uD2.CountNode();
         qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
         VDetail newDetail;
 
+        VNodeDetail det1p1;
+        VNodeDetail det1p2;
+        d1.NodeOnEdge(indexD1, det1p1, det1p2);
+        const VPointF *point1 = data->GeometricObject<const VPointF *>(det1p1.getId());
+        const VPointF *point2 = data->GeometricObject<const VPointF *>(det1p2.getId());
+
+        VNodeDetail det2p1;
+        VNodeDetail det2p2;
+        d2.NodeOnEdge(indexD2, det2p1, det2p2);
+        VPointF point3 = VPointF(*data->GeometricObject<const VPointF *>(det2p1.getId()));
+        VPointF point4 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
+
+        qreal dx = point1->x() - point4.x();
+        qreal dy = point1->y() - point4.y();
+
+        point3.setX(point3.x()+dx);
+        point3.setY(point3.y()+dy);
+
+        point4.setX(point4.x()+dx);
+        point4.setY(point4.y()+dy);
+
+        QLineF l1(point1->toQPointF(), point2->toQPointF());
+        QLineF l2(point4.toQPointF(), point3.toQPointF());
+        qreal angle = l2.angleTo(l1);
+
+        ptrdiff_t iD1 = d1.indexOfNode(det1p1.getId());
+
         do
         {
-            AddToNewDetail(unionDetails, doc, data, newDetail, d1, i, id);
+            AddToNewDetail(unionDetails, doc, data, newDetail, uD1, i, id);
             ++i;
-            if (i > indexD1 && pointsD2 < nD2-2)
+            if (i > iD1 && pointsD2 < nD2-2)
             {
-                VNodeDetail det1p1;
-                VNodeDetail det1p2;
-                d1.NodeOnEdge(indexD1, det1p1, det1p2);
-                const VPointF *point1 = data->GeometricObject<const VPointF *>(det1p1.getId());
-                const VPointF *point2 = data->GeometricObject<const VPointF *>(det1p2.getId());
-
-                VNodeDetail det2p1;
-                VNodeDetail det2p2;
-                d2.NodeOnEdge(indexD2, det2p1, det2p2);
-                VPointF point3 = VPointF(*data->GeometricObject<const VPointF *>(det2p1.getId()));
-                VPointF point4 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
-
-                qreal dx = point1->x() - point4.x();
-                qreal dy = point1->y() - point4.y();
-
-                point3.setX(point3.x()+dx);
-                point3.setY(point3.y()+dy);
-
-                point4.setX(point4.x()+dx);
-                point4.setY(point4.y()+dy);
-
-                QLineF l1(point1->toQPointF(), point2->toQPointF());
-                QLineF l2(point4.toQPointF(), point3.toQPointF());
-                qreal angle = l2.angleTo(l1);
-
                 do
                 {
                     if (pointsD2 == 0)
@@ -467,14 +476,14 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                         VNodeDetail node1;
                         VNodeDetail node2;
                         d2.NodeOnEdge(indexD2, node1, node2);
-                        ptrdiff_t k = d2.indexOfNode(node2.getId());
-                        if (k == d2.CountNode()-1)
+                        ptrdiff_t k = uD2.indexOfNode(node2.getId());
+                        if (k == uD2.CountNode()-1)
                         {
                             j = 0;
                         }
                         else
                         {
-                            j = d2.indexOfNode(node2.getId())+1;
+                            j = uD2.indexOfNode(node2.getId())+1;
                         }
                     }
                     if (pointsD2 == nD2 -2)
@@ -485,7 +494,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     {
                         j=0;
                     }
-                    AddToNewDetail(unionDetails, doc, data, newDetail, d2, j, id, dx, dy, det1p1.getId(), angle);
+                    AddToNewDetail(unionDetails, doc, data, newDetail, uD2, j, id, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
                 } while (pointsD2 < nD2);
@@ -504,43 +513,47 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
     }
     else
     {
+        VDetail uD1 = d1.RemoveEdge(indexD1);
+        VDetail uD2 = d2.RemoveEdge(indexD2);
         qint64 idCount = 0;
         qint32 j = 0, i = 0;
-        qint32 nD1 = d1.CountNode();
-        qint32 nD2 = d2.CountNode();
+        qint32 nD1 = uD1.CountNode();
+        qint32 nD2 = uD2.CountNode();
         qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
+
+        VNodeDetail det1p1;
+        VNodeDetail det1p2;
+        d1.NodeOnEdge(indexD1, det1p1, det1p2);
+        const VPointF *point1 = data->GeometricObject<const VPointF *>(det1p1.getId());
+        const VPointF *point2 = data->GeometricObject<const VPointF *>(det1p2.getId());
+
+        VNodeDetail det2p1;
+        VNodeDetail det2p2;
+        d2.NodeOnEdge(indexD2, det2p1, det2p2);
+        VPointF point3 = VPointF(*data->GeometricObject<const VPointF *>(det2p1.getId()));
+        VPointF point4 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
+
+        qreal dx = point1->x() - point4.x();
+        qreal dy = point1->y() - point4.y();
+
+        point3.setX(point3.x()+dx);
+        point3.setY(point3.y()+dy);
+
+        point4.setX(point4.x()+dx);
+        point4.setY(point4.y()+dy);
+
+        QLineF l1(point1->toQPointF(), point2->toQPointF());
+        QLineF l2(point4.toQPointF(), point3.toQPointF());
+        qreal angle = l2.angleTo(l1);
+
+        ptrdiff_t iD1 = d1.indexOfNode(det1p1.getId());
 
         do
         {
-            UpdatePoints(id, data, d1, i, idCount);
+            UpdatePoints(id, data, uD1, i, idCount);
             ++i;
-            if (i > indexD1 && pointsD2 < nD2-2)
+            if (i > iD1 && pointsD2 < nD2-2)
             {
-                VNodeDetail det1p1;
-                VNodeDetail det1p2;
-                d1.NodeOnEdge(indexD1, det1p1, det1p2);
-                const VPointF *point1 = data->GeometricObject<const VPointF *>(det1p1.getId());
-                const VPointF *point2 = data->GeometricObject<const VPointF *>(det1p2.getId());
-
-                VNodeDetail det2p1;
-                VNodeDetail det2p2;
-                d2.NodeOnEdge(indexD2, det2p1, det2p2);
-                VPointF point3 = VPointF(*data->GeometricObject<const VPointF *>(det2p1.getId()));
-                VPointF point4 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
-
-                qreal dx = point1->x() - point4.x();
-                qreal dy = point1->y() - point4.y();
-
-                point3.setX(point3.x()+dx);
-                point3.setY(point3.y()+dy);
-
-                point4.setX(point4.x()+dx);
-                point4.setY(point4.y()+dy);
-
-                QLineF l1(point1->toQPointF(), point2->toQPointF());
-                QLineF l2(point4.toQPointF(), point3.toQPointF());
-                qreal angle = l2.angleTo(l1);
-
                 do
                 {
                     if (pointsD2 == 0)
@@ -548,14 +561,14 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                         VNodeDetail node1;
                         VNodeDetail node2;
                         d2.NodeOnEdge(indexD2, node1, node2);
-                        ptrdiff_t k = d2.indexOfNode(node2.getId());
-                        if (k == d2.CountNode()-1)
+                        ptrdiff_t k = uD2.indexOfNode(node2.getId());
+                        if (k == uD2.CountNode()-1)
                         {
                             j = 0;
                         }
                         else
                         {
-                            j = d2.indexOfNode(node2.getId())+1;
+                            j = uD2.indexOfNode(node2.getId())+1;
                         }
                     }
                     if (pointsD2 == nD2-2)
@@ -566,7 +579,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     {
                         j=0;
                     }
-                    UpdatePoints(id, data, d2, j, idCount, dx, dy, det1p1.getId(), angle);
+                    UpdatePoints(id, data, uD2, j, idCount, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
                 } while (pointsD2 < nD2);
