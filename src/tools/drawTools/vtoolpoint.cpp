@@ -34,7 +34,9 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
     QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
+    namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
+    lineName->setPen(QPen(Qt::black));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -73,7 +75,7 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
     if (nameActivDraw == newName)
     {
         selectable = true;
-        currentColor = Qt::black;
+        currentColor = baseColor;
     }
     else
     {
@@ -150,7 +152,14 @@ void VToolPoint::RefreshLine()
     LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    lineName->setPen(QPen(currentColor, widthHairLine/factor));
+    if(currentColor == Qt::gray)
+    {
+        lineName->setPen(QPen(currentColor, widthHairLine/factor));
+    }
+    else
+    {
+        lineName->setPen(QPen(Qt::black, widthHairLine/factor));
+    }
     if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
     {
         lineName->setVisible(false);

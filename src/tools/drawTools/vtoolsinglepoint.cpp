@@ -34,10 +34,13 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
                                     QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent), dialogSinglePoint(QSharedPointer<DialogSinglePoint>())
 {
+    baseColor = Qt::red;
+    currentColor = baseColor;
     ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
+    setColorLabel(Qt::black);
     if (typeCreation == Tool::FromGui)
     {
         AddToFile();
@@ -124,6 +127,12 @@ void VToolSinglePoint::decrementReferens()
     }
 }
 
+void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
+{
+    namePoint->setBrush(color);
+    lineName->setPen(QPen(color, widthHairLine/factor));
+}
+
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
     ContextMenu(dialogSinglePoint, this, event, false);
@@ -160,11 +169,13 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
     {
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         VToolPoint::ChangedActivDraw(newName);
+        setColorLabel(Qt::black);
     }
     else
     {
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         VToolPoint::ChangedActivDraw(newName);
+        setColorLabel(Qt::gray);
     }
 }
 

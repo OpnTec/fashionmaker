@@ -278,7 +278,7 @@ protected:
     /**
      * @brief baseColor
      */
-    const Qt::GlobalColor   baseColor;
+    Qt::GlobalColor         baseColor;
     /**
      * @brief currentColor
      */

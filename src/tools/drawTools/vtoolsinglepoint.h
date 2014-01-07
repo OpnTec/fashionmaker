@@ -117,6 +117,7 @@ private:
      * @brief dialogSinglePoint
      */
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
+    void         setColorLabel(const Qt::GlobalColor & color);
 };
 
 #endif // VTOOLSINGLEPOINT_H
