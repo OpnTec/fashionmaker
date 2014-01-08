@@ -30,12 +30,13 @@
 #include "../exception/vexception.h"
 
 VSplinePath::VSplinePath(qreal kCurve, qint64 idObject, Draw::Draws mode)
-    : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve)
+    : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
 {
 }
 
 VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : VGObject(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve())
+    : VGObject(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve()),
+      maxCountPoints(splPath.getMaxCountPoints())
 {
 }
 
@@ -205,3 +206,13 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     }
     return QPointF();
 }
+qint32 VSplinePath::getMaxCountPoints() const
+{
+    return maxCountPoints;
+}
+
+void VSplinePath::setMaxCountPoints(const qint32 &value)
+{
+    maxCountPoints = value;
+}
+

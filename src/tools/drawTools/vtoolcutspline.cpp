@@ -252,6 +252,11 @@ void VToolCutSpline::RefreshGeometry()
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
+void VToolCutSpline::RemoveReferens()
+{
+    doc->DecrementReferens(splineId);
+}
+
 void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr)
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(splid);

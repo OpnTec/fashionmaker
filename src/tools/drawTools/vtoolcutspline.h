@@ -126,7 +126,8 @@ protected:
     /**
      * @brief RefreshGeometry
      */
-    void      RefreshGeometry();
+    void         RefreshGeometry();
+    virtual void RemoveReferens();
 private:
     Q_DISABLE_COPY(VToolCutSpline)
     /**
