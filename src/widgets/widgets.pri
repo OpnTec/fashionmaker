@@ -8,7 +8,8 @@ HEADERS += \
     src/widgets/vapplication.h \
     src/widgets/doubledelegate.h \
     src/widgets/vsimplespline.h \
-    src/widgets/vsimplesplinepath.h
+    src/widgets/vsimplesplinepath.h \
+    src/widgets/vsimplearc.h
 
 SOURCES += \
     src/widgets/vtablegraphicsview.cpp \
@@ -20,4 +21,5 @@ SOURCES += \
     src/widgets/vapplication.cpp \
     src/widgets/doubledelegate.cpp \
     src/widgets/vsimplespline.cpp \
-    src/widgets/vsimplesplinepath.cpp
+    src/widgets/vsimplesplinepath.cpp \
+    src/widgets/vsimplearc.cpp

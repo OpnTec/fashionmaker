@@ -85,6 +85,43 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
     FillList(box, list);
 }
 
+void DialogTool::FillComboBoxArcs(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutArc cut) const
+{
+    Q_ASSERT(box != 0);
+    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<qint64, VGObject*> i(*objs);
+    QMap<QString, qint64> list;
+    while (i.hasNext())
+    {
+        i.next();
+        if (cut == ComboMode::CutArc)
+        {
+            if (i.key() != id + 1 && i.key() != id + 2)
+            {
+                VGObject *obj = i.value();
+                if (obj->getType() == GObject::Arc && obj->getMode() == Draw::Calculation)
+                {
+                    const VArc *arc = data->GeometricObject<const VArc *>(i.key());
+                    list[arc->name()] = i.key();
+                }
+            }
+        }
+        else
+        {
+            if (i.key() != id)
+            {
+                VGObject *obj = i.value();
+                if (obj->getType() == GObject::Arc && obj->getMode() == Draw::Calculation)
+                {
+                    const VArc *arc = data->GeometricObject<const VArc *>(i.key());
+                    list[arc->name()] = i.key();
+                }
+            }
+        }
+    }
+    FillList(box, list);
+}
+
 void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_ASSERT(box != 0);
@@ -298,6 +335,15 @@ void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint
     Q_ASSERT(box != 0);
     FillComboBoxSplines(box, id, cut);
     splineId = value;
+    ChangeCurrentData(box, value);
+}
+
+void DialogTool::setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &value, const qint64 &id,
+                                 ComboMode::ComboBoxCutArc cut) const
+{
+    Q_ASSERT(box != 0);
+    FillComboBoxArcs(box, id, cut);
+    arcId = value;
     ChangeCurrentData(box, value);
 }
 

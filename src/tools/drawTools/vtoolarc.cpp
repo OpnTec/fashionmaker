@@ -111,17 +111,16 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(arc);
-        data->AddLengthArc(arc->name(), toMM(arc->GetLength()));
     }
     else
     {
         data->UpdateGObject(id, arc);
-        data->AddLengthArc(arc->name(), toMM(arc->GetLength()));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
         }
     }
+    data->AddLengthArc(id);
     VDrawTool::AddRecord(id, Tool::ArcTool, doc);
     if (parse == Document::FullParse)
     {

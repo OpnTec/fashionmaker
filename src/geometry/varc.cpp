@@ -43,7 +43,6 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {
-     //TODO Change name of arc in formula. Name now not unique.
     _name = QString ("Arc_%1").arg(this->GetCenter().name());
 }
 
@@ -189,4 +188,36 @@ QVector<QPointF> VArc::SplOfArc(qint32 number) const
         }
     }
     return QVector<QPointF>();
+}
+
+QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
+{
+    //Always need return two arcs, so we must correct wrong length.
+    qreal len = 0;
+    if (length < this->GetLength()*0.02)
+    {
+        len = this->GetLength()*0.02;
+    }
+    else if ( length > this->GetLength()*0.98)
+    {
+        len = this->GetLength()*0.98;
+    }
+    else
+    {
+        len = length;
+        qDebug()<<len;
+    }
+
+    qreal n = (len*180)/(M_PI*radius);
+    qDebug()<<n;
+    QLineF line(GetCenter().toQPointF(), GetP1());
+    line.setAngle(line.angle()+n);
+    QPointF point = line.p2();
+
+    arc1 = VArc (center, radius, formulaRadius, f1, formulaF1, line.angle(), QString().setNum(line.angle()),
+                 idObject, mode);
+
+    arc2 = VArc (center, radius, formulaRadius, line.angle(), QString().setNum(line.angle()), f2, formulaF2,
+                 idObject, mode);
+    return point;
 }

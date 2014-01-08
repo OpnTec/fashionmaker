@@ -34,6 +34,7 @@
 #include "../tools/vabstracttool.h"
 #include "../tools/drawTools/vtoolcutspline.h"
 #include "../tools/drawTools/vtoolcutsplinepath.h"
+#include "../tools/drawTools/vtoolcutarc.h"
 #include <QDebug>
 #include <QPushButton>
 
@@ -363,6 +364,20 @@ QString DialogHistory::Record(const VToolRecord &tool)
                                                                                 firstPointIdName, secondPointIdName);
             break;
         }
+        case Tool::CutArcTool:
+        {
+            qint64 arcId = 0;
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if (domElement.isElement())
+            {
+                arcId = doc->GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
+            }
+            const VArc *arc = data->GeometricObject<const VArc *>(arcId);
+            QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
+            QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
+            record = QString(tr("%1 - cut arc with center %2")).arg(toolIdName, arcCenterName);
+        }
+        break;
         case Tool::CutSplineTool:
         {
             qint64 splineId = 0;

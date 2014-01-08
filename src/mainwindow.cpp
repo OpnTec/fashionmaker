@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogTriangle(QSharedPointer<DialogTriangle>()),
     dialogPointOfIntersection(QSharedPointer<DialogPointOfIntersection>()),
     dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
-    dialogUnionDetails(QSharedPointer<DialogUnionDetails>()),
+    dialogUnionDetails(QSharedPointer<DialogUnionDetails>()), dialogCutArc(QSharedPointer<DialogCutArc>()),
     dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
     mode(Draw::Calculation), currentDrawIndex(0)
 {
@@ -122,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
     connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
     connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
+    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
 
     pattern = new VContainer();
 
@@ -522,6 +523,17 @@ void MainWindow::ToolUnionDetails(bool checked)
     disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogUnionDetails.data(), &DialogUnionDetails::UpdateList);
 }
 
+void MainWindow::ToolCutArc(bool checked)
+{
+    SetToolButton(checked, Tool::CutArcTool, ":/cursor/arc_cut_cursor.png",
+                  tr("Select arc"), dialogCutArc, &MainWindow::ClosedDialogCutArc);
+}
+
+void MainWindow::ClosedDialogCutArc(int result)
+{
+    ClosedDialog<VToolCutArc>(dialogCutArc, result);
+}
+
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
     ClosedDialog<VToolUnionDetails>(dialogUnionDetails, result);
@@ -824,6 +836,12 @@ void MainWindow::CanselTool()
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
+        case Tool::CutArcTool:
+            dialogCutArc.clear();
+            ui->toolButtonArcCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
         default:
             qWarning()<<"Got wrong tool type. Ignored.";
             break;
@@ -877,9 +895,9 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar = view->verticalScrollBar();
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
+        mode = Draw::Calculation;
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
 
-        mode = Draw::Calculation;
         SetEnableTool(true);
         doc->setCurrentData();
         ui->toolBox->setCurrentIndex(0);
@@ -1139,6 +1157,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointOfIntersection->setEnabled(drawTools);
     ui->toolButtonSplineCutPoint->setEnabled(drawTools);
     ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
+    ui->toolButtonArcCutPoint->setEnabled(drawTools);
 
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);

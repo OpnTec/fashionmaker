@@ -145,6 +145,7 @@ public:
      */
     QVector<QPointF>   SplOfArc( qint32 number ) const;
     virtual QString    name() const{return _name;}
+    QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
 private:
     /**
      * @brief f1 початковий кут в градусах

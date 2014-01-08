@@ -65,7 +65,7 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
     {
-        //TODO Need create garbage collector and remove all nodes, that we don't use.
+        //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
         Q_ASSERT(point != 0);

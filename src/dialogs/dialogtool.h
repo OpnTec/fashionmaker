@@ -44,8 +44,12 @@ namespace ComboMode
      */
     enum ComboBoxCutSpline { CutSpline, NoCutSpline };
     Q_DECLARE_FLAGS(ComboBoxCutSplines, ComboBoxCutSpline)
+
+    enum ComboBoxCutArc { CutArc, NoCutArc};
+    Q_DECLARE_FLAGS(ComboBoxCutArcs, ComboBoxCutArc)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( ComboMode::ComboBoxCutSplines )
+Q_DECLARE_OPERATORS_FOR_FLAGS( ComboMode::ComboBoxCutArcs )
 
 /**
  * @brief The DialogTool class parent for all dialog of tools.
@@ -267,6 +271,8 @@ protected:
      * @param id don't show this id in list
      */
     void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
+    void             FillComboBoxArcs(QComboBox *box, const qint64 &id = 0,
+                                      ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc)const;
     /**
      * @brief FillComboBoxSplines fill comboBox list of splines
      * @param box comboBox
@@ -353,6 +359,8 @@ protected:
      */
     void             setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
                                         ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
+    void             setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &value, const qint64 &id,
+                                        ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc) const;
     /**
      * @brief setCurrentSplinePathId set current splinePath id in combobox
      * @param box combobox
