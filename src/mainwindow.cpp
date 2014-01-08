@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
     dialogUnionDetails(QSharedPointer<DialogUnionDetails>()), dialogCutArc(QSharedPointer<DialogCutArc>()),
     dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-    mode(Draw::Calculation), currentDrawIndex(0)
+    mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0)
 {
     ui->setupUi(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
@@ -900,7 +900,7 @@ void MainWindow::ActionDraw(bool checked)
 
         SetEnableTool(true);
         doc->setCurrentData();
-        ui->toolBox->setCurrentIndex(0);
+        ui->toolBox->setCurrentIndex(currentToolBoxIndex);
     }
     else
     {
@@ -932,6 +932,7 @@ void MainWindow::ActionDetails(bool checked)
 
         mode = Draw::Modeling;
         SetEnableTool(true);
+        currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
     }
     else
