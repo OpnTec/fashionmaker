@@ -1037,6 +1037,27 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
             throw excep;
         }
     }
+    if (type == VToolCutArc::ToolType)
+    {
+        try
+        {
+            qint64 id = GetParametrId(domElement);
+            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+            qint64 arcId = GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
+
+            VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Tool::FromFile);
+            return;
+        }
+        catch (const VExceptionBadId &e)
+        {
+            VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+    }
 }
 
 void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
