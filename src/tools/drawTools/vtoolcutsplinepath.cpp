@@ -147,6 +147,9 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 }
             }
 
+            splPath1->setMaxCountPoints(splPath->CountPoint());
+            splPath2->setMaxCountPoints(splPath->CountPoint());
+
             splPath1id = data->AddGObject(splPath1);
             data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
 
@@ -197,6 +200,9 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                     splPath2->append(splPath->at(i));
                 }
             }
+
+            splPath1->setMaxCountPoints(splPath->CountPoint());
+            splPath2->setMaxCountPoints(splPath->CountPoint());
 
             data->UpdateGObject(splPath1id, splPath1);
             data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
@@ -321,6 +327,11 @@ void VToolCutSplinePath::RefreshGeometry()
     RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
     RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
+}
+
+void VToolCutSplinePath::RemoveReferens()
+{
+    doc->DecrementReferens(splinePathId);
 }
 
 void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, qint64 splPathid, SimpleSpline::Translation tr)

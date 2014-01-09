@@ -46,5 +46,6 @@
 #include "vtoolpointofintersection.h"
 #include "vtoolcutspline.h"
 #include "vtoolcutsplinepath.h"
+#include "vtoolcutarc.h"
 
 #endif // DRAWTOOLS_H

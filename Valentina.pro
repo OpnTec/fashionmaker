@@ -71,7 +71,7 @@ CONFIG(debug, debug|release){
                           -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
                           -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" \
                           -isystem "$${RCC_DIR}" \
-                          -Og -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
+                          -O0 -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                           -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self \
                           -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
                           -Wformat  -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k \

@@ -21,7 +21,8 @@ HEADERS += \
     src/dialogs/dialogalongline.h \
     src/dialogs/dialogcutspline.h \
     src/dialogs/dialogcutsplinepath.h \
-    src/dialogs/dialoguniondetails.h
+    src/dialogs/dialoguniondetails.h \
+    src/dialogs/dialogcutarc.h
 
 SOURCES += \
     src/dialogs/dialogtriangle.cpp \
@@ -45,7 +46,8 @@ SOURCES += \
     src/dialogs/dialogalongline.cpp \
     src/dialogs/dialogcutspline.cpp \
     src/dialogs/dialogcutsplinepath.cpp \
-    src/dialogs/dialoguniondetails.cpp
+    src/dialogs/dialoguniondetails.cpp \
+    src/dialogs/dialogcutarc.cpp
 
 FORMS += \
     src/dialogs/dialogtriangle.ui \
@@ -68,4 +70,5 @@ FORMS += \
     src/dialogs/dialogalongline.ui \
     src/dialogs/dialogcutspline.ui \
     src/dialogs/dialogcutsplinepath.ui \
-    src/dialogs/dialoguniondetails.ui
+    src/dialogs/dialoguniondetails.ui \
+    src/dialogs/dialogcutarc.ui

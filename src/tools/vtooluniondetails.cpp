@@ -174,6 +174,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                 Q_ASSERT(path != 0);
                 path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
+                qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
@@ -185,6 +186,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     qint64 idP1 = data->AddGObject(p1);
+                    --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
@@ -199,6 +201,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     qint64 idP4 = data->AddGObject(p4);
+                    --k;
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
@@ -208,6 +211,11 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                     }
                         path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle1(),
                                                   splinePath->at(i).KAsm1()));
+                }
+                while(k>=0)
+                {
+                    data->getNextId();
+                    --k;
                 }
                 idObject = data->AddGObject(path);
 
@@ -318,6 +326,8 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                 Q_ASSERT(path != 0);
                 path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
+                Q_ASSERT(splinePath != 0);
+                qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
@@ -330,6 +340,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                                     angle);
                     ++idCount;
                     data->UpdateGObject(idDetail+idCount, p1);
+                    --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
@@ -345,6 +356,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                                     angle);
                     ++idCount;
                     data->UpdateGObject(idDetail+idCount, p4);
+                    --k;
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
@@ -355,6 +367,14 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                         path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle1(),
                                                   splinePath->at(i).KAsm1()));
                 }
+
+                while(k>=0)
+                {
+                    data->getNextId();
+                    --k;
+                    ++idCount;
+                }
+
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, path);
 

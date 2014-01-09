@@ -186,12 +186,6 @@ public:
      */
     void                AddLengthArc(const qint64 &id);
     /**
-     * @brief AddLengthArc add length of arc
-     * @param name name of arc
-     * @param value length of arc
-     */
-    void                AddLengthArc(const QString &name, const qreal &value);
-    /**
      * @brief AddLineAngle add angle of line to container
      * @param name name of line angle
      * @param value angle in degree

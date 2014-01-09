@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vtoolcutspline.h
+ **  @file   vtoolcutarc.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   15 12, 2013
+ **  @date   7 1, 2014
  **
  **  @brief
  **  @copyright
@@ -26,69 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLCUTSPLINE_H
-#define VTOOLCUTSPLINE_H
+#ifndef VTOOLCUTARC_H
+#define VTOOLCUTARC_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogcutspline.h"
-#include "../../widgets/vsimplespline.h"
+#include "../../dialogs/dialogcutarc.h"
+#include "../../widgets/vsimplearc.h"
 
-/**
- * @brief The VToolCutSpline class for tool CutSpline. This tool find point on spline and cut spline on two.
- */
-class VToolCutSpline : public VToolPoint
+class VToolCutArc : public VToolPoint
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VToolCutSpline
-     * @param doc
-     * @param data
-     * @param id
-     * @param formula
-     * @param splineId
-     * @param typeCreation
-     * @param parent
-     */
-    VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
-                   const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
-                   const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    VToolCutArc(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
+                const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
+                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog
      */
     virtual void setDialog();
-    /**
-     * @brief Create
-     * @param dialog
-     * @param scene
-     * @param doc dom document container
-     * @param data
-     */
-    static void  Create(QSharedPointer<DialogCutSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
+    static void  Create(QSharedPointer<DialogCutArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
-    /**
-     * @brief Create
-     * @param _id
-     * @param pointName
-     * @param formula
-     * @param splineId
-     * @param mx
-     * @param my
-     * @param scene
-     * @param doc dom document container
-     * @param data
-     * @param parse
-     * @param typeCreation
-     */
-    static void  Create(const qint64 _id, const QString &pointName,
-                        const QString &formula, const qint64 &splineId, const qreal &mx, const qreal &my,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const qint64 _id, const QString &pointName, const QString &formula, const qint64 &arcId,
+                        const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
+                        VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief ToolType
      */
     static const QString ToolType;
-    static const QString AttrSpline;
+    static const QString AttrArc;
 public slots:
     /**
      * @brief FullUpdateFromFile
@@ -100,10 +65,10 @@ public slots:
      */
     virtual void FullUpdateFromGui(int result);
     /**
-     * @brief SplineChoosed
+     * @brief ArcChoosed
      * @param id
      */
-    void SplineChoosed(qint64 id);
+    void ArcChoosed(qint64 id);
     /**
      * @brief ChangedActivDraw
      * @param newName
@@ -126,33 +91,32 @@ protected:
     /**
      * @brief RefreshGeometry
      */
-    void         RefreshGeometry();
-    virtual void RemoveReferens();
+    void      RefreshGeometry();
 private:
-    Q_DISABLE_COPY(VToolCutSpline)
+    Q_DISABLE_COPY(VToolCutArc)
     /**
      * @brief formula keep formula of length
      */
     QString           formula;
     /**
-     * @brief splineId keep id of spline
+     * @brief arcId keep id of arc
      */
-    qint64            splineId;
+    qint64            arcId;
     /**
      * @brief DialogCutSpline pointer to the tool's dialog
      */
-    QSharedPointer<DialogCutSpline> dialogCutSpline;
+    QSharedPointer<DialogCutArc> dialogCutArc;
     /**
-     * @brief firstSpline
+     * @brief firstArc
      */
-    VSimpleSpline *firstSpline;
+    VSimpleArc *firstArc;
     /**
-     * @brief secondSpline
+     * @brief secondArc
      */
-    VSimpleSpline *secondSpline;
-    const qint64 spl1id;
-    const qint64 spl2id;
-    void RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr);
+    VSimpleArc *secondArc;
+    const qint64 arc1id;
+    const qint64 arc2id;
+    void RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr);
 };
 
-#endif // VTOOLCUTSPLINE_H
+#endif // VTOOLCUTARC_H

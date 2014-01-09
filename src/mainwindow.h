@@ -234,6 +234,7 @@ public slots:
      */
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
+    void               ToolCutArc(bool checked);
     /**
      * @brief ClosedDialogEndLine
      * @param result
@@ -320,6 +321,7 @@ public slots:
      * @param result result of working of dialog
      */
     void               ClosedDialogCutSpline(int result);
+    void               ClosedDialogCutArc(int result);
     /**
      * @brief About
      */
@@ -486,6 +488,7 @@ private:
      * @brief dialogUnionDetails
      */
     QSharedPointer<DialogUnionDetails>        dialogUnionDetails;
+    QSharedPointer<DialogCutArc>              dialogCutArc;
     /**
      * @brief dialogHistory
      */
@@ -507,6 +510,7 @@ private:
      */
     Draw::Draws        mode;
     qint32             currentDrawIndex;
+    qint32             currentToolBoxIndex;
     /**
      * @brief ToolBarOption
      */

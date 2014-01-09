@@ -66,6 +66,7 @@ namespace Tool
         LineIntersectTool,
         SplineTool,
         CutSplineTool,
+        CutArcTool,
         ArcTool,
         SplinePathTool,
         CutSplinePathTool,

@@ -40,5 +40,6 @@
         <file>icon/32x32/spline_cut_point.png</file>
         <file>icon/32x32/splinePath_cut_point.png</file>
         <file>icon/32x32/union.png</file>
+        <file>icon/32x32/arc_cut.png</file>
     </qresource>
 </RCC>

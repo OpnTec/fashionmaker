@@ -609,13 +609,8 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value)
 void VContainer::AddLengthArc(const qint64 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
-    AddLengthArc(arc->name(), toMM(arc->GetLength()));
-}
-
-void VContainer::AddLengthArc(const QString &name, const qreal &value)
-{
-    Q_ASSERT(name.isEmpty() == false);
-    lengthArcs[name] = value;
+    QString name = QString("%1_%2").arg(arc->name()).arg(id);
+    lengthArcs[name] = toMM(arc->GetLength());
 }
 
 void VContainer::AddLineAngle(const QString &name, const qreal &value)
