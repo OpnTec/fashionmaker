@@ -159,6 +159,7 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     VGObject::operator=(path);
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
+    this->maxCountPoints = path.getMaxCountPoints();
     return *this;
 }
 
