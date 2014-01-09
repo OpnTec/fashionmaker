@@ -186,6 +186,11 @@ void VToolPointOfContact::SetFactor(qreal factor)
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogPointOfContact, this, event);
+}
+
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogPointOfContact, this, event);

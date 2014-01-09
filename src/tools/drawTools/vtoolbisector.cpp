@@ -182,6 +182,11 @@ void VToolBisector::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
+void VToolBisector::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogBisector, this, event);
+}
+
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogBisector, this, event);

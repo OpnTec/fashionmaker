@@ -101,6 +101,7 @@ public slots:
      * @param result
      */
     virtual void FullUpdateFromGui(int result);
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent

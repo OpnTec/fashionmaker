@@ -80,6 +80,7 @@ public slots:
      * @param factor
      */
     virtual void            SetFactor(qreal factor);
+    virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief radius

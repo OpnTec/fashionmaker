@@ -163,6 +163,11 @@ void VToolLineIntersect::SetFactor(qreal factor)
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogLineIntersect, this, event);
+}
+
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogLineIntersect, this, event);

@@ -167,6 +167,11 @@ void VToolNormal::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
+void VToolNormal::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogNormal, this, event);
+}
+
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogNormal, this, event);

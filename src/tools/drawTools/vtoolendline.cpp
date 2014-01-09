@@ -151,6 +151,11 @@ void VToolEndLine::FullUpdateFromGui(int result)
     dialogEndLine.clear();
 }
 
+void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogEndLine, this, event);
+}
+
 void VToolEndLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);

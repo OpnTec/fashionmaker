@@ -184,3 +184,8 @@ void VToolSinglePoint::SetFactor(qreal factor)
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<const VPointF *>(id)));
 }
+
+void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogSinglePoint, this, event, false);
+}

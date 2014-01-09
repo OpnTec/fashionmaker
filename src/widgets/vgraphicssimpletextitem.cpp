@@ -73,3 +73,8 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     this->setBrush(Qt::black);
 }
+
+void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}

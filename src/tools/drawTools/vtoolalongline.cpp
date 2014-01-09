@@ -91,6 +91,11 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     ContextMenu(dialogAlongLine, this, event);
 }
 
+void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogAlongLine, this, event);
+}
+
 void VToolAlongLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);

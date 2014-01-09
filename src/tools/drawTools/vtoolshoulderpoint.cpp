@@ -190,6 +190,11 @@ void VToolShoulderPoint::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
+void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogShoulderPoint, this, event);
+}
+
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogShoulderPoint, this, event);

@@ -60,6 +60,7 @@ signals:
      * @param pos
      */
     void         NameChangePosition(const QPointF pos);
+    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief itemChange
@@ -78,6 +79,7 @@ protected:
      * @param event
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
 private:
     /**
      * @brief fontSize

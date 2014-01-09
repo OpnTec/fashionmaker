@@ -184,6 +184,11 @@ void VToolTriangle::FullUpdateFromGui(int result)
     dialogTriangle.clear();
 }
 
+void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogTriangle, this, event);
+}
+
 void VToolTriangle::RemoveReferens()
 {
     doc->DecrementReferens(axisP1Id);

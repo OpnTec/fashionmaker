@@ -166,6 +166,11 @@ void VToolHeight::FullUpdateFromGui(int result)
     dialogHeight.clear();
 }
 
+void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogHeight, this, event);
+}
+
 void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogHeight, this, event);

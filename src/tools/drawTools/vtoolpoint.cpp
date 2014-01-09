@@ -34,11 +34,13 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
     QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
+    Q_ASSERT(namePoint != 0);
+    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
+    Q_ASSERT(lineName != 0);
     lineName->setPen(QPen(Qt::black));
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
-            &VToolPoint::NameChangePosition);
+    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
@@ -103,6 +105,11 @@ void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+}
+
+void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    Q_UNUSED(event);
 }
 
 void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

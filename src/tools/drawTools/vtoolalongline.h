@@ -106,12 +106,13 @@ public slots:
      * @param factor
      */
     virtual void SetFactor(qreal factor);
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent
      * @param event
      */
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ); 
     /**
      * @brief AddToFile
      */

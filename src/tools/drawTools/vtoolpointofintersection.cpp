@@ -128,6 +128,11 @@ void VToolPointOfIntersection::FullUpdateFromGui(int result)
     dialogPointOfIntersection.clear();
 }
 
+void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogPointOfIntersection, this, event);
+}
+
 void VToolPointOfIntersection::RemoveReferens()
 {
     doc->DecrementReferens(firstPointId);
