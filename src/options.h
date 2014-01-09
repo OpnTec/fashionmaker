@@ -31,8 +31,9 @@
 
 #include <QFlags>
 
+#define SceneSize 50000
+
 #define PrintDPI 96
-#define PaperSize 50000
 #define toPixel(mm) ((mm / 25.4) * PrintDPI)
 #define toMM(pix) ((pix / PrintDPI) * 25.4)
 #define widthMainLine 1.2

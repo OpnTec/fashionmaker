@@ -29,8 +29,9 @@
 #include "tablewindow.h"
 #include "ui_tablewindow.h"
 #include "widgets/vtablegraphicsview.h"
-#include "options.h"
 #include <QtSvg>
+#include <QPrinter>
+#include "options.h"
 
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
@@ -159,10 +160,35 @@ void TableWindow::StopTable()
 
 void TableWindow::saveScene()
 {
-    QString name = QFileDialog::getSaveFileName(0, tr("Save layout"), "", "Images (*.png);;Svg files (*.svg)");
-    if (name.isNull())
+    QMap<QString, QString> extByMessage;
+    extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
+    extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
+    extByMessage[ tr("Images (*.png)") ] = ".png";
+
+    QString saveMessage;
+    QMapIterator<QString, QString> i(extByMessage);
+    while (i.hasNext())
+    {
+        i.next();
+        saveMessage += i.key();
+        if (i.hasNext())
+            saveMessage += ";;";
+    }
+
+    QString sf;
+    // the save function
+    QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), QDir::homePath(), saveMessage, &sf);
+
+    if (name.isEmpty())
     {
         return;
+    }
+
+    // what if the users did not specify a suffix...?
+    QFileInfo f( name );
+    if (f.suffix().isEmpty() && f.suffix() != "svg" && f.suffix() != "png" && f.suffix() != "pdf")
+    {
+        name += extByMessage[sf];
     }
 
     QBrush *brush = new QBrush();
@@ -170,7 +196,7 @@ void TableWindow::saveScene()
     tableScene->setBackgroundBrush( *brush );
     tableScene->clearSelection(); // Selections would also render to the file, so need delete them
     shadowPaper->setVisible(false);
-    QFileInfo fi(name);
+    QFileInfo fi( name );
     if (fi.suffix() == "svg")
     {
         paper->setVisible(false);
@@ -181,6 +207,12 @@ void TableWindow::saveScene()
     {
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
+        paper->setPen(QPen(Qt::black, widthMainLine));
+    }
+    else if (fi.suffix() == "pdf")
+    {
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+        PdfFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
     }
 
@@ -398,4 +430,27 @@ void TableWindow::PngFile(const QString &name) const
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     image.save(name);
+}
+
+void TableWindow::PdfFile(const QString &name) const
+{
+    QPrinter printer;
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(name);
+    QRectF r = paper->rect();
+    qreal x=0, y=0, w=0, h=0;
+    r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
+    printer.setResolution(PrintDPI);
+    printer.setPaperSize ( QSizeF(toMM(w), toMM(h)), QPrinter::Millimeter );
+    QPainter painter;
+    if (! painter.begin( &printer )) { // failed to open file
+        qCritical("Can't open printer %s",qPrintable(name));
+        return;
+    }
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    tableScene->render(&painter);
+    painter.end();
 }

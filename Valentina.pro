@@ -6,7 +6,7 @@
 
 # Use out-of-source builds (shadow builds)
 
-QT       += core gui widgets xml svg
+QT       += core gui widgets xml svg printsupport
 
 TEMPLATE = app
 

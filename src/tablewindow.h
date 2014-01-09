@@ -209,7 +209,7 @@ private:
      * @brief PsFile
      * @param name
      */
-    void PsFile(const QString &name)const;
+    void PdfFile(const QString &name)const;
 };
 
 #endif // TABLEWINDOW_H

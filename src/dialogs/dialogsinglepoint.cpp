@@ -36,8 +36,8 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     point(QPointF())
 {
     ui->setupUi(this);
-    ui->doubleSpinBoxX->setRange(0, toMM(PaperSize));
-    ui->doubleSpinBoxY->setRange(0, toMM(PaperSize));
+    ui->doubleSpinBoxX->setRange(0, toMM(SceneSize));
+    ui->doubleSpinBoxY->setRange(0, toMM(SceneSize));
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     labelEditNamePoint = ui->labelEditName;
     flagName = false;

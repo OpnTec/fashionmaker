@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     ToolBarOption();
     ToolBarDraws();
-    QRectF sceneRect = QRectF(0, 0, PaperSize, PaperSize);
+    QRectF sceneRect = QRectF(0, 0, SceneSize, SceneSize);
     sceneDraw = new VMainGraphicsScene(sceneRect);
     currentScene = sceneDraw;
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
