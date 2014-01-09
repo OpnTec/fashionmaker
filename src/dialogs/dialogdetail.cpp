@@ -38,8 +38,13 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     labelEditNamePoint = ui.labelEditNameDetail;
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogDetail::DialogAccepted);
-    flagName = false;
+
+    flagName = true;//We have default name of detail.
+    QPalette palette = labelEditNamePoint->palette();
+    palette.setColor(labelEditNamePoint->foregroundRole(), QColor(76, 76, 76));
+    labelEditNamePoint->setPalette(palette);
     CheckState();
+
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogDetail::DialogRejected);
 
