@@ -172,7 +172,7 @@ void VTableGraphicsView::rotateIt()
             QGraphicsItem *item = list.at(i);
             Q_ASSERT(item != 0);
             item->setTransformOriginPoint(item->boundingRect().center());
-            item->setRotation(item->rotation() + 180);
+            item->setRotation(item->rotation() + 90);
         }
     }
 }

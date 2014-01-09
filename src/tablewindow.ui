@@ -14,7 +14,7 @@
    <string>Create a layout</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="icon.qrc">
+   <iconset resource="../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -111,7 +111,7 @@
     <string>Turn</string>
    </property>
    <property name="toolTip">
-    <string>Turn the detail 180 degrees</string>
+    <string>Turn the detail 90 degrees</string>
    </property>
   </action>
   <action name="actionStop">
@@ -161,7 +161,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="icon.qrc">
+    <iconset resource="../share/resources/icon.qrc">
      <normaloff>:/icon/16x16/mirror.png</normaloff>:/icon/16x16/mirror.png</iconset>
    </property>
    <property name="text">
@@ -199,7 +199,7 @@
   </action>
  </widget>
  <resources>
-  <include location="icon.qrc"/>
+  <include location="../share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
