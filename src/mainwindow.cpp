@@ -648,8 +648,7 @@ void MainWindow::ToolBarOption()
     comboBoxGrow->addItems(list);
     comboBoxGrow->setCurrentIndex(14);
     ui->toolBarOption->addWidget(comboBoxGrow);
-    connect(comboBoxGrow,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(comboBoxGrow, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::ChangedGrowth);
 
     QLabel * labelSize = new QLabel;
@@ -663,8 +662,7 @@ void MainWindow::ToolBarOption()
     comboBoxSize->addItems(list);
     comboBoxSize->setCurrentIndex(14);
     ui->toolBarOption->addWidget(comboBoxSize);
-    connect(comboBoxSize,
-            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::ChangedSize);
 
     ui->toolBarOption->addSeparator();
@@ -707,6 +705,9 @@ void MainWindow::currentDrawChanged( int index )
     {
         doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
+        qint64 id = doc->SPointActiveDraw();
+        const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
+        view->centerOn(p->toQPointF());
     }
 }
 
@@ -896,6 +897,7 @@ void MainWindow::ActionDraw(bool checked)
         verScrollBar->setValue(currentScene->getVerScrollBar());
 
         mode = Draw::Calculation;
+        comboBoxDraws->setEnabled(true);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
 
         SetEnableTool(true);
@@ -929,6 +931,7 @@ void MainWindow::ActionDetails(bool checked)
 
         currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
+        comboBoxDraws->setEnabled(false);
 
         mode = Draw::Modeling;
         SetEnableTool(true);

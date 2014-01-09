@@ -486,6 +486,32 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     return param;
 }
 
+qint64 VDomDocument::SPointActiveDraw()
+{
+    QDomElement calcElement;
+    bool ok = GetActivCalculationElement(calcElement);
+    if (ok)
+    {
+        QDomNode domNode = calcElement.firstChild();
+        if (domNode.isNull() == false)
+        {
+            if (domNode.isElement())
+            {
+                QDomElement domElement = domNode.toElement();
+                if (domElement.isNull() == false)
+                {
+                    if (domElement.tagName() == VToolPoint::TagName &&
+                            domElement.attribute("type", "") == VToolSinglePoint::ToolType)
+                    {
+                        return GetParametrId(domElement);
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 void VDomDocument::TestUniqueId() const
 {
     QVector<qint64> vector;

@@ -225,6 +225,7 @@ public:
      * @return
      */
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    qint64         SPointActiveDraw();
 signals:
     /**
      * @brief ChangedActivDraw
