@@ -109,6 +109,7 @@ public slots:
      * @param newName
      */
     virtual void      ChangedActivDraw(const QString &newName);
+    virtual void      ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent

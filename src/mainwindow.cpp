@@ -706,8 +706,11 @@ void MainWindow::currentDrawChanged( int index )
         doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
         qint64 id = doc->SPointActiveDraw();
-        const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
-        view->centerOn(p->toQPointF());
+        if (id != 0)
+        {
+            const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
+            view->centerOn(p->toQPointF());
+        }
     }
 }
 

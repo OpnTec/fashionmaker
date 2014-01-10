@@ -66,6 +66,11 @@ VArc &VArc::operator =(const VArc &arc)
     return *this;
 }
 
+qreal VArc::GetLength() const
+{
+    return (M_PI * radius)/180 * AngleArc();
+}
+
 QPointF VArc::GetP1() const
 {
     QPointF p1 ( GetCenter().x () + radius, GetCenter().y () );
@@ -84,13 +89,22 @@ QPointF VArc::GetP2 () const
 
 QPainterPath VArc::GetPath() const
 {
-    QPainterPath Path;
-    QPointF center = GetCenter().toQPointF();
-    QRectF rect(center.x()-radius, center.y()-radius, radius*2, radius*2);
-    Path.moveTo(GetP1());
-    qreal angle = QLineF(center, GetP1()).angleTo(QLineF(center, GetP2()));
-    Path.arcTo(rect, GetF1(), angle);
-    return Path;
+    QPainterPath path;
+
+    QVector<QPointF> points = GetPoints();
+    if (points.count() >= 2)
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.moveTo(points[i]);
+            path.lineTo(points[i+1]);
+        }
+    }
+    else
+    {
+        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
+    }
+    return path;
 }
 
 qreal VArc::AngleArc() const
@@ -102,92 +116,25 @@ qreal VArc::AngleArc() const
     return l1.angleTo(l2);
 }
 
-qint32 VArc::NumberSplOfArc() const
-{
-    qint32 angArc = static_cast<qint32> (AngleArc ());
-    switch ( angArc )
-    {
-        case 0:
-        {
-            QString error = QString(tr("Angle of arc can't be 0 degree."));
-            throw VException(error);
-        }
-        case 90:
-            return 1;
-        case 180:
-            return 2;
-        case 270:
-            return 3;
-        case 360:
-            return 4;
-        default:
-            return static_cast<qint32> (AngleArc ( ) / 90 + 1);
-    }
-}
-
 QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
-    qint32 numberSpl =  NumberSplOfArc();
-    for (qint32 i = 1; i <= numberSpl; ++i)
+    qreal i = 0;
+    qreal angle = qRound(AngleArc());
+    do
     {
-        points<<SplOfArc ( i );
+        QLineF line(center.toQPointF(), GetP1());
+        line.setAngle(line.angle()+i);
+        points.append(line.p2());
+        i = i + 0.1;
     }
+    while(i <= angle);
     return points;
 }
 
-QVector<QPointF> VArc::SplOfArc(qint32 number) const
+QString VArc::name() const
 {
-    qint32 n = NumberSplOfArc ();
-    if ( number > n )
-    {
-        QString error = QString(tr("Arc has not this number of parts."));
-        throw VException(error);
-    }
-    qreal f1 = GetF1 ();
-    qreal f2 = GetF2 ();
-    qint32 i;
-    for ( i = 0; i < n; ++i )
-    {
-        if ( i == n - 1 )
-        {
-            f2 = GetF2 ();
-        }
-        else
-        {
-            if ( f1 + 90 > 360 )
-            {
-                f2 = f1 + 90 - 360;
-            }
-            else
-            {
-                f2 = f1 + 90;
-            }
-        }
-        qreal anglF1, anglF2;
-        if ( f1 + 90 > 360 )
-        {
-            anglF1 =  f1 + 90 - 360;
-        }
-        else
-        {
-            anglF1 = f1 + 90;
-        }
-        if ( f2 - 90 < 0 )
-        {
-            anglF2 = 360 + f2 - 90;
-        }
-        else
-        {
-            anglF2 = f2 - 90;
-        }
-        if ( i + 1 == number )
-        {
-            f1 = f2;
-            return VSpline::SplinePoints(GetP1 (), GetP2 (), anglF1, anglF2, 1., 1., 1.);
-        }
-    }
-    return QVector<QPointF>();
+    return _name;
 }
 
 QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
@@ -205,19 +152,22 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
     else
     {
         len = length;
-        qDebug()<<len;
     }
 
     qreal n = (len*180)/(M_PI*radius);
-    qDebug()<<n;
     QLineF line(GetCenter().toQPointF(), GetP1());
     line.setAngle(line.angle()+n);
-    QPointF point = line.p2();
 
     arc1 = VArc (center, radius, formulaRadius, f1, formulaF1, line.angle(), QString().setNum(line.angle()),
                  idObject, mode);
 
     arc2 = VArc (center, radius, formulaRadius, line.angle(), QString().setNum(line.angle()), f2, formulaF2,
                  idObject, mode);
-    return point;
+    return line.p2();
+}
+
+void VArc::setId(const qint64 &id)
+{
+    _id = id;
+    _name = QString ("Arc_%1_%2").arg(center.name()).arg(id);
 }

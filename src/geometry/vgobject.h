@@ -61,7 +61,7 @@ public:
     void            setMode(const Draw::Draws &value);
     GObject::Type   getType() const;
     qint64          id() const;
-    void            setId(const qint64 &id);
+    virtual void    setId(const qint64 &id);
 protected:
     /**
      * @brief _id id in container. Ned for arcs, spline and spline paths.

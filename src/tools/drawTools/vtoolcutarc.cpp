@@ -208,6 +208,11 @@ void VToolCutArc::ChangedActivDraw(const QString &newName)
     VToolPoint::ChangedActivDraw(newName);
 }
 
+void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogCutArc, this, event);
+}
+
 void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogCutArc, this, event);

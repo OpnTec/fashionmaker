@@ -92,7 +92,7 @@ public:
      * @brief GetLength повертає довжину дуги.
      * @return повертає довжину дуги.
      */
-    inline qreal       GetLength () const {return M_PI * radius/180 * (f2-f1);}
+    qreal              GetLength () const;
     /**
      * @brief GetRadius повертає радіус дуги.
      * @return повертає радіус дуги.
@@ -129,23 +129,13 @@ public:
      */
     qreal              AngleArc() const;
     /**
-     * @brief NumberSplOfArc
-     * @return
-     */
-    qint32             NumberSplOfArc () const;
-    /**
      * @brief GetPoints
      * @return
      */
     QVector<QPointF>   GetPoints () const;
-    /**
-     * @brief SplOfArc
-     * @param number
-     * @return
-     */
-    QVector<QPointF>   SplOfArc( qint32 number ) const;
-    virtual QString    name() const{return _name;}
+    virtual QString    name() const;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
+    virtual void       setId(const qint64 &id);
 private:
     /**
      * @brief f1 початковий кут в градусах

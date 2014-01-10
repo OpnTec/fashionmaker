@@ -286,6 +286,11 @@ void VToolCutSplinePath::ChangedActivDraw(const QString &newName)
     VToolPoint::ChangedActivDraw(newName);
 }
 
+void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    ContextMenu(dialogCutSplinePath, this, event);
+}
+
 void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogCutSplinePath, this, event);
