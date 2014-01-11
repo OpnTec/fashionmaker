@@ -105,6 +105,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
+                center->setMode(Draw::Modeling);
                 qint64 idCenter = data->AddGObject(center);
                 Q_UNUSED(idCenter);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(),
@@ -112,12 +113,12 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                                  QString().setNum(l2.angle()));
                 Q_ASSERT(arc1 != 0);
                 arc1->setMode(Draw::Modeling);
-                id = data->AddGObject(arc1);
+                idObject = data->AddGObject(arc1);
 
                 VArc *arc2 = new VArc(*arc1);
                 Q_ASSERT(arc2 != 0);
                 arc2->setMode(Draw::Modeling);
-                idObject = data->AddGObject(arc2);
+                id = data->AddGObject(arc2);
 
                 VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
             }
@@ -242,7 +243,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
     {
         case (Tool::NodePoint):
         {
-            if (qFuzzyCompare(dx+1, 1) == false && qFuzzyCompare(dy+1, 1) == false && pRotate != 0)
+            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(det.at(i).getId()));
                 Q_ASSERT(point != 0);
@@ -257,7 +258,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
         break;
         case (Tool::NodeArc):
         {
-            if (qFuzzyCompare(dx+1, 1) == false && qFuzzyCompare(dy+1, 1) == false && pRotate != 0)
+            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(det.at(i).getId());
                 VPointF p1 = VPointF(arc->GetP1());
@@ -272,6 +273,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
                 ++idCount;
+                center->setMode(Draw::Modeling);
                 data->UpdateGObject(idDetail+idCount, center);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
@@ -286,7 +288,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
         break;
         case (Tool::NodeSpline):
         {
-            if (qFuzzyCompare(dx+1, 1) == false && qFuzzyCompare(dy+1, 1) == false && pRotate != 0)
+            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 const VSpline *spline = data->GeometricObject<const VSpline *>(det.at(i).getId());
 
@@ -320,7 +322,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
         break;
         case (Tool::NodeSplinePath):
         {
-            if (qFuzzyCompare(dx+1, 1) == false && qFuzzyCompare(dy+1, 1) == false && pRotate != 0)
+            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VSplinePath *path = new VSplinePath();
                 Q_ASSERT(path != 0);

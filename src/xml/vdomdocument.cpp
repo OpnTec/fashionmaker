@@ -1314,7 +1314,6 @@ void VDomDocument::FullUpdateTree()
     Q_ASSERT(scene != 0);
     try
     {
-        data->ClearGObjects();
         Parse(Document::LiteParse, scene, scene);
     }
     catch (const std::bad_alloc &)

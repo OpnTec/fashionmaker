@@ -120,13 +120,21 @@ QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
     qreal i = 0;
-    qreal angle = qRound(AngleArc());
+    qreal angle = AngleArc();
+    qint32 k = static_cast<qint32>(angle);
+    qreal s = angle/(k/4);
     do
     {
         QLineF line(center.toQPointF(), GetP1());
         line.setAngle(line.angle()+i);
         points.append(line.p2());
-        i = i + 0.1;
+        i = i + s;
+        if(i > angle)
+        {
+            QLineF line(center.toQPointF(), GetP1());
+            line.setAngle(line.angle()+angle);
+            points.append(line.p2());
+        }
     }
     while(i <= angle);
     return points;

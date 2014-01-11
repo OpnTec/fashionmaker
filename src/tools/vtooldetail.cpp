@@ -247,8 +247,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         {
             domElement.setAttribute(AttrMx, QString().setNum(toMM(newPos.x())));
             domElement.setAttribute(AttrMy, QString().setNum(toMM(newPos.y())));
-            //I don't now why but signal does not work.
-            doc->FullUpdateTree();
+            doc->haveLiteChange();
         }
     }
 

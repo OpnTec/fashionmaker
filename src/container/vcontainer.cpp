@@ -223,6 +223,7 @@ QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &po
         qWarning()<<"Only three points.";
         return points;
     }
+    //Clear equivalent points
     for(qint32 i = 0; i <points.size(); ++i)
     {
         if(i == points.size()-1)
@@ -238,6 +239,22 @@ QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &po
         else
         {
             correctPoints.append(points.at(i));
+        }
+    }
+    if(correctPoints.size()<3)
+    {
+        return correctPoints;
+    }
+    //Remove point on line
+    QPointF point;
+    for(qint32 i = 1; i <correctPoints.size()-1; ++i)
+    {
+        QLineF l1(correctPoints[i-1], correctPoints[i]);
+        QLineF l2(correctPoints[i], correctPoints[i+1]);
+        QLineF::IntersectType intersect = l1.intersect(l2, &point);
+        if (intersect == QLineF::NoIntersection)
+        {
+            correctPoints.remove(i);
         }
     }
     return correctPoints;
