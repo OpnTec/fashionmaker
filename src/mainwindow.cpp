@@ -87,6 +87,10 @@ MainWindow::MainWindow(QWidget *parent)
     view = new VMainGraphicsView();
     ui->LayoutView->addWidget(view);
     view->setScene(currentScene);
+
+    sceneDraw->setTransform(view->transform());
+    sceneDetails->setTransform(view->transform());
+
     connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
@@ -880,24 +884,38 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
     QMainWindow::keyPressEvent ( event );
 }
 
+void MainWindow::SaveCurrentScene()
+{
+    /*Save transform*/
+    currentScene->setTransform(view->transform());
+    /*Save scroll bars value for previous scene.*/
+    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    currentScene->setHorScrollBar(horScrollBar->value());
+    QScrollBar *verScrollBar = view->verticalScrollBar();
+    currentScene->setVerScrollBar(verScrollBar->value());
+}
+
+void MainWindow::RestoreCurrentScene()
+{
+    /*Set transform for current scene*/
+    view->setTransform(currentScene->transform());
+    /*Set value for current scene scroll bar.*/
+    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    horScrollBar->setValue(currentScene->getHorScrollBar());
+    QScrollBar *verScrollBar = view->verticalScrollBar();
+    verScrollBar->setValue(currentScene->getVerScrollBar());
+}
+
 void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
     {
         ui->actionDetails->setChecked(false);
-        /*Save scroll bars value for previous scene.*/
-        QScrollBar *horScrollBar = view->horizontalScrollBar();
-        currentScene->setHorScrollBar(horScrollBar->value());
-        QScrollBar *verScrollBar = view->verticalScrollBar();
-        currentScene->setVerScrollBar(verScrollBar->value());
+        SaveCurrentScene();
 
         currentScene = sceneDraw;
         view->setScene(currentScene);
-        /*Set value for current scene scroll bar.*/
-        horScrollBar = view->horizontalScrollBar();
-        horScrollBar->setValue(currentScene->getHorScrollBar());
-        verScrollBar = view->verticalScrollBar();
-        verScrollBar->setValue(currentScene->getVerScrollBar());
+        RestoreCurrentScene();
 
         mode = Draw::Calculation;
         comboBoxDraws->setEnabled(true);
@@ -918,19 +936,11 @@ void MainWindow::ActionDetails(bool checked)
     if (checked)
     {
         ui->actionDraw->setChecked(false);
-        /*Save scroll bars value for previous scene.*/
-        QScrollBar *horScrollBar = view->horizontalScrollBar();
-        currentScene->setHorScrollBar(horScrollBar->value());
-        QScrollBar *verScrollBar = view->verticalScrollBar();
-        currentScene->setVerScrollBar(verScrollBar->value());
+        SaveCurrentScene();
 
         currentScene = sceneDetails;
         view->setScene(sceneDetails);
-        /*Set value for current scene scroll bar.*/
-        horScrollBar = view->horizontalScrollBar();
-        horScrollBar->setValue(currentScene->getHorScrollBar());
-        verScrollBar = view->verticalScrollBar();
-        verScrollBar->setValue(currentScene->getVerScrollBar());
+        RestoreCurrentScene();
 
         currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);

@@ -537,6 +537,8 @@ private:
      * @param enable
      */
     void               SetEnableTool(bool enable);
+    void               SaveCurrentScene();
+    void               RestoreCurrentScene();
     /**
      *
      */

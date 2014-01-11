@@ -69,6 +69,8 @@ public:
      * @param value
      */
     inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
+    QTransform    transform() const;
+    void          setTransform(const QTransform &transform);
 public slots:
     /**
      * @brief ChoosedItem
@@ -127,6 +129,7 @@ private:
      * @brief scaleFactor
      */
     qreal         scaleFactor;
+    QTransform    _transform;
 };
 
 #endif // VMAINGRAPHICSSCENE_H
