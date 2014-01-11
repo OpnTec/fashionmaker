@@ -112,6 +112,26 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         {
             domElement.setAttribute(AttrX, QString().setNum(toMM(newPos.x())));
             domElement.setAttribute(AttrY, QString().setNum(toMM(newPos.y())));
+
+            QGraphicsScene *sc = this->scene();
+            QRectF rect = sc->itemsBoundingRect();
+            //Correct BoundingRect
+            rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
+
+            QList<QGraphicsView*> list = sc->views();
+            QRect  rec = list[0]->contentsRect();
+            //Correct contentsRect
+            rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
+
+            if(rec.contains(rect.toRect()))
+            {
+                sc->setSceneRect(rec);
+            }
+            else
+            {
+                rect = rect.united(rec);
+                sc->setSceneRect(rect);
+            }
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }

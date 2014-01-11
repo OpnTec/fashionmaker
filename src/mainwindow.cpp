@@ -78,11 +78,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
     ToolBarOption();
     ToolBarDraws();
-    QRectF sceneRect = QRectF(0, 0, SceneSize, SceneSize);
-    sceneDraw = new VMainGraphicsScene(sceneRect);
+    sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
-    sceneDetails = new VMainGraphicsScene(sceneRect);
+    sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     view = new VMainGraphicsView();
     ui->LayoutView->addWidget(view);
@@ -583,6 +582,7 @@ void MainWindow::showEvent( QShowEvent *event )
         return;
     }
     // do your init stuff here
+
     MinimumScrollBar();
 
     isInitialized = true;//first show windows are held
@@ -1014,6 +1014,10 @@ void MainWindow::ActionOpen()
     if (fileName.isEmpty() && changeInFile == false)
     {
         OpenPattern(fName);
+        sceneDraw->setSceneRect(QRectF(0, 0, view->contentsRect().width()-view->contentsRect().x(),
+                                       view->contentsRect().height()-view->contentsRect().y()));
+        sceneDetails->setSceneRect(QRectF(0, 0, view->contentsRect().width()-view->contentsRect().x(),
+                                          view->contentsRect().height()-view->contentsRect().y()));
     }
     else
     {
