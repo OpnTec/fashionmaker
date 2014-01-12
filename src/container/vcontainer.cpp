@@ -241,22 +241,22 @@ QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &po
             correctPoints.append(points.at(i));
         }
     }
-//    if(correctPoints.size()<3)
-//    {
-//        return correctPoints;
-//    }
-//    //Remove point on line
-//    QPointF point;
-//    for(qint32 i = 1; i <correctPoints.size()-1; ++i)
-//    {
-//        QLineF l1(correctPoints[i-1], correctPoints[i]);
-//        QLineF l2(correctPoints[i], correctPoints[i+1]);
-//        QLineF::IntersectType intersect = l1.intersect(l2, &point);
-//        if (intersect == QLineF::NoIntersection)
-//        {
-//            correctPoints.remove(i);
-//        }
-//    }
+    if(correctPoints.size()<3)
+    {
+        return correctPoints;
+    }
+    //Remove point on line
+    QPointF point;
+    for(qint32 i = 1; i <correctPoints.size()-1; ++i)
+    {
+        QLineF l1(correctPoints[i-1], correctPoints[i]);
+        QLineF l2(correctPoints[i], correctPoints[i+1]);
+        QLineF::IntersectType intersect = l1.intersect(l2, &point);
+        if (intersect == QLineF::NoIntersection)
+        {
+            correctPoints.remove(i);
+        }
+    }
     return correctPoints;
 }
 
@@ -579,7 +579,6 @@ QVector<QPointF> VContainer::CheckLoops(const QVector<QPointF> &points) const
                 /*We found loop.*/
                 ekvPoints.append(points.at(i));
                 ekvPoints.append(crosPoint);
-                ekvPoints.append(points.at(j+1));
                 i = j + 2;
             }
         }

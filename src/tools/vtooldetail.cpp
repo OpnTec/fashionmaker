@@ -251,24 +251,21 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
             QGraphicsScene *sc = this->scene();
             QRectF rect = sc->itemsBoundingRect();
             //Correct BoundingRect
-            rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
+            //rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
             qDebug()<<"rect"<<rect;
 
             QList<QGraphicsView*> list = sc->views();
             QRect  rec = list[0]->contentsRect();
-            qDebug()<<"rec"<<rec;
+            QTransform t = list[0]->transform();
+            qDebug()<<"m11="<<t.m11();
+            qDebug()<<"m22="<<t.m22();
             //Correct contentsRect
-            rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
-
-            if(rec.contains(rect.toRect()))
-            {
-                sc->setSceneRect(rec);
-            }
-            else
-            {
-                rect = rect.united(rec);
-                sc->setSceneRect(rect);
-            }
+            rec = QRect(0, 0, rec.width()/t.m11() - rec.x(), rec.height()/t.m22() - rec.y());
+//            rec = QRectF(rec.x()/t.m11(), rec.y()/t.m22(), rec.width()/t.m11(), rec.height()/t.m22());
+            qDebug()<<"rec"<<rec;
+            rec = rec.united(rect.toRect());
+            qDebug()<<"rec1"<<rec;
+            sc->setSceneRect(rec);
 
             doc->haveLiteChange();
         }
