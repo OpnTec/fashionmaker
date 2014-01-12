@@ -165,6 +165,8 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSupplement());
     ui.checkBoxClosed->setChecked(details.getClosed());
+    ClickedClosed(details.getClosed());
+    ClickedSeams(details.getSupplement());
     ui.doubleSpinBoxSeams->setValue(details.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);

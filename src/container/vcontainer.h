@@ -223,7 +223,7 @@ public:
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, VDetail detail);
+    void                UpdateDetail(qint64 id, const VDetail &detail);
     /**
      * @brief UpdateStandartTableCell update standart table row by name
      * @param name name of row

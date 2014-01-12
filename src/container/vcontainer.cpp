@@ -774,7 +774,7 @@ void VContainer::UpdateGObject(qint64 id, VGObject* obj)
     UpdateObject(gObjects, id, obj);
 }
 
-void VContainer::UpdateDetail(qint64 id, VDetail detail)
+void VContainer::UpdateDetail(qint64 id, const VDetail &detail)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     details[id] = detail;
