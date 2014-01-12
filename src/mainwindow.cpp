@@ -701,6 +701,7 @@ void MainWindow::ToolBarDraws()
 
     ui->toolBarDraws->addAction(ui->actionLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
+    ui->actionLayout->setEnabled(false);
 }
 
 void MainWindow::currentDrawChanged( int index )
@@ -928,6 +929,11 @@ void MainWindow::ActionDraw(bool checked)
         SetEnableTool(true);
         doc->setCurrentData();
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
+
+        ui->actionHistory->setEnabled(true);
+        ui->actionLayout->setEnabled(false);
+        ui->actionOptionDraw->setEnabled(true);
+        ui->actionNewDraw->setEnabled(true);
     }
     else
     {
@@ -956,6 +962,11 @@ void MainWindow::ActionDetails(bool checked)
         SetEnableTool(true);
         currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
+
+        ui->actionHistory->setEnabled(false);
+        ui->actionLayout->setEnabled(true);
+        ui->actionOptionDraw->setEnabled(false);
+        ui->actionNewDraw->setEnabled(false);
     }
     else
     {
