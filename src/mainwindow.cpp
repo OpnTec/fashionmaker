@@ -712,6 +712,7 @@ void MainWindow::currentDrawChanged( int index )
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
         if(drawMode)
         {
+            ArrowTool();
             qint64 id = doc->SPointActiveDraw();
             if (id != 0)
             {
