@@ -139,10 +139,10 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 qint64 idP1 = data->AddGObject(p1);
 
-                VPointF p2 = VPointF(spline->GetP2().x(), spline->GetP2().y(), "A", 0, 0);
+                VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
 
-                VPointF p3 = VPointF(spline->GetP3().x(), spline->GetP3().y(), "A", 0, 0);
+                VPointF p3 = VPointF(spline->GetP3());
                 BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
 
                 VPointF *p4 = new VPointF(spline->GetP4());
@@ -150,9 +150,9 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 qint64 idP4 = data->AddGObject(p4);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve());
+                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
+                Draw::Modeling);
                 Q_ASSERT(spl != 0);
-                spl->setMode(Draw::Modeling);
                 idObject = data->AddGObject(spl);
 
                 VSpline *spl1 = new VSpline(*spl);
@@ -208,10 +208,10 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                     if (i==1)
                     {
                         path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i-1).KAsm1()));
+                                                  splinePath->at(i-1).KAsm2()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i).KAsm1()));
+                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2()+180,
+                                                  splinePath->at(i).KAsm2()));
                 }
                 while(k>=0)
                 {
@@ -310,9 +310,10 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, p4);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve());
+                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
+                Draw::Modeling);
+
                 Q_ASSERT(spl != 0);
-                spl->setMode(Draw::Modeling);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, spl);
 
@@ -364,10 +365,10 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                     if (i==1)
                     {
                         path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i-1).KAsm1()));
+                                                  splinePath->at(i-1).KAsm2()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i).KAsm1()));
+                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2()+180,
+                                                  splinePath->at(i).KAsm2()));
                 }
 
                 while(k>=0)

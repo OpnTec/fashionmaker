@@ -247,6 +247,29 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         {
             domElement.setAttribute(AttrMx, QString().setNum(toMM(newPos.x())));
             domElement.setAttribute(AttrMy, QString().setNum(toMM(newPos.y())));
+
+            QGraphicsScene *sc = this->scene();
+            QRectF rect = sc->itemsBoundingRect();
+            //Correct BoundingRect
+            rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
+            qDebug()<<"rect"<<rect;
+
+            QList<QGraphicsView*> list = sc->views();
+            QRect  rec = list[0]->contentsRect();
+            qDebug()<<"rec"<<rec;
+            //Correct contentsRect
+            rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
+
+            if(rec.contains(rect.toRect()))
+            {
+                sc->setSceneRect(rec);
+            }
+            else
+            {
+                rect = rect.united(rec);
+                sc->setSceneRect(rect);
+            }
+
             doc->haveLiteChange();
         }
     }
