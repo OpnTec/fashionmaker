@@ -232,6 +232,29 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
     return det;
 }
 
+QList<qint64> VDetail::Missing(const VDetail &det) const
+{
+    QList<qint64> list;
+    if(nodes.size() == det.CountNode())
+    {
+        return list;
+    }
+
+    qint32 j = 0;
+    for(qint32 i = 0; i < nodes.size(); ++i)
+    {
+        if(nodes[i].getId() == det.at(j).getId())
+        {
+            ++j;
+        }
+        else
+        {
+            list.append(nodes[i].getId());
+        }
+    }
+    return list;
+}
+
 QVector<VNodeDetail> VDetail::listNodePoint() const
 {
     QVector<VNodeDetail> list;

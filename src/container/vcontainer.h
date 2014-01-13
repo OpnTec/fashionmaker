@@ -279,6 +279,7 @@ public:
      * @brief ClearLineAngles clear angles of lines
      */
     inline void         ClearLineAngles() {lineAngles.clear();}
+    inline void         ClearDetails() {details.clear();}
     /**
      * @brief SetSize set value of size
      * @param size value of size in mm

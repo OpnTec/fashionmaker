@@ -350,6 +350,7 @@ void VDomDocument::Parse(const Document::Documents &parse, VMainGraphicsScene *s
     data->ClearLengthArcs();
     data->ClearLengthSplines();
     data->ClearLineAngles();
+    data->ClearDetails();
     history.clear();
     QDomElement rootElement = this->documentElement();
     QDomNode domNode = rootElement.firstChild();

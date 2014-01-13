@@ -78,6 +78,12 @@ void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idA
     }
 }
 
+void VNodeArc::DeleteNode()
+{
+    VAbstractNode::DeleteNode();
+    this->setVisible(false);
+}
+
 void VNodeArc::FullUpdateFromFile()
 {
     RefreshGeometry();

@@ -39,6 +39,40 @@ VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &
     _referens = 0;
 }
 
+void VAbstractNode::DeleteNode()
+{
+    if (_referens <= 1)
+    {
+        //remove from xml file
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if (domElement.isElement())
+        {
+            QDomNode element = domElement.parentNode();
+            if (element.isNull() == false)
+            {
+                if (element.isElement())
+                {
+                    RemoveReferens();//deincrement referens
+                    element.removeChild(domElement);//remove form file
+                    emit toolhaveChange();//set enabled save button
+                }
+                else
+                {
+                    qWarning()<<"parent isn't element"<<Q_FUNC_INFO;
+                }
+            }
+            else
+            {
+                qWarning()<<"parent isNull"<<Q_FUNC_INFO;
+            }
+        }
+        else
+        {
+            qWarning()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
+        }
+    }
+}
+
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;

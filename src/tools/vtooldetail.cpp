@@ -185,6 +185,17 @@ void VToolDetail::FullUpdateFromGui(int result)
             {
                AddNode(domElement, det[i]);
             }
+            VDetail detail = VAbstractTool::data.GetDetail(id);
+            QList<qint64> list = detail.Missing(det);
+            QHash<qint64, VDataTool*>* tools = doc->getTools();
+            if(list.size()>0)
+            {
+                for(qint32 i = 0; i < list.size(); ++i)
+                {
+                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list[i]));
+                    node->DeleteNode();
+                }
+            }
             emit FullUpdateTree();
         }
     }

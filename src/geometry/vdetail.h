@@ -183,6 +183,7 @@ public:
     ptrdiff_t      Edge(const qint64 &p1, const qint64 &p2)const;
     void           NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2)const;
     VDetail        RemoveEdge(const ptrdiff_t &index) const;
+    QList<qint64>  Missing(const VDetail &det) const;
 private:
     qint64         _id;
     /**
