@@ -89,6 +89,12 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
     }
 }
 
+void VNodePoint::DeleteNode()
+{
+    VAbstractNode::DeleteNode();
+    this->setVisible(false);
+}
+
 void VNodePoint::FullUpdateFromFile()
 {
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));

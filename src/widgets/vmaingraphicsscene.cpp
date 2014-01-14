@@ -31,10 +31,14 @@
 #include <QtWidgets>
 
 VMainGraphicsScene::VMainGraphicsScene()
-    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()){}
+    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
+{
+}
 
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()){}
+    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
+{
+}
 
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {

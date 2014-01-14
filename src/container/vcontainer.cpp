@@ -579,7 +579,6 @@ QVector<QPointF> VContainer::CheckLoops(const QVector<QPointF> &points) const
                 /*We found loop.*/
                 ekvPoints.append(points.at(i));
                 ekvPoints.append(crosPoint);
-                ekvPoints.append(points.at(j+1));
                 i = j + 2;
             }
         }
@@ -774,7 +773,7 @@ void VContainer::UpdateGObject(qint64 id, VGObject* obj)
     UpdateObject(gObjects, id, obj);
 }
 
-void VContainer::UpdateDetail(qint64 id, VDetail detail)
+void VContainer::UpdateDetail(qint64 id, const VDetail &detail)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     details[id] = detail;

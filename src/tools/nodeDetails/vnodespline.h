@@ -72,6 +72,7 @@ public:
      * @brief ToolType
      */
     static const QString ToolType;
+    virtual void DeleteNode();
 public slots:
     /**
      * @brief FullUpdateFromFile

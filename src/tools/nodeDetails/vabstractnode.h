@@ -54,6 +54,7 @@ public:
      */
     static const QString AttrIdObject;
     static const QString AttrIdTool;
+    virtual void DeleteNode();
 protected:
     /**
      * @brief idNode

@@ -91,6 +91,7 @@ public slots:
      * @param row number of row
      */
     void             ObjectChanged(int row);
+    void             DeleteItem();
 private:
     /**
      * @brief ui keeps information about user interface

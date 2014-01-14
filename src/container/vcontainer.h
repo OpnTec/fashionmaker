@@ -223,7 +223,7 @@ public:
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, VDetail detail);
+    void                UpdateDetail(qint64 id, const VDetail &detail);
     /**
      * @brief UpdateStandartTableCell update standart table row by name
      * @param name name of row
@@ -279,6 +279,7 @@ public:
      * @brief ClearLineAngles clear angles of lines
      */
     inline void         ClearLineAngles() {lineAngles.clear();}
+    inline void         ClearDetails() {details.clear();}
     /**
      * @brief SetSize set value of size
      * @param size value of size in mm

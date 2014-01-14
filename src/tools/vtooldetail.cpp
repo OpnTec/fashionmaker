@@ -185,6 +185,17 @@ void VToolDetail::FullUpdateFromGui(int result)
             {
                AddNode(domElement, det[i]);
             }
+            VDetail detail = VAbstractTool::data.GetDetail(id);
+            QList<qint64> list = detail.Missing(det);
+            QHash<qint64, VDataTool*>* tools = doc->getTools();
+            if(list.size()>0)
+            {
+                for(qint32 i = 0; i < list.size(); ++i)
+                {
+                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list[i]));
+                    node->DeleteNode();
+                }
+            }
             emit FullUpdateTree();
         }
     }
@@ -247,6 +258,34 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         {
             domElement.setAttribute(AttrMx, QString().setNum(toMM(newPos.x())));
             domElement.setAttribute(AttrMy, QString().setNum(toMM(newPos.y())));
+
+            QGraphicsScene *sc = this->scene();
+            QRectF rect = sc->itemsBoundingRect();
+
+            QList<QGraphicsView*> list = sc->views();
+            QRect  rec0 = list[0]->rect();
+            rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
+
+            QTransform t = list[0]->transform();
+
+            QRectF rec1;
+            if(t.m11() < 1)
+            {
+                rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+
+                rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+                QPolygonF polygone =  list[0]->mapToScene(rec1.toRect());
+                rec1 = polygone.boundingRect();
+
+            }
+            else
+            {
+                rec1 = rec0;
+            }
+
+            rec1 = rec1.united(rect.toRect());
+            sc->setSceneRect(rec1);
+
             doc->haveLiteChange();
         }
     }

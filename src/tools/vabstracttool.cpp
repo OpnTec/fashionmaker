@@ -178,6 +178,7 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
     }
 }
 
+//TODO see method deleteNode. I think no need have QGraphicsItem. QObject can delete yourself.
 void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
     if (_referens <= 1)
@@ -198,7 +199,8 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                     {
                         scene->removeItem(tool);//remove form scene
                     }
-                    emit toolhaveChange();//set enabled save button
+                    doc->FullUpdateTree();
+                    //emit toolhaveChange();//set enabled save button
                 }
                 else
                 {

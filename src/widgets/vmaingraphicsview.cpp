@@ -43,19 +43,26 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 
 void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 {
-    int numDegrees = event->delta() / 8;
-    int numSteps = numDegrees / 15;  // see QWheelEvent documentation
+    int numSteps = event->delta() / 8 / 15;  // see QWheelEvent documentation
+
     _numScheduledScalings += numSteps;
     if (_numScheduledScalings * numSteps < 0)
     {  // if user moved the wheel in another direction, we reset
         _numScheduledScalings = numSteps;       // previously scheduled scalings
     }
 
-    QTimeLine *anim = new QTimeLine(350, this);
+    QTimeLine *anim = new QTimeLine(300, this);
     Q_ASSERT(anim != 0);
     anim->setUpdateInterval(20);
 
-    connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scalingTime);
+    if (QApplication::keyboardModifiers() == Qt::ControlModifier)
+    {// If you press CTRL this code will be executed
+        connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scalingTime);
+    }
+    else
+    {
+        connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scrollingTime);
+    }
     connect(anim, &QTimeLine::finished, this, &VMainGraphicsView::animFinished);
     anim->start();
 }
@@ -63,28 +70,61 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 void VMainGraphicsView::scalingTime(qreal x)
 {
     Q_UNUSED(x);
+    const QPointF p0scene = mapToScene(mapFromGlobal(QCursor::pos()));
+
+    qreal factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 50.0;
+    scale(factor, factor);
+
+    const QPointF p1mouse = mapFromScene(p0scene);
+    const QPointF move = p1mouse - this->mapFromGlobal(QCursor::pos()); // The move
+    horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
+    verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
+
+    QGraphicsScene *sc = this->scene();
+    QRectF rect = sc->itemsBoundingRect();
+
+    QRect  rec0 = this->rect();
+    rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
+
+    QTransform t = this->transform();
+
+    QRectF rec1;
+    if(t.m11() < 1)
+    {
+        rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+
+        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+        QPolygonF polygone =  this->mapToScene(rec1.toRect());
+        rec1 = polygone.boundingRect();
+
+    }
+    else
+    {
+        rec1 = rec0;
+    }
+
+    rec1 = rec1.united(rect.toRect());
+    sc->setSceneRect(rec1);
+
+    emit NewFactor(factor);
+}
+
+void VMainGraphicsView::scrollingTime(qreal x)
+{
+    Q_UNUSED(x);
     qreal factor = 1.0;
-    if (QApplication::keyboardModifiers() == Qt::ControlModifier)
-    {// If you press CTRL this code will be executed
-        factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 300.0;
-        scale(factor, factor);
+    if (_numScheduledScalings < 0)
+    {
+        verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
         emit NewFactor(factor);
     }
     else
     {
-        if (_numScheduledScalings < 0)
-        {
-            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
+//        if (verticalScrollBar()->value() > 0)
+//        {
+            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
             emit NewFactor(factor);
-        }
-        else
-        {
-            if (verticalScrollBar()->value() > 0)
-            {
-                verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
-                emit NewFactor(factor);
-            }
-        }
+//        }
     }
 }
 

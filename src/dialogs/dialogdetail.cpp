@@ -56,6 +56,8 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
+
+    connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
 }
 
 void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
@@ -80,6 +82,7 @@ void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
                 qWarning()<<tr("Got wrong scene object. Ignore.");
                 break;
         }
+        ui.toolButtonDelete->setEnabled(true);
         this->show();
     }
 }
@@ -165,9 +168,12 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSupplement());
     ui.checkBoxClosed->setChecked(details.getClosed());
+    ClickedClosed(details.getClosed());
+    ClickedSeams(details.getSupplement());
     ui.doubleSpinBoxSeams->setValue(details.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
+    ui.toolButtonDelete->setEnabled(true);
 }
 
 void DialogDetail::BiasXChanged(qreal d)
@@ -212,4 +218,10 @@ void DialogDetail::ObjectChanged(int row)
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     ui.doubleSpinBoxBiasX->setValue(toMM(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(toMM(node.getMy()));
+}
+
+void DialogDetail::DeleteItem()
+{
+    qint32 row = ui.listWidget->currentRow();
+    delete ui.listWidget->item( row );
 }

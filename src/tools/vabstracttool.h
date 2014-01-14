@@ -304,7 +304,7 @@ protected:
      * @brief RemoveAllChild
      * @param domElement
      */
-    void                    RemoveAllChild(QDomElement &domElement);
+    void                    RemoveAllChild(QDomElement &domElement);                   
     virtual void            DeleteTool(QGraphicsItem *tool);
     template <typename T>
     /**

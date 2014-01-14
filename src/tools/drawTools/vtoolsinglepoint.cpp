@@ -115,23 +115,31 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 
             QGraphicsScene *sc = this->scene();
             QRectF rect = sc->itemsBoundingRect();
-            //Correct BoundingRect
-            rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
 
             QList<QGraphicsView*> list = sc->views();
-            QRect  rec = list[0]->contentsRect();
-            //Correct contentsRect
-            rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
+            QRect  rec0 = list[0]->rect();
+            rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
 
-            if(rec.contains(rect.toRect()))
+            QTransform t = list[0]->transform();
+
+            QRectF rec1;
+            if(t.m11() < 1)
             {
-                sc->setSceneRect(rec);
+                rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+
+                rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+                QPolygonF polygone =  list[0]->mapToScene(rec1.toRect());
+                rec1 = polygone.boundingRect();
+
             }
             else
             {
-                rect = rect.united(rec);
-                sc->setSceneRect(rect);
+                rec1 = rec0;
             }
+
+            rec1 = rec1.united(rect.toRect());
+            sc->setSceneRect(rec1);
+
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }

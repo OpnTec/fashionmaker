@@ -85,6 +85,12 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
     }
 }
 
+void VNodeSplinePath::DeleteNode()
+{
+    VAbstractNode::DeleteNode();
+    this->setVisible(false);
+}
+
 void VNodeSplinePath::FullUpdateFromFile()
 {
     RefreshGeometry();

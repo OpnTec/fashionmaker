@@ -55,6 +55,7 @@ public slots:
      * @param x
      */
     void     scalingTime(qreal x);
+    void     scrollingTime(qreal x);
     /**
      * @brief animFinished
      */

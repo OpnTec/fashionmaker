@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     dialogCutSpline(QSharedPointer<DialogCutSpline>()), dialogCutSplinePath (QSharedPointer<DialogCutSplinePath>()),
     dialogUnionDetails(QSharedPointer<DialogUnionDetails>()), dialogCutArc(QSharedPointer<DialogCutArc>()),
     dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-    mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0)
+    mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true)
 {
     ui->setupUi(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
@@ -701,6 +701,7 @@ void MainWindow::ToolBarDraws()
 
     ui->toolBarDraws->addAction(ui->actionLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
+    ui->actionLayout->setEnabled(false);
 }
 
 void MainWindow::currentDrawChanged( int index )
@@ -709,11 +710,15 @@ void MainWindow::currentDrawChanged( int index )
     {
         doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
-        qint64 id = doc->SPointActiveDraw();
-        if (id != 0)
+        if(drawMode)
         {
-            const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
-            view->centerOn(p->toQPointF());
+            ArrowTool();
+            qint64 id = doc->SPointActiveDraw();
+            if (id != 0)
+            {
+                const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
+                view->centerOn(p->toQPointF());
+            }
         }
     }
 }
@@ -915,15 +920,22 @@ void MainWindow::ActionDraw(bool checked)
 
         currentScene = sceneDraw;
         view->setScene(currentScene);
+        connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
         comboBoxDraws->setEnabled(true);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
+        drawMode = true;
 
         SetEnableTool(true);
         doc->setCurrentData();
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
+
+        ui->actionHistory->setEnabled(true);
+        ui->actionLayout->setEnabled(false);
+        ui->actionOptionDraw->setEnabled(true);
+        ui->actionNewDraw->setEnabled(true);
     }
     else
     {
@@ -940,16 +952,24 @@ void MainWindow::ActionDetails(bool checked)
 
         currentScene = sceneDetails;
         view->setScene(sceneDetails);
+        disconnect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
+        drawMode = false;
         currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
         comboBoxDraws->setEnabled(false);
+
 
         mode = Draw::Modeling;
         SetEnableTool(true);
         currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
+
+        ui->actionHistory->setEnabled(false);
+        ui->actionLayout->setEnabled(true);
+        ui->actionOptionDraw->setEnabled(false);
+        ui->actionNewDraw->setEnabled(false);
     }
     else
     {
@@ -1014,10 +1034,26 @@ void MainWindow::ActionOpen()
     if (fileName.isEmpty() && changeInFile == false)
     {
         OpenPattern(fName);
-        sceneDraw->setSceneRect(QRectF(0, 0, view->contentsRect().width()-view->contentsRect().x(),
-                                       view->contentsRect().height()-view->contentsRect().y()));
-        sceneDetails->setSceneRect(QRectF(0, 0, view->contentsRect().width()-view->contentsRect().x(),
-                                          view->contentsRect().height()-view->contentsRect().y()));
+
+        QRectF rect = sceneDraw->itemsBoundingRect();
+        //Correct BoundingRect
+        rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
+
+        QRect  rec = view->contentsRect();
+        //Correct contentsRect
+        rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
+
+        if(rec.contains(rect.toRect()))
+        {
+            sceneDraw->setSceneRect(rec);
+            sceneDetails->setSceneRect(rec);
+        }
+        else
+        {
+            rect = rect.united(rec);
+            sceneDraw->setSceneRect(rect);
+            sceneDetails->setSceneRect(rect);
+        }
     }
     else
     {
