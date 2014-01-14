@@ -920,6 +920,7 @@ void MainWindow::ActionDraw(bool checked)
 
         currentScene = sceneDraw;
         view->setScene(currentScene);
+        connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
@@ -951,6 +952,7 @@ void MainWindow::ActionDetails(bool checked)
 
         currentScene = sceneDetails;
         view->setScene(sceneDetails);
+        disconnect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         drawMode = false;

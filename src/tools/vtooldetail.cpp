@@ -261,22 +261,30 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 
             QGraphicsScene *sc = this->scene();
             QRectF rect = sc->itemsBoundingRect();
-            //Correct BoundingRect
-            //rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
-            qDebug()<<"rect"<<rect;
 
             QList<QGraphicsView*> list = sc->views();
-            QRect  rec = list[0]->contentsRect();
+            QRect  rec0 = list[0]->rect();
+            rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
+
             QTransform t = list[0]->transform();
-            qDebug()<<"m11="<<t.m11();
-            qDebug()<<"m22="<<t.m22();
-            //Correct contentsRect
-            rec = QRect(0, 0, rec.width()/t.m11() - rec.x(), rec.height()/t.m22() - rec.y());
-//            rec = QRectF(rec.x()/t.m11(), rec.y()/t.m22(), rec.width()/t.m11(), rec.height()/t.m22());
-            qDebug()<<"rec"<<rec;
-            rec = rec.united(rect.toRect());
-            qDebug()<<"rec1"<<rec;
-            sc->setSceneRect(rec);
+
+            QRectF rec1;
+            if(t.m11() < 1)
+            {
+                rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+
+                rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+                QPolygonF polygone =  list[0]->mapToScene(rec1.toRect());
+                rec1 = polygone.boundingRect();
+
+            }
+            else
+            {
+                rec1 = rec0;
+            }
+
+            rec1 = rec1.united(rect.toRect());
+            sc->setSceneRect(rec1);
 
             doc->haveLiteChange();
         }
