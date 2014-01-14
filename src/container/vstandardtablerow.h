@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vstandarttablecell.h
+ **  @file   vstandardtablecell.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,31 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef VSTANDARTTABLEROW_H
-#define VSTANDARTTABLEROW_H
+#ifndef VSTANDARDTABLEROW_H
+#define VSTANDARDTABLEROW_H
 
 #include <QString>
 
 /**
- * @brief The VStandartTableRow class keep data row of standart table
+ * @brief The VStandardTableRow class keep data row of standard table
  */
-class VStandartTableRow
+class VStandardTableRow
 {
 public:
                    /**
-                    * @brief VStandartTableRow create empty row
+                    * @brief VStandardTableRow create empty row
                     */
-                   VStandartTableRow();
+                   VStandardTableRow();
                    /**
-                    * @brief VStandartTableRow create row
+                    * @brief VStandardTableRow create row
                     * @param base value in base size and growth
                     * @param ksize increment in sizes
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VStandartTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
+                   VStandardTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
                                      const QString &description = QString());
-                   ~VStandartTableRow(){}
+                   ~VStandardTableRow(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value
@@ -90,4 +90,4 @@ private:
     QString        description;
 };
 
-#endif // VSTANDARTTABLEROW_H
+#endif // VSTANDARDTABLEROW_H

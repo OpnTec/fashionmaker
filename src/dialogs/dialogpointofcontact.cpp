@@ -39,7 +39,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     labelResultCalculation = ui.labelResultCalculation;
     labelDescription = ui.labelDescription;
     radioButtonSizeGrowth = ui.radioButtonSizeGrowth;
-    radioButtonStandartTable = ui.radioButtonStandartTable;
+    radioButtonStandardTable = ui.radioButtonStandardTable;
     radioButtonIncrements = ui.radioButtonIncrements;
     radioButtonLengthLine = ui.radioButtonLengthLine;
     radioButtonLengthArc = ui.radioButtonLengthArc;
@@ -65,7 +65,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
 
     ShowVariable(data->DataBase());
     connect(ui.radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogPointOfContact::SizeGrowth);
-    connect(ui.radioButtonStandartTable, &QRadioButton::clicked, this, &DialogPointOfContact::StandartTable);
+    connect(ui.radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::StandardTable);
     connect(ui.radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
     connect(ui.radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
     connect(ui.radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);

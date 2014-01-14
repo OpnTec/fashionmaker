@@ -107,9 +107,9 @@ private:
      */
     qint32               column;
     /**
-     * @brief InitialStandartTable initial option standart table
+     * @brief InitialStandardTable initial option standard table
      */
-    void                 InitialStandartTable();
+    void                 InitialStandardTable();
     /**
      * @brief InitialIncrementTable initial option increment table
      */
@@ -127,9 +127,9 @@ private:
      */
     void                 InitialArcsTable();
     /**
-     * @brief FillStandartTable fill data for standart table
+     * @brief FillStandardTable fill data for standard table
      */
-    void                 FillStandartTable();
+    void                 FillStandardTable();
     /**
      * @brief FillIncrementTable fill data for increment table
      */

@@ -40,7 +40,7 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -67,7 +67,7 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogBisector::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogBisector::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogBisector::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogBisector::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogBisector::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogBisector::LengthArcs);

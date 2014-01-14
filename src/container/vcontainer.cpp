@@ -35,7 +35,7 @@ qint64 VContainer::_id = 0;
 
 VContainer::VContainer()
     :base(QHash<QString, qint32>()),  gObjects(QHash<qint64, VGObject *>()),
-      standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
 {
@@ -52,7 +52,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :base(QHash<QString, qint32>()), gObjects(QHash<qint64, VGObject *>()),
-      standartTable(QHash<QString, VStandartTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
 {
@@ -103,7 +103,7 @@ void VContainer::setData(const VContainer &data)
             qWarning()<<"Don't know how copy this type.";
         }
     }
-    standartTable = *data.DataStandartTable();
+    standardTable = *data.DataStandardTable();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
     lineAngles = *data.DataLineAngles();
@@ -143,10 +143,10 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
     }
 }
 
-const VStandartTableRow VContainer::GetStandartTableCell(const QString &name) const
+const VStandardTableRow VContainer::GetStandardTableCell(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
-    return GetVariable(standartTable, name);
+    return GetVariable(standardTable, name);
 }
 
 const VIncrementTableRow VContainer::GetIncrementTableRow(const QString& name) const
@@ -634,9 +634,9 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
     lineAngles[name] = value;
 }
 
-qreal VContainer::GetValueStandartTableCell(const QString& name) const
+qreal VContainer::GetValueStandardTableCell(const QString& name) const
 {
-    VStandartTableRow cell =  GetStandartTableCell(name);
+    VStandardTableRow cell =  GetStandardTableCell(name);
     qreal k_size    = ( static_cast<qreal> (size()/10.0) - 50.0 ) / 2.0;
     qreal k_growth  = ( static_cast<qreal> (growth()/10.0) - 176.0 ) / 6.0;
     qreal value = cell.GetBase() + k_size*cell.GetKsize() + k_growth*cell.GetKgrowth();
@@ -655,7 +655,7 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 void VContainer::Clear()
 {
     _id = 0;
-    standartTable.clear();
+    standardTable.clear();
     incrementTable.clear();
     lengthLines.clear();
     lengthArcs.clear();
@@ -698,10 +698,10 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
         return base.value(name);
     }
 
-    if (standartTable.contains(name))
+    if (standardTable.contains(name))
     {
         *ok = true;
-        return GetValueStandartTableCell(name);
+        return GetValueStandardTableCell(name);
     }
     if (incrementTable.contains(name))
     {
@@ -788,64 +788,64 @@ void VContainer::AddLengthLine(const QString &name, const qreal &value)
 
 void VContainer::CreateManTableIGroup ()
 {
-    AddStandartTableCell("Pkor", VStandartTableRow(84, 0, 3));
-    AddStandartTableCell("Vtos", VStandartTableRow(1450, 2, 51));
-    AddStandartTableCell("Vtosh", VStandartTableRow(1506, 2, 54));
-    AddStandartTableCell("Vpt", VStandartTableRow(1438, 3, 52));
-    AddStandartTableCell("Vst", VStandartTableRow(1257, -1, 49));
-    AddStandartTableCell("Vlt", VStandartTableRow(1102, 0, 43));
-    AddStandartTableCell("Vk", VStandartTableRow(503, 0, 22));
-    AddStandartTableCell("Vsht", VStandartTableRow(1522, 2, 54));
-    AddStandartTableCell("Vzy", VStandartTableRow(1328, 0, 49));
-    AddStandartTableCell("Vlop", VStandartTableRow(1320, 0, 49));
-    AddStandartTableCell("Vps", VStandartTableRow(811, -1, 36));
-    AddStandartTableCell("Ssh", VStandartTableRow(202, 4, 1));
-    AddStandartTableCell("SgI", VStandartTableRow(517, 18, 2));
-    AddStandartTableCell("SgII", VStandartTableRow(522, 19, 1));
-    AddStandartTableCell("SgIII", VStandartTableRow(500, 20, 0));
-    AddStandartTableCell("SbI", VStandartTableRow(482, 12, 6));
-    AddStandartTableCell("Obed", VStandartTableRow(566, 18, 6));
-    AddStandartTableCell("Ok", VStandartTableRow(386, 8, 8));
-    AddStandartTableCell("Oi", VStandartTableRow(380, 8, 6));
-    AddStandartTableCell("Osch", VStandartTableRow(234, 4, 4));
-    AddStandartTableCell("Dsb", VStandartTableRow(1120, 0, 44));
-    AddStandartTableCell("Dsp", VStandartTableRow(1110, 0, 43));
-    AddStandartTableCell("Dn", VStandartTableRow(826, -3, 37));
-    AddStandartTableCell("Dps", VStandartTableRow(316, 4, 7));
-    AddStandartTableCell("Dpob", VStandartTableRow(783, 14, 15));
-    AddStandartTableCell("Ds", VStandartTableRow(260, 1, 6));
-    AddStandartTableCell("Op", VStandartTableRow(316, 12, 0));
-    AddStandartTableCell("Ozap", VStandartTableRow(180, 4, 0));
-    AddStandartTableCell("Pkis", VStandartTableRow(250, 4, 0));
-    AddStandartTableCell("SHp", VStandartTableRow(160, 1, 4));
-    AddStandartTableCell("Dlych", VStandartTableRow(500, 2, 15));
-    AddStandartTableCell("Dzap", VStandartTableRow(768, 2, 24));
-    AddStandartTableCell("DIIIp", VStandartTableRow(970, 2, 29));
-    AddStandartTableCell("Vprp", VStandartTableRow(214, 3, 3));
-    AddStandartTableCell("Vg", VStandartTableRow(262, 8, 3));
-    AddStandartTableCell("Dtp", VStandartTableRow(460, 7, 9));
-    AddStandartTableCell("Dp", VStandartTableRow(355, 5, 5));
-    AddStandartTableCell("Vprz", VStandartTableRow(208, 3, 5));
-    AddStandartTableCell("Dts", VStandartTableRow(438, 2, 10));
-    AddStandartTableCell("DtsI", VStandartTableRow(469, 2, 10));
-    AddStandartTableCell("Dvcht", VStandartTableRow(929, 9, 19));
-    AddStandartTableCell("SHg", VStandartTableRow(370, 14, 4));
-    AddStandartTableCell("Cg", VStandartTableRow(224, 6, 0));
-    AddStandartTableCell("SHs", VStandartTableRow(416, 10, 2));
-    AddStandartTableCell("dpzr", VStandartTableRow(121, 6, 0));
-    AddStandartTableCell("Ogol", VStandartTableRow(576, 4, 4));
-    AddStandartTableCell("Ssh1", VStandartTableRow(205, 5, 0));
+    AddStandardTableCell("Pkor", VStandardTableRow(84, 0, 3));
+    AddStandardTableCell("Vtos", VStandardTableRow(1450, 2, 51));
+    AddStandardTableCell("Vtosh", VStandardTableRow(1506, 2, 54));
+    AddStandardTableCell("Vpt", VStandardTableRow(1438, 3, 52));
+    AddStandardTableCell("Vst", VStandardTableRow(1257, -1, 49));
+    AddStandardTableCell("Vlt", VStandardTableRow(1102, 0, 43));
+    AddStandardTableCell("Vk", VStandardTableRow(503, 0, 22));
+    AddStandardTableCell("Vsht", VStandardTableRow(1522, 2, 54));
+    AddStandardTableCell("Vzy", VStandardTableRow(1328, 0, 49));
+    AddStandardTableCell("Vlop", VStandardTableRow(1320, 0, 49));
+    AddStandardTableCell("Vps", VStandardTableRow(811, -1, 36));
+    AddStandardTableCell("Ssh", VStandardTableRow(202, 4, 1));
+    AddStandardTableCell("SgI", VStandardTableRow(517, 18, 2));
+    AddStandardTableCell("SgII", VStandardTableRow(522, 19, 1));
+    AddStandardTableCell("SgIII", VStandardTableRow(500, 20, 0));
+    AddStandardTableCell("SbI", VStandardTableRow(482, 12, 6));
+    AddStandardTableCell("Obed", VStandardTableRow(566, 18, 6));
+    AddStandardTableCell("Ok", VStandardTableRow(386, 8, 8));
+    AddStandardTableCell("Oi", VStandardTableRow(380, 8, 6));
+    AddStandardTableCell("Osch", VStandardTableRow(234, 4, 4));
+    AddStandardTableCell("Dsb", VStandardTableRow(1120, 0, 44));
+    AddStandardTableCell("Dsp", VStandardTableRow(1110, 0, 43));
+    AddStandardTableCell("Dn", VStandardTableRow(826, -3, 37));
+    AddStandardTableCell("Dps", VStandardTableRow(316, 4, 7));
+    AddStandardTableCell("Dpob", VStandardTableRow(783, 14, 15));
+    AddStandardTableCell("Ds", VStandardTableRow(260, 1, 6));
+    AddStandardTableCell("Op", VStandardTableRow(316, 12, 0));
+    AddStandardTableCell("Ozap", VStandardTableRow(180, 4, 0));
+    AddStandardTableCell("Pkis", VStandardTableRow(250, 4, 0));
+    AddStandardTableCell("SHp", VStandardTableRow(160, 1, 4));
+    AddStandardTableCell("Dlych", VStandardTableRow(500, 2, 15));
+    AddStandardTableCell("Dzap", VStandardTableRow(768, 2, 24));
+    AddStandardTableCell("DIIIp", VStandardTableRow(970, 2, 29));
+    AddStandardTableCell("Vprp", VStandardTableRow(214, 3, 3));
+    AddStandardTableCell("Vg", VStandardTableRow(262, 8, 3));
+    AddStandardTableCell("Dtp", VStandardTableRow(460, 7, 9));
+    AddStandardTableCell("Dp", VStandardTableRow(355, 5, 5));
+    AddStandardTableCell("Vprz", VStandardTableRow(208, 3, 5));
+    AddStandardTableCell("Dts", VStandardTableRow(438, 2, 10));
+    AddStandardTableCell("DtsI", VStandardTableRow(469, 2, 10));
+    AddStandardTableCell("Dvcht", VStandardTableRow(929, 9, 19));
+    AddStandardTableCell("SHg", VStandardTableRow(370, 14, 4));
+    AddStandardTableCell("Cg", VStandardTableRow(224, 6, 0));
+    AddStandardTableCell("SHs", VStandardTableRow(416, 10, 2));
+    AddStandardTableCell("dpzr", VStandardTableRow(121, 6, 0));
+    AddStandardTableCell("Ogol", VStandardTableRow(576, 4, 4));
+    AddStandardTableCell("Ssh1", VStandardTableRow(205, 5, 0));
 
     //TODO Posible duplicate. Need check.
-    //AddStandartTableCell("St", VStandartTableRow(410, 20, 0));
-    AddStandartTableCell("St", VStandartTableRow(390, 20, 0));
+    //AddStandardTableCell("St", VStandardTableRow(410, 20, 0));
+    AddStandardTableCell("St", VStandardTableRow(390, 20, 0));
 
-    AddStandartTableCell("Drzap", VStandartTableRow(594, 3, 19));
-    AddStandartTableCell("DbII", VStandartTableRow(1020, 0, 44));
+    AddStandardTableCell("Drzap", VStandardTableRow(594, 3, 19));
+    AddStandardTableCell("DbII", VStandardTableRow(1020, 0, 44));
 
     //TODO Posible duplicate. Need check.
-    //AddStandartTableCell("Sb", VStandartTableRow(504, 15, 4));
-    AddStandartTableCell("Sb", VStandartTableRow(492, 15, 5));
+    //AddStandardTableCell("Sb", VStandardTableRow(504, 15, 4));
+    AddStandardTableCell("Sb", VStandardTableRow(492, 15, 5));
 }
 
 QVector<QPointF> VContainer::GetReversePoint(const QVector<QPointF> &points) const

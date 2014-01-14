@@ -60,7 +60,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     listWidget = ui->listWidget;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -73,7 +73,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogArc::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogArc::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogArc::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
     connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineAngles);

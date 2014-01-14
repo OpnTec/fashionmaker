@@ -29,13 +29,13 @@
      <property name="currentIndex">
       <number>1</number>
      </property>
-     <widget class="QWidget" name="tabStandart">
+     <widget class="QWidget" name="tabStandard">
       <attribute name="title">
        <string>Sizes table</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QTableWidget" name="tableWidgetStandart">
+        <widget class="QTableWidget" name="tableWidgetStandard">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -346,7 +346,7 @@
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
-  <tabstop>tableWidgetStandart</tabstop>
+  <tabstop>tableWidgetStandard</tabstop>
   <tabstop>tableWidgetIncrement</tabstop>
   <tabstop>toolButtonAdd</tabstop>
   <tabstop>toolButtonRemove</tabstop>

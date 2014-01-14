@@ -245,7 +245,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonStandartTable">
+          <widget class="QRadioButton" name="radioButtonStandardTable">
            <property name="text">
             <string>Standard table</string>
            </property>

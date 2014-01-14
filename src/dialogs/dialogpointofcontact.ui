@@ -333,7 +333,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonStandartTable">
+          <widget class="QRadioButton" name="radioButtonStandardTable">
            <property name="text">
             <string>Standard table</string>
            </property>
@@ -415,7 +415,7 @@
   <tabstop>comboBoxFirstPoint</tabstop>
   <tabstop>comboBoxSecondPoint</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
-  <tabstop>radioButtonStandartTable</tabstop>
+  <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
   <tabstop>radioButtonLengthLine</tabstop>
   <tabstop>radioButtonLengthArc</tabstop>

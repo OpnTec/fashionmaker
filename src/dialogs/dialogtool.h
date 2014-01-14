@@ -140,9 +140,9 @@ public slots:
      */
     void             SizeGrowth();
     /**
-     * @brief StandartTable show in list standart table variables
+     * @brief StandardTable show in list standard table variables
      */
-    void             StandartTable();
+    void             StandardTable();
     /**
      * @brief LengthLines show in list lengths of lines variables
      */
@@ -236,9 +236,9 @@ protected:
      */
     QRadioButton     *radioButtonSizeGrowth;
     /**
-     * @brief radioButtonStandartTable radio button for standart table variables
+     * @brief radioButtonStandardTable radio button for standard table variables
      */
-    QRadioButton     *radioButtonStandartTable;
+    QRadioButton     *radioButtonStandardTable;
     /**
      * @brief radioButtonIncrements radio button for increments variables
      */

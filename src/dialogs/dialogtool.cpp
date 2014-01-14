@@ -35,7 +35,7 @@
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
       spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
-      labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandartTable(0),
+      labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandardTable(0),
       radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0)
 {
     Q_ASSERT(data != 0);
@@ -500,9 +500,9 @@ void DialogTool::SizeGrowth()
     ShowVariable(data->DataBase());
 }
 
-void DialogTool::StandartTable()
+void DialogTool::StandardTable()
 {
-    ShowVariable(data->DataStandartTable());
+    ShowVariable(data->DataStandardTable());
 }
 
 void DialogTool::LengthLines()
@@ -546,7 +546,7 @@ void DialogTool::ValChenged(int row)
     Q_ASSERT(listWidget != 0);
     Q_ASSERT(labelDescription != 0);
     Q_ASSERT(radioButtonSizeGrowth != 0);
-    Q_ASSERT(radioButtonStandartTable != 0);
+    Q_ASSERT(radioButtonStandardTable != 0);
     Q_ASSERT(radioButtonIncrements != 0);
     Q_ASSERT(radioButtonLengthLine != 0);
     Q_ASSERT(radioButtonLengthArc != 0);
@@ -570,10 +570,10 @@ void DialogTool::ValChenged(int row)
         }
         return;
     }
-    if (radioButtonStandartTable->isChecked())
+    if (radioButtonStandardTable->isChecked())
     {
-        VStandartTableRow stable = data->GetStandartTableCell(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandartTableCell(item->text()))
+        VStandardTableRow stable = data->GetStandardTableCell(item->text());
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableCell(item->text()))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
@@ -612,7 +612,7 @@ void DialogTool::ValChenged(int row)
 void DialogTool::UpdateList()
 {
     Q_ASSERT(radioButtonSizeGrowth != 0);
-    Q_ASSERT(radioButtonStandartTable != 0);
+    Q_ASSERT(radioButtonStandardTable != 0);
     Q_ASSERT(radioButtonIncrements != 0);
     Q_ASSERT(radioButtonLengthLine != 0);
     Q_ASSERT(radioButtonLengthArc != 0);
@@ -622,9 +622,9 @@ void DialogTool::UpdateList()
     {
         ShowVariable(data->DataBase());
     }
-    if (radioButtonStandartTable->isChecked())
+    if (radioButtonStandardTable->isChecked())
     {
-        ShowVariable(data->DataStandartTable());
+        ShowVariable(data->DataStandardTable());
     }
     if (radioButtonIncrements->isChecked())
     {

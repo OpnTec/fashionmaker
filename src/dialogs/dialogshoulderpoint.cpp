@@ -41,7 +41,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -68,7 +68,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogShoulderPoint::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogShoulderPoint::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogShoulderPoint::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogShoulderPoint::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogShoulderPoint::LengthArcs);

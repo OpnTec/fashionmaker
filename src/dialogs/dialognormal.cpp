@@ -41,7 +41,7 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -83,7 +83,7 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogNormal::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogNormal::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogNormal::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogNormal::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogNormal::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogNormal::LengthArcs);

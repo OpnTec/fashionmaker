@@ -40,7 +40,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -66,7 +66,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogAlongLine::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogAlongLine::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogAlongLine::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogAlongLine::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogAlongLine::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogAlongLine::LengthArcs);

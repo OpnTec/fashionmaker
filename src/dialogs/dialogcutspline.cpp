@@ -37,7 +37,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -61,7 +61,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogCutSpline::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogCutSpline::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogCutSpline::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogCutSpline::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogCutSpline::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogCutSpline::LengthArcs);

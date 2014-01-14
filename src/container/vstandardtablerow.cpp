@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vstandarttablecell.cpp
+ **  @file   vstandardtablecell.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,11 +26,11 @@
  **
  *************************************************************************/
 
-#include "vstandarttablerow.h"
+#include "vstandardtablerow.h"
 
-VStandartTableRow::VStandartTableRow()
+VStandardTableRow::VStandardTableRow()
     :base(0), ksize(0), kgrowth(0), description(QString()){}
 
-VStandartTableRow::VStandartTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
+VStandardTableRow::VStandardTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
                                      const QString &description)
     :base(base), ksize(ksize), kgrowth(kgrowth), description(description){}

@@ -37,7 +37,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
     radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandartTable = ui->radioButtonStandartTable;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
     radioButtonIncrements = ui->radioButtonIncrements;
     radioButtonLengthLine = ui->radioButtonLengthLine;
     radioButtonLengthArc = ui->radioButtonLengthArc;
@@ -61,7 +61,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
 
     ShowVariable(data->DataBase());
     connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogCutArc::SizeGrowth);
-    connect(ui->radioButtonStandartTable, &QRadioButton::clicked, this, &DialogCutArc::StandartTable);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogCutArc::StandardTable);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogCutArc::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogCutArc::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogCutArc::LengthArcs);
