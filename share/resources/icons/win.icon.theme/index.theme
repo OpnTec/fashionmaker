@@ -5,7 +5,7 @@ Inherits=gnome,hicolor
 Example=x-directory-normal
 
 #Directories
-Directories=16x16/actions,24x24/actions,32x32/actions,scalable/actions
+Directories=16x16/actions,24x24/actions,32x32/actions
 
 [16x16/actions]
 Size=16
@@ -22,8 +22,4 @@ Size=32
 Context=Actions
 Type=Fixed
 
-[scalable/actions]
-Size=128
-Context=Actions
-Type=scalable
 
