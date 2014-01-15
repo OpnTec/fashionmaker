@@ -74,6 +74,34 @@ VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QOb
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
 }
 
+void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
+{
+    QRectF rect = sc->itemsBoundingRect();
+
+    QRect  rec0 = view->rect();
+    rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
+
+    QTransform t = view->transform();
+
+    QRectF rec1;
+    if(t.m11() < 1)
+    {
+        rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+
+        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+        QPolygonF polygone =  view->mapToScene(rec1.toRect());
+        rec1 = polygone.boundingRect();
+
+    }
+    else
+    {
+        rec1 = rec0;
+    }
+
+    rec1 = rec1.united(rect.toRect());
+    sc->setSceneRect(rec1);
+}
+
 QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
 {
     qreal x1, y1, x2, y2;

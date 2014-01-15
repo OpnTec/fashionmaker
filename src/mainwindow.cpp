@@ -1035,25 +1035,8 @@ void MainWindow::ActionOpen()
     {
         OpenPattern(fName);
 
-        QRectF rect = sceneDraw->itemsBoundingRect();
-        //Correct BoundingRect
-        rect = QRectF(0, 0, rect.width() + rect.x(), rect.height() + rect.y());
-
-        QRect  rec = view->contentsRect();
-        //Correct contentsRect
-        rec = QRect(0, 0, rec.width() - rec.x(), rec.height() - rec.y());
-
-        if(rec.contains(rect.toRect()))
-        {
-            sceneDraw->setSceneRect(rec);
-            sceneDetails->setSceneRect(rec);
-        }
-        else
-        {
-            rect = rect.united(rec);
-            sceneDraw->setSceneRect(rect);
-            sceneDetails->setSceneRect(rect);
-        }
+        VAbstractTool::NewSceneRect(sceneDraw, view);
+        VAbstractTool::NewSceneRect(sceneDetails, view);
     }
     else
     {

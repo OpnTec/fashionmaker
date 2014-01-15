@@ -32,6 +32,7 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
+#include "../tools/vabstracttool.h"
 
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     :QGraphicsView(parent), _numScheduledScalings(0)
@@ -80,31 +81,7 @@ void VMainGraphicsView::scalingTime(qreal x)
     horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
     verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
 
-    QGraphicsScene *sc = this->scene();
-    QRectF rect = sc->itemsBoundingRect();
-
-    QRect  rec0 = this->rect();
-    rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
-
-    QTransform t = this->transform();
-
-    QRectF rec1;
-    if(t.m11() < 1)
-    {
-        rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
-
-        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
-        QPolygonF polygone =  this->mapToScene(rec1.toRect());
-        rec1 = polygone.boundingRect();
-
-    }
-    else
-    {
-        rec1 = rec0;
-    }
-
-    rec1 = rec1.united(rect.toRect());
-    sc->setSceneRect(rec1);
+    VAbstractTool::NewSceneRect(this->scene(), this);
 
     emit NewFactor(factor);
 }

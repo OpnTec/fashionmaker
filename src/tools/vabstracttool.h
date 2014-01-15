@@ -48,6 +48,7 @@ public:
                              */
                             VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual                 ~VAbstractTool() {}
+    static void             NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     /**
      * @brief LineIntersectRect
      * @param rec
