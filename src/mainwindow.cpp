@@ -979,17 +979,17 @@ void MainWindow::ActionDetails(bool checked)
 
 void MainWindow::ActionSaveAs()
 {
-    QString filters(tr("Lekalo files (*.xml);;All files (*.*)"));
-    QString defaultFilter(tr("Lekalo files (*.xml)"));
-    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), QDir::homePath(),
-                                                 filters, &defaultFilter);
+    QString filters(tr("Pattern files (*.val)"));
+    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), QDir::homePath(), filters);
+
     if (fName.isEmpty())
     {
         return;
     }
-    if (fName.indexOf(".xml", fName.size()-4)<0)
+    QFileInfo f( fName );
+    if (f.suffix().isEmpty() && f.suffix() != "val")
     {
-        fName.append(".xml");
+        fName += ".val";
     }
     fileName = fName;
 
@@ -1025,7 +1025,7 @@ void MainWindow::ActionSave()
 
 void MainWindow::ActionOpen()
 {
-    QString filter(tr("Lekalo files (*.xml)"));
+    QString filter(tr("Pattern files (*.val)"));
     QString fName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
     if (fName.isEmpty())
     {
