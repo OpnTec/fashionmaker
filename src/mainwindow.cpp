@@ -261,7 +261,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
 {
     if (checked)
     {
-        CanselTool();
+        CancelTool();
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
@@ -453,7 +453,7 @@ void MainWindow::ToolDetail(bool checked)
 {
     if (checked)
     {
-        CanselTool();
+        CancelTool();
         tool = Tool::Detail;
         QPixmap pixmap("://cursor/new_detail_cursor.png");
         QCursor cur(pixmap, 2, 3);
@@ -731,7 +731,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
     mouseCoordinate->setText(string);
 }
 
-void MainWindow::CanselTool()
+void MainWindow::CancelTool()
 {
     switch ( tool )
     {
@@ -863,7 +863,7 @@ void MainWindow::CanselTool()
 
 void  MainWindow::ArrowTool()
 {
-    CanselTool();
+    CancelTool();
     ui->actionArrowTool->setChecked(true);
     tool = Tool::ArrowTool;
     QCursor cur(Qt::ArrowCursor);
@@ -1057,7 +1057,7 @@ void MainWindow::Clear()
     doc->clear();
     sceneDraw->clear();
     sceneDetails->clear();
-    CanselTool();
+    CancelTool();
     comboBoxDraws->clear();
     fileName.clear();
     ui->actionOptionDraw->setEnabled(false);
@@ -1300,7 +1300,7 @@ void MainWindow::AutoSavePattern()
 
 MainWindow::~MainWindow()
 {
-    CanselTool();
+    CancelTool();
     delete ui;
 
     delete pattern;

@@ -523,7 +523,7 @@ private:
     /**
      * @brief CanselTool
      */
-    void               CanselTool();
+    void               CancelTool();
     /**
      * @brief ArrowTool
      */

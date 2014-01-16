@@ -48,7 +48,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>150</height>
+         <height>144</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -303,7 +303,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>58</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -379,7 +379,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>104</height>
+         <height>100</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -507,7 +507,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>58</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -580,7 +580,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>58</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -664,7 +664,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -764,6 +764,9 @@
    <property name="toolTip">
     <string>Create a new pattern</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionOpen">
    <property name="icon">
@@ -793,6 +796,9 @@
    <property name="toolTip">
     <string>Save pattern</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionSaveAs">
    <property name="enabled">
@@ -808,6 +814,9 @@
    </property>
    <property name="toolTip">
     <string>Save not yet saved pattern</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionDraw">
@@ -830,6 +839,9 @@
    <property name="toolTip">
     <string>Draw mode</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
   </action>
   <action name="actionDetails">
    <property name="checkable">
@@ -847,6 +859,9 @@
    </property>
    <property name="toolTip">
     <string>Details mode</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionArrowTool">
@@ -878,6 +893,9 @@
    <property name="toolTip">
     <string>Add new pattern piece</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+N</string>
+   </property>
   </action>
   <action name="actionOptionDraw">
    <property name="icon">
@@ -905,6 +923,9 @@
    <property name="toolTip">
     <string>Tables of variables</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
   </action>
   <action name="actionHistory">
    <property name="checkable">
@@ -917,6 +938,9 @@
    <property name="text">
     <string>History</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
   <action name="actionLayout">
    <property name="icon">
@@ -928,6 +952,9 @@
    </property>
    <property name="toolTip">
     <string>Create layout</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -943,6 +970,9 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>
