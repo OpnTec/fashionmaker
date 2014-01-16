@@ -14,7 +14,7 @@
    <string>Curve path</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -53,6 +53,9 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm1">
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
            <property name="value">
             <double>1.000000000000000</double>
            </property>
@@ -95,6 +98,9 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm2">
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
            <property name="value">
             <double>1.000000000000000</double>
            </property>
@@ -169,6 +175,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="singleStep">
+        <double>0.010000000000000</double>
+       </property>
        <property name="value">
         <double>1.000000000000000</double>
        </property>
@@ -199,7 +208,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>
