@@ -68,7 +68,7 @@ public slots:
      *моделі.
      * @param listDetails Список моделей деталі.
      */
-    void                  ModelChosen(QVector<VItem*> listDetails);
+    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
     /**
      * @brief StopTable Слот, що виконується при хованні вікна. Виконує неохідні очищення і ховає
      *вікно.
@@ -195,6 +195,7 @@ private:
      * @brief sceneRect Мінімальний розмір листа паперу що буде показуватися на сцені.
      */
     QRectF                sceneRect;
+    QString               fileName;
     /**
      * @brief SvgFile
      * @param name

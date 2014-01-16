@@ -345,7 +345,7 @@ signals:
      * @brief ModelChosen Сигнал, що висилається після розрахунку всіх деталей моделі.
      * @param listDetails Список детайле моделі.
      */
-    void               ModelChosen(QVector<VItem*> listDetails);
+    void               ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
 protected:
     /**
      * @brief keyPressEvent

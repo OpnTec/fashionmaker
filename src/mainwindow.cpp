@@ -1158,7 +1158,7 @@ void MainWindow::ActionLayout(bool checked)
     hide();
     QVector<VItem*> listDetails;
     pattern->PrepareDetails(listDetails);
-    emit ModelChosen(listDetails);
+    emit ModelChosen(listDetails, fileName);
 }
 
 void MainWindow::ClosedActionHistory()

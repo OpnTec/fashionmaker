@@ -37,7 +37,7 @@ TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
     paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
-    indexDetail(0), sceneRect(QRectF())
+    indexDetail(0), sceneRect(QRectF()), fileName(QString())
 {
     ui->setupUi(this);
     numberDetal = new QLabel(tr("0 details left."), this);
@@ -118,8 +118,10 @@ void TableWindow::AddDetail()
 /*
  * Get details for creation layout.
  */
-void TableWindow::ModelChosen(QVector<VItem*> listDetails)
+void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName)
 {
+    this->fileName = fileName;
+    this->fileName.remove(this->fileName.size()-4, 4);
     this->listDetails = listDetails;
     listOutItems = new QBitArray(this->listDetails.count());
     AddPaper();
@@ -177,7 +179,8 @@ void TableWindow::saveScene()
 
     QString sf;
     // the save function
-    QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), QDir::homePath(), saveMessage, &sf);
+    QString dir = QDir::homePath()+fileName;
+    QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), dir, saveMessage, &sf);
 
     if (name.isEmpty())
     {
