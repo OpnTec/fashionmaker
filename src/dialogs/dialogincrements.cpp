@@ -37,11 +37,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
 {
     ui->setupUi(this);
-    InitialStandardTable();
-    InitialIncrementTable();
-    InitialLinesTable();
-    InitialSplinesTable();
-    InitialArcsTable();
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
@@ -278,24 +273,19 @@ void DialogIncrements::FullUpdateFromFile()
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
                &DialogIncrements::cellChanged);
 
-    ui->tableWidgetStandard->clear();
-    InitialStandardTable();
+    ui->tableWidgetStandard->clearContents();
     FillStandardTable();
 
     ui->tableWidgetIncrement->clearContents();
-    //InitialIncrementTable();
     FillIncrementTable();
 
-    ui->tableWidgetLines->clear();
-    InitialLinesTable();
+    ui->tableWidgetLines->clearContents();
     FillLengthLines();
 
-    ui->tableWidgetSplines->clear();
-    InitialSplinesTable();
+    ui->tableWidgetSplines->clearContents();
     FillLengthSplines();
 
-    ui->tableWidgetArcs->clear();
-    InitialArcsTable();
+    ui->tableWidgetArcs->clearContents();
     FillLengthArcs();
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
@@ -509,47 +499,6 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
         default:
             break;
     }
-}
-
-void DialogIncrements::InitialStandardTable()
-{
-    ui->tableWidgetStandard->setSortingEnabled(false);
-    ui->tableWidgetStandard->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Name")));
-    ui->tableWidgetStandard->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
-    ui->tableWidgetStandard->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
-    ui->tableWidgetStandard->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
-    ui->tableWidgetStandard->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("In growth")));
-    ui->tableWidgetStandard->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Description")));
-}
-
-void DialogIncrements::InitialIncrementTable()
-{
-    ui->tableWidgetIncrement->setSortingEnabled(false);
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Name")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Calculated value")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Base value")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("In size")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("In growth")));
-    ui->tableWidgetIncrement->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Description")));
-    ui->tableWidgetIncrement->verticalHeader()->setDefaultSectionSize(20);
-}
-
-void DialogIncrements::InitialLinesTable()
-{
-    ui->tableWidgetLines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Line")));
-    ui->tableWidgetLines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
-}
-
-void DialogIncrements::InitialSplinesTable()
-{
-    ui->tableWidgetSplines->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Curve")));
-    ui->tableWidgetSplines->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
-}
-
-void DialogIncrements::InitialArcsTable()
-{
-    ui->tableWidgetArcs->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Arc")));
-    ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
 }
 
 void DialogIncrements::closeEvent(QCloseEvent *event)

@@ -105,26 +105,6 @@ private:
      */
     qint32               column;
     /**
-     * @brief InitialStandardTable initial option standard table
-     */
-    void                 InitialStandardTable();
-    /**
-     * @brief InitialIncrementTable initial option increment table
-     */
-    void                 InitialIncrementTable();
-    /**
-     * @brief InitialLinesTable initial option lines table
-     */
-    void                 InitialLinesTable();
-    /**
-     * @brief InitialSplinesTable initial option splines table
-     */
-    void                 InitialSplinesTable();
-    /**
-     * @brief InitialArcsTable initial option arcs table
-     */
-    void                 InitialArcsTable();
-    /**
      * @brief FillStandardTable fill data for standard table
      */
     void                 FillStandardTable();
