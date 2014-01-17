@@ -42,7 +42,7 @@ public:
              * @brief DoubleSpinBoxDelegate
              * @param parent
              */
-            DoubleSpinBoxDelegate(QObject *parent = 0): QItemDelegate(parent){}
+    DoubleSpinBoxDelegate(QObject *parent = 0): QItemDelegate(parent), lastValue(-10001.0){}
     /**
      * @brief createEditor
      * @param parent
@@ -71,6 +71,10 @@ public:
      * @param index
      */
     void    updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+public slots:
+    void    commitAndCloseEditor();
+private:
+    qreal lastValue;
 };
 
 #endif

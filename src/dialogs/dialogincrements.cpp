@@ -62,8 +62,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this,
             &DialogIncrements::FullUpdateFromFile);
 
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogIncrements::DialogAccepted);
     ui->tabWidget->setCurrentIndex(0);
 }
 
@@ -284,8 +282,8 @@ void DialogIncrements::FullUpdateFromFile()
     InitialStandardTable();
     FillStandardTable();
 
-    ui->tableWidgetIncrement->clear();
-    InitialIncrementTable();
+    ui->tableWidgetIncrement->clearContents();
+    //InitialIncrementTable();
     FillIncrementTable();
 
     ui->tableWidgetLines->clear();
@@ -306,9 +304,9 @@ void DialogIncrements::FullUpdateFromFile()
 
 void DialogIncrements::clickedToolButtonAdd()
 {
+    ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
                &DialogIncrements::cellChanged);
-    ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
     qint32 currentRow  = ui->tableWidgetIncrement->rowCount();
     ui->tableWidgetIncrement->insertRow( currentRow );
 
@@ -316,7 +314,7 @@ void DialogIncrements::clickedToolButtonAdd()
     QString name;
     do
     {
-        name = QString(tr("Name %1")).arg(num);
+        name = QString(tr("Name_%1")).arg(num);
         num++;
     } while (data->IncrementTableContains(name));
 
@@ -554,9 +552,10 @@ void DialogIncrements::InitialArcsTable()
     ui->tableWidgetArcs->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Length")));
 }
 
-void DialogIncrements::DialogAccepted()
+void DialogIncrements::closeEvent(QCloseEvent *event)
 {
     emit DialogClosed(QDialog::Accepted);
+    event->accept();
 }
 
 DialogIncrements::~DialogIncrements()

@@ -71,10 +71,6 @@ public slots:
      * @brief FullUpdateFromFile update information in tables form file
      */
     void                 FullUpdateFromFile();
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
-    virtual void         DialogAccepted();
 signals:
     /**
      * @brief FullUpdateTree signal update data for dom document
@@ -84,6 +80,8 @@ signals:
      * @brief haveLiteChange signal show sign of change
      */
     void                 haveLiteChange();
+protected:
+    virtual void         closeEvent ( QCloseEvent * event );
 private:
     Q_DISABLE_COPY(DialogIncrements)
     /**
