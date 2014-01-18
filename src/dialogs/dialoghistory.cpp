@@ -364,6 +364,21 @@ QString DialogHistory::Record(const VToolRecord &tool)
                                                                                 firstPointIdName, secondPointIdName);
             break;
         }
+        case Tool::PointOfIntersection:
+        {
+            domElement = doc->elementById(QString().setNum(tool.getId()));
+            if (domElement.isElement())
+            {
+                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+            }
+            QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
+            QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
+            QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
+            record = QString(tr("%1 - point of intersection %2 and %3")).arg(toolIdName, firstPointIdName,
+                                                                             secondPointIdName);
+        }
+        break;
         case Tool::CutArcTool:
         {
             qint64 arcId = 0;

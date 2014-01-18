@@ -87,7 +87,7 @@ void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Triangle, doc);
+    VDrawTool::AddRecord(id, Tool::PointOfIntersection, doc);
     if (parse == Document::FullParse)
     {
         VToolPointOfIntersection *point = new VToolPointOfIntersection(doc, data, id, firstPointId,
