@@ -49,9 +49,11 @@ RESOURCES += \
 OTHER_FILES += share/resources/valentina.rc \
     share/resources/icon/64x64/icon64x64.ico
 
-TRANSLATIONS += share/translations/valentina_ru.ts \
+TRANSLATIONS += share/translations/valentina.ts \
+                share/translations/valentina_ru.ts \
                 share/translations/valentina_uk.ts \
                 share/translations/valentina_de.ts
+
 unix {
 QMAKE_CXX = ccache g++
 }
