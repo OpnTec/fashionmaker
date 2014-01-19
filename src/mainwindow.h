@@ -559,6 +559,8 @@ private:
      * @brief MinimumScrollBar
      */
     void               MinimumScrollBar();
+    bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
+                         qint64 &errorColumn) const;
     template <typename T>
     /**
      * @brief AddToolToDetail

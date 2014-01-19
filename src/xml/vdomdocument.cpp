@@ -126,9 +126,6 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 void VDomDocument::CreateEmptyFile()
 {
     QDomElement domElement = this->createElement("pattern");
-    QDomAttr domAttr = createAttribute("xmlns");
-    domAttr.setValue("http://www.opengis.net/kml/2.2");
-    domElement.setAttributeNode(domAttr);
 
     this->appendChild(domElement);
     QDomNode xmlNode = this->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document-->
+         <xs:element name="pattern">
+               <xs:complexType>
+                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                           <xs:element name="increments" minOccurs="0" maxOccurs="1">
+                                 <xs:complexType>
+                                       <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                                             <xs:element name="increment" minOccurs="0" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="ksize" type="xs:double"></xs:attribute>
+                                                         <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                         <xs:attribute name="description" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="kgrowth" type="xs:double"></xs:attribute>
+                                                         <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="base" type="xs:double"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="draw" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="calculation" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="x" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="y" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="firstPoint" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="secondPoint" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="basePoint" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="pShoulder" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="p1Line" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="p2Line" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="length" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="angle" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="splinePath" type="xs:long"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="firstPoint" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="secondPoint" type="xs:long"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element> 
+                                                               <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="angle1" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="angle2" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="radius" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="center" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="pathPoint">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="kAsm2" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="pSpline" type="xs:long"></xs:attribute>
+                                                                                             <xs:attribute name="angle" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="kAsm1" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="kCurve" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="kAsm1" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="kAsm2" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="angle1" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="angle2" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="point1" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="point4" type="xs:long"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="modeling" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="idObject" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="mx" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="my" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="idObject" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="idObject" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="det" minOccurs="2" maxOccurs="2">
+                                                                                       <xs:complexType>
+                                                                                             <xs:sequence>
+                                                                                                   <xs:element name="node" maxOccurs="unbounded">
+                                                                                                         <xs:complexType>
+                                                                                                               <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
+                                                                                                               <xs:attribute name="idObject" type="xs:long"></xs:attribute>
+                                                                                                               <xs:attribute name="mx" type="xs:long"></xs:attribute>
+                                                                                                               <xs:attribute name="my" type="xs:long"></xs:attribute>
+                                                                                                               <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                                         </xs:complexType>
+                                                                                                   </xs:element>
+                                                                                             </xs:sequence>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="indexD1" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="indexD2" type="xs:long"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="details" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="detail" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="node" maxOccurs="unbounded">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="idObject" type="xs:long"></xs:attribute>
+                                                                                             <xs:attribute name="mx" type="xs:long"></xs:attribute>
+                                                                                             <xs:attribute name="my" type="xs:long"></xs:attribute>
+                                                                                             <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                           <xs:attribute name="id" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="supplement" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="width" type="xs:long"></xs:attribute>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="closed" type="xs:long"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>

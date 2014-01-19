@@ -317,7 +317,9 @@ protected:
     void AddAttribute(QDomElement &domElement, const QString &name, const T &value)
     {
         QDomAttr domAttr = doc->createAttribute(name);
-        domAttr.setValue(QString().setNum(value));
+        QString val = QString().setNum(value);
+        val = val.replace(",", ".");
+        domAttr.setValue(val);
         domElement.setAttributeNode(domAttr);
     }
 private:

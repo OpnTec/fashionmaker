@@ -43,6 +43,35 @@
 #include <QShowEvent>
 #include <QScrollBar>
 #include <QFileDialog>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
+#include <QSourceLocation>
+#include <QAbstractMessageHandler>
+
+class MessageHandler : public QAbstractMessageHandler
+{
+public:
+    MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
+        m_sourceLocation(QSourceLocation()){}
+    inline QString statusMessage() const {return m_description;}
+    inline qint64     line() const {return m_sourceLocation.line();}
+    inline qint64     column() const {return m_sourceLocation.column();}
+protected:
+    virtual void handleMessage(QtMsgType type, const QString &description,
+                               const QUrl &identifier, const QSourceLocation &sourceLocation)
+    {
+        Q_UNUSED(type);
+        Q_UNUSED(identifier);
+
+        m_messageType = type;
+        m_description = description;
+        m_sourceLocation = sourceLocation;
+    }
+private:
+    QtMsgType       m_messageType;
+    QString         m_description;
+    QSourceLocation m_sourceLocation;
+};
 
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
@@ -1211,6 +1240,65 @@ void MainWindow::MinimumScrollBar()
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
+bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
+                                 qint64 &errorColumn) const
+{
+    QFile pattern(fileName);
+    if (pattern.open(QIODevice::ReadOnly) == false)
+    {
+        errorMsg = QString(tr("Can't open pattern file."));
+        errorLine = -1;
+        errorColumn = -1;
+        return false;
+    }
+    if(schema.isEmpty())
+    {
+        errorMsg = QString(tr("Empty schema path."));
+        errorLine = -1;
+        errorColumn = -1;
+        return false;
+    }
+    QFile fileSchema(schema);
+    if(fileSchema.open(QIODevice::ReadOnly) == false)
+    {
+        errorMsg = QString(tr("Can't open schema file."));
+        errorLine = -1;
+        errorColumn = -1;
+        return false;
+    }
+
+    MessageHandler messageHandler;
+    QXmlSchema sch;
+    sch.setMessageHandler(&messageHandler);
+    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
+
+    bool errorOccurred = false;
+    if (!sch.isValid())
+    {
+        errorOccurred = true;
+    }
+    else
+    {
+        QXmlSchemaValidator validator(sch);
+        if (!validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())))
+        {
+            errorOccurred = true;
+        }
+    }
+
+    if (errorOccurred)
+    {
+        errorMsg = messageHandler.statusMessage();
+        errorLine = messageHandler.line();
+        errorColumn = messageHandler.column();
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 bool MainWindow::SafeSaveing(const QString &fileName) const
 {
     try
@@ -1318,119 +1406,100 @@ void MainWindow::OpenPattern(const QString &fileName)
     }
     QFile file(fileName);
     QString errorMsg;
-    qint32 errorLine = 0;
-    qint32 errorColumn = 0;
+    qint64 errorLine = 0;
+    qint64 errorColumn = 0;
     if (file.open(QIODevice::ReadOnly))
     {
-        if (doc->setContent(&file, &errorMsg, &errorLine, &errorColumn))
+        if(ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
         {
-            disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                       this, &MainWindow::currentDrawChanged);
-            try
+            qint32 errorLine = 0;
+            qint32 errorColumn = 0;
+            if (doc->setContent(&file, &errorMsg, &errorLine, &errorColumn))
             {
-                doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
-            }
-            catch (const VExceptionObjectError &e)
-            {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error parsing file."));
-                msgBox.setInformativeText(e.ErrorMessage());
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                msgBox.setDetailedText(e.DetailedInformation());
-                msgBox.setIcon(QMessageBox::Critical);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
-            catch (const VExceptionConversionError &e)
-            {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error can't convert value."));
-                msgBox.setInformativeText(e.ErrorMessage());
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                msgBox.setIcon(QMessageBox::Critical);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
-            catch (const VExceptionEmptyParameter &e)
-            {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error empty parameter."));
-                msgBox.setInformativeText(e.ErrorMessage());
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                msgBox.setDetailedText(e.DetailedInformation());
-                msgBox.setIcon(QMessageBox::Critical);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
-            catch (const VExceptionWrongParameterId &e)
-            {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error wrong id."));
-                msgBox.setInformativeText(e.ErrorMessage());
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                msgBox.setDetailedText(e.DetailedInformation());
-                msgBox.setIcon(QMessageBox::Critical);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
-            catch (const VExceptionUniqueId &e)
-            {
-                QMessageBox msgBox;
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Error no unique id."));
-                msgBox.setInformativeText(e.ErrorMessage());
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                msgBox.setDetailedText(e.DetailedInformation());
-                msgBox.setIcon(QMessageBox::Critical);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
-            connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                    this, &MainWindow::currentDrawChanged);
-            QString nameDraw = doc->GetNameActivDraw();
-            qint32 index = comboBoxDraws->findText(nameDraw);
-            if ( index != -1 )
-            { // -1 for not found
-                comboBoxDraws->setCurrentIndex(index);
-            }
-            if (comboBoxDraws->count() > 0)
-            {
-                SetEnableTool(true);
+                disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+                           this, &MainWindow::currentDrawChanged);
+                try
+                {
+                    doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+                }
+                catch (const VExceptionObjectError &e)
+                {
+                    e.CriticalMessageBox(tr("Error parsing file."));
+                    file.close();
+                    Clear();
+                    return;
+                }
+                catch (const VExceptionConversionError &e)
+                {
+                    e.CriticalMessageBox(tr("Error can't convert value."));
+                    file.close();
+                    Clear();
+                    return;
+                }
+                catch (const VExceptionEmptyParameter &e)
+                {
+                    e.CriticalMessageBox(tr("Error empty parameter."));
+                    file.close();
+                    Clear();
+                    return;
+                }
+                catch (const VExceptionWrongParameterId &e)
+                {
+                    e.CriticalMessageBox(tr("Error wrong id."));
+                    file.close();
+                    Clear();
+                    return;
+                }
+                catch (const VExceptionUniqueId &e)
+                {
+                    e.CriticalMessageBox(tr("Error no unique id."));
+                    file.close();
+                    Clear();
+                    return;
+                }
+                connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+                        this, &MainWindow::currentDrawChanged);
+                QString nameDraw = doc->GetNameActivDraw();
+                qint32 index = comboBoxDraws->findText(nameDraw);
+                if ( index != -1 )
+                { // -1 for not found
+                    comboBoxDraws->setCurrentIndex(index);
+                }
+                if (comboBoxDraws->count() > 0)
+                {
+                    SetEnableTool(true);
+                }
+                else
+                {
+                    SetEnableTool(false);
+                }
+                SetEnableWidgets(true);
             }
             else
             {
-                SetEnableTool(false);
+                QMessageBox msgBox;
+                msgBox.setWindowTitle(tr("Error!"));
+                msgBox.setText(tr("Parsing pattern file error."));
+                msgBox.setInformativeText(errorMsg);
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.setDefaultButton(QMessageBox::Ok);
+                QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
+                msgBox.setDetailedText(error);
+                msgBox.exec();
+                file.close();
+                Clear();
+                return;
             }
-            SetEnableWidgets(true);
         }
         else
         {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Error!"));
-            msgBox.setText(tr("Error parsing pattern file."));
+            msgBox.setText(tr("Validation file error."));
             msgBox.setInformativeText(errorMsg);
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.setDefaultButton(QMessageBox::Ok);
-            QString error = QString(tr("Error in line %1 column %2")).arg(errorLine, errorColumn);
+            QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
             msgBox.setDetailedText(error);
             msgBox.exec();
             file.close();
@@ -1438,6 +1507,10 @@ void MainWindow::OpenPattern(const QString &fileName)
             return;
         }
         file.close();
+    }
+    else
+    {
+        qWarning()<<tr("Can't open pattern file.")<<Q_FUNC_INFO;
     }
     this->fileName = fileName;
     QFileInfo info(fileName);

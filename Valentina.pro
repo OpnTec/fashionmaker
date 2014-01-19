@@ -6,7 +6,7 @@
 
 # Use out-of-source builds (shadow builds)
 
-QT       += core gui widgets xml svg printsupport
+QT       += core gui widgets xml svg printsupport xmlpatterns
 
 TEMPLATE = app
 
@@ -44,7 +44,8 @@ include(src/xml/xml.pri)
 RESOURCES += \
     share/resources/icon.qrc \
     share/resources/cursor.qrc \
-    share/resources/theme.qrc
+    share/resources/theme.qrc \
+    share/resources/schema.qrc
 
 OTHER_FILES += share/resources/valentina.rc \
     share/resources/icon/64x64/icon64x64.ico

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>schema/pattern.xsd</file>
+    </qresource>
+</RCC>
