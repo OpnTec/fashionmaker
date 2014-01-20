@@ -169,11 +169,11 @@ void VToolPointOfContact::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogPointOfContact->getPointName());
-            domElement.setAttribute(AttrRadius, dialogPointOfContact->getRadius());
-            domElement.setAttribute(AttrCenter, QString().setNum(dialogPointOfContact->getCenter()));
-            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogPointOfContact->getFirstPoint()));
-            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogPointOfContact->getSecondPoint()));
+            SetAttribute(domElement, AttrName, dialogPointOfContact->getPointName());
+            SetAttribute(domElement, AttrRadius, dialogPointOfContact->getRadius());
+            SetAttribute(domElement, AttrCenter, QString().setNum(dialogPointOfContact->getCenter()));
+            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogPointOfContact->getFirstPoint()));
+            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogPointOfContact->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -201,16 +201,16 @@ void VToolPointOfContact::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrRadius, radius);
-    AddAttribute(domElement, AttrCenter, center);
-    AddAttribute(domElement, AttrFirstPoint, firstPointId);
-    AddAttribute(domElement, AttrSecondPoint, secondPointId);
+    SetAttribute(domElement, AttrRadius, radius);
+    SetAttribute(domElement, AttrCenter, center);
+    SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -221,13 +221,13 @@ void VToolPointOfContact::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrRadius, radius);
-        domElement.setAttribute(AttrCenter, center);
-        domElement.setAttribute(AttrFirstPoint, firstPointId);
-        domElement.setAttribute(AttrSecondPoint, secondPointId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrRadius, radius);
+        SetAttribute(domElement, AttrCenter, center);
+        SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }
 

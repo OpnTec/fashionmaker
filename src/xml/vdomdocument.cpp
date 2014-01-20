@@ -125,8 +125,11 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 
 void VDomDocument::CreateEmptyFile()
 {
-    QDomElement domElement = this->createElement("lekalo");
+    QDomElement domElement = this->createElement("pattern");
+
     this->appendChild(domElement);
+    QDomComment info = this->createComment("Valentina pattern format.");
+    domElement.appendChild(info);
     QDomNode xmlNode = this->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
     this->insertBefore(xmlNode, this->firstChild());
     QDomElement incrElement = this->createElement("increments");

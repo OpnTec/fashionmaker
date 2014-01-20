@@ -96,12 +96,12 @@ void VNodeSpline::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrIdObject, idNode);
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        AddAttribute(domElement, AttrIdTool, idTool);
+        SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -112,10 +112,10 @@ void VNodeSpline::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrIdObject, QString().setNum(idNode));
+        SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
         if (idTool != 0)
         {
-            domElement.setAttribute(AttrIdTool, idTool);
+            SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }

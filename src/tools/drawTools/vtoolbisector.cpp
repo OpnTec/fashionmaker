@@ -164,12 +164,12 @@ void VToolBisector::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogBisector->getPointName());
-            domElement.setAttribute(AttrTypeLine, dialogBisector->getTypeLine());
-            domElement.setAttribute(AttrLength, dialogBisector->getFormula());
-            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogBisector->getFirstPointId()));
-            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogBisector->getSecondPointId()));
-            domElement.setAttribute(AttrThirdPoint, QString().setNum(dialogBisector->getThirdPointId()));
+            SetAttribute(domElement, AttrName, dialogBisector->getPointName());
+            SetAttribute(domElement, AttrTypeLine, dialogBisector->getTypeLine());
+            SetAttribute(domElement, AttrLength, dialogBisector->getFormula());
+            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogBisector->getFirstPointId()));
+            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogBisector->getSecondPointId()));
+            SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogBisector->getThirdPointId()));
             emit FullUpdateTree();
         }
     }
@@ -197,17 +197,17 @@ void VToolBisector::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrTypeLine, typeLine);
-    AddAttribute(domElement, AttrLength, formula);
-    AddAttribute(domElement, AttrFirstPoint, firstPointId);
-    AddAttribute(domElement, AttrSecondPoint, basePointId);
-    AddAttribute(domElement, AttrThirdPoint, thirdPointId);
+    SetAttribute(domElement, AttrTypeLine, typeLine);
+    SetAttribute(domElement, AttrLength, formula);
+    SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    SetAttribute(domElement, AttrSecondPoint, basePointId);
+    SetAttribute(domElement, AttrThirdPoint, thirdPointId);
 
     AddToCalculation(domElement);
 }
@@ -218,14 +218,14 @@ void VToolBisector::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrTypeLine, typeLine);
-        domElement.setAttribute(AttrLength, formula);
-        domElement.setAttribute(AttrFirstPoint, firstPointId);
-        domElement.setAttribute(AttrSecondPoint, basePointId);
-        domElement.setAttribute(AttrThirdPoint, thirdPointId);
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrTypeLine, typeLine);
+        SetAttribute(domElement, AttrLength, formula);
+        SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        SetAttribute(domElement, AttrSecondPoint, basePointId);
+        SetAttribute(domElement, AttrThirdPoint, thirdPointId);
     }
 }
 

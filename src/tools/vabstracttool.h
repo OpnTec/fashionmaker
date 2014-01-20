@@ -314,21 +314,19 @@ protected:
      * @param name
      * @param value
      */
-    void AddAttribute(QDomElement &domElement, const QString &name, const T &value)
+    void SetAttribute(QDomElement &domElement, const QString &name, const T &value)
     {
-        QDomAttr domAttr = doc->createAttribute(name);
-        domAttr.setValue(QString().setNum(value));
-        domElement.setAttributeNode(domAttr);
+        QString val = QString().setNum(value);
+        val = val.replace(",", ".");
+        domElement.setAttribute(name, val);
     }
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
 
 template <>
-inline void VAbstractTool::AddAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
+inline void VAbstractTool::SetAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
 {
-    QDomAttr domAttr = doc->createAttribute(name);
-    domAttr.setValue(value);
-    domElement.setAttributeNode(domAttr);
+    domElement.setAttribute(name, value);
 }
 #endif // VABSTRACTTOOL_H

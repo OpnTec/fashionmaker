@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vexception.h"
+#include <QMessageBox>
 
 VException::VException(const QString &what):QException(), what(what)
 {
@@ -37,4 +38,20 @@ QString VException::ErrorMessage() const
 {
     QString error = QString("Exception: %1").arg(what);
     return error;
+}
+
+void VException::CriticalMessageBox(const QString &situation) const
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Critical error!");
+    msgBox.setText(situation);
+    msgBox.setInformativeText(ErrorMessage());
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    if (DetailedInformation().isEmpty() == false)
+    {
+        msgBox.setDetailedText(DetailedInformation());
+    }
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.exec();
 }

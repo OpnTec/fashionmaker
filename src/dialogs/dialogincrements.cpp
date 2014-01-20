@@ -442,7 +442,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
             if (domElement.isElement())
             {
                 bool ok = false;
-                qreal value = item->text().toDouble(&ok);
+                qreal value = item->text().replace(",", ".").toDouble(&ok);
                 if (ok)
                 {
                     domElement.setAttribute("base", value);
@@ -462,7 +462,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
-                domElement.setAttribute("ksize", item->text().toDouble());
+                domElement.setAttribute("ksize", item->text().replace(",", ".").toDouble());
                 this->column = 4;
                 emit FullUpdateTree();
             }
@@ -474,7 +474,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
-                domElement.setAttribute("kgrowth", item->text().toDouble());
+                domElement.setAttribute("kgrowth", item->text().replace(",", ".").toDouble());
                 this->column = 5;
                 emit FullUpdateTree();
             }

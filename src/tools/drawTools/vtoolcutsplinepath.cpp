@@ -249,9 +249,9 @@ void VToolCutSplinePath::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogCutSplinePath->getPointName());
-            domElement.setAttribute(AttrLength, dialogCutSplinePath->getFormula());
-            domElement.setAttribute(AttrSplinePath, QString().setNum(dialogCutSplinePath->getSplinePathId()));
+            SetAttribute(domElement, AttrName, dialogCutSplinePath->getPointName());
+            SetAttribute(domElement, AttrLength, dialogCutSplinePath->getFormula());
+            SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogCutSplinePath->getSplinePathId()));
             emit FullUpdateTree();
         }
     }
@@ -301,14 +301,14 @@ void VToolCutSplinePath::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrLength, formula);
-    AddAttribute(domElement, AttrSplinePath, splinePathId);
+    SetAttribute(domElement, AttrLength, formula);
+    SetAttribute(domElement, AttrSplinePath, splinePathId);
 
     AddToCalculation(domElement);
 }
@@ -319,11 +319,11 @@ void VToolCutSplinePath::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrLength, formula);
-        domElement.setAttribute(AttrSplinePath, splinePathId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrLength, formula);
+        SetAttribute(domElement, AttrSplinePath, splinePathId);
     }
 }
 
