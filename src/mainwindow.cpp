@@ -1009,7 +1009,8 @@ void MainWindow::ActionDetails(bool checked)
 void MainWindow::ActionSaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
-    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), QDir::homePath(), filters);
+    QString dir = QDir::homePath() + tr("/pattern.val");
+    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
 
     if (fName.isEmpty())
     {
