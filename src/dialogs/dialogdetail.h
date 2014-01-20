@@ -91,6 +91,9 @@ public slots:
      * @param row number of row
      */
     void             ObjectChanged(int row);
+    /**
+     * @brief DeleteItem delete item from list
+     */
     void             DeleteItem();
 private:
     /**

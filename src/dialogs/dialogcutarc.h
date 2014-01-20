@@ -35,17 +35,50 @@ namespace Ui {
 class DialogCutArc;
 }
 
+/**
+ * @brief The DialogCutArc class dialog for ToolCutArc.
+ */
 class DialogCutArc : public DialogTool
 {
     Q_OBJECT
 public:
+    /**
+     * @brief DialogCutArc create dialog.
+     * @param data container with data
+     * @param parent parent widget
+     */
     DialogCutArc(const VContainer *data, QWidget *parent = 0);
     ~DialogCutArc();
+    /**
+     * @brief getPointName return name point on arc
+     * @return name
+     */
     QString           getPointName() const {return pointName;}
+    /**
+     * @brief setPointName set name point on arc
+     * @param value name
+     */
     void              setPointName(const QString &value);
+    /**
+     * @brief getFormula return string with formula length
+     * @return formula
+     */
     QString           getFormula() const {return formula;}
+    /**
+     * @brief setFormula set string with formula length
+     * @param value string with formula
+     */
     void              setFormula(const QString &value);
+    /**
+     * @brief getArcId return id of arc
+     * @return id
+     */
     qint64            getArcId() const {return arcId;}
+    /**
+     * @brief setArcId set id of arc
+     * @param value id
+     * @param id don't show this id in list
+     */
     void              setArcId(const qint64 &value, const qint64 &id);
 public slots:
     /**
@@ -60,9 +93,21 @@ public slots:
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutArc)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogCutArc  *ui;
+    /**
+     * @brief pointName name of created point
+     */
     QString           pointName;
+    /**
+     * @brief formula string with formula
+     */
     QString           formula;
+    /**
+     * @brief arcId keep id of arc
+     */
     qint64            arcId;
 };
 

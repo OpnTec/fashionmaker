@@ -36,10 +36,18 @@ namespace Ui
     class DialogCutSpline;
 }
 
+/**
+ * @brief The DialogCutSpline class dialog for ToolCutSpline.
+ */
 class DialogCutSpline : public DialogTool
 {
     Q_OBJECT
 public:
+    /**
+     * @brief DialogCutSpline create dialog.
+     * @param data container with data
+     * @param parent parent widget
+     */
     DialogCutSpline(const VContainer *data, QWidget *parent = 0);
     ~DialogCutSpline();
     /**
@@ -86,9 +94,21 @@ public slots:
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutSpline)
+    /**
+     * @brief ui keeps information about user interface
+     */
     Ui::DialogCutSpline *ui;
+    /**
+     * @brief pointName name of created point
+     */
     QString           pointName;
+    /**
+     * @brief formula string with formula
+     */
     QString           formula;
+    /**
+     * @brief splineId keep id of spline
+     */
     qint64            splineId;
 };
 

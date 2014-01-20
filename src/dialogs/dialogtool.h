@@ -276,10 +276,17 @@ protected:
     /**
      * @brief FillComboBoxSplines fill comboBox list of splines
      * @param box comboBox
-     * @param id don't show id+1 and id+2 in list
+     * @param id don't show id in list
+     * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
     void             FillComboBoxSplines(QComboBox *box, const qint64 &id = 0,
                                          ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
+    /**
+     * @brief FillComboBoxSplinesPath
+     * @param box comboBox
+     * @param id don't show id in list
+     * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
+     */
     void             FillComboBoxSplinesPath(QComboBox *box, const qint64 &id = 0,
                                              ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
     /**
@@ -356,9 +363,18 @@ protected:
      * @param splineId save current spline id
      * @param value spline id
      * @param id don't show this id in list
+     * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
     void             setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
                                         ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
+    /**
+     * @brief setCurrentArcId
+     * @param box combobox
+     * @param arcId save current arc id
+     * @param value arc id
+     * @param id don't show this id in list
+     * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
+     */
     void             setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &value, const qint64 &id,
                                         ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc) const;
     /**
@@ -367,6 +383,7 @@ protected:
      * @param splinePathId save current splinePath id
      * @param value splinePath id
      * @param id don't show this id in list
+     * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
     void             setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value, const qint64 &id,
                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
@@ -377,6 +394,11 @@ protected:
      */
     qint64           getCurrentObjectId(QComboBox *box) const;
 private:
+    /**
+     * @brief FillList fill combobox list
+     * @param box combobox
+     * @param list list with ids and names
+     */
     void             FillList(QComboBox *box, const QMap<QString, qint64> &list)const;
 };
 
