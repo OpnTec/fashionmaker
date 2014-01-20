@@ -172,11 +172,11 @@ void VToolTriangle::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogTriangle->getPointName());
-            domElement.setAttribute(AttrAxisP1, QString().setNum(dialogTriangle->getAxisP1Id()));
-            domElement.setAttribute(AttrAxisP2, QString().setNum(dialogTriangle->getAxisP2Id()));
-            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogTriangle->getFirstPointId()));
-            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogTriangle->getSecondPointId()));
+            SetAttribute(domElement, AttrName, dialogTriangle->getPointName());
+            SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTriangle->getAxisP1Id()));
+            SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTriangle->getAxisP2Id()));
+            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTriangle->getFirstPointId()));
+            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTriangle->getSecondPointId()));
             emit FullUpdateTree();
         }
 
@@ -207,16 +207,16 @@ void VToolTriangle::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrAxisP1, axisP1Id);
-    AddAttribute(domElement, AttrAxisP2, axisP2Id);
-    AddAttribute(domElement, AttrFirstPoint, firstPointId);
-    AddAttribute(domElement, AttrSecondPoint, secondPointId);
+    SetAttribute(domElement, AttrAxisP1, axisP1Id);
+    SetAttribute(domElement, AttrAxisP2, axisP2Id);
+    SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -227,12 +227,12 @@ void VToolTriangle::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrAxisP1, axisP1Id);
-        domElement.setAttribute(AttrAxisP2, axisP2Id);
-        domElement.setAttribute(AttrFirstPoint, firstPointId);
-        domElement.setAttribute(AttrSecondPoint, secondPointId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrAxisP1, axisP1Id);
+        SetAttribute(domElement, AttrAxisP2, axisP2Id);
+        SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }

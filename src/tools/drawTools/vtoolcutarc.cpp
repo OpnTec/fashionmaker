@@ -171,9 +171,9 @@ void VToolCutArc::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogCutArc->getPointName());
-            domElement.setAttribute(AttrLength, dialogCutArc->getFormula());
-            domElement.setAttribute(AttrArc, QString().setNum(dialogCutArc->getArcId()));
+            SetAttribute(domElement, AttrName, dialogCutArc->getPointName());
+            SetAttribute(domElement, AttrLength, dialogCutArc->getFormula());
+            SetAttribute(domElement, AttrArc, QString().setNum(dialogCutArc->getArcId()));
             emit FullUpdateTree();
         }
     }
@@ -223,14 +223,14 @@ void VToolCutArc::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrLength, formula);
-    AddAttribute(domElement, AttrArc, arcId);
+    SetAttribute(domElement, AttrLength, formula);
+    SetAttribute(domElement, AttrArc, arcId);
 
     AddToCalculation(domElement);
 }
@@ -241,11 +241,11 @@ void VToolCutArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrLength, formula);
-        domElement.setAttribute(AttrArc, arcId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrLength, formula);
+        SetAttribute(domElement, AttrArc, arcId);
     }
 }
 

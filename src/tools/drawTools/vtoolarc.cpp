@@ -144,10 +144,10 @@ void VToolArc::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrCenter, QString().setNum(dialogArc->GetCenter()));
-            domElement.setAttribute(AttrRadius, dialogArc->GetRadius());
-            domElement.setAttribute(AttrAngle1, dialogArc->GetF1());
-            domElement.setAttribute(AttrAngle2, dialogArc->GetF2());
+            SetAttribute(domElement, AttrCenter, QString().setNum(dialogArc->GetCenter()));
+            SetAttribute(domElement, AttrRadius, dialogArc->GetRadius());
+            SetAttribute(domElement, AttrAngle1, dialogArc->GetF1());
+            SetAttribute(domElement, AttrAngle2, dialogArc->GetF2());
             emit FullUpdateTree();
         }
     }
@@ -194,12 +194,12 @@ void VToolArc::AddToFile()
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrCenter, arc->GetCenter().id());
-    AddAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-    AddAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-    AddAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+    SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+    SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+    SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
 
     AddToCalculation(domElement);
 }
@@ -210,10 +210,10 @@ void VToolArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrCenter, arc->GetCenter().id());
-        domElement.setAttribute(AttrRadius, arc->GetFormulaRadius());
-        domElement.setAttribute(AttrAngle1, arc->GetFormulaF1());
-        domElement.setAttribute(AttrAngle2, arc->GetFormulaF2());
+        SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+        SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+        SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+        SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
     }
 }
 

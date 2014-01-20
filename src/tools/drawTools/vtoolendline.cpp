@@ -140,11 +140,11 @@ void VToolEndLine::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogEndLine->getPointName());
-            domElement.setAttribute(AttrTypeLine, dialogEndLine->getTypeLine());
-            domElement.setAttribute(AttrLength, dialogEndLine->getFormula());
-            domElement.setAttribute(AttrAngle, QString().setNum(dialogEndLine->getAngle()));
-            domElement.setAttribute(AttrBasePoint, QString().setNum(dialogEndLine->getBasePointId()));
+            SetAttribute(domElement, AttrName, dialogEndLine->getPointName());
+            SetAttribute(domElement, AttrTypeLine, dialogEndLine->getTypeLine());
+            SetAttribute(domElement, AttrLength, dialogEndLine->getFormula());
+            SetAttribute(domElement, AttrAngle, QString().setNum(dialogEndLine->getAngle()));
+            SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogEndLine->getBasePointId()));
             emit FullUpdateTree();
         }
     }
@@ -161,16 +161,16 @@ void VToolEndLine::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrTypeLine, typeLine);
-    AddAttribute(domElement, AttrLength, formula);
-    AddAttribute(domElement, AttrAngle, angle);
-    AddAttribute(domElement, AttrBasePoint, basePointId);
+    SetAttribute(domElement, AttrTypeLine, typeLine);
+    SetAttribute(domElement, AttrLength, formula);
+    SetAttribute(domElement, AttrAngle, angle);
+    SetAttribute(domElement, AttrBasePoint, basePointId);
 
     AddToCalculation(domElement);
 }
@@ -181,12 +181,12 @@ void VToolEndLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrTypeLine, typeLine);
-        domElement.setAttribute(AttrLength, formula);
-        domElement.setAttribute(AttrAngle, angle);
-        domElement.setAttribute(AttrBasePoint, basePointId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrTypeLine, typeLine);
+        SetAttribute(domElement, AttrLength, formula);
+        SetAttribute(domElement, AttrAngle, angle);
+        SetAttribute(domElement, AttrBasePoint, basePointId);
     }
 }

@@ -670,10 +670,10 @@ void VToolUnionDetails::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrIndexD1, indexD1);
-    AddAttribute(domElement, AttrIndexD2, indexD2);
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrIndexD1, indexD1);
+    SetAttribute(domElement, AttrIndexD2, indexD2);
 
     AddDetail(domElement, d1);
     AddDetail(domElement, d2);
@@ -686,8 +686,8 @@ void VToolUnionDetails::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrIndexD1, indexD1);
-        domElement.setAttribute(AttrIndexD2, indexD2);
+        SetAttribute(domElement, AttrIndexD1, indexD1);
+        SetAttribute(domElement, AttrIndexD2, indexD2);
 
         QDomNode domNode = domElement.firstChild();
         domNode = UpdateDetail(domNode, d1);
@@ -711,30 +711,30 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
 {
     QDomElement nod = doc->createElement(TagNode);
 
-    AddAttribute(nod, AttrIdObject, node.getId());
-    AddAttribute(nod, AttrMx, toMM(node.getMx()));
-    AddAttribute(nod, AttrMy, toMM(node.getMy()));
+    SetAttribute(nod, AttrIdObject, node.getId());
+    SetAttribute(nod, AttrMx, toMM(node.getMx()));
+    SetAttribute(nod, AttrMy, toMM(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
-        AddAttribute(nod, AttrNodeType, NodeTypeContour);
+        SetAttribute(nod, AttrNodeType, NodeTypeContour);
     }
     else
     {
-        AddAttribute(nod, AttrNodeType, NodeTypeModeling);
+        SetAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch (node.getTypeTool())
     {
         case (Tool::NodeArc):
-            AddAttribute(nod, AttrType, QStringLiteral("NodeArc"));
+            SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
             break;
         case (Tool::NodePoint):
-            AddAttribute(nod, AttrType, QStringLiteral("NodePoint"));
+            SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
             break;
         case (Tool::NodeSpline):
-            AddAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
+            SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
             break;
         case (Tool::NodeSplinePath):
-            AddAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
+            SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

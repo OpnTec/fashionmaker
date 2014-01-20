@@ -105,14 +105,14 @@ void VNodePoint::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrIdObject, idNode);
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrIdObject, idNode);
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
     if (idTool != 0)
     {
-        AddAttribute(domElement, AttrIdTool, idTool);
+        SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -124,12 +124,12 @@ void VNodePoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrIdObject, idNode);
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrIdObject, idNode);
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
         if (idTool != 0)
         {
-            domElement.setAttribute(AttrIdTool, idTool);
+            SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }
@@ -172,8 +172,8 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrMx, QString().setNum(toMM(mx)));
-        domElement.setAttribute(AttrMy, QString().setNum(toMM(my)));
+        SetAttribute(domElement, AttrMx, QString().setNum(toMM(mx)));
+        SetAttribute(domElement, AttrMy, QString().setNum(toMM(my)));
         emit toolhaveChange();
     }
 }

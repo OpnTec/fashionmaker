@@ -119,9 +119,9 @@ void VToolPointOfIntersection::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogPointOfIntersection->getPointName());
-            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogPointOfIntersection->getFirstPointId()));
-            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogPointOfIntersection->getSecondPointId()));
+            SetAttribute(domElement, AttrName, dialogPointOfIntersection->getPointName());
+            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogPointOfIntersection->getFirstPointId()));
+            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogPointOfIntersection->getSecondPointId()));
             emit FullUpdateTree();
         }
     }
@@ -149,14 +149,14 @@ void VToolPointOfIntersection::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrFirstPoint, firstPointId);
-    AddAttribute(domElement, AttrSecondPoint, secondPointId);
+    SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -167,10 +167,10 @@ void VToolPointOfIntersection::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrName, toMM(point->mx()));
-        domElement.setAttribute(AttrName, toMM(point->my()));
-        domElement.setAttribute(AttrFirstPoint, firstPointId);
-        domElement.setAttribute(AttrSecondPoint, secondPointId);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrName, toMM(point->mx()));
+        SetAttribute(domElement, AttrName, toMM(point->my()));
+        SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }

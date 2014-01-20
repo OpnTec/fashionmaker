@@ -168,13 +168,13 @@ void VToolSpline::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrPoint1, spl.GetP1().id());
-            domElement.setAttribute(AttrPoint4, spl.GetP4().id());
-            domElement.setAttribute(AttrAngle1, spl.GetAngle1());
-            domElement.setAttribute(AttrAngle2, spl.GetAngle2());
-            domElement.setAttribute(AttrKAsm1, spl.GetKasm1());
-            domElement.setAttribute(AttrKAsm2, spl.GetKasm2());
-            domElement.setAttribute(AttrKCurve, spl.GetKcurve());
+            SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+            SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+            SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
+            SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
+            SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
+            SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
+            SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
             emit FullUpdateTree();
         }
     }
@@ -198,11 +198,11 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrAngle1, QString().setNum(spl.GetAngle1()));
-        domElement.setAttribute(AttrAngle2, QString().setNum(spl.GetAngle2()));
-        domElement.setAttribute(AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        domElement.setAttribute(AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        domElement.setAttribute(AttrKCurve, QString().setNum(spl.GetKcurve()));
+        SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetAngle1()));
+        SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetAngle2()));
+        SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
         emit FullUpdateTree();
     }
 }
@@ -217,15 +217,15 @@ void VToolSpline::AddToFile()
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrPoint1, spl->GetP1().id());
-    AddAttribute(domElement, AttrPoint4, spl->GetP4().id());
-    AddAttribute(domElement, AttrAngle1, spl->GetAngle1());
-    AddAttribute(domElement, AttrAngle2, spl->GetAngle2());
-    AddAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-    AddAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-    AddAttribute(domElement, AttrKCurve, spl->GetKcurve());
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
+    SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
+    SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
+    SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
+    SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
+    SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
+    SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
 
     AddToCalculation(domElement);
 }
@@ -236,13 +236,13 @@ void VToolSpline::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrPoint1, spl->GetP1().id());
-        domElement.setAttribute(AttrPoint4, spl->GetP4().id());
-        domElement.setAttribute(AttrAngle1, spl->GetAngle1());
-        domElement.setAttribute(AttrAngle2, spl->GetAngle2());
-        domElement.setAttribute(AttrKAsm1, spl->GetKasm1());
-        domElement.setAttribute(AttrKAsm2, spl->GetKasm2());
-        domElement.setAttribute(AttrKCurve, spl->GetKcurve());
+        SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
+        SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
+        SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
+        SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
+        SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
+        SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
+        SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
     }
 }
 

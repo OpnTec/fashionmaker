@@ -63,13 +63,13 @@ void VToolSinglePoint::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrX, toMM(point->x()));
-    AddAttribute(domElement, AttrY, toMM(point->y()));
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrX, toMM(point->x()));
+    SetAttribute(domElement, AttrY, toMM(point->y()));
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
     AddToCalculation(domElement);
 }
@@ -80,11 +80,11 @@ void VToolSinglePoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrX, QString().setNum(toMM(point->x())));
-        domElement.setAttribute(AttrY, QString().setNum(toMM(point->y())));
-        domElement.setAttribute(AttrMx, QString().setNum(toMM(point->mx())));
-        domElement.setAttribute(AttrMy, QString().setNum(toMM(point->my())));
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrX, QString().setNum(toMM(point->x())));
+        SetAttribute(domElement, AttrY, QString().setNum(toMM(point->y())));
+        SetAttribute(domElement, AttrMx, QString().setNum(toMM(point->mx())));
+        SetAttribute(domElement, AttrMy, QString().setNum(toMM(point->my())));
     }
 }
 
@@ -110,8 +110,8 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrX, QString().setNum(toMM(newPos.x())));
-            domElement.setAttribute(AttrY, QString().setNum(toMM(newPos.y())));
+            SetAttribute(domElement, AttrX, QString().setNum(toMM(newPos.x())));
+            SetAttribute(domElement, AttrY, QString().setNum(toMM(newPos.y())));
 
             QList<QGraphicsView*> list = this->scene()->views();
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
@@ -157,9 +157,9 @@ void VToolSinglePoint::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, name);
-            domElement.setAttribute(AttrX, QString().setNum(toMM(p.x())));
-            domElement.setAttribute(AttrY, QString().setNum(toMM(p.y())));
+            SetAttribute(domElement, AttrName, name);
+            SetAttribute(domElement, AttrX, QString().setNum(toMM(p.x())));
+            SetAttribute(domElement, AttrY, QString().setNum(toMM(p.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
         }

@@ -146,11 +146,11 @@ void VToolLineIntersect::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrName, dialogLineIntersect->getPointName());
-            domElement.setAttribute(AttrP1Line1, QString().setNum(dialogLineIntersect->getP1Line1()));
-            domElement.setAttribute(AttrP2Line1, QString().setNum(dialogLineIntersect->getP2Line1()));
-            domElement.setAttribute(AttrP1Line2, QString().setNum(dialogLineIntersect->getP1Line2()));
-            domElement.setAttribute(AttrP2Line2, QString().setNum(dialogLineIntersect->getP2Line2()));
+            SetAttribute(domElement, AttrName, dialogLineIntersect->getPointName());
+            SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogLineIntersect->getP1Line1()));
+            SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogLineIntersect->getP2Line1()));
+            SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogLineIntersect->getP1Line2()));
+            SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogLineIntersect->getP2Line2()));
             emit FullUpdateTree();
         }
     }
@@ -178,16 +178,16 @@ void VToolLineIntersect::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrType, ToolType);
-    AddAttribute(domElement, AttrName, point->name());
-    AddAttribute(domElement, AttrMx, toMM(point->mx()));
-    AddAttribute(domElement, AttrMy, toMM(point->my()));
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrType, ToolType);
+    SetAttribute(domElement, AttrName, point->name());
+    SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    AddAttribute(domElement, AttrP1Line1, p1Line1);
-    AddAttribute(domElement, AttrP2Line1, p2Line1);
-    AddAttribute(domElement, AttrP1Line2, p1Line2);
-    AddAttribute(domElement, AttrP2Line2, p2Line2);
+    SetAttribute(domElement, AttrP1Line1, p1Line1);
+    SetAttribute(domElement, AttrP2Line1, p2Line1);
+    SetAttribute(domElement, AttrP1Line2, p1Line2);
+    SetAttribute(domElement, AttrP2Line2, p2Line2);
 
     AddToCalculation(domElement);
 }
@@ -198,13 +198,13 @@ void VToolLineIntersect::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrName, point->name());
-        domElement.setAttribute(AttrMx, toMM(point->mx()));
-        domElement.setAttribute(AttrMy, toMM(point->my()));
-        domElement.setAttribute(AttrP1Line1, p1Line1);
-        domElement.setAttribute(AttrP2Line1, p2Line1);
-        domElement.setAttribute(AttrP1Line2, p1Line2);
-        domElement.setAttribute(AttrP2Line2, p2Line2);
+        SetAttribute(domElement, AttrName, point->name());
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        SetAttribute(domElement, AttrP1Line1, p1Line1);
+        SetAttribute(domElement, AttrP2Line1, p2Line1);
+        SetAttribute(domElement, AttrP1Line2, p1Line2);
+        SetAttribute(domElement, AttrP2Line2, p2Line2);
     }
 }
 

@@ -118,8 +118,8 @@ void VToolLine::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            domElement.setAttribute(AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
-            domElement.setAttribute(AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
+            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
+            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
         }
     }
@@ -163,9 +163,9 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
-    AddAttribute(domElement, AttrId, id);
-    AddAttribute(domElement, AttrFirstPoint, firstPoint);
-    AddAttribute(domElement, AttrSecondPoint, secondPoint);
+    SetAttribute(domElement, AttrId, id);
+    SetAttribute(domElement, AttrFirstPoint, firstPoint);
+    SetAttribute(domElement, AttrSecondPoint, secondPoint);
 
     AddToCalculation(domElement);
 }
@@ -175,8 +175,8 @@ void VToolLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        domElement.setAttribute(AttrFirstPoint, firstPoint);
-        domElement.setAttribute(AttrSecondPoint, secondPoint);
+        SetAttribute(domElement, AttrFirstPoint, firstPoint);
+        SetAttribute(domElement, AttrSecondPoint, secondPoint);
     }
 }
 
