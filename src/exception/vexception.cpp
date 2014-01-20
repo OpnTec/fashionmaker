@@ -28,6 +28,8 @@
 
 #include "vexception.h"
 #include <QMessageBox>
+#include <QSpacerItem>
+#include <QGridLayout>
 
 VException::VException(const QString &what):QException(), what(what)
 {
@@ -53,5 +55,10 @@ void VException::CriticalMessageBox(const QString &situation) const
         msgBox.setDetailedText(DetailedInformation());
     }
     msgBox.setIcon(QMessageBox::Critical);
+    QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    Q_ASSERT(horizontalSpacer != 0);
+    QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
+    Q_ASSERT(layout != 0);
+    layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
 }

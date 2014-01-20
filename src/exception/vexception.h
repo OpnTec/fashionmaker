@@ -74,6 +74,10 @@ public:
      * @return string with error
      */
     inline QString    What() const {return what;}
+    /**
+     * @brief CriticalMessageBox show Critical Message Box.
+     * @param situation main text message box.
+     */
     virtual void      CriticalMessageBox(const QString &situation) const;
 protected:
     /**
