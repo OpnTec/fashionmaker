@@ -110,7 +110,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     {
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Something wrong!!"));
+        msgBox.setText(tr("Something's wrong!!"));
         msgBox.setInformativeText(e.ErrorMessage());
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.setDefaultButton(QMessageBox::Ok);
