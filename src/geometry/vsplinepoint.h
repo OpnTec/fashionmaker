@@ -33,88 +33,89 @@
 #include "vpointf.h"
 
 /**
- * @brief The VSplinePoint клас, що містить у собі інформацію про точки сплайну.
+ * @brief The VSplinePoint class keep information about point in spline path. Each point have two angles and two
+ * coefficient. Point represent at the same time first and last point of spline.
  */
 class VSplinePoint
 {
 public:
             /**
-             * @brief VSplinePoint конструктор по замповчуванню.
+             * @brief VSplinePoint default constructor.
              */
                   VSplinePoint();
             /**
-             * @brief VSplinePoint конструктор.
-             * @param pSpline точка сплайну.
-             * @param angle кут дотичної сплайна.
-             * @param factor коефіцієнт довжини дотичної.
+             * @brief VSplinePoint constructor.
+             * @param pSpline spline point.
+             * @param angle second angle control line.
+             * @param factor coefficient of length second control line.
              */
                   VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle, qreal kAsm2);
                   /**
-                   * @brief VSplinePoint
-                   * @param point
+                   * @brief VSplinePoint copy constructor
+                   * @param point point
                    */
                   VSplinePoint(const VSplinePoint &point);
                   ~VSplinePoint() {}
     /**
-     * @brief P повертає точку.
-     * @return точка.
+     * @brief P return point.
+     * @return point.
      */
     inline VPointF P() const {return pSpline;}
     /**
-     * @brief SetP
-     * @param value
+     * @brief SetP set point.
+     * @param value point.
      */
     inline void   SetP(const VPointF &value) {pSpline = value;}
     /**
-     * @brief Angle1 повертає кут дотичної сплайна.
-     * @return кут в градусах.
+     * @brief Angle1 return first angle of spline.
+     * @return angle.
      */
     inline qreal  Angle1() const {return angle+180;}
     /**
-     * @brief SetAngle
-     * @param value
+     * @brief SetAngle set first angle of spline.
+     * @param value angle.
      */
     inline void   SetAngle(const qreal &value) {angle = value;}
     /**
-     * @brief Angle2 повертає кут дотичної сплайна.
-     * @return кут в градусах.
+     * @brief Angle2 return second angle of spline.
+     * @return angle.
      */
     inline qreal  Angle2() const {return angle;}
     /**
-     * @brief KAsm1 повертає коефіцієнт довжини дотичної.
-     * @return коефіцієнт.
+     * @brief KAsm1 return coefficient of length first control line.
+     * @return coefficient.
      */
     inline qreal  KAsm1() const {return kAsm1;}
     /**
-     * @brief SetKAsm1
-     * @param value
+     * @brief SetKAsm1 set coefficient of length first control line.
+     * @param value coefficient.
      */
     inline void   SetKAsm1(const qreal &value) {kAsm1 = value;}
     /**
-     * @brief KAsm2 повертає коефіцієнт довжини дотичної.
-     * @return коефіцієнт.
+     * @brief KAsm2 return coefficient of length second control line.
+     * @return coefficient.
      */
     inline qreal  KAsm2() const {return kAsm2;}
     /**
-     * @brief SetKAsm2
-     * @param value
+     * @brief SetKAsm2 set coefficient of length second control line.
+     * @param value coefficient.
      */
     inline void   SetKAsm2(const qreal &value) {kAsm2 = value;}
 protected:
     /**
-     * @brief pSpline точка сплайну.
+     * @brief pSpline point.
      */
     VPointF        pSpline;
     /**
-     * @brief angle кут дотичної сплайну.
+     * @brief angle first angle spline.
      */
     qreal         angle;
     /**
-     * @brief kAsm1 коефіцієнт довжини дотичної сплайну.
+     * @brief kAsm1 coefficient of length first control line.
      */
     qreal         kAsm1;
     /**
-     * @brief kAsm2 коефіцієнт довжини дотичної сплайну.
+     * @brief kAsm2 coefficient of length second control line.
      */
     qreal         kAsm2;
 };
