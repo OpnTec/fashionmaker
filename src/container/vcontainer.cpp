@@ -273,7 +273,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
             {
                 const VPointF *point = GeometricObject<const VPointF*>(detail.at(i).getId());
                 points.append(point->toQPointF());
-                if (detail.getSupplement() == true)
+                if (detail.getSeamAllowance() == true)
                 {
                     QPointF pEkv = point->toQPointF();
                     pEkv.setX(pEkv.x()+detail.at(i).getMx());
@@ -290,7 +290,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 if (len1 <= lenReverse)
                 {
                     points << arc->GetPoints();
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                         pointsEkv << biasPoints(arc->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
@@ -298,7 +298,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 else
                 {
                     points << GetReversePoint(arc->GetPoints());
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                         pointsEkv << biasPoints(GetReversePoint(arc->GetPoints()), detail.at(i).getMx(),
                                                 detail.at(i).getMy());
@@ -314,7 +314,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 if (len1 <= lenReverse)
                 {
                     points << spline->GetPoints();
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                         pointsEkv << biasPoints(spline->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
@@ -322,7 +322,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 else
                 {
                     points << GetReversePoint(spline->GetPoints());
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                         pointsEkv << biasPoints(GetReversePoint(spline->GetPoints()), detail.at(i).getMx(),
                                                 detail.at(i).getMy());
@@ -338,7 +338,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 if (len1 <= lenReverse)
                 {
                     points << splinePath->GetPathPoints();
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                      pointsEkv << biasPoints(splinePath->GetPathPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
@@ -346,7 +346,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
                 else
                 {
                     points << GetReversePoint(splinePath->GetPathPoints());
-                    if (detail.getSupplement() == true)
+                    if (detail.getSeamAllowance() == true)
                     {
                         pointsEkv << biasPoints(GetReversePoint(splinePath->GetPathPoints()), detail.at(i).getMx(),
                                                 detail.at(i).getMy());
@@ -370,7 +370,7 @@ QPainterPath VContainer::ContourPath(qint64 idDetail) const
 
     pointsEkv = CorrectEquidistantPoints(pointsEkv);
 
-    if (detail.getSupplement() == true)
+    if (detail.getSeamAllowance() == true)
     {
         QPainterPath ekv;
         if (detail.getClosed() == true)

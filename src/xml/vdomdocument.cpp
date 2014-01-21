@@ -637,7 +637,7 @@ void VDomDocument::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDo
         detail.setName(GetParametrString(domElement, VAbstractTool::AttrName, ""));
         detail.setMx(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0")));
         detail.setMy(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0")));
-        detail.setSupplement(GetParametrLongLong(domElement, VToolDetail::AttrSupplement, "1"));
+        detail.setSeamAllowance(GetParametrLongLong(domElement, VToolDetail::AttrSupplement, "1"));
         detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
         detail.setClosed(GetParametrLongLong(domElement, VToolDetail::AttrClosed, "1"));
 

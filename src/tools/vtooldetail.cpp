@@ -177,7 +177,7 @@ void VToolDetail::FullUpdateFromGui(int result)
         {
             VDetail det = dialogDetail->getDetails();
             SetAttribute(domElement, AttrName, det.getName());
-            SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSupplement()));
+            SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
             SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
             SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
             RemoveAllChild(domElement);
@@ -211,7 +211,7 @@ void VToolDetail::AddToFile()
     SetAttribute(domElement, AttrName, detail.getName());
     SetAttribute(domElement, AttrMx, toMM(detail.getMx()));
     SetAttribute(domElement, AttrMy, toMM(detail.getMy()));
-    SetAttribute(domElement, AttrSupplement, detail.getSupplement());
+    SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
     SetAttribute(domElement, AttrClosed, detail.getClosed());
     SetAttribute(domElement, AttrWidth, detail.getWidth());
 
@@ -235,7 +235,7 @@ void VToolDetail::RefreshDataInFile()
     {
         VDetail det = VAbstractTool::data.GetDetail(id);
         SetAttribute(domElement, AttrName, det.getName());
-        SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSupplement()));
+        SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
         SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
         SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         RemoveAllChild(domElement);

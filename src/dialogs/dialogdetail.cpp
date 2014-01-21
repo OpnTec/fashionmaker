@@ -97,7 +97,7 @@ void DialogDetail::DialogAccepted()
     }
     details.setWidth(ui.doubleSpinBoxSeams->value());
     details.setName(ui.lineEditNameDetail->text());
-    details.setSupplement(supplement);
+    details.setSeamAllowance(supplement);
     details.setClosed(closed);
     emit ToolTip("");
     emit DialogClosed(QDialog::Accepted);
@@ -166,10 +166,10 @@ void DialogDetail::setDetails(const VDetail &value)
                 details[i].getMy());
     }
     ui.lineEditNameDetail->setText(details.getName());
-    ui.checkBoxSeams->setChecked(details.getSupplement());
+    ui.checkBoxSeams->setChecked(details.getSeamAllowance());
     ui.checkBoxClosed->setChecked(details.getClosed());
     ClickedClosed(details.getClosed());
-    ClickedSeams(details.getSupplement());
+    ClickedSeams(details.getSeamAllowance());
     ui.doubleSpinBoxSeams->setValue(details.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);

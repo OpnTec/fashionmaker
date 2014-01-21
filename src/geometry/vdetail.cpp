@@ -29,11 +29,11 @@
 #include "vdetail.h"
 
 VDetail::VDetail()
-    :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), supplement(true), closed(true),
+    :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
       width(10){}
 
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
-    :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), supplement(true), closed(true),
+    :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
       width(10)
 {
     this->nodes = nodes;
@@ -41,7 +41,7 @@ VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
 
 VDetail::VDetail(const VDetail &detail)
     :_id(0), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
-      supplement(detail.getSupplement()), closed(detail.getClosed()), width(detail.getWidth()){}
+      seamAllowance(detail.getSeamAllowance()), closed(detail.getClosed()), width(detail.getWidth()){}
 
 VDetail &VDetail::operator =(const VDetail &detail)
 {
@@ -50,7 +50,7 @@ VDetail &VDetail::operator =(const VDetail &detail)
     name = detail.getName();
     mx = detail.getMx();
     my = detail.getMy();
-    supplement = detail.getSupplement();
+    seamAllowance = detail.getSeamAllowance();
     closed = detail.getClosed();
     width = detail.getWidth();
     return *this;
@@ -62,7 +62,7 @@ void VDetail::Clear()
     name.clear();
     mx = 0;
     my = 0;
-    supplement = true;
+    seamAllowance = true;
     closed = true;
     width = 10;
 }
