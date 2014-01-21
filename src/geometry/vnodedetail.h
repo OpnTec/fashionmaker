@@ -35,7 +35,7 @@
 namespace NodeDetail
 {
     /**
-     * @brief The NodeDetail enum
+     * @brief The NodeDetail enum node can be node of contour or node modeling.
      */
     enum NodeDetail { Contour, Modeling };
     Q_DECLARE_FLAGS(NodeDetails, NodeDetail)
@@ -43,106 +43,105 @@ namespace NodeDetail
 Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 
 /**
- * @brief The VNodeDetail class
+ * @brief The VNodeDetail class keep information about detail node.
  */
 class VNodeDetail
 {
 public:
                   /**
-                   * @brief VNodeDetail
+                   * @brief VNodeDetail default constructor.
                    */
                   VNodeDetail();
                   /**
-                   * @brief VNodeDetail
-                   * @param id
-                   * @param typeTool
-                   * @param mode
-                   * @param typeNode
-                   * @param mx
-                   * @param my
+                   * @brief VNodeDetail constructor.
+                   * @param id object id
+                   * @param typeTool type tool
+                   * @param typeNode type node
+                   * @param mx object bias x axis
+                   * @param my object bias y axis
                    */
                   VNodeDetail(qint64 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
                               qreal my = 0);
                   /**
-                   * @brief VNodeDetail
-                   * @param node
+                   * @brief VNodeDetail copy constructor
+                   * @param node node
                    */
                   VNodeDetail(const VNodeDetail &node);
                   /**
-                   * @brief operator =
-                   * @param node
-                   * @return
+                   * @brief operator = assignment operator
+                   * @param node node
+                   * @return node
                    */
                   VNodeDetail &operator=(const VNodeDetail &node);
     /**
-     * @brief getId
-     * @return
+     * @brief getId return object id.
+     * @return id.
      */
     inline qint64 getId() const {return id;}
     /**
-     * @brief setId
-     * @param value
+     * @brief setId set object id.
+     * @param value object id.
      */
     inline void   setId(const qint64 &value) {id = value;}
     /**
-     * @brief getTypeTool
-     * @return
+     * @brief getTypeTool return tool type.
+     * @return tool type.
      */
     inline Tool::Tools getTypeTool() const {return typeTool;}
     /**
-     * @brief setTypeTool
-     * @param value
+     * @brief setTypeTool set tool type.
+     * @param value tool type.
      */
     inline void   setTypeTool(const Tool::Tools &value) {typeTool = value;}
     /**
-     * @brief getTypeNode
-     * @return
+     * @brief getTypeNode return node type.
+     * @return node type.
      */
     inline NodeDetail::NodeDetails getTypeNode() const {return typeNode;}
     /**
-     * @brief setTypeNode
-     * @param value
+     * @brief setTypeNode set node type.
+     * @param value node type.
      */
     inline void   setTypeNode(const NodeDetail::NodeDetails &value) {typeNode = value;}
     /**
-     * @brief getMx
-     * @return
+     * @brief getMx return object bias x axis.
+     * @return bias x axis.
      */
     inline qreal  getMx() const {return mx;}
     /**
-     * @brief setMx
-     * @param value
+     * @brief setMx set object bias x axis.
+     * @param value bias x axis.
      */
     inline void   setMx(const qreal &value) {mx = value;}
     /**
-     * @brief getMy
-     * @return
+     * @brief getMy return object bias y axis.
+     * @return bias y axis.
      */
     inline qreal  getMy() const {return my;}
     /**
-     * @brief setMy
-     * @param value
+     * @brief setMy set object bias y axis.
+     * @param value bias y axis.
      */
     inline void   setMy(const qreal &value) {my = value;}
 private:
     /**
-     * @brief id
+     * @brief id object id.
      */
     qint64        id;
     /**
-     * @brief typeTool
+     * @brief typeTool type of tool
      */
     Tool::Tools   typeTool;
     /**
-     * @brief typeNode
+     * @brief typeNode node type.
      */
     NodeDetail::NodeDetails typeNode;
     /**
-     * @brief mx
+     * @brief mx bias x axis.
      */
     qreal         mx;
     /**
-     * @brief my
+     * @brief my bias y axis.
      */
     qreal         my;
 };
