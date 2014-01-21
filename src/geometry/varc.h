@@ -38,131 +38,146 @@ class QLineF;
 class QPainterPath;
 
 /**
- * @brief VArc клас, що реалізує дугу. Дуга розраховується за годиниковою стрілкою.
+ * @brief VArc class for anticlockwise arc.
  */
 class VArc: public VGObject
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
                        /**
-                        * @brief VArc конструктор по замовчуванню.
+                        * @brief VArc default constructor.
                         */
                        VArc ();
                        /**
-                        * @brief VArc конструктор.
-                        * @param center точка центру.
-                        * @param radius радіус.
-                        * @param f1 початковий кут в градусах.
-                        * @param f2 кінцевий кут в градусах.
+                        * @brief VArc constructor.
+                        * @param center center point.
+                        * @param radius arc radius.
+                        * @param f1 start angle (degree).
+                        * @param f2 end angle (degree).
                         */
                        VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
                              QString formulaF2, qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
                        /**
-                        * @brief VArc
-                        * @param arc
+                        * @brief VArc copy constructor
+                        * @param arc arc
                         */
                        VArc(const VArc &arc);
                        /**
-                        * @brief operator =
-                        * @param arc
-                        * @return
+                        * @brief operator = assignment operator
+                        * @param arc arc
+                        * @return arc
                         */
                        VArc& operator= (const VArc &arc);
     /**
-     * @brief GetF1 повертає початковий кут дуги.
-     * @return повертає кут в градусах.
+     * @brief GetF1 return start angle.
+     * @return angle in degree.
      */
     inline QString     GetFormulaF1 () const {return formulaF1;}
     /**
-     * @brief GetF1
-     * @return
+     * @brief GetF1 return formula for start angle.
+     * @return string with formula.
      */
     inline qreal       GetF1 () const {return f1;}
     /**
-     * @brief GetF2 повертає кінцевий кут дуги.
-     * @return повертає кут в градусах.
+     * @brief GetF2 return end angle.
+     * @return angle in degree.
      */
     inline QString     GetFormulaF2 () const {return formulaF2;}
     /**
-     * @brief GetF2
-     * @return
+     * @brief GetF2 return formula for end angle.
+     * @return string with formula.
      */
     inline qreal       GetF2 () const {return f2;}
     /**
-     * @brief GetLength повертає довжину дуги.
-     * @return повертає довжину дуги.
+     * @brief GetLength return arc length.
+     * @return length.
      */
     qreal              GetLength () const;
     /**
-     * @brief GetRadius повертає радіус дуги.
-     * @return повертає радіус дуги.
+     * @brief GetRadius return arc radius.
+     * @return radius.
      */
     inline QString     GetFormulaRadius () const {return formulaRadius;}
     /**
-     * @brief GetRadius
-     * @return
+     * @brief GetRadius return formula for radius.
+     * @return string with formula.
      */
     inline qreal       GetRadius () const {return radius;}
     /**
-     * @brief GetCenter повертає точку центра дуги.
-     * @return повертає точку центра дуги.
+     * @brief GetCenter return center point.
+     * @return center point.
      */
     inline VPointF     GetCenter () const {return center;}
     /**
-     * @brief GetP1 повертає першу точку з якої починається дуга.
-     * @return точку початку дуги.
+     * @brief GetP1 return point associated with start angle.
+     * @return point.
      */
     QPointF GetP1() const;
     /**
-     * @brief GetP2 повертає другу точку в якій закінчується дуга.
-     * @return точку кінця дуги.
+     * @brief GetP2 return point associated with end angle.
+     * @return точку point.
      */
     QPointF            GetP2 () const;
     /**
-     * @brief GetPath будує шлях по даній дузі.
-     * @return повертає шлях.
+     * @brief GetPath return QPainterPath for this arc.
+     * @return path.
      */
     QPainterPath       GetPath() const;
     /**
-     * @brief AngleArc
-     * @return
+     * @brief AngleArc calculate arc angle.
+     * @return angle in degree.
      */
     qreal              AngleArc() const;
     /**
-     * @brief GetPoints
-     * @return
+     * @brief GetPoints return list of points needed for drawing arc.
+     * @return list of points
      */
     QVector<QPointF>   GetPoints () const;
+    /**
+     * @brief name return arc name. This name used in variables.
+     * @return name
+     */
     virtual QString    name() const;
+    /**
+     * @brief CutArc cut arc into two arcs.
+     * @param length length first arc.
+     * @param arc1 first arc.
+     * @param arc2 second arc.
+     * @return point cutting
+     */
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
+    /**
+     * @brief setId keep id arc in data.
+     * @param id id arc in data.
+     */
     virtual void       setId(const qint64 &id);
 private:
     /**
-     * @brief f1 початковий кут в градусах
+     * @brief f1 start angle in degree.
      */
-    qreal              f1;          // початковий кут нахилу дуги (градуси)
+    qreal              f1;
     /**
-     * @brief formulaF1
+     * @brief formulaF1 formula for start angle.
      */
     QString            formulaF1;
     /**
-     * @brief f2 кінцевий кут в градусах
+     * @brief f2 end angle in degree.
      */
-    qreal              f2;          // кінцевий кут нахилу дуги (градуси)
+    qreal              f2;
     /**
-     * @brief formulaF2
+     * @brief formulaF2 formula for end angle.
      */
     QString            formulaF2;
     /**
-     * @brief radius радіус дуги.
+     * @brief radius arc radius.
      */
     qreal              radius;
     /**
-     * @brief formulaRadius
+     * @brief formulaRadius formula for arc radius.
      */
     QString            formulaRadius;
     /**
-     * @brief center центральна точка дуги.
+     * @brief center center point of arc.
      */
     VPointF            center;
 };
