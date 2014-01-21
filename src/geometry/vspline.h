@@ -57,85 +57,85 @@ public:
     VSpline (const VSpline &spline );
     /**
      * @brief VSpline constructor.
-     * @param p1 початкова точка сплайна.
-     * @param p4 кінцева точка сплайна.
-     * @param angle1 кут в градусах першої напрямної.
-     * @param angle2 кут в градусах другої напрямної.
-     * @param kCurve коефіцієнт кривизни сплайна.
-     * @param kAsm1 коефіцієнт довжини першої напрямної.
-     * @param kAsm2 коефіцієнт довжини другої напрямної.
+     * @param p1 first point spline.
+     * @param p4 last point spline.
+     * @param angle1 angle from first point to first control point.
+     * @param angle2 angle from second point to second control point.
+     * @param kCurve coefficient of curvature spline.
+     * @param kAsm1 coefficient of length first control line.
+     * @param kAsm2 coefficient of length second control line.
      */
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
     /**
-     * @brief VSpline конструктор.
-     * @param p1 початкова точка сплайну.
-     * @param p2 перша контролююча точка сплайну.
-     * @param p3 друга контролююча точка сплайну.
-     * @param p4 кінцева точка сплайну.
+     * @brief VSpline constructor.
+     * @param p1 first point spline.
+     * @param p2 first control point.
+     * @param p3 second control point.
+     * @param p4 second point spline.
      */
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, qint64 idObject = 0,
              Draw::Draws mode = Draw::Calculation);
     /**
-     * @brief GetP1 повертає першу точку сплайну.
-     * @return перша точка сплайну.
+     * @brief GetP1 return first spline point.
+     * @return first point.
      */
     VPointF        GetP1 () const {return p1;}
     /**
-     * @brief GetP2 повертує першу контрольну точку сплайну.
-     * @return перша контрольна точка сплайну.
+     * @brief GetP2 return first control point.
+     * @return first control point.
      */
     inline QPointF GetP2 () const {return p2;}
     /**
-     * @brief GetP3 повертає другу контрольну точку сплайну.
-     * @return друга контрольна точка сплайну.
+     * @brief GetP3 return second control point.
+     * @return second control point.
      */
     inline QPointF GetP3 () const {return p3;}
     /**
-     * @brief GetP4 повертає останню точку сплайну.
+     * @brief GetP4 return last spline point.
      * @return остання точка сплайну.
      */
     inline VPointF GetP4 () const {return p4;}
     /**
-     * @brief GetAngle1 повертає кут першої напрямної.
-     * @return кут в градусах.
+     * @brief GetAngle1 return first angle control line.
+     * @return angle.
      */
     inline qreal   GetAngle1 () const {return angle1;}
     /**
-     * @brief GetAngle2 повертає кут другої напрямної.
-     * @return кут в градусах.
+     * @brief GetAngle2 return second angle control line.
+     * @return angle.
      */
     inline qreal   GetAngle2() const {return angle2;}
     /**
-     * @brief GetLength повертає довжину сплайну.
-     * @return довжина сплайну.
+     * @brief GetLength return length of spline.
+     * @return length.
      */
     qreal          GetLength () const;
     /**
-     * @brief name
-     * @return
+     * @brief name return spline name. Used for variables.
+     * @return name.
      */
     QString        name () const;
     /**
-     * @brief GetKasm1
-     * @return
+     * @brief GetKasm1 return coefficient of length first control line.
+     * @return coefficient.
      */
     inline qreal   GetKasm1() const {return kAsm1;}
     /**
-     * @brief GetKasm2
-     * @return
+     * @brief GetKasm2 return coefficient of length second control line.
+     * @return coefficient.
      */
     inline qreal   GetKasm2() const {return kAsm2;}
     /**
-     * @brief GetKcurve
-     * @return
+     * @brief GetKcurve return coefficient of curvature spline.
+     * @return coefficient
      */
     inline qreal   GetKcurve() const {return kCurve;}
     /**
-     * @brief CrossingSplLine перевіряє перетин сплайну з лінією.
-     * @param line лінія з якою перевіряється перетин.
-     * @param intersectionPoint точка перетину.
-     * @return результат перевірки.
+     * @brief CrossingSplLine check intersection spline with line.
+     * @param line line.
+     * @param intersectionPoint intersection point.
+     * @return result intersection.
      */
     QLineF::IntersectType CrossingSplLine(const QLineF &line, QPointF *intersectionPoint ) const;
     qreal           LengthT(qreal t) const;
@@ -151,115 +151,118 @@ public:
      */
     QPointF         CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     /**
-     * @brief GetPoints повертає точки з яких складається сплайн.
-     * @return список точок.
+     * @brief GetPoints return list with spline points.
+     * @return list of points.
      */
     QVector<QPointF> GetPoints () const;
     /**
-     * @brief GetPath повертає шлях сплайну.
-     * @return шлях.
+     * @brief GetPath return QPainterPath for this spline.
+     * @return path.
      */
     QPainterPath   GetPath() const;
     /**
-     * @brief SplinePoints
-     * @param p1
-     * @param p4
-     * @param angle1
-     * @param angle2
-     * @param kAsm1
-     * @param kAsm2
-     * @param kCurve
+     * @brief SplinePoints return list with spline points.
+     * @param p1 first spline point.
+     * @param p4 last spline point.
+     * @param angle1 angle from first point to first control point.
+     * @param angle2 angle from second point to second control point.
+     * @param kAsm1 coefficient of length first control line.
+     * @param kAsm2 coefficient of length second control line.
+     * @param kCurve coefficient of curvature spline.
      * @return
      */
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
     /**
-     * @brief operator =
-     * @param spl
-     * @return
+     * @brief operator = assignmeant operator
+     * @param spl spline
+     * @return spline
      */
     VSpline        &operator=(const VSpline &spl);
 protected:
     /**
-     * @brief GetPoints повертає точки з яких складається сплайн.
-     * @param p1 початкова точка сплайну.
-     * @param p2 перша контролююча точка сплайну.
-     * @param p3 друга контролююча точка сплайну.
-     * @param p4 кінцева точка сплайну.
-     * @return список точок.
+     * @brief GetPoints return list with spline points.
+     * @param p1 first spline point.
+     * @param p2 first control point.
+     * @param p3 second control point.
+     * @param p4 last spline point.
+     * @return list of points.
      */
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
     /**
-     * @brief p1 початкова точка сплайну
+     * @brief p1 first spline point.
      */
-    VPointF        p1;          // перша точка
+    VPointF        p1;
     /**
-     * @brief p2 перша контрольна точка сплайну.
+     * @brief p2 first control point.
      */
-    QPointF        p2;          // друга точка
+    QPointF        p2;
     /**
-     * @brief p3 друга контрольна точка сплайну.
+     * @brief p3 second control point.
      */
-    QPointF        p3;          // третя точка
+    QPointF        p3;
     /**
-     * @brief p4 кінцеві точка сплайну.
+     * @brief p4 last spline point.
      */
-    VPointF        p4;          // четверта точка
+    VPointF        p4;
     /**
-     * @brief angle1 кут в градусах першої напрямної.
+     * @brief angle1 first angle control line.
      */
-    qreal          angle1;      // кут нахилу дотичної в першій точці
+    qreal          angle1;
     /**
-     * @brief angle2 кут в градусах другої напрямної.
+     * @brief angle2 second angle control line.
      */
-    qreal          angle2;      // кут нахилу дотичної в другій точці
+    qreal          angle2;
     /**
-     * @brief kAsm1
+     * @brief kAsm1 coefficient of length first control line.
      */
     qreal          kAsm1;
     /**
-     * @brief kAsm2
+     * @brief kAsm2 coefficient of length second control line.
      */
     qreal          kAsm2;
     /**
-     * @brief kCurve
+     * @brief kCurve coefficient of curvature spline.
      */
     qreal          kCurve;
     /**
-     * @brief LengthBezier повертає дожину сплайну за його чотирьма точками.
-     * @param p1 початкова точка сплайну.
-     * @param p2 перша контролююча точка сплайну.
-     * @param p3 друга контролююча точка сплайну.
-     * @param p4 кінцева точка сплайну.
-     * @return дожина сплайну.
+     * @brief LengthBezier return spline length using 4 spline point.
+     * @param p1 first spline point
+     * @param p2 first control point.
+     * @param p3 second control point.
+     * @param p4 last spline point.
+     * @return length.
      */
     qreal          LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const;
     /**
-     * @brief PointBezier_r знаходить точки сплайну по його чотирьом точках.
-     * @param x1 х координата першої точки сплайну.
-     * @param y1 у координата другої точки сплайну.
-     * @param x2 х координата першої контрольної точки сплайну.
-     * @param y2 у координата першої контрольної точки сплайну.
-     * @param x3 х координата другої контрольної точки сплайну.
-     * @param y3 у координата другої контрольної точки сплайну.
-     * @param x4 х координата кінцевої точки сплайну.
-     * @param y4 у координата кінцевої точки сплайну.
-     * @param level рівень рекурсії. Напочатку повинен дорівнювати 0.
-     * @param px список х координат точок сплайну.
-     * @param py список у коодринат сплайну.
+     * @brief PointBezier_r find spline point using four point of spline.
+     * @param x1 х coordinate first point.
+     * @param y1 у coordinate first point.
+     * @param x2 х coordinate first control point.
+     * @param y2 у coordinate first control point.
+     * @param x3 х coordinate second control point.
+     * @param y3 у coordinate second control point.
+     * @param x4 х coordinate last point.
+     * @param y4 у coordinate last point.
+     * @param level level of recursion. In the begin 0.
+     * @param px list х coordinat spline points.
+     * @param py list у coordinat spline points.
      */
     static void    PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
                                   qint16 level, QVector<qreal> &px, QVector<qreal> &py);
     /**
-     * @brief CalcSqDistance розраховує довжину між точками.
-     * @param x1 х координата першої точки.
-     * @param y1 у координата другої точки.
-     * @param x2 х координата першої точки.
-     * @param y2 у координата другої точки.
-     * @return довжину.
+     * @brief CalcSqDistance calculate squared distance.
+     * @param x1 х coordinate first point.
+     * @param y1 у coordinate first point.
+     * @param x2 х coordinate second point.
+     * @param y2 у coordinate second point.
+     * @return squared length.
      */
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
+    /**
+     * @brief CreateName create spline name.
+     */
     void           CreateName();
 };
 
