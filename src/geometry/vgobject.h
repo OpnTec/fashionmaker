@@ -38,29 +38,86 @@
 namespace GObject
 {
     /**
-     * @brief The NodeDetail enum
+     * @brief The NodeDetail enum type of graphical objects.
      */
     enum Type { Point, Arc, Spline, SplinePath };
     Q_DECLARE_FLAGS(Types, Type)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(GObject::Types)
 
+/**
+ * @brief The VGObject class keep information graphical objects.
+ */
 class VGObject
 {
 public:
+    /**
+     * @brief VGObject default constructor.
+     */
     VGObject();
+    /**
+     * @brief VGObject constructor.
+     * @param type type graphical object.
+     * @param idObject id parent object.
+     * @param mode mode creation. Used in modeling mode.
+     */
     VGObject(const GObject::Type &type, const qint64 &idObject = 0, const Draw::Draws &mode = Draw::Calculation);
+    /**
+     * @brief VGObject copy constructor.
+     * @param obj object.
+     */
     VGObject(const VGObject &obj);
+    /**
+     * @brief operator = assignment operator.
+     * @param obj object
+     * @return object
+     */
     VGObject& operator= (const VGObject &obj);
     virtual ~VGObject(){}
+    /**
+     * @brief getIdObject return parent id.
+     * @return parent id or 0 if object don't have parent.
+     */
     qint64          getIdObject() const;
+    /**
+     * @brief setIdObject set parent id.
+     * @param value parent id.
+     */
     void            setIdObject(const qint64 &value);
+    /**
+     * @brief name return name graphical object.
+     * @return name
+     */
     virtual QString name() const;
+    /**
+     * @brief setName set name graphical object.
+     * @param name name graphical object.
+     */
     void            setName(const QString &name);
+    /**
+     * @brief getMode return mode creation.
+     * @return mode.
+     */
     Draw::Draws     getMode() const;
+    /**
+     * @brief setMode set mode creation.
+     * @param value mode.
+     */
     void            setMode(const Draw::Draws &value);
+    /**
+     * @brief getType return object type.
+     * @return type.
+     */
     GObject::Type   getType() const;
+    /**
+     * @brief id return id object.
+     * @return id
+     */
     qint64          id() const;
+    /**
+     * @brief setId set id object.
+     * @param id id.
+     */
     virtual void    setId(const qint64 &id);
 protected:
     /**
