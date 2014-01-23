@@ -39,102 +39,96 @@ namespace Ui
 }
 
 /**
- * @brief TableWindow клас вікна створення розкладки.
+ * @brief TableWindow class layout window.
  */
 class TableWindow : public QMainWindow
 {
     Q_OBJECT
 public:
     /**
-     * @brief numberDetal Виводиться кількість деталей що ще залишилися.
+     * @brief numberDetal show count details, what need placed.
      */
     QLabel*               numberDetal;
     /**
-     * @brief colission Виводиться чи є колізії.
+     * @brief colission show if exist colissions.
      */
     QLabel*               colission;
     /**
-     * @brief TableWindow Конструктор класу вікна створення розкладки.
-     * @param parent parent widget Батько об'єкту. За замовчуванням = 0.
+     * @brief TableWindow constructor.
+     * @param parent parent widget.
      */
                  explicit TableWindow(QWidget *parent = 0);
-    /**
-     * @brief ~TableWindow Деструктор класу вікна.
-     */
     ~TableWindow();
 public slots:
     /**
-     * @brief ModelChosen Слот, що виконується при отриманні сигналу про розрахунок всіх деталей
-     *моделі.
-     * @param listDetails Список моделей деталі.
+     * @brief ModelChosen show window when user want create new layout.
+     * @param listDetails list of details.
      */
     void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
     /**
-     * @brief StopTable Слот, що виконується при хованні вікна. Виконує неохідні очищення і ховає
-     *вікно.
+     * @brief StopTable stop creation layout.
      */
     void                  StopTable();
     /**
-     * @brief saveScene Слот виконується при натисненні кнопки зберегти.
+     * @brief saveScene save created layout.
      */
     void                  saveScene();
     /**
-     * @brief GetNextDetail Слот виконується при натисненні кнопки наступна деталь.
+     * @brief GetNextDetail put next detail on table.
      */
     void                  GetNextDetail();
     /**
-     * @brief itemChect Відключає можливість виклику перевороту, якщо не вибрано жодної деталі.
-     * @param flag Булеве значення що регулює стан кнопки.
+     * @brief itemChect turn off rotation button if don't selected detail.
+     * @param flag true - enable button.
      */
     void                  itemChect(bool flag);
     /**
-     * @brief itemOut Слот, що виконується при отриманні сигналу виходу за межі листа.
-     * @param number Номер деталі в списку що вийшла за межі.
-     * @param flag Зберігає стан деталі.
+     * @brief itemOut handled if detail moved out paper sheet.
+     * @param number Number detail in list.
+     * @param flag set state of detail. True if detail moved out paper sheet.
      */
     void                  itemOut(int number, bool flag);
     /**
-     * @brief itemColliding Сигнал, що виконується при отриманні сигналу колізії об'єктів.
-     * @param list Список об'єктів що перетинаються.
-     * @param number 0 - включити до списку деталей що перетинаються, 1 - виключити зі списку.
+     * @brief itemColliding handled if we have colission details.
+     * @param list list of colission details.
+     * @param number 0 - include to list of colission dcetails, 1 - exclude from list.
      */
     void                  itemColliding(QList<QGraphicsItem *> list, int number);
     /**
-     * @brief AddLength Збільшує довжину листа на певне значення за один раз.
+     * @brief AddLength Add length paper sheet.Збільшує довжину листа на певне значення за один раз.
      */
     void                  AddLength();
     /**
-     * @brief RemoveLength Зменшує довжину листа на певне знечення за один раз.
-     *Зменшення відбувається до мінімально заданого значення.
+     * @brief RemoveLength reduce the length of paper sheet. You can reduce to the minimal value only.
      */
     void                  RemoveLength();
 signals:
     /**
-     * @brief closed Сигнал посилається при хованні вікна.
+     * @brief closed emit if window is closing.
      */
     void                  closed();
     /**
-     * @brief LengthChanged Сигнал посилається при зміні розміру листа.
+     * @brief LengthChanged emit if changing length of paper sheet.
      */
     void                  LengthChanged();
 protected:
     /**
-     * @brief closeEvent Перехоплення події закриття.
-     * @param event Подія що отримується.
+     * @brief closeEvent handle after close window.
+     * @param event close event.
      */
     void                  closeEvent(QCloseEvent *event);
     /**
-     * @brief moveToCenter Переміщує вікно у центер екрану.
+     * @brief moveToCenter move screen to the center of window.
      */
     void                  moveToCenter();
     /**
-     * @brief showEvent Перехоплення події показу вікна для розміщення його поцентру.
-     * @param event Подія що отримується.
+     * @brief showEvent handle after show window.
+     * @param event show event.
      */
     void                  showEvent ( QShowEvent * event );
     /**
-     * @brief keyPressEvent
-     * @param event
+     * @brief keyPressEvent handle key press events.
+     * @param event key event.
      */
     void                  keyPressEvent ( QKeyEvent * event );
 private:
@@ -144,71 +138,74 @@ private:
      */
     Ui::TableWindow*      ui;
     /**
-     * @brief listDetails Список деталей на укладання.
+     * @brief listDetails list of details.
      */
     QVector<VItem*>       listDetails;
     /**
-     * @brief outItems Змінна зберігає показує чи маємо деталі що виходять за межі листа.
+     * @brief outItems true if we have details out paper sheet.
      */
     bool                  outItems;
     /**
-     * @brief collidingItems Змінна показує чи маємо деталі що перетинаються.
+     * @brief collidingItems true if we have colission details.
      */
     bool                  collidingItems;
     /**
-     * @brief currentScene Зберігається покажчик на сцену.
+     * @brief currentScene pointer to scene.
      */
     QGraphicsScene*       tableScene;
     /**
-     * @brief paper Зберігається покажчик на прямокутник що імітує листа паперу.
+     * @brief paper paper sheet.
      */
     QGraphicsRectItem*    paper;
     /**
-     * @brief shadowPaper Зберігається покажчик на прямокутник що імітує тінь листа паперу.
+     * @brief shadowPaper paper sheet shadow.
      */
     QGraphicsRectItem*    shadowPaper;
     /**
-     * @brief checkNext Метод регулює стан кнопки Next.
+     * @brief checkNext disable next detail button if exist colission or out details.
      */
     void                  checkNext();
     /**
-     * @brief listOutItems Список стану виходу за лист кожної деталі.
+     * @brief listOutItems list state out each detail.
      */
     QBitArray*            listOutItems;
     /**
-     * @brief listCollidingItems Список що зберігає деталі що перетинаються між собою.
+     * @brief listCollidingItems list colissed details.
      */
     QList<QGraphicsItem*> listCollidingItems;
     /**
-     * @brief AddPaper Додає на сцену лист паперу з тінню.
+     * @brief AddPaper add to the scene paper and shadow.
      */
     void                  AddPaper();
     /**
-     * @brief AddDetail Додає наступну деталь.
+     * @brief AddDetail show on scene next detail.
      */
     void                  AddDetail();
     /**
-     * @brief indexDetail Індекс деталі в списку, що буде викладатися наступного разу.
+     * @brief indexDetail index next detail in list what will be shown.
      */
     qint32                indexDetail;
     /**
-     * @brief sceneRect Мінімальний розмір листа паперу що буде показуватися на сцені.
+     * @brief sceneRect minimal size of a paper.
      */
     QRectF                sceneRect;
+    /**
+     * @brief fileName keep name of pattern file.
+     */
     QString               fileName;
     /**
-     * @brief SvgFile
-     * @param name
+     * @brief SvgFile save layout to svg file.
+     * @param name name layout file.
      */
     void SvgFile(const QString &name)const;
     /**
-     * @brief PngFile
-     * @param name
+     * @brief PngFile save layout to png file.
+     * @param name name layout file.
      */
     void PngFile(const QString &name)const;
     /**
-     * @brief PsFile
-     * @param name
+     * @brief PsFile save layout to ps file.
+     * @param name name layout file.
      */
     void PdfFile(const QString &name)const;
 };
