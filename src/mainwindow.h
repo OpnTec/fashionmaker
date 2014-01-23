@@ -537,16 +537,6 @@ private:
      */
     bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
                          qint64 &errorColumn) const;
-    template <typename T>
-    /**
-     * @brief AddToolToDetail
-     * @param tool
-     * @param id
-     * @param typeTool
-     * @param idDetail
-     */
-    void               AddToolToDetail(T *tool, const qint64 &id, Tool::Tools typeTool,
-                                       const qint64 &idDetail);
     template <typename DrawTool, typename Dialog>
     /**
      * @brief ClosedDialog
