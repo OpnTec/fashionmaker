@@ -41,14 +41,14 @@ public:
                    /**
                     * @brief VToolPointOfContact
                     * @param doc dom document container
-                    * @param data
-                    * @param id
+                    * @param data container with variables
+                    * @param id object id in container
                     * @param radius
                     * @param center
                     * @param firstPointId
                     * @param secondPointId
                     * @param typeCreation
-                    * @param parent
+                    * @param parent parent object
                     */
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &radius, const qint64 &center,
@@ -73,7 +73,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void    Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
@@ -89,7 +89,7 @@ public:
      * @param my
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -103,7 +103,7 @@ public:
     static const QString ToolType;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void   FullUpdateFromFile();
     /**

@@ -44,10 +44,10 @@ public:
                  /**
                   * @brief VToolArc
                   * @param doc dom document container
-                  * @param data
-                  * @param id
+                  * @param data container with variables
+                  * @param id object id in container
                   * @param typeCreation
-                  * @param parent
+                  * @param parent parent object
                   */
                  VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                           QGraphicsItem * parent = 0);
@@ -60,7 +60,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void  Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
@@ -73,7 +73,7 @@ public:
      * @param f2
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -90,7 +90,7 @@ public:
     static const QString ToolType;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void     FullUpdateFromFile();
     /**
@@ -105,7 +105,7 @@ public slots:
     virtual void     ChangedActivDraw(const QString &newName);
     /**
      * @brief ShowTool
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */

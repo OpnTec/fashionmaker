@@ -42,14 +42,14 @@ public:
                  /**
                   * @brief VToolLineIntersect
                   * @param doc dom document container
-                  * @param data
-                  * @param id
+                  * @param data container with variables
+                  * @param id object id in container
                   * @param p1Line1
                   * @param p2Line1
                   * @param p1Line2
                   * @param p2Line2
                   * @param typeCreation
-                  * @param parent
+                  * @param parent parent object
                   */
                  VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &p1Line1,
                                     const qint64 &p2Line1, const qint64 &p1Line2, const qint64 &p2Line2,
@@ -63,7 +63,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void  Create(QSharedPointer<DialogLineIntersect> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
@@ -79,7 +79,7 @@ public:
      * @param my
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -93,7 +93,7 @@ public:
     static const QString ToolType;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
     /**

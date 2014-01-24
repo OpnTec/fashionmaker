@@ -42,11 +42,11 @@ public:
                   /**
                    * @brief VNodeSpline
                    * @param doc dom document container
-                   * @param data
-                   * @param id
-                   * @param idSpline
+                   * @param data container with variables
+                   * @param id object id in container
+                   * @param id object id in containerSpline
                    * @param typeCreation
-                   * @param parent
+                   * @param parent parent object
                    */
                   VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
                               const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
@@ -54,9 +54,9 @@ public:
     /**
      * @brief Create
      * @param doc dom document container
-     * @param data
-     * @param id
-     * @param idSpline
+     * @param data container with variables
+     * @param id object id in container
+     * @param id object id in containerSpline
      * @param parse
      * @param typeCreation
      * @return
@@ -75,7 +75,7 @@ public:
     virtual void DeleteNode();
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile ();
 protected:

@@ -43,11 +43,11 @@ public:
                                    /**
                                     * @brief VToolDetail
                                     * @param doc dom document container
-                                    * @param data
-                                    * @param id
+                                    * @param data container with variables
+                                    * @param id object id in container
                                     * @param typeCreation
                                     * @param scene
-                                    * @param parent
+                                    * @param parent parent object
                                     */
                                    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                const Tool::Sources &typeCreation, VMainGraphicsScene *scene,
@@ -70,7 +70,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void                    Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
                                           VDomDocument *doc, VContainer *data);
@@ -80,7 +80,7 @@ public:
      * @param newDetail
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -91,7 +91,7 @@ public:
     /**
      * @brief AddTool
      * @param tool
-     * @param id
+     * @param id object id in container
      * @param typeTool
      */
     void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool)
@@ -147,7 +147,7 @@ public:
     void                           Remove();
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void                   FullUpdateFromFile ();
     /**

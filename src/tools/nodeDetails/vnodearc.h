@@ -42,11 +42,11 @@ public:
                  /**
                   * @brief VNodeArc
                   * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param idArc
+                  * @param data container with variables
+                  * @param id object id in container
+                  * @param id object id in containerArc
                   * @param typeCreation
-                  * @param parent
+                  * @param parent parent object
                   */
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
                           const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
@@ -54,9 +54,9 @@ public:
     /**
      * @brief Create
      * @param doc dom document container
-     * @param data
-     * @param id
-     * @param idArc
+     * @param data container with variables
+     * @param id object id in container
+     * @param id object id in containerArc
      * @param parse
      * @param typeCreation
      */
@@ -73,7 +73,7 @@ public:
     virtual void DeleteNode();
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
 protected:

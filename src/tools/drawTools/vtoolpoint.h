@@ -42,9 +42,9 @@ public:
                             /**
                              * @brief VToolPoint
                              * @param doc dom document container
-                             * @param data
-                             * @param id
-                             * @param parent
+                             * @param data container with variables
+                             * @param id object id in container
+                             * @param parent parent object
                              */
                             VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
     virtual                 ~VToolPoint(){}
@@ -70,7 +70,7 @@ public slots:
     virtual void            FullUpdateFromGui(int result) = 0;
     /**
      * @brief ShowTool
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */

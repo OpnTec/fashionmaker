@@ -62,7 +62,7 @@ class VDomDocument : public QObject, public QDomDocument
 public:
                    /**
                     * @brief VDomDocument
-                    * @param data
+                    * @param data container with variables
                     * @param comboBoxDraws
                     * @param mode
                     */
@@ -70,7 +70,7 @@ public:
                    /**
                     * @brief VDomDocument
                     * @param name
-                    * @param data
+                    * @param data container with variables
                     * @param comboBoxDraws
                     * @param mode
                     */
@@ -79,7 +79,7 @@ public:
                    /**
                     * @brief VDomDocument
                     * @param doc dom document containertype
-                    * @param data
+                    * @param data container with variables
                     * @param comboBoxDraws
                     * @param mode
                     */
@@ -186,7 +186,7 @@ public:
     /**
      * @brief UpdateToolData
      * @param id
-     * @param data
+     * @param data container with variables
      */
     void           UpdateToolData(const qint64 &id, VContainer *data);
     /**
@@ -239,7 +239,7 @@ signals:
      */
     void           ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     void           FullUpdateFromFile();
     /**

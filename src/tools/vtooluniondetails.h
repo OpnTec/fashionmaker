@@ -44,7 +44,7 @@ public:
      * @brief Create
      * @param dialog
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void  Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
@@ -54,7 +54,7 @@ public:
      * @param newDetail
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -87,7 +87,7 @@ public:
                                  const qreal angle);
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile (){}
 protected:

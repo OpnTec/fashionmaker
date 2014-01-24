@@ -170,9 +170,13 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
 QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &p)
 {
     QLineF lineP2pointFrom = QLineF(line.p2(), p);
-    qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
+    //right triangle always have one angle with 90 degree
+    //Now we want find angle between projection and line from p.
+    qreal angle = 180-(line.angleTo(lineP2pointFrom)-90);
+    //Swap first and last points line. Need for rotation.
     QLineF pointFromlineP2 = QLineF(p, line.p2());
     pointFromlineP2.setAngle(pointFromlineP2.angle()+angle);
+    //After rotation we will have two intersect lines. Left just find intersect point.
     QPointF point;
     QLineF::IntersectType type = pointFromlineP2.intersect(line, &point);
     if ( type == QLineF::BoundedIntersection )

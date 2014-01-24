@@ -43,12 +43,12 @@ public:
                  /**
                   * @brief VToolLine
                   * @param doc dom document container
-                  * @param data
-                  * @param id
+                  * @param data container with variables
+                  * @param id object id in container
                   * @param firstPoint
                   * @param secondPoint
                   * @param typeCreation
-                  * @param parent
+                  * @param parent parent object
                   */
                  VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                            qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
@@ -61,7 +61,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void  Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
@@ -72,7 +72,7 @@ public:
      * @param secondPoint
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -85,7 +85,7 @@ public:
     static const QString TagName;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void     FullUpdateFromFile();
     /**
@@ -100,7 +100,7 @@ public slots:
     virtual void     FullUpdateFromGui(int result);
     /**
      * @brief ShowTool
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */

@@ -56,7 +56,7 @@ public:
     static const QString AttrArc;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
     /**
@@ -66,7 +66,7 @@ public slots:
     virtual void FullUpdateFromGui(int result);
     /**
      * @brief ArcChoosed
-     * @param id
+     * @param id object id in container
      */
     void ArcChoosed(qint64 id);
     /**

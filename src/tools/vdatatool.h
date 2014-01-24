@@ -41,8 +41,8 @@ class VDataTool : public QObject
 public:
                           /**
                            * @brief VDataTool
-                           * @param data
-                           * @param parent
+                           * @param data container with variables
+                           * @param parent parent object
                            */
                           VDataTool(VContainer *data, QObject *parent = 0);
     virtual               ~VDataTool(){}

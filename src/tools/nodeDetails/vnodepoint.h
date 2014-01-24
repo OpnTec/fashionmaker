@@ -42,11 +42,11 @@ public:
                  /**
                   * @brief VNodePoint
                   * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param idPoint
+                  * @param data container with variables
+                  * @param id object id in container
+                  * @param id object id in containerPoint
                   * @param typeCreation
-                  * @param parent
+                  * @param parent parent object
                   */
                  VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                             const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
@@ -54,9 +54,9 @@ public:
     /**
      * @brief Create
      * @param doc dom document container
-     * @param data
-     * @param id
-     * @param idPoint
+     * @param data container with variables
+     * @param id object id in container
+     * @param id object id in containerPoint
      * @param parse
      * @param typeCreation
      */
@@ -74,7 +74,7 @@ public:
     virtual void DeleteNode();
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
     /**

@@ -41,13 +41,13 @@ public:
                       /**
                        * @brief VToolLinePoint
                        * @param doc dom document container
-                       * @param data
-                       * @param id
+                       * @param data container with variables
+                       * @param id object id in container
                        * @param typeLine
                        * @param formula
                        * @param basePointId
                        * @param angle
-                       * @param parent
+                       * @param parent parent object
                        */
                       VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                      const QString &formula, const qint64 &basePointId, const qreal &angle,

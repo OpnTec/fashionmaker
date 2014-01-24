@@ -43,12 +43,12 @@ public:
     /**
      * @brief VToolCutSpline
      * @param doc
-     * @param data
-     * @param id
+     * @param data container with variables
+     * @param id object id in container
      * @param formula
      * @param splineId
      * @param typeCreation
-     * @param parent
+     * @param parent parent object
      */
     VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
                    const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
@@ -62,7 +62,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void  Create(QSharedPointer<DialogCutSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
@@ -76,7 +76,7 @@ public:
      * @param my
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -91,7 +91,7 @@ public:
     static const QString AttrSpline;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
     /**
@@ -101,7 +101,7 @@ public slots:
     virtual void FullUpdateFromGui(int result);
     /**
      * @brief SplineChoosed
-     * @param id
+     * @param id object id in container
      */
     void SplineChoosed(qint64 id);
     /**

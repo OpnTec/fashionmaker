@@ -42,15 +42,15 @@ public:
                    /**
                     * @brief VToolNormal
                     * @param doc dom document container
-                    * @param data
-                    * @param id
+                    * @param data container with variables
+                    * @param id object id in container
                     * @param typeLine
                     * @param formula
                     * @param angle
                     * @param firstPointId
                     * @param secondPointId
                     * @param typeCreation
-                    * @param parent
+                    * @param parent parent object
                     */
                    VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const QString &formula, const qreal &angle, const qint64 &firstPointId,
@@ -65,7 +65,7 @@ public:
      * @param dialog
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      */
     static void    Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);
@@ -82,7 +82,7 @@ public:
      * @param my
      * @param scene
      * @param doc dom document container
-     * @param data
+     * @param data container with variables
      * @param parse
      * @param typeCreation
      */
@@ -107,7 +107,7 @@ public:
     static const QString ToolType;
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void   FullUpdateFromFile();
     /**

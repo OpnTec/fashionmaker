@@ -44,10 +44,10 @@ public:
                   /**
                    * @brief VToolSplinePath
                    * @param doc dom document container
-                   * @param data
-                   * @param id
+                   * @param data container with variables
+                   * @param id object id in container
                    * @param typeCreation
-                   * @param parent
+                   * @param parent parent object
                    */
                   VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                   QGraphicsItem * parent = 0);
@@ -60,7 +60,7 @@ public:
       * @param dialog
       * @param scene
       * @param doc dom document container
-      * @param data
+      * @param data container with variables
       */
      static void  Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data);
@@ -70,7 +70,7 @@ public:
       * @param path
       * @param scene
       * @param doc dom document container
-      * @param data
+      * @param data container with variables
       * @param parse
       * @param typeCreation
       */
@@ -102,7 +102,7 @@ signals:
     void             setEnabledPoint(bool enable);
 public slots:
     /**
-     * @brief FullUpdateFromFile
+     * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void     FullUpdateFromFile();
     /**
@@ -125,7 +125,7 @@ public slots:
     virtual void     ChangedActivDraw(const QString &newName);
     /**
      * @brief ShowTool
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */

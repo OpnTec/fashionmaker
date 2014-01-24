@@ -41,10 +41,10 @@ public:
                  /**
                   * @brief VAbstractNode
                   * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param idNode
-                  * @param parent
+                  * @param data container with variables
+                  * @param id object id in container
+                  * @param id object id in containerNode
+                  * @param parent parent object
                   */
                  VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
                                const qint64 &idTool, QObject *parent = 0);

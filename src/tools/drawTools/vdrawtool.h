@@ -44,9 +44,9 @@ public:
                  /**
                   * @brief VDrawTool
                   * @param doc dom document container
-                  * @param data
-                  * @param id
-                  * @param parent
+                  * @param data container with variables
+                  * @param id object id in container
+                  * @param parent parent object
                   */
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
     virtual      ~VDrawTool() {}
@@ -62,7 +62,7 @@ public:
 public slots:
     /**
      * @brief ShowTool
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */
@@ -170,7 +170,7 @@ protected:
     /**
      * @brief ShowItem
      * @param item
-     * @param id
+     * @param id object id in container
      * @param color
      * @param enable
      */
