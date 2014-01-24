@@ -2024,7 +2024,7 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="354"/>
-        <source>Tool to create a point at the intersection of 2 lines.</source>
+        <source>Point at line intersection</source>
         <translation>Werkzeug zum Erzeugen eines Punktes am Schnittpunkt zweier Linien.</translation>
     </message>
     <message>

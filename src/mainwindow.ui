@@ -351,7 +351,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool to create a point at the intersection of 2 lines.</string>
+           <string>Point at line intersection</string>
           </property>
           <property name="text">
            <string>...</string>
