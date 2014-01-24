@@ -80,7 +80,7 @@ public slots:
     void          ChoosedItem(qint64 id, const Scene::Scenes &type);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
+     * @param factor scene scale factor. scene scale factor.
      */
     void          SetFactor(qreal factor);
 protected:
@@ -113,7 +113,7 @@ signals:
     void          ChoosedObject(qint64 id, Scene::Scenes type);
     /**
      * @brief NewFactor
-     * @param factor
+     * @param factor scene scale factor.
      */
     void          NewFactor(qreal factor);
 private:

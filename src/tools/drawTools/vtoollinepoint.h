@@ -43,7 +43,7 @@ public:
                        * @param doc dom document container
                        * @param data container with variables
                        * @param id object id in container
-                       * @param typeLine
+                       * @param typeLine line type.
                        * @param formula
                        * @param basePointId
                        * @param angle
@@ -60,7 +60,7 @@ public slots:
     virtual void      ChangedActivDraw(const QString &newName);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void      SetFactor(qreal factor);
 protected:

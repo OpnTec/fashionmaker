@@ -74,7 +74,7 @@ public slots:
     virtual void ChangedActivDraw(const QString &newName);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void SetFactor(qreal factor);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

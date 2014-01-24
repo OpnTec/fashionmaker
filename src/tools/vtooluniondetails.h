@@ -69,16 +69,6 @@ public:
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param newDetail
-     * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
-    /**
-     * @brief Create help create tool.
-     * @param _id tool id, 0 if tool doesn't exist yet.
      * @param d1 first detail.
      * @param d2 second detail.
      * @param d1id id first detail.

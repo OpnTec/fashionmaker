@@ -52,12 +52,12 @@ public:
                             const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                             QGraphicsItem * parent = 0 );
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param doc dom document container
      * @param data container with variables
      * @param id object id in container
      * @param id object id in containerPoint
-     * @param parse
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
@@ -120,8 +120,8 @@ protected:
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief UpdateNamePosition
-     * @param mx
-     * @param my
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
      */
     virtual void UpdateNamePosition(qreal mx, qreal my);
     /**

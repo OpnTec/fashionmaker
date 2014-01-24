@@ -100,7 +100,7 @@ public:
     /**
      * @brief ChangeActivDraw
      * @param name
-     * @param parse
+     * @param parse parser file mode.
      */
     void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
     /**
@@ -146,7 +146,7 @@ public:
     bool           SetNameDraw(const QString& name);
     /**
      * @brief Parse
-     * @param parse
+     * @param parse parser file mode.
      * @param sceneDraw
      * @param sceneDetail
      */
@@ -338,7 +338,7 @@ private:
      * @param sceneDraw
      * @param sceneDetail
      * @param node
-     * @param parse
+     * @param parse parser file mode.
      */
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document::Documents &parse);
@@ -347,7 +347,7 @@ private:
      * @param sceneDraw
      * @param sceneDetail
      * @param node
-     * @param parse
+     * @param parse parser file mode.
      * @param mode
      */
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
@@ -356,7 +356,7 @@ private:
      * @brief ParseDetailElement
      * @param sceneDetail
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      */
     void           ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                       const Document::Documents &parse);
@@ -364,7 +364,7 @@ private:
      * @brief ParseDetails
      * @param sceneDetail
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      */
     void           ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                 const Document::Documents &parse);
@@ -372,7 +372,7 @@ private:
      * @brief ParsePointElement
      * @param scene
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      * @param type
      * @param mode
      */
@@ -382,7 +382,7 @@ private:
      * @brief ParseLineElement
      * @param scene
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      * @param mode
      */
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
@@ -391,7 +391,7 @@ private:
      * @brief ParseSplineElement
      * @param scene
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      * @param type
      * @param mode
      */
@@ -401,7 +401,7 @@ private:
      * @brief ParseArcElement
      * @param scene
      * @param domElement
-     * @param parse
+     * @param parse parser file mode.
      * @param type
      * @param mode
      */

@@ -56,7 +56,7 @@ public:
       */
      virtual void    setDialog();
      /**
-      * @brief Create
+      * @brief Create help create tool
       * @param dialog
       * @param scene pointer to scene.
       * @param doc dom document container
@@ -65,13 +65,13 @@ public:
      static void  Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data);
      /**
-      * @brief Create
+      * @brief Create help create tool
       * @param _id tool id, 0 if tool doesn't exist yet.
       * @param path
       * @param scene pointer to scene.
       * @param doc dom document container
       * @param data container with variables
-      * @param parse
+      * @param parse parser file mode.
       * @param typeCreation way we create this tool.
       */
      static void  Create(const qint64 _id, VSplinePath *path, VMainGraphicsScene  *scene,
@@ -132,7 +132,7 @@ public slots:
     virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void     SetFactor(qreal factor);
 protected:

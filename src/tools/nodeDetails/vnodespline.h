@@ -52,12 +52,12 @@ public:
                               const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                               QGraphicsItem * parent = 0);
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param doc dom document container
      * @param data container with variables
      * @param id object id in container
      * @param id object id in containerSpline
-     * @param parse
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      * @return
      */

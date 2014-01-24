@@ -77,7 +77,7 @@ public slots:
     virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void            SetFactor(qreal factor);
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
@@ -96,8 +96,8 @@ protected:
     QGraphicsLineItem       *lineName;
     /**
      * @brief UpdateNamePosition
-     * @param mx
-     * @param my
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
      */
     virtual void            UpdateNamePosition(qreal mx, qreal my);
     /**

@@ -48,7 +48,7 @@ public:
      */
     virtual void setDialog();
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param dialog
      * @param scene pointer to scene.
      * @param doc dom document container
@@ -57,17 +57,17 @@ public:
     static void  Create(QSharedPointer<DialogCutSplinePath> &dialog, VMainGraphicsScene  *scene,
                         VDomDocument *doc, VContainer *data);
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param pointName
      * @param formula
      * @param splineId
-     * @param mx
-     * @param my
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
      * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
-     * @param parse
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const QString &pointName, const QString &formula,

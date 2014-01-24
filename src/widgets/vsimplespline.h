@@ -51,7 +51,7 @@ public:
     /**
      * @brief VSimpleSpline
      * @param id
-     * @param factor
+     * @param factor scene scale factor.
      * @param currentColor
      * @param parent
      */

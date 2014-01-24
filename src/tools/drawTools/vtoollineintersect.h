@@ -59,7 +59,7 @@ public:
      */
     virtual void setDialog();
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param dialog
      * @param scene pointer to scene.
      * @param doc dom document container
@@ -68,19 +68,19 @@ public:
     static void  Create(QSharedPointer<DialogLineIntersect> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param p1Line1Id
      * @param p2Line1Id
      * @param p1Line2Id
      * @param p2Line2Id
      * @param pointName
-     * @param mx
-     * @param my
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
      * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
-     * @param parse
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id, const qint64 &p1Line2Id,
@@ -103,7 +103,7 @@ public slots:
     virtual void FullUpdateFromGui(int result);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void SetFactor(qreal factor);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

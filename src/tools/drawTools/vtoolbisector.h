@@ -43,7 +43,7 @@ public:
                     * @param doc dom document container
                     * @param data container with variables
                     * @param id object id in container
-                    * @param typeLine
+                    * @param typeLine line type.
                     * @param formula
                     * @param firstPointId
                     * @param secondPointId
@@ -70,7 +70,7 @@ public:
      */
     virtual void   setDialog();
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param dialog
      * @param scene pointer to scene.
      * @param doc dom document container
@@ -79,20 +79,20 @@ public:
     static void    Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
     /**
-     * @brief Create
+     * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param formula
      * @param firstPointId
      * @param secondPointId
      * @param thirdPointId
-     * @param typeLine
+     * @param typeLine line type.
      * @param pointName
-     * @param mx
-     * @param my
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
      * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
-     * @param parse
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void    Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
@@ -116,7 +116,7 @@ public slots:
     virtual void   FullUpdateFromGui(int result);
     /**
      * @brief SetFactor set current scale factor of scene.
-     * @param factor
+     * @param factor scene scale factor.
      */
     virtual void   SetFactor(qreal factor);
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
