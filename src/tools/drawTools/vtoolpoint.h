@@ -59,24 +59,24 @@ public slots:
      */
     void                    NameChangePosition(const QPointF &pos);
     /**
-     * @brief ChangedActivDraw
+     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName
      */
     virtual void            ChangedActivDraw(const QString &newName);
     /**
-     * @brief FullUpdateFromGui
+     * @brief FullUpdateFromGui  refresh tool data from change options.
      * @param result
      */
     virtual void            FullUpdateFromGui(int result) = 0;
     /**
-     * @brief ShowTool
+     * @brief ShowTool  highlight tool.
      * @param id object id in container
      * @param color
      * @param enable
      */
     virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
-     * @brief SetFactor
+     * @brief SetFactor set current scale factor of scene.
      * @param factor
      */
     virtual void            SetFactor(qreal factor);

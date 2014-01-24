@@ -60,7 +60,7 @@ public slots:
      */
     virtual void FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui
+     * @brief FullUpdateFromGui  refresh tool data from change options.
      * @param result
      */
     virtual void FullUpdateFromGui(int result);
@@ -70,7 +70,7 @@ public slots:
      */
     void ArcChoosed(qint64 id);
     /**
-     * @brief ChangedActivDraw
+     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName
      */
     virtual void      ChangedActivDraw(const QString &newName);

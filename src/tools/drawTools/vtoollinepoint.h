@@ -54,12 +54,12 @@ public:
                                      QGraphicsItem * parent = 0);
 public slots:
     /**
-     * @brief ChangedActivDraw
+     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName
      */
     virtual void      ChangedActivDraw(const QString &newName);
     /**
-     * @brief SetFactor
+     * @brief SetFactor set current scale factor of scene.
      * @param factor
      */
     virtual void      SetFactor(qreal factor);

@@ -228,14 +228,14 @@ public:
     qint64         SPointActiveDraw();
 signals:
     /**
-     * @brief ChangedActivDraw
+     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName
      */
     void           ChangedActivDraw(const QString &newName);
     /**
-     * @brief ChangedNameDraw
-     * @param oldName
-     * @param newName
+     * @brief ChangedNameDraw save new name active pattern peace.
+     * @param oldName old name.
+     * @param newName new name.
      */
     void           ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
@@ -247,7 +247,7 @@ signals:
      */
     void           haveChange();
     /**
-     * @brief ShowTool
+     * @brief ShowTool  highlight tool.
      * @param id
      * @param color
      * @param enable

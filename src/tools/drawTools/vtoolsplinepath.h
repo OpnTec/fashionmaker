@@ -106,7 +106,7 @@ public slots:
      */
     virtual void     FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui
+     * @brief FullUpdateFromGui  refresh tool data from change options.
      * @param result
      */
     virtual void     FullUpdateFromGui(int result);
@@ -119,19 +119,19 @@ public slots:
     void             ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                                 const QPointF &pos);
     /**
-     * @brief ChangedActivDraw
+     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName
      */
     virtual void     ChangedActivDraw(const QString &newName);
     /**
-     * @brief ShowTool
+     * @brief ShowTool  highlight tool.
      * @param id object id in container
      * @param color
      * @param enable
      */
     virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
-     * @brief SetFactor
+     * @brief SetFactor set current scale factor of scene.
      * @param factor
      */
     virtual void     SetFactor(qreal factor);

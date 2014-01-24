@@ -111,12 +111,12 @@ public slots:
      */
     virtual void   FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui
+     * @brief FullUpdateFromGui  refresh tool data from change options.
      * @param result
      */
     virtual void   FullUpdateFromGui(int result);
     /**
-     * @brief SetFactor
+     * @brief SetFactor set current scale factor of scene.
      * @param factor
      */
     virtual void   SetFactor(qreal factor);

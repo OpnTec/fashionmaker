@@ -347,7 +347,7 @@ public slots:
      */
     void               AboutQt();
     /**
-     * @brief ShowToolTip show tools tooltip.
+     * @brief ShowTool  highlight tool.Tip show tools tooltip.
      * @param toolTip tooltip text.
      */
     void               ShowToolTip(const QString &toolTip);
