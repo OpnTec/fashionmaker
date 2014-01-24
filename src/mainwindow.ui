@@ -70,7 +70,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point on the end line.</string>
+           <string>Point at distance and angle</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -96,7 +96,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of shoulder.</string>
+           <string>Special point on shoulder.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -122,7 +122,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of contact.</string>
+           <string>Point at intersection of arc and line.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -148,7 +148,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of bisector.</string>
+           <string>Point along bisector</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -174,7 +174,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point of normal.</string>
+           <string>Point along perpendicular</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -200,7 +200,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool point along line.</string>
+           <string>Point at distance along line</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -226,7 +226,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool to create a point on the foot of a dropped perpendicular.</string>
+           <string>Perpendicular point along line</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -325,7 +325,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Line tool.</string>
+           <string>Line between points</string>
           </property>
           <property name="text">
            <string>...</string>

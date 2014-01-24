@@ -2258,7 +2258,7 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="73"/>
-        <source>Tool point on the end line.</source>
+        <source>Point at distance and angle</source>
         <translation>Nástroj bod na koncové čáře.</translation>
     </message>
     <message>
@@ -2286,27 +2286,27 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="99"/>
-        <source>Tool point of shoulder.</source>
+        <source>Special point on shoulder.</source>
         <translation>Nástroj bod ramene.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="125"/>
-        <source>Tool point of contact.</source>
+        <source>Point at intersection of arc and line.</source>
         <translation>Nástroj bod dotyku.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="151"/>
-        <source>Tool point of bisector.</source>
+        <source>Point along bisector</source>
         <translation>Nástroj bod osy úhlu.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="177"/>
-        <source>Tool point of normal.</source>
+        <source>Point along perpendicular</source>
         <translation>Nástroj bod kolmice.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="203"/>
-        <source>Tool point along line.</source>
+        <source>Point at distance along line</source>
         <translation>Nástroj bod podél čáry.</translation>
     </message>
     <message>
@@ -2399,12 +2399,12 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="229"/>
-        <source>Tool to create a point on the foot of a dropped perpendicular.</source>
+        <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="328"/>
-        <source>Line tool.</source>
+        <source>Line between points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
