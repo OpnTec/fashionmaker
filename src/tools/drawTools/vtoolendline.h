@@ -33,23 +33,23 @@
 #include "../../dialogs/dialogendline.h"
 
 /**
- * @brief The VToolEndLine class
+ * @brief The VToolEndLine class tool for creation point on the line end.
  */
 class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VToolEndLine
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
+                  * @brief VToolEndLine constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
                   * @param typeLine line type.
-                  * @param formula
-                  * @param angle
-                  * @param basePointId
+                  * @param formula string with formula length of line.
+                  * @param angle angle of line.
+                  * @param basePointId id first point of line.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VToolEndLine(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                               const QString &formula, const qreal &angle, const qint64 &basePointId,
@@ -59,27 +59,27 @@ public:
      */
     virtual void setDialog();
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void  Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
     /**
-     * @brief Create help create tool
+     * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param pointName point name.
      * @param typeLine line type.
-     * @param formula
-     * @param angle
-     * @param basePointId
+     * @param formula string with formula length of line.
+     * @param angle angle of line.
+     * @param basePointId id first point of line.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
@@ -87,9 +87,6 @@ public:
                         const QString &formula, const qreal &angle, const qint64 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -98,14 +95,18 @@ public slots:
     virtual void FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -118,7 +119,7 @@ protected:
     virtual void RefreshDataInFile();
 private:
     /**
-     * @brief dialogEndLine pointer to the dialog
+     * @brief dialogEndLine pointer to the dialog.
      */
     QSharedPointer<DialogEndLine> dialogEndLine;
 };

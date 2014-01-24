@@ -33,7 +33,7 @@
 #include "../../dialogs/dialogbisector.h"
 
 /**
- * @brief The VToolBisector class  tool for creation bisector point.
+ * @brief The VToolBisector class tool for creation bisector point.
  */
 class VToolBisector : public VToolLinePoint
 {
