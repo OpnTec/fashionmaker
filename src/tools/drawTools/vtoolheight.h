@@ -33,23 +33,23 @@
 #include "../../dialogs/dialogheight.h"
 
 /**
- * @brief The VToolHeight class
+ * @brief The VToolHeight class tool for creation point of height. Help find point of projection onto line.
  */
 class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT
 public:
                    /**
-                    * @brief VToolHeight
-                    * @param doc dom document container
-                    * @param data container with variables
-                    * @param id object id in container
+                    * @brief VToolHeight constructor.
+                    * @param doc dom document container.
+                    * @param data container with variables.
+                    * @param id object id in container.
                     * @param typeLine line type.
-                    * @param basePointId
-                    * @param p1LineId
-                    * @param p2LineId
+                    * @param basePointId id base point of projection.
+                    * @param p1LineId id first point of line.
+                    * @param p2LineId id second point of line.
                     * @param typeCreation way we create this tool.
-                    * @param parent parent object
+                    * @param parent parent object.
                     */
                    VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
@@ -59,11 +59,11 @@ public:
      */
     virtual void   setDialog();
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void    Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
@@ -72,14 +72,14 @@ public:
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param pointName point name.
      * @param typeLine line type.
-     * @param basePointId
-     * @param p1LineId
-     * @param p2LineId
+     * @param basePointId id base point of projection.
+     * @param p1LineId id first point of line.
+     * @param p2LineId id second point of line.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
@@ -88,15 +88,12 @@ public:
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
-     * @brief FindPoint
-     * @param line
-     * @param point
-     * @return
+     * @brief FindPoint find projection base point onto line.
+     * @param line line
+     * @param point base point.
+     * @return point onto line.
      */
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -104,15 +101,19 @@ public slots:
      */
     virtual void   FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @brief FullUpdateFromGui refresh tool data from change options.
+     * @param result result working dialog.
      */
     virtual void   FullUpdateFromGui(int result);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -125,15 +126,15 @@ protected:
     virtual void RefreshDataInFile();
 private:
     /**
-     * @brief dialogHeight
+     * @brief dialogHeight dialog.
      */
     QSharedPointer<DialogHeight> dialogHeight;
     /**
-     * @brief p1LineId
+     * @brief p1LineId id first point of line.
      */
     qint64         p1LineId;
     /**
-     * @brief p2LineId
+     * @brief p2LineId id second point of line.
      */
     qint64         p2LineId;
 };

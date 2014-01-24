@@ -115,6 +115,7 @@ void VToolHeight::Create(const qint64 _id, const QString &pointName, const QStri
     }
 }
 
+//TODO Which way is better? See VAbstractTool::ClosestPoint.
 QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 {
     qreal a = 0, b = 0, c = 0;
