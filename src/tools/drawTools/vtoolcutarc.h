@@ -50,7 +50,7 @@ public:
      * @param arc1id id first cutting arc.
      * @param arc2id id second cutting arc.
      * @param typeCreation way we create this tool.
-     * @param parent parent object
+     * @param parent parent object.
      */
     VToolCutArc(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
                 const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
