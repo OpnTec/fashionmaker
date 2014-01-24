@@ -71,7 +71,7 @@ public:
                           VContainer *data);
     /**
      * @brief Create
-     * @param _id
+     * @param _id tool id, 0 if tool doesn't exist yet.
      * @param formula
      * @param firstPointId
      * @param secondPointId

@@ -66,7 +66,7 @@ public:
                          VDomDocument *doc, VContainer *data);
      /**
       * @brief Create
-      * @param _id
+      * @param _id tool id, 0 if tool doesn't exist yet.
       * @param path
       * @param scene pointer to scene.
       * @param doc dom document container

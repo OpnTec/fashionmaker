@@ -88,7 +88,7 @@ public:
      * @param scene pointer to scene.
      * @param doc dom document container.
      * @param data container with variables.
-     * @param parse pares file mode.
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void                    Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,

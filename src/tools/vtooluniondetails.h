@@ -32,40 +32,76 @@
 #include "vabstracttool.h"
 #include "../dialogs/dialoguniondetails.h"
 
+/**
+ * @brief The VToolUnionDetails class tool union details.
+ */
 class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
+    /**
+     * @brief VToolUnionDetails costructor.
+     * @param doc dom document container.
+     * @param data dom document container.
+     * @param id object id in container.
+     * @param d1 first detail.
+     * @param d2 second detail.
+     * @param indexD1 index edge in first detail.
+     * @param indexD2 index edge in second detail.
+     * @param typeCreation way we create this tool.
+     * @param parent parent object.
+     */
     VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
                       const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
                       const Tool::Sources &typeCreation, QObject *parent = 0);
+    /**
+     * @brief setDialog set dialog when user want change tool option.
+     */
     virtual void setDialog() {}
     /**
-     * @brief Create
-     * @param dialog
-     * @param doc dom document container
-     * @param data container with variables
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void  Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
     /**
-     * @brief Create
-     * @param _id
+     * @brief Create help create tool.
+     * @param _id tool id, 0 if tool doesn't exist yet.
      * @param newDetail
      * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
-     * @param parse
+     * @param parse parser file mode.
+     * @param typeCreation way we create this tool.
+     */
+    /**
+     * @brief Create help create tool.
+     * @param _id tool id, 0 if tool doesn't exist yet.
+     * @param d1 first detail.
+     * @param d2 second detail.
+     * @param d1id id first detail.
+     * @param d2id id second detail.
+     * @param indexD1 index edge in first detail.
+     * @param indexD2 index edge in second detail.
+     * @param scene pointer to scene.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const VDetail &d1,  const VDetail &d2, const qint64 &d1id, const qint64 &d2id,
                         const ptrdiff_t &indexD1, const ptrdiff_t &indexD2, VMainGraphicsScene *scene,
                         VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                         const Tool::Sources &typeCreation);
-    static QVector<VDetail> GetDetailFromFile(VDomDocument *doc, const QDomElement &domElement);
     /**
-     * @brief TagName
+     * @brief GetDetailFromFile parse detail from file.
+     * @param doc dom document container.
+     * @param domElement tag in xml tree.
+     * @return detail stored in file.
      */
+    static QVector<VDetail> GetDetailFromFile(VDomDocument *doc, const QDomElement &domElement);
     static const QString TagName;
     static const QString ToolType;
     static const QString TagDetail;
@@ -76,13 +112,46 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
-
+    /**
+     * @brief AddToNewDetail create united detail adding one node per time.
+     * @param tool tool that make union.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param newDetail united detail.
+     * @param det detail what we union.
+     * @param i index node in detail.
+     * @param idTool id tool union details.
+     * @param dx bias node x axis.
+     * @param dy bias node y axis.
+     * @param pRotate point rotation.
+     * @param angle angle rotation.
+     */
     static void  AddToNewDetail(QObject *tool, VDomDocument *doc, VContainer *data, VDetail &newDetail,
                                 const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0,
                                 const qreal &dy = 0, const qint64 &pRotate = 0, const qreal &angle = 0);
+    /**
+     * @brief UpdatePoints update data for united details.
+     * @param idDetail id united detail.
+     * @param data container with variables.
+     * @param det detail what we union.
+     * @param i index node in detail.
+     * @param idCount
+     * @param dx bias node x axis.
+     * @param dy bias node y axis.
+     * @param pRotate point rotation.
+     * @param angle angle rotation.
+     */
     static void  UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
                               qint64 &idCount, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
                               const qreal &angle = 0);
+    /**
+     * @brief BiasRotatePoint bias and rotate point.
+     * @param point point.
+     * @param dx bias x axis.
+     * @param dy bias y axis.
+     * @param pRotate point rotation.
+     * @param angle angle rotation.
+     */
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal angle);
 public slots:
@@ -101,13 +170,45 @@ protected:
     virtual void RefreshDataInFile();
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
+    /**
+     * @brief d1 first detail.
+     */
     VDetail      d1;
+    /**
+     * @brief d2 second detail.
+     */
     VDetail      d2;
+    /**
+     * @brief indexD1 index edge in first detail.
+     */
     ptrdiff_t    indexD1;
+    /**
+     * @brief indexD2 index edge in second detail.
+     */
     ptrdiff_t    indexD2;
+    /**
+     * @brief AddDetail add detail to xml file.
+     * @param domElement tag in xml tree.
+     * @param d detail.
+     */
     void         AddDetail(QDomElement &domElement, VDetail &d);
+    /**
+     * @brief AddNode add node to xml file.
+     * @param domElement tag in xml tree.
+     * @param node node.
+     */
     void         AddNode(QDomElement &domElement, const VNodeDetail &node);
+    /**
+     * @brief UpdateDetail update detail in xml tree.
+     * @param domNode dom node.
+     * @param d detail.
+     * @return return next detail tag in xml tree if exist.
+     */
     QDomNode     UpdateDetail(const QDomNode &domNode, const VDetail &d);
+    /**
+     * @brief AddToModeling add tool to xml tree.
+     * @param domElement tag in xml tree.
+     */
     void         AddToModeling(const QDomElement &domElement);
 };
 

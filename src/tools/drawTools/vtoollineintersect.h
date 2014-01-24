@@ -69,7 +69,7 @@ public:
                         VContainer *data);
     /**
      * @brief Create
-     * @param _id
+     * @param _id tool id, 0 if tool doesn't exist yet.
      * @param p1Line1Id
      * @param p2Line1Id
      * @param p1Line2Id
