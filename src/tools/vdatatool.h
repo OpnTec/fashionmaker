@@ -33,46 +33,46 @@
 
 //We need QObject class because we use qobject_cast.
 /**
- * @brief The VDataTool class
+ * @brief The VDataTool class need for getting access to data container of tool.
  */
 class VDataTool : public QObject
 {
     Q_OBJECT
 public:
                           /**
-                           * @brief VDataTool
+                           * @brief VDataTool constructor.
                            * @param data container with variables
                            * @param parent parent object
                            */
                           VDataTool(VContainer *data, QObject *parent = 0);
     virtual               ~VDataTool(){}
     /**
-     * @brief operator =
-     * @param tool
-     * @return
+     * @brief operator = assignment operator.
+     * @param tool tool
+     * @return tool
      */
     VDataTool             &operator= (const VDataTool &tool);
     /**
-     * @brief getData
-     * @return
+     * @brief getData return data container.
+     * @return container.
      */
     inline VContainer     getData() const { return data; }
     /**
-     * @brief setData
-     * @param value
+     * @brief setData set data container.
+     * @param value container.
      */
     inline void           setData(const VContainer *value){data = *value;}
     /**
-     * @brief referens
-     * @return
+     * @brief referens return count of referens.
+     * @return count count of referens.
      */
     virtual inline qint64 referens() const {return _referens;}
     /**
-     * @brief incrementReferens
+     * @brief incrementReferens increment referens.
      */
     virtual inline void   incrementReferens(){++_referens;}
     /**
-     * @brief decrementReferens
+     * @brief decrementReferens decrement referens.
      */
     virtual void          decrementReferens();
 protected:
@@ -81,7 +81,7 @@ protected:
      */
     VContainer            data;
     /**
-     * @brief _referens
+     * @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool.
      */
     qint64                _referens;
 };

@@ -190,7 +190,7 @@ protected:
      */
     virtual void            RefreshDataInFile()=0;
     /**
-     * @brief getData return data container.
+     * @brief getData return pointer to data container.
      * @return container.
      */
     inline const VContainer *getData() const {return &data;}
