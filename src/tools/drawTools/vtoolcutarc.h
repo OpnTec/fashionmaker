@@ -41,7 +41,7 @@ public:
                 const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog();
     static void  Create(QSharedPointer<DialogCutArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
@@ -82,7 +82,7 @@ protected:
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void AddToFile();
     /**

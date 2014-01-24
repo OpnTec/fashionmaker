@@ -46,19 +46,19 @@ public:
                    * @param doc dom document container
                    * @param data container with variables
                    * @param id object id in container
-                   * @param typeCreation
+                   * @param typeCreation way we create this tool.
                    * @param parent parent object
                    */
                   VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                   QGraphicsItem * parent = 0);
      /**
-      * @brief setDialog
+      * @brief setDialog set dialog when user want change tool option.
       */
      virtual void    setDialog();
      /**
       * @brief Create
       * @param dialog
-      * @param scene
+      * @param scene pointer to scene.
       * @param doc dom document container
       * @param data container with variables
       */
@@ -68,11 +68,11 @@ public:
       * @brief Create
       * @param _id
       * @param path
-      * @param scene
+      * @param scene pointer to scene.
       * @param doc dom document container
       * @param data container with variables
       * @param parse
-      * @param typeCreation
+      * @param typeCreation way we create this tool.
       */
      static void  Create(const qint64 _id, VSplinePath *path, VMainGraphicsScene  *scene,
                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
@@ -142,7 +142,7 @@ protected:
      */
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void     AddToFile();
     /**
@@ -165,7 +165,7 @@ protected:
      */
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void     RemoveReferens();
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );

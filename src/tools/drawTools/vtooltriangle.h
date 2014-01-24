@@ -48,20 +48,20 @@ public:
                     * @param axisP2Id
                     * @param firstPointId
                     * @param secondPointId
-                    * @param typeCreation
+                    * @param typeCreation way we create this tool.
                     * @param parent parent object
                     */
                    VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                  const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                  const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void   setDialog();
     /**
      * @brief Create
      * @param dialog
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      */
@@ -77,11 +77,11 @@ public:
      * @param secondPointId
      * @param mx
      * @param my
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void    Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id, const qint64 &axisP2Id,
                           const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
@@ -114,7 +114,7 @@ public slots:
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void   RemoveReferens();
     /**
@@ -123,7 +123,7 @@ protected:
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void   AddToFile();
     /**

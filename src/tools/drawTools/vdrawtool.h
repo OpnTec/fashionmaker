@@ -51,7 +51,7 @@ public:
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
     virtual      ~VDrawTool() {}
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog() {}
     /**

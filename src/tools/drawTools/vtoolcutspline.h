@@ -47,20 +47,20 @@ public:
      * @param id object id in container
      * @param formula
      * @param splineId
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      * @param parent parent object
      */
     VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
                    const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
                    const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog();
     /**
      * @brief Create
      * @param dialog
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      */
@@ -74,11 +74,11 @@ public:
      * @param splineId
      * @param mx
      * @param my
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const QString &pointName,
                         const QString &formula, const qint64 &splineId, const qreal &mx, const qreal &my,
@@ -117,7 +117,7 @@ protected:
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void AddToFile();
     /**

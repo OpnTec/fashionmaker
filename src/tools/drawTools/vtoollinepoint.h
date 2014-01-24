@@ -89,7 +89,7 @@ protected:
      */
     virtual void      RefreshGeometry();
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
 private:

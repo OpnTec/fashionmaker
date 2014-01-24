@@ -52,11 +52,11 @@ public:
      * @brief Create
      * @param _id
      * @param newDetail
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const VDetail &d1,  const VDetail &d2, const qint64 &d1id, const qint64 &d2id,
                         const ptrdiff_t &indexD1, const ptrdiff_t &indexD2, VMainGraphicsScene *scene,
@@ -92,7 +92,7 @@ public slots:
     virtual void FullUpdateFromFile (){}
 protected:
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void AddToFile();
     /**

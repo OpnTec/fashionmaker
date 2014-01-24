@@ -48,20 +48,20 @@ public:
                     * @param basePointId
                     * @param p1LineId
                     * @param p2LineId
-                    * @param typeCreation
+                    * @param typeCreation way we create this tool.
                     * @param parent parent object
                     */
                    VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void   setDialog();
     /**
      * @brief Create
      * @param dialog
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      */
@@ -77,11 +77,11 @@ public:
      * @param p2LineId
      * @param mx
      * @param my
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void    Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
@@ -116,7 +116,7 @@ protected:
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void   AddToFile();
     /**

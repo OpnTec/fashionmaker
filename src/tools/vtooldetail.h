@@ -34,31 +34,38 @@
 #include "../dialogs/dialogdetail.h"
 
 /**
- * @brief The VToolDetail class
+ * @brief The VToolDetail class for working with detail.
  */
 class VToolDetail: public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
                                    /**
-                                    * @brief VToolDetail
+                                    * @brief VToolDetail constructor.
                                     * @param doc dom document container
                                     * @param data container with variables
                                     * @param id object id in container
-                                    * @param typeCreation
-                                    * @param scene
+                                    * @param typeCreation way we create this tool.
+                                    * @param scene pointer to scene.
                                     * @param parent parent object
                                     */
                                    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id,
                                                const Tool::Sources &typeCreation, VMainGraphicsScene *scene,
                                                QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void                   setDialog();
     template<typename T>
+    /**
+     * @brief CreateNode create new node for detail.
+     * @param data container.
+     * @param id id parent object.
+     * @return id for new object.
+     */
     static qint64 CreateNode(VContainer *data, const qint64 &id)
     {
+        //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
         Q_ASSERT(node != 0);
         node->setMode(Draw::Modeling);
@@ -66,84 +73,39 @@ public:
     }
 
     /**
-     * @brief Create
-     * @param dialog
-     * @param scene
-     * @param doc dom document container
-     * @param data container with variables
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
+     * @param scene pointer to scene.
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void                    Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene,
                                           VDomDocument *doc, VContainer *data);
     /**
-     * @brief Create
-     * @param _id
-     * @param newDetail
-     * @param scene
-     * @param doc dom document container
-     * @param data container with variables
-     * @param parse
-     * @param typeCreation
+     * @brief Create help create tool.
+     * @param _id tool id, 0 if tool doesn't exist yet.
+     * @param newDetail detail what we want show.
+     * @param scene pointer to scene.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param parse pares file mode.
+     * @param typeCreation way we create this tool.
      */
     static void                    Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                          const Tool::Sources &typeCreation);
-    template <typename T>
-    /**
-     * @brief AddTool
-     * @param tool
-     * @param id object id in container
-     * @param typeTool
-     */
-    void AddTool(T *tool, const qint64 &id, Tool::Tools typeTool)
-    {
-        tool->setParentItem(this);
-        connect(tool, &T::ChoosedTool, sceneDetails, &VMainGraphicsScene::ChoosedItem);
-        VNodeDetail node(id, typeTool, Draw::Modeling, NodeDetail::Modeling);
-        VDetail det = VAbstractTool::data.GetDetail(this->id);
-        det.append(node);
-        VAbstractTool::data.UpdateDetail(this->id, det);
-        QDomElement domElement = doc->elementById(QString().setNum(this->id));
-        if (domElement.isElement())
-        {
-            AddNode(domElement, node);
-        }
-    }
-    /**
-     * @brief TagName
-     */
+                                          const Tool::Sources &typeCreation); 
     static const QString           TagName;
-    /**
-     * @brief TagNode
-     */
     static const QString           TagNode;
-    /**
-     * @brief AttrSupplement
-     */
     static const QString           AttrSupplement;
-    /**
-     * @brief AttrClosed
-     */
     static const QString           AttrClosed;
-    /**
-     * @brief AttrWidth
-     */
     static const QString           AttrWidth;
-    /**
-     * @brief AttrIdObject
-     */
     static const QString           AttrIdObject;
-    /**
-     * @brief AttrNodeType
-     */
     static const QString           AttrNodeType;
-    /**
-     * @brief NodeTypeContour
-     */
     static const QString           NodeTypeContour;
-    /**
-     * @brief NodeTypeModeling
-     */
     static const QString           NodeTypeModeling;
+    /**
+     * @brief Remove full delete detail.
+     */
     void                           Remove();
 public slots:
     /**
@@ -151,13 +113,13 @@ public slots:
      */
     virtual void                   FullUpdateFromFile ();
     /**
-     * @brief FullUpdateFromGui
-     * @param result
+     * @brief FullUpdateFromGui refresh tool data from change options.
+     * @param result keep result working dialog.
      */
     virtual void                   FullUpdateFromGui(int result);
 protected:
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void                   AddToFile ();
     /**
@@ -165,52 +127,56 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief itemChange
-     * @param change
-     * @param value
-     * @return
+     * @brief itemChange handle detail change.
+     * @param change change
+     * @param value value
+     * @return new value.
      */
     virtual QVariant               itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
-     * @brief mouseReleaseEvent
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     virtual void                   mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
-     * @brief contextMenuEvent
-     * @param event
+     * @brief contextMenuEvent handle context menu events.
+     * @param event context menu event.
      */
     virtual void                   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void                   RemoveReferens();
+    /**
+     * @brief keyReleaseEvent handle key release events.
+     * @param event key release event.
+     */
     virtual void                   keyReleaseEvent(QKeyEvent * event);
 private:
     Q_DISABLE_COPY(VToolDetail)
     /**
-     * @brief dialogDetail
+     * @brief dialogDetail dialog.
      */
     QSharedPointer<DialogDetail>   dialogDetail;
     /**
-     * @brief sceneDetails
+     * @brief sceneDetails pointer to the scene.
      */
     VMainGraphicsScene             *sceneDetails;
     /**
-     * @brief RefreshGeometry
+     * @brief RefreshGeometry refresh item on scene.
      */
     void                           RefreshGeometry ();
     /**
-     * @brief AddNode
-     * @param domElement
-     * @param node
+     * @brief AddNode add node to the file.
+     * @param domElement tag in xml tree.
+     * @param node node of detail.
      */
     void                           AddNode(QDomElement &domElement, const VNodeDetail &node);
     template <typename Tool>
     /**
-     * @brief InitTool
-     * @param scene
-     * @param node
+     * @brief InitTool initial node item on scene
+     * @param scene pointer to scene.
+     * @param node node of detail.
      */
     void                           InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
 };

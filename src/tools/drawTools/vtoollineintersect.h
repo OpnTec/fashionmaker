@@ -48,20 +48,20 @@ public:
                   * @param p2Line1
                   * @param p1Line2
                   * @param p2Line2
-                  * @param typeCreation
+                  * @param typeCreation way we create this tool.
                   * @param parent parent object
                   */
                  VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &p1Line1,
                                     const qint64 &p2Line1, const qint64 &p1Line2, const qint64 &p2Line2,
                                     const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog();
     /**
      * @brief Create
      * @param dialog
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      */
@@ -77,11 +77,11 @@ public:
      * @param pointName
      * @param mx
      * @param my
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id, const qint64 &p1Line2Id,
                         const qint64 &p2Line2Id, const QString &pointName, const qreal &mx, const qreal &my,
@@ -114,7 +114,7 @@ protected:
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void AddToFile();
     /**
@@ -122,7 +122,7 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void RemoveReferens();
 private:

@@ -48,7 +48,7 @@ public:
                     * @param p1Line
                     * @param p2Line
                     * @param pShoulder
-                    * @param typeCreation
+                    * @param typeCreation way we create this tool.
                     * @param parent parent object
                     */
                    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
@@ -56,7 +56,7 @@ public:
                                       const qint64 &pShoulder, const Tool::Sources &typeCreation,
                                       QGraphicsItem * parent = 0);
     /**
-     * @brief setDialog
+     * @brief setDialog set dialog when user want change tool option.
      */
     virtual void   setDialog();
     /**
@@ -72,7 +72,7 @@ public:
     /**
      * @brief Create
      * @param dialog
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      */
@@ -89,11 +89,11 @@ public:
      * @param pointName
      * @param mx
      * @param my
-     * @param scene
+     * @param scene pointer to scene.
      * @param doc dom document container
      * @param data container with variables
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      */
     static void    Create(const qint64 _id, const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
                           const qint64 &pShoulder, const QString &typeLine, const QString &pointName, const qreal &mx,
@@ -126,7 +126,7 @@ protected:
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void   AddToFile();
     /**
@@ -134,7 +134,7 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief RemoveReferens
+     * @brief RemoveReferens decrement value of reference.
      */
     virtual void   RemoveReferens();
 private:

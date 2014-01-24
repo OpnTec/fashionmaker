@@ -45,7 +45,7 @@ public:
                    * @param data container with variables
                    * @param id object id in container
                    * @param id object id in containerSpline
-                   * @param typeCreation
+                   * @param typeCreation way we create this tool.
                    * @param parent parent object
                    */
                   VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
@@ -58,7 +58,7 @@ public:
      * @param id object id in container
      * @param id object id in containerSpline
      * @param parse
-     * @param typeCreation
+     * @param typeCreation way we create this tool.
      * @return
      */
     static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
@@ -80,7 +80,7 @@ public slots:
     virtual void FullUpdateFromFile ();
 protected:
     /**
-     * @brief AddToFile
+     * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void AddToFile ();
     /**
