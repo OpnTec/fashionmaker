@@ -70,7 +70,7 @@ public:
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param pointName point name.
+     * @param pointName point name. point name.
      * @param typeLine line type.
      * @param formula string with length formula.
      * @param firstPointId id first point of line.

@@ -34,12 +34,24 @@
 #include "../../widgets/vsimplearc.h"
 
 /**
- * @brief The VToolCutArc class tool for
+ * @brief The VToolCutArc class tool for cutting arc.
  */
 class VToolCutArc : public VToolPoint
 {
     Q_OBJECT
 public:
+    /**
+     * @brief VToolCutArc constructor.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param id object id in container.
+     * @param formula string with formula length first arc.
+     * @param arcId id arc in data container.
+     * @param arc1id id first cutting arc.
+     * @param arc2id id second cutting arc.
+     * @param typeCreation way we create this tool.
+     * @param parent parent object
+     */
     VToolCutArc(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
                 const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
@@ -47,14 +59,32 @@ public:
      * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog();
+    /**
+     * @brief Create help create tool form GUI.
+     * @param dialog dialog.
+     * @param scene pointer to scene.
+     * @param doc dom document container.
+     * @param data container with variables.
+     */
     static void  Create(QSharedPointer<DialogCutArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data);
+    /**
+     * @brief Create help create tool.
+     * @param _id tool id, 0 if tool doesn't exist yet.
+     * @param pointName point name.
+     * @param formula string with formula length first arc.
+     * @param arcId id arc in data container.
+     * @param mx label bias x axis.
+     * @param my label bias y axis.
+     * @param scene pointer to scene.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param parse parser file mode.
+     * @param typeCreation way we create this tool.
+     */
     static void  Create(const qint64 _id, const QString &pointName, const QString &formula, const qint64 &arcId,
                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
     static const QString AttrArc;
 public slots:
@@ -64,12 +94,12 @@ public slots:
     virtual void FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void FullUpdateFromGui(int result);
     /**
-     * @brief ArcChoosed
-     * @param id object id in container
+     * @brief ArcChoosed send signal about selection from cutted arc.
+     * @param id object id in container.
      */
     void ArcChoosed(qint64 id);
     /**
@@ -77,11 +107,15 @@ public slots:
      * @param newName new name active pattern peace.
      */
     virtual void      ChangedActivDraw(const QString &newName);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void      ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -111,15 +145,27 @@ private:
      */
     QSharedPointer<DialogCutArc> dialogCutArc;
     /**
-     * @brief firstArc
+     * @brief firstArc first arc after cutting.
      */
     VSimpleArc *firstArc;
     /**
-     * @brief secondArc
+     * @brief secondArc second arc after cutting.
      */
     VSimpleArc *secondArc;
+    /**
+     * @brief arc1id id first arc after cutting.
+     */
     const qint64 arc1id;
+    /**
+     * @brief arc2id id second arc after cutting.
+     */
     const qint64 arc2id;
+    /**
+     * @brief RefreshArc refresh arc on scene.
+     * @param sArc arc.
+     * @param arcid arc id.
+     * @param tr arc type.
+     */
     void RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr);
 };
 
