@@ -33,6 +33,9 @@
 #include "../../dialogs/dialogcutarc.h"
 #include "../../widgets/vsimplearc.h"
 
+/**
+ * @brief The VToolCutArc class tool for
+ */
 class VToolCutArc : public VToolPoint
 {
     Q_OBJECT
@@ -71,13 +74,13 @@ public slots:
     void ArcChoosed(qint64 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void      ChangedActivDraw(const QString &newName);
     virtual void      ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
@@ -90,7 +93,7 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief RefreshGeometry
+     * @brief RefreshGeometry  refresh item on scene.
      */
     void      RefreshGeometry();
 private:

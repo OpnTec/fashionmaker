@@ -113,7 +113,7 @@ public slots:
      */
     virtual void                   FullUpdateFromFile ();
     /**
-     * @brief FullUpdateFromGui refresh tool data from change options.
+     * @brief FullUpdateFromGui refresh tool data after change in options.
      * @param result keep result working dialog.
      */
     virtual void                   FullUpdateFromGui(int result);

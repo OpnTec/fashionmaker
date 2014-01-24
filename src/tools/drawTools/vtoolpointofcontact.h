@@ -84,7 +84,7 @@ public:
      * @param center
      * @param firstPointId
      * @param secondPointId
-     * @param pointName
+     * @param pointName point name.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
@@ -119,7 +119,7 @@ public slots:
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

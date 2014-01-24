@@ -59,7 +59,7 @@ public:
     /**
      * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param pointName
+     * @param pointName point name.
      * @param formula
      * @param splineId
      * @param mx label bias x axis.
@@ -96,13 +96,13 @@ public slots:
     void         SplineChoosed(qint64 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void ChangedActivDraw(const QString &newName);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
@@ -115,7 +115,7 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief RefreshGeometry
+     * @brief RefreshGeometry  refresh item on scene.
      */
     void         RefreshGeometry();
     virtual void RemoveReferens();

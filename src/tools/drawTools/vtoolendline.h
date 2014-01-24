@@ -70,7 +70,7 @@ public:
     /**
      * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param pointName
+     * @param pointName point name.
      * @param typeLine line type.
      * @param formula
      * @param angle
@@ -104,7 +104,7 @@ public slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

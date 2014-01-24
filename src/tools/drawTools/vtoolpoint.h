@@ -60,7 +60,7 @@ public slots:
     void                    NameChangePosition(const QPointF &pos);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void            ChangedActivDraw(const QString &newName);
     /**
@@ -101,17 +101,17 @@ protected:
      */
     virtual void            UpdateNamePosition(qreal mx, qreal my);
     /**
-     * @brief mouseReleaseEvent
+     * @brief mouseReleaseEvent  handle mouse release events.
      * @param event
      */
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
-     * @brief hoverMoveEvent
+     * @brief hoverMoveEvent handle hover move events.
      * @param event
      */
     virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief hoverLeaveEvent
+     * @brief hoverLeaveEvent handle hover leave events.
      * @param event
      */
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );

@@ -69,17 +69,17 @@ public slots:
     virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName name new active pattern peace.
+     * @param newName new name active pattern peace. name new active pattern peace.
      */
     virtual void ChangedActivDraw(const QString &newName);
     /**
      * @brief ChangedNameDraw save new name active pattern peace.
      * @param oldName old name.
-     * @param newName new name.
+     * @param newName new name active pattern peace. new name.
      */
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
-     * @brief FullUpdateFromGui refresh tool data from change options.
+     * @brief FullUpdateFromGui refresh tool data after change in options.
      * @param result keep result working dialog.
      */
     virtual void FullUpdateFromGui(int result)=0;

@@ -82,7 +82,7 @@ protected:
      */
     void        mousePressEvent(QMouseEvent *mousePress);
     /**
-     * @brief mouseReleaseEvent обробник відпускання кнопки миші.
+     * @brief mouseReleaseEvent  handle mouse release events. обробник відпускання кнопки миші.
      * @param event передається подія
      */
     void        mouseReleaseEvent ( QMouseEvent * event );

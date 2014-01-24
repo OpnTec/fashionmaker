@@ -72,7 +72,7 @@ protected:
      */
     void     mousePressEvent(QMouseEvent *mousePress);
     /**
-     * @brief mouseReleaseEvent
+     * @brief mouseReleaseEvent  handle mouse release events.
      * @param event
      */
     void     mouseReleaseEvent(QMouseEvent *event);

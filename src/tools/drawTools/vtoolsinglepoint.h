@@ -69,7 +69,7 @@ public slots:
     virtual void FullUpdateFromGui(int result);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void ChangedActivDraw(const QString &newName);
     /**
@@ -85,7 +85,7 @@ signals:
     void         FullUpdateTree();
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
@@ -98,7 +98,7 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief itemChange
+     * @brief itemChange handle tool change.
      * @param change
      * @param value
      * @return

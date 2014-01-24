@@ -70,7 +70,7 @@ public:
     /**
      * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param pointName
+     * @param pointName point name.
      * @param axisP1Id
      * @param axisP2Id
      * @param firstPointId
@@ -118,7 +118,7 @@ protected:
      */
     virtual void   RemoveReferens();
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

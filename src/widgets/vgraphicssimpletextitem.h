@@ -70,12 +70,12 @@ protected:
      */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
-     * @brief hoverMoveEvent
+     * @brief hoverMoveEvent handle hover move events.
      * @param event
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief hoverLeaveEvent
+     * @brief hoverLeaveEvent handle hover leave events.
      * @param event
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );

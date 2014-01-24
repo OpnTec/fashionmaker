@@ -120,7 +120,7 @@ public slots:
                                                 const QPointF &pos);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void     ChangedActivDraw(const QString &newName);
     /**
@@ -137,7 +137,7 @@ public slots:
     virtual void     SetFactor(qreal factor);
 protected:
     /**
-     * @brief contextMenuEvent
+     * @brief contextMenuEvent handle context menu events.
      * @param event
      */
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
@@ -150,17 +150,17 @@ protected:
      */
     virtual void     RefreshDataInFile();
     /**
-     * @brief mouseReleaseEvent
+     * @brief mouseReleaseEvent  handle mouse release events.
      * @param event
      */
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
-     * @brief hoverMoveEvent
+     * @brief hoverMoveEvent handle hover move events.
      * @param event
      */
     virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief hoverLeaveEvent
+     * @brief hoverLeaveEvent handle hover leave events.
      * @param event
      */
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
@@ -180,7 +180,7 @@ private:
      */
     QVector<VControlPointSpline *>   controlPoints;
     /**
-     * @brief RefreshGeometry
+     * @brief RefreshGeometry  refresh item on scene.
      */
     void             RefreshGeometry();
     /**

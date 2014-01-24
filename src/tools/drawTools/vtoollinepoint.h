@@ -55,7 +55,7 @@ public:
 public slots:
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName
+     * @param newName new name active pattern peace.
      */
     virtual void      ChangedActivDraw(const QString &newName);
     /**
@@ -85,7 +85,7 @@ protected:
      */
     QGraphicsLineItem *mainLine;
     /**
-     * @brief RefreshGeometry
+     * @brief RefreshGeometry  refresh item on scene.
      */
     virtual void      RefreshGeometry();
     /**

@@ -39,17 +39,17 @@ public:
     VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor);
 protected:
     /**
-     * @brief mouseReleaseEvent
+     * @brief mouseReleaseEvent  handle mouse release events.
      * @param event
      */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
-     * @brief hoverMoveEvent
+     * @brief hoverMoveEvent handle hover move events.
      * @param event
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief hoverLeaveEvent
+     * @brief hoverLeaveEvent handle hover leave events.
      * @param event
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );

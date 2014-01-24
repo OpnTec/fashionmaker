@@ -110,7 +110,7 @@ public slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief contextMenuEvent handle context menu event.
+     * @brief contextMenuEvent handle context menu events. handle context menu event.
      * @param event context menu event.
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ); 
