@@ -34,21 +34,21 @@
 #include "../../dialogs/dialogline.h"
 
 /**
- * @brief The VToolLine class
+ * @brief The VToolLine class tool for creation line.
  */
 class VToolLine: public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VToolLine
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param firstPoint
-                  * @param secondPoint
+                  * @brief VToolLine constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
+                  * @param firstPoint id first line point.
+                  * @param secondPoint id second line point.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
                            qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
@@ -57,31 +57,28 @@ public:
      */
     virtual void setDialog();
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool form GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void  Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                         VContainer *data);
     /**
-     * @brief Create help create tool
+     * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param firstPoint
-     * @param secondPoint
+     * @param firstPoint id first line point.
+     * @param secondPoint id second line point.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
-    /**
-     * @brief TagName
-     */
     static const QString TagName;
 public slots:
     /**
@@ -95,14 +92,14 @@ public slots:
     virtual void     ChangedActivDraw(const QString &newName);
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void     FullUpdateFromGui(int result);
     /**
-     * @brief ShowTool  highlight tool.
+     * @brief ShowTool highlight tool.
      * @param id object id in container
-     * @param color
-     * @param enable
+     * @param color highlight color.
+     * @param enable enable or disable highlight.
      */
     virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
     /**
@@ -113,7 +110,7 @@ public slots:
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -126,35 +123,45 @@ protected:
     virtual void     RefreshDataInFile();
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void     RemoveReferens();
+    /**
+     * @brief itemChange handle item change.
+     * @param change change.
+     * @param value value.
+     * @return value.
+     */
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
+    /**
+     * @brief keyReleaseEvent handle key realse events.
+     * @param event key realse event.
+     */
     virtual void     keyReleaseEvent(QKeyEvent * event);
 private:
     /**
-     * @brief firstPoint
+     * @brief firstPoint id first line point.
      */
     qint64           firstPoint;
     /**
-     * @brief secondPoint
+     * @brief secondPoint id second line point.
      */
     qint64           secondPoint;
     /**
-     * @brief dialogLine
+     * @brief dialogLine dialog.
      */
     QSharedPointer<DialogLine> dialogLine;
     /**
-     * @brief RefreshGeometry  refresh item on scene.
+     * @brief RefreshGeometry refresh item on scene.
      */
     void             RefreshGeometry();
 };

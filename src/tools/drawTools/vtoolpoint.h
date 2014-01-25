@@ -48,9 +48,6 @@ public:
                              */
                             VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
     virtual                 ~VToolPoint(){}
-    /**
-     * @brief TagName
-     */
     static const QString    TagName;
 public slots:
     /**
@@ -80,6 +77,10 @@ public slots:
      * @param factor scene scale factor.
      */
     virtual void            SetFactor(qreal factor);
+    /**
+     * @brief ShowContextMenu
+     * @param event
+     */
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
@@ -124,7 +125,17 @@ protected:
      * @brief RefreshLine
      */
     void                    RefreshLine();
+    /**
+     * @brief itemChange
+     * @param change
+     * @param value
+     * @return
+     */
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
+    /**
+     * @brief keyReleaseEvent
+     * @param event
+     */
     virtual void            keyReleaseEvent(QKeyEvent * event);
 private:
     Q_DISABLE_COPY(VToolPoint)
