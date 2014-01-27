@@ -32,72 +32,72 @@
 #include <QGraphicsView>
 
 /**
- * @brief The VTableGraphicsView class
+ * @brief The VTableGraphicsView class table layout view.
  */
 class VTableGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     /**
-     * @brief The typeMove_e enum
+     * @brief The typeMove_e enum type items moves.
      */
     enum typeMove_e { Left, Right, Up, Down };
                 VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = 0);
 signals:
     /**
-     * @brief itemChect Сигнал, що посилається коли змінюється стан вибору деталі.
-     * @param flag Зберігає стан вибору деталі: false - знайдено, true - не знайдено.
+     * @brief itemChect emit after change selection state detail.
+     * @param flag false - selected, true - don't selected.
      */
     void        itemChect( bool flag );
 public slots:
     /**
-     * @brief selectionChanged Слот виконується при зміні стану вибору деталей.
+     * @brief selectionChanged handle selection change.
      */
     void        selectionChanged();
     /**
-     * @brief rotateItems слот, який виконується при натисненні кнопки повороту деталі.
+     * @brief rotateItems handle rotatation detail.
      */
     inline void rotateItems() {rotateIt();}
     /**
-     * @brief MirrorItem дзеркалить об'єкт відносно вертикальної вісі семетрії об'єкта.
+     * @brief MirrorItem mirror detail.
      */
     void        MirrorItem();
     /**
-     * @brief ZoomIn збільшує масштаб листа.
+     * @brief ZoomIn zoom in paper scale.
      */
     inline void ZoomIn() {scale(1.1, 1.1);}
     /**
-     * @brief ZoomOut зменшує масштаб листа.
+     * @brief ZoomOut zoom out paper scale.
      */
     inline void ZoomOut() {scale(1/1.1, 1/1.1);}
 protected:
     /**
-     * @brief wheelEvent обробник повороту колеса мишки.
-     * @param event передається подія.
+     * @brief wheelEvent handle wheel events.
+     * @param event wheel event.
      */
     void        wheelEvent ( QWheelEvent * event );
     /**
-     * @brief mousePressEvent обробник натиснення кнопки миші.
-     * @param mousePress передається подія.
+     * @brief mousePressEvent handle mouse press events.
+     * @param mousePress mouse press event.
      */
     void        mousePressEvent(QMouseEvent *mousePress);
     /**
-     * @brief mouseReleaseEvent  handle mouse release events. обробник відпускання кнопки миші.
-     * @param event передається подія
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     void        mouseReleaseEvent ( QMouseEvent * event );
     /**
-     * @brief keyPressEvent обробник натиснення клавіші.
-     * @param event передається подія.
+     * @brief keyPressEvent handle key press events.
+     * @param event key press event.
      */
     void        keyPressEvent ( QKeyEvent * event );
     /**
-     * @brief rotateIt виконує поворот вибраних деталей на 180 градусів.
+     * @brief rotateIt rotate selected details on 180 degree.
      */
     void        rotateIt();
     /**
-     * @brief MoveItem переміщує виділені об'єкти сцени.
-     * @param move напрямок переміщення.
+     * @brief MoveItem move selected detail.
+     * @param move type of move.
      */
     void        MoveItem( VTableGraphicsView::typeMove_e move );
     

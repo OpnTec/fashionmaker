@@ -32,29 +32,43 @@
 #include <QGraphicsPathItem>
 #include "../tools/vabstracttool.h"
 
+/**
+ * @brief The VSimpleSplinePath class for simple spline path. This object used when we cut spline path and want show
+ * peaces.
+ */
 class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
+    /**
+     * @brief VSimpleSplinePath constructor.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param id spline path id.
+     * @param factor scale factor.
+     */
     VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor);
 protected:
     /**
-     * @brief mouseReleaseEvent  handle mouse release events.
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VSimpleSplinePath)
+    /**
+     * @brief factor scale factor.
+     */
     qreal *factor;
 };
 

@@ -33,49 +33,57 @@
 #include "../options.h"
 
 /**
- * @brief The VMainGraphicsScene class
+ * @brief The VMainGraphicsScene class main scene.
  */
 class VMainGraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
                   /**
-                   * @brief VMainGraphicsScene
+                   * @brief VMainGraphicsScene default constructor.
                    */
                   VMainGraphicsScene();
                   /**
-                   * @brief VMainGraphicsScene
-                   * @param sceneRect
-                   * @param parent
+                   * @brief VMainGraphicsScene constructor.
+                   * @param sceneRect scene rect.
+                   * @param parent parent object.
                    */
                   VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
     /**
-     * @brief getHorScrollBar
-     * @return
+     * @brief getHorScrollBar return scene horizontal scrollbar.
+     * @return horizontal scrollbar.
      */
     inline qint32 getHorScrollBar() const {return horScrollBar;}
     /**
-     * @brief setHorScrollBar
-     * @param value
+     * @brief setHorScrollBar set scene horizontal scrollbar.
+     * @param value horizontal scrollbar.
      */
     inline void   setHorScrollBar(const qint32 &value) {horScrollBar = value;}
     /**
-     * @brief getVerScrollBar
-     * @return
+     * @brief getVerScrollBar return scene vertical scrollbar.
+     * @return vertical scrollbar.
      */
     inline qint32 getVerScrollBar() const {return verScrollBar;}
     /**
-     * @brief setVerScrollBar
-     * @param value
+     * @brief setVerScrollBar set scene vertical scrollbar.
+     * @param value vertical scrollbar.
      */
     inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
+    /**
+     * @brief transform return view transformation.
+     * @return view transformation.
+     */
     QTransform    transform() const;
+    /**
+     * @brief setTransform set view transformation.
+     * @param transform view transformation.
+     */
     void          setTransform(const QTransform &transform);
 public slots:
     /**
-     * @brief ChoosedItem
-     * @param id
-     * @param type
+     * @brief ChoosedItem emit ChoosedObject signal.
+     * @param id object id.
+     * @param type object scene type.
      */
     void          ChoosedItem(qint64 id, const Scene::Scenes &type);
     /**
@@ -85,50 +93,53 @@ public slots:
     void          SetFactor(qreal factor);
 protected:
     /**
-     * @brief mouseMoveEvent
-     * @param event
+     * @brief mouseMoveEvent handle mouse move events.
+     * @param event mouse move event.
      */
     void          mouseMoveEvent(QGraphicsSceneMouseEvent* event);
     /**
-     * @brief mousePressEvent
-     * @param event
+     * @brief mousePressEvent mouse press events.
+     * @param event mouse press event
      */
     void          mousePressEvent(QGraphicsSceneMouseEvent *event);
 signals:
     /**
-     * @brief mouseMove
-     * @param scenePos
+     * @brief mouseMove send new mouse position.
+     * @param scenePos new mouse position.
      */
     void          mouseMove(QPointF scenePos);
     /**
-     * @brief mousePress
-     * @param scenePos
+     * @brief mousePress send new mouse press position.
+     * @param scenePos new mouse press position.
      */
     void          mousePress(QPointF scenePos);
     /**
-     * @brief ChoosedObject
-     * @param id
-     * @param type
+     * @brief ChoosedObject send option choosed object.
+     * @param id object id.
+     * @param type object scene type.
      */
     void          ChoosedObject(qint64 id, Scene::Scenes type);
     /**
-     * @brief NewFactor
+     * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
      */
     void          NewFactor(qreal factor);
 private:
     /**
-     * @brief horScrollBar
+     * @brief horScrollBar value horizontal scroll bar.
      */
     qint32        horScrollBar;
     /**
-     * @brief verScrollBar
+     * @brief verScrollBar value vertical scroll bar.
      */
     qint32        verScrollBar;
     /**
-     * @brief scaleFactor
+     * @brief scaleFactor scale factor.
      */
     qreal         scaleFactor;
+    /**
+     * @brief _transform view transform value.
+     */
     QTransform    _transform;
 };
 

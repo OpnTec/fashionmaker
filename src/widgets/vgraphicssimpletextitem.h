@@ -32,57 +32,65 @@
 #include <QGraphicsSimpleTextItem>
 
 /**
- * @brief The VGraphicsSimpleTextItem class
+ * @brief The VGraphicsSimpleTextItem class pointer label.
  */
 class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VGraphicsSimpleTextItem
-                  * @param parent
+                  * @brief VGraphicsSimpleTextItem default constructor.
+                  * @param parent parent object.
                   */
                  VGraphicsSimpleTextItem(QGraphicsItem * parent = 0);
                  /**
-                  * @brief VGraphicsSimpleTextItem
-                  * @param text
-                  * @param parent
+                  * @brief VGraphicsSimpleTextItem constructor.
+                  * @param text text.
+                  * @param parent parent object.
                   */
                  VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = 0 );
     /**
-     * @brief FontSize
-     * @return
+     * @brief FontSize return label font size.
+     * @return font size.
      */
     qint32       FontSize()const {return fontSize;}
 signals:
     /**
-     * @brief NameChangePosition
-     * @param pos
+     * @brief NameChangePosition emit when label change position.
+     * @param pos new posotion.
      */
     void         NameChangePosition(const QPointF pos);
+    /**
+     * @brief ShowContextMenu emit when need show tool context menu.
+     * @param event context menu event.
+     */
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
-     * @brief itemChange
-     * @param change
-     * @param value
-     * @return
+     * @brief itemChange handle item change.
+     * @param change change.
+     * @param value value.
+     * @return value.
      */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    /**
+     * @brief contextMenuEvent handle context menu events.
+     * @param event context menu event.
+     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
 private:
     /**
-     * @brief fontSize
+     * @brief fontSize label font size.
      */
     qint32       fontSize;
 };

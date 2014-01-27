@@ -34,99 +34,100 @@
 #include "../geometry/vsplinepath.h"
 
 /**
- * @brief The VControlPointSpline class
+ * @brief The VControlPointSpline class control spline point.
  */
 class VControlPointSpline : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
                       /**
-                       * @brief VControlPointSpline
-                       * @param indexSpline
-                       * @param position
-                       * @param controlPoint
-                       * @param splinePoint
-                       * @param parent
+                       * @brief VControlPointSpline constructor.
+                       * @param indexSpline index spline in list.
+                       * @param position position point in spline.
+                       * @param controlPoint control point.
+                       * @param splinePoint spline point.
+                       * @param parent parent object.
                        */
                       VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                           const QPointF &controlPoint, const QPointF &splinePoint,
                                           QGraphicsItem * parent = 0);
 signals:
     /**
-     * @brief ControlPointChangePosition
-     * @param indexSpline
-     * @param position
-     * @param pos
+     * @brief ControlPointChangePosition emit when control point change position.
+     * @param indexSpline index spline in list.
+     * @param position position point in spline.
+     * @param pos new posotion.
      */
     void              ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
                                                  const QPointF pos);
 public slots:
     /**
-     * @brief RefreshLine
-     * @param indexSpline
-     * @param pos
-     * @param controlPoint
-     * @param splinePoint
+     * @brief RefreshLine refresh line control point.
+     * @param indexSpline index spline in list.
+     * @param pos position point in spline.
+     * @param controlPoint control point.
+     * @param splinePoint spline point.
      */
     void              RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos, const QPointF &controlPoint,
                                   const QPointF &splinePoint);
     /**
-     * @brief setEnabledPoint
-     * @param enable
+     * @brief setEnabledPoint disable or enable control point.
+     * @param enable true - enable.
      */
     void              setEnabledPoint(bool enable);
 protected:
     /**
-     * @brief radius
+     * @brief radius radius circle.
      */
     qreal             radius;
     /**
-     * @brief controlLine
+     * @brief controlLine pointer to line control point.
      */
     QGraphicsLineItem *controlLine;
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief itemChange
-     * @param change
-     * @param value
-     * @return
+     * @brief itemChange handle item change.
+     * @param change change.
+     * @param value value.
+     * @return value.
      */
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
 private:
     Q_DISABLE_COPY(VControlPointSpline)
     /**
-     * @brief indexSpline
+     * @brief indexSpline index spline in list..
      */
     qint32            indexSpline;
     /**
-     * @brief position
+     * @brief position position point in spline.
      */
     SplinePoint::Position position;
+    //TODO LineIntersectCircle, ClosestPoint, addVector can be replaced by static methods of VAbstractTool class.
     /**
-     * @brief LineIntersectCircle
-     * @param center
-     * @param radius
-     * @param line
-     * @param p1
-     * @param p2
-     * @return
+     * @brief LineIntersectCircle find point intersection line and circle.
+     * @param center arc center.
+     * @param radius arc radius.
+     * @param line line
+     * @param p1 first intersection point.
+     * @param p2 second intersection point.
+     * @return 0 - intersection doesn't exist, 1 - one intersection point, 2 - two intersection points.
      */
     qint32            LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                           QPointF &p2) const;
     /**
-     * @brief ClosestPoint
-     * @param line
-     * @param p
-     * @return
+     * @brief ClosestPoint find point projection of point onto line.
+     * @param line line.
+     * @param p point.
+     * @return point on line or extended line if origin size too small.
      */
     QPointF           ClosestPoint(const QLineF &line, const QPointF &p) const;
     /**

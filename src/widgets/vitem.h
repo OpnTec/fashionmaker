@@ -33,95 +33,88 @@
 #include <QObject>
 
 /**
- * @brief VItem клас, що реалізує деталь на сцені.
+ * @brief VItem class detail on layout table.
  */
 class VItem : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
     /**
-     * @brief VItem конструктор за замовчуванням
-     *Конструктор генерує пусту деталь з номером в списку, що дорівнює 0.
+     * @brief VItem default constructor.
      */
                 VItem ():numInOutList(0), paper(0){}
     /**
-    * @brief VItem конструктор
-    * @param numInList номер в списку деталей, що передається у вікно де
-    *укладаються деталі.
-    * @param parent батьківський об'єкт на сцені для даного. За замовчуванням немає.
-    */
+     * @brief VItem constructor.
+     * @param numInList index in list of details.
+     * @param parent parent object.
+     */
                 VItem (int numInList, QGraphicsItem * parent = 0):QGraphicsPathItem (parent), numInOutList(numInList),
                     paper(0){}
     /**
-    * @brief VItem конструктор
-    * @param path зображення що буде показуватися на сцені - об’єкт класу QPainterPath.
-    * @param numInList номер в списку деталей, що передається у вікно де
-    *укладаються деталі.
-    * @param parent батьківський об'єкт на сцені для даного. За замовчуванням немає.
-    */
+     * @brief VItem constructor.
+     * @param path detail path.
+     * @param numInList index in list of details.
+     * @param parent parent object.
+     */
                 VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = 0 );
     /**
-    * @brief Rotate повертає об'єкт на кут в градусах
-    * @param angle кут в градусах на який повертається деталь.
-    */
+     * @brief Rotate rotate detail on angle in degree.
+     * @param angle angle in degree.
+     */
     void        Rotate ( qreal angle );
     /**
-     * @brief getPaper
-     * @return
+     * @brief getPaper return pointer to paper sheet.
+     * @return pointer to paper sheet.
      */
     QGraphicsRectItem *getPaper() const {return paper;}
     /**
-     * @brief setPaper
-     * @param value
+     * @brief setPaper set pointer to paper sheet.
+     * @param value pointer to paper sheet.
      */
     void        setPaper(QGraphicsRectItem *value) {paper = value;}
 public slots:
     /**
-     * @brief LengthChanged слот який обробляє сигнал зміни довжини листа.
+     * @brief LengthChanged handle signal change paper length.
      */
     void        LengthChanged();
     /**
-     * @brief SetIndexInList встановлює номер деталі в списку деталей.
-     * @param index номер в списку.
+     * @brief SetIndexInList set detail index in list.
+     * @param index index in list.
      */
     inline void SetIndexInList( qint32 index ) {numInOutList = index;}
 protected:
     /**
-     * @brief itemChange модифікація стандартного методу itemChange. Виконується перехоплення зміни
-     *положення і зміни батька.
-     * @param change
-     * @param value
-     * @return
+     * @brief itemChange handle item change.
+     * @param change change.
+     * @param value value.
+     * @return value.
      */
     QVariant    itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
-     * @brief checkItemChange перевіряє вихід деталі за рамки листа і факт колізії. Посилає відповідні
-     *сигнали.
+     * @brief checkItemChange change item change. If detail create colission or moved out paper emit signal.
      */
     void        checkItemChange ();
 private:
     Q_DISABLE_COPY(VItem)
     /**
-     * @brief numInOutList для зберігання інформації про колізії від кожної деталі необхідно знати її
-     *номер.
+     * @brief numInOutList index in list.
      */
     qint32      numInOutList;
     /**
-     * @brief paper
+     * @brief paper pointer to paper item.
      */
     QGraphicsRectItem*    paper;
 signals:
     /**
-     * @brief itemOut сигнал виходу за межі листа. Посилається у будь-якому випадку.
-     * @param numInOutList номер деталі яка вийшла за межі листа або тепер знаходиться в межах листа.
-     * @param flag був вихід чи ні.
+     * @brief itemOut emit if detail moved out paper. Detail send this signal each time when was moved.
+     * @param numInOutList index in list.
+     * @param flag true if moved out. false if not.
      */
     void        itemOut ( int numInOutList, bool flag );
     /**
-     * @brief itemColliding сигнал колізії деталі з іншими. Посилається як для додавання деталі до
-     *списку тих що перетинаються, так і для виключення його з такого.
-     * @param list список усіх деталей які приймають участь в колізії включаючи самого себе.
-     * @param number 1 - перетин є, 0 - перетину немає.
+     * @brief itemColliding emit if change create colission.
+     * @param list list with all colission detalis.
+     * @param number 1 - colission exist, 0 - colission doesn't exist.
      */
     void        itemColliding ( QList<QGraphicsItem *> list, int number );
 };

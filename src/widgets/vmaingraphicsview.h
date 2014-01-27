@@ -32,29 +32,33 @@
 #include <QGraphicsView>
 
 /**
- * @brief The VMainGraphicsView class
+ * @brief The VMainGraphicsView class main scene view.
  */
 class VMainGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     /**
-     * @brief VMainGraphicsView
-     * @param parent
+     * @brief VMainGraphicsView constructor.
+     * @param parent parent object.
      */
     explicit VMainGraphicsView(QWidget *parent = 0);
 signals:
     /**
-     * @brief NewFactor
+     * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
      */
     void     NewFactor(qreal factor);
 public slots:
     /**
-     * @brief scalingTime
+     * @brief scalingTime call each time when need handle scaling.
      * @param x
      */
     void     scalingTime(qreal x);
+    /**
+     * @brief scrollingTime call each time when need handle scrolling.
+     * @param x
+     */
     void     scrollingTime(qreal x);
     /**
      * @brief animFinished
@@ -62,23 +66,23 @@ public slots:
     void     animFinished();
 protected:
     /**
-     * @brief wheelEvent обробник повороту колеса мишки.
-     * @param event передається подія.
+     * @brief wheelEvent handle wheel events.
+     * @param event wheel event.
      */
     void     wheelEvent ( QWheelEvent * event );
     /**
-     * @brief mousePressEvent
-     * @param mousePress
+     * @brief mousePressEvent handle mouse press events.
+     * @param mousePress mouse press event.
      */
     void     mousePressEvent(QMouseEvent *mousePress);
     /**
-     * @brief mouseReleaseEvent  handle mouse release events.
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
     /**
-     * @brief _numScheduledScalings
+     * @brief _numScheduledScalings keep number scheduled scalings.
      */
     qint32   _numScheduledScalings;
 };

@@ -34,7 +34,7 @@
 namespace SimpleSpline
 {
     /**
-     * @brief The Translation enum
+     * @brief The Translation enum position point.
      */
     enum Translation { FirstPoint, ForthPoint };
     Q_DECLARE_FLAGS(Translations, Translation)
@@ -42,54 +42,54 @@ namespace SimpleSpline
 Q_DECLARE_OPERATORS_FOR_FLAGS( SimpleSpline::Translations )
 
 /**
- * @brief The VSimpleSpline class
+ * @brief The VSimpleSpline class for simple spline. This object used when we cut spline and want show peaces.
  */
 class VSimpleSpline : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
     /**
-     * @brief VSimpleSpline
-     * @param id
+     * @brief VSimpleSpline constructor.
+     * @param id spline id.
      * @param factor scene scale factor.
-     * @param currentColor
-     * @param parent
+     * @param currentColor current color.
+     * @param parent parent object.
      */
     VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
 signals:
     /**
-     * @brief Choosed
-     * @param id
+     * @brief Choosed send id when clicked.
+     * @param id spline id.
      */
     void Choosed(qint64 id);
 protected:
     /**
-     * @brief mouseReleaseEvent  handle mouse release events.
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VSimpleSpline)
     /**
-     * @brief id
+     * @brief id spline id.
      */
     qint64          id;
     /**
-     * @brief factor
+     * @brief factor scale factor.
      */
     qreal           *factor;
     /**
-     * @brief currentColor
+     * @brief currentColor current color.
      */
     Qt::GlobalColor *currentColor;
 };

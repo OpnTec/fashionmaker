@@ -32,24 +32,24 @@
 #include <QApplication>
 
 /**
- * @brief The VApplication class
+ * @brief The VApplication class reimplamentation QApplication class.
  */
 class VApplication : public QApplication
 {
     Q_OBJECT
 public:
     /**
-     * @brief VApplication
-     * @param argc
-     * @param argv
+     * @brief VApplication constructor.
+     * @param argc number arguments.
+     * @param argv command line.
      */
     VApplication(int &argc, char ** argv): QApplication(argc, argv){}
     virtual ~VApplication() {}
     /**
-     * @brief notify
-     * @param receiver
-     * @param event
-     * @return
+     * @brief notify Reimplemented from QApplication::notify().
+     * @param receiver receiver.
+     * @param event event.
+     * @return value that is returned from the receiver's event handler.
      */
     virtual bool notify(QObject * receiver, QEvent * event);
 };

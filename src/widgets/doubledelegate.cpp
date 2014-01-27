@@ -26,13 +26,6 @@
  **
  *************************************************************************/
 
- /*
-     doubledelegate.cpp
-
-     A delegate that allows the user to change integer values from the model
-     using a spin box widget.
- */
-
 #include "doubledelegate.h"
 
 #include <QDoubleSpinBox>
