@@ -33,19 +33,20 @@
 #include "../../dialogs/dialogsinglepoint.h"
 
 /**
- * @brief The VToolSinglePoint class
+ * @brief The VToolSinglePoint class class tool for creation pattern base point. Obly base point can move. All object
+ * pattern peace depend on base point.
  */
 class VToolSinglePoint : public VToolPoint
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VToolSinglePoint
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
+                  * @brief VToolSinglePoint constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                    QGraphicsItem * parent = 0 );
@@ -53,9 +54,6 @@ public:
      * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog();
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -64,7 +62,7 @@ public slots:
     virtual void FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void FullUpdateFromGui(int result);
     /**
@@ -77,16 +75,20 @@ public slots:
      * @param factor scene scale factor.
      */
     virtual void SetFactor(qreal factor);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 signals:
     /**
-     * @brief FullUpdateTree
+     * @brief FullUpdateTree handle if need update pattern file.
      */
     void         FullUpdateTree();
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -99,13 +101,13 @@ protected:
     virtual void RefreshDataInFile();
     /**
      * @brief itemChange handle tool change.
-     * @param change
-     * @param value
-     * @return
+     * @param change change.
+     * @param value value.
+     * @return value.
      */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     /**
-     * @brief decrementReferens
+     * @brief decrementReferens decrement referens parents objects.
      */
     virtual void decrementReferens();
     /**
@@ -115,9 +117,13 @@ protected:
     virtual void DeleteTool(QGraphicsItem *tool){Q_UNUSED(tool)}
 private:
     /**
-     * @brief dialogSinglePoint
+     * @brief dialogSinglePoint dialog.
      */
     QSharedPointer<DialogSinglePoint> dialogSinglePoint;
+    /**
+     * @brief setColorLabel change color for label and label line.
+     * @param color new color.
+     */
     void         setColorLabel(const Qt::GlobalColor & color);
 };
 
