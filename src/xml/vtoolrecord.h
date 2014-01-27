@@ -34,63 +34,63 @@
 #include <QString>
 
 /**
- * @brief The VToolRecord class
+ * @brief The VToolRecord class record about tool in history.
  */
 class VToolRecord
 {
 public:
                        /**
-                        * @brief VToolRecord
+                        * @brief VToolRecord default constructor.
                         */
                        VToolRecord();
                        /**
-                        * @brief VToolRecord
-                        * @param id
-                        * @param typeTool
-                        * @param nameDraw
+                        * @brief VToolRecord constructor.
+                        * @param id tool id.
+                        * @param typeTool tool type.
+                        * @param nameDraw pattern peace name.
                         */
                        VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw);
     /**
-     * @brief getId
-     * @return
+     * @brief getId return tool id.
+     * @return id.
      */
     inline qint64      getId() const {return id;}
     /**
-     * @brief setId
-     * @param value
+     * @brief setId set tool id.
+     * @param value id.
      */
     inline void        setId(const qint64 &value) {id = value;}
     /**
-     * @brief getTypeTool
-     * @return
+     * @brief getTypeTool return tool type.
+     * @return tool type.
      */
     inline Tool::Tools getTypeTool() const {return typeTool;}
     /**
-     * @brief setTypeTool
-     * @param value
+     * @brief setTypeTool set tool type.
+     * @param value tool type.
      */
     inline void        setTypeTool(const Tool::Tools &value) {typeTool = value;}
     /**
-     * @brief getNameDraw
-     * @return
+     * @brief getNameDraw return pattern peace name.
+     * @return pattern peace name.
      */
     inline QString     getNameDraw() const {return nameDraw;}
     /**
-     * @brief setNameDraw
-     * @param value
+     * @brief setNameDraw set pattern peace name.
+     * @param value pattern peace name.
      */
     inline void        setNameDraw(const QString &value) {nameDraw = value;}
 private:
     /**
-     * @brief id
+     * @brief id tool id.
      */
     qint64             id;
     /**
-     * @brief typeTool
+     * @brief typeTool tool type.
      */
     Tool::Tools        typeTool;
     /**
-     * @brief nameDraw
+     * @brief nameDraw pattern peace name.
      */
     QString            nameDraw;
 };
