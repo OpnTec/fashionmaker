@@ -33,7 +33,7 @@
 #include "../../dialogs/dialogsinglepoint.h"
 
 /**
- * @brief The VToolSinglePoint class class tool for creation pattern base point. Obly base point can move. All object
+ * @brief The VToolSinglePoint class tool for creation pattern base point. Obly base point can move. All object
  * pattern peace depend on base point.
  */
 class VToolSinglePoint : public VToolPoint
