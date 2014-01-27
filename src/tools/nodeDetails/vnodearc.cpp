@@ -59,7 +59,7 @@ void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idA
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
         Q_ASSERT(arc != 0);
         doc->AddTool(id, arc);
-        if(idTool != 0)
+        if (idTool != 0)
         {
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.

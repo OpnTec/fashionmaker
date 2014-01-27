@@ -93,7 +93,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (!QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK)) {
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
         //If there is no default working icon theme then we should
         //use an icon theme that we provide via a .qrc file
         //This case happens under Windows and Mac OS X
@@ -728,7 +729,7 @@ void MainWindow::currentDrawChanged( int index )
     {
         doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
-        if(drawMode)
+        if (drawMode)
         {
             ArrowTool();
             qint64 id = doc->SPointActiveDraw();
@@ -1241,7 +1242,7 @@ bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName,
         errorColumn = -1;
         return false;
     }
-    if(schema.isEmpty())
+    if (schema.isEmpty())
     {
         errorMsg = QString(tr("Empty schema path."));
         errorLine = -1;
@@ -1249,7 +1250,7 @@ bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName,
         return false;
     }
     QFile fileSchema(schema);
-    if(fileSchema.open(QIODevice::ReadOnly) == false)
+    if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
         errorMsg = QString(tr("Can't open schema file."));
         errorLine = -1;
@@ -1263,14 +1264,14 @@ bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName,
     sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
 
     bool errorOccurred = false;
-    if (!sch.isValid())
+    if (sch.isValid() == false)
     {
         errorOccurred = true;
     }
     else
     {
         QXmlSchemaValidator validator(sch);
-        if (!validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())))
+        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
         {
             errorOccurred = true;
         }
@@ -1400,7 +1401,7 @@ void MainWindow::OpenPattern(const QString &fileName)
     qint64 errorColumn = 0;
     if (file.open(QIODevice::ReadOnly))
     {
-        if(ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
+        if (ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
         {
             qint32 errorLine = 0;
             qint32 errorColumn = 0;

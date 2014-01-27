@@ -174,7 +174,9 @@ void TableWindow::saveScene()
         i.next();
         saveMessage += i.key();
         if (i.hasNext())
+        {
             saveMessage += ";;";
+        }
     }
 
     QString sf;
@@ -446,8 +448,9 @@ void TableWindow::PdfFile(const QString &name) const
     printer.setResolution(PrintDPI);
     printer.setPaperSize ( QSizeF(toMM(w), toMM(h)), QPrinter::Millimeter );
     QPainter painter;
-    if (! painter.begin( &printer )) { // failed to open file
-        qCritical("Can't open printer %s",qPrintable(name));
+    if (painter.begin( &printer ) == false)
+    { // failed to open file
+        qCritical("Can't open printer %s", qPrintable(name));
         return;
     }
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );

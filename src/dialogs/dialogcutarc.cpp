@@ -111,4 +111,3 @@ void DialogCutArc::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
-

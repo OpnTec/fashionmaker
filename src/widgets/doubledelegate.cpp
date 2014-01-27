@@ -78,7 +78,7 @@ void DoubleSpinBoxDelegate::commitAndCloseEditor()
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
     Q_ASSERT(spinBox != 0);
     qreal value = spinBox->value();
-    if(qFuzzyCompare ( lastValue, value ) == false)
+    if (qFuzzyCompare ( lastValue, value ) == false)
     {
         lastValue = value;
         emit commitData(spinBox);

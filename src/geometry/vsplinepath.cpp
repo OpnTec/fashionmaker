@@ -212,4 +212,3 @@ void VSplinePath::setMaxCountPoints(const qint32 &value)
 {
     maxCountPoints = value;
 }
-

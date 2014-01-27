@@ -31,8 +31,9 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogCutArc;
+namespace Ui
+{
+    class DialogCutArc;
 }
 
 /**

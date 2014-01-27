@@ -213,7 +213,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                         path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2()+180,
                                                   splinePath->at(i).KAsm2()));
                 }
-                while(k>=0)
+                while (k>=0)
                 {
                     data->getNextId();
                     --k;
@@ -371,7 +371,7 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                                                   splinePath->at(i).KAsm2()));
                 }
 
-                while(k>=0)
+                while (k>=0)
                 {
                     data->getNextId();
                     --k;
@@ -522,7 +522,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     ++j;
                 } while (pointsD2 < nD2);
             }
-        }while(i<nD1);
+        } while(i<nD1);
 
         newDetail.setName("Detail");
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Tool::FromTool);
@@ -607,7 +607,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     ++j;
                 } while (pointsD2 < nD2);
             }
-        }while(i<nD1);
+        } while(i<nD1);
     }
 }
 

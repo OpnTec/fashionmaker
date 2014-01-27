@@ -95,8 +95,8 @@ signals:
      * @param controlPoint new position control point.
      * @param splinePoint new position spline point.
      */
-    void             RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position, const QPointF &controlPoint,
-                                   const QPointF &splinePoint );
+    void             RefreshLine ( const qint32 &indexSpline, SplinePoint::Position position,
+                                   const QPointF &controlPoint, const QPointF &splinePoint );
     /**
      * @brief setEnabledPoint disable control points.
      * @param enable enable or diasable points.

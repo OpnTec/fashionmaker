@@ -61,7 +61,7 @@ VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id,
     {
         spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
         doc->AddTool(id, spl);
-        if(idTool != 0)
+        if (idTool != 0)
         {
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.

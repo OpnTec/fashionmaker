@@ -84,7 +84,7 @@ void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     QTransform t = view->transform();
 
     QRectF rec1;
-    if(t.m11() < 1)
+    if (t.m11() < 1)
     {
         rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
 
@@ -227,7 +227,7 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                     RemoveReferens();//deincrement referens
                     element.removeChild(domElement);//remove form file
                     QGraphicsScene *scene = tool->scene();
-                    if(scene != 0)//some tools haven't scene
+                    if (scene != 0)//some tools haven't scene
                     {
                         scene->removeItem(tool);//remove form scene
                     }

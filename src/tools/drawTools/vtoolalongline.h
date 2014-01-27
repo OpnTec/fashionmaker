@@ -113,7 +113,7 @@ protected:
      * @brief contextMenuEvent handle context menu events. handle context menu event.
      * @param event context menu event.
      */
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ); 
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
      * @brief AddToFile add tag with informations about tool into file.
      */

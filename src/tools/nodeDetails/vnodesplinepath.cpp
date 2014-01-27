@@ -65,7 +65,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
         const QVector<VSplinePoint> *points = path->GetPoint();
         for (qint32 i = 0; i<points->size(); ++i)
         {
-            if(idTool != 0)
+            if (idTool != 0)
             {
                 doc->IncrementReferens(idTool);
                 //Some nodes we don't show on scene. Tool that create this nodes must free memory.

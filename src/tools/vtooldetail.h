@@ -93,7 +93,7 @@ public:
      */
     static void                    Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
                                           VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                                          const Tool::Sources &typeCreation); 
+                                          const Tool::Sources &typeCreation);
     static const QString           TagName;
     static const QString           TagNode;
     static const QString           AttrSupplement;

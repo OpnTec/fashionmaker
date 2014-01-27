@@ -113,7 +113,7 @@ void VDetail::setId(const qint64 &id)
 bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
-    if(list.size() < 3)
+    if (list.size() < 3)
     {
         qWarning()<<"Not enough points.";
         return false;
@@ -198,9 +198,9 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
     QVector<VNodeDetail> list = this->listNodePoint();
     qint32 edge = list.size();
     ptrdiff_t k = 0;
-    for(ptrdiff_t i=0; i<edge; ++i)
+    for (ptrdiff_t i=0; i<edge; ++i)
     {
-        if(i == index)
+        if (i == index)
         {
             det.append(this->at(k));
             ++k;
@@ -212,17 +212,17 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
             this->NodeOnEdge(i, p1, p2);
             ptrdiff_t j1 = this->indexOfNode(p1.getId());
             ptrdiff_t j2 = this->indexOfNode(p2.getId());
-            if(j2 == 0)
+            if (j2 == 0)
             {
                 j2 = this->CountNode()-1;
-                if(j1 == j2)
+                if (j1 == j2)
                 {
                     det.append(this->at(j1));
                     ++k;
                     continue;
                 }
             }
-            for(ptrdiff_t j=j1; j<j2; ++j)
+            for (ptrdiff_t j=j1; j<j2; ++j)
             {
                 det.append(this->at(j));
                 ++k;
@@ -235,15 +235,15 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
 QList<qint64> VDetail::Missing(const VDetail &det) const
 {
     QList<qint64> list;
-    if(nodes.size() == det.CountNode())
+    if (nodes.size() == det.CountNode())
     {
         return list;
     }
 
     qint32 j = 0;
-    for(qint32 i = 0; i < nodes.size(); ++i)
+    for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        if(nodes[i].getId() == det.at(j).getId())
+        if (nodes[i].getId() == det.at(j).getId())
         {
             ++j;
         }

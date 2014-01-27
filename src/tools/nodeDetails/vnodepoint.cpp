@@ -70,7 +70,7 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
         Q_ASSERT(point != 0);
         doc->AddTool(id, point);
-        if(idTool != 0)
+        if (idTool != 0)
         {
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.

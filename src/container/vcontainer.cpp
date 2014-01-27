@@ -218,20 +218,20 @@ void VContainer::UpdateId(qint64 newId)
 QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> correctPoints;
-    if(points.size()<4)//Better don't check if only three points. We can destroy equidistant.
+    if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
         qWarning()<<"Only three points.";
         return points;
     }
     //Clear equivalent points
-    for(qint32 i = 0; i <points.size(); ++i)
+    for (qint32 i = 0; i <points.size(); ++i)
     {
-        if(i == points.size()-1)
+        if (i == points.size()-1)
         {
             correctPoints.append(points.at(i));
             continue;
         }
-        if(points.at(i) == points.at(i+1))
+        if (points.at(i) == points.at(i+1))
         {
             correctPoints.append(points.at(i));
             ++i;
@@ -241,13 +241,13 @@ QVector<QPointF> VContainer::CorrectEquidistantPoints(const QVector<QPointF> &po
             correctPoints.append(points.at(i));
         }
     }
-    if(correctPoints.size()<3)
+    if (correctPoints.size()<3)
     {
         return correctPoints;
     }
     //Remove point on line
     QPointF point;
-    for(qint32 i = 1; i <correctPoints.size()-1; ++i)
+    for (qint32 i = 1; i <correctPoints.size()-1; ++i)
     {
         QLineF l1(correctPoints[i-1], correctPoints[i]);
         QLineF l2(correctPoints[i], correctPoints[i+1]);
