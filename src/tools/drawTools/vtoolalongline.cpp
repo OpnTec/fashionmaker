@@ -86,6 +86,7 @@ void VToolAlongLine::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
+//cppcheck-suppress unusedFunction
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu(dialogAlongLine, this, event);

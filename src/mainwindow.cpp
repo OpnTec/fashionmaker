@@ -93,13 +93,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    static const char * FALLBACK_ICON_THEME = "win.icon.theme";
     if (!QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK)) {
         //If there is no default working icon theme then we should
         //use an icon theme that we provide via a .qrc file
         //This case happens under Windows and Mac OS X
         //This does not happen under GNOME or KDE
-        QIcon::setThemeName(FALLBACK_ICON_THEME);
+        QIcon::setThemeName("win.icon.theme");
         ui->actionNew->setIcon(QIcon::fromTheme("document-new"));
         ui->actionOpen->setIcon(QIcon::fromTheme("document-open"));
         ui->actionSave->setIcon(QIcon::fromTheme("document-save"));

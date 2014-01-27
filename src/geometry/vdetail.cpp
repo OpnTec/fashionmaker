@@ -268,7 +268,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     return list;
 }
 
-ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id) const
+ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id)
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)
     {

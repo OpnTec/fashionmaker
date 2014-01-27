@@ -282,7 +282,7 @@ private:
      * @param id object (arc, point, spline, splinePath) id.
      * @return index in list or -1 id can't find.
      */
-    ptrdiff_t      indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id) const;
+    static ptrdiff_t     indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id);
 };
 
 #endif // VDETAIL_H

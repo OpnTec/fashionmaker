@@ -51,7 +51,7 @@ public:
                     * @param parent parent object.
                     */
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                       const QString &radius, const qint64 &center,
+                                       const QString &arcRadius, const qint64 &center,
                                        const qint64 &firstPointId, const qint64 &secondPointId,
                                        const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
@@ -66,7 +66,7 @@ public:
      * @param secondPoint second line point.
      * @return point intersection.
      */
-    static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
+    static QPointF FindPoint(const qreal &arcRadius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     /**
      * @brief Create help create tool from GUI.
@@ -93,7 +93,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &radius, const qint64 &center,
+    static void    Create(const qint64 _id, const QString &arcRadius, const qint64 &center,
                           const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
@@ -140,7 +140,7 @@ private:
     /**
      * @brief radius string with formula radius arc.
      */
-    QString        radius;
+    QString        arcRadius;
     /**
      * @brief center id center arc point.
      */

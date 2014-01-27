@@ -42,6 +42,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
+//cppcheck-suppress unusedFunction
 void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 {
     int numSteps = event->delta() / 8 / 15;  // see QWheelEvent documentation

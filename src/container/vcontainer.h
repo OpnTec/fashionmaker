@@ -204,6 +204,7 @@ public:
      * @param secondPoint id of second point of line
      * @return name of line
      */
+    // cppcheck-suppress functionStatic
     QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
     /**
      * @brief GetNameLineAngle return name of line angle
@@ -211,6 +212,7 @@ public:
      * @param secondPoint id of second point of line
      * @return name of angle of line
      */
+    // cppcheck-suppress functionStatic
     QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const;
     /**
      * @brief UpdatePoint update point by id
@@ -373,7 +375,12 @@ public:
      * @param newId id
      */
     static void         UpdateId(qint64 newId);
-    QVector<QPointF>    CorrectEquidistantPoints(const QVector<QPointF> &points) const;
+    /**
+     * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.
+     * @param points list of points equdistant.
+     * @return corrected list.
+     */
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
     /**
      * @brief ContourPath create painter path for detail
      * @param idDetail id of detail
@@ -387,7 +394,7 @@ public:
      * @param my offset respect to y
      * @return new vector biased points
      */
-    QVector<QPointF>    biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const;
+    static QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my);
     /**
      * @brief Equidistant create equidistant painter path for detail
      * @param points vector of points
@@ -395,7 +402,7 @@ public:
      * @param width width of equidistant
      * @return return painter path of equidistant
      */
-    QPainterPath        Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width)const;
+    static QPainterPath Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width);
     /**
      * @brief ParallelLine create parallel line
      * @param line starting line
@@ -418,13 +425,13 @@ public:
      * @param width width of equidistant
      * @return vector of points
      */
-    QVector<QPointF>    EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)const;
+    static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
     /**
      * @brief CheckLoops seek and delete loops in equidistant
      * @param points vector of points of equidistant
      * @return vector of points of equidistant
      */
-    QVector<QPointF>    CheckLoops(const QVector<QPointF> &points) const;
+    static QVector<QPointF>    CheckLoops(const QVector<QPointF> &points);
     /**
      * @brief PrepareDetails prepare detail for creation layout
      * @param list list of details
@@ -480,14 +487,14 @@ private:
      * @param points container with points
      * @return reverced points
      */
-    QVector<QPointF>   GetReversePoint(const QVector<QPointF> &points)const;
+    static QVector<QPointF> GetReversePoint(const QVector<QPointF> &points);
     /**
      * @brief GetLengthContour return length of contour
      * @param contour container with points of contour
      * @param newPoints point whos we try to add to contour
      * @return length length of contour
      */
-    qreal              GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)const;
+    static qreal            GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
     template <typename key, typename val>
     /**
      * @brief GetObject return object from container
@@ -495,6 +502,7 @@ private:
      * @param id id of object
      * @return Object
      */
+    // cppcheck-suppress functionStatic
     const val GetObject(const QHash<key, val> &obj, key id) const;
     template <typename key, typename val>
     /**
@@ -503,6 +511,7 @@ private:
      * @param id id of object
      * @return Object
      */
+    // cppcheck-suppress functionStatic
     val GetVariable(const QHash<key, val> &obj, key id) const;
     template <typename val>
     /**

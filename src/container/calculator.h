@@ -158,6 +158,7 @@ private:
      * @brief serror report an error
      * @param error error code
      */
+    // cppcheck-suppress functionStatic
     void        serror(qint32 error);
     /**
      * @brief look_up finding the internal format for the current token in the token table.

@@ -385,6 +385,7 @@ void VToolDetail::RefreshGeometry()
 }
 
 template <typename Tool>
+//cppcheck-suppress unusedFunction
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     QHash<qint64, VDataTool*>* tools = doc->getTools();

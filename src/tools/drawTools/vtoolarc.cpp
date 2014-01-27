@@ -226,12 +226,14 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//cppcheck-suppress unusedFunction
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, widthMainLine/factor));
 }
 
+//cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
