@@ -33,22 +33,22 @@
 #include "../../dialogs/dialogpointofcontact.h"
 
 /**
- * @brief The VToolPointOfContact class
+ * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
  */
 class VToolPointOfContact : public VToolPoint
 {
 public:
                    /**
-                    * @brief VToolPointOfContact
-                    * @param doc dom document container
-                    * @param data container with variables
-                    * @param id object id in container
-                    * @param radius
-                    * @param center
-                    * @param firstPointId
-                    * @param secondPointId
+                    * @brief VToolPointOfContact constructor.
+                    * @param doc dom document container.
+                    * @param data container with variables.
+                    * @param id object id in container.
+                    * @param radius string with formula radius arc.
+                    * @param center id center arc point.
+                    * @param firstPointId id first line point.
+                    * @param secondPointId id second line point.
                     * @param typeCreation way we create this tool.
-                    * @param parent parent object
+                    * @param parent parent object.
                     */
                    VToolPointOfContact(VDomDocument *doc, VContainer *data, const qint64 &id,
                                        const QString &radius, const qint64 &center,
@@ -59,37 +59,37 @@ public:
      */
     virtual void   setDialog();
     /**
-     * @brief FindPoint
-     * @param radius
-     * @param center
-     * @param firstPoint
-     * @param secondPoint
-     * @return
+     * @brief FindPoint return point intersection line and arc.
+     * @param radius string with formula radius arc.
+     * @param center center arc point.
+     * @param firstPoint first line point.
+     * @param secondPoint second line point.
+     * @return point intersection.
      */
     static QPointF FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void    Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
                           VDomDocument *doc, VContainer *data);
     /**
-     * @brief Create help create tool
+     * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param radius
-     * @param center
-     * @param firstPointId
-     * @param secondPointId
+     * @param radius string with formula radius arc.
+     * @param center id center arc point.
+     * @param firstPointId id first line point.
+     * @param secondPointId id second line point.
      * @param pointName point name.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
@@ -97,9 +97,6 @@ public:
                           const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -108,7 +105,7 @@ public slots:
     virtual void   FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void   FullUpdateFromGui(int result);
     /**
@@ -116,11 +113,15 @@ public slots:
      * @param factor scene scale factor.
      */
     virtual void   SetFactor(qreal factor);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -137,23 +138,23 @@ protected:
     virtual void   RemoveReferens();
 private:
     /**
-     * @brief radius
+     * @brief radius string with formula radius arc.
      */
     QString        radius;
     /**
-     * @brief center
+     * @brief center id center arc point.
      */
     qint64         center;
     /**
-     * @brief firstPointId
+     * @brief firstPointId id first line point.
      */
     qint64         firstPointId;
     /**
-     * @brief secondPointId
+     * @brief secondPointId id second line point.
      */
     qint64         secondPointId;
     /**
-     * @brief dialogPointOfContact
+     * @brief dialogPointOfContact dialog.
      */
     QSharedPointer<DialogPointOfContact> dialogPointOfContact;
 };
