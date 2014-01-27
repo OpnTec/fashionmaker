@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vcontrolpointspline.h"
+#include "../tools/vabstracttool.h"
 
 #include <QPen>
 
@@ -48,7 +49,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
     this->setPos(controlPoint);
 
     QPointF p1, p2;
-    LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+    VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
     controlLine->setPen(QPen(Qt::red, widthHairLine));
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
@@ -77,79 +78,13 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
     return QGraphicsItem::itemChange(change, value);
 }
 
-qint32 VControlPointSpline::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
-                                                QPointF &p2) const
-{
-    const qreal eps = 1e-8;
-    //coefficient for equation of segment
-    qreal a = line.p2().y() - line.p1().y();
-    qreal b = line.p1().x() - line.p2().x();
-    // In this case does not used.
-    //qreal c = - a * line.p1().x() - b * line.p1().y();
-    // projection center of circle on to line
-    QPointF p = ClosestPoint (line, center);
-    // how many solutions?
-    qint32 flag = 0;
-    qreal d = QLineF (center, p).length();
-    if (qAbs (d - radius) <= eps)
-    {
-        flag = 1;
-    }
-    else
-    {
-        if (radius > d)
-        {
-            flag = 2;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    // find distance from projection to points of intersection
-    qreal k = sqrt (radius * radius - d * d);
-    qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
-    // add to projection a vectors aimed to points of intersection
-    p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
-    p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);
-    return flag;
-}
-
-QPointF VControlPointSpline::ClosestPoint(const QLineF &line, const QPointF &p) const
-{
-    QLineF lineP2pointFrom = QLineF(line.p2(), p);
-    qreal angle = 180-line.angleTo(lineP2pointFrom)-90;
-    QLineF pointFromlineP2 = QLineF(p, line.p2());
-    pointFromlineP2.setAngle(pointFromlineP2.angle()+angle);
-    QPointF point;
-    QLineF::IntersectType type = pointFromlineP2.intersect(line, &point);
-    if ( type == QLineF::BoundedIntersection )
-    {
-        return point;
-    }
-    else
-    {
-        if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection )
-        {
-            Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Немає точки перетину.");
-            return point;
-        }
-    }
-    return point;
-}
-
-QPointF VControlPointSpline::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) const
-{
-    return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
-}
-
 void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
                                       const QPointF &controlPoint, const QPointF &splinePoint)
 {
     if (this->indexSpline == indexSpline && this->position == pos)
     {
         QPointF p1, p2;
-        LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+        VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
         controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
     }
 }

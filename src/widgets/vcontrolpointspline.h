@@ -111,35 +111,6 @@ private:
      * @brief position position point in spline.
      */
     SplinePoint::Position position;
-    //TODO LineIntersectCircle, ClosestPoint, addVector can be replaced by static methods of VAbstractTool class.
-    /**
-     * @brief LineIntersectCircle find point intersection line and circle.
-     * @param center arc center.
-     * @param radius arc radius.
-     * @param line line
-     * @param p1 first intersection point.
-     * @param p2 second intersection point.
-     * @return 0 - intersection doesn't exist, 1 - one intersection point, 2 - two intersection points.
-     */
-    qint32            LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
-                                          QPointF &p2) const;
-    /**
-     * @brief ClosestPoint find point projection of point onto line.
-     * @param line line.
-     * @param p point.
-     * @return point on line or extended line if origin size too small.
-     */
-    QPointF           ClosestPoint(const QLineF &line, const QPointF &p) const;
-    /**
-     * @brief addVector
-     * @param p
-     * @param p1
-     * @param p2
-     * @param k
-     * @return
-     */
-    QPointF           addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) const;
-
 };
 
 #endif // VCONTROLPOINTSPLINE_H
