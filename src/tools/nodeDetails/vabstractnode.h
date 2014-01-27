@@ -32,42 +32,42 @@
 #include "../vabstracttool.h"
 
 /**
- * @brief The VAbstractNode class
+ * @brief The VAbstractNode class parent class for all detail node.
  */
 class VAbstractNode : public VAbstractTool
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VAbstractNode
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param id object id in containerNode
-                  * @param parent parent object
+                  * @brief VAbstractNode constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
+                  * @param id object id in containerNode.
+                  * @param parent parent object.
                   */
                  VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
                                const qint64 &idTool, QObject *parent = 0);
     virtual      ~VAbstractNode() {}
-    /**
-     * @brief AttrIdObject
-     */
     static const QString AttrIdObject;
     static const QString AttrIdTool;
     virtual void DeleteNode();
 protected:
     /**
-     * @brief idNode
+     * @brief idNodenode id.
      */
     qint64       idNode;
+    /**
+     * @brief idTool id tool.
+     */
     qint64       idTool;
     /**
-     * @brief AddToModeling
-     * @param domElement
+     * @brief AddToModeling add tag to modeling tag current pattern peace.
+     * @param domElement tag.
      */
     void         AddToModeling(const QDomElement &domElement);
     /**
-     * @brief decrementReferens
+     * @brief decrementReferens decrement reference for all parent objects.
      */
     virtual void decrementReferens();
 };

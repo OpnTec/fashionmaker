@@ -33,44 +33,41 @@
 #include "../../widgets/vgraphicssimpletextitem.h"
 
 /**
- * @brief The VNodePoint class
+ * @brief The VNodePoint class point detail node.
  */
 class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VNodePoint
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param id object id in containerPoint
+                  * @brief VNodePoint constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
+                  * @param id object id in containerPoint.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                             const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                             QGraphicsItem * parent = 0 );
     /**
-     * @brief Create help create tool
-     * @param doc dom document container
-     * @param data container with variables
-     * @param id object id in container
-     * @param id object id in containerPoint
+     * @brief Create help create tool.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param id object id in container.
+     * @param id object id in containerPoint.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
                         const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool = 0,
                         QObject *parent = 0);
-    /**
-     * @brief TagName
-     */
     static const QString TagName;
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
+    /**
+     * @brief DeleteNode delete node from detail.
+     */
     virtual void DeleteNode();
 public slots:
     /**
@@ -78,21 +75,21 @@ public slots:
      */
     virtual void FullUpdateFromFile();
     /**
-     * @brief NameChangePosition
-     * @param pos
+     * @brief NameChangePosition label change position.
+     * @param pos new position.
      */
     void         NameChangePosition(const QPointF &pos);
 protected:
     /**
-     * @brief radius
+     * @brief radius radius circle.
      */
     qreal        radius;
     /**
-     * @brief namePoint
+     * @brief namePoint label name.
      */
     VGraphicsSimpleTextItem *namePoint;
     /**
-     * @brief lineName
+     * @brief lineName pointer to label line.
      */
     QGraphicsLineItem       *lineName;
     /**
@@ -104,33 +101,33 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief mouseReleaseEvent  handle mouse release events.
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     /**
-     * @brief UpdateNamePosition
+     * @brief UpdateNamePosition update label position in file.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      */
     virtual void UpdateNamePosition(qreal mx, qreal my);
     /**
-     * @brief RefreshPointGeometry
-     * @param point
+     * @brief RefreshPointGeometry refresh point on scene.
+     * @param point point position.
      */
     virtual void RefreshPointGeometry(const VPointF &point);
     /**
-     * @brief RefreshLine
+     * @brief RefreshLine refresh label line on scene.
      */
     void         RefreshLine();
 private:

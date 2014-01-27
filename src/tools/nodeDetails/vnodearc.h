@@ -33,43 +33,40 @@
 #include <QGraphicsPathItem>
 
 /**
- * @brief The VNodeArc class
+ * @brief The VNodeArc class arc detail node.
  */
 class VNodeArc :public VAbstractNode, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VNodeArc
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param id object id in containerArc
+                  * @brief VNodeArc constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
+                  * @param id object id in containerArc.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
                           const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                           QGraphicsItem * parent = 0);
     /**
-     * @brief Create help create tool
-     * @param doc dom document container
-     * @param data container with variables
-     * @param id object id in container
-     * @param id object id in containerArc
+     * @brief Create help create tool.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param id object id in container.
+     * @param id object id in containerArc.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
     static void  Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Document::Documents &parse,
                         const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *parent = 0);
-    /**
-     * @brief TagName
-     */
     static const QString TagName;
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
+    /**
+     * @brief DeleteNode delete node from detail.
+     */
     virtual void DeleteNode();
 public slots:
     /**
@@ -86,23 +83,23 @@ protected:
      */
     virtual void RefreshDataInFile();
     /**
-     * @brief mouseReleaseEvent  handle mouse release events.
-     * @param event
+     * @brief mouseReleaseEvent handle mouse release events.
+     * @param event mouse release event.
      */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
      * @brief hoverMoveEvent handle hover move events.
-     * @param event
+     * @param event hover move event.
      */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     /**
      * @brief hoverLeaveEvent handle hover leave events.
-     * @param event
+     * @param event hover leave event.
      */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     /**
-     * @brief RefreshGeometry  refresh item on scene.
+     * @brief RefreshGeometry refresh item on scene.
      */
     void         RefreshGeometry();
 };
