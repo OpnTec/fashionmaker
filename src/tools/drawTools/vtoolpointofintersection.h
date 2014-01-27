@@ -33,21 +33,21 @@
 #include "../../dialogs/dialogpointofintersection.h"
 
 /**
- * @brief The VToolPointOfIntersection class
+ * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
  */
 class VToolPointOfIntersection : public VToolPoint
 {
     Q_OBJECT
 public:
                  /**
-                  * @brief VToolPointOfIntersection
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param firstPointId
-                  * @param secondPointId
+                  * @brief VToolPointOfIntersection constructor.
+                  * @param doc dom document container.
+                  * @param data container with variables.
+                  * @param id object id in container.
+                  * @param firstPointId id first line point.
+                  * @param secondPointId id second line point.
                   * @param typeCreation way we create this tool.
-                  * @param parent parent object
+                  * @param parent parent object.
                   */
                  VToolPointOfIntersection(VDomDocument *doc, VContainer *data, const qint64 &id,
                                           const qint64 &firstPointId, const qint64 &secondPointId,
@@ -57,25 +57,25 @@ public:
      */
     virtual void setDialog();
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void  Create(QSharedPointer<DialogPointOfIntersection> &dialog, VMainGraphicsScene  *scene,
                         VDomDocument *doc, VContainer *data);
     /**
-     * @brief Create help create tool
+     * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param pointName point name.
-     * @param firstPointId
-     * @param secondPointId
+     * @param firstPointId id first line point.
+     * @param secondPointId id second line point.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
@@ -83,9 +83,6 @@ public:
                         const qint64 &secondPointId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                         VDomDocument *doc, VContainer *data, const Document::Documents &parse,
                         const Tool::Sources &typeCreation);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -94,9 +91,13 @@ public slots:
     virtual void FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
@@ -105,7 +106,7 @@ protected:
     virtual void RemoveReferens();
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -119,15 +120,15 @@ protected:
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
     /**
-     * @brief firstPointId
+     * @brief firstPointId id first line point.
      */
     qint64       firstPointId;
     /**
-     * @brief secondPointId
+     * @brief secondPointId id second line point.
      */
     qint64       secondPointId;
     /**
-     * @brief dialogPointOfIntersection
+     * @brief dialogPointOfIntersection dialog.
      */
     QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
 };
