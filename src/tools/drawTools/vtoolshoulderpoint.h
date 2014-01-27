@@ -33,23 +33,24 @@
 #include "../../dialogs/dialogshoulderpoint.h"
 
 /**
- * @brief The VToolShoulderPoint class
+ * @brief The VToolShoulderPoint class tool for creation point on shoulder. This tool for special situation, when you
+ * want find point along line, but have only length from another point (shoulder).
  */
 class VToolShoulderPoint : public VToolLinePoint
 {
 public:
                    /**
-                    * @brief VToolShoulderPoint
-                    * @param doc dom document container
-                    * @param data container with variables
-                    * @param id object id in container
+                    * @brief VToolShoulderPoint constructor.
+                    * @param doc dom document container.
+                    * @param data container with variables.
+                    * @param id object id in container.
                     * @param typeLine line type.
-                    * @param formula
-                    * @param p1Line
-                    * @param p2Line
-                    * @param pShoulder
+                    * @param formula string with formula length.
+                    * @param p1Line id first line point.
+                    * @param p2Line id second line point.
+                    * @param pShoulder id shoulder point.
                     * @param typeCreation way we create this tool.
-                    * @param parent parent object
+                    * @param parent parent object.
                     */
                    VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                       const QString &formula, const qint64 &p1Line, const qint64 &p2Line,
@@ -60,38 +61,38 @@ public:
      */
     virtual void   setDialog();
     /**
-     * @brief FindPoint
-     * @param p1Line
-     * @param p2Line
-     * @param pShoulder
-     * @param length
-     * @return
+     * @brief FindPoint find point.
+     * @param p1Line first line point.
+     * @param p2Line second line point.
+     * @param pShoulder shoulder point.
+     * @param length length form shoulder point to our.
+     * @return point.
      */
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
     /**
-     * @brief Create help create tool
-     * @param dialog
+     * @brief Create help create tool from GUI.
+     * @param dialog dialog.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      */
     static void    Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
                           VContainer *data);
     /**
-     * @brief Create help create tool
+     * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param formula
-     * @param p1Line
-     * @param p2Line
-     * @param pShoulder
+     * @param formula string with formula length.
+     * @param p1Line id first line point.
+     * @param p2Line id second line point.
+     * @param pShoulder id shoulder point.
      * @param typeLine line type.
      * @param pointName point name.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
+     * @param doc dom document container.
+     * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
@@ -99,9 +100,6 @@ public:
                           const qint64 &pShoulder, const QString &typeLine, const QString &pointName, const qreal &mx,
                           const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                           const Document::Documents &parse, const Tool::Sources &typeCreation);
-    /**
-     * @brief ToolType
-     */
     static const QString ToolType;
 public slots:
     /**
@@ -110,7 +108,7 @@ public slots:
     virtual void   FullUpdateFromFile();
     /**
      * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
+     * @param result result working dialog.
      */
     virtual void   FullUpdateFromGui(int result);
     /**
@@ -118,11 +116,15 @@ public slots:
      * @param factor scene scale factor.
      */
     virtual void   SetFactor(qreal factor);
+    /**
+     * @brief ShowContextMenu show context menu.
+     * @param event context menu event.
+     */
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
-     * @param event
+     * @param event context menu event.
      */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
@@ -139,15 +141,15 @@ protected:
     virtual void   RemoveReferens();
 private:
     /**
-     * @brief p2Line
+     * @brief p2Line id second line point.
      */
     qint64         p2Line;
     /**
-     * @brief pShoulder
+     * @brief pShoulder id shoulder line point.
      */
     qint64         pShoulder;
     /**
-     * @brief dialogShoulderPoint
+     * @brief dialogShoulderPoint dialog.
      */
     QSharedPointer<DialogShoulderPoint> dialogShoulderPoint;
 };
