@@ -607,7 +607,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
                     ++j;
                 } while (pointsD2 < nD2);
             }
-        } while(i<nD1);
+        } while (i<nD1);
     }
 }
 

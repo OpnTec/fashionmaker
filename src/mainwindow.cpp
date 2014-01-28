@@ -29,6 +29,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "geometry/vspline.h"
+#include "geometry/vequidistant.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
@@ -1177,7 +1178,14 @@ void MainWindow::ActionLayout(bool checked)
     Q_UNUSED(checked);
     hide();
     QVector<VItem*> listDetails;
-    pattern->PrepareDetails(listDetails);
+    const QHash<qint64, VDetail> *details = pattern->DataDetails();
+    QHashIterator<qint64, VDetail> idetail(*details);
+    while (idetail.hasNext())
+    {
+        idetail.next();
+        QPainterPath path = VEquidistant().ContourPath(idetail.key(), pattern);
+        listDetails.append(new VItem(path, listDetails.size()));
+    }
     emit ModelChosen(listDetails, fileName);
 }
 

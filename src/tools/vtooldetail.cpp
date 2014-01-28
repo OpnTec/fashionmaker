@@ -28,6 +28,7 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
+#include "../geometry/vequidistant.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -380,7 +381,7 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 
 void VToolDetail::RefreshGeometry()
 {
-    QPainterPath path = VAbstractTool::data.ContourPath(id);
+    QPainterPath path = VEquidistant().ContourPath(id, this->getData());
     this->setPath(path);
 }
 
