@@ -64,9 +64,13 @@ const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
+const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine");
+const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
+const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
+const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
 VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
     Q_ASSERT(doc != 0);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
@@ -201,7 +205,6 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
     }
 }
 
-//TODO see method deleteNode. I think no need have QGraphicsItem. QObject can delete yourself.
 void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
     if (_referens <= 1)
@@ -242,6 +245,35 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
     }
 }
 
+Qt::PenStyle VAbstractTool::LineStyle()
+{
+    QStringList styles = Styles();
+    switch(styles.indexOf(typeLine))
+    {
+        case 0:
+            return Qt::NoPen;
+            break;
+        case 1:
+            return Qt::SolidLine;
+            break;
+        case 2:
+            return Qt::DashLine;
+            break;
+        case 3:
+            return Qt::DotLine;
+            break;
+        case 4:
+            return Qt::DashDotLine;
+            break;
+        case 5:
+            return Qt::DashDotDotLine;
+            break;
+        default:
+            return Qt::SolidLine;
+            break;
+    }
+}
+
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     //coefficient for equation of segment
@@ -249,6 +281,15 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
     *a = line.p2().y() - p1.y();
     *b = p1.x() - line.p2().x();
     *c = - *a * p1.x() - *b * p1.y();
+}
+
+const QStringList VAbstractTool::Styles()
+{
+    //Keep synchronize with DialogTool lineStyles list!!!
+    QStringList styles;
+    styles << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine << TypeLineDashDotLine
+              << TypeLineDashDotDotLine;
+    return styles;
 }
 
 void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)

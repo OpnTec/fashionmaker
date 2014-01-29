@@ -31,23 +31,16 @@
 VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
                                const QString &typeLine, const QString &formula, const qint64 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), typeLine(typeLine), formula(formula), angle(angle), basePointId(basePointId),
+    :VToolPoint(doc, data, id, parent),  formula(formula), angle(angle), basePointId(basePointId),
       mainLine(0)
 {
+    this->typeLine = typeLine;
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     QPointF point1 = data->GeometricObject<const VPointF *>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<const VPointF *>(id)->toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, widthHairLine/factor));
+    mainLine->setPen(QPen(Qt::black, widthHairLine/factor, LineStyle()));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
-    if (typeLine == TypeLineNone)
-    {
-        mainLine->setVisible(false);
-    }
-    else
-    {
-        mainLine->setVisible(true);
-    }
 }
 
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
@@ -60,25 +53,17 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
     {
         currentColor = Qt::gray;
     }
-    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
     VToolPoint::ChangedActivDraw(newName);
 }
 
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(currentColor, widthHairLine/factor));
+    mainLine->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
     QPointF point = VDrawTool::data.GeometricObject<const VPointF *>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<const VPointF *>(basePointId)->toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
-    if (typeLine == TypeLineNone)
-    {
-        mainLine->setVisible(false);
-    }
-    else
-    {
-        mainLine->setVisible(true);
-    }
 }
 
 void VToolLinePoint::SetFactor(qreal factor)

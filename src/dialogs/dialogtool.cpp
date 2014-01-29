@@ -29,6 +29,7 @@
 #include "dialogtool.h"
 #include "../container/calculator.h"
 #include "../geometry/vgobject.h"
+#include "../tools/vabstracttool.h"
 
 #include <QtWidgets>
 
@@ -36,11 +37,15 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
       spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
       labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandardTable(0),
-      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0)
+      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0),
+      lineStyles(QStringList())
 {
     Q_ASSERT(data != 0);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
+    //Keep synchronize with VAbstractTool styles list!!!
+    lineStyles<<tr("No line")<<tr("Line")<<tr("Dash Line")<<tr("Dot Line")<<tr("Dash Dot Line")
+             <<tr("Dash Dot Dot Line");
 }
 
 void DialogTool::closeEvent(QCloseEvent *event)
@@ -199,40 +204,45 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, Combo
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
 {
     Q_ASSERT(box != 0);
-    QStringList list;
-    list<<tr("Line")<<tr("No line");
-    box->addItems(list);
+    box->addItems(lineStyles);
+    box->setCurrentIndex(1);
 }
 
 QString DialogTool::GetTypeLine(const QComboBox *box) const
 {
-    if (box->currentText()==tr("Line"))
+    switch(lineStyles.indexOf(box->currentText()))
     {
-        return QString("hair");
-    }
-    else
-    {
-        return QString("none");
+        case 0:
+            return VAbstractTool::TypeLineNone;
+            break;
+        case 1:
+            return VAbstractTool::TypeLineLine;
+            break;
+        case 2:
+            return VAbstractTool::TypeLineDashLine;
+            break;
+        case 3:
+            return VAbstractTool::TypeLineDotLine;
+            break;
+        case 4:
+            return VAbstractTool::TypeLineDashDotLine;
+            break;
+        case 5:
+            return VAbstractTool::TypeLineDashDotDotLine;
+            break;
+        default:
+            return VAbstractTool::TypeLineLine;
+            break;
     }
 }
 
 void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
 {
-    if (value == "hair")
+    QStringList styles = VAbstractTool::Styles();
+    qint32 index = box->findText(lineStyles.at(styles.indexOf(value)));
+    if (index != -1)
     {
-        qint32 index = box->findText(tr("Line"));
-        if (index != -1)
-        {
-            box->setCurrentIndex(index);
-        }
-    }
-    if (value == "none")
-    {
-        qint32 index = box->findText(tr("No line"));
-        if (index != -1)
-        {
-            box->setCurrentIndex(index);
-        }
+        box->setCurrentIndex(index);
     }
 }
 

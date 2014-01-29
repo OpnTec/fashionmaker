@@ -137,6 +137,15 @@ public:
     static const QString    AttrAxisP2;
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;
+    static const QString    TypeLineDashLine;
+    static const QString    TypeLineDotLine;
+    static const QString    TypeLineDashDotLine;
+    static const QString    TypeLineDashDotDotLine;
+    /**
+     * @brief Styles return list of all line styles.
+     * @return
+     */
+    static const QStringList Styles();
     /**
      * @brief AddRecord add record about tool in history.
      * @param id object id in container
@@ -182,6 +191,10 @@ protected:
      */
     Qt::GlobalColor         currentColor;
     /**
+     * @brief typeLine line type.
+     */
+    QString                 typeLine;
+    /**
      * @brief AddToFile add tag with informations about tool into file.
      */
     virtual void            AddToFile()=0;
@@ -208,6 +221,11 @@ protected:
      * @param tool tool
      */
     virtual void            DeleteTool(QGraphicsItem *tool);
+    /**
+     * @brief LineStyle return pen style for current line style.
+     * @return pen style.
+     */
+    Qt::PenStyle            LineStyle();
     template <typename T>
     /**
      * @brief SetAttribute set attribute in pattern file. Replace "," by ".".

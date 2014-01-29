@@ -79,8 +79,8 @@ void VMainGraphicsView::scalingTime(qreal x)
 
     const QPointF p1mouse = mapFromScene(p0scene);
     const QPointF move = p1mouse - this->mapFromGlobal(QCursor::pos()); // The move
-    horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
-    verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
+    horizontalScrollBar()->setValue(static_cast<qint32>(move.x()) + horizontalScrollBar()->value());
+    verticalScrollBar()->setValue(static_cast<qint32>(move.y()) + verticalScrollBar()->value());
 
     VAbstractTool::NewSceneRect(this->scene(), this);
 

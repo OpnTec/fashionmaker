@@ -65,10 +65,6 @@ public slots:
     virtual void      SetFactor(qreal factor);
 protected:
     /**
-     * @brief typeLine type line.
-     */
-    QString           typeLine;
-    /**
      * @brief formula string with length formula.
      */
     QString           formula;

@@ -256,6 +256,10 @@ protected:
      */
     QRadioButton     *radioButtonLengthCurve;
     /**
+     * @brief lineStyles list supported line styles.
+     */
+    QStringList      lineStyles;
+    /**
      * @brief closeEvent handle when dialog cloded
      * @param event event
      */
