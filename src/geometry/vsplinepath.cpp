@@ -96,12 +96,7 @@ QVector<QPointF> VSplinePath::GetPathPoints() const
     {
         VSpline spl(path[i-1].P(), path[i].P(), path[i-1].Angle2(), path[i].Angle1(),
                 path[i-1].KAsm2(), path[i].KAsm1(), this->kCurve);
-        //TODO Use QVector<T> & QVector::operator+=(const QVector<T> & other) instead for.
-        QVector<QPointF> splP = spl.GetPoints();
-        for (qint32 j = 0; j < splP.size(); ++j)
-        {
-            pathPoints.append(splP[j]);
-        }
+        pathPoints += spl.GetPoints();
     }
     return pathPoints;
 }
