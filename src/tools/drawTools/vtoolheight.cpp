@@ -115,24 +115,9 @@ void VToolHeight::Create(const qint64 _id, const QString &pointName, const QStri
     }
 }
 
-//TODO Which way is better? See VAbstractTool::ClosestPoint.
 QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 {
-    qreal a = 0, b = 0, c = 0;
-    LineCoefficients(line, &a, &b, &c);
-    qreal x = point.x() + a;
-    qreal y = b + point.y();
-    QLineF lin (point, QPointF(x, y));
-    QPointF p;
-    QLineF::IntersectType intersect = line.intersect(lin, &p);
-    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
-    {
-        return p;
-    }
-    else
-    {
-        return QPointF();
-    }
+    return VAbstractTool::ClosestPoint(line, point);
 }
 
 void VToolHeight::FullUpdateFromFile()

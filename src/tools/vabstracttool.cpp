@@ -86,18 +86,18 @@ void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     QRectF rec1;
     if (t.m11() < 1)
     {
-        rec1 = QRect(0, 0, rec0.width()/t.m11(), rec0.height()/t.m22());
+        qreal width = rec0.width()/t.m11();
+        qreal height = rec0.height()/t.m22();
+        rec1 = QRect(0, 0, static_cast<qint32>(width), static_cast<qint32>(height));
 
         rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
         QPolygonF polygone =  view->mapToScene(rec1.toRect());
         rec1 = polygone.boundingRect();
-
     }
     else
     {
         rec1 = rec0;
     }
-
     rec1 = rec1.united(rect.toRect());
     sc->setSceneRect(rec1);
 }
@@ -134,7 +134,6 @@ QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
 qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                           QPointF &p2)
 {
-    const qreal eps = 1e-8;
     //coefficient for equation of segment
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
@@ -143,7 +142,7 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
     // how many solutions?
     qint32 flag = 0;
     qreal d = QLineF (center, p).length();
-    if (qAbs (d - radius) <= eps)
+    if (qFuzzyCompare(d, radius))
     {
         flag = 1;
     }
@@ -167,31 +166,23 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
     return flag;
 }
 
-QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &p)
+QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &point)
 {
-    QLineF lineP2pointFrom = QLineF(line.p2(), p);
-    //right triangle always have one angle with 90 degree
-    //Now we want find angle between projection and line from p.
-    qreal angle = 180-(line.angleTo(lineP2pointFrom)-90);
-    //Swap first and last points line. Need for rotation.
-    QLineF pointFromlineP2 = QLineF(p, line.p2());
-    pointFromlineP2.setAngle(pointFromlineP2.angle()+angle);
-    //After rotation we will have two intersect lines. Left just find intersect point.
-    QPointF point;
-    QLineF::IntersectType type = pointFromlineP2.intersect(line, &point);
-    if ( type == QLineF::BoundedIntersection )
+    qreal a = 0, b = 0, c = 0;
+    LineCoefficients(line, &a, &b, &c);
+    qreal x = point.x() + a;
+    qreal y = b + point.y();
+    QLineF lin (point, QPointF(x, y));
+    QPointF p;
+    QLineF::IntersectType intersect = line.intersect(lin, &p);
+    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        return point;
+        return p;
     }
     else
     {
-        if ( type == QLineF::NoIntersection || type == QLineF::UnboundedIntersection )
-        {
-            Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "Don't have point of intersection.");
-            return point;
-        }
+        return QPointF();
     }
-    return point;
 }
 
 QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k)

@@ -78,7 +78,7 @@ public:
      * @param p point.
      * @return point on line or extended line if origin size too small.
      */
-    static QPointF          ClosestPoint(const QLineF &line, const QPointF &p);
+    static QPointF          ClosestPoint(const QLineF &line, const QPointF &point);
     /**
      * @brief addVector
      * @param p
