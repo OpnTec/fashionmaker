@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   doubledelegate.h
+ **  @file   textdelegate.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   29 1, 2014
  **
  **  @brief
  **  @copyright
@@ -26,24 +26,24 @@
  **
  *************************************************************************/
 
-#ifndef DOUBLEDELEGATE_H
-#define DOUBLEDELEGATE_H
+#ifndef TEXTDELEGATE_H
+#define TEXTDELEGATE_H
 
 #include <QItemDelegate>
 
 /**
- * @brief The DoubleSpinBoxDelegate class a delegate that allows the user to change double values from the model
- * using a double spin box widget.
+ * @brief The TextDelegate class a delegate that allows the user to change text values from the model
+ * using a edit line widget.
  */
-class DoubleSpinBoxDelegate : public QItemDelegate
+class TextDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-            /**
-             * @brief DoubleSpinBoxDelegate constructor.
-             * @param parent parent object.
-             */
-    DoubleSpinBoxDelegate(QObject *parent = 0): QItemDelegate(parent), lastValue(-10001.0){}
+    /**
+     * @brief TextDelegate constructor.
+     * @param parent parent widget.
+     */
+    explicit TextDelegate(QObject *parent = 0);
     /**
      * @brief createEditorReturns the widget used to edit the item specified by index for editing. The parent widget and
      * style option are used to control how the editor widget appears.
@@ -75,16 +75,27 @@ public:
      * @param index index of data item.
      */
     void    updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+signals:
+    /**
+     * @brief SaveText help save text value of lineedit.
+     * @param text text.
+     */
+    void    SaveText(const QString &text) const;
 public slots:
     /**
      * @brief commitAndCloseEditor commit value if changed.
      */
     void    commitAndCloseEditor();
+    /**
+     * @brief InitText initialize text.
+     * @param text text.
+     */
+    void    InitText(const QString &text);
 private:
     /**
      * @brief lastValue last saved value.
      */
-    qreal lastValue;
+     QString lastText;
 };
 
-#endif
+#endif // TEXTDELEGATE_H

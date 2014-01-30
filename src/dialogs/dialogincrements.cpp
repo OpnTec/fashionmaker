@@ -29,6 +29,7 @@
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include "../widgets/doubledelegate.h"
+#include "../widgets/textdelegate.h"
 #include "../exception/vexception.h"
 
 #include <QPushButton>
@@ -37,10 +38,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
 {
     ui->setupUi(this);
+    TextDelegate *textDelegate = new TextDelegate(ui->tableWidgetIncrement);
+    Q_CHECK_PTR(textDelegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
+    Q_CHECK_PTR(doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
+
     FillStandardTable();
     FillIncrementTable();
     FillLengthLines();
