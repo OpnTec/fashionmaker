@@ -110,7 +110,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
-    Q_ASSERT(spline != 0);
+    Q_CHECK_PTR(spline);
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {

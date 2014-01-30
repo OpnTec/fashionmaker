@@ -54,7 +54,7 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
     }
 
     QTimeLine *anim = new QTimeLine(300, this);
-    Q_ASSERT(anim != 0);
+    Q_CHECK_PTR(anim);
     anim->setUpdateInterval(20);
 
     if (QApplication::keyboardModifiers() == Qt::ControlModifier)

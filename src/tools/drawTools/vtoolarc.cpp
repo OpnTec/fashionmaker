@@ -106,7 +106,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
-    Q_ASSERT(arc != 0);
+    Q_CHECK_PTR(arc);
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {

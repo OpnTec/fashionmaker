@@ -74,9 +74,9 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    Q_ASSERT(scene != 0);
-    Q_ASSERT(doc != 0);
-    Q_ASSERT(data != 0);
+    Q_CHECK_PTR(scene);
+    Q_CHECK_PTR(doc);
+    Q_CHECK_PTR(data);
     qint64 id = _id;
     if (typeCreation == Tool::FromGui)
     {
@@ -96,7 +96,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
-        Q_ASSERT(line != 0);
+        Q_CHECK_PTR(line);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);

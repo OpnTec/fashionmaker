@@ -30,7 +30,7 @@
 
 VDataTool::VDataTool(VContainer *data, QObject *parent): QObject(parent), data(*data), _referens(1)
 {
-    Q_ASSERT(data != 0);
+    Q_CHECK_PTR(data);
 }
 
 VDataTool &VDataTool::operator =(const VDataTool &tool)

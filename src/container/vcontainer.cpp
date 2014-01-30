@@ -72,7 +72,7 @@ void VContainer::setData(const VContainer &data)
     qDeleteAll(gObjects);
     gObjects.clear();
     const QHash<qint64, VGObject*> *obj = data.DataGObjects();
-    Q_ASSERT(obj != 0);
+    Q_CHECK_PTR(obj);
     QHashIterator<qint64, VGObject*> i(*obj);
     while (i.hasNext())
     {
@@ -219,7 +219,7 @@ template <typename val>
 void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, val point)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
-    Q_ASSERT(point != 0);
+    Q_CHECK_PTR(point);
     point->setId(id);
     if (gObjects.contains(id))
     {
@@ -359,7 +359,7 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
 template <typename key, typename val>
 qint64 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
-    Q_ASSERT(value != 0);
+    Q_CHECK_PTR(value);
     qint64 id = getNextId();
     value->setId(id);
     obj[id] = value;

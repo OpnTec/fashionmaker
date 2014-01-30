@@ -56,9 +56,9 @@ void VException::CriticalMessageBox(const QString &situation) const
     }
     msgBox.setIcon(QMessageBox::Critical);
     QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    Q_ASSERT(horizontalSpacer != 0);
+    Q_CHECK_PTR(horizontalSpacer);
     QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
-    Q_ASSERT(layout != 0);
+    Q_CHECK_PTR(layout);
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
 }

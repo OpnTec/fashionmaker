@@ -390,9 +390,9 @@ template <typename Tool>
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     QHash<qint64, VDataTool*>* tools = doc->getTools();
-    Q_ASSERT(tools != 0);
+    Q_CHECK_PTR(tools);
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
-    Q_ASSERT(tool != 0);
+    Q_CHECK_PTR(tool);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
 }

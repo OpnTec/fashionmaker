@@ -45,13 +45,13 @@ VToolCutSplinePath::VToolCutSplinePath(VDomDocument *doc, VContainer *data, cons
     Q_ASSERT_X(splPath2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
     firstSpline = new VSimpleSpline(splPath1id, &currentColor, &factor);
-    Q_ASSERT(firstSpline != 0);
+    Q_CHECK_PTR(firstSpline);
     RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
     secondSpline = new VSimpleSpline(splPath2id, &currentColor, &factor);
-    Q_ASSERT(secondSpline != 0);
+    Q_CHECK_PTR(secondSpline);
     RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
@@ -105,7 +105,7 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
         if (typeCreation == Tool::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_ASSERT(p);
+            Q_CHECK_PTR(p);
             id = data->AddGObject(p);
             splPath1id = id + 1;
             splPath2id = id + 2;
@@ -117,9 +117,9 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
 
 
             VSplinePath *splPath1 = new VSplinePath();
-            Q_ASSERT(splPath1);
+            Q_CHECK_PTR(splPath1);
             VSplinePath *splPath2 = new VSplinePath();
-            Q_ASSERT(splPath2);
+            Q_CHECK_PTR(splPath2);
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
             {
                 if (i <= p1 && i < p2)
@@ -159,7 +159,7 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
         else
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_ASSERT(p);
+            Q_CHECK_PTR(p);
             data->UpdateGObject(id, p);
 
             splPath1id = id + 1;
@@ -171,9 +171,9 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
             VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
 
             VSplinePath *splPath1 = new VSplinePath();
-            Q_ASSERT(splPath1 != 0);
+            Q_CHECK_PTR(splPath1);
             VSplinePath *splPath2 = new VSplinePath();
-            Q_ASSERT(splPath2 != 0);
+            Q_CHECK_PTR(splPath2);
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
             {
                 if (i <= p1 && i < p2)

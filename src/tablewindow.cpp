@@ -293,7 +293,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         if (lis.size()-2 <= 0)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
-                            Q_ASSERT(bitem != 0);
+                            Q_CHECK_PTR(bitem);
                             bitem->setPen(QPen(Qt::black, widthMainLine));
                             listCollidingItems.removeAt(i);
                         }
@@ -302,7 +302,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 else if (listCollidingItems.size()==1)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
-                    Q_ASSERT(bitem != 0);
+                    Q_CHECK_PTR(bitem);
                     bitem->setPen(QPen(Qt::black, widthMainLine));
                     listCollidingItems.clear();
                     collidingItems = true;

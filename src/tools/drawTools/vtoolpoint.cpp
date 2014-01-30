@@ -34,11 +34,11 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
     QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
-    Q_ASSERT(namePoint != 0);
+    Q_CHECK_PTR(namePoint);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
-    Q_ASSERT(lineName != 0);
+    Q_CHECK_PTR(lineName);
     lineName->setPen(QPen(Qt::black));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -51,7 +51,7 @@ VToolPoint::VToolPoint(VDomDocument *doc, VContainer *data, qint64 id, QGraphics
 void VToolPoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
-    Q_ASSERT(point != 0);
+    Q_CHECK_PTR(point);
     QPointF p = pos - this->pos();
     point->setMx(p.x());
     point->setMy(p.y());

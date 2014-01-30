@@ -65,7 +65,7 @@ public:
     void CopyGObject(const VContainer &data, const qint64 &id)
     {
         T *obj = new T(*data.GeometricObject<const T *>(id));
-        Q_ASSERT(obj != 0);
+        Q_CHECK_PTR(obj);
         UpdateGObject(id, obj);
     }
    /**
@@ -86,7 +86,7 @@ public:
             throw VExceptionBadId(tr("Can't find object"), id);
         }
         T obj = dynamic_cast<T>(gObj);
-        Q_ASSERT(obj != 0);
+        Q_CHECK_PTR(obj);
         return obj;
     }
 

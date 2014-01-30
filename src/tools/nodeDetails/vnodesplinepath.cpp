@@ -59,7 +59,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
     if (parse == Document::FullParse)
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
-        Q_ASSERT(splPath != 0);
+        Q_CHECK_PTR(splPath);
         doc->AddTool(id, splPath);
         const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
         const QVector<VSplinePoint> *points = path->GetPoint();
@@ -70,7 +70,7 @@ void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qin
                 doc->IncrementReferens(idTool);
                 //Some nodes we don't show on scene. Tool that create this nodes must free memory.
                 VDataTool *tool = doc->getTool(idTool);
-                Q_ASSERT(tool != 0);
+                Q_CHECK_PTR(tool);
                 splPath->setParent(tool);
             }
             else

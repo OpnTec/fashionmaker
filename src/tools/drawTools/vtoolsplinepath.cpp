@@ -86,7 +86,7 @@ void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGrap
                              VDomDocument *doc, VContainer *data)
 {
     VSplinePath *path = new VSplinePath(dialog->GetPath());
-    Q_ASSERT(path);
+    Q_CHECK_PTR(path);
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
         doc->IncrementReferens((*path)[i].P().id());

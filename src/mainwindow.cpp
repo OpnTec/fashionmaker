@@ -307,7 +307,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            Q_ASSERT(tButton != 0);
+            Q_CHECK_PTR(tButton);
             tButton->setChecked(true);
         }
     }

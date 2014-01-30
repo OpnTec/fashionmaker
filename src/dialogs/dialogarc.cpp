@@ -196,7 +196,7 @@ void DialogArc::F2Changed()
 
 void DialogArc::CheckState()
 {
-    Q_ASSERT(bOk != 0);
+    Q_CHECK_PTR(bOk);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
@@ -224,7 +224,7 @@ void DialogArc::ShowLineAngles()
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
-    Q_ASSERT(lineAnglesTable != 0);
+    Q_CHECK_PTR(lineAnglesTable);
     QHashIterator<QString, qreal> i(*lineAnglesTable);
     while (i.hasNext())
     {

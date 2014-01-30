@@ -37,7 +37,7 @@ QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOption
     Q_UNUSED(option);
     Q_UNUSED(index);
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
-    Q_ASSERT(editor != 0);
+    Q_CHECK_PTR(editor);
     editor->setMinimum(-10000.0);
     editor->setMaximum(10000.0);
     connect(editor, &QDoubleSpinBox::editingFinished, this, &DoubleSpinBoxDelegate::commitAndCloseEditor);
@@ -50,7 +50,7 @@ void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &in
     qreal value = index.model()->data(index, Qt::EditRole).toDouble();
 
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(editor);
-    Q_ASSERT(spinBox != 0);
+    Q_CHECK_PTR(spinBox);
     spinBox->setValue(value);
 }
 
@@ -58,7 +58,7 @@ void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &in
 void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(editor);
-    Q_ASSERT(spinBox != 0);
+    Q_CHECK_PTR(spinBox);
     spinBox->interpretText();
     qreal value = spinBox->value();
 
@@ -76,7 +76,7 @@ void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOp
 void DoubleSpinBoxDelegate::commitAndCloseEditor()
 {
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
-    Q_ASSERT(spinBox != 0);
+    Q_CHECK_PTR(spinBox);
     qreal value = spinBox->value();
     if (qFuzzyCompare ( lastValue, value ) == false)
     {

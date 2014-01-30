@@ -121,8 +121,8 @@ protected:
     void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
                      bool showRemove = true)
     {
-        Q_ASSERT(tool != 0);
-        Q_ASSERT(event != 0);
+        Q_CHECK_PTR(tool);
+        Q_CHECK_PTR(event);
         if (ignoreContextMenuEvent == false)
         {
             QMenu menu;
@@ -176,7 +176,7 @@ protected:
      */
     void ShowItem(Item *item, qint64 id, Qt::GlobalColor color, bool enable)
     {
-        Q_ASSERT(item != 0);
+        Q_CHECK_PTR(item);
         if (id == item->id)
         {
             if (enable == false)

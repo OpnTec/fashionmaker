@@ -62,7 +62,7 @@ void VTableGraphicsView::MirrorItem()
         for ( qint32 i = 0; i < list.count(); ++i )
         {
             QGraphicsItem *item = list.at(i);
-            Q_ASSERT(item != 0);
+            Q_CHECK_PTR(item);
             QRectF itemRectOld = item->sceneBoundingRect();
             //Get the current transform
             QTransform transform(item->transform());
@@ -170,7 +170,7 @@ void VTableGraphicsView::rotateIt()
         for ( qint32 i = 0; i < list.count(); ++i )
         {
             QGraphicsItem *item = list.at(i);
-            Q_ASSERT(item != 0);
+            Q_CHECK_PTR(item);
             item->setTransformOriginPoint(item->boundingRect().center());
             item->setRotation(item->rotation() + 90);
         }

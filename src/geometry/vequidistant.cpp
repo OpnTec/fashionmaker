@@ -30,7 +30,7 @@
 
 QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer *data) const
 {
-    Q_ASSERT(data != 0);
+    Q_CHECK_PTR(data);
     VDetail detail = data->GetDetail(idDetail);
     QVector<QPointF> points;
     QVector<QPointF> pointsEkv;

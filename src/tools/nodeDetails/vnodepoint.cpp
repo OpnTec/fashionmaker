@@ -68,14 +68,14 @@ void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 i
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
-        Q_ASSERT(point != 0);
+        Q_CHECK_PTR(point);
         doc->AddTool(id, point);
         if (idTool != 0)
         {
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            Q_ASSERT(tool != 0);
+            Q_CHECK_PTR(tool);
             point->setParent(tool);
         }
         else
