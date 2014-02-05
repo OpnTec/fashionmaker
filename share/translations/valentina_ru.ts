@@ -714,7 +714,7 @@
     <name>DialogDetail</name>
     <message>
         <location filename="../../src/dialogs/dialogdetail.ui" line="14"/>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="158"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="144"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
@@ -724,37 +724,37 @@
         <translation>Смещение по Х</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="72"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="65"/>
         <source>Bias Y</source>
         <translation>Смещение по Y</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="91"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="77"/>
         <source>Options</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="167"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="153"/>
         <source>Seam allowance</source>
         <translation>Прибавка на швы</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="220"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="199"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="145"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="131"/>
         <source>Name of detail</source>
         <translation>Имя детали</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="188"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="174"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="207"/>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="186"/>
         <source>Closed</source>
         <translation>Замкнутая</translation>
     </message>
@@ -1017,8 +1017,12 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialoghistory.cpp" line="425"/>
-        <source>%1 - cut curve point %2</source>
+        <source>%1 - cut curve path %2</source>
         <translation>%1 - разрезает сложную кривую %2</translation>
+    </message>
+    <message>
+        <source>%1 - cut curve point %2</source>
+        <translation type="obsolete">%1 - разрезает сложную кривую %2</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialoghistory.cpp" line="450"/>
@@ -1054,49 +1058,49 @@
 <context>
     <name>DialogIncrements</name>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="14"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="117"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="20"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="129"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="34"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="46"/>
         <source>Sizes table</source>
         <translation>Стандартная таблица</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="83"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="163"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="175"/>
         <source>Name</source>
         <translation>Обозначение</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="88"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="168"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="100"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="180"/>
         <source>The calculated value</source>
         <translation>Расчитаное значение</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="93"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="173"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="105"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="185"/>
         <source>Base value</source>
         <translation>Базовое значение</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="98"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="178"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="110"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="190"/>
         <source>In sizes</source>
         <translation>В размерах</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="103"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="183"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="115"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="195"/>
         <source>In growths</source>
         <translation>В ростах</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="108"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="188"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="120"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="200"/>
         <location filename="../../src/dialogs/dialogincrements.cpp" line="321"/>
         <location filename="../../src/dialogs/dialogincrements.cpp" line="354"/>
         <source>Description</source>
@@ -1111,18 +1115,18 @@
         <translation type="obsolete">В ростах</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="196"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="211"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="208"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="223"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="224"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="236"/>
         <source>Lines</source>
         <translation>Линии</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="246"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="258"/>
         <source>Line</source>
         <translation>Линия</translation>
     </message>
@@ -1131,12 +1135,12 @@
         <translation type="obsolete">Длина линии</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="260"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="272"/>
         <source>Curves</source>
         <translation>Кривые</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="282"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="294"/>
         <source>Curve</source>
         <translation>Кривая</translation>
     </message>
@@ -1145,12 +1149,12 @@
         <translation type="obsolete">Длина кривой</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="296"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="308"/>
         <source>Arcs</source>
         <translation>Дуги</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="318"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="330"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -1177,9 +1181,9 @@
         <translation type="obsolete">Расчитаное значение</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="251"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="287"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="323"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="263"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="299"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="335"/>
         <source>Length</source>
         <translation>Длина</translation>
     </message>
@@ -3123,12 +3127,12 @@
 <context>
     <name>VToolDetail</name>
     <message>
-        <location filename="../../src/tools/vtooldetail.cpp" line="311"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="312"/>
         <source>Options</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="../../src/tools/vtooldetail.cpp" line="312"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="313"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

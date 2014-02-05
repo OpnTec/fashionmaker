@@ -422,7 +422,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 QString pName = data->GeometricObject<const VPointF *>(points[0].P().id())->name();
-                record = QString(tr("%1 - cut curve point %2")).arg(toolIdName, pName);
+                record = QString(tr("%1 - cut curve path %2")).arg(toolIdName, pName);
                 for (qint32 i = 1; i< points.size(); ++i)
                 {
                     pName = data->GeometricObject<const VPointF *>(points[i].P().id())->name();
