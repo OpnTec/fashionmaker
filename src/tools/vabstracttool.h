@@ -31,6 +31,7 @@
 
 #include "vdatatool.h"
 #include "../xml/vdomdocument.h"
+#include <QMessageBox>
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -47,7 +48,7 @@ public:
                              * @param parent parent object.
                              */
                             VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
-    virtual                 ~VAbstractTool() {}
+    virtual                 ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
      * @param sc scene.

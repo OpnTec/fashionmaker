@@ -210,6 +210,16 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
     if (_referens <= 1)
     {
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm the deletion."));
+        msgBox.setInformativeText(tr("Do you really want delete?"));
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Question);
+        if (msgBox.exec() == QMessageBox::Cancel)
+        {
+            return;
+        }
         //remove from xml file
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())

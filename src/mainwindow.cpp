@@ -612,7 +612,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (changeInFile == true)
     {
-        QMessageBox msgBox;
+        QMessageBox msgBox(this);
         msgBox.setText(tr("The pattern has been modified."));
         msgBox.setInformativeText(tr("Do you want to save your changes?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
