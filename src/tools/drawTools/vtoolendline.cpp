@@ -146,6 +146,7 @@ void VToolEndLine::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrAngle, QString().setNum(dialogEndLine->getAngle()));
             SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogEndLine->getBasePointId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogEndLine.clear();

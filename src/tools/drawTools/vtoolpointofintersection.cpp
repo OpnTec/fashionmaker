@@ -123,6 +123,7 @@ void VToolPointOfIntersection::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogPointOfIntersection->getFirstPointId()));
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogPointOfIntersection->getSecondPointId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogPointOfIntersection.clear();

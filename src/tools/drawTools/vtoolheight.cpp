@@ -147,6 +147,7 @@ void VToolHeight::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrP1Line, QString().setNum(dialogHeight->getP1LineId()));
             SetAttribute(domElement, AttrP2Line, QString().setNum(dialogHeight->getP2LineId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogHeight.clear();

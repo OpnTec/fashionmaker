@@ -162,6 +162,7 @@ void VToolSinglePoint::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrY, QString().setNum(toMM(p.y())));
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogSinglePoint.clear();

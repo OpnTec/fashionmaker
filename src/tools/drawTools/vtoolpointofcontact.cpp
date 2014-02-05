@@ -175,6 +175,7 @@ void VToolPointOfContact::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogPointOfContact->getFirstPoint()));
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogPointOfContact->getSecondPoint()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogPointOfContact.clear();

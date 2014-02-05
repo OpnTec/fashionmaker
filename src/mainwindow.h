@@ -139,7 +139,7 @@ public slots:
      * @brief ChangedGrowth change new height value.
      * @param text value height.
      */
-    void               ChangedGrowth(const QString & text);
+    void               ChangedHeight(const QString & text);
     /**
      * @brief ClosedActionTable actions after closing table with variables.
      */

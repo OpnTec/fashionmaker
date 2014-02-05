@@ -198,6 +198,7 @@ void VToolDetail::FullUpdateFromGui(int result)
                 }
             }
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogDetail.clear();

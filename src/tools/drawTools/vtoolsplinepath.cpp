@@ -160,6 +160,7 @@ void VToolSplinePath::FullUpdateFromGui(int result)
                 SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
                 UpdatePathPoint(domElement, splPath);
                 emit FullUpdateTree();
+                emit toolhaveChange();
             }
 
         }

@@ -175,6 +175,7 @@ void VToolCutArc::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrLength, dialogCutArc->getFormula());
             SetAttribute(domElement, AttrArc, QString().setNum(dialogCutArc->getArcId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogCutArc.clear();

@@ -178,6 +178,7 @@ void VToolTriangle::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTriangle->getFirstPointId()));
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTriangle->getSecondPointId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
 
     }

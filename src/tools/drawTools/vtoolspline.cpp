@@ -176,6 +176,7 @@ void VToolSpline::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
             SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogSpline.clear();

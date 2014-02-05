@@ -156,6 +156,7 @@ void VToolNormal::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogNormal->getFirstPointId()));
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogNormal->getSecondPointId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogNormal.clear();

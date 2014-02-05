@@ -152,6 +152,7 @@ void VToolLineIntersect::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogLineIntersect->getP1Line2()));
             SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogLineIntersect->getP2Line2()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogLineIntersect.clear();

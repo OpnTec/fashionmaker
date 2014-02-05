@@ -1342,7 +1342,6 @@ void VDomDocument::FullUpdateTree()
     delete scene;
     setCurrentData();
     emit FullUpdateFromFile();
-    emit haveChange();
 }
 
 void VDomDocument::haveLiteChange()

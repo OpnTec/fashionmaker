@@ -176,6 +176,7 @@ void VToolCutSpline::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrLength, dialogCutSpline->getFormula());
             SetAttribute(domElement, AttrSpline, QString().setNum(dialogCutSpline->getSplineId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogCutSpline.clear();

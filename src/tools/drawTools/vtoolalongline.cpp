@@ -75,6 +75,7 @@ void VToolAlongLine::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, dialogAlongLine->getFirstPointId());
             SetAttribute(domElement, AttrSecondPoint, dialogAlongLine->getSecondPointId());
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogAlongLine.clear();

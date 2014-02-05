@@ -76,6 +76,7 @@ VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QOb
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
     connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
+    emit toolhaveChange();
 }
 
 void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)

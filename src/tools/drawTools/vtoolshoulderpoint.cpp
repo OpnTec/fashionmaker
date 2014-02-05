@@ -179,6 +179,7 @@ void VToolShoulderPoint::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrP2Line, QString().setNum(dialogShoulderPoint->getP2Line()));
             SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogShoulderPoint->getPShoulder()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogShoulderPoint.clear();

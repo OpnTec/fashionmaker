@@ -149,6 +149,7 @@ void VToolArc::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrAngle1, dialogArc->GetF1());
             SetAttribute(domElement, AttrAngle2, dialogArc->GetF2());
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogArc.clear();

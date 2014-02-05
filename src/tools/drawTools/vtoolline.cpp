@@ -121,6 +121,7 @@ void VToolLine::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogLine.clear();

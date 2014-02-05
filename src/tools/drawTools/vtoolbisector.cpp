@@ -171,6 +171,7 @@ void VToolBisector::FullUpdateFromGui(int result)
             SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogBisector->getSecondPointId()));
             SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogBisector->getThirdPointId()));
             emit FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     dialogBisector.clear();
