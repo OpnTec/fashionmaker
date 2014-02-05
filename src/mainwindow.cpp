@@ -673,7 +673,7 @@ void MainWindow::ToolBarOption()
     comboBoxGrow->setCurrentIndex(14);
     ui->toolBarOption->addWidget(comboBoxGrow);
     connect(comboBoxGrow, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::ChangedGrowth);
+            this, &MainWindow::ChangedHeight);
 
     QLabel * labelSize = new QLabel;
     labelSize->setText(tr(" Size: "));
@@ -1113,7 +1113,7 @@ void MainWindow::ChangedSize(const QString & text)
     doc->FullUpdateTree();
 }
 
-void MainWindow::ChangedGrowth(const QString &text)
+void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
     pattern->SetGrowth(growth*10);
