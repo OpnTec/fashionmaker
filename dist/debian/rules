@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
-  APPNAME := valentina
+  APPNAME := Valentina
   builddir:
 	  mkdir -p builddir
 	  
   builddir/Makefile: builddir
-	lrelease src/src.pro
+	lrelease $(APPNAME).pro
 	  cd builddir && qmake PREFIX=/usr ../$(APPNAME).pro -r
   build: build-stamp
   build-stamp: builddir/Makefile

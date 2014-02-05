@@ -1,5 +1,5 @@
-valentina (0.2+1hg20131126-ppa1-3) saucy; urgency=low
+valentina (0.2.1-dev) saucy; urgency=low
 
-  * Add new dependions qttools5-dev-tools 
+  * Release v.0.2.1-dev
 
- -- Roman Telezhinsky <dismine@gmail.com> Tue, 26 Nov 2013 21:28:15 +0200
+ -- Roman Telezhinsky <dismine@gmail.com>  Tue, 04 Feb 2014 17:40:25 +0200
