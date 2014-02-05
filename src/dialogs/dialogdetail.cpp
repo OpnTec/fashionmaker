@@ -49,9 +49,9 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(bCansel, &QPushButton::clicked, this, &DialogDetail::DialogRejected);
 
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogDetail::ObjectChanged);
-    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
@@ -95,7 +95,7 @@ void DialogDetail::DialogAccepted()
         QListWidgetItem *item = ui.listWidget->item(i);
         details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
-    details.setWidth(ui.doubleSpinBoxSeams->value());
+    details.setWidth(ui.spinBoxSeams->value());
     details.setName(ui.lineEditNameDetail->text());
     details.setSeamAllowance(supplement);
     details.setClosed(closed);
@@ -144,15 +144,15 @@ void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDet
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
-    disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    disconnect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    disconnect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    disconnect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
-    ui.doubleSpinBoxBiasX->setValue(toMM(node.getMx()));
-    ui.doubleSpinBoxBiasY->setValue(toMM(node.getMy()));
-    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    ui.spinBoxBiasX->setValue(static_cast<qint32>(toMM(node.getMx())));
+    ui.spinBoxBiasY->setValue(static_cast<qint32>(toMM(node.getMy())));
+    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
 }
 
@@ -170,7 +170,7 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.checkBoxClosed->setChecked(details.getClosed());
     ClickedClosed(details.getClosed());
     ClickedSeams(details.getSeamAllowance());
-    ui.doubleSpinBoxSeams->setValue(details.getWidth());
+    ui.spinBoxSeams->setValue(static_cast<qint32>(details.getWidth()));
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
@@ -200,7 +200,7 @@ void DialogDetail::ClickedSeams(bool checked)
 {
     supplement = checked;
     ui.checkBoxClosed->setEnabled(checked);
-    ui.doubleSpinBoxSeams->setEnabled(checked);
+    ui.spinBoxSeams->setEnabled(checked);
 }
 
 void DialogDetail::ClickedClosed(bool checked)
@@ -216,8 +216,8 @@ void DialogDetail::ObjectChanged(int row)
     }
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    ui.doubleSpinBoxBiasX->setValue(toMM(node.getMx()));
-    ui.doubleSpinBoxBiasY->setValue(toMM(node.getMy()));
+    ui.spinBoxBiasX->setValue(static_cast<qint32>(toMM(node.getMx())));
+    ui.spinBoxBiasY->setValue(static_cast<qint32>(toMM(node.getMy())));
 }
 
 void DialogDetail::DeleteItem()
