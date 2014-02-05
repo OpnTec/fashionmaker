@@ -54,7 +54,9 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_ru.ts \
                 share/translations/valentina_uk.ts \
                 share/translations/valentina_de.ts \
-                share/translations/valentina_cs.ts
+                share/translations/valentina_cs.ts \
+                share/translations/valentina_he_IL.ts \
+                share/translations/valentina_fr.ts
 
 unix {
 QMAKE_CXX = ccache g++
@@ -138,7 +140,9 @@ pixmaps.files += dist/$${TARGET}.png
 INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
                         share/translations/valentina_uk.qm \
                         share/translations/valentina_de.qm \
-                        share/translations/valentina_cs.qm
+                        share/translations/valentina_cs.qm \
+                        share/translations/valentina_he_IL.qm \
+                        share/translations/valentina_fr.qm
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 INSTALLS += target \

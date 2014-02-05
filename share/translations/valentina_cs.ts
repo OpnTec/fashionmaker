@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.0" language="cs">
 <context>
     <name>DialogAlongLine</name>
     <message>
@@ -14,38 +14,6 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <source>Formula calculation of length of line</source>
-        <translation type="obsolete">Vzorec pro výpočet délky čáry</translation>
-    </message>
-    <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="89"/>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="109"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="144"/>
-        <source>Value of length</source>
-        <translation>Hodnota délky</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="147"/>
-        <source>_</source>
-        <translation>_</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="79"/>
         <source>Formula for the calculation of length of line</source>
         <translation type="unfinished"></translation>
@@ -56,9 +24,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="89"/>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="109"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="106"/>
         <source>Calculate value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="144"/>
+        <source>Value of length</source>
+        <translation>Hodnota délky</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="147"/>
+        <source>_</source>
+        <translation>_</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="199"/>
@@ -96,6 +80,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="267"/>
+        <source>Input data</source>
+        <translation>Vstupní data</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="274"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
@@ -104,32 +93,6 @@
         <location filename="../../src/dialogs/dialogalongline.ui" line="284"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="329"/>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type line</source>
-        <translation type="obsolete">Typ čáry</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="obsolete">Ukázat čáru od prvního bodu k našemu bodu</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogalongline.ui" line="267"/>
-        <source>Input data</source>
-        <translation>Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a vzrůst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="291"/>
@@ -152,8 +115,9 @@
         <translation>Délka křivek</translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
+        <location filename="../../src/dialogs/dialogalongline.ui" line="329"/>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogalongline.cpp" line="96"/>
@@ -174,12 +138,14 @@
         <translation>Poloměr</translation>
     </message>
     <message>
-        <source>Formula calculation of radius of arc</source>
-        <translation type="obsolete">Vzorec pro výpočet poloměru oblouku</translation>
+        <location filename="../../src/dialogs/dialogarc.ui" line="85"/>
+        <source>Formula for the calculation of radius of arc</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
+        <location filename="../../src/dialogs/dialogarc.ui" line="92"/>
+        <source>Insert variable into the formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogarc.ui" line="95"/>
@@ -190,20 +156,6 @@
         <location filename="../../src/dialogs/dialogarc.ui" line="373"/>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogarc.ui" line="85"/>
-        <source>Formula for the calculation of radius of arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogarc.ui" line="92"/>
-        <source>Insert variable into the formula</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogarc.ui" line="112"/>
@@ -290,14 +242,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a vzrůst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogarc.ui" line="468"/>
         <source>Increments</source>
         <translation>Přídavky</translation>
@@ -328,10 +272,6 @@
         <translation>Proměnné</translation>
     </message>
     <message>
-        <source>Value angle of line.</source>
-        <translation type="obsolete">Hodnota úhel čáry.</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogarc.cpp" line="152"/>
         <source>Value of angle of line.</source>
         <translation type="unfinished"></translation>
@@ -350,38 +290,6 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <source>Formula calculation of length of bisector</source>
-        <translation type="obsolete">Vzorec pro výpočet délky osy souměrnosti úhlu</translation>
-    </message>
-    <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="92"/>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="112"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="141"/>
-        <source>Value of length</source>
-        <translation>Hodnota délky</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="144"/>
-        <source>_</source>
-        <translation>_</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogbisector.ui" line="82"/>
         <source>Calculation of length of bisector by using the formula</source>
         <translation type="unfinished"></translation>
@@ -392,9 +300,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="92"/>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="112"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogbisector.ui" line="109"/>
         <source>Calculate value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="141"/>
+        <source>Value of length</source>
+        <translation>Hodnota délky</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="144"/>
+        <source>_</source>
+        <translation>_</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogbisector.ui" line="202"/>
@@ -442,6 +366,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="306"/>
+        <source>Input data</source>
+        <translation>Vstupní data</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogbisector.ui" line="313"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
@@ -450,32 +379,6 @@
         <location filename="../../src/dialogs/dialogbisector.ui" line="323"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="371"/>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type line</source>
-        <translation type="obsolete">Typ čáry</translation>
-    </message>
-    <message>
-        <source>Show line from second point to our point</source>
-        <translation type="obsolete">Ukázat čáru od prvního bodu k našemu bodu</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogbisector.ui" line="306"/>
-        <source>Input data</source>
-        <translation>Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a vzrůst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogbisector.ui" line="330"/>
@@ -498,8 +401,9 @@
         <translation>Délka křivek</translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
+        <location filename="../../src/dialogs/dialogbisector.ui" line="371"/>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogbisector.cpp" line="97"/>
@@ -818,27 +722,14 @@
         <translation type="unfinished">Volby</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="167"/>
-        <source>Seam allowance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogdetail.ui" line="220"/>
-        <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
-    </message>
-    <message>
-        <source>Option</source>
-        <translation type="obsolete">Volba</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogdetail.ui" line="145"/>
         <source>Name of detail</source>
         <translation>Název detailu</translation>
     </message>
     <message>
-        <source>Supplement for seams</source>
-        <translation type="obsolete">Přídavek na švy</translation>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="167"/>
+        <source>Seam allowance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogdetail.ui" line="188"/>
@@ -851,12 +742,9 @@
         <translation>Zavřeno</translation>
     </message>
     <message>
-        <source>Get wrong scene object. Ignore.</source>
-        <translation type="obsolete">Nesprávný předmět scény. Přehlížet.</translation>
-    </message>
-    <message>
-        <source>Get wrong tools. Ignore.</source>
-        <translation type="obsolete">Nesprávné nástroje. Přehlížet.</translation>
+        <location filename="../../src/dialogs/dialogdetail.ui" line="220"/>
+        <source>Delete</source>
+        <translation type="unfinished">Smazat</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogdetail.cpp" line="82"/>
@@ -872,26 +760,14 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Point in the end of line</source>
-        <translation type="obsolete">Bod na konci čáry</translation>
+        <location filename="../../src/dialogs/dialogendline.ui" line="14"/>
+        <source>Point in the end of a line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="72"/>
         <source>Length</source>
         <translation>Délka</translation>
-    </message>
-    <message>
-        <source>Formula calculation of length of line</source>
-        <translation type="obsolete">Vzorec pro výpočet délky čáry</translation>
-    </message>
-    <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogendline.ui" line="14"/>
-        <source>Point in the end of a line</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="85"/>
@@ -944,8 +820,13 @@
     </message>
     <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="254"/>
-        <source>Degree of angel</source>
+        <source>Degree of angle</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogendline.ui" line="426"/>
+        <source>Angle of line</source>
+        <translation>Úhel čáry</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="444"/>
@@ -958,6 +839,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogendline.ui" line="462"/>
+        <source>Input data</source>
+        <translation>Vstupní data</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="469"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
@@ -966,45 +852,6 @@
         <location filename="../../src/dialogs/dialogendline.ui" line="479"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogendline.ui" line="527"/>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Angle degree </source>
-        <translation type="obsolete">Úhel (stupně)</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogendline.ui" line="426"/>
-        <source>Angle of line</source>
-        <translation>Úhel čáry</translation>
-    </message>
-    <message>
-        <source>Type line</source>
-        <translation type="obsolete">Typ čáry</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="obsolete">Ukázat čáru od prvního bodu k našemu bodu</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogendline.ui" line="462"/>
-        <source>Input data</source>
-        <translation>Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a vzrůst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogendline.ui" line="486"/>
@@ -1027,8 +874,9 @@
         <translation>Délka křivek</translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
+        <location filename="../../src/dialogs/dialogendline.ui" line="527"/>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1037,10 +885,6 @@
         <location filename="../../src/dialogs/dialogheight.ui" line="14"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogheight.ui" line="68"/>
@@ -1069,10 +913,6 @@
         <location filename="../../src/dialogs/dialogheight.ui" line="154"/>
         <source>Type of line</source>
         <translation type="unfinished">Typ čáry</translation>
-    </message>
-    <message>
-        <source>Type line</source>
-        <translation type="obsolete">Typ čáry</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogheight.ui" line="161"/>
@@ -1140,6 +980,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="285"/>
+        <source>Curve %1_%2</source>
+        <translation>Křivka %1_%2</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="292"/>
+        <source>Arc with center in point %1</source>
+        <translation>Oblouk se středem v bodě %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="302"/>
+        <source>Curve point %1</source>
+        <translation>Bod křivky %1</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialoghistory.cpp" line="325"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation type="unfinished"></translation>
@@ -1148,6 +1003,11 @@
         <location filename="../../src/dialogs/dialoghistory.cpp" line="343"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialoghistory.cpp" line="363"/>
+        <source>Triangle: axis %1_%2, points %3 and %4</source>
+        <translation>Trojúhelník: osa %1_%2, body %3 a %4</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialoghistory.cpp" line="378"/>
@@ -1174,54 +1034,6 @@
         <source>Got wrong tool type. Ignore.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>%1 - Point of soulder</source>
-        <translation type="obsolete">%1 - Bod ramene</translation>
-    </message>
-    <message>
-        <source>%3 - Normal to line %1_%2</source>
-        <translation type="obsolete">%3 - Kolmice k čáře %1_%2</translation>
-    </message>
-    <message>
-        <source>%4 - Bisector of angle %1_%2_%3</source>
-        <translation type="obsolete">%4 - Osa souměrnosti úhlu %1_%2_%3</translation>
-    </message>
-    <message>
-        <source>%5 - Point of intersection lines %1_%2 and %3_%4</source>
-        <translation type="obsolete">%5 - Bod průsečíku čar %1_%2 a %3_%4</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="285"/>
-        <source>Curve %1_%2</source>
-        <translation>Křivka %1_%2</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="292"/>
-        <source>Arc with center in point %1</source>
-        <translation>Oblouk se středem v bodě %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="302"/>
-        <source>Curve point %1</source>
-        <translation>Bod křivky %1</translation>
-    </message>
-    <message>
-        <source>%4 - Point of contact arc with center in point %1 and line %2_%3</source>
-        <translation type="obsolete">%4 - Bod dotyku oblouku se středem v bodě %1 a na čáře %2_%3</translation>
-    </message>
-    <message>
-        <source>Point of perpendical from point %1 to line %2_%3</source>
-        <translation type="obsolete">Bod kolmice z bodu %1 k čáře %2_%3</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialoghistory.cpp" line="363"/>
-        <source>Triangle: axis %1_%2, points %3 and %4</source>
-        <translation>Trojúhelník: osa %1_%2, body %3 a %4</translation>
-    </message>
-    <message>
-        <source>Get wrong tool type. Ignore.</source>
-        <translation type="obsolete">Nesprávný typ nástroje. Přehlížet.</translation>
-    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -1230,14 +1042,6 @@
         <location filename="../../src/dialogs/dialogincrements.ui" line="117"/>
         <source>Increments</source>
         <translation>Přídavky</translation>
-    </message>
-    <message>
-        <source>Table sizes</source>
-        <translation type="obsolete">Tabulka rozměrů</translation>
-    </message>
-    <message>
-        <source>Denotation</source>
-        <translation type="obsolete">Označení</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="34"/>
@@ -1277,18 +1081,10 @@
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="108"/>
         <location filename="../../src/dialogs/dialogincrements.ui" line="188"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="315"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="348"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="321"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="354"/>
         <source>Description</source>
         <translation>Popis</translation>
-    </message>
-    <message>
-        <source>In size</source>
-        <translation type="obsolete">Ve velikostech</translation>
-    </message>
-    <message>
-        <source>In growth</source>
-        <translation type="obsolete">V růstech</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="196"/>
@@ -1307,8 +1103,11 @@
         <translation>Čára</translation>
     </message>
     <message>
-        <source>Length of the line</source>
-        <translation type="obsolete">Délka čáry</translation>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="251"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="287"/>
+        <location filename="../../src/dialogs/dialogincrements.ui" line="323"/>
+        <source>Length</source>
+        <translation>Délka</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="260"/>
@@ -1321,10 +1120,6 @@
         <translation>Křivka</translation>
     </message>
     <message>
-        <source>Length of the curve</source>
-        <translation type="obsolete">Délka křivky</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="296"/>
         <source>Arcs</source>
         <translation>Oblouky</translation>
@@ -1335,33 +1130,14 @@
         <translation>Oblouk</translation>
     </message>
     <message>
-        <source>Length of arc</source>
-        <translation type="obsolete">Délka oblouku</translation>
-    </message>
-    <message>
-        <source>Denotation %1</source>
-        <translation type="obsolete">Označení %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="307"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="313"/>
         <source>Name_%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="454"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="460"/>
         <source>Can&apos;t convert toDouble value.</source>
         <translation>Nelze převést na hodnotu toDouble.</translation>
-    </message>
-    <message>
-        <source>Calculated value</source>
-        <translation type="obsolete">Vypočítaná hodnota</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="251"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="287"/>
-        <location filename="../../src/dialogs/dialogincrements.ui" line="323"/>
-        <source>Length</source>
-        <translation>Délka</translation>
     </message>
 </context>
 <context>
@@ -1389,14 +1165,6 @@
 </context>
 <context>
     <name>DialogLineIntersect</name>
-    <message>
-        <source>Point of line intersection</source>
-        <translation type="obsolete">Bod průsečíku čar</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
     <message>
         <location filename="../../src/dialogs/dialoglineintersect.ui" line="14"/>
         <source>Intersection of lines</source>
@@ -1458,12 +1226,14 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <source>Formula calculation of length of normal</source>
-        <translation type="obsolete">Vzorec pro výpočet délky kolmice</translation>
+        <location filename="../../src/dialogs/dialognormal.ui" line="85"/>
+        <source>Formula for calculation of length of normal</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
+        <location filename="../../src/dialogs/dialognormal.ui" line="92"/>
+        <source>Insert variable into formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialognormal.ui" line="95"/>
@@ -1480,6 +1250,11 @@
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialognormal.ui" line="112"/>
+        <source>Calculate value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialognormal.ui" line="144"/>
         <source>Value of length</source>
         <translation>Hodnota délky</translation>
@@ -1490,12 +1265,9 @@
         <translation>_</translation>
     </message>
     <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
+        <location filename="../../src/dialogs/dialognormal.ui" line="205"/>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialognormal.ui" line="225"/>
@@ -1513,47 +1285,6 @@
         <translation>Dodatečné úhlové stupně</translation>
     </message>
     <message>
-        <source>Type line</source>
-        <translation type="obsolete">Typ čáry</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="obsolete">Ukázat čáru od prvního bodu k našemu bodu</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialognormal.ui" line="481"/>
-        <source>Input data</source>
-        <translation>Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a růst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialognormal.ui" line="85"/>
-        <source>Formula for calculation of length of normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialognormal.ui" line="92"/>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialognormal.ui" line="112"/>
-        <source>Calculate value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialognormal.ui" line="205"/>
-        <source>Point label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialognormal.ui" line="463"/>
         <source>Type of line</source>
         <translation type="unfinished">Typ čáry</translation>
@@ -1562,6 +1293,11 @@
         <location filename="../../src/dialogs/dialognormal.ui" line="470"/>
         <source>Show line from first point to this point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialognormal.ui" line="481"/>
+        <source>Input data</source>
+        <translation>Vstupní data</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialognormal.ui" line="488"/>
@@ -1599,10 +1335,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialognormal.cpp" line="113"/>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
@@ -1621,18 +1353,25 @@
         <translation>Poloměr</translation>
     </message>
     <message>
-        <source>Formula calculation of radius of arc</source>
-        <translation type="obsolete">Vzorec pro výpočet poloměru oblouku</translation>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="85"/>
+        <source>Formula for calculation of radius of arc</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="92"/>
+        <source>Insert variable into formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="95"/>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="115"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="112"/>
+        <source>Calculate value</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="144"/>
@@ -1645,12 +1384,9 @@
         <translation>_</translation>
     </message>
     <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="205"/>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="225"/>
@@ -1658,8 +1394,10 @@
         <translation>Střed oblouku</translation>
     </message>
     <message>
-        <source>Slect point of center of arc</source>
-        <translation type="obsolete">Vybrat bod středu oblouku</translation>
+        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="244"/>
+        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="101"/>
+        <source>Select point of center of arc</source>
+        <translation>Vybrat bod středu oblouku</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="261"/>
@@ -1675,34 +1413,6 @@
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="321"/>
         <source>Input data</source>
         <translation>Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a růst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="85"/>
-        <source>Formula for calculation of radius of arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="92"/>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="112"/>
-        <source>Calculate value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="205"/>
-        <source>Point label</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofcontact.ui" line="328"/>
@@ -1740,19 +1450,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="90"/>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogpointofcontact.ui" line="244"/>
-        <location filename="../../src/dialogs/dialogpointofcontact.cpp" line="101"/>
-        <source>Select point of center of arc</source>
-        <translation>Vybrat bod středu oblouku</translation>
     </message>
 </context>
 <context>
@@ -1773,26 +1473,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="109"/>
-        <source>horizontal point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Point vertically</source>
-        <translation type="obsolete">Bod svisle</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogpointofintersection.ui" line="92"/>
         <source>First point of angle</source>
         <translation>První bod úhlu</translation>
     </message>
     <message>
-        <source>Point horizontally</source>
-        <translation type="obsolete">Bod vodorovně</translation>
+        <location filename="../../src/dialogs/dialogpointofintersection.ui" line="109"/>
+        <source>horizontal point</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogpointofintersection.ui" line="116"/>
@@ -1819,38 +1507,6 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <source>Formula calculation of length of line</source>
-        <translation type="obsolete">Vzorec pro výpočet délky čáry</translation>
-    </message>
-    <message>
-        <source>Calculate formula</source>
-        <translation type="obsolete">Vypočítat vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="95"/>
-        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="115"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="144"/>
-        <source>Value of length</source>
-        <translation>Hodnota délky</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="147"/>
-        <source>_</source>
-        <translation>_</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
-    </message>
-    <message>
-        <source>Put variable into formula</source>
-        <translation type="obsolete">Dát do vzorce proměnnou</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="85"/>
         <source>Formula for calculation of length of line</source>
         <translation type="unfinished"></translation>
@@ -1861,9 +1517,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="95"/>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="115"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
         <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="112"/>
         <source>Calculate value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="144"/>
+        <source>Value of length</source>
+        <translation>Hodnota délky</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="147"/>
+        <source>_</source>
+        <translation>_</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="205"/>
@@ -1906,19 +1578,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="407"/>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Velikost a růst</translation>
-    </message>
-    <message>
-        <source>Standart table</source>
-        <translation type="obsolete">Standardní tabulka</translation>
-    </message>
-    <message>
         <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="366"/>
         <source>Increments</source>
         <translation>Přídavky</translation>
@@ -1935,8 +1594,9 @@
         <translation>Délka křivek</translation>
     </message>
     <message>
-        <source>Variables. Click twice to select.</source>
-        <translation type="obsolete">Proměnné. Klepněte dvakrát pro výběr.</translation>
+        <location filename="../../src/dialogs/dialogshoulderpoint.ui" line="407"/>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogshoulderpoint.cpp" line="98"/>
@@ -1980,10 +1640,6 @@
         <location filename="../../src/dialogs/dialogsinglepoint.ui" line="114"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point name</source>
-        <translation type="obsolete">Název bodu</translation>
     </message>
 </context>
 <context>
@@ -2085,62 +1741,67 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <source>Wrong details id.</source>
-        <translation type="obsolete">Špatné ID detailu.</translation>
-    </message>
-    <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="203"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="209"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="223"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="47"/>
         <source>Line</source>
         <translation>Čára</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="203"/>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="231"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="47"/>
         <source>No line</source>
         <translation>Žádná čára</translation>
     </message>
     <message>
-        <source>Can&apos;t find point by name</source>
-        <translation type="obsolete">Nelze najít bod podle názvu</translation>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="47"/>
+        <source>Dash Line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="308"/>
-        <source>Error</source>
-        <translation>Chyba</translation>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="47"/>
+        <source>Dot Line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Growth</source>
-        <translation type="obsolete">Výška postavy</translation>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="47"/>
+        <source>Dash Dot Line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="248"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="48"/>
+        <source>Dash Dot Dot Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="258"/>
         <source>Can&apos;t find object by name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="563"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="318"/>
+        <source>Error</source>
+        <translation>Chyba</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="573"/>
         <source>Height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="568"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="578"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="592"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="602"/>
         <source>Line length</source>
         <translation>Délka čáry</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="599"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="609"/>
         <source>Arc length</source>
         <translation>Délka oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogtool.cpp" line="606"/>
+        <location filename="../../src/dialogs/dialogtool.cpp" line="616"/>
         <source>Curve length</source>
         <translation>Délka křivky</translation>
     </message>
@@ -2151,10 +1812,6 @@
         <location filename="../../src/dialogs/dialogtriangle.ui" line="14"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Name new point</source>
-        <translation type="obsolete">Název nového bodu</translation>
     </message>
     <message>
         <location filename="../../src/dialogs/dialogtriangle.ui" line="68"/>
@@ -2257,9 +1914,8 @@
         <translation>Bod</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="73"/>
-        <source>Point at distance and angle</source>
-        <translation>Nástroj bod na koncové čáře.</translation>
+        <source>Tool point on the end line.</source>
+        <translation type="obsolete">Nástroj bod na koncové čáře.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="76"/>
@@ -2285,33 +1941,24 @@
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="99"/>
-        <source>Special point on shoulder.</source>
-        <translation>Nástroj bod ramene.</translation>
+        <source>Tool point of shoulder.</source>
+        <translation type="obsolete">Nástroj bod ramene.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="125"/>
-        <source>Point at intersection of arc and line.</source>
-        <translation>Nástroj bod dotyku.</translation>
+        <source>Tool point of contact.</source>
+        <translation type="obsolete">Nástroj bod dotyku.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="151"/>
-        <source>Point along bisector</source>
-        <translation>Nástroj bod osy úhlu.</translation>
+        <source>Tool point of bisector.</source>
+        <translation type="obsolete">Nástroj bod osy úhlu.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="177"/>
-        <source>Point along perpendicular</source>
-        <translation>Nástroj bod kolmice.</translation>
+        <source>Tool point of normal.</source>
+        <translation type="obsolete">Nástroj bod kolmice.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="203"/>
-        <source>Point at distance along line</source>
-        <translation>Nástroj bod podél čáry.</translation>
-    </message>
-    <message>
-        <source>Tool point of height.</source>
-        <translation type="obsolete">Nástroj bod výšky.</translation>
+        <source>Tool point along line.</source>
+        <translation type="obsolete">Nástroj bod podél čáry.</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="255"/>
@@ -2329,12 +1976,49 @@
         <translation>Čára</translation>
     </message>
     <message>
-        <source>Tool line.</source>
-        <translation type="obsolete">Nástroj čára.</translation>
+        <location filename="../../src/mainwindow.ui" line="73"/>
+        <source>Point at distance and angle</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tool point of line intersection.</source>
-        <translation type="obsolete">Nástroj bod průsečíku čar.</translation>
+        <location filename="../../src/mainwindow.ui" line="99"/>
+        <source>Special point on shoulder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="125"/>
+        <source>Point at intersection of arc and line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="151"/>
+        <source>Point along bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="177"/>
+        <source>Point along perpendicular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="203"/>
+        <source>Point at distance along line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="229"/>
+        <source>Perpendicular point along line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="328"/>
+        <source>Line between points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="354"/>
+        <source>Point at line intersection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="392"/>
@@ -2347,12 +2031,24 @@
         <translation>Křivka</translation>
     </message>
     <message>
-        <source>Tool curve.</source>
-        <translation type="obsolete">Nástroj křivka.</translation>
+        <location filename="../../src/mainwindow.ui" line="404"/>
+        <source>Curve tool.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tool path curve.</source>
-        <translation type="obsolete">Nástroj cesta křivky.</translation>
+        <location filename="../../src/mainwindow.ui" line="430"/>
+        <source>Tool for path curve.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="456"/>
+        <source>Tool segment a pathed curve.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="482"/>
+        <source>Tool for segmenting a curve.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="520"/>
@@ -2365,8 +2061,9 @@
         <translation>Oblouk</translation>
     </message>
     <message>
-        <source>Tool arc.</source>
-        <translation type="obsolete">Nástroj oblouk.</translation>
+        <location filename="../../src/mainwindow.ui" line="532"/>
+        <source>Arc tool.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="593"/>
@@ -2392,50 +2089,6 @@
         <location filename="../../src/mainwindow.ui" line="683"/>
         <source>Help</source>
         <translation>Nápověda</translation>
-    </message>
-    <message>
-        <source>Drawing</source>
-        <translation type="obsolete">Nákres</translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="229"/>
-        <source>Perpendicular point along line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="328"/>
-        <source>Line between points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="354"/>
-        <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="404"/>
-        <source>Curve tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="430"/>
-        <source>Tool for path curve.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="456"/>
-        <source>Tool segment a pathed curve.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="482"/>
-        <source>Tool for segmenting a curve.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.ui" line="532"/>
-        <source>Arc tool.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="690"/>
@@ -2499,7 +2152,7 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="813"/>
-        <location filename="../../src/mainwindow.cpp" line="983"/>
+        <location filename="../../src/mainwindow.cpp" line="1004"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
@@ -2571,31 +2224,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="975"/>
-        <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deatils mode</source>
-        <translation type="obsolete">Režim podrobnosti</translation>
-    </message>
-    <message>
-        <source>Tools pointer</source>
-        <translation type="obsolete">Ukazovátko nástroje</translation>
-    </message>
-    <message>
-        <source>New drawing</source>
-        <translation type="obsolete">Nový nákres</translation>
-    </message>
-    <message>
-        <source>Add new drawing</source>
-        <translation type="obsolete">Přidat nový nákres</translation>
-    </message>
-    <message>
-        <source>Change the name of drawing</source>
-        <translation type="obsolete">Změnit název nákresu</translation>
-    </message>
-    <message>
         <location filename="../../src/mainwindow.ui" line="921"/>
         <source>Table of variables</source>
         <translation>Tabulka proměnných</translation>
@@ -2637,13 +2265,13 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="962"/>
-        <location filename="../../src/mainwindow.cpp" line="558"/>
+        <location filename="../../src/mainwindow.cpp" line="578"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.ui" line="967"/>
-        <location filename="../../src/mainwindow.cpp" line="553"/>
+        <location filename="../../src/mainwindow.cpp" line="573"/>
         <source>About Valentina</source>
         <translation>O programu Valentina</translation>
     </message>
@@ -2653,316 +2281,292 @@
         <translation>Ukončit</translation>
     </message>
     <message>
-        <source>Create new drawing for start working.</source>
-        <translation type="obsolete">Vytvořit nový nákres pro započetí s prací.</translation>
+        <location filename="../../src/mainwindow.ui" line="975"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Drawing %1</source>
-        <translation type="obsolete">Nákres %1</translation>
-    </message>
-    <message>
-        <source>Drawing:</source>
-        <translation type="obsolete">Nákres:</translation>
-    </message>
-    <message>
-        <source>Enter a name for the drawing.</source>
-        <translation type="obsolete">Zadejte název nákresu.</translation>
-    </message>
-    <message>
-        <source>Error. Drawing of same name already exists.</source>
-        <translation type="obsolete">Chyba. Nákres se stejným názvem již existuje.</translation>
-    </message>
-    <message>
-        <source>Error creating drawing with the name</source>
-        <translation type="obsolete">Chyba při vytváření nákresu s názvem</translation>
-    </message>
-    <message>
-        <source>Enter a new name for the drawing.</source>
-        <translation type="obsolete">Zadejte nový název nákresu.</translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="253"/>
-        <source>Error saving change!!!</source>
-        <translation>Chyba při ukládání změny!</translation>
-    </message>
-    <message>
-        <source>Can&apos;t save new name of drawing</source>
-        <translation type="obsolete">Nelze uložit nový název nákresu</translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="97"/>
+        <location filename="../../src/mainwindow.cpp" line="127"/>
         <source>Create new pattern piece to start working.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="154"/>
+        <location filename="../../src/mainwindow.cpp" line="184"/>
         <source>Pattern piece %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="157"/>
-        <location filename="../../src/mainwindow.cpp" line="221"/>
+        <location filename="../../src/mainwindow.cpp" line="187"/>
+        <location filename="../../src/mainwindow.cpp" line="251"/>
         <source>Pattern piece:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="159"/>
+        <location filename="../../src/mainwindow.cpp" line="189"/>
         <source>Enter a label for the pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="174"/>
+        <location filename="../../src/mainwindow.cpp" line="204"/>
         <source>Error. Pattern piece of same label already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="185"/>
+        <location filename="../../src/mainwindow.cpp" line="215"/>
         <source>Error creating pattern with the name </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="223"/>
+        <location filename="../../src/mainwindow.cpp" line="253"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="238"/>
+        <location filename="../../src/mainwindow.cpp" line="268"/>
         <source>Error. Pattern piece of same name already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="253"/>
+        <location filename="../../src/mainwindow.cpp" line="283"/>
+        <source>Error saving change!!!</source>
+        <translation>Chyba při ukládání změny!</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="283"/>
         <source>Can&apos;t save new label of pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="308"/>
-        <location filename="../../src/mainwindow.cpp" line="330"/>
+        <location filename="../../src/mainwindow.cpp" line="328"/>
+        <location filename="../../src/mainwindow.cpp" line="350"/>
         <source>Select point</source>
         <translation>Vybrat bod</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="319"/>
+        <location filename="../../src/mainwindow.cpp" line="339"/>
         <source>Select first point</source>
         <translation>Vybrat první bod</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="342"/>
-        <location filename="../../src/mainwindow.cpp" line="354"/>
-        <location filename="../../src/mainwindow.cpp" line="443"/>
+        <location filename="../../src/mainwindow.cpp" line="362"/>
+        <location filename="../../src/mainwindow.cpp" line="374"/>
+        <location filename="../../src/mainwindow.cpp" line="463"/>
         <source>Select first point of line</source>
         <translation>Vybrat první bod čáry</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="365"/>
+        <location filename="../../src/mainwindow.cpp" line="385"/>
         <source>Select first point of angle</source>
         <translation>Vybrat první bod úhlu</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="376"/>
+        <location filename="../../src/mainwindow.cpp" line="396"/>
         <source>Select first point of first line</source>
         <translation>Vybrat první bod první čáry</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="388"/>
+        <location filename="../../src/mainwindow.cpp" line="408"/>
         <source>Select first point curve</source>
         <translation>Vybrat první bod křivky</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="399"/>
+        <location filename="../../src/mainwindow.cpp" line="419"/>
         <source>Select simple curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="410"/>
+        <location filename="../../src/mainwindow.cpp" line="430"/>
         <source>Select point of center of arc</source>
         <translation>Vybrat bod středu oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="421"/>
+        <location filename="../../src/mainwindow.cpp" line="441"/>
         <source>Select point of curve path</source>
         <translation>Vybrat bod cesty křivky</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="432"/>
+        <location filename="../../src/mainwindow.cpp" line="452"/>
         <source>Select curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="461"/>
+        <location filename="../../src/mainwindow.cpp" line="481"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Vybrat body, oblouky, křivky po směru hodinových ručiček.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="489"/>
+        <location filename="../../src/mainwindow.cpp" line="509"/>
         <source>Select base point</source>
         <translation>Vybrat základní bod</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="500"/>
+        <location filename="../../src/mainwindow.cpp" line="520"/>
         <source>Select first point of axis</source>
         <translation>Vybrat první bod osy</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="512"/>
+        <location filename="../../src/mainwindow.cpp" line="532"/>
         <source>Select point vertically</source>
         <translation>Vybrat bod svisle</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="524"/>
+        <location filename="../../src/mainwindow.cpp" line="544"/>
         <source>Select detail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="532"/>
+        <location filename="../../src/mainwindow.cpp" line="552"/>
         <source>Select arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="549"/>
+        <location filename="../../src/mainwindow.cpp" line="569"/>
         <source>Based on Qt %2 (32 bit)</source>
         <translation>Založeno na Qt %2 (32 bit)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="550"/>
+        <location filename="../../src/mainwindow.cpp" line="570"/>
         <source>Built on %3 at %4</source>
         <translation>Sestaveno %3 v %4</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="551"/>
+        <location filename="../../src/mainwindow.cpp" line="571"/>
         <source>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</source>
         <translation>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="596"/>
+        <location filename="../../src/mainwindow.cpp" line="616"/>
         <source>The pattern has been modified.</source>
         <translation>Střih byl změněn.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="597"/>
+        <location filename="../../src/mainwindow.cpp" line="617"/>
         <source>Do you want to save your changes?</source>
         <translation>Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="644"/>
+        <location filename="../../src/mainwindow.cpp" line="664"/>
         <source>Height: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="683"/>
-        <source>Pattern Piece: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="982"/>
-        <location filename="../../src/mainwindow.cpp" line="1028"/>
-        <source>Pattern files (*.val)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="1224"/>
-        <location filename="../../src/mainwindow.cpp" line="1396"/>
-        <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="1316"/>
-        <source>Can&apos;t open pattern file. File name is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Growth: </source>
-        <translation type="obsolete">Výška postavy:</translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="659"/>
+        <location filename="../../src/mainwindow.cpp" line="679"/>
         <source> Size: </source>
         <translation> Velikost: </translation>
     </message>
     <message>
-        <source>Drawing: </source>
-        <translation type="obsolete">Nákres: </translation>
+        <location filename="../../src/mainwindow.cpp" line="703"/>
+        <source>Pattern Piece: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lekalo files (*.xml);;All files (*.*)</source>
-        <translation type="obsolete">Soubory se střihy (*.xml);;Všechny soubory (*.*)</translation>
+        <location filename="../../src/mainwindow.cpp" line="1002"/>
+        <location filename="../../src/mainwindow.cpp" line="1049"/>
+        <source>Pattern files (*.val)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lekalo files (*.xml)</source>
-        <translation type="obsolete">Soubory se střihy (*.xml)</translation>
+        <location filename="../../src/mainwindow.cpp" line="1003"/>
+        <source>/pattern.val</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1016"/>
-        <location filename="../../src/mainwindow.cpp" line="1223"/>
-        <location filename="../../src/mainwindow.cpp" line="1336"/>
-        <location filename="../../src/mainwindow.cpp" line="1351"/>
-        <location filename="../../src/mainwindow.cpp" line="1365"/>
-        <location filename="../../src/mainwindow.cpp" line="1380"/>
-        <location filename="../../src/mainwindow.cpp" line="1395"/>
-        <location filename="../../src/mainwindow.cpp" line="1428"/>
+        <location filename="../../src/mainwindow.cpp" line="1037"/>
+        <location filename="../../src/mainwindow.cpp" line="1310"/>
+        <location filename="../../src/mainwindow.cpp" line="1480"/>
+        <location filename="../../src/mainwindow.cpp" line="1496"/>
         <source>Error!</source>
         <translation>Chyba!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1017"/>
+        <location filename="../../src/mainwindow.cpp" line="1038"/>
         <source>Error saving file. Can&apos;t save file.</source>
         <translation>Chyba při ukládání souboru! Nelze uložit soubor.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1029"/>
+        <location filename="../../src/mainwindow.cpp" line="1050"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <source>Error don&apos;t unique id.</source>
-        <translation type="obsolete">Chyba. ID není jedinečné.</translation>
+        <location filename="../../src/mainwindow.cpp" line="1248"/>
+        <location filename="../../src/mainwindow.cpp" line="1512"/>
+        <source>Can&apos;t open pattern file.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1235"/>
+        <location filename="../../src/mainwindow.cpp" line="1255"/>
+        <source>Empty schema path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1263"/>
+        <source>Can&apos;t open schema file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1311"/>
+        <location filename="../../src/mainwindow.cpp" line="1454"/>
+        <source>Error no unique id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1322"/>
         <source>Got empty file name.</source>
         <translation>Obdržen prázdný název souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1263"/>
+        <location filename="../../src/mainwindow.cpp" line="1350"/>
         <source>Could not copy temp file to pattern file</source>
         <translation>Nepodařilo se zkopírovat dočasný soubor do souboru se střihem</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1274"/>
+        <location filename="../../src/mainwindow.cpp" line="1361"/>
         <source>Could not remove pattern file</source>
         <translation>Nepodařilo se odstranit soubor se střihem</translation>
     </message>
     <message>
-        <source>Can&apos;t open pattern file. File name empty</source>
-        <translation type="obsolete">Nelze otevřít soubor se střihem. Název souboru je prázdný</translation>
+        <location filename="../../src/mainwindow.cpp" line="1403"/>
+        <source>Can&apos;t open pattern file. File name is empty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1337"/>
+        <location filename="../../src/mainwindow.cpp" line="1426"/>
         <source>Error parsing file.</source>
         <translation>Chyba při zpracování souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1352"/>
+        <location filename="../../src/mainwindow.cpp" line="1433"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Chyba. Nelze převést hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1366"/>
+        <location filename="../../src/mainwindow.cpp" line="1440"/>
         <source>Error empty parameter.</source>
         <translation>Chyba. Prázdný parametr.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1381"/>
+        <location filename="../../src/mainwindow.cpp" line="1447"/>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatné ID.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1429"/>
-        <source>Error parsing pattern file.</source>
-        <translation>Chyba při zpracování souboru se střihem.</translation>
+        <location filename="../../src/mainwindow.cpp" line="1481"/>
+        <source>Parsing pattern file error.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1433"/>
+        <location filename="../../src/mainwindow.cpp" line="1497"/>
+        <source>Validation file error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error parsing pattern file.</source>
+        <translation type="obsolete">Chyba při zpracování souboru se střihem.</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1485"/>
+        <location filename="../../src/mainwindow.cpp" line="1501"/>
         <source>Error in line %1 column %2</source>
         <translation>Chyba na řádku %1, sloupec %2</translation>
     </message>
@@ -2986,7 +2590,7 @@
     </message>
     <message>
         <location filename="../../src/tablewindow.ui" line="85"/>
-        <location filename="../../src/tablewindow.cpp" line="183"/>
+        <location filename="../../src/tablewindow.cpp" line="185"/>
         <source>Save layout</source>
         <translation>Uložit rozvržení</translation>
     </message>
@@ -3008,16 +2612,7 @@
     <message>
         <location filename="../../src/tablewindow.ui" line="114"/>
         <source>Turn the detail 90 degrees</source>
-        <translation type="unfinished">Otočit detail o 180 stupňů {90 ?}</translation>
-    </message>
-    <message>
-        <location filename="../../src/tablewindow.ui" line="140"/>
-        <source>Enlarge the length of the sheet</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Turn the detail 180 degrees</source>
-        <translation type="obsolete">Otočit detail o 180 stupňů</translation>
     </message>
     <message>
         <location filename="../../src/tablewindow.ui" line="124"/>
@@ -3035,8 +2630,9 @@
         <translation>Zvětšit list</translation>
     </message>
     <message>
-        <source>Enlarge the length of sheet</source>
-        <translation type="obsolete">Zvětšit velikost listu</translation>
+        <location filename="../../src/tablewindow.ui" line="140"/>
+        <source>Enlarge the length of the sheet</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tablewindow.ui" line="153"/>
@@ -3073,7 +2669,7 @@
     </message>
     <message>
         <location filename="../../src/tablewindow.cpp" line="44"/>
-        <location filename="../../src/tablewindow.cpp" line="239"/>
+        <location filename="../../src/tablewindow.cpp" line="241"/>
         <source>Collisions not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3083,17 +2679,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tablewindow.cpp" line="253"/>
+        <location filename="../../src/tablewindow.cpp" line="255"/>
         <source>Collisions found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tablewindow.cpp" line="406"/>
+        <location filename="../../src/tablewindow.cpp" line="408"/>
         <source>SVG Generator Example Drawing</source>
         <translation>Kreslení pomocí SVG Generator Example</translation>
     </message>
     <message>
-        <location filename="../../src/tablewindow.cpp" line="407"/>
+        <location filename="../../src/tablewindow.cpp" line="409"/>
         <source>An SVG drawing created by the SVG Generator Example provided with Qt.</source>
         <translation>Kresba SVG vytvořená pomocí SVG Generator Example poskytovaného s Qt.</translation>
     </message>
@@ -3145,23 +2741,12 @@
     </message>
     <message>
         <location filename="../../src/widgets/vapplication.cpp" line="113"/>
+        <source>Something&apos;s wrong!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Something wrong!!</source>
-        <translation>Něco je špatně!</translation>
-    </message>
-</context>
-<context>
-    <name>VArc</name>
-    <message>
-        <source>Can&apos;t find id = %1 in table.</source>
-        <translation type="obsolete">Nelze najít id = %1 v tabulce.</translation>
-    </message>
-    <message>
-        <source>Angle of arc can&apos;t be 0 degree.</source>
-        <translation type="obsolete">Oblouk úhlu nemůže být 0 stupňů.</translation>
-    </message>
-    <message>
-        <source>Arc have not this number of part.</source>
-        <translation type="obsolete">Oblouk nemá tento počet částí.</translation>
+        <translation type="obsolete">Něco je špatně!</translation>
     </message>
 </context>
 <context>
@@ -3177,162 +2762,162 @@
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="402"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="405"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="441"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="444"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Obdrženo špatné ID parametru. Je potřeba jen ID &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="456"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="459"/>
         <source>Can&apos;t convert toLongLong parameter</source>
         <translation>Nelze převést na parametr toLongLong</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="469"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="472"/>
         <source>Got empty parameter</source>
         <translation>Obdržen prázdný parametr</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="485"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="488"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Nelze převést na parametr toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="529"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="532"/>
         <source>This id is not unique.</source>
         <translation>Toto ID není jedinečné.</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="688"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="691"/>
         <source>Error creating or updating detail</source>
         <translation>Chyba při vytváření nebo aktualizaci detailu</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="754"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="757"/>
         <source>Error creating or updating single point</source>
         <translation>Chyba při vytváření nebo aktualizaci základního bodu</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="780"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="783"/>
         <source>Error creating or updating point of end line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu na konci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="804"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="807"/>
         <source>Error creating or updating point along line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu podél čáry</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="829"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="832"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu ramene</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="854"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="857"/>
         <source>Error creating or updating point of normal</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu kolmice</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="879"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="882"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu osy úhlu</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="903"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="906"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku čar</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="927"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="930"/>
         <source>Error creating or updating point of contact</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu dotyku</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="949"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="952"/>
         <source>Error creating or updating modeling point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="973"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="976"/>
         <source>Error creating or updating height</source>
         <translation>Chyba při vytváření nebo aktualizaci výšky</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="997"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1000"/>
         <source>Error creating or updating triangle</source>
         <translation>Chyba při vytváření nebo aktualizaci trojúhelníku</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1019"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1022"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1040"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1043"/>
         <source>Error creating or updating cut spline point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1062"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1065"/>
         <source>Error creating or updating cut spline path point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1083"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1086"/>
         <source>Error creating or updating cut arc point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1105"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1108"/>
         <source>Error creating or updating line</source>
         <translation>Chyba při vytváření nebo aktualizaci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1136"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1139"/>
         <source>Error creating or updating simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci křivky</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1180"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1183"/>
         <source>Error creating or updating curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty křivky</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1202"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1205"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci modelové křivky</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1224"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1227"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty modelové křivky</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1253"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1256"/>
         <source>Error creating or updating simple arc</source>
         <translation>Chyba při vytváření nebo aktualizaci oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1275"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1278"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Chyba při vytváření nebo aktualizaci modelového oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1305"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1308"/>
         <source>Error creating or updating union details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1324"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1327"/>
         <source>Error!</source>
         <translation>Chyba!</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1325"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1328"/>
         <source>Error parsing file.</source>
         <translation>Chyba při zpracování souboru.</translation>
     </message>
@@ -3361,17 +2946,6 @@
     </message>
 </context>
 <context>
-    <name>VModelingTool</name>
-    <message>
-        <source>Option</source>
-        <translation type="obsolete">Volba</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Smazat</translation>
-    </message>
-</context>
-<context>
     <name>VSplinePath</name>
     <message>
         <location filename="../../src/geometry/vsplinepath.cpp" line="69"/>
@@ -3380,31 +2954,19 @@
     </message>
     <message>
         <location filename="../../src/geometry/vsplinepath.cpp" line="73"/>
-        <location filename="../../src/geometry/vsplinepath.cpp" line="125"/>
-        <location filename="../../src/geometry/vsplinepath.cpp" line="141"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="120"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="136"/>
         <source>This spline does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/geometry/vsplinepath.cpp" line="177"/>
+        <location filename="../../src/geometry/vsplinepath.cpp" line="172"/>
         <source>Can&apos;t cut spline path with one point</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This spline is not exist.</source>
-        <translation type="obsolete">Taková křivka neexistuje.</translation>
     </message>
 </context>
 <context>
     <name>VTableGraphicsView</name>
-    <message>
-        <source>detail don&apos;t find</source>
-        <translation type="obsolete">Detail nenalezen</translation>
-    </message>
-    <message>
-        <source>detail find</source>
-        <translation type="obsolete">Detail nalezen</translation>
-    </message>
     <message>
         <location filename="../../src/widgets/vtablegraphicsview.cpp" line="47"/>
         <source>can&apos;t find detail</source>
@@ -3419,12 +2981,12 @@
 <context>
     <name>VToolDetail</name>
     <message>
-        <location filename="../../src/tools/vtooldetail.cpp" line="310"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="311"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/tools/vtooldetail.cpp" line="311"/>
+        <location filename="../../src/tools/vtooldetail.cpp" line="312"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
