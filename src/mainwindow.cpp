@@ -207,14 +207,7 @@ void MainWindow::ActionNewDraw()
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &MainWindow::currentDrawChanged);
     comboBoxDraws->addItem(nameDraw);
-    index = comboBoxDraws->findText(nameDraw);
-    if ( index != -1 )
-    { // -1 for not found
-        comboBoxDraws->setCurrentIndex(index);
-        currentDrawChanged( index );
-    }
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &MainWindow::currentDrawChanged);
+
     pattern->ClearGObjects();
     //Create single point
     qint64 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
@@ -228,6 +221,15 @@ void MainWindow::ActionNewDraw()
     SetEnableTool(true);
     SetEnableWidgets(true);
     changeInFile = true;
+
+    index = comboBoxDraws->findText(nameDraw);
+    if ( index != -1 )
+    { // -1 for not found
+        comboBoxDraws->setCurrentIndex(index);
+        currentDrawChanged( index );
+    }
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &MainWindow::currentDrawChanged);
 }
 
 void MainWindow::OptionDraw()
