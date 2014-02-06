@@ -30,7 +30,6 @@
 #define VTOOLPOINTOFINTERSECTION_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogpointofintersection.h"
 
 /**
  * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
@@ -63,8 +62,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogPointOfIntersection> &dialog, VMainGraphicsScene  *scene,
-                        VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -90,11 +88,6 @@ public slots:
      */
     virtual void FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
-    /**
      * @brief ShowContextMenu show context menu.
      * @param event context menu event.
      */
@@ -117,6 +110,10 @@ protected:
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
     virtual void RefreshDataInFile();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void SaveDialog(QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
     /**
@@ -127,10 +124,6 @@ private:
      * @brief secondPointId id second line point.
      */
     qint64       secondPointId;
-    /**
-     * @brief dialogPointOfIntersection dialog.
-     */
-    QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

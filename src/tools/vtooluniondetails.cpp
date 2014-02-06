@@ -402,14 +402,16 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
     point->setY(line.p2().y());
 }
 
-void VToolUnionDetails::Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                               VContainer *data)
+void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
 {
-    VDetail d1 = data->GetDetail(dialog->getD1());
-    VDetail d2 = data->GetDetail(dialog->getD2());
-    ptrdiff_t indexD1 = dialog->getIndexD1();
-    ptrdiff_t indexD2 = dialog->getIndexD2();
-    Create(0, d1, d2, dialog->getD1(), dialog->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
+    Q_CHECK_PTR(dialog);
+    DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    VDetail d1 = data->GetDetail(dialogTool->getD1());
+    VDetail d2 = data->GetDetail(dialogTool->getD2());
+    ptrdiff_t indexD1 = dialogTool->getIndexD1();
+    ptrdiff_t indexD2 = dialogTool->getIndexD2();
+    Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
            Tool::FromGui);
 }
 

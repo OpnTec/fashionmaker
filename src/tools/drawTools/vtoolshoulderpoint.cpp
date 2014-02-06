@@ -28,6 +28,7 @@
 
 #include "vtoolshoulderpoint.h"
 #include "../../container/calculator.h"
+#include "../../dialogs/dialogshoulderpoint.h"
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
@@ -35,8 +36,7 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
                                        const qint64 &p2Line, const qint64 &pShoulder, const Tool::Sources &typeCreation,
                                        QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder),
-    dialogShoulderPoint(QSharedPointer<DialogShoulderPoint>())
+    :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder)
 {
     if (typeCreation == Tool::FromGui)
     {
@@ -50,14 +50,16 @@ VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, cons
 
 void VToolShoulderPoint::setDialog()
 {
-    Q_ASSERT(dialogShoulderPoint.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogShoulderPoint->setTypeLine(typeLine);
-    dialogShoulderPoint->setFormula(formula);
-    dialogShoulderPoint->setP1Line(basePointId, id);
-    dialogShoulderPoint->setP2Line(p2Line, id);
-    dialogShoulderPoint->setPShoulder(pShoulder, id);
-    dialogShoulderPoint->setPointName(p->name());
+    dialogTool->setTypeLine(typeLine);
+    dialogTool->setFormula(formula);
+    dialogTool->setP1Line(basePointId, id);
+    dialogTool->setP2Line(p2Line, id);
+    dialogTool->setPShoulder(pShoulder, id);
+    dialogTool->setPointName(p->name());
 }
 
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
@@ -87,15 +89,17 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     }
 }
 
-void VToolShoulderPoint::Create(QSharedPointer<DialogShoulderPoint> &dialog, VMainGraphicsScene *scene,
-                                VDomDocument *doc, VContainer *data)
+void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
 {
-    QString formula = dialog->getFormula();
-    qint64 p1Line = dialog->getP1Line();
-    qint64 p2Line = dialog->getP2Line();
-    qint64 pShoulder = dialog->getPShoulder();
-    QString typeLine = dialog->getTypeLine();
-    QString pointName = dialog->getPointName();
+    Q_CHECK_PTR(dialog);
+    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    QString formula = dialogTool->getFormula();
+    qint64 p1Line = dialogTool->getP1Line();
+    qint64 p2Line = dialogTool->getP2Line();
+    qint64 pShoulder = dialogTool->getPShoulder();
+    QString typeLine = dialogTool->getTypeLine();
+    QString pointName = dialogTool->getPointName();
     Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
@@ -165,26 +169,6 @@ void VToolShoulderPoint::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolShoulderPoint::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrName, dialogShoulderPoint->getPointName());
-            SetAttribute(domElement, AttrTypeLine, dialogShoulderPoint->getTypeLine());
-            SetAttribute(domElement, AttrLength, dialogShoulderPoint->getFormula());
-            SetAttribute(domElement, AttrP1Line, QString().setNum(dialogShoulderPoint->getP1Line()));
-            SetAttribute(domElement, AttrP2Line, QString().setNum(dialogShoulderPoint->getP2Line()));
-            SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogShoulderPoint->getPShoulder()));
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogShoulderPoint.clear();
-}
-
 void VToolShoulderPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -193,12 +177,12 @@ void VToolShoulderPoint::SetFactor(qreal factor)
 
 void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogShoulderPoint, this, event);
+    ContextMenu<DialogShoulderPoint>(this, event);
 }
 
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogShoulderPoint, this, event);
+    ContextMenu<DialogShoulderPoint>(this, event);
 }
 
 void VToolShoulderPoint::AddToFile()
@@ -243,4 +227,17 @@ void VToolShoulderPoint::RemoveReferens()
     doc->DecrementReferens(p2Line);
     doc->DecrementReferens(pShoulder);
     VToolLinePoint::RemoveReferens();
+}
+
+void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
+    SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
+    SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getPShoulder()));
 }

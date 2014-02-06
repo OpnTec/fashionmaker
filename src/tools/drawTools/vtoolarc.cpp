@@ -28,13 +28,14 @@
 
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
+#include "../../dialogs/dialogarc.h"
 
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
 VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                    QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogArc(QSharedPointer<DialogArc>())
+    :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(id);
     QPainterPath path;
@@ -58,21 +59,26 @@ VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::S
 
 void VToolArc::setDialog()
 {
-    Q_ASSERT(dialogArc.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
-    dialogArc->SetCenter(arc->GetCenter().id());
-    dialogArc->SetF1(arc->GetFormulaF1());
-    dialogArc->SetF2(arc->GetFormulaF2());
-    dialogArc->SetRadius(arc->GetFormulaRadius());
+    dialogTool->SetCenter(arc->GetCenter().id());
+    dialogTool->SetF1(arc->GetFormulaF1());
+    dialogTool->SetF2(arc->GetFormulaF2());
+    dialogTool->SetRadius(arc->GetFormulaRadius());
 }
 
-void VToolArc::Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                       VContainer *data)
 {
-    qint64 center = dialog->GetCenter();
-    QString radius = dialog->GetRadius();
-    QString f1 = dialog->GetF1();
-    QString f2 = dialog->GetF2();
+    Q_CHECK_PTR(dialog);
+    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    qint64 center = dialogTool->GetCenter();
+    QString radius = dialogTool->GetRadius();
+    QString f1 = dialogTool->GetF1();
+    QString f2 = dialogTool->GetF2();
     Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
@@ -137,24 +143,6 @@ void VToolArc::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolArc::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrCenter, QString().setNum(dialogArc->GetCenter()));
-            SetAttribute(domElement, AttrRadius, dialogArc->GetRadius());
-            SetAttribute(domElement, AttrAngle1, dialogArc->GetF1());
-            SetAttribute(domElement, AttrAngle2, dialogArc->GetF2());
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogArc.clear();
-}
-
 void VToolArc::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -187,7 +175,7 @@ void VToolArc::SetFactor(qreal factor)
 
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogArc, this, event);
+    ContextMenu<DialogArc>(this, event);
 }
 
 void VToolArc::AddToFile()
@@ -276,6 +264,17 @@ void VToolArc::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+void VToolArc::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
+    SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
+    SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
+    SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
 }
 
 void VToolArc::RefreshGeometry()

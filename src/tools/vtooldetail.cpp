@@ -42,8 +42,7 @@ const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
 VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialogDetail(QSharedPointer<DialogDetail>()),
-      sceneDetails(scene)
+    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(0), sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
@@ -80,17 +79,26 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     }
 }
 
-void VToolDetail::setDialog()
+VToolDetail::~VToolDetail()
 {
-    Q_ASSERT(dialogDetail.isNull() == false);
-    VDetail detail = VAbstractTool::data.GetDetail(id);
-    dialogDetail->setDetails(detail);
+    delete dialog;
 }
 
-void VToolDetail::Create(QSharedPointer<DialogDetail> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data)
+void VToolDetail::setDialog()
 {
-    VDetail detail = dialog->getDetails();
+    Q_CHECK_PTR(dialog);
+    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    dialogTool->setDetails(detail);
+}
+
+void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+{
+    Q_CHECK_PTR(dialog);
+    DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    VDetail detail = dialogTool->getDetails();
     VDetail det;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
@@ -176,7 +184,10 @@ void VToolDetail::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            VDetail det = dialogDetail->getDetails();
+            Q_CHECK_PTR(dialog);
+            DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+            Q_CHECK_PTR(dialogTool);
+            VDetail det = dialogTool->getDetails();
             SetAttribute(domElement, AttrName, det.getName());
             SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
             SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
@@ -201,7 +212,8 @@ void VToolDetail::FullUpdateFromGui(int result)
             emit toolhaveChange();
         }
     }
-    dialogDetail.clear();
+    delete dialog;
+    dialog = 0;
 }
 
 void VToolDetail::AddToFile()
@@ -322,12 +334,14 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        dialogDetail = QSharedPointer<DialogDetail>(new DialogDetail(getData()));
+        QGraphicsScene *scene = this->scene();
+        QList<QGraphicsView *> list =  scene->views();
+        dialog = new DialogDetail(getData(), list.first());
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
-                dialogDetail.data(), &DialogDetail::ChoosedObject);
-        connect(dialogDetail.data(), &DialogDetail::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
+                dialog, &DialogTool::ChoosedObject);
+        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
         setDialog();
-        dialogDetail->show();
+        dialog->show();
     }
     if (selectedAction == actionRemove)
     {

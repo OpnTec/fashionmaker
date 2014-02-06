@@ -27,13 +27,13 @@
  *************************************************************************/
 
 #include "vtoolline.h"
+#include "../../dialogs/dialogline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      const Tool::Sources &typeCreation, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
-    dialogLine(QSharedPointer<DialogLine>())
+    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
     ignoreFullUpdate = true;
     //Line
@@ -58,15 +58,20 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
 
 void VToolLine::setDialog()
 {
-    dialogLine->setFirstPoint(firstPoint);
-    dialogLine->setSecondPoint(secondPoint);
+    Q_CHECK_PTR(dialog);
+    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    dialogTool->setFirstPoint(firstPoint);
+    dialogTool->setSecondPoint(secondPoint);
 }
 
-void VToolLine::Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                       VContainer *data)
+void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
 {
-    qint64 firstPoint = dialog->getFirstPoint();
-    qint64 secondPoint = dialog->getSecondPoint();
+    Q_CHECK_PTR(dialog);
+    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    qint64 firstPoint = dialogTool->getFirstPoint();
+    qint64 secondPoint = dialogTool->getSecondPoint();
     Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
@@ -111,22 +116,6 @@ void VToolLine::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolLine::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogLine->getFirstPoint()));
-            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogLine->getSecondPoint()));
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogLine.clear();
-}
-
 void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
@@ -158,7 +147,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 
 void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogLine, this, event);
+    ContextMenu<DialogLine>(this, event);
 }
 
 void VToolLine::AddToFile()
@@ -228,6 +217,15 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+void VToolLine::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
+    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
 }
 
 void VToolLine::RefreshGeometry()

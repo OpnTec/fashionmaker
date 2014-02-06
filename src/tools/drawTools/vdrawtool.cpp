@@ -32,11 +32,16 @@ qreal VDrawTool::factor = 1;
 
 VDrawTool::VDrawTool(VDomDocument *doc, VContainer *data, qint64 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
-    nameActivDraw(doc->GetNameActivDraw())
+      nameActivDraw(doc->GetNameActivDraw()), dialog(0)
 {
     connect(this->doc, &VDomDocument::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VDomDocument::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VDomDocument::ShowTool, this, &VDrawTool::ShowTool);
+}
+
+VDrawTool::~VDrawTool()
+{
+    delete dialog;
 }
 
 void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
@@ -64,6 +69,23 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
     {
         nameActivDraw = newName;
     }
+}
+
+void VDrawTool::FullUpdateFromGui(int result)
+{
+    if (result == QDialog::Accepted)
+    {
+        QDomElement domElement = doc->elementById(QString().setNum(id));
+        if (domElement.isElement())
+        {
+            SaveDialog(domElement);
+
+            emit FullUpdateTree();
+            emit toolhaveChange();
+        }
+    }
+    delete dialog;
+    dialog = 0;
 }
 
 void VDrawTool::SetFactor(qreal factor)

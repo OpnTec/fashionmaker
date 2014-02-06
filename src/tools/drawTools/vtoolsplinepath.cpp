@@ -27,14 +27,14 @@
  *************************************************************************/
 
 #include "vtoolsplinepath.h"
+#include "../../dialogs/dialogsplinepath.h"
 
 const QString VToolSplinePath::TagName = QStringLiteral("spline");
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
 VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                  QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogSplinePath(QSharedPointer<DialogSplinePath>()),
-    controlPoints(QVector<VControlPointSpline *>())
+    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
     ignoreFullUpdate = true;
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
@@ -77,15 +77,19 @@ VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
 
 void VToolSplinePath::setDialog()
 {
-    Q_ASSERT(dialogSplinePath.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
-    dialogSplinePath->SetPath(*splPath);
+    dialogTool->SetPath(*splPath);
 }
 
-void VToolSplinePath::Create(QSharedPointer<DialogSplinePath> &dialog, VMainGraphicsScene *scene,
-                             VDomDocument *doc, VContainer *data)
+void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
 {
-    VSplinePath *path = new VSplinePath(dialog->GetPath());
+    Q_CHECK_PTR(dialog);
+    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     Q_CHECK_PTR(path);
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
@@ -129,45 +133,6 @@ void VToolSplinePath::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolSplinePath::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        VSplinePath splPath = dialogSplinePath->GetPath();
-        for (qint32 i = 1; i<=splPath.Count(); ++i)
-        {
-            VSpline spl = splPath.GetSpline(i);
-            qint32 j = i*2;
-            disconnect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-            disconnect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-            controlPoints[j-2]->setPos(spl.GetP2());
-            controlPoints[j-1]->setPos(spl.GetP3());
-            connect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-            connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                    &VToolSplinePath::ControlPointChangePosition);
-
-            spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
-                    splPath.getKCurve());
-            CorectControlPoints(spl, splPath, i);
-            CorectControlPoints(spl, splPath, i);
-
-            QDomElement domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
-                UpdatePathPoint(domElement, splPath);
-                emit FullUpdateTree();
-                emit toolhaveChange();
-            }
-
-        }
-    }
-    dialogSplinePath.clear();
-}
-
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                                  const QPointF &pos)
 {
@@ -189,6 +154,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
         SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
         UpdatePathPoint(domElement, splPath);
         emit FullUpdateTree();
+        emit toolhaveChange();
     }
 }
 
@@ -256,7 +222,7 @@ void VToolSplinePath::SetFactor(qreal factor)
 
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogSplinePath, this, event);
+    ContextMenu<DialogSplinePath>(this, event);
 }
 
 void VToolSplinePath::AddToFile()
@@ -380,6 +346,38 @@ void VToolSplinePath::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+void VToolSplinePath::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+
+    VSplinePath splPath = dialogTool->GetPath();
+    for (qint32 i = 1; i<=splPath.Count(); ++i)
+    {
+        VSpline spl = splPath.GetSpline(i);
+        qint32 j = i*2;
+        disconnect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        disconnect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        controlPoints[j-2]->setPos(spl.GetP2());
+        controlPoints[j-1]->setPos(spl.GetP3());
+        connect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+
+        spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
+                splPath.getKCurve());
+        CorectControlPoints(spl, splPath, i);
+        CorectControlPoints(spl, splPath, i);
+     }
+
+    SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+    UpdatePathPoint(domElement, splPath);
 }
 
 void VToolSplinePath::RefreshGeometry()

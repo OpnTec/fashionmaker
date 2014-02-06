@@ -177,6 +177,11 @@ public slots:
      * @brief UpdateList update lists of variables
      */
     void             UpdateList();
+    /**
+     * @brief ApplicationDeactivate hide and show dialog simultaneously with parent window.
+     * @param type true - hide, false - show window.
+     */
+    void             ApplicationDeactivate(bool type);
 protected:
     Q_DISABLE_COPY(DialogTool)
     /**

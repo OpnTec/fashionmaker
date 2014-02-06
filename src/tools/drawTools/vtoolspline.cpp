@@ -28,14 +28,14 @@
 
 #include "vtoolspline.h"
 #include "../../geometry/vspline.h"
+#include "../../dialogs/dialogspline.h"
 
 const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
 VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                          QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), dialogSpline(QSharedPointer<DialogSpline>()),
-      controlPoints(QVector<VControlPointSpline *>())
+    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
     ignoreFullUpdate = true;
 
@@ -77,27 +77,32 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const T
 
 void VToolSpline::setDialog()
 {
-    Q_ASSERT(dialogSpline.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
-    dialogSpline->setP1(spl->GetP1().id());
-    dialogSpline->setP4(spl->GetP4().id());
-    dialogSpline->setAngle1(spl->GetAngle1());
-    dialogSpline->setAngle2(spl->GetAngle2());
-    dialogSpline->setKAsm1(spl->GetKasm1());
-    dialogSpline->setKAsm2(spl->GetKasm2());
-    dialogSpline->setKCurve(spl->GetKcurve());
+    dialogTool->setP1(spl->GetP1().id());
+    dialogTool->setP4(spl->GetP4().id());
+    dialogTool->setAngle1(spl->GetAngle1());
+    dialogTool->setAngle2(spl->GetAngle2());
+    dialogTool->setKAsm1(spl->GetKasm1());
+    dialogTool->setKAsm2(spl->GetKasm2());
+    dialogTool->setKCurve(spl->GetKcurve());
 }
 
-void VToolSpline::Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
                          VContainer *data)
 {
-    qint64 p1 = dialog->getP1();
-    qint64 p4 = dialog->getP4();
-    qreal kAsm1 = dialog->getKAsm1();
-    qreal kAsm2 = dialog->getKAsm2();
-    qreal angle1 = dialog->getAngle1();
-    qreal angle2 = dialog->getAngle2();
-    qreal kCurve = dialog->getKCurve();
+    Q_CHECK_PTR(dialog);
+    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    qint64 p1 = dialogTool->getP1();
+    qint64 p4 = dialogTool->getP4();
+    qreal kAsm1 = dialogTool->getKAsm1();
+    qreal kAsm2 = dialogTool->getKAsm2();
+    qreal angle1 = dialogTool->getAngle1();
+    qreal angle2 = dialogTool->getAngle2();
+    qreal kCurve = dialogTool->getKCurve();
     Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
            Tool::FromGui);
 }
@@ -144,44 +149,6 @@ void VToolSpline::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolSpline::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        VPointF point1 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogSpline->getP1());
-        VPointF point4 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogSpline->getP4());
-        VSpline spl = VSpline (point1, point4, dialogSpline->getAngle1(), dialogSpline->getAngle2(),
-                               dialogSpline->getKAsm1(), dialogSpline->getKAsm2(), dialogSpline->getKCurve());
-
-        disconnect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPointChangePosition);
-        disconnect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPointChangePosition);
-        controlPoints[0]->setPos(spl.GetP2());
-        controlPoints[1]->setPos(spl.GetP3());
-        connect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPointChangePosition);
-        connect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSpline::ControlPointChangePosition);
-
-        spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogSpline->getKCurve());
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
-            SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
-            SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
-            SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
-            SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
-            SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
-            SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogSpline.clear();
-}
-
 void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                              const QPointF &pos)
 {
@@ -205,12 +172,13 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
         SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
         SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
         emit FullUpdateTree();
+        emit toolhaveChange();
     }
 }
 
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogSpline, this, event);
+    ContextMenu<DialogSpline>(this, event);
 }
 
 void VToolSpline::AddToFile()
@@ -304,6 +272,39 @@ void VToolSpline::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+void VToolSpline::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+
+    VPointF point1 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogTool->getP1());
+    VPointF point4 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogTool->getP4());
+    VSpline spl = VSpline (point1, point4, dialogTool->getAngle1(), dialogTool->getAngle2(),
+                           dialogTool->getKAsm1(), dialogTool->getKAsm2(), dialogTool->getKCurve());
+
+    disconnect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
+            &VToolSpline::ControlPointChangePosition);
+    disconnect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
+            &VToolSpline::ControlPointChangePosition);
+    controlPoints[0]->setPos(spl.GetP2());
+    controlPoints[1]->setPos(spl.GetP3());
+    connect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
+            &VToolSpline::ControlPointChangePosition);
+    connect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
+            &VToolSpline::ControlPointChangePosition);
+
+    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->getKCurve());
+
+    SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+    SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+    SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
+    SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
+    SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
+    SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
+    SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
 }
 
 void VToolSpline::RefreshGeometry()

@@ -31,7 +31,6 @@
 
 #include "vdrawtool.h"
 #include <QGraphicsPathItem>
-#include "../../dialogs/dialogspline.h"
 #include "../../widgets/vcontrolpointspline.h"
 #include "../../geometry/vsplinepath.h"
 
@@ -63,8 +62,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -107,11 +105,6 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void     FullUpdateFromFile ();
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void     FullUpdateFromGui ( int result );
     /**
      * @brief ControlPointChangePosition handle change position control point.
      * @param indexSpline position spline in spline list.
@@ -182,11 +175,11 @@ protected:
      * @param event key release event.
      */
     virtual void     keyReleaseEvent(QKeyEvent * event);
-private:
     /**
-     * @brief dialogSpline dialog.
+     * @brief SaveDialog save options into file after change in dialog.
      */
-    QSharedPointer<DialogSpline>   dialogSpline;
+    virtual void     SaveDialog(QDomElement &domElement);
+private:
     /**
      * @brief controlPoints list pointers of control points.
      */

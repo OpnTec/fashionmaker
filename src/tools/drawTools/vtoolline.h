@@ -63,8 +63,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -90,11 +89,6 @@ public slots:
      * @param newName new name active pattern peace.
      */
     virtual void     ChangedActivDraw(const QString &newName);
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void     FullUpdateFromGui(int result);
     /**
      * @brief ShowTool highlight tool.
      * @param id object id in container
@@ -147,6 +141,10 @@ protected:
      * @param event key realse event.
      */
     virtual void     keyReleaseEvent(QKeyEvent * event);
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void     SaveDialog(QDomElement &domElement);
 private:
     /**
      * @brief firstPoint id first line point.
@@ -156,10 +154,6 @@ private:
      * @brief secondPoint id second line point.
      */
     qint64           secondPoint;
-    /**
-     * @brief dialogLine dialog.
-     */
-    QSharedPointer<DialogLine> dialogLine;
     /**
      * @brief RefreshGeometry refresh item on scene.
      */

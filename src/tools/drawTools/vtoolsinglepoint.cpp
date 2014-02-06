@@ -27,12 +27,13 @@
  *************************************************************************/
 
 #include "vtoolsinglepoint.h"
+#include "../../dialogs/dialogsinglepoint.h"
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
 VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                     QGraphicsItem * parent )
-    :VToolPoint(doc, data, id, parent), dialogSinglePoint(QSharedPointer<DialogSinglePoint>())
+    :VToolPoint(doc, data, id, parent)
 {
     baseColor = Qt::red;
     currentColor = baseColor;
@@ -53,9 +54,11 @@ VToolSinglePoint::VToolSinglePoint (VDomDocument *doc, VContainer *data, qint64 
 
 void VToolSinglePoint::setDialog()
 {
-    Q_ASSERT(dialogSinglePoint.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogSinglePoint->setData(p->name(), p->toQPointF());
+    dialogTool->setData(p->name(), p->toQPointF());
 }
 
 void VToolSinglePoint::AddToFile()
@@ -131,6 +134,18 @@ void VToolSinglePoint::decrementReferens()
     }
 }
 
+void VToolSinglePoint::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    QPointF p = dialogTool->getPoint();
+    QString name = dialogTool->getName();
+    SetAttribute(domElement, AttrName, name);
+    SetAttribute(domElement, AttrX, QString().setNum(toMM(p.x())));
+    SetAttribute(domElement, AttrY, QString().setNum(toMM(p.y())));
+}
+
 void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
@@ -139,33 +154,13 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
-    ContextMenu(dialogSinglePoint, this, event, false);
+    ContextMenu<DialogSinglePoint>(this, event, false);
 }
 
 void  VToolSinglePoint::FullUpdateFromFile()
 {
     VPointF point = *VAbstractTool::data.GeometricObject<const VPointF *>(id);
     RefreshPointGeometry(point);
-}
-
-void VToolSinglePoint::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QPointF p = dialogSinglePoint->getPoint();
-        QString name = dialogSinglePoint->getName();
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrName, name);
-            SetAttribute(domElement, AttrX, QString().setNum(toMM(p.x())));
-            SetAttribute(domElement, AttrY, QString().setNum(toMM(p.y())));
-            //I don't now why but signal does not work.
-            doc->FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogSinglePoint.clear();
 }
 
 void VToolSinglePoint::ChangedActivDraw(const QString &newName)
@@ -192,5 +187,5 @@ void VToolSinglePoint::SetFactor(qreal factor)
 
 void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogSinglePoint, this, event, false);
+    ContextMenu<DialogSinglePoint>(this, event, false);
 }

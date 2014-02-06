@@ -64,8 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogUnionDetails> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.

@@ -31,7 +31,6 @@
 
 #include "vdrawtool.h"
 #include <QGraphicsPathItem>
-#include "../../dialogs/dialogarc.h"
 #include "../../widgets/vcontrolpointspline.h"
 
 /**
@@ -62,8 +61,7 @@ public:
      * @param doc dom document container
      * @param data container with variables
      */
-    static void  Create(QSharedPointer<DialogArc> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool form GUI.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -87,11 +85,6 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void     FullUpdateFromFile();
-    /**
-     * @brief FullUpdateFromGui refresh tool data after change in options.
-     * @param result result working options window.
-     */
-    virtual void     FullUpdateFromGui(int result);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
@@ -154,11 +147,11 @@ protected:
      * @param event key release event.
      */
     virtual void     keyReleaseEvent(QKeyEvent * event);
-private:
     /**
-     * @brief dialogArc dialog.
+     * @brief SaveDialog save options into file after change in dialog.
      */
-    QSharedPointer<DialogArc> dialogArc;
+    virtual void     SaveDialog(QDomElement &domElement);
+private:
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */

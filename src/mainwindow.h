@@ -361,6 +361,11 @@ signals:
      * @param listDetails list of details.
      */
     void               ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
+    /**
+     * @brief ApplicationDeactivate hide and show dialog simultaneously with parent window.
+     * @param type true - hide, false - show window.
+     */
+    void               ApplicationDeactivate(bool type);
 protected:
     /**
      * @brief keyPressEvent handle key press events.
@@ -381,6 +386,13 @@ protected:
      * @brief Clear reset to default window.
      */
     void               Clear();
+    /**
+     * @brief eventFilter event filter main window.
+     * @param object object.
+     * @param event event
+     * @return true if accept.
+     */
+    bool               eventFilter(QObject* object, QEvent* event);
 private:
     Q_DISABLE_COPY(MainWindow)
     /**
@@ -428,25 +440,7 @@ private:
      */
     bool               isInitialized;
     DialogIncrements   *dialogTable;
-    QSharedPointer<DialogEndLine>             dialogEndLine;
-    QSharedPointer<DialogLine>                dialogLine;
-    QSharedPointer<DialogAlongLine>           dialogAlongLine;
-    QSharedPointer<DialogShoulderPoint>       dialogShoulderPoint;
-    QSharedPointer<DialogNormal>              dialogNormal;
-    QSharedPointer<DialogBisector>            dialogBisector;
-    QSharedPointer<DialogLineIntersect>       dialogLineIntersect;
-    QSharedPointer<DialogSpline>              dialogSpline;
-    QSharedPointer<DialogArc>                 dialogArc;
-    QSharedPointer<DialogSplinePath>          dialogSplinePath;
-    QSharedPointer<DialogPointOfContact>      dialogPointOfContact;
-    QSharedPointer<DialogDetail>              dialogDetail;
-    QSharedPointer<DialogHeight>              dialogHeight;
-    QSharedPointer<DialogTriangle>            dialogTriangle;
-    QSharedPointer<DialogPointOfIntersection> dialogPointOfIntersection;
-    QSharedPointer<DialogCutSpline>           dialogCutSpline;
-    QSharedPointer<DialogCutSplinePath>       dialogCutSplinePath;
-    QSharedPointer<DialogUnionDetails>        dialogUnionDetails;
-    QSharedPointer<DialogCutArc>              dialogCutArc;
+    DialogTool         *dialogTool;
     DialogHistory      *dialogHistory;
     /**
      * @brief comboBoxDraws comboc who show name of pattern peaces.
@@ -517,11 +511,10 @@ private:
      * @param t tool type.
      * @param cursor path tool cursor icon.
      * @param toolTip first tooltipe.
-     * @param dialog pointer to dialog.
      * @param closeDialogSlot function what handle after close dialog.
      */
     void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
-                                     QSharedPointer<Dialog> &dialog, Func closeDialogSlot);
+                                     Func closeDialogSlot);
     /**
      * @brief MinimumScrollBar set scroll bar to minimum.
      */
@@ -537,13 +530,12 @@ private:
      */
     bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
                          qint64 &errorColumn) const;
-    template <typename DrawTool, typename Dialog>
+    template <typename DrawTool>
     /**
-     * @brief ClosedDialog
-     * @param dialog
-     * @param result
+     * @brief ClosedDialog handle close dialog
+     * @param result result working dialog.
      */
-    void               ClosedDialog(QSharedPointer<Dialog> &dialog, int result);
+    void               ClosedDialog(int result);
     /**
      * @brief SafeSaveing safe saving pattern file.
      * @param fileName pattern file name.

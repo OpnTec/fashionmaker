@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vtooltriangle.h"
+#include "../../dialogs/dialogtriangle.h"
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
@@ -34,7 +35,7 @@ VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &
                              const qint64 &axisP1Id, const qint64 &axisP2Id, const qint64 &firstPointId,
                              const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
-      secondPointId(secondPointId), dialogTriangle(QSharedPointer<DialogTriangle>())
+      secondPointId(secondPointId)
 {
     ignoreFullUpdate = true;
     if (typeCreation == Tool::FromGui)
@@ -49,23 +50,28 @@ VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &
 
 void VToolTriangle::setDialog()
 {
-    Q_ASSERT(dialogTriangle.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogTriangle->setAxisP1Id(axisP1Id, id);
-    dialogTriangle->setAxisP2Id(axisP2Id, id);
-    dialogTriangle->setFirstPointId(firstPointId, id);
-    dialogTriangle->setSecondPointId(secondPointId, id);
-    dialogTriangle->setPointName(p->name());
+    dialogTool->setAxisP1Id(axisP1Id, id);
+    dialogTool->setAxisP2Id(axisP2Id, id);
+    dialogTool->setFirstPointId(firstPointId, id);
+    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setPointName(p->name());
 }
 
-void VToolTriangle::Create(QSharedPointer<DialogTriangle> &dialog, VMainGraphicsScene *scene,
+void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                            VDomDocument *doc, VContainer *data)
 {
-    qint64 axisP1Id = dialog->getAxisP1Id();
-    qint64 axisP2Id = dialog->getAxisP2Id();
-    qint64 firstPointId = dialog->getFirstPointId();
-    qint64 secondPointId = dialog->getSecondPointId();
-    QString pointName = dialog->getPointName();
+    Q_CHECK_PTR(dialog);
+    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    qint64 axisP1Id = dialogTool->getAxisP1Id();
+    qint64 axisP2Id = dialogTool->getAxisP2Id();
+    qint64 firstPointId = dialogTool->getFirstPointId();
+    qint64 secondPointId = dialogTool->getSecondPointId();
+    QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
@@ -165,29 +171,9 @@ void VToolTriangle::FullUpdateFromFile()
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
-void VToolTriangle::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrName, dialogTriangle->getPointName());
-            SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTriangle->getAxisP1Id()));
-            SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTriangle->getAxisP2Id()));
-            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTriangle->getFirstPointId()));
-            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTriangle->getSecondPointId()));
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-
-    }
-    dialogTriangle.clear();
-}
-
 void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogTriangle, this, event);
+    ContextMenu<DialogTriangle>(this, event);
 }
 
 void VToolTriangle::RemoveReferens()
@@ -200,7 +186,7 @@ void VToolTriangle::RemoveReferens()
 
 void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogTriangle, this, event);
+    ContextMenu<DialogTriangle>(this, event);
 }
 
 void VToolTriangle::AddToFile()
@@ -236,4 +222,16 @@ void VToolTriangle::RefreshDataInFile()
         SetAttribute(domElement, AttrFirstPoint, firstPointId);
         SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
+}
+
+void VToolTriangle::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
+    SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
+    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
+    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
 }

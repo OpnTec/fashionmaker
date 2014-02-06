@@ -30,7 +30,6 @@
 #define VTOOLSINGLEPOINT_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogsinglepoint.h"
 
 /**
  * @brief The VToolSinglePoint class tool for creation pattern base point. Obly base point can move. All object
@@ -60,11 +59,6 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
@@ -115,11 +109,11 @@ protected:
      * @param tool tool what me delete.
      */
     virtual void DeleteTool(QGraphicsItem *tool){Q_UNUSED(tool)}
-private:
     /**
-     * @brief dialogSinglePoint dialog.
+     * @brief SaveDialog save options into file after change in dialog.
      */
-    QSharedPointer<DialogSinglePoint> dialogSinglePoint;
+    virtual void SaveDialog(QDomElement &domElement);
+private:
     /**
      * @brief setColorLabel change color for label and label line.
      * @param color new color.

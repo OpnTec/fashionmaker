@@ -33,6 +33,7 @@
 
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
+#include "../../dialogs/dialogtool.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
@@ -49,7 +50,7 @@ public:
                   * @param parent parent object.
                   */
                  VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
-    virtual      ~VDrawTool() {}
+    virtual      ~VDrawTool();
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -82,7 +83,7 @@ public slots:
      * @brief FullUpdateFromGui refresh tool data after change in options.
      * @param result keep result working dialog.
      */
-    virtual void FullUpdateFromGui(int result)=0;
+    virtual void FullUpdateFromGui(int result);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
@@ -106,20 +107,26 @@ protected:
      */
     static qreal factor;
     /**
+     * @brief dialog dialog options.
+     */
+    DialogTool *dialog;
+    /**
      * @brief AddToCalculation add tool to calculation tag in pattern file.
      * @param domElement tag in xml tree.
      */
     void         AddToCalculation(const QDomElement &domElement);
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void SaveDialog(QDomElement &domElement)=0;
     template <typename Dialog, typename Tool>
     /**
      * @brief ContextMenu show context menu for tool.
-     * @param dialog dialog option.
      * @param tool tool.
      * @param event context menu event.
      * @param showRemove true - tool have option delete.
      */
-    void ContextMenu(QSharedPointer<Dialog> &dialog, Tool *tool, QGraphicsSceneContextMenuEvent *event,
-                     bool showRemove = true)
+    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove = true)
     {
         Q_CHECK_PTR(tool);
         Q_CHECK_PTR(event);
@@ -143,14 +150,16 @@ protected:
             QAction *selectedAction = menu.exec(event->screenPos());
             if (selectedAction == actionOption)
             {
-                dialog = QSharedPointer<Dialog>(new Dialog(getData()));
+                QGraphicsScene *scene = tool->scene();
+                QList<QGraphicsView *> list =  scene->views();
+                dialog = new Dialog(getData(), list.first());
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
-                        &VMainGraphicsScene::ChoosedObject, dialog.data(), &Dialog::ChoosedObject);
-                connect(dialog.data(), &Dialog::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                        &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
+                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
                 if (ignoreFullUpdate == false)
                 {
-                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog.data(), &Dialog::UpdateList);
+                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
                 }
 
                 tool->setDialog();
@@ -190,6 +199,8 @@ protected:
             item->setPen(QPen(currentColor, widthHairLine/factor));
         }
     }
+private:
+    Q_DISABLE_COPY(VDrawTool)
 };
 
 #endif // VDRAWTOOL_H

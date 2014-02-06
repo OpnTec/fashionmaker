@@ -30,7 +30,6 @@
 #define VTOOLENDLINE_H
 
 #include "vtoollinepoint.h"
-#include "../../dialogs/dialogendline.h"
 
 /**
  * @brief The VToolEndLine class tool for creation point on the line end.
@@ -65,8 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogEndLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -94,11 +92,6 @@ public slots:
      */
     virtual void FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
-    /**
      * @brief ShowContextMenu show context menu.
      * @param event context menu event.
      */
@@ -117,11 +110,10 @@ protected:
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
     virtual void RefreshDataInFile();
-private:
     /**
-     * @brief dialogEndLine pointer to the dialog.
+     * @brief SaveDialog save options into file after change in dialog.
      */
-    QSharedPointer<DialogEndLine> dialogEndLine;
+    virtual void SaveDialog(QDomElement &domElement);
 };
 
 #endif // VTOOLENDLINE_H

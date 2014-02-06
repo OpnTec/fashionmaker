@@ -28,6 +28,7 @@
 
 #include "vtoolcutspline.h"
 #include "../../container/calculator.h"
+#include "../../dialogs/dialogcutspline.h"
 
 const QString VToolCutSpline::ToolType = QStringLiteral("cutSpline");
 const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
@@ -35,8 +36,8 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 VToolCutSpline::VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
                                const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
                                const Tool::Sources &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), formula(formula), splineId(splineId),
-      dialogCutSpline(QSharedPointer<DialogCutSpline>()), firstSpline(), secondSpline(), spl1id(spl1id), spl2id(spl2id)
+    :VToolPoint(doc, data, id, parent), formula(formula), splineId(splineId), firstSpline(), secondSpline(),
+      spl1id(spl1id), spl2id(spl2id)
 {
     Q_ASSERT_X(splineId > 0, Q_FUNC_INFO, "splineId <= 0");
     Q_ASSERT_X(spl1id > 0, Q_FUNC_INFO, "spl1id <= 0");
@@ -66,19 +67,24 @@ VToolCutSpline::VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64
 
 void VToolCutSpline::setDialog()
 {
-    Q_ASSERT(dialogCutSpline.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogCutSpline->setFormula(formula);
-    dialogCutSpline->setSplineId(splineId, id);
-    dialogCutSpline->setPointName(point->name());
+    dialogTool->setFormula(formula);
+    dialogTool->setSplineId(splineId, id);
+    dialogTool->setPointName(point->name());
 }
 
-void VToolCutSpline::Create(QSharedPointer<DialogCutSpline> &dialog, VMainGraphicsScene *scene,
+void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                             VDomDocument *doc, VContainer *data)
 {
-    QString pointName = dialog->getPointName();
-    QString formula = dialog->getFormula();
-    qint64 splineId = dialog->getSplineId();
+    Q_CHECK_PTR(dialog);
+    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    QString pointName = dialogTool->getPointName();
+    QString formula = dialogTool->getFormula();
+    qint64 splineId = dialogTool->getSplineId();
     Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
@@ -165,23 +171,6 @@ void VToolCutSpline::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolCutSpline::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrName, dialogCutSpline->getPointName());
-            SetAttribute(domElement, AttrLength, dialogCutSpline->getFormula());
-            SetAttribute(domElement, AttrSpline, QString().setNum(dialogCutSpline->getSplineId()));
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogCutSpline.clear();
-}
-
 void VToolCutSpline::SplineChoosed(qint64 id)
 {
     emit ChoosedTool(id, Scene::Spline);
@@ -212,12 +201,12 @@ void VToolCutSpline::ChangedActivDraw(const QString &newName)
 
 void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogCutSpline, this, event);
+    ContextMenu<DialogCutSpline>(this, event);
 }
 
 void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogCutSpline, this, event);
+    ContextMenu<DialogCutSpline>(this, event);
 }
 
 void VToolCutSpline::AddToFile()
@@ -261,6 +250,16 @@ void VToolCutSpline::RefreshGeometry()
 void VToolCutSpline::RemoveReferens()
 {
     doc->DecrementReferens(splineId);
+}
+
+void VToolCutSpline::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
 }
 
 void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr)

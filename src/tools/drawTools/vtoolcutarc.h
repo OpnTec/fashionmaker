@@ -30,7 +30,6 @@
 #define VTOOLCUTARC_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogcutarc.h"
 #include "../../widgets/vsimplearc.h"
 
 /**
@@ -66,8 +65,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogCutArc> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -93,25 +91,20 @@ public slots:
      */
     virtual void FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
-    /**
      * @brief ArcChoosed send signal about selection from cutted arc.
      * @param id object id in container.
      */
-    void ArcChoosed(qint64 id);
+    void         ArcChoosed(qint64 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
      */
-    virtual void      ChangedActivDraw(const QString &newName);
+    virtual void ChangedActivDraw(const QString &newName);
     /**
      * @brief ShowContextMenu show context menu.
      * @param event context menu event.
      */
-    virtual void      ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
@@ -129,29 +122,29 @@ protected:
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
-    void      RefreshGeometry();
+    void         RefreshGeometry();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void SaveDialog(QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCutArc)
     /**
      * @brief formula keep formula of length
      */
-    QString           formula;
+    QString      formula;
     /**
      * @brief arcId keep id of arc
      */
-    qint64            arcId;
-    /**
-     * @brief DialogCutSpline pointer to the tool's dialog
-     */
-    QSharedPointer<DialogCutArc> dialogCutArc;
+    qint64       arcId;
     /**
      * @brief firstArc first arc after cutting.
      */
-    VSimpleArc *firstArc;
+    VSimpleArc   *firstArc;
     /**
      * @brief secondArc second arc after cutting.
      */
-    VSimpleArc *secondArc;
+    VSimpleArc   *secondArc;
     /**
      * @brief arc1id id first arc after cutting.
      */
@@ -166,7 +159,7 @@ private:
      * @param arcid arc id.
      * @param tr arc type.
      */
-    void RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr);
+    void         RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr);
 };
 
 #endif // VTOOLCUTARC_H

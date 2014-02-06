@@ -28,6 +28,7 @@
 
 #include "vtoolnormal.h"
 #include "../../container/calculator.h"
+#include "../../dialogs/dialognormal.h"
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 
@@ -35,7 +36,7 @@ VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, 
                          const QString &formula, const qreal &angle, const qint64 &firstPointId,
                          const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
-    secondPointId(secondPointId), dialogNormal(QSharedPointer<DialogNormal>())
+    secondPointId(secondPointId)
 {
 
     if (typeCreation == Tool::FromGui)
@@ -50,25 +51,29 @@ VToolNormal::VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, 
 
 void VToolNormal::setDialog()
 {
-    Q_ASSERT(dialogNormal.isNull() == false);
+    Q_CHECK_PTR(dialog);
+    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
+    Q_CHECK_PTR(dialogTool);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogNormal->setTypeLine(typeLine);
-    dialogNormal->setFormula(formula);
-    dialogNormal->setAngle(angle);
-    dialogNormal->setFirstPointId(basePointId, id);
-    dialogNormal->setSecondPointId(secondPointId, id);
-    dialogNormal->setPointName(p->name());
+    dialogTool->setTypeLine(typeLine);
+    dialogTool->setFormula(formula);
+    dialogTool->setAngle(angle);
+    dialogTool->setFirstPointId(basePointId, id);
+    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setPointName(p->name());
 }
 
-void VToolNormal::Create(QSharedPointer<DialogNormal> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data)
+void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
 {
-    QString formula = dialog->getFormula();
-    qint64 firstPointId = dialog->getFirstPointId();
-    qint64 secondPointId = dialog->getSecondPointId();
-    QString typeLine = dialog->getTypeLine();
-    QString pointName = dialog->getPointName();
-    qreal angle = dialog->getAngle();
+    Q_CHECK_PTR(dialog);
+    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    QString formula = dialogTool->getFormula();
+    qint64 firstPointId = dialogTool->getFirstPointId();
+    qint64 secondPointId = dialogTool->getSecondPointId();
+    QString typeLine = dialogTool->getTypeLine();
+    QString pointName = dialogTool->getPointName();
+    qreal angle = dialogTool->getAngle();
     Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
@@ -142,26 +147,6 @@ void VToolNormal::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolNormal::FullUpdateFromGui(int result)
-{
-    if (result == QDialog::Accepted)
-    {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SetAttribute(domElement, AttrName, dialogNormal->getPointName());
-            SetAttribute(domElement, AttrTypeLine, dialogNormal->getTypeLine());
-            SetAttribute(domElement, AttrLength, dialogNormal->getFormula());
-            SetAttribute(domElement, AttrAngle, QString().setNum(dialogNormal->getAngle()));
-            SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogNormal->getFirstPointId()));
-            SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogNormal->getSecondPointId()));
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
-    }
-    dialogNormal.clear();
-}
-
 void VToolNormal::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -170,12 +155,12 @@ void VToolNormal::SetFactor(qreal factor)
 
 void VToolNormal::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogNormal, this, event);
+    ContextMenu<DialogNormal>(this, event);
 }
 
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu(dialogNormal, this, event);
+    ContextMenu<DialogNormal>(this, event);
 }
 
 void VToolNormal::AddToFile()
@@ -219,4 +204,17 @@ void VToolNormal::RemoveReferens()
 {
     doc->DecrementReferens(secondPointId);
     VToolLinePoint::RemoveReferens();
+}
+
+void VToolNormal::SaveDialog(QDomElement &domElement)
+{
+    Q_CHECK_PTR(dialog);
+    DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
+    Q_CHECK_PTR(dialogTool);
+    SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->getAngle()));
+    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
+    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
 }

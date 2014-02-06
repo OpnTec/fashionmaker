@@ -30,7 +30,6 @@
 #define VTOOLCUTSPLINE_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogcutspline.h"
 #include "../../widgets/vsimplespline.h"
 
 /**
@@ -64,8 +63,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogCutSpline> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -90,63 +88,58 @@ public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    virtual void FullUpdateFromFile();
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result
-     */
-    virtual void FullUpdateFromGui(int result);
+    virtual void  FullUpdateFromFile();
     /**
      * @brief SplineChoosed send signal about selection from spline.
      * @param id object id in container.
      */
-    void SplineChoosed(qint64 id);
+    void          SplineChoosed(qint64 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
      */
-    virtual void      ChangedActivDraw(const QString &newName);
+    virtual void  ChangedActivDraw(const QString &newName);
     /**
      * @brief ShowContextMenu show context menu.
      * @param event context menu event.
      */
-    virtual void      ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    virtual void  ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
      * @param event context menu event.
      */
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     /**
      * @brief AddToFile add tag with informations about tool into file.
      */
-    virtual void AddToFile();
+    virtual void  AddToFile();
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void RefreshDataInFile();
+    virtual void  RefreshDataInFile();
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
-    void         RefreshGeometry();
+    void          RefreshGeometry();
     /**
      * @brief RemoveReferens decrement referens value for used objects.
      */
-    virtual void RemoveReferens();
+    virtual void  RemoveReferens();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void  SaveDialog(QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCutSpline)
     /**
      * @brief formula keep formula of length.
      */
-    QString           formula;
+    QString       formula;
     /**
      * @brief splineId keep id of spline.
      */
-    qint64            splineId;
-    /**
-     * @brief DialogCutSpline pointer to the tool's dialog.
-     */
-    QSharedPointer<DialogCutSpline> dialogCutSpline;
+    qint64        splineId;
     /**
      * @brief firstSpline first spline after cutting.
      */
@@ -158,18 +151,18 @@ private:
     /**
      * @brief spl1id id first spline after cutting.
      */
-    const qint64 spl1id;
+    const qint64  spl1id;
     /**
      * @brief spl2id id second spline after cutting.
      */
-    const qint64 spl2id;
+    const qint64  spl2id;
     /**
      * @brief RefreshSpline refresh spline on scene.
      * @param spline spline.
      * @param splid spline id.
      * @param tr spline type.
      */
-    void RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr);
+    void          RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr);
 };
 
 #endif // VTOOLCUTSPLINE_H

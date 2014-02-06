@@ -30,7 +30,6 @@
 #define VTOOLBISECTOR_H
 
 #include "vtoollinepoint.h"
-#include "../../dialogs/dialogbisector.h"
 
 /**
  * @brief The VToolBisector class tool for creation bisector point.
@@ -76,8 +75,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(QSharedPointer<DialogBisector> &dialog, VMainGraphicsScene  *scene,
-                          VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -107,11 +105,6 @@ public slots:
      */
     virtual void   FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void   FullUpdateFromGui(int result);
-    /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
      */
@@ -139,6 +132,10 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void   RemoveReferens();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void   SaveDialog(QDomElement &domElement);
 private:
     /**
      * @brief firstPointId id first point of angle.
@@ -148,10 +145,6 @@ private:
      * @brief thirdPointId id third point of angle.
      */
     qint64         thirdPointId;
-    /**
-     * @brief dialogBisector dialog.
-     */
-    QSharedPointer<DialogBisector> dialogBisector;
 };
 
 #endif // VTOOLBISECTOR_H

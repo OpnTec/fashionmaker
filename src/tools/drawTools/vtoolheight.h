@@ -30,7 +30,6 @@
 #define VTOOLHEIGHT_H
 
 #include "vtoollinepoint.h"
-#include "../../dialogs/dialogheight.h"
 
 /**
  * @brief The VToolHeight class tool for creation point of height. Help find point of projection onto line.
@@ -65,8 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(QSharedPointer<DialogHeight> &dialog, VMainGraphicsScene  *scene,
-                          VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -101,11 +99,6 @@ public slots:
      */
     virtual void   FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void   FullUpdateFromGui(int result);
-    /**
      * @brief ShowContextMenu show context menu.
      * @param event context menu event.
      */
@@ -123,12 +116,12 @@ protected:
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void RefreshDataInFile();
-private:
+    virtual void   RefreshDataInFile();
     /**
-     * @brief dialogHeight dialog.
+     * @brief SaveDialog save options into file after change in dialog.
      */
-    QSharedPointer<DialogHeight> dialogHeight;
+    virtual void   SaveDialog(QDomElement &domElement);
+private:
     /**
      * @brief p1LineId id first point of line.
      */

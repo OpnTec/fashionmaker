@@ -30,7 +30,6 @@
 #define VTOOLALONGLINE_H
 
 #include "vtoollinepoint.h"
-#include "../../dialogs/dialogalongline.h"
 
 /**
  * @brief The VToolAlongLine class tool for creation point along line.
@@ -65,8 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogAlongLine> &dialog, VMainGraphicsScene  *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -93,11 +91,6 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
@@ -126,15 +119,15 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void RemoveReferens();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void SaveDialog(QDomElement &domElement);
 private:
     /**
      * @brief secondPointId id second point of line.
      */
     qint64       secondPointId;
-    /**
-     * @brief dialogAlongLine dialog.
-     */
-    QSharedPointer<DialogAlongLine> dialogAlongLine;
 };
 
 #endif // VTOOLALONGLINE_H

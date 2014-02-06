@@ -30,7 +30,6 @@
 #define VTOOLLINEINTERSECT_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialoglineintersect.h"
 
 /**
  * @brief The VToolLineIntersect class help find point intersection lines.
@@ -65,8 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(QSharedPointer<DialogLineIntersect> &dialog, VMainGraphicsScene *scene, VDomDocument *doc,
-                        VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -93,11 +91,6 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void FullUpdateFromGui(int result);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
@@ -126,6 +119,10 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void RemoveReferens();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void SaveDialog(QDomElement &domElement);
 private:
     /**
      * @brief p1Line1 id first point first line.
@@ -143,10 +140,6 @@ private:
      * @brief p2Line2 id second point second line.
      */
     qint64       p2Line2;
-    /**
-     * @brief dialogLineIntersect dialog.
-     */
-    QSharedPointer<DialogLineIntersect> dialogLineIntersect;
 };
 
 #endif // VTOOLLINEINTERSECT_H

@@ -30,7 +30,6 @@
 #define VTOOLPOINTOFCONTACT_H
 
 #include "vtoolpoint.h"
-#include "../../dialogs/dialogpointofcontact.h"
 
 /**
  * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
@@ -75,8 +74,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(QSharedPointer<DialogPointOfContact> &dialog, VMainGraphicsScene  *scene,
-                          VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -104,11 +102,6 @@ public slots:
      */
     virtual void   FullUpdateFromFile();
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void   FullUpdateFromGui(int result);
-    /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
      */
@@ -131,11 +124,15 @@ protected:
     /**
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
-    virtual void RefreshDataInFile();
+    virtual void   RefreshDataInFile();
     /**
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void   RemoveReferens();
+    /**
+     * @brief SaveDialog save options into file after change in dialog.
+     */
+    virtual void   SaveDialog(QDomElement &domElement);
 private:
     /**
      * @brief radius string with formula radius arc.
@@ -153,10 +150,6 @@ private:
      * @brief secondPointId id second line point.
      */
     qint64         secondPointId;
-    /**
-     * @brief dialogPointOfContact dialog.
-     */
-    QSharedPointer<DialogPointOfContact> dialogPointOfContact;
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

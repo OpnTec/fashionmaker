@@ -46,6 +46,8 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     //Keep synchronize with VAbstractTool styles list!!!
     lineStyles<<tr("No line")<<tr("Line")<<tr("Dash Line")<<tr("Dot Line")<<tr("Dash Dot Line")
              <<tr("Dash Dot Dot Line");
+    Qt::WindowFlags flags = windowFlags();
+    setWindowFlags(flags | Qt::WindowStaysOnTopHint);
 }
 
 void DialogTool::closeEvent(QCloseEvent *event)
@@ -652,6 +654,18 @@ void DialogTool::UpdateList()
     {
         ShowVariable(data->DataLengthSplines());
     }
+}
+
+void DialogTool::ApplicationDeactivate(bool type)
+{
+//    if (type == true)
+//    {
+//        this->hide();
+//    }
+//    else
+//    {
+//        this->show();
+//    }
 }
 
 template <class key, class val>

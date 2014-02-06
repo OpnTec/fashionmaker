@@ -61,11 +61,6 @@ public slots:
      */
     virtual void            ChangedActivDraw(const QString &newName);
     /**
-     * @brief FullUpdateFromGui  refresh tool data from change options.
-     * @param result result working dialog.
-     */
-    virtual void            FullUpdateFromGui(int result) = 0;
-    /**
      * @brief ShowTool  highlight tool.
      * @param id object id in container.
      * @param color highlight color.
