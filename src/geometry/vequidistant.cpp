@@ -341,7 +341,7 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points) const
                 /*We found loop.*/
                 ekvPoints.append(points.at(i));
                 ekvPoints.append(crosPoint);
-                i = j + 2;
+                i = j;
             }
         }
         else
