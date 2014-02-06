@@ -2395,14 +2395,14 @@
     <message>
         <location filename="../../src/mainwindow.cpp" line="339"/>
         <source>Select first point</source>
-        <translation>Виберість першу точку</translation>
+        <translation>Виберіть першу точку</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="362"/>
         <location filename="../../src/mainwindow.cpp" line="374"/>
         <location filename="../../src/mainwindow.cpp" line="463"/>
         <source>Select first point of line</source>
-        <translation>Виберість першу точку лінії</translation>
+        <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="385"/>

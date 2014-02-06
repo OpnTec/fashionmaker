@@ -329,7 +329,7 @@ void MainWindow::ClosedDialogEndLine(int result)
 
 void MainWindow::ToolLine(bool checked)
 {
-    SetToolButton<DialogTool>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
+    SetToolButton<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
                               &MainWindow::ClosedDialogLine);
 }
 

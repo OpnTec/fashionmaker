@@ -76,7 +76,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    void             ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
