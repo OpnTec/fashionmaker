@@ -42,9 +42,9 @@ QString VException::ErrorMessage() const
     return error;
 }
 
-void VException::CriticalMessageBox(const QString &situation) const
+void VException::CriticalMessageBox(const QString &situation, QWidget * parent) const
 {
-    QMessageBox msgBox;
+    QMessageBox msgBox(parent);
     msgBox.setWindowTitle("Critical error!");
     msgBox.setText(situation);
     msgBox.setInformativeText(ErrorMessage());

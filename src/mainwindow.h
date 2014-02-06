@@ -361,11 +361,6 @@ signals:
      * @param listDetails list of details.
      */
     void               ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
-    /**
-     * @brief ApplicationDeactivate hide and show dialog simultaneously with parent window.
-     * @param type true - hide, false - show window.
-     */
-    void               ApplicationDeactivate(bool type);
 protected:
     /**
      * @brief keyPressEvent handle key press events.
@@ -386,13 +381,6 @@ protected:
      * @brief Clear reset to default window.
      */
     void               Clear();
-    /**
-     * @brief eventFilter event filter main window.
-     * @param object object.
-     * @param event event
-     * @return true if accept.
-     */
-    bool               eventFilter(QObject* object, QEvent* event);
 private:
     Q_DISABLE_COPY(MainWindow)
     /**

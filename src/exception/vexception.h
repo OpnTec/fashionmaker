@@ -32,6 +32,7 @@
 
 #include <QException>
 #include <QString>
+#include <QWidget>
 
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception
@@ -78,7 +79,7 @@ public:
      * @brief CriticalMessageBox show Critical Message Box.
      * @param situation main text message box.
      */
-    virtual void      CriticalMessageBox(const QString &situation) const;
+    virtual void      CriticalMessageBox(const QString &situation, QWidget *parent = 0) const;
 protected:
     /**
      * @brief what string with error

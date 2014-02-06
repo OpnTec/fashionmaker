@@ -49,6 +49,7 @@
 #include <QSourceLocation>
 #include <QAbstractMessageHandler>
 
+//This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler
 {
 public:
@@ -81,7 +82,6 @@ MainWindow::MainWindow(QWidget *parent)
       mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true)
 {
     ui->setupUi(this);
-    qApp->installEventFilter(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
     {
@@ -288,7 +288,6 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, this);
         Q_CHECK_PTR(dialogTool);
-        connect(this, &MainWindow::ApplicationDeactivate, dialogTool, &DialogTool::ApplicationDeactivate);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
@@ -1038,29 +1037,6 @@ void MainWindow::Clear()
     SetEnableTool(false);
 }
 
-bool MainWindow::eventFilter(QObject *object, QEvent *event)
-{
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wswitch-enum"
-#endif
-    switch(event->type())
-    {
-        case(QEvent::ApplicationDeactivate):
-            emit ApplicationDeactivate(true);
-            break;
-        case(QEvent::ApplicationActivate):
-            emit ApplicationDeactivate(false);
-            break;
-        default:
-            break;
-    }
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
-#endif
-    return QWidget::eventFilter(object, event);
-}
-
 void MainWindow::ActionNew()
 {
     QProcess *v = new QProcess(this);
@@ -1398,35 +1374,35 @@ void MainWindow::OpenPattern(const QString &fileName)
                 }
                 catch (const VExceptionObjectError &e)
                 {
-                    e.CriticalMessageBox(tr("Error parsing file."));
+                    e.CriticalMessageBox(tr("Error parsing file."), this);
                     file.close();
                     Clear();
                     return;
                 }
                 catch (const VExceptionConversionError &e)
                 {
-                    e.CriticalMessageBox(tr("Error can't convert value."));
+                    e.CriticalMessageBox(tr("Error can't convert value."), this);
                     file.close();
                     Clear();
                     return;
                 }
                 catch (const VExceptionEmptyParameter &e)
                 {
-                    e.CriticalMessageBox(tr("Error empty parameter."));
+                    e.CriticalMessageBox(tr("Error empty parameter."), this);
                     file.close();
                     Clear();
                     return;
                 }
                 catch (const VExceptionWrongParameterId &e)
                 {
-                    e.CriticalMessageBox(tr("Error wrong id."));
+                    e.CriticalMessageBox(tr("Error wrong id."), this);
                     file.close();
                     Clear();
                     return;
                 }
                 catch (const VExceptionUniqueId &e)
                 {
-                    e.CriticalMessageBox(tr("Error no unique id."));
+                    e.CriticalMessageBox(tr("Error no unique id."), this);
                     file.close();
                     Clear();
                     return;
@@ -1451,7 +1427,7 @@ void MainWindow::OpenPattern(const QString &fileName)
             }
             else
             {
-                QMessageBox msgBox;
+                QMessageBox msgBox(this);
                 msgBox.setWindowTitle(tr("Error!"));
                 msgBox.setText(tr("Parsing pattern file error."));
                 msgBox.setInformativeText(errorMsg);
@@ -1467,7 +1443,7 @@ void MainWindow::OpenPattern(const QString &fileName)
         }
         else
         {
-            QMessageBox msgBox;
+            QMessageBox msgBox(this);
             msgBox.setWindowTitle(tr("Error!"));
             msgBox.setText(tr("Validation file error."));
             msgBox.setInformativeText(errorMsg);

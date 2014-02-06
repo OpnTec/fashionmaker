@@ -656,18 +656,6 @@ void DialogTool::UpdateList()
     }
 }
 
-void DialogTool::ApplicationDeactivate(bool type)
-{
-//    if (type == true)
-//    {
-//        this->hide();
-//    }
-//    else
-//    {
-//        this->show();
-//    }
-}
-
 template <class key, class val>
 void DialogTool::ShowVariable(const QHash<key, val> *var)
 {
