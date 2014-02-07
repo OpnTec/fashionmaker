@@ -157,8 +157,8 @@ void VToolPointOfIntersection::RefreshDataInFile()
     if (domElement.isElement())
     {
         SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrName, toMM(point->mx()));
-        SetAttribute(domElement, AttrName, toMM(point->my()));
+        SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        SetAttribute(domElement, AttrMy, toMM(point->my()));
         SetAttribute(domElement, AttrFirstPoint, firstPointId);
         SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
