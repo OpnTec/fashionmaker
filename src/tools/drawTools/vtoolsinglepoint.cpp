@@ -121,6 +121,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 
             //I don't now why but signal does not work.
             doc->FullUpdateTree();
+            emit toolhaveChange();
         }
     }
     return QGraphicsItem::itemChange(change, value);

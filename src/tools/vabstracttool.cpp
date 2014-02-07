@@ -237,7 +237,7 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                         scene->removeItem(tool);//remove form scene
                     }
                     doc->FullUpdateTree();
-                    //emit toolhaveChange();//set enabled save button
+                    emit toolhaveChange();//set enabled save button
                 }
                 else
                 {

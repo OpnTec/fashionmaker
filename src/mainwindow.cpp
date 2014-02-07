@@ -1092,8 +1092,8 @@ void MainWindow::ActionTable(bool checked)
     if (checked)
     {
         dialogTable = new DialogIncrements(pattern, doc, this);
-        connect(dialogTable, &DialogIncrements::DialogClosed, this,
-                &MainWindow::ClosedActionTable);
+        Q_CHECK_PTR(dialogTable);
+        connect(dialogTable, &DialogIncrements::DialogClosed, this, &MainWindow::ClosedActionTable);
         dialogTable->show();
     }
     else
@@ -1107,6 +1107,7 @@ void MainWindow::ClosedActionTable()
 {
     ui->actionTable->setChecked(false);
     delete dialogTable;
+    dialogTable = 0;
 }
 
 void MainWindow::ActionHistory(bool checked)

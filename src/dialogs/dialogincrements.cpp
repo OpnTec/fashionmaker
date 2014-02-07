@@ -55,13 +55,11 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::cellChanged);
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
-    connect(ui->toolButtonRemove, &QPushButton::clicked, this,
-            &DialogIncrements::clickedToolButtonRemove);
+    connect(ui->toolButtonRemove, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonRemove);
 
     connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
     connect(this, &DialogIncrements::haveLiteChange, this->doc, &VDomDocument::haveLiteChange);
-    connect(this->doc, &VDomDocument::FullUpdateFromFile, this,
-            &DialogIncrements::FullUpdateFromFile);
+    connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
 }
@@ -438,6 +436,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 data->ClearIncrementTable();
                 this->column = 2;
                 emit FullUpdateTree();
+                emit haveLiteChange();
             }
             break;
         case 2:
@@ -454,6 +453,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                     domElement.setAttribute("base", value);
                     this->column = 3;
                     emit FullUpdateTree();
+                    emit haveLiteChange();
                 }
                 else
                 {
@@ -471,6 +471,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 domElement.setAttribute("ksize", item->text().replace(",", ".").toDouble());
                 this->column = 4;
                 emit FullUpdateTree();
+                emit haveLiteChange();
             }
             break;
         case 4:
@@ -483,6 +484,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 domElement.setAttribute("kgrowth", item->text().replace(",", ".").toDouble());
                 this->column = 5;
                 emit FullUpdateTree();
+                emit haveLiteChange();
             }
             break;
         case 5:
