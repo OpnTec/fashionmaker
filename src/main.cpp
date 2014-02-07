@@ -60,6 +60,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 int main(int argc, char *argv[])
 {
+    Q_INIT_RESOURCE(cursor);
+    Q_INIT_RESOURCE(icon);
+    Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(theme);
+
     qInstallMessageHandler(myMessageOutput);
     VApplication app(argc, argv);
 
