@@ -1,24 +1,25 @@
 ; -------------------------------
 ; Start
  
- 
   !define MUI_PRODUCT "Valentina"
   !define MUI_FILE "valentina"
-  !define MUI_VERSION "0.2"
+  !define MUI_VERSION "0.2.1-dev"
   !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
+  !define WEBSITE_LINK "https://bitbucket.org/dismine/valentina"
+  !define PUBLISHER "Roman Telezhinsky"
   CRCCheck On
  
   ; Bij deze moeten we waarschijnlijk een absoluut pad gaan gebruiken
   ; dit moet effe uitgetest worden.
   !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
  
- 
 ;--------------------------------
 ;General
+
   Name "${MUI_BRANDINGTEXT}"
   Caption "${MUI_BRANDINGTEXT}"
   SetCompressor bzip2
-  OutFile "${MUI_FILE}-install-v.${MUI_VERSION}.exe"
+  OutFile "${MUI_FILE}-install-v.${MUI_VERSION}_32bit.exe"
   
   ; Request application privileges for Windows Vista
   RequestExecutionLevel user
@@ -32,9 +33,12 @@
   
 ;--------------------------------
 ;Folder selection page
+
+  ;Default installation folder
+  InstallDir "$LOCALAPPDATA\${MUI_PRODUCT}"
  
-InstallDir "$PROGRAMFILES\${MUI_PRODUCT}"
- 
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKCU "$LOCALAPPDATA\${MUI_PRODUCT}" ""
  
 ;--------------------------------
 ;Modern UI Configuration
@@ -51,7 +55,6 @@ InstallDir "$PROGRAMFILES\${MUI_PRODUCT}"
   !define MUI_UNCONFIRMPAGE
   !define MUI_FINISHPAGE
 
-
 ;--------------------------------
 ;Page
 
@@ -66,12 +69,40 @@ InstallDir "$PROGRAMFILES\${MUI_PRODUCT}"
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
   !insertmacro MUI_UNPAGE_FINISH
- 
+  
+;--------------------------------
+;Language Selection Dialog Settings
+
+  ;Remember the installer language
+  !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
+  !define MUI_LANGDLL_REGISTRY_KEY "Software\${MUI_PRODUCT}" 
+  !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+   
 ;--------------------------------
 ;Language
  
-  !insertmacro MUI_LANGUAGE "English"
- 
+  !define MUI_LANGDLL_ALLLANGUAGES
+  !insertmacro MUI_LANGUAGE "English" ;first language is the default language
+  !insertmacro MUI_LANGUAGE "German"
+  !insertmacro MUI_LANGUAGE "French"
+  !insertmacro MUI_LANGUAGE "Russian"
+  !insertmacro MUI_LANGUAGE "Ukrainian"
+  !insertmacro MUI_LANGUAGE "Czech"
+  !insertmacro MUI_LANGUAGE "Hebrew"
+  !insertmacro MUI_RESERVEFILE_LANGDLL
+
+  Function .onInit
+  !insertmacro MUI_LANGDLL_DISPLAY ;This has to come after the language macros
+  FunctionEnd
+
+;--------------------------------
+;Reserve Files
+  
+  ;If you are using solid compression, files that are required before
+  ;the actual installation should be stored first in the data block,
+  ;because this will make your installer start faster.
+  
+  !insertmacro MUI_RESERVEFILE_LANGDLL  
  
 ;-------------------------------- 
 ;Modern UI System
@@ -91,20 +122,40 @@ Section "Valentina  (required)"
 ;Add files
   SetOutPath "$INSTDIR"
   File /r "c:\pack\valentina\*.*"
+
+;create start-menu items  
+  !define START_LINK_DIR "$STARTMENU\Programs\${MUI_PRODUCT}"
+  !define START_LINK_RUN "$STARTMENU\Programs\${MUI_PRODUCT}\${MUI_PRODUCT}.lnk"
+  !define START_LINK_UNINSTALLER "$STARTMENU\Programs\${MUI_PRODUCT}\Uninstall ${MUI_PRODUCT}.lnk"
+
+# In your main installer section...
+  SetShellVarContext current
+  CreateDirectory "${START_LINK_DIR}"
+  CreateShortCut "${START_LINK_RUN}" "$INSTDIR\${MUI_FILE}.exe"
+  CreateShortCut "${START_LINK_UNINSTALLER}" "$INSTDIR\Uninstall.exe"
  
 ;create desktop shortcut
   CreateShortCut "$DESKTOP\${MUI_PRODUCT}.lnk" "$INSTDIR\${MUI_FILE}.exe" ""
  
-;create start-menu items
-  CreateDirectory "$SMPROGRAMS\${MUI_PRODUCT}"
-  CreateShortCut "$SMPROGRAMS\${MUI_PRODUCT}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
-  CreateShortCut "$SMPROGRAMS\${MUI_PRODUCT}\${MUI_PRODUCT}.lnk" "$INSTDIR\${MUI_FILE}.exe" "" "$INSTDIR\${MUI_FILE}.exe" 0
- 
 ;write uninstall information to the registry
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "DisplayName" "${MUI_PRODUCT} (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
+  !define UNINSTALLER_NAME "Uninstall.exe"
+  !define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
+
+  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayName" "${MUI_PRODUCT}"
+  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${MUI_FILE}.exe$\""
+  WriteRegStr HKCU "${REG_UNINSTALL}" "Publisher" "${PUBLISHER}"
+  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayVersion" "${MUI_VERSION}"
+  WriteRegDWord HKCU "${REG_UNINSTALL}" "EstimatedSize" 51,4 ;MB
+  WriteRegStr HKCU "${REG_UNINSTALL}" "HelpLink" "${WEBSITE_LINK}"
+  WriteRegStr HKCU "${REG_UNINSTALL}" "URLInfoAbout" "${WEBSITE_LINK}"
+  WriteRegStr HKCU "${REG_UNINSTALL}" "InstallLocation" "$\"$INSTDIR$\""
+  WriteRegStr HKCU "${REG_UNINSTALL}" "InstallSource" "$\"$EXEDIR$\""
+  WriteRegDWord HKCU "${REG_UNINSTALL}" "NoModify" 1
+  WriteRegDWord HKCU "${REG_UNINSTALL}" "NoRepair" 1
+  WriteRegStr HKCU "${REG_UNINSTALL}" "UninstallString" "$\"$INSTDIR\${UNINSTALLER_NAME}$\""
+  WriteRegStr HKCU "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_PRODUCT}."
  
-  WriteUninstaller "$INSTDIR\Uninstall.exe"
+  WriteUninstaller "$INSTDIR\${UNINSTALLER_NAME}"
  
 SectionEnd 
  
@@ -120,30 +171,16 @@ Section "Uninstall"
   RMDir "$INSTDIR"
  
 ;Delete Start Menu Shortcuts
+  SetShellVarContext current
   Delete "$DESKTOP\${MUI_PRODUCT}.lnk"
-  Delete "$SMPROGRAMS\${MUI_PRODUCT}\*.*"
-  RmDir  "$SMPROGRAMS\${MUI_PRODUCT}"
+  Delete "${START_LINK_DIR}\*.*"
+  RmDir  "${START_LINK_DIR}"
  
 ;Delete Uninstaller And Unistall Registry Entries
-  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\${MUI_PRODUCT}"
-  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"  
+  DeleteRegKey HKCU "SOFTWARE\${MUI_PRODUCT}"
+  DeleteRegKey HKCU "${REG_UNINSTALL}"  
  
 SectionEnd
- 
- 
-;--------------------------------    
-;MessageBox Section
- 
- 
-;Function that calls a messagebox when installation finished correctly
-Function .onInstSuccess
-  MessageBox MB_OK "You have successfully installed ${MUI_PRODUCT}. Use the desktop icon to start the program."
-FunctionEnd
- 
- 
-Function un.onUninstSuccess
-  MessageBox MB_OK "You have successfully uninstalled ${MUI_PRODUCT}."
-FunctionEnd
  
  
 ;eof
