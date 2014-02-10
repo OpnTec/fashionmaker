@@ -919,7 +919,7 @@ void MainWindow::ActionDetails(bool checked)
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
-    QString dir = QDir::homePath() + tr("/pattern.val");
+    QString dir = QFileInfo(curFile).absolutePath() + tr("/pattern.val");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
 
     if (fileName.isEmpty())
@@ -951,7 +951,16 @@ void MainWindow::Open()
     if (MaybeSave())
     {
         QString filter(tr("Pattern files (*.val)"));
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+        QString dir;
+        if (curFile.isEmpty())
+        {
+            dir = QDir::homePath();
+        }
+        else
+        {
+            dir = QFileInfo(curFile).absolutePath();
+        }
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
         if (fileName.isEmpty() == false)
         {
             LoadPattern(fileName);
