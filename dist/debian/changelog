@@ -1,5 +1,5 @@
-valentina (0.2.1-dev) saucy; urgency=low
+valentina (0.2.1) saucy; urgency=low
 
-  * Release v.0.2.1-dev
+  * Change version number
 
- -- Roman Telezhinsky <dismine@gmail.com>  Tue, 04 Feb 2014 17:40:25 +0200
+ -- Roman Telezhinsky <dismine@gmail.com>  Mon, 10 Feb 2014 09:23:59 +0200
