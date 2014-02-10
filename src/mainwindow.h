@@ -357,6 +357,7 @@ public slots:
      * @brief tableClosed handle after close layout window.
      */
     void               tableClosed();
+    void               OpenRecentFile();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -456,6 +457,9 @@ private:
      * @brief drawMode true if we current draw scene.
      */
     bool               drawMode;
+    enum { MaxRecentFiles = 5 };
+    QAction            *recentFileActs[MaxRecentFiles];
+    QAction            *separatorAct;
     /**
      * @brief ToolBarOption enable option toolbar.
      */
@@ -557,6 +561,9 @@ private:
      * @return returns true in all cases, except when the user clicks Cancel.
      */
     bool               MaybeSave();
+    void               UpdateRecentFileActions();
+    void               CreateMenus();
+    void               CreateActions();
 };
 
 #endif // MAINWINDOW_H

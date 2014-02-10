@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>144</width>
+         <width>150</width>
          <height>150</height>
         </rect>
        </property>
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -669,7 +669,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
@@ -680,14 +680,14 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
    <widget class="QMenu" name="menuDrawing">
     <property name="title">
-     <string>Pattern piece</string>
+     <string>&amp;Pattern piece</string>
     </property>
     <addaction name="actionNewDraw"/>
     <addaction name="actionOptionDraw"/>
@@ -760,6 +760,9 @@
    <property name="text">
     <string>New</string>
    </property>
+   <property name="iconText">
+    <string>&amp;New</string>
+   </property>
    <property name="toolTip">
     <string>Create a new pattern</string>
    </property>
@@ -776,6 +779,9 @@
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="iconText">
+    <string>&amp;Open</string>
+   </property>
    <property name="toolTip">
     <string>Open file with pattern</string>
    </property>
@@ -791,6 +797,9 @@
    </property>
    <property name="text">
     <string>Save</string>
+   </property>
+   <property name="iconText">
+    <string>&amp;Save</string>
    </property>
    <property name="toolTip">
     <string>Save pattern</string>
@@ -809,7 +818,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Save as</string>
+    <string>Save &amp;As...</string>
    </property>
    <property name="toolTip">
     <string>Save not yet saved pattern</string>
@@ -958,17 +967,20 @@
   </action>
   <action name="actionAbout_Qt">
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
   </action>
   <action name="actionAbout_Valentina">
    <property name="text">
-    <string>About Valentina</string>
+    <string>&amp;About Valentina</string>
    </property>
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>E&amp;xit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit the application</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>

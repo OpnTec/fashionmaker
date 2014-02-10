@@ -79,24 +79,13 @@ MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
       sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
       dialogTool(0), dialogHistory(0), comboBoxDraws(0), curFile(QString()), mode(Draw::Calculation),
-      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true)
+      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(0)
 {
-    ui->setupUi(this);
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-        //If there is no default working icon theme then we should
-        //use an icon theme that we provide via a .qrc file
-        //This case happens under Windows and Mac OS X
-        //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
-        ui->actionNew->setIcon(QIcon::fromTheme("document-new"));
-        ui->actionOpen->setIcon(QIcon::fromTheme("document-open"));
-        ui->actionSave->setIcon(QIcon::fromTheme("document-save"));
-        ui->actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
-    }
+    CreateActions();
+    CreateMenus();
     ToolBarOption();
     ToolBarDraws();
+
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
@@ -116,16 +105,6 @@ MainWindow::MainWindow(QWidget *parent)
     helpLabel = new QLabel(tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
-    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
-    connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
-    connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
-    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw);
-    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
-    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
-    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::NewPattern);
-    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
     connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
@@ -157,10 +136,6 @@ MainWindow::MainWindow(QWidget *parent)
     timer->setTimerType(Qt::VeryCoarseTimer);
     connect(timer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     timer->start(300000);
-
-    connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
-    connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
-    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     ui->toolBox->setCurrentIndex(0);
 
@@ -562,6 +537,15 @@ void MainWindow::tableClosed()
     MinimumScrollBar();
 }
 
+void MainWindow::OpenRecentFile()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action)
+    {
+        LoadPattern(action->data().toString());
+    }
+}
+
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -630,7 +614,6 @@ void MainWindow::ToolBarOption()
     mouseCoordinate = new QLabel;
     mouseCoordinate ->setText("0, 0");
     ui->toolBarOption->addWidget(mouseCoordinate);
-
 }
 
 void MainWindow::ToolBarDraws()
@@ -1268,6 +1251,21 @@ void MainWindow::setCurrentFile(const QString &fileName)
     {
         shownName = tr("untitled.val");
     }
+    else
+    {
+        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                           QApplication::applicationName());
+        QStringList files = settings.value("recentFileList").toStringList();
+        files.removeAll(fileName);
+        files.prepend(fileName);
+        while (files.size() > MaxRecentFiles)
+        {
+            files.removeLast();
+        }
+
+        settings.setValue("recentFileList", files);
+        UpdateRecentFileActions();
+    }
     shownName+="[*]";
     setWindowTitle(shownName);
 }
@@ -1279,7 +1277,8 @@ QString MainWindow::strippedName(const QString &fullFileName)
 
 void MainWindow::ReadSettings()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "ValentinaTeam", "Valentina");
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
     QPoint pos = settings.value("pos", QPoint(10, 10)).toPoint();
     QSize size = settings.value("size", QSize(1000, 800)).toSize();
     resize(size);
@@ -1288,7 +1287,8 @@ void MainWindow::ReadSettings()
 
 void MainWindow::WriteSettings()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "ValentinaTeam", "Valentina");
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
     settings.setValue("pos", pos());
     settings.setValue("size", size());
 }
@@ -1307,6 +1307,83 @@ bool MainWindow::MaybeSave()
             return false;
     }
     return true;
+}
+
+void MainWindow::UpdateRecentFileActions()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    QStringList files = settings.value("recentFileList").toStringList();
+
+    int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
+       QString text = tr("&%1 %2").arg(i + 1).arg(strippedName(files[i]));
+       recentFileActs[i]->setText(text);
+       recentFileActs[i]->setData(files[i]);
+       recentFileActs[i]->setVisible(true);
+    }
+    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+    {
+       recentFileActs[j]->setVisible(false);
+    }
+
+    separatorAct->setVisible(numRecentFiles > 0);
+}
+
+void MainWindow::CreateMenus()
+{
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        ui->menuFile->insertAction(ui->actionExit, recentFileActs[i]);
+    }
+    separatorAct = new QAction(this);
+    Q_CHECK_PTR(separatorAct);
+    separatorAct->setSeparator(true);
+    ui->menuFile->insertAction(ui->actionExit, separatorAct);
+    UpdateRecentFileActions();
+}
+
+void MainWindow::CreateActions()
+{
+    ui->setupUi(this);
+    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
+        //If there is no default working icon theme then we should
+        //use an icon theme that we provide via a .qrc file
+        //This case happens under Windows and Mac OS X
+        //This does not happen under GNOME or KDE
+        QIcon::setThemeName("win.icon.theme");
+        ui->actionNew->setIcon(QIcon::fromTheme("document-new"));
+        ui->actionOpen->setIcon(QIcon::fromTheme("document-open"));
+        ui->actionSave->setIcon(QIcon::fromTheme("document-save"));
+        ui->actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
+    }
+
+    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
+    connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
+    connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
+    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw);
+    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
+    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::NewPattern);
+    connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
+    connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
+    connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
+
+    //Actions for recent files loaded by a main window application.
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        recentFileActs[i] = new QAction(this);
+        Q_CHECK_PTR(recentFileActs[i]);
+        recentFileActs[i]->setVisible(false);
+        connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
+    }
 }
 
 MainWindow::~MainWindow()
