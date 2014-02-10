@@ -47,8 +47,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
-         <height>144</height>
+         <width>144</width>
+         <height>150</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -302,8 +302,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
-         <height>56</height>
+         <width>100</width>
+         <height>58</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -378,8 +378,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
-         <height>100</height>
+         <width>100</width>
+         <height>104</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -507,7 +507,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>56</height>
+         <height>58</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -579,8 +579,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
-         <height>56</height>
+         <width>100</width>
+         <height>58</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -664,7 +664,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -709,7 +709,6 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
-   <addaction name="actionSaveAs"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">

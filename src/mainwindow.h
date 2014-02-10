@@ -58,10 +58,10 @@ public:
               explicit MainWindow(QWidget *parent = 0);
                        ~MainWindow();
     /**
-     * @brief OpenPattern open pattern file.
+     * @brief LoadPattern open pattern file.
      * @param fileName name of file.
      */
-    void               OpenPattern(const QString &fileName);
+    void               LoadPattern(const QString &curFile);
 public slots:
     /**
      * @brief mouseMove save mouse position and show user.
@@ -87,21 +87,23 @@ public slots:
      */
     void               ActionNewDraw();
     /**
-     * @brief ActionSaveAs save as pattern file.
+     * @brief SaveAs save as pattern file.
+     * @return true for successes saving.
      */
-    void               ActionSaveAs();
+    bool               SaveAs();
     /**
-     * @brief ActionSave save pattern file.
+     * @brief Save save pattern file.
+     * @return true for successes saving.
      */
-    void               ActionSave();
+    bool               Save();
     /**
-     * @brief ActionOpen ask user select pattern file.
+     * @brief Open ask user select pattern file.
      */
-    void               ActionOpen();
+    void               Open();
     /**
-     * @brief ActionNew create new empty pattern.
+     * @brief NewPattern create new empty pattern.
      */
-    void               ActionNew();
+    void               NewPattern();
     /**
      * @brief ActionTable show table with variables.
      * @param checked true - button checked.
@@ -129,7 +131,7 @@ public slots:
     /**
      * @brief haveChange enable action save if we have unsaved change.
      */
-    void               haveChange();
+    void               PatternWasModified();
     /**
      * @brief ChangedSize change new size value.
      * @param text value size.
@@ -360,7 +362,7 @@ signals:
      * @brief ModelChosen emit after calculation all details.
      * @param listDetails list of details.
      */
-    void               ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
+    void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile);
 protected:
     /**
      * @brief keyPressEvent handle key press events.
@@ -437,11 +439,7 @@ private:
     /**
      * @brief fileName name current pattern file.
      */
-    QString            fileName;
-    /**
-     * @brief changeInFile true if exist change in file.
-     */
-    bool               changeInFile;
+    QString            curFile;
     /**
      * @brief mode keep current draw mode.
      */
@@ -516,7 +514,7 @@ private:
      * @param errorColumn number error column.
      * @return true if validation successful.
      */
-    bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
+    bool ValidatePattern(const QString &schema, const QString &curFile, QString &errorMsg, qint64 &errorLine,
                          qint64 &errorColumn) const;
     template <typename DrawTool>
     /**
@@ -525,15 +523,40 @@ private:
      */
     void               ClosedDialog(int result);
     /**
-     * @brief SafeSaveing safe saving pattern file.
+     * @brief SavePattern save pattern file.
      * @param fileName pattern file name.
-     * @return true if all is all right.
+     * @return true if all is good.
      */
-    bool               SafeSaveing(const QString &fileName)const;
+    bool               SavePattern(const QString &curFile);
     /**
      * @brief AutoSavePattern start safe saving.
      */
     void               AutoSavePattern();
+    /**
+     * @brief setCurrentFile the function is called to reset the state of a few variables when a file
+     * is loaded or saved, or when the user starts editing a new file (in which case fileName is empty).
+     * @param fileName file name.
+     */
+    void               setCurrentFile(const QString &fileName);
+    /**
+     * @brief strippedName the function call around curFile to exclude the path to the file.
+     * @param fullFileName full path to the file.
+     * @return file name.
+     */
+    QString            strippedName(const QString &fullFileName);
+    /**
+     * @brief ReadSettings read setting for app.
+     */
+    void               ReadSettings();
+    /**
+     * @brief WriteSettings save setting for app.
+     */
+    void               WriteSettings();
+    /**
+     * @brief MaybeSave The function is called to save pending changes.
+     * @return returns true in all cases, except when the user clicks Cancel.
+     */
+    bool               MaybeSave();
 };
 
 #endif // MAINWINDOW_H

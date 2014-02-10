@@ -69,8 +69,7 @@ int main(int argc, char *argv[])
     VApplication app(argc, argv);
 
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + QLocale::system().name(),
-                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
@@ -84,6 +83,11 @@ int main(int argc, char *argv[])
     #endif
 #endif
     app.installTranslator(&appTranslator);
+
+    app.setApplicationDisplayName("Valentina");
+    app.setApplicationName("Valentina");
+    app.setOrganizationName("ValentinaTeam");
+    app.setOrganizationDomain("valentinaproject.bitbucket.org");
 
     MainWindow w;
     w.setWindowState(w.windowState() ^ Qt::WindowMaximized);
@@ -106,7 +110,7 @@ int main(int argc, char *argv[])
                 {
                     fileName =  args.at(i+1);
                     qDebug() << args.at(i)<< ":" << fileName;
-                    w.OpenPattern(fileName);
+                    w.LoadPattern(fileName);
                 }
                 w.show();
                 break;

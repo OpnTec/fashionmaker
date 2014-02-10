@@ -43,19 +43,19 @@
 VDomDocument::VDomDocument(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent)
     : QObject(parent), QDomDocument(), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-    comboBoxDraws(comboBoxDraws), mode(mode){}
+    comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false){}
 
 VDomDocument::VDomDocument(const QString& name, VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode,
                            QObject *parent)
     :QObject(parent), QDomDocument(name), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-    comboBoxDraws(comboBoxDraws), mode(mode){}
+    comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false){}
 
 VDomDocument::VDomDocument(const QDomDocumentType& doctype, VContainer *data, QComboBox *comboBoxDraws,
                            Draw::Draws *mode, QObject *parent)
     :QObject(parent), QDomDocument(doctype), map(QHash<QString, QDomElement>()), nameActivDraw(QString()), data(data),
     tools(QHash<qint64, VDataTool*>()), history(QVector<VToolRecord>()), cursor(0),
-    comboBoxDraws(comboBoxDraws), mode(mode){}
+    comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false){}
 
 QDomElement VDomDocument::elementById(const QString& id)
 {
@@ -223,7 +223,7 @@ bool VDomDocument::SetNameDraw(const QString& name)
     {
         nameActivDraw = name;
         element.setAttribute("name", nameActivDraw);
-        emit haveChange();
+        emit patternChanged();
         emit ChangedNameDraw(oldName, nameActivDraw);
         return true;
     }
@@ -1346,13 +1346,24 @@ void VDomDocument::FullUpdateTree()
 
 void VDomDocument::haveLiteChange()
 {
-    emit haveChange();
+    patternModified = true;
+    emit patternChanged();
 }
 
 void VDomDocument::ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
 }
+bool VDomDocument::isPatternModified() const
+{
+    return patternModified;
+}
+
+void VDomDocument::setPatternModified(bool value)
+{
+    patternModified = value;
+}
+
 
 void VDomDocument::setCursor(const qint64 &value)
 {

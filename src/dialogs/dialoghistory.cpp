@@ -50,7 +50,7 @@ DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *paren
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &DialogHistory::cellClicked);
     connect(this, &DialogHistory::ShowHistoryTool, doc, &VDomDocument::ShowHistoryTool);
     connect(doc, &VDomDocument::ChangedCursor, this, &DialogHistory::ChangedCursor);
-    connect(doc, &VDomDocument::haveChange, this, &DialogHistory::UpdateHistory);
+    connect(doc, &VDomDocument::patternChanged, this, &DialogHistory::UpdateHistory);
     connect(doc, &VDomDocument::ChangedActivDraw, this, &DialogHistory::UpdateHistory);
     ShowPoint();
 }

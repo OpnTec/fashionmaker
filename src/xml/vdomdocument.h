@@ -239,6 +239,8 @@ public:
      * @return id base point.
      */
     qint64         SPointActiveDraw();
+    bool           isPatternModified() const;
+    void           setPatternModified(bool value);
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -256,9 +258,9 @@ signals:
      */
     void           FullUpdateFromFile();
     /**
-     * @brief haveChange emit if we have unsaved change.
+     * @brief patternChanged emit if we have unsaved change.
      */
-    void           haveChange();
+    void           patternChanged();
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
@@ -321,6 +323,10 @@ private:
      * @brief mode current draw mode.
      */
     Draw::Draws    *mode;
+    /**
+     * @brief fileModified true if exist change in file.
+     */
+    bool            patternModified;
     /**
      * @brief find find element by id.
      * @param node node.

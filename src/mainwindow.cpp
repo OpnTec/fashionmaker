@@ -78,8 +78,8 @@ private:
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
       sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
-      dialogTool(0), dialogHistory(0), comboBoxDraws(0), fileName(QString()), changeInFile(false),
-      mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true)
+      dialogTool(0), dialogHistory(0), comboBoxDraws(0), curFile(QString()), mode(Draw::Calculation),
+      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true)
 {
     ui->setupUi(this);
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
@@ -121,10 +121,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw);
     connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
-    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::ActionSaveAs);
-    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::ActionSave);
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::ActionOpen);
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::ActionNew);
+    connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::NewPattern);
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
@@ -150,7 +150,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     doc = new VDomDocument(pattern, comboBoxDraws, &mode);
     doc->CreateEmptyFile();
-    connect(doc, &VDomDocument::haveChange, this, &MainWindow::haveChange);
+    connect(doc, &VDomDocument::patternChanged, this, &MainWindow::PatternWasModified);
 
     //Autosaving file each 5 minutes
     QTimer *timer = new QTimer(this);
@@ -163,6 +163,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     ui->toolBox->setCurrentIndex(0);
+
+    ReadSettings();
+
+    setCurrentFile("");
 }
 
 void MainWindow::ActionNewDraw()
@@ -220,7 +224,6 @@ void MainWindow::ActionNewDraw()
     VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
-    changeInFile = true;
 
     index = comboBoxDraws->findText(nameDraw);
     if ( index != -1 )
@@ -580,51 +583,14 @@ void MainWindow::showEvent( QShowEvent *event )
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (changeInFile == true)
+    if (MaybeSave())
     {
-        QMessageBox msgBox(this);
-        msgBox.setText(tr("The pattern has been modified."));
-        msgBox.setInformativeText(tr("Do you want to save your changes?"));
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        msgBox.setIcon(QMessageBox::Question);
-        int ret = msgBox.exec();
-        switch (ret)
-        {
-            case QMessageBox::Save:
-                // Save was clicked
-                if (fileName.isEmpty())
-                {
-                    ActionSaveAs();
-                }
-                else
-                {
-                    ActionSave();
-                }
-                if (changeInFile)
-                {
-                    // We did't save file
-                    event->ignore();
-                }
-                else
-                {
-                    // We have successfully saved the file
-                    event->accept();
-                }
-                break;
-            case QMessageBox::Discard:
-                // Don't Save was clicked
-                event->accept();
-                break;
-            case QMessageBox::Cancel:
-                // Cancel was clicked
-                event->ignore();
-                break;
-            default:
-                // should never be reached
-                event->accept();
-                break;
-        }
+        WriteSettings();
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
     }
 }
 
@@ -950,113 +916,77 @@ void MainWindow::ActionDetails(bool checked)
     }
 }
 
-void MainWindow::ActionSaveAs()
+bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
     QString dir = QDir::homePath() + tr("/pattern.val");
-    QString fName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
 
-    if (fName.isEmpty())
+    if (fileName.isEmpty())
     {
-        return;
+        return false;
     }
-    QFileInfo f( fName );
+    QFileInfo f( fileName );
     if (f.suffix().isEmpty() && f.suffix() != "val")
     {
-        fName += ".val";
+        fileName += ".val";
     }
-    fileName = fName;
-
-    ActionSave();
+    return SavePattern(fileName);
 }
 
-void MainWindow::ActionSave()
+bool MainWindow::Save()
 {
-    if (fileName.isEmpty() == false)
+    if (curFile.isEmpty())
     {
-        bool result = SafeSaveing(fileName);
-        if (result)
-        {
-            ui->actionSave->setEnabled(false);
-            changeInFile = false;
-            QFileInfo info(fileName);
-            QString title(info.fileName());
-            title.append("-Valentina");
-            setWindowTitle(title);
-        }
-        else
-        {
-            QMessageBox msgBox;
-            msgBox.setWindowTitle(tr("Error!"));
-            msgBox.setText(tr("Error saving file. Can't save file."));
-            msgBox.setStandardButtons(QMessageBox::Ok);
-            msgBox.setDefaultButton(QMessageBox::Ok);
-            msgBox.setIcon(QMessageBox::Warning);
-            msgBox.exec();
-        }
-    }
-}
-
-void MainWindow::ActionOpen()
-{
-    QString filter(tr("Pattern files (*.val)"));
-    QString fName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
-    if (fName.isEmpty())
-    {
-        return;
-    }
-    if (fileName.isEmpty() && changeInFile == false)
-    {
-        OpenPattern(fName);
-
-        VAbstractTool::NewSceneRect(sceneDraw, view);
-        VAbstractTool::NewSceneRect(sceneDetails, view);
+        return SaveAs();
     }
     else
     {
-        /*Open new copy application*/
-        QProcess *v = new QProcess(this);
-        QStringList arguments;
-        arguments << "-o" << fName;
-        v->startDetached(QCoreApplication::applicationFilePath (), arguments);
-        delete v;
+        return SavePattern(curFile);
+    }
+}
+
+void MainWindow::Open()
+{
+    if (MaybeSave())
+    {
+        QString filter(tr("Pattern files (*.val)"));
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+        if (fileName.isEmpty() == false)
+        {
+            LoadPattern(fileName);
+
+            VAbstractTool::NewSceneRect(sceneDraw, view);
+            VAbstractTool::NewSceneRect(sceneDetails, view);
+        }
     }
 }
 
 void MainWindow::Clear()
 {
-    setWindowTitle("Valentina");
-    fileName.clear();
+    setCurrentFile("");
     pattern->Clear();
     doc->clear();
     sceneDraw->clear();
     sceneDetails->clear();
     CancelTool();
     comboBoxDraws->clear();
-    fileName.clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
     SetEnableTool(false);
 }
 
-void MainWindow::ActionNew()
+void MainWindow::NewPattern()
 {
     QProcess *v = new QProcess(this);
     v->startDetached(QCoreApplication::applicationFilePath ());
     delete v;
 }
 
-void MainWindow::haveChange()
+void MainWindow::PatternWasModified()
 {
-    if (fileName.isEmpty() == false)
-    {
-        ui->actionSave->setEnabled(true);
-        changeInFile = true;
-        QFileInfo info(fileName);
-        QString title(info.fileName());
-        title.append("*-Valentina");
-        setWindowTitle(title);
-    }
+    setWindowModified(doc->isPatternModified());
+    ui->actionSave->setEnabled(true);
 }
 
 void MainWindow::ChangedSize(const QString & text)
@@ -1079,7 +1009,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    if (enable == true && fileName.isEmpty() == false)
+    if (enable == true && curFile.isEmpty() == false)
     {
         ui->actionSave->setEnabled(enable);
     }
@@ -1140,7 +1070,7 @@ void MainWindow::ActionLayout(bool checked)
         QPainterPath path = VEquidistant().ContourPath(idetail.key(), pattern);
         listDetails.append(new VItem(path, listDetails.size()));
     }
-    emit ModelChosen(listDetails, fileName);
+    emit ModelChosen(listDetails, curFile);
 }
 
 void MainWindow::ClosedActionHistory()
@@ -1196,27 +1126,18 @@ void MainWindow::MinimumScrollBar()
 bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
                                  qint64 &errorColumn) const
 {
+    errorLine = -1;
+    errorColumn = -1;
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
-        errorMsg = QString(tr("Can't open pattern file."));
-        errorLine = -1;
-        errorColumn = -1;
-        return false;
-    }
-    if (schema.isEmpty())
-    {
-        errorMsg = QString(tr("Empty schema path."));
-        errorLine = -1;
-        errorColumn = -1;
+        errorMsg = QString(tr("Can't open pattern file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
         return false;
     }
     QFile fileSchema(schema);
     if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
-        errorMsg = QString(tr("Can't open schema file."));
-        errorLine = -1;
-        errorColumn = -1;
+        errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
         return false;
     }
 
@@ -1252,7 +1173,7 @@ bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName,
     }
 }
 
-bool MainWindow::SafeSaveing(const QString &fileName) const
+bool MainWindow::SavePattern(const QString &fileName)
 {
     try
     {
@@ -1260,15 +1181,7 @@ bool MainWindow::SafeSaveing(const QString &fileName) const
     }
     catch (const VExceptionUniqueId &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error no unique id."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setDetailedText(e.DetailedInformation());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error no unique id."), this);
         return false;
     }
     if (fileName.isEmpty())
@@ -1279,7 +1192,6 @@ bool MainWindow::SafeSaveing(const QString &fileName) const
     //Writing in temporary file
     QFileInfo tempInfo(fileName);
     QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
-    qDebug()<<"file "<<fileName<<"temp file "<<temp;
     QFile tempFile(temp);
     if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
     {
@@ -1301,7 +1213,7 @@ bool MainWindow::SafeSaveing(const QString &fileName) const
     {
         if ( tempFile.copy(patternFile.fileName()) == false )
         {
-            qCritical()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
+            qWarning()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
             tempOfPattern.copy(fileName);
             result = false;
         }
@@ -1312,31 +1224,80 @@ bool MainWindow::SafeSaveing(const QString &fileName) const
     }
     else
     {
-        qCritical()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
+        qWarning()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
         result = false;
     }
     if (result)
     {
         tempFile.remove();
+        setCurrentFile(fileName);
+        helpLabel->setText(tr("File saved"));
+        ui->actionSave->setEnabled(false);
     }
     return result;
 }
 
 void MainWindow::AutoSavePattern()
 {
-    if (fileName.isEmpty() == false && changeInFile == true)
+    if (curFile.isEmpty() == false && doc->isPatternModified() == true)
     {
-        bool result = SafeSaveing(fileName);
-        if (result)
+        if (Save() == false)
         {
-            ui->actionSave->setEnabled(false);
-            changeInFile = false;
-            QFileInfo info(fileName);
-            QString title(info.fileName());
-            title.append("-Valentina");
-            setWindowTitle(title);
+            qWarning()<<tr("Can not save pattern")<<Q_FUNC_INFO;
         }
     }
+}
+
+void MainWindow::setCurrentFile(const QString &fileName)
+{
+    curFile = fileName;
+    doc->setPatternModified(false);
+    setWindowModified(false);
+
+    QString shownName = strippedName(curFile);
+    if (curFile.isEmpty())
+    {
+        shownName = tr("untitled.val");
+    }
+    shownName+="[*]";
+    setWindowTitle(shownName);
+}
+
+QString MainWindow::strippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}
+
+void MainWindow::ReadSettings()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "ValentinaTeam", "Valentina");
+    QPoint pos = settings.value("pos", QPoint(10, 10)).toPoint();
+    QSize size = settings.value("size", QSize(1000, 800)).toSize();
+    resize(size);
+    move(pos);
+}
+
+void MainWindow::WriteSettings()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "ValentinaTeam", "Valentina");
+    settings.setValue("pos", pos());
+    settings.setValue("size", size());
+}
+
+bool MainWindow::MaybeSave()
+{
+    if (doc->isPatternModified())
+    {
+        QMessageBox::StandardButton ret;
+        ret = QMessageBox::warning(this, tr("Unsaved change"), tr("The pattern has been modified.\n"
+                                                             "Do you want to save your changes?"),
+                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        if (ret == QMessageBox::Save)
+            return Save();
+        else if (ret == QMessageBox::Cancel)
+            return false;
+    }
+    return true;
 }
 
 MainWindow::~MainWindow()
@@ -1350,13 +1311,8 @@ MainWindow::~MainWindow()
     delete sceneDraw;
 }
 
-void MainWindow::OpenPattern(const QString &fileName)
+void MainWindow::LoadPattern(const QString &fileName)
 {
-    if (fileName.isEmpty())
-    {
-        qWarning()<<tr("Can't open pattern file. File name is empty")<<Q_FUNC_INFO;
-        return;
-    }
     QFile file(fileName);
     QString errorMsg;
     qint64 errorLine = 0;
@@ -1373,7 +1329,13 @@ void MainWindow::OpenPattern(const QString &fileName)
                            this, &MainWindow::currentDrawChanged);
                 try
                 {
+                    #ifndef QT_NO_CURSOR
+                        QApplication::setOverrideCursor(Qt::WaitCursor);
+                    #endif
                     doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+                    #ifndef QT_NO_CURSOR
+                        QApplication::restoreOverrideCursor();
+                    #endif
                 }
                 catch (const VExceptionObjectError &e)
                 {
@@ -1463,12 +1425,10 @@ void MainWindow::OpenPattern(const QString &fileName)
     }
     else
     {
-        qWarning()<<tr("Can't open pattern file.")<<Q_FUNC_INFO;
+        QMessageBox::warning(this, tr("Valentina"), tr("Cannot read file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
     }
-    this->fileName = fileName;
-    QFileInfo info(fileName);
-    QString title(info.fileName());
-    title.append("-Valentina");
-    setWindowTitle(title);
-    helpLabel->setText("");
+    setCurrentFile(fileName);
+    helpLabel->setText(tr("File loaded"));
 }
