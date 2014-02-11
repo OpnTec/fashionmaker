@@ -3,7 +3,7 @@
  
   !define MUI_PRODUCT "Valentina"
   !define MUI_FILE "valentina"
-  !define MUI_VERSION "0.2.1-dev"
+  !define MUI_VERSION "0.2.2"
   !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
   !define WEBSITE_LINK "https://bitbucket.org/dismine/valentina"
   !define PUBLISHER "Roman Telezhinsky"

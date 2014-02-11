@@ -1,5 +1,5 @@
-valentina (0.2.1) saucy; urgency=low
+valentina (0.2.2) saucy; urgency=low
 
-  * Change version number
+  * Add new dependions qttools5-dev-tools 
 
  -- Roman Telezhinsky <dismine@gmail.com>  Mon, 10 Feb 2014 09:23:59 +0200

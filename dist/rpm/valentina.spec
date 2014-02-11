@@ -10,7 +10,7 @@ BuildRequires:  pkgconfig(Qt5Core) libqt5-qttools >= 5.0.0 libQtSvg-devel >= 5.0
 BuildRequires:  libqt5-qtbase-devel >= 5.0.0 libqt5-qttools >= 5.0.0 libQt5Svg-devel >= 5.0.0 ccache update-desktop-files
 %endif
 
-Version:	0.2.1
+Version:	0.2.2
 Release:	1
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
