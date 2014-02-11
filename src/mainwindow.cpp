@@ -925,7 +925,14 @@ bool MainWindow::Save()
     }
     else
     {
-        return SavePattern(curFile);
+        bool result = SavePattern(curFile);
+        if (result)
+        {
+            QString autofile = curFile +".autosave";
+            QFile file(autofile);
+            file.remove();
+        }
+        return result;
     }
 }
 
@@ -1222,9 +1229,11 @@ bool MainWindow::SavePattern(const QString &fileName)
     if (result)
     {
         tempFile.remove();
-        setCurrentFile(fileName);
-        helpLabel->setText(tr("File saved"));
-        ui->actionSave->setEnabled(false);
+        if (tempInfo.suffix() != "autosave")
+        {
+            setCurrentFile(fileName);
+            helpLabel->setText(tr("File saved"));
+        }
     }
     return result;
 }
@@ -1233,7 +1242,8 @@ void MainWindow::AutoSavePattern()
 {
     if (curFile.isEmpty() == false && doc->isPatternModified() == true)
     {
-        if (Save() == false)
+        QString autofile = curFile +".autosave";
+        if (SavePattern(autofile) == false)
         {
             qWarning()<<tr("Can not save pattern")<<Q_FUNC_INFO;
         }
