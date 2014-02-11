@@ -53,7 +53,7 @@ public:
                     VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
                         :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
                           lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionEmptyParameter() Q_DECL_NOEXCEPT_EXPR(true) {}
+    virtual         ~VExceptionEmptyParameter() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message

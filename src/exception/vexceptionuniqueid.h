@@ -51,7 +51,7 @@ public:
                      */
                     VExceptionUniqueId(const VExceptionUniqueId &e)
                         :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionUniqueId() Q_DECL_NOEXCEPT_EXPR(true){}
+    virtual         ~VExceptionUniqueId() noexcept (true){}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message

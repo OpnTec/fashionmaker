@@ -1,4 +1,4 @@
-valentina (0.2+1hg20131126-ppa1-3) saucy; urgency=low
+valentina (0.2.2) saucy; urgency=low
 
   * Add new dependions qttools5-dev-tools 
 
