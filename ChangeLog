@@ -1,3 +1,9 @@
+# Version 0.2.2 Released February 11, 2014
+- Macros Q_DECL_NOEXCEPT_EXPR don't work in gcc 4.6.
+- Change in build dependency for deb package. Add new architecture for deb file.
+- Added spec file for rpm package.
+- Fix valentina.desktop.
+
 # Version 0.2.1 Released December 8, 2013
 - Problem with compilation in console in Ubuntu.
 - Problem with compilation on windows with msvc.

@@ -4,7 +4,7 @@
  
   !define MUI_PRODUCT "Valentina"
   !define MUI_FILE "valentina"
-  !define MUI_VERSION "0.2"
+  !define MUI_VERSION "0.2.2"
   !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
   CRCCheck On
  
