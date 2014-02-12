@@ -70,6 +70,16 @@ public:
      * @param value id
      */
     void             setSecondPoint(const qint64 &value);
+    /**
+     * @brief getTypeLine return type of line
+     * @return type
+     */
+    inline QString    getTypeLine() const {return typeLine;}
+    /**
+     * @brief setTypeLine set type of line
+     * @param value type
+     */
+    void              setTypeLine(const QString &value);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
@@ -99,6 +109,10 @@ private:
      * @brief secondPoint id second point
      */
     qint64           secondPoint;
+    /**
+     * @brief typeLine type of line
+     */
+    QString           typeLine;
 };
 
 #endif // DIALOGLINE_H

@@ -1100,8 +1100,9 @@ void VDomDocument::ParseLineElement(VMainGraphicsScene *scene, const QDomElement
         qint64 id = GetParametrId(domElement);
         qint64 firstPoint = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
         qint64 secondPoint = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+        QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
 
-        VToolLine::Create(id, firstPoint, secondPoint, scene, this, data, parse, Tool::FromFile);
+        VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Tool::FromFile);
     }
     catch (const VExceptionBadId &e)
     {

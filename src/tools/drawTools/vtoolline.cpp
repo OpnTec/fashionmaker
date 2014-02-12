@@ -32,9 +32,10 @@
 const QString VToolLine::TagName = QStringLiteral("line");
 
 VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
-                     const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                     const QString &typeLine, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
+    this->typeLine = typeLine;
     ignoreFullUpdate = true;
     //Line
     const VPointF *first = data->GeometricObject<const VPointF *>(firstPoint);
@@ -44,7 +45,7 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, widthHairLine/factor));
+    this->setPen(QPen(Qt::black, widthHairLine/factor, LineStyle()));
 
     if (typeCreation == Tool::FromGui)
     {
@@ -63,6 +64,7 @@ void VToolLine::setDialog()
     Q_CHECK_PTR(dialogTool);
     dialogTool->setFirstPoint(firstPoint);
     dialogTool->setSecondPoint(secondPoint);
+    dialogTool->setTypeLine(typeLine);
 }
 
 void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
@@ -72,10 +74,11 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocume
     Q_CHECK_PTR(dialogTool);
     qint64 firstPoint = dialogTool->getFirstPoint();
     qint64 secondPoint = dialogTool->getSecondPoint();
-    Create(0, firstPoint, secondPoint, scene, doc, data, Document::FullParse, Tool::FromGui);
+    QString typeLine = dialogTool->getTypeLine();
+    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
+void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint, const QString &typeLine,
                        VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -100,7 +103,7 @@ void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64
     VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if (parse == Document::FullParse)
     {
-        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeCreation);
+        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);
         Q_CHECK_PTR(line);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
@@ -140,7 +143,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
 }
@@ -156,6 +159,7 @@ void VToolLine::AddToFile()
     SetAttribute(domElement, AttrId, id);
     SetAttribute(domElement, AttrFirstPoint, firstPoint);
     SetAttribute(domElement, AttrSecondPoint, secondPoint);
+    SetAttribute(domElement, AttrTypeLine, typeLine);
 
     AddToCalculation(domElement);
 }
@@ -167,19 +171,20 @@ void VToolLine::RefreshDataInFile()
     {
         SetAttribute(domElement, AttrFirstPoint, firstPoint);
         SetAttribute(domElement, AttrSecondPoint, secondPoint);
+        SetAttribute(domElement, AttrTypeLine, typeLine);
     }
 }
 
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine/factor));
+    this->setPen(QPen(currentColor, widthMainLine/factor, LineStyle()));
 }
 
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
 }
 
 void VToolLine::RemoveReferens()
@@ -226,6 +231,7 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialogTool);
     SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
     SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
+    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
 }
 
 void VToolLine::RefreshGeometry()
@@ -233,11 +239,12 @@ void VToolLine::RefreshGeometry()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        firstPoint = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPoint = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        firstPoint = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+        secondPoint = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+        typeLine = doc->GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
     }
     const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
 }

@@ -6,68 +6,151 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>217</width>
-    <height>137</height>
+    <width>267</width>
+    <height>154</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Line</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>First point</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxFirstPoint"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Second point</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxSecondPoint"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>255</width>
+     <height>134</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>First point</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBoxFirstPoint">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Second point</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBoxSecondPoint">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Type of line</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBoxLineType">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Show line from first point to this point</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>comboBoxFirstPoint</tabstop>
   <tabstop>comboBoxSecondPoint</tabstop>
-  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

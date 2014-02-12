@@ -32,7 +32,7 @@
 #include <QPushButton>
 
 DialogLine::DialogLine(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0)
+    :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0), typeLine(QString())
 {
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -42,6 +42,7 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+    FillComboBoxTypeLine(ui->comboBoxLineType);
 
     number = 0;
 }
@@ -62,6 +63,12 @@ void DialogLine::setSecondPoint(const qint64 &value)
     }
 }
 
+void DialogLine::setTypeLine(const QString &value)
+{
+    typeLine = value;
+    SetupTypeLine(ui->comboBoxLineType, value);
+}
+
 void DialogLine::setFirstPoint(const qint64 &value)
 {
     firstPoint = value;
@@ -80,6 +87,7 @@ void DialogLine::DialogAccepted()
     firstPoint = qvariant_cast<qint64>(ui->comboBoxFirstPoint->itemData(index));
     index = ui->comboBoxSecondPoint->currentIndex();
     secondPoint = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
+    typeLine = GetTypeLine(ui->comboBoxLineType);
     DialogClosed(QDialog::Accepted);
 }
 

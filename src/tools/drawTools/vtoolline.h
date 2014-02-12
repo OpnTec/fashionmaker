@@ -47,11 +47,13 @@ public:
                   * @param id object id in container.
                   * @param firstPoint id first line point.
                   * @param secondPoint id second line point.
+                  * @param typeLine line type.
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
                  VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-                           qint64 secondPoint, const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                           qint64 secondPoint, const QString &typeLine, const Tool::Sources &typeCreation,
+                           QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -69,13 +71,14 @@ public:
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param firstPoint id first line point.
      * @param secondPoint id second line point.
+     * @param typeLine line type.
      * @param scene pointer to scene.
      * @param doc dom document container.
      * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint,
+    static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint, const QString &typeLine,
                         VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;

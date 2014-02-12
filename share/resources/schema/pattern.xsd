@@ -64,6 +64,7 @@
 																			     <xs:attribute name="id" type="xs:long" use="required"></xs:attribute>
 																			     <xs:attribute name="firstPoint" type="xs:long"></xs:attribute>
 																			     <xs:attribute name="secondPoint" type="xs:long"></xs:attribute>
+																			     <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
 																		   </xs:complexType>
 																     </xs:element> 
 																     <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
