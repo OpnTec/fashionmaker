@@ -52,6 +52,7 @@ private:
 
 class PatternPage : public QWidget
 {
+    Q_OBJECT
 public:
     PatternPage(QWidget *parent = 0);
     void      Apply();

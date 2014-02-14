@@ -2,6 +2,87 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="uk_UA">
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="52"/>
+        <source>Apply</source>
+        <translation>Застосовувати</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="54"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Відмінити</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="56"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ок</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="86"/>
+        <source>Config Dialog</source>
+        <translation>Діалог налаштувань</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="112"/>
+        <source>Configuration</source>
+        <translation>Налаштування</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/configdialog.cpp" line="119"/>
+        <source>Pattern</source>
+        <translation>Лекало</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigurationPage</name>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="57"/>
+        <source>Setup user interface language updated and will be used the next time start</source>
+        <translation>Налаштування мови інтерфейсу користувача оновлені і будуть застосовані наступного запуску</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="73"/>
+        <source>Save</source>
+        <translation>Зберегти</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="76"/>
+        <source>Auto-save modified pattern</source>
+        <translation>Авто збереження модифіковане лекало</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="81"/>
+        <source>Interval:</source>
+        <translation>Інтервал:</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="94"/>
+        <source>min</source>
+        <translation>хв</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="114"/>
+        <source>Language</source>
+        <translation>Мова</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="117"/>
+        <source>GUI language</source>
+        <translation>Мова інтерфейсу</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="165"/>
+        <source>Decimal separator parts</source>
+        <translation>Розділювач десяткової частини</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="168"/>
+        <source>With OS options (.)</source>
+        <translation>З параметрів ОС (.)</translation>
+    </message>
+</context>
+<context>
     <name>DialogAlongLine</name>
     <message>
         <location filename="../../src/dialogs/dialogalongline.ui" line="14"/>
@@ -1101,8 +1182,8 @@
     <message>
         <location filename="../../src/dialogs/dialogincrements.ui" line="120"/>
         <location filename="../../src/dialogs/dialogincrements.ui" line="200"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="321"/>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="354"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="319"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="352"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1167,7 +1248,7 @@
         <translation type="obsolete">Позначення %1</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogincrements.cpp" line="313"/>
+        <location filename="../../src/dialogs/dialogincrements.cpp" line="311"/>
         <source>Name_%1</source>
         <translation>Name_%1</translation>
     </message>
@@ -1196,17 +1277,27 @@
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogline.ui" line="29"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="44"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogline.ui" line="43"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="77"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogline.cpp" line="98"/>
+        <location filename="../../src/dialogs/dialogline.ui" line="110"/>
+        <source>Type of line</source>
+        <translation>Тип лінії</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogline.ui" line="129"/>
+        <source>Show line from first point to this point</source>
+        <translation>Показати лінію від першої точки до даної</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/dialogline.cpp" line="106"/>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
@@ -1797,7 +1888,7 @@
         <translation>Коефіцієнт кривизни кривої</translation>
     </message>
     <message>
-        <location filename="../../src/dialogs/dialogsplinepath.cpp" line="83"/>
+        <location filename="../../src/dialogs/dialogsplinepath.cpp" line="84"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -1976,6 +2067,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../../src/mainwindow.ui" line="14"/>
+        <location filename="../../src/mainwindow.cpp" line="1567"/>
         <source>Valentina</source>
         <translation>Valentina</translation>
     </message>
@@ -2117,38 +2209,35 @@
         <translation>Інструмент нова деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="672"/>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="obsolete">Файл</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="683"/>
         <source>Help</source>
-        <translation>Допомога</translation>
+        <translation type="obsolete">Допомога</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="690"/>
         <source>Pattern piece</source>
-        <translation>Креслення</translation>
+        <translation type="obsolete">Креслення</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="861"/>
+        <location filename="../../src/mainwindow.ui" line="871"/>
         <source>Details mode</source>
         <translation>Режим деталей</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="879"/>
-        <location filename="../../src/mainwindow.ui" line="882"/>
+        <location filename="../../src/mainwindow.ui" line="889"/>
+        <location filename="../../src/mainwindow.ui" line="892"/>
         <source>Pointer tools</source>
         <translation>Інструмент вказівник</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="891"/>
+        <location filename="../../src/mainwindow.ui" line="901"/>
         <source>New pattern piece</source>
         <translation>Нове креслення</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="894"/>
+        <location filename="../../src/mainwindow.ui" line="904"/>
         <source>Add new pattern piece</source>
         <translation>Додати нове креслення</translation>
     </message>
@@ -2193,114 +2282,173 @@
         <translation>Інструмент дуга.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="720"/>
+        <location filename="../../src/mainwindow.ui" line="672"/>
+        <source>&amp;File</source>
+        <translation>&amp;Файл</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="683"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Допомога</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="690"/>
+        <source>&amp;Pattern piece</source>
+        <translation>&amp;Креслення</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="721"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="734"/>
+        <location filename="../../src/mainwindow.ui" line="735"/>
         <source>toolBar_2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="746"/>
+        <location filename="../../src/mainwindow.ui" line="747"/>
         <source>toolBar_3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="762"/>
+        <location filename="../../src/mainwindow.ui" line="763"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="765"/>
+        <location filename="../../src/mainwindow.ui" line="766"/>
+        <source>&amp;New</source>
+        <translation>&amp;Новий</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="769"/>
         <source>Create a new pattern</source>
         <translation>Створити нове лекало</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="768"/>
+        <location filename="../../src/mainwindow.ui" line="772"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="778"/>
+        <location filename="../../src/mainwindow.ui" line="782"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="781"/>
+        <location filename="../../src/mainwindow.ui" line="785"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Відкрити</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="788"/>
         <source>Open file with pattern</source>
         <translation>Відкрити файл з лекалами</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="794"/>
+        <location filename="../../src/mainwindow.ui" line="801"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="797"/>
+        <location filename="../../src/mainwindow.ui" line="804"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Зберегти</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="807"/>
         <source>Save pattern</source>
         <translation>Зберегти лекало</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="800"/>
+        <location filename="../../src/mainwindow.ui" line="810"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="813"/>
-        <location filename="../../src/mainwindow.cpp" line="957"/>
+        <location filename="../../src/mainwindow.ui" line="823"/>
+        <source>Save &amp;As...</source>
+        <translation>Зберегти &amp;як...</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="993"/>
+        <source>Options...</source>
+        <translation>Нашатування...</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="913"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="816"/>
+        <location filename="../../src/mainwindow.ui" line="826"/>
         <source>Save not yet saved pattern</source>
         <translation>Зберегти ще не збережене лекало</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="819"/>
+        <location filename="../../src/mainwindow.ui" line="829"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="837"/>
+        <location filename="../../src/mainwindow.ui" line="847"/>
         <source>Draw</source>
         <translation>Малювання</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="840"/>
+        <location filename="../../src/mainwindow.ui" line="850"/>
         <source>Draw mode</source>
         <translation>Режим малювання</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="843"/>
+        <location filename="../../src/mainwindow.ui" line="853"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="858"/>
+        <location filename="../../src/mainwindow.ui" line="868"/>
         <source>Details</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="864"/>
+        <location filename="../../src/mainwindow.ui" line="874"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="897"/>
+        <location filename="../../src/mainwindow.ui" line="907"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="906"/>
-        <location filename="../../src/mainwindow.ui" line="909"/>
+        <location filename="../../src/mainwindow.ui" line="916"/>
+        <location filename="../../src/mainwindow.ui" line="919"/>
         <source>Change the label of pattern piece</source>
         <translation>Змінити ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="975"/>
+        <location filename="../../src/mainwindow.ui" line="972"/>
+        <source>About &amp;Qt</source>
+        <translation>Про &amp;Qt</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="977"/>
+        <source>&amp;About Valentina</source>
+        <translation>&amp;Про Valentina</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="982"/>
+        <source>E&amp;xit</source>
+        <translation>&amp;Вихід</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="985"/>
+        <source>Exit the application</source>
+        <translation>Закрити програму</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="988"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
@@ -2313,61 +2461,58 @@
         <translation type="obsolete">Інструмент вказівник</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="921"/>
+        <location filename="../../src/mainwindow.ui" line="931"/>
         <source>Table of variables</source>
         <translation>Таблиця змінних</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="924"/>
+        <location filename="../../src/mainwindow.ui" line="934"/>
         <source>Tables of variables</source>
         <translation>Таблиці змінних</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="927"/>
+        <location filename="../../src/mainwindow.ui" line="937"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="939"/>
+        <location filename="../../src/mainwindow.ui" line="949"/>
         <source>History</source>
         <translation>Історія</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="942"/>
+        <location filename="../../src/mainwindow.ui" line="952"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="951"/>
+        <location filename="../../src/mainwindow.ui" line="961"/>
         <source>Layout</source>
         <translation>Розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="954"/>
+        <location filename="../../src/mainwindow.ui" line="964"/>
         <source>Create layout</source>
         <translation>Створити розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="957"/>
+        <location filename="../../src/mainwindow.ui" line="967"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="962"/>
-        <location filename="../../src/mainwindow.cpp" line="548"/>
+        <location filename="../../src/mainwindow.cpp" line="525"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="967"/>
-        <location filename="../../src/mainwindow.cpp" line="543"/>
+        <location filename="../../src/mainwindow.cpp" line="520"/>
         <source>About Valentina</source>
         <translation>Про Valentina</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="972"/>
         <source>Exit</source>
-        <translation>Вихід</translation>
+        <translation type="obsolete">Вихід</translation>
     </message>
     <message>
         <source>Drawing %1</source>
@@ -2382,105 +2527,102 @@
         <translation type="obsolete">Помилка створення креслення з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="274"/>
+        <location filename="../../src/mainwindow.cpp" line="249"/>
         <source>Error saving change!!!</source>
         <translation>Помилка збереження змін!!!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="321"/>
-        <location filename="../../src/mainwindow.cpp" line="343"/>
+        <location filename="../../src/mainwindow.cpp" line="296"/>
+        <location filename="../../src/mainwindow.cpp" line="318"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="332"/>
+        <location filename="../../src/mainwindow.cpp" line="307"/>
         <source>Select first point</source>
         <translation>Виберіть першу точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="355"/>
-        <location filename="../../src/mainwindow.cpp" line="366"/>
-        <location filename="../../src/mainwindow.cpp" line="454"/>
+        <location filename="../../src/mainwindow.cpp" line="330"/>
+        <location filename="../../src/mainwindow.cpp" line="341"/>
+        <location filename="../../src/mainwindow.cpp" line="429"/>
         <source>Select first point of line</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="377"/>
+        <location filename="../../src/mainwindow.cpp" line="352"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="388"/>
+        <location filename="../../src/mainwindow.cpp" line="363"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="399"/>
+        <location filename="../../src/mainwindow.cpp" line="374"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="421"/>
+        <location filename="../../src/mainwindow.cpp" line="396"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="432"/>
+        <location filename="../../src/mainwindow.cpp" line="407"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="116"/>
         <source>Create new pattern piece to start working.</source>
-        <translation>Створіть нове креслення для початку роботи.</translation>
+        <translation type="obsolete">Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="178"/>
+        <location filename="../../src/mainwindow.cpp" line="154"/>
         <source>Enter a label for the pattern piece.</source>
         <translation>Введить імя креслення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="193"/>
+        <location filename="../../src/mainwindow.cpp" line="169"/>
         <source>Error. Pattern piece of same label already exists.</source>
         <translation>Помилка. Креслення з таким імям уже існує.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="176"/>
-        <location filename="../../src/mainwindow.cpp" line="242"/>
+        <location filename="../../src/mainwindow.cpp" line="152"/>
+        <location filename="../../src/mainwindow.cpp" line="217"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="244"/>
+        <location filename="../../src/mainwindow.cpp" line="219"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введить нове ім&apos;я для креслення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="259"/>
+        <location filename="../../src/mainwindow.cpp" line="234"/>
         <source>Error. Pattern piece of same name already exists.</source>
         <translation>Помилка. Креслення з таким ім&apos;ям вже існує.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="274"/>
+        <location filename="../../src/mainwindow.cpp" line="249"/>
         <source>Can&apos;t save new label of pattern piece</source>
         <translation>Не можу зберегти нове ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="586"/>
         <source>The pattern has been modified.</source>
-        <translation>Лекало було зміненно.</translation>
+        <translation type="obsolete">Лекало було зміненно.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="587"/>
         <source>Do you want to save your changes?</source>
-        <translation>Ви хочете зберегти зміни?</translation>
+        <translation type="obsolete">Ви хочете зберегти зміни?</translation>
     </message>
     <message>
         <source>Growth: </source>
         <translation type="obsolete">Зріст:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="649"/>
+        <location filename="../../src/mainwindow.cpp" line="598"/>
         <source> Size: </source>
         <translation>Розмір:</translation>
     </message>
@@ -2497,33 +2639,46 @@
         <translation type="obsolete">Файл лекала (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="991"/>
         <source>Error saving file. Can&apos;t save file.</source>
-        <translation>Помилка збереження файлу. Не можу зберегти файл.</translation>
+        <translation type="obsolete">Помилка збереження файлу. Не можу зберегти файл.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1003"/>
+        <location filename="../../src/mainwindow.cpp" line="960"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1264"/>
-        <location filename="../../src/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/mainwindow.cpp" line="1149"/>
+        <source>Can&apos;t open pattern file %1:
+%2.</source>
+        <translation>Не можу відкрити файл лекала %1:
+%2.</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1155"/>
+        <source>Can&apos;t open schema file %1:
+%2.</source>
+        <translation>Не можу відкрити файл схеми %1:
+%2.</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1199"/>
+        <location filename="../../src/mainwindow.cpp" line="1509"/>
         <source>Error no unique id.</source>
         <translation>Помилка не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1275"/>
+        <location filename="../../src/mainwindow.cpp" line="1204"/>
         <source>Got empty file name.</source>
         <translation>Отримано пусте імя файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1303"/>
+        <location filename="../../src/mainwindow.cpp" line="1231"/>
         <source>Could not copy temp file to pattern file</source>
         <translation>Не можу копіювати тимчасовий файл до файлу лекала</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1314"/>
+        <location filename="../../src/mainwindow.cpp" line="1242"/>
         <source>Could not remove pattern file</source>
         <translation>Не можу видалити файл лекала</translation>
     </message>
@@ -2532,147 +2687,182 @@
         <translation type="obsolete">Не можу відкрити файл лекала. Пусте ім&apos;я файлу </translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="990"/>
-        <location filename="../../src/mainwindow.cpp" line="1263"/>
-        <location filename="../../src/mainwindow.cpp" line="1433"/>
-        <location filename="../../src/mainwindow.cpp" line="1449"/>
+        <location filename="../../src/mainwindow.cpp" line="1535"/>
+        <location filename="../../src/mainwindow.cpp" line="1551"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="465"/>
+        <location filename="../../src/mainwindow.cpp" line="440"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="173"/>
+        <location filename="../../src/mainwindow.cpp" line="149"/>
         <source>Pattern piece %1</source>
         <translation>Креслення %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="204"/>
+        <location filename="../../src/mainwindow.cpp" line="180"/>
         <source>Error creating pattern with the name </source>
         <translation>Помилка створення лекала з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="410"/>
+        <location filename="../../src/mainwindow.cpp" line="385"/>
         <source>Select simple curve</source>
         <translation>Виберіть просту криву</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="443"/>
+        <location filename="../../src/mainwindow.cpp" line="418"/>
         <source>Select curve path</source>
         <translation>Виберіть складну криву</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="480"/>
+        <location filename="../../src/mainwindow.cpp" line="455"/>
         <source>Select base point</source>
         <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="492"/>
+        <location filename="../../src/mainwindow.cpp" line="467"/>
         <source>Select first point of axis</source>
         <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="503"/>
+        <location filename="../../src/mainwindow.cpp" line="478"/>
         <source>Select point vertically</source>
         <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="513"/>
+        <location filename="../../src/mainwindow.cpp" line="488"/>
         <source>Select detail</source>
         <translation>Виберіть деталь</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="527"/>
+        <location filename="../../src/mainwindow.cpp" line="502"/>
         <source>Select arc</source>
         <translation>Виберіть дугу</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="539"/>
+        <location filename="../../src/mainwindow.cpp" line="516"/>
         <source>Based on Qt %2 (32 bit)</source>
         <translation>Базується на Qt %2 (32 bit)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="540"/>
+        <location filename="../../src/mainwindow.cpp" line="517"/>
         <source>Built on %3 at %4</source>
         <translation>Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="541"/>
+        <location filename="../../src/mainwindow.cpp" line="518"/>
         <source>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="634"/>
+        <location filename="../../src/mainwindow.cpp" line="583"/>
         <source>Height: </source>
         <translation>Зріст:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="673"/>
+        <location filename="../../src/mainwindow.cpp" line="621"/>
         <source>Pattern Piece: </source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="955"/>
-        <location filename="../../src/mainwindow.cpp" line="1002"/>
+        <location filename="../../src/mainwindow.cpp" line="903"/>
+        <location filename="../../src/mainwindow.cpp" line="950"/>
         <source>Pattern files (*.val)</source>
         <translation>Файл лекала (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="956"/>
+        <location filename="../../src/mainwindow.cpp" line="907"/>
+        <location filename="../../src/mainwindow.cpp" line="911"/>
         <source>/pattern.val</source>
         <translation>/викрійка.val</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1201"/>
-        <location filename="../../src/mainwindow.cpp" line="1465"/>
+        <location filename="../../src/mainwindow.cpp" line="1251"/>
+        <source>File saved</source>
+        <translation>Файл збережено</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1264"/>
+        <source>Can not save pattern</source>
+        <translation>Не можу зберегти лекало</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1278"/>
+        <source>untitled.val</source>
+        <translation>безімений.val</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1327"/>
+        <source>Unsaved change</source>
+        <translation>Незбережені зміни</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1327"/>
+        <source>The pattern has been modified.
+Do you want to save your changes?</source>
+        <translation>Лекало було змінено. Ви хочете зберегти ваші зміни?</translation>
+    </message>
+    <message>
+        <source>&amp;%1 %2</source>
+        <translation type="obsolete">&amp;%1 %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1567"/>
+        <source>Cannot read file %1:
+%2.</source>
+        <translation>Не можу прочитати файл%1:\n%2. </translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="1572"/>
+        <source>File loaded</source>
+        <translation>Файл завантажено</translation>
+    </message>
+    <message>
         <source>Can&apos;t open pattern file.</source>
-        <translation>Не можу відкрити файл викрійки.</translation>
+        <translation type="obsolete">Не можу відкрити файл викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1208"/>
         <source>Empty schema path.</source>
-        <translation>Пустий шлях до схеми.</translation>
+        <translation type="obsolete">Пустий шлях до схеми.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1216"/>
         <source>Can&apos;t open schema file.</source>
-        <translation>Не можу відкрити файл схеми.</translation>
+        <translation type="obsolete">Не можу відкрити файл схеми.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1356"/>
         <source>Can&apos;t open pattern file. File name is empty</source>
-        <translation>Не можу відкрити файл викрійки. Ім&apos;я файлу пусте</translation>
+        <translation type="obsolete">Не можу відкрити файл викрійки. Ім&apos;я файлу пусте</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1379"/>
+        <location filename="../../src/mainwindow.cpp" line="1481"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1386"/>
+        <location filename="../../src/mainwindow.cpp" line="1488"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1393"/>
+        <location filename="../../src/mainwindow.cpp" line="1495"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1400"/>
+        <location filename="../../src/mainwindow.cpp" line="1502"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1434"/>
+        <location filename="../../src/mainwindow.cpp" line="1536"/>
         <source>Parsing pattern file error.</source>
         <translation>Помилка парсингу файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1450"/>
+        <location filename="../../src/mainwindow.cpp" line="1552"/>
         <source>Validation file error.</source>
         <translation>Помилка валідації файлу.</translation>
     </message>
@@ -2681,10 +2871,51 @@
         <translation type="obsolete">Помилка парсінгу файлу лекала.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="1438"/>
-        <location filename="../../src/mainwindow.cpp" line="1454"/>
+        <location filename="../../src/mainwindow.cpp" line="1540"/>
+        <location filename="../../src/mainwindow.cpp" line="1556"/>
         <source>Error in line %1 column %2</source>
         <translation>Помилка в лінії %1 стовпчик %2</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="217"/>
+        <source>User</source>
+        <translation>Користувач</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="220"/>
+        <source>User name</source>
+        <translation>Ім&apos;я користувача</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="249"/>
+        <source>Graphical output</source>
+        <translation>Графічний вивід</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="252"/>
+        <source>Use antialiasing</source>
+        <translation>Використовувати згладжування</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="274"/>
+        <source>Undone</source>
+        <translation>Відмінити</translation>
+    </message>
+    <message>
+        <location filename="../../src/dialogs/pages.cpp" line="277"/>
+        <source>Count steps</source>
+        <translation>Кількість кроків</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="106"/>
+        <source>Create new pattern piece to start working.</source>
+        <translation>Створіть нове креслення для початку роботи.</translation>
     </message>
 </context>
 <context>
@@ -2831,12 +3062,12 @@
     <message>
         <location filename="../../src/tools/vabstracttool.cpp" line="214"/>
         <source>Confirm the deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтвердіть видалення.</translation>
     </message>
     <message>
         <location filename="../../src/tools/vabstracttool.cpp" line="215"/>
         <source>Do you really want delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете видалити?</translation>
     </message>
 </context>
 <context>
@@ -3020,52 +3251,52 @@
         <translation>Помилка створення чи оновлення точки розрізання дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1108"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1109"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1139"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1140"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1183"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1187"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1205"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1209"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1227"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1231"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1256"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1260"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1278"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1282"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1308"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1312"/>
         <source>Error creating or updating union details</source>
         <translation>Помилка створення чи оновлення об&apos;єднання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1327"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1331"/>
         <source>Error!</source>
         <translation>Помилка!</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1328"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1332"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
