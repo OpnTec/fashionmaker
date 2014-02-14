@@ -30,6 +30,7 @@
 #define OPTIONS_H
 
 #include <QFlags>
+#include <QString>
 
 #define SceneSize 50000
 
@@ -38,6 +39,8 @@
 #define toMM(pix) ((pix / PrintDPI) * 25.4)
 #define widthMainLine 1.2
 #define widthHairLine widthMainLine/3
+
+extern const QString translationsPath;
 
 namespace Scene
 {

@@ -31,6 +31,17 @@
 #include <QTextCodec>
 #include <QtCore>
 #include "tablewindow.h"
+#include "options.h"
+
+#ifdef Q_OS_WIN32
+    const QString translationsPath = QString("/translations");
+#else
+    #ifdef QT_DEBUG
+        const QString translationsPath = QString("/translations");
+    #else
+        const QString translationsPath = QString("/usr/share/valentina/translations");
+    #endif
+#endif
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -83,15 +94,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-#ifdef Q_OS_WIN32
-    appTranslator.load("valentina_" + checkedLocale, "./translations");
-#else
-    #ifdef QT_DEBUG
-        appTranslator.load("valentina_" + checkedLocale, "./translations");
-    #else
-        appTranslator.load("valentina_" + checkedLocale, "/usr/share/valentina/translations");
-    #endif
-#endif
+    appTranslator.load("valentina_" + checkedLocale, translationsPath);
     app.installTranslator(&appTranslator);   
 
     MainWindow w;
