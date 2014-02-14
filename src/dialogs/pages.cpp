@@ -223,9 +223,9 @@ QGroupBox *PatternPage::UserGroup()
     userName = new QLineEdit;
     Q_CHECK_PTR(userName);
 #ifdef Q_OS_WIN32
-    QString user = settings.value("pattern/user", getenv("USERNAME")).toString(&ok);
+    QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
-    QString user = settings.value("pattern/user", getenv("USER")).toString();
+    QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
 #endif
     userName->setText(user);
 
