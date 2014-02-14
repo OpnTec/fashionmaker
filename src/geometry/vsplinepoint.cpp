@@ -29,10 +29,37 @@
 #include "vsplinepoint.h"
 
 VSplinePoint::VSplinePoint()
-    :pSpline(VPointF()), angle(0), kAsm1(1), kAsm2(1){}
+    :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1){}
 
-VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle, qreal kAsm2)
-    :pSpline(pSpline), angle(angle), kAsm1(kAsm1), kAsm2(kAsm2){}
+VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
+    :pSpline(pSpline), angle1(0), angle2(180), kAsm1(kAsm1), kAsm2(kAsm2)
+{
+    if (qFuzzyCompare(qAbs(angle1-angle2), 180) == false)
+    {
+        qWarning()<<"angle1 and angle2 are not equal.";
+    }
+    SetAngle2(angle2);
+}
 
 VSplinePoint::VSplinePoint(const VSplinePoint &point)
-    :pSpline(point.P()), angle(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2()){}
+    :pSpline(point.P()), angle1(point.Angle1()), angle2(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2()){}
+
+void VSplinePoint::SetAngle1(const qreal &value)
+{
+    QLineF line(0, 0, 100, 0);
+    line.setAngle(value);
+    angle1 = line.angle();
+
+    line.setAngle(value+180);
+    angle2 = line.angle();
+}
+
+void VSplinePoint::SetAngle2(const qreal &value)
+{
+    QLineF line(0, 0, 100, 0);
+    line.setAngle(value);
+    angle2 = line.angle();
+
+    line.setAngle(value-180);
+    angle1 = line.angle();
+}

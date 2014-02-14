@@ -161,12 +161,12 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
 void VToolSplinePath::CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline)
 {
     VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePoint::FirstPoint);
-    p.SetAngle(spl.GetAngle1());
+    p.SetAngle2(spl.GetAngle1());
     p.SetKAsm2(spl.GetKasm1());
     splPath.UpdatePoint(indexSpline, SplinePoint::FirstPoint, p);
 
     p = splPath.GetSplinePoint(indexSpline, SplinePoint::LastPoint);
-    p.SetAngle(spl.GetAngle2()-180);
+    p.SetAngle2(spl.GetAngle2()-180);
     p.SetKAsm1(spl.GetKasm2());
     splPath.UpdatePoint(indexSpline, SplinePoint::LastPoint, p);
 }

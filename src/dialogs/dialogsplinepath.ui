@@ -76,9 +76,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxAngle1">
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle1">
            <property name="maximum">
-            <number>360</number>
+            <double>360.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -121,9 +121,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxAngle2">
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle2">
            <property name="maximum">
-            <number>360</number>
+            <double>360.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -200,9 +200,9 @@
  <tabstops>
   <tabstop>comboBoxPoint</tabstop>
   <tabstop>doubleSpinBoxKasm1</tabstop>
-  <tabstop>spinBoxAngle1</tabstop>
+  <tabstop>doubleSpinBoxAngle1</tabstop>
   <tabstop>doubleSpinBoxKasm2</tabstop>
-  <tabstop>spinBoxAngle2</tabstop>
+  <tabstop>doubleSpinBoxAngle2</tabstop>
   <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>buttonBox</tabstop>

@@ -1166,7 +1166,10 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
                         qint64 pSpline = GetParametrLongLong(element, VAbstractTool::AttrPSpline, "0");
                         VPointF p = *data->GeometricObject<const VPointF *>(pSpline);
 
-                        VSplinePoint splPoint(p, kAsm1, angle, kAsm2);
+                        QLineF line(0, 0, 100, 0);
+                        line.setAngle(angle+180);
+
+                        VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
                         path->append(splPoint);
                         if (parse == Document::FullParse)
                         {

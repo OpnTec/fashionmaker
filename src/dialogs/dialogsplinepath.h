@@ -73,10 +73,10 @@ public slots:
      */
     virtual void       DialogAccepted();
     /**
-     * @brief PointChenged selected another point in list
+     * @brief PointChanged selected another point in list
      * @param row number of row
      */
-    void               PointChenged(int row);
+    void               PointChanged(int row);
     /**
      * @brief currentPointChanged changed point in combo box
      * @param index index in list
@@ -86,12 +86,12 @@ public slots:
      * @brief Angle1Changed changed first angle
      * @param index index in list
      */
-    void               Angle1Changed( int index );
+    void               Angle1Changed(qreal index );
     /**
      * @brief Angle2Changed changed second angle
      * @param index index in list
      */
-    void               Angle2Changed( int index );
+    void               Angle2Changed( qreal index );
     /**
      * @brief KAsm1Changed changed first coefficient asymmetry
      * @param d value
@@ -116,10 +116,11 @@ private:
      * @brief NewItem add point to list
      * @param id id
      * @param kAsm1 first coefficient asymmetry
-     * @param angle angle in degree
+     * @param angle1 first angle in degree
      * @param kAsm2 second coefficient asymmetry
+     * @param angle2 second angle in degree
      */
-    void               NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2);
+    void               NewItem(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     /**
      * @brief dataPoint show data of point in fields
      * @param id id
@@ -133,11 +134,6 @@ private:
      * @brief EnableFields enable or disable fields
      */
     void               EnableFields();
-    /**
-     * @brief SetAngle set angle of point
-     * @param angle angle in degree
-     */
-    void               SetAngle(qint32 angle);
 };
 
 #endif // DIALOGSPLINEPATH_H

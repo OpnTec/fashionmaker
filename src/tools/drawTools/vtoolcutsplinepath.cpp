@@ -130,9 +130,10 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p1)
                     {
-                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1(), spl1.GetKasm1()));
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2()+180,
-                                                             spl2.GetKasm1());
+                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
+                                                      spl1.GetAngle1()));
+                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                             spl1.GetAngle2()+180, spl1.GetAngle2());
                         splPath1->append(cutPoint);
                         continue;
                     }
@@ -142,9 +143,11 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p2)
                     {
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1(), spl2.GetKasm1());
+                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180, spl2.GetKasm1(),
+                                                             spl2.GetAngle1());
                         splPath2->append(cutPoint);
-                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2()+180, splP2.KAsm2()));
+                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
+                                                      spl2.GetAngle2()+180));
                         continue;
                     }
                     splPath2->append(splPath->at(i));
@@ -184,9 +187,10 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p1)
                     {
-                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1(), spl1.GetKasm1()));
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2()+180,
-                                                             spl2.GetKasm1());
+                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
+                                                      spl1.GetAngle1()));
+                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                             spl2.GetKasm1(), spl1.GetAngle2()+180);
                         splPath1->append(cutPoint);
                         continue;
                     }
@@ -196,9 +200,11 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p2)
                     {
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1(), spl2.GetKasm1());
+                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180, spl2.GetKasm1(),
+                                                             spl2.GetAngle1());
                         splPath2->append(cutPoint);
-                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2()+180, splP2.KAsm2()));
+                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
+                                                      spl2.GetAngle2()+180));
                         continue;
                     }
                     splPath2->append(splPath->at(i));

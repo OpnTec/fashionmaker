@@ -38,18 +38,19 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
     ui->setupUi(this);
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogSplinePath::DialogAccepted);
+    bOk->setEnabled(false);
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     connect(bCansel, &QPushButton::clicked, this, &DialogSplinePath::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxPoint);
 
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChenged);
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
-    connect(ui->spinBoxAngle1,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxAngle1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::Angle1Changed);
-    connect(ui->spinBoxAngle2,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxAngle2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::Angle2Changed);
     connect(ui->doubleSpinBoxKasm1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::KAsm1Changed);
@@ -68,7 +69,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
-        NewItem(path[i].P().id(), path[i].KAsm1(), path[i].Angle2(), path[i].KAsm2());
+        NewItem(path[i].P().id(), path[i].KAsm1(), path[i].Angle1(), path[i].KAsm2(), path[i].Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
@@ -79,7 +80,7 @@ void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        NewItem(id, 1, 0, 1);
+        NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));
         this->show();
     }
@@ -98,7 +99,7 @@ void DialogSplinePath::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogSplinePath::PointChenged(int row)
+void DialogSplinePath::PointChanged(int row)
 {
     if (ui->listWidget->count() == 0)
     {
@@ -123,14 +124,26 @@ void DialogSplinePath::currentPointChanged(int index)
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::Angle1Changed(int index)
+void DialogSplinePath::Angle1Changed(qreal index)
 {
-    SetAngle(index+180);
+    qint32 row = ui->listWidget->currentRow();
+    QListWidgetItem *item = ui->listWidget->item( row );
+    Q_CHECK_PTR(item);
+    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    p.SetAngle1(index);
+    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
+    item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::Angle2Changed(int index)
+void DialogSplinePath::Angle2Changed(qreal index)
 {
-    SetAngle(index);
+    qint32 row = ui->listWidget->currentRow();
+    QListWidgetItem *item = ui->listWidget->item( row );
+    Q_CHECK_PTR(item);
+    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    p.SetAngle2(index);
+    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
+    item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
 void DialogSplinePath::KAsm1Changed(qreal d)
@@ -151,15 +164,21 @@ void DialogSplinePath::KAsm2Changed(qreal d)
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle, qreal kAsm2)
+void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
     const VPointF *point = data->GeometricObject<const VPointF *>(id);
     QListWidgetItem *item = new QListWidgetItem(point->name());
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VSplinePoint p(*point, kAsm1, angle, kAsm2);
-    DataPoint(point->id(), kAsm1, angle+180, kAsm2, angle);
+    VSplinePoint p(*point, kAsm1, angle1, kAsm2, angle2);
+    DataPoint(point->id(), kAsm1, angle1, kAsm2, angle2);
     item->setData(Qt::UserRole, QVariant::fromValue(p));
     ui->listWidget->addItem(item);
+    ui->listWidget->setCurrentItem(item);
+    if (ui->listWidget->count() >= 2)
+    {
+        bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        bOk->setEnabled(true);
+    }
     EnableFields();
 }
 
@@ -167,9 +186,9 @@ void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAs
 {
     disconnect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &DialogSplinePath::currentPointChanged);
-    disconnect(ui->spinBoxAngle1,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    disconnect(ui->doubleSpinBoxAngle1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
                this, &DialogSplinePath::Angle1Changed);
-    disconnect(ui->spinBoxAngle2,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    disconnect(ui->doubleSpinBoxAngle2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
                this, &DialogSplinePath::Angle2Changed);
     disconnect(ui->doubleSpinBoxKasm1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
                this, &DialogSplinePath::KAsm1Changed);
@@ -179,14 +198,14 @@ void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAs
     ChangeCurrentData(ui->comboBoxPoint, id);
     ui->doubleSpinBoxKasm1->setValue(kAsm1);
     ui->doubleSpinBoxKasm2->setValue(kAsm2);
-    ui->spinBoxAngle2->setValue(static_cast<qint32>(angle2));
-    ui->spinBoxAngle1->setValue(static_cast<qint32>(angle1));
+    ui->doubleSpinBoxAngle2->setValue(angle2);
+    ui->doubleSpinBoxAngle1->setValue(angle1);
 
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogSplinePath::currentPointChanged);
-    connect(ui->spinBoxAngle1,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxAngle1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::Angle1Changed);
-    connect(ui->spinBoxAngle2,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(ui->doubleSpinBoxAngle2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::Angle2Changed);
     connect(ui->doubleSpinBoxKasm1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::KAsm1Changed);
@@ -197,30 +216,20 @@ void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAs
 void DialogSplinePath::EnableFields()
 {
     ui->doubleSpinBoxKasm1->setEnabled(true);
-    ui->spinBoxAngle1->setEnabled(true);
+    ui->doubleSpinBoxAngle1->setEnabled(true);
     ui->doubleSpinBoxKasm2->setEnabled(true);
-    ui->spinBoxAngle2->setEnabled(true);
+    ui->doubleSpinBoxAngle2->setEnabled(true);
     qint32 row = ui->listWidget->currentRow();
     if (row == 0)
     {
         ui->doubleSpinBoxKasm1->setEnabled(false);
-        ui->spinBoxAngle1->setEnabled(false);
+        ui->doubleSpinBoxAngle1->setEnabled(false);
         return;
     }
     if (row == ui->listWidget->count()-1)
     {
         ui->doubleSpinBoxKasm2->setEnabled(false);
-        ui->spinBoxAngle2->setEnabled(false);
+        ui->doubleSpinBoxAngle2->setEnabled(false);
         return;
     }
-}
-
-void DialogSplinePath::SetAngle(qint32 angle)
-{
-    qint32 row = ui->listWidget->currentRow();
-    QListWidgetItem *item = ui->listWidget->item( row );
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
-    p.SetAngle(angle);
-    DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
-    item->setData(Qt::UserRole, QVariant::fromValue(p));
 }

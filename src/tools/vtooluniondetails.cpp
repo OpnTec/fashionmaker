@@ -207,11 +207,11 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContai
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i-1).KAsm2()));
+                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
+                                                  splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2()+180,
-                                                  splinePath->at(i).KAsm2()));
+                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
+                                                  splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
                 }
                 while (k>=0)
                 {
@@ -364,11 +364,11 @@ void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, c
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1(),
-                                                  splinePath->at(i-1).KAsm2()));
+                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
+                                                  splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2()+180,
-                                                  splinePath->at(i).KAsm2()));
+                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
+                                                  splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
                 }
 
                 while (k>=0)
