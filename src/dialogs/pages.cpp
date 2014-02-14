@@ -89,6 +89,7 @@ QGroupBox *ConfigurationPage::SaveGroup()
     {
         autoTimeValue = 5;
     }
+    autoTime->setRange(1, 60);
     autoTime->setValue(autoTimeValue);
     autoTime->setSuffix(tr("min"));
 
@@ -142,6 +143,11 @@ QGroupBox *ConfigurationPage::LangGroup()
 
         langCombo->addItem(ico, lang, locale);
     }
+
+    QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg("en"));
+    QString lang = QLocale("en").nativeLanguageName();
+    langCombo->addItem(ico, lang, "en");
+
     // set default translators and language checked
     qint32 index = langCombo->findData(checkedLocale);
     if (index != -1)
