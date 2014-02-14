@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>144</width>
          <height>150</height>
         </rect>
        </property>
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -694,6 +694,8 @@
     <addaction name="actionTable"/>
     <addaction name="actionHistory"/>
     <addaction name="actionLayout"/>
+    <addaction name="separator"/>
+    <addaction name="actionOptions"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDrawing"/>
@@ -984,6 +986,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options...</string>
    </property>
   </action>
  </widget>

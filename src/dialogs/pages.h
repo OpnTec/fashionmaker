@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   pages.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   12 2, 2014
  **
  **  @brief
  **  @copyright
@@ -26,31 +26,43 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef PAGES_H
+#define PAGES_H
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutarc.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
-#include "dialoguniondetails.h"
-#include "dialogtriangle.h"
-#include "dialogpointofintersection.h"
-#include "configdialog.h"
+#include <QtWidgets>
 
-#endif // DIALOGS_H
+class ConfigurationPage : public QWidget
+{
+    Q_OBJECT
+public:
+    ConfigurationPage(QWidget *parent = 0);
+    void      Apply();
+public slots:
+    void      LangChenged();
+private:
+    Q_DISABLE_COPY(ConfigurationPage)
+    QCheckBox *autoSaveCheck;
+    QSpinBox  *autoTime;
+    QComboBox *langCombo;
+    QCheckBox *osOptionCheck;
+    bool      langChanged;
+    QGroupBox *SaveGroup();
+    QGroupBox *LangGroup();
+};
+
+class PatternPage : public QWidget
+{
+public:
+    PatternPage(QWidget *parent = 0);
+    void      Apply();
+private:
+    Q_DISABLE_COPY(PatternPage)
+    QLineEdit *userName;
+    QCheckBox *graphOutputCheck;
+    QSpinBox  *undoneCount;
+    QGroupBox *UserGroup();
+    QGroupBox *GraphOutputGroup();
+    QGroupBox *UndoneGroup();
+};
+
+#endif // PAGES_H

@@ -79,7 +79,8 @@ MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
       sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
       dialogTool(0), dialogHistory(0), comboBoxDraws(0), curFile(QString()), mode(Draw::Calculation),
-      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(0)
+      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(0),
+      autoSaveTimer(0)
 {
     CreateActions();
     CreateMenus();
@@ -131,11 +132,7 @@ MainWindow::MainWindow(QWidget *parent)
     doc->CreateEmptyFile();
     connect(doc, &VDomDocument::patternChanged, this, &MainWindow::PatternWasModified);
 
-    //Autosaving file each 5 minutes
-    QTimer *timer = new QTimer(this);
-    timer->setTimerType(Qt::VeryCoarseTimer);
-    connect(timer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
-    timer->start(300000);
+    InitAutoSave();
 
     ui->toolBox->setCurrentIndex(0);
 
@@ -513,11 +510,13 @@ void MainWindow::ClosedDialogCutArc(int result)
 
 void MainWindow::About()
 {
+    QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
+
     QString fullName = QString("Valentina %1").arg(APP_VERSION);
     QString qtBase(tr("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR));
-    QString buildOn(tr("Built on %3 at %4").arg(__DATE__).arg(__TIME__));
-    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(
-                buildOn).arg(WARRANTY);
+    QString buildOn(tr("Built on %3 at %4").arg(date.toString()).arg(__TIME__));
+    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(buildOn)
+            .arg(WARRANTY);
     QMessageBox::about(this, tr("About Valentina"), about);
 }
 
@@ -969,6 +968,15 @@ void MainWindow::Open()
     }
 }
 
+void MainWindow::Options()
+{
+    ConfigDialog dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        InitAutoSave();
+    }
+}
+
 void MainWindow::Clear()
 {
     setCurrentFile("");
@@ -1393,6 +1401,7 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
+    connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
@@ -1401,6 +1410,32 @@ void MainWindow::CreateActions()
         Q_CHECK_PTR(recentFileActs[i]);
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
+    }
+}
+
+void MainWindow::InitAutoSave()
+{
+    //Autosaving file each 5 minutes
+    delete autoSaveTimer;
+    autoSaveTimer = 0;
+
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    bool autoSave = settings.value("configuration/autosave/state", 1).toBool();
+    if (autoSave)
+    {
+        bool ok = true;
+        qint32 autoTime = settings.value("configuration/autosave/time", 5).toInt(&ok);
+        if (ok == false)
+        {
+            autoTime = 5;
+        }
+
+        autoSaveTimer = new QTimer(this);
+        Q_CHECK_PTR(autoSaveTimer);
+        autoSaveTimer->setTimerType(Qt::VeryCoarseTimer);
+        connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
+        autoSaveTimer->start(autoTime*60000);
     }
 }
 

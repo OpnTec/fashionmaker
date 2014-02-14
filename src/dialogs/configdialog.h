@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   configdialog.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   12 2, 2014
  **
  **  @brief
  **  @copyright
@@ -26,31 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef CONFIGDIALOG_H
+#define CONFIGDIALOG_H
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutarc.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
-#include "dialoguniondetails.h"
-#include "dialogtriangle.h"
-#include "dialogpointofintersection.h"
-#include "configdialog.h"
+#include <QDialog>
+#include <QListWidget>
+#include "pages.h"
 
-#endif // DIALOGS_H
+class QListWidgetItem;
+class QStackedWidget;
+
+class ConfigDialog : public QDialog
+{
+    Q_OBJECT
+public:
+    explicit ConfigDialog(QWidget *parent = 0);
+public slots:
+    void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
+protected:
+    virtual void      closeEvent(QCloseEvent *event);
+private:
+    Q_DISABLE_COPY(ConfigDialog)
+    QListWidget       *contentsWidget;
+    QStackedWidget    *pagesWidget;
+    ConfigurationPage *configurationPage;
+    PatternPage       *patternPage;
+    void              createIcons();
+    void              Apply();
+    void              Ok();
+};
+
+#endif // CONFIGDIALOG_H

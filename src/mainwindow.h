@@ -101,6 +101,10 @@ public slots:
      */
     void               Open();
     /**
+     * @brief Options config dialog.
+     */
+    void               Options();
+    /**
      * @brief NewPattern create new empty pattern.
      */
     void               NewPattern();
@@ -460,6 +464,7 @@ private:
     enum { MaxRecentFiles = 5 };
     QAction            *recentFileActs[MaxRecentFiles];
     QAction            *separatorAct;
+    QTimer             *autoSaveTimer;
     /**
      * @brief ToolBarOption enable option toolbar.
      */
@@ -564,6 +569,7 @@ private:
     void               UpdateRecentFileActions();
     void               CreateMenus();
     void               CreateActions();
+    void               InitAutoSave();
 };
 
 #endif // MAINWINDOW_H

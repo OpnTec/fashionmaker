@@ -41,5 +41,14 @@
         <file>icon/32x32/splinePath_cut_point.png</file>
         <file>icon/32x32/union.png</file>
         <file>icon/32x32/arc_cut.png</file>
+        <file>icon/config.png</file>
+        <file>icon/pattern_config.png</file>
+        <file>icon/flags/cs.png</file>
+        <file>icon/flags/de.png</file>
+        <file>icon/flags/en.png</file>
+        <file>icon/flags/fr.png</file>
+        <file>icon/flags/he_IL.png</file>
+        <file>icon/flags/ru.png</file>
+        <file>icon/flags/uk.png</file>
     </qresource>
 </RCC>
