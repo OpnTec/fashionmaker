@@ -723,370 +723,368 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
-    if (type == VToolSinglePoint::ToolType)
-    {
-        VToolSinglePoint *spoint = 0;
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "A");
-            qreal x = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
-            qreal y = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-
-            data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-            VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
-            if (parse != Document::FullParse)
+    
+    VToolSinglePoint *spoint = 0;
+    
+    QStringList points;
+    points << VToolSinglePoint::ToolType << VToolEndLine::ToolType << VToolAlongLine::ToolType 
+           << VToolShoulderPoint::ToolType << VToolNormal::ToolType << VToolBisector::ToolType 
+           << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType << VNodePoint::ToolType 
+           << VToolHeight::ToolType << VToolTriangle::ToolType << VToolPointOfIntersection::ToolType 
+           << VToolCutSpline::ToolType << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
+    switch(points.indexOf(type)) {
+        case 0: //VToolSinglePoint::ToolType
+            try
             {
-                UpdateToolData(id, data);
-            }
-            if (parse == Document::FullParse)
-            {
-                spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
-                Q_CHECK_PTR(spoint);
-                scene->addItem(spoint);
-                connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-                connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-                tools[id] = spoint;
-            }
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            scene->removeItem(spoint);
-            delete spoint;
-            throw excep;
-        }
-    }
-    if (type == VToolEndLine::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-            qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
-            qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "A");
+                qreal x = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
+                qreal y = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
 
-            VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this, data, parse,
+                data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
+                VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
+                if (parse != Document::FullParse)
+                {
+                    UpdateToolData(id, data);
+                }
+                if (parse == Document::FullParse)
+                {
+                    spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
+                    Q_CHECK_PTR(spoint);
+                    scene->addItem(spoint);
+                    connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                    connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
+                    tools[id] = spoint;
+                }
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                scene->removeItem(spoint);
+                delete spoint;
+                throw excep;
+            }
+            break;
+        case 1: //VToolEndLine::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
+                qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
+
+                VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId, mx, my, scene, this, data, parse,
                                  Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolAlongLine::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 2: //VToolAlongLine::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-            VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this, data,
+                VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this, data,
                                    parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolShoulderPoint::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-            qint64 p1Line = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
-            qint64 p2Line = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
-            qint64 pShoulder = GetParametrLongLong(domElement, VAbstractTool::AttrPShoulder, "0");
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 3: //VToolShoulderPoint::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                qint64 p1Line = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
+                qint64 p2Line = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
+                qint64 pShoulder = GetParametrLongLong(domElement, VAbstractTool::AttrPShoulder, "0");
 
-            VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
+                VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
                                        data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolNormal::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
-            qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 4: //VToolNormal::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-            VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene, this,
+                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene, this,
                                 data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolBisector::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
-            qint64 thirdPointId = GetParametrLongLong(domElement, VAbstractTool::AttrThirdPoint, "0");
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 5: //VToolBisector::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                qint64 thirdPointId = GetParametrLongLong(domElement, VAbstractTool::AttrThirdPoint, "0");
 
-            VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine, name, mx, my, scene,
-                                  this, data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolLineIntersect::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            qint64 p1Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line1, "0");
-            qint64 p2Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line1, "0");
-            qint64 p1Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line2, "0");
-            qint64 p2Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line2, "0");
+                VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId, typeLine, name, mx, my, scene,
+                                        this, data, parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 6: //VToolLineIntersect::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                qint64 p1Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line1, "0");
+                qint64 p2Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line1, "0");
+                qint64 p1Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line2, "0");
+                qint64 p2Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line2, "0");
 
-            VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my, scene, this, data,
-                                       parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of lineintersection"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolPointOfContact::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
-            qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name, mx, my, scene, this, data,
+                                            parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of lineintersection"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 7: //VToolPointOfContact::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
+                qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-            VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
-                                        data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VNodePoint::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
-            const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
-                                                Draw::Modeling));
-            VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolHeight::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-            qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
-            qint64 p1LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
-            qint64 p2LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
+                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
+                                            data, parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 8: //VNodePoint::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+                qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
+                                                    Draw::Modeling));
+                VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 9: //VToolHeight::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+                qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
+                qint64 p1LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
+                qint64 p2LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
 
-            VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId, mx, my, scene, this, data, parse,
-                                Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating height"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolTriangle::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            qint64 axisP1Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP1, "0");
-            qint64 axisP2Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP2, "0");
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId, mx, my, scene, this, data, parse,
+                                    Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating height"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 10: //VToolTriangle::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                qint64 axisP1Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP1, "0");
+                qint64 axisP2Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP2, "0");
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-            VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this, data,
-                                  parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating triangle"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolPointOfIntersection::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-            qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this, data,
+                                        parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating triangle"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 11: //VToolPointOfIntersection::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
+                qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+    
+                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data, parse,
+                                                 Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 12: //VToolCutSpline::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                qint64 splineId = GetParametrLongLong(domElement, VToolCutSpline::AttrSpline, "0");
 
-            VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data, parse,
-                                             Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolCutSpline::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-            qint64 splineId = GetParametrLongLong(domElement, VToolCutSpline::AttrSpline, "0");
-
-            VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolCutSplinePath::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-            qint64 splinePathId = GetParametrLongLong(domElement, VToolCutSplinePath::AttrSplinePath, "0");
-
-            VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my, scene, this, data, parse,
-                                       Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolCutArc::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-            qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-            qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-            QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-            qint64 arcId = GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
-
-            VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
+                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 13: //VToolCutSplinePath::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                qint64 splinePathId = GetParametrLongLong(domElement, VToolCutSplinePath::AttrSplinePath, "0");
+    
+                VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my, scene, this, data, parse,
+                                        Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 14: //VToolCutArc::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
+                qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+                qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                qint64 arcId = GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
+    
+                VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        default:
+            qWarning() << "Illegal point type in VDomDocument::ParsePointElement().";
+            break;
     }
 }
 
@@ -1118,120 +1116,123 @@ void VDomDocument::ParseSplineElement(VMainGraphicsScene *scene, const QDomEleme
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
-    if (type == VToolSpline::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 point1 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint1, "0");
-            qint64 point4 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint4, "0");
-            qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
-            qreal angle2 = GetParametrDouble(domElement, VAbstractTool::AttrAngle2, "90.0");
-            qreal kAsm1 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm1, "1.0");
-            qreal kAsm2 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm2, "1.0");
-            qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
-
-            VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data, parse,
-                                Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating simple curve"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VToolSplinePath::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
-            VSplinePath *path = new VSplinePath(kCurve);
-            Q_CHECK_PTR(path);
-
-            QDomNodeList nodeList = domElement.childNodes();
-            qint32 num = nodeList.size();
-            for (qint32 i = 0; i < num; ++i)
+    
+    QStringList splines;
+    splines << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType << VNodeSplinePath::ToolType;
+    switch(splines.indexOf(type)) {
+        case 0: //VToolSpline::ToolType
+            try
             {
-                QDomElement element = nodeList.at(i).toElement();
-                if (element.isNull() == false)
+                qint64 id = GetParametrId(domElement);
+                qint64 point1 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint1, "0");
+                qint64 point4 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint4, "0");
+                qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
+                qreal angle2 = GetParametrDouble(domElement, VAbstractTool::AttrAngle2, "90.0");
+                qreal kAsm1 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm1, "1.0");
+                qreal kAsm2 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm2, "1.0");
+                qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
+
+                VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data, parse,Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating simple curve"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 1: //VToolSplinePath::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
+                VSplinePath *path = new VSplinePath(kCurve);
+                Q_CHECK_PTR(path);
+
+                QDomNodeList nodeList = domElement.childNodes();
+                qint32 num = nodeList.size();
+                for (qint32 i = 0; i < num; ++i)
                 {
-                    if (element.tagName() == VAbstractTool::AttrPathPoint)
+                    QDomElement element = nodeList.at(i).toElement();
+                    if (element.isNull() == false)
                     {
-                        qreal kAsm1 = GetParametrDouble(element, VAbstractTool::AttrKAsm1, "1.0");
-                        qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
-                        qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
-                        qint64 pSpline = GetParametrLongLong(element, VAbstractTool::AttrPSpline, "0");
-                        VPointF p = *data->GeometricObject<const VPointF *>(pSpline);
-
-                        QLineF line(0, 0, 100, 0);
-                        line.setAngle(angle+180);
-
-                        VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
-                        path->append(splPoint);
-                        if (parse == Document::FullParse)
+                        if (element.tagName() == VAbstractTool::AttrPathPoint)
                         {
-                            IncrementReferens(pSpline);
+                            qreal kAsm1 = GetParametrDouble(element, VAbstractTool::AttrKAsm1, "1.0");
+                            qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
+                            qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
+                            qint64 pSpline = GetParametrLongLong(element, VAbstractTool::AttrPSpline, "0");
+                            VPointF p = *data->GeometricObject<const VPointF *>(pSpline);
+
+                            QLineF line(0, 0, 100, 0);
+                            line.setAngle(angle+180);
+
+                            VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                            path->append(splPoint);
+                            if (parse == Document::FullParse)
+                            {
+                                IncrementReferens(pSpline);
+                            }
                         }
                     }
                 }
-            }
 
-            VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VNodeSpline::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
-            VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
-            Q_CHECK_PTR(spl);
-            spl->setIdObject(idObject);
-            spl->setMode(Draw::Modeling);
-            data->UpdateGObject(id, spl);
-            VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating modeling simple curve"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VNodeSplinePath::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
-            VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
-            Q_CHECK_PTR(path);
-            path->setIdObject(idObject);
-            path->setMode(Draw::Modeling);
-            data->UpdateGObject(id, path);
-            VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating modeling curve path"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
+                VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 2: //VNodeSpline::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+                qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
+                Q_CHECK_PTR(spl);
+                spl->setIdObject(idObject);
+                spl->setMode(Draw::Modeling);
+                data->UpdateGObject(id, spl);
+                VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating modeling simple curve"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 3: //VNodeSplinePath::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+                qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
+                Q_CHECK_PTR(path);
+                path->setIdObject(idObject);
+                path->setMode(Draw::Modeling);
+                data->UpdateGObject(id, path);
+                VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating modeling curve path"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        default:
+            qWarning() << "Illegal spline type in VDomDocument::ParseSplineElement().";
+            break;
     }
 }
 
@@ -1241,48 +1242,55 @@ void VDomDocument::ParseArcElement(VMainGraphicsScene *scene, const QDomElement 
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
-    if (type == VToolArc::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
-            QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
-            QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
-            QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
 
-            VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
+    QStringList arcs;
+    arcs << VToolArc::ToolType << VNodeArc::ToolType;
 
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
-    }
-    if (type == VNodeArc::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-            qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
-            VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
-            Q_CHECK_PTR(arc);
-            arc->setIdObject(idObject);
-            arc->setMode(Draw::Modeling);
-            data->UpdateGObject(id, arc);
-            VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating modeling arc"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
+    switch(arcs.indexOf(type)) {
+        case 0: //VToolArc::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
+                QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
+                QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
+                QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
+
+                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
+
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 1: //VNodeArc::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
+                qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
+                Q_CHECK_PTR(arc);
+                arc->setIdObject(idObject);
+                arc->setMode(Draw::Modeling);
+                data->UpdateGObject(id, arc);
+                VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating modeling arc"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        default:
+            qWarning() << "Illegal arc type in VDomDocument::ParseArcElement().";
+            break;
     }
 }
 
@@ -1292,27 +1300,35 @@ void VDomDocument::ParseToolsElement(VMainGraphicsScene *scene, const QDomElemen
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
-    if (type == VToolUnionDetails::ToolType)
-    {
-        try
-        {
-            qint64 id = GetParametrId(domElement);
-            qint64 indexD1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD1, "-1");
-            qint64 indexD2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD2, "-1");
+    
+    QStringList tools;
+    tools << VToolUnionDetails::ToolType;
+    
+    switch(tools.indexOf(type)) {
+        case 0: //VToolUnionDetails::ToolType
+            try
+            {
+                qint64 id = GetParametrId(domElement);
+                qint64 indexD1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD1, "-1");
+                qint64 indexD2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD2, "-1");
 
-            QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
+                QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
-            VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
-                                      Tool::FromFile);
+                VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
+                                        Tool::FromFile);
 
-            return;
-        }
-        catch (const VExceptionBadId &e)
-        {
-            VExceptionObjectError excep(tr("Error creating or updating union details"), domElement);
-            excep.AddMoreInformation(e.ErrorMessage());
-            throw excep;
-        }
+                return;
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating union details"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        default:
+            qWarning() << "Illegal tools type in VDomDocument::ParseToolsElement().";
+            break;
     }
 }
 
