@@ -724,7 +724,6 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
     
-    VToolSinglePoint *spoint = 0;
     
     QStringList points;
     points << VToolSinglePoint::ToolType << VToolEndLine::ToolType << VToolAlongLine::ToolType 
@@ -734,6 +733,8 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
            << VToolCutSpline::ToolType << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
     switch(points.indexOf(type)) {
         case 0: //VToolSinglePoint::ToolType
+        {
+            VToolSinglePoint *spoint = 0;
             try
             {
                 qint64 id = GetParametrId(domElement);
@@ -769,6 +770,7 @@ void VDomDocument::ParsePointElement(VMainGraphicsScene *scene, const QDomElemen
                 throw excep;
             }
             break;
+        }
         case 1: //VToolEndLine::ToolType
             try
             {
