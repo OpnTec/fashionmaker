@@ -166,6 +166,8 @@ void TableWindow::saveScene()
     extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
     extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
     extByMessage[ tr("Images (*.png)") ] = ".png";
+    extByMessage[ tr("PS files (*.ps)") ] = ".ps";
+    extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
 
     QString saveMessage;
     QMapIterator<QString, QString> i(extByMessage);
@@ -191,7 +193,8 @@ void TableWindow::saveScene()
 
     // what if the users did not specify a suffix...?
     QFileInfo f( name );
-    if (f.suffix().isEmpty() && f.suffix() != "svg" && f.suffix() != "png" && f.suffix() != "pdf")
+    if (f.suffix().isEmpty() && f.suffix() != "svg" && f.suffix() != "png" && f.suffix() != "pdf"
+        && f.suffix() != "eps" && f.suffix() != "ps")
     {
         name += extByMessage[sf];
     }
@@ -220,7 +223,18 @@ void TableWindow::saveScene()
         PdfFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
     }
-
+    else if (fi.suffix() == "eps")
+    {
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+        EpsFile(name);
+        paper->setPen(QPen(Qt::black, widthMainLine));
+    }
+    else if (fi.suffix() == "ps")
+    {
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+        PsFile(name);
+        paper->setPen(QPen(Qt::black, widthMainLine));
+    }
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
     tableScene->setBackgroundBrush( *brush );
@@ -459,4 +473,50 @@ void TableWindow::PdfFile(const QString &name) const
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
+}
+
+void TableWindow::EpsFile(const QString &name) const
+{
+    QTemporaryFile tmp;
+    if (tmp.open()) {
+        QProcess proc;
+        QString program;
+        QStringList params;
+        
+        PdfFile(tmp.fileName());
+
+#ifdef Q_OS_WIN32
+        program = "pdftops.exe";
+#else
+        program = "pdftops";
+#endif        
+        params << "-eps" << tmp.fileName() << name;
+        
+        proc.start(program,params);
+        proc.waitForFinished();
+        qDebug() << proc.errorString();
+    } 
+}
+
+void TableWindow::PsFile(const QString &name) const
+{
+    QTemporaryFile tmp;
+    if (tmp.open()) {
+        QProcess proc;
+        QString program;
+        QStringList params;
+        
+        PdfFile(tmp.fileName());
+
+#ifdef Q_OS_WIN32
+        program = "pdftops.exe";
+#else
+        program = "pdftops";
+#endif        
+        params << tmp.fileName() << name;
+        
+        proc.start(program,params);
+        proc.waitForFinished();
+        qDebug() << proc.errorString();
+    } 
 }

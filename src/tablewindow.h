@@ -204,10 +204,20 @@ private:
      */
     void PngFile(const QString &name)const;
     /**
-     * @brief PdfFile save layout to ps file.
+     * @brief PdfFile save layout to pdf file.
      * @param name name layout file.
      */
     void PdfFile(const QString &name)const;
+    /**
+     * @brief EpsFile save layout to eps file.
+     * @param name name layout file.
+     */
+    void EpsFile(const QString &name)const;
+    /**
+     * @brief PsFile save layout to ps file.
+     * @param name name layout file.
+     */
+    void PsFile(const QString &name)const;
 };
 
 #endif // TABLEWINDOW_H
