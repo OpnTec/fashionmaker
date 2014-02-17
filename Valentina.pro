@@ -121,7 +121,8 @@ QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${OBJECTS_DIR}/* \
                    $${UI_DIR}/* \
                    $${MOC_DIR}/* \
-                   $${RCC_DIR}/*
+                   $${RCC_DIR}/* \
+                   $$PWD/share/translations/valentina_*.qm
 
 unix {
 #VARIABLES
@@ -149,4 +150,38 @@ INSTALLS += target \
     desktop \
     pixmaps \
     translations
-}    
+}
+
+!isEmpty(TRANSLATIONS): {
+    for(_translation_name, TRANSLATIONS) {
+      _translation_name_qm = $$section(_translation_name,".", 0, 0).qm
+
+      system($$shell_path($$[QT_INSTALL_BINS]/lrelease) $$shell_path($$PWD/$$_translation_name) -qm $$shell_path($$PWD/$$_translation_name_qm))
+    }
+}
+
+# Copies the given files to the destination directory
+defineTest(copyToDestdir) {
+    files = $$1
+    DDIR = $$2
+    mkpath($$DDIR)
+
+    for(FILE, files) {
+
+        # Replace slashes in paths with backslashes for Windows
+        win32:FILE ~= s,/,\\,g
+        win32:DDIR ~= s,/,\\,g
+
+        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+    }
+
+    export(QMAKE_POST_LINK)
+}
+
+for(DIR, INSTALL_TRANSLATIONS) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     tr_path += $$PWD/$$DIR
+}
+
+copyToDestdir($$tr_path, $$shell_path($$OUT_PWD/$$DESTDIR/translations))

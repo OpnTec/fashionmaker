@@ -3035,127 +3035,127 @@ Do you want to save your changes?</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Details</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="757"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="765"/>
         <source>Error creating or updating single point</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Einzelpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="783"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="790"/>
         <source>Error creating or updating point of end line</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Punktes am Ende einer Linie</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="807"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="812"/>
         <source>Error creating or updating point along line</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Punktes auf einer Linie</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="832"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="835"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Schulterpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="857"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="858"/>
         <source>Error creating or updating point of normal</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Punktes einer Normalen</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="882"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="881"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Fehler beim Erstellen oder Aktualisieren einer Winkelhalbierenden</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="906"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="903"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Linienschnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="930"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="925"/>
         <source>Error creating or updating point of contact</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Berührungpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="952"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="945"/>
         <source>Error creating or updating modeling point</source>
         <translation>Fehler beim Erstellen oder Aktualisieren beim Modellieren eines Punktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="976"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="967"/>
         <source>Error creating or updating height</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der Größe</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1000"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="990"/>
         <source>Error creating or updating triangle</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Dreiecks</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1022"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1010"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Schnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1043"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1030"/>
         <source>Error creating or updating cut spline point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1065"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1050"/>
         <source>Error creating or updating cut spline path point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1086"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1069"/>
         <source>Error creating or updating cut arc point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1109"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1096"/>
         <source>Error creating or updating line</source>
         <translation>Fehler beim Erstellen oder Aktualisieren einer Linie</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1140"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1128"/>
         <source>Error creating or updating simple curve</source>
         <translation>Fehler beim Erstellen oder Aktualisieren einer einfachen Kurve</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1187"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1173"/>
         <source>Error creating or updating curve path</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Kurvenpfades</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1209"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1193"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Fehler beim Erstellen oder Aktuallisieren der Modellierung einer einfachen Kurve</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1231"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1213"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der Modellierung eines Kurvenpfades</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1260"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1248"/>
         <source>Error creating or updating simple arc</source>
         <translation>Fehler beim Erstellen oder Aktualsieren eines einfachen Bogens</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1282"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1268"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der Modellierung eines Bogens</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1312"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1304"/>
         <source>Error creating or updating union details</source>
         <translation>Fehler beim Vereinigen der Details</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1331"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1327"/>
         <source>Error!</source>
         <translation>Fehler!</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1332"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1328"/>
         <source>Error parsing file.</source>
         <translation>Fehler beim Parsen der Datei.</translation>
     </message>

@@ -3174,127 +3174,127 @@ Do you want to save your changes?</source>
         <translation>Ошибка создания или обновления детали</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="757"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="765"/>
         <source>Error creating or updating single point</source>
         <translation>Ошибка создания или обновления базовой точки</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="783"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="790"/>
         <source>Error creating or updating point of end line</source>
         <translation>Ошибка создания или обновления точки на конце линии</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="807"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="812"/>
         <source>Error creating or updating point along line</source>
         <translation>Ошибка создания или обновления точки вдоль линии</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="832"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="835"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Ошибка создания или обновления точки плеча</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="857"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="858"/>
         <source>Error creating or updating point of normal</source>
         <translation>Ошибка создания или обновления точки нормали</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="882"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="881"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Ошибка создания или обновления точки бисектрисы</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="906"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="903"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Ошибка создания или обновления точки пересичения линий</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="930"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="925"/>
         <source>Error creating or updating point of contact</source>
         <translation>Ошибка создания или обновления точки прикосновения</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="952"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="945"/>
         <source>Error creating or updating modeling point</source>
         <translation>Ошибка создания или обновления точки</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="976"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="967"/>
         <source>Error creating or updating height</source>
         <translation>Ошибка создания или обновления высоты</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1000"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="990"/>
         <source>Error creating or updating triangle</source>
         <translation>Ошибка создания или обновления треугольника</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1022"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1010"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Ошибка создания или обновления точки пересичения</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1043"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1030"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Ошибка создания или обновления точки разрезания сплайна</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1065"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1050"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Ошибка создания или обновления точки разрезания сложного сплайна</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1086"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1069"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Ошибка создания или обновления точки разрезания дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1109"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1096"/>
         <source>Error creating or updating line</source>
         <translation>Ошибка создания или обновления линии</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1140"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1128"/>
         <source>Error creating or updating simple curve</source>
         <translation>Ошибка создания или обновления кривой</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1187"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1173"/>
         <source>Error creating or updating curve path</source>
         <translation>Ошибка создания или обновления сложной кривой</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1209"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1193"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Ошибка создания или обновления модельной кривой</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1231"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1213"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Ошибка создания или обновления сложной модельной кривой</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1260"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1248"/>
         <source>Error creating or updating simple arc</source>
         <translation>Ошибка создания или обновления дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1282"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1268"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Ошибка создания или обновления модельной дуги</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1312"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1304"/>
         <source>Error creating or updating union details</source>
         <translation>Ошибка создания или обновления объединения деталей</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1331"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1327"/>
         <source>Error!</source>
         <translation>Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../src/xml/vdomdocument.cpp" line="1332"/>
+        <location filename="../../src/xml/vdomdocument.cpp" line="1328"/>
         <source>Error parsing file.</source>
         <translation>Ошибка парсинга файла.</translation>
     </message>

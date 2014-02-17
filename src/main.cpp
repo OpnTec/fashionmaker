@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 
     QTranslator appTranslator;
     appTranslator.load("valentina_" + checkedLocale, translationsPath);
-    app.installTranslator(&appTranslator);   
+    app.installTranslator(&appTranslator);
 
     MainWindow w;
     w.setWindowState(w.windowState() ^ Qt::WindowMaximized);
