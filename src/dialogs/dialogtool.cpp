@@ -214,22 +214,22 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const
 {
     switch(lineStyles.indexOf(box->currentText()))
     {
-        case 0:
+        case 0: //No line
             return VAbstractTool::TypeLineNone;
             break;
-        case 1:
+        case 1: //Line
             return VAbstractTool::TypeLineLine;
             break;
-        case 2:
+        case 2: //Dash Line
             return VAbstractTool::TypeLineDashLine;
             break;
-        case 3:
+        case 3: //Dot Line
             return VAbstractTool::TypeLineDotLine;
             break;
-        case 4:
+        case 4: //Dash Dot Line
             return VAbstractTool::TypeLineDashDotLine;
             break;
-        case 5:
+        case 5: //Dash Dot Dot Line
             return VAbstractTool::TypeLineDashDotDotLine;
             break;
         default:
