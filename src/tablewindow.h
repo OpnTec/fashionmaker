@@ -204,7 +204,7 @@ private:
      */
     void PngFile(const QString &name)const;
     /**
-     * @brief PsFile save layout to ps file.
+     * @brief PdfFile save layout to ps file.
      * @param name name layout file.
      */
     void PdfFile(const QString &name)const;
