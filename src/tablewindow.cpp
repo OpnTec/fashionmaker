@@ -207,34 +207,35 @@ void TableWindow::saveScene()
     QFileInfo fi( name );
     QStringList suffix;
     suffix << "svg" << "png" << "pdf" << "eps" << "ps";
-    switch (suffix.indexOf(fi.suffix())) {
-    case 0:
+    switch (suffix.indexOf(fi.suffix()))
+    {
+    case 0: //svg
         paper->setVisible(false);
         SvgFile(name);
         paper->setVisible(true);
         break;
-    case 1:
+    case 1: //png
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 2:
+    case 2: //pdf
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PdfFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 3:
+    case 3: //eps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 4:
+    case 4: //ps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
     default:
-        qWarning() << "Bad file suffix in TableWindow::saveScene().";
+        qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
         break;
     }
     brush->setColor( QColor( Qt::gray ) );
@@ -505,6 +506,7 @@ void TableWindow::PsFile(const QString &name) const
     }
 }
 
+//TODO delete parametr name and use last parameter in string list instead.
 void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
 {
     QProcess proc;
