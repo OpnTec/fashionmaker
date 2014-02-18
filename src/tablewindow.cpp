@@ -205,35 +205,37 @@ void TableWindow::saveScene()
     tableScene->clearSelection(); // Selections would also render to the file, so need delete them
     shadowPaper->setVisible(false);
     QFileInfo fi( name );
-    if (fi.suffix() == "svg")
-    {
+    QStringList suffix;
+    suffix << "svg" << "png" << "pdf" << "eps" << "ps";
+    switch (suffix.indexOf(fi.suffix())) {
+    case 0:
         paper->setVisible(false);
         SvgFile(name);
         paper->setVisible(true);
-    }
-    else if (fi.suffix() == "png")
-    {
+        break;
+    case 1:
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
-    }
-    else if (fi.suffix() == "pdf")
-    {
+        break;
+    case 2:
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PdfFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
-    }
-    else if (fi.suffix() == "eps")
-    {
+        break;
+    case 3:
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
-    }
-    else if (fi.suffix() == "ps")
-    {
+        break;
+    case 4:
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
+        break;
+    default:
+        qWarning() << "Bad file suffix in TableWindow::saveScene().";
+        break;
     }
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
@@ -492,9 +494,24 @@ void TableWindow::EpsFile(const QString &name) const
 #endif        
         params << "-eps" << tmp.fileName() << name;
         
-        proc.start(program,params);
-        proc.waitForFinished();
+#ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+        proc.start(program, params);
+        proc.waitForFinished(15000); 
+#ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+#endif
         qDebug() << proc.errorString();
+        
+        QFile F(name);
+        if(!F.exists())
+        {
+            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
+                        "Creating file '"+name+"' failed!",
+                        QMessageBox::Ok | QMessageBox::Default);
+            msgBox.exec();
+        }
     } 
 }
 
@@ -515,8 +532,23 @@ void TableWindow::PsFile(const QString &name) const
 #endif        
         params << tmp.fileName() << name;
         
-        proc.start(program,params);
-        proc.waitForFinished();
+#ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+        proc.start(program, params);
+        proc.waitForFinished(15000); 
+#ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+#endif
         qDebug() << proc.errorString();
+        
+        QFile F(name);
+        if(!F.exists())
+        {
+            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
+                        "Creating file '"+name+"' failed!",
+                        QMessageBox::Ok | QMessageBox::Default);
+            msgBox.exec();
+        }
     } 
 }
