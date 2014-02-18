@@ -480,75 +480,57 @@ void TableWindow::PdfFile(const QString &name) const
 void TableWindow::EpsFile(const QString &name) const
 {
     QTemporaryFile tmp;
-    if (tmp.open()) {
-        QProcess proc;
-        QString program;
-        QStringList params;
-        
+    if (tmp.open())
+    {
         PdfFile(tmp.fileName());
 
-#ifdef Q_OS_WIN32
-        program = "pdftops.exe";
-#else
-        program = "pdftops";
-#endif        
+        QStringList params;
         params << "-eps" << tmp.fileName() << name;
-        
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
-        proc.start(program, params);
-        proc.waitForFinished(15000); 
-#ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-#endif
-        qDebug() << proc.errorString();
-        
-        QFile F(name);
-        if(!F.exists())
-        {
-            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
-                        "Creating file '"+name+"' failed!",
-                        QMessageBox::Ok | QMessageBox::Default);
-            msgBox.exec();
-        }
+
+        PdfToPs(name, params);
     } 
 }
 
 void TableWindow::PsFile(const QString &name) const
 {
     QTemporaryFile tmp;
-    if (tmp.open()) {
-        QProcess proc;
-        QString program;
-        QStringList params;
-        
+    if (tmp.open())
+    {
         PdfFile(tmp.fileName());
 
-#ifdef Q_OS_WIN32
-        program = "pdftops.exe";
-#else
-        program = "pdftops";
-#endif        
+        QStringList params;
         params << tmp.fileName() << name;
-        
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+        PdfToPs(name, params);
+    }
+}
+
+void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
+{
+    QProcess proc;
+    QString program;
+
+#ifdef Q_OS_WIN32
+    program = "pdftops.exe";
+#else
+    program = "pdftops";
 #endif
-        proc.start(program, params);
-        proc.waitForFinished(15000); 
+
 #ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        qDebug() << proc.errorString();
-        
-        QFile F(name);
-        if(!F.exists())
-        {
-            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
-                        "Creating file '"+name+"' failed!",
-                        QMessageBox::Ok | QMessageBox::Default);
-            msgBox.exec();
-        }
-    } 
+    proc.start(program, params);
+    proc.waitForFinished(15000);
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+    qDebug() << proc.errorString();
+
+    QFile f(name);
+    if (!f.exists())
+    {
+        QMessageBox msgBox(QMessageBox::Critical, "Critical error!", "Creating file '"+name+"' failed!",
+                    QMessageBox::Ok | QMessageBox::Default);
+        msgBox.exec();
+    }
 }
