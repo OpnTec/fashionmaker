@@ -545,6 +545,12 @@ void MainWindow::OpenRecentFile()
     }
 }
 
+void MainWindow::PatternProperties()
+{
+    DialogPatternProperties proper(doc, this);
+    proper.exec();
+}
+
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -988,6 +994,7 @@ void MainWindow::Clear()
     comboBoxDraws->clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
+    ui->actionPattern_properties->setEnabled(false);
     SetEnableTool(false);
 }
 
@@ -1402,6 +1409,8 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
+    connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
+    ui->actionPattern_properties->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
@@ -1475,6 +1484,7 @@ void MainWindow::LoadPattern(const QString &fileName)
                     #ifndef QT_NO_CURSOR
                         QApplication::restoreOverrideCursor();
                     #endif
+                        ui->actionPattern_properties->setEnabled(true);
                 }
                 catch (const VExceptionObjectError &e)
                 {

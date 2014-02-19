@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   dialogpatternproperties.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   18 2, 2014
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef DIALOGPATTERNPROPERTIES_H
+#define DIALOGPATTERNPROPERTIES_H
 
-#include "dialogalongline.h"
-#include "dialogarc.h"
-#include "dialogbisector.h"
-#include "dialogdetail.h"
-#include "dialogendline.h"
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "dialogline.h"
-#include "dialoglineintersect.h"
-#include "dialognormal.h"
-#include "dialogpointofcontact.h"
-#include "dialogshoulderpoint.h"
-#include "dialogsinglepoint.h"
-#include "dialogspline.h"
-#include "dialogsplinepath.h"
-#include "dialogheight.h"
-#include "dialogcutarc.h"
-#include "dialogcutspline.h"
-#include "dialogcutsplinepath.h"
-#include "dialoguniondetails.h"
-#include "dialogtriangle.h"
-#include "dialogpointofintersection.h"
-#include "configdialog.h"
-#include "dialogpatternproperties.h"
+#include <QDialog>
+#include "../xml/vdomdocument.h"
 
-#endif // DIALOGS_H
+namespace Ui {
+class DialogPatternProperties;
+}
+
+class DialogPatternProperties : public QDialog
+{
+    Q_OBJECT
+public:
+    DialogPatternProperties(VDomDocument *doc, QWidget *parent = 0);
+    virtual ~DialogPatternProperties();
+signals:
+    void         haveChange();
+public slots:
+    void         Apply();
+private:
+    Q_DISABLE_COPY(DialogPatternProperties)
+    Ui::DialogPatternProperties *ui;
+    VDomDocument *doc;
+    void         Write(const QString &tagName, const QString &text) const;
+};
+
+#endif // DIALOGPATTERNPROPERTIES_H

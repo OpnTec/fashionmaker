@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>137</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>137</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>137</width>
          <height>58</height>
         </rect>
        </property>
@@ -695,6 +695,7 @@
     <addaction name="actionHistory"/>
     <addaction name="actionLayout"/>
     <addaction name="separator"/>
+    <addaction name="actionPattern_properties"/>
     <addaction name="actionOptions"/>
    </widget>
    <addaction name="menuFile"/>
@@ -991,6 +992,11 @@
   <action name="actionOptions">
    <property name="text">
     <string>Options...</string>
+   </property>
+  </action>
+  <action name="actionPattern_properties">
+   <property name="text">
+    <string>Pattern properties</string>
    </property>
   </action>
  </widget>

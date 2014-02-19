@@ -362,6 +362,7 @@ public slots:
      */
     void               tableClosed();
     void               OpenRecentFile();
+    void               PatternProperties();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
