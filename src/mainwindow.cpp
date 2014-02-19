@@ -1382,19 +1382,6 @@ void MainWindow::CreateMenus()
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-        //If there is no default working icon theme then we should
-        //use an icon theme that we provide via a .qrc file
-        //This case happens under Windows and Mac OS X
-        //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
-        ui->actionNew->setIcon(QIcon::fromTheme("document-new"));
-        ui->actionOpen->setIcon(QIcon::fromTheme("document-open"));
-        ui->actionSave->setIcon(QIcon::fromTheme("document-save"));
-        ui->actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
-    }
 
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
