@@ -367,8 +367,9 @@ signals:
     /**
      * @brief ModelChosen emit after calculation all details.
      * @param listDetails list of details.
+     * @param description pattern description.
      */
-    void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile);
+    void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile, const QString &description);
 protected:
     /**
      * @brief keyPressEvent handle key press events.

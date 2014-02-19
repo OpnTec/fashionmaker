@@ -63,8 +63,9 @@ public slots:
     /**
      * @brief ModelChosen show window when user want create new layout.
      * @param listDetails list of details.
+     * @param description pattern description.
      */
-    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
+    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description);
     /**
      * @brief StopTable stop creation layout.
      */
@@ -193,6 +194,10 @@ private:
      * @brief fileName keep name of pattern file.
      */
     QString               fileName;
+    /**
+     * @brief description pattern description
+     */
+    QString               description;
     /**
      * @brief SvgFile save layout to svg file.
      * @param name name layout file.

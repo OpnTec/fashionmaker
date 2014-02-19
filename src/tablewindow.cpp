@@ -37,7 +37,7 @@ TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
     paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
-    indexDetail(0), sceneRect(QRectF()), fileName(QString())
+    indexDetail(0), sceneRect(QRectF()), fileName(QString()), description(QString())
 {
     ui->setupUi(this);
     numberDetal = new QLabel(tr("0 details left."), this);
@@ -118,10 +118,13 @@ void TableWindow::AddDetail()
 /*
  * Get details for creation layout.
  */
-void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName)
+void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description)
 {
-    this->fileName = fileName;
-    this->fileName.remove(this->fileName.size()-4, 4);
+    this->description = description;
+
+    QFileInfo fi( fileName );
+    this->fileName = fi.baseName();
+
     this->listDetails = listDetails;
     listOutItems = new QBitArray(this->listDetails.count());
     AddPaper();
@@ -422,11 +425,9 @@ void TableWindow::SvgFile(const QString &name) const
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
-    generator.setTitle(tr("SVG Generator Example Drawing"));
-    generator.setDescription(tr("An SVG drawing created by the SVG Generator "
-                               "Example provided with Qt."));
+    generator.setTitle("Valentina pattern");
+    generator.setDescription(description);
     generator.setResolution(PrintDPI);
-    qDebug()<<"resolution is" << generator.resolution();
     QPainter painter;
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
