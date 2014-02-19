@@ -186,7 +186,7 @@ void TableWindow::saveScene()
 
     QString sf;
     // the save function
-    QString dir = QDir::homePath()+fileName;
+    QString dir = QDir::homePath()+"/"+fileName;
     QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), dir, saveMessage, &sf);
 
     if (name.isEmpty())

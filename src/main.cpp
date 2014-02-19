@@ -94,7 +94,15 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-    appTranslator.load("valentina_" + checkedLocale, translationsPath);
+#ifdef Q_OS_WIN32
+    appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+#else
+    #ifdef QT_DEBUG
+        appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+    #else
+        appTranslator.load("valentina_" + checkedLocale, translationsPath);
+    #endif
+#endif
     app.installTranslator(&appTranslator);
 
     MainWindow w;
