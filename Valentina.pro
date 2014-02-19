@@ -124,6 +124,13 @@ QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${RCC_DIR}/* \
                    $$PWD/share/translations/valentina_*.qm
 
+INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
+                        share/translations/valentina_uk.qm \
+                        share/translations/valentina_de.qm \
+                        share/translations/valentina_cs.qm \
+                        share/translations/valentina_he_IL.qm \
+                        share/translations/valentina_fr.qm
+
 unix {
 #VARIABLES
 isEmpty(PREFIX) {
@@ -138,12 +145,6 @@ desktop.path = $$DATADIR/applications/
 desktop.files += dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
 pixmaps.files += dist/$${TARGET}.png
-INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
-                        share/translations/valentina_uk.qm \
-                        share/translations/valentina_de.qm \
-                        share/translations/valentina_cs.qm \
-                        share/translations/valentina_he_IL.qm \
-                        share/translations/valentina_fr.qm
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 INSTALLS += target \
@@ -169,9 +170,10 @@ defineTest(copyToDestdir) {
     for(FILE, files) {
 
         # Replace slashes in paths with backslashes for Windows
-        win32:FILE ~= s,/,\\,g
-        win32:DDIR ~= s,/,\\,g
-
+        win32{
+            FILE ~= s,/,\\,g
+            DDIR ~= s,/,\\,g
+        }
         QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
     }
 
