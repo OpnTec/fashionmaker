@@ -33,7 +33,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="lineEditName"/>
      </item>
     </layout>
    </item>
@@ -53,7 +53,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="comboBoxTables"/>
      </item>
     </layout>
    </item>

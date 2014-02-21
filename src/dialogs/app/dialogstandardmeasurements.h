@@ -38,13 +38,20 @@ class DialogStandardMeasurements;
 class DialogStandardMeasurements : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit DialogStandardMeasurements(QWidget *parent = 0);
     ~DialogStandardMeasurements();
-
+    QString name() const;
+    QString tablePath() const;
 private:
+    Q_DISABLE_COPY(DialogStandardMeasurements)
     Ui::DialogStandardMeasurements *ui;
+    QString _name;
+    QString _tablePath;
+    void Accepted();
+    void Rejected();
+    void CheckState();
+    void LoadStandardTables();
 };
 
 #endif // DIALOGSTANDARDMEASUREMENTS_H

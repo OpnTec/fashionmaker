@@ -28,15 +28,108 @@
 
 #include "dialogstandardmeasurements.h"
 #include "ui_dialogstandardmeasurements.h"
+#include <QDir>
 
 DialogStandardMeasurements::DialogStandardMeasurements(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogStandardMeasurements)
+    QDialog(parent), ui(new Ui::DialogStandardMeasurements), _name(QString()), _tablePath(QString())
 {
     ui->setupUi(this);
+
+    {
+        const QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        Q_CHECK_PTR(bOk);
+        connect(bOk, &QPushButton::clicked, this, &DialogStandardMeasurements::Accepted);
+    }
+    {
+        const QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        Q_CHECK_PTR(bCansel);
+        connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::Rejected);
+    }
+
+    LoadStandardTables();
+
+    CheckState();
 }
 
 DialogStandardMeasurements::~DialogStandardMeasurements()
 {
     delete ui;
+}
+
+QString DialogStandardMeasurements::name() const
+{
+    return _name;
+}
+
+QString DialogStandardMeasurements::tablePath() const
+{
+    return _tablePath;
+}
+
+void DialogStandardMeasurements::Accepted()
+{
+    _name = ui->lineEditName->text();
+    _tablePath = "path";
+    accept();
+}
+
+void DialogStandardMeasurements::Rejected()
+{
+    _name = "";
+    _tablePath = "";
+    reject();
+}
+
+void DialogStandardMeasurements::CheckState()
+{
+    bool flagName = false;
+    if (ui->lineEditName->text().isEmpty() == false)
+    {
+        flagName = true;
+    }
+
+    bool flagTable = false;
+    {
+        const QComboBox *box = ui->comboBoxTables;
+        Q_CHECK_PTR(box);
+        if (box->count() > 0 && box->currentIndex() != -1)
+        {
+            flagTable = true;
+        }
+    }
+
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    Q_CHECK_PTR(bOk);
+    bOk->setEnabled(flagTable && flagName);
+}
+
+void DialogStandardMeasurements::LoadStandardTables()
+{
+#ifdef Q_OS_WIN32
+    const QString pathToTables = QString("/standard_tables");
+#else
+    #ifdef QT_DEBUG
+        const QString pathToTables = QString("/standard_tables");
+    #else
+        const QString pathToTables = QString("/usr/share/valentina/standard_tables");
+    #endif
+#endif
+    QDir tablesDir(pathToTables);
+    {
+        QStringList filters;
+        filters << "*.cpp";
+        tablesDir.setNameFilters(filters);
+    }
+    const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+    if (allFiles.isEmpty() == true)
+    {
+        ui->comboBoxTables->clear();
+        CheckState();
+        return;
+    }
+
+    for (int i = 0; i < allFiles.size(); ++i)
+    {
+
+    }
 }
