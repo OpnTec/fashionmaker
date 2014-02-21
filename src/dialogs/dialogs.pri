@@ -26,7 +26,8 @@ HEADERS += \
     src/dialogs/configdialog.h \
     src/dialogs/pages.h \
     src/dialogs/dialogpatternproperties.h \
-    src/dialogs/dialogmeasurements.h
+    src/dialogs/dialogmeasurements.h \
+    src/dialogs/dialogstandardmeasurements.h
 
 SOURCES += \
     src/dialogs/dialogtriangle.cpp \
@@ -55,7 +56,8 @@ SOURCES += \
     src/dialogs/configdialog.cpp \
     src/dialogs/pages.cpp \
     src/dialogs/dialogpatternproperties.cpp \
-    src/dialogs/dialogmeasurements.cpp
+    src/dialogs/dialogmeasurements.cpp \
+    src/dialogs/dialogstandardmeasurements.cpp
 
 FORMS += \
     src/dialogs/dialogtriangle.ui \
@@ -81,4 +83,5 @@ FORMS += \
     src/dialogs/dialoguniondetails.ui \
     src/dialogs/dialogcutarc.ui \
     src/dialogs/dialogpatternproperties.ui \
-    src/dialogs/dialogmeasurements.ui
+    src/dialogs/dialogmeasurements.ui \
+    src/dialogs/dialogstandardmeasurements.ui
