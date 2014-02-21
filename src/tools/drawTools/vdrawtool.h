@@ -33,7 +33,7 @@
 
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
-#include "../../dialogs/dialogtool.h"
+#include "../../dialogs/tools/dialogtool.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.

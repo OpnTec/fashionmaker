@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolline.h"
-#include "../../dialogs/dialogline.h"
+#include "../../dialogs/tools/dialogline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 

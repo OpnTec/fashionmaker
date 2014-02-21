@@ -28,13 +28,13 @@
 
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
-#include "../geometry/varc.h"
-#include "../geometry/vspline.h"
-#include "../geometry/vsplinepath.h"
-#include "../tools/vabstracttool.h"
-#include "../tools/drawTools/vtoolcutspline.h"
-#include "../tools/drawTools/vtoolcutsplinepath.h"
-#include "../tools/drawTools/vtoolcutarc.h"
+#include "../../geometry/varc.h"
+#include "../../geometry/vspline.h"
+#include "../../geometry/vsplinepath.h"
+#include "../../tools/vabstracttool.h"
+#include "../../tools/drawTools/vtoolcutspline.h"
+#include "../../tools/drawTools/vtoolcutsplinepath.h"
+#include "../../tools/drawTools/vtoolcutarc.h"
 #include <QDebug>
 #include <QPushButton>
 

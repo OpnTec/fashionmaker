@@ -28,7 +28,7 @@
 
 #include "vtoolshoulderpoint.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogshoulderpoint.h"
+#include "../../dialogs/tools/dialogshoulderpoint.h"
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 

@@ -29,8 +29,8 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
-#include "dialogtool.h"
-#include "../xml/vdomdocument.h"
+#include "../tools/dialogtool.h"
+#include "../../xml/vdomdocument.h"
 
 namespace Ui
 {

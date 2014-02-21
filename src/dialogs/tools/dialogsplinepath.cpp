@@ -28,7 +28,7 @@
 
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
-#include "../geometry/vsplinepoint.h"
+#include "../../geometry/vsplinepoint.h"
 
 #include <QPushButton>
 

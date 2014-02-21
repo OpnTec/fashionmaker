@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "dialogtool.h"
-#include "../container/calculator.h"
-#include "../geometry/vgobject.h"
-#include "../tools/vabstracttool.h"
+#include "../../container/calculator.h"
+#include "../../geometry/vgobject.h"
+#include "../../tools/vabstracttool.h"
 
 #include <QtWidgets>
 

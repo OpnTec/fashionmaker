@@ -35,7 +35,7 @@
 #include <QLabel>
 #include <QListWidgetItem>
 #include <QRadioButton>
-#include "../container/vcontainer.h"
+#include "../../container/vcontainer.h"
 
 namespace ComboMode
 {

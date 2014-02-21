@@ -30,7 +30,7 @@
 #define VTOOLUNIONDETAILS_H
 
 #include "vabstracttool.h"
-#include "../dialogs/dialoguniondetails.h"
+#include "../dialogs/tools/dialoguniondetails.h"
 
 /**
  * @brief The VToolUnionDetails class tool union details.

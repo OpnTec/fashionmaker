@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtooltriangle.h"
-#include "../../dialogs/dialogtriangle.h"
+#include "../../dialogs/tools/dialogtriangle.h"
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 

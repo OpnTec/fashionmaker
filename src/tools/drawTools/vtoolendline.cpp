@@ -29,7 +29,7 @@
 #include "vtoolendline.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogendline.h"
+#include "../../dialogs/tools/dialogendline.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 

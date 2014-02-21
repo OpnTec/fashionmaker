@@ -28,7 +28,7 @@
 
 #include "vtoolalongline.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogalongline.h"
+#include "../../dialogs/tools/dialogalongline.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 

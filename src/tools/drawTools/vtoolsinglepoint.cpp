@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolsinglepoint.h"
-#include "../../dialogs/dialogsinglepoint.h"
+#include "../../dialogs/tools/dialogsinglepoint.h"
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 

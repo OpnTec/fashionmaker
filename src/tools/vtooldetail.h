@@ -31,7 +31,7 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "../dialogs/dialogdetail.h"
+#include "../dialogs/tools/dialogdetail.h"
 
 /**
  * @brief The VToolDetail class for working with detail.

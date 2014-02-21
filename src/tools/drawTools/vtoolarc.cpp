@@ -28,7 +28,7 @@
 
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogarc.h"
+#include "../../dialogs/tools/dialogarc.h"
 
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");

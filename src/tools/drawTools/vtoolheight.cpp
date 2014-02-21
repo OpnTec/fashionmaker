@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolheight.h"
-#include "../../dialogs/dialogheight.h"
+#include "../../dialogs/tools/dialogheight.h"
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 

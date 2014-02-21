@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "pages.h"
-#include "../options.h"
+#include "../../options.h"
 
 ConfigurationPage::ConfigurationPage(QWidget *parent):
     QWidget(parent), autoSaveCheck(0), autoTime(0), langCombo(0), osOptionCheck(0), langChanged(false)

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolsplinepath.h"
-#include "../../dialogs/dialogsplinepath.h"
+#include "../../dialogs/tools/dialogsplinepath.h"
 
 const QString VToolSplinePath::TagName = QStringLiteral("spline");
 const QString VToolSplinePath::ToolType = QStringLiteral("path");

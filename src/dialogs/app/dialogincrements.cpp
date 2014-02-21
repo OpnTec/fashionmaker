@@ -28,9 +28,9 @@
 
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
-#include "../widgets/doubledelegate.h"
-#include "../widgets/textdelegate.h"
-#include "../exception/vexception.h"
+#include "../../widgets/doubledelegate.h"
+#include "../../widgets/textdelegate.h"
+#include "../../exception/vexception.h"
 
 #include <QPushButton>
 
