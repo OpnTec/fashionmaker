@@ -39,7 +39,7 @@ DialogPatternProperties::DialogPatternProperties(VDomDocument *doc, QWidget *par
 
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
     QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();

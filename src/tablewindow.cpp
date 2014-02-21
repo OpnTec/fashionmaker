@@ -513,7 +513,7 @@ void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
     QProcess proc;
     QString program;
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     program = "pdftops.exe";
 #else
     program = "pdftops";

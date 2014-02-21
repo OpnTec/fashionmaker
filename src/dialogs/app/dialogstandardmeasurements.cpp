@@ -105,7 +105,7 @@ void DialogStandardMeasurements::CheckState()
 
 void DialogStandardMeasurements::LoadStandardTables()
 {
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     const QString pathToTables = QString("/standard_tables");
 #else
     #ifdef QT_DEBUG

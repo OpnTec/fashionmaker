@@ -33,7 +33,7 @@
 #include "tablewindow.h"
 #include "options.h"
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     const QString translationsPath = QString("/translations");
 #else
     #ifdef QT_DEBUG
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
 #else
     #ifdef QT_DEBUG

@@ -222,7 +222,7 @@ QGroupBox *PatternPage::UserGroup()
 
     userName = new QLineEdit;
     Q_CHECK_PTR(userName);
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
     QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
