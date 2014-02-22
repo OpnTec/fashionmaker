@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogstandardmeasurements.h
+ **  @file   dialogindividualmeasurements.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   21 2, 2014
+ **  @date   22 2, 2014
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGSTANDARDMEASUREMENTS_H
-#define DIALOGSTANDARDMEASUREMENTS_H
+#ifndef DIALOGINDIVIDUALMEASUREMENTS_H
+#define DIALOGINDIVIDUALMEASUREMENTS_H
 
 #include <QDialog>
 
 namespace Ui {
-class DialogStandardMeasurements;
+class DialogIndividualMeasurements;
 }
 
-class DialogStandardMeasurements : public QDialog
+class DialogIndividualMeasurements : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit DialogStandardMeasurements(QWidget *parent = 0);
-    ~DialogStandardMeasurements();
-    QString name() const;
-    QString tablePath() const;
+    explicit DialogIndividualMeasurements(QWidget *parent = 0);
+    ~DialogIndividualMeasurements();
+    inline QString name() const {return _name;}
+    inline QString tablePath() const{return _tablePath;}
 private:
-    Q_DISABLE_COPY(DialogStandardMeasurements)
-    Ui::DialogStandardMeasurements *ui;
+    Q_DISABLE_COPY(DialogIndividualMeasurements)
+    Ui::DialogIndividualMeasurements *ui;
     QString _name;
     QString _tablePath;
     void DialogAccepted();
     void DialogRejected();
     void CheckState();
-    void LoadStandardTables();
 };
 
-#endif // DIALOGSTANDARDMEASUREMENTS_H
+#endif // DIALOGINDIVIDUALMEASUREMENTS_H

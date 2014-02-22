@@ -38,17 +38,18 @@ DialogStandardMeasurements::DialogStandardMeasurements(QWidget *parent) :
     {
         const QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
         Q_CHECK_PTR(bOk);
-        connect(bOk, &QPushButton::clicked, this, &DialogStandardMeasurements::Accepted);
+        connect(bOk, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogAccepted);
     }
     {
         const QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
         Q_CHECK_PTR(bCansel);
-        connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::Rejected);
+        connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogRejected);
     }
 
     LoadStandardTables();
 
     CheckState();
+    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogStandardMeasurements::CheckState);
 }
 
 DialogStandardMeasurements::~DialogStandardMeasurements()
@@ -66,14 +67,14 @@ QString DialogStandardMeasurements::tablePath() const
     return _tablePath;
 }
 
-void DialogStandardMeasurements::Accepted()
+void DialogStandardMeasurements::DialogAccepted()
 {
     _name = ui->lineEditName->text();
     _tablePath = "path";
     accept();
 }
 
-void DialogStandardMeasurements::Rejected()
+void DialogStandardMeasurements::DialogRejected()
 {
     _name = "";
     _tablePath = "";
