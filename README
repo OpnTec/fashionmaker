@@ -24,8 +24,12 @@ Prerequisites:
    * On Unix:
      - ccache
      - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended)
+     - xpdf package (tool pdftops). 
    * On Windows:
-     -  MinGW or Visual Studio
+     - MinGW or Visual Studio
+     - Xpdf is an open source viewer for Portable Document Format (PDF) 
+     files. Website http://www.foolabs.com/xpdf/. Put tool pdftops.exe 
+     in the same directory with Valentina's binary file.
 
 The installed toolchains have to match the one Qt was compiled with.
 

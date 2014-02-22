@@ -37,7 +37,7 @@ TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
     paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
-    indexDetail(0), sceneRect(QRectF()), fileName(QString())
+    indexDetail(0), sceneRect(QRectF()), fileName(QString()), description(QString())
 {
     ui->setupUi(this);
     numberDetal = new QLabel(tr("0 details left."), this);
@@ -118,10 +118,13 @@ void TableWindow::AddDetail()
 /*
  * Get details for creation layout.
  */
-void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName)
+void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description)
 {
-    this->fileName = fileName;
-    this->fileName.remove(this->fileName.size()-4, 4);
+    this->description = description;
+
+    QFileInfo fi( fileName );
+    this->fileName = fi.baseName();
+
     this->listDetails = listDetails;
     listOutItems = new QBitArray(this->listDetails.count());
     AddPaper();
@@ -183,7 +186,7 @@ void TableWindow::saveScene()
 
     QString sf;
     // the save function
-    QString dir = QDir::homePath()+fileName;
+    QString dir = QDir::homePath()+"/"+fileName;
     QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), dir, saveMessage, &sf);
 
     if (name.isEmpty())
@@ -207,34 +210,35 @@ void TableWindow::saveScene()
     QFileInfo fi( name );
     QStringList suffix;
     suffix << "svg" << "png" << "pdf" << "eps" << "ps";
-    switch (suffix.indexOf(fi.suffix())) {
-    case 0:
+    switch (suffix.indexOf(fi.suffix()))
+    {
+    case 0: //svg
         paper->setVisible(false);
         SvgFile(name);
         paper->setVisible(true);
         break;
-    case 1:
+    case 1: //png
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 2:
+    case 2: //pdf
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PdfFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 3:
+    case 3: //eps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
-    case 4:
+    case 4: //ps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
         paper->setPen(QPen(Qt::black, widthMainLine));
         break;
     default:
-        qWarning() << "Bad file suffix in TableWindow::saveScene().";
+        qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
         break;
     }
     brush->setColor( QColor( Qt::gray ) );
@@ -421,11 +425,9 @@ void TableWindow::SvgFile(const QString &name) const
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
-    generator.setTitle(tr("SVG Generator Example Drawing"));
-    generator.setDescription(tr("An SVG drawing created by the SVG Generator "
-                               "Example provided with Qt."));
+    generator.setTitle("Valentina pattern");
+    generator.setDescription(description);
     generator.setResolution(PrintDPI);
-    qDebug()<<"resolution is" << generator.resolution();
     QPainter painter;
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
@@ -480,75 +482,58 @@ void TableWindow::PdfFile(const QString &name) const
 void TableWindow::EpsFile(const QString &name) const
 {
     QTemporaryFile tmp;
-    if (tmp.open()) {
-        QProcess proc;
-        QString program;
-        QStringList params;
-        
+    if (tmp.open())
+    {
         PdfFile(tmp.fileName());
 
-#ifdef Q_OS_WIN32
-        program = "pdftops.exe";
-#else
-        program = "pdftops";
-#endif        
+        QStringList params;
         params << "-eps" << tmp.fileName() << name;
-        
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
-        proc.start(program, params);
-        proc.waitForFinished(15000); 
-#ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-#endif
-        qDebug() << proc.errorString();
-        
-        QFile F(name);
-        if(!F.exists())
-        {
-            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
-                        "Creating file '"+name+"' failed!",
-                        QMessageBox::Ok | QMessageBox::Default);
-            msgBox.exec();
-        }
+
+        PdfToPs(name, params);
     } 
 }
 
 void TableWindow::PsFile(const QString &name) const
 {
     QTemporaryFile tmp;
-    if (tmp.open()) {
-        QProcess proc;
-        QString program;
-        QStringList params;
-        
+    if (tmp.open())
+    {
         PdfFile(tmp.fileName());
 
-#ifdef Q_OS_WIN32
-        program = "pdftops.exe";
-#else
-        program = "pdftops";
-#endif        
+        QStringList params;
         params << tmp.fileName() << name;
-        
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+        PdfToPs(name, params);
+    }
+}
+
+//TODO delete parametr name and use last parameter in string list instead.
+void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
+{
+    QProcess proc;
+    QString program;
+
+#ifdef Q_OS_WIN32
+    program = "pdftops.exe";
+#else
+    program = "pdftops";
 #endif
-        proc.start(program, params);
-        proc.waitForFinished(15000); 
+
 #ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        qDebug() << proc.errorString();
-        
-        QFile F(name);
-        if(!F.exists())
-        {
-            QMessageBox msgBox(QMessageBox::Critical, "Critical error!",
-                        "Creating file '"+name+"' failed!",
-                        QMessageBox::Ok | QMessageBox::Default);
-            msgBox.exec();
-        }
-    } 
+    proc.start(program, params);
+    proc.waitForFinished(15000);
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+    qDebug() << proc.errorString();
+
+    QFile f(name);
+    if (!f.exists())
+    {
+        QMessageBox msgBox(QMessageBox::Critical, "Critical error!", "Creating file '"+name+"' failed!",
+                    QMessageBox::Ok | QMessageBox::Default);
+        msgBox.exec();
+    }
 }

@@ -94,8 +94,26 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-    appTranslator.load("valentina_" + checkedLocale, translationsPath);
+#ifdef Q_OS_WIN32
+    appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+#else
+    #ifdef QT_DEBUG
+        appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+    #else
+        appTranslator.load("valentina_" + checkedLocale, translationsPath);
+    #endif
+#endif
     app.installTranslator(&appTranslator);
+
+    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
+        //If there is no default working icon theme then we should
+        //use an icon theme that we provide via a .qrc file
+        //This case happens under Windows and Mac OS X
+        //This does not happen under GNOME or KDE
+        QIcon::setThemeName("win.icon.theme");
+    }
 
     MainWindow w;
     w.setWindowState(w.windowState() ^ Qt::WindowMaximized);

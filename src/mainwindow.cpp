@@ -545,6 +545,12 @@ void MainWindow::OpenRecentFile()
     }
 }
 
+void MainWindow::PatternProperties()
+{
+    DialogPatternProperties proper(doc, this);
+    proper.exec();
+}
+
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -988,6 +994,7 @@ void MainWindow::Clear()
     comboBoxDraws->clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
+    ui->actionPattern_properties->setEnabled(false);
     SetEnableTool(false);
 }
 
@@ -1085,7 +1092,8 @@ void MainWindow::ActionLayout(bool checked)
         QPainterPath path = VEquidistant().ContourPath(idetail.key(), pattern);
         listDetails.append(new VItem(path, listDetails.size()));
     }
-    emit ModelChosen(listDetails, curFile);
+    QString description = doc->UniqueTagText("description");
+    emit ModelChosen(listDetails, curFile, description);
 }
 
 void MainWindow::ClosedActionHistory()
@@ -1374,19 +1382,6 @@ void MainWindow::CreateMenus()
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-        //If there is no default working icon theme then we should
-        //use an icon theme that we provide via a .qrc file
-        //This case happens under Windows and Mac OS X
-        //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
-        ui->actionNew->setIcon(QIcon::fromTheme("document-new"));
-        ui->actionOpen->setIcon(QIcon::fromTheme("document-open"));
-        ui->actionSave->setIcon(QIcon::fromTheme("document-save"));
-        ui->actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
-    }
 
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
@@ -1402,6 +1397,8 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
+    connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
+    ui->actionPattern_properties->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
@@ -1475,6 +1472,7 @@ void MainWindow::LoadPattern(const QString &fileName)
                     #ifndef QT_NO_CURSOR
                         QApplication::restoreOverrideCursor();
                     #endif
+                        ui->actionPattern_properties->setEnabled(true);
                 }
                 catch (const VExceptionObjectError &e)
                 {

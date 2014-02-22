@@ -125,15 +125,25 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 
 void VDomDocument::CreateEmptyFile()
 {
-    QDomElement domElement = this->createElement("pattern");
+    QDomElement patternElement = this->createElement("pattern");
+    this->appendChild(patternElement);
 
-    this->appendChild(domElement);
     QDomComment info = this->createComment("Valentina pattern format.");
-    domElement.appendChild(info);
+    patternElement.appendChild(info);
     QDomNode xmlNode = this->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
     this->insertBefore(xmlNode, this->firstChild());
+
+    QDomElement authorElement = this->createElement("author");
+    patternElement.appendChild(authorElement);
+
+    QDomElement descElement = this->createElement("description");
+    patternElement.appendChild(descElement);
+
+    QDomElement notesElement = this->createElement("notes");
+    patternElement.appendChild(notesElement);
+
     QDomElement incrElement = this->createElement("increments");
-    domElement.appendChild(incrElement);
+    patternElement.appendChild(incrElement);
 }
 
 bool VDomDocument::CheckNameDraw(const QString& name) const
@@ -1362,6 +1372,28 @@ bool VDomDocument::isPatternModified() const
 void VDomDocument::setPatternModified(bool value)
 {
     patternModified = value;
+}
+
+QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal)
+{
+    QDomNodeList nodeList = this->elementsByTagName(tagName);
+    if (nodeList.isEmpty())
+    {
+        return defVal;
+    }
+    else
+    {
+        QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                return domElement.text();
+            }
+        }
+    }
+    return defVal;
 }
 
 

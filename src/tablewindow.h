@@ -63,8 +63,9 @@ public slots:
     /**
      * @brief ModelChosen show window when user want create new layout.
      * @param listDetails list of details.
+     * @param description pattern description.
      */
-    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName);
+    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description);
     /**
      * @brief StopTable stop creation layout.
      */
@@ -194,6 +195,10 @@ private:
      */
     QString               fileName;
     /**
+     * @brief description pattern description
+     */
+    QString               description;
+    /**
      * @brief SvgFile save layout to svg file.
      * @param name name layout file.
      */
@@ -218,6 +223,13 @@ private:
      * @param name name layout file.
      */
     void PsFile(const QString &name)const;
+    /**
+     * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
+     * @param name name output file.
+     * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
+     * need create eps file.
+     */
+    void PdfToPs(const QString &name, const QStringList &params)const;
 };
 
 #endif // TABLEWINDOW_H

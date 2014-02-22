@@ -8,7 +8,7 @@ Homepage: https://bitbucket.org/dismine/valentina
 
 Package: valentina
 Architecture: i386 amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, xpdf
 Description: Pattern making program.
  Open source project of creating a pattern making program, whose allow 
  create and modeling patterns of clothing.

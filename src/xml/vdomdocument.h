@@ -241,6 +241,7 @@ public:
     qint64         SPointActiveDraw();
     bool           isPatternModified() const;
     void           setPatternModified(bool value);
+    QString        UniqueTagText(const QString &tagName, const QString &defVal = QString());
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
