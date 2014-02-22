@@ -28,6 +28,7 @@
 
 #include "dialogindividualmeasurements.h"
 #include "ui_dialogindividualmeasurements.h"
+#include <QButtonGroup>
 
 DialogIndividualMeasurements::DialogIndividualMeasurements(QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogIndividualMeasurements), _name(QString()), _tablePath(QString())
@@ -47,7 +48,8 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(QWidget *parent) :
 
     CheckState();
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogIndividualMeasurements::CheckState);
-    connect(ui->buttonGroupPath, &QButtonGroup::buttonClicked, this, &DialogIndividualMeasurements::CheckState);
+    connect(ui->buttonGroupPath, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this,
+            &DialogIndividualMeasurements::CheckState);
 }
 
 DialogIndividualMeasurements::~DialogIndividualMeasurements()
