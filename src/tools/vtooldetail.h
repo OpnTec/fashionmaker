@@ -102,6 +102,10 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
+    static const QString NodeArc;
+    static const QString NodePoint;
+    static const QString NodeSpline;
+    static const QString NodeSplinePath;
     /**
      * @brief Remove full delete detail.
      */

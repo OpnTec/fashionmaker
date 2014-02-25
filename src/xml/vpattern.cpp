@@ -38,6 +38,7 @@
 
 #include <QMessageBox>
 
+const QString VPattern::TagPattern     = QStringLiteral("pattern");
 const QString VPattern::TagCalculation = QStringLiteral("calculation");
 const QString VPattern::TagModeling    = QStringLiteral("modeling");
 const QString VPattern::TagDetails     = QStringLiteral("details");
@@ -45,8 +46,22 @@ const QString VPattern::TagAuthor      = QStringLiteral("author");
 const QString VPattern::TagDescription = QStringLiteral("description");
 const QString VPattern::TagNotes       = QStringLiteral("notes");
 const QString VPattern::TagIncrements  = QStringLiteral("increments");
+const QString VPattern::TagIncrement   = QStringLiteral("increment");
 const QString VPattern::TagDraw        = QStringLiteral("draw");
+const QString VPattern::TagPoint       = QStringLiteral("point");
+const QString VPattern::TagLine        = QStringLiteral("line");
+const QString VPattern::TagSpline      = QStringLiteral("spline");
+const QString VPattern::TagArc         = QStringLiteral("arc");
+const QString VPattern::TagTools       = QStringLiteral("tools");
+
 const QString VPattern::AttrName       = QStringLiteral("name");
+const QString VPattern::AttrType       = QStringLiteral("type");
+
+const QString VPattern::IncrementName        = QStringLiteral("name");
+const QString VPattern::IncrementBase        = QStringLiteral("base");
+const QString VPattern::IncrementKsize       = QStringLiteral("ksize");
+const QString VPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
+const QString VPattern::IncrementDescription = QStringLiteral("description");
 
 VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
@@ -56,7 +71,7 @@ VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode
 
 void VPattern::CreateEmptyFile()
 {
-    QDomElement patternElement = this->createElement("pattern");
+    QDomElement patternElement = this->createElement(TagPattern);
 
     patternElement.appendChild(createComment("Valentina pattern format."));
     patternElement.appendChild(createElement(TagAuthor));
@@ -172,29 +187,35 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName()==TagDraw)
+                QStringList tags;
+                tags << TagDraw << TagIncrements;
+                switch(tags.indexOf(domElement.tagName()))
                 {
-                    if (parse == Document::FullParse)
-                    {
-                        if (nameActivDraw.isEmpty())
+                    case 0: // TagDraw
+                        if (parse == Document::FullParse)
                         {
-                            SetActivDraw(GetParametrString(domElement, AttrName));
+                            if (nameActivDraw.isEmpty())
+                            {
+                                SetActivDraw(GetParametrString(domElement, AttrName));
+                            }
+                            else
+                            {
+                                ChangeActivDraw(GetParametrString(domElement, AttrName));
+                            }
+                            comboBoxDraws->addItem(GetParametrString(domElement, AttrName));
                         }
                         else
                         {
-                            ChangeActivDraw(GetParametrString(domElement, AttrName));
+                            ChangeActivDraw(GetParametrString(domElement, AttrName), Document::LiteParse);
                         }
-                        comboBoxDraws->addItem(GetParametrString(domElement, AttrName));
-                    }
-                    else
-                    {
-                        ChangeActivDraw(GetParametrString(domElement, AttrName), Document::LiteParse);
-                    }
-                    ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
-                }
-                if (domElement.tagName()=="increments")
-                {
-                    ParseIncrementsElement(domElement);
+                        ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
+                        break;
+                    case 1: // TagIncrements
+                        ParseIncrementsElement(domElement);
+                        break;
+                    default:
+                        qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        break;
                 }
             }
         }
@@ -311,7 +332,7 @@ quint32 VPattern::SPointActiveDraw()
             if (domElement.isNull() == false)
             {
                 if (domElement.tagName() == VToolPoint::TagName &&
-                        domElement.attribute("type", "") == VToolSinglePoint::ToolType)
+                        domElement.attribute(AttrType, "") == VToolSinglePoint::ToolType)
                 {
                     return GetParametrId(domElement);
                 }
@@ -427,18 +448,23 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == "calculation")
+                QStringList tags;
+                tags << TagCalculation << TagModeling << TagDetails;
+                switch(tags.indexOf(domElement.tagName()))
                 {
-                    data->ClearCalculationGObjects();
-                    ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
-                }
-                if (domElement.tagName() == "modeling")
-                {
-                    ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
-                }
-                if (domElement.tagName() == "details")
-                {
-                    ParseDetails(sceneDetail, domElement, parse);
+                    case 0: // TagCalculation
+                        data->ClearCalculationGObjects();
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
+                        break;
+                    case 1: // TagModeling
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
+                        break;
+                    case 2: // TagDetails
+                        ParseDetails(sceneDetail, domElement, parse);
+                        break;
+                    default:
+                        qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        break;
                 }
             }
         }
@@ -467,30 +493,28 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
         const QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            if (domElement.tagName() == "point")
+            QStringList tags;
+            tags << TagPoint << TagLine << TagSpline << TagArc << TagTools;
+            switch(tags.indexOf(domElement.tagName()))
             {
-                ParsePointElement(scene, domElement, parse, domElement.attribute("type", ""));
-                continue;
-            }
-            if (domElement.tagName() == "line")
-            {
-                ParseLineElement(scene, domElement, parse);
-                continue;
-            }
-            if (domElement.tagName() == "spline")
-            {
-                ParseSplineElement(scene, domElement, parse, domElement.attribute("type", ""));
-                continue;
-            }
-            if (domElement.tagName() == "arc")
-            {
-                ParseArcElement(scene, domElement, parse, domElement.attribute("type", ""));
-                continue;
-            }
-            if (domElement.tagName() == "tools")
-            {
-                ParseToolsElement(scene, domElement, parse, domElement.attribute("type", ""));
-                continue;
+                case 0: // TagPoint
+                    ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 1: // TagLine
+                    ParseLineElement(scene, domElement, parse);
+                    break;
+                case 2: // TagSpline
+                    ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 3: // TagArc
+                    ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 4: // TagTools
+                    ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                default:
+                    qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                    break;
             }
         }
     }
@@ -525,23 +549,29 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                     const qreal mx = toPixel(GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                     const qreal my = toPixel(GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
                     const NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
-                    const QString t = GetParametrString(element, "type", "NodePoint");
+
+                    const QString t = GetParametrString(element, AttrType, "NodePoint");
                     Tool::Tools tool;
-                    if (t == "NodePoint")
+                    QStringList types;
+                    types << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline <<
+                             VToolDetail::NodeSplinePath;
+                    switch(types.indexOf(t))
                     {
-                        tool = Tool::NodePoint;
-                    }
-                    else if (t == "NodeArc")
-                    {
-                        tool = Tool::NodeArc;
-                    }
-                    else if (t == "NodeSpline")
-                    {
-                        tool = Tool::NodeSpline;
-                    }
-                    else if (t == "NodeSplinePath")
-                    {
-                        tool = Tool::NodeSplinePath;
+                        case 0: // VToolDetail::NodePoint
+                            tool = Tool::NodePoint;
+                            break;
+                        case 1: // VToolDetail::NodeArc
+                            tool = Tool::NodeArc;
+                            break;
+                        case 2: // VToolDetail::NodeSpline
+                            tool = Tool::NodeSpline;
+                            break;
+                        case 3: // VToolDetail::NodeSplinePath
+                            tool = Tool::NodeSplinePath;
+                            break;
+                        default:
+                            qWarning()<<"Wrong node type."<<Q_FUNC_INFO;
+                            break;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my));
                 }
@@ -944,7 +974,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
     }
 }
 
-void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement, const Document::Documents &parse)
+void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                const Document::Documents &parse)
 {
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -953,7 +984,8 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
         const quint32 id = GetParametrId(domElement);
         const quint32 firstPoint = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
         const quint32 secondPoint = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-        const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+        const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
+                                                   VAbstractTool::TypeLineLine);
 
         VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Tool::FromFile);
     }
@@ -1189,14 +1221,14 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == "increment")
+                if (domElement.tagName() == TagIncrement)
                 {
-                    quint32 id = GetParametrId(domElement);
-                    QString name = GetParametrString(domElement, "name", "");
-                    qreal base = GetParametrDouble(domElement, "base", "0");
-                    qreal ksize = GetParametrDouble(domElement, "ksize", "0");
-                    qreal kgrowth = GetParametrDouble(domElement, "kgrowth", "0");
-                    QString desc = GetParametrString(domElement, "description", "Description");
+                    const quint32 id = GetParametrId(domElement);
+                    const QString name = GetParametrString(domElement, IncrementName, "");
+                    const qreal base = GetParametrDouble(domElement, IncrementBase, "0");
+                    const qreal ksize = GetParametrDouble(domElement, IncrementKsize, "0");
+                    const qreal kgrowth = GetParametrDouble(domElement, IncrementKgrowth, "0");
+                    const QString desc = GetParametrString(domElement, IncrementDescription, "Description");
                     data->UpdateId(id);
                     data->AddIncrementTableRow(name, VIncrementTableRow(id, base, ksize, kgrowth, desc));
                 }
@@ -1209,7 +1241,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
 quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    const quint32 id = GetParametrUInt(domElement, "id", "0");
+    const quint32 id = GetParametrUInt(domElement, VAbstractTool::AttrId, "0");
     if (id <= 0)
     {
         throw VExceptionWrongParameterId(tr("Got wrong parameter id. Need only id > 0."), domElement);
@@ -1219,7 +1251,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 
 void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
 {
-    if (node.hasAttribute("id"))
+    if (node.hasAttribute(VAbstractTool::AttrId))
     {
         const quint32 id = GetParametrId(node);
         if (vector.contains(id))

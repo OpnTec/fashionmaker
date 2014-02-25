@@ -62,8 +62,9 @@ const QString VAbstractTool::AttrPathPoint   = QStringLiteral("pathPoint");
 const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
 const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
-const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
-const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
+
+const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
+const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
 const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine");
 const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");

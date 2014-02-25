@@ -32,13 +32,20 @@
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
+
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
 const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
+
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
+
+const QString VToolDetail::NodeArc        = QStringLiteral("NodeArc");
+const QString VToolDetail::NodePoint      = QStringLiteral("NodePoint");
+const QString VToolDetail::NodeSpline     = QStringLiteral("NodeSpline");
+const QString VToolDetail::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
 VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
@@ -376,16 +383,16 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     switch (node.getTypeTool())
     {
         case (Tool::NodeArc):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
+            doc->SetAttribute(nod, AttrType, NodeArc);
             break;
         case (Tool::NodePoint):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
+            doc->SetAttribute(nod, AttrType, NodePoint);
             break;
         case (Tool::NodeSpline):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
+            doc->SetAttribute(nod, AttrType, NodeSpline);
             break;
         case (Tool::NodeSplinePath):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
+            doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;

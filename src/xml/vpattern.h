@@ -164,6 +164,7 @@ public:
      * @return true if found.
      */
     bool           GetActivNodeElement(const QString& name, QDomElement& element);
+    static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
     static const QString TagDetails;
@@ -171,8 +172,20 @@ public:
     static const QString TagDescription;
     static const QString TagNotes;
     static const QString TagIncrements;
+    static const QString TagIncrement;
     static const QString TagDraw;
+    static const QString TagPoint;
+    static const QString TagLine;
+    static const QString TagSpline;
+    static const QString TagArc;
+    static const QString TagTools;
     static const QString AttrName;
+    static const QString AttrType;
+    static const QString IncrementName;
+    static const QString IncrementBase;
+    static const QString IncrementKsize;
+    static const QString IncrementKgrowth;
+    static const QString IncrementDescription;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
