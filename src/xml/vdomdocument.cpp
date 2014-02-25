@@ -31,6 +31,37 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionbadid.h"
 
+#include <QAbstractMessageHandler>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
+#include <QFile>
+
+//This class need for validation pattern file using XSD shema
+class MessageHandler : public QAbstractMessageHandler
+{
+public:
+    MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
+        m_sourceLocation(QSourceLocation()){}
+    inline QString statusMessage() const {return m_description;}
+    inline qint64     line() const {return m_sourceLocation.line();}
+    inline qint64     column() const {return m_sourceLocation.column();}
+protected:
+    virtual void handleMessage(QtMsgType type, const QString &description,
+                               const QUrl &identifier, const QSourceLocation &sourceLocation)
+    {
+        Q_UNUSED(type);
+        Q_UNUSED(identifier);
+
+        m_messageType = type;
+        m_description = description;
+        m_sourceLocation = sourceLocation;
+    }
+private:
+    QtMsgType       m_messageType;
+    QString         m_description;
+    QSourceLocation m_sourceLocation;
+};
+
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())
 {
@@ -161,4 +192,54 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
         }
     }
     return defVal;
+}
+
+bool VDomDocument::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
+                                   qint64 &errorColumn)
+{
+    errorLine = -1;
+    errorColumn = -1;
+    QFile pattern(fileName);
+    if (pattern.open(QIODevice::ReadOnly) == false)
+    {
+        errorMsg = QString(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
+        return false;
+    }
+    QFile fileSchema(schema);
+    if (fileSchema.open(QIODevice::ReadOnly) == false)
+    {
+        errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
+        return false;
+    }
+
+    MessageHandler messageHandler;
+    QXmlSchema sch;
+    sch.setMessageHandler(&messageHandler);
+    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
+
+    bool errorOccurred = false;
+    if (sch.isValid() == false)
+    {
+        errorOccurred = true;
+    }
+    else
+    {
+        QXmlSchemaValidator validator(sch);
+        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
+        {
+            errorOccurred = true;
+        }
+    }
+
+    if (errorOccurred)
+    {
+        errorMsg = messageHandler.statusMessage();
+        errorLine = messageHandler.line();
+        errorColumn = messageHandler.column();
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }

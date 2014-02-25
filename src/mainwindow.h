@@ -516,17 +516,6 @@ private:
      * @brief MinimumScrollBar set scroll bar to minimum.
      */
     void               MinimumScrollBar();
-    /**
-     * @brief ValidatePattern validate pattern file by xsd schema.
-     * @param schema path to schema file.
-     * @param fileName name of pattern file.
-     * @param errorMsg error message.
-     * @param errorLine number error line.
-     * @param errorColumn number error column.
-     * @return true if validation successful.
-     */
-    bool ValidatePattern(const QString &schema, const QString &curFile, QString &errorMsg, qint64 &errorLine,
-                         qint64 &errorColumn) const;
     template <typename DrawTool>
     /**
      * @brief ClosedDialog handle close dialog

@@ -131,9 +131,9 @@ void VToolHeight::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
-        p1LineId = domElement.attribute(AttrP1Line, "").toLongLong();
-        p2LineId = domElement.attribute(AttrP2Line, "").toLongLong();
+        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
+        p1LineId = domElement.attribute(AttrP1Line, "").toUInt();
+        p2LineId = domElement.attribute(AttrP2Line, "").toUInt();
     }
     RefreshGeometry();
 

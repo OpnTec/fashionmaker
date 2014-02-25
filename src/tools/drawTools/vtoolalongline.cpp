@@ -56,8 +56,8 @@ void VToolAlongLine::FullUpdateFromFile()
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshGeometry();
 }

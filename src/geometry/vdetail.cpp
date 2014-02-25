@@ -174,13 +174,13 @@ ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
-    if (index < 0 || index > list.size())
+    if (index > static_cast<quint32>(list.size()))
     {
         qWarning()<<"Wrong edge index index ="<<index;
         return;
     }
     p1 = list.at(index);
-    if (index + 1 > list.size() - 1)
+    if (index + 1 > static_cast<quint32>(list.size()) - 1)
     {
         p2 = list.at(0);
     }
@@ -196,9 +196,9 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
     det.ClearNodes();
 
     QVector<VNodeDetail> list = this->listNodePoint();
-    qint32 edge = list.size();
-    ptrdiff_t k = 0;
-    for (ptrdiff_t i=0; i<edge; ++i)
+    quint32 edge = static_cast<quint32>(list.size());
+    quint32 k = 0;
+    for (quint32 i=0; i<edge; ++i)
     {
         if (i == index)
         {

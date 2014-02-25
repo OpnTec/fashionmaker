@@ -160,9 +160,9 @@ void VToolPointOfContact::FullUpdateFromFile()
     if (domElement.isElement())
     {
         arcRadius = domElement.attribute(AttrRadius, "");
-        center = domElement.attribute(AttrCenter, "").toLongLong();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        center = domElement.attribute(AttrCenter, "").toUInt();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }

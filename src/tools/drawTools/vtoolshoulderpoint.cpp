@@ -162,9 +162,9 @@ void VToolShoulderPoint::FullUpdateFromFile()
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrP1Line, "").toLongLong();
-        p2Line = domElement.attribute(AttrP2Line, "").toLongLong();
-        pShoulder = domElement.attribute(AttrPShoulder, "").toLongLong();
+        basePointId = domElement.attribute(AttrP1Line, "").toUInt();
+        p2Line = domElement.attribute(AttrP2Line, "").toUInt();
+        pShoulder = domElement.attribute(AttrPShoulder, "").toUInt();
     }
     RefreshGeometry();
 }

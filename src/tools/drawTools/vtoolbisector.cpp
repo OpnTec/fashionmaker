@@ -155,9 +155,9 @@ void VToolBisector::FullUpdateFromFile()
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        basePointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
-        thirdPointId = domElement.attribute(AttrThirdPoint, "").toLongLong();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        basePointId = domElement.attribute(AttrSecondPoint, "").toUInt();
+        thirdPointId = domElement.attribute(AttrThirdPoint, "").toUInt();
     }
     RefreshGeometry();
 }

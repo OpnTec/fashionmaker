@@ -101,6 +101,17 @@ public:
      */
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
+    /**
+     * @brief ValidatePattern validate pattern file by xsd schema.
+     * @param schema path to schema file.
+     * @param fileName name of pattern file.
+     * @param errorMsg error message.
+     * @param errorLine number error line.
+     * @param errorColumn number error column.
+     * @return true if validation successful.
+     */
+    static bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
+                         qint64 &errorColumn);
 protected:
     /**
      * @brief data container with data.

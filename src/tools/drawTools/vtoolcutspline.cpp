@@ -166,7 +166,7 @@ void VToolCutSpline::FullUpdateFromFile()
     if (domElement.isElement())
     {
         formula = domElement.attribute(AttrLength, "");
-        splineId = domElement.attribute(AttrSpline, "").toLongLong();
+        splineId = domElement.attribute(AttrSpline, "").toUInt();
     }
     RefreshGeometry();
 }

@@ -136,10 +136,10 @@ void VToolLineIntersect::FullUpdateFromFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        p1Line1 = domElement.attribute(AttrP1Line1, "").toLongLong();
-        p2Line1 = domElement.attribute(AttrP2Line1, "").toLongLong();
-        p1Line2 = domElement.attribute(AttrP1Line2, "").toLongLong();
-        p2Line2 = domElement.attribute(AttrP2Line2, "").toLongLong();
+        p1Line1 = domElement.attribute(AttrP1Line1, "").toUInt();
+        p2Line1 = domElement.attribute(AttrP2Line1, "").toUInt();
+        p1Line2 = domElement.attribute(AttrP1Line2, "").toUInt();
+        p2Line2 = domElement.attribute(AttrP2Line2, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }

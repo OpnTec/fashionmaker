@@ -44,36 +44,8 @@
 #include <QShowEvent>
 #include <QScrollBar>
 #include <QFileDialog>
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
 #include <QSourceLocation>
-#include <QAbstractMessageHandler>
 
-//This class need for validation pattern file using XSD shema
-class MessageHandler : public QAbstractMessageHandler
-{
-public:
-    MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
-        m_sourceLocation(QSourceLocation()){}
-    inline QString statusMessage() const {return m_description;}
-    inline qint64     line() const {return m_sourceLocation.line();}
-    inline qint64     column() const {return m_sourceLocation.column();}
-protected:
-    virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation)
-    {
-        Q_UNUSED(type);
-        Q_UNUSED(identifier);
-
-        m_messageType = type;
-        m_description = description;
-        m_sourceLocation = sourceLocation;
-    }
-private:
-    QtMsgType       m_messageType;
-    QString         m_description;
-    QSourceLocation m_sourceLocation;
-};
 
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
@@ -1146,56 +1118,6 @@ void MainWindow::MinimumScrollBar()
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
-bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
-                                 qint64 &errorColumn) const
-{
-    errorLine = -1;
-    errorColumn = -1;
-    QFile pattern(fileName);
-    if (pattern.open(QIODevice::ReadOnly) == false)
-    {
-        errorMsg = QString(tr("Can't open pattern file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
-        return false;
-    }
-    QFile fileSchema(schema);
-    if (fileSchema.open(QIODevice::ReadOnly) == false)
-    {
-        errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
-        return false;
-    }
-
-    MessageHandler messageHandler;
-    QXmlSchema sch;
-    sch.setMessageHandler(&messageHandler);
-    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
-
-    bool errorOccurred = false;
-    if (sch.isValid() == false)
-    {
-        errorOccurred = true;
-    }
-    else
-    {
-        QXmlSchemaValidator validator(sch);
-        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
-        {
-            errorOccurred = true;
-        }
-    }
-
-    if (errorOccurred)
-    {
-        errorMsg = messageHandler.statusMessage();
-        errorLine = messageHandler.line();
-        errorColumn = messageHandler.column();
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
 bool MainWindow::SavePattern(const QString &fileName)
 {
     try
@@ -1455,7 +1377,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     qint64 errorColumn = 0;
     if (file.open(QIODevice::ReadOnly))
     {
-        if (ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
+        if (VDomDocument::ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
         {
             qint32 errorLine = 0;
             qint32 errorColumn = 0;

@@ -165,7 +165,7 @@ void VToolCutArc::FullUpdateFromFile()
     if (domElement.isElement())
     {
         formula = domElement.attribute(AttrLength, "");
-        arcId = domElement.attribute(AttrArc, "").toLongLong();
+        arcId = domElement.attribute(AttrArc, "").toUInt();
     }
     RefreshGeometry();
 }

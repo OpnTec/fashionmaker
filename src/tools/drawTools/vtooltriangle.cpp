@@ -163,10 +163,10 @@ void VToolTriangle::FullUpdateFromFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        axisP1Id = domElement.attribute(AttrAxisP1, "").toLongLong();
-        axisP2Id = domElement.attribute(AttrAxisP2, "").toLongLong();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        axisP1Id = domElement.attribute(AttrAxisP1, "").toUInt();
+        axisP2Id = domElement.attribute(AttrAxisP2, "").toUInt();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
