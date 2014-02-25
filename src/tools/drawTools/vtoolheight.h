@@ -50,7 +50,7 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                   VToolHeight(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
                                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -83,7 +83,7 @@ public:
      */
     static void    Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                           const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
-                          const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VDomDocument *doc,
+                          const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief FindPoint find projection base point onto line.

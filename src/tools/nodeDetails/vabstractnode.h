@@ -46,7 +46,7 @@ public:
                   * @param id object id in containerNode.
                   * @param parent parent object.
                   */
-                 VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
+                 VAbstractNode(VPattern *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
                                const qint64 &idTool, QObject *parent = 0);
     virtual      ~VAbstractNode() {}
     static const QString AttrIdObject;

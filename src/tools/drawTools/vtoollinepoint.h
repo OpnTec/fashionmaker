@@ -49,7 +49,7 @@ public:
                        * @param angle line angle.
                        * @param parent parent object.
                        */
-                      VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
+                      VToolLinePoint(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
                                      const QString &formula, const qint64 &basePointId, const qreal &angle,
                                      QGraphicsItem * parent = 0);
 public slots:

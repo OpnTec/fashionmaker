@@ -33,7 +33,7 @@
 const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
-VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                          QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
@@ -90,7 +90,7 @@ void VToolSpline::setDialog()
     dialogTool->setKCurve(spl->GetKcurve());
 }
 
-void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -109,7 +109,7 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocu
 
 void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                         VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                         VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                          const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
@@ -166,11 +166,11 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetAngle1()));
-        SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetAngle2()));
-        SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
+        doc->SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetAngle1()));
+        doc->SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetAngle2()));
+        doc->SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        doc->SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
         emit FullUpdateTree();
         emit toolhaveChange();
     }
@@ -186,15 +186,15 @@ void VToolSpline::AddToFile()
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-    SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-    SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-    SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-    SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-    SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-    SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
+    doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
+    doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
+    doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
+    doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
+    doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
 
     AddToCalculation(domElement);
 }
@@ -205,13 +205,13 @@ void VToolSpline::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-        SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-        SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-        SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-        SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-        SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-        SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
+        doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
+        doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
+        doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
+        doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
+        doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
+        doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
+        doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
     }
 }
 
@@ -298,13 +298,13 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->getKCurve());
 
-    SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
-    SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
-    SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
-    SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
-    SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
-    SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
-    SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
+    doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
+    doc->SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
+    doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
+    doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
+    doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
 }
 
 void VToolSpline::RefreshGeometry()

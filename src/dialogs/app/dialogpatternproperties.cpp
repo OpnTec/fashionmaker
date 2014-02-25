@@ -30,7 +30,7 @@
 #include "ui_dialogpatternproperties.h"
 #include <QSettings>
 
-DialogPatternProperties::DialogPatternProperties(VDomDocument *doc, QWidget *parent) :
+DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc)
 {
     ui->setupUi(this);
@@ -57,7 +57,7 @@ DialogPatternProperties::DialogPatternProperties(VDomDocument *doc, QWidget *par
     Q_CHECK_PTR(bCansel);
     connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
-    connect(this, &DialogPatternProperties::haveChange, this->doc, &VDomDocument::haveLiteChange);
+    connect(this, &DialogPatternProperties::haveChange, this->doc, &VPattern::haveLiteChange);
 }
 
 DialogPatternProperties::~DialogPatternProperties()

@@ -48,7 +48,7 @@ public:
                    * @param typeCreation way we create this tool.
                    * @param parent parent object.
                    */
-                  VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+                  VNodeSpline(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
                               const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
                               QGraphicsItem * parent = 0);
     /**
@@ -61,7 +61,7 @@ public:
      * @param typeCreation way we create this tool.
      * @return
      */
-    static VNodeSpline *Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+    static VNodeSpline *Create(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
                                const Document::Documents &parse, const Tool::Sources &typeCreation,
                                const qint64 &idTool = 0, QObject *parent = 0);
     static const QString TagName;

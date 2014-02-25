@@ -51,7 +51,7 @@ public:
      * @param typeCreation way we create this tool.
      * @param parent parent object.
      */
-    VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
+    VToolUnionDetails(VPattern *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
                       const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
                       const Tool::Sources &typeCreation, QObject *parent = 0);
     /**
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -82,7 +82,7 @@ public:
      */
     static void  Create(const qint64 _id, const VDetail &d1,  const VDetail &d2, const qint64 &d1id, const qint64 &d2id,
                         const ptrdiff_t &indexD1, const ptrdiff_t &indexD2, VMainGraphicsScene *scene,
-                        VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                        VPattern *doc, VContainer *data, const Document::Documents &parse,
                         const Tool::Sources &typeCreation);
     /**
      * @brief GetDetailFromFile parse detail from file.
@@ -90,7 +90,7 @@ public:
      * @param domElement tag in xml tree.
      * @return detail stored in file.
      */
-    static QVector<VDetail> GetDetailFromFile(VDomDocument *doc, const QDomElement &domElement);
+    static QVector<VDetail> GetDetailFromFile(VPattern *doc, const QDomElement &domElement);
     static const QString TagName;
     static const QString ToolType;
     static const QString TagDetail;
@@ -115,7 +115,7 @@ public:
      * @param pRotate point rotation.
      * @param angle angle rotation.
      */
-    static void  AddToNewDetail(QObject *tool, VDomDocument *doc, VContainer *data, VDetail &newDetail,
+    static void  AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
                                 const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0,
                                 const qreal &dy = 0, const qint64 &pRotate = 0, const qreal &angle = 0);
     /**

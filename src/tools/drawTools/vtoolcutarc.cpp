@@ -33,7 +33,7 @@
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 
-VToolCutArc::VToolCutArc(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
+VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const qint64 &id, const QString &formula,
                          const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
                          const Tool::Sources &typeCreation, QGraphicsItem * parent)
     :VToolPoint(doc, data, id, parent), formula(formula), arcId(arcId), firstArc(), secondArc(), arc1id(arc1id),
@@ -76,7 +76,7 @@ void VToolCutArc::setDialog()
     dialogTool->setPointName(point->name());
 }
 
-void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -89,7 +89,7 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocu
 }
 
 void VToolCutArc::Create(const qint64 _id, const QString &pointName, const QString &formula, const qint64 &arcId,
-                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
+                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
@@ -213,14 +213,14 @@ void VToolCutArc::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    SetAttribute(domElement, AttrLength, formula);
-    SetAttribute(domElement, AttrArc, arcId);
+    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrArc, arcId);
 
     AddToCalculation(domElement);
 }
@@ -231,11 +231,11 @@ void VToolCutArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrLength, formula);
-        SetAttribute(domElement, AttrArc, arcId);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrArc, arcId);
     }
 }
 
@@ -251,9 +251,9 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
 }
 
 void VToolCutArc::RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr)

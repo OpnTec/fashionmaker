@@ -69,13 +69,13 @@ const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, qint64 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
     Q_CHECK_PTR(doc);
-    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
-    connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
+    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
+    connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
+    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
     emit toolhaveChange();
 }
 
@@ -303,7 +303,7 @@ const QStringList VAbstractTool::Styles()
     return styles;
 }
 
-void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)
+void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VPattern *doc)
 {
     qint64 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();

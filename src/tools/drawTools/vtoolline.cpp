@@ -31,7 +31,7 @@
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
-VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
+VToolLine::VToolLine(VPattern *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
                      const QString &typeLine, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
@@ -67,7 +67,7 @@ void VToolLine::setDialog()
     dialogTool->setTypeLine(typeLine);
 }
 
-void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
@@ -79,7 +79,7 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocume
 }
 
 void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint, const QString &typeLine,
-                       VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     Q_CHECK_PTR(scene);
@@ -156,10 +156,10 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrFirstPoint, firstPoint);
-    SetAttribute(domElement, AttrSecondPoint, secondPoint);
-    SetAttribute(domElement, AttrTypeLine, typeLine);
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
+    doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
+    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
 
     AddToCalculation(domElement);
 }
@@ -169,9 +169,9 @@ void VToolLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrFirstPoint, firstPoint);
-        SetAttribute(domElement, AttrSecondPoint, secondPoint);
-        SetAttribute(domElement, AttrTypeLine, typeLine);
+        doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
+        doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
+        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     }
 }
 
@@ -229,9 +229,9 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
-    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
-    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
 }
 
 void VToolLine::RefreshGeometry()

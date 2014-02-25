@@ -49,7 +49,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolSpline (VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+                 VToolSpline (VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                               QGraphicsItem * parent = 0 );
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -62,7 +62,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -81,7 +81,7 @@ public:
      */
     static void  Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
                         const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
+                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;

@@ -30,7 +30,7 @@
 #define DIALOGHISTORY_H
 
 #include "../tools/dialogtool.h"
-#include "../../xml/vdomdocument.h"
+#include "../../xml/vpattern.h"
 
 namespace Ui
 {
@@ -50,7 +50,7 @@ public:
                        * @param doc dom document container
                        * @param parent parent widget
                        */
-                      DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
+                      DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = 0);
     virtual           ~DialogHistory();
 public slots:
     /**
@@ -95,7 +95,7 @@ private:
     /**
      * @brief doc dom document container
      */
-    VDomDocument      *doc;
+    VPattern          *doc;
     /**
      * @brief cursorRow save number of row where is cursor
      */

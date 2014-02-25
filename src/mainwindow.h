@@ -403,7 +403,7 @@ private:
     /**
      * @brief doc dom document container
      */
-    VDomDocument      *doc;
+    VPattern          *doc;
     /**
      * @brief tool current tool
      */

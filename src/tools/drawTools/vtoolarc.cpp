@@ -33,7 +33,7 @@
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolArc::VToolArc(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
 {
@@ -69,7 +69,7 @@ void VToolArc::setDialog()
     dialogTool->SetRadius(arc->GetFormulaRadius());
 }
 
-void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                       VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -83,7 +83,7 @@ void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocumen
 }
 
 void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
-                      const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                      const QString &f2, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                       const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
@@ -183,12 +183,12 @@ void VToolArc::AddToFile()
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-    SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-    SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-    SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+    doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+    doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+    doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
 
     AddToCalculation(domElement);
 }
@@ -199,10 +199,10 @@ void VToolArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-        SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-        SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-        SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
+        doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+        doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+        doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+        doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
     }
 }
 
@@ -271,10 +271,10 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
-    SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
-    SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
-    SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
+    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
+    doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
+    doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
+    doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
 }
 
 void VToolArc::RefreshGeometry()

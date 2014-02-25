@@ -30,7 +30,7 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include "../xml/vdomdocument.h"
+#include "../xml/vpattern.h"
 #include <QMessageBox>
 
 /**
@@ -47,7 +47,7 @@ public:
                              * @param id object id in container.
                              * @param parent parent object.
                              */
-                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
+                            VAbstractTool(VPattern *doc, VContainer *data, qint64 id, QObject *parent = 0);
     virtual                 ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
@@ -153,7 +153,7 @@ public:
      * @param toolType tool type
      * @param doc dom document container
      */
-    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
+    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VPattern *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -178,7 +178,7 @@ protected:
     /**
      * @brief doc dom document container
      */
-    VDomDocument            *doc;
+    VPattern                *doc;
     /**
      * @brief id object id.
      */
@@ -227,26 +227,7 @@ protected:
      * @return pen style.
      */
     Qt::PenStyle            LineStyle();
-    template <typename T>
-    /**
-     * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
-     * @param domElement element in xml tree.
-     * @param name name of attribute.
-     * @param value value of attribute.
-     */
-    void SetAttribute(QDomElement &domElement, const QString &name, const T &value)
-    {
-        QString val = QString().setNum(value);
-        val = val.replace(",", ".");
-        domElement.setAttribute(name, val);
-    }
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
-
-template <>
-inline void VAbstractTool::SetAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
-{
-    domElement.setAttribute(name, value);
-}
 #endif // VABSTRACTTOOL_H

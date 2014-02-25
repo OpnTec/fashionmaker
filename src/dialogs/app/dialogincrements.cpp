@@ -34,7 +34,7 @@
 
 #include <QPushButton>
 
-DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent)
+DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
 {
     ui->setupUi(this);
@@ -57,9 +57,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VDomDocument *doc, QWidget 
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
     connect(ui->toolButtonRemove, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonRemove);
 
-    connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
-    connect(this, &DialogIncrements::haveLiteChange, this->doc, &VDomDocument::haveLiteChange);
-    connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
+    connect(this, &DialogIncrements::haveLiteChange, this->doc, &VPattern::haveLiteChange);
+    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
 }

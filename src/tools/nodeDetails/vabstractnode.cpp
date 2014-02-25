@@ -32,7 +32,7 @@
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
-VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
+VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
                              const qint64 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
 {
@@ -76,7 +76,7 @@ void VAbstractNode::DeleteNode()
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;
-    bool ok = doc->GetActivModelingElement(modelingElement);
+    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
     if (ok)
     {
         modelingElement.appendChild(domElement);

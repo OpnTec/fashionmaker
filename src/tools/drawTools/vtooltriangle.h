@@ -50,7 +50,7 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
+                   VToolTriangle(VPattern *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
                                  const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
                                  const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -83,7 +83,7 @@ public:
      */
     static void    Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id, const qint64 &axisP2Id,
                           const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                          VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                           const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief FindPoint find point intersection two foots right triangle.

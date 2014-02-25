@@ -32,7 +32,7 @@
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
-VToolShoulderPoint::VToolShoulderPoint(VDomDocument *doc, VContainer *data, const qint64 &id,
+VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const qint64 &id,
                                        const QString &typeLine, const QString &formula, const qint64 &p1Line,
                                        const qint64 &p2Line, const qint64 &pShoulder, const Tool::Sources &typeCreation,
                                        QGraphicsItem * parent)
@@ -89,7 +89,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     }
 }
 
-void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
@@ -107,7 +107,7 @@ void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
 void VToolShoulderPoint::Create(const qint64 _id, const QString &formula, const qint64 &p1Line,
                                 const qint64 &p2Line, const qint64 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
-                                VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                 const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(p1Line);
@@ -190,17 +190,17 @@ void VToolShoulderPoint::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    SetAttribute(domElement, AttrTypeLine, typeLine);
-    SetAttribute(domElement, AttrLength, formula);
-    SetAttribute(domElement, AttrP1Line, basePointId);
-    SetAttribute(domElement, AttrP2Line, p2Line);
-    SetAttribute(domElement, AttrPShoulder, pShoulder);
+    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrP1Line, basePointId);
+    doc->SetAttribute(domElement, AttrP2Line, p2Line);
+    doc->SetAttribute(domElement, AttrPShoulder, pShoulder);
 
     AddToCalculation(domElement);
 }
@@ -211,14 +211,14 @@ void VToolShoulderPoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrName, toMM(point->mx()));
-        SetAttribute(domElement, AttrName, toMM(point->my()));
-        SetAttribute(domElement, AttrTypeLine, typeLine);
-        SetAttribute(domElement, AttrLength, formula);
-        SetAttribute(domElement, AttrP1Line, basePointId);
-        SetAttribute(domElement, AttrP2Line, p2Line);
-        SetAttribute(domElement, AttrPShoulder, pShoulder);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrName, toMM(point->mx()));
+        doc->SetAttribute(domElement, AttrName, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrP1Line, basePointId);
+        doc->SetAttribute(domElement, AttrP2Line, p2Line);
+        doc->SetAttribute(domElement, AttrPShoulder, pShoulder);
     }
 }
 
@@ -234,10 +234,10 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
-    SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
-    SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getPShoulder()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
+    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getPShoulder()));
 }

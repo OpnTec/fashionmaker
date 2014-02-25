@@ -32,7 +32,7 @@
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
-VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
+VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, qint64 id, const QString &formula,
                                const qint64 &firstPointId, const qint64 &secondPointId,
                                const QString &typeLine, const Tool::Sources &typeCreation,
                                QGraphicsItem *parent)
@@ -84,16 +84,16 @@ void VToolAlongLine::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    SetAttribute(domElement, AttrTypeLine, typeLine);
-    SetAttribute(domElement, AttrLength, formula);
-    SetAttribute(domElement, AttrFirstPoint, basePointId);
-    SetAttribute(domElement, AttrSecondPoint, secondPointId);
+    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
+    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -104,13 +104,13 @@ void VToolAlongLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrTypeLine, typeLine);
-        SetAttribute(domElement, AttrLength, formula);
-        SetAttribute(domElement, AttrFirstPoint, basePointId);
-        SetAttribute(domElement, AttrSecondPoint, secondPointId);
+        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
+        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }
 
@@ -125,11 +125,11 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    SetAttribute(domElement, AttrFirstPoint, dialogTool->getFirstPointId());
-    SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrFirstPoint, dialogTool->getFirstPointId());
+    doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
 }
 
 void VToolAlongLine::setDialog()
@@ -145,7 +145,7 @@ void VToolAlongLine::setDialog()
     dialogTool->setPointName(p->name());
 }
 
-void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
@@ -161,7 +161,7 @@ void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomD
 
 void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
                             const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
-                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
+                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                             VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);

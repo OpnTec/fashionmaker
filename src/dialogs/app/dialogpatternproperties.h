@@ -30,7 +30,7 @@
 #define DIALOGPATTERNPROPERTIES_H
 
 #include <QDialog>
-#include "../../xml/vdomdocument.h"
+#include "../../xml/vpattern.h"
 
 namespace Ui {
 class DialogPatternProperties;
@@ -40,7 +40,7 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    DialogPatternProperties(VDomDocument *doc, QWidget *parent = 0);
+    DialogPatternProperties(VPattern *doc, QWidget *parent = 0);
     virtual ~DialogPatternProperties();
 signals:
     void         haveChange();
@@ -49,7 +49,7 @@ public slots:
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
-    VDomDocument *doc;
+    VPattern *doc;
     void         Write(const QString &tagName, const QString &text) const;
 };
 

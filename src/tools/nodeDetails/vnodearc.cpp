@@ -33,7 +33,7 @@
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
-VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
+VNodeArc::VNodeArc(VPattern *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
                    const qint64 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
@@ -50,7 +50,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
     }
 }
 
-void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
+void VNodeArc::Create(VPattern *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
                       const Tool::Sources &typeCreation, const qint64 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
@@ -93,12 +93,12 @@ void VNodeArc::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -109,10 +109,10 @@ void VNodeArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, idNode);
+        doc->SetAttribute(domElement, AttrIdObject, idNode);
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }

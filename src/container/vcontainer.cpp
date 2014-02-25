@@ -275,6 +275,7 @@ void VContainer::Clear()
     lengthArcs.clear();
     lineAngles.clear();
     details.clear();
+    lengthSplines.clear();
     ClearGObjects();
 }
 

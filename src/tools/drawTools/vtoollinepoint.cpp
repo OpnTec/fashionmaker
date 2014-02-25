@@ -28,7 +28,7 @@
 
 #include "vtoollinepoint.h"
 
-VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
+VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const qint64 &id,
                                const QString &typeLine, const QString &formula, const qint64 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent),  formula(formula), angle(angle), basePointId(basePointId),

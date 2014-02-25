@@ -49,7 +49,7 @@ public:
                   * @param id object id in container.
                   * @param parent parent object.
                   */
-                 VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
+                 VDrawTool(VPattern *doc, VContainer *data, qint64 id);
     virtual      ~VDrawTool();
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -159,7 +159,7 @@ protected:
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
                 if (ignoreFullUpdate == false)
                 {
-                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
+                    connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
                 }
 
                 tool->setDialog();

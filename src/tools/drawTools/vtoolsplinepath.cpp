@@ -32,7 +32,7 @@
 const QString VToolSplinePath::TagName = QStringLiteral("spline");
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
-VToolSplinePath::VToolSplinePath(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
                                  QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
@@ -84,7 +84,7 @@ void VToolSplinePath::setDialog()
     dialogTool->SetPath(*splPath);
 }
 
-void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
@@ -99,7 +99,7 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDom
 }
 
 void VToolSplinePath::Create(const qint64 _id, VSplinePath *path, VMainGraphicsScene *scene,
-                             VDomDocument *doc, VContainer *data, const Document::Documents &parse,
+                             VPattern *doc, VContainer *data, const Document::Documents &parse,
                              const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
@@ -151,7 +151,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
         UpdatePathPoint(domElement, splPath);
         emit FullUpdateTree();
         emit toolhaveChange();
@@ -181,10 +181,10 @@ void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path)
         if (domElement.isNull() == false)
         {
             VSplinePoint p = path[i];
-            SetAttribute(domElement, AttrPSpline, p.P().id());
-            SetAttribute(domElement, AttrKAsm1, p.KAsm1());
-            SetAttribute(domElement, AttrKAsm2, p.KAsm2());
-            SetAttribute(domElement, AttrAngle, p.Angle2());
+            doc->SetAttribute(domElement, AttrPSpline, p.P().id());
+            doc->SetAttribute(domElement, AttrKAsm1, p.KAsm1());
+            doc->SetAttribute(domElement, AttrKAsm2, p.KAsm2());
+            doc->SetAttribute(domElement, AttrAngle, p.Angle2());
         }
     }
 }
@@ -230,9 +230,9 @@ void VToolSplinePath::AddToFile()
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrKCurve, splPath.getKCurve());
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrKCurve, splPath.getKCurve());
 
     for (qint32 i = 0; i < splPath.CountPoint(); ++i)
     {
@@ -268,7 +268,7 @@ void VToolSplinePath::RefreshDataInFile()
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+            doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
             UpdatePathPoint(domElement, splPath);
         }
 
@@ -279,10 +279,10 @@ void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &
 {
     QDomElement pathPoint = doc->createElement(AttrPathPoint);
 
-    SetAttribute(pathPoint, AttrPSpline, splPoint.P().id());
-    SetAttribute(pathPoint, AttrKAsm1, splPoint.KAsm1());
-    SetAttribute(pathPoint, AttrKAsm2, splPoint.KAsm2());
-    SetAttribute(pathPoint, AttrAngle, splPoint.Angle2());
+    doc->SetAttribute(pathPoint, AttrPSpline, splPoint.P().id());
+    doc->SetAttribute(pathPoint, AttrKAsm1, splPoint.KAsm1());
+    doc->SetAttribute(pathPoint, AttrKAsm2, splPoint.KAsm2());
+    doc->SetAttribute(pathPoint, AttrAngle, splPoint.Angle2());
 
     domElement.appendChild(pathPoint);
 }
@@ -376,7 +376,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
         CorectControlPoints(spl, splPath, i);
      }
 
-    SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+    doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
     UpdatePathPoint(domElement, splPath);
 }
 

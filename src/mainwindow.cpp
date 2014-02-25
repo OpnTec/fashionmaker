@@ -128,9 +128,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     pattern = new VContainer();
 
-    doc = new VDomDocument(pattern, comboBoxDraws, &mode);
+    doc = new VPattern(pattern, comboBoxDraws, &mode);
     doc->CreateEmptyFile();
-    connect(doc, &VDomDocument::patternChanged, this, &MainWindow::PatternWasModified);
+    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
 
     InitAutoSave();
 
@@ -268,7 +268,7 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(doc, &VDomDocument::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+        connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
     }
     else
     {
@@ -488,7 +488,7 @@ void MainWindow::ToolUnionDetails(bool checked)
     SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
                                       &MainWindow::ClosedDialogUnionDetails);
     //Must disconnect this signal here.
-    disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+    disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
 }
 
 void MainWindow::ClosedDialogUnionDetails(int result)

@@ -38,7 +38,7 @@
 #include <QDebug>
 #include <QPushButton>
 
-DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *parent)
+DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
     cursorToolRecordRow(0)
 {
@@ -48,10 +48,10 @@ DialogHistory::DialogHistory(VContainer *data, VDomDocument *doc, QWidget *paren
     FillTable();
     InitialTable();
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &DialogHistory::cellClicked);
-    connect(this, &DialogHistory::ShowHistoryTool, doc, &VDomDocument::ShowHistoryTool);
-    connect(doc, &VDomDocument::ChangedCursor, this, &DialogHistory::ChangedCursor);
-    connect(doc, &VDomDocument::patternChanged, this, &DialogHistory::UpdateHistory);
-    connect(doc, &VDomDocument::ChangedActivDraw, this, &DialogHistory::UpdateHistory);
+    connect(this, &DialogHistory::ShowHistoryTool, doc, &VPattern::ShowHistoryTool);
+    connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
+    connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
+    connect(doc, &VPattern::ChangedActivDraw, this, &DialogHistory::UpdateHistory);
     ShowPoint();
 }
 
@@ -79,9 +79,9 @@ void DialogHistory::cellClicked(int row, int column)
         cursorRow = row;
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
         qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
-        disconnect(doc, &VDomDocument::ChangedCursor, this, &DialogHistory::ChangedCursor);
+        disconnect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
         doc->setCursor(id);
-        connect(doc, &VDomDocument::ChangedCursor, this, &DialogHistory::ChangedCursor);
+        connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     }
     else
     {

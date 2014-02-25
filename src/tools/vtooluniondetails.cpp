@@ -41,7 +41,7 @@ const QString VToolUnionDetails::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolUnionDetails::VToolUnionDetails(VDomDocument *doc, VContainer *data, const qint64 &id, const VDetail &d1,
+VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const qint64 &id, const VDetail &d1,
                                      const VDetail &d2, const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
                                      const Tool::Sources &typeCreation, QObject *parent)
     :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
@@ -56,7 +56,7 @@ VToolUnionDetails::VToolUnionDetails(VDomDocument *doc, VContainer *data, const 
     }
 }
 
-void VToolUnionDetails::AddToNewDetail(QObject *tool, VDomDocument *doc, VContainer *data, VDetail &newDetail,
+void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
                                        const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx,
                                        const qreal &dy, const qint64 &pRotate, const qreal &angle)
 {
@@ -402,7 +402,7 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
     point->setY(line.p2().y());
 }
 
-void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
@@ -417,7 +417,7 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VD
 
 void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetail &d2, const qint64 &d1id,
                                const qint64 &d2id, const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
-                               VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
+                               VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VToolUnionDetails *unionDetails = 0;
@@ -613,7 +613,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
     }
 }
 
-QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VDomDocument *doc, const QDomElement &domElement)
+QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomElement &domElement)
 {
     QVector<VDetail> vector;
     QDomNodeList detailList = domElement.childNodes();
@@ -672,10 +672,10 @@ void VToolUnionDetails::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIndexD1, indexD1);
-    SetAttribute(domElement, AttrIndexD2, indexD2);
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIndexD1, indexD1);
+    doc->SetAttribute(domElement, AttrIndexD2, indexD2);
 
     AddDetail(domElement, d1);
     AddDetail(domElement, d2);
@@ -688,8 +688,8 @@ void VToolUnionDetails::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIndexD1, indexD1);
-        SetAttribute(domElement, AttrIndexD2, indexD2);
+        doc->SetAttribute(domElement, AttrIndexD1, indexD1);
+        doc->SetAttribute(domElement, AttrIndexD2, indexD2);
 
         QDomNode domNode = domElement.firstChild();
         domNode = UpdateDetail(domNode, d1);
@@ -713,30 +713,30 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
 {
     QDomElement nod = doc->createElement(TagNode);
 
-    SetAttribute(nod, AttrIdObject, node.getId());
-    SetAttribute(nod, AttrMx, toMM(node.getMx()));
-    SetAttribute(nod, AttrMy, toMM(node.getMy()));
+    doc->SetAttribute(nod, AttrIdObject, node.getId());
+    doc->SetAttribute(nod, AttrMx, toMM(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, toMM(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeContour);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);
     }
     else
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeModeling);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch (node.getTypeTool())
     {
         case (Tool::NodeArc):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
             break;
         case (Tool::NodePoint):
-            SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
             break;
         case (Tool::NodeSpline):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
             break;
         case (Tool::NodeSplinePath):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
@@ -773,7 +773,7 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;
-    bool ok = doc->GetActivModelingElement(modelingElement);
+    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
     if (ok)
     {
         modelingElement.appendChild(domElement);

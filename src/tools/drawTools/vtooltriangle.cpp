@@ -31,7 +31,7 @@
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
-VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id,
+VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const qint64 &id,
                              const qint64 &axisP1Id, const qint64 &axisP2Id, const qint64 &firstPointId,
                              const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
@@ -62,7 +62,7 @@ void VToolTriangle::setDialog()
 }
 
 void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                           VDomDocument *doc, VContainer *data)
+                           VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
@@ -78,7 +78,7 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
 
 void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
                            const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
+                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
@@ -194,16 +194,16 @@ void VToolTriangle::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
 
-    SetAttribute(domElement, AttrAxisP1, axisP1Id);
-    SetAttribute(domElement, AttrAxisP2, axisP2Id);
-    SetAttribute(domElement, AttrFirstPoint, firstPointId);
-    SetAttribute(domElement, AttrSecondPoint, secondPointId);
+    doc->SetAttribute(domElement, AttrAxisP1, axisP1Id);
+    doc->SetAttribute(domElement, AttrAxisP2, axisP2Id);
+    doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -214,13 +214,13 @@ void VToolTriangle::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrAxisP1, axisP1Id);
-        SetAttribute(domElement, AttrAxisP2, axisP2Id);
-        SetAttribute(domElement, AttrFirstPoint, firstPointId);
-        SetAttribute(domElement, AttrSecondPoint, secondPointId);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrAxisP1, axisP1Id);
+        doc->SetAttribute(domElement, AttrAxisP2, axisP2Id);
+        doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }
 
@@ -229,9 +229,9 @@ void VToolTriangle::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
-    SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
-    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
-    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
+    doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
 }

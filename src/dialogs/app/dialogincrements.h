@@ -30,7 +30,7 @@
 #define DIALOGINCREMENTS_H
 
 #include "../tools/dialogtool.h"
-#include "../../xml/vdomdocument.h"
+#include "../../xml/vpattern.h"
 
 namespace Ui
 {
@@ -50,7 +50,7 @@ public:
                           * @param doc dom document container
                           * @param parent parent widget
                           */
-                         DialogIncrements(VContainer *data, VDomDocument *doc, QWidget *parent = 0);
+                         DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = 0);
                          ~DialogIncrements();
 public slots:
     /**
@@ -95,7 +95,7 @@ private:
     /**
      * @brief doc dom document container
      */
-    VDomDocument         *doc;
+    VPattern             *doc;
     /**
      * @brief row save number of row current selected cell
      */

@@ -33,7 +33,7 @@
 const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
-VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
                                  const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
                                  QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
@@ -51,7 +51,7 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     }
 }
 
-void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
+void VNodeSplinePath::Create(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
                              const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
                              QObject *parent)
 {
@@ -100,12 +100,12 @@ void VNodeSplinePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -116,10 +116,10 @@ void VNodeSplinePath::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
+        doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }

@@ -40,7 +40,7 @@ const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(0), sceneDetails(scene)
 {
@@ -93,7 +93,7 @@ void VToolDetail::setDialog()
     dialogTool->setDetails(detail);
 }
 
-void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
@@ -140,7 +140,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocu
     Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     qint64 id = _id;
@@ -188,10 +188,10 @@ void VToolDetail::FullUpdateFromGui(int result)
             DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
             Q_CHECK_PTR(dialogTool);
             VDetail det = dialogTool->getDetails();
-            SetAttribute(domElement, AttrName, det.getName());
-            SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-            SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-            SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
+            doc->SetAttribute(domElement, AttrName, det.getName());
+            doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
+            doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
+            doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
             RemoveAllChild(domElement);
             for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
             {
@@ -221,13 +221,13 @@ void VToolDetail::AddToFile()
     VDetail detail = VAbstractTool::data.GetDetail(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrName, detail.getName());
-    SetAttribute(domElement, AttrMx, toMM(detail.getMx()));
-    SetAttribute(domElement, AttrMy, toMM(detail.getMy()));
-    SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
-    SetAttribute(domElement, AttrClosed, detail.getClosed());
-    SetAttribute(domElement, AttrWidth, detail.getWidth());
+    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, AttrName, detail.getName());
+    doc->SetAttribute(domElement, AttrMx, toMM(detail.getMx()));
+    doc->SetAttribute(domElement, AttrMy, toMM(detail.getMy()));
+    doc->SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
+    doc->SetAttribute(domElement, AttrClosed, detail.getClosed());
+    doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
     for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
@@ -235,7 +235,7 @@ void VToolDetail::AddToFile()
     }
 
     QDomElement element;
-    bool ok = doc->GetActivDetailsElement(element);
+    bool ok = doc->GetActivNodeElement(VPattern::TagDetails, element);
     if (ok)
     {
         element.appendChild(domElement);
@@ -248,10 +248,10 @@ void VToolDetail::RefreshDataInFile()
     if (domElement.isElement())
     {
         VDetail det = VAbstractTool::data.GetDetail(id);
-        SetAttribute(domElement, AttrName, det.getName());
-        SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-        SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-        SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
+        doc->SetAttribute(domElement, AttrName, det.getName());
+        doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
+        doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
+        doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
         {
@@ -270,8 +270,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            SetAttribute(domElement, AttrMx, QString().setNum(toMM(newPos.x())));
-            SetAttribute(domElement, AttrMy, QString().setNum(toMM(newPos.y())));
+            doc->SetAttribute(domElement, AttrMx, QString().setNum(toMM(newPos.x())));
+            doc->SetAttribute(domElement, AttrMy, QString().setNum(toMM(newPos.y())));
 
             QList<QGraphicsView*> list = this->scene()->views();
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
@@ -362,30 +362,30 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 
-    SetAttribute(nod, AttrIdObject, node.getId());
-    SetAttribute(nod, AttrMx, toMM(node.getMx()));
-    SetAttribute(nod, AttrMy, toMM(node.getMy()));
+    doc->SetAttribute(nod, AttrIdObject, node.getId());
+    doc->SetAttribute(nod, AttrMx, toMM(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, toMM(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeContour);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);
     }
     else
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeModeling);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch (node.getTypeTool())
     {
         case (Tool::NodeArc):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
             break;
         case (Tool::NodePoint):
-            SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
             break;
         case (Tool::NodeSpline):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
             break;
         case (Tool::NodeSplinePath):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
+            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
             break;
         default:
             qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
