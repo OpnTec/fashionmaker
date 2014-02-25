@@ -55,13 +55,13 @@ public:
      * @param factor scale factor.
      * @param parent parent object.
      */
-    VSimpleArc(qint64 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
+    VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
 signals:
     /**
      * @brief Choosed send id when clicked.
      * @param id arc id.
      */
-    void Choosed(qint64 id);
+    void Choosed(quint32 id);
 protected:
     /**
      * @brief mouseReleaseEvent handle mouse release events.
@@ -83,7 +83,7 @@ private:
     /**
      * @brief id arc id.
      */
-    qint64          id;
+    quint32          id;
     /**
      * @brief factor scale factor.
      */

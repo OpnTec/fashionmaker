@@ -83,7 +83,7 @@ public:
      * @param name attribute name.
      * @return long long value.
      */
-    qint64         GetParametrLongLong(const QDomElement& domElement, const QString &name,
+    quint32         GetParametrUInt(const QDomElement& domElement, const QString &name,
                                        const QString &defValue) const;
     /**
      * @brief GetParametrString return string value of attribute.

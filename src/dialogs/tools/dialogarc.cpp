@@ -94,7 +94,7 @@ DialogArc::~DialogArc()
     delete ui;
 }
 
-void DialogArc::SetCenter(const qint64 &value)
+void DialogArc::SetCenter(const quint32 &value)
 {
     center = value;
     ChangeCurrentData(ui->comboBoxBasePoint, center);
@@ -118,7 +118,7 @@ void DialogArc::SetRadius(const QString &value)
     ui->lineEditRadius->setText(radius);
 }
 
-void DialogArc::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogArc::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {

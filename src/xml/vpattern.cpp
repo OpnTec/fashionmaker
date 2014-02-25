@@ -49,7 +49,7 @@ const QString VPattern::TagDraw        = QStringLiteral("draw");
 const QString VPattern::AttrName       = QStringLiteral("name");
 
 VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent)
-    : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<qint64, VDataTool*>()),
+    : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false)
 {
 }
@@ -202,7 +202,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
     }
 }
 
-VDataTool *VPattern::getTool(const qint64 &id)
+VDataTool *VPattern::getTool(const quint32 &id)
 {
     if (tools.contains(id))
     {
@@ -216,7 +216,7 @@ VDataTool *VPattern::getTool(const qint64 &id)
     return 0;
 }
 
-void VPattern::setCursor(const qint64 &value)
+void VPattern::setCursor(const quint32 &value)
 {
     cursor = value;
     emit ChangedCursor(cursor);
@@ -230,7 +230,7 @@ void VPattern::setCurrentData()
         if (nameActivDraw != nameDraw)
         {
             nameActivDraw = nameDraw;
-            qint64 id = 0;
+            quint32 id = 0;
             if (history.size() == 0)
             {
                 return;
@@ -261,14 +261,14 @@ void VPattern::setCurrentData()
     }
 }
 
-void VPattern::AddTool(const qint64 &id, VDataTool *tool)
+void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_CHECK_PTR(tool);
     tools.insert(id, tool);
 }
 
-void VPattern::UpdateToolData(const qint64 &id, VContainer *data)
+void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_CHECK_PTR(data);
@@ -277,7 +277,7 @@ void VPattern::UpdateToolData(const qint64 &id, VContainer *data)
     tool->VDataTool::setData(data);
 }
 
-void VPattern::IncrementReferens(qint64 id) const
+void VPattern::IncrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     VDataTool *tool = tools.value(id);
@@ -285,7 +285,7 @@ void VPattern::IncrementReferens(qint64 id) const
     tool->incrementReferens();
 }
 
-void VPattern::DecrementReferens(qint64 id) const
+void VPattern::DecrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     VDataTool *tool = tools.value(id);
@@ -295,11 +295,11 @@ void VPattern::DecrementReferens(qint64 id) const
 
 void VPattern::TestUniqueId() const
 {
-    QVector<qint64> vector;
+    QVector<quint32> vector;
     CollectId(documentElement(), vector);
 }
 
-qint64 VPattern::SPointActiveDraw()
+quint32 VPattern::SPointActiveDraw()
 {
     QDomElement calcElement;
     if (GetActivNodeElement(TagCalculation, calcElement))
@@ -411,7 +411,7 @@ void VPattern::haveLiteChange()
     emit patternChanged();
 }
 
-void VPattern::ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
 }
@@ -504,13 +504,13 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
     try
     {
         VDetail detail;
-        const qint64 id = GetParametrId(domElement);
+        const quint32 id = GetParametrId(domElement);
         detail.setName(GetParametrString(domElement, VAbstractTool::AttrName, ""));
         detail.setMx(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0")));
         detail.setMy(toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0")));
-        detail.setSeamAllowance(GetParametrLongLong(domElement, VToolDetail::AttrSupplement, "1"));
+        detail.setSeamAllowance(GetParametrUInt(domElement, VToolDetail::AttrSupplement, "1"));
         detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
-        detail.setClosed(GetParametrLongLong(domElement, VToolDetail::AttrClosed, "1"));
+        detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -521,7 +521,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
             {
                 if (element.tagName() == VToolDetail::TagNode)
                 {
-                    const qint64 id = GetParametrLongLong(element, VToolDetail::AttrIdObject, "0");
+                    const quint32 id = GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
                     const qreal mx = toPixel(GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                     const qreal my = toPixel(GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
                     const NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
@@ -600,7 +600,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             VToolSinglePoint *spoint = 0;
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "A");
                 const qreal x = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
                 const qreal y = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
@@ -636,14 +636,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 1: //VToolEndLine::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                const qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
+                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId,
@@ -659,15 +659,15 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 2: //VToolAlongLine::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this,
                                        data, parse, Tool::FromFile);
@@ -682,16 +682,16 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 3: //VToolShoulderPoint::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                const qint64 p1Line = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
-                const qint64 p2Line = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
-                const qint64 pShoulder = GetParametrLongLong(domElement, VAbstractTool::AttrPShoulder, "0");
+                const quint32 p1Line = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
+                const quint32 p2Line = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
+                const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, "0");
 
                 VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
                                        data, parse, Tool::FromFile);
@@ -706,15 +706,15 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 4: //VToolNormal::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name,
@@ -730,16 +730,16 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 5: //VToolBisector::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const qint64 thirdPointId = GetParametrLongLong(domElement, VAbstractTool::AttrThirdPoint, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
 
                 VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId,
                                     typeLine, name, mx, my, scene, this, data, parse, Tool::FromFile);
@@ -754,14 +754,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 6: //VToolLineIntersect::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const qint64 p1Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line1, "0");
-                const qint64 p2Line1Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line1, "0");
-                const qint64 p1Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line2, "0");
-                const qint64 p2Line2Id = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line2, "0");
+                const quint32 p1Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, "0");
+                const quint32 p2Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, "0");
+                const quint32 p1Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, "0");
+                const quint32 p2Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, "0");
 
                 VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name,
                                             mx, my, scene, this, data, parse, Tool::FromFile);
@@ -776,14 +776,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 7: //VToolPointOfContact::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
-                const qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name,
                                             mx, my, scene, this,data, parse, Tool::FromFile);
@@ -798,9 +798,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 8: //VNodePoint::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-                const qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
+                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
@@ -818,15 +818,15 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 9: //VToolHeight::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
-                const qint64 basePointId = GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
-                const qint64 p1LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
-                const qint64 p2LineId = GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
+                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
+                const quint32 p1LineId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
+                const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
 
                 VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId,
                                     mx, my, scene, this, data, parse, Tool::FromFile);
@@ -841,14 +841,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 10: //VToolTriangle::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const qint64 axisP1Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP1, "0");
-                const qint64 axisP2Id = GetParametrLongLong(domElement, VAbstractTool::AttrAxisP2, "0");
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 axisP1Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, "0");
+                const quint32 axisP2Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this,
                                       data, parse, Tool::FromFile);
@@ -863,12 +863,12 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 11: //VToolPointOfIntersection::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const qint64 firstPointId = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const qint64 secondPointId = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId,
                                             mx, my, scene, this, data, parse,Tool::FromFile);
@@ -883,12 +883,12 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 12: //VToolCutSpline::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                const qint64 splineId = GetParametrLongLong(domElement, VToolCutSpline::AttrSpline, "0");
+                const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
 
                 VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Tool::FromFile);
             }
@@ -902,12 +902,12 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 13: //VToolCutSplinePath::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                const qint64 splinePathId = GetParametrLongLong(domElement, VToolCutSplinePath::AttrSplinePath, "0");
+                const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
 
                 VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my,
                                             scene, this, data, parse, Tool::FromFile);
@@ -922,12 +922,12 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
         case 14: //VToolCutArc::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                const qint64 arcId = GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
+                const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
 
                 VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Tool::FromFile);
             }
@@ -950,9 +950,9 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     try
     {
-        const qint64 id = GetParametrId(domElement);
-        const qint64 firstPoint = GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-        const qint64 secondPoint = GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+        const quint32 id = GetParametrId(domElement);
+        const quint32 firstPoint = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+        const quint32 secondPoint = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
         const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
 
         VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Tool::FromFile);
@@ -978,9 +978,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 0: //VToolSpline::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 point1 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint1, "0");
-                const qint64 point4 = GetParametrLongLong(domElement, VAbstractTool::AttrPoint4, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 point1 = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, "0");
+                const quint32 point4 = GetParametrUInt(domElement, VAbstractTool::AttrPoint4, "0");
                 const qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
                 const qreal angle2 = GetParametrDouble(domElement, VAbstractTool::AttrAngle2, "90.0");
                 const qreal kAsm1 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm1, "1.0");
@@ -1000,7 +1000,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 1: //VToolSplinePath::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
+                const quint32 id = GetParametrId(domElement);
                 const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
                 VSplinePath *path = new VSplinePath(kCurve);
                 Q_CHECK_PTR(path);
@@ -1017,7 +1017,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                             const qreal kAsm1 = GetParametrDouble(element, VAbstractTool::AttrKAsm1, "1.0");
                             const qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
                             const qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
-                            const qint64 pSpline = GetParametrLongLong(element, VAbstractTool::AttrPSpline, "0");
+                            const quint32 pSpline = GetParametrUInt(element, VAbstractTool::AttrPSpline, "0");
                             const VPointF p = *data->GeometricObject<const VPointF *>(pSpline);
 
                             QLineF line(0, 0, 100, 0);
@@ -1045,9 +1045,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 2: //VNodeSpline::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-                const qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
+                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
                 Q_CHECK_PTR(spl);
                 spl->setIdObject(idObject);
@@ -1065,9 +1065,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 3: //VNodeSplinePath::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-                const qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
+                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
                 Q_CHECK_PTR(path);
                 path->setIdObject(idObject);
@@ -1102,8 +1102,8 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
         case 0: //VToolArc::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 center = GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
                 const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
                 const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
@@ -1120,9 +1120,9 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
         case 1: //VNodeArc::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 idObject = GetParametrLongLong(domElement, VAbstractNode::AttrIdObject, "0");
-                const qint64 idTool = GetParametrLongLong(domElement, VAbstractNode::AttrIdTool, "0");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
+                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
                 Q_CHECK_PTR(arc);
                 arc->setIdObject(idObject);
@@ -1157,9 +1157,9 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
         case 0: //VToolUnionDetails::ToolType
             try
             {
-                const qint64 id = GetParametrId(domElement);
-                const qint64 indexD1 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD1, "-1");
-                const qint64 indexD2 = GetParametrLongLong(domElement, VToolUnionDetails::AttrIndexD2, "-1");
+                const quint32 id = GetParametrId(domElement);
+                const quint32 indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
+                const quint32 indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
 
                 const QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
@@ -1191,7 +1191,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
             {
                 if (domElement.tagName() == "increment")
                 {
-                    qint64 id = GetParametrId(domElement);
+                    quint32 id = GetParametrId(domElement);
                     QString name = GetParametrString(domElement, "name", "");
                     qreal base = GetParametrDouble(domElement, "base", "0");
                     qreal ksize = GetParametrDouble(domElement, "ksize", "0");
@@ -1206,10 +1206,10 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
     }
 }
 
-qint64 VPattern::GetParametrId(const QDomElement &domElement) const
+quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    const qint64 id = GetParametrLongLong(domElement, "id", "0");
+    const quint32 id = GetParametrUInt(domElement, "id", "0");
     if (id <= 0)
     {
         throw VExceptionWrongParameterId(tr("Got wrong parameter id. Need only id > 0."), domElement);
@@ -1217,11 +1217,11 @@ qint64 VPattern::GetParametrId(const QDomElement &domElement) const
     return id;
 }
 
-void VPattern::CollectId(const QDomElement &node, QVector<qint64> &vector) const
+void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
 {
     if (node.hasAttribute("id"))
     {
-        const qint64 id = GetParametrId(node);
+        const quint32 id = GetParametrId(node);
         if (vector.contains(id))
         {
             throw VExceptionUniqueId(tr("This id is not unique."), node);

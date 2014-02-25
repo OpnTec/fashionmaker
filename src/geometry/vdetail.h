@@ -103,7 +103,7 @@ public:
      * @param id object id.
      * @return true if containe.
      */
-    bool           Containes(const qint64 &id)const;
+    bool           Containes(const quint32 &id)const;
     /**
      * @brief operator [] find node by index in list.
      * @param indx index node in list.
@@ -191,17 +191,17 @@ public:
      * @param id object (arc, point, spline, splinePath) id.
      * @return index in list or -1 id can't find.
      */
-    ptrdiff_t      indexOfNode(const qint64 &id) const;
+    ptrdiff_t      indexOfNode(const quint32 &id) const;
     /**
      * @brief id return id detail in list data.
      * @return id.
      */
-    qint64         id() const;
+    quint32         id() const;
     /**
      * @brief setId set id detail in list data.
      * @param id detail id.
      */
-    void           setId(const qint64 &id);
+    void           setId(const quint32 &id);
     /**
      * @brief OnEdge checks if two poins located on the edge. Edge is line between two points. If between two points
      * located arcs or splines ignore this.
@@ -209,7 +209,7 @@ public:
      * @param p2 id second point.
      * @return true - on edge, false - no.
      */
-    bool           OnEdge(const qint64 &p1, const qint64 &p2)const;
+    bool           OnEdge(const quint32 &p1, const quint32 &p2)const;
     /**
      * @brief Edge return edge index in detail. Edge is line between two points. If between two points
      * located arcs or splines ignore this.
@@ -217,32 +217,32 @@ public:
      * @param p2 id second point.
      * @return edge index or -1 if points don't located on edge
      */
-    ptrdiff_t      Edge(const qint64 &p1, const qint64 &p2)const;
+    ptrdiff_t      Edge(const quint32 &p1, const quint32 &p2)const;
     /**
      * @brief NodeOnEdge return nodes located on edge with index.
      * @param index index of edge.
      * @param p1 first node.
      * @param p2 second node.
      */
-    void           NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2)const;
+    void           NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)const;
     /**
      * @brief RemoveEdge return detail without edge with index.
      * @param index idex of edge.
      * @return
      */
-    VDetail        RemoveEdge(const ptrdiff_t &index) const;
+    VDetail        RemoveEdge(const quint32 &index) const;
     /**
      * @brief Missing find missing ids in detail. When we deleted object in detail and return this detail need
      * understand, what nodes need make invisible.
      * @param det changed detail.
      * @return  list with missing detail.
      */
-    QList<qint64>  Missing(const VDetail &det) const;
+    QList<quint32>  Missing(const VDetail &det) const;
 private:
     /**
      * @brief _id id detail.
      */
-    qint64         _id;
+    quint32         _id;
     /**
      * @brief nodes list detail nodes.
      */
@@ -282,7 +282,7 @@ private:
      * @param id object (arc, point, spline, splinePath) id.
      * @return index in list or -1 id can't find.
      */
-    static ptrdiff_t     indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id);
+    static ptrdiff_t     indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
 };
 
 #endif // VDETAIL_H

@@ -94,20 +94,20 @@ public:
      * @brief getBasePointId return id base point of line
      * @return id
      */
-    inline qint64     getBasePointId() const {return basePointId;}
+    inline quint32     getBasePointId() const {return basePointId;}
     /**
      * @brief setBasePointId set id base point of line
      * @param value id
      * @param id don't show this id in list
      */
-    void              setBasePointId(const qint64 &value, const qint64 &id);
+    void              setBasePointId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void      ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -137,7 +137,7 @@ private:
     /**
      * @brief basePointId id base point of line
      */
-    qint64            basePointId;
+    quint32            basePointId;
 };
 
 #endif // DIALOGENDLINE_H

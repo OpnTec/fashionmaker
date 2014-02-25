@@ -98,13 +98,13 @@ public:
      * @brief getTools return list of tools pointers.
      * @return list.
      */
-    inline QHash<qint64, VDataTool*>* getTools() {return &tools;}
+    inline QHash<quint32, VDataTool*>* getTools() {return &tools;}
     /**
      * @brief getTool return tool from tool list.
      * @param id tool id.
      * @return tool.
      */
-    VDataTool* getTool(const qint64 &id);
+    VDataTool* getTool(const quint32 &id);
     /**
      * @brief getHistory return list with list of history records.
      * @return list of history records.
@@ -114,12 +114,12 @@ public:
      * @brief getCursor return cursor.
      * @return cursor.
      */
-    inline qint64  getCursor() const {return cursor;}
+    inline quint32  getCursor() const {return cursor;}
     /**
      * @brief setCursor set cursor.
      * @param value cursor.
      */
-    void           setCursor(const qint64 &value);
+    void           setCursor(const quint32 &value);
     /**
      * @brief setCurrentData set current data set.
      */
@@ -129,23 +129,23 @@ public:
      * @param id tool id.
      * @param tool tool.
      */
-    void           AddTool(const qint64 &id, VDataTool *tool);
+    void           AddTool(const quint32 &id, VDataTool *tool);
     /**
      * @brief UpdateToolData update tool in list tools.
      * @param id tool id.
      * @param data container with variables.
      */
-    void           UpdateToolData(const qint64 &id, VContainer *data);
+    void           UpdateToolData(const quint32 &id, VContainer *data);
     /**
      * @brief IncrementReferens increment reference parent objects.
      * @param id parent object id.
      */
-    void           IncrementReferens(qint64 id) const;
+    void           IncrementReferens(quint32 id) const;
     /**
      * @brief DecrementReferens decrement reference parent objects.
      * @param id parent object id.
      */
-    void           DecrementReferens(qint64 id) const;
+    void           DecrementReferens(quint32 id) const;
     /**
      * @brief TestUniqueId test exist unique id in pattern file. Each id must be unique.
      */
@@ -154,7 +154,7 @@ public:
      * @brief SPointActiveDraw return id base point current pattern peace.
      * @return id base point.
      */
-    qint64         SPointActiveDraw();
+    quint32         SPointActiveDraw();
     inline bool    isPatternModified() const {return patternModified;}
     inline void    setPatternModified(bool value) {patternModified = value;}
     /**
@@ -199,12 +199,12 @@ signals:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    void           ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    void           ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief ChangedCursor change cursor position.
      * @param id tool id.
      */
-    void           ChangedCursor(qint64 id);
+    void           ChangedCursor(quint32 id);
 public slots:
     /**
      * @brief FullUpdateTree lite parse file.
@@ -220,7 +220,7 @@ public slots:
      * @param color hightlight color.
      * @param enable enable or diasable hightlight.
      */
-    void           ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
+    void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
 private:
     Q_DISABLE_COPY(VPattern)
     /**
@@ -230,7 +230,7 @@ private:
     /**
      * @brief tools list with pointer on tools.
      */
-    QHash<qint64, VDataTool*> tools;
+    QHash<quint32, VDataTool*> tools;
     /**
      * @brief history history records.
      */
@@ -238,7 +238,7 @@ private:
     /**
      * @brief cursor cursor keep id tool after which we will add new tool in file.
      */
-    qint64         cursor;
+    quint32         cursor;
     QComboBox      *comboBoxDraws;
     /**
      * @brief mode current draw mode.
@@ -353,13 +353,13 @@ private:
      * @param domElement tag in xml tree.
      * @return id value.
      */
-    qint64         GetParametrId(const QDomElement& domElement) const;
+    quint32         GetParametrId(const QDomElement& domElement) const;
     /**
      * @brief CollectId recursive function, try find id attribute in file. Throw exclusion if find not unique.
      * @param node tag in xml tree.
      * @param vector list with ids.
      */
-    void           CollectId(const QDomElement &node, QVector<qint64> &vector)const;
+    void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                                    VMainGraphicsScene *sceneDetail);
 };

@@ -110,7 +110,7 @@ void DialogIncrements::FillIncrementTable()
 {
     const QHash<QString, VIncrementTableRow> *incrementTable = data->DataIncrementTable();
     QHashIterator<QString, VIncrementTableRow> i(*incrementTable);
-    QMap<qint64, QString> map;
+    QMap<quint32, QString> map;
     //Sorting QHash by id
     while (i.hasNext())
     {
@@ -120,7 +120,7 @@ void DialogIncrements::FillIncrementTable()
     }
 
     qint32 currentRow = -1;
-    QMapIterator<qint64, QString> iMap(map);
+    QMapIterator<quint32, QString> iMap(map);
     while (iMap.hasNext())
     {
         iMap.next();
@@ -312,7 +312,7 @@ void DialogIncrements::clickedToolButtonAdd()
         num++;
     } while (data->IncrementTableContains(name));
 
-    qint64 id = data->getNextId();
+    quint32 id = data->getNextId();
     qreal base = 0;
     qreal ksize = 0;
     qreal kgrowth = 0;
@@ -367,7 +367,7 @@ void DialogIncrements::clickedToolButtonRemove()
     qint32 row = item->row();
     QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
     data->RemoveIncrementTableRow(itemName->text());
-    qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+    quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -384,7 +384,7 @@ void DialogIncrements::clickedToolButtonRemove()
     emit haveLiteChange();
 }
 
-void DialogIncrements::AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize, qreal kgrowth,
+void DialogIncrements::AddIncrementToFile(quint32 id, QString name, qreal base, qreal ksize, qreal kgrowth,
                                           QString description)
 {
     QDomNodeList list = doc->elementsByTagName("increments");
@@ -421,14 +421,14 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
 {
     QTableWidgetItem *item = 0;
     QTableWidgetItem *itemName = 0;
-    qint64 id;
+    quint32 id;
     QDomElement domElement;
     this->row = row;
     switch (column)
     {
         case 0:
             item = ui->tableWidgetIncrement->item(row, 0);
-            id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+            id = qvariant_cast<quint32>(item->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
@@ -442,7 +442,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
         case 2:
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<qint64>(itemName->data(Qt::UserRole));
+            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
@@ -464,7 +464,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
         case 3:
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<qint64>(itemName->data(Qt::UserRole));
+            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
@@ -477,7 +477,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
         case 4:
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<qint64>(itemName->data(Qt::UserRole));
+            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {
@@ -490,7 +490,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
         case 5:
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<qint64>(itemName->data(Qt::UserRole));
+            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
             if (domElement.isElement())
             {

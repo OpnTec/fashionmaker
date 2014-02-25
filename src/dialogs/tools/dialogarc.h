@@ -54,12 +54,12 @@ public:
      * @brief GetCenter return id of center point
      * @return id id
      */
-    inline qint64    GetCenter() const {return center;}
+    inline quint32    GetCenter() const {return center;}
     /**
      * @brief SetCenter set id of center point
      * @param value id
      */
-    void             SetCenter(const qint64 &value);
+    void             SetCenter(const quint32 &value);
     /**
      * @brief GetRadius return formula of radius
      * @return formula
@@ -96,7 +96,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -172,7 +172,7 @@ private:
     /**
      * @brief center id of center point
      */
-    qint64           center;
+    quint32           center;
     /**
      * @brief radius formula of radius
      */

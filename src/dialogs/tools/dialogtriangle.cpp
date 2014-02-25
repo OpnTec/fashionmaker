@@ -57,7 +57,7 @@ DialogTriangle::~DialogTriangle()
     delete ui;
 }
 
-void DialogTriangle::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogTriangle::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -110,25 +110,25 @@ void DialogTriangle::setPointName(const QString &value)
     ui->lineEditNamePoint->setText(pointName);
 }
 
-void DialogTriangle::setSecondPointId(const qint64 &value, const qint64 &id)
+void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogTriangle::setFirstPointId(const qint64 &value, const qint64 &id)
+void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-void DialogTriangle::setAxisP2Id(const qint64 &value, const qint64 &id)
+void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
 {
     axisP2Id = value;
     setCurrentPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
 }
 
-void DialogTriangle::setAxisP1Id(const qint64 &value, const qint64 &id)
+void DialogTriangle::setAxisP1Id(const quint32 &value, const quint32 &id)
 {
     axisP1Id = value;
     setCurrentPointId(ui->comboBoxAxisP1, axisP1Id, value, id);

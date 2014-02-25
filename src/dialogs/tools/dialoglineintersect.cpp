@@ -57,7 +57,7 @@ DialogLineIntersect::~DialogLineIntersect()
     delete ui;
 }
 
-void DialogLineIntersect::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogLineIntersect::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -142,28 +142,28 @@ void DialogLineIntersect::DialogAccepted()
 
 void DialogLineIntersect::P1Line1Changed( int index)
 {
-    p1Line1 = qvariant_cast<qint64>(ui->comboBoxP1Line1->itemData(index));
+    p1Line1 = qvariant_cast<quint32>(ui->comboBoxP1Line1->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
 }
 
 void DialogLineIntersect::P2Line1Changed(int index)
 {
-    p2Line1 = qvariant_cast<qint64>(ui->comboBoxP2Line1->itemData(index));
+    p2Line1 = qvariant_cast<quint32>(ui->comboBoxP2Line1->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
 }
 
 void DialogLineIntersect::P1Line2Changed(int index)
 {
-    p1Line2 = qvariant_cast<qint64>(ui->comboBoxP1Line2->itemData(index));
+    p1Line2 = qvariant_cast<quint32>(ui->comboBoxP1Line2->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
 }
 
 void DialogLineIntersect::P2Line2Changed(int index)
 {
-    p2Line2 = qvariant_cast<qint64>(ui->comboBoxP2Line2->itemData(index));
+    p2Line2 = qvariant_cast<quint32>(ui->comboBoxP2Line2->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
 }
@@ -195,25 +195,25 @@ bool DialogLineIntersect::CheckIntersecion()
     }
 }
 
-void DialogLineIntersect::setP2Line2(const qint64 &value)
+void DialogLineIntersect::setP2Line2(const quint32 &value)
 {
     p2Line2 = value;
     ChangeCurrentData(ui->comboBoxP2Line2, value);
 }
 
-void DialogLineIntersect::setP1Line2(const qint64 &value)
+void DialogLineIntersect::setP1Line2(const quint32 &value)
 {
     p1Line2 = value;
     ChangeCurrentData(ui->comboBoxP1Line2, value);
 }
 
-void DialogLineIntersect::setP2Line1(const qint64 &value)
+void DialogLineIntersect::setP2Line1(const quint32 &value)
 {
     p2Line1 = value;
     ChangeCurrentData(ui->comboBoxP2Line1, value);
 }
 
-void DialogLineIntersect::setP1Line1(const qint64 &value)
+void DialogLineIntersect::setP1Line1(const quint32 &value)
 {
     p1Line1 = value;
     ChangeCurrentData(ui->comboBoxP1Line1, value);

@@ -100,17 +100,16 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
     return false;
 }
 
-qint64 VDomDocument::GetParametrLongLong(const QDomElement &domElement, const QString &name,
-                                         const QString &defValue) const
+quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     bool ok = false;
     const QString parametr = GetParametrString(domElement, name, defValue);
-    const qint64 id = parametr.toLongLong(&ok);
+    const quint32 id = parametr.toUInt(&ok);
     if (ok == false)
     {
-        throw VExceptionConversionError(tr("Can't convert toLongLong parameter"), name);
+        throw VExceptionConversionError(tr("Can't convert toUInt parameter"), name);
     }
     return id;
 }

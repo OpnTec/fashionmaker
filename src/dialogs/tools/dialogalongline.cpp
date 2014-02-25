@@ -81,7 +81,7 @@ DialogAlongLine::~DialogAlongLine()
     delete ui;
 }
 
-void DialogAlongLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogAlongLine::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -124,12 +124,12 @@ void DialogAlongLine::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogAlongLine::setSecondPointId(const qint64 &value, const qint64 &id)
+void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogAlongLine::setFirstPointId(const qint64 &value, const qint64 &id)
+void DialogAlongLine::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }

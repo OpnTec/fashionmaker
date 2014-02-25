@@ -74,42 +74,42 @@ public:
      * @brief getBasePointId return id base point of height
      * @return id
      */
-    inline qint64    getBasePointId() const {return basePointId;}
+    inline quint32    getBasePointId() const {return basePointId;}
     /**
      * @brief setBasePointId set id base point of height
      * @param value id
      * @param id don't show this id in list
      */
-    void             setBasePointId(const qint64 &value, const qint64 &id);
+    void             setBasePointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getP1LineId return id first point of line
      * @return id id
      */
-    inline qint64    getP1LineId() const {return p1LineId;}
+    inline quint32    getP1LineId() const {return p1LineId;}
     /**
      * @brief setP1LineId set id first point of line
      * @param value id
      * @param id don't show this id in list
      */
-    void             setP1LineId(const qint64 &value, const qint64 &id);
+    void             setP1LineId(const quint32 &value, const quint32 &id);
     /**
      * @brief getP2LineId return id second point of line
      * @return id
      */
-    inline qint64    getP2LineId() const{return p2LineId;}
+    inline quint32    getP2LineId() const{return p2LineId;}
     /**
      * @brief setP2LineId set id second point of line
      * @param value id
      * @param id don't show this id in list
      */
-    void             setP2LineId(const qint64 &value, const qint64 &id);
+    void             setP2LineId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -135,15 +135,15 @@ private:
     /**
      * @brief basePointId id base point of height
      */
-    qint64           basePointId;
+    quint32           basePointId;
     /**
      * @brief p1LineId id first point of line
      */
-    qint64           p1LineId;
+    quint32           p1LineId;
     /**
      * @brief p2LineId id second point of line
      */
-    qint64           p2LineId;
+    quint32           p2LineId;
 };
 
 #endif // DIALOGHEIGHT_H

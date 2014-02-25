@@ -82,7 +82,7 @@ DialogBisector::~DialogBisector()
     delete ui;
 }
 
-void DialogBisector::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogBisector::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -144,17 +144,17 @@ void DialogBisector::setFormula(const QString &value)
     ui->lineEditFormula->setText(formula);
 }
 
-void DialogBisector::setFirstPointId(const qint64 &value, const qint64 &id)
+void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
-void DialogBisector::setSecondPointId(const qint64 &value, const qint64 &id)
+void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogBisector::setThirdPointId(const qint64 &value, const qint64 &id)
+void DialogBisector::setThirdPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
 }

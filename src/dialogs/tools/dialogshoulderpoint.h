@@ -84,42 +84,42 @@ public:
      * @brief getP1Line return id first point of line
      * @return id
      */
-    inline qint64  getP1Line() const {return p1Line;}
+    inline quint32  getP1Line() const {return p1Line;}
     /**
      * @brief setP1Line set id first point of line
      * @param value id
      * @param id don't show this id in list
      */
-    void           setP1Line(const qint64 &value, const qint64 &id);
+    void           setP1Line(const quint32 &value, const quint32 &id);
     /**
      * @brief getP2Line return id second point of line
      * @return id
      */
-    inline qint64  getP2Line() const {return p2Line;}
+    inline quint32  getP2Line() const {return p2Line;}
     /**
      * @brief setP2Line set id second point of line
      * @param value id
      * @param id don't show this id in list
      */
-    void           setP2Line(const qint64 &value, const qint64 &id);
+    void           setP2Line(const quint32 &value, const quint32 &id);
     /**
      * @brief getPShoulder return id shoulder point
      * @return id
      */
-    inline qint64  getPShoulder() const {return pShoulder;}
+    inline quint32  getPShoulder() const {return pShoulder;}
     /**
      * @brief setPShoulder set id shoulder point
      * @param value id
      * @param id don't show this id in list
      */
-    void           setPShoulder(const qint64 &value, const qint64 &id);
+    void           setPShoulder(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void   ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -149,15 +149,15 @@ private:
     /**
      * @brief p1Line id first point of line
      */
-    qint64         p1Line;
+    quint32         p1Line;
     /**
      * @brief p2Line id second point of line
      */
-    qint64         p2Line;
+    quint32         p2Line;
     /**
      * @brief pShoulder id shoulder point
      */
-    qint64         pShoulder;
+    quint32         pShoulder;
 };
 
 #endif // DIALOGSHOULDERPOINT_H

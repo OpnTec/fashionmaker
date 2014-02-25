@@ -63,7 +63,7 @@ DialogHistory::~DialogHistory()
 void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
-    qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+    quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
     emit ShowHistoryTool(id, Qt::green, false);
     emit DialogClosed(QDialog::Accepted);
 }
@@ -78,7 +78,7 @@ void DialogHistory::cellClicked(int row, int column)
         item = ui->tableWidget->item(row, 0);
         cursorRow = row;
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
-        qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+        quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         disconnect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
         doc->setCursor(id);
         connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
@@ -86,22 +86,22 @@ void DialogHistory::cellClicked(int row, int column)
     else
     {
         QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
-        qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+        quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, Qt::green, false);
 
         cursorToolRecordRow = row;
         item = ui->tableWidget->item(cursorToolRecordRow, 0);
-        id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+        id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, Qt::green, true);
     }
 }
 
-void DialogHistory::ChangedCursor(qint64 id)
+void DialogHistory::ChangedCursor(quint32 id)
 {
     for (qint32 i = 0; i< ui->tableWidget->rowCount(); ++i)
     {
         QTableWidgetItem *item = ui->tableWidget->item(i, 0);
-        qint64 rId = qvariant_cast<qint64>(item->data(Qt::UserRole));
+        quint32 rId = qvariant_cast<quint32>(item->data(Qt::UserRole));
         if (rId == id)
         {
             QTableWidgetItem *oldCursorItem = ui->tableWidget->item(cursorRow, 0);
@@ -161,15 +161,15 @@ void DialogHistory::FillTable()
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     QString record = QString();
-    qint64 basePointId = 0;
-    qint64 secondPointId = 0;
-    qint64 firstPointId = 0;
-    qint64 thirdPointId = 0;
-    qint64 p1Line1 = 0;
-    qint64 p2Line1 = 0;
-    qint64 p1Line2 = 0;
-    qint64 p2Line2 = 0;
-    qint64 center = 0;
+    quint32 basePointId = 0;
+    quint32 secondPointId = 0;
+    quint32 firstPointId = 0;
+    quint32 thirdPointId = 0;
+    quint32 p1Line1 = 0;
+    quint32 p2Line1 = 0;
+    quint32 p1Line2 = 0;
+    quint32 p2Line2 = 0;
+    quint32 center = 0;
     QDomElement domElement;
     switch ( tool.getTypeTool() )
     {
@@ -186,7 +186,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
+                basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
             }
             QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
             QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
@@ -198,8 +198,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
             QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
@@ -211,8 +211,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
             QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
@@ -231,8 +231,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
             QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
@@ -245,9 +245,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
-                thirdPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrThirdPoint, "0");
+                firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
+                thirdPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
             }
             QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
             QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
@@ -262,10 +262,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                p1Line1 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line1, "0");
-                p2Line1 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line1, "0");
-                p1Line2 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line2, "0");
-                p2Line2 = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line2, "0");
+                p1Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, "0");
+                p2Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, "0");
+                p1Line2 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, "0");
+                p2Line2 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, "0");
             }
             QString p1Line1Name = data->GeometricObject<const VPointF *>(p1Line1)->name();
             QString p2Line1Name = data->GeometricObject<const VPointF *>(p2Line1)->name();
@@ -314,9 +314,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                center = doc->GetParametrLongLong(domElement, VAbstractTool::AttrCenter, "0");
-                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                center = doc->GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
+                firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
             QString centerName = data->GeometricObject<const VPointF *>(center)->name();
@@ -328,14 +328,14 @@ QString DialogHistory::Record(const VToolRecord &tool)
         }
         case Tool::Height:
         {
-            qint64 p1LineId = 0;
-            qint64 p2LineId = 0;
+            quint32 p1LineId = 0;
+            quint32 p2LineId = 0;
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                basePointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrBasePoint, "0");
-                p1LineId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP1Line, "0");
-                p2LineId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrP2Line, "0");
+                basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
+                p1LineId = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
+                p2LineId = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
             }
             QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
             QString p1LineIdName = data->GeometricObject<const VPointF *>(p1LineId)->name();
@@ -346,15 +346,15 @@ QString DialogHistory::Record(const VToolRecord &tool)
         }
         case Tool::Triangle:
         {
-            qint64 axisP1Id = 0;
-            qint64 axisP2Id = 0;
+            quint32 axisP1Id = 0;
+            quint32 axisP2Id = 0;
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                axisP1Id = doc->GetParametrLongLong(domElement, VAbstractTool::AttrAxisP1, "0");
-                axisP2Id = doc->GetParametrLongLong(domElement, VAbstractTool::AttrAxisP2, "0");
-                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                axisP1Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, "0");
+                axisP2Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, "0");
+                firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString axisP1IdName = data->GeometricObject<const VPointF *>(axisP1Id)->name();
             QString axisP2IdName = data->GeometricObject<const VPointF *>(axisP2Id)->name();
@@ -369,8 +369,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                firstPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-                secondPointId = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+                firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+                secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
             }
             QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
             QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
@@ -381,11 +381,11 @@ QString DialogHistory::Record(const VToolRecord &tool)
         break;
         case Tool::CutArcTool:
         {
-            qint64 arcId = 0;
+            quint32 arcId = 0;
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                arcId = doc->GetParametrLongLong(domElement, VToolCutArc::AttrArc, "0");
+                arcId = doc->GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
             }
             const VArc *arc = data->GeometricObject<const VArc *>(arcId);
             QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
@@ -395,11 +395,11 @@ QString DialogHistory::Record(const VToolRecord &tool)
         break;
         case Tool::CutSplineTool:
         {
-            qint64 splineId = 0;
+            quint32 splineId = 0;
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                splineId = doc->GetParametrLongLong(domElement, VToolCutSpline::AttrSpline, "0");
+                splineId = doc->GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
             }
             const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
             QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
@@ -410,11 +410,11 @@ QString DialogHistory::Record(const VToolRecord &tool)
         break;
         case Tool::CutSplinePathTool:
         {
-            qint64 splinePathId = 0;
+            quint32 splinePathId = 0;
             domElement = doc->elementById(QString().setNum(tool.getId()));
             if (domElement.isElement())
             {
-                splinePathId = doc->GetParametrLongLong(domElement, VToolCutSplinePath::AttrSplinePath, "0");
+                splinePathId = doc->GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
             }
             const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
             QVector<VSplinePoint> points = splPath->GetSplinePath();
@@ -469,7 +469,7 @@ void DialogHistory::ShowPoint()
         item->setSelected(true);
         cursorToolRecordRow = 0;
         item = ui->tableWidget->item(0, 0);
-        qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+        quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, Qt::green, true);
     }
 }
@@ -477,7 +477,7 @@ void DialogHistory::ShowPoint()
 void DialogHistory::closeEvent(QCloseEvent *event)
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
-    qint64 id = qvariant_cast<qint64>(item->data(Qt::UserRole));
+    quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
     emit ShowHistoryTool(id, Qt::green, false);
     DialogTool::closeEvent(event);
 }

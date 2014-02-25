@@ -30,7 +30,7 @@
 
 qreal VDrawTool::factor = 1;
 
-VDrawTool::VDrawTool(VPattern *doc, VContainer *data, qint64 id)
+VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(0)
 {
@@ -44,7 +44,7 @@ VDrawTool::~VDrawTool()
     delete dialog;
 }
 
-void VDrawTool::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     Q_UNUSED(id);
     Q_UNUSED(color);
@@ -102,7 +102,7 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     bool ok = doc->GetActivNodeElement(VPattern::TagCalculation, calcElement);
     if (ok)
     {
-        qint64 id = doc->getCursor();
+        quint32 id = doc->getCursor();
         if (id <= 0)
         {
             calcElement.appendChild(domElement);

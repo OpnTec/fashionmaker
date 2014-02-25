@@ -67,7 +67,7 @@ public slots:
      * @param id id of point or detail
      * @param type don't show this id in list
      */
-    virtual void       ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void       ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -120,7 +120,7 @@ private:
      * @param kAsm2 second coefficient asymmetry
      * @param angle2 second angle in degree
      */
-    void               NewItem(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    void               NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     /**
      * @brief dataPoint show data of point in fields
      * @param id id
@@ -129,7 +129,7 @@ private:
      * @param kAsm2 second coefficient asymmetry
      * @param angle2 second angle of spline
      */
-    void               DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    void               DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     /**
      * @brief EnableFields enable or disable fields
      */

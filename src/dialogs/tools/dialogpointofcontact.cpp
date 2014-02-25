@@ -75,7 +75,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
 }
 
-void DialogPointOfContact::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogPointOfContact::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -129,17 +129,17 @@ void DialogPointOfContact::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogPointOfContact::setSecondPoint(const qint64 &value, const qint64 &id)
+void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
 }
 
-void DialogPointOfContact::setFirstPoint(const qint64 &value, const qint64 &id)
+void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
 }
 
-void DialogPointOfContact::setCenter(const qint64 &value, const qint64 &id)
+void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxCenter, center, value, id);
     center = value;

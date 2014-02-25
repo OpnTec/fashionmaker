@@ -66,7 +66,7 @@ public:
      * @brief referens return count of referens.
      * @return count count of referens.
      */
-    virtual inline qint64 referens() const {return _referens;}
+    virtual inline quint32 referens() const {return _referens;}
     /**
      * @brief incrementReferens increment referens.
      */
@@ -83,7 +83,7 @@ protected:
     /**
      * @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool.
      */
-    qint64                _referens;
+    quint32                _referens;
 };
 
 #endif // VDATATOOL_H

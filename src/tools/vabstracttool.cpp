@@ -69,7 +69,7 @@ const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
-VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, qint64 id, QObject *parent)
+VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
     Q_CHECK_PTR(doc);
@@ -303,9 +303,9 @@ const QStringList VAbstractTool::Styles()
     return styles;
 }
 
-void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VPattern *doc)
+void VAbstractTool::AddRecord(const quint32 id, const Tool::Tools &toolType, VPattern *doc)
 {
-    qint64 cursor = doc->getCursor();
+    quint32 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
     if (cursor <= 0)
     {

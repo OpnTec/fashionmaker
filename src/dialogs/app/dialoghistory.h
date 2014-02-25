@@ -67,7 +67,7 @@ public slots:
      * @brief ChangedCursor changed cursor of input. Cursor show after what record we will insert new object
      * @param id id of object
      */
-    void              ChangedCursor(qint64 id);
+    void              ChangedCursor(quint32 id);
     /**
      * @brief UpdateHistory update history table
      */
@@ -79,7 +79,7 @@ signals:
      * @param color new color of tool
      * @param enable true enable selection, false disable selection
      */
-    void              ShowHistoryTool(qint64 id, Qt::GlobalColor color, bool enable);
+    void              ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
 protected:
     /**
      * @brief closeEvent handle when windows is closing

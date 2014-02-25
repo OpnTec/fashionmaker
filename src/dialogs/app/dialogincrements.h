@@ -133,7 +133,7 @@ private:
      * @param kgrowth increment in growths
      * @param description description of increment
      */
-    void                 AddIncrementToFile(qint64 id, QString name, qreal base, qreal ksize, qreal kgrowth,
+    void                 AddIncrementToFile(quint32 id, QString name, qreal base, qreal ksize, qreal kgrowth,
                                             QString description);
 };
 

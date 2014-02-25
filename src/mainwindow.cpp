@@ -186,12 +186,12 @@ void MainWindow::ActionNewDraw()
 
     pattern->ClearGObjects();
     //Create single point
-    qint64 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
+    quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<quint32, VDataTool*>* tools = doc->getTools();
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
     SetEnableTool(true);
@@ -657,7 +657,7 @@ void MainWindow::currentDrawChanged( int index )
         if (drawMode)
         {
             ArrowTool();
-            qint64 id = doc->SPointActiveDraw();
+            quint32 id = doc->SPointActiveDraw();
             if (id != 0)
             {
                 const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
@@ -1084,8 +1084,8 @@ void MainWindow::ActionLayout(bool checked)
     Q_UNUSED(checked);
     hide();
     QVector<VItem*> listDetails;
-    const QHash<qint64, VDetail> *details = pattern->DataDetails();
-    QHashIterator<qint64, VDetail> idetail(*details);
+    const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    QHashIterator<quint32, VDetail> idetail(*details);
     while (idetail.hasNext())
     {
         idetail.next();

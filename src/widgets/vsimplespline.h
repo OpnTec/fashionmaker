@@ -55,13 +55,13 @@ public:
      * @param currentColor current color.
      * @param parent parent object.
      */
-    VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
+    VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
 signals:
     /**
      * @brief Choosed send id when clicked.
      * @param id spline id.
      */
-    void Choosed(qint64 id);
+    void Choosed(quint32 id);
 protected:
     /**
      * @brief mouseReleaseEvent handle mouse release events.
@@ -83,7 +83,7 @@ private:
     /**
      * @brief id spline id.
      */
-    qint64          id;
+    quint32          id;
     /**
      * @brief factor scale factor.
      */

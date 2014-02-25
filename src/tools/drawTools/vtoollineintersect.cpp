@@ -31,9 +31,9 @@
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
-VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const qint64 &id,
-                                       const qint64 &p1Line1, const qint64 &p2Line1, const qint64 &p1Line2,
-                                       const qint64 &p2Line2, const Tool::Sources &typeCreation,
+VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id,
+                                       const quint32 &p1Line1, const quint32 &p2Line1, const quint32 &p1Line2,
+                                       const quint32 &p2Line2, const Tool::Sources &typeCreation,
                                        QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2)
@@ -67,17 +67,17 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     Q_CHECK_PTR(dialog);
     DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 p1Line1Id = dialogTool->getP1Line1();
-    qint64 p2Line1Id = dialogTool->getP2Line1();
-    qint64 p1Line2Id = dialogTool->getP1Line2();
-    qint64 p2Line2Id = dialogTool->getP2Line2();
+    quint32 p1Line1Id = dialogTool->getP1Line1();
+    quint32 p2Line1Id = dialogTool->getP2Line1();
+    quint32 p1Line2Id = dialogTool->getP1Line2();
+    quint32 p2Line2Id = dialogTool->getP2Line2();
     QString pointName = dialogTool->getPointName();
     Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
 
-void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id,
-                                const qint64 &p1Line2Id, const qint64 &p2Line2Id, const QString &pointName,
+void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
+                                const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                 VPattern *doc, VContainer *data, const Document::Documents &parse,
                                 const Tool::Sources &typeCreation)
@@ -93,7 +93,7 @@ void VToolLineIntersect::Create(const qint64 _id, const qint64 &p1Line1Id, const
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        qint64 id = _id;
+        quint32 id = _id;
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));

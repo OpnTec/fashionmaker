@@ -49,9 +49,9 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolPointOfContact(VPattern *doc, VContainer *data, const qint64 &id,
-                                       const QString &arcRadius, const qint64 &center,
-                                       const qint64 &firstPointId, const qint64 &secondPointId,
+                   VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
+                                       const QString &arcRadius, const quint32 &center,
+                                       const quint32 &firstPointId, const quint32 &secondPointId,
                                        const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -91,8 +91,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &arcRadius, const qint64 &center,
-                          const qint64 &firstPointId, const qint64 &secondPointId, const QString &pointName,
+    static void    Create(const quint32 _id, const QString &arcRadius, const quint32 &center,
+                          const quint32 &firstPointId, const quint32 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
@@ -141,15 +141,15 @@ private:
     /**
      * @brief center id center arc point.
      */
-    qint64         center;
+    quint32         center;
     /**
      * @brief firstPointId id first line point.
      */
-    qint64         firstPointId;
+    quint32         firstPointId;
     /**
      * @brief secondPointId id second line point.
      */
-    qint64         secondPointId;
+    quint32         secondPointId;
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

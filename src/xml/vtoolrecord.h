@@ -49,17 +49,17 @@ public:
                         * @param typeTool tool type.
                         * @param nameDraw pattern peace name.
                         */
-                       VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw);
+                       VToolRecord(const quint32 &id, const Tool::Tools &typeTool, const QString &nameDraw);
     /**
      * @brief getId return tool id.
      * @return id.
      */
-    inline qint64      getId() const {return id;}
+    inline quint32      getId() const {return id;}
     /**
      * @brief setId set tool id.
      * @param value id.
      */
-    inline void        setId(const qint64 &value) {id = value;}
+    inline void        setId(const quint32 &value) {id = value;}
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
@@ -84,7 +84,7 @@ private:
     /**
      * @brief id tool id.
      */
-    qint64             id;
+    quint32             id;
     /**
      * @brief typeTool tool type.
      */

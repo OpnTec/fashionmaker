@@ -76,7 +76,7 @@ DialogCutArc::~DialogCutArc()
     delete ui;
 }
 
-void DialogCutArc::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogCutArc::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Arc)
     {
@@ -95,7 +95,7 @@ void DialogCutArc::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogCutArc::setArcId(const qint64 &value, const qint64 &id)
+void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
 {
     setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboMode::CutArc);
 }

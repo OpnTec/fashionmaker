@@ -32,7 +32,7 @@
 const QString VToolSplinePath::TagName = QStringLiteral("spline");
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
-VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
                                  QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
@@ -98,11 +98,11 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     Create(0, path, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolSplinePath::Create(const qint64 _id, VSplinePath *path, VMainGraphicsScene *scene,
+void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene,
                              VPattern *doc, VContainer *data, const Document::Documents &parse,
                              const Tool::Sources &typeCreation)
 {
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(path);
@@ -209,7 +209,7 @@ void VToolSplinePath::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolSplinePath::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolSplinePath::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }

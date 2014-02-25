@@ -98,7 +98,7 @@ DialogNormal::~DialogNormal()
     delete ui;
 }
 
-void DialogNormal::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogNormal::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -142,12 +142,12 @@ void DialogNormal::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogNormal::setSecondPointId(const qint64 &value, const qint64 &id)
+void DialogNormal::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogNormal::setFirstPointId(const qint64 &value, const qint64 &id)
+void DialogNormal::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }

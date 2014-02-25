@@ -31,5 +31,5 @@
 VIncrementTableRow::VIncrementTableRow()
     :id(0), base(0), ksize(0), kgrowth(0), description(QString()){}
 
-VIncrementTableRow::VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth, QString description)
+VIncrementTableRow::VIncrementTableRow(quint32 id, qreal base, qreal ksize, qreal kgrowth, QString description)
     :id(id), base(base), ksize(ksize), kgrowth(kgrowth), description(description){}

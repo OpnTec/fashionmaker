@@ -76,7 +76,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 }
 
 
-void DialogSplinePath::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogSplinePath::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -113,7 +113,7 @@ void DialogSplinePath::PointChanged(int row)
 
 void DialogSplinePath::currentPointChanged(int index)
 {
-    qint64 id = qvariant_cast<qint64>(ui->comboBoxPoint->itemData(index));
+    quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -164,7 +164,7 @@ void DialogSplinePath::KAsm2Changed(qreal d)
     item->setData(Qt::UserRole, QVariant::fromValue(p));
 }
 
-void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
+void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
     const VPointF *point = data->GeometricObject<const VPointF *>(id);
     QListWidgetItem *item = new QListWidgetItem(point->name());
@@ -182,7 +182,7 @@ void DialogSplinePath::NewItem(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2
     EnableFields();
 }
 
-void DialogSplinePath::DataPoint(qint64 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
+void DialogSplinePath::DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
     disconnect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &DialogSplinePath::currentPointChanged);

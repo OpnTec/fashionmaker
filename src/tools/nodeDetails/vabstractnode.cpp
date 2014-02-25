@@ -32,8 +32,8 @@
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
-VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
-                             const qint64 &idTool, QObject *parent)
+VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
+                             const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
 {
     _referens = 0;

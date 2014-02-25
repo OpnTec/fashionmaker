@@ -32,9 +32,9 @@
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 
-VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                         const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                         const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                         const QString &formula, const qreal &angle, const quint32 &firstPointId,
+                         const quint32 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId)
 {
@@ -69,8 +69,8 @@ void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString typeLine = dialogTool->getTypeLine();
     QString pointName = dialogTool->getPointName();
     qreal angle = dialogTool->getAngle();
@@ -78,8 +78,8 @@ void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
            Document::FullParse, Tool::FromGui);
 }
 
-void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
-                         const qint64 &secondPointId, const QString &typeLine, const QString &pointName,
+void VToolNormal::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+                         const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
                          const Tool::Sources &typeCreation)
@@ -93,7 +93,7 @@ void VToolNormal::Create(const qint64 _id, const QString &formula, const qint64 
     {
         QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                 toPixel(result), angle);
-        qint64 id = _id;
+        quint32 id = _id;
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));

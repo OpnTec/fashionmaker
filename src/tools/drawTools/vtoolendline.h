@@ -50,8 +50,8 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolEndLine(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                              const QString &formula, const qreal &angle, const qint64 &basePointId,
+                 VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                              const QString &formula, const qreal &angle, const quint32 &basePointId,
                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -81,8 +81,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                        const QString &formula, const qreal &angle, const qint64 &basePointId, const qreal &mx,
+    static void  Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                        const QString &formula, const qreal &angle, const quint32 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;

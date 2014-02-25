@@ -54,46 +54,46 @@ public:
      * @brief getAxisP1Id return id first point of axis
      * @return id
      */
-    inline qint64  getAxisP1Id() const {return axisP1Id;}
+    inline quint32  getAxisP1Id() const {return axisP1Id;}
     /**
      * @brief setAxisP1Id set id first point of axis
      * @param value id
      * @param id don't show this point in list
      */
-    void           setAxisP1Id(const qint64 &value, const qint64 &id);
+    void           setAxisP1Id(const quint32 &value, const quint32 &id);
     /**
      * @brief getAxisP2Id return id second point of axis
      * @return id
      */
-    inline qint64  getAxisP2Id() const {return axisP2Id;}
+    inline quint32  getAxisP2Id() const {return axisP2Id;}
     /**
      * @brief setAxisP2Id set id second point of axis
      * @param value id
      * @param id don't show this point in list
      */
-    void           setAxisP2Id(const qint64 &value, const qint64 &id);
+    void           setAxisP2Id(const quint32 &value, const quint32 &id);
     /**
      * @brief getFirstPointId return id of first point
      * @return id
      */
-    inline qint64  getFirstPointId() const {return firstPointId;}
+    inline quint32  getFirstPointId() const {return firstPointId;}
     /**
      * @brief setFirstPointId set id of first point
      * @param value id
      * @param id don't show this point in list
      */
-    void           setFirstPointId(const qint64 &value, const qint64 &id);
+    void           setFirstPointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getSecondPointId return id of second point
      * @return id
      */
-    inline qint64  getSecondPointId() const {return secondPointId;}
+    inline quint32  getSecondPointId() const {return secondPointId;}
     /**
      * @brief setSecondPointId set id of second point
      * @param value id
      * @param id don't show this point in list
      */
-    void           setSecondPointId(const qint64 &value, const qint64 &id);
+    void           setSecondPointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getPointName return name of point
      * @return name
@@ -110,7 +110,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void   ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -132,19 +132,19 @@ private:
     /**
      * @brief axisP1Id id first point of axis
      */
-    qint64         axisP1Id;
+    quint32         axisP1Id;
     /**
      * @brief axisP2Id id second point of axis
      */
-    qint64         axisP2Id;
+    quint32         axisP2Id;
     /**
      * @brief firstPointId id first point of line
      */
-    qint64         firstPointId;
+    quint32         firstPointId;
     /**
      * @brief secondPointId id second point of line
      */
-    qint64         secondPointId;
+    quint32         secondPointId;
 };
 
 #endif // DIALOGTRIANGLE_H

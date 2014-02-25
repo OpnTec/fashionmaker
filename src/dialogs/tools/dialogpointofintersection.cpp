@@ -55,13 +55,13 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
     delete ui;
 }
 
-void DialogPointOfIntersection::setSecondPointId(const qint64 &value, const qint64 &id)
+void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
-void DialogPointOfIntersection::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogPointOfIntersection::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -102,7 +102,7 @@ void DialogPointOfIntersection::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogPointOfIntersection::setFirstPointId(const qint64 &value, const qint64 &id)
+void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);

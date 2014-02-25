@@ -51,9 +51,9 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolNormal(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                               const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                               const qint64 &secondPointId, const Tool::Sources &typeCreation,
+                   VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                               const QString &formula, const qreal &angle, const quint32 &firstPointId,
+                               const quint32 &secondPointId, const Tool::Sources &typeCreation,
                                QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -84,8 +84,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
-                          const qint64 &secondPointId, const QString &typeLine, const QString &pointName,
+    static void    Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                           const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
                           VPattern *doc, VContainer *data, const Document::Documents &parse,
                           const Tool::Sources &typeCreation);
@@ -141,7 +141,7 @@ private:
     /**
      * @brief secondPointId id second line point.
      */
-    qint64         secondPointId;
+    quint32         secondPointId;
 };
 
 #endif // VTOOLNORMAL_H

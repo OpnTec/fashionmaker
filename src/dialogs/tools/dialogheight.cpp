@@ -68,25 +68,25 @@ void DialogHeight::setTypeLine(const QString &value)
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-void DialogHeight::setBasePointId(const qint64 &value, const qint64 &id)
+void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
 {
     basePointId = value;
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
-void DialogHeight::setP1LineId(const qint64 &value, const qint64 &id)
+void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
 {
     p1LineId = value;
     setCurrentPointId(ui->comboBoxP1Line, p1LineId, value, id);
 }
 
-void DialogHeight::setP2LineId(const qint64 &value, const qint64 &id)
+void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
 {
     p2LineId = value;
     setCurrentPointId(ui->comboBoxP2Line, p2LineId, value, id);
 }
 
-void DialogHeight::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogHeight::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {

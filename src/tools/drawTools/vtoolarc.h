@@ -48,7 +48,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object
                   */
-                 VToolArc(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+                 VToolArc(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
                           QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -75,7 +75,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
+    static void  Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
                         const QString &f2, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
@@ -96,7 +96,7 @@ public slots:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.

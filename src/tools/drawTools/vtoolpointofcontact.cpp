@@ -32,9 +32,9 @@
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
-VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const qint64 &id,
-                                         const QString &radius, const qint64 &center,
-                                         const qint64 &firstPointId, const qint64 &secondPointId,
+VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
+                                         const QString &radius, const quint32 &center,
+                                         const quint32 &firstPointId, const quint32 &secondPointId,
                                          const Tool::Sources &typeCreation, QGraphicsItem *parent)
     : VToolPoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId)
@@ -94,16 +94,16 @@ void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString radius = dialogTool->getRadius();
-    qint64 center = dialogTool->getCenter();
-    qint64 firstPointId = dialogTool->getFirstPoint();
-    qint64 secondPointId = dialogTool->getSecondPoint();
+    quint32 center = dialogTool->getCenter();
+    quint32 firstPointId = dialogTool->getFirstPoint();
+    quint32 secondPointId = dialogTool->getSecondPoint();
     QString pointName = dialogTool->getPointName();
     Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
 
-void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const qint64 &center,
-                                 const qint64 &firstPointId, const qint64 &secondPointId,
+void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const quint32 &center,
+                                 const quint32 &firstPointId, const quint32 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document::Documents &parse, const Tool::Sources &typeCreation)
@@ -119,7 +119,7 @@ void VToolPointOfContact::Create(const qint64 _id, const QString &radius, const 
     {
         QPointF fPoint = VToolPointOfContact::FindPoint(toPixel(result), centerP->toQPointF(),
                                                          firstP->toQPointF(), secondP->toQPointF());
-        qint64 id =  _id;
+        quint32 id =  _id;
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));

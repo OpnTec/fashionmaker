@@ -84,31 +84,31 @@ public:
      * @brief getFirstPointId return id first point of line
      * @return id
      */
-    inline qint64       getFirstPointId() const {return firstPointId;}
+    inline quint32       getFirstPointId() const {return firstPointId;}
     /**
      * @brief setFirstPointId set id first point of line
      * @param value id
      * @param id id of current point
      */
-    void                setFirstPointId(const qint64 &value, const qint64 &id);
+    void                setFirstPointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getSecondPointId return id second point of line
      * @return id
      */
-    inline qint64       getSecondPointId() const {return secondPointId;}
+    inline quint32       getSecondPointId() const {return secondPointId;}
     /**
      * @brief setSecondPointId set id second point of line
      * @param value id
      * @param id id of current point
      */
-    void                setSecondPointId(const qint64 &value, const qint64 &id);
+    void                setSecondPointId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void        ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void        ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -138,11 +138,11 @@ private:
     /**
      * @brief firstPointId id first point of line
      */
-    qint64              firstPointId;
+    quint32              firstPointId;
     /**
      * @brief secondPointId id second point of line
      */
-    qint64              secondPointId;
+    quint32              secondPointId;
 };
 
 #endif // DIALOGALONGLINE_H

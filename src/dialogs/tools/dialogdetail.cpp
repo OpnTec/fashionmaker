@@ -60,7 +60,7 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
 }
 
-void DialogDetail::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogDetail::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type != Scene::Line && type != Scene::Detail)
     {
@@ -103,7 +103,7 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(qint64 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
+void DialogDetail::NewItem(quint32 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
                            qreal my)
 {
     QString name;

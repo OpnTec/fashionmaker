@@ -33,8 +33,8 @@
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
-VNodePoint::VNodePoint(VPattern *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
+                       const Tool::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
       namePoint(0), lineName(0)
@@ -58,8 +58,8 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, qint64 id, qint64 idPoin
     }
 }
 
-void VNodePoint::Create(VPattern *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
+void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
+                        const Document::Documents &parse, const Tool::Sources &typeCreation, const quint32 &idTool,
                         QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);

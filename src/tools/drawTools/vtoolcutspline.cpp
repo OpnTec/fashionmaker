@@ -33,8 +33,8 @@
 const QString VToolCutSpline::ToolType = QStringLiteral("cutSpline");
 const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 
-VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const qint64 &id, const QString &formula,
-                               const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
+VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                               const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
                                const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), splineId(splineId), firstSpline(), secondSpline(),
       spl1id(spl1id), spl2id(spl2id)
@@ -84,12 +84,12 @@ void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     Q_CHECK_PTR(dialogTool);
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
-    qint64 splineId = dialogTool->getSplineId();
+    quint32 splineId = dialogTool->getSplineId();
     Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolCutSpline::Create(const qint64 _id, const QString &pointName,
-                            const QString &formula, const qint64 &splineId, const qreal &mx, const qreal &my,
+void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
+                            const QString &formula, const quint32 &splineId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                             const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -102,9 +102,9 @@ void VToolCutSpline::Create(const qint64 _id, const QString &pointName,
         QPointF spl1p2, spl1p3, spl2p2, spl2p3;
         QPointF point = spl->CutSpline(toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
 
-        qint64 id = _id;
-        qint64 spl1id = 0;
-        qint64 spl2id = 0;
+        quint32 id = _id;
+        quint32 spl1id = 0;
+        quint32 spl2id = 0;
         if (typeCreation == Tool::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
@@ -171,7 +171,7 @@ void VToolCutSpline::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolCutSpline::SplineChoosed(qint64 id)
+void VToolCutSpline::SplineChoosed(quint32 id)
 {
     emit ChoosedTool(id, Scene::Spline);
 }
@@ -262,7 +262,7 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
 }
 
-void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr)
+void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, quint32 splid, SimpleSpline::Translation tr)
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(splid);
     QPainterPath path;

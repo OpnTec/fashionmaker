@@ -49,18 +49,18 @@ public:
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VIncrementTableRow(qint64 id, qreal base, qreal ksize, qreal kgrowth,
+                   VIncrementTableRow(quint32 id, qreal base, qreal ksize, qreal kgrowth,
                                       QString description = QString());
     /**
      * @brief getId return id of row
      * @return id
      */
-    inline qint64  getId() const {return id;}
+    inline quint32  getId() const {return id;}
     /**
      * @brief setId set id of row
      * @param value id
      */
-    inline void    setId(const qint64 &value) {id = value;}
+    inline void    setId(const quint32 &value) {id = value;}
     /**
      * @brief getBase return value in base size and growth
      * @return value
@@ -105,7 +105,7 @@ private:
     /**
      * @brief id identificator
      */
-    qint64         id;
+    quint32         id;
     /**
      * @brief base value in base size and growth
      */

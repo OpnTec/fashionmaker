@@ -69,42 +69,42 @@ public:
      * @brief GetCenter return id of center point
      * @return id
      */
-    inline qint64  getCenter() const {return center;}
+    inline quint32  getCenter() const {return center;}
     /**
      * @brief SetCenter set id of center point
      * @param value id
      * @param id don't show this id in list.
      */
-    void           setCenter(const qint64 &value, const qint64 &id);
+    void           setCenter(const quint32 &value, const quint32 &id);
     /**
      * @brief getFirstPoint return id first point
      * @return id
      */
-    inline qint64  getFirstPoint() const {return firstPoint;}
+    inline quint32  getFirstPoint() const {return firstPoint;}
     /**
      * @brief setFirstPoint set id first point
      * @param value id
      * @param id don't show this id in list.
      */
-    void           setFirstPoint(const qint64 &value, const qint64 &id);
+    void           setFirstPoint(const quint32 &value, const quint32 &id);
     /**
      * @brief getSecondPoint return id second point
      * @return id
      */
-    inline qint64  getSecondPoint() const {return secondPoint;}
+    inline quint32  getSecondPoint() const {return secondPoint;}
     /**
      * @brief setSecondPoint set id second point
      * @param value id
      * @param id don't show this id in list.
      */
-    void           setSecondPoint(const qint64 &value, const qint64 &id);
+    void           setSecondPoint(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void   ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void   ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -130,15 +130,15 @@ private:
     /**
      * @brief center id center point of arc
      */
-    qint64         center;
+    quint32         center;
     /**
      * @brief firstPoint id first point of line
      */
-    qint64         firstPoint;
+    quint32         firstPoint;
     /**
      * @brief secondPoint id second point of line
      */
-    qint64         secondPoint;
+    quint32         secondPoint;
 };
 
 #endif // DIALOGPOINTOFCONTACT_H

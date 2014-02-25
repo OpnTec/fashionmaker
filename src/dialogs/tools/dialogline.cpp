@@ -52,7 +52,7 @@ DialogLine::~DialogLine()
     delete ui;
 }
 
-void DialogLine::setSecondPoint(const qint64 &value)
+void DialogLine::setSecondPoint(const quint32 &value)
 {
     secondPoint = value;
     const VPointF *point = data->GeometricObject<const VPointF *>(value);
@@ -69,7 +69,7 @@ void DialogLine::setTypeLine(const QString &value)
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
-void DialogLine::setFirstPoint(const qint64 &value)
+void DialogLine::setFirstPoint(const quint32 &value)
 {
     firstPoint = value;
     const VPointF *point = data->GeometricObject<const VPointF *>(value);
@@ -84,14 +84,14 @@ void DialogLine::setFirstPoint(const qint64 &value)
 void DialogLine::DialogAccepted()
 {
     qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPoint = qvariant_cast<qint64>(ui->comboBoxFirstPoint->itemData(index));
+    firstPoint = qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(index));
     index = ui->comboBoxSecondPoint->currentIndex();
-    secondPoint = qvariant_cast<qint64>(ui->comboBoxSecondPoint->itemData(index));
+    secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
     typeLine = GetTypeLine(ui->comboBoxLineType);
     DialogClosed(QDialog::Accepted);
 }
 
-void DialogLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogLine::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {

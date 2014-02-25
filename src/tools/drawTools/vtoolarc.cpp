@@ -33,7 +33,7 @@
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
-VToolArc::VToolArc(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
 {
@@ -75,14 +75,14 @@ void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *d
     Q_CHECK_PTR(dialog);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 center = dialogTool->GetCenter();
+    quint32 center = dialogTool->GetCenter();
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
     Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
+void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                       const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -113,7 +113,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
     Q_CHECK_PTR(arc);
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(arc);
@@ -162,7 +162,7 @@ void VToolArc::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolArc::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }

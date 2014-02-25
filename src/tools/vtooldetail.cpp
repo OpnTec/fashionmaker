@@ -40,7 +40,7 @@ const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(0), sceneDetails(scene)
 {
@@ -102,7 +102,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     VDetail det;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        qint64 id = 0;
+        quint32 id = 0;
         switch (detail[i].getTypeTool())
         {
             case (Tool::NodePoint):
@@ -140,10 +140,10 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
+void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
     {
         id = data->AddDetail(newDetail);
@@ -162,7 +162,7 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        QHash<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
 }
@@ -198,8 +198,8 @@ void VToolDetail::FullUpdateFromGui(int result)
                AddNode(domElement, det[i]);
             }
             VDetail detail = VAbstractTool::data.GetDetail(id);
-            QList<qint64> list = detail.Missing(det);
-            QHash<qint64, VDataTool*>* tools = doc->getTools();
+            QList<quint32> list = detail.Missing(det);
+            QHash<quint32, VDataTool*>* tools = doc->getTools();
             if (list.size()>0)
             {
                 for (qint32 i = 0; i < list.size(); ++i)
@@ -404,7 +404,7 @@ template <typename Tool>
 //cppcheck-suppress unusedFunction
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
-    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<quint32, VDataTool*>* tools = doc->getTools();
     Q_CHECK_PTR(tools);
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
     Q_CHECK_PTR(tool);

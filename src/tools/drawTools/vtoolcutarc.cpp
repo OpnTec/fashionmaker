@@ -33,8 +33,8 @@
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 
-VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const qint64 &id, const QString &formula,
-                         const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
+VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                         const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
                          const Tool::Sources &typeCreation, QGraphicsItem * parent)
     :VToolPoint(doc, data, id, parent), formula(formula), arcId(arcId), firstArc(), secondArc(), arc1id(arc1id),
       arc2id(arc2id)
@@ -84,11 +84,11 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Q_CHECK_PTR(dialogTool);
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
-    qint64 arcId = dialogTool->getArcId();
+    quint32 arcId = dialogTool->getArcId();
     Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolCutArc::Create(const qint64 _id, const QString &pointName, const QString &formula, const qint64 &arcId,
+void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -102,9 +102,9 @@ void VToolCutArc::Create(const qint64 _id, const QString &pointName, const QStri
         VArc arc2;
         QPointF point = arc->CutArc(toPixel(result), arc1, arc2);
 
-        qint64 id = _id;
-        qint64 arc1id = 0;
-        qint64 arc2id = 0;
+        quint32 id = _id;
+        quint32 arc1id = 0;
+        quint32 arc2id = 0;
         if (typeCreation == Tool::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
@@ -170,7 +170,7 @@ void VToolCutArc::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolCutArc::ArcChoosed(qint64 id)
+void VToolCutArc::ArcChoosed(quint32 id)
 {
     emit ChoosedTool(id, Scene::Arc);
 }
@@ -256,7 +256,7 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
 }
 
-void VToolCutArc::RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr)
+void VToolCutArc::RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArc::Translation tr)
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(arcid);
     QPainterPath path;

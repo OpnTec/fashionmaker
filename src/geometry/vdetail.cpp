@@ -72,7 +72,7 @@ void VDetail::ClearNodes()
     nodes.clear();
 }
 
-bool VDetail::Containes(const qint64 &id) const
+bool VDetail::Containes(const quint32 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
@@ -95,22 +95,22 @@ const VNodeDetail &VDetail::at(ptrdiff_t indx) const
     return nodes[indx];
 }
 
-ptrdiff_t VDetail::indexOfNode(const qint64 &id) const
+ptrdiff_t VDetail::indexOfNode(const quint32 &id) const
 {
     return indexOfNode(nodes, id);
 }
 
-qint64 VDetail::id() const
+quint32 VDetail::id() const
 {
     return _id;
 }
 
-void VDetail::setId(const qint64 &id)
+void VDetail::setId(const quint32 &id)
 {
     _id = id;
 }
 
-bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
+bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
     if (list.size() < 3)
@@ -147,7 +147,7 @@ bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
     }
 }
 
-ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
+ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
     {
@@ -171,7 +171,7 @@ ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
     }
 }
 
-void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2) const
+void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
     if (index < 0 || index > list.size())
@@ -190,7 +190,7 @@ void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p
     }
 }
 
-VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
+VDetail VDetail::RemoveEdge(const quint32 &index) const
 {
     VDetail det(*this);
     det.ClearNodes();
@@ -232,9 +232,9 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
     return det;
 }
 
-QList<qint64> VDetail::Missing(const VDetail &det) const
+QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    QList<qint64> list;
+    QList<quint32> list;
     if (nodes.size() == det.CountNode())
     {
         return list;
@@ -268,7 +268,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     return list;
 }
 
-ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id)
+ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)
     {

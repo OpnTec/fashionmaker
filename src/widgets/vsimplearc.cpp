@@ -28,7 +28,7 @@
 
 #include "vsimplearc.h"
 
-VSimpleArc::VSimpleArc(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
+VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
 :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
     if (factor == 0)

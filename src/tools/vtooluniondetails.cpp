@@ -41,8 +41,8 @@ const QString VToolUnionDetails::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const qint64 &id, const VDetail &d1,
-                                     const VDetail &d2, const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
+VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1,
+                                     const VDetail &d2, const quint32 &indexD1, const quint32 &indexD2,
                                      const Tool::Sources &typeCreation, QObject *parent)
     :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
 {
@@ -57,10 +57,10 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const qint
 }
 
 void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
-                                       const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx,
-                                       const qreal &dy, const qint64 &pRotate, const qreal &angle)
+                                       const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx,
+                                       const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
-    qint64 id = 0, idObject = 0;
+    quint32 id = 0, idObject = 0;
     switch (det.at(i).getTypeTool())
     {
         case (Tool::NodePoint):
@@ -106,7 +106,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
                 center->setMode(Draw::Modeling);
-                qint64 idCenter = data->AddGObject(center);
+                quint32 idCenter = data->AddGObject(center);
                 Q_UNUSED(idCenter);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(),
                                  l1.angle(), QString().setNum(l1.angle()), l2.angle(),
@@ -137,7 +137,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 VPointF *p1 = new VPointF(spline->GetP1());
                 Q_CHECK_PTR(p1);
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                qint64 idP1 = data->AddGObject(p1);
+                quint32 idP1 = data->AddGObject(p1);
 
                 VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
@@ -148,7 +148,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 VPointF *p4 = new VPointF(spline->GetP4());
                 Q_CHECK_PTR(p4);
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                qint64 idP4 = data->AddGObject(p4);
+                quint32 idP4 = data->AddGObject(p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
@@ -186,7 +186,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                     Q_CHECK_PTR(p1);
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    qint64 idP1 = data->AddGObject(p1);
+                    quint32 idP1 = data->AddGObject(p1);
                     --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
@@ -201,7 +201,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                     Q_CHECK_PTR(p4);
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    qint64 idP4 = data->AddGObject(p4);
+                    quint32 idP4 = data->AddGObject(p4);
                     --k;
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
@@ -235,8 +235,8 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
     newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
 }
 
-void VToolUnionDetails::UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
-                                     qint64 &idCount, const qreal &dx, const qreal &dy, const qint64 &pRotate,
+void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
+                                     quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
                                      const qreal &angle)
 {
     switch (det.at(i).getTypeTool())
@@ -415,13 +415,13 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
            Tool::FromGui);
 }
 
-void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetail &d2, const qint64 &d1id,
-                               const qint64 &d2id, const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
+void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2, const quint32 &d1id,
+                               const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     VToolUnionDetails *unionDetails = 0;
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->getNextId();
@@ -438,7 +438,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
     {
         //Scene doesn't show this tool, so doc will destroy this object.
         unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, doc);
-        QHash<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, unionDetails);
         for (ptrdiff_t i = 0; i < d1.CountNode(); ++i)
         {
@@ -528,7 +528,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
 
         newDetail.setName("Detail");
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Tool::FromTool);
-        QHash<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
 
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
         toolDet->Remove();
@@ -540,7 +540,7 @@ void VToolUnionDetails::Create(const qint64 _id, const VDetail &d1, const VDetai
     {
         VDetail uD1 = d1.RemoveEdge(indexD1);
         VDetail uD2 = d2.RemoveEdge(indexD2);
-        qint64 idCount = 0;
+        quint32 idCount = 0;
         qint32 j = 0, i = 0;
         qint32 nD1 = uD1.CountNode();
         qint32 nD2 = uD2.CountNode();
@@ -635,7 +635,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                     {
                         if (element.tagName() == VToolUnionDetails::TagNode)
                         {
-                            qint64 id = doc->GetParametrLongLong(element, VToolDetail::AttrIdObject, "0");
+                            quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
                             qreal mx = toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                             qreal my = toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
                             Tool::Tools tool;

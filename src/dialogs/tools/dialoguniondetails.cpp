@@ -45,7 +45,7 @@ DialogUnionDetails::~DialogUnionDetails()
     delete ui;
 }
 
-void DialogUnionDetails::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogUnionDetails::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (numberD == 0)
     {
@@ -62,7 +62,7 @@ void DialogUnionDetails::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-bool DialogUnionDetails::CheckObject(const qint64 &id, const qint64 &idDetail) const
+bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const
 {
     if (idDetail == 0)
     {
@@ -72,7 +72,7 @@ bool DialogUnionDetails::CheckObject(const qint64 &id, const qint64 &idDetail) c
     return det.Containes(id);
 }
 
-void DialogUnionDetails::ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, ptrdiff_t &index)
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail, ptrdiff_t &index)
 {
     if (idDetail == 0)
     {

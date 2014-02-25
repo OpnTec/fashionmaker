@@ -50,8 +50,8 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolHeight(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                               const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
+                   VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                               const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -81,8 +81,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                          const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
+    static void    Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
@@ -125,11 +125,11 @@ private:
     /**
      * @brief p1LineId id first point of line.
      */
-    qint64         p1LineId;
+    quint32         p1LineId;
     /**
      * @brief p2LineId id second point of line.
      */
-    qint64         p2LineId;
+    quint32         p2LineId;
 };
 
 #endif // VTOOLHEIGHT_H

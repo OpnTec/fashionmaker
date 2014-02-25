@@ -31,8 +31,8 @@
 
 const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfIntersection");
 
-VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *data, const qint64 &id,
-                                                   const qint64 &firstPointId, const qint64 &secondPointId,
+VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *data, const quint32 &id,
+                                                   const quint32 &firstPointId, const quint32 &secondPointId,
                                                    const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
 {
@@ -64,14 +64,14 @@ void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *sc
     Q_CHECK_PTR(dialog);
     DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName, const qint64 &firstPointId,
-                                      const qint64 &secondPointId, const qreal &mx, const qreal &my,
+void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
+                                      const quint32 &secondPointId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                       const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -79,7 +79,7 @@ void VToolPointOfIntersection::Create(const qint64 _id, const QString &pointName
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
 
     QPointF point(firstPoint->x(), secondPoint->y());
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));

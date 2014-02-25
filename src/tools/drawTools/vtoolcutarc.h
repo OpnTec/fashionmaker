@@ -51,8 +51,8 @@ public:
      * @param typeCreation way we create this tool.
      * @param parent parent object.
      */
-    VToolCutArc(VPattern *doc, VContainer *data, const qint64 &id, const QString &formula,
-                const qint64 &arcId, const qint64 &arc1id, const qint64 &arc2id,
+    VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -80,7 +80,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const QString &pointName, const QString &formula, const qint64 &arcId,
+    static void  Create(const quint32 _id, const QString &pointName, const QString &formula, const quint32 &arcId,
                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString ToolType;
@@ -94,7 +94,7 @@ public slots:
      * @brief ArcChoosed send signal about selection from cutted arc.
      * @param id object id in container.
      */
-    void         ArcChoosed(qint64 id);
+    void         ArcChoosed(quint32 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
@@ -136,7 +136,7 @@ private:
     /**
      * @brief arcId keep id of arc
      */
-    qint64       arcId;
+    quint32       arcId;
     /**
      * @brief firstArc first arc after cutting.
      */
@@ -148,18 +148,18 @@ private:
     /**
      * @brief arc1id id first arc after cutting.
      */
-    const qint64 arc1id;
+    const quint32 arc1id;
     /**
      * @brief arc2id id second arc after cutting.
      */
-    const qint64 arc2id;
+    const quint32 arc2id;
     /**
      * @brief RefreshArc refresh arc on scene.
      * @param sArc arc.
      * @param arcid arc id.
      * @param tr arc type.
      */
-    void         RefreshArc(VSimpleArc *sArc, qint64 arcid, SimpleArc::Translation tr);
+    void         RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArc::Translation tr);
 };
 
 #endif // VTOOLCUTARC_H

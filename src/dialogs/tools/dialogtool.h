@@ -82,7 +82,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief NamePointChanged check name of point
      */
@@ -274,8 +274,8 @@ protected:
      * @param box comboBox
      * @param id don't show this id in list
      */
-    void             FillComboBoxPoints(QComboBox *box, const qint64 &id = 0)const;
-    void             FillComboBoxArcs(QComboBox *box, const qint64 &id = 0,
+    void             FillComboBoxPoints(QComboBox *box, const quint32 &id = 0)const;
+    void             FillComboBoxArcs(QComboBox *box, const quint32 &id = 0,
                                       ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc)const;
     /**
      * @brief FillComboBoxSplines fill comboBox list of splines
@@ -283,7 +283,7 @@ protected:
      * @param id don't show id in list
      * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
-    void             FillComboBoxSplines(QComboBox *box, const qint64 &id = 0,
+    void             FillComboBoxSplines(QComboBox *box, const quint32 &id = 0,
                                          ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
     /**
      * @brief FillComboBoxSplinesPath
@@ -291,7 +291,7 @@ protected:
      * @param id don't show id in list
      * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
-    void             FillComboBoxSplinesPath(QComboBox *box, const qint64 &id = 0,
+    void             FillComboBoxSplinesPath(QComboBox *box, const quint32 &id = 0,
                                              ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
     /**
      * @brief FillComboBoxTypeLine fill comboBox list of type lines
@@ -331,7 +331,7 @@ protected:
      * @param box combobox
      * @param value id of item
      */
-    void             ChangeCurrentData(QComboBox *box, const qint64 &value) const;
+    void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;
     /**
      * @brief PutValHere put variable into line edit from list
      * @param lineEdit lineEdit
@@ -360,7 +360,7 @@ protected:
      * @param value point id
      * @param id don't show this id in list
      */
-    void             setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const;
+    void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const;
     /**
      * @brief setCurrentSplineId set current spline id in combobox
      * @param box combobox
@@ -369,7 +369,7 @@ protected:
      * @param id don't show this id in list
      * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
-    void             setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
+    void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
                                         ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
     /**
      * @brief setCurrentArcId
@@ -379,7 +379,7 @@ protected:
      * @param id don't show this id in list
      * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
      */
-    void             setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &value, const qint64 &id,
+    void             setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
                                         ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc) const;
     /**
      * @brief setCurrentSplinePathId set current splinePath id in combobox
@@ -389,21 +389,21 @@ protected:
      * @param id don't show this id in list
      * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
-    void             setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value, const qint64 &id,
+    void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value, const quint32 &id,
                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
     /**
      * @brief getCurrentPointId return current point id in combobox
      * @param box combobox
      * @return id or -1 if combobox is empty
      */
-    qint64           getCurrentObjectId(QComboBox *box) const;
+    quint32           getCurrentObjectId(QComboBox *box) const;
 private:
     /**
      * @brief FillList fill combobox list
      * @param box combobox
      * @param list list with ids and names
      */
-    void             FillList(QComboBox *box, const QMap<QString, qint64> &list)const;
+    void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };
 
 #endif // DIALOGTOOL_H

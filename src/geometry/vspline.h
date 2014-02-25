@@ -66,7 +66,7 @@ public:
      * @param kAsm2 coefficient of length second control line.
      */
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-             qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
+             quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
     /**
      * @brief VSpline constructor.
      * @param p1 first point spline.
@@ -74,7 +74,7 @@ public:
      * @param p3 second control point.
      * @param p4 second point spline.
      */
-    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, qint64 idObject = 0,
+    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
              Draw::Draws mode = Draw::Calculation);
     /**
      * @brief GetP1 return first spline point.

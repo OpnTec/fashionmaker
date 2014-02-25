@@ -49,7 +49,7 @@ public:
      * @param scene pointer to scene.
      * @param parent parent object
      */
-    VToolDetail(VPattern *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
+    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
                 VMainGraphicsScene *scene, QGraphicsItem * parent = 0);
     ~VToolDetail();
     /**
@@ -63,7 +63,7 @@ public:
      * @param id id parent object.
      * @return id for new object.
      */
-    static qint64 CreateNode(VContainer *data, const qint64 &id)
+    static quint32 CreateNode(VContainer *data, const quint32 &id)
     {
         //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
@@ -90,7 +90,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void        Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
+    static void        Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
                               VPattern *doc, VContainer *data, const Document::Documents &parse,
                               const Tool::Sources &typeCreation);
     static const QString TagName;

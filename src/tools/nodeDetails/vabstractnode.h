@@ -46,8 +46,8 @@ public:
                   * @param id object id in containerNode.
                   * @param parent parent object.
                   */
-                 VAbstractNode(VPattern *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
-                               const qint64 &idTool, QObject *parent = 0);
+                 VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
+                               const quint32 &idTool, QObject *parent = 0);
     virtual      ~VAbstractNode() {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;
@@ -56,11 +56,11 @@ protected:
     /**
      * @brief idNodenode id.
      */
-    qint64       idNode;
+    quint32       idNode;
     /**
      * @brief idTool id tool.
      */
-    qint64       idTool;
+    quint32       idTool;
     /**
      * @brief AddToModeling add tag to modeling tag current pattern peace.
      * @param domElement tag.

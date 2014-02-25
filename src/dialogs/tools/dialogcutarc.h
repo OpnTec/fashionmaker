@@ -74,20 +74,20 @@ public:
      * @brief getArcId return id of arc
      * @return id
      */
-    qint64            getArcId() const {return arcId;}
+    quint32            getArcId() const {return arcId;}
     /**
      * @brief setArcId set id of arc
      * @param value id
      * @param id don't show this id in list
      */
-    void              setArcId(const qint64 &value, const qint64 &id);
+    void              setArcId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void      ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -109,7 +109,7 @@ private:
     /**
      * @brief arcId keep id of arc
      */
-    qint64            arcId;
+    quint32            arcId;
 };
 
 #endif // DIALOGCUTARC_H

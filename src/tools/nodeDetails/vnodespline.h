@@ -48,8 +48,8 @@ public:
                    * @param typeCreation way we create this tool.
                    * @param parent parent object.
                    */
-                  VNodeSpline(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
-                              const Tool::Sources &typeCreation, const qint64 &idTool = 0, QObject *qoParent = 0,
+                  VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                              const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *qoParent = 0,
                               QGraphicsItem * parent = 0);
     /**
      * @brief Create help create tool.
@@ -61,9 +61,9 @@ public:
      * @param typeCreation way we create this tool.
      * @return
      */
-    static VNodeSpline *Create(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
+    static VNodeSpline *Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                                const Document::Documents &parse, const Tool::Sources &typeCreation,
-                               const qint64 &idTool = 0, QObject *parent = 0);
+                               const quint32 &idTool = 0, QObject *parent = 0);
     static const QString TagName;
     static const QString ToolType;
     /**

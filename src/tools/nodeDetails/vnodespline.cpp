@@ -33,8 +33,8 @@
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
-VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
-                         const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                         const Tool::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                          QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
@@ -51,9 +51,9 @@ VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, qint64 id, qint64 idSp
     }
 }
 
-VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, qint64 id, qint64 idSpline,
+VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                                  const Document::Documents &parse, const Tool::Sources &typeCreation,
-                                 const qint64 &idTool, QObject *parent)
+                                 const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = 0;

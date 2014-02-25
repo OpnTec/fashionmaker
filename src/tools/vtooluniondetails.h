@@ -51,9 +51,9 @@ public:
      * @param typeCreation way we create this tool.
      * @param parent parent object.
      */
-    VToolUnionDetails(VPattern *doc, VContainer *data, const qint64 &id, const VDetail &d1, const VDetail &d2,
-                      const ptrdiff_t &indexD1, const ptrdiff_t &indexD2,
-                      const Tool::Sources &typeCreation, QObject *parent = 0);
+    VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
+                      const quint32 &indexD1, const quint32 &indexD2, const Tool::Sources &typeCreation,
+                      QObject *parent = 0);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -80,10 +80,9 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const VDetail &d1,  const VDetail &d2, const qint64 &d1id, const qint64 &d2id,
-                        const ptrdiff_t &indexD1, const ptrdiff_t &indexD2, VMainGraphicsScene *scene,
-                        VPattern *doc, VContainer *data, const Document::Documents &parse,
-                        const Tool::Sources &typeCreation);
+    static void  Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id, const quint32 &d2id,
+                        const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene, VPattern *doc,
+                        VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
     /**
      * @brief GetDetailFromFile parse detail from file.
      * @param doc dom document container.
@@ -116,8 +115,8 @@ public:
      * @param angle angle rotation.
      */
     static void  AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
-                                const VDetail &det, const ptrdiff_t &i, const qint64 &idTool, const qreal &dx = 0,
-                                const qreal &dy = 0, const qint64 &pRotate = 0, const qreal &angle = 0);
+                                const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx = 0,
+                                const qreal &dy = 0, const quint32 &pRotate = 0, const qreal &angle = 0);
     /**
      * @brief UpdatePoints update data for united details.
      * @param idDetail id united detail.
@@ -130,8 +129,8 @@ public:
      * @param pRotate point rotation.
      * @param angle angle rotation.
      */
-    static void  UpdatePoints(const qint64 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
-                              qint64 &idCount, const qreal &dx = 0, const qreal &dy = 0, const qint64 &pRotate = 0,
+    static void  UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
+                              quint32 &idCount, const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = 0,
                               const qreal &angle = 0);
     /**
      * @brief BiasRotatePoint bias and rotate point.
@@ -170,11 +169,11 @@ private:
     /**
      * @brief indexD1 index edge in first detail.
      */
-    ptrdiff_t    indexD1;
+    quint32       indexD1;
     /**
      * @brief indexD2 index edge in second detail.
      */
-    ptrdiff_t    indexD2;
+    quint32       indexD2;
     /**
      * @brief AddDetail add detail to xml file.
      * @param domElement tag in xml tree.

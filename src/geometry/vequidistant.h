@@ -44,7 +44,7 @@ public:
      * @param data container with objects (points, arcs, splines).
      * @return return painter path of contour detail.
      */
-    QPainterPath     ContourPath(const qint64 &idDetail, const VContainer *data) const;
+    QPainterPath     ContourPath(const quint32 &idDetail, const VContainer *data) const;
 private:
     /**
      * @brief GetLengthContour return length of contour.

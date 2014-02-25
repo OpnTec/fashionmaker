@@ -46,7 +46,7 @@ public:
                              * @param id object id in container.
                              * @param parent parent object.
                              */
-                            VToolPoint(VPattern *doc, VContainer *data, qint64 id, QGraphicsItem * parent = 0);
+                            VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = 0);
     virtual                 ~VToolPoint(){}
     static const QString    TagName;
 public slots:
@@ -66,7 +66,7 @@ public slots:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    virtual void            ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void            ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.

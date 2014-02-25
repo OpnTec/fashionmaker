@@ -74,20 +74,20 @@ public:
      * @brief getSplineId return id base point of line
      * @return id
      */
-    inline qint64     getSplinePathId() const {return splinePathId;}
+    inline quint32     getSplinePathId() const {return splinePathId;}
     /**
      * @brief setSplineId set id spline
      * @param value id
      * @param id don't show this id in list
      */
-    void              setSplinePathId(const qint64 &value, const qint64 &id);
+    void              setSplinePathId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void      ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void      ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -109,7 +109,7 @@ private:
     /**
      * @brief splinePathId keep id of splinePath
      */
-    qint64            splinePathId;
+    quint32            splinePathId;
 };
 
 #endif // DIALOGCUTSPLINEPATH_H

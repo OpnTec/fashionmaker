@@ -29,7 +29,7 @@
 #include "vsimplespline.h"
 #include "../options.h"
 
-VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
+VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
     if (factor == 0)

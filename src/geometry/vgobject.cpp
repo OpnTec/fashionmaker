@@ -33,7 +33,7 @@ VGObject::VGObject()
 {
 }
 
-VGObject::VGObject(const GObject::Type &type, const qint64 &idObject, const Draw::Draws &mode)
+VGObject::VGObject(const GObject::Type &type, const quint32 &idObject, const Draw::Draws &mode)
     :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
 {
 }
@@ -53,12 +53,12 @@ VGObject &VGObject::operator=(const VGObject &obj)
     return *this;
 }
 
-qint64 VGObject::getIdObject() const
+quint32 VGObject::getIdObject() const
 {
     return idObject;
 }
 
-void VGObject::setIdObject(const qint64 &value)
+void VGObject::setIdObject(const quint32 &value)
 {
     idObject = value;
 }
@@ -88,12 +88,12 @@ GObject::Type VGObject::getType() const
     return type;
 }
 
-qint64 VGObject::id() const
+quint32 VGObject::id() const
 {
     return _id;
 }
 
-void VGObject::setId(const qint64 &id)
+void VGObject::setId(const quint32 &id)
 {
     _id = id;
 }

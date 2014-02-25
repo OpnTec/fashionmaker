@@ -54,12 +54,12 @@ public:
      * @brief getD1 return id first detail
      * @return id
      */
-    inline qint64    getD1() const {return d1;}
+    inline quint32    getD1() const {return d1;}
     /**
      * @brief getD2 return id second detail
      * @return id
      */
-    inline qint64    getD2() const {return d2;}
+    inline quint32    getD2() const {return d2;}
     /**
      * @brief getIndexD1 return index edge first detail
      * @return index
@@ -76,7 +76,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    void             ChoosedObject(qint64 id, const Scene::Scenes &type);
+    void             ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -98,11 +98,11 @@ private:
     /**
      * @brief d1 id first detail
      */
-    qint64           d1;
+    quint32           d1;
     /**
      * @brief d2 id second detail
      */
-    qint64           d2;
+    quint32           d2;
     /**
      * @brief numberD number of detail, what we already have
      */
@@ -114,18 +114,18 @@ private:
     /**
      * @brief p1 id first point of detail
      */
-    qint64           p1;
+    quint32           p1;
     /**
      * @brief p2 id second point of detail
      */
-    qint64           p2;
+    quint32           p2;
     /**
      * @brief CheckObject check if detail contain this id
      * @param id id of item
      * @param idDetail detail id
      * @return true if contain
      */
-    bool             CheckObject(const qint64 &id, const qint64 &idDetail) const;
+    bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
     /**
      * @brief ChoosedDetail help save information about detail and points on detail
      * @param id id selected object
@@ -133,7 +133,7 @@ private:
      * @param idDetail id detail
      * @param index index of edge
      */
-    void             ChoosedDetail(const qint64 &id, const Scene::Scenes &type, qint64 &idDetail, ptrdiff_t &index);
+    void             ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail, ptrdiff_t &index);
 };
 
 #endif // DIALOGUNIONDETAILS_H

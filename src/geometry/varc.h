@@ -56,7 +56,7 @@ public:
                         * @param f2 end angle (degree).
                         */
                        VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-                             QString formulaF2, qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
+                             QString formulaF2, quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
                        /**
                         * @brief VArc copy constructor
                         * @param arc arc
@@ -150,7 +150,7 @@ public:
      * @brief setId keep id arc in data.
      * @param id id arc in data.
      */
-    virtual void       setId(const qint64 &id);
+    virtual void       setId(const quint32 &id);
 private:
     /**
      * @brief f1 start angle in degree.

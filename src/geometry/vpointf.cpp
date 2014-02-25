@@ -28,7 +28,7 @@
 
 #include "vpointf.h"
 
-VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject, Draw::Draws mode)
+VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Draw::Draws mode)
     :VGObject(GObject::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
 {
     this->_name = name;

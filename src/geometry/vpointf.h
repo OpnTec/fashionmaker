@@ -60,7 +60,7 @@ public:
      * @param mx offset name respect to x
      * @param my offset name respect to y
      */
-     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject = 0,
+     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
                Draw::Draws mode = Draw::Calculation);
     /**
      * @brief operator = assignment operator

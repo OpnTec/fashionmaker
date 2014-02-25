@@ -31,7 +31,7 @@
 VNodeDetail::VNodeDetail()
     :id(0), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0){}
 
-VNodeDetail::VNodeDetail(qint64 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx, qreal my)
+VNodeDetail::VNodeDetail(quint32 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx, qreal my)
     :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my){}
 
 VNodeDetail::VNodeDetail(const VNodeDetail &node)

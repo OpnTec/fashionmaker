@@ -31,13 +31,13 @@
 #include <QDebug>
 #include <QtAlgorithms>
 
-qint64 VContainer::_id = 0;
+quint32 VContainer::_id = 0;
 
 VContainer::VContainer()
-    :base(QHash<QString, qint32>()),  gObjects(QHash<qint64, VGObject *>()),
+    :base(QHash<QString, qint32>()),  gObjects(QHash<quint32, VGObject *>()),
       standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
+      lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
     SetSize(500);
     SetGrowth(1760);
@@ -51,10 +51,10 @@ VContainer &VContainer::operator =(const VContainer &data)
 }
 
 VContainer::VContainer(const VContainer &data)
-    :base(QHash<QString, qint32>()), gObjects(QHash<qint64, VGObject *>()),
+    :base(QHash<QString, qint32>()), gObjects(QHash<quint32, VGObject *>()),
       standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<qint64, VDetail>())
+      lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
     setData(data);
 }
@@ -71,9 +71,9 @@ void VContainer::setData(const VContainer &data)
 
     qDeleteAll(gObjects);
     gObjects.clear();
-    const QHash<qint64, VGObject*> *obj = data.DataGObjects();
+    const QHash<quint32, VGObject*> *obj = data.DataGObjects();
     Q_CHECK_PTR(obj);
-    QHashIterator<qint64, VGObject*> i(*obj);
+    QHashIterator<quint32, VGObject*> i(*obj);
     while (i.hasNext())
     {
         i.next();
@@ -112,7 +112,7 @@ void VContainer::setData(const VContainer &data)
     details = *data.DataDetails();
 }
 
-const VGObject *VContainer::GetGObject(qint64 id)const
+const VGObject *VContainer::GetGObject(quint32 id)const
 {
     return GetObject(gObjects, id);
 }
@@ -179,19 +179,19 @@ qreal VContainer::GetLineAngle(const QString &name) const
     return GetVariable(lineAngles, name);
 }
 
-const VDetail VContainer::GetDetail(qint64 id) const
+const VDetail VContainer::GetDetail(quint32 id) const
 {
     return GetVariable(details, id);
 }
 
-qint64 VContainer::AddGObject(VGObject *obj)
+quint32 VContainer::AddGObject(VGObject *obj)
 {
     return AddObject(gObjects, obj);
 }
 
-qint64 VContainer::AddDetail(VDetail detail)
+quint32 VContainer::AddDetail(VDetail detail)
 {
-    qint64 id = getNextId();
+    quint32 id = getNextId();
     details[id] = detail;
     return id;
 }
@@ -201,13 +201,13 @@ void VContainer::AddIncrementTableRow(const QString &name, VIncrementTableRow ro
     incrementTable[name] = row;
 }
 
-qint64 VContainer::getNextId()
+quint32 VContainer::getNextId()
 {
     _id++;
     return _id;
 }
 
-void VContainer::UpdateId(qint64 newId)
+void VContainer::UpdateId(quint32 newId)
 {
     if (newId > _id)
     {
@@ -216,7 +216,7 @@ void VContainer::UpdateId(qint64 newId)
 }
 
 template <typename val>
-void VContainer::UpdateObject(QHash<qint64, val> &obj, const qint64 &id, val point)
+void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     Q_CHECK_PTR(point);
@@ -236,7 +236,7 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value)
     lengthSplines[name] = value;
 }
 
-void VContainer::AddLengthArc(const qint64 &id)
+void VContainer::AddLengthArc(const quint32 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
     lengthArcs[arc->name()] = toMM(arc->GetLength());
@@ -292,7 +292,7 @@ void VContainer::ClearCalculationGObjects()
 {
     if (gObjects.size()>0)
     {
-        QHashIterator<qint64, VGObject*> i(gObjects);
+        QHashIterator<quint32, VGObject*> i(gObjects);
         while (i.hasNext())
         {
             i.next();
@@ -347,7 +347,7 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
     return 0;
 }
 
-void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId)
+void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
 {
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     const VPointF *first = GeometricObject<const VPointF *>(firstPointId);
@@ -358,16 +358,16 @@ void VContainer::AddLine(const qint64 &firstPointId, const qint64 &secondPointId
 }
 
 template <typename key, typename val>
-qint64 VContainer::AddObject(QHash<key, val> &obj, val value)
+quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
     Q_CHECK_PTR(value);
-    qint64 id = getNextId();
+    quint32 id = getNextId();
     value->setId(id);
     obj[id] = value;
     return id;
 }
 
-QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const
+QString VContainer::GetNameLine(const quint32 &firstPoint, const quint32 &secondPoint) const
 {
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
@@ -375,7 +375,7 @@ QString VContainer::GetNameLine(const qint64 &firstPoint, const qint64 &secondPo
     return QString("Line_%1_%2").arg(first->name(), second->name());
 }
 
-QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const
+QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &secondPoint) const
 {
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
@@ -383,12 +383,12 @@ QString VContainer::GetNameLineAngle(const qint64 &firstPoint, const qint64 &sec
     return QString("AngleLine_%1_%2").arg(first->name(), second->name());
 }
 
-void VContainer::UpdateGObject(qint64 id, VGObject* obj)
+void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
     UpdateObject(gObjects, id, obj);
 }
 
-void VContainer::UpdateDetail(qint64 id, const VDetail &detail)
+void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     details[id] = detail;

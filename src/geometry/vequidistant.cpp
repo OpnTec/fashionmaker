@@ -28,7 +28,7 @@
 
 #include "vequidistant.h"
 
-QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer *data) const
+QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
 {
     Q_CHECK_PTR(data);
     VDetail detail = data->GetDetail(idDetail);

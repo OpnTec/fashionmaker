@@ -60,7 +60,7 @@ public:
                    * @param mx object bias x axis
                    * @param my object bias y axis
                    */
-                  VNodeDetail(qint64 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+                  VNodeDetail(quint32 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
                               qreal my = 0);
                   /**
                    * @brief VNodeDetail copy constructor
@@ -77,12 +77,12 @@ public:
      * @brief getId return object id.
      * @return id.
      */
-    inline qint64 getId() const {return id;}
+    inline quint32 getId() const {return id;}
     /**
      * @brief setId set object id.
      * @param value object id.
      */
-    inline void   setId(const qint64 &value) {id = value;}
+    inline void   setId(const quint32 &value) {id = value;}
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
@@ -127,7 +127,7 @@ private:
     /**
      * @brief id object id.
      */
-    qint64        id;
+    quint32        id;
     /**
      * @brief typeTool type of tool
      */

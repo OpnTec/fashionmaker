@@ -54,22 +54,22 @@ public:
      * @brief getP1 return id first point of spline
      * @return id
      */
-    qint64        getP1() const;
+    quint32        getP1() const;
     /**
      * @brief setP1 set id first point of spline
      * @param value id
      */
-    void          setP1(const qint64 &value);
+    void          setP1(const quint32 &value);
     /**
      * @brief getP4 return id fourth point of spline
      * @return id
      */
-    qint64        getP4() const;
+    quint32        getP4() const;
     /**
      * @brief setP4 set id fourth point of spline
      * @param value id
      */
-    void          setP4(const qint64 &value);
+    void          setP4(const quint32 &value);
     /**
      * @brief getAngle1 return first angle of spline
      * @return angle in degree
@@ -126,7 +126,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void  ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void  ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -144,11 +144,11 @@ private:
     /**
      * @brief p1 id first point of spline
      */
-    qint64        p1;
+    quint32        p1;
     /**
      * @brief p4 id fourth point of spline
      */
-    qint64        p4;
+    quint32        p4;
     /**
      * @brief angle1 first angle of spline in degree
      */

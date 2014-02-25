@@ -31,7 +31,7 @@
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
-VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
                                     QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent)
 {

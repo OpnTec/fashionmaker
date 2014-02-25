@@ -31,9 +31,9 @@
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
-VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const qint64 &id,
-                             const qint64 &axisP1Id, const qint64 &axisP2Id, const qint64 &firstPointId,
-                             const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
+                             const quint32 &axisP1Id, const quint32 &axisP2Id, const quint32 &firstPointId,
+                             const quint32 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
@@ -67,17 +67,17 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 axisP1Id = dialogTool->getAxisP1Id();
-    qint64 axisP2Id = dialogTool->getAxisP2Id();
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 axisP1Id = dialogTool->getAxisP1Id();
+    quint32 axisP2Id = dialogTool->getAxisP2Id();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
 
-void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
-                           const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
+void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
+                           const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -88,7 +88,7 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
 
     QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
                               secondPoint->toQPointF());
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));

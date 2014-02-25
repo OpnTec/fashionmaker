@@ -33,7 +33,7 @@
 const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
                          QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
@@ -96,8 +96,8 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Q_CHECK_PTR(dialog);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 p1 = dialogTool->getP1();
-    qint64 p4 = dialogTool->getP4();
+    quint32 p1 = dialogTool->getP1();
+    quint32 p4 = dialogTool->getP4();
     qreal kAsm1 = dialogTool->getKAsm1();
     qreal kAsm2 = dialogTool->getKAsm2();
     qreal angle1 = dialogTool->getAngle1();
@@ -107,7 +107,7 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
            Tool::FromGui);
 }
 
-void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, const qreal &kAsm1,
+void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                          const Document::Documents &parse, const Tool::Sources &typeCreation)
@@ -116,7 +116,7 @@ void VToolSpline::Create(const qint64 _id, const qint64 &p1, const qint64 &p4, c
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
     Q_CHECK_PTR(spline);
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->AddGObject(spline);
@@ -355,7 +355,7 @@ void VToolSpline::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolSpline::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }

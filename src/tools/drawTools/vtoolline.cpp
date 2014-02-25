@@ -31,7 +31,7 @@
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
-VToolLine::VToolLine(VPattern *doc, VContainer *data, qint64 id, qint64 firstPoint, qint64 secondPoint,
+VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
                      const QString &typeLine, const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
@@ -72,20 +72,20 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     Q_CHECK_PTR(dialog);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 firstPoint = dialogTool->getFirstPoint();
-    qint64 secondPoint = dialogTool->getSecondPoint();
+    quint32 firstPoint = dialogTool->getFirstPoint();
+    quint32 secondPoint = dialogTool->getSecondPoint();
     QString typeLine = dialogTool->getTypeLine();
     Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolLine::Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint, const QString &typeLine,
+void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint, const QString &typeLine,
                        VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
-    qint64 id = _id;
+    quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {
         id = data->getNextId();
@@ -119,7 +119,7 @@ void VToolLine::FullUpdateFromFile()
     RefreshGeometry();
 }
 
-void VToolLine::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolLine::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
@@ -239,8 +239,8 @@ void VToolLine::RefreshGeometry()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        firstPoint = doc->GetParametrLongLong(domElement, VAbstractTool::AttrFirstPoint, "0");
-        secondPoint = doc->GetParametrLongLong(domElement, VAbstractTool::AttrSecondPoint, "0");
+        firstPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
+        secondPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
         typeLine = doc->GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
     }
     const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);

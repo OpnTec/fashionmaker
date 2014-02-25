@@ -88,12 +88,12 @@ void DialogCutSpline::setFormula(const QString &value)
     ui->lineEditFormula->setText(formula);
 }
 
-void DialogCutSpline::setSplineId(const qint64 &value, const qint64 &id)
+void DialogCutSpline::setSplineId(const quint32 &value, const quint32 &id)
 {
     setCurrentSplineId(ui->comboBoxSpline, splineId, value, id, ComboMode::CutSpline);
 }
 
-void DialogCutSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogCutSpline::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Spline)
     {

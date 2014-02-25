@@ -33,8 +33,8 @@
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
-VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const qint64 &id,  const QString &typeLine,
-                           const QString &formula, const qreal &angle, const qint64 &basePointId,
+VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  const QString &typeLine,
+                           const QString &formula, const qreal &angle, const quint32 &basePointId,
                            const Tool::Sources &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent)
 {
@@ -72,13 +72,13 @@ void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatter
     QString typeLine = dialogTool->getTypeLine();
     QString formula = dialogTool->getFormula();
     qreal angle = dialogTool->getAngle();
-    qint64 basePointId = dialogTool->getBasePointId();
+    quint32 basePointId = dialogTool->getBasePointId();
     Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
            Tool::FromGui);
 }
 
-void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                          const QString &formula, const qreal &angle, const qint64 &basePointId,
+void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                          const QString &formula, const qreal &angle, const quint32 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -91,7 +91,7 @@ void VToolEndLine::Create(const qint64 _id, const QString &pointName, const QStr
     {
         line.setLength(toPixel(result));
         line.setAngle(angle);
-        qint64 id = _id;
+        quint32 id = _id;
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject(new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));

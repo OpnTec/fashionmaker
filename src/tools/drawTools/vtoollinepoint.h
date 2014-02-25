@@ -49,8 +49,8 @@ public:
                        * @param angle line angle.
                        * @param parent parent object.
                        */
-                      VToolLinePoint(VPattern *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                                     const QString &formula, const qint64 &basePointId, const qreal &angle,
+                      VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                                     const QString &formula, const quint32 &basePointId, const qreal &angle,
                                      QGraphicsItem * parent = 0);
 public slots:
     /**
@@ -75,7 +75,7 @@ protected:
     /**
      * @brief basePointId id base line point.
      */
-    qint64            basePointId;
+    quint32            basePointId;
     /**
      * @brief mainLine line item.
      */

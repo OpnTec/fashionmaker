@@ -54,22 +54,22 @@ public:
      * @brief getFirstPoint return id first point
      * @return id
      */
-    inline qint64    getFirstPoint() const {return firstPoint;}
+    inline quint32    getFirstPoint() const {return firstPoint;}
     /**
      * @brief setFirstPoint set id first point
      * @param value id
      */
-    void             setFirstPoint(const qint64 &value);
+    void             setFirstPoint(const quint32 &value);
     /**
      * @brief getSecondPoint return id second point
      * @return id
      */
-    inline qint64    getSecondPoint() const {return secondPoint;}
+    inline quint32    getSecondPoint() const {return secondPoint;}
     /**
      * @brief setSecondPoint set id second point
      * @param value id
      */
-    void             setSecondPoint(const qint64 &value);
+    void             setSecondPoint(const quint32 &value);
     /**
      * @brief getTypeLine return type of line
      * @return type
@@ -86,7 +86,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -104,11 +104,11 @@ private:
     /**
      * @brief firstPoint id first point
      */
-    qint64           firstPoint;
+    quint32           firstPoint;
     /**
      * @brief secondPoint id second point
      */
-    qint64           secondPoint;
+    quint32           secondPoint;
     /**
      * @brief typeLine type of line
      */

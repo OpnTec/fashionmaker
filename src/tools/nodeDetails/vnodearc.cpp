@@ -33,8 +33,8 @@
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
-VNodeArc::VNodeArc(VPattern *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
-                   const qint64 &idTool, QObject *qoParent, QGraphicsItem *parent)
+VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Tool::Sources &typeCreation,
+                   const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
@@ -50,8 +50,8 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, qint64 id, qint64 idArc, con
     }
 }
 
-void VNodeArc::Create(VPattern *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
-                      const Tool::Sources &typeCreation, const qint64 &idTool, QObject *parent)
+void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document::Documents &parse,
+                      const Tool::Sources &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)

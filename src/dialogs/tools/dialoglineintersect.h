@@ -54,42 +54,42 @@ public:
      * @brief getP1Line1 return id first point of first line
      * @return id
      */
-    inline qint64           getP1Line1() const {return p1Line1;}
+    inline quint32           getP1Line1() const {return p1Line1;}
     /**
      * @brief setP1Line1 set id first point of first line
      * @param value id
      */
-    void                    setP1Line1(const qint64 &value);
+    void                    setP1Line1(const quint32 &value);
     /**
      * @brief getP2Line1 return id second point of first line
      * @return id
      */
-    inline qint64           getP2Line1() const {return p2Line1;}
+    inline quint32           getP2Line1() const {return p2Line1;}
     /**
      * @brief setP2Line1 set id second point of first line
      * @param value id
      */
-    void                    setP2Line1(const qint64 &value);
+    void                    setP2Line1(const quint32 &value);
     /**
      * @brief getP1Line2 return id first point of second line
      * @return id
      */
-    inline qint64           getP1Line2() const {return p1Line2;}
+    inline quint32           getP1Line2() const {return p1Line2;}
     /**
      * @brief setP1Line2 set id first point of second line
      * @param value id
      */
-    void                    setP1Line2(const qint64 &value);
+    void                    setP1Line2(const quint32 &value);
     /**
      * @brief getP2Line2 return id second point of second line
      * @return id
      */
-    inline qint64           getP2Line2() const {return p2Line2;}
+    inline quint32           getP2Line2() const {return p2Line2;}
     /**
      * @brief setP2Line2 set id second point of second line
      * @param value id
      */
-    void                    setP2Line2(const qint64 &value);
+    void                    setP2Line2(const quint32 &value);
     /**
      * @brief getPointName return name of point
      * @return
@@ -106,7 +106,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void            ChoosedObject(qint64 id, const Scene::Scenes &type);
+    virtual void            ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -148,19 +148,19 @@ private:
     /**
      * @brief p1Line1 id first point of first line
      */
-    qint64                  p1Line1;
+    quint32                  p1Line1;
     /**
      * @brief p2Line1 id second point of first line
      */
-    qint64                  p2Line1;
+    quint32                  p2Line1;
     /**
      * @brief p1Line2 id first point of second line
      */
-    qint64                  p1Line2;
+    quint32                  p1Line2;
     /**
      * @brief p2Line2 id second point of second line
      */
-    qint64                  p2Line2;
+    quint32                  p2Line2;
     /**
      * @brief flagPoint keep state of point
      */

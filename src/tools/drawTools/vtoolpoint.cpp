@@ -30,7 +30,7 @@
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
-VToolPoint::VToolPoint(VPattern *doc, VContainer *data, qint64 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
+VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
@@ -96,7 +96,7 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolPoint::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolPoint::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }

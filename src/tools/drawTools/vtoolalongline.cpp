@@ -32,8 +32,8 @@
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
-VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, qint64 id, const QString &formula,
-                               const qint64 &firstPointId, const qint64 &secondPointId,
+VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
+                               const quint32 &firstPointId, const quint32 &secondPointId,
                                const QString &typeLine, const Tool::Sources &typeCreation,
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId)
@@ -151,16 +151,16 @@ void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatt
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString typeLine = dialogTool->getTypeLine();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Tool::FromGui);
 }
 
-void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                            const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
+void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                            const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                             VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
@@ -173,7 +173,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
     if (errorMsg.isEmpty())
     {
         line.setLength(toPixel(result));
-        qint64 id = _id;
+        quint32 id = _id;
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));

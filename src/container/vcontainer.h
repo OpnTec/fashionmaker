@@ -62,7 +62,7 @@ public:
                         VContainer(const VContainer &data);
                         ~VContainer();
     template <typename T>
-    void CopyGObject(const VContainer &data, const qint64 &id)
+    void CopyGObject(const VContainer &data, const quint32 &id)
     {
         T *obj = new T(*data.GeometricObject<const T *>(id));
         Q_CHECK_PTR(obj);
@@ -74,7 +74,7 @@ public:
     */
     void                setData(const VContainer &data);
     template <typename T>
-    const T GeometricObject(qint64 id) const
+    const T GeometricObject(quint32 id) const
     {
         VGObject *gObj = 0;
         if (gObjects.contains(id))
@@ -95,7 +95,7 @@ public:
      * @param id id of point
      * @return point
      */
-    const VGObject *GetGObject(qint64 id) const;
+    const VGObject *GetGObject(quint32 id) const;
     /**
      * @brief GetStandardTableCell return standard table row by name
      * @param name name of standard table row
@@ -137,24 +137,24 @@ public:
      * @param id id of detail
      * @return detail
      */
-    const VDetail GetDetail(qint64 id) const;
+    const VDetail GetDetail(quint32 id) const;
     /**
      * @brief getId return current id
      * @return current id
      */
-    static qint64       getId() {return _id;}
+    static quint32       getId() {return _id;}
     /**
      * @brief AddPoint add new point to container
      * @param point new point
      * @return return id of new point in container
      */
-    qint64              AddGObject(VGObject *obj);
+    quint32              AddGObject(VGObject *obj);
     /**
      * @brief AddDetail add new detail to container
      * @param detail new detail
      * @return return id of new detail in container
      */
-    qint64              AddDetail(VDetail detail);
+    quint32              AddDetail(VDetail detail);
     /**
      * @brief AddStandardTableCell add new row of standard table
      * @param name name of row of standard table
@@ -184,7 +184,7 @@ public:
      * @brief AddLengthArc add length of arc to container
      * @param id id of arc
      */
-    void                AddLengthArc(const qint64 &id);
+    void                AddLengthArc(const quint32 &id);
     /**
      * @brief AddLineAngle add angle of line to container
      * @param name name of line angle
@@ -197,7 +197,7 @@ public:
      * @param secondPointId id of second point of line
      * @param mode mode of line
      */
-    void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
+    void                AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     /**
      * @brief GetNameLine return name of line
      * @param firstPoint id of first point of line
@@ -205,7 +205,7 @@ public:
      * @return name of line
      */
     // cppcheck-suppress functionStatic
-    QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLine(const quint32 &firstPoint, const quint32 &secondPoint) const;
     /**
      * @brief GetNameLineAngle return name of line angle
      * @param firstPoint id of first point of line
@@ -213,19 +213,19 @@ public:
      * @return name of angle of line
      */
     // cppcheck-suppress functionStatic
-    QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLineAngle(const quint32 &firstPoint, const quint32 &secondPoint) const;
     /**
      * @brief UpdatePoint update point by id
      * @param id id of existing point
      * @param point point
      */
-    void                UpdateGObject(qint64 id, VGObject* obj);
+    void                UpdateGObject(quint32 id, VGObject* obj);
     /**
      * @brief UpdateDetail update detail by id
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, const VDetail &detail);
+    void                UpdateDetail(quint32 id, const VDetail &detail);
     /**
      * @brief UpdateStandardTableCell update standard table row by name
      * @param name name of row
@@ -319,7 +319,7 @@ public:
      * @brief getNextId generate next unique id
      * @return next unique id
      */
-    static qint64       getNextId();
+    static quint32       getNextId();
     /**
      * @brief RemoveIncrementTableRow remove row by name from increment table
      * @param name name of existing row
@@ -329,7 +329,7 @@ public:
      * @brief data container with datagObjects return container of gObjects
      * @return pointer on container of gObjects
      */
-    inline const QHash<qint64, VGObject*> *DataGObjects() const {return &gObjects;}
+    inline const QHash<quint32, VGObject*> *DataGObjects() const {return &gObjects;}
     /**
      * @brief data container with dataBase return container of data
      * @return pointer on container of base data
@@ -369,12 +369,12 @@ public:
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
-    inline const QHash<qint64, VDetail> *DataDetails() const {return &details;}
+    inline const QHash<quint32, VDetail> *DataDetails() const {return &details;}
     /**
      * @brief UpdateId update id. If new id bigger when current save new like current.
      * @param newId id
      */
-    static void         UpdateId(qint64 newId);
+    static void         UpdateId(quint32 newId);
     /**
      * @brief CreateManTableIGroup generate man standard table of measurements
      */
@@ -383,7 +383,7 @@ private:
     /**
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
-    static qint64          _id;
+    static quint32          _id;
     /**
      * @brief base container of base data (size and growth)
      */
@@ -391,7 +391,7 @@ private:
     /**
      * @brief gObjects graphicals objects of pattern.
      */
-    QHash<qint64, VGObject*> gObjects;
+    QHash<quint32, VGObject*> gObjects;
     /**
      * @brief standardTable container of standard table rows
      */
@@ -419,7 +419,7 @@ private:
     /**
      * @brief details container of details
      */
-    QHash<qint64, VDetail> details;
+    QHash<quint32, VDetail> details;
     template <typename key, typename val>
     /**
      * @brief GetObject return object from container
@@ -445,7 +445,7 @@ private:
      * @param id id of existing object
      * @param point object
      */
-    void UpdateObject(QHash<qint64, val > &obj, const qint64 &id, val point);
+    void UpdateObject(QHash<quint32, val > &obj, const quint32 &id, val point);
     template <typename key, typename val>
     /**
      * @brief AddObject add object to container
@@ -453,7 +453,7 @@ private:
      * @param value object
      * @return id of object in container
      */
-    static qint64 AddObject(QHash<key, val> &obj, val value);
+    static quint32 AddObject(QHash<key, val> &obj, val value);
 };
 
 #endif // VCONTAINER_H

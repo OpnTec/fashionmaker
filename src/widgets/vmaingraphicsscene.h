@@ -85,7 +85,7 @@ public slots:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedItem(qint64 id, const Scene::Scenes &type);
+    void          ChoosedItem(quint32 id, const Scene::Scenes &type);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor. scene scale factor.
@@ -118,7 +118,7 @@ signals:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedObject(qint64 id, Scene::Scenes type);
+    void          ChoosedObject(quint32 id, Scene::Scenes type);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.

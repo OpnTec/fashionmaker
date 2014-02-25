@@ -47,7 +47,7 @@ public:
                              * @param id object id in container.
                              * @param parent parent object.
                              */
-                            VAbstractTool(VPattern *doc, VContainer *data, qint64 id, QObject *parent = 0);
+                            VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = 0);
     virtual                 ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
@@ -93,7 +93,7 @@ public:
      * @brief getId return object id.
      * @return id.
      */
-    inline qint64           getId() const {return id;}
+    inline quint32           getId() const {return id;}
     /**
      * @brief LineCoefficients coefficient for equation of segment. Segment equestion ax+by+c=0.
      * @param line line
@@ -153,7 +153,7 @@ public:
      * @param toolType tool type
      * @param doc dom document container
      */
-    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VPattern *doc);
+    static void  AddRecord(const quint32 id, const Tool::Tools &toolType, VPattern *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -169,7 +169,7 @@ signals:
      * @param id object id in container.
      * @param type type of scene object.
      */
-    void                    ChoosedTool(qint64 id, Scene::Scenes type);
+    void                    ChoosedTool(quint32 id, Scene::Scenes type);
     /**
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
@@ -182,7 +182,7 @@ protected:
     /**
      * @brief id object id.
      */
-    const qint64            id;
+    const quint32            id;
     /**
      * @brief baseColor base color for tool.
      */

@@ -51,12 +51,12 @@ DialogSpline::~DialogSpline()
     delete ui;
 }
 
-qint64 DialogSpline::getP1() const
+quint32 DialogSpline::getP1() const
 {
     return p1;
 }
 
-void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogSpline::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -81,7 +81,7 @@ void DialogSpline::ChoosedObject(qint64 id, const Scene::Scenes &type)
                 number = 0;
                 emit ToolTip("");
                 index = ui->comboBoxP1->currentIndex();
-                qint64 p1Id = qvariant_cast<qint64>(ui->comboBoxP1->itemData(index));
+                quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
 
                 QPointF p1 = data->GeometricObject<const VPointF *>(p1Id)->toQPointF();
                 QPointF p4 = data->GeometricObject<const VPointF *>(id)->toQPointF();
@@ -139,19 +139,19 @@ void DialogSpline::setAngle1(const qreal &value)
     ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
 }
 
-void DialogSpline::setP4(const qint64 &value)
+void DialogSpline::setP4(const quint32 &value)
 {
     p4 = value;
     ChangeCurrentData(ui->comboBoxP4, value);
 }
 
-void DialogSpline::setP1(const qint64 &value)
+void DialogSpline::setP1(const quint32 &value)
 {
     p1 = value;
     ChangeCurrentData(ui->comboBoxP1, value);
 }
 
-qint64 DialogSpline::getP4() const
+quint32 DialogSpline::getP4() const
 {
     return p4;
 }

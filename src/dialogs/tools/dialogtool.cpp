@@ -70,12 +70,12 @@ void DialogTool::showEvent(QShowEvent *event)
     isInitialized = true;//first show windows are held
 }
 
-void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
+void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 {
     Q_CHECK_PTR(box);
-    const QHash<qint64, VGObject*> *objs = data->DataGObjects();
-    QHashIterator<qint64, VGObject*> i(*objs);
-    QMap<QString, qint64> list;
+    const QHash<quint32, VGObject*> *objs = data->DataGObjects();
+    QHashIterator<quint32, VGObject*> i(*objs);
+    QMap<QString, quint32> list;
     while (i.hasNext())
     {
         i.next();
@@ -92,12 +92,12 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const qint64 &id) const
     FillList(box, list);
 }
 
-void DialogTool::FillComboBoxArcs(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutArc cut) const
+void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutArc cut) const
 {
     Q_CHECK_PTR(box);
-    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<qint64, VGObject*> i(*objs);
-    QMap<QString, qint64> list;
+    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<quint32, VGObject*> i(*objs);
+    QMap<QString, quint32> list;
     while (i.hasNext())
     {
         i.next();
@@ -129,12 +129,12 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const qint64 &id, ComboMode::C
     FillList(box, list);
 }
 
-void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
-    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<qint64, VGObject*> i(*objs);
-    QMap<QString, qint64> list;
+    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<quint32, VGObject*> i(*objs);
+    QMap<QString, quint32> list;
     while (i.hasNext())
     {
         i.next();
@@ -166,12 +166,12 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const qint64 &id, ComboMode
     FillList(box, list);
 }
 
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
-    const QHash<qint64, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<qint64, VGObject *> i(*objs);
-    QMap<QString, qint64> list;
+    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
+    QHashIterator<quint32, VGObject *> i(*objs);
+    QMap<QString, quint32> list;
     while (i.hasNext())
     {
         i.next();
@@ -261,7 +261,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
     }
 }
 
-void DialogTool::ChangeCurrentData(QComboBox *box, const qint64 &value) const
+void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
 {
     qint32 index = box->findData(value);
     if (index != -1)
@@ -333,7 +333,7 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     labelEditFormula->setPalette(palette);
 }
 
-void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64 &value, const qint64 &id) const
+void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const
 {
     Q_CHECK_PTR(box);
     FillComboBoxPoints(box, id);
@@ -341,7 +341,7 @@ void DialogTool::setCurrentPointId(QComboBox *box, qint64 &pointId, const qint64
     ChangeCurrentData(box, value);
 }
 
-void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint64 &value, const qint64 &id,
+void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
                                     ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
@@ -350,7 +350,7 @@ void DialogTool::setCurrentSplineId(QComboBox *box, qint64 &splineId, const qint
     ChangeCurrentData(box, value);
 }
 
-void DialogTool::setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &value, const qint64 &id,
+void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
                                  ComboMode::ComboBoxCutArc cut) const
 {
     Q_CHECK_PTR(box);
@@ -359,8 +359,8 @@ void DialogTool::setCurrentArcId(QComboBox *box, qint64 &arcId, const qint64 &va
     ChangeCurrentData(box, value);
 }
 
-void DialogTool::setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, const qint64 &value,
-                                        const qint64 &id, ComboMode::ComboBoxCutSpline cut) const
+void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
+                                        const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
     FillComboBoxSplinesPath(box, id, cut);
@@ -368,14 +368,14 @@ void DialogTool::setCurrentSplinePathId(QComboBox *box, qint64 &splinePathId, co
     ChangeCurrentData(box, value);
 }
 
-qint64 DialogTool::getCurrentObjectId(QComboBox *box) const
+quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     Q_CHECK_PTR(box);
     qint32 index = box->currentIndex();
     Q_ASSERT(index != -1);
     if (index != -1)
     {
-        return qvariant_cast<qint64>(box->itemData(index));
+        return qvariant_cast<quint32>(box->itemData(index));
     }
     else
     {
@@ -383,12 +383,12 @@ qint64 DialogTool::getCurrentObjectId(QComboBox *box) const
     }
 }
 
-void DialogTool::FillList(QComboBox *box, const QMap<QString, qint64> &list) const
+void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     Q_CHECK_PTR(box);
     box->clear();
 
-    QMapIterator<QString, qint64> iter(list);
+    QMapIterator<QString, quint32> iter(list);
     while (iter.hasNext())
     {
         iter.next();
@@ -402,7 +402,7 @@ void DialogTool::CheckState()
     bOk->setEnabled(flagFormula && flagName);
 }
 
-void DialogTool::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogTool::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);

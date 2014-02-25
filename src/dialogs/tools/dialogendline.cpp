@@ -93,7 +93,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogEndLine::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -128,7 +128,7 @@ void DialogEndLine::setAngle(const qreal &value)
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
-void DialogEndLine::setBasePointId(const qint64 &value, const qint64 &id)
+void DialogEndLine::setBasePointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }

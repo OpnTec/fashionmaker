@@ -83,7 +83,7 @@ DialogShoulderPoint::~DialogShoulderPoint()
     delete ui;
 }
 
-void DialogShoulderPoint::ChoosedObject(qint64 id, const Scene::Scenes &type)
+void DialogShoulderPoint::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
@@ -138,17 +138,17 @@ void DialogShoulderPoint::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogShoulderPoint::setPShoulder(const qint64 &value, const qint64 &id)
+void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
-void DialogShoulderPoint::setP2Line(const qint64 &value, const qint64 &id)
+void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
-void DialogShoulderPoint::setP1Line(const qint64 &value, const qint64 &id)
+void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
