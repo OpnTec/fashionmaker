@@ -46,7 +46,7 @@ public:
                              * @param id object id in container.
                              * @param parent parent object.
                              */
-                            VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = 0);
+                            VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual                 ~VToolPoint(){}
     static const QString    TagName;
 public slots:

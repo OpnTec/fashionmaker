@@ -48,11 +48,11 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
-      sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
-      dialogTool(0), dialogHistory(0), comboBoxDraws(0), curFile(QString()), mode(Draw::Calculation),
-      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(0),
-      autoSaveTimer(0)
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Tool::ArrowTool),
+      currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
+      view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
+      comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0),
+      drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(nullptr), autoSaveTimer(nullptr)
 {
     CreateActions();
     CreateMenus();
@@ -650,7 +650,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     delete dialogTool;
-    dialogTool = 0;
+    dialogTool = nullptr;
     switch ( tool )
     {
         case Tool::ArrowTool:
@@ -1031,7 +1031,7 @@ void MainWindow::ClosedActionTable()
 {
     ui->actionTable->setChecked(false);
     delete dialogTable;
-    dialogTable = 0;
+    dialogTable = nullptr;
 }
 
 void MainWindow::ActionHistory(bool checked)
@@ -1336,7 +1336,7 @@ void MainWindow::InitAutoSave()
 {
     //Autosaving file each 5 minutes
     delete autoSaveTimer;
-    autoSaveTimer = 0;
+    autoSaveTimer = nullptr;
 
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());

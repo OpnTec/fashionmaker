@@ -51,7 +51,7 @@ public:
      */
     VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                    const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
-                   const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                   const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

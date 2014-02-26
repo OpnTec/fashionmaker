@@ -134,7 +134,7 @@ protected:
         {
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
-            QAction *actionRemove = 0;
+            QAction *actionRemove = nullptr;
             if (showRemove)
             {
                 actionRemove = menu.addAction(tr("Delete"));

@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogCutArc(const VContainer *data, QWidget *parent = 0);
+    DialogCutArc(const VContainer *data, QWidget *parent = nullptr);
     ~DialogCutArc();
     /**
      * @brief getPointName return name point on arc

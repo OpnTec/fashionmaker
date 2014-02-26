@@ -56,7 +56,7 @@ VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, qu
                                  const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
-    VNodeSpline *spl = 0;
+    VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
         spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);

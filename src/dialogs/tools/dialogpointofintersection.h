@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogPointOfIntersection(const VContainer *data, QWidget *parent = 0);
+    DialogPointOfIntersection(const VContainer *data, QWidget *parent = nullptr);
     ~DialogPointOfIntersection();
     /**
      * @brief getPointName return name of point

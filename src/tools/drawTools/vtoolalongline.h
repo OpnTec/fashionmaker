@@ -52,7 +52,7 @@ public:
                   */
                  VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
                                 const quint32 &firstPointId, const quint32 &secondPointId, const QString &typeLine,
-                                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

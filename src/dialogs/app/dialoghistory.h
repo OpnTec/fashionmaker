@@ -50,7 +50,7 @@ public:
                        * @param doc dom document container
                        * @param parent parent widget
                        */
-                      DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = 0);
+                      DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
     virtual           ~DialogHistory();
 public slots:
     /**

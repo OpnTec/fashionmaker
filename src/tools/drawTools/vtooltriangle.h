@@ -52,7 +52,7 @@ public:
                     */
                    VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
                                  const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

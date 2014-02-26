@@ -40,7 +40,7 @@ class ConfigDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ConfigDialog(QWidget *parent = 0);
+    explicit ConfigDialog(QWidget *parent = nullptr);
 public slots:
     void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
 protected:

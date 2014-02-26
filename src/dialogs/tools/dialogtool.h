@@ -63,7 +63,7 @@ public:
                       * @param data container with data
                       * @param parent parent widget
                       */
-                     DialogTool(const VContainer *data, QWidget *parent = 0);
+                     DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
 signals:
     /**

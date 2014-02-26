@@ -52,7 +52,7 @@ public:
                     */
                    VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                               const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                               const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

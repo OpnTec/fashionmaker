@@ -57,7 +57,7 @@ public:
      * @brief TableWindow constructor.
      * @param parent parent widget.
      */
-                 explicit TableWindow(QWidget *parent = 0);
+                 explicit TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
 public slots:
     /**

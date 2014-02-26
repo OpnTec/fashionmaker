@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogLineIntersect(const VContainer *data, QWidget *parent = 0);
+    DialogLineIntersect(const VContainer *data, QWidget *parent = nullptr);
     ~DialogLineIntersect();
     /**
      * @brief getP1Line1 return id first point of first line

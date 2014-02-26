@@ -52,7 +52,7 @@ public:
                   */
                  VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                               const QString &formula, const qreal &angle, const quint32 &basePointId,
-                              const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                              const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

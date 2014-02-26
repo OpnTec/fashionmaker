@@ -76,7 +76,7 @@ public:
     template <typename T>
     const T GeometricObject(quint32 id) const
     {
-        VGObject *gObj = 0;
+        VGObject *gObj = nullptr;
         if (gObjects.contains(id))
         {
             gObj = gObjects.value(id);

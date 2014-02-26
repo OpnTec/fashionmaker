@@ -52,7 +52,7 @@ public:
                   */
                  VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
                                     const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                                    const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                    const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

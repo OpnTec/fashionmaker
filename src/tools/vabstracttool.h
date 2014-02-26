@@ -47,7 +47,7 @@ public:
      * @param id object id in container.
      * @param parent parent object.
      */
-    VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = 0);
+    VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.

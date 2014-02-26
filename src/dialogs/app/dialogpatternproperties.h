@@ -40,7 +40,7 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    DialogPatternProperties(VPattern *doc, QWidget *parent = 0);
+    DialogPatternProperties(VPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties();
 signals:
     void         haveChange();

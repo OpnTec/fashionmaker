@@ -49,7 +49,7 @@ public:
                   * @param parent parent object
                   */
                  VToolArc(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
-                          QGraphicsItem * parent = 0);
+                          QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

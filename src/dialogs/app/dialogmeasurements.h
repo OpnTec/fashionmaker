@@ -49,7 +49,7 @@ class DialogMeasurements : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogMeasurements(QWidget *parent = 0);
+    explicit DialogMeasurements(QWidget *parent = nullptr);
     ~DialogMeasurements();
     Measurements::Type type() const;
 private:

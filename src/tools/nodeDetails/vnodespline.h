@@ -49,8 +49,8 @@ public:
                    * @param parent parent object.
                    */
                   VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                              const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *qoParent = 0,
-                              QGraphicsItem * parent = 0);
+                              const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *qoParent = nullptr,
+                              QGraphicsItem * parent = nullptr);
     /**
      * @brief Create help create tool.
      * @param doc dom document container.
@@ -63,7 +63,7 @@ public:
      */
     static VNodeSpline *Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                                const Document::Documents &parse, const Tool::Sources &typeCreation,
-                               const quint32 &idTool = 0, QObject *parent = 0);
+                               const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
     /**

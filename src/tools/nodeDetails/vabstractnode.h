@@ -47,7 +47,7 @@ public:
                   * @param parent parent object.
                   */
                  VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                               const quint32 &idTool, QObject *parent = 0);
+                               const quint32 &idTool, QObject *parent = nullptr);
     virtual      ~VAbstractNode() {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;

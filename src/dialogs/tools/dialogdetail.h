@@ -44,7 +44,7 @@ public:
                       * @param data container with data
                       * @param parent parent widget
                       */
-                     DialogDetail(const VContainer *data, QWidget *parent = 0);
+                     DialogDetail(const VContainer *data, QWidget *parent = nullptr);
     /**
      * @brief getDetails return detail
      * @return detail

@@ -48,7 +48,7 @@ public:
                    * @param sceneRect scene rect.
                    * @param parent parent object.
                    */
-                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
+                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
     /**
      * @brief getHorScrollBar return scene horizontal scrollbar.
      * @return horizontal scrollbar.

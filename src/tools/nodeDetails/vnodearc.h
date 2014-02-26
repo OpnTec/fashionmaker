@@ -48,9 +48,8 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,
-                          const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *qoParent = 0,
-                          QGraphicsItem * parent = 0);
+                 VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Tool::Sources &typeCreation,
+                          const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
     /**
      * @brief Create help create tool.
      * @param doc dom document container.
@@ -61,7 +60,7 @@ public:
      * @param typeCreation way we create this tool.
      */
     static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document::Documents &parse,
-                        const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = 0);
+                        const Tool::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
     /**

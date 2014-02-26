@@ -55,7 +55,7 @@ public:
      * @param currentColor current color.
      * @param parent parent object.
      */
-    VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
+    VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
 signals:
     /**
      * @brief Choosed send id when clicked.

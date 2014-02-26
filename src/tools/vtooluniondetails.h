@@ -53,7 +53,7 @@ public:
      */
     VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
                       const quint32 &indexD1, const quint32 &indexD2, const Tool::Sources &typeCreation,
-                      QObject *parent = 0);
+                      QObject *parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

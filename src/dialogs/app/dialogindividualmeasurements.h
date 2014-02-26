@@ -40,7 +40,7 @@ class DialogIndividualMeasurements : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogIndividualMeasurements(QWidget *parent = 0);
+    explicit DialogIndividualMeasurements(QWidget *parent = nullptr);
     ~DialogIndividualMeasurements();
     QString name() const;
     QString tablePath() const;

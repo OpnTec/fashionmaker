@@ -34,11 +34,12 @@
 #include <QtWidgets>
 
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
-    :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(0), bOk(0),
-      spinBoxAngle(0), lineEditFormula(0), listWidget(0), labelResultCalculation(0), labelDescription(0),
-      labelEditNamePoint(0), labelEditFormula(0), radioButtonSizeGrowth(0), radioButtonStandardTable(0),
-      radioButtonIncrements(0), radioButtonLengthLine(0), radioButtonLengthArc(0), radioButtonLengthCurve(0),
-      lineStyles(QStringList())
+    :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
+      bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), listWidget(nullptr),
+      labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
+      labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
+      radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
+      radioButtonLengthCurve(nullptr), lineStyles(QStringList())
 {
     Q_CHECK_PTR(data);
     timerFormula = new QTimer(this);

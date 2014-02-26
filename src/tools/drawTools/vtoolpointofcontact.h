@@ -52,7 +52,7 @@ public:
                    VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &arcRadius, const quint32 &center,
                                        const quint32 &firstPointId, const quint32 &secondPointId,
-                                       const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                                       const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

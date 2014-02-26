@@ -55,7 +55,7 @@ public:
      * @param factor scale factor.
      * @param parent parent object.
      */
-    VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = 0, QObject *parent = 0);
+    VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = nullptr);
 signals:
     /**
      * @brief Choosed send id when clicked.

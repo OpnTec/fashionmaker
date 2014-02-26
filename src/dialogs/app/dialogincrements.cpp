@@ -419,8 +419,8 @@ void DialogIncrements::AddIncrementToFile(quint32 id, QString name, qreal base, 
 
 void DialogIncrements::cellChanged ( qint32 row, qint32 column )
 {
-    QTableWidgetItem *item = 0;
-    QTableWidgetItem *itemName = 0;
+    QTableWidgetItem *item = nullptr;
+    QTableWidgetItem *itemName = nullptr;
     quint32 id;
     QDomElement domElement;
     this->row = row;

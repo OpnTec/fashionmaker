@@ -33,17 +33,17 @@
 #include <QDebug>
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
-    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(0)
+    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(nullptr)
 {
 }
 
-VItem::VItem():numInOutList(0), paper(0)
+VItem::VItem():numInOutList(0), paper(nullptr)
 {
 
 }
 
 VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), numInOutList(numInList),
-    paper(0)
+    paper(nullptr)
 {
 
 }
@@ -51,7 +51,7 @@ VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), n
 void VItem::checkItemChange()
 {
     QRectF rect;
-    if (paper == 0)
+    if (paper == nullptr)
     {
         qDebug()<<"Don't set paper for detail!!!!";
         rect = this->scene()->sceneRect();

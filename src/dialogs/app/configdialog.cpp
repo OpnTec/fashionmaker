@@ -29,7 +29,7 @@
 #include "configdialog.h"
 
 ConfigDialog::ConfigDialog(QWidget *parent) :
-    QDialog(parent), contentsWidget(0), pagesWidget(0), configurationPage(0), patternPage(0)
+    QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr)
 {
     contentsWidget = new QListWidget;
     Q_CHECK_PTR(contentsWidget);

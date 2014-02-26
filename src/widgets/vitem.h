@@ -48,14 +48,14 @@ public:
      * @param numInList index in list of details.
      * @param parent parent object.
      */
-                VItem (int numInList, QGraphicsItem * parent = 0);
+                VItem (int numInList, QGraphicsItem * parent = nullptr);
     /**
      * @brief VItem constructor.
      * @param path detail path.
      * @param numInList index in list of details.
      * @param parent parent object.
      */
-                VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = 0 );
+                VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = nullptr );
     /**
      * @brief Rotate rotate detail on angle in degree.
      * @param angle angle in degree.

@@ -35,7 +35,7 @@ class ConfigurationPage : public QWidget
 {
     Q_OBJECT
 public:
-    ConfigurationPage(QWidget *parent = 0);
+    ConfigurationPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
     void      LangChenged();
@@ -54,7 +54,7 @@ class PatternPage : public QWidget
 {
     Q_OBJECT
 public:
-    PatternPage(QWidget *parent = 0);
+    PatternPage(QWidget *parent = nullptr);
     void      Apply();
 private:
     Q_DISABLE_COPY(PatternPage)

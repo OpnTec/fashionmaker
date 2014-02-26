@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogShoulderPoint(const VContainer *data, QWidget *parent = 0);
+    DialogShoulderPoint(const VContainer *data, QWidget *parent = nullptr);
     ~DialogShoulderPoint();
     /**
      * @brief getPointName return name of point

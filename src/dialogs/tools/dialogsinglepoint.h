@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
+    DialogSinglePoint(const VContainer *data, QWidget *parent = nullptr);
     ~DialogSinglePoint();
     /**
      * @brief setData set name and point

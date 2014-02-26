@@ -54,7 +54,7 @@ public:
                    VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &formula, const qreal &angle, const quint32 &firstPointId,
                                const quint32 &secondPointId, const Tool::Sources &typeCreation,
-                               QGraphicsItem * parent = 0);
+                               QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */

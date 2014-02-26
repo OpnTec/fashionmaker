@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogUnionDetails(const VContainer *data, QWidget *parent = 0);
+    DialogUnionDetails(const VContainer *data, QWidget *parent = nullptr);
     ~DialogUnionDetails();
     /**
      * @brief getD1 return id first detail

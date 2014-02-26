@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogCutSpline(const VContainer *data, QWidget *parent = 0);
+    DialogCutSpline(const VContainer *data, QWidget *parent = nullptr);
     ~DialogCutSpline();
     /**
      * @brief getPointName return name of point

@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogHeight(const VContainer *data, QWidget *parent = 0);
+    DialogHeight(const VContainer *data, QWidget *parent = nullptr);
     ~DialogHeight();
     /**
      * @brief getPointName return name of point

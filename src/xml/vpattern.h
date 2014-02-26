@@ -52,7 +52,7 @@ class VPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent = 0);
+    VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent = nullptr);
     /**
      * @brief CreateEmptyFile create minimal empty file.
      */

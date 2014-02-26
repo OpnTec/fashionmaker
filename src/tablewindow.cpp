@@ -34,9 +34,9 @@
 #include "options.h"
 
 TableWindow::TableWindow(QWidget *parent)
-    :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
-    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
-    paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
+    :QMainWindow(parent), numberDetal(nullptr), colission(nullptr), ui(new Ui::TableWindow),
+    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(nullptr),
+    paper(nullptr), shadowPaper(nullptr), listOutItems(nullptr), listCollidingItems(QList<QGraphicsItem*>()),
     indexDetail(0), sceneRect(QRectF()), fileName(QString()), description(QString())
 {
     ui->setupUi(this);

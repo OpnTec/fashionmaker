@@ -44,7 +44,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogPointOfContact(const VContainer *data, QWidget *parent = 0);
+    DialogPointOfContact(const VContainer *data, QWidget *parent = nullptr);
     /**
      * @brief getPointName return name of point
      * @return name

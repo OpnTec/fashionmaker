@@ -49,7 +49,7 @@ const QString VToolDetail::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
 VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(0), sceneDetails(scene)
+    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)

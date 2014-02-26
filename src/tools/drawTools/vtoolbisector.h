@@ -53,7 +53,7 @@ public:
                    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                                  const quint32 &thirdPointId, const Tool::Sources &typeCreation,
-                                 QGraphicsItem * parent = 0);
+                                 QGraphicsItem * parent = nullptr);
     /**
      * @brief FindPoint find bisector point.
      * @param firstPoint first point of angle.

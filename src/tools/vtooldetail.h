@@ -50,7 +50,7 @@ public:
      * @param parent parent object
      */
     VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
-                VMainGraphicsScene *scene, QGraphicsItem * parent = 0);
+                VMainGraphicsScene *scene, QGraphicsItem * parent = nullptr);
     ~VToolDetail();
     /**
      * @brief setDialog set dialog when user want change tool option.

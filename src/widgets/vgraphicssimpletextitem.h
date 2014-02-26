@@ -42,13 +42,13 @@ public:
                   * @brief VGraphicsSimpleTextItem default constructor.
                   * @param parent parent object.
                   */
-                 VGraphicsSimpleTextItem(QGraphicsItem * parent = 0);
+                 VGraphicsSimpleTextItem(QGraphicsItem * parent = nullptr);
                  /**
                   * @brief VGraphicsSimpleTextItem constructor.
                   * @param text text.
                   * @param parent parent object.
                   */
-                 VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = 0 );
+                 VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = nullptr );
     /**
      * @brief FontSize return label font size.
      * @return font size.

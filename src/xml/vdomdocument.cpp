@@ -40,7 +40,7 @@
 class MessageHandler : public QAbstractMessageHandler
 {
 public:
-    MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
+    MessageHandler() : QAbstractMessageHandler(), m_messageType(QtMsgType()), m_description(QString()),
         m_sourceLocation(QSourceLocation()){}
     QString statusMessage() const;
     qint64  line() const;

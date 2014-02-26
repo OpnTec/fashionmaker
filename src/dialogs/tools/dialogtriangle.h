@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogTriangle(const VContainer *data, QWidget *parent = 0);
+    DialogTriangle(const VContainer *data, QWidget *parent = nullptr);
     ~DialogTriangle();
     /**
      * @brief getAxisP1Id return id first point of axis

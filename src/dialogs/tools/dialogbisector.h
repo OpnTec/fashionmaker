@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogBisector(const VContainer *data, QWidget *parent = 0);
+    DialogBisector(const VContainer *data, QWidget *parent = nullptr);
     ~DialogBisector();
     /**
      * @brief getPointName return name of point

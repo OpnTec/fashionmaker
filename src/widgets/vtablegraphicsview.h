@@ -43,7 +43,7 @@ public:
      */
     enum typeMove_e { Left, Right, Up, Down };
 
-    VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = 0);
+    VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = nullptr);
 signals:
     /**
      * @brief itemChect emit after change selection state detail.

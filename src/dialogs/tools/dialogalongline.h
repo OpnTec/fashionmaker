@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogAlongLine(const VContainer *data, QWidget *parent = 0);
+    DialogAlongLine(const VContainer *data, QWidget *parent = nullptr);
     ~DialogAlongLine();
     /**
      * @brief getPointName return name of point

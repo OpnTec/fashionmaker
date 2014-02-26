@@ -50,7 +50,7 @@ public:
                           * @param doc dom document container
                           * @param parent parent widget
                           */
-                         DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = 0);
+                         DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
                          ~DialogIncrements();
 public slots:
     /**

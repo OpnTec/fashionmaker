@@ -37,7 +37,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
                        const Tool::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
-      namePoint(0), lineName(0)
+      namePoint(nullptr), lineName(nullptr)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);

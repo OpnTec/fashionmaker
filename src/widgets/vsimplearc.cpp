@@ -31,7 +31,7 @@
 VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
 :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
-    if (factor == 0)
+    if (factor == nullptr)
     {
         setPen(QPen(Qt::black, widthHairLine));
     }
@@ -55,7 +55,7 @@ void VSimpleArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == 0)
+    if (factor == nullptr)
     {
         this->setPen(QPen(*currentColor, widthMainLine));
     }
@@ -68,7 +68,7 @@ void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == 0)
+    if (factor == nullptr)
     {
         this->setPen(QPen(*currentColor, widthHairLine));
     }

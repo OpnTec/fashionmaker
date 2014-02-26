@@ -42,7 +42,7 @@ public:
      * @brief VMainGraphicsView constructor.
      * @param parent parent object.
      */
-    explicit VMainGraphicsView(QWidget *parent = 0);
+    explicit VMainGraphicsView(QWidget *parent = nullptr);
 signals:
     /**
      * @brief NewFactor send new scale factor.

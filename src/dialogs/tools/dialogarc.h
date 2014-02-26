@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogArc(const VContainer *data, QWidget *parent = 0);
+    DialogArc(const VContainer *data, QWidget *parent = nullptr);
     ~DialogArc();
     /**
      * @brief GetCenter return id of center point

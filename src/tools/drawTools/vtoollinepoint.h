@@ -51,7 +51,7 @@ public:
                        */
                       VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                      const QString &formula, const quint32 &basePointId, const qreal &angle,
-                                     QGraphicsItem * parent = 0);
+                                     QGraphicsItem * parent = nullptr);
 public slots:
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.

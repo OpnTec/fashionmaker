@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogLine(const VContainer *data, QWidget *parent = 0);
+    DialogLine(const VContainer *data, QWidget *parent = nullptr);
     ~DialogLine();
     /**
      * @brief getFirstPoint return id first point

@@ -44,7 +44,7 @@ public:
      * @param data container with variables
      * @param parent parent object
      */
-    VDataTool(VContainer *data, QObject *parent = 0);
+    VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool(){}
     /**
      * @brief operator = assignment operator.

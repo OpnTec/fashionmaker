@@ -48,7 +48,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogNormal(const VContainer *data, QWidget *parent = 0);
+    DialogNormal(const VContainer *data, QWidget *parent = nullptr);
     ~DialogNormal();
     /**
      * @brief getPointName return name of point

@@ -55,7 +55,7 @@ public:
                * @brief MainWindow constructor.
                * @param parent parent widget.
                */
-              explicit MainWindow(QWidget *parent = 0);
+              explicit MainWindow(QWidget *parent = nullptr);
                        ~MainWindow();
     /**
      * @brief LoadPattern open pattern file.

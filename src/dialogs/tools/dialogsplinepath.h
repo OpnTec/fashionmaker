@@ -49,7 +49,7 @@ public:
      * @param data container with data
      * @param parent parent widget
      */
-    DialogSplinePath(const VContainer *data, QWidget *parent = 0);
+    DialogSplinePath(const VContainer *data, QWidget *parent = nullptr);
     ~DialogSplinePath();
     /**
      * @brief GetPath return spline path

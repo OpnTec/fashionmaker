@@ -79,7 +79,7 @@ public:
      * @brief CriticalMessageBox show Critical Message Box.
      * @param situation main text message box.
      */
-    virtual void    CriticalMessageBox(const QString &situation, QWidget *parent = 0) const;
+    virtual void    CriticalMessageBox(const QString &situation, QWidget *parent = nullptr) const;
 protected:
     /**
      * @brief what string with error
