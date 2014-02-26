@@ -52,7 +52,7 @@ private:
      * @param newPoints point whos we try to add to contour.
      * @return length length of contour.
      */
-    qreal            GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) const;
+    static qreal     GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
     /**
      * @brief biasPoints bias point.
      * @param points vector of points.
@@ -60,13 +60,13 @@ private:
      * @param my offset respect to y.
      * @return new vector biased points.
      */
-    QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const;
+    static QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my);
     /**
      * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.
      * @param points list of points equdistant.
      * @return corrected list.
      */
-    QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points) const;
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
     /**
      * @brief Equidistant create equidistant painter path for detail.
      * @param points vector of points.
@@ -80,13 +80,13 @@ private:
      * @param points vector of points of equidistant.
      * @return vector of points of equidistant.
      */
-    QVector<QPointF> CheckLoops(const QVector<QPointF> &points) const;
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     /**
      * @brief GetReversePoint return revers container of points.
      * @param points container with points.
      * @return reverced points.
      */
-    QVector<QPointF> GetReversePoint(const QVector<QPointF> &points) const;
+    static QVector<QPointF> GetReversePoint(const QVector<QPointF> &points);
     /**
      * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
      * @param line1 first line.
@@ -109,7 +109,7 @@ private:
      * @param width width to parallel line.
      * @return point of parallel line.
      */
-    QPointF          SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const;
+    static QPointF   SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 };
 
 #endif // VEQUIDISTANT_H

@@ -157,7 +157,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     return path;
 }
 
-qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) const
+qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
 {
     qreal length = 0;
     QVector<QPointF> points;
@@ -170,7 +170,7 @@ qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVec
     return length;
 }
 
-QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const
+QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my)
 {
     QVector<QPointF> p;
     for (qint32 i = 0; i < points.size(); ++i)
@@ -183,7 +183,7 @@ QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const 
     return p;
 }
 
-QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> correctPoints;
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
@@ -295,7 +295,7 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
     return ekv;
 }
 
-QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 {
     QVector<QPointF> ekvPoints;
     /*If we got less than 4 points no need seek loops.*/
@@ -353,7 +353,7 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points) const
     return ekvPoints;
 }
 
-QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
 {
     Q_ASSERT(points.size() > 0);
     QVector<QPointF> reversePoints;
@@ -421,7 +421,7 @@ QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width) const
     return paralel;
 }
 
-QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const
+QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)
 {
     Q_ASSERT(width > 0);
     QLineF pLine = line;
