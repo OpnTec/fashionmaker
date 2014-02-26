@@ -43,87 +43,87 @@ class DialogBisector : public DialogTool
 {
     Q_OBJECT
 public:
-                      /**
-                       * @brief DialogBisector create dialog
-                       * @param data container with data
-                       * @param parent parent widget
-                       */
-                      DialogBisector(const VContainer *data, QWidget *parent = 0);
-                      ~DialogBisector();
+    /**
+     * @brief DialogBisector create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogBisector(const VContainer *data, QWidget *parent = 0);
+    ~DialogBisector();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    QString           getPointName() const {return pointName;}
+    QString            getPointName() const {return pointName;}
     /**
      * @brief setPointName set name of point
      * @param value name
      */
-    void              setPointName(const QString &value);
+    void               setPointName(const QString &value);
     /**
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString    getTypeLine() const {return typeLine;}
+    QString            getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
      */
-    void              setTypeLine(const QString &value);
+    void               setTypeLine(const QString &value);
     /**
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString    getFormula() const {return formula;}
+    QString            getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
      */
-    void              setFormula(const QString &value);
+    void               setFormula(const QString &value);
     /**
      * @brief getFirstPointId return id of first point
      * @return id
      */
-    inline quint32     getFirstPointId() const {return firstPointId;}
+    quint32            getFirstPointId() const;
     /**
      * @brief setFirstPointId set id of first point
      * @param value id
      * @param id don't show this id in list
      */
-    void              setFirstPointId(const quint32 &value, const quint32 &id);
+    void               setFirstPointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getSecondPointId return id of second point
      * @return id
      */
-    inline quint32     getSecondPointId() const {return secondPointId;}
+    quint32            getSecondPointId() const;
     /**
      * @brief setSecondPointId set id of second point
      * @param value id
      * @param id don't show this id in list
      */
-    void              setSecondPointId(const quint32 &value, const quint32 &id);
+    void               setSecondPointId(const quint32 &value, const quint32 &id);
     /**
      * @brief getThirdPointId return id of third point
      * @return id
      */
-    inline quint32     getThirdPointId() const {return thirdPointId;}
+    quint32            getThirdPointId() const;
     /**
      * @brief setThirdPointId set id of third point
      * @param value id
      * @param id don't show this id in list
      */
-    void              setThirdPointId(const quint32 &value, const quint32 &id);
+    void               setThirdPointId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void      ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void       ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
-    virtual void      DialogAccepted();
+    virtual void       DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogBisector)
     /**
@@ -149,15 +149,40 @@ private:
     /**
      * @brief firstPointId id of first point
      */
-    quint32             firstPointId;
+    quint32            firstPointId;
     /**
      * @brief secondPointId id of second point
      */
-    quint32             secondPointId;
+    quint32            secondPointId;
     /**
      * @brief thirdPointId id of third point
      */
-    quint32             thirdPointId;
+    quint32            thirdPointId;
 };
+
+inline QString DialogBisector::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline QString DialogBisector::getFormula() const
+{
+    return formula;
+}
+
+inline quint32 DialogBisector::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+inline quint32 DialogBisector::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+inline quint32 DialogBisector::getThirdPointId() const
+{
+    return thirdPointId;
+}
 
 #endif // DIALOGBISECTOR_H

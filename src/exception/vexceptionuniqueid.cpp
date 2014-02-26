@@ -40,6 +40,12 @@ VExceptionUniqueId::VExceptionUniqueId(const QString &what, const QDomElement &d
     lineNumber = domElement.lineNumber();
 }
 
+VExceptionUniqueId::VExceptionUniqueId(const VExceptionUniqueId &e)
+    :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
+{
+
+}
+
 QString VExceptionUniqueId::ErrorMessage() const
 {
     QString error = QString("ExceptionUniqueId: %1").arg(what);

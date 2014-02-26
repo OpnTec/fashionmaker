@@ -43,12 +43,13 @@ class DialogSinglePoint : public DialogTool
 {
     Q_OBJECT
 public:
-                   /**
-                    * @brief DialogSinglePoint create dialog
-                    * @param data container with data
-                    * @param parent parent widget
-                    */
-                   DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
+    /**
+     * @brief DialogSinglePoint create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogSinglePoint(const VContainer *data, QWidget *parent = 0);
+    ~DialogSinglePoint();
     /**
      * @brief setData set name and point
      * @param name name of point
@@ -59,13 +60,12 @@ public:
      * @brief getName return name
      * @return name
      */
-    inline QString getName()const {return name;}
+    QString        getName()const;
     /**
      * @brief getPoint return point
      * @return point
      */
-    inline QPointF getPoint()const {return point;}
-                   ~DialogSinglePoint();
+    QPointF        getPoint()const;
 public slots:
     /**
      * @brief mousePress get mouse position
@@ -91,5 +91,15 @@ private:
      */
     QPointF        point;
 };
+
+inline QString DialogSinglePoint::getName() const
+{
+    return name;
+}
+
+inline QPointF DialogSinglePoint::getPoint() const
+{
+    return point;
+}
 
 #endif // DIALOGSINGLEPOINT_H

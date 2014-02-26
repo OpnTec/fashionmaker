@@ -54,37 +54,52 @@ public:
     /**
      * @brief raise method raise for exception
      */
-    inline void       raise() const { throw *this; }
+    void            raise() const;
     /**
      * @brief clone clone exception
      * @return new exception
      */
-    inline VException *clone() const { return new VException(*this); }
+    VException      *clone() const;
     /**
      * @brief ErrorMessage return main error message
      * @return error message
      */
-    virtual QString   ErrorMessage() const;
+    virtual QString ErrorMessage() const;
     /**
      * @brief DetailedInformation return detailed information about error
      * @return detailed information
      */
-    virtual QString   DetailedInformation() const { return QString(); }
+    virtual QString DetailedInformation() const { return QString(); }
     /**
      * @brief What return string with error
      * @return string with error
      */
-    inline QString    What() const {return what;}
+    QString         What() const;
     /**
      * @brief CriticalMessageBox show Critical Message Box.
      * @param situation main text message box.
      */
-    virtual void      CriticalMessageBox(const QString &situation, QWidget *parent = 0) const;
+    virtual void    CriticalMessageBox(const QString &situation, QWidget *parent = 0) const;
 protected:
     /**
      * @brief what string with error
      */
-    QString           what;
+    QString         what;
 };
+
+inline void VException::raise() const
+{
+    throw *this;
+}
+
+inline VException *VException::clone() const
+{
+    return new VException(*this);
+}
+
+inline QString VException::What() const
+{
+    return what;
+}
 
 #endif // VEXCEPTION_H

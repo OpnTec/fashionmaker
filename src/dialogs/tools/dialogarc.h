@@ -43,164 +43,184 @@ class DialogArc : public DialogTool
 {
     Q_OBJECT
 public:
-                     /**
-                      * @brief DialogArc create dialog
-                      * @param data container with data
-                      * @param parent parent widget
-                      */
-                     DialogArc(const VContainer *data, QWidget *parent = 0);
-                     ~DialogArc();
+    /**
+     * @brief DialogArc create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogArc(const VContainer *data, QWidget *parent = 0);
+    ~DialogArc();
     /**
      * @brief GetCenter return id of center point
      * @return id id
      */
-    inline quint32    GetCenter() const {return center;}
+    quint32       GetCenter() const;
     /**
      * @brief SetCenter set id of center point
      * @param value id
      */
-    void             SetCenter(const quint32 &value);
+    void          SetCenter(const quint32 &value);
     /**
      * @brief GetRadius return formula of radius
      * @return formula
      */
-    inline QString   GetRadius() const {return radius;}
+    QString       GetRadius() const;
     /**
      * @brief SetRadius set formula of radius
      * @param value formula
      */
-    void             SetRadius(const QString &value);
+    void          SetRadius(const QString &value);
     /**
      * @brief GetF1 return formula first angle of arc
      * @return formula
      */
-    inline QString   GetF1() const {return f1;}
+    QString       GetF1() const;
     /**
      * @brief SetF1 set formula first angle of arc
      * @param value formula
      */
-    void             SetF1(const QString &value);
+    void          SetF1(const QString &value);
     /**
      * @brief GetF2 return formula second angle of arc
      * @return formula
      */
-    inline QString   GetF2() const {return f2;}
+    QString       GetF2() const;
     /**
      * @brief SetF2 set formula second angle of arc
      * @param value formula
      */
-    void             SetF2(const QString &value);
+    void          SetF2(const QString &value);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void  ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
-    virtual void     DialogAccepted();
+    virtual void  DialogAccepted();
     /**
      * @brief ValChenged show description angles of lines
      * @param row number of row
      */
-    virtual void     ValChenged(int row);
+    virtual void  ValChenged(int row);
     /**
      * @brief PutRadius put variable into formula of radius
      */
-    void             PutRadius();
+    void          PutRadius();
     /**
      * @brief PutF1 put variable into formula of first angle
      */
-    void             PutF1();
+    void          PutF1();
     /**
      * @brief PutF2 put variable into formula of second angle
      */
-    void             PutF2();
+    void          PutF2();
     /**
      * @brief LineAngles show variable angles of lines
      */
-    void             LineAngles();
+    void          LineAngles();
     /**
      * @brief RadiusChanged after change formula of radius calculate value and show result
      */
-    void             RadiusChanged();
+    void          RadiusChanged();
     /**
      * @brief F1Changed after change formula of first angle calculate value and show result
      */
-    void             F1Changed();
+    void          F1Changed();
     /**
      * @brief F2Changed after change formula of second angle calculate value and show result
      */
-    void             F2Changed();
+    void          F2Changed();
 protected:
     /**
      * @brief CheckState if all is right enable button ok
      */
-    virtual void     CheckState();
+    virtual void  CheckState();
 private:
     Q_DISABLE_COPY(DialogArc)
     /**
      * @brief ui keeps information about user interface
      */
-    Ui::DialogArc    *ui;
+    Ui::DialogArc *ui;
     /**
      * @brief flagRadius true if value of radius is correct
      */
-    bool             flagRadius;
+    bool          flagRadius;
     /**
      * @brief flagF1 true if value of first angle is correct
      */
-    bool             flagF1;
+    bool          flagF1;
     /**
      * @brief flagF2 true if value of second angle is correct
      */
-    bool             flagF2;
+    bool          flagF2;
     /**
      * @brief timerRadius timer of check formula of radius
      */
-    QTimer           *timerRadius;
+    QTimer        *timerRadius;
     /**
      * @brief timerF1 timer of check formula of first angle
      */
-    QTimer           *timerF1;
+    QTimer        *timerF1;
     /**
      * @brief timerF2 timer of check formula of second angle
      */
-    QTimer           *timerF2;
+    QTimer        *timerF2;
     /**
      * @brief center id of center point
      */
-    quint32           center;
+    quint32       center;
     /**
      * @brief radius formula of radius
      */
-    QString          radius;
+    QString       radius;
     /**
      * @brief f1 formula of first angle
      */
-    QString          f1;
+    QString       f1;
     /**
      * @brief f2 formula of second angle
      */
-    QString          f2;
+    QString       f2;
     /**
      * @brief EvalRadius calculate value of radius
      */
-    void             EvalRadius();
+    void          EvalRadius();
     /**
      * @brief EvalF1 calculate value of first angle
      */
-    void             EvalF1();
+    void          EvalF1();
     /**
      * @brief EvalF2 calculate value of second angle
      */
-    void             EvalF2();
+    void          EvalF2();
     /**
      * @brief ShowLineAngles show varibles angles of lines
      */
-    void             ShowLineAngles();
+    void          ShowLineAngles();
 };
+
+inline quint32 DialogArc::GetCenter() const
+{
+    return center;
+}
+
+inline QString DialogArc::GetRadius() const
+{
+    return radius;
+}
+
+inline QString DialogArc::GetF1() const
+{
+    return f1;
+}
+
+inline QString DialogArc::GetF2() const
+{
+    return f2;
+}
 
 #endif // DIALOGARC_H

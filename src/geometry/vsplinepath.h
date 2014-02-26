@@ -53,18 +53,18 @@ class VSplinePath :public VGObject
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
-                  /**
-                   * @brief VSplinePath constructor.
-                   * @param kCurve coefficient of curvature spline path.
-                   * @param idObject parent id.
-                   * @param mode mode creation spline path.
-                   */
-                  VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
-                  /**
-                   * @brief VSplinePath copy constructor.
-                   * @param splPath spline path.
-                   */
-                  VSplinePath(const VSplinePath& splPath);
+    /**
+     * @brief VSplinePath constructor.
+     * @param kCurve coefficient of curvature spline path.
+     * @param idObject parent id.
+     * @param mode mode creation spline path.
+     */
+    VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
+    /**
+     * @brief VSplinePath copy constructor.
+     * @param splPath spline path.
+     */
+    VSplinePath(const VSplinePath& splPath);
     /**
      * @brief append add point in the end of list points.
      * @param point new point.
@@ -79,7 +79,7 @@ public:
      * @brief CountPoint return count point.
      * @return count.
      */
-    inline qint32 CountPoint() const {return path.size();}
+    qint32        CountPoint() const;
     /**
      * @brief GetSpline return spline by index.
      * @param index index spline in spline path.
@@ -90,7 +90,7 @@ public:
      * @brief GetPath return QPainterPath which reprezent spline path.
      * @return path.
      */
-    QPainterPath  GetPath() const;
+    QPainterPath     GetPath() const;
     /**
      * @brief GetPathPoints return list of points what located on path.
      * @return list.
@@ -100,7 +100,7 @@ public:
      * @brief GetSplinePath return list with spline points.
      * @return list.
      */
-    inline QVector<VSplinePoint> GetSplinePath() const {return path;}
+    QVector<VSplinePoint> GetSplinePath() const;
     /**
      * @brief GetLength return length of spline path.
      * @return length.
@@ -123,22 +123,22 @@ public:
     /**
      * @brief Clear clear list of points.
      */
-    inline void   Clear() {path.clear();}
+    void          Clear();
     /**
      * @brief getKCurve return coefficient of curvature spline path.
      * @return coefficient of curvature spline.
      */
-    inline qreal  getKCurve() const {return kCurve;}
+    qreal         getKCurve() const;
     /**
      * @brief setKCurve set coefficient of curvature spline path.
      * @param value coefficient of curvature spline path.
      */
-    inline void   setKCurve(const qreal &value) {kCurve = value;}
+    void          setKCurve(const qreal &value);
     /**
      * @brief GetPoint pointer to list spline point.
      * @return list.
      */
-    inline const  QVector<VSplinePoint> *GetPoint() const {return &path;}
+    const  QVector<VSplinePoint> *GetPoint() const;
     /**
      * @brief operator = assignment operator.
      * @param path spline path.
@@ -211,5 +211,35 @@ protected:
      */
     qint32        maxCountPoints;
 };
+
+inline qint32 VSplinePath::CountPoint() const
+{
+    return path.size();
+}
+
+inline QVector<VSplinePoint> VSplinePath::GetSplinePath() const
+{
+    return path;
+}
+
+inline void VSplinePath::Clear()
+{
+    path.clear();
+}
+
+inline qreal VSplinePath::getKCurve() const
+{
+    return kCurve;
+}
+
+inline void VSplinePath::setKCurve(const qreal &value)
+{
+    kCurve = value;
+}
+
+inline const QVector<VSplinePoint> *VSplinePath::GetPoint() const
+{
+    return &path;
+}
 
 #endif // VSPLINEPATH_H

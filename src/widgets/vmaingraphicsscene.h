@@ -53,22 +53,22 @@ public:
      * @brief getHorScrollBar return scene horizontal scrollbar.
      * @return horizontal scrollbar.
      */
-    inline qint32 getHorScrollBar() const {return horScrollBar;}
+    qint32        getHorScrollBar() const;
     /**
      * @brief setHorScrollBar set scene horizontal scrollbar.
      * @param value horizontal scrollbar.
      */
-    inline void   setHorScrollBar(const qint32 &value) {horScrollBar = value;}
+    void          setHorScrollBar(const qint32 &value);
     /**
      * @brief getVerScrollBar return scene vertical scrollbar.
      * @return vertical scrollbar.
      */
-    inline qint32 getVerScrollBar() const {return verScrollBar;}
+    qint32        getVerScrollBar() const;
     /**
      * @brief setVerScrollBar set scene vertical scrollbar.
      * @param value vertical scrollbar.
      */
-    inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
+    void          setVerScrollBar(const qint32 &value);
     /**
      * @brief transform return view transformation.
      * @return view transformation.
@@ -142,5 +142,25 @@ private:
      */
     QTransform    _transform;
 };
+
+inline qint32 VMainGraphicsScene::getHorScrollBar() const
+{
+    return horScrollBar;
+}
+
+inline void VMainGraphicsScene::setHorScrollBar(const qint32 &value)
+{
+    horScrollBar = value;
+}
+
+inline qint32 VMainGraphicsScene::getVerScrollBar() const
+{
+    return verScrollBar;
+}
+
+inline void VMainGraphicsScene::setVerScrollBar(const qint32 &value)
+{
+    verScrollBar = value;
+}
 
 #endif // VMAINGRAPHICSSCENE_H

@@ -39,6 +39,13 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
     lineNumber = domElement.lineNumber();
 }
 
+VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
+    :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
+      moreInfo(e.MoreInformation())
+{
+
+}
+
 QString VExceptionObjectError::ErrorMessage() const
 {
     QString error = QString("ExceptionObjectError: %1").arg(what);

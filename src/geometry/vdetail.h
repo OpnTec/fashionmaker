@@ -59,32 +59,32 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
 class VDetail
 {
 public:
-                   /**
-                    * @brief VDetail default contructor. Create empty detail.
-                    */
-                   VDetail();
-                   /**
-                    * @brief VDetail constructor.
-                    * @param name detail name.
-                    * @param nodes list of nodes.
-                    */
-                   VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
-                   /**
-                    * @brief VDetail copy constructor.
-                    * @param detail detail.
-                    */
-                   VDetail(const VDetail &detail);
-                   /**
-                    * @brief operator = assignment operator.
-                    * @param detail detail.
-                    * @return new detail.
-                    */
-                   VDetail &operator=(const VDetail &detail);
+    /**
+     * @brief VDetail default contructor. Create empty detail.
+     */
+    VDetail();
+    /**
+     * @brief VDetail constructor.
+     * @param name detail name.
+     * @param nodes list of nodes.
+     */
+    VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
+    /**
+     * @brief VDetail copy constructor.
+     * @param detail detail.
+     */
+    VDetail(const VDetail &detail);
+    /**
+     * @brief operator = assignment operator.
+     * @param detail detail.
+     * @return new detail.
+     */
+    VDetail &operator=(const VDetail &detail);
     /**
      * @brief append append in the end of list node.
      * @param node new node.
      */
-    inline void    append(const VNodeDetail &node) {nodes.append(node);}
+    void           append(const VNodeDetail &node);
     /**
      * @brief Clear detail full clear.
      */
@@ -97,7 +97,7 @@ public:
      * @brief CountNode return count nodes.
      * @return count.
      */
-    inline qint32  CountNode() const {return nodes.size();}
+    qint32         CountNode() const;
     /**
      * @brief Containes check if detail containe this id.
      * @param id object id.
@@ -120,72 +120,72 @@ public:
      * @brief getName return detail name.
      * @return name.
      */
-    inline QString getName() const {return name;}
+    QString        getName() const;
     /**
      * @brief setName set detail name.
      * @param value new name.
      */
-    inline void    setName(const QString &value) {name = value;}
+    void           setName(const QString &value);
     /**
      * @brief getMx return bias for X axis.
      * @return x bias.
      */
-    inline qreal   getMx() const {return mx;}
+    qreal          getMx() const;
     /**
      * @brief setMx set bias for X axis.
      * @param value new x bias.
      */
-    inline void    setMx(const qreal &value) {mx = value;}
+    void           setMx(const qreal &value);
     /**
      * @brief getMy get bias for y axis.
      * @return y axis.
      */
-    inline qreal   getMy() const {return my;}
+    qreal          getMy() const;
     /**
      * @brief setMy set bias for y axis.
      * @param value new y bias.
      */
-    inline void    setMy(const qreal &value) {my = value;}
+    void           setMy(const qreal &value);
     /**
      * @brief getSeamAllowance keep status for seam allowance detail.
      * @return true - need seam allowance, false - no need seam allowance.
      */
-    inline bool    getSeamAllowance() const {return seamAllowance;}
+    bool           getSeamAllowance() const;
     /**
      * @brief setSeamAllowance set status for seam allowance detail.
      * @param value true - need seam allowance, false - no need seam allowance.
      */
-    inline void    setSeamAllowance(bool value) {seamAllowance = value;}
+    void           setSeamAllowance(bool value);
     /**
      * @brief getClosed keep close status for detail equdistant.
      * @return true - close equdistant, false - don't close equdistant.
      */
-    inline bool    getClosed() const {return closed;}
+    bool           getClosed() const;
     /**
      * @brief setClosed set close status for detail equdistant.
      * @param value true - close equdistant, false - don't close equdistant.
      */
-    inline void    setClosed(bool value) {closed = value;}
+    void           setClosed(bool value);
     /**
      * @brief getWidth return value detail seam allowance.
      * @return value in mm.
      */
-    inline qreal   getWidth() const {return width;}
+    qreal          getWidth() const;
     /**
      * @brief setWidth set value detail seam allowance.
      * @param value width in mm.
      */
-    inline void    setWidth(const qreal &value) {width = value;}
+    void           setWidth(const qreal &value);
     /**
      * @brief getNodes return list of nodes.
      * @return list of nodes.
      */
-    inline QVector<VNodeDetail> getNodes() const {return nodes;}
+    QVector<VNodeDetail> getNodes() const;
     /**
      * @brief setNodes set list of nodes
      * @param value list of nodes
      */
-    inline void    setNodes(const QVector<VNodeDetail> &value) {nodes = value;}
+    void           setNodes(const QVector<VNodeDetail> &value);
     /**
      * @brief indexOfNode return index in list node using id object.
      * @param id object (arc, point, spline, splinePath) id.
@@ -237,12 +237,12 @@ public:
      * @param det changed detail.
      * @return  list with missing detail.
      */
-    QList<quint32>  Missing(const VDetail &det) const;
+    QList<quint32> Missing(const VDetail &det) const;
 private:
     /**
      * @brief _id id detail.
      */
-    quint32         _id;
+    quint32        _id;
     /**
      * @brief nodes list detail nodes.
      */
@@ -284,5 +284,85 @@ private:
      */
     static ptrdiff_t     indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
 };
+
+inline void VDetail::append(const VNodeDetail &node)
+{
+    nodes.append(node);
+}
+
+inline qint32 VDetail::CountNode() const
+{
+    return nodes.size();
+}
+
+inline QString VDetail::getName() const
+{
+    return name;
+}
+
+inline void VDetail::setName(const QString &value)
+{
+    name = value;
+}
+
+inline qreal VDetail::getMx() const
+{
+    return mx;
+}
+
+inline void VDetail::setMx(const qreal &value)
+{
+    mx = value;
+}
+
+inline qreal VDetail::getMy() const
+{
+    return my;
+}
+
+inline void VDetail::setMy(const qreal &value)
+{
+    my = value;
+}
+
+inline bool VDetail::getSeamAllowance() const
+{
+    return seamAllowance;
+}
+
+inline void VDetail::setSeamAllowance(bool value)
+{
+    seamAllowance = value;
+}
+
+inline bool VDetail::getClosed() const
+{
+    return closed;
+}
+
+inline void VDetail::setClosed(bool value)
+{
+    closed = value;
+}
+
+inline qreal VDetail::getWidth() const
+{
+    return width;
+}
+
+inline void VDetail::setWidth(const qreal &value)
+{
+    width = value;
+}
+
+inline QVector<VNodeDetail> VDetail::getNodes() const
+{
+    return nodes;
+}
+
+inline void VDetail::setNodes(const QVector<VNodeDetail> &value)
+{
+    nodes = value;
+}
 
 #endif // VDETAIL_H

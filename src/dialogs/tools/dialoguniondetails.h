@@ -54,22 +54,22 @@ public:
      * @brief getD1 return id first detail
      * @return id
      */
-    inline quint32    getD1() const {return d1;}
+    quint32          getD1() const;
     /**
      * @brief getD2 return id second detail
      * @return id
      */
-    inline quint32    getD2() const {return d2;}
+    quint32          getD2() const;
     /**
      * @brief getIndexD1 return index edge first detail
      * @return index
      */
-    inline ptrdiff_t getIndexD1() const {return indexD1;}
+    ptrdiff_t        getIndexD1() const;
     /**
      * @brief getIndexD2 return index edge second detail
      * @return index
      */
-    inline ptrdiff_t getIndexD2() const {return indexD2;}
+    ptrdiff_t        getIndexD2() const;
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save correct data and ignore wrong.
@@ -135,5 +135,25 @@ private:
      */
     void             ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail, ptrdiff_t &index);
 };
+
+inline quint32 DialogUnionDetails::getD1() const
+{
+    return d1;
+}
+
+inline quint32 DialogUnionDetails::getD2() const
+{
+    return d2;
+}
+
+inline ptrdiff_t DialogUnionDetails::getIndexD1() const
+{
+    return indexD1;
+}
+
+inline ptrdiff_t DialogUnionDetails::getIndexD2() const
+{
+    return indexD2;
+}
 
 #endif // DIALOGUNIONDETAILS_H

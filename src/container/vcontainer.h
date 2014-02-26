@@ -160,8 +160,7 @@ public:
      * @param name name of row of standard table
      * @param cell row of standard table
      */
-    inline void         AddStandardTableCell(const QString& name, const VStandardTableRow &cell)
-    {standardTable[name] = cell;}
+    void                 AddStandardTableCell(const QString& name, const VStandardTableRow &cell);
     /**
      * @brief AddIncrementTableRow add new row of increment table
      * @param name name of new row of increment table
@@ -231,15 +230,13 @@ public:
      * @param name name of row
      * @param cell row of standard table
      */
-    inline void         UpdateStandardTableCell(const QString& name, VStandardTableRow cell)
-    {standardTable[name] = cell;}
+    void                UpdateStandardTableCell(const QString& name, VStandardTableRow cell);
     /**
      * @brief UpdateIncrementTableRow update increment table row by name
      * @param name name of row
      * @param row row
      */
-    inline void         UpdateIncrementTableRow(const QString& name, VIncrementTableRow row)
-    {incrementTable[name] = row;}
+    void                UpdateIncrementTableRow(const QString& name, VIncrementTableRow row);
     /**
      * @brief GetValueStandardTableCell return value of standard table row by name
      * @param name name of row
@@ -264,44 +261,44 @@ public:
     /**
      * @brief ClearIncrementTable clear increment table
      */
-    inline void         ClearIncrementTable() {incrementTable.clear();}
+    void                ClearIncrementTable();
     /**
      * @brief ClearLengthLines clear length lines
      */
-    inline void         ClearLengthLines() {lengthLines.clear();}
+    void                ClearLengthLines();
     /**
      * @brief ClearLengthSplines clear length splines
      */
-    inline void         ClearLengthSplines() {lengthSplines.clear();}
+    void                ClearLengthSplines();
     /**
      * @brief ClearLengthArcs clear length arcs
      */
-    inline void         ClearLengthArcs() {lengthArcs.clear();}
+    void                ClearLengthArcs();
     /**
      * @brief ClearLineAngles clear angles of lines
      */
-    inline void         ClearLineAngles() {lineAngles.clear();}
-    inline void         ClearDetails() {details.clear();}
+    void                ClearLineAngles();
+    void                ClearDetails();
     /**
      * @brief SetSize set value of size
      * @param size value of size in mm
      */
-    inline void         SetSize(qint32 size) {base["Сг"] = size;}
+    void                SetSize(qint32 size);
     /**
      * @brief SetGrowth set value of growth
      * @param growth value of growth in mm
      */
-    inline void         SetGrowth(qint32 growth) {base["Р"] = growth;}
+    void                SetGrowth(qint32 growth);
     /**
      * @brief size return size
      * @return size in mm
      */
-    inline qint32       size() const {return base.value("Сг");}
+    qint32              size() const;
     /**
      * @brief growth return growth
      * @return growth in mm
      */
-    inline qint32       growth() const {return base.value("Р");}
+    qint32              growth() const;
     /**
      * @brief FindVar return value of variable by name
      * @param name name of variable
@@ -314,7 +311,7 @@ public:
      * @param name name of row
      * @return true if contains
      */
-    inline bool         IncrementTableContains(const QString& name) {return incrementTable.contains(name);}
+    bool                IncrementTableContains(const QString& name);
     /**
      * @brief getNextId generate next unique id
      * @return next unique id
@@ -324,52 +321,52 @@ public:
      * @brief RemoveIncrementTableRow remove row by name from increment table
      * @param name name of existing row
      */
-    inline void         RemoveIncrementTableRow(const QString& name) {incrementTable.remove(name);}
+    void                 RemoveIncrementTableRow(const QString& name);
     /**
      * @brief data container with datagObjects return container of gObjects
      * @return pointer on container of gObjects
      */
-    inline const QHash<quint32, VGObject*> *DataGObjects() const {return &gObjects;}
+    const QHash<quint32, VGObject*> *DataGObjects() const;
     /**
      * @brief data container with dataBase return container of data
      * @return pointer on container of base data
      */
-    inline const QHash<QString, qint32> *DataBase() const {return &base;}
+    const QHash<QString, qint32> *DataBase() const;
     /**
      * @brief data container with dataStandardTable return container of standard table
      * @return pointer on container of standard table
      */
-    inline const QHash<QString, VStandardTableRow> *DataStandardTable() const {return &standardTable;}
+    const QHash<QString, VStandardTableRow> *DataStandardTable() const;
     /**
      * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
      */
-    inline const QHash<QString, VIncrementTableRow> *DataIncrementTable() const {return &incrementTable;}
+    const QHash<QString, VIncrementTableRow> *DataIncrementTable() const;
     /**
      * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
      */
-    inline const QHash<QString, qreal>  *DataLengthLines() const {return &lengthLines;}
+    const QHash<QString, qreal>  *DataLengthLines() const;
     /**
      * @brief data container with dataLengthSplines return container of splines lengths
      * @return pointer on container of splines lengths
      */
-    inline const QHash<QString, qreal>  *DataLengthSplines() const {return &lengthSplines;}
+    const QHash<QString, qreal>  *DataLengthSplines() const;
     /**
      * @brief data container with dataLengthArcs return container of arcs length
      * @return pointer on container of arcs length
      */
-    inline const QHash<QString, qreal>  *DataLengthArcs() const {return &lengthArcs;}
+    const QHash<QString, qreal>  *DataLengthArcs() const;
     /**
      * @brief data container with dataLineAngles return container of angles of line
      * @return pointer on container of angles of line
      */
-    inline const QHash<QString, qreal>  *DataLineAngles() const {return &lineAngles;}
+    const QHash<QString, qreal>  *DataLineAngles() const;
     /**
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
-    inline const QHash<quint32, VDetail> *DataDetails() const {return &details;}
+    const QHash<quint32, VDetail> *DataDetails() const;
     /**
      * @brief UpdateId update id. If new id bigger when current save new like current.
      * @param newId id
@@ -455,5 +452,125 @@ private:
      */
     static quint32 AddObject(QHash<key, val> &obj, val value);
 };
+
+inline void VContainer::AddStandardTableCell(const QString &name, const VStandardTableRow &cell)
+{
+    standardTable[name] = cell;
+}
+
+inline void VContainer::UpdateStandardTableCell(const QString &name, VStandardTableRow cell)
+{
+    standardTable[name] = cell;
+}
+
+inline void VContainer::UpdateIncrementTableRow(const QString &name, VIncrementTableRow row)
+{
+    incrementTable[name] = row;
+}
+
+inline void VContainer::ClearIncrementTable()
+{
+    incrementTable.clear();
+}
+
+inline void VContainer::ClearLengthLines()
+{
+    lengthLines.clear();
+}
+
+inline void VContainer::ClearLengthSplines()
+{
+    lengthSplines.clear();
+}
+
+inline void VContainer::ClearLengthArcs()
+{
+    lengthArcs.clear();
+}
+
+inline void VContainer::ClearLineAngles()
+{
+    lineAngles.clear();
+}
+
+inline void VContainer::ClearDetails()
+{
+    details.clear();
+}
+
+inline void VContainer::SetSize(qint32 size)
+{
+    base["Сг"] = size;
+}
+
+inline void VContainer::SetGrowth(qint32 growth)
+{
+    base["Р"] = growth;
+}
+
+inline qint32 VContainer::size() const
+{
+    return base.value("Сг");
+}
+
+inline qint32 VContainer::growth() const
+{
+    return base.value("Р");
+}
+
+inline bool VContainer::IncrementTableContains(const QString &name)
+{
+    return incrementTable.contains(name);
+}
+
+inline void VContainer::RemoveIncrementTableRow(const QString &name)
+{
+    incrementTable.remove(name);
+}
+
+inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
+{
+    return &gObjects;
+}
+
+inline const QHash<QString, qint32> *VContainer::DataBase() const
+{
+    return &base;
+}
+
+inline const QHash<QString, VStandardTableRow> *VContainer::DataStandardTable() const
+{
+    return &standardTable;
+}
+
+inline const QHash<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const
+{
+    return &incrementTable;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthLines() const
+{
+    return &lengthLines;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthSplines() const
+{
+    return &lengthSplines;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthArcs() const
+{
+    return &lengthArcs;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLineAngles() const
+{
+    return &lineAngles;
+}
+
+inline const QHash<quint32, VDetail> *VContainer::DataDetails() const
+{
+    return &details;
+}
 
 #endif // VCONTAINER_H

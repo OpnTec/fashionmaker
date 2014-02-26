@@ -43,18 +43,18 @@ class DialogTriangle : public DialogTool
 {
     Q_OBJECT
 public:
-                   /**
-                    * @brief DialogTriangle create dialog
-                    * @param data container with data
-                    * @param parent parent widget
-                    */
-                   DialogTriangle(const VContainer *data, QWidget *parent = 0);
-                   ~DialogTriangle();
+    /**
+     * @brief DialogTriangle create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogTriangle(const VContainer *data, QWidget *parent = 0);
+    ~DialogTriangle();
     /**
      * @brief getAxisP1Id return id first point of axis
      * @return id
      */
-    inline quint32  getAxisP1Id() const {return axisP1Id;}
+    quint32        getAxisP1Id() const;
     /**
      * @brief setAxisP1Id set id first point of axis
      * @param value id
@@ -65,7 +65,7 @@ public:
      * @brief getAxisP2Id return id second point of axis
      * @return id
      */
-    inline quint32  getAxisP2Id() const {return axisP2Id;}
+    quint32        getAxisP2Id() const;
     /**
      * @brief setAxisP2Id set id second point of axis
      * @param value id
@@ -76,7 +76,7 @@ public:
      * @brief getFirstPointId return id of first point
      * @return id
      */
-    inline quint32  getFirstPointId() const {return firstPointId;}
+    quint32        getFirstPointId() const;
     /**
      * @brief setFirstPointId set id of first point
      * @param value id
@@ -87,7 +87,7 @@ public:
      * @brief getSecondPointId return id of second point
      * @return id
      */
-    inline quint32  getSecondPointId() const {return secondPointId;}
+    quint32        getSecondPointId() const;
     /**
      * @brief setSecondPointId set id of second point
      * @param value id
@@ -98,7 +98,7 @@ public:
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString getPointName() const {return pointName;}
+    QString        getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -146,5 +146,30 @@ private:
      */
     quint32         secondPointId;
 };
+
+inline quint32 DialogTriangle::getAxisP1Id() const
+{
+    return axisP1Id;
+}
+
+inline quint32 DialogTriangle::getAxisP2Id() const
+{
+    return axisP2Id;
+}
+
+inline quint32 DialogTriangle::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+inline quint32 DialogTriangle::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+inline QString DialogTriangle::getPointName() const
+{
+    return pointName;
+}
 
 #endif // DIALOGTRIANGLE_H

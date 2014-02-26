@@ -42,9 +42,9 @@ class MessageHandler : public QAbstractMessageHandler
 public:
     MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
         m_sourceLocation(QSourceLocation()){}
-    inline QString statusMessage() const {return m_description;}
-    inline qint64     line() const {return m_sourceLocation.line();}
-    inline qint64     column() const {return m_sourceLocation.column();}
+    QString statusMessage() const;
+    qint64  line() const;
+    qint64  column() const;
 protected:
     virtual void handleMessage(QtMsgType type, const QString &description,
                                const QUrl &identifier, const QSourceLocation &sourceLocation)
@@ -61,6 +61,21 @@ private:
     QString         m_description;
     QSourceLocation m_sourceLocation;
 };
+
+inline QString MessageHandler::statusMessage() const
+{
+    return m_description;
+}
+
+inline qint64  MessageHandler::line() const
+{
+    return m_sourceLocation.line();
+}
+
+inline qint64  MessageHandler::column() const
+{
+    return m_sourceLocation.column();
+}
 
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())

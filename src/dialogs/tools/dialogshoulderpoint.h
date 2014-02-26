@@ -43,18 +43,18 @@ class DialogShoulderPoint : public DialogTool
 {
     Q_OBJECT
 public:
-                   /**
-                    * @brief DialogShoulderPoint create dialog
-                    * @param data container with data
-                    * @param parent parent widget
-                    */
-                   DialogShoulderPoint(const VContainer *data, QWidget *parent = 0);
-                   ~DialogShoulderPoint();
+    /**
+     * @brief DialogShoulderPoint create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogShoulderPoint(const VContainer *data, QWidget *parent = 0);
+    ~DialogShoulderPoint();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString getPointName() const {return pointName;}
+    QString        getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString getTypeLine() const {return typeLine;}
+    QString        getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
@@ -74,7 +74,7 @@ public:
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString getFormula() const {return formula;}
+    QString        getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
@@ -84,7 +84,7 @@ public:
      * @brief getP1Line return id first point of line
      * @return id
      */
-    inline quint32  getP1Line() const {return p1Line;}
+    quint32        getP1Line() const;
     /**
      * @brief setP1Line set id first point of line
      * @param value id
@@ -95,7 +95,7 @@ public:
      * @brief getP2Line return id second point of line
      * @return id
      */
-    inline quint32  getP2Line() const {return p2Line;}
+    quint32        getP2Line() const;
     /**
      * @brief setP2Line set id second point of line
      * @param value id
@@ -106,7 +106,7 @@ public:
      * @brief getPShoulder return id shoulder point
      * @return id
      */
-    inline quint32  getPShoulder() const {return pShoulder;}
+    quint32        getPShoulder() const;
     /**
      * @brief setPShoulder set id shoulder point
      * @param value id
@@ -159,5 +159,35 @@ private:
      */
     quint32         pShoulder;
 };
+
+inline QString DialogShoulderPoint::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogShoulderPoint::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline QString DialogShoulderPoint::getFormula() const
+{
+    return formula;
+}
+
+inline quint32 DialogShoulderPoint::getP1Line() const
+{
+    return p1Line;
+}
+
+inline quint32 DialogShoulderPoint::getP2Line() const
+{
+    return p2Line;
+}
+
+inline quint32 DialogShoulderPoint::getPShoulder() const
+{
+    return pShoulder;
+}
 
 #endif // DIALOGSHOULDERPOINT_H

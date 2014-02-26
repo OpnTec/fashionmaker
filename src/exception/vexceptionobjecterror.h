@@ -39,20 +39,18 @@
 class VExceptionObjectError : public VException
 {
 public:
-                    /**
-                     * @brief VExceptionObjectError exception object error
-                     * @param what string with error
-                     * @param domElement dom element
-                     */
-                    VExceptionObjectError(const QString &what, const QDomElement &domElement);
-                    /**
-                     * @brief VExceptionObjectError copy constructor
-                     * @param e exception
-                     */
-                    VExceptionObjectError(const VExceptionObjectError &e)
-                        :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()),
-                          moreInfo(e.MoreInformation()){}
-    virtual         ~VExceptionObjectError() noexcept (true) {}
+    /**
+     * @brief VExceptionObjectError exception object error
+     * @param what string with error
+     * @param domElement dom element
+     */
+    VExceptionObjectError(const QString &what, const QDomElement &domElement);
+    /**
+     * @brief VExceptionObjectError copy constructor
+     * @param e exception
+     */
+    VExceptionObjectError(const VExceptionObjectError &e);
+    virtual ~VExceptionObjectError() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message
@@ -67,17 +65,17 @@ public:
      * @brief TagText return tag text
      * @return tag text
      */
-    inline QString  TagText() const {return tagText;}
+    QString         TagText() const;
     /**
      * @brief TagName return tag name
      * @return tag name
      */
-    inline QString  TagName() const {return tagName;}
+    QString         TagName() const;
     /**
      * @brief LineNumber return line number in file
      * @return line number
      */
-    inline qint32   LineNumber() const {return lineNumber;}
+    qint32          LineNumber() const;
     /**
      * @brief AddMoreInformation add more information for error
      * @param info information
@@ -87,7 +85,7 @@ public:
      * @brief MoreInformation return more information for error
      * @return information
      */
-    inline QString  MoreInformation() const {return moreInfo;}
+    QString         MoreInformation() const;
 protected:
     /**
      * @brief tagText tag text
@@ -106,5 +104,25 @@ protected:
      */
     QString         moreInfo;
 };
+
+inline QString VExceptionObjectError::TagText() const
+{
+    return tagText;
+}
+
+inline QString VExceptionObjectError::TagName() const
+{
+    return tagName;
+}
+
+inline qint32 VExceptionObjectError::LineNumber() const
+{
+    return lineNumber;
+}
+
+inline QString VExceptionObjectError::MoreInformation() const
+{
+    return moreInfo;
+}
 
 #endif // VEXCEPTIONOBJECTERROR_H

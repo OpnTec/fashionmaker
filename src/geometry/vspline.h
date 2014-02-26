@@ -80,57 +80,57 @@ public:
      * @brief GetP1 return first spline point.
      * @return first point.
      */
-    VPointF        GetP1 () const {return p1;}
+    VPointF GetP1 () const {return p1;}
     /**
      * @brief GetP2 return first control point.
      * @return first control point.
      */
-    inline QPointF GetP2 () const {return p2;}
+    QPointF GetP2 () const;
     /**
      * @brief GetP3 return second control point.
      * @return second control point.
      */
-    inline QPointF GetP3 () const {return p3;}
+    QPointF GetP3 () const;
     /**
      * @brief GetP4 return last spline point.
      * @return остання точка сплайну.
      */
-    inline VPointF GetP4 () const {return p4;}
+    VPointF GetP4 () const;
     /**
      * @brief GetAngle1 return first angle control line.
      * @return angle.
      */
-    inline qreal   GetAngle1 () const {return angle1;}
+    qreal   GetAngle1 () const;
     /**
      * @brief GetAngle2 return second angle control line.
      * @return angle.
      */
-    inline qreal   GetAngle2() const {return angle2;}
+    qreal   GetAngle2() const;
     /**
      * @brief GetLength return length of spline.
      * @return length.
      */
-    qreal          GetLength () const;
+    qreal   GetLength () const;
     /**
      * @brief name return spline name. Used for variables.
      * @return name.
      */
-    QString        name () const;
+    QString name () const;
     /**
      * @brief GetKasm1 return coefficient of length first control line.
      * @return coefficient.
      */
-    inline qreal   GetKasm1() const {return kAsm1;}
+    qreal   GetKasm1() const;
     /**
      * @brief GetKasm2 return coefficient of length second control line.
      * @return coefficient.
      */
-    inline qreal   GetKasm2() const {return kAsm2;}
+    qreal   GetKasm2() const;
     /**
      * @brief GetKcurve return coefficient of curvature spline.
      * @return coefficient
      */
-    inline qreal   GetKcurve() const {return kCurve;}
+    qreal   GetKcurve() const;
     /**
      * @brief CrossingSplLine check intersection spline with line.
      * @param line line.
@@ -265,5 +265,45 @@ private:
      */
     void           CreateName();
 };
+
+inline QPointF VSpline::GetP2() const
+{
+    return p2;
+}
+
+inline QPointF VSpline::GetP3() const
+{
+    return p3;
+}
+
+inline VPointF VSpline::GetP4() const
+{
+    return p4;
+}
+
+inline qreal VSpline::GetAngle1() const
+{
+    return angle1;
+}
+
+inline qreal VSpline::GetAngle2() const
+{
+    return angle2;
+}
+
+inline qreal VSpline::GetKasm1() const
+{
+    return kAsm1;
+}
+
+inline qreal VSpline::GetKasm2() const
+{
+    return kAsm2;
+}
+
+inline qreal VSpline::GetKcurve() const
+{
+    return kCurve;
+}
 
 #endif // VSPLINE_H

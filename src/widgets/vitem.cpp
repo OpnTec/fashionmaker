@@ -37,6 +37,17 @@ VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
 {
 }
 
+VItem::VItem():numInOutList(0), paper(0)
+{
+
+}
+
+VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), numInOutList(numInList),
+    paper(0)
+{
+
+}
+
 void VItem::checkItemChange()
 {
     QRectF rect;

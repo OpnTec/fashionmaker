@@ -42,8 +42,8 @@ class DialogIndividualMeasurements : public QDialog
 public:
     explicit DialogIndividualMeasurements(QWidget *parent = 0);
     ~DialogIndividualMeasurements();
-    inline QString name() const {return _name;}
-    inline QString tablePath() const{return _tablePath;}
+    QString name() const;
+    QString tablePath() const;
 private:
     Q_DISABLE_COPY(DialogIndividualMeasurements)
     Ui::DialogIndividualMeasurements *ui;
@@ -53,5 +53,15 @@ private:
     void DialogRejected();
     void CheckState();
 };
+
+inline QString DialogIndividualMeasurements::name() const
+{
+    return _name;
+}
+
+inline QString DialogIndividualMeasurements::tablePath() const
+{
+    return _tablePath;
+}
 
 #endif // DIALOGINDIVIDUALMEASUREMENTS_H

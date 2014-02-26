@@ -39,17 +39,17 @@ class DialogPointOfContact : public DialogTool
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief DialogPointOfContact create dialog
-                  * @param data container with data
-                  * @param parent parent widget
-                  */
-                 DialogPointOfContact(const VContainer *data, QWidget *parent = 0);
+    /**
+     * @brief DialogPointOfContact create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogPointOfContact(const VContainer *data, QWidget *parent = 0);
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString getPointName() const {return pointName;}
+    QString        getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -59,7 +59,7 @@ public:
      * @brief getRadius return formula radius of arc
      * @return formula
      */
-    inline QString getRadius() const {return radius;}
+    QString        getRadius() const;
     /**
      * @brief setRadius set formula radius of arc
      * @param value formula
@@ -69,7 +69,7 @@ public:
      * @brief GetCenter return id of center point
      * @return id
      */
-    inline quint32  getCenter() const {return center;}
+    quint32        getCenter() const;
     /**
      * @brief SetCenter set id of center point
      * @param value id
@@ -80,7 +80,7 @@ public:
      * @brief getFirstPoint return id first point
      * @return id
      */
-    inline quint32  getFirstPoint() const {return firstPoint;}
+    quint32        getFirstPoint() const;
     /**
      * @brief setFirstPoint set id first point
      * @param value id
@@ -91,7 +91,7 @@ public:
      * @brief getSecondPoint return id second point
      * @return id
      */
-    inline quint32  getSecondPoint() const {return secondPoint;}
+    quint32        getSecondPoint() const;
     /**
      * @brief setSecondPoint set id second point
      * @param value id
@@ -140,5 +140,30 @@ private:
      */
     quint32         secondPoint;
 };
+
+inline QString DialogPointOfContact::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogPointOfContact::getRadius() const
+{
+    return radius;
+}
+
+inline quint32 DialogPointOfContact::getCenter() const
+{
+    return center;
+}
+
+inline  quint32 DialogPointOfContact::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+inline quint32 DialogPointOfContact::getSecondPoint() const
+{
+    return secondPoint;
+}
 
 #endif // DIALOGPOINTOFCONTACT_H

@@ -67,7 +67,7 @@ public:
      * @brief GetNameActivDraw return current pattern peace name.
      * @return pattern peace name.
      */
-    inline QString GetNameActivDraw() const {return nameActivDraw;}
+    QString        GetNameActivDraw() const;
     /**
      * @brief GetActivDrawElement return draw tag for current pattern peace.
      * @param element draw tag.
@@ -98,23 +98,23 @@ public:
      * @brief getTools return list of tools pointers.
      * @return list.
      */
-    inline QHash<quint32, VDataTool*>* getTools() {return &tools;}
+    QHash<quint32, VDataTool*>* getTools();
     /**
      * @brief getTool return tool from tool list.
      * @param id tool id.
      * @return tool.
      */
-    VDataTool* getTool(const quint32 &id);
+    VDataTool*     getTool(const quint32 &id);
     /**
      * @brief getHistory return list with list of history records.
      * @return list of history records.
      */
-    inline QVector<VToolRecord> *getHistory() {return &history;}
+    QVector<VToolRecord> *getHistory();
     /**
      * @brief getCursor return cursor.
      * @return cursor.
      */
-    inline quint32  getCursor() const {return cursor;}
+    quint32        getCursor() const;
     /**
      * @brief setCursor set cursor.
      * @param value cursor.
@@ -154,9 +154,9 @@ public:
      * @brief SPointActiveDraw return id base point current pattern peace.
      * @return id base point.
      */
-    quint32         SPointActiveDraw();
-    inline bool    isPatternModified() const {return patternModified;}
-    inline void    setPatternModified(bool value) {patternModified = value;}
+    quint32        SPointActiveDraw();
+    bool           isPatternModified() const;
+    void           setPatternModified(bool value);
     /**
      * @brief GetActivNodeElement find element in current pattern piece by name.
      * @param name name tag.
@@ -376,5 +376,35 @@ private:
     void           PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                                    VMainGraphicsScene *sceneDetail);
 };
+
+inline QString VPattern::GetNameActivDraw() const
+{
+    return nameActivDraw;
+}
+
+inline QHash<quint32, VDataTool *> *VPattern::getTools()
+{
+    return &tools;
+}
+
+inline QVector<VToolRecord> *VPattern::getHistory()
+{
+    return &history;
+}
+
+inline quint32 VPattern::getCursor() const
+{
+    return cursor;
+}
+
+inline bool VPattern::isPatternModified() const
+{
+    return patternModified;
+}
+
+inline void VPattern::setPatternModified(bool value)
+{
+    patternModified = value;
+}
 
 #endif // VPATTERN_H

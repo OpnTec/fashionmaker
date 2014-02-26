@@ -39,19 +39,18 @@
 class VExceptionWrongParameterId : public VException
 {
 public:
-                    /**
-                     * @brief VExceptionWrongParameterId exception wrong parameter id
-                     * @param what string with error
-                     * @param domElement som element
-                     */
-                    VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
-                    /**
-                     * @brief VExceptionWrongParameterId copy constructor
-                     * @param e exception
-                     */
-                    VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
-                        :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber()){}
-    virtual         ~VExceptionWrongParameterId() noexcept (true){}
+    /**
+     * @brief VExceptionWrongParameterId exception wrong parameter id
+     * @param what string with error
+     * @param domElement som element
+     */
+    VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
+    /**
+     * @brief VExceptionWrongParameterId copy constructor
+     * @param e exception
+     */
+    VExceptionWrongParameterId(const VExceptionWrongParameterId &e);
+    virtual ~VExceptionWrongParameterId() noexcept (true){}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message
@@ -66,17 +65,17 @@ public:
      * @brief TagText return tag text
      * @return tag text
      */
-    inline QString  TagText() const {return tagText;}
+    QString         TagText() const;
     /**
      * @brief TagName return tag name
      * @return tag name
      */
-    inline QString  TagName() const {return tagName;}
+    QString         TagName() const;
     /**
      * @brief LineNumber return line number in file
      * @return line number
      */
-    inline qint32   LineNumber() const {return lineNumber;}
+    qint32          LineNumber() const;
 protected:
     /**
      * @brief tagText tag text
@@ -91,5 +90,20 @@ protected:
      */
     qint32          lineNumber;
 };
+
+inline QString VExceptionWrongParameterId::TagText() const
+{
+    return tagText;
+}
+
+inline QString VExceptionWrongParameterId::TagName() const
+{
+    return tagName;
+}
+
+inline qint32 VExceptionWrongParameterId::LineNumber() const
+{
+    return lineNumber;
+}
 
 #endif // VEXCEPTIONWRONGPARAMETERID_H

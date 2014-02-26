@@ -49,7 +49,7 @@ public:
      * @brief getDetails return detail
      * @return detail
      */
-    inline VDetail   getDetails() const {return details;}
+    VDetail          getDetails() const;
     /**
      * @brief setDetails set detail
      * @param value detail
@@ -124,5 +124,10 @@ private:
     void             NewItem(quint32 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
                              qreal mx = 0, qreal my = 0);
 };
+
+inline VDetail DialogDetail::getDetails() const
+{
+    return details;
+}
 
 #endif // DIALOGDETAIL_H

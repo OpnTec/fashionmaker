@@ -42,7 +42,8 @@ public:
      * @brief The typeMove_e enum type items moves.
      */
     enum typeMove_e { Left, Right, Up, Down };
-                VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = 0);
+
+    VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent = 0);
 signals:
     /**
      * @brief itemChect emit after change selection state detail.
@@ -57,7 +58,7 @@ public slots:
     /**
      * @brief rotateItems handle rotatation detail.
      */
-    inline void rotateItems() {rotateIt();}
+    void        rotateItems();
     /**
      * @brief MirrorItem mirror detail.
      */
@@ -65,11 +66,11 @@ public slots:
     /**
      * @brief ZoomIn zoom in paper scale.
      */
-    inline void ZoomIn() {scale(1.1, 1.1);}
+    void        ZoomIn();
     /**
      * @brief ZoomOut zoom out paper scale.
      */
-    inline void ZoomOut() {scale(1/1.1, 1/1.1);}
+    void        ZoomOut();
 protected:
     /**
      * @brief wheelEvent handle wheel events.
@@ -102,5 +103,20 @@ protected:
     void        MoveItem( VTableGraphicsView::typeMove_e move );
     
 };
+
+inline void VTableGraphicsView::rotateItems()
+{
+    rotateIt();
+}
+
+inline void VTableGraphicsView::ZoomIn()
+{
+    scale(1.1, 1.1);
+}
+
+inline void VTableGraphicsView::ZoomOut()
+{
+    scale(1/1.1, 1/1.1);
+}
 
 #endif // VTABLEGRAPHICSVIEW_H

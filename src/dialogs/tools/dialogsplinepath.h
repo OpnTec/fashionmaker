@@ -44,18 +44,18 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-                       /**
-                        * @brief DialogSplinePath create dialog
-                        * @param data container with data
-                        * @param parent parent widget
-                        */
-                       DialogSplinePath(const VContainer *data, QWidget *parent = 0);
-                       ~DialogSplinePath();
+    /**
+     * @brief DialogSplinePath create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogSplinePath(const VContainer *data, QWidget *parent = 0);
+    ~DialogSplinePath();
     /**
      * @brief GetPath return spline path
      * @return path
      */
-    inline VSplinePath GetPath() const {return path;}
+    VSplinePath        GetPath() const;
     /**
      * @brief SetPath set spline path
      * @param value path
@@ -135,5 +135,10 @@ private:
      */
     void               EnableFields();
 };
+
+inline VSplinePath DialogSplinePath::GetPath() const
+{
+    return path;
+}
 
 #endif // DIALOGSPLINEPATH_H

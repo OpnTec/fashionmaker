@@ -43,18 +43,18 @@ class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
-                            /**
-                             * @brief DialogLineIntersect create dialog
-                             * @param data container with data
-                             * @param parent parent widget
-                             */
-                            DialogLineIntersect(const VContainer *data, QWidget *parent = 0);
-                            ~DialogLineIntersect();
+    /**
+     * @brief DialogLineIntersect create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogLineIntersect(const VContainer *data, QWidget *parent = 0);
+    ~DialogLineIntersect();
     /**
      * @brief getP1Line1 return id first point of first line
      * @return id
      */
-    inline quint32           getP1Line1() const {return p1Line1;}
+    quint32                 getP1Line1() const;
     /**
      * @brief setP1Line1 set id first point of first line
      * @param value id
@@ -64,7 +64,7 @@ public:
      * @brief getP2Line1 return id second point of first line
      * @return id
      */
-    inline quint32           getP2Line1() const {return p2Line1;}
+    quint32                 getP2Line1() const;
     /**
      * @brief setP2Line1 set id second point of first line
      * @param value id
@@ -74,7 +74,7 @@ public:
      * @brief getP1Line2 return id first point of second line
      * @return id
      */
-    inline quint32           getP1Line2() const {return p1Line2;}
+    quint32                 getP1Line2() const;
     /**
      * @brief setP1Line2 set id first point of second line
      * @param value id
@@ -84,7 +84,7 @@ public:
      * @brief getP2Line2 return id second point of second line
      * @return id
      */
-    inline quint32           getP2Line2() const {return p2Line2;}
+    quint32                 getP2Line2() const;
     /**
      * @brief setP2Line2 set id second point of second line
      * @param value id
@@ -94,7 +94,7 @@ public:
      * @brief getPointName return name of point
      * @return
      */
-    inline QString          getPointName() const {return pointName;}
+    QString                 getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value
@@ -175,5 +175,30 @@ private:
      */
     bool                    CheckIntersecion();
 };
+
+inline quint32 DialogLineIntersect::getP1Line1() const
+{
+    return p1Line1;
+}
+
+inline quint32 DialogLineIntersect::getP2Line1() const
+{
+    return p2Line1;
+}
+
+inline quint32 DialogLineIntersect::getP1Line2() const
+{
+    return p1Line2;
+}
+
+inline quint32 DialogLineIntersect::getP2Line2() const
+{
+    return p2Line2;
+}
+
+inline QString DialogLineIntersect::getPointName() const
+{
+    return pointName;
+}
 
 #endif // DIALOGLINEINTERSECT_H

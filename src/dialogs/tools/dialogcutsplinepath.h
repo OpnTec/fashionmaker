@@ -54,44 +54,44 @@ public:
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString    getPointName() const {return pointName;}
+    QString      getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
      */
-    void              setPointName(const QString &value);
+    void         setPointName(const QString &value);
     /**
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString    getFormula() const {return formula;}
+    QString      getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
      */
-    void              setFormula(const QString &value);
+    void         setFormula(const QString &value);
     /**
      * @brief getSplineId return id base point of line
      * @return id
      */
-    inline quint32     getSplinePathId() const {return splinePathId;}
+    quint32      getSplinePathId() const;
     /**
      * @brief setSplineId set id spline
      * @param value id
      * @param id don't show this id in list
      */
-    void              setSplinePathId(const quint32 &value, const quint32 &id);
+    void         setSplinePathId(const quint32 &value, const quint32 &id);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void      ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
-    virtual void      DialogAccepted();
+    virtual void DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutSplinePath)
     /**
@@ -101,15 +101,30 @@ private:
     /**
      * @brief pointName name of created point
      */
-    QString           pointName;
+    QString      pointName;
     /**
      * @brief formula string with formula
      */
-    QString           formula;
+    QString      formula;
     /**
      * @brief splinePathId keep id of splinePath
      */
-    quint32            splinePathId;
+    quint32      splinePathId;
 };
+
+inline QString DialogCutSplinePath::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogCutSplinePath::getFormula() const
+{
+    return formula;
+}
+
+inline quint32 DialogCutSplinePath::getSplinePathId() const
+{
+    return splinePathId;
+}
 
 #endif // DIALOGCUTSPLINEPATH_H

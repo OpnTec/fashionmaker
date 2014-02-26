@@ -34,6 +34,21 @@ VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idO
     this->_name = name;
 }
 
+VPointF::VPointF() :VGObject(GObject::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0)
+{
+
+}
+
+VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y())
+{
+
+}
+
+VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y())
+{
+
+}
+
 VPointF &VPointF::operator =(const VPointF &point)
 {
     VGObject::operator=(point);

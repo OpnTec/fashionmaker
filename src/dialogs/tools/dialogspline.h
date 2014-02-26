@@ -43,13 +43,13 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT
 public:
-                  /**
-                   * @brief DialogSpline create dialog
-                   * @param data container with data
-                   * @param parent parent widget
-                   */
-                  DialogSpline(const VContainer *data, QWidget *parent = 0);
-                  ~DialogSpline();
+    /**
+     * @brief DialogSpline create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogSpline(const VContainer *data, QWidget *parent = 0);
+    ~DialogSpline();
     /**
      * @brief getP1 return id first point of spline
      * @return id
@@ -74,7 +74,7 @@ public:
      * @brief getAngle1 return first angle of spline
      * @return angle in degree
      */
-    inline qreal  getAngle1() const {return angle1;}
+    qreal         getAngle1() const;
     /**
      * @brief setAngle1 set first angle of spline
      * @param value angle in degree
@@ -84,7 +84,7 @@ public:
      * @brief getAngle2 return second angle of spline
      * @return angle in degree
      */
-    inline qreal  getAngle2() const {return angle2;}
+    qreal         getAngle2() const;
     /**
      * @brief setAngle2 set second angle of spline
      * @param value angle in degree
@@ -94,7 +94,7 @@ public:
      * @brief getKAsm1 return first coefficient asymmetry
      * @return value. Can be >= 0.
      */
-    inline qreal  getKAsm1() const {return kAsm1;}
+    qreal         getKAsm1() const;
     /**
      * @brief setKAsm1 set first coefficient asymmetry
      * @param value value. Can be >= 0.
@@ -104,7 +104,7 @@ public:
      * @brief getKAsm2 return second coefficient asymmetry
      * @return value. Can be >= 0.
      */
-    inline qreal  getKAsm2() const {return kAsm2;}
+    qreal         getKAsm2() const;
     /**
      * @brief setKAsm2 set second coefficient asymmetry
      * @param value value. Can be >= 0.
@@ -114,7 +114,7 @@ public:
      * @brief getKCurve return coefficient curve
      * @return value. Can be >= 0.
      */
-    inline qreal  getKCurve() const {return kCurve;}
+    qreal         getKCurve() const;
     /**
      * @brief setKCurve set coefficient curve
      * @param value value. Can be >= 0.
@@ -170,5 +170,30 @@ private:
      */
     qreal         kCurve;
 };
+
+inline qreal DialogSpline::getAngle1() const
+{
+    return angle1;
+}
+
+inline qreal DialogSpline::getAngle2() const
+{
+    return angle2;
+}
+
+inline qreal DialogSpline::getKAsm1() const
+{
+    return kAsm1;
+}
+
+inline qreal DialogSpline::getKAsm2() const
+{
+    return kAsm2;
+}
+
+inline qreal DialogSpline::getKCurve() const
+{
+    return kCurve;
+}
 
 #endif // DIALOGSPLINE_H

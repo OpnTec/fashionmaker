@@ -55,52 +55,52 @@ public:
      * @brief getId return id of row
      * @return id
      */
-    inline quint32  getId() const {return id;}
+    quint32 getId() const;
     /**
      * @brief setId set id of row
      * @param value id
      */
-    inline void    setId(const quint32 &value) {id = value;}
+    void    setId(const quint32 &value);
     /**
      * @brief getBase return value in base size and growth
      * @return value
      */
-    inline qreal   getBase() const {return base;}
+    qreal   getBase() const;
     /**
      * @brief setBase set value in base size and growth
      * @param value base value
      */
-    inline void    setBase(const qreal &value) {base = value;}
+    void    setBase(const qreal &value);
     /**
      * @brief getKsize return increment in sizes
      * @return increment
      */
-    inline qreal   getKsize() const {return ksize;}
+    qreal   getKsize() const;
     /**
      * @brief setKsize set increment in sizes
      * @param value value of increment
      */
-    inline void    setKsize(const qreal &value) {ksize = value;}
+    void    setKsize(const qreal &value);
     /**
      * @brief getKgrowth return increment in growths
      * @return increment
      */
-    inline qreal   getKgrowth() const {return kgrowth;}
+    qreal   getKgrowth() const;
     /**
      * @brief setKgrowth set increment in growths
      * @param value value of increment
      */
-    inline void    setKgrowth(const qreal &value) {kgrowth = value;}
+    void    setKgrowth(const qreal &value);
     /**
      * @brief getDescription return description
      * @return description
      */
-    inline QString getDescription() const {return description;}
+    QString getDescription() const;
     /**
      * @brief setDescription set description for row
      * @param value description
      */
-    inline void    setDescription(const QString &value) {description = value;}
+    void    setDescription(const QString &value);
 private:
     /**
      * @brief id identificator
@@ -123,5 +123,55 @@ private:
      */
     QString        description;
 };
+
+inline quint32 VIncrementTableRow::getId() const
+{
+    return id;
+}
+
+inline void VIncrementTableRow::setId(const quint32 &value)
+{
+    id = value;
+}
+
+inline qreal VIncrementTableRow::getBase() const
+{
+    return base;
+}
+
+inline void VIncrementTableRow::setBase(const qreal &value)
+{
+    base = value;
+}
+
+inline qreal VIncrementTableRow::getKsize() const
+{
+    return ksize;
+}
+
+inline void VIncrementTableRow::setKsize(const qreal &value)
+{
+    ksize = value;
+}
+
+inline qreal VIncrementTableRow::getKgrowth() const
+{
+    return kgrowth;
+}
+
+inline void VIncrementTableRow::setKgrowth(const qreal &value)
+{
+    kgrowth = value;
+}
+
+inline QString VIncrementTableRow::getDescription() const
+{
+    return description;
+}
+
+inline void VIncrementTableRow::setDescription(const QString &value)
+{
+    description = value;
+}
 
 #endif // VINCREMENTTABLEROW_H

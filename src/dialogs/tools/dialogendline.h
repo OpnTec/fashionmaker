@@ -43,18 +43,18 @@ class DialogEndLine : public DialogTool
 {
     Q_OBJECT
 public:
-                      /**
-                       * @brief DialogEndLine create dialog
-                       * @param data container with data
-                       * @param parent parent widget
-                       */
-                      DialogEndLine(const VContainer *data, QWidget *parent = 0);
-                      ~DialogEndLine();
+    /**
+     * @brief DialogEndLine create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogEndLine(const VContainer *data, QWidget *parent = 0);
+    ~DialogEndLine();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString    getPointName() const {return pointName;}
+    QString           getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString    getTypeLine() const {return typeLine;}
+    QString           getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
@@ -74,7 +74,7 @@ public:
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString    getFormula() const {return formula;}
+    QString           getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
@@ -84,7 +84,7 @@ public:
      * @brief getAngle return angle of line
      * @return angle in degree
      */
-    inline qreal      getAngle() const {return angle;}
+    qreal             getAngle() const;
     /**
      * @brief setAngle set angle of line
      * @param value angle in degree
@@ -94,7 +94,7 @@ public:
      * @brief getBasePointId return id base point of line
      * @return id
      */
-    inline quint32     getBasePointId() const {return basePointId;}
+    quint32           getBasePointId() const;
     /**
      * @brief setBasePointId set id base point of line
      * @param value id
@@ -139,5 +139,30 @@ private:
      */
     quint32            basePointId;
 };
+
+inline QString DialogEndLine::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogEndLine::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline QString DialogEndLine::getFormula() const
+{
+    return formula;
+}
+
+inline qreal DialogEndLine::getAngle() const
+{
+    return angle;
+}
+
+inline quint32 DialogEndLine::getBasePointId() const
+{
+    return basePointId;
+}
 
 #endif // DIALOGENDLINE_H

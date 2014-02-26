@@ -67,12 +67,12 @@ public:
      * @brief BadId return bad id
      * @return id
      */
-    inline quint32   BadId() const {return id; }
+    quint32         BadId() const;
     /**
      * @brief BadKey return bad key
      * @return key
      */
-    inline QString  BadKey() const {return key; }
+    QString         BadKey() const;
 protected:
     /**
      * @brief id id
@@ -83,5 +83,15 @@ protected:
      */
     QString         key;
 };
+
+inline quint32 VExceptionBadId::BadId() const
+{
+    return id;
+}
+
+inline QString VExceptionBadId::BadKey() const
+{
+    return key;
+}
 
 #endif // VEXCEPTIONBADID_H

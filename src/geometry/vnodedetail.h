@@ -48,90 +48,90 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
 class VNodeDetail
 {
 public:
-                  /**
-                   * @brief VNodeDetail default constructor.
-                   */
-                  VNodeDetail();
-                  /**
-                   * @brief VNodeDetail constructor.
-                   * @param id object id
-                   * @param typeTool type tool
-                   * @param typeNode type node
-                   * @param mx object bias x axis
-                   * @param my object bias y axis
-                   */
-                  VNodeDetail(quint32 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
-                              qreal my = 0);
-                  /**
-                   * @brief VNodeDetail copy constructor
-                   * @param node node
-                   */
-                  VNodeDetail(const VNodeDetail &node);
-                  /**
-                   * @brief operator = assignment operator
-                   * @param node node
-                   * @return node
-                   */
-                  VNodeDetail &operator=(const VNodeDetail &node);
+    /**
+     * @brief VNodeDetail default constructor.
+     */
+    VNodeDetail();
+    /**
+     * @brief VNodeDetail constructor.
+     * @param id object id
+     * @param typeTool type tool
+     * @param typeNode type node
+     * @param mx object bias x axis
+     * @param my object bias y axis
+     */
+    VNodeDetail(quint32 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+              qreal my = 0);
+    /**
+     * @brief VNodeDetail copy constructor
+     * @param node node
+     */
+    VNodeDetail(const VNodeDetail &node);
+    /**
+     * @brief operator = assignment operator
+     * @param node node
+     * @return node
+     */
+    VNodeDetail &operator=(const VNodeDetail &node);
     /**
      * @brief getId return object id.
      * @return id.
      */
-    inline quint32 getId() const {return id;}
+    quint32     getId() const;
     /**
      * @brief setId set object id.
      * @param value object id.
      */
-    inline void   setId(const quint32 &value) {id = value;}
+    void        setId(const quint32 &value);
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    inline Tool::Tools getTypeTool() const {return typeTool;}
+    Tool::Tools getTypeTool() const;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    inline void   setTypeTool(const Tool::Tools &value) {typeTool = value;}
+    void        setTypeTool(const Tool::Tools &value);
     /**
      * @brief getTypeNode return node type.
      * @return node type.
      */
-    inline NodeDetail::NodeDetails getTypeNode() const {return typeNode;}
+    NodeDetail::NodeDetails getTypeNode() const;
     /**
      * @brief setTypeNode set node type.
      * @param value node type.
      */
-    inline void   setTypeNode(const NodeDetail::NodeDetails &value) {typeNode = value;}
+    void        setTypeNode(const NodeDetail::NodeDetails &value);
     /**
      * @brief getMx return object bias x axis.
      * @return bias x axis.
      */
-    inline qreal  getMx() const {return mx;}
+    qreal       getMx() const;
     /**
      * @brief setMx set object bias x axis.
      * @param value bias x axis.
      */
-    inline void   setMx(const qreal &value) {mx = value;}
+    void        setMx(const qreal &value);
     /**
      * @brief getMy return object bias y axis.
      * @return bias y axis.
      */
-    inline qreal  getMy() const {return my;}
+    qreal       getMy() const;
     /**
      * @brief setMy set object bias y axis.
      * @param value bias y axis.
      */
-    inline void   setMy(const qreal &value) {my = value;}
+    void        setMy(const qreal &value);
 private:
     /**
      * @brief id object id.
      */
-    quint32        id;
+    quint32     id;
     /**
      * @brief typeTool type of tool
      */
-    Tool::Tools   typeTool;
+    Tool::Tools typeTool;
     /**
      * @brief typeNode node type.
      */
@@ -139,12 +139,62 @@ private:
     /**
      * @brief mx bias x axis.
      */
-    qreal         mx;
+    qreal       mx;
     /**
      * @brief my bias y axis.
      */
-    qreal         my;
+    qreal       my;
 };
+
+inline quint32 VNodeDetail::getId() const
+{
+    return id;
+}
+
+inline void VNodeDetail::setId(const quint32 &value)
+{
+    id = value;
+}
+
+inline Tool::Tools VNodeDetail::getTypeTool() const
+{
+    return typeTool;
+}
+
+inline void VNodeDetail::setTypeTool(const Tool::Tools &value)
+{
+    typeTool = value;
+}
+
+inline NodeDetail::NodeDetails VNodeDetail::getTypeNode() const
+{
+    return typeNode;
+}
+
+inline void VNodeDetail::setTypeNode(const NodeDetail::NodeDetails &value)
+{
+    typeNode = value;
+}
+
+inline qreal VNodeDetail::getMx() const
+{
+    return mx;
+}
+
+inline void VNodeDetail::setMx(const qreal &value)
+{
+    mx = value;
+}
+
+inline qreal VNodeDetail::getMy() const
+{
+    return my;
+}
+
+inline void VNodeDetail::setMy(const qreal &value)
+{
+    my = value;
+}
 
 Q_DECLARE_METATYPE(VNodeDetail)
 

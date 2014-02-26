@@ -43,18 +43,18 @@ class DialogAlongLine : public DialogTool
 {
     Q_OBJECT
 public:
-                        /**
-                         * @brief DialogAlongLine create dialog
-                         * @param data container with data
-                         * @param parent parent widget
-                         */
-                        DialogAlongLine(const VContainer *data, QWidget *parent = 0);
-                        ~DialogAlongLine();
+    /**
+     * @brief DialogAlongLine create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogAlongLine(const VContainer *data, QWidget *parent = 0);
+    ~DialogAlongLine();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString      getPointName() const {return pointName;}
+    QString             getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString      getTypeLine() const {return typeLine;}
+    QString             getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
@@ -74,7 +74,7 @@ public:
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString      getFormula() const {return formula;}
+    QString             getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
@@ -84,7 +84,7 @@ public:
      * @brief getFirstPointId return id first point of line
      * @return id
      */
-    inline quint32       getFirstPointId() const {return firstPointId;}
+    quint32             getFirstPointId() const;
     /**
      * @brief setFirstPointId set id first point of line
      * @param value id
@@ -95,7 +95,7 @@ public:
      * @brief getSecondPointId return id second point of line
      * @return id
      */
-    inline quint32       getSecondPointId() const {return secondPointId;}
+    quint32             getSecondPointId() const;
     /**
      * @brief setSecondPointId set id second point of line
      * @param value id
@@ -138,11 +138,36 @@ private:
     /**
      * @brief firstPointId id first point of line
      */
-    quint32              firstPointId;
+    quint32             firstPointId;
     /**
      * @brief secondPointId id second point of line
      */
-    quint32              secondPointId;
+    quint32             secondPointId;
 };
+
+inline QString DialogAlongLine::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogAlongLine::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline QString DialogAlongLine::getFormula() const
+{
+    return formula;
+}
+
+inline quint32 DialogAlongLine::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+inline quint32 DialogAlongLine::getSecondPointId() const
+{
+    return secondPointId;
+}
 
 #endif // DIALOGALONGLINE_H

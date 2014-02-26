@@ -39,73 +39,73 @@
 class VSplinePoint
 {
 public:
-            /**
-             * @brief VSplinePoint default constructor.
-             */
-                  VSplinePoint();
-            /**
-             * @brief VSplinePoint constructor.
-             * @param pSpline spline point.
-             * @param angle second angle control line.
-             * @param factor coefficient of length second control line.
-             */
-                  VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-                  /**
-                   * @brief VSplinePoint copy constructor
-                   * @param point point
-                   */
-                  VSplinePoint(const VSplinePoint &point);
-                  ~VSplinePoint() {}
+    /**
+     * @brief VSplinePoint default constructor.
+     */
+          VSplinePoint();
+    /**
+     * @brief VSplinePoint constructor.
+     * @param pSpline spline point.
+     * @param angle second angle control line.
+     * @param factor coefficient of length second control line.
+     */
+    VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    /**
+     * @brief VSplinePoint copy constructor
+     * @param point point
+     */
+    VSplinePoint(const VSplinePoint &point);
+    ~VSplinePoint() {}
     /**
      * @brief P return point.
      * @return point.
      */
-    inline VPointF P() const {return pSpline;}
+    VPointF P() const;
     /**
      * @brief SetP set point.
      * @param value point.
      */
-    inline void    SetP(const VPointF &value) {pSpline = value;}
+    void    SetP(const VPointF &value);
     /**
      * @brief Angle1 return first angle of spline.
      * @return angle.
      */
-    inline qreal   Angle1() const {return angle1;}
+    qreal   Angle1() const;
     /**
      * @brief SetAngle1 set first angle of spline.
      * @param value angle.
      */
-    void           SetAngle1(const qreal &value);
+    void    SetAngle1(const qreal &value);
     /**
      * @brief SetAngle2 set second angle of spline.
      * @param value angle.
      */
-    void           SetAngle2(const qreal &value);
+    void    SetAngle2(const qreal &value);
     /**
      * @brief Angle2 return second angle of spline.
      * @return angle.
      */
-    inline qreal   Angle2() const {return angle2;}
+    qreal   Angle2() const;
     /**
      * @brief KAsm1 return coefficient of length first control line.
      * @return coefficient.
      */
-    inline qreal   KAsm1() const {return kAsm1;}
+    qreal   KAsm1() const;
     /**
      * @brief SetKAsm1 set coefficient of length first control line.
      * @param value coefficient.
      */
-    inline void    SetKAsm1(const qreal &value) {kAsm1 = value;}
+    void    SetKAsm1(const qreal &value);
     /**
      * @brief KAsm2 return coefficient of length second control line.
      * @return coefficient.
      */
-    inline qreal   KAsm2() const {return kAsm2;}
+    qreal   KAsm2() const;
     /**
      * @brief SetKAsm2 set coefficient of length second control line.
      * @param value coefficient.
      */
-    inline void    SetKAsm2(const qreal &value) {kAsm2 = value;}
+    void    SetKAsm2(const qreal &value);
 protected:
     /**
      * @brief pSpline point.
@@ -128,6 +128,46 @@ protected:
      */
     qreal          kAsm2;
 };
+
+inline VPointF VSplinePoint::P() const
+{
+    return pSpline;
+}
+
+inline void VSplinePoint::SetP(const VPointF &value)
+{
+    pSpline = value;
+}
+
+inline qreal VSplinePoint::Angle1() const
+{
+    return angle1;
+}
+
+inline qreal VSplinePoint::Angle2() const
+{
+    return angle2;
+}
+
+inline qreal VSplinePoint::KAsm1() const
+{
+    return kAsm1;
+}
+
+inline void VSplinePoint::SetKAsm1(const qreal &value)
+{
+    kAsm1 = value;
+}
+
+inline qreal VSplinePoint::KAsm2() const
+{
+    return kAsm2;
+}
+
+inline void VSplinePoint::SetKAsm2(const qreal &value)
+{
+    kAsm2 = value;
+}
 
 Q_DECLARE_METATYPE(VSplinePoint)
 

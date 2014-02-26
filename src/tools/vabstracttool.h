@@ -40,15 +40,15 @@ class VAbstractTool: public VDataTool
 {
     Q_OBJECT
 public:
-                            /**
-                             * @brief VAbstractTool container.
-                             * @param doc dom document container.
-                             * @param data container with data.
-                             * @param id object id in container.
-                             * @param parent parent object.
-                             */
-                            VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = 0);
-    virtual                 ~VAbstractTool(){}
+    /**
+     * @brief VAbstractTool container.
+     * @param doc dom document container.
+     * @param data container with data.
+     * @param id object id in container.
+     * @param parent parent object.
+     */
+    VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = 0);
+    virtual ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
      * @param sc scene.
@@ -93,7 +93,7 @@ public:
      * @brief getId return object id.
      * @return id.
      */
-    inline quint32           getId() const {return id;}
+    quint32                 getId() const;
     /**
      * @brief LineCoefficients coefficient for equation of segment. Segment equestion ax+by+c=0.
      * @param line line
@@ -207,7 +207,7 @@ protected:
      * @brief getData return pointer to data container.
      * @return container.
      */
-    inline const VContainer *getData() const {return &data;}
+    const VContainer        *getData() const;
     /**
      * @brief RemoveReferens decrement value of reference.
      */
@@ -230,4 +230,14 @@ protected:
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
+
+inline quint32 VAbstractTool::getId() const
+{
+    return id;
+}
+
+inline const VContainer *VAbstractTool::getData() const
+{
+    return &data;
+}
 #endif // VABSTRACTTOOL_H

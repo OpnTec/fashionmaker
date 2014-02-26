@@ -43,18 +43,18 @@ class DialogNormal : public DialogTool
 {
     Q_OBJECT
 public:
-                     /**
-                      * @brief DialogNormal create dialog
-                      * @param data container with data
-                      * @param parent parent widget
-                      */
-                     DialogNormal(const VContainer *data, QWidget *parent = 0);
-                     ~DialogNormal();
+    /**
+     * @brief DialogNormal create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogNormal(const VContainer *data, QWidget *parent = 0);
+    ~DialogNormal();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString   getPointName() const{return pointName;}
+    QString          getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString   getTypeLine() const {return typeLine;}
+    QString          getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
@@ -74,7 +74,7 @@ public:
      * @brief getFormula return string of formula
      * @return formula
      */
-    inline QString   getFormula() const {return formula;}
+    QString          getFormula() const;
     /**
      * @brief setFormula set string of formula
      * @param value formula
@@ -84,7 +84,7 @@ public:
      * @brief getAngle return aditional angle of normal
      * @return angle in degree
      */
-    inline qreal     getAngle() const {return angle;}
+    qreal            getAngle() const;
     /**
      * @brief setAngle set aditional angle of normal
      * @param value angle in degree
@@ -94,7 +94,7 @@ public:
      * @brief getFirstPointId return id of first point
      * @return id
      */
-    inline quint32    getFirstPointId() const {return firstPointId;}
+    quint32          getFirstPointId() const;
     /**
      * @brief setFirstPointId set id of first point
      * @param value id
@@ -105,7 +105,7 @@ public:
      * @brief getSecondPointId return id of second point
      * @return id
      */
-    inline quint32    getSecondPointId() const {return secondPointId;}
+    quint32          getSecondPointId() const;
     /**
      * @brief setSecondPointId set id of second point
      * @param value id
@@ -152,11 +152,41 @@ private:
     /**
      * @brief firstPointId id first point of line
      */
-    quint32           firstPointId;
+    quint32          firstPointId;
     /**
      * @brief secondPointId id second point of line
      */
-    quint32           secondPointId;
+    quint32          secondPointId;
 };
+
+inline QString DialogNormal::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogNormal::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline QString DialogNormal::getFormula() const
+{
+    return formula;
+}
+
+inline qreal DialogNormal::getAngle() const
+{
+    return angle;
+}
+
+inline quint32 DialogNormal::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+inline quint32 DialogNormal::getSecondPointId() const
+{
+    return secondPointId;
+}
 
 #endif // DIALOGNORMAL_H

@@ -43,18 +43,18 @@ class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT
 public:
-                   /**
-                    * @brief DialogPointOfIntersection create dialog
-                    * @param data container with data
-                    * @param parent parent widget
-                    */
-                   DialogPointOfIntersection(const VContainer *data, QWidget *parent = 0);
-                   ~DialogPointOfIntersection();
+    /**
+     * @brief DialogPointOfIntersection create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogPointOfIntersection(const VContainer *data, QWidget *parent = 0);
+    ~DialogPointOfIntersection();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString getPointName() const {return pointName;}
+    QString        getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getFirstPointId return id of first point
      * @return id
      */
-    inline quint32  getFirstPointId() const {return firstPointId;}
+    quint32        getFirstPointId() const;
     /**
      * @brief setFirstPointId set id of first point
      * @param value id
@@ -75,7 +75,7 @@ public:
      * @brief getSecondPointId return id of second point
      * @return id
      */
-    inline quint32  getSecondPointId() const {return secondPointId;}
+    quint32        getSecondPointId() const;
     /**
      * @brief setSecondPointId set id of second point
      * @param value id
@@ -110,11 +110,26 @@ private:
     /**
      * @brief firstPointId id first point of line
      */
-    quint32         firstPointId;
+    quint32        firstPointId;
     /**
      * @brief secondPointId id second point of line
      */
-    quint32         secondPointId;
+    quint32        secondPointId;
 };
+
+inline QString DialogPointOfIntersection::getPointName() const
+{
+    return pointName;
+}
+
+inline quint32 DialogPointOfIntersection::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+inline quint32 DialogPointOfIntersection::getSecondPointId() const
+{
+    return secondPointId;
+}
 
 #endif // DIALOGPOINTOFINTERSECTION_H

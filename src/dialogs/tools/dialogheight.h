@@ -43,18 +43,18 @@ class DialogHeight : public DialogTool
 {
     Q_OBJECT
 public:
-                     /**
-                      * @brief DialogHeight create dialog
-                      * @param data container with data
-                      * @param parent parent widget
-                      */
-                     DialogHeight(const VContainer *data, QWidget *parent = 0);
-                     ~DialogHeight();
+    /**
+     * @brief DialogHeight create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogHeight(const VContainer *data, QWidget *parent = 0);
+    ~DialogHeight();
     /**
      * @brief getPointName return name of point
      * @return name
      */
-    inline QString   getPointName() const {return pointName;}
+    QString          getPointName() const;
     /**
      * @brief setPointName set name of point
      * @param value name
@@ -64,7 +64,7 @@ public:
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString   getTypeLine() const {return typeLine;}
+    QString          getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
@@ -74,7 +74,7 @@ public:
      * @brief getBasePointId return id base point of height
      * @return id
      */
-    inline quint32    getBasePointId() const {return basePointId;}
+    quint32          getBasePointId() const;
     /**
      * @brief setBasePointId set id base point of height
      * @param value id
@@ -85,7 +85,7 @@ public:
      * @brief getP1LineId return id first point of line
      * @return id id
      */
-    inline quint32    getP1LineId() const {return p1LineId;}
+    quint32          getP1LineId() const;
     /**
      * @brief setP1LineId set id first point of line
      * @param value id
@@ -96,7 +96,7 @@ public:
      * @brief getP2LineId return id second point of line
      * @return id
      */
-    inline quint32    getP2LineId() const{return p2LineId;}
+    quint32          getP2LineId() const;
     /**
      * @brief setP2LineId set id second point of line
      * @param value id
@@ -145,5 +145,30 @@ private:
      */
     quint32           p2LineId;
 };
+
+inline QString DialogHeight::getPointName() const
+{
+    return pointName;
+}
+
+inline QString DialogHeight::getTypeLine() const
+{
+    return typeLine;
+}
+
+inline quint32 DialogHeight::getBasePointId() const
+{
+    return basePointId;
+}
+
+inline quint32 DialogHeight::getP1LineId() const
+{
+    return p1LineId;
+}
+
+inline quint32 DialogHeight::getP2LineId() const
+{
+    return p2LineId;
+}
 
 #endif // DIALOGHEIGHT_H

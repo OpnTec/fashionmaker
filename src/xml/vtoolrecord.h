@@ -39,47 +39,47 @@
 class VToolRecord
 {
 public:
-                       /**
-                        * @brief VToolRecord default constructor.
-                        */
-                       VToolRecord();
-                       /**
-                        * @brief VToolRecord constructor.
-                        * @param id tool id.
-                        * @param typeTool tool type.
-                        * @param nameDraw pattern peace name.
-                        */
-                       VToolRecord(const quint32 &id, const Tool::Tools &typeTool, const QString &nameDraw);
+    /**
+     * @brief VToolRecord default constructor.
+     */
+    VToolRecord();
+    /**
+     * @brief VToolRecord constructor.
+     * @param id tool id.
+     * @param typeTool tool type.
+     * @param nameDraw pattern peace name.
+     */
+    VToolRecord(const quint32 &id, const Tool::Tools &typeTool, const QString &nameDraw);
     /**
      * @brief getId return tool id.
      * @return id.
      */
-    inline quint32      getId() const {return id;}
+    quint32     getId() const;
     /**
      * @brief setId set tool id.
      * @param value id.
      */
-    inline void        setId(const quint32 &value) {id = value;}
+    void        setId(const quint32 &value);
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    inline Tool::Tools getTypeTool() const {return typeTool;}
+    Tool::Tools getTypeTool() const;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    inline void        setTypeTool(const Tool::Tools &value) {typeTool = value;}
+    void        setTypeTool(const Tool::Tools &value);
     /**
      * @brief getNameDraw return pattern peace name.
      * @return pattern peace name.
      */
-    inline QString     getNameDraw() const {return nameDraw;}
+    QString     getNameDraw() const;
     /**
      * @brief setNameDraw set pattern peace name.
      * @param value pattern peace name.
      */
-    inline void        setNameDraw(const QString &value) {nameDraw = value;}
+    void        setNameDraw(const QString &value);
 private:
     /**
      * @brief id tool id.
@@ -94,5 +94,35 @@ private:
      */
     QString            nameDraw;
 };
+
+inline quint32 VToolRecord::getId() const
+{
+    return id;
+}
+
+inline void VToolRecord::setId(const quint32 &value)
+{
+    id = value;
+}
+
+inline Tool::Tools VToolRecord::getTypeTool() const
+{
+    return typeTool;
+}
+
+inline void VToolRecord::setTypeTool(const Tool::Tools &value)
+{
+    typeTool = value;
+}
+
+inline QString VToolRecord::getNameDraw() const
+{
+    return nameDraw;
+}
+
+inline void VToolRecord::setNameDraw(const QString &value)
+{
+    nameDraw = value;
+}
 
 #endif // VTOOLRECORD_H

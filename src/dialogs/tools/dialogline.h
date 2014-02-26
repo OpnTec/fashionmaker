@@ -43,76 +43,91 @@ class DialogLine : public DialogTool
 {
     Q_OBJECT
 public:
-                     /**
-                      * @brief DialogLine create dialog
-                      * @param data container with data
-                      * @param parent parent widget
-                      */
-                     DialogLine(const VContainer *data, QWidget *parent = 0);
-                     ~DialogLine();
+    /**
+     * @brief DialogLine create dialog
+     * @param data container with data
+     * @param parent parent widget
+     */
+    DialogLine(const VContainer *data, QWidget *parent = 0);
+    ~DialogLine();
     /**
      * @brief getFirstPoint return id first point
      * @return id
      */
-    inline quint32    getFirstPoint() const {return firstPoint;}
+    quint32        getFirstPoint() const;
     /**
      * @brief setFirstPoint set id first point
      * @param value id
      */
-    void             setFirstPoint(const quint32 &value);
+    void           setFirstPoint(const quint32 &value);
     /**
      * @brief getSecondPoint return id second point
      * @return id
      */
-    inline quint32    getSecondPoint() const {return secondPoint;}
+    quint32        getSecondPoint() const;
     /**
      * @brief setSecondPoint set id second point
      * @param value id
      */
-    void             setSecondPoint(const quint32 &value);
+    void           setSecondPoint(const quint32 &value);
     /**
      * @brief getTypeLine return type of line
      * @return type
      */
-    inline QString    getTypeLine() const {return typeLine;}
+    QString        getTypeLine() const;
     /**
      * @brief setTypeLine set type of line
      * @param value type
      */
-    void              setTypeLine(const QString &value);
+    void           setTypeLine(const QString &value);
 public slots:
     /**
      * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void   ChoosedObject(quint32 id, const Scene::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
-    virtual void     DialogAccepted();
+    virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogLine)
     /**
      * @brief ui keeps information about user interface
      */
-    Ui::DialogLine   *ui;
+    Ui::DialogLine *ui;
     /**
      * @brief number number of handled objects
      */
-    qint32           number;
+    qint32         number;
     /**
      * @brief firstPoint id first point
      */
-    quint32           firstPoint;
+    quint32        firstPoint;
     /**
      * @brief secondPoint id second point
      */
-    quint32           secondPoint;
+    quint32        secondPoint;
     /**
      * @brief typeLine type of line
      */
-    QString           typeLine;
+    QString        typeLine;
 };
+
+inline quint32 DialogLine::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+inline quint32 DialogLine::getSecondPoint() const
+{
+    return secondPoint;
+}
+
+inline QString DialogLine::getTypeLine() const
+{
+    return typeLine;
+}
 
 #endif // DIALOGLINE_H
