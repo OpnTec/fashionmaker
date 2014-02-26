@@ -189,7 +189,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             {
                 QStringList tags;
                 tags << TagDraw << TagIncrements;
-                switch(tags.indexOf(domElement.tagName()))
+                switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
                         if (parse == Document::FullParse)
@@ -450,7 +450,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
             {
                 QStringList tags;
                 tags << TagCalculation << TagModeling << TagDetails;
-                switch(tags.indexOf(domElement.tagName()))
+                switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagCalculation
                         data->ClearCalculationGObjects();
@@ -495,7 +495,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
         {
             QStringList tags;
             tags << TagPoint << TagLine << TagSpline << TagArc << TagTools;
-            switch(tags.indexOf(domElement.tagName()))
+            switch (tags.indexOf(domElement.tagName()))
             {
                 case 0: // TagPoint
                     ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
@@ -555,7 +555,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                     QStringList types;
                     types << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline <<
                              VToolDetail::NodeSplinePath;
-                    switch(types.indexOf(t))
+                    switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
                             tool = Tool::NodePoint;
@@ -624,7 +624,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
            << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType << VNodePoint::ToolType
            << VToolHeight::ToolType << VToolTriangle::ToolType << VToolPointOfIntersection::ToolType
            << VToolCutSpline::ToolType << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
-    switch(points.indexOf(type)) {
+    switch (points.indexOf(type))
+    {
         case 0: //VToolSinglePoint::ToolType
         {
             VToolSinglePoint *spoint = 0;
@@ -747,8 +748,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name,
-                                        angle, mx, my, scene, this,data, parse, Tool::FromFile);
+                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene,
+                                    this, data, parse, Tool::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -815,8 +816,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name,
-                                            mx, my, scene, this,data, parse, Tool::FromFile);
+                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
+                                            data, parse, Tool::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -834,8 +835,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(),
-                                    mx, my, idObject,Draw::Modeling));
+                data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
+                                                    Draw::Modeling));
                 VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
@@ -900,8 +901,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId,
-                                            mx, my, scene, this, data, parse,Tool::FromFile);
+                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
+                                                 parse, Tool::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1006,7 +1007,8 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
 
     QStringList splines;
     splines << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType << VNodeSplinePath::ToolType;
-    switch(splines.indexOf(type)) {
+    switch (splines.indexOf(type))
+    {
         case 0: //VToolSpline::ToolType
             try
             {
@@ -1130,7 +1132,8 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
     QStringList arcs;
     arcs << VToolArc::ToolType << VNodeArc::ToolType;
 
-    switch(arcs.indexOf(type)) {
+    switch (arcs.indexOf(type))
+    {
         case 0: //VToolArc::ToolType
             try
             {
@@ -1185,7 +1188,8 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     QStringList tools;
     tools << VToolUnionDetails::ToolType;
 
-    switch(tools.indexOf(type)) {
+    switch (tools.indexOf(type))
+    {
         case 0: //VToolUnionDetails::ToolType
             try
             {

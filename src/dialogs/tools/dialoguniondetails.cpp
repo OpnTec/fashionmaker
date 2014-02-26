@@ -72,7 +72,8 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
     return det.Containes(id);
 }
 
-void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail, ptrdiff_t &index)
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail,
+                                       ptrdiff_t &index)
 {
     if (idDetail == 0)
     {

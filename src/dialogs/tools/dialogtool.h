@@ -389,7 +389,8 @@ protected:
      * @param id don't show this id in list
      * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
      */
-    void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value, const quint32 &id,
+    void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
+                                            const quint32 &id,
                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
     /**
      * @brief getCurrentPointId return current point id in combobox

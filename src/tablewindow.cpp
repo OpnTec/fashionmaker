@@ -490,7 +490,7 @@ void TableWindow::EpsFile(const QString &name) const
         params << "-eps" << tmp.fileName() << name;
 
         PdfToPs(name, params);
-    } 
+    }
 }
 
 void TableWindow::PsFile(const QString &name) const
@@ -530,7 +530,7 @@ void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
     qDebug() << proc.errorString();
 
     QFile f(name);
-    if (!f.exists())
+    if (f.exists() == false)
     {
         QMessageBox msgBox(QMessageBox::Critical, "Critical error!", "Creating file '"+name+"' failed!",
                     QMessageBox::Ok | QMessageBox::Default);

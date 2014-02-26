@@ -125,12 +125,12 @@ void ConfigDialog::createIcons()
 
 void ConfigDialog::Apply()
 {
-    switch(contentsWidget->currentRow())
+    switch (contentsWidget->currentRow())
     {
-        case(0):
+        case (0):
             configurationPage->Apply();
             break;
-        case(1):
+        case (1):
             patternPage->Apply();
             break;
         default:

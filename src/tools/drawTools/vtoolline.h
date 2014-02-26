@@ -78,8 +78,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint, const QString &typeLine,
-                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+    static void  Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
+                        const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Tool::Sources &typeCreation);
     static const QString TagName;
 public slots:

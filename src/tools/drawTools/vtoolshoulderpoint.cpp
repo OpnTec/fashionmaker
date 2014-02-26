@@ -32,9 +32,9 @@
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
-VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id,
-                                       const QString &typeLine, const QString &formula, const quint32 &p1Line,
-                                       const quint32 &p2Line, const quint32 &pShoulder, const Tool::Sources &typeCreation,
+VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                                       const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
+                                       const quint32 &pShoulder, const Tool::Sources &typeCreation,
                                        QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder)
 {

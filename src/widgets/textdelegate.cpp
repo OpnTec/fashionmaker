@@ -69,7 +69,7 @@ void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, cons
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
     Q_CHECK_PTR(lineEdit);
     QString text = lineEdit->text();
-    if(text.isEmpty())
+    if (text.isEmpty())
     {
         text = lastText;
     }
@@ -94,7 +94,7 @@ void TextDelegate::commitAndCloseEditor()
         lastText = text;
         emit commitData(lineEdit);
     }
-    else if(text.isEmpty() == false)
+    else if (text.isEmpty() == false)
     {
         lineEdit->setText(lastText);
         emit commitData(lineEdit);

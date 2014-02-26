@@ -213,7 +213,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
 
 QString DialogTool::GetTypeLine(const QComboBox *box) const
 {
-    switch(lineStyles.indexOf(box->currentText()))
+    switch (lineStyles.indexOf(box->currentText()))
     {
         case 0: //No line
             return VAbstractTool::TypeLineNone;

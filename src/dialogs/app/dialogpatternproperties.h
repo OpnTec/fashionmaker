@@ -32,8 +32,9 @@
 #include <QDialog>
 #include "../../xml/vpattern.h"
 
-namespace Ui {
-class DialogPatternProperties;
+namespace Ui
+{
+    class DialogPatternProperties;
 }
 
 class DialogPatternProperties : public QDialog

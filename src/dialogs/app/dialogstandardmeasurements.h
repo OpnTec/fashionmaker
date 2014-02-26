@@ -31,8 +31,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class DialogStandardMeasurements;
+namespace Ui
+{
+    class DialogStandardMeasurements;
 }
 
 class DialogStandardMeasurements : public QDialog

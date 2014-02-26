@@ -78,8 +78,8 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Tool::FromGui);
 }
 
-void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint, const QString &typeLine,
-                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
+                       const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document::Documents &parse, const Tool::Sources &typeCreation)
 {
     Q_CHECK_PTR(scene);

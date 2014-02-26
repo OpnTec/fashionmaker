@@ -260,24 +260,24 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 Qt::PenStyle VAbstractTool::LineStyle()
 {
     QStringList styles = Styles();
-    switch(styles.indexOf(typeLine))
+    switch (styles.indexOf(typeLine))
     {
-        case 0:
+        case 0: // TypeLineNone
             return Qt::NoPen;
             break;
-        case 1:
+        case 1: // TypeLineLine
             return Qt::SolidLine;
             break;
-        case 2:
+        case 2: // TypeLineDashLine
             return Qt::DashLine;
             break;
-        case 3:
+        case 3: // TypeLineDotLine
             return Qt::DotLine;
             break;
-        case 4:
+        case 4: // TypeLineDashDotLine
             return Qt::DashDotLine;
             break;
-        case 5:
+        case 5: // TypeLineDashDotDotLine
             return Qt::DashDotDotLine;
             break;
         default:

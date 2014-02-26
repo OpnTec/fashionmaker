@@ -374,7 +374,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
                 splPath.getKCurve());
         CorectControlPoints(spl, splPath, i);
         CorectControlPoints(spl, splPath, i);
-     }
+    }
 
     doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
     UpdatePathPoint(domElement, splPath);

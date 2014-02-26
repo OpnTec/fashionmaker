@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0),
-      drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(nullptr), autoSaveTimer(nullptr)
+      drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr), autoSaveTimer(nullptr)
 {
     CreateActions();
     CreateMenus();
@@ -1258,9 +1258,13 @@ bool MainWindow::MaybeSave()
                                                              "Do you want to save your changes?"),
                                    QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
+        {
             return Save();
+        }
         else if (ret == QMessageBox::Cancel)
+        {
             return false;
+        }
     }
     return true;
 }

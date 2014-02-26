@@ -80,9 +80,10 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id, const quint32 &d2id,
-                        const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene, VPattern *doc,
-                        VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id,
+                        const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene,
+                        VPattern *doc, VContainer *data, const Document::Documents &parse,
+                        const Tool::Sources &typeCreation);
     /**
      * @brief GetDetailFromFile parse detail from file.
      * @param doc dom document container.
