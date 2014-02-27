@@ -174,6 +174,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     switch ( tool.getTypeTool() )
     {
         case Tool::ArrowTool:
+            Q_UNREACHABLE();
             break;
         case Tool::SinglePointTool:
         {
@@ -435,16 +436,22 @@ QString DialogHistory::Record(const VToolRecord &tool)
         //Because "history" not only show history of pattern, but help restore current data for each pattern's piece, we
         //need add record about details and nodes, but don't show them.
         case Tool::Detail:
+            Q_UNREACHABLE();
             break;
         case Tool::UnionDetails:
+            Q_UNREACHABLE();
             break;
         case Tool::NodeArc:
+            Q_UNREACHABLE();
             break;
         case Tool::NodePoint:
+            Q_UNREACHABLE();
             break;
         case Tool::NodeSpline:
+            Q_UNREACHABLE();
             break;
         case Tool::NodeSplinePath:
+            Q_UNREACHABLE();
             break;
         default:
             qWarning()<<tr("Got wrong tool type. Ignore.");

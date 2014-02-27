@@ -426,7 +426,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
     this->row = row;
     switch (column)
     {
-        case 0:
+        case 0: // name
             item = ui->tableWidgetIncrement->item(row, 0);
             id = qvariant_cast<quint32>(item->data(Qt::UserRole));
             domElement = doc->elementById(QString().setNum(id));
@@ -439,7 +439,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 emit haveLiteChange();
             }
             break;
-        case 2:
+        case 2: // base
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
             id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
@@ -461,7 +461,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 }
             }
             break;
-        case 3:
+        case 3: // ksize
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
             id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
@@ -474,7 +474,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 emit haveLiteChange();
             }
             break;
-        case 4:
+        case 4: // kgrowth
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
             id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
@@ -487,7 +487,7 @@ void DialogIncrements::cellChanged ( qint32 row, qint32 column )
                 emit haveLiteChange();
             }
             break;
-        case 5:
+        case 5: // description
             itemName = ui->tableWidgetIncrement->item(row, 0);
             item = ui->tableWidgetIncrement->item(row, column);
             id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
