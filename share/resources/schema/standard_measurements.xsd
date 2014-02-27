@@ -15,7 +15,7 @@
 									<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
 									<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
 									<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
-									<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="number" type="xs:string" use="required"></xs:attribute>
 								</xs:complexType>
 							</xs:element>
 						 </xs:sequence>
