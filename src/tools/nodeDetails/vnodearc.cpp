@@ -38,7 +38,7 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, widthHairLine));
+    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
 
     if (typeCreation == Tool::FromGui)
     {
@@ -129,13 +129,13 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine));
+    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
 }
 
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
 }
 
 void VNodeArc::RefreshGeometry()

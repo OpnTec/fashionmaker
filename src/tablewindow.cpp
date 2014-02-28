@@ -81,7 +81,7 @@ void TableWindow::AddPaper()
     shadowPaper->setBrush(QBrush(Qt::black));
     tableScene->addItem(shadowPaper);
     paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
-    paper->setPen(QPen(Qt::black, widthMainLine));
+    paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
     paper->setBrush(QBrush(Qt::white));
     tableScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
@@ -220,22 +220,22 @@ void TableWindow::saveScene()
     case 1: //png
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 2: //pdf
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PdfFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 3: //eps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 4: //ps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     default:
         qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
@@ -314,7 +314,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
                             Q_CHECK_PTR(bitem);
-                            bitem->setPen(QPen(Qt::black, widthMainLine));
+                            bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
                             listCollidingItems.removeAt(i);
                         }
                     }
@@ -323,7 +323,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
                     Q_CHECK_PTR(bitem);
-                    bitem->setPen(QPen(Qt::black, widthMainLine));
+                    bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
                     listCollidingItems.clear();
                     collidingItems = true;
                 }
@@ -450,7 +450,7 @@ void TableWindow::PngFile(const QString &name) const
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     image.save(name);
@@ -474,7 +474,7 @@ void TableWindow::PdfFile(const QString &name) const
     }
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();

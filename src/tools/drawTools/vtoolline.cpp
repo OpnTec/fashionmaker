@@ -45,7 +45,7 @@ VToolLine::VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firs
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, widthHairLine/factor, LineStyle()));
+    this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor, LineStyle()));
 
     if (typeCreation == Tool::FromGui)
     {
@@ -143,7 +143,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
 }
@@ -178,13 +178,13 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine/factor, LineStyle()));
+    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor, LineStyle()));
 }
 
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
 }
 
 void VToolLine::RemoveReferens()
@@ -246,5 +246,5 @@ void VToolLine::RefreshGeometry()
     const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(currentColor, widthHairLine/factor, LineStyle()));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
 }

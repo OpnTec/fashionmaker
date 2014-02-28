@@ -194,8 +194,8 @@ void VToolCutSpline::ChangedActivDraw(const QString &newName)
         secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, false);
         secondSpline->setAcceptHoverEvents(false);
     }
-    firstSpline->setPen(QPen(currentColor, widthHairLine/factor));
-    secondSpline->setPen(QPen(currentColor, widthHairLine/factor));
+    firstSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    secondSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
     VToolPoint::ChangedActivDraw(newName);
 }
 
