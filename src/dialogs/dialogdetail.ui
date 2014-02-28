@@ -47,7 +47,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxBiasX"/>
+          <widget class="QSpinBox" name="spinBoxBiasX">
+           <property name="minimum">
+            <number>-3000</number>
+           </property>
+           <property name="maximum">
+            <number>3000</number>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -67,7 +74,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxBiasY"/>
+          <widget class="QSpinBox" name="spinBoxBiasY">
+           <property name="minimum">
+            <number>-3000</number>
+           </property>
+           <property name="maximum">
+            <number>3000</number>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -176,7 +190,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBoxSeams"/>
+             <widget class="QSpinBox" name="spinBoxSeams">
+              <property name="maximum">
+               <number>3000</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
