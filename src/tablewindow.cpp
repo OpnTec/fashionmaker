@@ -510,31 +510,26 @@ void TableWindow::PsFile(const QString &name) const
 
 //TODO delete parametr name and use last parameter in string list instead.
 void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
-{
-    QProcess proc;
-    QString program;
-
-#ifdef Q_OS_WIN32
-    program = "pdftops.exe";
-#else
-    program = "pdftops";
-#endif
-
+{    
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-    proc.start(program, params);
+    QProcess proc;
+#ifdef Q_OS_WIN
+    proc.start("pdftops.exe", params);
+#else
+    proc.start("pdftops", params);
+#endif
     proc.waitForFinished(15000);
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
-    qDebug() << proc.errorString();
 
     QFile f(name);
     if (!f.exists())
     {
-        QMessageBox msgBox(QMessageBox::Critical, "Critical error!", "Creating file '"+name+"' failed!",
-                    QMessageBox::Ok | QMessageBox::Default);
+        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(name).arg(proc.errorString());
+        QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
 }
