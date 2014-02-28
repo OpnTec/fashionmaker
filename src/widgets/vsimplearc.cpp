@@ -33,11 +33,11 @@ VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor,
 {
     if (factor == nullptr)
     {
-        setPen(QPen(Qt::black, widthHairLine));
+        setPen(QPen(Qt::black, toPixel(widthHairLine)));
     }
     else
     {
-        setPen(QPen(Qt::black, widthHairLine/ *factor));
+        setPen(QPen(Qt::black, toPixel(widthHairLine)/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -57,11 +57,11 @@ void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, widthMainLine));
+        this->setPen(QPen(*currentColor, toPixel(widthMainLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+        this->setPen(QPen(*currentColor, toPixel(widthMainLine)/ *factor));
     }
 }
 
@@ -70,10 +70,10 @@ void VSimpleArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, widthHairLine));
+        this->setPen(QPen(*currentColor, toPixel(widthHairLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, widthHairLine/ *factor));
+        this->setPen(QPen(*currentColor, toPixel(widthHairLine)/ *factor));
     }
 }

@@ -63,19 +63,19 @@ void VItem::checkItemChange()
     QRectF myrect = sceneBoundingRect();
     if ( rect.contains( myrect )==true )
     {
-        setPen(QPen(Qt::black, widthMainLine));
+        setPen(QPen(Qt::black, toPixel(widthMainLine)));
         emit itemOut( numInOutList, false );
     }
     else
     {
-        setPen(QPen(Qt::red, widthMainLine));
+        setPen(QPen(Qt::red, toPixel(widthMainLine)));
         emit itemOut( numInOutList, true );
     }
     QList<QGraphicsItem *> list = QGraphicsItem::collidingItems ();
     if ( list.size() - 2 > 0 )
     {
         list.append( this );
-        setPen(QPen(Qt::red, widthMainLine));
+        setPen(QPen(Qt::red, toPixel(widthMainLine)));
         emit itemColliding( list, 1 );//Detail intersect with other details.
     }
     else
