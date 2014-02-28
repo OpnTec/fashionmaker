@@ -93,10 +93,10 @@ void TableWindow::AddDetail()
     {
         tableScene->clearSelection();
         VItem* Detail = listDetails[indexDetail];
-        QObject::connect(Detail, SIGNAL(itemOut(int, bool)), this, SLOT(itemOut(int, bool)));
-        QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>, int)), this,
-                         SLOT(itemColliding(QList<QGraphicsItem*>, int)));
-        QObject::connect(this, SIGNAL(LengthChanged()), Detail, SLOT(LengthChanged()));
+        Q_CHECK_PTR(Detail);
+        connect(Detail, &VItem::itemOut, this, &TableWindow::itemOut);
+        connect(Detail, &VItem::itemColliding, this, &TableWindow::itemColliding);
+        connect(this, &TableWindow::LengthChanged, Detail, &VItem::LengthChanged);
         Detail->setPen(QPen(Qt::black, 1));
         Detail->setBrush(QBrush(Qt::white));
         Detail->setPos(paper->boundingRect().center());
