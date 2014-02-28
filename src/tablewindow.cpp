@@ -122,7 +122,16 @@ void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileNa
 {
     this->description = description;
 
-    QFileInfo fi( fileName );
+    QString file;
+    if (fileName.isEmpty())
+    {
+        file = tr("untitled");
+    }
+    else
+    {
+        file = fileName;
+    }
+    QFileInfo fi( file );
     this->fileName = fi.baseName();
 
     this->listDetails = listDetails;
