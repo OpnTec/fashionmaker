@@ -425,6 +425,7 @@ void TableWindow::SvgFile(const QString &name) const
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
+    generator.setViewBox(paper->rect());
     generator.setTitle("Valentina pattern");
     generator.setDescription(description);
     generator.setResolution(PrintDPI);
@@ -432,7 +433,7 @@ void TableWindow::SvgFile(const QString &name) const
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, 1.2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthHairLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
