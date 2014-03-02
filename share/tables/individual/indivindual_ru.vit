@@ -1,0 +1,91 @@
+<vit>
+	<lang>ru</lang>
+	<personal>
+	   <family-name></family-name>
+	   <given-name></given-name>
+	   <birth-date></birth-date>
+	   <sex></sex>
+	</personal>
+	<body-measurements>
+		<unit>mm</unit>
+		<head_and_neck>
+			<head_girth name="Огол" value="0.0" gui_text="Обхват головы" description="Номер размерного признака 48"/>
+			<mid_neck_girth name="Сш" value="0.0" gui_text="Полуобхват шеи" description="Номер размерного признака 13"/>
+			<neck_base_girth name="Ош" value="0.0" gui_text="Обхват шеи" description="Номер размерного признака 13"/>
+			<head_and_neck_length name="Вгол" value="0.0" gui_text="Высота головы" description="Номер размерного признака 78"/>
+		</head_and_neck>
+		<torso>
+			<center_front_waist_length name="Двчт" value="0.0" gui_text="Длина дуги верхней части туловища через точку основания шеи сбоку" description="Номер размерного признака 44"/>
+			<center_back_waist_length name="ДтсI" value="0.0" gui_text="Расстояние от линии талии сзади до точки основания шеи сбоку" description="Номер размерного признака 43"/>
+			<shoulder_length name="Вп" value="0.0" gui_text="Высота плеча" description="Номер размерного признака 72"/>
+			<side_waist_length name="Дб" value="0.0" gui_text="Длина боковой части" description="Разница между меркой 11 и 7"/>
+			<!--<trunk_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<shoulder_girth name="Оп" value="0.0" gui_text="Обхват плеча" description="Номер размерного признака 28"/>
+			<upper_chest_girth name="ОгI" value="0.0" gui_text="Обхват груди первый" description="Номер размерного признака 14"/>
+			<bust__girth name="ОгII" value="0.0" gui_text="Обхват груди второй" description="Номер размерного признака 15"/>
+			<under_bust_girth name="ОгIII" value="0.0" gui_text="Обхват груди третий" description="Номер размерного признака 16"/>
+			<waist_girth name="От" value="0.0" gui_text="Обхват талии" description="Номер размерного признака 18"/>
+			<high_hip_girth name="Вб" value="0.0" gui_text="Высота бедер" description="Номер размерного признака 103"/>
+			<hip_girth name="Обед" value="0.0" gui_text="Обхват бедра" description="Номер размерного признака 21"/>
+			<upper_front_chest_width name="Шг1" value="0.0" gui_text="Ширина груди первая" description="Номер размерного признака 45"/>
+			<front_chest_width name="Шг2" value="0.0" gui_text="Ширина груди вторая" description="Номер размерного признака 45"/>
+			<!--<across_front_shoulder_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<across_back_shoulder_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<upper_back_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<back_width name="Шс" value="0.0" gui_text="Ширина спины" description="Номер размерного признака 47"/>
+			<bustpoint_to_bustpoint name="Цг" value="0.0" gui_text="Расстояние между сосковыми точками" description="Номер размерного признака 46"/>
+			<!--<halter_bustpoint_to_bustpoint name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<neck_to_bustpoint name="Вг" value="0.0" gui_text="Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)" description="Номер размерного признака 35а"/>
+			<crotch_length name="Впр" value="0.0" gui_text="Раствор верхней вытачки" description="От грудной железы до основания груди"/>
+			<!--<rise_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<shoulder_drop name="Шп" value="0.0" gui_text="Длина плечевого ската" description="Номер размерного признака 31"/>
+			<!--<shoulder_slope_degrees name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<front_shoulder_slope_length name="Впкп" value="0.0" gui_text="Высота плеча косая спереди" description="Номер размерного признака 42"/>
+			<back_shoulder_slope_length name="Впк" value="0.0" gui_text="Высота плеча косая" description="Номер размерного признака 41"/>
+			<front_shoulder_to_waist_length name="Дтс" value="0.0" gui_text="Длина спины до талии с учетом выступа лопаток" description="Номер размерного признака 40"/>
+			<back_shoulder_to_waist_length name="ДтсI" value="0.0" gui_text="Расстояние от линии талии сзади до точки основания шеи сбоку" description="Номер размерного признака 43"/>
+		</torso>
+		<arm>
+			<armscye_girth name="Шпр" value="0.0" gui_text="Ширина проймы" description="Номер размерного признака "/>
+			<elbow_girth name="Олк" value="0.0" gui_text="Обхват локтя" description="Номер размерного признака "/>
+			<upper_arm_girth name="Оп" value="0.0" gui_text="Обхват плеча" description="Номер размерного признака 28"/>
+			<wrist_girth name="Озап" value="0.0" gui_text="Обхват запястья" description="Номер размерного признака 105"/>
+			<!--<scye_depth name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
+			<shoulder_and_arm_length name="Дрзап" value="0.0" gui_text="Длина руки до запястья" description="Номер размерного признака 68"/>
+			<underarm_length name="Взу" value="0.0" gui_text="Высота заднего угла подмышечной впадины" description="Номер размерного признака 11"/>
+			<cervical_to_wrist_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<shoulder_to_elbow_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<arm_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+		</arm>
+		<hand>
+			<hand_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<hand_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<hand_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+		</hand>
+		<leg>
+			<thigh_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<mid_thigh_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<knee_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<calf_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<ankle_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<knee_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<ankle_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+		</leg>
+		<foot>
+			<foot_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<foot_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<foot_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+		</foot>
+		<heights>
+			<height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<cervical_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<cervical_to_knee_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<waist_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<high_hip_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<hip_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<waist_to_hip_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<waist_to_knee_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<crotch_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+		</heights>
+	</body-measurements>
+</vit>

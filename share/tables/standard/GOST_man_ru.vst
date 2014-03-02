@@ -16,8 +16,8 @@
 		<measurement name="ОгI" gui_text="Обхват груди первый" base="1034" size_increace="36" height_increase ="4" number="14"/>
 		<measurement name="ОгII" gui_text="Обхват груди второй" base="1044" size_increace="38" height_increase ="2" number="15"/>
 		<measurement name="ОгIII" gui_text="Обхват груди третий" base="1000" size_increace="40" height_increase ="0" number="16"/>
-        <measurement name="От" gui_text="Обхват талии" base="780" size_increace="40" height_increase ="0" number="18"/>
-        <measurement name="Об" gui_text="Обхват бедер с учетом выступания живота" base="984" size_increace="30" height_increase ="10" number="19"/>
+        	<measurement name="От" gui_text="Обхват талии" base="780" size_increace="40" height_increase ="0" number="18"/>
+        	<measurement name="Об" gui_text="Обхват бедер с учетом выступания живота" base="984" size_increace="30" height_increase ="10" number="19"/>
 		<measurement name="ОбI" gui_text="Обхват бедер без учета выступания живота" base="964" size_increace="24" height_increase ="12" number="20"/>
 		<measurement name="Обед" gui_text="Обхват бедра" base="566" size_increace="18" height_increase ="6" number="21"/>
 		<measurement name="Ок" gui_text="Обхват колена" base="386" size_increace="8" height_increase ="8" number="22"/>
@@ -66,7 +66,7 @@
 		<measurement name="Окс" gui_text="Обхват колена в согнутом положении ноги" base="399" size_increace="9" height_increase ="8" number="50"/>
 		<measurement name="dпл" gui_text="Плечевой диаметр" base="412" size_increace="5" height_increase ="8" number="53"/>
 		<measurement name="dш" gui_text="Поперечный диаметр шеи" base="130" size_increace="2" height_increase ="2" number="54"/>
-		<measurement name="Впкп" gui_text="Высота плеча косая спереди" base="453" size_increace="7" height_increase ="8" number="60"/>
+		<measurement name="Впкп" gui_text="Высота плеча косая спереди" base="453" size_increace="7" height_increase ="8" number="42"/>
 		<measurement name="Дтн1" gui_text="Расстояние от точки основания шеи до линии талии спереди" base="449" size_increace="6" height_increase ="8" number="61"/>
 		<measurement name="Дрлок" gui_text="Длина руки до локтя" base="338" size_increace="2" height_increase ="12" number="62"/>
 		<measurement name="Дрзап" gui_text="Длина рукава до линии обхвата запястья" base="594" size_increace="3" height_increase ="19" number="68"/>
