@@ -1039,9 +1039,9 @@ void MainWindow::ActionHistory(bool checked)
     if (checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
+        Q_CHECK_PTR(dialogHistory);
         dialogHistory->setWindowFlags(Qt::Window);
-        connect(dialogHistory, &DialogHistory::DialogClosed, this,
-                &MainWindow::ClosedActionHistory);
+        connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
     }
     else

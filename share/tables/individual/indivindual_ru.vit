@@ -53,7 +53,7 @@
 			<!--<scye_depth name="" value="0.0" gui_text="" description="Номер размерного признака "/>-->
 			<shoulder_and_arm_length name="Дрзап" value="0.0" gui_text="Длина руки до запястья" description="Номер размерного признака 68"/>
 			<underarm_length name="Взу" value="0.0" gui_text="Высота заднего угла подмышечной впадины" description="Номер размерного признака 11"/>
-			<cervical_to_wrist_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<cervicale_to_wrist_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<shoulder_to_elbow_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<arm_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 		</arm>
@@ -74,12 +74,12 @@
 		<foot>
 			<foot_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<foot_length name="" value="0.0" gui_text="" description="Номер размерного признака "/>
-			<foot_girth name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<foot_width name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 		</foot>
 		<heights>
 			<height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
-			<cervical_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
-			<cervical_to_knee_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<cervicale_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
+			<cervicale_to_knee_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<waist_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<high_hip_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>
 			<hip_height name="" value="0.0" gui_text="" description="Номер размерного признака "/>

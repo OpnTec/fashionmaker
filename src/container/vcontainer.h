@@ -74,7 +74,7 @@ public:
     */
     void                setData(const VContainer &data);
     template <typename T>
-    const T GeometricObject(quint32 id) const
+    const T GeometricObject(const quint32 &id) const
     {
         VGObject *gObj = nullptr;
         if (gObjects.contains(id))
@@ -84,10 +84,21 @@ public:
         else
         {
             throw VExceptionBadId(tr("Can't find object"), id);
+            return nullptr;
         }
-        T obj = dynamic_cast<T>(gObj);
-        Q_CHECK_PTR(obj);
-        return obj;
+
+        try
+        {
+            T obj = dynamic_cast<T>(gObj);
+            Q_CHECK_PTR(obj);
+            return obj;
+        }
+        catch(const std::bad_alloc &)
+        {
+            throw VExceptionBadId(tr("Can't cast object"), id);
+            return nullptr;
+        }
+        return nullptr;
     }
 
     /**
