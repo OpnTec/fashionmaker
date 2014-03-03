@@ -561,6 +561,7 @@ private:
     void               CreateMenus();
     void               CreateActions();
     void               InitAutoSave();
+    QString            PatternPieceName(const QString &text);
 };
 
 #endif // MAINWINDOW_H

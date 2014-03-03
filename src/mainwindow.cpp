@@ -115,41 +115,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::ActionNewDraw()
 {
-    QString nameDraw;
-    bool bOk;
-    qint32 index;
-    QString nDraw = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-    QInputDialog *dlg = new QInputDialog(this);
-    dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Pattern piece:"));
-    dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a label for the pattern piece."));
-    dlg->resize(300, 100);
-    dlg->setTextValue(nDraw);
-    while (1)
+    const QString nameDraw = PatternPieceName(QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1));
+    if (nameDraw.isEmpty())
     {
-        bOk = dlg->exec();
-        nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty())
-        {
-            delete dlg;
-            return;
-        }
-        index = comboBoxDraws->findText(nameDraw);
-        if (index != -1)
-        {//we already have this name
-            qCritical()<<tr("Error. Pattern piece of same label already exists.");
-        }
-        else
-        {
-            break;
-        }
+        return;
     }
-    delete dlg;
-    bOk = doc->appendDraw(nameDraw);
-    if (bOk == false)
+    if (doc->appendDraw(nameDraw) == false)
     {
-        qCritical()<<tr("Error creating pattern with the name ")<<nameDraw<<".";
+        qWarning()<<tr("Error creating pattern with the name ")<<nameDraw<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -158,18 +131,21 @@ void MainWindow::ActionNewDraw()
 
     pattern->ClearGObjects();
     //Create single point
-    quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
+    const quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5,
+                                                       10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
+    Q_CHECK_PTR(spoint);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
+    Q_CHECK_PTR(tools);
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
 
-    index = comboBoxDraws->findText(nameDraw);
+    const qint32 index = comboBoxDraws->findText(nameDraw);
     if ( index != -1 )
     { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
@@ -181,46 +157,20 @@ void MainWindow::ActionNewDraw()
 
 void MainWindow::OptionDraw()
 {
-    QString nameDraw;
-    qint32 index;
-    QString nDraw = doc->GetNameActivDraw();
-    QInputDialog *dlg = new QInputDialog(this);
-    dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Pattern piece:"));
-    dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
-    dlg->resize(300, 100);
-    dlg->setTextValue(nDraw);
-    while (1)
+    const QString activDraw = doc->GetNameActivDraw();
+    const QString nameDraw = PatternPieceName(activDraw);
+    if (nameDraw.isEmpty())
     {
-        bool bOk = dlg->exec();
-        nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty())
-        {
-            delete dlg;
-            return;
-        }
-        index = comboBoxDraws->findText(nameDraw);
-        if (index != -1)
-        {//we already have this name
-            qCritical()<<tr("Error. Pattern piece of same name already exists.");
-        }
-        else
-        {
-            break;
-        }
+        return;
     }
-    delete dlg;
-    index = comboBoxDraws->findText(doc->GetNameActivDraw());
     if (doc->SetNameDraw(nameDraw))
     {
-        comboBoxDraws->setItemText(index, nameDraw);
+        comboBoxDraws->setItemText(comboBoxDraws->findText(activDraw), nameDraw);
     }
     else
     {
         QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new label of pattern piece"));
     }
-
 }
 
 template <typename Dialog, typename Func>
@@ -1360,6 +1310,35 @@ void MainWindow::InitAutoSave()
         connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
         autoSaveTimer->start(autoTime*60000);
     }
+}
+
+QString MainWindow::PatternPieceName(const QString &text)
+{
+    QInputDialog *dlg = new QInputDialog(this);
+    Q_CHECK_PTR(dlg);
+    dlg->setInputMode( QInputDialog::TextInput );
+    dlg->setLabelText(tr("Pattern piece:"));
+    dlg->setTextEchoMode(QLineEdit::Normal);
+    dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
+    dlg->resize(300, 100);
+    dlg->setTextValue(text);
+    QString nameDraw;
+    while (1)
+    {
+        const bool bOk = dlg->exec();
+        nameDraw = dlg->textValue();
+        if (bOk == false || nameDraw.isEmpty())
+        {
+            delete dlg;
+            return QString();
+        }
+        if (comboBoxDraws->findText(nameDraw) == -1)
+        {
+            break;
+        }
+    }
+    delete dlg;
+    return nameDraw;
 }
 
 MainWindow::~MainWindow()
