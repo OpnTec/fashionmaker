@@ -282,36 +282,36 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     
     // Calculate all the mid-points of the line segments
     //----------------------
-    double x12   = (x1 + x2) / 2;
-    double y12   = (y1 + y2) / 2;
-    double x23   = (x2 + x3) / 2;
-    double y23   = (y2 + y3) / 2;
-    double x34   = (x3 + x4) / 2;
-    double y34   = (y3 + y4) / 2;
-    double x123  = (x12 + x23) / 2;
-    double y123  = (y12 + y23) / 2;
-    double x234  = (x23 + x34) / 2;
-    double y234  = (y23 + y34) / 2;
-    double x1234 = (x123 + x234) / 2;
-    double y1234 = (y123 + y234) / 2;
+    const double x12   = (x1 + x2) / 2;
+    const double y12   = (y1 + y2) / 2;
+    const double x23   = (x2 + x3) / 2;
+    const double y23   = (y2 + y3) / 2;
+    const double x34   = (x3 + x4) / 2;
+    const double y34   = (y3 + y4) / 2;
+    const double x123  = (x12 + x23) / 2;
+    const double y123  = (y12 + y23) / 2;
+    const double x234  = (x23 + x34) / 2;
+    const double y234  = (y23 + y34) / 2;
+    const double x1234 = (x123 + x234) / 2;
+    const double y1234 = (y123 + y234) / 2;
     
     
     // Try to approximate the full cubic curve by a single straight line
     //------------------
-    double dx = x4-x1;
-    double dy = y4-y1;
+    const double dx = x4-x1;
+    const double dy = y4-y1;
     
     double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
     double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
-    double da1, da2, k;
     
     switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
              static_cast<int>(d3 > curve_collinearity_epsilon))
     {
         case 0:
+        {
             // All collinear OR p1==p4
             //----------------------
-            k = dx*dx + dy*dy;
+            double k = dx*dx + dy*dy;
             if (k < 0.000000001)
             {
                 d2 = CalcSqDistance(x1, y1, x2, y2);
@@ -320,12 +320,16 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
             else
             {
                 k   = 1 / k;
-                da1 = x2 - x1;
-                da2 = y2 - y1;
-                d2  = k * (da1*dx + da2*dy);
-                da1 = x3 - x1;
-                da2 = y3 - y1;
-                d3  = k * (da1*dx + da2*dy);
+                {
+                    const double da1 = x2 - x1;
+                    const double da2 = y2 - y1;
+                    d2  = k * (da1*dx + da2*dy);
+                }
+                {
+                    const double da1 = x3 - x1;
+                    const double da2 = y3 - y1;
+                    d3  = k * (da1*dx + da2*dy);
+                }
                 // cppcheck-suppress incorrectLogicOperator
                 if (d2 > 0 && d2 < 1 && d3 > 0 && d3 < 1)
                 {
@@ -363,10 +367,8 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
             {
                 if (d2 < m_distance_tolerance_square)
                 {
-
                     px.append(x2);
                     py.append(y2);
-                    //m_points.add(point_d(x2, y2));
                     return;
                 }
             }
@@ -374,31 +376,29 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
             {
                 if (d3 < m_distance_tolerance_square)
                 {
-
                     px.append(x3);
                     py.append(y3);
-                    //m_points.add(point_d(x3, y3));
                     return;
                 }
             }
             break;
+        }
         case 1:
+        {
             // p1,p2,p4 are collinear, p3 is significant
             //----------------------
             if (d3 * d3 <= m_distance_tolerance_square * (dx*dx + dy*dy))
             {
                 if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
-
                     px.append(x23);
                     py.append(y23);
-                    //m_points.add(point_d(x23, y23));
                     return;
                 }
 
                 // Angle Condition
                 //----------------------
-                da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
+                double da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
                 if (da1 >= M_PI)
                 {
                     da1 = 2*M_PI - da1;
@@ -406,14 +406,11 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
 
                 if (da1 < m_angle_tolerance)
                 {
-
                     px.append(x2);
                     py.append(y2);
 
                     px.append(x3);
                     py.append(y3);
-                    //m_points.add(point_d(x2, y2));
-                    //m_points.add(point_d(x3, y3));
                     return;
                 }
 
@@ -421,33 +418,30 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                 {
                     if (da1 > m_cusp_limit)
                     {
-
                         px.append(x3);
                         py.append(y3);
-                        //m_points.add(point_d(x3, y3));
                         return;
                     }
                 }
             }
             break;
-
+        }
         case 2:
+        {
             // p1,p3,p4 are collinear, p2 is significant
             //----------------------
             if (d2 * d2 <= m_distance_tolerance_square * (dx*dx + dy*dy))
             {
                 if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
-
                     px.append(x23);
                     py.append(y23);
-                    //m_points.add(point_d(x23, y23));
                     return;
                 }
 
                 // Angle Condition
                 //----------------------
-                da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
+                double da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
                 if (da1 >= M_PI)
                 {
                     da1 = 2*M_PI - da1;
@@ -455,14 +449,11 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
 
                 if (da1 < m_angle_tolerance)
                 {
-
                     px.append(x2);
                     py.append(y2);
 
                     px.append(x3);
                     py.append(y3);
-                    //m_points.add(point_d(x2, y2));
-                    //m_points.add(point_d(x3, y3));
                     return;
                 }
 
@@ -472,15 +463,14 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                     {
                         px.append(x2);
                         py.append(y2);
-
-                        //m_points.add(point_d(x2, y2));
                         return;
                     }
                 }
             }
             break;
-
+        }
         case 3:
+        {
             // Regular case
             //-----------------
             if ((d2 + d3)*(d2 + d3) <= m_distance_tolerance_square * (dx*dx + dy*dy))
@@ -490,18 +480,16 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                 //----------------------
                 if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
-
                     px.append(x23);
                     py.append(y23);
-                    //m_points.add(point_d(x23, y23));
                     return;
                 }
 
                 // Angle & Cusp Condition
                 //----------------------
-                k   = atan2(y3 - y2, x3 - x2);
-                da1 = fabs(k - atan2(y2 - y1, x2 - x1));
-                da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
+                const double k   = atan2(y3 - y2, x3 - x2);
+                double da1 = fabs(k - atan2(y2 - y1, x2 - x1));
+                double da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
                 if (da1 >= M_PI)
                 {
                     da1 = 2*M_PI - da1;
@@ -518,7 +506,6 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
 
                     px.append(x23);
                     py.append(y23);
-                    //m_points.add(point_d(x23, y23));
                     return;
                 }
 
@@ -540,6 +527,7 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                 }
             }
             break;
+        }
         default:
             break;
     }
