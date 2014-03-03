@@ -26,10 +26,10 @@
  **
  *************************************************************************/
 
-#include "vexceptionwrongparameterid.h"
+#include "vexceptionwrongid.h"
 #include <QDebug>
 
-VExceptionWrongParameterId::VExceptionWrongParameterId(const QString &what, const QDomElement &domElement)
+VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -39,20 +39,20 @@ VExceptionWrongParameterId::VExceptionWrongParameterId(const QString &what, cons
     lineNumber = domElement.lineNumber();
 }
 
-VExceptionWrongParameterId::VExceptionWrongParameterId(const VExceptionWrongParameterId &e)
+VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {
 
 }
 
-QString VExceptionWrongParameterId::ErrorMessage() const
+QString VExceptionWrongId::ErrorMessage() const
 {
-    QString error = QString("ExceptionWrongParameterId: %1").arg(what);
+    QString error = QString("ExceptionWrongId: %1").arg(what);
     return error;
 }
 
-QString VExceptionWrongParameterId::DetailedInformation() const
+QString VExceptionWrongId::DetailedInformation() const
 {
-    QString detail = QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText);
+    QString detail = QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText);
     return detail;
 }

@@ -26,31 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef VEXCEPTIONWRONGPARAMETERID_H
-#define VEXCEPTIONWRONGPARAMETERID_H
+#ifndef VEXCEPTIONWRONGID_H
+#define VEXCEPTIONWRONGID_H
 
 #include "vexception.h"
 
 #include <QDomElement>
 
 /**
- * @brief The VExceptionWrongParameterId class for exception wrong parameter id
+ * @brief The VExceptionWrongId class for exception wrong id
  */
-class VExceptionWrongParameterId : public VException
+class VExceptionWrongId : public VException
 {
 public:
     /**
-     * @brief VExceptionWrongParameterId exception wrong parameter id
+     * @brief VExceptionWrongId exception wrong parameter id
      * @param what string with error
      * @param domElement som element
      */
-    VExceptionWrongParameterId(const QString &what, const QDomElement &domElement);
+    VExceptionWrongId(const QString &what, const QDomElement &domElement);
     /**
-     * @brief VExceptionWrongParameterId copy constructor
+     * @brief VExceptionWrongId copy constructor
      * @param e exception
      */
-    VExceptionWrongParameterId(const VExceptionWrongParameterId &e);
-    virtual ~VExceptionWrongParameterId() noexcept (true){}
+    VExceptionWrongId(const VExceptionWrongId &e);
+    virtual ~VExceptionWrongId() noexcept (true){}
     /**
      * @brief ErrorMessage return main error message
      * @return main error message
@@ -91,19 +91,19 @@ protected:
     qint32          lineNumber;
 };
 
-inline QString VExceptionWrongParameterId::TagText() const
+inline QString VExceptionWrongId::TagText() const
 {
     return tagText;
 }
 
-inline QString VExceptionWrongParameterId::TagName() const
+inline QString VExceptionWrongId::TagName() const
 {
     return tagName;
 }
 
-inline qint32 VExceptionWrongParameterId::LineNumber() const
+inline qint32 VExceptionWrongId::LineNumber() const
 {
     return lineNumber;
 }
 
-#endif // VEXCEPTIONWRONGPARAMETERID_H
+#endif // VEXCEPTIONWRONGID_H

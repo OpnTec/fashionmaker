@@ -33,8 +33,7 @@
 #include "../tools/drawTools/drawtools.h"
 #include "../tools/nodeDetails/nodedetails.h"
 #include "../exception/vexceptionobjecterror.h"
-#include "../exception/vexceptionwrongparameterid.h"
-#include "../exception/vexceptionuniqueid.h"
+#include "../exception/vexceptionwrongid.h"
 
 #include <QMessageBox>
 
@@ -1254,7 +1253,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
     const quint32 id = GetParametrUInt(domElement, VAbstractTool::AttrId, "0");
     if (id <= 0)
     {
-        throw VExceptionWrongParameterId(tr("Got wrong parameter id. Need only id > 0."), domElement);
+        throw VExceptionWrongId(tr("Got wrong parameter id. Need only id > 0."), domElement);
     }
     return id;
 }
@@ -1266,7 +1265,7 @@ void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) cons
         const quint32 id = GetParametrId(node);
         if (vector.contains(id))
         {
-            throw VExceptionUniqueId(tr("This id is not unique."), node);
+            throw VExceptionWrongId(tr("This id is not unique."), node);
         }
         vector.append(id);
     }

@@ -31,7 +31,7 @@
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionwrongparameterid.h"
+#include "../exception/vexceptionwrongid.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -63,7 +63,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
         e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."));
         abort();
     }
-    catch (const VExceptionWrongParameterId &e)
+    catch (const VExceptionWrongId &e)
     {
         e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."));
         abort();

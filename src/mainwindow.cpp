@@ -33,8 +33,7 @@
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
-#include "exception/vexceptionwrongparameterid.h"
-#include "exception/vexceptionuniqueid.h"
+#include "exception/vexceptionwrongid.h"
 #include "version.h"
 
 #include <QInputDialog>
@@ -1074,7 +1073,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     {
         doc->TestUniqueId();
     }
-    catch (const VExceptionUniqueId &e)
+    catch (const VExceptionWrongId &e)
     {
         e.CriticalMessageBox(tr("Error no unique id."), this);
         return false;
@@ -1400,16 +1399,9 @@ void MainWindow::LoadPattern(const QString &fileName)
                     Clear();
                     return;
                 }
-                catch (const VExceptionWrongParameterId &e)
+                catch (const VExceptionWrongId &e)
                 {
                     e.CriticalMessageBox(tr("Error wrong id."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionUniqueId &e)
-                {
-                    e.CriticalMessageBox(tr("Error no unique id."), this);
                     file.close();
                     Clear();
                     return;
