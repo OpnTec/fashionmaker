@@ -199,6 +199,7 @@ private:
      * @param indexSpline index spline in spline path.
      */
     void             CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
+    void             RefreshSplinePath(VSplinePath &splPath);
 };
 
 #endif // VTOOLSPLINEPATH_H

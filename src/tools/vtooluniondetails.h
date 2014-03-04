@@ -84,6 +84,7 @@ public:
                         const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene,
                         VPattern *doc, VContainer *data, const Document::Documents &parse,
                         const Tool::Sources &typeCreation);
+    static void  PointsOnEdge(const VDetail &d, const qint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
     /**
      * @brief GetDetailFromFile parse detail from file.
      * @param doc dom document container.
