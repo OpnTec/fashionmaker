@@ -36,7 +36,6 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)
 {
     ui->setupUi(this);
-    spinBoxAngle = ui->doubleSpinBoxAngle;
     listWidget = ui->listWidget;
     labelResultCalculation = ui->labelResultCalculation;
     labelDescription = ui->labelDescription;
@@ -61,22 +60,8 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
-    connect(ui->toolButtonArrowDown, &QPushButton::clicked, this,
-            &DialogNormal::ArrowDown);
-    connect(ui->toolButtonArrowUp, &QPushButton::clicked, this,
-            &DialogNormal::ArrowUp);
-    connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this,
-            &DialogNormal::ArrowLeft);
-    connect(ui->toolButtonArrowRight, &QPushButton::clicked, this,
-            &DialogNormal::ArrowRight);
-    connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this,
-            &DialogNormal::ArrowLeftUp);
-    connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this,
-            &DialogNormal::ArrowLeftDown);
-    connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this,
-            &DialogNormal::ArrowRightUp);
-    connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this,
-            &DialogNormal::ArrowRightDown);
+    InitArrow(ui);
+
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogNormal::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogNormal::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogNormal::ValChenged);

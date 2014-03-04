@@ -398,7 +398,21 @@ protected:
      * @return id or -1 if combobox is empty
      */
     quint32           getCurrentObjectId(QComboBox *box) const;
-    bool ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    bool              ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    template <typename T>
+    void              InitArrow(T *ui)
+    {
+        Q_CHECK_PTR(ui);
+        spinBoxAngle = ui->doubleSpinBoxAngle;
+        connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
+        connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
+        connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this, &DialogTool::ArrowLeft);
+        connect(ui->toolButtonArrowRight, &QPushButton::clicked, this, &DialogTool::ArrowRight);
+        connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this, &DialogTool::ArrowLeftUp);
+        connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
+        connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
+        connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
+    }
 private:
     /**
      * @brief FillList fill combobox list
