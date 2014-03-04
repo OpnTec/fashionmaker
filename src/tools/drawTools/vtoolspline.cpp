@@ -30,15 +30,11 @@
 #include "../../geometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
 
-const QString VToolSpline::TagName = QStringLiteral("spline");
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
 VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
-                         QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
+                         QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
-    ignoreFullUpdate = true;
-
     const VSpline *spl = data->GeometricObject<const VSpline *>(id);
     QPainterPath path;
     path.addPath(spl->GetPath());
@@ -144,11 +140,6 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     }
 }
 
-void VToolSpline::FullUpdateFromFile()
-{
-    RefreshGeometry();
-}
-
 void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                              const QPointF &pos)
 {
@@ -224,54 +215,11 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
-}
-
-void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
-}
-
 void VToolSpline::RemoveReferens()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     doc->DecrementReferens(spl->GetP1().id());
     doc->DecrementReferens(spl->GetP4().id());
-}
-
-QVariant VToolSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
-{
-    if (change == QGraphicsItem::ItemSelectedChange)
-    {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
-    }
-
-    return QGraphicsItem::itemChange(change, value);
-}
-
-void VToolSpline::keyReleaseEvent(QKeyEvent *event)
-{
-    switch (event->key())
-    {
-        case Qt::Key_Delete:
-            DeleteTool(this);
-            break;
-        default:
-            break;
-    }
-    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 void VToolSpline::SaveDialog(QDomElement &domElement)
@@ -332,36 +280,4 @@ void VToolSpline::RefreshGeometry()
             &VToolSpline::ControlPointChangePosition);
     connect(controlPoints[1], &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
-}
-
-
-void VToolSpline::ChangedActivDraw(const QString &newName)
-{
-    bool selectable = false;
-    if (nameActivDraw == newName)
-    {
-        selectable = true;
-        currentColor = Qt::black;
-    }
-    else
-    {
-        selectable = false;
-        currentColor = Qt::gray;
-    }
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
-    this->setAcceptHoverEvents (selectable);
-    emit setEnabledPoint(selectable);
-    VDrawTool::ChangedActivDraw(newName);
-}
-
-void VToolSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
-{
-    ShowItem(this, id, color, enable);
-}
-
-void VToolSpline::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
 }

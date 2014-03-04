@@ -29,14 +29,12 @@
 #ifndef VTOOLSPLINEPATH_H
 #define VTOOLSPLINEPATH_H
 
-#include "vdrawtool.h"
-#include <QGraphicsPathItem>
-#include "../../widgets/vcontrolpointspline.h"
+#include "vabstractspline.h"
 
 /**
  * @brief The VToolSplinePath class tool for creation spline path.
  */
-class VToolSplinePath:public VDrawTool, public QGraphicsPathItem
+class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
@@ -75,7 +73,6 @@ public:
      static void  Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene,
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
                          const Tool::Sources &typeCreation);
-     static const QString TagName;
      static const QString ToolType;
 signals:
     /**
@@ -94,10 +91,6 @@ signals:
     void             setEnabledPoint(bool enable);
 public slots:
     /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
-    virtual void     FullUpdateFromFile();
-    /**
      * @brief ControlPointChangePosition handle change position control point.
      * @param indexSpline position spline in spline list.
      * @param position position point in spline.
@@ -105,23 +98,6 @@ public slots:
      */
     void             ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                                 const QPointF &pos);
-    /**
-     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName new name active pattern peace.
-     */
-    virtual void     ChangedActivDraw(const QString &newName);
-    /**
-     * @brief ShowTool  highlight tool.
-     * @param id object id in container
-     * @param color highlight color.
-     * @param enable enable or disable highlight.
-     */
-    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
-    virtual void     SetFactor(qreal factor);
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.
@@ -142,40 +118,14 @@ protected:
      */
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
-    virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void     RemoveReferens();
-    /**
-     * @brief itemChange handle item change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief keyReleaseEvent handle key release events.
-     * @param event key release event.
-     */
-    virtual void     keyReleaseEvent(QKeyEvent * event);
     /**
      * @brief SaveDialog save options into file after change in dialog.
      */
     virtual void     SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief controlPoints list pointers of control points.
-     */
-    QVector<VControlPointSpline *>   controlPoints;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
