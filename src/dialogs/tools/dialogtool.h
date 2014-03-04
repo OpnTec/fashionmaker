@@ -398,6 +398,7 @@ protected:
      * @return id or -1 if combobox is empty
      */
     quint32           getCurrentObjectId(QComboBox *box) const;
+    bool ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
 private:
     /**
      * @brief FillList fill combobox list

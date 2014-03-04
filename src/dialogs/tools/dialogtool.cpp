@@ -384,6 +384,21 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
     }
 }
 
+bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip)
+{
+    Q_CHECK_PTR(box);
+    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+    Q_CHECK_PTR(point);
+    const qint32 index = box->findText(point->name());
+    if ( index != -1 )
+    { // -1 for not found
+        box->setCurrentIndex(index);
+        emit ToolTip(toolTip);
+        return true;
+    }
+    return false;
+}
+
 void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     Q_CHECK_PTR(box);

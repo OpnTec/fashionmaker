@@ -102,30 +102,23 @@ void DialogNormal::ChoosedObject(quint32 id, const Scene::Scenes &type)
 {
     if (type == Scene::Point)
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxFirstPoint->setCurrentIndex(index);
+            if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+            {
                 number++;
-                emit ToolTip(tr("Select second point of line"));
                 return;
             }
         }
         if (number == 1)
         {
-            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxSecondPoint->setCurrentIndex(index);
-                number = 0;
-                emit ToolTip("");
-            }
-            if (isInitialized == false)
+            if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
             {
-                this->show();
+                number = 0;
+                if (isInitialized == false)
+                {
+                    this->show();
+                }
             }
         }
     }
