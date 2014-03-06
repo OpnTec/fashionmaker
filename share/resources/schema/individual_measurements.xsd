@@ -27,6 +27,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mid_neck_girth">
@@ -35,6 +36,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_base_girth">
@@ -43,6 +45,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="head_and_neck_length">
@@ -51,6 +54,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -65,6 +69,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="center_back_waist_length">
@@ -73,6 +78,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_length">
@@ -81,6 +87,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="side_waist_length">
@@ -89,6 +96,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="trunk_girth">
@@ -97,6 +105,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_girth">
@@ -105,6 +114,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_chest_girth">
@@ -113,6 +123,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="bust__girth">
@@ -121,6 +132,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="under_bust_girth">
@@ -129,6 +141,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_girth">
@@ -137,6 +150,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="high_hip_girth">
@@ -145,6 +159,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hip_girth">
@@ -153,6 +168,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_front_chest_width">
@@ -161,6 +177,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_chest_width">
@@ -169,6 +186,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="across_front_shoulder_width">
@@ -177,6 +195,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="across_back_shoulder_width">
@@ -185,6 +204,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_back_width">
@@ -193,6 +213,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_width">
@@ -201,6 +222,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="bustpoint_to_bustpoint">
@@ -209,6 +231,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="halter_bustpoint_to_bustpoint">
@@ -217,6 +240,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_bustpoint">
@@ -225,6 +249,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="crotch_length">
@@ -233,6 +258,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="rise_height">
@@ -241,6 +267,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_drop">
@@ -249,6 +276,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_slope_degrees">
@@ -257,6 +285,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_shoulder_slope_length">
@@ -265,6 +294,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_shoulder_slope_length">
@@ -273,6 +303,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_shoulder_to_waist_length">
@@ -281,6 +312,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_shoulder_to_waist_length">
@@ -289,6 +321,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -303,6 +336,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="elbow_girth">
@@ -311,14 +345,16 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="upper_arm_girth">
+										<xs:element name="upper-arm_girth">
 											<xs:complexType>
 												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="wrist_girth">
@@ -327,6 +363,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="scye_depth">
@@ -335,6 +372,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_and_arm_length">
@@ -343,6 +381,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="underarm_length">
@@ -351,14 +390,16 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="cervical_to_wrist_length">
+										<xs:element name="cervicale_to_wrist_length">
 											<xs:complexType>
 												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_to_elbow_length">
@@ -367,6 +408,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arm_length">
@@ -375,6 +417,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -389,6 +432,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hand_length">
@@ -397,6 +441,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hand_girth">
@@ -405,6 +450,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -419,6 +465,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mid_thigh_girth">
@@ -427,6 +474,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="knee_girth">
@@ -435,6 +483,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="calf_girth">
@@ -443,6 +492,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="ankle_girth">
@@ -451,6 +501,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="knee_height">
@@ -459,6 +510,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="ankle_height">
@@ -467,6 +519,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -481,6 +534,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="foot_length">
@@ -489,14 +543,16 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="foot_girth">
+										<xs:element name="foot_width">
 											<xs:complexType>
 												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -511,22 +567,25 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="cervical_height">
+										<xs:element name="cervicale_height">
 											<xs:complexType>
 												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="cervical_to_knee_height">
+										<xs:element name="cervicale_to_knee_height">
 											<xs:complexType>
 												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_height">
@@ -535,6 +594,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="high_hip_height">
@@ -543,6 +603,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hip_height">
@@ -551,6 +612,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_hip_height">
@@ -559,6 +621,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_knee_height">
@@ -567,6 +630,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="crotch_height">
@@ -575,6 +639,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
