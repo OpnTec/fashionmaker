@@ -277,7 +277,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 {
                     const QString pName = data->GeometricObject<const VPointF *>(points.at(0).P().id())->name();
                     record = QString(tr("Curve point %1")).arg(pName);
-                    if(points.size() > 1)
+                    if (points.size() > 1)
                     {
                         const QString pName = data->GeometricObject<const VPointF *>(points.last().P().id())->name();
                         record.append(QString("_%1").arg(pName));

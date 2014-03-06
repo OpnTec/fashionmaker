@@ -477,7 +477,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
     qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
 
     if (typeCreation == Tool::FromGui)
-    {       
+    {
         qint32 j = 0, i = 0;
         VDetail newDetail;
         do

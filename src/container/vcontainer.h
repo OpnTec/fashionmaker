@@ -93,7 +93,7 @@ public:
             Q_CHECK_PTR(obj);
             return obj;
         }
-        catch(const std::bad_alloc &)
+        catch (const std::bad_alloc &)
         {
             throw VExceptionBadId(tr("Can't cast object"), id);
             return nullptr;

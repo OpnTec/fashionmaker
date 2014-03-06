@@ -519,7 +519,7 @@ void TableWindow::PsFile(const QString &name) const
 
 //TODO delete parametr name and use last parameter in string list instead.
 void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
-{    
+{
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
