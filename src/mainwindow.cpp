@@ -917,6 +917,9 @@ void MainWindow::Clear()
     ui->actionSave->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
     SetEnableTool(false);
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
 }
 
 void MainWindow::NewPattern()
