@@ -74,7 +74,7 @@ private:
      * @param width width of equidistant.
      * @return return painter path of equidistant.
      */
-    QPainterPath     Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width) const;
+    static QPainterPath     Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width);
     /**
      * @brief CheckLoops seek and delete loops in equidistant.
      * @param points vector of points of equidistant.
@@ -94,14 +94,14 @@ private:
      * @param width width of equidistant.
      * @return vector of points.
      */
-    QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width) const;
+    static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
     /**
      * @brief ParallelLine create parallel line.
      * @param line starting line.
      * @param width width to parallel line.
      * @return parallel line.
      */
-    QLineF           ParallelLine(const QLineF &line, qreal width ) const;
+    static QLineF           ParallelLine(const QLineF &line, qreal width );
     /**
      * @brief SingleParallelPoint return point of parallel line.
      * @param line starting line.

@@ -229,7 +229,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
 }
 
 QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
-                                       const qreal &width) const
+                                       const qreal &width)
 {
     QPainterPath ekv;
     QVector<QPointF> ekvPoints;
@@ -364,7 +364,7 @@ QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
     return reversePoints;
 }
 
-QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width) const
+QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
     Q_ASSERT(width > 0);
     QVector<QPointF> points;
@@ -413,7 +413,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
     return points;
 }
 
-QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width) const
+QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
 {
     Q_ASSERT(width > 0);
     QLineF paralel = QLineF (SingleParallelPoint(line, 90, width), SingleParallelPoint(QLineF(line.p2(), line.p1()),

@@ -119,8 +119,8 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
         quint32 splPath1id = id + 1;
         quint32 splPath2id = id + 2;
 
-        const VSplinePoint splP1 = splPath->at(p1);
-        const VSplinePoint splP2 = splPath->at(p2);
+        VSplinePoint splP1 = splPath->at(p1);
+        VSplinePoint splP2 = splPath->at(p2);
         const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
         const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
 
