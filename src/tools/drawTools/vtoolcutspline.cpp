@@ -178,23 +178,24 @@ void VToolCutSpline::SplineChoosed(quint32 id)
 
 void VToolCutSpline::ChangedActivDraw(const QString &newName)
 {
+    bool flag = true;
     if (nameActivDraw == newName)
     {
         currentColor = Qt::black;
-        firstSpline->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        firstSpline->setAcceptHoverEvents(true);
-        secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        secondSpline->setAcceptHoverEvents(true);
+        flag = true;
     }
     else
     {
         currentColor = Qt::gray;
-        firstSpline->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        firstSpline->setAcceptHoverEvents(false);
-        secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        secondSpline->setAcceptHoverEvents(false);
+        flag = false;
     }
+
+    firstSpline->setFlag(QGraphicsItem::ItemIsSelectable, flag);
+    firstSpline->setAcceptHoverEvents(flag);
     firstSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+
+    secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, flag);
+    secondSpline->setAcceptHoverEvents(flag);
     secondSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
     VToolPoint::ChangedActivDraw(newName);
 }
