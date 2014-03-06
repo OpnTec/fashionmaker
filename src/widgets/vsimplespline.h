@@ -56,6 +56,7 @@ public:
      * @param parent parent object.
      */
     VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
+    void ChangedActivDraw(const bool &flag);
 signals:
     /**
      * @brief Choosed send id when clicked.

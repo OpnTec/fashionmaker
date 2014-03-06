@@ -44,6 +44,13 @@ VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *f
     setAcceptHoverEvents(true);
 }
 
+void VSimpleSpline::ChangedActivDraw(const bool &flag)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, flag);
+    setAcceptHoverEvents(flag);
+    setPen(QPen(*currentColor, toPixel(widthHairLine)/ *factor));
+}
+
 void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
