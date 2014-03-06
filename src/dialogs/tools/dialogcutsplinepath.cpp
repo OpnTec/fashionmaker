@@ -34,39 +34,21 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent
       splinePathId(0)
 {
     ui->setupUi(this);
-    listWidget = ui->listWidget;
+    InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
+
+    InitOkCansel(ui);
     flagFormula = false;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogCutSplinePath::DialogAccepted);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogCutSplinePath::DialogRejected);
 
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSplinePath::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSplinePath::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCutSplinePath::ValChenged);
-
-    ShowVariable(data->DataBase());
-    connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogCutSplinePath::SizeGrowth);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogCutSplinePath::StandardTable);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogCutSplinePath::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogCutSplinePath::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogCutSplinePath::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogCutSplinePath::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogCutSplinePath::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSplinePath::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogCutSplinePath::FormulaChanged);

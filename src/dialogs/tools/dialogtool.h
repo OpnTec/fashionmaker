@@ -35,6 +35,7 @@
 #include <QLabel>
 #include <QListWidgetItem>
 #include <QRadioButton>
+#include <QDialogButtonBox>
 #include "../../container/vcontainer.h"
 
 namespace ComboMode
@@ -397,10 +398,10 @@ protected:
      * @param box combobox
      * @return id or -1 if combobox is empty
      */
-    quint32           getCurrentObjectId(QComboBox *box) const;
-    bool              ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    quint32          getCurrentObjectId(QComboBox *box) const;
+    bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
     template <typename T>
-    void              InitArrow(T *ui)
+    void             InitArrow(T *ui)
     {
         Q_CHECK_PTR(ui);
         spinBoxAngle = ui->doubleSpinBoxAngle;
@@ -412,6 +413,39 @@ protected:
         connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
         connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
         connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
+    }
+    template <typename T>
+    void             InitVariables(T *ui)
+    {
+        listWidget = ui->listWidget;
+        labelDescription = ui->labelDescription;
+        radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
+        radioButtonStandardTable = ui->radioButtonStandardTable;
+        radioButtonIncrements = ui->radioButtonIncrements;
+        radioButtonLengthLine = ui->radioButtonLengthLine;
+        radioButtonLengthArc = ui->radioButtonLengthArc;
+        radioButtonLengthCurve = ui->radioButtonLengthSpline;
+
+        connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+
+        ShowVariable(data->DataBase());
+        connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeGrowth);
+        connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::StandardTable);
+        connect(radioButtonIncrements, &QRadioButton::clicked, this, &DialogTool::Increments);
+        connect(radioButtonLengthLine, &QRadioButton::clicked, this, &DialogTool::LengthLines);
+        connect(radioButtonLengthArc, &QRadioButton::clicked, this, &DialogTool::LengthArcs);
+        connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
+    }
+    template <typename T>
+    void             InitOkCansel(T *ui)
+    {
+        bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        Q_CHECK_PTR(bOk);
+        connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
+
+        QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        Q_CHECK_PTR(bCansel);
+        connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
     }
 private:
     /**

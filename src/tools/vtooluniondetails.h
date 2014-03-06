@@ -85,6 +85,7 @@ public:
                         VPattern *doc, VContainer *data, const Document::Documents &parse,
                         const Tool::Sources &typeCreation);
     static void  PointsOnEdge(const VDetail &d, const qint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
+    static void FindJ(const qint32 &pointsD2, const VDetail &d2, const qint32 &indexD2, qint32 &j);
     /**
      * @brief GetDetailFromFile parse detail from file.
      * @param doc dom document container.

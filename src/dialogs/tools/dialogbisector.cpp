@@ -36,25 +36,15 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
 {
     ui->setupUi(this);
-    listWidget = ui->listWidget;
+    InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
+    InitOkCansel(ui);
     flagFormula = false;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogBisector::DialogAccepted);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogBisector::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
@@ -62,16 +52,8 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogBisector::ValChenged);
+    connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
 
-    ShowVariable(data->DataBase());
-    connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogBisector::SizeGrowth);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogBisector::StandardTable);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogBisector::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogBisector::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogBisector::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogBisector::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogBisector::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogBisector::FormulaChanged);

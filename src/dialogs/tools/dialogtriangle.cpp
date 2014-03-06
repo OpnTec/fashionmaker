@@ -37,12 +37,9 @@ DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogTriangle::DialogAccepted);
+    InitOkCansel(ui);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogTriangle::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxAxisP1);
     FillComboBoxPoints(ui->comboBoxAxisP2);

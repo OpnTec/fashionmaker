@@ -37,12 +37,9 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWi
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogPointOfIntersection::DialogAccepted);
+    InitOkCansel(ui);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogPointOfIntersection::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);

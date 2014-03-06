@@ -36,11 +36,7 @@ DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
     kAsm1(1), kAsm2(1), kCurve(1)
 {
     ui->setupUi(this);
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogSpline::DialogAccepted);
-
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogSpline::DialogRejected);
+    InitOkCansel(ui);
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);

@@ -488,21 +488,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
             {
                 do
                 {
-                    if (pointsD2 == 0)
-                    {
-                        VNodeDetail node1;
-                        VNodeDetail node2;
-                        d2.NodeOnEdge(indexD2, node1, node2);
-                        ptrdiff_t k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
-                        if (k == d2.RemoveEdge(indexD2).CountNode()-1)
-                        {
-                            j = 0;
-                        }
-                        else
-                        {
-                            j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
-                        }
-                    }
+                    FindJ(pointsD2, d2, indexD2, j);
                     if (pointsD2 == d2.RemoveEdge(indexD2).CountNode() -2)
                     {
                         break;
@@ -546,21 +532,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
             {
                 do
                 {
-                    if (pointsD2 == 0)
-                    {
-                        VNodeDetail node1;
-                        VNodeDetail node2;
-                        d2.NodeOnEdge(indexD2, node1, node2);
-                        ptrdiff_t k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
-                        if (k == d2.RemoveEdge(indexD2).CountNode()-1)
-                        {
-                            j = 0;
-                        }
-                        else
-                        {
-                            j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
-                        }
-                    }
+                    FindJ(pointsD2, d2, indexD2, j);
                     if (pointsD2 == d2.RemoveEdge(indexD2).CountNode()-2)
                     {
                         break;
@@ -585,6 +557,25 @@ void VToolUnionDetails::PointsOnEdge(const VDetail &d, const qint32 &index, VPoi
     d.NodeOnEdge(index, det2p1, det2p2);
     p1 = VPointF(*data->GeometricObject<const VPointF *>(det2p1.getId()));
     p2 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
+}
+
+void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const qint32 &indexD2, qint32 &j)
+{
+    if (pointsD2 == 0)
+    {
+        VNodeDetail node1;
+        VNodeDetail node2;
+        d2.NodeOnEdge(indexD2, node1, node2);
+        ptrdiff_t k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
+        if (k == d2.RemoveEdge(indexD2).CountNode()-1)
+        {
+            j = 0;
+        }
+        else
+        {
+            j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
+        }
+    }
 }
 
 QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomElement &domElement)

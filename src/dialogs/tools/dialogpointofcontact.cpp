@@ -47,13 +47,17 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     lineEditFormula = ui.lineEditFormula;
     labelEditFormula = ui.labelEditFormula;
     labelEditNamePoint = ui.labelEditNamePoint;
-    flagFormula = false;
+
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogPointOfContact::DialogAccepted);
+    Q_CHECK_PTR(bOk);
+    connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
+    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
+    Q_CHECK_PTR(bCansel);
+    connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+
+    flagFormula = false;
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogPointOfContact::DialogRejected);
 
     FillComboBoxPoints(ui.comboBoxCenter);
     FillComboBoxPoints(ui.comboBoxFirstPoint);

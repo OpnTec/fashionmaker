@@ -36,43 +36,24 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     formula(QString()), angle(0), basePointId(0)
 {
     ui->setupUi(this);
-    listWidget = ui->listWidget;
+    InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
+
+    InitOkCansel(ui);
     flagFormula = false;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogEndLine::DialogAccepted);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogEndLine::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
-
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     InitArrow(ui);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEndLine::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogEndLine::ValChenged);
-
-    ShowVariable(data->DataBase());
-    connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogEndLine::SizeGrowth);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEndLine::StandardTable);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEndLine::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEndLine::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogEndLine::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEndLine::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);

@@ -33,39 +33,22 @@ DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0)
 {
     ui->setupUi(this);
-    listWidget = ui->listWidget;
+    InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
+
+    InitOkCansel(ui);
     flagFormula = false;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogCutArc::DialogAccepted);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogCutArc::DialogRejected);
 
     FillComboBoxArcs(ui->comboBoxArc);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutArc::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutArc::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCutArc::ValChenged);
 
-    ShowVariable(data->DataBase());
-    connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogCutArc::SizeGrowth);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogCutArc::StandardTable);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogCutArc::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogCutArc::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogCutArc::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogCutArc::LengthCurves);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogCutArc::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogCutArc::FormulaChanged);

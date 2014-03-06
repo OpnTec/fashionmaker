@@ -36,12 +36,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogSplinePath::DialogAccepted);
+    InitOkCansel(ui);
     bOk->setEnabled(false);
-
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogSplinePath::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxPoint);
 

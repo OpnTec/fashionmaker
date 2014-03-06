@@ -36,17 +36,19 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
+
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogDetail::DialogAccepted);
+    Q_CHECK_PTR(bOk);
+    connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
+    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
+    Q_CHECK_PTR(bCansel);
+    connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagName = true;//We have default name of detail.
     QPalette palette = labelEditNamePoint->palette();
     palette.setColor(labelEditNamePoint->foregroundRole(), QColor(76, 76, 76));
     labelEditNamePoint->setPalette(palette);
     CheckState();
-
-    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogDetail::DialogRejected);
 
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogDetail::ObjectChanged);
     connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),

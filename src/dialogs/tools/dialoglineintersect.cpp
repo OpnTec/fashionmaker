@@ -37,12 +37,9 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent
 {
     ui->setupUi(this);
     number = 0;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogLineIntersect::DialogAccepted);
+    InitOkCansel(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogLineIntersect::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);

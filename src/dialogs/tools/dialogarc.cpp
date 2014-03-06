@@ -47,38 +47,17 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     timerF2 = new QTimer(this);
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
 
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogArc::DialogAccepted);
-
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogArc::DialogRejected);
+    InitOkCansel(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 
     CheckState();
 
-    listWidget = ui->listWidget;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
+    InitVariables(ui);
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
     connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-
-    ShowVariable(data->DataBase());
-    connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogArc::SizeGrowth);
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogArc::StandardTable);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogArc::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogArc::LengthLines);
-    connect(ui->radioButtonLineAngles, &QRadioButton::clicked, this, &DialogArc::LineAngles);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogArc::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogArc::LengthCurves);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);

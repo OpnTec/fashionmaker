@@ -38,13 +38,12 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     ui->setupUi(this);
     ui->doubleSpinBoxX->setRange(0, toMM(SceneSize));
     ui->doubleSpinBoxY->setRange(0, toMM(SceneSize));
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     labelEditNamePoint = ui->labelEditName;
+    InitOkCansel(ui);
+
     flagName = false;
     CheckState();
-    connect(bOk, &QPushButton::clicked, this, &DialogSinglePoint::DialogAccepted);
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogSinglePoint::DialogRejected);
+
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NamePointChanged);
 }
 

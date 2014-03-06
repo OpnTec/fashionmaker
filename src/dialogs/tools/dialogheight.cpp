@@ -37,12 +37,9 @@ DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogHeight::DialogAccepted);
+    InitOkCansel(ui);
     flagName = false;
     CheckState();
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogHeight::DialogRejected);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);

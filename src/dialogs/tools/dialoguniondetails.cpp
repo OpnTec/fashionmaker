@@ -34,10 +34,7 @@ DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) 
     numberP(0), p1(0), p2(0)
 {
     ui->setupUi(this);
-    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    connect(bOk, &QPushButton::clicked, this, &DialogUnionDetails::DialogAccepted);
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    connect(bCansel, &QPushButton::clicked, this, &DialogUnionDetails::DialogRejected);
+    InitOkCansel(ui);
 }
 
 DialogUnionDetails::~DialogUnionDetails()
