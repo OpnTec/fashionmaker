@@ -44,7 +44,7 @@ VToolSpline::VToolSpline(VDomDocument *doc, VContainer *data, qint64 id, const T
     path.addPath(spl->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, widthHairLine/factor));
+    this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
@@ -227,13 +227,13 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine/factor));
+    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
 }
 
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
 }
 
 void VToolSpline::RemoveReferens()
@@ -309,7 +309,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
 void VToolSpline::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QPainterPath path;
     path.addPath(spl->GetPath());
@@ -348,7 +348,7 @@ void VToolSpline::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, widthHairLine/factor));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     emit setEnabledPoint(selectable);

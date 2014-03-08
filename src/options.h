@@ -34,10 +34,19 @@
 
 #define SceneSize 50000
 
-#define PrintDPI 96
-#define toPixel(mm) ((mm / 25.4) * PrintDPI)
-#define toMM(pix) ((pix / PrintDPI) * 25.4)
-#define widthMainLine 1.2
+#define PrintDPI 96.0
+
+inline double toPixel(double mm)
+{
+    return (mm / 25.4) * PrintDPI;
+}
+
+inline double toMM(double pix)
+{
+    return (pix / PrintDPI) * 25.4;
+}
+
+#define widthMainLine 1.2 //mm
 #define widthHairLine widthMainLine/3
 
 extern const QString translationsPath;

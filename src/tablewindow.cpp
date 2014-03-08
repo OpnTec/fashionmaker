@@ -81,7 +81,7 @@ void TableWindow::AddPaper()
     shadowPaper->setBrush(QBrush(Qt::black));
     tableScene->addItem(shadowPaper);
     paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
-    paper->setPen(QPen(Qt::black, widthMainLine));
+    paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
     paper->setBrush(QBrush(Qt::white));
     tableScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
@@ -93,10 +93,10 @@ void TableWindow::AddDetail()
     {
         tableScene->clearSelection();
         VItem* Detail = listDetails[indexDetail];
-        QObject::connect(Detail, SIGNAL(itemOut(int, bool)), this, SLOT(itemOut(int, bool)));
-        QObject::connect(Detail, SIGNAL(itemColliding(QList<QGraphicsItem*>, int)), this,
-                         SLOT(itemColliding(QList<QGraphicsItem*>, int)));
-        QObject::connect(this, SIGNAL(LengthChanged()), Detail, SLOT(LengthChanged()));
+        Q_CHECK_PTR(Detail);
+        connect(Detail, &VItem::itemOut, this, &TableWindow::itemOut);
+        connect(Detail, &VItem::itemColliding, this, &TableWindow::itemColliding);
+        connect(this, &TableWindow::LengthChanged, Detail, &VItem::LengthChanged);
         Detail->setPen(QPen(Qt::black, 1));
         Detail->setBrush(QBrush(Qt::white));
         Detail->setPos(paper->boundingRect().center());
@@ -122,7 +122,16 @@ void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileNa
 {
     this->description = description;
 
-    QFileInfo fi( fileName );
+    QString file;
+    if (fileName.isEmpty())
+    {
+        file = tr("untitled");
+    }
+    else
+    {
+        file = fileName;
+    }
+    QFileInfo fi( file );
     this->fileName = fi.baseName();
 
     this->listDetails = listDetails;
@@ -220,22 +229,22 @@ void TableWindow::saveScene()
     case 1: //png
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PngFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 2: //pdf
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PdfFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 3: //eps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 4: //ps
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
-        paper->setPen(QPen(Qt::black, widthMainLine));
+        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     default:
         qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
@@ -314,7 +323,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
                             Q_CHECK_PTR(bitem);
-                            bitem->setPen(QPen(Qt::black, widthMainLine));
+                            bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
                             listCollidingItems.removeAt(i);
                         }
                     }
@@ -323,7 +332,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
                     Q_CHECK_PTR(bitem);
-                    bitem->setPen(QPen(Qt::black, widthMainLine));
+                    bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
                     listCollidingItems.clear();
                     collidingItems = true;
                 }
@@ -425,6 +434,7 @@ void TableWindow::SvgFile(const QString &name) const
     QSvgGenerator generator;
     generator.setFileName(name);
     generator.setSize(paper->rect().size().toSize());
+    generator.setViewBox(paper->rect());
     generator.setTitle("Valentina pattern");
     generator.setDescription(description);
     generator.setResolution(PrintDPI);
@@ -432,7 +442,7 @@ void TableWindow::SvgFile(const QString &name) const
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, 1.2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthHairLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
@@ -449,7 +459,7 @@ void TableWindow::PngFile(const QString &name) const
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     image.save(name);
@@ -473,7 +483,7 @@ void TableWindow::PdfFile(const QString &name) const
     }
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, widthMainLine, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
@@ -509,31 +519,26 @@ void TableWindow::PsFile(const QString &name) const
 
 //TODO delete parametr name and use last parameter in string list instead.
 void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
-{
-    QProcess proc;
-    QString program;
-
-#ifdef Q_OS_WIN32
-    program = "pdftops.exe";
-#else
-    program = "pdftops";
-#endif
-
+{    
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-    proc.start(program, params);
+    QProcess proc;
+#ifdef Q_OS_WIN
+    proc.start("pdftops.exe", params);
+#else
+    proc.start("pdftops", params);
+#endif
     proc.waitForFinished(15000);
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
-    qDebug() << proc.errorString();
 
     QFile f(name);
     if (!f.exists())
     {
-        QMessageBox msgBox(QMessageBox::Critical, "Critical error!", "Creating file '"+name+"' failed!",
-                    QMessageBox::Ok | QMessageBox::Default);
+        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(name).arg(proc.errorString());
+        QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
 }

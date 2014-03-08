@@ -34,11 +34,11 @@ VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *fa
 {
     if (factor == 0)
     {
-        setPen(QPen(Qt::black, widthHairLine));
+        setPen(QPen(Qt::black, toPixel(widthHairLine)));
     }
     else
     {
-        setPen(QPen(Qt::black, widthHairLine/ *factor));
+        setPen(QPen(Qt::black, toPixel(widthHairLine)/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -58,11 +58,11 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == 0)
     {
-        this->setPen(QPen(*currentColor, widthMainLine));
+        this->setPen(QPen(*currentColor, toPixel(widthMainLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, widthMainLine/ *factor));
+        this->setPen(QPen(*currentColor, toPixel(widthMainLine)/ *factor));
     }
 }
 
@@ -71,10 +71,10 @@ void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == 0)
     {
-        this->setPen(QPen(*currentColor, widthHairLine));
+        this->setPen(QPen(*currentColor, toPixel(widthHairLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, widthHairLine/ *factor));
+        this->setPen(QPen(*currentColor, toPixel(widthHairLine)/ *factor));
     }
 }

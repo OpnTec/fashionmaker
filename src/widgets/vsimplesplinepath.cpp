@@ -45,11 +45,11 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthMainLine/ *factor));
+    this->setPen(QPen(currentColor, toPixel(widthMainLine)/ *factor));
 }
 
 void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, widthHairLine/ *factor));
+    this->setPen(QPen(currentColor, toPixel(widthHairLine)/ *factor));
 }
