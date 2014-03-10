@@ -324,6 +324,150 @@
 												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
+										<xs:element name="front_neck_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_neck_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_upper-bust_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_upper-bust_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_waist_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_waist_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_upper-hip_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_upper-hip_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_hip_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_hip_arc">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="chest_slope">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_slope">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_waist_slope">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_waist_slope">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front-neck_to_upper-chest_height">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front-neck_to_bust_height">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="ignore" type="xs:boolean"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>

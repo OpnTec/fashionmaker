@@ -114,10 +114,43 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::ActionNewDraw()
 {
-    const QString nameDraw = PatternPieceName(QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1));
-    if (nameDraw.isEmpty())
+    QString nameDraw;
+    if (comboBoxDraws->count() == 0)
     {
-        return;
+        DialogMeasurements measurements(this);
+        measurements.exec();
+        if (measurements.type() == Measurements::Standard)
+        {
+            DialogStandardMeasurements stMeasurements(this);
+            if (stMeasurements.exec() == QDialog::Accepted)
+            {
+                nameDraw = stMeasurements.name();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            DialogIndividualMeasurements indMeasurements(this);
+            if (indMeasurements.exec() == QDialog::Accepted)
+            {
+                nameDraw = indMeasurements.name();
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+    else
+    {
+        nameDraw = PatternPieceName(QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1));
+        if (nameDraw.isEmpty())
+        {
+            return;
+        }
     }
     if (doc->appendDraw(nameDraw) == false)
     {

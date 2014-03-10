@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   vstandardmeasurements.h
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   8 3, 2014
  **
  **  @brief
  **  @copyright
@@ -26,36 +26,15 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef VSTANDARDMEASUREMENTS_H
+#define VSTANDARDMEASUREMENTS_H
 
-#include "tools/dialogalongline.h"
-#include "tools/dialogarc.h"
-#include "tools/dialogbisector.h"
-#include "tools/dialogdetail.h"
-#include "tools/dialogendline.h"
-#include "tools/dialogline.h"
-#include "tools/dialoglineintersect.h"
-#include "tools/dialognormal.h"
-#include "tools/dialogpointofcontact.h"
-#include "tools/dialogshoulderpoint.h"
-#include "tools/dialogsinglepoint.h"
-#include "tools/dialogspline.h"
-#include "tools/dialogsplinepath.h"
-#include "tools/dialogheight.h"
-#include "tools/dialogcutarc.h"
-#include "tools/dialogcutspline.h"
-#include "tools/dialogcutsplinepath.h"
-#include "tools/dialoguniondetails.h"
-#include "tools/dialogtriangle.h"
-#include "tools/dialogpointofintersection.h"
+#include "vdomdocument.h"
 
-#include "app/dialoghistory.h"
-#include "app/dialogincrements.h"
-#include "app/configdialog.h"
-#include "app/dialogpatternproperties.h"
-#include "app/dialogmeasurements.h"
-#include "app/dialogindividualmeasurements.h"
-#include "app/dialogstandardmeasurements.h"
+class VStandardMeasurements:public VDomDocument
+{
+public:
+    VStandardMeasurements(VContainer *data);
+};
 
-#endif // DIALOGS_H
+#endif // VSTANDARDMEASUREMENTS_H

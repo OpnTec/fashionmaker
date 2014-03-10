@@ -58,6 +58,8 @@
 			<back_slope name="" value="0.0" gui_text="" description="" ignore="true"/>
 			<front_waist_slope name="" value="0.0" gui_text="" description="" ignore="true"/>
 			<back_waist_slope name="" value="0.0" gui_text="" description="" ignore="true"/>
+			<front-neck_to_upper-chest_height name="" value="0.0" gui_text="" description="" ignore="true"/>
+			<front-neck_to_bust_height name="" value="0.0" gui_text="" description="" ignore="true"/>
 		</torso>
 		<arm>
 			<armscye_girth name="" value="0.0" gui_text="" description="" ignore="true"/>

@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Pattern peace name</string>
+        <string>Pattern piece name</string>
        </property>
       </widget>
      </item>
@@ -54,7 +54,9 @@
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset theme="document-open"/>
+          <iconset theme="document-open">
+           <normaloff/>
+          </iconset>
          </property>
         </widget>
        </item>
@@ -88,7 +90,9 @@
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset theme="document-new"/>
+          <iconset theme="document-new">
+           <normaloff/>
+          </iconset>
          </property>
         </widget>
        </item>

@@ -25,7 +25,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Pattern peace name</string>
+        <string>Pattern piece name</string>
        </property>
        <property name="margin">
         <number>0</number>
