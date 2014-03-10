@@ -39,10 +39,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
     TextDelegate *textDelegate = new TextDelegate(ui->tableWidgetIncrement);
-    Q_CHECK_PTR(textDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
-    Q_CHECK_PTR(doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);

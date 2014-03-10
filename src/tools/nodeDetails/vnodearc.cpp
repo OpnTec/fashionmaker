@@ -57,7 +57,6 @@ void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc
     if (parse == Document::FullParse)
     {
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
-        Q_CHECK_PTR(arc);
         doc->AddTool(id, arc);
         if (idTool != 0)
         {

@@ -72,13 +72,11 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             else
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(det.at(i).getId()));
-                Q_CHECK_PTR(point);
                 point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                 angle);
                 idObject = data->AddGObject(point);
                 VPointF *point1 = new VPointF(*point);
-                Q_CHECK_PTR(point1);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
                 VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
@@ -99,7 +97,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 VPointF p2 = VPointF(arc->GetP2().x(), arc->GetP2().y(), "A", 0, 0);
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 VPointF *center = new VPointF(arc->GetCenter());
-                Q_CHECK_PTR(center);
                 BiasRotatePoint(center, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                 angle);
 
@@ -111,12 +108,10 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(),
                                  l1.angle(), QString().setNum(l1.angle()), l2.angle(),
                                  QString().setNum(l2.angle()));
-                Q_CHECK_PTR(arc1);
                 arc1->setMode(Draw::Modeling);
                 idObject = data->AddGObject(arc1);
 
                 VArc *arc2 = new VArc(*arc1);
-                Q_CHECK_PTR(arc2);
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
@@ -135,7 +130,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 const VSpline *spline = data->GeometricObject<const VSpline *>(det.at(i).getId());
 
                 VPointF *p1 = new VPointF(spline->GetP1());
-                Q_CHECK_PTR(p1);
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 quint32 idP1 = data->AddGObject(p1);
 
@@ -146,17 +140,14 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
 
                 VPointF *p4 = new VPointF(spline->GetP4());
-                Q_CHECK_PTR(p4);
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 quint32 idP4 = data->AddGObject(p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
-                Q_CHECK_PTR(spl);
                 idObject = data->AddGObject(spl);
 
                 VSpline *spl1 = new VSpline(*spl);
-                Q_CHECK_PTR(spl1);
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
                 VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
@@ -172,7 +163,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             else
             {
                 VSplinePath *path = new VSplinePath();
-                Q_CHECK_PTR(path);
                 path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
                 qint32 k = splinePath->getMaxCountPoints();
@@ -183,7 +173,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                             splinePath->at(i).KAsm1(), splinePath->getKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
-                    Q_CHECK_PTR(p1);
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     quint32 idP1 = data->AddGObject(p1);
@@ -198,7 +187,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                                     angle);
 
                     VPointF *p4 = new VPointF(spline.GetP4());
-                    Q_CHECK_PTR(p4);
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     quint32 idP4 = data->AddGObject(p4);
@@ -221,7 +209,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 idObject = data->AddGObject(path);
 
                 VSplinePath *path1 = new VSplinePath(*path);
-                Q_CHECK_PTR(path1);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
                 VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Tool::FromGui, idTool, tool);
@@ -246,7 +233,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(det.at(i).getId()));
-                Q_CHECK_PTR(point);
                 point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 ++idCount;
@@ -266,7 +252,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VPointF p2 = VPointF(arc->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 VPointF *center = new VPointF(arc->GetCenter());
-                Q_CHECK_PTR(center);
                 BiasRotatePoint(center, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                 angle);
 
@@ -277,7 +262,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 data->UpdateGObject(idDetail+idCount, center);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
-                Q_CHECK_PTR(arc1);
                 arc1->setMode(Draw::Modeling);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, arc1);
@@ -293,7 +277,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 const VSpline *spline = data->GeometricObject<const VSpline *>(det.at(i).getId());
 
                 VPointF *p1 = new VPointF(spline->GetP1());
-                Q_CHECK_PTR(p1);
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, p1);
@@ -305,7 +288,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 BiasRotatePoint(&p3, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
 
                 VPointF *p4 = new VPointF(spline->GetP4());
-                Q_CHECK_PTR(p4);
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, p4);
@@ -313,7 +295,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
 
-                Q_CHECK_PTR(spl);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, spl);
 
@@ -326,7 +307,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VSplinePath *path = new VSplinePath();
-                Q_CHECK_PTR(path);
                 path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
                 Q_CHECK_PTR(splinePath);
@@ -338,7 +318,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                             splinePath->at(i).KAsm1(), splinePath->getKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
-                    Q_CHECK_PTR(p1);
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     ++idCount;
@@ -354,7 +333,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                                     angle);
 
                     VPointF *p4 = new VPointF(spline.GetP4());
-                    Q_CHECK_PTR(p4);
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
                     ++idCount;

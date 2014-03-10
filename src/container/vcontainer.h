@@ -65,7 +65,6 @@ public:
     void CopyGObject(const VContainer &data, const quint32 &id)
     {
         T *obj = new T(*data.GeometricObject<const T *>(id));
-        Q_CHECK_PTR(obj);
         UpdateGObject(id, obj);
     }
    /**

@@ -87,7 +87,6 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
     Q_CHECK_PTR(dialogTool);
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
-    Q_CHECK_PTR(path);
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
         doc->IncrementReferens((*path)[i].P().id());

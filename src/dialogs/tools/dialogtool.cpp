@@ -276,6 +276,7 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
     Q_CHECK_PTR(lineEdit);
     Q_CHECK_PTR(listWidget);
     QListWidgetItem *item = listWidget->currentItem();
+    Q_CHECK_PTR(item);
     int pos = lineEdit->cursorPosition();
     lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
     lineEdit->setFocus();

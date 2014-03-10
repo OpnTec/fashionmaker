@@ -32,7 +32,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr)
 {
     contentsWidget = new QListWidget;
-    Q_CHECK_PTR(contentsWidget);
     contentsWidget->setViewMode(QListView::IconMode);
     contentsWidget->setIconSize(QSize(96, 84));
     contentsWidget->setMovement(QListView::Static);
@@ -41,20 +40,14 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     contentsWidget->setSpacing(12);
 
     pagesWidget = new QStackedWidget;
-    Q_CHECK_PTR(pagesWidget);
     configurationPage = new ConfigurationPage();
-    Q_CHECK_PTR(configurationPage);
     pagesWidget->addWidget(configurationPage);
     patternPage = new PatternPage();
-    Q_CHECK_PTR(patternPage);
     pagesWidget->addWidget(patternPage);
 
     QPushButton *applyButton = new QPushButton(tr("Apply"));
-    Q_CHECK_PTR(applyButton);
     QPushButton *canselButton = new QPushButton(tr("&Cancel"));
-    Q_CHECK_PTR(canselButton);
     QPushButton *okButton = new QPushButton(tr("&Ok"));
-    Q_CHECK_PTR(okButton);
 
     createIcons();
     contentsWidget->setCurrentRow(0);
@@ -64,19 +57,16 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     connect(okButton, &QPushButton::clicked, this, &ConfigDialog::Ok);
 
     QHBoxLayout *horizontalLayout = new QHBoxLayout;
-    Q_CHECK_PTR(horizontalLayout);
     horizontalLayout->addWidget(contentsWidget);
     horizontalLayout->addWidget(pagesWidget, 1);
 
     QHBoxLayout *buttonsLayout = new QHBoxLayout;
-    Q_CHECK_PTR(buttonsLayout);
     buttonsLayout->addStretch(1);
     buttonsLayout->addWidget(applyButton);
     buttonsLayout->addWidget(canselButton);
     buttonsLayout->addWidget(okButton);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    Q_CHECK_PTR(mainLayout);
     mainLayout->addLayout(horizontalLayout);
     mainLayout->addStretch(1);
     mainLayout->addSpacing(12);
@@ -107,14 +97,12 @@ void ConfigDialog::closeEvent(QCloseEvent *event)
 void ConfigDialog::createIcons()
 {
     QListWidgetItem *configButton = new QListWidgetItem(contentsWidget);
-    Q_CHECK_PTR(configButton);
     configButton->setIcon(QIcon("://icon/config.png"));
     configButton->setText(tr("Configuration"));
     configButton->setTextAlignment(Qt::AlignHCenter);
     configButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
     QListWidgetItem *patternButton = new QListWidgetItem(contentsWidget);
-    Q_CHECK_PTR(patternButton);
     patternButton->setIcon(QIcon("://icon/pattern_config.png"));
     patternButton->setText(tr("Pattern"));
     patternButton->setTextAlignment(Qt::AlignHCenter);

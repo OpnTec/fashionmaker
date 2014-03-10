@@ -68,7 +68,6 @@ void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idP
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
-        Q_CHECK_PTR(point);
         doc->AddTool(id, point);
         if (idTool != 0)
         {

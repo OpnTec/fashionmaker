@@ -112,7 +112,6 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &r
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
-    Q_CHECK_PTR(arc);
     quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {

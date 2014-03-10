@@ -166,7 +166,6 @@ void MainWindow::ActionNewDraw()
     const quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5,
                                                        10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
-    Q_CHECK_PTR(spoint);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -218,7 +217,6 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, this);
-        Q_CHECK_PTR(dialogTool);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
@@ -1001,7 +999,6 @@ void MainWindow::ActionTable(bool checked)
     if (checked)
     {
         dialogTable = new DialogIncrements(pattern, doc, this);
-        Q_CHECK_PTR(dialogTable);
         connect(dialogTable, &DialogIncrements::DialogClosed, this, &MainWindow::ClosedActionTable);
         dialogTable->show();
     }
@@ -1024,7 +1021,6 @@ void MainWindow::ActionHistory(bool checked)
     if (checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
-        Q_CHECK_PTR(dialogHistory);
         dialogHistory->setWindowFlags(Qt::Window);
         connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
@@ -1284,7 +1280,6 @@ void MainWindow::CreateMenus()
         ui->menuFile->insertAction(ui->actionExit, recentFileActs[i]);
     }
     separatorAct = new QAction(this);
-    Q_CHECK_PTR(separatorAct);
     separatorAct->setSeparator(true);
     ui->menuFile->insertAction(ui->actionExit, separatorAct);
     UpdateRecentFileActions();
@@ -1315,7 +1310,6 @@ void MainWindow::CreateActions()
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         recentFileActs[i] = new QAction(this);
-        Q_CHECK_PTR(recentFileActs[i]);
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
     }
@@ -1340,7 +1334,6 @@ void MainWindow::InitAutoSave()
         }
 
         autoSaveTimer = new QTimer(this);
-        Q_CHECK_PTR(autoSaveTimer);
         autoSaveTimer->setTimerType(Qt::VeryCoarseTimer);
         connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
         autoSaveTimer->start(autoTime*60000);
@@ -1350,7 +1343,6 @@ void MainWindow::InitAutoSave()
 QString MainWindow::PatternPieceName(const QString &text)
 {
     QInputDialog *dlg = new QInputDialog(this);
-    Q_CHECK_PTR(dlg);
     dlg->setInputMode( QInputDialog::TextInput );
     dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);

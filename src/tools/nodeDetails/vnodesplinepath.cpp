@@ -59,7 +59,6 @@ void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint3
     if (parse == Document::FullParse)
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
-        Q_CHECK_PTR(splPath);
         doc->AddTool(id, splPath);
         const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
         const QVector<VSplinePoint> *points = path->GetPoint();

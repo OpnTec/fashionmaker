@@ -45,13 +45,11 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
     Q_ASSERT_X(splPath2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
     firstSpline = new VSimpleSpline(splPath1id, &currentColor, &factor);
-    Q_CHECK_PTR(firstSpline);
     RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
     secondSpline = new VSimpleSpline(splPath2id, &currentColor, &factor);
-    Q_CHECK_PTR(secondSpline);
     RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
@@ -106,7 +104,6 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
 
         const QPointF point = splPath->CutSplinePath(toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
         VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-        Q_CHECK_PTR(p);
         if (typeCreation == Tool::FromGui)
         {
             id = data->AddGObject(p);
@@ -125,9 +122,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
         const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
 
         VSplinePath *splPath1 = new VSplinePath();
-        Q_CHECK_PTR(splPath1);
         VSplinePath *splPath2 = new VSplinePath();
-        Q_CHECK_PTR(splPath2);
         if (typeCreation == Tool::FromGui)
         {
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
@@ -220,7 +215,6 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
         {
             VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
                                                                splPath2id, typeCreation);
-            Q_CHECK_PTR(point);
             scene->addItem(point);
             connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);

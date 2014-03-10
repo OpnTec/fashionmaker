@@ -44,13 +44,11 @@ VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &i
     Q_ASSERT_X(spl2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
     firstSpline = new VSimpleSpline(spl1id, &currentColor, &factor);
-    Q_CHECK_PTR(firstSpline);
     RefreshSpline(firstSpline, spl1id, SimpleSpline::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
 
     secondSpline = new VSimpleSpline(spl2id, &currentColor, &factor);
-    Q_CHECK_PTR(secondSpline);
     RefreshSpline(secondSpline, spl2id, SimpleSpline::FirstPoint);
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
@@ -108,35 +106,29 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
         if (typeCreation == Tool::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
             id = data->AddGObject(p);
 
             VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-            Q_CHECK_PTR(spline1);
             spl1id = data->AddGObject(spline1);
             data->AddLengthSpline(spline1->name(), toMM(spline1->GetLength()));
 
             VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-            Q_CHECK_PTR(spline2);
             spl2id = data->AddGObject(spline2);
             data->AddLengthSpline(spline2->name(), toMM(spline2->GetLength()));
         }
         else
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
             data->UpdateGObject(id, p);
 
             spl1id = id + 1;
             spl2id = id + 2;
 
             VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-            Q_CHECK_PTR(spline1);
             data->UpdateGObject(spl1id, spline1);
             data->AddLengthSpline(spline1->name(), toMM(spline1->GetLength()));
 
             VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-            Q_CHECK_PTR(spline2);
             data->UpdateGObject(spl2id, spline2);
             data->AddLengthSpline(spline2->name(), toMM(spline2->GetLength()));
 

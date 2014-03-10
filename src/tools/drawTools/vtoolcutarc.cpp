@@ -44,13 +44,11 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
     Q_ASSERT_X(arc2id > 0, Q_FUNC_INFO, "arc2id <= 0");
 
     firstArc = new VSimpleArc(arc1id, &currentColor, &factor);
-    Q_CHECK_PTR(firstArc);
     RefreshArc(firstArc, arc1id, SimpleArc::ForthPoint);
     firstArc->setParentItem(this);
     connect(firstArc, &VSimpleArc::Choosed, this, &VToolCutArc::ArcChoosed);
 
     secondArc = new VSimpleArc(arc2id, &currentColor, &factor);
-    Q_CHECK_PTR(secondArc);
     RefreshArc(secondArc, arc2id, SimpleArc::FirstPoint);
     secondArc->setParentItem(this);
     connect(secondArc, &VSimpleArc::Choosed, this, &VToolCutArc::ArcChoosed);
@@ -108,32 +106,26 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
         if (typeCreation == Tool::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
             id = data->AddGObject(p);
 
             VArc * ar1 = new VArc(arc1);
-            Q_CHECK_PTR(ar1);
             arc1id = data->AddGObject(ar1);
 
             VArc * ar2 = new VArc(arc2);
-            Q_CHECK_PTR(ar2);
             arc2id = data->AddGObject(ar2);
         }
         else
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
             data->UpdateGObject(id, p);
 
             arc1id = id + 1;
             arc2id = id + 2;
 
             VArc * ar1 = new VArc(arc1);
-            Q_CHECK_PTR(ar1);
             data->UpdateGObject(arc1id, ar1);
 
             VArc * ar2 = new VArc(arc2);
-            Q_CHECK_PTR(ar2);
             data->UpdateGObject(arc2id, ar2);
 
             if (parse != Document::FullParse)

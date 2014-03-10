@@ -104,7 +104,6 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);
-        Q_CHECK_PTR(line);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);

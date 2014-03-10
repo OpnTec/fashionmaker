@@ -402,7 +402,6 @@ bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
 void VPattern::FullUpdateTree()
 {
     VMainGraphicsScene *scene = new VMainGraphicsScene();
-    Q_CHECK_PTR(scene);
     try
     {
         Parse(Document::LiteParse, scene, scene);
@@ -482,7 +481,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
 {
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
-    VMainGraphicsScene *scene = 0;
+    VMainGraphicsScene *scene = nullptr;
     if (mode == Draw::Calculation)
     {
         scene = sceneDraw;
@@ -652,7 +651,6 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 if (parse == Document::FullParse)
                 {
                     spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
-                    Q_CHECK_PTR(spoint);
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -1042,7 +1040,6 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 id = GetParametrId(domElement);
                 const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
                 VSplinePath *path = new VSplinePath(kCurve);
-                Q_CHECK_PTR(path);
 
                 const QDomNodeList nodeList = domElement.childNodes();
                 const qint32 num = nodeList.size();
@@ -1088,7 +1085,6 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
-                Q_CHECK_PTR(spl);
                 spl->setIdObject(idObject);
                 spl->setMode(Draw::Modeling);
                 data->UpdateGObject(id, spl);
@@ -1108,7 +1104,6 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
-                Q_CHECK_PTR(path);
                 path->setIdObject(idObject);
                 path->setMode(Draw::Modeling);
                 data->UpdateGObject(id, path);
@@ -1164,7 +1159,6 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
-                Q_CHECK_PTR(arc);
                 arc->setIdObject(idObject);
                 arc->setMode(Draw::Modeling);
                 data->UpdateGObject(id, arc);

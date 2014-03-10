@@ -67,7 +67,6 @@ public:
     {
         //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
-        Q_CHECK_PTR(node);
         node->setMode(Draw::Modeling);
         return data->AddGObject(node);
     }

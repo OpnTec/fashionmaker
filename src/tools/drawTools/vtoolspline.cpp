@@ -111,7 +111,6 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
-    Q_CHECK_PTR(spline);
     quint32 id = _id;
     if (typeCreation == Tool::FromGui)
     {

@@ -41,10 +41,8 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(option);
     Q_UNUSED(index);
     QLineEdit *editor = new QLineEdit(parent);
-    Q_CHECK_PTR(editor);
     QRegExp re("^(([^+ -/()\\^*%:;\"\'=.,><0-9]){1,1}[^+ -/()\\^*%:;\"\'=><]([0-9]){0,}){0,}$");
     QRegExpValidator *v = new QRegExpValidator(re);
-    Q_CHECK_PTR(v);
     editor->setValidator( v );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);
     return editor;
