@@ -474,7 +474,7 @@ void TableWindow::PdfFile(const QString &name) const
     qreal x=0, y=0, w=0, h=0;
     r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
     printer.setResolution(PrintDPI);
-    printer.setPaperSize ( QSizeF(toMM(w), toMM(h)), QPrinter::Millimeter );
+    printer.setPaperSize ( QSizeF(fromPixel(w), fromPixel(h)), QPrinter::Millimeter );
     QPainter painter;
     if (painter.begin( &printer ) == false)
     { // failed to open file

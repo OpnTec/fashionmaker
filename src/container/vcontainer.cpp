@@ -239,7 +239,7 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value)
 void VContainer::AddLengthArc(const quint32 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
-    lengthArcs[arc->name()] = toMM(arc->GetLength());
+    lengthArcs[arc->name()] = fromPixel(arc->GetLength());
 }
 
 void VContainer::AddLineAngle(const QString &name, const qreal &value)
@@ -352,7 +352,7 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     const VPointF *first = GeometricObject<const VPointF *>(firstPointId);
     const VPointF *second = GeometricObject<const VPointF *>(secondPointId);
-    AddLengthLine(nameLine, toMM(QLineF(first->toQPointF(), second->toQPointF()).length()));
+    AddLengthLine(nameLine, fromPixel(QLineF(first->toQPointF(), second->toQPointF()).length()));
     nameLine = GetNameLineAngle(firstPointId, secondPointId);
     AddLineAngle(nameLine, QLineF(first->toQPointF(), second->toQPointF()).angle());
 }

@@ -107,8 +107,8 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
     if (idTool != 0)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -124,8 +124,8 @@ void VNodePoint::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, idNode);
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         if (idTool != 0)
         {
             doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -171,8 +171,8 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(toMM(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(toMM(my)));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(fromPixel(mx)));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(fromPixel(my)));
         emit toolhaveChange();
     }
 }

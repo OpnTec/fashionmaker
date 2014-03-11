@@ -33,7 +33,8 @@
 #include "tablewindow.h"
 #include "options.h"
 
-Valentina::Units patternUnit = Valentina::Cm;
+//Default pattern unit.
+Valentina::Units patternUnit = Valentina::Mm;
 
 #ifdef Q_OS_WIN
     const QString translationsPath = QString("/translations");

@@ -168,8 +168,8 @@ void VToolLineIntersect::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrP1Line1, p1Line1);
     doc->SetAttribute(domElement, AttrP2Line1, p2Line1);
@@ -186,8 +186,8 @@ void VToolLineIntersect::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrP1Line1, p1Line1);
         doc->SetAttribute(domElement, AttrP2Line1, p2Line1);
         doc->SetAttribute(domElement, AttrP1Line2, p1Line2);

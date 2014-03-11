@@ -34,21 +34,6 @@
 
 #define SceneSize 50000
 
-#define PrintDPI 96.0
-
-inline double toPixel(double mm)
-{
-    return (mm / 25.4) * PrintDPI;
-}
-
-inline double toMM(double pix)
-{
-    return (pix / PrintDPI) * 25.4;
-}
-
-#define widthMainLine 1.2 //mm
-#define widthHairLine widthMainLine/3
-
 extern const QString translationsPath;
 
 namespace Valentina
@@ -117,5 +102,50 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Draws )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Units )
 
 extern Valentina::Units patternUnit;
+
+#define PrintDPI 96.0
+
+inline double toPixel(double unit)
+{
+    double result = 0;
+    switch (patternUnit)
+    {
+        case Valentina::Mm:
+            result = (unit / 25.4) * PrintDPI;
+            break;
+        case Valentina::Cm:
+            result = ((unit * 10.0) / 25.4) * PrintDPI;
+            break;
+        case Valentina::In:
+            result = unit * PrintDPI;
+            break;
+        default:
+            break;
+    }
+    return result;
+}
+
+inline double fromPixel(double pix)
+{
+    double result = 0;
+    switch (patternUnit)
+    {
+        case Valentina::Mm:
+            result = (pix / PrintDPI) * 25.4;
+            break;
+        case Valentina::Cm:
+            result = ((pix / PrintDPI) * 25.4) / 10.0;
+            break;
+        case Valentina::In:
+            result = pix / PrintDPI;
+            break;
+        default:
+            break;
+    }
+    return result;
+}
+
+#define widthMainLine 1.2 //mm
+#define widthHairLine widthMainLine/3
 
 #endif // OPTIONS_H

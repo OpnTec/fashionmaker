@@ -621,8 +621,8 @@ void MainWindow::currentDrawChanged( int index )
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
     QString string = QString("%1, %2")
-                            .arg(static_cast<qint32>(toMM(scenePos.x())))
-                            .arg(static_cast<qint32>(toMM(scenePos.y())));
+                            .arg(static_cast<qint32>(fromPixel(scenePos.x())))
+                            .arg(static_cast<qint32>(fromPixel(scenePos.y())));
     mouseCoordinate->setText(string);
 }
 

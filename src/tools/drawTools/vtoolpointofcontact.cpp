@@ -191,8 +191,8 @@ void VToolPointOfContact::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrRadius, arcRadius);
     doc->SetAttribute(domElement, AttrCenter, center);
@@ -209,8 +209,8 @@ void VToolPointOfContact::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrRadius, arcRadius);
         doc->SetAttribute(domElement, AttrCenter, center);
         doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);

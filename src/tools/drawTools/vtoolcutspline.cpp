@@ -110,11 +110,11 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
 
             VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
             spl1id = data->AddGObject(spline1);
-            data->AddLengthSpline(spline1->name(), toMM(spline1->GetLength()));
+            data->AddLengthSpline(spline1->name(), fromPixel(spline1->GetLength()));
 
             VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
             spl2id = data->AddGObject(spline2);
-            data->AddLengthSpline(spline2->name(), toMM(spline2->GetLength()));
+            data->AddLengthSpline(spline2->name(), fromPixel(spline2->GetLength()));
         }
         else
         {
@@ -126,11 +126,11 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
 
             VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
             data->UpdateGObject(spl1id, spline1);
-            data->AddLengthSpline(spline1->name(), toMM(spline1->GetLength()));
+            data->AddLengthSpline(spline1->name(), fromPixel(spline1->GetLength()));
 
             VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
             data->UpdateGObject(spl2id, spline2);
-            data->AddLengthSpline(spline2->name(), toMM(spline2->GetLength()));
+            data->AddLengthSpline(spline2->name(), fromPixel(spline2->GetLength()));
 
             if (parse != Document::FullParse)
             {
@@ -204,8 +204,8 @@ void VToolCutSpline::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
     doc->SetAttribute(domElement, AttrSpline, splineId);
@@ -220,8 +220,8 @@ void VToolCutSpline::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrSpline, splineId);
     }

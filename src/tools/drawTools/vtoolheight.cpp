@@ -157,8 +157,8 @@ void VToolHeight::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     doc->SetAttribute(domElement, AttrBasePoint, basePointId);
@@ -176,8 +176,8 @@ void VToolHeight::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
         doc->SetAttribute(domElement, AttrBasePoint, basePointId);
         doc->SetAttribute(domElement, AttrP1Line, p1LineId);

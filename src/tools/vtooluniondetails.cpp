@@ -657,8 +657,8 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
     QDomElement nod = doc->createElement(TagNode);
 
     doc->SetAttribute(nod, AttrIdObject, node.getId());
-    doc->SetAttribute(nod, AttrMx, toMM(node.getMx()));
-    doc->SetAttribute(nod, AttrMy, toMM(node.getMy()));
+    doc->SetAttribute(nod, AttrMx, fromPixel(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, fromPixel(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
         doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);

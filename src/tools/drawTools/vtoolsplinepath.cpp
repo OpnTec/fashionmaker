@@ -102,12 +102,12 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
     if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(path);
-        data->AddLengthSpline(path->name(), toMM(path->GetLength()));
+        data->AddLengthSpline(path->name(), fromPixel(path->GetLength()));
     }
     else
     {
         data->UpdateGObject(id, path);
-        data->AddLengthSpline(path->name(), toMM(path->GetLength()));
+        data->AddLengthSpline(path->name(), fromPixel(path->GetLength()));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

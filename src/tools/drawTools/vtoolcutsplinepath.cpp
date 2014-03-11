@@ -159,10 +159,10 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             splPath1id = data->AddGObject(splPath1);
-            data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), fromPixel(splPath1->GetLength()));
 
             splPath2id = data->AddGObject(splPath2);
-            data->AddLengthSpline(splPath2->name(), toMM(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), fromPixel(splPath2->GetLength()));
         }
         else
         {
@@ -200,10 +200,10 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             data->UpdateGObject(splPath1id, splPath1);
-            data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), fromPixel(splPath1->GetLength()));
 
             data->UpdateGObject(splPath2id, splPath2);
-            data->AddLengthSpline(splPath2->name(), toMM(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), fromPixel(splPath2->GetLength()));
 
             if (parse != Document::FullParse)
             {
@@ -278,8 +278,8 @@ void VToolCutSplinePath::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
     doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
@@ -294,8 +294,8 @@ void VToolCutSplinePath::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
     }

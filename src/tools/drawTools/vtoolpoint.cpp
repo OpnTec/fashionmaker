@@ -62,8 +62,8 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, toMM(mx));
-        doc->SetAttribute(domElement, AttrMy, toMM(my));
+        doc->SetAttribute(domElement, AttrMx, fromPixel(mx));
+        doc->SetAttribute(domElement, AttrMy, fromPixel(my));
         emit toolhaveChange();
     }
 }
