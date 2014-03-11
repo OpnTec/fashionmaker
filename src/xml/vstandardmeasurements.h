@@ -30,11 +30,20 @@
 #define VSTANDARDMEASUREMENTS_H
 
 #include "vdomdocument.h"
+#include "../options.h"
 
-class VStandardMeasurements:public VDomDocument
+class VStandardMeasurements:public QObject, public VDomDocument
 {
+    Q_OBJECT
 public:
     VStandardMeasurements(VContainer *data);
+    Valentina::Units Unit();
+    QString Description();
+    void Measurements();
+    void SetSize();
+    void SetHeight();
+public slots:
+    void Update();
 };
 
 #endif // VSTANDARDMEASUREMENTS_H

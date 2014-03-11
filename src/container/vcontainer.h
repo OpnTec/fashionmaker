@@ -166,11 +166,11 @@ public:
      */
     quint32              AddDetail(VDetail detail);
     /**
-     * @brief AddStandardTableCell add new row of standard table
+     * @brief AddStandardTableRow add new row of standard table
      * @param name name of row of standard table
-     * @param cell row of standard table
+     * @param row row of standard table
      */
-    void                 AddStandardTableCell(const QString& name, const VStandardTableRow &cell);
+    void                 AddStandardTableRow(const QString& name, const VStandardTableRow &row);
     /**
      * @brief AddIncrementTableRow add new row of increment table
      * @param name name of new row of increment table
@@ -252,7 +252,7 @@ public:
      * @param name name of row
      * @return value in mm
      */
-    qreal               GetValueStandardTableCell(const QString& name) const;
+    qreal               GetValueStandardTableRow(const QString& name) const;
     /**
      * @brief GetValueIncrementTableRow return value of increment table row by name
      * @param name name of row
@@ -291,24 +291,28 @@ public:
     void                ClearDetails();
     /**
      * @brief SetSize set value of size
-     * @param size value of size in mm
+     * @param size value of size
      */
-    void                SetSize(qint32 size);
+    void                SetSize(qreal size);
+    void                SetSizeName(const QString &name);
     /**
      * @brief SetGrowth set value of growth
-     * @param growth value of growth in mm
+     * @param growth value of growth
      */
-    void                SetGrowth(qint32 growth);
+    void                SetHeight(qreal height);
+    void                SetHeightName(const QString &name);
     /**
      * @brief size return size
      * @return size in mm
      */
-    qint32              size() const;
+    qreal               size() const;
+    QString             SizeName()const;
     /**
-     * @brief growth return growth
-     * @return growth in mm
+     * @brief height return height
+     * @return height in pattern units
      */
-    qint32              growth() const;
+    qreal               height() const;
+    QString             HeightName()const;
     /**
      * @brief FindVar return value of variable by name
      * @param name name of variable
@@ -337,11 +341,6 @@ public:
      * @return pointer on container of gObjects
      */
     const QHash<quint32, VGObject*> *DataGObjects() const;
-    /**
-     * @brief data container with dataBase return container of data
-     * @return pointer on container of base data
-     */
-    const QHash<QString, qint32> *DataBase() const;
     /**
      * @brief data container with dataStandardTable return container of standard table
      * @return pointer on container of standard table
@@ -382,19 +381,15 @@ public:
      * @param newId id
      */
     static void         UpdateId(quint32 newId);
-    /**
-     * @brief CreateManTableIGroup generate man standard table of measurements
-     */
-    void               CreateManTableIGroup ();
 private:
     /**
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static quint32          _id;
-    /**
-     * @brief base container of base data (size and growth)
-     */
-    QHash<QString, qint32> base;
+    qreal _size;
+    QString sizeName;
+    qreal _height;
+    QString heightName;
     /**
      * @brief gObjects graphicals objects of pattern.
      */
@@ -463,9 +458,9 @@ private:
     static quint32 AddObject(QHash<key, val> &obj, val value);
 };
 
-inline void VContainer::AddStandardTableCell(const QString &name, const VStandardTableRow &cell)
+inline void VContainer::AddStandardTableRow(const QString &name, const VStandardTableRow &row)
 {
-    standardTable[name] = cell;
+    standardTable[name] = row;
 }
 
 inline void VContainer::UpdateStandardTableCell(const QString &name, VStandardTableRow cell)
@@ -508,24 +503,44 @@ inline void VContainer::ClearDetails()
     details.clear();
 }
 
-inline void VContainer::SetSize(qint32 size)
+inline void VContainer::SetSize(qreal size)
 {
-    base["Сг"] = size;
+    _size = size;
 }
 
-inline void VContainer::SetGrowth(qint32 growth)
+inline void VContainer::SetSizeName(const QString &name)
 {
-    base["Р"] = growth;
+    sizeName = name;
 }
 
-inline qint32 VContainer::size() const
+inline void VContainer::SetHeight(qreal height)
 {
-    return base.value("Сг");
+    _height = height;
 }
 
-inline qint32 VContainer::growth() const
+inline void VContainer::SetHeightName(const QString &name)
 {
-    return base.value("Р");
+    heightName = name;
+}
+
+inline qreal VContainer::size() const
+{
+    return _size;
+}
+
+inline QString VContainer::SizeName() const
+{
+    return sizeName;
+}
+
+inline qreal VContainer::height() const
+{
+    return _height;
+}
+
+inline QString VContainer::HeightName() const
+{
+    return heightName;
 }
 
 inline bool VContainer::IncrementTableContains(const QString &name)
@@ -541,11 +556,6 @@ inline void VContainer::RemoveIncrementTableRow(const QString &name)
 inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
 {
     return &gObjects;
-}
-
-inline const QHash<QString, qint32> *VContainer::DataBase() const
-{
-    return &base;
 }
 
 inline const QHash<QString, VStandardTableRow> *VContainer::DataStandardTable() const

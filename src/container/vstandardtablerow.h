@@ -48,14 +48,14 @@ public:
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VStandardTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
-                                     const QString &description = QString());
+                   VStandardTableRow(const qreal &base, const qreal &ksize, const qreal &kgrowth,
+                                     const QString &gui_text = QString(), const QString &number = QString());
                    ~VStandardTableRow(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value
      */
-    qint32  GetBase() const;
+    qreal   GetBase() const;
     /**
      * @brief GetKsize return increment in sizes
      * @return increment
@@ -71,11 +71,12 @@ public:
      * @return description
      */
     QString GetDescription() const;
+    QString GetNumber() const;
 private:
     /**
      * @brief base value in base size and growth
      */
-    qint32         base;
+    qreal          base;
     /**
      * @brief ksize increment in sizes
      */
@@ -87,10 +88,11 @@ private:
     /**
      * @brief description description measurement
      */
-    QString        description;
+    QString        gui_text;
+    QString        number;
 };
 
-inline qint32 VStandardTableRow::GetBase() const
+inline qreal VStandardTableRow::GetBase() const
 {
     return base;
 }
@@ -107,7 +109,12 @@ inline qreal VStandardTableRow::GetKgrowth() const
 
 inline QString VStandardTableRow::GetDescription() const
 {
-    return description;
+    return gui_text;
+}
+
+inline QString VStandardTableRow::GetNumber() const
+{
+    return number;
 }
 
 #endif // VSTANDARDTABLEROW_H

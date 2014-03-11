@@ -29,8 +29,8 @@
 #include "vstandardtablerow.h"
 
 VStandardTableRow::VStandardTableRow()
-    :base(0), ksize(0), kgrowth(0), description(QString()){}
+    :base(0), ksize(0), kgrowth(0), gui_text(QString()), number(QString()){}
 
-VStandardTableRow::VStandardTableRow(const qint32 &base, const qreal &ksize, const qreal &kgrowth,
-                                     const QString &description)
-    :base(base), ksize(ksize), kgrowth(kgrowth), description(description){}
+VStandardTableRow::VStandardTableRow(const qreal &base, const qreal &ksize, const qreal &kgrowth,
+                                     const QString &description, const QString &number)
+    :base(base), ksize(ksize), kgrowth(kgrowth), gui_text(description), number(number){}

@@ -975,7 +975,7 @@ void MainWindow::ChangedSize(const QString & text)
 void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
-    pattern->SetGrowth(growth*10);
+    pattern->SetHeight(growth*10);
     doc->FullUpdateTree();
 }
 

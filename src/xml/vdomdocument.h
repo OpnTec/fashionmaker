@@ -111,7 +111,7 @@ public:
      * @return true if validation successful.
      */
     static bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
-                         qint64 &errorColumn);
+                                qint64 &errorColumn);
 protected:
     /**
      * @brief data container with data.

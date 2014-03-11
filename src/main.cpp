@@ -34,7 +34,7 @@
 #include "options.h"
 
 //Default pattern unit.
-Valentina::Units patternUnit = Valentina::Mm;
+Valentina::Units patternUnit = Valentina::Cm;
 
 #ifdef Q_OS_WIN
     const QString translationsPath = QString("/translations");

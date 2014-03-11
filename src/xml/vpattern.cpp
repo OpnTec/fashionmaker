@@ -1283,7 +1283,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
     {
         TestUniqueId();
         data->Clear();
-        data->CreateManTableIGroup();
+        emit UpdateMeasurements();
         nameActivDraw.clear();
         sceneDraw->clear();
         sceneDetail->clear();

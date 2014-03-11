@@ -1,6 +1,8 @@
 <vst>
-	<number>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</number>
+	<description>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</description>
 	<unit>mm</unit>
+	<size base="500" name="Сг"/>
+	<height base="1760" name="Р"/>
 	<measurements>
 		<measurement name="Втос" gui_text="Высота точки основания шеи спереди" base="1450" size_increace="2" height_increase ="51" number="98"/>
 		<measurement name="Втош" gui_text="Высота точки основания шеи сбоку" base="1506" size_increace="2" height_increase ="54" number="4"/>
@@ -16,8 +18,8 @@
 		<measurement name="ОгI" gui_text="Обхват груди первый" base="1034" size_increace="36" height_increase ="4" number="14"/>
 		<measurement name="ОгII" gui_text="Обхват груди второй" base="1044" size_increace="38" height_increase ="2" number="15"/>
 		<measurement name="ОгIII" gui_text="Обхват груди третий" base="1000" size_increace="40" height_increase ="0" number="16"/>
-        	<measurement name="От" gui_text="Обхват талии" base="780" size_increace="40" height_increase ="0" number="18"/>
-        	<measurement name="Об" gui_text="Обхват бедер с учетом выступания живота" base="984" size_increace="30" height_increase ="10" number="19"/>
+        <measurement name="От" gui_text="Обхват талии" base="780" size_increace="40" height_increase ="0" number="18"/>
+        <measurement name="Об" gui_text="Обхват бедер с учетом выступания живота" base="984" size_increace="30" height_increase ="10" number="19"/>
 		<measurement name="ОбI" gui_text="Обхват бедер без учета выступания живота" base="964" size_increace="24" height_increase ="12" number="20"/>
 		<measurement name="Обед" gui_text="Обхват бедра" base="566" size_increace="18" height_increase ="6" number="21"/>
 		<measurement name="Ок" gui_text="Обхват колена" base="386" size_increace="8" height_increase ="8" number="22"/>

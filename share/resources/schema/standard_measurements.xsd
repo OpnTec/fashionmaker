@@ -5,6 +5,18 @@
 			<xs:sequence>
 				<xs:element name="description" type="xs:string"></xs:element>
 				<xs:element name="unit" type="xs:string"></xs:element>
+				<xs:element name="size">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double"></xs:attribute>
+					   	<xs:attribute name="name" type="xs:string"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="height">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double"></xs:attribute>
+						<xs:attribute name="name" type="xs:string"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="measurements">
 					<xs:complexType>
 						<xs:sequence>

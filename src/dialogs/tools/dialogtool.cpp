@@ -524,9 +524,24 @@ void DialogTool::EvalFormula()
     Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
-void DialogTool::SizeGrowth()
+void DialogTool::SizeHeight()
 {
-    ShowVariable(data->DataBase());
+    Q_CHECK_PTR(listWidget);
+    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->clear();
+
+    {
+    QListWidgetItem *item = new QListWidgetItem(data->HeightName());
+    item->setFont(QFont("Times", 12, QFont::Bold));
+    listWidget->addItem(item);
+    }
+
+    QListWidgetItem *item = new QListWidgetItem(data->SizeName());
+    item->setFont(QFont("Times", 12, QFont::Bold));
+    listWidget->addItem(item);
+
+    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->setCurrentRow (0);
 }
 
 void DialogTool::StandardTable()
@@ -587,12 +602,12 @@ void DialogTool::ValChenged(int row)
     QListWidgetItem *item = listWidget->item( row );
     if (radioButtonSizeGrowth->isChecked())
     {
-        if (item->text()=="Р")
+        if (item->text()==data->HeightName())
         {
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->growth()).arg(tr("Height"));
+            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->height()).arg(tr("Height"));
             labelDescription->setText(desc);
         }
-        if (item->text()=="Сг")
+        if (item->text()==data->SizeName())
         {
             QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
             labelDescription->setText(desc);
@@ -602,7 +617,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonStandardTable->isChecked())
     {
         VStandardTableRow stable = data->GetStandardTableCell(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableCell(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(item->text()))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
@@ -649,7 +664,7 @@ void DialogTool::UpdateList()
 
     if (radioButtonSizeGrowth->isChecked())
     {
-        ShowVariable(data->DataBase());
+        SizeHeight();
     }
     if (radioButtonStandardTable->isChecked())
     {

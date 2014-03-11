@@ -137,9 +137,9 @@ public slots:
      */
     void             EvalFormula();
     /**
-     * @brief SizeGrowth show in list base variables
+     * @brief SizeHeight show in list base variables
      */
-    void             SizeGrowth();
+    void             SizeHeight();
     /**
      * @brief StandardTable show in list standard table variables
      */
@@ -428,8 +428,8 @@ protected:
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
-        ShowVariable(data->DataBase());
-        connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeGrowth);
+        SizeHeight();
+        connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
         connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::StandardTable);
         connect(radioButtonIncrements, &QRadioButton::clicked, this, &DialogTool::Increments);
         connect(radioButtonLengthLine, &QRadioButton::clicked, this, &DialogTool::LengthLines);

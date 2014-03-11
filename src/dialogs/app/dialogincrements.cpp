@@ -79,7 +79,7 @@ void DialogIncrements::FillStandardTable()
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetStandard->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableCell(i.key())));
+        item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(i.key())));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandard->setItem(currentRow, 1, item);
 
