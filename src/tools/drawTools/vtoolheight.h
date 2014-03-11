@@ -52,7 +52,7 @@ public:
                     */
                    VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                               const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                               const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -84,7 +84,7 @@ public:
     static void    Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                           const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation);
     /**
      * @brief FindPoint find projection base point onto line.
      * @param line line

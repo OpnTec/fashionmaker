@@ -45,12 +45,11 @@
 #include <QFileDialog>
 #include <QSourceLocation>
 
-
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Tool::ArrowTool),
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Valentina::ArrowTool),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
-      comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0), currentToolBoxIndex(0),
+      comboBoxDraws(nullptr), curFile(QString()), mode(Valentina::Calculation), currentDrawIndex(0), currentToolBoxIndex(0),
       drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr), autoSaveTimer(nullptr)
 {
     CreateActions();
@@ -165,14 +164,14 @@ void MainWindow::ActionNewDraw()
     //Create single point
     const quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5,
                                                        10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     Q_CHECK_PTR(tools);
     tools->insert(id, spoint);
-    VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
+    VDrawTool::AddRecord(id, Valentina::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
 
@@ -205,7 +204,7 @@ void MainWindow::OptionDraw()
 }
 
 template <typename Dialog, typename Func>
-void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
 {
     if (checked)
@@ -245,7 +244,7 @@ void MainWindow::ClosedDialog(int result)
 
 void MainWindow::ToolEndLine(bool checked)
 {
-    SetToolButton<DialogEndLine>(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                                  &MainWindow::ClosedDialogEndLine);
 }
 
@@ -256,7 +255,7 @@ void MainWindow::ClosedDialogEndLine(int result)
 
 void MainWindow::ToolLine(bool checked)
 {
-    SetToolButton<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
+    SetToolButton<DialogLine>(checked, Valentina::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
                               &MainWindow::ClosedDialogLine);
 }
 
@@ -267,7 +266,7 @@ void MainWindow::ClosedDialogLine(int result)
 
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton<DialogAlongLine>(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
+    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
                                    &MainWindow::ClosedDialogAlongLine);
 }
 
@@ -278,7 +277,7 @@ void MainWindow::ClosedDialogAlongLine(int result)
 
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    SetToolButton<DialogShoulderPoint>(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+    SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint);
 }
 
@@ -289,7 +288,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
 
 void MainWindow::ToolNormal(bool checked)
 {
-    SetToolButton<DialogNormal>(checked, Tool::NormalTool, ":/cursor/normal_cursor.png",
+    SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogNormal);
 }
 
@@ -300,7 +299,7 @@ void MainWindow::ClosedDialogNormal(int result)
 
 void MainWindow::ToolBisector(bool checked)
 {
-    SetToolButton<DialogBisector>(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png",
+    SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
                   tr("Select first point of angle"), &MainWindow::ClosedDialogBisector);
 }
 
@@ -311,7 +310,7 @@ void MainWindow::ClosedDialogBisector(int result)
 
 void MainWindow::ToolLineIntersect(bool checked)
 {
-    SetToolButton<DialogLineIntersect>(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
+    SetToolButton<DialogLineIntersect>(checked, Valentina::LineIntersectTool, ":/cursor/intersect_cursor.png",
                   tr("Select first point of first line"), &MainWindow::ClosedDialogLineIntersect);
 }
 
@@ -322,7 +321,7 @@ void MainWindow::ClosedDialogLineIntersect(int result)
 
 void MainWindow::ToolSpline(bool checked)
 {
-    SetToolButton<DialogSpline>(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
+    SetToolButton<DialogSpline>(checked, Valentina::SplineTool, ":/cursor/spline_cursor.png",
                   tr("Select first point curve"), &MainWindow::ClosedDialogSpline);
 }
 
@@ -333,7 +332,7 @@ void MainWindow::ClosedDialogSpline(int result)
 
 void MainWindow::ToolCutSpline(bool checked)
 {
-    SetToolButton<DialogCutSpline>(checked, Tool::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
+    SetToolButton<DialogCutSpline>(checked, Valentina::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
                   tr("Select simple curve"), &MainWindow::ClosedDialogCutSpline);
 }
 
@@ -344,7 +343,7 @@ void MainWindow::ClosedDialogCutSpline(int result)
 
 void MainWindow::ToolArc(bool checked)
 {
-    SetToolButton<DialogArc>(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
+    SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
                   tr("Select point of center of arc"), &MainWindow::ClosedDialogArc);
 }
 
@@ -355,7 +354,7 @@ void MainWindow::ClosedDialogArc(int result)
 
 void MainWindow::ToolSplinePath(bool checked)
 {
-    SetToolButton<DialogSplinePath>(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
+    SetToolButton<DialogSplinePath>(checked, Valentina::SplinePathTool, ":/cursor/splinepath_cursor.png",
                   tr("Select point of curve path"), &MainWindow::ClosedDialogSplinePath);
 }
 
@@ -366,7 +365,7 @@ void MainWindow::ClosedDialogSplinePath(int result)
 
 void MainWindow::ToolCutSplinePath(bool checked)
 {
-    SetToolButton<DialogCutSplinePath>(checked, Tool::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
+    SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
                   tr("Select curve path"), &MainWindow::ClosedDialogCutSplinePath);
 }
 
@@ -377,7 +376,7 @@ void MainWindow::ClosedDialogCutSplinePath(int result)
 
 void MainWindow::ToolPointOfContact(bool checked)
 {
-    SetToolButton<DialogPointOfContact>(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
+    SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact);
 }
 
@@ -388,7 +387,7 @@ void MainWindow::ClosedDialogPointOfContact(int result)
 
 void MainWindow::ToolDetail(bool checked)
 {
-    SetToolButton<DialogDetail>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
+    SetToolButton<DialogDetail>(checked, Valentina::DetailTool, "://cursor/new_detail_cursor.png",
                                 tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
 }
 
@@ -404,7 +403,7 @@ void MainWindow::ClosedDialogDetail(int result)
 
 void MainWindow::ToolHeight(bool checked)
 {
-    SetToolButton<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
+    SetToolButton<DialogHeight>(checked, Valentina::Height, ":/cursor/height_cursor.png", tr("Select base point"),
                                 &MainWindow::ClosedDialogHeight);
 }
 
@@ -415,7 +414,7 @@ void MainWindow::ClosedDialogHeight(int result)
 
 void MainWindow::ToolTriangle(bool checked)
 {
-    SetToolButton<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
+    SetToolButton<DialogTriangle>(checked, Valentina::Triangle, ":/cursor/triangle_cursor.png",
                                   tr("Select first point of axis"), &MainWindow::ClosedDialogTriangle);
 }
 
@@ -426,7 +425,7 @@ void MainWindow::ClosedDialogTriangle(int result)
 
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
-    SetToolButton<DialogPointOfIntersection>(checked, Tool::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
+    SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
                   tr("Select point vertically"), &MainWindow::ClosedDialogPointOfIntersection);
 }
 
@@ -437,7 +436,7 @@ void MainWindow::ClosedDialogPointOfIntersection(int result)
 
 void MainWindow::ToolUnionDetails(bool checked)
 {
-    SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
+    SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
                                       &MainWindow::ClosedDialogUnionDetails);
     //Must disconnect this signal here.
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
@@ -451,7 +450,7 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 
 void MainWindow::ToolCutArc(bool checked)
 {
-    SetToolButton<DialogCutArc>(checked, Tool::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
+    SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
                   &MainWindow::ClosedDialogCutArc);
 }
 
@@ -633,103 +632,103 @@ void MainWindow::CancelTool()
     dialogTool = nullptr;
     switch ( tool )
     {
-        case Tool::ArrowTool:
+        case Valentina::ArrowTool:
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             break;
-        case Tool::SinglePointTool:
+        case Valentina::SinglePointTool:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;
-        case Tool::EndLineTool:
+        case Valentina::EndLineTool:
             ui->toolButtonEndLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::LineTool:
+        case Valentina::LineTool:
             ui->toolButtonLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearFocus();
             break;
-        case Tool::AlongLineTool:
+        case Valentina::AlongLineTool:
             ui->toolButtonAlongLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::ShoulderPointTool:
+        case Valentina::ShoulderPointTool:
             ui->toolButtonShoulderPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::NormalTool:
+        case Valentina::NormalTool:
             ui->toolButtonNormal->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::BisectorTool:
+        case Valentina::BisectorTool:
             ui->toolButtonBisector->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::LineIntersectTool:
+        case Valentina::LineIntersectTool:
             ui->toolButtonLineIntersect->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::SplineTool:
+        case Valentina::SplineTool:
             ui->toolButtonSpline->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::ArcTool:
+        case Valentina::ArcTool:
             ui->toolButtonArc->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::SplinePathTool:
+        case Valentina::SplinePathTool:
             ui->toolButtonSplinePath->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::PointOfContact:
+        case Valentina::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::Detail:
+        case Valentina::DetailTool:
             ui->toolButtonNewDetail->setChecked(false);
             break;
-        case Tool::Height:
+        case Valentina::Height:
             ui->toolButtonHeight->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::Triangle:
+        case Valentina::Triangle:
             ui->toolButtonTriangle->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::PointOfIntersection:
+        case Valentina::PointOfIntersection:
             ui->toolButtonPointOfIntersection->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutSplineTool:
+        case Valentina::CutSplineTool:
             ui->toolButtonSplineCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutSplinePathTool:
+        case Valentina::CutSplinePathTool:
             ui->toolButtonSplinePathCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::UnionDetails:
+        case Valentina::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutArcTool:
+        case Valentina::CutArcTool:
             ui->toolButtonArcCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
@@ -744,7 +743,7 @@ void  MainWindow::ArrowTool()
 {
     CancelTool();
     ui->actionArrowTool->setChecked(true);
-    tool = Tool::ArrowTool;
+    tool = Valentina::ArrowTool;
     QCursor cur(Qt::ArrowCursor);
     view->setCursor(cur);
     helpLabel->setText("");
@@ -802,7 +801,7 @@ void MainWindow::ActionDraw(bool checked)
         connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
-        mode = Draw::Calculation;
+        mode = Valentina::Calculation;
         comboBoxDraws->setEnabled(true);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
         drawMode = true;
@@ -840,7 +839,7 @@ void MainWindow::ActionDetails(bool checked)
         comboBoxDraws->setEnabled(false);
 
 
-        mode = Draw::Modeling;
+        mode = Valentina::Modeling;
         SetEnableTool(true);
         currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
@@ -1059,7 +1058,7 @@ void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
     bool modelingTools = false;
-    if (mode == Draw::Calculation)
+    if (mode == Valentina::Calculation)
     {
         drawTools = enable;
     }

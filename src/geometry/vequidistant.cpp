@@ -38,7 +38,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     {
         switch (detail.at(i).getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
             {
                 const VPointF *point = data->GeometricObject<const VPointF*>(detail.at(i).getId());
                 points.append(point->toQPointF());
@@ -51,7 +51,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, arc->GetPoints());
@@ -75,7 +75,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
             {
                 const VSpline *spline = data->GeometricObject<const VSpline *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, spline->GetPoints());
@@ -99,7 +99,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
             {
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, splinePath->GetPathPoints());

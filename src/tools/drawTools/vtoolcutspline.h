@@ -51,7 +51,7 @@ public:
      */
     VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                    const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
-                   const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                   const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -81,7 +81,7 @@ public:
     static void  Create(const quint32 _id, const QString &pointName,
                         const QString &formula, const quint32 &splineId, const qreal &mx, const qreal &my,
                         VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
     static const QString AttrSpline;
 public slots:

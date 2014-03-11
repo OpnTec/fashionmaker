@@ -33,12 +33,12 @@ const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
 VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
                              const quint32 &axisP1Id, const quint32 &axisP2Id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                             const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -73,13 +73,13 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     quint32 secondPointId = dialogTool->getSecondPointId();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
 void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
                            const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
     const VPointF *axisP2 = data->GeometricObject<const VPointF *>(axisP2Id);
@@ -89,7 +89,7 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
     QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
                               secondPoint->toQPointF());
     quint32 id = _id;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));
     }
@@ -101,7 +101,7 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Triangle, doc);
+    VDrawTool::AddRecord(id, Valentina::Triangle, doc);
     if (parse == Document::FullParse)
     {
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,

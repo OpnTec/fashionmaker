@@ -49,7 +49,7 @@ public:
                   * @param parent parent object.
                   */
                  VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Tool::Sources &typeCreation, const quint32 &idTool = 0,
+                                 const Valentina::Sources &typeCreation, const quint32 &idTool = 0,
                                  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
     /**
      * @brief Create help create tool.
@@ -61,7 +61,7 @@ public:
      * @param typeCreation way we create this tool.
      */
     static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const quint32 &idTool = 0,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool = 0,
                         QObject *parent = 0);
     static const QString TagName;
     static const QString ToolType;

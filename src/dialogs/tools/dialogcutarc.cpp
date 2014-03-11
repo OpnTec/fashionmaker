@@ -59,9 +59,9 @@ DialogCutArc::~DialogCutArc()
     delete ui;
 }
 
-void DialogCutArc::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Arc)
+    if (type == Valentina::Arc)
     {
         const VArc *arc = data->GeometricObject<const VArc *>(id);
         ChangeCurrentText(ui->comboBoxArc, arc->name());

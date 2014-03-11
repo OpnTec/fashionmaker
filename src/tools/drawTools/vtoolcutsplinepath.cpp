@@ -36,7 +36,7 @@ const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
 VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &formula, const quint32 &splinePathId,
                                        const quint32 &splPath1id, const quint32 &splPath2id,
-                                       const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                                       const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), splinePathId(splinePathId), firstSpline(), secondSpline(),
       splPath1id (splPath1id), splPath2id(splPath2id)
 {
@@ -54,7 +54,7 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -83,13 +83,13 @@ void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     quint32 splinePathId = dialogTool->getSplinePathId();
-    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, const QString &formula,
                             const quint32 &splinePathId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document::Documents &parse, const Tool::Sources &typeCreation)
+                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     Q_CHECK_PTR(splPath);
@@ -104,7 +104,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
 
         const QPointF point = splPath->CutSplinePath(toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
         VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             id = data->AddGObject(p);
         }
@@ -123,7 +123,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
 
         VSplinePath *splPath1 = new VSplinePath();
         VSplinePath *splPath2 = new VSplinePath();
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
             {
@@ -210,7 +210,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::CutSplinePathTool, doc);
+        VDrawTool::AddRecord(id, Valentina::CutSplinePathTool, doc);
         if (parse == Document::FullParse)
         {
             VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
@@ -239,7 +239,7 @@ void VToolCutSplinePath::FullUpdateFromFile()
 
 void VToolCutSplinePath::SplineChoosed(quint32 id)
 {
-    emit ChoosedTool(id, Scene::SplinePath);
+    emit ChoosedTool(id, Valentina::SplinePath);
 }
 
 void VToolCutSplinePath::ChangedActivDraw(const QString &newName)

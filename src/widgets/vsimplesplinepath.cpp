@@ -37,7 +37,7 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::SplinePath);
+        emit ChoosedTool(id, Valentina::SplinePath);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

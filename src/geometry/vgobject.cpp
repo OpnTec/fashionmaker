@@ -29,11 +29,11 @@
 #include "vgobject.h"
 
 VGObject::VGObject()
-    :_id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Draw::Calculation)
+    :_id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Valentina::Calculation)
 {
 }
 
-VGObject::VGObject(const GObject::Type &type, const quint32 &idObject, const Draw::Draws &mode)
+VGObject::VGObject(const GObject::Type &type, const quint32 &idObject, const Valentina::Draws &mode)
     :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
 {
 }
@@ -73,12 +73,12 @@ void VGObject::setName(const QString &name)
     _name = name;
 }
 
-Draw::Draws VGObject::getMode() const
+Valentina::Draws VGObject::getMode() const
 {
     return mode;
 }
 
-void VGObject::setMode(const Draw::Draws &value)
+void VGObject::setMode(const Valentina::Draws &value)
 {
     mode = value;
 }

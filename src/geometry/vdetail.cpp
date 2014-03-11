@@ -260,7 +260,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     QVector<VNodeDetail> list;
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getTypeTool() == Tool::NodePoint)
+        if (nodes[i].getTypeTool() == Valentina::NodePoint)
         {
             list.append(nodes[i]);
         }

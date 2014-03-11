@@ -53,7 +53,7 @@ public:
                     */
                    VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                       const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                      const quint32 &pShoulder, const Tool::Sources &typeCreation,
+                                      const quint32 &pShoulder, const Valentina::Sources &typeCreation,
                                       QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -97,7 +97,7 @@ public:
     static void    Create(const quint32 _id, const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
                           const quint32 &pShoulder, const QString &typeLine, const QString &pointName, const qreal &mx,
                           const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                          const Document::Documents &parse, const Tool::Sources &typeCreation);
+                          const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     /**

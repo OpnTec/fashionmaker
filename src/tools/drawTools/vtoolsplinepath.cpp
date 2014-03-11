@@ -31,7 +31,7 @@
 
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
-VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
+VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                                  QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
@@ -62,7 +62,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
         controlPoints.append(controlPoint);
     }
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -91,15 +91,15 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     {
         doc->IncrementReferens((*path)[i].P().id());
     }
-    Create(0, path, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, path, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene,
                              VPattern *doc, VContainer *data, const Document::Documents &parse,
-                             const Tool::Sources &typeCreation)
+                             const Valentina::Sources &typeCreation)
 {
     quint32 id = _id;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(path);
         data->AddLengthSpline(path->name(), toMM(path->GetLength()));
@@ -113,7 +113,7 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplinePathTool, doc);
+    VDrawTool::AddRecord(id, Valentina::SplinePathTool, doc);
     if (parse == Document::FullParse)
     {
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
@@ -256,7 +256,7 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::SplinePath);
+        emit ChoosedTool(id, Valentina::SplinePath);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

@@ -49,7 +49,7 @@ public:
      * @param typeTool tool type.
      * @param nameDraw pattern peace name.
      */
-    VToolRecord(const quint32 &id, const Tool::Tools &typeTool, const QString &nameDraw);
+    VToolRecord(const quint32 &id, const Valentina::Tools &typeTool, const QString &nameDraw);
     /**
      * @brief getId return tool id.
      * @return id.
@@ -64,12 +64,12 @@ public:
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    Tool::Tools getTypeTool() const;
+    Valentina::Tools getTypeTool() const;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    void        setTypeTool(const Tool::Tools &value);
+    void        setTypeTool(const Valentina::Tools &value);
     /**
      * @brief getNameDraw return pattern peace name.
      * @return pattern peace name.
@@ -88,7 +88,7 @@ private:
     /**
      * @brief typeTool tool type.
      */
-    Tool::Tools        typeTool;
+    Valentina::Tools        typeTool;
     /**
      * @brief nameDraw pattern peace name.
      */
@@ -105,12 +105,12 @@ inline void VToolRecord::setId(const quint32 &value)
     id = value;
 }
 
-inline Tool::Tools VToolRecord::getTypeTool() const
+inline Valentina::Tools VToolRecord::getTypeTool() const
 {
     return typeTool;
 }
 
-inline void VToolRecord::setTypeTool(const Tool::Tools &value)
+inline void VToolRecord::setTypeTool(const Valentina::Tools &value)
 {
     typeTool = value;
 }

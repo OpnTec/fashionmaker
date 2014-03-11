@@ -97,9 +97,9 @@ void DialogArc::SetRadius(const QString &value)
     ui->lineEditRadius->setText(radius);
 }
 
-void DialogArc::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
 

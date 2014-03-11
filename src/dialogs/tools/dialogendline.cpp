@@ -59,9 +59,9 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
-void DialogEndLine::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogEndLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         ChangeCurrentText(ui->comboBoxBasePoint, point->name());

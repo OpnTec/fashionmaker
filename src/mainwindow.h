@@ -407,7 +407,7 @@ private:
     /**
      * @brief tool current tool
      */
-    Tool::Tools        tool;
+    Valentina::Tools        tool;
     /**
      * @brief currentScene pointer to current scene.
      */
@@ -450,7 +450,7 @@ private:
     /**
      * @brief mode keep current draw mode.
      */
-    Draw::Draws        mode;
+    Valentina::Draws        mode;
     /**
      * @brief currentDrawIndex save current selected pattern peace.
      */
@@ -510,7 +510,7 @@ private:
      * @param toolTip first tooltipe.
      * @param closeDialogSlot function what handle after close dialog.
      */
-    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+    void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
     /**
      * @brief MinimumScrollBar set scroll bar to minimum.

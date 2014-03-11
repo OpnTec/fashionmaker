@@ -35,7 +35,7 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 
 VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                                const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
-                               const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                               const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), splineId(splineId), firstSpline(), secondSpline(),
       spl1id(spl1id), spl2id(spl2id)
 {
@@ -53,7 +53,7 @@ VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &i
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -83,13 +83,13 @@ void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     quint32 splineId = dialogTool->getSplineId();
-    Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
                             const QString &formula, const quint32 &splineId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document::Documents &parse, const Tool::Sources &typeCreation)
+                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
     Calculator cal(data);
@@ -103,7 +103,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
         quint32 id = _id;
         quint32 spl1id = 0;
         quint32 spl2id = 0;
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
             id = data->AddGObject(p);
@@ -137,7 +137,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::CutSplineTool, doc);
+        VDrawTool::AddRecord(id, Valentina::CutSplineTool, doc);
         if (parse == Document::FullParse)
         {
             VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, typeCreation);
@@ -165,7 +165,7 @@ void VToolCutSpline::FullUpdateFromFile()
 
 void VToolCutSpline::SplineChoosed(quint32 id)
 {
-    emit ChoosedTool(id, Scene::Spline);
+    emit ChoosedTool(id, Valentina::Spline);
 }
 
 void VToolCutSpline::ChangedActivDraw(const QString &newName)

@@ -46,7 +46,7 @@ public:
                    * @param typeCreation way we create this tool.
                    * @param parent parent object.
                    */
-                  VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
+                  VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                                   QGraphicsItem * parent = nullptr);
      /**
       * @brief setDialog set dialog when user want change tool option.
@@ -72,7 +72,7 @@ public:
       */
      static void  Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene,
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
-                         const Tool::Sources &typeCreation);
+                         const Valentina::Sources &typeCreation);
      static const QString ToolType;
 signals:
     /**

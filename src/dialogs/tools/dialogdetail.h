@@ -61,7 +61,7 @@ public slots:
      * @param id id of objects (points, arcs, splines, spline paths)
      * @param type type of object
      */
-    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Valentina::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -121,7 +121,7 @@ private:
      * @param mx offset respect to x
      * @param my offset respect to y
      */
-    void             NewItem(quint32 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
+    void             NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
                              qreal mx = 0, qreal my = 0);
 };
 

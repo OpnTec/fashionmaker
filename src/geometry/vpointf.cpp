@@ -28,13 +28,13 @@
 
 #include "vpointf.h"
 
-VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Draw::Draws mode)
+VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
 {
     this->_name = name;
 }
 
-VPointF::VPointF() :VGObject(GObject::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0)
+VPointF::VPointF() :VGObject(GObject::Point, 0, Valentina::Calculation), _mx(0), _my(0), _x(0), _y(0)
 {
 
 }

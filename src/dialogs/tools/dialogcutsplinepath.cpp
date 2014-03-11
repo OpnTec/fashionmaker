@@ -76,9 +76,9 @@ void DialogCutSplinePath::setSplinePathId(const quint32 &value, const quint32 &i
     setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, id, ComboMode::CutSpline);
 }
 
-void DialogCutSplinePath::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogCutSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::SplinePath)
+    if (type == Valentina::SplinePath)
     {
         const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
         ChangeCurrentText(ui->comboBoxSplinePath, splPath->name());

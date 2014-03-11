@@ -34,7 +34,7 @@ const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                       const Tool::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
+                       const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
       namePoint(nullptr), lineName(nullptr)
@@ -48,7 +48,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -59,10 +59,10 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
 }
 
 void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const quint32 &idTool,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
                         QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
+    VAbstractTool::AddRecord(id, Valentina::NodePoint, doc);
     if (parse == Document::FullParse)
     {
         //TODO Need create garbage collector and remove all nodes, what we don't use.
@@ -137,7 +137,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Point);
+        emit ChoosedTool(id, Valentina::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

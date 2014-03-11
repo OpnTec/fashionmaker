@@ -60,7 +60,7 @@ public:
      * @param mx object bias x axis
      * @param my object bias y axis
      */
-    VNodeDetail(quint32 id, Tool::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
+    VNodeDetail(quint32 id, Valentina::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
               qreal my = 0);
     /**
      * @brief VNodeDetail copy constructor
@@ -87,12 +87,12 @@ public:
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    Tool::Tools getTypeTool() const;
+    Valentina::Tools getTypeTool() const;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    void        setTypeTool(const Tool::Tools &value);
+    void        setTypeTool(const Valentina::Tools &value);
     /**
      * @brief getTypeNode return node type.
      * @return node type.
@@ -131,7 +131,7 @@ private:
     /**
      * @brief typeTool type of tool
      */
-    Tool::Tools typeTool;
+    Valentina::Tools typeTool;
     /**
      * @brief typeNode node type.
      */
@@ -156,12 +156,12 @@ inline void VNodeDetail::setId(const quint32 &value)
     id = value;
 }
 
-inline Tool::Tools VNodeDetail::getTypeTool() const
+inline Valentina::Tools VNodeDetail::getTypeTool() const
 {
     return typeTool;
 }
 
-inline void VNodeDetail::setTypeTool(const Tool::Tools &value)
+inline void VNodeDetail::setTypeTool(const Valentina::Tools &value)
 {
     typeTool = value;
 }

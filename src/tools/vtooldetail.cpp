@@ -47,7 +47,7 @@ const QString VToolDetail::NodePoint      = QStringLiteral("NodePoint");
 const QString VToolDetail::NodeSpline     = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath = QStringLiteral("NodeSplinePath");
 
-VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Tool::Sources &typeCreation,
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
@@ -56,16 +56,16 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     {
         switch (detail[i].getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
                 InitTool<VNodePoint>(scene, detail[i]);
                 break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
                 InitTool<VNodeArc>(scene, detail[i]);
                 break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
                 InitTool<VNodeSpline>(scene, detail[i]);
                 break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
                 InitTool<VNodeSplinePath>(scene, detail[i]);
                 break;
             default:
@@ -80,7 +80,7 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
-    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
+    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
     {
        AddToFile();
     }
@@ -112,28 +112,28 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
         quint32 id = 0;
         switch (detail[i].getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
             {
                 id = CreateNode<VPointF>(data, detail[i].getId());
-                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
             {
                 id = CreateNode<VArc>(data, detail[i].getId());
-                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, detail[i].getId());
-                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, detail[i].getId());
-                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             default:
@@ -144,14 +144,14 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
         det.append(node);
     }
     det.setName(detail.getName());
-    Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, det, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     quint32 id = _id;
-    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
+    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
     {
         id = data->AddDetail(newDetail);
     }
@@ -163,7 +163,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::Detail, doc);
+    VAbstractTool::AddRecord(id, Valentina::DetailTool, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -320,7 +320,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Detail);
+        emit ChoosedTool(id, Valentina::Detail);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -382,16 +382,16 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     }
     switch (node.getTypeTool())
     {
-        case (Tool::NodeArc):
+        case (Valentina::NodeArc):
             doc->SetAttribute(nod, AttrType, NodeArc);
             break;
-        case (Tool::NodePoint):
+        case (Valentina::NodePoint):
             doc->SetAttribute(nod, AttrType, NodePoint);
             break;
-        case (Tool::NodeSpline):
+        case (Valentina::NodeSpline):
             doc->SetAttribute(nod, AttrType, NodeSpline);
             break;
-        case (Tool::NodeSplinePath):
+        case (Valentina::NodeSplinePath):
             doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
         default:

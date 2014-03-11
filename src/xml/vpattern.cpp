@@ -62,7 +62,7 @@ const QString VPattern::IncrementKsize       = QStringLiteral("ksize");
 const QString VPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
 const QString VPattern::IncrementDescription = QStringLiteral("description");
 
-VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent)
+VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false)
 {
@@ -250,7 +250,7 @@ void VPattern::setCursor(const quint32 &value)
 
 void VPattern::setCurrentData()
 {
-    if (*mode == Draw::Calculation)
+    if (*mode == Valentina::Calculation)
     {
         const QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
         if (nameActivDraw != nameDraw)
@@ -458,10 +458,10 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
                 {
                     case 0: // TagCalculation
                         data->ClearCalculationGObjects();
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Valentina::Calculation);
                         break;
                     case 1: // TagModeling
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Valentina::Modeling);
                         break;
                     case 2: // TagDetails
                         ParseDetails(sceneDetail, domElement, parse);
@@ -477,12 +477,12 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
 }
 
 void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
-                             const Document::Documents &parse, const Draw::Draws &mode)
+                             const Document::Documents &parse, const Valentina::Draws &mode)
 {
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
     VMainGraphicsScene *scene = nullptr;
-    if (mode == Draw::Calculation)
+    if (mode == Valentina::Calculation)
     {
         scene = sceneDraw;
     }
@@ -555,23 +555,23 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                     const NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
-                    Tool::Tools tool;
+                    Valentina::Tools tool;
                     QStringList types;
                     types << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline <<
                              VToolDetail::NodeSplinePath;
                     switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
-                            tool = Tool::NodePoint;
+                            tool = Valentina::NodePoint;
                             break;
                         case 1: // VToolDetail::NodeArc
-                            tool = Tool::NodeArc;
+                            tool = Valentina::NodeArc;
                             break;
                         case 2: // VToolDetail::NodeSpline
-                            tool = Tool::NodeSpline;
+                            tool = Valentina::NodeSpline;
                             break;
                         case 3: // VToolDetail::NodeSplinePath
-                            tool = Tool::NodeSplinePath;
+                            tool = Valentina::NodeSplinePath;
                             break;
                         default:
                             qWarning()<<"Wrong node type."<<Q_FUNC_INFO;
@@ -581,7 +581,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                 }
             }
         }
-        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Tool::FromFile);
+        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Valentina::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -643,14 +643,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
 
                 data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-                VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
+                VDrawTool::AddRecord(id, Valentina::SinglePointTool, this);
                 if (parse != Document::FullParse)
                 {
                     UpdateToolData(id, data);
                 }
                 if (parse == Document::FullParse)
                 {
-                    spoint = new VToolSinglePoint(this, data, id, Tool::FromFile);
+                    spoint = new VToolSinglePoint(this, data, id, Valentina::FromFile);
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -681,7 +681,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId,
-                                        mx, my, scene, this, data, parse, Tool::FromFile);
+                                        mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -704,7 +704,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this,
-                                       data, parse, Tool::FromFile);
+                                       data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -728,7 +728,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, "0");
 
                 VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
-                                       data, parse, Tool::FromFile);
+                                       data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -752,7 +752,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene,
-                                    this, data, parse, Tool::FromFile);
+                                    this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -776,7 +776,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
 
                 VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId,
-                                    typeLine, name, mx, my, scene, this, data, parse, Tool::FromFile);
+                                    typeLine, name, mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -798,7 +798,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 p2Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, "0");
 
                 VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name,
-                                            mx, my, scene, this, data, parse, Tool::FromFile);
+                                            mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -820,7 +820,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
-                                            data, parse, Tool::FromFile);
+                                            data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -839,8 +839,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal mx = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
-                                                    Draw::Modeling));
-                VNodePoint::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                                                    Valentina::Modeling));
+                VNodePoint::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -863,7 +863,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
 
                 VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId,
-                                    mx, my, scene, this, data, parse, Tool::FromFile);
+                                    mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -885,7 +885,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this,
-                                      data, parse, Tool::FromFile);
+                                      data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -905,7 +905,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
-                                                 parse, Tool::FromFile);
+                                                 parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -924,7 +924,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
 
-                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Tool::FromFile);
+                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -944,7 +944,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
 
                 VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my,
-                                            scene, this, data, parse, Tool::FromFile);
+                                            scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -963,7 +963,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
 
-                VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Tool::FromFile);
+                VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -991,7 +991,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
         const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                    VAbstractTool::TypeLineLine);
 
-        VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Tool::FromFile);
+        VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Valentina::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1025,7 +1025,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
 
                 VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data, parse,
-                                    Tool::FromFile);
+                                    Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1069,7 +1069,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                     }
                 }
 
-                VToolSplinePath::Create(id, path, scene, this, data, parse, Tool::FromFile);
+                VToolSplinePath::Create(id, path, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1086,9 +1086,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
                 spl->setIdObject(idObject);
-                spl->setMode(Draw::Modeling);
+                spl->setMode(Valentina::Modeling);
                 data->UpdateGObject(id, spl);
-                VNodeSpline::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                VNodeSpline::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1105,9 +1105,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
                 path->setIdObject(idObject);
-                path->setMode(Draw::Modeling);
+                path->setMode(Valentina::Modeling);
                 data->UpdateGObject(id, path);
-                VNodeSplinePath::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                VNodeSplinePath::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1143,7 +1143,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
                 const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
                 const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
 
-                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Tool::FromFile);
+                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1160,9 +1160,9 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
                 arc->setIdObject(idObject);
-                arc->setMode(Draw::Modeling);
+                arc->setMode(Valentina::Modeling);
                 data->UpdateGObject(id, arc);
-                VNodeArc::Create(this, data, id, idObject, parse, Tool::FromFile, idTool);
+                VNodeArc::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1199,7 +1199,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
                 VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
-                                        Tool::FromFile);
+                                        Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {

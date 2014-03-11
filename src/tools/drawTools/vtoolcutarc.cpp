@@ -35,7 +35,7 @@ const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 
 VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                          const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
-                         const Tool::Sources &typeCreation, QGraphicsItem * parent)
+                         const Valentina::Sources &typeCreation, QGraphicsItem * parent)
     :VToolPoint(doc, data, id, parent), formula(formula), arcId(arcId), firstArc(), secondArc(), arc1id(arc1id),
       arc2id(arc2id)
 {
@@ -53,7 +53,7 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
     secondArc->setParentItem(this);
     connect(secondArc, &VSimpleArc::Choosed, this, &VToolCutArc::ArcChoosed);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -83,12 +83,12 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     quint32 arcId = dialogTool->getArcId();
-    Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
     Calculator cal(data);
@@ -103,7 +103,7 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
         quint32 id = _id;
         quint32 arc1id = 0;
         quint32 arc2id = 0;
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
             id = data->AddGObject(p);
@@ -136,7 +136,7 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
         data->AddLengthArc(arc1id);
         data->AddLengthArc(arc2id);
 
-        VDrawTool::AddRecord(id, Tool::CutArcTool, doc);
+        VDrawTool::AddRecord(id, Valentina::CutArcTool, doc);
         if (parse == Document::FullParse)
         {
             VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);
@@ -164,7 +164,7 @@ void VToolCutArc::FullUpdateFromFile()
 
 void VToolCutArc::ArcChoosed(quint32 id)
 {
-    emit ChoosedTool(id, Scene::Arc);
+    emit ChoosedTool(id, Valentina::Arc);
 }
 
 void VToolCutArc::ChangedActivDraw(const QString &newName)

@@ -83,7 +83,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
         if (i.key() != id)
         {
             VGObject *obj = i.value();
-            if (obj->getType() == GObject::Point && obj->getMode() == Draw::Calculation)
+            if (obj->getType() == GObject::Point && obj->getMode() == Valentina::Calculation)
             {
                 const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
                 list[point->name()] = i.key();
@@ -107,7 +107,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Arc && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Arc && obj->getMode() == Valentina::Calculation)
                 {
                     const VArc *arc = data->GeometricObject<const VArc *>(i.key());
                     list[arc->name()] = i.key();
@@ -119,7 +119,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Arc && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Arc && obj->getMode() == Valentina::Calculation)
                 {
                     const VArc *arc = data->GeometricObject<const VArc *>(i.key());
                     list[arc->name()] = i.key();
@@ -144,7 +144,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Spline && obj->getMode() == Valentina::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     list[spl->name()] = i.key();
@@ -156,7 +156,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Spline && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::Spline && obj->getMode() == Valentina::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     list[spl->name()] = i.key();
@@ -181,7 +181,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::SplinePath && obj->getMode() == Valentina::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     list[splPath->name()] = i.key();
@@ -193,7 +193,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::SplinePath && obj->getMode() == Draw::Calculation)
+                if (obj->getType() == GObject::SplinePath && obj->getMode() == Valentina::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     list[splPath->name()] = i.key();
@@ -419,7 +419,7 @@ void DialogTool::CheckState()
     bOk->setEnabled(flagFormula && flagName);
 }
 
-void DialogTool::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogTool::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);

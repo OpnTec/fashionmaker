@@ -47,7 +47,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
+                 VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                                    QGraphicsItem * parent = nullptr );
     /**
      * @brief setDialog set dialog when user want change tool option.

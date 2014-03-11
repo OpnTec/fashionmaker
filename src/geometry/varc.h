@@ -56,7 +56,7 @@ public:
      * @param f2 end angle (degree).
      */
     VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-         QString formulaF2, quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
+         QString formulaF2, quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
     /**
      * @brief VArc copy constructor
      * @param arc arc

@@ -48,7 +48,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object
                   */
-                 VToolArc(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
+                 VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                           QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -77,7 +77,7 @@ public:
      */
     static void  Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
                         const QString &f2, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:

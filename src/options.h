@@ -51,18 +51,14 @@ inline double toMM(double pix)
 
 extern const QString translationsPath;
 
-namespace Scene
+namespace Valentina
 {
     /**
      * @brief The Scene enum
      */
     enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
     Q_DECLARE_FLAGS(Scenes, Scene)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( Scene::Scenes )
 
-namespace Tool
-{
     /**
      * @brief The Tool enum
      */
@@ -84,7 +80,7 @@ namespace Tool
         SplinePathTool,
         CutSplinePathTool,
         PointOfContact,
-        Detail,
+        DetailTool,
         NodePoint,
         NodeArc,
         NodeSpline,
@@ -101,18 +97,25 @@ namespace Tool
      */
     enum Source { FromGui, FromFile, FromTool };
     Q_DECLARE_FLAGS(Sources, Source)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Tools )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Tool::Sources )
 
-namespace Draw
-{
     /**
      * @brief The Draw enum
      */
     enum Draw { Calculation, Modeling };
     Q_DECLARE_FLAGS(Draws, Draw)
+
+    /**
+     * @brief The Unit enum
+     */
+    enum Unit { Mm, Cm, In };
+    Q_DECLARE_FLAGS(Units, Unit)
 }
-Q_DECLARE_OPERATORS_FOR_FLAGS(Draw::Draws)
+Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Scenes )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Tools )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Sources )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Draws )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Units )
+
+extern Valentina::Units patternUnit;
 
 #endif // OPTIONS_H

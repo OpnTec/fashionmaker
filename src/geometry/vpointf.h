@@ -58,7 +58,7 @@ public:
      * @param my offset name respect to y
      */
      VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
-               Draw::Draws mode = Draw::Calculation);
+               Valentina::Draws mode = Valentina::Calculation);
      ~VPointF(){}
     /**
      * @brief operator = assignment operator

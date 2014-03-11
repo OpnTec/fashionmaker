@@ -32,7 +32,7 @@
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Tool::Sources &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                          QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
     const VSpline *spl = data->GeometricObject<const VSpline *>(id);
@@ -61,7 +61,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Tool
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
     controlPoints.append(controlPoint2);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -100,19 +100,19 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     qreal angle2 = dialogTool->getAngle2();
     qreal kCurve = dialogTool->getKCurve();
     Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
-           Tool::FromGui);
+           Valentina::FromGui);
 }
 
 void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                         const Document::Documents &parse, const Tool::Sources &typeCreation)
+                         const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
     quint32 id = _id;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(spline);
         data->AddLengthSpline(spline->name(), toMM(spline->GetLength()));
@@ -126,7 +126,7 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
+    VDrawTool::AddRecord(id, Valentina::SplineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
@@ -209,7 +209,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Spline);
+        emit ChoosedTool(id, Valentina::Spline);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

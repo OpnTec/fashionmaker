@@ -42,7 +42,7 @@ DialogUnionDetails::~DialogUnionDetails()
     delete ui;
 }
 
-void DialogUnionDetails::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogUnionDetails::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (numberD == 0)
     {
@@ -69,12 +69,12 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
     return det.Containes(id);
 }
 
-void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail,
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail,
                                        ptrdiff_t &index)
 {
     if (idDetail == 0)
     {
-        if (type == Scene::Detail)
+        if (type == Valentina::Detail)
         {
             idDetail = id;
             emit ToolTip(tr("Select first point"));
@@ -85,7 +85,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Scene::Scenes &t
     {
         return;
     }
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         if (numberP == 0)
         {

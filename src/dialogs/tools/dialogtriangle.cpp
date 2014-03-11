@@ -54,9 +54,9 @@ DialogTriangle::~DialogTriangle()
     delete ui;
 }
 
-void DialogTriangle::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)

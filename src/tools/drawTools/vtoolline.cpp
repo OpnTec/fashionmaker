@@ -32,7 +32,7 @@
 const QString VToolLine::TagName = QStringLiteral("line");
 
 VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-                     const QString &typeLine, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                     const QString &typeLine, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
     this->typeLine = typeLine;
@@ -47,7 +47,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor, LineStyle()));
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -75,18 +75,18 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     quint32 firstPoint = dialogTool->getFirstPoint();
     quint32 secondPoint = dialogTool->getSecondPoint();
     QString typeLine = dialogTool->getTypeLine();
-    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                        const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                       const Document::Documents &parse, const Tool::Sources &typeCreation)
+                       const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     Q_CHECK_PTR(scene);
     Q_CHECK_PTR(doc);
     Q_CHECK_PTR(data);
     quint32 id = _id;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->getNextId();
         data->AddLine(firstPoint, secondPoint);
@@ -100,7 +100,7 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::LineTool, doc);
+    VDrawTool::AddRecord(id, Valentina::LineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);

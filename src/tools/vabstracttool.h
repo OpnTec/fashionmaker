@@ -153,7 +153,7 @@ public:
      * @param toolType tool type
      * @param doc dom document container
      */
-    static void  AddRecord(const quint32 id, const Tool::Tools &toolType, VPattern *doc);
+    static void  AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -169,7 +169,7 @@ signals:
      * @param id object id in container.
      * @param type type of scene object.
      */
-    void                    ChoosedTool(quint32 id, Scene::Scenes type);
+    void                    ChoosedTool(quint32 id, Valentina::Scenes type);
     /**
      * @brief FullUpdateTree emit if need reparse pattern file.
      */

@@ -296,7 +296,7 @@ void VContainer::ClearCalculationGObjects()
         while (i.hasNext())
         {
             i.next();
-            if (i.value()->getMode() == Draw::Calculation)
+            if (i.value()->getMode() == Valentina::Calculation)
             {
                 delete i.value();
                 gObjects.remove(i.key());

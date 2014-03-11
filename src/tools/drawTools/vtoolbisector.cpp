@@ -34,13 +34,13 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
 
 VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                              const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                             const quint32 &thirdPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                             const quint32 &thirdPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0), thirdPointId(0)
 {
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -96,14 +96,14 @@ void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     QString typeLine = dialogTool->getTypeLine();
     QString pointName = dialogTool->getPointName();
     Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
 void VToolBisector::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
                            const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                           const Document::Documents &parse, const Tool::Sources &typeCreation)
+                           const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -117,7 +117,7 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
         QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                   thirdPoint->toQPointF(), toPixel(result));
         quint32 id = _id;
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
@@ -131,7 +131,7 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
+        VDrawTool::AddRecord(id, Valentina::BisectorTool, doc);
         if (parse == Document::FullParse)
         {
             VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,

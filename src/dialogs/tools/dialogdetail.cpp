@@ -62,23 +62,23 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
 }
 
-void DialogDetail::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type != Scene::Line && type != Scene::Detail)
+    if (type != Valentina::Line && type != Valentina::Detail)
     {
         switch (type)
         {
-            case (Scene::Arc):
-                NewItem(id, Tool::NodeArc, NodeDetail::Contour);
+            case (Valentina::Arc):
+                NewItem(id, Valentina::NodeArc, NodeDetail::Contour);
                 break;
-            case (Scene::Point):
-                NewItem(id, Tool::NodePoint, NodeDetail::Contour);
+            case (Valentina::Point):
+                NewItem(id, Valentina::NodePoint, NodeDetail::Contour);
                 break;
-            case (Scene::Spline):
-                NewItem(id, Tool::NodeSpline, NodeDetail::Contour);
+            case (Valentina::Spline):
+                NewItem(id, Valentina::NodeSpline, NodeDetail::Contour);
                 break;
-            case (Scene::SplinePath):
-                NewItem(id, Tool::NodeSplinePath, NodeDetail::Contour);
+            case (Valentina::SplinePath):
+                NewItem(id, Valentina::NodeSplinePath, NodeDetail::Contour);
                 break;
             default:
                 qWarning()<<tr("Got wrong scene object. Ignore.");
@@ -105,31 +105,31 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(quint32 id, const Tool::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
+void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
                            qreal my)
 {
     QString name;
     switch (typeTool)
     {
-        case (Tool::NodePoint):
+        case (Valentina::NodePoint):
         {
             const VPointF *point = data->GeometricObject<const VPointF *>(id);
             name = point->name();
             break;
         }
-        case (Tool::NodeArc):
+        case (Valentina::NodeArc):
         {
             const VArc *arc = data->GeometricObject<const VArc *>(id);
             name = arc->name();
             break;
         }
-        case (Tool::NodeSpline):
+        case (Valentina::NodeSpline):
         {
             const VSpline *spl = data->GeometricObject<const VSpline *>(id);
             name = spl->name();
             break;
         }
-        case (Tool::NodeSplinePath):
+        case (Valentina::NodeSplinePath):
         {
             const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
             name = splPath->name();

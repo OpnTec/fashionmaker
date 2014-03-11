@@ -39,7 +39,7 @@ VArc::VArc ()
 }
 
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-            QString formulaF2, quint32 idObject, Draw::Draws mode)
+            QString formulaF2, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {

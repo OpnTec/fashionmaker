@@ -76,7 +76,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    void             ChoosedObject(quint32 id, const Scene::Scenes &type);
+    void             ChoosedObject(quint32 id, const Valentina::Scenes &type);
     /**
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
@@ -133,7 +133,7 @@ private:
      * @param idDetail id detail
      * @param index index of edge
      */
-    void             ChoosedDetail(const quint32 &id, const Scene::Scenes &type, quint32 &idDetail, ptrdiff_t &index);
+    void             ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail, ptrdiff_t &index);
 };
 
 inline quint32 DialogUnionDetails::getD1() const

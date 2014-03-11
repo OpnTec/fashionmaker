@@ -83,9 +83,9 @@ void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
     setCurrentPointId(ui->comboBoxP2Line, p2LineId, value, id);
 }
 
-void DialogHeight::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)

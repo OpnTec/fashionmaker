@@ -52,7 +52,7 @@ public:
                    VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &arcRadius, const quint32 &center,
                                        const quint32 &firstPointId, const quint32 &secondPointId,
-                                       const Tool::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                                       const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -94,7 +94,7 @@ public:
     static void    Create(const quint32 _id, const QString &arcRadius, const quint32 &center,
                           const quint32 &firstPointId, const quint32 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                          VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation);
+                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     /**

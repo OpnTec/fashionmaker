@@ -35,11 +35,11 @@ const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
                                          const QString &radius, const quint32 &center,
                                          const quint32 &firstPointId, const quint32 &secondPointId,
-                                         const Tool::Sources &typeCreation, QGraphicsItem *parent)
+                                         const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     : VToolPoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -99,14 +99,14 @@ void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     quint32 secondPointId = dialogTool->getSecondPoint();
     QString pointName = dialogTool->getPointName();
     Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
 void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const quint32 &center,
                                  const quint32 &firstPointId, const quint32 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
                                  VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                                 const Document::Documents &parse, const Tool::Sources &typeCreation)
+                                 const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *centerP = data->GeometricObject<const VPointF *>(center);
     const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
@@ -120,7 +120,7 @@ void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const
         QPointF fPoint = VToolPointOfContact::FindPoint(toPixel(result), centerP->toQPointF(),
                                                          firstP->toQPointF(), secondP->toQPointF());
         quint32 id =  _id;
-        if (typeCreation == Tool::FromGui)
+        if (typeCreation == Valentina::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
@@ -138,7 +138,7 @@ void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::PointOfContact, doc);
+        VDrawTool::AddRecord(id, Valentina::PointOfContact, doc);
         if (parse == Document::FullParse)
         {
             VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,

@@ -83,7 +83,7 @@ public slots:
      * @param id id of point or detail
      * @param type type of object
      */
-    virtual void     ChoosedObject(quint32 id, const Scene::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const Valentina::Scenes &type);
     /**
      * @brief NamePointChanged check name of point
      */

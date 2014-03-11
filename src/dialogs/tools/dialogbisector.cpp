@@ -64,9 +64,9 @@ DialogBisector::~DialogBisector()
     delete ui;
 }
 
-void DialogBisector::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogBisector::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)

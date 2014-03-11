@@ -53,7 +53,7 @@ public:
                     */
                    VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &formula, const qreal &angle, const quint32 &firstPointId,
-                               const quint32 &secondPointId, const Tool::Sources &typeCreation,
+                               const quint32 &secondPointId, const Valentina::Sources &typeCreation,
                                QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -88,7 +88,7 @@ public:
                           const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                           const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
                           VPattern *doc, VContainer *data, const Document::Documents &parse,
-                          const Tool::Sources &typeCreation);
+                          const Valentina::Sources &typeCreation);
     /**
      * @brief FindPoint return normal point.
      * @param firstPoint first line point.

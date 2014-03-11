@@ -52,7 +52,7 @@ class VPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, QComboBox *comboBoxDraws, Draw::Draws *mode, QObject *parent = nullptr);
+    VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent = nullptr);
     /**
      * @brief CreateEmptyFile create minimal empty file.
      */
@@ -256,7 +256,7 @@ private:
     /**
      * @brief mode current draw mode.
      */
-    Draw::Draws    *mode;
+    Valentina::Draws    *mode;
     /**
      * @brief fileModified true if exist change in file.
      */
@@ -291,7 +291,7 @@ private:
      * @param mode draw mode.
      */
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
-                                 const QDomNode& node, const Document::Documents &parse, const Draw::Draws &mode);
+                                 const QDomNode& node, const Document::Documents &parse, const Valentina::Draws &mode);
     /**
      * @brief ParseDetailElement parse detail tag.
      * @param sceneDetail detail scene.

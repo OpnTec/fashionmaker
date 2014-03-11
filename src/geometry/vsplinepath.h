@@ -59,7 +59,7 @@ public:
      * @param idObject parent id.
      * @param mode mode creation spline path.
      */
-    VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Draw::Draws mode = Draw::Calculation);
+    VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
     /**
      * @brief VSplinePath copy constructor.
      * @param splPath spline path.

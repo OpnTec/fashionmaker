@@ -29,7 +29,7 @@
 #include "vsplinepath.h"
 #include "../exception/vexception.h"
 
-VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw::Draws mode)
+VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
 {
 }

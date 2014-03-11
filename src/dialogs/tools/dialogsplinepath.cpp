@@ -72,9 +72,9 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 }
 
 
-void DialogSplinePath::ChoosedObject(quint32 id, const Scene::Scenes &type)
+void DialogSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
-    if (type == Scene::Point)
+    if (type == Valentina::Point)
     {
         NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));

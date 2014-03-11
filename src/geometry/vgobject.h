@@ -61,7 +61,8 @@ public:
      * @param idObject id parent object.
      * @param mode mode creation. Used in modeling mode.
      */
-    VGObject(const GObject::Type &type, const quint32 &idObject = 0, const Draw::Draws &mode = Draw::Calculation);
+    VGObject(const GObject::Type &type, const quint32 &idObject = 0,
+             const Valentina::Draws &mode = Valentina::Calculation);
     /**
      * @brief VGObject copy constructor.
      * @param obj object.
@@ -98,12 +99,12 @@ public:
      * @brief getMode return mode creation.
      * @return mode.
      */
-    Draw::Draws     getMode() const;
+    Valentina::Draws     getMode() const;
     /**
      * @brief setMode set mode creation.
      * @param value mode.
      */
-    void            setMode(const Draw::Draws &value);
+    void            setMode(const Valentina::Draws &value);
     /**
      * @brief getType return object type.
      * @return type.
@@ -139,7 +140,7 @@ protected:
     /**
      * @brief mode object created in calculation or drawing mode
      */
-    Draw::Draws     mode;
+    Valentina::Draws     mode;
 };
 
 #endif // VGOBJECT_H

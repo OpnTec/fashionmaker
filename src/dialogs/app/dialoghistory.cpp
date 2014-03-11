@@ -177,22 +177,22 @@ QString DialogHistory::Record(const VToolRecord &tool)
     {
         switch ( tool.getTypeTool() )
         {
-            case Tool::ArrowTool:
+            case Valentina::ArrowTool:
                 Q_UNREACHABLE();
                 break;
-            case Tool::SinglePointTool:
+            case Valentina::SinglePointTool:
             {
                 const QString name = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%1 - Base point")).arg(name);
             }
-            case Tool::EndLineTool:
+            case Valentina::EndLineTool:
             {
                 const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%1_%2 - Line from point %1 to point %2")).arg(basePointIdName, toolIdName);
             }
-            case Tool::LineTool:
+            case Valentina::LineTool:
             {
                 const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
@@ -200,7 +200,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
                 return QString(tr("%1_%2 - Line from point %1 to point %2")).arg(firstPointIdName, secondPointIdName);
             }
-            case Tool::AlongLineTool:
+            case Valentina::AlongLineTool:
             {
                 const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
@@ -209,12 +209,12 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%3 - Point along line %1_%2")).arg(basePointIdName, secondPointIdName, toolIdName);
             }
-            case Tool::ShoulderPointTool:
+            case Valentina::ShoulderPointTool:
             {
                 const QString name = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%1 - Point of shoulder")).arg(name);
             }
-            case Tool::NormalTool:
+            case Valentina::NormalTool:
             {
                 const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
@@ -223,7 +223,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%3 - normal to line %1_%2")).arg(basePointIdName, secondPointIdName, toolIdName);
             }
-            case Tool::BisectorTool:
+            case Valentina::BisectorTool:
             {
                 const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
@@ -235,7 +235,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 return QString(tr("%4 - bisector of angle %1_%2_%3")).arg(firstPointIdName, secondPointIdName,
                                                                           thirdPointIdName, toolIdName);
             }
-            case Tool::LineIntersectTool:
+            case Valentina::LineIntersectTool:
             {
                 const quint32 p1Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, "0");
                 const quint32 p2Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, "0");
@@ -250,7 +250,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                                                                                      p1Line2Name, p2Line2Name,
                                                                                      toolIdName);
             }
-            case Tool::SplineTool:
+            case Valentina::SplineTool:
             {
                 const VSpline *spl = data->GeometricObject<const VSpline *>(tool.getId());
                 Q_CHECK_PTR(spl);
@@ -258,14 +258,14 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
                 return QString(tr("Curve %1_%2")).arg(splP1Name, splP4Name);
             }
-            case Tool::ArcTool:
+            case Valentina::ArcTool:
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(tool.getId());
                 Q_CHECK_PTR(arc);
                 const QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
                 return QString(tr("Arc with center in point %1")).arg(arcCenterName);
             }
-            case Tool::SplinePathTool:
+            case Valentina::SplinePathTool:
             {
                 const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(tool.getId());
                 Q_CHECK_PTR(splPath);
@@ -288,7 +288,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 }
                 return record;
             }
-            case Tool::PointOfContact:
+            case Valentina::PointOfContact:
             {
                 const quint32 center = doc->GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
                 const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
@@ -300,7 +300,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")).arg(
                             centerName, firstPointIdName, secondPointIdName, toolIdName);
             }
-            case Tool::Height:
+            case Valentina::Height:
             {
                 const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const quint32 p1LineId = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
@@ -312,7 +312,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                                                                                              p1LineIdName,
                                                                                              p2LineIdName);
             }
-            case Tool::Triangle:
+            case Valentina::Triangle:
             {
                 const quint32 axisP1Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, "0");
                 const quint32 axisP2Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, "0");
@@ -325,7 +325,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 return QString(tr("Triangle: axis %1_%2, points %3 and %4")).arg(axisP1IdName, axisP2IdName,
                                                                                  firstPointIdName, secondPointIdName);
             }
-            case Tool::PointOfIntersection:
+            case Valentina::PointOfIntersection:
             {
                 const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
@@ -335,7 +335,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 return QString(tr("%1 - point of intersection %2 and %3")).arg(toolIdName, firstPointIdName,
                                                                                secondPointIdName);
             }
-            case Tool::CutArcTool:
+            case Valentina::CutArcTool:
             {
                 const quint32 arcId = doc->GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
                 const VArc *arc = data->GeometricObject<const VArc *>(arcId);
@@ -344,7 +344,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%1 - cut arc with center %2")).arg(toolIdName, arcCenterName);
             }
-            case Tool::CutSplineTool:
+            case Valentina::CutSplineTool:
             {
                 const quint32 splineId = doc->GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
                 const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
@@ -354,7 +354,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
                 return QString(tr("%1 - cut curve %2_%3")).arg(toolIdName, splP1Name, splP4Name);
             }
-            case Tool::CutSplinePathTool:
+            case Valentina::CutSplinePathTool:
             {
                 const quint32 splinePathId = doc->GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
                 const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
@@ -382,17 +382,17 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
-            case Tool::Detail:
+            case Valentina::DetailTool:
                 break;
-            case Tool::UnionDetails:
+            case Valentina::UnionDetails:
                 break;
-            case Tool::NodeArc:
+            case Valentina::NodeArc:
                 break;
-            case Tool::NodePoint:
+            case Valentina::NodePoint:
                 break;
-            case Tool::NodeSpline:
+            case Valentina::NodeSpline:
                 break;
-            case Tool::NodeSplinePath:
+            case Valentina::NodeSplinePath:
                 break;
             default:
                 qWarning()<<tr("Got wrong tool type. Ignore.");
