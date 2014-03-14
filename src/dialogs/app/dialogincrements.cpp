@@ -64,14 +64,14 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
 void DialogIncrements::FillStandardTable()
 {
-    const QHash<QString, VStandardTableRow> *standardTable = data->DataStandardTable();
+    const QHash<QString, VMeasurement> *standardTable = data->DataStandardTable();
     qint32 currentRow = -1;
-    QHashIterator<QString, VStandardTableRow> i(*standardTable);
+    QHashIterator<QString, VMeasurement> i(*standardTable);
     ui->tableWidgetStandard->setRowCount ( standardTable->size() );
     while (i.hasNext())
     {
         i.next();
-        VStandardTableRow cell = i.value();
+        VMeasurement cell = i.value();
         currentRow++;
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
@@ -91,7 +91,7 @@ void DialogIncrements::FillStandardTable()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandard->setItem(currentRow, 3, item);
 
-        item = new QTableWidgetItem(QString().setNum(cell.GetKgrowth()));
+        item = new QTableWidgetItem(QString().setNum(cell.GetKheight()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetStandard->setItem(currentRow, 4, item);
 

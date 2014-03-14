@@ -35,6 +35,14 @@ class VIndividualMeasurements:public VDomDocument
 {
 public:
     VIndividualMeasurements(VContainer *data);
+    Valentina::Units Unit();
+    void Measurements();
+    void Measurement(const QString &tag);
+    QString Language();
+    QString FamilyName();
+    QString GivenName();
+    QString BirthDate();
+    QString Sex();
 };
 
 #endif // VINDIVIDUALMEASUREMENTS_H

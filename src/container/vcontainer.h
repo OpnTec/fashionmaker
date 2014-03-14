@@ -29,7 +29,7 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include "vstandardtablerow.h"
+#include "vmeasurement.h"
 #include "vincrementtablerow.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
@@ -107,11 +107,11 @@ public:
      */
     const VGObject *GetGObject(quint32 id) const;
     /**
-     * @brief GetStandardTableCell return standard table row by name
-     * @param name name of standard table row
-     * @return row of standard table
+     * @brief GetMeasurement return measurement by name
+     * @param name short measurement name
+     * @return measurement
      */
-    const VStandardTableRow GetStandardTableCell(const QString& name) const;
+    const VMeasurement  GetMeasurement(const QString& name) const;
     /**
      * @brief GetIncrementTableRow return increment table row by name
      * @param name name of increment table row
@@ -147,7 +147,7 @@ public:
      * @param id id of detail
      * @return detail
      */
-    const VDetail GetDetail(quint32 id) const;
+    const VDetail       GetDetail(quint32 id) const;
     /**
      * @brief getId return current id
      * @return current id
@@ -166,11 +166,11 @@ public:
      */
     quint32              AddDetail(VDetail detail);
     /**
-     * @brief AddStandardTableRow add new row of standard table
-     * @param name name of row of standard table
-     * @param row row of standard table
+     * @brief AddMeasurement add new measurement
+     * @param name short measurement name
+     * @param row measurement
      */
-    void                 AddStandardTableRow(const QString& name, const VStandardTableRow &row);
+    void                 AddMeasurement(const QString& name, const VMeasurement &m);
     /**
      * @brief AddIncrementTableRow add new row of increment table
      * @param name name of new row of increment table
@@ -236,11 +236,11 @@ public:
      */
     void                UpdateDetail(quint32 id, const VDetail &detail);
     /**
-     * @brief UpdateStandardTableCell update standard table row by name
-     * @param name name of row
-     * @param cell row of standard table
+     * @brief UpdateMeasurement update measurement by name
+     * @param name short measurement name
+     * @param m measurement
      */
-    void                UpdateStandardTableCell(const QString& name, VStandardTableRow cell);
+    void                UpdateMeasurement(const QString& name, VMeasurement m);
     /**
      * @brief UpdateIncrementTableRow update increment table row by name
      * @param name name of row
@@ -345,7 +345,7 @@ public:
      * @brief data container with dataStandardTable return container of standard table
      * @return pointer on container of standard table
      */
-    const QHash<QString, VStandardTableRow> *DataStandardTable() const;
+    const QHash<QString, VMeasurement> *DataStandardTable() const;
     /**
      * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
@@ -397,7 +397,7 @@ private:
     /**
      * @brief standardTable container of standard table rows
      */
-    QHash<QString, VStandardTableRow> standardTable;
+    QHash<QString, VMeasurement> standardTable;
     /**
      * @brief incrementTable
      */
@@ -458,14 +458,14 @@ private:
     static quint32 AddObject(QHash<key, val> &obj, val value);
 };
 
-inline void VContainer::AddStandardTableRow(const QString &name, const VStandardTableRow &row)
+inline void VContainer::AddMeasurement(const QString &name, const VMeasurement &m)
 {
-    standardTable[name] = row;
+    standardTable[name] = m;
 }
 
-inline void VContainer::UpdateStandardTableCell(const QString &name, VStandardTableRow cell)
+inline void VContainer::UpdateMeasurement(const QString &name, VMeasurement m)
 {
-    standardTable[name] = cell;
+    standardTable[name] = m;
 }
 
 inline void VContainer::UpdateIncrementTableRow(const QString &name, VIncrementTableRow row)
@@ -558,7 +558,7 @@ inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
     return &gObjects;
 }
 
-inline const QHash<QString, VStandardTableRow> *VContainer::DataStandardTable() const
+inline const QHash<QString, VMeasurement> *VContainer::DataStandardTable() const
 {
     return &standardTable;
 }

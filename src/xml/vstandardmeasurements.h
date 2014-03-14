@@ -30,7 +30,6 @@
 #define VSTANDARDMEASUREMENTS_H
 
 #include "vdomdocument.h"
-#include "../options.h"
 
 class VStandardMeasurements:public QObject, public VDomDocument
 {

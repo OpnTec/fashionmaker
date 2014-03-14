@@ -168,7 +168,14 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
     const QString parameter = domElement.attribute(name, defValue);
     if (parameter.isEmpty())
     {
-        throw VExceptionEmptyParameter(tr("Got empty parameter"), name, domElement);
+        if (defValue.isEmpty())
+        {
+            throw VExceptionEmptyParameter(tr("Got empty parameter"), name, domElement);
+        }
+        else
+        {
+            return defValue;
+        }
     }
     return parameter;
 }
@@ -257,4 +264,27 @@ bool VDomDocument::ValidatePattern(const QString &schema, const QString &fileNam
     {
         return true;
     }
+}
+
+Valentina::Units VDomDocument::Units(const QString &unit)
+{
+    QStringList units;
+    units << "mm" << "cm" << "in";
+    Valentina::Units result = Valentina::Cm;
+    switch (units.indexOf(unit))
+    {
+        case 0:// mm
+            result = Valentina::Mm;
+            break;
+        case 1:// cm
+            result = Valentina::Cm;
+            break;
+        case 2:// in
+            result = Valentina::In;
+            break;
+        default:
+            result = Valentina::Cm;
+            break;
+    }
+    return result;
 }

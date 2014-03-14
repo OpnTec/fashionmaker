@@ -32,15 +32,15 @@
 #include <QString>
 
 /**
- * @brief The VStandardTableRow class keep data row of standard table
+ * @brief The VMeasurement class keep data row of standard table
  */
-class VStandardTableRow
+class VMeasurement
 {
 public:
                    /**
                     * @brief VStandardTableRow create empty row
                     */
-                   VStandardTableRow();
+                   VMeasurement();
                    /**
                     * @brief VStandardTableRow create row
                     * @param base value in base size and growth
@@ -48,9 +48,11 @@ public:
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VStandardTableRow(const qreal &base, const qreal &ksize, const qreal &kgrowth,
+                   VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
                                      const QString &gui_text = QString(), const QString &number = QString());
-                   ~VStandardTableRow(){}
+                   VMeasurement(const qreal &base, const QString &gui_text = QString(),
+                                const QString &number = QString());
+                   ~VMeasurement(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value
@@ -65,13 +67,15 @@ public:
      * @brief GetKgrowth return increment in growths
      * @return increment
      */
-    qreal   GetKgrowth() const;
+    qreal   GetKheight() const;
     /**
      * @brief GetDescription return description
      * @return description
      */
     QString GetDescription() const;
     QString GetNumber() const;
+    qreal   GetValue() const;
+    qreal   GetValue(const qreal &size, const qreal &height) const;
 private:
     /**
      * @brief base value in base size and growth
@@ -84,7 +88,7 @@ private:
     /**
      * @brief kgrowth increment in growths
      */
-    qreal          kgrowth;
+    qreal          kheight;
     /**
      * @brief description description measurement
      */
@@ -92,27 +96,27 @@ private:
     QString        number;
 };
 
-inline qreal VStandardTableRow::GetBase() const
+inline qreal VMeasurement::GetBase() const
 {
     return base;
 }
 
-inline qreal VStandardTableRow::GetKsize() const
+inline qreal VMeasurement::GetKsize() const
 {
     return ksize;
 }
 
-inline qreal VStandardTableRow::GetKgrowth() const
+inline qreal VMeasurement::GetKheight() const
 {
-    return kgrowth;
+    return kheight;
 }
 
-inline QString VStandardTableRow::GetDescription() const
+inline QString VMeasurement::GetDescription() const
 {
     return gui_text;
 }
 
-inline QString VStandardTableRow::GetNumber() const
+inline QString VMeasurement::GetNumber() const
 {
     return number;
 }

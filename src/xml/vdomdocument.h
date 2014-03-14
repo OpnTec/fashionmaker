@@ -33,6 +33,7 @@
 
 #include <QDomDocument>
 #include <QDebug>
+#include "../options.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -117,6 +118,7 @@ protected:
      * @brief data container with data.
      */
     VContainer     *data;
+    Valentina::Units Units(const QString &unit);
 private:
     Q_DISABLE_COPY(VDomDocument)
     /**

@@ -36,25 +36,7 @@ VStandardMeasurements::VStandardMeasurements(VContainer *data):VDomDocument(data
 Valentina::Units VStandardMeasurements::Unit()
 {
     const QString unit = UniqueTagText("unit", "cm");
-    QStringList units;
-    units << "mm" << "cm" << "in";
-    Valentina::Units result = Valentina::Cm;
-    switch (units.indexOf(unit))
-    {
-        case 0:// mm
-            result = Valentina::Mm;
-            break;
-        case 1:// cm
-            result = Valentina::Cm;
-            break;
-        case 2:// in
-            result = Valentina::In;
-            break;
-        default:
-            result = Valentina::Cm;
-            break;
-    }
-    return result;
+    return VDomDocument::Units(unit);
 }
 
 QString VStandardMeasurements::Description()
@@ -98,12 +80,12 @@ void VStandardMeasurements::Measurements()
 
                     if (Unit() == Valentina::Mm)//Convert to Cm.
                     {
-                        data->AddStandardTableRow(name, VStandardTableRow(base/10.0, size_increace/10.0,
-                                                                          height_increase/10.0, gui_text, number));
+                        data->AddMeasurement(name, VMeasurement(base/10.0, size_increace/10.0, height_increase/10.0,
+                                                                gui_text, number));
                     }
                     else//Cm or inch.
                     {
-                        data->AddStandardTableRow(name, VStandardTableRow(base, size_increace, height_increase,
+                        data->AddMeasurement(name, VMeasurement(base, size_increace, height_increase,
                                                                           gui_text, number));
                     }
                 }

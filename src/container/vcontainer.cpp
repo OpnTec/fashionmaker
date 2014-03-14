@@ -35,7 +35,7 @@ quint32 VContainer::_id = 0;
 
 VContainer::VContainer()
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      standardTable(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -49,7 +49,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      standardTable(QHash<QString, VStandardTableRow>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      standardTable(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -143,7 +143,7 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
     }
 }
 
-const VStandardTableRow VContainer::GetStandardTableCell(const QString &name) const
+const VMeasurement VContainer::GetMeasurement(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(standardTable, name);
@@ -250,11 +250,15 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 
 qreal VContainer::GetValueStandardTableRow(const QString& name) const
 {
-    const VStandardTableRow row =  GetStandardTableCell(name);
-    const qreal k_size    = ( size() - 50.0 ) / 2.0;
-    const qreal k_growth  = ( height() - 176.0 ) / 6.0;
-    const qreal value = row.GetBase() + k_size * row.GetKsize() + k_growth * row.GetKgrowth();
-    return value;
+    const VMeasurement m =  GetMeasurement(name);
+    if (patternType == Pattern::Individual)
+    {
+        return m.GetValue();
+    }
+    else
+    {
+        return m.GetValue(size(), height());
+    }
 }
 
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const

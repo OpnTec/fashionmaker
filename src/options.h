@@ -103,6 +103,18 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Units )
 
 extern Valentina::Units patternUnit;
 
+namespace Pattern
+{
+    /**
+     * @brief The Scene enum
+     */
+    enum Measurement { Standard, Individual };
+    Q_DECLARE_FLAGS(Measurements, Measurement)
+}
+Q_DECLARE_OPERATORS_FOR_FLAGS( Pattern::Measurements )
+
+extern Pattern::Measurements patternType;
+
 #define PrintDPI 96.0
 
 inline double toPixel(double unit)

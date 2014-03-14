@@ -616,7 +616,7 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonStandardTable->isChecked())
     {
-        VStandardTableRow stable = data->GetStandardTableCell(item->text());
+        VMeasurement stable = data->GetMeasurement(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(item->text()))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);

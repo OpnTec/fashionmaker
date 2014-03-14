@@ -26,11 +26,29 @@
  **
  *************************************************************************/
 
-#include "vstandardtablerow.h"
+#include "vmeasurement.h"
 
-VStandardTableRow::VStandardTableRow()
-    :base(0), ksize(0), kgrowth(0), gui_text(QString()), number(QString()){}
+VMeasurement::VMeasurement()
+    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()){}
 
-VStandardTableRow::VStandardTableRow(const qreal &base, const qreal &ksize, const qreal &kgrowth,
-                                     const QString &description, const QString &number)
-    :base(base), ksize(ksize), kgrowth(kgrowth), gui_text(description), number(number){}
+VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kgrowth,
+                           const QString &gui_text, const QString &number)
+    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number){}
+
+VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &number)
+    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number)
+{
+
+}
+
+qreal VMeasurement::GetValue() const
+{
+    return base;
+}
+
+qreal VMeasurement::GetValue(const qreal &size, const qreal &height) const
+{
+    const qreal k_size    = ( size - 50.0 ) / 2.0;
+    const qreal k_growth  = ( height - 176.0 ) / 6.0;
+    return base + k_size * ksize + k_growth * kheight;
+}
