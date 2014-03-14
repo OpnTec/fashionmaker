@@ -88,8 +88,11 @@ public:
                                        const QString &defValue) const;
     /**
      * @brief GetParametrString return string value of attribute.
+     *
+     * if attribute empty return default value. If default value empty too throw exception.
      * @param domElement tag in xml tree.
      * @param name attribute name.
+     * @throw VExceptionEmptyParameter when attribute is empty
      * @return attribute value.
      */
     QString        GetParametrString(const QDomElement& domElement, const QString &name,

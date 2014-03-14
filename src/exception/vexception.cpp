@@ -31,9 +31,14 @@
 #include <QSpacerItem>
 #include <QGridLayout>
 
-VException::VException(const QString &what):QException(), what(what)
+VException::VException(const QString &what):QException(), what(what), moreInfo(QString())
 {
     Q_ASSERT_X(what.isEmpty() == false, Q_FUNC_INFO, "Error message is empty");
+}
+
+VException::VException(const VException &e):what(e.What()), moreInfo(e.MoreInformation())
+{
+
 }
 
 QString VException::ErrorMessage() const
@@ -60,4 +65,25 @@ void VException::CriticalMessageBox(const QString &situation, QWidget * parent) 
     Q_CHECK_PTR(layout);
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
+}
+
+void VException::AddMoreInformation(const QString &info)
+{
+    if (info.isEmpty())
+    {
+        return;
+    }
+    moreInfo = QString("%1\n%2").arg(moreInfo, info);
+}
+
+QString VException::MoreInfo(const QString &detInfo) const
+{
+    if (moreInfo.isEmpty() == false)
+    {
+        return QString("%1\n%2").arg(moreInfo, detInfo);
+    }
+    else
+    {
+        return detInfo;
+    }
 }

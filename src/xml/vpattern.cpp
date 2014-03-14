@@ -34,6 +34,7 @@
 #include "../tools/nodeDetails/nodedetails.h"
 #include "../exception/vexceptionobjecterror.h"
 #include "../exception/vexceptionwrongid.h"
+#include "../exception/vexceptionconversionerror.h"
 
 #include <QMessageBox>
 
@@ -1244,10 +1245,23 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
 quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    const quint32 id = GetParametrUInt(domElement, VAbstractTool::AttrId, "0");
-    if (id <= 0)
+
+    quint32 id = 0;
+
+    QString message = tr("Got wrong parameter id. Need only id > 0.");
+    try
     {
-        throw VExceptionWrongId(tr("Got wrong parameter id. Need only id > 0."), domElement);
+        id = GetParametrUInt(domElement, VAbstractTool::AttrId, "0");
+        if (id <= 0)
+        {
+            throw VExceptionWrongId(message, domElement);
+        }
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        VExceptionWrongId excep(message, domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
     }
     return id;
 }

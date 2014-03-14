@@ -150,13 +150,28 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
     bool ok = false;
-    const QString parametr = GetParametrString(domElement, name, defValue);
-    const quint32 id = parametr.toUInt(&ok);
-    if (ok == false)
+    QString parametr;
+    quint32 id = 0;
+
+    QString message = tr("Can't convert toUInt parameter");
+    try
     {
-        throw VExceptionConversionError(tr("Can't convert toUInt parameter"), name);
+        parametr = GetParametrString(domElement, name, defValue);
+        id = parametr.toUInt(&ok);
+        if (ok == false)
+        {
+            throw VExceptionConversionError(message, name);
+        }
     }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+
     return id;
 }
 
@@ -184,12 +199,25 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
     bool ok = false;
-    QString parametr = GetParametrString(domElement, name, defValue);
-    const qreal param = parametr.replace(",", ".").toDouble(&ok);
-    if (ok == false)
+    qreal param = 0;
+
+    QString message = tr("Can't convert toDouble parameter");
+    try
     {
-        throw VExceptionConversionError(tr("Can't convert toDouble parameter"), name);
+        QString parametr = GetParametrString(domElement, name, defValue);
+        param = parametr.replace(",", ".").toDouble(&ok);
+        if (ok == false)
+        {
+            throw VExceptionConversionError(message, name);
+        }
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
     }
     return param;
 }

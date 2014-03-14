@@ -76,16 +76,6 @@ public:
      * @return line number
      */
     qint32          LineNumber() const;
-    /**
-     * @brief AddMoreInformation add more information for error
-     * @param info information
-     */
-    void            AddMoreInformation(const QString &info);
-    /**
-     * @brief MoreInformation return more information for error
-     * @return information
-     */
-    QString         MoreInformation() const;
 protected:
     /**
      * @brief tagText tag text
@@ -99,10 +89,6 @@ protected:
      * @brief lineNumber line number
      */
     qint32          lineNumber;
-    /**
-     * @brief moreInfo more information about error
-     */
-    QString         moreInfo;
 };
 
 inline QString VExceptionObjectError::TagText() const
@@ -118,11 +104,6 @@ inline QString VExceptionObjectError::TagName() const
 inline qint32 VExceptionObjectError::LineNumber() const
 {
     return lineNumber;
-}
-
-inline QString VExceptionObjectError::MoreInformation() const
-{
-    return moreInfo;
 }
 
 #endif // VEXCEPTIONOBJECTERROR_H

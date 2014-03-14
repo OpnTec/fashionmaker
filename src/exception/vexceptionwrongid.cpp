@@ -53,6 +53,5 @@ QString VExceptionWrongId::ErrorMessage() const
 
 QString VExceptionWrongId::DetailedInformation() const
 {
-    QString detail = QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText);
-    return detail;
+    return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
 }
