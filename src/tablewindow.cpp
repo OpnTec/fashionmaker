@@ -499,7 +499,7 @@ void TableWindow::EpsFile(const QString &name) const
         QStringList params;
         params << "-eps" << tmp.fileName() << name;
 
-        PdfToPs(name, params);
+        PdfToPs(params);
     }
 }
 
@@ -513,12 +513,11 @@ void TableWindow::PsFile(const QString &name) const
         QStringList params;
         params << tmp.fileName() << name;
 
-        PdfToPs(name, params);
+        PdfToPs(params);
     }
 }
 
-//TODO delete parametr name and use last parameter in string list instead.
-void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
+void TableWindow::PdfToPs(const QStringList &params) const
 {
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -534,10 +533,10 @@ void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
     QApplication::restoreOverrideCursor();
 #endif
 
-    QFile f(name);
+    QFile f(params.last());
     if (f.exists() == false)
     {
-        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(name).arg(proc.errorString());
+        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(params.last()).arg(proc.errorString());
         QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
