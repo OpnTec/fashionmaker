@@ -30,6 +30,7 @@
 #define DIALOGSTANDARDMEASUREMENTS_H
 
 #include <QDialog>
+#include "../../container/vcontainer.h"
 
 namespace Ui
 {
@@ -40,13 +41,14 @@ class DialogStandardMeasurements : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogStandardMeasurements(QWidget *parent = nullptr);
+    explicit DialogStandardMeasurements(VContainer *data, QWidget *parent = nullptr);
     ~DialogStandardMeasurements();
     QString name() const;
     QString tablePath() const;
 private:
     Q_DISABLE_COPY(DialogStandardMeasurements)
     Ui::DialogStandardMeasurements *ui;
+    VContainer *data;
     QString _name;
     QString _tablePath;
     void DialogAccepted();

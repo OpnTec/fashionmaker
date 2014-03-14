@@ -114,8 +114,8 @@ public:
      * @param errorColumn number error column.
      * @return true if validation successful.
      */
-    static bool ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
-                                qint64 &errorColumn);
+    static void ValidatePattern(const QString &schema, const QString &fileName);
+    void setContent(QIODevice * dev);
 protected:
     /**
      * @brief data container with data.

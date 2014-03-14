@@ -29,9 +29,10 @@
 #include "dialogstandardmeasurements.h"
 #include "ui_dialogstandardmeasurements.h"
 #include <QDir>
+#include "../../xml/vstandardmeasurements.h"
 
-DialogStandardMeasurements::DialogStandardMeasurements(QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogStandardMeasurements), _name(QString()), _tablePath(QString())
+DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, QWidget *parent) :
+    QDialog(parent), ui(new Ui::DialogStandardMeasurements), data(data), _name(QString()), _tablePath(QString())
 {
     ui->setupUi(this);
 
@@ -70,7 +71,8 @@ QString DialogStandardMeasurements::tablePath() const
 void DialogStandardMeasurements::DialogAccepted()
 {
     _name = ui->lineEditName->text();
-    _tablePath = "path";
+    const qint32 index = ui->comboBoxTables->currentIndex();
+    _tablePath = ui->comboBoxTables->itemData(index).toString();
     accept();
 }
 
@@ -107,20 +109,19 @@ void DialogStandardMeasurements::CheckState()
 void DialogStandardMeasurements::LoadStandardTables()
 {
 #ifdef Q_OS_WIN
-    const QString pathToTables = QString("/standard_tables");
+    const QString pathToTables = QString("/tables/standard");
 #else
     #ifdef QT_DEBUG
-        const QString pathToTables = QString("/standard_tables");
+        const QString pathToTables = QString("/tables/standard");
     #else
-        const QString pathToTables = QString("/usr/share/valentina/standard_tables");
+        const QString pathToTables = QString("/usr/share/valentina/tables/standard");
     #endif
 #endif
+    QStringList filters;
+    filters << "*.vst";
     QDir tablesDir(pathToTables);
-    {
-        QStringList filters;
-        filters << "*.cpp";
-        tablesDir.setNameFilters(filters);
-    }
+    tablesDir.setNameFilters(filters);
+
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
     {
@@ -131,6 +132,36 @@ void DialogStandardMeasurements::LoadStandardTables()
 
     for (int i = 0; i < allFiles.size(); ++i)
     {
+        QFile file(allFiles.at(i));
+        if (file.open(QIODevice::ReadOnly))
+        {
+            try
+            {
+                VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", allFiles.at(i));
+            }
+            catch(VException &e)
+            {
+                qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+                continue;
+            }
 
+            VStandardMeasurements m(data);
+            try
+            {
+                m.setContent(&file);
+                ui->comboBoxTables->addItem(m.Description(), QVariant(allFiles.at(i)));
+            }
+            catch(VException &e)
+            {
+                qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+                continue;
+            }
+
+            file.close();
+        }
+        else
+        {
+            qWarning()<<tr("Cannot read file %1:\n%2.").arg(allFiles.at(i)).arg(file.errorString()) << Q_FUNC_INFO;
+        }
     }
 }

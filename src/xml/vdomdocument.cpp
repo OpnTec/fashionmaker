@@ -244,22 +244,27 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
     return defVal;
 }
 
-bool VDomDocument::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
-                                   qint64 &errorColumn)
+void VDomDocument::ValidatePattern(const QString &schema, const QString &fileName)
 {
-    errorLine = -1;
-    errorColumn = -1;
+    QString errorMsg;
+    qint64 errorLine = -1;
+    qint64 errorColumn = -1;
+
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
         errorMsg = QString(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
-        return false;
+        VException e(errorMsg);
+        e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
+        throw e;
     }
     QFile fileSchema(schema);
     if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
         errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
-        return false;
+        VException e(errorMsg);
+        e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
+        throw e;
     }
 
     MessageHandler messageHandler;
@@ -283,14 +288,23 @@ bool VDomDocument::ValidatePattern(const QString &schema, const QString &fileNam
 
     if (errorOccurred)
     {
-        errorMsg = messageHandler.statusMessage();
-        errorLine = messageHandler.line();
-        errorColumn = messageHandler.column();
-        return false;
+        VException e(messageHandler.statusMessage());
+        e.AddMoreInformation(tr("Error in line %1 column %2").arg(messageHandler.line()).arg(messageHandler.column()));
+        throw e;
     }
-    else
+
+}
+
+void VDomDocument::setContent(QIODevice *dev)
+{
+    QString errorMsg;
+    int errorLine = 0;
+    int errorColumn = 0;
+    if (QDomDocument::setContent(dev, &errorMsg, &errorLine, &errorColumn) == false)
     {
-        return true;
+         VException e(errorMsg);
+         e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
+         throw e;
     }
 }
 

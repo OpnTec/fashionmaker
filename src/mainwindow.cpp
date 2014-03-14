@@ -120,7 +120,7 @@ void MainWindow::ActionNewDraw()
         measurements.exec();
         if (measurements.type() == Measurements::Standard)
         {
-            DialogStandardMeasurements stMeasurements(this);
+            DialogStandardMeasurements stMeasurements(pattern, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
                 nameDraw = stMeasurements.name();
@@ -1381,107 +1381,91 @@ MainWindow::~MainWindow()
 void MainWindow::LoadPattern(const QString &fileName)
 {
     QFile file(fileName);
-    QString errorMsg;
-    qint64 errorLine = 0;
-    qint64 errorColumn = 0;
     if (file.open(QIODevice::ReadOnly))
     {
-        if (VDomDocument::ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
+        try
         {
-            qint32 errorLine = 0;
-            qint32 errorColumn = 0;
-            if (doc->setContent(&file, &errorMsg, &errorLine, &errorColumn))
-            {
-                disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                           this, &MainWindow::currentDrawChanged);
-                try
-                {
-                    #ifndef QT_NO_CURSOR
-                        QApplication::setOverrideCursor(Qt::WaitCursor);
-                    #endif
-                    doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
-                    #ifndef QT_NO_CURSOR
-                        QApplication::restoreOverrideCursor();
-                    #endif
-                        ui->actionPattern_properties->setEnabled(true);
-                }
-                catch (const VExceptionObjectError &e)
-                {
-                    e.CriticalMessageBox(tr("Error parsing file."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionConversionError &e)
-                {
-                    e.CriticalMessageBox(tr("Error can't convert value."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionEmptyParameter &e)
-                {
-                    e.CriticalMessageBox(tr("Error empty parameter."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionWrongId &e)
-                {
-                    e.CriticalMessageBox(tr("Error wrong id."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                        this, &MainWindow::currentDrawChanged);
-                QString nameDraw = doc->GetNameActivDraw();
-                qint32 index = comboBoxDraws->findText(nameDraw);
-                if ( index != -1 )
-                { // -1 for not found
-                    comboBoxDraws->setCurrentIndex(index);
-                }
-                if (comboBoxDraws->count() > 0)
-                {
-                    SetEnableTool(true);
-                }
-                else
-                {
-                    SetEnableTool(false);
-                }
-                SetEnableWidgets(true);
-            }
-            else
-            {
-                QMessageBox msgBox(this);
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Parsing pattern file error."));
-                msgBox.setInformativeText(errorMsg);
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
-                msgBox.setDetailedText(error);
-                msgBox.exec();
-                file.close();
-                Clear();
-                return;
-            }
+            VDomDocument::ValidatePattern("://schema/pattern.xsd", fileName);
         }
-        else
+        catch(VException &e)
         {
-            QMessageBox msgBox(this);
-            msgBox.setWindowTitle(tr("Error!"));
-            msgBox.setText(tr("Validation file error."));
-            msgBox.setInformativeText(errorMsg);
-            msgBox.setStandardButtons(QMessageBox::Ok);
-            msgBox.setDefaultButton(QMessageBox::Ok);
-            QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
-            msgBox.setDetailedText(error);
-            msgBox.exec();
+            e.CriticalMessageBox(tr("Validation file error."), this);
             file.close();
             Clear();
             return;
         }
+
+        try
+        {
+            doc->setContent(&file);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
+            file.close();
+            Clear();
+            return;
+        }
+
+        disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+                   this, &MainWindow::currentDrawChanged);
+        try
+        {
+            #ifndef QT_NO_CURSOR
+                QApplication::setOverrideCursor(Qt::WaitCursor);
+            #endif
+            doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+            #ifndef QT_NO_CURSOR
+                QApplication::restoreOverrideCursor();
+            #endif
+                ui->actionPattern_properties->setEnabled(true);
+        }
+        catch (const VExceptionObjectError &e)
+        {
+            e.CriticalMessageBox(tr("Error parsing file."), this);
+            file.close();
+            Clear();
+            return;
+        }
+        catch (const VExceptionConversionError &e)
+        {
+            e.CriticalMessageBox(tr("Error can't convert value."), this);
+            file.close();
+            Clear();
+            return;
+        }
+        catch (const VExceptionEmptyParameter &e)
+        {
+            e.CriticalMessageBox(tr("Error empty parameter."), this);
+            file.close();
+            Clear();
+            return;
+        }
+        catch (const VExceptionWrongId &e)
+        {
+            e.CriticalMessageBox(tr("Error wrong id."), this);
+            file.close();
+            Clear();
+            return;
+        }
+        connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::currentDrawChanged);
+        QString nameDraw = doc->GetNameActivDraw();
+        qint32 index = comboBoxDraws->findText(nameDraw);
+        if ( index != -1 )
+        { // -1 for not found
+            comboBoxDraws->setCurrentIndex(index);
+        }
+        if (comboBoxDraws->count() > 0)
+        {
+            SetEnableTool(true);
+        }
+        else
+        {
+            SetEnableTool(false);
+        }
+        SetEnableWidgets(true);
+
         file.close();
     }
     else
