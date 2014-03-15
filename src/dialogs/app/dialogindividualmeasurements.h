@@ -30,6 +30,7 @@
 #define DIALOGINDIVIDUALMEASUREMENTS_H
 
 #include <QDialog>
+#include "../../container/vcontainer.h"
 
 namespace Ui
 {
@@ -41,7 +42,7 @@ class DialogIndividualMeasurements : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogIndividualMeasurements(QWidget *parent = nullptr);
+    explicit DialogIndividualMeasurements(VContainer *data, QWidget *parent = nullptr);
     ~DialogIndividualMeasurements();
     QString name() const;
     QString tablePath() const;
@@ -50,9 +51,13 @@ private:
     Ui::DialogIndividualMeasurements *ui;
     QString _name;
     QString _tablePath;
+    VContainer *data;
     void DialogAccepted();
     void DialogRejected();
     void CheckState();
+    void LoadIndividualTables();
+    void OpenTable();
+    void NewTable();
 };
 
 inline QString DialogIndividualMeasurements::name() const

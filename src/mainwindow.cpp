@@ -132,7 +132,7 @@ void MainWindow::ActionNewDraw()
         }
         else
         {
-            DialogIndividualMeasurements indMeasurements(this);
+            DialogIndividualMeasurements indMeasurements(pattern, this);
             if (indMeasurements.exec() == QDialog::Accepted)
             {
                 nameDraw = indMeasurements.name();

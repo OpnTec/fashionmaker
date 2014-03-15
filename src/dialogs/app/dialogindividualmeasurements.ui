@@ -82,6 +82,9 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
+        <widget class="QComboBox" name="comboBoxLang"/>
+       </item>
+       <item>
         <widget class="QLineEdit" name="lineEditPathNewM"/>
        </item>
        <item>
