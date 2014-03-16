@@ -144,6 +144,34 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
     domElement.setAttribute(name, value);
 }
 
+template <>
+inline void VDomDocument::SetAttribute<Pattern::Measurements>(QDomElement &domElement, const QString &name,
+                                                              const Pattern::Measurements &value)
+{
+    if (value == Pattern::Standard)
+    {
+        domElement.setAttribute(name, "standard");
+    }
+    else
+    {
+        domElement.setAttribute(name, "individual");
+    }
+}
+
+template <>
+inline void VDomDocument::SetAttribute<Valentina::Units>(QDomElement &domElement, const QString &name,
+                                                              const Valentina::Units &value)
+{
+    if (value == Valentina::Cm || value == Valentina::Mm)
+    {
+        domElement.setAttribute(name, "cm");
+    }
+    else
+    {
+        domElement.setAttribute(name, "in");
+    }
+}
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic pop
 #endif

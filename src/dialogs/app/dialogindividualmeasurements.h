@@ -42,7 +42,7 @@ class DialogIndividualMeasurements : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogIndividualMeasurements(VContainer *data, QWidget *parent = nullptr);
+    DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
     ~DialogIndividualMeasurements();
     QString name() const;
     QString tablePath() const;

@@ -38,24 +38,25 @@
 
 #include <QMessageBox>
 
-const QString VPattern::TagPattern     = QStringLiteral("pattern");
-const QString VPattern::TagCalculation = QStringLiteral("calculation");
-const QString VPattern::TagModeling    = QStringLiteral("modeling");
-const QString VPattern::TagDetails     = QStringLiteral("details");
-const QString VPattern::TagAuthor      = QStringLiteral("author");
-const QString VPattern::TagDescription = QStringLiteral("description");
-const QString VPattern::TagNotes       = QStringLiteral("notes");
-const QString VPattern::TagIncrements  = QStringLiteral("increments");
-const QString VPattern::TagIncrement   = QStringLiteral("increment");
-const QString VPattern::TagDraw        = QStringLiteral("draw");
-const QString VPattern::TagPoint       = QStringLiteral("point");
-const QString VPattern::TagLine        = QStringLiteral("line");
-const QString VPattern::TagSpline      = QStringLiteral("spline");
-const QString VPattern::TagArc         = QStringLiteral("arc");
-const QString VPattern::TagTools       = QStringLiteral("tools");
+const QString VPattern::TagPattern      = QStringLiteral("pattern");
+const QString VPattern::TagCalculation  = QStringLiteral("calculation");
+const QString VPattern::TagModeling     = QStringLiteral("modeling");
+const QString VPattern::TagDetails      = QStringLiteral("details");
+const QString VPattern::TagAuthor       = QStringLiteral("author");
+const QString VPattern::TagDescription  = QStringLiteral("description");
+const QString VPattern::TagNotes        = QStringLiteral("notes");
+const QString VPattern::TagMeasurements = QStringLiteral("measurements");
+const QString VPattern::TagIncrements   = QStringLiteral("increments");
+const QString VPattern::TagIncrement    = QStringLiteral("increment");
+const QString VPattern::TagDraw         = QStringLiteral("draw");
+const QString VPattern::TagPoint        = QStringLiteral("point");
+const QString VPattern::TagLine         = QStringLiteral("line");
+const QString VPattern::TagSpline       = QStringLiteral("spline");
+const QString VPattern::TagArc          = QStringLiteral("arc");
+const QString VPattern::TagTools        = QStringLiteral("tools");
 
-const QString VPattern::AttrName       = QStringLiteral("name");
-const QString VPattern::AttrType       = QStringLiteral("type");
+const QString VPattern::AttrName        = QStringLiteral("name");
+const QString VPattern::AttrType        = QStringLiteral("type");
 
 const QString VPattern::IncrementName        = QStringLiteral("name");
 const QString VPattern::IncrementBase        = QStringLiteral("base");
@@ -69,14 +70,25 @@ VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws 
 {
 }
 
-void VPattern::CreateEmptyFile()
+void VPattern::CreateEmptyFile(const QString &tablePath)
 {
+    if (tablePath.isEmpty())
+    {
+        throw VException("Path to measurement table empty.");
+    }
     QDomElement patternElement = this->createElement(TagPattern);
 
     patternElement.appendChild(createComment("Valentina pattern format."));
     patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
+
+    QDomElement measurements = createElement(TagMeasurements);
+    SetAttribute(measurements, "unit", patternUnit);
+    SetAttribute(measurements, "type", patternType);
+    SetAttribute(measurements, "path", tablePath);
+    patternElement.appendChild(measurements);
+
     patternElement.appendChild(createElement(TagIncrements));
 
     this->appendChild(patternElement);

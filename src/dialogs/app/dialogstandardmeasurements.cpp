@@ -31,8 +31,9 @@
 #include <QDir>
 #include "../../xml/vstandardmeasurements.h"
 
-DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogStandardMeasurements), data(data), _name(QString()), _tablePath(QString())
+DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,
+                                                       QWidget *parent) :
+    QDialog(parent), ui(new Ui::DialogStandardMeasurements), data(data), _name(patternPieceName), _tablePath(QString())
 {
     ui->setupUi(this);
 
@@ -46,6 +47,8 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, QWidget
         Q_CHECK_PTR(bCansel);
         connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogRejected);
     }
+
+    ui->lineEditName->setText(_name);
 
     LoadStandardTables();
 
@@ -73,13 +76,50 @@ void DialogStandardMeasurements::DialogAccepted()
     _name = ui->lineEditName->text();
     const qint32 index = ui->comboBoxTables->currentIndex();
     _tablePath = ui->comboBoxTables->itemData(index).toString();
+    QFile file(_tablePath);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        try
+        {
+            VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", _tablePath);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Validation file error."), this);
+            qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            return;
+        }
+
+        VStandardMeasurements m(data);
+        try
+        {
+            m.setContent(&file);
+            patternUnit = m.Unit();
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
+            qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            return;
+        }
+
+        file.close();
+    }
+    else
+    {
+        QString message = tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString());
+        QMessageBox::warning(this, tr("Cannot read file"), message);
+        qWarning()<<tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString()) << Q_FUNC_INFO;
+        return;
+    }
+
     accept();
 }
 
 void DialogStandardMeasurements::DialogRejected()
 {
-    _name = "";
-    _tablePath = "";
+    _name.clear();
+    _tablePath.clear();
     reject();
 }
 

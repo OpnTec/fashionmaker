@@ -34,8 +34,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogIndividualMeasurements), _name(QString()), _tablePath(QString()), data(data)
+DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,
+                                                           QWidget *parent) :
+    QDialog(parent), ui(new Ui::DialogIndividualMeasurements), _name(patternPieceName), _tablePath(QString()),
+    data(data)
 {
     ui->setupUi(this);
 
@@ -49,6 +51,8 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, QWi
         Q_CHECK_PTR(bCansel);
         connect(bCansel, &QPushButton::clicked, this, &DialogIndividualMeasurements::DialogRejected);
     }
+
+    ui->lineEditName->setText(_name);
 
     LoadIndividualTables();
 
@@ -90,13 +94,50 @@ void DialogIndividualMeasurements::DialogAccepted()
             return;
         }
     }
+    QFile file(_tablePath);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        try
+        {
+            VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", _tablePath);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Validation file error."), this);
+            qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            return;
+        }
+
+        VIndividualMeasurements m(data);
+        try
+        {
+            m.setContent(&file);
+            patternUnit = m.Unit();
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
+            qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            return;
+        }
+
+        file.close();
+    }
+    else
+    {
+        QString message = tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString());
+        QMessageBox::warning(this, tr("Cannot read file"), message);
+        qWarning()<<tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString()) << Q_FUNC_INFO;
+        return;
+    }
+
     accept();
 }
 
 void DialogIndividualMeasurements::DialogRejected()
 {
-    _name = "";
-    _tablePath = "";
+    _name.clear();
+    _tablePath.clear();
     reject();
 }
 

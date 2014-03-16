@@ -41,7 +41,7 @@ class DialogStandardMeasurements : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogStandardMeasurements(VContainer *data, QWidget *parent = nullptr);
+    DialogStandardMeasurements(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
     ~DialogStandardMeasurements();
     QString name() const;
     QString tablePath() const;

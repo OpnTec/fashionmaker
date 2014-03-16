@@ -99,7 +99,6 @@ MainWindow::MainWindow(QWidget *parent)
     pattern = new VContainer();
 
     doc = new VPattern(pattern, comboBoxDraws, &mode);
-    doc->CreateEmptyFile();
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
 
     InitAutoSave();
@@ -113,17 +112,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::ActionNewDraw()
 {
-    QString nameDraw;
+    QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
     if (comboBoxDraws->count() == 0)
     {
+        QString path;
         DialogMeasurements measurements(this);
         measurements.exec();
         if (measurements.type() == Measurements::Standard)
         {
-            DialogStandardMeasurements stMeasurements(pattern, this);
+            patternType == Pattern::Standard;
+            DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
-                nameDraw = stMeasurements.name();
+                patternPieceName = stMeasurements.name();
+                path = stMeasurements.tablePath();
             }
             else
             {
@@ -132,33 +134,36 @@ void MainWindow::ActionNewDraw()
         }
         else
         {
-            DialogIndividualMeasurements indMeasurements(pattern, this);
+            patternType == Pattern::Individual;
+            DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
             if (indMeasurements.exec() == QDialog::Accepted)
             {
-                nameDraw = indMeasurements.name();
+                patternPieceName = indMeasurements.name();
+                path = indMeasurements.tablePath();
             }
             else
             {
                 return;
             }
         }
+        doc->CreateEmptyFile(path);
     }
     else
     {
-        nameDraw = PatternPieceName(QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1));
-        if (nameDraw.isEmpty())
+        patternPieceName = PatternPieceName(patternPieceName);
+        if (patternPieceName.isEmpty())
         {
             return;
         }
     }
-    if (doc->appendDraw(nameDraw) == false)
+    if (doc->appendDraw(patternPieceName) == false)
     {
-        qWarning()<<tr("Error creating pattern with the name ")<<nameDraw<<".";
+        qWarning()<<tr("Error creating pattern with the name ")<<patternPieceName<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &MainWindow::currentDrawChanged);
-    comboBoxDraws->addItem(nameDraw);
+    comboBoxDraws->addItem(patternPieceName);
 
     pattern->ClearGObjects();
     //Create single point
@@ -175,7 +180,7 @@ void MainWindow::ActionNewDraw()
     SetEnableTool(true);
     SetEnableWidgets(true);
 
-    const qint32 index = comboBoxDraws->findText(nameDraw);
+    const qint32 index = comboBoxDraws->findText(patternPieceName);
     if ( index != -1 )
     { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);

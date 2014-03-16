@@ -55,8 +55,9 @@ public:
     VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent = nullptr);
     /**
      * @brief CreateEmptyFile create minimal empty file.
+     * @param tablePath
      */
-    void           CreateEmptyFile();
+    void           CreateEmptyFile(const QString &tablePath);
     /**
      * @brief ChangeActivDraw set new pattern peace name.
      * @param name new name.
@@ -171,6 +172,7 @@ public:
     static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagNotes;
+    static const QString TagMeasurements;
     static const QString TagIncrements;
     static const QString TagIncrement;
     static const QString TagDraw;
