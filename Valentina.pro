@@ -131,6 +131,10 @@ INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
                         share/translations/valentina_he_IL.qm \
                         share/translations/valentina_fr.qm
 
+INSTALL_STANDARD_MEASHUREMENTS += share/tables/standard/GOST_man_ru.vst
+
+INSTALL_INDIVIDUAL_MEASHUREMENTS += share/tables/individual/indivindual_ru.vit
+
 unix {
 #VARIABLES
 isEmpty(PREFIX) {
@@ -147,10 +151,16 @@ pixmaps.path = $$DATADIR/pixmaps/
 pixmaps.files += dist/$${TARGET}.png
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
+standard.path = $$DATADIR/$${TARGET}/tables/standard/
+standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+individual.path = $$DATADIR/$${TARGET}/tables/individual/
+individual.files = $$INSTALL_INDIVIDUAL_MEASHUREMENTS
 INSTALLS += target \
     desktop \
     pixmaps \
-    translations
+    translations \
+    standard \
+    individual
 }
 
 !isEmpty(TRANSLATIONS): {
@@ -187,3 +197,19 @@ for(DIR, INSTALL_TRANSLATIONS) {
 }
 
 copyToDestdir($$tr_path, $$shell_path($$OUT_PWD/$$DESTDIR/translations))
+
+for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     st_path += $$PWD/$$DIR
+}
+
+copyToDestdir($$st_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/standard))
+
+for(DIR, INSTALL_INDIVIDUAL_MEASHUREMENTS) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     ind_path += $$PWD/$$DIR
+}
+
+copyToDestdir($$ind_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/individual))
