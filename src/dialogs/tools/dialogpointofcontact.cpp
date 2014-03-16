@@ -67,9 +67,17 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui.listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
-    SizeHeight();
-    connect(ui.radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogPointOfContact::SizeHeight);
-    connect(ui.radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::StandardTable);
+    if (patternType == Pattern::Standard)
+    {
+        SizeHeight();
+        connect(ui.radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
+    }
+    else
+    {
+        radioButtonSizeGrowth->setVisible(false);
+        Measurements();
+    }
+    connect(ui.radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::Measurements);
     connect(ui.radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
     connect(ui.radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
     connect(ui.radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);

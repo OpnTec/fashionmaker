@@ -141,9 +141,9 @@ public slots:
      */
     void             SizeHeight();
     /**
-     * @brief StandardTable show in list standard table variables
+     * @brief Measurements show in list measurements
      */
-    void             StandardTable();
+    void             Measurements();
     /**
      * @brief LengthLines show in list lengths of lines variables
      */
@@ -428,9 +428,17 @@ protected:
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
-        SizeHeight();
-        connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
-        connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::StandardTable);
+        if (patternType == Pattern::Standard)
+        {
+            SizeHeight();
+            connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
+        }
+        else
+        {
+            radioButtonSizeGrowth->setVisible(false);
+            Measurements();
+        }
+        connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::Measurements);
         connect(radioButtonIncrements, &QRadioButton::clicked, this, &DialogTool::Increments);
         connect(radioButtonLengthLine, &QRadioButton::clicked, this, &DialogTool::LengthLines);
         connect(radioButtonLengthArc, &QRadioButton::clicked, this, &DialogTool::LengthArcs);

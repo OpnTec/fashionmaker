@@ -544,9 +544,9 @@ void DialogTool::SizeHeight()
     listWidget->setCurrentRow (0);
 }
 
-void DialogTool::StandardTable()
+void DialogTool::Measurements()
 {
-    ShowVariable(data->DataStandardTable());
+    ShowVariable(data->DataMeasurements());
 }
 
 void DialogTool::LengthLines()
@@ -668,7 +668,7 @@ void DialogTool::UpdateList()
     }
     if (radioButtonStandardTable->isChecked())
     {
-        ShowVariable(data->DataStandardTable());
+        ShowVariable(data->DataMeasurements());
     }
     if (radioButtonIncrements->isChecked())
     {

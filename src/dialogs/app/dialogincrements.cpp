@@ -64,7 +64,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
 void DialogIncrements::FillStandardTable()
 {
-    const QHash<QString, VMeasurement> *standardTable = data->DataStandardTable();
+    const QHash<QString, VMeasurement> *standardTable = data->DataMeasurements();
     qint32 currentRow = -1;
     QHashIterator<QString, VMeasurement> i(*standardTable);
     ui->tableWidgetStandard->setRowCount ( standardTable->size() );

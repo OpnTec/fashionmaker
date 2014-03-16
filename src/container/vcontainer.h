@@ -248,9 +248,9 @@ public:
      */
     void                UpdateIncrementTableRow(const QString& name, VIncrementTableRow row);
     /**
-     * @brief GetValueStandardTableCell return value of standard table row by name
-     * @param name name of row
-     * @return value in mm
+     * @brief GetValueStandardTableRow return value of measurement by name
+     * @param name name of measurement
+     * @return value in measurement units
      */
     qreal               GetValueStandardTableRow(const QString& name) const;
     /**
@@ -342,10 +342,10 @@ public:
      */
     const QHash<quint32, VGObject*> *DataGObjects() const;
     /**
-     * @brief data container with dataStandardTable return container of standard table
-     * @return pointer on container of standard table
+     * @brief DataMeasurements container with measurements.
+     * @return pointer to measurements.
      */
-    const QHash<QString, VMeasurement> *DataStandardTable() const;
+    const QHash<QString, VMeasurement> *DataMeasurements() const;
     /**
      * @brief data container with dataIncrementTable return container of increment table
      * @return pointer on container of increment table
@@ -395,9 +395,9 @@ private:
      */
     QHash<quint32, VGObject*> gObjects;
     /**
-     * @brief standardTable container of standard table rows
+     * @brief measurements container of measurements.
      */
-    QHash<QString, VMeasurement> standardTable;
+    QHash<QString, VMeasurement> measurements;
     /**
      * @brief incrementTable
      */
@@ -460,12 +460,12 @@ private:
 
 inline void VContainer::AddMeasurement(const QString &name, const VMeasurement &m)
 {
-    standardTable[name] = m;
+    measurements[name] = m;
 }
 
 inline void VContainer::UpdateMeasurement(const QString &name, VMeasurement m)
 {
-    standardTable[name] = m;
+    measurements[name] = m;
 }
 
 inline void VContainer::UpdateIncrementTableRow(const QString &name, VIncrementTableRow row)
@@ -558,9 +558,9 @@ inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
     return &gObjects;
 }
 
-inline const QHash<QString, VMeasurement> *VContainer::DataStandardTable() const
+inline const QHash<QString, VMeasurement> *VContainer::DataMeasurements() const
 {
-    return &standardTable;
+    return &measurements;
 }
 
 inline const QHash<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const

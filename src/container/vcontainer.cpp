@@ -35,7 +35,7 @@ quint32 VContainer::_id = 0;
 
 VContainer::VContainer()
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      standardTable(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      measurements(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -49,7 +49,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      standardTable(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      measurements(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -103,7 +103,7 @@ void VContainer::setData(const VContainer &data)
             qWarning()<<"Don't know how copy this type.";
         }
     }
-    standardTable = *data.DataStandardTable();
+    measurements = *data.DataMeasurements();
     incrementTable = *data.DataIncrementTable();
     lengthLines = *data.DataLengthLines();
     lineAngles = *data.DataLineAngles();
@@ -146,7 +146,7 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
 const VMeasurement VContainer::GetMeasurement(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
-    return GetVariable(standardTable, name);
+    return GetVariable(measurements, name);
 }
 
 const VIncrementTableRow VContainer::GetIncrementTableRow(const QString& name) const
@@ -250,7 +250,7 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 
 qreal VContainer::GetValueStandardTableRow(const QString& name) const
 {
-    const VMeasurement m =  GetMeasurement(name);
+    const VMeasurement m = GetMeasurement(name);
     if (patternType == Pattern::Individual)
     {
         return m.GetValue();
@@ -273,7 +273,7 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 void VContainer::Clear()
 {
     _id = 0;
-    standardTable.clear();
+    measurements.clear();
     incrementTable.clear();
     lengthLines.clear();
     lengthArcs.clear();
@@ -321,7 +321,7 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
         *ok = true;
         return _height;
     }
-    if (standardTable.contains(name))
+    if (measurements.contains(name))
     {
         *ok = true;
         return GetValueStandardTableRow(name);
