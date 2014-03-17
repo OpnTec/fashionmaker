@@ -105,9 +105,9 @@ private:
      */
     qint32               column;
     /**
-     * @brief FillStandardTable fill data for standard table
+     * @brief FillMeasurements load measurements data
      */
-    void                 FillStandardTable();
+    void                 FillMeasurements();
     /**
      * @brief FillIncrementTable fill data for increment table
      */

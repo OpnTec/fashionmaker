@@ -45,7 +45,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
 
-    FillStandardTable();
+    FillMeasurements();
     FillIncrementTable();
     FillLengthLines();
     FillLengthSplines();
@@ -62,12 +62,12 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->tabWidget->setCurrentIndex(0);
 }
 
-void DialogIncrements::FillStandardTable()
+void DialogIncrements::FillMeasurements()
 {
-    const QHash<QString, VMeasurement> *standardTable = data->DataMeasurements();
+    const QHash<QString, VMeasurement> *table = data->DataMeasurements();
     qint32 currentRow = -1;
-    QHashIterator<QString, VMeasurement> i(*standardTable);
-    ui->tableWidgetStandard->setRowCount ( standardTable->size() );
+    QHashIterator<QString, VMeasurement> i(*table);
+    ui->tableWidgetStandard->setRowCount ( table->size() );
     while (i.hasNext())
     {
         i.next();
@@ -276,7 +276,7 @@ void DialogIncrements::FullUpdateFromFile()
                &DialogIncrements::cellChanged);
 
     ui->tableWidgetStandard->clearContents();
-    FillStandardTable();
+    FillMeasurements();
 
     ui->tableWidgetIncrement->clearContents();
     FillIncrementTable();
