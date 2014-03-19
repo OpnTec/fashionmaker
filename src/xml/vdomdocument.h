@@ -42,7 +42,8 @@ namespace Document
 {
     /**
      * @brief Flags to determine the parsing mode in VDomDocument::Parse() and 
-     * related functions.
+     * related functions. In a LiteParse parse run, existing objects are updated.
+     * A FullParse run destroys all existing objects, and renders them again.
      */
     enum Document { LiteParse, FullParse};
     Q_DECLARE_FLAGS(Documents, Document)
@@ -112,7 +113,7 @@ public:
      */
     QDomElement    elementById(const QString& id);
     /**
-     * @brief Removes all children of a given element tag. RENAME: removeAllChildren!
+     * @brief Removes all children of a given element tag. RENAME: removeAllChildren
      * @param element tag
      */
     void           removeAllChilds(QDomElement &element);
@@ -121,13 +122,14 @@ public:
      */
     void           CreateEmptyFile();
     /**
-     * @brief Select pattern piece based on name. RENAME: ChangeActiveDraw? ChangeActivePatternPiece?
+     * @brief Select pattern piece based on name. The pattern piece with the given name becomes 
+     * the active pattern piece. RENAME: ChangeActivePatternPiece? SelectPatternPiece? SelectActivePatternPiece?
      * @param name pattern piece name
      * @param parse parsing mode
      */
     void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
     /**
-     * @brief Get selected pattern piece name. RENAME: GetNameOfActiveDraw? GetNameOfActivePatternPiece?
+     * @brief Get selected pattern piece name. RENAME: GetNameOfActivePatternPiece?
      * @return name of the active pattern piece
      */
     inline QString GetNameActivDraw() const {return nameActivDraw;}
@@ -156,13 +158,13 @@ public:
      */
     bool           GetActivDetailsElement(QDomElement &element);
     /**
-     * @brief Adds a new pattern piece to the document. NOTE: inconsistent capitalization
+     * @brief Adds a new pattern piece to the document. RENAME: AppendNewPatternPiece?
      * @param name pattern piece name.
      * @return true if successful
      */
     bool           appendDraw(const QString& name);
     /**
-     * @brief Sets the name of the selected pattern piece. RENAME: SetNameOfActiveDraw!
+     * @brief Sets the name of the selected pattern piece. RENAME: SetNameOfActivePatternPiece!
      * @param name pattern piece name.
      * @return true if successful
      */
@@ -226,12 +228,13 @@ public:
      */
     void           IncrementReferens(qint64 id) const;
     /**
-     * @brief Decrement reference parent objects. RENAME: like above
+     * @brief Decrement reference parent objects. RENAME: DecrementReference
      * @param id parent object id
      */
     void           DecrementReferens(qint64 id) const;
     /**
-     * @brief Throws an exception if there exists a duplicate id in the pattern file.
+     * @brief Checks for uniqueness of ids in the pattern file.
+     * @throw VExceptionUniqueId
      */
     void           TestUniqueId() const;
     /**
@@ -335,7 +338,9 @@ private:
      */
     QVector<VToolRecord> history;
     /**
-     * @brief Cursor keep id tool after which we will add new tool in file. TODO: very unclear what does that mean?
+     * @brief Cursor contains the id in the tool history behind which the next tool shall be added.
+     * In many cases, new tools are added at the end of the list -- there are some cases where tools
+     * need to be added in the middle.
      */
     qint64         cursor;
     /**
@@ -364,7 +369,7 @@ private:
      */
     bool           CheckNameDraw(const QString& name) const;
     /**
-     * @brief Set selected pattern piece. RENAME: SetActiveDraw? SetActivePatternPiece?
+     * @brief Set selected pattern piece. RENAME: SetActivePatternPiece?
      * @param name pattern piece name
      */
     void           SetActivDraw(const QString& name);
@@ -470,7 +475,8 @@ private:
      */
     qint64         GetParametrId(const QDomElement& domElement) const;
     /**
-     * @brief Recursively collects all id attribute in file. Throws an exception if a duplicate is found.
+     * @brief Recursively collects all id attribute in file. Throws an exception if a duplicate is found. RENAME: CollectIds
+     * @throw VExceptionUniqueId
      * @param node tag in XML tree
      * @param vector list with ids
      */
