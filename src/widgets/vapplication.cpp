@@ -36,12 +36,20 @@
 #include <QMessageBox>
 #include <QDebug>
 
+const qreal VApplication::PrintDPI = 96.0;
+
 // reimplemented from QApplication so we can throw exceptions in slots
+VApplication::VApplication(int &argc, char **argv)
+    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual)
+{
+
+}
+
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {
     try
     {
-      return QApplication::notify(receiver, event);
+        return QApplication::notify(receiver, event);
     }
     catch (const VExceptionObjectError &e)
     {
@@ -78,4 +86,84 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
       qCritical() << "Exception thrown:" << e.what();
     }
     return false;
+}
+
+double VApplication::toPixel(double unit) const
+{
+    double result = 0;
+    switch (_patternUnit)
+    {
+    case Valentina::Mm:
+        result = (unit / 25.4) * PrintDPI;
+        break;
+    case Valentina::Cm:
+        result = ((unit * 10.0) / 25.4) * PrintDPI;
+        break;
+    case Valentina::In:
+        result = unit * PrintDPI;
+        break;
+    default:
+        break;
+    }
+    return result;
+}
+
+double VApplication::fromPixel(double pix) const
+{
+    double result = 0;
+    switch (_patternUnit)
+    {
+    case Valentina::Mm:
+        result = (pix / PrintDPI) * 25.4;
+        break;
+    case Valentina::Cm:
+        result = ((pix / PrintDPI) * 25.4) / 10.0;
+        break;
+    case Valentina::In:
+        result = pix / PrintDPI;
+        break;
+    default:
+        break;
+    }
+    return result;
+}
+QString VApplication::pathToTables() const
+{
+    if (_patternType == Pattern::Individual)
+    {
+        #ifdef Q_OS_WIN
+            return QStringLiteral("/tables/individual");
+        #else
+            #ifdef QT_DEBUG
+                return QStringLiteral("/tables/individual");
+            #else
+                return QStringLiteral("/usr/share/valentina/tables/individual");
+            #endif
+        #endif
+    }
+    else
+    {
+        #ifdef Q_OS_WIN
+            return QStringLiteral("/tables/standard");
+        #else
+            #ifdef QT_DEBUG
+                return QStringLiteral("/tables/standard");
+            #else
+                return QStringLiteral("/usr/share/valentina/tables/standard");
+            #endif
+        #endif
+    }
+}
+
+QString VApplication::translationsPath() const
+{
+    #ifdef Q_OS_WIN
+        return QStringLiteral("/translations");
+    #else
+        #ifdef QT_DEBUG
+            return QStringLiteral("/translations");
+        #else
+            return QStringLiteral("/usr/share/valentina/translations");
+        #endif
+    #endif
 }

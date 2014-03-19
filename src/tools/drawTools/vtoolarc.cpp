@@ -42,7 +42,7 @@ VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina:
     path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
@@ -93,7 +93,7 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &r
     qreal result = cal.eval(radius, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        calcRadius = toPixel(result);
+        calcRadius = qApp->toPixel(result);
     }
 
     errorMsg.clear();
@@ -155,7 +155,7 @@ void VToolArc::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
@@ -218,14 +218,14 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/factor));
 }
 
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
 }
 
 void VToolArc::RemoveReferens()
@@ -278,7 +278,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QPainterPath path;
     path.addPath(arc->GetPath());

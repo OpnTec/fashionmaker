@@ -32,15 +32,15 @@
 #include <QString>
 
 /**
- * @brief The VIncrementTableRow class keep data row of increment table
+ * @brief The VIncrement class keep data row of increment table
  */
-class VIncrementTableRow
+class VIncrement
 {
 public:
                    /**
                     * @brief VIncrementTableRow create enpty row
                     */
-                   VIncrementTableRow();
+                   VIncrement();
                    /**
                     * @brief VIncrementTableRow create row
                     * @param id id
@@ -49,8 +49,7 @@ public:
                     * @param kgrowth increment in growths
                     * @param description description of increment
                     */
-                   VIncrementTableRow(quint32 id, qreal base, qreal ksize, qreal kgrowth,
-                                      QString description = QString());
+                   VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
     /**
      * @brief getId return id of row
      * @return id
@@ -82,15 +81,15 @@ public:
      */
     void    setKsize(const qreal &value);
     /**
-     * @brief getKgrowth return increment in growths
+     * @brief getKheight return increment in growths
      * @return increment
      */
-    qreal   getKgrowth() const;
+    qreal   getKheight() const;
     /**
-     * @brief setKgrowth set increment in growths
+     * @brief setKheight set increment in growths
      * @param value value of increment
      */
-    void    setKgrowth(const qreal &value);
+    void    setKheight(const qreal &value);
     /**
      * @brief getDescription return description
      * @return description
@@ -101,6 +100,8 @@ public:
      * @param value description
      */
     void    setDescription(const QString &value);
+    qreal   GetValue() const;
+    qreal   GetValue(const qreal &size, const qreal &height) const;
 private:
     /**
      * @brief id identificator
@@ -117,59 +118,59 @@ private:
     /**
      * @brief kgrowth increment in growths
      */
-    qreal          kgrowth;
+    qreal          kheight;
     /**
      * @brief description description of increment
      */
     QString        description;
 };
 
-inline quint32 VIncrementTableRow::getId() const
+inline quint32 VIncrement::getId() const
 {
     return id;
 }
 
-inline void VIncrementTableRow::setId(const quint32 &value)
+inline void VIncrement::setId(const quint32 &value)
 {
     id = value;
 }
 
-inline qreal VIncrementTableRow::getBase() const
+inline qreal VIncrement::getBase() const
 {
     return base;
 }
 
-inline void VIncrementTableRow::setBase(const qreal &value)
+inline void VIncrement::setBase(const qreal &value)
 {
     base = value;
 }
 
-inline qreal VIncrementTableRow::getKsize() const
+inline qreal VIncrement::getKsize() const
 {
     return ksize;
 }
 
-inline void VIncrementTableRow::setKsize(const qreal &value)
+inline void VIncrement::setKsize(const qreal &value)
 {
     ksize = value;
 }
 
-inline qreal VIncrementTableRow::getKgrowth() const
+inline qreal VIncrement::getKheight() const
 {
-    return kgrowth;
+    return kheight;
 }
 
-inline void VIncrementTableRow::setKgrowth(const qreal &value)
+inline void VIncrement::setKheight(const qreal &value)
 {
-    kgrowth = value;
+    kheight = value;
 }
 
-inline QString VIncrementTableRow::getDescription() const
+inline QString VIncrement::getDescription() const
 {
     return description;
 }
 
-inline void VIncrementTableRow::setDescription(const QString &value)
+inline void VIncrement::setDescription(const QString &value)
 {
     description = value;
 }

@@ -87,8 +87,8 @@ void VToolAlongLine::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     doc->SetAttribute(domElement, AttrLength, formula);
@@ -104,8 +104,8 @@ void VToolAlongLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrName, point->name());
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
         doc->SetAttribute(domElement, AttrLength, formula);
@@ -172,7 +172,7 @@ void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const Q
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        line.setLength(toPixel(result));
+        line.setLength(qApp->toPixel(result));
         quint32 id = _id;
         if (typeCreation == Valentina::FromGui)
         {

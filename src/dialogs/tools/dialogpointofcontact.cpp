@@ -67,7 +67,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui.listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
-    if (patternType == Pattern::Standard)
+    if (qApp->patternType() == Pattern::Standard)
     {
         SizeHeight();
         connect(ui.radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);

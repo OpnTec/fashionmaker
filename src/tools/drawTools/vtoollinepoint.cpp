@@ -39,7 +39,7 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
     QPointF point1 = data->GeometricObject<const VPointF *>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<const VPointF *>(id)->toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor, LineStyle()));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -53,13 +53,13 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
     {
         currentColor = Qt::gray;
     }
-    mainLine->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor, LineStyle()));
     VToolPoint::ChangedActivDraw(newName);
 }
 
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor, LineStyle()));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
     QPointF point = VDrawTool::data.GeometricObject<const VPointF *>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<const VPointF *>(basePointId)->toQPointF();

@@ -120,7 +120,7 @@ void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const
     if (errorMsg.isEmpty())
     {
         QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                       shoulderPoint->toQPointF(), toPixel(result));
+                                                       shoulderPoint->toQPointF(), qApp->toPixel(result));
         quint32 id =  _id;
         if (typeCreation == Valentina::FromGui)
         {
@@ -193,8 +193,8 @@ void VToolShoulderPoint::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     doc->SetAttribute(domElement, AttrLength, formula);
@@ -212,8 +212,8 @@ void VToolShoulderPoint::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrName, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrName, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrName, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrName, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrP1Line, basePointId);

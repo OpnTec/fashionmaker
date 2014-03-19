@@ -196,7 +196,7 @@ protected:
             {
                 currentColor = color;
             }
-            item->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+            item->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
         }
     }
 private:

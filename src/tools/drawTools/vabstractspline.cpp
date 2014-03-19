@@ -54,7 +54,7 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     emit setEnabledPoint(selectable);
@@ -75,13 +75,13 @@ void VAbstractSpline::SetFactor(qreal factor)
 void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/factor));
 }
 
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
 }
 
 QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)

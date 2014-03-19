@@ -30,7 +30,7 @@
 #define VCONTAINER_H
 
 #include "vmeasurement.h"
-#include "vincrementtablerow.h"
+#include "vincrement.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
 #include "../geometry/vdetail.h"
@@ -113,11 +113,11 @@ public:
      */
     const VMeasurement  GetMeasurement(const QString& name) const;
     /**
-     * @brief GetIncrementTableRow return increment table row by name
+     * @brief GetIncrement return increment table row by name
      * @param name name of increment table row
-     * @return row of increment table
+     * @return increment
      */
-    const VIncrementTableRow GetIncrementTableRow(const QString& name) const;
+    const VIncrement GetIncrement(const QString& name) const;
     /**
      * @brief GetLine return length of line by name
      * @param name name of line
@@ -172,11 +172,11 @@ public:
      */
     void                 AddMeasurement(const QString& name, const VMeasurement &m);
     /**
-     * @brief AddIncrementTableRow add new row of increment table
+     * @brief AddIncrement add new row of increment table
      * @param name name of new row of increment table
      * @param row new row of increment table
      */
-    void                AddIncrementTableRow(const QString& name, VIncrementTableRow row);
+    void                AddIncrement(const QString& name, VIncrement incr);
     /**
      * @brief AddLengthLine add length of line to container
      * @param name name of line
@@ -242,11 +242,11 @@ public:
      */
     void                UpdateMeasurement(const QString& name, VMeasurement m);
     /**
-     * @brief UpdateIncrementTableRow update increment table row by name
+     * @brief UpdateIncrement update increment table row by name
      * @param name name of row
      * @param row row
      */
-    void                UpdateIncrementTableRow(const QString& name, VIncrementTableRow row);
+    void                UpdateIncrement(const QString& name, VIncrement incr);
     /**
      * @brief GetValueStandardTableRow return value of measurement by name
      * @param name name of measurement
@@ -347,10 +347,10 @@ public:
      */
     const QHash<QString, VMeasurement> *DataMeasurements() const;
     /**
-     * @brief data container with dataIncrementTable return container of increment table
+     * @brief data container with dataIncrements return container of increment table
      * @return pointer on container of increment table
      */
-    const QHash<QString, VIncrementTableRow> *DataIncrementTable() const;
+    const QHash<QString, VIncrement> *DataIncrements() const;
     /**
      * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
@@ -399,9 +399,9 @@ private:
      */
     QHash<QString, VMeasurement> measurements;
     /**
-     * @brief incrementTable
+     * @brief increments
      */
-    QHash<QString, VIncrementTableRow> incrementTable;
+    QHash<QString, VIncrement> increments;
     /**
      * @brief lengthLines container of lines lengths
      */
@@ -468,14 +468,14 @@ inline void VContainer::UpdateMeasurement(const QString &name, VMeasurement m)
     measurements[name] = m;
 }
 
-inline void VContainer::UpdateIncrementTableRow(const QString &name, VIncrementTableRow row)
+inline void VContainer::UpdateIncrement(const QString &name, VIncrement incr)
 {
-    incrementTable[name] = row;
+    increments[name] = incr;
 }
 
 inline void VContainer::ClearIncrementTable()
 {
-    incrementTable.clear();
+    increments.clear();
 }
 
 inline void VContainer::ClearLengthLines()
@@ -545,12 +545,12 @@ inline QString VContainer::HeightName() const
 
 inline bool VContainer::IncrementTableContains(const QString &name)
 {
-    return incrementTable.contains(name);
+    return increments.contains(name);
 }
 
 inline void VContainer::RemoveIncrementTableRow(const QString &name)
 {
-    incrementTable.remove(name);
+    increments.remove(name);
 }
 
 inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
@@ -563,9 +563,9 @@ inline const QHash<QString, VMeasurement> *VContainer::DataMeasurements() const
     return &measurements;
 }
 
-inline const QHash<QString, VIncrementTableRow> *VContainer::DataIncrementTable() const
+inline const QHash<QString, VIncrement> *VContainer::DataIncrements() const
 {
-    return &incrementTable;
+    return &increments;
 }
 
 inline const QHash<QString, qreal> *VContainer::DataLengthLines() const

@@ -150,8 +150,8 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
             this, &DialogDetail::BiasXChanged);
     disconnect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(fromPixel(node.getMy())));
+    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
+    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
     connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
     connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
@@ -184,7 +184,7 @@ void DialogDetail::BiasXChanged(qreal d)
     QListWidgetItem *item = ui.listWidget->item( row );
     Q_CHECK_PTR(item);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    node.setMx(toPixel(d));
+    node.setMx(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
@@ -194,7 +194,7 @@ void DialogDetail::BiasYChanged(qreal d)
     QListWidgetItem *item = ui.listWidget->item( row );
     Q_CHECK_PTR(item);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    node.setMy(toPixel(d));
+    node.setMy(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
@@ -218,8 +218,8 @@ void DialogDetail::ObjectChanged(int row)
     }
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(fromPixel(node.getMy())));
+    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
+    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
 }
 
 void DialogDetail::DeleteItem()

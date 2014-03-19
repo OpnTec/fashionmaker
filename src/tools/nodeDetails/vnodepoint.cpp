@@ -29,6 +29,7 @@
 #include "vnodepoint.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
@@ -36,14 +37,14 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
 VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
                        const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
+    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(qApp->toPixel(1.5)),
       namePoint(nullptr), lineName(nullptr)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
-    this->setPen(QPen(Qt::black, toPixel(widthHairLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
@@ -107,8 +108,8 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
     if (idTool != 0)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -124,8 +125,8 @@ void VNodePoint::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, idNode);
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         if (idTool != 0)
         {
             doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -145,13 +146,13 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)));
 }
 
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)));
 }
 
 
@@ -171,8 +172,8 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(fromPixel(mx)));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(fromPixel(my)));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
         emit toolhaveChange();
     }
 }
@@ -200,7 +201,7 @@ void VNodePoint::RefreshLine()
     LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4))
     {
         lineName->setVisible(false);
     }

@@ -31,20 +31,6 @@
 #include <QTextCodec>
 #include <QtCore>
 #include "tablewindow.h"
-#include "options.h"
-
-Valentina::Units patternUnit = Valentina::Cm;// Default pattern unit.
-Pattern::Measurements patternType = Pattern::Individual;// Default pattern type.
-
-#ifdef Q_OS_WIN
-    const QString translationsPath = QString("/translations");
-#else
-    #ifdef QT_DEBUG
-        const QString translationsPath = QString("/translations");
-    #else
-        const QString translationsPath = QString("/usr/share/valentina/translations");
-    #endif
-#endif
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -98,12 +84,12 @@ int main(int argc, char *argv[])
 
     QTranslator appTranslator;
 #ifdef Q_OS_WIN
-    appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+    appTranslator.load("valentina_" + checkedLocale, "."+qApp->translationsPath());
 #else
     #ifdef QT_DEBUG
-        appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+        appTranslator.load("valentina_" + checkedLocale, "."+qApp->translationsPath());
     #else
-        appTranslator.load("valentina_" + checkedLocale, translationsPath);
+        appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     #endif
 #endif
     app.installTranslator(&appTranslator);

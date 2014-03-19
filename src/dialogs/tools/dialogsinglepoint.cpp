@@ -36,8 +36,8 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     point(QPointF())
 {
     ui->setupUi(this);
-    ui->doubleSpinBoxX->setRange(0, fromPixel(SceneSize));
-    ui->doubleSpinBoxY->setRange(0, fromPixel(SceneSize));
+    ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
+    ui->doubleSpinBoxY->setRange(0, qApp->fromPixel(SceneSize));
     labelEditNamePoint = ui->labelEditName;
     InitOkCansel(ui);
 
@@ -51,20 +51,20 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
 {
     if (isInitialized == false)
     {
-        ui->doubleSpinBoxX->setValue(fromPixel(scenePos.x()));
-        ui->doubleSpinBoxY->setValue(fromPixel(scenePos.y()));
+        ui->doubleSpinBoxX->setValue(qApp->fromPixel(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(qApp->fromPixel(scenePos.y()));
         this->show();
     }
     else
     {
-        ui->doubleSpinBoxX->setValue(fromPixel(scenePos.x()));
-        ui->doubleSpinBoxY->setValue(fromPixel(scenePos.y()));
+        ui->doubleSpinBoxX->setValue(qApp->fromPixel(scenePos.x()));
+        ui->doubleSpinBoxY->setValue(qApp->fromPixel(scenePos.y()));
     }
 }
 
 void DialogSinglePoint::DialogAccepted()
 {
-    point = QPointF(toPixel(ui->doubleSpinBoxX->value()), toPixel(ui->doubleSpinBoxY->value()));
+    point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
     name = ui->lineEditName->text();
     emit DialogClosed(QDialog::Accepted);
 }
@@ -75,8 +75,8 @@ void DialogSinglePoint::setData(const QString &name, const QPointF &point)
     this->point = point;
     isInitialized = true;
     ui->lineEditName->setText(name);
-    ui->doubleSpinBoxX->setValue(fromPixel(point.x()));
-    ui->doubleSpinBoxY->setValue(fromPixel(point.y()));
+    ui->doubleSpinBoxX->setValue(qApp->fromPixel(point.x()));
+    ui->doubleSpinBoxY->setValue(qApp->fromPixel(point.y()));
 }
 
 DialogSinglePoint::~DialogSinglePoint()

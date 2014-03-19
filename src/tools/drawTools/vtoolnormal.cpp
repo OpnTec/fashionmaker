@@ -92,7 +92,7 @@ void VToolNormal::Create(const quint32 _id, const QString &formula, const quint3
     if (errorMsg.isEmpty())
     {
         QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                toPixel(result), angle);
+                                                qApp->toPixel(result), angle);
         quint32 id = _id;
         if (typeCreation == Valentina::FromGui)
         {
@@ -171,8 +171,8 @@ void VToolNormal::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     doc->SetAttribute(domElement, AttrLength, formula);
@@ -190,8 +190,8 @@ void VToolNormal::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrAngle, angle);

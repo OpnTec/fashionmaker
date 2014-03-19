@@ -30,12 +30,13 @@
 
 #include <QDebug>
 #include <QtAlgorithms>
+#include "../widgets/vapplication.h"
 
 quint32 VContainer::_id = 0;
 
 VContainer::VContainer()
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      measurements(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -49,7 +50,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 VContainer::VContainer(const VContainer &data)
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
-      measurements(QHash<QString, VMeasurement>()), incrementTable(QHash<QString, VIncrementTableRow>()),
+      measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
 {
@@ -104,7 +105,7 @@ void VContainer::setData(const VContainer &data)
         }
     }
     measurements = *data.DataMeasurements();
-    incrementTable = *data.DataIncrementTable();
+    increments = *data.DataIncrements();
     lengthLines = *data.DataLengthLines();
     lineAngles = *data.DataLineAngles();
     lengthSplines = *data.DataLengthSplines();
@@ -149,10 +150,10 @@ const VMeasurement VContainer::GetMeasurement(const QString &name) const
     return GetVariable(measurements, name);
 }
 
-const VIncrementTableRow VContainer::GetIncrementTableRow(const QString& name) const
+const VIncrement VContainer::GetIncrement(const QString& name) const
 {
     Q_ASSERT(name.isEmpty()==false);
-    return GetVariable(incrementTable, name);
+    return GetVariable(increments, name);
 }
 
 qreal VContainer::GetLine(const QString &name) const
@@ -196,9 +197,9 @@ quint32 VContainer::AddDetail(VDetail detail)
     return id;
 }
 
-void VContainer::AddIncrementTableRow(const QString &name, VIncrementTableRow row)
+void VContainer::AddIncrement(const QString &name, VIncrement incr)
 {
-    incrementTable[name] = row;
+    increments[name] = incr;
 }
 
 quint32 VContainer::getNextId()
@@ -239,7 +240,7 @@ void VContainer::AddLengthSpline(const QString &name, const qreal &value)
 void VContainer::AddLengthArc(const quint32 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
-    lengthArcs[arc->name()] = fromPixel(arc->GetLength());
+    lengthArcs[arc->name()] = qApp->fromPixel(arc->GetLength());
 }
 
 void VContainer::AddLineAngle(const QString &name, const qreal &value)
@@ -251,7 +252,7 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 qreal VContainer::GetValueStandardTableRow(const QString& name) const
 {
     const VMeasurement m = GetMeasurement(name);
-    if (patternType == Pattern::Individual)
+    if (qApp->patternType() == Pattern::Individual)
     {
         return m.GetValue();
     }
@@ -263,18 +264,22 @@ qreal VContainer::GetValueStandardTableRow(const QString& name) const
 
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 {
-    const VIncrementTableRow row =  GetIncrementTableRow(name);
-    const qreal k_size    = ( size() - 50.0 ) / 2.0;
-    const qreal k_growth  = ( height() - 176.0 ) / 6.0;
-    const qreal value = row.getBase() + k_size * row.getKsize() + k_growth * row.getKgrowth();
-    return value;
+    const VIncrement icr = GetIncrement(name);
+    if (qApp->patternType() == Pattern::Individual)
+    {
+        return icr.GetValue();
+    }
+    else
+    {
+        return icr.GetValue(size(), height());
+    }
 }
 
 void VContainer::Clear()
 {
     _id = 0;
     measurements.clear();
-    incrementTable.clear();
+    increments.clear();
     lengthLines.clear();
     lengthArcs.clear();
     lineAngles.clear();
@@ -326,7 +331,7 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
         *ok = true;
         return GetValueStandardTableRow(name);
     }
-    if (incrementTable.contains(name))
+    if (increments.contains(name))
     {
         *ok = true;
         return GetValueIncrementTableRow(name);
@@ -360,7 +365,7 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
     QString nameLine = GetNameLine(firstPointId, secondPointId);
     const VPointF *first = GeometricObject<const VPointF *>(firstPointId);
     const VPointF *second = GeometricObject<const VPointF *>(secondPointId);
-    AddLengthLine(nameLine, fromPixel(QLineF(first->toQPointF(), second->toQPointF()).length()));
+    AddLengthLine(nameLine, qApp->fromPixel(QLineF(first->toQPointF(), second->toQPointF()).length()));
     nameLine = GetNameLineAngle(firstPointId, secondPointId);
     AddLineAngle(nameLine, QLineF(first->toQPointF(), second->toQPointF()).angle());
 }

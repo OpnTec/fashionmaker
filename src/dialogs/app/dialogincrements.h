@@ -66,7 +66,8 @@ public slots:
      * @param row number of row
      * @param column number of column
      */
-    void                 cellChanged ( qint32 row, qint32 column );
+    void                 IncrementChanged ( qint32 row, qint32 column );
+    void                 MeasurementsChanged ( qint32 row, qint32 column );
     /**
      * @brief FullUpdateFromFile update information in tables form file
      */
@@ -111,7 +112,7 @@ private:
     /**
      * @brief FillIncrementTable fill data for increment table
      */
-    void                 FillIncrementTable();
+    void                 FillIncrements();
     /**
      * @brief FillLengthLines fill data for table of lines lengths
      */

@@ -26,10 +26,22 @@
  **
  *************************************************************************/
 
-#include "vincrementtablerow.h"
+#include "vincrement.h"
 
-VIncrementTableRow::VIncrementTableRow()
-    :id(0), base(0), ksize(0), kgrowth(0), description(QString()){}
+VIncrement::VIncrement()
+    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString()){}
 
-VIncrementTableRow::VIncrementTableRow(quint32 id, qreal base, qreal ksize, qreal kgrowth, QString description)
-    :id(id), base(base), ksize(ksize), kgrowth(kgrowth), description(description){}
+VIncrement::VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
+    :id(id), base(base), ksize(ksize), kheight(kheight), description(description){}
+
+qreal VIncrement::GetValue() const
+{
+    return base;
+}
+
+qreal VIncrement::GetValue(const qreal &size, const qreal &height) const
+{
+    const qreal k_size    = ( size - 50.0 ) / 2.0;
+    const qreal k_height  = ( height - 176.0 ) / 6.0;
+    return base + k_size * ksize + k_height * kheight;
+}

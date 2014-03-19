@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vsimplesplinepath.h"
+#include "../widgets/vapplication.h"
 
 VSimpleSplinePath::VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor)
     :VAbstractTool(doc, data, id), factor(factor)
@@ -45,11 +46,11 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/ *factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/ *factor));
 }
 
 void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/ *factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/ *factor));
 }

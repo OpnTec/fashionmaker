@@ -29,6 +29,7 @@
 #include "vnodearc.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
@@ -38,7 +39,7 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, c
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(widthHairLine)));
 
     if (typeCreation == Valentina::FromGui)
     {
@@ -128,13 +129,13 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)));
 }
 
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)));
 }
 
 void VNodeArc::RefreshGeometry()

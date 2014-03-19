@@ -120,7 +120,7 @@ void MainWindow::ActionNewDraw()
         measurements.exec();
         if (measurements.type() == Measurements::Standard)
         {
-            patternType == Pattern::Standard;
+            qApp->setPatternType(Pattern::Standard);
             DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
@@ -134,7 +134,7 @@ void MainWindow::ActionNewDraw()
         }
         else
         {
-            patternType == Pattern::Individual;
+            qApp->setPatternType(Pattern::Individual);
             DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
             if (indMeasurements.exec() == QDialog::Accepted)
             {
@@ -167,7 +167,7 @@ void MainWindow::ActionNewDraw()
 
     pattern->ClearGObjects();
     //Create single point
-    const quint32 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5,
+    const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10), "А", 5,
                                                        10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui);
     sceneDraw->addItem(spoint);
@@ -626,8 +626,8 @@ void MainWindow::currentDrawChanged( int index )
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
     QString string = QString("%1, %2")
-                            .arg(static_cast<qint32>(fromPixel(scenePos.x())))
-                            .arg(static_cast<qint32>(fromPixel(scenePos.y())));
+                            .arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                            .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())));
     mouseCoordinate->setText(string);
 }
 

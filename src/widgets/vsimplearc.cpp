@@ -27,17 +27,18 @@
  *************************************************************************/
 
 #include "vsimplearc.h"
+#include "../widgets/vapplication.h"
 
 VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
 :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
     if (factor == nullptr)
     {
-        setPen(QPen(Qt::black, toPixel(widthHairLine)));
+        setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
     }
     else
     {
-        setPen(QPen(Qt::black, toPixel(widthHairLine)/ *factor));
+        setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -57,11 +58,11 @@ void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, toPixel(widthMainLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(widthMainLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, toPixel(widthMainLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(widthMainLine)/ *factor));
     }
 }
 
@@ -70,10 +71,10 @@ void VSimpleArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, toPixel(widthHairLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(widthHairLine)));
     }
     else
     {
-        this->setPen(QPen(*currentColor, toPixel(widthHairLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(widthHairLine)/ *factor));
     }
 }

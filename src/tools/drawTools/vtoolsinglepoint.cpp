@@ -69,10 +69,10 @@ void VToolSinglePoint::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrX, fromPixel(point->x()));
-    doc->SetAttribute(domElement, AttrY, fromPixel(point->y()));
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrX, qApp->fromPixel(point->x()));
+    doc->SetAttribute(domElement, AttrY, qApp->fromPixel(point->y()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     AddToCalculation(domElement);
 }
@@ -84,10 +84,10 @@ void VToolSinglePoint::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrX, QString().setNum(fromPixel(point->x())));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(fromPixel(point->y())));
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(fromPixel(point->mx())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(fromPixel(point->my())));
+        doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(point->x())));
+        doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(point->y())));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(point->mx())));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(point->my())));
     }
 }
 
@@ -113,8 +113,8 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            doc->SetAttribute(domElement, AttrX, QString().setNum(fromPixel(newPos.x())));
-            doc->SetAttribute(domElement, AttrY, QString().setNum(fromPixel(newPos.y())));
+            doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(newPos.x())));
+            doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(newPos.y())));
 
             QList<QGraphicsView*> list = this->scene()->views();
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
@@ -143,14 +143,14 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
     QPointF p = dialogTool->getPoint();
     QString name = dialogTool->getName();
     doc->SetAttribute(domElement, AttrName, name);
-    doc->SetAttribute(domElement, AttrX, QString().setNum(fromPixel(p.x())));
-    doc->SetAttribute(domElement, AttrY, QString().setNum(fromPixel(p.y())));
+    doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
+    doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
 }
 
 void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
-    lineName->setPen(QPen(color, toPixel(widthHairLine)/factor));
+    lineName->setPen(QPen(color, qApp->toPixel(widthHairLine)/factor));
 }
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )

@@ -141,8 +141,8 @@ void VToolPointOfIntersection::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
     doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
@@ -157,8 +157,8 @@ void VToolPointOfIntersection::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
         doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }

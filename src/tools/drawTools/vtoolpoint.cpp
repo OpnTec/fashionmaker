@@ -31,7 +31,7 @@
 const QString VToolPoint::TagName = QStringLiteral("point");
 
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
-    QGraphicsEllipseItem(parent), radius(toPixel(2)), namePoint(0), lineName(0)
+    QGraphicsEllipseItem(parent), radius(qApp->toPixel(2)), namePoint(0), lineName(0)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
@@ -62,8 +62,8 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, fromPixel(mx));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(my));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(mx));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(my));
         emit toolhaveChange();
     }
 }
@@ -81,7 +81,7 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     namePoint->setFlag(QGraphicsItem::ItemIsMovable, selectable);
@@ -89,7 +89,7 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
     namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, selectable);
     namePoint->setBrush(QBrush(currentColor));
     namePoint->setAcceptHoverEvents(selectable);
-    lineName->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    lineName->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     VDrawTool::ChangedActivDraw(newName);
 }
 
@@ -121,18 +121,18 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/factor));
 }
 
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
 }
 
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -158,13 +158,13 @@ void VToolPoint::RefreshLine()
     lineName->setLine(QLineF(p1, pRec - scenePos()));
     if (currentColor == Qt::gray)
     {
-        lineName->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+        lineName->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     }
     else
     {
-        lineName->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor));
+        lineName->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor));
     }
-    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4))
     {
         lineName->setVisible(false);
     }

@@ -29,6 +29,7 @@
 #include "vnodespline.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
@@ -39,7 +40,7 @@ VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 id
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(widthHairLine)));
 
     if (typeCreation == Valentina::FromGui)
     {
@@ -132,13 +133,13 @@ void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)));
 }
 
 void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)));
 }
 
 void VNodeSpline::RefreshGeometry()

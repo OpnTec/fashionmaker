@@ -30,6 +30,14 @@
 #define VAPPLICATION_H
 
 #include <QApplication>
+#include "../options.h"
+
+class VApplication;
+
+#if defined(qApp)
+#undef qApp
+#endif
+#define qApp (static_cast<VApplication*>(QCoreApplication::instance()))
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
@@ -43,7 +51,7 @@ public:
      * @param argc number arguments.
      * @param argv command line.
      */
-    VApplication(int &argc, char ** argv): QApplication(argc, argv){}
+    VApplication(int &argc, char ** argv);
     virtual ~VApplication() {}
     /**
      * @brief notify Reimplemented from QApplication::notify().
@@ -52,6 +60,39 @@ public:
      * @return value that is returned from the receiver's event handler.
      */
     virtual bool notify(QObject * receiver, QEvent * event);
+    Valentina::Units patternUnit() const;
+    void setPatternUnit(const Valentina::Units &patternUnit);
+    Pattern::Measurements patternType() const;
+    void setPatternType(const Pattern::Measurements &patternType);
+    double toPixel(double unit) const;
+    double fromPixel(double pix) const;
+    static const qreal PrintDPI;
+    QString translationsPath() const;
+    QString pathToTables() const;
+private:
+    Valentina::Units _patternUnit;
+    Pattern::Measurements _patternType;
 };
+
+inline Valentina::Units VApplication::patternUnit() const
+{
+    return _patternUnit;
+}
+
+inline void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
+{
+    _patternUnit = patternUnit;
+}
+
+inline Pattern::Measurements VApplication::patternType() const
+{
+    return _patternType;
+}
+
+inline void VApplication::setPatternType(const Pattern::Measurements &patternType)
+{
+    _patternType = patternType;
+}
+
 
 #endif // VAPPLICATION_H

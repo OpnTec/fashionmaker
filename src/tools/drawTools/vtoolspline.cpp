@@ -40,7 +40,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
     path.addPath(spl->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
@@ -115,12 +115,12 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddLengthSpline(spline->name(), fromPixel(spline->GetLength()));
+        data->AddLengthSpline(spline->name(), qApp->fromPixel(spline->GetLength()));
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddLengthSpline(spline->name(), fromPixel(spline->GetLength()));
+        data->AddLengthSpline(spline->name(), qApp->fromPixel(spline->GetLength()));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -256,7 +256,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
 void VToolSpline::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QPainterPath path;
     path.addPath(spl->GetPath());

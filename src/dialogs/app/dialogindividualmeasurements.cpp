@@ -33,6 +33,7 @@
 #include <QSettings>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "../../widgets/vapplication.h"
 
 DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,
                                                            QWidget *parent) :
@@ -112,7 +113,7 @@ void DialogIndividualMeasurements::DialogAccepted()
         try
         {
             m.setContent(&file);
-            patternUnit = m.Unit();
+            qApp->setPatternUnit( m.Unit());
         }
         catch(VException &e)
         {
@@ -196,18 +197,9 @@ void DialogIndividualMeasurements::CheckState()
 
 void DialogIndividualMeasurements::LoadIndividualTables()
 {
-#ifdef Q_OS_WIN
-    const QString pathToTables = QString("/tables/individual");
-#else
-    #ifdef QT_DEBUG
-        const QString pathToTables = QString("/tables/individual");
-    #else
-        const QString pathToTables = QString("/usr/share/valentina/tables/individual");
-    #endif
-#endif
     QStringList filters;
     filters << "*.vit";
-    QDir tablesDir(pathToTables);
+    QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);

@@ -47,7 +47,6 @@ were in use. */
 #include <QtXml>
 #include <QtWidgets>
 #include <QtSvg/QtSvg>
-#include "options.h"
 #endif
 
 #endif // STABLE_H

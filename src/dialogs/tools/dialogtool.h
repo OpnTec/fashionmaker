@@ -37,6 +37,7 @@
 #include <QRadioButton>
 #include <QDialogButtonBox>
 #include "../../container/vcontainer.h"
+#include "../../widgets/vapplication.h"
 
 namespace ComboMode
 {
@@ -428,7 +429,7 @@ protected:
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
-        if (patternType == Pattern::Standard)
+        if (qApp->patternType() == Pattern::Standard)
         {
             SizeHeight();
             connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);

@@ -115,7 +115,7 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
     if (errorMsg.isEmpty())
     {
         QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                  thirdPoint->toQPointF(), toPixel(result));
+                                                  thirdPoint->toQPointF(), qApp->toPixel(result));
         quint32 id = _id;
         if (typeCreation == Valentina::FromGui)
         {
@@ -185,8 +185,8 @@ void VToolBisector::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
     doc->SetAttribute(domElement, AttrLength, formula);
@@ -203,8 +203,8 @@ void VToolBisector::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrName, point->name());
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
         doc->SetAttribute(domElement, AttrLength, formula);

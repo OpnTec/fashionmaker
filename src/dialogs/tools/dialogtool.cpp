@@ -566,7 +566,7 @@ void DialogTool::LengthCurves()
 
 void DialogTool::Increments()
 {
-    ShowVariable(data->DataIncrementTable());
+    ShowVariable(data->DataIncrements());
 }
 
 void DialogTool::PutHere()
@@ -624,9 +624,9 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonIncrements->isChecked())
     {
-        VIncrementTableRow itable = data->GetIncrementTableRow(item->text());
+        VIncrement incr = data->GetIncrement(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
-                .arg(itable.getDescription());
+                .arg(incr.getDescription());
         labelDescription->setText(desc);
         return;
     }
@@ -672,7 +672,7 @@ void DialogTool::UpdateList()
     }
     if (radioButtonIncrements->isChecked())
     {
-        ShowVariable(data->DataIncrementTable());
+        ShowVariable(data->DataIncrements());
     }
     if (radioButtonLengthLine->isChecked())
     {

@@ -102,7 +102,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
         QPointF spl1p2, spl1p3, spl2p2, spl2p3;
         qint32 p1 = 0, p2 = 0;
 
-        const QPointF point = splPath->CutSplinePath(toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
+        const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
         VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
         if (typeCreation == Valentina::FromGui)
         {
@@ -159,10 +159,10 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             splPath1id = data->AddGObject(splPath1);
-            data->AddLengthSpline(splPath1->name(), fromPixel(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
 
             splPath2id = data->AddGObject(splPath2);
-            data->AddLengthSpline(splPath2->name(), fromPixel(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
         }
         else
         {
@@ -200,10 +200,10 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             data->UpdateGObject(splPath1id, splPath1);
-            data->AddLengthSpline(splPath1->name(), fromPixel(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
 
             data->UpdateGObject(splPath2id, splPath2);
-            data->AddLengthSpline(splPath2->name(), fromPixel(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
 
             if (parse != Document::FullParse)
             {
@@ -278,8 +278,8 @@ void VToolCutSplinePath::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
     doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
@@ -294,8 +294,8 @@ void VToolCutSplinePath::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
     }

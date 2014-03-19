@@ -98,7 +98,7 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
     {
         VArc arc1;
         VArc arc2;
-        QPointF point = arc->CutArc(toPixel(result), arc1, arc2);
+        QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
         quint32 id = _id;
         quint32 arc1id = 0;
@@ -185,8 +185,8 @@ void VToolCutArc::ChangedActivDraw(const QString &newName)
         secondArc->setFlag(QGraphicsItem::ItemIsSelectable, false);
         secondArc->setAcceptHoverEvents(false);
     }
-    firstArc->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
-    secondArc->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    firstArc->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
+    secondArc->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
     VToolPoint::ChangedActivDraw(newName);
 }
 
@@ -208,8 +208,8 @@ void VToolCutArc::AddToFile()
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
     doc->SetAttribute(domElement, AttrArc, arcId);
@@ -224,8 +224,8 @@ void VToolCutArc::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
         doc->SetAttribute(domElement, AttrArc, arcId);
     }

@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vitem.h"
-#include "../options.h"
 
 #include <QGraphicsScene>
 #include <QDebug>
+#include "../widgets/vapplication.h"
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
     :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(nullptr)
@@ -63,19 +63,19 @@ void VItem::checkItemChange()
     QRectF myrect = sceneBoundingRect();
     if ( rect.contains( myrect )==true )
     {
-        setPen(QPen(Qt::black, toPixel(widthMainLine)));
+        setPen(QPen(Qt::black, qApp->toPixel(widthMainLine)));
         emit itemOut( numInOutList, false );
     }
     else
     {
-        setPen(QPen(Qt::red, toPixel(widthMainLine)));
+        setPen(QPen(Qt::red, qApp->toPixel(widthMainLine)));
         emit itemOut( numInOutList, true );
     }
     QList<QGraphicsItem *> list = QGraphicsItem::collidingItems ();
     if ( list.size() - 2 > 0 )
     {
         list.append( this );
-        setPen(QPen(Qt::red, toPixel(widthMainLine)));
+        setPen(QPen(Qt::red, qApp->toPixel(widthMainLine)));
         emit itemColliding( list, 1 );//Detail intersect with other details.
     }
     else

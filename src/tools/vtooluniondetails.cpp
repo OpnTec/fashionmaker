@@ -579,8 +579,8 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                         if (element.tagName() == VToolUnionDetails::TagNode)
                         {
                             quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
-                            qreal mx = toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
-                            qreal my = toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
+                            qreal mx = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
+                            qreal my = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
                             Valentina::Tools tool;
                             NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
                             QString t = doc->GetParametrString(element, "type", "NodePoint");
@@ -657,8 +657,8 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
     QDomElement nod = doc->createElement(TagNode);
 
     doc->SetAttribute(nod, AttrIdObject, node.getId());
-    doc->SetAttribute(nod, AttrMx, fromPixel(node.getMx()));
-    doc->SetAttribute(nod, AttrMy, fromPixel(node.getMy()));
+    doc->SetAttribute(nod, AttrMx, qApp->fromPixel(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, qApp->fromPixel(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
         doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);

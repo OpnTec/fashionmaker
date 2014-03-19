@@ -230,8 +230,8 @@ void VToolDetail::AddToFile()
 
     doc->SetAttribute(domElement, AttrId, id);
     doc->SetAttribute(domElement, AttrName, detail.getName());
-    doc->SetAttribute(domElement, AttrMx, fromPixel(detail.getMx()));
-    doc->SetAttribute(domElement, AttrMy, fromPixel(detail.getMy()));
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(detail.getMx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(detail.getMy()));
     doc->SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
     doc->SetAttribute(domElement, AttrClosed, detail.getClosed());
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
@@ -277,8 +277,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            doc->SetAttribute(domElement, AttrMx, QString().setNum(fromPixel(newPos.x())));
-            doc->SetAttribute(domElement, AttrMy, QString().setNum(fromPixel(newPos.y())));
+            doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(newPos.x())));
+            doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(newPos.y())));
 
             QList<QGraphicsView*> list = this->scene()->views();
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
@@ -370,8 +370,8 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     QDomElement nod = doc->createElement(TagNode);
 
     doc->SetAttribute(nod, AttrIdObject, node.getId());
-    doc->SetAttribute(nod, AttrMx, fromPixel(node.getMx()));
-    doc->SetAttribute(nod, AttrMy, fromPixel(node.getMy()));
+    doc->SetAttribute(nod, AttrMx, qApp->fromPixel(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, qApp->fromPixel(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
         doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);

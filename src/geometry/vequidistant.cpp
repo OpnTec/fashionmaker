@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vequidistant.h"
+#include "../widgets/vapplication.h"
 
 QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
 {
@@ -145,11 +146,11 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
         QPainterPath ekv;
         if (detail.getClosed() == true)
         {
-            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, qApp->toPixel(detail.getWidth()));
         }
         else
         {
-            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, qApp->toPixel(detail.getWidth()));
         }
         path.addPath(ekv);
         path.setFillRule(Qt::WindingFill);
@@ -385,7 +386,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
         case (QLineF::UnboundedIntersection):
         {
                 QLineF line( line1.p2(), CrosPoint );
-                if (line.length() > width + toPixel(8))
+                if (line.length() > width + qApp->toPixel(8))
                 {
                     QLineF lineL = QLineF(bigLine1.p2(), CrosPoint);
                     lineL.setLength(width);

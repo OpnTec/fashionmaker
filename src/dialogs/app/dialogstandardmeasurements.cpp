@@ -30,6 +30,7 @@
 #include "ui_dialogstandardmeasurements.h"
 #include <QDir>
 #include "../../xml/vstandardmeasurements.h"
+#include "../../widgets/vapplication.h"
 
 DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,
                                                        QWidget *parent) :
@@ -94,7 +95,7 @@ void DialogStandardMeasurements::DialogAccepted()
         try
         {
             m.setContent(&file);
-            patternUnit = m.Unit();
+            qApp->setPatternUnit(m.Unit());
         }
         catch(VException &e)
         {
@@ -148,18 +149,9 @@ void DialogStandardMeasurements::CheckState()
 
 void DialogStandardMeasurements::LoadStandardTables()
 {
-#ifdef Q_OS_WIN
-    const QString pathToTables = QString("/tables/standard");
-#else
-    #ifdef QT_DEBUG
-        const QString pathToTables = QString("/tables/standard");
-    #else
-        const QString pathToTables = QString("/usr/share/valentina/tables/standard");
-    #endif
-#endif
     QStringList filters;
     filters << "*.vst";
-    QDir tablesDir(pathToTables);
+    QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);

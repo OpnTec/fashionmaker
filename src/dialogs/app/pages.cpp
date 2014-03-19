@@ -28,6 +28,7 @@
 
 #include "pages.h"
 #include "../../options.h"
+#include "../../widgets/vapplication.h"
 
 ConfigurationPage::ConfigurationPage(QWidget *parent):
     QWidget(parent), autoSaveCheck(0), autoTime(0), langCombo(0), osOptionCheck(0), langChanged(false)
@@ -115,7 +116,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
 
     QString m_langPath = QApplication::applicationDirPath();
-    m_langPath.append(translationsPath);
+    m_langPath.append(qApp->translationsPath());
     QDir dir(m_langPath);
     QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
 
