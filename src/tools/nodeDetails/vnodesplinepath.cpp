@@ -100,7 +100,7 @@ void VNodeSplinePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)

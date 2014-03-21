@@ -155,7 +155,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
     doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);

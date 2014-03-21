@@ -47,6 +47,11 @@ class VDomDocument : public QDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
+    static const QString    AttrId;
+    static const QString    AttrUnit;
+    static const QString    UnitMM;
+    static const QString    UnitCM;
+    static const QString    UnitIN;
     /**
      * @brief VDomDocument constructor.
      * @param data container with variables.
@@ -162,13 +167,20 @@ template <>
 inline void VDomDocument::SetAttribute<Valentina::Units>(QDomElement &domElement, const QString &name,
                                                               const Valentina::Units &value)
 {
-    if (value == Valentina::Cm || value == Valentina::Mm)
+    switch(value)
     {
-        domElement.setAttribute(name, "cm");
-    }
-    else
-    {
-        domElement.setAttribute(name, "in");
+        case Valentina::Mm:
+            domElement.setAttribute(name, "mm");
+            break;
+        case Valentina::Cm:
+            domElement.setAttribute(name, "cm");
+            break;
+        case Valentina::In:
+            domElement.setAttribute(name, "in");
+            break;
+        default:
+            domElement.setAttribute(name, "cm");
+            break;
     }
 }
 

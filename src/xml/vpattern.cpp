@@ -57,6 +57,7 @@ const QString VPattern::TagTools        = QStringLiteral("tools");
 
 const QString VPattern::AttrName        = QStringLiteral("name");
 const QString VPattern::AttrType        = QStringLiteral("type");
+const QString VPattern::AttrPath        = QStringLiteral("path");
 
 const QString VPattern::IncrementName        = QStringLiteral("name");
 const QString VPattern::IncrementBase        = QStringLiteral("base");
@@ -84,9 +85,9 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     patternElement.appendChild(createElement(TagNotes));
 
     QDomElement measurements = createElement(TagMeasurements);
-    SetAttribute(measurements, "unit", qApp->patternUnit());
-    SetAttribute(measurements, "type", qApp->patternType());
-    SetAttribute(measurements, "path", tablePath);
+    SetAttribute(measurements, AttrUnit, qApp->patternUnit());
+    SetAttribute(measurements, AttrType, qApp->patternType());
+    SetAttribute(measurements, AttrPath, tablePath);
     patternElement.appendChild(measurements);
 
     patternElement.appendChild(createElement(TagIncrements));
@@ -410,6 +411,79 @@ bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
         }
     }
     return false;
+}
+
+QString VPattern::MPath() const
+{
+    QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
+    QDomElement element = list.at(0).toElement();
+    if (element.isElement())
+    {
+        return GetParametrString(element, AttrPath);
+    }
+    else
+    {
+        return QString();
+    }
+}
+
+Valentina::Units VPattern::MUnit() const
+{
+    QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
+    QDomElement element = list.at(0).toElement();
+    if (element.isElement())
+    {
+        QStringList units;
+        units << "mm" << "cm" << "in";
+        QString unit = GetParametrString(element, AttrUnit);
+        switch(units.indexOf(unit))
+        {
+            case 0:// mm
+                return Valentina::Mm;
+                break;
+            case 1:// cm
+                return Valentina::Cm;
+                break;
+            case 2:// in
+                return Valentina::In;
+                break;
+            default:
+                return Valentina::Cm;
+                break;
+        }
+    }
+    else
+    {
+        return Valentina::Cm;
+    }
+}
+
+Pattern::Measurements VPattern::MType() const
+{
+    QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
+    QDomElement element = list.at(0).toElement();
+    if (element.isElement())
+    {
+        QString type = GetParametrString(element, AttrType);
+        QStringList types;
+        types << "standard" << "individual";
+        switch(types.indexOf(type))
+        {
+            case 0:// standard
+                return Pattern::Standard;
+                break;
+            case 1:// individual
+                return Pattern::Individual;
+                break;
+            default:
+                return Pattern::Individual;
+                break;
+        }
+    }
+    else
+    {
+        return Pattern::Individual;
+    }
 }
 
 void VPattern::FullUpdateTree()
@@ -1263,7 +1337,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
     QString message = tr("Got wrong parameter id. Need only id > 0.");
     try
     {
-        id = GetParametrUInt(domElement, VAbstractTool::AttrId, "0");
+        id = GetParametrUInt(domElement, VDomDocument::AttrId, "0");
         if (id <= 0)
         {
             throw VExceptionWrongId(message, domElement);
@@ -1280,7 +1354,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 
 void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
 {
-    if (node.hasAttribute(VAbstractTool::AttrId))
+    if (node.hasAttribute(VDomDocument::AttrId))
     {
         const quint32 id = GetParametrId(node);
         if (vector.contains(id))

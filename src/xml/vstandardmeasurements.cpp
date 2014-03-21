@@ -29,19 +29,30 @@
 #include "vstandardmeasurements.h"
 #include <QDebug>
 
+const QString VStandardMeasurements::TagMeasurement      = QStringLiteral("measurement");
+const QString VStandardMeasurements::TagDescription      = QStringLiteral("description");
+const QString VStandardMeasurements::TagSize             = QStringLiteral("size");
+const QString VStandardMeasurements::TagHeight           = QStringLiteral("height");
+const QString VStandardMeasurements::AttrName            = QStringLiteral("name");
+const QString VStandardMeasurements::AttrGui_text        = QStringLiteral("gui_text");
+const QString VStandardMeasurements::AttrBase            = QStringLiteral("base");
+const QString VStandardMeasurements::AttrSize_increace   = QStringLiteral("size_increace");
+const QString VStandardMeasurements::AttrHeight_increase = QStringLiteral("height_increase");
+const QString VStandardMeasurements::AttrNumber          = QStringLiteral("number");
+
 VStandardMeasurements::VStandardMeasurements(VContainer *data):VDomDocument(data)
 {
 }
 
 Valentina::Units VStandardMeasurements::Unit()
 {
-    const QString unit = UniqueTagText("unit", "cm");
+    const QString unit = UniqueTagText(AttrUnit, UnitCM);
     return VDomDocument::Units(unit);
 }
 
 QString VStandardMeasurements::Description()
 {
-    const QString desc = UniqueTagText("description", "");
+    const QString desc = UniqueTagText(TagDescription, "");
     if (desc.isEmpty())
     {
         qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
@@ -51,7 +62,7 @@ QString VStandardMeasurements::Description()
 
 void VStandardMeasurements::Measurements()
 {
-    const QDomNodeList nodeList = this->elementsByTagName("measurement");
+    const QDomNodeList nodeList = this->elementsByTagName(TagMeasurement);
     if (nodeList.isEmpty())
     {
         qWarning()<<"Measurement list is empty"<<Q_FUNC_INFO;
@@ -67,23 +78,23 @@ void VStandardMeasurements::Measurements()
                 const QDomElement domElement = domNode.toElement();
                 if (domElement.isNull() == false)
                 {
-                    const QString name = GetParametrString(domElement, "name", "");
+                    const QString name = GetParametrString(domElement, AttrName, "");
                     if (name.isEmpty())
                     {
                         continue;
                     }
-                    const QString gui_text = GetParametrString(domElement, "gui_text", "");
-                    const qreal base = GetParametrDouble(domElement, "base", "0.0");
-                    const qreal size_increace = GetParametrDouble(domElement, "size_increace", "0.0");
-                    const qreal height_increase = GetParametrDouble(domElement, "height_increase", "0.0");
-                    const QString number = GetParametrString(domElement, "number", "");
+                    const QString gui_text = GetParametrString(domElement, AttrGui_text, "");
+                    const qreal base = GetParametrDouble(domElement, AttrBase, "0.0");
+                    const qreal size_increace = GetParametrDouble(domElement, AttrSize_increace, "0.0");
+                    const qreal height_increase = GetParametrDouble(domElement, AttrHeight_increase, "0.0");
+                    const QString number = GetParametrString(domElement, AttrNumber, "");
 
-                    if (Unit() == Valentina::Mm)//Convert to Cm.
+                    if (Unit() == Valentina::Mm)// Convert to Cm.
                     {
                         data->AddMeasurement(name, VMeasurement(base/10.0, size_increace/10.0, height_increase/10.0,
                                                                 gui_text, number));
                     }
-                    else//Cm or inch.
+                    else// Cm or inch.
                     {
                         data->AddMeasurement(name, VMeasurement(base, size_increace, height_increase,
                                                                           gui_text, number));
@@ -96,7 +107,7 @@ void VStandardMeasurements::Measurements()
 
 void VStandardMeasurements::SetSize()
 {
-    const QDomNodeList nodeList = this->elementsByTagName("size");
+    const QDomNodeList nodeList = this->elementsByTagName(TagSize);
     if (nodeList.isEmpty())
     {
         data->SetSize(50);
@@ -110,14 +121,14 @@ void VStandardMeasurements::SetSize()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString name = GetParametrString(domElement, "name", "Сг");
-                const qreal base = GetParametrDouble(domElement, "base", "50.0");
-                if (Unit() == Valentina::Mm)//Convert to Cm.
+                const QString name = GetParametrString(domElement, AttrName, "Сг");
+                const qreal base = GetParametrDouble(domElement, AttrBase, "50.0");
+                if (Unit() == Valentina::Mm)// Convert to Cm.
                 {
                     data->SetSize(base/10.0);
                     data->SetSizeName(name);
                 }
-                else//Cm or inch.
+                else// Cm or inch.
                 {
                     data->SetSize(base);
                     data->SetSizeName(name);
@@ -129,7 +140,7 @@ void VStandardMeasurements::SetSize()
 
 void VStandardMeasurements::SetHeight()
 {
-    const QDomNodeList nodeList = this->elementsByTagName("height");
+    const QDomNodeList nodeList = this->elementsByTagName(TagHeight);
     if (nodeList.isEmpty())
     {
         data->SetHeight(176);
@@ -143,14 +154,14 @@ void VStandardMeasurements::SetHeight()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString name = GetParametrString(domElement, "name", "Р");
-                const qreal base = GetParametrDouble(domElement, "base", "176.0");
-                if (Unit() == Valentina::Mm)//Convert to Cm.
+                const QString name = GetParametrString(domElement, AttrName, "Р");
+                const qreal base = GetParametrDouble(domElement, AttrBase, "176.0");
+                if (Unit() == Valentina::Mm)// Convert to Cm.
                 {
                     data->SetHeight(base/10.0);
                     data->SetHeightName(name);
                 }
-                else//Cm or inch.
+                else// Cm or inch.
                 {
                     data->SetHeight(base);
                     data->SetHeightName(name);

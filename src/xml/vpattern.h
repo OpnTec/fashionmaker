@@ -165,6 +165,9 @@ public:
      * @return true if found.
      */
     bool           GetActivNodeElement(const QString& name, QDomElement& element);
+    QString        MPath() const;
+    Valentina::Units MUnit() const;
+    Pattern::Measurements MType() const;
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -183,6 +186,7 @@ public:
     static const QString TagTools;
     static const QString AttrName;
     static const QString AttrType;
+    static const QString AttrPath;
     static const QString IncrementName;
     static const QString IncrementBase;
     static const QString IncrementKsize;

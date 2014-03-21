@@ -28,13 +28,25 @@
 
 #include "vindividualmeasurements.h"
 
+const QString VIndividualMeasurements::AttrIgnore      = QStringLiteral("ignore");
+const QString VIndividualMeasurements::AttrName        = QStringLiteral("name");
+const QString VIndividualMeasurements::AttrM_number    = QStringLiteral("m_number");
+const QString VIndividualMeasurements::AttrGui_text    = QStringLiteral("gui_text");
+const QString VIndividualMeasurements::AttrValue       = QStringLiteral("value");
+const QString VIndividualMeasurements::AttrDescription = QStringLiteral("description");
+const QString VIndividualMeasurements::AttrLang        = QStringLiteral("lang");
+const QString VIndividualMeasurements::AttrFamily_name = QStringLiteral("family-name");
+const QString VIndividualMeasurements::AttrGiven_name  = QStringLiteral("given-name");
+const QString VIndividualMeasurements::AttrBirth_date  = QStringLiteral("birth-date");
+const QString VIndividualMeasurements::AttrSex         = QStringLiteral("sex");
+
 VIndividualMeasurements::VIndividualMeasurements(VContainer *data):VDomDocument(data)
 {
 }
 
 Valentina::Units VIndividualMeasurements::Unit()
 {
-    const QString unit = UniqueTagText("unit", "cm");
+    const QString unit = UniqueTagText(AttrUnit, UnitCM);
     return VDomDocument::Units(unit);
 }
 
@@ -145,24 +157,24 @@ void VIndividualMeasurements::Measurement(const QString &tag)
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const bool ignore = QVariant(GetParametrString(domElement, "ignore", "false")).toBool();
+                const bool ignore = QVariant(GetParametrString(domElement, AttrIgnore, "false")).toBool();
                 if (ignore)
                 {
                     return;
                 }
-                const QString name = GetParametrString(domElement, "name", "");
+                const QString name = GetParametrString(domElement, AttrName, "");
                 if (name.isEmpty())
                 {
                     return;
                 }
-                const QString m_number = GetParametrString(domElement, "m_number", "");
-                const QString gui_text = GetParametrString(domElement, "gui_text", "");
-                const qreal value = GetParametrDouble(domElement, "value", "0.0");
-                const QString description = GetParametrString(domElement, "description", "");
+                const QString m_number = GetParametrString(domElement, AttrM_number, "");
+                const QString gui_text = GetParametrString(domElement, AttrGui_text, "");
+                const qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
+                const QString description = GetParametrString(domElement, AttrDescription, "");
 
                 if (Unit() == Valentina::Mm)//Convert to Cm.
                 {
-                    data->AddMeasurement(name, VMeasurement(value/10.0, gui_text, description));
+                    data->AddMeasurement(name, VMeasurement(value/10.0, gui_text, description, tag));
                     if (m_number.isEmpty())
                     {
                         qWarning()<<"Can't find language-independent measurement name for "<< tag;
@@ -170,12 +182,14 @@ void VIndividualMeasurements::Measurement(const QString &tag)
                     }
                     else
                     {
-                        data->AddMeasurement(m_number, VMeasurement(value/10.0, gui_text, description));
+                        VMeasurement m(value/10.0, gui_text, description, tag);
+                        m.setVirtual(true);
+                        data->AddMeasurement(m_number, m);
                     }
                 }
                 else//Cm or inch.
                 {
-                    data->AddMeasurement(name, VMeasurement(value, gui_text, description));
+                    data->AddMeasurement(name, VMeasurement(value, gui_text, description, tag));
                     if (m_number.isEmpty())
                     {
                         qWarning()<<"Can't find language-independent measurement name for "<< tag;
@@ -183,7 +197,9 @@ void VIndividualMeasurements::Measurement(const QString &tag)
                     }
                     else
                     {
-                        data->AddMeasurement(m_number, VMeasurement(value, gui_text, description));
+                        VMeasurement m(value, gui_text, description, tag);
+                        m.setVirtual(true);
+                        data->AddMeasurement(m_number, m);
                     }
                 }
             }
@@ -193,25 +209,25 @@ void VIndividualMeasurements::Measurement(const QString &tag)
 
 QString VIndividualMeasurements::Language()
 {
-    return UniqueTagText("lang", "en");
+    return UniqueTagText(AttrLang, "en");
 }
 
 QString VIndividualMeasurements::FamilyName()
 {
-    return UniqueTagText("family-name", "");
+    return UniqueTagText(AttrFamily_name, "");
 }
 
 QString VIndividualMeasurements::GivenName()
 {
-    return UniqueTagText("given-name", "");
+    return UniqueTagText(AttrGiven_name, "");
 }
 
 QString VIndividualMeasurements::BirthDate()
 {
-    return UniqueTagText("birth-date", "");
+    return UniqueTagText(AttrBirth_date, "");
 }
 
 QString VIndividualMeasurements::Sex()
 {
-    return UniqueTagText("sex", "");
+    return UniqueTagText(AttrSex, "");
 }

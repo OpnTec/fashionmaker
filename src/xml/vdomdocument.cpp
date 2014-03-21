@@ -77,6 +77,12 @@ inline qint64  MessageHandler::column() const
     return m_sourceLocation.column();
 }
 
+const QString VDomDocument::AttrId   = QStringLiteral("id");
+const QString VDomDocument::AttrUnit = QStringLiteral("unit");
+const QString VDomDocument::UnitMM   = QStringLiteral("mm");
+const QString VDomDocument::UnitCM   = QStringLiteral("cm");
+const QString VDomDocument::UnitIN   = QStringLiteral("in");
+
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())
 {
@@ -122,9 +128,9 @@ void VDomDocument::removeAllChilds(QDomElement &element)
 
 bool VDomDocument::find(const QDomElement &node, const QString& id)
 {
-    if (node.hasAttribute("id"))
+    if (node.hasAttribute(AttrId))
     {
-        const QString value = node.attribute("id");
+        const QString value = node.attribute(AttrId);
         this->map[value] = node;
         if (value == id)
         {
@@ -311,7 +317,7 @@ void VDomDocument::setContent(QIODevice *dev)
 Valentina::Units VDomDocument::Units(const QString &unit)
 {
     QStringList units;
-    units << "mm" << "cm" << "in";
+    units << UnitMM << UnitCM << UnitIN;
     Valentina::Units result = Valentina::Cm;
     switch (units.indexOf(unit))
     {

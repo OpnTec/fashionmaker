@@ -31,6 +31,7 @@
 
 #include "../tools/dialogtool.h"
 #include "../../xml/vpattern.h"
+#include "../../xml/vindividualmeasurements.h"
 
 namespace Ui
 {
@@ -105,6 +106,7 @@ private:
      * @brief column save number of column current selected cell
      */
     qint32               column;
+    VIndividualMeasurements *m;
     /**
      * @brief FillMeasurements load measurements data
      */
@@ -131,11 +133,11 @@ private:
      * @param name name
      * @param base base value
      * @param ksize increment in sizes
-     * @param kgrowth increment in growths
+     * @param kheight increment in heights
      * @param description description of increment
      */
-    void                 AddIncrementToFile(quint32 id, QString name, qreal base, qreal ksize, qreal kgrowth,
-                                            QString description);
+    void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
+                                            const qreal &ksize, const qreal &kheight, const QString &description);
 };
 
 #endif // DIALOGINCREMENTS_H

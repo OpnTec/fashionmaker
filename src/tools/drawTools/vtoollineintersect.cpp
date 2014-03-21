@@ -165,7 +165,7 @@ void VToolLineIntersect::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrName, point->name());
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));

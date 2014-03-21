@@ -41,6 +41,16 @@ public:
     void Measurements();
     void SetSize();
     void SetHeight();
+    static const QString TagMeasurement;
+    static const QString TagDescription;
+    static const QString TagSize;
+    static const QString TagHeight;
+    static const QString AttrName;
+    static const QString AttrGui_text;
+    static const QString AttrBase;
+    static const QString AttrSize_increace;
+    static const QString AttrHeight_increase;
+    static const QString AttrNumber;
 public slots:
     void Update();
 };

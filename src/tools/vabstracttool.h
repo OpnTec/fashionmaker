@@ -102,7 +102,6 @@ public:
      * @param c c value
      */
     static void             LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
-    static const QString    AttrId;
     static const QString    AttrType;
     static const QString    AttrMx;
     static const QString    AttrMy;

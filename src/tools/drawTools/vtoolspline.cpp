@@ -176,7 +176,7 @@ void VToolSpline::AddToFile()
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());

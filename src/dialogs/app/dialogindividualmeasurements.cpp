@@ -217,7 +217,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
         {
             try
             {
-                VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", allFiles.at(i));
+                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", allFiles.at(i));
             }
             catch(VException &e)
             {

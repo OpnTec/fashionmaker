@@ -49,8 +49,9 @@ MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Valentina::ArrowTool),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
-      comboBoxDraws(nullptr), curFile(QString()), mode(Valentina::Calculation), currentDrawIndex(0), currentToolBoxIndex(0),
-      drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr), autoSaveTimer(nullptr)
+      comboBoxDraws(nullptr), curFile(QString()), mode(Valentina::Calculation), currentDrawIndex(0),
+      currentToolBoxIndex(0), drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr),
+      autoSaveTimer(nullptr)
 {
     CreateActions();
     CreateMenus();

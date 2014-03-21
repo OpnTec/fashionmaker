@@ -33,17 +33,18 @@
 #include "../../exception/vexception.h"
 
 #include <QPushButton>
+#include <QFile>
 
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
+    :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
 {
     ui->setupUi(this);
     TextDelegate *textDelegate = new TextDelegate(ui->tableWidgetIncrement);
-    ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
-    ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);
-    ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);
-    ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);
+    ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);// base value
+    ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);// in sizes
+    ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);// in heights
 
     if (qApp->patternType() == Pattern::Standard)
     {
@@ -58,16 +59,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     }
     else
     {
-        ui->tableWidgetMeasurements->setColumnHidden( 1, true );
-        ui->tableWidgetMeasurements->setColumnHidden( 3, true );
-        ui->tableWidgetMeasurements->setColumnHidden( 4, true );
+        ui->tableWidgetMeasurements->setColumnHidden( 1, true );// calculated value
+        ui->tableWidgetMeasurements->setColumnHidden( 3, true );// in sizes
+        ui->tableWidgetMeasurements->setColumnHidden( 4, true );// in heights
 
-        ui->tableWidgetIncrement->setColumnHidden( 1, true );
-        ui->tableWidgetIncrement->setColumnHidden( 3, true );
-        ui->tableWidgetIncrement->setColumnHidden( 4, true );
+        ui->tableWidgetIncrement->setColumnHidden( 1, true );// calculated value
+        ui->tableWidgetIncrement->setColumnHidden( 3, true );// in sizes
+        ui->tableWidgetIncrement->setColumnHidden( 4, true );// in heights
 
-        ui->tableWidgetMeasurements->setItemDelegateForColumn(0, textDelegate);
-        ui->tableWidgetMeasurements->setItemDelegateForColumn(2, doubleDelegate);
+        ui->tableWidgetMeasurements->setItemDelegateForColumn(2, doubleDelegate);// base value
 
         connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementsChanged);
     }
@@ -87,21 +87,66 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
+
+    if (qApp->patternType() == Pattern::Individual)
+    {
+        QString filePath = doc->MPath();
+        QFile file(filePath);
+        if (file.open(QIODevice::ReadOnly))
+        {
+            try
+            {
+                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", filePath);
+            }
+            catch(VException &e)
+            {
+                qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+                emit DialogClosed(QDialog::Rejected);
+                return;
+            }
+
+            m = new VIndividualMeasurements(data);
+            try
+            {
+                m->setContent(&file);
+            }
+            catch(VException &e)
+            {
+                qWarning()<<"Parsing measurements file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+                emit DialogClosed(QDialog::Rejected);
+                return;
+            }
+
+            file.close();
+        }
+        else
+        {
+            qWarning()<<tr("Cannot read file %1:\n%2.").arg(filePath).arg(file.errorString()) << Q_FUNC_INFO;
+        }
+    }
 }
 
 void DialogIncrements::FillMeasurements()
 {
     const QHash<QString, VMeasurement> *table = data->DataMeasurements();
-    qint32 currentRow = -1;
     QHashIterator<QString, VMeasurement> i(*table);
-    ui->tableWidgetMeasurements->setRowCount ( table->size() );
+    QMap<QString, VMeasurement> map;
+    //Sorting QHash by id
     while (i.hasNext())
     {
         i.next();
-        VMeasurement m = i.value();
+        map.insert(i.key(), i.value());
+    }
+    qint32 currentRow = -1;
+    QMapIterator<QString, VMeasurement> iMap(map);
+    ui->tableWidgetMeasurements->setRowCount ( table->size() );
+    while (iMap.hasNext())
+    {
+        iMap.next();
+        VMeasurement m = iMap.value();
         currentRow++;
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
         item->setToolTip(m.GetDescription());
@@ -109,7 +154,7 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == Pattern::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(i.key())));
+            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(iMap.key())));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);
         }
@@ -133,9 +178,9 @@ void DialogIncrements::FillMeasurements()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
     }
+    ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetMeasurements->resizeColumnsToContents();
     ui->tableWidgetMeasurements->resizeRowsToContents();
-    ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FillIncrements()
@@ -305,21 +350,20 @@ void DialogIncrements::FillLengthArcs()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetArcs->setItem(currentRow, 1, item);
     }
+    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetArcs->resizeColumnsToContents();
     ui->tableWidgetArcs->resizeRowsToContents();
-    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
 }
 
 void DialogIncrements::FullUpdateFromFile()
 {
-    disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-               &DialogIncrements::IncrementChanged);
-
     ui->tableWidgetMeasurements->clearContents();
     FillMeasurements();
 
+    disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     ui->tableWidgetIncrement->clearContents();
     FillIncrements();
+    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
 
     ui->tableWidgetLines->clearContents();
     FillLengthLines();
@@ -329,9 +373,6 @@ void DialogIncrements::FullUpdateFromFile()
 
     ui->tableWidgetArcs->clearContents();
     FillLengthArcs();
-
-    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-            &DialogIncrements::IncrementChanged);
 }
 
 void DialogIncrements::clickedToolButtonAdd()
@@ -350,15 +391,12 @@ void DialogIncrements::clickedToolButtonAdd()
         num++;
     } while (data->IncrementTableContains(name));
 
-    quint32 id = data->getNextId();
-    qreal base = 0;
-    qreal ksize = 0;
-    qreal kgrowth = 0;
-    QString description = QString(tr("Description"));
-    VIncrement incr = VIncrement(id, base, ksize, kgrowth, description);
+    const quint32 id = data->getNextId();
+    const QString description(tr("Description"));
+    VIncrement incr = VIncrement(id, 0, 0, 0, description);
     data->AddIncrement(name, incr);
 
-    AddIncrementToFile(id, name, base, ksize, kgrowth, description);
+    AddIncrementToFile(id, name, 0, 0, 0, description);
 
     QTableWidgetItem *item = new QTableWidgetItem(name);
     item->setTextAlignment(Qt::AlignHCenter);
@@ -367,7 +405,7 @@ void DialogIncrements::clickedToolButtonAdd()
     ui->tableWidgetIncrement->setItem(currentRow, 0, item);
     ui->tableWidgetIncrement->setCurrentCell(currentRow, 0, QItemSelectionModel::ClearAndSelect);
 
-    item = new QTableWidgetItem("0");
+    item = new QTableWidgetItem("0");// calculated value
     item->setTextAlignment(Qt::AlignHCenter);
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
@@ -375,19 +413,19 @@ void DialogIncrements::clickedToolButtonAdd()
     item->setFlags(flags);
     ui->tableWidgetIncrement->setItem(currentRow, 1, item);
 
-    item = new QTableWidgetItem("0");
+    item = new QTableWidgetItem("0");// base value
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
-    item = new QTableWidgetItem("0");
+    item = new QTableWidgetItem("0");// in sizes
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-    item = new QTableWidgetItem("0");
+    item = new QTableWidgetItem("0"); // in heights
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 4, item);
 
-    item = new QTableWidgetItem(tr("Description"));
+    item = new QTableWidgetItem(description);
     item->setTextAlignment(Qt::AlignHCenter);
     ui->tableWidgetIncrement->setItem(currentRow, 5, item);
 
@@ -409,7 +447,7 @@ void DialogIncrements::clickedToolButtonRemove()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        QDomNodeList list = doc->elementsByTagName("increments");
+        QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
         list.at(0).removeChild(domElement);
     }
     ui->tableWidgetIncrement->removeRow(row);
@@ -422,134 +460,115 @@ void DialogIncrements::clickedToolButtonRemove()
     emit haveLiteChange();
 }
 
-void DialogIncrements::AddIncrementToFile(quint32 id, QString name, qreal base, qreal ksize, qreal kgrowth,
-                                          QString description)
+void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base, const qreal &ksize,
+                                          const qreal &kheight, const QString &description)
 {
-    QDomNodeList list = doc->elementsByTagName("increments");
-    QDomElement element = doc->createElement("increment");
+    QDomElement element = doc->createElement(VPattern::TagIncrement);
 
-    QDomAttr drawAttr = doc->createAttribute("id");
-    drawAttr.setValue(QString().setNum(id));
-    element.setAttributeNode(drawAttr);
+    doc->SetAttribute(element, VDomDocument::AttrId, id);
+    doc->SetAttribute(element, VPattern::IncrementName, name);
+    doc->SetAttribute(element, VPattern::IncrementBase, base);
+    doc->SetAttribute(element, VPattern::IncrementKsize, ksize);
+    doc->SetAttribute(element, VPattern::IncrementKgrowth, kheight);
+    doc->SetAttribute(element, VPattern::IncrementDescription, description);
 
-    drawAttr = doc->createAttribute("name");
-    drawAttr.setValue(name);
-    element.setAttributeNode(drawAttr);
-
-    drawAttr = doc->createAttribute("base");
-    drawAttr.setValue(QString().setNum(base));
-    element.setAttributeNode(drawAttr);
-
-    drawAttr = doc->createAttribute("ksize");
-    drawAttr.setValue(QString().setNum(ksize));
-    element.setAttributeNode(drawAttr);
-
-    drawAttr = doc->createAttribute("kgrowth");
-    drawAttr.setValue(QString().setNum(kgrowth));
-    element.setAttributeNode(drawAttr);
-
-    drawAttr = doc->createAttribute("description");
-    drawAttr.setValue(description);
-    element.setAttributeNode(drawAttr);
-
+    QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
     list.at(0).appendChild(element);
 }
 
 void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 {
-    QTableWidgetItem *item = nullptr;
-    QTableWidgetItem *itemName = nullptr;
-    quint32 id;
-    QDomElement domElement;
+
+    const QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
+    const QTableWidgetItem *item = ui->tableWidgetIncrement->item(row, column);
+    const quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement() == false)
+    {
+        qWarning()<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
+        return;
+    }
     this->row = row;
     switch (column)
     {
-        case 0: // name
-            item = ui->tableWidgetIncrement->item(row, 0);
-            id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-            domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                domElement.setAttribute("name", item->text());
-                data->ClearIncrementTable();
-                this->column = 2;
-                emit FullUpdateTree();
-                emit haveLiteChange();
-            }
+        case 0: // VPattern::IncrementName
+            doc->SetAttribute(domElement, VPattern::IncrementName, item->text());
+            data->ClearIncrementTable();
+            this->column = 2;
+            emit FullUpdateTree();
             break;
-        case 2: // base
-            itemName = ui->tableWidgetIncrement->item(row, 0);
-            item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-            domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                bool ok = false;
-                qreal value = item->text().replace(",", ".").toDouble(&ok);
-                if (ok)
-                {
-                    domElement.setAttribute("base", value);
-                    this->column = 3;
-                    emit FullUpdateTree();
-                    emit haveLiteChange();
-                }
-                else
-                {
-                    throw VException(tr("Can't convert toDouble value."));
-                }
-            }
+        case 2: // VPattern::IncrementBase
+            doc->SetAttribute(domElement, VPattern::IncrementBase, item->text());
+            this->column = 3;
+            emit FullUpdateTree();
             break;
-        case 3: // ksize
-            itemName = ui->tableWidgetIncrement->item(row, 0);
-            item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-            domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                domElement.setAttribute("ksize", item->text().replace(",", ".").toDouble());
-                this->column = 4;
-                emit FullUpdateTree();
-                emit haveLiteChange();
-            }
+        case 3: // VPattern::IncrementKsize
+            doc->SetAttribute(domElement, VPattern::IncrementKsize, item->text());
+            this->column = 4;
+            emit FullUpdateTree();
             break;
-        case 4: // kgrowth
-            itemName = ui->tableWidgetIncrement->item(row, 0);
-            item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-            domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                domElement.setAttribute("kgrowth", item->text().replace(",", ".").toDouble());
-                this->column = 5;
-                emit FullUpdateTree();
-                emit haveLiteChange();
-            }
+        case 4: // VPattern::IncrementKgrowth
+            doc->SetAttribute(domElement, VPattern::IncrementKgrowth, item->text());
+            this->column = 5;
+            emit FullUpdateTree();
             break;
-        case 5: // description
-            itemName = ui->tableWidgetIncrement->item(row, 0);
-            item = ui->tableWidgetIncrement->item(row, column);
-            id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-            domElement = doc->elementById(QString().setNum(id));
-            if (domElement.isElement())
-            {
-                domElement.setAttribute("description", item->text());
-                VIncrement incr = data->GetIncrement(itemName->text());
-                incr.setDescription(item->text());
-                data->UpdateIncrement(itemName->text(), incr);
-                ui->tableWidgetIncrement->resizeColumnsToContents();
-                ui->tableWidgetIncrement->resizeRowsToContents();
-                ui->tableWidgetIncrement->setCurrentCell( row, 0 );
-                emit haveLiteChange();
-            }
+        case 5: // VPattern::IncrementDescription
+        {
+            doc->SetAttribute(domElement, VPattern::IncrementDescription, item->text());
+            VIncrement incr = data->GetIncrement(itemName->text());
+            incr.setDescription(item->text());
+            data->UpdateIncrement(itemName->text(), incr);
+            ui->tableWidgetIncrement->resizeColumnsToContents();
+            ui->tableWidgetIncrement->resizeRowsToContents();
+            this->column = 0;
+            ui->tableWidgetIncrement->setCurrentCell( row, this->column );
             break;
+        }
         default:
             break;
     }
+    emit haveLiteChange();
 }
 
 void DialogIncrements::MeasurementsChanged(qint32 row, qint32 column)
 {
+    const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
+    QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
+    VMeasurement measur = data->GetMeasurement(itemName->text());
+    const QString tag = measur.TagName();
+    VIndividualMeasurements m(data);
+    QDomNodeList list = m.elementsByTagName(tag);
+    QDomElement domElement = list.at(0).toElement();
+    if (domElement.isElement() == false)
+    {
+        qWarning()<<"Cant't find measurement "<<tag<<Q_FUNC_INFO;
+        return;
+    }
+    switch (column)
+    {
+        case 2:
+        {
+            m.SetAttribute(domElement, VIndividualMeasurements::AttrValue, item->text());
+            bool ok = false;
+            const qreal base = item->text().replace(",", ".").toDouble(&ok);
+            if (ok == false)
+            {
+                measur.setBase(0);
+                item->setText("0");
+                qWarning()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
+            }
+            else
+            {
+                measur.setBase(base);
+            }
+            data->UpdateMeasurement(itemName->text(), measur);
+            break;
+        }
+        default:
+            break;
+    }
+    emit haveLiteChange();
 }
 
 void DialogIncrements::closeEvent(QCloseEvent *event)

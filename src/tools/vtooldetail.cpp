@@ -228,7 +228,7 @@ void VToolDetail::AddToFile()
     VDetail detail = VAbstractTool::data.GetDetail(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, detail.getName());
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(detail.getMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(detail.getMy()));

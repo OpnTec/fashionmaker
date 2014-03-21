@@ -49,15 +49,17 @@ public:
                     * @param description description of increment
                     */
                    VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
-                                     const QString &gui_text = QString(), const QString &number = QString());
+                                const QString &gui_text = QString(), const QString &number = QString(), 
+                                const QString &TagName = QString());
                    VMeasurement(const qreal &base, const QString &gui_text = QString(),
-                                const QString &number = QString());
+                                const QString &number = QString(), const QString &TagName = QString());
                    ~VMeasurement(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value
      */
     qreal   GetBase() const;
+    void    setBase(const qreal &value);
     /**
      * @brief GetKsize return increment in sizes
      * @return increment
@@ -76,6 +78,10 @@ public:
     QString GetNumber() const;
     qreal   GetValue() const;
     qreal   GetValue(const qreal &size, const qreal &height) const;
+    QString TagName() const;
+    void    setTagName(const QString &TagName);
+    bool    Virtual() const;
+    void    setVirtual(bool value);
 private:
     /**
      * @brief base value in base size and growth
@@ -94,11 +100,18 @@ private:
      */
     QString        gui_text;
     QString        number;
+    bool           virtualM;
+    QString        _tagName;
 };
 
 inline qreal VMeasurement::GetBase() const
 {
     return base;
+}
+
+inline void VMeasurement::setBase(const qreal &value)
+{
+    base = value;
 }
 
 inline qreal VMeasurement::GetKsize() const
@@ -119,6 +132,26 @@ inline QString VMeasurement::GetDescription() const
 inline QString VMeasurement::GetNumber() const
 {
     return number;
+}
+
+inline QString VMeasurement::TagName() const
+{
+    return _tagName;
+}
+
+inline void VMeasurement::setTagName(const QString &tagName)
+{
+    _tagName = tagName;
+}
+
+inline bool VMeasurement::Virtual() const
+{
+    return virtualM;
+}
+
+inline void VMeasurement::setVirtual(bool value)
+{
+    virtualM = value;
 }
 
 #endif // VSTANDARDTABLEROW_H

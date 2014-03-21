@@ -214,7 +214,7 @@ void VToolSplinePath::AddToFile()
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrKCurve, splPath.getKCurve());
 

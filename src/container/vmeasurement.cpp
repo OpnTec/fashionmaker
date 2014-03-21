@@ -29,14 +29,23 @@
 #include "vmeasurement.h"
 
 VMeasurement::VMeasurement()
-    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()){}
+    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()), virtualM(false),
+      _tagName(QString())
+{
+
+}
 
 VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kgrowth,
-                           const QString &gui_text, const QString &number)
-    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number){}
+                           const QString &gui_text, const QString &number, const QString &tagName)
+    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number), virtualM(false),
+      _tagName(tagName)
+{
 
-VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &number)
-    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number)
+}
+
+VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &number, const QString &tagName)
+    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number), virtualM(false),
+      _tagName(tagName)
 {
 
 }
@@ -52,3 +61,7 @@ qreal VMeasurement::GetValue(const qreal &size, const qreal &height) const
     const qreal k_height  = ( height - 176.0 ) / 6.0;
     return base + k_size * ksize + k_height * kheight;
 }
+
+
+
+

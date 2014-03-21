@@ -43,6 +43,17 @@ public:
     QString GivenName();
     QString BirthDate();
     QString Sex();
+    static const QString AttrIgnore;
+    static const QString AttrName;
+    static const QString AttrM_number;
+    static const QString AttrGui_text;
+    static const QString AttrValue;
+    static const QString AttrDescription;
+    static const QString AttrLang;
+    static const QString AttrFamily_name;
+    static const QString AttrGiven_name;
+    static const QString AttrBirth_date;
+    static const QString AttrSex;
 };
 
 #endif // VINDIVIDUALMEASUREMENTS_H

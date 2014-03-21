@@ -28,7 +28,6 @@
 
 #include "vabstracttool.h"
 
-const QString VAbstractTool::AttrId          = QStringLiteral("id");
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
 const QString VAbstractTool::AttrMy          = QStringLiteral("my");

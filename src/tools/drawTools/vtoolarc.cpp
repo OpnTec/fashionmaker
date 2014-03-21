@@ -182,7 +182,7 @@ void VToolArc::AddToFile()
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, AttrId, id);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
     doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
