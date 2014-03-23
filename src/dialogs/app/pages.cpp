@@ -115,8 +115,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
     QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
 
-    QString m_langPath = QApplication::applicationDirPath();
-    m_langPath.append(qApp->translationsPath());
+    QString m_langPath = qApp->translationsPath();
     QDir dir(m_langPath);
     QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
 

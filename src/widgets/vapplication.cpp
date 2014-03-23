@@ -132,10 +132,10 @@ QString VApplication::pathToTables() const
     if (_patternType == Pattern::Individual)
     {
         #ifdef Q_OS_WIN
-            return QStringLiteral("/tables/individual");
+            return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
         #else
             #ifdef QT_DEBUG
-                return QStringLiteral("/tables/individual");
+                return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
             #else
                 return QStringLiteral("/usr/share/valentina/tables/individual");
             #endif
@@ -144,10 +144,10 @@ QString VApplication::pathToTables() const
     else
     {
         #ifdef Q_OS_WIN
-            return QStringLiteral("/tables/standard");
+            return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
         #else
             #ifdef QT_DEBUG
-                return QStringLiteral("/tables/standard");
+                return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
             #else
                 return QStringLiteral("/usr/share/valentina/tables/standard");
             #endif
@@ -158,10 +158,10 @@ QString VApplication::pathToTables() const
 QString VApplication::translationsPath() const
 {
     #ifdef Q_OS_WIN
-        return QStringLiteral("/translations");
+        return QApplication::applicationDirPath() + QStringLiteral("/translations");
     #else
         #ifdef QT_DEBUG
-            return QStringLiteral("/translations");
+            return QApplication::applicationDirPath() + QStringLiteral("/translations");
         #else
             return QStringLiteral("/usr/share/valentina/translations");
         #endif

@@ -153,6 +153,7 @@ void DialogStandardMeasurements::LoadStandardTables()
     filters << "*.vst";
     QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
+    tablesDir.setCurrent(qApp->pathToTables());
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
@@ -164,12 +165,13 @@ void DialogStandardMeasurements::LoadStandardTables()
 
     for (int i = 0; i < allFiles.size(); ++i)
     {
+        QFileInfo fi(allFiles.at(i));
         QFile file(allFiles.at(i));
         if (file.open(QIODevice::ReadOnly))
         {
             try
             {
-                VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", allFiles.at(i));
+                VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", fi.absoluteFilePath());
             }
             catch(VException &e)
             {
@@ -181,7 +183,7 @@ void DialogStandardMeasurements::LoadStandardTables()
             try
             {
                 m.setContent(&file);
-                ui->comboBoxTables->addItem(m.Description(), QVariant(allFiles.at(i)));
+                ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
             }
             catch(VException &e)
             {
@@ -193,7 +195,7 @@ void DialogStandardMeasurements::LoadStandardTables()
         }
         else
         {
-            qWarning()<<tr("Cannot read file %1:\n%2.").arg(allFiles.at(i)).arg(file.errorString()) << Q_FUNC_INFO;
+            qWarning()<<tr("Cannot read file %1:\n%2.").arg(fi.absoluteFilePath()).arg(file.errorString()) << Q_FUNC_INFO;
         }
     }
 }

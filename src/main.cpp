@@ -84,10 +84,10 @@ int main(int argc, char *argv[])
 
     QTranslator appTranslator;
 #ifdef Q_OS_WIN
-    appTranslator.load("valentina_" + checkedLocale, "."+qApp->translationsPath());
+    appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
 #else
     #ifdef QT_DEBUG
-        appTranslator.load("valentina_" + checkedLocale, "."+qApp->translationsPath());
+        appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     #else
         appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     #endif
