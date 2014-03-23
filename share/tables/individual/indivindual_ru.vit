@@ -1,10 +1,10 @@
 <vit>
 	<lang>ru</lang>
 	<personal>
-	   <family-name></family-name>
-	   <given-name></given-name>
-	   <birth-date></birth-date>
-	   <sex></sex>
+	   <family-name/>
+	   <given-name/>
+	   <birth-date/>
+	   <sex/>
 	</personal>
 	<body-measurements>
 		<unit>mm</unit>

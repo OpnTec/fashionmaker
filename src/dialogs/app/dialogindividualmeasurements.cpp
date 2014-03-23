@@ -100,7 +100,7 @@ void DialogIndividualMeasurements::DialogAccepted()
     {
         try
         {
-            VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", _tablePath);
+            VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", _tablePath);
         }
         catch(VException &e)
         {
@@ -158,7 +158,7 @@ void DialogIndividualMeasurements::CheckState()
 
         ui->lineEditPathNewM->setEnabled(false);
         ui->toolButtonOpenNew->setEnabled(false);
-        ui->comboBoxLang->setEditable(false);
+        ui->comboBoxLang->setEnabled(false);
 
         if (ui->lineEditPathExistM->text().isEmpty() == false)
         {
@@ -169,7 +169,7 @@ void DialogIndividualMeasurements::CheckState()
     {
         ui->lineEditPathNewM->setEnabled(true);
         ui->toolButtonOpenNew->setEnabled(true);
-        ui->comboBoxLang->setEditable(true);
+        ui->comboBoxLang->setEnabled(true);
 
         ui->toolButtonOpenExist->setEnabled(false);
         ui->lineEditPathExistM->setEnabled(false);
@@ -201,6 +201,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
     filters << "*.vit";
     QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
+    tablesDir.setCurrent(qApp->pathToTables());
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
@@ -212,12 +213,13 @@ void DialogIndividualMeasurements::LoadIndividualTables()
 
     for (int i = 0; i < allFiles.size(); ++i)
     {
+        QFileInfo fi(allFiles.at(i));
         QFile file(allFiles.at(i));
         if (file.open(QIODevice::ReadOnly))
         {
             try
             {
-                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", allFiles.at(i));
+                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", fi.absoluteFilePath());
             }
             catch(VException &e)
             {
@@ -230,7 +232,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
             {
                 m.setContent(&file);
                 const QString lang = QLocale(m.Language()).nativeLanguageName();
-                ui->comboBoxLang->addItem(lang, QVariant(allFiles.at(i)));
+                ui->comboBoxLang->addItem(lang, QVariant(fi.absoluteFilePath()));
             }
             catch(VException &e)
             {
@@ -242,7 +244,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
         }
         else
         {
-            qWarning()<<tr("Cannot read file %1:\n%2.").arg(allFiles.at(i)).arg(file.errorString()) << Q_FUNC_INFO;
+            qWarning()<<tr("Cannot read file %1:\n%2.").arg(fi.absoluteFilePath()).arg(file.errorString())<<Q_FUNC_INFO;
         }
     }
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -252,6 +254,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
     defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
     QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
 
+    //TODO make sure this part work.
     // set default translators and language checked
     qint32 index = ui->comboBoxLang->findData(checkedLocale);
     if (index != -1)
@@ -263,14 +266,36 @@ void DialogIndividualMeasurements::LoadIndividualTables()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        try
+        {
+            VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", fileName);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("Validation file error."), this);
+            fileName.clear();
+        }
+        file.close();
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Valentina"), tr("Cannot read file %1:\n%2.").arg(fileName)
+                             .arg(file.errorString()));
+        fileName.clear();
+    }
     ui->lineEditPathExistM->setText(fileName);
+    ui->lineEditPathExistM->setToolTip(fileName);
     CheckState();
 }
 
 void DialogIndividualMeasurements::NewTable()
 {
-    QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), QDir::homePath(),
+    QString dir = QDir::homePath()+"/measurements.vit";
+    QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), dir,
                                                 tr("Individual measurements (*.vit)"));
 
     if (name.isEmpty())
@@ -285,5 +310,6 @@ void DialogIndividualMeasurements::NewTable()
         name += ".vit";
     }
     ui->lineEditPathNewM->setText(name);
+    ui->lineEditPathNewM->setToolTip(name);
     CheckState();
 }
