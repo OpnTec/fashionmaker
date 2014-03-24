@@ -89,13 +89,13 @@ CONFIG(debug, debug|release){
         }
     } else {
         *-g++{#Don't use additional GCC keys on Windows system.
-        QMAKE_CXXFLAGS += -Og -Wall -Wextra -pedantic
+        QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic
         }
     }
 }else{
     # Release
     *-g++{
-    QMAKE_CXXFLAGS += -O1
+    QMAKE_CXXFLAGS += -O2
     }
 
     DEFINES += QT_NO_DEBUG_OUTPUT

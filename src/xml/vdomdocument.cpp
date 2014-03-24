@@ -81,7 +81,7 @@ const QString VDomDocument::AttrId   = QStringLiteral("id");
 const QString VDomDocument::AttrUnit = QStringLiteral("unit");
 const QString VDomDocument::UnitMM   = QStringLiteral("mm");
 const QString VDomDocument::UnitCM   = QStringLiteral("cm");
-const QString VDomDocument::UnitIN   = QStringLiteral("in");
+const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
 
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())
@@ -250,27 +250,21 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
     return defVal;
 }
 
-void VDomDocument::ValidatePattern(const QString &schema, const QString &fileName)
+void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
-    QString errorMsg;
-    qint64 errorLine = -1;
-    qint64 errorColumn = -1;
-
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
-        errorMsg = QString(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
-        VException e(errorMsg);
-        e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
-        throw e;
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
+        throw VException(errorMsg);
     }
+
     QFile fileSchema(schema);
     if (fileSchema.open(QIODevice::ReadOnly) == false)
     {
-        errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
-        VException e(errorMsg);
-        e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
-        throw e;
+        pattern.close();
+        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
+        throw VException(errorMsg);
     }
 
     MessageHandler messageHandler;
@@ -294,30 +288,41 @@ void VDomDocument::ValidatePattern(const QString &schema, const QString &fileNam
 
     if (errorOccurred)
     {
+        pattern.close();
+        fileSchema.close();
         VException e(messageHandler.statusMessage());
-        e.AddMoreInformation(tr("Error in line %1 column %2").arg(messageHandler.line()).arg(messageHandler.column()));
+        e.AddMoreInformation(tr("Validation error in line %1 column %2").arg(messageHandler.line()).arg(messageHandler.column()));
         throw e;
     }
-
+    pattern.close();
+    fileSchema.close();
 }
 
-void VDomDocument::setContent(QIODevice *dev)
+void VDomDocument::setContent(const QString &fileName)
 {
-    QString errorMsg;
-    int errorLine = 0;
-    int errorColumn = 0;
-    if (QDomDocument::setContent(dev, &errorMsg, &errorLine, &errorColumn) == false)
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadOnly) == false)
     {
-         VException e(errorMsg);
-         e.AddMoreInformation(tr("Error in line %1 column %2").arg(errorLine).arg(errorColumn));
-         throw e;
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName).arg(file.errorString()));
+        throw VException(errorMsg);
+    }
+
+    QString errorMsg;
+    int errorLine = -1;
+    int errorColumn = -1;
+    if (QDomDocument::setContent(&file, &errorMsg, &errorLine, &errorColumn) == false)
+    {
+        file.close();
+        VException e(errorMsg);
+        e.AddMoreInformation(tr("Parcing error in line %1 column %2").arg(errorLine).arg(errorColumn));
+        throw e;
     }
 }
 
-Valentina::Units VDomDocument::Units(const QString &unit)
+Valentina::Units VDomDocument::StrToUnits(const QString &unit)
 {
     QStringList units;
-    units << UnitMM << UnitCM << UnitIN;
+    units << UnitMM << UnitCM << UnitINCH;
     Valentina::Units result = Valentina::Cm;
     switch (units.indexOf(unit))
     {
@@ -327,11 +332,32 @@ Valentina::Units VDomDocument::Units(const QString &unit)
         case 1:// cm
             result = Valentina::Cm;
             break;
-        case 2:// in
-            result = Valentina::In;
+        case 2:// inch
+            result = Valentina::Inch;
             break;
         default:
             result = Valentina::Cm;
+            break;
+    }
+    return result;
+}
+
+QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
+{
+    QString result;
+    switch(unit)
+    {
+        case Valentina::Mm:
+            result = "mm";
+            break;
+        case Valentina::Cm:
+            result = "cm";
+            break;
+        case Valentina::Inch:
+            result = "inch";
+            break;
+        default:
+            result = "cm";
             break;
     }
     return result;

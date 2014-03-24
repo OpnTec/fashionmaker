@@ -99,7 +99,7 @@ double VApplication::toPixel(double unit) const
     case Valentina::Cm:
         result = ((unit * 10.0) / 25.4) * PrintDPI;
         break;
-    case Valentina::In:
+    case Valentina::Inch:
         result = unit * PrintDPI;
         break;
     default:
@@ -119,7 +119,7 @@ double VApplication::fromPixel(double pix) const
     case Valentina::Cm:
         result = ((pix / PrintDPI) * 25.4) / 10.0;
         break;
-    case Valentina::In:
+    case Valentina::Inch:
         result = pix / PrintDPI;
         break;
     default:

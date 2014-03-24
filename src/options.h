@@ -92,7 +92,7 @@ namespace Valentina
     /**
      * @brief The Unit enum
      */
-    enum Unit { Mm, Cm, In };
+    enum Unit { Mm, Cm, Inch };
     Q_DECLARE_FLAGS(Units, Unit)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Scenes )

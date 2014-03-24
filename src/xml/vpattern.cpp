@@ -35,6 +35,8 @@
 #include "../exception/vexceptionobjecterror.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../exception/vexceptionconversionerror.h"
+#include "vstandardmeasurements.h"
+#include "vindividualmeasurements.h"
 
 #include <QMessageBox>
 
@@ -85,7 +87,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     patternElement.appendChild(createElement(TagNotes));
 
     QDomElement measurements = createElement(TagMeasurements);
-    SetAttribute(measurements, AttrUnit, qApp->patternUnit());
+    SetAttribute(measurements, AttrUnit, UnitsToStr(qApp->patternUnit()));
     SetAttribute(measurements, AttrType, qApp->patternType());
     SetAttribute(measurements, AttrPath, tablePath);
     patternElement.appendChild(measurements);
@@ -417,7 +419,7 @@ bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
 
 QString VPattern::MPath() const
 {
-    QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
+    QDomNodeList list = elementsByTagName(TagMeasurements);
     QDomElement element = list.at(0).toElement();
     if (element.isElement())
     {
@@ -429,6 +431,20 @@ QString VPattern::MPath() const
     }
 }
 
+void VPattern::SetPath(const QString &path)
+{
+    QDomNodeList list = elementsByTagName(TagMeasurements);
+    QDomElement element = list.at(0).toElement();
+    if (element.isElement())
+    {
+        SetAttribute(element, AttrPath, path);
+    }
+    else
+    {
+        qWarning()<<"Can't save path to measurements"<<Q_FUNC_INFO;
+    }
+}
+
 Valentina::Units VPattern::MUnit() const
 {
     QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
@@ -436,7 +452,7 @@ Valentina::Units VPattern::MUnit() const
     if (element.isElement())
     {
         QStringList units;
-        units << "mm" << "cm" << "in";
+        units << "mm" << "cm" << "inch";
         QString unit = GetParametrString(element, AttrUnit);
         switch(units.indexOf(unit))
         {
@@ -447,7 +463,7 @@ Valentina::Units VPattern::MUnit() const
                 return Valentina::Cm;
                 break;
             case 2:// in
-                return Valentina::In;
+                return Valentina::Inch;
                 break;
             default:
                 return Valentina::Cm;
@@ -1385,7 +1401,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
     {
         TestUniqueId();
         data->Clear();
-        emit UpdateMeasurements();
+        UpdateMeasurements();
         nameActivDraw.clear();
         sceneDraw->clear();
         sceneDetail->clear();
@@ -1399,4 +1415,21 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
     data->ClearLineAngles();
     data->ClearDetails();
     history.clear();
+}
+
+void VPattern::UpdateMeasurements()
+{
+    const QString path = MPath();
+    if (MType() == Pattern::Standard)
+    {
+        VStandardMeasurements m(data);
+        m.setContent(path);
+        m.Measurements();
+    }
+    else
+    {
+        VIndividualMeasurements m(data);
+        m.setContent(path);
+        m.Measurements();
+    }
 }

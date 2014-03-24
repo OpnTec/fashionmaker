@@ -4,9 +4,16 @@
          <xs:element name="pattern">
                <xs:complexType>
                      <xs:sequence minOccurs="1" maxOccurs="unbounded">
-						   <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                           <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
-                           <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+							<xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+							<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+							<xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+							<xs:element name="measurements" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="path" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="unit" type="xs:string" use="required"></xs:attribute>   
+							   	</xs:complexType>
+							</xs:element>
                            <xs:element name="increments" minOccurs="0" maxOccurs="1">
                                  <xs:complexType>
                                        <xs:sequence minOccurs="0" maxOccurs="unbounded">

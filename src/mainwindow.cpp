@@ -35,6 +35,7 @@
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongid.h"
 #include "version.h"
+#include "xml/vstandardmeasurements.h"
 
 #include <QInputDialog>
 #include <QtCore>
@@ -55,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     CreateActions();
     CreateMenus();
-    ToolBarOption();
     ToolBarDraws();
 
     sceneDraw = new VMainGraphicsScene();
@@ -542,39 +542,36 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::ToolBarOption()
 {
-    QLabel * labelGrowth = new QLabel;
-    labelGrowth->setText(tr("Height: "));
-    ui->toolBarOption->addWidget(labelGrowth);
+    if (qApp->patternType() == Pattern::Standard)
+    {
+        ui->toolBarOption->addWidget(new QLabel(tr("Height: ")));
 
-    QStringList list;
-    list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
-         <<"182"<<"188";
-    QComboBox *comboBoxGrow = new QComboBox;
-    comboBoxGrow->clear();
-    comboBoxGrow->addItems(list);
-    comboBoxGrow->setCurrentIndex(14);
-    ui->toolBarOption->addWidget(comboBoxGrow);
-    connect(comboBoxGrow, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::ChangedHeight);
+        QStringList list;
+        list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
+             <<"182"<<"188";
+        QComboBox *comboBoxHeight = new QComboBox;
+        comboBoxHeight->addItems(list);
+        comboBoxHeight->setCurrentIndex(14);//176
+        ui->toolBarOption->addWidget(comboBoxHeight);
+        connect(comboBoxHeight, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedHeight);
 
-    QLabel * labelSize = new QLabel;
-    labelSize->setText(tr(" Size: "));
-    ui->toolBarOption->addWidget(labelSize);
+        ui->toolBarOption->addWidget(new QLabel(tr(" Size: ")));
 
-    list.clear();
-    list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"<<"56";
-    QComboBox *comboBoxSize = new QComboBox;
-    comboBoxSize->clear();
-    comboBoxSize->addItems(list);
-    comboBoxSize->setCurrentIndex(14);
-    ui->toolBarOption->addWidget(comboBoxSize);
-    connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::ChangedSize);
+        list.clear();
+        list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"
+             <<"56";
+        QComboBox *comboBoxSize = new QComboBox;
+        comboBoxSize->addItems(list);
+        comboBoxSize->setCurrentIndex(14);//50
+        ui->toolBarOption->addWidget(comboBoxSize);
+        connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedSize);
 
-    ui->toolBarOption->addSeparator();
+        ui->toolBarOption->addSeparator();
+    }
 
-    mouseCoordinate = new QLabel;
-    mouseCoordinate ->setText("0, 0");
+    mouseCoordinate = new QLabel("0, 0");
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
@@ -626,10 +623,12 @@ void MainWindow::currentDrawChanged( int index )
 
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
-    QString string = QString("%1, %2")
-                            .arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                            .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())));
-    mouseCoordinate->setText(string);
+    QString string = QString("%1, %2").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                      .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())));
+    if (mouseCoordinate != nullptr)
+    {
+        mouseCoordinate->setText(string);
+    }
 }
 
 void MainWindow::CancelTool()
@@ -953,6 +952,9 @@ void MainWindow::Clear()
     ui->actionSave->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
     SetEnableTool(false);
+    qApp->setPatternUnit(Valentina::Cm);
+    qApp->setPatternType(Pattern::Individual);
+    ui->toolBarOption->clear();
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
@@ -1386,100 +1388,165 @@ MainWindow::~MainWindow()
 
 void MainWindow::LoadPattern(const QString &fileName)
 {
-    QFile file(fileName);
-    if (file.open(QIODevice::ReadOnly))
+    try
     {
-        try
+        VDomDocument::ValidateXML("://schema/pattern.xsd", fileName);
+        doc->setContent(fileName);
+
+        qApp->setPatternUnit(doc->MUnit());
+        qApp->setPatternType(doc->MType());
+        QString path = doc->MPath();
+
+        path = CheckPathToMeasurements(path, qApp->patternType());
+        if(path.isEmpty())
         {
-            VDomDocument::ValidatePattern("://schema/pattern.xsd", fileName);
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Validation file error."), this);
-            file.close();
             Clear();
             return;
         }
 
-        try
+        QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
+                .arg(doc->UnitsToStr(qApp->patternUnit()));
+        if (qApp->patternType() == Pattern::Standard)
         {
-            doc->setContent(&file);
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
-            file.close();
-            Clear();
-            return;
-        }
-
-        disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                   this, &MainWindow::currentDrawChanged);
-        try
-        {
-            #ifndef QT_NO_CURSOR
-                QApplication::setOverrideCursor(Qt::WaitCursor);
-            #endif
-            doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
-            #ifndef QT_NO_CURSOR
-                QApplication::restoreOverrideCursor();
-            #endif
-                ui->actionPattern_properties->setEnabled(true);
-        }
-        catch (const VExceptionObjectError &e)
-        {
-            e.CriticalMessageBox(tr("Error parsing file."), this);
-            file.close();
-            Clear();
-            return;
-        }
-        catch (const VExceptionConversionError &e)
-        {
-            e.CriticalMessageBox(tr("Error can't convert value."), this);
-            file.close();
-            Clear();
-            return;
-        }
-        catch (const VExceptionEmptyParameter &e)
-        {
-            e.CriticalMessageBox(tr("Error empty parameter."), this);
-            file.close();
-            Clear();
-            return;
-        }
-        catch (const VExceptionWrongId &e)
-        {
-            e.CriticalMessageBox(tr("Error wrong id."), this);
-            file.close();
-            Clear();
-            return;
-        }
-        connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                this, &MainWindow::currentDrawChanged);
-        QString nameDraw = doc->GetNameActivDraw();
-        qint32 index = comboBoxDraws->findText(nameDraw);
-        if ( index != -1 )
-        { // -1 for not found
-            comboBoxDraws->setCurrentIndex(index);
-        }
-        if (comboBoxDraws->count() > 0)
-        {
-            SetEnableTool(true);
+            VStandardMeasurements m(pattern);
+            m.setContent(path);
+            Valentina::Units mUnit = m.Unit();
+            if (qApp->patternUnit() != mUnit)
+            {
+                QMessageBox::critical(this, tr("Wrong units."), text);
+                Clear();
+                return;
+            }
+            m.SetSize();
+            m.SetHeight();
+            ToolBarOption();
         }
         else
         {
-            SetEnableTool(false);
+            VIndividualMeasurements m(pattern);
+            m.setContent(path);
+            Valentina::Units mUnit = m.Unit();
+            if (qApp->patternUnit() != mUnit)
+            {
+                QMessageBox::critical(this, tr("Wrong units."), text);
+                Clear();
+                return;
+            }
         }
-        SetEnableWidgets(true);
+    }
+    catch(VException &e)
+    {
+        e.CriticalMessageBox(tr("File error."), this);
+        Clear();
+        return;
+    }
 
-        file.close();
+    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+               this, &MainWindow::currentDrawChanged);
+    try
+    {
+        #ifndef QT_NO_CURSOR
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+        #endif
+
+        doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+
+        #ifndef QT_NO_CURSOR
+            QApplication::restoreOverrideCursor();
+        #endif
+            ui->actionPattern_properties->setEnabled(true);
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        e.CriticalMessageBox(tr("Error can't convert value."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        e.CriticalMessageBox(tr("Error wrong id."), this);
+        Clear();
+        return;
+    }
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::currentDrawChanged);
+    QString nameDraw = doc->GetNameActivDraw();
+    qint32 index = comboBoxDraws->findText(nameDraw);
+    if ( index != -1 )
+    { // -1 for not found
+        comboBoxDraws->setCurrentIndex(index);
+    }
+    if (comboBoxDraws->count() > 0)
+    {
+        SetEnableTool(true);
     }
     else
     {
-        QMessageBox::warning(this, tr("Valentina"), tr("Cannot read file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
+        SetEnableTool(false);
     }
+    SetEnableWidgets(true);
+
     setCurrentFile(fileName);
     helpLabel->setText(tr("File loaded"));
+}
+
+QString MainWindow::CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType)
+{
+    QFile table(path);
+    if (table.exists() == false)
+    {
+        QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> %3").arg(path)
+                .arg(tr("could not be found. Do you want to update the file location"));
+        QMessageBox::StandardButton res = QMessageBox::question(this, "Loading measurements file", text,
+                                                                QMessageBox::Yes | QMessageBox::No,
+                                                                QMessageBox::Yes);
+        if(res == QMessageBox::No)
+        {
+            return QString();
+        }
+        else
+        {
+            QString filter;
+            if (patternType == Pattern::Standard)
+            {
+                filter = tr("Standard measurements (*.vst)");
+            }
+            else
+            {
+                filter = tr("Individual measurements (*.vit)");
+            }
+            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+
+            if(mPath.isEmpty())
+            {
+                return mPath;
+            }
+            else
+            {
+                if (patternType == Pattern::Standard)
+                {
+                    VDomDocument::ValidateXML("://schema/standard_measurements.xsd", mPath);
+                }
+                else
+                {
+                    VDomDocument::ValidateXML("://schema/individual_measurements.xsd", mPath);
+                }
+                doc->SetPath(mPath);
+                return mPath;
+            }
+        }
+    }
+    return path;
 }

@@ -91,37 +91,17 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     if (qApp->patternType() == Pattern::Individual)
     {
         QString filePath = doc->MPath();
-        QFile file(filePath);
-        if (file.open(QIODevice::ReadOnly))
+        try
         {
-            try
-            {
-                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", filePath);
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                emit DialogClosed(QDialog::Rejected);
-                return;
-            }
-
+            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
             m = new VIndividualMeasurements(data);
-            try
-            {
-                m->setContent(&file);
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Parsing measurements file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                emit DialogClosed(QDialog::Rejected);
-                return;
-            }
-
-            file.close();
+            m->setContent(filePath);
         }
-        else
+        catch(VException &e)
         {
-            qWarning()<<tr("Cannot read file %1:\n%2.").arg(filePath).arg(file.errorString()) << Q_FUNC_INFO;
+            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            emit DialogClosed(QDialog::Rejected);
+            return;
         }
     }
 }

@@ -77,40 +77,18 @@ void DialogStandardMeasurements::DialogAccepted()
     _name = ui->lineEditName->text();
     const qint32 index = ui->comboBoxTables->currentIndex();
     _tablePath = ui->comboBoxTables->itemData(index).toString();
-    QFile file(_tablePath);
-    if (file.open(QIODevice::ReadOnly))
-    {
-        try
-        {
-            VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", _tablePath);
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Validation file error."), this);
-            qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            return;
-        }
 
+    try
+    {
+        VDomDocument::ValidateXML("://schema/standard_measurements.xsd", _tablePath);
         VStandardMeasurements m(data);
-        try
-        {
-            m.setContent(&file);
-            qApp->setPatternUnit(m.Unit());
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
-            qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            return;
-        }
-
-        file.close();
+        m.setContent(_tablePath);
+        qApp->setPatternUnit(m.Unit());
     }
-    else
+    catch(VException &e)
     {
-        QString message = tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString());
-        QMessageBox::warning(this, tr("Cannot read file"), message);
-        qWarning()<<tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString()) << Q_FUNC_INFO;
+        e.CriticalMessageBox(tr("File error."), this);
+        qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
         return;
     }
 
@@ -166,36 +144,17 @@ void DialogStandardMeasurements::LoadStandardTables()
     for (int i = 0; i < allFiles.size(); ++i)
     {
         QFileInfo fi(allFiles.at(i));
-        QFile file(allFiles.at(i));
-        if (file.open(QIODevice::ReadOnly))
+        try
         {
-            try
-            {
-                VDomDocument::ValidatePattern("://schema/standard_measurements.xsd", fi.absoluteFilePath());
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                continue;
-            }
-
+            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", fi.absoluteFilePath());
             VStandardMeasurements m(data);
-            try
-            {
-                m.setContent(&file);
-                ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                continue;
-            }
-
-            file.close();
+            m.setContent(fi.absoluteFilePath());
+            ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
         }
-        else
+        catch(VException &e)
         {
-            qWarning()<<tr("Cannot read file %1:\n%2.").arg(fi.absoluteFilePath()).arg(file.errorString()) << Q_FUNC_INFO;
+            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            continue;
         }
     }
 }

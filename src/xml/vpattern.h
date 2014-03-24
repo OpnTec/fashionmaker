@@ -166,6 +166,7 @@ public:
      */
     bool           GetActivNodeElement(const QString& name, QDomElement& element);
     QString        MPath() const;
+    void           SetPath(const QString &path);
     Valentina::Units MUnit() const;
     Pattern::Measurements MType() const;
     static const QString TagPattern;
@@ -224,7 +225,6 @@ signals:
      * @param id tool id.
      */
     void           ChangedCursor(quint32 id);
-    void           UpdateMeasurements();
 public slots:
     /**
      * @brief FullUpdateTree lite parse file.
@@ -382,6 +382,7 @@ private:
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                                    VMainGraphicsScene *sceneDetail);
+    void           UpdateMeasurements();
 };
 
 inline QString VPattern::GetNameActivDraw() const

@@ -95,43 +95,19 @@ void DialogIndividualMeasurements::DialogAccepted()
             return;
         }
     }
-    QFile file(_tablePath);
-    if (file.open(QIODevice::ReadOnly))
+    try
     {
-        try
-        {
-            VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", _tablePath);
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Validation file error."), this);
-            qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            return;
-        }
-
+        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", _tablePath);
         VIndividualMeasurements m(data);
-        try
-        {
-            m.setContent(&file);
-            qApp->setPatternUnit( m.Unit());
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Parsing pattern file error."), this);
-            qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            return;
-        }
-
-        file.close();
+        m.setContent(_tablePath);
+        qApp->setPatternUnit( m.Unit());
     }
-    else
+    catch(VException &e)
     {
-        QString message = tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString());
-        QMessageBox::warning(this, tr("Cannot read file"), message);
-        qWarning()<<tr("Cannot read file %1:\n%2.").arg(_tablePath).arg(file.errorString()) << Q_FUNC_INFO;
+        e.CriticalMessageBox(tr("File error."), this);
+        qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
         return;
     }
-
     accept();
 }
 
@@ -214,37 +190,18 @@ void DialogIndividualMeasurements::LoadIndividualTables()
     for (int i = 0; i < allFiles.size(); ++i)
     {
         QFileInfo fi(allFiles.at(i));
-        QFile file(allFiles.at(i));
-        if (file.open(QIODevice::ReadOnly))
+        try
         {
-            try
-            {
-                VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", fi.absoluteFilePath());
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Validation file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                continue;
-            }
-
+            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", fi.absoluteFilePath());
             VIndividualMeasurements m(data);
-            try
-            {
-                m.setContent(&file);
-                const QString lang = QLocale(m.Language()).nativeLanguageName();
-                ui->comboBoxLang->addItem(lang, QVariant(fi.absoluteFilePath()));
-            }
-            catch(VException &e)
-            {
-                qWarning()<<"Parsing pattern file error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-                continue;
-            }
-
-            file.close();
+            m.setContent(fi.absoluteFilePath());
+            const QString lang = QLocale(m.Language()).nativeLanguageName();
+            ui->comboBoxLang->addItem(lang, QVariant(fi.absoluteFilePath()));
         }
-        else
+        catch(VException &e)
         {
-            qWarning()<<tr("Cannot read file %1:\n%2.").arg(fi.absoluteFilePath()).arg(file.errorString())<<Q_FUNC_INFO;
+            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            continue;
         }
     }
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -267,24 +224,13 @@ void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
-    QFile file(fileName);
-    if (file.open(QIODevice::ReadOnly))
+    try
     {
-        try
-        {
-            VDomDocument::ValidatePattern("://schema/individual_measurements.xsd", fileName);
-        }
-        catch(VException &e)
-        {
-            e.CriticalMessageBox(tr("Validation file error."), this);
-            fileName.clear();
-        }
-        file.close();
+        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", fileName);
     }
-    else
+    catch(VException &e)
     {
-        QMessageBox::warning(this, tr("Valentina"), tr("Cannot read file %1:\n%2.").arg(fileName)
-                             .arg(file.errorString()));
+        e.CriticalMessageBox(tr("File error."), this);
         fileName.clear();
     }
     ui->lineEditPathExistM->setText(fileName);

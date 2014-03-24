@@ -39,6 +39,7 @@
  */
 class VException : public QException
 {
+    Q_DECLARE_TR_FUNCTIONS(VException)
 public:
                       /**
                        * @brief VException constructor exception

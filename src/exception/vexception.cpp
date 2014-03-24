@@ -50,12 +50,12 @@ QString VException::ErrorMessage() const
 void VException::CriticalMessageBox(const QString &situation, QWidget * parent) const
 {
     QMessageBox msgBox(parent);
-    msgBox.setWindowTitle("Critical error!");
+    msgBox.setWindowTitle(tr("Critical error!"));
     msgBox.setText(situation);
     msgBox.setInformativeText(ErrorMessage());
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
-    if (DetailedInformation().isEmpty() == false)
+    if (moreInfo.isEmpty() == false)
     {
         msgBox.setDetailedText(DetailedInformation());
     }

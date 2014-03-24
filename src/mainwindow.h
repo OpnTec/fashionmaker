@@ -562,6 +562,7 @@ private:
     void               CreateActions();
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
+    QString            CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType);
 };
 
 #endif // MAINWINDOW_H

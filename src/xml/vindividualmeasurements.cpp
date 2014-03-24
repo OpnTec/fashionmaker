@@ -47,7 +47,7 @@ VIndividualMeasurements::VIndividualMeasurements(VContainer *data):VDomDocument(
 Valentina::Units VIndividualMeasurements::Unit()
 {
     const QString unit = UniqueTagText(AttrUnit, UnitCM);
-    return VDomDocument::Units(unit);
+    return VDomDocument::StrToUnits(unit);
 }
 
 void VIndividualMeasurements::Measurements()

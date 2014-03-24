@@ -51,7 +51,7 @@ public:
     static const QString    AttrUnit;
     static const QString    UnitMM;
     static const QString    UnitCM;
-    static const QString    UnitIN;
+    static const QString    UnitINCH;
     /**
      * @brief VDomDocument constructor.
      * @param data container with variables.
@@ -111,22 +111,24 @@ public:
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
     /**
-     * @brief ValidatePattern validate pattern file by xsd schema.
+     * @brief ValidateXML validate xml file by xsd schema.
      * @param schema path to schema file.
-     * @param fileName name of pattern file.
+     * @param fileName name of xml file.
      * @param errorMsg error message.
      * @param errorLine number error line.
      * @param errorColumn number error column.
      * @return true if validation successful.
      */
-    static void ValidatePattern(const QString &schema, const QString &fileName);
-    void setContent(QIODevice * dev);
+    static void ValidateXML(const QString &schema, const QString &fileName);
+    void setContent(const QString &fileName);
+    static Valentina::Units StrToUnits(const QString &unit);
+    static QString UnitsToStr(const Valentina::Units &unit);
 protected:
     /**
      * @brief data container with data.
      */
     VContainer     *data;
-    Valentina::Units Units(const QString &unit);
+
 private:
     Q_DISABLE_COPY(VDomDocument)
     /**
@@ -160,27 +162,6 @@ inline void VDomDocument::SetAttribute<Pattern::Measurements>(QDomElement &domEl
     else
     {
         domElement.setAttribute(name, "individual");
-    }
-}
-
-template <>
-inline void VDomDocument::SetAttribute<Valentina::Units>(QDomElement &domElement, const QString &name,
-                                                              const Valentina::Units &value)
-{
-    switch(value)
-    {
-        case Valentina::Mm:
-            domElement.setAttribute(name, "mm");
-            break;
-        case Valentina::Cm:
-            domElement.setAttribute(name, "cm");
-            break;
-        case Valentina::In:
-            domElement.setAttribute(name, "in");
-            break;
-        default:
-            domElement.setAttribute(name, "cm");
-            break;
     }
 }
 
