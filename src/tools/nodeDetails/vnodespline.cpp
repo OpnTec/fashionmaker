@@ -40,7 +40,7 @@ VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 id
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
     if (typeCreation == Valentina::FromGui)
     {
@@ -133,13 +133,13 @@ void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 void VNodeSpline::RefreshGeometry()

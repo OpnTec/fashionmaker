@@ -475,6 +475,7 @@ private:
      * @brief ToolBarDraws enable draw toolbar.
      */
     void               ToolBarDraws();
+    void               InitToolButtons();
     /**
      * @brief CanselTool cansel tool.
      */

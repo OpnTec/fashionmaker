@@ -9,22 +9,23 @@
 						<xs:sequence>
 							<xs:element name="family-name" type="xs:string"></xs:element>
 							<xs:element name="given-name" type="xs:string"></xs:element>
-							<xs:element name="birth-date" type="xs:string"></xs:element>
-							<xs:element name="sex" type="xs:string"></xs:element>
+							<xs:element name="birth-date" type="xs:date"></xs:element>
+							<xs:element name="sex" type="sex"></xs:element>
+							<xs:element name="email" type="emailAddress"></xs:element>
 					   </xs:sequence>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="body-measurements">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="unit" type="xs:string"></xs:element>
+							<xs:element name="unit" type="units"></xs:element>
 							<xs:element name="head_and_neck">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="head_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -33,8 +34,8 @@
 										</xs:element>
 										<xs:element name="mid_neck_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -43,8 +44,8 @@
 										</xs:element>
 										<xs:element name="neck_base_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -53,8 +54,8 @@
 										</xs:element>
 										<xs:element name="head_and_neck_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -69,8 +70,8 @@
 									<xs:sequence>
 										<xs:element name="center_front_waist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -79,8 +80,8 @@
 										</xs:element>
 										<xs:element name="center_back_waist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -89,8 +90,8 @@
 										</xs:element>
 										<xs:element name="shoulder_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -99,8 +100,8 @@
 										</xs:element>
 										<xs:element name="side_waist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -109,8 +110,8 @@
 										</xs:element>
 										<xs:element name="trunk_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -119,8 +120,8 @@
 										</xs:element>
 										<xs:element name="shoulder_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -129,8 +130,8 @@
 										</xs:element>
 										<xs:element name="upper_chest_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -139,8 +140,8 @@
 										</xs:element>
 										<xs:element name="bust__girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -149,8 +150,8 @@
 										</xs:element>
 										<xs:element name="under_bust_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -159,8 +160,8 @@
 										</xs:element>
 										<xs:element name="waist_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -169,8 +170,8 @@
 										</xs:element>
 										<xs:element name="high_hip_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -179,8 +180,8 @@
 										</xs:element>
 										<xs:element name="hip_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -189,8 +190,8 @@
 										</xs:element>
 										<xs:element name="upper_front_chest_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -199,8 +200,8 @@
 										</xs:element>
 										<xs:element name="front_chest_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -209,8 +210,8 @@
 										</xs:element>
 										<xs:element name="across_front_shoulder_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -219,8 +220,8 @@
 										</xs:element>
 										<xs:element name="across_back_shoulder_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -229,8 +230,8 @@
 										</xs:element>
 										<xs:element name="upper_back_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -239,8 +240,8 @@
 										</xs:element>
 										<xs:element name="back_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -249,8 +250,8 @@
 										</xs:element>
 										<xs:element name="bustpoint_to_bustpoint">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -259,8 +260,8 @@
 										</xs:element>
 										<xs:element name="halter_bustpoint_to_bustpoint">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -269,8 +270,8 @@
 										</xs:element>
 										<xs:element name="neck_to_bustpoint">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -279,8 +280,8 @@
 										</xs:element>
 										<xs:element name="crotch_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -289,8 +290,8 @@
 										</xs:element>
 										<xs:element name="rise_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -299,8 +300,8 @@
 										</xs:element>
 										<xs:element name="shoulder_drop">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -309,8 +310,8 @@
 										</xs:element>
 										<xs:element name="shoulder_slope_degrees">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -319,8 +320,8 @@
 										</xs:element>
 										<xs:element name="front_shoulder_slope_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -329,8 +330,8 @@
 										</xs:element>
 										<xs:element name="back_shoulder_slope_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -339,8 +340,8 @@
 										</xs:element>
 										<xs:element name="front_shoulder_to_waist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -349,8 +350,8 @@
 										</xs:element>
 										<xs:element name="back_shoulder_to_waist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -359,8 +360,8 @@
 										</xs:element>
 										<xs:element name="front_neck_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -369,8 +370,8 @@
 										</xs:element>
 										<xs:element name="back_neck_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -379,8 +380,8 @@
 										</xs:element>
 										<xs:element name="front_upper-bust_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -389,8 +390,8 @@
 										</xs:element>
 										<xs:element name="back_upper-bust_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -399,8 +400,8 @@
 										</xs:element>
 										<xs:element name="front_waist_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -409,8 +410,8 @@
 										</xs:element>
 										<xs:element name="back_waist_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -419,8 +420,8 @@
 										</xs:element>
 										<xs:element name="front_upper-hip_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -429,8 +430,8 @@
 										</xs:element>
 										<xs:element name="back_upper-hip_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -439,8 +440,8 @@
 										</xs:element>
 										<xs:element name="front_hip_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -449,8 +450,8 @@
 										</xs:element>
 										<xs:element name="back_hip_arc">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -459,8 +460,8 @@
 										</xs:element>
 										<xs:element name="chest_slope">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -469,8 +470,8 @@
 										</xs:element>
 										<xs:element name="back_slope">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -479,8 +480,8 @@
 										</xs:element>
 										<xs:element name="front_waist_slope">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -489,8 +490,8 @@
 										</xs:element>
 										<xs:element name="back_waist_slope">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -499,8 +500,8 @@
 										</xs:element>
 										<xs:element name="front-neck_to_upper-chest_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -509,8 +510,8 @@
 										</xs:element>
 										<xs:element name="front-neck_to_bust_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -525,8 +526,8 @@
 									<xs:sequence>
 										<xs:element name="armscye_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -535,8 +536,8 @@
 										</xs:element>
 										<xs:element name="elbow_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -545,8 +546,8 @@
 										</xs:element>
 										<xs:element name="upper-arm_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -555,8 +556,8 @@
 										</xs:element>
 										<xs:element name="wrist_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -565,8 +566,8 @@
 										</xs:element>
 										<xs:element name="scye_depth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -575,8 +576,8 @@
 										</xs:element>
 										<xs:element name="shoulder_and_arm_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -585,8 +586,8 @@
 										</xs:element>
 										<xs:element name="underarm_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -595,8 +596,8 @@
 										</xs:element>
 										<xs:element name="cervicale_to_wrist_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -605,8 +606,8 @@
 										</xs:element>
 										<xs:element name="shoulder_to_elbow_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -615,8 +616,8 @@
 										</xs:element>
 										<xs:element name="arm_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -631,8 +632,8 @@
 									<xs:sequence>
 										<xs:element name="hand_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -641,8 +642,8 @@
 										</xs:element>
 										<xs:element name="hand_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -651,8 +652,8 @@
 										</xs:element>
 										<xs:element name="hand_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -667,8 +668,8 @@
 									<xs:sequence>
 										<xs:element name="thigh_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -677,8 +678,8 @@
 										</xs:element>
 										<xs:element name="mid_thigh_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -687,8 +688,8 @@
 										</xs:element>
 										<xs:element name="knee_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -697,8 +698,8 @@
 										</xs:element>
 										<xs:element name="calf_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -707,8 +708,8 @@
 										</xs:element>
 										<xs:element name="ankle_girth">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -717,8 +718,8 @@
 										</xs:element>
 										<xs:element name="knee_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -727,8 +728,8 @@
 										</xs:element>
 										<xs:element name="ankle_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -743,8 +744,8 @@
 									<xs:sequence>
 										<xs:element name="foot_width">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -753,8 +754,8 @@
 										</xs:element>
 										<xs:element name="foot_length">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -769,8 +770,8 @@
 									<xs:sequence>
 										<xs:element name="height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -779,8 +780,8 @@
 										</xs:element>
 										<xs:element name="cervicale_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -789,8 +790,8 @@
 										</xs:element>
 										<xs:element name="cervicale_to_knee_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -799,8 +800,8 @@
 										</xs:element>
 										<xs:element name="waist_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -809,8 +810,8 @@
 										</xs:element>
 										<xs:element name="high_hip_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -819,8 +820,8 @@
 										</xs:element>
 										<xs:element name="hip_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -829,8 +830,8 @@
 										</xs:element>
 										<xs:element name="waist_to_hip_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -839,8 +840,8 @@
 										</xs:element>
 										<xs:element name="waist_to_knee_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -849,8 +850,8 @@
 										</xs:element>
 										<xs:element name="crotch_height">
 											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
-												<xs:attribute name="m_number" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+												<xs:attribute name="m_number" type="shortMeasurementName" use="required"></xs:attribute>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
 												<xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
@@ -866,4 +867,27 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:simpleType name="emailAddress">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="shortMeasurementName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([\p{L}]|[^0-9])[_\p{L}0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="units">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="mm"/>
+			<xs:enumeration value="cm"/>
+			<xs:enumeration value="inch"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sex">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="male"/>
+			<xs:enumeration value="female"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

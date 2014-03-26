@@ -35,7 +35,8 @@ class VIndividualMeasurements:public VDomDocument
 {
 public:
     VIndividualMeasurements(VContainer *data);
-    Valentina::Units Unit();
+    Valentina::Units Unit() const;
+    void setUnit(const Valentina::Units &unit);
     void Measurements();
     void Measurement(const QString &tag);
     QString Language();
@@ -49,11 +50,13 @@ public:
     static const QString AttrGui_text;
     static const QString AttrValue;
     static const QString AttrDescription;
-    static const QString AttrLang;
-    static const QString AttrFamily_name;
-    static const QString AttrGiven_name;
-    static const QString AttrBirth_date;
-    static const QString AttrSex;
+
+    static const QString TagLang;
+    static const QString TagFamily_name;
+    static const QString TagGiven_name;
+    static const QString TagBirth_date;
+    static const QString TagSex;
+    static const QString TagUnit;
 };
 
 #endif // VINDIVIDUALMEASUREMENTS_H

@@ -136,7 +136,7 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
             break;
         }
         default:
-            qWarning()<<tr("Got wrong tools. Ignore.");
+            qWarning()<<"Got wrong tools. Ignore.";
             break;
     }
 

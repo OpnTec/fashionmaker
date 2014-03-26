@@ -28,26 +28,56 @@
 
 #include "vindividualmeasurements.h"
 
-const QString VIndividualMeasurements::AttrIgnore      = QStringLiteral("ignore");
-const QString VIndividualMeasurements::AttrName        = QStringLiteral("name");
-const QString VIndividualMeasurements::AttrM_number    = QStringLiteral("m_number");
-const QString VIndividualMeasurements::AttrGui_text    = QStringLiteral("gui_text");
-const QString VIndividualMeasurements::AttrValue       = QStringLiteral("value");
+const QString VIndividualMeasurements::AttrIgnore     = QStringLiteral("ignore");
+const QString VIndividualMeasurements::AttrName       = QStringLiteral("name");
+const QString VIndividualMeasurements::AttrM_number   = QStringLiteral("m_number");
+const QString VIndividualMeasurements::AttrGui_text   = QStringLiteral("gui_text");
+const QString VIndividualMeasurements::AttrValue      = QStringLiteral("value");
 const QString VIndividualMeasurements::AttrDescription = QStringLiteral("description");
-const QString VIndividualMeasurements::AttrLang        = QStringLiteral("lang");
-const QString VIndividualMeasurements::AttrFamily_name = QStringLiteral("family-name");
-const QString VIndividualMeasurements::AttrGiven_name  = QStringLiteral("given-name");
-const QString VIndividualMeasurements::AttrBirth_date  = QStringLiteral("birth-date");
-const QString VIndividualMeasurements::AttrSex         = QStringLiteral("sex");
+
+const QString VIndividualMeasurements::TagLang        = QStringLiteral("lang");
+const QString VIndividualMeasurements::TagFamily_name = QStringLiteral("family-name");
+const QString VIndividualMeasurements::TagGiven_name  = QStringLiteral("given-name");
+const QString VIndividualMeasurements::TagBirth_date  = QStringLiteral("birth-date");
+const QString VIndividualMeasurements::TagSex         = QStringLiteral("sex");
+const QString VIndividualMeasurements::TagUnit        = QStringLiteral("unit");
 
 VIndividualMeasurements::VIndividualMeasurements(VContainer *data):VDomDocument(data)
 {
 }
 
-Valentina::Units VIndividualMeasurements::Unit()
+Valentina::Units VIndividualMeasurements::Unit() const
 {
-    const QString unit = UniqueTagText(AttrUnit, UnitCM);
+    const QString unit = UniqueTagText(TagUnit, UnitCM);
     return VDomDocument::StrToUnits(unit);
+}
+
+void VIndividualMeasurements::setUnit(const Valentina::Units &unit)
+{
+    const QDomNodeList nodeList = this->elementsByTagName(AttrUnit);
+    if (nodeList.isEmpty())
+    {
+        qWarning()<<"Can't save measurements units"<<Q_FUNC_INFO;
+        return;
+    }
+    else
+    {
+        const QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                QDomElement parent = domElement.parentNode().toElement();
+                QDomElement newUnit = createElement(TagUnit);
+                QDomText newUnitValue = createTextNode(UnitsToStr(unit));
+                newUnit.appendChild(newUnitValue);
+
+                parent.replaceChild(newUnit, domElement);
+                return;
+            }
+        }
+    }
 }
 
 void VIndividualMeasurements::Measurements()
@@ -209,25 +239,25 @@ void VIndividualMeasurements::Measurement(const QString &tag)
 
 QString VIndividualMeasurements::Language()
 {
-    return UniqueTagText(AttrLang, "en");
+    return UniqueTagText(TagLang, "en");
 }
 
 QString VIndividualMeasurements::FamilyName()
 {
-    return UniqueTagText(AttrFamily_name, "");
+    return UniqueTagText(TagFamily_name, "");
 }
 
 QString VIndividualMeasurements::GivenName()
 {
-    return UniqueTagText(AttrGiven_name, "");
+    return UniqueTagText(TagGiven_name, "");
 }
 
 QString VIndividualMeasurements::BirthDate()
 {
-    return UniqueTagText(AttrBirth_date, "");
+    return UniqueTagText(TagBirth_date, "");
 }
 
 QString VIndividualMeasurements::Sex()
 {
-    return UniqueTagText(AttrSex, "");
+    return UniqueTagText(TagSex, "");
 }

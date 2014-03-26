@@ -34,11 +34,11 @@ VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *f
 {
     if (factor == nullptr)
     {
-        setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
+        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/ *factor));
+        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -48,7 +48,7 @@ void VSimpleSpline::ChangedActivDraw(const bool &flag)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, flag);
     setAcceptHoverEvents(flag);
-    setPen(QPen(*currentColor, qApp->toPixel(widthHairLine)/ *factor));
+    setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
 }
 
 void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -65,11 +65,11 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(widthMainLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(widthMainLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
     }
 }
 
@@ -78,10 +78,10 @@ void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(widthHairLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(widthHairLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
 }

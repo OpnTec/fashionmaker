@@ -42,7 +42,7 @@ VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina:
     path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
@@ -155,7 +155,7 @@ void VToolArc::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
@@ -218,14 +218,14 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
 void VToolArc::RemoveReferens()
@@ -278,7 +278,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QPainterPath path;
     path.addPath(arc->GetPath());

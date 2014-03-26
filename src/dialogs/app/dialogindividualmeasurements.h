@@ -58,6 +58,7 @@ private:
     void LoadIndividualTables();
     void OpenTable();
     void NewTable();
+    void InitUnits();
 };
 
 inline QString DialogIndividualMeasurements::name() const

@@ -9,9 +9,9 @@
 							<xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
 							<xs:element name="measurements" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
-									<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="type" type="measurementsTypes" use="required"></xs:attribute>
 									<xs:attribute name="path" type="xs:string" use="required"></xs:attribute>
-									<xs:attribute name="unit" type="xs:string" use="required"></xs:attribute>   
+									<xs:attribute name="unit" type="units" use="required"></xs:attribute>   
 							   	</xs:complexType>
 							</xs:element>
                            <xs:element name="increments" minOccurs="0" maxOccurs="1">
@@ -23,7 +23,7 @@
 													     <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
 														 <xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
 														 <xs:attribute name="kgrowth" type="xs:double" use="required"></xs:attribute>
-														 <xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+														 <xs:attribute name="name" type="shortName" use="required"></xs:attribute>
 														 <xs:attribute name="base" type="xs:double" use="required"></xs:attribute>	   
                                                    </xs:complexType>
                                              </xs:element>
@@ -211,4 +211,22 @@
                      </xs:sequence>
                </xs:complexType>
          </xs:element>
+	<xs:simpleType name="shortName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([\p{L}]|[^0-9])[_\p{L}0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="units">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="mm"/>
+			<xs:enumeration value="cm"/>
+			<xs:enumeration value="inch"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="measurementsTypes">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="standard"/>
+			<xs:enumeration value="individual"/>
+		</xs:restriction>
+	</xs:simpleType>
    </xs:schema>

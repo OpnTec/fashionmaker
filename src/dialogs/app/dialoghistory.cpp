@@ -395,7 +395,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Valentina::NodeSplinePath:
                 break;
             default:
-                qWarning()<<tr("Got wrong tool type. Ignore.");
+                qWarning()<<"Got wrong tool type. Ignore.";
                 break;
         }
     }

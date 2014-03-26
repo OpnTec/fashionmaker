@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     CreateActions();
     CreateMenus();
     ToolBarDraws();
+    InitToolButtons();
 
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
@@ -76,26 +77,6 @@ MainWindow::MainWindow(QWidget *parent)
     view->setSizePolicy(policy);
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
-
-    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
-    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
-    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
-    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
-    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
-    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
-    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
-    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
-    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
-    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
-    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
-    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
-    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
-    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
-    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
-    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
-    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
-    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
-    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
 
     pattern = new VContainer();
 
@@ -159,7 +140,7 @@ void MainWindow::ActionNewDraw()
     }
     if (doc->appendDraw(patternPieceName) == false)
     {
-        qWarning()<<tr("Error creating pattern with the name ")<<patternPieceName<<".";
+        qWarning()<<"Error creating pattern with the name "<<patternPieceName<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -577,9 +558,8 @@ void MainWindow::ToolBarOption()
 
 void MainWindow::ToolBarDraws()
 {
-    QLabel * labelNameDraw = new QLabel;
-    labelNameDraw ->setText(tr("Pattern Piece: "));
-    ui->toolBarDraws->addWidget(labelNameDraw);
+    QLabel *labelPtternPieceName = new QLabel(tr("Pattern Piece: "));
+    ui->toolBarDraws->addWidget(labelPtternPieceName);
 
     comboBoxDraws = new QComboBox;
     ui->toolBarDraws->addWidget(comboBoxDraws);
@@ -600,6 +580,29 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addAction(ui->actionLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
     ui->actionLayout->setEnabled(false);
+}
+
+void MainWindow::InitToolButtons()
+{
+    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
+    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
+    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
+    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
+    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
+    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
+    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
+    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
+    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
+    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
+    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
+    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
+    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
+    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
+    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
+    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
+    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
+    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
+    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
 }
 
 void MainWindow::currentDrawChanged( int index )
@@ -1119,7 +1122,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     }
     if (fileName.isEmpty())
     {
-        qWarning()<<tr("Got empty file name.");
+        qWarning()<<"Got empty file name.";
         return false;
     }
     //Writing in temporary file
@@ -1130,6 +1133,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     {
         const int Indent = 4;
         QTextStream out(&tempFile);
+        out.setCodec("UTF-8");
         doc->save(out, Indent);
         tempFile.close();
     }
@@ -1146,7 +1150,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     {
         if ( tempFile.copy(patternFile.fileName()) == false )
         {
-            qWarning()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
+            qWarning()<<"Could not copy temp file to pattern file"<<Q_FUNC_INFO;
             tempOfPattern.copy(fileName);
             result = false;
         }
@@ -1157,7 +1161,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     }
     else
     {
-        qWarning()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
+        qWarning()<<"Could not remove pattern file"<<Q_FUNC_INFO;
         result = false;
     }
     if (result)
@@ -1179,7 +1183,7 @@ void MainWindow::AutoSavePattern()
         QString autofile = curFile +".autosave";
         if (SavePattern(autofile) == false)
         {
-            qWarning()<<tr("Can not save pattern")<<Q_FUNC_INFO;
+            qWarning()<<"Can not save pattern"<<Q_FUNC_INFO;
         }
     }
 }

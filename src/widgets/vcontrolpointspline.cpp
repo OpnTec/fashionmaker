@@ -42,7 +42,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -53,20 +53,20 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
     QPointF p1, p2;
     VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
-    controlLine->setPen(QPen(Qt::red, qApp->toPixel(widthHairLine)));
+    controlLine->setPen(QPen(Qt::red, qApp->toPixel(qApp->widthHairLine())));
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
 void VControlPointSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthMainLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
 }
 
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
@@ -95,14 +95,14 @@ void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)
     {
-        this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
+        this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setFlag(QGraphicsItem::ItemIsMovable, true);
         this->setAcceptHoverEvents(true);
     }
     else
     {
-        this->setPen(QPen(Qt::gray, qApp->toPixel(widthHairLine)));
+        this->setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setFlag(QGraphicsItem::ItemIsMovable, false);
         this->setAcceptHoverEvents(false);

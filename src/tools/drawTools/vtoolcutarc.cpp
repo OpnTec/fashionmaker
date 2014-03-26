@@ -185,8 +185,8 @@ void VToolCutArc::ChangedActivDraw(const QString &newName)
         secondArc->setFlag(QGraphicsItem::ItemIsSelectable, false);
         secondArc->setAcceptHoverEvents(false);
     }
-    firstArc->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
-    secondArc->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor));
+    firstArc->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    secondArc->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     VToolPoint::ChangedActivDraw(newName);
 }
 

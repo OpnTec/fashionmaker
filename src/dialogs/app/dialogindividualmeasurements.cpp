@@ -56,6 +56,7 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
     ui->lineEditName->setText(_name);
 
     LoadIndividualTables();
+    InitUnits();
 
     CheckState();
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogIndividualMeasurements::CheckState);
@@ -92,7 +93,7 @@ void DialogIndividualMeasurements::DialogAccepted()
         if ( iMeasur.copy(_tablePath) == false )
         {
             QMessageBox::warning(this, tr("Could not create measurements file"), tr("Please try again or change file"));
-            return;
+            DialogRejected();
         }
     }
     try
@@ -100,13 +101,25 @@ void DialogIndividualMeasurements::DialogAccepted()
         VDomDocument::ValidateXML("://schema/individual_measurements.xsd", _tablePath);
         VIndividualMeasurements m(data);
         m.setContent(_tablePath);
+        const qint32 index = ui->comboBoxUnits->currentIndex();
+        Valentina::Units unit = VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
+        m.setUnit(unit);
         qApp->setPatternUnit( m.Unit());
+        QFile iMeasur(_tablePath);
+        if (iMeasur.open(QIODevice::WriteOnly| QIODevice::Truncate))
+        {
+            const int Indent = 4;
+            QTextStream out(&iMeasur);
+            out.setCodec("UTF-8");
+            m.save(out, Indent);
+            iMeasur.close();
+        }
     }
     catch(VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-        return;
+        DialogRejected();
     }
     accept();
 }
@@ -135,6 +148,7 @@ void DialogIndividualMeasurements::CheckState()
         ui->lineEditPathNewM->setEnabled(false);
         ui->toolButtonOpenNew->setEnabled(false);
         ui->comboBoxLang->setEnabled(false);
+        ui->comboBoxUnits->setEnabled(false);
 
         if (ui->lineEditPathExistM->text().isEmpty() == false)
         {
@@ -146,6 +160,7 @@ void DialogIndividualMeasurements::CheckState()
         ui->lineEditPathNewM->setEnabled(true);
         ui->toolButtonOpenNew->setEnabled(true);
         ui->comboBoxLang->setEnabled(true);
+        ui->comboBoxUnits->setEnabled(true);
 
         ui->toolButtonOpenExist->setEnabled(false);
         ui->lineEditPathExistM->setEnabled(false);
@@ -258,4 +273,10 @@ void DialogIndividualMeasurements::NewTable()
     ui->lineEditPathNewM->setText(name);
     ui->lineEditPathNewM->setToolTip(name);
     CheckState();
+}
+
+void DialogIndividualMeasurements::InitUnits()
+{
+    ui->comboBoxUnits->addItem(tr("centimeter"), QVariant(VDomDocument::UnitsToStr(Valentina::Cm)));
+    ui->comboBoxUnits->addItem(tr("inch"), QVariant(VDomDocument::UnitsToStr(Valentina::Inch)));
 }

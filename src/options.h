@@ -31,6 +31,7 @@
 
 #include <QFlags>
 #include <QString>
+#include <QMetaType>
 
 #define SceneSize 50000
 
@@ -100,6 +101,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Tools )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Sources )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Draws )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Units )
+Q_DECLARE_METATYPE(Valentina::Unit)
 
 namespace Pattern
 {
@@ -110,8 +112,5 @@ namespace Pattern
     Q_DECLARE_FLAGS(Measurements, Measurement)
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS( Pattern::Measurements ) 
-
-#define widthMainLine 1.2 //mm
-#define widthHairLine widthMainLine/3
 
 #endif // OPTIONS_H

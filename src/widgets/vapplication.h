@@ -59,29 +59,29 @@ public:
      * @param event event.
      * @return value that is returned from the receiver's event handler.
      */
-    virtual bool notify(QObject * receiver, QEvent * event);
-    Valentina::Units patternUnit() const;
-    void setPatternUnit(const Valentina::Units &patternUnit);
+    virtual bool          notify(QObject * receiver, QEvent * event);
+    Valentina::Units      patternUnit() const;
+    void                  setPatternUnit(const Valentina::Units &patternUnit);
     Pattern::Measurements patternType() const;
-    void setPatternType(const Pattern::Measurements &patternType);
-    double toPixel(double unit) const;
-    double fromPixel(double pix) const;
-    static const qreal PrintDPI;
-    QString translationsPath() const;
-    QString pathToTables() const;
+    void                  setPatternType(const Pattern::Measurements &patternType);
+    double                toPixel(double unit) const;
+    double                fromPixel(double pix) const;
+    static const qreal    PrintDPI;
+    QString               translationsPath() const;
+    QString               pathToTables() const;
+    qreal                 widthMainLine() const;
+    qreal                 widthHairLine() const;
 private:
-    Valentina::Units _patternUnit;
+    Valentina::Units      _patternUnit;
     Pattern::Measurements _patternType;
+    qreal                 _widthMainLine;
+    qreal                 _widthHairLine;
+    void                  InitLineWidth();
 };
 
 inline Valentina::Units VApplication::patternUnit() const
 {
     return _patternUnit;
-}
-
-inline void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
-{
-    _patternUnit = patternUnit;
 }
 
 inline Pattern::Measurements VApplication::patternType() const
@@ -94,5 +94,14 @@ inline void VApplication::setPatternType(const Pattern::Measurements &patternTyp
     _patternType = patternType;
 }
 
+inline qreal VApplication::widthMainLine() const
+{
+    return _widthMainLine;
+}
+
+inline qreal VApplication::widthHairLine() const
+{
+    return _widthHairLine;
+}
 
 #endif // VAPPLICATION_H

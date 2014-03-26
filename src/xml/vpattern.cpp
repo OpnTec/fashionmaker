@@ -433,11 +433,17 @@ QString VPattern::MPath() const
 
 void VPattern::SetPath(const QString &path)
 {
+    if (path.isEmpty())
+    {
+        qWarning()<<"Path to measurements is empty"<<Q_FUNC_INFO;
+        return;
+    }
     QDomNodeList list = elementsByTagName(TagMeasurements);
     QDomElement element = list.at(0).toElement();
     if (element.isElement())
     {
         SetAttribute(element, AttrPath, path);
+        emit patternChanged();
     }
     else
     {

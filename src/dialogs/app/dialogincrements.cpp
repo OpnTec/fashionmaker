@@ -72,6 +72,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementsChanged);
     }
 
+    ui->toolBoxMeasurements->setCurrentIndex(1);
+
     FillMeasurements();
     FillIncrements();
     FillLengthLines();

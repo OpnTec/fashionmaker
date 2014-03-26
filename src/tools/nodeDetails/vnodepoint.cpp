@@ -44,7 +44,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
@@ -146,13 +146,13 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 

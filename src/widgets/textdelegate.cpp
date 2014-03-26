@@ -41,9 +41,8 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(option);
     Q_UNUSED(index);
     QLineEdit *editor = new QLineEdit(parent);
-    QRegExp re("^(([^+ -/()\\^*%:;\"\'=.,><0-9]){1,1}[^+ -/()\\^*%:;\"\'=><]([0-9]){0,}){0,}$");
-    QRegExpValidator *v = new QRegExpValidator(re);
-    editor->setValidator( v );
+    //Same regex pattern in xsd file
+    editor->setValidator( new QRegExpValidator(QRegExp("([\\p{L}]|[^0-9])[_\\p{L}0-9]*")) );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);
     return editor;
 }

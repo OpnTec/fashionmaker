@@ -45,7 +45,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, qApp->toPixel(widthHairLine)/factor, LineStyle()));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
 
     if (typeCreation == Valentina::FromGui)
     {
@@ -142,7 +142,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
 }
@@ -177,13 +177,13 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthMainLine)/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle()));
 }
 
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
 }
 
 void VToolLine::RemoveReferens()
@@ -245,5 +245,5 @@ void VToolLine::RefreshGeometry()
     const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(currentColor, qApp->toPixel(widthHairLine)/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
 }

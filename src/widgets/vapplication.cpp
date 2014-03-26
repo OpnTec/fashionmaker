@@ -38,13 +38,16 @@
 
 const qreal VApplication::PrintDPI = 96.0;
 
-// reimplemented from QApplication so we can throw exceptions in slots
-VApplication::VApplication(int &argc, char **argv)
-    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual)
-{
+#define DefWidth 1.2//mm
 
+VApplication::VApplication(int &argc, char **argv)
+    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
+      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0)
+{
+    InitLineWidth();
 }
 
+// reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {
     try
@@ -157,13 +160,41 @@ QString VApplication::pathToTables() const
 
 QString VApplication::translationsPath() const
 {
-    #ifdef Q_OS_WIN
-        return QApplication::applicationDirPath() + QStringLiteral("/translations");
-    #else
-        #ifdef QT_DEBUG
-            return QApplication::applicationDirPath() + QStringLiteral("/translations");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + QStringLiteral("/translations");
+#else
+#ifdef QT_DEBUG
+    return QApplication::applicationDirPath() + QStringLiteral("/translations");
         #else
             return QStringLiteral("/usr/share/valentina/translations");
         #endif
     #endif
+}
+
+
+void VApplication::InitLineWidth()
+{
+    switch(_patternUnit)
+    {
+        case Valentina::Mm:
+            _widthMainLine = DefWidth;
+            break;
+        case Valentina::Cm:
+            _widthMainLine = DefWidth/10.0;
+            break;
+        case Valentina::Inch:
+            _widthMainLine = DefWidth/25.4;
+            break;
+        default:
+            _widthMainLine = DefWidth;
+            break;
+    }
+    _widthHairLine = _widthMainLine/3.0;
+}
+
+
+void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
+{
+    _patternUnit = patternUnit;
+    InitLineWidth();
 }

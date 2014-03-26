@@ -150,7 +150,7 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
-    lineName->setPen(QPen(color, qApp->toPixel(widthHairLine)/factor));
+    lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
