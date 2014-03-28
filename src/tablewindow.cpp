@@ -240,7 +240,7 @@ void TableWindow::saveScene()
         PsFile(name);
         break;
     default:
-        qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
+        qDebug() << "Bad file suffix"<<Q_FUNC_INFO;
         break;
     }
     paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));

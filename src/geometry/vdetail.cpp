@@ -115,7 +115,7 @@ bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
     QVector<VNodeDetail> list = listNodePoint();
     if (list.size() < 3)
     {
-        qWarning()<<"Not enough points.";
+        qDebug()<<"Not enough points.";
         return false;
     }
     ptrdiff_t i = indexOfNode(list, p1);
@@ -151,7 +151,7 @@ ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
     {
-        qWarning()<<"Points don't on edge.";
+        qDebug()<<"Points don't on edge.";
         return -1;
     }
 
@@ -176,7 +176,7 @@ void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)
     QVector<VNodeDetail> list = listNodePoint();
     if (index > static_cast<quint32>(list.size()))
     {
-        qWarning()<<"Wrong edge index index ="<<index;
+        qDebug()<<"Wrong edge index index ="<<index;
         return;
     }
     p1 = list.at(index);
@@ -277,6 +277,6 @@ ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &
             return i;
         }
     }
-    qWarning()<<"Can't find node.";
+    qDebug()<<"Can't find node.";
     return -1;
 }

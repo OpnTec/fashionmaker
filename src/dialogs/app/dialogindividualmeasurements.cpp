@@ -108,17 +108,17 @@ void DialogIndividualMeasurements::DialogAccepted()
         QFile iMeasur(_tablePath);
         if (iMeasur.open(QIODevice::WriteOnly| QIODevice::Truncate))
         {
-            const int Indent = 4;
+            const int indent = 4;
             QTextStream out(&iMeasur);
             out.setCodec("UTF-8");
-            m.save(out, Indent);
+            m.save(out, indent);
             iMeasur.close();
         }
     }
     catch(VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
-        qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+        qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
         DialogRejected();
     }
     accept();
@@ -215,7 +215,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
         }
         catch(VException &e)
         {
-            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
             continue;
         }
     }
@@ -239,6 +239,11 @@ void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
     try
     {
         VDomDocument::ValidateXML("://schema/individual_measurements.xsd", fileName);

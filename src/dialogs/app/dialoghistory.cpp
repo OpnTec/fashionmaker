@@ -170,7 +170,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     const QDomElement domElement = doc->elementById(QString().setNum(tool.getId()));
     if (domElement.isElement() == false)
     {
-        qWarning()<<"Can't find element by id"<<Q_FUNC_INFO;
+        qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;
         return QString(tr("Can't create record."));
     }
     try
@@ -283,7 +283,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 }
                 else
                 {
-                    qWarning()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
+                    qDebug()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
                     return QString(tr("Can't create record."));
                 }
                 return record;
@@ -375,7 +375,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 }
                 else
                 {
-                    qWarning()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
+                    qDebug()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
                     return QString(tr("Can't create record."));
                 }
                 return record;
@@ -395,13 +395,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Valentina::NodeSplinePath:
                 break;
             default:
-                qWarning()<<"Got wrong tool type. Ignore.";
+                qDebug()<<"Got wrong tool type. Ignore.";
                 break;
         }
     }
     catch (const VExceptionBadId &e)
     {
-        qWarning()<<e.ErrorMessage()<<Q_FUNC_INFO;
+        qDebug()<<e.ErrorMessage()<<Q_FUNC_INFO;
         return QString(tr("Can't create record."));
     }
     return QString();

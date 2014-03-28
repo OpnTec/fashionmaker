@@ -241,17 +241,17 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                 }
                 else
                 {
-                    qWarning()<<"parent isn't element"<<Q_FUNC_INFO;
+                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
                 }
             }
             else
             {
-                qWarning()<<"parent isNull"<<Q_FUNC_INFO;
+                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
             }
         }
         else
         {
-            qWarning()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
+            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
         }
     }
 }

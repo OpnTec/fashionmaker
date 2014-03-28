@@ -272,6 +272,7 @@ public:
      * @brief ClearIncrementTable clear increment table
      */
     void                ClearIncrementTable();
+    void                ClearMeasurements();
     /**
      * @brief ClearLengthLines clear length lines
      */
@@ -476,6 +477,11 @@ inline void VContainer::UpdateIncrement(const QString &name, VIncrement incr)
 inline void VContainer::ClearIncrementTable()
 {
     increments.clear();
+}
+
+inline void VContainer::ClearMeasurements()
+{
+    measurements.clear();
 }
 
 inline void VContainer::ClearLengthLines()

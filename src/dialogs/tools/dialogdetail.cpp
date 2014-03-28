@@ -81,7 +81,7 @@ void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
                 NewItem(id, Valentina::NodeSplinePath, NodeDetail::Contour);
                 break;
             default:
-                qWarning()<<tr("Got wrong scene object. Ignore.");
+                qDebug()<<tr("Got wrong scene object. Ignore.");
                 break;
         }
         ui.toolButtonDelete->setEnabled(true);
@@ -136,7 +136,7 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
             break;
         }
         default:
-            qWarning()<<"Got wrong tools. Ignore.";
+            qDebug()<<"Got wrong tools. Ignore.";
             break;
     }
 

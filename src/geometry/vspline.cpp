@@ -134,7 +134,7 @@ qreal VSpline::LengthT(qreal t) const
 {
     if (t < 0 || t > 1)
     {
-        qWarning()<<"Wrong value t.";
+        qDebug()<<"Wrong value t.";
         return 0;
     }
     QLineF seg1_2 ( GetP1 ().toQPointF(), GetP2 () );
@@ -564,7 +564,7 @@ QPainterPath VSpline::GetPath() const
     }
     else
     {
-        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
+        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return splinePath;
 }

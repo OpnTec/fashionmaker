@@ -184,7 +184,7 @@ bool VPattern::SetNameDraw(const QString &name)
     }
     else
     {
-        qWarning()<<"Can't find activ draw"<<Q_FUNC_INFO;
+        qDebug()<<"Can't find activ draw"<<Q_FUNC_INFO;
         return false;
     }
 }
@@ -237,7 +237,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
                     case 5: // TagMeasurements
                         break;
                     default:
-                        qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
                         break;
                 }
             }
@@ -435,7 +435,7 @@ void VPattern::SetPath(const QString &path)
 {
     if (path.isEmpty())
     {
-        qWarning()<<"Path to measurements is empty"<<Q_FUNC_INFO;
+        qDebug()<<"Path to measurements is empty"<<Q_FUNC_INFO;
         return;
     }
     QDomNodeList list = elementsByTagName(TagMeasurements);
@@ -447,7 +447,7 @@ void VPattern::SetPath(const QString &path)
     }
     else
     {
-        qWarning()<<"Can't save path to measurements"<<Q_FUNC_INFO;
+        qDebug()<<"Can't save path to measurements"<<Q_FUNC_INFO;
     }
 }
 
@@ -508,6 +508,20 @@ Pattern::Measurements VPattern::MType() const
     {
         return Pattern::Individual;
     }
+}
+
+bool VPattern::SaveDocument(const QString &fileName)
+{
+    try
+    {
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        e.CriticalMessageBox(tr("Error no unique id."));
+        return false;
+    }
+    return VDomDocument::SaveDocument(fileName);
 }
 
 void VPattern::FullUpdateTree()
@@ -578,7 +592,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
                         ParseDetails(sceneDetail, domElement, parse);
                         break;
                     default:
-                        qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
                         break;
                 }
             }
@@ -628,7 +642,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
                     ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 default:
-                    qWarning()<<"Wrong tag name"<<Q_FUNC_INFO;
+                    qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
                     break;
             }
         }
@@ -685,7 +699,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                             tool = Valentina::NodeSplinePath;
                             break;
                         default:
-                            qWarning()<<"Wrong node type."<<Q_FUNC_INFO;
+                            qDebug()<<"Wrong node type."<<Q_FUNC_INFO;
                             break;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my));
@@ -1084,7 +1098,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            qWarning() << "Illegal point type in VDomDocument::ParsePointElement().";
+            qDebug() << "Illegal point type in VDomDocument::ParsePointElement().";
             break;
     }
 }
@@ -1228,7 +1242,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             }
             break;
         default:
-            qWarning() << "Illegal spline type in VDomDocument::ParseSplineElement().";
+            qDebug() << "Illegal spline type in VDomDocument::ParseSplineElement().";
             break;
     }
 }
@@ -1283,7 +1297,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
             }
             break;
         default:
-            qWarning() << "Illegal arc type in VDomDocument::ParseArcElement().";
+            qDebug() << "Illegal arc type in VDomDocument::ParseArcElement().";
             break;
     }
 }
@@ -1320,7 +1334,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            qWarning() << "Illegal tools type in VDomDocument::ParseToolsElement().";
+            qDebug() << "Illegal tools type in VDomDocument::ParseToolsElement().";
             break;
     }
 }

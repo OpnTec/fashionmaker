@@ -81,27 +81,20 @@ void VContainer::setData(const VContainer &data)
         switch (i.value()->getType())
         {
             case (GObject::Arc):
-            {
                 CopyGObject<VArc>(data, i.key());
                 break;
-            }
             case (GObject::Point):
-            {
                 CopyGObject<VPointF>(data, i.key());
                 break;
-            }
             case (GObject::Spline):
-            {
                 CopyGObject<VSpline>(data, i.key());
                 break;
-            }
             case (GObject::SplinePath):
-            {
                 CopyGObject<VSplinePath>(data, i.key());
                 break;
-            }
             default:
-            qWarning()<<"Don't know how copy this type.";
+                qDebug()<<"Don't know how copy this type.";
+                break;
         }
     }
     measurements = *data.DataMeasurements();

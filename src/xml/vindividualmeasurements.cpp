@@ -41,6 +41,10 @@ const QString VIndividualMeasurements::TagGiven_name  = QStringLiteral("given-na
 const QString VIndividualMeasurements::TagBirth_date  = QStringLiteral("birth-date");
 const QString VIndividualMeasurements::TagSex         = QStringLiteral("sex");
 const QString VIndividualMeasurements::TagUnit        = QStringLiteral("unit");
+const QString VIndividualMeasurements::TagEmail        = QStringLiteral("email");
+
+const QString VIndividualMeasurements::SexMale        = QStringLiteral("male");
+const QString VIndividualMeasurements::SexFemale      = QStringLiteral("female");
 
 VIndividualMeasurements::VIndividualMeasurements(VContainer *data):VDomDocument(data)
 {
@@ -54,30 +58,7 @@ Valentina::Units VIndividualMeasurements::Unit() const
 
 void VIndividualMeasurements::setUnit(const Valentina::Units &unit)
 {
-    const QDomNodeList nodeList = this->elementsByTagName(AttrUnit);
-    if (nodeList.isEmpty())
-    {
-        qWarning()<<"Can't save measurements units"<<Q_FUNC_INFO;
-        return;
-    }
-    else
-    {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                QDomElement parent = domElement.parentNode().toElement();
-                QDomElement newUnit = createElement(TagUnit);
-                QDomText newUnitValue = createTextNode(UnitsToStr(unit));
-                newUnit.appendChild(newUnitValue);
-
-                parent.replaceChild(newUnit, domElement);
-                return;
-            }
-        }
-    }
+    setTagText(TagUnit, UnitsToStr(unit));
 }
 
 void VIndividualMeasurements::Measurements()
@@ -176,7 +157,7 @@ void VIndividualMeasurements::Measurement(const QString &tag)
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
     {
-        qWarning()<<"Measurement" << tag <<"doesn't exist"<<Q_FUNC_INFO;
+        qDebug()<<"Measurement" << tag <<"doesn't exist"<<Q_FUNC_INFO;
         return;
     }
     else
@@ -207,7 +188,7 @@ void VIndividualMeasurements::Measurement(const QString &tag)
                     data->AddMeasurement(name, VMeasurement(value/10.0, gui_text, description, tag));
                     if (m_number.isEmpty())
                     {
-                        qWarning()<<"Can't find language-independent measurement name for "<< tag;
+                        qDebug()<<"Can't find language-independent measurement name for "<< tag;
                         return;
                     }
                     else
@@ -222,7 +203,7 @@ void VIndividualMeasurements::Measurement(const QString &tag)
                     data->AddMeasurement(name, VMeasurement(value, gui_text, description, tag));
                     if (m_number.isEmpty())
                     {
-                        qWarning()<<"Can't find language-independent measurement name for "<< tag;
+                        qDebug()<<"Can't find language-independent measurement name for "<< tag;
                         return;
                     }
                     else
@@ -237,27 +218,86 @@ void VIndividualMeasurements::Measurement(const QString &tag)
     }
 }
 
-QString VIndividualMeasurements::Language()
+QString VIndividualMeasurements::Language() const
 {
     return UniqueTagText(TagLang, "en");
 }
 
-QString VIndividualMeasurements::FamilyName()
+QString VIndividualMeasurements::FamilyName() const
 {
     return UniqueTagText(TagFamily_name, "");
 }
 
-QString VIndividualMeasurements::GivenName()
+void VIndividualMeasurements::setFamilyName(const QString &text)
+{
+    setTagText(TagFamily_name, text);
+}
+
+QString VIndividualMeasurements::GivenName() const
 {
     return UniqueTagText(TagGiven_name, "");
 }
 
-QString VIndividualMeasurements::BirthDate()
+void VIndividualMeasurements::setGivenName(const QString &text)
 {
-    return UniqueTagText(TagBirth_date, "");
+    setTagText(TagGiven_name, text);
 }
 
-QString VIndividualMeasurements::Sex()
+QDate VIndividualMeasurements::BirthDate() const
 {
-    return UniqueTagText(TagSex, "");
+    const QString date = UniqueTagText(TagBirth_date, "1900-01-01");
+    return QDate::fromString(date, "yyyy-MM-dd");
+}
+
+void VIndividualMeasurements::setBirthDate(const QDate &date)
+{
+    setTagText(TagBirth_date, date.toString("yyyy-MM-dd"));
+}
+
+VIndividualMeasurements::Genders VIndividualMeasurements::Sex() const
+{
+    return StrToGender(UniqueTagText(TagSex, ""));
+}
+
+void VIndividualMeasurements::setSex(const VIndividualMeasurements::Genders &sex)
+{
+    setTagText(TagSex, GenderToStr(sex));
+}
+
+QString VIndividualMeasurements::Mail() const
+{
+    return UniqueTagText(TagEmail, "");
+}
+
+void VIndividualMeasurements::setMail(const QString &text)
+{
+    setTagText(TagEmail, text);
+}
+
+QString VIndividualMeasurements::GenderToStr(const VIndividualMeasurements::Genders &sex)
+{
+    switch (sex)
+    {
+        case Male:
+            return SexMale;
+        case Female:
+            return SexFemale;
+        default:
+            return SexMale;
+    }
+}
+
+VIndividualMeasurements::Genders VIndividualMeasurements::StrToGender(const QString &sex)
+{
+    QStringList genders;
+    genders << SexMale << SexFemale;
+    switch (genders.indexOf(sex))
+    {
+        case 0: // SexMale
+            return Male;
+        case 1: // SexFemale
+            return Female;
+        default:
+            return Male;
+    }
 }

@@ -68,11 +68,17 @@ public slots:
      * @param column number of column
      */
     void                 IncrementChanged ( qint32 row, qint32 column );
-    void                 MeasurementsChanged ( qint32 row, qint32 column );
+    void                 MeasurementChanged ( qint32 row, qint32 column );
     /**
      * @brief FullUpdateFromFile update information in tables form file
      */
     void                 FullUpdateFromFile();
+    void                 SaveGivenName();
+    void                 SaveFamilyName();
+    void                 SaveEmail();
+    void                 SaveSex(int index);
+    void                 SaveBirthDate(const QDate & date);
+    void                 OpenTable();
 signals:
     /**
      * @brief FullUpdateTree signal update data for dom document

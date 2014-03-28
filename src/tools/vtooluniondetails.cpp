@@ -216,7 +216,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
         }
         break;
         default:
-            qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
     newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
@@ -364,7 +364,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
         }
         break;
         default:
-            qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
 }
@@ -682,7 +682,7 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
             doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
             break;
         default:
-            qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
     domElement.appendChild(nod);

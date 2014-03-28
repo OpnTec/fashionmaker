@@ -37,6 +37,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
 {
     baseColor = Qt::red;
     currentColor = baseColor;
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);

@@ -31,9 +31,8 @@
 
 #include "vdomdocument.h"
 
-class VStandardMeasurements:public QObject, public VDomDocument
+class VStandardMeasurements:public VDomDocument
 {
-    Q_OBJECT
 public:
     VStandardMeasurements(VContainer *data);
     Valentina::Units Unit();
@@ -51,8 +50,6 @@ public:
     static const QString AttrSize_increace;
     static const QString AttrHeight_increase;
     static const QString AttrNumber;
-public slots:
-    void Update();
 };
 
 #endif // VSTANDARDMEASUREMENTS_H

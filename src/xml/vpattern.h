@@ -193,6 +193,7 @@ public:
     static const QString IncrementKsize;
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
+    virtual bool   SaveDocument(const QString &fileName);
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.

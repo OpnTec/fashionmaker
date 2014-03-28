@@ -30,7 +30,8 @@
 
 #include <QLineEdit>
 
-TextDelegate::TextDelegate(QObject *parent): QItemDelegate(parent), lastText(QString("Name_"))
+TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
+    regex(regex)
 {
     //Little hack. Help save lineedit text in const method.
     connect(this, &TextDelegate::SaveText, this, &TextDelegate::InitText);
@@ -42,7 +43,7 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(index);
     QLineEdit *editor = new QLineEdit(parent);
     //Same regex pattern in xsd file
-    editor->setValidator( new QRegExpValidator(QRegExp("([\\p{L}]|[^0-9])[_\\p{L}0-9]*")) );
+    editor->setValidator( new QRegExpValidator(QRegExp(regex)) );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);
     return editor;
 }

@@ -30,20 +30,29 @@
 #define VINDIVIDUALMEASUREMENTS_H
 
 #include "vdomdocument.h"
+#include <QDate>
 
 class VIndividualMeasurements:public VDomDocument
 {
 public:
+    enum Sex { Male, Female };
+    Q_DECLARE_FLAGS(Genders, Sex)
+
     VIndividualMeasurements(VContainer *data);
     Valentina::Units Unit() const;
-    void setUnit(const Valentina::Units &unit);
-    void Measurements();
-    void Measurement(const QString &tag);
-    QString Language();
-    QString FamilyName();
-    QString GivenName();
-    QString BirthDate();
-    QString Sex();
+    void             setUnit(const Valentina::Units &unit);
+    void             Measurements();
+    QString          Language() const;
+    QString          FamilyName() const;
+    void             setFamilyName(const QString &text);
+    QString          GivenName() const;
+    void             setGivenName(const QString &text);
+    QDate            BirthDate() const;
+    void             setBirthDate(const QDate &date);
+    VIndividualMeasurements::Genders Sex() const;
+    void             setSex(const VIndividualMeasurements::Genders &sex);
+    QString          Mail() const;
+    void             setMail(const QString &text);
     static const QString AttrIgnore;
     static const QString AttrName;
     static const QString AttrM_number;
@@ -57,6 +66,17 @@ public:
     static const QString TagBirth_date;
     static const QString TagSex;
     static const QString TagUnit;
+    static const QString TagEmail;
+
+    static const QString SexMale;
+    static const QString SexFemale;
+
+    static QString   GenderToStr(const VIndividualMeasurements::Genders &sex);
+    static VIndividualMeasurements::Genders StrToGender(const QString &sex);
+private:
+    void             Measurement(const QString &tag);
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS( VIndividualMeasurements::Genders )
 
 #endif // VINDIVIDUALMEASUREMENTS_H

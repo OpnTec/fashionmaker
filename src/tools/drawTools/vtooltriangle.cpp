@@ -152,7 +152,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         if (c*c < a*a + b*b)
         {
             //Still don't know why this code handled. Need to think about that.
-            qWarning()<<"Can't find point."<<Q_FUNC_INFO;
+            qDebug()<<"Can't find point."<<Q_FUNC_INFO;
             return line.p2();
         }
     }

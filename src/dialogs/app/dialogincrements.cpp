@@ -31,6 +31,7 @@
 #include "../../widgets/doubledelegate.h"
 #include "../../widgets/textdelegate.h"
 #include "../../exception/vexception.h"
+#include "../../xml/vstandardmeasurements.h"
 
 #include <QPushButton>
 #include <QFile>
@@ -39,26 +40,48 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
 {
     ui->setupUi(this);
-    TextDelegate *textDelegate = new TextDelegate(ui->tableWidgetIncrement);
+
+    if (qApp->patternType() == Pattern::Individual)
+    {
+        const QString filePath = doc->MPath();
+        try
+        {
+            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
+            m = new VIndividualMeasurements(data);
+            m->setContent(filePath);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            emit DialogClosed(QDialog::Rejected);
+            return;
+        }
+    }
+
+    //Same regex in each shema files. Don't forget synchronize.
+    TextDelegate *textDelegate = new TextDelegate("^([^0-9-*/^+=\\s\\(\\)%:;!]){1,1}([^-*/^+=\\s\\(\\)%:;!]){0,}$",
+                                                  ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);// base value
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);// in sizes
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);// in heights
 
+    FillMeasurements();
+    FillIncrements();
+    FillLengthLines();
+    FillLengthSplines();
+    FillLengthArcs();
+
     if (qApp->patternType() == Pattern::Standard)
     {
-        ui->labelBirthDate->setVisible(false);
-        ui->lineEditBirthDate->setVisible(false);
-        ui->labelFamilyName->setVisible(false);
-        ui->lineEditFamilyName->setVisible(false);
-        ui->labelGivenName->setVisible(false);
-        ui->lineEditGivenName->setVisible(false);
-        ui->labelSex->setVisible(false);
-        ui->lineEditSex->setVisible(false);
+        ui->pagePersonalInformation->setVisible(false);
     }
     else
     {
+        QRegExpValidator *reg = new QRegExpValidator(QRegExp("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"));
+        ui->lineEditMail->setValidator(reg);
+
         ui->tableWidgetMeasurements->setColumnHidden( 1, true );// calculated value
         ui->tableWidgetMeasurements->setColumnHidden( 3, true );// in sizes
         ui->tableWidgetMeasurements->setColumnHidden( 4, true );// in heights
@@ -69,16 +92,31 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
         ui->tableWidgetMeasurements->setItemDelegateForColumn(2, doubleDelegate);// base value
 
-        connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementsChanged);
+        connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
+
+        ui->lineEditGivenName->setText(m->GivenName());
+        ui->lineEditFamilyName->setText(m->FamilyName());
+
+        ui->comboBoxSex->addItem(tr("male"),QVariant(m->GenderToStr(VIndividualMeasurements::Male)));
+        ui->comboBoxSex->addItem(tr("female"),QVariant(m->GenderToStr(VIndividualMeasurements::Female)));
+        qint32 index = ui->comboBoxSex->findData(m->GenderToStr(m->Sex()));
+        if (index != -1)
+        {
+            ui->comboBoxSex->setCurrentIndex(index);
+        }
+
+        ui->dateEditBirthDate->setDate(m->BirthDate());
+        ui->lineEditMail->setText(m->Mail());
+
+        connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveGivenName);
+        connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveFamilyName);
+        connect(ui->lineEditMail, &QLineEdit::editingFinished, this, &DialogIncrements::SaveEmail);
+        connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                &DialogIncrements::SaveSex);
+        connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &DialogIncrements::SaveBirthDate);
     }
 
     ui->toolBoxMeasurements->setCurrentIndex(1);
-
-    FillMeasurements();
-    FillIncrements();
-    FillLengthLines();
-    FillLengthSplines();
-    FillLengthArcs();
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
@@ -90,22 +128,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     ui->tabWidget->setCurrentIndex(0);
 
-    if (qApp->patternType() == Pattern::Individual)
-    {
-        QString filePath = doc->MPath();
-        try
-        {
-            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
-            m = new VIndividualMeasurements(data);
-            m->setContent(filePath);
-        }
-        catch(VException &e)
-        {
-            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            emit DialogClosed(QDialog::Rejected);
-            return;
-        }
-    }
+    connect(ui->toolButtonOpenMeasurements, &QToolButton::clicked, this, &DialogIncrements::OpenTable);
 }
 
 void DialogIncrements::FillMeasurements()
@@ -132,12 +155,20 @@ void DialogIncrements::FillMeasurements()
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
         item->setToolTip(m.GetDescription());
+        // set the item non-editable (view only), and non-selectable
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
         ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
 
         if (qApp->patternType() == Pattern::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(iMap.key())));
             item->setTextAlignment(Qt::AlignHCenter);
+            // set the item non-editable (view only), and non-selectable
+            Qt::ItemFlags flags = item->flags();
+            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+            item->setFlags(flags);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);
         }
 
@@ -149,15 +180,27 @@ void DialogIncrements::FillMeasurements()
         {
             QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m.GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
+            // set the item non-editable (view only), and non-selectable
+            Qt::ItemFlags flags = item->flags();
+            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+            item->setFlags(flags);
             ui->tableWidgetMeasurements->setItem(currentRow, 3, item);
 
             item = new QTableWidgetItem(QString().setNum(m.GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
+            // set the item non-editable (view only), and non-selectable
+            flags = item->flags();
+            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+            item->setFlags(flags);
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);
         }
 
         item = new QTableWidgetItem(m.GetNumber());
         item->setTextAlignment(Qt::AlignHCenter);
+        // set the item non-editable (view only), and non-selectable
+        flags = item->flags();
+        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
         ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
     }
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
@@ -339,8 +382,10 @@ void DialogIncrements::FillLengthArcs()
 
 void DialogIncrements::FullUpdateFromFile()
 {
+    disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
     ui->tableWidgetMeasurements->clearContents();
     FillMeasurements();
+    connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
 
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     ui->tableWidgetIncrement->clearContents();
@@ -355,6 +400,139 @@ void DialogIncrements::FullUpdateFromFile()
 
     ui->tableWidgetArcs->clearContents();
     FillLengthArcs();
+}
+
+void DialogIncrements::SaveGivenName()
+{
+    m->setGivenName(ui->lineEditGivenName->text());
+    if (m->SaveDocument(doc->MPath()) == false)
+    {
+        qDebug()<<"Can't save GivenName";
+    }
+}
+
+void DialogIncrements::SaveFamilyName()
+{
+
+    m->setFamilyName(ui->lineEditFamilyName->text());
+    if (m->SaveDocument(doc->MPath()) == false)
+    {
+        qDebug()<<"Can't save FamilyName";
+    }
+}
+
+void DialogIncrements::SaveEmail()
+{
+    m->setMail(ui->lineEditMail->text());
+    if (m->SaveDocument(doc->MPath()) == false)
+    {
+        qDebug()<<"Can't save Email";
+    }
+}
+
+void DialogIncrements::SaveSex(int index)
+{
+    m->setSex(m->StrToGender(ui->comboBoxSex->itemData(index).toString()));
+    if (m->SaveDocument(doc->MPath()) == false)
+    {
+        qDebug()<<"Can't save Sex";
+    }
+}
+
+void DialogIncrements::SaveBirthDate(const QDate & date)
+{
+    m->setBirthDate(date);
+    if (m->SaveDocument(doc->MPath()) == false)
+    {
+        qDebug()<<"Can't save BirthDate";
+    }
+}
+
+void DialogIncrements::OpenTable()
+{
+    QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
+            .arg(doc->UnitsToStr(qApp->patternUnit()));
+    if (qApp->patternType() == Pattern::Individual)
+    {
+        const QString filter(tr("Individual measurements (*.vit)"));
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+        if (filePath.isEmpty())
+        {
+            return;
+        }
+
+        VIndividualMeasurements *m1 = nullptr;
+        try
+        {
+            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
+
+            m1 = new VIndividualMeasurements(data);
+            m1->setContent(filePath);
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            delete m1;
+            emit DialogClosed(QDialog::Rejected);
+            return;
+        }
+        Valentina::Units mUnit = m1->Unit();
+        if (qApp->patternUnit() != mUnit)
+        {
+            QMessageBox::critical(this, tr("Wrong units."), text);
+            delete m1;
+            return;
+        }
+        delete m;
+        m = m1;
+        data->ClearMeasurements();
+        m->Measurements();
+        emit FullUpdateTree();
+
+        doc->SetPath(filePath);
+        emit haveLiteChange();
+    }
+    else
+    {
+        const QString filter(tr("Standard measurements (*.vst)"));
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+        if (filePath.isEmpty())
+        {
+            return;
+        }
+
+        VStandardMeasurements *m1 = nullptr;
+        try
+        {
+            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
+
+            m1 = new VStandardMeasurements(data);
+            m1->setContent(filePath);
+            Valentina::Units mUnit = m1->Unit();
+            if (qApp->patternUnit() != mUnit)
+            {
+                QMessageBox::critical(this, tr("Wrong units."), text);
+                delete m1;
+                return;
+            }
+            m1->SetSize();
+            m1->SetHeight();
+            data->ClearMeasurements();
+            m1->Measurements();
+            delete m1;
+            emit FullUpdateTree();
+
+            doc->SetPath(filePath);
+            emit haveLiteChange();
+        }
+        catch(VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            delete m1;
+            emit DialogClosed(QDialog::Rejected);
+            return;
+        }
+    }
 }
 
 void DialogIncrements::clickedToolButtonAdd()
@@ -467,7 +645,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement() == false)
     {
-        qWarning()<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
+        qDebug()<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
         return;
     }
     this->row = row;
@@ -512,45 +690,50 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     emit haveLiteChange();
 }
 
-void DialogIncrements::MeasurementsChanged(qint32 row, qint32 column)
+void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
 {
-    const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
-    QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
-
-    VMeasurement measur = data->GetMeasurement(itemName->text());
-    const QString tag = measur.TagName();
-    VIndividualMeasurements m(data);
-    QDomNodeList list = m.elementsByTagName(tag);
-    QDomElement domElement = list.at(0).toElement();
-    if (domElement.isElement() == false)
-    {
-        qWarning()<<"Cant't find measurement "<<tag<<Q_FUNC_INFO;
-        return;
-    }
     switch (column)
     {
-        case 2:
+        case 2:// value column
         {
-            m.SetAttribute(domElement, VIndividualMeasurements::AttrValue, item->text());
+            const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
+            QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
+
+            VMeasurement measur = data->GetMeasurement(itemName->text());
+            const QString tag = measur.TagName();
+            QDomNodeList list = m->elementsByTagName(tag);
+            QDomElement domElement = list.at(0).toElement();
+            if (domElement.isElement() == false)
+            {
+                qDebug()<<"Cant't find measurement "<<tag<<Q_FUNC_INFO;
+                return;
+            }
+
+            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, item->text());
+            if (m->SaveDocument(doc->MPath()) == false)
+            {
+                qDebug()<<"Can't save measurement";
+            }
             bool ok = false;
             const qreal base = item->text().replace(",", ".").toDouble(&ok);
             if (ok == false)
             {
                 measur.setBase(0);
                 item->setText("0");
-                qWarning()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
+                qDebug()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
             }
             else
             {
                 measur.setBase(base);
             }
-            data->UpdateMeasurement(itemName->text(), measur);
+            data->ClearMeasurements();
+            m->Measurements();
+            emit FullUpdateTree();
             break;
         }
         default:
             break;
     }
-    emit haveLiteChange();
 }
 
 void DialogIncrements::closeEvent(QCloseEvent *event)
@@ -562,4 +745,5 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 DialogIncrements::~DialogIncrements()
 {
     delete ui;
+    delete m;
 }

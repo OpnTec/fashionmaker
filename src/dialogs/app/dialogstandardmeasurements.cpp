@@ -88,7 +88,7 @@ void DialogStandardMeasurements::DialogAccepted()
     catch(VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
-        qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+        qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
         return;
     }
 
@@ -153,7 +153,7 @@ void DialogStandardMeasurements::LoadStandardTables()
         }
         catch(VException &e)
         {
-            qWarning()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
             continue;
         }
     }

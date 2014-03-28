@@ -36,7 +36,7 @@ VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAs
 {
     if (qFuzzyCompare(qAbs(angle1-angle2), 180) == false)
     {
-        qWarning()<<"angle1 and angle2 are not equal.";
+        qDebug()<<"angle1 and angle2 are not equal.";
     }
     SetAngle2(angle2);
 }

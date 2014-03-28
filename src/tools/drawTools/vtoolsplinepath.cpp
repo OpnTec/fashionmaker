@@ -231,7 +231,7 @@ void VToolSplinePath::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement() == false)
     {
-        qWarning()<<"Can't find element with id="<<id<<"in pattern file";
+        qDebug()<<"Can't find element with id="<<id<<"in pattern file";
         return;
     }
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);

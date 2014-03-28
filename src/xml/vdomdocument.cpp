@@ -362,3 +362,81 @@ QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
     }
     return result;
 }
+
+bool VDomDocument::SaveDocument(const QString &fileName)
+{
+    if (fileName.isEmpty())
+    {
+        qDebug()<<"Got empty file name.";
+        return false;
+    }
+    //Writing in temporary file
+    QFileInfo tempInfo(fileName);
+    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
+    QFile tempFile(temp);
+    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
+    {
+        const int indent = 4;
+        QTextStream out(&tempFile);
+        out.setCodec("UTF-8");
+        save(out, indent);
+        tempFile.close();
+    }
+    //Replace temp file our
+    bool result = false;
+    QFile patternFile(fileName);
+    // We need here temporary file because we need restore document after error of copying temp file.
+    QTemporaryFile tempOfPattern;
+    if (tempOfPattern.open())
+    {
+        patternFile.copy(tempOfPattern.fileName());
+    }
+    if ( patternFile.exists() == false || patternFile.remove() )
+    {
+        if ( tempFile.copy(patternFile.fileName()) == false )
+        {
+            qDebug()<<"Could not copy temp file to document file"<<Q_FUNC_INFO;
+            tempOfPattern.copy(fileName);
+            result = false;
+        }
+        else
+        {
+            tempFile.remove();
+            result = true;
+        }
+    }
+    else
+    {
+        qDebug()<<"Could not remove document file"<<Q_FUNC_INFO;
+        result = false;
+    }
+    return result;
+}
+
+void VDomDocument::setTagText(const QString &tag, const QString &text)
+{
+    const QDomNodeList nodeList = this->elementsByTagName(tag);
+    if (nodeList.isEmpty())
+    {
+        qDebug()<<"Can't save tag "<<tag<<Q_FUNC_INFO;
+        return;
+    }
+    else
+    {
+        const QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                QDomElement parent = domElement.parentNode().toElement();
+                QDomElement newTag = createElement(tag);
+                const QDomText newTagText = createTextNode(text);
+                newTag.appendChild(newTagText);
+
+                parent.replaceChild(newTag, domElement);
+                return;
+            }
+        }
+    }
+}

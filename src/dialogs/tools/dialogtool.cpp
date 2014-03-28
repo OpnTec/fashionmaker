@@ -258,7 +258,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
     }
     else
     {
-        qWarning()<<"Can't find object by name"<<value;
+        qDebug()<<"Can't find object by name"<<value;
     }
 }
 

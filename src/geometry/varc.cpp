@@ -102,7 +102,7 @@ QPainterPath VArc::GetPath() const
     }
     else
     {
-        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
+        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return path;
 }

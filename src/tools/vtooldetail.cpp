@@ -69,7 +69,7 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
                 InitTool<VNodeSplinePath>(scene, detail[i]);
                 break;
             default:
-                qWarning()<<"Get wrong tool type. Ignore.";
+                qDebug()<<"Get wrong tool type. Ignore.";
                 break;
         }
         doc->IncrementReferens(detail[i].getId());
@@ -137,7 +137,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
             }
             break;
             default:
-                qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
         VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
@@ -395,7 +395,7 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
             doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
         default:
-            qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
     domElement.appendChild(nod);

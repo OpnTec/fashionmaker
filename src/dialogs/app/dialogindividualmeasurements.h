@@ -40,24 +40,24 @@ namespace Ui
 class DialogIndividualMeasurements : public QDialog
 {
     Q_OBJECT
-
 public:
     DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
     ~DialogIndividualMeasurements();
     QString name() const;
     QString tablePath() const;
+public slots:
+    void OpenTable();
+    void NewTable();
+    void CheckState();
+    void DialogAccepted();
+    void DialogRejected();
 private:
     Q_DISABLE_COPY(DialogIndividualMeasurements)
     Ui::DialogIndividualMeasurements *ui;
     QString _name;
     QString _tablePath;
     VContainer *data;
-    void DialogAccepted();
-    void DialogRejected();
-    void CheckState();
     void LoadIndividualTables();
-    void OpenTable();
-    void NewTable();
     void InitUnits();
 };
 

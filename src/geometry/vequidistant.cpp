@@ -125,7 +125,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             }
             break;
             default:
-                qWarning()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
+                qDebug()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
                 break;
         }
     }
@@ -189,7 +189,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
     QVector<QPointF> correctPoints;
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
-        qWarning()<<"Only three points.";
+        qDebug()<<"Only three points.";
         return points;
     }
     //Clear equivalent points
@@ -371,7 +371,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
     QVector<QPointF> points;
     if (line1.p2() != line2.p2())
     {
-        qWarning()<<"Last point of two lines must be equal.";
+        qDebug()<<"Last point of two lines must be equal.";
     }
     QPointF CrosPoint;
     QLineF bigLine1 = ParallelLine(line1, width );

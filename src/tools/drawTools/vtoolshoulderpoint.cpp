@@ -70,7 +70,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     qreal dist = line.length();
     if (dist>toolLength)
     {
-        qWarning()<<"Correction of length in shoulder point tool. Parameter length too small.";
+        qDebug()<<"Correction of length in shoulder point tool. Parameter length too small.";
         toolLength = dist;
     }
     if (qFuzzyCompare(dist, toolLength))

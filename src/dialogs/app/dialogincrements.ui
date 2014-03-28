@@ -39,7 +39,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabStandard">
       <property name="sizePolicy">
@@ -71,7 +71,7 @@
           </widget>
          </item>
          <item alignment="Qt::AlignTop">
-          <widget class="QToolButton" name="toolButtonAnotherTable">
+          <widget class="QToolButton" name="toolButtonOpenMeasurements">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -107,7 +107,10 @@
          <property name="currentIndex">
           <number>1</number>
          </property>
-         <widget class="QWidget" name="page">
+         <widget class="QWidget" name="pagePersonalInformation">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -119,34 +122,8 @@
           <attribute name="label">
            <string>Personal information</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <property name="sizeConstraint">
-              <enum>QLayout::SetDefaultConstraint</enum>
-             </property>
-             <item>
-              <widget class="QLabel" name="labelFamilyName">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Family name</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEditFamilyName"/>
-             </item>
-            </layout>
-           </item>
-           <item>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0" colspan="2">
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QLabel" name="labelGivenName">
@@ -172,7 +149,33 @@
              </item>
             </layout>
            </item>
-           <item>
+           <item row="0" column="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetDefaultConstraint</enum>
+             </property>
+             <item>
+              <widget class="QLabel" name="labelFamilyName">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Family name</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditFamilyName"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
               <widget class="QLabel" name="labelBirthDate">
@@ -194,11 +197,15 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditBirthDate"/>
+              <widget class="QDateEdit" name="dateEditBirthDate">
+               <property name="displayFormat">
+                <string>yyyy-MM-dd</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
-           <item>
+           <item row="1" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <widget class="QLabel" name="labelSex">
@@ -220,11 +227,18 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditSex"/>
+              <widget class="QComboBox" name="comboBoxSex">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
-           <item>
+           <item row="1" column="2">
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
               <widget class="QLabel" name="labelMail">
@@ -251,14 +265,8 @@
             </layout>
            </item>
           </layout>
-          <zorder></zorder>
-          <zorder></zorder>
-          <zorder></zorder>
-          <zorder></zorder>
-          <zorder>layoutWidget</zorder>
-          <zorder>label_5</zorder>
          </widget>
-         <widget class="QWidget" name="page_2">
+         <widget class="QWidget" name="pageMeasurements">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -277,7 +285,7 @@
               <bool>true</bool>
              </property>
              <property name="editTriggers">
-              <set>QAbstractItemView::NoEditTriggers</set>
+              <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
              </property>
              <property name="alternatingRowColors">
               <bool>true</bool>

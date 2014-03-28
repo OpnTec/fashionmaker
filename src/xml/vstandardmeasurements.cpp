@@ -55,7 +55,7 @@ QString VStandardMeasurements::Description()
     const QString desc = UniqueTagText(TagDescription, "");
     if (desc.isEmpty())
     {
-        qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
+        qDebug()<<"Empty description in standard table."<<Q_FUNC_INFO;
     }
     return desc;
 }
@@ -65,7 +65,7 @@ void VStandardMeasurements::Measurements()
     const QDomNodeList nodeList = this->elementsByTagName(TagMeasurement);
     if (nodeList.isEmpty())
     {
-        qWarning()<<"Measurement list is empty"<<Q_FUNC_INFO;
+        qDebug()<<"Measurement list is empty"<<Q_FUNC_INFO;
         return;
     }
     else
@@ -169,9 +169,4 @@ void VStandardMeasurements::SetHeight()
             }
         }
     }
-}
-
-void VStandardMeasurements::Update()
-{
-    Measurements();
 }

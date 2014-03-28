@@ -43,7 +43,7 @@ public:
      * @brief TextDelegate constructor.
      * @param parent parent widget.
      */
-    explicit TextDelegate(QObject *parent = nullptr);
+    TextDelegate(const QString &regex, QObject *parent = nullptr);
     /**
      * @brief createEditorReturns the widget used to edit the item specified by index for editing. The parent widget and
      * style option are used to control how the editor widget appears.
@@ -96,6 +96,7 @@ private:
      * @brief lastValue last saved value.
      */
      QString lastText;
+     QString regex;
 };
 
 #endif // TEXTDELEGATE_H

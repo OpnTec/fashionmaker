@@ -119,15 +119,17 @@ public:
      * @param errorColumn number error column.
      * @return true if validation successful.
      */
-    static void ValidateXML(const QString &schema, const QString &fileName);
-    void setContent(const QString &fileName);
+    static void    ValidateXML(const QString &schema, const QString &fileName);
+    void           setContent(const QString &fileName);
     static Valentina::Units StrToUnits(const QString &unit);
     static QString UnitsToStr(const Valentina::Units &unit);
+    virtual bool SaveDocument(const QString &fileName);
 protected:
     /**
      * @brief data container with data.
      */
     VContainer     *data;
+    void setTagText(const QString &tag, const QString &text);
 
 private:
     Q_DISABLE_COPY(VDomDocument)

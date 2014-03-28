@@ -45,15 +45,16 @@ public:
     ~DialogStandardMeasurements();
     QString name() const;
     QString tablePath() const;
+public slots:
+    void DialogAccepted();
+    void DialogRejected();
+    void CheckState();
 private:
     Q_DISABLE_COPY(DialogStandardMeasurements)
     Ui::DialogStandardMeasurements *ui;
     VContainer *data;
     QString _name;
     QString _tablePath;
-    void DialogAccepted();
-    void DialogRejected();
-    void CheckState();
     void LoadStandardTables();
 };
 

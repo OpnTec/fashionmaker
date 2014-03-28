@@ -108,6 +108,11 @@ void MainWindow::ActionNewDraw()
             {
                 patternPieceName = stMeasurements.name();
                 path = stMeasurements.tablePath();
+                VStandardMeasurements m(pattern);
+                m.setContent(path);
+                m.SetSize();
+                m.SetHeight();
+                m.Measurements();
             }
             else
             {
@@ -122,6 +127,9 @@ void MainWindow::ActionNewDraw()
             {
                 patternPieceName = indMeasurements.name();
                 path = indMeasurements.tablePath();
+                VIndividualMeasurements m(pattern);
+                m.setContent(path);
+                m.Measurements();
             }
             else
             {
@@ -140,7 +148,7 @@ void MainWindow::ActionNewDraw()
     }
     if (doc->appendDraw(patternPieceName) == false)
     {
-        qWarning()<<"Error creating pattern with the name "<<patternPieceName<<".";
+        qDebug()<<"Error creating pattern with the name "<<patternPieceName<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -742,7 +750,7 @@ void MainWindow::CancelTool()
             currentScene->clearSelection();
             break;
         default:
-            qWarning()<<"Got wrong tool type. Ignored.";
+            qDebug()<<"Got wrong tool type. Ignored.";
             break;
     }
 }
@@ -1111,62 +1119,10 @@ void MainWindow::MinimumScrollBar()
 
 bool MainWindow::SavePattern(const QString &fileName)
 {
-    try
-    {
-        doc->TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        e.CriticalMessageBox(tr("Error no unique id."), this);
-        return false;
-    }
-    if (fileName.isEmpty())
-    {
-        qWarning()<<"Got empty file name.";
-        return false;
-    }
-    //Writing in temporary file
     QFileInfo tempInfo(fileName);
-    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
-    QFile tempFile(temp);
-    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
-    {
-        const int Indent = 4;
-        QTextStream out(&tempFile);
-        out.setCodec("UTF-8");
-        doc->save(out, Indent);
-        tempFile.close();
-    }
-    //Replace temp file our
-    bool result = false;
-    QFile patternFile(fileName);
-    // We need here temporary file because we need restore pattern after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
-    {
-        patternFile.copy(tempOfPattern.fileName());
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        if ( tempFile.copy(patternFile.fileName()) == false )
-        {
-            qWarning()<<"Could not copy temp file to pattern file"<<Q_FUNC_INFO;
-            tempOfPattern.copy(fileName);
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
-    }
-    else
-    {
-        qWarning()<<"Could not remove pattern file"<<Q_FUNC_INFO;
-        result = false;
-    }
+    const bool result = doc->SaveDocument(fileName);
     if (result)
     {
-        tempFile.remove();
         if (tempInfo.suffix() != "autosave")
         {
             setCurrentFile(fileName);
@@ -1183,7 +1139,7 @@ void MainWindow::AutoSavePattern()
         QString autofile = curFile +".autosave";
         if (SavePattern(autofile) == false)
         {
-            qWarning()<<"Can not save pattern"<<Q_FUNC_INFO;
+            qDebug()<<"Can not save pattern"<<Q_FUNC_INFO;
         }
     }
 }

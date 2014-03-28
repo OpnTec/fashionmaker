@@ -874,7 +874,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="shortMeasurementName">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="([\p{L}]|[^0-9])[_\p{L}0-9]*"/>
+			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!]){1,1}([^-*/^+=\s\(\)%:;!]){0,}$"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="units">
