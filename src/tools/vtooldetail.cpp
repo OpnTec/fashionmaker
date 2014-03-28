@@ -32,37 +32,44 @@
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
+
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
 const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
+
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
-VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
+const QString VToolDetail::NodeArc        = QStringLiteral("NodeArc");
+const QString VToolDetail::NodePoint      = QStringLiteral("NodePoint");
+const QString VToolDetail::NodeSpline     = QStringLiteral("NodeSpline");
+const QString VToolDetail::NodeSplinePath = QStringLiteral("NodeSplinePath");
+
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(0), sceneDetails(scene)
+    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail[i].getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
                 InitTool<VNodePoint>(scene, detail[i]);
                 break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
                 InitTool<VNodeArc>(scene, detail[i]);
                 break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
                 InitTool<VNodeSpline>(scene, detail[i]);
                 break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
                 InitTool<VNodeSplinePath>(scene, detail[i]);
                 break;
             default:
-                qWarning()<<"Get wrong tool type. Ignore.";
+                qDebug()<<"Get wrong tool type. Ignore.";
                 break;
         }
         doc->IncrementReferens(detail[i].getId());
@@ -73,7 +80,7 @@ VToolDetail::VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, 
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
-    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
+    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
     {
        AddToFile();
     }
@@ -93,7 +100,7 @@ void VToolDetail::setDialog()
     dialogTool->setDetails(detail);
 }
 
-void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
@@ -102,49 +109,49 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocu
     VDetail det;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        qint64 id = 0;
+        quint32 id = 0;
         switch (detail[i].getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
             {
                 id = CreateNode<VPointF>(data, detail[i].getId());
-                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
             {
                 id = CreateNode<VArc>(data, detail[i].getId());
-                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, detail[i].getId());
-                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, detail[i].getId());
-                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Tool::FromGui);
+                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             default:
-                qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+                qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
         VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
-    Create(0, det, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, det, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
-void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
+                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
-    qint64 id = _id;
-    if (typeCreation == Tool::FromGui || typeCreation == Tool::FromTool)
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
     {
         id = data->AddDetail(newDetail);
     }
@@ -156,13 +163,13 @@ void VToolDetail::Create(const qint64 &_id, const VDetail &newDetail, VMainGraph
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::Detail, doc);
+    VAbstractTool::AddRecord(id, Valentina::DetailTool, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        QHash<qint64, VDataTool*>* tools = doc->getTools();
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, detail);
     }
 }
@@ -188,18 +195,18 @@ void VToolDetail::FullUpdateFromGui(int result)
             DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
             Q_CHECK_PTR(dialogTool);
             VDetail det = dialogTool->getDetails();
-            SetAttribute(domElement, AttrName, det.getName());
-            SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-            SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-            SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
+            doc->SetAttribute(domElement, AttrName, det.getName());
+            doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
+            doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
+            doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
             RemoveAllChild(domElement);
             for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
             {
                AddNode(domElement, det[i]);
             }
             VDetail detail = VAbstractTool::data.GetDetail(id);
-            QList<qint64> list = detail.Missing(det);
-            QHash<qint64, VDataTool*>* tools = doc->getTools();
+            QList<quint32> list = detail.Missing(det);
+            QHash<quint32, VDataTool*>* tools = doc->getTools();
             if (list.size()>0)
             {
                 for (qint32 i = 0; i < list.size(); ++i)
@@ -221,13 +228,13 @@ void VToolDetail::AddToFile()
     VDetail detail = VAbstractTool::data.GetDetail(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrName, detail.getName());
-    SetAttribute(domElement, AttrMx, toMM(detail.getMx()));
-    SetAttribute(domElement, AttrMy, toMM(detail.getMy()));
-    SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
-    SetAttribute(domElement, AttrClosed, detail.getClosed());
-    SetAttribute(domElement, AttrWidth, detail.getWidth());
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrName, detail.getName());
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(detail.getMx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(detail.getMy()));
+    doc->SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
+    doc->SetAttribute(domElement, AttrClosed, detail.getClosed());
+    doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
     for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
@@ -235,7 +242,7 @@ void VToolDetail::AddToFile()
     }
 
     QDomElement element;
-    bool ok = doc->GetActivDetailsElement(element);
+    bool ok = doc->GetActivNodeElement(VPattern::TagDetails, element);
     if (ok)
     {
         element.appendChild(domElement);
@@ -248,10 +255,10 @@ void VToolDetail::RefreshDataInFile()
     if (domElement.isElement())
     {
         VDetail det = VAbstractTool::data.GetDetail(id);
-        SetAttribute(domElement, AttrName, det.getName());
-        SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-        SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-        SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
+        doc->SetAttribute(domElement, AttrName, det.getName());
+        doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
+        doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
+        doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
         {
@@ -270,8 +277,8 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            SetAttribute(domElement, AttrMx, QString().setNum(toMM(newPos.x())));
-            SetAttribute(domElement, AttrMy, QString().setNum(toMM(newPos.y())));
+            doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(newPos.x())));
+            doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(newPos.y())));
 
             QList<QGraphicsView*> list = this->scene()->views();
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
@@ -313,7 +320,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Detail);
+        emit ChoosedTool(id, Valentina::Detail);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -362,33 +369,33 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 
-    SetAttribute(nod, AttrIdObject, node.getId());
-    SetAttribute(nod, AttrMx, toMM(node.getMx()));
-    SetAttribute(nod, AttrMy, toMM(node.getMy()));
+    doc->SetAttribute(nod, AttrIdObject, node.getId());
+    doc->SetAttribute(nod, AttrMx, qApp->fromPixel(node.getMx()));
+    doc->SetAttribute(nod, AttrMy, qApp->fromPixel(node.getMy()));
     if (node.getTypeNode() == NodeDetail::Contour)
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeContour);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);
     }
     else
     {
-        SetAttribute(nod, AttrNodeType, NodeTypeModeling);
+        doc->SetAttribute(nod, AttrNodeType, NodeTypeModeling);
     }
     switch (node.getTypeTool())
     {
-        case (Tool::NodeArc):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
+        case (Valentina::NodeArc):
+            doc->SetAttribute(nod, AttrType, NodeArc);
             break;
-        case (Tool::NodePoint):
-            SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
+        case (Valentina::NodePoint):
+            doc->SetAttribute(nod, AttrType, NodePoint);
             break;
-        case (Tool::NodeSpline):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
+        case (Valentina::NodeSpline):
+            doc->SetAttribute(nod, AttrType, NodeSpline);
             break;
-        case (Tool::NodeSplinePath):
-            SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
+        case (Valentina::NodeSplinePath):
+            doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
         default:
-            qWarning()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
     domElement.appendChild(nod);
@@ -404,7 +411,7 @@ template <typename Tool>
 //cppcheck-suppress unusedFunction
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
-    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<quint32, VDataTool*>* tools = doc->getTools();
     Q_CHECK_PTR(tools);
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
     Q_CHECK_PTR(tool);

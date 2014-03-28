@@ -42,6 +42,12 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
     lineNumber = domElement.lineNumber();
 }
 
+VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
+    :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
+{
+
+}
+
 QString VExceptionEmptyParameter::ErrorMessage() const
 {
     QString error = QString("ExceptionEmptyParameter: %1 %2").arg(what, name);
@@ -50,6 +56,5 @@ QString VExceptionEmptyParameter::ErrorMessage() const
 
 QString VExceptionEmptyParameter::DetailedInformation() const
 {
-    QString detail = QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText);
-    return detail;
+    return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
 }

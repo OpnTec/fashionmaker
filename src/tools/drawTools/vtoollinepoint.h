@@ -49,9 +49,9 @@ public:
                        * @param angle line angle.
                        * @param parent parent object.
                        */
-                      VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                                     const QString &formula, const qint64 &basePointId, const qreal &angle,
-                                     QGraphicsItem * parent = 0);
+                      VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                                     const QString &formula, const quint32 &basePointId, const qreal &angle,
+                                     QGraphicsItem * parent = nullptr);
 public slots:
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
@@ -75,7 +75,7 @@ protected:
     /**
      * @brief basePointId id base line point.
      */
-    qint64            basePointId;
+    quint32            basePointId;
     /**
      * @brief mainLine line item.
      */

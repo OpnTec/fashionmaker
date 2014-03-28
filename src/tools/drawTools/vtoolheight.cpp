@@ -27,17 +27,17 @@
  *************************************************************************/
 
 #include "vtoolheight.h"
-#include "../../dialogs/dialogheight.h"
+#include "../../dialogs/tools/dialogheight.h"
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 
-VToolHeight::VToolHeight(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                         const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
-                         const Tool::Sources &typeCreation, QGraphicsItem * parent)
+VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                         const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                         const Valentina::Sources &typeCreation, QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent), p1LineId(p1LineId), p2LineId(p2LineId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -60,34 +60,34 @@ void VToolHeight::setDialog()
     dialogTool->setPointName(p->name());
 }
 
-void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
+    disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     QString pointName = dialogTool->getPointName();
     QString typeLine = dialogTool->getTypeLine();
-    qint64 basePointId = dialogTool->getBasePointId();
-    qint64 p1LineId = dialogTool->getP1LineId();
-    qint64 p2LineId = dialogTool->getP2LineId();
+    quint32 basePointId = dialogTool->getBasePointId();
+    quint32 p1LineId = dialogTool->getP1LineId();
+    quint32 p2LineId = dialogTool->getP2LineId();
     Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
-void VToolHeight::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                         const qint64 &basePointId, const qint64 &p1LineId, const qint64 &p2LineId,
-                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                         VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                         const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
     const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
 
     QPointF pHeight = FindPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()), basePoint->toQPointF());
-    qint64 id = _id;
-    if (typeCreation == Tool::FromGui)
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
@@ -105,7 +105,7 @@ void VToolHeight::Create(const qint64 _id, const QString &pointName, const QStri
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Height, doc);
+    VDrawTool::AddRecord(id, Valentina::Height, doc);
     if (parse == Document::FullParse)
     {
         VToolHeight *point = new VToolHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId,
@@ -131,9 +131,9 @@ void VToolHeight::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toLongLong();
-        p1LineId = domElement.attribute(AttrP1Line, "").toLongLong();
-        p2LineId = domElement.attribute(AttrP2Line, "").toLongLong();
+        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
+        p1LineId = domElement.attribute(AttrP1Line, "").toUInt();
+        p2LineId = domElement.attribute(AttrP2Line, "").toUInt();
     }
     RefreshGeometry();
 
@@ -154,16 +154,16 @@ void VToolHeight::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
-    SetAttribute(domElement, AttrTypeLine, typeLine);
-    SetAttribute(domElement, AttrBasePoint, basePointId);
-    SetAttribute(domElement, AttrP1Line, p1LineId);
-    SetAttribute(domElement, AttrP2Line, p2LineId);
+    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+    doc->SetAttribute(domElement, AttrBasePoint, basePointId);
+    doc->SetAttribute(domElement, AttrP1Line, p1LineId);
+    doc->SetAttribute(domElement, AttrP2Line, p2LineId);
 
     AddToCalculation(domElement);
 
@@ -175,13 +175,13 @@ void VToolHeight::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrTypeLine, typeLine);
-        SetAttribute(domElement, AttrBasePoint, basePointId);
-        SetAttribute(domElement, AttrP1Line, p1LineId);
-        SetAttribute(domElement, AttrP2Line, p2LineId);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        doc->SetAttribute(domElement, AttrBasePoint, basePointId);
+        doc->SetAttribute(domElement, AttrP1Line, p1LineId);
+        doc->SetAttribute(domElement, AttrP2Line, p2LineId);
     }
 }
 
@@ -190,9 +190,9 @@ void VToolHeight::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
-    SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1LineId()));
-    SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2LineId()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1LineId()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2LineId()));
 }

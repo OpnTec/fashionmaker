@@ -50,9 +50,7 @@ public:
                      * @brief VExceptionEmptyParameter copy constructor
                      * @param e exception
                      */
-                    VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
-                        :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()),
-                          lineNumber(e.LineNumber()){}
+                    VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
     virtual         ~VExceptionEmptyParameter() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
@@ -68,22 +66,22 @@ public:
      * @brief Name return name of attribute where error
      * @return name
      */
-    inline QString  Name() const {return name;}
+    QString         Name() const;
     /**
      * @brief TagText return tag text
      * @return tag text
      */
-    inline QString  TagText() const {return tagText;}
+    QString         TagText() const;
     /**
      * @brief TagName return tag name
      * @return tag name
      */
-    inline QString  TagName() const {return tagName;}
+    QString         TagName() const;
     /**
      * @brief LineNumber return line number of tag
      * @return line number
      */
-    inline qint32   LineNumber() const {return lineNumber;}
+    qint32          LineNumber() const;
 protected:
     /**
      * @brief name name attribute
@@ -102,5 +100,25 @@ protected:
      */
     qint32          lineNumber;
 };
+
+inline QString VExceptionEmptyParameter::Name() const
+{
+    return name;
+}
+
+inline QString VExceptionEmptyParameter::TagText() const
+{
+    return tagText;
+}
+
+inline QString VExceptionEmptyParameter::TagName() const
+{
+    return tagName;
+}
+
+inline qint32 VExceptionEmptyParameter::LineNumber() const
+{
+    return lineNumber;
+}
 
 #endif // VEXCEPTIONEMPTYPARAMETER_H

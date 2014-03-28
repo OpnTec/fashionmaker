@@ -44,50 +44,50 @@ class VArc: public VGObject
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
-                       /**
-                        * @brief VArc default constructor.
-                        */
-                       VArc ();
-                       /**
-                        * @brief VArc constructor.
-                        * @param center center point.
-                        * @param radius arc radius.
-                        * @param f1 start angle (degree).
-                        * @param f2 end angle (degree).
-                        */
-                       VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-                             QString formulaF2, qint64 idObject = 0, Draw::Draws mode = Draw::Calculation);
-                       /**
-                        * @brief VArc copy constructor
-                        * @param arc arc
-                        */
-                       VArc(const VArc &arc);
-                       /**
-                        * @brief operator = assignment operator
-                        * @param arc arc
-                        * @return arc
-                        */
-                       VArc& operator= (const VArc &arc);
+    /**
+     * @brief VArc default constructor.
+     */
+    VArc ();
+    /**
+     * @brief VArc constructor.
+     * @param center center point.
+     * @param radius arc radius.
+     * @param f1 start angle (degree).
+     * @param f2 end angle (degree).
+     */
+    VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
+         QString formulaF2, quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
+    /**
+     * @brief VArc copy constructor
+     * @param arc arc
+     */
+    VArc(const VArc &arc);
+    /**
+     * @brief operator = assignment operator
+     * @param arc arc
+     * @return arc
+     */
+    VArc& operator= (const VArc &arc);
     /**
      * @brief GetF1 return start angle.
      * @return angle in degree.
      */
-    inline QString     GetFormulaF1 () const {return formulaF1;}
+    QString            GetFormulaF1 () const;
     /**
      * @brief GetF1 return formula for start angle.
      * @return string with formula.
      */
-    inline qreal       GetF1 () const {return f1;}
+    qreal              GetF1 () const;
     /**
      * @brief GetF2 return end angle.
      * @return angle in degree.
      */
-    inline QString     GetFormulaF2 () const {return formulaF2;}
+    QString            GetFormulaF2 () const;
     /**
      * @brief GetF2 return formula for end angle.
      * @return string with formula.
      */
-    inline qreal       GetF2 () const {return f2;}
+    qreal              GetF2 () const;
     /**
      * @brief GetLength return arc length.
      * @return length.
@@ -97,22 +97,22 @@ public:
      * @brief GetRadius return arc radius.
      * @return radius.
      */
-    inline QString     GetFormulaRadius () const {return formulaRadius;}
+    QString            GetFormulaRadius () const;
     /**
      * @brief GetRadius return formula for radius.
      * @return string with formula.
      */
-    inline qreal       GetRadius () const {return radius;}
+    qreal              GetRadius () const;
     /**
      * @brief GetCenter return center point.
      * @return center point.
      */
-    inline VPointF     GetCenter () const {return center;}
+    VPointF            GetCenter () const;
     /**
      * @brief GetP1 return point associated with start angle.
      * @return point.
      */
-    QPointF GetP1() const;
+    QPointF            GetP1() const;
     /**
      * @brief GetP2 return point associated with end angle.
      * @return точку point.
@@ -150,7 +150,7 @@ public:
      * @brief setId keep id arc in data.
      * @param id id arc in data.
      */
-    virtual void       setId(const qint64 &id);
+    virtual void       setId(const quint32 &id);
 private:
     /**
      * @brief f1 start angle in degree.
@@ -181,5 +181,40 @@ private:
      */
     VPointF            center;
 };
+
+inline QString VArc::GetFormulaF1() const
+{
+    return formulaF1;
+}
+
+inline qreal VArc::GetF1() const
+{
+    return f1;
+}
+
+inline QString VArc::GetFormulaF2() const
+{
+    return formulaF2;
+}
+
+inline qreal VArc::GetF2() const
+{
+    return f2;
+}
+
+inline QString VArc::GetFormulaRadius() const
+{
+    return formulaRadius;
+}
+
+inline qreal VArc::GetRadius() const
+{
+    return radius;
+}
+
+inline VPointF VArc::GetCenter() const
+{
+    return center;
+}
 
 #endif // VARC_H

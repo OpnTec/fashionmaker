@@ -25,3 +25,6 @@ latex/
 
 # Ignore file Qt translation.
 *.qm
+
+# Ignore Mercurial .orig files
+*.orig

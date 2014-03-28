@@ -29,7 +29,7 @@
 #include "vtoolrecord.h"
 
 VToolRecord::VToolRecord()
-    :id(0), typeTool(Tool::ArrowTool), nameDraw(QString()){}
+    :id(0), typeTool(Valentina::ArrowTool), nameDraw(QString()){}
 
-VToolRecord::VToolRecord(const qint64 &id, const Tool::Tools &typeTool, const QString &nameDraw)
+VToolRecord::VToolRecord(const quint32 &id, const Valentina::Tools &typeTool, const QString &nameDraw)
     :id(id), typeTool(typeTool), nameDraw(nameDraw){}

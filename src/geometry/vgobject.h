@@ -61,7 +61,8 @@ public:
      * @param idObject id parent object.
      * @param mode mode creation. Used in modeling mode.
      */
-    VGObject(const GObject::Type &type, const qint64 &idObject = 0, const Draw::Draws &mode = Draw::Calculation);
+    VGObject(const GObject::Type &type, const quint32 &idObject = 0,
+             const Valentina::Draws &mode = Valentina::Calculation);
     /**
      * @brief VGObject copy constructor.
      * @param obj object.
@@ -78,12 +79,12 @@ public:
      * @brief getIdObject return parent id.
      * @return parent id or 0 if object don't have parent.
      */
-    qint64          getIdObject() const;
+    quint32          getIdObject() const;
     /**
      * @brief setIdObject set parent id.
      * @param value parent id.
      */
-    void            setIdObject(const qint64 &value);
+    void            setIdObject(const quint32 &value);
     /**
      * @brief name return name graphical object.
      * @return name
@@ -98,12 +99,12 @@ public:
      * @brief getMode return mode creation.
      * @return mode.
      */
-    Draw::Draws     getMode() const;
+    Valentina::Draws     getMode() const;
     /**
      * @brief setMode set mode creation.
      * @param value mode.
      */
-    void            setMode(const Draw::Draws &value);
+    void            setMode(const Valentina::Draws &value);
     /**
      * @brief getType return object type.
      * @return type.
@@ -113,17 +114,17 @@ public:
      * @brief id return id object.
      * @return id
      */
-    qint64          id() const;
+    quint32          id() const;
     /**
      * @brief setId set id object.
      * @param id id.
      */
-    virtual void    setId(const qint64 &id);
+    virtual void    setId(const quint32 &id);
 protected:
     /**
      * @brief _id id in container. Ned for arcs, spline and spline paths.
      */
-    qint64          _id;
+    quint32          _id;
     /**
      * @brief type type of graphical object
      */
@@ -131,7 +132,7 @@ protected:
     /**
      * @brief idObject id of parent object. Only for modeling. All another return 0.
      */
-    qint64          idObject;
+    quint32          idObject;
     /**
      * @brief _name object name
      */
@@ -139,7 +140,7 @@ protected:
     /**
      * @brief mode object created in calculation or drawing mode
      */
-    Draw::Draws     mode;
+    Valentina::Draws     mode;
 };
 
 #endif // VGOBJECT_H

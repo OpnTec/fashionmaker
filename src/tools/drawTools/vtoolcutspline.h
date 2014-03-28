@@ -49,9 +49,9 @@ public:
      * @param typeCreation way we create this tool.
      * @param parent parent object.
      */
-    VToolCutSpline(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &formula,
-                   const qint64 &splineId, const qint64 &spl1id, const qint64 &spl2id,
-                   const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+    VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                   const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
+                   const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -63,7 +63,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -78,10 +78,10 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const QString &pointName,
-                        const QString &formula, const qint64 &splineId, const qreal &mx, const qreal &my,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const quint32 _id, const QString &pointName,
+                        const QString &formula, const quint32 &splineId, const qreal &mx, const qreal &my,
+                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
     static const QString AttrSpline;
 public slots:
@@ -93,7 +93,7 @@ public slots:
      * @brief SplineChoosed send signal about selection from spline.
      * @param id object id in container.
      */
-    void          SplineChoosed(qint64 id);
+    void          SplineChoosed(quint32 id);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace.
@@ -139,7 +139,7 @@ private:
     /**
      * @brief splineId keep id of spline.
      */
-    qint64        splineId;
+    quint32        splineId;
     /**
      * @brief firstSpline first spline after cutting.
      */
@@ -151,18 +151,18 @@ private:
     /**
      * @brief spl1id id first spline after cutting.
      */
-    const qint64  spl1id;
+    const quint32  spl1id;
     /**
      * @brief spl2id id second spline after cutting.
      */
-    const qint64  spl2id;
+    const quint32  spl2id;
     /**
      * @brief RefreshSpline refresh spline on scene.
      * @param spline spline.
      * @param splid spline id.
      * @param tr spline type.
      */
-    void          RefreshSpline(VSimpleSpline *spline, qint64 splid, SimpleSpline::Translation tr);
+    void          RefreshSpline(VSimpleSpline *spline, quint32 splid, SimpleSpline::Translation tr);
 };
 
 #endif // VTOOLCUTSPLINE_H

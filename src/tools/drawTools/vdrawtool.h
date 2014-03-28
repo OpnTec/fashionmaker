@@ -33,7 +33,7 @@
 
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
-#include "../../dialogs/dialogtool.h"
+#include "../../dialogs/tools/dialogtool.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
@@ -49,7 +49,7 @@ public:
                   * @param id object id in container.
                   * @param parent parent object.
                   */
-                 VDrawTool(VDomDocument *doc, VContainer *data, qint64 id);
+                 VDrawTool(VPattern *doc, VContainer *data, quint32 id);
     virtual      ~VDrawTool();
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -67,7 +67,7 @@ public slots:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    virtual void ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
      * @param newName new name active pattern peace. name new active pattern peace.
@@ -134,7 +134,7 @@ protected:
         {
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
-            QAction *actionRemove = 0;
+            QAction *actionRemove = nullptr;
             if (showRemove)
             {
                 actionRemove = menu.addAction(tr("Delete"));
@@ -159,7 +159,7 @@ protected:
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
                 if (ignoreFullUpdate == false)
                 {
-                    connect(doc, &VDomDocument::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
+                    connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
                 }
 
                 tool->setDialog();
@@ -183,7 +183,7 @@ protected:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    void ShowItem(Item *item, qint64 id, Qt::GlobalColor color, bool enable)
+    void ShowItem(Item *item, quint32 id, Qt::GlobalColor color, bool enable)
     {
         Q_CHECK_PTR(item);
         if (id == item->id)
@@ -196,7 +196,7 @@ protected:
             {
                 currentColor = color;
             }
-            item->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
         }
     }
 private:

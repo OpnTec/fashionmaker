@@ -50,9 +50,9 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &axisP1Id,
-                                 const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                                 const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                   VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
+                                 const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
+                                 const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -81,10 +81,10 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id, const qint64 &axisP2Id,
-                          const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                          VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                          const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void    Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id, const quint32 &axisP2Id,
+                          const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                          const Document::Documents &parse, const Valentina::Sources &typeCreation);
     /**
      * @brief FindPoint find point intersection two foots right triangle.
      * @param axisP1 first axis point.
@@ -133,19 +133,19 @@ private:
     /**
      * @brief axisP1Id id first axis point.
      */
-    qint64         axisP1Id;
+    quint32         axisP1Id;
     /**
      * @brief axisP2Id id second axis point.
      */
-    qint64         axisP2Id;
+    quint32         axisP2Id;
     /**
      * @brief firstPointId id first triangle point, what lies on the hypotenuse.
      */
-    qint64         firstPointId;
+    quint32         firstPointId;
     /**
      * @brief secondPointId id second triangle point, what lies on the hypotenuse.
      */
-    qint64         secondPointId;
+    quint32         secondPointId;
 };
 
 #endif // VTOOLTRIANGLE_H

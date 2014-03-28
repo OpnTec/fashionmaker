@@ -28,18 +28,18 @@
 
 #include "vtoollinepoint.h"
 
-VToolLinePoint::VToolLinePoint(VDomDocument *doc, VContainer *data, const qint64 &id,
-                               const QString &typeLine, const QString &formula, const qint64 &basePointId,
+VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
+                               const QString &typeLine, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent),  formula(formula), angle(angle), basePointId(basePointId),
-      mainLine(0)
+      mainLine(nullptr)
 {
     this->typeLine = typeLine;
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     QPointF point1 = data->GeometricObject<const VPointF *>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<const VPointF *>(id)->toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -53,13 +53,13 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
     {
         currentColor = Qt::gray;
     }
-    mainLine->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
     VToolPoint::ChangedActivDraw(newName);
 }
 
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(currentColor, toPixel(widthHairLine)/factor, LineStyle()));
+    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
     QPointF point = VDrawTool::data.GeometricObject<const VPointF *>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<const VPointF *>(basePointId)->toQPointF();

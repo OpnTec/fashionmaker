@@ -47,8 +47,7 @@ public:
                      * @brief VExceptionConversionError copy constructor
                      * @param e exception
                      */
-                    VExceptionConversionError(const VExceptionConversionError &e)
-                        :VException(e), str(e.String()){}
+                    VExceptionConversionError(const VExceptionConversionError &e);
     virtual         ~VExceptionConversionError() noexcept (true) {}
     /**
      * @brief ErrorMessage return main error message
@@ -59,12 +58,17 @@ public:
      * @brief String return string, where happend error
      * @return string
      */
-    inline QString  String() const {return str;}
+    QString         String() const;
 protected:
     /**
      * @brief str string, where happend error
      */
     QString         str;
 };
+
+inline QString VExceptionConversionError::String() const
+{
+    return str;
+}
 
 #endif // VEXCEPTIONCONVERSIONERROR_H

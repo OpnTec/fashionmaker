@@ -32,8 +32,8 @@
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
-VAbstractNode::VAbstractNode(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &idNode,
-                             const qint64 &idTool, QObject *parent)
+VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
+                             const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
 {
     _referens = 0;
@@ -58,17 +58,17 @@ void VAbstractNode::DeleteNode()
                 }
                 else
                 {
-                    qWarning()<<"parent isn't element"<<Q_FUNC_INFO;
+                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
                 }
             }
             else
             {
-                qWarning()<<"parent isNull"<<Q_FUNC_INFO;
+                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
             }
         }
         else
         {
-            qWarning()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
+            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
         }
     }
 }
@@ -76,7 +76,7 @@ void VAbstractNode::DeleteNode()
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;
-    bool ok = doc->GetActivModelingElement(modelingElement);
+    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
     if (ok)
     {
         modelingElement.appendChild(domElement);

@@ -27,8 +27,9 @@
  *************************************************************************/
 
 #include "vsimplesplinepath.h"
+#include "../widgets/vapplication.h"
 
-VSimpleSplinePath::VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor)
+VSimpleSplinePath::VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor)
     :VAbstractTool(doc, data, id), factor(factor)
 {
 }
@@ -37,7 +38,7 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::SplinePath);
+        emit ChoosedTool(id, Valentina::SplinePath);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -45,11 +46,11 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/ *factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
 }
 
 void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/ *factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
 }

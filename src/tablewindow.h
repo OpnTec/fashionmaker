@@ -57,7 +57,7 @@ public:
      * @brief TableWindow constructor.
      * @param parent parent widget.
      */
-                 explicit TableWindow(QWidget *parent = 0);
+                 explicit TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
 public slots:
     /**
@@ -225,11 +225,10 @@ private:
     void PsFile(const QString &name)const;
     /**
      * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
-     * @param name name output file.
      * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
      * need create eps file.
      */
-    void PdfToPs(const QString &name, const QStringList &params)const;
+    void PdfToPs(const QStringList &params)const;
 };
 
 #endif // TABLEWINDOW_H

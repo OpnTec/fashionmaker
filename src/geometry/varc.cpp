@@ -39,7 +39,7 @@ VArc::VArc ()
 }
 
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-            QString formulaF2, qint64 idObject, Draw::Draws mode)
+            QString formulaF2, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {
@@ -102,7 +102,7 @@ QPainterPath VArc::GetPath() const
     }
     else
     {
-        qWarning()<<"points.count() < 2"<<Q_FUNC_INFO;
+        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return path;
 }
@@ -173,7 +173,7 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
     return line.p2();
 }
 
-void VArc::setId(const qint64 &id)
+void VArc::setId(const quint32 &id)
 {
     _id = id;
     _name = QString ("Arc_%1_%2").arg(center.name()).arg(id);

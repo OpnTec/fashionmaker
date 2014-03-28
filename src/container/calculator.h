@@ -42,8 +42,8 @@ public:
      * @brief Calculator class constructor.
      * @param data pointer to a variable container.
      */
-    explicit Calculator(const VContainer *data):errorMsg(0), token(QString()), tok(0), token_type(0), prog(QString()),
-        index(0), data(data), debugFormula(QString()){}
+    explicit Calculator(const VContainer *data):errorMsg(nullptr), token(QString()), tok(0), token_type(0),
+        prog(QString()), index(0), data(data), debugFormula(QString()){}
     /**
      * @brief eval calculate formula.
      * @param prog string of formula.

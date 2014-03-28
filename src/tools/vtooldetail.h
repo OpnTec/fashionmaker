@@ -31,7 +31,7 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "../dialogs/dialogdetail.h"
+#include "../dialogs/tools/dialogdetail.h"
 
 /**
  * @brief The VToolDetail class for working with detail.
@@ -49,8 +49,8 @@ public:
      * @param scene pointer to scene.
      * @param parent parent object
      */
-    VToolDetail(VDomDocument *doc, VContainer *data, const qint64 &id, const Tool::Sources &typeCreation,
-                VMainGraphicsScene *scene, QGraphicsItem * parent = 0);
+    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
+                VMainGraphicsScene *scene, QGraphicsItem * parent = nullptr);
     ~VToolDetail();
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -63,12 +63,11 @@ public:
      * @param id id parent object.
      * @return id for new object.
      */
-    static qint64 CreateNode(VContainer *data, const qint64 &id)
+    static quint32 CreateNode(VContainer *data, const quint32 &id)
     {
         //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
-        Q_CHECK_PTR(node);
-        node->setMode(Draw::Modeling);
+        node->setMode(Valentina::Modeling);
         return data->AddGObject(node);
     }
 
@@ -79,7 +78,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void        Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
+    static void        Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -90,9 +89,9 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void        Create(const qint64 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
-                              VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                              const Tool::Sources &typeCreation);
+    static void        Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
+                              VPattern *doc, VContainer *data, const Document::Documents &parse,
+                              const Valentina::Sources &typeCreation);
     static const QString TagName;
     static const QString TagNode;
     static const QString AttrSupplement;
@@ -102,6 +101,10 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
+    static const QString NodeArc;
+    static const QString NodePoint;
+    static const QString NodeSpline;
+    static const QString NodeSplinePath;
     /**
      * @brief Remove full delete detail.
      */

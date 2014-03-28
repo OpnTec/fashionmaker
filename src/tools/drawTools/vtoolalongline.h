@@ -50,9 +50,9 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
-                                const qint64 &firstPointId, const qint64 &secondPointId, const QString &typeLine,
-                                const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                 VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
+                                const quint32 &firstPointId, const quint32 &secondPointId, const QString &typeLine,
+                                const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -81,10 +81,10 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const QString &pointName, const QString &typeLine, const QString &formula,
-                        const qint64 &firstPointId, const qint64 &secondPointId, const qreal &mx, const qreal &my,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const quint32 _id, const QString &pointName, const QString &typeLine, const QString &formula,
+                        const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     /**
@@ -127,7 +127,7 @@ private:
     /**
      * @brief secondPointId id second point of line.
      */
-    qint64       secondPointId;
+    quint32       secondPointId;
 };
 
 #endif // VTOOLALONGLINE_H

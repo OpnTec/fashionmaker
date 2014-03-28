@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+	<lang>ru</lang>
+	<personal>
+	   <family-name/>
+	   <given-name/>
+	   <birth-date>1900-01-01</birth-date>
+	   <sex>male</sex>
+	   <email>username@example.com</email>
+	</personal>
+	<body-measurements>
+		<unit>mm</unit>
+		<head_and_neck>
+			<head_girth name="Огол" m_number="M1" value="0.0" gui_text="Обхват головы" description="Номер размерного признака 48"/>
+			<mid_neck_girth name="name" m_number="M2" value="0.0" gui_text="" description="" ignore="true"/>
+			<neck_base_girth name="Ош" m_number="M3" value="0.0" gui_text="Обхват шеи" description="Номер размерного признака 13"/>
+			<head_and_neck_length name="name" m_number="M4" value="0.0" gui_text="" description="" ignore="true"/>
+		</head_and_neck>
+		<torso>
+			<center_front_waist_length name="name" m_number="M5" value="0.0" gui_text="" description="" ignore="true"/>
+			<center_back_waist_length name="Дтс" m_number="M6" value="0.0" gui_text="Длина спины до талии с учетом выступа лопаток" description="Номер размерного признака 40"/>
+			<shoulder_length name="Шп" m_number="M7" value="0.0" gui_text="Длина плечевого ската" description="Номер размерного признака 31"/>
+			<side_waist_length name="Дб" m_number="M8" value="0.0" gui_text="Длина боковой части" description="Разница между меркой 11 и 7"/>
+			<trunk_length name="name" m_number="M9" value="0.0" gui_text="" description="" ignore="true"/>
+			<shoulder_girth name="name" m_number="M10" value="0.0" gui_text="" description="" ignore="true"/>
+			<upper_chest_girth name="ОгI" m_number="M11" value="0.0" gui_text="Обхват груди первый" description="Номер размерного признака 14"/>
+			<bust__girth name="ОгII" m_number="M12" value="0.0" gui_text="Обхват груди второй" description="Номер размерного признака 15"/>
+			<under_bust_girth name="ОгIII" m_number="M13" value="0.0" gui_text="Обхват груди третий" description="Номер размерного признака 16"/>
+			<waist_girth name="От" m_number="M14" value="0.0" gui_text="Обхват талии" description="Номер размерного признака 18"/>
+			<high_hip_girth name="name" m_number="M15" value="0.0" gui_text="" description="" ignore="true"/>
+			<hip_girth name="Об" m_number="M16" value="0.0" gui_text="Обхват бедер с учетом выступания живота" description="Номер размерного признака 19"/>
+			<upper_front_chest_width name="Шг1" m_number="M17" value="0.0" gui_text="Ширина груди первая" description="Номер размерного признака 45"/>
+			<front_chest_width name="Шг2" m_number="M18" value="0.0" gui_text="Ширина груди вторая" description="Номер размерного признака 45"/>
+			<across_front_shoulder_width name="dпл" m_number="M19" value="0.0" gui_text="Плечевой диаметр" description="Номер размерного признака 53"/>
+			<across_back_shoulder_width name="name" m_number="M20" value="0.0" gui_text="" description="" ignore="true"/>
+			<upper_back_width name="name" m_number="M21" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_width name="Шс" m_number="M22" value="0.0" gui_text="Ширина спины" description="Номер размерного признака 47"/>
+			<bustpoint_to_bustpoint name="Цг" m_number="M23" value="0.0" gui_text="Расстояние между сосковыми точками" description="Номер размерного признака 46"/>
+			<halter_bustpoint_to_bustpoint name="name" m_number="M24" value="0.0" gui_text="" description="" ignore="true"/>
+			<neck_to_bustpoint name="Вг" m_number="M25" value="0.0" gui_text="Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)" description="Номер размерного признака 35а"/>
+			<crotch_length name="name" m_number="M26" value="0.0" gui_text="" description="" ignore="true"/>
+			<rise_height name="Дпс" m_number="M27" value="0.0" gui_text="Расстояние от линии талии до подъягодичной складки" description="Номер размерного признака 104"/>
+			<shoulder_drop name="name" m_number="M28" value="0.0" gui_text="" description="" ignore="true"/>
+			<shoulder_slope_degrees name="name" m_number="M29" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_shoulder_slope_length name="name" m_number="M30" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_shoulder_slope_length name="name" m_number="M31" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_shoulder_to_waist_length name="name" m_number="M32" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_shoulder_to_waist_length name="name" m_number="M33" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_neck_arc name="name" m_number="M34" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_neck_arc name="name" m_number="M35" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_upper-bust_arc name="name" m_number="M36" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_upper-bust_arc name="name" m_number="M37" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_waist_arc name="name" m_number="M38" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_waist_arc name="name" m_number="M39" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_upper-hip_arc name="name" m_number="M40" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_upper-hip_arc name="name" m_number="M41" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_hip_arc name="name" m_number="M42" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_hip_arc name="name" m_number="M43" value="0.0" gui_text="" description="" ignore="true"/>
+			<chest_slope name="name" m_number="M44" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_slope name="name" m_number="M45" value="0.0" gui_text="" description="" ignore="true"/>
+			<front_waist_slope name="name" m_number="M46" value="0.0" gui_text="" description="" ignore="true"/>
+			<back_waist_slope name="name" m_number="M47" value="0.0" gui_text="" description="" ignore="true"/>
+			<front-neck_to_upper-chest_height name="name" m_number="M48" value="0.0" gui_text="" description="" ignore="true"/>
+			<front-neck_to_bust_height name="name" m_number="M49" value="0.0" gui_text="" description="" ignore="true"/>
+		</torso>
+		<arm>
+			<armscye_girth name="name" m_number="M50" value="0.0" gui_text="" description="" ignore="true"/>
+			<elbow_girth name="Олк" m_number="M51" value="0.0" gui_text="Обхват локтя" description="Номер размерного признака "/>
+			<upper-arm_girth name="Оп" m_number="M52" value="0.0" gui_text="Обхват плеча" description="Номер размерного признака 28"/>
+			<wrist_girth name="Озап" m_number="M53" value="0.0" gui_text="Обхват запястья" description="Номер размерного признака 105"/>
+			<scye_depth name="name" m_number="M54" value="0.0" gui_text="" description="" ignore="true"/>
+			<shoulder_and_arm_length name="Дзап" m_number="M55" value="0.0" gui_text="Расстояние от точки основания шеи сбоку до линии обхвата запястья" description="Номер размерного признака 33"/>
+			<underarm_length name="name" m_number="M56" value="0.0" gui_text="" description="" ignore="true"/>
+			<cervicale_to_wrist_length name="name" m_number="M57" value="0.0" gui_text="" description="" ignore="true"/>
+			<shoulder_to_elbow_length name="Дрлок" m_number="M58" value="0.0" gui_text="Длина руки до локтя" description="Номер размерного признака 62"/>
+			<arm_length name="Дрзап" m_number="M59" value="0.0" gui_text="Длина руки до запястья" description="Номер размерного признака 68"/>
+		</arm>
+		<hand>
+			<hand_width name="name" m_number="M60" value="0.0" gui_text="" description="" ignore="true"/>
+			<hand_length name="name" m_number="M61" value="0.0" gui_text="" description="" ignore="true"/>
+			<hand_girth name="name" m_number="M62" value="0.0" gui_text="" description="" ignore="true"/>
+		</hand>
+		<leg>
+			<thigh_girth name="Обед" m_number="M63" value="0.0" gui_text="Обхват бедра" description="Номер размерного признака 21"/>
+			<mid_thigh_girth name="name" m_number="M64" value="0.0" gui_text="" description="" ignore="true"/>
+			<knee_girth name="Ок" m_number="M65" value="0.0" gui_text="Обхват колена" description="Номер размерного признака 22"/>
+			<calf_girth name="Ои" m_number="M66" value="0.0" gui_text="Обхват икры" description="Номер размерного признака 23"/>
+			<ankle_girth name="Ощ" m_number="M67" value="0.0" gui_text="Обхват щиколотки" description="Номер размерного признака 24"/>
+			<knee_height name="Вк" m_number="M68" value="0.0" gui_text="Высота коленной точки" description="Номер размерного признака 9"/>
+			<ankle_height name="name" m_number="M69" value="0.0" gui_text="" description="" ignore="true"/>
+		</leg>
+		<foot>
+			<foot_width name="name" m_number="M70" value="0.0" gui_text="" description="" ignore="true"/>
+			<foot_length name="name" m_number="M71" value="0.0" gui_text="" description="" ignore="true"/>
+		</foot>
+		<heights>
+			<height name="Р" m_number="M72" value="0.0" gui_text="Рост" description="Номер размерного признака 1"/>
+			<cervicale_height name="Вшт" m_number="M73" value="0.0" gui_text="Высота точки основания шеи сзади" description="Номер размерного признака 10"/>
+			<cervicale_to_knee_height name="name" m_number="M74" value="0.0" gui_text="" description="" ignore="true"/>
+			<waist_height name="Влт" m_number="M75" value="0.0" gui_text="Высота линии талии" description="Номер размерного признака 7"/>
+			<high_hip_height name="name" m_number="M76" value="0.0" gui_text="" description="" ignore="true"/>
+			<hip_height name="name" m_number="M77" value="0.0" gui_text="" description="" ignore="true"/>
+			<waist_to_hip_height name="name" m_number="M78" value="0.0" gui_text="" description="" ignore="true"/>
+			<waist_to_knee_height name="name" m_number="M79" value="0.0" gui_text="" description="" ignore="true"/>
+			<crotch_height name="Дн" m_number="M80" value="0.0" gui_text="Длина ноги по внутренней поверхности" description="Номер размерного признака 27"/>
+		</heights>
+	</body-measurements>
+</vit>

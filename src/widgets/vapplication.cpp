@@ -31,95 +31,170 @@
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionwrongparameterid.h"
+#include "../exception/vexceptionwrongid.h"
 
 #include <QMessageBox>
 #include <QDebug>
+
+const qreal VApplication::PrintDPI = 96.0;
+
+#define DefWidth 1.2//mm
+
+VApplication::VApplication(int &argc, char **argv)
+    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
+      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0)
+{
+    InitLineWidth();
+}
 
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {
     try
     {
-      return QApplication::notify(receiver, event);
+        return QApplication::notify(receiver, event);
     }
     catch (const VExceptionObjectError &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error parsing file. Program will be terminated."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setDetailedText(e.DetailedInformation());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error parsing file. Program will be terminated."));
         abort();
     }
     catch (const VExceptionBadId &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error bad id. Program will be terminated."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error bad id. Program will be terminated."));
         abort();
     }
     catch (const VExceptionConversionError &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error can't convert value. Program will be terminated."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error can't convert value. Program will be terminated."));
         abort();
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error empty parameter. Program will be terminated."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setDetailedText(e.DetailedInformation());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."));
         abort();
     }
-    catch (const VExceptionWrongParameterId &e)
+    catch (const VExceptionWrongId &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error wrong id. Program will be terminated."));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setDetailedText(e.DetailedInformation());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."));
         abort();
     }
     catch (const VException &e)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Something's wrong!!"));
-        msgBox.setInformativeText(e.ErrorMessage());
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        e.CriticalMessageBox(tr("Something's wrong!!"));
+        return true;
     }
     catch (std::exception& e)
     {
       qCritical() << "Exception thrown:" << e.what();
     }
     return false;
+}
+
+double VApplication::toPixel(double unit) const
+{
+    double result = 0;
+    switch (_patternUnit)
+    {
+    case Valentina::Mm:
+        result = (unit / 25.4) * PrintDPI;
+        break;
+    case Valentina::Cm:
+        result = ((unit * 10.0) / 25.4) * PrintDPI;
+        break;
+    case Valentina::Inch:
+        result = unit * PrintDPI;
+        break;
+    default:
+        break;
+    }
+    return result;
+}
+
+double VApplication::fromPixel(double pix) const
+{
+    double result = 0;
+    switch (_patternUnit)
+    {
+    case Valentina::Mm:
+        result = (pix / PrintDPI) * 25.4;
+        break;
+    case Valentina::Cm:
+        result = ((pix / PrintDPI) * 25.4) / 10.0;
+        break;
+    case Valentina::Inch:
+        result = pix / PrintDPI;
+        break;
+    default:
+        break;
+    }
+    return result;
+}
+QString VApplication::pathToTables() const
+{
+    if (_patternType == Pattern::Individual)
+    {
+        #ifdef Q_OS_WIN
+            return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
+        #else
+            #ifdef QT_DEBUG
+                return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
+            #else
+                return QStringLiteral("/usr/share/valentina/tables/individual");
+            #endif
+        #endif
+    }
+    else
+    {
+        #ifdef Q_OS_WIN
+            return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
+        #else
+            #ifdef QT_DEBUG
+                return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
+            #else
+                return QStringLiteral("/usr/share/valentina/tables/standard");
+            #endif
+        #endif
+    }
+}
+
+QString VApplication::translationsPath() const
+{
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + QStringLiteral("/translations");
+#else
+#ifdef QT_DEBUG
+    return QApplication::applicationDirPath() + QStringLiteral("/translations");
+        #else
+            return QStringLiteral("/usr/share/valentina/translations");
+        #endif
+    #endif
+}
+
+
+void VApplication::InitLineWidth()
+{
+    switch(_patternUnit)
+    {
+        case Valentina::Mm:
+            _widthMainLine = DefWidth;
+            break;
+        case Valentina::Cm:
+            _widthMainLine = DefWidth/10.0;
+            break;
+        case Valentina::Inch:
+            _widthMainLine = DefWidth/25.4;
+            break;
+        default:
+            _widthMainLine = DefWidth;
+            break;
+    }
+    _widthHairLine = _widthMainLine/3.0;
+}
+
+
+void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
+{
+    _patternUnit = patternUnit;
+    InitLineWidth();
 }

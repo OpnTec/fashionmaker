@@ -30,7 +30,7 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include "../xml/vdomdocument.h"
+#include "../xml/vpattern.h"
 #include <QMessageBox>
 
 /**
@@ -40,15 +40,15 @@ class VAbstractTool: public VDataTool
 {
     Q_OBJECT
 public:
-                            /**
-                             * @brief VAbstractTool container.
-                             * @param doc dom document container.
-                             * @param data container with data.
-                             * @param id object id in container.
-                             * @param parent parent object.
-                             */
-                            VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent = 0);
-    virtual                 ~VAbstractTool(){}
+    /**
+     * @brief VAbstractTool container.
+     * @param doc dom document container.
+     * @param data container with data.
+     * @param id object id in container.
+     * @param parent parent object.
+     */
+    VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
+    virtual ~VAbstractTool(){}
     /**
      * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
      * @param sc scene.
@@ -93,7 +93,7 @@ public:
      * @brief getId return object id.
      * @return id.
      */
-    inline qint64           getId() const {return id;}
+    quint32                 getId() const;
     /**
      * @brief LineCoefficients coefficient for equation of segment. Segment equestion ax+by+c=0.
      * @param line line
@@ -102,7 +102,6 @@ public:
      * @param c c value
      */
     static void             LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
-    static const QString    AttrId;
     static const QString    AttrType;
     static const QString    AttrMx;
     static const QString    AttrMy;
@@ -153,7 +152,7 @@ public:
      * @param toolType tool type
      * @param doc dom document container
      */
-    static void  AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc);
+    static void  AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -169,7 +168,7 @@ signals:
      * @param id object id in container.
      * @param type type of scene object.
      */
-    void                    ChoosedTool(qint64 id, Scene::Scenes type);
+    void                    ChoosedTool(quint32 id, Valentina::Scenes type);
     /**
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
@@ -178,11 +177,11 @@ protected:
     /**
      * @brief doc dom document container
      */
-    VDomDocument            *doc;
+    VPattern                *doc;
     /**
      * @brief id object id.
      */
-    const qint64            id;
+    const quint32            id;
     /**
      * @brief baseColor base color for tool.
      */
@@ -207,7 +206,7 @@ protected:
      * @brief getData return pointer to data container.
      * @return container.
      */
-    inline const VContainer *getData() const {return &data;}
+    const VContainer        *getData() const;
     /**
      * @brief RemoveReferens decrement value of reference.
      */
@@ -227,26 +226,17 @@ protected:
      * @return pen style.
      */
     Qt::PenStyle            LineStyle();
-    template <typename T>
-    /**
-     * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
-     * @param domElement element in xml tree.
-     * @param name name of attribute.
-     * @param value value of attribute.
-     */
-    void SetAttribute(QDomElement &domElement, const QString &name, const T &value)
-    {
-        QString val = QString().setNum(value);
-        val = val.replace(",", ".");
-        domElement.setAttribute(name, val);
-    }
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
 
-template <>
-inline void VAbstractTool::SetAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
+inline quint32 VAbstractTool::getId() const
 {
-    domElement.setAttribute(name, value);
+    return id;
+}
+
+inline const VContainer *VAbstractTool::getData() const
+{
+    return &data;
 }
 #endif // VABSTRACTTOOL_H

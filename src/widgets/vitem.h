@@ -42,21 +42,20 @@ public:
     /**
      * @brief VItem default constructor.
      */
-                VItem ():numInOutList(0), paper(0){}
+                VItem ();
     /**
      * @brief VItem constructor.
      * @param numInList index in list of details.
      * @param parent parent object.
      */
-                VItem (int numInList, QGraphicsItem * parent = 0):QGraphicsPathItem (parent), numInOutList(numInList),
-                    paper(0){}
+                VItem (int numInList, QGraphicsItem * parent = nullptr);
     /**
      * @brief VItem constructor.
      * @param path detail path.
      * @param numInList index in list of details.
      * @param parent parent object.
      */
-                VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = 0 );
+                VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = nullptr );
     /**
      * @brief Rotate rotate detail on angle in degree.
      * @param angle angle in degree.
@@ -81,7 +80,7 @@ public slots:
      * @brief SetIndexInList set detail index in list.
      * @param index index in list.
      */
-    inline void SetIndexInList( qint32 index ) {numInOutList = index;}
+    void        SetIndexInList( qint32 index );
 protected:
     /**
      * @brief itemChange handle item change.
@@ -118,4 +117,9 @@ signals:
      */
     void        itemColliding ( QList<QGraphicsItem *> list, int number );
 };
+
+inline void VItem::SetIndexInList(qint32 index)
+{
+    numInOutList = index;
+}
 #endif // VITEM_H
