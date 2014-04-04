@@ -42,8 +42,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
 
     flagFormula = false;
     flagName = false;
-    CheckState();
     InitOkCansel(ui);
+    CheckState();
 
     FillComboBoxTypeLine(ui->comboBoxLineType);
     ui->comboBoxLineType->setCurrentIndex(0);

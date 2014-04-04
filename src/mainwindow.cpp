@@ -987,14 +987,14 @@ void MainWindow::PatternWasModified()
 void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
-    pattern->SetSize(size*10);
+    pattern->SetSize(size);
     doc->FullUpdateTree();
 }
 
 void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
-    pattern->SetHeight(growth*10);
+    pattern->SetHeight(growth);
     doc->FullUpdateTree();
 }
 
