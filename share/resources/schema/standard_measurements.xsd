@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="vst">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="description" type="xs:string"></xs:element>
+				<xs:element name="unit" type="units"></xs:element>
+				<xs:element name="size">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double"></xs:attribute>
+					   	<xs:attribute name="name" type="xs:string"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="height">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double"></xs:attribute>
+						<xs:attribute name="name" type="xs:string"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="measurements">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="measurement" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name" type="shortMeasurementName" use="required"></xs:attribute>
+									<xs:attribute name="gui_text" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="number" type="xs:string" use="required"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						 </xs:sequence>
+					  </xs:complexType>
+				   </xs:element>
+			</xs:sequence>
+		 </xs:complexType>
+	  </xs:element>
+	<xs:simpleType name="shortMeasurementName">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!]){1,1}([^-*/^+=\s\(\)%:;!]){0,}$"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="units">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="mm"/>
+			<xs:enumeration value="cm"/>
+			<xs:enumeration value="inch"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

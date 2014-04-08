@@ -37,7 +37,6 @@ QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOption
     Q_UNUSED(option);
     Q_UNUSED(index);
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
-    Q_CHECK_PTR(editor);
     editor->setMinimum(-10000.0);
     editor->setMaximum(10000.0);
     connect(editor, &QDoubleSpinBox::editingFinished, this, &DoubleSpinBoxDelegate::commitAndCloseEditor);

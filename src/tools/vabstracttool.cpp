@@ -28,7 +28,6 @@
 
 #include "vabstracttool.h"
 
-const QString VAbstractTool::AttrId          = QStringLiteral("id");
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
 const QString VAbstractTool::AttrMy          = QStringLiteral("my");
@@ -62,20 +61,21 @@ const QString VAbstractTool::AttrPathPoint   = QStringLiteral("pathPoint");
 const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
 const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
-const QString VAbstractTool::TypeLineNone    = QStringLiteral("none");
-const QString VAbstractTool::TypeLineLine    = QStringLiteral("hair");
+
+const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
+const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
 const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine");
 const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
-VAbstractTool::VAbstractTool(VDomDocument *doc, VContainer *data, qint64 id, QObject *parent)
+VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
     Q_CHECK_PTR(doc);
-    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VDomDocument::haveLiteChange);
-    connect(this->doc, &VDomDocument::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VDomDocument::FullUpdateTree);
+    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
+    connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
+    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
     emit toolhaveChange();
 }
 
@@ -241,17 +241,17 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                 }
                 else
                 {
-                    qWarning()<<"parent isn't element"<<Q_FUNC_INFO;
+                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
                 }
             }
             else
             {
-                qWarning()<<"parent isNull"<<Q_FUNC_INFO;
+                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
             }
         }
         else
         {
-            qWarning()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
+            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
         }
     }
 }
@@ -259,24 +259,24 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 Qt::PenStyle VAbstractTool::LineStyle()
 {
     QStringList styles = Styles();
-    switch(styles.indexOf(typeLine))
+    switch (styles.indexOf(typeLine))
     {
-        case 0:
+        case 0: // TypeLineNone
             return Qt::NoPen;
             break;
-        case 1:
+        case 1: // TypeLineLine
             return Qt::SolidLine;
             break;
-        case 2:
+        case 2: // TypeLineDashLine
             return Qt::DashLine;
             break;
-        case 3:
+        case 3: // TypeLineDotLine
             return Qt::DotLine;
             break;
-        case 4:
+        case 4: // TypeLineDashDotLine
             return Qt::DashDotLine;
             break;
-        case 5:
+        case 5: // TypeLineDashDotDotLine
             return Qt::DashDotDotLine;
             break;
         default:
@@ -303,9 +303,9 @@ const QStringList VAbstractTool::Styles()
     return styles;
 }
 
-void VAbstractTool::AddRecord(const qint64 id, const Tool::Tools &toolType, VDomDocument *doc)
+void VAbstractTool::AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc)
 {
-    qint64 cursor = doc->getCursor();
+    quint32 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
     if (cursor <= 0)
     {

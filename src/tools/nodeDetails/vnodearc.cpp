@@ -29,18 +29,19 @@
 #include "vnodearc.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
-VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc, const Tool::Sources &typeCreation,
-                   const qint64 &idTool, QObject *qoParent, QGraphicsItem *parent)
+VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Valentina::Sources &typeCreation,
+                   const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -50,14 +51,13 @@ VNodeArc::VNodeArc(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,
     }
 }
 
-void VNodeArc::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idArc,  const Document::Documents &parse,
-                      const Tool::Sources &typeCreation, const qint64 &idTool, QObject *parent)
+void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document::Documents &parse,
+                      const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
+    VAbstractTool::AddRecord(id, Valentina::NodeArc, doc);
     if (parse == Document::FullParse)
     {
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
-        Q_CHECK_PTR(arc);
         doc->AddTool(id, arc);
         if (idTool != 0)
         {
@@ -93,12 +93,12 @@ void VNodeArc::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -109,10 +109,10 @@ void VNodeArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, idNode);
+        doc->SetAttribute(domElement, AttrIdObject, idNode);
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }
@@ -121,7 +121,7 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Arc);
+        emit ChoosedTool(id, Valentina::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -129,13 +129,13 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 void VNodeArc::RefreshGeometry()

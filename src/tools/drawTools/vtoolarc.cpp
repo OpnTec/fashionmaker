@@ -28,12 +28,12 @@
 
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogarc.h"
+#include "../../dialogs/tools/dialogarc.h"
 
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
-VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::Sources &typeCreation,
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
 {
@@ -42,12 +42,12 @@ VToolArc::VToolArc(VDomDocument *doc, VContainer *data, qint64 id, const Tool::S
     path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
     this->setPath(path);
-    this->setPen(QPen(Qt::black, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -69,22 +69,22 @@ void VToolArc::setDialog()
     dialogTool->SetRadius(arc->GetFormulaRadius());
 }
 
-void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc,
+void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                       VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 center = dialogTool->GetCenter();
+    quint32 center = dialogTool->GetCenter();
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
-    Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Tool::FromGui);
+    Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
-void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &radius, const QString &f1,
-                      const QString &f2, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                      const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
+                      const QString &f2, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                      const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -93,7 +93,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
     qreal result = cal.eval(radius, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        calcRadius = toPixel(result);
+        calcRadius = qApp->toPixel(result);
     }
 
     errorMsg.clear();
@@ -112,9 +112,8 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
-    Q_CHECK_PTR(arc);
-    qint64 id = _id;
-    if (typeCreation == Tool::FromGui)
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(arc);
     }
@@ -127,7 +126,7 @@ void VToolArc::Create(const qint64 _id, const qint64 &center, const QString &rad
         }
     }
     data->AddLengthArc(id);
-    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
+    VDrawTool::AddRecord(id, Valentina::ArcTool, doc);
     if (parse == Document::FullParse)
     {
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
@@ -156,13 +155,13 @@ void VToolArc::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
 }
 
-void VToolArc::ShowTool(qint64 id, Qt::GlobalColor color, bool enable)
+void VToolArc::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
@@ -183,12 +182,12 @@ void VToolArc::AddToFile()
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-    SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-    SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-    SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+    doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+    doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+    doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
 
     AddToCalculation(domElement);
 }
@@ -199,10 +198,10 @@ void VToolArc::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-        SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-        SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-        SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
+        doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
+        doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
+        doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
+        doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
     }
 }
 
@@ -210,7 +209,7 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Arc);
+        emit ChoosedTool(id, Valentina::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -219,14 +218,14 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
 void VToolArc::RemoveReferens()
@@ -271,15 +270,15 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
-    SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
-    SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
-    SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
+    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
+    doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
+    doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
+    doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
 }
 
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     QPainterPath path;
     path.addPath(arc->GetPath());

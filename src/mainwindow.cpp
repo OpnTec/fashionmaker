@@ -33,9 +33,9 @@
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
-#include "exception/vexceptionwrongparameterid.h"
-#include "exception/vexceptionuniqueid.h"
+#include "exception/vexceptionwrongid.h"
 #include "version.h"
+#include "xml/vstandardmeasurements.h"
 
 #include <QInputDialog>
 #include <QtCore>
@@ -44,48 +44,20 @@
 #include <QShowEvent>
 #include <QScrollBar>
 #include <QFileDialog>
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
 #include <QSourceLocation>
-#include <QAbstractMessageHandler>
-
-//This class need for validation pattern file using XSD shema
-class MessageHandler : public QAbstractMessageHandler
-{
-public:
-    MessageHandler() : QAbstractMessageHandler(0), m_messageType(QtMsgType()), m_description(QString()),
-        m_sourceLocation(QSourceLocation()){}
-    inline QString statusMessage() const {return m_description;}
-    inline qint64     line() const {return m_sourceLocation.line();}
-    inline qint64     column() const {return m_sourceLocation.column();}
-protected:
-    virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation)
-    {
-        Q_UNUSED(type);
-        Q_UNUSED(identifier);
-
-        m_messageType = type;
-        m_description = description;
-        m_sourceLocation = sourceLocation;
-    }
-private:
-    QtMsgType       m_messageType;
-    QString         m_description;
-    QSourceLocation m_sourceLocation;
-};
 
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(0), doc(0), tool(Tool::ArrowTool), currentScene(0),
-      sceneDraw(0), sceneDetails(0), mouseCoordinate(0), helpLabel(0), view(0), isInitialized(false), dialogTable(0),
-      dialogTool(0), dialogHistory(0), comboBoxDraws(0), curFile(QString()), mode(Draw::Calculation),
-      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs{0,0,0,0,0}, separatorAct(0),
-      autoSaveTimer(0)
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Valentina::ArrowTool),
+      currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
+      view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
+      comboBoxDraws(nullptr), curFile(QString()), mode(Valentina::Calculation), currentDrawIndex(0),
+      currentToolBoxIndex(0), drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr),
+      autoSaveTimer(nullptr)
 {
     CreateActions();
     CreateMenus();
-    ToolBarOption();
     ToolBarDraws();
+    InitToolButtons();
 
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
@@ -106,31 +78,10 @@ MainWindow::MainWindow(QWidget *parent)
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
-    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
-    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
-    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
-    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
-    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
-    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
-    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
-    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
-    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
-    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
-    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
-    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
-    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
-    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
-    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
-    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
-    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
-    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
-    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
-
     pattern = new VContainer();
 
-    doc = new VDomDocument(pattern, comboBoxDraws, &mode);
-    doc->CreateEmptyFile();
-    connect(doc, &VDomDocument::patternChanged, this, &MainWindow::PatternWasModified);
+    doc = new VPattern(pattern, comboBoxDraws, &mode);
+    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
 
     InitAutoSave();
 
@@ -143,61 +94,83 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::ActionNewDraw()
 {
-    QString nameDraw;
-    bool bOk;
-    qint32 index;
-    QString nDraw = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-    QInputDialog *dlg = new QInputDialog(this);
-    dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Pattern piece:"));
-    dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a label for the pattern piece."));
-    dlg->resize(300, 100);
-    dlg->setTextValue(nDraw);
-    while (1)
+    QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+    if (comboBoxDraws->count() == 0)
     {
-        bOk = dlg->exec();
-        nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty())
+        QString path;
+        DialogMeasurements measurements(this);
+        measurements.exec();
+        if (measurements.type() == Measurements::Standard)
         {
-            delete dlg;
-            return;
-        }
-        index = comboBoxDraws->findText(nameDraw);
-        if (index != -1)
-        {//we already have this name
-            qCritical()<<tr("Error. Pattern piece of same label already exists.");
+            qApp->setPatternType(Pattern::Standard);
+            DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
+            if (stMeasurements.exec() == QDialog::Accepted)
+            {
+                patternPieceName = stMeasurements.name();
+                path = stMeasurements.tablePath();
+                VStandardMeasurements m(pattern);
+                m.setContent(path);
+                m.SetSize();
+                m.SetHeight();
+                m.Measurements();
+            }
+            else
+            {
+                return;
+            }
         }
         else
         {
-            break;
+            qApp->setPatternType(Pattern::Individual);
+            DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
+            if (indMeasurements.exec() == QDialog::Accepted)
+            {
+                patternPieceName = indMeasurements.name();
+                path = indMeasurements.tablePath();
+                VIndividualMeasurements m(pattern);
+                m.setContent(path);
+                m.Measurements();
+            }
+            else
+            {
+                return;
+            }
+        }
+        doc->CreateEmptyFile(path);
+    }
+    else
+    {
+        patternPieceName = PatternPieceName(patternPieceName);
+        if (patternPieceName.isEmpty())
+        {
+            return;
         }
     }
-    delete dlg;
-    bOk = doc->appendDraw(nameDraw);
-    if (bOk == false)
+    if (doc->appendDraw(patternPieceName) == false)
     {
-        qCritical()<<tr("Error creating pattern with the name ")<<nameDraw<<".";
+        qDebug()<<"Error creating pattern with the name "<<patternPieceName<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                this, &MainWindow::currentDrawChanged);
-    comboBoxDraws->addItem(nameDraw);
+    comboBoxDraws->addItem(patternPieceName);
 
     pattern->ClearGObjects();
     //Create single point
-    qint64 id = pattern->AddGObject(new VPointF(toPixel((10+comboBoxDraws->count()*5)), toPixel(10), "А", 5, 10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Tool::FromGui);
+    const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10), "А", 5,
+                                                       10));
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-    QHash<qint64, VDataTool*>* tools = doc->getTools();
+    QHash<quint32, VDataTool*>* tools = doc->getTools();
+    Q_CHECK_PTR(tools);
     tools->insert(id, spoint);
-    VDrawTool::AddRecord(id, Tool::SinglePointTool, doc);
+    VDrawTool::AddRecord(id, Valentina::SinglePointTool, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
 
-    index = comboBoxDraws->findText(nameDraw);
+    const qint32 index = comboBoxDraws->findText(patternPieceName);
     if ( index != -1 )
     { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
@@ -209,50 +182,24 @@ void MainWindow::ActionNewDraw()
 
 void MainWindow::OptionDraw()
 {
-    QString nameDraw;
-    qint32 index;
-    QString nDraw = doc->GetNameActivDraw();
-    QInputDialog *dlg = new QInputDialog(this);
-    dlg->setInputMode( QInputDialog::TextInput );
-    dlg->setLabelText(tr("Pattern piece:"));
-    dlg->setTextEchoMode(QLineEdit::Normal);
-    dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
-    dlg->resize(300, 100);
-    dlg->setTextValue(nDraw);
-    while (1)
+    const QString activDraw = doc->GetNameActivDraw();
+    const QString nameDraw = PatternPieceName(activDraw);
+    if (nameDraw.isEmpty())
     {
-        bool bOk = dlg->exec();
-        nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty())
-        {
-            delete dlg;
-            return;
-        }
-        index = comboBoxDraws->findText(nameDraw);
-        if (index != -1)
-        {//we already have this name
-            qCritical()<<tr("Error. Pattern piece of same name already exists.");
-        }
-        else
-        {
-            break;
-        }
+        return;
     }
-    delete dlg;
-    index = comboBoxDraws->findText(doc->GetNameActivDraw());
     if (doc->SetNameDraw(nameDraw))
     {
-        comboBoxDraws->setItemText(index, nameDraw);
+        comboBoxDraws->setItemText(comboBoxDraws->findText(activDraw), nameDraw);
     }
     else
     {
         QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new label of pattern piece"));
     }
-
 }
 
 template <typename Dialog, typename Func>
-void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
 {
     if (checked)
@@ -264,11 +211,10 @@ void MainWindow::SetToolButton(bool checked, Tool::Tools t, const QString &curso
         view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, this);
-        Q_CHECK_PTR(dialogTool);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
-        connect(doc, &VDomDocument::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+        connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
     }
     else
     {
@@ -293,7 +239,7 @@ void MainWindow::ClosedDialog(int result)
 
 void MainWindow::ToolEndLine(bool checked)
 {
-    SetToolButton<DialogEndLine>(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                                  &MainWindow::ClosedDialogEndLine);
 }
 
@@ -304,7 +250,7 @@ void MainWindow::ClosedDialogEndLine(int result)
 
 void MainWindow::ToolLine(bool checked)
 {
-    SetToolButton<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
+    SetToolButton<DialogLine>(checked, Valentina::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
                               &MainWindow::ClosedDialogLine);
 }
 
@@ -315,7 +261,7 @@ void MainWindow::ClosedDialogLine(int result)
 
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton<DialogAlongLine>(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
+    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
                                    &MainWindow::ClosedDialogAlongLine);
 }
 
@@ -326,7 +272,7 @@ void MainWindow::ClosedDialogAlongLine(int result)
 
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    SetToolButton<DialogShoulderPoint>(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+    SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint);
 }
 
@@ -337,7 +283,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
 
 void MainWindow::ToolNormal(bool checked)
 {
-    SetToolButton<DialogNormal>(checked, Tool::NormalTool, ":/cursor/normal_cursor.png",
+    SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogNormal);
 }
 
@@ -348,7 +294,7 @@ void MainWindow::ClosedDialogNormal(int result)
 
 void MainWindow::ToolBisector(bool checked)
 {
-    SetToolButton<DialogBisector>(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png",
+    SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
                   tr("Select first point of angle"), &MainWindow::ClosedDialogBisector);
 }
 
@@ -359,7 +305,7 @@ void MainWindow::ClosedDialogBisector(int result)
 
 void MainWindow::ToolLineIntersect(bool checked)
 {
-    SetToolButton<DialogLineIntersect>(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
+    SetToolButton<DialogLineIntersect>(checked, Valentina::LineIntersectTool, ":/cursor/intersect_cursor.png",
                   tr("Select first point of first line"), &MainWindow::ClosedDialogLineIntersect);
 }
 
@@ -370,7 +316,7 @@ void MainWindow::ClosedDialogLineIntersect(int result)
 
 void MainWindow::ToolSpline(bool checked)
 {
-    SetToolButton<DialogSpline>(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
+    SetToolButton<DialogSpline>(checked, Valentina::SplineTool, ":/cursor/spline_cursor.png",
                   tr("Select first point curve"), &MainWindow::ClosedDialogSpline);
 }
 
@@ -381,7 +327,7 @@ void MainWindow::ClosedDialogSpline(int result)
 
 void MainWindow::ToolCutSpline(bool checked)
 {
-    SetToolButton<DialogCutSpline>(checked, Tool::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
+    SetToolButton<DialogCutSpline>(checked, Valentina::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
                   tr("Select simple curve"), &MainWindow::ClosedDialogCutSpline);
 }
 
@@ -392,7 +338,7 @@ void MainWindow::ClosedDialogCutSpline(int result)
 
 void MainWindow::ToolArc(bool checked)
 {
-    SetToolButton<DialogArc>(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
+    SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
                   tr("Select point of center of arc"), &MainWindow::ClosedDialogArc);
 }
 
@@ -403,7 +349,7 @@ void MainWindow::ClosedDialogArc(int result)
 
 void MainWindow::ToolSplinePath(bool checked)
 {
-    SetToolButton<DialogSplinePath>(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
+    SetToolButton<DialogSplinePath>(checked, Valentina::SplinePathTool, ":/cursor/splinepath_cursor.png",
                   tr("Select point of curve path"), &MainWindow::ClosedDialogSplinePath);
 }
 
@@ -414,7 +360,7 @@ void MainWindow::ClosedDialogSplinePath(int result)
 
 void MainWindow::ToolCutSplinePath(bool checked)
 {
-    SetToolButton<DialogCutSplinePath>(checked, Tool::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
+    SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
                   tr("Select curve path"), &MainWindow::ClosedDialogCutSplinePath);
 }
 
@@ -425,7 +371,7 @@ void MainWindow::ClosedDialogCutSplinePath(int result)
 
 void MainWindow::ToolPointOfContact(bool checked)
 {
-    SetToolButton<DialogPointOfContact>(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
+    SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact);
 }
 
@@ -436,7 +382,7 @@ void MainWindow::ClosedDialogPointOfContact(int result)
 
 void MainWindow::ToolDetail(bool checked)
 {
-    SetToolButton<DialogDetail>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
+    SetToolButton<DialogDetail>(checked, Valentina::DetailTool, "://cursor/new_detail_cursor.png",
                                 tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
 }
 
@@ -452,7 +398,7 @@ void MainWindow::ClosedDialogDetail(int result)
 
 void MainWindow::ToolHeight(bool checked)
 {
-    SetToolButton<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
+    SetToolButton<DialogHeight>(checked, Valentina::Height, ":/cursor/height_cursor.png", tr("Select base point"),
                                 &MainWindow::ClosedDialogHeight);
 }
 
@@ -463,7 +409,7 @@ void MainWindow::ClosedDialogHeight(int result)
 
 void MainWindow::ToolTriangle(bool checked)
 {
-    SetToolButton<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
+    SetToolButton<DialogTriangle>(checked, Valentina::Triangle, ":/cursor/triangle_cursor.png",
                                   tr("Select first point of axis"), &MainWindow::ClosedDialogTriangle);
 }
 
@@ -474,7 +420,7 @@ void MainWindow::ClosedDialogTriangle(int result)
 
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
-    SetToolButton<DialogPointOfIntersection>(checked, Tool::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
+    SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
                   tr("Select point vertically"), &MainWindow::ClosedDialogPointOfIntersection);
 }
 
@@ -485,10 +431,10 @@ void MainWindow::ClosedDialogPointOfIntersection(int result)
 
 void MainWindow::ToolUnionDetails(bool checked)
 {
-    SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
+    SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
                                       &MainWindow::ClosedDialogUnionDetails);
     //Must disconnect this signal here.
-    disconnect(doc, &VDomDocument::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+    disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
 }
 
 void MainWindow::ClosedDialogUnionDetails(int result)
@@ -499,7 +445,7 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 
 void MainWindow::ToolCutArc(bool checked)
 {
-    SetToolButton<DialogCutArc>(checked, Tool::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
+    SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
                   &MainWindow::ClosedDialogCutArc);
 }
 
@@ -585,47 +531,43 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::ToolBarOption()
 {
-    QLabel * labelGrowth = new QLabel;
-    labelGrowth->setText(tr("Height: "));
-    ui->toolBarOption->addWidget(labelGrowth);
+    if (qApp->patternType() == Pattern::Standard)
+    {
+        ui->toolBarOption->addWidget(new QLabel(tr("Height: ")));
 
-    QStringList list;
-    list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
-         <<"182"<<"188";
-    QComboBox *comboBoxGrow = new QComboBox;
-    comboBoxGrow->clear();
-    comboBoxGrow->addItems(list);
-    comboBoxGrow->setCurrentIndex(14);
-    ui->toolBarOption->addWidget(comboBoxGrow);
-    connect(comboBoxGrow, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::ChangedHeight);
+        QStringList list;
+        list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
+             <<"182"<<"188";
+        QComboBox *comboBoxHeight = new QComboBox;
+        comboBoxHeight->addItems(list);
+        comboBoxHeight->setCurrentIndex(14);//176
+        ui->toolBarOption->addWidget(comboBoxHeight);
+        connect(comboBoxHeight, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedHeight);
 
-    QLabel * labelSize = new QLabel;
-    labelSize->setText(tr(" Size: "));
-    ui->toolBarOption->addWidget(labelSize);
+        ui->toolBarOption->addWidget(new QLabel(tr(" Size: ")));
 
-    list.clear();
-    list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"<<"56";
-    QComboBox *comboBoxSize = new QComboBox;
-    comboBoxSize->clear();
-    comboBoxSize->addItems(list);
-    comboBoxSize->setCurrentIndex(14);
-    ui->toolBarOption->addWidget(comboBoxSize);
-    connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::ChangedSize);
+        list.clear();
+        list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"
+             <<"56";
+        QComboBox *comboBoxSize = new QComboBox;
+        comboBoxSize->addItems(list);
+        comboBoxSize->setCurrentIndex(14);//50
+        ui->toolBarOption->addWidget(comboBoxSize);
+        connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedSize);
 
-    ui->toolBarOption->addSeparator();
+        ui->toolBarOption->addSeparator();
+    }
 
-    mouseCoordinate = new QLabel;
-    mouseCoordinate ->setText("0, 0");
+    mouseCoordinate = new QLabel("0, 0");
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
 void MainWindow::ToolBarDraws()
 {
-    QLabel * labelNameDraw = new QLabel;
-    labelNameDraw ->setText(tr("Pattern Piece: "));
-    ui->toolBarDraws->addWidget(labelNameDraw);
+    QLabel *labelPtternPieceName = new QLabel(tr("Pattern Piece: "));
+    ui->toolBarDraws->addWidget(labelPtternPieceName);
 
     comboBoxDraws = new QComboBox;
     ui->toolBarDraws->addWidget(comboBoxDraws);
@@ -648,6 +590,29 @@ void MainWindow::ToolBarDraws()
     ui->actionLayout->setEnabled(false);
 }
 
+void MainWindow::InitToolButtons()
+{
+    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
+    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
+    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
+    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
+    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
+    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
+    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
+    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
+    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
+    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
+    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
+    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
+    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
+    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
+    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
+    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
+    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
+    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
+    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
+}
+
 void MainWindow::currentDrawChanged( int index )
 {
     if (index != -1)
@@ -657,7 +622,7 @@ void MainWindow::currentDrawChanged( int index )
         if (drawMode)
         {
             ArrowTool();
-            qint64 id = doc->SPointActiveDraw();
+            quint32 id = doc->SPointActiveDraw();
             if (id != 0)
             {
                 const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
@@ -669,121 +634,123 @@ void MainWindow::currentDrawChanged( int index )
 
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
-    QString string = QString("%1, %2")
-                            .arg(static_cast<qint32>(toMM(scenePos.x())))
-                            .arg(static_cast<qint32>(toMM(scenePos.y())));
-    mouseCoordinate->setText(string);
+    QString string = QString("%1, %2").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                      .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())));
+    if (mouseCoordinate != nullptr)
+    {
+        mouseCoordinate->setText(string);
+    }
 }
 
 void MainWindow::CancelTool()
 {
     delete dialogTool;
-    dialogTool = 0;
+    dialogTool = nullptr;
     switch ( tool )
     {
-        case Tool::ArrowTool:
+        case Valentina::ArrowTool:
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             break;
-        case Tool::SinglePointTool:
+        case Valentina::SinglePointTool:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;
-        case Tool::EndLineTool:
+        case Valentina::EndLineTool:
             ui->toolButtonEndLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::LineTool:
+        case Valentina::LineTool:
             ui->toolButtonLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearFocus();
             break;
-        case Tool::AlongLineTool:
+        case Valentina::AlongLineTool:
             ui->toolButtonAlongLine->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::ShoulderPointTool:
+        case Valentina::ShoulderPointTool:
             ui->toolButtonShoulderPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::NormalTool:
+        case Valentina::NormalTool:
             ui->toolButtonNormal->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::BisectorTool:
+        case Valentina::BisectorTool:
             ui->toolButtonBisector->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::LineIntersectTool:
+        case Valentina::LineIntersectTool:
             ui->toolButtonLineIntersect->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::SplineTool:
+        case Valentina::SplineTool:
             ui->toolButtonSpline->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::ArcTool:
+        case Valentina::ArcTool:
             ui->toolButtonArc->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::SplinePathTool:
+        case Valentina::SplinePathTool:
             ui->toolButtonSplinePath->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::PointOfContact:
+        case Valentina::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::Detail:
+        case Valentina::DetailTool:
             ui->toolButtonNewDetail->setChecked(false);
             break;
-        case Tool::Height:
+        case Valentina::Height:
             ui->toolButtonHeight->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::Triangle:
+        case Valentina::Triangle:
             ui->toolButtonTriangle->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::PointOfIntersection:
+        case Valentina::PointOfIntersection:
             ui->toolButtonPointOfIntersection->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutSplineTool:
+        case Valentina::CutSplineTool:
             ui->toolButtonSplineCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutSplinePathTool:
+        case Valentina::CutSplinePathTool:
             ui->toolButtonSplinePathCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::UnionDetails:
+        case Valentina::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
-        case Tool::CutArcTool:
+        case Valentina::CutArcTool:
             ui->toolButtonArcCutPoint->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
         default:
-            qWarning()<<"Got wrong tool type. Ignored.";
+            qDebug()<<"Got wrong tool type. Ignored.";
             break;
     }
 }
@@ -792,7 +759,7 @@ void  MainWindow::ArrowTool()
 {
     CancelTool();
     ui->actionArrowTool->setChecked(true);
-    tool = Tool::ArrowTool;
+    tool = Valentina::ArrowTool;
     QCursor cur(Qt::ArrowCursor);
     view->setCursor(cur);
     helpLabel->setText("");
@@ -850,7 +817,7 @@ void MainWindow::ActionDraw(bool checked)
         connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
-        mode = Draw::Calculation;
+        mode = Valentina::Calculation;
         comboBoxDraws->setEnabled(true);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
         drawMode = true;
@@ -888,7 +855,7 @@ void MainWindow::ActionDetails(bool checked)
         comboBoxDraws->setEnabled(false);
 
 
-        mode = Draw::Modeling;
+        mode = Valentina::Modeling;
         SetEnableTool(true);
         currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
@@ -996,6 +963,12 @@ void MainWindow::Clear()
     ui->actionSave->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
     SetEnableTool(false);
+    qApp->setPatternUnit(Valentina::Cm);
+    qApp->setPatternType(Pattern::Individual);
+    ui->toolBarOption->clear();
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
 }
 
 void MainWindow::NewPattern()
@@ -1014,14 +987,14 @@ void MainWindow::PatternWasModified()
 void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
-    pattern->SetSize(size*10);
+    pattern->SetSize(size);
     doc->FullUpdateTree();
 }
 
 void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
-    pattern->SetGrowth(growth*10);
+    pattern->SetHeight(growth);
     doc->FullUpdateTree();
 }
 
@@ -1044,7 +1017,6 @@ void MainWindow::ActionTable(bool checked)
     if (checked)
     {
         dialogTable = new DialogIncrements(pattern, doc, this);
-        Q_CHECK_PTR(dialogTable);
         connect(dialogTable, &DialogIncrements::DialogClosed, this, &MainWindow::ClosedActionTable);
         dialogTable->show();
     }
@@ -1059,7 +1031,7 @@ void MainWindow::ClosedActionTable()
 {
     ui->actionTable->setChecked(false);
     delete dialogTable;
-    dialogTable = 0;
+    dialogTable = nullptr;
 }
 
 void MainWindow::ActionHistory(bool checked)
@@ -1068,8 +1040,7 @@ void MainWindow::ActionHistory(bool checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
-        connect(dialogHistory, &DialogHistory::DialogClosed, this,
-                &MainWindow::ClosedActionHistory);
+        connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
     }
     else
@@ -1084,8 +1055,8 @@ void MainWindow::ActionLayout(bool checked)
     Q_UNUSED(checked);
     hide();
     QVector<VItem*> listDetails;
-    const QHash<qint64, VDetail> *details = pattern->DataDetails();
-    QHashIterator<qint64, VDetail> idetail(*details);
+    const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    QHashIterator<quint32, VDetail> idetail(*details);
     while (idetail.hasNext())
     {
         idetail.next();
@@ -1106,7 +1077,7 @@ void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
     bool modelingTools = false;
-    if (mode == Draw::Calculation)
+    if (mode == Valentina::Calculation)
     {
         drawTools = enable;
     }
@@ -1146,113 +1117,12 @@ void MainWindow::MinimumScrollBar()
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
-bool MainWindow::ValidatePattern(const QString &schema, const QString &fileName, QString &errorMsg, qint64 &errorLine,
-                                 qint64 &errorColumn) const
-{
-    errorLine = -1;
-    errorColumn = -1;
-    QFile pattern(fileName);
-    if (pattern.open(QIODevice::ReadOnly) == false)
-    {
-        errorMsg = QString(tr("Can't open pattern file %1:\n%2.").arg(fileName).arg(pattern.errorString()));
-        return false;
-    }
-    QFile fileSchema(schema);
-    if (fileSchema.open(QIODevice::ReadOnly) == false)
-    {
-        errorMsg = QString(tr("Can't open schema file %1:\n%2.").arg(schema).arg(fileSchema.errorString()));
-        return false;
-    }
-
-    MessageHandler messageHandler;
-    QXmlSchema sch;
-    sch.setMessageHandler(&messageHandler);
-    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
-
-    bool errorOccurred = false;
-    if (sch.isValid() == false)
-    {
-        errorOccurred = true;
-    }
-    else
-    {
-        QXmlSchemaValidator validator(sch);
-        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
-        {
-            errorOccurred = true;
-        }
-    }
-
-    if (errorOccurred)
-    {
-        errorMsg = messageHandler.statusMessage();
-        errorLine = messageHandler.line();
-        errorColumn = messageHandler.column();
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
 bool MainWindow::SavePattern(const QString &fileName)
 {
-    try
-    {
-        doc->TestUniqueId();
-    }
-    catch (const VExceptionUniqueId &e)
-    {
-        e.CriticalMessageBox(tr("Error no unique id."), this);
-        return false;
-    }
-    if (fileName.isEmpty())
-    {
-        qWarning()<<tr("Got empty file name.");
-        return false;
-    }
-    //Writing in temporary file
     QFileInfo tempInfo(fileName);
-    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
-    QFile tempFile(temp);
-    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
-    {
-        const int Indent = 4;
-        QTextStream out(&tempFile);
-        doc->save(out, Indent);
-        tempFile.close();
-    }
-    //Replace temp file our
-    bool result = false;
-    QFile patternFile(fileName);
-    // We need here temporary file because we need restore pattern after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
-    {
-        patternFile.copy(tempOfPattern.fileName());
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        if ( tempFile.copy(patternFile.fileName()) == false )
-        {
-            qWarning()<<tr("Could not copy temp file to pattern file")<<Q_FUNC_INFO;
-            tempOfPattern.copy(fileName);
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
-    }
-    else
-    {
-        qWarning()<<tr("Could not remove pattern file")<<Q_FUNC_INFO;
-        result = false;
-    }
+    const bool result = doc->SaveDocument(fileName);
     if (result)
     {
-        tempFile.remove();
         if (tempInfo.suffix() != "autosave")
         {
             setCurrentFile(fileName);
@@ -1269,7 +1139,7 @@ void MainWindow::AutoSavePattern()
         QString autofile = curFile +".autosave";
         if (SavePattern(autofile) == false)
         {
-            qWarning()<<tr("Can not save pattern")<<Q_FUNC_INFO;
+            qDebug()<<"Can not save pattern"<<Q_FUNC_INFO;
         }
     }
 }
@@ -1336,9 +1206,13 @@ bool MainWindow::MaybeSave()
                                                              "Do you want to save your changes?"),
                                    QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
+        {
             return Save();
+        }
         else if (ret == QMessageBox::Cancel)
+        {
             return false;
+        }
     }
     return true;
 }
@@ -1373,7 +1247,6 @@ void MainWindow::CreateMenus()
         ui->menuFile->insertAction(ui->actionExit, recentFileActs[i]);
     }
     separatorAct = new QAction(this);
-    Q_CHECK_PTR(separatorAct);
     separatorAct->setSeparator(true);
     ui->menuFile->insertAction(ui->actionExit, separatorAct);
     UpdateRecentFileActions();
@@ -1404,7 +1277,6 @@ void MainWindow::CreateActions()
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         recentFileActs[i] = new QAction(this);
-        Q_CHECK_PTR(recentFileActs[i]);
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
     }
@@ -1414,7 +1286,7 @@ void MainWindow::InitAutoSave()
 {
     //Autosaving file each 5 minutes
     delete autoSaveTimer;
-    autoSaveTimer = 0;
+    autoSaveTimer = nullptr;
 
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
@@ -1429,11 +1301,38 @@ void MainWindow::InitAutoSave()
         }
 
         autoSaveTimer = new QTimer(this);
-        Q_CHECK_PTR(autoSaveTimer);
         autoSaveTimer->setTimerType(Qt::VeryCoarseTimer);
         connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
         autoSaveTimer->start(autoTime*60000);
     }
+}
+
+QString MainWindow::PatternPieceName(const QString &text)
+{
+    QInputDialog *dlg = new QInputDialog(this);
+    dlg->setInputMode( QInputDialog::TextInput );
+    dlg->setLabelText(tr("Pattern piece:"));
+    dlg->setTextEchoMode(QLineEdit::Normal);
+    dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
+    dlg->resize(300, 100);
+    dlg->setTextValue(text);
+    QString nameDraw;
+    while (1)
+    {
+        const bool bOk = dlg->exec();
+        nameDraw = dlg->textValue();
+        if (bOk == false || nameDraw.isEmpty())
+        {
+            delete dlg;
+            return QString();
+        }
+        if (comboBoxDraws->findText(nameDraw) == -1)
+        {
+            break;
+        }
+    }
+    delete dlg;
+    return nameDraw;
 }
 
 MainWindow::~MainWindow()
@@ -1449,123 +1348,165 @@ MainWindow::~MainWindow()
 
 void MainWindow::LoadPattern(const QString &fileName)
 {
-    QFile file(fileName);
-    QString errorMsg;
-    qint64 errorLine = 0;
-    qint64 errorColumn = 0;
-    if (file.open(QIODevice::ReadOnly))
+    try
     {
-        if (ValidatePattern("://schema/pattern.xsd", fileName, errorMsg, errorLine, errorColumn))
+        VDomDocument::ValidateXML("://schema/pattern.xsd", fileName);
+        doc->setContent(fileName);
+
+        qApp->setPatternUnit(doc->MUnit());
+        qApp->setPatternType(doc->MType());
+        QString path = doc->MPath();
+
+        path = CheckPathToMeasurements(path, qApp->patternType());
+        if(path.isEmpty())
         {
-            qint32 errorLine = 0;
-            qint32 errorColumn = 0;
-            if (doc->setContent(&file, &errorMsg, &errorLine, &errorColumn))
+            Clear();
+            return;
+        }
+
+        QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
+                .arg(doc->UnitsToStr(qApp->patternUnit()));
+        if (qApp->patternType() == Pattern::Standard)
+        {
+            VStandardMeasurements m(pattern);
+            m.setContent(path);
+            Valentina::Units mUnit = m.Unit();
+            if (qApp->patternUnit() != mUnit)
             {
-                disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                           this, &MainWindow::currentDrawChanged);
-                try
-                {
-                    #ifndef QT_NO_CURSOR
-                        QApplication::setOverrideCursor(Qt::WaitCursor);
-                    #endif
-                    doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
-                    #ifndef QT_NO_CURSOR
-                        QApplication::restoreOverrideCursor();
-                    #endif
-                        ui->actionPattern_properties->setEnabled(true);
-                }
-                catch (const VExceptionObjectError &e)
-                {
-                    e.CriticalMessageBox(tr("Error parsing file."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionConversionError &e)
-                {
-                    e.CriticalMessageBox(tr("Error can't convert value."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionEmptyParameter &e)
-                {
-                    e.CriticalMessageBox(tr("Error empty parameter."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionWrongParameterId &e)
-                {
-                    e.CriticalMessageBox(tr("Error wrong id."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                catch (const VExceptionUniqueId &e)
-                {
-                    e.CriticalMessageBox(tr("Error no unique id."), this);
-                    file.close();
-                    Clear();
-                    return;
-                }
-                connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                        this, &MainWindow::currentDrawChanged);
-                QString nameDraw = doc->GetNameActivDraw();
-                qint32 index = comboBoxDraws->findText(nameDraw);
-                if ( index != -1 )
-                { // -1 for not found
-                    comboBoxDraws->setCurrentIndex(index);
-                }
-                if (comboBoxDraws->count() > 0)
-                {
-                    SetEnableTool(true);
-                }
-                else
-                {
-                    SetEnableTool(false);
-                }
-                SetEnableWidgets(true);
+                QMessageBox::critical(this, tr("Wrong units."), text);
+                Clear();
+                return;
             }
-            else
+            m.SetSize();
+            m.SetHeight();
+            ToolBarOption();
+        }
+        else
+        {
+            VIndividualMeasurements m(pattern);
+            m.setContent(path);
+            Valentina::Units mUnit = m.Unit();
+            if (qApp->patternUnit() != mUnit)
             {
-                QMessageBox msgBox(this);
-                msgBox.setWindowTitle(tr("Error!"));
-                msgBox.setText(tr("Parsing pattern file error."));
-                msgBox.setInformativeText(errorMsg);
-                msgBox.setStandardButtons(QMessageBox::Ok);
-                msgBox.setDefaultButton(QMessageBox::Ok);
-                QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
-                msgBox.setDetailedText(error);
-                msgBox.exec();
-                file.close();
+                QMessageBox::critical(this, tr("Wrong units."), text);
                 Clear();
                 return;
             }
         }
-        else
-        {
-            QMessageBox msgBox(this);
-            msgBox.setWindowTitle(tr("Error!"));
-            msgBox.setText(tr("Validation file error."));
-            msgBox.setInformativeText(errorMsg);
-            msgBox.setStandardButtons(QMessageBox::Ok);
-            msgBox.setDefaultButton(QMessageBox::Ok);
-            QString error = QString(tr("Error in line %1 column %2")).arg(errorLine).arg(errorColumn);
-            msgBox.setDetailedText(error);
-            msgBox.exec();
-            file.close();
-            Clear();
-            return;
-        }
-        file.close();
+    }
+    catch(VException &e)
+    {
+        e.CriticalMessageBox(tr("File error."), this);
+        Clear();
+        return;
+    }
+
+    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+               this, &MainWindow::currentDrawChanged);
+    try
+    {
+        #ifndef QT_NO_CURSOR
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+        #endif
+
+        doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+
+        #ifndef QT_NO_CURSOR
+            QApplication::restoreOverrideCursor();
+        #endif
+            ui->actionPattern_properties->setEnabled(true);
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        e.CriticalMessageBox(tr("Error can't convert value."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        e.CriticalMessageBox(tr("Error wrong id."), this);
+        Clear();
+        return;
+    }
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::currentDrawChanged);
+    QString nameDraw = doc->GetNameActivDraw();
+    qint32 index = comboBoxDraws->findText(nameDraw);
+    if ( index != -1 )
+    { // -1 for not found
+        comboBoxDraws->setCurrentIndex(index);
+    }
+    if (comboBoxDraws->count() > 0)
+    {
+        SetEnableTool(true);
     }
     else
     {
-        QMessageBox::warning(this, tr("Valentina"), tr("Cannot read file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
+        SetEnableTool(false);
     }
+    SetEnableWidgets(true);
+
     setCurrentFile(fileName);
     helpLabel->setText(tr("File loaded"));
+}
+
+QString MainWindow::CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType)
+{
+    QFile table(path);
+    if (table.exists() == false)
+    {
+        QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> %3").arg(path)
+                .arg(tr("could not be found. Do you want to update the file location"));
+        QMessageBox::StandardButton res = QMessageBox::question(this, "Loading measurements file", text,
+                                                                QMessageBox::Yes | QMessageBox::No,
+                                                                QMessageBox::Yes);
+        if(res == QMessageBox::No)
+        {
+            return QString();
+        }
+        else
+        {
+            QString filter;
+            if (patternType == Pattern::Standard)
+            {
+                filter = tr("Standard measurements (*.vst)");
+            }
+            else
+            {
+                filter = tr("Individual measurements (*.vit)");
+            }
+            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+
+            if(mPath.isEmpty())
+            {
+                return mPath;
+            }
+            else
+            {
+                if (patternType == Pattern::Standard)
+                {
+                    VDomDocument::ValidateXML("://schema/standard_measurements.xsd", mPath);
+                }
+                else
+                {
+                    VDomDocument::ValidateXML("://schema/individual_measurements.xsd", mPath);
+                }
+                doc->SetPath(mPath);
+                return mPath;
+            }
+        }
+    }
+    return path;
 }

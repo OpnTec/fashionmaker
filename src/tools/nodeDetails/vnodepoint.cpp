@@ -29,26 +29,27 @@
 #include "vnodepoint.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
-VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                       const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
+                       const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(toPixel(1.5)),
-      namePoint(0), lineName(0)
+    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(qApp->toPixel(1.5)),
+      namePoint(nullptr), lineName(nullptr)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
-    this->setPen(QPen(Qt::black, toPixel(widthHairLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -58,17 +59,16 @@ VNodePoint::VNodePoint(VDomDocument *doc, VContainer *data, qint64 id, qint64 id
     }
 }
 
-void VNodePoint::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idPoint,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
+void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
                         QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
+    VAbstractTool::AddRecord(id, Valentina::NodePoint, doc);
     if (parse == Document::FullParse)
     {
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
-        Q_CHECK_PTR(point);
         doc->AddTool(id, point);
         if (idTool != 0)
         {
@@ -105,14 +105,14 @@ void VNodePoint::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -124,12 +124,12 @@ void VNodePoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, idNode);
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
+        doc->SetAttribute(domElement, AttrIdObject, idNode);
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }
@@ -138,7 +138,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Point);
+        emit ChoosedTool(id, Valentina::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -146,13 +146,13 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 
@@ -172,8 +172,8 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrMx, QString().setNum(toMM(mx)));
-        SetAttribute(domElement, AttrMy, QString().setNum(toMM(my)));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
         emit toolhaveChange();
     }
 }
@@ -201,7 +201,7 @@ void VNodePoint::RefreshLine()
     LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (QLineF(p1, pRec - scenePos()).length() <= toPixel(4))
+    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4))
     {
         lineName->setVisible(false);
     }

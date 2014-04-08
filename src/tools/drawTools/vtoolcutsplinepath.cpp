@@ -28,15 +28,15 @@
 
 #include "vtoolcutsplinepath.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogcutsplinepath.h"
+#include "../../dialogs/tools/dialogcutsplinepath.h"
 
 const QString VToolCutSplinePath::ToolType = QStringLiteral("cutSplinePath");
 const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
 
-VToolCutSplinePath::VToolCutSplinePath(VDomDocument *doc, VContainer *data, const qint64 &id,
-                                       const QString &formula, const qint64 &splinePathId,
-                                       const qint64 &splPath1id, const qint64 &splPath2id,
-                                       const Tool::Sources &typeCreation, QGraphicsItem *parent)
+VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id,
+                                       const QString &formula, const quint32 &splinePathId,
+                                       const quint32 &splPath1id, const quint32 &splPath2id,
+                                       const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), splinePathId(splinePathId), firstSpline(), secondSpline(),
       splPath1id (splPath1id), splPath2id(splPath2id)
 {
@@ -45,18 +45,16 @@ VToolCutSplinePath::VToolCutSplinePath(VDomDocument *doc, VContainer *data, cons
     Q_ASSERT_X(splPath2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
     firstSpline = new VSimpleSpline(splPath1id, &currentColor, &factor);
-    Q_CHECK_PTR(firstSpline);
     RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
     secondSpline = new VSimpleSpline(splPath2id, &currentColor, &factor);
-    Q_CHECK_PTR(secondSpline);
     RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -77,53 +75,56 @@ void VToolCutSplinePath::setDialog()
     dialogTool->setPointName(point->name());
 }
 
-void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
-    qint64 splinePathId = dialogTool->getSplinePathId();
-    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Tool::FromGui);
+    quint32 splinePathId = dialogTool->getSplinePathId();
+    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
-void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, const QString &formula,
-                            const qint64 &splinePathId, const qreal &mx, const qreal &my,
-                            VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data,
-                            const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, const QString &formula,
+                            const quint32 &splinePathId, const qreal &mx, const qreal &my,
+                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
+    Q_CHECK_PTR(splPath);
     Calculator cal(data);
     QString errorMsg;
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
+        quint32 id = _id;
         QPointF spl1p2, spl1p3, spl2p2, spl2p3;
         qint32 p1 = 0, p2 = 0;
-        QPointF point = splPath->CutSplinePath(toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
 
-        qint64 id = _id;
-        qint64 splPath1id = 0;
-        qint64 splPath2id = 0;
-        if (typeCreation == Tool::FromGui)
+        const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
+        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        if (typeCreation == Valentina::FromGui)
         {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
             id = data->AddGObject(p);
-            splPath1id = id + 1;
-            splPath2id = id + 2;
+        }
+        else
+        {
+            data->UpdateGObject(id, p);
+        }
 
-            VSplinePoint splP1 = splPath->at(p1);
-            VSplinePoint splP2 = splPath->at(p2);
-            VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
-            VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
+        quint32 splPath1id = id + 1;
+        quint32 splPath2id = id + 2;
 
+        VSplinePoint splP1 = splPath->at(p1);
+        VSplinePoint splP2 = splPath->at(p2);
+        const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
+        const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
 
-            VSplinePath *splPath1 = new VSplinePath();
-            Q_CHECK_PTR(splPath1);
-            VSplinePath *splPath2 = new VSplinePath();
-            Q_CHECK_PTR(splPath2);
+        VSplinePath *splPath1 = new VSplinePath();
+        VSplinePath *splPath2 = new VSplinePath();
+        if (typeCreation == Valentina::FromGui)
+        {
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
             {
                 if (i <= p1 && i < p2)
@@ -132,8 +133,8 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                     {
                         splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
                                                       spl1.GetAngle1()));
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
-                                                             spl1.GetAngle2()+180, spl1.GetAngle2());
+                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                                   spl1.GetAngle2()+180, spl1.GetAngle2());
                         splPath1->append(cutPoint);
                         continue;
                     }
@@ -143,8 +144,8 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p2)
                     {
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180, spl2.GetKasm1(),
-                                                             spl2.GetAngle1());
+                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
+                                                                   spl2.GetKasm1(), spl2.GetAngle1());
                         splPath2->append(cutPoint);
                         splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
                                                       spl2.GetAngle2()+180));
@@ -158,29 +159,13 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             splPath1id = data->AddGObject(splPath1);
-            data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
 
             splPath2id = data->AddGObject(splPath2);
-            data->AddLengthSpline(splPath2->name(), toMM(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
         }
         else
         {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            Q_CHECK_PTR(p);
-            data->UpdateGObject(id, p);
-
-            splPath1id = id + 1;
-            splPath2id = id + 2;
-
-            VSplinePoint splP1 = splPath->at(p1);
-            VSplinePoint splP2 = splPath->at(p2);
-            VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
-            VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
-
-            VSplinePath *splPath1 = new VSplinePath();
-            Q_CHECK_PTR(splPath1);
-            VSplinePath *splPath2 = new VSplinePath();
-            Q_CHECK_PTR(splPath2);
             for (qint32 i = 0; i < splPath->CountPoint(); i++)
             {
                 if (i <= p1 && i < p2)
@@ -189,8 +174,8 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                     {
                         splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
                                                       spl1.GetAngle1()));
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
-                                                             spl2.GetKasm1(), spl1.GetAngle2()+180);
+                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                                   spl2.GetKasm1(), spl1.GetAngle2()+180);
                         splPath1->append(cutPoint);
                         continue;
                     }
@@ -200,8 +185,8 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
                 {
                     if (i == p2)
                     {
-                        VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180, spl2.GetKasm1(),
-                                                             spl2.GetAngle1());
+                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
+                                                                   spl2.GetKasm1(), spl2.GetAngle1());
                         splPath2->append(cutPoint);
                         splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
                                                       spl2.GetAngle2()+180));
@@ -215,17 +200,17 @@ void VToolCutSplinePath::Create(const qint64 _id, const QString &pointName, cons
             splPath2->setMaxCountPoints(splPath->CountPoint());
 
             data->UpdateGObject(splPath1id, splPath1);
-            data->AddLengthSpline(splPath1->name(), toMM(splPath1->GetLength()));
+            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
 
             data->UpdateGObject(splPath2id, splPath2);
-            data->AddLengthSpline(splPath2->name(), toMM(splPath2->GetLength()));
+            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
 
             if (parse != Document::FullParse)
             {
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::CutSplinePathTool, doc);
+        VDrawTool::AddRecord(id, Valentina::CutSplinePathTool, doc);
         if (parse == Document::FullParse)
         {
             VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
@@ -247,36 +232,31 @@ void VToolCutSplinePath::FullUpdateFromFile()
     if (domElement.isElement())
     {
         formula = domElement.attribute(AttrLength, "");
-        splinePathId = domElement.attribute(AttrSplinePath, "").toLongLong();
+        splinePathId = domElement.attribute(AttrSplinePath, "").toUInt();
     }
     RefreshGeometry();
 }
 
-void VToolCutSplinePath::SplineChoosed(qint64 id)
+void VToolCutSplinePath::SplineChoosed(quint32 id)
 {
-    emit ChoosedTool(id, Scene::SplinePath);
+    emit ChoosedTool(id, Valentina::SplinePath);
 }
 
 void VToolCutSplinePath::ChangedActivDraw(const QString &newName)
 {
+    bool flag = true;
     if (nameActivDraw == newName)
     {
         currentColor = Qt::black;
-        firstSpline->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        firstSpline->setAcceptHoverEvents(true);
-        secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        secondSpline->setAcceptHoverEvents(true);
+        flag = true;
     }
     else
     {
         currentColor = Qt::gray;
-        firstSpline->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        firstSpline->setAcceptHoverEvents(false);
-        secondSpline->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        secondSpline->setAcceptHoverEvents(false);
+        flag = false;
     }
-    firstSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
-    secondSpline->setPen(QPen(currentColor, toPixel(widthHairLine)/factor));
+    firstSpline->ChangedActivDraw(flag);
+    secondSpline->ChangedActivDraw(flag);
     VToolPoint::ChangedActivDraw(newName);
 }
 
@@ -295,14 +275,14 @@ void VToolCutSplinePath::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
-    SetAttribute(domElement, AttrLength, formula);
-    SetAttribute(domElement, AttrSplinePath, splinePathId);
+    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
 
     AddToCalculation(domElement);
 }
@@ -313,11 +293,11 @@ void VToolCutSplinePath::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrLength, formula);
-        SetAttribute(domElement, AttrSplinePath, splinePathId);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrSplinePath, splinePathId);
     }
 }
 
@@ -338,12 +318,12 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
 }
 
-void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, qint64 splPathid, SimpleSpline::Translation tr)
+void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSpline::Translation tr)
 {
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(splPathid);
     QPainterPath path;

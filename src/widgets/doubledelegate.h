@@ -43,7 +43,7 @@ public:
              * @brief DoubleSpinBoxDelegate constructor.
              * @param parent parent object.
              */
-    DoubleSpinBoxDelegate(QObject *parent = 0): QItemDelegate(parent), lastValue(-10001.0){}
+    DoubleSpinBoxDelegate(QObject *parent = nullptr): QItemDelegate(parent), lastValue(-10001.0){}
     /**
      * @brief createEditorReturns the widget used to edit the item specified by index for editing. The parent widget and
      * style option are used to control how the editor widget appears.

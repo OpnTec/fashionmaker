@@ -55,7 +55,7 @@ public:
                * @brief MainWindow constructor.
                * @param parent parent widget.
                */
-              explicit MainWindow(QWidget *parent = 0);
+              explicit MainWindow(QWidget *parent = nullptr);
                        ~MainWindow();
     /**
      * @brief LoadPattern open pattern file.
@@ -403,11 +403,11 @@ private:
     /**
      * @brief doc dom document container
      */
-    VDomDocument      *doc;
+    VPattern          *doc;
     /**
      * @brief tool current tool
      */
-    Tool::Tools        tool;
+    Valentina::Tools        tool;
     /**
      * @brief currentScene pointer to current scene.
      */
@@ -450,7 +450,7 @@ private:
     /**
      * @brief mode keep current draw mode.
      */
-    Draw::Draws        mode;
+    Valentina::Draws        mode;
     /**
      * @brief currentDrawIndex save current selected pattern peace.
      */
@@ -475,6 +475,7 @@ private:
      * @brief ToolBarDraws enable draw toolbar.
      */
     void               ToolBarDraws();
+    void               InitToolButtons();
     /**
      * @brief CanselTool cansel tool.
      */
@@ -510,23 +511,12 @@ private:
      * @param toolTip first tooltipe.
      * @param closeDialogSlot function what handle after close dialog.
      */
-    void               SetToolButton(bool checked, Tool::Tools t, const QString &cursor, const QString &toolTip,
+    void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
     /**
      * @brief MinimumScrollBar set scroll bar to minimum.
      */
     void               MinimumScrollBar();
-    /**
-     * @brief ValidatePattern validate pattern file by xsd schema.
-     * @param schema path to schema file.
-     * @param fileName name of pattern file.
-     * @param errorMsg error message.
-     * @param errorLine number error line.
-     * @param errorColumn number error column.
-     * @return true if validation successful.
-     */
-    bool ValidatePattern(const QString &schema, const QString &curFile, QString &errorMsg, qint64 &errorLine,
-                         qint64 &errorColumn) const;
     template <typename DrawTool>
     /**
      * @brief ClosedDialog handle close dialog
@@ -572,6 +562,8 @@ private:
     void               CreateMenus();
     void               CreateActions();
     void               InitAutoSave();
+    QString            PatternPieceName(const QString &text);
+    QString            CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType);
 };
 
 #endif // MAINWINDOW_H

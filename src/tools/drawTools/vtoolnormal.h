@@ -51,10 +51,10 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolNormal(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                               const QString &formula, const qreal &angle, const qint64 &firstPointId,
-                               const qint64 &secondPointId, const Tool::Sources &typeCreation,
-                               QGraphicsItem * parent = 0);
+                   VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                               const QString &formula, const qreal &angle, const quint32 &firstPointId,
+                               const quint32 &secondPointId, const Valentina::Sources &typeCreation,
+                               QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -66,7 +66,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -84,11 +84,11 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
-                          const qint64 &secondPointId, const QString &typeLine, const QString &pointName,
+    static void    Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                           const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                          const Tool::Sources &typeCreation);
+                          VPattern *doc, VContainer *data, const Document::Documents &parse,
+                          const Valentina::Sources &typeCreation);
     /**
      * @brief FindPoint return normal point.
      * @param firstPoint first line point.
@@ -141,7 +141,7 @@ private:
     /**
      * @brief secondPointId id second line point.
      */
-    qint64         secondPointId;
+    quint32         secondPointId;
 };
 
 #endif // VTOOLNORMAL_H

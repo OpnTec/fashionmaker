@@ -72,7 +72,7 @@ void VDetail::ClearNodes()
     nodes.clear();
 }
 
-bool VDetail::Containes(const qint64 &id) const
+bool VDetail::Containes(const quint32 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
@@ -95,27 +95,27 @@ const VNodeDetail &VDetail::at(ptrdiff_t indx) const
     return nodes[indx];
 }
 
-ptrdiff_t VDetail::indexOfNode(const qint64 &id) const
+ptrdiff_t VDetail::indexOfNode(const quint32 &id) const
 {
     return indexOfNode(nodes, id);
 }
 
-qint64 VDetail::id() const
+quint32 VDetail::id() const
 {
     return _id;
 }
 
-void VDetail::setId(const qint64 &id)
+void VDetail::setId(const quint32 &id)
 {
     _id = id;
 }
 
-bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
+bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
     if (list.size() < 3)
     {
-        qWarning()<<"Not enough points.";
+        qDebug()<<"Not enough points.";
         return false;
     }
     ptrdiff_t i = indexOfNode(list, p1);
@@ -147,11 +147,11 @@ bool VDetail::OnEdge(const qint64 &p1, const qint64 &p2) const
     }
 }
 
-ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
+ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
     {
-        qWarning()<<"Points don't on edge.";
+        qDebug()<<"Points don't on edge.";
         return -1;
     }
 
@@ -171,16 +171,16 @@ ptrdiff_t VDetail::Edge(const qint64 &p1, const qint64 &p2) const
     }
 }
 
-void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p2) const
+void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
-    if (index < 0 || index > list.size())
+    if (index > static_cast<quint32>(list.size()))
     {
-        qWarning()<<"Wrong edge index index ="<<index;
+        qDebug()<<"Wrong edge index index ="<<index;
         return;
     }
     p1 = list.at(index);
-    if (index + 1 > list.size() - 1)
+    if (index + 1 > static_cast<quint32>(list.size()) - 1)
     {
         p2 = list.at(0);
     }
@@ -190,15 +190,15 @@ void VDetail::NodeOnEdge(const ptrdiff_t &index, VNodeDetail &p1, VNodeDetail &p
     }
 }
 
-VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
+VDetail VDetail::RemoveEdge(const quint32 &index) const
 {
     VDetail det(*this);
     det.ClearNodes();
 
     QVector<VNodeDetail> list = this->listNodePoint();
-    qint32 edge = list.size();
-    ptrdiff_t k = 0;
-    for (ptrdiff_t i=0; i<edge; ++i)
+    quint32 edge = static_cast<quint32>(list.size());
+    quint32 k = 0;
+    for (quint32 i=0; i<edge; ++i)
     {
         if (i == index)
         {
@@ -232,9 +232,9 @@ VDetail VDetail::RemoveEdge(const ptrdiff_t &index) const
     return det;
 }
 
-QList<qint64> VDetail::Missing(const VDetail &det) const
+QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    QList<qint64> list;
+    QList<quint32> list;
     if (nodes.size() == det.CountNode())
     {
         return list;
@@ -260,7 +260,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     QVector<VNodeDetail> list;
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getTypeTool() == Tool::NodePoint)
+        if (nodes[i].getTypeTool() == Valentina::NodePoint)
         {
             list.append(nodes[i]);
         }
@@ -268,7 +268,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     return list;
 }
 
-ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &id)
+ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)
     {
@@ -277,6 +277,6 @@ ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const qint64 &i
             return i;
         }
     }
-    qWarning()<<"Can't find node.";
+    qDebug()<<"Can't find node.";
     return -1;
 }

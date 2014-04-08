@@ -31,12 +31,12 @@
 #include "widgets/vtablegraphicsview.h"
 #include <QtSvg>
 #include <QPrinter>
-#include "options.h"
+#include "widgets/vapplication.h"
 
 TableWindow::TableWindow(QWidget *parent)
-    :QMainWindow(parent), numberDetal(0), colission(0), ui(new Ui::TableWindow),
-    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(0),
-    paper(0), shadowPaper(0), listOutItems(0), listCollidingItems(QList<QGraphicsItem*>()),
+    :QMainWindow(parent), numberDetal(nullptr), colission(nullptr), ui(new Ui::TableWindow),
+    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(nullptr),
+    paper(nullptr), shadowPaper(nullptr), listOutItems(nullptr), listCollidingItems(QList<QGraphicsItem*>()),
     indexDetail(0), sceneRect(QRectF()), fileName(QString()), description(QString())
 {
     ui->setupUi(this);
@@ -45,8 +45,8 @@ TableWindow::TableWindow(QWidget *parent)
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
-    //sceneRect = QRectF(0, 0, toPixel(203), toPixel(287));
-    sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
+    //sceneRect = QRectF(0, 0, qApp->toPixel(203), qApp->toPixel(287));
+    sceneRect = QRectF(0, 0, qApp->toPixel(823), qApp->toPixel(1171));
     tableScene = new QGraphicsScene(sceneRect);
     QBrush brush;
     brush.setStyle( Qt::SolidPattern );
@@ -81,7 +81,7 @@ void TableWindow::AddPaper()
     shadowPaper->setBrush(QBrush(Qt::black));
     tableScene->addItem(shadowPaper);
     paper = new QGraphicsRectItem(QRectF(x1, y1, x2, y2));
-    paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+    paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
     paper->setBrush(QBrush(Qt::white));
     tableScene->addItem(paper);
     qDebug()<<paper->rect().size().toSize();
@@ -168,7 +168,7 @@ void TableWindow::StopTable()
     delete listOutItems;
     listDetails.clear();
     //sceneRect = QRectF(0, 0, 230*resol/25.9, 327*resol/25.9);
-    sceneRect = QRectF(0, 0, toPixel(823), toPixel(1171));
+    sceneRect = QRectF(0, 0, qApp->toPixel(823), qApp->toPixel(1171));
     emit closed();
 }
 
@@ -216,6 +216,7 @@ void TableWindow::saveScene()
     tableScene->setBackgroundBrush( *brush );
     tableScene->clearSelection(); // Selections would also render to the file, so need delete them
     shadowPaper->setVisible(false);
+    paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
     QFileInfo fi( name );
     QStringList suffix;
     suffix << "svg" << "png" << "pdf" << "eps" << "ps";
@@ -226,30 +227,23 @@ void TableWindow::saveScene()
         SvgFile(name);
         paper->setVisible(true);
         break;
-    case 1: //png
-        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+    case 1: //png        
         PngFile(name);
-        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 2: //pdf
-        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
-        PdfFile(name);
-        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+        PdfFile(name);   
         break;
     case 3: //eps
-        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         EpsFile(name);
-        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     case 4: //ps
-        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
         PsFile(name);
-        paper->setPen(QPen(Qt::black, toPixel(widthMainLine)));
         break;
     default:
-        qWarning() << "Bad file suffix"<<Q_FUNC_INFO;
+        qDebug() << "Bad file suffix"<<Q_FUNC_INFO;
         break;
     }
+    paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
     brush->setColor( QColor( Qt::gray ) );
     brush->setStyle( Qt::SolidPattern );
     tableScene->setBackgroundBrush( *brush );
@@ -323,7 +317,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
                             Q_CHECK_PTR(bitem);
-                            bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                            bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
                             listCollidingItems.removeAt(i);
                         }
                     }
@@ -332,7 +326,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
                     Q_CHECK_PTR(bitem);
-                    bitem->setPen(QPen(Qt::black, toPixel(widthMainLine)));
+                    bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
                     listCollidingItems.clear();
                     collidingItems = true;
                 }
@@ -378,13 +372,13 @@ void TableWindow::GetNextDetail()
 void TableWindow::AddLength()
 {
     QRectF rect = tableScene->sceneRect();
-    rect.setHeight(rect.height()+toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279));
     tableScene->setSceneRect(rect);
     rect = shadowPaper->rect();
-    rect.setHeight(rect.height()+toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279));
     shadowPaper->setRect(rect);
     rect = paper->rect();
-    rect.setHeight(rect.height()+toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279));
     paper->setRect(rect);
     ui->actionRemove->setEnabled(true);
     emit LengthChanged();
@@ -395,13 +389,13 @@ void TableWindow::RemoveLength()
     if (sceneRect.height() <= tableScene->sceneRect().height() - 100)
     {
         QRectF rect = tableScene->sceneRect();
-        rect.setHeight(rect.height()-toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279));
         tableScene->setSceneRect(rect);
         rect = shadowPaper->rect();
-        rect.setHeight(rect.height()-toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279));
         shadowPaper->setRect(rect);
         rect = paper->rect();
-        rect.setHeight(rect.height()-toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279));
         paper->setRect(rect);
         if (fabs(sceneRect.height() - tableScene->sceneRect().height()) < 0.01)
         {
@@ -437,12 +431,12 @@ void TableWindow::SvgFile(const QString &name) const
     generator.setViewBox(paper->rect());
     generator.setTitle("Valentina pattern");
     generator.setDescription(description);
-    generator.setResolution(PrintDPI);
+    generator.setResolution(static_cast<int>(qApp->PrintDPI));
     QPainter painter;
     painter.begin(&generator);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, toPixel(widthHairLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
@@ -459,7 +453,7 @@ void TableWindow::PngFile(const QString &name) const
     QPainter painter(&image);
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     image.save(name);
@@ -473,8 +467,8 @@ void TableWindow::PdfFile(const QString &name) const
     QRectF r = paper->rect();
     qreal x=0, y=0, w=0, h=0;
     r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
-    printer.setResolution(PrintDPI);
-    printer.setPaperSize ( QSizeF(toMM(w), toMM(h)), QPrinter::Millimeter );
+    printer.setResolution(static_cast<int>(qApp->PrintDPI));
+    printer.setPaperSize ( QSizeF(qApp->fromPixel(w), qApp->fromPixel(h)), QPrinter::Millimeter );
     QPainter painter;
     if (painter.begin( &printer ) == false)
     { // failed to open file
@@ -483,7 +477,7 @@ void TableWindow::PdfFile(const QString &name) const
     }
     painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, toPixel(widthMainLine), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
     tableScene->render(&painter);
     painter.end();
@@ -499,8 +493,8 @@ void TableWindow::EpsFile(const QString &name) const
         QStringList params;
         params << "-eps" << tmp.fileName() << name;
 
-        PdfToPs(name, params);
-    } 
+        PdfToPs(params);
+    }
 }
 
 void TableWindow::PsFile(const QString &name) const
@@ -513,13 +507,12 @@ void TableWindow::PsFile(const QString &name) const
         QStringList params;
         params << tmp.fileName() << name;
 
-        PdfToPs(name, params);
+        PdfToPs(params);
     }
 }
 
-//TODO delete parametr name and use last parameter in string list instead.
-void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
-{    
+void TableWindow::PdfToPs(const QStringList &params) const
+{
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
@@ -534,10 +527,10 @@ void TableWindow::PdfToPs(const QString &name, const QStringList &params) const
     QApplication::restoreOverrideCursor();
 #endif
 
-    QFile f(name);
-    if (!f.exists())
+    QFile f(params.last());
+    if (f.exists() == false)
     {
-        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(name).arg(proc.errorString());
+        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(params.last()).arg(proc.errorString());
         QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }

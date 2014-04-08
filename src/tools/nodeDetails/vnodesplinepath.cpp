@@ -29,19 +29,20 @@
 #include "vnodesplinepath.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
-VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                                 const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                                  QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -51,15 +52,14 @@ VNodeSplinePath::VNodeSplinePath(VDomDocument *doc, VContainer *data, qint64 id,
     }
 }
 
-void VNodeSplinePath::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                             const Document::Documents &parse, const Tool::Sources &typeCreation, const qint64 &idTool,
+void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                             const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
                              QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
+    VAbstractTool::AddRecord(id, Valentina::NodeSplinePath, doc);
     if (parse == Document::FullParse)
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
-        Q_CHECK_PTR(splPath);
         doc->AddTool(id, splPath);
         const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
         const QVector<VSplinePoint> *points = path->GetPoint();
@@ -100,12 +100,12 @@ void VNodeSplinePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -116,10 +116,10 @@ void VNodeSplinePath::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
+        doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }
@@ -128,7 +128,7 @@ void VNodeSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::SplinePath);
+        emit ChoosedTool(id, Valentina::SplinePath);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -136,13 +136,13 @@ void VNodeSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 void VNodeSplinePath::RefreshGeometry()

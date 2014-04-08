@@ -50,7 +50,7 @@ public:
                        */
                       VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                           const QPointF &controlPoint, const QPointF &splinePoint,
-                                          QGraphicsItem * parent = 0);
+                                          QGraphicsItem * parent = nullptr);
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.

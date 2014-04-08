@@ -29,8 +29,8 @@
 #ifndef VCONTAINER_H
 #define VCONTAINER_H
 
-#include "vstandardtablerow.h"
-#include "vincrementtablerow.h"
+#include "vmeasurement.h"
+#include "vincrement.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
 #include "../geometry/vdetail.h"
@@ -62,10 +62,9 @@ public:
                         VContainer(const VContainer &data);
                         ~VContainer();
     template <typename T>
-    void CopyGObject(const VContainer &data, const qint64 &id)
+    void CopyGObject(const VContainer &data, const quint32 &id)
     {
         T *obj = new T(*data.GeometricObject<const T *>(id));
-        Q_CHECK_PTR(obj);
         UpdateGObject(id, obj);
     }
    /**
@@ -74,9 +73,9 @@ public:
     */
     void                setData(const VContainer &data);
     template <typename T>
-    const T GeometricObject(qint64 id) const
+    const T GeometricObject(const quint32 &id) const
     {
-        VGObject *gObj = 0;
+        VGObject *gObj = nullptr;
         if (gObjects.contains(id))
         {
             gObj = gObjects.value(id);
@@ -84,10 +83,21 @@ public:
         else
         {
             throw VExceptionBadId(tr("Can't find object"), id);
+            return nullptr;
         }
-        T obj = dynamic_cast<T>(gObj);
-        Q_CHECK_PTR(obj);
-        return obj;
+
+        try
+        {
+            T obj = dynamic_cast<T>(gObj);
+            Q_CHECK_PTR(obj);
+            return obj;
+        }
+        catch (const std::bad_alloc &)
+        {
+            throw VExceptionBadId(tr("Can't cast object"), id);
+            return nullptr;
+        }
+        return nullptr;
     }
 
     /**
@@ -95,19 +105,19 @@ public:
      * @param id id of point
      * @return point
      */
-    const VGObject *GetGObject(qint64 id) const;
+    const VGObject *GetGObject(quint32 id) const;
     /**
-     * @brief GetStandardTableCell return standard table row by name
-     * @param name name of standard table row
-     * @return row of standard table
+     * @brief GetMeasurement return measurement by name
+     * @param name short measurement name
+     * @return measurement
      */
-    const VStandardTableRow GetStandardTableCell(const QString& name) const;
+    const VMeasurement  GetMeasurement(const QString& name) const;
     /**
-     * @brief GetIncrementTableRow return increment table row by name
+     * @brief GetIncrement return increment table row by name
      * @param name name of increment table row
-     * @return row of increment table
+     * @return increment
      */
-    const VIncrementTableRow GetIncrementTableRow(const QString& name) const;
+    const VIncrement GetIncrement(const QString& name) const;
     /**
      * @brief GetLine return length of line by name
      * @param name name of line
@@ -137,37 +147,36 @@ public:
      * @param id id of detail
      * @return detail
      */
-    const VDetail GetDetail(qint64 id) const;
+    const VDetail       GetDetail(quint32 id) const;
     /**
      * @brief getId return current id
      * @return current id
      */
-    static qint64       getId() {return _id;}
+    static quint32       getId() {return _id;}
     /**
      * @brief AddPoint add new point to container
      * @param point new point
      * @return return id of new point in container
      */
-    qint64              AddGObject(VGObject *obj);
+    quint32              AddGObject(VGObject *obj);
     /**
      * @brief AddDetail add new detail to container
      * @param detail new detail
      * @return return id of new detail in container
      */
-    qint64              AddDetail(VDetail detail);
+    quint32              AddDetail(VDetail detail);
     /**
-     * @brief AddStandardTableCell add new row of standard table
-     * @param name name of row of standard table
-     * @param cell row of standard table
+     * @brief AddMeasurement add new measurement
+     * @param name short measurement name
+     * @param row measurement
      */
-    inline void         AddStandardTableCell(const QString& name, const VStandardTableRow &cell)
-    {standardTable[name] = cell;}
+    void                 AddMeasurement(const QString& name, const VMeasurement &m);
     /**
-     * @brief AddIncrementTableRow add new row of increment table
+     * @brief AddIncrement add new row of increment table
      * @param name name of new row of increment table
      * @param row new row of increment table
      */
-    void                AddIncrementTableRow(const QString& name, VIncrementTableRow row);
+    void                AddIncrement(const QString& name, VIncrement incr);
     /**
      * @brief AddLengthLine add length of line to container
      * @param name name of line
@@ -184,7 +193,7 @@ public:
      * @brief AddLengthArc add length of arc to container
      * @param id id of arc
      */
-    void                AddLengthArc(const qint64 &id);
+    void                AddLengthArc(const quint32 &id);
     /**
      * @brief AddLineAngle add angle of line to container
      * @param name name of line angle
@@ -197,7 +206,7 @@ public:
      * @param secondPointId id of second point of line
      * @param mode mode of line
      */
-    void                AddLine(const qint64 &firstPointId, const qint64 &secondPointId);
+    void                AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     /**
      * @brief GetNameLine return name of line
      * @param firstPoint id of first point of line
@@ -205,7 +214,7 @@ public:
      * @return name of line
      */
     // cppcheck-suppress functionStatic
-    QString             GetNameLine(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLine(const quint32 &firstPoint, const quint32 &secondPoint) const;
     /**
      * @brief GetNameLineAngle return name of line angle
      * @param firstPoint id of first point of line
@@ -213,39 +222,37 @@ public:
      * @return name of angle of line
      */
     // cppcheck-suppress functionStatic
-    QString             GetNameLineAngle(const qint64 &firstPoint, const qint64 &secondPoint) const;
+    QString             GetNameLineAngle(const quint32 &firstPoint, const quint32 &secondPoint) const;
     /**
      * @brief UpdatePoint update point by id
      * @param id id of existing point
      * @param point point
      */
-    void                UpdateGObject(qint64 id, VGObject* obj);
+    void                UpdateGObject(quint32 id, VGObject* obj);
     /**
      * @brief UpdateDetail update detail by id
      * @param id id of existing detail
      * @param detail detail
      */
-    void                UpdateDetail(qint64 id, const VDetail &detail);
+    void                UpdateDetail(quint32 id, const VDetail &detail);
     /**
-     * @brief UpdateStandardTableCell update standard table row by name
-     * @param name name of row
-     * @param cell row of standard table
+     * @brief UpdateMeasurement update measurement by name
+     * @param name short measurement name
+     * @param m measurement
      */
-    inline void         UpdateStandardTableCell(const QString& name, VStandardTableRow cell)
-    {standardTable[name] = cell;}
+    void                UpdateMeasurement(const QString& name, VMeasurement m);
     /**
-     * @brief UpdateIncrementTableRow update increment table row by name
+     * @brief UpdateIncrement update increment table row by name
      * @param name name of row
      * @param row row
      */
-    inline void         UpdateIncrementTableRow(const QString& name, VIncrementTableRow row)
-    {incrementTable[name] = row;}
+    void                UpdateIncrement(const QString& name, VIncrement incr);
     /**
-     * @brief GetValueStandardTableCell return value of standard table row by name
-     * @param name name of row
-     * @return value in mm
+     * @brief GetValueStandardTableRow return value of measurement by name
+     * @param name name of measurement
+     * @return value in measurement units
      */
-    qreal               GetValueStandardTableCell(const QString& name) const;
+    qreal               GetValueStandardTableRow(const QString& name) const;
     /**
      * @brief GetValueIncrementTableRow return value of increment table row by name
      * @param name name of row
@@ -264,44 +271,49 @@ public:
     /**
      * @brief ClearIncrementTable clear increment table
      */
-    inline void         ClearIncrementTable() {incrementTable.clear();}
+    void                ClearIncrementTable();
+    void                ClearMeasurements();
     /**
      * @brief ClearLengthLines clear length lines
      */
-    inline void         ClearLengthLines() {lengthLines.clear();}
+    void                ClearLengthLines();
     /**
      * @brief ClearLengthSplines clear length splines
      */
-    inline void         ClearLengthSplines() {lengthSplines.clear();}
+    void                ClearLengthSplines();
     /**
      * @brief ClearLengthArcs clear length arcs
      */
-    inline void         ClearLengthArcs() {lengthArcs.clear();}
+    void                ClearLengthArcs();
     /**
      * @brief ClearLineAngles clear angles of lines
      */
-    inline void         ClearLineAngles() {lineAngles.clear();}
-    inline void         ClearDetails() {details.clear();}
+    void                ClearLineAngles();
+    void                ClearDetails();
     /**
      * @brief SetSize set value of size
-     * @param size value of size in mm
+     * @param size value of size
      */
-    inline void         SetSize(qint32 size) {base["Сг"] = size;}
+    void                SetSize(qreal size);
+    void                SetSizeName(const QString &name);
     /**
      * @brief SetGrowth set value of growth
-     * @param growth value of growth in mm
+     * @param growth value of growth
      */
-    inline void         SetGrowth(qint32 growth) {base["Р"] = growth;}
+    void                SetHeight(qreal height);
+    void                SetHeightName(const QString &name);
     /**
      * @brief size return size
      * @return size in mm
      */
-    inline qint32       size() const {return base.value("Сг");}
+    qreal               size() const;
+    QString             SizeName()const;
     /**
-     * @brief growth return growth
-     * @return growth in mm
+     * @brief height return height
+     * @return height in pattern units
      */
-    inline qint32       growth() const {return base.value("Р");}
+    qreal               height() const;
+    QString             HeightName()const;
     /**
      * @brief FindVar return value of variable by name
      * @param name name of variable
@@ -314,92 +326,83 @@ public:
      * @param name name of row
      * @return true if contains
      */
-    inline bool         IncrementTableContains(const QString& name) {return incrementTable.contains(name);}
+    bool                IncrementTableContains(const QString& name);
     /**
      * @brief getNextId generate next unique id
      * @return next unique id
      */
-    static qint64       getNextId();
+    static quint32       getNextId();
     /**
      * @brief RemoveIncrementTableRow remove row by name from increment table
      * @param name name of existing row
      */
-    inline void         RemoveIncrementTableRow(const QString& name) {incrementTable.remove(name);}
+    void                 RemoveIncrementTableRow(const QString& name);
     /**
      * @brief data container with datagObjects return container of gObjects
      * @return pointer on container of gObjects
      */
-    inline const QHash<qint64, VGObject*> *DataGObjects() const {return &gObjects;}
+    const QHash<quint32, VGObject*> *DataGObjects() const;
     /**
-     * @brief data container with dataBase return container of data
-     * @return pointer on container of base data
+     * @brief DataMeasurements container with measurements.
+     * @return pointer to measurements.
      */
-    inline const QHash<QString, qint32> *DataBase() const {return &base;}
+    const QHash<QString, VMeasurement> *DataMeasurements() const;
     /**
-     * @brief data container with dataStandardTable return container of standard table
-     * @return pointer on container of standard table
-     */
-    inline const QHash<QString, VStandardTableRow> *DataStandardTable() const {return &standardTable;}
-    /**
-     * @brief data container with dataIncrementTable return container of increment table
+     * @brief data container with dataIncrements return container of increment table
      * @return pointer on container of increment table
      */
-    inline const QHash<QString, VIncrementTableRow> *DataIncrementTable() const {return &incrementTable;}
+    const QHash<QString, VIncrement> *DataIncrements() const;
     /**
      * @brief data container with dataLengthLines return container of lines lengths
      * @return pointer on container of lines lengths
      */
-    inline const QHash<QString, qreal>  *DataLengthLines() const {return &lengthLines;}
+    const QHash<QString, qreal>  *DataLengthLines() const;
     /**
      * @brief data container with dataLengthSplines return container of splines lengths
      * @return pointer on container of splines lengths
      */
-    inline const QHash<QString, qreal>  *DataLengthSplines() const {return &lengthSplines;}
+    const QHash<QString, qreal>  *DataLengthSplines() const;
     /**
      * @brief data container with dataLengthArcs return container of arcs length
      * @return pointer on container of arcs length
      */
-    inline const QHash<QString, qreal>  *DataLengthArcs() const {return &lengthArcs;}
+    const QHash<QString, qreal>  *DataLengthArcs() const;
     /**
      * @brief data container with dataLineAngles return container of angles of line
      * @return pointer on container of angles of line
      */
-    inline const QHash<QString, qreal>  *DataLineAngles() const {return &lineAngles;}
+    const QHash<QString, qreal>  *DataLineAngles() const;
     /**
      * @brief data container with dataDetails return container of details
      * @return pointer on container of details
      */
-    inline const QHash<qint64, VDetail> *DataDetails() const {return &details;}
+    const QHash<quint32, VDetail> *DataDetails() const;
     /**
      * @brief UpdateId update id. If new id bigger when current save new like current.
      * @param newId id
      */
-    static void         UpdateId(qint64 newId);
-    /**
-     * @brief CreateManTableIGroup generate man standard table of measurements
-     */
-    void               CreateManTableIGroup ();
+    static void         UpdateId(quint32 newId);
 private:
     /**
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
-    static qint64          _id;
-    /**
-     * @brief base container of base data (size and growth)
-     */
-    QHash<QString, qint32> base;
+    static quint32          _id;
+    qreal _size;
+    QString sizeName;
+    qreal _height;
+    QString heightName;
     /**
      * @brief gObjects graphicals objects of pattern.
      */
-    QHash<qint64, VGObject*> gObjects;
+    QHash<quint32, VGObject*> gObjects;
     /**
-     * @brief standardTable container of standard table rows
+     * @brief measurements container of measurements.
      */
-    QHash<QString, VStandardTableRow> standardTable;
+    QHash<QString, VMeasurement> measurements;
     /**
-     * @brief incrementTable
+     * @brief increments
      */
-    QHash<QString, VIncrementTableRow> incrementTable;
+    QHash<QString, VIncrement> increments;
     /**
      * @brief lengthLines container of lines lengths
      */
@@ -419,7 +422,7 @@ private:
     /**
      * @brief details container of details
      */
-    QHash<qint64, VDetail> details;
+    QHash<quint32, VDetail> details;
     template <typename key, typename val>
     /**
      * @brief GetObject return object from container
@@ -445,7 +448,7 @@ private:
      * @param id id of existing object
      * @param point object
      */
-    void UpdateObject(QHash<qint64, val > &obj, const qint64 &id, val point);
+    void UpdateObject(QHash<quint32, val > &obj, const quint32 &id, val point);
     template <typename key, typename val>
     /**
      * @brief AddObject add object to container
@@ -453,7 +456,147 @@ private:
      * @param value object
      * @return id of object in container
      */
-    static qint64 AddObject(QHash<key, val> &obj, val value);
+    static quint32 AddObject(QHash<key, val> &obj, val value);
 };
+
+inline void VContainer::AddMeasurement(const QString &name, const VMeasurement &m)
+{
+    measurements[name] = m;
+}
+
+inline void VContainer::UpdateMeasurement(const QString &name, VMeasurement m)
+{
+    measurements[name] = m;
+}
+
+inline void VContainer::UpdateIncrement(const QString &name, VIncrement incr)
+{
+    increments[name] = incr;
+}
+
+inline void VContainer::ClearIncrementTable()
+{
+    increments.clear();
+}
+
+inline void VContainer::ClearMeasurements()
+{
+    measurements.clear();
+}
+
+inline void VContainer::ClearLengthLines()
+{
+    lengthLines.clear();
+}
+
+inline void VContainer::ClearLengthSplines()
+{
+    lengthSplines.clear();
+}
+
+inline void VContainer::ClearLengthArcs()
+{
+    lengthArcs.clear();
+}
+
+inline void VContainer::ClearLineAngles()
+{
+    lineAngles.clear();
+}
+
+inline void VContainer::ClearDetails()
+{
+    details.clear();
+}
+
+inline void VContainer::SetSize(qreal size)
+{
+    _size = size;
+}
+
+inline void VContainer::SetSizeName(const QString &name)
+{
+    sizeName = name;
+}
+
+inline void VContainer::SetHeight(qreal height)
+{
+    _height = height;
+}
+
+inline void VContainer::SetHeightName(const QString &name)
+{
+    heightName = name;
+}
+
+inline qreal VContainer::size() const
+{
+    return _size;
+}
+
+inline QString VContainer::SizeName() const
+{
+    return sizeName;
+}
+
+inline qreal VContainer::height() const
+{
+    return _height;
+}
+
+inline QString VContainer::HeightName() const
+{
+    return heightName;
+}
+
+inline bool VContainer::IncrementTableContains(const QString &name)
+{
+    return increments.contains(name);
+}
+
+inline void VContainer::RemoveIncrementTableRow(const QString &name)
+{
+    increments.remove(name);
+}
+
+inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
+{
+    return &gObjects;
+}
+
+inline const QHash<QString, VMeasurement> *VContainer::DataMeasurements() const
+{
+    return &measurements;
+}
+
+inline const QHash<QString, VIncrement> *VContainer::DataIncrements() const
+{
+    return &increments;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthLines() const
+{
+    return &lengthLines;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthSplines() const
+{
+    return &lengthSplines;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLengthArcs() const
+{
+    return &lengthArcs;
+}
+
+inline const QHash<QString, qreal> *VContainer::DataLineAngles() const
+{
+    return &lineAngles;
+}
+
+inline const QHash<quint32, VDetail> *VContainer::DataDetails() const
+{
+    return &details;
+}
 
 #endif // VCONTAINER_H

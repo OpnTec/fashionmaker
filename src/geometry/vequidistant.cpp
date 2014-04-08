@@ -27,8 +27,9 @@
  *************************************************************************/
 
 #include "vequidistant.h"
+#include "../widgets/vapplication.h"
 
-QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer *data) const
+QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
 {
     Q_CHECK_PTR(data);
     VDetail detail = data->GetDetail(idDetail);
@@ -38,7 +39,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
     {
         switch (detail.at(i).getTypeTool())
         {
-            case (Tool::NodePoint):
+            case (Valentina::NodePoint):
             {
                 const VPointF *point = data->GeometricObject<const VPointF*>(detail.at(i).getId());
                 points.append(point->toQPointF());
@@ -51,7 +52,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
                 }
             }
             break;
-            case (Tool::NodeArc):
+            case (Valentina::NodeArc):
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, arc->GetPoints());
@@ -75,7 +76,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
                 }
             }
             break;
-            case (Tool::NodeSpline):
+            case (Valentina::NodeSpline):
             {
                 const VSpline *spline = data->GeometricObject<const VSpline *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, spline->GetPoints());
@@ -99,7 +100,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
                 }
             }
             break;
-            case (Tool::NodeSplinePath):
+            case (Valentina::NodeSplinePath):
             {
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, splinePath->GetPathPoints());
@@ -124,7 +125,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
             }
             break;
             default:
-                qWarning()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
+                qDebug()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
                 break;
         }
     }
@@ -145,11 +146,11 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
         QPainterPath ekv;
         if (detail.getClosed() == true)
         {
-            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, qApp->toPixel(detail.getWidth()));
         }
         else
         {
-            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, qApp->toPixel(detail.getWidth()));
         }
         path.addPath(ekv);
         path.setFillRule(Qt::WindingFill);
@@ -157,7 +158,7 @@ QPainterPath VEquidistant::ContourPath(const qint64 &idDetail, const VContainer 
     return path;
 }
 
-qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) const
+qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
 {
     qreal length = 0;
     QVector<QPointF> points;
@@ -170,7 +171,7 @@ qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVec
     return length;
 }
 
-QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const
+QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my)
 {
     QVector<QPointF> p;
     for (qint32 i = 0; i < points.size(); ++i)
@@ -183,12 +184,12 @@ QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const 
     return p;
 }
 
-QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> correctPoints;
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
-        qWarning()<<"Only three points.";
+        qDebug()<<"Only three points.";
         return points;
     }
     //Clear equivalent points
@@ -229,7 +230,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
 }
 
 QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
-                                       const qreal &width) const
+                                       const qreal &width)
 {
     QPainterPath ekv;
     QVector<QPointF> ekvPoints;
@@ -295,7 +296,7 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
     return ekv;
 }
 
-QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 {
     QVector<QPointF> ekvPoints;
     /*If we got less than 4 points no need seek loops.*/
@@ -353,7 +354,7 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points) const
     return ekvPoints;
 }
 
-QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points) const
+QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
 {
     Q_ASSERT(points.size() > 0);
     QVector<QPointF> reversePoints;
@@ -364,13 +365,13 @@ QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points) c
     return reversePoints;
 }
 
-QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width) const
+QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
     Q_ASSERT(width > 0);
     QVector<QPointF> points;
     if (line1.p2() != line2.p2())
     {
-        qWarning()<<"Last point of two lines must be equal.";
+        qDebug()<<"Last point of two lines must be equal.";
     }
     QPointF CrosPoint;
     QLineF bigLine1 = ParallelLine(line1, width );
@@ -385,7 +386,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
         case (QLineF::UnboundedIntersection):
         {
                 QLineF line( line1.p2(), CrosPoint );
-                if (line.length() > width + toPixel(8))
+                if (line.length() > width + qApp->toPixel(8))
                 {
                     QLineF lineL = QLineF(bigLine1.p2(), CrosPoint);
                     lineL.setLength(width);
@@ -413,7 +414,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
     return points;
 }
 
-QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width) const
+QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
 {
     Q_ASSERT(width > 0);
     QLineF paralel = QLineF (SingleParallelPoint(line, 90, width), SingleParallelPoint(QLineF(line.p2(), line.p1()),
@@ -421,7 +422,7 @@ QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width) const
     return paralel;
 }
 
-QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const
+QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)
 {
     Q_ASSERT(width > 0);
     QLineF pLine = line;

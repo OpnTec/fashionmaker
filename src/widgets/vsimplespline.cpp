@@ -27,21 +27,28 @@
  *************************************************************************/
 
 #include "vsimplespline.h"
-#include "../options.h"
+#include "../widgets/vapplication.h"
 
-VSimpleSpline::VSimpleSpline(qint64 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
+VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
-    if (factor == 0)
+    if (factor == nullptr)
     {
-        setPen(QPen(Qt::black, toPixel(widthHairLine)));
+        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        setPen(QPen(Qt::black, toPixel(widthHairLine)/ *factor));
+        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
+}
+
+void VSimpleSpline::ChangedActivDraw(const bool &flag)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, flag);
+    setAcceptHoverEvents(flag);
+    setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
 }
 
 void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -56,25 +63,25 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == 0)
+    if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, toPixel(widthMainLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, toPixel(widthMainLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
     }
 }
 
 void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == 0)
+    if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, toPixel(widthHairLine)));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, toPixel(widthHairLine)/ *factor));
+        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
 }

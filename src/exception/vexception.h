@@ -39,6 +39,7 @@
  */
 class VException : public QException
 {
+    Q_DECLARE_TR_FUNCTIONS(VException)
 public:
                       /**
                        * @brief VException constructor exception
@@ -49,42 +50,82 @@ public:
                        * @brief VException copy constructor
                        * @param e exception
                        */
-                      VException(const VException &e):what(e.What()){}
+                      VException(const VException &e);
     virtual           ~VException() noexcept (true){}
     /**
      * @brief raise method raise for exception
      */
-    inline void       raise() const { throw *this; }
+    void            raise() const;
     /**
      * @brief clone clone exception
      * @return new exception
      */
-    inline VException *clone() const { return new VException(*this); }
+    VException      *clone() const;
     /**
      * @brief ErrorMessage return main error message
      * @return error message
      */
-    virtual QString   ErrorMessage() const;
+    virtual QString ErrorMessage() const;
     /**
      * @brief DetailedInformation return detailed information about error
      * @return detailed information
      */
-    virtual QString   DetailedInformation() const { return QString(); }
+    virtual QString DetailedInformation() const;
     /**
      * @brief What return string with error
      * @return string with error
      */
-    inline QString    What() const {return what;}
+    QString         What() const;
     /**
      * @brief CriticalMessageBox show Critical Message Box.
      * @param situation main text message box.
      */
-    virtual void      CriticalMessageBox(const QString &situation, QWidget *parent = 0) const;
+    virtual void    CriticalMessageBox(const QString &situation, QWidget *parent = nullptr) const;
+    /**
+     * @brief AddMoreInformation add more information for error
+     * @param info information
+     */
+    void         AddMoreInformation(const QString &info);
+    /**
+     * @brief MoreInformation return more information for error
+     * @return information
+     */
+    QString      MoreInformation() const;
 protected:
     /**
      * @brief what string with error
      */
-    QString           what;
+    QString         what;
+    /**
+     * @brief moreInfo more information about error
+     */
+    QString         moreInfo;
+    QString         MoreInfo(const QString &detInfo) const;
 };
+
+inline void VException::raise() const
+{
+    throw *this;
+}
+
+inline VException *VException::clone() const
+{
+    return new VException(*this);
+}
+
+inline QString VException::DetailedInformation() const
+{
+    return moreInfo;
+}
+
+inline QString VException::What() const
+{
+    return what;
+}
+
+inline QString VException::MoreInformation() const
+{
+    return moreInfo;
+}
 
 #endif // VEXCEPTION_H

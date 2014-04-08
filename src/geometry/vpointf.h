@@ -43,16 +43,13 @@ public:
     /**
      * @brief VPointF creat empty point
      */
-    inline             VPointF ()
-                       :VGObject(GObject::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0){}
+    VPointF ();
     /**
      * @brief VPointF copy constructor
      * @param point
      */
-    inline             VPointF (const VPointF &point )
-                       :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y()){}
-    inline             VPointF (const QPointF &point )
-                       :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y()){}
+    VPointF (const VPointF &point );
+    VPointF (const QPointF &point );
     /**
      * @brief VPointF create new point
      * @param x x coordinate
@@ -60,61 +57,62 @@ public:
      * @param mx offset name respect to x
      * @param my offset name respect to y
      */
-     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, qint64 idObject = 0,
-               Draw::Draws mode = Draw::Calculation);
+     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
+               Valentina::Draws mode = Valentina::Calculation);
+     ~VPointF(){}
     /**
      * @brief operator = assignment operator
      * @param point point
      * @return point
      */
-    VPointF            &operator=(const VPointF &point);
-                       ~VPointF(){}
+    VPointF &operator=(const VPointF &point);
+
     /**
      * @brief mx return offset name respect to x
      * @return offset
      */
-    inline qreal       mx() const {return _mx;}
+    qreal       mx() const;
     /**
      * @brief my return offset name respect to y
      * @return offset
      */
-    inline qreal       my() const {return _my;}
+    qreal       my() const;
     /**
      * @brief setMx set offset name respect to x
      * @param mx offset
      */
-    inline void        setMx(qreal mx) {_mx = mx;}
+    void        setMx(qreal mx);
     /**
      * @brief setMy set offset name respect to y
      * @param my offset
      */
-    inline void        setMy(qreal my) {_my = my;}
+    void        setMy(qreal my);
     /**
      * @brief toQPointF convert to QPointF
      * @return QPointF point
      */
-    inline QPointF     toQPointF()const {return QPointF(_x, _y);}
+    QPointF     toQPointF()const;
     /**
      * @brief x return x coordinate
      * @return value
      */
-    inline qreal       x() const {return _x;}
+    qreal       x() const;
     /**
      * @brief setX set x coordinate
      * @param value x coordinate
      */
-    inline void        setX(const qreal &value){_x = value;}
+    void        setX(const qreal &value);
     /**
      * @brief y return y coordinate
      * @return value
      */
-    inline qreal       y() const {return _y;}
+    qreal       y() const;
     /**
      * @brief setY set y coordinate
      * @param value y coordinate
      */
-    inline void        setY(const qreal &value){_y = value;}
-    virtual QString    name() const{return _name;}
+    void        setY(const qreal &value);
+    virtual QString name() const;
 private:
     /**
      * @brief _mx offset name respect to x
@@ -133,5 +131,55 @@ private:
      */
     qreal              _y;
 };
+
+inline qreal VPointF::mx() const
+{
+    return _mx;
+}
+
+inline qreal VPointF::my() const
+{
+    return _my;
+}
+
+inline void VPointF::setMx(qreal mx)
+{
+    _mx = mx;
+}
+
+inline void VPointF::setMy(qreal my)
+{
+    _my = my;
+}
+
+inline QPointF VPointF::toQPointF() const
+{
+    return QPointF(_x, _y);
+}
+
+inline qreal VPointF::x() const
+{
+    return _x;
+}
+
+inline void VPointF::setX(const qreal &value)
+{
+    _x = value;
+}
+
+inline qreal VPointF::y() const
+{
+    return _y;
+}
+
+inline void VPointF::setY(const qreal &value)
+{
+    _y = value;
+}
+
+inline QString VPointF::name() const
+{
+    return _name;
+}
 
 #endif // VPOINTF_H

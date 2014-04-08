@@ -39,13 +39,13 @@ class VDataTool : public QObject
 {
     Q_OBJECT
 public:
-                          /**
-                           * @brief VDataTool constructor.
-                           * @param data container with variables
-                           * @param parent parent object
-                           */
-                          VDataTool(VContainer *data, QObject *parent = 0);
-    virtual               ~VDataTool(){}
+    /**
+     * @brief VDataTool constructor.
+     * @param data container with variables
+     * @param parent parent object
+     */
+    VDataTool(VContainer *data, QObject *parent = nullptr);
+    virtual ~VDataTool(){}
     /**
      * @brief operator = assignment operator.
      * @param tool tool
@@ -56,21 +56,21 @@ public:
      * @brief getData return data container.
      * @return container.
      */
-    inline VContainer     getData() const { return data; }
+    VContainer            getData() const;
     /**
      * @brief setData set data container.
      * @param value container.
      */
-    inline void           setData(const VContainer *value){data = *value;}
+    void                  setData(const VContainer *value);
     /**
      * @brief referens return count of referens.
      * @return count count of referens.
      */
-    virtual inline qint64 referens() const {return _referens;}
+    virtual quint32       referens() const;
     /**
      * @brief incrementReferens increment referens.
      */
-    virtual inline void   incrementReferens(){++_referens;}
+    virtual void          incrementReferens();
     /**
      * @brief decrementReferens decrement referens.
      */
@@ -83,7 +83,27 @@ protected:
     /**
      * @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool.
      */
-    qint64                _referens;
+    quint32                _referens;
 };
+
+inline VContainer VDataTool::getData() const
+{
+    return data;
+}
+
+inline void VDataTool::setData(const VContainer *value)
+{
+    data = *value;
+}
+
+inline quint32 VDataTool::referens() const
+{
+    return _referens;
+}
+
+inline void VDataTool::incrementReferens()
+{
+    ++_referens;
+}
 
 #endif // VDATATOOL_H

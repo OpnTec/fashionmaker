@@ -30,42 +30,87 @@
 #include "widgets/vapplication.h"
 #include <QTextCodec>
 #include <QtCore>
+#include <QMessageBox>
+#include <QThread>
 #include "tablewindow.h"
-#include "options.h"
 
-#ifdef Q_OS_WIN32
-    const QString translationsPath = QString("/translations");
-#else
-    #ifdef QT_DEBUG
-        const QString translationsPath = QString("/translations");
-    #else
-        const QString translationsPath = QString("/usr/share/valentina/translations");
-    #endif
-#endif
-
-void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QByteArray localMsg = msg.toLocal8Bit();
-    switch (type)
+    // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
+    if ((type == QtDebugMsg) && msg.contains("::connect"))
     {
-        case QtDebugMsg:
-            fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                    context.function);
-            break;
-        case QtWarningMsg:
-            fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                    context.function);
-            break;
-        case QtCriticalMsg:
-            fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                    context.function);
-            break;
-        case QtFatalMsg:
-            fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                    context.function);
+        type = QtWarningMsg;
+    }
+
+    // this is another one that doesn't make sense as just a debug message.  pretty serious
+    // sign of a problem
+    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
+    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
+    // is something that can easily happen if you are debugging and the application is paused.
+    // As it is so common, not worth popping up a dialog.
+    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
+            && QString(msg).contains("Cowardly refusing"))
+    {
+        type = QtDebugMsg;
+    }
+
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (isGuiThread)
+    {
+        QByteArray localMsg = msg.toLocal8Bit();
+        QMessageBox messageBox;
+        switch (type) {
+            case QtDebugMsg:
+                fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                        context.function);
+                return;
+            case QtWarningMsg:
+                messageBox.setIcon(QMessageBox::Warning);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                        context.function);
+                break;
+            case QtCriticalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                        context.function);
+                break;
+            case QtFatalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Cancel);
+                fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                        context.function);
+                break;
+            default:
+                break;
+        }
+
+        const int ret = messageBox.exec();
+        if (ret == QMessageBox::Cancel)
+        {
             abort();
-        default:
-            break;
+        }
+    }
+    else
+    {
+        if (type != QtDebugMsg)
+        {
+            abort(); // be NOISY unless overridden!
+        }
     }
 }
 
@@ -76,8 +121,15 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
 
-    qInstallMessageHandler(myMessageOutput);
     VApplication app(argc, argv);
+#ifdef QT_DEBUG
+    // Because our "noisy" message handler uses the GUI subsystem for message
+    // boxes, we can't install it until after the QApplication is constructed.  But it
+    // is good to be the very next thing to run, to start catching warnings ASAP.
+    {
+        qInstallMessageHandler(noisyFailureMsgHandler);
+    }
+#endif
     app.setApplicationDisplayName("Valentina");
     app.setApplicationName("Valentina");
     app.setOrganizationName("ValentinaTeam");
@@ -94,13 +146,13 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-#ifdef Q_OS_WIN32
-    appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+#ifdef Q_OS_WIN
+    appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
 #else
     #ifdef QT_DEBUG
-        appTranslator.load("valentina_" + checkedLocale, "."+translationsPath);
+        appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     #else
-        appTranslator.load("valentina_" + checkedLocale, translationsPath);
+        appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     #endif
 #endif
     app.installTranslator(&appTranslator);

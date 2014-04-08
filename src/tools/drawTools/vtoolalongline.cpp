@@ -28,18 +28,18 @@
 
 #include "vtoolalongline.h"
 #include "../../container/calculator.h"
-#include "../../dialogs/dialogalongline.h"
+#include "../../dialogs/tools/dialogalongline.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
-VToolAlongLine::VToolAlongLine(VDomDocument *doc, VContainer *data, qint64 id, const QString &formula,
-                               const qint64 &firstPointId, const qint64 &secondPointId,
-                               const QString &typeLine, const Tool::Sources &typeCreation,
+VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
+                               const quint32 &firstPointId, const quint32 &secondPointId,
+                               const QString &typeLine, const Valentina::Sources &typeCreation,
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId)
 {
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -56,8 +56,8 @@ void VToolAlongLine::FullUpdateFromFile()
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshGeometry();
 }
@@ -84,16 +84,16 @@ void VToolAlongLine::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
-    SetAttribute(domElement, AttrTypeLine, typeLine);
-    SetAttribute(domElement, AttrLength, formula);
-    SetAttribute(domElement, AttrFirstPoint, basePointId);
-    SetAttribute(domElement, AttrSecondPoint, secondPointId);
+    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
+    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -104,13 +104,13 @@ void VToolAlongLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrTypeLine, typeLine);
-        SetAttribute(domElement, AttrLength, formula);
-        SetAttribute(domElement, AttrFirstPoint, basePointId);
-        SetAttribute(domElement, AttrSecondPoint, secondPointId);
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
+        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }
 
@@ -125,11 +125,11 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    SetAttribute(domElement, AttrFirstPoint, dialogTool->getFirstPointId());
-    SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrFirstPoint, dialogTool->getFirstPointId());
+    doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
 }
 
 void VToolAlongLine::setDialog()
@@ -145,24 +145,24 @@ void VToolAlongLine::setDialog()
     dialogTool->setPointName(p->name());
 }
 
-void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data)
+void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString typeLine = dialogTool->getTypeLine();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
-void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QString &typeLine,
-                            const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
-                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                            VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                            const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                            VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -172,9 +172,9 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
     qreal result = cal.eval(formula, &errorMsg);
     if (errorMsg.isEmpty())
     {
-        line.setLength(toPixel(result));
-        qint64 id = _id;
-        if (typeCreation == Tool::FromGui)
+        line.setLength(qApp->toPixel(result));
+        quint32 id = _id;
+        if (typeCreation == Valentina::FromGui)
         {
             id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
             data->AddLine(firstPointId, id);
@@ -190,7 +190,7 @@ void VToolAlongLine::Create(const qint64 _id, const QString &pointName, const QS
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
+        VDrawTool::AddRecord(id, Valentina::AlongLineTool, doc);
         if (parse == Document::FullParse)
         {
             VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,

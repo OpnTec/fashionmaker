@@ -31,7 +31,7 @@
 
 #include "vdrawtool.h"
 #include <QGraphicsLineItem>
-#include "../../dialogs/dialogline.h"
+#include "../../dialogs/tools/dialogline.h"
 
 /**
  * @brief The VToolLine class tool for creation line.
@@ -51,9 +51,9 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolLine(VDomDocument *doc, VContainer *data, qint64 id, qint64 firstPoint,
-                           qint64 secondPoint, const QString &typeLine, const Tool::Sources &typeCreation,
-                           QGraphicsItem * parent = 0);
+                 VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint,
+                           quint32 secondPoint, const QString &typeLine, const Valentina::Sources &typeCreation,
+                           QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -65,7 +65,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -78,9 +78,9 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 &_id, const qint64 &firstPoint, const qint64 &secondPoint, const QString &typeLine,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
+                        const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString TagName;
 public slots:
     /**
@@ -98,7 +98,7 @@ public slots:
      * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    virtual void     ShowTool(qint64 id, Qt::GlobalColor color, bool enable);
+    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
@@ -152,11 +152,11 @@ private:
     /**
      * @brief firstPoint id first line point.
      */
-    qint64           firstPoint;
+    quint32           firstPoint;
     /**
      * @brief secondPoint id second line point.
      */
-    qint64           secondPoint;
+    quint32           secondPoint;
     /**
      * @brief RefreshGeometry refresh item on scene.
      */

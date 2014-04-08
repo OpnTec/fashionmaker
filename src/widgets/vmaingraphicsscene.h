@@ -48,27 +48,27 @@ public:
                    * @param sceneRect scene rect.
                    * @param parent parent object.
                    */
-                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = 0);
+                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
     /**
      * @brief getHorScrollBar return scene horizontal scrollbar.
      * @return horizontal scrollbar.
      */
-    inline qint32 getHorScrollBar() const {return horScrollBar;}
+    qint32        getHorScrollBar() const;
     /**
      * @brief setHorScrollBar set scene horizontal scrollbar.
      * @param value horizontal scrollbar.
      */
-    inline void   setHorScrollBar(const qint32 &value) {horScrollBar = value;}
+    void          setHorScrollBar(const qint32 &value);
     /**
      * @brief getVerScrollBar return scene vertical scrollbar.
      * @return vertical scrollbar.
      */
-    inline qint32 getVerScrollBar() const {return verScrollBar;}
+    qint32        getVerScrollBar() const;
     /**
      * @brief setVerScrollBar set scene vertical scrollbar.
      * @param value vertical scrollbar.
      */
-    inline void   setVerScrollBar(const qint32 &value) {verScrollBar = value;}
+    void          setVerScrollBar(const qint32 &value);
     /**
      * @brief transform return view transformation.
      * @return view transformation.
@@ -85,7 +85,7 @@ public slots:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedItem(qint64 id, const Scene::Scenes &type);
+    void          ChoosedItem(quint32 id, const Valentina::Scenes &type);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor. scene scale factor.
@@ -118,7 +118,7 @@ signals:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedObject(qint64 id, Scene::Scenes type);
+    void          ChoosedObject(quint32 id, Valentina::Scenes type);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
@@ -142,5 +142,25 @@ private:
      */
     QTransform    _transform;
 };
+
+inline qint32 VMainGraphicsScene::getHorScrollBar() const
+{
+    return horScrollBar;
+}
+
+inline void VMainGraphicsScene::setHorScrollBar(const qint32 &value)
+{
+    horScrollBar = value;
+}
+
+inline qint32 VMainGraphicsScene::getVerScrollBar() const
+{
+    return verScrollBar;
+}
+
+inline void VMainGraphicsScene::setVerScrollBar(const qint32 &value)
+{
+    verScrollBar = value;
+}
 
 #endif // VMAINGRAPHICSSCENE_H

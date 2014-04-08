@@ -44,7 +44,7 @@ public:
      * @param data container with objects (points, arcs, splines).
      * @return return painter path of contour detail.
      */
-    QPainterPath     ContourPath(const qint64 &idDetail, const VContainer *data) const;
+    QPainterPath     ContourPath(const quint32 &idDetail, const VContainer *data) const;
 private:
     /**
      * @brief GetLengthContour return length of contour.
@@ -52,7 +52,7 @@ private:
      * @param newPoints point whos we try to add to contour.
      * @return length length of contour.
      */
-    qreal            GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) const;
+    static qreal     GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
     /**
      * @brief biasPoints bias point.
      * @param points vector of points.
@@ -60,13 +60,13 @@ private:
      * @param my offset respect to y.
      * @return new vector biased points.
      */
-    QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my) const;
+    static QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my);
     /**
      * @brief CorrectEquidistantPoints clear equivalent points and remove point on line from equdistant.
      * @param points list of points equdistant.
      * @return corrected list.
      */
-    QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points) const;
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
     /**
      * @brief Equidistant create equidistant painter path for detail.
      * @param points vector of points.
@@ -74,19 +74,19 @@ private:
      * @param width width of equidistant.
      * @return return painter path of equidistant.
      */
-    QPainterPath     Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width) const;
+    static QPainterPath     Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width);
     /**
      * @brief CheckLoops seek and delete loops in equidistant.
      * @param points vector of points of equidistant.
      * @return vector of points of equidistant.
      */
-    QVector<QPointF> CheckLoops(const QVector<QPointF> &points) const;
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     /**
      * @brief GetReversePoint return revers container of points.
      * @param points container with points.
      * @return reverced points.
      */
-    QVector<QPointF> GetReversePoint(const QVector<QPointF> &points) const;
+    static QVector<QPointF> GetReversePoint(const QVector<QPointF> &points);
     /**
      * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
      * @param line1 first line.
@@ -94,14 +94,14 @@ private:
      * @param width width of equidistant.
      * @return vector of points.
      */
-    QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width) const;
+    static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
     /**
      * @brief ParallelLine create parallel line.
      * @param line starting line.
      * @param width width to parallel line.
      * @return parallel line.
      */
-    QLineF           ParallelLine(const QLineF &line, qreal width ) const;
+    static QLineF           ParallelLine(const QLineF &line, qreal width );
     /**
      * @brief SingleParallelPoint return point of parallel line.
      * @param line starting line.
@@ -109,7 +109,7 @@ private:
      * @param width width to parallel line.
      * @return point of parallel line.
      */
-    QPointF          SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width) const;
+    static QPointF   SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 };
 
 #endif // VEQUIDISTANT_H

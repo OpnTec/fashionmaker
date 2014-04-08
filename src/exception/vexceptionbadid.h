@@ -42,7 +42,7 @@ public:
                      * @param what string with error
                      * @param id id
                      */
-                    VExceptionBadId(const QString &what, const qint64 &id)
+                    VExceptionBadId(const QString &what, const quint32 &id)
                         :VException(what), id(id), key(QString()){}
                     /**
                      * @brief VExceptionBadId exception bad id
@@ -67,21 +67,31 @@ public:
      * @brief BadId return bad id
      * @return id
      */
-    inline qint64   BadId() const {return id; }
+    quint32         BadId() const;
     /**
      * @brief BadKey return bad key
      * @return key
      */
-    inline QString  BadKey() const {return key; }
+    QString         BadKey() const;
 protected:
     /**
      * @brief id id
      */
-    qint64          id;
+    quint32          id;
     /**
      * @brief key key
      */
     QString         key;
 };
+
+inline quint32 VExceptionBadId::BadId() const
+{
+    return id;
+}
+
+inline QString VExceptionBadId::BadKey() const
+{
+    return key;
+}
 
 #endif // VEXCEPTIONBADID_H

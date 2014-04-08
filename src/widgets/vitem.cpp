@@ -27,20 +27,31 @@
  *************************************************************************/
 
 #include "vitem.h"
-#include "../options.h"
 
 #include <QGraphicsScene>
 #include <QDebug>
+#include "../widgets/vapplication.h"
 
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
-    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(0)
+    :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(nullptr)
 {
+}
+
+VItem::VItem():numInOutList(0), paper(nullptr)
+{
+
+}
+
+VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), numInOutList(numInList),
+    paper(nullptr)
+{
+
 }
 
 void VItem::checkItemChange()
 {
     QRectF rect;
-    if (paper == 0)
+    if (paper == nullptr)
     {
         qDebug()<<"Don't set paper for detail!!!!";
         rect = this->scene()->sceneRect();
@@ -52,19 +63,19 @@ void VItem::checkItemChange()
     QRectF myrect = sceneBoundingRect();
     if ( rect.contains( myrect )==true )
     {
-        setPen(QPen(Qt::black, toPixel(widthMainLine)));
+        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
         emit itemOut( numInOutList, false );
     }
     else
     {
-        setPen(QPen(Qt::red, toPixel(widthMainLine)));
+        setPen(QPen(Qt::red, qApp->toPixel(qApp->widthMainLine())));
         emit itemOut( numInOutList, true );
     }
     QList<QGraphicsItem *> list = QGraphicsItem::collidingItems ();
     if ( list.size() - 2 > 0 )
     {
         list.append( this );
-        setPen(QPen(Qt::red, toPixel(widthMainLine)));
+        setPen(QPen(Qt::red, qApp->toPixel(qApp->widthMainLine())));
         emit itemColliding( list, 1 );//Detail intersect with other details.
     }
     else

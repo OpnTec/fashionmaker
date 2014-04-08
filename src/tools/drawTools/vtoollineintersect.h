@@ -50,9 +50,9 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolLineIntersect(VDomDocument *doc, VContainer *data, const qint64 &id, const qint64 &p1Line1,
-                                    const qint64 &p2Line1, const qint64 &p1Line2, const qint64 &p2Line2,
-                                    const Tool::Sources &typeCreation, QGraphicsItem * parent = 0);
+                 VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
+                                    const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
+                                    const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -64,7 +64,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VDomDocument *doc, VContainer *data);
+    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -81,10 +81,10 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const qint64 _id, const qint64 &p1Line1Id, const qint64 &p2Line1Id, const qint64 &p1Line2Id,
-                        const qint64 &p2Line2Id, const QString &pointName, const qreal &mx, const qreal &my,
-                        VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data,
-                        const Document::Documents &parse, const Tool::Sources &typeCreation);
+    static void  Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id, const quint32 &p1Line2Id,
+                        const quint32 &p2Line2Id, const QString &pointName, const qreal &mx, const qreal &my,
+                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     /**
@@ -127,19 +127,19 @@ private:
     /**
      * @brief p1Line1 id first point first line.
      */
-    qint64       p1Line1;
+    quint32       p1Line1;
     /**
      * @brief p2Line1 id second point first line.
      */
-    qint64       p2Line1;
+    quint32       p2Line1;
     /**
      * @brief p1Line2 id first point second line.
      */
-    qint64       p1Line2;
+    quint32       p1Line2;
     /**
      * @brief p2Line2 id second point second line.
      */
-    qint64       p2Line2;
+    quint32       p2Line2;
 };
 
 #endif // VTOOLLINEINTERSECT_H

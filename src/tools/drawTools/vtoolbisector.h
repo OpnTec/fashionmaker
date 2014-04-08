@@ -50,10 +50,10 @@ public:
                     * @param typeCreation way we create this tool.
                     * @param parent parent object.
                     */
-                   VToolBisector(VDomDocument *doc, VContainer *data, const qint64 &id, const QString &typeLine,
-                                 const QString &formula, const qint64 &firstPointId, const qint64 &secondPointId,
-                                 const qint64 &thirdPointId, const Tool::Sources &typeCreation,
-                                 QGraphicsItem * parent = 0);
+                   VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                                 const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                                 const quint32 &thirdPointId, const Valentina::Sources &typeCreation,
+                                 QGraphicsItem * parent = nullptr);
     /**
      * @brief FindPoint find bisector point.
      * @param firstPoint first point of angle.
@@ -75,7 +75,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VDomDocument *doc, VContainer *data);
+    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -93,11 +93,11 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const qint64 _id, const QString &formula, const qint64 &firstPointId,
-                          const qint64 &secondPointId, const qint64 &thirdPointId, const QString &typeLine,
+    static void    Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+                          const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                           const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                          VDomDocument *doc, VContainer *data, const Document::Documents &parse,
-                          const Tool::Sources &typeCreation);
+                          VPattern *doc, VContainer *data, const Document::Documents &parse,
+                          const Valentina::Sources &typeCreation);
     static const QString ToolType;
 public slots:
     /**
@@ -140,11 +140,11 @@ private:
     /**
      * @brief firstPointId id first point of angle.
      */
-    qint64         firstPointId;
+    quint32         firstPointId;
     /**
      * @brief thirdPointId id third point of angle.
      */
-    qint64         thirdPointId;
+    quint32         thirdPointId;
 };
 
 #endif // VTOOLBISECTOR_H

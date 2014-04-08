@@ -29,19 +29,20 @@
 #include "vnodespline.h"
 
 #include <QtWidgets>
+#include "../../widgets/vapplication.h"
 
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
-VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                         const Tool::Sources &typeCreation, const qint64 &idTool, QObject *qoParent,
+VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                         const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                          QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, toPixel(widthHairLine)));
+    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -51,12 +52,12 @@ VNodeSpline::VNodeSpline(VDomDocument *doc, VContainer *data, qint64 id, qint64 
     }
 }
 
-VNodeSpline *VNodeSpline::Create(VDomDocument *doc, VContainer *data, qint64 id, qint64 idSpline,
-                                 const Document::Documents &parse, const Tool::Sources &typeCreation,
-                                 const qint64 &idTool, QObject *parent)
+VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
+                                 const Document::Documents &parse, const Valentina::Sources &typeCreation,
+                                 const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
-    VNodeSpline *spl = 0;
+    VAbstractTool::AddRecord(id, Valentina::NodeSpline, doc);
+    VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
         spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
@@ -96,12 +97,12 @@ void VNodeSpline::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrIdObject, idNode);
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrIdObject, idNode);
     if (idTool != 0)
     {
-        SetAttribute(domElement, AttrIdTool, idTool);
+        doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
 
     AddToModeling(domElement);
@@ -112,10 +113,10 @@ void VNodeSpline::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
+        doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
         if (idTool != 0)
         {
-            SetAttribute(domElement, AttrIdTool, idTool);
+            doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
 }
@@ -124,7 +125,7 @@ void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Scene::Spline);
+        emit ChoosedTool(id, Valentina::Spline);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -132,13 +133,13 @@ void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthMainLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
 void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, toPixel(widthHairLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
 void VNodeSpline::RefreshGeometry()

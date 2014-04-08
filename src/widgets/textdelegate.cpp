@@ -30,7 +30,8 @@
 
 #include <QLineEdit>
 
-TextDelegate::TextDelegate(QObject *parent): QItemDelegate(parent), lastText(QString("Name_"))
+TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
+    regex(regex)
 {
     //Little hack. Help save lineedit text in const method.
     connect(this, &TextDelegate::SaveText, this, &TextDelegate::InitText);
@@ -41,11 +42,8 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(option);
     Q_UNUSED(index);
     QLineEdit *editor = new QLineEdit(parent);
-    Q_CHECK_PTR(editor);
-    QRegExp re("^(([^+ -/()\\^*%:;\"\'=.,><0-9]){1,1}[^+ -/()\\^*%:;\"\'=><]([0-9]){0,}){0,}$");
-    QRegExpValidator *v = new QRegExpValidator(re);
-    Q_CHECK_PTR(v);
-    editor->setValidator( v );
+    //Same regex pattern in xsd file
+    editor->setValidator( new QRegExpValidator(QRegExp(regex)) );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);
     return editor;
 }
@@ -69,7 +67,7 @@ void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, cons
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
     Q_CHECK_PTR(lineEdit);
     QString text = lineEdit->text();
-    if(text.isEmpty())
+    if (text.isEmpty())
     {
         text = lastText;
     }
@@ -94,7 +92,7 @@ void TextDelegate::commitAndCloseEditor()
         lastText = text;
         emit commitData(lineEdit);
     }
-    else if(text.isEmpty() == false)
+    else if (text.isEmpty() == false)
     {
         lineEdit->setText(lastText);
         emit commitData(lineEdit);

@@ -47,7 +47,7 @@ public:
      * @param id spline path id.
      * @param factor scale factor.
      */
-    VSimpleSplinePath(VDomDocument *doc, VContainer *data, qint64 id, qreal *factor);
+    VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor);
 protected:
     /**
      * @brief mouseReleaseEvent handle mouse release events.

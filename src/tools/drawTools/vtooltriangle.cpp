@@ -27,18 +27,18 @@
  *************************************************************************/
 
 #include "vtooltriangle.h"
-#include "../../dialogs/dialogtriangle.h"
+#include "../../dialogs/tools/dialogtriangle.h"
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
-VToolTriangle::VToolTriangle(VDomDocument *doc, VContainer *data, const qint64 &id,
-                             const qint64 &axisP1Id, const qint64 &axisP2Id, const qint64 &firstPointId,
-                             const qint64 &secondPointId, const Tool::Sources &typeCreation, QGraphicsItem *parent)
+VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
+                             const quint32 &axisP1Id, const quint32 &axisP2Id, const quint32 &firstPointId,
+                             const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Tool::FromGui)
+    if (typeCreation == Valentina::FromGui)
     {
         AddToFile();
     }
@@ -62,24 +62,24 @@ void VToolTriangle::setDialog()
 }
 
 void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                           VDomDocument *doc, VContainer *data)
+                           VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    qint64 axisP1Id = dialogTool->getAxisP1Id();
-    qint64 axisP2Id = dialogTool->getAxisP2Id();
-    qint64 firstPointId = dialogTool->getFirstPointId();
-    qint64 secondPointId = dialogTool->getSecondPointId();
+    quint32 axisP1Id = dialogTool->getAxisP1Id();
+    quint32 axisP2Id = dialogTool->getAxisP2Id();
+    quint32 firstPointId = dialogTool->getFirstPointId();
+    quint32 secondPointId = dialogTool->getSecondPointId();
     QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Tool::FromGui);
+           Document::FullParse, Valentina::FromGui);
 }
 
-void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qint64 &axisP1Id,
-                           const qint64 &axisP2Id, const qint64 &firstPointId, const qint64 &secondPointId,
-                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VDomDocument *doc,
-                           VContainer *data, const Document::Documents &parse, const Tool::Sources &typeCreation)
+void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
+                           const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
+                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
     const VPointF *axisP2 = data->GeometricObject<const VPointF *>(axisP2Id);
@@ -88,8 +88,8 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
 
     QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
                               secondPoint->toQPointF());
-    qint64 id = _id;
-    if (typeCreation == Tool::FromGui)
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));
     }
@@ -101,7 +101,7 @@ void VToolTriangle::Create(const qint64 _id, const QString &pointName, const qin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::Triangle, doc);
+    VDrawTool::AddRecord(id, Valentina::Triangle, doc);
     if (parse == Document::FullParse)
     {
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
@@ -152,7 +152,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
         if (c*c < a*a + b*b)
         {
             //Still don't know why this code handled. Need to think about that.
-            qWarning()<<tr("Can't find point.")<<Q_FUNC_INFO;
+            qDebug()<<"Can't find point."<<Q_FUNC_INFO;
             return line.p2();
         }
     }
@@ -163,10 +163,10 @@ void VToolTriangle::FullUpdateFromFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        axisP1Id = domElement.attribute(AttrAxisP1, "").toLongLong();
-        axisP2Id = domElement.attribute(AttrAxisP2, "").toLongLong();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toLongLong();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toLongLong();
+        axisP1Id = domElement.attribute(AttrAxisP1, "").toUInt();
+        axisP2Id = domElement.attribute(AttrAxisP2, "").toUInt();
+        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
+        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
@@ -194,16 +194,16 @@ void VToolTriangle::AddToFile()
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    SetAttribute(domElement, AttrId, id);
-    SetAttribute(domElement, AttrType, ToolType);
-    SetAttribute(domElement, AttrName, point->name());
-    SetAttribute(domElement, AttrMx, toMM(point->mx()));
-    SetAttribute(domElement, AttrMy, toMM(point->my()));
+    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrName, point->name());
+    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
-    SetAttribute(domElement, AttrAxisP1, axisP1Id);
-    SetAttribute(domElement, AttrAxisP2, axisP2Id);
-    SetAttribute(domElement, AttrFirstPoint, firstPointId);
-    SetAttribute(domElement, AttrSecondPoint, secondPointId);
+    doc->SetAttribute(domElement, AttrAxisP1, axisP1Id);
+    doc->SetAttribute(domElement, AttrAxisP2, axisP2Id);
+    doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
+    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
     AddToCalculation(domElement);
 }
@@ -214,13 +214,13 @@ void VToolTriangle::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        SetAttribute(domElement, AttrName, point->name());
-        SetAttribute(domElement, AttrMx, toMM(point->mx()));
-        SetAttribute(domElement, AttrMy, toMM(point->my()));
-        SetAttribute(domElement, AttrAxisP1, axisP1Id);
-        SetAttribute(domElement, AttrAxisP2, axisP2Id);
-        SetAttribute(domElement, AttrFirstPoint, firstPointId);
-        SetAttribute(domElement, AttrSecondPoint, secondPointId);
+        doc->SetAttribute(domElement, AttrName, point->name());
+        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
+        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+        doc->SetAttribute(domElement, AttrAxisP1, axisP1Id);
+        doc->SetAttribute(domElement, AttrAxisP2, axisP2Id);
+        doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
+        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
 }
 
@@ -229,9 +229,9 @@ void VToolTriangle::SaveDialog(QDomElement &domElement)
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
-    SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
-    SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
-    SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
+    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
+    doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
 }
