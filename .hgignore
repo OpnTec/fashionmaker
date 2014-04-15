@@ -19,6 +19,11 @@ syntax: glob
 # Ignore this directory.
 html/
 latex/
+bin/
+moc/
+obj/
+uic/
+rcc/
 
 # Ignore file used QtCreator for user profile.
 *.pro.user
@@ -28,3 +33,6 @@ latex/
 
 # Ignore Mercurial .orig files
 *.orig
+
+# Ignore Makefile
+Makefile

@@ -6,8 +6,8 @@
  **
  **  @brief
  **  @copyright
- **  This source code is part of the Valentine project, a pattern making
- **  program, whose allow create and modeling patterns of clothing.
+ **  This source code is part of the Valentina project, a pattern making
+ **  program that allows creating and modelling patterns of clothing.
  **  Copyright (C) 2013 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
@@ -41,7 +41,25 @@
 #endif
 
 /**
- * @brief The VDomDocument class extend QDomDocument class.
+ * @brief The VDomDocument class represents a Valentina document (.val file).
+ * 
+ * A Valentina document describes the construction of a sewing pattern. The 
+ * information is stored in XML format. By parsing a VDomDocument, the contained
+ * pattern is rendered to a Valentina graphics scene (VMainGraphicsScene).
+ *
+ * A sewing pattern consists of zero or more increments and one 
+ * or more pattern pieces.
+ *
+ * An increment is an auxiliary variable that is calculated from regular measurement
+ * variables (that belong to the standard measurements table). Increments are used to
+ * create a graduation schema for the sewing pattern.
+ *
+ * A pattern piece contains 
+ * 1) auxiliary pattern construction elements (calculation),
+ * 2) pattern construction elements (modeling), and 
+ * 3) special markers, e.g. seam allowances (details).
+ * Of these, 2) and 3) are visible in the final pattern (draw mode 'Modeling'),
+ * 1) is only displayed when editing (draw mode 'Calculation') the pattern.
  */
 class VDomDocument : public QDomDocument
 {
@@ -53,21 +71,22 @@ public:
     static const QString    UnitCM;
     static const QString    UnitINCH;
     /**
-     * @brief VDomDocument constructor.
-     * @param data container with variables.
-     * @param parent parent object
-     */
+    * @param data container with variables
+    * @param comboBoxDraws pointer to the ComboBox that will hold the pattern piece names
+    * @param mode draw mode
+    * @param parent
+    */
     VDomDocument(VContainer *data);
     virtual ~VDomDocument(){}
     /**
-     * @brief elementById find element by id.
+     * @brief Finds an element by id.
      * @param id value id attribute.
      * @return dom element.
      */
     QDomElement    elementById(const QString& id);
     /**
-     * @brief removeAllChilds remove all tag childs.
-     * @param element tag.
+     * @brief Removes all children of a given element tag. RENAME: removeAllChildren
+     * @param element tag
      */
     void           removeAllChilds(QDomElement &element);
     template <typename T>
@@ -76,6 +95,11 @@ public:
      * @param domElement element in xml tree.
      * @param name name of attribute.
      * @param value value of attribute.
+     * @param parse parsing mode
+     * @return list of tool pointers
+     * @return list of history record lists
+     * @return cursor
+     * @throw VExceptionUniqueId
      */
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value)
     {
@@ -84,29 +108,27 @@ public:
         domElement.setAttribute(name, val);
     }
     /**
-     * @brief GetParametrLongLong return long long value of attribute.
-     * @param domElement tag in xml tree.
-     * @param name attribute name.
-     * @return long long value.
+     * @brief Returns the long long value of the given attribute. RENAME: GetParameterLongLong?
+     * @param domElement tag in xml tree
+     * @param name attribute name
+     * @return long long value
      */
     quint32         GetParametrUInt(const QDomElement& domElement, const QString &name,
                                        const QString &defValue) const;
     /**
-     * @brief GetParametrString return string value of attribute.
+     * @brief Returns the string value of the given attribute. RENAME: see above
      *
      * if attribute empty return default value. If default value empty too throw exception.
-     * @param domElement tag in xml tree.
-     * @param name attribute name.
+     * @return attribute value
      * @throw VExceptionEmptyParameter when attribute is empty
-     * @return attribute value.
      */
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     /**
-     * @brief GetParametrDouble return double value of attribute.
-     * @param domElement tag in xml tree.
-     * @param name attribute name.
-     * @return double value.
+     * @brief Returns the double value of the given attribute.
+     * @param domElement tag in xml tree
+     * @param name attribute name
+     * @return double value
      */
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
@@ -134,15 +156,15 @@ protected:
 private:
     Q_DISABLE_COPY(VDomDocument)
     /**
-     * @brief map use for finding element by id.
+     * @brief Map used for finding element by id.
      */
     QHash<QString, QDomElement> map;
 
     /**
-     * @brief find find element by id.
-     * @param node node.
-     * @param id id value.
-     * @return true if found.
+     * @brief Find element by id.
+     * @param node node
+     * @param id id value
+     * @return true if found
      */
     bool           find(const QDomElement &node, const QString& id);
 };
