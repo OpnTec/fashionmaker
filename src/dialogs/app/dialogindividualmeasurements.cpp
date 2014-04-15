@@ -34,6 +34,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "../../widgets/vapplication.h"
+#include <QPushButton>
 
 DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,
                                                            QWidget *parent) :

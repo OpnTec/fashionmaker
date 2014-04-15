@@ -29,6 +29,7 @@
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
 #include <QSettings>
+#include <QPushButton>
 
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc)

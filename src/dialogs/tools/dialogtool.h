@@ -36,6 +36,7 @@
 #include <QListWidgetItem>
 #include <QRadioButton>
 #include <QDialogButtonBox>
+#include <QPushButton>
 #include "../../container/vcontainer.h"
 #include "../../widgets/vapplication.h"
 
