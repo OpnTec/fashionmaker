@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   version.h
+ **  @file   version.cpp
  **  @author Roman Telezhinsky <dismine@gmail.com>
- **  @date   November 15, 2013
+ **  @date   16 4, 2014
  **
  **  @brief
  **  @copyright
@@ -26,33 +26,10 @@
  **
  *************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+extern const int MAJOR_VERSION = 0;
+extern const int MINOR_VERSION = 2;
+extern const int DEBUG_VERSION = 2;
 
-#include <QtCore/QString>
-
-extern const int MAJOR_VERSION;
-extern const int MINOR_VERSION;
-extern const int DEBUG_VERSION;
-
-extern const QString APP_VERSION;
-extern const QString WARRANTY;
-
-#define VER_FILEVERSION             0,2,2,0
-#define VER_FILEVERSION_STR         "0.2.2.0\0"
-
-#define VER_PRODUCTVERSION          0,2,2,0
-#define VER_PRODUCTVERSION_STR      "0.2\0"
-
-#define VER_COMPANYNAME_STR         "ValentinaTeam"
-#define VER_FILEDESCRIPTION_STR     "Valentina"
-#define VER_INTERNALNAME_STR        "Valentina"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014 Valentina Team"
-#define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
-#define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
-#define VER_ORIGINALFILENAME_STR    "valentina.exe"
-#define VER_PRODUCTNAME_STR         "Valentina"
-
-#define VER_COMPANYDOMAIN_STR       "www.valentina-project.org"
-
-#endif // VERSION_H
+extern const QString APP_VERSION(QStringLiteral("%1.%2.%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION));
+extern const QString WARRANTY("The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE "
+                              "WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.");

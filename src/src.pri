@@ -1,7 +1,8 @@
 SOURCES += src/main.cpp \
         src/mainwindow.cpp \
         src/tablewindow.cpp \
-        src/stable.cpp
+        src/stable.cpp \
+    src/version.cpp
 
 HEADERS  += src/mainwindow.h \
     src/options.h \

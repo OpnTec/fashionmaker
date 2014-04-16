@@ -33,6 +33,7 @@
 #include <QMessageBox>
 #include <QThread>
 #include "tablewindow.h"
+#include "version.h"
 
 void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -130,10 +131,12 @@ int main(int argc, char *argv[])
         qInstallMessageHandler(noisyFailureMsgHandler);
     }
 #endif
-    app.setApplicationDisplayName("Valentina");
-    app.setApplicationName("Valentina");
-    app.setOrganizationName("ValentinaTeam");
-    app.setOrganizationDomain("valentinaproject.bitbucket.org");
+    app.setApplicationDisplayName(VER_PRODUCTNAME_STR);
+    app.setApplicationName(VER_INTERNALNAME_STR);
+    app.setOrganizationName(VER_COMPANYNAME_STR);
+    app.setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    // Setting the Application version
+    app.setApplicationVersion(APP_VERSION);
 
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
