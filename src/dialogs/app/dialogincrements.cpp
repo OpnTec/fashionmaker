@@ -38,6 +38,7 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vabstracttool.h"
+#include <QGraphicsView>
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");

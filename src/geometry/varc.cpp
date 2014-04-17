@@ -29,6 +29,7 @@
 #include "varc.h"
 #include "vspline.h"
 #include "../exception/vexception.h"
+#include <QDebug>
 
 class QRectF;
 

@@ -29,6 +29,9 @@
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
 #include "../geometry/vequidistant.h"
+#include <QKeyEvent>
+#include <QGraphicsSceneMouseEvent>
+#include <QMenu>
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -42,10 +45,10 @@ const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
 
-const QString VToolDetail::NodeArc        = QStringLiteral("NodeArc");
-const QString VToolDetail::NodePoint      = QStringLiteral("NodePoint");
-const QString VToolDetail::NodeSpline     = QStringLiteral("NodeSpline");
-const QString VToolDetail::NodeSplinePath = QStringLiteral("NodeSplinePath");
+const QString VToolDetail::NodeArc          = QStringLiteral("NodeArc");
+const QString VToolDetail::NodePoint        = QStringLiteral("NodePoint");
+const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
+const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 
 VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)

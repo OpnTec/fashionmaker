@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vabstractspline.h"
+#include <QKeyEvent>
 
 const QString VAbstractSpline::TagName = QStringLiteral("spline");
 

@@ -28,6 +28,7 @@
 
 #include "vsimplespline.h"
 #include "../widgets/vapplication.h"
+#include <QPen>
 
 VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)

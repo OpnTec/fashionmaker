@@ -28,6 +28,7 @@
 
 #include "vsimplesplinepath.h"
 #include "../widgets/vapplication.h"
+#include <QGraphicsSceneMouseEvent>
 
 VSimpleSplinePath::VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor)
     :VAbstractTool(doc, data, id), factor(factor)

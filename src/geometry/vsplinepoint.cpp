@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vsplinepoint.h"
+#include <QDebug>
 
 VSplinePoint::VSplinePoint()
     :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1){}

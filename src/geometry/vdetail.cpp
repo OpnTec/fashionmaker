@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vdetail.h"
+#include <QDebug>
 
 VDetail::VDetail()
     :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),

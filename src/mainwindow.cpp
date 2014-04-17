@@ -1440,6 +1440,12 @@ void MainWindow::LoadPattern(const QString &fileName)
         Clear();
         return;
     }
+    catch(VException &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file."), this);
+        Clear();
+        return;
+    }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::currentDrawChanged);
     QString nameDraw = doc->GetNameActivDraw();

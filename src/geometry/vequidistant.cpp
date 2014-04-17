@@ -28,6 +28,7 @@
 
 #include "vequidistant.h"
 #include "../widgets/vapplication.h"
+#include <QDebug>
 
 QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
 {

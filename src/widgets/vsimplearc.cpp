@@ -28,6 +28,8 @@
 
 #include "vsimplearc.h"
 #include "../widgets/vapplication.h"
+#include <QPen>
+#include <QGraphicsSceneMouseEvent>
 
 VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
 :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)

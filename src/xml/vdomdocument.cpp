@@ -35,6 +35,8 @@
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 #include <QFile>
+#include <QFileInfo>
+#include <QTemporaryFile>
 
 //This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler

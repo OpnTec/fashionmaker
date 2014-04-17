@@ -26,6 +26,8 @@
  **
  *************************************************************************/
 
+#include <QString>
+
 extern const int MAJOR_VERSION = 0;
 extern const int MINOR_VERSION = 2;
 extern const int DEBUG_VERSION = 2;

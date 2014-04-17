@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vtoolpoint.h"
+#include <QKeyEvent>
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
