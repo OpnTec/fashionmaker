@@ -1,13 +1,16 @@
 TEMPLATE = subdirs
 #SUBDIRS = sub_lib sub_tests sub_app
-SUBDIRS = sub_app
+SUBDIRS = \
+    sub_app \
+    sub_lib_qmuparser
 
-#sub_lib.subdir = lib
+sub_lib_qmuparser.subdir = libs/qmuparser
+sub_lib_qmuparser.file = libs/qmuparser/qmuparser.pro
 #sub_tests.file = tests/proj.pro
 #sub_tests.depends = sub_lib
 sub_app.subdir = app
 sub_app.file = app/app.pro
-#sub_app.depends = sub_lib
+sub_app.depends = sub_lib_qmuparser
 
 #This makes it possible to use make -j 4 on your fancy quad-core system with a project that consists of several
 #components that depend on each other. To simplify the process a bit, the following test function can be defined:

@@ -30,7 +30,7 @@
 #define STABLE_H
 
 /* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
-#pragma message("Compiling precompiled headers for Valentina.\n")
+#pragma message("Compiling precompiled headers for QmuParser library.\n")
 
 /* Add C includes here */
 
@@ -40,11 +40,7 @@
 #define _USE_MATH_DEFINES
 #endif
 #include <QtCore>
-#include <QApplication>
 #include <QtGlobal>
-#include <QtXml>
-#include <QtWidgets>
-#include <QtSvg/QtSvg>
 #endif
 
 #endif // STABLE_H
