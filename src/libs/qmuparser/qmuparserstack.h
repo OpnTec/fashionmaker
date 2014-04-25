@@ -79,7 +79,7 @@ namespace qmu
 	    TValueType pop()
       {
         if (empty())
-          throw QmuParserError( _T("stack is empty.") );
+          throw QmuParserError( "stack is empty." );
 
         TValueType el = top();
         m_Stack.pop();

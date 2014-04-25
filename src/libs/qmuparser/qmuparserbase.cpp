@@ -57,12 +57,12 @@ namespace qmu
   */
   const char_type* QmuParserBase::c_DefaultOprt[] =
   { 
-    _T("<="), _T(">="),  _T("!="), 
-    _T("=="), _T("<"),   _T(">"), 
-    _T("+"),  _T("-"),   _T("*"), 
-    _T("/"),  _T("^"),   _T("&&"), 
-    _T("||"), _T("="),   _T("("),  
-    _T(")"),   _T("?"),  _T(":"), 0 
+    "<=", ">=", "!=",
+    "==", "<",  ">",
+    "+",  "-",  "*",
+    "/",  "^",  "&&",
+    "||", "=",  "(",
+    ")",  "?",  ":", 0
   };
 
   //------------------------------------------------------------------------------
@@ -270,38 +270,38 @@ namespace qmu
 
     if (eInfo==pviFULL)
     {
-      ss << _T(" (") << MUP_VERSION_DATE;
-      ss << std::dec << _T("; ") << sizeof(void*)*8 << _T("BIT");
+      ss << " (" << MUP_VERSION_DATE;
+      ss << std::dec << "; " << sizeof(void*)*8 << "BIT";
 
 #ifdef _DEBUG
-      ss << _T("; DEBUG");
+      ss << "; DEBUG";
 #else 
-      ss << _T("; RELEASE");
+      ss << "; RELEASE";
 #endif
 
 #ifdef _UNICODE
-      ss << _T("; UNICODE");
+      ss << "; UNICODE";
 #else
   #ifdef _MBCS
-      ss << _T("; MBCS");
+      ss << "; MBCS";
   #else
-      ss << _T("; ASCII");
+      ss << "; ASCII";
   #endif
 #endif
 
-#ifdef MUP_USE_OPENMP
-      ss << _T("; OPENMP");
+#ifdef QMUP_USE_OPENMP
+      ss << "; OPENMP";
 //#else
-//      ss << _T("; NO_OPENMP");
+//      ss << "; NO_OPENMP";
 #endif
 
 #if defined(MUP_MATH_EXCEPTIONS)
-      ss << _T("; MATHEXC");
+      ss << "; MATHEXC";
 //#else
-//      ss << _T("; NO_MATHEXC");
+//      ss << "; NO_MATHEXC";
 #endif
 
-      ss << _T(")");
+      ss << ")";
     }
 
     return ss.str();
@@ -417,7 +417,7 @@ namespace qmu
     // when calling tellg on a stringstream created from the expression after 
     // reading a value at the end of an expression. (mu::Parser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    string_type sBuf(a_sExpr + _T(" ") );
+    string_type sBuf(a_sExpr + " " );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
   }
@@ -589,7 +589,7 @@ namespace qmu
       \post Will reset the Parser to string parsing mode.
       \throw ParserException in case the name contains invalid signs or a_pVar is NULL.
   */
-  void QmuParserBase::DefineVar(const string_type &a_sName, value_type *a_pVar)
+  void QmuParserBase::DefineVar(const string_type &a_sName, qreal *a_pVar)
   {
     if (a_pVar==0)
       Error(ecINVALID_VAR_PTR);
@@ -610,7 +610,7 @@ namespace qmu
       \post Will reset the Parser to string parsing mode.
       \throw ParserException in case the name contains invalid signs.
   */
-  void QmuParserBase::DefineConst(const string_type &a_sName, value_type a_fVal)
+  void QmuParserBase::DefineConst(const string_type &a_sName, qreal a_fVal)
   {
     CheckName(a_sName, ValidNameChars());
     m_ConstDef[a_sName] = a_fVal;
@@ -923,7 +923,7 @@ namespace qmu
       if (optTok.GetCode()==cmASSIGN)
       {
         if (valTok2.GetCode()!=cmVAR)
-          Error(ecUNEXPECTED_OPERATOR, -1, _T("="));
+          Error(ecUNEXPECTED_OPERATOR, -1, "=");
                       
         m_vRPN.AddAssignOp(valTok2.GetVar());
       }
@@ -990,7 +990,7 @@ namespace qmu
       associated operators. The Stack is filled beginning from index one the 
       value at index zero is not used at all.
   */
-  value_type QmuParserBase::ParseCmdCode() const
+  qreal QmuParserBase::ParseCmdCode() const
   {
     return ParseCmdCodeBulk(0, 0);
   }
@@ -1000,14 +1000,14 @@ namespace qmu
       \param nOffset The offset added to variable addresses (for bulk mode)
       \param nThreadID OpenMP Thread id of the calling thread
   */
-  value_type QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
+  qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
   {
     assert(nThreadID<=s_MaxNumOpenMPThreads);
 
     // Note: The check for nOffset==0 and nThreadID here is not necessary but 
     //       brings a minor performance gain when not in bulk mode.
-    value_type *Stack = ((nOffset==0) && (nThreadID==0)) ? &m_vStackBuffer[0] : &m_vStackBuffer[nThreadID * (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
-    value_type buf;
+    qreal *Stack = ((nOffset==0) && (nThreadID==0)) ? &m_vStackBuffer[0] : &m_vStackBuffer[nThreadID * (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
+    qreal buf;
     int sidx(0);
     for (const SToken *pTok = m_vRPN.GetBase(); pTok->Cmd!=cmEND ; ++pTok)
     {
@@ -1033,7 +1033,7 @@ namespace qmu
                   continue;
 
       case  cmPOW: 
-              --sidx; Stack[sidx] = MathImpl<value_type>::Pow(Stack[sidx], Stack[1+sidx]);
+              --sidx; Stack[sidx] = MathImpl<qreal>::Pow(Stack[sidx], Stack[1+sidx]);
               continue;
 
       case  cmLAND: --sidx; Stack[sidx]  = Stack[sidx] && Stack[sidx+1]; continue;
@@ -1208,7 +1208,7 @@ namespace qmu
    
         case cmVAR:
                 stVal.push(opt);
-                m_vRPN.AddVar( static_cast<value_type*>(opt.GetVar()) );
+                m_vRPN.AddVar( static_cast<qreal*>(opt.GetVar()) );
                 break;
 
         case cmVAL:
@@ -1415,7 +1415,7 @@ namespace qmu
     pointer #m_pParseFormula will be changed to the second parse routine the 
     uses bytecode instead of string parsing.
   */
-  value_type QmuParserBase::ParseString() const
+  qreal QmuParserBase::ParseString() const
   {
     try
     {
@@ -1610,14 +1610,14 @@ namespace qmu
     QmuParserStack<token_type> stOprt(a_stOprt),
                             stVal(a_stVal);
 
-    mu::console() << _T("\nValue stack:\n");
+    mu::console() << "\nValue stack:\n";
     while ( !stVal.empty() ) 
     {
       token_type val = stVal.pop();
       if (val.GetType()==tpSTR)
-        mu::console() << _T(" \"") << val.GetAsString() << _T("\" ");
+        mu::console() << " \"" << val.GetAsString() << "\" ";
       else
-        mu::console() << _T(" ") << val.GetVal() << _T(" ");
+        mu::console() << " " << val.GetVal() << " ";
     }
     mu::console() << "\nOperator stack:\n";
 
@@ -1625,37 +1625,37 @@ namespace qmu
     {
       if (stOprt.top().GetCode()<=cmASSIGN) 
       {
-        mu::console() << _T("OPRT_INTRNL \"")
+        mu::console() << "OPRT_INTRNL \""
                       << QmuParserBase::c_DefaultOprt[stOprt.top().GetCode()]
-                      << _T("\" \n");
+                      << "\" \n";
       }
       else
       {
         switch(stOprt.top().GetCode())
         {
-        case cmVAR:   mu::console() << _T("VAR\n");  break;
-        case cmVAL:   mu::console() << _T("VAL\n");  break;
-        case cmFUNC:  mu::console() << _T("FUNC \"") 
+        case cmVAR:   mu::console() << "VAR\n";  break;
+        case cmVAL:   mu::console() << "VAL\n";  break;
+        case cmFUNC:  mu::console() << "FUNC \""
                                     << stOprt.top().GetAsString() 
-                                    << _T("\"\n");   break;
-        case cmFUNC_BULK:  mu::console() << _T("FUNC_BULK \"") 
+                                    << "\"\n";   break;
+        case cmFUNC_BULK:  mu::console() << "FUNC_BULK \""
                                          << stOprt.top().GetAsString() 
-                                         << _T("\"\n");   break;
-        case cmOPRT_INFIX: mu::console() << _T("OPRT_INFIX \"")
+                                         << "\"\n";   break;
+        case cmOPRT_INFIX: mu::console() << "OPRT_INFIX \""
                                          << stOprt.top().GetAsString() 
-                                         << _T("\"\n");      break;
-        case cmOPRT_BIN:   mu::console() << _T("OPRT_BIN \"") 
+                                         << "\"\n";      break;
+        case cmOPRT_BIN:   mu::console() << "OPRT_BIN \""
                                          << stOprt.top().GetAsString() 
-                                         << _T("\"\n");           break;
-        case cmFUNC_STR: mu::console() << _T("FUNC_STR\n");       break;
-        case cmEND:      mu::console() << _T("END\n");            break;
-        case cmUNKNOWN:  mu::console() << _T("UNKNOWN\n");        break;
-        case cmBO:       mu::console() << _T("BRACKET \"(\"\n");  break;
-        case cmBC:       mu::console() << _T("BRACKET \")\"\n");  break;
-        case cmIF:       mu::console() << _T("IF\n");  break;
-        case cmELSE:     mu::console() << _T("ELSE\n");  break;
-        case cmENDIF:    mu::console() << _T("ENDIF\n");  break;
-        default:         mu::console() << stOprt.top().GetCode() << _T(" ");  break;
+                                         << "\"\n";           break;
+        case cmFUNC_STR: mu::console() << "FUNC_STR\n";       break;
+        case cmEND:      mu::console() << "END\n";            break;
+        case cmUNKNOWN:  mu::console() << "UNKNOWN\n";        break;
+        case cmBO:       mu::console() << "BRACKET \"(\"\n";  break;
+        case cmBC:       mu::console() << "BRACKET \")\"\n";  break;
+        case cmIF:       mu::console() << "IF\n";  break;
+        case cmELSE:     mu::console() << "ELSE\n";  break;
+        case cmENDIF:    mu::console() << "ENDIF\n";  break;
+        default:         mu::console() << stOprt.top().GetCode() << " ";  break;
         }
       }	
       stOprt.pop();
@@ -1672,7 +1672,7 @@ namespace qmu
       This member function can be used to retriev all results of an expression
       made up of multiple comma seperated subexpressions (i.e. "x+y,sin(x),cos(y)")
   */
-  value_type* QmuParserBase::Eval(int &nStackSize) const
+  qreal* QmuParserBase::Eval(int &nStackSize) const
   {
     (this->*m_pParseFormula)(); 
     nStackSize = m_nFinalResultIdx;
@@ -1709,13 +1709,13 @@ namespace qmu
     \return The evaluation result
     \throw ParseException if no Formula is set or in case of any other error related to the formula.
   */
-  value_type QmuParserBase::Eval() const
+  qreal QmuParserBase::Eval() const
   {
     return (this->*m_pParseFormula)(); 
   }
 
   //---------------------------------------------------------------------------
-  void QmuParserBase::Eval(value_type *results, int nBulkSize)
+  void QmuParserBase::Eval(qreal *results, int nBulkSize)
   {
     CreateRPN();
 

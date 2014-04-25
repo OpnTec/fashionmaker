@@ -115,26 +115,26 @@ namespace qmu
   template<>                                     \
   struct MathImpl<TYPE>                          \
   {                                              \
-    static TYPE Sin(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Cos(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Tan(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ASin(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ACos(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ATan(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ATan2(TYPE, TYPE)  { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Sinh(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Cosh(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Tanh(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ASinh(TYPE)        { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ACosh(TYPE)        { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE ATanh(TYPE)        { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Log(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Log2(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Log10(TYPE)        { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Exp(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Abs(TYPE)          { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Sqrt(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
-    static TYPE Rint(TYPE)         { throw QmuParserError(_T("unimplemented function.")); } \
+    static TYPE Sin(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE Cos(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE Tan(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE ASin(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE ACos(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE ATan(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE ATan2(TYPE, TYPE)  { throw QmuParserError("unimplemented function."); } \
+    static TYPE Sinh(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE Cosh(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE Tanh(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE ASinh(TYPE)        { throw QmuParserError("unimplemented function."); } \
+    static TYPE ACosh(TYPE)        { throw QmuParserError("unimplemented function."); } \
+    static TYPE ATanh(TYPE)        { throw QmuParserError("unimplemented function."); } \
+    static TYPE Log(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE Log2(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE Log10(TYPE)        { throw QmuParserError("unimplemented function."); } \
+    static TYPE Exp(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE Abs(TYPE)          { throw QmuParserError("unimplemented function."); } \
+    static TYPE Sqrt(TYPE)         { throw QmuParserError("unimplemented function."); } \
+    static TYPE Rint(TYPE)         { throw QmuParserError("unimplemented function."); } \
     static TYPE Sign(TYPE v)          { return (TYPE)((v<0) ? -1 : (v>0) ? 1 : 0);     } \
     static TYPE Pow(TYPE v1, TYPE v2) { return (TYPE)std::pow((double)v1, (double)v2); } \
   };

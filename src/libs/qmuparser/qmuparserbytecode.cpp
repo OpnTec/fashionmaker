@@ -95,7 +95,7 @@ namespace qmu
       \param a_pVar Pointer to be added.
       \throw nothrow
   */
-  void QmuParserByteCode::AddVar(value_type *a_pVar)
+  void QmuParserByteCode::AddVar(qreal *a_pVar)
   {
     ++m_iStackPos;
     m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
@@ -122,7 +122,7 @@ namespace qmu
       \param a_pVal Value to be added.
       \throw nothrow
   */
-  void QmuParserByteCode::AddVal(value_type a_fVal)
+  void QmuParserByteCode::AddVal(qreal a_fVal)
   {
     ++m_iStackPos;
     m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
@@ -140,7 +140,7 @@ namespace qmu
   void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
   {
     std::size_t sz = m_vRPN.size();
-    value_type &x = m_vRPN[sz-2].Val.data2,
+    qreal &x = m_vRPN[sz-2].Val.data2,
                &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
     {
@@ -159,14 +159,14 @@ namespace qmu
 
 #if defined(MUP_MATH_EXCEPTIONS)
         if (y==0)
-          throw ParserError(ecDIV_BY_ZERO, _T("0"));
+          throw ParserError(ecDIV_BY_ZERO, "0");
 #endif
 
         x = x / y;   
         m_vRPN.pop_back();
         break;
 
-    case cmPOW: x = MathImpl<value_type>::Pow(x, y); 
+    case cmPOW: x = MathImpl<qreal>::Pow(x, y);
                 m_vRPN.pop_back();
                 break;
 
@@ -243,7 +243,7 @@ namespace qmu
                         (m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
 
                 m_vRPN[sz-2].Cmd = cmVARMUL;
-                m_vRPN[sz-2].Val.ptr    = (value_type*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));    // variable
+                m_vRPN[sz-2].Val.ptr    = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));    // variable
                 m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data2;  // offset
                 m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data;   // multiplikatior
                 m_vRPN.pop_back();
@@ -256,7 +256,7 @@ namespace qmu
                    (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVAR) ) 
               {
                 m_vRPN[sz-2].Cmd        = cmVARMUL;
-                m_vRPN[sz-2].Val.ptr    = (value_type*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));
+                m_vRPN[sz-2].Val.ptr    = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));
                 m_vRPN[sz-2].Val.data   = m_vRPN[sz-2].Val.data2 + m_vRPN[sz-1].Val.data2;
                 m_vRPN[sz-2].Val.data2  = 0;
                 m_vRPN.pop_back();
@@ -267,7 +267,7 @@ namespace qmu
               {
                 // Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
                 m_vRPN[sz-2].Cmd     = cmVARMUL;
-                m_vRPN[sz-2].Val.ptr = (value_type*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));
+                m_vRPN[sz-2].Val.ptr = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) | (long long)(m_vRPN[sz-1].Val.ptr));
                 if (m_vRPN[sz-1].Cmd == cmVAL)
                 {
                   m_vRPN[sz-2].Val.data  *= m_vRPN[sz-1].Val.data2;
@@ -335,7 +335,7 @@ namespace qmu
 
       \sa  ParserToken::ECmdCode
   */
-  void QmuParserByteCode::AddAssignOp(value_type *a_pVar)
+  void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
   {
     --m_iStackPos;
 
@@ -495,89 +495,89 @@ namespace qmu
   {
     if (!m_vRPN.size()) 
     {
-      mu::console() << _T("No bytecode available\n");
+      mu::console() << "No bytecode available\n";
       return;
     }
 
-    mu::console() << _T("Number of RPN tokens:") << (int)m_vRPN.size() << _T("\n");
+    mu::console() << "Number of RPN tokens:" << (int)m_vRPN.size() << "\n";
     for (std::size_t i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
     {
-      mu::console() << std::dec << i << _T(" : \t");
+      mu::console() << std::dec << i << " : \t";
       switch (m_vRPN[i].Cmd)
       {
-      case cmVAL:   mu::console() << _T("VAL \t");
-                    mu::console() << _T("[") << m_vRPN[i].Val.data2 << _T("]\n");
+      case cmVAL:   mu::console() << "VAL \t";
+                    mu::console() << "[" << m_vRPN[i].Val.data2 << "]\n";
                     break;
 
-      case cmVAR:   mu::console() << _T("VAR \t");
-	                  mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Val.ptr << _T("]\n"); 
+      case cmVAR:   mu::console() << "VAR \t";
+                      mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                     break;
 
-      case cmVARPOW2: mu::console() << _T("VARPOW2 \t");
-	                    mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Val.ptr << _T("]\n"); 
+      case cmVARPOW2: mu::console() << "VARPOW2 \t";
+                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARPOW3: mu::console() << _T("VARPOW3 \t");
-	                    mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Val.ptr << _T("]\n"); 
+      case cmVARPOW3: mu::console() << "VARPOW3 \t";
+                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARPOW4: mu::console() << _T("VARPOW4 \t");
-	                    mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Val.ptr << _T("]\n"); 
+      case cmVARPOW4: mu::console() << "VARPOW4 \t";
+                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARMUL:  mu::console() << _T("VARMUL \t");
-	                    mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Val.ptr << _T("]"); 
-                      mu::console() << _T(" * [") << m_vRPN[i].Val.data << _T("]");
-                      mu::console() << _T(" + [") << m_vRPN[i].Val.data2 << _T("]\n");
+      case cmVARMUL:  mu::console() << "VARMUL \t";
+                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]";
+                      mu::console() << " * [" << m_vRPN[i].Val.data << "]";
+                      mu::console() << " + [" << m_vRPN[i].Val.data2 << "]\n";
                       break;
 
-      case cmFUNC:  mu::console() << _T("CALL\t");
-                    mu::console() << _T("[ARG:") << std::dec << m_vRPN[i].Fun.argc << _T("]"); 
-                    mu::console() << _T("[ADDR: 0x") << std::hex << m_vRPN[i].Fun.ptr << _T("]"); 
-                    mu::console() << _T("\n");
+      case cmFUNC:  mu::console() << "CALL\t";
+                    mu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
+                    mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Fun.ptr << "]";
+                    mu::console() << "\n";
                     break;
 
       case cmFUNC_STR:
-                    mu::console() << _T("CALL STRFUNC\t");
-                    mu::console() << _T("[ARG:") << std::dec << m_vRPN[i].Fun.argc << _T("]");
-                    mu::console() << _T("[IDX:") << std::dec << m_vRPN[i].Fun.idx << _T("]");
-                    mu::console() << _T("[ADDR: 0x") << m_vRPN[i].Fun.ptr << _T("]\n"); 
+                    mu::console() << "CALL STRFUNC\t";
+                    mu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
+                    mu::console() << "[IDX:" << std::dec << m_vRPN[i].Fun.idx << "]";
+                    mu::console() << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]\n";
                     break;
 
-      case cmLT:    mu::console() << _T("LT\n");  break;
-      case cmGT:    mu::console() << _T("GT\n");  break;
-      case cmLE:    mu::console() << _T("LE\n");  break;
-      case cmGE:    mu::console() << _T("GE\n");  break;
-      case cmEQ:    mu::console() << _T("EQ\n");  break;
-      case cmNEQ:   mu::console() << _T("NEQ\n"); break;
-      case cmADD:   mu::console() << _T("ADD\n"); break;
-      case cmLAND:  mu::console() << _T("&&\n"); break;
-      case cmLOR:   mu::console() << _T("||\n"); break;
-      case cmSUB:   mu::console() << _T("SUB\n"); break;
-      case cmMUL:   mu::console() << _T("MUL\n"); break;
-      case cmDIV:   mu::console() << _T("DIV\n"); break;
-      case cmPOW:   mu::console() << _T("POW\n"); break;
+      case cmLT:    mu::console() << "LT\n";  break;
+      case cmGT:    mu::console() << "GT\n";  break;
+      case cmLE:    mu::console() << "LE\n";  break;
+      case cmGE:    mu::console() << "GE\n";  break;
+      case cmEQ:    mu::console() << "EQ\n";  break;
+      case cmNEQ:   mu::console() << "NEQ\n"; break;
+      case cmADD:   mu::console() << "ADD\n"; break;
+      case cmLAND:  mu::console() << "&&\n"; break;
+      case cmLOR:   mu::console() << "||\n"; break;
+      case cmSUB:   mu::console() << "SUB\n"; break;
+      case cmMUL:   mu::console() << "MUL\n"; break;
+      case cmDIV:   mu::console() << "DIV\n"; break;
+      case cmPOW:   mu::console() << "POW\n"; break;
 
-      case cmIF:    mu::console() << _T("IF\t");
-                    mu::console() << _T("[OFFSET:") << std::dec << m_vRPN[i].Oprt.offset << _T("]\n");
+      case cmIF:    mu::console() << "IF\t";
+                    mu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
                     break;
 
-      case cmELSE:  mu::console() << _T("ELSE\t");
-                    mu::console() << _T("[OFFSET:") << std::dec << m_vRPN[i].Oprt.offset << _T("]\n");
+      case cmELSE:  mu::console() << "ELSE\t";
+                    mu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
                     break;
 
-      case cmENDIF: mu::console() << _T("ENDIF\n"); break;
+      case cmENDIF: mu::console() << "ENDIF\n"; break;
 
       case cmASSIGN: 
-                    mu::console() << _T("ASSIGN\t");
-                    mu::console() << _T("[ADDR: 0x") << m_vRPN[i].Oprt.ptr << _T("]\n"); 
+                    mu::console() << "ASSIGN\t";
+                    mu::console() << "[ADDR: 0x" << m_vRPN[i].Oprt.ptr << "]\n";
                     break; 
 
-      default:      mu::console() << _T("(unknown code: ") << m_vRPN[i].Cmd << _T(")\n"); 
+      default:      mu::console() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
                     break;
       } // switch cmdCode
     } // while bytecode
 
-    mu::console() << _T("END") << std::endl;
+    mu::console() << "END" << std::endl;
   }
 } // namespace qmu

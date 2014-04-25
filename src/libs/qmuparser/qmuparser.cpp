@@ -49,78 +49,78 @@ namespace qmu
 
   //---------------------------------------------------------------------------
   // Trigonometric function
-  value_type QmuParser::Sin(value_type v)   { return MathImpl<value_type>::Sin(v);  }
-  value_type QmuParser::Cos(value_type v)   { return MathImpl<value_type>::Cos(v);  }
-  value_type QmuParser::Tan(value_type v)   { return MathImpl<value_type>::Tan(v);  }
-  value_type QmuParser::ASin(value_type v)  { return MathImpl<value_type>::ASin(v); }
-  value_type QmuParser::ACos(value_type v)  { return MathImpl<value_type>::ACos(v); }
-  value_type QmuParser::ATan(value_type v)  { return MathImpl<value_type>::ATan(v); }
-  value_type QmuParser::ATan2(value_type v1, value_type v2) { return MathImpl<value_type>::ATan2(v1, v2); }
-  value_type QmuParser::Sinh(value_type v)  { return MathImpl<value_type>::Sinh(v); }
-  value_type QmuParser::Cosh(value_type v)  { return MathImpl<value_type>::Cosh(v); }
-  value_type QmuParser::Tanh(value_type v)  { return MathImpl<value_type>::Tanh(v); }
-  value_type QmuParser::ASinh(value_type v) { return MathImpl<value_type>::ASinh(v); }
-  value_type QmuParser::ACosh(value_type v) { return MathImpl<value_type>::ACosh(v); }
-  value_type QmuParser::ATanh(value_type v) { return MathImpl<value_type>::ATanh(v); }
+  qreal QmuParser::Sin(qreal v)   { return MathImpl<qreal>::Sin(v);  }
+  qreal QmuParser::Cos(qreal v)   { return MathImpl<qreal>::Cos(v);  }
+  qreal QmuParser::Tan(qreal v)   { return MathImpl<qreal>::Tan(v);  }
+  qreal QmuParser::ASin(qreal v)  { return MathImpl<qreal>::ASin(v); }
+  qreal QmuParser::ACos(qreal v)  { return MathImpl<qreal>::ACos(v); }
+  qreal QmuParser::ATan(qreal v)  { return MathImpl<qreal>::ATan(v); }
+  qreal QmuParser::ATan2(qreal v1, qreal v2) { return MathImpl<qreal>::ATan2(v1, v2); }
+  qreal QmuParser::Sinh(qreal v)  { return MathImpl<qreal>::Sinh(v); }
+  qreal QmuParser::Cosh(qreal v)  { return MathImpl<qreal>::Cosh(v); }
+  qreal QmuParser::Tanh(qreal v)  { return MathImpl<qreal>::Tanh(v); }
+  qreal QmuParser::ASinh(qreal v) { return MathImpl<qreal>::ASinh(v); }
+  qreal QmuParser::ACosh(qreal v) { return MathImpl<qreal>::ACosh(v); }
+  qreal QmuParser::ATanh(qreal v) { return MathImpl<qreal>::ATanh(v); }
 
   //---------------------------------------------------------------------------
   // Logarithm functions
 
   // Logarithm base 2
-  value_type QmuParser::Log2(value_type v)
+  qreal QmuParser::Log2(qreal v)
   {
     #ifdef MUP_MATH_EXCEPTIONS
         if (v<=0)
-          throw QmuParserError(ecDOMAIN_ERROR, _T("Log2"));
+          throw QmuParserError(ecDOMAIN_ERROR, "Log2");
     #endif
 
-    return MathImpl<value_type>::Log2(v);
+    return MathImpl<qreal>::Log2(v);
   }
 
   // Logarithm base 10
-  value_type QmuParser::Log10(value_type v)
+  qreal QmuParser::Log10(qreal v)
   {
     #ifdef MUP_MATH_EXCEPTIONS
         if (v<=0)
-          throw QmuParserError(ecDOMAIN_ERROR, _T("Log10"));
+          throw QmuParserError(ecDOMAIN_ERROR, "Log10");
     #endif
 
-    return MathImpl<value_type>::Log10(v);
+    return MathImpl<qreal>::Log10(v);
   }
 
 // Logarithm base e (natural logarithm)
-  value_type QmuParser::Ln(value_type v)
+  qreal QmuParser::Ln(qreal v)
   {
     #ifdef MUP_MATH_EXCEPTIONS
         if (v<=0)
-          throw QmuParserError(ecDOMAIN_ERROR, _T("Ln"));
+          throw QmuParserError(ecDOMAIN_ERROR, "Ln");
     #endif
 
-    return MathImpl<value_type>::Log(v);
+    return MathImpl<qreal>::Log(v);
   }
 
   //---------------------------------------------------------------------------
   //  misc
-  value_type QmuParser::Exp(value_type v)  { return MathImpl<value_type>::Exp(v);  }
-  value_type QmuParser::Abs(value_type v)  { return MathImpl<value_type>::Abs(v);  }
-  value_type QmuParser::Sqrt(value_type v)
+  qreal QmuParser::Exp(qreal v)  { return MathImpl<qreal>::Exp(v);  }
+  qreal QmuParser::Abs(qreal v)  { return MathImpl<qreal>::Abs(v);  }
+  qreal QmuParser::Sqrt(qreal v)
   {
     #ifdef MUP_MATH_EXCEPTIONS
         if (v<0)
-          throw QmuParserError(ecDOMAIN_ERROR, _T("sqrt"));
+          throw QmuParserError(ecDOMAIN_ERROR, "sqrt");
     #endif
 
-    return MathImpl<value_type>::Sqrt(v);
+    return MathImpl<qreal>::Sqrt(v);
   }
-  value_type QmuParser::Rint(value_type v) { return MathImpl<value_type>::Rint(v); }
-  value_type QmuParser::Sign(value_type v) { return MathImpl<value_type>::Sign(v); }
+  qreal QmuParser::Rint(qreal v) { return MathImpl<qreal>::Rint(v); }
+  qreal QmuParser::Sign(qreal v) { return MathImpl<qreal>::Sign(v); }
 
   //---------------------------------------------------------------------------
   /** \brief Callback for the unary minus operator.
       \param v The value to negate
       \return -v
   */
-  value_type QmuParser::UnaryMinus(value_type v)
+  qreal QmuParser::UnaryMinus(qreal v)
   {
     return -v;
   }
@@ -130,12 +130,12 @@ namespace qmu
       \param [in] a_afArg Vector with the function arguments
       \param [in] a_iArgc The size of a_afArg
   */
-  value_type QmuParser::Sum(const value_type *a_afArg, int a_iArgc)
+  qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
   {
     if (!a_iArgc)
-      throw exception_type(_T("too few arguments for function sum."));
+      throw exception_type("too few arguments for function sum.");
 
-    value_type fRes=0;
+    qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i) fRes += a_afArg[i];
     return fRes;
   }
@@ -145,14 +145,14 @@ namespace qmu
       \param [in] a_afArg Vector with the function arguments
       \param [in] a_iArgc The size of a_afArg
   */
-  value_type QmuParser::Avg(const value_type *a_afArg, int a_iArgc)
+  qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
   {
     if (!a_iArgc)
-      throw exception_type(_T("too few arguments for function sum."));
+      throw exception_type("too few arguments for function sum.");
 
-    value_type fRes=0;
+    qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i) fRes += a_afArg[i];
-    return fRes/(value_type)a_iArgc;
+    return fRes/(qreal)a_iArgc;
   }
 
 
@@ -161,12 +161,12 @@ namespace qmu
       \param [in] a_afArg Vector with the function arguments
       \param [in] a_iArgc The size of a_afArg
   */
-  value_type QmuParser::Min(const value_type *a_afArg, int a_iArgc)
+  qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
   {
     if (!a_iArgc)
-      throw exception_type(_T("too few arguments for function min."));
+      throw exception_type("too few arguments for function min.");
 
-    value_type fRes=a_afArg[0];
+    qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)
       fRes = std::min(fRes, a_afArg[i]);
 
@@ -179,12 +179,12 @@ namespace qmu
       \param [in] a_afArg Vector with the function arguments
       \param [in] a_iArgc The size of a_afArg
   */
-  value_type QmuParser::Max(const value_type *a_afArg, int a_iArgc)
+  qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
   {
     if (!a_iArgc)
-      throw exception_type(_T("too few arguments for function min."));
+      throw exception_type("too few arguments for function min.");
 
-    value_type fRes=a_afArg[0];
+    qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i) fRes = std::max(fRes, a_afArg[i]);
 
     return fRes;
@@ -198,9 +198,9 @@ namespace qmu
       \param [out] a_fVal Pointer where the value should be stored in case one is found.
       \return 1 if a value was found 0 otherwise.
   */
-  int QmuParser::IsVal(const char_type* a_szExpr, int *a_iPos, value_type *a_fVal)
+  int QmuParser::IsVal(const char_type* a_szExpr, int *a_iPos, qreal *a_fVal)
   {
-    value_type fVal(0);
+    qreal fVal(0);
 
     stringstream_type stream(a_szExpr);
     stream.seekg(0);        // todo:  check if this really is necessary
@@ -242,16 +242,16 @@ namespace qmu
   */
   void QmuParser::InitCharSets()
   {
-    DefineNameChars( _T("0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") );
-    DefineOprtChars( _T("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}") );
-    DefineInfixOprtChars( _T("/+-*^?<>=#!$%&|~'_") );
+    DefineNameChars( "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+    DefineOprtChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}" );
+    DefineInfixOprtChars( "/+-*^?<>=#!$%&|~'_" );
   }
 
   //---------------------------------------------------------------------------
   /** \brief Initialize the default functions. */
   void QmuParser::InitFun()
   {
-    if (qmu::TypeInfo<qmu::value_type>::IsInteger())
+    if (qmu::TypeInfo<qreal>::IsInteger())
     {
       // When setting MUP_BASETYPE to an integer type
       // Place functions for dealing with integer values here
@@ -262,38 +262,38 @@ namespace qmu
     else
     {
       // trigonometric functions
-      DefineFun(_T("sin"), Sin);
-      DefineFun(_T("cos"), Cos);
-      DefineFun(_T("tan"), Tan);
+      DefineFun("sin", Sin);
+      DefineFun("cos", Cos);
+      DefineFun("tan", Tan);
       // arcus functions
-      DefineFun(_T("asin"), ASin);
-      DefineFun(_T("acos"), ACos);
-      DefineFun(_T("atan"), ATan);
-      DefineFun(_T("atan2"), ATan2);
+      DefineFun("asin", ASin);
+      DefineFun("acos", ACos);
+      DefineFun("atan", ATan);
+      DefineFun("atan2", ATan2);
       // hyperbolic functions
-      DefineFun(_T("sinh"), Sinh);
-      DefineFun(_T("cosh"), Cosh);
-      DefineFun(_T("tanh"), Tanh);
+      DefineFun("sinh", Sinh);
+      DefineFun("cosh", Cosh);
+      DefineFun("tanh", Tanh);
       // arcus hyperbolic functions
-      DefineFun(_T("asinh"), ASinh);
-      DefineFun(_T("acosh"), ACosh);
-      DefineFun(_T("atanh"), ATanh);
+      DefineFun("asinh", ASinh);
+      DefineFun("acosh", ACosh);
+      DefineFun("atanh", ATanh);
       // Logarithm functions
-      DefineFun(_T("log2"), Log2);
-      DefineFun(_T("log10"), Log10);
-      DefineFun(_T("log"), Log10);
-      DefineFun(_T("ln"), Ln);
+      DefineFun("log2", Log2);
+      DefineFun("log10", Log10);
+      DefineFun("log", Log10);
+      DefineFun("ln", Ln);
       // misc
-      DefineFun(_T("exp"), Exp);
-      DefineFun(_T("sqrt"), Sqrt);
-      DefineFun(_T("sign"), Sign);
-      DefineFun(_T("rint"), Rint);
-      DefineFun(_T("abs"), Abs);
+      DefineFun("exp", Exp);
+      DefineFun("sqrt", Sqrt);
+      DefineFun("sign", Sign);
+      DefineFun("rint", Rint);
+      DefineFun("abs", Abs);
       // Functions with variable number of arguments
-      DefineFun(_T("sum"), Sum);
-      DefineFun(_T("avg"), Avg);
-      DefineFun(_T("min"), Min);
-      DefineFun(_T("max"), Max);
+      DefineFun("sum", Sum);
+      DefineFun("avg", Avg);
+      DefineFun("min", Min);
+      DefineFun("max", Max);
     }
   }
 
@@ -305,8 +305,8 @@ namespace qmu
   */
   void QmuParser::InitConst()
   {
-    DefineConst(_T("_pi"), (value_type)QmuParser_CONST_PI);
-    DefineConst(_T("_e"), (value_type)QmuParser_CONST_E);
+    DefineConst("_pi", (qreal)QmuParser_CONST_PI);
+    DefineConst("_e", (qreal)QmuParser_CONST_E);
   }
 
   //---------------------------------------------------------------------------
@@ -316,7 +316,7 @@ namespace qmu
   */
   void QmuParser::InitOprt()
   {
-    DefineInfixOprt(_T("-"), UnaryMinus);
+    DefineInfixOprt("-", UnaryMinus);
   }
 
   //---------------------------------------------------------------------------
@@ -357,11 +357,11 @@ namespace qmu
 
     http://sourceforge.net/forum/forum.php?thread_id=1994611&forum_id=462843
   */
-  value_type QmuParser::Diff(value_type *a_Var,
-                          value_type  a_fPos,
-                          value_type  a_fEpsilon) const
+  qreal QmuParser::Diff(qreal *a_Var,
+                          qreal  a_fPos,
+                          qreal  a_fEpsilon) const
   {
-    value_type fRes(0),
+    qreal fRes(0),
                fBuf(*a_Var),
                f[4] = {0,0,0,0},
                fEpsilon(a_fEpsilon);
@@ -369,7 +369,7 @@ namespace qmu
     // Backwards compatible calculation of epsilon inc case the user doesnt provide
     // his own epsilon
     if (fEpsilon==0)
-      fEpsilon = (a_fPos==0) ? (value_type)1e-10 : (value_type)1e-7 * a_fPos;
+      fEpsilon = (a_fPos==0) ? (qreal)1e-10 : (qreal)1e-7 * a_fPos;
 
     *a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();
     *a_Var = a_fPos+1 * fEpsilon;  f[1] = Eval();

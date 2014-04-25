@@ -68,10 +68,10 @@ private:
       the function pointer to the parser function depending on 
       which state it is in. (i.e. bytecode parser vs. string parser)
     */
-    typedef value_type (QmuParserBase::*ParseFunction)() const;
+    typedef qreal (QmuParserBase::*ParseFunction)() const;
 
     /** \brief Type used for storing an array of values. */
-    typedef std::vector<value_type> valbuf_type;
+    typedef std::vector<qreal> valbuf_type;
 
     /** \brief Type for a vector of strings. */
     typedef std::vector<string_type> stringbuf_type;
@@ -80,7 +80,7 @@ private:
     typedef QmuParserTokenReader token_reader_type;
     
     /** \brief Type used for parser tokens. */
-    typedef QmuParserToken<value_type, string_type> token_type;
+    typedef QmuParserToken<qreal, string_type> token_type;
 
     /** \brief Maximum number of threads spawned by OpenMP when using the bulk mode. */
     static const int s_MaxNumOpenMPThreads = 4;
@@ -101,9 +101,9 @@ private:
 
     virtual ~QmuParserBase();
     
-	  value_type  Eval() const;
-    value_type* Eval(int &nStackSize) const;
-    void Eval(value_type *results, int nBulkSize);
+      qreal  Eval() const;
+    qreal* Eval(int &nStackSize) const;
+    void Eval(qreal *results, int nBulkSize);
 
     int GetNumResults() const;
 
@@ -137,9 +137,9 @@ private:
                     unsigned a_iPri=0, 
                     EOprtAssociativity a_eAssociativity = oaLEFT,
                     bool a_bAllowOpt = false);
-    void DefineConst(const string_type &a_sName, value_type a_fVal);
+    void DefineConst(const string_type &a_sName, qreal a_fVal);
     void DefineStrConst(const string_type &a_sName, const string_type &a_strVal);
-    void DefineVar(const string_type &a_sName, value_type *a_fVar);
+    void DefineVar(const string_type &a_sName, qreal *a_fVar);
     void DefinePostfixOprt(const string_type &a_strFun, fun_type1 a_pOprt, bool a_bAllowOpt=true);
     void DefineInfixOprt(const string_type &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX, bool a_bAllowOpt=true);
 
@@ -259,9 +259,9 @@ private:
 
     void CreateRPN() const;
 
-    value_type ParseString() const; 
-    value_type ParseCmdCode() const;
-    value_type ParseCmdCodeBulk(int nOffset, int nThreadID) const;
+    qreal ParseString() const;
+    qreal ParseCmdCode() const;
+    qreal ParseCmdCodeBulk(int nOffset, int nThreadID) const;
 
     void  CheckName(const string_type &a_strName, const string_type &a_CharSet) const;
     void  CheckOprt(const string_type &a_sName,

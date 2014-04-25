@@ -34,20 +34,13 @@
     \brief This file contains standard definitions used by the parser.
 */
 
-#define QMUP_VERSION _T("2.2.3")
-#define QMUP_VERSION_DATE _T("20121222; SF")
+#define QMUP_VERSION "2.2.3"
+#define QMUP_VERSION_DATE "20121222; SF"
 
-#define QMUP_CHARS _T("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+#define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 /** \brief If this macro is defined mathematical exceptions (div by zero) will be thrown as exceptions. */
-//#define MUP_MATH_EXCEPTIONS
-
-/** \brief Define the base datatype for values.
-
-  This datatype must be a built in value type. You can not use custom classes.
-  It should be working with all types except "int"!
-*/
-#define QMUP_BASETYPE double
+//#define QMUP_MATH_EXCEPTIONS
 
 /** \brief Activate this option in order to compile with OpenMP support. 
 
@@ -59,13 +52,7 @@
   /** \brief Definition of the basic parser string type. */
   #define MUP_STRING_TYPE std::wstring
 
-  #if !defined(_T)
-    #define _T(x) L##x
-  #endif // not defined _T
 #else
-  #ifndef _T
-  #define _T(x) x
-  #endif
   
   /** \brief Definition of the basic parser string type. */
   #define MUP_STRING_TYPE std::string
@@ -89,9 +76,9 @@
             if (!(COND))                             \
             {                                        \
               stringstream_type ss;                  \
-              ss << _T("Assertion \"") _T(#COND) _T("\" failed: ") \
-                 << __FILE__ << _T(" line ")         \
-                 << __LINE__ << _T(".");             \
+              ss << "Assertion \"" #COND "\" failed: ") \
+                 << __FILE__ << " line "         \
+                 << __LINE__ << ".";             \
               throw ParserError( ss.str() );         \
             }
 #else
@@ -238,12 +225,6 @@ namespace qmu
   //------------------------------------------------------------------------------
   // basic types
 
-  /** \brief The numeric datatype used by the parser. 
-  
-    Normally this is a floating point type either single or double precision.
-  */
-  typedef QMUP_BASETYPE value_type;
-
   /** \brief The stringtype used by the parser. 
 
     Depends on wether UNICODE is used or not.
@@ -264,10 +245,10 @@ namespace qmu
   // Data container types
 
   /** \brief Type used for storing variables. */
-  typedef std::map<string_type, value_type*> varmap_type;
+  typedef std::map<string_type, qreal*> varmap_type;
   
   /** \brief Type used for storing constants. */
-  typedef std::map<string_type, value_type> valmap_type;
+  typedef std::map<string_type, qreal> valmap_type;
   
   /** \brief Type for assigning a string name to an index in the internal string table. */
   typedef std::map<string_type, std::size_t> strmap_type;
@@ -275,91 +256,91 @@ namespace qmu
   // Parser callbacks
   
   /** \brief Callback type used for functions without arguments. */
-  typedef value_type (*generic_fun_type)();
+  typedef qreal (*generic_fun_type)();
 
   /** \brief Callback type used for functions without arguments. */
-  typedef value_type (*fun_type0)();
+  typedef qreal (*fun_type0)();
 
   /** \brief Callback type used for functions with a single arguments. */
-  typedef value_type (*fun_type1)(value_type);
+  typedef qreal (*fun_type1)(qreal);
 
   /** \brief Callback type used for functions with two arguments. */
-  typedef value_type (*fun_type2)(value_type, value_type);
+  typedef qreal (*fun_type2)(qreal, qreal);
 
   /** \brief Callback type used for functions with three arguments. */
-  typedef value_type (*fun_type3)(value_type, value_type, value_type);
+  typedef qreal (*fun_type3)(qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with four arguments. */
-  typedef value_type (*fun_type4)(value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type4)(qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type5)(value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type5)(qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type6)(value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type6)(qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type7)(value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type7)(qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type8)(value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type8)(qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type9)(value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type9)(qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*fun_type10)(value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*fun_type10)(qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions without arguments. */
-  typedef value_type (*bulkfun_type0)(int, int);
+  typedef qreal (*bulkfun_type0)(int, int);
 
   /** \brief Callback type used for functions with a single arguments. */
-  typedef value_type (*bulkfun_type1)(int, int, value_type);
+  typedef qreal (*bulkfun_type1)(int, int, qreal);
 
   /** \brief Callback type used for functions with two arguments. */
-  typedef value_type (*bulkfun_type2)(int, int, value_type, value_type);
+  typedef qreal (*bulkfun_type2)(int, int, qreal, qreal);
 
   /** \brief Callback type used for functions with three arguments. */
-  typedef value_type (*bulkfun_type3)(int, int, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type3)(int, int, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with four arguments. */
-  typedef value_type (*bulkfun_type4)(int, int, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type4)(int, int, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type5)(int, int, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type5)(int, int, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type6)(int, int, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type6)(int, int, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type7)(int, int, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type7)(int, int, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type8)(int, int, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type8)(int, int, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type9)(int, int, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type9)(int, int, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with five arguments. */
-  typedef value_type (*bulkfun_type10)(int, int, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type, value_type);
+  typedef qreal (*bulkfun_type10)(int, int, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal);
 
   /** \brief Callback type used for functions with a variable argument list. */
-  typedef value_type (*multfun_type)(const value_type*, int);
+  typedef qreal (*multfun_type)(const qreal*, int);
 
   /** \brief Callback type used for functions taking a string as an argument. */
-  typedef value_type (*strfun_type1)(const char_type*);
+  typedef qreal (*strfun_type1)(const char_type*);
 
   /** \brief Callback type used for functions taking a string and a value as arguments. */
-  typedef value_type (*strfun_type2)(const char_type*, value_type);
+  typedef qreal (*strfun_type2)(const char_type*, qreal);
 
   /** \brief Callback type used for functions taking a string and two values as arguments. */
-  typedef value_type (*strfun_type3)(const char_type*, value_type, value_type);
+  typedef qreal (*strfun_type3)(const char_type*, qreal, qreal);
 
   /** \brief Callback used for functions that identify values in a string. */
-  typedef int (*identfun_type)(const char_type *sExpr, int *nPos, value_type *fVal);
+  typedef int (*identfun_type)(const char_type *sExpr, int *nPos, qreal *fVal);
 
   /** \brief Callback used for variable creation factory functions. */
-  typedef value_type* (*facfun_type)(const char_type*, void*);
+  typedef qreal* (*facfun_type)(const char_type*, void*);
 } // end of namespace
 
 #endif

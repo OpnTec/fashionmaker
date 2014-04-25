@@ -514,7 +514,7 @@ namespace qmu
         Error(ecUNEXPECTED_EOF, m_iPos);
 
       if (m_iBrackets>0)
-        Error(ecMISSING_PARENS, m_iPos, _T(")"));
+        Error(ecMISSING_PARENS, m_iPos, ")");
 
       m_iSynFlags = 0;
       a_Tok.Set(cmEND);
@@ -722,7 +722,7 @@ namespace qmu
     assert(m_pParser);
 
     string_type strTok;
-    value_type fVal(0);
+    qreal fVal(0);
     int iEnd(0);
     
     // 2.) Check for user defined constant
@@ -855,7 +855,7 @@ namespace qmu
     // If a factory is available implicitely create new variables
     if (m_pFactory)
     {
-      value_type *fVar = m_pFactory(strTok.c_str(), m_pFactoryData);
+      qreal *fVar = m_pFactory(strTok.c_str(), m_pFactoryData);
       a_Tok.SetVar(fVar, strTok );
 
       // Do not use m_pParser->DefineVar( strTok, fVar );
@@ -869,7 +869,7 @@ namespace qmu
     }
     else
     {
-      a_Tok.SetVar((value_type*)&m_fZero, strTok);
+      a_Tok.SetVar((qreal*)&m_fZero, strTok);
       m_UsedVar[strTok] = 0;  // Add variable to used-var-list
     }
 
@@ -897,15 +897,15 @@ namespace qmu
     std::size_t iEnd(0), iSkip(0);
 
     // parser over escaped '\"' end replace them with '"'
-    for(iEnd=(int)strBuf.find( _T("\"") ); iEnd!=0 && iEnd!=string_type::npos; iEnd=(int)strBuf.find( _T("\""), iEnd))
+    for(iEnd=(int)strBuf.find( "\"" ); iEnd!=0 && iEnd!=string_type::npos; iEnd=(int)strBuf.find( "\"", iEnd))
     {
       if (strBuf[iEnd-1]!='\\') break;
-      strBuf.replace(iEnd-1, 2, _T("\"") );
+      strBuf.replace(iEnd-1, 2, "\"" );
       iSkip++;
     }
 
     if (iEnd==string_type::npos)
-      Error(ecUNTERMINATED_STRING, m_iPos, _T("\"") );
+      Error(ecUNTERMINATED_STRING, m_iPos, "\"" );
 
     string_type strTok(strBuf.begin(), strBuf.begin()+iEnd);
 

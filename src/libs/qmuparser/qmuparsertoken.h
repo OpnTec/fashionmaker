@@ -65,7 +65,7 @@ namespace qmu
       int  m_iIdx;        ///< An otional index to an external buffer storing the token data
       TString m_strTok;   ///< Token string
       TString m_strVal;   ///< Value for string variables
-      value_type m_fVal;  ///< the value 
+      qreal m_fVal;  ///< the value
       std::auto_ptr<QmuParserCallback> m_pCallback;
 
   public:

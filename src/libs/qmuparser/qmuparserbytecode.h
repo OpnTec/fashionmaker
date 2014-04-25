@@ -48,9 +48,9 @@ namespace qmu
     {
       struct //SValData
       {
-        value_type *ptr;
-        value_type  data;
-        value_type  data2;
+        qreal *ptr;
+        qreal  data;
+        qreal  data2;
       } Val;
 
       struct //SFunData
@@ -66,7 +66,7 @@ namespace qmu
 
       struct //SOprtData
       {
-        value_type *ptr;
+        qreal *ptr;
         int offset;
       } Oprt;
     };
@@ -87,7 +87,7 @@ class QmuParserByteCode
 private:
 
     /** \brief Token type for internal use only. */
-    typedef QmuParserToken<value_type, string_type> token_type;
+    typedef QmuParserToken<qreal, string_type> token_type;
 
     /** \brief Token vector for storing the RPN. */
     typedef std::vector<SToken> rpn_type;
@@ -112,11 +112,11 @@ public:
     QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode);
     void Assign(const QmuParserByteCode &a_ByteCode);
 
-    void AddVar(value_type *a_pVar);
-    void AddVal(value_type a_fVal);
+    void AddVar(qreal *a_pVar);
+    void AddVal(qreal a_fVal);
     void AddOp(ECmdCode a_Oprt);
     void AddIfElse(ECmdCode a_Oprt);
-    void AddAssignOp(value_type *a_pVar);
+    void AddAssignOp(qreal *a_pVar);
     void AddFun(generic_fun_type a_pFun, int a_iArgc);
     void AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
     void AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);

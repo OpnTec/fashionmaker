@@ -35,49 +35,49 @@ using namespace std;
 /** \brief Namespace for mathematical applications. */
 namespace qmu
 {
-value_type QmuParserInt::Abs(value_type v)  { return (value_type)Round(fabs((double)v)); }
-value_type QmuParserInt::Sign(value_type v) { return (Round(v)<0) ? -1 : (Round(v)>0) ? 1 : 0; }
-value_type QmuParserInt::Ite(value_type v1,
-                          value_type v2, 
-                          value_type v3) { return (Round(v1)==1) ? Round(v2) : Round(v3); }
-value_type QmuParserInt::Add(value_type v1, value_type v2) { return Round(v1)  + Round(v2); }
-value_type QmuParserInt::Sub(value_type v1, value_type v2) { return Round(v1)  - Round(v2); }
-value_type QmuParserInt::Mul(value_type v1, value_type v2) { return Round(v1)  * Round(v2); }
-value_type QmuParserInt::Div(value_type v1, value_type v2) { return Round(v1)  / Round(v2); }
-value_type QmuParserInt::Mod(value_type v1, value_type v2) { return Round(v1)  % Round(v2); }
-value_type QmuParserInt::Shr(value_type v1, value_type v2) { return Round(v1) >> Round(v2); }
-value_type QmuParserInt::Shl(value_type v1, value_type v2) { return Round(v1) << Round(v2); }
-value_type QmuParserInt::LogAnd(value_type v1, value_type v2) { return Round(v1) & Round(v2); }
-value_type QmuParserInt::LogOr(value_type v1, value_type v2)  { return Round(v1) | Round(v2); }
-value_type QmuParserInt::And(value_type v1, value_type v2) { return Round(v1) && Round(v2); }
-value_type QmuParserInt::Or(value_type v1, value_type v2)  { return Round(v1) || Round(v2); }
-value_type QmuParserInt::Less(value_type v1, value_type v2)      { return Round(v1)  < Round(v2); }
-value_type QmuParserInt::Greater(value_type v1, value_type v2)   { return Round(v1)  > Round(v2); }
-value_type QmuParserInt::LessEq(value_type v1, value_type v2)    { return Round(v1) <= Round(v2); }
-value_type QmuParserInt::GreaterEq(value_type v1, value_type v2) { return Round(v1) >= Round(v2); }
-value_type QmuParserInt::Equal(value_type v1, value_type v2)     { return Round(v1) == Round(v2); }
-value_type QmuParserInt::NotEqual(value_type v1, value_type v2)  { return Round(v1) != Round(v2); }
-value_type QmuParserInt::Not(value_type v) { return !Round(v); }
+qreal QmuParserInt::Abs(qreal v)  { return (qreal)Round(fabs((double)v)); }
+qreal QmuParserInt::Sign(qreal v) { return (Round(v)<0) ? -1 : (Round(v)>0) ? 1 : 0; }
+qreal QmuParserInt::Ite(qreal v1,
+                          qreal v2,
+                          qreal v3) { return (Round(v1)==1) ? Round(v2) : Round(v3); }
+qreal QmuParserInt::Add(qreal v1, qreal v2) { return Round(v1)  + Round(v2); }
+qreal QmuParserInt::Sub(qreal v1, qreal v2) { return Round(v1)  - Round(v2); }
+qreal QmuParserInt::Mul(qreal v1, qreal v2) { return Round(v1)  * Round(v2); }
+qreal QmuParserInt::Div(qreal v1, qreal v2) { return Round(v1)  / Round(v2); }
+qreal QmuParserInt::Mod(qreal v1, qreal v2) { return Round(v1)  % Round(v2); }
+qreal QmuParserInt::Shr(qreal v1, qreal v2) { return Round(v1) >> Round(v2); }
+qreal QmuParserInt::Shl(qreal v1, qreal v2) { return Round(v1) << Round(v2); }
+qreal QmuParserInt::LogAnd(qreal v1, qreal v2) { return Round(v1) & Round(v2); }
+qreal QmuParserInt::LogOr(qreal v1, qreal v2)  { return Round(v1) | Round(v2); }
+qreal QmuParserInt::And(qreal v1, qreal v2) { return Round(v1) && Round(v2); }
+qreal QmuParserInt::Or(qreal v1, qreal v2)  { return Round(v1) || Round(v2); }
+qreal QmuParserInt::Less(qreal v1, qreal v2)      { return Round(v1)  < Round(v2); }
+qreal QmuParserInt::Greater(qreal v1, qreal v2)   { return Round(v1)  > Round(v2); }
+qreal QmuParserInt::LessEq(qreal v1, qreal v2)    { return Round(v1) <= Round(v2); }
+qreal QmuParserInt::GreaterEq(qreal v1, qreal v2) { return Round(v1) >= Round(v2); }
+qreal QmuParserInt::Equal(qreal v1, qreal v2)     { return Round(v1) == Round(v2); }
+qreal QmuParserInt::NotEqual(qreal v1, qreal v2)  { return Round(v1) != Round(v2); }
+qreal QmuParserInt::Not(qreal v) { return !Round(v); }
 
-value_type QmuParserInt::Pow(value_type v1, value_type v2)
+qreal QmuParserInt::Pow(qreal v1, qreal v2)
 { 
   return std::pow((double)Round(v1), (double)Round(v2)); 
 }
 
 //---------------------------------------------------------------------------
 // Unary operator Callbacks: Infix operators
-value_type QmuParserInt::UnaryMinus(value_type v)
+qreal QmuParserInt::UnaryMinus(qreal v)
 { 
   return -Round(v); 
 }
 
 //---------------------------------------------------------------------------
-value_type QmuParserInt::Sum(const value_type* a_afArg, int a_iArgc)
+qreal QmuParserInt::Sum(const qreal* a_afArg, int a_iArgc)
 { 
   if (!a_iArgc)	
-    throw QmuParserError(_T("too few arguments for function sum."));
+    throw QmuParserError("too few arguments for function sum.");
 
-  value_type fRes=0;
+  qreal fRes=0;
   for (int i=0; i<a_iArgc; ++i) 
     fRes += a_afArg[i];
 
@@ -85,12 +85,12 @@ value_type QmuParserInt::Sum(const value_type* a_afArg, int a_iArgc)
 }
 
 //---------------------------------------------------------------------------
-value_type QmuParserInt::Min(const value_type* a_afArg, int a_iArgc)
+qreal QmuParserInt::Min(const qreal* a_afArg, int a_iArgc)
 { 
   if (!a_iArgc)	
-    throw QmuParserError( _T("too few arguments for function min.") );
+    throw QmuParserError( "too few arguments for function min." );
 
-  value_type fRes=a_afArg[0];
+  qreal fRes=a_afArg[0];
   for (int i=0; i<a_iArgc; ++i) 
     fRes = std::min(fRes, a_afArg[i]);
 
@@ -98,12 +98,12 @@ value_type QmuParserInt::Min(const value_type* a_afArg, int a_iArgc)
 }
 
 //---------------------------------------------------------------------------
-value_type QmuParserInt::Max(const value_type* a_afArg, int a_iArgc)
+qreal QmuParserInt::Max(const qreal* a_afArg, int a_iArgc)
 { 
   if (!a_iArgc)	
-    throw QmuParserError(_T("too few arguments for function min."));
+    throw QmuParserError("too few arguments for function min.");
 
-  value_type fRes=a_afArg[0];
+  qreal fRes=a_afArg[0];
   for (int i=0; i<a_iArgc; ++i) 
     fRes = std::max(fRes, a_afArg[i]);
 
@@ -112,10 +112,10 @@ value_type QmuParserInt::Max(const value_type* a_afArg, int a_iArgc)
 
 //---------------------------------------------------------------------------
 // Default value recognition callback
-int QmuParserInt::IsVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
+int QmuParserInt::IsVal(const char_type *a_szExpr, int *a_iPos, qreal *a_fVal)
 {
   string_type buf(a_szExpr);
-  std::size_t pos = buf.find_first_not_of(_T("0123456789"));
+  std::size_t pos = buf.find_first_not_of("0123456789");
 
   if (pos==std::string::npos)
     return 0;
@@ -135,7 +135,7 @@ int QmuParserInt::IsVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fV
     return 0;
 
   *a_iPos += (int)iEnd;
-  *a_fVal = (value_type)iVal;
+  *a_fVal = (qreal)iVal;
   return 1;
 }
 
@@ -149,7 +149,7 @@ int QmuParserInt::IsVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fV
 
   Hey values must be prefixed with "0x" in order to be detected properly.
 */
-int QmuParserInt::IsHexVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
+int QmuParserInt::IsHexVal(const char_type *a_szExpr, int *a_iPos, qreal *a_fVal)
 {
   if (a_szExpr[1]==0 || (a_szExpr[0]!='0' || a_szExpr[1]!='x') ) 
     return 0;
@@ -166,12 +166,12 @@ int QmuParserInt::IsHexVal(const char_type *a_szExpr, int *a_iPos, value_type *a
     return 1;
 
   *a_iPos += (int)(2 + nPos);
-  *a_fVal = (value_type)iVal;
+  *a_fVal = (qreal)iVal;
   return 1;
 }
 
 //---------------------------------------------------------------------------
-int QmuParserInt::IsBinVal(const char_type *a_szExpr, int *a_iPos, value_type *a_fVal)
+int QmuParserInt::IsBinVal(const char_type *a_szExpr, int *a_iPos, qreal *a_fVal)
 {
   if (a_szExpr[0]!='#') 
     return 0;
@@ -187,7 +187,7 @@ int QmuParserInt::IsBinVal(const char_type *a_szExpr, int *a_iPos, value_type *a
     return 0;
 
   if (i==iBits)
-    throw exception_type(_T("Binary to integer conversion error (overflow)."));
+    throw exception_type("Binary to integer conversion error (overflow).");
 
   *a_fVal = (unsigned)(iVal >> (iBits-i) );
   *a_iPos += i+1;
@@ -220,21 +220,21 @@ void QmuParserInt::InitConst()
 //---------------------------------------------------------------------------
 void QmuParserInt::InitCharSets()
 {
-  DefineNameChars( _T("0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") );
-  DefineOprtChars( _T("+-*^/?<>=!%&|~'_") );
-  DefineInfixOprtChars( _T("/+-*^?<>=!%&|~'_") );
+  DefineNameChars( "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+  DefineOprtChars( "+-*^/?<>=!%&|~'_" );
+  DefineInfixOprtChars( "/+-*^?<>=!%&|~'_" );
 }
 
 //---------------------------------------------------------------------------
 /** \brief Initialize the default functions. */
 void QmuParserInt::InitFun()
 {
-  DefineFun( _T("sign"), Sign);
-  DefineFun( _T("abs"), Abs);
-  DefineFun( _T("if"), Ite);
-  DefineFun( _T("sum"), Sum);
-  DefineFun( _T("min"), Min);
-  DefineFun( _T("max"), Max);
+  DefineFun( "sign", Sign);
+  DefineFun( "abs", Abs);
+  DefineFun( "if", Ite);
+  DefineFun( "sum", Sum);
+  DefineFun( "min", Min);
+  DefineFun( "max", Max);
 }
 
 //---------------------------------------------------------------------------
@@ -247,31 +247,31 @@ void QmuParserInt::InitOprt()
 
   // Disable all built in operators, they wont work with integer numbers
   // since they are designed for floating point numbers
-  DefineInfixOprt( _T("-"), UnaryMinus);
-  DefineInfixOprt( _T("!"), Not);
+  DefineInfixOprt( "-", UnaryMinus);
+  DefineInfixOprt( "!", Not);
 
-  DefineOprt( _T("&"), LogAnd, prLOGIC);
-  DefineOprt( _T("|"), LogOr, prLOGIC);
-  DefineOprt( _T("&&"), And, prLOGIC);
-  DefineOprt( _T("||"), Or, prLOGIC);
+  DefineOprt( "&", LogAnd, prLOGIC);
+  DefineOprt( "|", LogOr, prLOGIC);
+  DefineOprt( "&&", And, prLOGIC);
+  DefineOprt( "||", Or, prLOGIC);
 
-  DefineOprt( _T("<"), Less, prCMP);
-  DefineOprt( _T(">"), Greater, prCMP);
-  DefineOprt( _T("<="), LessEq, prCMP);
-  DefineOprt( _T(">="), GreaterEq, prCMP);
-  DefineOprt( _T("=="), Equal, prCMP);
-  DefineOprt( _T("!="), NotEqual, prCMP);
+  DefineOprt( "<", Less, prCMP);
+  DefineOprt( ">", Greater, prCMP);
+  DefineOprt( "<=", LessEq, prCMP);
+  DefineOprt( ">=", GreaterEq, prCMP);
+  DefineOprt( "==", Equal, prCMP);
+  DefineOprt( "!=", NotEqual, prCMP);
 
-  DefineOprt( _T("+"), Add, prADD_SUB);
-  DefineOprt( _T("-"), Sub, prADD_SUB);
+  DefineOprt( "+", Add, prADD_SUB);
+  DefineOprt( "-", Sub, prADD_SUB);
 
-  DefineOprt( _T("*"), Mul, prMUL_DIV);
-  DefineOprt( _T("/"), Div, prMUL_DIV);
-  DefineOprt( _T("%"), Mod, prMUL_DIV);
+  DefineOprt( "*", Mul, prMUL_DIV);
+  DefineOprt( "/", Div, prMUL_DIV);
+  DefineOprt( "%", Mod, prMUL_DIV);
 
-  DefineOprt( _T("^"), Pow, prPOW, oaRIGHT);
-  DefineOprt( _T(">>"), Shr, prMUL_DIV+1);
-  DefineOprt( _T("<<"), Shl, prMUL_DIV+1);
+  DefineOprt( "^", Pow, prPOW, oaRIGHT);
+  DefineOprt( ">>", Shr, prMUL_DIV+1);
+  DefineOprt( "<<", Shl, prMUL_DIV+1);
 }
 
 } // namespace qmu

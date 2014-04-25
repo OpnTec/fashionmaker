@@ -43,42 +43,42 @@ namespace qmu
 class QmuParserInt : public QmuParserBase
 {
 private:
-    static int  Round(value_type v) { return (int)(v + ((v>=0) ? 0.5 : -0.5) ); };
+    static int  Round(qreal v) { return (int)(v + ((v>=0) ? 0.5 : -0.5) ); };
   
-    static value_type  Abs(value_type);
-    static value_type  Sign(value_type);
-    static value_type  Ite(value_type, value_type, value_type);
+    static qreal  Abs(qreal);
+    static qreal  Sign(qreal);
+    static qreal  Ite(qreal, qreal, qreal);
     // !! The unary Minus is a MUST, otherwise you cant use negative signs !!
-    static value_type  UnaryMinus(value_type);
+    static qreal  UnaryMinus(qreal);
     // Functions with variable number of arguments
-    static value_type  Sum(const value_type* a_afArg, int a_iArgc);  // sum
-    static value_type  Min(const value_type* a_afArg, int a_iArgc);  // minimum
-    static value_type  Max(const value_type* a_afArg, int a_iArgc);  // maximum
+    static qreal  Sum(const qreal* a_afArg, int a_iArgc);  // sum
+    static qreal  Min(const qreal* a_afArg, int a_iArgc);  // minimum
+    static qreal  Max(const qreal* a_afArg, int a_iArgc);  // maximum
     // binary operator callbacks
-    static value_type  Add(value_type v1, value_type v2);
-    static value_type  Sub(value_type v1, value_type v2);
-    static value_type  Mul(value_type v1, value_type v2);
-    static value_type  Div(value_type v1, value_type v2);
-    static value_type  Mod(value_type v1, value_type v2);
-    static value_type  Pow(value_type v1, value_type v2);
-    static value_type  Shr(value_type v1, value_type v2);
-    static value_type  Shl(value_type v1, value_type v2);
-    static value_type  LogAnd(value_type v1, value_type v2);
-    static value_type  LogOr(value_type v1, value_type v2);
-    static value_type  And(value_type v1, value_type v2);
-    static value_type  Or(value_type v1, value_type v2);
-    static value_type  Xor(value_type v1, value_type v2);
-    static value_type  Less(value_type v1, value_type v2);
-    static value_type  Greater(value_type v1, value_type v2);
-    static value_type  LessEq(value_type v1, value_type v2);
-    static value_type  GreaterEq(value_type v1, value_type v2);
-    static value_type  Equal(value_type v1, value_type v2);
-    static value_type  NotEqual(value_type v1, value_type v2);
-    static value_type  Not(value_type v1);
+    static qreal  Add(qreal v1, qreal v2);
+    static qreal  Sub(qreal v1, qreal v2);
+    static qreal  Mul(qreal v1, qreal v2);
+    static qreal  Div(qreal v1, qreal v2);
+    static qreal  Mod(qreal v1, qreal v2);
+    static qreal  Pow(qreal v1, qreal v2);
+    static qreal  Shr(qreal v1, qreal v2);
+    static qreal  Shl(qreal v1, qreal v2);
+    static qreal  LogAnd(qreal v1, qreal v2);
+    static qreal  LogOr(qreal v1, qreal v2);
+    static qreal  And(qreal v1, qreal v2);
+    static qreal  Or(qreal v1, qreal v2);
+    static qreal  Xor(qreal v1, qreal v2);
+    static qreal  Less(qreal v1, qreal v2);
+    static qreal  Greater(qreal v1, qreal v2);
+    static qreal  LessEq(qreal v1, qreal v2);
+    static qreal  GreaterEq(qreal v1, qreal v2);
+    static qreal  Equal(qreal v1, qreal v2);
+    static qreal  NotEqual(qreal v1, qreal v2);
+    static qreal  Not(qreal v1);
 
-    static int IsHexVal(const char_type* a_szExpr, int *a_iPos, value_type *a_iVal);
-    static int IsBinVal(const char_type* a_szExpr, int *a_iPos, value_type *a_iVal);
-    static int IsVal   (const char_type* a_szExpr, int *a_iPos, value_type *a_iVal);
+    static int IsHexVal(const char_type* a_szExpr, int *a_iPos, qreal *a_iVal);
+    static int IsBinVal(const char_type* a_szExpr, int *a_iPos, qreal *a_iVal);
+    static int IsVal   (const char_type* a_szExpr, int *a_iPos, qreal *a_iVal);
 
     /** \brief A facet class used to change decimal and thousands separator. */
     template<class TChar>

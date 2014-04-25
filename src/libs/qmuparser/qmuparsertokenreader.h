@@ -52,7 +52,7 @@ namespace qmu
   {
   private:
 
-      typedef QmuParserToken<value_type, string_type> token_type;
+      typedef QmuParserToken<qreal, string_type> token_type;
 
   public:
 
@@ -146,7 +146,7 @@ namespace qmu
       void *m_pFactoryData;
       std::list<identfun_type> m_vIdentFun; ///< Value token identification function
       varmap_type m_UsedVar;
-      value_type m_fZero;      ///< Dummy value of zero, referenced by undefined variables
+      qreal m_fZero;      ///< Dummy value of zero, referenced by undefined variables
       int m_iBrackets;
       token_type m_lastTok;
       char_type m_cArgSep;     ///< The character used for separating function arguments
