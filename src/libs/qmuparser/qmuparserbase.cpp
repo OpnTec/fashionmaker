@@ -873,13 +873,13 @@ namespace qmu
     while (a_stOpt.size() && a_stOpt.top().GetCode()==cmELSE)
     {
       token_type opElse = a_stOpt.pop();
-      MUP_ASSERT(a_stOpt.size()>0);
+      Q_ASSERT(a_stOpt.size()>0);
 
       // Take the value associated with the else branch from the value stack
       token_type vVal2 = a_stVal.pop();
 
-      MUP_ASSERT(a_stOpt.size()>0);
-      MUP_ASSERT(a_stVal.size()>=2);
+      Q_ASSERT(a_stOpt.size()>0);
+      Q_ASSERT(a_stVal.size()>=2);
 
       // it then else is a ternary operator Pop all three values from the value s
       // tack and just return the right value
@@ -889,8 +889,8 @@ namespace qmu
       a_stVal.push( (vExpr.GetVal()!=0) ? vVal1 : vVal2);
 
       token_type opIf = a_stOpt.pop();
-      MUP_ASSERT(opElse.GetCode()==cmELSE);
-      MUP_ASSERT(opIf.GetCode()==cmIF);
+      Q_ASSERT(opElse.GetCode()==cmELSE);
+      Q_ASSERT(opIf.GetCode()==cmIF);
 
       m_vRPN.AddIfElse(cmENDIF);
     } // while pending if-else-clause found
@@ -910,7 +910,7 @@ namespace qmu
     }
     else
     {
-      MUP_ASSERT(a_stVal.size()>=2);
+      Q_ASSERT(a_stVal.size()>=2);
       token_type valTok1 = a_stVal.pop(),
                  valTok2 = a_stVal.pop(),
                  optTok  = a_stOpt.pop(),
@@ -1044,7 +1044,7 @@ namespace qmu
 
       //case  cmBO:  // unused, listed for compiler optimization purposes
       //case  cmBC:
-      //      MUP_FAIL(INVALID_CODE_IN_BYTECODE);
+      //      Q_ASSERT(INVALID_CODE_IN_BYTECODE);
       //      continue;
 
       case  cmIF:
@@ -1060,7 +1060,7 @@ namespace qmu
             continue;
 
       //case  cmARG_SEP:
-      //      MUP_FAIL(INVALID_CODE_IN_BYTECODE);
+      //      Q_ASSERT(INVALID_CODE_IN_BYTECODE);
       //      continue;
 
       // value and variable tokens
@@ -1118,7 +1118,7 @@ namespace qmu
 
               // The index of the string argument in the string table
               int iIdxStack = pTok->Fun.idx;  
-              MUP_ASSERT( iIdxStack>=0 && iIdxStack<(int)m_vStringBuf.size() );
+              Q_ASSERT( iIdxStack>=0 && iIdxStack<(int)m_vStringBuf.size() );
 
               switch(pTok->Fun.argc)  // switch according to argument count
               {
@@ -1158,7 +1158,7 @@ namespace qmu
         //case  cmOPRT_BIN:
         //case  cmOPRT_POSTFIX:
         //case  cmOPRT_INFIX:
-        //      MUP_FAIL(INVALID_CODE_IN_BYTECODE);
+        //      Q_ASSERT(INVALID_CODE_IN_BYTECODE);
         //      continue;
 
         //case  cmEND:
@@ -1392,7 +1392,7 @@ namespace qmu
       Error(ecMISSING_ELSE_CLAUSE);
 
     // get the last value (= final result) from the stack
-    MUP_ASSERT(stArgCount.size()==1);
+    Q_ASSERT(stArgCount.size()==1);
     m_nFinalResultIdx = stArgCount.top();
     if (m_nFinalResultIdx==0)
       Error(ecINTERNAL_ERROR, 9);
