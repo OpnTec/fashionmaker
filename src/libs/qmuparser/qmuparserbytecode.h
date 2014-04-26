@@ -26,7 +26,6 @@
 #include <cassert>
 #include <string>
 #include <stack>
-#include <vector>
 
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"

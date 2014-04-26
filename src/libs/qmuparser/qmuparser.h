@@ -25,9 +25,6 @@
 
 #include "qmuparser_global.h"
 
-//--- Standard includes ------------------------------------------------------------------------
-#include <vector>
-
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserbase.h"
 

@@ -26,7 +26,6 @@
 #include <cassert>
 #include <string>
 #include <stack>
-#include <vector>
 #include <memory>
 #include <QtGlobal>
 

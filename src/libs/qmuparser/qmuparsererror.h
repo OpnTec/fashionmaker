@@ -27,7 +27,6 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
-#include <vector>
 #include <memory>
 
 #include "qmuparserdef.h"

@@ -26,7 +26,6 @@
 #include <cassert>
 #include <cmath>
 #include <memory>
-#include <vector>
 #include <deque>
 #include <sstream>
 #include <locale>
