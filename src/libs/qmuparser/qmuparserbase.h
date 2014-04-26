@@ -30,6 +30,7 @@
 #include <map>
 #include <memory>
 #include <locale>
+#include <QStack>
 
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserdef.h"
@@ -101,7 +102,7 @@ private:
 
     virtual ~QmuParserBase();
     
-      qreal  Eval() const;
+    qreal  Eval() const;
     qreal* Eval(int &nStackSize) const;
     void Eval(qreal *results, int nBulkSize);
 
@@ -239,17 +240,10 @@ private:
                       funmap_type &a_Storage,
                       const char_type *a_szCharSet );
 
-    void ApplyRemainingOprt(QmuParserStack<token_type> &a_stOpt,
-                                QmuParserStack<token_type> &a_stVal) const;
-    void ApplyBinOprt(QmuParserStack<token_type> &a_stOpt,
-                      QmuParserStack<token_type> &a_stVal) const;
-
-    void ApplyIfElse(QmuParserStack<token_type> &a_stOpt,
-                     QmuParserStack<token_type> &a_stVal) const;
-
-    void ApplyFunc(QmuParserStack<token_type> &a_stOpt,
-                   QmuParserStack<token_type> &a_stVal,
-                   int iArgCount) const; 
+    void ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
+    void ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
+    void ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
+    void ApplyFunc(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int iArgCount) const;
 
     token_type ApplyStrFunc(const token_type &a_FunTok,
                             const std::vector<token_type> &a_vArg) const;
@@ -268,8 +262,8 @@ private:
                     const QmuParserCallback &a_Callback,
                     const string_type &a_szCharSet) const;
 
-    void StackDump(const QmuParserStack<token_type > &a_stVal,
-                   const QmuParserStack<token_type > &a_stOprt) const;
+    void StackDump(const QStack<token_type > &a_stVal,
+                   const QStack<token_type > &a_stOprt) const;
 
     /** \brief Pointer to the parser function. 
     

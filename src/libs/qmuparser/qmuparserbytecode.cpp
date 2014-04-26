@@ -424,7 +424,7 @@ namespace qmu
     rpn_type(m_vRPN).swap(m_vRPN);     // shrink bytecode vector to fit
 
     // Determine the if-then-else jump offsets
-    QmuParserStack<int> stIf, stElse;
+    QStack<int> stIf, stElse;
     int idx;
     for (int i=0; i<(int)m_vRPN.size(); ++i)
     {

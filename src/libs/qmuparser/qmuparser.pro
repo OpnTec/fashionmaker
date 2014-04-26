@@ -45,7 +45,6 @@ HEADERS += \
     qmuparser_global.h \
     qmuparsertokenreader.h \
     qmuparsertoken.h \
-    qmuparserstack.h \
     qmuparserfixes.h \
     qmuparsererror.h \
     qmuparserdef.h \

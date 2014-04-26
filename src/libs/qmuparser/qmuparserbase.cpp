@@ -397,30 +397,32 @@ namespace qmu
     }
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Set the formula. 
-      \param a_strFormula Formula as string_type
-      \throw ParserException in case of syntax errors.
+//---------------------------------------------------------------------------
+/** \brief Set the formula.
+  \param a_strFormula Formula as string_type
+  \throw ParserException in case of syntax errors.
 
-      Triggers first time calculation thus the creation of the bytecode and
-      scanning of used variables.
-  */
-  void QmuParserBase::SetExpr(const string_type &a_sExpr)
-  {
+  Triggers first time calculation thus the creation of the bytecode and
+  scanning of used variables.
+*/
+void QmuParserBase::SetExpr(const string_type &a_sExpr)
+{
     // Check locale compatibility
     std::locale loc;
     if (m_pTokenReader->GetArgSep()==std::use_facet<numpunct<char_type> >(loc).decimal_point())
-      Error(ecLOCALE);
+    {
+        Error(ecLOCALE);
+    }
 
     // <ibg> 20060222: Bugfix for Borland-Kylix:
     // adding a space to the expression will keep Borlands KYLIX from going wild
-    // when calling tellg on a stringstream created from the expression after 
+    // when calling tellg on a stringstream created from the expression after
     // reading a value at the end of an expression. (mu::Parser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
     string_type sBuf(a_sExpr + " " );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
-  }
+}
 
   //---------------------------------------------------------------------------
   /** \brief Get the default symbols used for the built in operators. 
@@ -786,9 +788,7 @@ namespace qmu
       \post The function token is removed from the stack
       \throw exception_type if Argument count does not mach function requirements.
   */
-  void QmuParserBase::ApplyFunc( QmuParserStack<token_type> &a_stOpt,
-                              QmuParserStack<token_type> &a_stVal,
-                              int a_iArgCount) const
+  void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int a_iArgCount) const
   { 
     assert(m_pTokenReader.get());
 
@@ -866,8 +866,7 @@ namespace qmu
   }
 
   //---------------------------------------------------------------------------
-  void QmuParserBase::ApplyIfElse(QmuParserStack<token_type> &a_stOpt,
-                               QmuParserStack<token_type> &a_stVal) const
+  void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const
   {
     // Check if there is an if Else clause to be calculated
     while (a_stOpt.size() && a_stOpt.top().GetCode()==cmELSE)
@@ -900,8 +899,7 @@ namespace qmu
   /** \brief Performs the necessary steps to write code for
              the execution of binary operators into the bytecode. 
   */
-  void QmuParserBase::ApplyBinOprt(QmuParserStack<token_type> &a_stOpt,
-                                QmuParserStack<token_type> &a_stVal) const
+  void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const
   {
     // is it a user defined binary operator?
     if (a_stOpt.top().GetCode()==cmOPRT_BIN)
@@ -940,8 +938,7 @@ namespace qmu
       \param a_stOpt The operator stack
       \param a_stVal The value stack
   */
-  void QmuParserBase::ApplyRemainingOprt(QmuParserStack<token_type> &stOpt,
-                                      QmuParserStack<token_type> &stVal) const
+  void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_type> &stVal) const
   {
     while (stOpt.size() && 
            stOpt.top().GetCode() != cmBO &&
@@ -1179,8 +1176,8 @@ namespace qmu
     if (!m_pTokenReader->GetExpr().length())
       Error(ecUNEXPECTED_EOF, 0);
 
-    QmuParserStack<token_type> stOpt, stVal;
-    QmuParserStack<int> stArgCount;
+    QStack<token_type> stOpt, stVal;
+    QStack<int> stArgCount;
     token_type opta, opt;  // for storing operators
     token_type val, tval;  // for storing value
     string_type strBuf;    // buffer for string function arguments
@@ -1604,10 +1601,10 @@ namespace qmu
 
       This function is used for debugging only.
   */
-  void QmuParserBase::StackDump(const QmuParserStack<token_type> &a_stVal,
-                             const QmuParserStack<token_type> &a_stOprt) const
+  void QmuParserBase::StackDump(const QStack<token_type> &a_stVal,
+                             const QStack<token_type> &a_stOprt) const
   {
-    QmuParserStack<token_type> stOprt(a_stOprt),
+    QStack<token_type> stOprt(a_stOprt),
                             stVal(a_stVal);
 
     mu::console() << "\nValue stack:\n";
