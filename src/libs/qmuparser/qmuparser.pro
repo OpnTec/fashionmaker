@@ -37,7 +37,6 @@ SOURCES += \
     qmuparserbytecode.cpp \
     qmuparserbase.cpp \
     qmuparsertest.cpp \
-    qmuparserint.cpp \
     stable.cpp
 
 HEADERS += \
@@ -52,7 +51,6 @@ HEADERS += \
     qmuparserbytecode.h \
     qmuparserbase.h \
     qmuparsertest.h \
-    qmuparserint.h \
     stable.h
 
 VERSION = 2.2.3

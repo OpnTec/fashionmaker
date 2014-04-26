@@ -214,79 +214,6 @@ namespace qmu
       // reference: http://www.wolframalpha.com/input/?i=3%2B4*2%2F%281-5%29^2^3
       iStat += EqnTest("3+4*2/(1-5)^2^3", 3.0001220703125, true);
 
-      // Test user defined binary operators
-      iStat += EqnTestInt("1 | 2", 3, true);
-      iStat += EqnTestInt("1 || 2", 1, true);
-      iStat += EqnTestInt("123 & 456", 72, true);
-      iStat += EqnTestInt("(123 & 456) % 10", 2, true);
-      iStat += EqnTestInt("1 && 0", 0, true);
-      iStat += EqnTestInt("123 && 456", 1, true);
-      iStat += EqnTestInt("1 << 3", 8, true);
-      iStat += EqnTestInt("8 >> 3", 1, true);
-      iStat += EqnTestInt("9 / 4", 2, true);
-      iStat += EqnTestInt("9 % 4", 1, true);
-      iStat += EqnTestInt("if(5%2,1,0)", 1, true);
-      iStat += EqnTestInt("if(4%2,1,0)", 0, true);
-      iStat += EqnTestInt("-10+1", -9, true);
-      iStat += EqnTestInt("1+2*3", 7, true);
-      iStat += EqnTestInt("const1 != const2", 1, true);
-      iStat += EqnTestInt("const1 != const2", 0, false);
-      iStat += EqnTestInt("const1 == const2", 0, true);
-      iStat += EqnTestInt("const1 == 1", 1, true);
-      iStat += EqnTestInt("10*(const1 == 1)", 10, true);
-      iStat += EqnTestInt("2*(const1 | const2)", 6, true);
-      iStat += EqnTestInt("2*(const1 | const2)", 7, false);
-      iStat += EqnTestInt("const1 < const2", 1, true);
-      iStat += EqnTestInt("const2 > const1", 1, true);
-      iStat += EqnTestInt("const1 <= 1", 1, true);
-      iStat += EqnTestInt("const2 >= 2", 1, true);
-      iStat += EqnTestInt("2*(const1 + const2)", 6, true);
-      iStat += EqnTestInt("2*(const1 - const2)", -2, true);
-      iStat += EqnTestInt("a != b", 1, true);
-      iStat += EqnTestInt("a != b", 0, false);
-      iStat += EqnTestInt("a == b", 0, true);
-      iStat += EqnTestInt("a == 1", 1, true);
-      iStat += EqnTestInt("10*(a == 1)", 10, true);
-      iStat += EqnTestInt("2*(a | b)", 6, true);
-      iStat += EqnTestInt("2*(a | b)", 7, false);
-      iStat += EqnTestInt("a < b", 1, true);
-      iStat += EqnTestInt("b > a", 1, true);
-      iStat += EqnTestInt("a <= 1", 1, true);
-      iStat += EqnTestInt("b >= 2", 1, true);
-      iStat += EqnTestInt("2*(a + b)", 6, true);
-      iStat += EqnTestInt("2*(a - b)", -2, true);
-      iStat += EqnTestInt("a + (a << b)", 5, true);
-      iStat += EqnTestInt("-2^2", -4, true);
-      iStat += EqnTestInt("3--a", 4, true);
-      iStat += EqnTestInt("3+-3^2", -6, true);
-
-      // Test reading of hex values:
-      iStat += EqnTestInt("0xff", 255, true);
-      iStat += EqnTestInt("10+0xff", 265, true);
-      iStat += EqnTestInt("0xff+10", 265, true);
-      iStat += EqnTestInt("10*0xff", 2550, true);
-      iStat += EqnTestInt("0xff*10", 2550, true);
-      iStat += EqnTestInt("10+0xff+1", 266, true);
-      iStat += EqnTestInt("1+0xff+10", 266, true);
-
-// incorrect: '^' is your here, not power
-//    iStat += EqnTestInt("-(1+2)^2", -9, true);
-//    iStat += EqnTestInt("-1^3", -1, true);          
-
-      // Test precedence
-      // a=1, b=2, c=3
-      iStat += EqnTestInt("a + b * c", 7, true);
-      iStat += EqnTestInt("a * b + c", 5, true);
-      iStat += EqnTestInt("a<b && b>10", 0, true);
-      iStat += EqnTestInt("a<b && b<10", 1, true);
-
-      iStat += EqnTestInt("a + b << c", 17, true);
-      iStat += EqnTestInt("a << b + c", 7, true);
-      iStat += EqnTestInt("c * b < a", 0, true);
-      iStat += EqnTestInt("c * b == 6 * a", 1, true);
-      iStat += EqnTestInt("2^2^3", 256, true);
-
-
       if (iStat==0)
         qmu::console() << "passed" << endl;
       else 
@@ -1379,57 +1306,6 @@ namespace qmu
       {
         qmu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
         return 1;  // exceptions other than ParserException are not allowed
-      }
-
-      return iRet;
-    }
-
-    //---------------------------------------------------------------------------
-    int QmuParserTester::EqnTestInt(const string_type &a_str, double a_fRes, bool a_fPass)
-    {
-      QmuParserTester::c_iCount++;
-
-      qreal vVarVal[] = {1, 2, 3};   // variable values
-      qreal fVal[2] = {-99, -999};   // results: initially should be different
-      int iRet(0);
-
-      try
-      {
-        QmuParserInt p;
-        p.DefineConst( "const1", 1);
-        p.DefineConst( "const2", 2);
-        p.DefineVar( "a", &vVarVal[0]);
-        p.DefineVar( "b", &vVarVal[1]);
-        p.DefineVar( "c", &vVarVal[2]);
-
-        p.SetExpr(a_str);
-        fVal[0] = p.Eval(); // result from stringparsing
-        fVal[1] = p.Eval(); // result from bytecode
-
-        if (fVal[0]!=fVal[1])
-          throw QmuParser::exception_type( "Bytecode corrupt." );
-
-        iRet =  ( (a_fRes==fVal[0] &&  a_fPass) || 
-                  (a_fRes!=fVal[0] && !a_fPass) ) ? 0 : 1;
-        if (iRet==1)
-        {
-          qmu::console() << "\n  fail: " << a_str.c_str()
-                        << " (incorrect result; expected: " << a_fRes
-                        << " ;calculated: " << fVal[0]<< ").";
-        }
-      }
-      catch(QmuParser::exception_type &e)
-      {
-        if (a_fPass)
-        {
-          qmu::console() << "\n  fail: " << e.GetExpr() << " : " << e.GetMsg();
-          iRet = 1;
-        }
-      }
-      catch(...)
-      {
-        qmu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
-        iRet = 1;  // exceptions other than ParserException are not allowed
       }
 
       return iRet;

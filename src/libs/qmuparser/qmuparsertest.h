@@ -27,7 +27,6 @@
 #include <cstdlib>
 #include <numeric> // for accumulate
 #include "qmuparser.h"
-#include "qmuparserint.h"
 
 /** \file
     \brief This file contains the parser test class.
@@ -195,9 +194,6 @@ namespace qmu
                                  double a_fRes2, 
                                  double a_fVar2);
         int ThrowTest(const string_type& a_str, int a_iErrc, bool a_bFail = true);
-
-        // Test Int Parser
-        int EqnTestInt(const string_type& a_str, double a_fRes, bool a_fPass);
     };
   } // namespace Test
 } // namespace qmu
