@@ -21,7 +21,6 @@
  ******************************************************************************************************/
 
 #include "qmuparserbase.h"
-#include "qmuparsertemplatemagic.h"
 
 //--- Standard includes ------------------------------------------------------------------------
 #include <cassert>
@@ -266,11 +265,11 @@ namespace qmu
     
     stringstream_type ss;
 
-    ss << MUP_VERSION;
+    ss << QMUP_VERSION;
 
     if (eInfo==pviFULL)
     {
-      ss << " (" << MUP_VERSION_DATE;
+      ss << " (" << QMUP_VERSION_DATE;
       ss << std::dec << "; " << sizeof(void*)*8 << "BIT";
 
 #ifdef _DEBUG
@@ -1030,7 +1029,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
                   continue;
 
       case  cmPOW: 
-              --sidx; Stack[sidx] = MathImpl<qreal>::Pow(Stack[sidx], Stack[1+sidx]);
+              --sidx; Stack[sidx] = std::pow(Stack[sidx], Stack[1+sidx]);
               continue;
 
       case  cmLAND: --sidx; Stack[sidx]  = Stack[sidx] && Stack[sidx+1]; continue;
@@ -1607,22 +1606,22 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
     QStack<token_type> stOprt(a_stOprt),
                             stVal(a_stVal);
 
-    mu::console() << "\nValue stack:\n";
+    qmu::console() << "\nValue stack:\n";
     while ( !stVal.empty() ) 
     {
       token_type val = stVal.pop();
       if (val.GetType()==tpSTR)
-        mu::console() << " \"" << val.GetAsString() << "\" ";
+        qmu::console() << " \"" << val.GetAsString() << "\" ";
       else
-        mu::console() << " " << val.GetVal() << " ";
+        qmu::console() << " " << val.GetVal() << " ";
     }
-    mu::console() << "\nOperator stack:\n";
+    qmu::console() << "\nOperator stack:\n";
 
     while ( !stOprt.empty() )
     {
       if (stOprt.top().GetCode()<=cmASSIGN) 
       {
-        mu::console() << "OPRT_INTRNL \""
+        qmu::console() << "OPRT_INTRNL \""
                       << QmuParserBase::c_DefaultOprt[stOprt.top().GetCode()]
                       << "\" \n";
       }
@@ -1630,35 +1629,35 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       {
         switch(stOprt.top().GetCode())
         {
-        case cmVAR:   mu::console() << "VAR\n";  break;
-        case cmVAL:   mu::console() << "VAL\n";  break;
-        case cmFUNC:  mu::console() << "FUNC \""
+        case cmVAR:   qmu::console() << "VAR\n";  break;
+        case cmVAL:   qmu::console() << "VAL\n";  break;
+        case cmFUNC:  qmu::console() << "FUNC \""
                                     << stOprt.top().GetAsString() 
                                     << "\"\n";   break;
-        case cmFUNC_BULK:  mu::console() << "FUNC_BULK \""
+        case cmFUNC_BULK:  qmu::console() << "FUNC_BULK \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";   break;
-        case cmOPRT_INFIX: mu::console() << "OPRT_INFIX \""
+        case cmOPRT_INFIX: qmu::console() << "OPRT_INFIX \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";      break;
-        case cmOPRT_BIN:   mu::console() << "OPRT_BIN \""
+        case cmOPRT_BIN:   qmu::console() << "OPRT_BIN \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";           break;
-        case cmFUNC_STR: mu::console() << "FUNC_STR\n";       break;
-        case cmEND:      mu::console() << "END\n";            break;
-        case cmUNKNOWN:  mu::console() << "UNKNOWN\n";        break;
-        case cmBO:       mu::console() << "BRACKET \"(\"\n";  break;
-        case cmBC:       mu::console() << "BRACKET \")\"\n";  break;
-        case cmIF:       mu::console() << "IF\n";  break;
-        case cmELSE:     mu::console() << "ELSE\n";  break;
-        case cmENDIF:    mu::console() << "ENDIF\n";  break;
-        default:         mu::console() << stOprt.top().GetCode() << " ";  break;
+        case cmFUNC_STR: qmu::console() << "FUNC_STR\n";       break;
+        case cmEND:      qmu::console() << "END\n";            break;
+        case cmUNKNOWN:  qmu::console() << "UNKNOWN\n";        break;
+        case cmBO:       qmu::console() << "BRACKET \"(\"\n";  break;
+        case cmBC:       qmu::console() << "BRACKET \")\"\n";  break;
+        case cmIF:       qmu::console() << "IF\n";  break;
+        case cmELSE:     qmu::console() << "ELSE\n";  break;
+        case cmENDIF:    qmu::console() << "ENDIF\n";  break;
+        default:         qmu::console() << stOprt.top().GetCode() << " ";  break;
         }
       }	
       stOprt.pop();
     }
 
-    mu::console() << dec << endl;
+    qmu::console() << dec << endl;
   }
 
   //------------------------------------------------------------------------------

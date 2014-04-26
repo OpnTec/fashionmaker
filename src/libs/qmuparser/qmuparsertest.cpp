@@ -88,7 +88,7 @@ namespace qmu
     int QmuParserTester::TestInterface()
     {
       int iStat = 0;
-      mu::console() << "testing member functions...";
+      qmu::console() << "testing member functions...";
    
       // Test RemoveVar
       qreal afVal[3] = {1,2,3};
@@ -119,9 +119,9 @@ namespace qmu
       }
 
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -130,7 +130,7 @@ namespace qmu
     int QmuParserTester::TestStrArg()
     {
       int iStat = 0;
-      mu::console() << "testing string arguments...";
+      qmu::console() << "testing string arguments...";
  
       iStat += EqnTest("valueof(\"\")", 123, true);   // empty string arguments caused a crash
       iStat += EqnTest("valueof(\"aaa\")+valueof(\"bbb\")  ", 246, true);
@@ -144,9 +144,9 @@ namespace qmu
       iStat += EqnTest("strfun3(\"99\",1,2)", 102, true);
 
       if (iStat==0)
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -155,7 +155,7 @@ namespace qmu
     int QmuParserTester::TestBinOprt()
     {
       int iStat = 0;
-      mu::console() << "testing binary operators...";
+      qmu::console() << "testing binary operators...";
    
       // built in operators
       // xor operator
@@ -288,9 +288,9 @@ namespace qmu
 
 
       if (iStat==0)
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -302,7 +302,7 @@ namespace qmu
       int  iStat= 0,
            iErr = 0;
 
-      mu::console() << "testing name restriction enforcement...";
+      qmu::console() << "testing name restriction enforcement...";
     
       QmuParser p;
 
@@ -397,9 +397,9 @@ namespace qmu
   #undef PARSER_THROWCHECK
 
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -408,7 +408,7 @@ namespace qmu
     int QmuParserTester::TestSyntax()
     {
       int iStat = 0;
-      mu::console() << "testing syntax engine...";
+      qmu::console() << "testing syntax engine...";
 
       iStat += ThrowTest("1,", ecUNEXPECTED_EOF);  // incomplete hex definition
       iStat += ThrowTest("a,", ecUNEXPECTED_EOF);  // incomplete hex definition
@@ -446,9 +446,9 @@ namespace qmu
       iStat += EqnTest("sin()", 0, false);     // unexpected closing bracket
 
       if (iStat==0)
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -457,7 +457,7 @@ namespace qmu
     int QmuParserTester::TestVarConst()
     {
       int iStat = 0;
-      mu::console() << "testing variable/constant detection...";
+      qmu::console() << "testing variable/constant detection...";
 
       // Test if the result changes when a variable changes
       iStat += EqnTestWithVarChange( "a", 1, 1, 2, 2 );
@@ -504,7 +504,7 @@ namespace qmu
         // Test lookup of defined variables
         // 4 used variables
         p.SetExpr( "a+b+c+d" );
-        mu::varmap_type UsedVar = p.GetUsedVar();
+        qmu::varmap_type UsedVar = p.GetUsedVar();
         int iCount = (int)UsedVar.size();
         if (iCount!=4) 
           throw false;
@@ -514,7 +514,7 @@ namespace qmu
         if (p.GetVar().size()!=5)
           throw false;
 
-        mu::varmap_type::const_iterator item = UsedVar.begin();
+        qmu::varmap_type::const_iterator item = UsedVar.begin();
         for (idx=0; item!=UsedVar.end(); ++item)
         {
           if (&vVarVal[idx++]!=item->second) 
@@ -555,9 +555,9 @@ namespace qmu
       }
 
       if (iStat==0)  
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -566,7 +566,7 @@ namespace qmu
     int QmuParserTester::TestMultiArg()
     {
       int iStat = 0;
-      mu::console() << "testing multiarg functions...";
+      qmu::console() << "testing multiarg functions...";
     
       // Compound expressions
       iStat += EqnTest( "1,2,3", 3, true);
@@ -649,9 +649,9 @@ namespace qmu
       iStat += EqnTest( "sum(,1,2)",  0, false);
 
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
   
       return iStat;
     }
@@ -661,7 +661,7 @@ namespace qmu
     int QmuParserTester::TestInfixOprt()
     {
       int iStat(0);
-      mu::console() << "testing infix operators...";
+      qmu::console() << "testing infix operators...";
 
       iStat += EqnTest( "-1",    -1, true);
       iStat += EqnTest( "-(-1)",  1, true);
@@ -714,9 +714,9 @@ namespace qmu
       iStat += EqnTest( "~~ 123",  123+2, true);
 
       if (iStat==0)
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -726,7 +726,7 @@ namespace qmu
     int QmuParserTester::TestPostFix()
     {
       int iStat = 0;
-      mu::console() << "testing postfix operators...";
+      qmu::console() << "testing postfix operators...";
 
       // application
       iStat += EqnTest( "3{m}+5", 5.003, true);
@@ -766,9 +766,9 @@ namespace qmu
       iStat += ThrowTest( "multi*1.0", ecUNASSIGNABLE_TOKEN);
 
       if (iStat==0)
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -777,7 +777,7 @@ namespace qmu
     int QmuParserTester::TestExpression()
     {
       int iStat = 0;
-      mu::console() << "testing expression samples...";
+      qmu::console() << "testing expression samples...";
 
       qreal b = 2;
 
@@ -846,9 +846,9 @@ namespace qmu
       iStat += EqnTest( "1+2-3*4/5^6*(2*(1-5+(3*7^9)*(4+6*7-3)))+12", -7995810.09926, true);
 	  
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -859,7 +859,7 @@ namespace qmu
     int QmuParserTester::TestIfThenElse()
     {
       int iStat = 0;
-      mu::console() << "testing if-then-else operator...";
+      qmu::console() << "testing if-then-else operator...";
 
       // Test error detection
       iStat += ThrowTest(":3", ecUNEXPECTED_CONDITIONAL);
@@ -954,9 +954,9 @@ namespace qmu
       iStat += EqnTest("a=0?5:b=1?3:4, b", 3, true);
 
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -965,7 +965,7 @@ namespace qmu
     int QmuParserTester::TestException()
     {
       int  iStat = 0;
-      mu::console() << "testing error codes...";
+      qmu::console() << "testing error codes...";
 
       iStat += ThrowTest("3+",           ecUNEXPECTED_EOF);
       iStat += ThrowTest("3+)",          ecUNEXPECTED_PARENS);
@@ -1048,9 +1048,9 @@ namespace qmu
       iStat += ThrowTest( "a=\"tttt\"", ecOPRT_TYPE_CONFLICT);
 
       if (iStat==0) 
-        mu::console() << "passed" << endl;
+        qmu::console() << "passed" << endl;
       else 
-        mu::console() << "\n  failed with " << iStat << " errors" << endl;
+        qmu::console() << "\n  failed with " << iStat << " errors" << endl;
 
       return iStat;
     }
@@ -1073,28 +1073,28 @@ namespace qmu
       }
       catch(QmuParser::exception_type &e)
       {
-        mu::console() << "\n" << e.GetMsg() << endl;
-        mu::console() << e.GetToken() << endl;
+        qmu::console() << "\n" << e.GetMsg() << endl;
+        qmu::console() << e.GetToken() << endl;
         Abort();
       }
       catch(std::exception &e)
       {
-        mu::console() << e.what() << endl;
+        qmu::console() << e.what() << endl;
         Abort();
       }
       catch(...)
       {
-        mu::console() << "Internal error";
+        qmu::console() << "Internal error";
         Abort();
       }
 
       if (iStat==0) 
       {
-        mu::console() << "Test passed (" <<  QmuParserTester::c_iCount << " expressions)" << endl;
+        qmu::console() << "Test passed (" <<  QmuParserTester::c_iCount << " expressions)" << endl;
       }
       else 
       {
-        mu::console() << "Test failed with " << iStat 
+        qmu::console() << "Test failed with " << iStat
                   << " errors (" <<  QmuParserTester::c_iCount
                   << " expressions)" << endl;
       }
@@ -1130,7 +1130,7 @@ namespace qmu
         // output the formula in case of an failed test
         if (a_bFail==false || (a_bFail==true && a_iErrc!=e.GetCode()) )
         {
-          mu::console() << "\n  "
+          qmu::console() << "\n  "
                         << "Expression: " << a_str
                         << "  Code:" << e.GetCode() << "(" << e.GetMsg() << ")"
                         << "  Expected:" << a_iErrc;
@@ -1143,7 +1143,7 @@ namespace qmu
       bool bRet((a_bFail==false) ? 0 : 1);
       if (bRet==1)
       {
-        mu::console() << "\n  "
+        qmu::console() << "\n  "
                       << "Expression: " << a_str
                       << "  did evaluate; Expected error:" << a_iErrc;
       }
@@ -1188,17 +1188,17 @@ namespace qmu
       }
       catch(QmuParser::exception_type &e)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() << " (" << e.GetMsg() << ")";
+        qmu::console() << "\n  fail: " << a_str.c_str() << " (" << e.GetMsg() << ")";
         return 1;
       }
       catch(std::exception &e)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() << " (" << e.what() << ")";
+        qmu::console() << "\n  fail: " << a_str.c_str() << " (" << e.what() << ")";
         return 1;  // always return a failure since this exception is not expected
       }
       catch(...)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
+        qmu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
         return 1;  // exceptions other than ParserException are not allowed
       }
 
@@ -1329,7 +1329,7 @@ namespace qmu
         }
         catch(std::exception &e)
         {
-          mu::console() << "\n  " << e.what() << "\n";
+          qmu::console() << "\n  " << e.what() << "\n";
         }
 
         // limited floating point accuracy requires the following test
@@ -1350,7 +1350,7 @@ namespace qmu
         
         if (iRet==1)
         {
-          mu::console() << "\n  fail: " << a_str.c_str()
+          qmu::console() << "\n  fail: " << a_str.c_str()
                         << " (incorrect result; expected: " << a_fRes
                         << " ;calculated: " << fVal[0] << ","
                                                 << fVal[1] << ","
@@ -1364,20 +1364,20 @@ namespace qmu
         if (a_fPass)
         {
           if (fVal[0]!=fVal[2] && fVal[0]!=-999 && fVal[1]!=-998)
-            mu::console() << "\n  fail: " << a_str.c_str() << " (copy construction)";
+            qmu::console() << "\n  fail: " << a_str.c_str() << " (copy construction)";
           else
-            mu::console() << "\n  fail: " << a_str.c_str() << " (" << e.GetMsg() << ")";
+            qmu::console() << "\n  fail: " << a_str.c_str() << " (" << e.GetMsg() << ")";
           return 1;
         }
       }
       catch(std::exception &e)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() << " (" << e.what() << ")";
+        qmu::console() << "\n  fail: " << a_str.c_str() << " (" << e.what() << ")";
         return 1;  // always return a failure since this exception is not expected
       }
       catch(...)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
+        qmu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
         return 1;  // exceptions other than ParserException are not allowed
       }
 
@@ -1413,7 +1413,7 @@ namespace qmu
                   (a_fRes!=fVal[0] && !a_fPass) ) ? 0 : 1;
         if (iRet==1)
         {
-          mu::console() << "\n  fail: " << a_str.c_str()
+          qmu::console() << "\n  fail: " << a_str.c_str()
                         << " (incorrect result; expected: " << a_fRes
                         << " ;calculated: " << fVal[0]<< ").";
         }
@@ -1422,13 +1422,13 @@ namespace qmu
       {
         if (a_fPass)
         {
-          mu::console() << "\n  fail: " << e.GetExpr() << " : " << e.GetMsg();
+          qmu::console() << "\n  fail: " << e.GetExpr() << " : " << e.GetMsg();
           iRet = 1;
         }
       }
       catch(...)
       {
-        mu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
+        qmu::console() << "\n  fail: " << a_str.c_str() <<  " (unexpected exception)";
         iRet = 1;  // exceptions other than ParserException are not allowed
       }
 
@@ -1439,7 +1439,7 @@ namespace qmu
     /** \brief Internal error in test class Test is going to be aborted. */
     void QmuParserTester::Abort() const
     {
-      mu::console() << "Test failed (internal error in test class)" << endl;
+      qmu::console() << "Test failed (internal error in test class)" << endl;
       while (!getchar());
       exit(-1);
     }

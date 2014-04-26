@@ -21,7 +21,8 @@
  ******************************************************************************************************/
 
 #include "qmuparser.h"
-#include "qmuparsertemplatemagic.h"
+#include <QtMath>
+#include <QtGlobal>
 
 //--- Standard includes ------------------------------------------------------------------------
 #include <cmath>
@@ -40,28 +41,17 @@ using namespace std;
     \brief Implementation of the standard floating point QmuParser.
 */
 
-
-
 /** \brief Namespace for mathematical applications. */
 namespace qmu
 {
-
-
   //---------------------------------------------------------------------------
   // Trigonometric function
-  qreal QmuParser::Sin(qreal v)   { return MathImpl<qreal>::Sin(v);  }
-  qreal QmuParser::Cos(qreal v)   { return MathImpl<qreal>::Cos(v);  }
-  qreal QmuParser::Tan(qreal v)   { return MathImpl<qreal>::Tan(v);  }
-  qreal QmuParser::ASin(qreal v)  { return MathImpl<qreal>::ASin(v); }
-  qreal QmuParser::ACos(qreal v)  { return MathImpl<qreal>::ACos(v); }
-  qreal QmuParser::ATan(qreal v)  { return MathImpl<qreal>::ATan(v); }
-  qreal QmuParser::ATan2(qreal v1, qreal v2) { return MathImpl<qreal>::ATan2(v1, v2); }
-  qreal QmuParser::Sinh(qreal v)  { return MathImpl<qreal>::Sinh(v); }
-  qreal QmuParser::Cosh(qreal v)  { return MathImpl<qreal>::Cosh(v); }
-  qreal QmuParser::Tanh(qreal v)  { return MathImpl<qreal>::Tanh(v); }
-  qreal QmuParser::ASinh(qreal v) { return MathImpl<qreal>::ASinh(v); }
-  qreal QmuParser::ACosh(qreal v) { return MathImpl<qreal>::ACosh(v); }
-  qreal QmuParser::ATanh(qreal v) { return MathImpl<qreal>::ATanh(v); }
+  qreal QmuParser::Sinh(qreal v)  { return sinh(v); }
+  qreal QmuParser::Cosh(qreal v)  { return cosh(v); }
+  qreal QmuParser::Tanh(qreal v)  { return tanh(v); }
+  qreal QmuParser::ASinh(qreal v) { return log(v + qSqrt(v * v + 1)); }
+  qreal QmuParser::ACosh(qreal v) { return log(v + qSqrt(v * v - 1)); }
+  qreal QmuParser::ATanh(qreal v) { return ((qreal)0.5 * log((1 + v) / (1 - v))); }
 
   //---------------------------------------------------------------------------
   // Logarithm functions
@@ -74,7 +64,7 @@ namespace qmu
           throw QmuParserError(ecDOMAIN_ERROR, "Log2");
     #endif
 
-    return MathImpl<qreal>::Log2(v);
+    return log(v)/log((qreal)2);
   }
 
   // Logarithm base 10
@@ -85,35 +75,14 @@ namespace qmu
           throw QmuParserError(ecDOMAIN_ERROR, "Log10");
     #endif
 
-    return MathImpl<qreal>::Log10(v);
-  }
-
-// Logarithm base e (natural logarithm)
-  qreal QmuParser::Ln(qreal v)
-  {
-    #ifdef MUP_MATH_EXCEPTIONS
-        if (v<=0)
-          throw QmuParserError(ecDOMAIN_ERROR, "Ln");
-    #endif
-
-    return MathImpl<qreal>::Log(v);
+    return log10(v);
   }
 
   //---------------------------------------------------------------------------
   //  misc
-  qreal QmuParser::Exp(qreal v)  { return MathImpl<qreal>::Exp(v);  }
-  qreal QmuParser::Abs(qreal v)  { return MathImpl<qreal>::Abs(v);  }
-  qreal QmuParser::Sqrt(qreal v)
-  {
-    #ifdef MUP_MATH_EXCEPTIONS
-        if (v<0)
-          throw QmuParserError(ecDOMAIN_ERROR, "sqrt");
-    #endif
-
-    return MathImpl<qreal>::Sqrt(v);
-  }
-  qreal QmuParser::Rint(qreal v) { return MathImpl<qreal>::Rint(v); }
-  qreal QmuParser::Sign(qreal v) { return MathImpl<qreal>::Sign(v); }
+  qreal QmuParser::Abs(qreal v)  { return (v>=0) ? v : -v;  }
+  qreal QmuParser::Rint(qreal v) { return qFloor(v + (qreal)0.5); }
+  qreal QmuParser::Sign(qreal v) { return (qreal)((v<0) ? -1 : (v>0) ? 1 : 0); }
 
   //---------------------------------------------------------------------------
   /** \brief Callback for the unary minus operator.
@@ -156,39 +125,45 @@ namespace qmu
   }
 
 
-  //---------------------------------------------------------------------------
-  /** \brief Callback for determining the minimum value out of a vector.
-      \param [in] a_afArg Vector with the function arguments
-      \param [in] a_iArgc The size of a_afArg
-  */
-  qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
-  {
+//---------------------------------------------------------------------------
+/** \brief Callback for determining the minimum value out of a vector.
+  \param [in] a_afArg Vector with the function arguments
+  \param [in] a_iArgc The size of a_afArg
+*/
+qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
+{
     if (!a_iArgc)
-      throw exception_type("too few arguments for function min.");
+    {
+        throw exception_type("too few arguments for function min.");
+    }
 
     qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)
-      fRes = std::min(fRes, a_afArg[i]);
-
+    {
+        fRes = qMin(fRes, a_afArg[i]);
+    }
     return fRes;
-  }
+}
 
-
-  //---------------------------------------------------------------------------
-  /** \brief Callback for determining the maximum value out of a vector.
-      \param [in] a_afArg Vector with the function arguments
-      \param [in] a_iArgc The size of a_afArg
-  */
-  qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
-  {
+//---------------------------------------------------------------------------
+/** \brief Callback for determining the maximum value out of a vector.
+  \param [in] a_afArg Vector with the function arguments
+  \param [in] a_iArgc The size of a_afArg
+*/
+qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
+{
     if (!a_iArgc)
-      throw exception_type("too few arguments for function min.");
+    {
+        throw exception_type("too few arguments for function min.");
+    }
 
     qreal fRes=a_afArg[0];
-    for (int i=0; i<a_iArgc; ++i) fRes = std::max(fRes, a_afArg[i]);
-
+    for (int i=0; i<a_iArgc; ++i)
+    {
+        fRes = qMax(fRes, a_afArg[i]);
+    }
     return fRes;
-  }
+}
 
 
   //---------------------------------------------------------------------------
@@ -247,55 +222,44 @@ namespace qmu
     DefineInfixOprtChars( "/+-*^?<>=#!$%&|~'_" );
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Initialize the default functions. */
-  void QmuParser::InitFun()
-  {
-    if (qmu::TypeInfo<qreal>::IsInteger())
-    {
-      // When setting MUP_BASETYPE to an integer type
-      // Place functions for dealing with integer values here
-      // ...
-      // ...
-      // ...
-    }
-    else
-    {
-      // trigonometric functions
-      DefineFun("sin", Sin);
-      DefineFun("cos", Cos);
-      DefineFun("tan", Tan);
-      // arcus functions
-      DefineFun("asin", ASin);
-      DefineFun("acos", ACos);
-      DefineFun("atan", ATan);
-      DefineFun("atan2", ATan2);
-      // hyperbolic functions
-      DefineFun("sinh", Sinh);
-      DefineFun("cosh", Cosh);
-      DefineFun("tanh", Tanh);
-      // arcus hyperbolic functions
-      DefineFun("asinh", ASinh);
-      DefineFun("acosh", ACosh);
-      DefineFun("atanh", ATanh);
-      // Logarithm functions
-      DefineFun("log2", Log2);
-      DefineFun("log10", Log10);
-      DefineFun("log", Log10);
-      DefineFun("ln", Ln);
-      // misc
-      DefineFun("exp", Exp);
-      DefineFun("sqrt", Sqrt);
-      DefineFun("sign", Sign);
-      DefineFun("rint", Rint);
-      DefineFun("abs", Abs);
-      // Functions with variable number of arguments
-      DefineFun("sum", Sum);
-      DefineFun("avg", Avg);
-      DefineFun("min", Min);
-      DefineFun("max", Max);
-    }
-  }
+//---------------------------------------------------------------------------
+/** \brief Initialize the default functions. */
+void QmuParser::InitFun()
+{
+    // trigonometric functions
+    DefineFun("sin",   qSin);
+    DefineFun("cos",   qCos);
+    DefineFun("tan",   qTan);
+    // arcus functions
+    DefineFun("asin",  qAsin);
+    DefineFun("acos",  qAcos);
+    DefineFun("atan",  qAtan);
+    DefineFun("atan2", qAtan2);
+    // hyperbolic functions
+    DefineFun("sinh",  Sinh);
+    DefineFun("cosh",  Cosh);
+    DefineFun("tanh",  Tanh);
+    // arcus hyperbolic functions
+    DefineFun("asinh", ASinh);
+    DefineFun("acosh", ACosh);
+    DefineFun("atanh", ATanh);
+    // Logarithm functions
+    DefineFun("log2",  Log2);
+    DefineFun("log10", Log10);
+    DefineFun("log",   Log10);
+    DefineFun("ln",    qLn);
+    // misc
+    DefineFun("exp",   qExp);
+    DefineFun("sqrt",  qSqrt);
+    DefineFun("sign",  Sign);
+    DefineFun("rint",  Rint);
+    DefineFun("abs",   Abs);
+    // Functions with variable number of arguments
+    DefineFun("sum",   Sum);
+    DefineFun("avg",   Avg);
+    DefineFun("min",   Min);
+    DefineFun("max",   Max);
+}
 
   //---------------------------------------------------------------------------
   /** \brief Initialize constants.

@@ -34,7 +34,6 @@
 
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserdef.h"
-#include "qmuparserstack.h"
 #include "qmuparsertokenreader.h"
 #include "qmuparserbytecode.h"
 #include "qmuparsererror.h"
@@ -121,7 +120,7 @@ private:
     bool HasBuiltInOprt() const;
     void AddValIdent(identfun_type a_pCallback);
 
-    /** \fn void mu::QParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun, bool a_bAllowOpt = true)
+    /** \fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun, bool a_bAllowOpt = true)
         \brief Define a parser function without arguments.
         \param a_strName Name of the function
         \param a_pFun Pointer to the callback function

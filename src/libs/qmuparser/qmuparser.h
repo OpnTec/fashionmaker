@@ -30,7 +30,6 @@
 
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserbase.h"
-#include "qmuparsertemplatemagic.h"
 
 /** \file
     \brief Definition of the standard floating point parser.
@@ -61,18 +60,8 @@ public:
 
     qreal Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
 protected:
-
     // Trigonometric functions
-    static qreal  Sin(qreal);
-    static qreal  Cos(qreal);
-    static qreal  Tan(qreal);
     static qreal  Tan2(qreal, qreal);
-    // arcus functions
-    static qreal  ASin(qreal);
-    static qreal  ACos(qreal);
-    static qreal  ATan(qreal);
-    static qreal  ATan2(qreal, qreal);
-
     // hyperbolic functions
     static qreal  Sinh(qreal);
     static qreal  Cosh(qreal);
@@ -84,18 +73,13 @@ protected:
     // Logarithm functions
     static qreal  Log2(qreal);  // Logarithm Base 2
     static qreal  Log10(qreal); // Logarithm Base 10
-    static qreal  Ln(qreal);    // Logarithm Base e (natural logarithm)
     // misc
-    static qreal  Exp(qreal);
     static qreal  Abs(qreal);
-    static qreal  Sqrt(qreal);
     static qreal  Rint(qreal);
     static qreal  Sign(qreal);
-
     // Prefix operators
     // !!! Unary Minus is a MUST if you want to use negative signs !!!
     static qreal  UnaryMinus(qreal);
-
     // Functions with variable number of arguments
     static qreal Sum(const qreal*, int);  // sum
     static qreal Avg(const qreal*, int);  // mean value

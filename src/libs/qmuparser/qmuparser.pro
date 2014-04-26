@@ -52,7 +52,6 @@ HEADERS += \
     qmuparserbytecode.h \
     qmuparserbase.h \
     qmuparsertest.h \
-    qmuparsertemplatemagic.h \
     qmuparserint.h \
     stable.h
 

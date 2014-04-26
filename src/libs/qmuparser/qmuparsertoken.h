@@ -28,6 +28,7 @@
 #include <stack>
 #include <vector>
 #include <memory>
+#include <QtGlobal>
 
 #include "qmuparsererror.h"
 #include "qmuparsercallback.h"

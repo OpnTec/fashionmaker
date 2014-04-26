@@ -31,8 +31,6 @@
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
 #include "qmuparsertoken.h"
-#include "qmuparserstack.h"
-#include "qmuparsertemplatemagic.h"
 
 
 namespace qmu
@@ -166,7 +164,7 @@ namespace qmu
         m_vRPN.pop_back();
         break;
 
-    case cmPOW: x = MathImpl<qreal>::Pow(x, y);
+    case cmPOW: x = std::pow(x, y);
                 m_vRPN.pop_back();
                 break;
 
@@ -495,89 +493,89 @@ namespace qmu
   {
     if (!m_vRPN.size()) 
     {
-      mu::console() << "No bytecode available\n";
+      qmu::console() << "No bytecode available\n";
       return;
     }
 
-    mu::console() << "Number of RPN tokens:" << (int)m_vRPN.size() << "\n";
+    qmu::console() << "Number of RPN tokens:" << (int)m_vRPN.size() << "\n";
     for (std::size_t i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
     {
-      mu::console() << std::dec << i << " : \t";
+      qmu::console() << std::dec << i << " : \t";
       switch (m_vRPN[i].Cmd)
       {
-      case cmVAL:   mu::console() << "VAL \t";
-                    mu::console() << "[" << m_vRPN[i].Val.data2 << "]\n";
+      case cmVAL:   qmu::console() << "VAL \t";
+                    qmu::console() << "[" << m_vRPN[i].Val.data2 << "]\n";
                     break;
 
-      case cmVAR:   mu::console() << "VAR \t";
-                      mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
+      case cmVAR:   qmu::console() << "VAR \t";
+                      qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                     break;
 
-      case cmVARPOW2: mu::console() << "VARPOW2 \t";
-                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
+      case cmVARPOW2: qmu::console() << "VARPOW2 \t";
+                        qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARPOW3: mu::console() << "VARPOW3 \t";
-                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
+      case cmVARPOW3: qmu::console() << "VARPOW3 \t";
+                        qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARPOW4: mu::console() << "VARPOW4 \t";
-                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
+      case cmVARPOW4: qmu::console() << "VARPOW4 \t";
+                        qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]\n";
                       break;
 
-      case cmVARMUL:  mu::console() << "VARMUL \t";
-                        mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]";
-                      mu::console() << " * [" << m_vRPN[i].Val.data << "]";
-                      mu::console() << " + [" << m_vRPN[i].Val.data2 << "]\n";
+      case cmVARMUL:  qmu::console() << "VARMUL \t";
+                        qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Val.ptr << "]";
+                      qmu::console() << " * [" << m_vRPN[i].Val.data << "]";
+                      qmu::console() << " + [" << m_vRPN[i].Val.data2 << "]\n";
                       break;
 
-      case cmFUNC:  mu::console() << "CALL\t";
-                    mu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
-                    mu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Fun.ptr << "]";
-                    mu::console() << "\n";
+      case cmFUNC:  qmu::console() << "CALL\t";
+                    qmu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
+                    qmu::console() << "[ADDR: 0x" << std::hex << m_vRPN[i].Fun.ptr << "]";
+                    qmu::console() << "\n";
                     break;
 
       case cmFUNC_STR:
-                    mu::console() << "CALL STRFUNC\t";
-                    mu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
-                    mu::console() << "[IDX:" << std::dec << m_vRPN[i].Fun.idx << "]";
-                    mu::console() << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]\n";
+                    qmu::console() << "CALL STRFUNC\t";
+                    qmu::console() << "[ARG:" << std::dec << m_vRPN[i].Fun.argc << "]";
+                    qmu::console() << "[IDX:" << std::dec << m_vRPN[i].Fun.idx << "]";
+                    qmu::console() << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]\n";
                     break;
 
-      case cmLT:    mu::console() << "LT\n";  break;
-      case cmGT:    mu::console() << "GT\n";  break;
-      case cmLE:    mu::console() << "LE\n";  break;
-      case cmGE:    mu::console() << "GE\n";  break;
-      case cmEQ:    mu::console() << "EQ\n";  break;
-      case cmNEQ:   mu::console() << "NEQ\n"; break;
-      case cmADD:   mu::console() << "ADD\n"; break;
-      case cmLAND:  mu::console() << "&&\n"; break;
-      case cmLOR:   mu::console() << "||\n"; break;
-      case cmSUB:   mu::console() << "SUB\n"; break;
-      case cmMUL:   mu::console() << "MUL\n"; break;
-      case cmDIV:   mu::console() << "DIV\n"; break;
-      case cmPOW:   mu::console() << "POW\n"; break;
+      case cmLT:    qmu::console() << "LT\n";  break;
+      case cmGT:    qmu::console() << "GT\n";  break;
+      case cmLE:    qmu::console() << "LE\n";  break;
+      case cmGE:    qmu::console() << "GE\n";  break;
+      case cmEQ:    qmu::console() << "EQ\n";  break;
+      case cmNEQ:   qmu::console() << "NEQ\n"; break;
+      case cmADD:   qmu::console() << "ADD\n"; break;
+      case cmLAND:  qmu::console() << "&&\n"; break;
+      case cmLOR:   qmu::console() << "||\n"; break;
+      case cmSUB:   qmu::console() << "SUB\n"; break;
+      case cmMUL:   qmu::console() << "MUL\n"; break;
+      case cmDIV:   qmu::console() << "DIV\n"; break;
+      case cmPOW:   qmu::console() << "POW\n"; break;
 
-      case cmIF:    mu::console() << "IF\t";
-                    mu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
+      case cmIF:    qmu::console() << "IF\t";
+                    qmu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
                     break;
 
-      case cmELSE:  mu::console() << "ELSE\t";
-                    mu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
+      case cmELSE:  qmu::console() << "ELSE\t";
+                    qmu::console() << "[OFFSET:" << std::dec << m_vRPN[i].Oprt.offset << "]\n";
                     break;
 
-      case cmENDIF: mu::console() << "ENDIF\n"; break;
+      case cmENDIF: qmu::console() << "ENDIF\n"; break;
 
       case cmASSIGN: 
-                    mu::console() << "ASSIGN\t";
-                    mu::console() << "[ADDR: 0x" << m_vRPN[i].Oprt.ptr << "]\n";
+                    qmu::console() << "ASSIGN\t";
+                    qmu::console() << "[ADDR: 0x" << m_vRPN[i].Oprt.ptr << "]\n";
                     break; 
 
-      default:      mu::console() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
+      default:      qmu::console() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
                     break;
       } // switch cmdCode
     } // while bytecode
 
-    mu::console() << "END" << std::endl;
+    qmu::console() << "END" << std::endl;
   }
 } // namespace qmu
