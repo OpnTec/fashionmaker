@@ -435,7 +435,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   /** \brief Define the set of valid characters to be used in names of
              functions, variables, constants.
   */
-  void QmuParserBase::DefineNameChars(const char_type *a_szCharset)
+  void QmuParserBase::DefineNameChars(const QString &a_szCharset)
   {
     m_sNameChars = a_szCharset;
   }
@@ -444,7 +444,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   /** \brief Define the set of valid characters to be used in names of
              binary operators and postfix operators.
   */
-  void QmuParserBase::DefineOprtChars(const char_type *a_szCharset)
+  void QmuParserBase::DefineOprtChars(const QString &a_szCharset)
   {
     m_sOprtChars = a_szCharset;
   }
@@ -453,7 +453,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   /** \brief Define the set of valid characters to be used in names of
              infix operators.
   */
-  void QmuParserBase::DefineInfixOprtChars(const char_type *a_szCharset)
+  void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
   {
     m_sInfixOprtChars = a_szCharset;
   }
@@ -465,7 +465,11 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   const char_type* QmuParserBase::ValidNameChars() const
   {
     assert(m_sNameChars.size());
-    return m_sNameChars.c_str();
+    #if defined(_UNICODE)
+        return m_sNameChars.toStdWString().c_str();
+    #else
+        return m_sNameChars.toStdString().c_str();
+    #endif
   }
 
   //---------------------------------------------------------------------------
@@ -475,7 +479,11 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   const char_type* QmuParserBase::ValidOprtChars() const
   {
     assert(m_sOprtChars.size());
-    return m_sOprtChars.c_str();
+    #if defined(_UNICODE)
+        return m_sOprtChars.toStdWString().c_str();
+    #else
+        return m_sOprtChars.toStdString().c_str();
+    #endif
   }
 
   //---------------------------------------------------------------------------
@@ -485,7 +493,11 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   const char_type* QmuParserBase::ValidInfixOprtChars() const
   {
     assert(m_sInfixOprtChars.size());
-    return m_sInfixOprtChars.c_str();
+    #if defined(_UNICODE)
+        return m_sInfixOprtChars.toStdWString().c_str();
+    #else
+        return m_sInfixOprtChars.toStdString().c_str();
+    #endif
   }
 
   //---------------------------------------------------------------------------

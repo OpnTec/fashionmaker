@@ -31,6 +31,7 @@
 #include <memory>
 #include <locale>
 #include <QStack>
+#include <QString>
 
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserdef.h"
@@ -160,9 +161,9 @@ private:
     string_type GetVersion(EParserVersionInfo eInfo = pviFULL) const;
 
     const char_type ** GetOprtDef() const;
-    void DefineNameChars(const char_type *a_szCharset);
-    void DefineOprtChars(const char_type *a_szCharset);
-    void DefineInfixOprtChars(const char_type *a_szCharset);
+    void DefineNameChars(const QString &a_szCharset);
+    void DefineOprtChars(const QString &a_szCharset);
+    void DefineInfixOprtChars(const QString &a_szCharset);
 
     const char_type* ValidNameChars() const;
     const char_type* ValidOprtChars() const;
@@ -285,9 +286,9 @@ private:
 
     bool m_bBuiltInOp;             ///< Flag that can be used for switching built in operators on and off
 
-    string_type m_sNameChars;      ///< Charset for names
-    string_type m_sOprtChars;      ///< Charset for postfix/ binary operator tokens
-    string_type m_sInfixOprtChars; ///< Charset for infix operator tokens
+    QString m_sNameChars;      ///< Charset for names
+    QString m_sOprtChars;      ///< Charset for postfix/ binary operator tokens
+    QString m_sInfixOprtChars; ///< Charset for infix operator tokens
     
     mutable int m_nIfElseCounter;  ///< Internal counter for keeping track of nested if-then-else clauses
 
