@@ -21,14 +21,11 @@
  ******************************************************************************************************/
 
 #include "qmuparsertest.h"
+#include <QtMath>
 
 #include <cstdio>
-#include <cmath>
 #include <iostream>
 #include <limits>
-
-#define PARSER_CONST_PI  3.141592653589793238462643
-#define PARSER_CONST_E   2.718281828459045235360287
 
 using namespace std;
 
@@ -594,7 +591,7 @@ namespace qmu
       iStat += EqnTest( "-(-1)",  1, true);
       iStat += EqnTest( "-(-1)*2",  2, true);
       iStat += EqnTest( "-(-2)*sqrt(4)",  4, true);
-      iStat += EqnTest( "-_pi", -PARSER_CONST_PI, true);
+      iStat += EqnTest( "-_pi", -M_PI, true);
       iStat += EqnTest( "-a",  -1, true);
       iStat += EqnTest( "-(a)",  -1, true);
       iStat += EqnTest( "-(-a)",  1, true);
@@ -1154,8 +1151,8 @@ namespace qmu
       
         p1.reset(new qmu::QmuParser());
         // Add constants
-        p1->DefineConst( "pi", (qreal)PARSER_CONST_PI);
-        p1->DefineConst( "e", (qreal)PARSER_CONST_E);
+        p1->DefineConst( "pi", (qreal)M_PI);
+        p1->DefineConst( "e", (qreal)M_E);
         p1->DefineConst( "const", 1);
         p1->DefineConst( "const1", 2);
         p1->DefineConst( "const2", 3);
