@@ -25,15 +25,8 @@
 #include <QtGlobal>
 
 //--- Standard includes ------------------------------------------------------------------------
-#include <cmath>
 #include <algorithm>
 #include <numeric>
-
-/** \brief Pi (what else?). */
-#define QmuParser_CONST_PI  3.141592653589793238462643
-
-/** \brief The eulerian number. */
-#define QmuParser_CONST_E   2.718281828459045235360287
 
 using namespace std;
 
@@ -80,7 +73,7 @@ namespace qmu
 
   //---------------------------------------------------------------------------
   //  misc
-  qreal QmuParser::Abs(qreal v)  { return (v>=0) ? v : -v;  }
+  qreal QmuParser::Abs(qreal v)  { return qAbs(v);  }
   qreal QmuParser::Rint(qreal v) { return qFloor(v + (qreal)0.5); }
   qreal QmuParser::Sign(qreal v) { return (qreal)((v<0) ? -1 : (v>0) ? 1 : 0); }
 
@@ -269,8 +262,8 @@ void QmuParser::InitFun()
   */
   void QmuParser::InitConst()
   {
-    DefineConst("_pi", (qreal)QmuParser_CONST_PI);
-    DefineConst("_e", (qreal)QmuParser_CONST_E);
+    DefineConst("_pi", (qreal)M_PI);
+    DefineConst("_e", (qreal)M_E);
   }
 
   //---------------------------------------------------------------------------
