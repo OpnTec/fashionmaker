@@ -1228,7 +1228,7 @@ namespace qmu
         try
         {
           // Test copy constructor
-          std::vector<qmu::QmuParser> vParser;
+          QVector<qmu::QmuParser> vParser;
           vParser.push_back(*(p1.get()));
           qmu::QmuParser p2 = vParser[0];   // take parser from vector
         

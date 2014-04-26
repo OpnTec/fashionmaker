@@ -110,7 +110,7 @@ public:
     string_type operator[](unsigned a_iIdx) const;
 
 private:
-    std::vector<string_type>  m_vErrMsg;  ///< A vector with the predefined error messages
+    QVector<string_type>  m_vErrMsg;  ///< A vector with the predefined error messages
     static const self_type m_Instance;    ///< The instance pointer
 };
 

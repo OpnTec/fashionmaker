@@ -90,7 +90,7 @@ private:
     typedef QmuParserToken<qreal, string_type> token_type;
 
     /** \brief Token vector for storing the RPN. */
-    typedef std::vector<SToken> rpn_type;
+    typedef QVector<SToken> rpn_type;
 
     /** \brief Position in the Calculation array. */
     unsigned m_iStackPos;

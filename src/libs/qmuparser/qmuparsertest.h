@@ -183,7 +183,7 @@ namespace qmu
 	      void Run();
 
     private:
-        std::vector<testfun_type> m_vTestFun;
+        QVector<testfun_type> m_vTestFun;
 	      void AddTest(testfun_type a_pFun);
 
         // Test Double Parser

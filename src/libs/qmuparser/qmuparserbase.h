@@ -71,10 +71,10 @@ private:
     typedef qreal (QmuParserBase::*ParseFunction)() const;
 
     /** \brief Type used for storing an array of values. */
-    typedef std::vector<qreal> valbuf_type;
+    typedef QVector<qreal> valbuf_type;
 
     /** \brief Type for a vector of strings. */
-    typedef std::vector<string_type> stringbuf_type;
+    typedef QVector<string_type> stringbuf_type;
 
     /** \brief Typedef for the token reader. */
     typedef QmuParserTokenReader token_reader_type;
@@ -245,7 +245,7 @@ private:
     void ApplyFunc(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int iArgCount) const;
 
     token_type ApplyStrFunc(const token_type &a_FunTok,
-                            const std::vector<token_type> &a_vArg) const;
+                            const QVector<token_type> &a_vArg) const;
 
     int GetOprtPrecedence(const token_type &a_Tok) const;
     EOprtAssociativity GetOprtAssociativity(const token_type &a_Tok) const;

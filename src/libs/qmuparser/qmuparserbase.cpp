@@ -748,7 +748,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       \throw exception_type If the function token is not a string function
   */
   QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok,
-                                                  const std::vector<token_type> &a_vArg) const
+                                                  const QVector<token_type> &a_vArg) const
   {
     if (a_vArg.back().GetCode()!=cmSTRING)
       Error(ecSTRING_EXPECTED, m_pTokenReader->GetPos(), a_FunTok.GetAsString());
@@ -824,7 +824,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
 
     // Collect the numeric function arguments from the value stack and store them
     // in a vector
-    std::vector<token_type> stArg;  
+    QVector<token_type> stArg;
     for (int i=0; i<iArgNumerical; ++i)
     {
       stArg.push_back( a_stVal.pop() );
