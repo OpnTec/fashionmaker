@@ -32,6 +32,7 @@
 #include <locale>
 #include <QStack>
 #include <QString>
+#include <QStringList>
 
 //--- Parser includes --------------------------------------------------------------------------
 #include "qmuparserdef.h"
@@ -75,13 +76,13 @@ private:
     typedef QVector<qreal> valbuf_type;
 
     /** \brief Type for a vector of strings. */
-    typedef QVector<string_type> stringbuf_type;
+    typedef QVector<QString> stringbuf_type;
 
     /** \brief Typedef for the token reader. */
     typedef QmuParserTokenReader token_reader_type;
     
     /** \brief Type used for parser tokens. */
-    typedef QmuParserToken<qreal, string_type> token_type;
+    typedef QmuParserToken<qreal, QString> token_type;
 
     /** \brief Maximum number of threads spawned by OpenMP when using the bulk mode. */
     static const int s_MaxNumOpenMPThreads = 4;
@@ -108,7 +109,7 @@ private:
 
     int GetNumResults() const;
 
-    void SetExpr(const string_type &a_sExpr);
+    void SetExpr(const QString &a_sExpr);
     void SetVarFactory(facfun_type a_pFactory, void *pUserData = NULL);
 
     void SetDecSep(char_type cDecSep);
@@ -128,21 +129,21 @@ private:
         \param a_bAllowOpt A flag indicating this function may be optimized
     */
     template<typename T>
-    void DefineFun(const string_type &a_strName, T a_pFun, bool a_bAllowOpt = true)
+    void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true)
     {
       AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
     }
 
-    void DefineOprt(const string_type &a_strName, 
-                    fun_type2 a_pFun, 
-                    unsigned a_iPri=0, 
+    void DefineOprt(const QString &a_strName,
+                    fun_type2 a_pFun,
+                    unsigned a_iPri=0,
                     EOprtAssociativity a_eAssociativity = oaLEFT,
                     bool a_bAllowOpt = false);
-    void DefineConst(const string_type &a_sName, qreal a_fVal);
-    void DefineStrConst(const string_type &a_sName, const string_type &a_strVal);
-    void DefineVar(const string_type &a_sName, qreal *a_fVar);
-    void DefinePostfixOprt(const string_type &a_strFun, fun_type1 a_pOprt, bool a_bAllowOpt=true);
-    void DefineInfixOprt(const string_type &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX, bool a_bAllowOpt=true);
+    void DefineConst(const QString &a_sName, qreal a_fVal);
+    void DefineStrConst(const QString &a_sName, const QString &a_strVal);
+    void DefineVar(const QString &a_sName, qreal *a_fVar);
+    void DefinePostfixOprt(const QString &a_strFun, fun_type1 a_pOprt, bool a_bAllowOpt=true);
+    void DefineInfixOprt(const QString &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX, bool a_bAllowOpt=true);
 
     // Clear user defined variables, constants or functions
     void ClearVar();
@@ -152,29 +153,29 @@ private:
     void ClearPostfixOprt();
     void ClearOprt();
     
-    void RemoveVar(const string_type &a_strVarName);
+    void RemoveVar(const QString &a_strVarName);
     const varmap_type& GetUsedVar() const;
     const varmap_type& GetVar() const;
     const valmap_type& GetConst() const;
-    const string_type& GetExpr() const;
+    const QString &GetExpr() const;
     const funmap_type& GetFunDef() const;
     string_type GetVersion(EParserVersionInfo eInfo = pviFULL) const;
 
-    const char_type ** GetOprtDef() const;
+    const QStringList &GetOprtDef() const;
     void DefineNameChars(const QString &a_szCharset);
     void DefineOprtChars(const QString &a_szCharset);
     void DefineInfixOprtChars(const QString &a_szCharset);
 
-    const char_type* ValidNameChars() const;
-    const char_type* ValidOprtChars() const;
-    const char_type* ValidInfixOprtChars() const;
+    const QString& ValidNameChars() const;
+    const QString &ValidOprtChars() const;
+    const QString &ValidInfixOprtChars() const;
 
     void SetArgSep(char_type cArgSep);
-    char_type GetArgSep() const;
+    QChar GetArgSep() const;
     
-    void  Error(EErrorCodes a_iErrc, 
-                int a_iPos = (int)qmu::string_type::npos,
-                const string_type &a_strTok = string_type() ) const;
+    void  Error(EErrorCodes a_iErrc,
+                int a_iPos = -1,
+                const QString &a_strTok = QString() ) const;
 
  protected:
 	  
@@ -185,9 +186,9 @@ private:
     virtual void InitConst() = 0;
     virtual void InitOprt() = 0; 
 
-    virtual void OnDetectVar(string_type *pExpr, int &nStart, int &nEnd);
+    virtual void OnDetectVar(QString *pExpr, int &nStart, int &nEnd);
 
-    static const char_type *c_DefaultOprt[]; 
+    static const QStringList c_DefaultOprt;
     static std::locale s_locale;  ///< The locale used by the parser
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
@@ -235,10 +236,10 @@ private:
     void InitTokenReader();
     void ReInit() const;
 
-    void AddCallback( const string_type &a_strName, 
+    void AddCallback(const QString &a_strName,
                       const QmuParserCallback &a_Callback,
                       funmap_type &a_Storage,
-                      const char_type *a_szCharSet );
+                      const QString &a_szCharSet );
 
     void ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
@@ -257,10 +258,10 @@ private:
     qreal ParseCmdCode() const;
     qreal ParseCmdCodeBulk(int nOffset, int nThreadID) const;
 
-    void  CheckName(const string_type &a_strName, const string_type &a_CharSet) const;
-    void  CheckOprt(const string_type &a_sName,
+    void  CheckName(const QString &a_strName, const QString &a_CharSet) const;
+    void  CheckOprt(const QString &a_sName,
                     const QmuParserCallback &a_Callback,
-                    const string_type &a_szCharSet) const;
+                    const QString &a_szCharSet) const;
 
     void StackDump(const QStack<token_type > &a_stVal,
                    const QStack<token_type > &a_stOprt) const;

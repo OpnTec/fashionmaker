@@ -27,6 +27,7 @@
 #include <cstdlib>
 #include <numeric> // for accumulate
 #include "qmuparser.h"
+#include <QString>
 
 /** \file
     \brief This file contains the parser test class.
@@ -48,14 +49,14 @@ namespace qmu
         static int c_iCount;
 
         // Multiarg callbacks
-        static qreal f1of1(qreal v) { return v;};
+        static qreal f1of1(qreal v) { return v;}
       	
-        static qreal f1of2(qreal v, qreal  ) {return v;};
-        static qreal f2of2(qreal  , qreal v) {return v;};
+        static qreal f1of2(qreal v, qreal  ) {return v;}
+        static qreal f2of2(qreal  , qreal v) {return v;}
 
-        static qreal f1of3(qreal v, qreal  , qreal  ) {return v;};
-        static qreal f2of3(qreal  , qreal v, qreal  ) {return v;};
-        static qreal f3of3(qreal  , qreal  , qreal v) {return v;};
+        static qreal f1of3(qreal v, qreal  , qreal  ) {return v;}
+        static qreal f2of3(qreal  , qreal v, qreal  ) {return v;}
+        static qreal f3of3(qreal  , qreal  , qreal v) {return v;}
       	
         static qreal f1of4(qreal v, qreal,   qreal  , qreal  ) {return v;}
         static qreal f2of4(qreal  , qreal v, qreal  , qreal  ) {return v;}
@@ -120,36 +121,32 @@ namespace qmu
           return 10; 
         }
 
-        static qreal ValueOf(const char_type*)
+        static qreal ValueOf(const QString &)
         { 
           return 123; 
         }
 
-        static qreal StrFun1(const char_type* v1)
+        static qreal StrFun1(const QString & v1)
         { 
-          int val(0);
-          stringstream_type(v1) >> val;
+          int val = v1.toInt();
           return (qreal)val;
         }
 
-        static qreal StrFun2(const char_type* v1, qreal v2)
+        static qreal StrFun2(const QString & v1, qreal v2)
         { 
-          int val(0);
-          stringstream_type(v1) >> val;
+          int val = v1.toInt();
           return (qreal)(val + v2);
         }
         
-        static qreal StrFun3(const char_type* v1, qreal v2, qreal v3)
+        static qreal StrFun3(const QString & v1, qreal v2, qreal v3)
         { 
-          int val(0);
-          stringstream_type(v1) >> val;
+          int val = v1.toInt();
           return val + v2 + v3;
         }
 
-        static qreal StrToFloat(const char_type* a_szMsg)
+        static qreal StrToFloat(const QString & a_szMsg)
         {
-          qreal val(0);
-          stringstream_type(a_szMsg) >> val;
+          qreal val = a_szMsg.toDouble();
           return val;
         }
 
@@ -159,7 +156,7 @@ namespace qmu
         static qreal Milli(qreal a_fVal) { return a_fVal / (qreal)1e3; }
 
         // Custom value recognition
-        static int IsHexVal(const char_type *a_szExpr, int *a_iPos, qreal *a_fVal);
+        static int IsHexVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal);
 
         int TestNames();
 	      int TestSyntax();
@@ -187,13 +184,13 @@ namespace qmu
 	      void AddTest(testfun_type a_pFun);
 
         // Test Double Parser
-        int EqnTest(const string_type& a_str, double a_fRes, bool a_fPass);
-        int EqnTestWithVarChange(const string_type& a_str, 
-                                 double a_fRes1, 
-                                 double a_fVar1, 
-                                 double a_fRes2, 
+        int EqnTest(const QString &a_str, double a_fRes, bool a_fPass);
+        int EqnTestWithVarChange(const QString &a_str,
+                                 double a_fRes1,
+                                 double a_fVar1,
+                                 double a_fRes2,
                                  double a_fVar2);
-        int ThrowTest(const string_type& a_str, int a_iErrc, bool a_bFail = true);
+        int ThrowTest(const QString &a_str, int a_iErrc, bool a_bFail = true);
     };
   } // namespace Test
 } // namespace qmu

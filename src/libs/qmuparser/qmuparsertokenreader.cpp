@@ -27,6 +27,8 @@
 #include <stack>
 #include <string>
 
+#include <QStringList>
+
 #include "qmuparsertokenreader.h"
 #include "qmuparserbase.h"
 
@@ -191,7 +193,7 @@ namespace qmu
       \return #m_strFormula
       \throw nothrow
   */
-  const string_type& QmuParserTokenReader::GetExpr() const
+  const QString& QmuParserTokenReader::GetExpr() const
   {
     return m_strFormula;
   }
@@ -209,7 +211,7 @@ namespace qmu
       Sets the formula position index to zero and set Syntax flags to default for initial formula parsing.
       \pre [assert] triggered if a_szFormula==0
   */
-  void QmuParserTokenReader::SetFormula(const string_type &a_strFormula)
+  void QmuParserTokenReader::SetFormula(const QString &a_strFormula)
   {
     m_strFormula = a_strFormula;
     ReInit();
@@ -253,13 +255,19 @@ namespace qmu
   {
     assert(m_pParser);
 
-    std::stack<int> FunArgs;
-    const char_type *szFormula = m_strFormula.c_str();
+    //std::stack<int> FunArgs;
+#if defined(_UNICODE)
+    const char_type *szFormula = m_strFormula.toStdWString().c_str();
+#else
+    const char_type *szFormula = m_strFormula.toStdString().c_str();
+#endif
     token_type tok;
 
     // Ignore all non printable characters when reading the expression
     while (szFormula[m_iPos]>0 && szFormula[m_iPos]<=0x20) 
+    {
       ++m_iPos;
+    }
 
     if ( IsEOF(tok) )        return SaveBeforeReturn(tok); // Check for end of formula
     if ( IsOprt(tok) )       return SaveBeforeReturn(tok); // Check for user defined binary operator
@@ -280,19 +288,23 @@ namespace qmu
     // (The GetUsedVar function must suppress the error for
     // undefined variables in order to collect all variable 
     // names including the undefined ones.)
-    if ( (m_bIgnoreUndefVar || m_pFactory) && IsUndefVarTok(tok) )  
+    if ( (m_bIgnoreUndefVar || m_pFactory) && IsUndefVarTok(tok) )
+    {
       return SaveBeforeReturn(tok);
+    }
 
     // Check for unknown token
     // 
     // !!! From this point on there is no exit without an exception possible...
     // 
-    string_type strTok;
+    QString strTok;
     int iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if (iEnd!=m_iPos)
+    {
       Error(ecUNASSIGNABLE_TOKEN, m_iPos, strTok);
+    }
 
-    Error(ecUNASSIGNABLE_TOKEN, m_iPos, m_strFormula.substr(m_iPos));
+    Error(ecUNASSIGNABLE_TOKEN, m_iPos, m_strFormula.mid(m_iPos));
     return token_type(); // never reached
   }
 
@@ -309,59 +321,86 @@ namespace qmu
     m_pConstDef     = &a_pParent->m_ConstDef;
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Extract all characters that belong to a certain charset.
+//---------------------------------------------------------------------------
+/** \brief Extract all characters that belong to a certain charset.
 
-    \param a_szCharSet [in] Const char array of the characters allowed in the token. 
-    \param a_strTok [out]  The string that consists entirely of characters listed in a_szCharSet.
-    \param a_iPos [in] Position in the string from where to start reading.
-    \return The Position of the first character not listed in a_szCharSet.
-    \throw nothrow
-  */
-  int QmuParserTokenReader::ExtractToken(const char_type *a_szCharSet,
-                                      string_type &a_sTok, 
-                                      int a_iPos) const
-  {
-    int iEnd = (int)m_strFormula.find_first_not_of(a_szCharSet, a_iPos);
+\param a_szCharSet [in] Const char array of the characters allowed in the token.
+\param a_strTok [out]  The string that consists entirely of characters listed in a_szCharSet.
+\param a_iPos [in] Position in the string from where to start reading.
+\return The Position of the first character not listed in a_szCharSet.
+\throw nothrow
+*/
+int QmuParserTokenReader::ExtractToken(const QString &a_szCharSet, QString &a_sTok, int a_iPos) const
+{
+#if defined(_UNICODE)
+    const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
+    const std::wstring a_szCharSetstd = a_szCharSet.toStdWString();
+#else
+    const std::string m_strFormulaStd = m_strFormula.toStdString();
+    const std::string a_szCharSetStd = a_szCharSet.toStdString();
+#endif
+
+    int iEnd = (int)m_strFormulaStd.find_first_not_of(a_szCharSetStd, a_iPos);
 
     if (iEnd==(int)string_type::npos)
-        iEnd = (int)m_strFormula.length();
-    
-    // Assign token string if there was something found
-    if (a_iPos!=iEnd)
-      a_sTok = string_type( m_strFormula.begin()+a_iPos, m_strFormula.begin()+iEnd);
-
-    return iEnd;
-  }
-
-  //---------------------------------------------------------------------------
-  /** \brief Check Expression for the presence of a binary operator token.
-  
-    Userdefined binary operator "++" gives inconsistent parsing result for
-    the equations "a++b" and "a ++ b" if alphabetic characters are allowed
-    in operator tokens. To avoid this this function checks specifically
-    for operator tokens.
-  */
-  int QmuParserTokenReader::ExtractOperatorToken(string_type &a_sTok,
-                                              int a_iPos) const
-  {
-    int iEnd = (int)m_strFormula.find_first_not_of(m_pParser->ValidInfixOprtChars(), a_iPos);
-    if (iEnd==(int)string_type::npos)
-      iEnd = (int)m_strFormula.length();
+    {
+        iEnd = (int)m_strFormulaStd.length();
+    }
 
     // Assign token string if there was something found
     if (a_iPos!=iEnd)
     {
-      a_sTok = string_type( m_strFormula.begin() + a_iPos, m_strFormula.begin() + iEnd);
-      return iEnd;
+    #if defined(_UNICODE)
+        a_sTok = QString().fromStdWString(std::wstring( m_strFormulaStd.begin()+a_iPos, m_strFormulaStd.begin()+iEnd));
+    #else
+        a_sTok = QString().fromStdString(std::string( m_strFormulaStd.begin()+a_iPos, m_strFormulaStd.begin()+iEnd));
+    #endif
+    }
+
+    return iEnd;
+}
+
+//---------------------------------------------------------------------------
+/** \brief Check Expression for the presence of a binary operator token.
+
+Userdefined binary operator "++" gives inconsistent parsing result for
+the equations "a++b" and "a ++ b" if alphabetic characters are allowed
+in operator tokens. To avoid this this function checks specifically
+for operator tokens.
+*/
+int QmuParserTokenReader::ExtractOperatorToken(QString &a_sTok, int a_iPos) const
+{
+#if defined(_UNICODE)
+    const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
+    const std::wstring oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdWString();
+#else
+    const std::string m_strFormulaStd = m_strFormula.toStdString();
+    const std::string oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdString();
+#endif
+    int iEnd = (int)m_strFormulaStd.find_first_not_of(oprtCharsStd, a_iPos);
+    if (iEnd==(int)string_type::npos)
+    {
+        iEnd = (int)m_strFormulaStd.length();
+    }
+
+    // Assign token string if there was something found
+    if (a_iPos!=iEnd)
+    {
+    #if defined(_UNICODE)
+        a_sTok = QString().fromStdWString(string_type(m_strFormulaStd.begin() + a_iPos,
+                                                      m_strFormulaStd.begin() + iEnd));
+    #else
+        a_sTok = QString().fromStdString(string_type(m_strFormulaStd.begin() + a_iPos, m_strFormulaStd.begin() + iEnd));
+    #endif
+        return iEnd;
     }
     else
     {
-      // There is still the chance of having to deal with an operator consisting exclusively
-      // of alphabetic characters.
-      return ExtractToken(QMUP_CHARS, a_sTok, a_iPos);
+        // There is still the chance of having to deal with an operator consisting exclusively
+        // of alphabetic characters.
+        return ExtractToken(QMUP_CHARS, a_sTok, a_iPos);
     }
-  }
+}
 
   //---------------------------------------------------------------------------
   /** \brief Check if a built in operator or other token can be found
@@ -370,15 +409,14 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsBuiltIn(token_type &a_Tok)
   {
-    const char_type **const pOprtDef = m_pParser->GetOprtDef(),
-                     *const szFormula = m_strFormula.c_str();
+    const QStringList pOprtDef = m_pParser->GetOprtDef();
 
     // Compare token with function and operator strings
     // check string for operator/function
-    for (int i=0; pOprtDef[i]; i++)
+    for (int i=0; i < pOprtDef.size(); ++i)
     {
-      std::size_t len( std::char_traits<char_type>::length(pOprtDef[i]) );
-      if ( string_type(pOprtDef[i]) == string_type(szFormula + m_iPos, szFormula + m_iPos + len) )
+        int len = pOprtDef.at(i).length();
+      if ( pOprtDef.at(i) == m_strFormula.mid(m_iPos, m_iPos + len) )
       {
         switch(i)
         {
@@ -404,7 +442,7 @@ namespace qmu
 
               // The assignement operator need special treatment
               if (i==cmASSIGN && m_iSynFlags & noASSIGN)
-                Error(ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at(i));
 
               if (!m_pParser->HasBuiltInOprt()) continue;
               if (m_iSynFlags & noOPT) 
@@ -415,7 +453,7 @@ namespace qmu
                 if ( IsInfixOpTok(a_Tok) ) 
                   return true;
 
-                Error(ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at(i));
               }
 
               m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
@@ -424,7 +462,7 @@ namespace qmu
 
 		    case cmBO:
               if (m_iSynFlags & noBO)
-	              Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef[i]);
+                  Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at(i));
               
               if (m_lastTok.GetCode()==cmFUNC)
                 m_iSynFlags = noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
@@ -436,24 +474,24 @@ namespace qmu
 
 		    case cmBC:
               if (m_iSynFlags & noBC)
-                Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at(i));
 
               m_iSynFlags  = noBO | noVAR | noVAL | noFUN | noINFIXOP | noSTR | noASSIGN;
 
               if (--m_iBrackets<0)
-                Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at(i));
               break;
 
         case cmELSE:
               if (m_iSynFlags & noELSE)
-                Error(ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at(i));
 
               m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
               break;
 
         case cmIF:
               if (m_iSynFlags & noIF)
-                Error(ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef[i]);
+                Error(ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at(i));
 
               m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
               break;
@@ -462,8 +500,8 @@ namespace qmu
               Error(ecINTERNAL_ERROR);
         } // switch operator id
 
-        m_iPos += (int)len;
-        a_Tok.Set( (ECmdCode)i, pOprtDef[i] );
+        m_iPos += len;
+        a_Tok.Set( (ECmdCode)i, pOprtDef.at(i) );
         return true;
 	    } // if operator string found
     } // end of for all operator strings
@@ -474,17 +512,17 @@ namespace qmu
   //---------------------------------------------------------------------------
   bool QmuParserTokenReader::IsArgSep(token_type &a_Tok)
   {
-    const char_type* szFormula = m_strFormula.c_str();
-
-    if (szFormula[m_iPos]==m_cArgSep)
+    if (m_strFormula.at(m_iPos)==m_cArgSep)
     {
       // copy the separator into null terminated string
-      char_type szSep[2];
+      QString szSep;
       szSep[0] = m_cArgSep;
       szSep[1] = 0;
 
       if (m_iSynFlags & noARG_SEP)
+      {
         Error(ecUNEXPECTED_ARG_SEP, m_iPos, szSep);
+      }
 
       m_iSynFlags  = noBC | noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN;
       m_iPos++;
@@ -505,7 +543,11 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsEOF(token_type &a_Tok)
   {
-    const char_type* szFormula = m_strFormula.c_str();
+#if defined(_UNICODE)
+    const char_type* szFormula = m_strFormula.toStdWString().c_str();
+#else
+    const char_type* szFormula = m_strFormula.toStdString().c_str();
+#endif
 
     // check for EOF
     if ( !szFormula[m_iPos] /*|| szFormula[m_iPos] == '\n'*/)
@@ -530,7 +572,7 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsInfixOpTok(token_type &a_Tok)
   {
-    string_type sTok;
+    QString sTok;
     int iEnd = ExtractToken(m_pParser->ValidInfixOprtChars(), sTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
@@ -539,7 +581,7 @@ namespace qmu
     funmap_type::const_reverse_iterator it = m_pInfixOprtDef->rbegin();
     for ( ; it!=m_pInfixOprtDef->rend(); ++it)
     {
-      if (sTok.find(it->first)!=0)
+      if (sTok.indexOf(it->first)!=0)
         continue;
 
       a_Tok.Set(it->second, it->first);
@@ -575,7 +617,7 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsFunTok(token_type &a_Tok)
   {
-    string_type strTok;
+    QString strTok;
     int iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
@@ -585,13 +627,12 @@ namespace qmu
       return false;
 
     // Check if the next sign is an opening bracket
-    const char_type *szFormula = m_strFormula.c_str();
-    if (szFormula[iEnd]!='(')
+    if (m_strFormula.at(iEnd)!='(')
       return false;
 
     a_Tok.Set(item->second, strTok);
 
-    m_iPos = (int)iEnd;
+    m_iPos = iEnd;
     if (m_iSynFlags & noFUN)
       Error(ecUNEXPECTED_FUN, m_iPos-(int)a_Tok.GetAsString().length(), a_Tok.GetAsString());
 
@@ -606,18 +647,19 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsOprt(token_type &a_Tok)
   {
-    const char_type *const szExpr = m_strFormula.c_str();
-    string_type strTok;
+    QString strTok;
 
     int iEnd = ExtractOperatorToken(strTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
 
     // Check if the operator is a built in operator, if so ignore it here
-    const char_type **const pOprtDef = m_pParser->GetOprtDef();
-    for (int i=0; m_pParser->HasBuiltInOprt() && pOprtDef[i]; ++i)
+    const QStringList pOprtDef = m_pParser->GetOprtDef();
+    QStringList::const_iterator constIterator;
+    for (constIterator = pOprtDef.constBegin(); m_pParser->HasBuiltInOprt() && constIterator != pOprtDef.constEnd();
+         ++constIterator)
     {
-      if (string_type(pOprtDef[i])==strTok)
+      if ((*constIterator)==strTok)
         return false;
     }
 
@@ -630,8 +672,8 @@ namespace qmu
     funmap_type::const_reverse_iterator it = m_pOprtDef->rbegin();
     for ( ; it!=m_pOprtDef->rend(); ++it)
     {
-      const string_type &sID = it->first;
-      if ( sID == string_type(szExpr + m_iPos, szExpr + m_iPos + sID.length()) )
+      const QString &sID = it->first;
+      if ( sID == m_strFormula.mid(m_iPos, m_iPos + sID.length()) )
       {
         a_Tok.Set(it->second, strTok);
 
@@ -686,7 +728,7 @@ namespace qmu
     // token readers.
     
     // Test if there could be a postfix operator
-    string_type sTok;
+    QString sTok;
     int iEnd = ExtractToken(m_pParser->ValidOprtChars(), sTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
@@ -695,11 +737,11 @@ namespace qmu
     funmap_type::const_reverse_iterator it = m_pPostOprtDef->rbegin();
     for ( ; it!=m_pPostOprtDef->rend(); ++it)
     {
-      if (sTok.find(it->first)!=0)
+      if (sTok.indexOf(it->first)!=0)
         continue;
 
       a_Tok.Set(it->second, sTok);
-  	  m_iPos += (int)it->first.length();
+      m_iPos += it->first.length();
 
       m_iSynFlags = noVAL | noVAR | noFUN | noBO | noPOSTOP | noSTR | noASSIGN;
       return true;
@@ -721,7 +763,7 @@ namespace qmu
     assert(m_pConstDef);
     assert(m_pParser);
 
-    string_type strTok;
+    QString strTok;
     qreal fVal(0);
     int iEnd(0);
     
@@ -737,7 +779,7 @@ namespace qmu
         a_Tok.SetVal(item->second, strTok);
 
         if (m_iSynFlags & noVAL)
-          Error(ecUNEXPECTED_VAL, m_iPos - (int)strTok.length(), strTok);
+          Error(ecUNEXPECTED_VAL, m_iPos - strTok.length(), strTok);
 
         m_iSynFlags = noVAL | noVAR | noFUN | noBO | noINFIXOP | noSTR | noASSIGN; 
         return true;
@@ -750,11 +792,11 @@ namespace qmu
     for (item = m_vIdentFun.begin(); item!=m_vIdentFun.end(); ++item)
     {
       int iStart = m_iPos;
-      if ( (*item)(m_strFormula.c_str() + m_iPos, &m_iPos, &fVal)==1 )
+      if ( (*item)(m_strFormula.mid(m_iPos), &m_iPos, &fVal)==1 )
       {
-        strTok.assign(m_strFormula.c_str(), iStart, m_iPos);
+        strTok = m_strFormula.mid(iStart, m_iPos);
         if (m_iSynFlags & noVAL)
-          Error(ecUNEXPECTED_VAL, m_iPos - (int)strTok.length(), strTok);
+          Error(ecUNEXPECTED_VAL, m_iPos - strTok.length(), strTok);
 
         a_Tok.SetVal(fVal, strTok);
         m_iSynFlags = noVAL | noVAR | noFUN | noBO | noINFIXOP | noSTR | noASSIGN;
@@ -775,7 +817,7 @@ namespace qmu
     if (!m_pVarDef->size())
       return false;
 
-    string_type strTok;
+    QString strTok;
     int iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
@@ -806,7 +848,7 @@ namespace qmu
     if (!m_pStrVarDef || !m_pStrVarDef->size())
       return false;
 
-    string_type strTok;
+    QString strTok;
     int iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if (iEnd==m_iPos)
       return false;
@@ -838,7 +880,7 @@ namespace qmu
   */
   bool QmuParserTokenReader::IsUndefVarTok(token_type &a_Tok)
   {
-    string_type strTok;
+    QString strTok;
     int iEnd( ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos) );
     if ( iEnd==m_iPos )
       return false;
@@ -855,7 +897,7 @@ namespace qmu
     // If a factory is available implicitely create new variables
     if (m_pFactory)
     {
-      qreal *fVar = m_pFactory(strTok.c_str(), m_pFactoryData);
+      qreal *fVar = m_pFactory(strTok, m_pFactoryData);
       a_Tok.SetVar(fVar, strTok );
 
       // Do not use m_pParser->DefineVar( strTok, fVar );
@@ -893,21 +935,21 @@ namespace qmu
     if (m_strFormula[m_iPos]!='"') 
       return false;
 
-    string_type strBuf(&m_strFormula[m_iPos+1]);
-    std::size_t iEnd(0), iSkip(0);
+    QString strBuf(m_strFormula[m_iPos+1]);
+    int iEnd(0), iSkip(0);
 
     // parser over escaped '\"' end replace them with '"'
-    for(iEnd=(int)strBuf.find( "\"" ); iEnd!=0 && iEnd!=string_type::npos; iEnd=(int)strBuf.find( "\"", iEnd))
+    for(iEnd=strBuf.indexOf( "\"" ); iEnd!=0 && iEnd!=-1; iEnd=strBuf.indexOf( "\"", iEnd))
     {
       if (strBuf[iEnd-1]!='\\') break;
       strBuf.replace(iEnd-1, 2, "\"" );
       iSkip++;
     }
 
-    if (iEnd==string_type::npos)
+    if (iEnd==-1)
       Error(ecUNTERMINATED_STRING, m_iPos, "\"" );
 
-    string_type strTok(strBuf.begin(), strBuf.begin()+iEnd);
+    QString strTok = strBuf.mid(0, iEnd);
 
     if (m_iSynFlags & noSTR)
       Error(ecUNEXPECTED_STR, m_iPos, strTok);
@@ -915,7 +957,7 @@ namespace qmu
 		m_pParser->m_vStringBuf.push_back(strTok); // Store string in internal buffer
     a_Tok.SetString(strTok, m_pParser->m_vStringBuf.size());
 
-    m_iPos += (int)strTok.length() + 2 + (int)iSkip;  // +2 wg Anfhrungszeichen; +iSkip fr entfernte escape zeichen
+    m_iPos += (int)strTok.length() + 2 + iSkip;  // +2 wg Anfhrungszeichen; +iSkip fr entfernte escape zeichen
     m_iSynFlags = noANY ^ ( noARG_SEP | noBC | noOPT | noEND );
 
     return true;
@@ -933,7 +975,7 @@ namespace qmu
   */
   void  QmuParserTokenReader::Error( EErrorCodes a_iErrc,
                                   int a_iPos, 
-                                  const string_type &a_sTok) const
+                                  const QString &a_sTok) const
   {
     m_pParser->Error(a_iErrc, a_iPos, a_sTok);
   }
@@ -945,7 +987,7 @@ namespace qmu
   }
 
   //---------------------------------------------------------------------------
-  char_type QmuParserTokenReader::GetArgSep() const
+  QChar QmuParserTokenReader::GetArgSep() const
   {
     return m_cArgSep;
   }

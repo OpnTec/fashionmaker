@@ -22,6 +22,8 @@
 
 #include "qmuparsererror.h"
 
+#include <QTextStream>
+
 
 namespace qmu
 {
@@ -34,9 +36,9 @@ namespace qmu
   }
 
   //------------------------------------------------------------------------------
-  string_type QmuParserErrorMsg::operator[](unsigned a_iIdx) const
+  QString QmuParserErrorMsg::operator[](unsigned a_iIdx) const
   {
-    return (a_iIdx<m_vErrMsg.size()) ? m_vErrMsg[a_iIdx] : string_type();
+    return (a_iIdx<m_vErrMsg.size()) ? m_vErrMsg[a_iIdx] : QString();
   }
 
   //---------------------------------------------------------------------------
@@ -137,15 +139,13 @@ namespace qmu
     ,m_ErrMsg(QmuParserErrorMsg::Instance())
   {
     m_strMsg = m_ErrMsg[m_iErrc];
-    stringstream_type stream;
-    stream << (int)m_iPos;
-    ReplaceSubString(m_strMsg, "$POS$", stream.str());
+    ReplaceSubString(m_strMsg, "$POS$", QString().setNum(m_iPos));
     ReplaceSubString(m_strMsg, "$TOK$", m_strTok);
   }
 
   //------------------------------------------------------------------------------
   /** \brief Construct an error from a message text. */
-  QmuParserError::QmuParserError(const string_type &sMsg)
+  QmuParserError::QmuParserError(const QString &sMsg)
     :m_ErrMsg(QmuParserErrorMsg::Instance())
   {
     Reset();
@@ -159,9 +159,9 @@ namespace qmu
       \param [in] sExpr The expression related to the error.
       \param [in] a_iPos the position in the expression where the error occured. 
   */
-  QmuParserError::QmuParserError( EErrorCodes iErrc,
-                            const string_type &sTok,
-                            const string_type &sExpr,
+  QmuParserError::QmuParserError(EErrorCodes iErrc,
+                            const QString &sTok,
+                            const QString &sExpr,
                             int iPos )
     :m_strMsg()
     ,m_strFormula(sExpr)
@@ -171,9 +171,7 @@ namespace qmu
     ,m_ErrMsg(QmuParserErrorMsg::Instance())
   {
     m_strMsg = m_ErrMsg[m_iErrc];
-    stringstream_type stream;
-    stream << (int)m_iPos;
-    ReplaceSubString(m_strMsg, "$POS$", stream.str());
+    ReplaceSubString(m_strMsg, "$POS$", QString().setNum(m_iPos));
     ReplaceSubString(m_strMsg, "$TOK$", m_strTok);
   }
 
@@ -183,7 +181,7 @@ namespace qmu
       \param [in] iPos the position in the expression where the error occured. 
       \param [in] sTok The token string related to this error.
   */
-  QmuParserError::QmuParserError(EErrorCodes iErrc, int iPos, const string_type &sTok)
+  QmuParserError::QmuParserError(EErrorCodes iErrc, int iPos, const QString &sTok)
     :m_strMsg()
     ,m_strFormula()
     ,m_strTok(sTok)
@@ -192,9 +190,7 @@ namespace qmu
     ,m_ErrMsg(QmuParserErrorMsg::Instance())
   {
     m_strMsg = m_ErrMsg[m_iErrc];
-    stringstream_type stream;
-    stream << (int)m_iPos;
-    ReplaceSubString(m_strMsg, "$POS$", stream.str());
+    ReplaceSubString(m_strMsg, "$POS$", QString().setNum(m_iPos));
     ReplaceSubString(m_strMsg, "$TOK$", m_strTok);
   }
 
@@ -204,7 +200,7 @@ namespace qmu
       \param [in] iPos the position related to the error.
       \param [in] sTok The token string related to this error.
   */
-  QmuParserError::QmuParserError(const char_type *szMsg, int iPos, const string_type &sTok)
+  QmuParserError::QmuParserError(const QString &szMsg, int iPos, const QString &sTok)
     :m_strMsg(szMsg)
     ,m_strFormula()
     ,m_strTok(sTok)
@@ -212,9 +208,7 @@ namespace qmu
     ,m_iErrc(ecGENERIC)
     ,m_ErrMsg(QmuParserErrorMsg::Instance())
   {
-    stringstream_type stream;
-    stream << (int)m_iPos;
-    ReplaceSubString(m_strMsg, "$POS$", stream.str());
+    ReplaceSubString(m_strMsg, "$POS$", QString().setNum(m_iPos));
     ReplaceSubString(m_strMsg, "$TOK$", m_strTok);
   }
 
@@ -249,32 +243,30 @@ namespace qmu
   QmuParserError::~QmuParserError()
   {}
 
-  //------------------------------------------------------------------------------
-  /** \brief Replace all ocuurences of a substring with another string. 
-      \param strFind The string that shall be replaced.
-      \param strReplaceWith The string that should be inserted instead of strFind
-  */
-  void QmuParserError::ReplaceSubString( string_type &strSource,
-                                      const string_type &strFind,
-                                      const string_type &strReplaceWith)
-  {
-    string_type strResult;
-    string_type::size_type iPos(0), iNext(0);
+//------------------------------------------------------------------------------
+/** \brief Replace all ocuurences of a substring with another string.
+  \param strFind The string that shall be replaced.
+  \param strReplaceWith The string that should be inserted instead of strFind
+*/
+void QmuParserError::ReplaceSubString( QString &strSource, const QString &strFind, const QString &strReplaceWith)
+{
+    QString strResult;
+    int iPos(0), iNext(0);
 
     for(;;)
     {
-      iNext = strSource.find(strFind, iPos);
-      strResult.append(strSource, iPos, iNext-iPos);
+        iNext = strSource.indexOf(strFind, iPos);
+        strResult.append(strSource.mid(iPos, iNext-iPos));
 
-      if( iNext==string_type::npos )
-        break;
+        if( iNext==-1 )
+            break;
 
-      strResult.append(strReplaceWith);
-      iPos = iNext + strFind.length();
-    } 
+        strResult.append(strReplaceWith);
+        iPos = iNext + strFind.length();
+    }
 
     strSource.swap(strResult);
-  }
+}
 
   //------------------------------------------------------------------------------
   /** \brief Reset the erro object. */
@@ -289,21 +281,21 @@ namespace qmu
       
   //------------------------------------------------------------------------------
   /** \brief Set the expression related to this error. */
-  void QmuParserError::SetFormula(const string_type &a_strFormula)
+  void QmuParserError::SetFormula(const QString &a_strFormula)
   {
     m_strFormula = a_strFormula;
   }
 
   //------------------------------------------------------------------------------
   /** \brief gets the expression related tp this error.*/
-  const string_type& QmuParserError::GetExpr() const
+  const QString& QmuParserError::GetExpr() const
   {
     return m_strFormula;
   }
 
   //------------------------------------------------------------------------------
   /** \brief Returns the message string for this error. */
-  const string_type& QmuParserError::GetMsg() const
+  const QString& QmuParserError::GetMsg() const
   {
     return m_strMsg;
   }
@@ -320,7 +312,7 @@ namespace qmu
 
   //------------------------------------------------------------------------------
   /** \brief Return string related with this token (if available). */
-  const string_type& QmuParserError::GetToken() const
+  const QString& QmuParserError::GetToken() const
   {
     return m_strTok;
   }

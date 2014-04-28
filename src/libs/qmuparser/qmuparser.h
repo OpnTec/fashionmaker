@@ -83,7 +83,7 @@ protected:
     static qreal Min(const qreal*, int);  // minimum
     static qreal Max(const qreal*, int);  // maximum
 
-    static int IsVal(const char_type* a_szExpr, int *a_iPos, qreal *a_fVal);
+    static int IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal);
 };
 
 } // namespace qmu

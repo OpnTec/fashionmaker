@@ -166,11 +166,16 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
       \param [out] a_fVal Pointer where the value should be stored in case one is found.
       \return 1 if a value was found 0 otherwise.
   */
-  int QmuParser::IsVal(const char_type* a_szExpr, int *a_iPos, qreal *a_fVal)
+  int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
   {
     qreal fVal(0);
 
-    stringstream_type stream(a_szExpr);
+#if defined(_UNICODE)
+    std::wstring a_szExprStd = a_szExpr.toStdWString();
+#else
+    std::string a_szExprStd = a_szExpr.toStdString();
+#endif
+    stringstream_type stream(a_szExprStd);
     stream.seekg(0);        // todo:  check if this really is necessary
     stream.imbue(QmuParser::s_locale);
     stream >> fVal;

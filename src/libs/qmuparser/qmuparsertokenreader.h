@@ -52,7 +52,7 @@ namespace qmu
   {
   private:
 
-      typedef QmuParserToken<qreal, string_type> token_type;
+      typedef QmuParserToken<qreal, QString> token_type;
 
   public:
 
@@ -61,13 +61,13 @@ namespace qmu
 
       void AddValIdent(identfun_type a_pCallback);
       void SetVarCreator(facfun_type a_pFactory, void *pUserData);
-      void SetFormula(const string_type &a_strFormula);
+      void SetFormula(const QString &a_strFormula);
       void SetArgSep(char_type cArgSep);
 
       int GetPos() const;
-      const string_type& GetExpr() const;
+      const QString &GetExpr() const;
       varmap_type& GetUsedVar();
-      char_type GetArgSep() const;
+      QChar GetArgSep() const;
 
       void IgnoreUndefVar(bool bIgnore);
       void ReInit();
@@ -106,10 +106,8 @@ namespace qmu
       void Assign(const QmuParserTokenReader &a_Reader);
 
       void SetParent(QmuParserBase *a_pParent);
-      int ExtractToken(const char_type *a_szCharSet, 
-                       string_type &a_strTok, 
-                       int a_iPos) const;
-      int ExtractOperatorToken(string_type &a_sTok, int a_iPos) const;
+      int ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const;
+      int ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
 
       bool IsBuiltIn(token_type &a_Tok);
       bool IsArgSep(token_type &a_Tok);
@@ -123,14 +121,14 @@ namespace qmu
       bool IsStrVarTok(token_type &a_Tok);
       bool IsUndefVarTok(token_type &a_Tok);
       bool IsString(token_type &a_Tok);
-      void Error(EErrorCodes a_iErrc, 
-                 int a_iPos = -1, 
-                 const string_type &a_sTok = string_type() ) const;
+      void Error(EErrorCodes a_iErrc,
+                 int a_iPos = -1,
+                 const QString &a_sTok = QString() ) const;
 
       token_type& SaveBeforeReturn(const token_type &tok);
 
       QmuParserBase *m_pParser;
-      string_type m_strFormula;
+      QString m_strFormula;
       int  m_iPos;
       int  m_iSynFlags;
       bool m_bIgnoreUndefVar;
@@ -149,7 +147,7 @@ namespace qmu
       qreal m_fZero;      ///< Dummy value of zero, referenced by undefined variables
       int m_iBrackets;
       token_type m_lastTok;
-      char_type m_cArgSep;     ///< The character used for separating function arguments
+      QChar m_cArgSep;     ///< The character used for separating function arguments
   };
 } // namespace qmu
 

@@ -53,15 +53,9 @@ namespace qmu
       When defining custom binary operators with #AddOprt(...) make sure not to choose 
       names conflicting with these definitions. 
   */
-  const char_type* QmuParserBase::c_DefaultOprt[] =
-  { 
-    "<=", ">=", "!=",
-    "==", "<",  ">",
-    "+",  "-",  "*",
-    "/",  "^",  "&&",
-    "||", "=",  "(",
-    ")",  "?",  ":", 0
-  };
+  const QStringList QmuParserBase::c_DefaultOprt = QStringList() << "<=" << ">=" << "!=" << "==" << "<"  << ">"  << "+"
+                                                                 << "-"  << "*"  << "/"  << "^"  << "&&" << "||" << "="
+                                                                 << "("  << ")"  << "?"  << ":";
 
   //------------------------------------------------------------------------------
   /** \brief Constructor.
@@ -247,7 +241,7 @@ namespace qmu
   }
 
   //---------------------------------------------------------------------------
-  void QmuParserBase::OnDetectVar(string_type * /*pExpr*/, int & /*nStart*/, int & /*nEnd*/)
+  void QmuParserBase::OnDetectVar(QString * /*pExpr*/, int & /*nStart*/, int & /*nEnd*/)
   {}
 
   //---------------------------------------------------------------------------
@@ -329,10 +323,10 @@ namespace qmu
 
   //---------------------------------------------------------------------------
   /** \brief Add a function or operator callback to the parser. */
-  void QmuParserBase::AddCallback(const string_type &a_strName,
+  void QmuParserBase::AddCallback(const QString &a_strName,
                                 const QmuParserCallback &a_Callback,
                                 funmap_type &a_Storage,
-                                const char_type *a_szCharSet )
+                                const QString &a_szCharSet )
   {
     if (a_Callback.GetAddr()==0)
         Error(ecINVALID_FUN_PTR);
@@ -362,13 +356,19 @@ namespace qmu
 
       \throw ParserException if the name contains invalid charakters.
   */
-  void QmuParserBase::CheckOprt(const string_type &a_sName,
+  void QmuParserBase::CheckOprt(const QString &a_sName,
                              const QmuParserCallback &a_Callback,
-                             const string_type &a_szCharSet) const
+                             const QString &a_szCharSet) const
   {
-    if ( !a_sName.length() ||
-        (a_sName.find_first_not_of(a_szCharSet)!=string_type::npos) ||
-        (a_sName[0]>='0' && a_sName[0]<='9'))
+#if defined(_UNICODE)
+    const std::wstring a_sNameStd = a_sName.toStdWString();
+    const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
+#else
+    const std::string a_sNameStd = a_sName.toStdString();
+    const std::string a_szCharSetStd = a_szCharSet.toStdString();
+#endif
+    if ( !a_sNameStd.length() || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
+         (a_sNameStd.at(0)>='0' && a_sNameStd.at(0)<='9'))
     {
       switch(a_Callback.GetCode())
       {
@@ -379,21 +379,26 @@ namespace qmu
     }
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Check if a name contains invalid characters. 
+//---------------------------------------------------------------------------
+/** \brief Check if a name contains invalid characters.
 
-      \throw ParserException if the name contains invalid charakters.
-  */
-  void QmuParserBase::CheckName(const string_type &a_sName,
-                             const string_type &a_szCharSet) const
-  {
-    if ( !a_sName.length() ||
-        (a_sName.find_first_not_of(a_szCharSet)!=string_type::npos) ||
-        (a_sName[0]>='0' && a_sName[0]<='9'))
+  \throw ParserException if the name contains invalid charakters.
+*/
+void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
+{
+    #if defined(_UNICODE)
+        std::wstring a_sNameStd = a_sName.toStdWString();
+        std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
+    #else
+        std::string a_sNameStd = a_sName.toStdString();
+        std::string a_szCharSetStd = a_szCharSet.toStdString();
+    #endif
+    if ( !a_sNameStd.length() || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
+         (a_sNameStd[0]>='0' && a_sNameStd[0]<='9'))
     {
-      Error(ecINVALID_NAME);
+        Error(ecINVALID_NAME);
     }
-  }
+}
 
 //---------------------------------------------------------------------------
 /** \brief Set the formula.
@@ -403,7 +408,7 @@ namespace qmu
   Triggers first time calculation thus the creation of the bytecode and
   scanning of used variables.
 */
-void QmuParserBase::SetExpr(const string_type &a_sExpr)
+void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
     std::locale loc;
@@ -415,9 +420,9 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
     // <ibg> 20060222: Bugfix for Borland-Kylix:
     // adding a space to the expression will keep Borlands KYLIX from going wild
     // when calling tellg on a stringstream created from the expression after
-    // reading a value at the end of an expression. (mu::Parser::IsVal function)
+    // reading a value at the end of an expression. (qmu::QmuParser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    string_type sBuf(a_sExpr + " " );
+    QString sBuf(a_sExpr + " " );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
 }
@@ -426,9 +431,9 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   /** \brief Get the default symbols used for the built in operators. 
       \sa c_DefaultOprt
   */
-  const char_type** QmuParserBase::GetOprtDef() const
+  const QStringList &QmuParserBase::GetOprtDef() const
   {
-    return (const char_type **)(&c_DefaultOprt[0]);
+    return c_DefaultOprt;
   }
 
   //---------------------------------------------------------------------------
@@ -458,53 +463,41 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
     m_sInfixOprtChars = a_szCharset;
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Virtual function that defines the characters allowed in name identifiers. 
-      \sa #ValidOprtChars, #ValidPrefixOprtChars
-  */ 
-  const char_type* QmuParserBase::ValidNameChars() const
-  {
+//---------------------------------------------------------------------------
+/** \brief Virtual function that defines the characters allowed in name identifiers.
+  \sa #ValidOprtChars, #ValidPrefixOprtChars
+*/
+const QString& QmuParserBase::ValidNameChars() const
+{
     assert(m_sNameChars.size());
-    #if defined(_UNICODE)
-        return m_sNameChars.toStdWString().c_str();
-    #else
-        return m_sNameChars.toStdString().c_str();
-    #endif
-  }
+    return m_sNameChars;
+}
 
   //---------------------------------------------------------------------------
   /** \brief Virtual function that defines the characters allowed in operator definitions. 
       \sa #ValidNameChars, #ValidPrefixOprtChars
   */
-  const char_type* QmuParserBase::ValidOprtChars() const
+  const QString &QmuParserBase::ValidOprtChars() const
   {
     assert(m_sOprtChars.size());
-    #if defined(_UNICODE)
-        return m_sOprtChars.toStdWString().c_str();
-    #else
-        return m_sOprtChars.toStdString().c_str();
-    #endif
+    return m_sOprtChars;
   }
 
   //---------------------------------------------------------------------------
   /** \brief Virtual function that defines the characters allowed in infix operator definitions.
       \sa #ValidNameChars, #ValidOprtChars
   */
-  const char_type* QmuParserBase::ValidInfixOprtChars() const
+  const QString &QmuParserBase::ValidInfixOprtChars() const
   {
     assert(m_sInfixOprtChars.size());
-    #if defined(_UNICODE)
-        return m_sInfixOprtChars.toStdWString().c_str();
-    #else
-        return m_sInfixOprtChars.toStdString().c_str();
-    #endif
+    return m_sInfixOprtChars;
   }
 
   //---------------------------------------------------------------------------
   /** \brief Add a user defined operator. 
       \post Will reset the Parser to string parsing mode.
   */
-  void QmuParserBase::DefinePostfixOprt(const string_type &a_sName,
+  void QmuParserBase::DefinePostfixOprt(const QString &a_sName,
                                      fun_type1 a_pFun,
                                      bool a_bAllowOpt)
   {
@@ -536,7 +529,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       \param [in] a_bAllowOpt  True if operator is volatile (default=false)
       \sa EPrec
   */
-  void QmuParserBase::DefineInfixOprt(const string_type &a_sName,
+  void QmuParserBase::DefineInfixOprt(const QString &a_sName,
                                   fun_type1 a_pFun, 
                                   int a_iPrec, 
                                   bool a_bAllowOpt)
@@ -558,7 +551,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       
       Adds a new Binary operator the the parser instance. 
   */
-  void QmuParserBase::DefineOprt( const string_type &a_sName,
+  void QmuParserBase::DefineOprt( const QString &a_sName,
                                fun_type2 a_pFun, 
                                unsigned a_iPrec, 
                                EOprtAssociativity a_eAssociativity,
@@ -566,8 +559,12 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   {
     // Check for conflicts with built in operator names
     for (int i=0; m_bBuiltInOp && i<cmENDIF; ++i)
-      if (a_sName == string_type(c_DefaultOprt[i]))
+    {
+      if (a_sName == c_DefaultOprt.at(i))
+      {
         Error(ecBUILTIN_OVERLOAD, -1, a_sName);
+      }
+    }
 
     AddCallback(a_sName, 
                 QmuParserCallback(a_pFun, a_bAllowOpt, a_iPrec, a_eAssociativity),
@@ -575,24 +572,26 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
                 ValidOprtChars() );
   }
 
-  //---------------------------------------------------------------------------
-  /** \brief Define a new string constant.
-      \param [in] a_strName The name of the constant.
-      \param [in] a_strVal the value of the constant. 
-  */
-  void QmuParserBase::DefineStrConst(const string_type &a_strName, const string_type &a_strVal)
-  {
+//---------------------------------------------------------------------------
+/** \brief Define a new string constant.
+  \param [in] a_strName The name of the constant.
+  \param [in] a_strVal the value of the constant.
+*/
+void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_strVal)
+{
     // Test if a constant with that names already exists
     if (m_StrVarDef.find(a_strName)!=m_StrVarDef.end())
-      Error(ecNAME_CONFLICT);
+    {
+        Error(ecNAME_CONFLICT);
+    }
 
     CheckName(a_strName, ValidNameChars());
-    
+
     m_vStringVarBuf.push_back(a_strVal);           // Store variable string in internal buffer
     m_StrVarDef[a_strName] = m_vStringBuf.size();  // bind buffer index to variable name
 
     ReInit();
-  }
+}
 
   //---------------------------------------------------------------------------
   /** \brief Add a user defined variable. 
@@ -601,14 +600,18 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       \post Will reset the Parser to string parsing mode.
       \throw ParserException in case the name contains invalid signs or a_pVar is NULL.
   */
-  void QmuParserBase::DefineVar(const string_type &a_sName, qreal *a_pVar)
+  void QmuParserBase::DefineVar(const QString &a_sName, qreal *a_pVar)
   {
     if (a_pVar==0)
+    {
       Error(ecINVALID_VAR_PTR);
+    }
 
     // Test if a constant with that names already exists
     if (m_ConstDef.find(a_sName)!=m_ConstDef.end())
+    {
       Error(ecNAME_CONFLICT);
+    }
 
     CheckName(a_sName, ValidNameChars());
     m_VarDef[a_sName] = a_pVar;
@@ -622,7 +625,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       \post Will reset the Parser to string parsing mode.
       \throw ParserException in case the name contains invalid signs.
   */
-  void QmuParserBase::DefineConst(const string_type &a_sName, qreal a_fVal)
+  void QmuParserBase::DefineConst(const QString &a_sName, qreal a_fVal)
   {
     CheckName(a_sName, ValidNameChars());
     m_ConstDef[a_sName] = a_fVal;
@@ -748,7 +751,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
 
   //---------------------------------------------------------------------------
   /** \brief Retrieve the formula. */
-  const string_type& QmuParserBase::GetExpr() const
+  const QString& QmuParserBase::GetExpr() const
   {
     return m_pTokenReader->GetExpr();
   }
@@ -1129,9 +1132,9 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
 
               switch(pTok->Fun.argc)  // switch according to argument count
               {
-              case 0: Stack[sidx] = (*(strfun_type1)pTok->Fun.ptr)(m_vStringBuf[iIdxStack].c_str()); continue;
-              case 1: Stack[sidx] = (*(strfun_type2)pTok->Fun.ptr)(m_vStringBuf[iIdxStack].c_str(), Stack[sidx]); continue;
-              case 2: Stack[sidx] = (*(strfun_type3)pTok->Fun.ptr)(m_vStringBuf[iIdxStack].c_str(), Stack[sidx], Stack[sidx+1]); continue;
+              case 0: Stack[sidx] = (*(strfun_type1)pTok->Fun.ptr)(m_vStringBuf.at(iIdxStack)); continue;
+              case 1: Stack[sidx] = (*(strfun_type2)pTok->Fun.ptr)(m_vStringBuf.at(iIdxStack), Stack[sidx]); continue;
+              case 2: Stack[sidx] = (*(strfun_type3)pTok->Fun.ptr)(m_vStringBuf.at(iIdxStack), Stack[sidx], Stack[sidx+1]); continue;
               }
 
               continue;
@@ -1448,7 +1451,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
     \param a_strTok [in] The token string representation associated with the error.
     \throw ParserException always throws thats the only purpose of this function.
   */
-  void  QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const string_type &a_sTok) const
+  void  QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const
   {
     throw exception_type(a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
   }
@@ -1471,7 +1474,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
 
       Removes a variable if it exists. If the Variable does not exist nothing will be done.
   */
-  void QmuParserBase::RemoveVar(const string_type &a_strVarName)
+  void QmuParserBase::RemoveVar(const QString &a_strVarName)
   {
     varmap_type::iterator item = m_VarDef.find(a_strVarName);
     if (item!=m_VarDef.end())
@@ -1592,7 +1595,7 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
   //------------------------------------------------------------------------------
   /** \brief Get the argument separator character. 
   */
-  char_type QmuParserBase::GetArgSep() const
+  QChar QmuParserBase::GetArgSep() const
   {
     return m_pTokenReader->GetArgSep();
   }
@@ -1617,22 +1620,22 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
     QStack<token_type> stOprt(a_stOprt),
                             stVal(a_stVal);
 
-    qmu::console() << "\nValue stack:\n";
+    qDebug() << "\nValue stack:\n";
     while ( !stVal.empty() ) 
     {
       token_type val = stVal.pop();
       if (val.GetType()==tpSTR)
-        qmu::console() << " \"" << val.GetAsString() << "\" ";
+        qDebug() << " \"" << val.GetAsString() << "\" ";
       else
-        qmu::console() << " " << val.GetVal() << " ";
+        qDebug() << " " << val.GetVal() << " ";
     }
-    qmu::console() << "\nOperator stack:\n";
+    qDebug() << "\nOperator stack:\n";
 
     while ( !stOprt.empty() )
     {
       if (stOprt.top().GetCode()<=cmASSIGN) 
       {
-        qmu::console() << "OPRT_INTRNL \""
+        qDebug() << "OPRT_INTRNL \""
                       << QmuParserBase::c_DefaultOprt[stOprt.top().GetCode()]
                       << "\" \n";
       }
@@ -1640,35 +1643,35 @@ void QmuParserBase::SetExpr(const string_type &a_sExpr)
       {
         switch(stOprt.top().GetCode())
         {
-        case cmVAR:   qmu::console() << "VAR\n";  break;
-        case cmVAL:   qmu::console() << "VAL\n";  break;
-        case cmFUNC:  qmu::console() << "FUNC \""
+        case cmVAR:   qDebug() << "VAR\n";  break;
+        case cmVAL:   qDebug() << "VAL\n";  break;
+        case cmFUNC:  qDebug() << "FUNC \""
                                     << stOprt.top().GetAsString() 
                                     << "\"\n";   break;
-        case cmFUNC_BULK:  qmu::console() << "FUNC_BULK \""
+        case cmFUNC_BULK:  qDebug() << "FUNC_BULK \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";   break;
-        case cmOPRT_INFIX: qmu::console() << "OPRT_INFIX \""
+        case cmOPRT_INFIX: qDebug() << "OPRT_INFIX \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";      break;
-        case cmOPRT_BIN:   qmu::console() << "OPRT_BIN \""
+        case cmOPRT_BIN:   qDebug() << "OPRT_BIN \""
                                          << stOprt.top().GetAsString() 
                                          << "\"\n";           break;
-        case cmFUNC_STR: qmu::console() << "FUNC_STR\n";       break;
-        case cmEND:      qmu::console() << "END\n";            break;
-        case cmUNKNOWN:  qmu::console() << "UNKNOWN\n";        break;
-        case cmBO:       qmu::console() << "BRACKET \"(\"\n";  break;
-        case cmBC:       qmu::console() << "BRACKET \")\"\n";  break;
-        case cmIF:       qmu::console() << "IF\n";  break;
-        case cmELSE:     qmu::console() << "ELSE\n";  break;
-        case cmENDIF:    qmu::console() << "ENDIF\n";  break;
-        default:         qmu::console() << stOprt.top().GetCode() << " ";  break;
+        case cmFUNC_STR: qDebug() << "FUNC_STR\n";       break;
+        case cmEND:      qDebug() << "END\n";            break;
+        case cmUNKNOWN:  qDebug() << "UNKNOWN\n";        break;
+        case cmBO:       qDebug() << "BRACKET \"(\"\n";  break;
+        case cmBC:       qDebug() << "BRACKET \")\"\n";  break;
+        case cmIF:       qDebug() << "IF\n";  break;
+        case cmELSE:     qDebug() << "ELSE\n";  break;
+        case cmENDIF:    qDebug() << "ENDIF\n";  break;
+        default:         qDebug() << stOprt.top().GetCode() << " ";  break;
         }
       }	
       stOprt.pop();
     }
 
-    qmu::console() << dec << endl;
+    qDebug() << dec;
   }
 
   //------------------------------------------------------------------------------

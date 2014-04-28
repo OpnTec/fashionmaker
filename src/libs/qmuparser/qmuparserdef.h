@@ -27,6 +27,8 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <QMap>
+#include <QString>
 
 #include "qmuparserfixes.h"
 
@@ -49,54 +51,15 @@
 //#define MUP_USE_OPENMP
 
 #if defined(_UNICODE)
-  /** \brief Definition of the basic parser string type. */
-  #define MUP_STRING_TYPE std::wstring
-
+    /** \brief Definition of the basic parser string type. */
+    #define QMUP_STRING_TYPE std::wstring
 #else
-  
-  /** \brief Definition of the basic parser string type. */
-  #define MUP_STRING_TYPE std::string
+    /** \brief Definition of the basic parser string type. */
+    #define QMUP_STRING_TYPE std::string
 #endif
 
 namespace qmu
 {
-#if defined(_UNICODE)
-
-  //------------------------------------------------------------------------------
-  /** \brief Encapsulate wcout. */
-  inline std::wostream& console()
-  {
-    return std::wcout;
-  }
-
-  /** \brief Encapsulate cin. */
-  inline std::wistream& console_in()
-  {
-    return std::wcin;
-  }
-
-#else
-
-  /** \brief Encapsulate cout. 
-  
-    Used for supporting UNICODE more easily.
-  */
-  inline std::ostream& console()
-  {
-    return std::cout;
-  }
-
-  /** \brief Encapsulate cin. 
-
-    Used for supporting UNICODE more easily.
-  */
-  inline std::istream& console_in()
-  {
-    return std::cin;
-  }
-
-#endif
-
   //------------------------------------------------------------------------------
   /** \brief Bytecode values.
 
@@ -200,7 +163,7 @@ namespace qmu
 
     Depends on wether UNICODE is used or not.
   */
-  typedef MUP_STRING_TYPE string_type;
+  typedef QMUP_STRING_TYPE string_type;
 
   /** \brief The character type used by the parser. 
   
@@ -216,13 +179,13 @@ namespace qmu
   // Data container types
 
   /** \brief Type used for storing variables. */
-  typedef std::map<string_type, qreal*> varmap_type;
+  typedef std::map<QString, qreal*> varmap_type;
   
   /** \brief Type used for storing constants. */
-  typedef std::map<string_type, qreal> valmap_type;
+  typedef std::map<QString, qreal> valmap_type;
   
   /** \brief Type for assigning a string name to an index in the internal string table. */
-  typedef std::map<string_type, std::size_t> strmap_type;
+  typedef std::map<QString, int> strmap_type;
 
   // Parser callbacks
   
@@ -299,19 +262,19 @@ namespace qmu
   typedef qreal (*multfun_type)(const qreal*, int);
 
   /** \brief Callback type used for functions taking a string as an argument. */
-  typedef qreal (*strfun_type1)(const char_type*);
+  typedef qreal (*strfun_type1)(const QString &);
 
   /** \brief Callback type used for functions taking a string and a value as arguments. */
-  typedef qreal (*strfun_type2)(const char_type*, qreal);
+  typedef qreal (*strfun_type2)(const QString &, qreal);
 
   /** \brief Callback type used for functions taking a string and two values as arguments. */
-  typedef qreal (*strfun_type3)(const char_type*, qreal, qreal);
+  typedef qreal (*strfun_type3)(const QString &, qreal, qreal);
 
   /** \brief Callback used for functions that identify values in a string. */
-  typedef int (*identfun_type)(const char_type *sExpr, int *nPos, qreal *fVal);
+  typedef int (*identfun_type)(const QString &sExpr, int *nPos, qreal *fVal);
 
   /** \brief Callback used for variable creation factory functions. */
-  typedef qreal* (*facfun_type)(const char_type*, void*);
+  typedef qreal* (*facfun_type)(const QString &, void*);
 } // end of namespace
 
 #endif
