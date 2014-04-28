@@ -134,7 +134,9 @@ INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
 
 INSTALL_STANDARD_MEASHUREMENTS += share/tables/standard/GOST_man_ru.vst
 
-INSTALL_INDIVIDUAL_MEASHUREMENTS += share/tables/individual/indivindual_ru.vit
+INSTALL_INDIVIDUAL_MEASHUREMENTS += \
+    share/tables/individual/indivindual_ru.vit \
+    share/tables/individual/individual_en-us.vit
 
 unix {
 #VARIABLES

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <lang>en-us</lang>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1900-01-01</birth-date>
+        <sex>male</sex>
+        <email>username@example.com</email>
+    </personal>
+    <body-measurements>
+        <unit>cm</unit>
+        <head_and_neck>
+            <head_girth gui_text="Head girth" description="Around fullest part of Head" value="0.0" m_number="M1" name="head_girth"/>
+            <mid_neck_girth gui_text="Mid-neck girth" description="Around middle part of Neck" value="0.0" m_number="M2" name="mid_neck_girth"/>
+            <neck_base_girth gui_text="Neck Base girth" description="Around Neck at base" value="0.0" m_number="M3" name="neck_base_girth"/>
+            <head_and_neck_length gui_text="Head and Neck length" description="Vertical Distance from Crown to Nape" value="0.0" m_number="M4" name="head_and_neck_length"/>
+        </head_and_neck>
+        <torso>
+            <center_front_waist_length gui_text="Front Center length" description="Front Neck Center over tape at Bustline to Front Waist Center" value="0.0" m_number="M5" name="center_front_waist_length"/>
+            <center_back_waist_length gui_text="Back Center length" description="Back Neck Center to Back Waist Center" value="0.0" m_number="M6" name="center_back_waist_length"/>
+            <shoulder_length gui_text="Shoulder length" description="NeckPoint to ShoulderTip" value="0.0" m_number="M7" name="shoulder_length"/>
+            <side_waist_length gui_text="Side Waist length" description="Armpit to Waist side" value="0.0" m_number="M8" name="side_waist_length"/>
+            <trunk_length gui_text="Trunk length" description="Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point" value="0.0" m_number="M9" name="trunk_length"/>
+            <shoulder_girth gui_text="Shoulder girth" description="Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides" value="0.0" m_number="M10" name="shoulder_girth"/>
+            <upper_chest_girth gui_text="Upper Chest girth" description="Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest" value="0.0" m_number="M11" name="upper_chest_girth"/>
+            <bust__girth gui_text="Bust girth" description="Around fullest part of Bust, parallel to floor" value="0.0" m_number="M12" name="bust__girth"/>
+            <under_bust_girth gui_text="Under Bust girth" description="Around Chest below the Bust, parallel to floor" value="0.0" m_number="M13" name="under_bust_girth"/>
+            <waist_girth gui_text="Waist girth" description="Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist." value="0.0" m_number="M14" name="waist_girth"/>
+            <high_hip_girth gui_text="HighHip girth" description="Around HighHip, parallel to floor" value="0.0" m_number="M15" name="high_hip_girth"/>
+            <hip_girth gui_text="Hip girth" description="Around Hip, parallel to floor" value="0.0" m_number="M16" name="hip_girth"/>
+            <upper_front_chest_width gui_text="Front Upper Chest width" description="Across Front UpperChest, smallest width from armscye to armscye" value="0.0" m_number="M17" name="upper_front_chest_width"/>
+            <front_chest_width gui_text="Front Chest width" description="Across Front Chest, from armfold to armfold" value="0.0" m_number="M18" name="front_chest_width"/>
+            <across_front_shoulder_width gui_text="Front Across Shoulder width" description="From ShoulderTip to ShoulderTip, across Front" value="0.0" m_number="M19" name="across_front_shoulder_width"/>
+            <across_back_shoulder_width gui_text="Back Across Shoulder width" description="From ShoulderTip to ShoulderTip, across Back" value="0.0" m_number="M20" name="across_back_shoulder_width"/>
+            <upper_back_width gui_text="Back Upper Chest width" description="Across Back UpperChest, smallest width from armscye to armscye" value="0.0" m_number="M21" name="upper_back_width"/>
+            <back_width gui_text="Back Chest width" description="Across Back Chest, from armfold to armfold" value="0.0" m_number="M22" name="back_width"/>
+            <bustpoint_to_bustpoint gui_text="BustPoint to BustPoint" description="Distance between BustPoints, across Chest" value="0.0" m_number="M23" name="bustpoint_to_bustpoint"/>
+            <halter_bustpoint_to_bustpoint gui_text="Halter Bustpoint to Bustpoint" description="Distance from Bustpoint, behind neck, down to Bustpoint" value="0.0" m_number="M24" name="halter_bustpoint_to_bustpoint"/>
+            <neck_to_bustpoint gui_text="NeckPoint to BustPoint" description="From NeckPoint to BustPoint" value="0.0" m_number="M25" name="neck_to_bustpoint"/>
+            <crotch_length gui_text="Crotch length" description="From Front Waist Center, down to crotch, up to Back Waist Center" value="0.0" m_number="M26" name="crotch_length"/>
+            <rise_height gui_text="Rise height" description="Sit on hard chair, measure from side waist straight down to chair bottom" value="0.0" m_number="M27" name="rise_height"/>
+            <shoulder_drop gui_text="Shoulder Drop" description="Vertical Distance from NeckPoint level to ShoulderTip level" value="0.0" m_number="M28" name="shoulder_drop"/>
+            <shoulder_slope_degrees gui_text="Shoulder Slope degrees" description="Degrees of angle from NeckPoint to ShoulderTip – requires goniometer" value="0.0" m_number="M29" name="shoulder_slope_degrees"/>
+            <front_shoulder_slope_length gui_text="Front Shoulder Balance" description="ShoulderTip to Front Waist Center" value="0.0" m_number="M30" name="front_shoulder_slope_length"/>
+            <back_shoulder_slope_length gui_text="Back Shoulder Balance" description="ShoulderTip to Back Waist Center" value="0.0" m_number="M31" name="back_shoulder_slope_length"/>
+            <front_shoulder_to_waist_length gui_text="Front Full Length" description="NeckPoint straight down front chest to Waistline" value="0.0" m_number="M32" name="front_shoulder_to_waist_length"/>
+            <back_shoulder_to_waist_length gui_text="Back Full Length" description="Back NeckPoint straight down back chest to Waistline" value="0.0" m_number="M33" name="back_shoulder_to_waist_length"/>
+            <front_neck_arc gui_text="Front Neck arc" description="NeckPoint to NeckPoint through Front Neck Center" value="0.0" m_number="M34" name="front_neck_arc"/>
+            <back_neck_arc gui_text="Back Neck arc" description="NeckPoint to NeckPoint across Nape" value="0.0" m_number="M35" name="back_neck_arc"/>
+            <front_upper-bust_arc gui_text="front_upper-bust_arc" description="front_upper-bust_arc" value="0.0" m_number="M36" name="front_upper_bust_arc"/>
+            <back_upper-bust_arc gui_text="Back UpperBust arc" description="Back UpperBust side to side" value="0.0" m_number="M37" name="back_upper_bust_arc"/>
+            <front_waist_arc gui_text="Front Waist arc" description="Front Waist side to side" value="0.0" m_number="M38" name="front_waist_arc"/>
+            <back_waist_arc gui_text="Back Waist arc" description="Back Waist side to side" value="0.0" m_number="M39" name="back_waist_arc"/>
+            <front_upper-hip_arc gui_text="Front UpperHip arc" description="Front UpperHip side to side" value="0.0" m_number="M40" name="front_upper_hip_arc"/>
+            <back_upper-hip_arc gui_text="Back UpperHip arc" description="Back UpperHip side to side" value="0.0" m_number="M41" name="back_upper_hip_arc"/>
+            <front_hip_arc gui_text="Front Hip arc" description="Front Hip side to side" value="0.0" m_number="M42" name="front_hip_arc"/>
+            <back_hip_arc gui_text="Back Hip arc" description="Back Hip side to side" value="0.0" m_number="M43" name="back_hip_arc"/>
+            <chest_slope gui_text="Chest Balance" description="NeckPoint to Front ArmfoldPoint" value="0.0" m_number="M44" name="chest_slope"/>
+            <back_slope gui_text="Back Balance" description="NeckPoint to Back ArmfoldPoint" value="0.0" m_number="M45" name="back_slope"/>
+            <front_waist_slope gui_text="Front Waist Balance" description="NeckPoint across Front Chest to Waist side" value="0.0" m_number="M46" name="front_waist_slope"/>
+            <back_waist_slope gui_text="Back Waist Balance" description="NeckPoint across Back Chest to Waist side" value="0.0" m_number="M47" name="back_waist_slope"/>
+            <front-neck_to_upper-chest_height gui_text="Front UpperChest height" description="Front Neck Center straight down to UpperChest line" value="0.0" m_number="M48" name="front_neck_to_upper_chest_height"/>
+            <front-neck_to_bust_height gui_text="Bust height" description="Front Neck Center straight down to Bust line" value="0.0" m_number="M49" name="front_neck_to_bust_height"/>
+        </torso>
+        <arm>
+            <armscye_girth gui_text="Armscye Girth" description="Around Armscye" value="0.0" m_number="M50" name="armscye_girth"/>
+            <elbow_girth gui_text="Elbow Girth" description="Around Elbow with elbow bent" value="0.0" m_number="M51" name="elbow_girth"/>
+            <upper-arm_girth gui_text="Upperarm Girth" description="Around UpperArm" value="0.0" m_number="M52" name="upper_arm_girth"/>
+            <wrist_girth gui_text="Wrist girth" description="Around Wrist" value="0.0" m_number="M53" name="wrist_girth"/>
+            <scye_depth gui_text="Armscye depth" description="Nape straight down to UnderBust line (same as Back UpperBust height)" value="0.0" m_number="M54" name="scye_depth"/>
+            <shoulder_and_arm_length gui_text="Shoulder and Arm  length" description="NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip" value="0.0" m_number="M55" name="shoulder_and_arm_length"/>
+            <underarm_length gui_text="Underarm length" description="Armpit to Wrist, with arm straight and hanging at side" value="0.0" m_number="M56" name="underarm_length"/>
+            <cervicale_to_wrist_length gui_text="Nape to wrist length" description="Nape to Wrist, with elbow bent and hand on hip" value="0.0" m_number="M57" name="cervicale_to_wrist_length"/>
+            <shoulder_to_elbow_length gui_text="Elbow length" description="ShoulderTip to Elbow, with elbow bent and hand on hip" value="0.0" m_number="M58" name="shoulder_to_elbow_length"/>
+            <arm_length gui_text="Arm length" description="ShoulderTip to Wrist, with elbow bent and hand on hip" value="0.0" m_number="M59" name="arm_length"/>
+        </arm>
+        <hand>
+            <hand_width gui_text="Hand width" description="Hand side to side" value="0.0" m_number="M60" name="hand_width"/>
+            <hand_length gui_text="Hand length" description="Hand Middle Finger tip to wrist" value="0.0" m_number="M61" name="hand_length"/>
+            <hand_girth gui_text="Hand girth" description="Around Hand" value="0.0" m_number="M62" name="hand_girth"/>
+        </hand>
+        <leg>
+            <thigh_girth gui_text="Thigh girth" description="Around Thigh" value="0.0" m_number="M63" name="thigh_girth"/>
+            <mid_thigh_girth gui_text="Midthigh girth"  description="Around MidThigh" value="0.0" m_number="M64" name="mid_thigh_girth"/>
+            <knee_girth gui_text="Knee girth" description="Around Knee" value="0.0" m_number="M65" name="knee_girth"/>
+            <calf_girth gui_text="Calf girth" description="Around Calf" value="0.0" m_number="M66" name="calf_girth"/>
+            <ankle_girth gui_text="Ankle girth" description="Around Ankle " value="0.0" m_number="M67" name="ankle_girth"/>
+            <knee_height gui_text="Knee height" description="Knee to Floor" value="0.0" m_number="M68" name="knee_height"/>
+            <ankle_height gui_text="Ankle height" description="Ankle to Floor" value="0.0" m_number="M69" name="ankle_height"/>
+        </leg>
+        <foot>
+            <foot_width gui_text="Foot width" description="Widest part of Foot side to side" value="0.0" m_number="M70" name="foot_width"/>
+            <foot_length gui_text="Foot length" description="Tip of Longest Toe straight to back of heel" value="0.0" m_number="M71" name="foot_length"/>
+        </foot>
+        <heights>
+            <height gui_text="Total Height" description="Top of head to floor" value="0.0" m_number="M72" name="height"/>
+            <cervicale_height gui_text="Nape height" description="Nape to Floor" value="0.0" m_number="M73" name="cervicale_height"/>
+            <cervicale_to_knee_height gui_text="Nape to knee height"  description="Nape to Knee" value="0.0" m_number="M74" name="cervicale_to_knee_height"/>
+            <waist_height gui_text="Waist height" description="Waist side to floor" value="0.0" m_number="M75" name="waist_height"/>
+            <high_hip_height gui_text="HighHip height" description="HighHip side to Floor" value="0.0" m_number="M76" name="high_hip_height"/>
+            <hip_height gui_text="Hip height" description="Hip side to Floor" value="0.0" m_number="M77" name="hip_height"/>
+            <waist_to_hip_height gui_text="Waist to Hip height" description="Waist side to Hip" value="0.0" m_number="M78" name="waist_to_hip_height"/>
+            <waist_to_knee_height gui_text="Waist to Knee height" description="Waist side to Knee" value="0.0" m_number="M79" name="waist_to_knee_height"/>
+            <crotch_height gui_text="Crotch height/Inseam" description="Crotch to Floor along inside leg" value="0.0" m_number="M80" name="crotch_height"/>
+        </heights>
+    </body-measurements>
+</vit>
