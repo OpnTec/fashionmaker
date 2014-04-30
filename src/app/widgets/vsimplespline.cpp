@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   vsimplespline.cpp
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   17 12, 2013
  **
  **  @brief

@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   dialogstandardmeasurements.cpp
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   21 2, 2014
  **
  **  @brief

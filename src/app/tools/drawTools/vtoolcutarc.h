@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   vtoolcutarc.h
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   7 1, 2014
  **
  **  @brief

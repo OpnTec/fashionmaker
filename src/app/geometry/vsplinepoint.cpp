@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   vsplinepoint.cpp
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   November 15, 2013
  **
  **  @brief

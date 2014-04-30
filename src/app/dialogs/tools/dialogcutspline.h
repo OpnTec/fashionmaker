@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   dialogcutspline.h
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 12, 2013
  **
  **  @brief

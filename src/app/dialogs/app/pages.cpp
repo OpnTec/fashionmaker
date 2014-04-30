@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   pages.cpp
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 2, 2014
  **
  **  @brief

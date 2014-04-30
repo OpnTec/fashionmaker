@@ -1,7 +1,7 @@
 /************************************************************************
  **
  **  @file   vgobject.h
- **  @author Roman Telezhinsky <dismine@gmail.com>
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   27 12, 2013
  **
  **  @brief
