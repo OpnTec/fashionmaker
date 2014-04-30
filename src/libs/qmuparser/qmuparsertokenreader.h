@@ -35,8 +35,8 @@
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
 
-/** \file
-    \brief This file contains the parser token reader definition.
+/** @file
+    @brief This file contains the parser token reader definition.
 */
 
 
@@ -45,7 +45,7 @@ namespace qmu
   // Forward declaration
   class QmuParserBase;
 
-  /** \brief Token reader for the ParserBase class.
+  /** @brief Token reader for the ParserBase class.
 
   */
   class QmuParserTokenReader
@@ -75,7 +75,7 @@ namespace qmu
 
   private:
 
-      /** \brief Syntax codes. 
+      /** @brief Syntax codes. 
   	
 	        The syntax codes control the syntax check done during the first time parsing of 
           the expression string. They are flags that indicate which tokens are allowed next

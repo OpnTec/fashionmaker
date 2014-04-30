@@ -25,25 +25,24 @@
 
 #include "qmuparserdef.h"
 
-/** \file
-    \brief Definition of the parser callback class.
-*/
+/**
+ * @file
+ * @brief Definition of the parser callback class.
+ */
 
 namespace qmu
 {
 
-/** \brief Encapsulation of prototypes for a numerical parser function.
-
-    Encapsulates the prototyp for numerical parser functions. The class
-    stores the number of arguments for parser functions as well
-    as additional flags indication the function is non optimizeable.
-    The pointer to the callback function pointer is stored as void* 
-    and needs to be casted according to the argument count.
-    Negative argument counts indicate a parser function with a variable number
-    of arguments. 
-
-    \author (C) 2004-2011 Ingo Berg
-*/
+/**
+ * @brief Encapsulation of prototypes for a numerical parser function.
+ *
+ * Encapsulates the prototyp for numerical parser functions. The class stores the number of arguments for parser
+ * functions as well as additional flags indication the function is non optimizeable. The pointer to the callback
+ * function pointer is stored as void* and needs to be casted according to the argument count. Negative argument counts
+ * indicate a parser function with a variable number of arguments.
+ *
+ * @author (C) 2004-2011 Ingo Berg
+ */
 class QmuParserCallback
 {
 public:
@@ -80,23 +79,22 @@ public:
     QmuParserCallback(const QmuParserCallback &a_Fun);
     
     QmuParserCallback* Clone() const;
-
-    bool  IsOptimizable() const;
-    void* GetAddr() const;
-    ECmdCode  GetCode() const;
-    ETypeCode GetType() const;
-    int GetPri()  const;
+	bool               IsOptimizable() const;
+	void*              GetAddr() const;
+	ECmdCode           GetCode() const;
+	ETypeCode          GetType() const;
+	int                GetPri()  const;
     EOprtAssociativity GetAssociativity() const;
-    int GetArgc() const;
-
+	int                GetArgc() const;
 private:
     void *m_pFun;                   ///< Pointer to the callback function, casted to void
     
-    /** \brief Number of numeric function arguments
-    
-        This number is negative for functions with variable number of arguments. in this cases
-        they represent the actual number of arguments found.
-    */
+	/**
+	 * @brief Number of numeric function arguments
+	 *
+	 * This number is negative for functions with variable number of arguments. in this cases
+	 * they represent the actual number of arguments found.
+	 */
     int   m_iArgc;      
     int   m_iPri;                   ///< Valid only for binary and infix operators; Operator precedence.
     EOprtAssociativity m_eOprtAsct; ///< Operator associativity; Valid only for binary operators 
@@ -105,8 +103,10 @@ private:
     bool  m_bAllowOpti;             ///< Flag indication optimizeability 
 };
 
-//------------------------------------------------------------------------------
-/** \brief Container for Callback objects. */
+//----------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Container for Callback objects.
+ */
 typedef std::map<QString, QmuParserCallback> funmap_type;
 
 } // namespace qmu

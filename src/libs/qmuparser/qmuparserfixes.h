@@ -23,8 +23,8 @@
 #ifndef QMUPARSERFIXES_H
 #define QMUPARSERFIXES_H
 
-/** \file
-    \brief This file contains compatibility fixes for some platforms.
+/** @file
+    @brief This file contains compatibility fixes for some platforms.
 */
 
 //

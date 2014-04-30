@@ -23,116 +23,104 @@
 #ifndef QMUPARSERBYTECODE_H
 #define QMUPARSERBYTECODE_H
 
-#include <cassert>
-#include <string>
-#include <stack>
-
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"
 #include "qmuparsertoken.h"
 
-/** \file
-    \brief Definition of the parser bytecode class.
-*/
-
+/**
+ * @file
+ * @brief Definition of the parser bytecode class.
+ */
 
 namespace qmu
 {
-  struct SToken
-  {
-    ECmdCode Cmd;
-    int StackPos;
+struct SToken
+{
+	ECmdCode Cmd;
+	int StackPos;
 
-    union
-    {
-      struct //SValData
-      {
-        qreal *ptr;
-        qreal  data;
-        qreal  data2;
-      } Val;
+	union
+	{
+		struct //SValData
+		{
+			qreal *ptr;
+			qreal  data;
+			qreal  data2;
+		} Val;
 
-      struct //SFunData
-      {
-        // Note: generic_fun_type is merely a placeholder. The real type could be 
-        //       anything between gun_type1 and fun_type9. I can't use a void
-        //       pointer due to constraints in the ANSI standard which allows
-        //       data pointers and function pointers to differ in size.
-        generic_fun_type ptr;
-        int   argc;
-        int   idx;
-      } Fun;
+		struct //SFunData
+		{
+			// Note: generic_fun_type is merely a placeholder. The real type could be
+			//       anything between gun_type1 and fun_type9. I can't use a void
+			//       pointer due to constraints in the ANSI standard which allows
+			//       data pointers and function pointers to differ in size.
+			generic_fun_type ptr;
+			int   argc;
+			int   idx;
+		} Fun;
 
-      struct //SOprtData
-      {
-        qreal *ptr;
-        int offset;
-      } Oprt;
-    };
-  };
+		struct //SOprtData
+		{
+			qreal *ptr;
+			int offset;
+		} Oprt;
+	};
+};
   
   
-  /** \brief Bytecode implementation of the Math Parser.
-
-  The bytecode contains the formula converted to revers polish notation stored in a continious
-  memory area. Associated with this data are operator codes, variable pointers, constant 
-  values and function pointers. Those are necessary in order to calculate the result.
-  All those data items will be casted to the underlying datatype of the bytecode.
-
-  \author (C) 2004-2013 Ingo Berg 
-*/
+/**
+ * @brief Bytecode implementation of the Math Parser.
+ *
+ * The bytecode contains the formula converted to revers polish notation stored in a continious
+ * memory area. Associated with this data are operator codes, variable pointers, constant
+ * values and function pointers. Those are necessary in order to calculate the result.
+ * All those data items will be casted to the underlying datatype of the bytecode.
+ *
+ * @author (C) 2004-2013 Ingo Berg
+ */
 class QmuParserByteCode
 {
 private:
-
-    /** \brief Token type for internal use only. */
+    /** @brief Token type for internal use only. */
     typedef QmuParserToken<qreal, string_type> token_type;
 
-    /** \brief Token vector for storing the RPN. */
+    /** @brief Token vector for storing the RPN. */
     typedef QVector<SToken> rpn_type;
 
-    /** \brief Position in the Calculation array. */
+    /** @brief Position in the Calculation array. */
     unsigned m_iStackPos;
 
-    /** \brief Maximum size needed for the stack. */
+    /** @brief Maximum size needed for the stack. */
     std::size_t m_iMaxStackSize;
     
-    /** \brief The actual rpn storage. */
+    /** @brief The actual rpn storage. */
     rpn_type  m_vRPN;
 
     bool m_bEnableOptimizer;
 
     void ConstantFolding(ECmdCode a_Oprt);
-
 public:
-
     QmuParserByteCode();
     QmuParserByteCode(const QmuParserByteCode &a_ByteCode);
     QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode);
-    void Assign(const QmuParserByteCode &a_ByteCode);
-
-    void AddVar(qreal *a_pVar);
-    void AddVal(qreal a_fVal);
-    void AddOp(ECmdCode a_Oprt);
-    void AddIfElse(ECmdCode a_Oprt);
-    void AddAssignOp(qreal *a_pVar);
-    void AddFun(generic_fun_type a_pFun, int a_iArgc);
-    void AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
-    void AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
-
-    void EnableOptimizer(bool bStat);
-
-    void Finalize();
-    void clear();
-    std::size_t GetMaxStackSize() const;
-    std::size_t GetSize() const;
-
+	void          Assign(const QmuParserByteCode &a_ByteCode);
+	void          AddVar(qreal *a_pVar);
+	void          AddVal(qreal a_fVal);
+	void          AddOp(ECmdCode a_Oprt);
+	void          AddIfElse(ECmdCode a_Oprt);
+	void          AddAssignOp(qreal *a_pVar);
+	void          AddFun(generic_fun_type a_pFun, int a_iArgc);
+	void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
+	void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
+	void          EnableOptimizer(bool bStat);
+	void          Finalize();
+	void          clear();
+	std::size_t   GetMaxStackSize() const;
+	std::size_t   GetSize() const;
     const SToken* GetBase() const;
-    void AsciiDump();
+	void          AsciiDump();
 };
-
 } // namespace qmu
-
 #endif
 
 

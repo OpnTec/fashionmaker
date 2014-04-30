@@ -32,13 +32,13 @@
 #include "qmuparsererror.h"
 #include "qmuparsercallback.h"
 
-/** \file
-    \brief This file contains the parser token definition.
+/** @file
+    @brief This file contains the parser token definition.
 */
 
 namespace qmu
 {
-  /** \brief Encapsulation of the data for a single formula token. 
+  /** @brief Encapsulation of the data for a single formula token. 
 
     Formula token implementation. Part of the Math Parser Package.
     Formula tokens can be either one of the following:
@@ -52,7 +52,7 @@ namespace qmu
 	    <li>binary operator</li>
     </ul>
 
-   \author (C) 2004-2013 Ingo Berg 
+   @author (C) 2004-2013 Ingo Berg 
   */
   template<typename TBase, typename TString>
   class QmuParserToken
@@ -71,11 +71,11 @@ namespace qmu
   public:
 
       //---------------------------------------------------------------------------
-      /** \brief Constructor (default).
+      /** @brief Constructor (default).
         
           Sets token to an neutral state of type cmUNKNOWN.
-          \throw nothrow
-          \sa ECmdCode
+          @throw nothrow
+          @sa ECmdCode
       */
       QmuParserToken()
         :m_iCode(cmUNKNOWN)
@@ -87,12 +87,12 @@ namespace qmu
       {}
 
       //------------------------------------------------------------------------------
-      /** \brief Create token from another one.
+      /** @brief Create token from another one.
       
           Implemented by calling Assign(...)
-          \throw nothrow
-          \post m_iType==cmUNKNOWN
-          \sa #Assign
+          @throw nothrow
+          @post m_iType==cmUNKNOWN
+          @sa #Assign
       */
       QmuParserToken(const QmuParserToken &a_Tok)
       {
@@ -100,11 +100,11 @@ namespace qmu
       }
       
       //------------------------------------------------------------------------------
-      /** \brief Assignement operator. 
+      /** @brief Assignement operator. 
       
           Copy token state from another token and return this.
           Implemented by calling Assign(...).
-          \throw nothrow
+          @throw nothrow
       */
       QmuParserToken& operator=(const QmuParserToken &a_Tok)
       {
@@ -113,9 +113,9 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Copy token information from argument.
+      /** @brief Copy token information from argument.
       
-          \throw nothrow
+          @throw nothrow
       */
       void Assign(const QmuParserToken &a_Tok)
       {
@@ -131,15 +131,15 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Assign a token type. 
+      /** @brief Assign a token type. 
 
         Token may not be of type value, variable or function. Those have seperate set functions. 
 
         \pre [assert] a_iType!=cmVAR
         \pre [assert] a_iType!=cmVAL
         \pre [assert] a_iType!=cmFUNC
-        \post m_fVal = 0
-        \post m_pTok = 0
+        @post m_fVal = 0
+        @post m_pTok = 0
       */
       QmuParserToken& Set(ECmdCode a_iType, const TString &a_strTok=TString())
       {
@@ -158,7 +158,7 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Set Callback type. */
+      /** @brief Set Callback type. */
       QmuParserToken& Set(const QmuParserCallback &a_pCallback, const TString &a_sTok)
       {
         assert(a_pCallback.GetAddr());
@@ -175,10 +175,10 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Make this token a value token. 
+      /** @brief Make this token a value token. 
       
           Member variables not necessary for value tokens will be invalidated.
-          \throw nothrow
+          @throw nothrow
       */
       QmuParserToken& SetVal(TBase a_fVal, const TString &a_strTok=TString())
       {
@@ -195,10 +195,10 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief make this token a variable token. 
+      /** @brief make this token a variable token. 
       
           Member variables not necessary for variable tokens will be invalidated.
-          \throw nothrow
+          @throw nothrow
       */
       QmuParserToken& SetVar(TBase *a_pVar, const TString &a_strTok)
       {
@@ -212,10 +212,10 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Make this token a variable token. 
+      /** @brief Make this token a variable token. 
       
           Member variables not necessary for variable tokens will be invalidated.
-          \throw nothrow
+          @throw nothrow
       */
       QmuParserToken& SetString(const TString &a_strTok, std::size_t a_iSize)
       {
@@ -230,11 +230,11 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Set an index associated with the token related data. 
+      /** @brief Set an index associated with the token related data. 
       
           In cmSTRFUNC - This is the index to a string table in the main parser.
-          \param a_iIdx The index the string function result will take in the bytecode parser.
-          \throw exception_type if #a_iIdx<0 or #m_iType!=cmSTRING
+		  * @param a_iIdx The index the string function result will take in the bytecode parser.
+          @throw exception_type if #a_iIdx<0 or #m_iType!=cmSTRING
       */
       void SetIdx(int a_iIdx)
       {
@@ -245,12 +245,12 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Return Index associated with the token related data. 
+      /** @brief Return Index associated with the token related data. 
       
           In cmSTRFUNC - This is the index to a string table in the main parser.
 
-          \throw exception_type if #m_iIdx<0 or #m_iType!=cmSTRING
-          \return The index the result will take in the Bytecode calculatin array (#m_iIdx).
+          @throw exception_type if #m_iIdx<0 or #m_iType!=cmSTRING
+		  * @return The index the result will take in the Bytecode calculatin array (#m_iIdx).
       */
       int GetIdx() const
       {
@@ -261,10 +261,10 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Return the token type.
+      /** @brief Return the token type.
       
-          \return #m_iType
-          \throw nothrow
+		  * @return #m_iType
+          @throw nothrow
       */
       ECmdCode GetCode() const
       {
@@ -313,11 +313,11 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Return the address of the callback function assoziated with
+      /** @brief Return the address of the callback function assoziated with
                  function and operator tokens.
 
-          \return The pointer stored in #m_pTok.
-          \throw exception_type if token type is non of:
+		  * @return The pointer stored in #m_pTok.
+          @throw exception_type if token type is non of:
                  <ul>
                    <li>cmFUNC</li>
                    <li>cmSTRFUNC</li>
@@ -325,7 +325,7 @@ namespace qmu
                    <li>cmINFIXOP</li>
                    <li>cmOPRT_BIN</li>
                  </ul>
-          \sa ECmdCode
+          @sa ECmdCode
       */
       generic_fun_type GetFuncAddr() const
       {
@@ -336,7 +336,7 @@ namespace qmu
       /** \biref Get value of the token.
         
           Only applicable to variable and value tokens.
-          \throw exception_type if token is no value/variable token.
+          @throw exception_type if token is no value/variable token.
       */
       TBase GetVal() const
       {
@@ -349,10 +349,10 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Get address of a variable token.
+      /** @brief Get address of a variable token.
 
         Valid only if m_iType==CmdVar.
-        \throw exception_type if token is no variable token.
+        @throw exception_type if token is no variable token.
       */
       TBase* GetVar() const
       {
@@ -363,7 +363,7 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Return the number of function arguments. 
+      /** @brief Return the number of function arguments. 
 
         Valid only if m_iType==CmdFUNC.
       */
@@ -378,13 +378,13 @@ namespace qmu
       }
 
       //------------------------------------------------------------------------------
-      /** \brief Return the token identifier. 
+      /** @brief Return the token identifier. 
           
           If #m_iType is cmSTRING the token identifier is the value of the string argument
           for a string function.
-          \return #m_strTok
-          \throw nothrow
-          \sa m_strTok
+		  * @return #m_strTok
+          @throw nothrow
+          @sa m_strTok
       */
       const TString& GetAsString() const
       {
