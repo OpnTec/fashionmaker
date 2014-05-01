@@ -31,9 +31,9 @@
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
-VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
-                             const quint32 &axisP1Id, const quint32 &axisP2Id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
+                             const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
+                             const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {

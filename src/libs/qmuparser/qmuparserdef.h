@@ -47,11 +47,11 @@
 //#define QMUP_USE_OPENMP
 
 #if defined(_UNICODE)
-	/** @brief Definition of the basic parser string type. */
-	#define QMUP_STRING_TYPE std::wstring
+    /** @brief Definition of the basic parser string type. */
+    #define QMUP_STRING_TYPE std::wstring
 #else
-	/** @brief Definition of the basic parser string type. */
-	#define QMUP_STRING_TYPE std::string
+    /** @brief Definition of the basic parser string type. */
+    #define QMUP_STRING_TYPE std::string
 #endif
 
 namespace qmu
@@ -272,4 +272,3 @@ typedef qreal* ( *facfun_type ) ( const QString &, void* );
 } // end of namespace
 
 #endif
-

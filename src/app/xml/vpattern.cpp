@@ -460,7 +460,7 @@ Valentina::Units VPattern::MUnit() const
         QStringList units;
         units << "mm" << "cm" << "inch";
         QString unit = GetParametrString(element, AttrUnit);
-        switch(units.indexOf(unit))
+        switch (units.indexOf(unit))
         {
             case 0:// mm
                 return Valentina::Mm;
@@ -491,7 +491,7 @@ Pattern::Measurements VPattern::MType() const
         QString type = GetParametrString(element, AttrType);
         QStringList types;
         types << "standard" << "individual";
-        switch(types.indexOf(type))
+        switch (types.indexOf(type))
         {
             case 0:// standard
                 return Pattern::Standard;
@@ -1049,7 +1049,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
 
-                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse,
+                                       Valentina::FromFile);
             }
             catch (const VExceptionBadId &e)
             {

@@ -105,8 +105,8 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
-void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode, qreal mx,
-                           qreal my)
+void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
+                           qreal mx, qreal my)
 {
     QString name;
     switch (typeTool)

@@ -74,24 +74,24 @@ namespace qmu
       token_type ReadNextToken();
 
   private:
-
-      /** @brief Syntax codes. 
-  	
-	        The syntax codes control the syntax check done during the first time parsing of 
-          the expression string. They are flags that indicate which tokens are allowed next
-          if certain tokens are identified.
-  	  */
+      /**
+       * @brief Syntax codes.
+       *
+       * The syntax codes control the syntax check done during the first time parsing of
+       * the expression string. They are flags that indicate which tokens are allowed next
+       * if certain tokens are identified.
+       */
       enum ESynCodes
       {
-        noBO      = 1 << 0,  ///< to avoid i.e. "cos(7)(" 
+        noBO      = 1 << 0,  ///< to avoid i.e. "cos(7)("
         noBC      = 1 << 1,  ///< to avoid i.e. "sin)" or "()"
         noVAL     = 1 << 2,  ///< to avoid i.e. "tan 2" or "sin(8)3.14"
         noVAR     = 1 << 3,  ///< to avoid i.e. "sin a" or "sin(8)a"
         noARG_SEP = 1 << 4,  ///< to avoid i.e. ",," or "+," ...
-        noFUN     = 1 << 5,  ///< to avoid i.e. "sqrt cos" or "(1)sin"	
+        noFUN     = 1 << 5,  ///< to avoid i.e. "sqrt cos" or "(1)sin"
         noOPT     = 1 << 6,  ///< to avoid i.e. "(+)"
         noPOSTOP  = 1 << 7,  ///< to avoid i.e. "(5!!)" "sin!"
-	      noINFIXOP = 1 << 8,  ///< to avoid i.e. "++4" "!!4"
+        noINFIXOP = 1 << 8,  ///< to avoid i.e. "++4" "!!4"
         noEND     = 1 << 9,  ///< to avoid unexpected end of formula
         noSTR     = 1 << 10, ///< to block numeric arguments on string functions
         noASSIGN  = 1 << 11, ///< to block assignement to constant i.e. "4=7"
@@ -99,7 +99,7 @@ namespace qmu
         noELSE    = 1 << 13,
         sfSTART_OF_LINE = noOPT | noBC | noPOSTOP | noASSIGN | noIF | noELSE | noARG_SEP,
         noANY     = ~0       ///< All of he above flags set
-      };	
+      };
 
       QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
       QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader);
@@ -152,5 +152,3 @@ namespace qmu
 } // namespace qmu
 
 #endif
-
-

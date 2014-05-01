@@ -36,38 +36,38 @@ namespace qmu
 {
 struct SToken
 {
-	ECmdCode Cmd;
-	int StackPos;
+    ECmdCode Cmd;
+    int StackPos;
 
-	union
-	{
-		struct //SValData
-		{
-			qreal *ptr;
-			qreal  data;
-			qreal  data2;
-		} Val;
+    union //
+    {
+        struct //SValData
+        {
+            qreal *ptr;
+            qreal  data;
+            qreal  data2;
+        } Val;
 
-		struct //SFunData
-		{
-			// Note: generic_fun_type is merely a placeholder. The real type could be
-			//       anything between gun_type1 and fun_type9. I can't use a void
-			//       pointer due to constraints in the ANSI standard which allows
-			//       data pointers and function pointers to differ in size.
-			generic_fun_type ptr;
-			int   argc;
-			int   idx;
-		} Fun;
+        struct //SFunData
+        {
+            // Note: generic_fun_type is merely a placeholder. The real type could be
+            //       anything between gun_type1 and fun_type9. I can't use a void
+            //       pointer due to constraints in the ANSI standard which allows
+            //       data pointers and function pointers to differ in size.
+            generic_fun_type ptr;
+            int   argc;
+            int   idx;
+        } Fun;
 
-		struct //SOprtData
-		{
-			qreal *ptr;
-			int offset;
-		} Oprt;
-	};
+        struct //SOprtData
+        {
+            qreal *ptr;
+            int offset;
+        } Oprt;
+    };
 };
-  
-  
+
+
 /**
  * @brief Bytecode implementation of the Math Parser.
  *
@@ -92,7 +92,7 @@ private:
 
     /** @brief Maximum size needed for the stack. */
     std::size_t m_iMaxStackSize;
-    
+
     /** @brief The actual rpn storage. */
     rpn_type  m_vRPN;
 
@@ -103,24 +103,22 @@ public:
     QmuParserByteCode();
     QmuParserByteCode(const QmuParserByteCode &a_ByteCode);
     QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode);
-	void          Assign(const QmuParserByteCode &a_ByteCode);
-	void          AddVar(qreal *a_pVar);
-	void          AddVal(qreal a_fVal);
-	void          AddOp(ECmdCode a_Oprt);
-	void          AddIfElse(ECmdCode a_Oprt);
-	void          AddAssignOp(qreal *a_pVar);
-	void          AddFun(generic_fun_type a_pFun, int a_iArgc);
-	void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
-	void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
-	void          EnableOptimizer(bool bStat);
-	void          Finalize();
-	void          clear();
-	std::size_t   GetMaxStackSize() const;
-	std::size_t   GetSize() const;
+    void          Assign(const QmuParserByteCode &a_ByteCode);
+    void          AddVar(qreal *a_pVar);
+    void          AddVal(qreal a_fVal);
+    void          AddOp(ECmdCode a_Oprt);
+    void          AddIfElse(ECmdCode a_Oprt);
+    void          AddAssignOp(qreal *a_pVar);
+    void          AddFun(generic_fun_type a_pFun, int a_iArgc);
+    void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
+    void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
+    void          EnableOptimizer(bool bStat);
+    void          Finalize();
+    void          clear();
+    std::size_t   GetMaxStackSize() const;
+    std::size_t   GetSize() const;
     const SToken* GetBase() const;
-	void          AsciiDump();
+    void          AsciiDump();
 };
 } // namespace qmu
 #endif
-
-

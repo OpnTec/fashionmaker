@@ -174,7 +174,7 @@ QString VApplication::translationsPath() const
 
 void VApplication::InitLineWidth()
 {
-    switch(_patternUnit)
+    switch (_patternUnit)
     {
         case Valentina::Mm:
             _widthMainLine = DefWidth;

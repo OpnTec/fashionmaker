@@ -37,23 +37,23 @@
 class VMeasurement
 {
 public:
-                   /**
-                    * @brief VStandardTableRow create empty row
-                    */
-                   VMeasurement();
-                   /**
-                    * @brief VStandardTableRow create row
-                    * @param base value in base size and growth
-                    * @param ksize increment in sizes
-                    * @param kgrowth increment in growths
-                    * @param description description of increment
-                    */
-                   VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
-                                const QString &gui_text = QString(), const QString &number = QString(), 
-                                const QString &TagName = QString());
-                   VMeasurement(const qreal &base, const QString &gui_text = QString(),
-                                const QString &number = QString(), const QString &TagName = QString());
-                   ~VMeasurement(){}
+    /**
+     * @brief VStandardTableRow create empty row
+     */
+    VMeasurement();
+    /**
+     * @brief VStandardTableRow create row
+     * @param base value in base size and growth
+     * @param ksize increment in sizes
+     * @param kgrowth increment in growths
+     * @param description description of increment
+     */
+    VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
+                 const QString &gui_text = QString(), const QString &number = QString(),
+                 const QString &TagName = QString());
+    VMeasurement(const qreal &base, const QString &gui_text = QString(),
+                 const QString &number = QString(), const QString &TagName = QString());
+    ~VMeasurement(){}
     /**
      * @brief GetBase return value in base size and growth
      * @return value

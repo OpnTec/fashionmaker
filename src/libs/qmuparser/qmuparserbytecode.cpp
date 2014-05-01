@@ -35,30 +35,30 @@
 
 namespace qmu
 {
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Bytecode default constructor.
  */
 QmuParserByteCode::QmuParserByteCode()
-	:m_iStackPos(0), m_iMaxStackSize(0), m_vRPN(), m_bEnableOptimizer(true)
+    :m_iStackPos(0), m_iMaxStackSize(0), m_vRPN(), m_bEnableOptimizer(true)
 {
-	m_vRPN.reserve(50);
+    m_vRPN.reserve(50);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Copy constructor.
  *
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
 QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
-	:m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
-	  m_bEnableOptimizer(true)
+    :m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
+      m_bEnableOptimizer(true)
 {
-	Assign(a_ByteCode);
+    Assign(a_ByteCode);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Assignment operator.
  *
@@ -66,17 +66,17 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  */
 QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
 {
-	Assign(a_ByteCode);
-	return *this;
+    Assign(a_ByteCode);
+    return *this;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::EnableOptimizer(bool bStat)
 {
-	m_bEnableOptimizer = bStat;
+    m_bEnableOptimizer = bStat;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Copy state of another object to this.
  *
@@ -84,17 +84,17 @@ void QmuParserByteCode::EnableOptimizer(bool bStat)
  */
 void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 {
-	if (this==&a_ByteCode)
-	{
-		return;
-	}
+    if (this==&a_ByteCode)
+    {
+        return;
+    }
 
-	m_iStackPos = a_ByteCode.m_iStackPos;
-	m_vRPN = a_ByteCode.m_vRPN;
-	m_iMaxStackSize = a_ByteCode.m_iMaxStackSize;
+    m_iStackPos = a_ByteCode.m_iStackPos;
+    m_vRPN = a_ByteCode.m_vRPN;
+    m_iMaxStackSize = a_ByteCode.m_iMaxStackSize;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add a Variable pointer to bytecode.
  * @param a_pVar Pointer to be added.
@@ -102,19 +102,19 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
  */
 void QmuParserByteCode::AddVar(qreal *a_pVar)
 {
-	++m_iStackPos;
-	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    ++m_iStackPos;
+    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
-	// optimization does not apply
-	SToken tok;
-	tok.Cmd       = cmVAR;
-	tok.Val.ptr   = a_pVar;
-	tok.Val.data  = 1;
-	tok.Val.data2 = 0;
-	m_vRPN.push_back(tok);
+    // optimization does not apply
+    SToken tok;
+    tok.Cmd       = cmVAR;
+    tok.Val.ptr   = a_pVar;
+    tok.Val.data  = 1;
+    tok.Val.data2 = 0;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add a Variable pointer to bytecode.
  *
@@ -130,159 +130,159 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
  */
 void QmuParserByteCode::AddVal(qreal a_fVal)
 {
-	++m_iStackPos;
-	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    ++m_iStackPos;
+    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
-	// If optimization does not apply
-	SToken tok;
-	tok.Cmd = cmVAL;
-	tok.Val.ptr   = NULL;
-	tok.Val.data  = 0;
-	tok.Val.data2 = a_fVal;
-	m_vRPN.push_back(tok);
+    // If optimization does not apply
+    SToken tok;
+    tok.Cmd = cmVAL;
+    tok.Val.ptr   = NULL;
+    tok.Val.data  = 0;
+    tok.Val.data2 = a_fVal;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
-	std::size_t sz = m_vRPN.size();
-	qreal &x = m_vRPN[sz-2].Val.data2,
-		  &y = m_vRPN[sz-1].Val.data2;
-	switch (a_Oprt)
-	{
-		case cmLAND:
-			x = static_cast<int>(x) && static_cast<int>(y);
-			m_vRPN.pop_back();
-			break;
-		case cmLOR:
-			x = static_cast<int>(x) || static_cast<int>(y);
-			m_vRPN.pop_back();
-			break;
-		case cmLT:
-			x = x < y;
-			m_vRPN.pop_back();
-			break;
-		case cmGT:
-			x = x > y;
-			m_vRPN.pop_back();
-			break;
-		case cmLE:
-			x = x <= y;
-			m_vRPN.pop_back();
-			break;
-		case cmGE:
-			x = x >= y;
-			m_vRPN.pop_back();
-			break;
-		case cmNEQ:
-			x = (qFuzzyCompare(x, y) == false);
-			m_vRPN.pop_back();
-			break;
-		case cmEQ:
-			x = qFuzzyCompare(x, y);
-			m_vRPN.pop_back();
-			break;
-		case cmADD:
-			x = x + y;
-			m_vRPN.pop_back();
-			break;
-		case cmSUB:
-			x = x - y;
-			m_vRPN.pop_back();
-			break;
-		case cmMUL:
-			x = x * y;
-			m_vRPN.pop_back();
-			break;
-		case cmDIV:
-		#if defined(MUP_MATH_EXCEPTIONS)
-			if (y==0)
-			{
-				throw ParserError(ecDIV_BY_ZERO, "0");
-			}
-		#endif
-			x = x / y;
-			m_vRPN.pop_back();
-			break;
-		case cmPOW:
-			x = qPow(x, y);
-			m_vRPN.pop_back();
-			break;
-		case cmASSIGN:
-			Q_UNREACHABLE();
-			break;
-		case cmBO:
-			Q_UNREACHABLE();
-			break;
-		case cmBC:
-			Q_UNREACHABLE();
-			break;
-		case cmIF:
-			Q_UNREACHABLE();
-			break;
-		case cmELSE:
-			Q_UNREACHABLE();
-			break;
-		case cmENDIF:
-			Q_UNREACHABLE();
-			break;
-		case cmARG_SEP:
-			Q_UNREACHABLE();
-			break;
-		case cmVAR:
-			Q_UNREACHABLE();
-			break;
-		case cmVAL:
-			Q_UNREACHABLE();
-			break;
-		case cmVARPOW2:
-			Q_UNREACHABLE();
-			break;
-		case cmVARPOW3:
-			Q_UNREACHABLE();
-			break;
-		case cmVARPOW4:
-			Q_UNREACHABLE();
-			break;
-		case cmVARMUL:
-			Q_UNREACHABLE();
-			break;
-		case cmPOW2:
-			Q_UNREACHABLE();
-			break;
-		case cmFUNC:
-			Q_UNREACHABLE();
-			break;
-		case cmFUNC_STR:
-			Q_UNREACHABLE();
-			break;
-		case cmFUNC_BULK:
-			Q_UNREACHABLE();
-			break;
-		case cmSTRING:
-			Q_UNREACHABLE();
-			break;
-		case cmOPRT_BIN:
-			Q_UNREACHABLE();
-			break;
-		case cmOPRT_POSTFIX:
-			Q_UNREACHABLE();
-			break;
-		case cmOPRT_INFIX:
-			Q_UNREACHABLE();
-			break;
-		case cmEND:
-			Q_UNREACHABLE();
-			break;
-		case cmUNKNOWN:
-			Q_UNREACHABLE();
-			break;
-		default:
-			break;
-	} // switch opcode
+    std::size_t sz = m_vRPN.size();
+    qreal &x = m_vRPN[sz-2].Val.data2,
+          &y = m_vRPN[sz-1].Val.data2;
+    switch (a_Oprt)
+    {
+        case cmLAND:
+            x = static_cast<int>(x) && static_cast<int>(y);
+            m_vRPN.pop_back();
+            break;
+        case cmLOR:
+            x = static_cast<int>(x) || static_cast<int>(y);
+            m_vRPN.pop_back();
+            break;
+        case cmLT:
+            x = x < y;
+            m_vRPN.pop_back();
+            break;
+        case cmGT:
+            x = x > y;
+            m_vRPN.pop_back();
+            break;
+        case cmLE:
+            x = x <= y;
+            m_vRPN.pop_back();
+            break;
+        case cmGE:
+            x = x >= y;
+            m_vRPN.pop_back();
+            break;
+        case cmNEQ:
+            x = (qFuzzyCompare(x, y) == false);
+            m_vRPN.pop_back();
+            break;
+        case cmEQ:
+            x = qFuzzyCompare(x, y);
+            m_vRPN.pop_back();
+            break;
+        case cmADD:
+            x = x + y;
+            m_vRPN.pop_back();
+            break;
+        case cmSUB:
+            x = x - y;
+            m_vRPN.pop_back();
+            break;
+        case cmMUL:
+            x = x * y;
+            m_vRPN.pop_back();
+            break;
+        case cmDIV:
+        #if defined(MUP_MATH_EXCEPTIONS)
+            if (y==0)
+            {
+                throw ParserError(ecDIV_BY_ZERO, "0");
+            }
+        #endif
+            x = x / y;
+            m_vRPN.pop_back();
+            break;
+        case cmPOW:
+            x = qPow(x, y);
+            m_vRPN.pop_back();
+            break;
+        case cmASSIGN:
+            Q_UNREACHABLE();
+            break;
+        case cmBO:
+            Q_UNREACHABLE();
+            break;
+        case cmBC:
+            Q_UNREACHABLE();
+            break;
+        case cmIF:
+            Q_UNREACHABLE();
+            break;
+        case cmELSE:
+            Q_UNREACHABLE();
+            break;
+        case cmENDIF:
+            Q_UNREACHABLE();
+            break;
+        case cmARG_SEP:
+            Q_UNREACHABLE();
+            break;
+        case cmVAR:
+            Q_UNREACHABLE();
+            break;
+        case cmVAL:
+            Q_UNREACHABLE();
+            break;
+        case cmVARPOW2:
+            Q_UNREACHABLE();
+            break;
+        case cmVARPOW3:
+            Q_UNREACHABLE();
+            break;
+        case cmVARPOW4:
+            Q_UNREACHABLE();
+            break;
+        case cmVARMUL:
+            Q_UNREACHABLE();
+            break;
+        case cmPOW2:
+            Q_UNREACHABLE();
+            break;
+        case cmFUNC:
+            Q_UNREACHABLE();
+            break;
+        case cmFUNC_STR:
+            Q_UNREACHABLE();
+            break;
+        case cmFUNC_BULK:
+            Q_UNREACHABLE();
+            break;
+        case cmSTRING:
+            Q_UNREACHABLE();
+            break;
+        case cmOPRT_BIN:
+            Q_UNREACHABLE();
+            break;
+        case cmOPRT_POSTFIX:
+            Q_UNREACHABLE();
+            break;
+        case cmOPRT_INFIX:
+            Q_UNREACHABLE();
+            break;
+        case cmEND:
+            Q_UNREACHABLE();
+            break;
+        case cmUNKNOWN:
+            Q_UNREACHABLE();
+            break;
+        default:
+            break;
+    } // switch opcode
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add an operator identifier to bytecode.
  *
@@ -296,254 +296,254 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
  */
 void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 {
-	bool bOptimized = false;
+    bool bOptimized = false;
 
-	if (m_bEnableOptimizer)
-	{
-		std::size_t sz = m_vRPN.size();
+    if (m_bEnableOptimizer)
+    {
+        std::size_t sz = m_vRPN.size();
 
-		// Check for foldable constants like:
-		//   cmVAL cmVAL cmADD
-		// where cmADD can stand fopr any binary operator applied to
-		// two constant values.
-		if (sz>=2 && m_vRPN[sz-2].Cmd == cmVAL && m_vRPN[sz-1].Cmd == cmVAL)
-		{
-			ConstantFolding(a_Oprt);
-			bOptimized = true;
-		}
-		else
-		{
-			switch(a_Oprt)
-			{
-				case  cmPOW:
-					// Optimization for ploynomials of low order
-					if (m_vRPN[sz-2].Cmd == cmVAR && m_vRPN[sz-1].Cmd == cmVAL)
-					{
-						if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 2))
-						{
-							m_vRPN[sz-2].Cmd = cmVARPOW2;
-						}
-						else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 3))
-						{
-							m_vRPN[sz-2].Cmd = cmVARPOW3;
-						}
-						else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 4))
-						{
-							m_vRPN[sz-2].Cmd = cmVARPOW4;
-						}
-						else
-						{
-							break;
-						}
-						m_vRPN.pop_back();
-						bOptimized = true;
-					}
-					break;
+        // Check for foldable constants like:
+        //   cmVAL cmVAL cmADD
+        // where cmADD can stand fopr any binary operator applied to
+        // two constant values.
+        if (sz>=2 && m_vRPN[sz-2].Cmd == cmVAL && m_vRPN[sz-1].Cmd == cmVAL)
+        {
+            ConstantFolding(a_Oprt);
+            bOptimized = true;
+        }
+        else
+        {
+            switch (a_Oprt)
+            {
+                case cmPOW:
+                    // Optimization for ploynomials of low order
+                    if (m_vRPN[sz-2].Cmd == cmVAR && m_vRPN[sz-1].Cmd == cmVAL)
+                    {
+                        if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 2))
+                        {
+                            m_vRPN[sz-2].Cmd = cmVARPOW2;
+                        }
+                        else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 3))
+                        {
+                            m_vRPN[sz-2].Cmd = cmVARPOW3;
+                        }
+                        else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 4))
+                        {
+                            m_vRPN[sz-2].Cmd = cmVARPOW4;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
+                    break;
 
-				case  cmSUB:
-				case  cmADD:
-					// Simple optimization based on pattern recognition for a shitload of different
-					// bytecode combinations of addition/subtraction
-					if ( (m_vRPN[sz-1].Cmd == cmVAR    && m_vRPN[sz-2].Cmd == cmVAL)    ||
-						 (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVAR)    ||
-						 (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVARMUL) ||
-						 (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAL)    ||
-						 (m_vRPN[sz-1].Cmd == cmVAR    && m_vRPN[sz-2].Cmd == cmVAR &&
-						  m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
-						 (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVARMUL
-						  && m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
-						 (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAR &&
-						  m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
-						 (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVARMUL &&
-						  m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) )
-					{
-						assert( (m_vRPN[sz-2].Val.ptr==NULL && m_vRPN[sz-1].Val.ptr!=NULL) ||
-						(m_vRPN[sz-2].Val.ptr!=NULL && m_vRPN[sz-1].Val.ptr==NULL) ||
-						(m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
+                case cmSUB:
+                case cmADD:
+                    // Simple optimization based on pattern recognition for a shitload of different
+                    // bytecode combinations of addition/subtraction
+                    if ( (m_vRPN[sz-1].Cmd == cmVAR    && m_vRPN[sz-2].Cmd == cmVAL)    ||
+                         (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVAR)    ||
+                         (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVARMUL) ||
+                         (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAL)    ||
+                         (m_vRPN[sz-1].Cmd == cmVAR    && m_vRPN[sz-2].Cmd == cmVAR &&
+                          m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
+                         (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVARMUL
+                          && m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
+                         (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAR &&
+                          m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) ||
+                         (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVARMUL &&
+                          m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) )
+                    {
+                        assert( (m_vRPN[sz-2].Val.ptr==NULL && m_vRPN[sz-1].Val.ptr!=NULL) ||
+                        (m_vRPN[sz-2].Val.ptr!=NULL && m_vRPN[sz-1].Val.ptr==NULL) ||
+                        (m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
 
-						m_vRPN[sz-2].Cmd = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
-								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));    // variable
-						m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data2; // offset
-						m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data;  // multiplikatior
-						m_vRPN.pop_back();
-						bOptimized = true;
-					}
-					break;
-				case  cmMUL:
-					if ( (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVAL) ||
-					(m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVAR) )
-					{
-						m_vRPN[sz-2].Cmd        = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>(
-								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
-						m_vRPN[sz-2].Val.data   = m_vRPN[sz-2].Val.data2 + m_vRPN[sz-1].Val.data2;
-						m_vRPN[sz-2].Val.data2  = 0;
-						m_vRPN.pop_back();
-						bOptimized = true;
-					}
-					else if ( (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVARMUL) ||
-					(m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAL) )
-					{
-						// Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
-						m_vRPN[sz-2].Cmd     = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
-								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
-						if (m_vRPN[sz-1].Cmd == cmVAL)
-						{
-							m_vRPN[sz-2].Val.data  *= m_vRPN[sz-1].Val.data2;
-							m_vRPN[sz-2].Val.data2 *= m_vRPN[sz-1].Val.data2;
-						}
-						else
-						{
-							m_vRPN[sz-2].Val.data  = m_vRPN[sz-1].Val.data  * m_vRPN[sz-2].Val.data2;
-							m_vRPN[sz-2].Val.data2 = m_vRPN[sz-1].Val.data2 * m_vRPN[sz-2].Val.data2;
-						}
-						m_vRPN.pop_back();
-						bOptimized = true;
-					}
-					else if (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVAR &&
-					m_vRPN[sz-1].Val.ptr == m_vRPN[sz-2].Val.ptr)
-					{
-						// Optimization: a*a -> a^2
-						m_vRPN[sz-2].Cmd = cmVARPOW2;
-						m_vRPN.pop_back();
-						bOptimized = true;
-					}
-					break;
-				case cmDIV:
-				if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL &&
-						(qFuzzyCompare(m_vRPN[sz-1].Val.data2+1, 1+0)==false))
-				{
-					// Optimization: 4*a/2 -> 2*a
-					m_vRPN[sz-2].Val.data  /= m_vRPN[sz-1].Val.data2;
-					m_vRPN[sz-2].Val.data2 /= m_vRPN[sz-1].Val.data2;
-					m_vRPN.pop_back();
-					bOptimized = true;
-				}
-				break;
-				case cmLE:
-					Q_UNREACHABLE();
-					break;
-				case cmGE:
-					Q_UNREACHABLE();
-					break;
-				case cmNEQ:
-					Q_UNREACHABLE();
-					break;
-				case cmEQ:
-					Q_UNREACHABLE();
-					break;
-				case cmLT:
-					Q_UNREACHABLE();
-					break;
-				case cmGT:
-					Q_UNREACHABLE();
-					break;
-				case cmLAND:
-					Q_UNREACHABLE();
-					break;
-				case cmLOR:
-					Q_UNREACHABLE();
-					break;
-				case cmASSIGN:
-					Q_UNREACHABLE();
-					break;
-				case cmBO:
-					Q_UNREACHABLE();
-					break;
-				case cmBC:
-					Q_UNREACHABLE();
-					break;
-				case cmIF:
-					Q_UNREACHABLE();
-					break;
-				case cmELSE:
-					Q_UNREACHABLE();
-					break;
-				case cmENDIF:
-					Q_UNREACHABLE();
-					break;
-				case cmARG_SEP:
-					Q_UNREACHABLE();
-					break;
-				case cmVAR:
-					Q_UNREACHABLE();
-					break;
-				case cmVAL:
-					Q_UNREACHABLE();
-					break;
-				case cmVARPOW2:
-					Q_UNREACHABLE();
-					break;
-				case cmVARPOW3:
-					Q_UNREACHABLE();
-					break;
-				case cmVARPOW4:
-					Q_UNREACHABLE();
-					break;
-				case cmVARMUL:
-					Q_UNREACHABLE();
-					break;
-				case cmPOW2:
-					Q_UNREACHABLE();
-					break;
-				case cmFUNC:
-					Q_UNREACHABLE();
-					break;
-				case cmFUNC_STR:
-					Q_UNREACHABLE();
-					break;
-				case cmFUNC_BULK:
-					Q_UNREACHABLE();
-					break;
-				case cmSTRING:
-					Q_UNREACHABLE();
-					break;
-				case cmOPRT_BIN:
-					Q_UNREACHABLE();
-					break;
-				case cmOPRT_POSTFIX:
-					Q_UNREACHABLE();
-					break;
-				case cmOPRT_INFIX:
-					Q_UNREACHABLE();
-					break;
-				case cmEND:
-					Q_UNREACHABLE();
-					break;
-				case cmUNKNOWN:
-					Q_UNREACHABLE();
-					break;
-				default:
-					break;
+                        m_vRPN[sz-2].Cmd = cmVARMUL;
+                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));    // variable
+                        m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data2; // offset
+                        m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data;  // multiplikatior
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
+                    break;
+                case cmMUL:
+                    if ( (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVAL) ||
+                    (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVAR) )
+                    {
+                        m_vRPN[sz-2].Cmd        = cmVARMUL;
+                        m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>(
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
+                        m_vRPN[sz-2].Val.data   = m_vRPN[sz-2].Val.data2 + m_vRPN[sz-1].Val.data2;
+                        m_vRPN[sz-2].Val.data2  = 0;
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
+                    else if ( (m_vRPN[sz-1].Cmd == cmVAL    && m_vRPN[sz-2].Cmd == cmVARMUL) ||
+                    (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVAL) )
+                    {
+                        // Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
+                        m_vRPN[sz-2].Cmd     = cmVARMUL;
+                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
+                        if (m_vRPN[sz-1].Cmd == cmVAL)
+                        {
+                            m_vRPN[sz-2].Val.data  *= m_vRPN[sz-1].Val.data2;
+                            m_vRPN[sz-2].Val.data2 *= m_vRPN[sz-1].Val.data2;
+                        }
+                        else
+                        {
+                            m_vRPN[sz-2].Val.data  = m_vRPN[sz-1].Val.data  * m_vRPN[sz-2].Val.data2;
+                            m_vRPN[sz-2].Val.data2 = m_vRPN[sz-1].Val.data2 * m_vRPN[sz-2].Val.data2;
+                        }
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
+                    else if (m_vRPN[sz-1].Cmd == cmVAR && m_vRPN[sz-2].Cmd == cmVAR &&
+                    m_vRPN[sz-1].Val.ptr == m_vRPN[sz-2].Val.ptr)
+                    {
+                        // Optimization: a*a -> a^2
+                        m_vRPN[sz-2].Cmd = cmVARPOW2;
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
+                    break;
+                case cmDIV:
+                if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL &&
+                        (qFuzzyCompare(m_vRPN[sz-1].Val.data2+1, 1+0)==false))
+                {
+                    // Optimization: 4*a/2 -> 2*a
+                    m_vRPN[sz-2].Val.data  /= m_vRPN[sz-1].Val.data2;
+                    m_vRPN[sz-2].Val.data2 /= m_vRPN[sz-1].Val.data2;
+                    m_vRPN.pop_back();
+                    bOptimized = true;
+                }
+                break;
+                case cmLE:
+                    Q_UNREACHABLE();
+                    break;
+                case cmGE:
+                    Q_UNREACHABLE();
+                    break;
+                case cmNEQ:
+                    Q_UNREACHABLE();
+                    break;
+                case cmEQ:
+                    Q_UNREACHABLE();
+                    break;
+                case cmLT:
+                    Q_UNREACHABLE();
+                    break;
+                case cmGT:
+                    Q_UNREACHABLE();
+                    break;
+                case cmLAND:
+                    Q_UNREACHABLE();
+                    break;
+                case cmLOR:
+                    Q_UNREACHABLE();
+                    break;
+                case cmASSIGN:
+                    Q_UNREACHABLE();
+                    break;
+                case cmBO:
+                    Q_UNREACHABLE();
+                    break;
+                case cmBC:
+                    Q_UNREACHABLE();
+                    break;
+                case cmIF:
+                    Q_UNREACHABLE();
+                    break;
+                case cmELSE:
+                    Q_UNREACHABLE();
+                    break;
+                case cmENDIF:
+                    Q_UNREACHABLE();
+                    break;
+                case cmARG_SEP:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVAR:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVAL:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVARPOW2:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVARPOW3:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVARPOW4:
+                    Q_UNREACHABLE();
+                    break;
+                case cmVARMUL:
+                    Q_UNREACHABLE();
+                    break;
+                case cmPOW2:
+                    Q_UNREACHABLE();
+                    break;
+                case cmFUNC:
+                    Q_UNREACHABLE();
+                    break;
+                case cmFUNC_STR:
+                    Q_UNREACHABLE();
+                    break;
+                case cmFUNC_BULK:
+                    Q_UNREACHABLE();
+                    break;
+                case cmSTRING:
+                    Q_UNREACHABLE();
+                    break;
+                case cmOPRT_BIN:
+                    Q_UNREACHABLE();
+                    break;
+                case cmOPRT_POSTFIX:
+                    Q_UNREACHABLE();
+                    break;
+                case cmOPRT_INFIX:
+                    Q_UNREACHABLE();
+                    break;
+                case cmEND:
+                    Q_UNREACHABLE();
+                    break;
+                case cmUNKNOWN:
+                    Q_UNREACHABLE();
+                    break;
+                default:
+                    break;
 
-			} // switch a_Oprt
-		}
-	}
+            } // switch a_Oprt
+        }
+    }
 
-	// If optimization can't be applied just write the value
-	if (!bOptimized)
-	{
-		--m_iStackPos;
-		SToken tok;
-		tok.Cmd = a_Oprt;
-		m_vRPN.push_back(tok);
-	}
+    // If optimization can't be applied just write the value
+    if (bOptimized == false)
+    {
+        --m_iStackPos;
+        SToken tok;
+        tok.Cmd = a_Oprt;
+        m_vRPN.push_back(tok);
+    }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
 {
-	SToken tok;
-	tok.Cmd = a_Oprt;
-	m_vRPN.push_back(tok);
+    SToken tok;
+    tok.Cmd = a_Oprt;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add an assignement operator
  *
@@ -557,15 +557,15 @@ void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
  */
 void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
 {
-	--m_iStackPos;
+    --m_iStackPos;
 
-	SToken tok;
-	tok.Cmd = cmASSIGN;
-	tok.Val.ptr = a_pVar;
-	m_vRPN.push_back(tok);
+    SToken tok;
+    tok.Cmd = cmASSIGN;
+    tok.Val.ptr = a_pVar;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add function to bytecode.
  *
@@ -574,25 +574,25 @@ void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
  */
 void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
 {
-	if (a_iArgc>=0)
-	{
-		m_iStackPos = m_iStackPos - a_iArgc + 1;
-	}
-	else
-	{
-		// function with unlimited number of arguments
-		m_iStackPos = m_iStackPos + a_iArgc + 1;
-	}
-	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    if (a_iArgc>=0)
+    {
+        m_iStackPos = m_iStackPos - a_iArgc + 1;
+    }
+    else
+    {
+        // function with unlimited number of arguments
+        m_iStackPos = m_iStackPos + a_iArgc + 1;
+    }
+    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
-	SToken tok;
-	tok.Cmd = cmFUNC;
-	tok.Fun.argc = a_iArgc;
-	tok.Fun.ptr = a_pFun;
-	m_vRPN.push_back(tok);
+    SToken tok;
+    tok.Cmd = cmFUNC;
+    tok.Fun.argc = a_iArgc;
+    tok.Fun.ptr = a_pFun;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add a bulk function to bytecode.
  *
@@ -601,17 +601,17 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
  */
 void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
 {
-	m_iStackPos = m_iStackPos - a_iArgc + 1;
-	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iStackPos = m_iStackPos - a_iArgc + 1;
+    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
-	SToken tok;
-	tok.Cmd = cmFUNC_BULK;
-	tok.Fun.argc = a_iArgc;
-	tok.Fun.ptr = a_pFun;
-	m_vRPN.push_back(tok);
+    SToken tok;
+    tok.Cmd = cmFUNC_BULK;
+    tok.Fun.argc = a_iArgc;
+    tok.Fun.ptr = a_pFun;
+    m_vRPN.push_back(tok);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add Strung function entry to the parser bytecode.
  * @throw nothrow
@@ -621,19 +621,19 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
  */
 void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx)
 {
-	m_iStackPos = m_iStackPos - a_iArgc + 1;
+    m_iStackPos = m_iStackPos - a_iArgc + 1;
 
-	SToken tok;
-	tok.Cmd = cmFUNC_STR;
-	tok.Fun.argc = a_iArgc;
-	tok.Fun.idx = a_iIdx;
-	tok.Fun.ptr = a_pFun;
-	m_vRPN.push_back(tok);
+    SToken tok;
+    tok.Cmd = cmFUNC_STR;
+    tok.Fun.argc = a_iArgc;
+    tok.Fun.idx = a_iIdx;
+    tok.Fun.ptr = a_pFun;
+    m_vRPN.push_back(tok);
 
-	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add end marker to bytecode.
  *
@@ -641,164 +641,164 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
  */
 void QmuParserByteCode::Finalize()
 {
-	SToken tok;
-	tok.Cmd = cmEND;
-	m_vRPN.push_back(tok);
-	rpn_type(m_vRPN).swap(m_vRPN);     // shrink bytecode vector to fit
+    SToken tok;
+    tok.Cmd = cmEND;
+    m_vRPN.push_back(tok);
+    rpn_type(m_vRPN).swap(m_vRPN);     // shrink bytecode vector to fit
 
-	// Determine the if-then-else jump offsets
-	QStack<int> stIf, stElse;
-	int idx;
-	for (int i=0; i<m_vRPN.size(); ++i)
-	{
-		switch(m_vRPN[i].Cmd)
-		{
-			case cmIF:
-				stIf.push(i);
-				break;
-			case  cmELSE:
-				stElse.push(i);
-				idx = stIf.pop();
-				m_vRPN[idx].Oprt.offset = i - idx;
-				break;
-			case cmENDIF:
-				idx = stElse.pop();
-				m_vRPN[idx].Oprt.offset = i - idx;
-				break;
-			case cmLE:
-				Q_UNREACHABLE();
-				break;
-			case cmGE:
-				Q_UNREACHABLE();
-				break;
-			case cmNEQ:
-				Q_UNREACHABLE();
-				break;
-			case cmEQ:
-				Q_UNREACHABLE();
-				break;
-			case cmLT:
-				Q_UNREACHABLE();
-				break;
-			case cmGT:
-				Q_UNREACHABLE();
-				break;
-			case cmADD:
-				Q_UNREACHABLE();
-				break;
-			case cmSUB:
-				Q_UNREACHABLE();
-				break;
-			case cmMUL:
-				Q_UNREACHABLE();
-				break;
-			case cmDIV:
-				Q_UNREACHABLE();
-				break;
-			case cmPOW:
-				Q_UNREACHABLE();
-				break;
-			case cmLAND:
-				Q_UNREACHABLE();
-				break;
-			case cmLOR:
-				Q_UNREACHABLE();
-				break;
-			case cmASSIGN:
-				Q_UNREACHABLE();
-				break;
-			case cmBO:
-				Q_UNREACHABLE();
-				break;
-			case cmBC:
-				Q_UNREACHABLE();
-				break;
-			case cmARG_SEP:
-				Q_UNREACHABLE();
-				break;
-			case cmVAR:
-				Q_UNREACHABLE();
-				break;
-			case cmVAL:
-				Q_UNREACHABLE();
-				break;
-			case cmVARPOW2:
-				Q_UNREACHABLE();
-				break;
-			case cmVARPOW3:
-				Q_UNREACHABLE();
-				break;
-			case cmVARPOW4:
-				Q_UNREACHABLE();
-				break;
-			case cmVARMUL:
-				Q_UNREACHABLE();
-				break;
-			case cmPOW2:
-				Q_UNREACHABLE();
-				break;
-			case cmFUNC:
-				Q_UNREACHABLE();
-				break;
-			case cmFUNC_STR:
-				Q_UNREACHABLE();
-				break;
-			case cmFUNC_BULK:
-				Q_UNREACHABLE();
-				break;
-			case cmSTRING:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_BIN:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_POSTFIX:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_INFIX:
-				Q_UNREACHABLE();
-				break;
-			case cmEND:
-				Q_UNREACHABLE();
-				break;
-			case cmUNKNOWN:
-				Q_UNREACHABLE();
-				break;
-			default:
-				break;
-		}
-	}
+    // Determine the if-then-else jump offsets
+    QStack<int> stIf, stElse;
+    int idx;
+    for (int i=0; i<m_vRPN.size(); ++i)
+    {
+        switch (m_vRPN[i].Cmd)
+        {
+            case cmIF:
+                stIf.push(i);
+                break;
+            case cmELSE:
+                stElse.push(i);
+                idx = stIf.pop();
+                m_vRPN[idx].Oprt.offset = i - idx;
+                break;
+            case cmENDIF:
+                idx = stElse.pop();
+                m_vRPN[idx].Oprt.offset = i - idx;
+                break;
+            case cmLE:
+                Q_UNREACHABLE();
+                break;
+            case cmGE:
+                Q_UNREACHABLE();
+                break;
+            case cmNEQ:
+                Q_UNREACHABLE();
+                break;
+            case cmEQ:
+                Q_UNREACHABLE();
+                break;
+            case cmLT:
+                Q_UNREACHABLE();
+                break;
+            case cmGT:
+                Q_UNREACHABLE();
+                break;
+            case cmADD:
+                Q_UNREACHABLE();
+                break;
+            case cmSUB:
+                Q_UNREACHABLE();
+                break;
+            case cmMUL:
+                Q_UNREACHABLE();
+                break;
+            case cmDIV:
+                Q_UNREACHABLE();
+                break;
+            case cmPOW:
+                Q_UNREACHABLE();
+                break;
+            case cmLAND:
+                Q_UNREACHABLE();
+                break;
+            case cmLOR:
+                Q_UNREACHABLE();
+                break;
+            case cmASSIGN:
+                Q_UNREACHABLE();
+                break;
+            case cmBO:
+                Q_UNREACHABLE();
+                break;
+            case cmBC:
+                Q_UNREACHABLE();
+                break;
+            case cmARG_SEP:
+                Q_UNREACHABLE();
+                break;
+            case cmVAR:
+                Q_UNREACHABLE();
+                break;
+            case cmVAL:
+                Q_UNREACHABLE();
+                break;
+            case cmVARPOW2:
+                Q_UNREACHABLE();
+                break;
+            case cmVARPOW3:
+                Q_UNREACHABLE();
+                break;
+            case cmVARPOW4:
+                Q_UNREACHABLE();
+                break;
+            case cmVARMUL:
+                Q_UNREACHABLE();
+                break;
+            case cmPOW2:
+                Q_UNREACHABLE();
+                break;
+            case cmFUNC:
+                Q_UNREACHABLE();
+                break;
+            case cmFUNC_STR:
+                Q_UNREACHABLE();
+                break;
+            case cmFUNC_BULK:
+                Q_UNREACHABLE();
+                break;
+            case cmSTRING:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_BIN:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_POSTFIX:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_INFIX:
+                Q_UNREACHABLE();
+                break;
+            case cmEND:
+                Q_UNREACHABLE();
+                break;
+            case cmUNKNOWN:
+                Q_UNREACHABLE();
+                break;
+            default:
+                break;
+        }
+    }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 const SToken* QmuParserByteCode::GetBase() const
 {
-	if (m_vRPN.size()==0)
-	{
-		throw QmuParserError(ecINTERNAL_ERROR);
-	}
-	else
-	{
-		return &m_vRPN[0];
-	}
+    if (m_vRPN.size()==0)
+    {
+        throw QmuParserError(ecINTERNAL_ERROR);
+    }
+    else
+    {
+        return &m_vRPN[0];
+    }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 std::size_t QmuParserByteCode::GetMaxStackSize() const
 {
-	return m_iMaxStackSize+1;
+    return m_iMaxStackSize+1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the number of entries in the bytecode.
  */
 std::size_t QmuParserByteCode::GetSize() const
 {
-	return m_vRPN.size();
+    return m_vRPN.size();
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Delete the bytecode.
  *
@@ -809,145 +809,145 @@ std::size_t QmuParserByteCode::GetSize() const
  */
 void QmuParserByteCode::clear()
 {
-	m_vRPN.clear();
-	m_iStackPos = 0;
-	m_iMaxStackSize = 0;
+    m_vRPN.clear();
+    m_iStackPos = 0;
+    m_iMaxStackSize = 0;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Dump bytecode (for debugging only!).
  */
 void QmuParserByteCode::AsciiDump()
 {
-	if (!m_vRPN.size())
-	{
-		qDebug() << "No bytecode available\n";
-		return;
-	}
+    if (m_vRPN.size() == false)
+    {
+        qDebug() << "No bytecode available\n";
+        return;
+    }
 
-	qDebug() << "Number of RPN tokens:" << m_vRPN.size() << "\n";
-	for (int i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
-	{
-		qDebug() << i << " : \t";
-		switch (m_vRPN[i].Cmd)
-		{
-			case cmVAL:
-				qDebug() << "VAL \t" << "[" << m_vRPN[i].Val.data2 << "]\n";
-				break;
-			case cmVAR:
-				qDebug() << "VAR \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
-				break;
-			case cmVARPOW2:
-				qDebug() << "VARPOW2 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
-				break;
-			case cmVARPOW3:
-				qDebug() << "VARPOW3 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
-				break;
-			case cmVARPOW4:
-				qDebug() << "VARPOW4 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
-				break;
-			case cmVARMUL:
-				qDebug() << "VARMUL \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]" << " * ["
-						 << m_vRPN[i].Val.data << "]" << " + [" << m_vRPN[i].Val.data2 << "]\n";
-				break;
-			case cmFUNC:
-				qDebug() << "CALL\t" << "[ARG:" << m_vRPN[i].Fun.argc << "]" << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]"
-						 << "\n";
-				break;
-			case cmFUNC_STR:
-				qDebug() << "CALL STRFUNC\t" << "[ARG:" << m_vRPN[i].Fun.argc << "]" << "[IDX:" << m_vRPN[i].Fun.idx
-						 << "]" << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]\n";
-				break;
-			case cmLT:
-				qDebug() << "LT\n";
-				break;
-			case cmGT:
-				qDebug() << "GT\n";
-				break;
-			case cmLE:
-				qDebug() << "LE\n";
-				break;
-			case cmGE:
-				qDebug() << "GE\n";
-				break;
-			case cmEQ:
-				qDebug() << "EQ\n";
-				break;
-			case cmNEQ:
-				qDebug() << "NEQ\n";
-				break;
-			case cmADD:
-				qDebug() << "ADD\n";
-				break;
-			case cmLAND:
-				qDebug() << "&&\n";
-				break;
-			case cmLOR:
-				qDebug() << "||\n";
-				break;
-			case cmSUB:
-				qDebug() << "SUB\n";
-				break;
-			case cmMUL:
-				qDebug() << "MUL\n";
-				break;
-			case cmDIV:
-				qDebug() << "DIV\n";
-				break;
-			case cmPOW:
-				qDebug() << "POW\n";
-				break;
-			case cmIF:
-				qDebug() << "IF\t" << "[OFFSET:" << m_vRPN[i].Oprt.offset << "]\n";
-				break;
-			case cmELSE:
-				qDebug() << "ELSE\t" << "[OFFSET:" << m_vRPN[i].Oprt.offset << "]\n";
-				break;
-			case cmENDIF:
-				qDebug() << "ENDIF\n"; break;
-			case cmASSIGN:
-				qDebug() << "ASSIGN\t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Oprt.ptr, 'f', 16) << "]\n";
-				break;
-			case cmBO:
-				Q_UNREACHABLE();
-				break;
-			case cmBC:
-				Q_UNREACHABLE();
-				break;
-			case cmARG_SEP:
-				Q_UNREACHABLE();
-				break;
-			case cmPOW2:
-				Q_UNREACHABLE();
-				break;
-			case cmFUNC_BULK:
-				Q_UNREACHABLE();
-				break;
-			case cmSTRING:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_BIN:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_POSTFIX:
-				Q_UNREACHABLE();
-				break;
-			case cmOPRT_INFIX:
-				Q_UNREACHABLE();
-				break;
-			case cmEND:
-				Q_UNREACHABLE();
-				break;
-			case cmUNKNOWN:
-				Q_UNREACHABLE();
-				break;
-			default:
-				qDebug() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
-				break;
-		} // switch cmdCode
-	} // while bytecode
+    qDebug() << "Number of RPN tokens:" << m_vRPN.size() << "\n";
+    for (int i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
+    {
+        qDebug() << i << " : \t";
+        switch (m_vRPN[i].Cmd)
+        {
+            case cmVAL:
+                qDebug() << "VAL \t" << "[" << m_vRPN[i].Val.data2 << "]\n";
+                break;
+            case cmVAR:
+                qDebug() << "VAR \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                break;
+            case cmVARPOW2:
+                qDebug() << "VARPOW2 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                break;
+            case cmVARPOW3:
+                qDebug() << "VARPOW3 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                break;
+            case cmVARPOW4:
+                qDebug() << "VARPOW4 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                break;
+            case cmVARMUL:
+                qDebug() << "VARMUL \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]" << " * ["
+                         << m_vRPN[i].Val.data << "]" << " + [" << m_vRPN[i].Val.data2 << "]\n";
+                break;
+            case cmFUNC:
+                qDebug() << "CALL\t" << "[ARG:" << m_vRPN[i].Fun.argc << "]" << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]"
+                         << "\n";
+                break;
+            case cmFUNC_STR:
+                qDebug() << "CALL STRFUNC\t" << "[ARG:" << m_vRPN[i].Fun.argc << "]" << "[IDX:" << m_vRPN[i].Fun.idx
+                         << "]" << "[ADDR: 0x" << m_vRPN[i].Fun.ptr << "]\n";
+                break;
+            case cmLT:
+                qDebug() << "LT\n";
+                break;
+            case cmGT:
+                qDebug() << "GT\n";
+                break;
+            case cmLE:
+                qDebug() << "LE\n";
+                break;
+            case cmGE:
+                qDebug() << "GE\n";
+                break;
+            case cmEQ:
+                qDebug() << "EQ\n";
+                break;
+            case cmNEQ:
+                qDebug() << "NEQ\n";
+                break;
+            case cmADD:
+                qDebug() << "ADD\n";
+                break;
+            case cmLAND:
+                qDebug() << "&&\n";
+                break;
+            case cmLOR:
+                qDebug() << "||\n";
+                break;
+            case cmSUB:
+                qDebug() << "SUB\n";
+                break;
+            case cmMUL:
+                qDebug() << "MUL\n";
+                break;
+            case cmDIV:
+                qDebug() << "DIV\n";
+                break;
+            case cmPOW:
+                qDebug() << "POW\n";
+                break;
+            case cmIF:
+                qDebug() << "IF\t" << "[OFFSET:" << m_vRPN[i].Oprt.offset << "]\n";
+                break;
+            case cmELSE:
+                qDebug() << "ELSE\t" << "[OFFSET:" << m_vRPN[i].Oprt.offset << "]\n";
+                break;
+            case cmENDIF:
+                qDebug() << "ENDIF\n"; break;
+            case cmASSIGN:
+                qDebug() << "ASSIGN\t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Oprt.ptr, 'f', 16) << "]\n";
+                break;
+            case cmBO:
+                Q_UNREACHABLE();
+                break;
+            case cmBC:
+                Q_UNREACHABLE();
+                break;
+            case cmARG_SEP:
+                Q_UNREACHABLE();
+                break;
+            case cmPOW2:
+                Q_UNREACHABLE();
+                break;
+            case cmFUNC_BULK:
+                Q_UNREACHABLE();
+                break;
+            case cmSTRING:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_BIN:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_POSTFIX:
+                Q_UNREACHABLE();
+                break;
+            case cmOPRT_INFIX:
+                Q_UNREACHABLE();
+                break;
+            case cmEND:
+                Q_UNREACHABLE();
+                break;
+            case cmUNKNOWN:
+                Q_UNREACHABLE();
+                break;
+            default:
+                qDebug() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
+                break;
+        } // switch cmdCode
+    } // while bytecode
 
-	qDebug() << "END";
+    qDebug() << "END";
 }
 } // namespace qmu

@@ -157,8 +157,8 @@ void MainWindow::ActionNewDraw()
 
     pattern->ClearGObjects();
     //Create single point
-    const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10), "А", 5,
-                                                       10));
+    const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10),
+                                                       "А", 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
@@ -261,8 +261,8 @@ void MainWindow::ClosedDialogLine(int result)
 
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png", tr("Select point"),
-                                   &MainWindow::ClosedDialogAlongLine);
+    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
+                                   tr("Select point"), &MainWindow::ClosedDialogAlongLine);
 }
 
 void MainWindow::ClosedDialogAlongLine(int result)
@@ -360,8 +360,9 @@ void MainWindow::ClosedDialogSplinePath(int result)
 
 void MainWindow::ToolCutSplinePath(bool checked)
 {
-    SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool, ":/cursor/splinepath_cut_point_cursor.png",
-                  tr("Select curve path"), &MainWindow::ClosedDialogCutSplinePath);
+    SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool,
+                                       ":/cursor/splinepath_cut_point_cursor.png", tr("Select curve path"),
+                                       &MainWindow::ClosedDialogCutSplinePath);
 }
 
 void MainWindow::ClosedDialogCutSplinePath(int result)
@@ -420,8 +421,9 @@ void MainWindow::ClosedDialogTriangle(int result)
 
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
-    SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection, ":/cursor/pointofintersect_cursor.png",
-                  tr("Select point vertically"), &MainWindow::ClosedDialogPointOfIntersection);
+    SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection,
+                                             ":/cursor/pointofintersect_cursor.png", tr("Select point vertically"),
+                                             &MainWindow::ClosedDialogPointOfIntersection);
 }
 
 void MainWindow::ClosedDialogPointOfIntersection(int result)
@@ -431,8 +433,8 @@ void MainWindow::ClosedDialogPointOfIntersection(int result)
 
 void MainWindow::ToolUnionDetails(bool checked)
 {
-    SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png", tr("Select detail"),
-                                      &MainWindow::ClosedDialogUnionDetails);
+    SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png",
+                                      tr("Select detail"), &MainWindow::ClosedDialogUnionDetails);
     //Must disconnect this signal here.
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
 }
@@ -1358,7 +1360,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         QString path = doc->MPath();
 
         path = CheckPathToMeasurements(path, qApp->patternType());
-        if(path.isEmpty())
+        if (path.isEmpty())
         {
             Clear();
             return;
@@ -1394,7 +1396,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             }
         }
     }
-    catch(VException &e)
+    catch (VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         Clear();
@@ -1440,7 +1442,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         Clear();
         return;
     }
-    catch(VException &e)
+    catch (VException &e)
     {
         e.CriticalMessageBox(tr("Error parsing file."), this);
         Clear();
@@ -1478,7 +1480,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Pattern::
         QMessageBox::StandardButton res = QMessageBox::question(this, "Loading measurements file", text,
                                                                 QMessageBox::Yes | QMessageBox::No,
                                                                 QMessageBox::Yes);
-        if(res == QMessageBox::No)
+        if (res == QMessageBox::No)
         {
             return QString();
         }
@@ -1495,7 +1497,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Pattern::
             }
             QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
 
-            if(mPath.isEmpty())
+            if (mPath.isEmpty())
             {
                 return mPath;
             }

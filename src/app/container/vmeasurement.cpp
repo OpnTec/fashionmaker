@@ -61,7 +61,3 @@ qreal VMeasurement::GetValue(const qreal &size, const qreal &height) const
     const qreal k_height  = ( height - 176.0 ) / 6.0;
     return base + k_size * ksize + k_height * kheight;
 }
-
-
-
-

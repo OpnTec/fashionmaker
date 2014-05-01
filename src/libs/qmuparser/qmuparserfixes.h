@@ -55,5 +55,3 @@
 #endif
 
 #endif // include guard
-
-

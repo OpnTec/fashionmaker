@@ -54,7 +54,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
             m = new VIndividualMeasurements(data);
             m->setContent(filePath);
         }
-        catch(VException &e)
+        catch (VException &e)
         {
             e.CriticalMessageBox(tr("File error."), this);
             emit DialogClosed(QDialog::Rejected);
@@ -101,8 +101,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxSex->addItem(tr("male"),QVariant(m->GenderToStr(VIndividualMeasurements::Male)));
-        ui->comboBoxSex->addItem(tr("female"),QVariant(m->GenderToStr(VIndividualMeasurements::Female)));
+        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(VIndividualMeasurements::Male)));
+        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(VIndividualMeasurements::Female)));
         qint32 index = ui->comboBoxSex->findData(m->GenderToStr(m->Sex()));
         if (index != -1)
         {
@@ -473,7 +473,7 @@ void DialogIncrements::OpenTable()
             m1 = new VIndividualMeasurements(data);
             m1->setContent(filePath);
         }
-        catch(VException &e)
+        catch (VException &e)
         {
             e.CriticalMessageBox(tr("File error."), this);
             delete m1;
@@ -529,7 +529,7 @@ void DialogIncrements::OpenTable()
             doc->SetPath(filePath);
             emit haveLiteChange();
         }
-        catch(VException &e)
+        catch (VException &e)
         {
             e.CriticalMessageBox(tr("File error."), this);
             delete m1;

@@ -222,26 +222,26 @@ void TableWindow::saveScene()
     suffix << "svg" << "png" << "pdf" << "eps" << "ps";
     switch (suffix.indexOf(fi.suffix()))
     {
-    case 0: //svg
-        paper->setVisible(false);
-        SvgFile(name);
-        paper->setVisible(true);
-        break;
-    case 1: //png        
-        PngFile(name);
-        break;
-    case 2: //pdf
-        PdfFile(name);   
-        break;
-    case 3: //eps
-        EpsFile(name);
-        break;
-    case 4: //ps
-        PsFile(name);
-        break;
-    default:
-        qDebug() << "Bad file suffix"<<Q_FUNC_INFO;
-        break;
+        case 0: //svg
+            paper->setVisible(false);
+            SvgFile(name);
+            paper->setVisible(true);
+            break;
+        case 1: //png
+            PngFile(name);
+            break;
+        case 2: //pdf
+            PdfFile(name);
+            break;
+        case 3: //eps
+            EpsFile(name);
+            break;
+        case 4: //ps
+            PsFile(name);
+            break;
+        default:
+            qDebug() << "Bad file suffix"<<Q_FUNC_INFO;
+            break;
     }
     paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
     brush->setColor( QColor( Qt::gray ) );

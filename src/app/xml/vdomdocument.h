@@ -42,21 +42,21 @@
 
 /**
  * @brief The VDomDocument class represents a Valentina document (.val file).
- * 
- * A Valentina document describes the construction of a sewing pattern. The 
+ *
+ * A Valentina document describes the construction of a sewing pattern. The
  * information is stored in XML format. By parsing a VDomDocument, the contained
  * pattern is rendered to a Valentina graphics scene (VMainGraphicsScene).
  *
- * A sewing pattern consists of zero or more increments and one 
+ * A sewing pattern consists of zero or more increments and one
  * or more pattern pieces.
  *
  * An increment is an auxiliary variable that is calculated from regular measurement
  * variables (that belong to the standard measurements table). Increments are used to
  * create a graduation schema for the sewing pattern.
  *
- * A pattern piece contains 
+ * A pattern piece contains
  * 1) auxiliary pattern construction elements (calculation),
- * 2) pattern construction elements (modeling), and 
+ * 2) pattern construction elements (modeling), and
  * 3) special markers, e.g. seam allowances (details).
  * Of these, 2) and 3) are visible in the final pattern (draw mode 'Modeling'),
  * 1) is only displayed when editing (draw mode 'Calculation') the pattern.

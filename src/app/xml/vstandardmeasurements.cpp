@@ -70,7 +70,7 @@ void VStandardMeasurements::Measurements()
     }
     else
     {
-        for(qint32 i = 0; i < nodeList.size(); ++i)
+        for (qint32 i = 0; i < nodeList.size(); ++i)
         {
             const QDomNode domNode = nodeList.at(i);
             if (domNode.isNull() == false && domNode.isElement())

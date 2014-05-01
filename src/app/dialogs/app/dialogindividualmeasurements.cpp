@@ -116,7 +116,7 @@ void DialogIndividualMeasurements::DialogAccepted()
             iMeasur.close();
         }
     }
-    catch(VException &e)
+    catch (VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
@@ -214,7 +214,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
             const QString lang = QLocale(m.Language()).nativeLanguageName();
             ui->comboBoxLang->addItem(lang, QVariant(fi.absoluteFilePath()));
         }
-        catch(VException &e)
+        catch (VException &e)
         {
             qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
             continue;
@@ -249,7 +249,7 @@ void DialogIndividualMeasurements::OpenTable()
     {
         VDomDocument::ValidateXML("://schema/individual_measurements.xsd", fileName);
     }
-    catch(VException &e)
+    catch (VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         fileName.clear();

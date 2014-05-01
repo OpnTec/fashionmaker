@@ -133,7 +133,8 @@ private:
      * @param idDetail id detail
      * @param index index of edge
      */
-    void             ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail, ptrdiff_t &index);
+    void             ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail,
+                                   ptrdiff_t &index);
 };
 
 inline quint32 DialogUnionDetails::getD1() const

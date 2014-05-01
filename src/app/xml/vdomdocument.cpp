@@ -293,7 +293,8 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
         pattern.close();
         fileSchema.close();
         VException e(messageHandler.statusMessage());
-        e.AddMoreInformation(tr("Validation error in line %1 column %2").arg(messageHandler.line()).arg(messageHandler.column()));
+        e.AddMoreInformation(tr("Validation error in line %1 column %2").arg(messageHandler.line())
+                             .arg(messageHandler.column()));
         throw e;
     }
     pattern.close();
@@ -347,7 +348,7 @@ Valentina::Units VDomDocument::StrToUnits(const QString &unit)
 QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
 {
     QString result;
-    switch(unit)
+    switch (unit)
     {
         case Valentina::Mm:
             result = "mm";

@@ -60,9 +60,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool = 0,
-                        QObject *parent = 0);
+    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Document::Documents &parse,
+                        const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = 0);
     static const QString TagName;
     static const QString ToolType;
     /**

@@ -481,7 +481,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
                     ++j;
                 } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
             }
-        } while(i < d1.RemoveEdge(indexD1).CountNode());
+        } while (i < d1.RemoveEdge(indexD1).CountNode());
 
         newDetail.setName("Detail");
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Valentina::FromTool);

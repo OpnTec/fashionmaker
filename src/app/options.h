@@ -111,6 +111,6 @@ namespace Pattern
     enum Measurement { Standard, Individual };
     Q_DECLARE_FLAGS(Measurements, Measurement)
 }
-Q_DECLARE_OPERATORS_FOR_FLAGS( Pattern::Measurements ) 
+Q_DECLARE_OPERATORS_FOR_FLAGS( Pattern::Measurements )
 
 #endif // OPTIONS_H

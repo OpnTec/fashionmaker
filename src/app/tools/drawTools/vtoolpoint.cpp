@@ -36,7 +36,7 @@ const QString VToolPoint::TagName = QStringLiteral("point");
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(DefRadius), namePoint(0), lineName(0)
 {
-    switch(qApp->patternUnit())
+    switch (qApp->patternUnit())
     {
         case Valentina::Mm:
             radius = qApp->toPixel(DefRadius);

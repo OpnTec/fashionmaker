@@ -86,7 +86,7 @@ void DialogStandardMeasurements::DialogAccepted()
         m.setContent(_tablePath);
         qApp->setPatternUnit(m.Unit());
     }
-    catch(VException &e)
+    catch (VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
@@ -152,7 +152,7 @@ void DialogStandardMeasurements::LoadStandardTables()
             m.setContent(fi.absoluteFilePath());
             ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
         }
-        catch(VException &e)
+        catch (VException &e)
         {
             qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
             continue;

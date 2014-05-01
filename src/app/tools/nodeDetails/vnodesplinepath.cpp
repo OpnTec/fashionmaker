@@ -53,8 +53,8 @@ VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, qu
 }
 
 void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                             const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
-                             QObject *parent)
+                             const Document::Documents &parse, const Valentina::Sources &typeCreation,
+                             const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Valentina::NodeSplinePath, doc);
     if (parse == Document::FullParse)

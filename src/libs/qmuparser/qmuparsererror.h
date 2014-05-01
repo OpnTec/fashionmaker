@@ -97,18 +97,18 @@ enum EErrorCodes
 class QmuParserErrorMsg
 {
 public:
-	typedef QmuParserErrorMsg self_type;
+    typedef QmuParserErrorMsg self_type;
 
-	QmuParserErrorMsg();
-	~QmuParserErrorMsg();
+    QmuParserErrorMsg();
+    ~QmuParserErrorMsg();
 
-	static const QmuParserErrorMsg& Instance();
-	QString operator[] ( unsigned a_iIdx ) const;
+    static const QmuParserErrorMsg& Instance();
+    QString operator[] ( unsigned a_iIdx ) const;
 
 private:
-	Q_DISABLE_COPY(QmuParserErrorMsg)
-	QVector<QString>  m_vErrMsg;  ///< A vector with the predefined error messages
-	static const self_type m_Instance;    ///< The instance pointer
+    Q_DISABLE_COPY(QmuParserErrorMsg)
+    QVector<QString>  m_vErrMsg;  ///< A vector with the predefined error messages
+    static const self_type m_Instance;    ///< The instance pointer
 };
 
 //---------------------------------------------------------------------------
@@ -121,38 +121,37 @@ class QmuParserError
 {
 public:
 
-	QmuParserError();
-	explicit QmuParserError ( EErrorCodes a_iErrc );
-	explicit QmuParserError ( const QString &sMsg );
-	QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), int a_iPos = -1 );
-	QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
-	QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
-	QmuParserError ( const QmuParserError &a_Obj );
-	QmuParserError& operator= ( const QmuParserError &a_Obj );
-	~QmuParserError();
+    QmuParserError();
+    explicit QmuParserError ( EErrorCodes a_iErrc );
+    explicit QmuParserError ( const QString &sMsg );
+    QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), int a_iPos = -1 );
+    QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
+    QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
+    QmuParserError ( const QmuParserError &a_Obj );
+    QmuParserError& operator= ( const QmuParserError &a_Obj );
+    ~QmuParserError();
 
-	void           SetFormula ( const QString &a_strFormula );
-	const QString& GetExpr() const;
-	const QString& GetMsg() const;
-	std::size_t    GetPos() const;
-	const QString& GetToken() const;
-	EErrorCodes    GetCode() const;
+    void           SetFormula ( const QString &a_strFormula );
+    const QString& GetExpr() const;
+    const QString& GetMsg() const;
+    std::size_t    GetPos() const;
+    const QString& GetToken() const;
+    EErrorCodes    GetCode() const;
 
 private:
-	QString m_strMsg;     ///< The message string
-	QString m_strFormula; ///< Formula string
-	QString m_strTok;     ///< Token related with the error
-	int m_iPos;               ///< Formula position related to the error
-	EErrorCodes m_iErrc;      ///< Error code
-	const QmuParserErrorMsg &m_ErrMsg;
-	/**
-	 * @brief Replace all ocuurences of a substring with another string.
-	 */
-	void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
-	void Reset();
+    QString m_strMsg;     ///< The message string
+    QString m_strFormula; ///< Formula string
+    QString m_strTok;     ///< Token related with the error
+    int m_iPos;               ///< Formula position related to the error
+    EErrorCodes m_iErrc;      ///< Error code
+    const QmuParserErrorMsg &m_ErrMsg;
+    /**
+     * @brief Replace all ocuurences of a substring with another string.
+     */
+    void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
+    void Reset();
 };
 
 } // namespace qmu
 
 #endif
-

@@ -77,33 +77,33 @@ public:
     QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti);
     QmuParserCallback();
     QmuParserCallback(const QmuParserCallback &a_Fun);
-    
+
     QmuParserCallback* Clone() const;
-	bool               IsOptimizable() const;
-	void*              GetAddr() const;
-	ECmdCode           GetCode() const;
-	ETypeCode          GetType() const;
-	int                GetPri()  const;
+    bool               IsOptimizable() const;
+    void*              GetAddr() const;
+    ECmdCode           GetCode() const;
+    ETypeCode          GetType() const;
+    int                GetPri()  const;
     EOprtAssociativity GetAssociativity() const;
-	int                GetArgc() const;
+    int                GetArgc() const;
 private:
     void *m_pFun;                   ///< Pointer to the callback function, casted to void
-    
-	/**
-	 * @brief Number of numeric function arguments
-	 *
-	 * This number is negative for functions with variable number of arguments. in this cases
-	 * they represent the actual number of arguments found.
-	 */
-    int   m_iArgc;      
+
+    /**
+     * @brief Number of numeric function arguments
+     *
+     * This number is negative for functions with variable number of arguments. in this cases
+     * they represent the actual number of arguments found.
+     */
+    int   m_iArgc;
     int   m_iPri;                   ///< Valid only for binary and infix operators; Operator precedence.
-    EOprtAssociativity m_eOprtAsct; ///< Operator associativity; Valid only for binary operators 
+    EOprtAssociativity m_eOprtAsct; ///< Operator associativity; Valid only for binary operators
     ECmdCode  m_iCode;
     ETypeCode m_iType;
-    bool  m_bAllowOpti;             ///< Flag indication optimizeability 
+    bool  m_bAllowOpti;             ///< Flag indication optimizeability
 };
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Container for Callback objects.
  */
@@ -112,4 +112,3 @@ typedef std::map<QString, QmuParserCallback> funmap_type;
 } // namespace qmu
 
 #endif
-

@@ -39,78 +39,78 @@ namespace qmu
 // Trigonometric function
 qreal QmuParser::Sinh(qreal v)
 {
-	return sinh(v);
+    return sinh(v);
 }
 
 qreal QmuParser::Cosh(qreal v)
 {
-	return cosh(v);
+    return cosh(v);
 }
 
 qreal QmuParser::Tanh(qreal v)
 {
-	return tanh(v);
+    return tanh(v);
 }
 
 qreal QmuParser::ASinh(qreal v)
 {
-	return log(v + qSqrt(v * v + 1));
+    return log(v + qSqrt(v * v + 1));
 }
 
 qreal QmuParser::ACosh(qreal v)
 {
-	return log(v + qSqrt(v * v - 1));
+    return log(v + qSqrt(v * v - 1));
 }
 
 qreal QmuParser::ATanh(qreal v)
 {
-	return (0.5 * log((1 + v) / (1 - v)));
+    return (0.5 * log((1 + v) / (1 - v)));
 }
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 // Logarithm functions
 
 // Logarithm base 2
 qreal QmuParser::Log2(qreal v)
 {
 #ifdef MUP_MATH_EXCEPTIONS
-	if (v<=0)
-	{
-		throw QmuParserError(ecDOMAIN_ERROR, "Log2");
-	}
+    if (v<=0)
+    {
+        throw QmuParserError(ecDOMAIN_ERROR, "Log2");
+    }
 #endif
-	return log(v)/log(2.0);
+    return log(v)/log(2.0);
 }
 
 // Logarithm base 10
 qreal QmuParser::Log10(qreal v)
 {
 #ifdef MUP_MATH_EXCEPTIONS
-	if (v<=0)
-	{
-		throw QmuParserError(ecDOMAIN_ERROR, "Log10");
-	}
+    if (v<=0)
+    {
+        throw QmuParserError(ecDOMAIN_ERROR, "Log10");
+    }
 #endif
-	return log10(v);
+    return log10(v);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 //  misc
 qreal QmuParser::Abs(qreal v)
 {
-	return qAbs(v);
+    return qAbs(v);
 }
 
 qreal QmuParser::Rint(qreal v)
 {
-	return qFloor(v + 0.5);
+    return qFloor(v + 0.5);
 }
 
 qreal QmuParser::Sign(qreal v)
 {
-	return ((v<0) ? -1 : (v>0) ? 1 : 0);
+    return ((v<0) ? -1 : (v>0) ? 1 : 0);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for the unary minus operator.
  * @param v The value to negate
@@ -118,10 +118,10 @@ qreal QmuParser::Sign(qreal v)
  */
 qreal QmuParser::UnaryMinus(qreal v)
 {
-	return -v;
+    return -v;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for adding multiple values.
  * @param [in] a_afArg Vector with the function arguments
@@ -129,16 +129,19 @@ qreal QmuParser::UnaryMinus(qreal v)
  */
 qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
 {
-	if (!a_iArgc)
-	{
-		throw exception_type("too few arguments for function sum.");
-	}
-	qreal fRes=0;
-	for (int i=0; i<a_iArgc; ++i) fRes += a_afArg[i];
-	return fRes;
+    if (a_iArgc == false)
+    {
+        throw exception_type("too few arguments for function sum.");
+    }
+    qreal fRes=0;
+    for (int i=0; i<a_iArgc; ++i)
+    {
+        fRes += a_afArg[i];
+    }
+    return fRes;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for averaging multiple values.
  * @param [in] a_afArg Vector with the function arguments
@@ -146,16 +149,19 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
 {
-	if (!a_iArgc)
-	{
-		throw exception_type("too few arguments for function sum.");
-	}
-	qreal fRes=0;
-	for (int i=0; i<a_iArgc; ++i) fRes += a_afArg[i];
-	return fRes/static_cast<qreal>(a_iArgc);
+    if (a_iArgc == false)
+    {
+        throw exception_type("too few arguments for function sum.");
+    }
+    qreal fRes=0;
+    for (int i=0; i<a_iArgc; ++i)
+    {
+        fRes += a_afArg[i];
+    }
+    return fRes/static_cast<qreal>(a_iArgc);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for determining the minimum value out of a vector.
  * @param [in] a_afArg Vector with the function arguments
@@ -163,19 +169,19 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
 {
-	if (!a_iArgc)
-	{
-		throw exception_type("too few arguments for function min.");
-	}
-	qreal fRes=a_afArg[0];
-	for (int i=0; i<a_iArgc; ++i)
-	{
-		fRes = qMin(fRes, a_afArg[i]);
-	}
-	return fRes;
+    if (a_iArgc == false)
+    {
+        throw exception_type("too few arguments for function min.");
+    }
+    qreal fRes=a_afArg[0];
+    for (int i=0; i<a_iArgc; ++i)
+    {
+        fRes = qMin(fRes, a_afArg[i]);
+    }
+    return fRes;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Callback for determining the maximum value out of a vector.
  * @param [in] a_afArg Vector with the function arguments
@@ -183,19 +189,19 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 {
-	if (!a_iArgc)
-	{
-		throw exception_type("too few arguments for function min.");
-	}
-	qreal fRes=a_afArg[0];
-	for (int i=0; i<a_iArgc; ++i)
-	{
-		fRes = qMax(fRes, a_afArg[i]);
-	}
-	return fRes;
+    if (a_iArgc == false)
+    {
+        throw exception_type("too few arguments for function min.");
+    }
+    qreal fRes=a_afArg[0];
+    for (int i=0; i<a_iArgc; ++i)
+    {
+        fRes = qMax(fRes, a_afArg[i]);
+    }
+    return fRes;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
 * @brief Default value recognition callback.
 * @param [in] a_szExpr Pointer to the expression
@@ -205,30 +211,30 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 */
 int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
 {
-	qreal fVal(0);
+    qreal fVal(0);
 
-	#if defined(_UNICODE)
-		std::wstring a_szExprStd = a_szExpr.toStdWString();
-	#else
-		std::string a_szExprStd = a_szExpr.toStdString();
-	#endif
-	stringstream_type stream(a_szExprStd);
-	stream.seekg(0);        // todo:  check if this really is necessary
-	stream.imbue(QmuParser::s_locale);
-	stream >> fVal;
-	stringstream_type::pos_type iEnd = stream.tellg(); // Position after reading
+    #if defined(_UNICODE)
+        std::wstring a_szExprStd = a_szExpr.toStdWString();
+    #else
+        std::string a_szExprStd = a_szExpr.toStdString();
+    #endif
+    stringstream_type stream(a_szExprStd);
+    stream.seekg(0);        // todo:  check if this really is necessary
+    stream.imbue(QmuParser::s_locale);
+    stream >> fVal;
+    stringstream_type::pos_type iEnd = stream.tellg(); // Position after reading
 
-	if (iEnd==static_cast<stringstream_type::pos_type>(-1))
-	{
-	  return 0;
-	}
+    if (iEnd==static_cast<stringstream_type::pos_type>(-1))
+    {
+        return 0;
+    }
 
-	*a_iPos += static_cast<int>(iEnd);
-	*a_fVal = fVal;
-	return 1;
+    *a_iPos += static_cast<int>(iEnd);
+    *a_fVal = fVal;
+    return 1;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Constructor.
  *
@@ -236,15 +242,15 @@ int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
  */
 QmuParser::QmuParser():QmuParserBase()
 {
-	AddValIdent(IsVal);
+    AddValIdent(IsVal);
 
-	InitCharSets();
-	InitFun();
-	InitConst();
-	InitOprt();
+    InitCharSets();
+    InitFun();
+    InitConst();
+    InitOprt();
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Define the character sets.
  * @sa DefineNameChars, DefineOprtChars, DefineInfixOprtChars
@@ -254,53 +260,53 @@ QmuParser::QmuParser():QmuParserBase()
  */
 void QmuParser::InitCharSets()
 {
-	DefineNameChars( "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" );
-	DefineOprtChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}" );
-	DefineInfixOprtChars( "/+-*^?<>=#!$%&|~'_" );
+    DefineNameChars( "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+    DefineOprtChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}" );
+    DefineInfixOprtChars( "/+-*^?<>=#!$%&|~'_" );
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Initialize the default functions.
  */
 void QmuParser::InitFun()
 {
-	// trigonometric functions
-	DefineFun("sin",   qSin);
-	DefineFun("cos",   qCos);
-	DefineFun("tan",   qTan);
-	// arcus functions
-	DefineFun("asin",  qAsin);
-	DefineFun("acos",  qAcos);
-	DefineFun("atan",  qAtan);
-	DefineFun("atan2", qAtan2);
-	// hyperbolic functions
-	DefineFun("sinh",  Sinh);
-	DefineFun("cosh",  Cosh);
-	DefineFun("tanh",  Tanh);
-	// arcus hyperbolic functions
-	DefineFun("asinh", ASinh);
-	DefineFun("acosh", ACosh);
-	DefineFun("atanh", ATanh);
-	// Logarithm functions
-	DefineFun("log2",  Log2);
-	DefineFun("log10", Log10);
-	DefineFun("log",   Log10);
-	DefineFun("ln",    qLn);
-	// misc
-	DefineFun("exp",   qExp);
-	DefineFun("sqrt",  qSqrt);
-	DefineFun("sign",  Sign);
-	DefineFun("rint",  Rint);
-	DefineFun("abs",   Abs);
-	// Functions with variable number of arguments
-	DefineFun("sum",   Sum);
-	DefineFun("avg",   Avg);
-	DefineFun("min",   Min);
-	DefineFun("max",   Max);
+    // trigonometric functions
+    DefineFun("sin",   qSin);
+    DefineFun("cos",   qCos);
+    DefineFun("tan",   qTan);
+    // arcus functions
+    DefineFun("asin",  qAsin);
+    DefineFun("acos",  qAcos);
+    DefineFun("atan",  qAtan);
+    DefineFun("atan2", qAtan2);
+    // hyperbolic functions
+    DefineFun("sinh",  Sinh);
+    DefineFun("cosh",  Cosh);
+    DefineFun("tanh",  Tanh);
+    // arcus hyperbolic functions
+    DefineFun("asinh", ASinh);
+    DefineFun("acosh", ACosh);
+    DefineFun("atanh", ATanh);
+    // Logarithm functions
+    DefineFun("log2",  Log2);
+    DefineFun("log10", Log10);
+    DefineFun("log",   Log10);
+    DefineFun("ln",    qLn);
+    // misc
+    DefineFun("exp",   qExp);
+    DefineFun("sqrt",  qSqrt);
+    DefineFun("sign",  Sign);
+    DefineFun("rint",  Rint);
+    DefineFun("abs",   Abs);
+    // Functions with variable number of arguments
+    DefineFun("sum",   Sum);
+    DefineFun("avg",   Avg);
+    DefineFun("min",   Min);
+    DefineFun("max",   Max);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Initialize constants.
  *
@@ -309,11 +315,11 @@ void QmuParser::InitFun()
  */
 void QmuParser::InitConst()
 {
-	DefineConst("_pi", (qreal)M_PI);
-	DefineConst("_e", (qreal)M_E);
+    DefineConst("_pi", (qreal)M_PI);
+    DefineConst("_e", (qreal)M_E);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Initialize operators.
  *
@@ -321,38 +327,38 @@ void QmuParser::InitConst()
  */
 void QmuParser::InitOprt()
 {
-	DefineInfixOprt("-", UnaryMinus);
+    DefineInfixOprt("-", UnaryMinus);
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
-	Q_UNUSED(pExpr);
-	Q_UNUSED(nStart);
-	Q_UNUSED(nEnd);
-	// this is just sample code to illustrate modifying variable names on the fly.
-	// I'm not sure anyone really needs such a feature...
-	/*
+    Q_UNUSED(pExpr);
+    Q_UNUSED(nStart);
+    Q_UNUSED(nEnd);
+    // this is just sample code to illustrate modifying variable names on the fly.
+    // I'm not sure anyone really needs such a feature...
+    /*
 
 
-	string sVar(pExpr->begin()+nStart, pExpr->begin()+nEnd);
-	string sRepl = std::string("_") + sVar + "_";
+    string sVar(pExpr->begin()+nStart, pExpr->begin()+nEnd);
+    string sRepl = std::string("_") + sVar + "_";
 
-	int nOrigVarEnd = nEnd;
-	cout << "variable detected!\n";
-	cout << "  Expr: " << *pExpr << "\n";
-	cout << "  Start: " << nStart << "\n";
-	cout << "  End: " << nEnd << "\n";
-	cout << "  Var: \"" << sVar << "\"\n";
-	cout << "  Repl: \"" << sRepl << "\"\n";
-	nEnd = nStart + sRepl.length();
-	cout << "  End: " << nEnd << "\n";
-	pExpr->replace(pExpr->begin()+nStart, pExpr->begin()+nOrigVarEnd, sRepl);
-	cout << "  New expr: " << *pExpr << "\n";
-	*/
+    int nOrigVarEnd = nEnd;
+    cout << "variable detected!\n";
+    cout << "  Expr: " << *pExpr << "\n";
+    cout << "  Start: " << nStart << "\n";
+    cout << "  End: " << nEnd << "\n";
+    cout << "  Var: \"" << sVar << "\"\n";
+    cout << "  Repl: \"" << sRepl << "\"\n";
+    nEnd = nStart + sRepl.length();
+    cout << "  End: " << nEnd << "\n";
+    pExpr->replace(pExpr->begin()+nStart, pExpr->begin()+nOrigVarEnd, sRepl);
+    cout << "  New expr: " << *pExpr << "\n";
+    */
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Numerically differentiate with regard to a variable.
  * @param [in] a_Var Pointer to the differentiation variable.
@@ -368,25 +374,25 @@ void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
  */
 qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
 {
-	qreal fRes(0),
-		  fBuf(*a_Var),
-		  f[4] = {0,0,0,0},
-		  fEpsilon(a_fEpsilon);
+    qreal fRes(0),
+          fBuf(*a_Var),
+          f[4] = {0, 0, 0, 0},
+          fEpsilon(a_fEpsilon);
 
-	// Backwards compatible calculation of epsilon inc case the user doesnt provide
-	// his own epsilon
-	if (qFuzzyCompare(fEpsilon + 1, 1 + 0))
-	{
-		fEpsilon = (qFuzzyCompare(a_fPos + 1, 1 + 0)) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
-	}
+    // Backwards compatible calculation of epsilon inc case the user doesnt provide
+    // his own epsilon
+    if (qFuzzyCompare(fEpsilon + 1, 1 + 0))
+    {
+        fEpsilon = (qFuzzyCompare(a_fPos + 1, 1 + 0)) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
+    }
 
-	*a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();
-	*a_Var = a_fPos+1 * fEpsilon;  f[1] = Eval();
-	*a_Var = a_fPos-1 * fEpsilon;  f[2] = Eval();
-	*a_Var = a_fPos-2 * fEpsilon;  f[3] = Eval();
-	*a_Var = fBuf; // restore variable
+    *a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();
+    *a_Var = a_fPos+1 * fEpsilon;  f[1] = Eval();
+    *a_Var = a_fPos-1 * fEpsilon;  f[2] = Eval();
+    *a_Var = a_fPos-2 * fEpsilon;  f[3] = Eval();
+    *a_Var = fBuf; // restore variable
 
-	fRes = (-f[0] + 8*f[1] - 8*f[2] + f[3]) / (12*fEpsilon);
-	return fRes;
+    fRes = (-f[0] + 8*f[1] - 8*f[2] + f[3]) / (12*fEpsilon);
+    return fRes;
 }
 } // namespace qmu

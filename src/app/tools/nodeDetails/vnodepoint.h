@@ -39,18 +39,17 @@ class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VNodePoint constructor.
-                  * @param doc dom document container.
-                  * @param data container with variables.
-                  * @param id object id in container.
-                  * @param id object id in containerPoint.
-                  * @param typeCreation way we create this tool.
-                  * @param parent parent object.
-                  */
-                 VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                            const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *qoParent = nullptr,
-                            QGraphicsItem * parent = nullptr );
+    /**
+     * @brief VNodePoint constructor.
+     * @param doc dom document container.
+     * @param data container with variables.
+     * @param id object id in container.
+     * @param id object id in containerPoint.
+     * @param typeCreation way we create this tool.
+     * @param parent parent object.
+     */
+    VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Valentina::Sources &typeCreation,
+               const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
     /**
      * @brief Create help create tool.
      * @param doc dom document container.
@@ -60,9 +59,8 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool = 0,
-                        QObject *parent = nullptr);
+    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document::Documents &parse,
+                        const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
     /**

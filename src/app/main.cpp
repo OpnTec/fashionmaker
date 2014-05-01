@@ -70,7 +70,8 @@ void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, c
     {
         QByteArray localMsg = msg.toLocal8Bit();
         QMessageBox messageBox;
-        switch (type) {
+        switch (type)
+        {
             case QtDebugMsg:
                 fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
