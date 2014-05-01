@@ -99,8 +99,6 @@ class QmuParserErrorMsg
 public:
 	typedef QmuParserErrorMsg self_type;
 
-	QmuParserErrorMsg& operator= ( const QmuParserErrorMsg & );
-	QmuParserErrorMsg ( const QmuParserErrorMsg& );
 	QmuParserErrorMsg();
 	~QmuParserErrorMsg();
 
@@ -108,6 +106,7 @@ public:
 	QString operator[] ( unsigned a_iIdx ) const;
 
 private:
+	Q_DISABLE_COPY(QmuParserErrorMsg)
 	QVector<QString>  m_vErrMsg;  ///< A vector with the predefined error messages
 	static const self_type m_Instance;    ///< The instance pointer
 };

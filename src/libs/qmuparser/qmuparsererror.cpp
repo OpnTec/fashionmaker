@@ -37,25 +37,11 @@ const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 //----------------------------------------------------------------------------------------------------------------------
 QString QmuParserErrorMsg::operator[] ( unsigned a_iIdx ) const
 {
-	return ( a_iIdx < m_vErrMsg.size() ) ? m_vErrMsg[a_iIdx] : QString();
+	return ( a_iIdx < static_cast<unsigned>( m_vErrMsg.size() ) ) ? m_vErrMsg[a_iIdx] : QString();
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 QmuParserErrorMsg::~QmuParserErrorMsg()
-{}
-
-//----------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Assignement operator is deactivated.
- */
-QmuParserErrorMsg& QmuParserErrorMsg::operator= ( const QmuParserErrorMsg& )
-{
-	assert ( false );
-	return *this;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-QmuParserErrorMsg::QmuParserErrorMsg ( const QmuParserErrorMsg& )
 {}
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -147,11 +133,9 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
  * @brief Construct an error from a message text.
  */
 QmuParserError::QmuParserError ( const QString &sMsg )
-	: m_ErrMsg ( QmuParserErrorMsg::Instance() )
-{
-	Reset();
-	m_strMsg = sMsg;
-}
+	: m_strMsg(sMsg), m_strFormula(), m_strTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
+	  m_ErrMsg ( QmuParserErrorMsg::Instance() )
+{}
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -264,9 +248,9 @@ void QmuParserError::ReplaceSubString ( QString &strSource, const QString &strFi
  */
 void QmuParserError::Reset()
 {
-	m_strMsg = "";
-	m_strFormula = "";
-	m_strTok = "";
+	m_strMsg.clear();
+	m_strFormula.clear();
+	m_strTok.clear();
 	m_iPos = -1;
 	m_iErrc = ecUNDEFINED;
 }

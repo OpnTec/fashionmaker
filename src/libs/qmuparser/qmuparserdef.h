@@ -44,7 +44,7 @@
 
   OpenMP is used only in the bulk mode it may increase the performance a bit.
 */
-//#define MUP_USE_OPENMP
+//#define QMUP_USE_OPENMP
 
 #if defined(_UNICODE)
 	/** @brief Definition of the basic parser string type. */

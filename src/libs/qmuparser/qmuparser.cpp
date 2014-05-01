@@ -64,7 +64,7 @@ qreal QmuParser::ACosh(qreal v)
 
 qreal QmuParser::ATanh(qreal v)
 {
-	return ((qreal)0.5 * log((1 + v) / (1 - v)));
+	return (0.5 * log((1 + v) / (1 - v)));
 }
 //----------------------------------------------------------------------------------------------------------------------
 // Logarithm functions
@@ -78,7 +78,7 @@ qreal QmuParser::Log2(qreal v)
 		throw QmuParserError(ecDOMAIN_ERROR, "Log2");
 	}
 #endif
-	return log(v)/log((qreal)2);
+	return log(v)/log(2.0);
 }
 
 // Logarithm base 10
@@ -102,12 +102,12 @@ qreal QmuParser::Abs(qreal v)
 
 qreal QmuParser::Rint(qreal v)
 {
-	return qFloor(v + (qreal)0.5);
+	return qFloor(v + 0.5);
 }
 
 qreal QmuParser::Sign(qreal v)
 {
-	return (qreal)((v<0) ? -1 : (v>0) ? 1 : 0);
+	return ((v<0) ? -1 : (v>0) ? 1 : 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
 	}
 	qreal fRes=0;
 	for (int i=0; i<a_iArgc; ++i) fRes += a_afArg[i];
-	return fRes/(qreal)a_iArgc;
+	return fRes/static_cast<qreal>(a_iArgc);
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -218,12 +218,12 @@ int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
 	stream >> fVal;
 	stringstream_type::pos_type iEnd = stream.tellg(); // Position after reading
 
-	if (iEnd==(stringstream_type::pos_type)-1)
+	if (iEnd==static_cast<stringstream_type::pos_type>(-1))
 	{
 	  return 0;
 	}
 
-	*a_iPos += (int)iEnd;
+	*a_iPos += static_cast<int>(iEnd);
 	*a_fVal = fVal;
 	return 1;
 }
@@ -325,8 +325,11 @@ void QmuParser::InitOprt()
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-void QmuParser::OnDetectVar(string_type * /*pExpr*/, int & /*nStart*/, int & /*nEnd*/)
+void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 {
+	Q_UNUSED(pExpr);
+	Q_UNUSED(nStart);
+	Q_UNUSED(nEnd);
 	// this is just sample code to illustrate modifying variable names on the fly.
 	// I'm not sure anyone really needs such a feature...
 	/*
@@ -372,9 +375,9 @@ qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
 
 	// Backwards compatible calculation of epsilon inc case the user doesnt provide
 	// his own epsilon
-	if (fEpsilon==0)
+	if (qFuzzyCompare(fEpsilon + 1, 1 + 0))
 	{
-		fEpsilon = (a_fPos==0) ? (qreal)1e-10 : (qreal)1e-7 * a_fPos;
+		fEpsilon = (qFuzzyCompare(a_fPos + 1, 1 + 0)) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
 	}
 
 	*a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();

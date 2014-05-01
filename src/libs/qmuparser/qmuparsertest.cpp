@@ -81,8 +81,8 @@ int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_f
 			return 1;
 		}
 
-		*a_iPos += ( int ) ( 2 + nPos );
-		*a_fVal = ( qreal ) iVal;
+		*a_iPos +=  2 + nPos;
+		*a_fVal = static_cast<qreal>(iVal);
 		return 1;
 	}
 	else
@@ -460,7 +460,7 @@ int QmuParserTester::TestVarConst()
 		// 4 used variables
 		p.SetExpr ( "a+b+c+d" );
 		qmu::varmap_type UsedVar = p.GetUsedVar();
-		int iCount = ( int ) UsedVar.size();
+		int iCount = static_cast<int>(UsedVar.size());
 		if ( iCount != 4 )
 		{
 			throw false;
@@ -485,7 +485,7 @@ int QmuParserTester::TestVarConst()
 		// Test lookup of undefined variables
 		p.SetExpr ( "undef1+undef2+undef3" );
 		UsedVar = p.GetUsedVar();
-		iCount = ( int ) UsedVar.size();
+		iCount = static_cast<int>(UsedVar.size());
 		if ( iCount != 3 )
 		{
 			throw false;
@@ -509,7 +509,7 @@ int QmuParserTester::TestVarConst()
 		// 1 used variables
 		p.SetExpr ( "a+b" );
 		UsedVar = p.GetUsedVar();
-		iCount = ( int ) UsedVar.size();
+		iCount = static_cast<int>(UsedVar.size());
 		if ( iCount != 2 )
 		{
 			throw false;
@@ -1072,7 +1072,7 @@ void QmuParserTester::Run()
 	int iStat = 0;
 	try
 	{
-		for ( int i = 0; i < ( int ) m_vTestFun.size(); ++i )
+		for ( int i = 0; i < m_vTestFun.size(); ++i )
 		{
 			iStat += ( this->*m_vTestFun[i] ) ();
 		}
@@ -1227,7 +1227,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 
 	try
 	{
-		std::auto_ptr<QmuParser> p1;
+		std::unique_ptr<QmuParser> p1;
 		QmuParser  p2, p3;   // three parser objects
 		// they will be used for testing copy and assihnment operators
 		// p1 is a pointer since i'm going to delete it in order to test if
@@ -1306,7 +1306,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 		// String parsing and bytecode parsing must yield the same result
 		fVal[0] = p1->Eval(); // result from stringparsing
 		fVal[1] = p1->Eval(); // result from bytecode
-		if ( fVal[0] != fVal[1] )
+		if ( qFuzzyCompare( fVal[0], fVal[1] ) == false )
 		{
 			throw QmuParser::exception_type ( "Bytecode / string parsing mismatch." );
 		}
@@ -1354,7 +1354,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 			// http://sourceforge.net/projects/muparser/forums/forum/462843/topic/5037825
 			if ( numeric_limits<qreal>::has_infinity )
 			{
-				bCloseEnough &= ( fabs ( fVal[i] ) != numeric_limits<qreal>::infinity() );
+				bCloseEnough &= (qFuzzyCompare( fabs ( fVal[i] ), numeric_limits<qreal>::infinity())==false );
 			}
 		}
 
@@ -1376,7 +1376,8 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 	{
 		if ( a_fPass )
 		{
-			if ( fVal[0] != fVal[2] && fVal[0] != -999 && fVal[1] != -998 )
+			if ( (qFuzzyCompare(fVal[0], fVal[2])==false) && (qFuzzyCompare(fVal[0], -999)==false) &&
+				 (qFuzzyCompare(fVal[1], -998 )==false))
 			{
 				qDebug() << "\n  fail: " << a_str << " (copy construction)";
 			}
@@ -1405,7 +1406,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 /**
  * @brief Internal error in test class Test is going to be aborted.
  */
-void QmuParserTester::Abort() const
+void Q_NORETURN QmuParserTester::Abort() const
 {
 	qDebug() << "Test failed (internal error in test class)" ;
 	while ( !getchar() );

@@ -178,7 +178,7 @@ private:
 
 	static qreal land ( qreal v1, qreal v2 )
 	{
-		return ( int ) v1 & ( int ) v2;
+		return static_cast<int>( v1 ) & static_cast<int>( v2 );
 	}
 
 	static qreal FirstArg ( const qreal* a_afArg, int a_iArgc )
@@ -218,12 +218,12 @@ private:
 
 	static qreal Rnd ( qreal v )
 	{
-		return ( qreal ) ( 1 + ( v * std::rand() / ( RAND_MAX + 1.0 ) ) );
+		return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
 	}
 
 	static qreal RndWithString ( const char_type* )
 	{
-		return ( qreal ) ( 1 + ( 1000.0f * std::rand() / ( RAND_MAX + 1.0 ) ) );
+		return static_cast<qreal>( ( 1 + ( 1000.0f * static_cast<qreal>(qrand()) / ( RAND_MAX + 1.0 ) ) ) );
 	}
 
 	static qreal Ping()
@@ -239,13 +239,13 @@ private:
 	static qreal StrFun1 ( const QString & v1 )
 	{
 		int val = v1.toInt();
-		return ( qreal ) val;
+		return static_cast<qreal>(val);
 	}
 
 	static qreal StrFun2 ( const QString & v1, qreal v2 )
 	{
 		int val = v1.toInt();
-		return ( qreal ) ( val + v2 );
+		return static_cast<qreal>( val + v2 );
 	}
 
 	static qreal StrFun3 ( const QString & v1, qreal v2, qreal v3 )
@@ -263,17 +263,17 @@ private:
 	// postfix operator callback
 	static qreal Mega ( qreal a_fVal )
 	{
-		return a_fVal * ( qreal ) 1e6;
+		return a_fVal * static_cast<qreal>( 1e6 );
 	}
 
 	static qreal Micro ( qreal a_fVal )
 	{
-		return a_fVal * ( qreal ) 1e-6;
+		return a_fVal * static_cast<qreal>( 1e-6 );
 	}
 
 	static qreal Milli ( qreal a_fVal )
 	{
-		return a_fVal / ( qreal ) 1e3;
+		return a_fVal / static_cast<qreal>( 1e3 );
 	}
 
 	// Custom value recognition

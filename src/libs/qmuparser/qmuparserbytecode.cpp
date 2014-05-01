@@ -52,6 +52,8 @@ QmuParserByteCode::QmuParserByteCode()
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
 QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
+	:m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
+	  m_bEnableOptimizer(true)
 {
 	Assign(a_ByteCode);
 }
@@ -101,7 +103,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 void QmuParserByteCode::AddVar(qreal *a_pVar)
 {
 	++m_iStackPos;
-	m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
+	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
 	// optimization does not apply
 	SToken tok;
@@ -129,7 +131,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
 void QmuParserByteCode::AddVal(qreal a_fVal)
 {
 	++m_iStackPos;
-	m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
+	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
 	// If optimization does not apply
 	SToken tok;
@@ -145,15 +147,15 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
 	std::size_t sz = m_vRPN.size();
 	qreal &x = m_vRPN[sz-2].Val.data2,
-	&y = m_vRPN[sz-1].Val.data2;
+		  &y = m_vRPN[sz-1].Val.data2;
 	switch (a_Oprt)
 	{
 		case cmLAND:
-			x = (int)x && (int)y;
+			x = static_cast<int>(x) && static_cast<int>(y);
 			m_vRPN.pop_back();
 			break;
 		case cmLOR:
-			x = (int)x || (int)y;
+			x = static_cast<int>(x) || static_cast<int>(y);
 			m_vRPN.pop_back();
 			break;
 		case cmLT:
@@ -173,11 +175,11 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 			m_vRPN.pop_back();
 			break;
 		case cmNEQ:
-			x = x != y;
+			x = (qFuzzyCompare(x, y) == false);
 			m_vRPN.pop_back();
 			break;
 		case cmEQ:
-			x = x == y;
+			x = qFuzzyCompare(x, y);
 			m_vRPN.pop_back();
 			break;
 		case cmADD:
@@ -202,10 +204,79 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 			x = x / y;
 			m_vRPN.pop_back();
 			break;
-			case cmPOW:
-				x = qPow(x, y);
-				m_vRPN.pop_back();
-				break;
+		case cmPOW:
+			x = qPow(x, y);
+			m_vRPN.pop_back();
+			break;
+		case cmASSIGN:
+			Q_UNREACHABLE();
+			break;
+		case cmBO:
+			Q_UNREACHABLE();
+			break;
+		case cmBC:
+			Q_UNREACHABLE();
+			break;
+		case cmIF:
+			Q_UNREACHABLE();
+			break;
+		case cmELSE:
+			Q_UNREACHABLE();
+			break;
+		case cmENDIF:
+			Q_UNREACHABLE();
+			break;
+		case cmARG_SEP:
+			Q_UNREACHABLE();
+			break;
+		case cmVAR:
+			Q_UNREACHABLE();
+			break;
+		case cmVAL:
+			Q_UNREACHABLE();
+			break;
+		case cmVARPOW2:
+			Q_UNREACHABLE();
+			break;
+		case cmVARPOW3:
+			Q_UNREACHABLE();
+			break;
+		case cmVARPOW4:
+			Q_UNREACHABLE();
+			break;
+		case cmVARMUL:
+			Q_UNREACHABLE();
+			break;
+		case cmPOW2:
+			Q_UNREACHABLE();
+			break;
+		case cmFUNC:
+			Q_UNREACHABLE();
+			break;
+		case cmFUNC_STR:
+			Q_UNREACHABLE();
+			break;
+		case cmFUNC_BULK:
+			Q_UNREACHABLE();
+			break;
+		case cmSTRING:
+			Q_UNREACHABLE();
+			break;
+		case cmOPRT_BIN:
+			Q_UNREACHABLE();
+			break;
+		case cmOPRT_POSTFIX:
+			Q_UNREACHABLE();
+			break;
+		case cmOPRT_INFIX:
+			Q_UNREACHABLE();
+			break;
+		case cmEND:
+			Q_UNREACHABLE();
+			break;
+		case cmUNKNOWN:
+			Q_UNREACHABLE();
+			break;
 		default:
 			break;
 	} // switch opcode
@@ -248,15 +319,15 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 					// Optimization for ploynomials of low order
 					if (m_vRPN[sz-2].Cmd == cmVAR && m_vRPN[sz-1].Cmd == cmVAL)
 					{
-						if (m_vRPN[sz-1].Val.data2==2)
+						if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 2))
 						{
 							m_vRPN[sz-2].Cmd = cmVARPOW2;
 						}
-						else if (m_vRPN[sz-1].Val.data2==3)
+						else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 3))
 						{
 							m_vRPN[sz-2].Cmd = cmVARPOW3;
 						}
-						else if (m_vRPN[sz-1].Val.data2==4)
+						else if (qFuzzyCompare(m_vRPN[sz-1].Val.data2, 4))
 						{
 							m_vRPN[sz-2].Cmd = cmVARPOW4;
 						}
@@ -291,8 +362,9 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 						(m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
 
 						m_vRPN[sz-2].Cmd = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr    = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) |
-								(long long)(m_vRPN[sz-1].Val.ptr));    // variable
+						m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
+								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));    // variable
 						m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data2; // offset
 						m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data;  // multiplikatior
 						m_vRPN.pop_back();
@@ -304,8 +376,9 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 					(m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVAR) )
 					{
 						m_vRPN[sz-2].Cmd        = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr    = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) |
-								(long long)(m_vRPN[sz-1].Val.ptr));
+						m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>(
+								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
 						m_vRPN[sz-2].Val.data   = m_vRPN[sz-2].Val.data2 + m_vRPN[sz-1].Val.data2;
 						m_vRPN[sz-2].Val.data2  = 0;
 						m_vRPN.pop_back();
@@ -316,8 +389,9 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 					{
 						// Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
 						m_vRPN[sz-2].Cmd     = cmVARMUL;
-						m_vRPN[sz-2].Val.ptr = (qreal*)((long long)(m_vRPN[sz-2].Val.ptr) |
-								(long long)(m_vRPN[sz-1].Val.ptr));
+						m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
+								reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+								reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
 						if (m_vRPN[sz-1].Cmd == cmVAL)
 						{
 							m_vRPN[sz-2].Val.data  *= m_vRPN[sz-1].Val.data2;
@@ -341,7 +415,8 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 					}
 					break;
 				case cmDIV:
-				if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL && m_vRPN[sz-1].Val.data2!=0)
+				if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL &&
+						(qFuzzyCompare(m_vRPN[sz-1].Val.data2+1, 1+0)==false))
 				{
 					// Optimization: 4*a/2 -> 2*a
 					m_vRPN[sz-2].Val.data  /= m_vRPN[sz-1].Val.data2;
@@ -350,8 +425,103 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 					bOptimized = true;
 				}
 				break;
+				case cmLE:
+					Q_UNREACHABLE();
+					break;
+				case cmGE:
+					Q_UNREACHABLE();
+					break;
+				case cmNEQ:
+					Q_UNREACHABLE();
+					break;
+				case cmEQ:
+					Q_UNREACHABLE();
+					break;
+				case cmLT:
+					Q_UNREACHABLE();
+					break;
+				case cmGT:
+					Q_UNREACHABLE();
+					break;
+				case cmLAND:
+					Q_UNREACHABLE();
+					break;
+				case cmLOR:
+					Q_UNREACHABLE();
+					break;
+				case cmASSIGN:
+					Q_UNREACHABLE();
+					break;
+				case cmBO:
+					Q_UNREACHABLE();
+					break;
+				case cmBC:
+					Q_UNREACHABLE();
+					break;
+				case cmIF:
+					Q_UNREACHABLE();
+					break;
+				case cmELSE:
+					Q_UNREACHABLE();
+					break;
+				case cmENDIF:
+					Q_UNREACHABLE();
+					break;
+				case cmARG_SEP:
+					Q_UNREACHABLE();
+					break;
+				case cmVAR:
+					Q_UNREACHABLE();
+					break;
+				case cmVAL:
+					Q_UNREACHABLE();
+					break;
+				case cmVARPOW2:
+					Q_UNREACHABLE();
+					break;
+				case cmVARPOW3:
+					Q_UNREACHABLE();
+					break;
+				case cmVARPOW4:
+					Q_UNREACHABLE();
+					break;
+				case cmVARMUL:
+					Q_UNREACHABLE();
+					break;
+				case cmPOW2:
+					Q_UNREACHABLE();
+					break;
+				case cmFUNC:
+					Q_UNREACHABLE();
+					break;
+				case cmFUNC_STR:
+					Q_UNREACHABLE();
+					break;
+				case cmFUNC_BULK:
+					Q_UNREACHABLE();
+					break;
+				case cmSTRING:
+					Q_UNREACHABLE();
+					break;
+				case cmOPRT_BIN:
+					Q_UNREACHABLE();
+					break;
+				case cmOPRT_POSTFIX:
+					Q_UNREACHABLE();
+					break;
+				case cmOPRT_INFIX:
+					Q_UNREACHABLE();
+					break;
+				case cmEND:
+					Q_UNREACHABLE();
+					break;
+				case cmUNKNOWN:
+					Q_UNREACHABLE();
+					break;
+				default:
+					break;
 
-				} // switch a_Oprt
+			} // switch a_Oprt
 		}
 	}
 
@@ -413,7 +583,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
 		// function with unlimited number of arguments
 		m_iStackPos = m_iStackPos + a_iArgc + 1;
 	}
-	m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
+	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
 	SToken tok;
 	tok.Cmd = cmFUNC;
@@ -432,7 +602,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
 void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
 {
 	m_iStackPos = m_iStackPos - a_iArgc + 1;
-	m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
+	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
 	SToken tok;
 	tok.Cmd = cmFUNC_BULK;
@@ -460,7 +630,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
 	tok.Fun.ptr = a_pFun;
 	m_vRPN.push_back(tok);
 
-	m_iMaxStackSize = std::max(m_iMaxStackSize, (size_t)m_iStackPos);
+	m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -479,7 +649,7 @@ void QmuParserByteCode::Finalize()
 	// Determine the if-then-else jump offsets
 	QStack<int> stIf, stElse;
 	int idx;
-	for (int i=0; i<(int)m_vRPN.size(); ++i)
+	for (int i=0; i<m_vRPN.size(); ++i)
 	{
 		switch(m_vRPN[i].Cmd)
 		{
@@ -494,6 +664,105 @@ void QmuParserByteCode::Finalize()
 			case cmENDIF:
 				idx = stElse.pop();
 				m_vRPN[idx].Oprt.offset = i - idx;
+				break;
+			case cmLE:
+				Q_UNREACHABLE();
+				break;
+			case cmGE:
+				Q_UNREACHABLE();
+				break;
+			case cmNEQ:
+				Q_UNREACHABLE();
+				break;
+			case cmEQ:
+				Q_UNREACHABLE();
+				break;
+			case cmLT:
+				Q_UNREACHABLE();
+				break;
+			case cmGT:
+				Q_UNREACHABLE();
+				break;
+			case cmADD:
+				Q_UNREACHABLE();
+				break;
+			case cmSUB:
+				Q_UNREACHABLE();
+				break;
+			case cmMUL:
+				Q_UNREACHABLE();
+				break;
+			case cmDIV:
+				Q_UNREACHABLE();
+				break;
+			case cmPOW:
+				Q_UNREACHABLE();
+				break;
+			case cmLAND:
+				Q_UNREACHABLE();
+				break;
+			case cmLOR:
+				Q_UNREACHABLE();
+				break;
+			case cmASSIGN:
+				Q_UNREACHABLE();
+				break;
+			case cmBO:
+				Q_UNREACHABLE();
+				break;
+			case cmBC:
+				Q_UNREACHABLE();
+				break;
+			case cmARG_SEP:
+				Q_UNREACHABLE();
+				break;
+			case cmVAR:
+				Q_UNREACHABLE();
+				break;
+			case cmVAL:
+				Q_UNREACHABLE();
+				break;
+			case cmVARPOW2:
+				Q_UNREACHABLE();
+				break;
+			case cmVARPOW3:
+				Q_UNREACHABLE();
+				break;
+			case cmVARPOW4:
+				Q_UNREACHABLE();
+				break;
+			case cmVARMUL:
+				Q_UNREACHABLE();
+				break;
+			case cmPOW2:
+				Q_UNREACHABLE();
+				break;
+			case cmFUNC:
+				Q_UNREACHABLE();
+				break;
+			case cmFUNC_STR:
+				Q_UNREACHABLE();
+				break;
+			case cmFUNC_BULK:
+				Q_UNREACHABLE();
+				break;
+			case cmSTRING:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_BIN:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_POSTFIX:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_INFIX:
+				Q_UNREACHABLE();
+				break;
+			case cmEND:
+				Q_UNREACHABLE();
+				break;
+			case cmUNKNOWN:
+				Q_UNREACHABLE();
 				break;
 			default:
 				break;
@@ -558,7 +827,7 @@ void QmuParserByteCode::AsciiDump()
 	}
 
 	qDebug() << "Number of RPN tokens:" << m_vRPN.size() << "\n";
-	for (std::size_t i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
+	for (int i=0; i<m_vRPN.size() && m_vRPN[i].Cmd!=cmEND; ++i)
 	{
 		qDebug() << i << " : \t";
 		switch (m_vRPN[i].Cmd)
@@ -639,6 +908,39 @@ void QmuParserByteCode::AsciiDump()
 				qDebug() << "ENDIF\n"; break;
 			case cmASSIGN:
 				qDebug() << "ASSIGN\t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Oprt.ptr, 'f', 16) << "]\n";
+				break;
+			case cmBO:
+				Q_UNREACHABLE();
+				break;
+			case cmBC:
+				Q_UNREACHABLE();
+				break;
+			case cmARG_SEP:
+				Q_UNREACHABLE();
+				break;
+			case cmPOW2:
+				Q_UNREACHABLE();
+				break;
+			case cmFUNC_BULK:
+				Q_UNREACHABLE();
+				break;
+			case cmSTRING:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_BIN:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_POSTFIX:
+				Q_UNREACHABLE();
+				break;
+			case cmOPRT_INFIX:
+				Q_UNREACHABLE();
+				break;
+			case cmEND:
+				Q_UNREACHABLE();
+				break;
+			case cmUNKNOWN:
+				Q_UNREACHABLE();
 				break;
 			default:
 				qDebug() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
