@@ -95,7 +95,7 @@ QmuParserBase::~QmuParserBase()
  * @return *this
  * @throw nothrow
  */
-QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
+QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser) Q_DECL_NOEXCEPT
 {
     Assign(a_Parser);
     return *this;
@@ -198,7 +198,7 @@ void QmuParserBase::ResetLocale()
  * @post m_pTokenReader.get()!=0
  * @throw nothrow
  */
-void QmuParserBase::InitTokenReader()
+void QmuParserBase::InitTokenReader() Q_DECL_NOEXCEPT
 {
     m_pTokenReader.reset(new token_reader_type(this));
 }
@@ -210,7 +210,7 @@ void QmuParserBase::InitTokenReader()
  * Clear bytecode, reset the token reader.
  * @throw nothrow
  */
-void QmuParserBase::ReInit() const
+void QmuParserBase::ReInit() const Q_DECL_NOEXCEPT
 {
     m_pParseFormula = &QmuParserBase::ParseString;
     m_vStringBuf.clear();
@@ -977,7 +977,7 @@ const valmap_type& QmuParserBase::GetConst() const
  * parser functions. String functions are not part of this map. The Prototype definition is encapsulated in objects
  * of the class FunProt one per parser function each associated with function names via a map construct.
  */
-const funmap_type& QmuParserBase::GetFunDef() const
+const funmap_type& QmuParserBase::GetFunDef() const Q_DECL_NOEXCEPT
 {
     return m_FunDef;
 }
@@ -2082,7 +2082,7 @@ void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QStr
  * Resets the parser to string parsing mode by calling #ReInit.
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearVar()
+void QmuParserBase::ClearVar() Q_DECL_NOEXCEPT
 {
     m_VarDef.clear();
     ReInit();
@@ -2095,7 +2095,7 @@ void QmuParserBase::ClearVar()
  *
  * Removes a variable if it exists. If the Variable does not exist nothing will be done.
  */
-void QmuParserBase::RemoveVar(const QString &a_strVarName)
+void QmuParserBase::RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT
 {
     varmap_type::iterator item = m_VarDef.find(a_strVarName);
     if (item!=m_VarDef.end())
@@ -2112,7 +2112,7 @@ void QmuParserBase::RemoveVar(const QString &a_strVarName)
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearFun()
+void QmuParserBase::ClearFun() Q_DECL_NOEXCEPT
 {
     m_FunDef.clear();
     ReInit();
@@ -2126,7 +2126,7 @@ void QmuParserBase::ClearFun()
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
-void QmuParserBase::ClearConst()
+void QmuParserBase::ClearConst() Q_DECL_NOEXCEPT
 {
     m_ConstDef.clear();
     m_StrVarDef.clear();
@@ -2139,7 +2139,7 @@ void QmuParserBase::ClearConst()
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
-void QmuParserBase::ClearPostfixOprt()
+void QmuParserBase::ClearPostfixOprt() Q_DECL_NOEXCEPT
 {
     m_PostOprtDef.clear();
     ReInit();
@@ -2152,7 +2152,7 @@ void QmuParserBase::ClearPostfixOprt()
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearOprt()
+void QmuParserBase::ClearOprt() Q_DECL_NOEXCEPT
 {
     m_OprtDef.clear();
     ReInit();
@@ -2165,7 +2165,7 @@ void QmuParserBase::ClearOprt()
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearInfixOprt()
+void QmuParserBase::ClearInfixOprt() Q_DECL_NOEXCEPT
 {
     m_InfixOprtDef.clear();
     ReInit();
@@ -2177,7 +2177,7 @@ void QmuParserBase::ClearInfixOprt()
  * @post Resets the parser to string parser mode.
  * @throw nothrow
  */
-void QmuParserBase::EnableOptimizer(bool a_bIsOn)
+void QmuParserBase::EnableOptimizer(bool a_bIsOn) Q_DECL_NOEXCEPT
 {
     m_vRPN.EnableOptimizer(a_bIsOn);
     ReInit();
@@ -2208,7 +2208,7 @@ void QmuParserBase::EnableDebugDump(bool bDumpCmd, bool bDumpStack)
  * manually one by one. It is not possible to disable built in operators selectively. This function will Reinitialize
  * the parser by calling ReInit().
  */
-void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn)
+void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn) Q_DECL_NOEXCEPT
 {
     m_bBuiltInOp = a_bIsOn;
     ReInit();
@@ -2220,7 +2220,7 @@ void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn)
  * @return #m_bBuiltInOp; true if built in operators are enabled.
  * @throw nothrow
  */
-bool QmuParserBase::HasBuiltInOprt() const
+bool QmuParserBase::HasBuiltInOprt() const Q_DECL_NOEXCEPT
 {
     return m_bBuiltInOp;
 }

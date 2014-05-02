@@ -338,7 +338,7 @@ QmuParserCallback* QmuParserCallback::Clone() const
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-bool QmuParserCallback::IsOptimizable() const
+bool QmuParserCallback::IsOptimizable() const Q_DECL_NOEXCEPT
 {
     return m_bAllowOpti;
 }
@@ -352,7 +352,7 @@ bool QmuParserCallback::IsOptimizable() const
  * @throw nothrow
  * @return #pFun
  */
-void* QmuParserCallback::GetAddr() const
+void* QmuParserCallback::GetAddr() const Q_DECL_NOEXCEPT
 {
     return m_pFun;
 }
@@ -379,7 +379,7 @@ ETypeCode QmuParserCallback::GetType() const
  *
  * Only valid if the callback token is an operator token (binary or infix).
  */
-int QmuParserCallback::GetPri()  const
+int QmuParserCallback::GetPri()  const Q_DECL_NOEXCEPT
 {
     return m_iPri;
 }
@@ -391,7 +391,7 @@ int QmuParserCallback::GetPri()  const
  *
  * Only valid if the callback token is a binary operator token.
  */
-EOprtAssociativity QmuParserCallback::GetAssociativity() const
+EOprtAssociativity QmuParserCallback::GetAssociativity() const Q_DECL_NOEXCEPT
 {
     return m_eOprtAsct;
 }

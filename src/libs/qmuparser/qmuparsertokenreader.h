@@ -57,20 +57,20 @@ namespace qmu
   public:
 
       QmuParserTokenReader(QmuParserBase *a_pParent);
-      QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const;
+      QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const Q_DECL_NOEXCEPT;
 
       void AddValIdent(identfun_type a_pCallback);
       void SetVarCreator(facfun_type a_pFactory, void *pUserData);
       void SetFormula(const QString &a_strFormula);
       void SetArgSep(char_type cArgSep);
 
-      int GetPos() const;
-      const QString &GetExpr() const;
+      int GetPos() const Q_DECL_NOEXCEPT;
+      const QString &GetExpr() const Q_DECL_NOEXCEPT;
       varmap_type& GetUsedVar();
       QChar GetArgSep() const;
 
       void IgnoreUndefVar(bool bIgnore);
-      void ReInit();
+      void ReInit() Q_DECL_NOEXCEPT;
       token_type ReadNextToken();
 
   private:
@@ -102,16 +102,16 @@ namespace qmu
       };
 
       QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
-      QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader);
-      void Assign(const QmuParserTokenReader &a_Reader);
+      QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
+      void Assign(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
 
       void SetParent(QmuParserBase *a_pParent);
-      int ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const;
+      int ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const Q_DECL_NOEXCEPT;
       int ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
 
       bool IsBuiltIn(token_type &a_Tok);
       bool IsArgSep(token_type &a_Tok);
-      bool IsEOF(token_type &a_Tok);
+      bool IsEOF(token_type &a_Tok) Q_DECL_NOEXCEPT;
       bool IsInfixOpTok(token_type &a_Tok);
       bool IsFunTok(token_type &a_Tok);
       bool IsPostOpTok(token_type &a_Tok);
@@ -119,8 +119,8 @@ namespace qmu
       bool IsValTok(token_type &a_Tok);
       bool IsVarTok(token_type &a_Tok);
       bool IsStrVarTok(token_type &a_Tok);
-      bool IsUndefVarTok(token_type &a_Tok);
-      bool IsString(token_type &a_Tok);
+      bool IsUndefVarTok(token_type &a_Tok) Q_DECL_NOEXCEPT;
+      bool IsString(token_type &a_Tok) Q_DECL_NOEXCEPT;
       void Error(EErrorCodes a_iErrc,
                  int a_iPos = -1,
                  const QString &a_sTok = QString() ) const;

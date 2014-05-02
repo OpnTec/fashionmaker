@@ -104,7 +104,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
  * @param a_pVar Pointer to be added.
  * @throw nothrow
  */
-void QmuParserByteCode::AddVar(qreal *a_pVar)
+void QmuParserByteCode::AddVar(qreal *a_pVar) Q_DECL_NOEXCEPT
 {
     ++m_iStackPos;
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
@@ -132,7 +132,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
  * @param a_pVal Value to be added.
  * @throw nothrow
  */
-void QmuParserByteCode::AddVal(qreal a_fVal)
+void QmuParserByteCode::AddVal(qreal a_fVal) Q_DECL_NOEXCEPT
 {
     ++m_iStackPos;
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
@@ -623,7 +623,7 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
  * A string function entry consists of the stack position of the return value, followed by a cmSTRFUNC code, the
  * function pointer and an index into the string buffer maintained by the parser.
  */
-void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx)
+void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx) Q_DECL_NOEXCEPT
 {
     m_iStackPos = m_iStackPos - a_iArgc + 1;
 
@@ -643,7 +643,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
  *
  * @throw nothrow
  */
-void QmuParserByteCode::Finalize()
+void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
 {
     SToken tok;
     tok.Cmd = cmEND;
@@ -812,7 +812,7 @@ std::size_t QmuParserByteCode::GetSize() const
  * The name of this function is a violation of my own coding guidelines but this way it's more in line with the STL
  * functions thus more intuitive.
  */
-void QmuParserByteCode::clear()
+void QmuParserByteCode::clear() Q_DECL_NOEXCEPT
 {
     m_vRPN.clear();
     m_iStackPos = 0;

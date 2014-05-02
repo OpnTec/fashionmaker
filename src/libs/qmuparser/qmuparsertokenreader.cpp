@@ -63,7 +63,7 @@ QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reade
  * @param a_Reader Object to copy to this token reader.
  * @throw nothrow
  */
-QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenReader &a_Reader )
+QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
 {
     if ( &a_Reader != this )
     {
@@ -80,7 +80,7 @@ QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenRead
  * @param a_Reader Object from which the state should be copied.
  * @throw nothrow
  */
-void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader )
+void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
 {
     m_pParser = a_Reader.m_pParser;
     m_strFormula = a_Reader.m_strFormula;
@@ -135,7 +135,7 @@ QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
  * @return A new QParserTokenReader object.
  * @throw nothrow
  */
-QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) const
+QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) const Q_DECL_NOEXCEPT
 {
     std::unique_ptr<QmuParserTokenReader> ptr ( new QmuParserTokenReader ( *this ) );
     ptr->SetParent ( a_pParent );
@@ -175,7 +175,7 @@ void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserDa
  * @return #m_iPos
  * @throw nothrow
  */
-int QmuParserTokenReader::GetPos() const
+int QmuParserTokenReader::GetPos() const Q_DECL_NOEXCEPT
 {
     return m_iPos;
 }
@@ -187,7 +187,7 @@ int QmuParserTokenReader::GetPos() const
  * @return #m_strFormula
  * @throw nothrow
  */
-const QString& QmuParserTokenReader::GetExpr() const
+const QString& QmuParserTokenReader::GetExpr() const Q_DECL_NOEXCEPT
 {
     return m_strFormula;
 }
@@ -237,7 +237,7 @@ void QmuParserTokenReader::IgnoreUndefVar ( bool bIgnore )
  * @throw nothrow
  * @sa ESynCodes
  */
-void QmuParserTokenReader::ReInit()
+void QmuParserTokenReader::ReInit() Q_DECL_NOEXCEPT
 {
     m_iPos = 0;
     m_iSynFlags = sfSTART_OF_LINE;
@@ -362,7 +362,7 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
  * @return The Position of the first character not listed in a_szCharSet.
  * @throw nothrow
  */
-int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const
+int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const Q_DECL_NOEXCEPT
 {
 #if defined(_UNICODE)
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
@@ -599,7 +599,7 @@ bool QmuParserTokenReader::IsArgSep ( token_type &a_Tok )
  * @throw nothrow
  * @sa IsOprt, IsFunTok, IsStrFunTok, IsValTok, IsVarTok, IsString, IsInfixOpTok, IsPostOpTok
  */
-bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
+bool QmuParserTokenReader::IsEOF ( token_type &a_Tok ) Q_DECL_NOEXCEPT
 {
 #if defined(_UNICODE)
     const char_type* szFormula = m_strFormula.toStdWString().c_str();
@@ -996,7 +996,7 @@ bool QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok )
  * @return true if a variable token has been found.
  * @throw nothrow
  */
-bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
+bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) Q_DECL_NOEXCEPT
 {
     QString strTok;
     int iEnd ( ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos ) );
@@ -1051,7 +1051,7 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
  * @sa IsOprt, IsFunTok, IsStrFunTok, IsValTok, IsVarTok, IsEOF, IsInfixOpTok, IsPostOpTok
  * @throw nothrow
  */
-bool QmuParserTokenReader::IsString ( token_type &a_Tok )
+bool QmuParserTokenReader::IsString ( token_type &a_Tok ) Q_DECL_NOEXCEPT
 {
     if ( m_strFormula[m_iPos] != '"' )
     {

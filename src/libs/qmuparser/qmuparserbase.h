@@ -64,7 +64,7 @@ public:
 
     QmuParserBase();
     QmuParserBase(const QmuParserBase &a_Parser);
-    QmuParserBase& operator=(const QmuParserBase &a_Parser);
+    QmuParserBase& operator=(const QmuParserBase &a_Parser) Q_DECL_NOEXCEPT;
     virtual ~QmuParserBase();
 
     static void        EnableDebugDump(bool bDumpCmd, bool bDumpStack);
@@ -77,9 +77,9 @@ public:
     void               SetDecSep(char_type cDecSep);
     void               SetThousandsSep(char_type cThousandsSep = 0);
     void               ResetLocale();
-    void               EnableOptimizer(bool a_bIsOn=true);
-    void               EnableBuiltInOprt(bool a_bIsOn=true);
-    bool               HasBuiltInOprt() const;
+    void               EnableOptimizer(bool a_bIsOn=true) Q_DECL_NOEXCEPT;
+    void               EnableBuiltInOprt(bool a_bIsOn=true) Q_DECL_NOEXCEPT;
+    bool               HasBuiltInOprt() const Q_DECL_NOEXCEPT;
     void               AddValIdent(identfun_type a_pCallback);
     void               DefineOprt(const QString &a_strName, fun_type2 a_pFun, unsigned a_iPri=0,
                                   EOprtAssociativity a_eAssociativity = oaLEFT, bool a_bAllowOpt = false);
@@ -90,18 +90,18 @@ public:
     void               DefineInfixOprt(const QString &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX,
                                        bool a_bAllowOpt=true);
     // Clear user defined variables, constants or functions
-    void               ClearVar();
-    void               ClearFun();
-    void               ClearConst();
-    void               ClearInfixOprt();
-    void               ClearPostfixOprt();
-    void               ClearOprt();
-    void               RemoveVar(const QString &a_strVarName);
+    void               ClearVar() Q_DECL_NOEXCEPT;
+    void               ClearFun() Q_DECL_NOEXCEPT;
+    void               ClearConst() Q_DECL_NOEXCEPT;
+    void               ClearInfixOprt() Q_DECL_NOEXCEPT;
+    void               ClearPostfixOprt() Q_DECL_NOEXCEPT;
+    void               ClearOprt() Q_DECL_NOEXCEPT;
+    void               RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT;
     const varmap_type& GetUsedVar() const;
     const varmap_type& GetVar() const;
     const valmap_type& GetConst() const;
     const QString&     GetExpr() const;
-    const funmap_type& GetFunDef() const;
+    const funmap_type& GetFunDef() const Q_DECL_NOEXCEPT;
     static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
     static const QStringList& GetOprtDef();
     void               DefineNameChars(const QString &a_szCharset);
@@ -235,8 +235,8 @@ private:
     mutable int m_nFinalResultIdx;
 
     void               Assign(const QmuParserBase &a_Parser);
-    void               InitTokenReader();
-    void               ReInit() const;
+    void               InitTokenReader() Q_DECL_NOEXCEPT;
+    void               ReInit() const Q_DECL_NOEXCEPT;
     void               AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
                                    funmap_type &a_Storage, const QString &a_szCharSet );
     void               ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;

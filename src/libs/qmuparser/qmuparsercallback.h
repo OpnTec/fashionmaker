@@ -79,12 +79,12 @@ public:
     QmuParserCallback(const QmuParserCallback &a_Fun);
 
     QmuParserCallback* Clone() const;
-    bool               IsOptimizable() const;
-    void*              GetAddr() const;
+    bool               IsOptimizable() const Q_DECL_NOEXCEPT;
+    void*              GetAddr() const Q_DECL_NOEXCEPT;
     ECmdCode           GetCode() const;
     ETypeCode          GetType() const;
-    int                GetPri()  const;
-    EOprtAssociativity GetAssociativity() const;
+    int                GetPri()  const Q_DECL_NOEXCEPT;
+    EOprtAssociativity GetAssociativity() const Q_DECL_NOEXCEPT;
     int                GetArgc() const;
 private:
     void *m_pFun;                   ///< Pointer to the callback function, casted to void
