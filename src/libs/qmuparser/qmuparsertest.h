@@ -61,9 +61,10 @@ private:
     void AddTest ( testfun_type a_pFun );
 
     // Test Double Parser
-    int EqnTest ( const QString &a_str, double a_fRes, bool a_fPass );
-    int EqnTestWithVarChange ( const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2, double a_fVar2 );
-    int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
+    static int EqnTest ( const QString &a_str, double a_fRes, bool a_fPass );
+    static int EqnTestWithVarChange ( const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                      double a_fVar2 );
+    static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
     // Multiarg callbacks
     static qreal f1of1 ( qreal v )
@@ -279,20 +280,32 @@ private:
     // Custom value recognition
     static int IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal );
 
+    // cppcheck-suppress functionStatic
     int TestNames();
+    // cppcheck-suppress functionStatic
     int TestSyntax();
+    // cppcheck-suppress functionStatic
     int TestMultiArg();
+    // cppcheck-suppress functionStatic
     int TestPostFix();
+    // cppcheck-suppress functionStatic
     int TestExpression();
+    // cppcheck-suppress functionStatic
     int TestInfixOprt();
+    // cppcheck-suppress functionStatic
     int TestBinOprt();
+    // cppcheck-suppress functionStatic
     int TestVarConst();
+    // cppcheck-suppress functionStatic
     int TestInterface();
+    // cppcheck-suppress functionStatic
     int TestException();
+    // cppcheck-suppress functionStatic
     int TestStrArg();
+    // cppcheck-suppress functionStatic
     int TestIfThenElse();
 
-    void Abort() const;
+    static void Abort();
 };
 } // namespace Test
 } // namespace qmu

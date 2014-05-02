@@ -153,6 +153,7 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
  * By default muparser uses the "C" locale. The decimal separator of this
  * locale is overwritten by the one provided here.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::SetDecSep(char_type cDecSep)
 {
     char_type cThousandsSep = std::use_facet< change_dec_sep<char_type> >(s_locale).thousands_sep();
@@ -168,6 +169,7 @@ void QmuParserBase::SetDecSep(char_type cDecSep)
  * By default muparser uses the "C" locale. The thousands separator of this
  * locale is overwritten by the one provided here.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
 {
     char_type cDecSep = std::use_facet< change_dec_sep<char_type> >(s_locale).decimal_point();
@@ -180,6 +182,7 @@ void QmuParserBase::SetThousandsSep(char_type cThousandsSep)
  *
  * The default locale used "." as decimal separator, no thousands separator and "," as function argument separator.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::ResetLocale()
 {
     s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>('.'));
@@ -231,7 +234,8 @@ void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
  *
  * Format is as follows: "MAJOR.MINOR (COMPILER_FLAGS)" The COMPILER_FLAGS are returned only if eInfo==pviFULL.
  */
-QString QmuParserBase::GetVersion(EParserVersionInfo eInfo) const
+// cppcheck-suppress unusedFunction
+QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
 {
     QString versionInfo;
     QTextStream ss(&versionInfo);
@@ -294,6 +298,7 @@ void QmuParserBase::AddValIdent(identfun_type a_pCallback)
  * @param a_pFactory A pointer to the variable factory.
  * @param pUserData A user defined context pointer.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData)
 {
     m_pTokenReader->SetVarCreator(a_pFactory, pUserData);
@@ -529,7 +534,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
  * @brief Get the default symbols used for the built in operators.
  * @sa c_DefaultOprt
  */
-const QStringList &QmuParserBase::GetOprtDef() const
+const QStringList &QmuParserBase::GetOprtDef()
 {
     return c_DefaultOprt;
 }
@@ -611,6 +616,7 @@ void QmuParserBase::DefinePostfixOprt(const QString &a_sName, fun_type1 a_pFun, 
  *
  * Calls the virtual functions InitFun(), InitConst() and InitOprt().
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::Init()
 {
     InitCharSets();
@@ -668,6 +674,7 @@ void QmuParserBase::DefineOprt( const QString &a_sName, fun_type2 a_pFun, unsign
  * @param [in] a_strName The name of the constant.
  * @param [in] a_strVal the value of the constant.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_strVal)
 {
     // Test if a constant with that names already exists
@@ -930,13 +937,13 @@ const varmap_type& QmuParserBase::GetUsedVar() const
         m_pParseFormula = &QmuParserBase::ParseString;
         m_pTokenReader->IgnoreUndefVar(false);
     }
-    catch (exception_type &e)
+    catch (const exception_type &e)
     {
         // Make sure to stay in string parse mode, dont call ReInit()
         // because it deletes the array with the used variables
         m_pParseFormula = &QmuParserBase::ParseString;
         m_pTokenReader->IgnoreUndefVar(false);
-        throw e;
+        throw;
     }
     return m_pTokenReader->GetUsedVar();
 }
@@ -1780,8 +1787,8 @@ void QmuParserBase::CreateRPN() const
     QStack<token_type> stOpt, stVal;
     QStack<int> stArgCount;
     token_type opta, opt;  // for storing operators
-    token_type val, tval;  // for storing value
-    string_type strBuf;    // buffer for string function arguments
+    //token_type val, tval;  // for storing value
+    //string_type strBuf;    // buffer for string function arguments
 
     ReInit();
 
@@ -2074,6 +2081,7 @@ void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QStr
  *
  * Resets the parser to string parsing mode by calling #ReInit.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::ClearVar()
 {
     m_VarDef.clear();
@@ -2103,6 +2111,7 @@ void QmuParserBase::RemoveVar(const QString &a_strVarName)
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::ClearFun()
 {
     m_FunDef.clear();
@@ -2142,6 +2151,7 @@ void QmuParserBase::ClearPostfixOprt()
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::ClearOprt()
 {
     m_OprtDef.clear();
@@ -2154,6 +2164,7 @@ void QmuParserBase::ClearOprt()
  * @post Resets the parser to string parser mode.
  * @throw nothrow
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::ClearInfixOprt()
 {
     m_InfixOprtDef.clear();
@@ -2180,6 +2191,7 @@ void QmuParserBase::EnableOptimizer(bool a_bIsOn)
  *
  * This function is for debug purposes only!
  */
+// cppcheck-suppress unusedFunction
 void QmuParserBase::EnableDebugDump(bool bDumpCmd, bool bDumpStack)
 {
     QmuParserBase::g_DbgDumpCmdCode = bDumpCmd;
@@ -2410,6 +2422,7 @@ qreal* QmuParserBase::Eval(int &nStackSize) const
  * If the expression contains comma seperated subexpressions (i.e. "sin(y), x+y"). There mey be more than one return
  * value. This function returns the number of available results.
  */
+// cppcheck-suppress unusedFunction
 int QmuParserBase::GetNumResults() const
 {
     return m_nFinalResultIdx;
@@ -2438,7 +2451,7 @@ qreal QmuParserBase::Eval() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::Eval(qreal *results, int nBulkSize)
+void QmuParserBase::Eval(qreal *results, int nBulkSize) const
 {
     CreateRPN();
 
@@ -2452,7 +2465,10 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize)
     #endif
 
     int nMaxThreads = qMin(omp_get_max_threads(), s_MaxNumOpenMPThreads);
-    int nThreadID, ct=0;
+    // cppcheck-suppress variableScope
+    int nThreadID;
+    // cppcheck-suppress unreadVariable
+    int ct=0;
     omp_set_num_threads(nMaxThreads);
 
     #pragma omp parallel for schedule(static, nBulkSize/nMaxThreads) private(nThreadID)

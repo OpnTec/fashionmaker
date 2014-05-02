@@ -1065,6 +1065,7 @@ void QmuParserTester::AddTest ( testfun_type a_pFun )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void QmuParserTester::Run()
 {
     int iStat = 0;
@@ -1179,6 +1180,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
         var = a_fVar1;
         fVal[0] = p.Eval();
 
+        // cppcheck-suppress redundantAssignment
         var = a_fVar2;
         fVal[1] = p.Eval();
 
@@ -1404,7 +1406,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 /**
  * @brief Internal error in test class Test is going to be aborted.
  */
-void Q_NORETURN QmuParserTester::Abort() const
+void Q_NORETURN QmuParserTester::Abort()
 {
     qDebug() << "Test failed (internal error in test class)";
     while ( getchar() == false);

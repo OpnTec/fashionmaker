@@ -332,11 +332,12 @@ QmuParserCallback* QmuParserCallback::Clone() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Return tru if the function is conservative.
+ * @brief Return true if the function is conservative.
  *
  * Conservative functions return always the same result for the same argument.
  * @throw nothrow
  */
+// cppcheck-suppress unusedFunction
 bool QmuParserCallback::IsOptimizable() const
 {
     return m_bAllowOpti;

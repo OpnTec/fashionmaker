@@ -73,12 +73,14 @@ void VAbstractSpline::SetFactor(qreal factor)
     RefreshGeometry();
 }
 
+// cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
+// cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

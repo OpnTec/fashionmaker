@@ -70,7 +70,7 @@ public:
     static void        EnableDebugDump(bool bDumpCmd, bool bDumpStack);
     qreal              Eval() const;
     qreal*             Eval(int &nStackSize) const;
-    void               Eval(qreal *results, int nBulkSize);
+    void               Eval(qreal *results, int nBulkSize) const;
     int                GetNumResults() const;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = NULL);
@@ -102,8 +102,8 @@ public:
     const valmap_type& GetConst() const;
     const QString&     GetExpr() const;
     const funmap_type& GetFunDef() const;
-    QString            GetVersion(EParserVersionInfo eInfo = pviFULL) const;
-    const QStringList& GetOprtDef() const;
+    static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
+    static const QStringList& GetOprtDef();
     void               DefineNameChars(const QString &a_szCharset);
     void               DefineOprtChars(const QString &a_szCharset);
     void               DefineInfixOprtChars(const QString &a_szCharset);

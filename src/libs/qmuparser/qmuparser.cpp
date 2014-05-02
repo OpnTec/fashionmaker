@@ -372,6 +372,7 @@ void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
  *
  * http://sourceforge.net/forum/forum.php?thread_id=1994611&forum_id=462843
  */
+// cppcheck-suppress unusedFunction
 qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
 {
     qreal fRes(0),

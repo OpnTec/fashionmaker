@@ -148,7 +148,7 @@ private:
     /**
      * @brief Replace all ocuurences of a substring with another string.
      */
-    void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
+    static void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
     void Reset();
 };
 

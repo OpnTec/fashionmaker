@@ -106,6 +106,7 @@ void VContainer::setData(const VContainer &data)
     details = *data.DataDetails();
 }
 
+// cppcheck-suppress unusedFunction
 const VGObject *VContainer::GetGObject(quint32 id)const
 {
     return GetObject(gObjects, id);

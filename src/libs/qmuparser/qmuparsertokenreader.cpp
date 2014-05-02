@@ -101,6 +101,9 @@ void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader )
     m_pFactoryData    = a_Reader.m_pFactoryData;
     m_iBrackets       = a_Reader.m_iBrackets;
     m_cArgSep         = a_Reader.m_cArgSep;
+
+    m_fZero           = 0;
+    m_lastTok         = token_type();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,7 +366,7 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
 {
 #if defined(_UNICODE)
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
-    const std::wstring a_szCharSetstd = a_szCharSet.toStdWString();
+    const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
 #else
     const std::string m_strFormulaStd = m_strFormula.toStdString();
     const std::string a_szCharSetStd = a_szCharSet.toStdString();

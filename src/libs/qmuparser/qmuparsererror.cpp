@@ -29,6 +29,7 @@ namespace qmu
 const QmuParserErrorMsg QmuParserErrorMsg::m_Instance;
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 {
     return m_Instance;
@@ -225,11 +226,11 @@ QmuParserError::~QmuParserError()
 void QmuParserError::ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith )
 {
     QString strResult;
-    int iPos ( 0 ), iNext ( 0 );
+    int iPos ( 0 );
 
     for ( ;; )
     {
-        iNext = strSource.indexOf ( strFind, iPos );
+        int iNext = strSource.indexOf ( strFind, iPos );
         strResult.append ( strSource.mid ( iPos, iNext - iPos ) );
 
         if ( iNext == -1 )
@@ -248,6 +249,7 @@ void QmuParserError::ReplaceSubString ( QString &strSource, const QString &strFi
 /**
  * @brief Reset the erro object.
  */
+// cppcheck-suppress unusedFunction
 void QmuParserError::Reset()
 {
     m_strMsg.clear();
