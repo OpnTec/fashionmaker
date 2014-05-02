@@ -30,6 +30,7 @@
 #include "../../options.h"
 #include "../../widgets/vapplication.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent):
     QWidget(parent), autoSaveCheck(0), autoTime(0), langCombo(0), osOptionCheck(0), langChanged(false)
 {
@@ -43,6 +44,7 @@ ConfigurationPage::ConfigurationPage(QWidget *parent):
     setLayout(mainLayout);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::Apply()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -61,11 +63,13 @@ void ConfigurationPage::Apply()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::LangChenged()
 {
     langChanged = true;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SaveGroup()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -101,6 +105,7 @@ QGroupBox *ConfigurationPage::SaveGroup()
     return saveGroup;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::LangGroup()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -168,7 +173,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     return langGroup;
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
     QWidget(parent), userName(0), graphOutputCheck(0), undoneCount(0)
 {
@@ -184,6 +189,7 @@ PatternPage::PatternPage(QWidget *parent):
     setLayout(mainLayout);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void PatternPage::Apply()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -193,6 +199,7 @@ void PatternPage::Apply()
     settings.setValue("pattern/undone", undoneCount->value());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::UserGroup()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -219,6 +226,7 @@ QGroupBox *PatternPage::UserGroup()
     return userGroup;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::GraphOutputGroup()
 {
 //    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -240,6 +248,7 @@ QGroupBox *PatternPage::GraphOutputGroup()
     return graphOutputGroup;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::UndoneGroup()
 {
     //    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),

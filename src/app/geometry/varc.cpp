@@ -33,12 +33,13 @@
 
 class QRectF;
 
+//---------------------------------------------------------------------------------------------------------------------
 VArc::VArc ()
     :VGObject(GObject::Arc), f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
       formulaRadius(QString()), center(VPointF())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
             QString formulaF2, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
@@ -47,13 +48,14 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
     _name = QString ("Arc_%1").arg(this->GetCenter().name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(const VArc &arc)
     : VGObject(arc), f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
     center(arc.GetCenter())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VArc &VArc::operator =(const VArc &arc)
 {
     VGObject::operator=(arc);
@@ -67,11 +69,13 @@ VArc &VArc::operator =(const VArc &arc)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VArc::GetLength() const
 {
     return (M_PI * radius)/180 * AngleArc();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VArc::GetP1() const
 {
     QPointF p1 ( GetCenter().x () + radius, GetCenter().y () );
@@ -80,6 +84,7 @@ QPointF VArc::GetP1() const
     return centerP1.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VArc::GetP2 () const
 {
     QPointF p2 ( GetCenter().x () + radius, GetCenter().y () );
@@ -88,6 +93,7 @@ QPointF VArc::GetP2 () const
     return centerP2.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VArc::GetPath() const
 {
     QPainterPath path;
@@ -108,6 +114,7 @@ QPainterPath VArc::GetPath() const
     return path;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VArc::AngleArc() const
 {
     QLineF l1(0, 0, 100, 100);
@@ -117,6 +124,7 @@ qreal VArc::AngleArc() const
     return l1.angleTo(l2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
@@ -140,11 +148,13 @@ QVector<QPointF> VArc::GetPoints() const
     return points;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VArc::name() const
 {
     return _name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 {
     //Always need return two arcs, so we must correct wrong length.
@@ -174,6 +184,7 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
     return line.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VArc::setId(const quint32 &id)
 {
     _id = id;

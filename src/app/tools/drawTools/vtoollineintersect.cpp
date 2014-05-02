@@ -31,6 +31,7 @@
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id,
                                        const quint32 &p1Line1, const quint32 &p2Line1, const quint32 &p1Line2,
                                        const quint32 &p2Line2, const Valentina::Sources &typeCreation,
@@ -49,6 +50,7 @@ VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const qu
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -62,6 +64,7 @@ void VToolLineIntersect::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -76,6 +79,7 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
                                 const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
@@ -131,6 +135,7 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -144,22 +149,26 @@ void VToolLineIntersect::FullUpdateFromFile()
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersect>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersect>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -179,6 +188,7 @@ void VToolLineIntersect::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -195,6 +205,7 @@ void VToolLineIntersect::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::RemoveReferens()
 {
     doc->DecrementReferens(p1Line1);
@@ -203,6 +214,7 @@ void VToolLineIntersect::RemoveReferens()
     doc->DecrementReferens(p2Line2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

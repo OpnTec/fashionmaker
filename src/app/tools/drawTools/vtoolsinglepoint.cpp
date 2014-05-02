@@ -31,6 +31,7 @@
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                                     QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent)
@@ -53,6 +54,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -62,6 +64,7 @@ void VToolSinglePoint::setDialog()
     dialogTool->setData(p->name(), p->toQPointF());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -78,6 +81,7 @@ void VToolSinglePoint::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -92,6 +96,7 @@ void VToolSinglePoint::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
@@ -128,6 +133,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::decrementReferens()
 {
     if (_referens > 1)
@@ -136,6 +142,7 @@ void VToolSinglePoint::decrementReferens()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -148,23 +155,27 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
     ContextMenu<DialogSinglePoint>(this, event, false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void  VToolSinglePoint::FullUpdateFromFile()
 {
     VPointF point = *VAbstractTool::data.GeometricObject<const VPointF *>(id);
     RefreshPointGeometry(point);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -181,12 +192,14 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<const VPointF *>(id)));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSinglePoint>(this, event, false);

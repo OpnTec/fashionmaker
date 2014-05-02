@@ -32,6 +32,7 @@
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const quint32 &firstPointId,
                          const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
@@ -49,6 +50,7 @@ VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, con
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -63,6 +65,7 @@ void VToolNormal::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -78,6 +81,7 @@ void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
@@ -123,6 +127,7 @@ void VToolNormal::Create(const quint32 _id, const QString &formula, const quint3
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                                const qreal &angle)
 {
@@ -133,6 +138,7 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
     return normal.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -147,22 +153,26 @@ void VToolNormal::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogNormal>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogNormal>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -183,6 +193,7 @@ void VToolNormal::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -200,12 +211,14 @@ void VToolNormal::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::RemoveReferens()
 {
     doc->DecrementReferens(secondPointId);
     VToolLinePoint::RemoveReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

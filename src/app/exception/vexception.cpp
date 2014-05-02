@@ -31,22 +31,24 @@
 #include <QSpacerItem>
 #include <QGridLayout>
 
+//---------------------------------------------------------------------------------------------------------------------
 VException::VException(const QString &what):QException(), what(what), moreInfo(QString())
 {
     Q_ASSERT_X(what.isEmpty() == false, Q_FUNC_INFO, "Error message is empty");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VException::VException(const VException &e):what(e.What()), moreInfo(e.MoreInformation())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 QString VException::ErrorMessage() const
 {
     QString error = QString("Exception: %1").arg(what);
     return error;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VException::CriticalMessageBox(const QString &situation, QWidget * parent) const
 {
     QMessageBox msgBox(parent);
@@ -67,6 +69,7 @@ void VException::CriticalMessageBox(const QString &situation, QWidget * parent) 
     msgBox.exec();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VException::AddMoreInformation(const QString &info)
 {
     if (info.isEmpty())
@@ -76,6 +79,7 @@ void VException::AddMoreInformation(const QString &info)
     moreInfo = QString("%1\n%2").arg(moreInfo, info);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VException::MoreInfo(const QString &detInfo) const
 {
     if (moreInfo.isEmpty() == false)

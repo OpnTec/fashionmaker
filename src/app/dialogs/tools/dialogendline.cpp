@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
     formula(QString()), angle(0), basePointId(0)
@@ -59,6 +60,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -70,35 +72,41 @@ void DialogEndLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setBasePointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -109,6 +117,7 @@ void DialogEndLine::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
     delete ui;

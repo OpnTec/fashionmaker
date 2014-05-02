@@ -28,11 +28,13 @@
 
 #include "vdatatool.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VDataTool::VDataTool(VContainer *data, QObject *parent): QObject(parent), data(*data), _referens(1)
 {
     Q_CHECK_PTR(data);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VDataTool &VDataTool::operator =(const VDataTool &tool)
 {
     data = tool.getData();
@@ -40,6 +42,7 @@ VDataTool &VDataTool::operator =(const VDataTool &tool)
    return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDataTool::decrementReferens()
 {
     if (_referens > 0)

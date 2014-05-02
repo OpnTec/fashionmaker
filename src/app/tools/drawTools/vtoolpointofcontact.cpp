@@ -32,6 +32,7 @@
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
                                          const QString &radius, const quint32 &center,
                                          const quint32 &firstPointId, const quint32 &secondPointId,
@@ -49,6 +50,7 @@ VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const 
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -62,6 +64,7 @@ void VToolPointOfContact::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                                        const QPointF &secondPoint)
 {
@@ -88,6 +91,7 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
     return pArc;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -102,6 +106,7 @@ void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const quint32 &center,
                                  const quint32 &firstPointId, const quint32 &secondPointId,
                                  const QString &pointName, const qreal &mx, const qreal &my,
@@ -154,6 +159,7 @@ void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -167,22 +173,26 @@ void VToolPointOfContact::FullUpdateFromFile()
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfContact>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfContact>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -202,6 +212,7 @@ void VToolPointOfContact::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -218,6 +229,7 @@ void VToolPointOfContact::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::RemoveReferens()
 {
     doc->DecrementReferens(center);
@@ -225,6 +237,7 @@ void VToolPointOfContact::RemoveReferens()
     doc->DecrementReferens(secondPointId);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

@@ -32,6 +32,7 @@
 #include <QtWidgets>
 #include <QWheelEvent>
 
+//---------------------------------------------------------------------------------------------------------------------
 VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
     :QGraphicsView(pScene, parent)
 {
@@ -39,6 +40,7 @@ VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
     connect(pScene, &QGraphicsScene::selectionChanged, this, &VTableGraphicsView::selectionChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::selectionChanged()
 {
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
@@ -54,6 +56,7 @@ void VTableGraphicsView::selectionChanged()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::MirrorItem()
 {
     QList<QGraphicsItem *> list = scene()->selectedItems();
@@ -94,6 +97,7 @@ void VTableGraphicsView::MirrorItem()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::wheelEvent(QWheelEvent *event)
 {
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
@@ -114,6 +118,7 @@ void VTableGraphicsView::wheelEvent(QWheelEvent *event)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
     if (mousePress->button() & Qt::LeftButton)
@@ -131,12 +136,14 @@ void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );
     QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -162,6 +169,7 @@ void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
     QGraphicsView::keyPressEvent ( event );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::rotateIt()
 {
     QList<QGraphicsItem *> list = scene()->selectedItems();
@@ -177,6 +185,7 @@ void VTableGraphicsView::rotateIt()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VTableGraphicsView::MoveItem(VTableGraphicsView::typeMove_e move)
 {
     qreal dx = 0, dy = 0;

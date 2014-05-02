@@ -67,12 +67,13 @@ const QString VPattern::IncrementKsize       = QStringLiteral("ksize");
 const QString VPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
 const QString VPattern::IncrementDescription = QStringLiteral("description");
 
+//---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::CreateEmptyFile(const QString &tablePath)
 {
     if (tablePath.isEmpty())
@@ -98,6 +99,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ChangeActivDraw(const QString &name, const Document::Documents &parse)
 {
     Q_ASSERT_X(name.isEmpty() == false, "ChangeActivDraw", "name draw is empty");
@@ -111,6 +113,7 @@ void VPattern::ChangeActivDraw(const QString &name, const Document::Documents &p
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::GetActivDrawElement(QDomElement &element)
 {
     if (nameActivDraw.isEmpty() == false)
@@ -136,6 +139,7 @@ bool VPattern::GetActivDrawElement(QDomElement &element)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::appendDraw(const QString &name)
 {
     Q_ASSERT_X(name.isEmpty() == false, "appendDraw", "name draw is empty");
@@ -169,6 +173,7 @@ bool VPattern::appendDraw(const QString &name)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::SetNameDraw(const QString &name)
 {
     Q_ASSERT_X(name.isEmpty() == false, "SetNameDraw", "name draw is empty");
@@ -189,6 +194,7 @@ bool VPattern::SetNameDraw(const QString &name)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail)
 {
     Q_CHECK_PTR(sceneDraw);
@@ -246,6 +252,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VDataTool *VPattern::getTool(const quint32 &id)
 {
     if (tools.contains(id))
@@ -260,12 +267,14 @@ VDataTool *VPattern::getTool(const quint32 &id)
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::setCursor(const quint32 &value)
 {
     cursor = value;
     emit ChangedCursor(cursor);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::setCurrentData()
 {
     if (*mode == Valentina::Calculation)
@@ -305,6 +314,7 @@ void VPattern::setCurrentData()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -312,6 +322,7 @@ void VPattern::AddTool(const quint32 &id, VDataTool *tool)
     tools.insert(id, tool);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -321,6 +332,7 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
     tool->VDataTool::setData(data);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::IncrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -329,6 +341,7 @@ void VPattern::IncrementReferens(quint32 id) const
     tool->incrementReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::DecrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -337,12 +350,14 @@ void VPattern::DecrementReferens(quint32 id) const
     tool->decrementReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::TestUniqueId() const
 {
     QVector<quint32> vector;
     CollectId(documentElement(), vector);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VPattern::SPointActiveDraw()
 {
     QDomElement calcElement;
@@ -365,6 +380,7 @@ quint32 VPattern::SPointActiveDraw()
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::CheckNameDraw(const QString &name) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "CheckNameDraw", "name draw is empty");
@@ -387,12 +403,14 @@ bool VPattern::CheckNameDraw(const QString &name) const
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetActivDraw(const QString &name)
 {
     Q_ASSERT_X(name.isEmpty() == false, "SetActivDraw", "name draw is empty");
     this->nameActivDraw = name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
 {
     Q_ASSERT_X(name.isEmpty() == false, "GetActivNodeElement", "name draw is empty");
@@ -417,6 +435,7 @@ bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VPattern::MPath() const
 {
     QDomNodeList list = elementsByTagName(TagMeasurements);
@@ -431,6 +450,7 @@ QString VPattern::MPath() const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetPath(const QString &path)
 {
     if (path.isEmpty())
@@ -451,6 +471,7 @@ void VPattern::SetPath(const QString &path)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Valentina::Units VPattern::MUnit() const
 {
     QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
@@ -482,6 +503,7 @@ Valentina::Units VPattern::MUnit() const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Pattern::Measurements VPattern::MType() const
 {
     QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
@@ -510,6 +532,7 @@ Pattern::Measurements VPattern::MType() const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VPattern::SaveDocument(const QString &fileName)
 {
     try
@@ -524,6 +547,7 @@ bool VPattern::SaveDocument(const QString &fileName)
     return VDomDocument::SaveDocument(fileName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::FullUpdateTree()
 {
     VMainGraphicsScene *scene = new VMainGraphicsScene();
@@ -555,17 +579,20 @@ void VPattern::FullUpdateTree()
     emit FullUpdateFromFile();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::haveLiteChange()
 {
     patternModified = true;
     emit patternChanged();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
                                 const Document::Documents &parse)
 {
@@ -601,6 +628,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
                              const Document::Documents &parse, const Valentina::Draws &mode)
 {
@@ -649,6 +677,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
                                   const Document::Documents &parse)
 {
@@ -716,6 +745,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
                             const Document::Documents &parse)
 {
@@ -739,6 +769,7 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &domElement,
                                  const Document::Documents &parse, const QString &type)
 {
@@ -1104,6 +1135,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
                                 const Document::Documents &parse)
 {
@@ -1127,6 +1159,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
                                   const Document::Documents &parse, const QString &type)
 {
@@ -1248,6 +1281,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
                                const Document::Documents &parse, const QString &type)
 {
@@ -1303,6 +1337,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &domElement,
                                  const Document::Documents &parse, const QString &type)
 {
@@ -1340,6 +1375,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseIncrementsElement(const QDomNode &node)
 {
     QDomNode domNode = node.firstChild();
@@ -1367,6 +1403,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1391,6 +1428,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
 {
     if (node.hasAttribute(VDomDocument::AttrId))
@@ -1413,6 +1451,7 @@ void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) cons
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                                VMainGraphicsScene *sceneDetail)
 {
@@ -1438,6 +1477,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
     history.clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::UpdateMeasurements()
 {
     const QString path = MPath();

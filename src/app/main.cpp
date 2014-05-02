@@ -35,6 +35,7 @@
 #include "tablewindow.h"
 #include "version.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
@@ -116,6 +117,7 @@ void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, c
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(cursor);

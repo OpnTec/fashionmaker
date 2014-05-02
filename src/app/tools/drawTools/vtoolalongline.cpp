@@ -32,6 +32,7 @@
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
                                const quint32 &firstPointId, const quint32 &secondPointId,
                                const QString &typeLine, const Valentina::Sources &typeCreation,
@@ -49,6 +50,7 @@ VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, cons
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -62,23 +64,27 @@ void VToolAlongLine::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogAlongLine>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogAlongLine>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -98,6 +104,7 @@ void VToolAlongLine::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -114,12 +121,14 @@ void VToolAlongLine::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::RemoveReferens()
 {
     doc->DecrementReferens(secondPointId);
     VToolLinePoint::RemoveReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -132,6 +141,7 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -145,6 +155,7 @@ void VToolAlongLine::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -159,6 +170,7 @@ void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatt
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                             const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,

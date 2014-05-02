@@ -29,6 +29,7 @@
 #include "dialogcutarc.h"
 #include "ui_dialogcutarc.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0)
 {
@@ -54,11 +55,13 @@ DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogCutArc::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Arc)
@@ -70,6 +73,7 @@ void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -78,17 +82,20 @@ void DialogCutArc::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
 {
     setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboMode::CutArc);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::setPointName(const QString &value)
 {
     pointName = value;

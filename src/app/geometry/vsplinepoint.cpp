@@ -29,9 +29,12 @@
 #include "vsplinepoint.h"
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::VSplinePoint()
-    :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1){}
+    :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1)
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
     :pSpline(pSpline), angle1(0), angle2(180), kAsm1(kAsm1), kAsm2(kAsm2)
 {
@@ -42,9 +45,12 @@ VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAs
     SetAngle2(angle2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::VSplinePoint(const VSplinePoint &point)
-    :pSpline(point.P()), angle1(point.Angle1()), angle2(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2()){}
+    :pSpline(point.P()), angle1(point.Angle1()), angle2(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2())
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSplinePoint::SetAngle1(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);
@@ -55,6 +61,7 @@ void VSplinePoint::SetAngle1(const qreal &value)
     angle2 = line.angle();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSplinePoint::SetAngle2(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);

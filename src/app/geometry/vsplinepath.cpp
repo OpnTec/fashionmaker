@@ -29,17 +29,18 @@
 #include "vsplinepath.h"
 #include "../exception/vexception.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(const VSplinePath &splPath)
     : VGObject(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve()),
       maxCountPoints(splPath.getMaxCountPoints())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSplinePath::append(const VSplinePoint &point)
 {
     path.append(point);
@@ -51,6 +52,7 @@ void VSplinePath::append(const VSplinePoint &point)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::Count() const
 {
     if (path.size() == 0)
@@ -63,6 +65,7 @@ qint32 VSplinePath::Count() const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline VSplinePath::GetSpline(qint32 index) const
 {
     if (Count()<1)
@@ -78,6 +81,7 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     return spl;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VSplinePath::GetPath() const
 {
     QPainterPath painterPath;
@@ -90,6 +94,7 @@ QPainterPath VSplinePath::GetPath() const
     return painterPath;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VSplinePath::GetPathPoints() const
 {
     QVector<QPointF> pathPoints;
@@ -102,6 +107,7 @@ QVector<QPointF> VSplinePath::GetPathPoints() const
     return pathPoints;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSplinePath::GetLength() const
 {
     qreal length = 0;
@@ -114,6 +120,7 @@ qreal VSplinePath::GetLength() const
     return length;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &pos, const VSplinePoint &point)
 {
     if (indexSpline < 1 || indexSpline > Count())
@@ -130,6 +137,7 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &p
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const
 {
     if (indexSpline < 1 || indexSpline > Count())
@@ -146,6 +154,7 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Positi
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
     VGObject::operator=(path);
@@ -155,16 +164,19 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
 {
     return path[indx];
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const VSplinePoint &VSplinePath::at(ptrdiff_t indx) const
 {
     return path[indx];
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
                                    QPointF &spl2p2, QPointF &spl2p3) const
 {
@@ -199,11 +211,14 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     }
     return QPointF();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::getMaxCountPoints() const
 {
     return maxCountPoints;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSplinePath::setMaxCountPoints(const qint32 &value)
 {
     maxCountPoints = value;

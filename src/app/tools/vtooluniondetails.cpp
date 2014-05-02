@@ -41,6 +41,7 @@ const QString VToolUnionDetails::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1,
                                      const VDetail &d2, const quint32 &indexD1, const quint32 &indexD2,
                                      const Valentina::Sources &typeCreation, QObject *parent)
@@ -56,6 +57,7 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quin
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
                                        const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
@@ -222,6 +224,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
     newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
                                      quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
                                      const qreal &angle)
@@ -369,6 +372,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                         const qreal angle)
 {
@@ -380,6 +384,7 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
     point->setY(line.p2().y());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -393,6 +398,7 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
            Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2, const quint32 &d1id,
                                const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -528,6 +534,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::PointsOnEdge(const VDetail &d, const qint32 &index, VPointF &p1, VPointF &p2, VContainer *data)
 {
     VNodeDetail det2p1;
@@ -537,6 +544,7 @@ void VToolUnionDetails::PointsOnEdge(const VDetail &d, const qint32 &index, VPoi
     p2 = VPointF(*data->GeometricObject<const VPointF *>(det2p2.getId()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const qint32 &indexD2, qint32 &j)
 {
     if (pointsD2 == 0)
@@ -556,6 +564,7 @@ void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const q
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomElement &domElement)
 {
     QVector<VDetail> vector;
@@ -611,6 +620,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
     return vector;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -626,6 +636,7 @@ void VToolUnionDetails::AddToFile()
     AddToModeling(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -640,6 +651,7 @@ void VToolUnionDetails::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 {
     QDomElement det = doc->createElement(TagDetail);
@@ -652,6 +664,7 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
     domElement.appendChild(det);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
@@ -688,6 +701,7 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
     domElement.appendChild(nod);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail &d)
 {
     //QDomNode domNode = domElement.firstChild();
@@ -713,6 +727,7 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
     return domNode.nextSibling();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;

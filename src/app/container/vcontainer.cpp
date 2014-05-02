@@ -34,20 +34,22 @@
 
 quint32 VContainer::_id = 0;
 
+//---------------------------------------------------------------------------------------------------------------------
 VContainer::VContainer()
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
       measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VContainer &VContainer::operator =(const VContainer &data)
 {
     setData(data);
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VContainer::VContainer(const VContainer &data)
     :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
       measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
@@ -57,12 +59,14 @@ VContainer::VContainer(const VContainer &data)
     setData(data);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VContainer::~VContainer()
 {
     qDeleteAll(gObjects);
     gObjects.clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::setData(const VContainer &data)
 {
     _size = data.size();
@@ -106,12 +110,14 @@ void VContainer::setData(const VContainer &data)
     details = *data.DataDetails();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 const VGObject *VContainer::GetGObject(quint32 id)const
 {
     return GetObject(gObjects, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename key, typename val>
 const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
 {
@@ -125,6 +131,7 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename key, typename val>
 val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
 {
@@ -138,52 +145,61 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const VMeasurement VContainer::GetMeasurement(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(measurements, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const VIncrement VContainer::GetIncrement(const QString& name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(increments, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetLine(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(lengthLines, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetLengthArc(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(lengthArcs, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetLengthSpline(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(lengthSplines, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetLineAngle(const QString &name) const
 {
     Q_ASSERT(name.isEmpty()==false);
     return GetVariable(lineAngles, name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const VDetail VContainer::GetDetail(quint32 id) const
 {
     return GetVariable(details, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VContainer::AddGObject(VGObject *obj)
 {
     return AddObject(gObjects, obj);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VContainer::AddDetail(VDetail detail)
 {
     quint32 id = getNextId();
@@ -191,17 +207,20 @@ quint32 VContainer::AddDetail(VDetail detail)
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddIncrement(const QString &name, VIncrement incr)
 {
     increments[name] = incr;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VContainer::getNextId()
 {
     _id++;
     return _id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::UpdateId(quint32 newId)
 {
     if (newId > _id)
@@ -210,6 +229,7 @@ void VContainer::UpdateId(quint32 newId)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
@@ -225,24 +245,28 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
     UpdateId(id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddLengthSpline(const QString &name, const qreal &value)
 {
     Q_ASSERT(name.isEmpty() == false);
     lengthSplines[name] = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddLengthArc(const quint32 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
     lengthArcs[arc->name()] = qApp->fromPixel(arc->GetLength());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddLineAngle(const QString &name, const qreal &value)
 {
     Q_ASSERT(name.isEmpty() == false);
     lineAngles[name] = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetValueStandardTableRow(const QString& name) const
 {
     const VMeasurement m = GetMeasurement(name);
@@ -256,6 +280,7 @@ qreal VContainer::GetValueStandardTableRow(const QString& name) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 {
     const VIncrement icr = GetIncrement(name);
@@ -269,6 +294,7 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::Clear()
 {
     _id = 0;
@@ -282,6 +308,7 @@ void VContainer::Clear()
     ClearGObjects();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearGObjects()
 {
     if (gObjects.size()>0)
@@ -291,6 +318,7 @@ void VContainer::ClearGObjects()
     gObjects.clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
     if (gObjects.size()>0)
@@ -308,6 +336,7 @@ void VContainer::ClearCalculationGObjects()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::FindVar(const QString &name, bool *ok)const
 {
     if (sizeName == name)
@@ -354,6 +383,7 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
 {
     QString nameLine = GetNameLine(firstPointId, secondPointId);
@@ -364,6 +394,7 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
     AddLineAngle(nameLine, QLineF(first->toQPointF(), second->toQPointF()).angle());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename key, typename val>
 quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
@@ -374,6 +405,7 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VContainer::GetNameLine(const quint32 &firstPoint, const quint32 &secondPoint) const
 {
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
@@ -382,6 +414,7 @@ QString VContainer::GetNameLine(const quint32 &firstPoint, const quint32 &second
     return QString("Line_%1_%2").arg(first->name(), second->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &secondPoint) const
 {
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
@@ -390,11 +423,13 @@ QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &s
     return QString("AngleLine_%1_%2").arg(first->name(), second->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
     UpdateObject(gObjects, id, obj);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -402,6 +437,7 @@ void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
     UpdateId(id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddLengthLine(const QString &name, const qreal &value)
 {
     Q_ASSERT(name.isEmpty() == false);

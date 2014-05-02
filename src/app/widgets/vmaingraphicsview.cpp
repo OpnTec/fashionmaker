@@ -34,6 +34,7 @@
 #include <QScrollBar>
 #include "../tools/vabstracttool.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     :QGraphicsView(parent), _numScheduledScalings(0)
 {
@@ -42,6 +43,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 {
@@ -68,6 +70,7 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
     anim->start();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::scalingTime(qreal x)
 {
     Q_UNUSED(x);
@@ -86,6 +89,7 @@ void VMainGraphicsView::scalingTime(qreal x)
     emit NewFactor(factor);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::scrollingTime(qreal x)
 {
     Q_UNUSED(x);
@@ -105,6 +109,7 @@ void VMainGraphicsView::scrollingTime(qreal x)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::animFinished()
 {
     if (_numScheduledScalings > 0)
@@ -118,6 +123,7 @@ void VMainGraphicsView::animFinished()
     sender()->~QObject();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
     if (mousePress->button() & Qt::LeftButton)
@@ -135,6 +141,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );

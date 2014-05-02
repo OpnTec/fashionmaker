@@ -29,6 +29,7 @@
 #include "dialogcutspline.h"
 #include "ui_dialogcutspline.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogCutSpline), pointName(QString()), formula(QString()), splineId(0)
 {
@@ -53,28 +54,33 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogCutSpline::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogCutSpline::~DialogCutSpline()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::setSplineId(const quint32 &value, const quint32 &id)
 {
     setCurrentSplineId(ui->comboBoxSpline, splineId, value, id, ComboMode::CutSpline);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Spline)
@@ -86,6 +92,7 @@ void DialogCutSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();

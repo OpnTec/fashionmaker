@@ -28,6 +28,7 @@
 
 #include "vexceptionbadid.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionBadId::ErrorMessage() const
 {
     QString error;

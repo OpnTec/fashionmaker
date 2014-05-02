@@ -28,21 +28,22 @@
 
 #include "vgobject.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VGObject::VGObject()
     :_id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Valentina::Calculation)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VGObject::VGObject(const GObject::Type &type, const quint32 &idObject, const Valentina::Draws &mode)
     :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VGObject::VGObject(const VGObject &obj)
     :_id(obj.id()), type(obj.getType()), idObject(obj.getIdObject()), _name(obj.name()), mode(obj.getMode())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VGObject &VGObject::operator=(const VGObject &obj)
 {
     this->_id      = obj.id();
@@ -53,21 +54,25 @@ VGObject &VGObject::operator=(const VGObject &obj)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VGObject::getIdObject() const
 {
     return idObject;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGObject::setIdObject(const quint32 &value)
 {
     idObject = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VGObject::name() const
 {
     return _name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGObject::setName(const QString &name)
 {
     _name = name;
@@ -78,21 +83,25 @@ Valentina::Draws VGObject::getMode() const
     return mode;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGObject::setMode(const Valentina::Draws &value)
 {
     mode = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 GObject::Type VGObject::getType() const
 {
     return type;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VGObject::id() const
 {
     return _id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGObject::setId(const quint32 &id)
 {
     _id = id;

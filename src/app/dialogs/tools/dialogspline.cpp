@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
     kAsm1(1), kAsm2(1), kCurve(1)
@@ -42,16 +43,19 @@ DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
     FillComboBoxPoints(ui->comboBoxP4);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogSpline::~DialogSpline()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 DialogSpline::getP1() const
 {
     return p1;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -93,6 +97,7 @@ void DialogSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::DialogAccepted()
 {
     p1 = getCurrentObjectId(ui->comboBoxP1);
@@ -105,48 +110,56 @@ void DialogSpline::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setKCurve(const qreal &value)
 {
     kCurve = value;
     ui->doubleSpinBoxKcurve->setValue(value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setKAsm2(const qreal &value)
 {
     kAsm2 = value;
     ui->doubleSpinBoxKasm2->setValue(value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setKAsm1(const qreal &value)
 {
     kAsm1 = value;
     ui->doubleSpinBoxKasm1->setValue(value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setAngle2(const qreal &value)
 {
     angle2 = value;
     ui->spinBoxAngle2->setValue(static_cast<qint32>(value));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setAngle1(const qreal &value)
 {
     angle1 = value;
     ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setP4(const quint32 &value)
 {
     p4 = value;
     ChangeCurrentData(ui->comboBoxP4, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::setP1(const quint32 &value)
 {
     p1 = value;
     ChangeCurrentData(ui->comboBoxP1, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 DialogSpline::getP4() const
 {
     return p4;

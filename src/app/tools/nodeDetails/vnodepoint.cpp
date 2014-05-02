@@ -34,6 +34,7 @@
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
                        const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
@@ -59,6 +60,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
                         const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
                         QObject *parent)
@@ -89,17 +91,20 @@ void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idP
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::DeleteNode()
 {
     VAbstractNode::DeleteNode();
     this->setVisible(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::FullUpdateFromFile()
 {
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -118,6 +123,7 @@ void VNodePoint::AddToFile()
     AddToModeling(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -134,6 +140,7 @@ void VNodePoint::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -143,19 +150,21 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
@@ -167,6 +176,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
     VAbstractTool::data.UpdateGObject(id, point);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -178,6 +188,7 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::RefreshPointGeometry(const VPointF &point)
 {
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
@@ -194,6 +205,7 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
     RefreshLine();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::RefreshLine()
 {
     QRectF nameRec = namePoint->sceneBoundingRect();

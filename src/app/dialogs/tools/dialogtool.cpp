@@ -33,6 +33,7 @@
 
 #include <QtWidgets>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
       bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), listWidget(nullptr),
@@ -51,12 +52,14 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     setWindowFlags(flags | Qt::WindowStaysOnTopHint);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::closeEvent(QCloseEvent *event)
 {
     DialogClosed(QDialog::Rejected);
     event->accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::showEvent(QShowEvent *event)
 {
     QDialog::showEvent( event );
@@ -71,6 +74,7 @@ void DialogTool::showEvent(QShowEvent *event)
     isInitialized = true;//first show windows are held
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 {
     Q_CHECK_PTR(box);
@@ -93,6 +97,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
     FillList(box, list);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutArc cut) const
 {
     Q_CHECK_PTR(box);
@@ -130,6 +135,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
     FillList(box, list);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
@@ -167,6 +173,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
     FillList(box, list);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
     Q_CHECK_PTR(box);
@@ -204,6 +211,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
     FillList(box, list);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
 {
     Q_CHECK_PTR(box);
@@ -211,6 +219,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
     box->setCurrentIndex(1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::GetTypeLine(const QComboBox *box) const
 {
     switch (lineStyles.indexOf(box->currentText()))
@@ -239,6 +248,7 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
 {
     QStringList styles = VAbstractTool::Styles();
@@ -249,6 +259,7 @@ void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
 {
     qint32 index = box->findText(value);
@@ -262,6 +273,7 @@ void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
 {
     qint32 index = box->findData(value);
@@ -271,6 +283,7 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
 {
     Q_CHECK_PTR(lineEdit);
@@ -283,6 +296,7 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
     lineEdit->setCursorPosition(pos + item->text().size());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
 {
     Q_CHECK_PTR(edit);
@@ -300,6 +314,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
     timer->start(1000);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
 {
     Q_CHECK_PTR(edit);
@@ -335,6 +350,7 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     labelEditFormula->setPalette(palette);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const
 {
     Q_CHECK_PTR(box);
@@ -343,6 +359,7 @@ void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint
     ChangeCurrentData(box, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
                                     ComboMode::ComboBoxCutSpline cut) const
 {
@@ -352,6 +369,7 @@ void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const qui
     ChangeCurrentData(box, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
                                  ComboMode::ComboBoxCutArc cut) const
 {
@@ -361,6 +379,7 @@ void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &
     ChangeCurrentData(box, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
                                         const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
@@ -370,6 +389,7 @@ void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, c
     ChangeCurrentData(box, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     Q_CHECK_PTR(box);
@@ -385,6 +405,7 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip)
 {
     Q_CHECK_PTR(box);
@@ -400,6 +421,7 @@ bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     Q_CHECK_PTR(box);
@@ -413,18 +435,21 @@ void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) co
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::CheckState()
 {
     Q_CHECK_PTR(bOk);
     bOk->setEnabled(flagFormula && flagName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::NamePointChanged()
 {
     Q_CHECK_PTR(labelEditNamePoint);
@@ -450,16 +475,19 @@ void DialogTool::NamePointChanged()
     CheckState();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::DialogAccepted()
 {
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::DialogRejected()
 {
     emit DialogClosed(QDialog::Rejected);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FormulaChanged()
 {
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
@@ -469,54 +497,63 @@ void DialogTool::FormulaChanged()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowUp()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(90);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowDown()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(270);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowLeft()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(180);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowRight()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(0);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowLeftUp()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(135);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowLeftDown()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(225);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowRightUp()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(45);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ArrowRightDown()
 {
     Q_CHECK_PTR(spinBoxAngle);
     spinBoxAngle->setValue(315);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::EvalFormula()
 {
     Q_CHECK_PTR(lineEditFormula);
@@ -524,6 +561,7 @@ void DialogTool::EvalFormula()
     Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SizeHeight()
 {
     Q_CHECK_PTR(listWidget);
@@ -544,36 +582,43 @@ void DialogTool::SizeHeight()
     listWidget->setCurrentRow (0);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::Measurements()
 {
     ShowVariable(data->DataMeasurements());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::LengthLines()
 {
     ShowVariable(data->DataLengthLines());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::LengthArcs()
 {
     ShowVariable(data->DataLengthArcs());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::LengthCurves()
 {
     ShowVariable(data->DataLengthSplines());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::Increments()
 {
     ShowVariable(data->DataIncrements());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutHere()
 {
     PutValHere(lineEditFormula, listWidget);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutVal(QListWidgetItem *item)
 {
     Q_CHECK_PTR(lineEditFormula);
@@ -585,6 +630,7 @@ void DialogTool::PutVal(QListWidgetItem *item)
     lineEditFormula->setCursorPosition(pos + item->text().size());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ValChenged(int row)
 {
     Q_CHECK_PTR(listWidget);
@@ -653,6 +699,7 @@ void DialogTool::ValChenged(int row)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::UpdateList()
 {
     Q_CHECK_PTR(radioButtonSizeGrowth);
@@ -688,6 +735,7 @@ void DialogTool::UpdateList()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <class key, class val>
 void DialogTool::ShowVariable(const QHash<key, val> *var)
 {

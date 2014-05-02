@@ -31,6 +31,7 @@
 
 const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfIntersection");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *data, const quint32 &id,
                                                    const quint32 &firstPointId, const quint32 &secondPointId,
                                                    const Valentina::Sources &typeCreation, QGraphicsItem *parent)
@@ -47,6 +48,7 @@ VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *da
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -58,6 +60,7 @@ void VToolPointOfIntersection::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                       VContainer *data)
 {
@@ -70,6 +73,7 @@ void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *sc
     Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
                                       const quint32 &secondPointId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -106,6 +110,7 @@ void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointNam
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -117,22 +122,26 @@ void VToolPointOfIntersection::FullUpdateFromFile()
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfIntersection>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::RemoveReferens()
 {
     doc->DecrementReferens(firstPointId);
     doc->DecrementReferens(secondPointId);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfIntersection>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -150,6 +159,7 @@ void VToolPointOfIntersection::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -164,6 +174,7 @@ void VToolPointOfIntersection::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

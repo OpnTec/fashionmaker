@@ -30,6 +30,7 @@
 
 #include <QtWidgets>
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
                                                    const QDomElement &domElement)
     : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
@@ -42,18 +43,19 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
     lineNumber = domElement.lineNumber();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
     :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionEmptyParameter::ErrorMessage() const
 {
     QString error = QString("ExceptionEmptyParameter: %1 %2").arg(what, name);
     return error;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionEmptyParameter::DetailedInformation() const
 {
     return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));

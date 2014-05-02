@@ -70,6 +70,7 @@ const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
@@ -80,6 +81,7 @@ VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObjec
     emit toolhaveChange();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
     QRectF rect = sc->itemsBoundingRect();
@@ -108,6 +110,7 @@ void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     sc->setSceneRect(rec1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
 {
     qreal x1, y1, x2, y2;
@@ -137,6 +140,7 @@ QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
     return point;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                           QPointF &p2)
 {
@@ -172,6 +176,7 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
     return flag;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &point)
 {
     qreal a = 0, b = 0, c = 0;
@@ -191,11 +196,13 @@ QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &point)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k)
 {
     return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::RemoveAllChild(QDomElement &domElement)
 {
     if ( domElement.hasChildNodes() )
@@ -207,6 +214,7 @@ void VAbstractTool::RemoveAllChild(QDomElement &domElement)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
     if (_referens <= 1)
@@ -257,6 +265,7 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Qt::PenStyle VAbstractTool::LineStyle()
 {
     QStringList styles = Styles();
@@ -286,6 +295,7 @@ Qt::PenStyle VAbstractTool::LineStyle()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     //coefficient for equation of segment
@@ -295,6 +305,7 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
     *c = - *a * p1.x() - *b * p1.y();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const QStringList VAbstractTool::Styles()
 {
     //Keep synchronize with DialogTool lineStyles list!!!
@@ -304,6 +315,7 @@ const QStringList VAbstractTool::Styles()
     return styles;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc)
 {
     quint32 cursor = doc->getCursor();

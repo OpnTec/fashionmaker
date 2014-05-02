@@ -30,6 +30,7 @@
 
 #include <QLineEdit>
 
+//---------------------------------------------------------------------------------------------------------------------
 TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
     regex(regex)
 {
@@ -37,6 +38,7 @@ TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate
     connect(this, &TextDelegate::SaveText, this, &TextDelegate::InitText);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(option);
@@ -48,6 +50,7 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     return editor;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     QString text = index.model()->data(index, Qt::EditRole).toString();
@@ -62,6 +65,7 @@ void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) cons
     lineEdit->setText(text);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
@@ -75,6 +79,7 @@ void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, cons
     model->setData(index, text, Qt::EditRole);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TextDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                         const QModelIndex &index) const
 {
@@ -82,6 +87,7 @@ void TextDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewI
     editor->setGeometry(option.rect);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TextDelegate::commitAndCloseEditor()
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
@@ -100,6 +106,7 @@ void TextDelegate::commitAndCloseEditor()
     emit closeEditor(lineEdit);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TextDelegate::InitText(const QString &text)
 {
     lastText = text;

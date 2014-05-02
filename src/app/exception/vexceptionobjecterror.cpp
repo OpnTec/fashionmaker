@@ -29,6 +29,7 @@
 #include "vexceptionobjecterror.h"
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
@@ -39,18 +40,19 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
     lineNumber = domElement.lineNumber();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionObjectError::ErrorMessage() const
 {
     QString error = QString("ExceptionObjectError: %1").arg(what);
     return error;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionObjectError::DetailedInformation() const
 {
     return MoreInfo(QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText));

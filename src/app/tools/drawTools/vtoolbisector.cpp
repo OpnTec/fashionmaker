@@ -32,6 +32,7 @@
 
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                              const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                              const quint32 &thirdPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
@@ -50,6 +51,7 @@ VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id,
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                  const QPointF &thirdPoint, const qreal &length)
 {
@@ -69,6 +71,7 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
     return line1.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -83,6 +86,7 @@ void VToolBisector::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data)
 {
@@ -99,6 +103,7 @@ void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
                            const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
@@ -147,6 +152,7 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -161,22 +167,26 @@ void VToolBisector::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogBisector>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogBisector>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -197,6 +207,7 @@ void VToolBisector::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -214,6 +225,7 @@ void VToolBisector::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::RemoveReferens()
 {
     doc->DecrementReferens(firstPointId);
@@ -221,6 +233,7 @@ void VToolBisector::RemoveReferens()
     VToolLinePoint::RemoveReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

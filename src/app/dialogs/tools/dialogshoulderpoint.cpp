@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0)
@@ -60,11 +61,13 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogShoulderPoint::~DialogShoulderPoint()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -109,6 +112,7 @@ void DialogShoulderPoint::ChoosedObject(quint32 id, const Valentina::Scenes &typ
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -120,33 +124,39 @@ void DialogShoulderPoint::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setPointName(const QString &value)
 {
     pointName = value;

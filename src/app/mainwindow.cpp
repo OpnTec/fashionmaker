@@ -46,6 +46,7 @@
 #include <QFileDialog>
 #include <QSourceLocation>
 
+//---------------------------------------------------------------------------------------------------------------------
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Valentina::ArrowTool),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
@@ -92,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCurrentFile("");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionNewDraw()
 {
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
@@ -180,6 +182,7 @@ void MainWindow::ActionNewDraw()
             &MainWindow::currentDrawChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OptionDraw()
 {
     const QString activDraw = doc->GetNameActivDraw();
@@ -198,6 +201,7 @@ void MainWindow::OptionDraw()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
@@ -226,6 +230,7 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
@@ -237,127 +242,150 @@ void MainWindow::ClosedDialog(int result)
     ArrowTool();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolEndLine(bool checked)
 {
     SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                                  &MainWindow::ClosedDialogEndLine);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogEndLine(int result)
 {
     ClosedDialog<VToolEndLine>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolLine(bool checked)
 {
     SetToolButton<DialogLine>(checked, Valentina::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
                               &MainWindow::ClosedDialogLine);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogLine(int result)
 {
     ClosedDialog<VToolLine>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolAlongLine(bool checked)
 {
     SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
                                    tr("Select point"), &MainWindow::ClosedDialogAlongLine);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogAlongLine(int result)
 {
     ClosedDialog<VToolAlongLine>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
     ClosedDialog<VToolShoulderPoint>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolNormal(bool checked)
 {
     SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogNormal);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogNormal(int result)
 {
     ClosedDialog<VToolNormal>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBisector(bool checked)
 {
     SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
                   tr("Select first point of angle"), &MainWindow::ClosedDialogBisector);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogBisector(int result)
 {
     ClosedDialog<VToolBisector>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolLineIntersect(bool checked)
 {
     SetToolButton<DialogLineIntersect>(checked, Valentina::LineIntersectTool, ":/cursor/intersect_cursor.png",
                   tr("Select first point of first line"), &MainWindow::ClosedDialogLineIntersect);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogLineIntersect(int result)
 {
     ClosedDialog<VToolLineIntersect>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSpline(bool checked)
 {
     SetToolButton<DialogSpline>(checked, Valentina::SplineTool, ":/cursor/spline_cursor.png",
                   tr("Select first point curve"), &MainWindow::ClosedDialogSpline);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogSpline(int result)
 {
     ClosedDialog<VToolSpline>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCutSpline(bool checked)
 {
     SetToolButton<DialogCutSpline>(checked, Valentina::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
                   tr("Select simple curve"), &MainWindow::ClosedDialogCutSpline);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogCutSpline(int result)
 {
     ClosedDialog<VToolCutSpline>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolArc(bool checked)
 {
     SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
                   tr("Select point of center of arc"), &MainWindow::ClosedDialogArc);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogArc(int result)
 {
     ClosedDialog<VToolArc>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSplinePath(bool checked)
 {
     SetToolButton<DialogSplinePath>(checked, Valentina::SplinePathTool, ":/cursor/splinepath_cursor.png",
                   tr("Select point of curve path"), &MainWindow::ClosedDialogSplinePath);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogSplinePath(int result)
 {
     ClosedDialog<VToolSplinePath>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCutSplinePath(bool checked)
 {
     SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool,
@@ -365,28 +393,33 @@ void MainWindow::ToolCutSplinePath(bool checked)
                                        &MainWindow::ClosedDialogCutSplinePath);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogCutSplinePath(int result)
 {
     ClosedDialog<VToolCutSplinePath>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointOfContact(bool checked)
 {
     SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogPointOfContact(int result)
 {
     ClosedDialog<VToolPointOfContact>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolDetail(bool checked)
 {
     SetToolButton<DialogDetail>(checked, Valentina::DetailTool, "://cursor/new_detail_cursor.png",
                                 tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogDetail(int result)
 {
     if (result == QDialog::Accepted)
@@ -397,28 +430,33 @@ void MainWindow::ClosedDialogDetail(int result)
     doc->FullUpdateTree();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolHeight(bool checked)
 {
     SetToolButton<DialogHeight>(checked, Valentina::Height, ":/cursor/height_cursor.png", tr("Select base point"),
                                 &MainWindow::ClosedDialogHeight);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogHeight(int result)
 {
     ClosedDialog<VToolHeight>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolTriangle(bool checked)
 {
     SetToolButton<DialogTriangle>(checked, Valentina::Triangle, ":/cursor/triangle_cursor.png",
                                   tr("Select first point of axis"), &MainWindow::ClosedDialogTriangle);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogTriangle(int result)
 {
     ClosedDialog<VToolTriangle>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
     SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection,
@@ -426,11 +464,13 @@ void MainWindow::ToolPointOfIntersection(bool checked)
                                              &MainWindow::ClosedDialogPointOfIntersection);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogPointOfIntersection(int result)
 {
     ClosedDialog<VToolPointOfIntersection>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolUnionDetails(bool checked)
 {
     SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png",
@@ -439,23 +479,27 @@ void MainWindow::ToolUnionDetails(bool checked)
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
     ClosedDialog<VToolUnionDetails>(result);
     doc->FullUpdateTree();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCutArc(bool checked)
 {
     SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
                   &MainWindow::ClosedDialogCutArc);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogCutArc(int result)
 {
     ClosedDialog<VToolCutArc>(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::About()
 {
     QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
@@ -468,22 +512,26 @@ void MainWindow::About()
     QMessageBox::about(this, tr("About Valentina"), about);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AboutQt()
 {
     QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowToolTip(const QString &toolTip)
 {
     helpLabel->setText(toolTip);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::tableClosed()
 {
     show();
     MinimumScrollBar();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OpenRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
@@ -493,12 +541,14 @@ void MainWindow::OpenRecentFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PatternProperties()
 {
     DialogPatternProperties proper(doc, this);
     proper.exec();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -518,6 +568,7 @@ void MainWindow::showEvent( QShowEvent *event )
     isInitialized = true;//first show windows are held
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -531,6 +582,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarOption()
 {
     if (qApp->patternType() == Pattern::Standard)
@@ -566,6 +618,7 @@ void MainWindow::ToolBarOption()
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarDraws()
 {
     QLabel *labelPtternPieceName = new QLabel(tr("Pattern Piece: "));
@@ -592,6 +645,7 @@ void MainWindow::ToolBarDraws()
     ui->actionLayout->setEnabled(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitToolButtons()
 {
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
@@ -615,6 +669,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::currentDrawChanged( int index )
 {
     if (index != -1)
@@ -634,6 +689,7 @@ void MainWindow::currentDrawChanged( int index )
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
     QString string = QString("%1, %2").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
@@ -644,6 +700,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CancelTool()
 {
     delete dialogTool;
@@ -757,6 +814,7 @@ void MainWindow::CancelTool()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void  MainWindow::ArrowTool()
 {
     CancelTool();
@@ -767,11 +825,13 @@ void  MainWindow::ArrowTool()
     helpLabel->setText("");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionAroowTool()
 {
     ArrowTool();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::keyPressEvent ( QKeyEvent * event )
 {
     switch (event->key())
@@ -785,6 +845,7 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
     QMainWindow::keyPressEvent ( event );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SaveCurrentScene()
 {
     /*Save transform*/
@@ -796,6 +857,7 @@ void MainWindow::SaveCurrentScene()
     currentScene->setVerScrollBar(verScrollBar->value());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::RestoreCurrentScene()
 {
     /*Set transform for current scene*/
@@ -807,6 +869,7 @@ void MainWindow::RestoreCurrentScene()
     verScrollBar->setValue(currentScene->getVerScrollBar());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
@@ -839,6 +902,7 @@ void MainWindow::ActionDraw(bool checked)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
@@ -873,6 +937,7 @@ void MainWindow::ActionDetails(bool checked)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
@@ -899,6 +964,7 @@ bool MainWindow::SaveAs()
     return SavePattern(fileName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::Save()
 {
     if (curFile.isEmpty())
@@ -918,6 +984,7 @@ bool MainWindow::Save()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Open()
 {
     if (MaybeSave())
@@ -943,6 +1010,7 @@ void MainWindow::Open()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Options()
 {
     ConfigDialog dlg(this);
@@ -952,6 +1020,7 @@ void MainWindow::Options()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Clear()
 {
     setCurrentFile("");
@@ -973,6 +1042,7 @@ void MainWindow::Clear()
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::NewPattern()
 {
     QProcess *v = new QProcess(this);
@@ -980,12 +1050,14 @@ void MainWindow::NewPattern()
     delete v;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PatternWasModified()
 {
     setWindowModified(doc->isPatternModified());
     ui->actionSave->setEnabled(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
@@ -993,6 +1065,7 @@ void MainWindow::ChangedSize(const QString & text)
     doc->FullUpdateTree();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
@@ -1000,6 +1073,7 @@ void MainWindow::ChangedHeight(const QString &text)
     doc->FullUpdateTree();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetEnableWidgets(bool enable)
 {
     ui->actionSaveAs->setEnabled(enable);
@@ -1014,6 +1088,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionHistory->setEnabled(enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionTable(bool checked)
 {
     if (checked)
@@ -1029,6 +1104,7 @@ void MainWindow::ActionTable(bool checked)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedActionTable()
 {
     ui->actionTable->setChecked(false);
@@ -1036,6 +1112,7 @@ void MainWindow::ClosedActionTable()
     dialogTable = nullptr;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionHistory(bool checked)
 {
     if (checked)
@@ -1052,6 +1129,7 @@ void MainWindow::ActionHistory(bool checked)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionLayout(bool checked)
 {
     Q_UNUSED(checked);
@@ -1069,12 +1147,14 @@ void MainWindow::ActionLayout(bool checked)
     emit ModelChosen(listDetails, curFile, description);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedActionHistory()
 {
     ui->actionHistory->setChecked(false);
     delete dialogHistory;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
@@ -1111,6 +1191,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::MinimumScrollBar()
 {
     QScrollBar *horScrollBar = view->horizontalScrollBar();
@@ -1119,6 +1200,7 @@ void MainWindow::MinimumScrollBar()
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::SavePattern(const QString &fileName)
 {
     QFileInfo tempInfo(fileName);
@@ -1134,6 +1216,7 @@ bool MainWindow::SavePattern(const QString &fileName)
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AutoSavePattern()
 {
     if (curFile.isEmpty() == false && doc->isPatternModified() == true)
@@ -1146,6 +1229,7 @@ void MainWindow::AutoSavePattern()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     curFile = fileName;
@@ -1176,6 +1260,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     setWindowTitle(shownName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
@@ -1191,6 +1276,7 @@ void MainWindow::ReadSettings()
     move(pos);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::WriteSettings()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -1199,6 +1285,7 @@ void MainWindow::WriteSettings()
     settings.setValue("size", size());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::MaybeSave()
 {
     if (doc->isPatternModified())
@@ -1219,6 +1306,7 @@ bool MainWindow::MaybeSave()
     return true;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -1242,6 +1330,7 @@ void MainWindow::UpdateRecentFileActions()
     separatorAct->setVisible(numRecentFiles > 0);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateMenus()
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
@@ -1254,6 +1343,7 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
@@ -1284,6 +1374,7 @@ void MainWindow::CreateActions()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitAutoSave()
 {
     //Autosaving file each 5 minutes
@@ -1309,6 +1400,7 @@ void MainWindow::InitAutoSave()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString MainWindow::PatternPieceName(const QString &text)
 {
     QInputDialog *dlg = new QInputDialog(this);
@@ -1337,6 +1429,7 @@ QString MainWindow::PatternPieceName(const QString &text)
     return nameDraw;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
     CancelTool();
@@ -1348,6 +1441,7 @@ MainWindow::~MainWindow()
     delete sceneDraw;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadPattern(const QString &fileName)
 {
     try
@@ -1470,6 +1564,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     helpLabel->setText(tr("File loaded"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString MainWindow::CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType)
 {
     QFile table(path);

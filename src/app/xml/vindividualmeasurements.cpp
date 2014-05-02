@@ -46,21 +46,24 @@ const QString VIndividualMeasurements::TagEmail        = QStringLiteral("email")
 const QString VIndividualMeasurements::SexMale        = QStringLiteral("male");
 const QString VIndividualMeasurements::SexFemale      = QStringLiteral("female");
 
+//---------------------------------------------------------------------------------------------------------------------
 VIndividualMeasurements::VIndividualMeasurements(VContainer *data):VDomDocument(data)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 Valentina::Units VIndividualMeasurements::Unit() const
 {
     const QString unit = UniqueTagText(TagUnit, UnitCM);
     return VDomDocument::StrToUnits(unit);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setUnit(const Valentina::Units &unit)
 {
     setTagText(TagUnit, UnitsToStr(unit));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::Measurements()
 {
     //head and neck
@@ -152,6 +155,7 @@ void VIndividualMeasurements::Measurements()
     Measurement("crotch_height");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::Measurement(const QString &tag)
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);
@@ -218,62 +222,74 @@ void VIndividualMeasurements::Measurement(const QString &tag)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VIndividualMeasurements::Language() const
 {
     return UniqueTagText(TagLang, "en");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VIndividualMeasurements::FamilyName() const
 {
     return UniqueTagText(TagFamily_name, "");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setFamilyName(const QString &text)
 {
     setTagText(TagFamily_name, text);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VIndividualMeasurements::GivenName() const
 {
     return UniqueTagText(TagGiven_name, "");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setGivenName(const QString &text)
 {
     setTagText(TagGiven_name, text);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QDate VIndividualMeasurements::BirthDate() const
 {
     const QString date = UniqueTagText(TagBirth_date, "1900-01-01");
     return QDate::fromString(date, "yyyy-MM-dd");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setBirthDate(const QDate &date)
 {
     setTagText(TagBirth_date, date.toString("yyyy-MM-dd"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VIndividualMeasurements::Genders VIndividualMeasurements::Sex() const
 {
     return StrToGender(UniqueTagText(TagSex, ""));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setSex(const VIndividualMeasurements::Genders &sex)
 {
     setTagText(TagSex, GenderToStr(sex));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VIndividualMeasurements::Mail() const
 {
     return UniqueTagText(TagEmail, "");
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VIndividualMeasurements::setMail(const QString &text)
 {
     setTagText(TagEmail, text);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VIndividualMeasurements::GenderToStr(const VIndividualMeasurements::Genders &sex)
 {
     switch (sex)
@@ -287,6 +303,7 @@ QString VIndividualMeasurements::GenderToStr(const VIndividualMeasurements::Gend
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VIndividualMeasurements::Genders VIndividualMeasurements::StrToGender(const QString &sex)
 {
     QStringList genders;

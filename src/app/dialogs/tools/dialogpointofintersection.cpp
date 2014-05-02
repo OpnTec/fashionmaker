@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogPointOfIntersection), number(0), pointName(QString()),
     firstPointId(0), secondPointId(0)
@@ -47,17 +48,20 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWi
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersection::NamePointChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersection::~DialogPointOfIntersection()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -91,6 +95,7 @@ void DialogPointOfIntersection::ChoosedObject(quint32 id, const Valentina::Scene
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -99,12 +104,14 @@ void DialogPointOfIntersection::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::setPointName(const QString &value)
 {
     pointName = value;

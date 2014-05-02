@@ -64,16 +64,19 @@ private:
     QSourceLocation m_sourceLocation;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QString MessageHandler::statusMessage() const
 {
     return m_description;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline qint64  MessageHandler::line() const
 {
     return m_sourceLocation.line();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline qint64  MessageHandler::column() const
 {
     return m_sourceLocation.column();
@@ -85,12 +88,12 @@ const QString VDomDocument::UnitMM   = QStringLiteral("mm");
 const QString VDomDocument::UnitCM   = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
 
+//---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 QDomElement VDomDocument::elementById(const QString& id)
 {
     if (map.contains(id))
@@ -111,6 +114,7 @@ QDomElement VDomDocument::elementById(const QString& id)
     return QDomElement();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::removeAllChilds(QDomElement &element)
 {
     QDomNode domNode = element.firstChild();
@@ -128,6 +132,7 @@ void VDomDocument::removeAllChilds(QDomElement &element)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::find(const QDomElement &node, const QString& id)
 {
     if (node.hasAttribute(AttrId))
@@ -154,6 +159,7 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -183,6 +189,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
                                         const QString &defValue) const
 {
@@ -203,6 +210,7 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
     return parameter;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -230,6 +238,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
     return param;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const
 {
     const QDomNodeList nodeList = this->elementsByTagName(tagName);
@@ -252,6 +261,7 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
     return defVal;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
     QFile pattern(fileName);
@@ -301,6 +311,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     fileSchema.close();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::setContent(const QString &fileName)
 {
     QFile file(fileName);
@@ -322,6 +333,7 @@ void VDomDocument::setContent(const QString &fileName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Valentina::Units VDomDocument::StrToUnits(const QString &unit)
 {
     QStringList units;
@@ -345,6 +357,7 @@ Valentina::Units VDomDocument::StrToUnits(const QString &unit)
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
 {
     QString result;
@@ -366,6 +379,7 @@ QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::SaveDocument(const QString &fileName)
 {
     if (fileName.isEmpty())
@@ -416,6 +430,7 @@ bool VDomDocument::SaveDocument(const QString &fileName)
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::setTagText(const QString &tag, const QString &text)
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);

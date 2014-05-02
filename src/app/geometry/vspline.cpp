@@ -30,15 +30,20 @@
 
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline()
     :VGObject(GObject::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
-      kAsm1(1), kAsm2(1), kCurve(1){}
+      kAsm1(1), kAsm2(1), kCurve(1)
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline ( const VSpline & spline )
     :VGObject(spline), p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()),
       angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()),
-      kCurve(spline.GetKcurve()){}
+      kCurve(spline.GetKcurve())
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
                   quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
@@ -67,6 +72,7 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
     this->p3 = p4p3.p2();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
       kAsm2(1), kCurve(1)
@@ -91,16 +97,19 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
     this->kAsm2 = QLineF ( GetP4().toQPointF(), p3 ).length()/L;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::GetLength () const
 {
     return LengthBezier ( GetP1().toQPointF(), this->p2, this->p3, GetP4().toQPointF());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VSpline::name() const
 {
     return _name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const
 {
     QVector<qreal> px;
@@ -130,6 +139,7 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
     throw "Can't found point of intersection spline and line.";
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::LengthT(qreal t) const
 {
     if (t < 0 || t > 1)
@@ -164,6 +174,7 @@ qreal VSpline::LengthT(qreal t) const
     return LengthBezier ( GetP1().toQPointF(), p12, p123, p1234);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3 ) const
 {
     //Always need return two splines, so we must correct wrong length.
@@ -223,11 +234,13 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
     return p1234;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VSpline::GetPoints () const
 {
     return GetPoints(GetP1().toQPointF(), p2, p3, GetP4().toQPointF());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
 {
     QVector<QPointF> pvector;
@@ -248,6 +261,7 @@ QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const
     return pvector;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const
 {
     QPainterPath splinePath;
@@ -260,6 +274,7 @@ qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPoint
     return splinePath.length();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                               qreal x3, qreal y3, qreal x4, qreal y4,
                               qint16 level, QVector<qreal> &px, QVector<qreal> &py)
@@ -271,15 +286,15 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     const double m_cusp_limit = 0.0;
     double m_approximation_scale = 1.0;
     double m_distance_tolerance_square;
-    
+
     m_distance_tolerance_square = 0.5 / m_approximation_scale;
     m_distance_tolerance_square *= m_distance_tolerance_square;
-    
+
     if (level > curve_recursion_limit)
     {
         return;
     }
-    
+
     // Calculate all the mid-points of the line segments
     //----------------------
     const double x12   = (x1 + x2) / 2;
@@ -294,16 +309,16 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
     const double y234  = (y23 + y34) / 2;
     const double x1234 = (x123 + x234) / 2;
     const double y1234 = (y123 + y234) / 2;
-    
-    
+
+
     // Try to approximate the full cubic curve by a single straight line
     //------------------
     const double dx = x4-x1;
     const double dy = y4-y1;
-    
+
     double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
     double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
-    
+
     switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
              static_cast<int>(d3 > curve_collinearity_epsilon))
     {
@@ -531,13 +546,14 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
         default:
             break;
     }
-    
+
     // Continue subdivision
     //----------------------
     PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, static_cast<qint16>(level + 1), px, py);
     PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), px, py);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
 {
     qreal dx = x2 - x1;
@@ -545,11 +561,13 @@ qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
     return dx * dx + dy * dy;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSpline::CreateName()
 {
     _name = QString("Spl_%1_%2").arg(this->GetP1().name(), this->GetP4().name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VSpline::GetPath() const
 {
     QPainterPath splinePath;
@@ -569,6 +587,7 @@ QPainterPath VSpline::GetPath() const
     return splinePath;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                        qreal kAsm2, qreal kCurve)
 {
@@ -586,6 +605,7 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
     return GetPoints(p1, p2, p3, p4);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VSpline &VSpline::operator =(const VSpline &spline)
 {
     VGObject::operator=(spline);

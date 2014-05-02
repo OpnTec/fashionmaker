@@ -30,43 +30,49 @@
 
 #include <QtWidgets>
 
+//---------------------------------------------------------------------------------------------------------------------
 VMainGraphicsScene::VMainGraphicsScene()
     :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
     :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     emit mouseMove(event->scenePos());
     QGraphicsScene::mouseMoveEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit mousePress(event->scenePos());
     QGraphicsScene::mousePressEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QTransform VMainGraphicsScene::transform() const
 {
     return _transform;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::setTransform(const QTransform &transform)
 {
     _transform = transform;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::ChoosedItem(quint32 id, const Valentina::Scenes &type)
 {
     emit ChoosedObject(id, type);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetFactor(qreal factor)
 {
     scaleFactor=scaleFactor*factor;

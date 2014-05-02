@@ -30,6 +30,7 @@
 
 #include <QDoubleSpinBox>
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                              const QModelIndex &index ) const
@@ -43,6 +44,7 @@ QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOption
     return editor;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
@@ -53,6 +55,7 @@ void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &in
     spinBox->setValue(value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
@@ -64,6 +67,7 @@ void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *mo
     model->setData(index, value, Qt::EditRole);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                                  const QModelIndex &index) const
@@ -72,6 +76,7 @@ void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOp
     editor->setGeometry(option.rect);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DoubleSpinBoxDelegate::commitAndCloseEditor()
 {
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());

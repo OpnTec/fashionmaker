@@ -34,6 +34,7 @@
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
@@ -58,6 +59,7 @@ VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina:
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -70,6 +72,7 @@ void VToolArc::setDialog()
     dialogTool->SetRadius(arc->GetFormulaRadius());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                       VContainer *data)
 {
@@ -83,6 +86,7 @@ void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *d
     Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
                       const QString &f2, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                       const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -138,11 +142,13 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &r
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -162,22 +168,26 @@ void VToolArc::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogArc>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::AddToFile()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
@@ -193,6 +203,7 @@ void VToolArc::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::RefreshDataInFile()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
@@ -206,6 +217,7 @@ void VToolArc::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -215,6 +227,7 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -222,6 +235,7 @@ void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -229,12 +243,14 @@ void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::RemoveReferens()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     doc->DecrementReferens(arc->GetCenter().id());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -253,6 +269,7 @@ QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -266,6 +283,7 @@ void VToolArc::keyReleaseEvent(QKeyEvent *event)
     QGraphicsItem::keyReleaseEvent ( event );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -277,6 +295,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolArc::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));

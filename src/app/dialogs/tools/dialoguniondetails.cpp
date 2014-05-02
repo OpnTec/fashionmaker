@@ -29,6 +29,7 @@
 #include "dialoguniondetails.h"
 #include "ui_dialoguniondetails.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogUnionDetails), indexD1(0), indexD2(0), d1(0), d2(0),  numberD(0),
     numberP(0), p1(0), p2(0)
@@ -37,11 +38,13 @@ DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) 
     InitOkCansel(ui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogUnionDetails::~DialogUnionDetails()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogUnionDetails::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (numberD == 0)
@@ -54,11 +57,13 @@ void DialogUnionDetails::ChoosedObject(quint32 id, const Valentina::Scenes &type
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogUnionDetails::DialogAccepted()
 {
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const
 {
     if (idDetail == 0)
@@ -69,6 +74,7 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
     return det.Containes(id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail,
                                        ptrdiff_t &index)
 {

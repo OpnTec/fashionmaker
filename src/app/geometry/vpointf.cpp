@@ -28,27 +28,26 @@
 
 #include "vpointf.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
 {
     this->_name = name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF() :VGObject(GObject::Point, 0, Valentina::Calculation), _mx(0), _my(0), _x(0), _y(0)
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 VPointF &VPointF::operator =(const VPointF &point)
 {
     VGObject::operator=(point);

@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
     axisP2Id(0), firstPointId(0), secondPointId(0)
@@ -49,11 +50,13 @@ DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::~DialogTriangle()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -91,6 +94,7 @@ void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -101,30 +105,35 @@ void DialogTriangle::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
 {
     axisP2Id = value;
     setCurrentPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::setAxisP1Id(const quint32 &value, const quint32 &id)
 {
     axisP1Id = value;

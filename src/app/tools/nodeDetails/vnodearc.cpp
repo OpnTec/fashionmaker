@@ -34,6 +34,7 @@
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Valentina::Sources &typeCreation,
                    const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
@@ -51,6 +52,7 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, c
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document::Documents &parse,
                       const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *parent)
 {
@@ -78,17 +80,20 @@ void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::DeleteNode()
 {
     VAbstractNode::DeleteNode();
     this->setVisible(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -104,6 +109,7 @@ void VNodeArc::AddToFile()
     AddToModeling(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -117,6 +123,7 @@ void VNodeArc::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -126,18 +133,21 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::RefreshGeometry()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);

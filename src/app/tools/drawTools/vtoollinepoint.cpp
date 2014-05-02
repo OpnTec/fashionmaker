@@ -28,6 +28,7 @@
 
 #include "vtoollinepoint.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
                                const QString &typeLine, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
@@ -43,6 +44,7 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -57,6 +59,7 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
     VToolPoint::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::RefreshGeometry()
 {
     mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
@@ -66,6 +69,7 @@ void VToolLinePoint::RefreshGeometry()
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);

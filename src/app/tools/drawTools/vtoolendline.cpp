@@ -33,6 +33,7 @@
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const quint32 &basePointId,
                            const Valentina::Sources &typeCreation, QGraphicsItem *parent)
@@ -49,6 +50,7 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -62,6 +64,7 @@ void VToolEndLine::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data)
 {
@@ -77,6 +80,7 @@ void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatter
            Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qreal &angle, const quint32 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
@@ -120,6 +124,7 @@ void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QSt
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -133,16 +138,19 @@ void VToolEndLine::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogEndLine>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogEndLine>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -162,6 +170,7 @@ void VToolEndLine::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -178,6 +187,7 @@ void VToolEndLine::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

@@ -30,6 +30,7 @@
 #include "../widgets/vapplication.h"
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
 {
     Q_CHECK_PTR(data);
@@ -159,6 +160,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     return path;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
 {
     qreal length = 0;
@@ -172,6 +174,7 @@ qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVec
     return length;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my)
 {
     QVector<QPointF> p;
@@ -185,6 +188,7 @@ QVector<QPointF> VEquidistant::biasPoints(const QVector<QPointF> &points, const 
     return p;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> correctPoints;
@@ -230,6 +234,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
     return correctPoints;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
                                        const qreal &width)
 {
@@ -297,6 +302,7 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
     return ekv;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 {
     QVector<QPointF> ekvPoints;
@@ -355,6 +361,7 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
     return ekvPoints;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
 {
     Q_ASSERT(points.size() > 0);
@@ -366,6 +373,7 @@ QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
     return reversePoints;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
     Q_ASSERT(width > 0);
@@ -415,6 +423,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
     return points;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
 {
     Q_ASSERT(width > 0);
@@ -423,6 +432,7 @@ QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
     return paralel;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)
 {
     Q_ASSERT(width > 0);

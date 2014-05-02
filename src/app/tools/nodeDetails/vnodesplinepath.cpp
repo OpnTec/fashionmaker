@@ -34,6 +34,7 @@
 const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                                  const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                                  QGraphicsItem * parent)
@@ -52,6 +53,7 @@ VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, qu
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                              const Document::Documents &parse, const Valentina::Sources &typeCreation,
                              const quint32 &idTool, QObject *parent)
@@ -85,17 +87,20 @@ void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint3
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::DeleteNode()
 {
     VAbstractNode::DeleteNode();
     this->setVisible(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -111,6 +116,7 @@ void VNodeSplinePath::AddToFile()
     AddToModeling(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -124,6 +130,7 @@ void VNodeSplinePath::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -133,18 +140,21 @@ void VNodeSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::RefreshGeometry()
 {
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);

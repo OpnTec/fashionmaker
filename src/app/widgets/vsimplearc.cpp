@@ -31,6 +31,7 @@
 #include <QPen>
 #include <QGraphicsSceneMouseEvent>
 
+//---------------------------------------------------------------------------------------------------------------------
 VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
 :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
@@ -46,6 +47,7 @@ VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor,
     setAcceptHoverEvents(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -55,6 +57,7 @@ void VSimpleArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -68,6 +71,7 @@ void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

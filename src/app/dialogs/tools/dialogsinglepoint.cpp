@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSinglePoint), name(QString()),
     point(QPointF())
@@ -47,6 +48,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NamePointChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSinglePoint::mousePress(const QPointF &scenePos)
 {
     if (isInitialized == false)
@@ -62,6 +64,7 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSinglePoint::DialogAccepted()
 {
     point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
@@ -69,6 +72,7 @@ void DialogSinglePoint::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSinglePoint::setData(const QString &name, const QPointF &point)
 {
     this->name = name;
@@ -79,6 +83,7 @@ void DialogSinglePoint::setData(const QString &name, const QPointF &point)
     ui->doubleSpinBoxY->setValue(qApp->fromPixel(point.y()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogSinglePoint::~DialogSinglePoint()
 {
     delete ui;

@@ -32,6 +32,7 @@
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                        const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
                                        const quint32 &pShoulder, const Valentina::Sources &typeCreation,
@@ -48,6 +49,7 @@ VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const qu
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -62,6 +64,7 @@ void VToolShoulderPoint::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                       const qreal &length)
 {
@@ -89,6 +92,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -104,6 +108,7 @@ void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const quint32 &p1Line,
                                 const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
@@ -155,6 +160,7 @@ void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -169,22 +175,26 @@ void VToolShoulderPoint::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogShoulderPoint>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogShoulderPoint>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -205,6 +215,7 @@ void VToolShoulderPoint::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -222,6 +233,7 @@ void VToolShoulderPoint::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::RemoveReferens()
 {
     doc->DecrementReferens(p2Line);
@@ -229,6 +241,7 @@ void VToolShoulderPoint::RemoveReferens()
     VToolLinePoint::RemoveReferens();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

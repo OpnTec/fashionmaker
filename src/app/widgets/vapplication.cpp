@@ -40,6 +40,7 @@ const qreal VApplication::PrintDPI = 96.0;
 
 #define DefWidth 1.2//mm
 
+//---------------------------------------------------------------------------------------------------------------------
 VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0)
@@ -47,6 +48,7 @@ VApplication::VApplication(int &argc, char **argv)
     InitLineWidth();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {
@@ -91,6 +93,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 double VApplication::toPixel(double unit) const
 {
     double result = 0;
@@ -111,6 +114,7 @@ double VApplication::toPixel(double unit) const
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 double VApplication::fromPixel(double pix) const
 {
     double result = 0;
@@ -130,6 +134,8 @@ double VApplication::fromPixel(double pix) const
     }
     return result;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::pathToTables() const
 {
     if (_patternType == Pattern::Individual)
@@ -158,6 +164,7 @@ QString VApplication::pathToTables() const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::translationsPath() const
 {
 #ifdef Q_OS_WIN
@@ -171,7 +178,7 @@ QString VApplication::translationsPath() const
     #endif
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitLineWidth()
 {
     switch (_patternUnit)
@@ -192,7 +199,7 @@ void VApplication::InitLineWidth()
     _widthHairLine = _widthMainLine/3.0;
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
 {
     _patternUnit = patternUnit;

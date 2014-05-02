@@ -29,6 +29,7 @@
 #include "vexceptionwrongid.h"
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
@@ -39,18 +40,19 @@ VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &dom
     lineNumber = domElement.lineNumber();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionWrongId::ErrorMessage() const
 {
     QString error = QString("ExceptionWrongId: %1").arg(what);
     return error;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VExceptionWrongId::DetailedInformation() const
 {
     return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));

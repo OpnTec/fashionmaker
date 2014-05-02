@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)
@@ -60,11 +61,13 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogNormal::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -91,6 +94,7 @@ void DialogNormal::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -102,34 +106,40 @@ void DialogNormal::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setPointName(const QString &value)
 {
     pointName = value;

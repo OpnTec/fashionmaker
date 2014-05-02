@@ -32,6 +32,7 @@
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
                      const QString &typeLine, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
@@ -58,6 +59,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -68,6 +70,7 @@ void VToolLine::setDialog()
     dialogTool->setTypeLine(typeLine);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -79,6 +82,7 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                        const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -114,22 +118,26 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -148,11 +156,13 @@ void VToolLine::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLine>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -164,6 +174,7 @@ void VToolLine::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -175,24 +186,28 @@ void VToolLine::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::RemoveReferens()
 {
     doc->DecrementReferens(firstPoint);
     doc->DecrementReferens(secondPoint);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -211,6 +226,7 @@ QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -224,6 +240,7 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
     QGraphicsItem::keyReleaseEvent ( event );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -234,6 +251,7 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolLine::RefreshGeometry()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));

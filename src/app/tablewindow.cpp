@@ -33,6 +33,7 @@
 #include <QPrinter>
 #include "widgets/vapplication.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(nullptr), colission(nullptr), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(nullptr),
@@ -67,12 +68,14 @@ TableWindow::TableWindow(QWidget *parent)
     connect(view, &VTableGraphicsView::itemChect, this, &TableWindow::itemChect);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 TableWindow::~TableWindow()
 {
     delete tableScene;
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::AddPaper()
 {
     qreal x1, y1, x2, y2;
@@ -87,6 +90,7 @@ void TableWindow::AddPaper()
     qDebug()<<paper->rect().size().toSize();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::AddDetail()
 {
     if (indexDetail<listDetails.count())
@@ -115,6 +119,7 @@ void TableWindow::AddDetail()
     numberDetal->setText(QString(tr("%1 details left.")).arg(listDetails.count()-indexDetail));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 /*
  * Get details for creation layout.
  */
@@ -142,12 +147,14 @@ void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileNa
     show();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::closeEvent(QCloseEvent *event)
 {
     event->ignore();
     StopTable();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::moveToCenter()
 {
     QRect rect = frameGeometry();
@@ -155,12 +162,14 @@ void TableWindow::moveToCenter()
     move(rect.topLeft());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::showEvent ( QShowEvent * event )
 {
     QMainWindow::showEvent(event);
     moveToCenter();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::StopTable()
 {
     hide();
@@ -172,6 +181,7 @@ void TableWindow::StopTable()
     emit closed();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::saveScene()
 {
     QMap<QString, QString> extByMessage;
@@ -251,12 +261,14 @@ void TableWindow::saveScene()
     delete brush;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::itemChect(bool flag)
 {
     ui->actionTurn->setDisabled(flag);
     ui->actionMirror->setDisabled(flag);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::checkNext()
 {
     if (outItems == true && collidingItems == true)
@@ -281,6 +293,7 @@ void TableWindow::checkNext()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::itemOut(int number, bool flag)
 {
     listOutItems->setBit(number, flag);
@@ -298,6 +311,7 @@ void TableWindow::itemOut(int number, bool flag)
     checkNext();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
 {
     //qDebug()<<"number="<<number;
@@ -364,11 +378,13 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
     checkNext();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::GetNextDetail()
 {
     AddDetail();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::AddLength()
 {
     QRectF rect = tableScene->sceneRect();
@@ -384,6 +400,7 @@ void TableWindow::AddLength()
     emit LengthChanged();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::RemoveLength()
 {
     if (sceneRect.height() <= tableScene->sceneRect().height() - 100)
@@ -409,6 +426,7 @@ void TableWindow::RemoveLength()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::keyPressEvent ( QKeyEvent * event )
 {
     if ( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
@@ -422,7 +440,7 @@ void TableWindow::keyPressEvent ( QKeyEvent * event )
     QMainWindow::keyPressEvent ( event );
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::SvgFile(const QString &name) const
 {
     QSvgGenerator generator;
@@ -442,6 +460,7 @@ void TableWindow::SvgFile(const QString &name) const
     painter.end();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PngFile(const QString &name) const
 {
     QRectF r = paper->rect();
@@ -459,6 +478,7 @@ void TableWindow::PngFile(const QString &name) const
     image.save(name);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PdfFile(const QString &name) const
 {
     QPrinter printer;
@@ -483,6 +503,7 @@ void TableWindow::PdfFile(const QString &name) const
     painter.end();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::EpsFile(const QString &name) const
 {
     QTemporaryFile tmp;
@@ -497,6 +518,7 @@ void TableWindow::EpsFile(const QString &name) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PsFile(const QString &name) const
 {
     QTemporaryFile tmp;
@@ -511,6 +533,7 @@ void TableWindow::PsFile(const QString &name) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PdfToPs(const QStringList &params) const
 {
 #ifndef QT_NO_CURSOR

@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)
@@ -48,41 +49,48 @@ DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogHeight::~DialogHeight()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
 {
     basePointId = value;
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
 {
     p1LineId = value;
     setCurrentPointId(ui->comboBoxP1Line, p1LineId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
 {
     p2LineId = value;
     setCurrentPointId(ui->comboBoxP2Line, p2LineId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -115,6 +123,7 @@ void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();

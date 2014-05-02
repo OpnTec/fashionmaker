@@ -31,6 +31,7 @@
 #include <QPushButton>
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(), details(VDetail()), supplement(true), closed(true)
 {
@@ -62,6 +63,7 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type != Valentina::Line && type != Valentina::Detail)
@@ -89,6 +91,7 @@ void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::DialogAccepted()
 {
     details.Clear();
@@ -105,6 +108,7 @@ void DialogDetail::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
                            qreal mx, qreal my)
 {
@@ -158,6 +162,7 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
             this, &DialogDetail::BiasYChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::setDetails(const VDetail &value)
 {
     details = value;
@@ -178,6 +183,7 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.toolButtonDelete->setEnabled(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::BiasXChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
@@ -188,6 +194,7 @@ void DialogDetail::BiasXChanged(qreal d)
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::BiasYChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
@@ -198,6 +205,7 @@ void DialogDetail::BiasYChanged(qreal d)
     item->setData(Qt::UserRole, QVariant::fromValue(node));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::ClickedSeams(bool checked)
 {
     supplement = checked;
@@ -205,11 +213,13 @@ void DialogDetail::ClickedSeams(bool checked)
     ui.spinBoxSeams->setEnabled(checked);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::ClickedClosed(bool checked)
 {
     closed = checked;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::ObjectChanged(int row)
 {
     if (ui.listWidget->count() == 0)
@@ -222,6 +232,7 @@ void DialogDetail::ObjectChanged(int row)
     ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::DeleteItem()
 {
     qint32 row = ui.listWidget->currentRow();

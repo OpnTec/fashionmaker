@@ -29,10 +29,13 @@
 #include "vdetail.h"
 #include <QDebug>
 
+//---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail()
     :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
-      width(10){}
+      width(10)
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
     :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
       width(10)
@@ -40,10 +43,13 @@ VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
     this->nodes = nodes;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const VDetail &detail)
     :_id(0), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
-      seamAllowance(detail.getSeamAllowance()), closed(detail.getClosed()), width(detail.getWidth()){}
+      seamAllowance(detail.getSeamAllowance()), closed(detail.getClosed()), width(detail.getWidth())
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VDetail &VDetail::operator =(const VDetail &detail)
 {
     _id = detail.id();
@@ -57,6 +63,7 @@ VDetail &VDetail::operator =(const VDetail &detail)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDetail::Clear()
 {
     nodes.clear();
@@ -68,11 +75,13 @@ void VDetail::Clear()
     width = 10;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDetail::ClearNodes()
 {
     nodes.clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VDetail::Containes(const quint32 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
@@ -86,31 +95,37 @@ bool VDetail::Containes(const quint32 &id) const
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail &VDetail::operator [](ptrdiff_t indx)
 {
     return nodes[indx];
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 const VNodeDetail &VDetail::at(ptrdiff_t indx) const
 {
     return nodes[indx];
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 ptrdiff_t VDetail::indexOfNode(const quint32 &id) const
 {
     return indexOfNode(nodes, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VDetail::id() const
 {
     return _id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDetail::setId(const quint32 &id)
 {
     _id = id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
@@ -148,6 +163,7 @@ bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
@@ -172,6 +188,7 @@ ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
@@ -191,6 +208,7 @@ void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VDetail VDetail::RemoveEdge(const quint32 &index) const
 {
     VDetail det(*this);
@@ -233,6 +251,7 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
     return det;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
     QList<quint32> list;
@@ -256,6 +275,7 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
     return list;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VNodeDetail> VDetail::listNodePoint() const
 {
     QVector<VNodeDetail> list;
@@ -269,6 +289,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     return list;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)

@@ -40,16 +40,18 @@ const QString VStandardMeasurements::AttrSize_increace   = QStringLiteral("size_
 const QString VStandardMeasurements::AttrHeight_increase = QStringLiteral("height_increase");
 const QString VStandardMeasurements::AttrNumber          = QStringLiteral("number");
 
+//---------------------------------------------------------------------------------------------------------------------
 VStandardMeasurements::VStandardMeasurements(VContainer *data):VDomDocument(data)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 Valentina::Units VStandardMeasurements::Unit()
 {
     const QString unit = UniqueTagText(AttrUnit, UnitCM);
     return VDomDocument::StrToUnits(unit);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString VStandardMeasurements::Description()
 {
     const QString desc = UniqueTagText(TagDescription, "");
@@ -60,6 +62,7 @@ QString VStandardMeasurements::Description()
     return desc;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::Measurements()
 {
     const QDomNodeList nodeList = this->elementsByTagName(TagMeasurement);
@@ -105,6 +108,7 @@ void VStandardMeasurements::Measurements()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetSize()
 {
     const QDomNodeList nodeList = this->elementsByTagName(TagSize);
@@ -138,6 +142,7 @@ void VStandardMeasurements::SetSize()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetHeight()
 {
     const QDomNodeList nodeList = this->elementsByTagName(TagHeight);

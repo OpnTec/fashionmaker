@@ -32,22 +32,21 @@
 #include <QDebug>
 #include "../widgets/vapplication.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
     :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(nullptr)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VItem::VItem():numInOutList(0), paper(nullptr)
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), numInOutList(numInList),
     paper(nullptr)
-{
+{}
 
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 void VItem::checkItemChange()
 {
     QRectF rect;
@@ -87,6 +86,7 @@ void VItem::checkItemChange()
     //qDebug()<<"list="<<list.size();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
 {
     if ( change == QGraphicsItem::ItemPositionHasChanged && scene() )
@@ -102,6 +102,7 @@ QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
     return QGraphicsPathItem::itemChange( change, value );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VItem::LengthChanged()
 {
     checkItemChange();

@@ -28,15 +28,22 @@
 
 #include "vnodedetail.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :id(0), typeTool(Valentina::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0){}
+    :id(0), typeTool(Valentina::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(quint32 id, Valentina::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx, qreal my)
-    :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my){}
+    :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my)
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(const VNodeDetail &node)
-    :id(node.getId()), typeTool(node.getTypeTool()), typeNode(node.getTypeNode()), mx(node.getMx()), my(node.getMy()){}
+    :id(node.getId()), typeTool(node.getTypeTool()), typeNode(node.getTypeNode()), mx(node.getMx()), my(node.getMy())
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
 {
     id = node.getId();

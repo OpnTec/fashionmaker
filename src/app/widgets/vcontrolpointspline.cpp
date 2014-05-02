@@ -32,6 +32,7 @@
 #include <QPen>
 #include "../widgets/vapplication.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)
@@ -57,18 +58,21 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
@@ -80,6 +84,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
                                       const QPointF &controlPoint, const QPointF &splinePoint)
 {
@@ -91,6 +96,7 @@ void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Po
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)

@@ -33,6 +33,7 @@
 #include "../../widgets/vapplication.h"
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,
                                                        QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogStandardMeasurements), data(data), _name(patternPieceName), _tablePath(QString())
@@ -58,21 +59,25 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogStandardMeasurements::CheckState);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogStandardMeasurements::~DialogStandardMeasurements()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogStandardMeasurements::name() const
 {
     return _name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogStandardMeasurements::tablePath() const
 {
     return _tablePath;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::DialogAccepted()
 {
     _name = ui->lineEditName->text();
@@ -96,6 +101,7 @@ void DialogStandardMeasurements::DialogAccepted()
     accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::DialogRejected()
 {
     _name.clear();
@@ -103,6 +109,7 @@ void DialogStandardMeasurements::DialogRejected()
     reject();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::CheckState()
 {
     bool flagName = false;
@@ -126,6 +133,7 @@ void DialogStandardMeasurements::CheckState()
     bOk->setEnabled(flagTable && flagName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::LoadStandardTables()
 {
     QStringList filters;

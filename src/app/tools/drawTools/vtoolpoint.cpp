@@ -33,6 +33,7 @@ const QString VToolPoint::TagName = QStringLiteral("point");
 
 #define DefRadius 2.0//mm
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(DefRadius), namePoint(0), lineName(0)
 {
@@ -65,6 +66,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
@@ -76,6 +78,7 @@ void VToolPoint::NameChangePosition(const QPointF &pos)
     VAbstractTool::data.UpdateGObject(id, point);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -87,6 +90,7 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -112,22 +116,26 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     Q_UNUSED(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -137,18 +145,21 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -166,6 +177,7 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
     RefreshLine();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::RefreshLine()
 {
     QRectF nameRec = namePoint->sceneBoundingRect();
@@ -191,6 +203,7 @@ void VToolPoint::RefreshLine()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -209,6 +222,7 @@ QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const 
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())

@@ -29,6 +29,7 @@
 #include "dialogmeasurements.h"
 #include "ui_dialogmeasurements.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogMeasurements::DialogMeasurements(QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogMeasurements), result(Measurements::Individual)
 {
@@ -37,22 +38,26 @@ DialogMeasurements::DialogMeasurements(QWidget *parent) :
     connect(ui->toolButtonIndividual, &QToolButton::clicked, this, &DialogMeasurements::IndividualMeasurements);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogMeasurements::~DialogMeasurements()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Measurements::Type DialogMeasurements::type() const
 {
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurements::StandardMeasurements()
 {
     result = Measurements::Standard;
     accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurements::IndividualMeasurements()
 {
     result = Measurements::Individual;

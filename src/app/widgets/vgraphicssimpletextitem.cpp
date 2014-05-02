@@ -30,6 +30,7 @@
 
 #include <QtWidgets>
 
+//---------------------------------------------------------------------------------------------------------------------
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     :QGraphicsSimpleTextItem(parent), fontSize(0)
 {
@@ -43,6 +44,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     this->setFont(font);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
     :QGraphicsSimpleTextItem(text, parent), fontSize(0)
 {
@@ -52,6 +54,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
     this->setAcceptHoverEvents(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
      if (change == ItemPositionChange && scene())
@@ -62,18 +65,21 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
      return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setBrush(Qt::green);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setBrush(Qt::black);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     emit ShowContextMenu(event);

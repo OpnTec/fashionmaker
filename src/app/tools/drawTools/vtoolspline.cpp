@@ -32,6 +32,7 @@
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
                          QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
@@ -71,6 +72,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -86,6 +88,7 @@ void VToolSpline::setDialog()
     dialogTool->setKCurve(spl->GetKcurve());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
@@ -103,6 +106,7 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
            Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -139,6 +143,7 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                              const QPointF &pos)
 {
@@ -166,6 +171,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSpline>(this, event);
@@ -189,6 +195,7 @@ void VToolSpline::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::RefreshDataInFile()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
@@ -205,6 +212,7 @@ void VToolSpline::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -214,6 +222,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::RemoveReferens()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
@@ -221,6 +230,7 @@ void VToolSpline::RemoveReferens()
     doc->DecrementReferens(spl->GetP4().id());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -254,6 +264,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));

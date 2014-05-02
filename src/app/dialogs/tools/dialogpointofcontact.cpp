@@ -30,6 +30,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0)
@@ -87,6 +88,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -131,6 +133,7 @@ void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &ty
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::DialogAccepted()
 {
     pointName = ui.lineEditNamePoint->text();
@@ -141,28 +144,33 @@ void DialogPointOfContact::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui.comboBoxCenter, center, value, id);
     center = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::setRadius(const QString &value)
 {
     radius = value;
     ui.lineEditFormula->setText(radius);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::setPointName(const QString &value)
 {
     pointName = value;

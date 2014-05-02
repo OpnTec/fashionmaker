@@ -32,6 +32,7 @@
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
@@ -39,6 +40,7 @@ VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id,
     _referens = 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::DeleteNode()
 {
     if (_referens <= 1)
@@ -73,6 +75,7 @@ void VAbstractNode::DeleteNode()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;
@@ -88,6 +91,7 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement)
     emit toolhaveChange();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::decrementReferens()
 {
     if (_referens > 0)

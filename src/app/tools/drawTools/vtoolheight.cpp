@@ -31,6 +31,7 @@
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                          const Valentina::Sources &typeCreation, QGraphicsItem * parent)
@@ -47,6 +48,7 @@ VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, con
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -60,6 +62,7 @@ void VToolHeight::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
@@ -76,6 +79,7 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
@@ -120,11 +124,13 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 {
     return VAbstractTool::ClosestPoint(line, point);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -139,16 +145,19 @@ void VToolHeight::FullUpdateFromFile()
 
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogHeight>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogHeight>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -169,6 +178,7 @@ void VToolHeight::AddToFile()
 
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -185,6 +195,7 @@ void VToolHeight::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

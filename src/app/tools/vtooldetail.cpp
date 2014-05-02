@@ -50,6 +50,7 @@ const QString VToolDetail::NodePoint        = QStringLiteral("NodePoint");
 const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
@@ -89,11 +90,13 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolDetail::~VToolDetail()
 {
     delete dialog;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -103,6 +106,7 @@ void VToolDetail::setDialog()
     dialogTool->setDetails(detail);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -150,6 +154,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Create(0, det, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
@@ -177,16 +182,19 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::Remove()
 {
     DeleteTool(this);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::FullUpdateFromGui(int result)
 {
     if (result == QDialog::Accepted)
@@ -226,6 +234,7 @@ void VToolDetail::FullUpdateFromGui(int result)
     dialog = 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -252,6 +261,7 @@ void VToolDetail::AddToFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -270,6 +280,7 @@ void VToolDetail::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged && scene())
@@ -306,6 +317,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -319,6 +331,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
     QGraphicsItem::keyReleaseEvent ( event );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -328,6 +341,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
@@ -359,6 +373,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::RemoveReferens()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -368,6 +383,7 @@ void VToolDetail::RemoveReferens()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
@@ -404,12 +420,14 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     domElement.appendChild(nod);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::RefreshGeometry()
 {
     QPainterPath path = VEquidistant().ContourPath(id, this->getData());
     this->setPath(path);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename Tool>
 //cppcheck-suppress unusedFunction
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)

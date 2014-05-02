@@ -31,6 +31,7 @@
 #include <QSettings>
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc)
 {
@@ -61,11 +62,13 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     connect(this, &DialogPatternProperties::haveChange, this->doc, &VPattern::haveLiteChange);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::~DialogPatternProperties()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Apply()
 {
     Write("notes", ui->plainTextEditTechNotes->document()->toPlainText());
@@ -75,6 +78,7 @@ void DialogPatternProperties::Apply()
     close();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Write(const QString &tagName, const QString &text) const
 {
     QDomNodeList nodeList = doc->elementsByTagName(tagName);

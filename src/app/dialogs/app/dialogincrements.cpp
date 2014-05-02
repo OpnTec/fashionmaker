@@ -40,6 +40,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
 {
@@ -135,6 +136,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->toolButtonOpenMeasurements, &QToolButton::clicked, this, &DialogIncrements::OpenTable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillMeasurements()
 {
     const QHash<QString, VMeasurement> *table = data->DataMeasurements();
@@ -212,6 +214,7 @@ void DialogIncrements::FillMeasurements()
     ui->tableWidgetMeasurements->resizeRowsToContents();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillIncrements()
 {
     const QHash<QString, VIncrement> *increments = data->DataIncrements();
@@ -279,6 +282,7 @@ void DialogIncrements::FillIncrements()
     ui->tableWidgetIncrement->setCurrentCell( row, column );
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillLengthLines()
 {
     const QHash<QString, qreal> *linesTable = data->DataLengthLines();
@@ -314,6 +318,7 @@ void DialogIncrements::FillLengthLines()
     ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillLengthSplines()
 {
     const QHash<QString, qreal> *splinesTable = data->DataLengthSplines();
@@ -349,6 +354,7 @@ void DialogIncrements::FillLengthSplines()
     ui->tableWidgetSplines->verticalHeader()->setDefaultSectionSize(20);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillLengthArcs()
 {
     const QHash<QString, qreal> *arcsTable = data->DataLengthArcs();
@@ -384,6 +390,7 @@ void DialogIncrements::FillLengthArcs()
     ui->tableWidgetArcs->resizeRowsToContents();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FullUpdateFromFile()
 {
     disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
@@ -406,6 +413,7 @@ void DialogIncrements::FullUpdateFromFile()
     FillLengthArcs();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveGivenName()
 {
     m->setGivenName(ui->lineEditGivenName->text());
@@ -415,6 +423,7 @@ void DialogIncrements::SaveGivenName()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveFamilyName()
 {
 
@@ -425,6 +434,7 @@ void DialogIncrements::SaveFamilyName()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveEmail()
 {
     m->setMail(ui->lineEditMail->text());
@@ -434,6 +444,7 @@ void DialogIncrements::SaveEmail()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveSex(int index)
 {
     m->setSex(m->StrToGender(ui->comboBoxSex->itemData(index).toString()));
@@ -443,6 +454,7 @@ void DialogIncrements::SaveSex(int index)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveBirthDate(const QDate & date)
 {
     m->setBirthDate(date);
@@ -452,6 +464,7 @@ void DialogIncrements::SaveBirthDate(const QDate & date)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::OpenTable()
 {
     QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
@@ -539,6 +552,7 @@ void DialogIncrements::OpenTable()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::clickedToolButtonAdd()
 {
     ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
@@ -599,6 +613,7 @@ void DialogIncrements::clickedToolButtonAdd()
     emit haveLiteChange();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::clickedToolButtonRemove()
 {
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
@@ -624,6 +639,7 @@ void DialogIncrements::clickedToolButtonRemove()
     emit haveLiteChange();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base, const qreal &ksize,
                                           const qreal &kheight, const QString &description)
 {
@@ -640,6 +656,7 @@ void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name
     list.at(0).appendChild(element);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 {
 
@@ -694,6 +711,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     emit haveLiteChange();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
 {
     switch (column)
@@ -740,12 +758,14 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::closeEvent(QCloseEvent *event)
 {
     emit DialogClosed(QDialog::Accepted);
     event->accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogIncrements::~DialogIncrements()
 {
     delete ui;

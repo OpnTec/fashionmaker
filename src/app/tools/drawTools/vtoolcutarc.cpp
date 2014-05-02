@@ -33,6 +33,7 @@
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                          const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
                          const Valentina::Sources &typeCreation, QGraphicsItem * parent)
@@ -63,6 +64,7 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -74,6 +76,7 @@ void VToolCutArc::setDialog()
     dialogTool->setPointName(point->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
@@ -86,6 +89,7 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -151,6 +155,7 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -162,11 +167,13 @@ void VToolCutArc::FullUpdateFromFile()
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ArcChoosed(quint32 id)
 {
     emit ChoosedTool(id, Valentina::Arc);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -190,16 +197,19 @@ void VToolCutArc::ChangedActivDraw(const QString &newName)
     VToolPoint::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutArc>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutArc>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -217,6 +227,7 @@ void VToolCutArc::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -231,6 +242,7 @@ void VToolCutArc::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::RefreshGeometry()
 {
     RefreshArc(firstArc, arc1id, SimpleArc::ForthPoint);
@@ -238,6 +250,7 @@ void VToolCutArc::RefreshGeometry()
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);
@@ -248,6 +261,7 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArc::Translation tr)
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(arcid);

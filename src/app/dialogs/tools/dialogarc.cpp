@@ -32,6 +32,7 @@
 #include <QPushButton>
 #include <QtWidgets>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()), f2(QString())
@@ -68,35 +69,41 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SetCenter(const quint32 &value)
 {
     center = value;
     ChangeCurrentData(ui->comboBoxBasePoint, center);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SetF2(const QString &value)
 {
     f2 = value;
     ui->lineEditF2->setText(f2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SetF1(const QString &value)
 {
     f1 = value;
     ui->lineEditF1->setText(f1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SetRadius(const QString &value)
 {
     radius = value;
     ui->lineEditRadius->setText(radius);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -109,6 +116,7 @@ void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DialogAccepted()
 {
     radius = ui->lineEditRadius->text();
@@ -118,6 +126,7 @@ void DialogArc::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ValChenged(int row)
 {
     if (ui->listWidget->count() == 0)
@@ -135,68 +144,80 @@ void DialogArc::ValChenged(int row)
     DialogTool::ValChenged(row);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::PutRadius()
 {
     PutValHere(ui->lineEditRadius, ui->listWidget);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::PutF1()
 {
     PutValHere(ui->lineEditF1, ui->listWidget);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::PutF2()
 {
     PutValHere(ui->lineEditF2, ui->listWidget);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::LineAngles()
 {
     ShowLineAngles();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     ValFormulaChanged(flagRadius, ui->lineEditRadius, timerRadius);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
     ValFormulaChanged(flagF1, ui->lineEditF1, timerF1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
     ValFormulaChanged(flagF2, ui->lineEditF2, timerF2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::CheckState()
 {
     Q_CHECK_PTR(bOk);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
     Eval(ui->lineEditRadius, flagRadius, timerRadius, ui->labelResultRadius);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
     Eval(ui->lineEditF1, flagF1, timerF1, ui->labelResultF1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
     Eval(ui->lineEditF2, flagF2, timerF2, ui->labelResultF2);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ShowLineAngles()
 {
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);

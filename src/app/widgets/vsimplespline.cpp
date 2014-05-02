@@ -30,6 +30,7 @@
 #include "../widgets/vapplication.h"
 #include <QPen>
 
+//---------------------------------------------------------------------------------------------------------------------
 VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
@@ -45,6 +46,7 @@ VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *f
     setAcceptHoverEvents(true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSpline::ChangedActivDraw(const bool &flag)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, flag);
@@ -52,6 +54,7 @@ void VSimpleSpline::ChangedActivDraw(const bool &flag)
     setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -61,6 +64,7 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -74,6 +78,7 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

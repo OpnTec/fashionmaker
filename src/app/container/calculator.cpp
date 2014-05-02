@@ -38,6 +38,7 @@
 #define FINISHED   10
 #define EOL        9
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal Calculator::eval(QString prog, QString *errorMsg)
 {
     this->errorMsg = errorMsg;
@@ -53,6 +54,7 @@ qreal Calculator::eval(QString prog, QString *errorMsg)
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal Calculator::get_exp()
 {
     qreal result = 0;
@@ -67,7 +69,7 @@ qreal Calculator::get_exp()
     return result;
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::level2(qreal *result)
 {
     QChar op;
@@ -82,6 +84,7 @@ void Calculator::level2(qreal *result)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::level3(qreal *result)
 {
     QChar op;
@@ -97,6 +100,7 @@ void Calculator::level3(qreal *result)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::level4(qreal *result)
 {
     qreal hold;
@@ -110,6 +114,7 @@ void Calculator::level4(qreal *result)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::level5(qreal *result)
 {
     QChar op;
@@ -127,6 +132,7 @@ void Calculator::level5(qreal *result)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::level6(qreal *result)
 {
     if ((token[0] == '(') && (token_type == DELIMITER))
@@ -142,6 +148,7 @@ void Calculator::level6(qreal *result)
         primitive(result);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::primitive(qreal *result)
 {
     QString str;
@@ -164,6 +171,7 @@ void Calculator::primitive(qreal *result)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::arith(QChar o, qreal *r, qreal *h)
 {
     qreal  t;//, ex;
@@ -194,6 +202,7 @@ void Calculator::arith(QChar o, qreal *r, qreal *h)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::unary(QChar o, qreal *r)
 {
     if (o=='-')
@@ -202,6 +211,7 @@ void Calculator::unary(QChar o, qreal *r)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal Calculator::find_var(QString s)
 {
     bool ok = false;
@@ -215,6 +225,7 @@ qreal Calculator::find_var(QString s)
     return value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::serror(qint32 error)
 {
     QString e[]=
@@ -230,6 +241,7 @@ void Calculator::serror(qint32 error)
     qDebug()<<e[error];
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 char Calculator::look_up(QString s)
 {
     QString p;
@@ -240,6 +252,7 @@ char Calculator::look_up(QString s)
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool Calculator::isdelim(QChar c)
 {
     if (StrChr(" ;,+-<>/*%^=()", c) || c=='\n' || c=='\r' || c=='\0')
@@ -249,6 +262,7 @@ bool Calculator::isdelim(QChar c)
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool Calculator::iswhite(QChar c)
 {
     if (c==' ' || c=='\t')
@@ -261,6 +275,7 @@ bool Calculator::iswhite(QChar c)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::get_token()
 {
     QString *temp;
@@ -355,11 +370,13 @@ void Calculator::get_token()
     return;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool Calculator::StrChr(QString string, QChar c)
 {
     return string.contains(c, Qt::CaseInsensitive);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::putback()
 {
     QString t;

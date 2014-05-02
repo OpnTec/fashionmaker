@@ -31,6 +31,7 @@
 
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
@@ -59,11 +60,13 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogBisector::FormulaChanged);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogBisector::~DialogBisector()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -108,39 +111,46 @@ void DialogBisector::ChoosedObject(quint32 id, const Valentina::Scenes &type)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setFormula(const QString &value)
 {
     formula = value;
     ui->lineEditFormula->setText(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::setThirdPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();

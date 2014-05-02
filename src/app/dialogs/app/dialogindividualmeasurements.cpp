@@ -36,6 +36,7 @@
 #include "../../widgets/vapplication.h"
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,
                                                            QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogIndividualMeasurements), _name(patternPieceName), _tablePath(QString()),
@@ -67,11 +68,13 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
     connect(ui->toolButtonOpenNew, &QToolButton::clicked, this, &DialogIndividualMeasurements::NewTable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogIndividualMeasurements::~DialogIndividualMeasurements()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::DialogAccepted()
 {
     _name = ui->lineEditName->text();
@@ -125,6 +128,7 @@ void DialogIndividualMeasurements::DialogAccepted()
     accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::DialogRejected()
 {
     _name.clear();
@@ -132,6 +136,7 @@ void DialogIndividualMeasurements::DialogRejected()
     reject();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::CheckState()
 {
     bool flagName = false;
@@ -187,6 +192,7 @@ void DialogIndividualMeasurements::CheckState()
     bOk->setEnabled(flagName && flagPath && flagLang);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::LoadIndividualTables()
 {
     QStringList filters;
@@ -236,6 +242,7 @@ void DialogIndividualMeasurements::LoadIndividualTables()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
@@ -259,6 +266,7 @@ void DialogIndividualMeasurements::OpenTable()
     CheckState();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::NewTable()
 {
     QString dir = QDir::homePath()+"/measurements.vit";
@@ -281,6 +289,7 @@ void DialogIndividualMeasurements::NewTable()
     CheckState();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::InitUnits()
 {
     ui->comboBoxUnits->addItem(tr("centimeter"), QVariant(VDomDocument::UnitsToStr(Valentina::Cm)));

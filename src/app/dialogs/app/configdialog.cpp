@@ -28,6 +28,7 @@
 
 #include "configdialog.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr)
 {
@@ -76,6 +77,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     setWindowTitle(tr("Config Dialog"));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == false)
@@ -85,6 +87,7 @@ void ConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previou
     pagesWidget->setCurrentIndex(contentsWidget->row(current));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::closeEvent(QCloseEvent *event)
 {
     if (result() == QDialog::Accepted)
@@ -94,6 +97,7 @@ void ConfigDialog::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::createIcons()
 {
     QListWidgetItem *configButton = new QListWidgetItem(contentsWidget);
@@ -111,6 +115,7 @@ void ConfigDialog::createIcons()
     connect(contentsWidget, &QListWidget::currentItemChanged, this, &ConfigDialog::changePage);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::Apply()
 {
     switch (contentsWidget->currentRow())
@@ -127,6 +132,7 @@ void ConfigDialog::Apply()
     setResult(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::Ok()
 {
     Apply();

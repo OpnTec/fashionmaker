@@ -30,11 +30,12 @@
 #include "../widgets/vapplication.h"
 #include <QGraphicsSceneMouseEvent>
 
+//---------------------------------------------------------------------------------------------------------------------
 VSimpleSplinePath::VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor)
     :VAbstractTool(doc, data, id), factor(factor)
-{
-}
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -44,12 +45,14 @@ void VSimpleSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSplinePath::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

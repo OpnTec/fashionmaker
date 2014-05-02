@@ -30,6 +30,7 @@
 
 qreal VDrawTool::factor = 1;
 
+//---------------------------------------------------------------------------------------------------------------------
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
@@ -39,11 +40,13 @@ VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     connect(this->doc, &VPattern::ShowTool, this, &VDrawTool::ShowTool);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 VDrawTool::~VDrawTool()
 {
     delete dialog;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     Q_UNUSED(id);
@@ -51,6 +54,7 @@ void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
     Q_UNUSED(enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -63,6 +67,7 @@ void VDrawTool::ChangedActivDraw(const QString &newName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 {
     if (nameActivDraw == oldName)
@@ -71,6 +76,7 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::FullUpdateFromGui(int result)
 {
     if (result == QDialog::Accepted)
@@ -88,6 +94,7 @@ void VDrawTool::FullUpdateFromGui(int result)
     dialog = nullptr;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SetFactor(qreal factor)
 {
     if (factor <= 2 && factor >= 0.5)
@@ -96,6 +103,7 @@ void VDrawTool::SetFactor(qreal factor)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
     QDomElement calcElement;

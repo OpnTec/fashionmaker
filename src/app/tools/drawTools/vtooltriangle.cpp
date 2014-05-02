@@ -31,6 +31,7 @@
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
+//---------------------------------------------------------------------------------------------------------------------
 VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
                              const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                              const Valentina::Sources &typeCreation, QGraphicsItem *parent)
@@ -48,6 +49,7 @@ VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::setDialog()
 {
     Q_CHECK_PTR(dialog);
@@ -61,6 +63,7 @@ void VToolTriangle::setDialog()
     dialogTool->setPointName(p->name());
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                            VPattern *doc, VContainer *data)
 {
@@ -76,6 +79,7 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
            Document::FullParse, Valentina::FromGui);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
                            const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
@@ -117,6 +121,7 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                                  const QPointF &secondPoint)
 {
@@ -158,6 +163,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -171,11 +177,13 @@ void VToolTriangle::FullUpdateFromFile()
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogTriangle>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::RemoveReferens()
 {
     doc->DecrementReferens(axisP1Id);
@@ -184,11 +192,13 @@ void VToolTriangle::RemoveReferens()
     doc->DecrementReferens(secondPointId);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogTriangle>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -208,6 +218,7 @@ void VToolTriangle::AddToFile()
     AddToCalculation(domElement);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -224,6 +235,7 @@ void VToolTriangle::RefreshDataInFile()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
     Q_CHECK_PTR(dialog);

@@ -31,17 +31,20 @@
 
 const QString VAbstractSpline::TagName = QStringLiteral("spline");
 
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
 {
     ignoreFullUpdate = true;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -62,17 +65,20 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -80,6 +86,7 @@ void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -87,6 +94,7 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -105,6 +113,7 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
     return QGraphicsItem::itemChange(change, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())

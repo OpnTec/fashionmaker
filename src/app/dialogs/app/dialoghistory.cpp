@@ -38,6 +38,7 @@
 #include <QDebug>
 #include <QPushButton>
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
     cursorToolRecordRow(0)
@@ -55,11 +56,13 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     ShowPoint();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogHistory::~DialogHistory()
 {
     delete ui;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
@@ -68,6 +71,7 @@ void DialogHistory::DialogAccepted()
     emit DialogClosed(QDialog::Accepted);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::cellClicked(int row, int column)
 {
     if (column == 0)
@@ -96,6 +100,7 @@ void DialogHistory::cellClicked(int row, int column)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::ChangedCursor(quint32 id)
 {
     for (qint32 i = 0; i< ui->tableWidget->rowCount(); ++i)
@@ -112,12 +117,14 @@ void DialogHistory::ChangedCursor(quint32 id)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::UpdateHistory()
 {
     FillTable();
     InitialTable();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
@@ -165,6 +172,7 @@ void DialogHistory::FillTable()
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(20);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     const QDomElement domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -407,6 +415,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     return QString();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::InitialTable()
 {
     ui->tableWidget->setSortingEnabled(false);
@@ -414,6 +423,7 @@ void DialogHistory::InitialTable()
     ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Tool")));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::ShowPoint()
 {
     QVector<VToolRecord> *history = doc->getHistory();
@@ -428,6 +438,7 @@ void DialogHistory::ShowPoint()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::closeEvent(QCloseEvent *event)
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
