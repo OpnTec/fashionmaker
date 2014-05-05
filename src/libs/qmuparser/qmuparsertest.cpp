@@ -1352,9 +1352,16 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
             // The tests equations never result in infinity, if they do thats a bug.
             // reference:
             // http://sourceforge.net/projects/muparser/forums/forum/462843/topic/5037825
-            if ( numeric_limits<qreal>::has_infinity )
+#if defined(Q_CC_MSVC)
+#pragma warning(push)
+#pragma warning(disable:4127)
+#endif
+            if (std::numeric_limits<qreal>::has_infinity)
+#if defined(Q_CC_MSVC)
+#pragma warning(pop)
+#endif
             {
-                bCloseEnough &= (qFuzzyCompare( fabs ( fVal[i] ), numeric_limits<qreal>::infinity())==false );
+                bCloseEnough &= (qFuzzyCompare( fabs ( fVal[i] ), std::numeric_limits<qreal>::infinity())==false );
             }
         }
 

@@ -134,16 +134,16 @@ public:
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
     const QString& GetMsg() const;
-    std::size_t    GetPos() const;
+    int            GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
 
 private:
-    QString m_strMsg;     ///< The message string
-    QString m_strFormula; ///< Formula string
-    QString m_strTok;     ///< Token related with the error
-    int m_iPos;               ///< Formula position related to the error
-    EErrorCodes m_iErrc;      ///< Error code
+    QString m_sMsg;      ///< The message string
+    QString m_sExpr;     ///< Formula string
+    QString m_sTok;      ///< Token related with the error
+    int     m_iPos;      ///< Formula position related to the error
+    EErrorCodes m_iErrc; ///< Error code
     const QmuParserErrorMsg &m_ErrMsg;
     /**
      * @brief Replace all ocuurences of a substring with another string.

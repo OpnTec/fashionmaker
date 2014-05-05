@@ -643,7 +643,7 @@ bool QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok )
     }
 
     // iteraterate over all postfix operator strings
-    funmap_type::const_reverse_iterator it = m_pInfixOprtDef->rbegin();
+    auto it = m_pInfixOprtDef->rbegin();
     for ( ; it != m_pInfixOprtDef->rend(); ++it )
     {
         if ( sTok.indexOf ( it->first ) != 0 )
@@ -752,7 +752,7 @@ bool QmuParserTokenReader::IsOprt ( token_type &a_Tok )
     // are part of long token names (like: "add123") will be found instead
     // of the long ones.
     // Length sorting is done with ascending length so we use a reverse iterator here.
-    funmap_type::const_reverse_iterator it = m_pOprtDef->rbegin();
+    auto it = m_pOprtDef->rbegin();
     for ( ; it != m_pOprtDef->rend(); ++it )
     {
         const QString &sID = it->first;
@@ -781,7 +781,7 @@ bool QmuParserTokenReader::IsOprt ( token_type &a_Tok )
             }
 
             m_iPos += sID.length();
-            m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noEND | noBC | noASSIGN;
+            m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noEND | noASSIGN;
             return true;
         }
     }
@@ -825,7 +825,7 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
     }
 
     // iteraterate over all postfix operator strings
-    funmap_type::const_reverse_iterator it = m_pPostOprtDef->rbegin();
+    auto it = m_pPostOprtDef->rbegin();
     for ( ; it != m_pPostOprtDef->rend(); ++it )
     {
         if ( sTok.indexOf ( it->first ) != 0 )
@@ -890,7 +890,8 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
         int iStart = m_iPos;
         if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal ) == 1 )
         {
-            strTok = m_strFormula.mid ( iStart, m_iPos );
+            // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
+            strTok = m_strFormula.mid ( iStart, m_iPos-iStart );
             if ( m_iSynFlags & noVAL )
             {
                 Error ( ecUNEXPECTED_VAL, m_iPos - strTok.length(), strTok );
@@ -913,7 +914,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
  */
 bool QmuParserTokenReader::IsVarTok ( token_type &a_Tok )
 {
-    if ( m_pVarDef->size() == false)
+    if ( m_pVarDef->empty())
     {
         return false;
     }
@@ -952,7 +953,7 @@ bool QmuParserTokenReader::IsVarTok ( token_type &a_Tok )
 //---------------------------------------------------------------------------------------------------------------------
 bool QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok )
 {
-    if ( m_pStrVarDef == false || m_pStrVarDef->size() == false)
+    if ( m_pStrVarDef == false || m_pStrVarDef->empty() )
     {
         return false;
     }

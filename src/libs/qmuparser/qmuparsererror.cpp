@@ -109,10 +109,9 @@ QmuParserErrorMsg::QmuParserErrorMsg()
  * @brief Default constructor.
  */
 QmuParserError::QmuParserError()
-    : m_strMsg(), m_strFormula(), m_strTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
+    : m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
-{
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -121,12 +120,12 @@ QmuParserError::QmuParserError()
  * It does not contain any information but the error code.
  */
 QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
-    : m_strMsg(), m_strFormula(), m_strTok(), m_iPos ( -1 ), m_iErrc ( a_iErrc ),
+    : m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( a_iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
-    m_strMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_strMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_strMsg, "$TOK$", m_strTok );
+    m_sMsg = m_ErrMsg[m_iErrc];
+    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
+    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,7 +133,7 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
  * @brief Construct an error from a message text.
  */
 QmuParserError::QmuParserError ( const QString &sMsg )
-    : m_strMsg(sMsg), m_strFormula(), m_strTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
+    : m_sMsg(sMsg), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {}
 
@@ -146,16 +145,13 @@ QmuParserError::QmuParserError ( const QString &sMsg )
  * @param [in] sExpr The expression related to the error.
  * @param [in] a_iPos the position in the expression where the error occured.
  */
-QmuParserError::QmuParserError ( EErrorCodes iErrc,
-                                 const QString &sTok,
-                                 const QString &sExpr,
-                                 int iPos )
-    : m_strMsg(), m_strFormula ( sExpr ), m_strTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
+QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const QString &sExpr, int iPos )
+    : m_sMsg(), m_sExpr ( sExpr ), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
-    m_strMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_strMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_strMsg, "$TOK$", m_strTok );
+    m_sMsg = m_ErrMsg[m_iErrc];
+    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
+    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,13 +161,13 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc,
  * @param [in] iPos the position in the expression where the error occured.
  * @param [in] sTok The token string related to this error.
  */
-QmuParserError::QmuParserError ( EErrorCodes iErrc, int iPos, const QString &sTok )
-    : m_strMsg(), m_strFormula(), m_strTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
+QmuParserError::QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok )
+    : m_sMsg(), m_sExpr(), m_sTok ( sTok ), m_iPos ( a_iPos ), m_iErrc ( a_iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
-    m_strMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_strMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_strMsg, "$TOK$", m_strTok );
+    m_sMsg = m_ErrMsg[m_iErrc];
+    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
+    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,20 +177,19 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, int iPos, const QString &sTo
   * @param [in] sTok The token string related to this error.
   */
 QmuParserError::QmuParserError ( const QString &szMsg, int iPos, const QString &sTok )
-    : m_strMsg ( szMsg ), m_strFormula(), m_strTok ( sTok ), m_iPos ( iPos ), m_iErrc ( ecGENERIC ),
+    : m_sMsg ( szMsg ), m_sExpr(), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( ecGENERIC ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
-    ReplaceSubString ( m_strMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_strMsg, "$TOK$", m_strTok );
+    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
+    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Copy constructor. */
 QmuParserError::QmuParserError ( const QmuParserError &a_Obj )
-    : m_strMsg ( a_Obj.m_strMsg ), m_strFormula ( a_Obj.m_strFormula ), m_strTok ( a_Obj.m_strTok ),
+    : m_sMsg ( a_Obj.m_sMsg ), m_sExpr ( a_Obj.m_sExpr ), m_sTok ( a_Obj.m_sTok ),
       m_iPos ( a_Obj.m_iPos ), m_iErrc ( a_Obj.m_iErrc ), m_ErrMsg ( QmuParserErrorMsg::Instance() )
-{
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Assignment operator. */
@@ -205,9 +200,9 @@ QmuParserError& QmuParserError::operator= ( const QmuParserError &a_Obj )
         return *this;
     }
 
-    m_strMsg = a_Obj.m_strMsg;
-    m_strFormula = a_Obj.m_strFormula;
-    m_strTok = a_Obj.m_strTok;
+    m_sMsg = a_Obj.m_sMsg;
+    m_sExpr = a_Obj.m_sExpr;
+    m_sTok = a_Obj.m_sTok;
     m_iPos = a_Obj.m_iPos;
     m_iErrc = a_Obj.m_iErrc;
     return *this;
@@ -252,9 +247,9 @@ void QmuParserError::ReplaceSubString ( QString &strSource, const QString &strFi
 // cppcheck-suppress unusedFunction
 void QmuParserError::Reset()
 {
-    m_strMsg.clear();
-    m_strFormula.clear();
-    m_strTok.clear();
+    m_sMsg.clear();
+    m_sExpr.clear();
+    m_sTok.clear();
     m_iPos = -1;
     m_iErrc = ecUNDEFINED;
 }
@@ -265,7 +260,7 @@ void QmuParserError::Reset()
  */
 void QmuParserError::SetFormula ( const QString &a_strFormula )
 {
-    m_strFormula = a_strFormula;
+    m_sExpr = a_strFormula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +269,7 @@ void QmuParserError::SetFormula ( const QString &a_strFormula )
  */
 const QString& QmuParserError::GetExpr() const
 {
-    return m_strFormula;
+    return m_sExpr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -283,7 +278,7 @@ const QString& QmuParserError::GetExpr() const
  */
 const QString& QmuParserError::GetMsg() const
 {
-    return m_strMsg;
+    return m_sMsg;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -292,7 +287,7 @@ const QString& QmuParserError::GetMsg() const
  *
  * If the error is not related to a distinct position this will return -1
  */
-std::size_t QmuParserError::GetPos() const
+int QmuParserError::GetPos() const
 {
     return m_iPos;
 }
@@ -303,7 +298,7 @@ std::size_t QmuParserError::GetPos() const
  */
 const QString& QmuParserError::GetToken() const
 {
-    return m_strTok;
+    return m_sTok;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
