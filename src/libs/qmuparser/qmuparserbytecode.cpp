@@ -202,7 +202,7 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
         #if defined(MUP_MATH_EXCEPTIONS)
             if (y==0)
             {
-                throw ParserError(ecDIV_BY_ZERO, "0");
+                throw qmuParserError(ecDIV_BY_ZERO, "0");
             }
         #endif
             x = x / y;
@@ -419,104 +419,47 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     }
                     break;
                 case cmDIV:
-                if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL &&
-                        (qFuzzyCompare(m_vRPN[sz-1].Val.data2+1, 1+0)==false))
-                {
-                    // Optimization: 4*a/2 -> 2*a
-                    m_vRPN[sz-2].Val.data  /= m_vRPN[sz-1].Val.data2;
-                    m_vRPN[sz-2].Val.data2 /= m_vRPN[sz-1].Val.data2;
-                    m_vRPN.pop_back();
-                    bOptimized = true;
-                }
-                break;
-                case cmLE:
-                    break;
-                case cmGE:
+                    if (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVARMUL &&
+                            (qFuzzyCompare(m_vRPN[sz-1].Val.data2+1, 1+0)==false))
+                    {
+                        // Optimization: 4*a/2 -> 2*a
+                        m_vRPN[sz-2].Val.data  /= m_vRPN[sz-1].Val.data2;
+                        m_vRPN[sz-2].Val.data2 /= m_vRPN[sz-1].Val.data2;
+                        m_vRPN.pop_back();
+                        bOptimized = true;
+                    }
                     break;
                 case cmNEQ:
-                    Q_UNREACHABLE();
-                    break;
                 case cmEQ:
-                    Q_UNREACHABLE();
-                    break;
-                case cmLT:
-                    break;
-                case cmGT:
-                    break;
-                case cmLAND:
-                    break;
                 case cmLOR:
-                    Q_UNREACHABLE();
-                    break;
                 case cmASSIGN:
-                    Q_UNREACHABLE();
-                    break;
                 case cmBO:
-                    Q_UNREACHABLE();
-                    break;
                 case cmBC:
-                    Q_UNREACHABLE();
-                    break;
                 case cmIF:
-                    Q_UNREACHABLE();
-                    break;
                 case cmELSE:
-                    Q_UNREACHABLE();
-                    break;
                 case cmENDIF:
-                    Q_UNREACHABLE();
-                    break;
                 case cmARG_SEP:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVAR:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVAL:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW2:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW3:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW4:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARMUL:
-                    Q_UNREACHABLE();
-                    break;
                 case cmPOW2:
-                    Q_UNREACHABLE();
-                    break;
                 case cmFUNC:
-                    Q_UNREACHABLE();
-                    break;
                 case cmFUNC_STR:
-                    Q_UNREACHABLE();
-                    break;
                 case cmFUNC_BULK:
-                    Q_UNREACHABLE();
-                    break;
                 case cmSTRING:
-                    Q_UNREACHABLE();
-                    break;
                 case cmOPRT_BIN:
-                    Q_UNREACHABLE();
-                    break;
                 case cmOPRT_POSTFIX:
-                    Q_UNREACHABLE();
-                    break;
                 case cmOPRT_INFIX:
-                    Q_UNREACHABLE();
-                    break;
                 case cmEND:
-                    Q_UNREACHABLE();
-                    break;
                 case cmUNKNOWN:
-                    Q_UNREACHABLE();
-                    break;
+                case cmLE:
+                case cmGE:
+                case cmLT:
+                case cmGT:
+                case cmLAND:
                 default:
                     break;
 
@@ -665,88 +608,38 @@ void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
                 m_vRPN[idx].Oprt.offset = i - idx;
                 break;
             case cmLE:
-                break;
             case cmGE:
-                break;
             case cmNEQ:
-                Q_UNREACHABLE();
-                break;
             case cmEQ:
-                Q_UNREACHABLE();
-                break;
             case cmLT:
-                break;
             case cmGT:
-                break;
             case cmADD:
-                break;
             case cmSUB:
-                break;
             case cmMUL:
-                break;
             case cmDIV:
-                break;
             case cmPOW:
-                break;
             case cmLAND:
-                break;
             case cmLOR:
-                Q_UNREACHABLE();
-                break;
             case cmASSIGN:
-                break;
             case cmBO:
-                Q_UNREACHABLE();
-                break;
             case cmBC:
-                Q_UNREACHABLE();
-                break;
             case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
             case cmVAR:
-                break;
             case cmVAL:
-                break;
             case cmVARPOW2:
-                // For optimization purposes
-                break;
             case cmVARPOW3:
-                // For optimization purposes
-                break;
             case cmVARPOW4:
-                // For optimization purposes
-                break;
             case cmVARMUL:
-                // For optimization purposes
-                break;
             case cmPOW2:
-                // For optimization purposes
-                break;
             case cmFUNC:
-                break;
             case cmFUNC_STR:
-                break;
             case cmFUNC_BULK:
-                Q_UNREACHABLE();
-                break;
             case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_BIN:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_POSTFIX:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_INFIX:
-                Q_UNREACHABLE();
-                break;
             case cmEND:
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
             default:
                 break;
         }
@@ -894,38 +787,16 @@ void QmuParserByteCode::AsciiDump()
                 qDebug() << "ASSIGN\t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Oprt.ptr, 'f', 16) << "]\n";
                 break;
             case cmBO:
-                Q_UNREACHABLE();
-                break;
             case cmBC:
-                Q_UNREACHABLE();
-                break;
             case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
             case cmPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_BULK:
-                Q_UNREACHABLE();
-                break;
             case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_BIN:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_POSTFIX:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_INFIX:
-                Q_UNREACHABLE();
-                break;
             case cmEND:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
             default:
                 qDebug() << "(unknown code: " << m_vRPN[i].Cmd << ")\n";
                 break;

@@ -375,107 +375,39 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
                 Error(ecINVALID_INFIX_IDENT, -1, a_sName);
                 break;
             case cmLE:
-                Q_UNREACHABLE();
-                break;
             case cmGE:
-                Q_UNREACHABLE();
-                break;
             case cmNEQ:
-                Q_UNREACHABLE();
-                break;
             case cmEQ:
-                Q_UNREACHABLE();
-                break;
             case cmLT:
-                Q_UNREACHABLE();
-                break;
             case cmGT:
-                Q_UNREACHABLE();
-                break;
             case cmADD:
-                Q_UNREACHABLE();
-                break;
             case cmSUB:
-                Q_UNREACHABLE();
-                break;
             case cmMUL:
-                Q_UNREACHABLE();
-                break;
             case cmDIV:
-                Q_UNREACHABLE();
-                break;
             case cmPOW:
-                Q_UNREACHABLE();
-                break;
             case cmLAND:
-                Q_UNREACHABLE();
-                break;
             case cmLOR:
-                Q_UNREACHABLE();
-                break;
             case cmASSIGN:
-                Q_UNREACHABLE();
-                break;
             case cmBO:
-                Q_UNREACHABLE();
-                break;
             case cmBC:
-                Q_UNREACHABLE();
-                break;
             case cmIF:
-                Q_UNREACHABLE();
-                break;
             case cmELSE:
-                Q_UNREACHABLE();
-                break;
             case cmENDIF:
-                Q_UNREACHABLE();
-                break;
             case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
             case cmVAR:
-                Q_UNREACHABLE();
-                break;
             case cmVAL:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW2:
-                // For optimization purposes
-                break;
             case cmVARPOW3:
-                // For optimization purposes
-                break;
             case cmVARPOW4:
-                // For optimization purposes
-                break;
             case cmVARMUL:
-                // For optimization purposes
-                break;
             case cmPOW2:
-                // For optimization purposes
-                break;
             case cmFUNC:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_STR:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_BULK:
-                Q_UNREACHABLE();
-                break;
             case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_BIN:
-                Q_UNREACHABLE();
-                break;
             case cmEND:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
             default:
                 Error(ecINVALID_NAME, -1, a_sName);
                 break;
@@ -778,53 +710,21 @@ int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
         case cmOPRT_BIN:
             return a_Tok.GetPri();
         case cmBO:
-            Q_UNREACHABLE();
-            break;
         case cmBC:
-            Q_UNREACHABLE();
-            break;
         case cmENDIF:
-            Q_UNREACHABLE();
-            break;
         case cmVAR:
-            Q_UNREACHABLE();
-            break;
         case cmVAL:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW2:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW3:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW4:
-            Q_UNREACHABLE();
-            break;
         case cmVARMUL:
-            Q_UNREACHABLE();
-            break;
         case cmPOW2:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC_STR:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC_BULK:
-            Q_UNREACHABLE();
-            break;
         case cmSTRING:
-            Q_UNREACHABLE();
-            break;
         case cmOPRT_POSTFIX:
-            Q_UNREACHABLE();
-            break;
         case cmUNKNOWN:
-            Q_UNREACHABLE();
-            break;
         default:
             Error(ecINTERNAL_ERROR, 5);
             return 999;
@@ -859,68 +759,26 @@ EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) 
         case cmOPRT_BIN:
             return a_Tok.GetAssociativity();
         case cmBO:
-            Q_UNREACHABLE();
-            break;
         case cmBC:
-            Q_UNREACHABLE();
-            break;
         case cmIF:
-            Q_UNREACHABLE();
-            break;
         case cmELSE:
-            Q_UNREACHABLE();
-            break;
         case cmENDIF:
-            Q_UNREACHABLE();
-            break;
         case cmARG_SEP:
-            Q_UNREACHABLE();
-            break;
         case cmVAR:
-            Q_UNREACHABLE();
-            break;
         case cmVAL:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW2:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW3:
-            Q_UNREACHABLE();
-            break;
         case cmVARPOW4:
-            Q_UNREACHABLE();
-            break;
         case cmVARMUL:
-            Q_UNREACHABLE();
-            break;
         case cmPOW2:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC_STR:
-            Q_UNREACHABLE();
-            break;
         case cmFUNC_BULK:
-            Q_UNREACHABLE();
-            break;
         case cmSTRING:
-            Q_UNREACHABLE();
-            break;
         case cmOPRT_POSTFIX:
-            Q_UNREACHABLE();
-            break;
         case cmOPRT_INFIX:
-            Q_UNREACHABLE();
-            break;
         case cmEND:
-            Q_UNREACHABLE();
-            break;
         case cmUNKNOWN:
-            Q_UNREACHABLE();
-            break;
         default:
             return oaNONE;
     }
@@ -1352,62 +1210,24 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
                 ApplyIfElse(stOpt, stVal);
                 break;
             case cmBO:
-                Q_UNREACHABLE();
-                break;
             case cmBC:
-                Q_UNREACHABLE();
-                break;
             case cmIF:
-                Q_UNREACHABLE();
-                break;
             case cmENDIF:
-                Q_UNREACHABLE();
-                break;
             case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
             case cmVAR:
-                Q_UNREACHABLE();
-                break;
             case cmVAL:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW3:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW4:
-                Q_UNREACHABLE();
-                break;
             case cmVARMUL:
-                Q_UNREACHABLE();
-                break;
             case cmPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_STR:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_BULK:
-                Q_UNREACHABLE();
-                break;
             case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_POSTFIX:
-                Q_UNREACHABLE();
-                break;
             case cmEND:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
             default:
                 Error(ecINTERNAL_ERROR);
                 break;
@@ -1525,14 +1345,6 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 --sidx;
                 Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
                 continue;
-            case cmBO:  // unused, listed for compiler optimization purposes
-                Q_UNREACHABLE();
-                break;
-            case cmBC:
-                Q_UNREACHABLE();
-                break;
-            //    Q_ASSERT(INVALID_CODE_IN_BYTECODE);
-            //    continue;
             case cmIF:
                 if (qFuzzyCompare(Stack[sidx--]+1, 1+0))
                 {
@@ -1544,11 +1356,6 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 continue;
             case cmENDIF:
                 continue;
-            case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
-            //    Q_ASSERT(INVALID_CODE_IN_BYTECODE);
-            //    continue;
 
             // value and variable tokens
             case cmVAR:
@@ -1747,29 +1554,22 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 }
             }
             case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_BIN:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_POSTFIX:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_INFIX:
-                Q_UNREACHABLE();
-                break;
             //      Q_ASSERT(INVALID_CODE_IN_BYTECODE);
             //      continue;
             case cmEND:
-                Q_UNREACHABLE();
-                break;
                //     return Stack[m_nFinalResultIdx];
             case cmPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
+            case cmBO:  // unused, listed for compiler optimization purposes
+            case cmBC:
+            //    Q_ASSERT(INVALID_CODE_IN_BYTECODE);
+            //    continue;
+            case cmARG_SEP:
+            //    Q_ASSERT(INVALID_CODE_IN_BYTECODE);
+            //    continue;
             default:
                 Error(ecINTERNAL_ERROR, 3);
                 return 0;
@@ -1967,26 +1767,12 @@ void QmuParserBase::CreateRPN() const
                 ApplyFunc(stOpt, stVal, 1);  // this is the postfix operator
                 break;
             case cmENDIF:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW3:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW4:
-                Q_UNREACHABLE();
-                break;
             case cmVARMUL:
-                Q_UNREACHABLE();
-                break;
             case cmPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
             default:
                 Error(ecINTERNAL_ERROR, 3);
         } // end of switch operator-token
@@ -2326,71 +2112,27 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
                     qDebug() << "ENDIF\n";
                     break;
                 case cmLE:
-                    Q_UNREACHABLE();
-                    break;
                 case cmGE:
-                    Q_UNREACHABLE();
-                    break;
                 case cmNEQ:
-                    Q_UNREACHABLE();
-                    break;
                 case cmEQ:
-                    Q_UNREACHABLE();
-                    break;
                 case cmLT:
-                    Q_UNREACHABLE();
-                    break;
                 case cmGT:
-                    Q_UNREACHABLE();
-                    break;
                 case cmADD:
-                    Q_UNREACHABLE();
-                    break;
                 case cmSUB:
-                    Q_UNREACHABLE();
-                    break;
                 case cmMUL:
-                    Q_UNREACHABLE();
-                    break;
                 case cmDIV:
-                    Q_UNREACHABLE();
-                    break;
                 case cmPOW:
-                    Q_UNREACHABLE();
-                    break;
                 case cmLAND:
-                    Q_UNREACHABLE();
-                    break;
                 case cmLOR:
-                    Q_UNREACHABLE();
-                    break;
                 case cmASSIGN:
-                    Q_UNREACHABLE();
-                    break;
                 case cmARG_SEP:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW2:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW3:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARPOW4:
-                    Q_UNREACHABLE();
-                    break;
                 case cmVARMUL:
-                    Q_UNREACHABLE();
-                    break;
                 case cmPOW2:
-                    Q_UNREACHABLE();
-                    break;
                 case cmSTRING:
-                    Q_UNREACHABLE();
-                    break;
                 case cmOPRT_POSTFIX:
-                    Q_UNREACHABLE();
-                    break;
                 default:
                     qDebug() << stOprt.top().GetCode() << " ";
                     break;
