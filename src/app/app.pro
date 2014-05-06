@@ -234,7 +234,7 @@ copyToDestdir($$ind_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/individual))
 
 win32:CONFIG(release, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2
 else:win32:CONFIG(debug, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2
-else:unix: LIBS += -L../libs/qmuparser/bin -lqmuparser2
+else:unix: LIBS += -L../libs/qmuparser/bin -lqmuparser
 
 INCLUDEPATH += ../libs/qmuparser
 DEPENDPATH += ../libs/qmuparser
