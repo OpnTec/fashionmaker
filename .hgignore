@@ -24,6 +24,7 @@ moc/
 obj/
 uic/
 rcc/
+man/
 
 # Ignore file used QtCreator for user profile.
 *.pro.user
