@@ -109,7 +109,7 @@ QmuParserErrorMsg::QmuParserErrorMsg()
  * @brief Default constructor.
  */
 QmuParserError::QmuParserError()
-    : m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
+    : QException(), m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {}
 
@@ -120,7 +120,7 @@ QmuParserError::QmuParserError()
  * It does not contain any information but the error code.
  */
 QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
-    : m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( a_iErrc ),
+    : QException(), m_sMsg(), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( a_iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
@@ -133,7 +133,7 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
  * @brief Construct an error from a message text.
  */
 QmuParserError::QmuParserError ( const QString &sMsg )
-    : m_sMsg(sMsg), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
+    : QException(), m_sMsg(sMsg), m_sExpr(), m_sTok(), m_iPos ( -1 ), m_iErrc ( ecUNDEFINED ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {}
 
@@ -146,7 +146,7 @@ QmuParserError::QmuParserError ( const QString &sMsg )
  * @param [in] a_iPos the position in the expression where the error occured.
  */
 QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const QString &sExpr, int iPos )
-    : m_sMsg(), m_sExpr ( sExpr ), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
+    : QException(), m_sMsg(), m_sExpr ( sExpr ), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
@@ -162,7 +162,7 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const Q
  * @param [in] sTok The token string related to this error.
  */
 QmuParserError::QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok )
-    : m_sMsg(), m_sExpr(), m_sTok ( sTok ), m_iPos ( a_iPos ), m_iErrc ( a_iErrc ),
+    : QException(), m_sMsg(), m_sExpr(), m_sTok ( sTok ), m_iPos ( a_iPos ), m_iErrc ( a_iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
@@ -177,7 +177,7 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString 
   * @param [in] sTok The token string related to this error.
   */
 QmuParserError::QmuParserError ( const QString &szMsg, int iPos, const QString &sTok )
-    : m_sMsg ( szMsg ), m_sExpr(), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( ecGENERIC ),
+    : QException(), m_sMsg ( szMsg ), m_sExpr(), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( ecGENERIC ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
@@ -187,7 +187,7 @@ QmuParserError::QmuParserError ( const QString &szMsg, int iPos, const QString &
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Copy constructor. */
 QmuParserError::QmuParserError ( const QmuParserError &a_Obj )
-    : m_sMsg ( a_Obj.m_sMsg ), m_sExpr ( a_Obj.m_sExpr ), m_sTok ( a_Obj.m_sTok ),
+    : QException(), m_sMsg ( a_Obj.m_sMsg ), m_sExpr ( a_Obj.m_sExpr ), m_sTok ( a_Obj.m_sTok ),
       m_iPos ( a_Obj.m_iPos ), m_iErrc ( a_Obj.m_iErrc ), m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {}
 
@@ -207,10 +207,6 @@ QmuParserError& QmuParserError::operator= ( const QmuParserError &a_Obj )
     m_iErrc = a_Obj.m_iErrc;
     return *this;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QmuParserError::~QmuParserError()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -309,4 +305,5 @@ EErrorCodes QmuParserError::GetCode() const
 {
     return m_iErrc;
 }
+
 } // namespace qmu

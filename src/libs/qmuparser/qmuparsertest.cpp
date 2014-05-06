@@ -23,10 +23,8 @@
 #include "qmuparsertest.h"
 #include <QtMath>
 #include <QString>
-
-#include <cstdio>
-#include <iostream>
-#include <limits>
+#include <QDebug>
+#include "qmuparsererror.h"
 
 using namespace std;
 
@@ -64,32 +62,33 @@ QmuParserTester::QmuParserTester()
 //---------------------------------------------------------------------------------------------------------------------
 int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal )
 {
-    if ( a_szExpr[1] == 0 || ( a_szExpr[0] != '0' || a_szExpr[1] != 'x' ) )
+    if ( a_szExpr.data()[1] == 0 || ( a_szExpr.data()[0] != '0' || a_szExpr.data()[1] != 'x' ) )
     {
         return 0;
     }
 
     unsigned iVal ( 0 );
-    bool ok = false;
-    iVal = a_szExpr.toUInt ( &ok, 16 );
 
-    if ( ok )
+#if defined(_UNICODE)
+    std::wstring a_szExprStd = a_szExpr.mid(2).toStdWString();
+#else
+    std::string a_szExprStd = a_szExpr.mid(2).toStdString();
+#endif
+
+    // New code based on streams for UNICODE compliance:
+    stringstream_type::pos_type nPos(0);
+    stringstream_type ss(a_szExprStd);
+    ss >> std::hex >> iVal;
+    nPos = ss.tellg();
+
+    if (nPos==static_cast<stringstream_type::pos_type>(0))
     {
-        int nPos = a_szExpr.indexOf ( QString().setNum ( iVal, 16 ) );
-        if ( nPos == 0 )
-        {
-            return 1;
-        }
-
-        *a_iPos +=  2 + nPos;
-        *a_fVal = static_cast<qreal>(iVal);
         return 1;
     }
-    else
-    {
-        return 0;
-    }
 
+    *a_iPos += static_cast<int>(2 + nPos);
+    *a_fVal = static_cast<qreal>(iVal);
+    return 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,11 +127,11 @@ int QmuParserTester::TestInterface()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestInterface passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestInterface failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -157,11 +156,11 @@ int QmuParserTester::TestStrArg()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestStrArg passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestStrArg failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -232,11 +231,11 @@ int QmuParserTester::TestBinOprt()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestBinOprt passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestBinOprt failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -260,7 +259,7 @@ int QmuParserTester::TestNames()
       {                                              \
         p.Define##DOMAIN(EXPR, ARG);                 \
       }                                              \
-      catch (QmuParser::exception_type&)                 \
+      catch (QmuParserError &)                 \
       {                                              \
         iErr = (FAIL==false) ? 0 : 1;                \
       }                                              \
@@ -345,11 +344,11 @@ int QmuParserTester::TestNames()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestNames passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestNames failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -398,11 +397,11 @@ int QmuParserTester::TestSyntax()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestSyntax passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestSyntax failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -531,11 +530,11 @@ int QmuParserTester::TestVarConst()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestVarConst passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestVarConst failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -629,11 +628,11 @@ int QmuParserTester::TestMultiArg()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestMultiArg passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestMultiArg failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -698,11 +697,11 @@ int QmuParserTester::TestInfixOprt()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestInfixOprt passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestInfixOprt failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -754,11 +753,11 @@ int QmuParserTester::TestPostFix()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestPostFix passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestPostFix failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -792,6 +791,8 @@ int QmuParserTester::TestExpression()
 
     iStat += EqnTest ( "(2*b+1)*4", ( 2 * b + 1 ) * 4, true );
     iStat += EqnTest ( "4*(2*b+1)", ( 2 * b + 1 ) * 4, true );
+    // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
+    iStat += EqnTest ( "1+2+3", 6, true );
 
     // operator precedencs
     iStat += EqnTest ( "1+2-3*4/5^6", 2.99923, true );
@@ -839,11 +840,11 @@ int QmuParserTester::TestExpression()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestExpression passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestExpression failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -949,11 +950,11 @@ int QmuParserTester::TestIfThenElse()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestIfThenElse passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestIfThenElse failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -1047,11 +1048,11 @@ int QmuParserTester::TestException()
 
     if ( iStat == 0 )
     {
-        qDebug() << "passed";
+        qDebug() << "TestException passed";
     }
     else
     {
-        qDebug() << "\n  failed with " << iStat << " errors";
+        qDebug() << "\n TestException failed with " << iStat << " errors";
     }
 
     return iStat;
@@ -1076,7 +1077,7 @@ void QmuParserTester::Run()
             iStat += ( this->*m_vTestFun[i] ) ();
         }
     }
-    catch ( QmuParser::exception_type &e )
+    catch ( QmuParserError &e )
     {
         qDebug() << "\n" << e.GetMsg();
         qDebug() << e.GetToken();
@@ -1130,14 +1131,12 @@ int QmuParserTester::ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail
         p.SetExpr ( a_str );
         p.Eval();
     }
-    catch ( QmuParserError &e )
+    catch ( const qmu::QmuParserError &e )
     {
         // output the formula in case of an failed test
         if ( a_bFail == false || ( a_bFail == true && a_iErrc != e.GetCode() ) )
         {
-            qDebug() << "\n  "
-                     << "Expression: " << a_str
-                     << "  Code:" << e.GetCode() << "(" << e.GetMsg() << ")"
+            qDebug() << "\n  " << "Expression: " << a_str << "  Code:" << e.GetCode() << "(" << e.GetMsg() << ")"
                      << "  Expected:" << a_iErrc;
         }
 
@@ -1194,7 +1193,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
             throw std::runtime_error ( "incorrect result (second pass)" );
         }
     }
-    catch ( QmuParser::exception_type &e )
+    catch ( QmuParserError &e )
     {
         qDebug() << "\n  fail: " << a_str << " (" << e.GetMsg() << ")";
         return 1;
@@ -1308,7 +1307,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
         fVal[1] = p1->Eval(); // result from bytecode
         if ( qFuzzyCompare( fVal[0], fVal[1] ) == false )
         {
-            throw QmuParser::exception_type ( "Bytecode / string parsing mismatch." );
+            throw QmuParserError ( "Bytecode / string parsing mismatch." );
         }
 
         // Test copy and assignement operators
@@ -1379,7 +1378,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
                      << fVal[4] << ").";
         }
     }
-    catch ( QmuParser::exception_type &e )
+    catch ( QmuParserError &e )
     {
         if ( a_fPass )
         {

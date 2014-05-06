@@ -23,11 +23,9 @@
 #ifndef QMUPARSERERROR_H
 #define QMUPARSERERROR_H
 
-#include <cassert>
-#include <stdexcept>
-#include <string>
+#include "qmuparser_global.h"
 #include <sstream>
-#include <memory>
+#include <QException>
 
 #include "qmuparserdef.h"
 
@@ -117,10 +115,9 @@ private:
 
   Part of the math parser package.
 */
-class QmuParserError
+class QMUPARSERSHARED_EXPORT QmuParserError : public QException
 {
 public:
-
     QmuParserError();
     explicit QmuParserError ( EErrorCodes a_iErrc );
     explicit QmuParserError ( const QString &sMsg );
@@ -129,7 +126,7 @@ public:
     QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
-    ~QmuParserError();
+    virtual ~QmuParserError() noexcept (true){}
 
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
@@ -138,6 +135,15 @@ public:
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
 
+    /**
+     * @brief raise method raise for exception
+     */
+    virtual void   raise() const;
+    /**
+     * @brief clone clone exception
+     * @return new exception
+     */
+    virtual QmuParserError *clone() const;
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string
@@ -151,6 +157,16 @@ private:
     static void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
     void Reset();
 };
+
+inline void QmuParserError::raise() const
+{
+    throw *this;
+}
+
+inline QmuParserError *QmuParserError::clone() const
+{
+    return new QmuParserError(*this);
+}
 
 } // namespace qmu
 

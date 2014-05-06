@@ -23,66 +23,53 @@
 #ifndef QMUPARSERTOKENREADER_H
 #define QMUPARSERTOKENREADER_H
 
-#include <cassert>
-#include <cstdio>
-#include <cstring>
-#include <list>
-#include <map>
-#include <memory>
-#include <stack>
-#include <string>
-
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
 
-/** @file
-    @brief This file contains the parser token reader definition.
-*/
-
+/**
+ * @file
+ * @brief This file contains the parser token reader definition.
+ */
 
 namespace qmu
 {
-  // Forward declaration
-  class QmuParserBase;
+// Forward declaration
+class QmuParserBase;
 
-  /** @brief Token reader for the ParserBase class.
+/**
+ * @brief Token reader for the ParserBase class.
+ *
+ */
+class QmuParserTokenReader
+{
+private:
+    typedef QmuParserToken<qreal, QString> token_type;
+public:
+    QmuParserTokenReader(QmuParserBase *a_pParent);
+    QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const Q_DECL_NOEXCEPT;
 
-  */
-  class QmuParserTokenReader
-  {
-  private:
+    void           AddValIdent(identfun_type a_pCallback);
+    void           SetVarCreator(facfun_type a_pFactory, void *pUserData);
+    void           SetFormula(const QString &a_strFormula);
+    void           SetArgSep(char_type cArgSep);
+    int            GetPos() const Q_DECL_NOEXCEPT;
+    const QString& GetExpr() const Q_DECL_NOEXCEPT;
+    varmap_type&   GetUsedVar();
+    QChar          GetArgSep() const;
+    void           IgnoreUndefVar(bool bIgnore);
+    void           ReInit() Q_DECL_NOEXCEPT;
+    token_type     ReadNextToken();
+private:
 
-      typedef QmuParserToken<qreal, QString> token_type;
-
-  public:
-
-      QmuParserTokenReader(QmuParserBase *a_pParent);
-      QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const Q_DECL_NOEXCEPT;
-
-      void AddValIdent(identfun_type a_pCallback);
-      void SetVarCreator(facfun_type a_pFactory, void *pUserData);
-      void SetFormula(const QString &a_strFormula);
-      void SetArgSep(char_type cArgSep);
-
-      int GetPos() const Q_DECL_NOEXCEPT;
-      const QString &GetExpr() const Q_DECL_NOEXCEPT;
-      varmap_type& GetUsedVar();
-      QChar GetArgSep() const;
-
-      void IgnoreUndefVar(bool bIgnore);
-      void ReInit() Q_DECL_NOEXCEPT;
-      token_type ReadNextToken();
-
-  private:
-      /**
-       * @brief Syntax codes.
-       *
-       * The syntax codes control the syntax check done during the first time parsing of
-       * the expression string. They are flags that indicate which tokens are allowed next
-       * if certain tokens are identified.
-       */
-      enum ESynCodes
-      {
+    /**
+     * @brief Syntax codes.
+     *
+     * The syntax codes control the syntax check done during the first time parsing of
+     * the expression string. They are flags that indicate which tokens are allowed next
+     * if certain tokens are identified.
+     */
+    enum ESynCodes
+    {
         noBO      = 1 << 0,  ///< to avoid i.e. "cos(7)("
         noBC      = 1 << 1,  ///< to avoid i.e. "sin)" or "()"
         noVAL     = 1 << 2,  ///< to avoid i.e. "tan 2" or "sin(8)3.14"
@@ -99,56 +86,54 @@ namespace qmu
         noELSE    = 1 << 13,
         sfSTART_OF_LINE = noOPT | noBC | noPOSTOP | noASSIGN | noIF | noELSE | noARG_SEP,
         noANY     = ~0       ///< All of he above flags set
-      };
+    };
 
-      QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
-      QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
-      void Assign(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
+    QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
+    QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
+    void            Assign(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
 
-      void SetParent(QmuParserBase *a_pParent);
-      int ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const Q_DECL_NOEXCEPT;
-      int ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
+    void            SetParent(QmuParserBase *a_pParent);
+    int             ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const Q_DECL_NOEXCEPT;
+    int             ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
 
-      bool IsBuiltIn(token_type &a_Tok);
-      bool IsArgSep(token_type &a_Tok);
-      bool IsEOF(token_type &a_Tok) Q_DECL_NOEXCEPT;
-      bool IsInfixOpTok(token_type &a_Tok);
-      bool IsFunTok(token_type &a_Tok);
-      bool IsPostOpTok(token_type &a_Tok);
-      bool IsOprt(token_type &a_Tok);
-      bool IsValTok(token_type &a_Tok);
-      bool IsVarTok(token_type &a_Tok);
-      bool IsStrVarTok(token_type &a_Tok);
-      bool IsUndefVarTok(token_type &a_Tok) Q_DECL_NOEXCEPT;
-      bool IsString(token_type &a_Tok) Q_DECL_NOEXCEPT;
-      void Error(EErrorCodes a_iErrc,
-                 int a_iPos = -1,
-                 const QString &a_sTok = QString() ) const;
+    bool            IsBuiltIn(token_type &a_Tok);
+    bool            IsArgSep(token_type &a_Tok);
+    bool            IsEOF(token_type &a_Tok);
+    bool            IsInfixOpTok(token_type &a_Tok);
+    bool            IsFunTok(token_type &a_Tok);
+    bool            IsPostOpTok(token_type &a_Tok);
+    bool            IsOprt(token_type &a_Tok);
+    bool            IsValTok(token_type &a_Tok);
+    bool            IsVarTok(token_type &a_Tok);
+    bool            IsStrVarTok(token_type &a_Tok);
+    bool            IsUndefVarTok(token_type &a_Tok) Q_DECL_NOEXCEPT;
+    bool            IsString(token_type &a_Tok);
+    void Q_NORETURN Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
 
-      token_type& SaveBeforeReturn(const token_type &tok);
+    token_type& SaveBeforeReturn(const token_type &tok);
 
-      QmuParserBase *m_pParser;
-      QString m_strFormula;
-      int  m_iPos;
-      int  m_iSynFlags;
-      bool m_bIgnoreUndefVar;
+    QmuParserBase     *m_pParser;
+    QString            m_strFormula;
+    int                m_iPos;
+    int                m_iSynFlags;
+    bool               m_bIgnoreUndefVar;
 
-      const funmap_type *m_pFunDef;
-      const funmap_type *m_pPostOprtDef;
-      const funmap_type *m_pInfixOprtDef;
-      const funmap_type *m_pOprtDef;
-      const valmap_type *m_pConstDef;
-      const strmap_type *m_pStrVarDef;
-      varmap_type *m_pVarDef;  ///< The only non const pointer to parser internals
-      facfun_type m_pFactory;
-      void *m_pFactoryData;
-      std::list<identfun_type> m_vIdentFun; ///< Value token identification function
-      varmap_type m_UsedVar;
-      qreal m_fZero;      ///< Dummy value of zero, referenced by undefined variables
-      int m_iBrackets;
-      token_type m_lastTok;
-      QChar m_cArgSep;     ///< The character used for separating function arguments
-  };
+    const funmap_type *m_pFunDef;
+    const funmap_type *m_pPostOprtDef;
+    const funmap_type *m_pInfixOprtDef;
+    const funmap_type *m_pOprtDef;
+    const valmap_type *m_pConstDef;
+    const strmap_type *m_pStrVarDef;
+    varmap_type       *m_pVarDef;         ///< The only non const pointer to parser internals
+    facfun_type        m_pFactory;
+    void              *m_pFactoryData;
+    std::list<identfun_type> m_vIdentFun; ///< Value token identification function
+    varmap_type        m_UsedVar;
+    qreal              m_fZero;           ///< Dummy value of zero, referenced by undefined variables
+    int                m_iBrackets;       ///< Keep count open brackets
+    token_type         m_lastTok;
+    QChar              m_cArgSep;         ///< The character used for separating function arguments
+};
 } // namespace qmu
 
 #endif

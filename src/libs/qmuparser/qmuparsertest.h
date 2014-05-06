@@ -23,9 +23,7 @@
 #ifndef QMUPARSERTEST_H
 #define QMUPARSERTEST_H
 
-#include <string>
-#include <cstdlib>
-#include <numeric> // for accumulate
+#include "qmuparser_global.h"
 #include "qmuparser.h"
 #include <QString>
 
@@ -47,7 +45,7 @@ namespace Test
  *
  * (C) 2004-2011 Ingo Berg
  */
-class QmuParserTester // final
+class QMUPARSERSHARED_EXPORT QmuParserTester // final
 {
 public:
     typedef int ( QmuParserTester::*testfun_type ) ();
@@ -186,7 +184,7 @@ private:
     {
         if ( a_iArgc == false)
         {
-            throw qmu::QmuParser::exception_type ( "too few arguments for function FirstArg." );
+            throw QmuParserError ( "too few arguments for function FirstArg." );
         }
 
         return a_afArg[0];
@@ -196,7 +194,7 @@ private:
     {
         if ( a_iArgc == false)
         {
-            throw qmu::QmuParser::exception_type ( "too few arguments for function LastArg." );
+            throw QmuParserError ( "too few arguments for function LastArg." );
         }
 
         return a_afArg[a_iArgc - 1];
@@ -206,7 +204,7 @@ private:
     {
         if ( a_iArgc == false)
         {
-            throw qmu::QmuParser::exception_type ( "too few arguments for function sum." );
+            throw QmuParserError ( "too few arguments for function sum." );
         }
 
         qreal fRes = 0;

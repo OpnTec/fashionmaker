@@ -232,7 +232,7 @@ public:
      *
      * In cmSTRFUNC - This is the index to a string table in the main parser.
      * @param a_iIdx The index the string function result will take in the bytecode parser.
-     * @throw exception_type if #a_iIdx<0 or #m_iType!=cmSTRING
+     * @throw QmuParserError if #a_iIdx<0 or #m_iType!=cmSTRING
      */
     void SetIdx ( int a_iIdx )
     {
@@ -250,7 +250,7 @@ public:
      *
      * In cmSTRFUNC - This is the index to a string table in the main parser.
      *
-     * @throw exception_type if #m_iIdx<0 or #m_iType!=cmSTRING
+     * @throw QmuParserError if #m_iIdx<0 or #m_iType!=cmSTRING
      * @return The index the result will take in the Bytecode calculatin array (#m_iIdx).
      */
     int GetIdx() const
@@ -327,7 +327,7 @@ public:
      * @brief Return the address of the callback function assoziated with function and operator tokens.
      *
      * @return The pointer stored in #m_pTok.
-     * @throw exception_type if token type is non of:
+     * @throw QmuParserError if token type is non of:
      *        <ul>
      *           <li>cmFUNC</li>
      *           <li>cmSTRFUNC</li>
@@ -348,7 +348,7 @@ public:
      * @brief Get value of the token.
      *
      * Only applicable to variable and value tokens.
-     * @throw exception_type if token is no value/variable token.
+     * @throw QmuParserError if token is no value/variable token.
      */
     TBase GetVal() const
     {
@@ -359,107 +359,39 @@ public:
             case cmVAR:
                 return * ( reinterpret_cast<TBase*>(m_pTok) );
             case cmLE:
-                Q_UNREACHABLE();
-                break;
             case cmGE:
-                Q_UNREACHABLE();
-                break;
             case cmNEQ:
-                Q_UNREACHABLE();
-                break;
             case cmEQ:
-                Q_UNREACHABLE();
-                break;
             case cmLT:
-                Q_UNREACHABLE();
-                break;
             case cmGT:
-                Q_UNREACHABLE();
-                break;
             case cmADD:
-                Q_UNREACHABLE();
-                break;
             case cmSUB:
-                Q_UNREACHABLE();
-                break;
             case cmMUL:
-                Q_UNREACHABLE();
-                break;
             case cmDIV:
-                Q_UNREACHABLE();
-                break;
             case cmPOW:
-                Q_UNREACHABLE();
-                break;
             case cmLAND:
-                Q_UNREACHABLE();
-                break;
             case cmLOR:
-                Q_UNREACHABLE();
-                break;
             case cmASSIGN:
-                Q_UNREACHABLE();
-                break;
             case cmBO:
-                Q_UNREACHABLE();
-                break;
             case cmBC:
-                Q_UNREACHABLE();
-                break;
             case cmIF:
-                Q_UNREACHABLE();
-                break;
             case cmELSE:
-                Q_UNREACHABLE();
-                break;
             case cmENDIF:
-                Q_UNREACHABLE();
-                break;
             case cmARG_SEP:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW3:
-                Q_UNREACHABLE();
-                break;
             case cmVARPOW4:
-                Q_UNREACHABLE();
-                break;
             case cmVARMUL:
-                Q_UNREACHABLE();
-                break;
             case cmPOW2:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_STR:
-                Q_UNREACHABLE();
-                break;
             case cmFUNC_BULK:
-                Q_UNREACHABLE();
-                break;
-            case cmSTRING:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_BIN:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_POSTFIX:
-                Q_UNREACHABLE();
-                break;
             case cmOPRT_INFIX:
-                Q_UNREACHABLE();
-                break;
             case cmEND:
-                Q_UNREACHABLE();
-                break;
             case cmUNKNOWN:
-                Q_UNREACHABLE();
-                break;
+            case cmSTRING:
             default:
                 throw QmuParserError ( ecVAL_EXPECTED );
         }
@@ -470,7 +402,7 @@ public:
      * @brief Get address of a variable token.
      *
      * Valid only if m_iType==CmdVar.
-     * @throw exception_type if token is no variable token.
+     * @throw QmuParserError if token is no variable token.
      */
     TBase* GetVar() const
     {

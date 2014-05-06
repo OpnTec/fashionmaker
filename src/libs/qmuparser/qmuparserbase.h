@@ -23,6 +23,7 @@
 #ifndef QMUQPARSERBASE_H
 #define QMUQPARSERBASE_H
 
+#include "qmuparser_global.h"
 #include <QStack>
 #include <QString>
 #include <QStringList>
@@ -51,17 +52,10 @@ namespace qmu
  * Complementary to a set of internally implemented functions the parser is able to handle
  * user defined functions and variables.
  */
-class QmuParserBase
+class QMUPARSERSHARED_EXPORT QmuParserBase
 {
     friend class QmuParserTokenReader;
 public:
-    /**
-     * @brief Type of the error class.
-     *
-     * Included for backwards compatibility.
-     */
-    typedef QmuParserError exception_type;
-
     QmuParserBase();
     QmuParserBase(const QmuParserBase &a_Parser);
     QmuParserBase& operator=(const QmuParserBase &a_Parser) Q_DECL_NOEXCEPT;
@@ -112,7 +106,7 @@ public:
     const QString&     ValidInfixOprtChars() const;
     void               SetArgSep(char_type cArgSep);
     QChar              GetArgSep() const;
-    void               Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_strTok = QString() ) const;
+    void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_strTok = QString() ) const;
     /**
      * @fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun,
      * bool a_bAllowOpt = true)

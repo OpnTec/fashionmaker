@@ -42,26 +42,26 @@ class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException)
 public:
-                      /**
-                       * @brief VException constructor exception
-                       * @param what string with error
-                       */
-                      VException(const QString &what);
-                      /**
-                       * @brief VException copy constructor
-                       * @param e exception
-                       */
-                      VException(const VException &e);
-    virtual           ~VException() noexcept (true){}
+    /**
+     * @brief VException constructor exception
+     * @param what string with error
+     */
+    VException(const QString &what);
+    /**
+     * @brief VException copy constructor
+     * @param e exception
+     */
+    VException(const VException &e);
+    virtual ~VException() noexcept (true){}
     /**
      * @brief raise method raise for exception
      */
-    void            raise() const;
+    virtual void    raise() const;
     /**
      * @brief clone clone exception
      * @return new exception
      */
-    VException      *clone() const;
+    virtual VException *clone() const;
     /**
      * @brief ErrorMessage return main error message
      * @return error message

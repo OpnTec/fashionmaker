@@ -53,7 +53,7 @@ HEADERS += \
     qmuparsertest.h \
     stable.h
 
-VERSION = 2.2.3
+VERSION = 2.2.4
 
 unix {
     target.path = /usr/lib
@@ -83,7 +83,7 @@ CONFIG(debug, debug|release){
                           -Wmissing-include-dirs -Wpacked -Wredundant-decls -Winline \
                           -Wswitch-default -Wswitch-enum -Wuninitialized -Wvariadic-macros \
                           -Wlogical-op -Wnoexcept -Wmissing-noreturn -Wpointer-arith\
-                          -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -gdwarf-3
+                          -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -gdwarf-3 \
                           -ftrapv
         }
     } else {

@@ -254,15 +254,10 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken()
 {
     assert ( m_pParser );
 
-#if defined(_UNICODE)
-    const char_type *szFormula = m_strFormula.toStdWString().c_str();
-#else
-    const char_type *szFormula = m_strFormula.toStdString().c_str();
-#endif
     token_type tok;
 
     // Ignore all non printable characters when reading the expression
-    while ( szFormula[m_iPos] > 0 && szFormula[m_iPos] <= 0x20 )
+    while ( m_strFormula.data()[m_iPos] > 0 && m_strFormula.data()[m_iPos] <= 0x20 )
     {
         ++m_iPos;
     }
@@ -452,7 +447,7 @@ bool QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok )
     for ( int i = 0; i < pOprtDef.size(); ++i )
     {
         int len = pOprtDef.at ( i ).length();
-        if ( pOprtDef.at ( i ) == m_strFormula.mid ( m_iPos, m_iPos + len ) )
+        if ( pOprtDef.at ( i ) == m_strFormula.mid ( m_iPos, len ) )
         {
             switch ( i )
             {
@@ -596,23 +591,31 @@ bool QmuParserTokenReader::IsArgSep ( token_type &a_Tok )
  *
  * @return true if an end of formula is found false otherwise.
  * @param a_Tok [out] If an eof is found the corresponding token will be stored there.
- * @throw nothrow
  * @sa IsOprt, IsFunTok, IsStrFunTok, IsValTok, IsVarTok, IsString, IsInfixOpTok, IsPostOpTok
  */
-bool QmuParserTokenReader::IsEOF ( token_type &a_Tok ) Q_DECL_NOEXCEPT
+bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
 {
-#if defined(_UNICODE)
-    const char_type* szFormula = m_strFormula.toStdWString().c_str();
-#else
-    const char_type* szFormula = m_strFormula.toStdString().c_str();
-#endif
+//#if defined(_UNICODE)
+//    const char_type* szFormula = m_strFormula.toStdWString().c_str();
+//#else
+//    const char_type* szFormula = m_strFormula.toStdString().c_str();
+//#endif
 
     // check for EOF
-    if ( szFormula[m_iPos] == false /*|| szFormula[m_iPos] == '\n'*/ )
+    if ( m_strFormula.data()[m_iPos] == false /*|| szFormula[m_iPos] == '\n'*/ )
     {
         if ( m_iSynFlags & noEND )
         {
-            Error ( ecUNEXPECTED_EOF, m_iPos );
+            try
+            {
+                Error ( ecUNEXPECTED_EOF, m_iPos );
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                qDebug() << "\n  "
+                         << "  Code:" << e.GetCode() << "(" << e.GetMsg() << ")";
+                throw e;
+            }
         }
 
         if ( m_iBrackets > 0 )
@@ -756,7 +759,7 @@ bool QmuParserTokenReader::IsOprt ( token_type &a_Tok )
     for ( ; it != m_pOprtDef->rend(); ++it )
     {
         const QString &sID = it->first;
-        if ( sID == m_strFormula.mid ( m_iPos, m_iPos + sID.length() ) )
+        if ( sID == m_strFormula.mid ( m_iPos, sID.length() ) )
         {
             a_Tok.Set ( it->second, strTok );
 
@@ -891,7 +894,8 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
         if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
-            strTok = m_strFormula.mid ( iStart, m_iPos-iStart );
+            //strTok = m_strFormula.mid ( iStart, m_iPos-iStart );
+            strTok = m_strFormula.mid ( iStart, m_iPos );
             if ( m_iSynFlags & noVAL )
             {
                 Error ( ecUNEXPECTED_VAL, m_iPos - strTok.length(), strTok );
@@ -1050,16 +1054,15 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) Q_DECL_NOEXCEPT
  * @param a_Tok [out] If a variable token has been found it will be placed here.
  * @return true if a string token has been found.
  * @sa IsOprt, IsFunTok, IsStrFunTok, IsValTok, IsVarTok, IsEOF, IsInfixOpTok, IsPostOpTok
- * @throw nothrow
  */
-bool QmuParserTokenReader::IsString ( token_type &a_Tok ) Q_DECL_NOEXCEPT
+bool QmuParserTokenReader::IsString ( token_type &a_Tok )
 {
     if ( m_strFormula[m_iPos] != '"' )
     {
         return false;
     }
 
-    QString strBuf ( m_strFormula[m_iPos + 1] );
+    QString strBuf (m_strFormula.mid(m_iPos + 1));
     int iEnd ( 0 ), iSkip ( 0 );
 
     // parser over escaped '\"' end replace them with '"'
@@ -1105,7 +1108,7 @@ bool QmuParserTokenReader::IsString ( token_type &a_Tok ) Q_DECL_NOEXCEPT
  * @param a_strTok [in] The token string representation associated with the error.
  * @throw ParserException always throws thats the only purpose of this function.
  */
-void  QmuParserTokenReader::Error ( EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok ) const
+void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok ) const
 {
     m_pParser->Error ( a_iErrc, a_iPos, a_sTok );
 }

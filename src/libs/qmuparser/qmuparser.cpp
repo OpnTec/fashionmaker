@@ -131,7 +131,7 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
 {
     if (a_iArgc == false)
     {
-        throw exception_type("too few arguments for function sum.");
+        throw QmuParserError("too few arguments for function sum.");
     }
     qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i)
@@ -151,7 +151,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
 {
     if (a_iArgc == false)
     {
-        throw exception_type("too few arguments for function sum.");
+        throw QmuParserError("too few arguments for function sum.");
     }
     qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i)
@@ -171,7 +171,7 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
 {
     if (a_iArgc == false)
     {
-        throw exception_type("too few arguments for function min.");
+        throw QmuParserError("too few arguments for function min.");
     }
     qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)
@@ -191,7 +191,7 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 {
     if (a_iArgc == false)
     {
-        throw exception_type("too few arguments for function min.");
+        throw QmuParserError("too few arguments for function min.");
     }
     qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)

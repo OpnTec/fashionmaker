@@ -430,10 +430,8 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                 }
                 break;
                 case cmLE:
-                    Q_UNREACHABLE();
                     break;
                 case cmGE:
-                    Q_UNREACHABLE();
                     break;
                 case cmNEQ:
                     Q_UNREACHABLE();
@@ -442,13 +440,10 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     Q_UNREACHABLE();
                     break;
                 case cmLT:
-                    Q_UNREACHABLE();
                     break;
                 case cmGT:
-                    Q_UNREACHABLE();
                     break;
                 case cmLAND:
-                    Q_UNREACHABLE();
                     break;
                 case cmLOR:
                     Q_UNREACHABLE();
@@ -670,10 +665,8 @@ void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
                 m_vRPN[idx].Oprt.offset = i - idx;
                 break;
             case cmLE:
-                Q_UNREACHABLE();
                 break;
             case cmGE:
-                Q_UNREACHABLE();
                 break;
             case cmNEQ:
                 Q_UNREACHABLE();
@@ -682,34 +675,25 @@ void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
                 Q_UNREACHABLE();
                 break;
             case cmLT:
-                Q_UNREACHABLE();
                 break;
             case cmGT:
-                Q_UNREACHABLE();
                 break;
             case cmADD:
-                Q_UNREACHABLE();
                 break;
             case cmSUB:
-                Q_UNREACHABLE();
                 break;
             case cmMUL:
-                Q_UNREACHABLE();
                 break;
             case cmDIV:
-                Q_UNREACHABLE();
                 break;
             case cmPOW:
-                Q_UNREACHABLE();
                 break;
             case cmLAND:
-                Q_UNREACHABLE();
                 break;
             case cmLOR:
                 Q_UNREACHABLE();
                 break;
             case cmASSIGN:
-                Q_UNREACHABLE();
                 break;
             case cmBO:
                 Q_UNREACHABLE();
@@ -721,31 +705,27 @@ void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
                 Q_UNREACHABLE();
                 break;
             case cmVAR:
-                Q_UNREACHABLE();
                 break;
             case cmVAL:
-                Q_UNREACHABLE();
                 break;
             case cmVARPOW2:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARPOW3:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARPOW4:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARMUL:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmPOW2:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmFUNC:
-                Q_UNREACHABLE();
                 break;
             case cmFUNC_STR:
-                Q_UNREACHABLE();
                 break;
             case cmFUNC_BULK:
                 Q_UNREACHABLE();
@@ -763,7 +743,6 @@ void QmuParserByteCode::Finalize() Q_DECL_NOEXCEPT
                 Q_UNREACHABLE();
                 break;
             case cmEND:
-                Q_UNREACHABLE();
                 break;
             case cmUNKNOWN:
                 Q_UNREACHABLE();

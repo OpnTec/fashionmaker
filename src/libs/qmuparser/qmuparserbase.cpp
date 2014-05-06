@@ -27,6 +27,9 @@
     #include <omp.h>
 #endif
 
+#include "qmuparsererror.h"
+#include "qmuparsertokenreader.h"
+
 using namespace std;
 
 /**
@@ -438,19 +441,19 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
                 Q_UNREACHABLE();
                 break;
             case cmVARPOW2:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARPOW3:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARPOW4:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmVARMUL:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmPOW2:
-                Q_UNREACHABLE();
+                // For optimization purposes
                 break;
             case cmFUNC:
                 Q_UNREACHABLE();
@@ -937,7 +940,7 @@ const varmap_type& QmuParserBase::GetUsedVar() const
         m_pParseFormula = &QmuParserBase::ParseString;
         m_pTokenReader->IgnoreUndefVar(false);
     }
-    catch (const exception_type &e)
+    catch (const QmuParserError &e)
     {
         // Make sure to stay in string parse mode, dont call ReInit()
         // because it deletes the array with the used variables
@@ -995,7 +998,7 @@ const QString& QmuParserBase::GetExpr() const
 /**
  * @brief Execute a function that takes a single string argument.
  * @param a_FunTok Function token.
- * @throw exception_type If the function token is not a string function
+ * @throw QmuParserError If the function token is not a string function
  */
 QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok,
                                                       const QVector<token_type> &a_vArg) const
@@ -1052,7 +1055,7 @@ QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok
  * @param iArgCount Number of Arguments actually gathered used only for multiarg functions.
  * @post The result is pushed to the value stack
  * @post The function token is removed from the stack
- * @throw exception_type if Argument count does not mach function requirements.
+ * @throw QmuParserError if Argument count does not mach function requirements.
  */
 void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int a_iArgCount) const
 {
@@ -2051,7 +2054,7 @@ qreal QmuParserBase::ParseString() const
         m_pParseFormula = &QmuParserBase::ParseCmdCode;
         return (this->*m_pParseFormula)();
     }
-    catch (QmuParserError &exc)
+    catch (qmu::QmuParserError &exc)
     {
         exc.SetFormula(m_pTokenReader->GetExpr());
         throw;
@@ -2071,7 +2074,7 @@ qreal QmuParserBase::ParseString() const
 */
 void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const
 {
-    throw exception_type(a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
+    throw qmu::QmuParserError (a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
