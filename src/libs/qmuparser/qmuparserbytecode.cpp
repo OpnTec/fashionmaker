@@ -140,7 +140,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal) Q_DECL_NOEXCEPT
     // If optimization does not apply
     SToken tok;
     tok.Cmd = cmVAL;
-    tok.Val.ptr   = NULL;
+    tok.Val.ptr   = nullptr;
     tok.Val.data  = 0;
     tok.Val.data2 = a_fVal;
     m_vRPN.push_back(tok);
@@ -361,8 +361,8 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                          (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVARMUL &&
                           m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) )
                     {
-                        assert( (m_vRPN[sz-2].Val.ptr==NULL && m_vRPN[sz-1].Val.ptr!=NULL) ||
-                        (m_vRPN[sz-2].Val.ptr!=NULL && m_vRPN[sz-1].Val.ptr==NULL) ||
+                        assert( (m_vRPN[sz-2].Val.ptr==nullptr && m_vRPN[sz-1].Val.ptr!=nullptr) ||
+                        (m_vRPN[sz-2].Val.ptr!=nullptr && m_vRPN[sz-1].Val.ptr==nullptr) ||
                         (m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
 
                         m_vRPN[sz-2].Cmd = cmVARMUL;

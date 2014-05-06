@@ -314,7 +314,7 @@ public:
     //------------------------------------------------------------------------------
     EOprtAssociativity GetAssociativity() const
     {
-        if ( m_pCallback.get() == NULL || m_pCallback->GetCode() != cmOPRT_BIN )
+        if ( m_pCallback.get() == nullptr || m_pCallback->GetCode() != cmOPRT_BIN )
         {
             throw QmuParserError ( ecINTERNAL_ERROR );
         }

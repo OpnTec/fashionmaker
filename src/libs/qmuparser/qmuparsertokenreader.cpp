@@ -118,9 +118,10 @@ void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader ) Q_DEC
  */
 QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
     : m_pParser ( a_pParent ), m_strFormula(), m_iPos ( 0 ), m_iSynFlags ( 0 ), m_bIgnoreUndefVar ( false ),
-      m_pFunDef ( NULL ), m_pPostOprtDef ( NULL ), m_pInfixOprtDef ( NULL ), m_pOprtDef ( NULL ), m_pConstDef ( NULL ),
-      m_pStrVarDef ( NULL ), m_pVarDef ( NULL ), m_pFactory ( NULL ), m_pFactoryData ( NULL ), m_vIdentFun(),
-      m_UsedVar(), m_fZero ( 0 ), m_iBrackets ( 0 ), m_lastTok(), m_cArgSep ( ',' )
+      m_pFunDef ( nullptr ), m_pPostOprtDef ( nullptr ), m_pInfixOprtDef ( nullptr ), m_pOprtDef ( nullptr ),
+      m_pConstDef ( nullptr ), m_pStrVarDef ( nullptr ), m_pVarDef ( nullptr ), m_pFactory ( nullptr ),
+      m_pFactoryData ( nullptr ), m_vIdentFun(), m_UsedVar(), m_fZero ( 0 ), m_iBrackets ( 0 ), m_lastTok(),
+      m_cArgSep ( ',' )
 {
     assert ( m_pParser );
     SetParent ( m_pParser );

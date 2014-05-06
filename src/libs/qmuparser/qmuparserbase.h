@@ -67,7 +67,7 @@ public:
     void               Eval(qreal *results, int nBulkSize) const;
     int                GetNumResults() const;
     void               SetExpr(const QString &a_sExpr);
-    void               SetVarFactory(facfun_type a_pFactory, void *pUserData = NULL);
+    void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
     void               SetDecSep(char_type cDecSep);
     void               SetThousandsSep(char_type cThousandsSep = 0);
     void               ResetLocale();
