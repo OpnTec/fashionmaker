@@ -74,12 +74,6 @@ QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteC
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::EnableOptimizer(bool bStat)
-{
-    m_bEnableOptimizer = bStat;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Copy state of another object to this.
  *
@@ -657,22 +651,6 @@ const SToken* QmuParserByteCode::GetBase() const
     {
         return &m_vRPN[0];
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-std::size_t QmuParserByteCode::GetMaxStackSize() const
-{
-    return m_iMaxStackSize+1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Returns the number of entries in the bytecode.
- */
-// cppcheck-suppress unusedFunction
-std::size_t QmuParserByteCode::GetSize() const
-{
-    return m_vRPN.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

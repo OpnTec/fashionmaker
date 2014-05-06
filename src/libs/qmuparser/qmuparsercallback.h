@@ -109,6 +109,90 @@ private:
  */
 typedef std::map<QString, QmuParserCallback> funmap_type;
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Clone this instance and return a pointer to the new instance.
+ */
+inline QmuParserCallback* QmuParserCallback::Clone() const
+{
+    return new QmuParserCallback ( *this );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return true if the function is conservative.
+ *
+ * Conservative functions return always the same result for the same argument.
+ * @throw nothrow
+ */
+// cppcheck-suppress unusedFunction
+inline bool QmuParserCallback::IsOptimizable() const Q_DECL_NOEXCEPT
+{
+    return m_bAllowOpti;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Get the callback address for the parser function.
+ *
+ * The type of the address is void. It needs to be recasted according to the argument number to the right type.
+ *
+ * @throw nothrow
+ * @return #pFun
+ */
+inline void* QmuParserCallback::GetAddr() const Q_DECL_NOEXCEPT
+{
+    return m_pFun;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return the callback code.
+*/
+inline ECmdCode  QmuParserCallback::GetCode() const
+{
+    return m_iCode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline ETypeCode QmuParserCallback::GetType() const
+{
+    return m_iType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return the operator precedence.
+ * @throw nothrown
+ *
+ * Only valid if the callback token is an operator token (binary or infix).
+ */
+inline int QmuParserCallback::GetPri()  const Q_DECL_NOEXCEPT
+{
+    return m_iPri;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return the operators associativity.
+ * @throw nothrown
+ *
+ * Only valid if the callback token is a binary operator token.
+ */
+inline EOprtAssociativity QmuParserCallback::GetAssociativity() const Q_DECL_NOEXCEPT
+{
+    return m_eOprtAsct;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the number of function Arguments.
+ */
+inline int QmuParserCallback::GetArgc() const
+{
+    return m_iArgc;
+}
+
 } // namespace qmu
 
 #endif

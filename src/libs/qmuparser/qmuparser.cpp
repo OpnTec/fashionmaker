@@ -112,17 +112,6 @@ qreal QmuParser::Sign(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Callback for the unary minus operator.
- * @param v The value to negate
- * @return -v
- */
-qreal QmuParser::UnaryMinus(qreal v)
-{
-    return -v;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Callback for adding multiple values.
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg

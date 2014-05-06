@@ -120,5 +120,28 @@ private:
 
     void ConstantFolding(ECmdCode a_Oprt);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void QmuParserByteCode::EnableOptimizer(bool bStat)
+{
+    m_bEnableOptimizer = bStat;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline std::size_t QmuParserByteCode::GetMaxStackSize() const
+{
+    return m_iMaxStackSize+1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the number of entries in the bytecode.
+ */
+// cppcheck-suppress unusedFunction
+inline std::size_t QmuParserByteCode::GetSize() const
+{
+    return m_vRPN.size();
+}
+
 } // namespace qmu
 #endif

@@ -194,20 +194,6 @@ void QmuParserBase::ResetLocale()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Initialize the token reader.
- *
- * Create new token reader object and submit pointers to function, operator, constant and variable definitions.
- *
- * @post m_pTokenReader.get()!=0
- * @throw nothrow
- */
-void QmuParserBase::InitTokenReader() Q_DECL_NOEXCEPT
-{
-    m_pTokenReader.reset(new token_reader_type(this));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Reset parser to string parsing mode and clear internal buffers.
  *
  * Clear bytecode, reset the token reader.
@@ -281,30 +267,6 @@ QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
         ss << ")";
     }
     return versionInfo;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Add a value parsing function.
- *
- * When parsing an expression muParser tries to detect values in the expression string using different valident
- * callbacks. Thuis it's possible to parse for hex values, binary values and floating point values.
- */
-void QmuParserBase::AddValIdent(identfun_type a_pCallback)
-{
-    m_pTokenReader->AddValIdent(a_pCallback);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Set a function that can create variable pointer for unknown expression variables.
- * @param a_pFactory A pointer to the variable factory.
- * @param pUserData A user defined context pointer.
- */
-// cppcheck-suppress unusedFunction
-void QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData)
-{
-    m_pTokenReader->SetVarCreator(a_pFactory, pUserData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,43 +424,6 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
     QString sBuf(a_sExpr + " " );
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Get the default symbols used for the built in operators.
- * @sa c_DefaultOprt
- */
-const QStringList &QmuParserBase::GetOprtDef()
-{
-    return c_DefaultOprt;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Define the set of valid characters to be used in names of functions, variables, constants.
- */
-void QmuParserBase::DefineNameChars(const QString &a_szCharset)
-{
-    m_sNameChars = a_szCharset;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Define the set of valid characters to be used in names of binary operators and postfix operators.
- */
-void QmuParserBase::DefineOprtChars(const QString &a_szCharset)
-{
-    m_sOprtChars = a_szCharset;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Define the set of valid characters to be used in names of infix operators.
- */
-void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
-{
-    m_sInfixOprtChars = a_szCharset;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -807,49 +732,6 @@ const varmap_type& QmuParserBase::GetUsedVar() const
         throw;
     }
     return m_pTokenReader->GetUsedVar();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return a map containing the used variables only.
- */
-const varmap_type& QmuParserBase::GetVar() const
-{
-    return m_VarDef;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return a map containing all parser constants.
- */
-const valmap_type& QmuParserBase::GetConst() const
-{
-    return m_ConstDef;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return prototypes of all parser functions.
- * @return #m_FunDef
- * @sa FunProt
- * @throw nothrow
- *
- * The return type is a map of the public type #funmap_type containing the prototype definitions for all numerical
- * parser functions. String functions are not part of this map. The Prototype definition is encapsulated in objects
- * of the class FunProt one per parser function each associated with function names via a map construct.
- */
-const funmap_type& QmuParserBase::GetFunDef() const Q_DECL_NOEXCEPT
-{
-    return m_FunDef;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Retrieve the formula.
- */
-const QString& QmuParserBase::GetExpr() const
-{
-    return m_pTokenReader->GetExpr();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2005,17 +1887,6 @@ void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn) Q_DECL_NOEXCEPT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Query status of built in variables.
- * @return #m_bBuiltInOp; true if built in operators are enabled.
- * @throw nothrow
- */
-bool QmuParserBase::HasBuiltInOprt() const Q_DECL_NOEXCEPT
-{
-    return m_bBuiltInOp;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Get the argument separator character.
  */
 QChar QmuParserBase::GetArgSep() const
@@ -2158,41 +2029,6 @@ qreal* QmuParserBase::Eval(int &nStackSize) const
 
     // (for historic reasons the stack starts at position 1)
     return &m_vStackBuffer[1];
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the number of results on the calculation stack.
- *
- * If the expression contains comma seperated subexpressions (i.e. "sin(y), x+y"). There mey be more than one return
- * value. This function returns the number of available results.
- */
-// cppcheck-suppress unusedFunction
-int QmuParserBase::GetNumResults() const
-{
-    return m_nFinalResultIdx;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculate the result.
- *
- * A note on const correctness:
- * I consider it important that Calc is a const function.
- * Due to caching operations Calc changes only the state of internal variables with one exception
- * m_UsedVar this is reset during string parsing and accessible from the outside. Instead of making
- * Calc non const GetUsedVar is non const because it explicitely calls Eval() forcing this update.
- *
- * @pre A formula must be set.
- * @pre Variables must have been set (if needed)
- *
- * @sa #m_pParseFormula
- * @return The evaluation result
- * @throw ParseException if no Formula is set or in case of any other error related to the formula.
- */
-qreal QmuParserBase::Eval() const
-{
-    return (this->*m_pParseFormula)();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

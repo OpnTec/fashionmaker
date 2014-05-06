@@ -171,39 +171,6 @@ void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserDa
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Return the current position of the token reader in the formula string.
- *
- * @return #m_iPos
- * @throw nothrow
- */
-int QmuParserTokenReader::GetPos() const Q_DECL_NOEXCEPT
-{
-    return m_iPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return a reference to the formula.
- *
- * @return #m_strFormula
- * @throw nothrow
- */
-const QString& QmuParserTokenReader::GetExpr() const Q_DECL_NOEXCEPT
-{
-    return m_strFormula;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return a map containing the used variables only.
- */
-varmap_type& QmuParserTokenReader::GetUsedVar()
-{
-    return m_UsedVar;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Initialize the token Reader.
  *
  *   Sets the formula position index to zero and set Syntax flags to default for initial formula parsing.
@@ -213,20 +180,6 @@ void QmuParserTokenReader::SetFormula ( const QString &a_strFormula )
 {
     m_strFormula = a_strFormula;
     ReInit();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Set Flag that contronls behaviour in case of undefined variables beeing found.
- *
- * If true, the parser does not throw an exception if an undefined variable is found. Otherwise it does. This variable
- * is used internally only! It supresses a "undefined variable" exception in GetUsedVar().
- * Those function should return a complete list of variables including
- * those the are not defined by the time of it's call.
- */
-void QmuParserTokenReader::IgnoreUndefVar ( bool bIgnore )
-{
-    m_bIgnoreUndefVar = bIgnore;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1112,17 +1065,5 @@ bool QmuParserTokenReader::IsString ( token_type &a_Tok )
 void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok ) const
 {
     m_pParser->Error ( a_iErrc, a_iPos, a_sTok );
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void QmuParserTokenReader::SetArgSep ( char_type cArgSep )
-{
-    m_cArgSep = cArgSep;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QChar QmuParserTokenReader::GetArgSep() const
-{
-    return m_cArgSep;
 }
 } // namespace qmu

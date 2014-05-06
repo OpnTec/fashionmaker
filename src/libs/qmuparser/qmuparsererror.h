@@ -109,6 +109,19 @@ private:
     static const self_type m_Instance;    ///< The instance pointer
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
+{
+    return m_Instance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString QmuParserErrorMsg::operator[] ( unsigned a_iIdx ) const
+{
+    return ( a_iIdx < static_cast<unsigned>( m_vErrMsg.size() ) ) ? m_vErrMsg[a_iIdx] : QString();
+}
+
 //---------------------------------------------------------------------------
 /** @brief Error class of the parser.
     @author Ingo Berg
@@ -134,15 +147,7 @@ public:
     int            GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
-
-    /**
-     * @brief raise method raise for exception
-     */
     virtual void   raise() const;
-    /**
-     * @brief clone clone exception
-     * @return new exception
-     */
     virtual QmuParserError *clone() const;
 private:
     QString m_sMsg;      ///< The message string
@@ -158,14 +163,79 @@ private:
     void Reset();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief raise method raise for exception
+ */
 inline void QmuParserError::raise() const
 {
     throw *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief clone clone exception
+ * @return new exception
+ */
 inline QmuParserError *QmuParserError::clone() const
 {
     return new QmuParserError(*this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Set the expression related to this error.
+ */
+inline void QmuParserError::SetFormula ( const QString &a_strFormula )
+{
+    m_sExpr = a_strFormula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief gets the expression related tp this error.
+ */
+inline const QString& QmuParserError::GetExpr() const
+{
+    return m_sExpr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the message string for this error.
+ */
+inline const QString& QmuParserError::GetMsg() const
+{
+    return m_sMsg;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return the formula position related to the error.
+ *
+ * If the error is not related to a distinct position this will return -1
+ */
+inline int QmuParserError::GetPos() const
+{
+    return m_iPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return string related with this token (if available).
+ */
+inline const QString& QmuParserError::GetToken() const
+{
+    return m_sTok;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Return the error code.
+ */
+inline EErrorCodes QmuParserError::GetCode() const
+{
+    return m_iErrc;
 }
 
 } // namespace qmu

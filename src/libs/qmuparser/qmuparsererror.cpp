@@ -29,19 +29,6 @@ namespace qmu
 const QmuParserErrorMsg QmuParserErrorMsg::m_Instance;
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
-{
-    return m_Instance;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString QmuParserErrorMsg::operator[] ( unsigned a_iIdx ) const
-{
-    return ( a_iIdx < static_cast<unsigned>( m_vErrMsg.size() ) ) ? m_vErrMsg[a_iIdx] : QString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QmuParserErrorMsg::~QmuParserErrorMsg()
 {}
 
@@ -185,7 +172,9 @@ QmuParserError::QmuParserError ( const QString &szMsg, int iPos, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/** @brief Copy constructor. */
+/**
+ * @brief Copy constructor.
+ */
 QmuParserError::QmuParserError ( const QmuParserError &a_Obj )
     : QException(), m_sMsg ( a_Obj.m_sMsg ), m_sExpr ( a_Obj.m_sExpr ), m_sTok ( a_Obj.m_sTok ),
       m_iPos ( a_Obj.m_iPos ), m_iErrc ( a_Obj.m_iErrc ), m_ErrMsg ( QmuParserErrorMsg::Instance() )
@@ -248,62 +237,6 @@ void QmuParserError::Reset()
     m_sTok.clear();
     m_iPos = -1;
     m_iErrc = ecUNDEFINED;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Set the expression related to this error.
- */
-void QmuParserError::SetFormula ( const QString &a_strFormula )
-{
-    m_sExpr = a_strFormula;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief gets the expression related tp this error.
- */
-const QString& QmuParserError::GetExpr() const
-{
-    return m_sExpr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Returns the message string for this error.
- */
-const QString& QmuParserError::GetMsg() const
-{
-    return m_sMsg;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the formula position related to the error.
- *
- * If the error is not related to a distinct position this will return -1
- */
-int QmuParserError::GetPos() const
-{
-    return m_iPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return string related with this token (if available).
- */
-const QString& QmuParserError::GetToken() const
-{
-    return m_sTok;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Return the error code.
- */
-EErrorCodes QmuParserError::GetCode() const
-{
-    return m_iErrc;
 }
 
 } // namespace qmu

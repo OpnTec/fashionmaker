@@ -29,7 +29,6 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#include <QtCore/QString>
 
 extern const int MAJOR_VERSION;
 extern const int MINOR_VERSION;
