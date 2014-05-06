@@ -502,14 +502,9 @@ void MainWindow::ClosedDialogCutArc(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::About()
 {
-    QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-
-    QString fullName = QString("Valentina %1").arg(APP_VERSION);
-    QString qtBase(tr("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR));
-    QString buildOn(tr("Built on %3 at %4").arg(date.toString()).arg(__TIME__));
-    QString about = QString(tr("<h1>%1</h1> %2 <br/><br/> %3 <br/><br/> %4")).arg(fullName).arg(qtBase).arg(buildOn)
-            .arg(WARRANTY);
-    QMessageBox::about(this, tr("About Valentina"), about);
+    DialogAboutApp * about_dialog = new DialogAboutApp(this);
+    about_dialog->setAttribute(Qt::WA_DeleteOnClose,true);
+    about_dialog->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
