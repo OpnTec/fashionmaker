@@ -126,6 +126,8 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
 
+    QT_REQUIRE_VERSION(argc, argv, "5.1.0");
+
     VApplication app(argc, argv);
 #ifdef QT_DEBUG
     // Because our "noisy" message handler uses the GUI subsystem for message
