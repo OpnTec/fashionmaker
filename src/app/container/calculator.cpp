@@ -39,6 +39,22 @@
 #define EOL        9
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Calculator class constructor.
+ * @param data pointer to a variable container.
+ */
+Calculator::Calculator(const VContainer *data)
+    :errorMsg(nullptr), token(QString()), tok(0), token_type(0), prog(QString()), index(0), data(data),
+      debugFormula(QString())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief eval calculate formula.
+ * @param prog string of formula.
+ * @param errorMsg keep error message.
+ * @return value of formula.
+ */
 qreal Calculator::eval(QString prog, QString *errorMsg)
 {
     this->errorMsg = errorMsg;
@@ -55,6 +71,10 @@ qreal Calculator::eval(QString prog, QString *errorMsg)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief get_exp calculate formula.
+ * @return value of formula.
+ */
 qreal Calculator::get_exp()
 {
     qreal result = 0;
@@ -70,6 +90,10 @@ qreal Calculator::get_exp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief level2 method of addition and subtraction of two terms.
+ * @param result result of operation.
+ */
 void Calculator::level2(qreal *result)
 {
     QChar op;
@@ -85,6 +109,10 @@ void Calculator::level2(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief level3 method of multiplication, division, finding percent.
+ * @param result result of operation.
+ */
 void Calculator::level3(qreal *result)
 {
     QChar op;
@@ -101,6 +129,10 @@ void Calculator::level3(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief level4 method of degree two numbers.
+ * @param result result of operation.
+ */
 void Calculator::level4(qreal *result)
 {
     qreal hold;
@@ -115,6 +147,10 @@ void Calculator::level4(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief level5 method for finding unary plus or minus.
+ * @param result result of operation.
+ */
 void Calculator::level5(qreal *result)
 {
     QChar op;
@@ -133,6 +169,10 @@ void Calculator::level5(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief level6 processing method of the expression in brackets.
+ * @param result result of operation.
+ */
 void Calculator::level6(qreal *result)
 {
     if ((token[0] == '(') && (token_type == DELIMITER))
@@ -149,6 +189,10 @@ void Calculator::level6(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief primitive method of determining the value of a variable by its name.
+ * @param result result of operation.
+ */
 void Calculator::primitive(qreal *result)
 {
     QString str;
@@ -172,6 +216,12 @@ void Calculator::primitive(qreal *result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief arith perform the specified arithmetic. The result is written to the first element.
+ * @param o sign of operation.
+ * @param r first element.
+ * @param h second element.
+ */
 void Calculator::arith(QChar o, qreal *r, qreal *h)
 {
     qreal  t;//, ex;
@@ -203,6 +253,11 @@ void Calculator::arith(QChar o, qreal *r, qreal *h)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief unary method changes the sign.
+ * @param o sign of symbol.
+ * @param r element.
+ */
 void Calculator::unary(QChar o, qreal *r)
 {
     if (o=='-')
@@ -212,6 +267,11 @@ void Calculator::unary(QChar o, qreal *r)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief find_var method is finding variable by name.
+ * @param s name of variable.
+ * @return value of variable.
+ */
 qreal Calculator::find_var(QString s)
 {
     bool ok = false;
@@ -226,6 +286,11 @@ qreal Calculator::find_var(QString s)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief serror report an error
+ * @param error error code
+ */
+// cppcheck-suppress functionStatic
 void Calculator::serror(qint32 error)
 {
     QString e[]=
@@ -242,6 +307,11 @@ void Calculator::serror(qint32 error)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief look_up finding the internal format for the current token in the token table.
+ * @param s name of token.
+ * @return internal number of token.
+ */
 char Calculator::look_up(QString s)
 {
     QString p;
@@ -253,6 +323,11 @@ char Calculator::look_up(QString s)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief isdelim return true if c delimiter.
+ * @param c character.
+ * @return true - delimiter, false - do not delimiter.
+ */
 bool Calculator::isdelim(QChar c)
 {
     if (StrChr(" ;,+-<>/*%^=()", c) || c=='\n' || c=='\r' || c=='\0')
@@ -263,6 +338,11 @@ bool Calculator::isdelim(QChar c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief iswhite checks whether c space or tab.
+ * @param c character.
+ * @return true - space or tab, false - don't space and don't tab.
+ */
 bool Calculator::iswhite(QChar c)
 {
     if (c==' ' || c=='\t')
@@ -276,6 +356,9 @@ bool Calculator::iswhite(QChar c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief get_token return next token.
+ */
 void Calculator::get_token()
 {
     QString *temp;
@@ -371,12 +454,21 @@ void Calculator::get_token()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief StrChr checks whether the character belongs to the line.
+ * @param string string with formula
+ * @param c character.
+ * @return true - belongs to the line, false - don't belongs to the line.
+ */
 bool Calculator::StrChr(QString string, QChar c)
 {
     return string.contains(c, Qt::CaseInsensitive);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief putback returns the readout token back into the flow.
+ */
 void Calculator::putback()
 {
     QString t;

@@ -45,22 +45,22 @@ class VContainer
 {
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
-                       /**
-                        * @brief VContainer create empty container
-                        */
-                        VContainer();
-                       /**
-                        * @brief operator = copy constructor
-                        * @param data container
-                        * @return copy container
-                        */
-                        VContainer &operator=(const VContainer &data);
-                       /**
-                        * @brief VContainer create container from another container
-                        * @param data container
-                        */
-                        VContainer(const VContainer &data);
-                        ~VContainer();
+    /**
+     * @brief VContainer create empty container
+     */
+    VContainer();
+    /**
+     * @brief operator = copy constructor
+     * @param data container
+     * @return copy container
+     */
+    VContainer &operator=(const VContainer &data);
+    /**
+     * @brief VContainer create container from another container
+     * @param data container
+     */
+    VContainer(const VContainer &data);
+    ~VContainer();
     template <typename T>
     void CopyGObject(const VContainer &data, const quint32 &id)
     {
