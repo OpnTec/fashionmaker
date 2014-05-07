@@ -43,7 +43,7 @@ class QmuParserBase;
  * @sa Assign
  * @throw nothrow
  */
-QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reader )
+QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
     :m_pParser( a_Reader.m_pParser ), m_strFormula( a_Reader.m_strFormula ), m_iPos( a_Reader.m_iPos ),
       m_iSynFlags( a_Reader.m_iSynFlags ), m_bIgnoreUndefVar( a_Reader.m_bIgnoreUndefVar ),
       m_pFunDef( a_Reader.m_pFunDef ), m_pPostOprtDef( a_Reader.m_pPostOprtDef ),
@@ -116,7 +116,7 @@ void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader ) Q_DEC
  * @post #m_pParser==a_pParser
  * @param a_pParent Parent parser object of the token reader.
  */
-QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
+QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent ) Q_DECL_NOEXCEPT
     : m_pParser ( a_pParent ), m_strFormula(), m_iPos ( 0 ), m_iSynFlags ( 0 ), m_bIgnoreUndefVar ( false ),
       m_pFunDef ( nullptr ), m_pPostOprtDef ( nullptr ), m_pInfixOprtDef ( nullptr ), m_pOprtDef ( nullptr ),
       m_pConstDef ( nullptr ), m_pStrVarDef ( nullptr ), m_pVarDef ( nullptr ), m_pFactory ( nullptr ),
@@ -144,7 +144,7 @@ QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserTokenReader::token_type& QmuParserTokenReader::SaveBeforeReturn ( const token_type &tok )
+QmuParserTokenReader::token_type& QmuParserTokenReader::SaveBeforeReturn ( const token_type &tok ) Q_DECL_NOEXCEPT
 {
     m_lastTok = tok;
     return m_lastTok;
@@ -163,7 +163,7 @@ void QmuParserTokenReader::AddValIdent ( identfun_type a_pCallback )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserData )
+void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserData ) Q_DECL_NOEXCEPT
 {
     m_pFactory = a_pFactory;
     m_pFactoryData = pUserData;
@@ -176,7 +176,7 @@ void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserDa
  *   Sets the formula position index to zero and set Syntax flags to default for initial formula parsing.
  *   @pre [assert] triggered if a_szFormula==0
  */
-void QmuParserTokenReader::SetFormula ( const QString &a_strFormula )
+void QmuParserTokenReader::SetFormula ( const QString &a_strFormula ) Q_DECL_NOEXCEPT
 {
     m_strFormula = a_strFormula;
     ReInit();
@@ -289,7 +289,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
+void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent ) Q_DECL_NOEXCEPT
 {
     m_pParser       = a_pParent;
     m_pFunDef       = &a_pParent->m_FunDef;

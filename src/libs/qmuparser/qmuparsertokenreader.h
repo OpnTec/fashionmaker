@@ -45,18 +45,18 @@ class QmuParserTokenReader
 private:
     typedef QmuParserToken<qreal, QString> token_type;
 public:
-    QmuParserTokenReader(QmuParserBase *a_pParent);
+    QmuParserTokenReader(QmuParserBase *a_pParent) Q_DECL_NOEXCEPT;
     QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const Q_DECL_NOEXCEPT;
 
     void           AddValIdent(identfun_type a_pCallback);
-    void           SetVarCreator(facfun_type a_pFactory, void *pUserData);
-    void           SetFormula(const QString &a_strFormula);
-    void           SetArgSep(char_type cArgSep);
+    void           SetVarCreator(facfun_type a_pFactory, void *pUserData) Q_DECL_NOEXCEPT;
+    void           SetFormula(const QString &a_strFormula) Q_DECL_NOEXCEPT;
+    void           SetArgSep(char_type cArgSep) Q_DECL_NOEXCEPT;
     int            GetPos() const Q_DECL_NOEXCEPT;
     const QString& GetExpr() const Q_DECL_NOEXCEPT;
-    varmap_type&   GetUsedVar();
-    QChar          GetArgSep() const;
-    void           IgnoreUndefVar(bool bIgnore);
+    varmap_type&   GetUsedVar() Q_DECL_NOEXCEPT;
+    QChar          GetArgSep() const Q_DECL_NOEXCEPT;
+    void           IgnoreUndefVar(bool bIgnore) Q_DECL_NOEXCEPT;
     void           ReInit() Q_DECL_NOEXCEPT;
     token_type     ReadNextToken();
 private:
@@ -88,11 +88,11 @@ private:
         noANY     = ~0       ///< All of he above flags set
     };
 
-    QmuParserTokenReader(const QmuParserTokenReader &a_Reader);
+    QmuParserTokenReader(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
     QmuParserTokenReader& operator=(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
     void            Assign(const QmuParserTokenReader &a_Reader) Q_DECL_NOEXCEPT;
 
-    void            SetParent(QmuParserBase *a_pParent);
+    void            SetParent(QmuParserBase *a_pParent) Q_DECL_NOEXCEPT;
     int             ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const Q_DECL_NOEXCEPT;
     int             ExtractOperatorToken(QString &a_sTok, int a_iPos) const;
 
@@ -110,7 +110,7 @@ private:
     bool            IsString(token_type &a_Tok);
     void Q_NORETURN Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
 
-    token_type& SaveBeforeReturn(const token_type &tok);
+    token_type& SaveBeforeReturn(const token_type &tok) Q_DECL_NOEXCEPT;
 
     QmuParserBase     *m_pParser;
     QString            m_strFormula;
@@ -163,7 +163,7 @@ inline const QString& QmuParserTokenReader::GetExpr() const Q_DECL_NOEXCEPT
 /**
  * @brief Return a map containing the used variables only.
  */
-inline varmap_type& QmuParserTokenReader::GetUsedVar()
+inline varmap_type& QmuParserTokenReader::GetUsedVar() Q_DECL_NOEXCEPT
 {
     return m_UsedVar;
 }
@@ -177,19 +177,19 @@ inline varmap_type& QmuParserTokenReader::GetUsedVar()
  * Those function should return a complete list of variables including
  * those the are not defined by the time of it's call.
  */
-inline void QmuParserTokenReader::IgnoreUndefVar ( bool bIgnore )
+inline void QmuParserTokenReader::IgnoreUndefVar ( bool bIgnore ) Q_DECL_NOEXCEPT
 {
     m_bIgnoreUndefVar = bIgnore;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void QmuParserTokenReader::SetArgSep ( char_type cArgSep )
+inline void QmuParserTokenReader::SetArgSep ( char_type cArgSep ) Q_DECL_NOEXCEPT
 {
     m_cArgSep = cArgSep;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QChar QmuParserTokenReader::GetArgSep() const
+inline QChar QmuParserTokenReader::GetArgSep() const Q_DECL_NOEXCEPT
 {
     return m_cArgSep;
 }

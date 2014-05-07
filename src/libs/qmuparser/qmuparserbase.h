@@ -65,7 +65,7 @@ public:
     qreal              Eval() const;
     qreal*             Eval(int &nStackSize) const;
     void               Eval(qreal *results, int nBulkSize) const;
-    int                GetNumResults() const;
+    int                GetNumResults() const Q_DECL_NOEXCEPT;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
     void               SetDecSep(char_type cDecSep);
@@ -92,15 +92,15 @@ public:
     void               ClearOprt() Q_DECL_NOEXCEPT;
     void               RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT;
     const varmap_type& GetUsedVar() const;
-    const varmap_type& GetVar() const;
-    const valmap_type& GetConst() const;
+    const varmap_type& GetVar() const Q_DECL_NOEXCEPT;
+    const valmap_type& GetConst() const Q_DECL_NOEXCEPT;
     const QString&     GetExpr() const;
     const funmap_type& GetFunDef() const Q_DECL_NOEXCEPT;
     static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
-    static const QStringList& GetOprtDef();
-    void               DefineNameChars(const QString &a_szCharset);
-    void               DefineOprtChars(const QString &a_szCharset);
-    void               DefineInfixOprtChars(const QString &a_szCharset);
+    static const QStringList& GetOprtDef() Q_DECL_NOEXCEPT;
+    void               DefineNameChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
+    void               DefineOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
+    void               DefineInfixOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
     const QString&     ValidNameChars() const;
     const QString&     ValidOprtChars() const;
     const QString&     ValidInfixOprtChars() const;
@@ -234,7 +234,7 @@ private:
     mutable int m_nFinalResultIdx;
 
     void               Assign(const QmuParserBase &a_Parser);
-    void               InitTokenReader() Q_DECL_NOEXCEPT;
+    void               InitTokenReader();
     void               ReInit() const Q_DECL_NOEXCEPT;
     void               AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
                                    funmap_type &a_Storage, const QString &a_szCharSet );
@@ -262,9 +262,8 @@ private:
  * Create new token reader object and submit pointers to function, operator, constant and variable definitions.
  *
  * @post m_pTokenReader.get()!=0
- * @throw nothrow
  */
-inline void QmuParserBase::InitTokenReader() Q_DECL_NOEXCEPT
+inline void QmuParserBase::InitTokenReader()
 {
     m_pTokenReader.reset(new token_reader_type(this));
 }
@@ -298,7 +297,7 @@ inline void QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData
  * @brief Get the default symbols used for the built in operators.
  * @sa c_DefaultOprt
  */
-inline const QStringList &QmuParserBase::GetOprtDef()
+inline const QStringList &QmuParserBase::GetOprtDef() Q_DECL_NOEXCEPT
 {
     return c_DefaultOprt;
 }
@@ -307,7 +306,7 @@ inline const QStringList &QmuParserBase::GetOprtDef()
 /**
  * @brief Define the set of valid characters to be used in names of functions, variables, constants.
  */
-inline void QmuParserBase::DefineNameChars(const QString &a_szCharset)
+inline void QmuParserBase::DefineNameChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
 {
     m_sNameChars = a_szCharset;
 }
@@ -316,7 +315,7 @@ inline void QmuParserBase::DefineNameChars(const QString &a_szCharset)
 /**
  * @brief Define the set of valid characters to be used in names of binary operators and postfix operators.
  */
-inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset)
+inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
 {
     m_sOprtChars = a_szCharset;
 }
@@ -325,7 +324,7 @@ inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset)
 /**
  * @brief Define the set of valid characters to be used in names of infix operators.
  */
-inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
+inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
 {
     m_sInfixOprtChars = a_szCharset;
 }
@@ -334,7 +333,7 @@ inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
 /**
  * @brief Return a map containing the used variables only.
  */
-inline const varmap_type &QmuParserBase::GetVar() const
+inline const varmap_type &QmuParserBase::GetVar() const Q_DECL_NOEXCEPT
 {
     return m_VarDef;
 }
@@ -343,7 +342,7 @@ inline const varmap_type &QmuParserBase::GetVar() const
 /**
  * @brief Return a map containing all parser constants.
  */
-inline const valmap_type &QmuParserBase::GetConst() const
+inline const valmap_type &QmuParserBase::GetConst() const Q_DECL_NOEXCEPT
 {
     return m_ConstDef;
 }
@@ -392,7 +391,7 @@ inline bool QmuParserBase::HasBuiltInOprt() const Q_DECL_NOEXCEPT
  * value. This function returns the number of available results.
  */
 // cppcheck-suppress unusedFunction
-inline int QmuParserBase::GetNumResults() const
+inline int QmuParserBase::GetNumResults() const Q_DECL_NOEXCEPT
 {
     return m_nFinalResultIdx;
 }

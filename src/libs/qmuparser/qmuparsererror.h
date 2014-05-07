@@ -100,7 +100,7 @@ public:
     QmuParserErrorMsg();
     ~QmuParserErrorMsg();
 
-    static const QmuParserErrorMsg& Instance();
+    static const QmuParserErrorMsg& Instance() Q_DECL_NOEXCEPT;
     QString operator[] ( unsigned a_iIdx ) const;
 
 private:
@@ -111,7 +111,7 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
+inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance() Q_DECL_NOEXCEPT
 {
     return m_Instance;
 }
@@ -141,12 +141,12 @@ public:
     QmuParserError& operator= ( const QmuParserError &a_Obj );
     virtual ~QmuParserError() noexcept (true){}
 
-    void           SetFormula ( const QString &a_strFormula );
-    const QString& GetExpr() const;
-    const QString& GetMsg() const;
-    int            GetPos() const;
-    const QString& GetToken() const;
-    EErrorCodes    GetCode() const;
+    void           SetFormula ( const QString &a_strFormula ) Q_DECL_NOEXCEPT;
+    const QString& GetExpr() const Q_DECL_NOEXCEPT;
+    const QString& GetMsg() const Q_DECL_NOEXCEPT;
+    int            GetPos() const Q_DECL_NOEXCEPT;
+    const QString& GetToken() const Q_DECL_NOEXCEPT;
+    EErrorCodes    GetCode() const Q_DECL_NOEXCEPT;
     virtual void   raise() const;
     virtual QmuParserError *clone() const;
 private:
@@ -186,7 +186,7 @@ inline QmuParserError *QmuParserError::clone() const
 /**
  * @brief Set the expression related to this error.
  */
-inline void QmuParserError::SetFormula ( const QString &a_strFormula )
+inline void QmuParserError::SetFormula ( const QString &a_strFormula ) Q_DECL_NOEXCEPT
 {
     m_sExpr = a_strFormula;
 }
@@ -195,7 +195,7 @@ inline void QmuParserError::SetFormula ( const QString &a_strFormula )
 /**
  * @brief gets the expression related tp this error.
  */
-inline const QString& QmuParserError::GetExpr() const
+inline const QString& QmuParserError::GetExpr() const Q_DECL_NOEXCEPT
 {
     return m_sExpr;
 }
@@ -204,7 +204,7 @@ inline const QString& QmuParserError::GetExpr() const
 /**
  * @brief Returns the message string for this error.
  */
-inline const QString& QmuParserError::GetMsg() const
+inline const QString& QmuParserError::GetMsg() const Q_DECL_NOEXCEPT
 {
     return m_sMsg;
 }
@@ -215,7 +215,7 @@ inline const QString& QmuParserError::GetMsg() const
  *
  * If the error is not related to a distinct position this will return -1
  */
-inline int QmuParserError::GetPos() const
+inline int QmuParserError::GetPos() const Q_DECL_NOEXCEPT
 {
     return m_iPos;
 }
@@ -224,7 +224,7 @@ inline int QmuParserError::GetPos() const
 /**
  * @brief Return string related with this token (if available).
  */
-inline const QString& QmuParserError::GetToken() const
+inline const QString& QmuParserError::GetToken() const Q_DECL_NOEXCEPT
 {
     return m_sTok;
 }
@@ -233,7 +233,7 @@ inline const QString& QmuParserError::GetToken() const
 /**
  * @brief Return the error code.
  */
-inline EErrorCodes QmuParserError::GetCode() const
+inline EErrorCodes QmuParserError::GetCode() const Q_DECL_NOEXCEPT
 {
     return m_iErrc;
 }

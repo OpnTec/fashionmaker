@@ -40,7 +40,7 @@ namespace qmu
  * @brief Bytecode default constructor.
  */
 // cppcheck-suppress uninitMemberVar
-QmuParserByteCode::QmuParserByteCode()
+QmuParserByteCode::QmuParserByteCode() Q_DECL_NOEXCEPT
     :m_iStackPos(0), m_iMaxStackSize(0), m_vRPN(), m_bEnableOptimizer(true)
 {
     m_vRPN.reserve(50);
@@ -53,7 +53,7 @@ QmuParserByteCode::QmuParserByteCode()
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
 // cppcheck-suppress uninitMemberVar
-QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
+QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT
     :m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
       m_bEnableOptimizer(true)
 {
@@ -67,7 +67,7 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
 // cppcheck-suppress operatorEqVarError
-QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
+QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT
 {
     Assign(a_ByteCode);
     return *this;
@@ -79,7 +79,7 @@ QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteC
  *
  * @throw nowthrow
  */
-void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
+void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT
 {
     if (this==&a_ByteCode)
     {
@@ -472,7 +472,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
+void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt) Q_DECL_NOEXCEPT
 {
     SToken tok;
     tok.Cmd = a_Oprt;
@@ -491,7 +491,7 @@ void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
  *
  * @sa  ParserToken::ECmdCode
  */
-void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
+void QmuParserByteCode::AddAssignOp(qreal *a_pVar) Q_DECL_NOEXCEPT
 {
     --m_iStackPos;
 
@@ -508,7 +508,7 @@ void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
  * @param a_iArgc Number of arguments, negative numbers indicate multiarg functions.
  * @param a_pFun Pointer to function callback.
  */
-void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
+void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT
 {
     if (a_iArgc>=0)
     {
@@ -535,7 +535,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
  * @param a_iArgc Number of arguments, negative numbers indicate multiarg functions.
  * @param a_pFun Pointer to function callback.
  */
-void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
+void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT
 {
     m_iStackPos = m_iStackPos - a_iArgc + 1;
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
