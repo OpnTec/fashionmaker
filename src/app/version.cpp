@@ -32,6 +32,7 @@ extern const int MAJOR_VERSION = 0;
 extern const int MINOR_VERSION = 2;
 extern const int DEBUG_VERSION = 2;
 
-extern const QString APP_VERSION(QStringLiteral("%1.%2.%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION));
+extern const QString APP_VERSION(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION)
+                                 .arg(LOCAL_REVISION));
 extern const QString WARRANTY("The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE "
                               "WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.");
