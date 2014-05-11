@@ -121,6 +121,7 @@ public slots:
     /**
      * @brief LineAngles show variable angles of lines
      */
+    // cppcheck-suppress unusedFunction
     void          LineAngles();
     /**
      * @brief RadiusChanged after change formula of radius calculate value and show result

@@ -48,6 +48,7 @@ public:
     qint64  line() const;
     qint64  column() const;
 protected:
+    // cppcheck-suppress unusedFunction
     virtual void handleMessage(QtMsgType type, const QString &description,
                                const QUrl &identifier, const QSourceLocation &sourceLocation)
     {

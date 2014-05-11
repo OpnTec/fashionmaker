@@ -87,6 +87,7 @@ private:
     static void arith(QChar o, qreal *r, qreal *h);
     static void unary(QChar o, qreal *r);
     qreal       find_var(QString s);
+    // cppcheck-suppress functionStatic
     void        serror(qint32 error);
     static char look_up(QString s);
     static bool isdelim(QChar c);

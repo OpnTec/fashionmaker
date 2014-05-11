@@ -110,6 +110,7 @@ QString VSpline::name() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const
 {
     QVector<qreal> px;
@@ -588,6 +589,7 @@ QPainterPath VSpline::GetPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                        qreal kAsm2, qreal kCurve)
 {

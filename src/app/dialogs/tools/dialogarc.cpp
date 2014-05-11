@@ -163,6 +163,7 @@ void DialogArc::PutF2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void DialogArc::LineAngles()
 {
     ShowLineAngles();

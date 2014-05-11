@@ -290,7 +290,6 @@ qreal Calculator::find_var(QString s)
  * @brief serror report an error
  * @param error error code
  */
-// cppcheck-suppress functionStatic
 void Calculator::serror(qint32 error)
 {
     QString e[]=

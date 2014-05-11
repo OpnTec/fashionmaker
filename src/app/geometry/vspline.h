@@ -137,6 +137,7 @@ public:
      * @param intersectionPoint intersection point.
      * @return result intersection.
      */
+    // cppcheck-suppress unusedFunction
     QLineF::IntersectType CrossingSplLine(const QLineF &line, QPointF *intersectionPoint ) const;
     qreal           LengthT(qreal t) const;
     /**
@@ -171,6 +172,7 @@ public:
      * @param kCurve coefficient of curvature spline.
      * @return
      */
+    // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
     /**

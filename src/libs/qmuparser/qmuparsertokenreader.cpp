@@ -568,7 +568,7 @@ bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
             {
                 qDebug() << "\n  "
                          << "  Code:" << e.GetCode() << "(" << e.GetMsg() << ")";
-                throw e;
+                throw;
             }
         }
 
