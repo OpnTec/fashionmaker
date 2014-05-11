@@ -14,7 +14,7 @@
    <string>Valentina</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../share/resources/icon.qrc">
+   <iconset resource="share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -76,7 +76,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/segment.png</normaloff>:/icon/32x32/segment.png</iconset>
           </property>
           <property name="iconSize">
@@ -102,7 +102,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
           </property>
           <property name="iconSize">
@@ -128,7 +128,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/point_of_contact.png</normaloff>:/icon/32x32/point_of_contact.png</iconset>
           </property>
           <property name="iconSize">
@@ -154,7 +154,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/bisector.png</normaloff>:/icon/32x32/bisector.png</iconset>
           </property>
           <property name="iconSize">
@@ -180,7 +180,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/normal.png</normaloff>:/icon/32x32/normal.png</iconset>
           </property>
           <property name="iconSize">
@@ -206,7 +206,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
           </property>
           <property name="iconSize">
@@ -232,7 +232,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/height.png</normaloff>:/icon/32x32/height.png</iconset>
           </property>
           <property name="iconSize">
@@ -258,7 +258,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/triangle.png</normaloff>:/icon/32x32/triangle.png</iconset>
           </property>
           <property name="iconSize">
@@ -281,7 +281,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/point_of_intersection.png</normaloff>:/icon/32x32/point_of_intersection.png</iconset>
           </property>
           <property name="iconSize">
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>137</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -331,7 +331,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/line.png</normaloff>:/icon/32x32/line.png</iconset>
           </property>
           <property name="iconSize">
@@ -357,7 +357,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/intersect.png</normaloff>:/icon/32x32/intersect.png</iconset>
           </property>
           <property name="iconSize">
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>137</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -407,7 +407,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/spline.png</normaloff>:/icon/32x32/spline.png</iconset>
           </property>
           <property name="iconSize">
@@ -433,7 +433,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/splinePath.png</normaloff>:/icon/32x32/splinePath.png</iconset>
           </property>
           <property name="iconSize">
@@ -459,7 +459,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/splinePath_cut_point.png</normaloff>:/icon/32x32/splinePath_cut_point.png</iconset>
           </property>
           <property name="iconSize">
@@ -485,7 +485,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/spline_cut_point.png</normaloff>:/icon/32x32/spline_cut_point.png</iconset>
           </property>
           <property name="iconSize">
@@ -535,7 +535,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/arc.png</normaloff>:/icon/32x32/arc.png</iconset>
           </property>
           <property name="iconSize">
@@ -558,7 +558,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/arc_cut.png</normaloff>:/icon/32x32/arc_cut.png</iconset>
           </property>
           <property name="iconSize">
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>137</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -605,7 +605,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/new_detail.png</normaloff>:/icon/32x32/new_detail.png</iconset>
           </property>
           <property name="iconSize">
@@ -628,7 +628,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/union.png</normaloff>:/icon/32x32/union.png</iconset>
           </property>
           <property name="iconSize">
@@ -841,7 +841,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/draw.png</normaloff>:/icon/32x32/draw.png</iconset>
    </property>
    <property name="text">
@@ -862,7 +862,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/kontur.png</normaloff>:/icon/32x32/kontur.png</iconset>
    </property>
    <property name="text">
@@ -883,7 +883,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
    </property>
    <property name="text">
@@ -895,7 +895,7 @@
   </action>
   <action name="actionNewDraw">
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/new_draw.png</normaloff>:/icon/32x32/new_draw.png</iconset>
    </property>
    <property name="text">
@@ -910,7 +910,7 @@
   </action>
   <action name="actionOptionDraw">
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
@@ -925,7 +925,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/table.png</normaloff>:/icon/32x32/table.png</iconset>
    </property>
    <property name="text">
@@ -943,7 +943,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/history.png</normaloff>:/icon/32x32/history.png</iconset>
    </property>
    <property name="text">
@@ -955,7 +955,7 @@
   </action>
   <action name="actionLayout">
    <property name="icon">
-    <iconset resource="../share/resources/icon.qrc">
+    <iconset resource="share/resources/icon.qrc">
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
@@ -1016,7 +1016,7 @@
   <tabstop>toolButtonNewDetail</tabstop>
  </tabstops>
  <resources>
-  <include location="../share/resources/icon.qrc"/>
+  <include location="share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

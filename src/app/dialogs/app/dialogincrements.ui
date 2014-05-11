@@ -20,7 +20,7 @@
    <string>Increments</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../share/resources/icon.qrc">
+   <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -115,8 +115,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>939</width>
-            <height>411</height>
+            <width>559</width>
+            <height>82</height>
            </rect>
           </property>
           <attribute name="label">
@@ -271,8 +271,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>939</width>
-            <height>411</height>
+            <width>98</width>
+            <height>96</height>
            </rect>
           </property>
           <attribute name="label">
@@ -599,7 +599,7 @@
   <tabstop>tableWidgetArcs</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../share/resources/icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

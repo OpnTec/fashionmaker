@@ -55,7 +55,7 @@
           <string>Graduation</string>
          </property>
          <property name="icon">
-          <iconset resource="../../../share/resources/icon.qrc">
+          <iconset resource="../../share/resources/icon.qrc">
            <normaloff>:/icon/Graduation.png</normaloff>:/icon/Graduation.png</iconset>
          </property>
          <property name="iconSize">
@@ -101,7 +101,7 @@
           <string>Individual</string>
          </property>
          <property name="icon">
-          <iconset resource="../../../share/resources/icon.qrc">
+          <iconset resource="../../share/resources/icon.qrc">
            <normaloff>:/icon/individual.png</normaloff>:/icon/individual.png</iconset>
          </property>
          <property name="iconSize">
@@ -133,7 +133,7 @@
   <tabstop>toolButtonStandard</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../share/resources/icon.qrc"/>
+  <include location="../../share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
