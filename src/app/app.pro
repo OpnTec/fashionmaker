@@ -64,7 +64,9 @@ RESOURCES += \
     share/resources/theme.qrc \
     share/resources/schema.qrc
 
-OTHER_FILES += share/resources/valentina.rc \
+OTHER_FILES += \
+    share/resources/valentina.rc \
+    share/resources/valentina.manifest \
     share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina.ts \

@@ -1,5 +1,12 @@
 IDI_ICON1               ICON    DISCARDABLE     "icon/64x64/icon64x64.ico"
 
+// XP-style Common Dialogs
+// If you want XP mode versions then you'll have to add a resource file that
+// contains a reference to a magic manifest file which specifies that your
+// app using v6 of the MS common controls library.
+// http://qtcreator.blogspot.it/2009/10/xp-style-common-dialogs.html
+1                        24     DISCARDABLE     "valentina.manifest"
+
 #include <windows.h>
 #include "../../version.h"
 
