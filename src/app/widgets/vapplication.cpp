@@ -35,6 +35,7 @@
 
 #include <QMessageBox>
 #include <QDebug>
+#include <QDir>
 
 const qreal VApplication::PrintDPI = 96.0;
 
@@ -146,7 +147,15 @@ QString VApplication::pathToTables() const
             #ifdef QT_DEBUG
                 return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
             #else
-                return QStringLiteral("/usr/share/valentina/tables/individual");
+                QDir dir(QApplication::applicationDirPath() + QStringLiteral("/tables/individual"));
+                if(dir.exist())
+                {
+                    return dir.absolutePath();
+                }
+                else
+                {
+                    return QStringLiteral("/usr/share/valentina/tables/individual");
+                }
             #endif
         #endif
     }
@@ -158,7 +167,15 @@ QString VApplication::pathToTables() const
             #ifdef QT_DEBUG
                 return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
             #else
-                return QStringLiteral("/usr/share/valentina/tables/standard");
+                QDir dir(QApplication::applicationDirPath() + QStringLiteral("/tables/standard"));
+                if(dir.exist())
+                {
+                    return dir.absolutePath();
+                }
+                else
+                {
+                    return QStringLiteral("/usr/share/valentina/tables/standard");
+                }
             #endif
         #endif
     }
@@ -172,10 +189,18 @@ QString VApplication::translationsPath() const
 #else
 #ifdef QT_DEBUG
     return QApplication::applicationDirPath() + QStringLiteral("/translations");
-        #else
+    #else
+        QDir dir(QApplication::applicationDirPath() + QStringLiteral("/translations"));
+        if(dir.exist())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
             return QStringLiteral("/usr/share/valentina/translations");
-        #endif
+        }
     #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
