@@ -44,9 +44,14 @@ const qreal VApplication::PrintDPI = 96.0;
 //---------------------------------------------------------------------------------------------------------------------
 VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
-      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0)
+      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
+      guiText(QMap<QString, VTranslation>()), description(QMap<QString, VTranslation>()),
+      variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>())
 {
     InitLineWidth();
+    InitMeasurements();
+    InitVariables();
+    InitFunctions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,6 +227,282 @@ void VApplication::InitLineWidth()
             break;
     }
     _widthHairLine = _widthMainLine/3.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitMeasurements()
+{
+    // head_and_neck
+    InitMeasurement(headGirth, QStringLiteral("Head girth"), QStringLiteral("Around fullest part of Head"));
+
+    InitMeasurement(midNeckGirth, QStringLiteral("Mid-neck girth"), QStringLiteral("Around middle part of Neck"));
+
+    InitMeasurement(neckBaseGirth, QStringLiteral("Neck Base girth"), QStringLiteral("Around Neck at base"));
+
+    InitMeasurement(headAndNeckLength, QStringLiteral("Head and Neck length"),
+                    QStringLiteral("Vertical Distance from Crown to Nape"));
+
+    // torso
+    InitMeasurement(centerFrontWaistLength, QStringLiteral("Front Center length"),
+                    QStringLiteral("Front Neck Center over tape at Bustline to Front Waist Center"));
+
+    InitMeasurement(centerBackWaistLength, QStringLiteral("Back Center length"),
+                    QStringLiteral("Back Neck Center to Back Waist Center"));
+
+    InitMeasurement(shoulderLength, QStringLiteral("Shoulder length"), QStringLiteral("NeckPoint to ShoulderTip"));
+
+    InitMeasurement(sideWaistLength, QStringLiteral("Side Waist length"), QStringLiteral("Armpit to Waist side"));
+
+    InitMeasurement(trunkLength, QStringLiteral("Trunk length"),
+        QStringLiteral("Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point"));
+
+    InitMeasurement(shoulderGirth, QStringLiteral("Shoulder girth"),
+             QStringLiteral("Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides"));
+
+    InitMeasurement(upperChestGirth, QStringLiteral("Upper Chest girth"),
+    QStringLiteral("Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor"
+                   " across front chest"));
+
+    InitMeasurement(bustGirth, QStringLiteral("Bust girth"),
+                    QStringLiteral("Around fullest part of Bust, parallel to floor"));
+
+    InitMeasurement(underBustGirth, QStringLiteral("Under Bust girth"),
+                    QStringLiteral("Around Chest below the Bust, parallel to floor"));
+
+    InitMeasurement(waistGirth, QStringLiteral("Waist girth"),
+    QStringLiteral("Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not"
+                   " usually parallel to floor for front waist or back waist."));
+
+    InitMeasurement(highHipGirth, QStringLiteral("HighHip girth"), QStringLiteral("Around HighHip, parallel to floor"));
+
+    InitMeasurement(hipGirth, QStringLiteral("Hip girth"), QStringLiteral("Around Hip, parallel to floor"));
+
+    InitMeasurement(upperFrontChestWidth, QStringLiteral("Front Upper Chest width"),
+                    QStringLiteral("Across Front UpperChest, smallest width from armscye to armscye"));
+
+    InitMeasurement(frontChestWidth, QStringLiteral("Front Chest width"),
+                    QStringLiteral("Across Front Chest, from armfold to armfold"));
+
+    InitMeasurement(acrossFrontShoulderWidth, QStringLiteral("Front Across Shoulder width"),
+                    QStringLiteral("From ShoulderTip to ShoulderTip, across Front"));
+
+    InitMeasurement(acrossBackShoulderWidth, QStringLiteral("Back Across Shoulder width"),
+                    QStringLiteral("From ShoulderTip to ShoulderTip, across Back"));
+
+    InitMeasurement(acrossBackShoulderWidth, QStringLiteral("Back Upper Chest width"),
+                    QStringLiteral("Across Back UpperChest, smallest width from armscye to armscye"));
+
+    InitMeasurement(backWidth, QStringLiteral("Back Chest width"),
+                    QStringLiteral("Across Back Chest, from armfold to armfold"));
+
+    InitMeasurement(bustpointToBustpoint, QStringLiteral("BustPoint to BustPoint"),
+                    QStringLiteral("Distance between BustPoints, across Chest"));
+
+    InitMeasurement(halterBustpointToBustpoint, QStringLiteral("Halter Bustpoint to Bustpoint"),
+                    QStringLiteral("Distance from Bustpoint, behind neck, down to Bustpoint"));
+
+    InitMeasurement(neckToBustpoint, QStringLiteral("NeckPoint to BustPoint"),
+                    QStringLiteral("From NeckPoint to BustPoint"));
+
+    InitMeasurement(crotchLength, QStringLiteral("Crotch length"),
+                    QStringLiteral("From Front Waist Center, down to crotch, up to Back Waist Center"));
+
+    InitMeasurement(riseHeight, QStringLiteral("Rise height"),
+                    QStringLiteral("Sit on hard chair, measure from side waist straight down to chair bottom"));
+
+    InitMeasurement(shoulderDrop, QStringLiteral("Shoulder Drop"),
+                    QStringLiteral("Vertical Distance from NeckPoint level to ShoulderTip level"));
+
+    InitMeasurement(shoulderSlopeDegrees, QStringLiteral("Shoulder Slope degrees"),
+                    QStringLiteral("Degrees of angle from NeckPoint to ShoulderTip – requires goniometer"));
+
+    InitMeasurement(frontShoulderSlopeLength, QStringLiteral("Front Shoulder Balance"),
+                    QStringLiteral("ShoulderTip to Front Waist Center"));
+
+    InitMeasurement(backShoulderSlopeLength, QStringLiteral("Back Shoulder Balance"),
+                    QStringLiteral("ShoulderTip to Back Waist Center"));
+
+    InitMeasurement(frontShoulderToWaistLength, QStringLiteral("Front Full Length"),
+                    QStringLiteral("NeckPoint straight down front chest to Waistline"));
+
+    InitMeasurement(backShoulderToWaistLength, QStringLiteral("Back Full Length"),
+                    QStringLiteral("Back NeckPoint straight down back chest to Waistline"));
+
+    InitMeasurement(frontNeckArc, QStringLiteral("Front Neck arc"),
+                    QStringLiteral("NeckPoint to NeckPoint through Front Neck Center"));
+
+    InitMeasurement(backNeckArc, QStringLiteral("Back Neck arc"), QStringLiteral("NeckPoint to NeckPoint across Nape"));
+
+    InitMeasurement(frontUpperBustArc, QStringLiteral("front_upper-bust_arc"), QStringLiteral("front_upper-bust_arc"));
+
+    InitMeasurement(backUpperBustArc, QStringLiteral("Back UpperBust arc"),
+                    QStringLiteral("Back UpperBust side to side"));
+
+    InitMeasurement(frontWaistArc, QStringLiteral("Front Waist arc"), QStringLiteral("Front Waist side to side"));
+
+    InitMeasurement(backWaistArc, QStringLiteral("Back Waist arc"), QStringLiteral("Back Waist side to side"));
+
+    InitMeasurement(frontUpperHipArc, QStringLiteral("Front UpperHip arc"),
+                    QStringLiteral("Front UpperHip side to side"));
+
+    InitMeasurement(backUpperHipArc, QStringLiteral("Back UpperHip arc"), QStringLiteral("Back UpperHip side to side"));
+
+    InitMeasurement(frontHipArc, QStringLiteral("Front Hip arc"), QStringLiteral("Front Hip side to side"));
+
+    InitMeasurement(backHipArc, QStringLiteral("Back Hip arc"), QStringLiteral("Back Hip side to side"));
+
+    InitMeasurement(chestSlope, QStringLiteral("Chest Balance"), QStringLiteral("NeckPoint to Front ArmfoldPoint"));
+
+    InitMeasurement(backSlope, QStringLiteral("Back Balance"), QStringLiteral("NeckPoint to Back ArmfoldPoint"));
+
+    InitMeasurement(frontWaistSlope, QStringLiteral("Front Waist Balance"),
+                    QStringLiteral("NeckPoint across Front Chest to Waist side"));
+
+    InitMeasurement(backWaistSlope, QStringLiteral("Back Waist Balance"),
+                    QStringLiteral("NeckPoint across Back Chest to Waist side"));
+
+    InitMeasurement(frontNeckToUpperChestHeight, QStringLiteral("Front UpperChest height"),
+                    QStringLiteral("Front Neck Center straight down to UpperChest line"));
+
+    InitMeasurement(frontNeckToBustHeight, QStringLiteral("Bust height"),
+                    QStringLiteral("Front Neck Center straight down to Bust line"));
+
+    // arm
+    InitMeasurement(armscyeGirth, QStringLiteral("Armscye Girth"), QStringLiteral("Around Armscye"));
+
+    InitMeasurement(elbowGirth, QStringLiteral("Elbow Girth"), QStringLiteral("Around Elbow with elbow bent"));
+
+    InitMeasurement(upperArmGirth, QStringLiteral("Upperarm Girth"), QStringLiteral("Around UpperArm"));
+
+    InitMeasurement(wristGirth, QStringLiteral("Wrist girth"), QStringLiteral("Around Wrist"));
+
+    InitMeasurement(scyeDepth, QStringLiteral("Armscye depth"),
+                    QStringLiteral("Nape straight down to UnderBust line (same as Back UpperBust height)"));
+
+    InitMeasurement(shoulderAndArmLength, QStringLiteral("Shoulder and Arm length"),
+                    QStringLiteral("NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip"));
+
+    InitMeasurement(underarmLength, QStringLiteral("Underarm length"),
+                    QStringLiteral("Armpit to Wrist, with arm straight and hanging at side"));
+
+    InitMeasurement(cervicaleToWristLength, QStringLiteral("Nape to wrist length"),
+                    QStringLiteral("Nape to Wrist, with elbow bent and hand on hip"));
+
+    InitMeasurement(shoulderToElbowLength, QStringLiteral("Elbow length"),
+                    QStringLiteral("ShoulderTip to Elbow, with elbow bent and hand on hip"));
+
+    InitMeasurement(armLength, QStringLiteral("Arm length"),
+                    QStringLiteral("ShoulderTip to Wrist, with elbow bent and hand on hip"));
+
+    // hand
+    InitMeasurement(handWidth, QStringLiteral("Hand width"), QStringLiteral("Hand side to side"));
+
+    InitMeasurement(handLength, QStringLiteral("Hand length"), QStringLiteral("Hand Middle Finger tip to wrist"));
+
+    InitMeasurement(handGirth, QStringLiteral("Hand girth"), QStringLiteral("Around Hand"));
+
+    // leg
+    InitMeasurement(thighGirth, QStringLiteral("Thigh girth"), QStringLiteral("Around Thigh"));
+
+    InitMeasurement(midThighGirth, QStringLiteral("Midthigh girth"), QStringLiteral("Around MidThigh"));
+
+    InitMeasurement(kneeGirth, QStringLiteral("Knee girth"), QStringLiteral("Around Knee"));
+
+    InitMeasurement(calfGirth, QStringLiteral("Calf girth"), QStringLiteral("Around Calf"));
+
+    InitMeasurement(ankleGirth, QStringLiteral("Ankle girth"), QStringLiteral("Around Ankle"));
+
+    InitMeasurement(kneeHeight, QStringLiteral("Knee height"), QStringLiteral("Knee to Floor"));
+
+    InitMeasurement(ankleHeight, QStringLiteral("Ankle height"), QStringLiteral("Ankle to Floor"));
+
+    // foot
+    InitMeasurement(footWidth, QStringLiteral("Foot width"), QStringLiteral("Widest part of Foot side to side"));
+
+    InitMeasurement(footLength, QStringLiteral("Foot length"),
+                    QStringLiteral("Tip of Longest Toe straight to back of heel"));
+
+    // heights
+    InitMeasurement(height, QStringLiteral("Total Height"), QStringLiteral("Top of head to floor"));
+
+    InitMeasurement(cervicaleHeight, QStringLiteral("Nape height"), QStringLiteral("Nape to Floor"));
+
+    InitMeasurement(cervicaleToKneeHeight, QStringLiteral("Nape to knee height"), QStringLiteral("Nape to Knee"));
+
+    InitMeasurement(waistHeight, QStringLiteral("Waist height"), QStringLiteral("Waist side to floor"));
+
+    InitMeasurement(highHipHeight, QStringLiteral("HighHip height"), QStringLiteral("HighHip side to Floor"));
+
+    InitMeasurement(hipHeight, QStringLiteral("Hip height"), QStringLiteral("Hip side to Floor"));
+
+    InitMeasurement(waistToHipHeight, QStringLiteral("Waist to Hip height"), QStringLiteral("Waist side to Hip"));
+
+    InitMeasurement(waistToKneeHeight, QStringLiteral("Waist to Knee height"), QStringLiteral("Waist side to Knee"));
+
+    InitMeasurement(crotchHeight, QStringLiteral("Crotch height/Inseam"),
+                    QStringLiteral("Crotch to Floor along inside leg"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitMeasurement(const QString &measurement, const QString &guiTxt, const QString &desc)
+{
+    const QString context = QStringLiteral("Measurements");
+    const QString disambiguation1 = QStringLiteral("Short measurement name. Don't use math symbols in name!!!!");
+    const QString disambiguation2 = QStringLiteral("Full measurement name");
+    const QString disambiguation3 = QStringLiteral("Full measurement description");
+
+    measurements.insert(measurement, VTranslation::translate(context, measurement, disambiguation1));
+    guiText.insert(measurement, VTranslation::translate(context, guiTxt, disambiguation2));
+    description.insert(measurement, VTranslation::translate(context, desc, disambiguation3));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitVariables()
+{
+    const QString context = QStringLiteral("Variables");
+    const QString disambiguation = QStringLiteral("Left symbol _ in name");
+
+    variables.insert(line_, VTranslation::translate(context, line_, disambiguation));
+    variables.insert(angleLine_, VTranslation::translate(context, angleLine_, disambiguation));
+    variables.insert(arc_, VTranslation::translate(context, arc_, disambiguation));
+    variables.insert(spl_, VTranslation::translate(context, spl_, disambiguation));
+    variables.insert(splPath, VTranslation::translate(context, splPath, disambiguation));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitFunctions()
+{
+    const QString context = QStringLiteral("Functions");
+
+    functions.insert(sin_F, VTranslation::translate(context, sin_F, QStringLiteral("sine function")));
+    functions.insert(cos_F, VTranslation::translate(context, cos_F, QStringLiteral("cosine function")));
+    functions.insert(tan_F, VTranslation::translate(context, tan_F, QStringLiteral("tangens function")));
+    functions.insert(asin_F, VTranslation::translate(context, asin_F, QStringLiteral("arcus sine function")));
+    functions.insert(acos_F, VTranslation::translate(context, acos_F, QStringLiteral("arcus cosine function")));
+    functions.insert(atan_F, VTranslation::translate(context, atan_F, QStringLiteral("arcus tangens function")));
+    functions.insert(sinh_F, VTranslation::translate(context, sinh_F, QStringLiteral("hyperbolic sine function")));
+    functions.insert(cosh_F, VTranslation::translate(context, cosh_F, QStringLiteral("hyperbolic cosine")));
+    functions.insert(tanh_F, VTranslation::translate(context, tanh_F, QStringLiteral("hyperbolic tangens function")));
+    functions.insert(asinh_F, VTranslation::translate(context, asinh_F,
+                                                      QStringLiteral("hyperbolic arcus sine function")));
+    functions.insert(acosh_F, VTranslation::translate(context, acosh_F,
+                                                      QStringLiteral("hyperbolic arcus tangens function")));
+    functions.insert(atanh_F, VTranslation::translate(context, atanh_F,
+                                                      QStringLiteral("hyperbolic arcur tangens function")));
+    functions.insert(log2_F, VTranslation::translate(context, log2_F, QStringLiteral("logarithm to the base 2")));
+    functions.insert(log10_F, VTranslation::translate(context, log10_F, QStringLiteral("logarithm to the base 10")));
+    functions.insert(log_F, VTranslation::translate(context, log_F, QStringLiteral("logarithm to the base 10")));
+    functions.insert(ln_F, VTranslation::translate(context, ln_F, QStringLiteral("logarithm to base e (2.71828...)")));
+    functions.insert(exp_F, VTranslation::translate(context, exp_F, QStringLiteral("e raised to the power of x")));
+    functions.insert(sqrt_F, VTranslation::translate(context, sqrt_F, QStringLiteral("square root of a value")));
+    functions.insert(sign_F, VTranslation::translate(context, sign_F,
+                                                     QStringLiteral("sign function -1 if x<0; 1 if x>0")));
+    functions.insert(rint_F, VTranslation::translate(context, rint_F, QStringLiteral("round to nearest integer")));
+    functions.insert(abs_F, VTranslation::translate(context, abs_F, QStringLiteral("absolute value")));
+    functions.insert(min_F, VTranslation::translate(context, min_F, QStringLiteral("min of all arguments")));
+    functions.insert(max_F, VTranslation::translate(context, max_F, QStringLiteral("max of all arguments")));
+    functions.insert(sum_F, VTranslation::translate(context, sum_F, QStringLiteral("sum of all arguments")));
+    functions.insert(avg_F, VTranslation::translate(context, avg_F, QStringLiteral("mean value of all arguments")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

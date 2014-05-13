@@ -411,7 +411,7 @@ QString VContainer::GetNameLine(const quint32 &firstPoint, const quint32 &second
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
 
-    return QString("Line_%1_%2").arg(first->name(), second->name());
+    return QString(line_+"%1_%2").arg(first->name(), second->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,7 +420,7 @@ QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &s
     const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
 
-    return QString("AngleLine_%1_%2").arg(first->name(), second->name());
+    return QString(angleLine_+"%1_%2").arg(first->name(), second->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

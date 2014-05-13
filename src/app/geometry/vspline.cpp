@@ -565,7 +565,7 @@ qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
 //---------------------------------------------------------------------------------------------------------------------
 void VSpline::CreateName()
 {
-    _name = QString("Spl_%1_%2").arg(this->GetP1().name(), this->GetP4().name());
+    _name = QString(spl_+"%1_%2").arg(this->GetP1().name(), this->GetP4().name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

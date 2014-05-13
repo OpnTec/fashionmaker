@@ -31,6 +31,7 @@
 
 #include <QApplication>
 #include "../options.h"
+#include "vtranslation.h"
 
 class VApplication;
 
@@ -76,7 +77,17 @@ private:
     Pattern::Measurements _patternType;
     qreal                 _widthMainLine;
     qreal                 _widthHairLine;
+    QMap<QString, VTranslation> measurements;
+    QMap<QString, VTranslation> guiText;
+    QMap<QString, VTranslation> description;
+    QMap<QString, VTranslation> variables;
+    QMap<QString, VTranslation> functions;
     void                  InitLineWidth();
+    void                  InitMeasurements();
+    void                  InitMeasurement(const QString &measurement, const QString &guiTxt, const QString & desc);
+    void                  InitVariables();
+    void                  InitFunctions();
+
 };
 
 inline Valentina::Units VApplication::patternUnit() const
