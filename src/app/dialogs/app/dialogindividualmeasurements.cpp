@@ -57,9 +57,7 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
 
     ui->lineEditName->setText(_name);
 
-    LoadIndividualTables();
     InitUnits();
-
     CheckState();
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogIndividualMeasurements::CheckState);
     connect(ui->buttonGroupPath, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this,
@@ -91,9 +89,10 @@ void DialogIndividualMeasurements::DialogAccepted()
             table.remove();
         }
 
-        const qint32 index = ui->comboBoxLang->currentIndex();
-        QString path = ui->comboBoxLang->itemData(index).toString();
-        QFile iMeasur(path);
+        //just in case
+        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", "://tables/individual/individual.vit");
+        QFile iMeasur("://tables/individual/individual.vit");
+        //TODO maybe make copy save?
         if ( iMeasur.copy(_tablePath) == false )
         {
             QMessageBox::warning(this, tr("Could not create measurements file"), tr("Please try again or change file"));
@@ -153,7 +152,6 @@ void DialogIndividualMeasurements::CheckState()
 
         ui->lineEditPathNewM->setEnabled(false);
         ui->toolButtonOpenNew->setEnabled(false);
-        ui->comboBoxLang->setEnabled(false);
         ui->comboBoxUnits->setEnabled(false);
 
         if (ui->lineEditPathExistM->text().isEmpty() == false)
@@ -165,7 +163,6 @@ void DialogIndividualMeasurements::CheckState()
     {
         ui->lineEditPathNewM->setEnabled(true);
         ui->toolButtonOpenNew->setEnabled(true);
-        ui->comboBoxLang->setEnabled(true);
         ui->comboBoxUnits->setEnabled(true);
 
         ui->toolButtonOpenExist->setEnabled(false);
@@ -177,69 +174,10 @@ void DialogIndividualMeasurements::CheckState()
         }
     }
 
-    bool flagLang = false;
-    {
-        const QComboBox *box = ui->comboBoxLang;
-        Q_CHECK_PTR(box);
-        if (box->count() > 0 && box->currentIndex() != -1)
-        {
-            flagLang = true;
-        }
-    }
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     Q_CHECK_PTR(bOk);
-    bOk->setEnabled(flagName && flagPath && flagLang);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIndividualMeasurements::LoadIndividualTables()
-{
-    QStringList filters;
-    filters << "*.vit";
-    QDir tablesDir(qApp->pathToTables());
-    tablesDir.setNameFilters(filters);
-    tablesDir.setCurrent(qApp->pathToTables());
-
-    const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
-    if (allFiles.isEmpty() == true)
-    {
-        ui->comboBoxLang->clear();
-        CheckState();
-        return;
-    }
-
-    for (int i = 0; i < allFiles.size(); ++i)
-    {
-        QFileInfo fi(allFiles.at(i));
-        try
-        {
-            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", fi.absoluteFilePath());
-            VIndividualMeasurements m(data);
-            m.setContent(fi.absoluteFilePath());
-            const QString lang = QLocale(m.Language()).nativeLanguageName();
-            ui->comboBoxLang->addItem(lang, QVariant(fi.absoluteFilePath()));
-        }
-        catch (VException &e)
-        {
-            qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
-            continue;
-        }
-    }
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-
-    QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
-    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
-
-    //TODO make sure this part work.
-    // set default translators and language checked
-    qint32 index = ui->comboBoxLang->findData(checkedLocale);
-    if (index != -1)
-    {
-        ui->comboBoxLang->setCurrentIndex(index);
-    }
+    bOk->setEnabled(flagName && flagPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

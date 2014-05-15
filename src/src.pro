@@ -4,11 +4,11 @@ SUBDIRS = \
     sub_app \
     sub_lib_qmuparser
 
-sub_lib_qmuparser.subdir = libs/qmuparser
+#sub_lib_qmuparser.subdir = libs/qmuparser
 sub_lib_qmuparser.file = libs/qmuparser/qmuparser.pro
 #sub_tests.file = tests/proj.pro
 #sub_tests.depends = sub_lib
-sub_app.subdir = app
+#sub_app.subdir = app
 sub_app.file = app/app.pro
 sub_app.depends = sub_lib_qmuparser
 

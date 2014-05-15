@@ -24,10 +24,7 @@ MOC_DIR = moc
 OBJECTS_DIR = obj
 
 # files created rcc
-RCC_DIR = rcc
-
-# files created uic
-UI_DIR = uic
+#RCC_DIR = rcc
 
 SOURCES += \
     qmuparser.cpp \
@@ -73,8 +70,8 @@ CONFIG(debug, debug|release){
     # Debug
     unix {
         *-g++{
-        QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" \
-                          -isystem "$${MOC_DIR}" -isystem "$${RCC_DIR}" \
+        QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtCore" -isystem "$${MOC_DIR}" \
+                          #-isystem "$${RCC_DIR}" \
                           -O0 -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                           -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self -Wstack-protector \
                           -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
@@ -101,8 +98,9 @@ CONFIG(debug, debug|release){
 }
 
 # Remove generated files at cleaning
-QMAKE_DISTCLEAN += $${DESTDIR}/* \
-                   $${OBJECTS_DIR}/* \
-                   $${UI_DIR}/* \
-                   $${MOC_DIR}/* \
-                   $${RCC_DIR}/*
+QMAKE_DISTCLEAN += \
+    $${DESTDIR}/* \
+    $${OBJECTS_DIR}/* \
+    #$${RCC_DIR}/* \
+    $${MOC_DIR}/*
+

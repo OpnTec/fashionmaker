@@ -6,6 +6,8 @@
 
 # Use out-of-source builds (shadow builds)
 
+include(../../Valentina.pri)
+
 QT       += core gui widgets xml svg printsupport xmlpatterns
 
 TEMPLATE = app
@@ -155,16 +157,15 @@ QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${RCC_DIR}/* \
                    $$PWD/share/translations/valentina_*.qm
 
-INSTALL_TRANSLATIONS += share/translations/valentina_ru.qm \
-                        share/translations/valentina_uk.qm \
-                        share/translations/valentina_de.qm \
-                        share/translations/valentina_cs.qm \
-                        share/translations/valentina_he_IL.qm \
-                        share/translations/valentina_fr.qm
+INSTALL_TRANSLATIONS += \
+    share/translations/valentina_ru.qm \
+    share/translations/valentina_uk.qm \
+    share/translations/valentina_de.qm \
+    share/translations/valentina_cs.qm \
+    share/translations/valentina_he_IL.qm \
+    share/translations/valentina_fr.qm
 
-INSTALL_STANDARD_MEASHUREMENTS += share/tables/standard/GOST_man_ru.vst
-
-INSTALL_INDIVIDUAL_MEASHUREMENTS += share/tables/individual/indivindual_ru.vit
+INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
 unix {
 #VARIABLES
@@ -184,14 +185,12 @@ translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 standard.path = $$DATADIR/$${TARGET}/tables/standard/
 standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
-individual.path = $$DATADIR/$${TARGET}/tables/individual/
-individual.files = $$INSTALL_INDIVIDUAL_MEASHUREMENTS
-INSTALLS += target \
+INSTALLS += \
+    target \
     desktop \
     pixmaps \
     translations \
-    standard \
-    individual
+    standard
 }
 
 !isEmpty(TRANSLATIONS): {
@@ -200,25 +199,6 @@ INSTALLS += target \
 
       system($$shell_path($$[QT_INSTALL_BINS]/lrelease) $$shell_path($$PWD/$$_translation_name) -qm $$shell_path($$PWD/$$_translation_name_qm))
     }
-}
-
-# Copies the given files to the destination directory
-defineTest(copyToDestdir) {
-    files = $$1
-    DDIR = $$2
-    mkpath($$DDIR)
-
-    for(FILE, files) {
-
-        # Replace slashes in paths with backslashes for Windows
-        win32{
-            FILE ~= s,/,\\,g
-            DDIR ~= s,/,\\,g
-        }
-        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-    }
-
-    export(QMAKE_POST_LINK)
 }
 
 for(DIR, INSTALL_TRANSLATIONS) {
@@ -236,14 +216,6 @@ for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
 }
 
 copyToDestdir($$st_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/standard))
-
-for(DIR, INSTALL_INDIVIDUAL_MEASHUREMENTS) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     ind_path += $$PWD/$$DIR
-}
-
-copyToDestdir($$ind_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/individual))
 
 win32:CONFIG(release, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2
 else:win32:CONFIG(debug, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2

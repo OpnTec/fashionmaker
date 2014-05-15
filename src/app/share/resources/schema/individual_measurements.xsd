@@ -4,7 +4,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="version" type="formatVersion"></xs:element>
-				<xs:element name="lang" type="xs:string"></xs:element>
 				<xs:element name="personal">
 					<xs:complexType>
 						<xs:sequence>

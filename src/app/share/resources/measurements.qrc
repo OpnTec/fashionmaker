@@ -1,3 +1,5 @@
 <RCC>
-    <qresource prefix="/"/>
+    <qresource prefix="/">
+        <file>tables/individual/individual.vit</file>
+    </qresource>
 </RCC>
