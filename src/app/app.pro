@@ -63,7 +63,8 @@ RESOURCES += \
     share/resources/icon.qrc \
     share/resources/cursor.qrc \
     share/resources/theme.qrc \
-    share/resources/schema.qrc
+    share/resources/schema.qrc \
+    share/resources/measurements.qrc
 
 OTHER_FILES += \
     share/resources/valentina.rc \
