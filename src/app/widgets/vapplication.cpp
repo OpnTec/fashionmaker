@@ -146,7 +146,7 @@ QString VApplication::pathToTables() const
 {
     if (_patternType == Pattern::Individual)
     {
-        return "://tables/individual/individual.vit";
+        return QStringLiteral("://tables/individual/individual.vit");
     }
     else
     {
@@ -317,9 +317,9 @@ void VApplication::InitMeasurements()
 
     InitMeasurement(backNeckArc, QStringLiteral("Back Neck arc"), QStringLiteral("NeckPoint to NeckPoint across Nape"));
 
-    InitMeasurement(frontUpperBustArc, QStringLiteral("front_upper-bust_arc"), QStringLiteral("front_upper-bust_arc"));
+    InitMeasurement(frontUpperChestArc, QStringLiteral("front_upper-bust_arc"), QStringLiteral("front_upper-bust_arc"));
 
-    InitMeasurement(backUpperBustArc, QStringLiteral("Back UpperBust arc"),
+    InitMeasurement(backUpperChestArc, QStringLiteral("Back UpperBust arc"),
                     QStringLiteral("Back UpperBust side to side"));
 
     InitMeasurement(frontWaistArc, QStringLiteral("Front Waist arc"), QStringLiteral("Front Waist side to side"));

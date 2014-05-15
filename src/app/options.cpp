@@ -28,6 +28,7 @@
 
 #include "options.h"
 
+//measurements
 const QString headGirth                   = QStringLiteral("head_girth");
 const QString midNeckGirth                = QStringLiteral("mid_neck_girth");
 const QString neckBaseGirth               = QStringLiteral("neck_base_girth");
@@ -63,8 +64,8 @@ const QString frontShoulderToWaistLength  = QStringLiteral("front_shoulder_to_wa
 const QString backShoulderToWaistLength   = QStringLiteral("back_shoulder_to_waist_length");
 const QString frontNeckArc                = QStringLiteral("front_neck_arc");
 const QString backNeckArc                 = QStringLiteral("back_neck_arc");
-const QString frontUpperBustArc           = QStringLiteral("front_upper_bust_arc");
-const QString backUpperBustArc            = QStringLiteral("back_upper_bust_arc");
+const QString frontUpperChestArc          = QStringLiteral("front_upper_chest_arc");
+const QString backUpperChestArc           = QStringLiteral("back_upper_chest_arc");
 const QString frontWaistArc               = QStringLiteral("front_waist_arc");
 const QString backWaistArc                = QStringLiteral("back_waist_arc");
 const QString frontUpperHipArc            = QStringLiteral("front_upper_hip_arc");
@@ -109,12 +110,14 @@ const QString waistToHipHeight            = QStringLiteral("waist_to_hip_height"
 const QString waistToKneeHeight           = QStringLiteral("waist_to_knee_height");
 const QString crotchHeight                = QStringLiteral("crotch_height");
 
+//variables
 const QString line_      = QStringLiteral("Line_");
 const QString angleLine_ = QStringLiteral("AngleLine_");
 const QString arc_       = QStringLiteral("Arc_");
 const QString spl_       = QStringLiteral("Spl_");
 const QString splPath    = QStringLiteral("splPath");
 
+//functions
 const QString sin_F   = QStringLiteral("sin");
 const QString cos_F   = QStringLiteral("cos");
 const QString tan_F   = QStringLiteral("tan");
