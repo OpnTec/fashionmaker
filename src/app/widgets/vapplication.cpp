@@ -146,23 +146,7 @@ QString VApplication::pathToTables() const
 {
     if (_patternType == Pattern::Individual)
     {
-        #ifdef Q_OS_WIN
-            return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
-        #else
-            #ifdef QT_DEBUG
-                return QApplication::applicationDirPath() + QStringLiteral("/tables/individual");
-            #else
-                QDir dir(QApplication::applicationDirPath() + QStringLiteral("/tables/individual"));
-                if(dir.exist())
-                {
-                    return dir.absolutePath();
-                }
-                else
-                {
-                    return QStringLiteral("/usr/share/valentina/tables/individual");
-                }
-            #endif
-        #endif
+        return "://tables/individual/individual.vit";
     }
     else
     {

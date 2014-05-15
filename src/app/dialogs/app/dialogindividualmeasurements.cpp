@@ -90,8 +90,8 @@ void DialogIndividualMeasurements::DialogAccepted()
         }
 
         //just in case
-        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", "://tables/individual/individual.vit");
-        QFile iMeasur("://tables/individual/individual.vit");
+        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", qApp->pathToTables());
+        QFile iMeasur(qApp->pathToTables());
         //TODO maybe make copy save?
         if ( iMeasur.copy(_tablePath) == false )
         {
