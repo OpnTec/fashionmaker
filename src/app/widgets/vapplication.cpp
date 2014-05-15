@@ -425,6 +425,147 @@ void VApplication::InitMeasurements()
 
     InitMeasurement(crotchHeight, QStringLiteral("Crotch height/Inseam"),
                     QStringLiteral("Crotch to Floor along inside leg"));
+    //extended
+    InitMeasurement(heightFrontNeckBasePoint, QStringLiteral("Height front neck base point"),
+                    QStringLiteral("Height of the point base of the neck in front"));
+
+    InitMeasurement(heightBaseNeckSidePoint, QStringLiteral("Height base neck side point"),
+                    QStringLiteral("Height of the base of the neck side point"));
+
+    InitMeasurement(heightShoulderPoint, QStringLiteral("Height shoulder point"),
+                    QStringLiteral("The height of the shoulder point"));
+
+    InitMeasurement(heightNipplePoint, QStringLiteral("Height nipple point"), QStringLiteral("Height nipple point"));
+
+    InitMeasurement(heightBackAngleAxilla, QStringLiteral("Height back angle axilla"),
+                    QStringLiteral("Height back angle axilla"));
+
+    InitMeasurement(heightScapularPoint, QStringLiteral("Height scapular point"),
+                    QStringLiteral("Height scapular point"));
+
+    InitMeasurement(heightUnderButtockFolds, QStringLiteral("Height under buttock folds"),
+                    QStringLiteral("Height under buttock folds"));
+
+    InitMeasurement(hipsExcludingProtrudingAbdomen, QStringLiteral("Hips excluding protruding abdomen"),
+                    QStringLiteral("Hips excluding protruding abdomen"));
+
+    InitMeasurement(girthFootInstep, QStringLiteral("Girth foot instep"), QStringLiteral("Girth foot instep"));
+
+    InitMeasurement(sideWaistToFloor, QStringLiteral("Side waist to floor"),
+                    QStringLiteral("The distance from the side waist to floor"));
+
+    InitMeasurement(frontWaistToFloor, QStringLiteral("Front waist to floor"),
+                    QStringLiteral("The distance from the front waist to floor"));
+
+    InitMeasurement(arcThroughGroinArea, QStringLiteral("Arc through groin area"),
+                    QStringLiteral("Arc through groin area"));
+
+    InitMeasurement(waistToPlaneSeat, QStringLiteral("Waist to plane seat"),
+                    QStringLiteral("The distance from the waist to the plane seat"));
+
+    InitMeasurement(neckToRadialPoint, QStringLiteral("Neck to radial point"),
+                    QStringLiteral("The distance from the base of the neck to the side of the radial point"));
+
+    InitMeasurement(neckToThirdFinger, QStringLiteral("Neck to third finger"),
+                    QStringLiteral("Distance from the base of the neck side point to the end of the third finger"));
+
+    InitMeasurement(neckToFirstLineChestCircumference, QStringLiteral("Neck to first line chest circumference"),
+                    QStringLiteral("The distance from the base of the neck to the side of the first line in front of "
+                                   "chest circumference"));
+
+    InitMeasurement(frontWaistLength, QStringLiteral("Front waist length"),
+                    QStringLiteral("The distance from the base of the neck to the waist side front (waist length in "
+                                   "the front)"));
+
+    InitMeasurement(arcThroughShoulderJoint, QStringLiteral("Arc through shoulder joint"),
+                    QStringLiteral("Arc through the highest point of the shoulder joint"));
+
+    InitMeasurement(neckToBackLineChestCircumference, QStringLiteral("Neck to back line chest circumference"),
+                    QStringLiteral("The distance from the base of the neck to the back line of chest circumference of "
+                                   "the first and the second based on ledge vanes"));
+
+    InitMeasurement(waistToNeckSide, QStringLiteral("Waist to neck side"),
+                    QStringLiteral("The distance from the waist to the back base of the neck side point"));
+
+    InitMeasurement(arcLengthUpperBody, QStringLiteral("Arc length upper body"),
+                    QStringLiteral("Arc length of the upper body through the base of the neck side point"));
+
+    InitMeasurement(chestWidth, QStringLiteral("Chest width"), QStringLiteral("Chest width"));
+
+    InitMeasurement(anteroposteriorDiameterHands, QStringLiteral("Anteroposterior diameter hands"),
+                    QStringLiteral("Anteroposterior diameter of the hands"));
+
+    InitMeasurement(heightClavicularPoint, QStringLiteral("Height clavicular point"),
+                    QStringLiteral("Height clavicular point"));
+
+    InitMeasurement(heightArmholeSlash, QStringLiteral("Height armhole slash"),
+                    QStringLiteral("The distance from the point to the cervical level of the posterior angle of the "
+                                   "front armpit (underarm height oblique)"));
+
+    InitMeasurement(slashShoulderHeight, QStringLiteral("Slash shoulder height"),
+                    QStringLiteral("Slash shoulder height"));
+
+    InitMeasurement(halfGirthNeck, QStringLiteral("Half girth neck"), QStringLiteral("Half girth neck"));
+
+    InitMeasurement(halfGirthNeckForShirts, QStringLiteral("Half girth neck for shirts"),
+                    QStringLiteral("Half girth neck for shirts"));
+
+    InitMeasurement(halfGirthChestFirst, QStringLiteral("Half girth chest first"),
+                    QStringLiteral("Half girth chest first"));
+
+    InitMeasurement(halfGirthChestSecond, QStringLiteral("Half girth chest second"),
+                    QStringLiteral("Half girth chest second"));
+
+    InitMeasurement(halfGirthChestThird, QStringLiteral("Half girth chest third"),
+                    QStringLiteral("Half girth chest third"));
+
+    InitMeasurement(halfGirthWaist, QStringLiteral("Half girth waist"), QStringLiteral("Half girth waist"));
+
+    InitMeasurement(halfGirthHipsConsideringProtrudingAbdomen,
+                    QStringLiteral("Half girth hips considering protruding abdomen"),
+                    QStringLiteral("Half girth hips considering protruding abdomen"));
+
+    InitMeasurement(halfGirthHipsExcludingProtrudingAbdomen,
+                    QStringLiteral("Half girth hips excluding protruding abdomen"),
+                    QStringLiteral("Half girth hips excluding protruding abdomen"));
+
+    InitMeasurement(girthKneeFlexedFeet, QStringLiteral("Girth knee flexed feet"),
+                    QStringLiteral("Girth knee flexed feet"));
+
+    InitMeasurement(neckTransverseDiameter, QStringLiteral("Neck transverse diameter"),
+                    QStringLiteral("Neck transverse diameter"));
+
+    InitMeasurement(frontSlashShoulderHeight, QStringLiteral("Front slash shoulder height"),
+                    QStringLiteral("Front slash shoulder height"));
+
+    InitMeasurement(neckToFrontWaistLine, QStringLiteral("Neck to front waist line"),
+                    QStringLiteral("The distance from the base of the neck to the waist line front"));
+
+    InitMeasurement(handVerticalDiameter, QStringLiteral("Hand vertical diameter"),
+                    QStringLiteral("Hand vertical diameter"));
+
+    InitMeasurement(neckToKneePoint, QStringLiteral("Neck to knee point"),
+                    QStringLiteral("Distance from neck to knee point"));
+
+    InitMeasurement(waistToKnee, QStringLiteral("Waist to knee"),
+                    QStringLiteral("The distance from the waist to the knee"));
+
+    InitMeasurement(shoulderHeight, QStringLiteral("Shoulder height"), QStringLiteral("Shoulder height"));
+
+    InitMeasurement(headHeight, QStringLiteral("Head height"), QStringLiteral("Head height"));
+
+    InitMeasurement(bodyPosition, QStringLiteral("Body position"), QStringLiteral("Body position"));
+
+    InitMeasurement(arcBehindShoulderGirdle, QStringLiteral("Arc behind shoulder girdle"),
+                    QStringLiteral("Arc behind the shoulder girdle"));
+
+    InitMeasurement(neckToNeckBase, QStringLiteral("Neck to neck base"),
+                    QStringLiteral("Distance from neck point to point on the base of the neck side neck girth "
+                                   "measurement line"));
+
+    InitMeasurement(depthWaistFirst, QStringLiteral("Depth waist first"), QStringLiteral("Depth waist first"));
+
+    InitMeasurement(depthWaistSecond, QStringLiteral("Depth waist second"), QStringLiteral("Depth waist second"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
