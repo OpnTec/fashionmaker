@@ -503,7 +503,7 @@ void MainWindow::ClosedDialogCutArc(int result)
 void MainWindow::About()
 {
     DialogAboutApp * about_dialog = new DialogAboutApp(this);
-    about_dialog->setAttribute(Qt::WA_DeleteOnClose,true);
+    about_dialog->setAttribute(Qt::WA_DeleteOnClose, true);
     about_dialog->show();
 }
 
@@ -546,8 +546,8 @@ void MainWindow::PatternProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::EditPatternCode()
 {
-    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this,doc);
-    Pattern->setAttribute(Qt::WA_DeleteOnClose,true);
+    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this, doc);
+    Pattern->setAttribute(Qt::WA_DeleteOnClose, true);
     Pattern->show();
 }
 
@@ -1367,7 +1367,7 @@ void MainWindow::CreateActions()
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
-    connect(ui->actionEdit_pattern_code,&QAction::triggered,this,&MainWindow::EditPatternCode);
+    connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     //ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.

@@ -30,7 +30,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement()
-    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString()){}
+    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString())
+{}
 
 VIncrement::VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
     :id(id), base(base), ksize(ksize), kheight(kheight), description(description)

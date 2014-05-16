@@ -80,7 +80,7 @@ namespace qmu
         static qreal Avg(const qreal*, int);  // mean value
         static qreal Min(const qreal*, int);  // minimum
         static qreal Max(const qreal*, int);  // maximum
-};
+    };
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -30,6 +30,10 @@
 #include "ui_dialogaboutapp.h"
 #include "../../version.h"
 
+#include <QDesktopServices>
+#include <QMessageBox>
+
+//---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogAboutApp)
@@ -50,16 +54,18 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
 
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::~DialogAboutApp()
 {
     delete ui;
 }
 
-void DialogAboutApp::webButtonClicked() {
-    if ( ! QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR))) {
-        QMessageBox::warning(this,
-                             tr("Warning"),
-                             tr("Cannot open your default browser"));
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAboutApp::webButtonClicked()
+{
+    if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
+    {
+        QMessageBox::warning(this, tr("Warning"), tr("Cannot open your default browser"));
     }
 
 }

@@ -31,8 +31,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class DialogAboutApp;
+namespace Ui
+{
+    class DialogAboutApp;
 }
 
 class DialogAboutApp : public QDialog

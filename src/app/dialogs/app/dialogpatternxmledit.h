@@ -37,21 +37,20 @@
 /**
  * @brief The vXMLTreeElement class : node/attribute of xml pattern. Used by vXMLTreeView
  *
- **********************************************************************************************
  */
 
 #define BACKGROUND_COLOR_ATTRIBUTE QBrush(Qt::GlobalColor::cyan)
 class VXMLTreeElement : public QStandardItem
 {
 
-public:   
+public:
     /**
      * @brief vXMLTreeElement
      * @param name : display name
      * @param nodetype : node type (node, attribute, root)
      * @param source : the source dom node
      */
-    explicit VXMLTreeElement (QString name, int nodetype, QDomNode source,bool editor);
+    explicit VXMLTreeElement (QString name, int nodetype, QDomNode source, bool editor);
 
     explicit VXMLTreeElement (QString name, int nodetype);
 
@@ -146,7 +145,8 @@ public:
     /**
      * @brief The TreeElement struct : chained list of vXMLTreeElement
      */
-    typedef struct TreeElementchain {
+    typedef struct TreeElementchain
+    {
         VXMLTreeElement* elmt;
         TreeElementchain* next;
     } TreeElementchain;
@@ -197,8 +197,9 @@ inline VXMLTreeView::TreeElementchain * VXMLTreeView::GetItems()
 
 //********************************************************************************************
 
-namespace Ui {
-class DialogPatternXmlEdit;
+namespace Ui
+{
+    class DialogPatternXmlEdit;
 }
 /**
  * @brief The DialogPatternXmlEdit class : ui dialog for XML editing of pattern
@@ -223,11 +224,12 @@ public:
     void ButtonDeleteAttributeClicked();
     void ButtonAddSonClicked();
     void ButtonAddAttributeClicked();
-    void ButtonApplyChangesClicked() ;
+    void ButtonApplyChangesClicked();
 
 
     // Stack of changes definition
-    typedef struct ChangesStackElement {
+    typedef struct ChangesStackElement
+    {
         short int type;
         VXMLTreeElement *element;
         QString *newText;
@@ -276,7 +278,5 @@ private:
     ChangesStackElement* changeStackRoot;
     ChangesStackElement* changeStackLast;
 };
-
-
 
 #endif // DIALOGPATTERNXMLEDIT_H
