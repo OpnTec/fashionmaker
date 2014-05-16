@@ -36,14 +36,14 @@ const short int DialogPatternXmlEdit::ChangeTypeModify=3;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
-    :QDialog(parent), ui(new Ui::DialogPatternXmlEdit)
+    :QDialog(parent), treeChange(false), currentNodeEdited(nullptr), currentNodeEditedStatus(0),
+      currentNodeEditedStack(nullptr), ui(new Ui::DialogPatternXmlEdit), doc(nullptr), root(QDomElement()),
+      rootNode(nullptr), rootBases(nullptr), rootBasesNum(0), xmlmodel(nullptr), changeStackRoot(nullptr),
+      changeStackLast(nullptr)
 {
     ui->setupUi(this);
 
     xmlmodel = new VXMLTreeView();
-    currentNodeEdited=nullptr;
-    treeChange=false;
-    this->changeStackRoot = this->changeStackLast = nullptr;
 
     doc=xmldoc;
     root = doc->documentElement();
@@ -53,9 +53,10 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 
     ui->treeView_main->setWindowTitle("XML");
 
-
+    //TODO warning: use of old-style cast [-Wold-style-cast]
     rootNode = (QStandardItem*) xmlmodel->invisibleRootItem();
 
+    //TODO warning: conversion to 'qint16 {aka short int}' from 'int' may alter its value [-Wconversion]
     qint16 drawnum=xmldoc->elementsByTagName("draw").size();
     rootBases = new VXMLTreeElement*[drawnum+1];
     rootBasesNum=1;
@@ -524,9 +525,11 @@ void DialogPatternXmlEdit::ElementClicked ( const QModelIndex & index )
 {
 
     // Get item (function returns parent of clicked item)
+    //TODO warning: use of old-style cast [-Wold-style-cast]
     VXMLTreeElement *item = (VXMLTreeElement *)index.internalPointer();
 
     // Get child specified by index row/column
+    //TODO warning: use of old-style cast [-Wold-style-cast]
     VXMLTreeElement * item2 = (VXMLTreeElement *) item->child(index.row(), index.column());
 
     // Clear all data and disable buttons
@@ -670,10 +673,9 @@ void DialogPatternXmlEdit::ReadNodes(QDomNode dNode, VXMLTreeElement* root, VXML
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VXMLTreeView::VXMLTreeView(QObject *parent) : QStandardItemModel(parent)
-{
-    current=last=items=nullptr;
-}
+VXMLTreeView::VXMLTreeView(QObject *parent)
+    : QStandardItemModel(parent), items(nullptr), current(nullptr), last(nullptr)
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VXMLTreeView::ClearTree()
@@ -730,19 +732,17 @@ const short int VXMLTreeElement::TypeAttr=2;
 const short int VXMLTreeElement::TypeRoot=3;
 
 //---------------------------------------------------------------------------------------------------------------------
+//TODO warning: conversion to 'short int' from 'int' may alter its value [-Wconversion]
+//treeNodeValueSet(false), treeNodeName(name)
+//                                         ^
 VXMLTreeElement::VXMLTreeElement(QString name, int nodetype, QDomNode source, bool editor)
-    : QStandardItem(name)
+    : QStandardItem(name), DocNode(source), addedNode(editor), elementType(nodetype), treeNodeValue("<empty>"),
+      treeNodeValueSet(false), treeNodeName(name)
 {
-    this->elementType=nodetype;
-    this->DocNode=source;
-    this->addedNode=editor;
     if (editor == false)
     {
         this->DocNode=source;
     }
-    this->treeNodeName=name;
-    this->treeNodeValue="<empty>"; // TODO : translation ?
-    this->treeNodeValueSet=false,
     this->setText(this->displayText());
     switch (this->elementType)
     {

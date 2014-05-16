@@ -175,7 +175,6 @@ private:
      * @brief last : used to parse in iteration.
      */
     TreeElementchain * last;
-
 };
 
 inline VXMLTreeView::TreeElementchain * VXMLTreeView::getCurrent()
