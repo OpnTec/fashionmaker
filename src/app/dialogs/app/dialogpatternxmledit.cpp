@@ -35,14 +35,15 @@ const short int DialogPatternXmlEdit::ChangeTypeDelete=1;
 const short int DialogPatternXmlEdit::ChangeTypeAdd=2;
 const short int DialogPatternXmlEdit::ChangeTypeModify=3;
 
-DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent,VPattern *xmldoc):QDialog(parent),ui(new Ui::DialogPatternXmlEdit)
+DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent,VPattern *xmldoc):QDialog(parent),
+    ui(new Ui::DialogPatternXmlEdit)
 {
     ui->setupUi(this);
 
     xmlmodel = new VXMLTreeView();
-    currentNodeEdited=0;
+    currentNodeEdited=nullptr;
     treeChange=false;
-    this->changeStackRoot = this->changeStackLast =0;
+    this->changeStackRoot = this->changeStackLast =nullptr ;
 
     doc=xmldoc;
     root = doc->documentElement();
@@ -75,13 +76,15 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent,VPattern *xmldoc):QDi
     //ui->treeView_main->expandAll();
 
     // connectors
-    connect(ui->comboBox_Base_Selection,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&DialogPatternXmlEdit::BaseSelectionChanged);
+    connect(ui->comboBox_Base_Selection,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this,&DialogPatternXmlEdit::BaseSelectionChanged);
     connect(ui->treeView_main,&QTreeView::clicked,this,&DialogPatternXmlEdit::ElementClicked);
     connect(ui->lineEdit_Name,&QLineEdit::textEdited,this,&DialogPatternXmlEdit::NameTextEdited);
     connect(ui->lineEdit_Value,&QLineEdit::textEdited,this,&DialogPatternXmlEdit::ValueTextEdited);
     connect(ui->pushButton_Set_Values,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonSetClicked);
     connect(ui->pushButton_Cancel_Values,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonCancelClicked);
-    connect(ui->pushButton_Remove_attribute,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonDeleteAttributeClicked);
+    connect(ui->pushButton_Remove_attribute,&QPushButton::clicked,
+            this,&DialogPatternXmlEdit::ButtonDeleteAttributeClicked);
     connect(ui->pushButton_Add_son,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonAddSonClicked);
     connect(ui->pushButton_Add_attribute,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonAddAttributeClicked);
     connect(ui->pushButton_Apply_Changes,&QPushButton::clicked,this,&DialogPatternXmlEdit::ButtonApplyChangesClicked);
@@ -96,7 +99,7 @@ DialogPatternXmlEdit::ChangesStackElement* DialogPatternXmlEdit::CreateStackElem
     tmp->type=typechange;
     tmp->changedText=tmp->changedValue=false;
 
-    if (changeStackLast==0)
+    if (changeStackLast==nullptr )
     {
         changeStackLast=changeStackRoot=tmp;
     }
@@ -105,8 +108,8 @@ DialogPatternXmlEdit::ChangesStackElement* DialogPatternXmlEdit::CreateStackElem
         changeStackLast->next=tmp;
         changeStackLast=changeStackLast->next;
     }
-    changeStackLast->newValue=changeStackLast->newText=0;
-    changeStackLast->next=0;
+    changeStackLast->newValue=changeStackLast->newText=nullptr;
+    changeStackLast->next=nullptr;
     return changeStackLast;
 }
 
@@ -114,7 +117,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
 {
     QString Changes="";
     ChangesStackElement* currentChange;
-    if (this->changeStackRoot==0)
+    if (this->changeStackRoot==nullptr)
     {
         Changes="No Changes";
     }
@@ -156,7 +159,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
                 }
             }
             currentChange=currentChange->next;
-        } while (currentChange != 0);
+        } while (currentChange != nullptr);
     }
     QMessageBox::information(this, "Changes (not REALLY applied for now)", Changes);
     // TODO : clear stack and apply
@@ -188,11 +191,11 @@ void DialogPatternXmlEdit::RemoveChangeStackElement(ChangesStackElement* elmt)
 
     if (changeStackRoot == elmt)
     {
-        if (elmt->newText != 0)
+        if (elmt->newText != nullptr)
         {
             delete elmt->newText;
         }
-        if (elmt->newValue != 0)
+        if (elmt->newValue != nullptr)
         {
             delete elmt->newValue;
         }
@@ -204,23 +207,23 @@ void DialogPatternXmlEdit::RemoveChangeStackElement(ChangesStackElement* elmt)
         delete elmt;
         return;
     }
-    while (index->next!=0) {
+    while (index->next!=nullptr) {
         if (index->next == elmt)
         {
             break;
         }
         index=index->next;
     }
-    if (index->next == 0)
+    if (index->next == nullptr)
     {
         // TODO : debug error here
         return;
     }
-    if (index->next->newText != 0)
+    if (index->next->newText != nullptr)
     {
         delete index->next->newText;
     }
-    if (index->next->newValue != 0)
+    if (index->next->newValue != nullptr)
     {
         delete index->next->newValue;
     }
@@ -237,7 +240,7 @@ void DialogPatternXmlEdit::ButtonDeleteAttributeClicked()
     ChangesStackElement* newstack;
 
     // TODO : maybe assert functions here
-    if (this->currentNodeEdited == 0)
+    if (this->currentNodeEdited == nullptr)
     {
         return;
     }
@@ -265,7 +268,7 @@ void DialogPatternXmlEdit::ButtonAddSonClicked()
     bool ok;
     //clear_edit_data();
     // TODO : maybe assert functions here
-    if (this->currentNodeEdited == 0)
+    if (this->currentNodeEdited == nullptr)
     {
         return;
     }
@@ -327,11 +330,14 @@ void DialogPatternXmlEdit::ButtonAddAttributeClicked()
     QDomNode empty; // empty QNode to pas to create function : maybe a better way to do this ?
 
     // TODO : maybe assert functions here
-    if (this->currentNodeEdited == 0)
+    if (this->currentNodeEdited == nullptr)
     {
         return;
     }
-    if (this->currentNodeEdited->getelementType() != VXMLTreeElement::TypeNode) return;
+    if (this->currentNodeEdited->getelementType() != VXMLTreeElement::TypeNode)
+    {
+        return;
+    }
 
     QString name = QInputDialog::getText(this, tr("Attribute Name"),
                                                 tr("Name:"), QLineEdit::Normal,
@@ -377,7 +383,7 @@ void DialogPatternXmlEdit::ButtonSetClicked()
     ChangesStackElement* newstack;
 
     // TODO : check if a change has already been done
-    if (this->currentNodeEdited == 0) return;
+    if (this->currentNodeEdited == nullptr) return;
     name=ui->lineEdit_Name->text();
     value=ui->lineEdit_Value->text();
     bool nameedit,valueedit;
@@ -444,13 +450,13 @@ void DialogPatternXmlEdit::ClearEditData()
 void DialogPatternXmlEdit::ClearStack()
 {
     ChangesStackElement * tmp;
-    while (changeStackRoot != 0)
+    while (changeStackRoot != nullptr)
     {
-        if (changeStackRoot->newText != 0)
+        if (changeStackRoot->newText != nullptr)
         {
             delete changeStackRoot->newText;
         }
-        if (changeStackRoot->newValue != 0)
+        if (changeStackRoot->newValue != nullptr)
         {
             delete changeStackRoot->newValue;
         }
@@ -458,7 +464,7 @@ void DialogPatternXmlEdit::ClearStack()
         changeStackRoot=changeStackRoot->next;
         delete tmp;
     }
-    changeStackLast=0;
+    changeStackLast=nullptr;
 }
 
 void DialogPatternXmlEdit::BaseSelectionChanged(int value)
@@ -515,7 +521,7 @@ void DialogPatternXmlEdit::ElementClicked ( const QModelIndex & index )
     this->currentNodeEdited=item2;
     this->currentNodeEditedStatus=0;
     DialogPatternXmlEdit::ChangesStackElement * local = this->changeStackRoot;
-    while (local != 0)
+    while (local != nullptr)
     {
         if (local->element == item2)
         {
@@ -562,7 +568,7 @@ DialogPatternXmlEdit::~DialogPatternXmlEdit()
     //xmlmodel->clearTree();
     delete ui;
     ChangesStackElement * tmp;
-    while (changeStackRoot != 0)
+    while (changeStackRoot != nullptr)
     {
         tmp=changeStackRoot->next;
         delete changeStackRoot;
@@ -652,7 +658,7 @@ void DialogPatternXmlEdit::ReadNodes(QDomNode dNode, VXMLTreeElement* root,VXMLT
 // vXMLTreeView Code  -----------------------------------------------------------------
 VXMLTreeView::VXMLTreeView(QObject *parent) : QStandardItemModel(parent)
 {
-    current=last=items=0;
+    current=last=items=nullptr;
 }
 
 void VXMLTreeView::ClearTree() {
@@ -661,14 +667,14 @@ void VXMLTreeView::ClearTree() {
 
     //clear the chain link
     TreeElementchain * tmp;
-    while (items != 0)
+    while (items != nullptr)
     {
         tmp=items;
         items=items->next;
         delete tmp;
     }
     // reset chain counters
-    current=last=items=0;
+    current=last=items=nullptr;
 
 }
 
@@ -679,27 +685,27 @@ VXMLTreeView::~VXMLTreeView()
 
 void VXMLTreeView::appendchain(VXMLTreeElement* elmt)
 {
-    if (last == 0)
+    if (last == nullptr)
     { // first element
         current = new TreeElementchain;
-        if (current == 0)
+        if (current == nullptr)
         {
-            Q_ASSERT(current != 0);
+            Q_ASSERT(current != nullptr);
             // TODO : throw exception
         }
         current->elmt=elmt;
-        current->next=0;
+        current->next=nullptr;
         last=items=current;
         return;
     }
     TreeElementchain* temp= new TreeElementchain;
-    if (temp == 0)
+    if (temp == nullptr)
     {
-        Q_ASSERT(temp != 0);
+        Q_ASSERT(temp != nullptr);
         // TODO : throw exception
     }
     temp->elmt=elmt;
-    temp->next=0;
+    temp->next=nullptr;
     last->next=temp;
     last=temp;
 }
