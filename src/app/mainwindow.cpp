@@ -546,8 +546,8 @@ void MainWindow::PatternProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::EditPatternCode()
 {
-    //TODO : free dialog pointer at end of dialog
     DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this,doc);
+    Pattern->setAttribute(Qt::WA_DeleteOnClose,true);
     Pattern->show();
 }
 

@@ -41,7 +41,7 @@
  */
 
 #define BACKGROUND_COLOR_ATTRIBUTE QBrush(Qt::GlobalColor::cyan)
-class vXMLTreeElement : public QStandardItem
+class VXMLTreeElement : public QStandardItem
 {
 
 public:   
@@ -51,11 +51,11 @@ public:
      * @param nodetype : node type (node, attribute, root)
      * @param source : the source dom node
      */
-    explicit vXMLTreeElement (QString name, int nodetype, QDomNode source,bool editor);
+    explicit VXMLTreeElement (QString name, int nodetype, QDomNode source,bool editor);
 
-    explicit vXMLTreeElement (QString name, int nodetype);
+    explicit VXMLTreeElement (QString name, int nodetype);
 
-    ~vXMLTreeElement ();
+    ~VXMLTreeElement ();
     static const short int TypeNode;
     static const short int TypeAttr;
     static const short int TypeRoot;
@@ -110,38 +110,58 @@ private:
      * @brief nodeValue : Attribute or node value
      */
     QString treeNodeName;
-    Q_DISABLE_COPY(vXMLTreeElement)
+    Q_DISABLE_COPY(VXMLTreeElement)
 };
+
+inline short int VXMLTreeElement::getelementType()
+{
+    return this->elementType;
+}
+
+inline QDomNode VXMLTreeElement::getDocNode()
+{
+    return this->DocNode;
+}
+
+inline QString VXMLTreeElement::gettreeNodeName()
+{
+    return this->treeNodeName;
+}
+
+inline bool VXMLTreeElement::gettreeNodeValueSet()
+{
+    return this->treeNodeValueSet;
+}
 
 //********************************************************************************************
 /**
  * @brief The vXMLTreeView class : container to display/edit xml pattern
  */
-class vXMLTreeView : public QStandardItemModel
+class VXMLTreeView : public QStandardItemModel
 {
 public:
-    explicit vXMLTreeView (QObject *parent = 0);
-    void appendchain(vXMLTreeElement* elmt);
+    explicit VXMLTreeView (QObject *parent = 0);
+    void appendchain(VXMLTreeElement* elmt);
 
     /**
      * @brief The TreeElement struct : chained list of vXMLTreeElement
      */
     typedef struct TreeElementchain {
-        vXMLTreeElement* elmt;
+        VXMLTreeElement* elmt;
         TreeElementchain* next;
     } TreeElementchain;
 
     TreeElementchain * getCurrent();
-    void setCurrent(TreeElementchain * value);
-    TreeElementchain * getLast();
-    TreeElementchain * getItems();
+    void SetCurrent(TreeElementchain * value);
+    TreeElementchain * GetLast();
+    TreeElementchain * GetItems();
     /**
      * @brief clearTree : clear tree elements and listed items.
      */
-    void clearTree();
-    ~vXMLTreeView ();
+    void ClearTree();
+    ~VXMLTreeView ();
 private:
-    Q_DISABLE_COPY(vXMLTreeView)
+    Q_DISABLE_COPY(VXMLTreeView)
 
     /**
      * @brief items : root of chained list of vXMLTreeElement
@@ -157,6 +177,23 @@ private:
     TreeElementchain * last;
 
 };
+
+inline VXMLTreeView::TreeElementchain * VXMLTreeView::getCurrent()
+{
+    return this->current;
+}
+inline void VXMLTreeView::SetCurrent(VXMLTreeView::TreeElementchain * value)
+{
+    this->current=value;
+}
+inline VXMLTreeView::TreeElementchain * VXMLTreeView::GetLast()
+{
+    return this->last;
+}
+inline VXMLTreeView::TreeElementchain * VXMLTreeView::GetItems()
+{
+    return this->items;
+}
 
 //********************************************************************************************
 
@@ -177,10 +214,10 @@ public:
     /**
      * @brief clear_edit_data :  clear input boxes and disables buttons.
      */
-    void clear_edit_data();
+    void ClearEditData();
 
-    void nameTextEdited(QString newtext);
-    void valueTextEdited(QString newtext);
+    void NameTextEdited(QString newtext);
+    void ValueTextEdited(QString newtext);
     void ButtonSetClicked();
     void ButtonCancelClicked();
     void ButtonDeleteAttributeClicked();
@@ -192,7 +229,7 @@ public:
     // Stack of changes definition
     typedef struct ChangesStackElement {
         short int type;
-        vXMLTreeElement *element;
+        VXMLTreeElement *element;
         QString *newText;
         bool changedText;
         QString *newValue;
@@ -202,16 +239,16 @@ public:
 
     // Change stack functions
     ChangesStackElement* CreateStackElement(short int typechange);
-    void removeChangeStackElement(ChangesStackElement* elmt);
-    void clearStack();
+    void RemoveChangeStackElement(ChangesStackElement* elmt);
+    void ClearStack();
     bool treeChange;
-    vXMLTreeElement* current_node_edited;
-    short int current_node_edited_status;
-    ChangesStackElement* current_node_edited_stack;
+    VXMLTreeElement* currentNodeEdited;
+    short int currentNodeEditedStatus;
+    ChangesStackElement* currentNodeEditedStack;
 
 private slots:
-    void baseSelectionChanged(int value);
-    void Element_clicked ( const QModelIndex & index );
+    void BaseSelectionChanged(int value);
+    void ElementClicked ( const QModelIndex & index );
 
 private:
     Q_DISABLE_COPY(DialogPatternXmlEdit)
@@ -222,11 +259,11 @@ private:
     QDomElement root;
     QStandardItem *rootNode;
     //typedef struct rootbases { vXMLTreeElement * root; QString name; } rootbases;
-    vXMLTreeElement ** rootBases;
+    VXMLTreeElement ** rootBases;
     qint16 rootBasesNum;
 
-    void readNodes(QDomNode dNode, vXMLTreeElement* root, vXMLTreeView *xmlmodel, bool refresh);
-    vXMLTreeView* xmlmodel;
+    void ReadNodes(QDomNode dNode, VXMLTreeElement* root, VXMLTreeView *xmlmodel, bool refresh);
+    VXMLTreeView* xmlmodel;
 
 
     // Stack of changes
