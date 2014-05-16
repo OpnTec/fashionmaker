@@ -363,6 +363,11 @@ public slots:
     void               tableClosed();
     void               OpenRecentFile();
     void               PatternProperties();
+    /**
+     * @brief Edit XML code of pattern
+     */
+    void               EditPatternCode();
+
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.

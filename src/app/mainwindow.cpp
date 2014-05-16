@@ -544,6 +544,14 @@ void MainWindow::PatternProperties()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::EditPatternCode()
+{
+    //TODO : free dialog pointer at end of dialog
+    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this,doc);
+    Pattern->show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -1359,6 +1367,8 @@ void MainWindow::CreateActions()
     connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
+    connect(ui->actionEdit_pattern_code,&QAction::triggered,this,&MainWindow::EditPatternCode);
+    //ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
