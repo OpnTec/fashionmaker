@@ -32,6 +32,14 @@
 #include "vdomdocument.h"
 #include <QDate>
 
+/*
+   VIT_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+// version without patch part
+#define VIT_MIN_VERSION 0x000100
+// max support version of format
+#define VIT_VERSION 0x000100
+
 class VIndividualMeasurements:public VDomDocument
 {
 public:

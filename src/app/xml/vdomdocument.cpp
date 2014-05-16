@@ -83,11 +83,12 @@ inline qint64  MessageHandler::column() const
     return m_sourceLocation.column();
 }
 
-const QString VDomDocument::AttrId   = QStringLiteral("id");
-const QString VDomDocument::AttrUnit = QStringLiteral("unit");
-const QString VDomDocument::UnitMM   = QStringLiteral("mm");
-const QString VDomDocument::UnitCM   = QStringLiteral("cm");
+const QString VDomDocument::AttrId     = QStringLiteral("id");
+const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
+const QString VDomDocument::UnitMM     = QStringLiteral("mm");
+const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
+const QString VDomDocument::TagVersion = QStringLiteral("version");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument(VContainer *data)
@@ -429,6 +430,30 @@ bool VDomDocument::SaveDocument(const QString &fileName)
         result = false;
     }
     return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::Major() const
+{
+    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QStringList v = version.split(".");
+    return v.at(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::Minor() const
+{
+    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QStringList v = version.split(".");
+    return v.at(1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::Patch() const
+{
+    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QStringList v = version.split(".");
+    return v.at(2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

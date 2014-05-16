@@ -36,7 +36,7 @@ quint32 VContainer::_id = 0;
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::VContainer()
-    :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
+    :_size(50), sizeName(size_M), _height(176), heightName(height_M), gObjects(QHash<quint32, VGObject *>()),
       measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
@@ -51,7 +51,7 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::VContainer(const VContainer &data)
-    :_size(50), sizeName("Сг"), _height(176), heightName("P"), gObjects(QHash<quint32, VGObject *>()),
+    :_size(50), sizeName(size_M), _height(176), heightName(height_M), gObjects(QHash<quint32, VGObject *>()),
       measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
       lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
       lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())

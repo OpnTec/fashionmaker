@@ -31,6 +31,14 @@
 
 #include "vdomdocument.h"
 
+/*
+   VST_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+// version without patch part
+#define VST_MIN_VERSION 0x000100
+// max support version of format
+#define VST_VERSION 0x000100
+
 class VStandardMeasurements:public VDomDocument
 {
 public:
