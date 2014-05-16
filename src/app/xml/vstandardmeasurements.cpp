@@ -63,140 +63,140 @@ QString VStandardMeasurements::Description()
 void VStandardMeasurements::Measurements()
 {
     //head and neck
-    Measurement(headGirth);
-    Measurement(midNeckGirth);
-    Measurement(neckBaseGirth);
-    Measurement(headAndNeckLength);
+    Measurement(headGirth_M);
+    Measurement(midNeckGirth_M);
+    Measurement(neckBaseGirth_M);
+    Measurement(headAndNeckLength_M);
     //torso
-    Measurement(centerFrontWaistLength);
-    Measurement(centerBackWaistLength);
-    Measurement(shoulderLength);
-    Measurement(sideWaistLength);
-    Measurement(trunkLength);
-    Measurement(shoulderGirth);
-    Measurement(upperChestGirth);
-    Measurement(bustGirth);
-    Measurement(underBustGirth);
-    Measurement(waistGirth);
-    Measurement(highHipGirth);
-    Measurement(hipGirth);
-    Measurement(upperFrontChestWidth);
-    Measurement(frontChestWidth);
-    Measurement(acrossFrontShoulderWidth);
-    Measurement(acrossBackShoulderWidth);
-    Measurement(upperBackWidth);
-    Measurement(backWidth);
-    Measurement(bustpointToBustpoint);
-    Measurement(halterBustpointToBustpoint);
-    Measurement(neckToBustpoint);
-    Measurement(crotchLength);
-    Measurement(riseHeight);
-    Measurement(shoulderDrop);
-    Measurement(shoulderSlopeDegrees);
-    Measurement(frontShoulderSlopeLength);
-    Measurement(backShoulderSlopeLength);
-    Measurement(frontShoulderToWaistLength);
-    Measurement(backShoulderToWaistLength);
-    Measurement(frontNeckArc);
-    Measurement(backNeckArc);
-    Measurement(frontUpperChestArc);
-    Measurement(backUpperChestArc);
-    Measurement(frontWaistArc);
-    Measurement(backWaistArc);
-    Measurement(frontUpperHipArc);
-    Measurement(backUpperHipArc);
-    Measurement(frontHipArc);
-    Measurement(backHipArc);
-    Measurement(chestSlope);
-    Measurement(backSlope);
-    Measurement(frontWaistSlope);
-    Measurement(backWaistSlope);
-    Measurement(frontNeckToUpperChestHeight);
-    Measurement(frontNeckToBustHeight);
+    Measurement(centerFrontWaistLength_M);
+    Measurement(centerBackWaistLength_M);
+    Measurement(shoulderLength_M);
+    Measurement(sideWaistLength_M);
+    Measurement(trunkLength_M);
+    Measurement(shoulderGirth_M);
+    Measurement(upperChestGirth_M);
+    Measurement(bustGirth_M);
+    Measurement(underBustGirth_M);
+    Measurement(waistGirth_M);
+    Measurement(highHipGirth_M);
+    Measurement(hipGirth_M);
+    Measurement(upperFrontChestWidth_M);
+    Measurement(frontChestWidth_M);
+    Measurement(acrossFrontShoulderWidth_M);
+    Measurement(acrossBackShoulderWidth_M);
+    Measurement(upperBackWidth_M);
+    Measurement(backWidth_M);
+    Measurement(bustpointToBustpoint_M);
+    Measurement(halterBustpointToBustpoint_M);
+    Measurement(neckToBustpoint_M);
+    Measurement(crotchLength_M);
+    Measurement(riseHeight_M);
+    Measurement(shoulderDrop_M);
+    Measurement(shoulderSlopeDegrees_M);
+    Measurement(frontShoulderSlopeLength_M);
+    Measurement(backShoulderSlopeLength_M);
+    Measurement(frontShoulderToWaistLength_M);
+    Measurement(backShoulderToWaistLength_M);
+    Measurement(frontNeckArc_M);
+    Measurement(backNeckArc_M);
+    Measurement(frontUpperChestArc_M);
+    Measurement(backUpperChestArc_M);
+    Measurement(frontWaistArc_M);
+    Measurement(backWaistArc_M);
+    Measurement(frontUpperHipArc_M);
+    Measurement(backUpperHipArc_M);
+    Measurement(frontHipArc_M);
+    Measurement(backHipArc_M);
+    Measurement(chestSlope_M);
+    Measurement(backSlope_M);
+    Measurement(frontWaistSlope_M);
+    Measurement(backWaistSlope_M);
+    Measurement(frontNeckToUpperChestHeight_M);
+    Measurement(frontNeckToBustHeight_M);
     //arm
-    Measurement(armscyeGirth);
-    Measurement(elbowGirth);
-    Measurement(upperArmGirth);
-    Measurement(wristGirth);
-    Measurement(scyeDepth);
-    Measurement(shoulderAndArmLength);
-    Measurement(underarmLength);
-    Measurement(cervicaleToWristLength);
-    Measurement(shoulderToElbowLength);
-    Measurement(armLength);
+    Measurement(armscyeGirth_M);
+    Measurement(elbowGirth_M);
+    Measurement(upperArmGirth_M);
+    Measurement(wristGirth_M);
+    Measurement(scyeDepth_M);
+    Measurement(shoulderAndArmLength_M);
+    Measurement(underarmLength_M);
+    Measurement(cervicaleToWristLength_M);
+    Measurement(shoulderToElbowLength_M);
+    Measurement(armLength_M);
     //hand
-    Measurement(handWidth);
-    Measurement(handLength);
-    Measurement(handGirth);
+    Measurement(handWidth_M);
+    Measurement(handLength_M);
+    Measurement(handGirth_M);
     //leg
-    Measurement(thighGirth);
-    Measurement(midThighGirth);
-    Measurement(kneeGirth);
-    Measurement(calfGirth);
-    Measurement(ankleGirth);
-    Measurement(kneeHeight);
-    Measurement(ankleHeight);
+    Measurement(thighGirth_M);
+    Measurement(midThighGirth_M);
+    Measurement(kneeGirth_M);
+    Measurement(calfGirth_M);
+    Measurement(ankleGirth_M);
+    Measurement(kneeHeight_M);
+    Measurement(ankleHeight_M);
     //foot
-    Measurement(footWidth);
-    Measurement(footLength);
+    Measurement(footWidth_M);
+    Measurement(footLength_M);
     //heights
-    Measurement(cervicaleHeight);
-    Measurement(cervicaleToKneeHeight);
-    Measurement(waistHeight);
-    Measurement(highHipHeight);
-    Measurement(hipHeight);
-    Measurement(waistToHipHeight);
-    Measurement(waistToKneeHeight);
-    Measurement(crotchHeight);
+    Measurement(cervicaleHeight_M);
+    Measurement(cervicaleToKneeHeight_M);
+    Measurement(waistHeight_M);
+    Measurement(highHipHeight_M);
+    Measurement(hipHeight_M);
+    Measurement(waistToHipHeight_M);
+    Measurement(waistToKneeHeight_M);
+    Measurement(crotchHeight_M);
     //extended
-    Measurement(heightFrontNeckBasePoint);
-    Measurement(heightBaseNeckSidePoint);
-    Measurement(heightShoulderPoint);
-    Measurement(heightNipplePoint);
-    Measurement(heightBackAngleAxilla);
-    Measurement(heightScapularPoint);
-    Measurement(heightUnderButtockFolds);
-    Measurement(hipsExcludingProtrudingAbdomen);
-    Measurement(girthFootInstep);
-    Measurement(sideWaistToFloor);
-    Measurement(frontWaistToFloor);
-    Measurement(arcThroughGroinArea);
-    Measurement(waistToPlaneSeat);
-    Measurement(neckToRadialPoint);
-    Measurement(neckToThirdFinger);
-    Measurement(neckToFirstLineChestCircumference);
-    Measurement(frontWaistLength);
-    Measurement(arcThroughShoulderJoint);
-    Measurement(neckToBackLineChestCircumference);
-    Measurement(waistToNeckSide);
-    Measurement(arcLengthUpperBody);
-    Measurement(chestWidth);
-    Measurement(anteroposteriorDiameterHands);
-    Measurement(heightClavicularPoint);
-    Measurement(heightArmholeSlash);
-    Measurement(slashShoulderHeight);
-    Measurement(halfGirthNeck);
-    Measurement(halfGirthNeckForShirts);
-    Measurement(halfGirthChestFirst);
-    Measurement(halfGirthChestSecond);
-    Measurement(halfGirthChestThird);
-    Measurement(halfGirthWaist);
-    Measurement(halfGirthHipsConsideringProtrudingAbdomen);
-    Measurement(halfGirthHipsExcludingProtrudingAbdomen);
-    Measurement(girthKneeFlexedFeet);
-    Measurement(neckTransverseDiameter);
-    Measurement(frontSlashShoulderHeight);
-    Measurement(neckToFrontWaistLine);
-    Measurement(handVerticalDiameter);
-    Measurement(neckToKneePoint);
-    Measurement(waistToKnee);
-    Measurement(shoulderHeight);
-    Measurement(headHeight);
-    Measurement(bodyPosition);
-    Measurement(arcBehindShoulderGirdle);
-    Measurement(neckToNeckBase);
-    Measurement(depthWaistFirst);
-    Measurement(depthWaistSecond);
+    Measurement(heightFrontNeckBasePoint_M);
+    Measurement(heightBaseNeckSidePoint_M);
+    Measurement(heightShoulderPoint_M);
+    Measurement(heightNipplePoint_M);
+    Measurement(heightBackAngleAxilla_M);
+    Measurement(heightScapularPoint_M);
+    Measurement(heightUnderButtockFolds_M);
+    Measurement(hipsExcludingProtrudingAbdomen_M);
+    Measurement(girthFootInstep_M);
+    Measurement(sideWaistToFloor_M);
+    Measurement(frontWaistToFloor_M);
+    Measurement(arcThroughGroinArea_M);
+    Measurement(waistToPlaneSeat_M);
+    Measurement(neckToRadialPoint_M);
+    Measurement(neckToThirdFinger_M);
+    Measurement(neckToFirstLineChestCircumference_M);
+    Measurement(frontWaistLength_M);
+    Measurement(arcThroughShoulderJoint_M);
+    Measurement(neckToBackLineChestCircumference_M);
+    Measurement(waistToNeckSide_M);
+    Measurement(arcLengthUpperBody_M);
+    Measurement(chestWidth_M);
+    Measurement(anteroposteriorDiameterHands_M);
+    Measurement(heightClavicularPoint_M);
+    Measurement(heightArmholeSlash_M);
+    Measurement(slashShoulderHeight_M);
+    Measurement(halfGirthNeck_M);
+    Measurement(halfGirthNeckForShirts_M);
+    Measurement(halfGirthChestFirst_M);
+    Measurement(halfGirthChestSecond_M);
+    Measurement(halfGirthChestThird_M);
+    Measurement(halfGirthWaist_M);
+    Measurement(halfGirthHipsConsideringProtrudingAbdomen_M);
+    Measurement(halfGirthHipsExcludingProtrudingAbdomen_M);
+    Measurement(girthKneeFlexedFeet_M);
+    Measurement(neckTransverseDiameter_M);
+    Measurement(frontSlashShoulderHeight_M);
+    Measurement(neckToFrontWaistLine_M);
+    Measurement(handVerticalDiameter_M);
+    Measurement(neckToKneePoint_M);
+    Measurement(waistToKnee_M);
+    Measurement(shoulderHeight_M);
+    Measurement(headHeight_M);
+    Measurement(bodyPosition_M);
+    Measurement(arcBehindShoulderGirdle_M);
+    Measurement(neckToNeckBase_M);
+    Measurement(depthWaistFirst_M);
+    Measurement(depthWaistSecond_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ void VStandardMeasurements::SetSize()
     if (nodeList.isEmpty())
     {
         data->SetSize(50);
-        data->SetSizeName(size);
+        data->SetSizeName(size_M);
     }
     else
     {
@@ -258,7 +258,7 @@ void VStandardMeasurements::SetSize()
                     value = value/10.0;
                 }
                 data->SetSize(value);
-                data->SetSizeName(size);
+                data->SetSizeName(size_M);
             }
         }
     }
@@ -271,7 +271,7 @@ void VStandardMeasurements::SetHeight()
     if (nodeList.isEmpty())
     {
         data->SetHeight(176);
-        data->SetHeightName(height);
+        data->SetHeightName(height_M);
     }
     else
     {
@@ -287,7 +287,7 @@ void VStandardMeasurements::SetHeight()
                     value = value / 10.0;
                 }
                 data->SetHeight(value);
-                data->SetHeightName(height);
+                data->SetHeightName(height_M);
             }
         }
     }
