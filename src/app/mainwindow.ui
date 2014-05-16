@@ -696,6 +696,7 @@
     <addaction name="actionLayout"/>
     <addaction name="separator"/>
     <addaction name="actionPattern_properties"/>
+    <addaction name="actionEdit_pattern_code"/>
     <addaction name="actionOptions"/>
    </widget>
    <addaction name="menuFile"/>
@@ -999,6 +1000,11 @@
     <string>Pattern properties</string>
    </property>
   </action>
+  <action name="actionEdit_pattern_code">
+   <property name="text">
+    <string>Edit pattern XML code</string>
+   </property>
+  </action>  
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
