@@ -83,7 +83,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="bust__girth">
+										<xs:element name="bust_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
@@ -203,12 +203,12 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="front_upper-bust_arc">
+										<xs:element name="front_upper_chest_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="back_upper-bust_arc">
+										<xs:element name="back_upper_chest_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
@@ -223,12 +223,12 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="front_upper-hip_arc">
+										<xs:element name="front_upper_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="back_upper-hip_arc">
+										<xs:element name="back_upper_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
@@ -263,12 +263,12 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="front-neck_to_upper-chest_height">
+										<xs:element name="front_neck_to_upper_chest_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="front-neck_to_bust_height">
+										<xs:element name="front_neck_to_bust_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
@@ -289,7 +289,7 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="upper-arm_girth">
+										<xs:element name="upper_arm_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>

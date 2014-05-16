@@ -110,6 +110,7 @@ const QString waistToHipHeight            = QStringLiteral("waist_to_hip_height"
 const QString waistToKneeHeight           = QStringLiteral("waist_to_knee_height");
 const QString crotchHeight                = QStringLiteral("crotch_height");
 //extended measurements
+const QString size                              = QStringLiteral("size");
 const QString heightFrontNeckBasePoint          = QStringLiteral("height_front_neck_base_point");
 const QString heightBaseNeckSidePoint           = QStringLiteral("height_base_neck_side_point");
 const QString heightShoulderPoint               = QStringLiteral("height_shoulder_point");

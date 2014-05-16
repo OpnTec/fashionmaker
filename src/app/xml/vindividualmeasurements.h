@@ -42,7 +42,6 @@ public:
     Valentina::Units Unit() const;
     void             setUnit(const Valentina::Units &unit);
     void             Measurements();
-    QString          Language() const;
     QString          FamilyName() const;
     void             setFamilyName(const QString &text);
     QString          GivenName() const;
@@ -53,21 +52,13 @@ public:
     void             setSex(const VIndividualMeasurements::Genders &sex);
     QString          Mail() const;
     void             setMail(const QString &text);
-    static const QString AttrIgnore;
-    static const QString AttrName;
-    static const QString AttrM_number;
-    static const QString AttrGui_text;
     static const QString AttrValue;
-    static const QString AttrDescription;
-
-    static const QString TagLang;
     static const QString TagFamily_name;
     static const QString TagGiven_name;
     static const QString TagBirth_date;
     static const QString TagSex;
     static const QString TagUnit;
     static const QString TagEmail;
-
     static const QString SexMale;
     static const QString SexFemale;
 

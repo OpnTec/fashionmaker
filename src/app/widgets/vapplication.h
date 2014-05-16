@@ -72,19 +72,24 @@ public:
     QString               pathToTables() const;
     qreal                 widthMainLine() const;
     qreal                 widthHairLine() const;
+    QString               Measurement(const QString &measurement) const;
+    QString               GuiText(const QString &measurement) const;
+    QString               Description(const QString &measurement) const;
+    QString               Variable(const QString &name) const;
+    QString               Function(const QString &name) const;
 private:
     Valentina::Units      _patternUnit;
     Pattern::Measurements _patternType;
     qreal                 _widthMainLine;
     qreal                 _widthHairLine;
     QMap<QString, VTranslation> measurements;
-    QMap<QString, VTranslation> guiText;
-    QMap<QString, VTranslation> description;
+    QMap<QString, VTranslation> guiTexts;
+    QMap<QString, VTranslation> descriptions;
     QMap<QString, VTranslation> variables;
     QMap<QString, VTranslation> functions;
     void                  InitLineWidth();
     void                  InitMeasurements();
-    void                  InitMeasurement(const QString &measurement, const QString &guiTxt, const QString & desc);
+    void                  InitMeasurement(const QString &measurement, const QString &guiText, const QString & desc);
     void                  InitVariables();
     void                  InitFunctions();
 

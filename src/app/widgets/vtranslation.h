@@ -50,6 +50,7 @@
 class VTranslation
 {
 public:
+    VTranslation();
     VTranslation(const QString &context, const QString &sourceText, const QString &disambiguation = 0, int n = -1);
     QString translate() const;
     static VTranslation translate(const QString &context, const QString &sourceText, const QString &disambiguation = 0,

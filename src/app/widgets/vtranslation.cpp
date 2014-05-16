@@ -41,11 +41,14 @@ VTranslation VTranslation::translate(const QString &context, const QString &sour
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VTranslation::VTranslation()
+    :mcontext(QString()), msourceText(QString()), mdisambiguation(QString()), mn(-1)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VTranslation::VTranslation(const QString &context, const QString &sourceText, const QString &disambiguation, int n)
     :mcontext(context), msourceText(sourceText), mdisambiguation(disambiguation), mn(n)
-{
-    mn = -1;
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslation::VTranslation::translate() const

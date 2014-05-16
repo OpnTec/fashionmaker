@@ -45,7 +45,7 @@ const qreal VApplication::PrintDPI = 96.0;
 VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
-      guiText(QMap<QString, VTranslation>()), description(QMap<QString, VTranslation>()),
+      guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>())
 {
     InitLineWidth();
@@ -569,7 +569,7 @@ void VApplication::InitMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::InitMeasurement(const QString &measurement, const QString &guiTxt, const QString &desc)
+void VApplication::InitMeasurement(const QString &measurement, const QString &guiText, const QString &desc)
 {
     const QString context = QStringLiteral("Measurements");
     const QString disambiguation1 = QStringLiteral("Short measurement name. Don't use math symbols in name!!!!");
@@ -577,8 +577,8 @@ void VApplication::InitMeasurement(const QString &measurement, const QString &gu
     const QString disambiguation3 = QStringLiteral("Full measurement description");
 
     measurements.insert(measurement, VTranslation::translate(context, measurement, disambiguation1));
-    guiText.insert(measurement, VTranslation::translate(context, guiTxt, disambiguation2));
-    description.insert(measurement, VTranslation::translate(context, desc, disambiguation3));
+    guiTexts.insert(measurement, VTranslation::translate(context, guiText, disambiguation2));
+    descriptions.insert(measurement, VTranslation::translate(context, desc, disambiguation3));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -635,4 +635,34 @@ void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
 {
     _patternUnit = patternUnit;
     InitLineWidth();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::Measurement(const QString &measurement) const
+{
+    return measurements.value(measurement).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::GuiText(const QString &measurement) const
+{
+    return guiTexts.value(measurement).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::Description(const QString &measurement) const
+{
+    return descriptions.value(measurement).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::Variable(const QString &name) const
+{
+    return variables.value(name).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::Function(const QString &name) const
+{
+    return functions.value(name).translate();
 }

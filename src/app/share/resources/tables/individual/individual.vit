@@ -48,25 +48,25 @@
             <back_shoulder_to_waist_length value="0.0"/>
             <front_neck_arc value="0.0"/>
             <back_neck_arc value="0.0"/>
-            <front_upper-bust_arc value="0.0"/>
-            <back_upper-bust_arc value="0.0"/>
+            <front_upper_chest_arc value="0.0"/>
+            <back_upper_chest_arc value="0.0"/>
             <front_waist_arc value="0.0"/>
             <back_waist_arc value="0.0"/>
-            <front_upper-hip_arc value="0.0"/>
-            <back_upper-hip_arc value="0.0"/>
+            <front_upper_hip_arc value="0.0"/>
+            <back_upper_hip_arc value="0.0"/>
             <front_hip_arc value="0.0"/>
             <back_hip_arc value="0.0"/>
             <chest_slope value="0.0"/>
             <back_slope value="0.0"/>
             <front_waist_slope value="0.0"/>
             <back_waist_slope value="0.0"/>
-            <front-neck_to_upper-chest_height value="0.0"/>
-            <front-neck_to_bust_height value="0.0"/>
+            <front_neck_to_upper_chest_height value="0.0"/>
+            <front_neck_to_bust_height value="0.0"/>
         </torso>
         <arm>
             <armscye_girth value="0.0"/>
             <elbow_girth value="0.0"/>
-            <upper-arm_girth value="0.0"/>
+            <upper_arm_girth value="0.0"/>
             <wrist_girth value="0.0"/>
             <scye_depth value="0.0"/>
             <shoulder_and_arm_length value="0.0"/>

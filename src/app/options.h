@@ -194,6 +194,7 @@ extern const QString waistToHipHeight;
 extern const QString waistToKneeHeight;
 extern const QString crotchHeight;
 //extended measurements
+extern const QString size;
 extern const QString heightFrontNeckBasePoint;
 extern const QString heightBaseNeckSidePoint;
 extern const QString heightShoulderPoint;
