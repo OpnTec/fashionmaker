@@ -44,12 +44,11 @@ public:
     static const QString TagDescription;
     static const QString TagSize;
     static const QString TagHeight;
-    static const QString AttrName;
-    static const QString AttrGui_text;
-    static const QString AttrBase;
+    static const QString AttrValue;
     static const QString AttrSize_increace;
     static const QString AttrHeight_increase;
-    static const QString AttrNumber;
+private:
+    void Measurement(const QString &tag);
 };
 
 #endif // VSTANDARDMEASUREMENTS_H
