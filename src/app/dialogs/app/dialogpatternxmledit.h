@@ -40,6 +40,7 @@
  */
 
 #define BACKGROUND_COLOR_ATTRIBUTE QBrush(Qt::GlobalColor::cyan)
+#define BACKGROUND_COLOR_INACTIVE_NODE QBrush(Qt::GlobalColor::gray)
 class VXMLTreeElement : public QStandardItem
 {
 
@@ -62,26 +63,28 @@ public:
      * @brief setNodeValue : set value of node (content or attribute)
      * @param value : the value
      */
-    void setTreeNodeValue(QString value);
+    void SetTreeNodeValue(QString value);
     /**
      * @brief displayText : text to display
      * @return text to display
      */
-    QString displayText();
+    QString DisplayText();
     /**
      * @brief getDocNode
      * @return current document node
      */
-    QDomNode getDocNode();
-    QString gettreeNodeName();
-    QString gettreeNodeValue();
-    bool gettreeNodeValueSet();
-    void setTreeNodeName(QString value);
+    QDomNode GetDocNode();
+    QString GettreeNodeName();
+    QString GettreeNodeValue();
+    bool GettreeNodeValueSet();
+    void SetTreeNodeName(QString value);
     /**
      * @brief getelementType
      * @return elementType value
      */
-    short int getelementType();
+    short int GetelementType();
+    bool IsSelectable();
+    void SetSetlectable(bool value);
 
 private:
     /**
@@ -109,25 +112,39 @@ private:
      * @brief nodeValue : Attribute or node value
      */
     QString treeNodeName;
+    /**
+     * @brief selectable : can item be selected to be changed (ex : false if father deleted).
+     */
+    bool selectable;
     Q_DISABLE_COPY(VXMLTreeElement)
 };
 
-inline short int VXMLTreeElement::getelementType()
+inline bool VXMLTreeElement::IsSelectable()
+{
+    return this->selectable;
+}
+
+inline void VXMLTreeElement::SetSetlectable(bool value)
+{
+    this->selectable=value;
+}
+
+inline short int VXMLTreeElement::GetelementType()
 {
     return this->elementType;
 }
 
-inline QDomNode VXMLTreeElement::getDocNode()
+inline QDomNode VXMLTreeElement::GetDocNode()
 {
     return this->DocNode;
 }
 
-inline QString VXMLTreeElement::gettreeNodeName()
+inline QString VXMLTreeElement::GettreeNodeName()
 {
     return this->treeNodeName;
 }
 
-inline bool VXMLTreeElement::gettreeNodeValueSet()
+inline bool VXMLTreeElement::GettreeNodeValueSet()
 {
     return this->treeNodeValueSet;
 }
@@ -224,7 +241,8 @@ public:
     void ButtonAddSonClicked();
     void ButtonAddAttributeClicked();
     void ButtonApplyChangesClicked();
-
+    void ButtonUndoLastChange();
+    void ButtonDeleteNode();
 
     // Stack of changes definition
     typedef struct ChangesStackElement
@@ -232,8 +250,10 @@ public:
         short int type;
         VXMLTreeElement *element;
         QString *newText;
+        QString *oldText;
         bool changedText;
         QString *newValue;
+        QString *oldValue;
         bool changedValue;
         ChangesStackElement* next;
     } ChangesStackElement;
@@ -246,6 +266,19 @@ public:
     VXMLTreeElement* currentNodeEdited;
     short int currentNodeEditedStatus;
     ChangesStackElement* currentNodeEditedStack;
+    /**
+     * @brief UndoChange : undo change in change stack element
+     * @param current : change to undo
+     * @return true if undo has been done, false on error
+     */
+    bool UndoChange(ChangesStackElement* current);
+    /**
+     * @brief DeleteNodeAndSons : delete node and all it's attribute and sons below
+     * @param currentNode : node to delete
+     * @param onlydeactivate : if true, dont delete just deactivate sons and attributes
+     * @return false if changes couldn't be done
+     */
+    bool DeleteNodeAndSons(VXMLTreeElement *currentNode, bool onlydeactivate);
 
 private slots:
     void BaseSelectionChanged(int value);

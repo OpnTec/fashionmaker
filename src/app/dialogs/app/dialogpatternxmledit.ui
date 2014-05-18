@@ -200,7 +200,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QPushButton" name="pushButton_Remove_attribute_2">
+            <widget class="QPushButton" name="pushButton_Remove_Node">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -272,12 +272,12 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QPushButton" name="pushButton_Cancel_Changes">
+            <widget class="QPushButton" name="pushButton_Undo_Last_Change">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Cancel changes</string>
+              <string>Undo last</string>
              </property>
             </widget>
            </item>
