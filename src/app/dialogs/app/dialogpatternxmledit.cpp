@@ -29,6 +29,8 @@
 #include "dialogpatternxmledit.h"
 #include "ui_dialogpatternxmledit.h"
 
+#include <QMessageBox>
+
 const short int DialogPatternXmlEdit::ChangeTypeDelete=1;
 const short int DialogPatternXmlEdit::ChangeTypeAdd=2;
 const short int DialogPatternXmlEdit::ChangeTypeModify=3;
@@ -63,7 +65,7 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 
 
     VXMLTreeElement* standard_base = new VXMLTreeElement("Valentina", VXMLTreeElement::TypeRoot, root, false);
-    ui->comboBox_Base_Selection->addItem(tr("All drawings"), QVariant(0));
+    ui->comboBox_Base_Selection->addItem(tr("All pattern pieces"), QVariant(0));
 
     //rootBases[0]=(QDomNode) doc->DocumentNode;
     rootNode->appendRow(standard_base);
@@ -579,9 +581,7 @@ void DialogPatternXmlEdit::ButtonAddSonClicked()
     }
 
 
-    QString name = QInputDialog::getText(this, tr("Node Name"),
-                                                tr("Name:"), QLineEdit::Normal,
-                                                "", &ok);
+    QString name = QInputDialog::getText(this, tr("Node Name"), tr("Name:"), QLineEdit::Normal, "", &ok);
     if (ok==false)
     {
         return;
