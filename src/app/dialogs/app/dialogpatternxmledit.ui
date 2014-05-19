@@ -62,6 +62,12 @@
          <property name="selectionMode">
           <enum>QAbstractItemView::SingleSelection</enum>
          </property>
+         <property name="headerHidden">
+          <bool>true</bool>
+         </property>
+         <attribute name="headerVisible">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
        <item>
