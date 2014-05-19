@@ -1089,6 +1089,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     }
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
+    ui->actionPattern_properties->setEnabled(enable);
+    ui->actionEdit_pattern_code->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1368,7 +1370,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
-    //ui->actionEdit_pattern_code->setEnabled(false);
+    ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
