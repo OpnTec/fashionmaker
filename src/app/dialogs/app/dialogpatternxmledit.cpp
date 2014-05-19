@@ -154,18 +154,12 @@ bool DialogPatternXmlEdit::DeleteNodeAndSons(VXMLTreeElement * currentNode, bool
 
     QList<VXMLTreeElement*> stack;
     VXMLTreeElement * currentNodeStack;
+    // First undo all changes on sons
     stack << currentNode;
     while (stack.isEmpty() == false)
     {
         //pop first element
         currentNodeStack=stack.takeFirst();
-        if (onlydeactivate==true)
-        {
-            currentNodeStack->SetSetlectable(false);
-            QFont textfont=currentNodeStack->font();
-            textfont.setStrikeOut(true);
-            currentNodeStack->setFont(textfont);
-        }
         // clear all changes made in son node and not on current or it will loop
         if (currentNodeStack != currentNode)
         {
@@ -189,6 +183,29 @@ bool DialogPatternXmlEdit::DeleteNodeAndSons(VXMLTreeElement * currentNode, bool
         }
         //stack.removeFirst();
     }
+    // Next set strike font on all
+    if (onlydeactivate==true)
+    {
+        stack << currentNode;
+        while (stack.isEmpty() == false)
+        {
+            //pop first element
+            currentNodeStack=stack.takeFirst();
+
+            currentNodeStack->SetSetlectable(false);
+            QFont textfont=currentNodeStack->font();
+            textfont.setStrikeOut(true);
+            currentNodeStack->setFont(textfont);
+            // add sons to stack
+            int index=currentNodeStack->rowCount();
+            while (index > 0)
+            {
+                stack << static_cast<VXMLTreeElement *> (currentNodeStack->child(index-1));
+                index--;
+            }
+        }
+    }
+
     currentNode->SetSetlectable(true);
 
    if (onlydeactivate==false)
@@ -836,12 +853,10 @@ void DialogPatternXmlEdit::ElementClicked ( const QModelIndex & index )
 {
 
     // Get item (function returns parent of clicked item)
-    //TODO warning: use of old-style cast [-Wold-style-cast]
-    VXMLTreeElement *item = (VXMLTreeElement *)index.internalPointer();
+    VXMLTreeElement *item = static_cast<VXMLTreeElement *> (index.internalPointer());
 
     // Get child specified by index row/column
-    //TODO warning: use of old-style cast [-Wold-style-cast]
-    VXMLTreeElement * item2 = (VXMLTreeElement *) item->child(index.row(), index.column());
+    VXMLTreeElement * item2 = static_cast<VXMLTreeElement *> (item->child(index.row(), index.column()));
 
     // Clear all data and disable buttons
     this->ClearEditData();
