@@ -98,8 +98,8 @@ CONFIG(debug, debug|release){
         *-g++{
         QMAKE_CXXFLAGS += -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
                           -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
-                          -isystem "/usr/include/qt5/QtCore" -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" \
-                          -isystem "$${RCC_DIR}" \
+                          -isystem "/usr/include/qt5/QtCore" -isystem "/usr/include/qt5/QtXmlPatterns" \
+                          -isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" -isystem "$${RCC_DIR}" \
                           -O0 -Wall -Wextra -pedantic -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy \
                           -Wnon-virtual-dtor -Wold-style-cast -Wconversion -Winit-self -Wstack-protector \
                           -Wunreachable-code -Wcast-align -Wcast-qual -Wdisabled-optimization -Wfloat-equal \
