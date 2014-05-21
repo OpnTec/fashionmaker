@@ -346,13 +346,11 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
             emit ToolTip(e.GetMsg());
-            qDebug() << "\nError:\n"
-                     << "--------\n"
-                     << "Message:     "   << e.GetMsg()   << "\n"
-                     << "Expression:  \"" << e.GetExpr()  << "\"\n"
-                     << "Token:       \"" << e.GetToken() << "\"\n"
-                     << "Position:    "   << e.GetPos()   << "\n"
-                     << "Errc:        "   << QString::number(e.GetCode(), 16);
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
         }
     }
     CheckState();
