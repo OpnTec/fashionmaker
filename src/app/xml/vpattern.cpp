@@ -215,7 +215,8 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             if (domElement.isNull() == false)
             {
                 QStringList tags;
-                tags << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes << TagMeasurements;
+                tags << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes << TagMeasurements
+                     << TagVersion;
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
@@ -248,8 +249,10 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
                         break;
                     case 5: // TagMeasurements
                         break;
+                    case 6: // TagVersion
+                        break;
                     default:
-                        qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        qDebug()<<"Wrong tag name"<<domElement.tagName()<<Q_FUNC_INFO;
                         break;
                 }
             }
