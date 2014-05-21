@@ -173,7 +173,7 @@ typedef std::basic_stringstream < char_type, std::char_traits<char_type>, std::a
 // Data container types
 
 /** @brief Type used for storing variables. */
-typedef std::map<QString, qreal> varmap_type;
+typedef std::map<QString, qreal*> varmap_type;
 
 /** @brief Type used for storing constants. */
 typedef std::map<QString, qreal> valmap_type;
@@ -268,7 +268,7 @@ typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal );
 
 /** @brief Callback used for variable creation factory functions. */
-typedef qreal ( *facfun_type ) ( const QString &, void* );
+typedef qreal* ( *facfun_type ) ( const QString &, void* );
 } // end of namespace
 
 #endif

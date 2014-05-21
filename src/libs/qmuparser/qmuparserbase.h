@@ -79,7 +79,7 @@ public:
                                   EOprtAssociativity a_eAssociativity = oaLEFT, bool a_bAllowOpt = false);
     void               DefineConst(const QString &a_sName, qreal a_fVal);
     void               DefineStrConst(const QString &a_sName, const QString &a_strVal);
-    void               DefineVar(const QString &a_sName, qreal a_fVar);
+    void               DefineVar(const QString &a_sName, qreal *a_fVar);
     void               DefinePostfixOprt(const QString &a_strFun, fun_type1 a_pOprt, bool a_bAllowOpt=true);
     void               DefineInfixOprt(const QString &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX,
                                        bool a_bAllowOpt=true);

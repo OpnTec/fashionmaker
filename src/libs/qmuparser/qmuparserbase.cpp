@@ -555,12 +555,17 @@ void QmuParserBase::DefineStrConst(const QString &a_strName, const QString &a_st
 /**
  * @brief Add a user defined variable.
  * @param [in] a_sName the variable name
- * @param [in] a_pVar the variable vaule.
+ * @param [in] a_pVar A pointer to the variable vaule.
  * @post Will reset the Parser to string parsing mode.
- * @throw ParserException in case the name contains invalid signs.
+ * @throw ParserException in case the name contains invalid signs or a_pVar is NULL.
  */
-void QmuParserBase::DefineVar(const QString &a_sName, qreal a_pVar)
+void QmuParserBase::DefineVar(const QString &a_sName, qreal *a_pVar)
 {
+    if (a_pVar==0)
+    {
+        Error(ecINVALID_VAR_PTR);
+    }
+
     // Test if a constant with that names already exists
     if (m_ConstDef.find(a_sName)!=m_ConstDef.end())
     {
@@ -1236,25 +1241,25 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
 
             // value and variable tokens
             case cmVAR:
-                Stack[++sidx] = *(&pTok->Val.ptr + nOffset);
+                Stack[++sidx] = *(pTok->Val.ptr + nOffset);
                 continue;
             case cmVAL:
                 Stack[++sidx] =  pTok->Val.data2;
                 continue;
             case cmVARPOW2:
-                buf = *(&pTok->Val.ptr + nOffset);
+                buf = *(pTok->Val.ptr + nOffset);
                 Stack[++sidx] = buf*buf;
                 continue;
             case cmVARPOW3:
-                buf = *(&pTok->Val.ptr + nOffset);
+                buf = *(pTok->Val.ptr + nOffset);
                 Stack[++sidx] = buf*buf*buf;
                 continue;
             case cmVARPOW4:
-                buf = *(&pTok->Val.ptr + nOffset);
+                buf = *(pTok->Val.ptr + nOffset);
                 Stack[++sidx] = buf*buf*buf*buf;
                 continue;
             case cmVARMUL:
-                Stack[++sidx] = *(&pTok->Val.ptr + nOffset) * pTok->Val.data + pTok->Val.data2;
+                Stack[++sidx] = *(pTok->Val.ptr + nOffset) * pTok->Val.data + pTok->Val.data2;
                 continue;
             // Next is treatment of numeric functions
             case cmFUNC:
@@ -1492,7 +1497,7 @@ void QmuParserBase::CreateRPN() const
                 break;
             case cmVAR:
                 stVal.push(opt);
-                m_vRPN.AddVar( opt.GetVar() );
+                m_vRPN.AddVar( static_cast<qreal*>(opt.GetVar()) );
                 break;
             case cmVAL:
                 stVal.push(opt);

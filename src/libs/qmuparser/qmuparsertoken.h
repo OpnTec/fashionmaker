@@ -196,13 +196,13 @@ public:
      * Member variables not necessary for variable tokens will be invalidated.
      * @throw nothrow
      */
-    QmuParserToken& SetVar ( TBase a_pVar, const TString &a_strTok )
+    QmuParserToken& SetVar ( TBase *a_pVar, const TString &a_strTok )
     {
         m_iCode = cmVAR;
         m_iType = tpDBL;
         m_strTok = a_strTok;
         m_iIdx = -1;
-        m_pTok =  a_pVar;
+        m_pTok = reinterpret_cast<void*> ( a_pVar );
         m_pCallback.reset ( 0 );
         return *this;
     }
@@ -357,7 +357,7 @@ public:
             case cmVAL:
                 return m_fVal;
             case cmVAR:
-                return m_pTok;
+                return * ( reinterpret_cast<TBase*>(m_pTok) );
             case cmLE:
             case cmGE:
             case cmNEQ:
@@ -404,14 +404,14 @@ public:
      * Valid only if m_iType==CmdVar.
      * @throw QmuParserError if token is no variable token.
      */
-    TBase GetVar() const
+    TBase* GetVar() const
     {
         if ( m_iCode != cmVAR )
         {
             throw QmuParserError ( ecINTERNAL_ERROR );
         }
 
-        return m_pTok;
+        return reinterpret_cast<TBase*>( m_pTok );
     }
 
     //------------------------------------------------------------------------------
@@ -449,7 +449,7 @@ public:
 private:
     ECmdCode  m_iCode;  ///< Type of the token; The token type is a constant of type #ECmdCode.
     ETypeCode m_iType;
-    TBase m_pTok;      ///< Stores Token pointer; not applicable for all tokens
+    void  *m_pTok;      ///< Stores Token pointer; not applicable for all tokens
     int  m_iIdx;        ///< An otional index to an external buffer storing the token data
     TString m_strTok;   ///< Token string
     TString m_strVal;   ///< Value for string variables

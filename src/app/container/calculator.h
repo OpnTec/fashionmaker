@@ -38,9 +38,11 @@ class Calculator:public QmuParser
 {
 public:
     explicit Calculator(const VContainer *data);
+    ~Calculator();
     qreal        EvalFormula(const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
+    qreal *vVarVal;
     void         InitVariables(const VContainer *data);
     static qreal CmUnit(qreal val);
     static qreal MmUnit(qreal val);
