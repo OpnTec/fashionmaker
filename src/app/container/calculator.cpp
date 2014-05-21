@@ -28,15 +28,7 @@
 
 #include "calculator.h"
 #include <QDebug>
-
-#define DELIMITER  1
-#define VARIABLE   2
-#define NUMBER     3
-#define COMMAND    4
-#define STRING     5
-#define QUOTE      6
-#define FINISHED   10
-#define EOL        9
+#include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -44,433 +36,187 @@
  * @param data pointer to a variable container.
  */
 Calculator::Calculator(const VContainer *data)
-    :errorMsg(nullptr), token(QString()), tok(0), token_type(0), prog(QString()), index(0), data(data),
-      debugFormula(QString())
-{}
+    :QmuParser()
+{
+    //String with all unique symbols for supported alpabets.
+    // See script alphabets.py for generation and more information.
+    const QString symbols = QStringLiteral("ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋCŬđ"
+                                           "ҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփїІĈЎґĐΗЖҙĘȚ"
+                                           "ΟОҡĠآΧЦتЮұİزηжԸغοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖЙŤěΜӜDСձģΤӰ"
+                                           "ЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪ"
+                                           "ЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥĹЧΦثÆӳЯIسŲԵзζԽпξكՅ"
+                                           "ÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌR"
+                                           "ӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒU"
+                                           "əÚѝŻşҤӑâeէŐımկòuշÕúտŔ");
+
+    // Defining identifier character sets
+    DefineNameChars(QStringLiteral("0123456789_") + symbols);
+    DefineOprtChars(symbols + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
+
+    // Add variables
+    InitVariables(data);
+
+    // Add unary operators
+    DefinePostfixOprt(cm_Oprt, CmUnit);
+    DefinePostfixOprt(mm_Oprt, MmUnit);
+    DefinePostfixOprt(in_Oprt, InchUnit);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief eval calculate formula.
- * @param prog string of formula.
- * @param errorMsg keep error message.
+ * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::eval(QString prog, QString *errorMsg)
+qreal Calculator::EvalFormula(const QString &formula)
 {
-    this->errorMsg = errorMsg;
-    this->errorMsg->clear();
-    debugFormula.clear();
-    this->prog = prog;
-    //qDebug()<<"Formula: "<<prog;
-    index = 0;
-    qreal result = get_exp();
-    QString str = QString(" = %1").arg(result, 0, 'f', 3);
-    debugFormula.append(str);
-    //qDebug()<<"Result:"<<debugFormula;
-    return result;
+    SetExpr(formula);
+    return Eval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief get_exp calculate formula.
- * @return value of formula.
- */
-qreal Calculator::get_exp()
+void Calculator::InitVariables(const VContainer *data)
 {
-    qreal result = 0;
-    get_token();
-    if (token.isEmpty())
+    if (qApp->patternType() == Pattern::Standard)
     {
-        serror(2);
-        return 0;
+        DefineVar(data->SizeName(), data->size());
+        DefineVar(data->HeightName(), data->height());
     }
-    level2(&result);
-    putback();
-    return result;
-}
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief level2 method of addition and subtraction of two terms.
- * @param result result of operation.
- */
-void Calculator::level2(qreal *result)
-{
-    QChar op;
-    qreal hold;
-
-    level3(result);
-    while ((op=token[0]) == '+' || op == '-')
     {
-        get_token();
-        level3(&hold);
-        arith(op, result, &hold);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief level3 method of multiplication, division, finding percent.
- * @param result result of operation.
- */
-void Calculator::level3(qreal *result)
-{
-    QChar op;
-    qreal hold;
-
-    level4(result);
-
-    while ((op = token[0]) == '*' || op == '/' || op == '%')
-    {
-        get_token();
-        level4(&hold);
-        arith(op, result, &hold);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief level4 method of degree two numbers.
- * @param result result of operation.
- */
-void Calculator::level4(qreal *result)
-{
-    qreal hold;
-
-    level5(result);
-    if (token[0] == '^')
-    {
-        get_token();
-        level4(&hold);
-        arith('^', result, &hold);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief level5 method for finding unary plus or minus.
- * @param result result of operation.
- */
-void Calculator::level5(qreal *result)
-{
-    QChar op;
-
-    op = '\0';
-    if ((token_type==DELIMITER) && (token[0]=='+' || token[0]=='-'))
-    {
-        op = token[0];
-        get_token();
-    }
-    level6(result);
-    if (op != '\0')
-    {
-        unary(op, result);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief level6 processing method of the expression in brackets.
- * @param result result of operation.
- */
-void Calculator::level6(qreal *result)
-{
-    if ((token[0] == '(') && (token_type == DELIMITER))
-    {
-        get_token();
-        level2(result);
-        if (token[0] != ')')
+        const QHash<QString, qreal> *lengthLines = data->DataLengthLines();
+        QHash<QString, qreal>::const_iterator i = lengthLines->constBegin();
+        while (i != lengthLines->constEnd())
         {
-            serror(1);
+            DefineVar(i.key(), i.value());
+            ++i;
         }
-        get_token();
-    } else
-        primitive(result);
-}
+    }
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief primitive method of determining the value of a variable by its name.
- * @param result result of operation.
- */
-void Calculator::primitive(qreal *result)
-{
-    QString str;
-    switch (token_type)
     {
-        case VARIABLE:
-            *result = find_var(token);
-            str = QString("%1").arg(*result, 0, 'f', 3);
-            debugFormula.append(str);
-            get_token();
-            return;
-        case NUMBER:
-            *result  = token.toDouble();
-            str = QString("%1").arg(*result, 0, 'f', 3);
-            debugFormula.append(str);
-            get_token();
-            return;
-        default:
-            serror(0);
+        const QHash<QString, qreal> *lengthSplines = data->DataLengthSplines();
+        QHash<QString, qreal>::const_iterator i = lengthSplines->constBegin();
+        while (i != lengthSplines->constEnd())
+        {
+            DefineVar(i.key(), i.value());
+            ++i;
+        }
+    }
+
+    {
+        const QHash<QString, qreal> *lengthArcs = data->DataLengthArcs();
+        QHash<QString, qreal>::const_iterator i = lengthArcs->constBegin();
+        while (i != lengthArcs->constEnd())
+        {
+            DefineVar(i.key(), i.value());
+            ++i;
+        }
+    }
+
+    {
+        const QHash<QString, qreal> *lineAngles = data->DataLineAngles();
+        QHash<QString, qreal>::const_iterator i = lineAngles->constBegin();
+        while (i != lineAngles->constEnd())
+        {
+            DefineVar(i.key(), i.value());
+            ++i;
+        }
+    }
+
+    {
+        const QHash<QString, VMeasurement> *measurements = data->DataMeasurements();
+        QHash<QString, VMeasurement>::const_iterator i = measurements->constBegin();
+        while (i != measurements->constEnd())
+        {
+            if (qApp->patternType() == Pattern::Standard)
+            {
+                DefineVar(i.key(), i.value().GetValue(data->size(), data->height()));
+            }
+            else
+            {
+                DefineVar(i.key(), i.value().GetValue());
+            }
+            ++i;
+        }
+    }
+
+    {
+        const QHash<QString, VIncrement> *increments = data->DataIncrements();
+        QHash<QString, VIncrement>::const_iterator i = increments->constBegin();
+        while (i != increments->constEnd())
+        {
+            if (qApp->patternType() == Pattern::Standard)
+            {
+                DefineVar(i.key(), i.value().GetValue(data->size(), data->height()));
+            }
+            else
+            {
+                DefineVar(i.key(), i.value().GetValue());
+            }
+            ++i;
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief arith perform the specified arithmetic. The result is written to the first element.
- * @param o sign of operation.
- * @param r first element.
- * @param h second element.
- */
-void Calculator::arith(QChar o, qreal *r, qreal *h)
+qreal Calculator::CmUnit(qreal val)
 {
-    qreal  t;//, ex;
-
-    switch (o.toLatin1())
+    qreal unit = val;
+    switch(qApp->patternUnit())
     {
-        case '-':
-            *r = *r-*h;
+        case Valentina::Mm:
+            unit = val * 10.0;
             break;
-        case '+':
-            *r = *r+*h;
+        case Valentina::Cm:
             break;
-        case '*':
-            *r = *r * *h;
-            break;
-        case '/':
-            *r = (*r)/(*h);
-            break;
-        case '%':
-            t = (*r)/(*h);
-            *r = *r-(t*(*h));
-            break;
-        case '^':
-            *r = pow(*r, *h);
+        case Valentina::Inch:
+            unit = val / 2.54;
             break;
         default:
             break;
     }
+
+    return unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief unary method changes the sign.
- * @param o sign of symbol.
- * @param r element.
- */
-void Calculator::unary(QChar o, qreal *r)
+qreal Calculator::MmUnit(qreal val)
 {
-    if (o=='-')
+    qreal unit = val;
+    switch(qApp->patternUnit())
     {
-        *r = -(*r);
+        case Valentina::Mm:
+            break;
+        case Valentina::Cm:
+            unit = val / 10.0;
+            break;
+        case Valentina::Inch:
+            unit = val / 25.4;
+            break;
+        default:
+            break;
     }
+
+    return unit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief find_var method is finding variable by name.
- * @param s name of variable.
- * @return value of variable.
- */
-qreal Calculator::find_var(QString s)
+qreal Calculator::InchUnit(qreal val)
 {
-    bool ok = false;
-    qreal value = data->FindVar(s, &ok);
-    if (ok == false)
+    qreal unit = val;
+    switch(qApp->patternUnit())
     {
-        qDebug()<<s;
-        serror(4); /* don't variable */
-        return 0;
-    }
-    return value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief serror report an error
- * @param error error code
- */
-void Calculator::serror(qint32 error)
-{
-    QString e[]=
-    {
-        "Syntax error",
-        "Parentheses do not match",
-        "This is not the expression",
-        "Assumed the equality symbol",
-        "Do not a variable"
-    };
-    errorMsg->clear();
-    *errorMsg = e[error];
-    qDebug()<<e[error];
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief look_up finding the internal format for the current token in the token table.
- * @param s name of token.
- * @return internal number of token.
- */
-char Calculator::look_up(QString s)
-{
-    QString p;
-
-    p = s;
-    p = p.toLower();
-
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief isdelim return true if c delimiter.
- * @param c character.
- * @return true - delimiter, false - do not delimiter.
- */
-bool Calculator::isdelim(QChar c)
-{
-    if (StrChr(" ;,+-<>/*%^=()", c) || c=='\n' || c=='\r' || c=='\0')
-    {
-        return true;
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief iswhite checks whether c space or tab.
- * @param c character.
- * @return true - space or tab, false - don't space and don't tab.
- */
-bool Calculator::iswhite(QChar c)
-{
-    if (c==' ' || c=='\t')
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief get_token return next token.
- */
-void Calculator::get_token()
-{
-    QString *temp;
-
-    token_type=0; tok=0;
-    token.clear();
-    temp=&token;
-
-    if (prog[index]=='\0')
-    { /* end of file */
-        token="\0";
-        tok=FINISHED;
-        token_type=DELIMITER;
-        return;
+        case Valentina::Mm:
+            unit = val * 25.4;
+            break;
+        case Valentina::Cm:
+            unit = val * 2.54;
+            break;
+        case Valentina::Inch:
+            break;
+        default:
+            break;
     }
 
-    while (iswhite(prog[index]))
-    {
-        ++index;  /* skip spaces */
-    }
-
-    if (prog[index]=='\r')
-    { /* crtl */
-        ++index; ++index;
-        tok= EOL; token='\r';
-        token.append('\n');token.append("\0");
-        token_type = DELIMITER;
-        return;
-    }
-
-    if (StrChr("+-*^/%=;(),><", prog[index]))
-    { /* delimiter */
-        *temp=prog[index];
-        index++; /* jump to the next position */
-        temp->append("\0");
-        token_type=DELIMITER;
-        debugFormula.append(token);
-        return;
-    }
-    if (prog[index]=='"')
-    { /* quoted string */
-        index++;
-        while (prog[index] != '"' && prog[index] != '\r')
-        {
-            temp->append(prog[index]);
-            index++;
-        }
-        if (prog[index]=='\r')
-        {
-            serror(1);
-        }
-        index++;temp->append("\0");
-        token_type=QUOTE;
-        return;
-    }
-    if (prog[index].isDigit())
-    { /* number */
-        while (isdelim(prog[index]) == false)
-        {
-            temp->append(prog[index]);
-            index++;
-        }
-        temp->append('\0');
-        token_type = NUMBER;
-        return;
-    }
-
-    if (prog[index].isPrint())
-    { /* variable or command */
-        while (isdelim(prog[index]) == false)
-        {
-            temp->append(prog[index]);
-            index++;
-        }
-        token_type=STRING;
-    }
-    temp->append("\0");
-
-    /* Seen if there is a command line or a variable */
-    if (token_type==STRING)
-    {
-        tok=look_up(token);
-        if (tok == false)
-        {
-            token_type = VARIABLE;
-        }
-        else
-        {
-            token_type = COMMAND; /* It is command */
-        }
-    }
-    return;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief StrChr checks whether the character belongs to the line.
- * @param string string with formula
- * @param c character.
- * @return true - belongs to the line, false - don't belongs to the line.
- */
-bool Calculator::StrChr(QString string, QChar c)
-{
-    return string.contains(c, Qt::CaseInsensitive);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief putback returns the readout token back into the flow.
- */
-void Calculator::putback()
-{
-    QString t;
-    t = token;
-    index = index - t.size();
+    return unit;
 }

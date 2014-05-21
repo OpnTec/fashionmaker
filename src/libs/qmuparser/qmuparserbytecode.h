@@ -43,7 +43,7 @@ struct SToken
     {
         struct //SValData
         {
-            qreal *ptr;
+            qreal  ptr;
             qreal  data;
             qreal  data2;
         } Val;
@@ -85,11 +85,11 @@ public:
     QmuParserByteCode(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
     QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
     void          Assign(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
-    void          AddVar(qreal *a_pVar) Q_DECL_NOEXCEPT;
+    void          AddVar(qreal a_pVar) Q_DECL_NOEXCEPT;
     void          AddVal(qreal a_fVal) Q_DECL_NOEXCEPT;
     void          AddOp(ECmdCode a_Oprt);
     void          AddIfElse(ECmdCode a_Oprt) Q_DECL_NOEXCEPT;
-    void          AddAssignOp(qreal *a_pVar) Q_DECL_NOEXCEPT;
+    void          AddAssignOp(qreal a_pVar) Q_DECL_NOEXCEPT;
     void          AddFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT;
     void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT;
     void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx) Q_DECL_NOEXCEPT;

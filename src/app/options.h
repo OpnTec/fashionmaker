@@ -278,4 +278,9 @@ extern const QString max_F;
 extern const QString sum_F;
 extern const QString avg_F;
 
+// Postfix operators
+extern const QString cm_Oprt;
+extern const QString mm_Oprt;
+extern const QString in_Oprt;
+
 #endif // OPTIONS_H

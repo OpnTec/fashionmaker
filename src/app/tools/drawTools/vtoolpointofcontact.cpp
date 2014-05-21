@@ -117,45 +117,58 @@ void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const
     const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondP = data->GeometricObject<const VPointF *>(secondPointId);
 
-    Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(radius, &errorMsg);
-    if (errorMsg.isEmpty())
+    qreal result = 0;
+    try
     {
-        QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), centerP->toQPointF(),
-                                                         firstP->toQPointF(), secondP->toQPointF());
-        quint32 id =  _id;
-        if (typeCreation == Valentina::FromGui)
+        Calculator cal(data);
+        result = cal.EvalFormula(radius);
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        //TODO show error message
+        qDebug() << "\nError:\n"
+                 << "--------\n"
+                 << "Message:     "   << e.GetMsg()   << "\n"
+                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                 << "Token:       \"" << e.GetToken() << "\"\n"
+                 << "Position:    "   << e.GetPos()   << "\n"
+                 << "Errc:        "   << QString::number(e.GetCode(), 16);
+        return;
+    }
+
+    QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), centerP->toQPointF(),
+                                                     firstP->toQPointF(), secondP->toQPointF());
+    quint32 id =  _id;
+    if (typeCreation == Valentina::FromGui)
+    {
+        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        data->AddLine(secondPointId, id);
+        data->AddLine(center, id);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        data->AddLine(secondPointId, id);
+        data->AddLine(center, id);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            data->AddLine(secondPointId, id);
-            data->AddLine(center, id);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            data->AddLine(secondPointId, id);
-            data->AddLine(center, id);
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::PointOfContact, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
-                                                                 firstPointId, secondPointId, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(center);
-            doc->IncrementReferens(firstPointId);
-            doc->IncrementReferens(secondPointId);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::PointOfContact, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
+                                                             firstPointId, secondPointId, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(center);
+        doc->IncrementReferens(firstPointId);
+        doc->IncrementReferens(secondPointId);
     }
 }
 

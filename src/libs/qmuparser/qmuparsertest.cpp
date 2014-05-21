@@ -103,9 +103,9 @@ int QmuParserTester::TestInterface()
 
     try
     {
-        p.DefineVar ( "a", &afVal[0] );
-        p.DefineVar ( "b", &afVal[1] );
-        p.DefineVar ( "c", &afVal[2] );
+        p.DefineVar ( "a", afVal[0] );
+        p.DefineVar ( "b", afVal[1] );
+        p.DefineVar ( "c", afVal[2] );
         p.SetExpr ( "a+b+c" );
         p.Eval();
     }
@@ -280,21 +280,21 @@ int QmuParserTester::TestNames()
     // variable names
     qreal a;
     p.ClearConst();
-    PARSER_THROWCHECK ( Var, false, "123abc", &a )
-    PARSER_THROWCHECK ( Var, false, "9a", &a )
-    PARSER_THROWCHECK ( Var, false, "0a", &a )
-    PARSER_THROWCHECK ( Var, false, "+a", &a )
-    PARSER_THROWCHECK ( Var, false, "-a", &a )
-    PARSER_THROWCHECK ( Var, false, "?a", &a )
-    PARSER_THROWCHECK ( Var, false, "!a", &a )
-    PARSER_THROWCHECK ( Var, false, "a+", &a )
-    PARSER_THROWCHECK ( Var, false, "a-", &a )
-    PARSER_THROWCHECK ( Var, false, "a*", &a )
-    PARSER_THROWCHECK ( Var, false, "a?", &a )
-    PARSER_THROWCHECK ( Var, true,  "a", &a )
-    PARSER_THROWCHECK ( Var, true,  "a_min", &a )
-    PARSER_THROWCHECK ( Var, true,  "a_min0", &a )
-    PARSER_THROWCHECK ( Var, true,  "a_min9", &a )
+    PARSER_THROWCHECK ( Var, false, "123abc", a )
+    PARSER_THROWCHECK ( Var, false, "9a", a )
+    PARSER_THROWCHECK ( Var, false, "0a", a )
+    PARSER_THROWCHECK ( Var, false, "+a", a )
+    PARSER_THROWCHECK ( Var, false, "-a", a )
+    PARSER_THROWCHECK ( Var, false, "?a", a )
+    PARSER_THROWCHECK ( Var, false, "!a", a )
+    PARSER_THROWCHECK ( Var, false, "a+", a )
+    PARSER_THROWCHECK ( Var, false, "a-", a )
+    PARSER_THROWCHECK ( Var, false, "a*", a )
+    PARSER_THROWCHECK ( Var, false, "a?", a )
+    PARSER_THROWCHECK ( Var, true,  "a", a )
+    PARSER_THROWCHECK ( Var, true,  "a_min", a )
+    PARSER_THROWCHECK ( Var, true,  "a_min0", a )
+    PARSER_THROWCHECK ( Var, true,  "a_min9", a )
     PARSER_THROWCHECK ( Var, false, "a_min9", 0 )
     // Postfix operators
     // fail
@@ -449,11 +449,11 @@ int QmuParserTester::TestVarConst()
         int idx;
         qmu::QmuParser p;
         qreal vVarVal[] = { 1, 2, 3, 4, 5};
-        p.DefineVar ( "a", &vVarVal[0] );
-        p.DefineVar ( "b", &vVarVal[1] );
-        p.DefineVar ( "c", &vVarVal[2] );
-        p.DefineVar ( "d", &vVarVal[3] );
-        p.DefineVar ( "e", &vVarVal[4] );
+        p.DefineVar ( "a", vVarVal[0] );
+        p.DefineVar ( "b", vVarVal[1] );
+        p.DefineVar ( "c", vVarVal[2] );
+        p.DefineVar ( "d", vVarVal[3] );
+        p.DefineVar ( "e", vVarVal[4] );
 
         // Test lookup of defined variables
         // 4 used variables
@@ -475,7 +475,7 @@ int QmuParserTester::TestVarConst()
         qmu::varmap_type::const_iterator item = UsedVar.begin();
         for ( idx = 0; item != UsedVar.end(); ++item )
         {
-            if ( &vVarVal[idx++] != item->second )
+            if ( vVarVal[idx++] != item->second )
             {
                 throw false;
             }
@@ -516,7 +516,7 @@ int QmuParserTester::TestVarConst()
         item = UsedVar.begin();
         for ( idx = 0; item != UsedVar.end(); ++item )
         {
-            if ( &vVarVal[idx++] != item->second )
+            if ( vVarVal[idx++] != item->second )
             {
                 throw false;
             }
@@ -1118,9 +1118,9 @@ int QmuParserTester::ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail
         qreal fVal[] = {1, 1, 1};
         QmuParser p;
 
-        p.DefineVar ( "a", &fVal[0] );
-        p.DefineVar ( "b", &fVal[1] );
-        p.DefineVar ( "c", &fVal[2] );
+        p.DefineVar ( "a", fVal[0] );
+        p.DefineVar ( "b", fVal[1] );
+        p.DefineVar ( "c", fVal[2] );
         p.DefinePostfixOprt ( "{m}", Milli );
         p.DefinePostfixOprt ( "m", Milli );
         p.DefineFun ( "ping", Ping );
@@ -1173,7 +1173,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
 
         // variable
         qreal var = 0;
-        p.DefineVar ( "a", &var );
+        p.DefineVar ( "a", var );
         p.SetExpr ( a_str );
 
         var = a_fVar1;
@@ -1242,11 +1242,11 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
         p1->DefineConst ( "const2", 3 );
         // variables
         qreal vVarVal[] = { 1, 2, 3, -2};
-        p1->DefineVar ( "a", &vVarVal[0] );
-        p1->DefineVar ( "aa", &vVarVal[1] );
-        p1->DefineVar ( "b", &vVarVal[1] );
-        p1->DefineVar ( "c", &vVarVal[2] );
-        p1->DefineVar ( "d", &vVarVal[3] );
+        p1->DefineVar ( "a", vVarVal[0] );
+        p1->DefineVar ( "aa", vVarVal[1] );
+        p1->DefineVar ( "b", vVarVal[1] );
+        p1->DefineVar ( "c", vVarVal[2] );
+        p1->DefineVar ( "d", vVarVal[3] );
 
         // custom value ident functions
         p1->AddValIdent ( &QmuParserTester::IsHexVal );

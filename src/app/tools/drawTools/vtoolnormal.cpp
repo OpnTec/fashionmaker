@@ -90,40 +90,54 @@ void VToolNormal::Create(const quint32 _id, const QString &formula, const quint3
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
-    Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+
+    qreal result = 0;
+    try
     {
-        QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                qApp->toPixel(result), angle);
-        quint32 id = _id;
-        if (typeCreation == Valentina::FromGui)
+        Calculator cal(data);
+        result = cal.EvalFormula(formula);
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        //TODO show error message
+        qDebug() << "\nError:\n"
+                 << "--------\n"
+                 << "Message:     "   << e.GetMsg()   << "\n"
+                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                 << "Token:       \"" << e.GetToken() << "\"\n"
+                 << "Position:    "   << e.GetPos()   << "\n"
+                 << "Errc:        "   << QString::number(e.GetCode(), 16);
+        return;
+    }
+
+    QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
+                                            qApp->toPixel(result), angle);
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
+    {
+        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::NormalTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
-                                                 firstPointId, secondPointId, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolNormal::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(firstPointId);
-            doc->IncrementReferens(secondPointId);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::NormalTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
+                                             firstPointId, secondPointId, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolNormal::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(firstPointId);
+        doc->IncrementReferens(secondPointId);
     }
 }
 

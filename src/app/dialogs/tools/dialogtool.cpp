@@ -32,6 +32,7 @@
 #include "../../tools/vabstracttool.h"
 
 #include <QtWidgets>
+#include "../../../libs/qmuparser/qmuparsererror.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
@@ -329,20 +330,29 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     }
     else
     {
-        Calculator cal(data);
-        QString errorMsg;
-        qreal result = cal.eval(edit->text(), &errorMsg);
-        if (errorMsg.isEmpty() == false)
+        try
+        {
+            Calculator cal(data);
+            const qreal result = cal.EvalFormula(edit->text());
+
+            label->setText(QString().setNum(result));
+            flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("");
+        }
+        catch(qmu::QmuParserError &e)
         {
             label->setText(tr("Error"));
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-        }
-        else
-        {
-            label->setText(QString().setNum(result));
-            flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip(e.GetMsg());
+            qDebug() << "\nError:\n"
+                     << "--------\n"
+                     << "Message:     "   << e.GetMsg()   << "\n"
+                     << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                     << "Token:       \"" << e.GetToken() << "\"\n"
+                     << "Position:    "   << e.GetPos()   << "\n"
+                     << "Errc:        "   << QString::number(e.GetCode(), 16);
         }
     }
     CheckState();

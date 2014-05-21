@@ -194,3 +194,8 @@ const QString min_F   = QStringLiteral("min");
 const QString max_F   = QStringLiteral("max");
 const QString sum_F   = QStringLiteral("sum");
 const QString avg_F   = QStringLiteral("avg");
+
+// Postfix operators
+const QString cm_Oprt = QStringLiteral("cm");
+const QString mm_Oprt = QStringLiteral("mm");
+const QString in_Oprt = QStringLiteral("in");

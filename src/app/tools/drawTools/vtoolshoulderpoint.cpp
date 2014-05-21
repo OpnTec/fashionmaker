@@ -119,44 +119,57 @@ void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
     const VPointF *shoulderPoint = data->GeometricObject<const VPointF *>(pShoulder);
 
-    Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    qreal result = 0;
+    try
     {
-        QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                       shoulderPoint->toQPointF(), qApp->toPixel(result));
-        quint32 id =  _id;
-        if (typeCreation == Valentina::FromGui)
+        Calculator cal(data);
+        result = cal.EvalFormula(formula);
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        //TODO show error message
+        qDebug() << "\nError:\n"
+                 << "--------\n"
+                 << "Message:     "   << e.GetMsg()   << "\n"
+                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                 << "Token:       \"" << e.GetToken() << "\"\n"
+                 << "Position:    "   << e.GetPos()   << "\n"
+                 << "Errc:        "   << QString::number(e.GetCode(), 16);
+        return;
+    }
+
+    QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
+                                                   shoulderPoint->toQPointF(), qApp->toPixel(result));
+    quint32 id =  _id;
+    if (typeCreation == Valentina::FromGui)
+    {
+        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(p1Line, id);
+        data->AddLine(p2Line, id);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(p1Line, id);
+        data->AddLine(p2Line, id);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(p1Line, id);
-            data->AddLine(p2Line, id);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(p1Line, id);
-            data->AddLine(p2Line, id);
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::ShoulderPointTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
-                                                               p1Line, p2Line, pShoulder,
-                                                               typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(p1Line);
-            doc->IncrementReferens(p2Line);
-            doc->IncrementReferens(pShoulder);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::ShoulderPointTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
+                                                           p1Line, p2Line, pShoulder,
+                                                           typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(p1Line);
+        doc->IncrementReferens(p2Line);
+        doc->IncrementReferens(pShoulder);
     }
 }
 

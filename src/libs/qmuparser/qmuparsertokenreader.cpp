@@ -976,7 +976,7 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) Q_DECL_NOEXCEPT
     // If a factory is available implicitely create new variables
     if ( m_pFactory )
     {
-        qreal *fVar = m_pFactory ( strTok, m_pFactoryData );
+        qreal fVar = m_pFactory ( strTok, m_pFactoryData );
         a_Tok.SetVar ( fVar, strTok );
 
         // Do not use m_pParser->DefineVar( strTok, fVar );
@@ -990,7 +990,7 @@ bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) Q_DECL_NOEXCEPT
     }
     else
     {
-        a_Tok.SetVar ( &m_fZero, strTok );
+        a_Tok.SetVar ( m_fZero, strTok );
         m_UsedVar[strTok] = 0;  // Add variable to used-var-list
     }
 

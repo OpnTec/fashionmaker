@@ -98,7 +98,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXC
  * @param a_pVar Pointer to be added.
  * @throw nothrow
  */
-void QmuParserByteCode::AddVar(qreal *a_pVar) Q_DECL_NOEXCEPT
+void QmuParserByteCode::AddVar(qreal a_pVar) Q_DECL_NOEXCEPT
 {
     ++m_iStackPos;
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
@@ -134,7 +134,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal) Q_DECL_NOEXCEPT
     // If optimization does not apply
     SToken tok;
     tok.Cmd = cmVAL;
-    tok.Val.ptr   = nullptr;
+    tok.Val.ptr   = 0;
     tok.Val.data  = 0;
     tok.Val.data2 = a_fVal;
     m_vRPN.push_back(tok);
@@ -355,14 +355,14 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                          (m_vRPN[sz-1].Cmd == cmVARMUL && m_vRPN[sz-2].Cmd == cmVARMUL &&
                           m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) )
                     {
-                        assert( (m_vRPN[sz-2].Val.ptr==nullptr && m_vRPN[sz-1].Val.ptr!=nullptr) ||
-                        (m_vRPN[sz-2].Val.ptr!=nullptr && m_vRPN[sz-1].Val.ptr==nullptr) ||
+                        assert( (m_vRPN[sz-2].Val.ptr==0 && m_vRPN[sz-1].Val.ptr!=0) ||
+                        (m_vRPN[sz-2].Val.ptr!=0 && m_vRPN[sz-1].Val.ptr==0) ||
                         (m_vRPN[sz-2].Val.ptr == m_vRPN[sz-1].Val.ptr) );
 
                         m_vRPN[sz-2].Cmd = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));    // variable
+                        m_vRPN[sz-2].Val.ptr = static_cast<qreal>(
+                                static_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                static_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));    // variable
                         m_vRPN[sz-2].Val.data2 += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data2; // offset
                         m_vRPN[sz-2].Val.data  += ((a_Oprt==cmSUB) ? -1 : 1) * m_vRPN[sz-1].Val.data;  // multiplikatior
                         m_vRPN.pop_back();
@@ -374,9 +374,9 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     (m_vRPN[sz-1].Cmd == cmVAL && m_vRPN[sz-2].Cmd == cmVAR) )
                     {
                         m_vRPN[sz-2].Cmd        = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr    = reinterpret_cast<qreal*>(
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
+                        m_vRPN[sz-2].Val.ptr    = static_cast<qreal>(
+                                static_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                static_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
                         m_vRPN[sz-2].Val.data   = m_vRPN[sz-2].Val.data2 + m_vRPN[sz-1].Val.data2;
                         m_vRPN[sz-2].Val.data2  = 0;
                         m_vRPN.pop_back();
@@ -387,9 +387,9 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     {
                         // Optimization: 2*(3*b+1) or (3*b+1)*2 -> 6*b+2
                         m_vRPN[sz-2].Cmd     = cmVARMUL;
-                        m_vRPN[sz-2].Val.ptr = reinterpret_cast<qreal*>(
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
-                                reinterpret_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
+                        m_vRPN[sz-2].Val.ptr = static_cast<qreal>(
+                                static_cast<qlonglong>(m_vRPN[sz-2].Val.ptr) |
+                                static_cast<qlonglong>(m_vRPN[sz-1].Val.ptr));
                         if (m_vRPN[sz-1].Cmd == cmVAL)
                         {
                             m_vRPN[sz-2].Val.data  *= m_vRPN[sz-1].Val.data2;
@@ -491,7 +491,7 @@ void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt) Q_DECL_NOEXCEPT
  *
  * @sa  ParserToken::ECmdCode
  */
-void QmuParserByteCode::AddAssignOp(qreal *a_pVar) Q_DECL_NOEXCEPT
+void QmuParserByteCode::AddAssignOp(qreal a_pVar) Q_DECL_NOEXCEPT
 {
     --m_iStackPos;
 
@@ -691,19 +691,19 @@ void QmuParserByteCode::AsciiDump()
                 qDebug() << "VAL \t" << "[" << m_vRPN[i].Val.data2 << "]\n";
                 break;
             case cmVAR:
-                qDebug() << "VAR \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                qDebug() << "VAR \t" << "[ADDR: 0x" << QString::number(m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
                 break;
             case cmVARPOW2:
-                qDebug() << "VARPOW2 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                qDebug() << "VARPOW2 \t" << "[ADDR: 0x" << QString::number(m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
                 break;
             case cmVARPOW3:
-                qDebug() << "VARPOW3 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                qDebug() << "VARPOW3 \t" << "[ADDR: 0x" << QString::number(m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
                 break;
             case cmVARPOW4:
-                qDebug() << "VARPOW4 \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
+                qDebug() << "VARPOW4 \t" << "[ADDR: 0x" << QString::number(m_vRPN[i].Val.ptr, 'f', 16) << "]\n";
                 break;
             case cmVARMUL:
-                qDebug() << "VARMUL \t" << "[ADDR: 0x" << QString::number(*m_vRPN[i].Val.ptr, 'f', 16) << "]" << " * ["
+                qDebug() << "VARMUL \t" << "[ADDR: 0x" << QString::number(m_vRPN[i].Val.ptr, 'f', 16) << "]" << " * ["
                          << m_vRPN[i].Val.data << "]" << " + [" << m_vRPN[i].Val.data2 << "]\n";
                 break;
             case cmFUNC:

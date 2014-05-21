@@ -93,26 +93,27 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &r
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
-    Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(radius, &errorMsg);
-    if (errorMsg.isEmpty())
+    try
     {
+        Calculator cal(data);
+
+        qreal result = cal.EvalFormula(radius);
         calcRadius = qApp->toPixel(result);
-    }
 
-    errorMsg.clear();
-    result = cal.eval(f1, &errorMsg);
-    if (errorMsg.isEmpty())
-    {
-        calcF1 = result;
+        calcF1 = cal.EvalFormula(f1);
+        calcF2 = cal.EvalFormula(f2);
     }
-
-    errorMsg.clear();
-    result = cal.eval(f2, &errorMsg);
-    if (errorMsg.isEmpty())
+    catch(qmu::QmuParserError &e)
     {
-        calcF2 = result;
+        //TODO show error message
+        qDebug() << "\nError:\n"
+                 << "--------\n"
+                 << "Message:     "   << e.GetMsg()   << "\n"
+                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                 << "Token:       \"" << e.GetToken() << "\"\n"
+                 << "Position:    "   << e.GetPos()   << "\n"
+                 << "Errc:        "   << QString::number(e.GetCode(), 16);
+        return;
     }
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);

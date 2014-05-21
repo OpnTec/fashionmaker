@@ -95,63 +95,76 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
-    Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    qreal result = 0;
+    try
     {
-        VArc arc1;
-        VArc arc2;
-        QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
+        Calculator cal(data);
+        result = cal.EvalFormula(formula);
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        //TODO show error message
+        qDebug() << "\nError:\n"
+                 << "--------\n"
+                 << "Message:     "   << e.GetMsg()   << "\n"
+                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
+                 << "Token:       \"" << e.GetToken() << "\"\n"
+                 << "Position:    "   << e.GetPos()   << "\n"
+                 << "Errc:        "   << QString::number(e.GetCode(), 16);
+        return;
+    }
 
-        quint32 id = _id;
-        quint32 arc1id = 0;
-        quint32 arc2id = 0;
-        if (typeCreation == Valentina::FromGui)
+    VArc arc1;
+    VArc arc2;
+    QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
+
+    quint32 id = _id;
+    quint32 arc1id = 0;
+    quint32 arc2id = 0;
+    if (typeCreation == Valentina::FromGui)
+    {
+        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        id = data->AddGObject(p);
+
+        VArc * ar1 = new VArc(arc1);
+        arc1id = data->AddGObject(ar1);
+
+        VArc * ar2 = new VArc(arc2);
+        arc2id = data->AddGObject(ar2);
+    }
+    else
+    {
+        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        data->UpdateGObject(id, p);
+
+        arc1id = id + 1;
+        arc2id = id + 2;
+
+        VArc * ar1 = new VArc(arc1);
+        data->UpdateGObject(arc1id, ar1);
+
+        VArc * ar2 = new VArc(arc2);
+        data->UpdateGObject(arc2id, ar2);
+
+        if (parse != Document::FullParse)
         {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            id = data->AddGObject(p);
-
-            VArc * ar1 = new VArc(arc1);
-            arc1id = data->AddGObject(ar1);
-
-            VArc * ar2 = new VArc(arc2);
-            arc2id = data->AddGObject(ar2);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            data->UpdateGObject(id, p);
+    }
+    data->AddLengthArc(arc1id);
+    data->AddLengthArc(arc2id);
 
-            arc1id = id + 1;
-            arc2id = id + 2;
-
-            VArc * ar1 = new VArc(arc1);
-            data->UpdateGObject(arc1id, ar1);
-
-            VArc * ar2 = new VArc(arc2);
-            data->UpdateGObject(arc2id, ar2);
-
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        data->AddLengthArc(arc1id);
-        data->AddLengthArc(arc2id);
-
-        VDrawTool::AddRecord(id, Valentina::CutArcTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-            doc->AddTool(id, point);
-            doc->AddTool(arc1id, point);
-            doc->AddTool(arc2id, point);
-            doc->IncrementReferens(arcId);
-        }
+    VDrawTool::AddRecord(id, Valentina::CutArcTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
+        doc->AddTool(id, point);
+        doc->AddTool(arc1id, point);
+        doc->AddTool(arc2id, point);
+        doc->IncrementReferens(arcId);
     }
 }
 
