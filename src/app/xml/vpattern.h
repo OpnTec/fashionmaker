@@ -53,6 +53,8 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
 // max support version of format
 #define VAL_VERSION 0x000100
 
+#define VAL_STR_VERSION "0.1.0"
+
 /**
  * @brief The VPattern class working with pattern file.
  */

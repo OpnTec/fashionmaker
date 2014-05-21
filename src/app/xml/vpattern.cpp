@@ -84,6 +84,11 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     QDomElement patternElement = this->createElement(TagPattern);
 
     patternElement.appendChild(createComment("Valentina pattern format."));
+
+    QDomElement version = createElement(TagVersion);
+    QDomText newNodeText = createTextNode(VAL_STR_VERSION);
+    version.appendChild(newNodeText);
+
     patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
