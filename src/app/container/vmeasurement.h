@@ -80,8 +80,6 @@ public:
     qreal   GetValue(const qreal &size, const qreal &height) const;
     QString TagName() const;
     void    setTagName(const QString &TagName);
-    bool    Virtual() const;
-    void    setVirtual(bool value);
 private:
     /**
      * @brief base value in base size and growth

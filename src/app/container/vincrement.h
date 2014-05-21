@@ -37,19 +37,19 @@
 class VIncrement
 {
 public:
-                   /**
-                    * @brief VIncrementTableRow create enpty row
-                    */
-                   VIncrement();
-                   /**
-                    * @brief VIncrementTableRow create row
-                    * @param id id
-                    * @param base value in base size and growth
-                    * @param ksize increment in sizes
-                    * @param kgrowth increment in growths
-                    * @param description description of increment
-                    */
-                   VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
+    /**
+     * @brief VIncrementTableRow create enpty row
+     */
+    VIncrement();
+    /**
+     * @brief VIncrementTableRow create row
+     * @param id id
+     * @param base value in base size and growth
+     * @param ksize increment in sizes
+     * @param kgrowth increment in growths
+     * @param description description of increment
+     */
+    VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
     /**
      * @brief getId return id of row
      * @return id
