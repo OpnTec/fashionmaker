@@ -30,6 +30,8 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
 
+#include "exception/vexceptionobjecterror.h"
+
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,24 +182,9 @@ void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const Q
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
 
-    try
-    {
-        Calculator cal(data);
-        const qreal result = cal.EvalFormula(formula);
-        line.setLength(qApp->toPixel(result));
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        //TODO show error
-        qDebug() << "\nError:\n"
-                 << "--------\n"
-                 << "Message:     "   << e.GetMsg()   << "\n"
-                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
-                 << "Token:       \"" << e.GetToken() << "\"\n"
-                 << "Position:    "   << e.GetPos()   << "\n"
-                 << "Errc:        "   << QString::number(e.GetCode(), 16);
-        return;
-    }
+    Calculator cal(data);
+    const qreal result = cal.EvalFormula(formula);
+    line.setLength(qApp->toPixel(result));
 
     quint32 id = _id;
     if (typeCreation == Valentina::FromGui)

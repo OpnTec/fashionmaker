@@ -93,28 +93,13 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &r
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
-    try
-    {
-        Calculator cal(data);
+    Calculator cal(data);
 
-        qreal result = cal.EvalFormula(radius);
-        calcRadius = qApp->toPixel(result);
+    qreal result = cal.EvalFormula(radius);
+    calcRadius = qApp->toPixel(result);
 
-        calcF1 = cal.EvalFormula(f1);
-        calcF2 = cal.EvalFormula(f2);
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        //TODO show error message
-        qDebug() << "\nError:\n"
-                 << "--------\n"
-                 << "Message:     "   << e.GetMsg()   << "\n"
-                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
-                 << "Token:       \"" << e.GetToken() << "\"\n"
-                 << "Position:    "   << e.GetPos()   << "\n"
-                 << "Errc:        "   << QString::number(e.GetCode(), 16);
-        return;
-    }
+    calcF1 = cal.EvalFormula(f1);
+    calcF2 = cal.EvalFormula(f2);
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );

@@ -39,6 +39,7 @@
 #include "vindividualmeasurements.h"
 
 #include <QMessageBox>
+#include <qmuparsererror.h>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -845,6 +846,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
+                throw excep;
+            }
             break;
         case 2: //VToolAlongLine::ToolType
             try
@@ -866,6 +878,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             {
                 VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
                 throw excep;
             }
             break;
@@ -892,6 +915,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
+                throw excep;
+            }
             break;
         case 4: //VToolNormal::ToolType
             try
@@ -916,6 +950,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
+                throw excep;
+            }
             break;
         case 5: //VToolBisector::ToolType
             try
@@ -938,6 +983,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
                 throw excep;
             }
             break;
@@ -982,6 +1038,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
                 throw excep;
             }
             break;
@@ -1089,6 +1156,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
+                throw excep;
+            }
             break;
         case 13: //VToolCutSplinePath::ToolType
             try
@@ -1109,6 +1187,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
+                throw excep;
+            }
             break;
         case 14: //VToolCutArc::ToolType
             try
@@ -1126,6 +1215,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
             {
                 VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
                 throw excep;
             }
             break;
@@ -1309,6 +1409,17 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
             {
                 VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch(qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+                QString message(  "Message:     "   + e.GetMsg()   + "\n"+
+                                + "Expression:  \"" + e.GetExpr()  + "\"\n"+
+                                + "Token:       \"" + e.GetToken() + "\"\n"+
+                                + "Position:    "   + QString::number(e.GetPos()) + "\n"+
+                                + "Errc:        "   + QString::number(e.GetCode(), 16));
+                excep.AddMoreInformation(message);
                 throw excep;
             }
             break;

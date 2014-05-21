@@ -95,24 +95,9 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QStr
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
-    qreal result = 0;
-    try
-    {
-        Calculator cal(data);
-        result = cal.EvalFormula(formula);
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        //TODO show error message
-        qDebug() << "\nError:\n"
-                 << "--------\n"
-                 << "Message:     "   << e.GetMsg()   << "\n"
-                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
-                 << "Token:       \"" << e.GetToken() << "\"\n"
-                 << "Position:    "   << e.GetPos()   << "\n"
-                 << "Errc:        "   << QString::number(e.GetCode(), 16);
-        return;
-    }
+
+    Calculator cal(data);
+    const qreal result = cal.EvalFormula(formula);
 
     VArc arc1;
     VArc arc2;

@@ -114,24 +114,8 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     const VPointF *thirdPoint = data->GeometricObject<const VPointF *>(thirdPointId);
 
-    qreal result = 0;
-    try
-    {
-        Calculator cal(data);
-        result = cal.EvalFormula(formula);
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        //TODO show error message
-        qDebug() << "\nError:\n"
-                 << "--------\n"
-                 << "Message:     "   << e.GetMsg()   << "\n"
-                 << "Expression:  \"" << e.GetExpr()  << "\"\n"
-                 << "Token:       \"" << e.GetToken() << "\"\n"
-                 << "Position:    "   << e.GetPos()   << "\n"
-                 << "Errc:        "   << QString::number(e.GetCode(), 16);
-        return;
-    }
+    Calculator cal(data);
+    const qreal result = cal.EvalFormula(formula);
 
     QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                               thirdPoint->toQPointF(), qApp->toPixel(result));
