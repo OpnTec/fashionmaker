@@ -202,11 +202,7 @@ int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
 {
     qreal fVal(0);
 
-    #if defined(_UNICODE)
-        std::wstring a_szExprStd = a_szExpr.toStdWString();
-    #else
-        std::string a_szExprStd = a_szExpr.toStdString();
-    #endif
+    std::wstring a_szExprStd = a_szExpr.toStdWString();
     stringstream_type stream(a_szExprStd);
     stream.seekg(0);        // todo:  check if this really is necessary
     stream.imbue(QmuParser::s_locale);

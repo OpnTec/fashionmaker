@@ -81,23 +81,23 @@ struct SToken
 class QmuParserByteCode
 {
 public:
-    QmuParserByteCode() Q_DECL_NOEXCEPT;
-    QmuParserByteCode(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
-    QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
-    void          Assign(const QmuParserByteCode &a_ByteCode) Q_DECL_NOEXCEPT;
-    void          AddVar(qreal *a_pVar) Q_DECL_NOEXCEPT;
-    void          AddVal(qreal a_fVal) Q_DECL_NOEXCEPT;
+    QmuParserByteCode();
+    QmuParserByteCode(const QmuParserByteCode &a_ByteCode);
+    QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode);
+    void          Assign(const QmuParserByteCode &a_ByteCode);
+    void          AddVar(qreal *a_pVar);
+    void          AddVal(qreal a_fVal);
     void          AddOp(ECmdCode a_Oprt);
-    void          AddIfElse(ECmdCode a_Oprt) Q_DECL_NOEXCEPT;
-    void          AddAssignOp(qreal *a_pVar) Q_DECL_NOEXCEPT;
-    void          AddFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT;
-    void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc) Q_DECL_NOEXCEPT;
-    void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx) Q_DECL_NOEXCEPT;
-    void          EnableOptimizer(bool bStat) Q_DECL_NOEXCEPT;
-    void          Finalize() Q_DECL_NOEXCEPT;
-    void          clear() Q_DECL_NOEXCEPT;
-    std::size_t   GetMaxStackSize() const Q_DECL_NOEXCEPT;
-    std::size_t   GetSize() const Q_DECL_NOEXCEPT;
+    void          AddIfElse(ECmdCode a_Oprt);
+    void          AddAssignOp(qreal *a_pVar);
+    void          AddFun(generic_fun_type a_pFun, int a_iArgc);
+    void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
+    void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
+    void          EnableOptimizer(bool bStat);
+    void          Finalize();
+    void          clear();
+    std::size_t   GetMaxStackSize() const;
+    std::size_t   GetSize() const;
     const SToken* GetBase() const;
     void          AsciiDump();
 private:
@@ -122,13 +122,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void QmuParserByteCode::EnableOptimizer(bool bStat) Q_DECL_NOEXCEPT
+inline void QmuParserByteCode::EnableOptimizer(bool bStat)
 {
     m_bEnableOptimizer = bStat;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline std::size_t QmuParserByteCode::GetMaxStackSize() const Q_DECL_NOEXCEPT
+inline std::size_t QmuParserByteCode::GetMaxStackSize() const
 {
     return m_iMaxStackSize+1;
 }
@@ -138,7 +138,7 @@ inline std::size_t QmuParserByteCode::GetMaxStackSize() const Q_DECL_NOEXCEPT
  * @brief Returns the number of entries in the bytecode.
  */
 // cppcheck-suppress unusedFunction
-inline std::size_t QmuParserByteCode::GetSize() const Q_DECL_NOEXCEPT
+inline std::size_t QmuParserByteCode::GetSize() const
 {
     return m_vRPN.size();
 }

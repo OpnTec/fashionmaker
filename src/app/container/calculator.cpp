@@ -30,6 +30,8 @@
 #include <QDebug>
 #include "../widgets/vapplication.h"
 
+int Calculator::iVal = -1;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Calculator class constructor.
@@ -60,11 +62,14 @@ Calculator::Calculator(const VContainer *data)
     DefinePostfixOprt(cm_Oprt, CmUnit);
     DefinePostfixOprt(mm_Oprt, MmUnit);
     DefinePostfixOprt(in_Oprt, InchUnit);
+
+    SetVarFactory(AddVariable, this);
 }
 
 Calculator::~Calculator()
 {
     delete [] vVarVal;
+    Calculator::iVal = -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,4 +271,36 @@ qreal Calculator::InchUnit(qreal val)
     }
 
     return unit;
+}
+
+//---------------------------------------------------------------------------
+// Factory function for creating new parser variables
+// This could as well be a function performing database queries.
+qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
+{
+    // I don't want dynamic allocation here, so i used this static buffer
+    // If you want dynamic allocation you must allocate all variables dynamically
+    // in order to delete them later on. Or you find other ways to keep track of
+    // variables that have been created implicitely.
+    static qreal afValBuf[100];
+
+    ++iVal;
+
+    Q_UNUSED(a_szName)
+    Q_UNUSED(a_pUserData)
+    //  qDebug() << "Generating new variable \""
+    //           << a_szName << "\" (slots left: "
+    //           << 99-iVal << ")"
+    //           << " User data pointer is:"
+    //           << QString::number(a_pUserData, 16);
+    afValBuf[iVal] = 0;
+
+    if (iVal>=99)
+    {
+        throw qmu::QmuParserError( "Variable buffer overflow." );
+    }
+    else
+    {
+        return &afValBuf[iVal];
+    }
 }
