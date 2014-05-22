@@ -48,7 +48,7 @@ SOURCES += \
         tablewindow.cpp \
         stable.cpp \
         version.cpp \
-    options.cpp
+        options.cpp
 
 HEADERS  += \
         mainwindow.h \
