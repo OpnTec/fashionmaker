@@ -87,12 +87,13 @@ private:
     QMap<QString, VTranslation> descriptions;
     QMap<QString, VTranslation> variables;
     QMap<QString, VTranslation> functions;
+    QMap<QString, VTranslation> postfixOperators;
     void                  InitLineWidth();
     void                  InitMeasurements();
     void                  InitMeasurement(const QString &measurement, const QString &guiText, const QString & desc);
     void                  InitVariables();
     void                  InitFunctions();
-
+    void                  InitPostfixOperators();
 };
 
 inline Valentina::Units VApplication::patternUnit() const

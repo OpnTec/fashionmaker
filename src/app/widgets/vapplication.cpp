@@ -46,12 +46,14 @@ VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
-      variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>())
+      variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
+      postfixOperators(QMap<QString, VTranslation>())
 {
     InitLineWidth();
     InitMeasurements();
     InitVariables();
     InitFunctions();
+    InitPostfixOperators();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -628,6 +630,15 @@ void VApplication::InitFunctions()
     functions.insert(max_F, VTranslation::translate(context, max_F, QStringLiteral("max of all arguments")));
     functions.insert(sum_F, VTranslation::translate(context, sum_F, QStringLiteral("sum of all arguments")));
     functions.insert(avg_F, VTranslation::translate(context, avg_F, QStringLiteral("mean value of all arguments")));
+}
+
+void VApplication::InitPostfixOperators()
+{
+    const QString context = QStringLiteral("PostfixOperators");
+
+    postfixOperators.insert(cm_Oprt, VTranslation::translate(context, cm_Oprt, QStringLiteral("centimeter")));
+    postfixOperators.insert(mm_Oprt, VTranslation::translate(context, mm_Oprt, QStringLiteral("millimeter")));
+    postfixOperators.insert(in_Oprt, VTranslation::translate(context, in_Oprt, QStringLiteral("inch")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
