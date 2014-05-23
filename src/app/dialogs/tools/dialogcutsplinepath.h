@@ -119,7 +119,7 @@ inline QString DialogCutSplinePath::getPointName() const
 
 inline QString DialogCutSplinePath::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline quint32 DialogCutSplinePath::getSplinePathId() const

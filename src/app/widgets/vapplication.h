@@ -77,6 +77,9 @@ public:
     QString               Description(const QString &measurement) const;
     QString               Variable(const QString &name) const;
     QString               Function(const QString &name) const;
+    QString               PostfixOperator(const QString &name) const;
+    QString               FormulaFromUser(const QString &formula);
+    QString               FormulaToUser(const QString &formula);
 private:
     Valentina::Units      _patternUnit;
     Pattern::Measurements _patternType;
@@ -94,6 +97,11 @@ private:
     void                  InitVariables();
     void                  InitFunctions();
     void                  InitPostfixOperators();
+    bool                  Measurements(QString &newFormula, int position, const QString &token);
+    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token);
+    bool                  PostfixOperators(QString &newFormula, int position, const QString &token);
+    bool                  Functions(QString &newFormula, int position, const QString &token);
+    bool                  VariablesToUser(QString &newFormula, int position, const QString &token);
 };
 
 inline Valentina::Units VApplication::patternUnit() const

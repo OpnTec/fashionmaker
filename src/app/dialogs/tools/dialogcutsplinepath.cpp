@@ -71,7 +71,7 @@ void DialogCutSplinePath::setPointName(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     ui->lineEditFormula->setText(formula);
 }
 

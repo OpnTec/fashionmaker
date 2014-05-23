@@ -40,20 +40,7 @@ int Calculator::iVal = -1;
 Calculator::Calculator(const VContainer *data)
     :QmuParser(), vVarVal(nullptr)
 {
-    //String with all unique symbols for supported alpabets.
-    // See script alphabets.py for generation and more information.
-    const QString symbols = QStringLiteral("ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋCŬđ"
-                                           "ҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփїІĈЎґĐΗЖҙĘȚ"
-                                           "ΟОҡĠآΧЦتЮұİزηжԸغοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖЙŤěΜӜDСձģΤӰ"
-                                           "ЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪ"
-                                           "ЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥĹЧΦثÆӳЯIسŲԵзζԽпξكՅ"
-                                           "ÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌR"
-                                           "ӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒU"
-                                           "əÚѝŻşҤӑâeէŐımկòuշÕúտŔ");
-
-    // Defining identifier character sets
-    DefineNameChars(QStringLiteral("0123456789_") + symbols);
-    DefineOprtChars(symbols + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
+    InitCharacterSets();
 
     // Add variables
     InitVariables(data);
@@ -62,8 +49,35 @@ Calculator::Calculator(const VContainer *data)
     DefinePostfixOprt(cm_Oprt, CmUnit);
     DefinePostfixOprt(mm_Oprt, MmUnit);
     DefinePostfixOprt(in_Oprt, InchUnit);
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+Calculator::Calculator(const QString &formula, bool fromUser)
+    :QmuParser(), vVarVal(nullptr)
+{
+    InitCharacterSets();
     SetVarFactory(AddVariable, this);
+
+    // Add unary operators
+    if(fromUser)
+    {
+        DefinePostfixOprt(qApp->PostfixOperator(cm_Oprt), CmUnit);
+        DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
+        DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
+
+        QLocale loc = QLocale();
+        SetDecSep(loc.decimalPoint().toLatin1());
+        SetThousandsSep(loc.groupSeparator().toLatin1());
+        SetArgSep(';');
+    }
+    else
+    {
+        DefinePostfixOprt(cm_Oprt, CmUnit);
+        DefinePostfixOprt(mm_Oprt, MmUnit);
+        DefinePostfixOprt(in_Oprt, InchUnit);
+    }
+
+    SetExpr(formula);
 }
 
 Calculator::~Calculator()
@@ -208,6 +222,24 @@ void Calculator::InitVariables(const VContainer *data)
             ++i;
         }
     }
+}
+
+void Calculator::InitCharacterSets()
+{
+    //String with all unique symbols for supported alpabets.
+    // See script alphabets.py for generation and more information.
+    const QString symbols = QStringLiteral("ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋCŬđ"
+                                           "ҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփїІĈЎґĐΗЖҙĘȚ"
+                                           "ΟОҡĠآΧЦتЮұİزηжԸغοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖЙŤěΜӜDСձģΤӰ"
+                                           "ЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪ"
+                                           "ЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥĹЧΦثÆӳЯIسŲԵзζԽпξكՅ"
+                                           "ÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌR"
+                                           "ӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒU"
+                                           "əÚѝŻşҤӑâeէŐımկòuշÕúտŔ");
+
+    // Defining identifier character sets
+    DefineNameChars(QStringLiteral("0123456789_") + symbols);
+    DefineOprtChars(symbols + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

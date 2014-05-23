@@ -37,7 +37,8 @@ using namespace qmu;
 class Calculator:public QmuParser
 {
 public:
-    explicit Calculator(const VContainer *data);
+    Calculator(const VContainer *data);
+    Calculator(const QString &formula, bool fromUser = true);
     ~Calculator();
     qreal         EvalFormula(const QString &formula);
 private:
@@ -45,6 +46,7 @@ private:
     qreal *vVarVal;
     static int iVal;
     void          InitVariables(const VContainer *data);
+    void          InitCharacterSets();
     static qreal  CmUnit(qreal val);
     static qreal  MmUnit(qreal val);
     static qreal  InchUnit(qreal val);

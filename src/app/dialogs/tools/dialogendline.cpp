@@ -89,7 +89,7 @@ void DialogEndLine::setTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     ui->lineEditFormula->setText(formula);
 }
 

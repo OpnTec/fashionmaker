@@ -332,8 +332,9 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     {
         try
         {
+            const QString formula = qApp->FormulaFromUser(edit->text());
             Calculator cal(data);
-            const qreal result = cal.EvalFormula(edit->text());
+            const qreal result = cal.EvalFormula(formula);
 
             label->setText(QString().setNum(result));
             flag = true;
@@ -345,7 +346,7 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             label->setText(tr("Error"));
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-            emit ToolTip(e.GetMsg());
+            emit ToolTip("Parser error: "+e.GetMsg());
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"

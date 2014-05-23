@@ -37,6 +37,8 @@
 #include <QDebug>
 #include <QDir>
 
+#include <container/calculator.h>
+
 const qreal VApplication::PrintDPI = 96.0;
 
 #define DefWidth 1.2//mm
@@ -632,6 +634,7 @@ void VApplication::InitFunctions()
     functions.insert(avg_F, VTranslation::translate(context, avg_F, QStringLiteral("mean value of all arguments")));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitPostfixOperators()
 {
     const QString context = QStringLiteral("PostfixOperators");
@@ -639,6 +642,86 @@ void VApplication::InitPostfixOperators()
     postfixOperators.insert(cm_Oprt, VTranslation::translate(context, cm_Oprt, QStringLiteral("centimeter")));
     postfixOperators.insert(mm_Oprt, VTranslation::translate(context, mm_Oprt, QStringLiteral("millimeter")));
     postfixOperators.insert(in_Oprt, VTranslation::translate(context, in_Oprt, QStringLiteral("inch")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::Measurements(QString &newFormula, int position, const QString &token)
+{
+    QMap<QString, VTranslation>::const_iterator i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        if(token == i.value().translate())
+        {
+            newFormula.replace(position, token.length(), i.key());
+            return true;
+        }
+        ++i;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token)
+{
+    QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
+    while (i != variables.constEnd())
+    {
+        if(token.indexOf( i.value().translate() ) == 0)
+        {
+            newFormula.replace(position, i.value().translate().length(), i.key());
+            return true;
+        }
+        ++i;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::PostfixOperators(QString &newFormula, int position, const QString &token)
+{
+    QMap<QString, VTranslation>::const_iterator i = postfixOperators.constBegin();
+    while (i != postfixOperators.constEnd())
+    {
+        if(token == i.value().translate())
+        {
+            newFormula.replace(position, token.length(), i.key());
+            return true;
+        }
+        ++i;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::Functions(QString &newFormula, int position, const QString &token)
+{
+    QMap<QString, VTranslation>::const_iterator i = functions.constBegin();
+    while (i != functions.constEnd())
+    {
+        if(token == i.value().translate())
+        {
+            newFormula.replace(position, token.length(), i.key());
+            return true;
+        }
+        ++i;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token)
+{
+    QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
+    while (i != variables.constEnd())
+    {
+        if(token.indexOf( i.key() ) == 0)
+        {
+            newFormula.replace(position, variables.value(i.key()).translate().length(), i.value().translate());
+            return true;
+        }
+        ++i;
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -676,4 +759,176 @@ QString VApplication::Variable(const QString &name) const
 QString VApplication::Function(const QString &name) const
 {
     return functions.value(name).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::PostfixOperator(const QString &name) const
+{
+    return postfixOperators.value(name).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::FormulaFromUser(const QString &formula)
+{
+    QString newFormula = formula;
+
+    QMap<int, QString> tokens;
+    QMap<int, QString> numbers;
+    try
+    {
+        Calculator cal(formula);
+        tokens = cal.GetTokens();
+        numbers = cal.GetNumbers();
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        qDebug() << "\nMath parser error:\n"
+                 << "--------------------------------------\n"
+                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Expression:  " << e.GetExpr() << "\n"
+                 << "--------------------------------------";
+        return newFormula;
+    }
+
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
+    {
+        if(Measurements(newFormula, i.key(), i.value()))
+        {
+            ++i;
+            continue;
+        }
+
+        if(VariablesFromUser(newFormula, i.key(), i.value()))
+        {
+            ++i;
+            continue;
+        }
+
+        if(PostfixOperators(newFormula, i.key(), i.value()))
+        {
+            ++i;
+            continue;
+        }
+
+        if(Functions(newFormula, i.key(), i.value()))
+        {
+            ++i;
+            continue;
+        }
+        ++i;
+    }
+
+    QLocale loc = QLocale();
+    if(loc != QLocale(QLocale::C))
+    {
+        QMap<int, QString>::const_iterator i = numbers.constBegin();
+        while (i != numbers.constEnd())
+        {
+            QLocale::setDefault(QLocale::C);
+            bool ok = false;
+            qreal d = QString(i.value()).toDouble(&ok);
+            if(ok == false)
+            {
+                qDebug()<<"Can't convert to double token"<<i.value();
+                ++i;
+                continue;
+            }
+            if(qFloor (d) < d)
+            {
+                QLocale::setDefault(QLocale::system());
+                QLocale loc = QLocale();
+                QString dStr = loc.toString(d);
+                newFormula.replace(i.key(), i.value().length(), dStr);
+            }
+            ++i;
+        }
+    }
+
+    return newFormula;
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::FormulaToUser(const QString &formula)
+{
+    QString newFormula = formula;
+
+    QMap<int, QString> tokens;
+    QMap<int, QString> numbers;
+    try
+    {
+        Calculator cal(formula);
+        tokens = cal.GetTokens();
+        numbers = cal.GetNumbers();
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        qDebug() << "\nMath parser error:\n"
+                 << "--------------------------------------\n"
+                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Expression:  " << e.GetExpr() << "\n"
+                 << "--------------------------------------";
+        return newFormula;
+    }
+
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
+    {
+        if (measurements.contains(i.value()))
+        {
+            newFormula.replace(i.key(), i.value().length(), measurements.value(i.value()).translate());
+            ++i;
+            continue;
+        }
+
+        if (functions.contains(i.value()))
+        {
+            newFormula.replace(i.key(), i.value().length(), functions.value(i.value()).translate());
+            ++i;
+            continue;
+        }
+
+        if (postfixOperators.contains(i.value()))
+        {
+            newFormula.replace(i.key(), i.value().length(), postfixOperators.value(i.value()).translate());
+            ++i;
+            continue;
+        }
+
+        if(VariablesToUser(newFormula, i.key(), i.value()))
+        {
+            ++i;
+            continue;
+        }
+
+    }
+
+    QLocale loc = QLocale();
+    if(loc != QLocale::C)
+    {
+        QMap<int, QString>::const_iterator i = numbers.constBegin();
+        while (i != numbers.constEnd())
+        {
+            bool ok = false;
+            qreal d = QString(i.value()).toDouble(&ok);
+            if(ok == false)
+            {
+                qDebug()<<"Can't convert to double token"<<i.value();
+                ++i;
+                continue;
+            }
+            if(qFloor (d) < d)
+            {
+                QLocale::setDefault(QLocale::C);
+                QLocale loc = QLocale();
+                QString dStr = loc.toString(d);
+                newFormula.replace(i.key(), i.value().length(), dStr);
+                QLocale::setDefault(QLocale::system());
+            }
+            ++i;
+        }
+    }
+
+    return newFormula;
 }

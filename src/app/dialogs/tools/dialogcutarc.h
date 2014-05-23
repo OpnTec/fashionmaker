@@ -64,7 +64,7 @@ public:
      * @brief getFormula return string with formula length
      * @return formula
      */
-    QString           getFormula() const {return formula;}
+    QString           getFormula() const {return qApp->FormulaFromUser(formula);}
     /**
      * @brief setFormula set string with formula length
      * @param value string with formula

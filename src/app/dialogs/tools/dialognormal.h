@@ -171,7 +171,7 @@ inline QString DialogNormal::getTypeLine() const
 
 inline QString DialogNormal::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline qreal DialogNormal::getAngle() const
