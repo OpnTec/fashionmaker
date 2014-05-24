@@ -93,7 +93,6 @@ private:
     QMap<QString, VTranslation> postfixOperators;
     void                  InitLineWidth();
     void                  InitMeasurements();
-    void                  InitMeasurement(const QString &measurement, const QString &guiText, const QString & desc);
     void                  InitVariables();
     void                  InitFunctions();
     void                  InitPostfixOperators();

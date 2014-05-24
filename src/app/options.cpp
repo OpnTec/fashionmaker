@@ -28,6 +28,7 @@
 
 #include "options.h"
 
+// Keep synchronize all names with initialization in VApllication class.
 //measurements
 const QString headGirth_M                   = QStringLiteral("head_girth");
 const QString midNeckGirth_M                = QStringLiteral("mid_neck_girth");
@@ -145,7 +146,8 @@ const QString halfGirthChestThird_M               = QStringLiteral("half_girth_c
 const QString halfGirthWaist_M                    = QStringLiteral("half_girth_waist");
 const QString halfGirthHipsConsideringProtrudingAbdomen_M
 = QStringLiteral("half_girth_hips_considering_protruding_abdomen");
-const QString halfGirthHipsExcludingProtrudingAbdomen_M = QStringLiteral("half_girth_hips_excluding_protruding_abdomen");
+const QString halfGirthHipsExcludingProtrudingAbdomen_M
+= QStringLiteral("half_girth_hips_excluding_protruding_abdomen");
 const QString girthKneeFlexedFeet_M               = QStringLiteral("girth_knee_flexed_feet");
 const QString neckTransverseDiameter_M            = QStringLiteral("neck_transverse_diameter");
 const QString frontSlashShoulderHeight_M          = QStringLiteral("front_slash_shoulder_height");

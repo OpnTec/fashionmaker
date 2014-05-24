@@ -39,6 +39,7 @@
  * I took idea from this article http://ololoepepe.blogspot.com/2013/08/qt.html.
  * As you know, if wrap string to a function translate, it will be marked for translation. No matter what namespace
  * contains this function. In class Translation used this circumstance.
+ * It is mean never change name of method translate!!!!!.
  * Instead of using QT_TRANSLATE_NOOP3 macros we can store strings in QMap.
  * Example:
  * create map and fill up its
@@ -52,14 +53,44 @@ class VTranslation
 public:
     VTranslation();
     VTranslation(const QString &context, const QString &sourceText, const QString &disambiguation = 0, int n = -1);
+    VTranslation &operator=(const VTranslation &tr);
+    VTranslation(const VTranslation &tr);
     QString translate() const;
     static VTranslation translate(const QString &context, const QString &sourceText, const QString &disambiguation = 0,
                                   int n = -1);
+    QString getMcontext() const;
+    QString getMsourceText() const;
+    QString getMdisambiguation() const;
+    int     getN() const;
 private:
     QString mcontext;
     QString msourceText;
     QString mdisambiguation;
     int     mn;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VTranslation::getMcontext() const
+{
+    return mcontext;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VTranslation::getMsourceText() const
+{
+    return msourceText;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VTranslation::getMdisambiguation() const
+{
+    return mdisambiguation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VTranslation::getN() const
+{
+    return mn;
+}
 
 #endif // VTRANSLATION_H

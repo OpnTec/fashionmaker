@@ -51,6 +51,23 @@ VTranslation::VTranslation(const QString &context, const QString &sourceText, co
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VTranslation &VTranslation::operator=(const VTranslation &tr)
+
+{
+    this->mcontext = tr.getMcontext();
+    this->msourceText = tr.getMsourceText();
+    this->mdisambiguation = tr.getMdisambiguation();
+    this->mn = tr.getN();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VTranslation::VTranslation(const VTranslation &tr)
+    :mcontext(tr.getMcontext()), msourceText(tr.getMsourceText()), mdisambiguation(tr.getMdisambiguation()),
+      mn(tr.getN())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslation::VTranslation::translate() const
 {
     return QCoreApplication::translate(mcontext.toUtf8().constData(), msourceText.toUtf8().constData(),

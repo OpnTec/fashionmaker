@@ -220,428 +220,1298 @@ void VApplication::InitLineWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitMeasurements()
 {
+    //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
+    //mark such string to translation.
+    VTranslation m;
+    VTranslation g;
+    VTranslation d;
+
+    //=================================================================================================================
     // head_and_neck
-    InitMeasurement(headGirth_M, QStringLiteral("Head girth"), QStringLiteral("Around fullest part of Head"));
+    m = VTranslation::translate("Measurements", "head_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Head girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around fullest part of Head", "Full measurement description");
 
-    InitMeasurement(midNeckGirth_M, QStringLiteral("Mid-neck girth"), QStringLiteral("Around middle part of Neck"));
+    measurements.insert(headGirth_M, m);
+    guiTexts.insert(headGirth_M, g);
+    descriptions.insert(headGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "mid_neck_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Mid-neck girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around middle part of Neck", "Full measurement description");
 
-    InitMeasurement(neckBaseGirth_M, QStringLiteral("Neck Base girth"), QStringLiteral("Around Neck at base"));
+    measurements.insert(midNeckGirth_M, m);
+    guiTexts.insert(midNeckGirth_M, g);
+    descriptions.insert(midNeckGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_base_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck Base girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Neck at base", "Full measurement description");
 
-    InitMeasurement(headAndNeckLength_M, QStringLiteral("Head and Neck length"),
-                    QStringLiteral("Vertical Distance from Crown to Nape"));
+    measurements.insert(neckBaseGirth_M, m);
+    guiTexts.insert(neckBaseGirth_M, g);
+    descriptions.insert(neckBaseGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "head_and_neck_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Head and Neck length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Vertical Distance from Crown to Nape", "Full measurement description");
 
+    measurements.insert(headAndNeckLength_M, m);
+    guiTexts.insert(headAndNeckLength_M, g);
+    descriptions.insert(headAndNeckLength_M, d);
+    //=================================================================================================================
     // torso
-    InitMeasurement(centerFrontWaistLength_M, QStringLiteral("Front Center length"),
-                    QStringLiteral("Front Neck Center over tape at Bustline to Front Waist Center"));
+    m = VTranslation::translate("Measurements", "center_front_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Center length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front Neck Center over tape at Bustline to Front Waist Center",
+                                "Full measurement description");
 
-    InitMeasurement(centerBackWaistLength_M, QStringLiteral("Back Center length"),
-                    QStringLiteral("Back Neck Center to Back Waist Center"));
+    measurements.insert(centerFrontWaistLength_M, m);
+    guiTexts.insert(centerFrontWaistLength_M, g);
+    descriptions.insert(centerFrontWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "center_back_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Center length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back Neck Center to Back Waist Center",
+                                "Full measurement description");
 
-    InitMeasurement(shoulderLength_M, QStringLiteral("Shoulder length"), QStringLiteral("NeckPoint to ShoulderTip"));
+    measurements.insert(centerBackWaistLength_M, m);
+    guiTexts.insert(centerBackWaistLength_M, g);
+    descriptions.insert(centerBackWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to ShoulderTip", "Full measurement description");
 
-    InitMeasurement(sideWaistLength_M, QStringLiteral("Side Waist length"), QStringLiteral("Armpit to Waist side"));
+    measurements.insert(shoulderLength_M, m);
+    guiTexts.insert(shoulderLength_M, g);
+    descriptions.insert(shoulderLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "side_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Side Waist length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Armpit to Waist side", "Full measurement description");
 
-    InitMeasurement(trunkLength_M, QStringLiteral("Trunk length"),
-        QStringLiteral("Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point"));
+    measurements.insert(sideWaistLength_M, m);
+    guiTexts.insert(sideWaistLength_M, g);
+    descriptions.insert(sideWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "trunk_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Trunk length", "Full measurement name");
+    d = VTranslation::translate("Measurements",
+                                "Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning"
+                                " point",
+                                "Full measurement description");
 
-    InitMeasurement(shoulderGirth_M, QStringLiteral("Shoulder girth"),
-             QStringLiteral("Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides"));
+    measurements.insert(trunkLength_M, m);
+    guiTexts.insert(trunkLength_M, g);
+    descriptions.insert(trunkLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Arms and Torso, at bicep level parallel to floor, with arms"
+                                " hanging at the sides", "Full measurement description");
 
-    InitMeasurement(upperChestGirth_M, QStringLiteral("Upper Chest girth"),
-    QStringLiteral("Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor"
-                   " across front chest"));
+    measurements.insert(shoulderGirth_M, m);
+    guiTexts.insert(shoulderGirth_M, g);
+    descriptions.insert(shoulderGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "upper_chest_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Upper Chest girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Chest at Armfold level, will be parallel to floor across back,"
+                                " will not be parallel to floor across front chest", "Full measurement description");
 
-    InitMeasurement(bustGirth_M, QStringLiteral("Bust girth"),
-                    QStringLiteral("Around fullest part of Bust, parallel to floor"));
+    measurements.insert(upperChestGirth_M, m);
+    guiTexts.insert(upperChestGirth_M, g);
+    descriptions.insert(upperChestGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "bust_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Bust girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around fullest part of Bust, parallel to floor",
+                                "Full measurement description");
 
-    InitMeasurement(underBustGirth_M, QStringLiteral("Under Bust girth"),
-                    QStringLiteral("Around Chest below the Bust, parallel to floor"));
+    measurements.insert(bustGirth_M, m);
+    guiTexts.insert(bustGirth_M, g);
+    descriptions.insert(bustGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "under_bust_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Under Bust girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Chest below the Bust, parallel to floor",
+                                "Full measurement description");
 
-    InitMeasurement(waistGirth_M, QStringLiteral("Waist girth"),
-    QStringLiteral("Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not"
-                   " usually parallel to floor for front waist or back waist."));
+    measurements.insert(underBustGirth_M, m);
+    guiTexts.insert(underBustGirth_M, g);
+    descriptions.insert(underBustGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Tie a string around smallest part of waist, keep string tied while"
+                                " taking meaasurements. Not usually parallel to floor for front waist or back waist.",
+                                "Full measurement description");
 
-    InitMeasurement(highHipGirth_M, QStringLiteral("HighHip girth"), QStringLiteral("Around HighHip, parallel to floor"));
+    measurements.insert(waistGirth_M, m);
+    guiTexts.insert(waistGirth_M, g);
+    descriptions.insert(waistGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "high_hip_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "HighHip girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around HighHip, parallel to floor", "Full measurement description");
 
-    InitMeasurement(hipGirth_M, QStringLiteral("Hip girth"), QStringLiteral("Around Hip, parallel to floor"));
+    measurements.insert(highHipGirth_M, m);
+    guiTexts.insert(highHipGirth_M, g);
+    descriptions.insert(highHipGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hip_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hip girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Hip, parallel to floor", "Full measurement description");
 
-    InitMeasurement(upperFrontChestWidth_M, QStringLiteral("Front Upper Chest width"),
-                    QStringLiteral("Across Front UpperChest, smallest width from armscye to armscye"));
+    measurements.insert(hipGirth_M, m);
+    guiTexts.insert(hipGirth_M, g);
+    descriptions.insert(hipGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "upper_front_chest_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Upper Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Across Front UpperChest, smallest width from armscye to armscye",
+                                "Full measurement description");
 
-    InitMeasurement(frontChestWidth_M, QStringLiteral("Front Chest width"),
-                    QStringLiteral("Across Front Chest, from armfold to armfold"));
+    measurements.insert(upperFrontChestWidth_M, m);
+    guiTexts.insert(upperFrontChestWidth_M, g);
+    descriptions.insert(upperFrontChestWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_chest_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Across Front Chest, from armfold to armfold",
+                                "Full measurement description");
 
-    InitMeasurement(acrossFrontShoulderWidth_M, QStringLiteral("Front Across Shoulder width"),
-                    QStringLiteral("From ShoulderTip to ShoulderTip, across Front"));
+    measurements.insert(frontChestWidth_M, m);
+    guiTexts.insert(frontChestWidth_M, g);
+    descriptions.insert(frontChestWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "across_front_shoulder_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Across Shoulder width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "From ShoulderTip to ShoulderTip, across Front",
+                                "Full measurement description");
 
-    InitMeasurement(acrossBackShoulderWidth_M, QStringLiteral("Back Across Shoulder width"),
-                    QStringLiteral("From ShoulderTip to ShoulderTip, across Back"));
+    measurements.insert(acrossFrontShoulderWidth_M, m);
+    guiTexts.insert(acrossFrontShoulderWidth_M, g);
+    descriptions.insert(acrossFrontShoulderWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "across_back_shoulder_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Across Shoulder width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "From ShoulderTip to ShoulderTip, across Back",
+                                "Full measurement description");
 
-    InitMeasurement(acrossBackShoulderWidth_M, QStringLiteral("Back Upper Chest width"),
-                    QStringLiteral("Across Back UpperChest, smallest width from armscye to armscye"));
+    measurements.insert(acrossBackShoulderWidth_M, m);
+    guiTexts.insert(acrossBackShoulderWidth_M,g );
+    descriptions.insert(acrossBackShoulderWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "across_back_shoulder_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Upper Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Across Back UpperChest, smallest width from armscye to armscye",
+                                "Full measurement description");
 
-    InitMeasurement(backWidth_M, QStringLiteral("Back Chest width"),
-                    QStringLiteral("Across Back Chest, from armfold to armfold"));
+    measurements.insert(acrossBackShoulderWidth_M, m);
+    guiTexts.insert(acrossBackShoulderWidth_M, g);
+    descriptions.insert(acrossBackShoulderWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "upper_back_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Upper Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Across Back UpperChest, smallest width from armscye to armscye",
+                                "Full measurement description");
 
-    InitMeasurement(bustpointToBustpoint_M, QStringLiteral("BustPoint to BustPoint"),
-                    QStringLiteral("Distance between BustPoints, across Chest"));
+    measurements.insert(upperBackWidth_M, m);
+    guiTexts.insert(upperBackWidth_M, g);
+    descriptions.insert(upperBackWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Across Back Chest, from armfold to armfold",
+                                "Full measurement description");
 
-    InitMeasurement(halterBustpointToBustpoint_M, QStringLiteral("Halter Bustpoint to Bustpoint"),
-                    QStringLiteral("Distance from Bustpoint, behind neck, down to Bustpoint"));
+    measurements.insert(backWidth_M, m);
+    guiTexts.insert(backWidth_M, g);
+    descriptions.insert(backWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "bustpoint_to_bustpoint",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "BustPoint to BustPoint", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Distance between BustPoints, across Chest",
+                                "Full measurement description");
 
-    InitMeasurement(neckToBustpoint_M, QStringLiteral("NeckPoint to BustPoint"),
-                    QStringLiteral("From NeckPoint to BustPoint"));
+    measurements.insert(bustpointToBustpoint_M, m);
+    guiTexts.insert(bustpointToBustpoint_M, g);
+    descriptions.insert(bustpointToBustpoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "halter_bustpoint_to_bustpoint",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Halter Bustpoint to Bustpoint", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Distance from Bustpoint, behind neck, down to Bustpoint",
+                                "Full measurement description");
 
-    InitMeasurement(crotchLength_M, QStringLiteral("Crotch length"),
-                    QStringLiteral("From Front Waist Center, down to crotch, up to Back Waist Center"));
+    measurements.insert(halterBustpointToBustpoint_M, m);
+    guiTexts.insert(halterBustpointToBustpoint_M, g);
+    descriptions.insert(halterBustpointToBustpoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_bustpoint",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "NeckPoint to BustPoint", "Full measurement name");
+    d = VTranslation::translate("Measurements", "From NeckPoint to BustPoint", "Full measurement description");
 
-    InitMeasurement(riseHeight_M, QStringLiteral("Rise height"),
-                    QStringLiteral("Sit on hard chair, measure from side waist straight down to chair bottom"));
+    measurements.insert(neckToBustpoint_M, m);
+    guiTexts.insert(neckToBustpoint_M, g);
+    descriptions.insert(neckToBustpoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "crotch_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Crotch length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "From Front Waist Center, down to crotch, up to Back Waist Center",
+                                "Full measurement description");
 
-    InitMeasurement(shoulderDrop_M, QStringLiteral("Shoulder Drop"),
-                    QStringLiteral("Vertical Distance from NeckPoint level to ShoulderTip level"));
+    measurements.insert(crotchLength_M, m);
+    guiTexts.insert(crotchLength_M, g);
+    descriptions.insert(crotchLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "rise_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Rise height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Sit on hard chair, measure from side waist straight down to chair"
+                                " bottom", "Full measurement description");
 
-    InitMeasurement(shoulderSlopeDegrees_M, QStringLiteral("Shoulder Slope degrees"),
-                    QStringLiteral("Degrees of angle from NeckPoint to ShoulderTip – requires goniometer"));
+    measurements.insert(riseHeight_M, m);
+    guiTexts.insert(riseHeight_M, g);
+    descriptions.insert(riseHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_drop",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder Drop", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Vertical Distance from NeckPoint level to ShoulderTip level",
+                                "Full measurement description");
 
-    InitMeasurement(frontShoulderSlopeLength_M, QStringLiteral("Front Shoulder Balance"),
-                    QStringLiteral("ShoulderTip to Front Waist Center"));
+    measurements.insert(shoulderDrop_M, m);
+    guiTexts.insert(shoulderDrop_M, g);
+    descriptions.insert(shoulderDrop_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_slope_degrees",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder Slope degrees", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Degrees of angle from NeckPoint to ShoulderTip – requires goniometer",
+                                "Full measurement description");
 
-    InitMeasurement(backShoulderSlopeLength_M, QStringLiteral("Back Shoulder Balance"),
-                    QStringLiteral("ShoulderTip to Back Waist Center"));
+    measurements.insert(shoulderSlopeDegrees_M, m);
+    guiTexts.insert(shoulderSlopeDegrees_M, g);
+    descriptions.insert(shoulderSlopeDegrees_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_shoulder_slope_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Shoulder Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "ShoulderTip to Front Waist Center", "Full measurement description");
 
-    InitMeasurement(frontShoulderToWaistLength_M, QStringLiteral("Front Full Length"),
-                    QStringLiteral("NeckPoint straight down front chest to Waistline"));
+    measurements.insert(frontShoulderSlopeLength_M, m);
+    guiTexts.insert(frontShoulderSlopeLength_M, g);
+    descriptions.insert(frontShoulderSlopeLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_shoulder_slope_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Shoulder Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "ShoulderTip to Back Waist Center", "Full measurement description");
 
-    InitMeasurement(backShoulderToWaistLength_M, QStringLiteral("Back Full Length"),
-                    QStringLiteral("Back NeckPoint straight down back chest to Waistline"));
+    measurements.insert(backShoulderSlopeLength_M, m);
+    guiTexts.insert(backShoulderSlopeLength_M, g);
+    descriptions.insert(backShoulderSlopeLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_shoulder_to_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Full Length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint straight down front chest to Waistline",
+                                "Full measurement description");
 
-    InitMeasurement(frontNeckArc_M, QStringLiteral("Front Neck arc"),
-                    QStringLiteral("NeckPoint to NeckPoint through Front Neck Center"));
+    measurements.insert(frontShoulderToWaistLength_M, m);
+    guiTexts.insert(frontShoulderToWaistLength_M, g);
+    descriptions.insert(frontShoulderToWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_shoulder_to_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Full Length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back NeckPoint straight down back chest to Waistline",
+                                "Full measurement description");
 
-    InitMeasurement(backNeckArc_M, QStringLiteral("Back Neck arc"), QStringLiteral("NeckPoint to NeckPoint across Nape"));
+    measurements.insert(backShoulderToWaistLength_M, m);
+    guiTexts.insert(backShoulderToWaistLength_M, g);
+    descriptions.insert(backShoulderToWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_neck_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Neck arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to NeckPoint through Front Neck Center",
+                                "Full measurement description");
 
-    InitMeasurement(frontUpperChestArc_M, QStringLiteral("front_upper-bust_arc"), QStringLiteral("front_upper-bust_arc"));
+    measurements.insert(frontNeckArc_M, m);
+    guiTexts.insert(frontNeckArc_M, g);
+    descriptions.insert(frontNeckArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_neck_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Neck arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to NeckPoint across Nape", "Full measurement description");
 
-    InitMeasurement(backUpperChestArc_M, QStringLiteral("Back UpperBust arc"),
-                    QStringLiteral("Back UpperBust side to side"));
+    measurements.insert(backNeckArc_M, m);
+    guiTexts.insert(backNeckArc_M, g);
+    descriptions.insert(backNeckArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_upper_chest_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "front_upper-bust_arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "front_upper-bust_arc", "Full measurement description");
 
-    InitMeasurement(frontWaistArc_M, QStringLiteral("Front Waist arc"), QStringLiteral("Front Waist side to side"));
+    measurements.insert(frontUpperChestArc_M, m);
+    guiTexts.insert(frontUpperChestArc_M, g);
+    descriptions.insert(frontUpperChestArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_upper_chest_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back UpperBust arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back UpperBust side to side", "Full measurement description");
 
-    InitMeasurement(backWaistArc_M, QStringLiteral("Back Waist arc"), QStringLiteral("Back Waist side to side"));
+    measurements.insert(backUpperChestArc_M, m);
+    guiTexts.insert(backUpperChestArc_M, g);
+    descriptions.insert(backUpperChestArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_waist_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Waist arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front Waist side to side", "Full measurement description");
 
-    InitMeasurement(frontUpperHipArc_M, QStringLiteral("Front UpperHip arc"),
-                    QStringLiteral("Front UpperHip side to side"));
+    measurements.insert(frontWaistArc_M, m);
+    guiTexts.insert(frontWaistArc_M, g);
+    descriptions.insert(frontWaistArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_waist_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Waist arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back Waist side to side", "Full measurement description");
 
-    InitMeasurement(backUpperHipArc_M, QStringLiteral("Back UpperHip arc"), QStringLiteral("Back UpperHip side to side"));
+    measurements.insert(backWaistArc_M, m);
+    guiTexts.insert(backWaistArc_M, g);
+    descriptions.insert(backWaistArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_upper_hip_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front UpperHip arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front UpperHip side to side", "Full measurement description");
 
-    InitMeasurement(frontHipArc_M, QStringLiteral("Front Hip arc"), QStringLiteral("Front Hip side to side"));
+    measurements.insert(frontUpperHipArc_M, m);
+    guiTexts.insert(frontUpperHipArc_M, g);
+    descriptions.insert(frontUpperHipArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_upper_hip_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back UpperHip arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back UpperHip side to side", "Full measurement description");
 
-    InitMeasurement(backHipArc_M, QStringLiteral("Back Hip arc"), QStringLiteral("Back Hip side to side"));
+    measurements.insert(backUpperHipArc_M, m);
+    guiTexts.insert(backUpperHipArc_M, g);
+    descriptions.insert(backUpperHipArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_hip_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Hip arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front Hip side to side", "Full measurement description");
 
-    InitMeasurement(chestSlope_M, QStringLiteral("Chest Balance"), QStringLiteral("NeckPoint to Front ArmfoldPoint"));
+    measurements.insert(frontHipArc_M, m);
+    guiTexts.insert(frontHipArc_M, g);
+    descriptions.insert(frontHipArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_hip_arc",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Hip arc", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Back Hip side to side", "Full measurement description");
 
-    InitMeasurement(backSlope_M, QStringLiteral("Back Balance"), QStringLiteral("NeckPoint to Back ArmfoldPoint"));
+    measurements.insert(backHipArc_M, m);
+    guiTexts.insert(backHipArc_M, g);
+    descriptions.insert(backHipArc_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "chest_slope",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Chest Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to Front ArmfoldPoint", "Full measurement description");
 
-    InitMeasurement(frontWaistSlope_M, QStringLiteral("Front Waist Balance"),
-                    QStringLiteral("NeckPoint across Front Chest to Waist side"));
+    measurements.insert(chestSlope_M, m);
+    guiTexts.insert(chestSlope_M, g);
+    descriptions.insert(chestSlope_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_slope",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to Back ArmfoldPoint", "Full measurement description");
 
-    InitMeasurement(backWaistSlope_M, QStringLiteral("Back Waist Balance"),
-                    QStringLiteral("NeckPoint across Back Chest to Waist side"));
+    measurements.insert(backSlope_M, m);
+    guiTexts.insert(backSlope_M, g);
+    descriptions.insert(backSlope_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_waist_slope",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front Waist Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint across Front Chest to Waist side",
+                                "Full measurement description");
 
-    InitMeasurement(frontNeckToUpperChestHeight_M, QStringLiteral("Front UpperChest height"),
-                    QStringLiteral("Front Neck Center straight down to UpperChest line"));
+    measurements.insert(frontWaistSlope_M, m);
+    guiTexts.insert(frontWaistSlope_M, g);
+    descriptions.insert(frontWaistSlope_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "back_waist_slope",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Back Waist Balance", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint across Back Chest to Waist side",
+                                "Full measurement description");
 
-    InitMeasurement(frontNeckToBustHeight_M, QStringLiteral("Bust height"),
-                    QStringLiteral("Front Neck Center straight down to Bust line"));
+    measurements.insert(backWaistSlope_M, m);
+    guiTexts.insert(backWaistSlope_M, g);
+    descriptions.insert(backWaistSlope_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_neck_to_upper_chest_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front UpperChest height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front Neck Center straight down to UpperChest line",
+                                "Full measurement description");
 
+    measurements.insert(frontNeckToUpperChestHeight_M, m);
+    guiTexts.insert(frontNeckToUpperChestHeight_M, g);
+    descriptions.insert(frontNeckToUpperChestHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_neck_to_bust_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Bust height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front Neck Center straight down to Bust line",
+                                "Full measurement description");
+
+    measurements.insert(frontNeckToBustHeight_M, m);
+    guiTexts.insert(frontNeckToBustHeight_M, g);
+    descriptions.insert(frontNeckToBustHeight_M, d);
+    //=================================================================================================================
     // arm
-    InitMeasurement(armscyeGirth_M, QStringLiteral("Armscye Girth"), QStringLiteral("Around Armscye"));
+    m = VTranslation::translate("Measurements", "armscye_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Armscye Girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Armscye", "Full measurement description");
 
-    InitMeasurement(elbowGirth_M, QStringLiteral("Elbow Girth"), QStringLiteral("Around Elbow with elbow bent"));
+    measurements.insert(armscyeGirth_M, m);
+    guiTexts.insert(armscyeGirth_M, g);
+    descriptions.insert(armscyeGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "elbow_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Elbow Girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Elbow with elbow bent", "Full measurement description");
 
-    InitMeasurement(upperArmGirth_M, QStringLiteral("Upperarm Girth"), QStringLiteral("Around UpperArm"));
+    measurements.insert(elbowGirth_M, m);
+    guiTexts.insert(elbowGirth_M, g);
+    descriptions.insert(elbowGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "upper_arm_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Upperarm Girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around UpperArm", "Full measurement description");
 
-    InitMeasurement(wristGirth_M, QStringLiteral("Wrist girth"), QStringLiteral("Around Wrist"));
+    measurements.insert(upperArmGirth_M, m);
+    guiTexts.insert(upperArmGirth_M, g);
+    descriptions.insert(upperArmGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "wrist_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Wrist girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Wrist", "Full measurement description");
 
-    InitMeasurement(scyeDepth_M, QStringLiteral("Armscye depth"),
-                    QStringLiteral("Nape straight down to UnderBust line (same as Back UpperBust height)"));
+    measurements.insert(wristGirth_M, m);
+    guiTexts.insert(wristGirth_M, g);
+    descriptions.insert(wristGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "scye_depth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Armscye depth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Nape straight down to UnderBust line (same as Back UpperBust height)",
+                                "Full measurement description");
 
-    InitMeasurement(shoulderAndArmLength_M, QStringLiteral("Shoulder and Arm length"),
-                    QStringLiteral("NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip"));
+    measurements.insert(scyeDepth_M, m);
+    guiTexts.insert(scyeDepth_M, g);
+    descriptions.insert(scyeDepth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_and_arm_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder and Arm length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip",
+                                "Full measurement description");
 
-    InitMeasurement(underarmLength_M, QStringLiteral("Underarm length"),
-                    QStringLiteral("Armpit to Wrist, with arm straight and hanging at side"));
+    measurements.insert(shoulderAndArmLength_M, m);
+    guiTexts.insert(shoulderAndArmLength_M, g);
+    descriptions.insert(shoulderAndArmLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "underarm_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Underarm length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Armpit to Wrist, with arm straight and hanging at side",
+                                "Full measurement description");
 
-    InitMeasurement(cervicaleToWristLength_M, QStringLiteral("Nape to wrist length"),
-                    QStringLiteral("Nape to Wrist, with elbow bent and hand on hip"));
+    measurements.insert(underarmLength_M, m);
+    guiTexts.insert(underarmLength_M, g);
+    descriptions.insert(underarmLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "cervicale_to_wrist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Nape to wrist length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Nape to Wrist, with elbow bent and hand on hip",
+                                "Full measurement description");
 
-    InitMeasurement(shoulderToElbowLength_M, QStringLiteral("Elbow length"),
-                    QStringLiteral("ShoulderTip to Elbow, with elbow bent and hand on hip"));
+    measurements.insert(cervicaleToWristLength_M, m);
+    guiTexts.insert(cervicaleToWristLength_M, g);
+    descriptions.insert(cervicaleToWristLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_to_elbow_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Elbow length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "ShoulderTip to Elbow, with elbow bent and hand on hip",
+                                "Full measurement description");
 
-    InitMeasurement(armLength_M, QStringLiteral("Arm length"),
-                    QStringLiteral("ShoulderTip to Wrist, with elbow bent and hand on hip"));
+    measurements.insert(shoulderToElbowLength_M, m);
+    guiTexts.insert(shoulderToElbowLength_M, g);
+    descriptions.insert(shoulderToElbowLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "arm_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Arm length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "ShoulderTip to Wrist, with elbow bent and hand on hip",
+                                "Full measurement description");
 
+    measurements.insert(armLength_M, m);
+    guiTexts.insert(armLength_M, g);
+    descriptions.insert(armLength_M, d);
+    //=================================================================================================================
     // hand
-    InitMeasurement(handWidth_M, QStringLiteral("Hand width"), QStringLiteral("Hand side to side"));
+    m = VTranslation::translate("Measurements", "hand_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hand width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Hand side to side", "Full measurement description");
 
-    InitMeasurement(handLength_M, QStringLiteral("Hand length"), QStringLiteral("Hand Middle Finger tip to wrist"));
+    measurements.insert(handWidth_M, m);
+    guiTexts.insert(handWidth_M, g);
+    descriptions.insert(handWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hand_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hand length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Hand Middle Finger tip to wrist", "Full measurement description");
 
-    InitMeasurement(handGirth_M, QStringLiteral("Hand girth"), QStringLiteral("Around Hand"));
+    measurements.insert(handLength_M, m);
+    guiTexts.insert(handLength_M, g);
+    descriptions.insert(handLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hand_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hand girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Hand", "Full measurement description");
 
+    measurements.insert(handGirth_M, m);
+    guiTexts.insert(handGirth_M, g);
+    descriptions.insert(handGirth_M, d);
+    //=================================================================================================================
     // leg
-    InitMeasurement(thighGirth_M, QStringLiteral("Thigh girth"), QStringLiteral("Around Thigh"));
+    m = VTranslation::translate("Measurements", "thigh_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Thigh girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Thigh", "Full measurement description");
 
-    InitMeasurement(midThighGirth_M, QStringLiteral("Midthigh girth"), QStringLiteral("Around MidThigh"));
+    measurements.insert(thighGirth_M, m);
+    guiTexts.insert(thighGirth_M, g);
+    descriptions.insert(thighGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "mid_thigh_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Midthigh girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around MidThigh", "Full measurement description");
 
-    InitMeasurement(kneeGirth_M, QStringLiteral("Knee girth"), QStringLiteral("Around Knee"));
+    measurements.insert(midThighGirth_M, m);
+    guiTexts.insert(midThighGirth_M, g);
+    descriptions.insert(midThighGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "knee_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Knee girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Knee", "Full measurement description");
 
-    InitMeasurement(calfGirth_M, QStringLiteral("Calf girth"), QStringLiteral("Around Calf"));
+    measurements.insert(kneeGirth_M, m);
+    guiTexts.insert(kneeGirth_M, g);
+    descriptions.insert(kneeGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "calf_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Calf girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Calf", "Full measurement description");
 
-    InitMeasurement(ankleGirth_M, QStringLiteral("Ankle girth"), QStringLiteral("Around Ankle"));
+    measurements.insert(calfGirth_M, m);
+    guiTexts.insert(calfGirth_M, g);
+    descriptions.insert(calfGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "ankle_girth",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Ankle girth", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Around Ankle", "Full measurement description");
 
-    InitMeasurement(kneeHeight_M, QStringLiteral("Knee height"), QStringLiteral("Knee to Floor"));
+    measurements.insert(ankleGirth_M, m);
+    guiTexts.insert(ankleGirth_M, g);
+    descriptions.insert(ankleGirth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "knee_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Knee height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Knee to Floor", "Full measurement description");
 
-    InitMeasurement(ankleHeight_M, QStringLiteral("Ankle height"), QStringLiteral("Ankle to Floor"));
+    measurements.insert(kneeHeight_M, m);
+    guiTexts.insert(kneeHeight_M, g);
+    descriptions.insert(kneeHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "ankle_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Ankle height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Ankle to Floor", "Full measurement description");
 
+    measurements.insert(ankleHeight_M, m);
+    guiTexts.insert(ankleHeight_M, g);
+    descriptions.insert(ankleHeight_M, d);
+    //=================================================================================================================
     // foot
-    InitMeasurement(footWidth_M, QStringLiteral("Foot width"), QStringLiteral("Widest part of Foot side to side"));
+    m = VTranslation::translate("Measurements", "foot_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Foot width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Widest part of Foot side to side", "Full measurement description");
 
-    InitMeasurement(footLength_M, QStringLiteral("Foot length"),
-                    QStringLiteral("Tip of Longest Toe straight to back of heel"));
+    measurements.insert(footWidth_M, m);
+    guiTexts.insert(footWidth_M, g);
+    descriptions.insert(footWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "foot_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Foot length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Tip of Longest Toe straight to back of heel",
+                                "Full measurement description");
 
+    measurements.insert(footLength_M, m);
+    guiTexts.insert(footLength_M, g);
+    descriptions.insert(footLength_M, d);
+    //=================================================================================================================
     // heights
-    InitMeasurement(height_M, QStringLiteral("Total Height"), QStringLiteral("Top of head to floor"));
+    m = VTranslation::translate("Measurements", "height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Total Height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Top of head to floor", "Full measurement description");
 
-    InitMeasurement(cervicaleHeight_M, QStringLiteral("Nape height"), QStringLiteral("Nape to Floor"));
+    measurements.insert(height_M, m);
+    guiTexts.insert(height_M, g);
+    descriptions.insert(height_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "cervicale_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Nape height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Nape to Floor", "Full measurement description");
 
-    InitMeasurement(cervicaleToKneeHeight_M, QStringLiteral("Nape to knee height"), QStringLiteral("Nape to Knee"));
+    measurements.insert(cervicaleHeight_M, m);
+    guiTexts.insert(cervicaleHeight_M, g);
+    descriptions.insert(cervicaleHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "cervicale_to_knee_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Nape to knee height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Nape to Knee", "Full measurement description");
 
-    InitMeasurement(waistHeight_M, QStringLiteral("Waist height"), QStringLiteral("Waist side to floor"));
+    measurements.insert(cervicaleToKneeHeight_M, m);
+    guiTexts.insert(cervicaleToKneeHeight_M, g);
+    descriptions.insert(cervicaleToKneeHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Waist side to floor", "Full measurement description");
 
-    InitMeasurement(highHipHeight_M, QStringLiteral("HighHip height"), QStringLiteral("HighHip side to Floor"));
+    measurements.insert(waistHeight_M, m);
+    guiTexts.insert(waistHeight_M, g);
+    descriptions.insert(waistHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "high_hip_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "HighHip height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "HighHip side to Floor", "Full measurement description");
 
-    InitMeasurement(hipHeight_M, QStringLiteral("Hip height"), QStringLiteral("Hip side to Floor"));
+    measurements.insert(highHipHeight_M, m);
+    guiTexts.insert(highHipHeight_M, g);
+    descriptions.insert(highHipHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hip_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hip height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Hip side to Floor", "Full measurement description");
 
-    InitMeasurement(waistToHipHeight_M, QStringLiteral("Waist to Hip height"), QStringLiteral("Waist side to Hip"));
+    measurements.insert(hipHeight_M, m);
+    guiTexts.insert(hipHeight_M, g);
+    descriptions.insert(hipHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_to_hip_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist to Hip height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Waist side to Hip", "Full measurement description");
 
-    InitMeasurement(waistToKneeHeight_M, QStringLiteral("Waist to Knee height"), QStringLiteral("Waist side to Knee"));
+    measurements.insert(waistToHipHeight_M, m);
+    guiTexts.insert(waistToHipHeight_M, g);
+    descriptions.insert(waistToHipHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_to_knee_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist to Knee height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Waist side to Knee", "Full measurement description");
 
-    InitMeasurement(crotchHeight_M, QStringLiteral("Crotch height/Inseam"),
-                    QStringLiteral("Crotch to Floor along inside leg"));
+    measurements.insert(waistToKneeHeight_M, m);
+    guiTexts.insert(waistToKneeHeight_M, g);
+    descriptions.insert(waistToKneeHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "crotch_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Crotch height/Inseam", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Crotch to Floor along inside leg", "Full measurement description");
+
+    measurements.insert(crotchHeight_M, m);
+    guiTexts.insert(crotchHeight_M, g);
+    descriptions.insert(crotchHeight_M, d);
+    //=================================================================================================================
     //extended
-    InitMeasurement(heightFrontNeckBasePoint_M, QStringLiteral("Height front neck base point"),
-                    QStringLiteral("Height of the point base of the neck in front"));
+    m = VTranslation::translate("Measurements", "size", "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Size", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Size", "Full measurement description");
 
-    InitMeasurement(heightBaseNeckSidePoint_M, QStringLiteral("Height base neck side point"),
-                    QStringLiteral("Height of the base of the neck side point"));
+    measurements.insert(size_M, m);
+    guiTexts.insert(size_M, g);
+    descriptions.insert(size_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_front_neck_base_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height front neck base point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height of the point base of the neck in front",
+                                "Full measurement description");
 
-    InitMeasurement(heightShoulderPoint_M, QStringLiteral("Height shoulder point"),
-                    QStringLiteral("The height of the shoulder point"));
+    measurements.insert(heightFrontNeckBasePoint_M, m);
+    guiTexts.insert(heightFrontNeckBasePoint_M, g);
+    descriptions.insert(heightFrontNeckBasePoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_base_neck_side_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height base neck side point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height of the base of the neck side point",
+                                "Full measurement description");
 
-    InitMeasurement(heightNipplePoint_M, QStringLiteral("Height nipple point"), QStringLiteral("Height nipple point"));
+    measurements.insert(heightBaseNeckSidePoint_M, m);
+    guiTexts.insert(heightBaseNeckSidePoint_M, g);
+    descriptions.insert(heightBaseNeckSidePoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_shoulder_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height shoulder point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The height of the shoulder point", "Full measurement description");
 
-    InitMeasurement(heightBackAngleAxilla_M, QStringLiteral("Height back angle axilla"),
-                    QStringLiteral("Height back angle axilla"));
+    measurements.insert(heightShoulderPoint_M, m);
+    guiTexts.insert(heightShoulderPoint_M, g);
+    descriptions.insert(heightShoulderPoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_nipple_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height nipple point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height nipple point", "Full measurement description");
 
-    InitMeasurement(heightScapularPoint_M, QStringLiteral("Height scapular point"),
-                    QStringLiteral("Height scapular point"));
+    measurements.insert(heightNipplePoint_M, m);
+    guiTexts.insert(heightNipplePoint_M, g);
+    descriptions.insert(heightNipplePoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_back_angle_axilla",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height back angle axilla", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height back angle axilla", "Full measurement description");
 
-    InitMeasurement(heightUnderButtockFolds_M, QStringLiteral("Height under buttock folds"),
-                    QStringLiteral("Height under buttock folds"));
+    measurements.insert(heightBackAngleAxilla_M, m);
+    guiTexts.insert(heightBackAngleAxilla_M, g);
+    descriptions.insert(heightBackAngleAxilla_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_scapular_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height scapular point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height scapular point", "Full measurement description");
 
-    InitMeasurement(hipsExcludingProtrudingAbdomen_M, QStringLiteral("Hips excluding protruding abdomen"),
-                    QStringLiteral("Hips excluding protruding abdomen"));
+    measurements.insert(heightScapularPoint_M, m);
+    guiTexts.insert(heightScapularPoint_M, g);
+    descriptions.insert(heightScapularPoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_under_buttock_folds",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height under buttock folds", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height under buttock folds", "Full measurement description");
 
-    InitMeasurement(girthFootInstep_M, QStringLiteral("Girth foot instep"), QStringLiteral("Girth foot instep"));
+    measurements.insert(heightUnderButtockFolds_M, m);
+    guiTexts.insert(heightUnderButtockFolds_M, g);
+    descriptions.insert(heightUnderButtockFolds_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hips_excluding_protruding_abdomen",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hips excluding protruding abdomen", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Hips excluding protruding abdomen", "Full measurement description");
 
-    InitMeasurement(sideWaistToFloor_M, QStringLiteral("Side waist to floor"),
-                    QStringLiteral("The distance from the side waist to floor"));
+    measurements.insert(hipsExcludingProtrudingAbdomen_M, m);
+    guiTexts.insert(hipsExcludingProtrudingAbdomen_M, g);
+    descriptions.insert(hipsExcludingProtrudingAbdomen_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "girth_foot_instep",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Girth foot instep", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Girth foot instep", "Full measurement description");
 
-    InitMeasurement(frontWaistToFloor_M, QStringLiteral("Front waist to floor"),
-                    QStringLiteral("The distance from the front waist to floor"));
+    measurements.insert(girthFootInstep_M, m);
+    guiTexts.insert(girthFootInstep_M, g);
+    descriptions.insert(girthFootInstep_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "side_waist_to_floor",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Side waist to floor", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the side waist to floor",
+                                "Full measurement description");
 
-    InitMeasurement(arcThroughGroinArea_M, QStringLiteral("Arc through groin area"),
-                    QStringLiteral("Arc through groin area"));
+    measurements.insert(sideWaistToFloor_M, m);
+    guiTexts.insert(sideWaistToFloor_M, g);
+    descriptions.insert(sideWaistToFloor_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_waist_to_floor",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front waist to floor", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the front waist to floor",
+                                "Full measurement description");
 
-    InitMeasurement(waistToPlaneSeat_M, QStringLiteral("Waist to plane seat"),
-                    QStringLiteral("The distance from the waist to the plane seat"));
+    measurements.insert(frontWaistToFloor_M, m);
+    guiTexts.insert(frontWaistToFloor_M, g);
+    descriptions.insert(frontWaistToFloor_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "arc_through_groin_area",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Arc through groin area", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Arc through groin area", "Full measurement description");
 
-    InitMeasurement(neckToRadialPoint_M, QStringLiteral("Neck to radial point"),
-                    QStringLiteral("The distance from the base of the neck to the side of the radial point"));
+    measurements.insert(arcThroughGroinArea_M, m);
+    guiTexts.insert(arcThroughGroinArea_M, g);
+    descriptions.insert(arcThroughGroinArea_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_to_plane_seat",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist to plane seat", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the waist to the plane seat",
+                                "Full measurement description");
 
-    InitMeasurement(neckToThirdFinger_M, QStringLiteral("Neck to third finger"),
-                    QStringLiteral("Distance from the base of the neck side point to the end of the third finger"));
+    measurements.insert(waistToPlaneSeat_M, m);
+    guiTexts.insert(waistToPlaneSeat_M, g);
+    descriptions.insert(waistToPlaneSeat_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_radial_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to radial point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the base of the neck to the side of the radial"
+                                " point", "Full measurement description");
 
-    InitMeasurement(neckToFirstLineChestCircumference_M, QStringLiteral("Neck to first line chest circumference"),
-                    QStringLiteral("The distance from the base of the neck to the side of the first line in front of "
-                                   "chest circumference"));
+    measurements.insert(neckToRadialPoint_M, m);
+    guiTexts.insert(neckToRadialPoint_M, g);
+    descriptions.insert(neckToRadialPoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_third_finger",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to third finger", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Distance from the base of the neck side point to the end of the third"
+                                " finger", "Full measurement description");
 
-    InitMeasurement(frontWaistLength_M, QStringLiteral("Front waist length"),
-                    QStringLiteral("The distance from the base of the neck to the waist side front (waist length in "
-                                   "the front)"));
+    measurements.insert(neckToThirdFinger_M, m);
+    guiTexts.insert(neckToThirdFinger_M, g);
+    descriptions.insert(neckToThirdFinger_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_first_line_chest_circumference",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to first line chest circumference", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the base of the neck to the side of the first line"
+                                " in front of chest circumference", "Full measurement description");
 
-    InitMeasurement(arcThroughShoulderJoint_M, QStringLiteral("Arc through shoulder joint"),
-                    QStringLiteral("Arc through the highest point of the shoulder joint"));
+    measurements.insert(neckToFirstLineChestCircumference_M, m);
+    guiTexts.insert(neckToFirstLineChestCircumference_M, g);
+    descriptions.insert(neckToFirstLineChestCircumference_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_waist_length",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front waist length", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the base of the neck to the waist side front (waist"
+                                " length in the front)", "Full measurement description");
 
-    InitMeasurement(neckToBackLineChestCircumference_M, QStringLiteral("Neck to back line chest circumference"),
-                    QStringLiteral("The distance from the base of the neck to the back line of chest circumference of "
-                                   "the first and the second based on ledge vanes"));
+    measurements.insert(frontWaistLength_M, m);
+    guiTexts.insert(frontWaistLength_M, g);
+    descriptions.insert(frontWaistLength_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "arc_through_shoulder_joint",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Arc through shoulder joint", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Arc through the highest point of the shoulder joint",
+                                "Full measurement description");
 
-    InitMeasurement(waistToNeckSide_M, QStringLiteral("Waist to neck side"),
-                    QStringLiteral("The distance from the waist to the back base of the neck side point"));
+    measurements.insert(arcThroughShoulderJoint_M, m);
+    guiTexts.insert(arcThroughShoulderJoint_M, g);
+    descriptions.insert(arcThroughShoulderJoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_back_line_chest_circumference",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to back line chest circumference", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the base of the neck to the back line of chest"
+                                " circumference of the first and the second based on ledge vanes",
+                                "Full measurement description");
 
-    InitMeasurement(arcLengthUpperBody_M, QStringLiteral("Arc length upper body"),
-                    QStringLiteral("Arc length of the upper body through the base of the neck side point"));
+    measurements.insert(neckToBackLineChestCircumference_M, m);
+    guiTexts.insert(neckToBackLineChestCircumference_M, g);
+    descriptions.insert(neckToBackLineChestCircumference_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_to_neck_side",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist to neck side", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the waist to the back base of the neck side point",
+                                "Full measurement description");
 
-    InitMeasurement(chestWidth_M, QStringLiteral("Chest width"), QStringLiteral("Chest width"));
+    measurements.insert(waistToNeckSide_M, m);
+    guiTexts.insert(waistToNeckSide_M, g);
+    descriptions.insert(waistToNeckSide_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "arc_length_upper_body",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Arc length upper body", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Arc length of the upper body through the base of the neck side point",
+                                "Full measurement description");
 
-    InitMeasurement(anteroposteriorDiameterHands_M, QStringLiteral("Anteroposterior diameter hands"),
-                    QStringLiteral("Anteroposterior diameter of the hands"));
+    measurements.insert(arcLengthUpperBody_M, m);
+    guiTexts.insert(arcLengthUpperBody_M, g);
+    descriptions.insert(arcLengthUpperBody_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "chest_width",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Chest width", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Chest width", "Full measurement description");
 
-    InitMeasurement(heightClavicularPoint_M, QStringLiteral("Height clavicular point"),
-                    QStringLiteral("Height clavicular point"));
+    measurements.insert(chestWidth_M, m);
+    guiTexts.insert(chestWidth_M, g);
+    descriptions.insert(chestWidth_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "anteroposterior_diameter_hands",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Anteroposterior diameter hands", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Anteroposterior diameter of the hands",
+                                "Full measurement description");
 
-    InitMeasurement(heightArmholeSlash_M, QStringLiteral("Height armhole slash"),
-                    QStringLiteral("The distance from the point to the cervical level of the posterior angle of the "
-                                   "front armpit (underarm height oblique)"));
+    measurements.insert(anteroposteriorDiameterHands_M, m);
+    guiTexts.insert(anteroposteriorDiameterHands_M, g);
+    descriptions.insert(anteroposteriorDiameterHands_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_clavicular_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height clavicular point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Height clavicular point", "Full measurement description");
 
-    InitMeasurement(slashShoulderHeight_M, QStringLiteral("Slash shoulder height"),
-                    QStringLiteral("Slash shoulder height"));
+    measurements.insert(heightClavicularPoint_M, m);
+    guiTexts.insert(heightClavicularPoint_M, g);
+    descriptions.insert(heightClavicularPoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "height_armhole_slash",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Height armhole slash", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the point to the cervical level of the posterior"
+                                " angle of the front armpit (underarm height oblique)", "Full measurement description");
 
-    InitMeasurement(halfGirthNeck_M, QStringLiteral("Half girth neck"), QStringLiteral("Half girth neck"));
+    measurements.insert(heightArmholeSlash_M, m);
+    guiTexts.insert(heightArmholeSlash_M, g);
+    descriptions.insert(heightArmholeSlash_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "slash_shoulder_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Slash shoulder height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Slash shoulder height", "Full measurement description");
 
-    InitMeasurement(halfGirthNeckForShirts_M, QStringLiteral("Half girth neck for shirts"),
-                    QStringLiteral("Half girth neck for shirts"));
+    measurements.insert(slashShoulderHeight_M, m);
+    guiTexts.insert(slashShoulderHeight_M, g);
+    descriptions.insert(slashShoulderHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_neck",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth neck", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth neck", "Full measurement description");
 
-    InitMeasurement(halfGirthChestFirst_M, QStringLiteral("Half girth chest first"),
-                    QStringLiteral("Half girth chest first"));
+    measurements.insert(halfGirthNeck_M, m);
+    guiTexts.insert(halfGirthNeck_M, g);
+    descriptions.insert(halfGirthNeck_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_neck_for_shirts",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth neck for shirts", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth neck for shirts", "Full measurement description");
 
-    InitMeasurement(halfGirthChestSecond_M, QStringLiteral("Half girth chest second"),
-                    QStringLiteral("Half girth chest second"));
+    measurements.insert(halfGirthNeckForShirts_M, m);
+    guiTexts.insert(halfGirthNeckForShirts_M, g);
+    descriptions.insert(halfGirthNeckForShirts_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_chest_first",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth chest first", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth chest first", "Full measurement description");
 
-    InitMeasurement(halfGirthChestThird_M, QStringLiteral("Half girth chest third"),
-                    QStringLiteral("Half girth chest third"));
+    measurements.insert(halfGirthChestFirst_M, m);
+    guiTexts.insert(halfGirthChestFirst_M, g);
+    descriptions.insert(halfGirthChestFirst_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_chest_second",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth chest second", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth chest second", "Full measurement description");
 
-    InitMeasurement(halfGirthWaist_M, QStringLiteral("Half girth waist"), QStringLiteral("Half girth waist"));
+    measurements.insert(halfGirthChestSecond_M, m);
+    guiTexts.insert(halfGirthChestSecond_M, g);
+    descriptions.insert(halfGirthChestSecond_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_chest_third",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth chest third", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth chest third", "Full measurement description");
 
-    InitMeasurement(halfGirthHipsConsideringProtrudingAbdomen_M,
-                    QStringLiteral("Half girth hips considering protruding abdomen"),
-                    QStringLiteral("Half girth hips considering protruding abdomen"));
+    measurements.insert(halfGirthChestThird_M, m);
+    guiTexts.insert(halfGirthChestThird_M, g);
+    descriptions.insert(halfGirthChestThird_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_waist",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth waist", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth waist", "Full measurement description");
 
-    InitMeasurement(halfGirthHipsExcludingProtrudingAbdomen_M,
-                    QStringLiteral("Half girth hips excluding protruding abdomen"),
-                    QStringLiteral("Half girth hips excluding protruding abdomen"));
+    measurements.insert(halfGirthWaist_M, m);
+    guiTexts.insert(halfGirthWaist_M, g);
+    descriptions.insert(halfGirthWaist_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_hips_considering_protruding_abdomen",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth hips considering protruding abdomen",
+                                "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth hips considering protruding abdomen",
+                                "Full measurement description");
 
-    InitMeasurement(girthKneeFlexedFeet_M, QStringLiteral("Girth knee flexed feet"),
-                    QStringLiteral("Girth knee flexed feet"));
+    measurements.insert(halfGirthHipsConsideringProtrudingAbdomen_M, m);
+    guiTexts.insert(halfGirthHipsConsideringProtrudingAbdomen_M, g);
+    descriptions.insert(halfGirthHipsConsideringProtrudingAbdomen_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "half_girth_hips_excluding_protruding_abdomen",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Half girth hips excluding protruding abdomen",
+                                "Full measurement name");
+    d = VTranslation::translate("Measurements", "Half girth hips excluding protruding abdomen",
+                                "Full measurement description");
 
-    InitMeasurement(neckTransverseDiameter_M, QStringLiteral("Neck transverse diameter"),
-                    QStringLiteral("Neck transverse diameter"));
+    measurements.insert(halfGirthHipsExcludingProtrudingAbdomen_M, m);
+    guiTexts.insert(halfGirthHipsExcludingProtrudingAbdomen_M, g);
+    descriptions.insert(halfGirthHipsExcludingProtrudingAbdomen_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "girth_knee_flexed_feet",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Girth knee flexed feet", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Girth knee flexed feet", "Full measurement description");
 
-    InitMeasurement(frontSlashShoulderHeight_M, QStringLiteral("Front slash shoulder height"),
-                    QStringLiteral("Front slash shoulder height"));
+    measurements.insert(girthKneeFlexedFeet_M, m);
+    guiTexts.insert(girthKneeFlexedFeet_M, g);
+    descriptions.insert(girthKneeFlexedFeet_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_transverse_diameter",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck transverse diameter", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Neck transverse diameter", "Full measurement description");
 
-    InitMeasurement(neckToFrontWaistLine_M, QStringLiteral("Neck to front waist line"),
-                    QStringLiteral("The distance from the base of the neck to the waist line front"));
+    measurements.insert(neckTransverseDiameter_M, m);
+    guiTexts.insert(neckTransverseDiameter_M, g);
+    descriptions.insert(neckTransverseDiameter_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "front_slash_shoulder_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Front slash shoulder height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Front slash shoulder height", "Full measurement description");
 
-    InitMeasurement(handVerticalDiameter_M, QStringLiteral("Hand vertical diameter"),
-                    QStringLiteral("Hand vertical diameter"));
+    measurements.insert(frontSlashShoulderHeight_M, m);
+    guiTexts.insert(frontSlashShoulderHeight_M, g);
+    descriptions.insert(frontSlashShoulderHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_front_waist_line",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to front waist line", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the base of the neck to the waist line front",
+                                "Full measurement description");
 
-    InitMeasurement(neckToKneePoint_M, QStringLiteral("Neck to knee point"),
-                    QStringLiteral("Distance from neck to knee point"));
+    measurements.insert(neckToFrontWaistLine_M, m);
+    guiTexts.insert(neckToFrontWaistLine_M, g);
+    descriptions.insert(neckToFrontWaistLine_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "hand_vertical_diameter",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Hand vertical diameter", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Hand vertical diameter", "Full measurement description");
 
-    InitMeasurement(waistToKnee_M, QStringLiteral("Waist to knee"),
-                    QStringLiteral("The distance from the waist to the knee"));
+    measurements.insert(handVerticalDiameter_M, m);
+    guiTexts.insert(handVerticalDiameter_M, g);
+    descriptions.insert(handVerticalDiameter_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_knee_point",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to knee point", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Distance from neck to knee point", "Full measurement description");
 
-    InitMeasurement(shoulderHeight_M, QStringLiteral("Shoulder height"), QStringLiteral("Shoulder height"));
+    measurements.insert(neckToKneePoint_M, m);
+    guiTexts.insert(neckToKneePoint_M, g);
+    descriptions.insert(neckToKneePoint_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "waist_to_knee",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Waist to knee", "Full measurement name");
+    d = VTranslation::translate("Measurements", "The distance from the waist to the knee",
+                                "Full measurement description");
 
-    InitMeasurement(headHeight_M, QStringLiteral("Head height"), QStringLiteral("Head height"));
+    measurements.insert(waistToKnee_M, m);
+    guiTexts.insert(waistToKnee_M, g);
+    descriptions.insert(waistToKnee_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "shoulder_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Shoulder height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Shoulder height", "Full measurement description");
 
-    InitMeasurement(bodyPosition_M, QStringLiteral("Body position"), QStringLiteral("Body position"));
+    measurements.insert(shoulderHeight_M, m);
+    guiTexts.insert(shoulderHeight_M, g);
+    descriptions.insert(shoulderHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "head_height",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Head height", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Head height", "Full measurement description");
 
-    InitMeasurement(arcBehindShoulderGirdle_M, QStringLiteral("Arc behind shoulder girdle"),
-                    QStringLiteral("Arc behind the shoulder girdle"));
+    measurements.insert(headHeight_M, m);
+    guiTexts.insert(headHeight_M, g);
+    descriptions.insert(headHeight_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "body_position",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Body position", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Body position", "Full measurement description");
 
-    InitMeasurement(neckToNeckBase_M, QStringLiteral("Neck to neck base"),
-                    QStringLiteral("Distance from neck point to point on the base of the neck side neck girth "
-                                   "measurement line"));
+    measurements.insert(bodyPosition_M, m);
+    guiTexts.insert(bodyPosition_M, g);
+    descriptions.insert(bodyPosition_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "arc_behind_shoulder_girdle",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Arc behind shoulder girdle", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Arc behind the shoulder girdle", "Full measurement description");
 
-    InitMeasurement(depthWaistFirst_M, QStringLiteral("Depth waist first"), QStringLiteral("Depth waist first"));
+    measurements.insert(arcBehindShoulderGirdle_M, m);
+    guiTexts.insert(arcBehindShoulderGirdle_M, g);
+    descriptions.insert(arcBehindShoulderGirdle_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "neck_to_neck_base",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Neck to neck base", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Distance from neck point to point on the base of the neck side neck"
+                                " girth measurement line", "Full measurement description");
 
-    InitMeasurement(depthWaistSecond_M, QStringLiteral("Depth waist second"), QStringLiteral("Depth waist second"));
-}
+    measurements.insert(neckToNeckBase_M, m);
+    guiTexts.insert(neckToNeckBase_M, g);
+    descriptions.insert(neckToNeckBase_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "depth_waist_first",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Depth waist first", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Depth waist first", "Full measurement description");
 
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::InitMeasurement(const QString &measurement, const QString &guiText, const QString &desc)
-{
-    const QString context = QStringLiteral("Measurements");
-    const QString disambiguation1 = QStringLiteral("Short measurement name. Don't use math symbols in name!!!!");
-    const QString disambiguation2 = QStringLiteral("Full measurement name");
-    const QString disambiguation3 = QStringLiteral("Full measurement description");
+    measurements.insert(depthWaistFirst_M, m);
+    guiTexts.insert(depthWaistFirst_M, g);
+    descriptions.insert(depthWaistFirst_M, d);
+    //=================================================================================================================
+    m = VTranslation::translate("Measurements", "depth_waist_second",
+                                "Short measurement name. Don't use math symbols in name!!!!");
+    g = VTranslation::translate("Measurements", "Depth waist second", "Full measurement name");
+    d = VTranslation::translate("Measurements", "Depth waist second", "Full measurement description");
 
-    measurements.insert(measurement, VTranslation::translate(context, measurement, disambiguation1));
-    guiTexts.insert(measurement, VTranslation::translate(context, guiText, disambiguation2));
-    descriptions.insert(measurement, VTranslation::translate(context, desc, disambiguation3));
+    measurements.insert(depthWaistSecond_M, m);
+    guiTexts.insert(depthWaistSecond_M, g);
+    descriptions.insert(depthWaistSecond_M, d);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitVariables()
 {
-    const QString context = QStringLiteral("Variables");
-    const QString disambiguation = QStringLiteral("Left symbol _ in name");
-
-    variables.insert(line_, VTranslation::translate(context, line_, disambiguation));
-    variables.insert(angleLine_, VTranslation::translate(context, angleLine_, disambiguation));
-    variables.insert(arc_, VTranslation::translate(context, arc_, disambiguation));
-    variables.insert(spl_, VTranslation::translate(context, spl_, disambiguation));
-    variables.insert(splPath, VTranslation::translate(context, splPath, disambiguation));
+    variables.insert(line_, VTranslation::translate("Variables", "Line_", "Left symbol _ in name"));
+    variables.insert(angleLine_, VTranslation::translate("Variables", "AngleLine_", "Left symbol _ in name"));
+    variables.insert(arc_, VTranslation::translate("Variables", "Arc_", "Left symbol _ in name"));
+    variables.insert(spl_, VTranslation::translate("Variables", "Spl_", "Left symbol _ in name"));
+    variables.insert(splPath, VTranslation::translate("Variables", "SplPath"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitFunctions()
 {
-    const QString context = QStringLiteral("Functions");
-
-    functions.insert(sin_F, VTranslation::translate(context, sin_F, QStringLiteral("sine function")));
-    functions.insert(cos_F, VTranslation::translate(context, cos_F, QStringLiteral("cosine function")));
-    functions.insert(tan_F, VTranslation::translate(context, tan_F, QStringLiteral("tangens function")));
-    functions.insert(asin_F, VTranslation::translate(context, asin_F, QStringLiteral("arcus sine function")));
-    functions.insert(acos_F, VTranslation::translate(context, acos_F, QStringLiteral("arcus cosine function")));
-    functions.insert(atan_F, VTranslation::translate(context, atan_F, QStringLiteral("arcus tangens function")));
-    functions.insert(sinh_F, VTranslation::translate(context, sinh_F, QStringLiteral("hyperbolic sine function")));
-    functions.insert(cosh_F, VTranslation::translate(context, cosh_F, QStringLiteral("hyperbolic cosine")));
-    functions.insert(tanh_F, VTranslation::translate(context, tanh_F, QStringLiteral("hyperbolic tangens function")));
-    functions.insert(asinh_F, VTranslation::translate(context, asinh_F,
-                                                      QStringLiteral("hyperbolic arcus sine function")));
-    functions.insert(acosh_F, VTranslation::translate(context, acosh_F,
-                                                      QStringLiteral("hyperbolic arcus tangens function")));
-    functions.insert(atanh_F, VTranslation::translate(context, atanh_F,
-                                                      QStringLiteral("hyperbolic arcur tangens function")));
-    functions.insert(log2_F, VTranslation::translate(context, log2_F, QStringLiteral("logarithm to the base 2")));
-    functions.insert(log10_F, VTranslation::translate(context, log10_F, QStringLiteral("logarithm to the base 10")));
-    functions.insert(log_F, VTranslation::translate(context, log_F, QStringLiteral("logarithm to the base 10")));
-    functions.insert(ln_F, VTranslation::translate(context, ln_F, QStringLiteral("logarithm to base e (2.71828...)")));
-    functions.insert(exp_F, VTranslation::translate(context, exp_F, QStringLiteral("e raised to the power of x")));
-    functions.insert(sqrt_F, VTranslation::translate(context, sqrt_F, QStringLiteral("square root of a value")));
-    functions.insert(sign_F, VTranslation::translate(context, sign_F,
-                                                     QStringLiteral("sign function -1 if x<0; 1 if x>0")));
-    functions.insert(rint_F, VTranslation::translate(context, rint_F, QStringLiteral("round to nearest integer")));
-    functions.insert(abs_F, VTranslation::translate(context, abs_F, QStringLiteral("absolute value")));
-    functions.insert(min_F, VTranslation::translate(context, min_F, QStringLiteral("min of all arguments")));
-    functions.insert(max_F, VTranslation::translate(context, max_F, QStringLiteral("max of all arguments")));
-    functions.insert(sum_F, VTranslation::translate(context, sum_F, QStringLiteral("sum of all arguments")));
-    functions.insert(avg_F, VTranslation::translate(context, avg_F, QStringLiteral("mean value of all arguments")));
+    functions.insert(sin_F, VTranslation::translate("Functions", "sin", "sine function"));
+    functions.insert(cos_F, VTranslation::translate("Functions", "cos", "cosine function"));
+    functions.insert(tan_F, VTranslation::translate("Functions", "tan", "tangens function"));
+    functions.insert(asin_F, VTranslation::translate("Functions", "asin", "arcus sine function"));
+    functions.insert(acos_F, VTranslation::translate("Functions", "acos", "arcus cosine function"));
+    functions.insert(atan_F, VTranslation::translate("Functions", "atan", "arcus tangens function"));
+    functions.insert(sinh_F, VTranslation::translate("Functions", "sinh", "hyperbolic sine function"));
+    functions.insert(cosh_F, VTranslation::translate("Functions", "cosh", "hyperbolic cosine"));
+    functions.insert(tanh_F, VTranslation::translate("Functions", "tanh", "hyperbolic tangens function"));
+    functions.insert(asinh_F, VTranslation::translate("Functions", "asinh", "hyperbolic arcus sine function"));
+    functions.insert(acosh_F, VTranslation::translate("Functions", "acosh", "hyperbolic arcus tangens function"));
+    functions.insert(atanh_F, VTranslation::translate("Functions", "atanh", "hyperbolic arcur tangens function"));
+    functions.insert(log2_F, VTranslation::translate("Functions", "log2", "logarithm to the base 2"));
+    functions.insert(log10_F, VTranslation::translate("Functions", "log10", "logarithm to the base 10"));
+    functions.insert(log_F, VTranslation::translate("Functions", "log", "logarithm to the base 10"));
+    functions.insert(ln_F, VTranslation::translate("Functions", "ln", "logarithm to base e (2.71828...)"));
+    functions.insert(exp_F, VTranslation::translate("Functions", "exp", "e raised to the power of x"));
+    functions.insert(sqrt_F, VTranslation::translate("Functions", "sqrt", "square root of a value"));
+    functions.insert(sign_F, VTranslation::translate("Functions", "sign", "sign function -1 if x<0; 1 if x>0"));
+    functions.insert(rint_F, VTranslation::translate("Functions", "rint", "round to nearest integer"));
+    functions.insert(abs_F, VTranslation::translate("Functions", "abs", "absolute value"));
+    functions.insert(min_F, VTranslation::translate("Functions", "min", "min of all arguments"));
+    functions.insert(max_F, VTranslation::translate("Functions", "max", "max of all arguments"));
+    functions.insert(sum_F, VTranslation::translate("Functions", "sum", "sum of all arguments"));
+    functions.insert(avg_F, VTranslation::translate("Functions", "avg", "mean value of all arguments"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitPostfixOperators()
 {
-    const QString context = QStringLiteral("PostfixOperators");
-
-    postfixOperators.insert(cm_Oprt, VTranslation::translate(context, cm_Oprt, QStringLiteral("centimeter")));
-    postfixOperators.insert(mm_Oprt, VTranslation::translate(context, mm_Oprt, QStringLiteral("millimeter")));
-    postfixOperators.insert(in_Oprt, VTranslation::translate(context, in_Oprt, QStringLiteral("inch")));
+    postfixOperators.insert(cm_Oprt, VTranslation::translate("PostfixOperators", "cm", "centimeter"));
+    postfixOperators.insert(mm_Oprt, VTranslation::translate("PostfixOperators", "mm", "millimeter"));
+    postfixOperators.insert(in_Oprt, VTranslation::translate("PostfixOperators", "in", "inch"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
