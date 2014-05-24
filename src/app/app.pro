@@ -79,7 +79,9 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_de.ts \
                 share/translations/valentina_cs.ts \
                 share/translations/valentina_he_IL.ts \
-                share/translations/valentina_fr.ts
+                share/translations/valentina_fr.ts \
+                share/translations/valentina_it.ts \
+                share/translations/valentina_nl.ts
 
 unix {
 QMAKE_CXX = ccache g++
