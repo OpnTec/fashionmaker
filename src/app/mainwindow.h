@@ -254,6 +254,10 @@ public slots:
      * @param result result of dialog working.
      */
     void               ClosedDialogEndLine(int result);
+    /** // TODO ISSUE 79 : copy
+     * @brief ApplyDialogEndLine actions after apply in DialogEndLine.
+     */
+    void               ApplyDialogEndLine();
     /**
      * @brief ClosedDialogLine actions after closing DialogLine.
      * @param result result of dialog working.
@@ -503,7 +507,7 @@ private:
      */
     void               RestoreCurrentScene();
     template <typename Dialog, typename Func>
-    /**
+    /** // TODO ISSUE 79 : delete
      * @brief SetToolButton set tool and show dialog.
      * @param checked true if tool button checked.
      * @param t tool type.
@@ -513,6 +517,18 @@ private:
      */
     void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
+    /** // TODO ISSUE 79 : copy
+     * @brief SetToolButton set tool and show dialog.
+     * @param checked true if tool button checked.
+     * @param t tool type.
+     * @param cursor path tool cursor icon.
+     * @param toolTip first tooltipe.
+     * @param closeDialogSlot function to handle close of dialog.
+     * @param applyDialogSlot function to handle apply in dialog.
+     */
+    template <typename Dialog, typename Func, typename Func2>
+    void               SetToolButton2(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+                                     Func closeDialogSlot, Func2 applyDialogSlot);
     /**
      * @brief MinimumScrollBar set scroll bar to minimum.
      */
@@ -523,6 +539,11 @@ private:
      * @param result result working dialog.
      */
     void               ClosedDialog(int result);
+    /** // TODO ISSUE 79 : copy
+     * @brief ApplyDialog handle apply in dialog
+     */
+    template <typename DrawTool>
+    void               ApplyDialog();
     /**
      * @brief SavePattern save pattern file.
      * @param fileName pattern file name.

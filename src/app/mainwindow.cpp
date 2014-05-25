@@ -202,6 +202,7 @@ void MainWindow::OptionDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// TODO Issue 79 : remove function
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
@@ -231,6 +232,36 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// TODO Issue 79 : rename to SetToolButton
+template <typename Dialog, typename Func, typename Func2>
+void MainWindow::SetToolButton2(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+                               Func closeDialogSlot, Func2 applyDialogSlot)
+{
+    if (checked)
+    {
+        CancelTool();
+        tool = t;
+        QPixmap pixmap(cursor);
+        QCursor cur(pixmap, 2, 3);
+        view->setCursor(cur);
+        helpLabel->setText(toolTip);
+        dialogTool = new Dialog(pattern, this);
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
+        connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
+        connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
+        connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+    }
+    else
+    {
+        if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
+        {
+            Q_CHECK_PTR(tButton);
+            tButton->setChecked(true);
+        }
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
@@ -243,10 +274,31 @@ void MainWindow::ClosedDialog(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ApplyDialog()
+{// TODO ISSUE 79 : copy
+    Q_CHECK_PTR(dialogTool);
+
+    // TODO ISSUE 79 : Only create on first apply for now,
+    // for updating : VDataTool * stored in DialogTool ?
+    DrawTool::Create(dialogTool, currentScene, doc, pattern);
+
+    ArrowTool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolEndLine(bool checked)
 {
-    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-                                 &MainWindow::ClosedDialogEndLine);
+//    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+//                                 &MainWindow::ClosedDialogEndLine);
+    SetToolButton2<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+                                 &MainWindow::ClosedDialogEndLine,&MainWindow::ApplyDialogEndLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ApplyDialogEndLine()
+{   // TODO ISSUE 79 : copy
+    ApplyDialog<VToolEndLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
