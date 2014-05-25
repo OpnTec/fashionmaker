@@ -54,6 +54,10 @@ public:
                          DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
                          ~DialogIncrements();
 public slots:
+     /** TODO ISSUE 79 : create real function
+      * @brief DialogApply apply data and emit signal about applied dialog.
+      */
+     virtual void      DialogApply(){}
     /**
      * @brief clickedToolButtonAdd create new row in table
      */

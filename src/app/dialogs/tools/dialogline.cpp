@@ -36,7 +36,7 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0), typeLine(QString())
 {
     ui->setupUi(this);
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);

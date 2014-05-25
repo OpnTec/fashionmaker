@@ -48,7 +48,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     timerF2 = new QTimer(this);
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
 
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 

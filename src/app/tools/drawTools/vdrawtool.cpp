@@ -95,6 +95,19 @@ void VDrawTool::FullUpdateFromGui(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::FullUpdateFromGuiApply()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        SaveDialog(domElement);
+
+        emit FullUpdateTree();
+        emit toolhaveChange();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SetFactor(qreal factor)
 {
     if (factor <= 2 && factor >= 0.5)

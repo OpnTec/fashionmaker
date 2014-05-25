@@ -85,6 +85,10 @@ public slots:
      */
     virtual void FullUpdateFromGui(int result);
     /**
+     * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
+     */
+    virtual void FullUpdateFromGuiApply();
+    /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor.
      */
@@ -157,6 +161,7 @@ protected:
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
                 if (ignoreFullUpdate == false)
                 {
                     connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);

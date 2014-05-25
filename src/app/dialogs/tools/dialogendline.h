@@ -31,6 +31,8 @@
 
 #include "dialogtool.h"
 
+
+#define DIALOGENDLINE_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogEndLine;
@@ -113,6 +115,10 @@ public slots:
      */
     virtual void      DialogAccepted();
     /**
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply();
+    /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void DeployFormulaTextEdit();
@@ -122,6 +128,10 @@ public slots:
     void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogEndLine)
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
     /**
      * @brief ui keeps information about user interface
      */

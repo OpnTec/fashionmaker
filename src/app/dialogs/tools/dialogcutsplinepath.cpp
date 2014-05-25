@@ -41,7 +41,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
 
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     flagFormula = false;
     flagName = false;
     CheckState();

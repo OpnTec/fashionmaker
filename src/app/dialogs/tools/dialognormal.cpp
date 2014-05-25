@@ -42,7 +42,7 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     flagFormula = false;
     flagName = false;

@@ -855,3 +855,9 @@ void DialogTool::ShowVariable(const QHash<key, val> *var)
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->setCurrentRow (0);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::DialogApply()
+{
+
+}

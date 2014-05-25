@@ -76,6 +76,10 @@ public slots:
      * @brief PointChanged selected another point in list
      * @param row number of row
      */
+    /** TODO ISSUE 79 : create real function
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply(){}
     void               PointChanged(int row);
     /**
      * @brief currentPointChanged changed point in combo box

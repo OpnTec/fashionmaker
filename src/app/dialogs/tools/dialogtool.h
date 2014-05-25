@@ -76,6 +76,10 @@ signals:
      */
     void             DialogClosed(int result);
     /**
+     * @brief DialogApplied emit signal dialog apply changes
+     */
+    void     DialogApplied();
+    /**
      * @brief ToolTip emit tooltipe for tool
      * @param toolTip text tooltipe
      */
@@ -95,6 +99,10 @@ public slots:
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
     virtual void     DialogAccepted();
+    /**
+     * @brief DialogApply save data and emit signal DialogApplied.
+     */
+    virtual void     DialogApply();
     /**
      * @brief DialogRejected emit signal dialog rejected
      */
@@ -453,15 +461,19 @@ protected:
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
     }
     template <typename T>
-    void             InitOkCansel(T *ui)
+    void             InitOkCancel(T *ui)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
         Q_CHECK_PTR(bOk);
         connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
 
-        QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        Q_CHECK_PTR(bCansel);
-        connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        Q_CHECK_PTR(bCancel);
+        connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+        // TODO issue #79
+        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        Q_CHECK_PTR(bApply);
+        connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
 private:
     /**

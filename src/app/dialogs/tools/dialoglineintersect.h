@@ -111,6 +111,10 @@ public slots:
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
     virtual void            DialogAccepted();
+    /** TODO ISSUE 79 : create real function
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply(){}
     /**
      * @brief P1Line1Changed changed first point of first line
      * @param index index in list

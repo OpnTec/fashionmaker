@@ -109,6 +109,10 @@ public slots:
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
     virtual void   DialogAccepted();
+    /** TODO ISSUE 79 : create real function
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply(){}
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
     /**
