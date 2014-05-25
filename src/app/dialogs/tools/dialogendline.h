@@ -112,6 +112,14 @@ public slots:
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
     virtual void      DialogAccepted();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
+    /**
+     * @brief FormulaTextChanged when formula text changes for validation and calc
+     */
+    void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogEndLine)
     /**
@@ -138,6 +146,10 @@ private:
      * @brief basePointId id base point of line
      */
     quint32            basePointId;
+    /**
+     * @brief formulaBaseHeight base height defined by dialogui
+     */
+    int formulaBaseHeight;
 };
 
 inline QString DialogEndLine::getPointName() const

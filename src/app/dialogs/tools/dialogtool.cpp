@@ -33,10 +33,15 @@
 
 #include <QtWidgets>
 
+// TODO : for issue #79
+// replace lineEditFormula -> plainTextEditFormula
+// delete lineEditFormala everywhrer
+// delete PutValHere and eval overloaded functions
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
-      bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), listWidget(nullptr),
+      bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr), listWidget(nullptr),
       labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
@@ -283,22 +288,42 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
-{
+{   // TODO issue #79 : erase this function after all tools updated to plainTextEdit
     Q_CHECK_PTR(lineEdit);
     Q_CHECK_PTR(listWidget);
     QListWidgetItem *item = listWidget->currentItem();
     Q_CHECK_PTR(item);
+
     int pos = lineEdit->cursorPosition();
     lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
     lineEdit->setFocus();
     lineEdit->setCursorPosition(pos + item->text().size());
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget)
+{
+    Q_CHECK_PTR(plainTextEdit);
+    Q_CHECK_PTR(listWidget);
+    QListWidgetItem *item = listWidget->currentItem();
+    Q_CHECK_PTR(item);
+
+    QTextCursor cursor = plainTextEdit->textCursor();
+    cursor.insertText(item->text());
+    plainTextEdit->setTextCursor(cursor);
+    /*
+    int pos = lineEdit->cursorPosition();
+    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
+    lineEdit->setFocus();
+    lineEdit->setCursorPosition(pos + item->text().size());
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
-{
+{// TODO issue #79 : erase this function after all tools updated to plainTextEdit
     Q_CHECK_PTR(edit);
     Q_CHECK_PTR(timer);
     Q_CHECK_PTR(labelEditFormula);
@@ -313,10 +338,26 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
     }
     timer->start(1000);
 }
-
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *timer)
 {
+    Q_CHECK_PTR(edit);
+    Q_CHECK_PTR(timer);
+    Q_CHECK_PTR(labelEditFormula);
+    if (edit->toPlainText().isEmpty())
+    {
+        flag = false;
+        CheckState();
+        QPalette palette = labelEditFormula->palette();
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+        labelEditFormula->setPalette(palette);
+        return;
+    }
+    timer->start(1000);
+}
+
+void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+{  // TODO issue #79 : erase this function after all tools updated to plainTextEdit
     Q_CHECK_PTR(edit);
     Q_CHECK_PTR(timer);
     Q_CHECK_PTR(label);
@@ -332,6 +373,45 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
         Calculator cal(data);
         QString errorMsg;
         qreal result = cal.eval(edit->text(), &errorMsg);
+        if (errorMsg.isEmpty() == false)
+        {
+            label->setText(tr("Error"));
+            flag = false;
+            palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+        }
+        else
+        {
+            label->setText(QString().setNum(result));
+            flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+        }
+    }
+    CheckState();
+    timer->stop();
+    labelEditFormula->setPalette(palette);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+{
+    Q_CHECK_PTR(edit);
+    Q_CHECK_PTR(timer);
+    Q_CHECK_PTR(label);
+    Q_CHECK_PTR(labelEditFormula);
+    QPalette palette = labelEditFormula->palette();
+    if (edit->toPlainText().isEmpty())
+    {
+        flag = false;
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+    }
+    else
+    {
+        Calculator cal(data);
+        QString errorMsg;
+        // Replace line return with spaces for calc
+        QString formula = edit->toPlainText();
+        formula.replace("\n"," ");
+        qreal result = cal.eval(formula, &errorMsg);
         if (errorMsg.isEmpty() == false)
         {
             label->setText(tr("Error"));
@@ -489,8 +569,17 @@ void DialogTool::DialogRejected()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FormulaChanged()
-{
+{   // TODO issue #79 : erase after full update of tools.
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        ValFormulaChanged(flagFormula, edit, timerFormula);
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FormulaChanged2()
+{
+    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
     if (edit)
     {
         ValFormulaChanged(flagFormula, edit, timerFormula);
@@ -556,9 +645,9 @@ void DialogTool::ArrowRightDown()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::EvalFormula()
 {
-    Q_CHECK_PTR(lineEditFormula);
+    Q_CHECK_PTR(plainTextEditFormula);
     Q_CHECK_PTR(labelResultCalculation);
-    Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
+    Eval(plainTextEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -615,19 +704,23 @@ void DialogTool::Increments()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutHere()
 {
-    PutValHere(lineEditFormula, listWidget);
+    PutValHere(plainTextEditFormula, listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::PutVal(QListWidgetItem *item)
 {
-    Q_CHECK_PTR(lineEditFormula);
+    Q_CHECK_PTR(plainTextEditFormula);
     Q_CHECK_PTR(item);
-    int pos = lineEditFormula->cursorPosition();
+    QTextCursor cursor = plainTextEditFormula->textCursor();
+    cursor.insertText(item->text());
+    plainTextEditFormula->setTextCursor(cursor);
+    /*int pos = plainTextEditFormula->cursorPosition();
     lineEditFormula->setText(lineEditFormula->text().insert(lineEditFormula->cursorPosition(),
                                                             item->text()));
     lineEditFormula->setFocus();
     lineEditFormula->setCursorPosition(pos + item->text().size());
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
