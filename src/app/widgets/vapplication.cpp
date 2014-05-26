@@ -424,16 +424,6 @@ void VApplication::InitMeasurements()
     guiTexts.insert(acrossBackShoulderWidth_M,g );
     descriptions.insert(acrossBackShoulderWidth_M, d);
     //=================================================================================================================
-    m = VTranslation::translate("Measurements", "across_back_shoulder_width",
-                                "Short measurement name. Don't use math symbols in name!!!!");
-    g = VTranslation::translate("Measurements", "Back Upper Chest width", "Full measurement name");
-    d = VTranslation::translate("Measurements", "Across Back UpperChest, smallest width from armscye to armscye",
-                                "Full measurement description");
-
-    measurements.insert(acrossBackShoulderWidth_M, m);
-    guiTexts.insert(acrossBackShoulderWidth_M, g);
-    descriptions.insert(acrossBackShoulderWidth_M, d);
-    //=================================================================================================================
     m = VTranslation::translate("Measurements", "upper_back_width",
                                 "Short measurement name. Don't use math symbols in name!!!!");
     g = VTranslation::translate("Measurements", "Back Upper Chest width", "Full measurement name");
