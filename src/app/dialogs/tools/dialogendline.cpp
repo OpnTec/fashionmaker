@@ -39,12 +39,9 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     ui->setupUi(this);
     InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
+    lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
-
-    // TODO : auto extend height on first value length.
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     InitOkCansel(ui);
     flagFormula = false;
@@ -60,29 +57,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEndLine::PutVal);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEndLine::FormulaTextChanged);
-    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEndLine::DeployFormulaTextEdit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEndLine::FormulaTextChanged()
-{
-    // TODO issue #79 :  back to FormulaChanged when full update
-    // Also remove this function if only one function called here
-    this->FormulaChanged2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEndLine::DeployFormulaTextEdit()
-{
-    if (ui->plainTextEditFormula->height() < 64)
-    {
-        ui->plainTextEditFormula->setFixedHeight(64);
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-    }
+    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEndLine::FormulaChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,10 +90,7 @@ void DialogEndLine::setTypeLine(const QString &value)
 void DialogEndLine::setFormula(const QString &value)
 {
     formula = value;
-    ui->plainTextEditFormula->setPlainText(value);
-    //QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-    //cursor.insertText(value);
-    //ui->plainTextEditFormula->setCursor(cursor);
+    ui->lineEditFormula->setText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,7 +111,7 @@ void DialogEndLine::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->plainTextEditFormula->toPlainText();
+    formula = ui->lineEditFormula->text();
     angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
     emit DialogClosed(QDialog::Accepted);

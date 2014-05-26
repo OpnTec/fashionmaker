@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>486</width>
-    <height>522</height>
+    <width>539</width>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,17 +74,17 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLineEdit" name="lineEditFormula">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="toolTip">
+        <string>Formula for calculation of length of line</string>
        </property>
-      </spacer>
+      </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonPutHere">
@@ -142,56 +142,6 @@
        </property>
        <property name="text">
         <string>_</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
-      <widget class="QPlainTextEdit" name="plainTextEditFormula">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="baseSize">
-        <size>
-         <width>4</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonGrowLength">
-       <property name="maximumSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/16x16/go-down.png</normaloff>
-         <activeoff>:/icon/16x16/go-next.png</activeoff>:/icon/16x16/go-down.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -600,6 +550,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>lineEditFormula</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>lineEditNamePoint</tabstop>
   <tabstop>doubleSpinBoxAngle</tabstop>

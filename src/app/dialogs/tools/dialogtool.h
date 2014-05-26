@@ -37,7 +37,6 @@
 #include <QRadioButton>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QPlainTextEdit>
 #include "../../container/vcontainer.h"
 #include "../../widgets/vapplication.h"
 
@@ -103,7 +102,6 @@ public slots:
      * @brief formula check formula
      */
     void             FormulaChanged();
-    void             FormulaChanged2();
     /**
      * @brief ArrowUp set angle value 90 degree
      */
@@ -216,7 +214,6 @@ protected:
      * @brief lineEditFormula linEdit for formula
      */
     QLineEdit        *lineEditFormula;
-    QPlainTextEdit   *plainTextEditFormula;
     /**
      * @brief listWidget listWidget with variables
      */
@@ -344,7 +341,6 @@ protected:
      * @param listWidget listWidget
      */
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
-    void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     /**
      * @brief ValFormulaChanged handle change formula
      * @param flag flag state of formula
@@ -352,7 +348,6 @@ protected:
      * @param timer timer of formula
      */
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
-    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
     /**
      * @brief Eval evaluate formula and show result
      * @param edit lineEdit of formula
@@ -360,7 +355,6 @@ protected:
      * @param timer timer of formula
      * @param label label for signal error
      */
-    void             Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     /**
      * @brief setCurrentPointId set current point id in combobox
