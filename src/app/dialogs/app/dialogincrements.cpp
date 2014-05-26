@@ -208,6 +208,7 @@ void DialogIncrements::FillMeasurements()
         flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
         item->setFlags(flags);
+        item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
     }
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
@@ -306,7 +307,7 @@ void DialogIncrements::FillLengthLines()
         ui->tableWidgetLines->setRowCount ( linesTable->size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetLines->setItem(currentRow, 0, item);
 
@@ -341,7 +342,7 @@ void DialogIncrements::FillLengthSplines()
         currentRow++;
         ui->tableWidgetSplines->setRowCount ( splinesTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetSplines->setItem(currentRow, 0, item);
@@ -377,8 +378,8 @@ void DialogIncrements::FillLengthArcs()
         currentRow++;
         ui->tableWidgetArcs->setRowCount ( arcsTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
+        QTableWidgetItem *item = new QTableWidgetItem(i.key());
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetArcs->setItem(currentRow, 0, item);
 
