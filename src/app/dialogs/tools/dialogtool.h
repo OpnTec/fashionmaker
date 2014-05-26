@@ -40,6 +40,7 @@
 #include <QPlainTextEdit>
 #include "../../container/vcontainer.h"
 #include "../../widgets/vapplication.h"
+#include "../../tools/vabstracttool.h"
 
 namespace ComboMode
 {
@@ -69,6 +70,8 @@ public:
                       */
                      DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
+    inline VAbstractTool* GetAssociatedTool() { return this->associatedTool;}
+    inline void SetAssociatedTool(VAbstractTool* tool) { this->associatedTool=tool;}
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -475,6 +478,7 @@ protected:
         Q_CHECK_PTR(bApply);
         connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
+    VAbstractTool* associatedTool;
 private:
     /**
      * @brief FillList fill combobox list

@@ -268,7 +268,10 @@ void MainWindow::ClosedDialog(int result)
     Q_CHECK_PTR(dialogTool);
     if (result == QDialog::Accepted)
     {
-        DrawTool::Create(dialogTool, currentScene, doc, pattern);
+        if (dialogTool->GetAssociatedTool() == nullptr)
+        {
+            DrawTool::Create(dialogTool, currentScene, doc, pattern);
+        }
     }
     ArrowTool();
 }
@@ -280,10 +283,14 @@ void MainWindow::ApplyDialog()
     Q_CHECK_PTR(dialogTool);
 
     // TODO ISSUE 79 : Only create on first apply for now,
-    // for updating : VDataTool * stored in DialogTool ?
-    DrawTool::Create(dialogTool, currentScene, doc, pattern);
+    // need function for updating in dialogtools or drawtool
 
-    ArrowTool();
+    if (dialogTool->GetAssociatedTool() == nullptr)
+    {
+        dialogTool->SetAssociatedTool(
+                dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+    }
+    //ArrowTool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

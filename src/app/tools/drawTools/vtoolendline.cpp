@@ -65,7 +65,7 @@ void VToolEndLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data)
 {
     Q_CHECK_PTR(dialog);
@@ -76,12 +76,12 @@ void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatter
     QString formula = dialogTool->getFormula();
     qreal angle = dialogTool->getAngle();
     quint32 basePointId = dialogTool->getBasePointId();
-    Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
+    return Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
            Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                           const QString &formula, const qreal &angle, const quint32 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -120,8 +120,10 @@ void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QSt
             connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
             doc->AddTool(id, point);
             doc->IncrementReferens(basePointId);
+            return point;
         }
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

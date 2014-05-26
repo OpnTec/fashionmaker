@@ -45,7 +45,7 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
       labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), lineStyles(QStringList())
+      radioButtonLengthCurve(nullptr), lineStyles(QStringList()), associatedTool(nullptr)
 {
     Q_CHECK_PTR(data);
     timerFormula = new QTimer(this);
