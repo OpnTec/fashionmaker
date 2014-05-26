@@ -1505,7 +1505,7 @@ void VApplication::InitPostfixOperators()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::Measurements(QString &newFormula, int position, const QString &token)
+bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const QString &token) const
 {
     QMap<QString, VTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
@@ -1521,7 +1521,7 @@ bool VApplication::Measurements(QString &newFormula, int position, const QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token)
+bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token) const
 {
     QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
@@ -1537,7 +1537,7 @@ bool VApplication::VariablesFromUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::PostfixOperators(QString &newFormula, int position, const QString &token)
+bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token) const
 {
     QMap<QString, VTranslation>::const_iterator i = postfixOperators.constBegin();
     while (i != postfixOperators.constEnd())
@@ -1553,7 +1553,7 @@ bool VApplication::PostfixOperators(QString &newFormula, int position, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::Functions(QString &newFormula, int position, const QString &token)
+bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QString &token) const
 {
     QMap<QString, VTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
@@ -1569,14 +1569,14 @@ bool VApplication::Functions(QString &newFormula, int position, const QString &t
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token)
+bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token) const
 {
     QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
         if(token.indexOf( i.key() ) == 0)
         {
-            newFormula.replace(position, variables.value(i.key()).translate().length(), i.value().translate());
+            newFormula.replace(position, i.key().length(), i.value().translate());
             return true;
         }
         ++i;
@@ -1592,9 +1592,55 @@ void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::Measurement(const QString &measurement) const
+QString VApplication::VarToUser(const QString &var) const
 {
-    return measurements.value(measurement).translate();
+    if (measurements.contains(var))
+    {
+        return measurements.value(var).translate();
+    }
+
+    if (functions.contains(var))
+    {
+        return functions.value(var).translate();
+    }
+
+    if (postfixOperators.contains(var))
+    {
+        return postfixOperators.value(var).translate();
+    }
+
+    QString newVar = var;
+    if(VariablesToUser(newVar, 0, var))
+    {
+        return newVar;
+    }
+    return newVar;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::VarFromUser(const QString &var) const
+{
+    QString newVar = var;
+    if(MeasurementsFromUser(newVar, 0, var))
+    {
+        return newVar;
+    }
+
+    if(VariablesFromUser(newVar, 0, var))
+    {
+        return newVar;
+    }
+
+    if(PostfixOperatorsFromUser(newVar, 0, var))
+    {
+        return newVar;
+    }
+
+    if(FunctionsFromUser(newVar, 0, var))
+    {
+        return newVar;
+    }
+    return newVar;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1653,7 +1699,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
-        if(Measurements(newFormula, i.key(), i.value()))
+        if(MeasurementsFromUser(newFormula, i.key(), i.value()))
         {
             ++i;
             continue;
@@ -1665,13 +1711,13 @@ QString VApplication::FormulaFromUser(const QString &formula)
             continue;
         }
 
-        if(PostfixOperators(newFormula, i.key(), i.value()))
+        if(PostfixOperatorsFromUser(newFormula, i.key(), i.value()))
         {
             ++i;
             continue;
         }
 
-        if(Functions(newFormula, i.key(), i.value()))
+        if(FunctionsFromUser(newFormula, i.key(), i.value()))
         {
             ++i;
             continue;

@@ -72,7 +72,8 @@ public:
     QString               pathToTables() const;
     qreal                 widthMainLine() const;
     qreal                 widthHairLine() const;
-    QString               Measurement(const QString &measurement) const;
+    QString               VarToUser(const QString &var) const;
+    QString               VarFromUser(const QString &var) const;
     QString               GuiText(const QString &measurement) const;
     QString               Description(const QString &measurement) const;
     QString               Variable(const QString &name) const;
@@ -96,11 +97,11 @@ private:
     void                  InitVariables();
     void                  InitFunctions();
     void                  InitPostfixOperators();
-    bool                  Measurements(QString &newFormula, int position, const QString &token);
-    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token);
-    bool                  PostfixOperators(QString &newFormula, int position, const QString &token);
-    bool                  Functions(QString &newFormula, int position, const QString &token);
-    bool                  VariablesToUser(QString &newFormula, int position, const QString &token);
+    bool                  MeasurementsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  FunctionsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  VariablesToUser(QString &newFormula, int position, const QString &token) const;
 };
 
 inline Valentina::Units VApplication::patternUnit() const

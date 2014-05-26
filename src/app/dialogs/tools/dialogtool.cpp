@@ -671,8 +671,9 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonStandardTable->isChecked())
     {
-        VMeasurement stable = data->GetMeasurement(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(item->text()))
+        QString name = qApp->VarFromUser(item->text());
+        VMeasurement stable = data->GetMeasurement(name);
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(name))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
@@ -687,22 +688,22 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonLengthLine->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(qApp->VarFromUser(item->text())))
                 .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthArc->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(qApp->VarFromUser(item->text())))
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthCurve->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthSpline(item->text()))
-                .arg(tr("Curve length"));
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(data->GetLengthSpline(qApp->VarFromUser(item->text()))).arg(tr("Curve length"));
         labelDescription->setText(desc);
         return;
     }
@@ -757,7 +758,7 @@ void DialogTool::ShowVariable(const QHash<key, val> *var)
     while (i.hasNext())
     {
         i.next();
-        map.insert(i.key(), i.value());
+        map.insert(qApp->VarToUser(i.key()), i.value());
     }
 
     QMapIterator<key, val> iMap(map);

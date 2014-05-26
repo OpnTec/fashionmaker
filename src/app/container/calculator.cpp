@@ -78,6 +78,14 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
 
     SetExpr(formula);
+    try
+    {
+        Eval();//Need run for making tokens
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        return;//Ignore all warnings
+    }
 }
 
 Calculator::~Calculator()
