@@ -43,7 +43,7 @@ class QmuParserBase;
  * @sa Assign
  * @throw nothrow
  */
-QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
+QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reader )
     :m_pParser( a_Reader.m_pParser ), m_strFormula( a_Reader.m_strFormula ), m_iPos( a_Reader.m_iPos ),
       m_iSynFlags( a_Reader.m_iSynFlags ), m_bIgnoreUndefVar( a_Reader.m_bIgnoreUndefVar ),
       m_pFunDef( a_Reader.m_pFunDef ), m_pPostOprtDef( a_Reader.m_pPostOprtDef ),
@@ -63,7 +63,7 @@ QmuParserTokenReader::QmuParserTokenReader ( const QmuParserTokenReader &a_Reade
  * @param a_Reader Object to copy to this token reader.
  * @throw nothrow
  */
-QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
+QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenReader &a_Reader )
 {
     if ( &a_Reader != this )
     {
@@ -80,7 +80,7 @@ QmuParserTokenReader& QmuParserTokenReader::operator= ( const QmuParserTokenRead
  * @param a_Reader Object from which the state should be copied.
  * @throw nothrow
  */
-void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader ) Q_DECL_NOEXCEPT
+void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader )
 {
     m_pParser = a_Reader.m_pParser;
     m_strFormula = a_Reader.m_strFormula;
@@ -116,7 +116,7 @@ void QmuParserTokenReader::Assign ( const QmuParserTokenReader &a_Reader ) Q_DEC
  * @post #m_pParser==a_pParser
  * @param a_pParent Parent parser object of the token reader.
  */
-QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent ) Q_DECL_NOEXCEPT
+QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent )
     : m_pParser ( a_pParent ), m_strFormula(), m_iPos ( 0 ), m_iSynFlags ( 0 ), m_bIgnoreUndefVar ( false ),
       m_pFunDef ( nullptr ), m_pPostOprtDef ( nullptr ), m_pInfixOprtDef ( nullptr ), m_pOprtDef ( nullptr ),
       m_pConstDef ( nullptr ), m_pStrVarDef ( nullptr ), m_pVarDef ( nullptr ), m_pFactory ( nullptr ),
@@ -136,7 +136,7 @@ QmuParserTokenReader::QmuParserTokenReader ( QmuParserBase *a_pParent ) Q_DECL_N
  * @return A new QParserTokenReader object.
  * @throw nothrow
  */
-QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) const Q_DECL_NOEXCEPT
+QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) const
 {
     std::unique_ptr<QmuParserTokenReader> ptr ( new QmuParserTokenReader ( *this ) );
     ptr->SetParent ( a_pParent );
@@ -144,7 +144,7 @@ QmuParserTokenReader* QmuParserTokenReader::Clone ( QmuParserBase *a_pParent ) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserTokenReader::token_type& QmuParserTokenReader::SaveBeforeReturn ( const token_type &tok ) Q_DECL_NOEXCEPT
+QmuParserTokenReader::token_type& QmuParserTokenReader::SaveBeforeReturn ( const token_type &tok )
 {
     m_lastTok = tok;
     return m_lastTok;
@@ -163,7 +163,7 @@ void QmuParserTokenReader::AddValIdent ( identfun_type a_pCallback )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserData ) Q_DECL_NOEXCEPT
+void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserData )
 {
     m_pFactory = a_pFactory;
     m_pFactoryData = pUserData;
@@ -176,7 +176,7 @@ void QmuParserTokenReader::SetVarCreator ( facfun_type a_pFactory, void *pUserDa
  *   Sets the formula position index to zero and set Syntax flags to default for initial formula parsing.
  *   @pre [assert] triggered if a_szFormula==0
  */
-void QmuParserTokenReader::SetFormula ( const QString &a_strFormula ) Q_DECL_NOEXCEPT
+void QmuParserTokenReader::SetFormula ( const QString &a_strFormula )
 {
     m_strFormula = a_strFormula;
     ReInit();
@@ -191,7 +191,7 @@ void QmuParserTokenReader::SetFormula ( const QString &a_strFormula ) Q_DECL_NOE
  * @throw nothrow
  * @sa ESynCodes
  */
-void QmuParserTokenReader::ReInit() Q_DECL_NOEXCEPT
+void QmuParserTokenReader::ReInit()
 {
     m_iPos = 0;
     m_iSynFlags = sfSTART_OF_LINE;
@@ -289,7 +289,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent ) Q_DECL_NOEXCEPT
+void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
 {
     m_pParser       = a_pParent;
     m_pFunDef       = &a_pParent->m_FunDef;
@@ -311,15 +311,10 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent ) Q_DECL_NOEXCEP
  * @return The Position of the first character not listed in a_szCharSet.
  * @throw nothrow
  */
-int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const Q_DECL_NOEXCEPT
+int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const
 {
-#if defined(_UNICODE)
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
     const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-#else
-    const std::string m_strFormulaStd = m_strFormula.toStdString();
-    const std::string a_szCharSetStd = a_szCharSet.toStdString();
-#endif
 
     int iEnd = static_cast<int>(m_strFormulaStd.find_first_not_of ( a_szCharSetStd, a_iPos ));
 
@@ -331,13 +326,8 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
     // Assign token string if there was something found
     if ( a_iPos != iEnd )
     {
-#if defined(_UNICODE)
         a_sTok = QString().fromStdWString ( std::wstring ( m_strFormulaStd.begin() + a_iPos,
                                                            m_strFormulaStd.begin() + iEnd ) );
-#else
-        a_sTok = QString().fromStdString ( std::string ( m_strFormulaStd.begin() + a_iPos,
-                                                         m_strFormulaStd.begin() + iEnd ) );
-#endif
     }
 
     return iEnd;
@@ -353,13 +343,9 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
  */
 int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) const
 {
-#if defined(_UNICODE)
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
     const std::wstring oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdWString();
-#else
-    const std::string m_strFormulaStd = m_strFormula.toStdString();
-    const std::string oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdString();
-#endif
+
     int iEnd = static_cast<int>( m_strFormulaStd.find_first_not_of ( oprtCharsStd, a_iPos ) );
     if ( iEnd == static_cast<int>( string_type::npos ) )
     {
@@ -369,13 +355,8 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
     // Assign token string if there was something found
     if ( a_iPos != iEnd )
     {
-#if defined(_UNICODE)
         a_sTok = QString().fromStdWString ( string_type ( m_strFormulaStd.begin() + a_iPos,
                                             m_strFormulaStd.begin() + iEnd ) );
-#else
-        a_sTok = QString().fromStdString ( string_type ( m_strFormulaStd.begin() + a_iPos,
-                                                         m_strFormulaStd.begin() + iEnd ) );
-#endif
         return iEnd;
     }
     else
@@ -549,12 +530,6 @@ bool QmuParserTokenReader::IsArgSep ( token_type &a_Tok )
  */
 bool QmuParserTokenReader::IsEOF ( token_type &a_Tok )
 {
-//#if defined(_UNICODE)
-//    const char_type* szFormula = m_strFormula.toStdWString().c_str();
-//#else
-//    const char_type* szFormula = m_strFormula.toStdString().c_str();
-//#endif
-
     // check for EOF
     if ( m_strFormula.data()[m_iPos] == false /*|| szFormula[m_iPos] == '\n'*/ )
     {
@@ -848,8 +823,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
         if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
-            //strTok = m_strFormula.mid ( iStart, m_iPos-iStart );
-            strTok = m_strFormula.mid ( iStart, m_iPos );
+            strTok = m_strFormula.mid ( iStart, m_iPos-iStart );
             if ( m_iSynFlags & noVAL )
             {
                 Error ( ecUNEXPECTED_VAL, m_iPos - strTok.length(), strTok );
@@ -955,7 +929,7 @@ bool QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok )
  * @return true if a variable token has been found.
  * @throw nothrow
  */
-bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) Q_DECL_NOEXCEPT
+bool QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok )
 {
     QString strTok;
     int iEnd ( ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos ) );

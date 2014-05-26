@@ -32,6 +32,7 @@
 #include "../../tools/vabstracttool.h"
 
 #include <QtWidgets>
+#include "../../../libs/qmuparser/qmuparsererror.h"
 
 // TODO : for issue #79
 // replace lineEditFormula -> plainTextEditFormula
@@ -370,20 +371,28 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     }
     else
     {
-        Calculator cal(data);
-        QString errorMsg;
-        qreal result = cal.eval(edit->text(), &errorMsg);
-        if (errorMsg.isEmpty() == false)
+        try
+        {
+            const QString formula = qApp->FormulaFromUser(edit->text());
+            Calculator cal(data);
+            const qreal result = cal.EvalFormula(formula);
+
+            label->setText(QString().setNum(result));
+            flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("");
+        }
+        catch(qmu::QmuParserError &e)
         {
             label->setText(tr("Error"));
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-        }
-        else
-        {
-            label->setText(QString().setNum(result));
-            flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("Parser error: "+e.GetMsg());
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
         }
     }
     CheckState();
@@ -758,8 +767,9 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonStandardTable->isChecked())
     {
-        VMeasurement stable = data->GetMeasurement(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(item->text()))
+        QString name = qApp->VarFromUser(item->text());
+        VMeasurement stable = data->GetMeasurement(name);
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(name))
                 .arg(stable.GetDescription());
         labelDescription->setText(desc);
         return;
@@ -774,22 +784,22 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonLengthLine->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(qApp->VarFromUser(item->text())))
                 .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthArc->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(item->text()))
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(qApp->VarFromUser(item->text())))
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthCurve->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthSpline(item->text()))
-                .arg(tr("Curve length"));
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(data->GetLengthSpline(qApp->VarFromUser(item->text()))).arg(tr("Curve length"));
         labelDescription->setText(desc);
         return;
     }
@@ -844,7 +854,7 @@ void DialogTool::ShowVariable(const QHash<key, val> *var)
     while (i.hasNext())
     {
         i.next();
-        map.insert(i.key(), i.value());
+        map.insert(qApp->VarToUser(i.key()), i.value());
     }
 
     QMapIterator<key, val> iMap(map);

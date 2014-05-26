@@ -39,8 +39,11 @@
 #ifdef Q_CC_MSVC
 #define _USE_MATH_DEFINES
 #endif
+
+#ifdef QT_CORE_LIB
 #include <QtCore>
-#include <QtGlobal>
+#endif
+
 #endif
 
 #endif // STABLE_H

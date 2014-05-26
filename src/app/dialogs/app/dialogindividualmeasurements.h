@@ -57,7 +57,6 @@ private:
     QString _name;
     QString _tablePath;
     VContainer *data;
-    void LoadIndividualTables();
     void InitUnits();
 };
 

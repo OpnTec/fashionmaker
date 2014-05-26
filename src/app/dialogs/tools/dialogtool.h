@@ -464,7 +464,8 @@ protected:
         }
         else
         {
-            radioButtonSizeGrowth->setVisible(false);
+            radioButtonSizeGrowth->setEnabled(false);
+            radioButtonStandardTable->setChecked(true);
             Measurements();
         }
         connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::Measurements);

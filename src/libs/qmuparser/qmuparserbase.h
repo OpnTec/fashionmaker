@@ -58,22 +58,22 @@ class QMUPARSERSHARED_EXPORT QmuParserBase
 public:
     QmuParserBase();
     QmuParserBase(const QmuParserBase &a_Parser);
-    QmuParserBase& operator=(const QmuParserBase &a_Parser) Q_DECL_NOEXCEPT;
+    QmuParserBase& operator=(const QmuParserBase &a_Parser);
     virtual ~QmuParserBase();
 
     static void        EnableDebugDump(bool bDumpCmd, bool bDumpStack);
     qreal              Eval() const;
     qreal*             Eval(int &nStackSize) const;
     void               Eval(qreal *results, int nBulkSize) const;
-    int                GetNumResults() const Q_DECL_NOEXCEPT;
+    int                GetNumResults() const;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
     void               SetDecSep(char_type cDecSep);
     void               SetThousandsSep(char_type cThousandsSep = 0);
     void               ResetLocale();
-    void               EnableOptimizer(bool a_bIsOn=true) Q_DECL_NOEXCEPT;
-    void               EnableBuiltInOprt(bool a_bIsOn=true) Q_DECL_NOEXCEPT;
-    bool               HasBuiltInOprt() const Q_DECL_NOEXCEPT;
+    void               EnableOptimizer(bool a_bIsOn=true);
+    void               EnableBuiltInOprt(bool a_bIsOn=true);
+    bool               HasBuiltInOprt() const;
     void               AddValIdent(identfun_type a_pCallback);
     void               DefineOprt(const QString &a_strName, fun_type2 a_pFun, unsigned a_iPri=0,
                                   EOprtAssociativity a_eAssociativity = oaLEFT, bool a_bAllowOpt = false);
@@ -84,23 +84,25 @@ public:
     void               DefineInfixOprt(const QString &a_strName, fun_type1 a_pOprt, int a_iPrec=prINFIX,
                                        bool a_bAllowOpt=true);
     // Clear user defined variables, constants or functions
-    void               ClearVar() Q_DECL_NOEXCEPT;
-    void               ClearFun() Q_DECL_NOEXCEPT;
-    void               ClearConst() Q_DECL_NOEXCEPT;
-    void               ClearInfixOprt() Q_DECL_NOEXCEPT;
-    void               ClearPostfixOprt() Q_DECL_NOEXCEPT;
-    void               ClearOprt() Q_DECL_NOEXCEPT;
-    void               RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT;
+    void               ClearVar();
+    void               ClearFun();
+    void               ClearConst();
+    void               ClearInfixOprt();
+    void               ClearPostfixOprt();
+    void               ClearOprt();
+    void               RemoveVar(const QString &a_strVarName);
     const varmap_type& GetUsedVar() const;
-    const varmap_type& GetVar() const Q_DECL_NOEXCEPT;
-    const valmap_type& GetConst() const Q_DECL_NOEXCEPT;
+    const varmap_type& GetVar() const;
+    const valmap_type& GetConst() const;
     const QString&     GetExpr() const;
-    const funmap_type& GetFunDef() const Q_DECL_NOEXCEPT;
+    const funmap_type& GetFunDef() const;
     static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
-    static const QStringList& GetOprtDef() Q_DECL_NOEXCEPT;
-    void               DefineNameChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
-    void               DefineOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
-    void               DefineInfixOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT;
+    static const QStringList& GetOprtDef();
+    QMap<int, QString> GetTokens() const;
+    QMap<int, QString> GetNumbers() const;
+    void               DefineNameChars(const QString &a_szCharset);
+    void               DefineOprtChars(const QString &a_szCharset);
+    void               DefineInfixOprtChars(const QString &a_szCharset);
     const QString&     ValidNameChars() const;
     const QString&     ValidOprtChars() const;
     const QString&     ValidInfixOprtChars() const;
@@ -232,10 +234,12 @@ private:
     // items merely used for caching state information
     mutable valbuf_type m_vStackBuffer; ///< This is merely a buffer used for the stack in the cmd parsing routine
     mutable int m_nFinalResultIdx;
+    mutable QMap<int, QString> m_Tokens;///< Keep all tokens that we can translate
+    mutable QMap<int, QString> m_Numbers;///< Keep all numbers what exist in formula
 
     void               Assign(const QmuParserBase &a_Parser);
     void               InitTokenReader();
-    void               ReInit() const Q_DECL_NOEXCEPT;
+    void               ReInit() const;
     void               AddCallback(const QString &a_strName, const QmuParserCallback &a_Callback,
                                    funmap_type &a_Storage, const QString &a_szCharSet );
     void               ApplyRemainingOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
@@ -297,16 +301,26 @@ inline void QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData
  * @brief Get the default symbols used for the built in operators.
  * @sa c_DefaultOprt
  */
-inline const QStringList &QmuParserBase::GetOprtDef() Q_DECL_NOEXCEPT
+inline const QStringList &QmuParserBase::GetOprtDef()
 {
     return c_DefaultOprt;
+}
+
+inline QMap<int, QString> QmuParserBase::GetTokens() const
+{
+    return m_Tokens;
+}
+
+inline QMap<int, QString> QmuParserBase::GetNumbers() const
+{
+    return m_Numbers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Define the set of valid characters to be used in names of functions, variables, constants.
  */
-inline void QmuParserBase::DefineNameChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
+inline void QmuParserBase::DefineNameChars(const QString &a_szCharset)
 {
     m_sNameChars = a_szCharset;
 }
@@ -315,7 +329,7 @@ inline void QmuParserBase::DefineNameChars(const QString &a_szCharset) Q_DECL_NO
 /**
  * @brief Define the set of valid characters to be used in names of binary operators and postfix operators.
  */
-inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
+inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset)
 {
     m_sOprtChars = a_szCharset;
 }
@@ -324,7 +338,7 @@ inline void QmuParserBase::DefineOprtChars(const QString &a_szCharset) Q_DECL_NO
 /**
  * @brief Define the set of valid characters to be used in names of infix operators.
  */
-inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset) Q_DECL_NOEXCEPT
+inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
 {
     m_sInfixOprtChars = a_szCharset;
 }
@@ -333,7 +347,7 @@ inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset) Q_DE
 /**
  * @brief Return a map containing the used variables only.
  */
-inline const varmap_type &QmuParserBase::GetVar() const Q_DECL_NOEXCEPT
+inline const varmap_type &QmuParserBase::GetVar() const
 {
     return m_VarDef;
 }
@@ -342,7 +356,7 @@ inline const varmap_type &QmuParserBase::GetVar() const Q_DECL_NOEXCEPT
 /**
  * @brief Return a map containing all parser constants.
  */
-inline const valmap_type &QmuParserBase::GetConst() const Q_DECL_NOEXCEPT
+inline const valmap_type &QmuParserBase::GetConst() const
 {
     return m_ConstDef;
 }
@@ -358,7 +372,7 @@ inline const valmap_type &QmuParserBase::GetConst() const Q_DECL_NOEXCEPT
  * parser functions. String functions are not part of this map. The Prototype definition is encapsulated in objects
  * of the class FunProt one per parser function each associated with function names via a map construct.
  */
-inline const funmap_type &QmuParserBase::GetFunDef() const Q_DECL_NOEXCEPT
+inline const funmap_type &QmuParserBase::GetFunDef() const
 {
     return m_FunDef;
 }
@@ -378,7 +392,7 @@ inline const QString& QmuParserBase::GetExpr() const
  * @return #m_bBuiltInOp; true if built in operators are enabled.
  * @throw nothrow
  */
-inline bool QmuParserBase::HasBuiltInOprt() const Q_DECL_NOEXCEPT
+inline bool QmuParserBase::HasBuiltInOprt() const
 {
     return m_bBuiltInOp;
 }
@@ -391,7 +405,7 @@ inline bool QmuParserBase::HasBuiltInOprt() const Q_DECL_NOEXCEPT
  * value. This function returns the number of available results.
  */
 // cppcheck-suppress unusedFunction
-inline int QmuParserBase::GetNumResults() const Q_DECL_NOEXCEPT
+inline int QmuParserBase::GetNumResults() const
 {
     return m_nFinalResultIdx;
 }

@@ -97,136 +97,134 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     Q_CHECK_PTR(splPath);
+
     Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    const qreal result = cal.EvalFormula(formula);
+
+    quint32 id = _id;
+    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    qint32 p1 = 0, p2 = 0;
+
+    const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
+    VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+    if (typeCreation == Valentina::FromGui)
     {
-        quint32 id = _id;
-        QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-        qint32 p1 = 0, p2 = 0;
+        id = data->AddGObject(p);
+    }
+    else
+    {
+        data->UpdateGObject(id, p);
+    }
 
-        const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
-        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-        if (typeCreation == Valentina::FromGui)
+    quint32 splPath1id = id + 1;
+    quint32 splPath2id = id + 2;
+
+    VSplinePoint splP1 = splPath->at(p1);
+    VSplinePoint splP2 = splPath->at(p2);
+    const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
+    const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
+
+    VSplinePath *splPath1 = new VSplinePath();
+    VSplinePath *splPath2 = new VSplinePath();
+    if (typeCreation == Valentina::FromGui)
+    {
+        for (qint32 i = 0; i < splPath->CountPoint(); i++)
         {
-            id = data->AddGObject(p);
-        }
-        else
-        {
-            data->UpdateGObject(id, p);
-        }
-
-        quint32 splPath1id = id + 1;
-        quint32 splPath2id = id + 2;
-
-        VSplinePoint splP1 = splPath->at(p1);
-        VSplinePoint splP2 = splPath->at(p2);
-        const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
-        const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
-
-        VSplinePath *splPath1 = new VSplinePath();
-        VSplinePath *splPath2 = new VSplinePath();
-        if (typeCreation == Valentina::FromGui)
-        {
-            for (qint32 i = 0; i < splPath->CountPoint(); i++)
+            if (i <= p1 && i < p2)
             {
-                if (i <= p1 && i < p2)
+                if (i == p1)
                 {
-                    if (i == p1)
-                    {
-                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
-                                                      spl1.GetAngle1()));
-                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
-                                                                   spl1.GetAngle2()+180, spl1.GetAngle2());
-                        splPath1->append(cutPoint);
-                        continue;
-                    }
-                    splPath1->append(splPath->at(i));
+                    splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
+                                                  spl1.GetAngle1()));
+                    const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                               spl1.GetAngle2()+180, spl1.GetAngle2());
+                    splPath1->append(cutPoint);
+                    continue;
                 }
-                else
-                {
-                    if (i == p2)
-                    {
-                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
-                                                                   spl2.GetKasm1(), spl2.GetAngle1());
-                        splPath2->append(cutPoint);
-                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
-                                                      spl2.GetAngle2()+180));
-                        continue;
-                    }
-                    splPath2->append(splPath->at(i));
-                }
+                splPath1->append(splPath->at(i));
             }
-
-            splPath1->setMaxCountPoints(splPath->CountPoint());
-            splPath2->setMaxCountPoints(splPath->CountPoint());
-
-            splPath1id = data->AddGObject(splPath1);
-            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
-
-            splPath2id = data->AddGObject(splPath2);
-            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
-        }
-        else
-        {
-            for (qint32 i = 0; i < splPath->CountPoint(); i++)
+            else
             {
-                if (i <= p1 && i < p2)
+                if (i == p2)
                 {
-                    if (i == p1)
-                    {
-                        splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
-                                                      spl1.GetAngle1()));
-                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
-                                                                   spl2.GetKasm1(), spl1.GetAngle2()+180);
-                        splPath1->append(cutPoint);
-                        continue;
-                    }
-                    splPath1->append(splPath->at(i));
+                    const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
+                                                               spl2.GetKasm1(), spl2.GetAngle1());
+                    splPath2->append(cutPoint);
+                    splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
+                                                  spl2.GetAngle2()+180));
+                    continue;
                 }
-                else
-                {
-                    if (i == p2)
-                    {
-                        const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
-                                                                   spl2.GetKasm1(), spl2.GetAngle1());
-                        splPath2->append(cutPoint);
-                        splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
-                                                      spl2.GetAngle2()+180));
-                        continue;
-                    }
-                    splPath2->append(splPath->at(i));
-                }
-            }
-
-            splPath1->setMaxCountPoints(splPath->CountPoint());
-            splPath2->setMaxCountPoints(splPath->CountPoint());
-
-            data->UpdateGObject(splPath1id, splPath1);
-            data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
-
-            data->UpdateGObject(splPath2id, splPath2);
-            data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
-
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
+                splPath2->append(splPath->at(i));
             }
         }
-        VDrawTool::AddRecord(id, Valentina::CutSplinePathTool, doc);
-        if (parse == Document::FullParse)
+
+        splPath1->setMaxCountPoints(splPath->CountPoint());
+        splPath2->setMaxCountPoints(splPath->CountPoint());
+
+        splPath1id = data->AddGObject(splPath1);
+        data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
+
+        splPath2id = data->AddGObject(splPath2);
+        data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
+    }
+    else
+    {
+        for (qint32 i = 0; i < splPath->CountPoint(); i++)
         {
-            VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
-                                                               splPath2id, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-            doc->AddTool(id, point);
-            doc->AddTool(splPath1id, point);
-            doc->AddTool(splPath2id, point);
-            doc->IncrementReferens(splinePathId);
+            if (i <= p1 && i < p2)
+            {
+                if (i == p1)
+                {
+                    splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
+                                                  spl1.GetAngle1()));
+                    const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(),
+                                                               spl2.GetKasm1(), spl1.GetAngle2()+180);
+                    splPath1->append(cutPoint);
+                    continue;
+                }
+                splPath1->append(splPath->at(i));
+            }
+            else
+            {
+                if (i == p2)
+                {
+                    const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
+                                                               spl2.GetKasm1(), spl2.GetAngle1());
+                    splPath2->append(cutPoint);
+                    splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
+                                                  spl2.GetAngle2()+180));
+                    continue;
+                }
+                splPath2->append(splPath->at(i));
+            }
         }
+
+        splPath1->setMaxCountPoints(splPath->CountPoint());
+        splPath2->setMaxCountPoints(splPath->CountPoint());
+
+        data->UpdateGObject(splPath1id, splPath1);
+        data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
+
+        data->UpdateGObject(splPath2id, splPath2);
+        data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
+
+        if (parse != Document::FullParse)
+        {
+            doc->UpdateToolData(id, data);
+        }
+    }
+    VDrawTool::AddRecord(id, Valentina::CutSplinePathTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
+                                                           splPath2id, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
+        doc->AddTool(id, point);
+        doc->AddTool(splPath1id, point);
+        doc->AddTool(splPath2id, point);
+        doc->IncrementReferens(splinePathId);
     }
 }
 

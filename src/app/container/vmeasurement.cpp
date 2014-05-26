@@ -30,21 +30,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement()
-    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()), virtualM(false),
-      _tagName(QString())
+    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()), _tagName(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kgrowth,
                            const QString &gui_text, const QString &number, const QString &tagName)
-    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number), virtualM(false),
-      _tagName(tagName)
+    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &number, const QString &tagName)
-    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number), virtualM(false),
-      _tagName(tagName)
+    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

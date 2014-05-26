@@ -56,7 +56,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
 
     InitArrow(ui);
 
-
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEndLine::PutVal);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
@@ -116,7 +115,7 @@ void DialogEndLine::setTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -164,6 +163,7 @@ void DialogEndLine::SaveData()
     formula.replace("\n"," ");
     angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
+    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

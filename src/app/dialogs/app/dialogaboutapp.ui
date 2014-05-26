@@ -162,7 +162,7 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>pushButton_Web_Site</string>
+         <string notr="true">pushButton_Web_Site</string>
         </property>
         <property name="autoDefault">
          <bool>false</bool>
@@ -246,7 +246,7 @@ p, li { white-space: pre-wrap; }
          </sizepolicy>
         </property>
         <property name="text">
-         <string>label_QT_Version</string>
+         <string notr="true">label_QT_Version</string>
         </property>
        </widget>
       </item>

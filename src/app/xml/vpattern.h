@@ -45,6 +45,16 @@ namespace Document
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
 
+/*
+   VAL_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+// version without patch part
+#define VAL_MIN_VERSION 0x000100
+// max support version of format
+#define VAL_VERSION 0x000100
+
+#define VAL_STR_VERSION "0.1.0"
+
 /**
  * @brief The VPattern class working with pattern file.
  */

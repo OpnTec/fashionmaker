@@ -174,7 +174,7 @@ inline QString DialogEndLine::getTypeLine() const
 
 inline QString DialogEndLine::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline qreal DialogEndLine::getAngle() const

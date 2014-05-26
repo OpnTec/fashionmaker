@@ -27,22 +27,15 @@
  *************************************************************************/
 
 #include "vindividualmeasurements.h"
+#include "../widgets/vapplication.h"
 
-const QString VIndividualMeasurements::AttrIgnore     = QStringLiteral("ignore");
-const QString VIndividualMeasurements::AttrName       = QStringLiteral("name");
-const QString VIndividualMeasurements::AttrM_number   = QStringLiteral("m_number");
-const QString VIndividualMeasurements::AttrGui_text   = QStringLiteral("gui_text");
 const QString VIndividualMeasurements::AttrValue      = QStringLiteral("value");
-const QString VIndividualMeasurements::AttrDescription = QStringLiteral("description");
-
-const QString VIndividualMeasurements::TagLang        = QStringLiteral("lang");
 const QString VIndividualMeasurements::TagFamily_name = QStringLiteral("family-name");
 const QString VIndividualMeasurements::TagGiven_name  = QStringLiteral("given-name");
 const QString VIndividualMeasurements::TagBirth_date  = QStringLiteral("birth-date");
 const QString VIndividualMeasurements::TagSex         = QStringLiteral("sex");
 const QString VIndividualMeasurements::TagUnit        = QStringLiteral("unit");
-const QString VIndividualMeasurements::TagEmail        = QStringLiteral("email");
-
+const QString VIndividualMeasurements::TagEmail       = QStringLiteral("email");
 const QString VIndividualMeasurements::SexMale        = QStringLiteral("male");
 const QString VIndividualMeasurements::SexFemale      = QStringLiteral("female");
 
@@ -67,92 +60,142 @@ void VIndividualMeasurements::setUnit(const Valentina::Units &unit)
 void VIndividualMeasurements::Measurements()
 {
     //head and neck
-    Measurement("head_girth");
-    Measurement("mid_neck_girth");
-    Measurement("neck_base_girth");
-    Measurement("head_and_neck_length");
+    Measurement(headGirth_M);
+    Measurement(midNeckGirth_M);
+    Measurement(neckBaseGirth_M);
+    Measurement(headAndNeckLength_M);
     //torso
-    Measurement("center_front_waist_length");
-    Measurement("center_back_waist_length");
-    Measurement("shoulder_length");
-    Measurement("side_waist_length");
-    Measurement("trunk_length");
-    Measurement("shoulder_girth");
-    Measurement("upper_chest_girth");
-    Measurement("bust__girth");
-    Measurement("under_bust_girth");
-    Measurement("waist_girth");
-    Measurement("high_hip_girth");
-    Measurement("hip_girth");
-    Measurement("upper_front_chest_width");
-    Measurement("front_chest_width");
-    Measurement("across_front_shoulder_width");
-    Measurement("across_back_shoulder_width");
-    Measurement("upper_back_width");
-    Measurement("back_width");
-    Measurement("bustpoint_to_bustpoint");
-    Measurement("halter_bustpoint_to_bustpoint");
-    Measurement("neck_to_bustpoint");
-    Measurement("crotch_length");
-    Measurement("rise_height");
-    Measurement("shoulder_drop");
-    Measurement("shoulder_slope_degrees");
-    Measurement("front_shoulder_slope_length");
-    Measurement("back_shoulder_slope_length");
-    Measurement("front_shoulder_to_waist_length");
-    Measurement("back_shoulder_to_waist_length");
-    Measurement("front_neck_arc");
-    Measurement("back_neck_arc");
-    Measurement("front_upper-bust_arc");
-    Measurement("back_upper-bust_arc");
-    Measurement("front_waist_arc");
-    Measurement("back_waist_arc");
-    Measurement("front_upper-hip_arc");
-    Measurement("back_upper-hip_arc");
-    Measurement("front_hip_arc");
-    Measurement("back_hip_arc");
-    Measurement("chest_slope");
-    Measurement("back_slope");
-    Measurement("front_waist_slope");
-    Measurement("back_waist_slope");
-    Measurement("front-neck_to_upper-chest_height");
-    Measurement("front-neck_to_bust_height");
+    Measurement(centerFrontWaistLength_M);
+    Measurement(centerBackWaistLength_M);
+    Measurement(shoulderLength_M);
+    Measurement(sideWaistLength_M);
+    Measurement(trunkLength_M);
+    Measurement(shoulderGirth_M);
+    Measurement(upperChestGirth_M);
+    Measurement(bustGirth_M);
+    Measurement(underBustGirth_M);
+    Measurement(waistGirth_M);
+    Measurement(highHipGirth_M);
+    Measurement(hipGirth_M);
+    Measurement(upperFrontChestWidth_M);
+    Measurement(frontChestWidth_M);
+    Measurement(acrossFrontShoulderWidth_M);
+    Measurement(acrossBackShoulderWidth_M);
+    Measurement(upperBackWidth_M);
+    Measurement(backWidth_M);
+    Measurement(bustpointToBustpoint_M);
+    Measurement(halterBustpointToBustpoint_M);
+    Measurement(neckToBustpoint_M);
+    Measurement(crotchLength_M);
+    Measurement(riseHeight_M);
+    Measurement(shoulderDrop_M);
+    Measurement(shoulderSlopeDegrees_M);
+    Measurement(frontShoulderSlopeLength_M);
+    Measurement(backShoulderSlopeLength_M);
+    Measurement(frontShoulderToWaistLength_M);
+    Measurement(backShoulderToWaistLength_M);
+    Measurement(frontNeckArc_M);
+    Measurement(backNeckArc_M);
+    Measurement(frontUpperChestArc_M);
+    Measurement(backUpperChestArc_M);
+    Measurement(frontWaistArc_M);
+    Measurement(backWaistArc_M);
+    Measurement(frontUpperHipArc_M);
+    Measurement(backUpperHipArc_M);
+    Measurement(frontHipArc_M);
+    Measurement(backHipArc_M);
+    Measurement(chestSlope_M);
+    Measurement(backSlope_M);
+    Measurement(frontWaistSlope_M);
+    Measurement(backWaistSlope_M);
+    Measurement(frontNeckToUpperChestHeight_M);
+    Measurement(frontNeckToBustHeight_M);
     //arm
-    Measurement("armscye_girth");
-    Measurement("elbow_girth");
-    Measurement("upper-arm_girth");
-    Measurement("wrist_girth");
-    Measurement("scye_depth");
-    Measurement("shoulder_and_arm_length");
-    Measurement("underarm_length");
-    Measurement("cervicale_to_wrist_length");
-    Measurement("shoulder_to_elbow_length");
-    Measurement("arm_length");
+    Measurement(armscyeGirth_M);
+    Measurement(elbowGirth_M);
+    Measurement(upperArmGirth_M);
+    Measurement(wristGirth_M);
+    Measurement(scyeDepth_M);
+    Measurement(shoulderAndArmLength_M);
+    Measurement(underarmLength_M);
+    Measurement(cervicaleToWristLength_M);
+    Measurement(shoulderToElbowLength_M);
+    Measurement(armLength_M);
     //hand
-    Measurement("hand_width");
-    Measurement("hand_length");
-    Measurement("hand_girth");
+    Measurement(handWidth_M);
+    Measurement(handLength_M);
+    Measurement(handGirth_M);
     //leg
-    Measurement("thigh_girth");
-    Measurement("mid_thigh_girth");
-    Measurement("knee_girth");
-    Measurement("calf_girth");
-    Measurement("ankle_girth");
-    Measurement("knee_height");
-    Measurement("ankle_height");
+    Measurement(thighGirth_M);
+    Measurement(midThighGirth_M);
+    Measurement(kneeGirth_M);
+    Measurement(calfGirth_M);
+    Measurement(ankleGirth_M);
+    Measurement(kneeHeight_M);
+    Measurement(ankleHeight_M);
     //foot
-    Measurement("foot_width");
-    Measurement("foot_length");
+    Measurement(footWidth_M);
+    Measurement(footLength_M);
     //heights
-    Measurement("height");
-    Measurement("cervicale_height");
-    Measurement("cervicale_to_knee_height");
-    Measurement("waist_height");
-    Measurement("high_hip_height");
-    Measurement("hip_height");
-    Measurement("waist_to_hip_height");
-    Measurement("waist_to_knee_height");
-    Measurement("crotch_height");
+    Measurement(height_M);
+    Measurement(cervicaleHeight_M);
+    Measurement(cervicaleToKneeHeight_M);
+    Measurement(waistHeight_M);
+    Measurement(highHipHeight_M);
+    Measurement(hipHeight_M);
+    Measurement(waistToHipHeight_M);
+    Measurement(waistToKneeHeight_M);
+    Measurement(crotchHeight_M);
+    //extended
+    Measurement(size_M);
+    Measurement(heightFrontNeckBasePoint_M);
+    Measurement(heightBaseNeckSidePoint_M);
+    Measurement(heightShoulderPoint_M);
+    Measurement(heightNipplePoint_M);
+    Measurement(heightBackAngleAxilla_M);
+    Measurement(heightScapularPoint_M);
+    Measurement(heightUnderButtockFolds_M);
+    Measurement(hipsExcludingProtrudingAbdomen_M);
+    Measurement(girthFootInstep_M);
+    Measurement(sideWaistToFloor_M);
+    Measurement(frontWaistToFloor_M);
+    Measurement(arcThroughGroinArea_M);
+    Measurement(waistToPlaneSeat_M);
+    Measurement(neckToRadialPoint_M);
+    Measurement(neckToThirdFinger_M);
+    Measurement(neckToFirstLineChestCircumference_M);
+    Measurement(frontWaistLength_M);
+    Measurement(arcThroughShoulderJoint_M);
+    Measurement(neckToBackLineChestCircumference_M);
+    Measurement(waistToNeckSide_M);
+    Measurement(arcLengthUpperBody_M);
+    Measurement(chestWidth_M);
+    Measurement(anteroposteriorDiameterHands_M);
+    Measurement(heightClavicularPoint_M);
+    Measurement(heightArmholeSlash_M);
+    Measurement(slashShoulderHeight_M);
+    Measurement(halfGirthNeck_M);
+    Measurement(halfGirthNeckForShirts_M);
+    Measurement(halfGirthChestFirst_M);
+    Measurement(halfGirthChestSecond_M);
+    Measurement(halfGirthChestThird_M);
+    Measurement(halfGirthWaist_M);
+    Measurement(halfGirthHipsConsideringProtrudingAbdomen_M);
+    Measurement(halfGirthHipsExcludingProtrudingAbdomen_M);
+    Measurement(girthKneeFlexedFeet_M);
+    Measurement(neckTransverseDiameter_M);
+    Measurement(frontSlashShoulderHeight_M);
+    Measurement(neckToFrontWaistLine_M);
+    Measurement(handVerticalDiameter_M);
+    Measurement(neckToKneePoint_M);
+    Measurement(waistToKnee_M);
+    Measurement(shoulderHeight_M);
+    Measurement(headHeight_M);
+    Measurement(bodyPosition_M);
+    Measurement(arcBehindShoulderGirdle_M);
+    Measurement(neckToNeckBase_M);
+    Measurement(depthWaistFirst_M);
+    Measurement(depthWaistSecond_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,60 +215,16 @@ void VIndividualMeasurements::Measurement(const QString &tag)
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const bool ignore = QVariant(GetParametrString(domElement, AttrIgnore, "false")).toBool();
-                if (ignore)
-                {
-                    return;
-                }
-                const QString name = GetParametrString(domElement, AttrName, "");
-                if (name.isEmpty())
-                {
-                    return;
-                }
-                const QString m_number = GetParametrString(domElement, AttrM_number, "");
-                const QString gui_text = GetParametrString(domElement, AttrGui_text, "");
-                const qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
-                const QString description = GetParametrString(domElement, AttrDescription, "");
+                qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
 
                 if (Unit() == Valentina::Mm)//Convert to Cm.
                 {
-                    data->AddMeasurement(name, VMeasurement(value/10.0, gui_text, description, tag));
-                    if (m_number.isEmpty())
-                    {
-                        qDebug()<<"Can't find language-independent measurement name for "<< tag;
-                        return;
-                    }
-                    else
-                    {
-                        VMeasurement m(value/10.0, gui_text, description, tag);
-                        m.setVirtual(true);
-                        data->AddMeasurement(m_number, m);
-                    }
+                    value = value / 10.0;
                 }
-                else//Cm or inch.
-                {
-                    data->AddMeasurement(name, VMeasurement(value, gui_text, description, tag));
-                    if (m_number.isEmpty())
-                    {
-                        qDebug()<<"Can't find language-independent measurement name for "<< tag;
-                        return;
-                    }
-                    else
-                    {
-                        VMeasurement m(value, gui_text, description, tag);
-                        m.setVirtual(true);
-                        data->AddMeasurement(m_number, m);
-                    }
-                }
+                data->AddMeasurement(tag, VMeasurement(value, qApp->GuiText(tag), qApp->Description(tag), tag));
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VIndividualMeasurements::Language() const
-{
-    return UniqueTagText(TagLang, "en");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

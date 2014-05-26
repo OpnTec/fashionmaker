@@ -34,7 +34,7 @@ namespace qmu
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type0 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type0 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -44,7 +44,6 @@ QmuParserCallback::QmuParserCallback ( fun_type0 a_pFun, bool a_bAllowOpti ) Q_D
 __extension__
 #endif
 QmuParserCallback::QmuParserCallback ( fun_type1 a_pFun, bool a_bAllowOpti, int a_iPrec, ECmdCode a_iCode )
-Q_DECL_NOEXCEPT
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 1 ), m_iPri ( a_iPrec ), m_eOprtAsct ( oaNONE ),
       m_iCode ( a_iCode ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -57,7 +56,7 @@ Q_DECL_NOEXCEPT
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 2 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -75,7 +74,7 @@ QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti ) Q_D
 __extension__
 #endif
 QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec,
-                                       EOprtAssociativity a_eOprtAsct ) Q_DECL_NOEXCEPT
+                                       EOprtAssociativity a_eOprtAsct )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 2 ), m_iPri ( a_iPrec ), m_eOprtAsct ( a_eOprtAsct ),
       m_iCode ( cmOPRT_BIN ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -84,7 +83,7 @@ QmuParserCallback::QmuParserCallback ( fun_type2 a_pFun, bool a_bAllowOpti, int 
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type3 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type3 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 3 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -94,7 +93,7 @@ QmuParserCallback::QmuParserCallback ( fun_type3 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type4 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type4 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 4 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -104,7 +103,7 @@ QmuParserCallback::QmuParserCallback ( fun_type4 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type5 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type5 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 5 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -113,7 +112,7 @@ QmuParserCallback::QmuParserCallback ( fun_type5 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type6 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type6 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 6 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -122,7 +121,7 @@ QmuParserCallback::QmuParserCallback ( fun_type6 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type7 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type7 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 7 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -131,7 +130,7 @@ QmuParserCallback::QmuParserCallback ( fun_type7 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type8 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type8 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 8 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -140,7 +139,7 @@ QmuParserCallback::QmuParserCallback ( fun_type8 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type9 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type9 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 9 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -149,7 +148,7 @@ QmuParserCallback::QmuParserCallback ( fun_type9 a_pFun, bool a_bAllowOpti ) Q_D
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( fun_type10 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( fun_type10 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 10 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -158,7 +157,7 @@ QmuParserCallback::QmuParserCallback ( fun_type10 a_pFun, bool a_bAllowOpti ) Q_
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type0 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type0 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -167,7 +166,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type0 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type1 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type1 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 1 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -180,7 +179,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type1 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type2 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type2 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 2 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -189,7 +188,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type2 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type3 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type3 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 3 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -198,7 +197,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type3 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type4 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type4 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 4 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -207,7 +206,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type4 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type5 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type5 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 5 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -216,7 +215,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type5 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type6 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type6 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 6 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -225,7 +224,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type6 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type7 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type7 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 7 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -234,7 +233,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type7 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type8 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type8 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 8 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -243,7 +242,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type8 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type9 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type9 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 9 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -252,7 +251,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type9 a_pFun, bool a_bAllowOpti )
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( bulkfun_type10 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( bulkfun_type10 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 10 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_BULK ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -261,7 +260,7 @@ QmuParserCallback::QmuParserCallback ( bulkfun_type10 a_pFun, bool a_bAllowOpti 
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( multfun_type a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( multfun_type a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( -1 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC ), m_iType ( tpDBL ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -270,7 +269,7 @@ QmuParserCallback::QmuParserCallback ( multfun_type a_pFun, bool a_bAllowOpti ) 
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( strfun_type1 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( strfun_type1 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_STR ), m_iType ( tpSTR ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -279,7 +278,7 @@ QmuParserCallback::QmuParserCallback ( strfun_type1 a_pFun, bool a_bAllowOpti ) 
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( strfun_type2 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( strfun_type2 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 1 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_STR ), m_iType ( tpSTR ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -288,7 +287,7 @@ QmuParserCallback::QmuParserCallback ( strfun_type2 a_pFun, bool a_bAllowOpti ) 
 #ifdef __GNUC__
 __extension__
 #endif
-QmuParserCallback::QmuParserCallback ( strfun_type3 a_pFun, bool a_bAllowOpti ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( strfun_type3 a_pFun, bool a_bAllowOpti )
     : m_pFun ( reinterpret_cast<void*> ( a_pFun ) ), m_iArgc ( 2 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ),
       m_iCode ( cmFUNC_STR ), m_iType ( tpSTR ), m_bAllowOpti ( a_bAllowOpti )
 {}
@@ -298,7 +297,7 @@ QmuParserCallback::QmuParserCallback ( strfun_type3 a_pFun, bool a_bAllowOpti ) 
  * @brief Default constructor.
  * @throw nothrow
  */
-QmuParserCallback::QmuParserCallback() Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback()
     : m_pFun ( 0 ), m_iArgc ( 0 ), m_iPri ( -1 ), m_eOprtAsct ( oaNONE ), m_iCode ( cmUNKNOWN ), m_iType ( tpVOID ),
       m_bAllowOpti ( 0 )
 {}
@@ -308,7 +307,7 @@ QmuParserCallback::QmuParserCallback() Q_DECL_NOEXCEPT
  * @brief Copy constructor.
  * @throw nothrow
  */
-QmuParserCallback::QmuParserCallback ( const QmuParserCallback &ref ) Q_DECL_NOEXCEPT
+QmuParserCallback::QmuParserCallback ( const QmuParserCallback &ref )
     : m_pFun ( ref.m_pFun ), m_iArgc ( ref.m_iArgc ), m_iPri ( ref.m_iPri ), m_eOprtAsct ( ref.m_eOprtAsct ),
       m_iCode ( ref.m_iCode ), m_iType ( ref.m_iType ), m_bAllowOpti ( ref.m_bAllowOpti )
 {

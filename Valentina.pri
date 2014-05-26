@@ -20,3 +20,22 @@ defineTest(minQtVersion) {
     }
     return(false)
 }
+
+# Copies the given files to the destination directory
+defineTest(copyToDestdir) {
+    files = $$1
+    DDIR = $$2
+    mkpath($$DDIR)
+
+    for(FILE, files) {
+
+        # Replace slashes in paths with backslashes for Windows
+        win32{
+            FILE ~= s,/,\\,g
+            DDIR ~= s,/,\\,g
+        }
+        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+    }
+
+    export(QMAKE_POST_LINK)
+}

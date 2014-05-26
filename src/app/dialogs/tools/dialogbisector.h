@@ -171,7 +171,7 @@ inline QString DialogBisector::getTypeLine() const
 
 inline QString DialogBisector::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline quint32 DialogBisector::getFirstPointId() const

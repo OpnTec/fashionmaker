@@ -96,63 +96,61 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName,
                             const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
+
     Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    const qreal result = cal.EvalFormula(formula);
+
+    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
+
+    quint32 id = _id;
+    quint32 spl1id = 0;
+    quint32 spl2id = 0;
+    if (typeCreation == Valentina::FromGui)
     {
-        QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-        QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
+        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        id = data->AddGObject(p);
 
-        quint32 id = _id;
-        quint32 spl1id = 0;
-        quint32 spl2id = 0;
-        if (typeCreation == Valentina::FromGui)
+        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
+        spl1id = data->AddGObject(spline1);
+        data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
+
+        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
+        spl2id = data->AddGObject(spline2);
+        data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
+    }
+    else
+    {
+        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        data->UpdateGObject(id, p);
+
+        spl1id = id + 1;
+        spl2id = id + 2;
+
+        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
+        data->UpdateGObject(spl1id, spline1);
+        data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
+
+        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
+        data->UpdateGObject(spl2id, spline2);
+        data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
+
+        if (parse != Document::FullParse)
         {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            id = data->AddGObject(p);
-
-            VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-            spl1id = data->AddGObject(spline1);
-            data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
-
-            VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-            spl2id = data->AddGObject(spline2);
-            data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-            data->UpdateGObject(id, p);
-
-            spl1id = id + 1;
-            spl2id = id + 2;
-
-            VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-            data->UpdateGObject(spl1id, spline1);
-            data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
-
-            VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-            data->UpdateGObject(spl2id, spline2);
-            data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
-
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::CutSplineTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-            doc->AddTool(id, point);
-            doc->AddTool(spl1id, point);
-            doc->AddTool(spl2id, point);
-            doc->IncrementReferens(splineId);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::CutSplineTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
+        doc->AddTool(id, point);
+        doc->AddTool(spl1id, point);
+        doc->AddTool(spl2id, point);
+        doc->IncrementReferens(splineId);
     }
 }
 

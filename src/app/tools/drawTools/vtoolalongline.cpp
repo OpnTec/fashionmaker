@@ -30,6 +30,8 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
 
+#include "exception/vexceptionobjecterror.h"
+
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,40 +181,38 @@ void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const Q
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
+
     Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    const qreal result = cal.EvalFormula(formula);
+    line.setLength(qApp->toPixel(result));
+
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
-        line.setLength(qApp->toPixel(result));
-        quint32 id = _id;
-        if (typeCreation == Valentina::FromGui)
+        id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        data->AddLine(id, secondPointId);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        data->AddLine(id, secondPointId);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            data->AddLine(id, secondPointId);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            data->UpdateGObject(id, new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            data->AddLine(id, secondPointId);
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::AlongLineTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,
-                                                       secondPointId, typeLine, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(firstPointId);
-            doc->IncrementReferens(secondPointId);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::AlongLineTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,
+                                                   secondPointId, typeLine, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(firstPointId);
+        doc->IncrementReferens(secondPointId);
     }
 }

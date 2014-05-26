@@ -69,11 +69,7 @@ int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_f
 
     unsigned iVal ( 0 );
 
-#if defined(_UNICODE)
     std::wstring a_szExprStd = a_szExpr.mid(2).toStdWString();
-#else
-    std::string a_szExprStd = a_szExpr.mid(2).toStdString();
-#endif
 
     // New code based on streams for UNICODE compliance:
     stringstream_type::pos_type nPos(0);

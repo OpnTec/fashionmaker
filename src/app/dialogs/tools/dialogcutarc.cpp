@@ -91,7 +91,7 @@ void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     ui->lineEditFormula->setText(formula);
 }
 

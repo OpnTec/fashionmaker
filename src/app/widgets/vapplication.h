@@ -31,6 +31,7 @@
 
 #include <QApplication>
 #include "../options.h"
+#include "vtranslation.h"
 
 class VApplication;
 
@@ -71,12 +72,36 @@ public:
     QString               pathToTables() const;
     qreal                 widthMainLine() const;
     qreal                 widthHairLine() const;
+    QString               VarToUser(const QString &var) const;
+    QString               VarFromUser(const QString &var) const;
+    QString               GuiText(const QString &measurement) const;
+    QString               Description(const QString &measurement) const;
+    QString               Variable(const QString &name) const;
+    QString               Function(const QString &name) const;
+    QString               PostfixOperator(const QString &name) const;
+    QString               FormulaFromUser(const QString &formula);
+    QString               FormulaToUser(const QString &formula);
 private:
     Valentina::Units      _patternUnit;
     Pattern::Measurements _patternType;
     qreal                 _widthMainLine;
     qreal                 _widthHairLine;
+    QMap<QString, VTranslation> measurements;
+    QMap<QString, VTranslation> guiTexts;
+    QMap<QString, VTranslation> descriptions;
+    QMap<QString, VTranslation> variables;
+    QMap<QString, VTranslation> functions;
+    QMap<QString, VTranslation> postfixOperators;
     void                  InitLineWidth();
+    void                  InitMeasurements();
+    void                  InitVariables();
+    void                  InitFunctions();
+    void                  InitPostfixOperators();
+    bool                  MeasurementsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  FunctionsFromUser(QString &newFormula, int position, const QString &token) const;
+    bool                  VariablesToUser(QString &newFormula, int position, const QString &token) const;
 };
 
 inline Valentina::Units VApplication::patternUnit() const

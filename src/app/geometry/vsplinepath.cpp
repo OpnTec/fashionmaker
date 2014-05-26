@@ -44,7 +44,7 @@ VSplinePath::VSplinePath(const VSplinePath &splPath)
 void VSplinePath::append(const VSplinePoint &point)
 {
     path.append(point);
-    _name = QString("SplPath");
+    _name = splPath;
     _name.append(QString("_%1").arg(path.first().P().name()));
     if (path.size() > 1)
     {

@@ -77,7 +77,7 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     qreal angle = dialogTool->getAngle();
     quint32 basePointId = dialogTool->getBasePointId();
 
-    VToolEndLine *point;
+    VToolEndLine *point = nullptr;
     point=Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
                  Valentina::FromGui);
     if (point != nullptr) {
@@ -94,18 +94,25 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
+
     Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    const qreal result = cal.EvalFormula(formula);
+
+    line.setLength(qApp->toPixel(result));
+    line.setAngle(angle);
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
-        line.setLength(qApp->toPixel(result));
-        line.setAngle(angle);
-        quint32 id = _id;
-        if (typeCreation == Valentina::FromGui)
+        id = data->AddGObject(new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->AddLine(basePointId, id);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->AddLine(basePointId, id);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject(new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
-            data->AddLine(basePointId, id);
+            doc->UpdateToolData(id, data);
         }
         else
         {
@@ -116,20 +123,20 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Valentina::EndLineTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
-                                                   basePointId, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(basePointId);
-            return point;
-        }
     }
-    return nullptr;
+    VDrawTool::AddRecord(id, Valentina::EndLineTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,
+                                               basePointId, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(basePointId);
+		return point;
+    }
+	return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

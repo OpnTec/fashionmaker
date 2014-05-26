@@ -128,7 +128,7 @@ void DialogNormal::setAngle(const qreal &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     ui->lineEditFormula->setText(formula);
 }
 

@@ -46,47 +46,47 @@ namespace qmu
 class QmuParserCallback
 {
 public:
-    QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type1  a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode=cmFUNC) Q_DECL_NOEXCEPT;
+    QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type1  a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode=cmFUNC);
     QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eAssociativity)
-    Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type3  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type4  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type5  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type6  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type7  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type8  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type9  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(fun_type10 a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
+   ;
+    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type3  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type4  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type5  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type6  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type7  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type8  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type9  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type10 a_pFun, bool a_bAllowOpti);
 
-    QmuParserCallback(bulkfun_type0  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type1  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type2  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type3  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type4  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type5  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type6  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type7  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type8  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type9  a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(bulkfun_type10 a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
+    QmuParserCallback(bulkfun_type0  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type1  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type2  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type3  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type4  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type5  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type6  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type7  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type8  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type9  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type10 a_pFun, bool a_bAllowOpti);
 
-    QmuParserCallback(multfun_type a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(strfun_type1 a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(strfun_type2 a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti) Q_DECL_NOEXCEPT;
-    QmuParserCallback() Q_DECL_NOEXCEPT;
-    QmuParserCallback(const QmuParserCallback &a_Fun) Q_DECL_NOEXCEPT;
+    QmuParserCallback(multfun_type a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(strfun_type1 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(strfun_type2 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback();
+    QmuParserCallback(const QmuParserCallback &a_Fun);
 
     QmuParserCallback* Clone() const;
-    bool               IsOptimizable() const Q_DECL_NOEXCEPT;
-    void*              GetAddr() const Q_DECL_NOEXCEPT;
-    ECmdCode           GetCode() const Q_DECL_NOEXCEPT;
-    ETypeCode          GetType() const Q_DECL_NOEXCEPT;
-    int                GetPri()  const Q_DECL_NOEXCEPT;
-    EOprtAssociativity GetAssociativity() const Q_DECL_NOEXCEPT;
-    int                GetArgc() const Q_DECL_NOEXCEPT;
+    bool               IsOptimizable() const;
+    void*              GetAddr() const;
+    ECmdCode           GetCode() const;
+    ETypeCode          GetType() const;
+    int                GetPri()  const;
+    EOprtAssociativity GetAssociativity() const;
+    int                GetArgc() const;
 private:
     void *m_pFun;                   ///< Pointer to the callback function, casted to void
 
@@ -127,7 +127,7 @@ inline QmuParserCallback* QmuParserCallback::Clone() const
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-inline bool QmuParserCallback::IsOptimizable() const Q_DECL_NOEXCEPT
+inline bool QmuParserCallback::IsOptimizable() const
 {
     return m_bAllowOpti;
 }
@@ -141,7 +141,7 @@ inline bool QmuParserCallback::IsOptimizable() const Q_DECL_NOEXCEPT
  * @throw nothrow
  * @return #pFun
  */
-inline void* QmuParserCallback::GetAddr() const Q_DECL_NOEXCEPT
+inline void* QmuParserCallback::GetAddr() const
 {
     return m_pFun;
 }
@@ -150,13 +150,13 @@ inline void* QmuParserCallback::GetAddr() const Q_DECL_NOEXCEPT
 /**
  * @brief Return the callback code.
 */
-inline ECmdCode  QmuParserCallback::GetCode() const Q_DECL_NOEXCEPT
+inline ECmdCode  QmuParserCallback::GetCode() const
 {
     return m_iCode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline ETypeCode QmuParserCallback::GetType() const Q_DECL_NOEXCEPT
+inline ETypeCode QmuParserCallback::GetType() const
 {
     return m_iType;
 }
@@ -168,7 +168,7 @@ inline ETypeCode QmuParserCallback::GetType() const Q_DECL_NOEXCEPT
  *
  * Only valid if the callback token is an operator token (binary or infix).
  */
-inline int QmuParserCallback::GetPri()  const Q_DECL_NOEXCEPT
+inline int QmuParserCallback::GetPri()  const
 {
     return m_iPri;
 }
@@ -180,7 +180,7 @@ inline int QmuParserCallback::GetPri()  const Q_DECL_NOEXCEPT
  *
  * Only valid if the callback token is a binary operator token.
  */
-inline EOprtAssociativity QmuParserCallback::GetAssociativity() const Q_DECL_NOEXCEPT
+inline EOprtAssociativity QmuParserCallback::GetAssociativity() const
 {
     return m_eOprtAsct;
 }
@@ -189,7 +189,7 @@ inline EOprtAssociativity QmuParserCallback::GetAssociativity() const Q_DECL_NOE
 /**
  * @brief Returns the number of function Arguments.
  */
-inline int QmuParserCallback::GetArgc() const Q_DECL_NOEXCEPT
+inline int QmuParserCallback::GetArgc() const
 {
     return m_iArgc;
 }
