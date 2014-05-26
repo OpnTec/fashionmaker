@@ -105,7 +105,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="pagePersonalInformation">
           <property name="enabled">
@@ -283,6 +283,9 @@
             <widget class="QTableWidget" name="tableWidgetMeasurements">
              <property name="enabled">
               <bool>true</bool>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
              </property>
              <property name="editTriggers">
               <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>

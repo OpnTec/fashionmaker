@@ -146,7 +146,7 @@ void DialogIncrements::FillMeasurements()
     while (i.hasNext())
     {
         i.next();
-        map.insert(i.key(), i.value());
+        map.insert(qApp->VarToUser(i.key()), i.value());
     }
     qint32 currentRow = -1;
     QMapIterator<QString, VMeasurement> iMap(map);
@@ -165,6 +165,7 @@ void DialogIncrements::FillMeasurements()
         Qt::ItemFlags flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
         item->setFlags(flags);
+        item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
 
         if (qApp->patternType() == Pattern::Standard)
@@ -292,7 +293,7 @@ void DialogIncrements::FillLengthLines()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -328,7 +329,7 @@ void DialogIncrements::FillLengthSplines()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -364,7 +365,7 @@ void DialogIncrements::FillLengthArcs()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -721,7 +722,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
-            VMeasurement measur = data->GetMeasurement(itemName->text());
+            VMeasurement measur = data->GetMeasurement(qApp->VarFromUser(itemName->text()));
             const QString tag = measur.TagName();
             QDomNodeList list = m->elementsByTagName(tag);
             QDomElement domElement = list.at(0).toElement();
