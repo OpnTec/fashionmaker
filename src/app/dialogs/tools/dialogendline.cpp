@@ -163,7 +163,6 @@ void DialogEndLine::SaveData()
     formula.replace("\n"," ");
     angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

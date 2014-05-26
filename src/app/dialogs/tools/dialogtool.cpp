@@ -415,23 +415,31 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
     }
     else
     {
-        Calculator cal(data);
-        QString errorMsg;
-        // Replace line return with spaces for calc
-        QString formula = edit->toPlainText();
-        formula.replace("\n"," ");
-        qreal result = cal.eval(formula, &errorMsg);
-        if (errorMsg.isEmpty() == false)
+        try
+        {
+            // Replace line return with spaces for calc
+            QString formula = edit->toPlainText();
+            formula.replace("\n"," ");
+            formula = qApp->FormulaFromUser(formula);
+            Calculator cal(data);
+            const qreal result = cal.EvalFormula(formula);
+
+            label->setText(QString().setNum(result));
+            flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("");
+        }
+        catch(qmu::QmuParserError &e)
         {
             label->setText(tr("Error"));
             flag = false;
             palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-        }
-        else
-        {
-            label->setText(QString().setNum(result));
-            flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("Parser error: "+e.GetMsg());
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
         }
     }
     CheckState();
