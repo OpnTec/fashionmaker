@@ -264,14 +264,38 @@ void MainWindow::SetToolButton2(bool checked, Valentina::Tools t, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
-{
+{// TODO ISSUE 79 : delete
     Q_CHECK_PTR(dialogTool);
     if (result == QDialog::Accepted)
     {
+        DrawTool::Create(dialogTool, currentScene, doc, pattern);
+    }
+    ArrowTool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename DrawTool>
+void MainWindow::ClosedDialog2(int result)
+{ // TODO ISSUE 79 : rename
+    Q_CHECK_PTR(dialogTool);
+    if (result == QDialog::Accepted)
+    {
+        // Only create tool if not already created with apply
         if (dialogTool->GetAssociatedTool() == nullptr)
         {
-            DrawTool::Create(dialogTool, currentScene, doc, pattern);
+            dialogTool->SetAssociatedTool(
+                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
         }
+        else
+        { // Or update associated tool with data
+            VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+            vtool->FullUpdateFromGuiApply();
+        }
+    }
+    if (dialogTool->GetAssociatedTool() != nullptr)
+    {
+        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        vtool->DialogLinkDestroy();
     }
     ArrowTool();
 }
@@ -282,20 +306,22 @@ void MainWindow::ApplyDialog()
 {// TODO ISSUE 79 : copy
     Q_CHECK_PTR(dialogTool);
 
-    // TODO ISSUE 79 : Only create on first apply for now,
-    // need function for updating in dialogtools or drawtool
-
+    // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
     {
         dialogTool->SetAssociatedTool(
-                dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
     }
-    //ArrowTool();
+    else
+    { // Or update associated tool with data
+        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        vtool->FullUpdateFromGuiApply();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolEndLine(bool checked)
-{
+{// TODO ISSUE 79 : copy
 //    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
 //                                 &MainWindow::ClosedDialogEndLine);
     SetToolButton2<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
@@ -311,7 +337,7 @@ void MainWindow::ApplyDialogEndLine()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ClosedDialogEndLine(int result)
 {
-    ClosedDialog<VToolEndLine>(result);
+    ClosedDialog2<VToolEndLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

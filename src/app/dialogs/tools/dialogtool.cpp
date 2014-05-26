@@ -41,8 +41,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
-      bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr), listWidget(nullptr),
-      labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
+      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr),
+      listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), lineStyles(QStringList()), associatedTool(nullptr)
@@ -520,6 +520,9 @@ void DialogTool::CheckState()
 {
     Q_CHECK_PTR(bOk);
     bOk->setEnabled(flagFormula && flagName);
+    Q_CHECK_PTR(bApply);
+    bApply->setEnabled(flagFormula && flagName);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

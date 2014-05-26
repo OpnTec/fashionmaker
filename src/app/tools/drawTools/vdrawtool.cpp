@@ -108,6 +108,12 @@ void VDrawTool::FullUpdateFromGuiApply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::DialogLinkDestroy()
+{
+    this->dialog=nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SetFactor(qreal factor)
 {
     if (factor <= 2 && factor >= 0.5)

@@ -76,8 +76,14 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     QString formula = dialogTool->getFormula();
     qreal angle = dialogTool->getAngle();
     quint32 basePointId = dialogTool->getBasePointId();
-    return Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
-           Valentina::FromGui);
+
+    VToolEndLine *point;
+    point=Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
+                 Valentina::FromGui);
+    if (point != nullptr) {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

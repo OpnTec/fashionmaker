@@ -70,8 +70,14 @@ public:
                       */
                      DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
-    inline VAbstractTool* GetAssociatedTool() { return this->associatedTool;}
-    inline void SetAssociatedTool(VAbstractTool* tool) { this->associatedTool=tool;}
+    inline VAbstractTool* GetAssociatedTool()
+    {
+        return this->associatedTool;
+    }
+    inline void SetAssociatedTool(VAbstractTool* tool)
+    {
+        this->associatedTool=tool;
+    }
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -219,6 +225,10 @@ protected:
      * @brief bOk button ok
      */
     QPushButton      *bOk;
+    /**
+     * @brief bApply button apply
+     */
+    QPushButton      *bApply;
     /**
      * @brief spinBoxAngle spinbox for angle
      */
@@ -474,10 +484,13 @@ protected:
         Q_CHECK_PTR(bCancel);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
         // TODO issue #79
-        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
         Q_CHECK_PTR(bApply);
         connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
+    /**
+     * @brief associatedTool vdrawtool associated with opened dialog.
+     */
     VAbstractTool* associatedTool;
 private:
     /**

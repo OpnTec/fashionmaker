@@ -534,11 +534,17 @@ private:
      */
     void               MinimumScrollBar();
     template <typename DrawTool>
-    /**
+    /** // TODO ISSUE 79 : delete
      * @brief ClosedDialog handle close dialog
      * @param result result working dialog.
      */
     void               ClosedDialog(int result);
+    template <typename DrawTool>
+    /** // TODO ISSUE 79 : rename
+     * @brief ClosedDialog handle close dialog
+     * @param result result working dialog.
+     */
+    void               ClosedDialog2(int result);
     /** // TODO ISSUE 79 : copy
      * @brief ApplyDialog handle apply in dialog
      */

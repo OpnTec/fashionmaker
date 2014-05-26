@@ -56,6 +56,10 @@ public:
      */
     virtual void setDialog() {}
     /**
+    * @brief DialogLinkDestroy removes dialog pointer
+    */
+    virtual void DialogLinkDestroy();
+    /**
      * @brief ignoreContextMenu set ignore contect menu tool.
      * @param enable true - ignore.
      */
