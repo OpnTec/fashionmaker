@@ -35,6 +35,11 @@
 #include <QDebug>
 #include "../options.h"
 
+/*
+   can be used like #if (V_FORMAT_VERSION >= V_FORMAT_VERSION_CHECK(4, 4, 0))
+*/
+#define V_FORMAT_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -70,6 +75,7 @@ public:
     static const QString    UnitMM;
     static const QString    UnitCM;
     static const QString    UnitINCH;
+    static const QString    TagVersion;
     /**
     * @param data container with variables
     * @param comboBoxDraws pointer to the ComboBox that will hold the pattern piece names
@@ -145,7 +151,10 @@ public:
     void           setContent(const QString &fileName);
     static Valentina::Units StrToUnits(const QString &unit);
     static QString UnitsToStr(const Valentina::Units &unit);
-    virtual bool SaveDocument(const QString &fileName);
+    virtual bool   SaveDocument(const QString &fileName);
+    QString        Major() const;
+    QString        Minor() const;
+    QString        Patch() const;
 protected:
     /**
      * @brief data container with data.

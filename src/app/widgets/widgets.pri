@@ -10,7 +10,8 @@ HEADERS += \
     widgets/vsimplespline.h \
     widgets/vsimplesplinepath.h \
     widgets/vsimplearc.h \
-    widgets/textdelegate.h
+    widgets/textdelegate.h \
+    widgets/vtranslation.h
 
 SOURCES += \
     widgets/vtablegraphicsview.cpp \
@@ -24,4 +25,5 @@ SOURCES += \
     widgets/vsimplespline.cpp \
     widgets/vsimplesplinepath.cpp \
     widgets/vsimplearc.cpp \
-    widgets/textdelegate.cpp
+    widgets/textdelegate.cpp \
+    widgets/vtranslation.cpp

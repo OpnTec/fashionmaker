@@ -145,7 +145,7 @@ void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::setFormula(const QString &value)
 {
-    formula = value;
+    formula = qApp->FormulaToUser(value);
     ui->lineEditFormula->setText(formula);
 }
 

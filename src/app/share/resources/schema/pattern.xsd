@@ -4,6 +4,7 @@
          <xs:element name="pattern">
                <xs:complexType>
                      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+							<xs:element name="version" type="formatVersion"></xs:element>
 							<xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
 							<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
 							<xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
@@ -227,6 +228,11 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="standard"/>
 			<xs:enumeration value="individual"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="formatVersion">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
 		</xs:restriction>
 	</xs:simpleType>
    </xs:schema>

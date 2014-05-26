@@ -45,7 +45,7 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {
-    _name = QString ("Arc_%1").arg(this->GetCenter().name());
+    _name = QString (arc_+"%1").arg(this->GetCenter().name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,5 +188,5 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 void VArc::setId(const quint32 &id)
 {
     _id = id;
-    _name = QString ("Arc_%1_%2").arg(center.name()).arg(id);
+    _name = QString (arc_+"%1_%2").arg(center.name()).arg(id);
 }

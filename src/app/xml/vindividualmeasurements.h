@@ -32,6 +32,14 @@
 #include "vdomdocument.h"
 #include <QDate>
 
+/*
+   VIT_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+// version without patch part
+#define VIT_MIN_VERSION 0x000100
+// max support version of format
+#define VIT_VERSION 0x000100
+
 class VIndividualMeasurements:public VDomDocument
 {
 public:
@@ -42,7 +50,6 @@ public:
     Valentina::Units Unit() const;
     void             setUnit(const Valentina::Units &unit);
     void             Measurements();
-    QString          Language() const;
     QString          FamilyName() const;
     void             setFamilyName(const QString &text);
     QString          GivenName() const;
@@ -53,21 +60,13 @@ public:
     void             setSex(const VIndividualMeasurements::Genders &sex);
     QString          Mail() const;
     void             setMail(const QString &text);
-    static const QString AttrIgnore;
-    static const QString AttrName;
-    static const QString AttrM_number;
-    static const QString AttrGui_text;
     static const QString AttrValue;
-    static const QString AttrDescription;
-
-    static const QString TagLang;
     static const QString TagFamily_name;
     static const QString TagGiven_name;
     static const QString TagBirth_date;
     static const QString TagSex;
     static const QString TagUnit;
     static const QString TagEmail;
-
     static const QString SexMale;
     static const QString SexFemale;
 

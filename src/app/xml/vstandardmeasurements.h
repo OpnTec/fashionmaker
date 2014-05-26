@@ -31,6 +31,14 @@
 
 #include "vdomdocument.h"
 
+/*
+   VST_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+// version without patch part
+#define VST_MIN_VERSION 0x000100
+// max support version of format
+#define VST_VERSION 0x000100
+
 class VStandardMeasurements:public VDomDocument
 {
 public:
@@ -44,12 +52,11 @@ public:
     static const QString TagDescription;
     static const QString TagSize;
     static const QString TagHeight;
-    static const QString AttrName;
-    static const QString AttrGui_text;
-    static const QString AttrBase;
+    static const QString AttrValue;
     static const QString AttrSize_increace;
     static const QString AttrHeight_increase;
-    static const QString AttrNumber;
+private:
+    void Measurement(const QString &tag);
 };
 
 #endif // VSTANDARDMEASUREMENTS_H

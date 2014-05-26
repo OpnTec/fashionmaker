@@ -146,7 +146,7 @@ void DialogIncrements::FillMeasurements()
     while (i.hasNext())
     {
         i.next();
-        map.insert(i.key(), i.value());
+        map.insert(qApp->VarToUser(i.key()), i.value());
     }
     qint32 currentRow = -1;
     QMapIterator<QString, VMeasurement> iMap(map);
@@ -165,6 +165,7 @@ void DialogIncrements::FillMeasurements()
         Qt::ItemFlags flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
         item->setFlags(flags);
+        item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
 
         if (qApp->patternType() == Pattern::Standard)
@@ -207,6 +208,7 @@ void DialogIncrements::FillMeasurements()
         flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
         item->setFlags(flags);
+        item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
     }
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
@@ -292,7 +294,7 @@ void DialogIncrements::FillLengthLines()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -305,7 +307,7 @@ void DialogIncrements::FillLengthLines()
         ui->tableWidgetLines->setRowCount ( linesTable->size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetLines->setItem(currentRow, 0, item);
 
@@ -328,7 +330,7 @@ void DialogIncrements::FillLengthSplines()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -340,7 +342,7 @@ void DialogIncrements::FillLengthSplines()
         currentRow++;
         ui->tableWidgetSplines->setRowCount ( splinesTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetSplines->setItem(currentRow, 0, item);
@@ -364,7 +366,7 @@ void DialogIncrements::FillLengthArcs()
     while (iHash.hasNext())
     {
         iHash.next();
-        map.insert(iHash.key(), iHash.value());
+        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
     }
 
     qint32 currentRow = -1;
@@ -376,8 +378,8 @@ void DialogIncrements::FillLengthArcs()
         currentRow++;
         ui->tableWidgetArcs->setRowCount ( arcsTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
+        QTableWidgetItem *item = new QTableWidgetItem(i.key());
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
         ui->tableWidgetArcs->setItem(currentRow, 0, item);
 
@@ -721,7 +723,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
-            VMeasurement measur = data->GetMeasurement(itemName->text());
+            VMeasurement measur = data->GetMeasurement(qApp->VarFromUser(itemName->text()));
             const QString tag = measur.TagName();
             QDomNodeList list = m->elementsByTagName(tag);
             QDomElement domElement = list.at(0).toElement();

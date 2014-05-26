@@ -115,40 +115,37 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
     const VPointF *thirdPoint = data->GeometricObject<const VPointF *>(thirdPointId);
 
     Calculator cal(data);
-    QString errorMsg;
-    qreal result = cal.eval(formula, &errorMsg);
-    if (errorMsg.isEmpty())
+    const qreal result = cal.EvalFormula(formula);
+
+    QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
+                                              thirdPoint->toQPointF(), qApp->toPixel(result));
+    quint32 id = _id;
+    if (typeCreation == Valentina::FromGui)
     {
-        QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                  thirdPoint->toQPointF(), qApp->toPixel(result));
-        quint32 id = _id;
-        if (typeCreation == Valentina::FromGui)
+        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+    }
+    else
+    {
+        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->AddLine(firstPointId, id);
+        if (parse != Document::FullParse)
         {
-            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
+            doc->UpdateToolData(id, data);
         }
-        else
-        {
-            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
-            data->AddLine(firstPointId, id);
-            if (parse != Document::FullParse)
-            {
-                doc->UpdateToolData(id, data);
-            }
-        }
-        VDrawTool::AddRecord(id, Valentina::BisectorTool, doc);
-        if (parse == Document::FullParse)
-        {
-            VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,
-                                                     thirdPointId, typeCreation);
-            scene->addItem(point);
-            connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
-            doc->AddTool(id, point);
-            doc->IncrementReferens(firstPointId);
-            doc->IncrementReferens(secondPointId);
-            doc->IncrementReferens(thirdPointId);
-        }
+    }
+    VDrawTool::AddRecord(id, Valentina::BisectorTool, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,
+                                                 thirdPointId, typeCreation);
+        scene->addItem(point);
+        connect(point, &VToolBisector::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
+        doc->AddTool(id, point);
+        doc->IncrementReferens(firstPointId);
+        doc->IncrementReferens(secondPointId);
+        doc->IncrementReferens(thirdPointId);
     }
 }
 

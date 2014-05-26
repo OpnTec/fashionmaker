@@ -270,7 +270,7 @@ public:
      * @return #m_iType
      * @throw nothrow
      */
-    ECmdCode GetCode() const Q_DECL_NOEXCEPT
+    ECmdCode GetCode() const
     {
         if ( m_pCallback.get() )
         {
@@ -442,7 +442,7 @@ public:
      * @throw nothrow
      * @sa m_strTok
      */
-    const TString& GetAsString() const Q_DECL_NOEXCEPT
+    const TString& GetAsString() const
     {
         return m_strTok;
     }

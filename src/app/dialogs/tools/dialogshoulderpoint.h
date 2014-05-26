@@ -172,7 +172,7 @@ inline QString DialogShoulderPoint::getTypeLine() const
 
 inline QString DialogShoulderPoint::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline quint32 DialogShoulderPoint::getP1Line() const

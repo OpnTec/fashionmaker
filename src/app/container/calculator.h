@@ -31,67 +31,26 @@
 
 #include "vcontainer.h"
 
-/**
- * @brief The Calculator class calculate formulas of pattern. Support operation +,-,/,* and braces.
- * Can replace name of variables her value.
- */
-class Calculator
+#include "../../libs/qmuparser/qmuparser.h"
+using namespace qmu;
+
+class Calculator:public QmuParser
 {
 public:
-    explicit Calculator(const VContainer *data);
-    qreal       eval(QString prog, QString *errorMsg);
+    Calculator(const VContainer *data);
+    Calculator(const QString &formula, bool fromUser = true);
+    ~Calculator();
+    qreal         EvalFormula(const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
-    /**
-     * @brief errorMsg keeps error message of calculation.
-     */
-    QString     *errorMsg;
-    /**
-     * @brief token теперішня лексема.
-     */
-    QString     token;
-    /**
-     * @brief tok internal representation of token.
-     */
-    qint32      tok;
-    /**
-     * @brief token_type type of token.
-     */
-    qint32      token_type;
-    /**
-     * @brief prog string where keeps formula.
-     */
-    QString     prog;
-    /**
-     * @brief index number character in string of formula.
-     */
-    qint32      index;
-    /**
-     * @brief data container with data container of all variables.
-     */
-    const VContainer *data;
-    /**
-     * @brief debugFormula decoded string of formula.
-     */
-    QString     debugFormula;
-    qreal       get_exp();
-    void        get_token();
-    static bool StrChr(QString string, QChar c);
-    void        putback();
-    void        level2(qreal *result);
-    void        level3(qreal *result);
-    void        level4(qreal *result);
-    void        level5(qreal *result);
-    void        level6(qreal *result);
-    void        primitive(qreal *result);
-    static void arith(QChar o, qreal *r, qreal *h);
-    static void unary(QChar o, qreal *r);
-    qreal       find_var(QString s);
-    // cppcheck-suppress functionStatic
-    void        serror(qint32 error);
-    static char look_up(QString s);
-    static bool isdelim(QChar c);
-    static bool iswhite(QChar c);
+    qreal *vVarVal;
+    static int iVal;
+    void          InitVariables(const VContainer *data);
+    void          InitCharacterSets();
+    static qreal  CmUnit(qreal val);
+    static qreal  MmUnit(qreal val);
+    static qreal  InchUnit(qreal val);
+    static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
 };
 
 #endif // CALCULATOR_H

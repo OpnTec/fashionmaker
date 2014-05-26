@@ -157,7 +157,7 @@ inline QString DialogAlongLine::getTypeLine() const
 
 inline QString DialogAlongLine::getFormula() const
 {
-    return formula;
+    return qApp->FormulaFromUser(formula);
 }
 
 inline quint32 DialogAlongLine::getFirstPointId() const

@@ -80,8 +80,6 @@ public:
     qreal   GetValue(const qreal &size, const qreal &height) const;
     QString TagName() const;
     void    setTagName(const QString &TagName);
-    bool    Virtual() const;
-    void    setVirtual(bool value);
 private:
     /**
      * @brief base value in base size and growth
@@ -100,7 +98,6 @@ private:
      */
     QString        gui_text;
     QString        number;
-    bool           virtualM;
     QString        _tagName;
 };
 
@@ -142,16 +139,6 @@ inline QString VMeasurement::TagName() const
 inline void VMeasurement::setTagName(const QString &tagName)
 {
     _tagName = tagName;
-}
-
-inline bool VMeasurement::Virtual() const
-{
-    return virtualM;
-}
-
-inline void VMeasurement::setVirtual(bool value)
-{
-    virtualM = value;
 }
 
 #endif // VSTANDARDTABLEROW_H

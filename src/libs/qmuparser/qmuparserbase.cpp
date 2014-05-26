@@ -64,7 +64,7 @@ QmuParserBase::QmuParserBase()
     :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
       m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
       m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0)
+      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>())
 {
     InitTokenReader();
 }
@@ -79,7 +79,7 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
     :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
       m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
       m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0)
+      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>())
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -98,7 +98,7 @@ QmuParserBase::~QmuParserBase()
  * @return *this
  * @throw nothrow
  */
-QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser) Q_DECL_NOEXCEPT
+QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
 {
     Assign(a_Parser);
     return *this;
@@ -199,13 +199,15 @@ void QmuParserBase::ResetLocale()
  * Clear bytecode, reset the token reader.
  * @throw nothrow
  */
-void QmuParserBase::ReInit() const Q_DECL_NOEXCEPT
+void QmuParserBase::ReInit() const
 {
     m_pParseFormula = &QmuParserBase::ParseString;
     m_vStringBuf.clear();
     m_vRPN.clear();
     m_pTokenReader->ReInit();
     m_nIfElseCounter = 0;
+    m_Tokens.clear();
+    m_Numbers.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,13 +320,9 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
 void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                               const QString &a_szCharSet) const
 {
-#if defined(_UNICODE)
     const std::wstring a_sNameStd = a_sName.toStdWString();
     const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-#else
-    const std::string a_sNameStd = a_sName.toStdString();
-    const std::string a_szCharSetStd = a_szCharSet.toStdString();
-#endif
+
     if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
          (a_sNameStd.at(0)>='0' && a_sNameStd.at(0)<='9'))
     {
@@ -385,13 +383,9 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
  */
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
-#if defined(_UNICODE)
     std::wstring a_sNameStd = a_sName.toStdWString();
     std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
-#else
-    std::string a_sNameStd = a_sName.toStdString();
-    std::string a_szCharSetStd = a_szCharSet.toStdString();
-#endif
+
     if ( a_sNameStd.length() == false || (a_sNameStd.find_first_not_of(a_szCharSetStd)!=string_type::npos) ||
          (a_sNameStd[0]>='0' && a_sNameStd[0]<='9'))
     {
@@ -1494,14 +1488,17 @@ void QmuParserBase::CreateRPN() const
                 opt.SetIdx(m_vStringBuf.size());      // Assign buffer index to token
                 stVal.push(opt);
                 m_vStringBuf.push_back(opt.GetAsString()); // Store string in internal buffer
+                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmVAR:
                 stVal.push(opt);
                 m_vRPN.AddVar( static_cast<qreal*>(opt.GetVar()) );
+                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmVAL:
                 stVal.push(opt);
                 m_vRPN.AddVal( opt.GetVal() );
+                m_Numbers.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmELSE:
                 m_nIfElseCounter--;
@@ -1643,10 +1640,12 @@ void QmuParserBase::CreateRPN() const
             case cmFUNC_BULK:
             case cmFUNC_STR:
                 stOpt.push(opt);
+                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmOPRT_POSTFIX:
                 stOpt.push(opt);
                 ApplyFunc(stOpt, stVal, 1);  // this is the postfix operator
+                m_Tokens.insert(m_pTokenReader->GetPos()-opt.GetAsString().length(), opt.GetAsString());
                 break;
             case cmENDIF:
             case cmVARPOW2:
@@ -1753,7 +1752,7 @@ void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QStr
  * Resets the parser to string parsing mode by calling #ReInit.
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearVar() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearVar()
 {
     m_VarDef.clear();
     ReInit();
@@ -1766,7 +1765,7 @@ void QmuParserBase::ClearVar() Q_DECL_NOEXCEPT
  *
  * Removes a variable if it exists. If the Variable does not exist nothing will be done.
  */
-void QmuParserBase::RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT
+void QmuParserBase::RemoveVar(const QString &a_strVarName)
 {
     varmap_type::iterator item = m_VarDef.find(a_strVarName);
     if (item!=m_VarDef.end())
@@ -1783,7 +1782,7 @@ void QmuParserBase::RemoveVar(const QString &a_strVarName) Q_DECL_NOEXCEPT
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearFun() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearFun()
 {
     m_FunDef.clear();
     ReInit();
@@ -1797,7 +1796,7 @@ void QmuParserBase::ClearFun() Q_DECL_NOEXCEPT
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
-void QmuParserBase::ClearConst() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearConst()
 {
     m_ConstDef.clear();
     m_StrVarDef.clear();
@@ -1810,7 +1809,7 @@ void QmuParserBase::ClearConst() Q_DECL_NOEXCEPT
  * @post Resets the parser to string parsing mode.
  * @throw nothrow
  */
-void QmuParserBase::ClearPostfixOprt() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearPostfixOprt()
 {
     m_PostOprtDef.clear();
     ReInit();
@@ -1823,7 +1822,7 @@ void QmuParserBase::ClearPostfixOprt() Q_DECL_NOEXCEPT
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearOprt() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearOprt()
 {
     m_OprtDef.clear();
     ReInit();
@@ -1836,7 +1835,7 @@ void QmuParserBase::ClearOprt() Q_DECL_NOEXCEPT
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-void QmuParserBase::ClearInfixOprt() Q_DECL_NOEXCEPT
+void QmuParserBase::ClearInfixOprt()
 {
     m_InfixOprtDef.clear();
     ReInit();
@@ -1848,7 +1847,7 @@ void QmuParserBase::ClearInfixOprt() Q_DECL_NOEXCEPT
  * @post Resets the parser to string parser mode.
  * @throw nothrow
  */
-void QmuParserBase::EnableOptimizer(bool a_bIsOn) Q_DECL_NOEXCEPT
+void QmuParserBase::EnableOptimizer(bool a_bIsOn)
 {
     m_vRPN.EnableOptimizer(a_bIsOn);
     ReInit();
@@ -1879,7 +1878,7 @@ void QmuParserBase::EnableDebugDump(bool bDumpCmd, bool bDumpStack)
  * manually one by one. It is not possible to disable built in operators selectively. This function will Reinitialize
  * the parser by calling ReInit().
  */
-void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn) Q_DECL_NOEXCEPT
+void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn)
 {
     m_bBuiltInOp = a_bIsOn;
     ReInit();

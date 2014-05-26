@@ -74,7 +74,7 @@ namespace qmu
         static qreal Sign(qreal);
         // Prefix operators
         // !!! Unary Minus is a MUST if you want to use negative signs !!!
-        static qreal UnaryMinus(qreal v) Q_DECL_NOEXCEPT;
+        static qreal UnaryMinus(qreal v);
         // Functions with variable number of arguments
         static qreal Sum(const qreal*, int);  // sum
         static qreal Avg(const qreal*, int);  // mean value
@@ -88,7 +88,7 @@ namespace qmu
  * @param v The value to negate
  * @return -v
  */
-inline qreal QmuParser::UnaryMinus(qreal v) Q_DECL_NOEXCEPT
+inline qreal QmuParser::UnaryMinus(qreal v)
 {
     return -v;
 }
