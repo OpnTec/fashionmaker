@@ -47,6 +47,10 @@
 #include <QSourceLocation>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MainWindow constructor.
+ * @param parent parent widget.
+ */
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Valentina::ArrowTool),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
@@ -96,6 +100,9 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionNewDraw add to scene new pattern peace.
+ */
 void MainWindow::ActionNewDraw()
 {
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
@@ -185,6 +192,9 @@ void MainWindow::ActionNewDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief OptionDraw help change name of pattern peace.
+ */
 void MainWindow::OptionDraw()
 {
     const QString activDraw = doc->GetNameActivDraw();
@@ -204,6 +214,14 @@ void MainWindow::OptionDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetToolButton set tool and show dialog.
+ * @param checked true if tool button checked.
+ * @param t tool type.
+ * @param cursor path tool cursor icon.
+ * @param toolTip first tooltipe.
+ * @param closeDialogSlot function what handle after close dialog.
+ */
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
@@ -233,6 +251,10 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialog handle close dialog
+ * @param result result working dialog.
+ */
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
@@ -245,6 +267,10 @@ void MainWindow::ClosedDialog(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolEndLine handler tool endLine.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolEndLine(bool checked)
 {
     SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
@@ -252,12 +278,20 @@ void MainWindow::ToolEndLine(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogEndLine actions after closing DialogEndLine.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogEndLine(int result)
 {
     ClosedDialog<VToolEndLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolLine handler tool line.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolLine(bool checked)
 {
     SetToolButton<DialogLine>(checked, Valentina::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
@@ -265,12 +299,20 @@ void MainWindow::ToolLine(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogLine actions after closing DialogLine.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogLine(int result)
 {
     ClosedDialog<VToolLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolAlongLine handler tool alongLine.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolAlongLine(bool checked)
 {
     SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
@@ -278,12 +320,20 @@ void MainWindow::ToolAlongLine(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogAlongLine actions after closing DialogAlongLine.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogAlongLine(int result)
 {
     ClosedDialog<VToolAlongLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolShoulderPoint handler tool shoulderPoint.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
@@ -291,12 +341,20 @@ void MainWindow::ToolShoulderPoint(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogShoulderPoint actions after closing DialogShoulderPoint.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
     ClosedDialog<VToolShoulderPoint>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolNormal handler tool normal.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolNormal(bool checked)
 {
     SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
@@ -304,12 +362,20 @@ void MainWindow::ToolNormal(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogNormal actions after closing DialogNormal.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogNormal(int result)
 {
     ClosedDialog<VToolNormal>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolBisector handler tool bisector.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolBisector(bool checked)
 {
     SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
@@ -317,12 +383,20 @@ void MainWindow::ToolBisector(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogBisector actions after closing DialogBisector.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogBisector(int result)
 {
     ClosedDialog<VToolBisector>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolLineIntersect handler tool lineIntersect.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolLineIntersect(bool checked)
 {
     SetToolButton<DialogLineIntersect>(checked, Valentina::LineIntersectTool, ":/cursor/intersect_cursor.png",
@@ -330,12 +404,20 @@ void MainWindow::ToolLineIntersect(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogLineIntersect actions after closing DialogLineIntersect.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogLineIntersect(int result)
 {
     ClosedDialog<VToolLineIntersect>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolSpline handler tool spline.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolSpline(bool checked)
 {
     SetToolButton<DialogSpline>(checked, Valentina::SplineTool, ":/cursor/spline_cursor.png",
@@ -343,12 +425,20 @@ void MainWindow::ToolSpline(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogSpline actions after closing DialogSpline.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogSpline(int result)
 {
     ClosedDialog<VToolSpline>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolCutSpline handler tool CutSpline.
+ * @param checked true - button is checked
+ */
 void MainWindow::ToolCutSpline(bool checked)
 {
     SetToolButton<DialogCutSpline>(checked, Valentina::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
@@ -356,12 +446,20 @@ void MainWindow::ToolCutSpline(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogCutSpline actions after closing DialogCutSpline.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogCutSpline(int result)
 {
     ClosedDialog<VToolCutSpline>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolArc handler tool arc.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolArc(bool checked)
 {
     SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
@@ -369,12 +467,20 @@ void MainWindow::ToolArc(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogArc actions after closing DialogArc.
+ * @param result result of dialog working..
+ */
 void MainWindow::ClosedDialogArc(int result)
 {
     ClosedDialog<VToolArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolSplinePath handler tool splinePath.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolSplinePath(bool checked)
 {
     SetToolButton<DialogSplinePath>(checked, Valentina::SplinePathTool, ":/cursor/splinepath_cursor.png",
@@ -382,12 +488,20 @@ void MainWindow::ToolSplinePath(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogSplinePath actions after closing DialogSplinePath.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogSplinePath(int result)
 {
     ClosedDialog<VToolSplinePath>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolCutSplinePath handler tool CutSplinePath.
+ * @param checked true - button is checked
+ */
 void MainWindow::ToolCutSplinePath(bool checked)
 {
     SetToolButton<DialogCutSplinePath>(checked, Valentina::CutSplinePathTool,
@@ -396,12 +510,20 @@ void MainWindow::ToolCutSplinePath(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogCutSplinePath actions after closing DialogCutSplinePath.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogCutSplinePath(int result)
 {
     ClosedDialog<VToolCutSplinePath>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolPointOfContact handler tool pointOfContact.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolPointOfContact(bool checked)
 {
     SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
@@ -409,12 +531,20 @@ void MainWindow::ToolPointOfContact(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogPointOfContact actions after closing DialogPointOfContact.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogPointOfContact(int result)
 {
     ClosedDialog<VToolPointOfContact>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolDetail handler tool detail.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolDetail(bool checked)
 {
     SetToolButton<DialogDetail>(checked, Valentina::DetailTool, "://cursor/new_detail_cursor.png",
@@ -422,6 +552,10 @@ void MainWindow::ToolDetail(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogDetail actions after closing DialogDetail.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogDetail(int result)
 {
     if (result == QDialog::Accepted)
@@ -433,6 +567,10 @@ void MainWindow::ClosedDialogDetail(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolHeight handler tool height.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolHeight(bool checked)
 {
     SetToolButton<DialogHeight>(checked, Valentina::Height, ":/cursor/height_cursor.png", tr("Select base point"),
@@ -440,12 +578,20 @@ void MainWindow::ToolHeight(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogHeight actions after closing DialogHeight.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogHeight(int result)
 {
     ClosedDialog<VToolHeight>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolTriangle handler tool triangle.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolTriangle(bool checked)
 {
     SetToolButton<DialogTriangle>(checked, Valentina::Triangle, ":/cursor/triangle_cursor.png",
@@ -453,12 +599,20 @@ void MainWindow::ToolTriangle(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogTriangle actions after closing DialogTriangle.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogTriangle(int result)
 {
     ClosedDialog<VToolTriangle>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolPointOfIntersection handler tool pointOfIntersection.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
     SetToolButton<DialogPointOfIntersection>(checked, Valentina::PointOfIntersection,
@@ -467,12 +621,20 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogPointOfIntersection actions after closing DialogPointOfIntersection.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogPointOfIntersection(int result)
 {
     ClosedDialog<VToolPointOfIntersection>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolUnionDetails handler tool unionDetails.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolUnionDetails(bool checked)
 {
     SetToolButton<DialogUnionDetails>(checked, Valentina::UnionDetails, ":/cursor/union_cursor.png",
@@ -482,6 +644,10 @@ void MainWindow::ToolUnionDetails(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogUnionDetails actions after closing DialogUnionDetails.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
     ClosedDialog<VToolUnionDetails>(result);
@@ -489,6 +655,10 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolCutArc handler tool cutArc.
+ * @param checked true - button checked.
+ */
 void MainWindow::ToolCutArc(bool checked)
 {
     SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
@@ -496,12 +666,19 @@ void MainWindow::ToolCutArc(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedDialogCutArc actions after closing DialogCutArc.
+ * @param result result of dialog working.
+ */
 void MainWindow::ClosedDialogCutArc(int result)
 {
     ClosedDialog<VToolCutArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief About show widows about.
+ */
 void MainWindow::About()
 {
     DialogAboutApp * about_dialog = new DialogAboutApp(this);
@@ -510,18 +687,28 @@ void MainWindow::About()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AboutQt show widows aboutQt.
+ */
 void MainWindow::AboutQt()
 {
     QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool  highlight tool.Tip show tools tooltip.
+ * @param toolTip tooltip text.
+ */
 void MainWindow::ShowToolTip(const QString &toolTip)
 {
     helpLabel->setText(toolTip);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief tableClosed handle after close layout window.
+ */
 void MainWindow::tableClosed()
 {
     show();
@@ -546,6 +733,10 @@ void MainWindow::PatternProperties()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief showEvent handle after show window.
+ * @param event show event.
+ */
 void MainWindow::showEvent( QShowEvent *event )
 {
     QMainWindow::showEvent( event );
@@ -566,6 +757,10 @@ void MainWindow::showEvent( QShowEvent *event )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief closeEvent handle after close window.
+ * @param event close event.
+ */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -580,6 +775,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolBarOption enable option toolbar.
+ */
 void MainWindow::ToolBarOption()
 {
     if (qApp->patternType() == Pattern::Standard)
@@ -616,6 +814,9 @@ void MainWindow::ToolBarOption()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ToolBarDraws enable draw toolbar.
+ */
 void MainWindow::ToolBarDraws()
 {
     QLabel *labelPtternPieceName = new QLabel(tr("Pattern Piece: "));
@@ -667,6 +868,10 @@ void MainWindow::InitToolButtons()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief currentDrawChanged change active pattern peace.
+ * @param index index in combobox.
+ */
 void MainWindow::currentDrawChanged( int index )
 {
     if (index != -1)
@@ -687,6 +892,10 @@ void MainWindow::currentDrawChanged( int index )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseMove save mouse position and show user.
+ * @param scenePos position mouse.
+ */
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
     QString string = QString("%1, %2").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
@@ -698,6 +907,9 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CanselTool cansel tool.
+ */
 void MainWindow::CancelTool()
 {
     delete dialogTool;
@@ -812,6 +1024,9 @@ void MainWindow::CancelTool()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ArrowTool enable arrow tool.
+ */
 void  MainWindow::ArrowTool()
 {
     CancelTool();
@@ -823,12 +1038,19 @@ void  MainWindow::ArrowTool()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionAroowTool set arrow tool. Cansel tool what was before.
+ */
 void MainWindow::ActionAroowTool()
 {
     ArrowTool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyPressEvent handle key press events.
+ * @param event key event.
+ */
 void MainWindow::keyPressEvent ( QKeyEvent * event )
 {
     switch (event->key())
@@ -843,6 +1065,9 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveCurrentScene save scene options before set another.
+ */
 void MainWindow::SaveCurrentScene()
 {
     /*Save transform*/
@@ -855,6 +1080,9 @@ void MainWindow::SaveCurrentScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RestoreCurrentScene restore scene options after change.
+ */
 void MainWindow::RestoreCurrentScene()
 {
     /*Set transform for current scene*/
@@ -867,6 +1095,10 @@ void MainWindow::RestoreCurrentScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionDraw show draw scene.
+ * @param checked true - button checked.
+ */
 void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
@@ -900,6 +1132,10 @@ void MainWindow::ActionDraw(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionDetails show details scene.
+ * @param checked true - button checked.
+ */
 void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
@@ -935,6 +1171,10 @@ void MainWindow::ActionDetails(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveAs save as pattern file.
+ * @return true for successes saving.
+ */
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
@@ -962,6 +1202,10 @@ bool MainWindow::SaveAs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Save save pattern file.
+ * @return true for successes saving.
+ */
 bool MainWindow::Save()
 {
     if (curFile.isEmpty())
@@ -982,6 +1226,9 @@ bool MainWindow::Save()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Open ask user select pattern file.
+ */
 void MainWindow::Open()
 {
     if (MaybeSave())
@@ -1008,6 +1255,9 @@ void MainWindow::Open()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Options config dialog.
+ */
 void MainWindow::Options()
 {
     ConfigDialog dlg(this);
@@ -1018,6 +1268,9 @@ void MainWindow::Options()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Clear reset to default window.
+ */
 void MainWindow::Clear()
 {
     setCurrentFile("");
@@ -1040,6 +1293,9 @@ void MainWindow::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewPattern create new empty pattern.
+ */
 void MainWindow::NewPattern()
 {
     QProcess *v = new QProcess(this);
@@ -1048,6 +1304,9 @@ void MainWindow::NewPattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief haveChange enable action save if we have unsaved change.
+ */
 void MainWindow::PatternWasModified()
 {
     setWindowModified(doc->isPatternModified());
@@ -1055,6 +1314,10 @@ void MainWindow::PatternWasModified()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedSize change new size value.
+ * @param text value size.
+ */
 void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
@@ -1063,6 +1326,10 @@ void MainWindow::ChangedSize(const QString & text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedGrowth change new height value.
+ * @param text value height.
+ */
 void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
@@ -1071,6 +1338,10 @@ void MainWindow::ChangedHeight(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetEnableWidgets enable action button.
+ * @param enable enable value.
+ */
 void MainWindow::SetEnableWidgets(bool enable)
 {
     ui->actionSaveAs->setEnabled(enable);
@@ -1086,6 +1357,10 @@ void MainWindow::SetEnableWidgets(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionTable show table with variables.
+ * @param checked true - button checked.
+ */
 void MainWindow::ActionTable(bool checked)
 {
     if (checked)
@@ -1102,6 +1377,9 @@ void MainWindow::ActionTable(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedActionTable actions after closing table with variables.
+ */
 void MainWindow::ClosedActionTable()
 {
     ui->actionTable->setChecked(false);
@@ -1110,6 +1388,10 @@ void MainWindow::ClosedActionTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionHistory show tool history.
+ * @param checked true - button checked.
+ */
 void MainWindow::ActionHistory(bool checked)
 {
     if (checked)
@@ -1127,6 +1409,10 @@ void MainWindow::ActionHistory(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionLayout begin creation layout.
+ * @param checked true - button checked.
+ */
 void MainWindow::ActionLayout(bool checked)
 {
     Q_UNUSED(checked);
@@ -1145,6 +1431,9 @@ void MainWindow::ActionLayout(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosedActionHistory actions after closing history window with variables.
+ */
 void MainWindow::ClosedActionHistory()
 {
     ui->actionHistory->setChecked(false);
@@ -1152,6 +1441,10 @@ void MainWindow::ClosedActionHistory()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetEnableTool enable button.
+ * @param enable enable value.
+ */
 void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
@@ -1189,6 +1482,9 @@ void MainWindow::SetEnableTool(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MinimumScrollBar set scroll bar to minimum.
+ */
 void MainWindow::MinimumScrollBar()
 {
     QScrollBar *horScrollBar = view->horizontalScrollBar();
@@ -1198,6 +1494,11 @@ void MainWindow::MinimumScrollBar()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SavePattern save pattern file.
+ * @param fileName pattern file name.
+ * @return true if all is good.
+ */
 bool MainWindow::SavePattern(const QString &fileName)
 {
     QFileInfo tempInfo(fileName);
@@ -1214,6 +1515,9 @@ bool MainWindow::SavePattern(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AutoSavePattern start safe saving.
+ */
 void MainWindow::AutoSavePattern()
 {
     if (curFile.isEmpty() == false && doc->isPatternModified() == true)
@@ -1227,6 +1531,11 @@ void MainWindow::AutoSavePattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setCurrentFile the function is called to reset the state of a few variables when a file
+ * is loaded or saved, or when the user starts editing a new file (in which case fileName is empty).
+ * @param fileName file name.
+ */
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     curFile = fileName;
@@ -1258,11 +1567,20 @@ void MainWindow::setCurrentFile(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief strippedName the function call around curFile to exclude the path to the file.
+ * @param fullFileName full path to the file.
+ * @return file name.
+ */
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ReadSettings read setting for app.
+ */
 void MainWindow::ReadSettings()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -1274,6 +1592,9 @@ void MainWindow::ReadSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief WriteSettings save setting for app.
+ */
 void MainWindow::WriteSettings()
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -1283,6 +1604,10 @@ void MainWindow::WriteSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MaybeSave The function is called to save pending changes.
+ * @return returns true in all cases, except when the user clicks Cancel.
+ */
 bool MainWindow::MaybeSave()
 {
     if (doc->isPatternModified())
@@ -1439,6 +1764,10 @@ MainWindow::~MainWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LoadPattern open pattern file.
+ * @param fileName name of file.
+ */
 void MainWindow::LoadPattern(const QString &fileName)
 {
     try
