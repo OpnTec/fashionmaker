@@ -1,10 +1,13 @@
 [Desktop Entry]
 Type=Application
 Name=Valentina
+Exec=valentina %U
+Version=1.0
+Encoding=UTF-8
 GenericName=Pattern making program
 Comment=Open source project of creating a pattern making program, whose allow create and modeling patterns of clothing
 Icon=valentina
-Exec=valentina
+Terminal=false
+MimeType=text/val;
 Categories=Graphics;VectorGraphics;2DGraphics;
-Version=1.0
 Name[uk]=valentina

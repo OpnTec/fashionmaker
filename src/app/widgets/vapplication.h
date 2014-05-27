@@ -97,11 +97,17 @@ private:
     void                  InitVariables();
     void                  InitFunctions();
     void                  InitPostfixOperators();
-    bool                  MeasurementsFromUser(QString &newFormula, int position, const QString &token) const;
-    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token) const;
-    bool                  PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token) const;
-    bool                  FunctionsFromUser(QString &newFormula, int position, const QString &token) const;
-    bool                  VariablesToUser(QString &newFormula, int position, const QString &token) const;
+    bool                  MeasurementsFromUser(QString &newFormula, int position, const QString &token,
+                                               int &bias) const;
+    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool                  PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token,
+                                                   int &bias) const;
+    bool                  FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool                  VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    void                  CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
+                                               QMap<int, QString> &numbers);
+    void                  BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
+
 };
 
 inline Valentina::Units VApplication::patternUnit() const

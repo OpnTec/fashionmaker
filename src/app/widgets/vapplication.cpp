@@ -1505,7 +1505,7 @@ void VApplication::InitPostfixOperators()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const QString &token) const
+bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
@@ -1513,6 +1513,7 @@ bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const
         if(token == i.value().translate())
         {
             newFormula.replace(position, token.length(), i.key());
+            bias = token.length() - i.key().length();
             return true;
         }
         ++i;
@@ -1521,7 +1522,7 @@ bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token) const
+bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
@@ -1529,6 +1530,9 @@ bool VApplication::VariablesFromUser(QString &newFormula, int position, const QS
         if(token.indexOf( i.value().translate() ) == 0)
         {
             newFormula.replace(position, i.value().translate().length(), i.key());
+            QString newToken = token;
+            newToken.replace(0, i.value().translate().length(), i.key());
+            bias = token.length() - newToken.length();
             return true;
         }
         ++i;
@@ -1537,7 +1541,7 @@ bool VApplication::VariablesFromUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token) const
+bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = postfixOperators.constBegin();
     while (i != postfixOperators.constEnd())
@@ -1545,6 +1549,7 @@ bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, c
         if(token == i.value().translate())
         {
             newFormula.replace(position, token.length(), i.key());
+            bias = token.length() - i.key().length();
             return true;
         }
         ++i;
@@ -1553,7 +1558,7 @@ bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QString &token) const
+bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
@@ -1561,6 +1566,7 @@ bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QS
         if(token == i.value().translate())
         {
             newFormula.replace(position, token.length(), i.key());
+            bias = token.length() - i.key().length();
             return true;
         }
         ++i;
@@ -1569,7 +1575,7 @@ bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token) const
+bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
@@ -1577,11 +1583,46 @@ bool VApplication::VariablesToUser(QString &newFormula, int position, const QStr
         if(token.indexOf( i.key() ) == 0)
         {
             newFormula.replace(position, i.key().length(), i.value().translate());
+
+            QString newToken = token;
+            newToken.replace(0, i.key().length(), i.value().translate());
+            bias = token.length() - newToken.length();
             return true;
         }
         ++i;
     }
     return false;
+}
+
+void VApplication::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
+                                        QMap<int, QString> &numbers)
+{
+    if(bias == 0)
+    {
+        return;
+    }
+
+    BiasTokens(position, bias, tokens);
+    BiasTokens(position, bias, numbers);
+}
+
+void VApplication::BiasTokens(int position, int bias, QMap<int, QString> &tokens) const
+{
+    QMap<int, QString> newTokens;
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
+    {
+        if(i.key()<= position)
+        {
+            newTokens.insert(i.key(), i.value());
+        }
+        else
+        {
+            newTokens.insert(i.key()-bias, i.value());
+        }
+        ++i;
+    }
+    tokens = newTokens;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1610,7 +1651,8 @@ QString VApplication::VarToUser(const QString &var) const
     }
 
     QString newVar = var;
-    if(VariablesToUser(newVar, 0, var))
+    int bias = 0;
+    if(VariablesToUser(newVar, 0, var, bias))
     {
         return newVar;
     }
@@ -1621,22 +1663,23 @@ QString VApplication::VarToUser(const QString &var) const
 QString VApplication::VarFromUser(const QString &var) const
 {
     QString newVar = var;
-    if(MeasurementsFromUser(newVar, 0, var))
+    int bias = 0;
+    if(MeasurementsFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }
 
-    if(VariablesFromUser(newVar, 0, var))
+    if(VariablesFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }
 
-    if(PostfixOperatorsFromUser(newVar, 0, var))
+    if(PostfixOperatorsFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }
 
-    if(FunctionsFromUser(newVar, 0, var))
+    if(FunctionsFromUser(newVar, 0, var, bias))
     {
         return newVar;
     }
@@ -1696,58 +1739,84 @@ QString VApplication::FormulaFromUser(const QString &formula)
         return newFormula;
     }
 
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
-    while (i != tokens.constEnd())
+    QList<int> tKeys = tokens.keys();
+    QList<QString> tValues = tokens.values();
+    for (int i = 0; i < tKeys.size(); ++i)
     {
-        if(MeasurementsFromUser(newFormula, i.key(), i.value()))
+        int bias = 0;
+        if(MeasurementsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
-            ++i;
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if(VariablesFromUser(newFormula, i.key(), i.value()))
+        if(VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
-            ++i;
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if(PostfixOperatorsFromUser(newFormula, i.key(), i.value()))
+        if(PostfixOperatorsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
-            ++i;
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if(FunctionsFromUser(newFormula, i.key(), i.value()))
+        if(FunctionsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
-            ++i;
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
-        ++i;
     }
 
-    QLocale loc = QLocale();
+    QLocale loc = QLocale::system();
     if(loc != QLocale(QLocale::C))
     {
-        QMap<int, QString>::const_iterator i = numbers.constBegin();
-        while (i != numbers.constEnd())
+        QList<int> nKeys = numbers.keys();
+        QList<QString> nValues = numbers.values();
+        for (int i = 0; i < tKeys.size(); ++i)
         {
-            QLocale::setDefault(QLocale::C);
             bool ok = false;
-            qreal d = QString(i.value()).toDouble(&ok);
-            if(ok == false)
+            qreal d = loc.toDouble(nValues.at(i), &ok);
+            if (ok == false)
             {
-                qDebug()<<"Can't convert to double token"<<i.value();
-                ++i;
+                qDebug()<<"Can't convert to double token"<<nValues.at(i);
                 continue;
             }
-            if(qFloor (d) < d)
+            if (qFloor (d) < d)
             {
-                QLocale::setDefault(QLocale::system());
-                QLocale loc = QLocale();
+                QLocale loc = QLocale(QLocale::C);
                 QString dStr = loc.toString(d);
-                newFormula.replace(i.key(), i.value().length(), dStr);
+                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+                int bias = nValues.at(i).length() - dStr.length();
+                if (bias != 0)
+                {
+                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                    nKeys = numbers.keys();
+                    nValues = numbers.values();
+                }
             }
-            ++i;
+
         }
     }
 
@@ -1764,7 +1833,7 @@ QString VApplication::FormulaToUser(const QString &formula)
     QMap<int, QString> numbers;
     try
     {
-        Calculator cal(formula);
+        Calculator cal(formula, false);
         tokens = cal.GetTokens();
         numbers = cal.GetNumbers();
     }
@@ -1778,61 +1847,91 @@ QString VApplication::FormulaToUser(const QString &formula)
         return newFormula;
     }
 
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
-    while (i != tokens.constEnd())
+    QList<int> tKeys = tokens.keys();
+    QList<QString> tValues = tokens.values();
+    for (int i = 0; i < tKeys.size(); ++i)
     {
-        if (measurements.contains(i.value()))
+        if (measurements.contains(tValues.at(i)))
         {
-            newFormula.replace(i.key(), i.value().length(), measurements.value(i.value()).translate());
-            ++i;
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(), measurements.value(tValues.at(i)).translate());
+            int bias = tValues.at(i).length() - measurements.value(tValues.at(i)).translate().length();
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if (functions.contains(i.value()))
+        if (functions.contains(tValues.at(i)))
         {
-            newFormula.replace(i.key(), i.value().length(), functions.value(i.value()).translate());
-            ++i;
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(), functions.value(tValues.at(i)).translate());
+            int bias = tValues.at(i).length() - functions.value(tValues.at(i)).translate().length();
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if (postfixOperators.contains(i.value()))
+        if (postfixOperators.contains(tValues.at(i)))
         {
-            newFormula.replace(i.key(), i.value().length(), postfixOperators.value(i.value()).translate());
-            ++i;
+            newFormula.replace(tKeys.at(i), tValues.at(i).length(), postfixOperators.value(tValues.at(i)).translate());
+            int bias = tValues.at(i).length() - postfixOperators.value(tValues.at(i)).translate().length();
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
 
-        if(VariablesToUser(newFormula, i.key(), i.value()))
+        int bias = 0;
+        if(VariablesToUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
-            ++i;
+            if (bias != 0)
+            {
+                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
+                tKeys = tokens.keys();
+                tValues = tokens.values();
+            }
             continue;
         }
-
     }
 
-    QLocale loc = QLocale();
+    QLocale loc = QLocale::system();
     if(loc != QLocale::C)
     {
-        QMap<int, QString>::const_iterator i = numbers.constBegin();
-        while (i != numbers.constEnd())
+        QList<int> nKeys = numbers.keys();
+        QList<QString> nValues = numbers.values();
+        for (int i = 0; i < tKeys.size(); ++i)
         {
+            QLocale loc = QLocale(QLocale::C);
             bool ok = false;
-            qreal d = QString(i.value()).toDouble(&ok);
+            qreal d = loc.toDouble(nValues.at(i), &ok);
             if(ok == false)
             {
-                qDebug()<<"Can't convert to double token"<<i.value();
-                ++i;
+                qDebug()<<"Can't convert to double token"<<nValues.at(i);
                 continue;
             }
             if(qFloor (d) < d)
             {
-                QLocale::setDefault(QLocale::C);
-                QLocale loc = QLocale();
+                QLocale loc = QLocale::system();
                 QString dStr = loc.toString(d);
-                newFormula.replace(i.key(), i.value().length(), dStr);
-                QLocale::setDefault(QLocale::system());
+                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+                int bias = nValues.at(i).length() - dStr.length();
+
+                if (bias != 0)
+                {
+                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                    nKeys = numbers.keys();
+                    nValues = numbers.values();
+                }
             }
-            ++i;
         }
     }
 

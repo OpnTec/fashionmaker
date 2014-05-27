@@ -122,7 +122,7 @@ void DialogEndLine::setFormula(const QString &value)
     {
         this->DeployFormulaTextEdit();
     }
-    ui->plainTextEditFormula->setPlainText(value);
+    ui->plainTextEditFormula->setPlainText(formula);
     //QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     //cursor.insertText(value);
     //ui->plainTextEditFormula->setCursor(cursor);

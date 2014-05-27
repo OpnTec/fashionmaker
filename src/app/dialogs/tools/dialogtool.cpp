@@ -377,7 +377,8 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             Calculator cal(data);
             const qreal result = cal.EvalFormula(formula);
 
-            label->setText(QString().setNum(result));
+            QLocale loc = QLocale::system();
+            label->setText(loc.toString(result));
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
             emit ToolTip("");
@@ -424,7 +425,8 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
             Calculator cal(data);
             const qreal result = cal.EvalFormula(formula);
 
-            label->setText(QString().setNum(result));
+            QLocale loc = QLocale::system();
+            label->setText(loc.toString(result));
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
             emit ToolTip("");
