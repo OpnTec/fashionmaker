@@ -1234,14 +1234,19 @@ void MainWindow::Open()
     if (MaybeSave())
     {
         QString filter(tr("Pattern files (*.val)"));
+        //Get list last open files
+        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                           QApplication::applicationName());
+        QStringList files = settings.value("recentFileList").toStringList();
         QString dir;
-        if (curFile.isEmpty())
+        if (files.isEmpty())
         {
             dir = QDir::homePath();
         }
         else
         {
-            dir = QFileInfo(curFile).absolutePath();
+            //Absolute path to last open file
+            dir = QFileInfo(files.first()).absolutePath();
         }
         QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
         if (fileName.isEmpty() == false)
