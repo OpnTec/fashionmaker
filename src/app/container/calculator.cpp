@@ -49,6 +49,9 @@ Calculator::Calculator(const VContainer *data)
     DefinePostfixOprt(cm_Oprt, CmUnit);
     DefinePostfixOprt(mm_Oprt, MmUnit);
     DefinePostfixOprt(in_Oprt, InchUnit);
+
+    SetArgSep(',');
+    SetDecSep('.');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +68,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
         DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
         DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
 
-        QLocale loc = QLocale();
+        QLocale loc = QLocale::system();
         SetDecSep(loc.decimalPoint().toLatin1());
         SetThousandsSep(loc.groupSeparator().toLatin1());
         SetArgSep(';');
@@ -75,6 +78,9 @@ Calculator::Calculator(const QString &formula, bool fromUser)
         DefinePostfixOprt(cm_Oprt, CmUnit);
         DefinePostfixOprt(mm_Oprt, MmUnit);
         DefinePostfixOprt(in_Oprt, InchUnit);
+
+        SetArgSep(',');
+        SetDecSep('.');
     }
 
     SetExpr(formula);
