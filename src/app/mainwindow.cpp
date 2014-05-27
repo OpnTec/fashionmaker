@@ -67,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     view = new VMainGraphicsView();
     ui->LayoutView->addWidget(view);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view->setScene(currentScene);
 
     sceneDraw->setTransform(view->transform());
