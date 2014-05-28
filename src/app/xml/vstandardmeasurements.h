@@ -53,7 +53,7 @@ public:
     static const QString TagSize;
     static const QString TagHeight;
     static const QString AttrValue;
-    static const QString AttrSize_increace;
+    static const QString AttrSize_increase;
     static const QString AttrHeight_increase;
 private:
     void Measurement(const QString &tag);

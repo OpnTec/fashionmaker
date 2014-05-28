@@ -34,7 +34,7 @@ const QString VStandardMeasurements::TagDescription      = QStringLiteral("descr
 const QString VStandardMeasurements::TagSize             = QStringLiteral("size");
 const QString VStandardMeasurements::TagHeight           = QStringLiteral("height");
 const QString VStandardMeasurements::AttrValue           = QStringLiteral("value");
-const QString VStandardMeasurements::AttrSize_increace   = QStringLiteral("size_increace");
+const QString VStandardMeasurements::AttrSize_increase   = QStringLiteral("size_increase");
 const QString VStandardMeasurements::AttrHeight_increase = QStringLiteral("height_increase");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,17 +217,17 @@ void VStandardMeasurements::Measurement(const QString &tag)
             if (domElement.isNull() == false)
             {
                 const qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
-                const qreal size_increace = GetParametrDouble(domElement, AttrSize_increace, "0.0");
+                const qreal size_increase = GetParametrDouble(domElement, AttrSize_increase, "0.0");
                 const qreal height_increase = GetParametrDouble(domElement, AttrHeight_increase, "0.0");
 
                 if (Unit() == Valentina::Mm)// Convert to Cm.
                 {
-                    data->AddMeasurement(tag, VMeasurement(value/10.0, size_increace/10.0, height_increase/10.0,
+                    data->AddMeasurement(tag, VMeasurement(value/10.0, size_increase/10.0, height_increase/10.0,
                                                            qApp->GuiText(tag), qApp->Description(tag), tag));
                 }
                 else// Cm or inch.
                 {
-                    data->AddMeasurement(tag, VMeasurement(value, size_increace, height_increase, qApp->GuiText(tag),
+                    data->AddMeasurement(tag, VMeasurement(value, size_increase, height_increase, qApp->GuiText(tag),
                                                            qApp->Description(tag), tag));
                 }
             }

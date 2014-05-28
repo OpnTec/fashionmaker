@@ -7,147 +7,147 @@
 	<height base="1760"/>
 	<body-measurements>
         <head_and_neck>
-            <head_girth value="576" size_increace="4" height_increase ="4"/><!--Огол(Обхват головы)--> 
-            <mid_neck_girth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <neck_base_girth value="404" size_increace="8" height_increase ="2"/><!--Ош(Обхват шеи)-->
-            <head_and_neck_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
+            <head_girth value="576" size_increase="4" height_increase ="4"/><!--Огол(Обхват головы)--> 
+            <mid_neck_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <neck_base_girth value="404" size_increase="8" height_increase ="2"/><!--Ош(Обхват шеи)-->
+            <head_and_neck_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </head_and_neck>
         <torso>
-            <center_front_waist_length value="0.0" size_increace="" height_increase=""/><!--Нету перевода-->
-            <center_back_waist_length value="438" size_increace="2" height_increase ="10"/><!--Дтс(Длина спины до талии с учетом выступа лопаток)-->
-            <shoulder_length value="160" size_increace="1" height_increase ="4"/><!--Шп(Длина плечевого ската)-->
-            <side_waist_length value="0.0" size_increace="0" height_increase="0"/><!--Дб(Длина боковой части)-->
-            <trunk_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <shoulder_girth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <upper_chest_girth value="1034" size_increace="36" height_increase ="4"/><!--ОгI(Обхват груди первый)-->
-            <bust_girth value="1044" size_increace="38" height_increase ="2"/><!--ОгII(Обхват груди второй)-->
-            <under_bust_girth value="1000" size_increace="40" height_increase ="0"/><!--ОгIII(Обхват груди третий)-->
-            <waist_girth value="780" size_increace="40" height_increase ="0"/><!--От(Обхват талии)-->
-            <high_hip_girth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <hip_girth value="984" size_increace="30" height_increase ="10"/><!--Об(Обхват бедер с учетом выступания живота)-->
-            <upper_front_chest_width value="0.0" size_increace="0" height_increase="0"/><!--Шг1(Ширина груди первая)-->
-            <front_chest_width value="0.0" size_increace="0" height_increase="0"/><!--Шг2(Ширина груди вторая)-->
-            <across_front_shoulder_width value="412" size_increace="5" height_increase ="8"/><!--dпл(Плечевой диаметр)-->
-            <across_back_shoulder_width value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <upper_back_width value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_width value="416" size_increace="10" height_increase ="2"/><!--Шс(Ширина спины)-->
-            <bustpoint_to_bustpoint value="224" size_increace="6" height_increase ="0"/><!--Цг(Расстояние между сосковыми точками)-->
-            <halter_bustpoint_to_bustpoint value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <neck_to_bustpoint value="262" size_increace="8" height_increase ="3"/><!--Вг(Расстояние от точки основания шеи сбоку до сосковой точки (высота груди))-->
-            <crotch_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <rise_height value="316" size_increace="4" height_increase ="7"/><!--Дпс(Расстояние от линии талии до подъягодичной складки)-->
-            <shoulder_drop value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <shoulder_slope_degrees value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_shoulder_slope_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_shoulder_slope_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_shoulder_to_waist_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_shoulder_to_waist_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_neck_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_neck_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_upper_chest_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_upper_chest_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_waist_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_waist_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_upper_hip_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_upper_hip_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_hip_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_hip_arc value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <chest_slope value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_slope value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_waist_slope value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <back_waist_slope value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <front_neck_to_upper_chest_height value="0.0" size_increace="0" height_increase=""/><!--Нету перевода-->
-            <front_neck_to_bust_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
+            <center_front_waist_length value="0.0" size_increase="" height_increase=""/><!--Нету перевода-->
+            <center_back_waist_length value="438" size_increase="2" height_increase ="10"/><!--Дтс(Длина спины до талии с учетом выступа лопаток)-->
+            <shoulder_length value="160" size_increase="1" height_increase ="4"/><!--Шп(Длина плечевого ската)-->
+            <side_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Дб(Длина боковой части)-->
+            <trunk_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <shoulder_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <upper_chest_girth value="1034" size_increase="36" height_increase ="4"/><!--ОгI(Обхват груди первый)-->
+            <bust_girth value="1044" size_increase="38" height_increase ="2"/><!--ОгII(Обхват груди второй)-->
+            <under_bust_girth value="1000" size_increase="40" height_increase ="0"/><!--ОгIII(Обхват груди третий)-->
+            <waist_girth value="780" size_increase="40" height_increase ="0"/><!--От(Обхват талии)-->
+            <high_hip_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <hip_girth value="984" size_increase="30" height_increase ="10"/><!--Об(Обхват бедер с учетом выступания живота)-->
+            <upper_front_chest_width value="0.0" size_increase="0" height_increase="0"/><!--Шг1(Ширина груди первая)-->
+            <front_chest_width value="0.0" size_increase="0" height_increase="0"/><!--Шг2(Ширина груди вторая)-->
+            <across_front_shoulder_width value="412" size_increase="5" height_increase ="8"/><!--dпл(Плечевой диаметр)-->
+            <across_back_shoulder_width value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <upper_back_width value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_width value="416" size_increase="10" height_increase ="2"/><!--Шс(Ширина спины)-->
+            <bustpoint_to_bustpoint value="224" size_increase="6" height_increase ="0"/><!--Цг(Расстояние между сосковыми точками)-->
+            <halter_bustpoint_to_bustpoint value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <neck_to_bustpoint value="262" size_increase="8" height_increase ="3"/><!--Вг(Расстояние от точки основания шеи сбоку до сосковой точки (высота груди))-->
+            <crotch_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <rise_height value="316" size_increase="4" height_increase ="7"/><!--Дпс(Расстояние от линии талии до подъягодичной складки)-->
+            <shoulder_drop value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <shoulder_slope_degrees value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_shoulder_slope_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_shoulder_slope_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_shoulder_to_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_shoulder_to_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_neck_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_neck_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_upper_chest_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_upper_chest_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_waist_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_waist_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_upper_hip_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_upper_hip_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_hip_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_hip_arc value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <chest_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_waist_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <back_waist_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_neck_to_upper_chest_height value="0.0" size_increase="0" height_increase=""/><!--Нету перевода-->
+            <front_neck_to_bust_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </torso>
         <arm>
-            <armscye_girth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <elbow_girth value="0.0" size_increace="0" height_increase="0"/><!--Олк(Обхват локтя)-->
-            <upper_arm_girth value="316" size_increace="12" height_increase ="0"/><!--Оп(Обхват плеча)-->
-            <wrist_girth value="180" size_increace="4" height_increase ="0"/><!--Озап(Обхват запястья)-->
-            <scye_depth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <shoulder_and_arm_length value="768" size_increace="2" height_increase ="24"/><!--Дзап(Расстояние от точки основания шеи сбоку до линии обхвата запястья)-->
-            <underarm_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <cervicale_to_wrist_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <shoulder_to_elbow_length value="338" size_increace="2" height_increase ="12"/><!--Дрлок(Длина руки до локтя)-->
-            <arm_length value="594" size_increace="3" height_increase ="19"/><!--Дрзап(Длина рукава до линии обхвата запястья)-->
+            <armscye_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <elbow_girth value="0.0" size_increase="0" height_increase="0"/><!--Олк(Обхват локтя)-->
+            <upper_arm_girth value="316" size_increase="12" height_increase ="0"/><!--Оп(Обхват плеча)-->
+            <wrist_girth value="180" size_increase="4" height_increase ="0"/><!--Озап(Обхват запястья)-->
+            <scye_depth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <shoulder_and_arm_length value="768" size_increase="2" height_increase ="24"/><!--Дзап(Расстояние от точки основания шеи сбоку до линии обхвата запястья)-->
+            <underarm_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <cervicale_to_wrist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <shoulder_to_elbow_length value="338" size_increase="2" height_increase ="12"/><!--Дрлок(Длина руки до локтя)-->
+            <arm_length value="594" size_increase="3" height_increase ="19"/><!--Дрзап(Длина рукава до линии обхвата запястья)-->
         </arm>
         <hand>
-            <hand_width value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <hand_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <hand_girth value="263" size_increace="3" height_increase ="3"/><!--Окис(Обхват кисти)-->
+            <hand_width value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <hand_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <hand_girth value="263" size_increase="3" height_increase ="3"/><!--Окис(Обхват кисти)-->
         </hand>
         <leg>
-            <thigh_girth value="566" size_increace="18" height_increase ="6"/><!--Обед(Обхват бедра)-->
-            <mid_thigh_girth value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <knee_girth value="386" size_increace="8" height_increase ="8"/><!--Ок(Обхват колена)-->
-            <calf_girth value="380" size_increace="8" height_increase ="6"/><!--Ои(Обхват икры)-->
-            <ankle_girth value="234" size_increace="4" height_increase ="4"/><!--Ощ(Обхват щиколотки)-->
-            <knee_height value="503" size_increace="0" height_increase ="22"/><!--Вк(Высота коленной точки)-->
-            <ankle_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
+            <thigh_girth value="566" size_increase="18" height_increase ="6"/><!--Обед(Обхват бедра)-->
+            <mid_thigh_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <knee_girth value="386" size_increase="8" height_increase ="8"/><!--Ок(Обхват колена)-->
+            <calf_girth value="380" size_increase="8" height_increase ="6"/><!--Ои(Обхват икры)-->
+            <ankle_girth value="234" size_increase="4" height_increase ="4"/><!--Ощ(Обхват щиколотки)-->
+            <knee_height value="503" size_increase="0" height_increase ="22"/><!--Вк(Высота коленной точки)-->
+            <ankle_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </leg>
         <foot>
-            <foot_width value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <foot_length value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
+            <foot_width value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <foot_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </foot>
         <heights>
-            <cervicale_height value="1522" size_increace="2" height_increase ="54"/><!--Вшт(Высота точки основания шеи сзади)-->
-            <cervicale_to_knee_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <waist_height value="1102" size_increace="0" height_increase ="43"/><!--Влт(Высота линии талии)-->
-            <high_hip_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <hip_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <waist_to_hip_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <waist_to_knee_height value="0.0" size_increace="0" height_increase="0"/><!--Нету перевода-->
-            <crotch_height value="826" size_increace="-3" height_increase ="37"/><!--Дн(Длина ноги по внутренней поверхности)-->
+            <cervicale_height value="1522" size_increase="2" height_increase ="54"/><!--Вшт(Высота точки основания шеи сзади)-->
+            <cervicale_to_knee_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <waist_height value="1102" size_increase="0" height_increase ="43"/><!--Влт(Высота линии талии)-->
+            <high_hip_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <hip_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <waist_to_hip_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <waist_to_knee_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <crotch_height value="826" size_increase="-3" height_increase ="37"/><!--Дн(Длина ноги по внутренней поверхности)-->
         </heights>
         <extended>
-			<height_front_neck_base_point value="1450" size_increace="2" height_increase ="51"/><!--Втос(Высота точки основания шеи спереди)-->
-			<height_base_neck_side_point value="1506" size_increace="2" height_increase ="54"/><!--Втош(Высота точки основания шеи сбоку)-->
-			<height_shoulder_point value="1438" size_increace="3" height_increase ="52"/><!--Впт(Высота плечевой точки)-->
-			<height_nipple_point value="1257" size_increace="-1" height_increase ="49"/><!--Вст(Высота сосковой точки)-->
-			<height_back_angle_axilla value="1328" size_increace="0" height_increase ="49"/><!--Взу(Высота заднего угла подмышечной впадины)-->
-			<height_scapular_point value="1320" size_increace="0" height_increase ="49"/><!--Влоп(Высота лопаточной точки)-->
-			<height_under_buttock_folds value="811" size_increace="-1" height_increase ="36"/><!--Впс(Высота подъягодичной складки)-->
-			<hips_excluding_protruding_abdomen value="964" size_increace="24" height_increase ="12"/><!--ОбI(Обхват бедер без учета выступания живота)-->
-			<girth_foot_instep value="350" size_increace="2" height_increase ="8"/><!--Ос(Обхват подъема стопы)-->
-			<side_waist_to_floor value="1120" size_increace="0" height_increase ="44"/><!--Дсб(Расстояние от линии талии до пола сбоку)-->
-			<front_waist_to_floor value="1110" size_increace="0" height_increase ="43"/><!--Дсп(Расстояние от линии талии до пола спереди)-->
-			<arc_through_groin_area value="783" size_increace="14" height_increase ="15"/><!--Дпоб(Дуга через паховую область)-->
-			<waist_to_plane_seat value="260" size_increace="1" height_increase ="6"/><!--Дс(Расстояние от линии талии до плоскости сидения)-->
-			<neck_to_radial_point value="500" size_increace="2" height_increase ="15"/><!--Длуч(Расстояние от точки основания шеи сбоку до лучевой точки)-->
-			<neck_to_third_finger value="970" size_increace="2" height_increase ="29"/><!--ДIIIп(Расстояние от точки основания шеи сбоку до конца третьего пальца)-->
-			<neck_to_first_line_chest_circumference value="214" size_increace="3" height_increase ="3"/><!--Впрп(Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди)-->
-			<front_waist_length value="460" size_increace="7" height_increase ="9"/><!--Дтп(Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди))-->
-			<arc_through_shoulder_joint value="355" size_increace="5" height_increase ="5"/><!--Дп(Дуга через высшую точку плечевого сустава)-->
-			<neck_to_back_line_chest_circumference value="208" size_increace="3" height_increase ="5"/><!--Впрз(Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток)-->
-			<waist_to_neck_side value="469" size_increace="2" height_increase ="10"/><!--ДтсI(Расстояние от линии талии сзади до точки основания шеи сбоку)-->
-			<arc_length_upper_body  value="929" size_increace="9" height_increase ="19"/><!--Двчт(Длина дуги верхней части туловища через точку основания шеи сбоку)-->
-			<chest_width value="370" size_increace="14" height_increase ="4"/><!--Шг(Ширина груди)-->
-			<anteroposterior_diameter_hands value="121" size_increace="6" height_increase ="0"/><!--dпзр(Передне-задний диаметр руки)-->
-			<height_clavicular_point value="1454" size_increace="2" height_increase ="52"/><!--Вкт(Высота ключичной точки)-->
-			<height_armhole_slash value="324" size_increace="7" height_increase ="2"/><!--Впрк(Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая))-->
-			<slash_shoulder_height value="495" size_increace="5" height_increase ="7"/><!--Впк(Высота плеча косая)-->
-			<half_girth_neck value="202" size_increace="4" height_increase ="2"/><!--Сш(Полуобхват шеи)-->
-			<half_girth_neck_for_shirts value="205" size_increace="5" height_increase ="0"/><!--Сш1(Полуобхват шеи для сорочек)-->
-			<half_girth_chest_first value="517" size_increace="18" height_increase ="2"/><!--СгI(Полуобхват груди первый)-->
-			<half_girth_chest_second value="522" size_increace="19" height_increase ="1"/><!--СгII(Полуобхват груди второй)-->
-			<half_girth_chest_third value="500" size_increace="20" height_increase ="0"/><!--СгIII(Полуобхват груди третий)-->
-			<half_girth_waist value="390" size_increace="20" height_increase ="0"/><!--Ст(Полуобхват талии)-->
-			<half_girth_hips_considering_protruding_abdomen value="492" size_increace="15" height_increase ="5"/><!--Сб(Полуобхват бедер с учетом выступания живота)-->
-			<half_girth_hips_excluding_protruding_abdomen value="482" size_increace="12" height_increase ="6"/><!--СбI(Полуобхват бедер без учета выступания живота)-->
-			<girth_knee_flexed_feet value="399" size_increace="9" height_increase ="8"/><!--Окс(Обхват колена в согнутом положении ноги)-->
-			<neck_transverse_diameter value="130" size_increace="2" height_increase ="2"/><!--dш(Поперечный диаметр шеи)-->
-			<front_slash_shoulder_height value="453" size_increace="7" height_increase ="8"/><!--Впкп(Высота плеча косая спереди)-->
-			<neck_to_front_waist_line value="449" size_increace="6" height_increase ="8"/><!--Дтн1(Расстояние от точки основания шеи до линии талии спереди)-->
-			<hand_vertical_diameter value="128" size_increace="2" height_increase ="2"/><!--dвр(Вертикальный диаметр руки)-->
-			<neck_to_knee_point value="1019" size_increace="0" height_increase ="34"/><!--Дшк(Расстояние от шейной точки до колена)-->
-			<waist_to_knee value="603" size_increace="-2" height_increase ="24"/><!--Дтк(Расстояние от линии талии до колена)-->
-			<shoulder_height value="67" size_increace="0" height_increase ="2"/><!--Вп(Высота плеча)-->
-			<head_height value="246" size_increace="-2" height_increase ="6"/><!--Вгол(Высота головы)-->
-			<body_position value="84" size_increace="0" height_increase ="3"/><!--Пкор(Положение корпуса)-->
-			<arc_behind_shoulder_girdle value="535" size_increace="7" height_increase ="7"/><!--Дпз(Дуга плечевого пояса сзади)-->
-			<neck_to_neck_base value="109" size_increace="1" height_increase ="0"/><!--Дшош(Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи)-->
-			<depth_waist_first value="64" size_increace="-1" height_increase ="0"/><!--Гт1(Глубина талии первая)-->
-			<depth_waist_second value="37" size_increace="0" height_increase ="0"/><!--ГтII(Глубина талии вторая)-->
+			<height_front_neck_base_point value="1450" size_increase="2" height_increase ="51"/><!--Втос(Высота точки основания шеи спереди)-->
+			<height_base_neck_side_point value="1506" size_increase="2" height_increase ="54"/><!--Втош(Высота точки основания шеи сбоку)-->
+			<height_shoulder_point value="1438" size_increase="3" height_increase ="52"/><!--Впт(Высота плечевой точки)-->
+			<height_nipple_point value="1257" size_increase="-1" height_increase ="49"/><!--Вст(Высота сосковой точки)-->
+			<height_back_angle_axilla value="1328" size_increase="0" height_increase ="49"/><!--Взу(Высота заднего угла подмышечной впадины)-->
+			<height_scapular_point value="1320" size_increase="0" height_increase ="49"/><!--Влоп(Высота лопаточной точки)-->
+			<height_under_buttock_folds value="811" size_increase="-1" height_increase ="36"/><!--Впс(Высота подъягодичной складки)-->
+			<hips_excluding_protruding_abdomen value="964" size_increase="24" height_increase ="12"/><!--ОбI(Обхват бедер без учета выступания живота)-->
+			<girth_foot_instep value="350" size_increase="2" height_increase ="8"/><!--Ос(Обхват подъема стопы)-->
+			<side_waist_to_floor value="1120" size_increase="0" height_increase ="44"/><!--Дсб(Расстояние от линии талии до пола сбоку)-->
+			<front_waist_to_floor value="1110" size_increase="0" height_increase ="43"/><!--Дсп(Расстояние от линии талии до пола спереди)-->
+			<arc_through_groin_area value="783" size_increase="14" height_increase ="15"/><!--Дпоб(Дуга через паховую область)-->
+			<waist_to_plane_seat value="260" size_increase="1" height_increase ="6"/><!--Дс(Расстояние от линии талии до плоскости сидения)-->
+			<neck_to_radial_point value="500" size_increase="2" height_increase ="15"/><!--Длуч(Расстояние от точки основания шеи сбоку до лучевой точки)-->
+			<neck_to_third_finger value="970" size_increase="2" height_increase ="29"/><!--ДIIIп(Расстояние от точки основания шеи сбоку до конца третьего пальца)-->
+			<neck_to_first_line_chest_circumference value="214" size_increase="3" height_increase ="3"/><!--Впрп(Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди)-->
+			<front_waist_length value="460" size_increase="7" height_increase ="9"/><!--Дтп(Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди))-->
+			<arc_through_shoulder_joint value="355" size_increase="5" height_increase ="5"/><!--Дп(Дуга через высшую точку плечевого сустава)-->
+			<neck_to_back_line_chest_circumference value="208" size_increase="3" height_increase ="5"/><!--Впрз(Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток)-->
+			<waist_to_neck_side value="469" size_increase="2" height_increase ="10"/><!--ДтсI(Расстояние от линии талии сзади до точки основания шеи сбоку)-->
+			<arc_length_upper_body  value="929" size_increase="9" height_increase ="19"/><!--Двчт(Длина дуги верхней части туловища через точку основания шеи сбоку)-->
+			<chest_width value="370" size_increase="14" height_increase ="4"/><!--Шг(Ширина груди)-->
+			<anteroposterior_diameter_hands value="121" size_increase="6" height_increase ="0"/><!--dпзр(Передне-задний диаметр руки)-->
+			<height_clavicular_point value="1454" size_increase="2" height_increase ="52"/><!--Вкт(Высота ключичной точки)-->
+			<height_armhole_slash value="324" size_increase="7" height_increase ="2"/><!--Впрк(Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая))-->
+			<slash_shoulder_height value="495" size_increase="5" height_increase ="7"/><!--Впк(Высота плеча косая)-->
+			<half_girth_neck value="202" size_increase="4" height_increase ="2"/><!--Сш(Полуобхват шеи)-->
+			<half_girth_neck_for_shirts value="205" size_increase="5" height_increase ="0"/><!--Сш1(Полуобхват шеи для сорочек)-->
+			<half_girth_chest_first value="517" size_increase="18" height_increase ="2"/><!--СгI(Полуобхват груди первый)-->
+			<half_girth_chest_second value="522" size_increase="19" height_increase ="1"/><!--СгII(Полуобхват груди второй)-->
+			<half_girth_chest_third value="500" size_increase="20" height_increase ="0"/><!--СгIII(Полуобхват груди третий)-->
+			<half_girth_waist value="390" size_increase="20" height_increase ="0"/><!--Ст(Полуобхват талии)-->
+			<half_girth_hips_considering_protruding_abdomen value="492" size_increase="15" height_increase ="5"/><!--Сб(Полуобхват бедер с учетом выступания живота)-->
+			<half_girth_hips_excluding_protruding_abdomen value="482" size_increase="12" height_increase ="6"/><!--СбI(Полуобхват бедер без учета выступания живота)-->
+			<girth_knee_flexed_feet value="399" size_increase="9" height_increase ="8"/><!--Окс(Обхват колена в согнутом положении ноги)-->
+			<neck_transverse_diameter value="130" size_increase="2" height_increase ="2"/><!--dш(Поперечный диаметр шеи)-->
+			<front_slash_shoulder_height value="453" size_increase="7" height_increase ="8"/><!--Впкп(Высота плеча косая спереди)-->
+			<neck_to_front_waist_line value="449" size_increase="6" height_increase ="8"/><!--Дтн1(Расстояние от точки основания шеи до линии талии спереди)-->
+			<hand_vertical_diameter value="128" size_increase="2" height_increase ="2"/><!--dвр(Вертикальный диаметр руки)-->
+			<neck_to_knee_point value="1019" size_increase="0" height_increase ="34"/><!--Дшк(Расстояние от шейной точки до колена)-->
+			<waist_to_knee value="603" size_increase="-2" height_increase ="24"/><!--Дтк(Расстояние от линии талии до колена)-->
+			<shoulder_height value="67" size_increase="0" height_increase ="2"/><!--Вп(Высота плеча)-->
+			<head_height value="246" size_increase="-2" height_increase ="6"/><!--Вгол(Высота головы)-->
+			<body_position value="84" size_increase="0" height_increase ="3"/><!--Пкор(Положение корпуса)-->
+			<arc_behind_shoulder_girdle value="535" size_increase="7" height_increase ="7"/><!--Дпз(Дуга плечевого пояса сзади)-->
+			<neck_to_neck_base value="109" size_increase="1" height_increase ="0"/><!--Дшош(Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи)-->
+			<depth_waist_first value="64" size_increase="-1" height_increase ="0"/><!--Гт1(Глубина талии первая)-->
+			<depth_waist_second value="37" size_increase="0" height_increase ="0"/><!--ГтII(Глубина талии вторая)-->
 		</extended>
     </body-measurements>
 </vst>
