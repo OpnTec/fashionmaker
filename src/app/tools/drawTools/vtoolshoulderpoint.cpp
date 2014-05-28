@@ -65,6 +65,7 @@ void VToolShoulderPoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+//TODO find better way calculate point.
 QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                                       const qreal &length)
 {
