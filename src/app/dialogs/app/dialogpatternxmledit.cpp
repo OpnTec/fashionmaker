@@ -45,22 +45,20 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 {
     ui->setupUi(this);
 
-    xmlmodel = new VXMLTreeView();
-
-    doc=xmldoc;
-    root = doc->documentElement();
-    // disable edit trigers :
-    //ui->treeView_main->editTriggers(QTreeView::NoEditTriggers);
+    this->xmlmodel = new VXMLTreeView();
+    this->doc=xmldoc;
+    this->root = this->doc->documentElement();
+    // disable edit trigers (no edition directly on tree)
     ui->treeView_main->setEditTriggers(QTreeView::NoEditTriggers);
 
     ui->treeView_main->setWindowTitle("XML");
 
-    rootNode = xmlmodel->invisibleRootItem();
+    this->rootNode = this->xmlmodel->invisibleRootItem();
 
     int drawnum=xmldoc->elementsByTagName("draw").size();
-    rootBases = new VXMLTreeElement*[drawnum+1];
-    rootBasesNum=1;
-    rootBases[0]=new VXMLTreeElement("Valentina", VXMLTreeElement::TypeRoot, root, false);
+    this->rootBases = new VXMLTreeElement*[drawnum+1];
+    this->rootBasesNum=1;
+    this->rootBases[0]=new VXMLTreeElement("Valentina", VXMLTreeElement::TypeRoot, root, false);
     // TODO : OOM exception.
 
 
@@ -68,9 +66,9 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
     ui->comboBox_Base_Selection->addItem(tr("All pattern pieces"), QVariant(0));
 
     //rootBases[0]=(QDomNode) doc->DocumentNode;
-    rootNode->appendRow(standard_base);
+    this->rootNode->appendRow(standard_base);
 
-    ReadNodes(root, standard_base, xmlmodel, false);
+    this->ReadNodes(this->root, standard_base, this->xmlmodel, false);
 
     ui->treeView_main->setModel(xmlmodel);
 
@@ -93,6 +91,64 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
             this, &DialogPatternXmlEdit::ButtonApplyChangesClicked);
     connect(ui->pushButton_Undo_Last_Change, &QPushButton::clicked, this, &DialogPatternXmlEdit::ButtonUndoLastChange);
     connect(ui->pushButton_Remove_Node, &QPushButton::clicked, this, &DialogPatternXmlEdit::ButtonDeleteNode);
+}
+
+bool DialogPatternXmlEdit::CheckChanges(QString &message, QDomNode testRoot)
+{
+    message="OK";
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogPatternXmlEdit::ApplyAttributeChange(QDomNode domElement, QString name, QString value)
+{
+    if (domElement.isElement() == false)
+    {
+        return false;
+    }
+    domElement.toElement().setAttribute(name,value);
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogPatternXmlEdit::ApplyNodeChange(QDomNode domElement, QString name, QString value)
+{
+    if (domElement.isElement() == false)
+    {
+        return false;
+    }
+    domElement.toElement().setNodeValue(value);
+    domElement.toElement().setTagName(name);
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogPatternXmlEdit::ApplyNodeAdd(QDomNode domElement, VXMLTreeElement* treeElement, QString name, QString value)
+{
+    QDomElement newnode = domElement.ownerDocument().createElement(name);
+    //Q_ASSERT(newnode != nullptr);
+    newnode.setNodeValue(value);
+    domElement.appendChild(newnode);
+    treeElement->SetDocNode(newnode);
+    return true;
+}
+
+bool DialogPatternXmlEdit::ApplyAttributeDelete(QDomNode domElement, QString name)
+{
+    if (domElement.isElement() == false)
+    {
+        return false;
+    }
+    domElement.toElement().removeAttribute(name);
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogPatternXmlEdit::ApplyNodeDelete(QDomNode domElement)
+{
+    QDomNode mother=domElement.parentNode();
+    mother.removeChild(domElement);
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,6 +487,83 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
     }
     QMessageBox::information(this, "Changes (not REALLY applied for now)", Changes);
     // TODO : clear stack and apply
+
+    currentChange=this->changeStackRoot;
+    // copy DOM
+    QDomNode newroot = root.cloneNode(true);
+
+    QString name, value;
+    while (currentChange != nullptr)
+    {
+        if (currentChange->type == DialogPatternXmlEdit::ChangeTypeModify)
+        {
+            name=(currentChange->changedText == false) ? currentChange->element->GettreeNodeName()
+                                                       : *currentChange->newText;
+            value=(currentChange->changedValue == false) ? currentChange->element->GettreeNodeValue()
+                                                         : *currentChange->newValue;
+            if (currentChange->element->GetelementType() == VXMLTreeElement::TypeAttr)
+            {
+
+                this->ApplyAttributeChange(currentChange->element->GetDocNode(), name, value);
+            }
+            else if (currentChange->element->GetelementType() == VXMLTreeElement::TypeNode)
+            {
+                this->ApplyNodeChange(currentChange->element->GetDocNode(), name, value);
+            }
+            else
+            {
+                QMessageBox::warning(this, "Error in changes", "Invalid node type");
+                return;
+            }
+        }
+        else if (currentChange->type == DialogPatternXmlEdit::ChangeTypeAdd)
+        {
+            name=(currentChange->changedText == false) ? currentChange->element->GettreeNodeName()
+                                                       : *currentChange->newText;
+            value=(currentChange->changedValue == false) ? currentChange->element->GettreeNodeValue()
+                                                         : *currentChange->newValue;
+            if (currentChange->element->GetelementType() == VXMLTreeElement::TypeAttr)
+            {
+                this->ApplyAttributeChange(currentChange->element->GetFatherElement()->GetDocNode(), name, value);
+            }
+            else if (currentChange->element->GetelementType() == VXMLTreeElement::TypeNode)
+            {
+                this->ApplyNodeAdd(currentChange->element->GetFatherElement()->GetDocNode(), currentChange->element,
+                                   name, value);
+            }
+            else
+            {
+                QMessageBox::warning(this, "Error in changes", "Invalid node type");
+                return;
+            }
+        }
+        else if (currentChange->type == DialogPatternXmlEdit::ChangeTypeDelete)
+        {
+            if (currentChange->element->GetelementType() == VXMLTreeElement::TypeAttr)
+            {
+                name=(currentChange->changedText == false) ? currentChange->element->GettreeNodeName()
+                                                           : *currentChange->newText;
+                this->ApplyAttributeDelete(currentChange->element->GetDocNode(), name);
+            }
+            else if (currentChange->element->GetelementType() == VXMLTreeElement::TypeNode)
+            {
+                this->ApplyNodeDelete(currentChange->element->GetDocNode().parentNode());
+            }
+            else
+            {
+                QMessageBox::warning(this, "Error in changes", "Invalid node type");
+                return;
+            }
+        }
+        currentChange=currentChange->next;
+    }
+    QString message;
+    if (this->CheckChanges(message,newroot) == false)
+    {
+        QMessageBox::warning(this, "Error in changes", message);
+        return;
+    }
+    this->doc->FullUpdateTree();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -586,17 +719,17 @@ void DialogPatternXmlEdit::ButtonAddSonClicked()
     {
         return;
     }
-    QString value = QInputDialog::getText(this, tr("Node Value (may be empty)"),
-                                                tr("Value:"), QLineEdit::Normal,
-                                                "", &ok);
+    QString value = QInputDialog::getText(this, tr("Node Value (may be empty)"),tr("Value:"),
+                                          QLineEdit::Normal,"", &ok);
     if (ok==false)
     {
         return;
     }
 
-    // create element tree but do not add attribute in DOM (will be done in apply).
+    // create element tree and put father tree element to catch up with DOM tree.
     QDomNode empty;
     VXMLTreeElement* tElement = new VXMLTreeElement(name, VXMLTreeElement::TypeNode, empty, true);
+    tElement->SetFatherElement(this->currentNodeEdited);
 
     if (value.isEmpty() == false)
     {
@@ -656,6 +789,8 @@ void DialogPatternXmlEdit::ButtonAddAttributeClicked()
 
     // create element tree but do not add attribute in DOM (will be done in apply).
     VXMLTreeElement* tElement = new VXMLTreeElement(name, VXMLTreeElement::TypeAttr, empty, true);
+    // set parent node.
+    tElement->SetFatherElement(this->currentNodeEdited);
 
     tElement->SetTreeNodeValue(value);
     currentNodeEdited->appendRow(tElement);
@@ -1063,7 +1198,7 @@ const short int VXMLTreeElement::TypeRoot=3;
 //                                         ^
 VXMLTreeElement::VXMLTreeElement(QString name, int nodetype, QDomNode source, bool editor)
     : QStandardItem(name), DocNode(source), addedNode(editor), elementType(nodetype), treeNodeValue("<empty>"),
-      treeNodeValueSet(false), treeNodeName(name), selectable(true)
+      treeNodeValueSet(false), treeNodeName(name), selectable(true), parentnode(nullptr)
 {
     if (editor == false)
     {

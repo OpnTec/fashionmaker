@@ -74,8 +74,23 @@ public:
      * @return current document node
      */
     QDomNode GetDocNode();
+    /**
+     * @brief SetDocNode set tree element DomNode
+     * @param node
+     */
+    inline void SetDocNode(QDomNode node)
+    {
+        this->DocNode=node;
+    }
+    inline void SetAddedNode(bool state) {this->addedNode=state;}
+    inline bool GetAddedNode() {return this->addedNode;}
+
     QString GettreeNodeName();
     QString GettreeNodeValue();
+    /**
+     * @brief GettreeNodeValueSet check if value has been set
+     * @return true if value is set
+     */
     bool GettreeNodeValueSet();
     void SetTreeNodeName(QString value);
     /**
@@ -86,11 +101,25 @@ public:
     bool IsSelectable();
     void SetSetlectable(bool value);
 
+    inline void SetFatherElement(VXMLTreeElement* parent)
+    {
+        this->parentnode=parent;
+    }
+    inline VXMLTreeElement* GetFatherElement()
+    {
+        return this->parentnode;
+    }
+
 private:
     /**
      * @brief DocNode : link to current document node
      */
     QDomNode DocNode;
+
+    /**
+     * @brief parentnode parent node of this element. If null then the DocNode must be valid
+     */
+    VXMLTreeElement* parentnode;
 
     /**
      * @brief addedNode : true if node is added by editor (implies empty DocNode)
@@ -280,6 +309,51 @@ public:
      */
     bool DeleteNodeAndSons(VXMLTreeElement *currentNode, bool onlydeactivate);
 
+    /**
+     * @brief ApplyAttributeChange change or add attribute for node
+     * @param domElement : node containing attribute
+     * @param name
+     * @param value
+     * @return true on success
+     */
+    bool ApplyAttributeChange(QDomNode domElement, QString name, QString value);
+    /**
+     * @brief ApplyNodeChange Change name or text content of node
+     * @param domElement node
+     * @param name
+     * @param value text content of node
+     * @return true on success
+     */
+    bool ApplyNodeChange(QDomNode domElement, QString name, QString value);
+    /**
+     * @brief ApplyNodeAdd add node as child of domElement and set DocNode of treeElement
+     * @param domElement
+     * @param treeElement the XMLTreeElement of added node
+     * @param name
+     * @param value
+     * @return true on success
+     */
+    bool ApplyNodeAdd(QDomNode domElement, VXMLTreeElement* treeElement, QString name, QString value);
+    /**
+     * @brief ApplyAttributeDelete delete attribute for node
+     * @param domElement
+     * @param name attribute name
+     * @return true on success
+     */
+    bool ApplyAttributeDelete(QDomNode domElement, QString name);
+    /**
+     * @brief ApplyNodeDelete delete node domElement
+     * @param domElement
+     * @return true on success
+     */
+    bool ApplyNodeDelete(QDomNode domElement);
+    /**
+     * @brief CheckChanges Check if changes made are OK
+     * @param message error message returned if false
+     * @param testRoot root of DOM to test
+     * @return true if validated, false otherwise
+     */
+    bool CheckChanges(QString &message, QDomNode testRoot);
 private slots:
     void BaseSelectionChanged(int value);
     void ElementClicked ( const QModelIndex & index );
