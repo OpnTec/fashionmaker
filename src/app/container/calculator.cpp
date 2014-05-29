@@ -28,6 +28,7 @@
 
 #include "calculator.h"
 #include <QDebug>
+#include <QSettings>
 #include "../widgets/vapplication.h"
 
 int Calculator::iVal = -1;
@@ -68,10 +69,22 @@ Calculator::Calculator(const QString &formula, bool fromUser)
         DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
         DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
 
-        QLocale loc = QLocale::system();
-        SetDecSep(loc.decimalPoint().toLatin1());
-        SetThousandsSep(loc.groupSeparator().toLatin1());
-        SetArgSep(';');
+        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                           QApplication::applicationName());
+        bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
+        if (osSeparatorValue)
+        {
+            QLocale loc = QLocale::system();
+            SetDecSep(loc.decimalPoint().toLatin1());
+            SetThousandsSep(loc.groupSeparator().toLatin1());
+            SetArgSep(';');
+        }
+        else
+        {
+            SetArgSep(',');
+            SetDecSep('.');
+        }
     }
     else
     {

@@ -36,6 +36,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QDir>
+#include <QSettings>
 
 #include <container/calculator.h>
 
@@ -1789,8 +1790,12 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
     QLocale loc = QLocale::system();
-    if(loc != QLocale(QLocale::C))
+    if(loc != QLocale(QLocale::C) && osSeparatorValue)
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
@@ -1903,8 +1908,12 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
     QLocale loc = QLocale::system();
-    if(loc != QLocale::C)
+    if(loc != QLocale::C && osSeparatorValue)
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
