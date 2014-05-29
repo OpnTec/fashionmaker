@@ -58,9 +58,10 @@ CONFIG(debug, debug|release){
 QMAKE_DISTCLEAN += $${DESTDIR}/* \
                    $${OBJECTS_DIR}/*
 
-win32:CONFIG(release, debug|release): LIBS += -L../../libs/qmuparser/bin -lqmuparser2
-else:win32:CONFIG(debug, debug|release): LIBS += -L../../libs/qmuparser/bin -lqmuparser2
-else:unix: LIBS += -L../../libs/qmuparser/bin -lqmuparser
 
-INCLUDEPATH += ../../libs/qmuparser
-DEPENDPATH += ../../libs/qmuparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser2
+else:unix: LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser
+
+INCLUDEPATH += $$PWD/../../libs/qmuparser
+DEPENDPATH += $$PWD/../../libs/qmuparser

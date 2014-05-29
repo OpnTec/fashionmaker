@@ -1249,12 +1249,23 @@ void MainWindow::Open()
             dir = QFileInfo(files.first()).absolutePath();
         }
         QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
-        if (fileName.isEmpty() == false)
+        if (fileName.isEmpty() == false && fileName != curFile)
         {
-            LoadPattern(fileName);
+            if (curFile.isEmpty())
+            {
+                LoadPattern(fileName);
 
-            VAbstractTool::NewSceneRect(sceneDraw, view);
-            VAbstractTool::NewSceneRect(sceneDetails, view);
+                VAbstractTool::NewSceneRect(sceneDraw, view);
+                VAbstractTool::NewSceneRect(sceneDetails, view);
+            }
+            else
+            {
+                QProcess *v = new QProcess(this);
+                QStringList arguments;
+                arguments << fileName;
+                v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+                delete v;
+            }
         }
     }
 }
@@ -1303,9 +1314,12 @@ void MainWindow::Clear()
  */
 void MainWindow::NewPattern()
 {
-    QProcess *v = new QProcess(this);
-    v->startDetached(QCoreApplication::applicationFilePath ());
-    delete v;
+    if (doc->isPatternModified() || curFile.isEmpty() == false)
+    {
+        QProcess *v = new QProcess(this);
+        v->startDetached(QCoreApplication::applicationFilePath ());
+        delete v;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

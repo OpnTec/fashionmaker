@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.1.0");
+    QT_REQUIRE_VERSION(argc, argv, "5.2.1");
 
     VApplication app(argc, argv);
 #ifdef QT_DEBUG
@@ -175,36 +175,18 @@ int main(int argc, char *argv[])
     QObject::connect(&w, &MainWindow::ModelChosen, &table, &TableWindow::ModelChosen);
     QObject::connect(&table, &TableWindow::closed, &w, &MainWindow::tableClosed);
 
-    const QStringList args = app.arguments();
-    QString fileName;
-    QRegExp rxArgOpenFile("-o");//parameter open file
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
+    parser.process(app);
+    const QStringList args = parser.positionalArguments();
+    if (args.size() > 0)
+    {
+        w.LoadPattern(args.at(0));
 
-    if (args.size()>1)
-    {
-        for (int i = 1; i < args.size(); ++i)
-        {
-            if (rxArgOpenFile.indexIn(args.at(i)) != -1 )
-            {
-                if (args.at(i+1).isEmpty() == false)
-                {
-                    fileName =  args.at(i+1);
-                    qDebug() << args.at(i)<< ":" << fileName;
-                    w.LoadPattern(fileName);
-                }
-                w.show();
-                break;
-            }
-            else
-            {
-                qDebug() << "Uknown arg:" << args.at(i);
-                w.show();
-                break;
-            }
-        }
     }
-    else
-    {
-        w.show();
-    }
+    w.show();
     return app.exec();
 }

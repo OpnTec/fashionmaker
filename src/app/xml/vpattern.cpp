@@ -39,7 +39,7 @@
 #include "vindividualmeasurements.h"
 
 #include <QMessageBox>
-#include <qmuparsererror.h>
+#include "../../libs/qmuparser/qmuparsererror.h"
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
