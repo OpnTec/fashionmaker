@@ -333,8 +333,9 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
         try
         {
             const QString formula = qApp->FormulaFromUser(edit->text());
-            Calculator cal(data);
-            const qreal result = cal.EvalFormula(formula);
+            Calculator *cal = new Calculator(data);
+            const qreal result = cal->EvalFormula(formula);
+            delete cal;
 
             QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                                QApplication::applicationName());

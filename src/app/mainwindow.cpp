@@ -1905,7 +1905,14 @@ void MainWindow::LoadPattern(const QString &fileName)
     }
     SetEnableWidgets(true);
 
+    bool patternModified = doc->isPatternModified();
     setCurrentFile(fileName);
+    if (patternModified)
+    {
+        //For situation where was fixed wrong formula need return for document status was modified.
+        doc->setPatternModified(patternModified);
+        PatternWasModified();
+    }
     helpLabel->setText(tr("File loaded"));
 }
 

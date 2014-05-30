@@ -245,9 +245,9 @@ QmuParser::QmuParser():QmuParserBase()
  */
 void QmuParser::InitCharSets()
 {
-    DefineNameChars( "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" );
-    DefineOprtChars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}" );
-    DefineInfixOprtChars( "/+-*^?<>=#!$%&|~'_" );
+    DefineNameChars( QStringLiteral("0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") );
+    DefineOprtChars( QStringLiteral("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-*^/?<>=#!$%&|~'_{}") );
+    DefineInfixOprtChars( QStringLiteral("/+-*^?<>=#!$%&|~'_") );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

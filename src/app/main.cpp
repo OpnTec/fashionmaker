@@ -74,9 +74,8 @@ void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, c
         switch (type)
         {
             case QtDebugMsg:
-                fprintf(stderr, "Debug: %s\n", localMsg.constData());
-//                fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-//                        context.function);
+                fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+                        context.function);
                 return;
             case QtWarningMsg:
                 messageBox.setIcon(QMessageBox::Warning);

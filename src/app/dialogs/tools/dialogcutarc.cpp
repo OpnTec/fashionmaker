@@ -30,6 +30,11 @@
 #include "ui_dialogcutarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogCutArc create dialog.
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0)
 {
@@ -62,6 +67,11 @@ DialogCutArc::~DialogCutArc()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Arc)
@@ -74,6 +84,9 @@ void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogCutArc::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -83,12 +96,21 @@ void DialogCutArc::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setArcId set id of arc
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
 {
     setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboMode::CutArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFormula set string with formula length
+ * @param value string with formula
+ */
 void DialogCutArc::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
@@ -96,8 +118,22 @@ void DialogCutArc::setFormula(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name point on arc
+ * @param value name
+ */
 void DialogCutArc::setPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string with formula length
+ * @return formula
+ */
+QString DialogCutArc::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
 }

@@ -656,7 +656,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
     {
-        const QDomElement domElement = nodeList.at(i).toElement();
+        QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
             QStringList tags;
@@ -779,7 +779,7 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                  const Document::Documents &parse, const QString &type)
 {
     Q_CHECK_PTR(scene);
@@ -842,11 +842,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
+
                 const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-                VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId,
+                VToolEndLine::Create(id, name, typeLine, f, angle, basePointId,
                                         mx, my, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VToolEndLine::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {

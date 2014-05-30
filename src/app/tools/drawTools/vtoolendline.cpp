@@ -30,6 +30,7 @@
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogendline.h"
+#include "../../dialogs/tools/dialogeditwrongformula.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
@@ -82,15 +83,39 @@ void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatter
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                          const QString &formula, const qreal &angle, const quint32 &basePointId,
+                          QString &formula, const qreal &angle, const quint32 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    qreal result = 0;
+
+    try
+    {
+        Calculator *cal = new Calculator(data);
+        result = cal->EvalFormula(formula);
+        delete cal;
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+        dialog->setFormula(formula);
+        if (dialog->exec() == QDialog::Accepted)
+        {
+            formula = dialog->getFormula();
+            delete dialog;
+            Calculator *cal = new Calculator(data);
+            result = cal->EvalFormula(formula);
+            delete cal;
+        }
+        else
+        {
+            delete dialog;
+            throw;
+        }
+    }
 
     line.setLength(qApp->toPixel(result));
     line.setAngle(angle);

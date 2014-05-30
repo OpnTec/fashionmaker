@@ -43,54 +43,17 @@ class DialogCutArc : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogCutArc create dialog.
-     * @param data container with data
-     * @param parent parent widget
-     */
+
     DialogCutArc(const VContainer *data, QWidget *parent = nullptr);
     ~DialogCutArc();
-    /**
-     * @brief getPointName return name point on arc
-     * @return name
-     */
-    QString           getPointName() const {return pointName;}
-    /**
-     * @brief setPointName set name point on arc
-     * @param value name
-     */
+    QString           getPointName() const;
     void              setPointName(const QString &value);
-    /**
-     * @brief getFormula return string with formula length
-     * @return formula
-     */
-    QString           getFormula() const {return qApp->FormulaFromUser(formula);}
-    /**
-     * @brief setFormula set string with formula length
-     * @param value string with formula
-     */
+    QString           getFormula() const;
     void              setFormula(const QString &value);
-    /**
-     * @brief getArcId return id of arc
-     * @return id
-     */
-    quint32            getArcId() const {return arcId;}
-    /**
-     * @brief setArcId set id of arc
-     * @param value id
-     * @param id don't show this id in list
-     */
+    quint32           getArcId() const;
     void              setArcId(const quint32 &value, const quint32 &id);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void      ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutArc)
@@ -111,5 +74,25 @@ private:
      */
     quint32            arcId;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name point on arc
+ * @return name
+ */
+inline QString DialogCutArc::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getArcId return id of arc
+ * @return id
+ */
+inline quint32 DialogCutArc::getArcId() const
+{
+    return arcId;
+}
 
 #endif // DIALOGCUTARC_H
