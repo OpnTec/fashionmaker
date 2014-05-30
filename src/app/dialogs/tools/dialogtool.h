@@ -475,6 +475,16 @@ protected:
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
     }
     template <typename T>
+    void             InitOkCancelApply(T *ui)
+    {
+        InitOkCancel(ui);
+        // TODO issue #79
+        bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        Q_CHECK_PTR(bApply);
+        connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
+    }
+    //Left this method for dialog what do not need apply button
+    template <typename T>
     void             InitOkCancel(T *ui)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
@@ -484,10 +494,6 @@ protected:
         QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
         Q_CHECK_PTR(bCancel);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
-        // TODO issue #79
-        bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-        Q_CHECK_PTR(bApply);
-        connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
     /**
      * @brief associatedTool vdrawtool associated with opened dialog.

@@ -43,7 +43,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
 
     flagFormula = false;
     flagName = false;
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     CheckState();
 
     FillComboBoxTypeLine(ui->comboBoxLineType);

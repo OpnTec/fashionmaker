@@ -190,9 +190,9 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
             //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
             //Don't know why.
             delete dialog;
-            Calculator *cal = new Calculator(data);
-            result = cal->EvalFormula(formula);
-            delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
+            Calculator *cal1 = new Calculator(data);
+            result = cal1->EvalFormula(formula);
+            delete cal1;//Here can be memory leak, but dialog already check this formula and probability very low.
         }
         else
         {

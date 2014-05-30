@@ -38,7 +38,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent
 {
     ui->setupUi(this);
     number = 0;
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
 

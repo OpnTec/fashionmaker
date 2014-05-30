@@ -46,7 +46,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     // TODO : auto extend height on first value length.
     this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagFormula = false;
     flagName = false;
     CheckState();

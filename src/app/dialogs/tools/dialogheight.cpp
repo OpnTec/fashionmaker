@@ -38,7 +38,7 @@ DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagName = false;
     CheckState();
 

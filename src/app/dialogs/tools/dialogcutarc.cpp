@@ -45,7 +45,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
 
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagFormula = false;
     flagName = false;
     CheckState();

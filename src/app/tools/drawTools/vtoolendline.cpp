@@ -80,8 +80,8 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     VToolEndLine *point = nullptr;
     point=Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
                  Valentina::FromGui);
-    if (point != nullptr) 
-	{
+    if (point != nullptr)
+    {
         point->dialog=dialogTool;
     }
     return point;
@@ -123,9 +123,9 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
         doc->AddTool(id, point);
         doc->IncrementReferens(basePointId);
-		return point;
+        return point;
     }
-	return nullptr;
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

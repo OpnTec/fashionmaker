@@ -435,11 +435,24 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
             QString formula = edit->toPlainText();
             formula.replace("\n"," ");
             formula = qApp->FormulaFromUser(formula);
-            Calculator cal(data);
-            const qreal result = cal.EvalFormula(formula);
+            Calculator *cal = new Calculator(data);
+            const qreal result = cal->EvalFormula(formula);
+            delete cal;
 
-            QLocale loc = QLocale::system();
-            label->setText(loc.toString(result));
+            QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                               QApplication::applicationName());
+            bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
+            if (osSeparatorValue)
+            {
+                QLocale loc = QLocale::system();
+                label->setText(loc.toString(result));
+            }
+            else
+            {
+                QLocale loc = QLocale(QLocale::C);
+                label->setText(loc.toString(result));
+            }
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
             emit ToolTip("");
