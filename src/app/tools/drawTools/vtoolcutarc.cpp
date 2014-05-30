@@ -67,9 +67,9 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
     dialogTool->setArcId(arcId, id);
@@ -80,9 +80,9 @@ void VToolCutArc::setDialog()
 void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 arcId = dialogTool->getArcId();
@@ -250,9 +250,9 @@ void VToolCutArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));

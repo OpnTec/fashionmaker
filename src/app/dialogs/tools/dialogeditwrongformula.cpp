@@ -85,7 +85,7 @@ void DialogEditWrongFormula::DialogRejected()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagFormula);
 }
 

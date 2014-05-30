@@ -176,7 +176,7 @@ void MainWindow::ActionNewDraw()
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
-    Q_CHECK_PTR(tools);
+    SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Valentina::SinglePointTool, doc);
     SetEnableTool(true);
@@ -246,7 +246,7 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            Q_CHECK_PTR(tButton);
+            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -286,7 +286,7 @@ void MainWindow::SetToolButton2(bool checked, Valentina::Tools t, const QString 
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            Q_CHECK_PTR(tButton);
+            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -299,7 +299,7 @@ void MainWindow::SetToolButton2(bool checked, Valentina::Tools t, const QString 
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {// TODO ISSUE 79 : delete
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
         DrawTool::Create(dialogTool, currentScene, doc, pattern);
@@ -316,7 +316,7 @@ void MainWindow::ClosedDialog(int result)
 template <typename DrawTool>
 void MainWindow::ClosedDialog2(int result)
 {
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
         // Only create tool if not already created with apply
@@ -346,7 +346,7 @@ void MainWindow::ClosedDialog2(int result)
 template <typename DrawTool>
 void MainWindow::ApplyDialog()
 {// TODO ISSUE 79 : copy
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
 
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)

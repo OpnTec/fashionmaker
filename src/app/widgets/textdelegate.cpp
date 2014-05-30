@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "textdelegate.h"
-
 #include <QLineEdit>
+#include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
@@ -56,7 +56,7 @@ void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) cons
     QString text = index.model()->data(index, Qt::EditRole).toString();
 
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
-    Q_CHECK_PTR(lineEdit);
+    SCASSERT(lineEdit != nullptr);
     if ( lastText != text && text.isEmpty() == false)
     {
         //Here need save text, but method is const, so, we use signal instead.
@@ -69,7 +69,7 @@ void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) cons
 void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
-    Q_CHECK_PTR(lineEdit);
+    SCASSERT(lineEdit != nullptr);
     QString text = lineEdit->text();
     if (text.isEmpty())
     {
@@ -91,7 +91,7 @@ void TextDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewI
 void TextDelegate::commitAndCloseEditor()
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
-    Q_CHECK_PTR(lineEdit);
+    SCASSERT(lineEdit != nullptr);
     QString text = lineEdit->text();
     if ( lastText != text && text.isEmpty() == false)
     {

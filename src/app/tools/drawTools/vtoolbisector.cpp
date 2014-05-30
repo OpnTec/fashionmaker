@@ -74,9 +74,9 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
@@ -90,9 +90,9 @@ void VToolBisector::setDialog()
 void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     QString formula = dialogTool->getFormula();
     const quint32 firstPointId = dialogTool->getFirstPointId();
     const quint32 secondPointId = dialogTool->getSecondPointId();
@@ -232,9 +232,9 @@ void VToolBisector::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());

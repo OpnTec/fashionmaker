@@ -53,9 +53,9 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
@@ -68,9 +68,9 @@ void VToolEndLine::setDialog()
 VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->getTypeLine();
     QString formula = dialogTool->getFormula();
@@ -194,9 +194,9 @@ void VToolEndLine::RefreshDataInFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());

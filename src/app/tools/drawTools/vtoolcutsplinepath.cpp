@@ -68,9 +68,9 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
     dialogTool->setSplinePathId(splinePathId, id);
@@ -80,9 +80,9 @@ void VToolCutSplinePath::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
@@ -96,7 +96,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
                             const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
-    Q_CHECK_PTR(splPath);
+    SCASSERT(splPath != nullptr);
 
     const qreal result = CheckFormula(formula, data);
 
@@ -326,9 +326,9 @@ void VToolCutSplinePath::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));

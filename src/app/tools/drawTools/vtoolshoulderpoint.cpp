@@ -52,9 +52,9 @@ VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const qu
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
@@ -96,9 +96,9 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool);
     QString formula = dialogTool->getFormula();
     const quint32 p1Line = dialogTool->getP1Line();
     const quint32 p2Line = dialogTool->getP2Line();
@@ -241,9 +241,9 @@ void VToolShoulderPoint::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());

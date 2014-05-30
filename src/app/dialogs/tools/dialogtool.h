@@ -432,7 +432,7 @@ protected:
     template <typename T>
     void             InitArrow(T *ui)
     {
-        Q_CHECK_PTR(ui);
+        SCASSERT(ui != nullptr);
         spinBoxAngle = ui->doubleSpinBoxAngle;
         connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
         connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
@@ -480,7 +480,7 @@ protected:
         InitOkCancel(ui);
         // TODO issue #79
         bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-        Q_CHECK_PTR(bApply);
+        SCASSERT(bApply != nullptr);
         connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
     //Left this method for dialog what do not need apply button
@@ -488,11 +488,11 @@ protected:
     void             InitOkCancel(T *ui)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        Q_CHECK_PTR(bOk);
+        SCASSERT(bOk != nullptr);
         connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
 
         QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        Q_CHECK_PTR(bCancel);
+        SCASSERT(bCancel != nullptr);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
     }
     /**

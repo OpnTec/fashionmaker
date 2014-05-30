@@ -129,7 +129,7 @@ void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
     const QVector<VToolRecord> *history = doc->getHistory();
-    Q_CHECK_PTR(history);
+    SCASSERT(history != nullptr);
     qint32 currentRow = -1;
     qint32 count = 0;
     ui->tableWidget->setRowCount(history->size());
@@ -164,7 +164,7 @@ void DialogHistory::FillTable()
     {
         cursorRow = currentRow;
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
-        Q_CHECK_PTR(item);
+        SCASSERT(item != nullptr);
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
     }
     ui->tableWidget->resizeColumnsToContents();
@@ -261,7 +261,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Valentina::SplineTool:
             {
                 const VSpline *spl = data->GeometricObject<const VSpline *>(tool.getId());
-                Q_CHECK_PTR(spl);
+                SCASSERT(spl != nullptr);
                 const QString splP1Name = data->GeometricObject<const VPointF *>(spl->GetP1().id())->name();
                 const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
                 return QString(tr("Curve %1_%2")).arg(splP1Name, splP4Name);
@@ -269,14 +269,14 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Valentina::ArcTool:
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(tool.getId());
-                Q_CHECK_PTR(arc);
+                SCASSERT(arc != nullptr);
                 const QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
                 return QString(tr("Arc with center in point %1")).arg(arcCenterName);
             }
             case Valentina::SplinePathTool:
             {
                 const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(tool.getId());
-                Q_CHECK_PTR(splPath);
+                SCASSERT(splPath != nullptr);
                 const QVector<VSplinePoint> points = splPath->GetSplinePath();
                 QString record;
                 if (points.size() != 0 )
@@ -347,7 +347,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const quint32 arcId = doc->GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
                 const VArc *arc = data->GeometricObject<const VArc *>(arcId);
-                Q_CHECK_PTR(arc);
+                SCASSERT(arc != nullptr);
                 const QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 return QString(tr("%1 - cut arc with center %2")).arg(toolIdName, arcCenterName);
@@ -356,7 +356,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const quint32 splineId = doc->GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
                 const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
-                Q_CHECK_PTR(spl);
+                SCASSERT(spl != nullptr);
                 const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
                 const QString splP1Name = data->GeometricObject<const VPointF *>(spl->GetP1().id())->name();
                 const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
@@ -366,7 +366,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const quint32 splinePathId = doc->GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
                 const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
-                Q_CHECK_PTR(splPath);
+                SCASSERT(splPath != nullptr);
                 const QVector<VSplinePoint> points = splPath->GetSplinePath();
                 QString record;
                 if (points.size() != 0 )

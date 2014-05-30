@@ -33,6 +33,11 @@
 #include <QString>
 #include <QMetaType>
 #include <QtGlobal>
+#include <csignal>
+
+#ifdef Q_OS_WIN32
+#include WinBase.h
+#endif /*Q_OS_WIN32*/
 
 #define SceneSize 50000
 
@@ -282,5 +287,44 @@ extern const QString avg_F;
 extern const QString cm_Oprt;
 extern const QString mm_Oprt;
 extern const QString in_Oprt;
+
+/*
+ * This macros SCASSERT (for Stop and Continue Assert) will break into the debugger on the line of the assert and allow
+ * you to continue afterwards should you choose to.
+ * idea: Q_ASSERT no longer pauses debugger - http://qt-project.org/forums/viewthread/13148
+ * Usefull links:
+ * 1. What's the difference between __PRETTY_FUNCTION__, __FUNCTION__, __func__? -
+ *    https://stackoverflow.com/questions/4384765/whats-the-difference-between-pretty-function-function-func
+ *
+ * 2. Windows Predefined Macros - http://msdn.microsoft.com/library/b0084kay.aspx
+ *
+ * 3. Windows DebugBreak function - http://msdn.microsoft.com/en-us/library/ms679297%28VS.85%29.aspx
+ *
+ * 4. Continue to debug after failed assertion on Linux? [C/C++] -
+ * https://stackoverflow.com/questions/1721543/continue-to-debug-after-failed-assertion-on-linux-c-c
+ */
+#ifndef QT_NO_DEBUG
+#ifdef Q_OS_WIN32
+#define SCASSERT(cond)                                      \
+{                                                           \
+    if (!(cond))                                            \
+    {                                                       \
+        qDebug("ASSERT: %s in %s (%s:%u)",                  \
+            #cond, __FUNCSIG__, __FILE__, __LINE__);        \
+        void WINAPI DebugBreak(void);                       \                                                                                                          \
+    }                                                       \
+}
+#else
+#define SCASSERT(cond)                                      \
+{                                                           \
+    if (!(cond))                                            \
+    {                                                       \
+        qDebug("ASSERT: %s in %s (%s:%u)",                  \
+            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
+        std::raise(SIGTRAP);                                     \
+    }                                                       \
+}
+#endif /* Q_OS_WIN32 */
+#endif /* QT_NO_DEBUG */
 
 #endif // OPTIONS_H

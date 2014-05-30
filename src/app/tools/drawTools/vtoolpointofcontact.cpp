@@ -53,9 +53,9 @@ VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center, id);
@@ -94,9 +94,9 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     QString radius = dialogTool->getRadius();
     const quint32 center = dialogTool->getCenter();
     const quint32 firstPointId = dialogTool->getFirstPoint();
@@ -235,9 +235,9 @@ void VToolPointOfContact::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));

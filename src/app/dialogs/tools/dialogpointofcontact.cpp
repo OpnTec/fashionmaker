@@ -50,10 +50,10 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     labelEditNamePoint = ui.labelEditNamePoint;
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    Q_CHECK_PTR(bCansel);
+    SCASSERT(bCansel != nullptr);
     connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagFormula = false;
