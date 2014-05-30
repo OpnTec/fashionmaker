@@ -76,9 +76,9 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     Q_CHECK_PTR(dialog);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 firstPoint = dialogTool->getFirstPoint();
-    quint32 secondPoint = dialogTool->getSecondPoint();
-    QString typeLine = dialogTool->getTypeLine();
+    const quint32 firstPoint = dialogTool->getFirstPoint();
+    const quint32 secondPoint = dialogTool->getSecondPoint();
+    const QString typeLine = dialogTool->getTypeLine();
     Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 

@@ -98,27 +98,25 @@ void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString radius = dialogTool->getRadius();
-    quint32 center = dialogTool->getCenter();
-    quint32 firstPointId = dialogTool->getFirstPoint();
-    quint32 secondPointId = dialogTool->getSecondPoint();
-    QString pointName = dialogTool->getPointName();
+    const quint32 center = dialogTool->getCenter();
+    const quint32 firstPointId = dialogTool->getFirstPoint();
+    const quint32 secondPointId = dialogTool->getSecondPoint();
+    const QString pointName = dialogTool->getPointName();
     Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::Create(const quint32 _id, const QString &radius, const quint32 &center,
-                                 const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const QString &pointName, const qreal &mx, const qreal &my,
-                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+void VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
+                                 const quint32 &secondPointId, const QString &pointName, const qreal &mx,
+                                 const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *centerP = data->GeometricObject<const VPointF *>(center);
     const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondP = data->GeometricObject<const VPointF *>(secondPointId);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(radius);
+    const qreal result = CheckFormula(radius, data);
 
     QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), centerP->toQPointF(),
                                                      firstP->toQPointF(), secondP->toQPointF());

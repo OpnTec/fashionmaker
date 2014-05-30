@@ -83,21 +83,20 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Q_CHECK_PTR(dialog);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    QString pointName = dialogTool->getPointName();
+    const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
-    quint32 arcId = dialogTool->getArcId();
+    const quint32 arcId = dialogTool->getArcId();
     Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutArc::Create(const quint32 _id, const QString &pointName, const QString &formula, const quint32 &arcId,
+void VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    const qreal result = CheckFormula(formula, data);
 
     VArc arc1;
     VArc arc2;
