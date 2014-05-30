@@ -601,6 +601,9 @@ void VPattern::FullUpdateTree()
     catch (const std::bad_alloc &)
     {
         delete scene;
+#ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+#endif
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Error!"));
         msgBox.setText(tr("Error parsing file."));
@@ -609,6 +612,9 @@ void VPattern::FullUpdateTree()
         msgBox.setDefaultButton(QMessageBox::Ok);
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.exec();
+#ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
         emit ClearMainWindow();
         return;
     }
