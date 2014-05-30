@@ -167,7 +167,7 @@
            <item>
             <widget class="QRadioButton" name="radioButtonSizeGrowth">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -183,7 +183,7 @@
            <item>
             <widget class="QRadioButton" name="radioButtonStandardTable">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -196,7 +196,7 @@
            <item>
             <widget class="QRadioButton" name="radioButtonIncrements">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -212,7 +212,7 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -228,7 +228,7 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -244,7 +244,7 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -260,7 +260,7 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
