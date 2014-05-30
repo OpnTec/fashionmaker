@@ -67,9 +67,9 @@ void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *sc
     Q_CHECK_PTR(dialog);
     DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 firstPointId = dialogTool->getFirstPointId();
-    quint32 secondPointId = dialogTool->getSecondPointId();
-    QString pointName = dialogTool->getPointName();
+    const quint32 firstPointId = dialogTool->getFirstPointId();
+    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const QString pointName = dialogTool->getPointName();
     Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 

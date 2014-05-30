@@ -28,9 +28,22 @@
 
 #include "vdrawtool.h"
 
+#include <qmuparsererror.h>
+
+#include <dialogs/tools/dialogeditwrongformula.h>
+
+#include <container/calculator.h>
+
 qreal VDrawTool::factor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDrawTool constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param parent parent object.
+ */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
@@ -46,7 +59,15 @@ VDrawTool::~VDrawTool()
     delete dialog;
 }
 
+
+
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool  highlight tool.
+ * @param id object id in container.
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     Q_UNUSED(id);
@@ -55,6 +76,10 @@ void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace. name new active pattern peace.
+ */
 void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -68,6 +93,11 @@ void VDrawTool::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedNameDraw save new name active pattern peace.
+ * @param oldName old name.
+ * @param newName new name active pattern peace. new name.
+ */
 void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 {
     if (nameActivDraw == oldName)
@@ -77,6 +107,10 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromGui refresh tool data after change in options.
+ * @param result keep result working dialog.
+ */
 void VDrawTool::FullUpdateFromGui(int result)
 {
     if (result == QDialog::Accepted)
@@ -95,6 +129,10 @@ void VDrawTool::FullUpdateFromGui(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VDrawTool::SetFactor(qreal factor)
 {
     if (factor <= 2 && factor >= 0.5)
@@ -104,6 +142,55 @@ void VDrawTool::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckFormula check formula.
+ *
+ * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
+ * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
+ * @param formula [in|out] string with formula.
+ * @param data [in] container with variables. Need for math parser.
+ * @throw QmuParserError.
+ * @return result of calculation formula.
+ */
+qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
+{
+    qreal result = 0;
+    Calculator *cal = nullptr;
+    try
+    {
+        cal = new Calculator(data);
+        result = cal->EvalFormula(formula);
+        delete cal;
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        delete cal;
+        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+        dialog->setFormula(formula);
+        if (dialog->exec() == QDialog::Accepted)
+        {
+            formula = dialog->getFormula();
+            //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
+            //Don't know why.
+            delete dialog;
+            Calculator *cal = new Calculator(data);
+            result = cal->EvalFormula(formula);
+            delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
+        }
+        else
+        {
+            delete dialog;
+            throw;
+        }
+    }
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToCalculation add tool to calculation tag in pattern file.
+ * @param domElement tag in xml tree.
+ */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
     QDomElement calcElement;

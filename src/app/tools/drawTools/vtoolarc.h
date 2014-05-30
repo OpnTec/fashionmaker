@@ -75,9 +75,9 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
-                        const QString &f2, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
+    static void  Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
+                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document::Documents &parse,
+                        const Valentina::Sources &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:

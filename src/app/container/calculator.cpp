@@ -97,14 +97,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
 
     SetExpr(formula);
-    try
-    {
-        Eval();//Need run for making tokens
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        return;//Ignore all warnings
-    }
+    Eval();//Need run for making tokens
 }
 
 Calculator::~Calculator()
@@ -217,15 +210,13 @@ void Calculator::InitVariables(const VContainer *data)
             if (qApp->patternType() == Pattern::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
             else
             {
                 vVarVal[j] = i.value().GetValue();
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
+            DefineVar(i.key(), &vVarVal[j]);
+            ++j;
             ++i;
         }
     }
@@ -237,15 +228,13 @@ void Calculator::InitVariables(const VContainer *data)
             if (qApp->patternType() == Pattern::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
             else
             {
                 vVarVal[j] = i.value().GetValue();
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
+            DefineVar(i.key(), &vVarVal[j]);
+            ++j;
             ++i;
         }
     }

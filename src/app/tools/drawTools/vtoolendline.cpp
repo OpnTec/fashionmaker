@@ -30,6 +30,7 @@
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogendline.h"
+#include "../../dialogs/tools/dialogeditwrongformula.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
@@ -71,28 +72,25 @@ void VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatter
     Q_CHECK_PTR(dialog);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    QString pointName = dialogTool->getPointName();
-    QString typeLine = dialogTool->getTypeLine();
+    const QString pointName = dialogTool->getPointName();
+    const QString typeLine = dialogTool->getTypeLine();
     QString formula = dialogTool->getFormula();
-    qreal angle = dialogTool->getAngle();
-    quint32 basePointId = dialogTool->getBasePointId();
+    const qreal angle = dialogTool->getAngle();
+    const quint32 basePointId = dialogTool->getBasePointId();
     Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
            Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                          const QString &formula, const qreal &angle, const quint32 &basePointId,
+                          QString &formula, const qreal &angle, const quint32 &basePointId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
-
-    line.setLength(qApp->toPixel(result));
+    line.setLength(qApp->toPixel(CheckFormula(formula, data)));
     line.setAngle(angle);
     quint32 id = _id;
     if (typeCreation == Valentina::FromGui)

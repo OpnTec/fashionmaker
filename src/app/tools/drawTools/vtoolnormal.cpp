@@ -72,17 +72,17 @@ void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    quint32 firstPointId = dialogTool->getFirstPointId();
-    quint32 secondPointId = dialogTool->getSecondPointId();
-    QString typeLine = dialogTool->getTypeLine();
-    QString pointName = dialogTool->getPointName();
-    qreal angle = dialogTool->getAngle();
+    const quint32 firstPointId = dialogTool->getFirstPointId();
+    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const QString typeLine = dialogTool->getTypeLine();
+    const QString pointName = dialogTool->getPointName();
+    const qreal angle = dialogTool->getAngle();
     Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolNormal::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+void VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
@@ -91,8 +91,7 @@ void VToolNormal::Create(const quint32 _id, const QString &formula, const quint3
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    const qreal result = CheckFormula(formula, data);
 
     QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                             qApp->toPixel(result), angle);

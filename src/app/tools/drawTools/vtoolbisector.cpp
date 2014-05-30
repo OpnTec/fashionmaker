@@ -94,17 +94,17 @@ void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    quint32 firstPointId = dialogTool->getFirstPointId();
-    quint32 secondPointId = dialogTool->getSecondPointId();
-    quint32 thirdPointId = dialogTool->getThirdPointId();
-    QString typeLine = dialogTool->getTypeLine();
-    QString pointName = dialogTool->getPointName();
+    const quint32 firstPointId = dialogTool->getFirstPointId();
+    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const quint32 thirdPointId = dialogTool->getThirdPointId();
+    const QString typeLine = dialogTool->getTypeLine();
+    const QString pointName = dialogTool->getPointName();
     Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::Create(const quint32 _id, const QString &formula, const quint32 &firstPointId,
+void VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                            const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -114,8 +114,7 @@ void VToolBisector::Create(const quint32 _id, const QString &formula, const quin
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     const VPointF *thirdPoint = data->GeometricObject<const VPointF *>(thirdPointId);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    const qreal result = CheckFormula(formula, data);
 
     QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                               thirdPoint->toQPointF(), qApp->toPixel(result));

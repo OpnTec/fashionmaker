@@ -81,7 +81,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const quint32 _id, const QString &pointName, const QString &typeLine, const QString &formula,
+    static void  Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
                         const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
                         VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Valentina::Sources &typeCreation);

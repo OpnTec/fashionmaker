@@ -305,8 +305,7 @@ QString VIndividualMeasurements::GenderToStr(const VIndividualMeasurements::Gend
 //---------------------------------------------------------------------------------------------------------------------
 VIndividualMeasurements::Genders VIndividualMeasurements::StrToGender(const QString &sex)
 {
-    QStringList genders;
-    genders << SexMale << SexFemale;
+    QStringList genders{SexMale, SexFemale};
     switch (genders.indexOf(sex))
     {
         case 0: // SexMale

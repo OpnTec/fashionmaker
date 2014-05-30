@@ -100,17 +100,17 @@ void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    quint32 p1Line = dialogTool->getP1Line();
-    quint32 p2Line = dialogTool->getP2Line();
-    quint32 pShoulder = dialogTool->getPShoulder();
-    QString typeLine = dialogTool->getTypeLine();
-    QString pointName = dialogTool->getPointName();
+    const quint32 p1Line = dialogTool->getP1Line();
+    const quint32 p2Line = dialogTool->getP2Line();
+    const quint32 pShoulder = dialogTool->getPShoulder();
+    const QString typeLine = dialogTool->getTypeLine();
+    const QString pointName = dialogTool->getPointName();
     Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const quint32 &p1Line,
+void VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
                                 const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -120,8 +120,7 @@ void VToolShoulderPoint::Create(const quint32 _id, const QString &formula, const
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
     const VPointF *shoulderPoint = data->GeometricObject<const VPointF *>(pShoulder);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    const qreal result = CheckFormula(formula, data);
 
     QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                    shoulderPoint->toQPointF(), qApp->toPixel(result));

@@ -214,9 +214,8 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags;
-                tags << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes << TagMeasurements
-                     << TagVersion;
+                QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements,
+                            TagVersion};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
@@ -487,8 +486,7 @@ Valentina::Units VPattern::MUnit() const
     QDomElement element = list.at(0).toElement();
     if (element.isElement())
     {
-        QStringList units;
-        units << "mm" << "cm" << "inch";
+        QStringList units{"mm", "cm", "inch"};
         QString unit = GetParametrString(element, AttrUnit);
         switch (units.indexOf(unit))
         {
@@ -520,8 +518,7 @@ Pattern::Measurements VPattern::MType() const
     if (element.isElement())
     {
         QString type = GetParametrString(element, AttrType);
-        QStringList types;
-        types << "standard" << "individual";
+        QStringList types{"standard", "individual"};
         switch (types.indexOf(type))
         {
             case 0:// standard
@@ -613,8 +610,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags;
-                tags << TagCalculation << TagModeling << TagDetails;
+                QStringList tags{TagCalculation, TagModeling, TagDetails};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagCalculation
@@ -656,11 +652,10 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
     {
-        const QDomElement domElement = nodeList.at(i).toElement();
+        QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            QStringList tags;
-            tags << TagPoint << TagLine << TagSpline << TagArc << TagTools;
+            QStringList tags{TagPoint, TagLine, TagSpline, TagArc, TagTools};
             switch (tags.indexOf(domElement.tagName()))
             {
                 case 0: // TagPoint
@@ -719,9 +714,8 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
                     Valentina::Tools tool;
-                    QStringList types;
-                    types << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline <<
-                             VToolDetail::NodeSplinePath;
+                    QStringList types{VToolDetail::NodePoint, VToolDetail::NodeArc, VToolDetail::NodeSpline,
+                                VToolDetail::NodeSplinePath};
                     switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
@@ -779,7 +773,7 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &domElement,
+void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                  const Document::Documents &parse, const QString &type)
 {
     Q_CHECK_PTR(scene);
@@ -787,12 +781,11 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
 
 
-    QStringList points;
-    points << VToolSinglePoint::ToolType << VToolEndLine::ToolType << VToolAlongLine::ToolType
-           << VToolShoulderPoint::ToolType << VToolNormal::ToolType << VToolBisector::ToolType
-           << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType << VNodePoint::ToolType
-           << VToolHeight::ToolType << VToolTriangle::ToolType << VToolPointOfIntersection::ToolType
-           << VToolCutSpline::ToolType << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
+    QStringList points{VToolSinglePoint::ToolType, VToolEndLine::ToolType, VToolAlongLine::ToolType,
+                VToolShoulderPoint::ToolType, VToolNormal::ToolType, VToolBisector::ToolType,
+                VToolLineIntersect::ToolType, VToolPointOfContact::ToolType, VNodePoint::ToolType,
+                VToolHeight::ToolType, VToolTriangle::ToolType, VToolPointOfIntersection::ToolType,
+                VToolCutSpline::ToolType, VToolCutSplinePath::ToolType, VToolCutArc::ToolType};
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -842,11 +835,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
+
                 const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-                VToolEndLine::Create(id, name, typeLine, formula, angle, basePointId,
+                VToolEndLine::Create(id, name, typeLine, f, angle, basePointId,
                                         mx, my, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -873,11 +874,18 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-                VToolAlongLine::Create(id, name, typeLine, formula, firstPointId, secondPointId, mx, my, scene, this,
+                VToolAlongLine::Create(id, name, typeLine, f, firstPointId, secondPointId, mx, my, scene, this,
                                        data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -904,12 +912,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 p1Line = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
                 const quint32 p2Line = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
                 const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, "0");
 
-                VToolShoulderPoint::Create(id, formula, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
+                VToolShoulderPoint::Create(id, f, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
                                        data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -936,12 +951,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-                VToolNormal::Create(id, formula, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene,
+                VToolNormal::Create(id, f, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene,
                                     this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -968,12 +990,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                            VAbstractTool::TypeLineLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
                 const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
 
-                VToolBisector::Create(id, formula, firstPointId, secondPointId, thirdPointId,
+                VToolBisector::Create(id, f, firstPointId, secondPointId, thirdPointId,
                                     typeLine, name, mx, my, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1020,12 +1049,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
+                QString f = radius;//need for saving fixed formula;
                 const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
-                VToolPointOfContact::Create(id, radius, center, firstPointId, secondPointId, name, mx, my, scene, this,
+                VToolPointOfContact::Create(id, f, center, firstPointId, secondPointId, name, mx, my, scene, this,
                                             data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != radius)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrRadius, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1135,10 +1171,16 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
 
-                VToolCutSpline::Create(id, name, formula, splineId, mx, my, scene, this, data, parse,
-                                       Valentina::FromFile);
+                VToolCutSpline::Create(id, name, f, splineId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1163,10 +1205,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
 
-                VToolCutSplinePath::Create(id, name, formula, splinePathId, mx, my,
-                                            scene, this, data, parse, Valentina::FromFile);
+                VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, scene, this, data, parse,
+                                           Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1191,9 +1240,16 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, const QDomElement &d
                 const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+                QString f = formula;//need for saving fixed formula;
                 const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
 
-                VToolCutArc::Create(id, name, formula, arcId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                VToolCutArc::Create(id, name, f, arcId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (f != formula)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1248,8 +1304,8 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines;
-    splines << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType << VNodeSplinePath::ToolType;
+    QStringList splines{VToolSpline::ToolType, VToolSplinePath::ToolType, VNodeSpline::ToolType,
+                VNodeSplinePath::ToolType};
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::ToolType
@@ -1363,15 +1419,14 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                               const Document::Documents &parse, const QString &type)
+void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document::Documents &parse,
+                               const QString &type)
 {
     Q_CHECK_PTR(scene);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList arcs;
-    arcs << VToolArc::ToolType << VNodeArc::ToolType;
+    QStringList arcs{VToolArc::ToolType, VNodeArc::ToolType};
 
     switch (arcs.indexOf(type))
     {
@@ -1381,10 +1436,21 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
                 const quint32 id = GetParametrId(domElement);
                 const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
+                QString r = radius;//need for saving fixed formula;
                 const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
+                QString f1Fix = f1;//need for saving fixed formula;
                 const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
+                QString f2Fix = f2;//need for saving fixed formula;
 
-                VToolArc::Create(id, center, radius, f1, f2, scene, this, data, parse, Valentina::FromFile);
+                VToolArc::Create(id, center, r, f1Fix, f2Fix, scene, this, data, parse, Valentina::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (r != radius || f1Fix != f1 || f2Fix != f2)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrRadius, r);
+                    SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
+                    SetAttribute(domElement, VAbstractTool::AttrAngle2, f2Fix);
+                    haveLiteChange();
+                }
             }
             catch (const VExceptionBadId &e)
             {
@@ -1434,8 +1500,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList tools;
-    tools << VToolUnionDetails::ToolType;
+    QStringList tools{VToolUnionDetails::ToolType};
 
     switch (tools.indexOf(type))
     {

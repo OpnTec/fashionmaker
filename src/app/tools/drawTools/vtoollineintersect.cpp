@@ -70,11 +70,11 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     Q_CHECK_PTR(dialog);
     DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 p1Line1Id = dialogTool->getP1Line1();
-    quint32 p2Line1Id = dialogTool->getP2Line1();
-    quint32 p1Line2Id = dialogTool->getP1Line2();
-    quint32 p2Line2Id = dialogTool->getP2Line2();
-    QString pointName = dialogTool->getPointName();
+    const quint32 p1Line1Id = dialogTool->getP1Line1();
+    const quint32 p2Line1Id = dialogTool->getP2Line1();
+    const quint32 p1Line2Id = dialogTool->getP1Line2();
+    const quint32 p2Line2Id = dialogTool->getP2Line2();
+    const QString pointName = dialogTool->getPointName();
     Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }

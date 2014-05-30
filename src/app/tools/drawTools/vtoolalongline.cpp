@@ -164,27 +164,25 @@ void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatt
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     Q_CHECK_PTR(dialogTool);
     QString formula = dialogTool->getFormula();
-    quint32 firstPointId = dialogTool->getFirstPointId();
-    quint32 secondPointId = dialogTool->getSecondPointId();
-    QString typeLine = dialogTool->getTypeLine();
-    QString pointName = dialogTool->getPointName();
+    const quint32 firstPointId = dialogTool->getFirstPointId();
+    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const QString typeLine = dialogTool->getTypeLine();
+    const QString pointName = dialogTool->getPointName();
     Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                            const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                            VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
+                            const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
-    line.setLength(qApp->toPixel(result));
+    line.setLength(qApp->toPixel(CheckFormula(formula, data)));
 
     quint32 id = _id;
     if (typeCreation == Valentina::FromGui)

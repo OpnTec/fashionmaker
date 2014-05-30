@@ -83,14 +83,14 @@ void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     Q_CHECK_PTR(dialog);
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    QString pointName = dialogTool->getPointName();
+    const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
-    quint32 splinePathId = dialogTool->getSplinePathId();
+    const quint32 splinePathId = dialogTool->getSplinePathId();
     Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, const QString &formula,
+void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QString &formula,
                             const quint32 &splinePathId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                             const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -98,8 +98,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, con
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     Q_CHECK_PTR(splPath);
 
-    Calculator cal(data);
-    const qreal result = cal.EvalFormula(formula);
+    const qreal result = CheckFormula(formula, data);
 
     quint32 id = _id;
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;

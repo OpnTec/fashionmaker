@@ -70,11 +70,11 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     Q_CHECK_PTR(dialog);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 axisP1Id = dialogTool->getAxisP1Id();
-    quint32 axisP2Id = dialogTool->getAxisP2Id();
-    quint32 firstPointId = dialogTool->getFirstPointId();
-    quint32 secondPointId = dialogTool->getSecondPointId();
-    QString pointName = dialogTool->getPointName();
+    const quint32 axisP1Id = dialogTool->getAxisP1Id();
+    const quint32 axisP2Id = dialogTool->getAxisP2Id();
+    const quint32 firstPointId = dialogTool->getFirstPointId();
+    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
