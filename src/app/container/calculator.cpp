@@ -35,7 +35,17 @@ int Calculator::iVal = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Calculator class constructor.
+ * @brief Calculator class constructor. Make easy initialization math parser.
+ *
+ * This constructor hide initialization variables, operators, character sets.
+ * Use this constuctor for evaluation formula. All formulas must be converted to internal look.
+ * Example:
+ *
+ * const QString formula = qApp->FormulaFromUser(edit->text());
+ * Calculator *cal = new Calculator(data);
+ * const qreal result = cal->EvalFormula(formula);
+ * delete cal;
+ *
  * @param data pointer to a variable container.
  */
 Calculator::Calculator(const VContainer *data)
@@ -56,6 +66,21 @@ Calculator::Calculator(const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Calculator class constructor. Make easy initialization math parser.
+ *
+ * This constructor hide initialization variables, operators, character sets.
+ * Use this constuctor to get tokens from formula. All formulas must be converted to external look.
+ * Example:
+ *
+ * Calculator *cal = new Calculator(formula, false);
+ * tokens = cal->GetTokens();
+ * numbers = cal->GetNumbers();
+ * delete cal;
+ *
+ * @param data pointer to a variable container.
+ * @param fromUser true if we parse formula from user
+ */
 Calculator::Calculator(const QString &formula, bool fromUser)
     :QmuParser(), vVarVal(nullptr)
 {
@@ -97,7 +122,8 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
 
     SetExpr(formula);
-    Eval();//Need run for making tokens
+    //Need run for making tokens. Don't catch exception here, because it will show us in dialog that formula has error.
+    Eval();
 }
 
 Calculator::~Calculator()
@@ -240,6 +266,7 @@ void Calculator::InitVariables(const VContainer *data)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::InitCharacterSets()
 {
     //String with all unique symbols for supported alpabets.

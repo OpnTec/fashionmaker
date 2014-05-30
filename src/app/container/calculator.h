@@ -34,6 +34,25 @@
 #include "../../libs/qmuparser/qmuparser.h"
 using namespace qmu;
 
+/**
+ * @brief The Calculator class for calculation formula.
+ *
+ * Main purpose make easy evaluate value of formula and get tokens.
+ * Note. If created to many parser for different purpes in the same time parser can work wrong.
+ * Example:
+ * DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+ * dialog->setFormula(formula);
+ * if (dialog->exec() == QDialog::Accepted)
+ * {
+ *     formula = dialog->getFormula();
+ *     //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
+ *     //Don't know why.
+ *     delete dialog;
+ *     Calculator *cal = new Calculator(data);
+ *     result = cal->EvalFormula(formula);
+ *     delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
+ * }
+ */
 class Calculator:public QmuParser
 {
 public:
