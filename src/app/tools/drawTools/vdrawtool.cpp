@@ -31,6 +31,13 @@
 qreal VDrawTool::factor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDrawTool constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param parent parent object.
+ */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
@@ -46,7 +53,15 @@ VDrawTool::~VDrawTool()
     delete dialog;
 }
 
+
+
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool  highlight tool.
+ * @param id object id in container.
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     Q_UNUSED(id);
@@ -55,6 +70,10 @@ void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace. name new active pattern peace.
+ */
 void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -68,6 +87,11 @@ void VDrawTool::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedNameDraw save new name active pattern peace.
+ * @param oldName old name.
+ * @param newName new name active pattern peace. new name.
+ */
 void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 {
     if (nameActivDraw == oldName)
@@ -77,6 +101,10 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromGui refresh tool data after change in options.
+ * @param result keep result working dialog.
+ */
 void VDrawTool::FullUpdateFromGui(int result)
 {
     if (result == QDialog::Accepted)
@@ -95,6 +123,10 @@ void VDrawTool::FullUpdateFromGui(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VDrawTool::SetFactor(qreal factor)
 {
     if (factor <= 2 && factor >= 0.5)
@@ -104,6 +136,10 @@ void VDrawTool::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToCalculation add tool to calculation tag in pattern file.
+ * @param domElement tag in xml tree.
+ */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
     QDomElement calcElement;
