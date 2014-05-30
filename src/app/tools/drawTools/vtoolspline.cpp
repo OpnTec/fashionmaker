@@ -95,13 +95,13 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     Q_CHECK_PTR(dialog);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 p1 = dialogTool->getP1();
-    quint32 p4 = dialogTool->getP4();
-    qreal kAsm1 = dialogTool->getKAsm1();
-    qreal kAsm2 = dialogTool->getKAsm2();
-    qreal angle1 = dialogTool->getAngle1();
-    qreal angle2 = dialogTool->getAngle2();
-    qreal kCurve = dialogTool->getKCurve();
+    const quint32 p1 = dialogTool->getP1();
+    const quint32 p4 = dialogTool->getP4();
+    const qreal kAsm1 = dialogTool->getKAsm1();
+    const qreal kAsm2 = dialogTool->getKAsm2();
+    const qreal angle1 = dialogTool->getAngle1();
+    const qreal angle2 = dialogTool->getAngle2();
+    const qreal kCurve = dialogTool->getKCurve();
     Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
            Valentina::FromGui);
 }

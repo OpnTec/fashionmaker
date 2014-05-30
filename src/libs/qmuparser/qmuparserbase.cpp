@@ -50,9 +50,8 @@ bool QmuParserBase::g_DbgDumpStack = false;
  * When defining custom binary operators with #AddOprt(...) make sure not to choose
  * names conflicting with these definitions.
  */
-const QStringList QmuParserBase::c_DefaultOprt = QStringList() << "<=" << ">=" << "!=" << "==" << "<"  << ">"
-                                                               << "+"  << "-"  << "*"  << "/"  << "^"  << "&&"
-                                                               << "||" << "="  << "("  << ")"  << "?"  << ":";
+const QStringList QmuParserBase::c_DefaultOprt{"<=", ">=", "!=", "==", "<", ">", "+", "-", "*", "/", "^", "&&", "||",
+                                               "=", "(", ")", "?", ":"};
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

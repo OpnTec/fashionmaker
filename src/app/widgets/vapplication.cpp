@@ -36,6 +36,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QDir>
+#include <QSettings>
 
 #include <container/calculator.h>
 
@@ -1721,23 +1722,10 @@ QString VApplication::FormulaFromUser(const QString &formula)
 {
     QString newFormula = formula;
 
-    QMap<int, QString> tokens;
-    QMap<int, QString> numbers;
-    try
-    {
-        Calculator cal(formula);
-        tokens = cal.GetTokens();
-        numbers = cal.GetNumbers();
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        qDebug() << "\nMath parser error:\n"
-                 << "--------------------------------------\n"
-                 << "Message:     " << e.GetMsg()  << "\n"
-                 << "Expression:  " << e.GetExpr() << "\n"
-                 << "--------------------------------------";
-        return newFormula;
-    }
+    Calculator *cal = new Calculator(formula);
+    QMap<int, QString> tokens = cal->GetTokens();
+    QMap<int, QString> numbers = cal->GetNumbers();
+    delete cal;
 
     QList<int> tKeys = tokens.keys();
     QList<QString> tValues = tokens.values();
@@ -1789,12 +1777,16 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
     QLocale loc = QLocale::system();
-    if(loc != QLocale(QLocale::C))
+    if(loc != QLocale(QLocale::C) && osSeparatorValue)
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
-        for (int i = 0; i < tKeys.size(); ++i)
+        for (int i = 0; i < nKeys.size(); ++i)
         {
             bool ok = false;
             qreal d = loc.toDouble(nValues.at(i), &ok);
@@ -1833,9 +1825,10 @@ QString VApplication::FormulaToUser(const QString &formula)
     QMap<int, QString> numbers;
     try
     {
-        Calculator cal(formula, false);
-        tokens = cal.GetTokens();
-        numbers = cal.GetNumbers();
+        Calculator *cal = new Calculator(formula, false);
+        tokens = cal->GetTokens();
+        numbers = cal->GetNumbers();
+        delete cal;
     }
     catch (qmu::QmuParserError &e)
     {
@@ -1903,12 +1896,16 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
     QLocale loc = QLocale::system();
-    if(loc != QLocale::C)
+    if(loc != QLocale::C && osSeparatorValue)
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
-        for (int i = 0; i < tKeys.size(); ++i)
+        for (int i = 0; i < nKeys.size(); ++i)
         {
             QLocale loc = QLocale(QLocale::C);
             bool ok = false;

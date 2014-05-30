@@ -89,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     doc = new VPattern(pattern, comboBoxDraws, &mode);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
+    connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
 
     InitAutoSave();
 
@@ -889,9 +890,8 @@ void MainWindow::ToolBarOption()
     {
         ui->toolBarOption->addWidget(new QLabel(tr("Height: ")));
 
-        QStringList list;
-        list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
-             <<"182"<<"188";
+        QStringList list{"92", "98", "104", "110", "116", "122", "128", "134", "140", "146", "152", "158", "164", "170",
+                         "176", "182", "188"};
         QComboBox *comboBoxHeight = new QComboBox;
         comboBoxHeight->addItems(list);
         comboBoxHeight->setCurrentIndex(14);//176
@@ -1354,12 +1354,23 @@ void MainWindow::Open()
             dir = QFileInfo(files.first()).absolutePath();
         }
         QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
-        if (fileName.isEmpty() == false)
+        if (fileName.isEmpty() == false && fileName != curFile)
         {
-            LoadPattern(fileName);
+            if (curFile.isEmpty())
+            {
+                LoadPattern(fileName);
 
-            VAbstractTool::NewSceneRect(sceneDraw, view);
-            VAbstractTool::NewSceneRect(sceneDetails, view);
+                VAbstractTool::NewSceneRect(sceneDraw, view);
+                VAbstractTool::NewSceneRect(sceneDetails, view);
+            }
+            else
+            {
+                QProcess *v = new QProcess(this);
+                QStringList arguments;
+                arguments << fileName;
+                v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+                delete v;
+            }
         }
     }
 }
@@ -1386,6 +1397,7 @@ void MainWindow::Clear()
     setCurrentFile("");
     pattern->Clear();
     doc->clear();
+    doc->setPatternModified(false);
     sceneDraw->clear();
     sceneDetails->clear();
     CancelTool();
@@ -1408,9 +1420,12 @@ void MainWindow::Clear()
  */
 void MainWindow::NewPattern()
 {
-    QProcess *v = new QProcess(this);
-    v->startDetached(QCoreApplication::applicationFilePath ());
-    delete v;
+    if (doc->isPatternModified() || curFile.isEmpty() == false)
+    {
+        QProcess *v = new QProcess(this);
+        v->startDetached(QCoreApplication::applicationFilePath ());
+        delete v;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1978,6 +1993,25 @@ void MainWindow::LoadPattern(const QString &fileName)
         Clear();
         return;
     }
+    catch (const std::bad_alloc &)
+    {
+#ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+#endif
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Error parsing file."));
+        msgBox.setInformativeText("std::bad_alloc");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+#ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+        Clear();
+        return;
+    }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::currentDrawChanged);
     QString nameDraw = doc->GetNameActivDraw();
@@ -1996,7 +2030,14 @@ void MainWindow::LoadPattern(const QString &fileName)
     }
     SetEnableWidgets(true);
 
+    bool patternModified = doc->isPatternModified();
     setCurrentFile(fileName);
+    if (patternModified)
+    {
+        //For situation where was fixed wrong formula need return for document status was modified.
+        doc->setPatternModified(patternModified);
+        PatternWasModified();
+    }
     helpLabel->setText(tr("File loaded"));
 }
 

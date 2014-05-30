@@ -42,91 +42,50 @@ class VDrawTool : public VAbstractTool
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VDrawTool constructor.
-                  * @param doc dom document container.
-                  * @param data container with variables.
-                  * @param id object id in container.
-                  * @param parent parent object.
-                  */
-                 VDrawTool(VPattern *doc, VContainer *data, quint32 id);
+
+    VDrawTool(VPattern *doc, VContainer *data, quint32 id);
     virtual      ~VDrawTool();
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+
+    /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
     /**
-    * @brief DialogLinkDestroy removes dialog pointer
-    */
+     * @brief DialogLinkDestroy removes dialog pointer
+     */
     virtual void DialogLinkDestroy();
-    /**
-     * @brief ignoreContextMenu set ignore contect menu tool.
-     * @param enable true - ignore.
-     */
-    void         ignoreContextMenu(bool enable) {ignoreContextMenuEvent = enable;}
+
+    void         ignoreContextMenu(bool enable);
+    static qreal CheckFormula(QString &formula, VContainer *data);
 public slots:
-    /**
-     * @brief ShowTool  highlight tool.
-     * @param id object id in container.
-     * @param color highlight color.
-     * @param enable enable or disable highlight.
-     */
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    /**
-     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName new name active pattern peace. name new active pattern peace.
-     */
     virtual void ChangedActivDraw(const QString &newName);
-    /**
-     * @brief ChangedNameDraw save new name active pattern peace.
-     * @param oldName old name.
-     * @param newName new name active pattern peace. new name.
-     */
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    /**
-     * @brief FullUpdateFromGui refresh tool data after change in options.
-     * @param result keep result working dialog.
-     */
     virtual void FullUpdateFromGui(int result);
     /**
      * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
      */
     virtual void FullUpdateFromGuiApply();
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void SetFactor(qreal factor);
 protected:
-    /**
-     * @brief ignoreContextMenuEvent ignore or not context menu events.
-     */
+    /** @brief ignoreContextMenuEvent ignore or not context menu events. */
     bool         ignoreContextMenuEvent;
-    /**
-     * @brief ignoreFullUpdate ignore or not full updates.
-     */
+
+    /** @brief ignoreFullUpdate ignore or not full updates. */
     bool         ignoreFullUpdate;
-    /**
-     * @brief nameActivDraw name of tool's pattern peace.
-     */
+
+    /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
-    /**
-     * @brief factor scene scale factor.
-     */
+
+    /** @brief factor scene scale factor. */
     static qreal factor;
-    /**
-     * @brief dialog dialog options.
-     */
+
+    /** @brief dialog dialog options.*/
     DialogTool *dialog;
-    /**
-     * @brief AddToCalculation add tool to calculation tag in pattern file.
-     * @param domElement tag in xml tree.
-     */
+
     void         AddToCalculation(const QDomElement &domElement);
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
+
+    /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
+
     template <typename Dialog, typename Tool>
     /**
      * @brief ContextMenu show context menu for tool.
@@ -211,5 +170,15 @@ protected:
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ignoreContextMenu set ignore contect menu tool.
+ * @param enable true - ignore.
+ */
+inline void VDrawTool::ignoreContextMenu(bool enable)
+{
+    ignoreContextMenuEvent = enable;
+}
 
 #endif // VDRAWTOOL_H

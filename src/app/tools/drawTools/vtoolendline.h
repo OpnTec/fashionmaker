@@ -84,7 +84,7 @@ public:
      * @return the created tool
      */
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                        const QString &formula, const qreal &angle, const quint32 &basePointId, const qreal &mx,
+                        QString &formula, const qreal &angle, const quint32 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;

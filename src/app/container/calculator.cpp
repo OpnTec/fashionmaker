@@ -28,13 +28,24 @@
 
 #include "calculator.h"
 #include <QDebug>
+#include <QSettings>
 #include "../widgets/vapplication.h"
 
 int Calculator::iVal = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Calculator class constructor.
+ * @brief Calculator class constructor. Make easy initialization math parser.
+ *
+ * This constructor hide initialization variables, operators, character sets.
+ * Use this constuctor for evaluation formula. All formulas must be converted to internal look.
+ * Example:
+ *
+ * const QString formula = qApp->FormulaFromUser(edit->text());
+ * Calculator *cal = new Calculator(data);
+ * const qreal result = cal->EvalFormula(formula);
+ * delete cal;
+ *
  * @param data pointer to a variable container.
  */
 Calculator::Calculator(const VContainer *data)
@@ -55,6 +66,21 @@ Calculator::Calculator(const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Calculator class constructor. Make easy initialization math parser.
+ *
+ * This constructor hide initialization variables, operators, character sets.
+ * Use this constuctor to get tokens from formula. All formulas must be converted to external look.
+ * Example:
+ *
+ * Calculator *cal = new Calculator(formula, false);
+ * tokens = cal->GetTokens();
+ * numbers = cal->GetNumbers();
+ * delete cal;
+ *
+ * @param data pointer to a variable container.
+ * @param fromUser true if we parse formula from user
+ */
 Calculator::Calculator(const QString &formula, bool fromUser)
     :QmuParser(), vVarVal(nullptr)
 {
@@ -68,10 +94,22 @@ Calculator::Calculator(const QString &formula, bool fromUser)
         DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
         DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
 
-        QLocale loc = QLocale::system();
-        SetDecSep(loc.decimalPoint().toLatin1());
-        SetThousandsSep(loc.groupSeparator().toLatin1());
-        SetArgSep(';');
+        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                           QApplication::applicationName());
+        bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
+        if (osSeparatorValue)
+        {
+            QLocale loc = QLocale::system();
+            SetDecSep(loc.decimalPoint().toLatin1());
+            SetThousandsSep(loc.groupSeparator().toLatin1());
+            SetArgSep(';');
+        }
+        else
+        {
+            SetArgSep(',');
+            SetDecSep('.');
+        }
     }
     else
     {
@@ -84,14 +122,8 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
 
     SetExpr(formula);
-    try
-    {
-        Eval();//Need run for making tokens
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        return;//Ignore all warnings
-    }
+    //Need run for making tokens. Don't catch exception here, because it will show us in dialog that formula has error.
+    Eval();
 }
 
 Calculator::~Calculator()
@@ -204,15 +236,13 @@ void Calculator::InitVariables(const VContainer *data)
             if (qApp->patternType() == Pattern::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
             else
             {
                 vVarVal[j] = i.value().GetValue();
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
+            DefineVar(i.key(), &vVarVal[j]);
+            ++j;
             ++i;
         }
     }
@@ -224,20 +254,19 @@ void Calculator::InitVariables(const VContainer *data)
             if (qApp->patternType() == Pattern::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
             else
             {
                 vVarVal[j] = i.value().GetValue();
-                DefineVar(i.key(), &vVarVal[j]);
-                ++j;
             }
+            DefineVar(i.key(), &vVarVal[j]);
+            ++j;
             ++i;
         }
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void Calculator::InitCharacterSets()
 {
     //String with all unique symbols for supported alpabets.

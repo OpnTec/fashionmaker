@@ -73,13 +73,12 @@ void VToolArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
-                      VContainer *data)
+void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     Q_CHECK_PTR(dialog);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     Q_CHECK_PTR(dialogTool);
-    quint32 center = dialogTool->GetCenter();
+    const quint32 center = dialogTool->GetCenter();
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
@@ -87,19 +86,16 @@ void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::Create(const quint32 _id, const quint32 &center, const QString &radius, const QString &f1,
-                      const QString &f2, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                      const Document::Documents &parse, const Valentina::Sources &typeCreation)
+void VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
+                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document::Documents &parse,
+                      const Valentina::Sources &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
-    Calculator cal(data);
+    calcRadius = qApp->toPixel(CheckFormula(radius, data));
 
-    qreal result = cal.EvalFormula(radius);
-    calcRadius = qApp->toPixel(result);
-
-    calcF1 = cal.EvalFormula(f1);
-    calcF2 = cal.EvalFormula(f2);
+    calcF1 = CheckFormula(f1, data);
+    calcF2 = CheckFormula(f2, data);
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );

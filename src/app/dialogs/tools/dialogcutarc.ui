@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>507</width>
-    <height>493</height>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Cut arc</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -236,6 +236,12 @@
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonSizeGrowth">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Size and height</string>
            </property>
@@ -246,6 +252,12 @@
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonStandardTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Standard table</string>
            </property>
@@ -253,6 +265,12 @@
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonIncrements">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Increments</string>
            </property>
@@ -262,6 +280,12 @@
           <widget class="QRadioButton" name="radioButtonLengthLine">
            <property name="enabled">
             <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="text">
             <string>Length of lines</string>
@@ -273,6 +297,12 @@
            <property name="enabled">
             <bool>true</bool>
            </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Length of arcs</string>
            </property>
@@ -282,6 +312,12 @@
           <widget class="QRadioButton" name="radioButtonLengthSpline">
            <property name="enabled">
             <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="text">
             <string>Length of curves</string>

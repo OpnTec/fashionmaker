@@ -81,10 +81,9 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void  Create(const quint32 _id, const QString &pointName, const QString &formula,
-                        const quint32 &splinePathId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                        VPattern *doc, VContainer *data, const Document::Documents &parse,
-                        const Valentina::Sources &typeCreation);
+    static void  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &splinePathId,
+                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
     static const QString ToolType;
     static const QString AttrSplinePath;
 public slots:

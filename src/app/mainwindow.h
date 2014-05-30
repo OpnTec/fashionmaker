@@ -56,25 +56,32 @@ public:
     void               LoadPattern(const QString &curFile);
 public slots:
     void               mouseMove(const QPointF &scenePos);
+
     void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
     void               ActionNewDraw();
+    void               ActionLayout(bool checked);
+    void               ActionTable(bool checked);
+    void               ActionHistory(bool checked);
+
+    void               tableClosed();
+    void               ClosedActionTable();
+    void               ClosedActionHistory();
+
     bool               SaveAs();
     bool               Save();
     void               Open();
     void               Options();
     void               NewPattern();
-    void               ActionTable(bool checked);
-    void               ActionHistory(bool checked);
-    void               ActionLayout(bool checked);
+
     void               currentDrawChanged( int index );
     void               OptionDraw();
-    void               PatternWasModified();
     void               ChangedSize(const QString &text);
     void               ChangedHeight(const QString & text);
-    void               ClosedActionTable();
-    void               ClosedActionHistory();
+
+    void               PatternWasModified();
+
     void               ToolEndLine(bool checked);
     void               ToolLine(bool checked);
     void               ToolAlongLine(bool checked);
@@ -94,6 +101,7 @@ public slots:
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
     void               ToolCutArc(bool checked);
+
     void               ClosedDialogEndLine(int result);
     void               ApplyDialogEndLine();
     void               ClosedDialogLine(int result);
@@ -114,12 +122,14 @@ public slots:
     void               ClosedDialogUnionDetails(int result);
     void               ClosedDialogCutSpline(int result);
     void               ClosedDialogCutArc(int result);
+
     void               About();
     void               AboutQt();
-    void               ShowToolTip(const QString &toolTip);
-    void               tableClosed();
-    void               OpenRecentFile();
     void               PatternProperties();
+
+    void               ShowToolTip(const QString &toolTip);
+    void               OpenRecentFile();
+    void               Clear();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -131,80 +141,63 @@ protected:
     virtual void       keyPressEvent ( QKeyEvent * event );
     virtual void       showEvent( QShowEvent *event );
     virtual void       closeEvent( QCloseEvent * event );
-    void               Clear();
 private:
     Q_DISABLE_COPY(MainWindow)
-    /**
-     * @brief ui keeps information about user interface
-     */
+    /** @brief ui keeps information about user interface */
     Ui::MainWindow     *ui;
-    /**
-     * @brief pattern container with data (points, arcs, splines, spline paths, variables)
-     */
+
+    /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
     VContainer        *pattern;
-    /**
-     * @brief doc dom document container
-     */
+
+    /** @brief doc dom document container */
     VPattern          *doc;
-    /**
-     * @brief tool current tool
-     */
+
+    /** @brief tool current tool */
     Valentina::Tools        tool;
-    /**
-     * @brief currentScene pointer to current scene.
-     */
+
+    /** @brief currentScene pointer to current scene. */
     VMainGraphicsScene *currentScene;
-    /**
-     * @brief sceneDraw draw scene.
-     */
+
+    /** @brief sceneDraw draw scene. */
     VMainGraphicsScene *sceneDraw;
-    /**
-     * @brief sceneDetails details scene.
-     */
+
+    /** @brief sceneDetails details scene. */
     VMainGraphicsScene *sceneDetails;
-    /**
-     * @brief mouseCoordinate pointer to label who show mouse coordinate.
-     */
+
+    /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QLabel             *mouseCoordinate;
-    /**
-     * @brief helpLabel help show tooltip.
-     */
+
+    /** @brief helpLabel help show tooltip. */
     QLabel             *helpLabel;
-    /**
-     * @brief view show current scene.
-     */
+
+    /** @brief view show current scene. */
     VMainGraphicsView  *view;
-    /**
-     * @brief isInitialized true after first show window.
-     */
+
+    /** @brief isInitialized true after first show window. */
     bool               isInitialized;
+
     DialogIncrements   *dialogTable;
     DialogTool         *dialogTool;
     DialogHistory      *dialogHistory;
-    /**
-     * @brief comboBoxDraws comboc who show name of pattern peaces.
-     */
+
+    /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
-    /**
-     * @brief fileName name current pattern file.
-     */
+
+    /** @brief fileName name current pattern file. */
     QString            curFile;
-    /**
-     * @brief mode keep current draw mode.
-     */
+
+    /** @brief mode keep current draw mode. */
     Valentina::Draws        mode;
-    /**
-     * @brief currentDrawIndex save current selected pattern peace.
-     */
+
+    /** @brief currentDrawIndex save current selected pattern peace. */
     qint32             currentDrawIndex;
-    /**
-     * @brief currentToolBoxIndex save current set of tools.
-     */
+
+    /** @brief currentToolBoxIndex save current set of tools. */
     qint32             currentToolBoxIndex;
-    /**
-     * @brief drawMode true if we current draw scene.
-     */
+
+    /** @brief drawMode true if we current draw scene. */
     bool               drawMode;
+
     enum { MaxRecentFiles = 5 };
     QAction            *recentFileActs[MaxRecentFiles];
     QAction            *separatorAct;
@@ -218,6 +211,8 @@ private:
     void               SetEnableTool(bool enable);
     void               SaveCurrentScene();
     void               RestoreCurrentScene();
+    void               MinimumScrollBar();
+
     template <typename Dialog, typename Func>
     // TODO ISSUE 79 : delete
     void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
@@ -226,7 +221,6 @@ private:
     // TODO ISSUE 79 : copy
     void               SetToolButton2(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot, Func2 applyDialogSlot);
-    void               MinimumScrollBar();
     template <typename DrawTool>
     void               ClosedDialog(int result);
     template <typename DrawTool>

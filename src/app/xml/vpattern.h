@@ -236,6 +236,7 @@ signals:
      * @param id tool id.
      */
     void           ChangedCursor(quint32 id);
+    void           ClearMainWindow();
 public slots:
     /**
      * @brief FullUpdateTree lite parse file.
@@ -334,7 +335,7 @@ private:
      * @param type type of point.
      * @param mode draw mode.
      */
-    void           ParsePointElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+    void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document::Documents &parse, const QString &type);
     /**
      * @brief ParseLineElement parse line tag.
@@ -363,7 +364,7 @@ private:
      * @param type type of spline.
      * @param mode draw mode.
      */
-    void           ParseArcElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+    void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document::Documents &parse, const QString& type);
     /**
      * @brief ParseToolsElement parse tools tag.

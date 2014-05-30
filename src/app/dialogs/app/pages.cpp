@@ -51,7 +51,7 @@ void ConfigurationPage::Apply()
                        QApplication::applicationName());
     settings.setValue("configuration/autosave/state", autoSaveCheck->isChecked());
     settings.setValue("configuration/autosave/time", autoTime->value());
-    //settings.setValue("configuration/osSeparator", osOptionCheck->isChecked());
+    settings.setValue("configuration/osSeparator", osOptionCheck->isChecked());
     if (langChanged)
     {
         QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
@@ -157,10 +157,9 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
 
-    osOptionCheck = new QCheckBox(tr("With OS options (.)"));
-    //bool osOptionValue = settings.value("configuration/osSeparator", 1).toBool();
-    //osOptionCheck->setChecked(osOptionValue);
-    osOptionCheck->setEnabled(false);
+    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    bool osOptionValue = settings.value("configuration/osSeparator", 1).toBool();
+    osOptionCheck->setChecked(osOptionValue);
 
     QHBoxLayout *separatorLayout = new QHBoxLayout;
     separatorLayout->addWidget(separatorLabel);

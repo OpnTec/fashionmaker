@@ -219,9 +219,9 @@ for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
 
 copyToDestdir($$st_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/standard))
 
-win32:CONFIG(release, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2
-else:win32:CONFIG(debug, debug|release): LIBS += -L../libs/qmuparser/bin -lqmuparser2
-else:unix: LIBS += -L../libs/qmuparser/bin -lqmuparser
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser2
+else:unix: LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser
 
-INCLUDEPATH += ../libs/qmuparser
-DEPENDPATH += ../libs/qmuparser
+INCLUDEPATH += $$PWD/../libs/qmuparser
+DEPENDPATH += $$PWD/../libs/qmuparser

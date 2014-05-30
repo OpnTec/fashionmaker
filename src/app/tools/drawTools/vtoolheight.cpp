@@ -70,11 +70,11 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     Q_CHECK_PTR(dialogTool);
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
-    QString pointName = dialogTool->getPointName();
-    QString typeLine = dialogTool->getTypeLine();
-    quint32 basePointId = dialogTool->getBasePointId();
-    quint32 p1LineId = dialogTool->getP1LineId();
-    quint32 p2LineId = dialogTool->getP2LineId();
+    const QString pointName = dialogTool->getPointName();
+    const QString typeLine = dialogTool->getTypeLine();
+    const quint32 basePointId = dialogTool->getBasePointId();
+    const quint32 p1LineId = dialogTool->getP1LineId();
+    const quint32 p2LineId = dialogTool->getP2LineId();
     Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
 }
