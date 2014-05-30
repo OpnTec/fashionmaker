@@ -50,6 +50,7 @@ public:
     virtual void setDialog() {}
 
     void         ignoreContextMenu(bool enable);
+    static qreal CheckFormula(QString &formula, VContainer *data);
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);

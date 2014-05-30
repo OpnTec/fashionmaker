@@ -28,6 +28,12 @@
 
 #include "vdrawtool.h"
 
+#include <qmuparsererror.h>
+
+#include <dialogs/tools/dialogeditwrongformula.h>
+
+#include <container/calculator.h>
+
 qreal VDrawTool::factor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +139,51 @@ void VDrawTool::SetFactor(qreal factor)
     {
         this->factor = factor;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckFormula check formula.
+ *
+ * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
+ * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
+ * @param formula [in|out] string with formula.
+ * @param data [in] container with variables. Need for math parser.
+ * @throw QmuParserError.
+ * @return result of calculation formula.
+ */
+qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
+{
+    qreal result = 0;
+    Calculator *cal = nullptr;
+    try
+    {
+        cal = new Calculator(data);
+        result = cal->EvalFormula(formula);
+        delete cal;
+    }
+    catch(qmu::QmuParserError &e)
+    {
+        delete cal;
+        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+        dialog->setFormula(formula);
+        if (dialog->exec() == QDialog::Accepted)
+        {
+            formula = dialog->getFormula();
+            //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
+            //Don't know why.
+            delete dialog;
+            Calculator *cal = new Calculator(data);
+            result = cal->EvalFormula(formula);
+            delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
+        }
+        else
+        {
+            delete dialog;
+            throw;
+        }
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

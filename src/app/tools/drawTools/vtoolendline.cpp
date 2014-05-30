@@ -90,32 +90,7 @@ void VToolEndLine::Create(const quint32 _id, const QString &pointName, const QSt
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
 
-    qreal result = 0;
-
-    try
-    {
-        Calculator *cal = new Calculator(data);
-        result = cal->EvalFormula(formula);
-        delete cal;
-    }
-    catch(qmu::QmuParserError &e)
-    {
-        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
-        dialog->setFormula(formula);
-        if (dialog->exec() == QDialog::Accepted)
-        {
-            formula = dialog->getFormula();
-            delete dialog;
-            Calculator *cal = new Calculator(data);
-            result = cal->EvalFormula(formula);
-            delete cal;
-        }
-        else
-        {
-            delete dialog;
-            throw;
-        }
-    }
+    qreal result = CheckFormula(formula, data);
 
     line.setLength(qApp->toPixel(result));
     line.setAngle(angle);
