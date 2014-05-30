@@ -128,6 +128,7 @@ public slots:
 
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
+    void               Clear();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -139,7 +140,6 @@ protected:
     virtual void       keyPressEvent ( QKeyEvent * event );
     virtual void       showEvent( QShowEvent *event );
     virtual void       closeEvent( QCloseEvent * event );
-    void               Clear();
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */

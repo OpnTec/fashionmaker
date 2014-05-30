@@ -236,6 +236,7 @@ signals:
      * @param id tool id.
      */
     void           ChangedCursor(quint32 id);
+    void           ClearMainWindow();
 public slots:
     /**
      * @brief FullUpdateTree lite parse file.

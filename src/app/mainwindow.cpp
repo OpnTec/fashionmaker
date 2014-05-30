@@ -89,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     doc = new VPattern(pattern, comboBoxDraws, &mode);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
+    connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
 
     InitAutoSave();
 
@@ -1291,6 +1292,7 @@ void MainWindow::Clear()
     setCurrentFile("");
     pattern->Clear();
     doc->clear();
+    doc->setPatternModified(false);
     sceneDraw->clear();
     sceneDetails->clear();
     CancelTool();

@@ -40,6 +40,7 @@
 
 #include <QMessageBox>
 #include "../../libs/qmuparser/qmuparsererror.h"
+#include <exception/vexceptionemptyparameter.h>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -556,10 +557,46 @@ bool VPattern::SaveDocument(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::FullUpdateTree()
 {
-    VMainGraphicsScene *scene = new VMainGraphicsScene();
+    VMainGraphicsScene *scene = nullptr;
     try
     {
+        scene = new VMainGraphicsScene();
         Parse(Document::LiteParse, scene, scene);
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        delete scene;
+        e.CriticalMessageBox(tr("Error parsing file."));
+        emit ClearMainWindow();
+        return;
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        delete scene;
+        e.CriticalMessageBox(tr("Error can't convert value."));
+        emit ClearMainWindow();
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        delete scene;
+        e.CriticalMessageBox(tr("Error empty parameter."));
+        emit ClearMainWindow();
+        return;
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        delete scene;
+        e.CriticalMessageBox(tr("Error wrong id."));
+        emit ClearMainWindow();
+        return;
+    }
+    catch (VException &e)
+    {
+        delete scene;
+        e.CriticalMessageBox(tr("Error parsing file."));
+        emit ClearMainWindow();
+        return;
     }
     catch (const std::bad_alloc &)
     {
@@ -572,12 +609,8 @@ void VPattern::FullUpdateTree()
         msgBox.setDefaultButton(QMessageBox::Ok);
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.exec();
+        emit ClearMainWindow();
         return;
-    }
-    catch (...)
-    {
-        delete scene;
-        throw;
     }
 
     delete scene;
