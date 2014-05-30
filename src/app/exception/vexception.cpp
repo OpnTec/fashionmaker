@@ -66,6 +66,10 @@ void VException::CriticalMessageBox(const QString &situation, QWidget * parent) 
     QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
     Q_CHECK_PTR(layout);
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+    //Disable Qt::WaitCursor for error message.
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
     msgBox.exec();
 }
 

@@ -51,11 +51,19 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *
 
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEditWrongFormula::EvalFormula);
     connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
+
+    //Disable Qt::WaitCursor
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::~DialogEditWrongFormula()
 {
+#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
     delete ui;
 }
 
