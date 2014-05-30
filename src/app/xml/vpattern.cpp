@@ -206,6 +206,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
 {
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
+    QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements, TagVersion};
     PrepareForParse(parse, sceneDraw, sceneDetail);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -215,8 +216,6 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements,
-                            TagVersion};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
@@ -641,6 +640,7 @@ void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
                                 const Document::Documents &parse)
 {
+    QStringList tags{TagCalculation, TagModeling, TagDetails};
     QDomNode domNode = node.firstChild();
     while (domNode.isNull() == false)
     {
@@ -649,7 +649,6 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags{TagCalculation, TagModeling, TagDetails};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagCalculation
@@ -687,6 +686,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
     {
         scene = sceneDetail;
     }
+    QStringList tags{TagPoint, TagLine, TagSpline, TagArc, TagTools};
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -694,7 +694,6 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
         QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            QStringList tags{TagPoint, TagLine, TagSpline, TagArc, TagTools};
             switch (tags.indexOf(domElement.tagName()))
             {
                 case 0: // TagPoint
@@ -737,6 +736,8 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
         detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
         detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
 
+        QStringList types{VToolDetail::NodePoint, VToolDetail::NodeArc, VToolDetail::NodeSpline,
+                    VToolDetail::NodeSplinePath};
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
         for (qint32 i = 0; i < num; ++i)
@@ -753,8 +754,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
                     Valentina::Tools tool;
-                    QStringList types{VToolDetail::NodePoint, VToolDetail::NodeArc, VToolDetail::NodeSpline,
-                                VToolDetail::NodeSplinePath};
+
                     switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
