@@ -338,8 +338,7 @@ void VDomDocument::setContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Valentina::Units VDomDocument::StrToUnits(const QString &unit)
 {
-    QStringList units;
-    units << UnitMM << UnitCM << UnitINCH;
+    QStringList units{UnitMM, UnitCM, UnitINCH};
     Valentina::Units result = Valentina::Cm;
     switch (units.indexOf(unit))
     {

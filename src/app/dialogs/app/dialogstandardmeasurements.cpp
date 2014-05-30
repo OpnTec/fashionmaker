@@ -136,8 +136,7 @@ void DialogStandardMeasurements::CheckState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::LoadStandardTables()
 {
-    QStringList filters;
-    filters << "*.vst";
+    QStringList filters{"*.vst"};
     QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
     tablesDir.setCurrent(qApp->pathToTables());

@@ -214,9 +214,8 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags;
-                tags << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes << TagMeasurements
-                     << TagVersion;
+                QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements,
+                            TagVersion};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
@@ -487,8 +486,7 @@ Valentina::Units VPattern::MUnit() const
     QDomElement element = list.at(0).toElement();
     if (element.isElement())
     {
-        QStringList units;
-        units << "mm" << "cm" << "inch";
+        QStringList units{"mm", "cm", "inch"};
         QString unit = GetParametrString(element, AttrUnit);
         switch (units.indexOf(unit))
         {
@@ -520,8 +518,7 @@ Pattern::Measurements VPattern::MType() const
     if (element.isElement())
     {
         QString type = GetParametrString(element, AttrType);
-        QStringList types;
-        types << "standard" << "individual";
+        QStringList types{"standard", "individual"};
         switch (types.indexOf(type))
         {
             case 0:// standard
@@ -613,8 +610,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                QStringList tags;
-                tags << TagCalculation << TagModeling << TagDetails;
+                QStringList tags{TagCalculation, TagModeling, TagDetails};
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagCalculation
@@ -659,8 +655,7 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
         QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            QStringList tags;
-            tags << TagPoint << TagLine << TagSpline << TagArc << TagTools;
+            QStringList tags{TagPoint, TagLine, TagSpline, TagArc, TagTools};
             switch (tags.indexOf(domElement.tagName()))
             {
                 case 0: // TagPoint
@@ -719,9 +714,8 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
                     Valentina::Tools tool;
-                    QStringList types;
-                    types << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline <<
-                             VToolDetail::NodeSplinePath;
+                    QStringList types{VToolDetail::NodePoint, VToolDetail::NodeArc, VToolDetail::NodeSpline,
+                                VToolDetail::NodeSplinePath};
                     switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
@@ -787,12 +781,11 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
 
 
-    QStringList points;
-    points << VToolSinglePoint::ToolType << VToolEndLine::ToolType << VToolAlongLine::ToolType
-           << VToolShoulderPoint::ToolType << VToolNormal::ToolType << VToolBisector::ToolType
-           << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType << VNodePoint::ToolType
-           << VToolHeight::ToolType << VToolTriangle::ToolType << VToolPointOfIntersection::ToolType
-           << VToolCutSpline::ToolType << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
+    QStringList points{VToolSinglePoint::ToolType, VToolEndLine::ToolType, VToolAlongLine::ToolType,
+                VToolShoulderPoint::ToolType, VToolNormal::ToolType, VToolBisector::ToolType,
+                VToolLineIntersect::ToolType, VToolPointOfContact::ToolType, VNodePoint::ToolType,
+                VToolHeight::ToolType, VToolTriangle::ToolType, VToolPointOfIntersection::ToolType,
+                VToolCutSpline::ToolType, VToolCutSplinePath::ToolType, VToolCutArc::ToolType};
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1256,8 +1249,8 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines;
-    splines << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType << VNodeSplinePath::ToolType;
+    QStringList splines{VToolSpline::ToolType, VToolSplinePath::ToolType, VNodeSpline::ToolType,
+                VNodeSplinePath::ToolType};
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::ToolType
@@ -1378,8 +1371,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, const QDomElement &dom
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList arcs;
-    arcs << VToolArc::ToolType << VNodeArc::ToolType;
+    QStringList arcs{VToolArc::ToolType, VNodeArc::ToolType};
 
     switch (arcs.indexOf(type))
     {
@@ -1442,8 +1434,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList tools;
-    tools << VToolUnionDetails::ToolType;
+    QStringList tools{VToolUnionDetails::ToolType};
 
     switch (tools.indexOf(type))
     {

@@ -228,8 +228,7 @@ void TableWindow::saveScene()
     shadowPaper->setVisible(false);
     paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
     QFileInfo fi( name );
-    QStringList suffix;
-    suffix << "svg" << "png" << "pdf" << "eps" << "ps";
+    QStringList suffix{"svg", "png", "pdf", "eps", "ps"};
     switch (suffix.indexOf(fi.suffix()))
     {
         case 0: //svg
@@ -510,10 +509,7 @@ void TableWindow::EpsFile(const QString &name) const
     if (tmp.open())
     {
         PdfFile(tmp.fileName());
-
-        QStringList params;
-        params << "-eps" << tmp.fileName() << name;
-
+        QStringList params{"-eps", tmp.fileName(), name};
         PdfToPs(params);
     }
 }
@@ -525,10 +521,7 @@ void TableWindow::PsFile(const QString &name) const
     if (tmp.open())
     {
         PdfFile(tmp.fileName());
-
-        QStringList params;
-        params << tmp.fileName() << name;
-
+        QStringList params{tmp.fileName(), name};
         PdfToPs(params);
     }
 }

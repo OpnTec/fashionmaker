@@ -784,9 +784,8 @@ void MainWindow::ToolBarOption()
     {
         ui->toolBarOption->addWidget(new QLabel(tr("Height: ")));
 
-        QStringList list;
-        list <<"92"<<"98"<<"104"<<"110"<<"116"<<"122"<<"128"<<"134"<<"140"<<"146"<<"152"<<"158"<<"164"<<"170"<<"176"
-             <<"182"<<"188";
+        QStringList list{"92", "98", "104", "110", "116", "122", "128", "134", "140", "146", "152", "158", "164", "170",
+                         "176", "182", "188"};
         QComboBox *comboBoxHeight = new QComboBox;
         comboBoxHeight->addItems(list);
         comboBoxHeight->setCurrentIndex(14);//176
