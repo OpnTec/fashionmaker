@@ -31,6 +31,7 @@
 #include <QSpacerItem>
 #include <QGridLayout>
 #include "../options.h"
+#include <QApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
 VException::VException(const QString &what):QException(), what(what), moreInfo(QString())

@@ -37,8 +37,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
-
 #include <container/calculator.h>
+#include <QtMath>
 
 const qreal VApplication::PrintDPI = 96.0;
 

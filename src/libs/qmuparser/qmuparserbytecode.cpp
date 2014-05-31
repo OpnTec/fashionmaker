@@ -22,11 +22,10 @@
 
 #include "qmuparserbytecode.h"
 
-#include <cassert>
-#include <string>
-#include <stack>
-#include <iostream>
+#include <QStack>
 #include <QString>
+#include <QtMath>
+#include <QDebug>
 
 #include "qmuparserdef.h"
 #include "qmuparsererror.h"

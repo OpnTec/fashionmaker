@@ -36,7 +36,7 @@
 #include <csignal>
 
 #ifdef Q_OS_WIN32
-#include WinBase.h
+#include <Windows.h>
 #endif /*Q_OS_WIN32*/
 
 #define SceneSize 50000
@@ -305,15 +305,30 @@ extern const QString in_Oprt;
  */
 #ifndef QT_NO_DEBUG
 #ifdef Q_OS_WIN32
+#ifdef Q_CC_MSVC
 #define SCASSERT(cond)                                      \
 {                                                           \
     if (!(cond))                                            \
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
             #cond, __FUNCSIG__, __FILE__, __LINE__);        \
-        void WINAPI DebugBreak(void);                       \                                                                                                          \
+        DebugBreak();                                       \
     }                                                       \
-}
+}                                                           \
+
+#else
+
+#define SCASSERT(cond)                                      \
+{                                                           \
+    if (!(cond))                                            \
+    {                                                       \
+        qDebug("ASSERT: %s in %s (%s:%u)",                  \
+            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
+        DebugBreak();                                       \
+    }                                                       \
+}                                                           \
+
+#endif /*Q_CC_MSVC*/
 #else
 #define SCASSERT(cond)                                      \
 {                                                           \
@@ -321,9 +336,10 @@ extern const QString in_Oprt;
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
             #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        std::raise(SIGTRAP);                                     \
+        std::raise(SIGTRAP);                                \
     }                                                       \
-}
+}                                                           \
+
 #endif /* Q_OS_WIN32 */
 #endif /* QT_NO_DEBUG */
 

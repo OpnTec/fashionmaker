@@ -30,9 +30,9 @@
 #define VDRAWTOOL_H
 
 #include "../vabstracttool.h"
-
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QGraphicsView>
 #include "../../dialogs/tools/dialogtool.h"
 
 /**
