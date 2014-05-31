@@ -84,7 +84,12 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_nl.ts
 
 unix {
-QMAKE_CXX = ccache g++
+    *-g++{
+        QMAKE_CXX = ccache g++
+    }
+    clang*{
+        QMAKE_CXX = ccache clang++
+    }
 }
 
 CONFIG += precompile_header

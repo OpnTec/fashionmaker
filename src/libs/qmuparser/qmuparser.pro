@@ -56,7 +56,13 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 
-    QMAKE_CXX = ccache g++
+    *-g++{
+        QMAKE_CXX = ccache g++
+    }
+
+    clang*{
+        QMAKE_CXX = ccache clang++
+    }
 }
 
 CONFIG += precompile_header

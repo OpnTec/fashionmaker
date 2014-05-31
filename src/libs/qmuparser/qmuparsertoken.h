@@ -298,7 +298,7 @@ public:
     //------------------------------------------------------------------------------
     int GetPri() const
     {
-        if ( m_pCallback.get() == false)
+        if ( m_pCallback.get() == nullptr)
         {
             throw QmuParserError ( ecINTERNAL_ERROR );
         }
@@ -424,7 +424,7 @@ public:
     {
         assert ( m_pCallback.get() );
 
-        if ( m_pCallback->GetAddr() == false)
+        if ( m_pCallback->GetAddr() == nullptr)
         {
             throw QmuParserError ( ecINTERNAL_ERROR );
         }

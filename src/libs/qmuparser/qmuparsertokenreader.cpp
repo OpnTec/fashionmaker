@@ -884,7 +884,7 @@ bool QmuParserTokenReader::IsVarTok ( token_type &a_Tok )
 //---------------------------------------------------------------------------------------------------------------------
 bool QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok )
 {
-    if ( m_pStrVarDef == false || m_pStrVarDef->empty() )
+    if ( m_pStrVarDef == nullptr || m_pStrVarDef->empty() )
     {
         return false;
     }

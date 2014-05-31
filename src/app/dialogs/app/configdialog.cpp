@@ -80,7 +80,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    if (current == false)
+    if (current == nullptr)
     {
         current = previous;
     }
