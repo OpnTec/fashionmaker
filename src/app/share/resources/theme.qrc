@@ -34,5 +34,8 @@
         <file alias="24x24/actions/list-add.png">icons/win.icon.theme/24x24/actions/list-add.png</file>
         <file alias="32x32/actions/list-remove.png">icons/win.icon.theme/32x32/actions/list-remove.png</file>
         <file alias="32x32/actions/list-add.png">icons/win.icon.theme/32x32/actions/list-add.png</file>
+        <file>icons/win.icon.theme/16x16/actions/go-down.png</file>
+        <file>icons/win.icon.theme/24x24/actions/go-down.png</file>
+        <file>icons/win.icon.theme/32x32/actions/go-down.png</file>
     </qresource>
 </RCC>

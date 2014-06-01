@@ -79,14 +79,14 @@ void DialogEndLine::DeployFormulaTextEdit()
     if (ui->plainTextEditFormula->height() < DIALOGENDLINE_MAX_FORMULA_HEIGHT)
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOGENDLINE_MAX_FORMULA_HEIGHT);
-        QIcon icon(":/icon/16x16/go-next.png");
-        ui->pushButtonGrowLength->setIcon(icon);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next"));
     }
     else
     {
        ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       QIcon icon(":/icon/16x16/go-down.png");
-       ui->pushButtonGrowLength->setIcon(icon);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down"));
     }
 }
 

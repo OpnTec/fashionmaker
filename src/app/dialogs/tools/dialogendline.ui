@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>486</width>
-    <height>522</height>
+    <height>586</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -186,9 +186,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/16x16/go-down.png</normaloff>
-         <activeoff>:/icon/16x16/go-next.png</activeoff>:/icon/16x16/go-down.png</iconset>
+        <iconset theme="go-down"/>
        </property>
        <property name="iconSize">
         <size>
