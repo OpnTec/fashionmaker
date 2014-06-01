@@ -46,263 +46,154 @@ class QString;
 class VSpline :public VGObject
 {
 public:
-    /**
-     * @brief VSpline default constructor
-     */
     VSpline();
-    /**
-     * @brief VSpline constructor.
-     * @param spline spline from which the copy.
-     */
     VSpline (const VSpline &spline );
-    /**
-     * @brief VSpline constructor.
-     * @param p1 first point spline.
-     * @param p4 last point spline.
-     * @param angle1 angle from first point to first control point.
-     * @param angle2 angle from second point to second control point.
-     * @param kCurve coefficient of curvature spline.
-     * @param kAsm1 coefficient of length first control line.
-     * @param kAsm2 coefficient of length second control line.
-     */
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
-    /**
-     * @brief VSpline constructor.
-     * @param p1 first point spline.
-     * @param p2 first control point.
-     * @param p3 second control point.
-     * @param p4 second point spline.
-     */
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
              Valentina::Draws mode = Valentina::Calculation);
-    /**
-     * @brief GetP1 return first spline point.
-     * @return first point.
-     */
-    VPointF GetP1 () const {return p1;}
-    /**
-     * @brief GetP2 return first control point.
-     * @return first control point.
-     */
+    VPointF GetP1 () const;
     QPointF GetP2 () const;
-    /**
-     * @brief GetP3 return second control point.
-     * @return second control point.
-     */
     QPointF GetP3 () const;
-    /**
-     * @brief GetP4 return last spline point.
-     * @return остання точка сплайну.
-     */
     VPointF GetP4 () const;
-    /**
-     * @brief GetAngle1 return first angle control line.
-     * @return angle.
-     */
     qreal   GetAngle1 () const;
-    /**
-     * @brief GetAngle2 return second angle control line.
-     * @return angle.
-     */
     qreal   GetAngle2() const;
-    /**
-     * @brief GetLength return length of spline.
-     * @return length.
-     */
     qreal   GetLength () const;
-    /**
-     * @brief name return spline name. Used for variables.
-     * @return name.
-     */
     QString name () const;
-    /**
-     * @brief GetKasm1 return coefficient of length first control line.
-     * @return coefficient.
-     */
     qreal   GetKasm1() const;
-    /**
-     * @brief GetKasm2 return coefficient of length second control line.
-     * @return coefficient.
-     */
     qreal   GetKasm2() const;
-    /**
-     * @brief GetKcurve return coefficient of curvature spline.
-     * @return coefficient
-     */
     qreal   GetKcurve() const;
-    /**
-     * @brief CrossingSplLine check intersection spline with line.
-     * @param line line.
-     * @param intersectionPoint intersection point.
-     * @return result intersection.
-     */
     // cppcheck-suppress unusedFunction
     QLineF::IntersectType CrossingSplLine(const QLineF &line, QPointF *intersectionPoint ) const;
     qreal           LengthT(qreal t) const;
-    /**
-     * @brief CutSpline cut spline. GetPointP1() of base spline will return first point for first spline, GetPointP4()
-     * of base spline will return forth point of second spline.
-     * @param length length first spline
-     * @param spl1p2 second point of first spline
-     * @param spl1p3 third point of first spline
-     * @param spl2p2 second point of second spline
-     * @param spl2p3 third point of second spline
-     * @return point of cutting. This point is forth point of first spline and first point of second spline.
-     */
     QPointF         CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
-    /**
-     * @brief GetPoints return list with spline points.
-     * @return list of points.
-     */
     QVector<QPointF> GetPoints () const;
-    /**
-     * @brief GetPath return QPainterPath for this spline.
-     * @return path.
-     */
-    QPainterPath   GetPath() const;
-    /**
-     * @brief SplinePoints return list with spline points.
-     * @param p1 first spline point.
-     * @param p4 last spline point.
-     * @param angle1 angle from first point to first control point.
-     * @param angle2 angle from second point to second control point.
-     * @param kAsm1 coefficient of length first control line.
-     * @param kAsm2 coefficient of length second control line.
-     * @param kCurve coefficient of curvature spline.
-     * @return
-     */
+    QPainterPath    GetPath() const;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
-    /**
-     * @brief operator = assignmeant operator
-     * @param spl spline
-     * @return spline
-     */
-    VSpline        &operator=(const VSpline &spl);
+    VSpline         &operator=(const VSpline &spl);
 protected:
-    /**
-     * @brief GetPoints return list with spline points.
-     * @param p1 first spline point.
-     * @param p2 first control point.
-     * @param p3 second control point.
-     * @param p4 last spline point.
-     * @return list of points.
-     */
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
-    /**
-     * @brief p1 first spline point.
-     */
+    /** @brief p1 first spline point. */
     VPointF        p1;
-    /**
-     * @brief p2 first control point.
-     */
+
+    /** @brief p2 first control point. */
     QPointF        p2;
-    /**
-     * @brief p3 second control point.
-     */
+
+    /** @brief p3 second control point. */
     QPointF        p3;
-    /**
-     * @brief p4 last spline point.
-     */
+
+    /** @brief p4 last spline point. */
     VPointF        p4;
-    /**
-     * @brief angle1 first angle control line.
-     */
+
+    /** @brief angle1 first angle control line. */
     qreal          angle1;
-    /**
-     * @brief angle2 second angle control line.
-     */
+
+    /** @brief angle2 second angle control line. */
     qreal          angle2;
-    /**
-     * @brief kAsm1 coefficient of length first control line.
-     */
+
+    /** @brief kAsm1 coefficient of length first control line. */
     qreal          kAsm1;
-    /**
-     * @brief kAsm2 coefficient of length second control line.
-     */
+
+    /** @brief kAsm2 coefficient of length second control line. */
     qreal          kAsm2;
-    /**
-     * @brief kCurve coefficient of curvature spline.
-     */
+
+    /** @brief kCurve coefficient of curvature spline. */
     qreal          kCurve;
-    /**
-     * @brief LengthBezier return spline length using 4 spline point.
-     * @param p1 first spline point
-     * @param p2 first control point.
-     * @param p3 second control point.
-     * @param p4 last spline point.
-     * @return length.
-     */
     qreal          LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const;
-    /**
-     * @brief PointBezier_r find spline point using four point of spline.
-     * @param x1 х coordinate first point.
-     * @param y1 у coordinate first point.
-     * @param x2 х coordinate first control point.
-     * @param y2 у coordinate first control point.
-     * @param x3 х coordinate second control point.
-     * @param y3 у coordinate second control point.
-     * @param x4 х coordinate last point.
-     * @param y4 у coordinate last point.
-     * @param level level of recursion. In the begin 0.
-     * @param px list х coordinat spline points.
-     * @param py list у coordinat spline points.
-     */
     static void    PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
                                   qint16 level, QVector<qreal> &px, QVector<qreal> &py);
-    /**
-     * @brief CalcSqDistance calculate squared distance.
-     * @param x1 х coordinate first point.
-     * @param y1 у coordinate first point.
-     * @param x2 х coordinate second point.
-     * @param y2 у coordinate second point.
-     * @return squared length.
-     */
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
-    /**
-     * @brief CreateName create spline name.
-     */
     void           CreateName();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP1 return first spline point.
+ * @return first point.
+ */
+inline VPointF VSpline::GetP1() const
+{
+    return p1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP2 return first control point.
+ * @return first control point.
+ */
 inline QPointF VSpline::GetP2() const
 {
     return p2;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP3 return second control point.
+ * @return second control point.
+ */
 inline QPointF VSpline::GetP3() const
 {
     return p3;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP4 return last spline point.
+ * @return остання точка сплайну.
+ */
 inline VPointF VSpline::GetP4() const
 {
     return p4;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle1 return first angle control line.
+ * @return angle.
+ */
 inline qreal VSpline::GetAngle1() const
 {
     return angle1;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle2 return second angle control line.
+ * @return angle.
+ */
 inline qreal VSpline::GetAngle2() const
 {
     return angle2;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKasm1 return coefficient of length first control line.
+ * @return coefficient.
+ */
 inline qreal VSpline::GetKasm1() const
 {
     return kAsm1;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKasm2 return coefficient of length second control line.
+ * @return coefficient.
+ */
 inline qreal VSpline::GetKasm2() const
 {
     return kAsm2;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKcurve return coefficient of curvature spline.
+ * @return coefficient
+ */
 inline qreal VSpline::GetKcurve() const
 {
     return kCurve;

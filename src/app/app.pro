@@ -468,7 +468,6 @@ CONFIG(debug, debug|release){
 -Wunnamed-type-template-args \
 -Wunneeded-internal-declaration \
 -Wunneeded-member-function \
--Wunreachable-code \
 -Wunsequenced \
 -Wunsupported-visibility \
 -Wunused \

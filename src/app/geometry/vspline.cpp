@@ -27,16 +27,23 @@
  *************************************************************************/
 
 #include "vspline.h"
-
+#include <cmath>
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSpline default constructor
+ */
 VSpline::VSpline()
     :VGObject(GObject::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
       kAsm1(1), kAsm2(1), kCurve(1)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSpline constructor.
+ * @param spline spline from which the copy.
+ */
 VSpline::VSpline ( const VSpline & spline )
     :VGObject(spline), p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()),
       angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()),
@@ -44,6 +51,16 @@ VSpline::VSpline ( const VSpline & spline )
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSpline constructor.
+ * @param p1 first point spline.
+ * @param p4 last point spline.
+ * @param angle1 angle from first point to first control point.
+ * @param angle2 angle from second point to second control point.
+ * @param kCurve coefficient of curvature spline.
+ * @param kAsm1 coefficient of length first control line.
+ * @param kAsm2 coefficient of length second control line.
+ */
 VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
                   quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
@@ -73,6 +90,13 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSpline constructor.
+ * @param p1 first point spline.
+ * @param p2 first control point.
+ * @param p3 second control point.
+ * @param p4 second point spline.
+ */
 VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Valentina::Draws mode)
     :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
       kAsm2(1), kCurve(1)
@@ -98,18 +122,32 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetLength return length of spline.
+ * @return length.
+ */
 qreal VSpline::GetLength () const
 {
     return LengthBezier ( GetP1().toQPointF(), this->p2, this->p3, GetP4().toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief name return spline name. Used for variables.
+ * @return name.
+ */
 QString VSpline::name() const
 {
     return _name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CrossingSplLine check intersection spline with line.
+ * @param line line.
+ * @param intersectionPoint intersection point.
+ * @return result intersection.
+ */
 // cppcheck-suppress unusedFunction
 QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const
 {
@@ -176,6 +214,16 @@ qreal VSpline::LengthT(qreal t) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CutSpline cut spline. GetPointP1() of base spline will return first point for first spline, GetPointP4()
+ * of base spline will return forth point of second spline.
+ * @param length length first spline
+ * @param spl1p2 second point of first spline
+ * @param spl1p3 third point of first spline
+ * @param spl2p2 second point of second spline
+ * @param spl2p3 third point of second spline
+ * @return point of cutting. This point is forth point of first spline and first point of second spline.
+ */
 QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3 ) const
 {
     //Always need return two splines, so we must correct wrong length.
@@ -236,12 +284,24 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPoints return list with spline points.
+ * @return list of points.
+ */
 QVector<QPointF> VSpline::GetPoints () const
 {
     return GetPoints(GetP1().toQPointF(), p2, p3, GetP4().toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPoints return list with spline points.
+ * @param p1 first spline point.
+ * @param p2 first control point.
+ * @param p3 second control point.
+ * @param p4 last spline point.
+ * @return list of points.
+ */
 QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
 {
     QVector<QPointF> pvector;
@@ -263,6 +323,14 @@ QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LengthBezier return spline length using 4 spline point.
+ * @param p1 first spline point
+ * @param p2 first control point.
+ * @param p3 second control point.
+ * @param p4 last spline point.
+ * @return length.
+ */
 qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const
 {
     QPainterPath splinePath;
@@ -276,6 +344,20 @@ qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PointBezier_r find spline point using four point of spline.
+ * @param x1 х coordinate first point.
+ * @param y1 у coordinate first point.
+ * @param x2 х coordinate first control point.
+ * @param y2 у coordinate first control point.
+ * @param x3 х coordinate second control point.
+ * @param y3 у coordinate second control point.
+ * @param x4 х coordinate last point.
+ * @param y4 у coordinate last point.
+ * @param level level of recursion. In the begin 0.
+ * @param px list х coordinat spline points.
+ * @param py list у coordinat spline points.
+ */
 void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                               qreal x3, qreal y3, qreal x4, qreal y4,
                               qint16 level, QVector<qreal> &px, QVector<qreal> &py)
@@ -555,6 +637,14 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CalcSqDistance calculate squared distance.
+ * @param x1 х coordinate first point.
+ * @param y1 у coordinate first point.
+ * @param x2 х coordinate second point.
+ * @param y2 у coordinate second point.
+ * @return squared length.
+ */
 qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
 {
     qreal dx = x2 - x1;
@@ -563,12 +653,19 @@ qreal VSpline::CalcSqDistance (qreal x1, qreal y1, qreal x2, qreal y2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CreateName create spline name.
+ */
 void VSpline::CreateName()
 {
     _name = QString(spl_+"%1_%2").arg(this->GetP1().name(), this->GetP4().name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPath return QPainterPath for this spline.
+ * @return path.
+ */
 QPainterPath VSpline::GetPath() const
 {
     QPainterPath splinePath;
@@ -589,6 +686,17 @@ QPainterPath VSpline::GetPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SplinePoints return list with spline points.
+ * @param p1 first spline point.
+ * @param p4 last spline point.
+ * @param angle1 angle from first point to first control point.
+ * @param angle2 angle from second point to second control point.
+ * @param kAsm1 coefficient of length first control line.
+ * @param kAsm2 coefficient of length second control line.
+ * @param kCurve coefficient of curvature spline.
+ * @return list with spline points.
+ */
 // cppcheck-suppress unusedFunction
 QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                        qreal kAsm2, qreal kCurve)
@@ -608,6 +716,11 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief operator = assignmeant operator
+ * @param spl spline
+ * @return spline
+ */
 VSpline &VSpline::operator =(const VSpline &spline)
 {
     VGObject::operator=(spline);
