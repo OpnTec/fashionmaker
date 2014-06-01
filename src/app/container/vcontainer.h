@@ -204,7 +204,7 @@ private:
 /**
  * @brief AddMeasurement add new measurement
  * @param name short measurement name
- * @param row measurement
+ * @param m measurement
  */
 inline void VContainer::AddMeasurement(const QString &name, const VMeasurement &m)
 {
@@ -226,7 +226,7 @@ inline void VContainer::UpdateMeasurement(const QString &name, VMeasurement m)
 /**
  * @brief UpdateIncrement update increment table row by name
  * @param name name of row
- * @param row row
+ * @param incr increment
  */
 inline void VContainer::UpdateIncrement(const QString &name, VIncrement incr)
 {
@@ -309,7 +309,7 @@ inline void VContainer::SetSizeName(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetGrowth set value of growth
- * @param growth value of growth
+ * @param height value of height
  */
 inline void VContainer::SetHeight(qreal height)
 {

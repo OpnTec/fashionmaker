@@ -46,9 +46,9 @@ VMeasurement::VMeasurement()
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kgrowth,
+VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
-    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), description(description), _tagName(tagName)
+    :base(base), ksize(ksize), kheight(kheight), gui_text(gui_text), description(description), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

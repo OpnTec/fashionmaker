@@ -228,7 +228,7 @@ public:
     /**
      * @brief RemoveEdge return detail without edge with index.
      * @param index idex of edge.
-     * @return
+     * @return detail without edge with index.
      */
     VDetail        RemoveEdge(const quint32 &index) const;
     /**

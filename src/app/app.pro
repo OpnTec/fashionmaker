@@ -124,7 +124,7 @@ CONFIG(debug, debug|release){
 -isystem "/usr/include/qt5" -isystem "/usr/include/qt5/QtWidgets" \
 -isystem "/usr/include/qt5/QtXml" -isystem "/usr/include/qt5/QtGui" \
 -isystem "/usr/include/qt5/QtCore" -isystem "/usr/include/qt5/QtXmlPatterns" \
--isystem "$${UI_DIR}" -isystem "$${MOC_DIR}" -isystem "$${RCC_DIR}" \
+-isystem "$${UI_DIR}" -isystem "$${OUT_PWD}/$${MOC_DIR}" -isystem "$${RCC_DIR}" \
 -O0 \
 -fparse-all-comments \
 -Wabi \
@@ -228,8 +228,6 @@ CONFIG(debug, debug|release){
 -Wdocumentation \
 -Wdocumentation-deprecated-sync \
 -Wdocumentation-html \
--Wdocumentation-pedantic \
--Wdocumentation-unknown-command \
 -Wdollar-in-identifier-extension \
 -Wduplicate-decl-specifier \
 -Wduplicate-enum \
