@@ -688,7 +688,7 @@ void DialogTool::ValChenged(int row)
         QString name = qApp->VarFromUser(item->text());
         VMeasurement stable = data->GetMeasurement(name);
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(name))
-                .arg(stable.GetDescription());
+                .arg(stable.GetGuiText());
         labelDescription->setText(desc);
         return;
     }

@@ -160,7 +160,7 @@ void DialogIncrements::FillMeasurements()
         QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setToolTip(m.GetDescription());
+        item->setToolTip(m.GetGuiText());
         // set the item non-editable (view only), and non-selectable
         Qt::ItemFlags flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
@@ -202,7 +202,7 @@ void DialogIncrements::FillMeasurements()
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);
         }
 
-        item = new QTableWidgetItem(m.GetNumber());
+        item = new QTableWidgetItem(m.GetDescription());
         item->setTextAlignment(Qt::AlignHCenter);
         // set the item non-editable (view only), and non-selectable
         flags = item->flags();

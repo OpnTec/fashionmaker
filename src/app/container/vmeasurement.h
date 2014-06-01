@@ -37,105 +37,107 @@
 class VMeasurement
 {
 public:
-    /**
-     * @brief VStandardTableRow create empty row
-     */
     VMeasurement();
-    /**
-     * @brief VStandardTableRow create row
-     * @param base value in base size and growth
-     * @param ksize increment in sizes
-     * @param kgrowth increment in growths
-     * @param description description of increment
-     */
     VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
-                 const QString &gui_text = QString(), const QString &number = QString(),
+                 const QString &gui_text = QString(), const QString &description = QString(),
                  const QString &TagName = QString());
     VMeasurement(const qreal &base, const QString &gui_text = QString(),
-                 const QString &number = QString(), const QString &TagName = QString());
+                 const QString &description = QString(), const QString &TagName = QString());
+    VMeasurement(const VMeasurement &m);
+    VMeasurement &operator=(const VMeasurement &m);
     ~VMeasurement(){}
-    /**
-     * @brief GetBase return value in base size and growth
-     * @return value
-     */
     qreal   GetBase() const;
     void    setBase(const qreal &value);
-    /**
-     * @brief GetKsize return increment in sizes
-     * @return increment
-     */
     qreal   GetKsize() const;
-    /**
-     * @brief GetKgrowth return increment in growths
-     * @return increment
-     */
     qreal   GetKheight() const;
-    /**
-     * @brief GetDescription return description
-     * @return description
-     */
+    QString GetGuiText() const;
     QString GetDescription() const;
-    QString GetNumber() const;
     qreal   GetValue() const;
     qreal   GetValue(const qreal &size, const qreal &height) const;
     QString TagName() const;
     void    setTagName(const QString &TagName);
 private:
-    /**
-     * @brief base value in base size and growth
-     */
+    /** @brief base value in base size and growth */
     qreal          base;
-    /**
-     * @brief ksize increment in sizes
-     */
+
+    /** @brief ksize increment in sizes */
     qreal          ksize;
-    /**
-     * @brief kgrowth increment in growths
-     */
+
+    /** @brief kgrowth increment in growths */
     qreal          kheight;
-    /**
-     * @brief description description measurement
-     */
+
+    /** @brief description description measurement */
     QString        gui_text;
-    QString        number;
+
+    QString        description;
     QString        _tagName;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBase return value in base size and growth
+ * @return value
+ */
 inline qreal VMeasurement::GetBase() const
 {
     return base;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline void VMeasurement::setBase(const qreal &value)
 {
     base = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKsize return increment in sizes
+ * @return increment
+ */
 inline qreal VMeasurement::GetKsize() const
 {
     return ksize;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKheight return increment in heights
+ * @return increment
+ */
 inline qreal VMeasurement::GetKheight() const
 {
     return kheight;
 }
 
-inline QString VMeasurement::GetDescription() const
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetGuiText measurement name for tooltip
+ * @return measurement name
+ */
+inline QString VMeasurement::GetGuiText() const
 {
     return gui_text;
 }
 
-inline QString VMeasurement::GetNumber() const
+//---------------------------------------------------------------------------------------------------------------------
+inline QString VMeasurement::GetDescription() const
 {
-    return number;
+    return description;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline qreal VMeasurement::GetValue() const
+{
+    return base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline QString VMeasurement::TagName() const
 {
     return _tagName;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline void VMeasurement::setTagName(const QString &tagName)
 {
     _tagName = tagName;

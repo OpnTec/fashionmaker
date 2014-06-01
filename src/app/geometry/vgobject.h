@@ -51,95 +51,35 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(GObject::Types)
 class VGObject
 {
 public:
-    /**
-     * @brief VGObject default constructor.
-     */
     VGObject();
-    /**
-     * @brief VGObject constructor.
-     * @param type type graphical object.
-     * @param idObject id parent object.
-     * @param mode mode creation. Used in modeling mode.
-     */
     VGObject(const GObject::Type &type, const quint32 &idObject = 0,
              const Valentina::Draws &mode = Valentina::Calculation);
-    /**
-     * @brief VGObject copy constructor.
-     * @param obj object.
-     */
     VGObject(const VGObject &obj);
-    /**
-     * @brief operator = assignment operator.
-     * @param obj object
-     * @return object
-     */
     VGObject& operator= (const VGObject &obj);
     virtual ~VGObject(){}
-    /**
-     * @brief getIdObject return parent id.
-     * @return parent id or 0 if object don't have parent.
-     */
     quint32          getIdObject() const;
-    /**
-     * @brief setIdObject set parent id.
-     * @param value parent id.
-     */
-    void            setIdObject(const quint32 &value);
-    /**
-     * @brief name return name graphical object.
-     * @return name
-     */
-    virtual QString name() const;
-    /**
-     * @brief setName set name graphical object.
-     * @param name name graphical object.
-     */
-    void            setName(const QString &name);
-    /**
-     * @brief getMode return mode creation.
-     * @return mode.
-     */
-    Valentina::Draws     getMode() const;
-    /**
-     * @brief setMode set mode creation.
-     * @param value mode.
-     */
-    void            setMode(const Valentina::Draws &value);
-    /**
-     * @brief getType return object type.
-     * @return type.
-     */
-    GObject::Type   getType() const;
-    /**
-     * @brief id return id object.
-     * @return id
-     */
+    void             setIdObject(const quint32 &value);
+    virtual QString  name() const;
+    void             setName(const QString &name);
+    Valentina::Draws getMode() const;
+    void             setMode(const Valentina::Draws &value);
+    GObject::Type    getType() const;
     quint32          id() const;
-    /**
-     * @brief setId set id object.
-     * @param id id.
-     */
-    virtual void    setId(const quint32 &id);
+    virtual void     setId(const quint32 &id);
 protected:
-    /**
-     * @brief _id id in container. Ned for arcs, spline and spline paths.
-     */
+    /** @brief _id id in container. Ned for arcs, spline and spline paths. */
     quint32          _id;
-    /**
-     * @brief type type of graphical object
-     */
+
+    /** @brief type type of graphical object */
     GObject::Type   type;
-    /**
-     * @brief idObject id of parent object. Only for modeling. All another return 0.
-     */
+
+    /** @brief idObject id of parent object. Only for modeling. All another return 0. */
     quint32          idObject;
-    /**
-     * @brief _name object name
-     */
+
+    /** @brief _name object name */
     QString         _name;
-    /**
-     * @brief mode object created in calculation or drawing mode
-     */
+
+    /** @brief mode object created in calculation or drawing mode */
     Valentina::Draws     mode;
 };
 

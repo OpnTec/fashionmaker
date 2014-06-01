@@ -29,25 +29,57 @@
 #include "vmeasurement.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMeasurement create empty measurement
+ */
 VMeasurement::VMeasurement()
-    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), number(QString()), _tagName(QString())
+    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), description(QString()), _tagName(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMeasurement create measurement for standard table
+ * @param base value in base size and growth
+ * @param ksize increment in sizes
+ * @param kheight increment in heights
+ * @param gui_text shor tooltip for user
+ * @param description measurement full description
+ * @param tagName measurement's tag name in file
+ */
 VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kgrowth,
-                           const QString &gui_text, const QString &number, const QString &tagName)
-    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), number(number), _tagName(tagName)
+                           const QString &gui_text, const QString &description, const QString &tagName)
+    :base(base), ksize(ksize), kheight(kgrowth), gui_text(gui_text), description(description), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &number, const QString &tagName)
-    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), number(number), _tagName(tagName)
+/**
+ * @brief VMeasurement create measurement for individual table
+ * @param base value in base size and growth
+ * @param gui_text shor tooltip for user
+ * @param description measurement full description
+ * @param tagName measurement's tag name in file
+ */
+VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &description,
+                           const QString &tagName)
+    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), description(description), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetValue() const
+VMeasurement::VMeasurement(const VMeasurement &m)
+    :base(m.GetBase()), ksize(m.GetKsize()), kheight(m.GetKheight()), gui_text(m.GetGuiText()),
+      description(m.GetDescription()), _tagName(m.TagName())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 {
-    return base;
+    this->base = m.GetBase();
+    this->ksize = m.GetKsize();
+    this->kheight = m.GetKheight();
+    this->gui_text = m.GetGuiText();
+    this->description = m.GetDescription();
+    this->_tagName = m.TagName();
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

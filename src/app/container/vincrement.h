@@ -37,139 +37,132 @@
 class VIncrement
 {
 public:
-    /**
-     * @brief VIncrementTableRow create enpty row
-     */
     VIncrement();
-    /**
-     * @brief VIncrementTableRow create row
-     * @param id id
-     * @param base value in base size and growth
-     * @param ksize increment in sizes
-     * @param kgrowth increment in growths
-     * @param description description of increment
-     */
     VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
-    /**
-     * @brief getId return id of row
-     * @return id
-     */
     quint32 getId() const;
-    /**
-     * @brief setId set id of row
-     * @param value id
-     */
     void    setId(const quint32 &value);
-    /**
-     * @brief getBase return value in base size and growth
-     * @return value
-     */
     qreal   getBase() const;
-    /**
-     * @brief setBase set value in base size and growth
-     * @param value base value
-     */
     void    setBase(const qreal &value);
-    /**
-     * @brief getKsize return increment in sizes
-     * @return increment
-     */
     qreal   getKsize() const;
-    /**
-     * @brief setKsize set increment in sizes
-     * @param value value of increment
-     */
     void    setKsize(const qreal &value);
-    /**
-     * @brief getKheight return increment in growths
-     * @return increment
-     */
     qreal   getKheight() const;
-    /**
-     * @brief setKheight set increment in growths
-     * @param value value of increment
-     */
     void    setKheight(const qreal &value);
-    /**
-     * @brief getDescription return description
-     * @return description
-     */
     QString getDescription() const;
-    /**
-     * @brief setDescription set description for row
-     * @param value description
-     */
     void    setDescription(const QString &value);
     qreal   GetValue() const;
     qreal   GetValue(const qreal &size, const qreal &height) const;
 private:
-    /**
-     * @brief id identificator
-     */
+    /** @brief id identificator */
     quint32         id;
-    /**
-     * @brief base value in base size and growth
-     */
+
+    /** @brief base value in base size and height */
     qreal          base;
-    /**
-     * @brief ksize increment in sizes
-     */
+
+    /** @brief ksize increment in sizes */
     qreal          ksize;
-    /**
-     * @brief kgrowth increment in growths
-     */
+
+    /** @brief kgrowth increment in growths */
     qreal          kheight;
-    /**
-     * @brief description description of increment
-     */
+
+    /** @brief description description of increment */
     QString        description;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getId return id of row
+ * @return id
+ */
 inline quint32 VIncrement::getId() const
 {
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setId set id of row
+ * @param value id
+ */
 inline void VIncrement::setId(const quint32 &value)
 {
     id = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getBase return value in base size and growth
+ * @return value
+ */
 inline qreal VIncrement::getBase() const
 {
     return base;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setBase set value in base size and growth
+ * @param value base value
+ */
 inline void VIncrement::setBase(const qreal &value)
 {
     base = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getKsize return increment in sizes
+ * @return increment
+ */
 inline qreal VIncrement::getKsize() const
 {
     return ksize;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setKsize set increment in sizes
+ * @param value value of increment
+ */
 inline void VIncrement::setKsize(const qreal &value)
 {
     ksize = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getKheight return increment in growths
+ * @return increment
+ */
 inline qreal VIncrement::getKheight() const
 {
     return kheight;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setKheight set increment in growths
+ * @param value value of increment
+ */
 inline void VIncrement::setKheight(const qreal &value)
 {
     kheight = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getDescription return description
+ * @return description
+ */
 inline QString VIncrement::getDescription() const
 {
     return description;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDescription set description for row
+ * @param value description
+ */
 inline void VIncrement::setDescription(const QString &value)
 {
     description = value;

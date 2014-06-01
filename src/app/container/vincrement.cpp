@@ -29,9 +29,22 @@
 #include "vincrement.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VIncrement create enpty increment
+ */
 VIncrement::VIncrement()
-    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString()){}
+    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString())
+{}
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VIncrementTableRow create increment
+ * @param id id
+ * @param base value in base size and growth
+ * @param ksize increment in sizes
+ * @param kheight increment in heights
+ * @param description description of increment
+ */
 VIncrement::VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
     :id(id), base(base), ksize(ksize), kheight(kheight), description(description)
 {}
