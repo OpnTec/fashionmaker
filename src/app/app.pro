@@ -486,7 +486,6 @@ CONFIG(debug, debug|release){
 -Wunused-value \
 -Wunused-variable \
 -Wunused-volatile-lvalue \
--Wused-but-marked-unused \
 -Wuser-defined-literals \
 -Wvarargs \
 -Wvariadic-macros \

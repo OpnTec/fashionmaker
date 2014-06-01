@@ -30,11 +30,22 @@
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSplinePoint default constructor.
+ */
 VSplinePoint::VSplinePoint()
     :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSplinePoint constructor.
+ * @param pSpline spline point.
+ * @param kAsm1 coefficient of length first control line.
+ * @param angle1 first angle control line.
+ * @param kAsm2 coefficient of length second control line.
+ * @param angle2 second angle control line.
+ */
 VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
     :pSpline(pSpline), angle1(0), angle2(180), kAsm1(kAsm1), kAsm2(kAsm2)
 {
@@ -46,11 +57,30 @@ VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAs
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSplinePoint copy constructor
+ * @param point point
+ */
 VSplinePoint::VSplinePoint(const VSplinePoint &point)
     :pSpline(point.P()), angle1(point.Angle1()), angle2(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePoint &VSplinePoint::operator=(const VSplinePoint &point)
+{
+    this->pSpline = point.P();
+    this->angle1 = point.Angle1();
+    this->angle2 = point.Angle2();
+    this->kAsm1 = point.KAsm1();
+    this->kAsm2 = point.KAsm2();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetAngle1 set first angle of spline.
+ * @param value angle.
+ */
 void VSplinePoint::SetAngle1(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);
@@ -62,6 +92,10 @@ void VSplinePoint::SetAngle1(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetAngle2 set second angle of spline.
+ * @param value angle.
+ */
 void VSplinePoint::SetAngle2(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);

@@ -39,131 +39,113 @@
 class VSplinePoint
 {
 public:
-    /**
-     * @brief VSplinePoint default constructor.
-     */
-          VSplinePoint();
-    /**
-     * @brief VSplinePoint constructor.
-     * @param pSpline spline point.
-     * @param angle second angle control line.
-     * @param factor coefficient of length second control line.
-     */
+    VSplinePoint();
     VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-    /**
-     * @brief VSplinePoint copy constructor
-     * @param point point
-     */
     VSplinePoint(const VSplinePoint &point);
+    VSplinePoint &operator=(const VSplinePoint &point);
     ~VSplinePoint() {}
-    /**
-     * @brief P return point.
-     * @return point.
-     */
     VPointF P() const;
-    /**
-     * @brief SetP set point.
-     * @param value point.
-     */
     void    SetP(const VPointF &value);
-    /**
-     * @brief Angle1 return first angle of spline.
-     * @return angle.
-     */
     qreal   Angle1() const;
-    /**
-     * @brief SetAngle1 set first angle of spline.
-     * @param value angle.
-     */
     void    SetAngle1(const qreal &value);
-    /**
-     * @brief SetAngle2 set second angle of spline.
-     * @param value angle.
-     */
     void    SetAngle2(const qreal &value);
-    /**
-     * @brief Angle2 return second angle of spline.
-     * @return angle.
-     */
     qreal   Angle2() const;
-    /**
-     * @brief KAsm1 return coefficient of length first control line.
-     * @return coefficient.
-     */
     qreal   KAsm1() const;
-    /**
-     * @brief SetKAsm1 set coefficient of length first control line.
-     * @param value coefficient.
-     */
     void    SetKAsm1(const qreal &value);
-    /**
-     * @brief KAsm2 return coefficient of length second control line.
-     * @return coefficient.
-     */
     qreal   KAsm2() const;
-    /**
-     * @brief SetKAsm2 set coefficient of length second control line.
-     * @param value coefficient.
-     */
     void    SetKAsm2(const qreal &value);
 protected:
-    /**
-     * @brief pSpline point.
-     */
+    /** @brief pSpline point. */
     VPointF        pSpline;
-    /**
-     * @brief angle1 first angle spline.
-     */
+
+    /** @brief angle1 first angle spline. */
     qreal          angle1;
-    /**
-     * @brief angle2 second angle spline.
-     */
+
+    /** @brief angle2 second angle spline. */
     qreal          angle2;
-    /**
-     * @brief kAsm1 coefficient of length first control line.
-     */
+
+    /** @brief kAsm1 coefficient of length first control line. */
     qreal          kAsm1;
-    /**
-     * @brief kAsm2 coefficient of length second control line.
-     */
+
+    /** @brief kAsm2 coefficient of length second control line. */
     qreal          kAsm2;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P return point.
+ * @return point.
+ */
 inline VPointF VSplinePoint::P() const
 {
     return pSpline;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetP set point.
+ * @param value point.
+ */
 inline void VSplinePoint::SetP(const VPointF &value)
 {
     pSpline = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle1 return first angle of spline.
+ * @return angle.
+ */
 inline qreal VSplinePoint::Angle1() const
 {
     return angle1;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle2 return second angle of spline.
+ * @return angle.
+ */
 inline qreal VSplinePoint::Angle2() const
 {
     return angle2;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm1 return coefficient of length first control line.
+ * @return coefficient.
+ */
 inline qreal VSplinePoint::KAsm1() const
 {
     return kAsm1;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetKAsm1 set coefficient of length first control line.
+ * @param value coefficient.
+ */
 inline void VSplinePoint::SetKAsm1(const qreal &value)
 {
     kAsm1 = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm2 return coefficient of length second control line.
+ * @return coefficient.
+ */
 inline qreal VSplinePoint::KAsm2() const
 {
     return kAsm2;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetKAsm2 set coefficient of length second control line.
+ * @param value coefficient.
+ */
 inline void VSplinePoint::SetKAsm2(const qreal &value)
 {
     kAsm2 = value;
