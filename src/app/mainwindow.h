@@ -203,6 +203,7 @@ private:
     QTimer             *autoSaveTimer;
     void               ToolBarOption();
     void               ToolBarDraws();
+    void               ToolBarZoom();
     void               InitToolButtons();
     void               CancelTool();
     void               ArrowTool();

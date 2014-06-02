@@ -124,6 +124,22 @@ void VMainGraphicsView::animFinished()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::ZoomIn()
+{
+    scale(1.1, 1.1);
+    VAbstractTool::NewSceneRect(this->scene(), this);
+    emit NewFactor(1.1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::ZoomOut()
+{
+    scale(1.0/1.1, 1.0/1.1);
+    VAbstractTool::NewSceneRect(this->scene(), this);
+    emit NewFactor(1.0/1.1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
     if (mousePress->button() & Qt::LeftButton)

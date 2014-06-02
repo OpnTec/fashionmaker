@@ -64,6 +64,8 @@ public slots:
      * @brief animFinished
      */
     void     animFinished();
+    void     ZoomIn();
+    void     ZoomOut();
 protected:
     /**
      * @brief wheelEvent handle wheel events.

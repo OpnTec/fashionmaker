@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent)
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
+    ToolBarZoom();
+
     pattern = new VContainer();
 
     doc = new VPattern(pattern, comboBoxDraws, &mode);
@@ -843,6 +845,24 @@ void MainWindow::ToolBarDraws()
     ui->actionLayout->setEnabled(false);
 }
 
+void MainWindow::ToolBarZoom()
+{
+    /*First we will try use Standard Shortcuts from Qt, but because keypad "-" and "+" not the same keys like in main
+    keypad, shortcut Ctrl+"-" or "+" from keypad will not working with standard shortcut (QKeySequence::ZoomIn or
+    QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus + Qt::KeypadModifier for keypad.
+    Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
+
+    const QList<QKeySequence> zoomInShortcuts = {QKeySequence::ZoomIn,
+                                                 Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier};
+    ui->actionZoomIn->setShortcuts(zoomInShortcuts);
+    connect(ui->actionZoomIn, &QAction::triggered, view, &VMainGraphicsView::ZoomIn);
+
+    const QList<QKeySequence> zoomOutShortcuts = {QKeySequence::ZoomOut,
+                                                 Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier};
+    ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
+    connect(ui->actionZoomOut, &QAction::triggered, view, &VMainGraphicsView::ZoomOut);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitToolButtons()
 {
@@ -1300,6 +1320,8 @@ void MainWindow::Clear()
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
+    ui->actionZoomIn->setEnabled(false);
+    ui->actionZoomOut->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Valentina::Cm);
     qApp->setPatternType(Pattern::Individual);
@@ -1374,6 +1396,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     }
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
+    ui->actionZoomIn->setEnabled(enable);
+    ui->actionZoomOut->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

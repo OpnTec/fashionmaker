@@ -694,6 +694,8 @@
     <addaction name="actionTable"/>
     <addaction name="actionHistory"/>
     <addaction name="actionLayout"/>
+    <addaction name="actionZoomIn"/>
+    <addaction name="actionZoomOut"/>
     <addaction name="separator"/>
     <addaction name="actionPattern_properties"/>
     <addaction name="actionOptions"/>
@@ -756,6 +758,19 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolBarZoom">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -1000,6 +1015,34 @@
   <action name="actionPattern_properties">
    <property name="text">
     <string>Pattern properties</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-in"/>
+   </property>
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+   <property name="toolTip">
+    <string>zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-out"/>
+   </property>
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom out</string>
    </property>
   </action>
  </widget>
