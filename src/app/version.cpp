@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 
+#include "version.h"
 #include <QString>
 
 extern const int MAJOR_VERSION = 0;

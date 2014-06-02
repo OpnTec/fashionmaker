@@ -263,9 +263,9 @@ const VDetail VContainer::GetDetail(quint32 id) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddPoint add new point to container
- * @param point new point
- * @return return id of new point in container
+ * @brief AddGObject add new GObject to container
+ * @param obj new object
+ * @return return id of new object in container
  */
 quint32 VContainer::AddGObject(VGObject *obj)
 {
@@ -287,9 +287,9 @@ quint32 VContainer::AddDetail(VDetail detail)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddIncrement add new row of increment table
- * @param name name of new row of increment table
- * @param row new row of increment table
+ * @brief AddIncrement add new increment
+ * @param name increment name
+ * @param incr increment
  */
 void VContainer::AddIncrement(const QString &name, VIncrement incr)
 {
@@ -521,7 +521,6 @@ qreal VContainer::FindVar(const QString &name, bool *ok)const
  * @brief AddLine add line to container
  * @param firstPointId id of first point of line
  * @param secondPointId id of second point of line
- * @param mode mode of line
  */
 void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
 {
@@ -582,9 +581,9 @@ QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &s
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief UpdatePoint update point by id
- * @param id id of existing point
- * @param point point
+ * @brief UpdateGObject update GObject by id
+ * @param id id of existing GObject
+ * @param obj object
  */
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {

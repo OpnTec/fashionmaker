@@ -184,7 +184,7 @@ public:
      * @brief name return spline path name.
      * @return name.
      */
-    virtual QString name() const{return _name;}
+    virtual QString name() const;
     /**
      * @brief getMaxCountPoints return max count of points what can have spline path. This method use tool union detail.
      * Because cutting point can change position spline can have diffirent count of points. Need know max value. This

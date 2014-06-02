@@ -77,13 +77,10 @@ public:
     static const QString    UnitINCH;
     static const QString    TagVersion;
     /**
-    * @param data container with variables
-    * @param comboBoxDraws pointer to the ComboBox that will hold the pattern piece names
-    * @param mode draw mode
-    * @param parent
-    */
+     * @param data container with variables
+     */
     VDomDocument(VContainer *data);
-    virtual ~VDomDocument(){}
+    virtual ~VDomDocument();
     /**
      * @brief Finds an element by id.
      * @param id value id attribute.
@@ -142,10 +139,6 @@ public:
      * @brief ValidateXML validate xml file by xsd schema.
      * @param schema path to schema file.
      * @param fileName name of xml file.
-     * @param errorMsg error message.
-     * @param errorLine number error line.
-     * @param errorColumn number error column.
-     * @return true if validation successful.
      */
     static void    ValidateXML(const QString &schema, const QString &fileName);
     void           setContent(const QString &fileName);

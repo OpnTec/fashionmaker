@@ -50,15 +50,7 @@ public:
 protected:
     // cppcheck-suppress unusedFunction
     virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation)
-    {
-        Q_UNUSED(type);
-        Q_UNUSED(identifier);
-
-        m_messageType = type;
-        m_description = description;
-        m_sourceLocation = sourceLocation;
-    }
+                               const QUrl &identifier, const QSourceLocation &sourceLocation);
 private:
     QtMsgType       m_messageType;
     QString         m_description;
@@ -83,6 +75,18 @@ inline qint64  MessageHandler::column() const
     return m_sourceLocation.column();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
+                                   const QSourceLocation &sourceLocation)
+{
+    Q_UNUSED(type);
+    Q_UNUSED(identifier);
+
+    m_messageType = type;
+    m_description = description;
+    m_sourceLocation = sourceLocation;
+}
+
 const QString VDomDocument::AttrId     = QStringLiteral("id");
 const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
 const QString VDomDocument::UnitMM     = QStringLiteral("mm");
@@ -93,6 +97,10 @@ const QString VDomDocument::TagVersion = QStringLiteral("version");
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument(VContainer *data)
     : QDomDocument(), data(data), map(QHash<QString, QDomElement>())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VDomDocument::~VDomDocument()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

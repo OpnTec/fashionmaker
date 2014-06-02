@@ -396,9 +396,9 @@ protected:
                                             const quint32 &id,
                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
     /**
-     * @brief getCurrentPointId return current point id in combobox
+     * @brief getCurrentPointId return current point id stored in combobox
      * @param box combobox
-     * @return id or -1 if combobox is empty
+     * @return id or 0 if combobox is empty
      */
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);

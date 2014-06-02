@@ -50,10 +50,6 @@ VPointF::VPointF() :VGObject(GObject::Point, 0, Valentina::Calculation), _mx(0),
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VPointF copy constructor
- * @param point
- */
 VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y())
 {}
 
@@ -61,7 +57,7 @@ VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(po
 VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y())
 {}
 
-
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief operator = assignment operator
  * @param point point

@@ -32,6 +32,10 @@
  * @brief Definition of the parser bytecode class.
  */
 
+#ifdef Q_CC_CLANG
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnested-anon-types"
+#endif
 namespace qmu
 {
 struct SToken
@@ -67,6 +71,9 @@ struct SToken
     };
 };
 
+#ifdef Q_CC_CLANG
+#pragma clang diagnostic pop
+#endif
 
 /**
  * @brief Bytecode implementation of the Math Parser.
@@ -97,7 +104,7 @@ public:
     void          Finalize();
     void          clear();
     std::size_t   GetMaxStackSize() const;
-    std::size_t   GetSize() const;
+    int GetSize() const;
     const SToken* GetBase() const;
     void          AsciiDump();
 private:
@@ -138,7 +145,7 @@ inline std::size_t QmuParserByteCode::GetMaxStackSize() const
  * @brief Returns the number of entries in the bytecode.
  */
 // cppcheck-suppress unusedFunction
-inline std::size_t QmuParserByteCode::GetSize() const
+inline int QmuParserByteCode::GetSize() const
 {
     return m_vRPN.size();
 }

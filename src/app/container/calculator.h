@@ -32,7 +32,6 @@
 #include "vcontainer.h"
 
 #include "../../libs/qmuparser/qmuparser.h"
-using namespace qmu;
 
 /**
  * @brief The Calculator class for calculation formula.
@@ -53,7 +52,7 @@ using namespace qmu;
  *     delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
  * }
  */
-class Calculator:public QmuParser
+class Calculator:public qmu::QmuParser
 {
 public:
     Calculator(const VContainer *data);

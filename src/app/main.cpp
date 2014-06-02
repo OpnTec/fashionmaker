@@ -36,7 +36,7 @@
 #include "version.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
     if ((type == QtDebugMsg) && msg.contains("::connect"))

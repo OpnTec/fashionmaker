@@ -197,14 +197,14 @@ void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)
         qDebug()<<"Wrong edge index index ="<<index;
         return;
     }
-    p1 = list.at(index);
+    p1 = list.at(static_cast<int>(index));
     if (index + 1 > static_cast<quint32>(list.size()) - 1)
     {
         p2 = list.at(0);
     }
     else
     {
-        p2 = list.at(index+1);
+        p2 = list.at(static_cast<int>(index+1));
     }
 }
 
@@ -221,7 +221,7 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
     {
         if (i == index)
         {
-            det.append(this->at(k));
+            det.append(this->at(static_cast<int>(k)));
             ++k;
         }
         else

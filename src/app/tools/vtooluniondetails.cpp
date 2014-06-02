@@ -133,7 +133,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 
                 VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                quint32 idP1 = data->AddGObject(p1);
+                //quint32 idP1 = data->AddGObject(p1);
 
                 VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
@@ -143,7 +143,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                quint32 idP4 = data->AddGObject(p4);
+                //quint32 idP4 = data->AddGObject(p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Valentina::Modeling);
@@ -177,7 +177,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    quint32 idP1 = data->AddGObject(p1);
+                    //quint32 idP1 = data->AddGObject(p1);
                     --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
@@ -191,7 +191,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                     angle);
-                    quint32 idP4 = data->AddGObject(p4);
+                    //quint32 idP4 = data->AddGObject(p4);
                     --k;
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
@@ -392,8 +392,8 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
     Q_CHECK_PTR(dialogTool);
     VDetail d1 = data->GetDetail(dialogTool->getD1());
     VDetail d2 = data->GetDetail(dialogTool->getD2());
-    ptrdiff_t indexD1 = dialogTool->getIndexD1();
-    ptrdiff_t indexD2 = dialogTool->getIndexD2();
+    quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
+    quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
     Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
            Valentina::FromGui);
 }
@@ -535,7 +535,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::PointsOnEdge(const VDetail &d, const qint32 &index, VPointF &p1, VPointF &p2, VContainer *data)
+void VToolUnionDetails::PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data)
 {
     VNodeDetail det2p1;
     VNodeDetail det2p2;
@@ -545,7 +545,7 @@ void VToolUnionDetails::PointsOnEdge(const VDetail &d, const qint32 &index, VPoi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const qint32 &indexD2, qint32 &j)
+void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j)
 {
     if (pointsD2 == 0)
     {

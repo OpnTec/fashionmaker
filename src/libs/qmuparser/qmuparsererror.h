@@ -101,7 +101,7 @@ public:
     ~QmuParserErrorMsg();
 
     static const QmuParserErrorMsg& Instance();
-    QString operator[] ( unsigned a_iIdx ) const;
+    QString operator[] ( int a_iIdx ) const;
 
 private:
     Q_DISABLE_COPY(QmuParserErrorMsg)
@@ -117,9 +117,9 @@ inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString QmuParserErrorMsg::operator[] ( unsigned a_iIdx ) const
+inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
 {
-    return ( a_iIdx < static_cast<unsigned>( m_vErrMsg.size() ) ) ? m_vErrMsg[a_iIdx] : QString();
+    return ( a_iIdx <  m_vErrMsg.size()  ) ? m_vErrMsg[a_iIdx] : QString();
 }
 
 //---------------------------------------------------------------------------
@@ -162,25 +162,6 @@ private:
     static void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
     void Reset();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief raise method raise for exception
- */
-inline void QmuParserError::raise() const
-{
-    throw *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief clone clone exception
- * @return new exception
- */
-inline QmuParserError *QmuParserError::clone() const
-{
-    return new QmuParserError(*this);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

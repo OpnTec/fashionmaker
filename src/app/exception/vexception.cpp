@@ -95,3 +95,21 @@ QString VException::MoreInfo(const QString &detInfo) const
         return detInfo;
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VException::DetailedInformation() const
+{
+    return moreInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VException *VException::clone() const
+{
+    return new VException(*this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VException::raise() const
+{
+    throw *this;
+}

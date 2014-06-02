@@ -424,7 +424,7 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
     }
     else
     {
-        return -1;
+        return 0;
     }
 }
 

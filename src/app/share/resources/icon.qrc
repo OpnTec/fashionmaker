@@ -52,5 +52,7 @@
         <file>icon/flags/uk.png</file>
         <file>icon/Graduation.png</file>
         <file>icon/individual.png</file>
+        <file>icon/flags/nl.png</file>
+        <file>icon/flags/it.png</file>
     </qresource>
 </RCC>

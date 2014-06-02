@@ -31,6 +31,8 @@
 #include <QSettings>
 #include "../widgets/vapplication.h"
 
+using namespace qmu;
+
 int Calculator::iVal = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,7 +80,7 @@ Calculator::Calculator(const VContainer *data)
  * numbers = cal->GetNumbers();
  * delete cal;
  *
- * @param data pointer to a variable container.
+ * @param formula string with formula.
  * @param fromUser true if we parse formula from user
  */
 Calculator::Calculator(const QString &formula, bool fromUser)

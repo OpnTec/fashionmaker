@@ -84,8 +84,8 @@ public:
                         const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene,
                         VPattern *doc, VContainer *data, const Document::Documents &parse,
                         const Valentina::Sources &typeCreation);
-    static void  PointsOnEdge(const VDetail &d, const qint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
-    static void FindJ(const qint32 &pointsD2, const VDetail &d2, const qint32 &indexD2, qint32 &j);
+    static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
+    static void FindJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     /**
      * @brief GetDetailFromFile parse detail from file.
      * @param doc dom document container.
@@ -126,7 +126,7 @@ public:
      * @param data container with variables.
      * @param det detail what we union.
      * @param i index node in detail.
-     * @param idCount
+     * @param idCount count updated or created objects.
      * @param dx bias node x axis.
      * @param dy bias node y axis.
      * @param pRotate point rotation.

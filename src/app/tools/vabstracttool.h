@@ -76,18 +76,9 @@ public:
     /**
      * @brief ClosestPoint find point projection of point onto line.
      * @param line line.
-     * @param p point.
      * @return point on line or extended line if origin size too small.
      */
     static QPointF          ClosestPoint(const QLineF &line, const QPointF &point);
-    /**
-     * @brief addVector
-     * @param p
-     * @param p1
-     * @param p2
-     * @param k
-     * @return
-     */
     static QPointF          addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     /**
      * @brief getId return object id.
@@ -143,7 +134,7 @@ public:
     static const QString    TypeLineDashDotDotLine;
     /**
      * @brief Styles return list of all line styles.
-     * @return
+     * @return list of all line styles.
      */
     static const QStringList Styles();
     /**

@@ -213,6 +213,9 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VSplinePath::name() const{return _name;}
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::getMaxCountPoints() const
 {
     return maxCountPoints;

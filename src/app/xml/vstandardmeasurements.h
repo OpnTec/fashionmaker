@@ -43,6 +43,7 @@ class VStandardMeasurements:public VDomDocument
 {
 public:
     VStandardMeasurements(VContainer *data);
+    virtual ~VStandardMeasurements();
     Valentina::Units Unit();
     QString Description();
     void Measurements();
@@ -56,6 +57,7 @@ public:
     static const QString AttrSize_increase;
     static const QString AttrHeight_increase;
 private:
+    Q_DISABLE_COPY(VStandardMeasurements)
     void Measurement(const QString &tag);
 };
 

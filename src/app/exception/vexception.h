@@ -104,26 +104,13 @@ protected:
     QString         MoreInfo(const QString &detInfo) const;
 };
 
-inline void VException::raise() const
-{
-    throw *this;
-}
-
-inline VException *VException::clone() const
-{
-    return new VException(*this);
-}
-
-inline QString VException::DetailedInformation() const
-{
-    return moreInfo;
-}
-
+//---------------------------------------------------------------------------------------------------------------------
 inline QString VException::What() const
 {
     return what;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QString VException::MoreInformation() const
 {
     return moreInfo;

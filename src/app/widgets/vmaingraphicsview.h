@@ -52,12 +52,12 @@ signals:
 public slots:
     /**
      * @brief scalingTime call each time when need handle scaling.
-     * @param x
+     * @param x value from 0.0 to 1.0
      */
     void     scalingTime(qreal x);
     /**
      * @brief scrollingTime call each time when need handle scrolling.
-     * @param x
+     * @param x value from 0.0 to 1.0
      */
     void     scrollingTime(qreal x);
     /**

@@ -716,11 +716,6 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief operator = assignmeant operator
- * @param spl spline
- * @return spline
- */
 VSpline &VSpline::operator =(const VSpline &spline)
 {
     VGObject::operator=(spline);

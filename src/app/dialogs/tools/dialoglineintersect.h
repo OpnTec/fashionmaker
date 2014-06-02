@@ -92,12 +92,12 @@ public:
     void                    setP2Line2(const quint32 &value);
     /**
      * @brief getPointName return name of point
-     * @return
+     * @return name of point
      */
     QString                 getPointName() const;
     /**
      * @brief setPointName set name of point
-     * @param value
+     * @param value name of point
      */
     void                    setPointName(const QString &value);
 public slots:

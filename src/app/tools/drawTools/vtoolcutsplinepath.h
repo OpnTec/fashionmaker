@@ -72,7 +72,7 @@ public:
      * @param _id tool id, 0 if tool doesn't exist yet.
      * @param pointName point name.
      * @param formula string with formula length first splinePath.
-     * @param splineId id splinePath in data container.
+     * @param splinePathId id of splinePath in data container.
      * @param mx label bias x axis.
      * @param my label bias y axis.
      * @param scene pointer to scene.

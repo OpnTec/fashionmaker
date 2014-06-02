@@ -48,7 +48,7 @@ signals:
     /**
      * @brief RefreshLine refresh control line.
      * @param indexSpline position spline in spline list.
-     * @param position position point in spline.
+     * @param pos position point in spline.
      * @param controlPoint new position control point.
      * @param splinePoint new position spline point.
      */

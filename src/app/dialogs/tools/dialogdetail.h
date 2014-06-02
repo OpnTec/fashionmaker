@@ -116,7 +116,6 @@ private:
      * @brief NewItem add new object (point, arc, spline or spline path) to list
      * @param id id of object
      * @param typeTool type of tool
-     * @param mode mode
      * @param typeNode type of node in detail
      * @param mx offset respect to x
      * @param my offset respect to y

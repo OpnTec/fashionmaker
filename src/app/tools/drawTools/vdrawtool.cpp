@@ -42,7 +42,6 @@ qreal VDrawTool::factor = 1;
  * @param doc dom document container.
  * @param data container with variables.
  * @param id object id in container.
- * @param parent parent object.
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
@@ -162,6 +161,7 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
     }
     catch(qmu::QmuParserError &e)
     {
+        Q_UNUSED(e)
         delete cal;
         DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
         dialog->setFormula(formula);

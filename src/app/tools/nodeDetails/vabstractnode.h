@@ -43,7 +43,8 @@ public:
                   * @param doc dom document container.
                   * @param data container with variables.
                   * @param id object id in container.
-                  * @param id object id in containerNode.
+                  * @param idNode object id in containerNode.
+                  * @param idTool id tool.
                   * @param parent parent object.
                   */
                  VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,

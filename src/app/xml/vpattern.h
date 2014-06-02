@@ -65,7 +65,7 @@ public:
     VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent = nullptr);
     /**
      * @brief CreateEmptyFile create minimal empty file.
-     * @param tablePath
+     * @param tablePath path to measurement file (standard or individual)
      */
     void           CreateEmptyFile(const QString &tablePath);
     /**
@@ -333,7 +333,6 @@ private:
      * @param domElement tag in xml tree.
      * @param parse parser file mode.
      * @param type type of point.
-     * @param mode draw mode.
      */
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document::Documents &parse, const QString &type);
@@ -342,7 +341,6 @@ private:
      * @param scene scene.
      * @param domElement tag in xml tree.
      * @param parse parser file mode.
-     * @param mode draw mode.
      */
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                     const Document::Documents &parse);
@@ -352,7 +350,6 @@ private:
      * @param domElement tag in xml tree.
      * @param parse parser file mode.
      * @param type type of spline.
-     * @param mode draw mode.
      */
     void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                       const Document::Documents &parse, const QString& type);
@@ -362,7 +359,6 @@ private:
      * @param domElement tag in xml tree.
      * @param parse parser file mode.
      * @param type type of spline.
-     * @param mode draw mode.
      */
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document::Documents &parse, const QString& type);

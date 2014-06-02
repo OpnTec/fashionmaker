@@ -47,6 +47,7 @@ public:
     Q_DECLARE_FLAGS(Genders, Sex)
 
     VIndividualMeasurements(VContainer *data);
+    virtual ~VIndividualMeasurements();
     Valentina::Units Unit() const;
     void             setUnit(const Valentina::Units &unit);
     void             Measurements();
@@ -73,6 +74,7 @@ public:
     static QString   GenderToStr(const VIndividualMeasurements::Genders &sex);
     static VIndividualMeasurements::Genders StrToGender(const QString &sex);
 private:
+    Q_DISABLE_COPY(VIndividualMeasurements)
     void             Measurement(const QString &tag);
 };
 

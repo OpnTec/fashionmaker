@@ -44,8 +44,10 @@ public:
                   * @param doc dom document container.
                   * @param data container with variables.
                   * @param id object id in container.
-                  * @param id object id in containerSpline.
+                  * @param idSpline object id in containerSpline.
                   * @param typeCreation way we create this tool.
+                  * @param idTool tool id.
+                  * @param qoParent QObject parent.
                   * @param parent parent object.
                   */
                  VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
@@ -56,9 +58,11 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      * @param id object id in container.
-     * @param id object id in containerSpline.
+     * @param idSpline object id in containerSpline.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
+     * @param idTool tool id.
+     * @param parent QObject parent.
      */
     static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Document::Documents &parse,
                         const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = 0);

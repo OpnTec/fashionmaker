@@ -44,8 +44,10 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      * @param id object id in container.
-     * @param id object id in containerPoint.
+     * @param idPoint object id in containerPoint.
      * @param typeCreation way we create this tool.
+     * @param idTool tool id.
+     * @param qoParent QObject parent
      * @param parent parent object.
      */
     VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Valentina::Sources &typeCreation,
@@ -55,9 +57,11 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      * @param id object id in container.
-     * @param id object id in containerPoint.
+     * @param idPoint object id in containerPoint.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
+     * @param idTool tool id.
+     * @param parent QObject parent
      */
     static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document::Documents &parse,
                         const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);

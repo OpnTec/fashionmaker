@@ -42,7 +42,7 @@ public:
                     * @param doc dom document container.
                     * @param data container with variables.
                     * @param id object id in container.
-                    * @param radius string with formula radius arc.
+                    * @param arcRadius string with formula radius arc.
                     * @param center id center arc point.
                     * @param firstPointId id first line point.
                     * @param secondPointId id second line point.
@@ -59,7 +59,7 @@ public:
     virtual void   setDialog();
     /**
      * @brief FindPoint return point intersection line and arc.
-     * @param radius string with formula radius arc.
+     * @param arcRadius string with formula radius arc.
      * @param center center arc point.
      * @param firstPoint first line point.
      * @param secondPoint second line point.
@@ -78,7 +78,7 @@ public:
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param radius string with formula radius arc.
+     * @param arcRadius string with formula radius arc.
      * @param center id center arc point.
      * @param firstPointId id first line point.
      * @param secondPointId id second line point.
