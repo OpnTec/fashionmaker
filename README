@@ -24,7 +24,8 @@ Prerequisites:
    * mercurial
    * On Unix:
      - ccache
-     - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended)
+     - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
+       clang (clang 3.4 recommended)
      - xpdf package (tool pdftops). 
    * On Windows:
      - MinGW or Visual Studio
