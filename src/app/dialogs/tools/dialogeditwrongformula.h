@@ -49,6 +49,7 @@ class DialogEditWrongFormula : public DialogTool
 public:
     explicit DialogEditWrongFormula(const VContainer *data, QWidget *parent = nullptr);
     ~DialogEditWrongFormula();
+
     QString      getFormula() const;
     void         setFormula(const QString &value);
 public slots:
@@ -59,9 +60,8 @@ protected:
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;
-    /**
-     * @brief formula string with formula
-     */
+
+    /** @brief formula string with formula */
     QString           formula;
 };
 

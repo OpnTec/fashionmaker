@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogLineIntersect create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
     p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true)
@@ -57,6 +62,11 @@ DialogLineIntersect::~DialogLineIntersect()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogLineIntersect::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -131,6 +141,9 @@ void DialogLineIntersect::ChoosedObject(quint32 id, const Valentina::Scenes &typ
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogLineIntersect::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -142,6 +155,10 @@ void DialogLineIntersect::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P1Line1Changed changed first point of first line
+ * @param index index in list
+ */
 void DialogLineIntersect::P1Line1Changed( int index)
 {
     p1Line1 = qvariant_cast<quint32>(ui->comboBoxP1Line1->itemData(index));
@@ -150,6 +167,10 @@ void DialogLineIntersect::P1Line1Changed( int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P2Line1Changed changed second point of first line
+ * @param index index in list
+ */
 void DialogLineIntersect::P2Line1Changed(int index)
 {
     p2Line1 = qvariant_cast<quint32>(ui->comboBoxP2Line1->itemData(index));
@@ -158,6 +179,10 @@ void DialogLineIntersect::P2Line1Changed(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P1Line2Changed changed first point of second line
+ * @param index index in list
+ */
 void DialogLineIntersect::P1Line2Changed(int index)
 {
     p1Line2 = qvariant_cast<quint32>(ui->comboBoxP1Line2->itemData(index));
@@ -166,6 +191,10 @@ void DialogLineIntersect::P1Line2Changed(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P2Line2Changed changed second point of second line
+ * @param index index in list
+ */
 void DialogLineIntersect::P2Line2Changed(int index)
 {
     p2Line2 = qvariant_cast<quint32>(ui->comboBoxP2Line2->itemData(index));
@@ -174,6 +203,9 @@ void DialogLineIntersect::P2Line2Changed(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckState check state of dialog. Enable or disable button ok.
+ */
 void DialogLineIntersect::CheckState()
 {
     Q_CHECK_PTR(bOk);
@@ -181,6 +213,10 @@ void DialogLineIntersect::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckIntersecion check intersection of points
+ * @return true - line have intersection, false = don't have
+ */
 bool DialogLineIntersect::CheckIntersecion()
 {
     const VPointF *p1L1 = data->GeometricObject<const VPointF *>(p1Line1);
@@ -203,6 +239,10 @@ bool DialogLineIntersect::CheckIntersecion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP2Line2 set id second point of second line
+ * @param value id
+ */
 void DialogLineIntersect::setP2Line2(const quint32 &value)
 {
     p2Line2 = value;
@@ -210,6 +250,10 @@ void DialogLineIntersect::setP2Line2(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP1Line2 set id first point of second line
+ * @param value id
+ */
 void DialogLineIntersect::setP1Line2(const quint32 &value)
 {
     p1Line2 = value;
@@ -217,6 +261,10 @@ void DialogLineIntersect::setP1Line2(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP2Line1 set id second point of first line
+ * @param value id
+ */
 void DialogLineIntersect::setP2Line1(const quint32 &value)
 {
     p2Line1 = value;
@@ -224,6 +272,10 @@ void DialogLineIntersect::setP2Line1(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP1Line1 set id first point of first line
+ * @param value id
+ */
 void DialogLineIntersect::setP1Line1(const quint32 &value)
 {
     p1Line1 = value;
@@ -231,6 +283,10 @@ void DialogLineIntersect::setP1Line1(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name of point
+ */
 void DialogLineIntersect::setPointName(const QString &value)
 {
     pointName = value;

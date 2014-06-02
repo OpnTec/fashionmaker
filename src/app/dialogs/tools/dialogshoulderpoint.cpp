@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogShoulderPoint create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0)
@@ -68,6 +73,11 @@ DialogShoulderPoint::~DialogShoulderPoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogShoulderPoint::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -113,6 +123,9 @@ void DialogShoulderPoint::ChoosedObject(quint32 id, const Valentina::Scenes &typ
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogShoulderPoint::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -125,24 +138,43 @@ void DialogShoulderPoint::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPShoulder set id shoulder point
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP2Line set id second point of line
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP1Line set id first point of line
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFormula set string of formula
+ * @param value formula
+ */
 void DialogShoulderPoint::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
@@ -150,6 +182,10 @@ void DialogShoulderPoint::setFormula(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setTypeLine set type of line
+ * @param value type
+ */
 void DialogShoulderPoint::setTypeLine(const QString &value)
 {
     typeLine = value;
@@ -157,6 +193,10 @@ void DialogShoulderPoint::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogShoulderPoint::setPointName(const QString &value)
 {
     pointName = value;

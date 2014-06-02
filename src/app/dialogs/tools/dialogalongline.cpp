@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAlongLine create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0)
@@ -67,6 +72,11 @@ DialogAlongLine::~DialogAlongLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogAlongLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -94,6 +104,9 @@ void DialogAlongLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogAlongLine::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -105,18 +118,32 @@ void DialogAlongLine::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setSecondPointId set id second point of line
+ * @param value id
+ * @param id id of current point
+ */
 void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFirstPointId set id first point of line
+ * @param value id
+ * @param id id of current point
+ */
 void DialogAlongLine::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFormula set string of formula
+ * @param value formula
+ */
 void DialogAlongLine::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
@@ -124,6 +151,10 @@ void DialogAlongLine::setFormula(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setTypeLine set type of line
+ * @param value type
+ */
 void DialogAlongLine::setTypeLine(const QString &value)
 {
     typeLine = value;
@@ -131,6 +162,10 @@ void DialogAlongLine::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogAlongLine::setPointName(const QString &value)
 {
     pointName = value;

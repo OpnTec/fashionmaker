@@ -43,90 +43,64 @@ class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogPointOfIntersection create dialog
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogPointOfIntersection(const VContainer *data, QWidget *parent = nullptr);
     ~DialogPointOfIntersection();
-    /**
-     * @brief getPointName return name of point
-     * @return name
-     */
+
     QString        getPointName() const;
-    /**
-     * @brief setPointName set name of point
-     * @param value name
-     */
     void           setPointName(const QString &value);
-    /**
-     * @brief getFirstPointId return id of first point
-     * @return id
-     */
+
     quint32        getFirstPointId() const;
-    /**
-     * @brief setFirstPointId set id of first point
-     * @param value id
-     * @param id don't show this id in list.
-     */
     void           setFirstPointId(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getSecondPointId return id of second point
-     * @return id
-     */
+
     quint32        getSecondPointId() const;
-    /**
-     * @brief setSecondPointId set id of second point
-     * @param value id
-     * @param id don't show this id in list.
-     */
     void           setSecondPointId(const quint32 &value, const quint32 &id);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void   ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogPointOfIntersection)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;
-    /**
-     * @brief number number of handled objects
-     */
+
+    /** @brief number number of handled objects */
     qint32         number;
-    /**
-     * @brief pointName name of point
-     */
+
+    /** @brief pointName name of point */
     QString        pointName;
-    /**
-     * @brief firstPointId id first point of line
-     */
+
+    /** @brief firstPointId id first point of line */
     quint32        firstPointId;
-    /**
-     * @brief secondPointId id second point of line
-     */
+
+    /** @brief secondPointId id second point of line */
     quint32        secondPointId;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
 inline QString DialogPointOfIntersection::getPointName() const
 {
     return pointName;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id of first point
+ * @return id
+ */
 inline quint32 DialogPointOfIntersection::getFirstPointId() const
 {
     return firstPointId;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id of second point
+ * @return id
+ */
 inline quint32 DialogPointOfIntersection::getSecondPointId() const
 {
     return secondPointId;

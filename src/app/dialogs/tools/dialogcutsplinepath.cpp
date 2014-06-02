@@ -30,6 +30,11 @@
 #include "ui_dialogcutsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogCutSplinePath create dialog.
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
       splinePathId(0)
@@ -62,6 +67,10 @@ DialogCutSplinePath::~DialogCutSplinePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogCutSplinePath::setPointName(const QString &value)
 {
     pointName = value;
@@ -69,6 +78,10 @@ void DialogCutSplinePath::setPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFormula set string of formula
+ * @param value formula
+ */
 void DialogCutSplinePath::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
@@ -76,12 +89,22 @@ void DialogCutSplinePath::setFormula(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setSplineId set id spline
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogCutSplinePath::setSplinePathId(const quint32 &value, const quint32 &id)
 {
     setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, id, ComboMode::CutSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogCutSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::SplinePath)
@@ -94,6 +117,9 @@ void DialogCutSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &typ
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogCutSplinePath::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();

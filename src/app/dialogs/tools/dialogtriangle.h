@@ -43,130 +43,96 @@ class DialogTriangle : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogTriangle create dialog
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogTriangle(const VContainer *data, QWidget *parent = nullptr);
     ~DialogTriangle();
-    /**
-     * @brief getAxisP1Id return id first point of axis
-     * @return id
-     */
+
     quint32        getAxisP1Id() const;
-    /**
-     * @brief setAxisP1Id set id first point of axis
-     * @param value id
-     * @param id don't show this point in list
-     */
     void           setAxisP1Id(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getAxisP2Id return id second point of axis
-     * @return id
-     */
+
     quint32        getAxisP2Id() const;
-    /**
-     * @brief setAxisP2Id set id second point of axis
-     * @param value id
-     * @param id don't show this point in list
-     */
     void           setAxisP2Id(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getFirstPointId return id of first point
-     * @return id
-     */
+
     quint32        getFirstPointId() const;
-    /**
-     * @brief setFirstPointId set id of first point
-     * @param value id
-     * @param id don't show this point in list
-     */
     void           setFirstPointId(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getSecondPointId return id of second point
-     * @return id
-     */
+
     quint32        getSecondPointId() const;
-    /**
-     * @brief setSecondPointId set id of second point
-     * @param value id
-     * @param id don't show this point in list
-     */
     void           setSecondPointId(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getPointName return name of point
-     * @return name
-     */
+
     QString        getPointName() const;
-    /**
-     * @brief setPointName set name of point
-     * @param value name
-     */
     void           setPointName(const QString &value);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void   ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogTriangle)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
-    /**
-     * @brief number number of handled objects
-     */
+
+    /** @brief number number of handled objects */
     qint32         number;
-    /**
-     * @brief pointName name of point
-     */
+
+    /** @brief pointName name of point */
     QString        pointName;
-    /**
-     * @brief axisP1Id id first point of axis
-     */
+
+    /** @brief axisP1Id id first point of axis */
     quint32         axisP1Id;
-    /**
-     * @brief axisP2Id id second point of axis
-     */
+
+    /** @brief axisP2Id id second point of axis */
     quint32         axisP2Id;
-    /**
-     * @brief firstPointId id first point of line
-     */
+
+    /** @brief firstPointId id first point of line */
     quint32         firstPointId;
-    /**
-     * @brief secondPointId id second point of line
-     */
+
+    /** @brief secondPointId id second point of line */
     quint32         secondPointId;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAxisP1Id return id first point of axis
+ * @return id
+ */
 inline quint32 DialogTriangle::getAxisP1Id() const
 {
     return axisP1Id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAxisP2Id return id second point of axis
+ * @return id
+ */
 inline quint32 DialogTriangle::getAxisP2Id() const
 {
     return axisP2Id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id of first point
+ * @return id
+ */
 inline quint32 DialogTriangle::getFirstPointId() const
 {
     return firstPointId;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id of second point
+ * @return id
+ */
 inline quint32 DialogTriangle::getSecondPointId() const
 {
     return secondPointId;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
 inline QString DialogTriangle::getPointName() const
 {
     return pointName;

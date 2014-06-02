@@ -30,6 +30,11 @@
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionObjectError exception object error
+ * @param what string with error
+ * @param domElement dom element
+ */
 VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
@@ -41,11 +46,19 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionObjectError copy constructor
+ * @param e exception
+ */
 VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ErrorMessage return main error message
+ * @return main error message
+ */
 QString VExceptionObjectError::ErrorMessage() const
 {
     QString error = QString("ExceptionObjectError: %1").arg(what);
@@ -53,6 +66,10 @@ QString VExceptionObjectError::ErrorMessage() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DetailedInformation return detailed information about error
+ * @return detailed information
+ */
 QString VExceptionObjectError::DetailedInformation() const
 {
     return MoreInfo(QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText));

@@ -243,7 +243,7 @@ void QmuParserError::Reset()
 /**
  * @brief raise method raise for exception
  */
-void qmu::QmuParserError::raise() const
+Q_NORETURN void QmuParserError::raise() const
 {
     throw *this;
 }
@@ -253,7 +253,7 @@ void qmu::QmuParserError::raise() const
  * @brief clone clone exception
  * @return new exception
  */
-QmuParserError *qmu::QmuParserError::clone() const
+QmuParserError *QmuParserError::clone() const
 {
     return new QmuParserError(*this);
 }

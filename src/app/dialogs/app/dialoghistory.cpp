@@ -39,6 +39,12 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogHistory create dialog
+ * @param data container with data
+ * @param doc dom document container
+ * @param parent parent widget
+ */
 DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
     cursorToolRecordRow(0)
@@ -63,6 +69,9 @@ DialogHistory::~DialogHistory()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
@@ -72,6 +81,11 @@ void DialogHistory::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief cellClicked changed history record
+ * @param row number row in table
+ * @param column number column in table
+ */
 void DialogHistory::cellClicked(int row, int column)
 {
     if (column == 0)
@@ -101,6 +115,10 @@ void DialogHistory::cellClicked(int row, int column)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedCursor changed cursor of input. Cursor show after what record we will insert new object
+ * @param id id of object
+ */
 void DialogHistory::ChangedCursor(quint32 id)
 {
     for (qint32 i = 0; i< ui->tableWidget->rowCount(); ++i)
@@ -118,6 +136,9 @@ void DialogHistory::ChangedCursor(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateHistory update history table
+ */
 void DialogHistory::UpdateHistory()
 {
     FillTable();
@@ -125,6 +146,9 @@ void DialogHistory::UpdateHistory()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillTable fill table
+ */
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
@@ -173,6 +197,11 @@ void DialogHistory::FillTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Record return description for record
+ * @param tool record data
+ * @return description
+ */
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     const QDomElement domElement = doc->elementById(QString().setNum(tool.getId()));
@@ -416,6 +445,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief InitialTable set initial option of table
+ */
 void DialogHistory::InitialTable()
 {
     ui->tableWidget->setSortingEnabled(false);
@@ -424,6 +456,9 @@ void DialogHistory::InitialTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowPoint show selected point
+ */
 void DialogHistory::ShowPoint()
 {
     QVector<VToolRecord> *history = doc->getHistory();
@@ -439,6 +474,10 @@ void DialogHistory::ShowPoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief closeEvent handle when windows is closing
+ * @param event event
+ */
 void DialogHistory::closeEvent(QCloseEvent *event)
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);

@@ -43,123 +43,93 @@ class DialogEndLine : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogEndLine create dialog
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogEndLine(const VContainer *data, QWidget *parent = nullptr);
     ~DialogEndLine();
-    /**
-     * @brief getPointName return name of point
-     * @return name
-     */
+
     QString           getPointName() const;
-    /**
-     * @brief setPointName set name of point
-     * @param value name
-     */
     void              setPointName(const QString &value);
-    /**
-     * @brief getTypeLine return type of line
-     * @return type
-     */
+
     QString           getTypeLine() const;
-    /**
-     * @brief setTypeLine set type of line
-     * @param value type
-     */
     void              setTypeLine(const QString &value);
-    /**
-     * @brief getFormula return string of formula
-     * @return formula
-     */
+
     QString           getFormula() const;
-    /**
-     * @brief setFormula set string of formula
-     * @param value formula
-     */
     void              setFormula(const QString &value);
-    /**
-     * @brief getAngle return angle of line
-     * @return angle in degree
-     */
+
     qreal             getAngle() const;
-    /**
-     * @brief setAngle set angle of line
-     * @param value angle in degree
-     */
     void              setAngle(const qreal &value);
-    /**
-     * @brief getBasePointId return id base point of line
-     * @return id
-     */
+
     quint32           getBasePointId() const;
-    /**
-     * @brief setBasePointId set id base point of line
-     * @param value id
-     * @param id don't show this id in list
-     */
     void              setBasePointId(const quint32 &value, const quint32 &id);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void      ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogEndLine)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogEndLine *ui;
-    /**
-     * @brief pointName name of point
-     */
+
+    /** @brief pointName name of point */
     QString           pointName;
-    /**
-     * @brief typeLine type of line
-     */
+
+    /** @brief typeLine type of line */
     QString           typeLine;
-    /**
-     * @brief formula formula
-     */
+
+    /** @brief formula formula */
     QString           formula;
-    /**
-     * @brief angle angle of line
-     */
+
+    /** @brief angle angle of line */
     qreal             angle;
-    /**
-     * @brief basePointId id base point of line
-     */
+
+    /** @brief basePointId id base point of line */
     quint32            basePointId;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
 inline QString DialogEndLine::getPointName() const
 {
     return pointName;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
 inline QString DialogEndLine::getTypeLine() const
 {
     return typeLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
 inline QString DialogEndLine::getFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAngle return angle of line
+ * @return angle in degree
+ */
 inline qreal DialogEndLine::getAngle() const
 {
     return angle;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getBasePointId return id base point of line
+ * @return id
+ */
 inline quint32 DialogEndLine::getBasePointId() const
 {
     return basePointId;

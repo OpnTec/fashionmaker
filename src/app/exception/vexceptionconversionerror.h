@@ -37,35 +37,21 @@
 class VExceptionConversionError : public VException
 {
 public:
-                    /**
-                     * @brief VExceptionConversionError exception conversion error
-                     * @param what string with error
-                     * @param str string, where happend error
-                     */
-                    VExceptionConversionError(const QString &what, const QString &str);
-                    /**
-                     * @brief VExceptionConversionError copy constructor
-                     * @param e exception
-                     */
-                    VExceptionConversionError(const VExceptionConversionError &e);
-    virtual         ~VExceptionConversionError() noexcept (true) {}
-    /**
-     * @brief ErrorMessage return main error message
-     * @return main error message
-     */
+    VExceptionConversionError(const QString &what, const QString &str);
+    VExceptionConversionError(const VExceptionConversionError &e);
+    virtual         ~VExceptionConversionError() noexcept (true);
     virtual QString ErrorMessage() const;
-    /**
-     * @brief String return string, where happend error
-     * @return string
-     */
     QString         String() const;
 protected:
-    /**
-     * @brief str string, where happend error
-     */
+    /** @brief str string, where happend error */
     QString         str;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief String return string, where happend error
+ * @return string
+ */
 inline QString VExceptionConversionError::String() const
 {
     return str;

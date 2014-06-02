@@ -43,128 +43,95 @@ class DialogAlongLine : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogAlongLine create dialog
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogAlongLine(const VContainer *data, QWidget *parent = nullptr);
     ~DialogAlongLine();
-    /**
-     * @brief getPointName return name of point
-     * @return name
-     */
     QString             getPointName() const;
-    /**
-     * @brief setPointName set name of point
-     * @param value name
-     */
     void                setPointName(const QString &value);
-    /**
-     * @brief getTypeLine return type of line
-     * @return type
-     */
+
     QString             getTypeLine() const;
-    /**
-     * @brief setTypeLine set type of line
-     * @param value type
-     */
     void                setTypeLine(const QString &value);
-    /**
-     * @brief getFormula return string of formula
-     * @return formula
-     */
+
     QString             getFormula() const;
-    /**
-     * @brief setFormula set string of formula
-     * @param value formula
-     */
     void                setFormula(const QString &value);
-    /**
-     * @brief getFirstPointId return id first point of line
-     * @return id
-     */
+
     quint32             getFirstPointId() const;
-    /**
-     * @brief setFirstPointId set id first point of line
-     * @param value id
-     * @param id id of current point
-     */
     void                setFirstPointId(const quint32 &value, const quint32 &id);
-    /**
-     * @brief getSecondPointId return id second point of line
-     * @return id
-     */
+
     quint32             getSecondPointId() const;
-    /**
-     * @brief setSecondPointId set id second point of line
-     * @param value id
-     * @param id id of current point
-     */
     void                setSecondPointId(const quint32 &value, const quint32 &id);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void        ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void        DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogAlongLine)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogAlongLine *ui;
-    /**
-     * @brief number number of handled objects
-     */
+
+    /** @brief number number of handled objects */
     qint32              number;
-    /**
-     * @brief pointName name of point
-     */
+
+    /** @brief pointName name of point */
     QString             pointName;
-    /**
-     * @brief typeLine type of line
-     */
+
+    /** @brief typeLine type of line */
     QString             typeLine;
-    /**
-     * @brief formula formula
-     */
+
+    /** @brief formula formula */
     QString             formula;
-    /**
-     * @brief firstPointId id first point of line
-     */
+
+    /** @brief firstPointId id first point of line */
     quint32             firstPointId;
-    /**
-     * @brief secondPointId id second point of line
-     */
+
+    /** @brief secondPointId id second point of line */
     quint32             secondPointId;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
 inline QString DialogAlongLine::getPointName() const
 {
     return pointName;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
 inline QString DialogAlongLine::getTypeLine() const
 {
     return typeLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
 inline QString DialogAlongLine::getFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id first point of line
+ * @return id
+ */
 inline quint32 DialogAlongLine::getFirstPointId() const
 {
     return firstPointId;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id second point of line
+ * @return id
+ */
 inline quint32 DialogAlongLine::getSecondPointId() const
 {
     return secondPointId;

@@ -29,6 +29,11 @@
 #include "vexceptionconversionerror.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionConversionError exception conversion error
+ * @param what string with error
+ * @param str string, where happend error
+ */
 VExceptionConversionError::VExceptionConversionError(const QString &what, const QString &str)
     :VException(what), str(str)
 {
@@ -36,11 +41,23 @@ VExceptionConversionError::VExceptionConversionError(const QString &what, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionConversionError copy constructor
+ * @param e exception
+ */
 VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e)
     :VException(e), str(e.String())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionConversionError::~VExceptionConversionError()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ErrorMessage return main error message
+ * @return main error message
+ */
 QString VExceptionConversionError::ErrorMessage() const
 {
     QString error = QString("ExceptionConversionError: %1 %2").arg(what, str);

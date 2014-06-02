@@ -34,12 +34,22 @@
 class QRectF;
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VArc default constructor.
+ */
 VArc::VArc ()
     :VGObject(GObject::Arc), f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
       formulaRadius(QString()), center(VPointF())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VArc constructor.
+ * @param center center point.
+ * @param radius arc radius.
+ * @param f1 start angle (degree).
+ * @param f2 end angle (degree).
+ */
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
             QString formulaF2, quint32 idObject, Valentina::Draws mode)
     : VGObject(GObject::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
@@ -49,6 +59,10 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VArc copy constructor
+ * @param arc arc
+ */
 VArc::VArc(const VArc &arc)
     : VGObject(arc), f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
@@ -56,6 +70,11 @@ VArc::VArc(const VArc &arc)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief operator = assignment operator
+ * @param arc arc
+ * @return arc
+ */
 VArc &VArc::operator =(const VArc &arc)
 {
     VGObject::operator=(arc);
@@ -70,12 +89,20 @@ VArc &VArc::operator =(const VArc &arc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetLength return arc length.
+ * @return length.
+ */
 qreal VArc::GetLength() const
 {
     return (M_PI * radius)/180 * AngleArc();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP1 return point associated with start angle.
+ * @return point.
+ */
 QPointF VArc::GetP1() const
 {
     QPointF p1 ( GetCenter().x () + radius, GetCenter().y () );
@@ -85,6 +112,10 @@ QPointF VArc::GetP1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP2 return point associated with end angle.
+ * @return точку point.
+ */
 QPointF VArc::GetP2 () const
 {
     QPointF p2 ( GetCenter().x () + radius, GetCenter().y () );
@@ -94,6 +125,10 @@ QPointF VArc::GetP2 () const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPath return QPainterPath for this arc.
+ * @return path.
+ */
 QPainterPath VArc::GetPath() const
 {
     QPainterPath path;
@@ -115,6 +150,10 @@ QPainterPath VArc::GetPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AngleArc calculate arc angle.
+ * @return angle in degree.
+ */
 qreal VArc::AngleArc() const
 {
     QLineF l1(0, 0, 100, 100);
@@ -125,6 +164,10 @@ qreal VArc::AngleArc() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPoints return list of points needed for drawing arc.
+ * @return list of points
+ */
 QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
@@ -149,12 +192,23 @@ QVector<QPointF> VArc::GetPoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief name return arc name. This name used in variables.
+ * @return name
+ */
 QString VArc::name() const
 {
     return _name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CutArc cut arc into two arcs.
+ * @param length length first arc.
+ * @param arc1 first arc.
+ * @param arc2 second arc.
+ * @return point cutting
+ */
 QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 {
     //Always need return two arcs, so we must correct wrong length.
@@ -185,6 +239,10 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setId keep id arc in data.
+ * @param id id arc in data.
+ */
 void VArc::setId(const quint32 &id)
 {
     _id = id;

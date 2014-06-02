@@ -29,6 +29,36 @@
 #include "vexceptionbadid.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionBadId exception bad id
+ * @param what string with error
+ * @param id id
+ */
+VExceptionBadId::VExceptionBadId(const QString &what, const quint32 &id)
+    :VException(what), id(id), key(QString()){}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionBadId exception bad id
+ * @param what string with error
+ * @param key string key
+ */
+VExceptionBadId::VExceptionBadId(const QString &what, const QString &key)
+    :VException(what), id(0), key(key){}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionBadId copy constructor
+ * @param e exception
+ */
+VExceptionBadId::VExceptionBadId(const VExceptionBadId &e)
+    :VException(e), id(e.BadId()), key(e.BadKey()){}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ErrorMessage return main error message
+ * @return main error message
+ */
 QString VExceptionBadId::ErrorMessage() const
 {
     QString error;

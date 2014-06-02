@@ -48,9 +48,6 @@ private:
     Q_DISABLE_COPY(DialogAboutApp)
 
 private slots:
-    /**
-     * @brief Fake button clicked
-     */
     void webButtonClicked();
 };
 

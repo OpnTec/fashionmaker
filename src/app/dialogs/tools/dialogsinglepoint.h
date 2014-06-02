@@ -43,60 +43,42 @@ class DialogSinglePoint : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogSinglePoint create dialog
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogSinglePoint(const VContainer *data, QWidget *parent = nullptr);
     ~DialogSinglePoint();
-    /**
-     * @brief setData set name and point
-     * @param name name of point
-     * @param point data for point
-     */
     void           setData(const QString &name, const QPointF &point);
-    /**
-     * @brief getName return name
-     * @return name
-     */
     QString        getName()const;
-    /**
-     * @brief getPoint return point
-     * @return point
-     */
     QPointF        getPoint()const;
 public slots:
-    /**
-     * @brief mousePress get mouse position
-     * @param scenePos position of cursor
-     */
     void           mousePress(const QPointF &scenePos);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void   DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogSinglePoint)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogSinglePoint *ui;
-    /**
-     * @brief name name of point
-     */
+
+    /** @brief name name of point */
     QString        name;
-    /**
-     * @brief point data of point
-     */
+
+    /** @brief point data of point */
     QPointF        point;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getName return name
+ * @return name
+ */
 inline QString DialogSinglePoint::getName() const
 {
     return name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPoint return point
+ * @return point
+ */
 inline QPointF DialogSinglePoint::getPoint() const
 {
     return point;

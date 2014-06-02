@@ -43,13 +43,15 @@ class DialogCutArc : public DialogTool
 {
     Q_OBJECT
 public:
-
     DialogCutArc(const VContainer *data, QWidget *parent = nullptr);
     ~DialogCutArc();
+
     QString           getPointName() const;
     void              setPointName(const QString &value);
+
     QString           getFormula() const;
     void              setFormula(const QString &value);
+
     quint32           getArcId() const;
     void              setArcId(const quint32 &value, const quint32 &id);
 public slots:
@@ -57,21 +59,16 @@ public slots:
     virtual void      DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutArc)
-    /**
-     * @brief ui keeps information about user interface
-     */
+    /** @brief ui keeps information about user interface */
     Ui::DialogCutArc  *ui;
-    /**
-     * @brief pointName name of created point
-     */
+
+    /** @brief pointName name of created point */
     QString           pointName;
-    /**
-     * @brief formula string with formula
-     */
+
+    /** @brief formula string with formula */
     QString           formula;
-    /**
-     * @brief arcId keep id of arc
-     */
+
+    /** @brief arcId keep id of arc */
     quint32            arcId;
 };
 

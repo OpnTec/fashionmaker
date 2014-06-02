@@ -45,33 +45,13 @@ class DialogIncrements : public DialogTool
 {
     Q_OBJECT
 public:
-                         /**
-                          * @brief DialogIncrements create dialog
-                          * @param data container with data
-                          * @param doc dom document container
-                          * @param parent parent widget
-                          */
-                         DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-                         ~DialogIncrements();
+     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
+     ~DialogIncrements();
 public slots:
-    /**
-     * @brief clickedToolButtonAdd create new row in table
-     */
     void                 clickedToolButtonAdd();
-    /**
-     * @brief clickedToolButtonRemove remove one row from table
-     */
     void                 clickedToolButtonRemove();
-    /**
-     * @brief cellChanged cell in table was changed
-     * @param row number of row
-     * @param column number of column
-     */
     void                 IncrementChanged ( qint32 row, qint32 column );
     void                 MeasurementChanged ( qint32 row, qint32 column );
-    /**
-     * @brief FullUpdateFromFile update information in tables form file
-     */
     void                 FullUpdateFromFile();
     void                 SaveGivenName();
     void                 SaveFamilyName();
@@ -92,56 +72,29 @@ protected:
     virtual void         closeEvent ( QCloseEvent * event );
 private:
     Q_DISABLE_COPY(DialogIncrements)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogIncrements *ui;
-    /**
-     * @brief data container with data
-     */
+
+    /** @brief data container with data */
     VContainer           *data; // need because we must change data
-    /**
-     * @brief doc dom document container
-     */
+
+    /** @brief doc dom document container */
     VPattern             *doc;
-    /**
-     * @brief row save number of row current selected cell
-     */
+
+    /** @brief row save number of row current selected cell */
     qint32               row;
-    /**
-     * @brief column save number of column current selected cell
-     */
+
+    /** @brief column save number of column current selected cell */
     qint32               column;
+
     VIndividualMeasurements *m;
-    /**
-     * @brief FillMeasurements load measurements data
-     */
+
     void                 FillMeasurements();
-    /**
-     * @brief FillIncrementTable fill data for increment table
-     */
     void                 FillIncrements();
-    /**
-     * @brief FillLengthLines fill data for table of lines lengths
-     */
     void                 FillLengthLines();
-    /**
-     * @brief FillLengthSplines fill data for table of splines lengths
-     */
     void                 FillLengthSplines();
-    /**
-     * @brief FillLengthArcs fill data for table of arcs lengths
-     */
     void                 FillLengthArcs();
-    /**
-     * @brief AddIncrementToFile save created increment to file
-     * @param id id of increment
-     * @param name name
-     * @param base base value
-     * @param ksize increment in sizes
-     * @param kheight increment in heights
-     * @param description description of increment
-     */
     void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
                                             const qreal &ksize, const qreal &kheight, const QString &description);
 };

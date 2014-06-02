@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogTriangle create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
     axisP2Id(0), firstPointId(0), secondPointId(0)
@@ -57,6 +62,11 @@ DialogTriangle::~DialogTriangle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -95,6 +105,9 @@ void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogTriangle::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -106,6 +119,10 @@ void DialogTriangle::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogTriangle::setPointName(const QString &value)
 {
     pointName = value;
@@ -113,6 +130,11 @@ void DialogTriangle::setPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setSecondPointId set id of second point
+ * @param value id
+ * @param id don't show this point in list
+ */
 void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
@@ -120,6 +142,11 @@ void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFirstPointId set id of first point
+ * @param value id
+ * @param id don't show this point in list
+ */
 void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
@@ -127,6 +154,11 @@ void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setAxisP2Id set id second point of axis
+ * @param value id
+ * @param id don't show this point in list
+ */
 void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
 {
     axisP2Id = value;
@@ -134,6 +166,11 @@ void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setAxisP1Id set id first point of axis
+ * @param value id
+ * @param id don't show this point in list
+ */
 void DialogTriangle::setAxisP1Id(const quint32 &value, const quint32 &id)
 {
     axisP1Id = value;

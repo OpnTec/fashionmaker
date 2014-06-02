@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogSpline create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSpline), number(0), p1(0), p4(0), angle1(0), angle2(0),
     kAsm1(1), kAsm2(1), kCurve(1)
@@ -50,12 +55,21 @@ DialogSpline::~DialogSpline()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP1 return id first point of spline
+ * @return id
+ */
 quint32 DialogSpline::getP1() const
 {
     return p1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -98,6 +112,9 @@ void DialogSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogSpline::DialogAccepted()
 {
     p1 = getCurrentObjectId(ui->comboBoxP1);
@@ -111,6 +128,10 @@ void DialogSpline::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setKCurve set coefficient curve
+ * @param value value. Can be >= 0.
+ */
 void DialogSpline::setKCurve(const qreal &value)
 {
     kCurve = value;
@@ -118,6 +139,10 @@ void DialogSpline::setKCurve(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setKAsm2 set second coefficient asymmetry
+ * @param value value. Can be >= 0.
+ */
 void DialogSpline::setKAsm2(const qreal &value)
 {
     kAsm2 = value;
@@ -125,6 +150,10 @@ void DialogSpline::setKAsm2(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setKAsm1 set first coefficient asymmetry
+ * @param value value. Can be >= 0.
+ */
 void DialogSpline::setKAsm1(const qreal &value)
 {
     kAsm1 = value;
@@ -132,6 +161,10 @@ void DialogSpline::setKAsm1(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setAngle2 set second angle of spline
+ * @param value angle in degree
+ */
 void DialogSpline::setAngle2(const qreal &value)
 {
     angle2 = value;
@@ -139,6 +172,10 @@ void DialogSpline::setAngle2(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setAngle1 set first angle of spline
+ * @param value angle in degree
+ */
 void DialogSpline::setAngle1(const qreal &value)
 {
     angle1 = value;
@@ -146,6 +183,10 @@ void DialogSpline::setAngle1(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP4 set id fourth point of spline
+ * @param value id
+ */
 void DialogSpline::setP4(const quint32 &value)
 {
     p4 = value;
@@ -153,6 +194,10 @@ void DialogSpline::setP4(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP1 set id first point of spline
+ * @param value id
+ */
 void DialogSpline::setP1(const quint32 &value)
 {
     p1 = value;
@@ -160,6 +205,10 @@ void DialogSpline::setP1(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP4 return id fourth point of spline
+ * @return id
+ */
 quint32 DialogSpline::getP4() const
 {
     return p4;

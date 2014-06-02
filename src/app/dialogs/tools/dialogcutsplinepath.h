@@ -43,85 +43,61 @@ class DialogCutSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    /**
-     * @brief DialogCutSplinePath create dialog.
-     * @param data container with data
-     * @param parent parent widget
-     */
     DialogCutSplinePath(const VContainer *data, QWidget *parent = nullptr);
     ~DialogCutSplinePath();
-    /**
-     * @brief getPointName return name of point
-     * @return name
-     */
+
     QString      getPointName() const;
-    /**
-     * @brief setPointName set name of point
-     * @param value name
-     */
     void         setPointName(const QString &value);
-    /**
-     * @brief getFormula return string of formula
-     * @return formula
-     */
+
     QString      getFormula() const;
-    /**
-     * @brief setFormula set string of formula
-     * @param value formula
-     */
     void         setFormula(const QString &value);
-    /**
-     * @brief getSplineId return id base point of line
-     * @return id
-     */
+
     quint32      getSplinePathId() const;
-    /**
-     * @brief setSplineId set id spline
-     * @param value id
-     * @param id don't show this id in list
-     */
     void         setSplinePathId(const quint32 &value, const quint32 &id);
 public slots:
-    /**
-     * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
-     * @param id id of point or detail
-     * @param type type of object
-     */
     virtual void ChoosedObject(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief DialogAccepted save data and emit signal about closed dialog.
-     */
     virtual void DialogAccepted();
 private:
     Q_DISABLE_COPY(DialogCutSplinePath)
-    /**
-     * @brief ui keeps information about user interface
-     */
+
+    /** @brief ui keeps information about user interface */
     Ui::DialogCutSplinePath *ui;
-    /**
-     * @brief pointName name of created point
-     */
+
+    /** @brief pointName name of created point */
     QString      pointName;
-    /**
-     * @brief formula string with formula
-     */
+
+    /** @brief formula string with formula */
     QString      formula;
-    /**
-     * @brief splinePathId keep id of splinePath
-     */
+
+    /** @brief splinePathId keep id of splinePath */
     quint32      splinePathId;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
 inline QString DialogCutSplinePath::getPointName() const
 {
     return pointName;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
 inline QString DialogCutSplinePath::getFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSplineId return id base point of line
+ * @return id
+ */
 inline quint32 DialogCutSplinePath::getSplinePathId() const
 {
     return splinePathId;

@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogHeight create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)
@@ -56,6 +61,10 @@ DialogHeight::~DialogHeight()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogHeight::setPointName(const QString &value)
 {
     pointName = value;
@@ -63,6 +72,10 @@ void DialogHeight::setPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setTypeLine set type of line
+ * @param value type
+ */
 void DialogHeight::setTypeLine(const QString &value)
 {
     typeLine = value;
@@ -70,6 +83,11 @@ void DialogHeight::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setBasePointId set id base point of height
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
 {
     basePointId = value;
@@ -77,6 +95,11 @@ void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP1LineId set id first point of line
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
 {
     p1LineId = value;
@@ -84,6 +107,11 @@ void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setP2LineId set id second point of line
+ * @param value id
+ * @param id don't show this id in list
+ */
 void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
 {
     p2LineId = value;
@@ -91,6 +119,11 @@ void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -124,6 +157,9 @@ void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogHeight::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();

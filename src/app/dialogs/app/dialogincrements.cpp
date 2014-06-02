@@ -41,6 +41,12 @@
 #include <QCloseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogIncrements create dialog
+ * @param data container with data
+ * @param doc dom document container
+ * @param parent parent widget
+ */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
 {
@@ -137,6 +143,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillMeasurements load measurements data
+ */
 void DialogIncrements::FillMeasurements()
 {
     const QHash<QString, VMeasurement> *table = data->DataMeasurements();
@@ -217,6 +226,9 @@ void DialogIncrements::FillMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillIncrementTable fill data for increment table
+ */
 void DialogIncrements::FillIncrements()
 {
     const QHash<QString, VIncrement> *increments = data->DataIncrements();
@@ -285,6 +297,9 @@ void DialogIncrements::FillIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillLengthLines fill data for table of lines lengths
+ */
 void DialogIncrements::FillLengthLines()
 {
     const QHash<QString, qreal> *linesTable = data->DataLengthLines();
@@ -321,6 +336,9 @@ void DialogIncrements::FillLengthLines()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillLengthSplines fill data for table of splines lengths
+ */
 void DialogIncrements::FillLengthSplines()
 {
     const QHash<QString, qreal> *splinesTable = data->DataLengthSplines();
@@ -357,6 +375,9 @@ void DialogIncrements::FillLengthSplines()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillLengthArcs fill data for table of arcs lengths
+ */
 void DialogIncrements::FillLengthArcs()
 {
     const QHash<QString, qreal> *arcsTable = data->DataLengthArcs();
@@ -393,6 +414,9 @@ void DialogIncrements::FillLengthArcs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update information in tables form file
+ */
 void DialogIncrements::FullUpdateFromFile()
 {
     disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
@@ -555,6 +579,9 @@ void DialogIncrements::OpenTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief clickedToolButtonAdd create new row in table
+ */
 void DialogIncrements::clickedToolButtonAdd()
 {
     ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
@@ -616,6 +643,9 @@ void DialogIncrements::clickedToolButtonAdd()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief clickedToolButtonRemove remove one row from table
+ */
 void DialogIncrements::clickedToolButtonRemove()
 {
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
@@ -642,6 +672,15 @@ void DialogIncrements::clickedToolButtonRemove()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddIncrementToFile save created increment to file
+ * @param id id of increment
+ * @param name name
+ * @param base base value
+ * @param ksize increment in sizes
+ * @param kheight increment in heights
+ * @param description description of increment
+ */
 void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base, const qreal &ksize,
                                           const qreal &kheight, const QString &description)
 {
@@ -659,6 +698,11 @@ void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief cellChanged cell in table was changed
+ * @param row number of row
+ * @param column number of column
+ */
 void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 {
 

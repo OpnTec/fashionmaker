@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogLine create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogLine::DialogLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0), typeLine(QString())
 {
@@ -52,6 +57,10 @@ DialogLine::~DialogLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setSecondPoint set id second point
+ * @param value id
+ */
 void DialogLine::setSecondPoint(const quint32 &value)
 {
     secondPoint = value;
@@ -64,6 +73,10 @@ void DialogLine::setSecondPoint(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setTypeLine set type of line
+ * @param value type
+ */
 void DialogLine::setTypeLine(const QString &value)
 {
     typeLine = value;
@@ -71,6 +84,10 @@ void DialogLine::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFirstPoint set id first point
+ * @param value id
+ */
 void DialogLine::setFirstPoint(const quint32 &value)
 {
     firstPoint = value;
@@ -83,6 +100,9 @@ void DialogLine::setFirstPoint(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogLine::DialogAccepted()
 {
     qint32 index = ui->comboBoxFirstPoint->currentIndex();
@@ -94,6 +114,11 @@ void DialogLine::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)

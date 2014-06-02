@@ -32,6 +32,11 @@
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogDetail create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(), details(VDetail()), supplement(true), closed(true)
 {
@@ -64,6 +69,11 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of objects (points, arcs, splines, spline paths)
+ * @param type type of object
+ */
 void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type != Valentina::Line && type != Valentina::Detail)
@@ -92,6 +102,9 @@ void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogDetail::DialogAccepted()
 {
     details.Clear();
@@ -109,6 +122,14 @@ void DialogDetail::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewItem add new object (point, arc, spline or spline path) to list
+ * @param id id of object
+ * @param typeTool type of tool
+ * @param typeNode type of node in detail
+ * @param mx offset respect to x
+ * @param my offset respect to y
+ */
 void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
                            qreal mx, qreal my)
 {
@@ -163,6 +184,10 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDetails set detail
+ * @param value detail
+ */
 void DialogDetail::setDetails(const VDetail &value)
 {
     details = value;
@@ -184,6 +209,10 @@ void DialogDetail::setDetails(const VDetail &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BiasXChanged changed value of offset for object respect to x
+ * @param d value in mm
+ */
 void DialogDetail::BiasXChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
@@ -195,6 +224,10 @@ void DialogDetail::BiasXChanged(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BiasYChanged changed value of offset for object respect to y
+ * @param d value in mm
+ */
 void DialogDetail::BiasYChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
@@ -206,6 +239,10 @@ void DialogDetail::BiasYChanged(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClickedSeams save supplement of seams for detail
+ * @param checked 1 - need supplement, 0 - don't need supplement
+ */
 void DialogDetail::ClickedSeams(bool checked)
 {
     supplement = checked;
@@ -214,12 +251,20 @@ void DialogDetail::ClickedSeams(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClickedClosed save closed equdistant or not
+ * @param checked 1 - closed, 0 - don't closed
+ */
 void DialogDetail::ClickedClosed(bool checked)
 {
     closed = checked;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ObjectChanged changed new object (point, arc, spline or spline path) form list
+ * @param row number of row
+ */
 void DialogDetail::ObjectChanged(int row)
 {
     if (ui.listWidget->count() == 0)
@@ -233,6 +278,9 @@ void DialogDetail::ObjectChanged(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DeleteItem delete item from list
+ */
 void DialogDetail::DeleteItem()
 {
     qint32 row = ui.listWidget->currentRow();

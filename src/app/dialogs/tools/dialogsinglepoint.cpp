@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogSinglePoint create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSinglePoint), name(QString()),
     point(QPointF())
@@ -49,6 +54,10 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mousePress get mouse position
+ * @param scenePos position of cursor
+ */
 void DialogSinglePoint::mousePress(const QPointF &scenePos)
 {
     if (isInitialized == false)
@@ -65,6 +74,9 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogSinglePoint::DialogAccepted()
 {
     point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
@@ -73,6 +85,11 @@ void DialogSinglePoint::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setData set name and point
+ * @param name name of point
+ * @param point data for point
+ */
 void DialogSinglePoint::setData(const QString &name, const QPointF &point)
 {
     this->name = name;

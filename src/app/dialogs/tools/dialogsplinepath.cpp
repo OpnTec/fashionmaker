@@ -33,6 +33,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogSplinePath create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
@@ -62,6 +67,10 @@ DialogSplinePath::~DialogSplinePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetPath set spline path
+ * @param value path
+ */
 void DialogSplinePath::SetPath(const VSplinePath &value)
 {
     this->path = value;
@@ -75,6 +84,11 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type don't show this id in list
+ */
 void DialogSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -86,6 +100,9 @@ void DialogSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogSplinePath::DialogAccepted()
 {
     path.Clear();
@@ -100,6 +117,10 @@ void DialogSplinePath::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PointChanged selected another point in list
+ * @param row number of row
+ */
 void DialogSplinePath::PointChanged(int row)
 {
     if (ui->listWidget->count() == 0)
@@ -113,6 +134,10 @@ void DialogSplinePath::PointChanged(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief currentPointChanged changed point in combo box
+ * @param index index in list
+ */
 void DialogSplinePath::currentPointChanged(int index)
 {
     quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
@@ -127,6 +152,10 @@ void DialogSplinePath::currentPointChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle1Changed changed first angle
+ * @param index index in list
+ */
 void DialogSplinePath::Angle1Changed(qreal index)
 {
     qint32 row = ui->listWidget->currentRow();
@@ -139,6 +168,10 @@ void DialogSplinePath::Angle1Changed(qreal index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle2Changed changed second angle
+ * @param index index in list
+ */
 void DialogSplinePath::Angle2Changed(qreal index)
 {
     qint32 row = ui->listWidget->currentRow();
@@ -151,6 +184,10 @@ void DialogSplinePath::Angle2Changed(qreal index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm1Changed changed first coefficient asymmetry
+ * @param d value
+ */
 void DialogSplinePath::KAsm1Changed(qreal d)
 {
     qint32 row = ui->listWidget->currentRow();
@@ -161,6 +198,10 @@ void DialogSplinePath::KAsm1Changed(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm2Changed changed second coefficient asymmetry
+ * @param d value
+ */
 void DialogSplinePath::KAsm2Changed(qreal d)
 {
     qint32 row = ui->listWidget->currentRow();
@@ -171,6 +212,14 @@ void DialogSplinePath::KAsm2Changed(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewItem add point to list
+ * @param id id
+ * @param kAsm1 first coefficient asymmetry
+ * @param angle1 first angle in degree
+ * @param kAsm2 second coefficient asymmetry
+ * @param angle2 second angle in degree
+ */
 void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
     const VPointF *point = data->GeometricObject<const VPointF *>(id);
@@ -190,6 +239,14 @@ void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief dataPoint show data of point in fields
+ * @param id id
+ * @param kAsm1 first coefficient asymmetry
+ * @param angle1 first angle of spline
+ * @param kAsm2 second coefficient asymmetry
+ * @param angle2 second angle of spline
+ */
 void DialogSplinePath::DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
     disconnect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -222,6 +279,9 @@ void DialogSplinePath::DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EnableFields enable or disable fields
+ */
 void DialogSplinePath::EnableFields()
 {
     ui->doubleSpinBoxKasm1->setEnabled(true);

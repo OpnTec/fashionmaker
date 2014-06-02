@@ -32,6 +32,11 @@
 #include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogPointOfIntersection create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogPointOfIntersection), number(0), pointName(QString()),
     firstPointId(0), secondPointId(0)
@@ -55,6 +60,11 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setSecondPointId set id of second point
+ * @param value id
+ * @param id don't show this id in list.
+ */
 void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     secondPointId = value;
@@ -62,6 +72,11 @@ void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const qui
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogPointOfIntersection::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -96,6 +111,9 @@ void DialogPointOfIntersection::ChoosedObject(quint32 id, const Valentina::Scene
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogPointOfIntersection::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
@@ -105,6 +123,11 @@ void DialogPointOfIntersection::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setFirstPointId set id of first point
+ * @param value id
+ * @param id don't show this id in list.
+ */
 void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     firstPointId = value;
@@ -112,6 +135,10 @@ void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setPointName set name of point
+ * @param value name
+ */
 void DialogPointOfIntersection::setPointName(const QString &value)
 {
     pointName = value;

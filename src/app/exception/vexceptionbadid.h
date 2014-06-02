@@ -37,58 +37,36 @@
 class VExceptionBadId : public VException
 {
 public:
-                    /**
-                     * @brief VExceptionBadId exception bad id
-                     * @param what string with error
-                     * @param id id
-                     */
-                    VExceptionBadId(const QString &what, const quint32 &id)
-                        :VException(what), id(id), key(QString()){}
-                    /**
-                     * @brief VExceptionBadId exception bad id
-                     * @param what string with error
-                     * @param key string key
-                     */
-                    VExceptionBadId(const QString &what, const QString &key)
-                        :VException(what), id(0), key(key){}
-                    /**
-                     * @brief VExceptionBadId copy constructor
-                     * @param e exception
-                     */
-                    VExceptionBadId(const VExceptionBadId &e)
-                        :VException(e), id(e.BadId()), key(e.BadKey()){}
+    VExceptionBadId(const QString &what, const quint32 &id);
+    VExceptionBadId(const QString &what, const QString &key);
+    VExceptionBadId(const VExceptionBadId &e);
     virtual         ~VExceptionBadId() noexcept (true){}
-    /**
-     * @brief ErrorMessage return main error message
-     * @return main error message
-     */
     virtual QString ErrorMessage() const;
-    /**
-     * @brief BadId return bad id
-     * @return id
-     */
     quint32         BadId() const;
-    /**
-     * @brief BadKey return bad key
-     * @return key
-     */
     QString         BadKey() const;
 protected:
-    /**
-     * @brief id id
-     */
+    /** @brief id id */
     quint32          id;
-    /**
-     * @brief key key
-     */
+
+    /** @brief key key */
     QString         key;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BadId return bad id
+ * @return id
+ */
 inline quint32 VExceptionBadId::BadId() const
 {
     return id;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BadKey return bad key
+ * @return key
+ */
 inline QString VExceptionBadId::BadKey() const
 {
     return key;

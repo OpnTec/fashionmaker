@@ -33,6 +33,11 @@
 #include <QtWidgets>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogArc create dialog
+ * @param data container with data
+ * @param parent parent widget
+ */
 DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
     timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()), f2(QString())
@@ -76,6 +81,10 @@ DialogArc::~DialogArc()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetCenter set id of center point
+ * @param value id
+ */
 void DialogArc::SetCenter(const quint32 &value)
 {
     center = value;
@@ -83,6 +92,10 @@ void DialogArc::SetCenter(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetF2 set formula second angle of arc
+ * @param value formula
+ */
 void DialogArc::SetF2(const QString &value)
 {
     f2 = value;
@@ -90,6 +103,10 @@ void DialogArc::SetF2(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetF1 set formula first angle of arc
+ * @param value formula
+ */
 void DialogArc::SetF1(const QString &value)
 {
     f1 = value;
@@ -97,6 +114,10 @@ void DialogArc::SetF1(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetRadius set formula of radius
+ * @param value formula
+ */
 void DialogArc::SetRadius(const QString &value)
 {
     radius = value;
@@ -104,6 +125,11 @@ void DialogArc::SetRadius(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @param id id of point or detail
+ * @param type type of object
+ */
 void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 {
     if (type == Valentina::Point)
@@ -117,6 +143,9 @@ void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogAccepted save data and emit signal about closed dialog.
+ */
 void DialogArc::DialogAccepted()
 {
     radius = ui->lineEditRadius->text();
@@ -127,6 +156,10 @@ void DialogArc::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValChenged show description angles of lines
+ * @param row number of row
+ */
 void DialogArc::ValChenged(int row)
 {
     if (ui->listWidget->count() == 0)
@@ -145,24 +178,36 @@ void DialogArc::ValChenged(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PutRadius put variable into formula of radius
+ */
 void DialogArc::PutRadius()
 {
     PutValHere(ui->lineEditRadius, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PutF1 put variable into formula of first angle
+ */
 void DialogArc::PutF1()
 {
     PutValHere(ui->lineEditF1, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PutF2 put variable into formula of second angle
+ */
 void DialogArc::PutF2()
 {
     PutValHere(ui->lineEditF2, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineAngles show variable angles of lines
+ */
 // cppcheck-suppress unusedFunction
 void DialogArc::LineAngles()
 {
@@ -170,6 +215,9 @@ void DialogArc::LineAngles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RadiusChanged after change formula of radius calculate value and show result
+ */
 void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
@@ -177,6 +225,9 @@ void DialogArc::RadiusChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief F1Changed after change formula of first angle calculate value and show result
+ */
 void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
@@ -184,6 +235,9 @@ void DialogArc::F1Changed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief F2Changed after change formula of second angle calculate value and show result
+ */
 void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
@@ -191,6 +245,9 @@ void DialogArc::F2Changed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckState if all is right enable button ok
+ */
 void DialogArc::CheckState()
 {
     Q_CHECK_PTR(bOk);
@@ -198,6 +255,9 @@ void DialogArc::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EvalRadius calculate value of radius
+ */
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
@@ -205,6 +265,9 @@ void DialogArc::EvalRadius()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EvalF1 calculate value of first angle
+ */
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
@@ -212,6 +275,9 @@ void DialogArc::EvalF1()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EvalF2 calculate value of second angle
+ */
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
@@ -219,6 +285,9 @@ void DialogArc::EvalF2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowLineAngles show varibles angles of lines
+ */
 void DialogArc::ShowLineAngles()
 {
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);

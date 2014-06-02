@@ -31,6 +31,12 @@
 #include <QtWidgets>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionEmptyParameter exception empty parameter
+ * @param what string with error
+ * @param name name of attribute where error
+ * @param domElement dom element
+ */
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
                                                    const QDomElement &domElement)
     : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
@@ -44,11 +50,23 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VExceptionEmptyParameter copy constructor
+ * @param e exception
+ */
 VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
     :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionEmptyParameter::~VExceptionEmptyParameter()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ErrorMessage return main error message
+ * @return main error message
+ */
 QString VExceptionEmptyParameter::ErrorMessage() const
 {
     QString error = QString("ExceptionEmptyParameter: %1 %2").arg(what, name);
@@ -56,6 +74,10 @@ QString VExceptionEmptyParameter::ErrorMessage() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DetailedInformation return detailed information about error
+ * @return detailed information
+ */
 QString VExceptionEmptyParameter::DetailedInformation() const
 {
     return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
