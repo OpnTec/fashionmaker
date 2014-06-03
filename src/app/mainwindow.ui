@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>144</width>
          <height>150</height>
         </rect>
        </property>
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -691,7 +691,6 @@
     </property>
     <addaction name="actionNewDraw"/>
     <addaction name="actionOptionDraw"/>
-    <addaction name="actionTable"/>
     <addaction name="actionHistory"/>
     <addaction name="actionLayout"/>
     <addaction name="actionZoomIn"/>
@@ -700,8 +699,15 @@
     <addaction name="actionPattern_properties"/>
     <addaction name="actionOptions"/>
    </widget>
+   <widget class="QMenu" name="menuMeasurements">
+    <property name="title">
+     <string>Measurements</string>
+    </property>
+    <addaction name="actionTable"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDrawing"/>
+   <addaction name="menuMeasurements"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
