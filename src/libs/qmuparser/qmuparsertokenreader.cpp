@@ -24,6 +24,7 @@
 #include "qmuparserbase.h"
 
 #include <QStringList>
+#include <QDebug>
 
 /**
  * @file

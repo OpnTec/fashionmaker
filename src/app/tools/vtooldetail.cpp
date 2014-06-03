@@ -32,6 +32,7 @@
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>
+#include <QGraphicsView>
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -99,9 +100,9 @@ VToolDetail::~VToolDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     VDetail detail = VAbstractTool::data.GetDetail(id);
     dialogTool->setDetails(detail);
 }
@@ -109,9 +110,9 @@ void VToolDetail::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     VDetail detail = dialogTool->getDetails();
     VDetail det;
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
@@ -202,9 +203,9 @@ void VToolDetail::FullUpdateFromGui(int result)
         QDomElement domElement = doc->elementById(QString().setNum(id));
         if (domElement.isElement())
         {
-            Q_CHECK_PTR(dialog);
+            SCASSERT(dialog != nullptr);
             DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-            Q_CHECK_PTR(dialogTool);
+            SCASSERT(dialogTool != nullptr);
             VDetail det = dialogTool->getDetails();
             doc->SetAttribute(domElement, AttrName, det.getName());
             doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
@@ -433,9 +434,9 @@ template <typename Tool>
 void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     QHash<quint32, VDataTool*>* tools = doc->getTools();
-    Q_CHECK_PTR(tools);
+    SCASSERT(tools != nullptr);
     Tool *tool = qobject_cast<Tool*>(tools->value(node.getId()));
-    Q_CHECK_PTR(tool);
+    SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
 }

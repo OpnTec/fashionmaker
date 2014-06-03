@@ -23,6 +23,7 @@
 #include "qmuparserbase.h"
 #include <QTextStream>
 #include <QtMath>
+#include <QDebug>
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
@@ -2086,4 +2087,17 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
     }
     #endif
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Set a function that can create variable pointer for unknown expression variables.
+ * @param a_pFactory A pointer to the variable factory.
+ * @param pUserData A user defined context pointer.
+ */
+// cppcheck-suppress unusedFunction
+void qmu::QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData)
+{
+    m_pTokenReader->SetVarCreator(a_pFactory, pUserData);
+}
+
 } // namespace qmu

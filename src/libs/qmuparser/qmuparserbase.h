@@ -286,18 +286,6 @@ inline void QmuParserBase::AddValIdent(identfun_type a_pCallback)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Set a function that can create variable pointer for unknown expression variables.
- * @param a_pFactory A pointer to the variable factory.
- * @param pUserData A user defined context pointer.
- */
-// cppcheck-suppress unusedFunction
-inline void QmuParserBase::SetVarFactory(facfun_type a_pFactory, void *pUserData)
-{
-    m_pTokenReader->SetVarCreator(a_pFactory, pUserData);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Get the default symbols used for the built in operators.
  * @sa c_DefaultOprt
  */
@@ -306,11 +294,13 @@ inline const QStringList &QmuParserBase::GetOprtDef()
     return c_DefaultOprt;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QMap<int, QString> QmuParserBase::GetTokens() const
 {
     return m_Tokens;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QMap<int, QString> QmuParserBase::GetNumbers() const
 {
     return m_Numbers;

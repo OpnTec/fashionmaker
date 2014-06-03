@@ -30,6 +30,7 @@
 #include "vspline.h"
 #include "../exception/vexception.h"
 #include <QDebug>
+#include <QtMath>
 
 class QRectF;
 

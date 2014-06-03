@@ -33,6 +33,7 @@
 
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QGraphicsView>
 #include "../../dialogs/tools/dialogtool.h"
 
 /**
@@ -87,8 +88,8 @@ protected:
      */
     void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove = true)
     {
-        Q_CHECK_PTR(tool);
-        Q_CHECK_PTR(event);
+        SCASSERT(tool != nullptr);
+        SCASSERT(event != nullptr);
         if (ignoreContextMenuEvent == false)
         {
             QMenu menu;
@@ -144,7 +145,7 @@ protected:
      */
     void ShowItem(Item *item, quint32 id, Qt::GlobalColor color, bool enable)
     {
-        Q_CHECK_PTR(item);
+        SCASSERT(item != nullptr);
         if (id == item->id)
         {
             if (enable == false)

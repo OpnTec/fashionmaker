@@ -28,6 +28,7 @@
 
 #include "vsimplespline.h"
 #include "../widgets/vapplication.h"
+#include <QGraphicsSceneMouseEvent>
 #include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------

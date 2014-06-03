@@ -29,6 +29,7 @@
 #include "dialogaboutapp.h"
 #include "ui_dialogaboutapp.h"
 #include "../../version.h"
+#include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
 
