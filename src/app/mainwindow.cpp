@@ -1292,9 +1292,9 @@ void MainWindow::Open()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Options config dialog.
+ * @brief Preferences config dialog.
  */
-void MainWindow::Options()
+void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
@@ -1701,11 +1701,11 @@ void MainWindow::CreateMenus()
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
-        ui->menuFile->insertAction(ui->actionExit, recentFileActs[i]);
+        ui->menuFile->insertAction(ui->actionPreferences, recentFileActs[i]);
     }
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
-    ui->menuFile->insertAction(ui->actionExit, separatorAct);
+    ui->menuFile->insertAction(ui->actionPreferences, separatorAct);
     UpdateRecentFileActions();
 }
 
@@ -1727,7 +1727,7 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
-    connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::Options);
+    connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
 

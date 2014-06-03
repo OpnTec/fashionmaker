@@ -72,7 +72,7 @@ public slots:
     bool               SaveAs();
     bool               Save();
     void               Open();
-    void               Options();
+    void               Preferences();
     void               NewPattern();
 
     void               currentDrawChanged( int index );
