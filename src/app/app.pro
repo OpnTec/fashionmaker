@@ -587,7 +587,9 @@ INSTALL_TRANSLATIONS += \
     share/translations/valentina_de.qm \
     share/translations/valentina_cs.qm \
     share/translations/valentina_he_IL.qm \
-    share/translations/valentina_fr.qm
+    share/translations/valentina_fr.qm \
+    share/translations/valentina_it.qm \
+    share/translations/valentina_nl.qm
 
 INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
