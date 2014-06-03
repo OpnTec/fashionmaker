@@ -1022,7 +1022,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-in"/>
+    <iconset theme="zoom-in">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Zoom In</string>
@@ -1036,7 +1038,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-out"/>
+    <iconset theme="zoom-out">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Zoom Out</string>
