@@ -50,6 +50,23 @@ VIncrement::VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QStri
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VIncrement::VIncrement(const VIncrement &incr)
+    :id(incr.getId()), base(incr.getBase()), ksize(incr.getKsize()), kheight(incr.getKheight()),
+      description(incr.getDescription())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VIncrement &VIncrement::operator=(const VIncrement &incr)
+{
+    this->id = incr.getId();
+    this->base = incr.getBase();
+    this->ksize = incr.getKsize();
+    this->kheight = incr.getKheight();
+    this->description = incr.getDescription();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VIncrement::GetValue() const
 {
     return base;
