@@ -36,6 +36,7 @@
 #include "exception/vexceptionwrongid.h"
 #include "version.h"
 #include "xml/vstandardmeasurements.h"
+#include "widgets/vapplication.h"
 
 #include <QInputDialog>
 #include <QtCore>
@@ -1708,6 +1709,21 @@ void MainWindow::CreateMenus()
     separatorAct->setSeparator(true);
     ui->menuFile->insertAction(ui->actionPreferences, separatorAct);
     UpdateRecentFileActions();
+
+    //Add Undo/Redo actions.
+    QAction *undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction->setShortcuts(QKeySequence::Undo);
+    undoAction->setIcon(QIcon::fromTheme("edit-undo"));
+    ui->menuDrawing->insertAction(ui->actionPattern_properties, undoAction);
+
+    QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction->setShortcuts(QKeySequence::Redo);
+    redoAction->setIcon(QIcon::fromTheme("edit-redo"));
+    ui->menuDrawing->insertAction(ui->actionPattern_properties, redoAction);
+
+    separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+    ui->menuDrawing->insertAction(ui->actionPattern_properties, separatorAct);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
