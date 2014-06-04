@@ -50,7 +50,7 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError::~VExceptionConversionError()
+VExceptionConversionError::~VExceptionConversionError() noexcept (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
