@@ -30,6 +30,7 @@
 #define VAPPLICATION_H
 
 #include <QApplication>
+#include <QUndoStack>
 #include "../options.h"
 #include "vtranslation.h"
 
@@ -81,7 +82,9 @@ public:
     QString               PostfixOperator(const QString &name) const;
     QString               FormulaFromUser(const QString &formula);
     QString               FormulaToUser(const QString &formula);
+    QUndoStack            *getUndoStack() const;
 private:
+    Q_DISABLE_COPY(VApplication)
     Valentina::Units      _patternUnit;
     Pattern::Measurements _patternType;
     qreal                 _widthMainLine;
@@ -92,6 +95,7 @@ private:
     QMap<QString, VTranslation> variables;
     QMap<QString, VTranslation> functions;
     QMap<QString, VTranslation> postfixOperators;
+    QUndoStack            *undoStack;
     void                  InitLineWidth();
     void                  InitMeasurements();
     void                  InitVariables();
@@ -107,7 +111,6 @@ private:
     void                  CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
                                                QMap<int, QString> &numbers);
     void                  BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
-
 };
 
 inline Valentina::Units VApplication::patternUnit() const

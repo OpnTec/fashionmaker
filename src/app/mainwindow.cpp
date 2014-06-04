@@ -770,6 +770,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     {
         WriteSettings();
         event->accept();
+        qApp->closeAllWindows();
     }
     else
     {
