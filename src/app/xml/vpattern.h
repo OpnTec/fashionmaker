@@ -63,117 +63,28 @@ class VPattern : public QObject, public VDomDocument
     Q_OBJECT
 public:
     VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent = nullptr);
-    /**
-     * @brief CreateEmptyFile create minimal empty file.
-     * @param tablePath path to measurement file (standard or individual)
-     */
     void           CreateEmptyFile(const QString &tablePath);
-    /**
-     * @brief ChangeActivDraw set new pattern peace name.
-     * @param name new name.
-     * @param parse parser file mode.
-     */
     void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
-    /**
-     * @brief GetNameActivDraw return current pattern peace name.
-     * @return pattern peace name.
-     */
     QString        GetNameActivDraw() const;
-    /**
-     * @brief GetActivDrawElement return draw tag for current pattern peace.
-     * @param element draw tag.
-     * @return true if found.
-     */
     bool           GetActivDrawElement(QDomElement &element) const;
-    /**
-     * @brief appendDraw add new pattern peace structure to the file.
-     * @param name pattern peace name.
-     * @return true if success.
-     */
     bool           appendDraw(const QString& name);
-    /**
-     * @brief SetNameDraw change current pattern peace.
-     * @param name pattern peace name.
-     * @return true if success.
-     */
     bool           SetNameDraw(const QString& name);
-    /**
-     * @brief Parse parse file.
-     * @param parse parser file mode.
-     * @param sceneDraw pointer to draw scene.
-     * @param sceneDetail pointer to details scene.
-     */
     void           Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                          VMainGraphicsScene *sceneDetail);
-    /**
-     * @brief getTools return list of tools pointers.
-     * @return list.
-     */
     QHash<quint32, VDataTool*>* getTools();
-    /**
-     * @brief getTool return tool from tool list.
-     * @param id tool id.
-     * @return tool.
-     */
     VDataTool*     getTool(const quint32 &id);
-    /**
-     * @brief getHistory return list with list of history records.
-     * @return list of history records.
-     */
     QVector<VToolRecord> *getHistory();
-    /**
-     * @brief getCursor return cursor.
-     * @return cursor.
-     */
     quint32        getCursor() const;
-    /**
-     * @brief setCursor set cursor.
-     * @param value cursor.
-     */
     void           setCursor(const quint32 &value);
-    /**
-     * @brief setCurrentData set current data set.
-     */
     void           setCurrentData();
-    /**
-     * @brief AddTool add tool to list tools.
-     * @param id tool id.
-     * @param tool tool.
-     */
     void           AddTool(const quint32 &id, VDataTool *tool);
-    /**
-     * @brief UpdateToolData update tool in list tools.
-     * @param id tool id.
-     * @param data container with variables.
-     */
     void           UpdateToolData(const quint32 &id, VContainer *data);
-    /**
-     * @brief IncrementReferens increment reference parent objects.
-     * @param id parent object id.
-     */
     void           IncrementReferens(quint32 id) const;
-    /**
-     * @brief DecrementReferens decrement reference parent objects.
-     * @param id parent object id.
-     */
     void           DecrementReferens(quint32 id) const;
-    /**
-     * @brief TestUniqueId test exist unique id in pattern file. Each id must be unique.
-     */
     void           TestUniqueId() const;
-    /**
-     * @brief SPointActiveDraw return id base point current pattern peace.
-     * @return id base point.
-     */
     quint32        SPointActiveDraw();
     bool           isPatternModified() const;
     void           setPatternModified(bool value);
-    /**
-     * @brief GetActivNodeElement find element in current pattern piece by name.
-     * @param name name tag.
-     * @param element element.
-     * @return true if found.
-     */
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
     QString        MPath() const;
     void           SetPath(const QString &path);
@@ -238,186 +149,107 @@ signals:
     void           ChangedCursor(quint32 id);
     void           ClearMainWindow();
 public slots:
-    /**
-     * @brief FullUpdateTree lite parse file.
-     */
     void           LiteParseTree();
-    /**
-     * @brief haveLiteChange we have unsaved change.
-     */
     void           haveLiteChange();
-    /**
-     * @brief ShowHistoryTool hightlight tool.
-     * @param id tool id.
-     * @param color hightlight color.
-     * @param enable enable or diasable hightlight.
-     */
     void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
 private:
     Q_DISABLE_COPY(VPattern)
-    /**
-     * @brief nameActivDraw name current pattern peace.
-     */
-    QString        nameActivDraw;
-    /**
-     * @brief tools list with pointer on tools.
-     */
-    QHash<quint32, VDataTool*> tools;
-    /**
-     * @brief history history records.
-     */
-    QVector<VToolRecord> history;
-    /**
-     * @brief cursor cursor keep id tool after which we will add new tool in file.
-     */
-    quint32         cursor;
-    QComboBox      *comboBoxDraws;
-    /**
-     * @brief mode current draw mode.
-     */
-    Valentina::Draws    *mode;
-    /**
-     * @brief fileModified true if exist change in file.
-     */
-    bool            patternModified;
-    /**
-     * @brief CheckNameDraw check if exist pattern peace with this name.
-     * @param name pattern peace name.
-     * @return true if exist.
-     */
-    bool           CheckNameDraw(const QString& name) const;
-    /**
-     * @brief SetActivDraw set current pattern peace.
-     * @param name pattern peace name.
-     */
-    void           SetActivDraw(const QString& name);
 
-    /**
-     * @brief ParseDrawElement parse draw tag.
-     * @param sceneDraw draw scene.
-     * @param sceneDetail details scene.
-     * @param node node.
-     * @param parse parser file mode.
-     */
+    /** @brief nameActivDraw name current pattern peace. */
+    QString        nameActivDraw;
+
+    /** @brief tools list with pointer on tools. */
+    QHash<quint32, VDataTool*> tools;
+
+    /** @brief history history records. */
+    QVector<VToolRecord> history;
+
+    /** @brief cursor cursor keep id tool after which we will add new tool in file. */
+    quint32         cursor;
+
+    QComboBox      *comboBoxDraws;
+
+    /** @brief mode current draw mode. */
+    Valentina::Draws    *mode;
+
+    /** @brief fileModified true if exist change in file. */
+    bool            patternModified;
+
+    bool           CheckNameDraw(const QString& name) const;
+    void           SetActivDraw(const QString& name);
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document::Documents &parse);
-    /**
-     * @brief ParseDrawMode parse draw tag with draw mode.
-     * @param sceneDraw draw scene.
-     * @param sceneDetail details scene.
-     * @param node node.
-     * @param parse parser file mode.
-     * @param mode draw mode.
-     */
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
                                  const QDomNode& node, const Document::Documents &parse, const Valentina::Draws &mode);
-    /**
-     * @brief ParseDetailElement parse detail tag.
-     * @param sceneDetail detail scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     */
     void           ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                       const Document::Documents &parse);
-    /**
-     * @brief ParseDetails parse details tag.
-     * @param sceneDetail detail scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     */
     void           ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
                                 const Document::Documents &parse);
-    /**
-     * @brief ParsePointElement parse point tag.
-     * @param scene scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     * @param type type of point.
-     */
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document::Documents &parse, const QString &type);
-    /**
-     * @brief ParseLineElement parse line tag.
-     * @param scene scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     */
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                     const Document::Documents &parse);
-    /**
-     * @brief ParseSplineElement parse spline tag.
-     * @param scene scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     * @param type type of spline.
-     */
     void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                       const Document::Documents &parse, const QString& type);
-    /**
-     * @brief ParseArcElement parse arc tag.
-     * @param scene scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     * @param type type of spline.
-     */
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document::Documents &parse, const QString& type);
-    /**
-     * @brief ParseToolsElement parse tools tag.
-     * @param scene scene.
-     * @param domElement tag in xml tree.
-     * @param parse parser file mode.
-     * @param type type of spline.
-     */
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document::Documents &parse, const QString& type);
-    /**
-     * @brief ParseIncrementsElement parse increments tag.
-     * @param node tag in xml tree.
-     */
     void           ParseIncrementsElement(const QDomNode& node);
-    /**
-     * @brief GetParametrId return value id attribute.
-     * @param domElement tag in xml tree.
-     * @return id value.
-     */
-    quint32         GetParametrId(const QDomElement& domElement) const;
-    /**
-     * @brief CollectId recursive function, try find id attribute in file. Throw exclusion if find not unique.
-     * @param node tag in xml tree.
-     * @param vector list with ids.
-     */
+    quint32        GetParametrId(const QDomElement& domElement) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
                                    VMainGraphicsScene *sceneDetail);
     void           UpdateMeasurements();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetNameActivDraw return current pattern peace name.
+ * @return pattern peace name.
+ */
 inline QString VPattern::GetNameActivDraw() const
 {
     return nameActivDraw;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTools return list of tools pointers.
+ * @return list.
+ */
 inline QHash<quint32, VDataTool *> *VPattern::getTools()
 {
     return &tools;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getHistory return list with list of history records.
+ * @return list of history records.
+ */
 inline QVector<VToolRecord> *VPattern::getHistory()
 {
     return &history;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getCursor return cursor.
+ * @return cursor.
+ */
 inline quint32 VPattern::getCursor() const
 {
     return cursor;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline bool VPattern::isPatternModified() const
 {
     return patternModified;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline void VPattern::setPatternModified(bool value)
 {
     patternModified = value;
