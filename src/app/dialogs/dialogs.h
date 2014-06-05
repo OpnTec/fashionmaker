@@ -58,5 +58,6 @@
 #include "app/dialogindividualmeasurements.h"
 #include "app/dialogstandardmeasurements.h"
 #include "app/dialogaboutapp.h"
+#include "app/dialogpatternxmledit.h"
 
 #endif // DIALOGS_H

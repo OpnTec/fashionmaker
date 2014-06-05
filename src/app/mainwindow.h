@@ -129,6 +129,10 @@ public slots:
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
+	/**
+     * @brief Edit XML code of pattern
+     */
+    void               EditPatternCode();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.

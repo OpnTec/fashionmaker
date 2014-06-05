@@ -685,7 +685,7 @@ void MainWindow::ClosedDialogCutArc(int result)
 void MainWindow::About()
 {
     DialogAboutApp * about_dialog = new DialogAboutApp(this);
-    about_dialog->setAttribute(Qt::WA_DeleteOnClose,true);
+    about_dialog->setAttribute(Qt::WA_DeleteOnClose, true);
     about_dialog->show();
 }
 
@@ -733,6 +733,14 @@ void MainWindow::PatternProperties()
 {
     DialogPatternProperties proper(doc, this);
     proper.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::EditPatternCode()
+{
+    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this, doc);
+    Pattern->setAttribute(Qt::WA_DeleteOnClose, true);
+    Pattern->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1396,7 +1404,9 @@ void MainWindow::SetEnableWidgets(bool enable)
     }
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
-    ui->actionZoomIn->setEnabled(enable);
+    ui->actionPattern_properties->setEnabled(enable);
+    ui->actionEdit_pattern_code->setEnabled(enable);
+	ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
 }
 
@@ -1730,6 +1740,8 @@ void MainWindow::CreateActions()
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
+    connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
+    ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
