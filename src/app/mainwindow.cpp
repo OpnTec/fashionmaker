@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     pattern = new VContainer();
 
-    doc = new VPattern(pattern, comboBoxDraws, &mode);
+    doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
 
@@ -1884,20 +1884,9 @@ void MainWindow::LoadPattern(const QString &fileName)
         return;
     }
 
-    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentDrawChanged);
     try
     {
-        #ifndef QT_NO_CURSOR
-            QApplication::setOverrideCursor(Qt::WaitCursor);
-        #endif
-
         doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
-
-        #ifndef QT_NO_CURSOR
-            QApplication::restoreOverrideCursor();
-        #endif
-            ui->actionPattern_properties->setEnabled(true);
     }
     catch (const VExceptionObjectError &e)
     {
@@ -1948,8 +1937,15 @@ void MainWindow::LoadPattern(const QString &fileName)
         Clear();
         return;
     }
+
+    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+               this, &MainWindow::currentDrawChanged);
+    comboBoxDraws->clear();
+    comboBoxDraws->addItems(doc->getPatternPieces());
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::currentDrawChanged);
+    ui->actionPattern_properties->setEnabled(true);
+
     QString nameDraw = doc->GetNameActivDraw();
     qint32 index = comboBoxDraws->findText(nameDraw);
     if ( index != -1 )

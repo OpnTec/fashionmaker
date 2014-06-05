@@ -70,10 +70,15 @@ const QString VPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
 const QString VPattern::IncrementDescription = QStringLiteral("description");
 
 //---------------------------------------------------------------------------------------------------------------------
-VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent)
+VPattern::VPattern(VContainer *data, Valentina::Draws *mode, VMainGraphicsScene *sceneDraw,
+                   VMainGraphicsScene *sceneDetail, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
-      history(QVector<VToolRecord>()), cursor(0), comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false)
-{}
+      history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), patternModified(false),
+      sceneDraw(sceneDraw), sceneDetail(sceneDetail)
+{
+    SCASSERT(sceneDraw != nullptr);
+    SCASSERT(sceneDetail != nullptr);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -237,6 +242,9 @@ bool VPattern::SetNameDraw(const QString &name)
  */
 void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail)
 {
+#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
     Q_CHECK_PTR(sceneDraw);
     Q_CHECK_PTR(sceneDetail);
     PrepareForParse(parse, sceneDraw, sceneDetail);
@@ -263,7 +271,7 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
                             {
                                 ChangeActivDraw(GetParametrString(domElement, AttrName));
                             }
-                            comboBoxDraws->addItem(GetParametrString(domElement, AttrName));
+                            patternPieces << GetParametrString(domElement, AttrName);
                         }
                         else
                         {
@@ -292,6 +300,9 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
         }
         domNode = domNode.nextSibling();
     }
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,15 +342,17 @@ void VPattern::setCursor(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setCurrentData set current data set.
+ *
+ * Each time after parsing need set correct data set for current pattern piece. After parsing it is always last.
+ * Current data set for pattern pice it is data set for last object in pattern pice (point, arc, spline, spline path so
+ * on).
  */
 void VPattern::setCurrentData()
 {
     if (*mode == Valentina::Calculation)
     {
-        const QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
-        if (nameActivDraw != nameDraw)
+        if (patternPieces.size() > 1)//don't need upadate data if we have only one pattern piece
         {
-            nameActivDraw = nameDraw;
             quint32 id = 0;
             if (history.size() == 0)
             {
@@ -348,7 +361,7 @@ void VPattern::setCurrentData()
             for (qint32 i = 0; i < history.size(); ++i)
             {
                 const VToolRecord tool = history.at(i);
-                if (tool.getNameDraw() == nameDraw)
+                if (tool.getNameDraw() == nameActivDraw)
                 {
                     id = tool.getId();
                 }
@@ -736,6 +749,7 @@ void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1833,7 +1847,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
         nameActivDraw.clear();
         sceneDraw->clear();
         sceneDetail->clear();
-        comboBoxDraws->clear();
+        patternPieces.clear();
         tools.clear();
         cursor = 0;
     }

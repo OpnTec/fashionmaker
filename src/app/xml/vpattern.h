@@ -62,7 +62,8 @@ class VPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent = nullptr);
+    VPattern(VContainer *data, Valentina::Draws *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+             QObject *parent = nullptr);
     void           CreateEmptyFile(const QString &tablePath);
     void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
     QString        GetNameActivDraw() const;
@@ -115,6 +116,7 @@ public:
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
     virtual bool   SaveDocument(const QString &fileName);
+    QStringList    getPatternPieces() const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -165,15 +167,18 @@ private:
     QVector<VToolRecord> history;
 
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
-    quint32         cursor;
+    quint32        cursor;
 
-    QComboBox      *comboBoxDraws;
+    QStringList    patternPieces;
 
     /** @brief mode current draw mode. */
     Valentina::Draws    *mode;
 
     /** @brief fileModified true if exist change in file. */
-    bool            patternModified;
+    bool           patternModified;
+
+    VMainGraphicsScene *sceneDraw;
+    VMainGraphicsScene *sceneDetail;
 
     bool           CheckNameDraw(const QString& name) const;
     void           SetActivDraw(const QString& name);
@@ -253,6 +258,12 @@ inline bool VPattern::isPatternModified() const
 inline void VPattern::setPatternModified(bool value)
 {
     patternModified = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QStringList VPattern::getPatternPieces() const
+{
+    return patternPieces;
 }
 
 #endif // VPATTERN_H
