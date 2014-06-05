@@ -242,9 +242,12 @@ bool VPattern::SetNameDraw(const QString &name)
  */
 void VPattern::Parse(const Document::Documents &parse)
 {
+    if (parse == Document::FullParse)
+    {
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
+    }
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     PrepareForParse(parse);
@@ -300,9 +303,12 @@ void VPattern::Parse(const Document::Documents &parse)
         }
         domNode = domNode.nextSibling();
     }
+    if (parse == Document::FullParse)
+    {
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
