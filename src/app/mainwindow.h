@@ -129,6 +129,7 @@ public slots:
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
+    void               FullParseFile();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.

@@ -898,8 +898,8 @@ void MainWindow::currentDrawChanged( int index )
 {
     if (index != -1)
     {
-        doc->setCurrentData();
         doc->ChangeActivDraw(comboBoxDraws->itemText(index));
+        doc->setCurrentData();
         if (drawMode)
         {
             ArrowTool();
@@ -1331,6 +1331,91 @@ void MainWindow::Clear()
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
+}
+
+void MainWindow::FullParseFile()
+{
+    try
+    {
+        doc->Parse(Document::FullParse);
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        e.CriticalMessageBox(tr("Error can't convert value."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        e.CriticalMessageBox(tr("Error wrong id."), this);
+        Clear();
+        return;
+    }
+    catch (VException &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file."), this);
+        Clear();
+        return;
+    }
+    catch (const std::bad_alloc &)
+    {
+#ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+#endif
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Error!"));
+        msgBox.setText(tr("Error parsing file."));
+        msgBox.setInformativeText("std::bad_alloc");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.exec();
+#ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+        Clear();
+        return;
+    }
+
+    QString patternPiece = QString();
+    if (comboBoxDraws->currentIndex() != -1)
+    {
+        patternPiece = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
+    }
+    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+               this, &MainWindow::currentDrawChanged);
+    comboBoxDraws->clear();
+    comboBoxDraws->addItems(doc->getPatternPieces());
+    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this, &MainWindow::currentDrawChanged);
+    ui->actionPattern_properties->setEnabled(true);
+
+    qint32 index = comboBoxDraws->findText(patternPiece);
+    if ( index != -1 )
+    { // -1 for not found
+        comboBoxDraws->setCurrentIndex(index);
+    }
+    if (comboBoxDraws->count() > 0)
+    {
+        SetEnableTool(true);
+    }
+    else
+    {
+        SetEnableTool(false);
+    }
+    SetEnableWidgets(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1884,83 +1969,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         return;
     }
 
-    try
-    {
-        doc->Parse(Document::FullParse);
-    }
-    catch (const VExceptionObjectError &e)
-    {
-        e.CriticalMessageBox(tr("Error parsing file."), this);
-        Clear();
-        return;
-    }
-    catch (const VExceptionConversionError &e)
-    {
-        e.CriticalMessageBox(tr("Error can't convert value."), this);
-        Clear();
-        return;
-    }
-    catch (const VExceptionEmptyParameter &e)
-    {
-        e.CriticalMessageBox(tr("Error empty parameter."), this);
-        Clear();
-        return;
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        e.CriticalMessageBox(tr("Error wrong id."), this);
-        Clear();
-        return;
-    }
-    catch (VException &e)
-    {
-        e.CriticalMessageBox(tr("Error parsing file."), this);
-        Clear();
-        return;
-    }
-    catch (const std::bad_alloc &)
-    {
-#ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-#endif
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error parsing file."));
-        msgBox.setInformativeText("std::bad_alloc");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
-        Clear();
-        return;
-    }
-
-    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentDrawChanged);
-    comboBoxDraws->clear();
-    comboBoxDraws->addItems(doc->getPatternPieces());
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentDrawChanged);
-    ui->actionPattern_properties->setEnabled(true);
-
-    QString nameDraw = doc->GetNameActivDraw();
-    qint32 index = comboBoxDraws->findText(nameDraw);
-    if ( index != -1 )
-    { // -1 for not found
-        comboBoxDraws->setCurrentIndex(index);
-    }
-    if (comboBoxDraws->count() > 0)
-    {
-        SetEnableTool(true);
-    }
-    else
-    {
-        SetEnableTool(false);
-    }
-    SetEnableWidgets(true);
+    FullParseFile();
 
     bool patternModified = doc->isPatternModified();
     setCurrentFile(fileName);
