@@ -84,7 +84,7 @@ public:
      * @param element draw tag.
      * @return true if found.
      */
-    bool           GetActivDrawElement(QDomElement &element);
+    bool           GetActivDrawElement(QDomElement &element) const;
     /**
      * @brief appendDraw add new pattern peace structure to the file.
      * @param name pattern peace name.
@@ -174,7 +174,7 @@ public:
      * @param element element.
      * @return true if found.
      */
-    bool           GetActivNodeElement(const QString& name, QDomElement& element);
+    bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
     QString        MPath() const;
     void           SetPath(const QString &path);
     Valentina::Units MUnit() const;
@@ -241,7 +241,7 @@ public slots:
     /**
      * @brief FullUpdateTree lite parse file.
      */
-    void           FullUpdateTree();
+    void           LiteParseTree();
     /**
      * @brief haveLiteChange we have unsaved change.
      */

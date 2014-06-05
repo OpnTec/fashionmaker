@@ -77,7 +77,7 @@ VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObjec
     Q_CHECK_PTR(doc);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
+    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
                     {
                         scene->removeItem(tool);//remove form scene
                     }
-                    doc->FullUpdateTree();
+                    doc->LiteParseTree();
                     emit toolhaveChange();//set enabled save button
                 }
                 else

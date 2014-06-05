@@ -133,7 +133,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
     connect(ui->toolButtonRemove, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonRemove);
 
-    connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
+    connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
     connect(this, &DialogIncrements::haveLiteChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 

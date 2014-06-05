@@ -126,7 +126,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
             VAbstractTool::NewSceneRect(this->scene(), list[0]);
 
             //I don't now why but signal does not work.
-            doc->FullUpdateTree();
+            doc->LiteParseTree();
             emit toolhaveChange();
         }
     }

@@ -110,18 +110,21 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
 void VPattern::ChangeActivDraw(const QString &name, const Document::Documents &parse)
 {
     Q_ASSERT_X(name.isEmpty() == false, "ChangeActivDraw", "name draw is empty");
-    if (CheckNameDraw(name))
+    if (this->nameActivDraw != name)
     {
-        this->nameActivDraw = name;
-        if (parse == Document::FullParse)
+        if (CheckNameDraw(name))
         {
-            emit ChangedActivDraw(name);
+            this->nameActivDraw = name;
+            if (parse == Document::FullParse)
+            {
+                emit ChangedActivDraw(name);
+            }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::GetActivDrawElement(QDomElement &element)
+bool VPattern::GetActivDrawElement(QDomElement &element) const
 {
     if (nameActivDraw.isEmpty() == false)
     {
@@ -279,8 +282,11 @@ VDataTool *VPattern::getTool(const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::setCursor(const quint32 &value)
 {
-    cursor = value;
-    emit ChangedCursor(cursor);
+    if (cursor != value)
+    {
+        cursor = value;
+        emit ChangedCursor(cursor);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,7 +426,7 @@ void VPattern::SetActivDraw(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
+bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "GetActivNodeElement", "name draw is empty");
     QDomElement drawElement;
@@ -555,7 +561,7 @@ bool VPattern::SaveDocument(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::FullUpdateTree()
+void VPattern::LiteParseTree()
 {
     VMainGraphicsScene *scene = nullptr;
     try
