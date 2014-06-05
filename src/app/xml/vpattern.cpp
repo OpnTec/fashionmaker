@@ -240,14 +240,14 @@ bool VPattern::SetNameDraw(const QString &name)
  * @param sceneDraw pointer to draw scene.
  * @param sceneDetail pointer to details scene.
  */
-void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail)
+void VPattern::Parse(const Document::Documents &parse)
 {
 #ifndef QT_NO_CURSOR
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-    Q_CHECK_PTR(sceneDraw);
-    Q_CHECK_PTR(sceneDetail);
-    PrepareForParse(parse, sceneDraw, sceneDetail);
+    SCASSERT(sceneDraw != nullptr);
+    SCASSERT(sceneDetail != nullptr);
+    PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
     {
@@ -661,50 +661,42 @@ bool VPattern::SaveDocument(const QString &fileName)
  */
 void VPattern::LiteParseTree()
 {
-    VMainGraphicsScene *scene = nullptr;
     try
     {
-        scene = new VMainGraphicsScene();
-        Parse(Document::LiteParse, scene, scene);
+        Parse(Document::LiteParse);
     }
     catch (const VExceptionObjectError &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error parsing file."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionConversionError &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error can't convert value."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error empty parameter."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error wrong id."));
         emit ClearMainWindow();
         return;
     }
     catch (VException &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error parsing file."));
         emit ClearMainWindow();
         return;
     }
     catch (const std::bad_alloc &)
     {
-        delete scene;
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
@@ -723,7 +715,6 @@ void VPattern::LiteParseTree()
         return;
     }
 
-    delete scene;
     setCurrentData();
     emit FullUpdateFromFile();
 }
@@ -1834,11 +1825,10 @@ void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
-                               VMainGraphicsScene *sceneDetail)
+void VPattern::PrepareForParse(const Document::Documents &parse)
 {
-    Q_CHECK_PTR(sceneDraw);
-    Q_CHECK_PTR(sceneDetail);
+    SCASSERT(sceneDraw != nullptr);
+    SCASSERT(sceneDetail != nullptr);
     if (parse == Document::FullParse)
     {
         TestUniqueId();

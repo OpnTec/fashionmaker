@@ -1886,7 +1886,7 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     try
     {
-        doc->Parse(Document::FullParse, sceneDraw, sceneDetails);
+        doc->Parse(Document::FullParse);
     }
     catch (const VExceptionObjectError &e)
     {

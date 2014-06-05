@@ -70,8 +70,7 @@ public:
     bool           GetActivDrawElement(QDomElement &element) const;
     bool           appendDraw(const QString& name);
     bool           SetNameDraw(const QString& name);
-    void           Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
-                         VMainGraphicsScene *sceneDetail);
+    void           Parse(const Document::Documents &parse);
     QHash<quint32, VDataTool*>* getTools();
     VDataTool*     getTool(const quint32 &id);
     QVector<VToolRecord> *getHistory();
@@ -203,8 +202,7 @@ private:
     void           ParseIncrementsElement(const QDomNode& node);
     quint32        GetParametrId(const QDomElement& domElement) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
-    void           PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
-                                   VMainGraphicsScene *sceneDetail);
+    void           PrepareForParse(const Document::Documents &parse);
     void           UpdateMeasurements();
 };
 
