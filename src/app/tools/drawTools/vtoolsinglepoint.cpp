@@ -29,12 +29,14 @@
 #include "vtoolsinglepoint.h"
 #include "../../dialogs/tools/dialogsinglepoint.h"
 
+#include <xml/vundocommands.h>
+
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
-                                    QGraphicsItem * parent )
-    :VToolPoint(doc, data, id, parent)
+                                    const QString &namePP, const QString &mPath, QGraphicsItem * parent )
+    :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
     baseColor = Qt::red;
     currentColor = baseColor;
@@ -67,18 +69,35 @@ void VToolSinglePoint::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::AddToFile()
 {
+    Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
+
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement sPoint = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrX, qApp->fromPixel(point->x()));
-    doc->SetAttribute(domElement, AttrY, qApp->fromPixel(point->y()));
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
+    // Create SPoint tag
+    doc->SetAttribute(sPoint, VDomDocument::AttrId, id);
+    doc->SetAttribute(sPoint, AttrType, ToolType);
+    doc->SetAttribute(sPoint, AttrName, point->name());
+    doc->SetAttribute(sPoint, AttrX, qApp->fromPixel(point->x()));
+    doc->SetAttribute(sPoint, AttrY, qApp->fromPixel(point->y()));
+    doc->SetAttribute(sPoint, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(sPoint, AttrMy, qApp->fromPixel(point->my()));
 
-    AddToCalculation(domElement);
+    //Create pattern piece structure
+    QDomElement patternPiece = doc->createElement(VPattern::TagDraw);
+    doc->SetAttribute(patternPiece, AttrName, namePP);
+
+    QDomElement calcElement = doc->createElement(VPattern::TagCalculation);
+    calcElement.appendChild(sPoint);
+
+    patternPiece.appendChild(calcElement);
+    patternPiece.appendChild(doc->createElement(VPattern::TagModeling));
+    patternPiece.appendChild(doc->createElement(VPattern::TagDetails));
+
+    AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP, mPath);
+    connect(addPP, &AddPatternPiece::ClearScene, doc, &VPattern::ClearScene);
+    connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addPP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,9 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCal::AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()), cursor(doc->getCursor())
+    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()),
+      cursor(doc->getCursor()), redoFlag(false)
 {
-    setText(tr("Add to section %1").arg(VPattern::TagCalculation));
+    setText(tr("Add object"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ AddToCal::~AddToCal()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCal::undo()
 {
-    doc->ChangeActivDraw(nameActivDraw);
+    doc->ChangeActivPP(nameActivDraw);
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -65,7 +66,7 @@ void AddToCal::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCal::redo()
 {
-    doc->ChangeActivDraw(nameActivDraw);
+    doc->ChangeActivPP(nameActivDraw);
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -93,28 +94,66 @@ void AddToCal::redo()
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
     }
-    emit UnsavedChange();
+    if (redoFlag == false)
+    {
+        emit UnsavedChange();
+    }
+    else
+    {
+        emit NeedFullParsing();
+    }
+    redoFlag = true;
 }
 
 //--------------------------------------------AddPatternPiece----------------------------------------------------------
 
 int AddPatternPiece::countPP = 0;
 
-AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc)
+AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
+                                 QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
 {
-    setText(tr("Add to new pattern piece"));
+    setText(tr("Add pattern piece %1").arg(namePP));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::~AddPatternPiece()
 {}
 
+//---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
 {
+    if (countPP <= 1)
+    {
+        emit ClearScene();
+    }
+    else
+    {
+        QDomElement rootElement = doc->documentElement();
+        QDomElement patternPiece = doc->GetPPElement(namePP);
+        rootElement.removeChild(patternPiece);
+        emit NeedFullParsing();
+    }
     --countPP;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::redo()
 {
     ++countPP;
+    if (countPP == 1 && mPath.isEmpty() == false)
+    {
+        doc->CreateEmptyFile(mPath);
+    }
+
+    QDomElement rootElement = doc->documentElement();
+
+    rootElement.appendChild(xml);
+    doc->haveLiteChange();
+
+    if (redoFlag)
+    {
+        emit NeedFullParsing();
+    }
+    redoFlag = true;
 }

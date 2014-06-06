@@ -58,7 +58,7 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     connect(this, &DialogHistory::ShowHistoryTool, doc, &VPattern::ShowHistoryTool);
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
-    connect(doc, &VPattern::ChangedActivDraw, this, &DialogHistory::UpdateHistory);
+    connect(doc, &VPattern::ChangedActivPP, this, &DialogHistory::UpdateHistory);
     ShowPoint();
 }
 

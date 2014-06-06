@@ -48,6 +48,7 @@ public:
                   * @param parent parent object.
                   */
                  VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+                                   const QString &namePP = QString(), const QString &mPath = QString(),
                                    QGraphicsItem * parent = nullptr );
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -114,6 +115,8 @@ protected:
      */
     virtual void SaveDialog(QDomElement &domElement);
 private:
+    QString namePP;
+    QString mPath;
     /**
      * @brief setColorLabel change color for label and label line.
      * @param color new color.

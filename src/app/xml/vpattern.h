@@ -65,10 +65,10 @@ public:
     VPattern(VContainer *data, Valentina::Draws *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
     void           CreateEmptyFile(const QString &tablePath);
-    void           ChangeActivDraw(const QString& name, const Document::Documents &parse = Document::FullParse);
+    void           ChangeActivPP(const QString& name, const Document::Documents &parse = Document::FullParse);
     QString        GetNameActivDraw() const;
     bool           GetActivDrawElement(QDomElement &element) const;
-    bool           appendDraw(const QString& name);
+    bool           appendPP(const QString& name);
     bool           SetNameDraw(const QString& name);
     void           Parse(const Document::Documents &parse);
     QHash<quint32, VDataTool*>* getTools();
@@ -116,12 +116,13 @@ public:
     static const QString IncrementDescription;
     virtual bool   SaveDocument(const QString &fileName);
     QStringList    getPatternPieces() const;
+    QDomElement    GetPPElement(const QString &name);
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
      * @param newName new pattern peace name.
      */
-    void           ChangedActivDraw(const QString &newName);
+    void           ChangedActivPP(const QString &newName);
     /**
      * @brief ChangedNameDraw save new name active pattern peace.
      * @param oldName old name.
@@ -155,6 +156,7 @@ public slots:
     void           haveLiteChange();
     void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
     void           NeedFullParsing();
+    void           ClearScene();
 private:
     Q_DISABLE_COPY(VPattern)
 
@@ -181,8 +183,8 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
-    bool           CheckNameDraw(const QString& name) const;
-    void           SetActivDraw(const QString& name);
+    bool           CheckNamePP(const QString& name) const;
+    void           SetActivPP(const QString& name);
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document::Documents &parse);
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
@@ -265,5 +267,7 @@ inline QStringList VPattern::getPatternPieces() const
 {
     return patternPieces;
 }
+
+
 
 #endif // VPATTERN_H

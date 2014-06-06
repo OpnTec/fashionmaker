@@ -91,6 +91,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     {
         throw VException("Path to measurement table empty.");
     }
+    this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
 
     patternElement.appendChild(createComment("Valentina pattern format."));
@@ -117,21 +118,21 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangeActivDraw set new pattern peace name.
+ * @brief ChangeActivPP set new active pattern piece name.
  * @param name new name.
  * @param parse parser file mode.
  */
-void VPattern::ChangeActivDraw(const QString &name, const Document::Documents &parse)
+void VPattern::ChangeActivPP(const QString &name, const Document::Documents &parse)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "ChangeActivDraw", "name draw is empty");
+    Q_ASSERT_X(name.isEmpty() == false, "ChangeActivPP", "name pattern piece is empty");
     if (this->nameActivDraw != name)
     {
-        if (CheckNameDraw(name))
+        if (CheckNamePP(name))
         {
             this->nameActivDraw = name;
             if (parse == Document::FullParse)
             {
-                emit ChangedActivDraw(name);
+                emit ChangedActivPP(name);
             }
         }
     }
@@ -170,37 +171,29 @@ bool VPattern::GetActivDrawElement(QDomElement &element) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief appendDraw add new pattern peace structure to the file.
+ * @brief appendPP add new pattern piece.
+ *
+ * Method check if not exist pattern piece with the same name and change name active pattern piece name, send signal
+ * about change pattern piece. Doen't add pattern piece to file structure. This task make SPoint tool.
  * @param name pattern peace name.
  * @return true if success.
  */
-bool VPattern::appendDraw(const QString &name)
+bool VPattern::appendPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "appendDraw", "name draw is empty");
+    Q_ASSERT_X(name.isEmpty() == false, "appendPP", "name pattern piece is empty");
     if (name.isEmpty())
     {
         return false;
     }
-    if (CheckNameDraw(name) == false)
+    if (CheckNamePP(name) == false)
     {
-        QDomElement rootElement = this->documentElement();
-
-        QDomElement drawElement = this->createElement(TagDraw);
-        SetAttribute(drawElement, AttrName, name);
-
-        drawElement.appendChild(createElement(TagCalculation));
-        drawElement.appendChild(createElement(TagModeling));
-        drawElement.appendChild(createElement(TagDetails));
-
-        rootElement.appendChild(drawElement);
-
         if (nameActivDraw.isEmpty())
         {
-            SetActivDraw(name);
+            SetActivPP(name);
         }
         else
         {
-            ChangeActivDraw(name);
+            ChangeActivPP(name);
         }
         return true;
     }
@@ -268,17 +261,17 @@ void VPattern::Parse(const Document::Documents &parse)
                         {
                             if (nameActivDraw.isEmpty())
                             {
-                                SetActivDraw(GetParametrString(domElement, AttrName));
+                                SetActivPP(GetParametrString(domElement, AttrName));
                             }
                             else
                             {
-                                ChangeActivDraw(GetParametrString(domElement, AttrName));
+                                ChangeActivPP(GetParametrString(domElement, AttrName));
                             }
                             patternPieces << GetParametrString(domElement, AttrName);
                         }
                         else
                         {
-                            ChangeActivDraw(GetParametrString(domElement, AttrName), Document::LiteParse);
+                            ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
                         }
                         ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
                         break;
@@ -487,7 +480,7 @@ quint32 VPattern::SPointActiveDraw()
  * @param name pattern peace name.
  * @return true if exist.
  */
-bool VPattern::CheckNameDraw(const QString &name) const
+bool VPattern::CheckNamePP(const QString &name) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "CheckNameDraw", "name draw is empty");
     const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
@@ -511,12 +504,12 @@ bool VPattern::CheckNameDraw(const QString &name) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SetActivDraw set current pattern peace.
+ * @brief SetActivPP set current pattern piece.
  * @param name pattern peace name.
  */
-void VPattern::SetActivDraw(const QString &name)
+void VPattern::SetActivPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "SetActivDraw", "name draw is empty");
+    Q_ASSERT_X(name.isEmpty() == false, "SetActivPP", "name pattern piece is empty");
     this->nameActivDraw = name;
 }
 
@@ -747,11 +740,17 @@ void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
     emit ShowTool(id, color, enable);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::NeedFullParsing()
 {
     emit UndoCommand();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ClearScene()
+{
+    emit ClearMainWindow();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1876,4 +1875,29 @@ void VPattern::UpdateMeasurements()
         m.setContent(path);
         m.Measurements();
     }
+}
+
+
+QDomElement VPattern::GetPPElement(const QString &name)
+{
+    if (name.isEmpty() == false)
+    {
+        const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
+        if (elements.size() == 0)
+        {
+            return QDomElement();
+        }
+        for ( qint32 i = 0; i < elements.count(); i++ )
+        {
+            QDomElement element = elements.at( i ).toElement();
+            if (element.isNull() == false)
+            {
+                if ( element.attribute( AttrName ) == name )
+                {
+                    return element;
+                }
+            }
+        }
+    }
+    return QDomElement();
 }

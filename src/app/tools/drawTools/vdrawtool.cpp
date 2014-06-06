@@ -46,7 +46,7 @@ VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
 {
-    connect(this->doc, &VPattern::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
+    connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VPattern::ShowTool, this, &VDrawTool::ShowTool);
 }

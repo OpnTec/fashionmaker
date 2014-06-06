@@ -111,9 +111,9 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::ActionNewPP()
 {
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+    QString path;
     if (comboBoxDraws->count() == 0)
     {
-        QString path;
         DialogMeasurements measurements(this);
         if (measurements.exec() == QDialog::Rejected)
         {
@@ -155,7 +155,6 @@ void MainWindow::ActionNewPP()
                 return;
             }
         }
-        doc->CreateEmptyFile(path);
     }
     else
     {
@@ -165,9 +164,9 @@ void MainWindow::ActionNewPP()
             return;
         }
     }
-    if (doc->appendDraw(patternPieceName) == false)
+    if (doc->appendPP(patternPieceName) == false)
     {
-        qDebug()<<"Error creating pattern with the name "<<patternPieceName<<".";
+        qDebug()<<"Error creating pattern piece with the name "<<patternPieceName<<".";
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -178,7 +177,7 @@ void MainWindow::ActionNewPP()
     //Create single point
     const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10),
                                                        "А", 5, 10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui);
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Valentina::FromGui, patternPieceName, path);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -902,7 +901,7 @@ void MainWindow::currentDrawChanged( int index )
 {
     if (index != -1)
     {
-        doc->ChangeActivDraw(comboBoxDraws->itemText(index));
+        doc->ChangeActivPP(comboBoxDraws->itemText(index));
         doc->setCurrentData();
         if (drawMode)
         {
@@ -1644,6 +1643,7 @@ bool MainWindow::SavePattern(const QString &fileName)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
+            qApp->getUndoStack()->setClean();
         }
     }
     return result;
