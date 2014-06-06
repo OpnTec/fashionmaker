@@ -30,18 +30,18 @@
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
-AddToCalculation::AddToCalculation(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()), cursor(doc->getCursor())
+AddToCal::AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()), cursor(doc->getCursor())
 {
-    setText(QObject::tr("Add to section %1").arg(VPattern::TagCalculation));
+    setText(tr("Add to section %1").arg(VPattern::TagCalculation));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-AddToCalculation::~AddToCalculation()
+AddToCal::~AddToCal()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void AddToCalculation::undo()
+void AddToCal::undo()
 {
     doc->ChangeActivDraw(nameActivDraw);
     doc->setCursor(cursor);
@@ -59,10 +59,11 @@ void AddToCalculation::undo()
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
     }
+    emit NeedFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AddToCalculation::redo()
+void AddToCal::redo()
 {
     doc->ChangeActivDraw(nameActivDraw);
     doc->setCursor(cursor);
@@ -84,13 +85,36 @@ void AddToCalculation::redo()
             }
             else
             {
-                qDebug()<<QObject::tr("Can not find the element after which you want to insert.")<< Q_FUNC_INFO;
+                qDebug()<<"Can not find the element after which you want to insert."<< Q_FUNC_INFO;
             }
         }
     }
     else
     {
-        qDebug()<<QObject::tr("Can't find tag Calculation")<< Q_FUNC_INFO;
+        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
     }
-    //emit toolhaveChange();
+    emit UnsavedChange();
+}
+
+//--------------------------------------------AddPatternPiece----------------------------------------------------------
+
+int AddPatternPiece::countPP = 0;
+
+AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), xml(xml), doc(doc)
+{
+    setText(tr("Add to new pattern piece"));
+}
+
+AddPatternPiece::~AddPatternPiece()
+{}
+
+void AddPatternPiece::undo()
+{
+    --countPP;
+}
+
+void AddPatternPiece::redo()
+{
+    ++countPP;
 }

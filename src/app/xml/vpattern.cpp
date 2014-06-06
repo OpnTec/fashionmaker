@@ -399,7 +399,7 @@ void VPattern::setCurrentData()
 void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
-    Q_CHECK_PTR(tool);
+    SCASSERT(tool != nullptr);
     tools.insert(id, tool);
 }
 
@@ -412,9 +412,9 @@ void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
-    Q_CHECK_PTR(data);
+    SCASSERT(data != nullptr);
     VDataTool *tool = tools.value(id);
-    Q_CHECK_PTR(tool);
+    SCASSERT(tool != nullptr);
     tool->VDataTool::setData(data);
 }
 
@@ -427,7 +427,7 @@ void VPattern::IncrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     VDataTool *tool = tools.value(id);
-    Q_CHECK_PTR(tool);
+    SCASSERT(tool != nullptr);
     tool->incrementReferens();
 }
 
@@ -440,7 +440,7 @@ void VPattern::DecrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     VDataTool *tool = tools.value(id);
-    Q_CHECK_PTR(tool);
+    SCASSERT(tool != nullptr);
     tool->decrementReferens();
 }
 
@@ -745,6 +745,11 @@ void VPattern::haveLiteChange()
 void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
+}
+
+void VPattern::NeedFullParsing()
+{
+    emit UndoCommand();
 }
 
 

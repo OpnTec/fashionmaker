@@ -149,10 +149,12 @@ signals:
      */
     void           ChangedCursor(quint32 id);
     void           ClearMainWindow();
+    void           UndoCommand();
 public slots:
     void           LiteParseTree();
     void           haveLiteChange();
     void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
+    void           NeedFullParsing();
 private:
     Q_DISABLE_COPY(VPattern)
 

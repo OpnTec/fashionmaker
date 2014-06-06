@@ -93,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
+    connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
 
     InitAutoSave();
 
@@ -105,16 +106,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ActionNewDraw add to scene new pattern peace.
+ * @brief ActionNewPP add to scene new pattern piece.
  */
-void MainWindow::ActionNewDraw()
+void MainWindow::ActionNewPP()
 {
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
     if (comboBoxDraws->count() == 0)
     {
         QString path;
         DialogMeasurements measurements(this);
-        measurements.exec();
+        if (measurements.exec() == QDialog::Rejected)
+        {
+            return;
+        }
         if (measurements.type() == Measurements::Standard)
         {
             qApp->setPatternType(Pattern::Standard);
@@ -1819,7 +1823,7 @@ void MainWindow::CreateActions()
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
-    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewDraw);
+    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewPP);
     connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
     connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);

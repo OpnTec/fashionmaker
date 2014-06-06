@@ -29,10 +29,9 @@
 #include "vdrawtool.h"
 
 #include <qmuparsererror.h>
-
 #include <dialogs/tools/dialogeditwrongformula.h>
-
 #include <container/calculator.h>
+#include "../../xml/vundocommands.h"
 
 qreal VDrawTool::factor = 1;
 
@@ -191,32 +190,8 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
  */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
-    QDomElement calcElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagCalculation, calcElement);
-    if (ok)
-    {
-        quint32 id = doc->getCursor();
-        if (id <= 0)
-        {
-            calcElement.appendChild(domElement);
-        }
-        else
-        {
-            QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
-            if (refElement.isElement())
-            {
-                calcElement.insertAfter(domElement, refElement);
-                doc->setCursor(0);
-            }
-            else
-            {
-                qCritical()<<tr("Can not find the element after which you want to insert.")<< Q_FUNC_INFO;
-            }
-        }
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Calculation")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddToCal *addToCal = new AddToCal(domElement, doc);
+    connect(addToCal, &AddToCal::UnsavedChange, doc, &VPattern::haveLiteChange);
+    connect(addToCal, &AddToCal::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addToCal);
 }

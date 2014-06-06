@@ -34,18 +34,41 @@
 #include <QDomElement>
 #include <QUndoCommand>
 
-class AddToCalculation : public QUndoCommand
+class AddToCal : public QObject, public QUndoCommand
 {
+    Q_OBJECT
 public:
-    AddToCalculation(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
-    virtual ~AddToCalculation();
+    AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    virtual ~AddToCal();
     virtual void undo();
     virtual void redo();
+signals:
+    void UnsavedChange();
+    void NeedFullParsing();
 private:
+    Q_DISABLE_COPY(AddToCal)
     const QDomElement xml;
     VPattern *doc;
     const QString nameActivDraw;
     quint32 cursor;
+};
+
+class AddPatternPiece : public QObject, public QUndoCommand
+{
+    Q_OBJECT
+public:
+    AddPatternPiece(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    virtual ~AddPatternPiece();
+    virtual void undo();
+    virtual void redo();
+signals:
+    void UnsavedChange();
+    void NeedFullParsing();
+private:
+    Q_DISABLE_COPY(AddPatternPiece)
+    const QDomElement xml;
+    VPattern *doc;
+    static int countPP;
 };
 
 #endif // VUNDOCOMMANDS_H

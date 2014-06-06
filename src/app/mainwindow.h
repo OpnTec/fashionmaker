@@ -60,7 +60,7 @@ public slots:
     void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
-    void               ActionNewDraw();
+    void               ActionNewPP();
     void               ActionLayout(bool checked);
     void               ActionTable(bool checked);
     void               ActionHistory(bool checked);
