@@ -61,6 +61,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     InitVariables(ui);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                              QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,13 +81,15 @@ void DialogAlongLine::DeployFormulaTextEdit()
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOGALONLINE_MAX_FORMULA_HEIGHT);
         //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next"));
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                                  QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
     }
     else
     {
        ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
        //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down"));
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                                   QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
 }
 
