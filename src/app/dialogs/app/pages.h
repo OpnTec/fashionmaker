@@ -60,10 +60,10 @@ private:
     Q_DISABLE_COPY(PatternPage)
     QLineEdit *userName;
     QCheckBox *graphOutputCheck;
-    QSpinBox  *undoneCount;
+    QSpinBox  *undoCount;
     QGroupBox *UserGroup();
     QGroupBox *GraphOutputGroup();
-    QGroupBox *UndoneGroup();
+    QGroupBox *UndoGroup();
 };
 
 #endif // PAGES_H

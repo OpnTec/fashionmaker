@@ -1726,9 +1726,19 @@ void MainWindow::ReadSettings()
     resize(size);
     move(pos);
 
+    // Scene antialiasing
     bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
     view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
+
+    // Stack limit
+    bool ok = true;
+    qint32 count = settings.value("pattern/undo", 0).toInt(&ok);
+    if (ok == false)
+    {
+        count = 0;
+    }
+    qApp->getUndoStack()->setUndoLimit(count);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

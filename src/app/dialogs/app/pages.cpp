@@ -188,16 +188,16 @@ QGroupBox *ConfigurationPage::LangGroup()
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
-    QWidget(parent), userName(0), graphOutputCheck(0), undoneCount(0)
+    QWidget(parent), userName(0), graphOutputCheck(0), undoCount(0)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
-    QGroupBox *undoneGroup = UndoneGroup();
+    QGroupBox *undoGroup = UndoGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(userGroup);
     mainLayout->addWidget(graphOutputGroup);
-    mainLayout->addWidget(undoneGroup);
+    mainLayout->addWidget(undoGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -214,7 +214,10 @@ void PatternPage::Apply()
     qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
 
-    settings.setValue("pattern/undone", undoneCount->value());
+    /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
+     * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
+     * prints a warning and does nothing.*/
+    settings.setValue("pattern/undo", undoCount->value());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,29 +269,29 @@ QGroupBox *PatternPage::GraphOutputGroup()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGroupBox *PatternPage::UndoneGroup()
+QGroupBox *PatternPage::UndoGroup()
 {
-    //    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-    //                       QApplication::applicationName());
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
 
-    QGroupBox *undoneGroup = new QGroupBox(tr("Undone"));
-    QLabel *undoneLabel = new QLabel(tr("Count steps"));
-    undoneCount = new QSpinBox;
-//    bool ok = true;
-//    qint32 count = settings.value("pattern/undone", 100).toInt(&ok);
-//    if (ok == false)
-//    {
-//        count = 100;
-//    }
-//    undoneCount->setValue(count);
-    undoneCount->setEnabled(false);
+    QGroupBox *undoGroup = new QGroupBox(tr("Undo"));
+    QLabel *undoLabel = new QLabel(tr("Count steps (0 - no limit)"));
+    undoCount = new QSpinBox;
+    undoCount->setMinimum(0);
+    bool ok = true;
+    qint32 count = settings.value("pattern/undo", 0).toInt(&ok);
+    if (ok == false)
+    {
+        count = 0;
+    }
+    undoCount->setValue(count);
 
     QHBoxLayout *countLayout = new QHBoxLayout;
-    countLayout->addWidget(undoneLabel);
-    countLayout->addWidget(undoneCount);
+    countLayout->addWidget(undoLabel);
+    countLayout->addWidget(undoCount);
 
-    QVBoxLayout *undoneLayout = new QVBoxLayout;
-    undoneLayout->addLayout(countLayout);
-    undoneGroup->setLayout(undoneLayout);
-    return undoneGroup;
+    QVBoxLayout *undoLayout = new QVBoxLayout;
+    undoLayout->addLayout(countLayout);
+    undoGroup->setLayout(undoLayout);
+    return undoGroup;
 }
