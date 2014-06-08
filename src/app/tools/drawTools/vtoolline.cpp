@@ -29,6 +29,8 @@
 #include "vtoolline.h"
 #include "../../dialogs/tools/dialogline.h"
 #include <QKeyEvent>
+#include "../../geometry/vpointf.h"
+#include "../../dialogs/tools/dialogline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 

@@ -29,7 +29,6 @@
 #ifndef VTRANSLATION_H
 #define VTRANSLATION_H
 
-#include <QCoreApplication>
 #include <QString>
 
 /**

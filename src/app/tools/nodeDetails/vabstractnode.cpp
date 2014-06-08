@@ -28,6 +28,7 @@
 
 #include "vabstractnode.h"
 #include <QDebug>
+#include "../../xml/vpattern.h"
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");

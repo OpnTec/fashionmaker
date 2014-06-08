@@ -29,8 +29,8 @@
 #include "vdrawtool.h"
 
 #include <qmuparsererror.h>
-#include <dialogs/tools/dialogeditwrongformula.h>
-#include <container/calculator.h>
+#include "dialogs/tools/dialogeditwrongformula.h"
+#include "container/calculator.h"
 #include "../../xml/vundocommands.h"
 
 qreal VDrawTool::factor = 1;

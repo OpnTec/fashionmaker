@@ -29,8 +29,12 @@
 #ifndef VEQUIDISTANT_H
 #define VEQUIDISTANT_H
 
-#include <QPainterPath>
-#include "../container/vcontainer.h"
+#include "vdetail.h"
+
+class QPainterPath;
+class VContainer;
+class QPointF;
+class QLineF;
 
 /**
  * @brief The VEquidistant class calculate equidistant for detail.

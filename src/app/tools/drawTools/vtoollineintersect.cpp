@@ -28,6 +28,7 @@
 
 #include "vtoollineintersect.h"
 #include "../../dialogs/tools/dialoglineintersect.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 

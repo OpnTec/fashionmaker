@@ -36,6 +36,7 @@
 #include "exception/vexceptionwrongid.h"
 #include "version.h"
 #include "xml/vstandardmeasurements.h"
+#include "xml/vindividualmeasurements.h"
 #include "widgets/vapplication.h"
 
 #include <QInputDialog>

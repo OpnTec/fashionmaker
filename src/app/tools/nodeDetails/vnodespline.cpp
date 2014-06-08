@@ -28,8 +28,8 @@
 
 #include "vnodespline.h"
 
-#include <QtWidgets>
 #include "../../widgets/vapplication.h"
+#include "../../geometry/vspline.h"
 
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");

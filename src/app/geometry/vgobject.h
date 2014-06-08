@@ -30,10 +30,6 @@
 #define VGOBJECT_H
 
 #include "../options.h"
-#include "../exception/vexception.h"
-#include <QCoreApplication>
-#include <QHash>
-
 
 namespace GObject
 {

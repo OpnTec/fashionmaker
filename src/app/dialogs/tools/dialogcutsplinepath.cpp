@@ -29,6 +29,9 @@
 #include "dialogcutsplinepath.h"
 #include "ui_dialogcutsplinepath.h"
 
+#include "../../geometry/vsplinepath.h"
+#include "../../container/vcontainer.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutSplinePath create dialog.

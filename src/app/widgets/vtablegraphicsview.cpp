@@ -29,7 +29,6 @@
 #include "vtablegraphicsview.h"
 
 #include <QDebug>
-#include <QtWidgets>
 #include <QWheelEvent>
 
 //---------------------------------------------------------------------------------------------------------------------

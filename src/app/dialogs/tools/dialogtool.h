@@ -29,16 +29,18 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-#include <QComboBox>
 #include <QDialog>
-#include <QDoubleSpinBox>
-#include <QLabel>
-#include <QListWidgetItem>
-#include <QRadioButton>
 #include <QDialogButtonBox>
-#include <QPushButton>
-#include "../../container/vcontainer.h"
 #include "../../widgets/vapplication.h"
+
+class QDoubleSpinBox;
+class QLabel;
+class QRadioButton;
+class QComboBox;
+class QListWidgetItem;
+class QLineEdit;
+class QListWidget;
+class VContainer;
 
 namespace ComboMode
 {

@@ -28,10 +28,11 @@
 
 #include "dialogtool.h"
 #include "../../container/calculator.h"
-#include "../../geometry/vgobject.h"
+#include "../../container/vcontainer.h"
+#include "../../geometry/varc.h"
+#include "../../geometry/vpointf.h"
+#include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
-
-#include <QtWidgets>
 #include "../../../libs/qmuparser/qmuparsererror.h"
 
 //---------------------------------------------------------------------------------------------------------------------

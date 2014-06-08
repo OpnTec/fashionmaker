@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vpointf.h"
+#include <QPointF>
+#include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -77,4 +79,14 @@ VPointF &VPointF::operator =(const VPointF &point)
 QString VPointF::name() const
 {
     return _name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief toQPointF convert to QPointF
+ * @return QPointF point
+ */
+QPointF VPointF::toQPointF() const
+{
+    return QPointF(_x, _y);
 }

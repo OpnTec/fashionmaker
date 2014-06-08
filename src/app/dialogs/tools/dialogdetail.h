@@ -31,6 +31,7 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
+#include "../../geometry/vdetail.h"
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.

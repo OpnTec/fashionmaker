@@ -29,6 +29,7 @@
 #include "vtoolnormal.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialognormal.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 

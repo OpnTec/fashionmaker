@@ -29,9 +29,9 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "vcontainer.h"
-
 #include "../../libs/qmuparser/qmuparser.h"
+
+class VContainer;
 
 /**
  * @brief The Calculator class for calculation formula.

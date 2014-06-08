@@ -30,15 +30,13 @@
 #include "ui_dialogincrements.h"
 #include "../../widgets/doubledelegate.h"
 #include "../../widgets/textdelegate.h"
-#include "../../exception/vexception.h"
 #include "../../xml/vstandardmeasurements.h"
+#include "../../xml/vpattern.h"
+#include "../../xml/vindividualmeasurements.h"
 
-#include <QPushButton>
-#include <QFile>
 #include <QFileDialog>
 #include <QDir>
 #include <QMessageBox>
-#include <QCloseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

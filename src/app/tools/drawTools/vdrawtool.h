@@ -35,6 +35,8 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QGraphicsView>
 #include "../../dialogs/tools/dialogtool.h"
+#include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.

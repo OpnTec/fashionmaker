@@ -30,7 +30,10 @@
 #define VNODEPOINT_H
 
 #include "vabstractnode.h"
-#include "../../widgets/vgraphicssimpletextitem.h"
+#include "../../xml/vpattern.h"
+
+class VPointF;
+class VGraphicsSimpleTextItem;
 
 /**
  * @brief The VNodePoint class point detail node.

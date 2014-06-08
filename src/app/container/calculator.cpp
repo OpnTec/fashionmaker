@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QSettings>
 #include "../widgets/vapplication.h"
+#include "vcontainer.h"
 
 using namespace qmu;
 

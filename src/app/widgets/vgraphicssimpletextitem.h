@@ -30,6 +30,7 @@
 #define VGRAPHICSSIMPLETEXTITEM_H
 
 #include <QGraphicsSimpleTextItem>
+#include <QObject>
 
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.

@@ -29,6 +29,7 @@
 #include "pages.h"
 #include "../../options.h"
 #include "../../widgets/vapplication.h"
+#include "../../widgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent):

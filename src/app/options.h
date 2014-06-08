@@ -30,14 +30,13 @@
 #define OPTIONS_H
 
 #include <QFlags>
-#include <QString>
-#include <QMetaType>
-#include <QtGlobal>
 #include <csignal>
 
 #ifdef Q_OS_WIN32
-#include <Windows.h>
+#   include <Windows.h>
 #endif /*Q_OS_WIN32*/
+
+class QString;
 
 #define SceneSize 50000
 

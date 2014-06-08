@@ -30,7 +30,9 @@
 #define VTOOLPOINT_H
 
 #include "vdrawtool.h"
-#include "../../widgets/vgraphicssimpletextitem.h"
+
+class VPointF;
+class VGraphicsSimpleTextItem;
 
 /**
  * @brief The VToolPoint class parent for all tools what create points.

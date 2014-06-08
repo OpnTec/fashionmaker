@@ -29,7 +29,8 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

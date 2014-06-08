@@ -30,11 +30,8 @@
 #define VARC_H
 
 #include "vgobject.h"
-#include <QCoreApplication>
-#include "../options.h"
 #include "vpointf.h"
-class QString;
-class QLineF;
+
 class QPainterPath;
 
 /**

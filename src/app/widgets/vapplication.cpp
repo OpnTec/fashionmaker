@@ -32,14 +32,17 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
+#include "vmaingraphicsview.h"
+#include "../container/calculator.h"
 
-#include <QMessageBox>
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
+#include <QUndoStack>
 
-#include <container/calculator.h>
-#include <QtMath>
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
 
 const qreal VApplication::PrintDPI = 96.0;
 

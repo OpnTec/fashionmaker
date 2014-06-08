@@ -29,7 +29,6 @@
 #ifndef VNODEDETAIL_H
 #define VNODEDETAIL_H
 
-#include <QMetaType>
 #include "../options.h"
 
 namespace NodeDetail

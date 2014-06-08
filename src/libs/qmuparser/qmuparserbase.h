@@ -31,8 +31,6 @@
 #include "qmuparserdef.h"
 #include "qmuparsertokenreader.h"
 #include "qmuparserbytecode.h"
-#include "qmuparsererror.h"
-
 
 namespace qmu
 {

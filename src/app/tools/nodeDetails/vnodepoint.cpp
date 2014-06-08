@@ -28,8 +28,9 @@
 
 #include "vnodepoint.h"
 
-#include <QtWidgets>
 #include "../../widgets/vapplication.h"
+#include "../../geometry/vpointf.h"
+#include "../../widgets/vgraphicssimpletextitem.h"
 
 const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");

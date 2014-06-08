@@ -31,10 +31,7 @@
 
 #include "vmeasurement.h"
 #include "vincrement.h"
-#include "../geometry/varc.h"
-#include "../geometry/vsplinepath.h"
 #include "../geometry/vdetail.h"
-#include "../widgets/vitem.h"
 #include "../geometry/vgobject.h"
 #include "../exception/vexceptionbadid.h"
 

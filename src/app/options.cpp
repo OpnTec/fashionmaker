@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "options.h"
+#include <QString>
 
 // Keep synchronize all names with initialization in VApllication class.
 //measurements

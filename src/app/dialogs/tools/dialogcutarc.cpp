@@ -29,6 +29,9 @@
 #include "dialogcutarc.h"
 #include "ui_dialogcutarc.h"
 
+#include "../../geometry/varc.h"
+#include "../../container/vcontainer.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutArc create dialog.

@@ -28,13 +28,11 @@
 
 #include "dialogindividualmeasurements.h"
 #include "ui_dialogindividualmeasurements.h"
-#include <QButtonGroup>
 #include "../../xml/vindividualmeasurements.h"
-#include <QSettings>
 #include <QFileDialog>
 #include <QMessageBox>
 #include "../../widgets/vapplication.h"
-#include <QPushButton>
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,

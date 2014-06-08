@@ -30,7 +30,9 @@
 #include "ui_dialogarc.h"
 
 #include <QPushButton>
-#include <QtWidgets>
+
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

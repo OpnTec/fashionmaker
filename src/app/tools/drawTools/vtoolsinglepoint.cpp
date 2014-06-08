@@ -28,8 +28,9 @@
 
 #include "vtoolsinglepoint.h"
 #include "../../dialogs/tools/dialogsinglepoint.h"
-
-#include <xml/vundocommands.h>
+#include "../../widgets/vgraphicssimpletextitem.h"
+#include "../../xml/vundocommands.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 

@@ -29,6 +29,8 @@
 #include "vtoolcutarc.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogcutarc.h"
+#include "../../geometry/vpointf.h"
+#include "../../geometry/varc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc = QStringLiteral("arc");

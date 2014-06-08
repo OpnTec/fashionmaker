@@ -29,7 +29,13 @@
 #ifndef PAGES_H
 #define PAGES_H
 
-#include <QtWidgets>
+#include <QObject>
+
+class QCheckBox;
+class QSpinBox;
+class QComboBox;
+class QGroupBox;
+class QLineEdit;
 
 class ConfigurationPage : public QWidget
 {

@@ -30,8 +30,8 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include "../xml/vpattern.h"
-#include <QMessageBox>
+
+class VPattern;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.

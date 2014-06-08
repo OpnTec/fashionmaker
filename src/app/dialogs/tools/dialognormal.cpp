@@ -29,8 +29,6 @@
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
 
-#include <QPushButton>
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogNormal create dialog

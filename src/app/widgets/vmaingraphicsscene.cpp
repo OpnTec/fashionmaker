@@ -28,8 +28,6 @@
 
 #include "vmaingraphicsscene.h"
 
-#include <QtWidgets>
-
 //---------------------------------------------------------------------------------------------------------------------
 VMainGraphicsScene::VMainGraphicsScene()
     :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())

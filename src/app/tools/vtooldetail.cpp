@@ -28,7 +28,12 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
 #include "../geometry/vequidistant.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../dialogs/tools/dialogtool.h"
+#include "../dialogs/tools/dialogdetail.h"
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>

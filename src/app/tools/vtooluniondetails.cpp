@@ -29,6 +29,10 @@
 #include "vtooluniondetails.h"
 #include "nodeDetails/nodedetails.h"
 #include "vtooldetail.h"
+#include "../geometry/vpointf.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
+#include "../dialogs/tools/dialoguniondetails.h"
 
 const QString VToolUnionDetails::TagName          = QStringLiteral("tools");
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");

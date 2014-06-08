@@ -30,7 +30,9 @@
 #define DIALOGHISTORY_H
 
 #include "../tools/dialogtool.h"
-#include "../../xml/vpattern.h"
+
+class VPattern;
+class VToolRecord;
 
 namespace Ui
 {

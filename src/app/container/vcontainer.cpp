@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vcontainer.h"
-
 #include <QDebug>
-#include <QtAlgorithms>
 #include "../widgets/vapplication.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
 
 quint32 VContainer::_id = 0;
 

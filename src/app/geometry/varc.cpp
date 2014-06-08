@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "varc.h"
-#include "vspline.h"
-#include "../exception/vexception.h"
 #include <QDebug>
-#include <QtMath>
 
-class QRectF;
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

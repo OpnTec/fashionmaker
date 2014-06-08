@@ -28,8 +28,8 @@
 
 #include "vnodesplinepath.h"
 
-#include <QtWidgets>
 #include "../../widgets/vapplication.h"
+#include "../../geometry/vsplinepath.h"
 
 const QString VNodeSplinePath::TagName = QStringLiteral("spline");
 const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");

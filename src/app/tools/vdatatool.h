@@ -31,6 +31,8 @@
 
 #include "../container/vcontainer.h"
 
+class QObject;
+
 //We need QObject class because we use qobject_cast.
 /**
  * @brief The VDataTool class need for getting access to data container of tool.

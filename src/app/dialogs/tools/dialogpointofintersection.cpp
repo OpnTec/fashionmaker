@@ -29,7 +29,8 @@
 #include "dialogpointofintersection.h"
 #include "ui_dialogpointofintersection.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

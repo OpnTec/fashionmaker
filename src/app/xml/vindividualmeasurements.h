@@ -30,7 +30,6 @@
 #define VINDIVIDUALMEASUREMENTS_H
 
 #include "vdomdocument.h"
-#include <QDate>
 
 /*
    VIT_VERSION is (major << 16) + (minor << 8) + patch.

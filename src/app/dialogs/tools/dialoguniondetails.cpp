@@ -28,6 +28,8 @@
 
 #include "dialoguniondetails.h"
 #include "ui_dialoguniondetails.h"
+#include "../../geometry/vdetail.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

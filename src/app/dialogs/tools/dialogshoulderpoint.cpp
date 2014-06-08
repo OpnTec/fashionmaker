@@ -29,7 +29,8 @@
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

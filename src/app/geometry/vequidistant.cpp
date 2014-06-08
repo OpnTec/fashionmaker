@@ -26,9 +26,15 @@
  **
  *************************************************************************/
 
+#include "varc.h"
 #include "vequidistant.h"
+#include "vpointf.h"
+#include "vspline.h"
+#include "vsplinepath.h"
 #include "../widgets/vapplication.h"
 #include <QDebug>
+#include <QPainterPath>
+#include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const

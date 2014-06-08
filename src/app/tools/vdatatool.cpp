@@ -39,7 +39,7 @@ VDataTool &VDataTool::operator =(const VDataTool &tool)
 {
     data = tool.getData();
     _referens = tool.referens();
-   return *this;
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

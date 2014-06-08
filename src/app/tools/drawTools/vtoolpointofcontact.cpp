@@ -29,6 +29,7 @@
 #include "vtoolpointofcontact.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 

@@ -31,8 +31,11 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "../dialogs/tools/dialogdetail.h"
-#include "../dialogs/tools/dialogtool.h"
+#include "../xml/vpattern.h"
+
+class VMainGraphicsScene;
+class DialogTool;
+
 /**
  * @brief The VToolDetail class for working with detail.
  */

@@ -31,6 +31,7 @@
 
 #include "vabstractnode.h"
 #include <QGraphicsPathItem>
+#include "../../xml/vpattern.h"
 
 /**
  * @brief The VNodeSpline class spline detail node.

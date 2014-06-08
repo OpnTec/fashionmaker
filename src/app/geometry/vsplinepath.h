@@ -29,12 +29,9 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
-#include "vsplinepoint.h"
-#include "vpointf.h"
-#include "vspline.h"
 #include "vgobject.h"
-#include <QApplication>
-#include "../container/vcontainer.h"
+#include "vspline.h"
+#include "vsplinepoint.h"
 
 namespace SplinePoint
 {

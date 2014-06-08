@@ -30,12 +30,12 @@
 #define VAPPLICATION_H
 
 #include <QApplication>
-#include <QUndoStack>
 #include "../options.h"
-#include "vmaingraphicsview.h"
 #include "vtranslation.h"
 
 class VApplication;
+class QUndoStack;
+class VMainGraphicsView;
 
 #if defined(qApp)
 #undef qApp

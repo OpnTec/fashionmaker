@@ -31,7 +31,6 @@
 
 #include "vdrawtool.h"
 #include <QGraphicsLineItem>
-#include "../../dialogs/tools/dialogline.h"
 
 /**
  * @brief The VToolLine class tool for creation line.

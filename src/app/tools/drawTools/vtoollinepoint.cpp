@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vtoollinepoint.h"
+#include "../../geometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,

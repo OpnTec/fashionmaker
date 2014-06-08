@@ -28,8 +28,8 @@
 
 #include "dialogtriangle.h"
 #include "ui_dialogtriangle.h"
-
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

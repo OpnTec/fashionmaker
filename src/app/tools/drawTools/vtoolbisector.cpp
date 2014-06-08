@@ -29,6 +29,7 @@
 #include "vtoolbisector.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogbisector.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 

@@ -29,7 +29,8 @@
 #include "dialogheight.h"
 #include "ui_dialogheight.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

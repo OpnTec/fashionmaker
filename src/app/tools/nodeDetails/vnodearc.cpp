@@ -28,8 +28,8 @@
 
 #include "vnodearc.h"
 
-#include <QtWidgets>
 #include "../../widgets/vapplication.h"
+#include "../../geometry/varc.h"
 
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");

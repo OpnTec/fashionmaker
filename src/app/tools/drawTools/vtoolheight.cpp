@@ -28,6 +28,7 @@
 
 #include "vtoolheight.h"
 #include "../../dialogs/tools/dialogheight.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 

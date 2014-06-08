@@ -28,8 +28,12 @@
 
 #include "dialogdetail.h"
 
-#include <QPushButton>
 #include <QDebug>
+
+#include "../../geometry/varc.h"
+#include "../../geometry/vpointf.h"
+#include "../../geometry/vsplinepath.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

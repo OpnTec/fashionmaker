@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vabstracttool.h"
+#include "../xml/vpattern.h"
 #include <QGraphicsView>
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");

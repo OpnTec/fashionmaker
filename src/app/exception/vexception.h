@@ -32,8 +32,8 @@
 
 #include <QException>
 #include <QString>
-#include <QWidget>
-#include <QCoreApplication>
+
+class QWidget;
 
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vpattern.h"
-
+#include "../tools/vdatatool.h"
 #include "../tools/vtooldetail.h"
 #include "../tools/vtooluniondetails.h"
 #include "../tools/drawTools/drawtools.h"
@@ -35,12 +35,12 @@
 #include "../exception/vexceptionobjecterror.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../exception/vexceptionconversionerror.h"
+#include "../exception/vexceptionemptyparameter.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
-
-#include <QMessageBox>
 #include "../../libs/qmuparser/qmuparsererror.h"
-#include <exception/vexceptionemptyparameter.h>
+#include "../geometry/varc.h"
+#include <QMessageBox>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");

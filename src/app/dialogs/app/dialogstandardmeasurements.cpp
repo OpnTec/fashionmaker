@@ -31,7 +31,7 @@
 #include <QDir>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../widgets/vapplication.h"
-#include <QPushButton>
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,

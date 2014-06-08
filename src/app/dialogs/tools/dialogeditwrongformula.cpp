@@ -29,8 +29,6 @@
 #include "dialogeditwrongformula.h"
 #include "ui_dialogeditwrongformula.h"
 
-#include <container/calculator.h>
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString())

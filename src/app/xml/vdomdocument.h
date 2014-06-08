@@ -29,11 +29,9 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
-#include "../container/vcontainer.h"
-
 #include <QDomDocument>
 #include <QDebug>
-#include "../options.h"
+#include "../container/vcontainer.h"
 
 /*
    can be used like #if (V_FORMAT_VERSION >= V_FORMAT_VERSION_CHECK(4, 4, 0))

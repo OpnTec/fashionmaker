@@ -28,6 +28,8 @@
 
 #include "vtoolpoint.h"
 #include <QKeyEvent>
+#include "../../geometry/vpointf.h"
+#include "../../widgets/vgraphicssimpletextitem.h"
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 

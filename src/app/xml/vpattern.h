@@ -30,10 +30,10 @@
 #define VPATTERN_H
 
 #include "vdomdocument.h"
-#include "../widgets/vmaingraphicsscene.h"
-#include "../tools/vdatatool.h"
 #include "vtoolrecord.h"
-#include <QComboBox>
+
+class VDataTool;
+class VMainGraphicsScene;
 
 namespace Document
 {

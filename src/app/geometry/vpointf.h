@@ -29,10 +29,10 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include <QPointF>
-#include <QString>
-#include "../options.h"
 #include "vgobject.h"
+
+class QPointF;
+class QString;
 
 /**
  * @brief The VPointF class keep data of point.
@@ -109,16 +109,6 @@ inline void VPointF::setMx(qreal mx)
 inline void VPointF::setMy(qreal my)
 {
     _my = my;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief toQPointF convert to QPointF
- * @return QPointF point
- */
-inline QPointF VPointF::toQPointF() const
-{
-    return QPointF(_x, _y);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
