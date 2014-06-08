@@ -421,8 +421,17 @@ void MainWindow::ClosedDialogLine(int result)
  */
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
-                                   tr("Select point"), &MainWindow::ClosedDialogAlongLine);
+    SetToolButton2<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
+                     tr("Select point"), &MainWindow::ClosedDialogAlongLine, &MainWindow::ApplyDialogAlongLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogAlongLine actions after apply in DialogAlongLine.
+ */
+void MainWindow::ApplyDialogAlongLine()
+{
+    ApplyDialog<VToolAlongLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -432,7 +441,7 @@ void MainWindow::ToolAlongLine(bool checked)
  */
 void MainWindow::ClosedDialogAlongLine(int result)
 {
-    ClosedDialog<VToolAlongLine>(result);
+    ClosedDialog2<VToolAlongLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

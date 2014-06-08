@@ -169,6 +169,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="lineWrapMode">
+        <enum>QPlainTextEdit::NoWrap</enum>
+       </property>
       </widget>
      </item>
      <item>
@@ -186,7 +189,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down"/>
+        <iconset resource="../../share/resources/theme.qrc">
+         <normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -673,6 +677,7 @@
  </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
+  <include location="../../share/resources/theme.qrc"/>
  </resources>
  <connections>
   <connection>
