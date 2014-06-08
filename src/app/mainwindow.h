@@ -109,6 +109,7 @@ public slots:
     void               ApplyDialogAlongLine();
     void               ClosedDialogShoulderPoint(int result);
     void               ClosedDialogNormal(int result);
+    void               ApplyDialogNormal();
     void               ClosedDialogBisector(int result);
     void               ApplyDialogBisector();
     void               ClosedDialogLineIntersect(int result);

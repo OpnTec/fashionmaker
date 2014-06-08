@@ -472,8 +472,18 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
  */
 void MainWindow::ToolNormal(bool checked)
 {
-    SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogNormal);
+    SetToolButton2<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogNormal,
+                  &MainWindow::ApplyDialogNormal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogNormal actions after apply in ApplyDialogNormal.
+ */
+void MainWindow::ApplyDialogNormal()
+{
+    ApplyDialog<VToolNormal>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -483,7 +493,7 @@ void MainWindow::ToolNormal(bool checked)
  */
 void MainWindow::ClosedDialogNormal(int result)
 {
-    ClosedDialog<VToolNormal>(result);
+    ClosedDialog2<VToolNormal>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

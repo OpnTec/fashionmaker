@@ -66,7 +66,7 @@ void VToolNormal::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
@@ -77,12 +77,18 @@ void VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const QString typeLine = dialogTool->getTypeLine();
     const QString pointName = dialogTool->getPointName();
     const qreal angle = dialogTool->getAngle();
-    Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
+    VToolNormal *point = nullptr;
+    point=Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
+VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
@@ -121,7 +127,9 @@ void VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &fir
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
