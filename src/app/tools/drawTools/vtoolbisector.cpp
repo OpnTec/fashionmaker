@@ -87,7 +87,7 @@ void VToolBisector::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -99,12 +99,18 @@ void VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     const quint32 thirdPointId = dialogTool->getThirdPointId();
     const QString typeLine = dialogTool->getTypeLine();
     const QString pointName = dialogTool->getPointName();
-    Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
+    VToolBisector *point = nullptr;
+    point=Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
+VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                            const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -145,7 +151,9 @@ void VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &f
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
         doc->IncrementReferens(thirdPointId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

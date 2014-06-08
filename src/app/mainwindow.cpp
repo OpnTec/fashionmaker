@@ -493,8 +493,18 @@ void MainWindow::ClosedDialogNormal(int result)
  */
 void MainWindow::ToolBisector(bool checked)
 {
-    SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
-                  tr("Select first point of angle"), &MainWindow::ClosedDialogBisector);
+    SetToolButton2<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
+                  tr("Select first point of angle"), &MainWindow::ClosedDialogBisector,
+                  &MainWindow::ApplyDialogBisector);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogBisector actions after apply in DialogBisector.
+ */
+void MainWindow::ApplyDialogBisector()
+{
+    ApplyDialog<VToolBisector>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -504,7 +514,7 @@ void MainWindow::ToolBisector(bool checked)
  */
 void MainWindow::ClosedDialogBisector(int result)
 {
-    ClosedDialog<VToolBisector>(result);
+    ClosedDialog2<VToolBisector>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
