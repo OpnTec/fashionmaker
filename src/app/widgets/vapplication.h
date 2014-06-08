@@ -32,6 +32,7 @@
 #include <QApplication>
 #include <QUndoStack>
 #include "../options.h"
+#include "vmaingraphicsview.h"
 #include "vtranslation.h"
 
 class VApplication;
@@ -83,6 +84,10 @@ public:
     QString               FormulaFromUser(const QString &formula);
     QString               FormulaToUser(const QString &formula);
     QUndoStack            *getUndoStack() const;
+    VMainGraphicsView     *getSceneView() const;
+    void                  setSceneView(VMainGraphicsView *value);
+    QTimer                *getAutoSaveTimer() const;
+    void                  setAutoSaveTimer(QTimer *value);
 private:
     Q_DISABLE_COPY(VApplication)
     Valentina::Units      _patternUnit;
@@ -96,6 +101,8 @@ private:
     QMap<QString, VTranslation> functions;
     QMap<QString, VTranslation> postfixOperators;
     QUndoStack            *undoStack;
+    VMainGraphicsView     *sceneView;
+    QTimer                *autoSaveTimer;
     void                  InitLineWidth();
     void                  InitMeasurements();
     void                  InitVariables();
@@ -113,29 +120,64 @@ private:
     void                  BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 inline Valentina::Units VApplication::patternUnit() const
 {
     return _patternUnit;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline Pattern::Measurements VApplication::patternType() const
 {
     return _patternType;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline void VApplication::setPatternType(const Pattern::Measurements &patternType)
 {
     _patternType = patternType;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline qreal VApplication::widthMainLine() const
 {
     return _widthMainLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline qreal VApplication::widthHairLine() const
 {
     return _widthHairLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QUndoStack *VApplication::getUndoStack() const
+{
+    return undoStack;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VMainGraphicsView *VApplication::getSceneView() const
+{
+    return sceneView;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VApplication::setSceneView(VMainGraphicsView *value)
+{
+    sceneView = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QTimer *VApplication::getAutoSaveTimer() const
+{
+    return autoSaveTimer;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VApplication::setAutoSaveTimer(QTimer *value)
+{
+    autoSaveTimer = value;
 }
 
 #endif // VAPPLICATION_H

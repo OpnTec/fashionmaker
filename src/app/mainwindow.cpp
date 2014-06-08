@@ -83,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     view->setSizePolicy(policy);
+    qApp->setSceneView(view);
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
@@ -1724,6 +1725,10 @@ void MainWindow::ReadSettings()
     QSize size = settings.value("size", QSize(1000, 800)).toSize();
     resize(size);
     move(pos);
+
+    bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
+    view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
+    view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1853,6 +1858,11 @@ void MainWindow::InitAutoSave()
     delete autoSaveTimer;
     autoSaveTimer = nullptr;
 
+    autoSaveTimer = new QTimer(this);
+    autoSaveTimer->setTimerType(Qt::VeryCoarseTimer);
+    connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
+    autoSaveTimer->stop();
+
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
     bool autoSave = settings.value("configuration/autosave/state", 1).toBool();
@@ -1864,12 +1874,10 @@ void MainWindow::InitAutoSave()
         {
             autoTime = 5;
         }
-
-        autoSaveTimer = new QTimer(this);
-        autoSaveTimer->setTimerType(Qt::VeryCoarseTimer);
-        connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
         autoSaveTimer->start(autoTime*60000);
+
     }
+    qApp->setAutoSaveTimer(autoSaveTimer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

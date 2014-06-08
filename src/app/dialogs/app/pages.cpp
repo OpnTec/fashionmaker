@@ -51,7 +51,21 @@ void ConfigurationPage::Apply()
                        QApplication::applicationName());
     settings.setValue("configuration/autosave/state", autoSaveCheck->isChecked());
     settings.setValue("configuration/autosave/time", autoTime->value());
+
+    QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
+    SCASSERT(autoSaveTimer);
+
+    if (autoSaveCheck->isChecked())
+    {
+        autoSaveTimer->start(autoTime->value()*60000);
+    }
+    else
+    {
+        autoSaveTimer->stop();
+    }
+
     settings.setValue("configuration/osSeparator", osOptionCheck->isChecked());
+
     if (langChanged)
     {
         QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
@@ -194,7 +208,12 @@ void PatternPage::Apply()
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
     settings.setValue("pattern/user", userName->text());
-    //settings.setValue("pattern/graphicalOutput", graphOutputCheck->isChecked());
+
+    // Scene antialiasing
+    settings.setValue("pattern/graphicalOutput", graphOutputCheck->isChecked());
+    qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
+    qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
+
     settings.setValue("pattern/undone", undoneCount->value());
 }
 
@@ -228,15 +247,14 @@ QGroupBox *PatternPage::UserGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::GraphOutputGroup()
 {
-//    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-//                       QApplication::applicationName());
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
 
     QGroupBox *graphOutputGroup = new QGroupBox(tr("Graphical output"));
 
     graphOutputCheck = new QCheckBox(tr("Use antialiasing"));
-    //bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
-    //graphOutputCheck->setChecked(graphOutputValue);
-    graphOutputCheck->setEnabled(false);
+    bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
+    graphOutputCheck->setChecked(graphOutputValue);
 
     QHBoxLayout *graphLayout = new QHBoxLayout;
     graphLayout->addWidget(graphOutputCheck);

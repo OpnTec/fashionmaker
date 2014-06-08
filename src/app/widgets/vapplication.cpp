@@ -51,7 +51,7 @@ VApplication::VApplication(int &argc, char **argv)
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
-      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr)
+      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -1937,10 +1937,3 @@ QString VApplication::FormulaToUser(const QString &formula)
 
     return newFormula;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QUndoStack *VApplication::getUndoStack() const
-{
-    return undoStack;
-}
-
