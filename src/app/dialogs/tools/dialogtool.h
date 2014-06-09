@@ -376,7 +376,21 @@ protected:
      * @param timer timer of formula
      */
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
+    /**
+     * @brief ValFormulaChanged handle change formula
+     * @param flag flag state of formula
+     * @param edit PlainTextEdit
+     * @param timer timer of formula
+     */
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
+    /**
+     * @brief Eval evaluate formula and show result
+     * @param edit PlainTextEdit of formula
+     * @param flag flag state of formula
+     * @param timer timer of formula
+     * @param label label for signal error
+     */
+    void             Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     /**
      * @brief Eval evaluate formula and show result
      * @param edit lineEdit of formula
@@ -384,7 +398,6 @@ protected:
      * @param timer timer of formula
      * @param label label for signal error
      */
-    void             Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     /**
      * @brief setCurrentPointId set current point id in combobox

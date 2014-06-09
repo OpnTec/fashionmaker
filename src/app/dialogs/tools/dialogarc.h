@@ -31,6 +31,7 @@
 
 #include "dialogtool.h"
 
+#define DIALOGARC_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogArc;
@@ -104,7 +105,11 @@ public slots:
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
     /**
      * @brief ValChenged show description angles of lines
      * @param row number of row
@@ -146,6 +151,10 @@ protected:
     virtual void  CheckState();
 private:
     Q_DISABLE_COPY(DialogArc)
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
     /**
      * @brief ui keeps information about user interface
      */
@@ -206,6 +215,10 @@ private:
      * @brief ShowLineAngles show varibles angles of lines
      */
     void          ShowLineAngles();
+    /**
+    * @brief formulaBaseHeight base height defined by dialogui
+    */
+   int formulaBaseHeight;
 };
 
 inline quint32 DialogArc::GetCenter() const

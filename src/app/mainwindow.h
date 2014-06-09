@@ -116,6 +116,7 @@ public slots:
     void               ClosedDialogLineIntersect(int result);
     void               ClosedDialogSpline(int result);
     void               ClosedDialogArc(int result);
+    void               ApplyDialogArc();
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogCutSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);

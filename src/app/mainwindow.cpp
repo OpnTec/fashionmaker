@@ -602,8 +602,18 @@ void MainWindow::ClosedDialogCutSpline(int result)
  */
 void MainWindow::ToolArc(bool checked)
 {
-    SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
-                  tr("Select point of center of arc"), &MainWindow::ClosedDialogArc);
+    SetToolButtonWithApply<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
+                  tr("Select point of center of arc"), &MainWindow::ClosedDialogArc,
+                  &MainWindow::ApplyDialogArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogArc actions after apply in DialogArc.
+ */
+void MainWindow::ApplyDialogArc()
+{
+    ApplyDialog<VToolArc>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -613,7 +623,7 @@ void MainWindow::ToolArc(bool checked)
  */
 void MainWindow::ClosedDialogArc(int result)
 {
-    ClosedDialog<VToolArc>(result);
+    ClosedDialogWithApply<VToolArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

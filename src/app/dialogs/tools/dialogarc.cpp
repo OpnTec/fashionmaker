@@ -48,7 +48,9 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     timerF2 = new QTimer(this);
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
 
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
+
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 
@@ -64,9 +66,32 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
     connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF2);
 
-    connect(ui->lineEditRadius, &QLineEdit::textChanged, this, &DialogArc::RadiusChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
     connect(ui->lineEditF1, &QLineEdit::textChanged, this, &DialogArc::F1Changed);
     connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGARC_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGARC_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +125,12 @@ void DialogArc::SetF1(const QString &value)
 void DialogArc::SetRadius(const QString &value)
 {
     radius = value;
-    ui->lineEditRadius->setText(radius);
+    // increase height if needed.
+    if (radius.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,11 +149,24 @@ void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DialogAccepted()
 {
-    radius = ui->lineEditRadius->text();
+    this->SaveData();
+    emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SaveData()
+{
+    radius = ui->plainTextEditFormula->toPlainText();
+    radius.replace("\n"," ");
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
     center = getCurrentObjectId(ui->comboBoxBasePoint);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +190,7 @@ void DialogArc::ValChenged(int row)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::PutRadius()
 {
-    PutValHere(ui->lineEditRadius, ui->listWidget);
+    PutValHere(ui->plainTextEditFormula, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,7 +216,7 @@ void DialogArc::LineAngles()
 void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
-    ValFormulaChanged(flagRadius, ui->lineEditRadius, timerRadius);
+    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,13 +238,15 @@ void DialogArc::CheckState()
 {
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
+    SCASSERT(bApply != nullptr);
+    bApply->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    Eval(ui->lineEditRadius, flagRadius, timerRadius, ui->labelResultRadius);
+    Eval(ui->plainTextEditFormula, flagRadius, timerRadius, ui->labelResultRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
