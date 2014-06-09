@@ -31,6 +31,7 @@
 
 #include "dialogtool.h"
 
+#define DIALOGSHOULDERPOINT_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogShoulderPoint;
@@ -124,12 +125,24 @@ public slots:
      * @brief DialogAccepted save data and emit signal about closed dialog.
      */
     virtual void   DialogAccepted();
-    /** TODO ISSUE 79 : create real function
+    /**
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
+    /**
+     * @brief FormulaTextChanged when formula text changes for validation and calc
+     */
+    void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
     /**
      * @brief ui keeps information about user interface
      */
@@ -162,6 +175,10 @@ private:
      * @brief pShoulder id shoulder point
      */
     quint32         pShoulder;
+    /**
+     * @brief formulaBaseHeight base height defined by dialogui
+     */
+    int formulaBaseHeight;
 };
 
 inline QString DialogShoulderPoint::getPointName() const

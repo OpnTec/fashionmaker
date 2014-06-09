@@ -94,7 +94,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
@@ -105,12 +105,18 @@ void VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     const quint32 pShoulder = dialogTool->getPShoulder();
     const QString typeLine = dialogTool->getTypeLine();
     const QString pointName = dialogTool->getPointName();
-    Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
+    VToolShoulderPoint * point = nullptr;
+    point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
+VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
                                 const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -154,7 +160,9 @@ void VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint
         doc->IncrementReferens(p1Line);
         doc->IncrementReferens(p2Line);
         doc->IncrementReferens(pShoulder);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

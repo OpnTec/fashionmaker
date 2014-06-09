@@ -40,10 +40,12 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     number = 0;
     InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    lineEditFormula = ui->lineEditFormula;
+    plainTextEditFormula = ui->plainTextEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
     InitOkCancelApply(ui);
+
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     flagFormula = false;
     flagName = false;
@@ -58,7 +60,38 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogShoulderPoint::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogShoulderPoint::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogShoulderPoint::FormulaTextChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::FormulaTextChanged()
+{
+    // TODO issue #79 :  back to FormulaChanged when full update
+    // Also remove this function if only one function called here
+    this->FormulaChanged2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGSHOULDERPOINT_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGSHOULDERPOINT_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,13 +148,26 @@ void DialogShoulderPoint::ChoosedObject(quint32 id, const Valentina::Scenes &typ
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::DialogAccepted()
 {
+    this->SaveData();
+    emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::SaveData()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n"," ");
     p1Line = getCurrentObjectId(ui->comboBoxP1Line);
     p2Line = getCurrentObjectId(ui->comboBoxP2Line);
     pShoulder = getCurrentObjectId(ui->comboBoxPShoulder);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -146,7 +192,12 @@ void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 void DialogShoulderPoint::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

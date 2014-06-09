@@ -76,7 +76,7 @@ public:
      * @param doc dom document container.
      * @param data container with variables.
      */
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolShoulderPoint*    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -94,7 +94,7 @@ public:
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
      */
-    static void    Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
+    static VToolShoulderPoint*    Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
                           const quint32 &pShoulder, const QString &typeLine, const QString &pointName, const qreal &mx,
                           const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                           const Document::Documents &parse, const Valentina::Sources &typeCreation);

@@ -451,8 +451,18 @@ void MainWindow::ClosedDialogAlongLine(int result)
  */
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint);
+    SetToolButton2<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint,
+                  &MainWindow::ApplyDialogShoulderPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogShoulderPoint actions after apply in DialogEndLine.
+ */
+void MainWindow::ApplyDialogShoulderPoint()
+{
+    ApplyDialog<VToolShoulderPoint>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,7 +472,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
  */
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
-    ClosedDialog<VToolShoulderPoint>(result);
+    ClosedDialog2<VToolShoulderPoint>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
