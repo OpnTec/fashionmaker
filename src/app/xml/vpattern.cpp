@@ -73,8 +73,8 @@ const QString VPattern::IncrementDescription = QStringLiteral("description");
 VPattern::VPattern(VContainer *data, Valentina::Draws *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
-      history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), patternModified(false),
-      sceneDraw(sceneDraw), sceneDetail(sceneDetail)
+      history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), sceneDraw(sceneDraw),
+      sceneDetail(sceneDetail)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
@@ -724,7 +724,6 @@ void VPattern::LiteParseTree()
  */
 void VPattern::haveLiteChange()
 {
-    patternModified = true;
     emit patternChanged();
 }
 

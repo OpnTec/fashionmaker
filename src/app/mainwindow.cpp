@@ -93,9 +93,10 @@ MainWindow::MainWindow(QWidget *parent)
     pattern = new VContainer();
 
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
-    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
+
+    connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
 
     InitAutoSave();
 
@@ -1319,7 +1320,6 @@ void MainWindow::Clear()
     setCurrentFile("");
     pattern->Clear();
     doc->clear();
-    doc->setPatternModified(false);
     sceneDraw->clear();
     sceneDetails->clear();
     CancelTool();
@@ -1429,7 +1429,7 @@ void MainWindow::FullParseFile()
  */
 void MainWindow::NewPattern()
 {
-    if (doc->isPatternModified() || curFile.isEmpty() == false)
+    if (this->isWindowModified() || curFile.isEmpty() == false)
     {
         QProcess *v = new QProcess(this);
         v->startDetached(QCoreApplication::applicationFilePath ());
@@ -1441,10 +1441,10 @@ void MainWindow::NewPattern()
 /**
  * @brief haveChange enable action save if we have unsaved change.
  */
-void MainWindow::PatternWasModified()
+void MainWindow::PatternWasModified(bool saved)
 {
-    setWindowModified(doc->isPatternModified());
-    ui->actionSave->setEnabled(true);
+    setWindowModified(!saved);
+    ui->actionSave->setEnabled(!saved);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1657,7 +1657,7 @@ bool MainWindow::SavePattern(const QString &fileName)
  */
 void MainWindow::AutoSavePattern()
 {
-    if (curFile.isEmpty() == false && doc->isPatternModified() == true)
+    if (curFile.isEmpty() == false && this->isWindowModified() == true)
     {
         QString autofile = curFile +".autosave";
         if (SavePattern(autofile) == false)
@@ -1676,7 +1676,6 @@ void MainWindow::AutoSavePattern()
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     curFile = fileName;
-    doc->setPatternModified(false);
     setWindowModified(false);
 
     QString shownName = strippedName(curFile);
@@ -1761,7 +1760,7 @@ void MainWindow::WriteSettings()
  */
 bool MainWindow::MaybeSave()
 {
-    if (doc->isPatternModified())
+    if (this->isWindowModified())
     {
         QMessageBox::StandardButton ret;
         ret = QMessageBox::warning(this, tr("Unsaved change"), tr("The pattern has been modified.\n"
@@ -1994,13 +1993,12 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     FullParseFile();
 
-    bool patternModified = doc->isPatternModified();
+    bool patternModified = this->isWindowModified();
     setCurrentFile(fileName);
     if (patternModified)
     {
         //For situation where was fixed wrong formula need return for document status was modified.
-        doc->setPatternModified(patternModified);
-        PatternWasModified();
+        PatternWasModified(patternModified);
     }
     helpLabel->setText(tr("File loaded"));
 }

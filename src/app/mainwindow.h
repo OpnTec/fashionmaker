@@ -80,7 +80,7 @@ public slots:
     void               ChangedSize(const QString &text);
     void               ChangedHeight(const QString & text);
 
-    void               PatternWasModified();
+    void               PatternWasModified(bool saved);
 
     void               ToolEndLine(bool checked);
     void               ToolLine(bool checked);

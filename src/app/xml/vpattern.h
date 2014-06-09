@@ -177,9 +177,6 @@ private:
     /** @brief mode current draw mode. */
     Valentina::Draws    *mode;
 
-    /** @brief fileModified true if exist change in file. */
-    bool           patternModified;
-
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
@@ -248,18 +245,6 @@ inline QVector<VToolRecord> *VPattern::getHistory()
 inline quint32 VPattern::getCursor() const
 {
     return cursor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VPattern::isPatternModified() const
-{
-    return patternModified;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VPattern::setPatternModified(bool value)
-{
-    patternModified = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

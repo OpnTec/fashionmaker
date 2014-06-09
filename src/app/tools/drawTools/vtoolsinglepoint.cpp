@@ -134,21 +134,27 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
     }
     if (change == ItemPositionHasChanged && scene())
     {
+        this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         // value - this is new position.
         QPointF newPos = value.toPointF();
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(newPos.x())));
-            doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(newPos.y())));
 
-            QList<QGraphicsView*> list = this->scene()->views();
-            VAbstractTool::NewSceneRect(this->scene(), list[0]);
+        MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
+        connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveSP);
 
-            //I don't now why but signal does not work.
-            doc->LiteParseTree();
-            emit toolhaveChange();
-        }
+//        QDomElement domElement = doc->elementById(QString().setNum(id));
+//        if (domElement.isElement())
+//        {
+//            doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(newPos.x())));
+//            doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(newPos.y())));
+
+//            QList<QGraphicsView*> list = this->scene()->views();
+//            VAbstractTool::NewSceneRect(this->scene(), list[0]);
+
+//            //I don't now why but signal does not work.
+//            doc->LiteParseTree();
+//            emit toolhaveChange();
+//        }
     }
     return QGraphicsItem::itemChange(change, value);
 }

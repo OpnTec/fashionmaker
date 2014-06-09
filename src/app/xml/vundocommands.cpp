@@ -28,6 +28,8 @@
 
 #include "vundocommands.h"
 #include <QDebug>
+#include "../widgets/vapplication.h"
+#include "../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCal::AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -94,11 +96,7 @@ void AddToCal::redo()
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
     }
-    if (redoFlag == false)
-    {
-        emit UnsavedChange();
-    }
-    else
+    if (redoFlag)
     {
         emit NeedFullParsing();
     }
@@ -156,4 +154,85 @@ void AddPatternPiece::redo()
         emit NeedFullParsing();
     }
     redoFlag = true;
+}
+
+//--------------------------------------------MoveSPoint---------------------------------------------------------------
+MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+                       QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), doc(doc), oldX(10.0), oldY(10.0), newX(x), newY(y), sPointId(id), scene(scene)
+{
+    setText(tr("Move single point"));
+
+    SCASSERT(scene != nullptr);
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
+        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
+    }
+    else
+    {
+        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+MoveSPoint::~MoveSPoint()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MoveSPoint::undo()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(sPointId));
+    if (domElement.isElement())
+    {
+        doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(oldX)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrY, QString().setNum(qApp->fromPixel(oldY)));
+
+        emit NeedLiteParsing();
+
+        QList<QGraphicsView*> list = scene->views();
+        VAbstractTool::NewSceneRect(scene, list[0]);
+    }
+    else
+    {
+        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MoveSPoint::redo()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(sPointId));
+    if (domElement.isElement())
+    {
+        doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(newX)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrY, QString().setNum(qApp->fromPixel(newY)));
+
+        emit NeedLiteParsing();
+
+        QList<QGraphicsView*> list = scene->views();
+        VAbstractTool::NewSceneRect(scene, list[0]);
+    }
+    else
+    {
+        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MoveSPoint::mergeWith(const QUndoCommand *command)
+{
+    const MoveSPoint *moveCommand = static_cast<const MoveSPoint *>(command);
+    SCASSERT(moveCommand != nullptr);
+    const quint32 id = moveCommand->getSPointId();
+
+    if (id != sPointId)
+    {
+        return false;
+    }
+
+    newX = moveCommand->getNewX();
+    newY = moveCommand->getNewY();
+    return true;
 }

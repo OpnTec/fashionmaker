@@ -169,6 +169,7 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
     this->setPos(point.toQPointF());
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     disconnect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     QFont font = namePoint->font();
     font.setPointSize(static_cast<qint32>(namePoint->FontSize()/factor));

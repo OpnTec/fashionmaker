@@ -191,7 +191,6 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
     AddToCal *addToCal = new AddToCal(domElement, doc);
-    connect(addToCal, &AddToCal::UnsavedChange, doc, &VPattern::haveLiteChange);
     connect(addToCal, &AddToCal::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);
 }

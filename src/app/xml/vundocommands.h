@@ -32,6 +32,7 @@
 #include "vpattern.h"
 
 #include <QDomElement>
+#include <QGraphicsScene>
 #include <QUndoCommand>
 
 class AddToCal : public QObject, public QUndoCommand
@@ -43,7 +44,6 @@ public:
     virtual void undo();
     virtual void redo();
 signals:
-    void UnsavedChange();
     void NeedFullParsing();
 private:
     Q_DISABLE_COPY(AddToCal)
@@ -54,6 +54,7 @@ private:
     bool redoFlag;
 };
 
+//-------------------------------------------AddPatternPiece-----------------------------------------------------------
 class AddPatternPiece : public QObject, public QUndoCommand
 {
     Q_OBJECT
@@ -75,5 +76,58 @@ private:
     bool redoFlag;
     QString mPath;
 };
+
+//---------------------------------------------MoveSPoint--------------------------------------------------------------
+class MoveSPoint : public QObject, public QUndoCommand
+{
+    Q_OBJECT
+public:
+    MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+               QUndoCommand *parent = 0);
+    virtual ~MoveSPoint();
+    virtual void undo();
+    virtual void redo();
+    virtual bool mergeWith(const QUndoCommand *command);
+    virtual int  id() const;
+    quint32      getSPointId() const;
+    double       getNewX() const;
+    double       getNewY() const;
+signals:
+    void NeedLiteParsing();
+private:
+    Q_DISABLE_COPY(MoveSPoint)
+    enum { Id = 0 };
+    VPattern *doc;
+    double   oldX;
+    double   oldY;
+    double   newX;
+    double   newY;
+    quint32  sPointId;
+    QGraphicsScene *scene;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int MoveSPoint::id() const
+{
+    return Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 MoveSPoint::getSPointId() const
+{
+    return sPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline double MoveSPoint::getNewX() const
+{
+    return newX;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline double MoveSPoint::getNewY() const
+{
+    return newY;
+}
 
 #endif // VUNDOCOMMANDS_H
