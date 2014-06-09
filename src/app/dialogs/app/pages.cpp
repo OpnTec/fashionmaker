@@ -143,7 +143,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     {
         // get locale extracted by filename
         QString locale;
-        locale = fileNames[i];                  // "valentina_de.qm"
+        locale = fileNames.at(i);                  // "valentina_de.qm"
         locale.truncate(locale.lastIndexOf('.'));   // "valentina_de"
         locale.remove(0, locale.indexOf('_') + 1);   // "de"
 

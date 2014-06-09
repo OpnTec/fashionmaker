@@ -87,7 +87,7 @@ bool VDetail::Containes(const quint32 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        VNodeDetail node = nodes[i];
+        VNodeDetail node = nodes.at(i);
         if (node.getId() == id)
         {
             return true;
@@ -105,7 +105,7 @@ VNodeDetail &VDetail::operator [](ptrdiff_t indx)
 //---------------------------------------------------------------------------------------------------------------------
 const VNodeDetail &VDetail::at(ptrdiff_t indx) const
 {
-    return nodes[indx];
+    return nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,13 +264,13 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
     qint32 j = 0;
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getId() == det.at(j).getId())
+        if (nodes.at(i).getId() == det.at(j).getId())
         {
             ++j;
         }
         else
         {
-            list.append(nodes[i].getId());
+            list.append(nodes.at(i).getId());
         }
     }
     return list;
@@ -282,9 +282,9 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     QVector<VNodeDetail> list;
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getTypeTool() == Valentina::NodePoint)
+        if (nodes.at(i).getTypeTool() == Valentina::NodePoint)
         {
-            list.append(nodes[i]);
+            list.append(nodes.at(i));
         }
     }
     return list;
@@ -295,7 +295,7 @@ ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)
     {
-        if (list[i].getId() == id)
+        if (list.at(i).getId() == id)
         {
             return i;
         }

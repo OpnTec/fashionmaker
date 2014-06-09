@@ -662,7 +662,7 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 
     for (ptrdiff_t i = 0; i < d.CountNode(); ++i)
     {
-        AddNode(det, d[i]);
+        AddNode(det, d.at(i));
     }
 
     domElement.appendChild(det);

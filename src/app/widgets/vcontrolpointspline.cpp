@@ -36,8 +36,7 @@
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline),
-      position(position)
+    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position)
 {
     //create circle
     radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;

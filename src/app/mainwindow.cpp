@@ -1789,9 +1789,9 @@ void MainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-       QString text = QString("&%1 %2").arg(i + 1).arg(strippedName(files[i]));
+       QString text = QString("&%1 %2").arg(i + 1).arg(strippedName(files.at(i)));
        recentFileActs[i]->setText(text);
-       recentFileActs[i]->setData(files[i]);
+       recentFileActs[i]->setData(files.at(i));
        recentFileActs[i]->setVisible(true);
     }
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)

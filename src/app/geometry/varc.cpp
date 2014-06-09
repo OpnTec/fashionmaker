@@ -139,8 +139,8 @@ QPainterPath VArc::GetPath() const
     {
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            path.moveTo(points[i]);
-            path.lineTo(points[i+1]);
+            path.moveTo(points.at(i));
+            path.lineTo(points.at(i+1));
         }
     }
     else

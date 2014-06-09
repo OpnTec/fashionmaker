@@ -198,8 +198,8 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.listWidget->clear();
     for (ptrdiff_t i = 0; i < details.CountNode(); ++i)
     {
-        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getTypeNode(), details[i].getMx(),
-                details[i].getMy());
+        NewItem(details.at(i).getId(), details.at(i).getTypeTool(), details.at(i).getTypeNode(), details.at(i).getMx(),
+                details.at(i).getMy());
     }
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSeamAllowance());

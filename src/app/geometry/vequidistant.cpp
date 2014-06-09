@@ -142,9 +142,9 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     path.moveTo(points[0]);
     for (qint32 i = 1; i < points.count(); ++i)
     {
-        path.lineTo(points[i]);
+        path.lineTo(points.at(i));
     }
-    path.lineTo(points[0]);
+    path.lineTo(points.at(0));
 
     pointsEkv = CorrectEquidistantPoints(pointsEkv);
     pointsEkv = CheckLoops(pointsEkv);
@@ -229,8 +229,8 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
     QPointF point;
     for (qint32 i = 1; i <correctPoints.size()-1; ++i)
     {
-        QLineF l1(correctPoints[i-1], correctPoints[i]);
-        QLineF l2(correctPoints[i], correctPoints[i+1]);
+        QLineF l1(correctPoints.at(i-1), correctPoints.at(i));
+        QLineF l2(correctPoints.at(i), correctPoints.at(i+1));
         QLineF::IntersectType intersect = l1.intersect(l2, &point);
         if (intersect == QLineF::NoIntersection)
         {
@@ -241,8 +241,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv,
-                                       const qreal &width)
+QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width)
 {
     QPainterPath ekv;
     QVector<QPointF> ekvPoints;
@@ -255,14 +254,14 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
     {
         if (i != points.size()-1)
         {
-            if (points[i] == points[i+1])
+            if (points.at(i) == points.at(i+1))
             {
                 points.remove(i+1);
             }
         }
         else
         {
-            if (points[i] == points[0])
+            if (points.at(i) == points.at(0))
             {
                 points.remove(i);
             }
@@ -276,13 +275,13 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
     {
         if ( i == 0 && eqv == Detail::CloseEquidistant)
         {//first point, polyline closed
-            ekvPoints<<EkvPoint(QLineF(points[points.size()-2], points[points.size()-1]), QLineF(points[1], points[0]),
-                    width);
+            ekvPoints<<EkvPoint(QLineF(points.at(points.size()-2), points.at(points.size()-1)),
+                                QLineF(points.at(1), points.at(0)), width);
             continue;
         }
         else if (i == 0 && eqv == Detail::OpenEquidistant)
         {//first point, polyline doesn't closed
-            ekvPoints.append(SingleParallelPoint(QLineF(points[0], points[1]), 90, width));
+            ekvPoints.append(SingleParallelPoint(QLineF(points.at(0), points.at(1)), 90, width));
             continue;
         }
         if (i == points.size()-1 && eqv == Detail::CloseEquidistant)
@@ -292,18 +291,18 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
         }
         else if (i == points.size()-1 && eqv == Detail::OpenEquidistant)
         {//last point, polyline doesn't closed
-                ekvPoints.append(SingleParallelPoint(QLineF(points[points.size()-1], points[points.size()-2]), -90,
-                        width));
+                ekvPoints.append(SingleParallelPoint(QLineF(points.at(points.size()-1), points.at(points.size()-2)),
+                                                     -90, width));
                 continue;
         }
         //points in the middle of polyline
-        ekvPoints<<EkvPoint(QLineF(points[i-1], points[i]), QLineF(points[i+1], points[i]), width);
+        ekvPoints<<EkvPoint(QLineF(points.at(i-1), points.at(i)), QLineF(points.at(i+1), points.at(i)), width);
     }
     ekvPoints = CheckLoops(ekvPoints);
-    ekv.moveTo(ekvPoints[0]);
+    ekv.moveTo(ekvPoints.at(0));
     for (qint32 i = 1; i < ekvPoints.count(); ++i)
     {
-        ekv.lineTo(ekvPoints[i]);
+        ekv.lineTo(ekvPoints.at(i));
     }
     return ekv;
 }

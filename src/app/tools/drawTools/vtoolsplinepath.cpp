@@ -203,7 +203,7 @@ void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path)
         QDomElement domElement = nodeList.at(i).toElement();
         if (domElement.isNull() == false)
         {
-            VSplinePoint p = path[i];
+            VSplinePoint p = path.at(i);
             doc->SetAttribute(domElement, AttrPSpline, p.P().id());
             doc->SetAttribute(domElement, AttrKAsm1, p.KAsm1());
             doc->SetAttribute(domElement, AttrKAsm2, p.KAsm2());
@@ -230,7 +230,7 @@ void VToolSplinePath::AddToFile()
 
     for (qint32 i = 0; i < splPath.CountPoint(); ++i)
     {
-        AddPathPoint(domElement, splPath[i]);
+        AddPathPoint(domElement, splPath.at(i));
     }
 
     AddToCalculation(domElement);
@@ -280,7 +280,7 @@ void VToolSplinePath::RemoveReferens()
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     for (qint32 i = 0; i < splPath.Count(); ++i)
     {
-        doc->DecrementReferens(splPath[i].P().id());
+        doc->DecrementReferens(splPath.at(i).P().id());
     }
 }
 

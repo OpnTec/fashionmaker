@@ -170,8 +170,8 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
     QLineF::IntersectType type = QLineF::NoIntersection;
     for ( i = 0; i < px.count()-1; ++i )
     {
-        type = line.intersect(QLineF ( QPointF ( px[i], py[i] ),
-                                       QPointF ( px[i+1], py[i+1] )), &crosPoint);
+        type = line.intersect(QLineF ( QPointF ( px.at(i), py.at(i) ),
+                                       QPointF ( px.at(i+1), py.at(i+1) )), &crosPoint);
         if ( type == QLineF::BoundedIntersection )
         {
             *intersectionPoint = crosPoint;
@@ -320,7 +320,7 @@ QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const
     y.append ( p4.y () );
     for ( qint32 i = 0; i < x.count(); ++i )
     {
-        pvector.append( QPointF ( x[i], y[i] ) );
+        pvector.append( QPointF ( x.at(i), y.at(i)) );
     }
     return pvector;
 }
@@ -338,10 +338,10 @@ qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPoint
 {
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);
-    splinePath.moveTo(points[0]);
+    splinePath.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
-        splinePath.lineTo(points[i]);
+        splinePath.lineTo(points.at(i));
     }
     return splinePath.length();
 }
@@ -677,8 +677,8 @@ QPainterPath VSpline::GetPath() const
     {
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            splinePath.moveTo(points[i]);
-            splinePath.lineTo(points[i+1]);
+            splinePath.moveTo(points.at(i));
+            splinePath.lineTo(points.at(i+1));
         }
     }
     else

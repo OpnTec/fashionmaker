@@ -64,25 +64,25 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        switch (detail[i].getTypeTool())
+        switch (detail.at(i).getTypeTool())
         {
             case (Valentina::NodePoint):
-                InitTool<VNodePoint>(scene, detail[i]);
+                InitTool<VNodePoint>(scene, detail.at(i));
                 break;
             case (Valentina::NodeArc):
-                InitTool<VNodeArc>(scene, detail[i]);
+                InitTool<VNodeArc>(scene, detail.at(i));
                 break;
             case (Valentina::NodeSpline):
-                InitTool<VNodeSpline>(scene, detail[i]);
+                InitTool<VNodeSpline>(scene, detail.at(i));
                 break;
             case (Valentina::NodeSplinePath):
-                InitTool<VNodeSplinePath>(scene, detail[i]);
+                InitTool<VNodeSplinePath>(scene, detail.at(i));
                 break;
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
                 break;
         }
-        doc->IncrementReferens(detail[i].getId());
+        doc->IncrementReferens(detail.at(i).getId());
     }
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -123,37 +123,37 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
-        switch (detail[i].getTypeTool())
+        switch (detail.at(i).getTypeTool())
         {
             case (Valentina::NodePoint):
             {
-                id = CreateNode<VPointF>(data, detail[i].getId());
-                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VPointF>(data, detail.at(i).getId());
+                VNodePoint::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             case (Valentina::NodeArc):
             {
-                id = CreateNode<VArc>(data, detail[i].getId());
-                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VArc>(data, detail.at(i).getId());
+                VNodeArc::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             case (Valentina::NodeSpline):
             {
-                id = CreateNode<VSpline>(data, detail[i].getId());
-                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VSpline>(data, detail.at(i).getId());
+                VNodeSpline::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             case (Valentina::NodeSplinePath):
             {
-                id = CreateNode<VSplinePath>(data, detail[i].getId());
-                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VSplinePath>(data, detail.at(i).getId());
+                VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
             }
             break;
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
+        VNodeDetail node(id, detail.at(i).getTypeTool(), NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
@@ -219,7 +219,7 @@ void VToolDetail::FullUpdateFromGui(int result)
             RemoveAllChild(domElement);
             for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
             {
-               AddNode(domElement, det[i]);
+               AddNode(domElement, det.at(i));
             }
             VDetail detail = VAbstractTool::data.GetDetail(id);
             QList<quint32> list = detail.Missing(det);
@@ -228,7 +228,7 @@ void VToolDetail::FullUpdateFromGui(int result)
             {
                 for (qint32 i = 0; i < list.size(); ++i)
                 {
-                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list[i]));
+                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list.at(i)));
                     node->DeleteNode();
                 }
             }
