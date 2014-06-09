@@ -99,6 +99,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     QDomElement version = createElement(TagVersion);
     QDomText newNodeText = createTextNode(VAL_STR_VERSION);
     version.appendChild(newNodeText);
+    patternElement.appendChild(version);
 
     patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
