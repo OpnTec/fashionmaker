@@ -31,6 +31,7 @@
 
 #include "dialogtool.h"
 
+#define DIALOGCUTARC_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogCutArc;
@@ -55,12 +56,24 @@ public:
 public slots:
     virtual void      ChoosedObject(quint32 id, const Valentina::Scenes &type);
     virtual void      DialogAccepted();
-    /** TODO ISSUE 79 : create real function
+    /**
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
+    /**
+     * @brief FormulaTextChanged when formula text changes for validation and calc
+     */
+    void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogCutArc)
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
     /**
      * @brief ui keeps information about user interface
      */
@@ -77,6 +90,10 @@ private:
      * @brief arcId keep id of arc
      */
     quint32            arcId;
+    /**
+    * @brief formulaBaseHeight base height defined by dialogui
+    */
+   int formulaBaseHeight;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

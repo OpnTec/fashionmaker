@@ -70,9 +70,7 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::FormulaTextChanged()
 {
-    // TODO issue #79 :  back to FormulaChanged when full update
-    // Also remove this function if only one function called here
-    this->FormulaChanged2();
+    this->FormulaChangedPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

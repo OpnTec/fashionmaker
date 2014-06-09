@@ -223,7 +223,6 @@ void MainWindow::OptionDraw()
  * @param toolTip first tooltipe.
  * @param closeDialogSlot function what handle after close dialog.
  */
-// TODO Issue 79 : remove function
 template <typename Dialog, typename Func>
 void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot)
@@ -253,10 +252,9 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// TODO Issue 79 : rename to SetToolButton
 template <typename Dialog, typename Func, typename Func2>
 /**
- * @brief SetToolButton set tool and show dialog.
+ * @brief SetToolButtonWithApply set tool and show dialog.
  * @param checked true if tool button checked.
  * @param t tool type.
  * @param cursor path tool cursor icon.
@@ -298,7 +296,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Valentina::Tools t, const 
  */
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
-{// TODO ISSUE 79 : delete
+{
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
@@ -309,10 +307,9 @@ void MainWindow::ClosedDialog(int result)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ClosedDialog handle close dialog
+ * @brief ClosedDialogWithApply handle close dialog that has apply button
  * @param result result working dialog.
  */
-// TODO ISSUE 79 : rename
 template <typename DrawTool>
 void MainWindow::ClosedDialogWithApply(int result)
 {
@@ -345,7 +342,7 @@ void MainWindow::ClosedDialogWithApply(int result)
  */
 template <typename DrawTool>
 void MainWindow::ApplyDialog()
-{// TODO ISSUE 79 : copy
+{
     SCASSERT(dialogTool != nullptr);
 
     // Only create tool if not already created with apply
@@ -367,19 +364,17 @@ void MainWindow::ApplyDialog()
  * @param checked true - button checked.
  */
 void MainWindow::ToolEndLine(bool checked)
-{// TODO ISSUE 79 : copy
-//    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-//                                 &MainWindow::ClosedDialogEndLine);
+{
     SetToolButtonWithApply<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                                  &MainWindow::ClosedDialogEndLine,&MainWindow::ApplyDialogEndLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/** // TODO ISSUE 79 : copy
+/**
  * @brief ApplyDialogEndLine actions after apply in DialogEndLine.
  */
 void MainWindow::ApplyDialogEndLine()
-{   // TODO ISSUE 79 : copy
+{
     ApplyDialog<VToolEndLine>();
 }
 
@@ -458,7 +453,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ApplyDialogShoulderPoint actions after apply in DialogEndLine.
+ * @brief ApplyDialogShoulderPoint actions after apply in DialogShoulderPoint.
  */
 void MainWindow::ApplyDialogShoulderPoint()
 {
@@ -489,7 +484,7 @@ void MainWindow::ToolNormal(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ApplyDialogNormal actions after apply in ApplyDialogNormal.
+ * @brief ApplyDialogNormal actions after apply in DialogNormal.
  */
 void MainWindow::ApplyDialogNormal()
 {
@@ -816,8 +811,17 @@ void MainWindow::ClosedDialogUnionDetails(int result)
  */
 void MainWindow::ToolCutArc(bool checked)
 {
-    SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
-                  &MainWindow::ClosedDialogCutArc);
+    SetToolButtonWithApply<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png",
+                  tr("Select arc"), &MainWindow::ClosedDialogCutArc, &MainWindow::ApplyDialogCutArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogCutArc actions after apply in DialogCutArc.
+ */
+void MainWindow::ApplyDialogCutArc()
+{
+    ApplyDialog<VToolCutArc>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -827,7 +831,7 @@ void MainWindow::ToolCutArc(bool checked)
  */
 void MainWindow::ClosedDialogCutArc(int result)
 {
-    ClosedDialog<VToolCutArc>(result);
+    ClosedDialogWithApply<VToolCutArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

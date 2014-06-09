@@ -290,7 +290,7 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
 }
 
 void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
-{   // TODO issue #79 : erase this function after all tools updated to plainTextEdit
+{
     SCASSERT(lineEdit != nullptr);
     SCASSERT(listWidget != nullptr);
     QListWidgetItem *item = listWidget->currentItem();
@@ -324,7 +324,7 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
-{// TODO issue #79 : erase this function after all tools updated to plainTextEdit
+{
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(labelEditFormula != nullptr);
@@ -358,7 +358,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
 }
 
 void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
-{  // TODO issue #79 : erase this function after all tools updated to plainTextEdit
+{
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
@@ -565,9 +565,11 @@ void DialogTool::CheckState()
 {
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagFormula && flagName);
-    SCASSERT(bApply != nullptr);
-    bApply->setEnabled(flagFormula && flagName);
-
+    // In case dialog hasn't apply button
+    if ( bApply != nullptr)
+    {
+        bApply->setEnabled(flagFormula && flagName);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,7 +619,7 @@ void DialogTool::DialogRejected()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FormulaChanged()
-{   // TODO issue #79 : erase after full update of tools.
+{
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
@@ -625,7 +627,7 @@ void DialogTool::FormulaChanged()
     }
 }
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FormulaChanged2()
+void DialogTool::FormulaChangedPlainText()
 {
     QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
     if (edit)

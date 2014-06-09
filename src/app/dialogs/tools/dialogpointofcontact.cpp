@@ -50,8 +50,10 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
 
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
     InitOkCancelApply(ui);
-/*    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
+
+    /*    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
@@ -99,9 +101,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::FormulaTextChanged()
 {
-    // TODO issue #79 :  back to FormulaChanged when full update
-    // Also remove this function if only one function called here
-    this->FormulaChanged2();
+    this->FormulaChangedPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

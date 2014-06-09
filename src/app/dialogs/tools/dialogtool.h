@@ -117,10 +117,13 @@ public slots:
      */
     virtual void     DialogRejected();
     /**
-     * @brief formula check formula
+     * @brief FormulaChanged check formula (one line input only)
      */
     void             FormulaChanged();
-    void             FormulaChanged2();
+    /**
+     * @brief FormulaChangedPlainText check formula (plain text editor editor)
+     */
+    void             FormulaChangedPlainText();
     /**
      * @brief ArrowUp set angle value 90 degree
      */
@@ -475,16 +478,22 @@ protected:
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
     }
     template <typename T>
+    /**
+     * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
+     * @param ui Dialog container
+     */
     void             InitOkCancelApply(T *ui)
     {
         InitOkCancel(ui);
-        // TODO issue #79
         bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
         SCASSERT(bApply != nullptr);
         connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
     }
-    //Left this method for dialog what do not need apply button
     template <typename T>
+    /**
+     * @brief InitOkCancel initialise OK and Cancel buttons
+     * @param ui Dialog container
+     */
     void             InitOkCancel(T *ui)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);

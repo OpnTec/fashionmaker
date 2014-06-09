@@ -77,7 +77,7 @@ void VToolCutArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -86,11 +86,17 @@ void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 arcId = dialogTool->getArcId();
-    Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    VToolCutArc* point = nullptr;
+    point=Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
+VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
@@ -149,7 +155,9 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &f
         doc->AddTool(arc1id, point);
         doc->AddTool(arc2id, point);
         doc->IncrementReferens(arcId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,7 +39,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCancelApply(ui);
+    InitOkCancel(ui);
 
     flagFormula = false;
     flagName = false;

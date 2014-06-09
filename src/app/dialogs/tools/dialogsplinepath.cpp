@@ -37,7 +37,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
-    InitOkCancelApply(ui);
+    InitOkCancel(ui);
     bOk->setEnabled(false);
 
     FillComboBoxPoints(ui->comboBoxPoint);

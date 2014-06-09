@@ -35,7 +35,7 @@ DialogUnionDetails::DialogUnionDetails(const VContainer *data, QWidget *parent) 
     numberP(0), p1(0), p2(0)
 {
     ui->setupUi(this);
-    InitOkCancelApply(ui);
+    InitOkCancel(ui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

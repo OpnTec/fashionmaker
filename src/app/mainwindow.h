@@ -127,6 +127,7 @@ public slots:
     void               ClosedDialogUnionDetails(int result);
     void               ClosedDialogCutSpline(int result);
     void               ClosedDialogCutArc(int result);
+    void               ApplyDialogCutArc();
 
     void               About();
     void               AboutQt();
