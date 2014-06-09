@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vundocommands.cpp
+ **  @file   movespoint.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   4 6, 2014
+ **  @date   9 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,137 +26,13 @@
  **
  *************************************************************************/
 
-#include "vundocommands.h"
-#include <QDebug>
-#include "../widgets/vapplication.h"
+#include "movespoint.h"
+#include <QGraphicsScene>
+#include <QDomElement>
+#include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
+#include "../widgets/vapplication.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-AddToCal::AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()),
-      cursor(doc->getCursor()), redoFlag(false)
-{
-    setText(tr("Add object"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-AddToCal::~AddToCal()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AddToCal::undo()
-{
-    doc->ChangeActivPP(nameActivDraw);
-    doc->setCursor(cursor);
-
-    QDomElement calcElement;
-    if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
-    {
-        calcElement.removeChild(xml);
-        if (cursor > 0)
-        {
-            doc->setCursor(0);
-        }
-    }
-    else
-    {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
-    }
-    emit NeedFullParsing();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AddToCal::redo()
-{
-    doc->ChangeActivPP(nameActivDraw);
-    doc->setCursor(cursor);
-
-    QDomElement calcElement;
-    if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
-    {
-        if (cursor <= 0)
-        {
-            calcElement.appendChild(xml);
-        }
-        else
-        {
-            QDomElement refElement = doc->elementById(QString().setNum(cursor));
-            if (refElement.isElement())
-            {
-                calcElement.insertAfter(xml, refElement);
-                doc->setCursor(0);
-            }
-            else
-            {
-                qDebug()<<"Can not find the element after which you want to insert."<< Q_FUNC_INFO;
-            }
-        }
-    }
-    else
-    {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
-    }
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
-}
-
-//--------------------------------------------AddPatternPiece----------------------------------------------------------
-
-int AddPatternPiece::countPP = 0;
-
-AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                                 QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
-{
-    setText(tr("Add pattern piece %1").arg(namePP));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::~AddPatternPiece()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AddPatternPiece::undo()
-{
-    if (countPP <= 1)
-    {
-        emit ClearScene();
-    }
-    else
-    {
-        QDomElement rootElement = doc->documentElement();
-        QDomElement patternPiece = doc->GetPPElement(namePP);
-        rootElement.removeChild(patternPiece);
-        emit NeedFullParsing();
-    }
-    --countPP;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AddPatternPiece::redo()
-{
-    ++countPP;
-    if (countPP == 1 && mPath.isEmpty() == false)
-    {
-        doc->CreateEmptyFile(mPath);
-    }
-
-    QDomElement rootElement = doc->documentElement();
-
-    rootElement.appendChild(xml);
-    doc->haveLiteChange();
-
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
-}
-
-//--------------------------------------------MoveSPoint---------------------------------------------------------------
 MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                        QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), doc(doc), oldX(10.0), oldY(10.0), newX(x), newY(y), sPointId(id), scene(scene)

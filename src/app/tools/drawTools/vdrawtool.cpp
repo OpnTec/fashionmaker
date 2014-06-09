@@ -31,7 +31,7 @@
 #include <qmuparsererror.h>
 #include "dialogs/tools/dialogeditwrongformula.h"
 #include "container/calculator.h"
-#include "../../xml/vundocommands.h"
+#include "../../undocommands/addtocalc.h"
 
 qreal VDrawTool::factor = 1;
 
@@ -190,7 +190,7 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
  */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
-    AddToCal *addToCal = new AddToCal(domElement, doc);
-    connect(addToCal, &AddToCal::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    AddToCalc *addToCal = new AddToCalc(domElement, doc);
+    connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);
 }

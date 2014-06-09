@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vundocommands.h
+ **  @file   movespoint.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   4 6, 2014
+ **  @date   9 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,58 +26,14 @@
  **
  *************************************************************************/
 
-#ifndef VUNDOCOMMANDS_H
-#define VUNDOCOMMANDS_H
+#ifndef MOVESPOINT_H
+#define MOVESPOINT_H
 
-#include "vpattern.h"
-
-#include <QDomElement>
-#include <QGraphicsScene>
 #include <QUndoCommand>
 
-class AddToCal : public QObject, public QUndoCommand
-{
-    Q_OBJECT
-public:
-    AddToCal(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
-    virtual ~AddToCal();
-    virtual void undo();
-    virtual void redo();
-signals:
-    void NeedFullParsing();
-private:
-    Q_DISABLE_COPY(AddToCal)
-    const QDomElement xml;
-    VPattern *doc;
-    const QString nameActivDraw;
-    quint32 cursor;
-    bool redoFlag;
-};
+class VPattern;
+class QGraphicsScene;
 
-//-------------------------------------------AddPatternPiece-----------------------------------------------------------
-class AddPatternPiece : public QObject, public QUndoCommand
-{
-    Q_OBJECT
-public:
-    AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                    QUndoCommand *parent = 0);
-    virtual ~AddPatternPiece();
-    virtual void undo();
-    virtual void redo();
-signals:
-    void ClearScene();
-    void NeedFullParsing();
-private:
-    Q_DISABLE_COPY(AddPatternPiece)
-    const QDomElement xml;
-    VPattern *doc;
-    static int countPP;
-    QString namePP;
-    bool redoFlag;
-    QString mPath;
-};
-
-//---------------------------------------------MoveSPoint--------------------------------------------------------------
 class MoveSPoint : public QObject, public QUndoCommand
 {
     Q_OBJECT
@@ -130,4 +86,4 @@ inline double MoveSPoint::getNewY() const
     return newY;
 }
 
-#endif // VUNDOCOMMANDS_H
+#endif // MOVESPOINT_H

@@ -29,6 +29,7 @@
 #include "vtoolspline.h"
 #include "../../geometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
+#include "../../undocommands/movespline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
@@ -158,17 +159,10 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     {
         spl = VSpline(spline->GetP1(), spline->GetP2(), pos, spline->GetP4(), spline->GetKcurve());
     }
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetAngle1()));
-        doc->SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetAngle2()));
-        doc->SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        doc->SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
-        emit FullUpdateTree();
-        emit toolhaveChange();
-    }
+
+    MoveSpline *moveSpl = new MoveSpline(doc, spline, spl, id, this->scene());
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSpl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
