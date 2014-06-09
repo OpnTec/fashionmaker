@@ -43,7 +43,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
 
-    // TODO : auto extend height on first value length.
     this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);

@@ -119,6 +119,7 @@ public slots:
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogCutSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);
+    void               ApplyDialogPointOfContact();
     void               ClosedDialogDetail(int result);
     void               ClosedDialogHeight(int result);
     void               ClosedDialogTriangle(int result);
@@ -218,17 +219,15 @@ private:
     void               MinimumScrollBar();
 
     template <typename Dialog, typename Func>
-    // TODO ISSUE 79 : delete
     void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
     template <typename Dialog, typename Func, typename Func2>
-    // TODO ISSUE 79 : copy
-    void               SetToolButton2(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+    void               SetToolButtonWithApply(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
     template <typename DrawTool>
-    void               ClosedDialog2(int result);
+    void               ClosedDialogWithApply(int result);
     template <typename DrawTool>
     void               ApplyDialog();
     bool               SavePattern(const QString &curFile);

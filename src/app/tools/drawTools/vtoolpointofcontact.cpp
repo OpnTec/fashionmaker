@@ -92,7 +92,7 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
@@ -102,12 +102,18 @@ void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const quint32 firstPointId = dialogTool->getFirstPoint();
     const quint32 secondPointId = dialogTool->getSecondPoint();
     const QString pointName = dialogTool->getPointName();
-    Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
+    VToolPointOfContact *point = nullptr;
+    point=Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
+VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const QString &pointName, const qreal &mx,
                                  const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -151,7 +157,9 @@ void VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint
         doc->IncrementReferens(center);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

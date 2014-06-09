@@ -264,7 +264,7 @@ template <typename Dialog, typename Func, typename Func2>
  * @param closeDialogSlot function to handle close of dialog.
  * @param applyDialogSlot function to handle apply in dialog.
  */
-void MainWindow::SetToolButton2(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+void MainWindow::SetToolButtonWithApply(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                Func closeDialogSlot, Func2 applyDialogSlot)
 {
     if (checked)
@@ -314,7 +314,7 @@ void MainWindow::ClosedDialog(int result)
  */
 // TODO ISSUE 79 : rename
 template <typename DrawTool>
-void MainWindow::ClosedDialog2(int result)
+void MainWindow::ClosedDialogWithApply(int result)
 {
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
@@ -370,7 +370,7 @@ void MainWindow::ToolEndLine(bool checked)
 {// TODO ISSUE 79 : copy
 //    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
 //                                 &MainWindow::ClosedDialogEndLine);
-    SetToolButton2<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+    SetToolButtonWithApply<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
                                  &MainWindow::ClosedDialogEndLine,&MainWindow::ApplyDialogEndLine);
 }
 
@@ -390,7 +390,7 @@ void MainWindow::ApplyDialogEndLine()
  */
 void MainWindow::ClosedDialogEndLine(int result)
 {
-    ClosedDialog2<VToolEndLine>(result);
+    ClosedDialogWithApply<VToolEndLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -421,7 +421,7 @@ void MainWindow::ClosedDialogLine(int result)
  */
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton2<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
+    SetToolButtonWithApply<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
                      tr("Select point"), &MainWindow::ClosedDialogAlongLine, &MainWindow::ApplyDialogAlongLine);
 }
 
@@ -441,7 +441,7 @@ void MainWindow::ApplyDialogAlongLine()
  */
 void MainWindow::ClosedDialogAlongLine(int result)
 {
-    ClosedDialog2<VToolAlongLine>(result);
+    ClosedDialogWithApply<VToolAlongLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -451,7 +451,7 @@ void MainWindow::ClosedDialogAlongLine(int result)
  */
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    SetToolButton2<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+    SetToolButtonWithApply<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint,
                   &MainWindow::ApplyDialogShoulderPoint);
 }
@@ -472,7 +472,7 @@ void MainWindow::ApplyDialogShoulderPoint()
  */
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
-    ClosedDialog2<VToolShoulderPoint>(result);
+    ClosedDialogWithApply<VToolShoulderPoint>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -482,7 +482,7 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
  */
 void MainWindow::ToolNormal(bool checked)
 {
-    SetToolButton2<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
+    SetToolButtonWithApply<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
                   tr("Select first point of line"), &MainWindow::ClosedDialogNormal,
                   &MainWindow::ApplyDialogNormal);
 }
@@ -503,7 +503,7 @@ void MainWindow::ApplyDialogNormal()
  */
 void MainWindow::ClosedDialogNormal(int result)
 {
-    ClosedDialog2<VToolNormal>(result);
+    ClosedDialogWithApply<VToolNormal>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -513,7 +513,7 @@ void MainWindow::ClosedDialogNormal(int result)
  */
 void MainWindow::ToolBisector(bool checked)
 {
-    SetToolButton2<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
+    SetToolButtonWithApply<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
                   tr("Select first point of angle"), &MainWindow::ClosedDialogBisector,
                   &MainWindow::ApplyDialogBisector);
 }
@@ -534,7 +534,7 @@ void MainWindow::ApplyDialogBisector()
  */
 void MainWindow::ClosedDialogBisector(int result)
 {
-    ClosedDialog2<VToolBisector>(result);
+    ClosedDialogWithApply<VToolBisector>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -671,8 +671,18 @@ void MainWindow::ClosedDialogCutSplinePath(int result)
  */
 void MainWindow::ToolPointOfContact(bool checked)
 {
-    SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact);
+    SetToolButtonWithApply<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact,
+                  &MainWindow::ApplyDialogPointOfContact);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogPointOfContact actions after apply in DialogPointOfContact.
+ */
+void MainWindow::ApplyDialogPointOfContact()
+{
+    ApplyDialog<VToolPointOfContact>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -682,7 +692,7 @@ void MainWindow::ToolPointOfContact(bool checked)
  */
 void MainWindow::ClosedDialogPointOfContact(int result)
 {
-    ClosedDialog<VToolPointOfContact>(result);
+    ClosedDialogWithApply<VToolPointOfContact>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
