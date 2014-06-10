@@ -73,7 +73,7 @@ public:
         try
         {
             T obj = dynamic_cast<T>(gObj);
-            Q_CHECK_PTR(obj);
+            SCASSERT(obj != nullptr);
             return obj;
         }
         catch (const std::bad_alloc &)

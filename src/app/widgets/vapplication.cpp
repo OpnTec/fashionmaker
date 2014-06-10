@@ -37,7 +37,6 @@
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
-
 #include <container/calculator.h>
 #include <QtMath>
 

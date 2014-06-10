@@ -37,60 +37,93 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(), number(0), pointName(QString()), radius(QString()), center(0),
+    :DialogTool(data, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()), radius(QString()), center(0),
     firstPoint(0), secondPoint(0)
 {
-    ui.setupUi(this);
-    listWidget = ui.listWidget;
-    labelResultCalculation = ui.labelResultCalculation;
-    labelDescription = ui.labelDescription;
-    radioButtonSizeGrowth = ui.radioButtonSizeGrowth;
-    radioButtonStandardTable = ui.radioButtonStandardTable;
-    radioButtonIncrements = ui.radioButtonIncrements;
-    radioButtonLengthLine = ui.radioButtonLengthLine;
-    radioButtonLengthArc = ui.radioButtonLengthArc;
-    radioButtonLengthCurve = ui.radioButtonLengthSpline;
-    lineEditFormula = ui.lineEditFormula;
-    labelEditFormula = ui.labelEditFormula;
-    labelEditNamePoint = ui.labelEditNamePoint;
+    ui->setupUi(this);
+    InitVariables(ui);
+    listWidget = ui->listWidget;
+    labelResultCalculation = ui->labelResultCalculation;
+    labelDescription = ui->labelDescription;
+    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
+    radioButtonStandardTable = ui->radioButtonStandardTable;
+    radioButtonIncrements = ui->radioButtonIncrements;
+    radioButtonLengthLine = ui->radioButtonLengthLine;
+    radioButtonLengthArc = ui->radioButtonLengthArc;
+    radioButtonLengthCurve = ui->radioButtonLengthSpline;
+    plainTextEditFormula = ui->plainTextEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+    labelEditNamePoint = ui->labelEditNamePoint;
 
-    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
+    InitOkCancelApply(ui);
+
+    /*    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    Q_CHECK_PTR(bCansel);
+    SCASSERT(bCansel != nullptr);
     connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
-
+    */
     flagFormula = false;
     flagName = false;
     CheckState();
 
-    FillComboBoxPoints(ui.comboBoxCenter);
-    FillComboBoxPoints(ui.comboBoxFirstPoint);
-    FillComboBoxPoints(ui.comboBoxSecondPoint);
+    FillComboBoxPoints(ui->comboBoxCenter);
+    FillComboBoxPoints(ui->comboBoxFirstPoint);
+    FillComboBoxPoints(ui->comboBoxSecondPoint);
 
-    connect(ui.toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
-    connect(ui.listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
-    connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
+    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
+    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
     if (qApp->patternType() == Pattern::Standard)
     {
         SizeHeight();
-        connect(ui.radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
+        connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
     }
     else
     {
         radioButtonSizeGrowth->setVisible(false);
         Measurements();
     }
-    connect(ui.radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::Measurements);
-    connect(ui.radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
-    connect(ui.radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
-    connect(ui.radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
-    connect(ui.radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
-    connect(ui.toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
-    connect(ui.lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
-    connect(ui.lineEditFormula, &QLineEdit::textChanged, this, &DialogPointOfContact::FormulaChanged);
+    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::Measurements);
+    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
+    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
+    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
+    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
+    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::FormulaTextChanged()
+{
+    this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,10 +139,10 @@ void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &ty
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)
         {
-            qint32 index = ui.comboBoxFirstPoint->findText(point->name());
+            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
-                ui.comboBoxFirstPoint->setCurrentIndex(index);
+                ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point of line"));
                 return;
@@ -117,10 +150,10 @@ void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &ty
         }
         if (number == 1)
         {
-            qint32 index = ui.comboBoxSecondPoint->findText(point->name());
+            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
-                ui.comboBoxSecondPoint->setCurrentIndex(index);
+                ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select point of center of arc"));
                 return;
@@ -128,10 +161,10 @@ void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &ty
         }
         if (number == 2)
         {
-            qint32 index = ui.comboBoxCenter->findText(point->name());
+            qint32 index = ui->comboBoxCenter->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
-                ui.comboBoxCenter->setCurrentIndex(index);
+                ui->comboBoxCenter->setCurrentIndex(index);
                 number = 0;
                 emit ToolTip("");
             }
@@ -149,12 +182,25 @@ void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &ty
  */
 void DialogPointOfContact::DialogAccepted()
 {
-    pointName = ui.lineEditNamePoint->text();
-    radius = ui.lineEditFormula->text();
-    center = getCurrentObjectId(ui.comboBoxCenter);
-    firstPoint = getCurrentObjectId(ui.comboBoxFirstPoint);
-    secondPoint = getCurrentObjectId(ui.comboBoxSecondPoint);
+    this->SaveData();
     emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::SaveData()
+{
+    pointName = ui->lineEditNamePoint->text();
+    radius = ui->plainTextEditFormula->toPlainText();
+    radius.replace("\n"," ");
+    center = getCurrentObjectId(ui->comboBoxCenter);
+    firstPoint = getCurrentObjectId(ui->comboBoxFirstPoint);
+    secondPoint = getCurrentObjectId(ui->comboBoxSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,7 +211,7 @@ void DialogPointOfContact::DialogAccepted()
  */
 void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui.comboBoxSecondPoint, secondPoint, value, id);
+    setCurrentPointId(ui->comboBoxSecondPoint, secondPoint, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,7 +222,7 @@ void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &i
  */
 void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui.comboBoxFirstPoint, firstPoint, value, id);
+    setCurrentPointId(ui->comboBoxFirstPoint, firstPoint, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,7 +233,7 @@ void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id
  */
 void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui.comboBoxCenter, center, value, id);
+    setCurrentPointId(ui->comboBoxCenter, center, value, id);
     center = value;
 }
 
@@ -199,7 +245,12 @@ void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
 void DialogPointOfContact::setRadius(const QString &value)
 {
     radius = value;
-    ui.lineEditFormula->setText(radius);
+    // increase height if needed.
+    if (radius.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,5 +261,5 @@ void DialogPointOfContact::setRadius(const QString &value)
 void DialogPointOfContact::setPointName(const QString &value)
 {
     pointName = value;
-    ui.lineEditNamePoint->setText(pointName);
+    ui->lineEditNamePoint->setText(pointName);
 }

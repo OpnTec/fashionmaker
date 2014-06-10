@@ -32,8 +32,6 @@
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
-#include <QDesktopServices>
-#include <QMessageBox>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :

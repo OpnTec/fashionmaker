@@ -53,9 +53,9 @@ VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center, id);
@@ -92,22 +92,28 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     QString radius = dialogTool->getRadius();
     const quint32 center = dialogTool->getCenter();
     const quint32 firstPointId = dialogTool->getFirstPoint();
     const quint32 secondPointId = dialogTool->getSecondPoint();
     const QString pointName = dialogTool->getPointName();
-    Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
+    VToolPointOfContact *point = nullptr;
+    point=Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
+VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const QString &pointName, const qreal &mx,
                                  const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -151,7 +157,9 @@ void VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint
         doc->IncrementReferens(center);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -235,9 +243,9 @@ void VToolPointOfContact::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));

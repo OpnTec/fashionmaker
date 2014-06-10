@@ -111,8 +111,8 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc )
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
+    m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
+    m_sMsg.replace("$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,8 +137,8 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const Q
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
+    m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
+    m_sMsg.replace("$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,8 +153,8 @@ QmuParserError::QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString 
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
-    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
+    m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
+    m_sMsg.replace("$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,8 +167,8 @@ QmuParserError::QmuParserError ( const QString &szMsg, int iPos, const QString &
     : QException(), m_sMsg ( szMsg ), m_sExpr(), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( ecGENERIC ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
-    ReplaceSubString ( m_sMsg, "$POS$", QString().setNum ( m_iPos ) );
-    ReplaceSubString ( m_sMsg, "$TOK$", m_sTok );
+    m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
+    m_sMsg.replace("$TOK$", m_sTok );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,34 +195,6 @@ QmuParserError& QmuParserError::operator= ( const QmuParserError &a_Obj )
     m_iPos = a_Obj.m_iPos;
     m_iErrc = a_Obj.m_iErrc;
     return *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Replace all ocuurences of a substring with another string.
- * @param strFind The string that shall be replaced.
- * @param strReplaceWith The string that should be inserted instead of strFind
- */
-void QmuParserError::ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith )
-{
-    QString strResult;
-    int iPos ( 0 );
-
-    for ( ;; )
-    {
-        int iNext = strSource.indexOf ( strFind, iPos );
-        strResult.append ( strSource.mid ( iPos, iNext - iPos ) );
-
-        if ( iNext == -1 )
-        {
-            break;
-        }
-
-        strResult.append ( strReplaceWith );
-        iPos = iNext + strFind.length();
-    }
-
-    strSource.swap ( strResult );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

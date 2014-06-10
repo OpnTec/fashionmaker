@@ -63,6 +63,10 @@ public:
 public slots:
     virtual void            ChoosedObject(quint32 id, const Valentina::Scenes &type);
     virtual void            DialogAccepted();
+    /** TODO ISSUE 79 : create real function
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void            DialogApply(){}
     void                    P1Line1Changed( int index);
     void                    P2Line1Changed( int index);
     void                    P1Line2Changed( int index);

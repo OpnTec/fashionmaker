@@ -57,9 +57,9 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setData(p->name(), p->toQPointF());
 }
@@ -145,9 +145,9 @@ void VToolSinglePoint::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     QPointF p = dialogTool->getPoint();
     QString name = dialogTool->getName();
     doc->SetAttribute(domElement, AttrName, name);

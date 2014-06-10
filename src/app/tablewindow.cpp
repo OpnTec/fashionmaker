@@ -97,7 +97,7 @@ void TableWindow::AddDetail()
     {
         tableScene->clearSelection();
         VItem* Detail = listDetails[indexDetail];
-        Q_CHECK_PTR(Detail);
+        SCASSERT(Detail != nullptr);
         connect(Detail, &VItem::itemOut, this, &TableWindow::itemOut);
         connect(Detail, &VItem::itemColliding, this, &TableWindow::itemColliding);
         connect(this, &TableWindow::LengthChanged, Detail, &VItem::LengthChanged);
@@ -329,7 +329,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                         if (lis.size()-2 <= 0)
                         {
                             VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
-                            Q_CHECK_PTR(bitem);
+                            SCASSERT(bitem != nullptr);
                             bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
                             listCollidingItems.removeAt(i);
                         }
@@ -338,7 +338,7 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
                 else if (listCollidingItems.size()==1)
                 {
                     VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
-                    Q_CHECK_PTR(bitem);
+                    SCASSERT(bitem != nullptr);
                     bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
                     listCollidingItems.clear();
                     collidingItems = true;

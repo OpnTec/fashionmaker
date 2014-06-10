@@ -63,8 +63,9 @@ public:
      * @param scene pointer to scene.
      * @param doc dom document container.
      * @param data container with variables.
+     * @return the created tool
      */
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     /**
      * @brief Create help create tool.
      * @param _id tool id, 0 if tool doesn't exist yet.
@@ -80,8 +81,9 @@ public:
      * @param data container with variables.
      * @param parse parser file mode.
      * @param typeCreation way we create this tool.
+     * @return the created tool
      */
-    static void  Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+    static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                         QString &formula, const qreal &angle, const quint32 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document::Documents &parse, const Valentina::Sources &typeCreation);

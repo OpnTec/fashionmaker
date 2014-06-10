@@ -157,10 +157,6 @@ private:
     int     m_iPos;      ///< Formula position related to the error
     EErrorCodes m_iErrc; ///< Error code
     const QmuParserErrorMsg &m_ErrMsg;
-    /**
-     * @brief Replace all ocuurences of a substring with another string.
-     */
-    static void ReplaceSubString ( QString &strSource, const QString &strFind, const QString &strReplaceWith );
     void Reset();
 };
 

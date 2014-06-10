@@ -62,9 +62,9 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     dialogTool->setFirstPoint(firstPoint);
     dialogTool->setSecondPoint(secondPoint);
     dialogTool->setTypeLine(typeLine);
@@ -73,9 +73,9 @@ void VToolLine::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const quint32 firstPoint = dialogTool->getFirstPoint();
     const quint32 secondPoint = dialogTool->getSecondPoint();
     const QString typeLine = dialogTool->getTypeLine();
@@ -87,9 +87,9 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
                        const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
-    Q_CHECK_PTR(scene);
-    Q_CHECK_PTR(doc);
-    Q_CHECK_PTR(data);
+    SCASSERT(scene != nullptr);
+    SCASSERT(doc != nullptr);
+    SCASSERT(data != nullptr);
     quint32 id = _id;
     if (typeCreation == Valentina::FromGui)
     {
@@ -243,9 +243,9 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());

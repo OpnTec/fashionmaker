@@ -126,6 +126,25 @@ void VDrawTool::FullUpdateFromGui(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::FullUpdateFromGuiApply()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        SaveDialog(domElement);
+
+        emit FullUpdateTree();
+        emit toolhaveChange();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::DialogLinkDestroy()
+{
+    this->dialog=nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
@@ -171,9 +190,9 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
             //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
             //Don't know why.
             delete dialog;
-            Calculator *cal = new Calculator(data);
-            result = cal->EvalFormula(formula);
-            delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
+            Calculator *cal1 = new Calculator(data);
+            result = cal1->EvalFormula(formula);
+            delete cal1;//Here can be memory leak, but dialog already check this formula and probability very low.
         }
         else
         {

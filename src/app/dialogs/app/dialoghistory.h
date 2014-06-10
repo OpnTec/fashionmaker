@@ -48,6 +48,10 @@ public:
     virtual ~DialogHistory();
 public slots:
     virtual void      DialogAccepted();
+    /** TODO ISSUE 79 : create real function
+    * @brief DialogApply apply data and emit signal about applied dialog.
+    */
+    virtual void      DialogApply(){}
     void              cellClicked(int row, int column);
     void              ChangedCursor(quint32 id);
     void              UpdateHistory();

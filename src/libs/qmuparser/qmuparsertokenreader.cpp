@@ -22,7 +22,6 @@
 
 #include "qmuparsertokenreader.h"
 #include "qmuparserbase.h"
-
 #include <QStringList>
 #include <QDebug>
 

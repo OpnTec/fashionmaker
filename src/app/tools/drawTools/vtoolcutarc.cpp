@@ -67,9 +67,9 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
     dialogTool->setArcId(arcId, id);
@@ -77,20 +77,26 @@ void VToolCutArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 arcId = dialogTool->getArcId();
-    Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    VToolCutArc* point = nullptr;
+    point=Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
+VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
 {
@@ -149,7 +155,9 @@ void VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &f
         doc->AddTool(arc1id, point);
         doc->AddTool(arc2id, point);
         doc->IncrementReferens(arcId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -250,9 +258,9 @@ void VToolCutArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));

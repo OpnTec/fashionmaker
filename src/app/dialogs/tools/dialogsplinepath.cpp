@@ -42,7 +42,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     bOk->setEnabled(false);
 
     FillComboBoxPoints(ui->comboBoxPoint);
@@ -160,7 +160,7 @@ void DialogSplinePath::Angle1Changed(qreal index)
 {
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
-    Q_CHECK_PTR(item);
+    SCASSERT(item != nullptr);
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
     p.SetAngle1(index);
     DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
@@ -176,7 +176,7 @@ void DialogSplinePath::Angle2Changed(qreal index)
 {
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
-    Q_CHECK_PTR(item);
+    SCASSERT(item != nullptr);
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
     p.SetAngle2(index);
     DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());

@@ -44,10 +44,10 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     labelEditNamePoint = ui.labelEditNameDetail;
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
     QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    Q_CHECK_PTR(bCansel);
+    SCASSERT(bCansel != nullptr);
     connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagName = true;//We have default name of detail.
@@ -217,7 +217,7 @@ void DialogDetail::BiasXChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
-    Q_CHECK_PTR(item);
+    SCASSERT(item != nullptr);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMx(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));
@@ -232,7 +232,7 @@ void DialogDetail::BiasYChanged(qreal d)
 {
     qint32 row = ui.listWidget->currentRow();
     QListWidgetItem *item = ui.listWidget->item( row );
-    Q_CHECK_PTR(item);
+    SCASSERT(item != nullptr);
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setMy(qApp->toPixel(d));
     item->setData(Qt::UserRole, QVariant::fromValue(node));

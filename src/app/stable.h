@@ -38,9 +38,6 @@
 
 #if defined __cplusplus
 /* Add C++ includes here */
-#ifdef Q_CC_MSVC
-#define _USE_MATH_DEFINES
-#endif
 
 #ifdef QT_CORE_LIB
 #   include <QtCore>

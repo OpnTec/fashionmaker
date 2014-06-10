@@ -45,7 +45,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
     ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
     ui->doubleSpinBoxY->setRange(0, qApp->fromPixel(SceneSize));
     labelEditNamePoint = ui->labelEditName;
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     flagName = false;
     CheckState();

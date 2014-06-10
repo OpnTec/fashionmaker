@@ -53,7 +53,7 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     timerF2 = new QTimer(this);
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
 
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 
@@ -250,7 +250,7 @@ void DialogArc::F2Changed()
  */
 void DialogArc::CheckState()
 {
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagRadius && flagF1 && flagF2);
 }
 
@@ -294,7 +294,7 @@ void DialogArc::ShowLineAngles()
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
-    Q_CHECK_PTR(lineAnglesTable);
+    SCASSERT(lineAnglesTable != nullptr);
     QHashIterator<QString, qreal> i(*lineAnglesTable);
     while (i.hasNext())
     {

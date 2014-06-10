@@ -32,6 +32,11 @@
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
 
+#define DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT 64
+namespace Ui
+{
+    class DialogPointOfContact;
+}
 /**
  * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
  */
@@ -58,11 +63,23 @@ public:
 public slots:
     virtual void   ChoosedObject(quint32 id, const Valentina::Scenes &type);
     virtual void   DialogAccepted();
+    /**
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
+    /**
+     * @brief FormulaTextChanged when formula text changes for validation and calc
+     */
+    void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
 
     /** @brief ui keeps information about user interface */
-    Ui::DialogPointOfContact ui;
+    Ui::DialogPointOfContact *ui;
 
     /** @brief number number of handled objects */
     qint32         number;
@@ -81,6 +98,14 @@ private:
 
     /** @brief secondPoint id second point of line */
     quint32         secondPoint;
+
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int             formulaBaseHeight;
+
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

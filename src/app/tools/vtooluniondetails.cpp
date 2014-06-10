@@ -312,7 +312,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Valentina::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
-                Q_CHECK_PTR(splinePath);
+                SCASSERT(splinePath != nullptr);
                 qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
@@ -387,9 +387,9 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 //---------------------------------------------------------------------------------------------------------------------
 void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     VDetail d1 = data->GetDetail(dialogTool->getD1());
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
@@ -492,16 +492,16 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
         newDetail.setName("Detail");
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Valentina::FromTool);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
-        Q_CHECK_PTR(tools);
+        SCASSERT(tools != nullptr);
 
         {
             VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
-            Q_CHECK_PTR(toolDet);
+            SCASSERT(toolDet != nullptr);
             toolDet->Remove();
         }
 
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
-        Q_CHECK_PTR(toolDet);
+        SCASSERT(toolDet != nullptr);
         toolDet->Remove();
     }
     else
