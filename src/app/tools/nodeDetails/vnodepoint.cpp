@@ -38,9 +38,10 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
 VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
                        const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(qApp->toPixel(1.5)),
+    :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
 {
+    radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,

@@ -37,22 +37,7 @@ const QString VToolPoint::TagName = QStringLiteral("point");
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(DefRadius), namePoint(0), lineName(0)
 {
-    switch (qApp->patternUnit())
-    {
-        case Valentina::Mm:
-            radius = qApp->toPixel(DefRadius);
-            break;
-        case Valentina::Cm:
-            radius = qApp->toPixel(DefRadius/10.0);
-            break;
-        case Valentina::Inch:
-            radius = qApp->toPixel(DefRadius/25.4);
-            break;
-        default:
-            radius = qApp->toPixel(DefRadius);
-            break;
-    }
-
+    radius = (DefRadius/*mm*/ / 25.4) * VApplication::PrintDPI;
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     namePoint->setBrush(Qt::black);
