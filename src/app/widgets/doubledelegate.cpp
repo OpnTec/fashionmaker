@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "doubledelegate.h"
-
 #include <QDoubleSpinBox>
+#include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 //cppcheck-suppress unusedFunction
@@ -51,7 +51,7 @@ void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &in
     qreal value = index.model()->data(index, Qt::EditRole).toDouble();
 
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(editor);
-    Q_CHECK_PTR(spinBox);
+    SCASSERT(spinBox != nullptr);
     spinBox->setValue(value);
 }
 
@@ -60,7 +60,7 @@ void DoubleSpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &in
 void DoubleSpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(editor);
-    Q_CHECK_PTR(spinBox);
+    SCASSERT(spinBox != nullptr);
     spinBox->interpretText();
     qreal value = spinBox->value();
 
@@ -80,7 +80,7 @@ void DoubleSpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOp
 void DoubleSpinBoxDelegate::commitAndCloseEditor()
 {
     QDoubleSpinBox *spinBox = qobject_cast<QDoubleSpinBox*>(sender());
-    Q_CHECK_PTR(spinBox);
+    SCASSERT(spinBox != nullptr);
     qreal value = spinBox->value();
     if (qFuzzyCompare ( lastValue, value ) == false)
     {

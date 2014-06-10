@@ -44,7 +44,7 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWi
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     flagName = false;
     CheckState();
 

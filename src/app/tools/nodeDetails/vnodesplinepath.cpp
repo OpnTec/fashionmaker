@@ -72,7 +72,7 @@ void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint3
                 doc->IncrementReferens(idTool);
                 //Some nodes we don't show on scene. Tool that create this nodes must free memory.
                 VDataTool *tool = doc->getTool(idTool);
-                Q_CHECK_PTR(tool);
+                SCASSERT(tool != nullptr);
                 splPath->setParent(tool);
             }
             else

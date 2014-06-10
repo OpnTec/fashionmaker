@@ -185,7 +185,7 @@ void MainWindow::ActionNewPP()
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
-    Q_CHECK_PTR(tools);
+    SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
     VDrawTool::AddRecord(id, Valentina::SinglePointTool, doc);
     SetEnableTool(true);
@@ -254,12 +254,50 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            Q_CHECK_PTR(tButton);
+            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Dialog, typename Func, typename Func2>
+/**
+ * @brief SetToolButtonWithApply set tool and show dialog.
+ * @param checked true if tool button checked.
+ * @param t tool type.
+ * @param cursor path tool cursor icon.
+ * @param toolTip first tooltipe.
+ * @param closeDialogSlot function to handle close of dialog.
+ * @param applyDialogSlot function to handle apply in dialog.
+ */
+void MainWindow::SetToolButtonWithApply(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+                               Func closeDialogSlot, Func2 applyDialogSlot)
+{
+    if (checked)
+    {
+        CancelTool();
+        tool = t;
+        QPixmap pixmap(cursor);
+        QCursor cur(pixmap, 2, 3);
+        view->setCursor(cur);
+        helpLabel->setText(toolTip);
+        dialogTool = new Dialog(pattern, this);
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
+        connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
+        connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
+        connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+    }
+    else
+    {
+        if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
+        {
+            SCASSERT(tButton != nullptr);
+            tButton->setChecked(true);
+        }
+    }
+}
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ClosedDialog handle close dialog
@@ -268,7 +306,7 @@ void MainWindow::SetToolButton(bool checked, Valentina::Tools t, const QString &
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
         DrawTool::Create(dialogTool, currentScene, doc, pattern);
@@ -278,13 +316,75 @@ void MainWindow::ClosedDialog(int result)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief ClosedDialogWithApply handle close dialog that has apply button
+ * @param result result working dialog.
+ */
+template <typename DrawTool>
+void MainWindow::ClosedDialogWithApply(int result)
+{
+    SCASSERT(dialogTool != nullptr);
+    if (result == QDialog::Accepted)
+    {
+        // Only create tool if not already created with apply
+        if (dialogTool->GetAssociatedTool() == nullptr)
+        {
+            dialogTool->SetAssociatedTool(
+                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+        }
+        else
+        { // Or update associated tool with data
+            VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+            vtool->FullUpdateFromGuiApply();
+        }
+    }
+    if (dialogTool->GetAssociatedTool() != nullptr)
+    {
+        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        vtool->DialogLinkDestroy();
+    }
+    ArrowTool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialog handle apply in dialog
+ */
+template <typename DrawTool>
+void MainWindow::ApplyDialog()
+{
+    SCASSERT(dialogTool != nullptr);
+
+    // Only create tool if not already created with apply
+    if (dialogTool->GetAssociatedTool() == nullptr)
+    {
+        dialogTool->SetAssociatedTool(
+                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+    }
+    else
+    { // Or update associated tool with data
+        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        vtool->FullUpdateFromGuiApply();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief ToolEndLine handler tool endLine.
  * @param checked true - button checked.
  */
 void MainWindow::ToolEndLine(bool checked)
 {
-    SetToolButton<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-                                 &MainWindow::ClosedDialogEndLine);
+    SetToolButtonWithApply<DialogEndLine>(checked, Valentina::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
+                                 &MainWindow::ClosedDialogEndLine,&MainWindow::ApplyDialogEndLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogEndLine actions after apply in DialogEndLine.
+ */
+void MainWindow::ApplyDialogEndLine()
+{
+    ApplyDialog<VToolEndLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +394,7 @@ void MainWindow::ToolEndLine(bool checked)
  */
 void MainWindow::ClosedDialogEndLine(int result)
 {
-    ClosedDialog<VToolEndLine>(result);
+    ClosedDialogWithApply<VToolEndLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,8 +425,17 @@ void MainWindow::ClosedDialogLine(int result)
  */
 void MainWindow::ToolAlongLine(bool checked)
 {
-    SetToolButton<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
-                                   tr("Select point"), &MainWindow::ClosedDialogAlongLine);
+    SetToolButtonWithApply<DialogAlongLine>(checked, Valentina::AlongLineTool, ":/cursor/alongline_cursor.png",
+                     tr("Select point"), &MainWindow::ClosedDialogAlongLine, &MainWindow::ApplyDialogAlongLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogAlongLine actions after apply in DialogAlongLine.
+ */
+void MainWindow::ApplyDialogAlongLine()
+{
+    ApplyDialog<VToolAlongLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,7 +445,7 @@ void MainWindow::ToolAlongLine(bool checked)
  */
 void MainWindow::ClosedDialogAlongLine(int result)
 {
-    ClosedDialog<VToolAlongLine>(result);
+    ClosedDialogWithApply<VToolAlongLine>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -346,8 +455,18 @@ void MainWindow::ClosedDialogAlongLine(int result)
  */
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    SetToolButton<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint);
+    SetToolButtonWithApply<DialogShoulderPoint>(checked, Valentina::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint,
+                  &MainWindow::ApplyDialogShoulderPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogShoulderPoint actions after apply in DialogShoulderPoint.
+ */
+void MainWindow::ApplyDialogShoulderPoint()
+{
+    ApplyDialog<VToolShoulderPoint>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,7 +476,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
  */
 void MainWindow::ClosedDialogShoulderPoint(int result)
 {
-    ClosedDialog<VToolShoulderPoint>(result);
+    ClosedDialogWithApply<VToolShoulderPoint>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -367,8 +486,18 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
  */
 void MainWindow::ToolNormal(bool checked)
 {
-    SetToolButton<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogNormal);
+    SetToolButtonWithApply<DialogNormal>(checked, Valentina::NormalTool, ":/cursor/normal_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogNormal,
+                  &MainWindow::ApplyDialogNormal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogNormal actions after apply in DialogNormal.
+ */
+void MainWindow::ApplyDialogNormal()
+{
+    ApplyDialog<VToolNormal>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -378,7 +507,7 @@ void MainWindow::ToolNormal(bool checked)
  */
 void MainWindow::ClosedDialogNormal(int result)
 {
-    ClosedDialog<VToolNormal>(result);
+    ClosedDialogWithApply<VToolNormal>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -388,8 +517,18 @@ void MainWindow::ClosedDialogNormal(int result)
  */
 void MainWindow::ToolBisector(bool checked)
 {
-    SetToolButton<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
-                  tr("Select first point of angle"), &MainWindow::ClosedDialogBisector);
+    SetToolButtonWithApply<DialogBisector>(checked, Valentina::BisectorTool, ":/cursor/bisector_cursor.png",
+                  tr("Select first point of angle"), &MainWindow::ClosedDialogBisector,
+                  &MainWindow::ApplyDialogBisector);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogBisector actions after apply in DialogBisector.
+ */
+void MainWindow::ApplyDialogBisector()
+{
+    ApplyDialog<VToolBisector>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -399,7 +538,7 @@ void MainWindow::ToolBisector(bool checked)
  */
 void MainWindow::ClosedDialogBisector(int result)
 {
-    ClosedDialog<VToolBisector>(result);
+    ClosedDialogWithApply<VToolBisector>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -472,8 +611,18 @@ void MainWindow::ClosedDialogCutSpline(int result)
  */
 void MainWindow::ToolArc(bool checked)
 {
-    SetToolButton<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
-                  tr("Select point of center of arc"), &MainWindow::ClosedDialogArc);
+    SetToolButtonWithApply<DialogArc>(checked, Valentina::ArcTool, ":/cursor/arc_cursor.png",
+                  tr("Select point of center of arc"), &MainWindow::ClosedDialogArc,
+                  &MainWindow::ApplyDialogArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogArc actions after apply in DialogArc.
+ */
+void MainWindow::ApplyDialogArc()
+{
+    ApplyDialog<VToolArc>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -483,7 +632,7 @@ void MainWindow::ToolArc(bool checked)
  */
 void MainWindow::ClosedDialogArc(int result)
 {
-    ClosedDialog<VToolArc>(result);
+    ClosedDialogWithApply<VToolArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -536,8 +685,18 @@ void MainWindow::ClosedDialogCutSplinePath(int result)
  */
 void MainWindow::ToolPointOfContact(bool checked)
 {
-    SetToolButton<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact);
+    SetToolButtonWithApply<DialogPointOfContact>(checked, Valentina::PointOfContact, ":/cursor/pointcontact_cursor.png",
+                  tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact,
+                  &MainWindow::ApplyDialogPointOfContact);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogPointOfContact actions after apply in DialogPointOfContact.
+ */
+void MainWindow::ApplyDialogPointOfContact()
+{
+    ApplyDialog<VToolPointOfContact>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -547,7 +706,7 @@ void MainWindow::ToolPointOfContact(bool checked)
  */
 void MainWindow::ClosedDialogPointOfContact(int result)
 {
-    ClosedDialog<VToolPointOfContact>(result);
+    ClosedDialogWithApply<VToolPointOfContact>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -671,8 +830,17 @@ void MainWindow::ClosedDialogUnionDetails(int result)
  */
 void MainWindow::ToolCutArc(bool checked)
 {
-    SetToolButton<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png", tr("Select arc"),
-                  &MainWindow::ClosedDialogCutArc);
+    SetToolButtonWithApply<DialogCutArc>(checked, Valentina::CutArcTool, ":/cursor/arc_cut_cursor.png",
+                  tr("Select arc"), &MainWindow::ClosedDialogCutArc, &MainWindow::ApplyDialogCutArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ApplyDialogCutArc actions after apply in DialogCutArc.
+ */
+void MainWindow::ApplyDialogCutArc()
+{
+    ApplyDialog<VToolCutArc>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -682,7 +850,7 @@ void MainWindow::ToolCutArc(bool checked)
  */
 void MainWindow::ClosedDialogCutArc(int result)
 {
-    ClosedDialog<VToolCutArc>(result);
+    ClosedDialogWithApply<VToolCutArc>(result);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -692,7 +860,7 @@ void MainWindow::ClosedDialogCutArc(int result)
 void MainWindow::About()
 {
     DialogAboutApp * about_dialog = new DialogAboutApp(this);
-    about_dialog->setAttribute(Qt::WA_DeleteOnClose,true);
+    about_dialog->setAttribute(Qt::WA_DeleteOnClose, true);
     about_dialog->show();
 }
 
@@ -740,6 +908,14 @@ void MainWindow::PatternProperties()
 {
     DialogPatternProperties proper(doc, this);
     proper.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::EditPatternCode()
+{
+    DialogPatternXmlEdit *Pattern = new DialogPatternXmlEdit (this, doc);
+    Pattern->setAttribute(Qt::WA_DeleteOnClose, true);
+    Pattern->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1488,7 +1664,9 @@ void MainWindow::SetEnableWidgets(bool enable)
     }
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
-    ui->actionZoomIn->setEnabled(enable);
+    ui->actionPattern_properties->setEnabled(enable);
+    ui->actionEdit_pattern_code->setEnabled(enable);
+	ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
 }
 
@@ -1851,6 +2029,8 @@ void MainWindow::CreateActions()
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
+    connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
+    ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)

@@ -66,7 +66,7 @@ void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            Q_CHECK_PTR(tool);
+            SCASSERT(tool != nullptr);
             arc->setParent(tool);
         }
         else

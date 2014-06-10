@@ -30,7 +30,6 @@
 #define VDRAWTOOL_H
 
 #include "../vabstracttool.h"
-
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QGraphicsView>
@@ -51,6 +50,10 @@ public:
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
+    /**
+     * @brief DialogLinkDestroy removes dialog pointer
+     */
+    virtual void DialogLinkDestroy();
 
     void         ignoreContextMenu(bool enable);
     static qreal CheckFormula(QString &formula, VContainer *data);
@@ -59,6 +62,10 @@ public slots:
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGui(int result);
+    /**
+     * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
+     */
+    virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
 protected:
     /** @brief ignoreContextMenuEvent ignore or not context menu events. */
@@ -119,6 +126,7 @@ protected:
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
                 if (ignoreFullUpdate == false)
                 {
                     connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);

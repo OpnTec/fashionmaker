@@ -38,17 +38,19 @@
  * @param parent parent widget
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0)
+    :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()), typeLine(QString()),
+      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     labelResultCalculation = ui->labelResultCalculation;
-    lineEditFormula = ui->lineEditFormula;
+    plainTextEditFormula = ui->plainTextEditFormula;
     labelEditFormula = ui->labelEditFormula;
+
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     flagFormula = false;
     flagName = false;
-    InitOkCansel(ui);
+    InitOkCancelApply(ui);
     CheckState();
 
     FillComboBoxTypeLine(ui->comboBoxLineType);
@@ -60,9 +62,38 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogAlongLine::EvalFormula);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogAlongLine::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     InitVariables(ui);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                              QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::FormulaTextChanged()
+{
+    this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGALONLINE_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGALONLINE_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                                  QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                                   QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,12 +140,25 @@ void DialogAlongLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
  */
 void DialogAlongLine::DialogAccepted()
 {
+    this->SaveData();
+    emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::SaveData()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n"," ");
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +191,12 @@ void DialogAlongLine::setFirstPointId(const quint32 &value, const quint32 &id)
 void DialogAlongLine::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

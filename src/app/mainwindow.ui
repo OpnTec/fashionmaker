@@ -699,6 +699,7 @@
     <addaction name="actionZoomOut"/>
     <addaction name="separator"/>
     <addaction name="actionPattern_properties"/>
+	<addaction name="actionEdit_pattern_code"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -1056,6 +1057,11 @@
     <string>Zoom out</string>
    </property>
   </action>
+    <action name="actionEdit_pattern_code">
+   <property name="text">
+    <string>Edit pattern XML code</string>
+   </property>
+  </action>  
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>

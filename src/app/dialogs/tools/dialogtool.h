@@ -41,6 +41,8 @@ class QListWidgetItem;
 class QLineEdit;
 class QListWidget;
 class VContainer;
+class QPlainTextEdit;
+class VAbstractTool;
 
 namespace ComboMode
 {
@@ -65,12 +67,18 @@ class DialogTool : public QDialog
 public:
     DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
+    VAbstractTool* GetAssociatedTool();
+    void SetAssociatedTool(VAbstractTool* tool);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
      * @param result keep result
      */
     void             DialogClosed(int result);
+    /**
+     * @brief DialogApplied emit signal dialog apply changes
+     */
+    void     DialogApplied();
     /**
      * @brief ToolTip emit tooltipe for tool
      * @param toolTip text tooltipe
@@ -80,8 +88,16 @@ public slots:
     virtual void     ChoosedObject(quint32 id, const Valentina::Scenes &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
+    /**
+     * @brief DialogApply save data and emit signal DialogApplied.
+     */
+    virtual void     DialogApply();
     virtual void     DialogRejected();
     void             FormulaChanged();
+    /**
+     * @brief FormulaChangedPlainText check formula (plain text editor editor)
+     */
+    void             FormulaChangedPlainText();
     void             ArrowUp();
     void             ArrowDown();
     void             ArrowLeft();
@@ -122,12 +138,15 @@ protected:
     /** @brief bOk button ok */
     QPushButton      *bOk;
 
+    /** @brief bApply button apply */
+    QPushButton      *bApply;
+
     /** @brief spinBoxAngle spinbox for angle */
     QDoubleSpinBox   *spinBoxAngle;
 
     /** @brief lineEditFormula linEdit for formula */
     QLineEdit        *lineEditFormula;
-
+    QPlainTextEdit   *plainTextEditFormula;
     /** @brief listWidget listWidget with variables */
     QListWidget      *listWidget;
 
@@ -182,7 +201,10 @@ protected:
     void             ChangeCurrentText(QComboBox *box, const QString &value);
     void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
+    void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
+    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
+    void             Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const;
     void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
@@ -197,7 +219,7 @@ protected:
     template <typename T>
     void             InitArrow(T *ui)
     {
-        Q_CHECK_PTR(ui);
+        SCASSERT(ui != nullptr);
         spinBoxAngle = ui->doubleSpinBoxAngle;
         connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
         connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
@@ -240,18 +262,50 @@ protected:
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
     }
     template <typename T>
-    void             InitOkCansel(T *ui)
+    /**
+     * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
+     * @param ui Dialog container
+     */
+    void             InitOkCancelApply(T *ui)
+    {
+        InitOkCancel(ui);
+        bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        SCASSERT(bApply != nullptr);
+        connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
+    }
+    template <typename T>
+    /**
+     * @brief InitOkCancel initialise OK and Cancel buttons
+     * @param ui Dialog container
+     */
+    void             InitOkCancel(T *ui)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        Q_CHECK_PTR(bOk);
+        SCASSERT(bOk != nullptr);
         connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
 
-        QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        Q_CHECK_PTR(bCansel);
-        connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        SCASSERT(bCancel != nullptr);
+        connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
     }
+    /**
+     * @brief associatedTool vdrawtool associated with opened dialog.
+     */
+    VAbstractTool* associatedTool;
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VAbstractTool *DialogTool::GetAssociatedTool()
+{
+    return this->associatedTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void DialogTool::SetAssociatedTool(VAbstractTool *tool)
+{
+    this->associatedTool=tool;
+}
 
 #endif // DIALOGTOOL_H

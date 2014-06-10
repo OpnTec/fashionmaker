@@ -53,9 +53,9 @@ VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setAxisP1Id(axisP1Id, id);
     dialogTool->setAxisP2Id(axisP2Id, id);
@@ -68,9 +68,9 @@ void VToolTriangle::setDialog()
 void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                            VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const quint32 axisP1Id = dialogTool->getAxisP1Id();
     const quint32 axisP2Id = dialogTool->getAxisP2Id();
     const quint32 firstPointId = dialogTool->getFirstPointId();
@@ -239,9 +239,9 @@ void VToolTriangle::RefreshDataInFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));

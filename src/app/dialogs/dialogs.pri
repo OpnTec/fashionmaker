@@ -29,8 +29,9 @@ HEADERS += \
     dialogs/app/dialogmeasurements.h \
     dialogs/app/dialogstandardmeasurements.h \
     dialogs/app/dialogindividualmeasurements.h \
-	dialogs/app/dialogaboutapp.h \
-    dialogs/tools/dialogeditwrongformula.h
+    dialogs/app/dialogaboutapp.h \
+    dialogs/tools/dialogeditwrongformula.h \
+    dialogs/app/dialogpatternxmledit.h
 
 SOURCES += \
     dialogs/tools/dialogtriangle.cpp \
@@ -62,8 +63,9 @@ SOURCES += \
     dialogs/app/dialogmeasurements.cpp \
     dialogs/app/dialogstandardmeasurements.cpp \
     dialogs/app/dialogindividualmeasurements.cpp \
-	dialogs/app/dialogaboutapp.cpp \
-    dialogs/tools/dialogeditwrongformula.cpp
+    dialogs/app/dialogaboutapp.cpp \
+    dialogs/app/dialogpatternxmledit.cpp \
+	dialogs/tools/dialogeditwrongformula.cpp
 
 FORMS += \
     dialogs/tools/dialogtriangle.ui \
@@ -92,5 +94,6 @@ FORMS += \
     dialogs/app/dialogmeasurements.ui \
     dialogs/app/dialogstandardmeasurements.ui \
     dialogs/app/dialogindividualmeasurements.ui \
-	dialogs/app/dialogaboutapp.ui \
-    dialogs/tools/dialogeditwrongformula.ui
+    dialogs/app/dialogaboutapp.ui \
+    dialogs/app/dialogpatternxmledit.ui \
+	dialogs/tools/dialogeditwrongformula.ui

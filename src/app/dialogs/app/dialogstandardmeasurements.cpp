@@ -42,12 +42,12 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 
     {
         const QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        Q_CHECK_PTR(bOk);
+        SCASSERT(bOk != nullptr);
         connect(bOk, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogAccepted);
     }
     {
         const QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        Q_CHECK_PTR(bCansel);
+        SCASSERT(bCansel != nullptr);
         connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogRejected);
     }
 
@@ -121,7 +121,7 @@ void DialogStandardMeasurements::CheckState()
     bool flagTable = false;
     {
         const QComboBox *box = ui->comboBoxTables;
-        Q_CHECK_PTR(box);
+        SCASSERT(box != nullptr);
         if (box->count() > 0 && box->currentIndex() != -1)
         {
             flagTable = true;
@@ -129,7 +129,7 @@ void DialogStandardMeasurements::CheckState()
     }
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagTable && flagName);
 }
 

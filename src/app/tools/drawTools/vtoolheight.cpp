@@ -52,9 +52,9 @@ VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, con
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setBasePointId(basePointId, id);
@@ -67,9 +67,9 @@ void VToolHeight::setDialog()
 void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->getTypeLine();
@@ -199,9 +199,9 @@ void VToolHeight::RefreshDataInFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));

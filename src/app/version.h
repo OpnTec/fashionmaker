@@ -29,6 +29,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
+class QString;
+
 extern const int MAJOR_VERSION;
 extern const int MINOR_VERSION;
 extern const int DEBUG_VERSION;

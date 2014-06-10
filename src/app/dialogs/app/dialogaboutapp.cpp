@@ -65,7 +65,7 @@ DialogAboutApp::~DialogAboutApp()
  */
 void DialogAboutApp::webButtonClicked()
 {
-    if ( ! QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)))
+    if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
     {
         QMessageBox::warning(this, tr("Warning"), tr("Cannot open your default browser"));
     }

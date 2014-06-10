@@ -43,7 +43,7 @@ DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
     kAsm1(1), kAsm2(1), kCurve(1)
 {
     ui->setupUi(this);
-    InitOkCansel(ui);
+    InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);

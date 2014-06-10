@@ -37,7 +37,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
 {
     ui->setupUi(this);
 
-    Q_CHECK_PTR(doc);
+    SCASSERT(doc != nullptr);
 
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
@@ -52,11 +52,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     ui->plainTextEditTechNotes->setPlainText(this->doc->UniqueTagText("notes"));
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogPatternProperties::Apply);
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    Q_CHECK_PTR(bCansel);
+    SCASSERT(bCansel != nullptr);
     connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     connect(this, &DialogPatternProperties::haveChange, this->doc, &VPattern::haveLiteChange);

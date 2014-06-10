@@ -36,16 +36,18 @@
  * @param parent parent widget
  */
 DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), angle(0), firstPointId(0), secondPointId(0)
+    :DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
+      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    lineEditFormula = ui->lineEditFormula;
+    plainTextEditFormula = ui->plainTextEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCansel(ui);
+    InitOkCancelApply(ui);
+
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     flagFormula = false;
     flagName = false;
@@ -61,7 +63,34 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogNormal::PutVal);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogNormal::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogNormal::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::FormulaTextChanged()
+{
+    this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGNORMAL_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGNORMAL_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next"));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,13 +137,26 @@ void DialogNormal::ChoosedObject(quint32 id, const Valentina::Scenes &type)
  */
 void DialogNormal::DialogAccepted()
 {
+    this->SaveData();
+    emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::SaveData()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n"," ");
     angle = ui->doubleSpinBoxAngle->value();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,7 +200,12 @@ void DialogNormal::setAngle(const qreal &value)
 void DialogNormal::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,16 +39,19 @@
  * @param parent parent widget
  */
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
+    :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()), typeLine(QString()),
+      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     labelResultCalculation = ui->labelResultCalculation;
-    lineEditFormula = ui->lineEditFormula;
+    plainTextEditFormula = ui->plainTextEditFormula;
     labelEditFormula = ui->labelEditFormula;
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCansel(ui);
+
+    this->formulaBaseHeight=ui->plainTextEditFormula->height();
+
+    InitOkCancelApply(ui);
     flagFormula = false;
     flagName = false;
     CheckState();
@@ -63,7 +66,36 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
 
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogBisector::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogBisector::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
+
+    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::FormulaTextChanged()
+{
+    this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::DeployFormulaTextEdit()
+{
+    if (ui->plainTextEditFormula->height() < DIALOGBISECTOR_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOGBISECTOR_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                                  QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                                   QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,7 +184,12 @@ void DialogBisector::setTypeLine(const QString &value)
 void DialogBisector::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed.
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,11 +231,24 @@ void DialogBisector::setThirdPointId(const quint32 &value, const quint32 &id)
  */
 void DialogBisector::DialogAccepted()
 {
+    this->SaveData();
+    emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::DialogApply()
+{
+    this->SaveData();
+    emit DialogApplied();
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::SaveData()
+{
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n"," ");
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     thirdPointId = getCurrentObjectId(ui->comboBoxThirdPoint);
-    emit DialogClosed(QDialog::Accepted);
 }

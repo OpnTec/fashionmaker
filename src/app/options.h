@@ -340,6 +340,8 @@ extern const QString in_Oprt;
 }                                                           \
 
 #endif /* Q_OS_WIN32 */
+#else // define but disable this function if debugging is not set
+#define SCASSERT(cond) qt_noop();
 #endif /* QT_NO_DEBUG */
 
 #endif // OPTIONS_H

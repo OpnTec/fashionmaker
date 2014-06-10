@@ -43,13 +43,13 @@
  */
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
-      bOk(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), listWidget(nullptr),
-      labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
+      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr),
+      listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), lineStyles(QStringList())
+      radioButtonLengthCurve(nullptr), lineStyles(QStringList()), associatedTool(nullptr)
 {
-    Q_CHECK_PTR(data);
+    SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
     //Keep synchronize with VAbstractTool styles list!!!
@@ -97,7 +97,7 @@ void DialogTool::showEvent(QShowEvent *event)
  */
 void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     const QHash<quint32, VGObject*> *objs = data->DataGObjects();
     QHashIterator<quint32, VGObject*> i(*objs);
     QMap<QString, quint32> list;
@@ -120,7 +120,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutArc cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
     QHashIterator<quint32, VGObject*> i(*objs);
     QMap<QString, quint32> list;
@@ -164,7 +164,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
  */
 void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
     QHashIterator<quint32, VGObject*> i(*objs);
     QMap<QString, quint32> list;
@@ -208,7 +208,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
  */
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
     QHashIterator<quint32, VGObject *> i(*objs);
     QMap<QString, quint32> list;
@@ -250,7 +250,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
  */
 void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     box->addItems(lineStyles);
     box->setCurrentIndex(1);
 }
@@ -347,14 +347,34 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
  */
 void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
 {
-    Q_CHECK_PTR(lineEdit);
-    Q_CHECK_PTR(listWidget);
+    SCASSERT(lineEdit != nullptr);
+    SCASSERT(listWidget != nullptr);
     QListWidgetItem *item = listWidget->currentItem();
-    Q_CHECK_PTR(item);
+    SCASSERT(item != nullptr);
+
     int pos = lineEdit->cursorPosition();
     lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
     lineEdit->setFocus();
     lineEdit->setCursorPosition(pos + item->text().size());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget)
+{
+    SCASSERT(plainTextEdit != nullptr);
+    SCASSERT(listWidget != nullptr);
+    QListWidgetItem *item = listWidget->currentItem();
+    SCASSERT(item != nullptr);
+
+    QTextCursor cursor = plainTextEdit->textCursor();
+    cursor.insertText(item->text());
+    plainTextEdit->setTextCursor(cursor);
+    /*
+    int pos = lineEdit->cursorPosition();
+    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
+    lineEdit->setFocus();
+    lineEdit->setCursorPosition(pos + item->text().size());
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -366,10 +386,27 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
  */
 void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
 {
-    Q_CHECK_PTR(edit);
-    Q_CHECK_PTR(timer);
-    Q_CHECK_PTR(labelEditFormula);
+    SCASSERT(edit != nullptr);
+    SCASSERT(timer != nullptr);
+    SCASSERT(labelEditFormula != nullptr);
     if (edit->text().isEmpty())
+    {
+        flag = false;
+        CheckState();
+        QPalette palette = labelEditFormula->palette();
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+        labelEditFormula->setPalette(palette);
+        return;
+    }
+    timer->start(1000);
+}
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *timer)
+{
+    SCASSERT(edit != nullptr);
+    SCASSERT(timer != nullptr);
+    SCASSERT(labelEditFormula != nullptr);
+    if (edit->toPlainText().isEmpty())
     {
         flag = false;
         CheckState();
@@ -391,10 +428,10 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
  */
 void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
 {
-    Q_CHECK_PTR(edit);
-    Q_CHECK_PTR(timer);
-    Q_CHECK_PTR(label);
-    Q_CHECK_PTR(labelEditFormula);
+    SCASSERT(edit != nullptr);
+    SCASSERT(timer != nullptr);
+    SCASSERT(label != nullptr);
+    SCASSERT(labelEditFormula != nullptr);
     QPalette palette = labelEditFormula->palette();
     if (edit->text().isEmpty())
     {
@@ -447,16 +484,70 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setCurrentPointId set current point id in combobox
- * @param box combobox
- * @param pointId save current point id
- * @param value point id
- * @param id don't show this id in list
- */
+void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+{
+    SCASSERT(edit != nullptr);
+    SCASSERT(timer != nullptr);
+    SCASSERT(label != nullptr);
+    SCASSERT(labelEditFormula != nullptr);
+    QPalette palette = labelEditFormula->palette();
+    if (edit->toPlainText().isEmpty())
+    {
+        flag = false;
+        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+    }
+    else
+    {
+        try
+        {
+            // Replace line return with spaces for calc
+            QString formula = edit->toPlainText();
+            formula.replace("\n"," ");
+            formula = qApp->FormulaFromUser(formula);
+            Calculator *cal = new Calculator(data);
+            const qreal result = cal->EvalFormula(formula);
+            delete cal;
+
+            QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                               QApplication::applicationName());
+            bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+
+            if (osSeparatorValue)
+            {
+                QLocale loc = QLocale::system();
+                label->setText(loc.toString(result));
+            }
+            else
+            {
+                QLocale loc = QLocale(QLocale::C);
+                label->setText(loc.toString(result));
+            }
+            flag = true;
+            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
+            emit ToolTip("");
+        }
+        catch(qmu::QmuParserError &e)
+        {
+            label->setText(tr("Error"));
+            flag = false;
+            palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
+            emit ToolTip("Parser error: "+e.GetMsg());
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
+        }
+    }
+    CheckState();
+    timer->stop();
+    labelEditFormula->setPalette(palette);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     FillComboBoxPoints(box, id);
     pointId = value;
     ChangeCurrentData(box, value);
@@ -474,7 +565,7 @@ void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint
 void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
                                     ComboMode::ComboBoxCutSpline cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     FillComboBoxSplines(box, id, cut);
     splineId = value;
     ChangeCurrentData(box, value);
@@ -492,7 +583,7 @@ void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const qui
 void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
                                  ComboMode::ComboBoxCutArc cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     FillComboBoxArcs(box, id, cut);
     arcId = value;
     ChangeCurrentData(box, value);
@@ -510,7 +601,7 @@ void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &
 void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
                                         const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     FillComboBoxSplinesPath(box, id, cut);
     splinePathId = value;
     ChangeCurrentData(box, value);
@@ -524,7 +615,7 @@ void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, c
  */
 quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     qint32 index = box->currentIndex();
     Q_ASSERT(index != -1);
     if (index != -1)
@@ -540,9 +631,9 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip)
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     const VPointF *point = data->GeometricObject<const VPointF *>(id);
-    Q_CHECK_PTR(point);
+    SCASSERT(point != nullptr);
     const qint32 index = box->findText(point->name());
     if ( index != -1 )
     { // -1 for not found
@@ -561,7 +652,7 @@ bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &
  */
 void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
-    Q_CHECK_PTR(box);
+    SCASSERT(box != nullptr);
     box->clear();
 
     QMapIterator<QString, quint32> iter(list);
@@ -578,8 +669,13 @@ void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) co
  */
 void DialogTool::CheckState()
 {
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagFormula && flagName);
+    // In case dialog hasn't apply button
+    if ( bApply != nullptr)
+    {
+        bApply->setEnabled(flagFormula && flagName);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -600,7 +696,7 @@ void DialogTool::ChoosedObject(quint32 id, const Valentina::Scenes &type)
  */
 void DialogTool::NamePointChanged()
 {
-    Q_CHECK_PTR(labelEditNamePoint);
+    SCASSERT(labelEditNamePoint != nullptr);
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
@@ -653,6 +749,15 @@ void DialogTool::FormulaChanged()
         ValFormulaChanged(flagFormula, edit, timerFormula);
     }
 }
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FormulaChangedPlainText()
+{
+    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
+    if (edit)
+    {
+        ValFormulaChanged(flagFormula, edit, timerFormula);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -660,7 +765,7 @@ void DialogTool::FormulaChanged()
  */
 void DialogTool::ArrowUp()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(90);
 }
 
@@ -670,7 +775,7 @@ void DialogTool::ArrowUp()
  */
 void DialogTool::ArrowDown()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(270);
 }
 
@@ -680,7 +785,7 @@ void DialogTool::ArrowDown()
  */
 void DialogTool::ArrowLeft()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(180);
 }
 
@@ -690,7 +795,7 @@ void DialogTool::ArrowLeft()
  */
 void DialogTool::ArrowRight()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(0);
 }
 
@@ -700,7 +805,7 @@ void DialogTool::ArrowRight()
  */
 void DialogTool::ArrowLeftUp()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(135);
 }
 
@@ -710,7 +815,7 @@ void DialogTool::ArrowLeftUp()
  */
 void DialogTool::ArrowLeftDown()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(225);
 }
 
@@ -720,7 +825,7 @@ void DialogTool::ArrowLeftDown()
  */
 void DialogTool::ArrowRightUp()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(45);
 }
 
@@ -730,7 +835,7 @@ void DialogTool::ArrowRightUp()
  */
 void DialogTool::ArrowRightDown()
 {
-    Q_CHECK_PTR(spinBoxAngle);
+    SCASSERT(spinBoxAngle != nullptr);
     spinBoxAngle->setValue(315);
 }
 
@@ -740,9 +845,9 @@ void DialogTool::ArrowRightDown()
  */
 void DialogTool::EvalFormula()
 {
-    Q_CHECK_PTR(lineEditFormula);
-    Q_CHECK_PTR(labelResultCalculation);
-    Eval(lineEditFormula, flagFormula, timerFormula, labelResultCalculation);
+    SCASSERT(plainTextEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
+    Eval(plainTextEditFormula, flagFormula, timerFormula, labelResultCalculation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -751,7 +856,7 @@ void DialogTool::EvalFormula()
  */
 void DialogTool::SizeHeight()
 {
-    Q_CHECK_PTR(listWidget);
+    SCASSERT(listWidget != nullptr);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
 
@@ -820,7 +925,7 @@ void DialogTool::Increments()
  */
 void DialogTool::PutHere()
 {
-    PutValHere(lineEditFormula, listWidget);
+    PutValHere(plainTextEditFormula, listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -830,13 +935,17 @@ void DialogTool::PutHere()
  */
 void DialogTool::PutVal(QListWidgetItem *item)
 {
-    Q_CHECK_PTR(lineEditFormula);
-    Q_CHECK_PTR(item);
-    int pos = lineEditFormula->cursorPosition();
+    SCASSERT(plainTextEditFormula != nullptr);
+    SCASSERT(item != nullptr);
+    QTextCursor cursor = plainTextEditFormula->textCursor();
+    cursor.insertText(item->text());
+    plainTextEditFormula->setTextCursor(cursor);
+    /*int pos = plainTextEditFormula->cursorPosition();
     lineEditFormula->setText(lineEditFormula->text().insert(lineEditFormula->cursorPosition(),
                                                             item->text()));
     lineEditFormula->setFocus();
     lineEditFormula->setCursorPosition(pos + item->text().size());
+    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -846,14 +955,14 @@ void DialogTool::PutVal(QListWidgetItem *item)
  */
 void DialogTool::ValChenged(int row)
 {
-    Q_CHECK_PTR(listWidget);
-    Q_CHECK_PTR(labelDescription);
-    Q_CHECK_PTR(radioButtonSizeGrowth);
-    Q_CHECK_PTR(radioButtonStandardTable);
-    Q_CHECK_PTR(radioButtonIncrements);
-    Q_CHECK_PTR(radioButtonLengthLine);
-    Q_CHECK_PTR(radioButtonLengthArc);
-    Q_CHECK_PTR(radioButtonLengthCurve);
+    SCASSERT(listWidget != nullptr);
+    SCASSERT(labelDescription != nullptr);
+    SCASSERT(radioButtonSizeGrowth != nullptr);
+    SCASSERT(radioButtonStandardTable != nullptr);
+    SCASSERT(radioButtonIncrements != nullptr);
+    SCASSERT(radioButtonLengthLine != nullptr);
+    SCASSERT(radioButtonLengthArc != nullptr);
+    SCASSERT(radioButtonLengthCurve != nullptr);
     if (listWidget->count() == 0)
     {
         return;
@@ -919,12 +1028,12 @@ void DialogTool::ValChenged(int row)
  */
 void DialogTool::UpdateList()
 {
-    Q_CHECK_PTR(radioButtonSizeGrowth);
-    Q_CHECK_PTR(radioButtonStandardTable);
-    Q_CHECK_PTR(radioButtonIncrements);
-    Q_CHECK_PTR(radioButtonLengthLine);
-    Q_CHECK_PTR(radioButtonLengthArc);
-    Q_CHECK_PTR(radioButtonLengthCurve);
+    SCASSERT(radioButtonSizeGrowth != nullptr);
+    SCASSERT(radioButtonStandardTable != nullptr);
+    SCASSERT(radioButtonIncrements != nullptr);
+    SCASSERT(radioButtonLengthLine != nullptr);
+    SCASSERT(radioButtonLengthArc != nullptr);
+    SCASSERT(radioButtonLengthCurve != nullptr);
 
     if (radioButtonSizeGrowth->isChecked())
     {
@@ -960,7 +1069,7 @@ void DialogTool::UpdateList()
 template <class key, class val>
 void DialogTool::ShowVariable(const QHash<key, val> *var)
 {
-    Q_CHECK_PTR(listWidget);
+    SCASSERT(listWidget != nullptr);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
 
@@ -982,4 +1091,10 @@ void DialogTool::ShowVariable(const QHash<key, val> *var)
     }
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->setCurrentRow (0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::DialogApply()
+{
+
 }

@@ -44,12 +44,12 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
 
     {
         const QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        Q_CHECK_PTR(bOk);
+        SCASSERT(bOk != nullptr);
         connect(bOk, &QPushButton::clicked, this, &DialogIndividualMeasurements::DialogAccepted);
     }
     {
         const QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        Q_CHECK_PTR(bCansel);
+        SCASSERT(bCansel != nullptr);
         connect(bCansel, &QPushButton::clicked, this, &DialogIndividualMeasurements::DialogRejected);
     }
 
@@ -174,7 +174,7 @@ void DialogIndividualMeasurements::CheckState()
 
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagName && flagPath);
 }
 

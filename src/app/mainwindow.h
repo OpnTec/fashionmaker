@@ -103,17 +103,24 @@ public slots:
     void               ToolCutArc(bool checked);
 
     void               ClosedDialogEndLine(int result);
+    void               ApplyDialogEndLine();
     void               ClosedDialogLine(int result);
     void               ClosedDialogAlongLine(int result);
+    void               ApplyDialogAlongLine();
     void               ClosedDialogShoulderPoint(int result);
+    void               ApplyDialogShoulderPoint();
     void               ClosedDialogNormal(int result);
+    void               ApplyDialogNormal();
     void               ClosedDialogBisector(int result);
+    void               ApplyDialogBisector();
     void               ClosedDialogLineIntersect(int result);
     void               ClosedDialogSpline(int result);
     void               ClosedDialogArc(int result);
+    void               ApplyDialogArc();
     void               ClosedDialogSplinePath(int result);
     void               ClosedDialogCutSplinePath(int result);
     void               ClosedDialogPointOfContact(int result);
+    void               ApplyDialogPointOfContact();
     void               ClosedDialogDetail(int result);
     void               ClosedDialogHeight(int result);
     void               ClosedDialogTriangle(int result);
@@ -121,6 +128,7 @@ public slots:
     void               ClosedDialogUnionDetails(int result);
     void               ClosedDialogCutSpline(int result);
     void               ClosedDialogCutArc(int result);
+    void               ApplyDialogCutArc();
 
     void               About();
     void               AboutQt();
@@ -129,6 +137,10 @@ public slots:
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
+	/**
+     * @brief Edit XML code of pattern
+     */
+    void               EditPatternCode();
     void               FullParseFile();
 signals:
     /**
@@ -217,10 +229,15 @@ private:
     template <typename Dialog, typename Func>
     void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
-
+    template <typename Dialog, typename Func, typename Func2>
+    void               SetToolButtonWithApply(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+                                     Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
-
+    template <typename DrawTool>
+    void               ClosedDialogWithApply(int result);
+    template <typename DrawTool>
+    void               ApplyDialog();
     bool               SavePattern(const QString &curFile);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);

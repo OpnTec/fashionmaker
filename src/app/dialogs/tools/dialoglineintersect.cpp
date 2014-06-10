@@ -44,7 +44,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent
 {
     ui->setupUi(this);
     number = 0;
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
 
@@ -209,7 +209,7 @@ void DialogLineIntersect::P2Line2Changed(int index)
  */
 void DialogLineIntersect::CheckState()
 {
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagName && flagPoint);
 }
 

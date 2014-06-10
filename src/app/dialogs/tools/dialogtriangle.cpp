@@ -43,7 +43,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     flagName = false;
     CheckState();
 

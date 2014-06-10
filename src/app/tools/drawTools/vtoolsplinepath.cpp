@@ -76,9 +76,9 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     dialogTool->SetPath(*splPath);
 }
@@ -86,9 +86,9 @@ void VToolSplinePath::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
@@ -287,9 +287,9 @@ void VToolSplinePath::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
 
     VSplinePath splPath = dialogTool->GetPath();
     RefreshSplinePath(splPath);

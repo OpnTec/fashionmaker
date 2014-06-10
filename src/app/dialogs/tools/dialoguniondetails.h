@@ -53,6 +53,10 @@ public:
 public slots:
     void             ChoosedObject(quint32 id, const Valentina::Scenes &type);
     virtual void     DialogAccepted();
+    /** TODO ISSUE 79 : create real function
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply(){}
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
 

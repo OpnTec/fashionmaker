@@ -39,7 +39,7 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *
     lineEditFormula = ui->lineEditFormula;
     labelEditFormula = ui->labelFormula;
 
-    InitOkCansel(ui);
+    InitOkCancel(ui);
     flagFormula = false;
     CheckState();
 
@@ -83,7 +83,7 @@ void DialogEditWrongFormula::DialogRejected()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
-    Q_CHECK_PTR(bOk);
+    SCASSERT(bOk != nullptr);
     bOk->setEnabled(flagFormula);
 }
 

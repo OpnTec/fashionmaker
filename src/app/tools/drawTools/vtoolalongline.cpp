@@ -133,9 +133,9 @@ void VToolAlongLine::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
@@ -146,9 +146,9 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::setDialog()
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
@@ -158,22 +158,28 @@ void VToolAlongLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
-    Q_CHECK_PTR(dialog);
+    SCASSERT(dialog != nullptr);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
-    Q_CHECK_PTR(dialogTool);
+    SCASSERT(dialogTool != nullptr);
     QString formula = dialogTool->getFormula();
     const quint32 firstPointId = dialogTool->getFirstPointId();
     const quint32 secondPointId = dialogTool->getSecondPointId();
     const QString typeLine = dialogTool->getTypeLine();
     const QString pointName = dialogTool->getPointName();
-    Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
+    VToolAlongLine *point=nullptr;
+    point = Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
            Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
+VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
                             const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                             const Document::Documents &parse, const Valentina::Sources &typeCreation)
@@ -212,5 +218,7 @@ void VToolAlongLine::Create(const quint32 _id, const QString &pointName, const Q
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
+        return point;
     }
+    return nullptr;
 }

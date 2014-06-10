@@ -31,6 +31,8 @@
 
 #include "dialogtool.h"
 
+
+#define DIALOGENDLINE_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogEndLine;
@@ -63,6 +65,18 @@ public:
 public slots:
     virtual void      ChoosedObject(quint32 id, const Valentina::Scenes &type);
     virtual void      DialogAccepted();
+    /**
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
+    /**
+     * @brief FormulaTextChanged when formula text changes for validation and calc
+     */
+    void FormulaTextChanged();
 private:
     Q_DISABLE_COPY(DialogEndLine)
 
@@ -83,6 +97,13 @@ private:
 
     /** @brief basePointId id base point of line */
     quint32            basePointId;
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeight;
+
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

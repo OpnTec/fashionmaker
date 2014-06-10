@@ -78,7 +78,7 @@ void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idP
             doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
-            Q_CHECK_PTR(tool);
+            SCASSERT(tool != nullptr);
             point->setParent(tool);
         }
         else
