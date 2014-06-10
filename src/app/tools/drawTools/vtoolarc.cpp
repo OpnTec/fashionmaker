@@ -73,7 +73,7 @@ void VToolArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
@@ -82,11 +82,17 @@ void VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *d
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
-    Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    VToolArc* point = nullptr;
+    point=Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
+VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document::Documents &parse,
                       const Valentina::Sources &typeCreation)
 {
@@ -121,7 +127,9 @@ void VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius,
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);
+        return toolArc;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

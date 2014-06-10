@@ -34,11 +34,6 @@
 #include <QtWidgets>
 #include "../../../libs/qmuparser/qmuparsererror.h"
 
-// TODO : for issue #79
-// replace lineEditFormula -> plainTextEditFormula
-// delete lineEditFormala everywhrer
-// delete PutValHere and eval overloaded functions
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTool create dialog

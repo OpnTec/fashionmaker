@@ -31,6 +31,7 @@
 
 #include "dialogtool.h"
 
+#define DIALOGARC_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogArc;
@@ -63,7 +64,11 @@ public slots:
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void      DialogApply();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
     virtual void  ValChenged(int row);
     void          PutRadius();
     void          PutF1();
@@ -111,10 +116,17 @@ private:
     /** @brief f2 formula of second angle */
     QString       f2;
 
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int           formulaBaseHeight;
+
     void          EvalRadius();
     void          EvalF1();
     void          EvalF2();
     void          ShowLineAngles();
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    void SaveData();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
