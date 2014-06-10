@@ -60,11 +60,13 @@ private:
     void InitUnits();
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QString DialogIndividualMeasurements::name() const
 {
     return _name;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 inline QString DialogIndividualMeasurements::tablePath() const
 {
     return _tablePath;

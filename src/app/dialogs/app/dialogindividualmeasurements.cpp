@@ -147,6 +147,8 @@ void DialogIndividualMeasurements::CheckState()
     bool flagPath = false;
     if (ui->radioButtonExistM->isChecked())
     {
+        ui->labelGivenName->setEnabled(true);
+        ui->labelFamilyName->setEnabled(true);
         ui->lineEditPathExistM->setEnabled(true);
         ui->toolButtonOpenExist->setEnabled(true);
 
@@ -165,6 +167,8 @@ void DialogIndividualMeasurements::CheckState()
         ui->toolButtonOpenNew->setEnabled(true);
         ui->comboBoxUnits->setEnabled(true);
 
+        ui->labelGivenName->setEnabled(false);
+        ui->labelFamilyName->setEnabled(false);
         ui->toolButtonOpenExist->setEnabled(false);
         ui->lineEditPathExistM->setEnabled(false);
 
@@ -199,6 +203,10 @@ void DialogIndividualMeasurements::OpenTable()
         e.CriticalMessageBox(tr("File error."), this);
         fileName.clear();
     }
+    VIndividualMeasurements m(data);
+    m.setContent(fileName);
+    ui->labelGivenName->setText(m.GivenName());
+    ui->labelFamilyName->setText(m.FamilyName());
     ui->lineEditPathExistM->setText(fileName);
     ui->lineEditPathExistM->setToolTip(fileName);
     CheckState();
