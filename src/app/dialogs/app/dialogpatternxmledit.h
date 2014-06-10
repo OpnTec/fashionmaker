@@ -51,7 +51,7 @@ public:
      * @param nodetype : node type (node, attribute, root)
      * @param source : the source dom node
      */
-    explicit VXMLTreeElement (QString name, int nodetype, QDomNode source, bool editor);
+    explicit VXMLTreeElement (QString name, short int nodetype, QDomNode source, bool editor);
 
     explicit VXMLTreeElement (QString name, int nodetype);
 

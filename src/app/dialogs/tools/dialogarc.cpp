@@ -40,7 +40,8 @@
  */
 DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-    timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()), f2(QString())
+      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()),
+      f2(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
 

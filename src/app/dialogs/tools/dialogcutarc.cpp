@@ -35,8 +35,9 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent) :
-    DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0)
+DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent)
+    : DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0),
+      formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);

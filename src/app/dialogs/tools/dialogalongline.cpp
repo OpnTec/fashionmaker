@@ -38,8 +38,8 @@
  * @param parent parent widget
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0)
+    :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()), typeLine(QString()),
+      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     labelResultCalculation = ui->labelResultCalculation;

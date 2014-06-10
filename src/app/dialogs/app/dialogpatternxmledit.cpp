@@ -1196,9 +1196,9 @@ const short int VXMLTreeElement::TypeRoot=3;
 //TODO warning: conversion to 'short int' from 'int' may alter its value [-Wconversion]
 //treeNodeValueSet(false), treeNodeName(name)
 //                                         ^
-VXMLTreeElement::VXMLTreeElement(QString name, int nodetype, QDomNode source, bool editor)
-    : QStandardItem(name), DocNode(source), addedNode(editor), elementType(nodetype), treeNodeValue("<empty>"),
-      treeNodeValueSet(false), treeNodeName(name), selectable(true), parentnode(nullptr)
+VXMLTreeElement::VXMLTreeElement(QString name, short int nodetype, QDomNode source, bool editor)
+    : QStandardItem(name), DocNode(source), parentnode(nullptr), addedNode(editor), elementType(nodetype),
+      treeNodeValue("<empty>"), treeNodeValueSet(false), treeNodeName(name), selectable(true)
 {
     if (editor == false)
     {

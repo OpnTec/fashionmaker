@@ -38,8 +38,8 @@
  * @param parent parent widget
  */
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0)
+    :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()), typeLine(QString()),
+      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
