@@ -162,7 +162,7 @@ QString VApplication::pathToTables() const
                 return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
             #else
                 QDir dir(QApplication::applicationDirPath() + QStringLiteral("/tables/standard"));
-                if (dir.exist())
+                if (dir.exists())
                 {
                     return dir.absolutePath();
                 }
@@ -185,7 +185,7 @@ QString VApplication::translationsPath() const
     return QApplication::applicationDirPath() + QStringLiteral("/translations");
     #else
         QDir dir(QApplication::applicationDirPath() + QStringLiteral("/translations"));
-        if (dir.exist())
+        if (dir.exists())
         {
             return dir.absolutePath();
         }
