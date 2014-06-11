@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   movesplinepath.h
+ **  @file   savetooloptions.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 6, 2014
  **
@@ -26,56 +26,53 @@
  **
  *************************************************************************/
 
-#ifndef MOVESPLINEPATH_H
-#define MOVESPLINEPATH_H
+#ifndef SAVETOOLOPTIONS_H
+#define SAVETOOLOPTIONS_H
 
 #include <QUndoCommand>
-#include "../geometry/vsplinepath.h"
+#include <QDomElement>
 
 class VPattern;
-class QGraphicsScene;
 
-class MoveSplinePath : public QObject, public QUndoCommand
+class SaveToolOptions : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath, const quint32 &id,
-                   QGraphicsScene *scene, QUndoCommand *parent = 0);
-    virtual ~MoveSplinePath();
+    SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id, QUndoCommand *parent = 0);
+    virtual ~SaveToolOptions();
     virtual void undo();
     virtual void redo();
     virtual bool mergeWith(const QUndoCommand *command);
     virtual int  id() const;
-    quint32      getSplinePathId() const;
-    VSplinePath  getNewSplinePath() const;
+    QDomElement  getNewXml() const;
+    quint32 getToolId() const;
 signals:
     void NeedLiteParsing();
 private:
-    Q_DISABLE_COPY(MoveSplinePath)
-    enum { Id = 2 };
-    VPattern    *doc;
-    VSplinePath oldSplinePath;
-    VSplinePath newSplinePath;
-    quint32     splinePathId;
-    QGraphicsScene *scene;
+    Q_DISABLE_COPY(SaveToolOptions)
+    enum { Id = 3 };
+    const QDomElement oldXml;
+    QDomElement       newXml;
+    VPattern          *doc;
+    const quint32     toolId;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int MoveSplinePath::id() const
+inline QDomElement SaveToolOptions::getNewXml() const
+{
+    return newXml;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int SaveToolOptions::id() const
 {
     return Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveSplinePath::getSplinePathId() const
+inline quint32 SaveToolOptions::getToolId() const
 {
-    return splinePathId;
+    return toolId;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-inline VSplinePath MoveSplinePath::getNewSplinePath() const
-{
-    return newSplinePath;
-}
-
-#endif // MOVESPLINEPATH_H
+#endif // SAVETOOLOPTIONS_H

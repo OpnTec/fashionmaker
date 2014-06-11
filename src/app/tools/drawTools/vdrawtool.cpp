@@ -32,6 +32,7 @@
 #include "dialogs/tools/dialogeditwrongformula.h"
 #include "container/calculator.h"
 #include "../../undocommands/addtocalc.h"
+#include "../../undocommands/savetooloptions.h"
 
 qreal VDrawTool::factor = 1;
 
@@ -111,13 +112,19 @@ void VDrawTool::FullUpdateFromGui(int result)
 {
     if (result == QDialog::Accepted)
     {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
+        QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+        if (oldDomElement.isElement())
         {
-            SaveDialog(domElement);
+            QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+            SaveDialog(newDomElement);
 
-            emit LiteUpdateTree();
-            emit toolhaveChange();
+            SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+            connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+            qApp->getUndoStack()->push(saveOptions);
+        }
+        else
+        {
+            qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
         }
     }
     delete dialog;
@@ -127,13 +134,19 @@ void VDrawTool::FullUpdateFromGui(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::FullUpdateFromGuiApply()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
     {
-        SaveDialog(domElement);
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+        SaveDialog(newDomElement);
 
-        emit LiteUpdateTree();
-        emit toolhaveChange();
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 

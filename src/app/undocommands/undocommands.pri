@@ -3,7 +3,8 @@ HEADERS += \
     undocommands/addpatternpiece.h \
     undocommands/movespoint.h \
     undocommands/movespline.h \
-    undocommands/movesplinepath.h
+    undocommands/movesplinepath.h \
+    undocommands/savetooloptions.h
     
 
 SOURCES += \
@@ -11,5 +12,6 @@ SOURCES += \
     undocommands/addpatternpiece.cpp \
     undocommands/movespoint.cpp \
     undocommands/movespline.cpp \
-    undocommands/movesplinepath.cpp
+    undocommands/movesplinepath.cpp \
+    undocommands/savetooloptions.cpp
     
