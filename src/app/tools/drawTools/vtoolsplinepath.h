@@ -149,7 +149,7 @@ private:
      * @param splPath spline path.
      * @param indexSpline index spline in spline path.
      */
-    void             UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
+    void             UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
     void             RefreshSplinePath(VSplinePath &splPath);
 };
 
