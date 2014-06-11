@@ -163,7 +163,7 @@ signals:
     /**
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
-    void                    FullUpdateTree();
+    void                    LiteUpdateTree();
 protected:
     /**
      * @brief doc dom document container

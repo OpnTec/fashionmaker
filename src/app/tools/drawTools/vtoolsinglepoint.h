@@ -79,7 +79,7 @@ signals:
     /**
      * @brief FullUpdateTree handle if need update pattern file.
      */
-    void         FullUpdateTree();
+    void         LiteUpdateTree();
 protected:
     /**
      * @brief contextMenuEvent handle context menu events.

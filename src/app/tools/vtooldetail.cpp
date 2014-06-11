@@ -232,7 +232,7 @@ void VToolDetail::FullUpdateFromGui(int result)
                     node->DeleteNode();
                 }
             }
-            emit FullUpdateTree();
+            emit LiteUpdateTree();
             emit toolhaveChange();
         }
     }

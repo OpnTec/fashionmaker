@@ -78,7 +78,7 @@ VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObjec
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
+    connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VPattern::LiteParseTree);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

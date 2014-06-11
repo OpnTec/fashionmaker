@@ -149,7 +149,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     {
         doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
         UpdatePathPoint(domElement, splPath);
-        emit FullUpdateTree();
+        emit LiteUpdateTree();
         emit toolhaveChange();
     }
 }

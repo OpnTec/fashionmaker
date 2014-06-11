@@ -116,7 +116,7 @@ void VDrawTool::FullUpdateFromGui(int result)
         {
             SaveDialog(domElement);
 
-            emit FullUpdateTree();
+            emit LiteUpdateTree();
             emit toolhaveChange();
         }
     }
@@ -132,7 +132,7 @@ void VDrawTool::FullUpdateFromGuiApply()
     {
         SaveDialog(domElement);
 
-        emit FullUpdateTree();
+        emit LiteUpdateTree();
         emit toolhaveChange();
     }
 }
