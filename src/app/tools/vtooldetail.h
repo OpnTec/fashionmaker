@@ -118,10 +118,10 @@ public slots:
      */
     virtual void       FullUpdateFromFile ();
     /**
-     * @brief FullUpdateFromGui refresh tool data after change in options.
+     * @brief FullUpdateFromGuiOk refresh tool data after change in options.
      * @param result keep result working dialog.
      */
-    virtual void       FullUpdateFromGui(int result);
+    virtual void       FullUpdateFromGuiOk(int result);
 protected:
     /**
      * @brief AddToFile add tag with informations about tool into file.

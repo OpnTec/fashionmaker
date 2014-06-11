@@ -61,7 +61,7 @@ public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    virtual void FullUpdateFromGui(int result);
+    virtual void FullUpdateFromGuiOk(int result);
     /**
      * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
      */
@@ -125,7 +125,7 @@ protected:
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
-                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
                 connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
                 if (ignoreFullUpdate == false)
                 {

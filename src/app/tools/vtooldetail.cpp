@@ -201,7 +201,7 @@ void VToolDetail::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::FullUpdateFromGui(int result)
+void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
@@ -369,7 +369,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         dialog = new DialogDetail(getData(), list.first());
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                 dialog, &DialogTool::ChoosedObject);
-        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
+        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
         setDialog();
         dialog->show();
     }

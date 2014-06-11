@@ -105,10 +105,10 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromGui refresh tool data after change in options.
+ * @brief FullUpdateFromGuiOk refresh tool data after change in options.
  * @param result keep result working dialog.
  */
-void VDrawTool::FullUpdateFromGui(int result)
+void VDrawTool::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
