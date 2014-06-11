@@ -29,6 +29,7 @@
 #include "savetooloptions.h"
 #include "../options.h"
 #include "../xml/vpattern.h"
+#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id,
@@ -90,4 +91,8 @@ bool SaveToolOptions::mergeWith(const QUndoCommand *command)
     return true;
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------
+int SaveToolOptions::id() const
+{
+    return static_cast<int>(UndoCommand::SaveToolOptions);
+}

@@ -31,7 +31,9 @@
 #include <QDomElement>
 #include <QGraphicsView>
 #include "../xml/vpattern.h"
+#include "undocommands.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
                        QGraphicsScene *scene, QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), doc(doc), oldSpline(*oldSpl), newSpline(newSpl), splineId(id), scene(scene)
@@ -41,9 +43,11 @@ MoveSpline::MoveSpline(VPattern *doc, const VSpline *oldSpl, const VSpline &newS
     SCASSERT(scene != nullptr);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 MoveSpline::~MoveSpline()
 {}
 
+//---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::undo()
 {
     QDomElement domElement = doc->elementById(QString().setNum(splineId));
@@ -66,6 +70,7 @@ void MoveSpline::undo()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::redo()
 {
     QDomElement domElement = doc->elementById(QString().setNum(splineId));
@@ -88,6 +93,7 @@ void MoveSpline::redo()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool MoveSpline::mergeWith(const QUndoCommand *command)
 {
     const MoveSpline *moveCommand = static_cast<const MoveSpline *>(command);
@@ -101,4 +107,10 @@ bool MoveSpline::mergeWith(const QUndoCommand *command)
 
     newSpline = moveCommand->getNewSpline();
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int MoveSpline::id() const
+{
+    return static_cast<int>(UndoCommand::MoveSpline);
 }

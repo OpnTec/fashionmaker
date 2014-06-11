@@ -32,7 +32,9 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../widgets/vapplication.h"
+#include "undocommands.h"
 
+//---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                        QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), doc(doc), oldX(10.0), oldY(10.0), newX(x), newY(y), sPointId(id), scene(scene)
@@ -111,4 +113,10 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
     newX = moveCommand->getNewX();
     newY = moveCommand->getNewY();
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int MoveSPoint::id() const
+{
+    return static_cast<int>(UndoCommand::MoveSPoint);
 }

@@ -4,7 +4,8 @@ HEADERS += \
     undocommands/movespoint.h \
     undocommands/movespline.h \
     undocommands/movesplinepath.h \
-    undocommands/savetooloptions.h
+    undocommands/savetooloptions.h \
+    undocommands/undocommands.h
     
 
 SOURCES += \

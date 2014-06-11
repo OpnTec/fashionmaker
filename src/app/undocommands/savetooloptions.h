@@ -50,7 +50,6 @@ signals:
     void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(SaveToolOptions)
-    enum { Id = 3 };
     const QDomElement oldXml;
     QDomElement       newXml;
     VPattern          *doc;
@@ -61,12 +60,6 @@ private:
 inline QDomElement SaveToolOptions::getNewXml() const
 {
     return newXml;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline int SaveToolOptions::id() const
-{
-    return Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

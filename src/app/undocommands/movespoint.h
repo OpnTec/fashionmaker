@@ -52,7 +52,6 @@ signals:
     void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(MoveSPoint)
-    enum { Id = 0 };
     VPattern *doc;
     double   oldX;
     double   oldY;
@@ -61,12 +60,6 @@ private:
     quint32  sPointId;
     QGraphicsScene *scene;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline int MoveSPoint::id() const
-{
-    return Id;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 MoveSPoint::getSPointId() const

@@ -52,19 +52,12 @@ signals:
     void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(MoveSpline)
-    enum { Id = 1 };
     VPattern *doc;
     VSpline  oldSpline;
     VSpline  newSpline;
     quint32  splineId;
     QGraphicsScene *scene;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline int MoveSpline::id() const
-{
-    return Id;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 MoveSpline::getSplineId() const

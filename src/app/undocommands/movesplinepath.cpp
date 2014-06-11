@@ -29,6 +29,7 @@
 #include "movesplinepath.h"
 #include <QDomElement>
 #include "../tools/drawTools/vtoolsplinepath.h"
+#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
@@ -99,4 +100,10 @@ bool MoveSplinePath::mergeWith(const QUndoCommand *command)
 
     newSplinePath = moveCommand->getNewSplinePath();
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int MoveSplinePath::id() const
+{
+    return static_cast<int>(UndoCommand::MoveSplinePath);
 }
