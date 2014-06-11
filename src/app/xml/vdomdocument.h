@@ -102,7 +102,7 @@ public:
      * @return cursor
      * @throw VExceptionUniqueId
      */
-    void SetAttribute(QDomElement &domElement, const QString &name, const T &value)
+    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
     {
         QString val = QString().setNum(value);
         val = val.replace(",", ".");
@@ -170,14 +170,15 @@ private:
 };
 
 template <>
-inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value)
+inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const QString &name,
+                                                const QString &value) const
 {
     domElement.setAttribute(name, value);
 }
 
 template <>
 inline void VDomDocument::SetAttribute<Pattern::Measurements>(QDomElement &domElement, const QString &name,
-                                                              const Pattern::Measurements &value)
+                                                              const Pattern::Measurements &value) const
 {
     if (value == Pattern::Standard)
     {

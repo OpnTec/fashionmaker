@@ -28,6 +28,7 @@
 
 #include "vtoolsplinepath.h"
 #include "../../dialogs/tools/dialogsplinepath.h"
+#include "../../undocommands/movesplinepath.h"
 
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
@@ -132,8 +133,9 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
                                                  const QPointF &pos)
 {
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
-    VSpline spl = splPath.GetSpline(indexSpline);
+    VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    VSplinePath newSplPath = oldSplPath;
+    VSpline spl = newSplPath.GetSpline(indexSpline);
     if (position == SplinePoint::FirstPoint)
     {
         spl = VSpline(spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());
@@ -143,19 +145,15 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
         spl = VSpline(spl.GetP1(), spl.GetP2(), pos, spl.GetP4(), spl.GetKcurve());
     }
 
-    CorectControlPoints(spl, splPath, indexSpline);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
-        UpdatePathPoint(domElement, splPath);
-        emit LiteUpdateTree();
-        emit toolhaveChange();
-    }
+    UpdateControlPoints(spl, newSplPath, indexSpline);
+
+    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
+    connect(moveSplPath, &MoveSplinePath::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSplPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSplinePath::CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline)
+void VToolSplinePath::UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline)
 {
     VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePoint::FirstPoint);
     p.SetAngle2(spl.GetAngle1());
@@ -188,14 +186,14 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
 
         spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
                 splPath.getKCurve());
-        CorectControlPoints(spl, splPath, i);
-        CorectControlPoints(spl, splPath, i);
+        UpdateControlPoints(spl, splPath, i);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSplinePath::UpdatePathPoint(QDomNode& node, VSplinePath &path)
+void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path)
 {
+    SCASSERT(doc != nullptr)
     QDomNodeList nodeList = node.childNodes();
     qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -248,7 +246,7 @@ void VToolSplinePath::RefreshDataInFile()
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     RefreshSplinePath(splPath);
     doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
-    UpdatePathPoint(domElement, splPath);
+    UpdatePathPoint(doc, domElement, splPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +292,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
     VSplinePath splPath = dialogTool->GetPath();
     RefreshSplinePath(splPath);
     doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
-    UpdatePathPoint(domElement, splPath);
+    UpdatePathPoint(doc, domElement, splPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

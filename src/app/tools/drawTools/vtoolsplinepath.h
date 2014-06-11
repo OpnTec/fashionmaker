@@ -74,6 +74,13 @@ public:
                          VPattern *doc, VContainer *data, const Document::Documents &parse,
                          const Valentina::Sources &typeCreation);
      static const QString ToolType;
+     /**
+      * @brief UpdatePathPoint update spline path in pattern file.
+      * @brief doc dom document container.
+      * @param node tag in file.
+      * @param path spline path.
+      */
+     static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
 signals:
     /**
      * @brief RefreshLine refresh control line.
@@ -137,18 +144,12 @@ private:
      */
     void             AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
     /**
-     * @brief UpdatePathPoint update spline path in pattern file.
-     * @param node tag in file.
-     * @param path spline path.
-     */
-    void             UpdatePathPoint(QDomNode& node, VSplinePath &path);
-    /**
-     * @brief CorectControlPoints update position points control points in file.
+     * @brief UpdateControlPoints update position points control points in file.
      * @param spl spline what was changed.
      * @param splPath spline path.
      * @param indexSpline index spline in spline path.
      */
-    void             CorectControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
+    void             UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline);
     void             RefreshSplinePath(VSplinePath &splPath);
 };
 
