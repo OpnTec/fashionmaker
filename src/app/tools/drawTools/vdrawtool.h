@@ -62,9 +62,6 @@ public slots:
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGuiOk(int result);
-    /**
-     * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
-     */
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
 protected:
@@ -87,6 +84,7 @@ protected:
 
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
+    void         SaveDialogChange();
 
     template <typename Dialog, typename Tool>
     /**

@@ -112,27 +112,22 @@ void VDrawTool::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        QDomElement oldDomElement = doc->elementById(QString().setNum(id));
-        if (oldDomElement.isElement())
-        {
-            QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-            SaveDialog(newDomElement);
-
-            SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-            connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
-            qApp->getUndoStack()->push(saveOptions);
-        }
-        else
-        {
-            qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-        }
+        SaveDialogChange();
     }
-    delete dialog;
-    dialog = nullptr;
+    DialogLinkDestroy();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
+ */
 void VDrawTool::FullUpdateFromGuiApply()
+{
+    SaveDialogChange();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SaveDialogChange()
 {
     QDomElement oldDomElement = doc->elementById(QString().setNum(id));
     if (oldDomElement.isElement())
@@ -153,6 +148,7 @@ void VDrawTool::FullUpdateFromGuiApply()
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::DialogLinkDestroy()
 {
+    delete this->dialog;
     this->dialog=nullptr;
 }
 
