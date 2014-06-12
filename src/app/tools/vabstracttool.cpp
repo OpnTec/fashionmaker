@@ -203,18 +203,6 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::RemoveAllChild(QDomElement &domElement)
-{
-    if ( domElement.hasChildNodes() )
-    {
-        while ( domElement.childNodes().length() >= 1 )
-        {
-            domElement.removeChild( domElement.firstChild() );
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
     if (_referens <= 1)

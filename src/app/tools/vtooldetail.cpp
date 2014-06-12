@@ -38,6 +38,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>
 #include <QGraphicsView>
+#include "../undocommands/savedetailoptions.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -247,36 +248,15 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SCASSERT(dialog != nullptr);
-            DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-            SCASSERT(dialogTool != nullptr);
-            VDetail det = dialogTool->getDetails();
-            doc->SetAttribute(domElement, AttrName, det.getName());
-            doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-            doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-            doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
-            RemoveAllChild(domElement);
-            for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
-            {
-               AddNode(domElement, det.at(i));
-            }
-            VDetail detail = VAbstractTool::data.GetDetail(id);
-            QList<quint32> list = detail.Missing(det);
-            QHash<quint32, VDataTool*>* tools = doc->getTools();
-            if (list.size()>0)
-            {
-                for (qint32 i = 0; i < list.size(); ++i)
-                {
-                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list.at(i)));
-                    node->DeleteNode();
-                }
-            }
-            emit LiteUpdateTree();
-            emit toolhaveChange();
-        }
+        SCASSERT(dialog != nullptr);
+        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+        SCASSERT(dialogTool != nullptr);
+        VDetail newDet = dialogTool->getDetails();
+        VDetail oldDet = VAbstractTool::data.GetDetail(id);
+
+        SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveCommand);
     }
     delete dialog;
     dialog = nullptr;
@@ -298,7 +278,7 @@ void VToolDetail::AddToFile()
 
     for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
-       AddNode(domElement, detail.at(i));
+       AddNode(doc, domElement, detail.at(i));
     }
 
     QDomElement element;
@@ -320,10 +300,10 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
         doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
-        RemoveAllChild(domElement);
+        doc->RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
         {
-           AddNode(domElement, det.at(i));
+           AddNode(doc, domElement, det.at(i));
         }
     }
 }
@@ -432,7 +412,7 @@ void VToolDetail::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
+void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 

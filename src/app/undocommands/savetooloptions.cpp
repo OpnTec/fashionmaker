@@ -78,16 +78,16 @@ void SaveToolOptions::redo()
 //---------------------------------------------------------------------------------------------------------------------
 bool SaveToolOptions::mergeWith(const QUndoCommand *command)
 {
-    const SaveToolOptions *moveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(moveCommand != nullptr);
-    const quint32 id = moveCommand->getToolId();
+    const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
+    SCASSERT(saveCommand != nullptr);
+    const quint32 id = saveCommand->getToolId();
 
     if (id != toolId)
     {
         return false;
     }
 
-    newXml = moveCommand->getNewXml();
+    newXml = saveCommand->getNewXml();
     return true;
 }
 

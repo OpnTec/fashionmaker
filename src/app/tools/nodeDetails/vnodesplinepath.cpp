@@ -94,6 +94,15 @@ void VNodeSplinePath::DeleteNode()
     this->setVisible(false);
 }
 
+void VNodeSplinePath::RestoreNode()
+{
+    if (this->isVisible() == false)
+    {
+        VAbstractNode::RestoreNode();
+        this->setVisible(true);
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::FullUpdateFromFile()
 {

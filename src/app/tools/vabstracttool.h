@@ -32,6 +32,7 @@
 #include "vdatatool.h"
 
 class VPattern;
+class QDomElement;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -202,11 +203,6 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void            RemoveReferens(){}
-    /**
-     * @brief RemoveAllChild remove all child from file.
-     * @param domElement tag in xml tree.
-     */
-    void                    RemoveAllChild(QDomElement &domElement);
     /**
      * @brief DeleteTool full delete object form scene and file.
      * @param tool tool

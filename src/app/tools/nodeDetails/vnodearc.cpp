@@ -87,6 +87,15 @@ void VNodeArc::DeleteNode()
     this->setVisible(false);
 }
 
+void VNodeArc::RestoreNode()
+{
+    if (this->isVisible() == false)
+    {
+        VAbstractNode::RestoreNode();
+        this->setVisible(true);
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::FullUpdateFromFile()
 {

@@ -112,6 +112,13 @@ public:
      * @brief Remove full delete detail.
      */
     void               Remove();
+    /**
+     * @brief AddNode add node to the file.
+     * @param dom document container
+     * @param domElement tag in xml tree.
+     * @param node node of detail.
+     */
+    static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -171,12 +178,6 @@ private:
      * @brief RefreshGeometry refresh item on scene.
      */
     void               RefreshGeometry ();
-    /**
-     * @brief AddNode add node to the file.
-     * @param domElement tag in xml tree.
-     * @param node node of detail.
-     */
-    void               AddNode(QDomElement &domElement, const VNodeDetail &node);
     template <typename Tool>
     /**
      * @brief InitTool initial node item on scene

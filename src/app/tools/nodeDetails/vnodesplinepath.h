@@ -73,6 +73,7 @@ public:
      * @brief DeleteNode delete node from detail.
      */
     virtual void DeleteNode();
+    virtual void RestoreNode();
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

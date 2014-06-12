@@ -527,3 +527,19 @@ void VDomDocument::setTagText(const QString &tag, const QString &text)
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveAllChild remove all child from file.
+ * @param domElement tag in xml tree.
+ */
+void VDomDocument::RemoveAllChild(QDomElement &domElement)
+{
+    if ( domElement.hasChildNodes() )
+    {
+        while ( domElement.childNodes().length() >= 1 )
+        {
+            domElement.removeChild( domElement.firstChild() );
+        }
+    }
+}

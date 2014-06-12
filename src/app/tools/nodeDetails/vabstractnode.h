@@ -53,6 +53,7 @@ public:
     static const QString AttrIdObject;
     static const QString AttrIdTool;
     virtual void DeleteNode();
+    virtual void RestoreNode();
 protected:
     /**
      * @brief idNodenode id.
@@ -71,6 +72,8 @@ protected:
      * @brief decrementReferens decrement reference for all parent objects.
      */
     virtual void decrementReferens();
+    virtual void RemoveReferens();
+    virtual void RestoreReferens();
 };
 
 #endif // VABSTRACTNODE_H

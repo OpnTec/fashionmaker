@@ -100,6 +100,15 @@ void VNodePoint::DeleteNode()
     this->setVisible(false);
 }
 
+void VNodePoint::RestoreNode()
+{
+    if (this->isVisible() == false)
+    {
+        VAbstractNode::RestoreNode();
+        this->setVisible(true);
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::FullUpdateFromFile()
 {
