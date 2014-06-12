@@ -255,25 +255,26 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
 //---------------------------------------------------------------------------------------------------------------------
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    QList<quint32> list;
     if (nodes.size() == det.CountNode())
     {
-        return list;
+        return QList<quint32>();
     }
 
-    qint32 j = 0;
+    QSet<quint32> set1;
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        if (nodes.at(i).getId() == det.at(j).getId())
-        {
-            ++j;
-        }
-        else
-        {
-            list.append(nodes.at(i).getId());
-        }
+        set1.insert(nodes.at(i).getId());
     }
-    return list;
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < det.CountNode(); ++j)
+    {
+        set2.insert(det.at(j).getId());
+    }
+
+    QSet<quint32> set3 = set1.subtract(set2);
+
+    return set3.toList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
