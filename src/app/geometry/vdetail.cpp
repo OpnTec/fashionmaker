@@ -33,13 +33,13 @@
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail()
     :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
-      width(10)
+      width(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
     :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
-      width(10)
+      width(0)
 {
     this->nodes = nodes;
 }
@@ -73,7 +73,7 @@ void VDetail::Clear()
     my = 0;
     seamAllowance = true;
     closed = true;
-    width = 10;
+    width = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

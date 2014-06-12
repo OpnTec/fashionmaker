@@ -34,6 +34,7 @@
 #include "../../geometry/vpointf.h"
 #include "../../geometry/vsplinepath.h"
 #include "../../container/vcontainer.h"
+#include "../../xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,6 +47,9 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
+    ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
@@ -61,9 +65,9 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     CheckState();
 
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogDetail::ObjectChanged);
-    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
@@ -119,7 +123,7 @@ void DialogDetail::DialogAccepted()
         QListWidgetItem *item = ui.listWidget->item(i);
         details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
-    details.setWidth(ui.spinBoxSeams->value());
+    details.setWidth(ui.doubleSpinBoxSeams->value());
     details.setName(ui.lineEditNameDetail->text());
     details.setSeamAllowance(supplement);
     details.setClosed(closed);
@@ -198,15 +202,15 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
-    disconnect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    disconnect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    disconnect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
-    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
 }
 
@@ -229,7 +233,7 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.checkBoxClosed->setChecked(details.getClosed());
     ClickedClosed(details.getClosed());
     ClickedSeams(details.getSeamAllowance());
-    ui.spinBoxSeams->setValue(static_cast<qint32>(details.getWidth()));
+    ui.doubleSpinBoxSeams->setValue(details.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
@@ -274,7 +278,7 @@ void DialogDetail::ClickedSeams(bool checked)
 {
     supplement = checked;
     ui.checkBoxClosed->setEnabled(checked);
-    ui.spinBoxSeams->setEnabled(checked);
+    ui.doubleSpinBoxSeams->setEnabled(checked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,8 +304,8 @@ void DialogDetail::ObjectChanged(int row)
     }
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
+    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

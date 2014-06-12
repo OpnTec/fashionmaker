@@ -271,6 +271,11 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Equidistan
         qDebug()<<"Not enough points for building the equidistant.\n";
         return ekv;
     }
+    if (width <= 0)
+    {
+        qDebug()<<"Width <= 0.\n";
+        return ekv;
+    }
     for (qint32 i = 0; i < points.size(); ++i )
     {
         if (i != points.size()-1)

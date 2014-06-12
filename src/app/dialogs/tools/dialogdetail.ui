@@ -41,18 +41,37 @@
          </property>
          <item>
           <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Bias X</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxBiasX">
-           <property name="minimum">
-            <number>-3000</number>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxBiasX">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="maximum">
-            <number>3000</number>
+            <double>900.990000000000009</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelUnitX">
+           <property name="text">
+            <string>cm</string>
            </property>
           </widget>
          </item>
@@ -64,7 +83,7 @@
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
+             <horstretch>1</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
@@ -74,12 +93,25 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBoxBiasY">
-           <property name="minimum">
-            <number>-3000</number>
+          <widget class="QDoubleSpinBox" name="doubleSpinBoxBiasY">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="maximum">
-            <number>3000</number>
+            <double>900.990000000000009</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelUnitY">
+           <property name="text">
+            <string>cm</string>
            </property>
           </widget>
          </item>
@@ -177,7 +209,7 @@
              <widget class="QLabel" name="labelEditWidth">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
+                <horstretch>1</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
@@ -190,9 +222,31 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBoxSeams">
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxSeams">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>1</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximum">
-               <number>3000</number>
+               <double>900.990000000000009</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelUnit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>cm</string>
               </property>
              </widget>
             </item>
