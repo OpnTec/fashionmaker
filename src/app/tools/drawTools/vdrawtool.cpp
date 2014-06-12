@@ -114,7 +114,8 @@ void VDrawTool::FullUpdateFromGuiOk(int result)
     {
         SaveDialogChange();
     }
-    DialogLinkDestroy();
+    delete dialog;
+    dialog=nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,7 +149,6 @@ void VDrawTool::SaveDialogChange()
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::DialogLinkDestroy()
 {
-    delete this->dialog;
     this->dialog=nullptr;
 }
 
