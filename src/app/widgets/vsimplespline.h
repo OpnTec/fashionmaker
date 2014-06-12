@@ -31,15 +31,7 @@
 
 #include <QGraphicsPathItem>
 
-namespace SimpleSpline
-{
-    /**
-     * @brief The Translation enum position point.
-     */
-    enum Translation { FirstPoint, ForthPoint };
-    Q_DECLARE_FLAGS(Translations, Translation)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( SimpleSpline::Translations )
+enum class SimpleSplinePoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleSpline class for simple spline. This object used when we cut spline and want show peaces.

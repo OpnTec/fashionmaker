@@ -36,7 +36,7 @@ const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
 {
@@ -50,7 +50,7 @@ VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Valentina:
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -84,7 +84,7 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
     VToolArc* point = nullptr;
-    point=Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    point=Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -94,8 +94,8 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document::Documents &parse,
-                      const Valentina::Sources &typeCreation)
+                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                      const Source &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -107,7 +107,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(arc);
     }
@@ -120,7 +120,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
         }
     }
     data->AddLengthArc(id);
-    VDrawTool::AddRecord(id, Valentina::ArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
     if (parse == Document::FullParse)
     {
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
@@ -213,7 +213,7 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Arc);
+        emit ChoosedTool(id, SceneObject::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

@@ -103,9 +103,9 @@ void DialogIndividualMeasurements::DialogAccepted()
         VIndividualMeasurements m(data);
         m.setContent(_tablePath);
         const qint32 index = ui->comboBoxUnits->currentIndex();
-        Valentina::Units unit = VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
+        Unit unit = VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
         m.setUnit(unit);
-        qApp->setPatternUnit( m.Unit());
+        qApp->setPatternUnit( m.MUnit());
         QFile iMeasur(_tablePath);
         if (iMeasur.open(QIODevice::WriteOnly| QIODevice::Truncate))
         {
@@ -236,6 +236,6 @@ void DialogIndividualMeasurements::NewTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::InitUnits()
 {
-    ui->comboBoxUnits->addItem(tr("centimeter"), QVariant(VDomDocument::UnitsToStr(Valentina::Cm)));
-    ui->comboBoxUnits->addItem(tr("inch"), QVariant(VDomDocument::UnitsToStr(Valentina::Inch)));
+    ui->comboBoxUnits->addItem(tr("centimeter"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
+    ui->comboBoxUnits->addItem(tr("inch"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 }

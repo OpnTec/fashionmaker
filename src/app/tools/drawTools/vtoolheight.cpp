@@ -35,11 +35,11 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
 //---------------------------------------------------------------------------------------------------------------------
 VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                         const Valentina::Sources &typeCreation, QGraphicsItem * parent)
+                         const Source &typeCreation, QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent), p1LineId(p1LineId), p2LineId(p2LineId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -77,14 +77,14 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const quint32 p1LineId = dialogTool->getP1LineId();
     const quint32 p2LineId = dialogTool->getP2LineId();
     Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                         VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
@@ -92,7 +92,7 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
 
     QPointF pHeight = FindPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()), basePoint->toQPointF());
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
         data->AddLine(basePointId, id);
@@ -110,7 +110,7 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::Height, doc);
+    VDrawTool::AddRecord(id, Tool::Height, doc);
     if (parse == Document::FullParse)
     {
         VToolHeight *point = new VToolHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId,

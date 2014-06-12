@@ -78,7 +78,7 @@ private:
      * @param width width of equidistant.
      * @return return painter path of equidistant.
      */
-    static QPainterPath     Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width);
+    static QPainterPath     Equidistant(QVector<QPointF> points, const EquidistantType &eqv, const qreal &width);
     /**
      * @brief CheckLoops seek and delete loops in equidistant.
      * @param points vector of points of equidistant.

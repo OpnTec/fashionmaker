@@ -33,7 +33,7 @@
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)
     :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position)
@@ -85,7 +85,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
+void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
                                       const QPointF &controlPoint, const QPointF &splinePoint)
 {
     if (this->indexSpline == indexSpline && this->position == pos)

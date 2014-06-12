@@ -31,15 +31,7 @@
 
 #include <QGraphicsPathItem>
 
-namespace SimpleArc
-{
-    /**
-     * @brief The Translation enum position point.
-     */
-    enum Translation { FirstPoint, ForthPoint };
-    Q_DECLARE_FLAGS(Translations, Translation)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( SimpleArc::Translations )
+enum class SimpleArcPoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleArc class for simple arc. This object used when we cut arc and want show peaces.

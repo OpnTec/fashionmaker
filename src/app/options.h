@@ -29,7 +29,6 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <QFlags>
 #include <csignal>
 
 #ifdef Q_OS_WIN32
@@ -40,81 +39,40 @@ class QString;
 
 #define SceneSize 50000
 
-namespace Valentina
+enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail };
+enum class Tool : char
 {
-    /**
-     * @brief The Scene enum
-     */
-    enum Scene { Point, Line, Spline, Arc, SplinePath, Detail };
-    Q_DECLARE_FLAGS(Scenes, Scene)
+    ArrowTool,
+    SinglePointTool,
+    EndLineTool,
+    LineTool,
+    AlongLineTool,
+    ShoulderPointTool,
+    NormalTool,
+    BisectorTool,
+    LineIntersectTool,
+    SplineTool,
+    CutSplineTool,
+    CutArcTool,
+    ArcTool,
+    SplinePathTool,
+    CutSplinePathTool,
+    PointOfContact,
+    DetailTool,
+    NodePoint,
+    NodeArc,
+    NodeSpline,
+    NodeSplinePath,
+    Height,
+    Triangle,
+    PointOfIntersection,
+    UnionDetails
+};
 
-    /**
-     * @brief The Tool enum
-     */
-    enum Tool
-    {
-        ArrowTool,
-        SinglePointTool,
-        EndLineTool,
-        LineTool,
-        AlongLineTool,
-        ShoulderPointTool,
-        NormalTool,
-        BisectorTool,
-        LineIntersectTool,
-        SplineTool,
-        CutSplineTool,
-        CutArcTool,
-        ArcTool,
-        SplinePathTool,
-        CutSplinePathTool,
-        PointOfContact,
-        DetailTool,
-        NodePoint,
-        NodeArc,
-        NodeSpline,
-        NodeSplinePath,
-        Height,
-        Triangle,
-        PointOfIntersection,
-        UnionDetails
-    };
-    Q_DECLARE_FLAGS(Tools, Tool)
-
-    /**
-     * @brief The Source enum
-     */
-    enum Source { FromGui, FromFile, FromTool };
-    Q_DECLARE_FLAGS(Sources, Source)
-
-    /**
-     * @brief The Draw enum
-     */
-    enum Draw { Calculation, Modeling };
-    Q_DECLARE_FLAGS(Draws, Draw)
-
-    /**
-     * @brief The Unit enum
-     */
-    enum Unit { Mm, Cm, Inch };
-    Q_DECLARE_FLAGS(Units, Unit)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Scenes )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Tools )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Sources )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Draws )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Valentina::Units )
-Q_DECLARE_METATYPE(Valentina::Unit)
-
-namespace Pattern
-{
-    /**
-     * @brief The Scene enum
-     */
-    enum Measurement { Standard, Individual };
-    Q_DECLARE_FLAGS(Measurements, Measurement)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( Pattern::Measurements )
+enum class Source : char { FromGui, FromFile, FromTool };
+enum class Draw : char { Calculation, Modeling };
+enum class Unit : char { Mm, Cm, Inch };
+enum class MeasurementsType : char { Standard, Individual };
 
 // measurements
 extern const QString headGirth_M;

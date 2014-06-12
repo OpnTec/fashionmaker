@@ -315,7 +315,7 @@ const QStringList VAbstractTool::Styles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc)
+void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *doc)
 {
     quint32 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();

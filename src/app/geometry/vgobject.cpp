@@ -33,7 +33,7 @@
  * @brief VGObject default constructor.
  */
 VGObject::VGObject()
-    :_id(0), type(GObject::Point), idObject(0), _name(QString()), mode(Valentina::Calculation)
+    :_id(0), type(GOType::Point), idObject(0), _name(QString()), mode(Draw::Calculation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ VGObject::VGObject()
  * @param idObject id parent object.
  * @param mode mode creation. Used in modeling mode.
  */
-VGObject::VGObject(const GObject::Type &type, const quint32 &idObject, const Valentina::Draws &mode)
+VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode)
     :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
 {}
 
@@ -117,7 +117,7 @@ void VGObject::setName(const QString &name)
  * @brief getMode return mode creation.
  * @return mode.
  */
-Valentina::Draws VGObject::getMode() const
+Draw VGObject::getMode() const
 {
     return mode;
 }
@@ -127,7 +127,7 @@ Valentina::Draws VGObject::getMode() const
  * @brief setMode set mode creation.
  * @param value mode.
  */
-void VGObject::setMode(const Valentina::Draws &value)
+void VGObject::setMode(const Draw &value)
 {
     mode = value;
 }
@@ -137,7 +137,7 @@ void VGObject::setMode(const Valentina::Draws &value)
  * @brief getType return object type.
  * @return type.
  */
-GObject::Type VGObject::getType() const
+GOType VGObject::getType() const
 {
     return type;
 }

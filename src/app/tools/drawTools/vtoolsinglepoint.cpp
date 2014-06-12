@@ -36,7 +36,7 @@
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                     const QString &namePP, const QString &mPath, QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
@@ -48,7 +48,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
     setColorLabel(Qt::black);
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }

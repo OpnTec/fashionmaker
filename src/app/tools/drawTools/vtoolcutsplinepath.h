@@ -54,7 +54,7 @@ public:
      */
     VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                        const quint32 &splinePathId, const quint32 &splPath1id, const quint32 &splPath2id,
-                       const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -83,7 +83,7 @@ public:
      */
     static void  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &splinePathId,
                         const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                        const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrSplinePath;
 public slots:
@@ -164,7 +164,7 @@ private:
      * @param splPathid splinePath id.
      * @param tr splineType type.
      */
-    void          RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSpline::Translation tr);
+    void          RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSplinePoint tr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H

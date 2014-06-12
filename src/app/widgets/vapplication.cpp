@@ -50,7 +50,7 @@ const qreal VApplication::PrintDPI = 96.0;
 
 //---------------------------------------------------------------------------------------------------------------------
 VApplication::VApplication(int &argc, char **argv)
-    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
+    : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
@@ -116,13 +116,13 @@ double VApplication::toPixel(double unit) const
     double result = 0;
     switch (_patternUnit)
     {
-    case Valentina::Mm:
+    case Unit::Mm:
         result = (unit / 25.4) * PrintDPI;
         break;
-    case Valentina::Cm:
+    case Unit::Cm:
         result = ((unit * 10.0) / 25.4) * PrintDPI;
         break;
-    case Valentina::Inch:
+    case Unit::Inch:
         result = unit * PrintDPI;
         break;
     default:
@@ -137,13 +137,13 @@ double VApplication::fromPixel(double pix) const
     double result = 0;
     switch (_patternUnit)
     {
-    case Valentina::Mm:
+    case Unit::Mm:
         result = (pix / PrintDPI) * 25.4;
         break;
-    case Valentina::Cm:
+    case Unit::Cm:
         result = ((pix / PrintDPI) * 25.4) / 10.0;
         break;
-    case Valentina::Inch:
+    case Unit::Inch:
         result = pix / PrintDPI;
         break;
     default:
@@ -155,7 +155,7 @@ double VApplication::fromPixel(double pix) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::pathToTables() const
 {
-    if (_patternType == Pattern::Individual)
+    if (_patternType == MeasurementsType::Individual)
     {
         return QStringLiteral("://tables/individual/individual.vit");
     }
@@ -208,13 +208,13 @@ void VApplication::InitLineWidth()
 {
     switch (_patternUnit)
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             _widthMainLine = DefWidth;
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             _widthMainLine = DefWidth/10.0;
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             _widthMainLine = DefWidth/25.4;
             break;
         default:
@@ -1633,7 +1633,7 @@ void VApplication::BiasTokens(int position, int bias, QMap<int, QString> &tokens
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
+void VApplication::setPatternUnit(const Unit &patternUnit)
 {
     _patternUnit = patternUnit;
     InitLineWidth();

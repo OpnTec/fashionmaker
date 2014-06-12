@@ -37,12 +37,12 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 //---------------------------------------------------------------------------------------------------------------------
 VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
                                const quint32 &firstPointId, const quint32 &secondPointId,
-                               const QString &typeLine, const Valentina::Sources &typeCreation,
+                               const QString &typeLine, const Source &typeCreation,
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId)
 {
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -170,7 +170,7 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
     const QString pointName = dialogTool->getPointName();
     VToolAlongLine *point=nullptr;
     point = Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -182,7 +182,7 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
 VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
                             const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                            const Document &parse, const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -191,7 +191,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     line.setLength(qApp->toPixel(CheckFormula(formula, data)));
 
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         data->AddLine(firstPointId, id);
@@ -207,7 +207,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::AlongLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,

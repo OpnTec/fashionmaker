@@ -44,7 +44,7 @@ class VStandardMeasurements:public VDomDocument
 public:
     VStandardMeasurements(VContainer *data);
     virtual ~VStandardMeasurements();
-    Valentina::Units Unit();
+    Unit MUnit();
     QString Description();
     void Measurements();
     void SetSize();

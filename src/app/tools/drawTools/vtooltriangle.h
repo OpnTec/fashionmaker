@@ -52,7 +52,7 @@ public:
                     */
                    VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
                                  const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -84,7 +84,7 @@ public:
     static void    Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id, const quint32 &axisP2Id,
                           const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
                           VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                          const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                          const Document &parse, const Source &typeCreation);
     /**
      * @brief FindPoint find point intersection two foots right triangle.
      * @param axisP1 first axis point.

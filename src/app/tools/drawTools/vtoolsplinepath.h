@@ -46,7 +46,7 @@ public:
                    * @param typeCreation way we create this tool.
                    * @param parent parent object.
                    */
-                  VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+                  VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                   QGraphicsItem * parent = nullptr);
      /**
       * @brief setDialog set dialog when user want change tool option.
@@ -71,8 +71,8 @@ public:
       * @param typeCreation way we create this tool.
       */
      static void  Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene,
-                         VPattern *doc, VContainer *data, const Document::Documents &parse,
-                         const Valentina::Sources &typeCreation);
+                         VPattern *doc, VContainer *data, const Document &parse,
+                         const Source &typeCreation);
      static const QString ToolType;
      /**
       * @brief UpdatePathPoint update spline path in pattern file.
@@ -89,7 +89,7 @@ signals:
      * @param controlPoint new position control point.
      * @param splinePoint new position spline point.
      */
-    void             RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
+    void             RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
                                  const QPointF &controlPoint, const QPointF &splinePoint);
     /**
      * @brief setEnabledPoint disable control points.
@@ -103,7 +103,7 @@ public slots:
      * @param position position point in spline.
      * @param pos new position.
      */
-    void             ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
+    void             ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                                 const QPointF &pos);
 protected:
     /**

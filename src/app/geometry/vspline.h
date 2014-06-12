@@ -46,9 +46,9 @@ public:
     VSpline();
     VSpline (const VSpline &spline );
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-             quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
+             quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
-             Valentina::Draws mode = Valentina::Calculation);
+             Draw mode = Draw::Calculation);
     VSpline &operator=(const VSpline &spl);
     VPointF GetP1 () const;
     QPointF GetP2 () const;

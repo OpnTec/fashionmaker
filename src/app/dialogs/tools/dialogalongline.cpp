@@ -108,9 +108,9 @@ DialogAlongLine::~DialogAlongLine()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogAlongLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogAlongLine::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         if (number == 0)
         {

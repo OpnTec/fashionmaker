@@ -30,8 +30,8 @@
 #include "../exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Valentina::Draws mode)
-    : VGObject(GObject::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
+VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)
+    : VGObject(GOType::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,13 +121,13 @@ qreal VSplinePath::GetLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &pos, const VSplinePoint &point)
+void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point)
 {
     if (indexSpline < 1 || indexSpline > Count())
     {
         throw VException(tr("This spline does not exist."));
     }
-    if (pos == SplinePoint::FirstPoint)
+    if (pos == SplinePointPosition::FirstPoint)
     {
         path[indexSpline-1] = point;
     }
@@ -138,13 +138,13 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePoint::Position &p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const
+VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const
 {
     if (indexSpline < 1 || indexSpline > Count())
     {
         throw VException(tr("This spline does not exist."));
     }
-    if (pos == SplinePoint::FirstPoint)
+    if (pos == SplinePointPosition::FirstPoint)
     {
         return path.at(indexSpline-1);
     }

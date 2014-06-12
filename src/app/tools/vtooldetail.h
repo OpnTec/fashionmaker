@@ -52,7 +52,7 @@ public:
      * @param scene pointer to scene.
      * @param parent parent object
      */
-    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
+    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, QGraphicsItem * parent = nullptr);
     ~VToolDetail();
     /**
@@ -70,7 +70,7 @@ public:
     {
         //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
-        node->setMode(Valentina::Modeling);
+        node->setMode(Draw::Modeling);
         return data->AddGObject(node);
     }
 
@@ -93,8 +93,8 @@ public:
      * @param typeCreation way we create this tool.
      */
     static void        Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
-                              VPattern *doc, VContainer *data, const Document::Documents &parse,
-                              const Valentina::Sources &typeCreation);
+                              VPattern *doc, VContainer *data, const Document &parse,
+                              const Source &typeCreation);
     static const QString TagName;
     static const QString TagNode;
     static const QString AttrSupplement;

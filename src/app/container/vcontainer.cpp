@@ -100,16 +100,16 @@ void VContainer::setData(const VContainer &data)
         i.next();
         switch (i.value()->getType())
         {
-            case (GObject::Arc):
+            case (GOType::Arc):
                 CopyGObject<VArc>(data, i.key());
                 break;
-            case (GObject::Point):
+            case (GOType::Point):
                 CopyGObject<VPointF>(data, i.key());
                 break;
-            case (GObject::Spline):
+            case (GOType::Spline):
                 CopyGObject<VSpline>(data, i.key());
                 break;
-            case (GObject::SplinePath):
+            case (GOType::SplinePath):
                 CopyGObject<VSplinePath>(data, i.key());
                 break;
             default:
@@ -386,7 +386,7 @@ void VContainer::AddLineAngle(const QString &name, const qreal &value)
 qreal VContainer::GetValueStandardTableRow(const QString& name) const
 {
     const VMeasurement m = GetMeasurement(name);
-    if (qApp->patternType() == Pattern::Individual)
+    if (qApp->patternType() == MeasurementsType::Individual)
     {
         return m.GetValue();
     }
@@ -405,7 +405,7 @@ qreal VContainer::GetValueStandardTableRow(const QString& name) const
 qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 {
     const VIncrement icr = GetIncrement(name);
-    if (qApp->patternType() == Pattern::Individual)
+    if (qApp->patternType() == MeasurementsType::Individual)
     {
         return icr.GetValue();
     }
@@ -454,7 +454,7 @@ void VContainer::ClearCalculationGObjects()
         while (i.hasNext())
         {
             i.next();
-            if (i.value()->getMode() == Valentina::Calculation)
+            if (i.value()->getMode() == Draw::Calculation)
             {
                 delete i.value();
                 gObjects.remove(i.key());

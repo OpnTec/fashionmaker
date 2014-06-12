@@ -36,14 +36,14 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
+                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
                          QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -55,10 +55,10 @@ VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 id
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Document::Documents &parse, const Valentina::Sources &typeCreation,
+                                 const Document &parse, const Source &typeCreation,
                                  const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Valentina::NodeSpline, doc);
+    VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
@@ -132,7 +132,7 @@ void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Spline);
+        emit ChoosedTool(id, SceneObject::Spline);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

@@ -44,7 +44,7 @@ public:
     VPointF (const VPointF &point );
     VPointF (const QPointF &point );
     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
-              Valentina::Draws mode = Valentina::Calculation);
+              Draw mode = Draw::Calculation);
     virtual ~VPointF(){}
     VPointF &operator=(const VPointF &point);
     qreal       mx() const;

@@ -163,9 +163,9 @@ void DialogArc::SetRadius(const QString &value)
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogArc::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
 

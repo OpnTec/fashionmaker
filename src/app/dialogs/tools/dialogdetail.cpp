@@ -78,24 +78,26 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
  * @param id id of objects (points, arcs, splines, spline paths)
  * @param type type of object
  */
-void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogDetail::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type != Valentina::Line && type != Valentina::Detail)
+    if (type != SceneObject::Line && type != SceneObject::Detail)
     {
         switch (type)
         {
-            case (Valentina::Arc):
-                NewItem(id, Valentina::NodeArc, NodeDetail::Contour);
+            case (SceneObject::Arc):
+                NewItem(id, Tool::NodeArc, NodeDetail::Contour);
                 break;
-            case (Valentina::Point):
-                NewItem(id, Valentina::NodePoint, NodeDetail::Contour);
+            case (SceneObject::Point):
+                NewItem(id, Tool::NodePoint, NodeDetail::Contour);
                 break;
-            case (Valentina::Spline):
-                NewItem(id, Valentina::NodeSpline, NodeDetail::Contour);
+            case (SceneObject::Spline):
+                NewItem(id, Tool::NodeSpline, NodeDetail::Contour);
                 break;
-            case (Valentina::SplinePath):
-                NewItem(id, Valentina::NodeSplinePath, NodeDetail::Contour);
+            case (SceneObject::SplinePath):
+                NewItem(id, Tool::NodeSplinePath, NodeDetail::Contour);
                 break;
+            case (SceneObject::Line):
+            case (SceneObject::Detail):
             default:
                 qDebug()<<tr("Got wrong scene object. Ignore.");
                 break;
@@ -134,36 +136,57 @@ void DialogDetail::DialogAccepted()
  * @param mx offset respect to x
  * @param my offset respect to y
  */
-void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
+void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                            qreal mx, qreal my)
 {
     QString name;
     switch (typeTool)
     {
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
         {
             const VPointF *point = data->GeometricObject<const VPointF *>(id);
             name = point->name();
             break;
         }
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
         {
             const VArc *arc = data->GeometricObject<const VArc *>(id);
             name = arc->name();
             break;
         }
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
         {
             const VSpline *spl = data->GeometricObject<const VSpline *>(id);
             name = spl->name();
             break;
         }
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
         {
             const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
             name = splPath->name();
             break;
         }
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"Got wrong tools. Ignore.";
             break;

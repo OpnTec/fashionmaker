@@ -344,41 +344,41 @@ void VDomDocument::setContent(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Valentina::Units VDomDocument::StrToUnits(const QString &unit)
+Unit VDomDocument::StrToUnits(const QString &unit)
 {
     QStringList units{UnitMM, UnitCM, UnitINCH};
-    Valentina::Units result = Valentina::Cm;
+    Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {
         case 0:// mm
-            result = Valentina::Mm;
+            result = Unit::Mm;
             break;
         case 1:// cm
-            result = Valentina::Cm;
+            result = Unit::Cm;
             break;
         case 2:// inch
-            result = Valentina::Inch;
+            result = Unit::Inch;
             break;
         default:
-            result = Valentina::Cm;
+            result = Unit::Cm;
             break;
     }
     return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
+QString VDomDocument::UnitsToStr(const Unit &unit)
 {
     QString result;
     switch (unit)
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             result = "mm";
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             result = "cm";
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             result = "inch";
             break;
         default:

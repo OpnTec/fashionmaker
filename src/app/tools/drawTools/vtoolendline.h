@@ -52,7 +52,7 @@ public:
                   */
                  VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                               const QString &formula, const qreal &angle, const quint32 &basePointId,
-                              const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                              const Source &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -86,7 +86,7 @@ public:
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                         QString &formula, const qreal &angle, const quint32 &basePointId, const qreal &mx,
                         const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                        const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
     /**

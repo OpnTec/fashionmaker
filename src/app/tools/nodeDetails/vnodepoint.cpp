@@ -37,7 +37,7 @@ const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                       const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
+                       const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
                        QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
@@ -52,7 +52,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -64,10 +64,10 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
 
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation, const quint32 &idTool,
+                        const Document &parse, const Source &typeCreation, const quint32 &idTool,
                         QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Valentina::NodePoint, doc);
+    VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
     {
         //TODO Need create garbage collector and remove all nodes, what we don't use.
@@ -147,7 +147,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Point);
+        emit ChoosedTool(id, SceneObject::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

@@ -50,7 +50,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
-    if (qApp->patternType() == Pattern::Individual)
+    if (qApp->patternType() == MeasurementsType::Individual)
     {
         const QString filePath = doc->MPath();
         try
@@ -82,7 +82,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillLengthSplines();
     FillLengthArcs();
 
-    if (qApp->patternType() == Pattern::Standard)
+    if (qApp->patternType() == MeasurementsType::Standard)
     {
         ui->pagePersonalInformation->setVisible(false);
     }
@@ -106,8 +106,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(VIndividualMeasurements::Male)));
-        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(VIndividualMeasurements::Female)));
+        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(SexType::Male)));
+        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(SexType::Female)));
         qint32 index = ui->comboBoxSex->findData(m->GenderToStr(m->Sex()));
         if (index != -1)
         {
@@ -175,7 +175,7 @@ void DialogIncrements::FillMeasurements()
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
 
-        if (qApp->patternType() == Pattern::Standard)
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(iMap.key())));
             item->setTextAlignment(Qt::AlignHCenter);
@@ -190,7 +190,7 @@ void DialogIncrements::FillMeasurements()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetMeasurements->setItem(currentRow, 2, item);
 
-        if (qApp->patternType() == Pattern::Standard)
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m.GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
@@ -255,7 +255,7 @@ void DialogIncrements::FillIncrements()
         item->setData(Qt::UserRole, incr.getId());
         ui->tableWidgetIncrement->setItem(currentRow, 0, item);
 
-        if (qApp->patternType() == Pattern::Standard)
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
             item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(iMap.value())));
             item->setTextAlignment(Qt::AlignHCenter);
@@ -270,7 +270,7 @@ void DialogIncrements::FillIncrements()
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
-        if (qApp->patternType() == Pattern::Standard)
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
             item = new QTableWidgetItem(QString().setNum(incr.getKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
@@ -493,7 +493,7 @@ void DialogIncrements::OpenTable()
 {
     QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
             .arg(doc->UnitsToStr(qApp->patternUnit()));
-    if (qApp->patternType() == Pattern::Individual)
+    if (qApp->patternType() == MeasurementsType::Individual)
     {
         const QString filter(tr("Individual measurements (*.vit)"));
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
@@ -517,7 +517,7 @@ void DialogIncrements::OpenTable()
             emit DialogClosed(QDialog::Rejected);
             return;
         }
-        Valentina::Units mUnit = m1->Unit();
+        Unit mUnit = m1->MUnit();
         if (qApp->patternUnit() != mUnit)
         {
             QMessageBox::critical(this, tr("Wrong units."), text);
@@ -549,7 +549,7 @@ void DialogIncrements::OpenTable()
 
             m1 = new VStandardMeasurements(data);
             m1->setContent(filePath);
-            Valentina::Units mUnit = m1->Unit();
+            Unit mUnit = m1->MUnit();
             if (qApp->patternUnit() != mUnit)
             {
                 QMessageBox::critical(this, tr("Wrong units."), text);

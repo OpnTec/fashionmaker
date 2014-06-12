@@ -52,7 +52,7 @@ public:
                     */
                    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                                 const quint32 &thirdPointId, const Valentina::Sources &typeCreation,
+                                 const quint32 &thirdPointId, const Source &typeCreation,
                                  QGraphicsItem * parent = nullptr);
     /**
      * @brief FindPoint find bisector point.
@@ -96,8 +96,8 @@ public:
     static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                           const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                           const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                          VPattern *doc, VContainer *data, const Document::Documents &parse,
-                          const Valentina::Sources &typeCreation);
+                          VPattern *doc, VContainer *data, const Document &parse,
+                          const Source &typeCreation);
     static const QString ToolType;
 public slots:
     /**

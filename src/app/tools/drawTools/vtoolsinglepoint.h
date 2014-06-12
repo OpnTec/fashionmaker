@@ -47,7 +47,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+                 VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                    const QString &namePP = QString(), const QString &mPath = QString(),
                                    QGraphicsItem * parent = nullptr );
     /**

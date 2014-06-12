@@ -35,13 +35,13 @@ const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 //---------------------------------------------------------------------------------------------------------------------
 VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id,
                                        const quint32 &p1Line1, const quint32 &p2Line1, const quint32 &p1Line2,
-                                       const quint32 &p2Line2, const Valentina::Sources &typeCreation,
+                                       const quint32 &p2Line2, const Source &typeCreation,
                                        QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), p1Line1(p1Line1), p2Line1(p2Line1), p1Line2(p1Line2),
     p2Line2(p2Line2)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -77,15 +77,15 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     const quint32 p2Line2Id = dialogTool->getP2Line2();
     const QString pointName = dialogTool->getPointName();
     Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
                                 const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                                VPattern *doc, VContainer *data, const Document::Documents &parse,
-                                const Valentina::Sources &typeCreation)
+                                VPattern *doc, VContainer *data, const Document &parse,
+                                const Source &typeCreation)
 {
     const VPointF *p1Line1 = data->GeometricObject<const VPointF *>(p1Line1Id);
     const VPointF *p2Line1 = data->GeometricObject<const VPointF *>(p2Line1Id);
@@ -99,7 +99,7 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         quint32 id = _id;
-        if (typeCreation == Valentina::FromGui)
+        if (typeCreation == Source::FromGui)
         {
             id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
             data->AddLine(p1Line1Id, id);
@@ -119,7 +119,7 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Valentina::LineIntersectTool, doc);
+        VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
         if (parse == Document::FullParse)
         {
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id, p2Line1Id, p1Line2Id,

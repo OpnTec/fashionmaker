@@ -85,7 +85,7 @@ public slots:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedItem(quint32 id, const Valentina::Scenes &type);
+    void          ChoosedItem(quint32 id, const SceneObject &type);
     /**
      * @brief SetFactor set current scale factor of scene.
      * @param factor scene scale factor. scene scale factor.
@@ -118,7 +118,7 @@ signals:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedObject(quint32 id, Valentina::Scenes type);
+    void          ChoosedObject(quint32 id, SceneObject type);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.

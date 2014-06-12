@@ -140,8 +140,8 @@ public:
      */
     static void    ValidateXML(const QString &schema, const QString &fileName);
     void           setContent(const QString &fileName);
-    static Valentina::Units StrToUnits(const QString &unit);
-    static QString UnitsToStr(const Valentina::Units &unit);
+    static Unit StrToUnits(const QString &unit);
+    static QString UnitsToStr(const Unit &unit);
     virtual bool   SaveDocument(const QString &fileName);
     QString        Major() const;
     QString        Minor() const;
@@ -177,10 +177,10 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
 }
 
 template <>
-inline void VDomDocument::SetAttribute<Pattern::Measurements>(QDomElement &domElement, const QString &name,
-                                                              const Pattern::Measurements &value) const
+inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
+                                                              const MeasurementsType &value) const
 {
-    if (value == Pattern::Standard)
+    if (value == MeasurementsType::Standard)
     {
         domElement.setAttribute(name, "standard");
     }

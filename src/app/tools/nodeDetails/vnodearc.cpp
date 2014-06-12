@@ -35,14 +35,14 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Valentina::Sources &typeCreation,
+VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
                    const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -53,10 +53,10 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document::Documents &parse,
-                      const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *parent)
+void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document &parse,
+                      const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Valentina::NodeArc, doc);
+    VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
@@ -128,7 +128,7 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Arc);
+        emit ChoosedTool(id, SceneObject::Arc);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

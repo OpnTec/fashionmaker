@@ -57,7 +57,7 @@ const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
@@ -66,18 +66,39 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     {
         switch (detail.at(i).getTypeTool())
         {
-            case (Valentina::NodePoint):
+            case (Tool::NodePoint):
                 InitTool<VNodePoint>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeArc):
+            case (Tool::NodeArc):
                 InitTool<VNodeArc>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeSpline):
+            case (Tool::NodeSpline):
                 InitTool<VNodeSpline>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeSplinePath):
+            case (Tool::NodeSplinePath):
                 InitTool<VNodeSplinePath>(scene, detail.at(i));
                 break;
+            case (Tool::ArrowTool):
+            case (Tool::SinglePointTool):
+            case (Tool::EndLineTool):
+            case (Tool::LineTool):
+            case (Tool::AlongLineTool):
+            case (Tool::ShoulderPointTool):
+            case (Tool::NormalTool):
+            case (Tool::BisectorTool):
+            case (Tool::LineIntersectTool):
+            case (Tool::SplineTool):
+            case (Tool::CutSplineTool):
+            case (Tool::CutArcTool):
+            case (Tool::ArcTool):
+            case (Tool::SplinePathTool):
+            case (Tool::CutSplinePathTool):
+            case (Tool::PointOfContact):
+            case (Tool::DetailTool):
+            case (Tool::Height):
+            case (Tool::Triangle):
+            case (Tool::PointOfIntersection):
+            case (Tool::UnionDetails):
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
                 break;
@@ -90,7 +111,7 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
-    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
        AddToFile();
     }
@@ -125,30 +146,51 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
         quint32 id = 0;
         switch (detail.at(i).getTypeTool())
         {
-            case (Valentina::NodePoint):
+            case (Tool::NodePoint):
             {
                 id = CreateNode<VPointF>(data, detail.at(i).getId());
-                VNodePoint::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
+                VNodePoint::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeArc):
+            case (Tool::NodeArc):
             {
                 id = CreateNode<VArc>(data, detail.at(i).getId());
-                VNodeArc::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
+                VNodeArc::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeSpline):
+            case (Tool::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, detail.at(i).getId());
-                VNodeSpline::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
+                VNodeSpline::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeSplinePath):
+            case (Tool::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, detail.at(i).getId());
-                VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Valentina::FromGui);
+                VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
+            case (Tool::ArrowTool):
+            case (Tool::SinglePointTool):
+            case (Tool::EndLineTool):
+            case (Tool::LineTool):
+            case (Tool::AlongLineTool):
+            case (Tool::ShoulderPointTool):
+            case (Tool::NormalTool):
+            case (Tool::BisectorTool):
+            case (Tool::LineIntersectTool):
+            case (Tool::SplineTool):
+            case (Tool::CutSplineTool):
+            case (Tool::CutArcTool):
+            case (Tool::ArcTool):
+            case (Tool::SplinePathTool):
+            case (Tool::CutSplinePathTool):
+            case (Tool::PointOfContact):
+            case (Tool::DetailTool):
+            case (Tool::Height):
+            case (Tool::Triangle):
+            case (Tool::PointOfIntersection):
+            case (Tool::UnionDetails):
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
@@ -157,15 +199,15 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
         det.append(node);
     }
     det.setName(detail.getName());
-    Create(0, det, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                         VContainer *data, const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         id = data->AddDetail(newDetail);
     }
@@ -177,7 +219,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Valentina::DetailTool, doc);
+    VAbstractTool::AddRecord(id, Tool::DetailTool, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -237,7 +279,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         }
     }
     delete dialog;
-    dialog = 0;
+    dialog = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,7 +384,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Detail);
+        emit ChoosedTool(id, SceneObject::Detail);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -407,18 +449,39 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     }
     switch (node.getTypeTool())
     {
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, NodeArc);
             break;
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
             doc->SetAttribute(nod, AttrType, NodePoint);
             break;
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
             doc->SetAttribute(nod, AttrType, NodeSpline);
             break;
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
             doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;

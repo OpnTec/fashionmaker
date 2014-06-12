@@ -71,9 +71,9 @@ quint32 DialogSpline::getP1() const
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogSpline::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogSpline::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)

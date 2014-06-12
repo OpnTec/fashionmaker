@@ -127,7 +127,7 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Point);
+        emit ChoosedTool(id, SceneObject::Point);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

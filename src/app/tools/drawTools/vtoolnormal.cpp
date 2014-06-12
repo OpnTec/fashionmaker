@@ -36,12 +36,12 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
 //---------------------------------------------------------------------------------------------------------------------
 VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const quint32 &firstPointId,
-                         const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                         const quint32 &secondPointId, const Source &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId)
 {
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -80,7 +80,7 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const qreal angle = dialogTool->getAngle();
     VToolNormal *point = nullptr;
     point=Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -92,8 +92,8 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                         VPattern *doc, VContainer *data, const Document::Documents &parse,
-                         const Valentina::Sources &typeCreation)
+                         VPattern *doc, VContainer *data, const Document &parse,
+                         const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -103,7 +103,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
     QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                             qApp->toPixel(result), angle);
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         data->AddLine(firstPointId, id);
@@ -117,7 +117,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::NormalTool, doc);
+    VDrawTool::AddRecord(id, Tool::NormalTool, doc);
     if (parse == Document::FullParse)
     {
         VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,

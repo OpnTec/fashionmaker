@@ -65,7 +65,7 @@ void VMainGraphicsScene::setTransform(const QTransform &transform)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::ChoosedItem(quint32 id, const Valentina::Scenes &type)
+void VMainGraphicsScene::ChoosedItem(quint32 id, const SceneObject &type)
 {
     emit ChoosedObject(id, type);
 }

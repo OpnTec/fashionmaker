@@ -36,14 +36,14 @@ const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
+                                 const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
                                  QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -55,10 +55,10 @@ VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, qu
 
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                             const Document::Documents &parse, const Valentina::Sources &typeCreation,
+                             const Document &parse, const Source &typeCreation,
                              const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Valentina::NodeSplinePath, doc);
+    VAbstractTool::AddRecord(id, Tool::NodeSplinePath, doc);
     if (parse == Document::FullParse)
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
@@ -135,7 +135,7 @@ void VNodeSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::SplinePath);
+        emit ChoosedTool(id, SceneObject::SplinePath);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }

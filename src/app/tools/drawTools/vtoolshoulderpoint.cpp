@@ -36,11 +36,11 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 //---------------------------------------------------------------------------------------------------------------------
 VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                        const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                       const quint32 &pShoulder, const Valentina::Sources &typeCreation,
+                                       const quint32 &pShoulder, const Source &typeCreation,
                                        QGraphicsItem * parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder)
 {
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -108,7 +108,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = nullptr;
     point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -121,7 +121,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
                                 const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                                const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                                const Document &parse, const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(p1Line);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
@@ -132,7 +132,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
     QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                    shoulderPoint->toQPointF(), qApp->toPixel(result));
     quint32 id =  _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         data->AddLine(p1Line, id);
@@ -148,7 +148,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::ShoulderPointTool, doc);
+    VDrawTool::AddRecord(id, Tool::ShoulderPointTool, doc);
     if (parse == Document::FullParse)
     {
         VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,

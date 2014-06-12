@@ -51,7 +51,7 @@ public:
      * @param qoParent QObject parent.
      * @param parent QGraphicsItem parent.
      */
-    VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Valentina::Sources &typeCreation,
+    VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
                 const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
     /**
      * @brief Create help create tool.
@@ -65,7 +65,7 @@ public:
      * @return pointer to node.
      */
     static VNodeSpline *Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                               const Document::Documents &parse, const Valentina::Sources &typeCreation,
+                               const Document &parse, const Source &typeCreation,
                                const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;

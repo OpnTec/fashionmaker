@@ -63,10 +63,10 @@ public:
      * @return value that is returned from the receiver's event handler.
      */
     virtual bool          notify(QObject * receiver, QEvent * event);
-    Valentina::Units      patternUnit() const;
-    void                  setPatternUnit(const Valentina::Units &patternUnit);
-    Pattern::Measurements patternType() const;
-    void                  setPatternType(const Pattern::Measurements &patternType);
+    Unit      patternUnit() const;
+    void                  setPatternUnit(const Unit &patternUnit);
+    MeasurementsType patternType() const;
+    void                  setPatternType(const MeasurementsType &patternType);
     double                toPixel(double unit) const;
     double                fromPixel(double pix) const;
     static const qreal    PrintDPI;
@@ -90,8 +90,8 @@ public:
     void                  setAutoSaveTimer(QTimer *value);
 private:
     Q_DISABLE_COPY(VApplication)
-    Valentina::Units      _patternUnit;
-    Pattern::Measurements _patternType;
+    Unit      _patternUnit;
+    MeasurementsType _patternType;
     qreal                 _widthMainLine;
     qreal                 _widthHairLine;
     QMap<QString, VTranslation> measurements;
@@ -121,19 +121,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Valentina::Units VApplication::patternUnit() const
+inline Unit VApplication::patternUnit() const
 {
     return _patternUnit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Pattern::Measurements VApplication::patternType() const
+inline MeasurementsType VApplication::patternType() const
 {
     return _patternType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VApplication::setPatternType(const Pattern::Measurements &patternType)
+inline void VApplication::setPatternType(const MeasurementsType &patternType)
 {
     _patternType = patternType;
 }

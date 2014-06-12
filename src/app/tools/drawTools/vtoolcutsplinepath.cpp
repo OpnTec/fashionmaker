@@ -40,7 +40,7 @@ const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
 VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &formula, const quint32 &splinePathId,
                                        const quint32 &splPath1id, const quint32 &splPath2id,
-                                       const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                                       const Source &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), splinePathId(splinePathId), firstSpline(), secondSpline(),
       splPath1id (splPath1id), splPath2id(splPath2id)
 {
@@ -49,16 +49,16 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
     Q_ASSERT_X(splPath2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
     firstSpline = new VSimpleSpline(splPath1id, &currentColor, &factor);
-    RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
+    RefreshSpline(firstSpline, splPath1id, SimpleSplinePoint::ForthPoint);
     firstSpline->setParentItem(this);
     connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
     secondSpline = new VSimpleSpline(splPath2id, &currentColor, &factor);
-    RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
+    RefreshSpline(secondSpline, splPath2id, SimpleSplinePoint::FirstPoint);
     secondSpline->setParentItem(this);
     connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSplinePath::SplineChoosed);
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -89,14 +89,14 @@ void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
-    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QString &formula,
                             const quint32 &splinePathId, const qreal &mx, const qreal &my,
                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                            const Document &parse, const Source &typeCreation)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     SCASSERT(splPath != nullptr);
@@ -109,7 +109,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
 
     const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
     VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);
     }
@@ -128,7 +128,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
 
     VSplinePath *splPath1 = new VSplinePath();
     VSplinePath *splPath2 = new VSplinePath();
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         for (qint32 i = 0; i < splPath->CountPoint(); i++)
         {
@@ -215,7 +215,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::CutSplinePathTool, doc);
+    VDrawTool::AddRecord(id, Tool::CutSplinePathTool, doc);
     if (parse == Document::FullParse)
     {
         VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
@@ -245,7 +245,7 @@ void VToolCutSplinePath::FullUpdateFromFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::SplineChoosed(quint32 id)
 {
-    emit ChoosedTool(id, Valentina::SplinePath);
+    emit ChoosedTool(id, SceneObject::SplinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,8 +315,8 @@ void VToolCutSplinePath::RefreshDataInFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::RefreshGeometry()
 {
-    RefreshSpline(firstSpline, splPath1id, SimpleSpline::ForthPoint);
-    RefreshSpline(secondSpline, splPath2id, SimpleSpline::FirstPoint);
+    RefreshSpline(firstSpline, splPath1id, SimpleSplinePoint::ForthPoint);
+    RefreshSpline(secondSpline, splPath2id, SimpleSplinePoint::FirstPoint);
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
@@ -338,13 +338,13 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSpline::Translation tr)
+void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSplinePoint tr)
 {
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(splPathid);
     QPainterPath path;
     path.addPath(splPath->GetPath());
     path.setFillRule( Qt::WindingFill );
-    if (tr == SimpleSpline::FirstPoint)
+    if (tr == SimpleSplinePoint::FirstPoint)
     {
         VSpline spl = splPath->GetSpline(1);
         path.translate(-spl.GetP1().toQPointF().x(), -spl.GetP1().toQPointF().y());

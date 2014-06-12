@@ -31,9 +31,12 @@
 
 #include "vabstractnode.h"
 #include "../../xml/vpattern.h"
+#include <QGraphicsEllipseItem>
 
 class VPointF;
 class VGraphicsSimpleTextItem;
+class QGraphicsLineItem;
+class QGraphicsItem;
 
 /**
  * @brief The VNodePoint class point detail node.
@@ -53,7 +56,7 @@ public:
      * @param qoParent QObject parent
      * @param parent parent object.
      */
-    VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Valentina::Sources &typeCreation,
+    VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
                const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
     /**
      * @brief Create help create tool.
@@ -66,8 +69,8 @@ public:
      * @param idTool tool id.
      * @param parent QObject parent
      */
-    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document::Documents &parse,
-                        const Valentina::Sources &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
+    static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document &parse,
+                        const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
     /**

@@ -51,7 +51,7 @@ public:
                   * @param parent parent object.
                   */
                  VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint,
-                           quint32 secondPoint, const QString &typeLine, const Valentina::Sources &typeCreation,
+                           quint32 secondPoint, const QString &typeLine, const Source &typeCreation,
                            QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -79,7 +79,7 @@ public:
      */
     static void  Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                         const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                        const Document &parse, const Source &typeCreation);
     static const QString TagName;
 public slots:
     /**

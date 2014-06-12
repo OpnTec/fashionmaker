@@ -106,9 +106,9 @@ DialogCutArc::~DialogCutArc()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogCutArc::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogCutArc::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Arc)
+    if (type == SceneObject::Arc)
     {
         const VArc *arc = data->GeometricObject<const VArc *>(id);
         ChangeCurrentText(ui->comboBoxArc, arc->name());
@@ -150,7 +150,7 @@ void DialogCutArc::SaveData()
  */
 void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
 {
-    setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboMode::CutArc);
+    setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboBoxCutArc::CutArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

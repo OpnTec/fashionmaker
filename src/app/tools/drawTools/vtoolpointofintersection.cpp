@@ -35,11 +35,11 @@ const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfInters
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *data, const quint32 &id,
                                                    const quint32 &firstPointId, const quint32 &secondPointId,
-                                                   const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                                                   const Source &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -71,21 +71,21 @@ void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *sc
     const quint32 firstPointId = dialogTool->getFirstPointId();
     const quint32 secondPointId = dialogTool->getSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
                                       const quint32 &secondPointId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                                      const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                                      const Document &parse, const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
 
     QPointF point(firstPoint->x(), secondPoint->y());
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));
     }
@@ -97,7 +97,7 @@ void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointNam
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::PointOfIntersection, doc);
+    VDrawTool::AddRecord(id, Tool::PointOfIntersection, doc);
     if (parse == Document::FullParse)
     {
         VToolPointOfIntersection *point = new VToolPointOfIntersection(doc, data, id, firstPointId,

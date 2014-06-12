@@ -51,7 +51,7 @@ public:
     ptrdiff_t        getIndexD1() const;
     ptrdiff_t        getIndexD2() const;
 public slots:
-    void             ChoosedObject(quint32 id, const Valentina::Scenes &type);
+    void             ChoosedObject(quint32 id, const SceneObject &type);
     virtual void     DialogAccepted();
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.
@@ -88,7 +88,7 @@ private:
     quint32           p2;
 
     bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
-    void             ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail,
+    void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
                                    ptrdiff_t &index);
 };
 

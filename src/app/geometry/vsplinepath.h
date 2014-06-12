@@ -33,15 +33,7 @@
 #include "vspline.h"
 #include "vsplinepoint.h"
 
-namespace SplinePoint
-{
-    /**
-     * @brief The Position enum position in spline.
-     */
-    enum Position { FirstPoint, LastPoint };
-    Q_DECLARE_FLAGS(Positions, Position)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( SplinePoint::Positions )
+enum class SplinePointPosition : char { FirstPoint, LastPoint };
 
 /**
  * @brief The VSplinePath class keep information about splinePath.
@@ -56,7 +48,7 @@ public:
      * @param idObject parent id.
      * @param mode mode creation spline path.
      */
-    VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
+    VSplinePath(qreal kCurve = 1, quint32 idObject = 0, Draw mode = Draw::Calculation);
     /**
      * @brief VSplinePath copy constructor.
      * @param splPath spline path.
@@ -109,14 +101,14 @@ public:
      * @param pos position point in spline.
      * @param point point.
      */
-    void          UpdatePoint(qint32 indexSpline, const SplinePoint::Position &pos, const VSplinePoint &point);
+    void          UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
     /**
      * @brief GetSplinePoint return spline point from list.
      * @param indexSpline spline index in list.
      * @param pos position point in spline.
      * @return spline point.
      */
-    VSplinePoint  GetSplinePoint(qint32 indexSpline, SplinePoint::Position pos) const;
+    VSplinePoint  GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
     /**
      * @brief Clear clear list of points.
      */

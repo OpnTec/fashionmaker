@@ -47,7 +47,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     {
         switch (detail.at(i).getTypeTool())
         {
-            case (Valentina::NodePoint):
+            case (Tool::NodePoint):
             {
                 const VPointF *point = data->GeometricObject<const VPointF*>(detail.at(i).getId());
                 points.append(point->toQPointF());
@@ -60,7 +60,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Valentina::NodeArc):
+            case (Tool::NodeArc):
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, arc->GetPoints());
@@ -84,7 +84,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Valentina::NodeSpline):
+            case (Tool::NodeSpline):
             {
                 const VSpline *spline = data->GeometricObject<const VSpline *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, spline->GetPoints());
@@ -108,7 +108,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
-            case (Valentina::NodeSplinePath):
+            case (Tool::NodeSplinePath):
             {
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, splinePath->GetPathPoints());
@@ -132,8 +132,29 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
                 }
             }
             break;
+            case (Tool::ArrowTool):
+            case (Tool::SinglePointTool):
+            case (Tool::EndLineTool):
+            case (Tool::LineTool):
+            case (Tool::AlongLineTool):
+            case (Tool::ShoulderPointTool):
+            case (Tool::NormalTool):
+            case (Tool::BisectorTool):
+            case (Tool::LineIntersectTool):
+            case (Tool::SplineTool):
+            case (Tool::CutSplineTool):
+            case (Tool::CutArcTool):
+            case (Tool::ArcTool):
+            case (Tool::SplinePathTool):
+            case (Tool::CutSplinePathTool):
+            case (Tool::PointOfContact):
+            case (Tool::DetailTool):
+            case (Tool::Height):
+            case (Tool::Triangle):
+            case (Tool::PointOfIntersection):
+            case (Tool::UnionDetails):
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<<detail.at(i).getTypeTool();
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(detail.at(i).getTypeTool());
                 break;
         }
     }
@@ -154,11 +175,11 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
         QPainterPath ekv;
         if (detail.getClosed() == true)
         {
-            ekv = Equidistant(pointsEkv, Detail::CloseEquidistant, qApp->toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(detail.getWidth()));
         }
         else
         {
-            ekv = Equidistant(pointsEkv, Detail::OpenEquidistant, qApp->toPixel(detail.getWidth()));
+            ekv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(detail.getWidth()));
         }
         path.addPath(ekv);
         path.setFillRule(Qt::WindingFill);
@@ -241,7 +262,7 @@ QVector<QPointF> VEquidistant::CorrectEquidistantPoints(const QVector<QPointF> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Equidistant &eqv, const qreal &width)
+QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const EquidistantType &eqv, const qreal &width)
 {
     QPainterPath ekv;
     QVector<QPointF> ekvPoints;
@@ -267,29 +288,29 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Detail::Eq
             }
         }
     }
-    if (eqv == Detail::CloseEquidistant)
+    if (eqv == EquidistantType::CloseEquidistant)
     {
         points.append(points.at(0));
     }
     for (qint32 i = 0; i < points.size(); ++i )
     {
-        if ( i == 0 && eqv == Detail::CloseEquidistant)
+        if ( i == 0 && eqv == EquidistantType::CloseEquidistant)
         {//first point, polyline closed
             ekvPoints<<EkvPoint(QLineF(points.at(points.size()-2), points.at(points.size()-1)),
                                 QLineF(points.at(1), points.at(0)), width);
             continue;
         }
-        else if (i == 0 && eqv == Detail::OpenEquidistant)
+        else if (i == 0 && eqv == EquidistantType::OpenEquidistant)
         {//first point, polyline doesn't closed
             ekvPoints.append(SingleParallelPoint(QLineF(points.at(0), points.at(1)), 90, width));
             continue;
         }
-        if (i == points.size()-1 && eqv == Detail::CloseEquidistant)
+        if (i == points.size()-1 && eqv == EquidistantType::CloseEquidistant)
         {//last point, polyline closed
             ekvPoints.append(ekvPoints.at(0));
             continue;
         }
-        else if (i == points.size()-1 && eqv == Detail::OpenEquidistant)
+        else if (i == points.size()-1 && eqv == EquidistantType::OpenEquidistant)
         {//last point, polyline doesn't closed
                 ekvPoints.append(SingleParallelPoint(QLineF(points.at(points.size()-1), points.at(points.size()-2)),
                                                      -90, width));

@@ -38,11 +38,11 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 //---------------------------------------------------------------------------------------------------------------------
 VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const quint32 &basePointId,
-                           const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                           const Source &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, basePointId, angle, parent)
 {
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -80,7 +80,7 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
 
     VToolEndLine *point = nullptr;
     point=Create(0, pointName, typeLine, formula, angle, basePointId, 5, 10, scene, doc, data, Document::FullParse,
-                 Valentina::FromGui);
+                 Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -92,7 +92,7 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
 VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                    QString &formula, const qreal &angle, const quint32 &basePointId,
                                    const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                   VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                                   VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
@@ -100,7 +100,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
     line.setLength(qApp->toPixel(CheckFormula(formula, data)));
     line.setAngle(angle);
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         data->AddLine(basePointId, id);
@@ -114,7 +114,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::EndLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formula, angle,

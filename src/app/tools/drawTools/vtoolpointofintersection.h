@@ -50,7 +50,7 @@ public:
                   */
                  VToolPointOfIntersection(VPattern *doc, VContainer *data, const quint32 &id,
                                           const quint32 &firstPointId, const quint32 &secondPointId,
-                                          const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
+                                          const Source &typeCreation, QGraphicsItem * parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -79,8 +79,8 @@ public:
      */
     static void  Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
                         const quint32 &secondPointId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                        VPattern *doc, VContainer *data, const Document::Documents &parse,
-                        const Valentina::Sources &typeCreation);
+                        VPattern *doc, VContainer *data, const Document &parse,
+                        const Source &typeCreation);
     static const QString ToolType;
 public slots:
     /**

@@ -89,7 +89,7 @@ void DialogStandardMeasurements::DialogAccepted()
         VDomDocument::ValidateXML("://schema/standard_measurements.xsd", _tablePath);
         VStandardMeasurements m(data);
         m.setContent(_tablePath);
-        qApp->setPatternUnit(m.Unit());
+        qApp->setPatternUnit(m.MUnit());
     }
     catch (VException &e)
     {

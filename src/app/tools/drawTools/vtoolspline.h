@@ -46,7 +46,7 @@ public:
                   * @param typeCreation way we create this tool.
                   * @param parent parent object.
                   */
-                 VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+                 VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                               QGraphicsItem * parent = nullptr );
     /**
      * @brief setDialog set dialog when user want change tool option.
@@ -79,7 +79,7 @@ public:
     static void  Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                         const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                         VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                        const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
     /**
@@ -88,7 +88,7 @@ public slots:
      * @param position position point in spline.
      * @param pos new position.
      */
-    void             ControlPointChangePosition (const qint32 &indexSpline, const SplinePoint::Position &position,
+    void             ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                                  const QPointF &pos);
 protected:
     /**

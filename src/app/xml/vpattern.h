@@ -35,15 +35,7 @@
 class VDataTool;
 class VMainGraphicsScene;
 
-namespace Document
-{
-    /**
-     * @brief The Document enum parse types.
-     */
-    enum Document { LiteParse, FullParse};
-    Q_DECLARE_FLAGS(Documents, Document)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS(Document::Documents)
+enum class Document : char { LiteParse, FullParse};
 
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
@@ -62,15 +54,15 @@ class VPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
 public:
-    VPattern(VContainer *data, Valentina::Draws *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
+    VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
     void           CreateEmptyFile(const QString &tablePath);
-    void           ChangeActivPP(const QString& name, const Document::Documents &parse = Document::FullParse);
+    void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
     QString        GetNameActivDraw() const;
     bool           GetActivDrawElement(QDomElement &element) const;
     bool           appendPP(const QString& name);
     bool           SetNameDraw(const QString& name);
-    void           Parse(const Document::Documents &parse);
+    void           Parse(const Document &parse);
     QHash<quint32, VDataTool*>* getTools();
     VDataTool*     getTool(const quint32 &id);
     QVector<VToolRecord> *getHistory();
@@ -88,8 +80,8 @@ public:
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
     QString        MPath() const;
     void           SetPath(const QString &path);
-    Valentina::Units MUnit() const;
-    Pattern::Measurements MType() const;
+    Unit           MUnit() const;
+    MeasurementsType MType() const;
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -175,7 +167,7 @@ private:
     QStringList    patternPieces;
 
     /** @brief mode current draw mode. */
-    Valentina::Draws    *mode;
+    Draw    *mode;
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
@@ -183,27 +175,27 @@ private:
     bool           CheckNamePP(const QString& name) const;
     void           SetActivPP(const QString& name);
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                    const QDomNode& node, const Document::Documents &parse);
+                                    const QDomNode& node, const Document &parse);
     void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
-                                 const QDomNode& node, const Document::Documents &parse, const Valentina::Draws &mode);
+                                 const QDomNode& node, const Document &parse, const Draw &mode);
     void           ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
-                                      const Document::Documents &parse);
+                                      const Document &parse);
     void           ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
-                                const Document::Documents &parse);
+                                const Document &parse);
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                     const Document::Documents &parse, const QString &type);
+                                     const Document &parse, const QString &type);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                    const Document::Documents &parse);
+                                    const Document &parse);
     void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                      const Document::Documents &parse, const QString& type);
+                                      const Document &parse, const QString& type);
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                   const Document::Documents &parse, const QString& type);
+                                   const Document &parse, const QString& type);
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document::Documents &parse, const QString& type);
+                                     const Document &parse, const QString& type);
     void           ParseIncrementsElement(const QDomNode& node);
     quint32        GetParametrId(const QDomElement& domElement) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
-    void           PrepareForParse(const Document::Documents &parse);
+    void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();
 };
 
