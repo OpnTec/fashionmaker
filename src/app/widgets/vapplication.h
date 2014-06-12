@@ -63,9 +63,9 @@ public:
      * @return value that is returned from the receiver's event handler.
      */
     virtual bool          notify(QObject * receiver, QEvent * event);
-    Unit      patternUnit() const;
+    Unit                  patternUnit() const;
     void                  setPatternUnit(const Unit &patternUnit);
-    MeasurementsType patternType() const;
+    MeasurementsType      patternType() const;
     void                  setPatternType(const MeasurementsType &patternType);
     double                toPixel(double unit) const;
     double                fromPixel(double pix) const;

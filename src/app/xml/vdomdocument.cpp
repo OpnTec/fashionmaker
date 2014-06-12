@@ -367,22 +367,58 @@ Unit VDomDocument::StrToUnits(const QString &unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::UnitsToStr(const Unit &unit)
+/**
+ * @brief UnitsToStr translate unit to string.
+ *
+ * This method used when need write unit in xml file and for showing unit in dialogs.
+ * @param unit curent unit
+ * @param translate true if need show translated name. Default value false.
+ * @return string reprezantation for unit.
+ */
+QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
 {
     QString result;
     switch (unit)
     {
         case Unit::Mm:
-            result = "mm";
+            if (translate)
+            {
+                result = QObject::tr("mm");
+            }
+            else
+            {
+                result = "mm";
+            }
             break;
         case Unit::Cm:
-            result = "cm";
+            if (translate)
+            {
+                result = QObject::tr("cm");
+            }
+            else
+            {
+                result = "cm";
+            }
             break;
         case Unit::Inch:
-            result = "inch";
+            if (translate)
+            {
+                result = QObject::tr("in", "inch abbreviation");
+            }
+            else
+            {
+                result = "inch";//I decided use full name in xml file.
+            }
             break;
         default:
-            result = "cm";
+            if (translate)
+            {
+                result = QObject::tr("cm");
+            }
+            else
+            {
+                result = "cm";
+            }
             break;
     }
     return result;

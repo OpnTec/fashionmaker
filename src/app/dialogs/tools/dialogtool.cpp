@@ -34,6 +34,8 @@
 #include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
+#include "../../widgets/vapplication.h"
+#include "../../xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -454,12 +456,12 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             if (osSeparatorValue)
             {
                 QLocale loc = QLocale::system();
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             else
             {
                 QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
@@ -515,12 +517,12 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
             if (osSeparatorValue)
             {
                 QLocale loc = QLocale::system();
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             else
             {
                 QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
