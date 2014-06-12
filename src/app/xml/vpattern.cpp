@@ -639,6 +639,7 @@ bool VPattern::SaveDocument(const QString &fileName)
         e.CriticalMessageBox(tr("Error no unique id."));
         return false;
     }
+
     return VDomDocument::SaveDocument(fileName);
 }
 
@@ -1865,7 +1866,28 @@ void VPattern::UpdateMeasurements()
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::GarbageCollector()
+{
+    QHashIterator<quint32, VDataTool*> t(tools);
+    while (t.hasNext()) {
+        t.next();
+        VDataTool *tool = t.value();
+        if(tool->referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(t.key()));
+            if(domElement.isElement()){
+                QDomNode parent = domElement.parentNode();
+                if(!parent.isNull()){
+                    parent.removeChild(domElement);
+                } else {
+                    qWarning()<<tr("Can't get parent for object id = %1").arg(t.key());
+                }
+            }
+        }
+    }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
 QDomElement VPattern::GetPPElement(const QString &name)
 {
     if (name.isEmpty() == false)

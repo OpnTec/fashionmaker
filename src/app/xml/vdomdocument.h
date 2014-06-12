@@ -152,7 +152,6 @@ protected:
      */
     VContainer     *data;
     void setTagText(const QString &tag, const QString &text);
-
 private:
     Q_DISABLE_COPY(VDomDocument)
     /**

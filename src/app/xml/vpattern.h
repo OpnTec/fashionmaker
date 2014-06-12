@@ -197,6 +197,7 @@ private:
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();
+    void           GarbageCollector();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
