@@ -39,12 +39,19 @@ VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QG
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VAbstractSpline::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -66,12 +73,22 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool highlight tool.
+ * @param id object id in container
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VAbstractSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VAbstractSpline::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -79,6 +96,10 @@ void VAbstractSpline::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -87,6 +108,10 @@ void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 // cppcheck-suppress unusedFunction
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -95,6 +120,12 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange hadle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -114,6 +145,10 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key release events.
+ * @param event key release event.
+ */
 void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())

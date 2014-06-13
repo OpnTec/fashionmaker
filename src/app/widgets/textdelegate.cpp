@@ -31,6 +31,10 @@
 #include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief TextDelegate constructor.
+ * @param parent parent widget.
+ */
 TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
     regex(regex)
 {
@@ -39,6 +43,14 @@ TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief createEditorReturns the widget used to edit the item specified by index for editing. The parent widget and
+ * style option are used to control how the editor widget appears.
+ * @param parent parent widget.
+ * @param option item options.
+ * @param index index of data item.
+ * @return editor to be used for editing the data item.
+ */
 QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(option);
@@ -51,6 +63,12 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setEditorData sets the data to be displayed and edited by the editor from the data model item specified by
+ * the model index.
+ * @param editor editor.
+ * @param index index of data item.
+ */
 void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     QString text = index.model()->data(index, Qt::EditRole).toString();
@@ -66,6 +84,12 @@ void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setModelData gets data from the editor widget and stores it in the specified model at the item index.
+ * @param editor editor.
+ * @param model model.
+ * @param index index of data item.
+ */
 void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(editor);
@@ -80,6 +104,13 @@ void TextDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief updateEditorGeometry updates the editor for the item specified by index according to the style option
+ * given.
+ * @param editor editor.
+ * @param option item options.
+ * @param index index of data item.
+ */
 void TextDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                         const QModelIndex &index) const
 {
@@ -88,6 +119,9 @@ void TextDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief commitAndCloseEditor commit value if changed.
+ */
 void TextDelegate::commitAndCloseEditor()
 {
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
@@ -107,6 +141,10 @@ void TextDelegate::commitAndCloseEditor()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief InitText initialize text.
+ * @param text text.
+ */
 void TextDelegate::InitText(const QString &text)
 {
     lastText = text;

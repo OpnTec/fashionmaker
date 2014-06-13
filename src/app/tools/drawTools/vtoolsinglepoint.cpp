@@ -36,6 +36,14 @@
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolSinglePoint constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                     const QString &namePP, const QString &mPath, QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
@@ -59,6 +67,9 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolSinglePoint::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -69,6 +80,9 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolSinglePoint::AddToFile()
 {
     Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
@@ -103,6 +117,9 @@ void VToolSinglePoint::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolSinglePoint::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -118,6 +135,12 @@ void VToolSinglePoint::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle tool change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
@@ -147,6 +170,9 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief decrementReferens decrement referens parents objects.
+ */
 void VToolSinglePoint::decrementReferens()
 {
     if (_referens > 1)
@@ -156,6 +182,9 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -169,6 +198,10 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setColorLabel change color for label and label line.
+ * @param color new color.
+ */
 void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
@@ -176,12 +209,19 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
     ContextMenu<DialogSinglePoint>(this, event, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void  VToolSinglePoint::FullUpdateFromFile()
 {
     VPointF point = *VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -189,6 +229,10 @@ void  VToolSinglePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -206,6 +250,10 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -213,6 +261,10 @@ void VToolSinglePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSinglePoint>(this, event, false);

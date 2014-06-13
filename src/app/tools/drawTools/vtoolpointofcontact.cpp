@@ -34,6 +34,18 @@
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolPointOfContact constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param arcRadius string with formula radius arc.
+ * @param center id center arc point.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
                                          const QString &radius, const quint32 &center,
                                          const quint32 &firstPointId, const quint32 &secondPointId,
@@ -52,6 +64,9 @@ VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolPointOfContact::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -66,6 +81,14 @@ void VToolPointOfContact::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindPoint return point intersection line and arc.
+ * @param arcRadius string with formula radius arc.
+ * @param center center arc point.
+ * @param firstPoint first line point.
+ * @param secondPoint second line point.
+ * @return point intersection.
+ */
 QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                                        const QPointF &secondPoint)
 {
@@ -93,7 +116,15 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
+VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+                                                 VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
@@ -114,10 +145,27 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center, const quint32 &firstPointId,
-                                 const quint32 &secondPointId, const QString &pointName, const qreal &mx,
-                                 const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                                 const Document &parse, const Source &typeCreation)
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param arcRadius string with formula radius arc.
+ * @param center id center arc point.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param pointName point name.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
+VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &radius, const quint32 &center,
+                                                 const quint32 &firstPointId, const quint32 &secondPointId,
+                                                 const QString &pointName, const qreal &mx, const qreal &my,
+                                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                                 const Document &parse, const Source &typeCreation)
 {
     const VPointF *centerP = data->GeometricObject<const VPointF *>(center);
     const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
@@ -164,6 +212,9 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolPointOfContact::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -178,6 +229,10 @@ void VToolPointOfContact::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolPointOfContact::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -185,18 +240,29 @@ void VToolPointOfContact::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfContact>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfContact>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolPointOfContact::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -217,6 +283,9 @@ void VToolPointOfContact::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolPointOfContact::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -234,6 +303,9 @@ void VToolPointOfContact::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolPointOfContact::RemoveReferens()
 {
     doc->DecrementReferens(center);
@@ -242,6 +314,9 @@ void VToolPointOfContact::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

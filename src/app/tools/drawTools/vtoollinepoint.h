@@ -38,56 +38,26 @@ class VToolLinePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-                      /**
-                       * @brief VToolLinePoint constructor.
-                       * @param doc dom document container.
-                       * @param data container with variables.
-                       * @param id object id in container.
-                       * @param typeLine line type.
-                       * @param formula string with length formula.
-                       * @param basePointId id base line point.
-                       * @param angle line angle.
-                       * @param parent parent object.
-                       */
-                      VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                                     const QString &formula, const quint32 &basePointId, const qreal &angle,
-                                     QGraphicsItem * parent = nullptr);
+    VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
+                   const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
 public slots:
-    /**
-     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName new name active pattern peace.
-     */
     virtual void      ChangedActivDraw(const QString &newName);
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void      SetFactor(qreal factor);
 protected:
-    /**
-     * @brief formula string with length formula.
-     */
+    /** @brief formula string with length formula. */
     QString           formula;
-    /**
-     * @brief angle line angle.
-     */
+
+    /** @brief angle line angle. */
     qreal             angle;
-    /**
-     * @brief basePointId id base line point.
-     */
+
+    /** @brief basePointId id base line point. */
     quint32            basePointId;
-    /**
-     * @brief mainLine line item.
-     */
+
+    /** @brief mainLine line item. */
     QGraphicsLineItem *mainLine;
-    /**
-     * @brief RefreshGeometry  refresh item on scene.
-     */
+
     virtual void      RefreshGeometry();
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
-    virtual void      RemoveReferens() {doc->DecrementReferens(basePointId);}
+    virtual void      RemoveReferens();
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

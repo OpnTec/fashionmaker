@@ -33,6 +33,14 @@
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VControlPointSpline constructor.
+ * @param indexSpline index spline in list.
+ * @param position position point in spline.
+ * @param controlPoint control point.
+ * @param splinePoint spline point.
+ * @param parent parent object.
+ */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)
@@ -59,6 +67,10 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VControlPointSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -73,6 +85,12 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
@@ -85,6 +103,13 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshLine refresh line control point.
+ * @param indexSpline index spline in list.
+ * @param pos position point in spline.
+ * @param controlPoint control point.
+ * @param splinePoint spline point.
+ */
 void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
                                       const QPointF &controlPoint, const QPointF &splinePoint)
 {
@@ -97,6 +122,10 @@ void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setEnabledPoint disable or enable control point.
+ * @param enable true - enable.
+ */
 void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)

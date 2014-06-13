@@ -36,6 +36,18 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolCutArc constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param formula string with formula length first arc.
+ * @param arcId id arc in data container.
+ * @param arc1id id first cutting arc.
+ * @param arc2id id second cutting arc.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                          const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
                          const Source &typeCreation, QGraphicsItem * parent)
@@ -67,6 +79,9 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolCutArc::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -79,8 +94,14 @@ void VToolCutArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data)
+/**
+ * @brief Create help create tool form GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
+VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
@@ -98,9 +119,23 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param formula string with formula length first arc.
+ * @param arcId id arc in data container.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document &parse, const Source &typeCreation)
+                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
 
@@ -163,6 +198,9 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolCutArc::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -175,12 +213,20 @@ void VToolCutArc::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ArcChoosed send signal about selection from cutted arc.
+ * @param id object id in container.
+ */
 void VToolCutArc::ArcChoosed(quint32 id)
 {
     emit ChoosedTool(id, SceneObject::Arc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolCutArc::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -205,18 +251,29 @@ void VToolCutArc::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutArc>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutArc>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolCutArc::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -235,6 +292,9 @@ void VToolCutArc::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolCutArc::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -250,6 +310,9 @@ void VToolCutArc::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolCutArc::RefreshGeometry()
 {
     RefreshArc(firstArc, arc1id, SimpleArcPoint::ForthPoint);
@@ -258,6 +321,9 @@ void VToolCutArc::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -269,6 +335,12 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshArc refresh arc on scene.
+ * @param sArc arc.
+ * @param arcid arc id.
+ * @param tr arc type.
+ */
 void VToolCutArc::RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArcPoint tr)
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(arcid);

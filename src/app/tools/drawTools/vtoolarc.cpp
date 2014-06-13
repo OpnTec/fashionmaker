@@ -36,6 +36,14 @@ const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolArc constuctor.
+ * @param doc dom document container
+ * @param data container with variables
+ * @param id object id in container
+ * @param typeCreation way we create this tool.
+ * @param parent parent object
+ */
 VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                    QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
@@ -61,6 +69,9 @@ VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &ty
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolArc::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -74,6 +85,13 @@ void VToolArc::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool
+ * @param dialog dialog options.
+ * @param scene pointer to scene.
+ * @param doc dom document container
+ * @param data container with variables
+ */
 VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -93,6 +111,19 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool form GUI.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param center id arc center point.
+ * @param radius arc radius.
+ * @param f1 start angle of arc.
+ * @param f2 end angle of arc.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
                       const Source &typeCreation)
@@ -134,12 +165,19 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolArc::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolArc::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -160,12 +198,22 @@ void VToolArc::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool highlight tool.
+ * @param id object id in container
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VToolArc::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolArc::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -173,12 +221,19 @@ void VToolArc::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogArc>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolArc::AddToFile()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
@@ -195,6 +250,9 @@ void VToolArc::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolArc::RefreshDataInFile()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
@@ -209,6 +267,10 @@ void VToolArc::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -219,6 +281,10 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -227,6 +293,10 @@ void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 //cppcheck-suppress unusedFunction
 void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
@@ -235,6 +305,9 @@ void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolArc::RemoveReferens()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
@@ -242,6 +315,12 @@ void VToolArc::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle tool change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -261,6 +340,10 @@ QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key release events.
+ * @param event key release event.
+ */
 void VToolArc::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -275,6 +358,9 @@ void VToolArc::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolArc::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -287,6 +373,9 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolArc::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));

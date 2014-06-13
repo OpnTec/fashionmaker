@@ -46,6 +46,18 @@ const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolUnionDetails costructor.
+ * @param doc dom document container.
+ * @param data dom document container.
+ * @param id object id in container.
+ * @param d1 first detail.
+ * @param d2 second detail.
+ * @param indexD1 index edge in first detail.
+ * @param indexD2 index edge in second detail.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1,
                                      const VDetail &d2, const quint32 &indexD1, const quint32 &indexD2,
                                      const Source &typeCreation, QObject *parent)
@@ -62,6 +74,20 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToNewDetail create united detail adding one node per time.
+ * @param tool tool that make union.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param newDetail united detail.
+ * @param det detail what we union.
+ * @param i index node in detail.
+ * @param idTool id tool union details.
+ * @param dx bias node x axis.
+ * @param dy bias node y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
                                        const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
@@ -250,6 +276,18 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdatePoints update data for united details.
+ * @param idDetail id united detail.
+ * @param data container with variables.
+ * @param det detail what we union.
+ * @param i index node in detail.
+ * @param idCount count updated or created objects.
+ * @param dx bias node x axis.
+ * @param dy bias node y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
                                      quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
                                      const qreal &angle)
@@ -419,6 +457,14 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BiasRotatePoint bias and rotate point.
+ * @param point point.
+ * @param dx bias x axis.
+ * @param dy bias y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                         const qreal angle)
 {
@@ -431,6 +477,12 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -445,6 +497,21 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param d1 first detail.
+ * @param d2 second detail.
+ * @param d1id id first detail.
+ * @param d2id id second detail.
+ * @param indexD1 index edge in first detail.
+ * @param indexD2 index edge in second detail.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2, const quint32 &d1id,
                                const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -611,6 +678,12 @@ void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetDetailFromFile parse detail from file.
+ * @param doc dom document container.
+ * @param domElement tag in xml tree.
+ * @return detail stored in file.
+ */
 QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomElement &domElement)
 {
     QVector<VDetail> vector;
@@ -667,6 +740,9 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolUnionDetails::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -683,6 +759,9 @@ void VToolUnionDetails::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolUnionDetails::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -698,6 +777,11 @@ void VToolUnionDetails::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddDetail add detail to xml file.
+ * @param domElement tag in xml tree.
+ * @param d detail.
+ */
 void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 {
     QDomElement det = doc->createElement(TagDetail);
@@ -711,6 +795,11 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddNode add node to xml file.
+ * @param domElement tag in xml tree.
+ * @param node node.
+ */
 void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
@@ -769,6 +858,12 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateDetail update detail in xml tree.
+ * @param domNode dom node.
+ * @param d detail.
+ * @return return next detail tag in xml tree if exist.
+ */
 QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail &d)
 {
     //QDomNode domNode = domElement.firstChild();
@@ -795,6 +890,10 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToModeling add tool to xml tree.
+ * @param domElement tag in xml tree.
+ */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;

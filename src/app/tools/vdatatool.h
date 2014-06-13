@@ -41,68 +41,56 @@ class VDataTool : public QObject
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VDataTool constructor.
-     * @param data container with variables
-     * @param parent parent object
-     */
     VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool(){}
-    /**
-     * @brief operator = assignment operator.
-     * @param tool tool
-     * @return tool
-     */
     VDataTool             &operator= (const VDataTool &tool);
-    /**
-     * @brief getData return data container.
-     * @return container.
-     */
     VContainer            getData() const;
-    /**
-     * @brief setData set data container.
-     * @param value container.
-     */
     void                  setData(const VContainer *value);
-    /**
-     * @brief referens return count of referens.
-     * @return count count of referens.
-     */
     virtual quint32       referens() const;
-    /**
-     * @brief incrementReferens increment referens.
-     */
     virtual void          incrementReferens();
-    /**
-     * @brief decrementReferens decrement referens.
-     */
     virtual void          decrementReferens();
 protected:
-    /**
-     * @brief data container with data
-     */
+    /** @brief data container with data */
     VContainer            data;
-    /**
-     * @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool.
-     */
+
+    /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
     quint32                _referens;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getData return data container.
+ * @return container.
+ */
 inline VContainer VDataTool::getData() const
 {
     return data;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setData set data container.
+ * @param value container.
+ */
 inline void VDataTool::setData(const VContainer *value)
 {
     data = *value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief referens return count of referens.
+ * @return count count of referens.
+ */
 inline quint32 VDataTool::referens() const
 {
     return _referens;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief incrementReferens increment referens.
+ */
 inline void VDataTool::incrementReferens()
 {
     ++_referens;

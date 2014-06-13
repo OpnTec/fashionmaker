@@ -32,6 +32,13 @@
 #include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSimpleSpline constructor.
+ * @param id spline id.
+ * @param factor scene scale factor.
+ * @param currentColor current color.
+ * @param parent parent object.
+ */
 VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
@@ -56,6 +63,10 @@ void VSimpleSpline::ChangedActivDraw(const bool &flag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -66,6 +77,10 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -80,6 +95,10 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

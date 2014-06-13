@@ -79,16 +79,7 @@ public:
      */
     VDomDocument(VContainer *data);
     virtual ~VDomDocument();
-    /**
-     * @brief Finds an element by id.
-     * @param id value id attribute.
-     * @return dom element.
-     */
     QDomElement    elementById(const QString& id);
-    /**
-     * @brief Removes all children of a given element tag. RENAME: removeAllChildren
-     * @param element tag
-     */
     void           removeAllChilds(QDomElement &element);
     template <typename T>
     /**
@@ -108,36 +99,11 @@ public:
         val = val.replace(",", ".");
         domElement.setAttribute(name, val);
     }
-    /**
-     * @brief Returns the long long value of the given attribute. RENAME: GetParameterLongLong?
-     * @param domElement tag in xml tree
-     * @param name attribute name
-     * @return long long value
-     */
-    quint32         GetParametrUInt(const QDomElement& domElement, const QString &name,
-                                       const QString &defValue) const;
-    /**
-     * @brief Returns the string value of the given attribute. RENAME: see above
-     *
-     * if attribute empty return default value. If default value empty too throw exception.
-     * @return attribute value
-     * @throw VExceptionEmptyParameter when attribute is empty
-     */
+    quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
-    /**
-     * @brief Returns the double value of the given attribute.
-     * @param domElement tag in xml tree
-     * @param name attribute name
-     * @return double value
-     */
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
-    /**
-     * @brief ValidateXML validate xml file by xsd schema.
-     * @param schema path to schema file.
-     * @param fileName name of xml file.
-     */
     static void    ValidateXML(const QString &schema, const QString &fileName);
     void           setContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
@@ -148,27 +114,19 @@ public:
     QString        Patch() const;
     static void    RemoveAllChild(QDomElement &domElement);
 protected:
-    /**
-     * @brief data container with data.
-     */
+    /** @brief data container with data. */
     VContainer     *data;
+
     void setTagText(const QString &tag, const QString &text);
 private:
     Q_DISABLE_COPY(VDomDocument)
-    /**
-     * @brief Map used for finding element by id.
-     */
+    /** @brief Map used for finding element by id. */
     QHash<QString, QDomElement> map;
 
-    /**
-     * @brief Find element by id.
-     * @param node node
-     * @param id id value
-     * @return true if found
-     */
     bool           find(const QDomElement &node, const QString& id);
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 template <>
 inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const QString &name,
                                                 const QString &value) const
@@ -176,6 +134,7 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
     domElement.setAttribute(name, value);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <>
 inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
                                                               const MeasurementsType &value) const

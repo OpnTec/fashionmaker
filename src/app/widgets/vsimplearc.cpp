@@ -32,8 +32,15 @@
 #include <QGraphicsSceneMouseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSimpleArc constructor.
+ * @param id arc id.
+ * @param currentColor current color.
+ * @param factor scale factor.
+ * @param parent parent object.
+ */
 VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
-:QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
+    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
     if (factor == nullptr)
     {
@@ -48,6 +55,10 @@ VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VSimpleArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -58,6 +69,10 @@ void VSimpleArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -72,6 +87,10 @@ void VSimpleArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VSimpleArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

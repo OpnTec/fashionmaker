@@ -38,107 +38,37 @@ class VToolLineIntersect:public VToolPoint
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VToolLineIntersect constructor.
-                  * @param doc dom document container.
-                  * @param data container with variables.
-                  * @param id object id in container.
-                  * @param p1Line1 id first point first line.
-                  * @param p2Line1 id second point first line.
-                  * @param p1Line2 id first point second line.
-                  * @param p2Line2 id second point second line.
-                  * @param typeCreation way we create this tool.
-                  * @param parent parent object.
-                  */
-                 VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
-                                    const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                                    const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+    VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
+                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
+                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog();
-    /**
-     * @brief Create help create tool from GUI.
-     * @param dialog dialog.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     */
     static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
-    /**
-     * @brief Create help create tool.
-     * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param p1Line1Id id first point first line.
-     * @param p2Line1Id id second point first line.
-     * @param p1Line2Id id first point second line.
-     * @param p2Line2Id id second point second line.
-     * @param pointName point name.
-     * @param mx label bias x axis.
-     * @param my label bias y axis.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
     static void  Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id, const quint32 &p1Line2Id,
                         const quint32 &p2Line2Id, const QString &pointName, const qreal &mx, const qreal &my,
                         VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void SetFactor(qreal factor);
-    /**
-     * @brief ShowContextMenu show context menu.
-     * @param event context menu event.
-     */
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void RefreshDataInFile();
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
     virtual void RemoveReferens();
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
     virtual void SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief p1Line1 id first point first line.
-     */
+    /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;
-    /**
-     * @brief p2Line1 id second point first line.
-     */
+
+    /** @brief p2Line1 id second point first line. */
     quint32       p2Line1;
-    /**
-     * @brief p1Line2 id first point second line.
-     */
+
+    /** @brief p1Line2 id first point second line. */
     quint32       p1Line2;
-    /**
-     * @brief p2Line2 id second point second line.
-     */
+
+    /** @brief p2Line2 id second point second line.*/
     quint32       p2Line2;
 };
 

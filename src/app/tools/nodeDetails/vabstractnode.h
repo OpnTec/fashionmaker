@@ -38,39 +38,21 @@ class VAbstractNode : public VAbstractTool
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VAbstractNode constructor.
-                  * @param doc dom document container.
-                  * @param data container with variables.
-                  * @param id object id in container.
-                  * @param idNode object id in containerNode.
-                  * @param idTool id tool.
-                  * @param parent parent object.
-                  */
-                 VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                               const quint32 &idTool, QObject *parent = nullptr);
+    VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
+                  const quint32 &idTool, QObject *parent = nullptr);
     virtual      ~VAbstractNode() {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;
     virtual void DeleteNode();
     virtual void RestoreNode();
 protected:
-    /**
-     * @brief idNodenode id.
-     */
+    /** @brief idNodenode id. */
     quint32       idNode;
-    /**
-     * @brief idTool id tool.
-     */
+
+    /** @brief idTool id tool. */
     quint32       idTool;
-    /**
-     * @brief AddToModeling add tag to modeling tag current pattern peace.
-     * @param domElement tag.
-     */
+
     void         AddToModeling(const QDomElement &domElement);
-    /**
-     * @brief decrementReferens decrement reference for all parent objects.
-     */
     virtual void decrementReferens();
     virtual void RemoveReferens();
     virtual void RestoreReferens();

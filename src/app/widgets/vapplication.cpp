@@ -49,6 +49,11 @@ const qreal VApplication::PrintDPI = 96.0;
 #define DefWidth 1.2//mm
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication constructor.
+ * @param argc number arguments.
+ * @param argv command line.
+ */
 VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
@@ -66,6 +71,12 @@ VApplication::VApplication(int &argc, char **argv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief notify Reimplemented from QApplication::notify().
+ * @param receiver receiver.
+ * @param event event.
+ * @return value that is returned from the receiver's event handler.
+ */
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {

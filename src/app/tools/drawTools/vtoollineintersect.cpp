@@ -33,6 +33,18 @@
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolLineIntersect constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param p1Line1 id first point first line.
+ * @param p2Line1 id second point first line.
+ * @param p1Line2 id first point second line.
+ * @param p2Line2 id second point second line.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const quint32 &id,
                                        const quint32 &p1Line1, const quint32 &p2Line1, const quint32 &p1Line2,
                                        const quint32 &p2Line2, const Source &typeCreation,
@@ -52,6 +64,9 @@ VToolLineIntersect::VToolLineIntersect(VPattern *doc, VContainer *data, const qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolLineIntersect::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -66,6 +81,13 @@ void VToolLineIntersect::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -81,6 +103,22 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param p1Line1Id id first point first line.
+ * @param p2Line1Id id second point first line.
+ * @param p1Line2Id id first point second line.
+ * @param p2Line2Id id second point second line.
+ * @param pointName point name.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
                                 const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
@@ -137,6 +175,9 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolLineIntersect::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -151,6 +192,10 @@ void VToolLineIntersect::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolLineIntersect::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -158,18 +203,29 @@ void VToolLineIntersect::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersect>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersect>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolLineIntersect::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -190,6 +246,9 @@ void VToolLineIntersect::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolLineIntersect::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -207,6 +266,9 @@ void VToolLineIntersect::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolLineIntersect::RemoveReferens()
 {
     doc->DecrementReferens(p1Line1);
@@ -216,6 +278,9 @@ void VToolLineIntersect::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

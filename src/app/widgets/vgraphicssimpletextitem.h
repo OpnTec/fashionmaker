@@ -39,16 +39,9 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VGraphicsSimpleTextItem default constructor.
-                  * @param parent parent object.
-                  */
+
                  VGraphicsSimpleTextItem(QGraphicsItem * parent = nullptr);
-                 /**
-                  * @brief VGraphicsSimpleTextItem constructor.
-                  * @param text text.
-                  * @param parent parent object.
-                  */
+
                  VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = nullptr );
     /**
      * @brief FontSize return label font size.
@@ -67,32 +60,12 @@ signals:
      */
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
-    /**
-     * @brief itemChange handle item change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
 private:
-    /**
-     * @brief fontSize label font size.
-     */
+    /** @brief fontSize label font size. */
     qint32       fontSize;
 };
 

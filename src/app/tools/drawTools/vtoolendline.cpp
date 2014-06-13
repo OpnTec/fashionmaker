@@ -36,6 +36,18 @@
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolEndLine constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeLine line type.
+ * @param formula string with formula length of line.
+ * @param angle angle of line.
+ * @param basePointId id first point of line.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  const QString &typeLine,
                            const QString &formula, const qreal &angle, const quint32 &basePointId,
                            const Source &typeCreation, QGraphicsItem *parent)
@@ -53,6 +65,9 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolEndLine::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -67,6 +82,14 @@ void VToolEndLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @return the created tool
+ */
 VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -89,6 +112,23 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param typeLine line type.
+ * @param formula string with formula length of line.
+ * @param angle angle of line.
+ * @param basePointId id first point of line.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ * @return the created tool
+ */
 VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                    QString &formula, const qreal &angle, const quint32 &basePointId,
                                    const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
@@ -130,6 +170,9 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolEndLine::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -144,18 +187,29 @@ void VToolEndLine::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogEndLine>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogEndLine>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolEndLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -176,6 +230,9 @@ void VToolEndLine::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolEndLine::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -193,6 +250,9 @@ void VToolEndLine::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolEndLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

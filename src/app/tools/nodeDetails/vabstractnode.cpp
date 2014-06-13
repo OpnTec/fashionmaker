@@ -34,6 +34,15 @@ const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VAbstractNode constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idNode object id in containerNode.
+ * @param idTool id tool.
+ * @param parent parent object.
+ */
 VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
@@ -59,6 +68,10 @@ void VAbstractNode::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToModeling add tag to modeling tag current pattern peace.
+ * @param domElement tag.
+ */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
     QDomElement modelingElement;
@@ -75,6 +88,9 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief decrementReferens decrement reference for all parent objects.
+ */
 void VAbstractNode::decrementReferens()
 {
     if (_referens > 0)

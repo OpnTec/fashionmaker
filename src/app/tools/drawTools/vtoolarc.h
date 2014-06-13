@@ -40,121 +40,31 @@ class VToolArc :public VDrawTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VToolArc constuctor.
-                  * @param doc dom document container
-                  * @param data container with variables
-                  * @param id object id in container
-                  * @param typeCreation way we create this tool.
-                  * @param parent parent object
-                  */
-                 VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                          QGraphicsItem * parent = nullptr);
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
-    virtual void setDialog();
-    /**
-     * @brief Create help create tool
-     * @param dialog dialog options.
-     * @param scene pointer to scene.
-     * @param doc dom document container
-     * @param data container with variables
-     */
-    static VToolArc*  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    /**
-     * @brief Create help create tool form GUI.
-     * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param center id arc center point.
-     * @param radius arc radius.
-     * @param f1 start angle of arc.
-     * @param f2 end angle of arc.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
-    static VToolArc*  Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
-                        const Source &typeCreation);
+    VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    virtual void     setDialog();
+    static VToolArc* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolArc* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
+                            VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                            const Source &typeCreation);
     static const QString TagName;
     static const QString ToolType;
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void     FullUpdateFromFile();
-    /**
-     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName new name active pattern peace.
-     */
     virtual void     ChangedActivDraw(const QString &newName);
-    /**
-     * @brief ShowTool highlight tool.
-     * @param id object id in container
-     * @param color highlight color.
-     * @param enable enable or disable highlight.
-     */
     virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void     SetFactor(qreal factor);
 protected:
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void     AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void     RefreshDataInFile();
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
     virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
     virtual void     RemoveReferens();
-    /**
-     * @brief itemChange handle tool change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief keyReleaseEvent handle key release events.
-     * @param event key release event.
-     */
     virtual void     keyReleaseEvent(QKeyEvent * event);
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
     virtual void     SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief RefreshGeometry  refresh item on scene.
-     */
     void             RefreshGeometry();
 };
 

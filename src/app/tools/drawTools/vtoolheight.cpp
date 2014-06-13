@@ -33,6 +33,18 @@
 const QString VToolHeight::ToolType = QStringLiteral("height");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolHeight constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeLine line type.
+ * @param basePointId id base point of projection.
+ * @param p1LineId id first point of line.
+ * @param p2LineId id second point of line.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                          const Source &typeCreation, QGraphicsItem * parent)
@@ -50,6 +62,9 @@ VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolHeight::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -64,6 +79,13 @@ void VToolHeight::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data)
 {
@@ -81,6 +103,22 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param typeLine line type.
+ * @param basePointId id base point of projection.
+ * @param p1LineId id first point of line.
+ * @param p2LineId id second point of line.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                          const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
@@ -126,12 +164,21 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindPoint find projection base point onto line.
+ * @param line line
+ * @param point base point.
+ * @return point onto line.
+ */
 QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 {
     return VAbstractTool::ClosestPoint(line, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolHeight::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -147,18 +194,29 @@ void VToolHeight::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogHeight>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogHeight>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolHeight::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -180,6 +238,9 @@ void VToolHeight::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolHeight::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -197,6 +258,9 @@ void VToolHeight::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolHeight::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

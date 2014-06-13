@@ -35,6 +35,17 @@ const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VNodeArc constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idArc object id in containerArc.
+ * @param typeCreation way we create this tool.
+ * @param idTool tool id.
+ * @param qoParent QObject parent
+ * @param parent parent object.
+ */
 VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
                    const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
@@ -53,6 +64,17 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idArc object id in containerArc.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ * @param idTool tool id.
+ * @param parent QObject parent
+ */
 void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc,  const Document &parse,
                       const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
@@ -81,12 +103,16 @@ void VNodeArc::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idArc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DeleteNode delete node from detail.
+ */
 void VNodeArc::DeleteNode()
 {
     VAbstractNode::DeleteNode();
     this->setVisible(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::RestoreNode()
 {
     if (this->isVisible() == false)
@@ -97,12 +123,18 @@ void VNodeArc::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VNodeArc::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VNodeArc::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -119,6 +151,9 @@ void VNodeArc::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VNodeArc::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -133,6 +168,10 @@ void VNodeArc::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -143,6 +182,10 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -150,6 +193,10 @@ void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -157,6 +204,9 @@ void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry refresh item on scene.
+ */
 void VNodeArc::RefreshGeometry()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);

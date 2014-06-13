@@ -33,6 +33,16 @@
 const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfIntersection");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolPointOfIntersection constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *data, const quint32 &id,
                                                    const quint32 &firstPointId, const quint32 &secondPointId,
                                                    const Source &typeCreation, QGraphicsItem *parent)
@@ -50,6 +60,9 @@ VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *da
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolPointOfIntersection::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -62,6 +75,13 @@ void VToolPointOfIntersection::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                       VContainer *data)
 {
@@ -75,6 +95,20 @@ void VToolPointOfIntersection::Create(DialogTool *dialog, VMainGraphicsScene *sc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
                                       const quint32 &secondPointId, const qreal &mx, const qreal &my,
                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
@@ -112,6 +146,9 @@ void VToolPointOfIntersection::Create(const quint32 _id, const QString &pointNam
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolPointOfIntersection::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -124,12 +161,19 @@ void VToolPointOfIntersection::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfIntersection>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolPointOfIntersection::RemoveReferens()
 {
     doc->DecrementReferens(firstPointId);
@@ -137,12 +181,19 @@ void VToolPointOfIntersection::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogPointOfIntersection>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolPointOfIntersection::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -161,6 +212,9 @@ void VToolPointOfIntersection::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolPointOfIntersection::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -176,6 +230,9 @@ void VToolPointOfIntersection::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

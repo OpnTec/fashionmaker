@@ -34,6 +34,19 @@
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolBisector constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeLine line type.
+ * @param formula string with formula length of bisector.
+ * @param firstPointId id first point of angle.
+ * @param secondPointId id second point of angle.
+ * @param thirdPointId id third point of angle.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                              const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                              const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem *parent)
@@ -53,6 +66,14 @@ VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindPoint find bisector point.
+ * @param firstPoint first point of angle.
+ * @param secondPoint second point of angle.
+ * @param thirdPoint third point of angle.
+ * @param length bisector length.
+ * @return bisector point.
+ */
 QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
                                  const QPointF &thirdPoint, const qreal &length)
 {
@@ -73,6 +94,9 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolBisector::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -88,6 +112,13 @@ void VToolBisector::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool form GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                            VContainer *data)
 {
@@ -111,6 +142,23 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param formula string with formula.
+ * @param firstPointId id first point of angle.
+ * @param secondPointId id second point of angle.
+ * @param thirdPointId id third point of angle.
+ * @param typeLine line type.
+ * @param pointName point name.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                            const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
                            const QString &pointName, const qreal &mx, const qreal &my,
@@ -158,6 +206,9 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolBisector::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -173,6 +224,10 @@ void VToolBisector::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolBisector::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -180,18 +235,29 @@ void VToolBisector::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolBisector::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogBisector>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogBisector>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolBisector::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -213,6 +279,9 @@ void VToolBisector::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolBisector::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -231,6 +300,9 @@ void VToolBisector::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolBisector::RemoveReferens()
 {
     doc->DecrementReferens(firstPointId);
@@ -239,6 +311,9 @@ void VToolBisector::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolBisector::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

@@ -30,6 +30,17 @@
 #include "../../geometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolLinePoint constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeLine line type.
+ * @param formula string with length formula.
+ * @param basePointId id base line point.
+ * @param angle line angle.
+ * @param parent parent object.
+ */
 VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
                                const QString &typeLine, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
@@ -46,6 +57,10 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
@@ -61,6 +76,9 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolLinePoint::RefreshGeometry()
 {
     mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
@@ -71,6 +89,19 @@ void VToolLinePoint::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
+void VToolLinePoint::RemoveReferens()
+{
+    doc->DecrementReferens(basePointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolLinePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);

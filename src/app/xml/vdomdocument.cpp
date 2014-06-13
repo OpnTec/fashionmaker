@@ -104,6 +104,11 @@ VDomDocument::~VDomDocument()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Finds an element by id.
+ * @param id value id attribute.
+ * @return dom element.
+ */
 QDomElement VDomDocument::elementById(const QString& id)
 {
     if (map.contains(id))
@@ -125,6 +130,10 @@ QDomElement VDomDocument::elementById(const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Removes all children of a given element tag. RENAME: removeAllChildren
+ * @param element tag
+ */
 void VDomDocument::removeAllChilds(QDomElement &element)
 {
     QDomNode domNode = element.firstChild();
@@ -143,6 +152,12 @@ void VDomDocument::removeAllChilds(QDomElement &element)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Find element by id.
+ * @param node node
+ * @param id id value
+ * @return true if found
+ */
 bool VDomDocument::find(const QDomElement &node, const QString& id)
 {
     if (node.hasAttribute(AttrId))
@@ -170,6 +185,12 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the long long value of the given attribute. RENAME: GetParameterLongLong?
+ * @param domElement tag in xml tree
+ * @param name attribute name
+ * @return long long value
+ */
 quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -200,6 +221,13 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the string value of the given attribute. RENAME: see above
+ *
+ * if attribute empty return default value. If default value empty too throw exception.
+ * @return attribute value
+ * @throw VExceptionEmptyParameter when attribute is empty
+ */
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
                                         const QString &defValue) const
 {
@@ -221,6 +249,12 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the double value of the given attribute.
+ * @param domElement tag in xml tree
+ * @param name attribute name
+ * @return double value
+ */
 qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -272,6 +306,11 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValidateXML validate xml file by xsd schema.
+ * @param schema path to schema file.
+ * @param fileName name of xml file.
+ */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
     QFile pattern(fileName);

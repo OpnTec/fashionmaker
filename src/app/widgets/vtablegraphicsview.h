@@ -51,69 +51,42 @@ signals:
      */
     void        itemChect( bool flag );
 public slots:
-    /**
-     * @brief selectionChanged handle selection change.
-     */
     void        selectionChanged();
-    /**
-     * @brief rotateItems handle rotatation detail.
-     */
     void        rotateItems();
-    /**
-     * @brief MirrorItem mirror detail.
-     */
     void        MirrorItem();
-    /**
-     * @brief ZoomIn zoom in paper scale.
-     */
     void        ZoomIn();
-    /**
-     * @brief ZoomOut zoom out paper scale.
-     */
     void        ZoomOut();
 protected:
-    /**
-     * @brief wheelEvent handle wheel events.
-     * @param event wheel event.
-     */
     void        wheelEvent ( QWheelEvent * event );
-    /**
-     * @brief mousePressEvent handle mouse press events.
-     * @param mousePress mouse press event.
-     */
     void        mousePressEvent(QMouseEvent *mousePress);
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     void        mouseReleaseEvent ( QMouseEvent * event );
-    /**
-     * @brief keyPressEvent handle key press events.
-     * @param event key press event.
-     */
     void        keyPressEvent ( QKeyEvent * event );
-    /**
-     * @brief rotateIt rotate selected details on 180 degree.
-     */
     void        rotateIt();
-    /**
-     * @brief MoveItem move selected detail.
-     * @param move type of move.
-     */
     void        MoveItem( VTableGraphicsView::typeMove_e move );
-    
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief rotateItems handle rotatation detail.
+ */
 inline void VTableGraphicsView::rotateItems()
 {
     rotateIt();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ZoomIn zoom in paper scale.
+ */
 inline void VTableGraphicsView::ZoomIn()
 {
     scale(1.1, 1.1);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ZoomOut zoom out paper scale.
+ */
 inline void VTableGraphicsView::ZoomOut()
 {
     scale(1/1.1, 1/1.1);

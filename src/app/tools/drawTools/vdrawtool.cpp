@@ -147,6 +147,9 @@ void VDrawTool::SaveDialogChange()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogLinkDestroy removes dialog pointer
+ */
 void VDrawTool::DialogLinkDestroy()
 {
     this->dialog=nullptr;

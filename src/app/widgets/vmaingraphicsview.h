@@ -38,10 +38,7 @@ class VMainGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VMainGraphicsView constructor.
-     * @param parent parent object.
-     */
+
     explicit VMainGraphicsView(QWidget *parent = nullptr);
 signals:
     /**
@@ -50,42 +47,17 @@ signals:
      */
     void     NewFactor(qreal factor);
 public slots:
-    /**
-     * @brief scalingTime call each time when need handle scaling.
-     * @param x value from 0.0 to 1.0
-     */
     void     scalingTime(qreal x);
-    /**
-     * @brief scrollingTime call each time when need handle scrolling.
-     * @param x value from 0.0 to 1.0
-     */
     void     scrollingTime(qreal x);
-    /**
-     * @brief animFinished
-     */
     void     animFinished();
     void     ZoomIn();
     void     ZoomOut();
 protected:
-    /**
-     * @brief wheelEvent handle wheel events.
-     * @param event wheel event.
-     */
     void     wheelEvent ( QWheelEvent * event );
-    /**
-     * @brief mousePressEvent handle mouse press events.
-     * @param mousePress mouse press event.
-     */
     void     mousePressEvent(QMouseEvent *mousePress);
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
-    /**
-     * @brief _numScheduledScalings keep number scheduled scalings.
-     */
+    /** @brief _numScheduledScalings keep number scheduled scalings. */
     qint32   _numScheduledScalings;
 };
 

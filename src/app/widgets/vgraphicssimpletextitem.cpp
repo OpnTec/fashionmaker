@@ -29,6 +29,10 @@
 #include "vgraphicssimpletextitem.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGraphicsSimpleTextItem default constructor.
+ * @param parent parent object.
+ */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     :QGraphicsSimpleTextItem(parent), fontSize(0)
 {
@@ -43,6 +47,11 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VGraphicsSimpleTextItem constructor.
+ * @param text text.
+ * @param parent parent object.
+ */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
     :QGraphicsSimpleTextItem(text, parent), fontSize(0)
 {
@@ -53,6 +62,12 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
      if (change == ItemPositionChange && scene())
@@ -64,6 +79,10 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VGraphicsSimpleTextItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -71,6 +90,10 @@ void VGraphicsSimpleTextItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -78,6 +101,10 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     emit ShowContextMenu(event);

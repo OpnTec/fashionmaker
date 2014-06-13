@@ -29,16 +29,28 @@
 #include "vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMainGraphicsScene default constructor.
+ */
 VMainGraphicsScene::VMainGraphicsScene()
     :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMainGraphicsScene constructor.
+ * @param sceneRect scene rect.
+ * @param parent parent object.
+ */
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
     :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseMoveEvent handle mouse move events.
+ * @param event mouse move event.
+ */
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
     emit mouseMove(event->scenePos());
@@ -46,6 +58,10 @@ void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mousePressEvent mouse press events.
+ * @param event mouse press event
+ */
 void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit mousePress(event->scenePos());
@@ -53,24 +69,41 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief transform return view transformation.
+ * @return view transformation.
+ */
 QTransform VMainGraphicsScene::transform() const
 {
     return _transform;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setTransform set view transformation.
+ * @param transform view transformation.
+ */
 void VMainGraphicsScene::setTransform(const QTransform &transform)
 {
     _transform = transform;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChoosedItem emit ChoosedObject signal.
+ * @param id object id.
+ * @param type object scene type.
+ */
 void VMainGraphicsScene::ChoosedItem(quint32 id, const SceneObject &type)
 {
     emit ChoosedObject(id, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor. scene scale factor.
+ */
 void VMainGraphicsScene::SetFactor(qreal factor)
 {
     scaleFactor=scaleFactor*factor;

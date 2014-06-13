@@ -45,99 +45,36 @@ class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VNodePoint constructor.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param id object id in container.
-     * @param idPoint object id in containerPoint.
-     * @param typeCreation way we create this tool.
-     * @param idTool tool id.
-     * @param qoParent QObject parent
-     * @param parent parent object.
-     */
+
     VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
                const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
-    /**
-     * @brief Create help create tool.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param id object id in container.
-     * @param idPoint object id in containerPoint.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     * @param idTool tool id.
-     * @param parent QObject parent
-     */
+
     static void  Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
-    /**
-     * @brief DeleteNode delete node from detail.
-     */
     virtual void DeleteNode();
     virtual void RestoreNode();
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief NameChangePosition label change position.
-     * @param pos new position.
-     */
     void         NameChangePosition(const QPointF &pos);
 protected:
-    /**
-     * @brief radius radius circle.
-     */
+    /** @brief radius radius circle. */
     qreal        radius;
-    /**
-     * @brief namePoint label name.
-     */
+
+    /** @brief namePoint label name. */
     VGraphicsSimpleTextItem *namePoint;
-    /**
-     * @brief lineName pointer to label line.
-     */
+
+    /** @brief lineName pointer to label line. */
     QGraphicsLineItem       *lineName;
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
+
     virtual void AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void RefreshDataInFile();
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief UpdateNamePosition update label position in file.
-     * @param mx label bias x axis.
-     * @param my label bias y axis.
-     */
     virtual void UpdateNamePosition(qreal mx, qreal my);
-    /**
-     * @brief RefreshPointGeometry refresh point on scene.
-     * @param point point position.
-     */
     virtual void RefreshPointGeometry(const VPointF &point);
-    /**
-     * @brief RefreshLine refresh label line on scene.
-     */
     void         RefreshLine();
 private:
     Q_DISABLE_COPY(VNodePoint)

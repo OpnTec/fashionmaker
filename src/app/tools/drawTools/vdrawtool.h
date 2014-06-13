@@ -50,11 +50,7 @@ public:
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
-    /**
-     * @brief DialogLinkDestroy removes dialog pointer
-     */
     virtual void DialogLinkDestroy();
-
     void         ignoreContextMenu(bool enable);
     static qreal CheckFormula(QString &formula, VContainer *data);
 public slots:

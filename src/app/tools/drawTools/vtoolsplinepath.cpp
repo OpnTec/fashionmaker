@@ -33,6 +33,14 @@
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolSplinePath constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                  QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
@@ -57,7 +65,8 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
         controlPoints.append(controlPoint);
 
-        controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, spl.GetP3(), spl.GetP4().toQPointF(), this);
+        controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, spl.GetP3(), spl.GetP4().toQPointF(),
+                                               this);
         connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSplinePath::ControlPointChangePosition);
         connect(this, &VToolSplinePath::RefreshLine, controlPoint, &VControlPointSpline::RefreshLine);
@@ -75,6 +84,9 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolSplinePath::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -85,6 +97,13 @@ void VToolSplinePath::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -99,9 +118,18 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene,
-                             VPattern *doc, VContainer *data, const Document &parse,
-                             const Source &typeCreation)
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param path spline path.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
+void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene, VPattern *doc,
+                             VContainer *data, const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
@@ -130,6 +158,12 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ControlPointChangePosition handle change position control point.
+ * @param indexSpline position spline in spline list.
+ * @param position position point in spline.
+ * @param pos new position.
+ */
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                                  const QPointF &pos)
 {
@@ -153,6 +187,12 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateControlPoints update position points control points in file.
+ * @param spl spline what was changed.
+ * @param splPath spline path.
+ * @param indexSpline index spline in spline path.
+ */
 void VToolSplinePath::UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const
 {
     VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePointPosition::FirstPoint);
@@ -191,6 +231,12 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdatePathPoint update spline path in pattern file.
+ * @brief doc dom document container.
+ * @param node tag in file.
+ * @param path spline path.
+ */
 void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path)
 {
     SCASSERT(doc != nullptr)
@@ -211,12 +257,19 @@ void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSpli
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSplinePath>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolSplinePath::AddToFile()
 {
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
@@ -235,6 +288,9 @@ void VToolSplinePath::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolSplinePath::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -250,6 +306,11 @@ void VToolSplinePath::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddPathPoint write path point to pattern file.
+ * @param domElement dom element.
+ * @param splPoint spline path point.
+ */
 void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint)
 {
     QDomElement pathPoint = doc->createElement(AttrPathPoint);
@@ -263,6 +324,10 @@ void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent  handle mouse release events.
+ * @param event mouse release event.
+ */
 void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -273,6 +338,9 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolSplinePath::RemoveReferens()
 {
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
@@ -283,6 +351,9 @@ void VToolSplinePath::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolSplinePath::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -296,6 +367,9 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolSplinePath::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));

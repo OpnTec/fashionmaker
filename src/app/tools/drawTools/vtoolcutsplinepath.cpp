@@ -37,6 +37,18 @@ const QString VToolCutSplinePath::ToolType = QStringLiteral("cutSplinePath");
 const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolCutSplinePath constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param formula string with formula length first splinePath.
+ * @param splinePathId id splinePath (we cut this splinePath) in data container.
+ * @param splPath1id id first splinePath after cutting.
+ * @param splPath2id id second splinePath after cutting.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &formula, const quint32 &splinePathId,
                                        const quint32 &splPath1id, const quint32 &splPath2id,
@@ -69,6 +81,9 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolCutSplinePath::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -81,6 +96,13 @@ void VToolCutSplinePath::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool form GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -93,10 +115,24 @@ void VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param formula string with formula length first splinePath.
+ * @param splinePathId id of splinePath in data container.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QString &formula,
-                            const quint32 &splinePathId, const qreal &mx, const qreal &my,
-                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document &parse, const Source &typeCreation)
+                                const quint32 &splinePathId, const qreal &mx, const qreal &my,
+                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                const Document &parse, const Source &typeCreation)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     SCASSERT(splPath != nullptr);
@@ -231,6 +267,9 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolCutSplinePath::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -243,12 +282,20 @@ void VToolCutSplinePath::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SplineChoosed send signal about selection splinePath.
+ * @param id object id in container.
+ */
 void VToolCutSplinePath::SplineChoosed(quint32 id)
 {
     emit ChoosedTool(id, SceneObject::SplinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolCutSplinePath::ChangedActivDraw(const QString &newName)
 {
     bool flag = true;
@@ -268,18 +315,29 @@ void VToolCutSplinePath::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutSplinePath>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolCutSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutSplinePath>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolCutSplinePath::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -298,6 +356,9 @@ void VToolCutSplinePath::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolCutSplinePath::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -313,6 +374,9 @@ void VToolCutSplinePath::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolCutSplinePath::RefreshGeometry()
 {
     RefreshSpline(firstSpline, splPath1id, SimpleSplinePoint::ForthPoint);
@@ -321,12 +385,18 @@ void VToolCutSplinePath::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement referens value for used objects.
+ */
 void VToolCutSplinePath::RemoveReferens()
 {
     doc->DecrementReferens(splinePathId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -338,6 +408,12 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshSpline refresh splinePath on scene.
+ * @param spline splinePath.
+ * @param splPathid splinePath id.
+ * @param tr splineType type.
+ */
 void VToolCutSplinePath::RefreshSpline(VSimpleSpline *spline, quint32 splPathid, SimpleSplinePoint tr)
 {
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(splPathid);

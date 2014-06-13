@@ -36,9 +36,19 @@ const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                       const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
-                       QGraphicsItem *parent)
+/**
+ * @brief VNodePoint constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idPoint object id in containerPoint.
+ * @param typeCreation way we create this tool.
+ * @param idTool tool id.
+ * @param qoParent QObject parent
+ * @param parent parent object.
+ */
+VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Source &typeCreation,
+                       const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
 {
@@ -63,9 +73,19 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint,
-                        const Document &parse, const Source &typeCreation, const quint32 &idTool,
-                        QObject *parent)
+/**
+ * @brief Create help create tool.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idPoint object id in containerPoint.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ * @param idTool tool id.
+ * @param parent QObject parent
+ */
+void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document &parse,
+                        const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
@@ -94,12 +114,16 @@ void VNodePoint::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DeleteNode delete node from detail.
+ */
 void VNodePoint::DeleteNode()
 {
     VAbstractNode::DeleteNode();
     this->setVisible(false);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::RestoreNode()
 {
     if (this->isVisible() == false)
@@ -110,12 +134,18 @@ void VNodePoint::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VNodePoint::FullUpdateFromFile()
 {
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VNodePoint::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -135,6 +165,9 @@ void VNodePoint::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VNodePoint::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -152,6 +185,10 @@ void VNodePoint::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -162,6 +199,10 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -169,6 +210,10 @@ void VNodePoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -176,6 +221,10 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NameChangePosition label change position.
+ * @param pos new position.
+ */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
@@ -188,6 +237,11 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateNamePosition update label position in file.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ */
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -200,6 +254,10 @@ void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshPointGeometry refresh point on scene.
+ * @param point point position.
+ */
 void VNodePoint::RefreshPointGeometry(const VPointF &point)
 {
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
@@ -217,6 +275,9 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshLine refresh label line on scene.
+ */
 void VNodePoint::RefreshLine()
 {
     QRectF nameRec = namePoint->sceneBoundingRect();

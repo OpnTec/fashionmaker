@@ -36,6 +36,13 @@ const QString VToolPoint::TagName = QStringLiteral("point");
 #define DefRadius 2.0//mm
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolPoint constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param parent parent object.
+ */
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
     QGraphicsEllipseItem(parent), radius(DefRadius), namePoint(0), lineName(0)
 {
@@ -54,6 +61,10 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NameChangePosition handle change posion point label.
+ * @param pos new position.
+ */
 void VToolPoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
@@ -66,6 +77,11 @@ void VToolPoint::NameChangePosition(const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateNamePosition save new position label to the pattern file.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ */
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -78,6 +94,10 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -104,12 +124,22 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool  highlight tool.
+ * @param id object id in container.
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VToolPoint::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -117,12 +147,20 @@ void VToolPoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     Q_UNUSED(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent  handle mouse release events.
+ * @param event mouse release event.
+ */
 void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -133,6 +171,10 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -140,6 +182,10 @@ void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -147,6 +193,10 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshPointGeometry refresh point on scene.
+ * @param point point.
+ */
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -166,6 +216,9 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshLine refresh line to label on scene.
+ */
 void VToolPoint::RefreshLine()
 {
     QRectF nameRec = namePoint->sceneBoundingRect();
@@ -192,6 +245,12 @@ void VToolPoint::RefreshLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange hadle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -211,6 +270,10 @@ QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key release events.
+ * @param event key release event.
+ */
 void VToolPoint::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())

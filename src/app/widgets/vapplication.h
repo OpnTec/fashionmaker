@@ -49,75 +49,63 @@ class VApplication : public QApplication
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VApplication constructor.
-     * @param argc number arguments.
-     * @param argv command line.
-     */
     VApplication(int &argc, char ** argv);
     virtual ~VApplication() {}
-    /**
-     * @brief notify Reimplemented from QApplication::notify().
-     * @param receiver receiver.
-     * @param event event.
-     * @return value that is returned from the receiver's event handler.
-     */
-    virtual bool          notify(QObject * receiver, QEvent * event);
-    Unit                  patternUnit() const;
-    void                  setPatternUnit(const Unit &patternUnit);
-    MeasurementsType      patternType() const;
-    void                  setPatternType(const MeasurementsType &patternType);
-    double                toPixel(double unit) const;
-    double                fromPixel(double pix) const;
-    static const qreal    PrintDPI;
-    QString               translationsPath() const;
-    QString               pathToTables() const;
-    qreal                 widthMainLine() const;
-    qreal                 widthHairLine() const;
-    QString               VarToUser(const QString &var) const;
-    QString               VarFromUser(const QString &var) const;
-    QString               GuiText(const QString &measurement) const;
-    QString               Description(const QString &measurement) const;
-    QString               Variable(const QString &name) const;
-    QString               Function(const QString &name) const;
-    QString               PostfixOperator(const QString &name) const;
-    QString               FormulaFromUser(const QString &formula);
-    QString               FormulaToUser(const QString &formula);
-    QUndoStack            *getUndoStack() const;
-    VMainGraphicsView     *getSceneView() const;
-    void                  setSceneView(VMainGraphicsView *value);
-    QTimer                *getAutoSaveTimer() const;
-    void                  setAutoSaveTimer(QTimer *value);
+    virtual bool       notify(QObject * receiver, QEvent * event);
+    Unit               patternUnit() const;
+    void               setPatternUnit(const Unit &patternUnit);
+    MeasurementsType   patternType() const;
+    void               setPatternType(const MeasurementsType &patternType);
+    double             toPixel(double unit) const;
+    double             fromPixel(double pix) const;
+    static const qreal PrintDPI;
+    QString            translationsPath() const;
+    QString            pathToTables() const;
+    qreal              widthMainLine() const;
+    qreal              widthHairLine() const;
+    QString            VarToUser(const QString &var) const;
+    QString            VarFromUser(const QString &var) const;
+    QString            GuiText(const QString &measurement) const;
+    QString            Description(const QString &measurement) const;
+    QString            Variable(const QString &name) const;
+    QString            Function(const QString &name) const;
+    QString            PostfixOperator(const QString &name) const;
+    QString            FormulaFromUser(const QString &formula);
+    QString            FormulaToUser(const QString &formula);
+    QUndoStack         *getUndoStack() const;
+    VMainGraphicsView  *getSceneView() const;
+    void               setSceneView(VMainGraphicsView *value);
+    QTimer             *getAutoSaveTimer() const;
+    void               setAutoSaveTimer(QTimer *value);
 private:
     Q_DISABLE_COPY(VApplication)
-    Unit      _patternUnit;
-    MeasurementsType _patternType;
-    qreal                 _widthMainLine;
-    qreal                 _widthHairLine;
+    Unit               _patternUnit;
+    MeasurementsType   _patternType;
+    qreal              _widthMainLine;
+    qreal              _widthHairLine;
     QMap<QString, VTranslation> measurements;
     QMap<QString, VTranslation> guiTexts;
     QMap<QString, VTranslation> descriptions;
     QMap<QString, VTranslation> variables;
     QMap<QString, VTranslation> functions;
     QMap<QString, VTranslation> postfixOperators;
-    QUndoStack            *undoStack;
-    VMainGraphicsView     *sceneView;
-    QTimer                *autoSaveTimer;
-    void                  InitLineWidth();
-    void                  InitMeasurements();
-    void                  InitVariables();
-    void                  InitFunctions();
-    void                  InitPostfixOperators();
-    bool                  MeasurementsFromUser(QString &newFormula, int position, const QString &token,
-                                               int &bias) const;
-    bool                  VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool                  PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token,
-                                                   int &bias) const;
-    bool                  FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool                  VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    void                  CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
-                                               QMap<int, QString> &numbers);
-    void                  BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
+    QUndoStack         *undoStack;
+    VMainGraphicsView  *sceneView;
+    QTimer             *autoSaveTimer;
+    void               InitLineWidth();
+    void               InitMeasurements();
+    void               InitVariables();
+    void               InitFunctions();
+    void               InitPostfixOperators();
+    bool               MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool               VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool               PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token,
+                                                int &bias) const;
+    bool               FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool               VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    void               CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
+                                            QMap<int, QString> &numbers);
+    void               BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
