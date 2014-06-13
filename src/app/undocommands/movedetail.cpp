@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   movespoint.cpp
+ **  @file   movedetail.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   9 6, 2014
+ **  @date   13 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "movespoint.h"
+#include "movedetail.h"
 #include <QGraphicsScene>
 #include <QDomElement>
 #include "../xml/vpattern.h"
@@ -35,37 +35,37 @@
 #include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                        QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), oldX(0.0), oldY(0.0), newX(x), newY(y), sPointId(id), scene(scene)
+    : QObject(), QUndoCommand(parent), doc(doc), oldX(0.0), oldY(0.0), newX(x), newY(y), detId(id), scene(scene)
 {
-    setText(tr("Move single point"));
+    setText(QObject::tr("Move detail"));
 
     SCASSERT(scene != nullptr);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "0.0"));
-        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrY, "0.0"));
+        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
+        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0"));
     }
     else
     {
-        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSPoint::~MoveSPoint()
+MoveDetail::~MoveDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveSPoint::undo()
+void MoveDetail::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(sPointId));
+    QDomElement domElement = doc->elementById(QString().setNum(detId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(oldX)));
-        doc->SetAttribute(domElement, VAbstractTool::AttrY, QString().setNum(qApp->fromPixel(oldY)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(oldX)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(oldY)));
 
         emit NeedLiteParsing();
 
@@ -74,18 +74,18 @@ void MoveSPoint::undo()
     }
     else
     {
-        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveSPoint::redo()
+void MoveDetail::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(sPointId));
+    QDomElement domElement = doc->elementById(QString().setNum(detId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(newX)));
-        doc->SetAttribute(domElement, VAbstractTool::AttrY, QString().setNum(qApp->fromPixel(newY)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(newX)));
+        doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(newY)));
 
         emit NeedLiteParsing();
 
@@ -94,18 +94,18 @@ void MoveSPoint::redo()
     }
     else
     {
-        qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSPoint::mergeWith(const QUndoCommand *command)
+bool MoveDetail::mergeWith(const QUndoCommand *command)
 {
-    const MoveSPoint *moveCommand = static_cast<const MoveSPoint *>(command);
+    const MoveDetail *moveCommand = static_cast<const MoveDetail *>(command);
     SCASSERT(moveCommand != nullptr);
-    const quint32 id = moveCommand->getSPointId();
+    const quint32 id = moveCommand->getDetId();
 
-    if (id != sPointId)
+    if (id != detId)
     {
         return false;
     }
@@ -116,7 +116,7 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSPoint::id() const
+int MoveDetail::id() const
 {
-    return static_cast<int>(UndoCommand::MoveSPoint);
+    return static_cast<int>(UndoCommand::MoveDetail);
 }

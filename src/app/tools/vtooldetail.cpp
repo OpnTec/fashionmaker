@@ -39,6 +39,7 @@
 #include <QMenu>
 #include <QGraphicsView>
 #include "../undocommands/savedetailoptions.h"
+#include "../undocommands/movedetail.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -109,7 +110,6 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
-    this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
@@ -313,20 +313,13 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 {
     if (change == ItemPositionHasChanged && scene())
     {
+        this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         // value - this is new position.
         QPointF newPos = value.toPointF();
-        //qDebug()<<newPos;
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(newPos.x())));
-            doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(newPos.y())));
 
-            QList<QGraphicsView*> list = this->scene()->views();
-            VAbstractTool::NewSceneRect(this->scene(), list[0]);
-
-            doc->haveLiteChange();
-        }
+        MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, this->scene());
+        connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveDet);
     }
 
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -474,6 +467,10 @@ void VToolDetail::RefreshGeometry()
 {
     QPainterPath path = VEquidistant().ContourPath(id, this->getData());
     this->setPath(path);
+
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    this->setPos(detail.getMx(), detail.getMy());
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
