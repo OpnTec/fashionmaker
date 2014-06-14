@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   undocommands.h
+ **  @file   deltool.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 6, 2014
+ **  @date   13 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,18 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef UNDOCOMMANDS_H
-#define UNDOCOMMANDS_H
+#ifndef DELTOOL_H
+#define DELTOOL_H
 
-enum class UndoCommand: char { AddPatternPiece,
-                               AddToCalc,
-                               MoveSpline,
-                               MoveSplinePath,
-                               MoveSPoint,
-                               SaveToolOptions,
-                               SaveDetailOptions,
-                               MoveDetail,
-                               DeleteTool
-                             };
+#include <QDomElement>
+#include <QUndoCommand>
 
-#endif // UNDOCOMMANDS_H
+class VPattern;
+
+class DelTool : public QObject, public QUndoCommand
+{
+    Q_OBJECT
+public:
+    DelTool(VPattern *doc, quint32 id, QUndoCommand *parent = 0);
+    virtual ~DelTool();
+    virtual void undo();
+    virtual void redo();
+signals:
+    void NeedFullParsing();
+private:
+    Q_DISABLE_COPY(DelTool)
+    QDomElement xml;
+    QDomNode parentNode;
+    QDomNode previousNode;
+    VPattern *doc;
+    quint32  toolId;
+};
+
+#endif // DELTOOL_H

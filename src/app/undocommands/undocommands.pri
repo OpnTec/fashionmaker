@@ -7,7 +7,8 @@ HEADERS += \
     undocommands/savetooloptions.h \
     undocommands/undocommands.h \
     undocommands/savedetailoptions.h \
-    undocommands/movedetail.h
+    undocommands/movedetail.h \
+    undocommands/deltool.h
     
 
 SOURCES += \
@@ -18,5 +19,6 @@ SOURCES += \
     undocommands/movesplinepath.cpp \
     undocommands/savetooloptions.cpp \
     undocommands/savedetailoptions.cpp \
-    undocommands/movedetail.cpp
+    undocommands/movedetail.cpp \
+    undocommands/deltool.cpp
     

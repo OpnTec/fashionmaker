@@ -29,6 +29,9 @@
 #include "vabstracttool.h"
 #include "../xml/vpattern.h"
 #include <QGraphicsView>
+#include <QMessageBox>
+#include "../undocommands/deltool.h"
+#include "../widgets/vapplication.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -241,52 +244,20 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
  */
 void VAbstractTool::DeleteTool(QGraphicsItem *tool)
 {
-    if (_referens <= 1)
+    QMessageBox msgBox;
+    msgBox.setText(tr("Confirm the deletion."));
+    msgBox.setInformativeText(tr("Do you really want delete?"));
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Question);
+    if (msgBox.exec() == QMessageBox::Cancel)
     {
-        QMessageBox msgBox;
-        msgBox.setText(tr("Confirm the deletion."));
-        msgBox.setInformativeText(tr("Do you really want delete?"));
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Question);
-        if (msgBox.exec() == QMessageBox::Cancel)
-        {
-            return;
-        }
-        //remove from xml file
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                if (element.isElement())
-                {
-                    RemoveReferens();//deincrement referens
-                    element.removeChild(domElement);//remove form file
-                    QGraphicsScene *scene = tool->scene();
-                    if (scene != 0)//some tools haven't scene
-                    {
-                        scene->removeItem(tool);//remove form scene
-                    }
-                    doc->LiteParseTree();
-                    emit toolhaveChange();//set enabled save button
-                }
-                else
-                {
-                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
-                }
-            }
-            else
-            {
-                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
-            }
-        }
-        else
-        {
-            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
-        }
+        return;
     }
+
+    DelTool *delTool = new DelTool(doc, id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
