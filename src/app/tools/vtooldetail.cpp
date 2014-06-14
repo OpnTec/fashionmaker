@@ -59,6 +59,15 @@ const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolDetail constructor.
+ * @param doc dom document container
+ * @param data container with variables
+ * @param id object id in container
+ * @param typeCreation way we create this tool.
+ * @param scene pointer to scene.
+ * @param parent parent object
+ */
 VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
@@ -125,6 +134,9 @@ VToolDetail::~VToolDetail()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolDetail::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -135,6 +147,13 @@ void VToolDetail::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -204,6 +223,16 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param newDetail detail what we want show.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
                          VContainer *data, const Document &parse, const Source &typeCreation)
 {
@@ -232,18 +261,28 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Remove full delete detail.
+ */
 void VToolDetail::Remove()
 {
     DeleteTool(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolDetail::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromGuiOk refresh tool data after change in options.
+ * @param result keep result working dialog.
+ */
 void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
@@ -263,6 +302,9 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -290,6 +332,9 @@ void VToolDetail::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolDetail::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -309,6 +354,12 @@ void VToolDetail::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle detail change.
+ * @param change change
+ * @param value value
+ * @return new value.
+ */
 QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged && scene())
@@ -339,6 +390,10 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key release events.
+ * @param event key release event.
+ */
 void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -353,6 +408,10 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
@@ -363,6 +422,10 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
@@ -395,6 +458,9 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolDetail::RemoveReferens()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -405,6 +471,12 @@ void VToolDetail::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddNode add node to the file.
+ * @param dom document container
+ * @param domElement tag in xml tree.
+ * @param node node of detail.
+ */
 void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
@@ -463,6 +535,9 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry refresh item on scene.
+ */
 void VToolDetail::RefreshGeometry()
 {
     QPainterPath path = VEquidistant().ContourPath(id, this->getData());
