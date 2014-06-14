@@ -266,7 +266,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
  */
 void VToolDetail::Remove()
 {
-    DeleteTool(this);
+    DeleteTool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -399,7 +399,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool(this);
+            DeleteTool();
             break;
         default:
             break;
@@ -453,7 +453,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        DeleteTool(this);
+        DeleteTool();
     }
 }
 

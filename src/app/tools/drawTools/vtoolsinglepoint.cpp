@@ -31,6 +31,7 @@
 #include "../../widgets/vgraphicssimpletextitem.h"
 #include "../../undocommands/movespoint.h"
 #include "../../undocommands/addpatternpiece.h"
+#include "../../undocommands/deletepatternpiece.h"
 #include "../../geometry/vpointf.h"
 
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
@@ -182,6 +183,15 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::DeleteTool()
+{
+    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, namePP);
+    connect(deletePP, &DeletePatternPiece::ClearScene, doc, &VPattern::ClearScene);
+    connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(deletePP);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
@@ -215,7 +225,7 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
  */
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
-    ContextMenu<DialogSinglePoint>(this, event, false);
+    ContextMenu<DialogSinglePoint>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

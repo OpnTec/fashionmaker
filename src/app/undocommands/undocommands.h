@@ -37,7 +37,8 @@ enum class UndoCommand: char { AddPatternPiece,
                                SaveToolOptions,
                                SaveDetailOptions,
                                MoveDetail,
-                               DeleteTool
+                               DeleteTool,
+                               DeletePatternPiece
                              };
 
 #endif // UNDOCOMMANDS_H

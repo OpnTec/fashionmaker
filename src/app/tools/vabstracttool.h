@@ -145,7 +145,7 @@ protected:
      * @brief RemoveReferens decrement value of reference.
      */
     virtual void            RemoveReferens(){}
-    virtual void            DeleteTool(QGraphicsItem *tool);
+    virtual void            DeleteTool();
     Qt::PenStyle            LineStyle();
 private:
     Q_DISABLE_COPY(VAbstractTool)

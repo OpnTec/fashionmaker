@@ -349,7 +349,7 @@ void VToolArc::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool(this);
+            DeleteTool();
             break;
         default:
             break;

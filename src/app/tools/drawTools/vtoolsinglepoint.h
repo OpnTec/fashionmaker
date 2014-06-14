@@ -64,7 +64,7 @@ protected:
      * @brief DeleteTool delete tool from file and scene. This tool can't be deleted by now.
      * @param tool tool what me delete.
      */
-    virtual void DeleteTool(QGraphicsItem *tool){Q_UNUSED(tool)}
+    virtual void DeleteTool();
     virtual void SaveDialog(QDomElement &domElement);
 private:
     QString namePP;

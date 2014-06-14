@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   addpatternpiece.cpp
+ **  @file   deletepatternpiece.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   9 6, 2014
+ **  @date   14 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,23 +26,43 @@
  **
  *************************************************************************/
 
-#include "addpatternpiece.h"
+#include "deletepatternpiece.h"
 #include "../xml/vpattern.h"
+#include "addpatternpiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                                 QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
+DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), doc(doc), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
+      previousNode(QDomNode())
 {
-    setText(tr("Add pattern piece %1").arg(namePP));
+    setText(tr("Delete pattern piece %1").arg(namePP));
+
+    QDomElement patternP= doc->GetPPElement(namePP);
+    patternPiece = patternP.cloneNode().toElement();
+    mPath = doc->MPath();
+    previousNode = patternP.previousSibling();//find previous pattern piece
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::~AddPatternPiece()
+DeletePatternPiece::~DeletePatternPiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void AddPatternPiece::undo()
+void DeletePatternPiece::undo()
+{
+    if (CountPP() == 0)
+    {
+        doc->CreateEmptyFile(mPath);
+    }
+
+    QDomElement rootElement = doc->documentElement();
+    rootElement.insertAfter(patternPiece, previousNode);
+
+    emit NeedFullParsing();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DeletePatternPiece::redo()
 {
     if (CountPP() <= 1)
     {
@@ -58,26 +78,7 @@ void AddPatternPiece::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AddPatternPiece::redo()
-{
-    if (CountPP() == 0 && mPath.isEmpty() == false)
-    {
-        doc->CreateEmptyFile(mPath);
-    }
-
-    QDomElement rootElement = doc->documentElement();
-
-    rootElement.appendChild(xml);
-
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int AddPatternPiece::CountPP()
+int DeletePatternPiece::CountPP()
 {
     QDomElement rootElement = doc->documentElement();
     if (rootElement.isNull())

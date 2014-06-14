@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   addpatternpiece.h
+ **  @file   deletepatternpiece.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   9 6, 2014
+ **  @date   14 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,34 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef ADDPATTERNPIECE_H
-#define ADDPATTERNPIECE_H
+#ifndef DELETEPATTERNPIECE_H
+#define DELETEPATTERNPIECE_H
 
 #include <QDomElement>
 #include <QUndoCommand>
 
 class VPattern;
 
-class AddPatternPiece : public QObject, public QUndoCommand
+class DeletePatternPiece : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                    QUndoCommand *parent = 0);
-    virtual ~AddPatternPiece();
+    DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent = 0);
+    virtual ~DeletePatternPiece();
     virtual void undo();
     virtual void redo();
 signals:
     void ClearScene();
     void NeedFullParsing();
 private:
-    Q_DISABLE_COPY(AddPatternPiece)
-    const QDomElement xml;
-    VPattern   *doc;
-    QString    namePP;
-    bool       redoFlag;
-    QString    mPath;
-    int        CountPP();
+    Q_DISABLE_COPY(DeletePatternPiece)
+    VPattern    *doc;
+    QString     namePP;
+    QDomElement patternPiece;
+    QString     mPath;
+    QDomNode    previousNode;
+    int         CountPP();
 };
 
-#endif // ADDPATTERNPIECE_H
+#endif // DELETEPATTERNPIECE_H
