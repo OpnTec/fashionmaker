@@ -34,6 +34,8 @@
 #include "../../undocommands/deletepatternpiece.h"
 #include "../../geometry/vpointf.h"
 
+#include <QMessageBox>
+
 const QString VToolSinglePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,8 +187,18 @@ void VToolSinglePoint::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::DeleteTool()
 {
-    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, namePP);
-    connect(deletePP, &DeletePatternPiece::ClearScene, doc, &VPattern::ClearScene);
+    QMessageBox msgBox;
+    msgBox.setText(tr("Confirm the deletion."));
+    msgBox.setInformativeText(tr("Do you really want delete?"));
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Question);
+    if (msgBox.exec() == QMessageBox::Cancel)
+    {
+        return;
+    }
+
+    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
     connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(deletePP);
 }
@@ -225,7 +237,14 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
  */
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
-    ContextMenu<DialogSinglePoint>(this, event);
+    if (doc->CountPP() > 1)
+    {
+        ContextMenu<DialogSinglePoint>(this, event);
+    }
+    else
+    {
+        ContextMenu<DialogSinglePoint>(this, event, false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -277,5 +296,12 @@ void VToolSinglePoint::SetFactor(qreal factor)
  */
 void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogSinglePoint>(this, event, false);
+    if (doc->CountPP() > 1)
+    {
+        ContextMenu<DialogSinglePoint>(this, event);
+    }
+    else
+    {
+        ContextMenu<DialogSinglePoint>(this, event, false);
+    }
 }

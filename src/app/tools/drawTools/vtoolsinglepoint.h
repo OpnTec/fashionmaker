@@ -40,8 +40,7 @@ class VToolSinglePoint : public VToolPoint
     Q_OBJECT
 public:
     VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP = QString(), const QString &mPath = QString(),
-                      QGraphicsItem * parent = nullptr );
+                      const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
     virtual void setDialog();
     static const QString ToolType;
 public slots:
@@ -60,10 +59,6 @@ protected:
     virtual void RefreshDataInFile();
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void decrementReferens();
-    /**
-     * @brief DeleteTool delete tool from file and scene. This tool can't be deleted by now.
-     * @param tool tool what me delete.
-     */
     virtual void DeleteTool();
     virtual void SaveDialog(QDomElement &domElement);
 private:

@@ -126,15 +126,12 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
 void VPattern::ChangeActivPP(const QString &name, const Document &parse)
 {
     Q_ASSERT_X(name.isEmpty() == false, "ChangeActivPP", "name pattern piece is empty");
-    if (this->nameActivDraw != name)
+    if (CheckNamePP(name))
     {
-        if (CheckNamePP(name))
+        this->nameActivDraw = name;
+        if (parse == Document::FullParse)
         {
-            this->nameActivDraw = name;
-            if (parse == Document::FullParse)
-            {
-                emit ChangedActivPP(name);
-            }
+            emit ChangedActivPP(name);
         }
     }
 }
@@ -194,7 +191,8 @@ bool VPattern::appendPP(const QString &name)
         }
         else
         {
-            ChangeActivPP(name);
+            this->nameActivDraw = name;
+            emit ChangedActivPP(name);
         }
         return true;
     }
@@ -338,7 +336,7 @@ void VPattern::setCurrentData()
 {
     if (*mode == Draw::Calculation)
     {
-        if (patternPieces.size() > 1)//don't need upadate data if we have only one pattern piece
+        if (CountPP() > 1)//don't need upadate data if we have only one pattern piece
         {
             quint32 id = 0;
             if (history.size() == 0)
@@ -985,7 +983,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 }
                 if (parse == Document::FullParse)
                 {
-                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile);
+                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile, nameActivDraw, MPath());
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -1910,4 +1908,16 @@ QDomElement VPattern::GetPPElement(const QString &name)
         }
     }
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPattern::CountPP() const
+{
+    const QDomElement rootElement = this->documentElement();
+    if (rootElement.isNull())
+    {
+        return 0;
+    }
+
+    return rootElement.elementsByTagName( TagDraw ).count();
 }

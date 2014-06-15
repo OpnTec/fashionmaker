@@ -34,6 +34,9 @@ AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QS
                                  QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
 {
+    Q_ASSERT(xml.isNull() == false);
+    Q_ASSERT(namePP.isEmpty() == false);
+    Q_ASSERT(mPath.isEmpty() == false);
     setText(tr("Add pattern piece %1").arg(namePP));
 }
 
@@ -44,7 +47,7 @@ AddPatternPiece::~AddPatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
 {
-    if (CountPP() <= 1)
+    if (doc->CountPP() <= 1)
     {
         emit ClearScene();
     }
@@ -60,7 +63,7 @@ void AddPatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::redo()
 {
-    if (CountPP() == 0 && mPath.isEmpty() == false)
+    if (doc->CountPP() == 0 && mPath.isEmpty() == false)
     {
         doc->CreateEmptyFile(mPath);
     }
@@ -74,17 +77,4 @@ void AddPatternPiece::redo()
         emit NeedFullParsing();
     }
     redoFlag = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int AddPatternPiece::CountPP()
-{
-    QDomElement rootElement = doc->documentElement();
-    if (rootElement.isNull())
-    {
-        return 0;
-    }
-
-    const QDomNodeList elements = rootElement.elementsByTagName( VPattern::TagDraw );
-    return elements.count();
 }

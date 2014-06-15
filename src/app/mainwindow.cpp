@@ -166,6 +166,7 @@ void MainWindow::ActionNewPP()
         {
             return;
         }
+        path = doc->MPath();
     }
     if (doc->appendPP(patternPieceName) == false)
     {
@@ -195,7 +196,10 @@ void MainWindow::ActionNewPP()
     if ( index != -1 )
     { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
-        currentDrawChanged( index );
+    }
+    else
+    {
+        comboBoxDraws->setCurrentIndex(0);
     }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &MainWindow::currentDrawChanged);
@@ -1590,8 +1594,13 @@ void MainWindow::FullParseFile()
     qint32 index = comboBoxDraws->findText(patternPiece);
     if ( index != -1 )
     { // -1 for not found
-        comboBoxDraws->setCurrentIndex(index);
+        currentDrawChanged(index);
     }
+    else
+    {
+        currentDrawChanged(0);
+    }
+
     if (comboBoxDraws->count() > 0)
     {
         SetEnableTool(true);

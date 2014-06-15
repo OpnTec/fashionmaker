@@ -98,9 +98,9 @@ protected:
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
             QAction *actionRemove = nullptr;
+            actionRemove = menu.addAction(tr("Delete"));
             if (showRemove)
             {
-                actionRemove = menu.addAction(tr("Delete"));
                 if (_referens > 1)
                 {
                     actionRemove->setEnabled(false);
@@ -110,6 +110,11 @@ protected:
                     actionRemove->setEnabled(true);
                 }
             }
+            else
+            {
+                actionRemove->setEnabled(false);
+            }
+
             QAction *selectedAction = menu.exec(event->screenPos());
             if (selectedAction == actionOption)
             {
@@ -130,12 +135,9 @@ protected:
 
                 dialog->show();
             }
-            if (showRemove)
+            if (selectedAction == actionRemove)
             {
-                if (selectedAction == actionRemove)
-                {
-                    DeleteTool();
-                }
+                DeleteTool();
             }
         }
     }

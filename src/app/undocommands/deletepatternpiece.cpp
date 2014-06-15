@@ -50,42 +50,19 @@ DeletePatternPiece::~DeletePatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::undo()
 {
-    if (CountPP() == 0)
-    {
-        doc->CreateEmptyFile(mPath);
-    }
 
     QDomElement rootElement = doc->documentElement();
     rootElement.insertAfter(patternPiece, previousNode);
 
     emit NeedFullParsing();
+    doc->ChangedActivPP(namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::redo()
 {
-    if (CountPP() <= 1)
-    {
-        emit ClearScene();
-    }
-    else
-    {
-        QDomElement rootElement = doc->documentElement();
-        QDomElement patternPiece = doc->GetPPElement(namePP);
-        rootElement.removeChild(patternPiece);
-        emit NeedFullParsing();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int DeletePatternPiece::CountPP()
-{
     QDomElement rootElement = doc->documentElement();
-    if (rootElement.isNull())
-    {
-        return 0;
-    }
-
-    const QDomNodeList elements = rootElement.elementsByTagName( VPattern::TagDraw );
-    return elements.count();
+    QDomElement patternPiece = doc->GetPPElement(namePP);
+    rootElement.removeChild(patternPiece);
+    emit NeedFullParsing();
 }

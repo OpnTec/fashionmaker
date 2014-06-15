@@ -43,7 +43,6 @@ public:
     virtual void undo();
     virtual void redo();
 signals:
-    void ClearScene();
     void NeedFullParsing();
 private:
     Q_DISABLE_COPY(DeletePatternPiece)
@@ -52,7 +51,6 @@ private:
     QDomElement patternPiece;
     QString     mPath;
     QDomNode    previousNode;
-    int         CountPP();
 };
 
 #endif // DELETEPATTERNPIECE_H

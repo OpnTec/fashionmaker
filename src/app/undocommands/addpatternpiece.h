@@ -53,7 +53,6 @@ private:
     QString    namePP;
     bool       redoFlag;
     QString    mPath;
-    int        CountPP();
 };
 
 #endif // ADDPATTERNPIECE_H

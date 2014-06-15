@@ -109,6 +109,8 @@ public:
     virtual bool   SaveDocument(const QString &fileName);
     QStringList    getPatternPieces() const;
     QDomElement    GetPPElement(const QString &name);
+    bool           CheckNamePP(const QString& name) const;
+    int            CountPP() const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -172,7 +174,6 @@ private:
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
 
-    bool           CheckNamePP(const QString& name) const;
     void           SetActivPP(const QString& name);
     void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
                                     const QDomNode& node, const Document &parse);
