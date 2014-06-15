@@ -407,7 +407,7 @@ void CommunityPage::add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool c
 {
     QLabel *labelbox = new QLabel(label);
     (*thebox)= new QCheckBox;
-    (*thebox)->setChecked(checked   );
+    (*thebox)->setChecked(checked);
     layout->addRow(labelbox, *thebox);
 }
 
