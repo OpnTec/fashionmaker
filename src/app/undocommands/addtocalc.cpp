@@ -59,6 +59,7 @@ void AddToCalc::undo()
     else
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        return;
     }
     emit NeedFullParsing();
 }
@@ -87,12 +88,14 @@ void AddToCalc::redo()
             else
             {
                 qDebug()<<"Can not find the element after which you want to insert."<< Q_FUNC_INFO;
+                return;
             }
         }
     }
     else
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        return;
     }
     if (redoFlag)
     {

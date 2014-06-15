@@ -51,6 +51,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     else
     {
         qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -75,6 +76,7 @@ void MoveDetail::undo()
     else
     {
         qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -95,6 +97,7 @@ void MoveDetail::redo()
     else
     {
         qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        return;
     }
 }
 

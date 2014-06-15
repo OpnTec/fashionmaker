@@ -242,17 +242,20 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
  * @brief DeleteTool full delete object form scene and file.
  * @param tool tool
  */
-void VAbstractTool::DeleteTool()
+void VAbstractTool::DeleteTool(bool ask)
 {
-    QMessageBox msgBox;
-    msgBox.setText(tr("Confirm the deletion."));
-    msgBox.setInformativeText(tr("Do you really want delete?"));
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.setIcon(QMessageBox::Question);
-    if (msgBox.exec() == QMessageBox::Cancel)
+    if (ask)
     {
-        return;
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm the deletion."));
+        msgBox.setInformativeText(tr("Do you really want delete?"));
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Question);
+        if (msgBox.exec() == QMessageBox::Cancel)
+        {
+            return;
+        }
     }
 
     DelTool *delTool = new DelTool(doc, id);

@@ -67,6 +67,7 @@ void MoveSpline::undo()
     else
     {
         qDebug()<<"Can't find spline with id ="<< splineId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -90,6 +91,7 @@ void MoveSpline::redo()
     else
     {
         qDebug()<<"Can't find spline with id ="<< splineId << Q_FUNC_INFO;
+        return;
     }
 }
 

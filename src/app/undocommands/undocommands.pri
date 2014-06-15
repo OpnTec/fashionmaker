@@ -9,7 +9,10 @@ HEADERS += \
     undocommands/savedetailoptions.h \
     undocommands/movedetail.h \
     undocommands/deltool.h \
-    undocommands/deletepatternpiece.h
+    undocommands/deletepatternpiece.h \
+    undocommands/adddetnode.h \
+    undocommands/adddet.h \
+    undocommands/adduniondetails.h
     
 
 SOURCES += \
@@ -22,5 +25,8 @@ SOURCES += \
     undocommands/savedetailoptions.cpp \
     undocommands/movedetail.cpp \
     undocommands/deltool.cpp \
-    undocommands/deletepatternpiece.cpp
+    undocommands/deletepatternpiece.cpp \
+    undocommands/adddetnode.cpp \
+    undocommands/adddet.cpp \
+    undocommands/adduniondetails.cpp
     

@@ -45,6 +45,7 @@ DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
     else
     {
         qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -71,5 +72,6 @@ void DelTool::redo()
     else
     {
         qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        return;
     }
 }

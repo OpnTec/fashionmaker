@@ -51,6 +51,7 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
     else
     {
         qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -75,6 +76,7 @@ void MoveSPoint::undo()
     else
     {
         qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -95,6 +97,7 @@ void MoveSPoint::redo()
     else
     {
         qDebug()<<"Can't find spoint with id ="<< sPointId << Q_FUNC_INFO;
+        return;
     }
 }
 

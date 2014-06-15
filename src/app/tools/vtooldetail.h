@@ -80,7 +80,7 @@ public:
     static const QString NodePoint;
     static const QString NodeSpline;
     static const QString NodeSplinePath;
-    void               Remove();
+    void               Remove(bool ask);
     static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
 public slots:
     virtual void       FullUpdateFromFile ();

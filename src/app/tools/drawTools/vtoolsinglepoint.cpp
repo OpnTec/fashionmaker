@@ -185,17 +185,20 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DeleteTool()
+void VToolSinglePoint::DeleteTool(bool ask)
 {
-    QMessageBox msgBox;
-    msgBox.setText(tr("Confirm the deletion."));
-    msgBox.setInformativeText(tr("Do you really want delete?"));
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.setIcon(QMessageBox::Question);
-    if (msgBox.exec() == QMessageBox::Cancel)
+    if (ask)
     {
-        return;
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm the deletion."));
+        msgBox.setInformativeText(tr("Do you really want delete?"));
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Question);
+        if (msgBox.exec() == QMessageBox::Cancel)
+        {
+            return;
+        }
     }
 
     DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);

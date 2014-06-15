@@ -40,6 +40,7 @@
 #include <QGraphicsView>
 #include "../undocommands/savedetailoptions.h"
 #include "../undocommands/movedetail.h"
+#include "../undocommands/adddet.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -123,7 +124,11 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
-       AddToFile();
+        AddToFile();
+        if (typeCreation != Source::FromTool)
+        {
+            qApp->getUndoStack()->endMacro();
+        }
     }
 }
 
@@ -161,6 +166,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     SCASSERT(dialogTool != nullptr);
     VDetail detail = dialogTool->getDetails();
     VDetail det;
+    qApp->getUndoStack()->beginMacro("add detail");
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
@@ -219,6 +225,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
         det.append(node);
     }
     det.setName(detail.getName());
+    det.setWidth(detail.getWidth());
     Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
@@ -264,9 +271,9 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
 /**
  * @brief Remove full delete detail.
  */
-void VToolDetail::Remove()
+void VToolDetail::Remove(bool ask)
 {
-    DeleteTool();
+    DeleteTool(ask);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,12 +330,9 @@ void VToolDetail::AddToFile()
        AddNode(doc, domElement, detail.at(i));
     }
 
-    QDomElement element;
-    bool ok = doc->GetActivNodeElement(VPattern::TagDetails, element);
-    if (ok)
-    {
-        element.appendChild(domElement);
-    }
+    AddDet *addDet = new AddDet(domElement, doc);
+    connect(addDet, &AddDet::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addDet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

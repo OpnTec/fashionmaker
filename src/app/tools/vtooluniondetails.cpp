@@ -33,6 +33,7 @@
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
 #include "../dialogs/tools/dialoguniondetails.h"
+#include "../undocommands/adduniondetails.h"
 
 const QString VToolUnionDetails::TagName          = QStringLiteral("tools");
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
@@ -492,6 +493,7 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
+    qApp->getUndoStack()->beginMacro("union details");
     Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
            Source::FromGui);
 }
@@ -603,6 +605,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
         } while (i < d1.RemoveEdge(indexD1).CountNode());
 
         newDetail.setName("Detail");
+        newDetail.setWidth(d1.getWidth());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
@@ -610,12 +613,14 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
         {
             VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
             SCASSERT(toolDet != nullptr);
-            toolDet->Remove();
+            bool ask = false;
+            toolDet->Remove(ask);
         }
 
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
         SCASSERT(toolDet != nullptr);
-        toolDet->Remove();
+        bool ask = false;
+        toolDet->Remove(ask);
     }
     else
     {
@@ -644,6 +649,11 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
                 } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
             }
         } while (i<d1.RemoveEdge(indexD1).CountNode());
+    }
+
+    if (typeCreation == Source::FromGui)
+    {
+        qApp->getUndoStack()->endMacro();
     }
 }
 
@@ -896,15 +906,7 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
  */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
-    QDomElement modelingElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
-    if (ok)
-    {
-        modelingElement.appendChild(domElement);
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddUnionDetails *addUnion = new AddUnionDetails(domElement, doc);
+    connect(addUnion, &AddUnionDetails::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addUnion);
 }

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   savetooloptions.cpp
+ **  @file   adddet.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 6, 2014
+ **  @date   15 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,75 +26,52 @@
  **
  *************************************************************************/
 
-#include "savetooloptions.h"
-#include "../options.h"
+#include "adddet.h"
 #include "../xml/vpattern.h"
-#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id,
-                                 QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), oldXml(oldXml), newXml(newXml), doc(doc), toolId(id)
+AddDet::AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), redoFlag(false)
 {
-    setText(tr("Save tool option"));
+    setText(tr("Add detail"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::~SaveToolOptions()
+AddDet::~AddDet()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void SaveToolOptions::undo()
+void AddDet::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
-    if (domElement.isElement())
+    QDomElement element;
+    if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
-        domElement.parentNode().replaceChild(oldXml, domElement);
-
-        emit NeedLiteParsing();
+        element.removeChild(xml);
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< toolId << Q_FUNC_INFO;
+        qDebug()<<"Can't find tag"<<VPattern::TagDetails<< Q_FUNC_INFO;
         return;
     }
+    emit NeedFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void SaveToolOptions::redo()
+void AddDet::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
-    if (domElement.isElement())
+    QDomElement element;
+    if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
-        domElement.parentNode().replaceChild(newXml, domElement);
-
-        emit NeedLiteParsing();
+        element.appendChild(xml);
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< toolId << Q_FUNC_INFO;
+        qDebug()<<"Can't find tag"<<VPattern::TagDetails<< Q_FUNC_INFO;
         return;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool SaveToolOptions::mergeWith(const QUndoCommand *command)
-{
-    const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(saveCommand != nullptr);
-    const quint32 id = saveCommand->getToolId();
-
-    if (id != toolId)
+    if (redoFlag)
     {
-        return false;
+        emit NeedFullParsing();
     }
-
-    newXml = saveCommand->getNewXml();
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int SaveToolOptions::id() const
-{
-    return static_cast<int>(UndoCommand::SaveToolOptions);
+    redoFlag = true;
 }

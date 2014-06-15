@@ -29,6 +29,8 @@
 #include "vabstractnode.h"
 #include <QDebug>
 #include "../../xml/vpattern.h"
+#include "../../undocommands/adddetnode.h"
+#include "../../widgets/vapplication.h"
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
@@ -74,17 +76,8 @@ void VAbstractNode::RestoreNode()
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    QDomElement modelingElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
-    if (ok)
-    {
-        modelingElement.appendChild(domElement);
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddDetNode *addNode = new AddDetNode(domElement, doc);
+    qApp->getUndoStack()->push(addNode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

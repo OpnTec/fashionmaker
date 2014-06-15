@@ -75,6 +75,7 @@ void SaveDetailOptions::undo()
     else
     {
         qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        return;
     }
 }
 
@@ -111,6 +112,7 @@ void SaveDetailOptions::redo()
     else
     {
         qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        return;
     }
 }
 
