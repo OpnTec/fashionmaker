@@ -41,6 +41,7 @@ AddDet::~AddDet()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void AddDet::undo()
 {
     QDomElement element;
@@ -57,6 +58,7 @@ void AddDet::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void AddDet::redo()
 {
     QDomElement element;

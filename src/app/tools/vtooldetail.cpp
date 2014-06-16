@@ -586,4 +586,5 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
+    doc->IncrementReferens(node.getId());
 }

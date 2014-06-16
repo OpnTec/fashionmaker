@@ -65,6 +65,7 @@ void SaveDetailOptions::undo()
             {
                 VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(nodes.at(i).getId()));
                 node->RestoreNode();
+                doc->IncrementReferens(nodes.at(i).getId());
             }
         }
         emit NeedLiteParsing();
@@ -102,6 +103,7 @@ void SaveDetailOptions::redo()
             {
                 VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list.at(i)));
                 node->DeleteNode();
+                doc->DecrementReferens(list.at(i));
             }
         }
         emit NeedLiteParsing();

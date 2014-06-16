@@ -43,6 +43,7 @@ public:
     virtual ~MoveDetail();
     virtual void undo();
     virtual void redo();
+    // cppcheck-suppress unusedFunction
     virtual bool mergeWith(const QUndoCommand *command);
     virtual int  id() const;
     quint32      getDetId() const;

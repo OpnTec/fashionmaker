@@ -465,59 +465,6 @@ void VContainer::ClearCalculationGObjects()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FindVar return value of variable by name
- * @param name name of variable
- * @param ok false if can't find variable
- * @return value of variable
- */
-qreal VContainer::FindVar(const QString &name, bool *ok)const
-{
-    if (sizeName == name)
-    {
-        *ok = true;
-        return _size;
-    }
-    if (heightName == name)
-    {
-        *ok = true;
-        return _height;
-    }
-    if (measurements.contains(name))
-    {
-        *ok = true;
-        return GetValueStandardTableRow(name);
-    }
-    if (increments.contains(name))
-    {
-        *ok = true;
-        return GetValueIncrementTableRow(name);
-    }
-    if (lengthLines.contains(name))
-    {
-        *ok = true;
-        return lengthLines.value(name);
-    }
-    if (lengthArcs.contains(name))
-    {
-        *ok = true;
-        return lengthArcs.value(name);
-    }
-    if (lineAngles.contains(name))
-    {
-        *ok = true;
-        return lineAngles.value(name);
-    }
-    if (lengthSplines.contains(name))
-    {
-        *ok = true;
-        return lengthSplines.value(name);
-    }
-    *ok = false;
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AddLine add line to container
  * @param firstPointId id of first point of line
  * @param secondPointId id of second point of line

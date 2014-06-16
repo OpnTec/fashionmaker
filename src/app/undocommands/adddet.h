@@ -40,7 +40,9 @@ class AddDet : public QObject, public QUndoCommand
 public:
     AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddDet();
+    // cppcheck-suppress unusedFunction
     virtual void undo();
+    // cppcheck-suppress unusedFunction
     virtual void redo();
 signals:
     void NeedFullParsing();

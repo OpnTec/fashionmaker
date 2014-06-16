@@ -67,8 +67,6 @@ public:
     QString            VarFromUser(const QString &var) const;
     QString            GuiText(const QString &measurement) const;
     QString            Description(const QString &measurement) const;
-    QString            Variable(const QString &name) const;
-    QString            Function(const QString &name) const;
     QString            PostfixOperator(const QString &name) const;
     QString            FormulaFromUser(const QString &formula);
     QString            FormulaToUser(const QString &formula);

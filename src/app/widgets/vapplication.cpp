@@ -1717,18 +1717,6 @@ QString VApplication::Description(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::Variable(const QString &name) const
-{
-    return variables.value(name).translate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VApplication::Function(const QString &name) const
-{
-    return functions.value(name).translate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::PostfixOperator(const QString &name) const
 {
     return postfixOperators.value(name).translate();

@@ -133,6 +133,7 @@ QString VException::DetailedInformation() const
  * @brief clone clone exception
  * @return new exception
  */
+// cppcheck-suppress unusedFunction
 VException *VException::clone() const
 {
     return new VException(*this);

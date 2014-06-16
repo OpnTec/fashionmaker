@@ -67,6 +67,7 @@ void DeleteDetail::redo()
     {
         parentNode.removeChild(domElement);
 
+        //When UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(detId));

@@ -107,6 +107,7 @@ void MoveDetail::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 bool MoveDetail::mergeWith(const QUndoCommand *command)
 {
     const MoveDetail *moveCommand = static_cast<const MoveDetail *>(command);

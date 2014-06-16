@@ -76,6 +76,7 @@ inline qint64  MessageHandler::column() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
                                    const QSourceLocation &sourceLocation)
 {

@@ -127,7 +127,6 @@ public:
     QString            SizeName()const;
     qreal              height() const;
     QString            HeightName()const;
-    qreal              FindVar(const QString& name, bool *ok)const;
     bool               IncrementTableContains(const QString& name);
     static quint32     getNextId();
     void               RemoveIncrementTableRow(const QString& name);

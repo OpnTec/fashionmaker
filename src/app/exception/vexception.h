@@ -47,6 +47,7 @@ public:
     virtual ~VException() noexcept (true){}
 
     virtual void    raise() const;
+    // cppcheck-suppress unusedFunction
     virtual VException *clone() const;
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;

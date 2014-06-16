@@ -53,7 +53,7 @@ signals:
      * @brief NameChangePosition emit when label change position.
      * @param pos new posotion.
      */
-    void         NameChangePosition(const QPointF pos);
+    void         NameChangePosition(const QPointF &pos);
     /**
      * @brief ShowContextMenu emit when need show tool context menu.
      * @param event context menu event.

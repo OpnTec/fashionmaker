@@ -50,7 +50,7 @@ signals:
      * @param pos new posotion.
      */
     void              ControlPointChangePosition(const qint32 &indexSpline, SplinePointPosition position,
-                                                 const QPointF pos);
+                                                 const QPointF &pos);
 public slots:
     void              RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                   const QPointF &splinePoint);
