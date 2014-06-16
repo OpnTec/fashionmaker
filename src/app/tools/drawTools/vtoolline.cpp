@@ -315,7 +315,7 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool();
+            DeleteTool(this);
             break;
         default:
             break;

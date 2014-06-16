@@ -137,7 +137,7 @@ protected:
             }
             if (selectedAction == actionRemove)
             {
-                DeleteTool();
+                DeleteTool(tool);
             }
         }
     }

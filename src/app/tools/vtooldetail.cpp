@@ -273,7 +273,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
  */
 void VToolDetail::Remove(bool ask)
 {
-    DeleteTool(ask);
+    DeleteTool(this, ask);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,7 +368,6 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 {
     if (change == ItemPositionHasChanged && scene())
     {
-        this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         // value - this is new position.
         QPointF newPos = value.toPointF();
 
@@ -403,7 +402,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool();
+            DeleteTool(this);
             break;
         default:
             break;
@@ -457,7 +456,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        DeleteTool();
+        DeleteTool(this);
     }
 }
 
@@ -544,6 +543,7 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
  */
 void VToolDetail::RefreshGeometry()
 {
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     QPainterPath path = VEquidistant().ContourPath(id, this->getData());
     this->setPath(path);
 

@@ -28,11 +28,12 @@
 
 #include "deltool.h"
 #include "../xml/vpattern.h"
+#include <QGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
-DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
+DelTool::DelTool(VPattern *doc, quint32 id, QGraphicsItem *tool, QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), xml(QDomElement()), parentNode(QDomNode()), previousNode(QDomNode()),
-      doc(doc), toolId(id)
+      doc(doc), toolId(id), tool(tool)
 {
     setText(tr("Delete tool"));
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -67,6 +68,7 @@ void DelTool::redo()
     if (domElement.isElement())
     {
         parentNode.removeChild(domElement);
+        tool->hide();
         emit NeedFullParsing();
     }
     else

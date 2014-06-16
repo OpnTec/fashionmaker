@@ -33,12 +33,13 @@
 #include <QUndoCommand>
 
 class VPattern;
+class QGraphicsItem;
 
 class DelTool : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    DelTool(VPattern *doc, quint32 id, QUndoCommand *parent = 0);
+    DelTool(VPattern *doc, quint32 id, QGraphicsItem *tool, QUndoCommand *parent = 0);
     virtual ~DelTool();
     virtual void undo();
     virtual void redo();
@@ -51,6 +52,7 @@ private:
     QDomNode previousNode;
     VPattern *doc;
     quint32  toolId;
+    QGraphicsItem *tool;
 };
 
 #endif // DELTOOL_H

@@ -59,7 +59,7 @@ protected:
     virtual void RefreshDataInFile();
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void decrementReferens();
-    virtual void DeleteTool(bool ask = true);
+    virtual void DeleteTool(QGraphicsItem *tool, bool ask = true);
     virtual void SaveDialog(QDomElement &domElement);
 private:
     QString namePP;

@@ -161,7 +161,6 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
     }
     if (change == ItemPositionHasChanged && scene())
     {
-        this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         // value - this is new position.
         QPointF newPos = value.toPointF();
 
@@ -185,8 +184,9 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DeleteTool(bool ask)
+void VToolSinglePoint::DeleteTool(QGraphicsItem *tool, bool ask)
 {
+    Q_UNUSED(tool)
     if (ask)
     {
         QMessageBox msgBox;

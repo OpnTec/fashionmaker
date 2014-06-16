@@ -199,6 +199,7 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -213,6 +214,7 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
     namePoint->setPos(QPointF(point.mx(), point.my()));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     RefreshLine();
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,7 +281,7 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool();
+            DeleteTool(this);
             break;
         default:
             break;

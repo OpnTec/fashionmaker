@@ -37,7 +37,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                        QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), oldX(0.0), oldY(0.0), newX(x), newY(y), detId(id), scene(scene)
+    : QObject(), QUndoCommand(parent), doc(doc), oldX(0.0), oldY(0.0), newX(x), newY(y), detId(id), scene(scene),
+      redoFlag(false)
 {
     setText(QObject::tr("Move detail"));
 
@@ -67,6 +68,7 @@ void MoveDetail::undo()
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(oldX)));
         doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(oldY)));
+        qDebug()<<"undo move detail"<<oldX<<oldY;
 
         emit NeedLiteParsing();
 
@@ -88,8 +90,13 @@ void MoveDetail::redo()
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(newX)));
         doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(newY)));
+        qDebug()<<"redo move detail"<<newX<<newY;
 
-        emit NeedLiteParsing();
+        if (redoFlag)
+        {
+            emit NeedLiteParsing();
+        }
+        redoFlag = true;
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);
