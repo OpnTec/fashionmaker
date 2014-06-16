@@ -184,9 +184,8 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DeleteTool(QGraphicsItem *tool, bool ask)
+void VToolSinglePoint::DeleteTool(bool ask)
 {
-    Q_UNUSED(tool)
     if (ask)
     {
         QMessageBox msgBox;

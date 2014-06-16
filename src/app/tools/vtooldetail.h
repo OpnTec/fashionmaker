@@ -109,6 +109,7 @@ private:
      * @param node node of detail.
      */
     void               InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
+    virtual void       DeleteTool(bool ask = true);
 };
 
 #endif // VTOOLDETAIL_H

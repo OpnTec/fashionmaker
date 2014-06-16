@@ -75,7 +75,7 @@ public:
                               quint32 &idCount, const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = 0,
                               const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                 const qreal angle);
+                                 const qreal &angle);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

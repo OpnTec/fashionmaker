@@ -68,7 +68,6 @@ void MoveDetail::undo()
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(oldX)));
         doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(oldY)));
-        qDebug()<<"undo move detail"<<oldX<<oldY;
 
         emit NeedLiteParsing();
 
@@ -90,7 +89,6 @@ void MoveDetail::redo()
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(newX)));
         doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(newY)));
-        qDebug()<<"redo move detail"<<newX<<newY;
 
         if (redoFlag)
         {

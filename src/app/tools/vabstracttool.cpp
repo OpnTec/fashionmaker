@@ -242,9 +242,8 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
  * @brief DeleteTool full delete object form scene and file.
  * @param tool tool
  */
-void VAbstractTool::DeleteTool(QGraphicsItem *tool, bool ask)
+void VAbstractTool::DeleteTool(bool ask)
 {
-    DelTool *delTool = new DelTool(doc, id, tool);
     if (ask)
     {
         QMessageBox msgBox;
@@ -257,9 +256,9 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool, bool ask)
         {
             return;
         }
-        /*Ugly hack. If UnionDetails delete detail no need emit FullParsing */
-        connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     }
+    DelTool *delTool = new DelTool(doc, id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(delTool);
 }
 

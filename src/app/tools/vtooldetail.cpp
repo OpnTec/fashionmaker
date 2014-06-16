@@ -38,9 +38,11 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>
 #include <QGraphicsView>
+#include <QMessageBox>
 #include "../undocommands/savedetailoptions.h"
 #include "../undocommands/movedetail.h"
 #include "../undocommands/adddet.h"
+#include "../undocommands/deletedetail.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -273,7 +275,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
  */
 void VToolDetail::Remove(bool ask)
 {
-    DeleteTool(this, ask);
+    DeleteTool(ask);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -550,6 +552,27 @@ void VToolDetail::RefreshGeometry()
     VDetail detail = VAbstractTool::data.GetDetail(id);
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+void VToolDetail::DeleteTool(bool ask)
+{
+    DeleteDetail *delDet = new DeleteDetail(doc, id);
+    if (ask)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm the deletion."));
+        msgBox.setInformativeText(tr("Do you really want delete?"));
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Question);
+        if (msgBox.exec() == QMessageBox::Cancel)
+        {
+            return;
+        }
+        /*Ugly hack. If UnionDetails delete detail no need emit FullParsing */
+        connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    }
+    qApp->getUndoStack()->push(delDet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

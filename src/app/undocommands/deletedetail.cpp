@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   deltool.cpp
+ **  @file   deletedetail.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 6, 2014
+ **  @date   16 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,15 +26,13 @@
  **
  *************************************************************************/
 
-#include "deltool.h"
+#include "deletedetail.h"
 #include "../xml/vpattern.h"
-#include <QGraphicsItem>
 #include "../tools/vtooldetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(QDomElement()), parentNode(QDomNode()), doc(doc), toolId(id),
-      cursor(doc->getCursor())
+DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
+    : QObject(), QUndoCommand(parent), xml(QDomElement()), doc(doc), detId(id), parentNode(QDomNode())
 {
     setText(tr("Delete tool"));
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -45,45 +43,41 @@ DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
     }
     else
     {
-        qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get detail by id = "<<detId<<Q_FUNC_INFO;
         return;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DelTool::~DelTool()
+DeleteDetail::~DeleteDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void DelTool::undo()
+void DeleteDetail::undo()
 {
-    if (cursor <= 0)
-    {
-        parentNode.appendChild(xml);
-    }
-    else
-    {
-        QDomElement refElement = doc->elementById(QString().setNum(cursor));
-        if (refElement.isElement())
-        {
-            parentNode.insertAfter(xml, refElement);
-        }
-    }
+    parentNode.appendChild(xml);
     emit NeedFullParsing();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DelTool::redo()
+void DeleteDetail::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
+    QDomElement domElement = doc->elementById(QString().setNum(detId));
     if (domElement.isElement())
     {
         parentNode.removeChild(domElement);
+
+        QHash<quint32, VDataTool*>* tools = doc->getTools();
+        SCASSERT(tools != nullptr);
+        VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(detId));
+        SCASSERT(toolDet != nullptr);
+        toolDet->hide();
+
         emit NeedFullParsing();
     }
     else
     {
-        qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get detail by id = "<<detId<<Q_FUNC_INFO;
         return;
     }
 }

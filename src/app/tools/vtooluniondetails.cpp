@@ -467,7 +467,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
  * @param angle angle rotation.
  */
 void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                        const qreal angle)
+                                        const qreal &angle)
 {
     point->setX(point->x()+dx);
     point->setY(point->y()+dy);
@@ -496,6 +496,7 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
     qApp->getUndoStack()->beginMacro("union details");
     Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
            Source::FromGui);
+    qApp->getUndoStack()->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -649,11 +650,6 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
                 } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
             }
         } while (i<d1.RemoveEdge(indexD1).CountNode());
-    }
-
-    if (typeCreation == Source::FromGui)
-    {
-        qApp->getUndoStack()->endMacro();
     }
 }
 

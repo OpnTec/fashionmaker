@@ -12,7 +12,8 @@ HEADERS += \
     undocommands/deletepatternpiece.h \
     undocommands/adddetnode.h \
     undocommands/adddet.h \
-    undocommands/adduniondetails.h
+    undocommands/adduniondetails.h \
+    undocommands/deletedetail.h
     
 
 SOURCES += \
@@ -28,5 +29,6 @@ SOURCES += \
     undocommands/deletepatternpiece.cpp \
     undocommands/adddetnode.cpp \
     undocommands/adddet.cpp \
-    undocommands/adduniondetails.cpp
+    undocommands/adduniondetails.cpp \
+    undocommands/deletedetail.cpp
     

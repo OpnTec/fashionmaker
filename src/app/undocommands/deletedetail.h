@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   deltool.h
+ **  @file   deletedetail.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 6, 2014
+ **  @date   16 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef DELTOOL_H
-#define DELTOOL_H
+#ifndef DELETEDETAIL_H
+#define DELETEDETAIL_H
 
 #include <QDomElement>
 #include <QUndoCommand>
@@ -35,23 +35,22 @@
 class VPattern;
 class QGraphicsItem;
 
-class DelTool : public QObject, public QUndoCommand
+class DeleteDetail : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    DelTool(VPattern *doc, quint32 id, QUndoCommand *parent = 0);
-    virtual ~DelTool();
+    DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent = 0);
+    virtual ~DeleteDetail();
     virtual void undo();
     virtual void redo();
 signals:
     void NeedFullParsing();
 private:
-    Q_DISABLE_COPY(DelTool)
+    Q_DISABLE_COPY(DeleteDetail)
     QDomElement xml;
-    QDomNode parentNode;
     VPattern *doc;
-    quint32  toolId;
-    quint32 cursor;
+    quint32  detId;
+    QDomNode parentNode;
 };
 
-#endif // DELTOOL_H
+#endif // DELETEDETAIL_H
