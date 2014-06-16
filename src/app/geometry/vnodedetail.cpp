@@ -30,11 +30,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :id(0), typeTool(Valentina::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
+    :id(0), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::VNodeDetail(quint32 id, Valentina::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx, qreal my)
+VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my)
     :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my)
 {}
 

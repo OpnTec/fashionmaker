@@ -29,20 +29,32 @@
 #include "vtoolalongline.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
-
+#include "../../geometry/vpointf.h"
 #include "exception/vexceptionobjecterror.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolAlongLine constuctor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param formula string with length formula.
+ * @param firstPointId id first point of line.
+ * @param secondPointId id second point of line.
+ * @param typeLine line type. line type.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
                                const quint32 &firstPointId, const quint32 &secondPointId,
-                               const QString &typeLine, const Valentina::Sources &typeCreation,
+                               const QString &typeLine, const Source &typeCreation,
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId)
 {
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -53,6 +65,9 @@ VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolAlongLine::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -67,6 +82,10 @@ void VToolAlongLine::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolAlongLine::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -74,6 +93,10 @@ void VToolAlongLine::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events. handle context menu event.
+ * @param event context menu event.
+ */
 //cppcheck-suppress unusedFunction
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
@@ -81,12 +104,19 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu handle context menu event.
+ * @param event context menu event.
+ */
 void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogAlongLine>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolAlongLine::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -107,6 +137,9 @@ void VToolAlongLine::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolAlongLine::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -124,6 +157,9 @@ void VToolAlongLine::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolAlongLine::RemoveReferens()
 {
     doc->DecrementReferens(secondPointId);
@@ -131,6 +167,9 @@ void VToolAlongLine::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolAlongLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -144,6 +183,9 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolAlongLine::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -158,6 +200,13 @@ void VToolAlongLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool form GUI.
+ * @param dialog dialog options.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -170,7 +219,7 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
     const QString pointName = dialogTool->getPointName();
     VToolAlongLine *point=nullptr;
     point = Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -179,10 +228,26 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
-                            const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
-                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                            const Document::Documents &parse, const Valentina::Sources &typeCreation)
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name. point name.
+ * @param typeLine line type.
+ * @param formula string with length formula.
+ * @param firstPointId id first point of line.
+ * @param secondPointId id second point of line.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
+VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                                       QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                                       const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                       VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -191,7 +256,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     line.setLength(qApp->toPixel(CheckFormula(formula, data)));
 
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject( new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
         data->AddLine(firstPointId, id);
@@ -207,7 +272,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::AlongLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,

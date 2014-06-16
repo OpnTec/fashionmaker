@@ -29,11 +29,20 @@
 #include "vtoolspline.h"
 #include "../../geometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
+#include "../../undocommands/movespline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
+/**
+ * @brief VToolSpline constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                          QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
 {
     const VSpline *spl = data->GeometricObject<const VSpline *>(id);
@@ -46,7 +55,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
-    VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePoint::FirstPoint, spl->GetP2(),
+    VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
                                                                  spl->GetP1().toQPointF(), this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -54,7 +63,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
     connect(this, &VToolSpline::setEnabledPoint, controlPoint1, &VControlPointSpline::setEnabledPoint);
     controlPoints.append(controlPoint1);
 
-    VControlPointSpline *controlPoint2 = new VControlPointSpline(1, SplinePoint::LastPoint, spl->GetP3(),
+    VControlPointSpline *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
                                                                  spl->GetP4().toQPointF(), this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -62,7 +71,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
     controlPoints.append(controlPoint2);
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -73,6 +82,9 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Vale
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolSpline::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -89,8 +101,14 @@ void VToolSpline::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data)
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
+void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
@@ -103,20 +121,36 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const qreal angle2 = dialogTool->getAngle2();
     const qreal kCurve = dialogTool->getKCurve();
     Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
-           Valentina::FromGui);
+           Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param p1 id first spline point.
+ * @param p4 id last spline point.
+ * @param kAsm1 coefficient of length first control line.
+ * @param kAsm2 coefficient of length second control line.
+ * @param angle1 angle from first point to first control point.
+ * @param angle2 angle from second point to second control point.
+ * @param kCurve coefficient of curvature spline.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                          const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                         const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                         const Document &parse, const Source &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
         data->AddLengthSpline(spline->name(), qApp->fromPixel(spline->GetLength()));
@@ -130,7 +164,7 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::SplineTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
@@ -144,13 +178,19 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePoint::Position &position,
+/**
+ * @brief ControlPointChangePosition handle change position control point.
+ * @param indexSpline position spline in spline list.
+ * @param position position point in spline.
+ * @param pos new position.
+ */
+void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos)
 {
     Q_UNUSED(indexSpline);
     const VSpline *spline = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     VSpline spl;
-    if (position == SplinePoint::FirstPoint)
+    if (position == SplinePointPosition::FirstPoint)
     {
         spl = VSpline(spline->GetP1(), pos, spline->GetP3(), spline->GetP4(), spline->GetKcurve());
     }
@@ -158,25 +198,26 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     {
         spl = VSpline(spline->GetP1(), spline->GetP2(), pos, spline->GetP4(), spline->GetKcurve());
     }
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetAngle1()));
-        doc->SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetAngle2()));
-        doc->SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        doc->SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
-        emit FullUpdateTree();
-        emit toolhaveChange();
-    }
+
+    MoveSpline *moveSpl = new MoveSpline(doc, spline, spl, id, this->scene());
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSpl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSpline>(this, event);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolSpline::AddToFile()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
@@ -196,6 +237,9 @@ void VToolSpline::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolSpline::RefreshDataInFile()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
@@ -213,16 +257,23 @@ void VToolSpline::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent  handle mouse release events.
+ * @param event context menu event.
+ */
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Spline);
+        emit ChoosedTool(id, SceneObject::Spline);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolSpline::RemoveReferens()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
@@ -231,6 +282,9 @@ void VToolSpline::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolSpline::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -265,6 +319,9 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry  refresh item on scene.
+ */
 void VToolSpline::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -275,10 +332,10 @@ void VToolSpline::RefreshGeometry()
     this->setPath(path);
     QPointF splinePoint = VAbstractTool::data.GeometricObject<const VPointF *>(spl->GetP1().id())->toQPointF();
     QPointF controlPoint = spl->GetP2();
-    emit RefreshLine(1, SplinePoint::FirstPoint, controlPoint, splinePoint);
+    emit RefreshLine(1, SplinePointPosition::FirstPoint, controlPoint, splinePoint);
     splinePoint = VAbstractTool::data.GeometricObject<const VPointF *>(spl->GetP4().id())->toQPointF();
     controlPoint = spl->GetP3();
-    emit RefreshLine(1, SplinePoint::LastPoint, controlPoint, splinePoint);
+    emit RefreshLine(1, SplinePointPosition::LastPoint, controlPoint, splinePoint);
 
     disconnect(controlPoints[0], &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);

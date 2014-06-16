@@ -30,20 +30,8 @@
 #define VGOBJECT_H
 
 #include "../options.h"
-#include "../exception/vexception.h"
-#include <QCoreApplication>
-#include <QHash>
 
-
-namespace GObject
-{
-    /**
-     * @brief The NodeDetail enum type of graphical objects.
-     */
-    enum Type { Point, Arc, Spline, SplinePath };
-    Q_DECLARE_FLAGS(Types, Type)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS(GObject::Types)
+enum class GOType : char { Point, Arc, Spline, SplinePath };
 
 /**
  * @brief The VGObject class keep information graphical objects.
@@ -52,8 +40,7 @@ class VGObject
 {
 public:
     VGObject();
-    VGObject(const GObject::Type &type, const quint32 &idObject = 0,
-             const Valentina::Draws &mode = Valentina::Calculation);
+    VGObject(const GOType &type, const quint32 &idObject = 0, const Draw &mode = Draw::Calculation);
     VGObject(const VGObject &obj);
     VGObject& operator= (const VGObject &obj);
     virtual ~VGObject(){}
@@ -61,9 +48,9 @@ public:
     void             setIdObject(const quint32 &value);
     virtual QString  name() const;
     void             setName(const QString &name);
-    Valentina::Draws getMode() const;
-    void             setMode(const Valentina::Draws &value);
-    GObject::Type    getType() const;
+    Draw             getMode() const;
+    void             setMode(const Draw &value);
+    GOType           getType() const;
     quint32          id() const;
     virtual void     setId(const quint32 &id);
 protected:
@@ -71,7 +58,7 @@ protected:
     quint32          _id;
 
     /** @brief type type of graphical object */
-    GObject::Type   type;
+    GOType   type;
 
     /** @brief idObject id of parent object. Only for modeling. All another return 0. */
     quint32          idObject;
@@ -80,7 +67,7 @@ protected:
     QString         _name;
 
     /** @brief mode object created in calculation or drawing mode */
-    Valentina::Draws     mode;
+    Draw     mode;
 };
 
 #endif // VGOBJECT_H

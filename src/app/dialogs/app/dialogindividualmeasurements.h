@@ -30,7 +30,8 @@
 #define DIALOGINDIVIDUALMEASUREMENTS_H
 
 #include <QDialog>
-#include "../../container/vcontainer.h"
+
+class VContainer;
 
 namespace Ui
 {

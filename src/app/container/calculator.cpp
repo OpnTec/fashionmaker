@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QSettings>
 #include "../widgets/vapplication.h"
+#include "vcontainer.h"
 
 using namespace qmu;
 
@@ -150,7 +151,7 @@ qreal Calculator::EvalFormula(const QString &formula)
 void Calculator::InitVariables(const VContainer *data)
 {
     int num = 0;
-    if (qApp->patternType() == Pattern::Standard)
+    if (qApp->patternType() == MeasurementsType::Standard)
     {
         num +=2;
     }
@@ -176,7 +177,7 @@ void Calculator::InitVariables(const VContainer *data)
     vVarVal = new qreal[num];
     int j = 0;
 
-    if (qApp->patternType() == Pattern::Standard)
+    if (qApp->patternType() == MeasurementsType::Standard)
     {
         vVarVal[j] = data->size();
         DefineVar(data->SizeName(), &vVarVal[j]);
@@ -235,7 +236,7 @@ void Calculator::InitVariables(const VContainer *data)
         QHash<QString, VMeasurement>::const_iterator i = measurements->constBegin();
         while (i != measurements->constEnd())
         {
-            if (qApp->patternType() == Pattern::Standard)
+            if (qApp->patternType() == MeasurementsType::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
             }
@@ -253,7 +254,7 @@ void Calculator::InitVariables(const VContainer *data)
         QHash<QString, VIncrement>::const_iterator i = increments->constBegin();
         while (i != increments->constEnd())
         {
-            if (qApp->patternType() == Pattern::Standard)
+            if (qApp->patternType() == MeasurementsType::Standard)
             {
                 vVarVal[j] = i.value().GetValue(data->size(), data->height());
             }
@@ -293,12 +294,12 @@ qreal Calculator::CmUnit(qreal val)
     qreal unit = val;
     switch(qApp->patternUnit())
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             unit = val * 10.0;
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             unit = val / 2.54;
             break;
         default:
@@ -314,12 +315,12 @@ qreal Calculator::MmUnit(qreal val)
     qreal unit = val;
     switch(qApp->patternUnit())
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             unit = val / 10.0;
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             unit = val / 25.4;
             break;
         default:
@@ -335,13 +336,13 @@ qreal Calculator::InchUnit(qreal val)
     qreal unit = val;
     switch(qApp->patternUnit())
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             unit = val * 25.4;
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             unit = val * 2.54;
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             break;
         default:
             break;

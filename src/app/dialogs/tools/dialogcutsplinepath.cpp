@@ -29,6 +29,9 @@
 #include "dialogcutsplinepath.h"
 #include "ui_dialogcutsplinepath.h"
 
+#include "../../geometry/vsplinepath.h"
+#include "../../container/vcontainer.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutSplinePath create dialog.
@@ -96,7 +99,7 @@ void DialogCutSplinePath::setFormula(const QString &value)
  */
 void DialogCutSplinePath::setSplinePathId(const quint32 &value, const quint32 &id)
 {
-    setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, id, ComboMode::CutSpline);
+    setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, id, ComboBoxCutSpline::CutSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,9 +108,9 @@ void DialogCutSplinePath::setSplinePathId(const quint32 &value, const quint32 &i
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogCutSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogCutSplinePath::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::SplinePath)
+    if (type == SceneObject::SplinePath)
     {
         const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
         ChangeCurrentText(ui->comboBoxSplinePath, splPath->name());

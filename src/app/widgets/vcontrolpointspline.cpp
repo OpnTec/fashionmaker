@@ -33,11 +33,18 @@
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
+/**
+ * @brief VControlPointSpline constructor.
+ * @param indexSpline index spline in list.
+ * @param position position point in spline.
+ * @param controlPoint control point.
+ * @param splinePoint spline point.
+ * @param parent parent object.
+ */
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, const QPointF &splinePoint,
                                          QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline),
-      position(position)
+    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position)
 {
     //create circle
     radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;
@@ -60,6 +67,10 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePoint:
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VControlPointSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -74,6 +85,12 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
@@ -86,7 +103,14 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos,
+/**
+ * @brief RefreshLine refresh line control point.
+ * @param indexSpline index spline in list.
+ * @param pos position point in spline.
+ * @param controlPoint control point.
+ * @param splinePoint spline point.
+ */
+void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
                                       const QPointF &controlPoint, const QPointF &splinePoint)
 {
     if (this->indexSpline == indexSpline && this->position == pos)
@@ -98,6 +122,10 @@ void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePoint::Po
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setEnabledPoint disable or enable control point.
+ * @param enable true - enable.
+ */
 void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)

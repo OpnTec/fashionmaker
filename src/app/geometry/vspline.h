@@ -32,11 +32,8 @@
 #include "vpointf.h"
 #include "vgobject.h"
 
-#include <QHash>
-#include <QLineF>
-#include <QPainterPath>
-
-class QString;
+class QLineF;
+class QPainterPath;
 
 #define M_2PI   6.28318530717958647692528676655900576
 
@@ -49,9 +46,10 @@ public:
     VSpline();
     VSpline (const VSpline &spline );
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-             quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
+             quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
-             Valentina::Draws mode = Valentina::Calculation);
+             Draw mode = Draw::Calculation);
+    VSpline &operator=(const VSpline &spl);
     VPointF GetP1 () const;
     QPointF GetP2 () const;
     QPointF GetP3 () const;
@@ -72,7 +70,6 @@ public:
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
-    VSpline         &operator=(const VSpline &spl);
 protected:
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:

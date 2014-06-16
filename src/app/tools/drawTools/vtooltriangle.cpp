@@ -28,18 +28,31 @@
 
 #include "vtooltriangle.h"
 #include "../../dialogs/tools/dialogtriangle.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolTriangle constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param axisP1Id id first axis point.
+ * @param axisP2Id id second axis point.
+ * @param firstPointId id first triangle point, what lies on the hypotenuse.
+ * @param secondPointId id second triangle point, what lies on the hypotenuse.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
                              const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                             const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                             const Source &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
     ignoreFullUpdate = true;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -50,6 +63,9 @@ VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolTriangle::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -64,8 +80,14 @@ void VToolTriangle::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                           VPattern *doc, VContainer *data)
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
+void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
@@ -76,14 +98,30 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     const quint32 secondPointId = dialogTool->getSecondPointId();
     const QString pointName = dialogTool->getPointName();
     Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param pointName point name.
+ * @param axisP1Id id first axis point.
+ * @param axisP2Id id second axis point.
+ * @param firstPointId id first triangle point, what lies on the hypotenuse.
+ * @param secondPointId id second triangle point, what lies on the hypotenuse.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
                            const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                           VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                           VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
     const VPointF *axisP2 = data->GeometricObject<const VPointF *>(axisP2Id);
@@ -93,7 +131,7 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
     QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
                               secondPoint->toQPointF());
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));
     }
@@ -105,7 +143,7 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::Triangle, doc);
+    VDrawTool::AddRecord(id, Tool::Triangle, doc);
     if (parse == Document::FullParse)
     {
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
@@ -122,6 +160,14 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindPoint find point intersection two foots right triangle.
+ * @param axisP1 first axis point.
+ * @param axisP2 second axis point.
+ * @param firstPoint first triangle point, what lies on the hypotenuse.
+ * @param secondPoint second triangle point, what lies on the hypotenuse.
+ * @return point intersection two foots right triangle.
+ */
 QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                                  const QPointF &secondPoint)
 {
@@ -164,6 +210,9 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolTriangle::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -178,12 +227,19 @@ void VToolTriangle::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogTriangle>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolTriangle::RemoveReferens()
 {
     doc->DecrementReferens(axisP1Id);
@@ -193,12 +249,19 @@ void VToolTriangle::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogTriangle>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolTriangle::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -219,6 +282,9 @@ void VToolTriangle::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolTriangle::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -236,6 +302,9 @@ void VToolTriangle::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolTriangle::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

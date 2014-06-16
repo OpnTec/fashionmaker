@@ -27,16 +27,18 @@
  *************************************************************************/
 
 #include "vspline.h"
-#include <cmath>
 #include <QDebug>
-#include <QtMath>
+
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VSpline default constructor
  */
 VSpline::VSpline()
-    :VGObject(GObject::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
+    :VGObject(GOType::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
       kAsm1(1), kAsm2(1), kCurve(1)
 {}
 
@@ -63,8 +65,8 @@ VSpline::VSpline ( const VSpline & spline )
  * @param kAsm2 coefficient of length second control line.
  */
 VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-                  quint32 idObject, Valentina::Draws mode)
-    :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
+                  quint32 idObject, Draw mode)
+    :VGObject(GOType::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
       angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve)
 {
     CreateName();
@@ -98,8 +100,8 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
  * @param p3 second control point.
  * @param p4 second point spline.
  */
-VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Valentina::Draws mode)
-    :VGObject(GObject::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
+VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Draw mode)
+    :VGObject(GOType::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
       kAsm2(1), kCurve(1)
 {
     CreateName();
@@ -168,8 +170,8 @@ QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *in
     QLineF::IntersectType type = QLineF::NoIntersection;
     for ( i = 0; i < px.count()-1; ++i )
     {
-        type = line.intersect(QLineF ( QPointF ( px[i], py[i] ),
-                                       QPointF ( px[i+1], py[i+1] )), &crosPoint);
+        type = line.intersect(QLineF ( QPointF ( px.at(i), py.at(i) ),
+                                       QPointF ( px.at(i+1), py.at(i+1) )), &crosPoint);
         if ( type == QLineF::BoundedIntersection )
         {
             *intersectionPoint = crosPoint;
@@ -318,7 +320,7 @@ QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const
     y.append ( p4.y () );
     for ( qint32 i = 0; i < x.count(); ++i )
     {
-        pvector.append( QPointF ( x[i], y[i] ) );
+        pvector.append( QPointF ( x.at(i), y.at(i)) );
     }
     return pvector;
 }
@@ -336,10 +338,10 @@ qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPoint
 {
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);
-    splinePath.moveTo(points[0]);
+    splinePath.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
-        splinePath.lineTo(points[i]);
+        splinePath.lineTo(points.at(i));
     }
     return splinePath.length();
 }
@@ -675,8 +677,8 @@ QPainterPath VSpline::GetPath() const
     {
         for (qint32 i = 0; i < points.count()-1; ++i)
         {
-            splinePath.moveTo(points[i]);
-            splinePath.lineTo(points[i+1]);
+            splinePath.moveTo(points.at(i));
+            splinePath.lineTo(points.at(i+1));
         }
     }
     else

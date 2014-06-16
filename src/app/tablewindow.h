@@ -45,63 +45,32 @@ class TableWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    /**
-     * @brief numberDetal show count details, what need placed.
-     */
+    /** @brief numberDetal show count details, what need placed. */
     QLabel*               numberDetal;
-    /**
-     * @brief colission show if exist colissions.
-     */
+
+    /** @brief colission show if exist colissions. */
     QLabel*               colission;
-    /**
-     * @brief TableWindow constructor.
-     * @param parent parent widget.
-     */
-                 explicit TableWindow(QWidget *parent = nullptr);
+
+    explicit TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
 public slots:
-    /**
-     * @brief ModelChosen show window when user want create new layout.
-     * @param listDetails list of details.
-     * @param description pattern description.
-     */
+
     void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description);
-    /**
-     * @brief StopTable stop creation layout.
-     */
+
     void                  StopTable();
-    /**
-     * @brief saveScene save created layout.
-     */
+
     void                  saveScene();
-    /**
-     * @brief GetNextDetail put next detail on table.
-     */
+
     void                  GetNextDetail();
-    /**
-     * @brief itemChect turn off rotation button if don't selected detail.
-     * @param flag true - enable button.
-     */
+
     void                  itemChect(bool flag);
-    /**
-     * @brief itemOut handled if detail moved out paper sheet.
-     * @param number Number detail in list.
-     * @param flag set state of detail. True if detail moved out paper sheet.
-     */
+
     void                  itemOut(int number, bool flag);
-    /**
-     * @brief itemColliding handled if we have colission details.
-     * @param list list of colission details.
-     * @param number 0 - include to list of colission dcetails, 1 - exclude from list.
-     */
+
     void                  itemColliding(QList<QGraphicsItem *> list, int number);
-    /**
-     * @brief AddLength Add length paper sheet.Збільшує довжину листа на певне значення за один раз.
-     */
+
     void                  AddLength();
-    /**
-     * @brief RemoveLength reduce the length of paper sheet. You can reduce to the minimal value only.
-     */
+
     void                  RemoveLength();
 signals:
     /**
@@ -113,122 +82,64 @@ signals:
      */
     void                  LengthChanged();
 protected:
-    /**
-     * @brief closeEvent handle after close window.
-     * @param event close event.
-     */
+
     void                  closeEvent(QCloseEvent *event);
-    /**
-     * @brief moveToCenter move screen to the center of window.
-     */
+
     void                  moveToCenter();
-    /**
-     * @brief showEvent handle after show window.
-     * @param event show event.
-     */
+
     void                  showEvent ( QShowEvent * event );
-    /**
-     * @brief keyPressEvent handle key press events.
-     * @param event key event.
-     */
+
     void                  keyPressEvent ( QKeyEvent * event );
 private:
     Q_DISABLE_COPY(TableWindow)
-    /**
-     * @brief ui keeps information about user interface Змінна для доступу до об'єктів вікна.
-     */
+    /** @brief ui keeps information about user interface */
     Ui::TableWindow*      ui;
-    /**
-     * @brief listDetails list of details.
-     */
+
+    /** @brief listDetails list of details. */
     QVector<VItem*>       listDetails;
-    /**
-     * @brief outItems true if we have details out paper sheet.
-     */
+
+    /** @brief outItems true if we have details out paper sheet. */
     bool                  outItems;
-    /**
-     * @brief collidingItems true if we have colission details.
-     */
+
+    /** @brief collidingItems true if we have colission details. */
     bool                  collidingItems;
-    /**
-     * @brief currentScene pointer to scene.
-     */
+
+    /** @brief currentScene pointer to scene. */
     QGraphicsScene*       tableScene;
-    /**
-     * @brief paper paper sheet.
-     */
+
+    /** @brief paper paper sheet. */
     QGraphicsRectItem*    paper;
-    /**
-     * @brief shadowPaper paper sheet shadow.
-     */
+
+    /** @brief shadowPaper paper sheet shadow. */
     QGraphicsRectItem*    shadowPaper;
-    /**
-     * @brief checkNext disable next detail button if exist colission or out details.
-     */
-    void                  checkNext();
-    /**
-     * @brief listOutItems list state out each detail.
-     */
+
+    /** @brief listOutItems list state out each detail. */
     QBitArray*            listOutItems;
-    /**
-     * @brief listCollidingItems list colissed details.
-     */
+
+    /** @brief listCollidingItems list colissed details. */
     QList<QGraphicsItem*> listCollidingItems;
-    /**
-     * @brief AddPaper add to the scene paper and shadow.
-     */
-    void                  AddPaper();
-    /**
-     * @brief AddDetail show on scene next detail.
-     */
-    void                  AddDetail();
-    /**
-     * @brief indexDetail index next detail in list what will be shown.
-     */
+
+    /** @brief indexDetail index next detail in list what will be shown. */
     qint32                indexDetail;
-    /**
-     * @brief sceneRect minimal size of a paper.
-     */
+
+    /** @brief sceneRect minimal size of a paper. */
     QRectF                sceneRect;
-    /**
-     * @brief fileName keep name of pattern file.
-     */
+
+    /** @brief fileName keep name of pattern file. */
     QString               fileName;
-    /**
-     * @brief description pattern description
-     */
+
+    /** @brief description pattern description */
     QString               description;
-    /**
-     * @brief SvgFile save layout to svg file.
-     * @param name name layout file.
-     */
-    void SvgFile(const QString &name)const;
-    /**
-     * @brief PngFile save layout to png file.
-     * @param name name layout file.
-     */
-    void PngFile(const QString &name)const;
-    /**
-     * @brief PdfFile save layout to pdf file.
-     * @param name name layout file.
-     */
-    void PdfFile(const QString &name)const;
-    /**
-     * @brief EpsFile save layout to eps file.
-     * @param name name layout file.
-     */
-    void EpsFile(const QString &name)const;
-    /**
-     * @brief PsFile save layout to ps file.
-     * @param name name layout file.
-     */
-    void PsFile(const QString &name)const;
-    /**
-     * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
-     * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
-     * need create eps file.
-     */
-    void PdfToPs(const QStringList &params)const;
+
+    void                  checkNext();
+    void                  AddPaper();
+    void                  AddDetail();
+    void                  SvgFile(const QString &name)const;
+    void                  PngFile(const QString &name)const;
+    void                  PdfFile(const QString &name)const;
+    void                  EpsFile(const QString &name)const;
+    void                  PsFile(const QString &name)const;
+    void                  PdfToPs(const QStringList &params)const;
 };
 
 #endif // TABLEWINDOW_H

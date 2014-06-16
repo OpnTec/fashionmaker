@@ -30,7 +30,6 @@
 #define VINDIVIDUALMEASUREMENTS_H
 
 #include "vdomdocument.h"
-#include <QDate>
 
 /*
    VIT_VERSION is (major << 16) + (minor << 8) + patch.
@@ -40,27 +39,26 @@
 // max support version of format
 #define VIT_VERSION 0x000100
 
+enum class SexType : char { Male, Female };
+
 class VIndividualMeasurements:public VDomDocument
 {
 public:
-    enum Sex { Male, Female };
-    Q_DECLARE_FLAGS(Genders, Sex)
-
     VIndividualMeasurements(VContainer *data);
     virtual ~VIndividualMeasurements();
-    Valentina::Units Unit() const;
-    void             setUnit(const Valentina::Units &unit);
-    void             Measurements();
-    QString          FamilyName() const;
-    void             setFamilyName(const QString &text);
-    QString          GivenName() const;
-    void             setGivenName(const QString &text);
-    QDate            BirthDate() const;
-    void             setBirthDate(const QDate &date);
-    VIndividualMeasurements::Genders Sex() const;
-    void             setSex(const VIndividualMeasurements::Genders &sex);
-    QString          Mail() const;
-    void             setMail(const QString &text);
+    Unit    MUnit() const;
+    void    setUnit(const Unit &unit);
+    void    Measurements();
+    QString FamilyName() const;
+    void    setFamilyName(const QString &text);
+    QString GivenName() const;
+    void    setGivenName(const QString &text);
+    QDate   BirthDate() const;
+    void    setBirthDate(const QDate &date);
+    SexType Sex() const;
+    void    setSex(const SexType &sex);
+    QString Mail() const;
+    void    setMail(const QString &text);
     static const QString AttrValue;
     static const QString TagFamily_name;
     static const QString TagGiven_name;
@@ -71,13 +69,11 @@ public:
     static const QString SexMale;
     static const QString SexFemale;
 
-    static QString   GenderToStr(const VIndividualMeasurements::Genders &sex);
-    static VIndividualMeasurements::Genders StrToGender(const QString &sex);
+    static QString GenderToStr(const SexType &sex);
+    static SexType StrToGender(const QString &sex);
 private:
     Q_DISABLE_COPY(VIndividualMeasurements)
     void             Measurement(const QString &tag);
 };
-
-Q_DECLARE_OPERATORS_FOR_FLAGS( VIndividualMeasurements::Genders )
 
 #endif // VINDIVIDUALMEASUREMENTS_H

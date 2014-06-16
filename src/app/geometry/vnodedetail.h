@@ -29,18 +29,9 @@
 #ifndef VNODEDETAIL_H
 #define VNODEDETAIL_H
 
-#include <QMetaType>
 #include "../options.h"
 
-namespace NodeDetail
-{
-    /**
-     * @brief The NodeDetail enum node can be node of contour or node modeling.
-     */
-    enum NodeDetail { Contour, Modeling };
-    Q_DECLARE_FLAGS(NodeDetails, NodeDetail)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS(NodeDetail::NodeDetails)
+enum class NodeDetail : char { Contour, Modeling };
 
 /**
  * @brief The VNodeDetail class keep information about detail node.
@@ -60,8 +51,7 @@ public:
      * @param mx object bias x axis
      * @param my object bias y axis
      */
-    VNodeDetail(quint32 id, Valentina::Tools typeTool, NodeDetail::NodeDetails typeNode, qreal mx = 0,
-              qreal my = 0);
+    VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx = 0, qreal my = 0);
     /**
      * @brief VNodeDetail copy constructor
      * @param node node
@@ -87,22 +77,22 @@ public:
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    Valentina::Tools getTypeTool() const;
+    Tool getTypeTool() const;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    void        setTypeTool(const Valentina::Tools &value);
+    void        setTypeTool(const Tool &value);
     /**
      * @brief getTypeNode return node type.
      * @return node type.
      */
-    NodeDetail::NodeDetails getTypeNode() const;
+    NodeDetail getTypeNode() const;
     /**
      * @brief setTypeNode set node type.
      * @param value node type.
      */
-    void        setTypeNode(const NodeDetail::NodeDetails &value);
+    void        setTypeNode(const NodeDetail &value);
     /**
      * @brief getMx return object bias x axis.
      * @return bias x axis.
@@ -131,11 +121,11 @@ private:
     /**
      * @brief typeTool type of tool
      */
-    Valentina::Tools typeTool;
+    Tool typeTool;
     /**
      * @brief typeNode node type.
      */
-    NodeDetail::NodeDetails typeNode;
+    NodeDetail typeNode;
     /**
      * @brief mx bias x axis.
      */
@@ -156,22 +146,22 @@ inline void VNodeDetail::setId(const quint32 &value)
     id = value;
 }
 
-inline Valentina::Tools VNodeDetail::getTypeTool() const
+inline Tool VNodeDetail::getTypeTool() const
 {
     return typeTool;
 }
 
-inline void VNodeDetail::setTypeTool(const Valentina::Tools &value)
+inline void VNodeDetail::setTypeTool(const Tool &value)
 {
     typeTool = value;
 }
 
-inline NodeDetail::NodeDetails VNodeDetail::getTypeNode() const
+inline NodeDetail VNodeDetail::getTypeNode() const
 {
     return typeNode;
 }
 
-inline void VNodeDetail::setTypeNode(const NodeDetail::NodeDetails &value)
+inline void VNodeDetail::setTypeNode(const NodeDetail &value)
 {
     typeNode = value;
 }

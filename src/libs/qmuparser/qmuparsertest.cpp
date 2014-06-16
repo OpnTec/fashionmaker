@@ -21,7 +21,11 @@
  ******************************************************************************************************/
 
 #include "qmuparsertest.h"
-#include <QtMath>
+
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
+
 #include <QString>
 #include <QDebug>
 #include "qmuparsererror.h"

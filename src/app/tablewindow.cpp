@@ -34,6 +34,10 @@
 #include "widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief TableWindow constructor.
+ * @param parent parent widget.
+ */
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(nullptr), colission(nullptr), ui(new Ui::TableWindow),
     listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(nullptr),
@@ -76,6 +80,9 @@ TableWindow::~TableWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddPaper add to the scene paper and shadow.
+ */
 void TableWindow::AddPaper()
 {
     qreal x1, y1, x2, y2;
@@ -91,6 +98,9 @@ void TableWindow::AddPaper()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddDetail show on scene next detail.
+ */
 void TableWindow::AddDetail()
 {
     if (indexDetail<listDetails.count())
@@ -120,6 +130,11 @@ void TableWindow::AddDetail()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ModelChosen show window when user want create new layout.
+ * @param listDetails list of details.
+ * @param description pattern description.
+ */
 /*
  * Get details for creation layout.
  */
@@ -148,6 +163,10 @@ void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileNa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief closeEvent handle after close window.
+ * @param event close event.
+ */
 void TableWindow::closeEvent(QCloseEvent *event)
 {
     event->ignore();
@@ -155,6 +174,9 @@ void TableWindow::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief moveToCenter move screen to the center of window.
+ */
 void TableWindow::moveToCenter()
 {
     QRect rect = frameGeometry();
@@ -163,6 +185,10 @@ void TableWindow::moveToCenter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief showEvent handle after show window.
+ * @param event show event.
+ */
 void TableWindow::showEvent ( QShowEvent * event )
 {
     QMainWindow::showEvent(event);
@@ -170,6 +196,9 @@ void TableWindow::showEvent ( QShowEvent * event )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief StopTable stop creation layout.
+ */
 void TableWindow::StopTable()
 {
     hide();
@@ -182,6 +211,9 @@ void TableWindow::StopTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief saveScene save created layout.
+ */
 void TableWindow::saveScene()
 {
     QMap<QString, QString> extByMessage;
@@ -261,6 +293,10 @@ void TableWindow::saveScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChect turn off rotation button if don't selected detail.
+ * @param flag true - enable button.
+ */
 void TableWindow::itemChect(bool flag)
 {
     ui->actionTurn->setDisabled(flag);
@@ -268,6 +304,9 @@ void TableWindow::itemChect(bool flag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief checkNext disable next detail button if exist colission or out details.
+ */
 void TableWindow::checkNext()
 {
     if (outItems == true && collidingItems == true)
@@ -293,6 +332,11 @@ void TableWindow::checkNext()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemOut handled if detail moved out paper sheet.
+ * @param number Number detail in list.
+ * @param flag set state of detail. True if detail moved out paper sheet.
+ */
 void TableWindow::itemOut(int number, bool flag)
 {
     listOutItems->setBit(number, flag);
@@ -311,6 +355,11 @@ void TableWindow::itemOut(int number, bool flag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemColliding handled if we have colission details.
+ * @param list list of colission details.
+ * @param number 0 - include to list of colission dcetails, 1 - exclude from list.
+ */
 void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
 {
     //qDebug()<<"number="<<number;
@@ -378,12 +427,18 @@ void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetNextDetail put next detail on table.
+ */
 void TableWindow::GetNextDetail()
 {
     AddDetail();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddLength Add length paper sheet.Збільшує довжину листа на певне значення за один раз.
+ */
 void TableWindow::AddLength()
 {
     QRectF rect = tableScene->sceneRect();
@@ -400,6 +455,9 @@ void TableWindow::AddLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveLength reduce the length of paper sheet. You can reduce to the minimal value only.
+ */
 void TableWindow::RemoveLength()
 {
     if (sceneRect.height() <= tableScene->sceneRect().height() - 100)
@@ -426,6 +484,10 @@ void TableWindow::RemoveLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyPressEvent handle key press events.
+ * @param event key event.
+ */
 void TableWindow::keyPressEvent ( QKeyEvent * event )
 {
     if ( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
@@ -440,6 +502,10 @@ void TableWindow::keyPressEvent ( QKeyEvent * event )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SvgFile save layout to svg file.
+ * @param name name layout file.
+ */
 void TableWindow::SvgFile(const QString &name) const
 {
     QSvgGenerator generator;
@@ -460,6 +526,10 @@ void TableWindow::SvgFile(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PngFile save layout to png file.
+ * @param name name layout file.
+ */
 void TableWindow::PngFile(const QString &name) const
 {
     QRectF r = paper->rect();
@@ -478,6 +548,10 @@ void TableWindow::PngFile(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PdfFile save layout to pdf file.
+ * @param name name layout file.
+ */
 void TableWindow::PdfFile(const QString &name) const
 {
     QPrinter printer;
@@ -503,6 +577,10 @@ void TableWindow::PdfFile(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EpsFile save layout to eps file.
+ * @param name name layout file.
+ */
 void TableWindow::EpsFile(const QString &name) const
 {
     QTemporaryFile tmp;
@@ -515,6 +593,10 @@ void TableWindow::EpsFile(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PsFile save layout to ps file.
+ * @param name name layout file.
+ */
 void TableWindow::PsFile(const QString &name) const
 {
     QTemporaryFile tmp;
@@ -527,6 +609,11 @@ void TableWindow::PsFile(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
+ * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
+ * need create eps file.
+ */
 void TableWindow::PdfToPs(const QStringList &params) const
 {
 #ifndef QT_NO_CURSOR

@@ -29,8 +29,6 @@
 #include "dialogsinglepoint.h"
 #include "ui_dialogsinglepoint.h"
 
-#include <QPushButton>
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogSinglePoint create dialog

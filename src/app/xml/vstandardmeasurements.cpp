@@ -46,7 +46,7 @@ VStandardMeasurements::~VStandardMeasurements()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Valentina::Units VStandardMeasurements::Unit()
+Unit VStandardMeasurements::MUnit()
 {
     const QString unit = UniqueTagText(AttrUnit, UnitCM);
     return VDomDocument::StrToUnits(unit);
@@ -224,7 +224,7 @@ void VStandardMeasurements::Measurement(const QString &tag)
                 const qreal size_increase = GetParametrDouble(domElement, AttrSize_increase, "0.0");
                 const qreal height_increase = GetParametrDouble(domElement, AttrHeight_increase, "0.0");
 
-                if (Unit() == Valentina::Mm)// Convert to Cm.
+                if (MUnit() == Unit::Mm)// Convert to Cm.
                 {
                     data->AddMeasurement(tag, VMeasurement(value/10.0, size_increase/10.0, height_increase/10.0,
                                                            qApp->GuiText(tag), qApp->Description(tag), tag));
@@ -257,7 +257,7 @@ void VStandardMeasurements::SetSize()
             if (domElement.isNull() == false)
             {
                 qreal value = GetParametrDouble(domElement, AttrValue, "50.0");
-                if (Unit() == Valentina::Mm)// Convert to Cm.
+                if (MUnit() == Unit::Mm)// Convert to Cm.
                 {
                     value = value/10.0;
                 }
@@ -286,7 +286,7 @@ void VStandardMeasurements::SetHeight()
             if (domElement.isNull() == false)
             {
                 qreal value = GetParametrDouble(domElement, AttrValue, "176.0");
-                if (Unit() == Valentina::Mm)// Convert to Cm.
+                if (MUnit() == Unit::Mm)// Convert to Cm.
                 {
                     value = value / 10.0;
                 }

@@ -29,7 +29,8 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -109,9 +110,9 @@ DialogBisector::~DialogBisector()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogBisector::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogBisector::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)

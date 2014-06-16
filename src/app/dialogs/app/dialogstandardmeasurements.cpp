@@ -31,7 +31,7 @@
 #include <QDir>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../widgets/vapplication.h"
-#include <QPushButton>
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,
@@ -89,7 +89,7 @@ void DialogStandardMeasurements::DialogAccepted()
         VDomDocument::ValidateXML("://schema/standard_measurements.xsd", _tablePath);
         VStandardMeasurements m(data);
         m.setContent(_tablePath);
-        qApp->setPatternUnit(m.Unit());
+        qApp->setPatternUnit(m.MUnit());
     }
     catch (VException &e)
     {

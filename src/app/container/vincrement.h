@@ -39,6 +39,8 @@ class VIncrement
 public:
     VIncrement();
     VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
+    VIncrement(const VIncrement &incr);
+    VIncrement &operator=(const VIncrement &incr);
     quint32 getId() const;
     void    setId(const quint32 &value);
     qreal   getBase() const;

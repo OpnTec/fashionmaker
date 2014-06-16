@@ -40,17 +40,8 @@ class VControlPointSpline : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-                      /**
-                       * @brief VControlPointSpline constructor.
-                       * @param indexSpline index spline in list.
-                       * @param position position point in spline.
-                       * @param controlPoint control point.
-                       * @param splinePoint spline point.
-                       * @param parent parent object.
-                       */
-                      VControlPointSpline(const qint32 &indexSpline, SplinePoint::Position position,
-                                          const QPointF &controlPoint, const QPointF &splinePoint,
-                                          QGraphicsItem * parent = nullptr);
+    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
+                        const QPointF &splinePoint, QGraphicsItem * parent = nullptr);
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.
@@ -58,59 +49,29 @@ signals:
      * @param position position point in spline.
      * @param pos new posotion.
      */
-    void              ControlPointChangePosition(const qint32 &indexSpline, SplinePoint::Position position,
+    void              ControlPointChangePosition(const qint32 &indexSpline, SplinePointPosition position,
                                                  const QPointF pos);
 public slots:
-    /**
-     * @brief RefreshLine refresh line control point.
-     * @param indexSpline index spline in list.
-     * @param pos position point in spline.
-     * @param controlPoint control point.
-     * @param splinePoint spline point.
-     */
-    void              RefreshLine(const qint32 &indexSpline, SplinePoint::Position pos, const QPointF &controlPoint,
+    void              RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                   const QPointF &splinePoint);
-    /**
-     * @brief setEnabledPoint disable or enable control point.
-     * @param enable true - enable.
-     */
     void              setEnabledPoint(bool enable);
 protected:
-    /**
-     * @brief radius radius circle.
-     */
+    /** @brief radius radius circle. */
     qreal             radius;
-    /**
-     * @brief controlLine pointer to line control point.
-     */
+
+    /** @brief controlLine pointer to line control point. */
     QGraphicsLineItem *controlLine;
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
+
     virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief itemChange handle item change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
 private:
     Q_DISABLE_COPY(VControlPointSpline)
-    /**
-     * @brief indexSpline index spline in list..
-     */
+    /** @brief indexSpline index spline in list.. */
     qint32            indexSpline;
-    /**
-     * @brief position position point in spline.
-     */
-    SplinePoint::Position position;
+
+    /** @brief position position point in spline. */
+    SplinePointPosition position;
 };
 
 #endif // VCONTROLPOINTSPLINE_H

@@ -30,11 +30,8 @@
 #define VARC_H
 
 #include "vgobject.h"
-#include <QCoreApplication>
-#include "../options.h"
 #include "vpointf.h"
-class QString;
-class QLineF;
+
 class QPainterPath;
 
 /**
@@ -46,7 +43,7 @@ class VArc: public VGObject
 public:
     VArc ();
     VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-         QString formulaF2, quint32 idObject = 0, Valentina::Draws mode = Valentina::Calculation);
+         QString formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
     QString            GetFormulaF1 () const;

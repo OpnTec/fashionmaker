@@ -29,7 +29,13 @@
 #ifndef PAGES_H
 #define PAGES_H
 
-#include <QtWidgets>
+#include <QObject>
+
+class QCheckBox;
+class QSpinBox;
+class QComboBox;
+class QGroupBox;
+class QLineEdit;
 
 class ConfigurationPage : public QWidget
 {
@@ -60,10 +66,10 @@ private:
     Q_DISABLE_COPY(PatternPage)
     QLineEdit *userName;
     QCheckBox *graphOutputCheck;
-    QSpinBox  *undoneCount;
+    QSpinBox  *undoCount;
     QGroupBox *UserGroup();
     QGroupBox *GraphOutputGroup();
-    QGroupBox *UndoneGroup();
+    QGroupBox *UndoGroup();
 };
 
 #endif // PAGES_H

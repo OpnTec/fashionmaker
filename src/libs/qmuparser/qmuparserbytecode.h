@@ -24,7 +24,6 @@
 #define QMUPARSERBYTECODE_H
 
 #include "qmuparserdef.h"
-#include "qmuparsererror.h"
 #include "qmuparsertoken.h"
 
 /**

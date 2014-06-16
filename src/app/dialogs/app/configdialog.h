@@ -30,11 +30,11 @@
 #define CONFIGDIALOG_H
 
 #include <QDialog>
-#include <QListWidget>
 #include "pages.h"
 
 class QListWidgetItem;
 class QStackedWidget;
+class QListWidget;
 
 class ConfigDialog : public QDialog
 {

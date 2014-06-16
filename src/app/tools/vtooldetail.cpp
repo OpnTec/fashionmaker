@@ -28,11 +28,21 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
 #include "../geometry/vequidistant.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../dialogs/tools/dialogtool.h"
+#include "../dialogs/tools/dialogdetail.h"
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QMenu>
 #include <QGraphicsView>
+#include <QMessageBox>
+#include "../undocommands/savedetailoptions.h"
+#include "../undocommands/movedetail.h"
+#include "../undocommands/adddet.h"
+#include "../undocommands/deletedetail.h"
 
 const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
@@ -52,42 +62,75 @@ const QString VToolDetail::NodeSpline       = QStringLiteral("NodeSpline");
 const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
+/**
+ * @brief VToolDetail constructor.
+ * @param doc dom document container
+ * @param data container with variables
+ * @param id object id in container
+ * @param typeCreation way we create this tool.
+ * @param scene pointer to scene.
+ * @param parent parent object
+ */
+VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
-        switch (detail[i].getTypeTool())
+        switch (detail.at(i).getTypeTool())
         {
-            case (Valentina::NodePoint):
-                InitTool<VNodePoint>(scene, detail[i]);
+            case (Tool::NodePoint):
+                InitTool<VNodePoint>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeArc):
-                InitTool<VNodeArc>(scene, detail[i]);
+            case (Tool::NodeArc):
+                InitTool<VNodeArc>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeSpline):
-                InitTool<VNodeSpline>(scene, detail[i]);
+            case (Tool::NodeSpline):
+                InitTool<VNodeSpline>(scene, detail.at(i));
                 break;
-            case (Valentina::NodeSplinePath):
-                InitTool<VNodeSplinePath>(scene, detail[i]);
+            case (Tool::NodeSplinePath):
+                InitTool<VNodeSplinePath>(scene, detail.at(i));
                 break;
+            case (Tool::ArrowTool):
+            case (Tool::SinglePointTool):
+            case (Tool::EndLineTool):
+            case (Tool::LineTool):
+            case (Tool::AlongLineTool):
+            case (Tool::ShoulderPointTool):
+            case (Tool::NormalTool):
+            case (Tool::BisectorTool):
+            case (Tool::LineIntersectTool):
+            case (Tool::SplineTool):
+            case (Tool::CutSplineTool):
+            case (Tool::CutArcTool):
+            case (Tool::ArcTool):
+            case (Tool::SplinePathTool):
+            case (Tool::CutSplinePathTool):
+            case (Tool::PointOfContact):
+            case (Tool::DetailTool):
+            case (Tool::Height):
+            case (Tool::Triangle):
+            case (Tool::PointOfIntersection):
+            case (Tool::UnionDetails):
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
                 break;
         }
-        doc->IncrementReferens(detail[i].getId());
+        doc->IncrementReferens(detail.at(i).getId());
     }
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
-    this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
-    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
-       AddToFile();
+        AddToFile();
+        if (typeCreation != Source::FromTool)
+        {
+            qApp->getUndoStack()->endMacro();
+        }
     }
 }
 
@@ -98,6 +141,9 @@ VToolDetail::~VToolDetail()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolDetail::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -108,6 +154,13 @@ void VToolDetail::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -115,52 +168,85 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     SCASSERT(dialogTool != nullptr);
     VDetail detail = dialogTool->getDetails();
     VDetail det;
+    qApp->getUndoStack()->beginMacro("add detail");
     for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
-        switch (detail[i].getTypeTool())
+        switch (detail.at(i).getTypeTool())
         {
-            case (Valentina::NodePoint):
+            case (Tool::NodePoint):
             {
-                id = CreateNode<VPointF>(data, detail[i].getId());
-                VNodePoint::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VPointF>(data, detail.at(i).getId());
+                VNodePoint::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeArc):
+            case (Tool::NodeArc):
             {
-                id = CreateNode<VArc>(data, detail[i].getId());
-                VNodeArc::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VArc>(data, detail.at(i).getId());
+                VNodeArc::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeSpline):
+            case (Tool::NodeSpline):
             {
-                id = CreateNode<VSpline>(data, detail[i].getId());
-                VNodeSpline::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VSpline>(data, detail.at(i).getId());
+                VNodeSpline::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Valentina::NodeSplinePath):
+            case (Tool::NodeSplinePath):
             {
-                id = CreateNode<VSplinePath>(data, detail[i].getId());
-                VNodeSplinePath::Create(doc, data, id, detail[i].getId(), Document::FullParse, Valentina::FromGui);
+                id = CreateNode<VSplinePath>(data, detail.at(i).getId());
+                VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
+            case (Tool::ArrowTool):
+            case (Tool::SinglePointTool):
+            case (Tool::EndLineTool):
+            case (Tool::LineTool):
+            case (Tool::AlongLineTool):
+            case (Tool::ShoulderPointTool):
+            case (Tool::NormalTool):
+            case (Tool::BisectorTool):
+            case (Tool::LineIntersectTool):
+            case (Tool::SplineTool):
+            case (Tool::CutSplineTool):
+            case (Tool::CutArcTool):
+            case (Tool::ArcTool):
+            case (Tool::SplinePathTool):
+            case (Tool::CutSplinePathTool):
+            case (Tool::PointOfContact):
+            case (Tool::DetailTool):
+            case (Tool::Height):
+            case (Tool::Triangle):
+            case (Tool::PointOfIntersection):
+            case (Tool::UnionDetails):
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, detail[i].getTypeTool(), NodeDetail::Contour);
+        VNodeDetail node(id, detail.at(i).getTypeTool(), NodeDetail::Contour);
         det.append(node);
     }
     det.setName(detail.getName());
-    Create(0, det, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    det.setWidth(detail.getWidth());
+    Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param newDetail detail what we want show.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                         VContainer *data, const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui || typeCreation == Valentina::FromTool)
+    if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         id = data->AddDetail(newDetail);
     }
@@ -172,7 +258,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Valentina::DetailTool, doc);
+    VAbstractTool::AddRecord(id, Tool::DetailTool, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -184,58 +270,50 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::Remove()
+/**
+ * @brief Remove full delete detail.
+ */
+void VToolDetail::Remove(bool ask)
 {
-    DeleteTool(this);
+    DeleteTool(ask);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolDetail::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::FullUpdateFromGui(int result)
+/**
+ * @brief FullUpdateFromGuiOk refresh tool data after change in options.
+ * @param result keep result working dialog.
+ */
+void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SCASSERT(dialog != nullptr);
-            DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-            SCASSERT(dialogTool != nullptr);
-            VDetail det = dialogTool->getDetails();
-            doc->SetAttribute(domElement, AttrName, det.getName());
-            doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-            doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
-            doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
-            RemoveAllChild(domElement);
-            for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
-            {
-               AddNode(domElement, det[i]);
-            }
-            VDetail detail = VAbstractTool::data.GetDetail(id);
-            QList<quint32> list = detail.Missing(det);
-            QHash<quint32, VDataTool*>* tools = doc->getTools();
-            if (list.size()>0)
-            {
-                for (qint32 i = 0; i < list.size(); ++i)
-                {
-                    VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list[i]));
-                    node->DeleteNode();
-                }
-            }
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
+        SCASSERT(dialog != nullptr);
+        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+        SCASSERT(dialogTool != nullptr);
+        VDetail newDet = dialogTool->getDetails();
+        VDetail oldDet = VAbstractTool::data.GetDetail(id);
+
+        SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveCommand);
     }
     delete dialog;
-    dialog = 0;
+    dialog = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -251,18 +329,18 @@ void VToolDetail::AddToFile()
 
     for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
     {
-       AddNode(domElement, detail.at(i));
+       AddNode(doc, domElement, detail.at(i));
     }
 
-    QDomElement element;
-    bool ok = doc->GetActivNodeElement(VPattern::TagDetails, element);
-    if (ok)
-    {
-        element.appendChild(domElement);
-    }
+    AddDet *addDet = new AddDet(domElement, doc);
+    connect(addDet, &AddDet::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addDet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolDetail::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -273,33 +351,31 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
         doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
-        RemoveAllChild(domElement);
+        doc->RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
         {
-           AddNode(domElement, det.at(i));
+           AddNode(doc, domElement, det.at(i));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle detail change.
+ * @param change change
+ * @param value value
+ * @return new value.
+ */
 QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionHasChanged && scene())
     {
         // value - this is new position.
         QPointF newPos = value.toPointF();
-        //qDebug()<<newPos;
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(newPos.x())));
-            doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(newPos.y())));
 
-            QList<QGraphicsView*> list = this->scene()->views();
-            VAbstractTool::NewSceneRect(this->scene(), list[0]);
-
-            doc->haveLiteChange();
-        }
+        MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, this->scene());
+        connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveDet);
     }
 
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -319,6 +395,10 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key release events.
+ * @param event key release event.
+ */
 void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -333,16 +413,24 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Detail);
+        emit ChoosedTool(id, SceneObject::Detail);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
@@ -364,7 +452,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         dialog = new DialogDetail(getData(), list.first());
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                 dialog, &DialogTool::ChoosedObject);
-        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGui);
+        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
         setDialog();
         dialog->show();
     }
@@ -375,6 +463,9 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolDetail::RemoveReferens()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -385,7 +476,13 @@ void VToolDetail::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
+/**
+ * @brief AddNode add node to the file.
+ * @param dom document container
+ * @param domElement tag in xml tree.
+ * @param node node of detail.
+ */
+void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 
@@ -402,18 +499,39 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
     }
     switch (node.getTypeTool())
     {
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, NodeArc);
             break;
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
             doc->SetAttribute(nod, AttrType, NodePoint);
             break;
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
             doc->SetAttribute(nod, AttrType, NodeSpline);
             break;
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
             doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
@@ -422,10 +540,39 @@ void VToolDetail::AddNode(QDomElement &domElement, const VNodeDetail &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry refresh item on scene.
+ */
 void VToolDetail::RefreshGeometry()
 {
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     QPainterPath path = VEquidistant().ContourPath(id, this->getData());
     this->setPath(path);
+
+    VDetail detail = VAbstractTool::data.GetDetail(id);
+    this->setPos(detail.getMx(), detail.getMy());
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+}
+
+void VToolDetail::DeleteTool(bool ask)
+{
+    DeleteDetail *delDet = new DeleteDetail(doc, id);
+    if (ask)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(tr("Confirm the deletion."));
+        msgBox.setInformativeText(tr("Do you really want delete?"));
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Question);
+        if (msgBox.exec() == QMessageBox::Cancel)
+        {
+            return;
+        }
+        /*Ugly hack. If UnionDetails delete detail no need emit FullParsing */
+        connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    }
+    qApp->getUndoStack()->push(delDet);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

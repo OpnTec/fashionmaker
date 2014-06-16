@@ -29,8 +29,7 @@
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
 #include "../../geometry/vsplinepoint.h"
-
-#include <QPushButton>
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -77,7 +76,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
-        NewItem(path[i].P().id(), path[i].KAsm1(), path[i].Angle1(), path[i].KAsm2(), path[i].Angle2());
+        NewItem(path.at(i).P().id(), path.at(i).KAsm1(), path.at(i).Angle1(), path.at(i).KAsm2(), path.at(i).Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
@@ -89,9 +88,9 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
  * @param id id of point or detail
  * @param type don't show this id in list
  */
-void DialogSplinePath::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogSplinePath::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));

@@ -30,21 +30,12 @@
 #define DIALOGMEASUREMENTS_H
 
 #include <QDialog>
+#include "../../options.h"
 
 namespace Ui
 {
     class DialogMeasurements;
 }
-
-namespace Measurements
-{
-    /**
-     * @brief The Type enum pattern measurements.
-     */
-    enum Type { Standard, Individual };
-    Q_DECLARE_FLAGS(Types, Type)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( Measurements::Types )
 
 class DialogMeasurements : public QDialog
 {
@@ -52,11 +43,11 @@ class DialogMeasurements : public QDialog
 public:
     explicit DialogMeasurements(QWidget *parent = nullptr);
     ~DialogMeasurements();
-    Measurements::Type type() const;
+    MeasurementsType type() const;
 private:
     Q_DISABLE_COPY(DialogMeasurements)
     Ui::DialogMeasurements *ui;
-    Measurements::Type result;
+    MeasurementsType result;
     void StandardMeasurements();
     void IndividualMeasurements();
 };

@@ -29,12 +29,25 @@
 #include "vtoolline.h"
 #include "../../dialogs/tools/dialogline.h"
 #include <QKeyEvent>
+#include "../../geometry/vpointf.h"
+#include "../../dialogs/tools/dialogline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolLine constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param firstPoint id first line point.
+ * @param secondPoint id second line point.
+ * @param typeLine line type.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-                     const QString &typeLine, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                     const QString &typeLine, const Source &typeCreation, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
     this->typeLine = typeLine;
@@ -49,7 +62,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -60,6 +73,9 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolLine::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -71,6 +87,13 @@ void VToolLine::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool form GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -79,19 +102,31 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     const quint32 firstPoint = dialogTool->getFirstPoint();
     const quint32 secondPoint = dialogTool->getSecondPoint();
     const QString typeLine = dialogTool->getTypeLine();
-    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Valentina::FromGui);
+    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param firstPoint id first line point.
+ * @param secondPoint id second line point.
+ * @param typeLine line type.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                        const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                       const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                       const Document &parse, const Source &typeCreation)
 {
     SCASSERT(scene != nullptr);
     SCASSERT(doc != nullptr);
     SCASSERT(data != nullptr);
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->getNextId();
         data->AddLine(firstPoint, secondPoint);
@@ -105,7 +140,7 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::LineTool, doc);
+    VDrawTool::AddRecord(id, Tool::LineTool, doc);
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);
@@ -119,18 +154,31 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolLine::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowTool highlight tool.
+ * @param id object id in container
+ * @param color highlight color.
+ * @param enable enable or disable highlight.
+ */
 void VToolLine::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     ShowItem(this, id, color, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolLine::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -138,6 +186,10 @@ void VToolLine::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
 void VToolLine::ChangedActivDraw(const QString &newName)
 {
     bool selectable = false;
@@ -157,12 +209,19 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLine>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -175,6 +234,9 @@ void VToolLine::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolLine::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -187,6 +249,10 @@ void VToolLine::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -194,6 +260,10 @@ void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -201,6 +271,9 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolLine::RemoveReferens()
 {
     doc->DecrementReferens(firstPoint);
@@ -208,6 +281,12 @@ void VToolLine::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
@@ -227,6 +306,10 @@ QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyReleaseEvent handle key realse events.
+ * @param event key realse event.
+ */
 void VToolLine::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -241,6 +324,9 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolLine::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
@@ -252,6 +338,9 @@ void VToolLine::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry refresh item on scene.
+ */
 void VToolLine::RefreshGeometry()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));

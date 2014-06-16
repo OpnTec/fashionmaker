@@ -32,26 +32,37 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
+#include "vmaingraphicsview.h"
+#include "../container/calculator.h"
 
-#include <QMessageBox>
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
-#include <container/calculator.h>
-#include <QtMath>
+#include <QUndoStack>
+
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
 
 const qreal VApplication::PrintDPI = 96.0;
 
 #define DefWidth 1.2//mm
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication constructor.
+ * @param argc number arguments.
+ * @param argv command line.
+ */
 VApplication::VApplication(int &argc, char **argv)
-    : QApplication(argc, argv), _patternUnit(Valentina::Cm), _patternType(Pattern::Individual),
+    : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
-      postfixOperators(QMap<QString, VTranslation>())
+      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr)
 {
+    undoStack = new QUndoStack(this);
+
     InitLineWidth();
     InitMeasurements();
     InitVariables();
@@ -60,6 +71,12 @@ VApplication::VApplication(int &argc, char **argv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief notify Reimplemented from QApplication::notify().
+ * @param receiver receiver.
+ * @param event event.
+ * @return value that is returned from the receiver's event handler.
+ */
 // reimplemented from QApplication so we can throw exceptions in slots
 bool VApplication::notify(QObject *receiver, QEvent *event)
 {
@@ -110,13 +127,13 @@ double VApplication::toPixel(double unit) const
     double result = 0;
     switch (_patternUnit)
     {
-    case Valentina::Mm:
+    case Unit::Mm:
         result = (unit / 25.4) * PrintDPI;
         break;
-    case Valentina::Cm:
+    case Unit::Cm:
         result = ((unit * 10.0) / 25.4) * PrintDPI;
         break;
-    case Valentina::Inch:
+    case Unit::Inch:
         result = unit * PrintDPI;
         break;
     default:
@@ -131,13 +148,13 @@ double VApplication::fromPixel(double pix) const
     double result = 0;
     switch (_patternUnit)
     {
-    case Valentina::Mm:
+    case Unit::Mm:
         result = (pix / PrintDPI) * 25.4;
         break;
-    case Valentina::Cm:
+    case Unit::Cm:
         result = ((pix / PrintDPI) * 25.4) / 10.0;
         break;
-    case Valentina::Inch:
+    case Unit::Inch:
         result = pix / PrintDPI;
         break;
     default:
@@ -149,7 +166,7 @@ double VApplication::fromPixel(double pix) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::pathToTables() const
 {
-    if (_patternType == Pattern::Individual)
+    if (_patternType == MeasurementsType::Individual)
     {
         return QStringLiteral("://tables/individual/individual.vit");
     }
@@ -202,13 +219,13 @@ void VApplication::InitLineWidth()
 {
     switch (_patternUnit)
     {
-        case Valentina::Mm:
+        case Unit::Mm:
             _widthMainLine = DefWidth;
             break;
-        case Valentina::Cm:
+        case Unit::Cm:
             _widthMainLine = DefWidth/10.0;
             break;
-        case Valentina::Inch:
+        case Unit::Inch:
             _widthMainLine = DefWidth/25.4;
             break;
         default:
@@ -1627,7 +1644,7 @@ void VApplication::BiasTokens(int position, int bias, QMap<int, QString> &tokens
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setPatternUnit(const Valentina::Units &patternUnit)
+void VApplication::setPatternUnit(const Unit &patternUnit)
 {
     _patternUnit = patternUnit;
     InitLineWidth();

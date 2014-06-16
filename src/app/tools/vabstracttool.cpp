@@ -27,7 +27,11 @@
  *************************************************************************/
 
 #include "vabstracttool.h"
+#include "../xml/vpattern.h"
 #include <QGraphicsView>
+#include <QMessageBox>
+#include "../undocommands/deltool.h"
+#include "../widgets/vapplication.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -71,16 +75,28 @@ const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLin
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VAbstractTool container.
+ * @param doc dom document container.
+ * @param data container with data.
+ * @param id object id in container.
+ * @param parent parent object.
+ */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::FullUpdateTree, this->doc, &VPattern::FullUpdateTree);
+    connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VPattern::LiteParseTree);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
+ * @param sc scene.
+ * @param view view.
+ */
 void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
     QRectF rect = sc->itemsBoundingRect();
@@ -110,6 +126,12 @@ void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineIntersectRect find point intersection line and rect.
+ * @param rec rect.
+ * @param line line.
+ * @return point intersection.
+ */
 QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
 {
     qreal x1, y1, x2, y2;
@@ -140,6 +162,15 @@ QPointF VAbstractTool::LineIntersectRect(QRectF rec, QLineF line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineIntersectCircle find point intersection line and circle.
+ * @param center arc center.
+ * @param radius arc radius.
+ * @param line line
+ * @param p1 first intersection point.
+ * @param p2 second intersection point.
+ * @return 0 - intersection doesn't exist, 1 - one intersection point, 2 - two intersection points.
+ */
 qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                           QPointF &p2)
 {
@@ -176,6 +207,11 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosestPoint find point projection of point onto line.
+ * @param line line.
+ * @return point on line or extended line if origin size too small.
+ */
 QPointF VAbstractTool::ClosestPoint(const QLineF &line, const QPointF &point)
 {
     qreal a = 0, b = 0, c = 0;
@@ -202,21 +238,13 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::RemoveAllChild(QDomElement &domElement)
+/**
+ * @brief DeleteTool full delete object form scene and file.
+ * @param tool tool
+ */
+void VAbstractTool::DeleteTool(bool ask)
 {
-    if ( domElement.hasChildNodes() )
-    {
-        while ( domElement.childNodes().length() >= 1 )
-        {
-            domElement.removeChild( domElement.firstChild() );
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::DeleteTool(QGraphicsItem *tool)
-{
-    if (_referens <= 1)
+    if (ask)
     {
         QMessageBox msgBox;
         msgBox.setText(tr("Confirm the deletion."));
@@ -228,43 +256,17 @@ void VAbstractTool::DeleteTool(QGraphicsItem *tool)
         {
             return;
         }
-        //remove from xml file
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                if (element.isElement())
-                {
-                    RemoveReferens();//deincrement referens
-                    element.removeChild(domElement);//remove form file
-                    QGraphicsScene *scene = tool->scene();
-                    if (scene != 0)//some tools haven't scene
-                    {
-                        scene->removeItem(tool);//remove form scene
-                    }
-                    doc->FullUpdateTree();
-                    emit toolhaveChange();//set enabled save button
-                }
-                else
-                {
-                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
-                }
-            }
-            else
-            {
-                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
-            }
-        }
-        else
-        {
-            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
-        }
     }
+    DelTool *delTool = new DelTool(doc, id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineStyle return pen style for current line style.
+ * @return pen style.
+ */
 Qt::PenStyle VAbstractTool::LineStyle()
 {
     QStringList styles = Styles();
@@ -295,6 +297,13 @@ Qt::PenStyle VAbstractTool::LineStyle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineCoefficients coefficient for equation of segment. Segment equestion ax+by+c=0.
+ * @param line line
+ * @param a a value
+ * @param b b value
+ * @param c c value
+ */
 void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     //coefficient for equation of segment
@@ -305,6 +314,10 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Styles return list of all line styles.
+ * @return list of all line styles.
+ */
 const QStringList VAbstractTool::Styles()
 {
     //Keep synchronize with DialogTool lineStyles list!!!
@@ -314,7 +327,13 @@ const QStringList VAbstractTool::Styles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::AddRecord(const quint32 id, const Valentina::Tools &toolType, VPattern *doc)
+/**
+ * @brief AddRecord add record about tool in history.
+ * @param id object id in container
+ * @param toolType tool type
+ * @param doc dom document container
+ */
+void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *doc)
 {
     quint32 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();

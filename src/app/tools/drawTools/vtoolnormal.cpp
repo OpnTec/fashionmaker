@@ -29,18 +29,32 @@
 #include "vtoolnormal.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialognormal.h"
+#include "../../geometry/vpointf.h"
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolNormal constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param typeLine line type.
+ * @param formula string with formula normal length.
+ * @param angle additional angle.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                          const QString &formula, const qreal &angle, const quint32 &firstPointId,
-                         const quint32 &secondPointId, const Valentina::Sources &typeCreation, QGraphicsItem *parent)
+                         const quint32 &secondPointId, const Source &typeCreation, QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
     secondPointId(secondPointId)
 {
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -51,6 +65,9 @@ VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setDialog set dialog when user want change tool option.
+ */
 void VToolNormal::setDialog()
 {
     SCASSERT(dialog != nullptr);
@@ -66,6 +83,13 @@ void VToolNormal::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -79,7 +103,7 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const qreal angle = dialogTool->getAngle();
     VToolNormal *point = nullptr;
     point=Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
-           Document::FullParse, Valentina::FromGui);
+           Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -88,11 +112,28 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param formula string with formula normal length.
+ * @param firstPointId id first line point.
+ * @param secondPointId id second line point.
+ * @param typeLine line type.
+ * @param pointName point name.
+ * @param angle additional angle.
+ * @param mx label bias x axis.
+ * @param my label bias y axis.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                          const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
                          const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                         VPattern *doc, VContainer *data, const Document::Documents &parse,
-                         const Valentina::Sources &typeCreation)
+                         VPattern *doc, VContainer *data, const Document &parse,
+                         const Source &typeCreation)
 {
     const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
@@ -102,7 +143,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
     QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                             qApp->toPixel(result), angle);
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
         data->AddLine(firstPointId, id);
@@ -116,7 +157,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Valentina::NormalTool, doc);
+    VDrawTool::AddRecord(id, Tool::NormalTool, doc);
     if (parse == Document::FullParse)
     {
         VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
@@ -133,6 +174,14 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindPoint return normal point.
+ * @param firstPoint first line point.
+ * @param secondPoint second line point.
+ * @param length normal length.
+ * @param angle additional angle.
+ * @return normal point.
+ */
 QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                                const qreal &angle)
 {
@@ -144,6 +193,9 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VToolNormal::FullUpdateFromFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -159,6 +211,10 @@ void VToolNormal::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetFactor set current scale factor of scene.
+ * @param factor scene scale factor.
+ */
 void VToolNormal::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
@@ -166,18 +222,29 @@ void VToolNormal::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowContextMenu show context menu.
+ * @param event context menu event.
+ */
 void VToolNormal::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogNormal>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief contextMenuEvent handle context menu events.
+ * @param event context menu event.
+ */
 void VToolNormal::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogNormal>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolNormal::AddToFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -199,6 +266,9 @@ void VToolNormal::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolNormal::RefreshDataInFile()
 {
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
@@ -217,6 +287,9 @@ void VToolNormal::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveReferens decrement value of reference.
+ */
 void VToolNormal::RemoveReferens()
 {
     doc->DecrementReferens(secondPointId);
@@ -224,6 +297,9 @@ void VToolNormal::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveDialog save options into file after change in dialog.
+ */
 void VToolNormal::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);

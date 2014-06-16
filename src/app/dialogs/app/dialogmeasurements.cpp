@@ -31,7 +31,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMeasurements::DialogMeasurements(QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogMeasurements), result(Measurements::Individual)
+    QDialog(parent), ui(new Ui::DialogMeasurements), result(MeasurementsType::Individual)
 {
     ui->setupUi(this);
     connect(ui->toolButtonStandard, &QToolButton::clicked, this, &DialogMeasurements::StandardMeasurements);
@@ -45,7 +45,7 @@ DialogMeasurements::~DialogMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Measurements::Type DialogMeasurements::type() const
+MeasurementsType DialogMeasurements::type() const
 {
     return result;
 }
@@ -53,13 +53,13 @@ Measurements::Type DialogMeasurements::type() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurements::StandardMeasurements()
 {
-    result = Measurements::Standard;
+    result = MeasurementsType::Standard;
     accept();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurements::IndividualMeasurements()
 {
-    result = Measurements::Individual;
+    result = MeasurementsType::Individual;
     accept();
 }

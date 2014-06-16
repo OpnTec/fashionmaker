@@ -63,7 +63,7 @@ public:
     quint32           getBasePointId() const;
     void              setBasePointId(const quint32 &value, const quint32 &id);
 public slots:
-    virtual void      ChoosedObject(quint32 id, const Valentina::Scenes &type);
+    virtual void      ChoosedObject(quint32 id, const SceneObject &type);
     virtual void      DialogAccepted();
     /**
      * @brief DialogApply apply data and emit signal about applied dialog.

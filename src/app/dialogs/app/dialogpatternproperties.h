@@ -30,7 +30,8 @@
 #define DIALOGPATTERNPROPERTIES_H
 
 #include <QDialog>
-#include "../../xml/vpattern.h"
+
+class VPattern;
 
 namespace Ui
 {

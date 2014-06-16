@@ -31,15 +31,7 @@
 
 #include <QGraphicsPathItem>
 
-namespace SimpleSpline
-{
-    /**
-     * @brief The Translation enum position point.
-     */
-    enum Translation { FirstPoint, ForthPoint };
-    Q_DECLARE_FLAGS(Translations, Translation)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( SimpleSpline::Translations )
+enum class SimpleSplinePoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleSpline class for simple spline. This object used when we cut spline and want show peaces.
@@ -48,50 +40,27 @@ class VSimpleSpline : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VSimpleSpline constructor.
-     * @param id spline id.
-     * @param factor scene scale factor.
-     * @param currentColor current color.
-     * @param parent parent object.
-     */
     VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
-    void ChangedActivDraw(const bool &flag);
+    void            ChangedActivDraw(const bool &flag);
 signals:
     /**
      * @brief Choosed send id when clicked.
      * @param id spline id.
      */
-    void Choosed(quint32 id);
+    void            Choosed(quint32 id);
 protected:
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VSimpleSpline)
-    /**
-     * @brief id spline id.
-     */
-    quint32          id;
-    /**
-     * @brief factor scale factor.
-     */
+    /** @brief id spline id. */
+    quint32         id;
+
+    /** @brief factor scale factor. */
     qreal           *factor;
-    /**
-     * @brief currentColor current color.
-     */
+
+    /** @brief currentColor current color. */
     Qt::GlobalColor *currentColor;
 };
 

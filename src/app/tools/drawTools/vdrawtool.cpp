@@ -29,10 +29,10 @@
 #include "vdrawtool.h"
 
 #include <qmuparsererror.h>
-
-#include <dialogs/tools/dialogeditwrongformula.h>
-
-#include <container/calculator.h>
+#include "dialogs/tools/dialogeditwrongformula.h"
+#include "container/calculator.h"
+#include "../../undocommands/addtocalc.h"
+#include "../../undocommands/savetooloptions.h"
 
 qreal VDrawTool::factor = 1;
 
@@ -47,7 +47,7 @@ VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
 {
-    connect(this->doc, &VPattern::ChangedActivDraw, this, &VDrawTool::ChangedActivDraw);
+    connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
     connect(this->doc, &VPattern::ShowTool, this, &VDrawTool::ShowTool);
 }
@@ -105,40 +105,51 @@ void VDrawTool::ChangedNameDraw(const QString &oldName, const QString &newName)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromGui refresh tool data after change in options.
+ * @brief FullUpdateFromGuiOk refresh tool data after change in options.
  * @param result keep result working dialog.
  */
-void VDrawTool::FullUpdateFromGui(int result)
+void VDrawTool::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            SaveDialog(domElement);
-
-            emit FullUpdateTree();
-            emit toolhaveChange();
-        }
+        SaveDialogChange();
     }
     delete dialog;
-    dialog = nullptr;
+    dialog=nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
+ */
 void VDrawTool::FullUpdateFromGuiApply()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        SaveDialog(domElement);
+    SaveDialogChange();
+}
 
-        emit FullUpdateTree();
-        emit toolhaveChange();
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SaveDialogChange()
+{
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+        SaveDialog(newDomElement);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogLinkDestroy removes dialog pointer
+ */
 void VDrawTool::DialogLinkDestroy()
 {
     this->dialog=nullptr;
@@ -210,32 +221,7 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
  */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
-    QDomElement calcElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagCalculation, calcElement);
-    if (ok)
-    {
-        quint32 id = doc->getCursor();
-        if (id <= 0)
-        {
-            calcElement.appendChild(domElement);
-        }
-        else
-        {
-            QDomElement refElement = doc->elementById(QString().setNum(doc->getCursor()));
-            if (refElement.isElement())
-            {
-                calcElement.insertAfter(domElement, refElement);
-                doc->setCursor(0);
-            }
-            else
-            {
-                qCritical()<<tr("Can not find the element after which you want to insert.")<< Q_FUNC_INFO;
-            }
-        }
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Calculation")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddToCalc *addToCal = new AddToCalc(domElement, doc);
+    connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addToCal);
 }

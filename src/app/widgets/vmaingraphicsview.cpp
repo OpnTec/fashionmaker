@@ -35,6 +35,10 @@
 #include "../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMainGraphicsView constructor.
+ * @param parent parent object.
+ */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     :QGraphicsView(parent), _numScheduledScalings(0)
 {
@@ -44,6 +48,10 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief wheelEvent handle wheel events.
+ * @param event wheel event.
+ */
 //cppcheck-suppress unusedFunction
 void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 {
@@ -71,6 +79,10 @@ void VMainGraphicsView::wheelEvent(QWheelEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief scalingTime call each time when need handle scaling.
+ * @param x value from 0.0 to 1.0
+ */
 void VMainGraphicsView::scalingTime(qreal x)
 {
     Q_UNUSED(x);
@@ -90,6 +102,10 @@ void VMainGraphicsView::scalingTime(qreal x)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief scrollingTime call each time when need handle scrolling.
+ * @param x value from 0.0 to 1.0
+ */
 void VMainGraphicsView::scrollingTime(qreal x)
 {
     Q_UNUSED(x);
@@ -110,6 +126,9 @@ void VMainGraphicsView::scrollingTime(qreal x)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief animFinished
+ */
 void VMainGraphicsView::animFinished()
 {
     if (_numScheduledScalings > 0)
@@ -140,6 +159,10 @@ void VMainGraphicsView::ZoomOut()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mousePressEvent handle mouse press events.
+ * @param mousePress mouse press event.
+ */
 void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
     if (mousePress->button() & Qt::LeftButton)
@@ -158,6 +181,10 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );

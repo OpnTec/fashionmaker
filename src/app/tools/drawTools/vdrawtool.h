@@ -34,6 +34,8 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QGraphicsView>
 #include "../../dialogs/tools/dialogtool.h"
+#include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
@@ -48,21 +50,14 @@ public:
 
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
-    /**
-     * @brief DialogLinkDestroy removes dialog pointer
-     */
     virtual void DialogLinkDestroy();
-
     void         ignoreContextMenu(bool enable);
     static qreal CheckFormula(QString &formula, VContainer *data);
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
-    virtual void FullUpdateFromGui(int result);
-    /**
-     * @brief FullUpdateFromGuiApply refresh tool data after change in options but do not delete dialog
-     */
+    virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
 protected:
@@ -85,6 +80,7 @@ protected:
 
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
+    void         SaveDialogChange();
 
     template <typename Dialog, typename Tool>
     /**
@@ -102,9 +98,9 @@ protected:
             QMenu menu;
             QAction *actionOption = menu.addAction(tr("Options"));
             QAction *actionRemove = nullptr;
+            actionRemove = menu.addAction(tr("Delete"));
             if (showRemove)
             {
-                actionRemove = menu.addAction(tr("Delete"));
                 if (_referens > 1)
                 {
                     actionRemove->setEnabled(false);
@@ -114,6 +110,11 @@ protected:
                     actionRemove->setEnabled(true);
                 }
             }
+            else
+            {
+                actionRemove->setEnabled(false);
+            }
+
             QAction *selectedAction = menu.exec(event->screenPos());
             if (selectedAction == actionOption)
             {
@@ -123,7 +124,7 @@ protected:
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
-                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGui);
+                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
                 connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
                 if (ignoreFullUpdate == false)
                 {
@@ -134,12 +135,9 @@ protected:
 
                 dialog->show();
             }
-            if (showRemove)
+            if (selectedAction == actionRemove)
             {
-                if (selectedAction == actionRemove)
-                {
-                    DeleteTool(tool);
-                }
+                DeleteTool();
             }
         }
     }

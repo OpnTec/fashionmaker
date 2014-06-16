@@ -29,6 +29,7 @@
 #include "pages.h"
 #include "../../options.h"
 #include "../../widgets/vapplication.h"
+#include "../../widgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent):
@@ -51,7 +52,21 @@ void ConfigurationPage::Apply()
                        QApplication::applicationName());
     settings.setValue("configuration/autosave/state", autoSaveCheck->isChecked());
     settings.setValue("configuration/autosave/time", autoTime->value());
+
+    QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
+    SCASSERT(autoSaveTimer);
+
+    if (autoSaveCheck->isChecked())
+    {
+        autoSaveTimer->start(autoTime->value()*60000);
+    }
+    else
+    {
+        autoSaveTimer->stop();
+    }
+
     settings.setValue("configuration/osSeparator", osOptionCheck->isChecked());
+
     if (langChanged)
     {
         QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
@@ -128,7 +143,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     {
         // get locale extracted by filename
         QString locale;
-        locale = fileNames[i];                  // "valentina_de.qm"
+        locale = fileNames.at(i);                  // "valentina_de.qm"
         locale.truncate(locale.lastIndexOf('.'));   // "valentina_de"
         locale.remove(0, locale.indexOf('_') + 1);   // "de"
 
@@ -174,16 +189,16 @@ QGroupBox *ConfigurationPage::LangGroup()
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
-    QWidget(parent), userName(0), graphOutputCheck(0), undoneCount(0)
+    QWidget(parent), userName(0), graphOutputCheck(0), undoCount(0)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
-    QGroupBox *undoneGroup = UndoneGroup();
+    QGroupBox *undoGroup = UndoGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(userGroup);
     mainLayout->addWidget(graphOutputGroup);
-    mainLayout->addWidget(undoneGroup);
+    mainLayout->addWidget(undoGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -194,8 +209,16 @@ void PatternPage::Apply()
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                        QApplication::applicationName());
     settings.setValue("pattern/user", userName->text());
-    //settings.setValue("pattern/graphicalOutput", graphOutputCheck->isChecked());
-    settings.setValue("pattern/undone", undoneCount->value());
+
+    // Scene antialiasing
+    settings.setValue("pattern/graphicalOutput", graphOutputCheck->isChecked());
+    qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
+    qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
+
+    /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
+     * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
+     * prints a warning and does nothing.*/
+    settings.setValue("pattern/undo", undoCount->value());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -228,15 +251,14 @@ QGroupBox *PatternPage::UserGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::GraphOutputGroup()
 {
-//    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-//                       QApplication::applicationName());
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
 
     QGroupBox *graphOutputGroup = new QGroupBox(tr("Graphical output"));
 
     graphOutputCheck = new QCheckBox(tr("Use antialiasing"));
-    //bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
-    //graphOutputCheck->setChecked(graphOutputValue);
-    graphOutputCheck->setEnabled(false);
+    bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
+    graphOutputCheck->setChecked(graphOutputValue);
 
     QHBoxLayout *graphLayout = new QHBoxLayout;
     graphLayout->addWidget(graphOutputCheck);
@@ -248,29 +270,29 @@ QGroupBox *PatternPage::GraphOutputGroup()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGroupBox *PatternPage::UndoneGroup()
+QGroupBox *PatternPage::UndoGroup()
 {
-    //    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-    //                       QApplication::applicationName());
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
 
-    QGroupBox *undoneGroup = new QGroupBox(tr("Undone"));
-    QLabel *undoneLabel = new QLabel(tr("Count steps"));
-    undoneCount = new QSpinBox;
-//    bool ok = true;
-//    qint32 count = settings.value("pattern/undone", 100).toInt(&ok);
-//    if (ok == false)
-//    {
-//        count = 100;
-//    }
-//    undoneCount->setValue(count);
-    undoneCount->setEnabled(false);
+    QGroupBox *undoGroup = new QGroupBox(tr("Undo"));
+    QLabel *undoLabel = new QLabel(tr("Count steps (0 - no limit)"));
+    undoCount = new QSpinBox;
+    undoCount->setMinimum(0);
+    bool ok = true;
+    qint32 count = settings.value("pattern/undo", 0).toInt(&ok);
+    if (ok == false)
+    {
+        count = 0;
+    }
+    undoCount->setValue(count);
 
     QHBoxLayout *countLayout = new QHBoxLayout;
-    countLayout->addWidget(undoneLabel);
-    countLayout->addWidget(undoneCount);
+    countLayout->addWidget(undoLabel);
+    countLayout->addWidget(undoCount);
 
-    QVBoxLayout *undoneLayout = new QVBoxLayout;
-    undoneLayout->addLayout(countLayout);
-    undoneGroup->setLayout(undoneLayout);
-    return undoneGroup;
+    QVBoxLayout *undoLayout = new QVBoxLayout;
+    undoLayout->addLayout(countLayout);
+    undoGroup->setLayout(undoLayout);
+    return undoGroup;
 }

@@ -28,22 +28,33 @@
 
 #include "vnodespline.h"
 
-#include <QtWidgets>
 #include "../../widgets/vapplication.h"
+#include "../../geometry/vspline.h"
 
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VNodeSpline constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idSpline object id in containerSpline.
+ * @param typeCreation way we create this tool.
+ * @param idTool id node.
+ * @param qoParent QObject parent.
+ * @param parent QGraphicsItem parent.
+ */
 VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Valentina::Sources &typeCreation, const quint32 &idTool, QObject *qoParent,
+                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
                          QGraphicsItem * parent)
     :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -54,11 +65,21 @@ VNodeSpline::VNodeSpline(VPattern *doc, VContainer *data, quint32 id, quint32 id
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Document::Documents &parse, const Valentina::Sources &typeCreation,
-                                 const quint32 &idTool, QObject *parent)
+/**
+ * @brief Create help create tool.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idSpline object id in containerSpline.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ * @param idTool id node.
+ * @return pointer to node.
+ */
+VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Document &parse,
+                                 const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
-    VAbstractTool::AddRecord(id, Valentina::NodeSpline, doc);
+    VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
@@ -85,6 +106,9 @@ VNodeSpline *VNodeSpline::Create(VPattern *doc, VContainer *data, quint32 id, qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DeleteNode delete node from detail.
+ */
 void VNodeSpline::DeleteNode()
 {
     VAbstractNode::DeleteNode();
@@ -92,12 +116,28 @@ void VNodeSpline::DeleteNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodeSpline::RestoreNode()
+{
+    if (this->isVisible() == false)
+    {
+        VAbstractNode::RestoreNode();
+        this->setVisible(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
 void VNodeSpline::FullUpdateFromFile()
 {
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VNodeSpline::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -114,6 +154,9 @@ void VNodeSpline::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VNodeSpline::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -128,16 +171,24 @@ void VNodeSpline::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, Valentina::Spline);
+        emit ChoosedTool(id, SceneObject::Spline);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverMoveEvent handle hover move events.
+ * @param event hover move event.
+ */
 void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -145,6 +196,10 @@ void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief hoverLeaveEvent handle hover leave events.
+ * @param event hover leave event.
+ */
 void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -152,6 +207,9 @@ void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshGeometry refresh item on scene.
+ */
 void VNodeSpline::RefreshGeometry()
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);

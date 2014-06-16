@@ -39,68 +39,19 @@ class VMainGraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-                  /**
-                   * @brief VMainGraphicsScene default constructor.
-                   */
-                  VMainGraphicsScene();
-                  /**
-                   * @brief VMainGraphicsScene constructor.
-                   * @param sceneRect scene rect.
-                   * @param parent parent object.
-                   */
-                  VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
-    /**
-     * @brief getHorScrollBar return scene horizontal scrollbar.
-     * @return horizontal scrollbar.
-     */
+    VMainGraphicsScene();
+    VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
     qint32        getHorScrollBar() const;
-    /**
-     * @brief setHorScrollBar set scene horizontal scrollbar.
-     * @param value horizontal scrollbar.
-     */
     void          setHorScrollBar(const qint32 &value);
-    /**
-     * @brief getVerScrollBar return scene vertical scrollbar.
-     * @return vertical scrollbar.
-     */
     qint32        getVerScrollBar() const;
-    /**
-     * @brief setVerScrollBar set scene vertical scrollbar.
-     * @param value vertical scrollbar.
-     */
     void          setVerScrollBar(const qint32 &value);
-    /**
-     * @brief transform return view transformation.
-     * @return view transformation.
-     */
     QTransform    transform() const;
-    /**
-     * @brief setTransform set view transformation.
-     * @param transform view transformation.
-     */
     void          setTransform(const QTransform &transform);
 public slots:
-    /**
-     * @brief ChoosedItem emit ChoosedObject signal.
-     * @param id object id.
-     * @param type object scene type.
-     */
-    void          ChoosedItem(quint32 id, const Valentina::Scenes &type);
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor. scene scale factor.
-     */
+    void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
 protected:
-    /**
-     * @brief mouseMoveEvent handle mouse move events.
-     * @param event mouse move event.
-     */
     void          mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-    /**
-     * @brief mousePressEvent mouse press events.
-     * @param event mouse press event
-     */
     void          mousePressEvent(QGraphicsSceneMouseEvent *event);
 signals:
     /**
@@ -118,46 +69,61 @@ signals:
      * @param id object id.
      * @param type object scene type.
      */
-    void          ChoosedObject(quint32 id, Valentina::Scenes type);
+    void          ChoosedObject(quint32 id, SceneObject type);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
      */
     void          NewFactor(qreal factor);
 private:
-    /**
-     * @brief horScrollBar value horizontal scroll bar.
-     */
+    /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;
-    /**
-     * @brief verScrollBar value vertical scroll bar.
-     */
+
+    /** @brief verScrollBar value vertical scroll bar. */
     qint32        verScrollBar;
-    /**
-     * @brief scaleFactor scale factor.
-     */
+
+    /** @brief scaleFactor scale factor. */
     qreal         scaleFactor;
-    /**
-     * @brief _transform view transform value.
-     */
+
+    /** @brief _transform view transform value. */
     QTransform    _transform;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getHorScrollBar return scene horizontal scrollbar.
+ * @return horizontal scrollbar.
+ */
 inline qint32 VMainGraphicsScene::getHorScrollBar() const
 {
     return horScrollBar;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setHorScrollBar set scene horizontal scrollbar.
+ * @param value horizontal scrollbar.
+ */
 inline void VMainGraphicsScene::setHorScrollBar(const qint32 &value)
 {
     horScrollBar = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getVerScrollBar return scene vertical scrollbar.
+ * @return vertical scrollbar.
+ */
 inline qint32 VMainGraphicsScene::getVerScrollBar() const
 {
     return verScrollBar;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setVerScrollBar set scene vertical scrollbar.
+ * @param value vertical scrollbar.
+ */
 inline void VMainGraphicsScene::setVerScrollBar(const qint32 &value)
 {
     verScrollBar = value;

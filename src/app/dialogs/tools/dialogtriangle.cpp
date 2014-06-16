@@ -28,8 +28,8 @@
 
 #include "dialogtriangle.h"
 #include "ui_dialogtriangle.h"
-
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -67,9 +67,9 @@ DialogTriangle::~DialogTriangle()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogTriangle::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogTriangle::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)

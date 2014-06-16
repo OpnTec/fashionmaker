@@ -31,8 +31,11 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsPathItem>
-#include "../dialogs/tools/dialogdetail.h"
-#include "../dialogs/tools/dialogtool.h"
+#include "../xml/vpattern.h"
+
+class VMainGraphicsScene;
+class DialogTool;
+
 /**
  * @brief The VToolDetail class for working with detail.
  */
@@ -40,21 +43,10 @@ class VToolDetail: public VAbstractTool, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VToolDetail constructor.
-     * @param doc dom document container
-     * @param data container with variables
-     * @param id object id in container
-     * @param typeCreation way we create this tool.
-     * @param scene pointer to scene.
-     * @param parent parent object
-     */
-    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Valentina::Sources &typeCreation,
+    VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, QGraphicsItem * parent = nullptr);
     ~VToolDetail();
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+
     virtual void       setDialog();
     template<typename T>
     /**
@@ -67,31 +59,14 @@ public:
     {
         //We can't use exist object. Need create new.
         T *node = new T(*data->GeometricObject<const T *>(id));
-        node->setMode(Valentina::Modeling);
+        node->setMode(Draw::Modeling);
         return data->AddGObject(node);
     }
 
-    /**
-     * @brief Create help create tool from GUI.
-     * @param dialog dialog.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     */
     static void        Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
-    /**
-     * @brief Create help create tool.
-     * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param newDetail detail what we want show.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
     static void        Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
-                              VPattern *doc, VContainer *data, const Document::Documents &parse,
-                              const Valentina::Sources &typeCreation);
+                              VPattern *doc, VContainer *data, const Document &parse,
+                              const Source &typeCreation);
     static const QString TagName;
     static const QString TagNode;
     static const QString AttrSupplement;
@@ -105,75 +80,28 @@ public:
     static const QString NodePoint;
     static const QString NodeSpline;
     static const QString NodeSplinePath;
-    /**
-     * @brief Remove full delete detail.
-     */
-    void               Remove();
+    void               Remove(bool ask);
+    static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void       FullUpdateFromFile ();
-    /**
-     * @brief FullUpdateFromGui refresh tool data after change in options.
-     * @param result keep result working dialog.
-     */
-    virtual void       FullUpdateFromGui(int result);
+    virtual void       FullUpdateFromGuiOk(int result);
 protected:
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void       AddToFile ();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void       RefreshDataInFile();
-    /**
-     * @brief itemChange handle detail change.
-     * @param change change
-     * @param value value
-     * @return new value.
-     */
     virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
     virtual void       RemoveReferens();
-    /**
-     * @brief keyReleaseEvent handle key release events.
-     * @param event key release event.
-     */
     virtual void       keyReleaseEvent(QKeyEvent * event);
 private:
     Q_DISABLE_COPY(VToolDetail)
-    /**
-     * @brief dialog dialog options.
-     */
+    /** @brief dialog dialog options. */
     DialogTool         *dialog;
-    /**
-     * @brief sceneDetails pointer to the scene.
-     */
+
+    /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *sceneDetails;
-    /**
-     * @brief RefreshGeometry refresh item on scene.
-     */
+
     void               RefreshGeometry ();
-    /**
-     * @brief AddNode add node to the file.
-     * @param domElement tag in xml tree.
-     * @param node node of detail.
-     */
-    void               AddNode(QDomElement &domElement, const VNodeDetail &node);
     template <typename Tool>
     /**
      * @brief InitTool initial node item on scene
@@ -181,6 +109,7 @@ private:
      * @param node node of detail.
      */
     void               InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
+    virtual void       DeleteTool(bool ask = true);
 };
 
 #endif // VTOOLDETAIL_H

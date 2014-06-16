@@ -24,11 +24,12 @@
 
 #include <QStack>
 #include <QString>
-#include <QtMath>
-#include <QDebug>
 
-#include "qmuparserdef.h"
-#include "qmuparsererror.h"
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
+
+#include <QDebug>
 #include "qmuparsertoken.h"
 
 

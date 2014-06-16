@@ -28,7 +28,8 @@
 
 #include "dialogpointofcontact.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -77,7 +78,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
-    if (qApp->patternType() == Pattern::Standard)
+    if (qApp->patternType() == MeasurementsType::Standard)
     {
         SizeHeight();
         connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
@@ -132,9 +133,9 @@ void DialogPointOfContact::DeployFormulaTextEdit()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogPointOfContact::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogPointOfContact::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)

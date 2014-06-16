@@ -29,20 +29,33 @@
 #include "vdatatool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDataTool constructor.
+ * @param data container with variables
+ * @param parent parent object
+ */
 VDataTool::VDataTool(VContainer *data, QObject *parent): QObject(parent), data(*data), _referens(1)
 {
     SCASSERT(data != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief operator = assignment operator.
+ * @param tool tool
+ * @return tool
+ */
 VDataTool &VDataTool::operator =(const VDataTool &tool)
 {
     data = tool.getData();
     _referens = tool.referens();
-   return *this;
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief decrementReferens decrement referens.
+ */
 void VDataTool::decrementReferens()
 {
     if (_referens > 0)

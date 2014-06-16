@@ -28,8 +28,13 @@
 
 #include "dialogdetail.h"
 
-#include <QPushButton>
 #include <QDebug>
+
+#include "../../geometry/varc.h"
+#include "../../geometry/vpointf.h"
+#include "../../geometry/vsplinepath.h"
+#include "../../container/vcontainer.h"
+#include "../../xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -42,6 +47,9 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
+    ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+    ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
@@ -57,9 +65,9 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     CheckState();
 
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogDetail::ObjectChanged);
-    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
@@ -74,24 +82,26 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
  * @param id id of objects (points, arcs, splines, spline paths)
  * @param type type of object
  */
-void DialogDetail::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogDetail::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type != Valentina::Line && type != Valentina::Detail)
+    if (type != SceneObject::Line && type != SceneObject::Detail)
     {
         switch (type)
         {
-            case (Valentina::Arc):
-                NewItem(id, Valentina::NodeArc, NodeDetail::Contour);
+            case (SceneObject::Arc):
+                NewItem(id, Tool::NodeArc, NodeDetail::Contour);
                 break;
-            case (Valentina::Point):
-                NewItem(id, Valentina::NodePoint, NodeDetail::Contour);
+            case (SceneObject::Point):
+                NewItem(id, Tool::NodePoint, NodeDetail::Contour);
                 break;
-            case (Valentina::Spline):
-                NewItem(id, Valentina::NodeSpline, NodeDetail::Contour);
+            case (SceneObject::Spline):
+                NewItem(id, Tool::NodeSpline, NodeDetail::Contour);
                 break;
-            case (Valentina::SplinePath):
-                NewItem(id, Valentina::NodeSplinePath, NodeDetail::Contour);
+            case (SceneObject::SplinePath):
+                NewItem(id, Tool::NodeSplinePath, NodeDetail::Contour);
                 break;
+            case (SceneObject::Line):
+            case (SceneObject::Detail):
             default:
                 qDebug()<<tr("Got wrong scene object. Ignore.");
                 break;
@@ -113,7 +123,7 @@ void DialogDetail::DialogAccepted()
         QListWidgetItem *item = ui.listWidget->item(i);
         details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
-    details.setWidth(ui.spinBoxSeams->value());
+    details.setWidth(ui.doubleSpinBoxSeams->value());
     details.setName(ui.lineEditNameDetail->text());
     details.setSeamAllowance(supplement);
     details.setClosed(closed);
@@ -130,36 +140,57 @@ void DialogDetail::DialogAccepted()
  * @param mx offset respect to x
  * @param my offset respect to y
  */
-void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const NodeDetail::NodeDetails &typeNode,
+void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                            qreal mx, qreal my)
 {
     QString name;
     switch (typeTool)
     {
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
         {
             const VPointF *point = data->GeometricObject<const VPointF *>(id);
             name = point->name();
             break;
         }
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
         {
             const VArc *arc = data->GeometricObject<const VArc *>(id);
             name = arc->name();
             break;
         }
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
         {
             const VSpline *spl = data->GeometricObject<const VSpline *>(id);
             name = spl->name();
             break;
         }
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
         {
             const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
             name = splPath->name();
             break;
         }
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"Got wrong tools. Ignore.";
             break;
@@ -171,15 +202,15 @@ void DialogDetail::NewItem(quint32 id, const Valentina::Tools &typeTool, const N
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
-    disconnect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    disconnect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    disconnect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
-    connect(ui.spinBoxBiasX,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasXChanged);
-    connect(ui.spinBoxBiasY,  static_cast<void (QSpinBox::*)(qint32)>(&QSpinBox::valueChanged),
+    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
 }
 
@@ -194,15 +225,15 @@ void DialogDetail::setDetails(const VDetail &value)
     ui.listWidget->clear();
     for (ptrdiff_t i = 0; i < details.CountNode(); ++i)
     {
-        NewItem(details[i].getId(), details[i].getTypeTool(), details[i].getTypeNode(), details[i].getMx(),
-                details[i].getMy());
+        NewItem(details.at(i).getId(), details.at(i).getTypeTool(), details.at(i).getTypeNode(), details.at(i).getMx(),
+                details.at(i).getMy());
     }
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSeamAllowance());
     ui.checkBoxClosed->setChecked(details.getClosed());
     ClickedClosed(details.getClosed());
     ClickedSeams(details.getSeamAllowance());
-    ui.spinBoxSeams->setValue(static_cast<qint32>(details.getWidth()));
+    ui.doubleSpinBoxSeams->setValue(details.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
@@ -247,7 +278,7 @@ void DialogDetail::ClickedSeams(bool checked)
 {
     supplement = checked;
     ui.checkBoxClosed->setEnabled(checked);
-    ui.spinBoxSeams->setEnabled(checked);
+    ui.doubleSpinBoxSeams->setEnabled(checked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -273,8 +304,8 @@ void DialogDetail::ObjectChanged(int row)
     }
     QListWidgetItem *item = ui.listWidget->item( row );
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
-    ui.spinBoxBiasX->setValue(static_cast<qint32>(qApp->fromPixel(node.getMx())));
-    ui.spinBoxBiasY->setValue(static_cast<qint32>(qApp->fromPixel(node.getMy())));
+    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

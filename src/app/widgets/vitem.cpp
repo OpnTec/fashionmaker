@@ -33,20 +33,37 @@
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VItem constructor.
+ * @param path detail path.
+ * @param numInList index in list of details.
+ * @param parent parent object.
+ */
 VItem::VItem (const QPainterPath & path, int numInList, QGraphicsItem * parent )
     :QGraphicsPathItem ( path, parent ), numInOutList(numInList), paper(nullptr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VItem default constructor.
+ */
 VItem::VItem():numInOutList(0), paper(nullptr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VItem constructor.
+ * @param numInList index in list of details.
+ * @param parent parent object.
+ */
 VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), numInOutList(numInList),
     paper(nullptr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief checkItemChange change item change. If detail create colission or moved out paper emit signal.
+ */
 void VItem::checkItemChange()
 {
     QRectF rect;
@@ -87,6 +104,12 @@ void VItem::checkItemChange()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief itemChange handle item change.
+ * @param change change.
+ * @param value value.
+ * @return value.
+ */
 QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
 {
     if ( change == QGraphicsItem::ItemPositionHasChanged && scene() )
@@ -103,6 +126,9 @@ QVariant VItem::itemChange( GraphicsItemChange change, const QVariant &value )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LengthChanged handle signal change paper length.
+ */
 void VItem::LengthChanged()
 {
     checkItemChange();

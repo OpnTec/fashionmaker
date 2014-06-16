@@ -30,28 +30,12 @@
 #define VDETAIL_H
 
 #include "vnodedetail.h"
-
-#include <QString>
 #include <QVector>
 
-namespace Detail
-{
-    /**
-     * @brief The Contour enum OpenContour - first and last points contour don't match,
-     * CloseContour - first and last points contour match.
-     */
-    enum Contour { OpenContour, CloseContour };
-    Q_DECLARE_FLAGS(Contours, Contour)
+class QString;
 
-    /**
-     * @brief The Equidistant enum OpenEquidistant - first and last points equidistant don't match,
-     * CloseEquidistant - first and last points equidistant match.
-     */
-    enum Equidistant { OpenEquidistant, CloseEquidistant };
-    Q_DECLARE_FLAGS(Equidistants, Equidistant)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Contours)
-Q_DECLARE_OPERATORS_FOR_FLAGS(Detail::Equidistants)
+enum class Contour : char { OpenContour, CloseContour };
+enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).

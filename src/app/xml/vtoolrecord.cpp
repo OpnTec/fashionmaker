@@ -29,11 +29,20 @@
 #include "vtoolrecord.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolRecord default constructor.
+ */
 VToolRecord::VToolRecord()
-    :id(0), typeTool(Valentina::ArrowTool), nameDraw(QString())
+    :id(0), typeTool(Tool::ArrowTool), nameDraw(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRecord::VToolRecord(const quint32 &id, const Valentina::Tools &typeTool, const QString &nameDraw)
+/**
+ * @brief VToolRecord constructor.
+ * @param id tool id.
+ * @param typeTool tool type.
+ * @param nameDraw pattern peace name.
+ */
+VToolRecord::VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw)
     :id(id), typeTool(typeTool), nameDraw(nameDraw)
 {}

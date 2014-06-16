@@ -28,10 +28,10 @@
 
 #include "vexception.h"
 #include <QMessageBox>
-#include <QSpacerItem>
-#include <QGridLayout>
 #include "../options.h"
-#include <QApplication>
+
+class QSpacerItem;
+class QGridLayout;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

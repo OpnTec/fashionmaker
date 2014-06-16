@@ -29,7 +29,6 @@
 #include "vtablegraphicsview.h"
 
 #include <QDebug>
-#include <QtWidgets>
 #include <QWheelEvent>
 #include "../options.h"
 
@@ -42,6 +41,9 @@ VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief selectionChanged handle selection change.
+ */
 void VTableGraphicsView::selectionChanged()
 {
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
@@ -58,6 +60,9 @@ void VTableGraphicsView::selectionChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MirrorItem mirror detail.
+ */
 void VTableGraphicsView::MirrorItem()
 {
     QList<QGraphicsItem *> list = scene()->selectedItems();
@@ -99,6 +104,10 @@ void VTableGraphicsView::MirrorItem()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief wheelEvent handle wheel events.
+ * @param event wheel event.
+ */
 void VTableGraphicsView::wheelEvent(QWheelEvent *event)
 {
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
@@ -120,6 +129,10 @@ void VTableGraphicsView::wheelEvent(QWheelEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mousePressEvent handle mouse press events.
+ * @param mousePress mouse press event.
+ */
 void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
     if (mousePress->button() & Qt::LeftButton)
@@ -138,6 +151,10 @@ void VTableGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent handle mouse release events.
+ * @param event mouse release event.
+ */
 void VTableGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );
@@ -145,6 +162,10 @@ void VTableGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief keyPressEvent handle key press events.
+ * @param event key press event.
+ */
 void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key())
@@ -171,6 +192,9 @@ void VTableGraphicsView::keyPressEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief rotateIt rotate selected details on 180 degree.
+ */
 void VTableGraphicsView::rotateIt()
 {
     QList<QGraphicsItem *> list = scene()->selectedItems();
@@ -187,6 +211,10 @@ void VTableGraphicsView::rotateIt()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MoveItem move selected detail.
+ * @param move type of move.
+ */
 void VTableGraphicsView::MoveItem(VTableGraphicsView::typeMove_e move)
 {
     qreal dx = 0, dy = 0;

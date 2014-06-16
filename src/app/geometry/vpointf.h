@@ -29,10 +29,10 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include <QPointF>
-#include <QString>
-#include "../options.h"
 #include "vgobject.h"
+
+class QPointF;
+class QString;
 
 /**
  * @brief The VPointF class keep data of point.
@@ -44,7 +44,7 @@ public:
     VPointF (const VPointF &point );
     VPointF (const QPointF &point );
     VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
-              Valentina::Draws mode = Valentina::Calculation);
+              Draw mode = Draw::Calculation);
     virtual ~VPointF(){}
     VPointF &operator=(const VPointF &point);
     qreal       mx() const;
@@ -109,16 +109,6 @@ inline void VPointF::setMx(qreal mx)
 inline void VPointF::setMy(qreal my)
 {
     _my = my;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief toQPointF convert to QPointF
- * @return QPointF point
- */
-inline QPointF VPointF::toQPointF() const
-{
-    return QPointF(_x, _y);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

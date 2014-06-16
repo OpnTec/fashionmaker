@@ -37,118 +37,40 @@
 class VToolPointOfContact : public VToolPoint
 {
 public:
-                   /**
-                    * @brief VToolPointOfContact constructor.
-                    * @param doc dom document container.
-                    * @param data container with variables.
-                    * @param id object id in container.
-                    * @param arcRadius string with formula radius arc.
-                    * @param center id center arc point.
-                    * @param firstPointId id first line point.
-                    * @param secondPointId id second line point.
-                    * @param typeCreation way we create this tool.
-                    * @param parent parent object.
-                    */
-                   VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id,
-                                       const QString &arcRadius, const quint32 &center,
-                                       const quint32 &firstPointId, const quint32 &secondPointId,
-                                       const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+    VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
+                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
+                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
-    /**
-     * @brief FindPoint return point intersection line and arc.
-     * @param arcRadius string with formula radius arc.
-     * @param center center arc point.
-     * @param firstPoint first line point.
-     * @param secondPoint second line point.
-     * @return point intersection.
-     */
     static QPointF FindPoint(const qreal &arcRadius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
-    /**
-     * @brief Create help create tool from GUI.
-     * @param dialog dialog.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     */
-    static VToolPointOfContact*    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    /**
-     * @brief Create help create tool.
-     * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param arcRadius string with formula radius arc.
-     * @param center id center arc point.
-     * @param firstPointId id first line point.
-     * @param secondPointId id second line point.
-     * @param pointName point name.
-     * @param mx label bias x axis.
-     * @param my label bias y axis.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
+    static VToolPointOfContact*    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc,
+                                          VContainer *data);
     static VToolPointOfContact*    Create(const quint32 _id, QString &arcRadius, const quint32 &center,
                           const quint32 &firstPointId, const quint32 &secondPointId, const QString &pointName,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation);
+                          VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void   FullUpdateFromFile();
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void   SetFactor(qreal factor);
-    /**
-     * @brief ShowContextMenu show context menu.
-     * @param event context menu event.
-     */
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void   AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void   RefreshDataInFile();
-    /**
-     * @brief RemoveReferens decrement value of reference.
-     */
     virtual void   RemoveReferens();
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
     virtual void   SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief radius string with formula radius arc.
-     */
+    /** @brief radius string with formula radius arc. */
     QString        arcRadius;
-    /**
-     * @brief center id center arc point.
-     */
+
+    /** @brief center id center arc point. */
     quint32         center;
-    /**
-     * @brief firstPointId id first line point.
-     */
+
+    /** @brief firstPointId id first line point. */
     quint32         firstPointId;
-    /**
-     * @brief secondPointId id second line point.
-     */
+
+    /** @brief secondPointId id second line point. */
     quint32         secondPointId;
 };
 

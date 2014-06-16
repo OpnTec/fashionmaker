@@ -104,6 +104,11 @@ VDomDocument::~VDomDocument()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Finds an element by id.
+ * @param id value id attribute.
+ * @return dom element.
+ */
 QDomElement VDomDocument::elementById(const QString& id)
 {
     if (map.contains(id))
@@ -125,6 +130,10 @@ QDomElement VDomDocument::elementById(const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Removes all children of a given element tag. RENAME: removeAllChildren
+ * @param element tag
+ */
 void VDomDocument::removeAllChilds(QDomElement &element)
 {
     QDomNode domNode = element.firstChild();
@@ -143,6 +152,12 @@ void VDomDocument::removeAllChilds(QDomElement &element)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Find element by id.
+ * @param node node
+ * @param id id value
+ * @return true if found
+ */
 bool VDomDocument::find(const QDomElement &node, const QString& id)
 {
     if (node.hasAttribute(AttrId))
@@ -170,6 +185,12 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the long long value of the given attribute. RENAME: GetParameterLongLong?
+ * @param domElement tag in xml tree
+ * @param name attribute name
+ * @return long long value
+ */
 quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -200,6 +221,13 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the string value of the given attribute. RENAME: see above
+ *
+ * if attribute empty return default value. If default value empty too throw exception.
+ * @return attribute value
+ * @throw VExceptionEmptyParameter when attribute is empty
+ */
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
                                         const QString &defValue) const
 {
@@ -221,6 +249,12 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the double value of the given attribute.
+ * @param domElement tag in xml tree
+ * @param name attribute name
+ * @return double value
+ */
 qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
@@ -272,6 +306,11 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValidateXML validate xml file by xsd schema.
+ * @param schema path to schema file.
+ * @param fileName name of xml file.
+ */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
     QFile pattern(fileName);
@@ -344,45 +383,81 @@ void VDomDocument::setContent(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Valentina::Units VDomDocument::StrToUnits(const QString &unit)
+Unit VDomDocument::StrToUnits(const QString &unit)
 {
     QStringList units{UnitMM, UnitCM, UnitINCH};
-    Valentina::Units result = Valentina::Cm;
+    Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {
         case 0:// mm
-            result = Valentina::Mm;
+            result = Unit::Mm;
             break;
         case 1:// cm
-            result = Valentina::Cm;
+            result = Unit::Cm;
             break;
         case 2:// inch
-            result = Valentina::Inch;
+            result = Unit::Inch;
             break;
         default:
-            result = Valentina::Cm;
+            result = Unit::Cm;
             break;
     }
     return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::UnitsToStr(const Valentina::Units &unit)
+/**
+ * @brief UnitsToStr translate unit to string.
+ *
+ * This method used when need write unit in xml file and for showing unit in dialogs.
+ * @param unit curent unit
+ * @param translate true if need show translated name. Default value false.
+ * @return string reprezantation for unit.
+ */
+QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
 {
     QString result;
     switch (unit)
     {
-        case Valentina::Mm:
-            result = "mm";
+        case Unit::Mm:
+            if (translate)
+            {
+                result = QObject::tr("mm");
+            }
+            else
+            {
+                result = "mm";
+            }
             break;
-        case Valentina::Cm:
-            result = "cm";
+        case Unit::Cm:
+            if (translate)
+            {
+                result = QObject::tr("cm");
+            }
+            else
+            {
+                result = "cm";
+            }
             break;
-        case Valentina::Inch:
-            result = "inch";
+        case Unit::Inch:
+            if (translate)
+            {
+                result = QObject::tr("in", "inch abbreviation");
+            }
+            else
+            {
+                result = "inch";//I decided use full name in xml file.
+            }
             break;
         default:
-            result = "cm";
+            if (translate)
+            {
+                result = QObject::tr("cm");
+            }
+            else
+            {
+                result = "cm";
+            }
             break;
     }
     return result;
@@ -488,6 +563,22 @@ void VDomDocument::setTagText(const QString &tag, const QString &text)
                 parent.replaceChild(newTag, domElement);
                 return;
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveAllChild remove all child from file.
+ * @param domElement tag in xml tree.
+ */
+void VDomDocument::RemoveAllChild(QDomElement &domElement)
+{
+    if ( domElement.hasChildNodes() )
+    {
+        while ( domElement.childNodes().length() >= 1 )
+        {
+            domElement.removeChild( domElement.firstChild() );
         }
     }
 }

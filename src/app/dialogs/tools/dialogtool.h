@@ -29,32 +29,23 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-#include <QComboBox>
 #include <QDialog>
-#include <QDoubleSpinBox>
-#include <QLabel>
-#include <QListWidgetItem>
-#include <QRadioButton>
 #include <QDialogButtonBox>
-#include <QPushButton>
-#include <QPlainTextEdit>
-#include "../../container/vcontainer.h"
 #include "../../widgets/vapplication.h"
-#include "../../tools/vabstracttool.h"
 
-namespace ComboMode
-{
-    /**
-     * @brief The ComboBoxCutSpline enum
-     */
-    enum ComboBoxCutSpline { CutSpline, NoCutSpline };
-    Q_DECLARE_FLAGS(ComboBoxCutSplines, ComboBoxCutSpline)
+class QDoubleSpinBox;
+class QLabel;
+class QRadioButton;
+class QComboBox;
+class QListWidgetItem;
+class QLineEdit;
+class QListWidget;
+class VContainer;
+class QPlainTextEdit;
+class VAbstractTool;
 
-    enum ComboBoxCutArc { CutArc, NoCutArc};
-    Q_DECLARE_FLAGS(ComboBoxCutArcs, ComboBoxCutArc)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( ComboMode::ComboBoxCutSplines )
-Q_DECLARE_OPERATORS_FOR_FLAGS( ComboMode::ComboBoxCutArcs )
+enum class ComboBoxCutSpline : char { CutSpline, NoCutSpline };
+enum class ComboBoxCutArc : char { CutArc, NoCutArc};
 
 /**
  * @brief The DialogTool class parent for all dialog of tools.
@@ -65,14 +56,8 @@ class DialogTool : public QDialog
 public:
     DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
-    inline VAbstractTool* GetAssociatedTool()
-    {
-        return this->associatedTool;
-    }
-    inline void SetAssociatedTool(VAbstractTool* tool)
-    {
-        this->associatedTool=tool;
-    }
+    VAbstractTool* GetAssociatedTool();
+    void SetAssociatedTool(VAbstractTool* tool);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -89,7 +74,7 @@ signals:
      */
     void             ToolTip(const QString &toolTip);
 public slots:
-    virtual void     ChoosedObject(quint32 id, const Valentina::Scenes &type);
+    virtual void     ChoosedObject(quint32 id, const SceneObject &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     /**
@@ -191,11 +176,11 @@ protected:
     virtual void     showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box, const quint32 &id = 0)const;
     void             FillComboBoxArcs(QComboBox *box, const quint32 &id = 0,
-                                      ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc)const;
+                                      ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
     void             FillComboBoxSplines(QComboBox *box, const quint32 &id = 0,
-                                         ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
+                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxSplinesPath(QComboBox *box, const quint32 &id = 0,
-                                             ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline)const;
+                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
@@ -212,12 +197,12 @@ protected:
     void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const;
     void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
-                                        ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
+                                        ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     void             setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
-                                        ComboMode::ComboBoxCutArc cut = ComboMode::NoCutArc) const;
+                                        ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
     void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
                                             const quint32 &id,
-                                            ComboMode::ComboBoxCutSpline cut = ComboMode::NoCutSpline) const;
+                                            ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
     template <typename T>
@@ -248,7 +233,7 @@ protected:
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
-        if (qApp->patternType() == Pattern::Standard)
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
             SizeHeight();
             connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
@@ -299,5 +284,17 @@ protected:
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VAbstractTool *DialogTool::GetAssociatedTool()
+{
+    return this->associatedTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void DialogTool::SetAssociatedTool(VAbstractTool *tool)
+{
+    this->associatedTool=tool;
+}
 
 #endif // DIALOGTOOL_H

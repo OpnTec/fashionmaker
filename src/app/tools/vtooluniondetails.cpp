@@ -29,6 +29,11 @@
 #include "vtooluniondetails.h"
 #include "nodeDetails/nodedetails.h"
 #include "vtooldetail.h"
+#include "../geometry/vpointf.h"
+#include "../geometry/varc.h"
+#include "../geometry/vsplinepath.h"
+#include "../dialogs/tools/dialoguniondetails.h"
+#include "../undocommands/adduniondetails.h"
 
 const QString VToolUnionDetails::TagName          = QStringLiteral("tools");
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
@@ -42,12 +47,24 @@ const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VToolUnionDetails costructor.
+ * @param doc dom document container.
+ * @param data dom document container.
+ * @param id object id in container.
+ * @param d1 first detail.
+ * @param d2 second detail.
+ * @param indexD1 index edge in first detail.
+ * @param indexD2 index edge in second detail.
+ * @param typeCreation way we create this tool.
+ * @param parent parent object.
+ */
 VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1,
                                      const VDetail &d2, const quint32 &indexD1, const quint32 &indexD2,
-                                     const Valentina::Sources &typeCreation, QObject *parent)
+                                     const Source &typeCreation, QObject *parent)
     :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
 {
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         AddToFile();
     }
@@ -58,6 +75,20 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToNewDetail create united detail adding one node per time.
+ * @param tool tool that make union.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param newDetail united detail.
+ * @param det detail what we union.
+ * @param i index node in detail.
+ * @param idTool id tool union details.
+ * @param dx bias node x axis.
+ * @param dy bias node y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
                                        const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
@@ -65,7 +96,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
     quint32 id = 0, idObject = 0;
     switch (det.at(i).getTypeTool())
     {
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
         {
             if ( qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && (pRotate == 0))
             {
@@ -74,18 +105,18 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             else
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(det.at(i).getId()));
-                point->setMode(Valentina::Modeling);
+                point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),
                                 angle);
                 idObject = data->AddGObject(point);
                 VPointF *point1 = new VPointF(*point);
-                point1->setMode(Valentina::Modeling);
+                point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Valentina::FromGui, idTool, tool);
+                VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
         {
             if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
             {
@@ -104,24 +135,24 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
-                center->setMode(Valentina::Modeling);
+                center->setMode(Draw::Modeling);
                 quint32 idCenter = data->AddGObject(center);
                 Q_UNUSED(idCenter);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(),
                                  l1.angle(), QString().setNum(l1.angle()), l2.angle(),
                                  QString().setNum(l2.angle()));
-                arc1->setMode(Valentina::Modeling);
+                arc1->setMode(Draw::Modeling);
                 idObject = data->AddGObject(arc1);
 
                 VArc *arc2 = new VArc(*arc1);
-                arc2->setMode(Valentina::Modeling);
+                arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Valentina::FromGui, idTool, tool);
+                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
         {
             if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
             {
@@ -146,17 +177,17 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 //quint32 idP4 = data->AddGObject(p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
-                Valentina::Modeling);
+                Draw::Modeling);
                 idObject = data->AddGObject(spl);
 
                 VSpline *spl1 = new VSpline(*spl);
-                spl1->setMode(Valentina::Modeling);
+                spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Valentina::FromGui, idTool, tool);
+                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
         {
             if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
             {
@@ -165,7 +196,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             else
             {
                 VSplinePath *path = new VSplinePath();
-                path->setMode(Valentina::Modeling);
+                path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
                 qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
@@ -211,12 +242,33 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 idObject = data->AddGObject(path);
 
                 VSplinePath *path1 = new VSplinePath(*path);
-                path1->setMode(Valentina::Modeling);
+                path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Valentina::FromGui, idTool, tool);
+                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
@@ -225,18 +277,30 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdatePoints update data for united details.
+ * @param idDetail id united detail.
+ * @param data container with variables.
+ * @param det detail what we union.
+ * @param i index node in detail.
+ * @param idCount count updated or created objects.
+ * @param dx bias node x axis.
+ * @param dy bias node y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
                                      quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
                                      const qreal &angle)
 {
     switch (det.at(i).getTypeTool())
     {
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
         {
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VPointF *point = new VPointF(*data->GeometricObject<const VPointF *>(det.at(i).getId()));
-                point->setMode(Valentina::Modeling);
+                point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, point);
@@ -245,7 +309,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             }
         }
         break;
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
         {
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
@@ -261,11 +325,11 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
                 ++idCount;
-                center->setMode(Valentina::Modeling);
+                center->setMode(Draw::Modeling);
                 data->UpdateGObject(idDetail+idCount, center);
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
-                arc1->setMode(Valentina::Modeling);
+                arc1->setMode(Draw::Modeling);
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, arc1);
 
@@ -273,7 +337,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             }
         }
         break;
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
         {
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
@@ -296,7 +360,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 data->UpdateGObject(idDetail+idCount, p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
-                Valentina::Modeling);
+                Draw::Modeling);
 
                 ++idCount;
                 data->UpdateGObject(idDetail+idCount, spl);
@@ -305,12 +369,12 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             }
         }
         break;
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
         {
             if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
             {
                 VSplinePath *path = new VSplinePath();
-                path->setMode(Valentina::Modeling);
+                path->setMode(Draw::Modeling);
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(det.at(i).getId());
                 SCASSERT(splinePath != nullptr);
                 qint32 k = splinePath->getMaxCountPoints();
@@ -366,6 +430,27 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
             }
         }
         break;
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
@@ -373,8 +458,16 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BiasRotatePoint bias and rotate point.
+ * @param point point.
+ * @param dx bias x axis.
+ * @param dy bias y axis.
+ * @param pRotate point rotation.
+ * @param angle angle rotation.
+ */
 void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
-                                        const qreal angle)
+                                        const qreal &angle)
 {
     point->setX(point->x()+dx);
     point->setY(point->y()+dy);
@@ -385,6 +478,12 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool from GUI.
+ * @param dialog dialog.
+ * @param doc dom document container.
+ * @param data container with variables.
+ */
 void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -394,19 +493,36 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
+    qApp->getUndoStack()->beginMacro("union details");
     Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
-           Valentina::FromGui);
+           Source::FromGui);
+    qApp->getUndoStack()->endMacro();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Create help create tool.
+ * @param _id tool id, 0 if tool doesn't exist yet.
+ * @param d1 first detail.
+ * @param d2 second detail.
+ * @param d1id id first detail.
+ * @param d2id id second detail.
+ * @param indexD1 index edge in first detail.
+ * @param indexD2 index edge in second detail.
+ * @param scene pointer to scene.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param parse parser file mode.
+ * @param typeCreation way we create this tool.
+ */
 void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2, const quint32 &d1id,
                                const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                               const Document::Documents &parse, const Valentina::Sources &typeCreation)
+                               const Document &parse, const Source &typeCreation)
 {
     VToolUnionDetails *unionDetails = 0;
     quint32 id = _id;
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         id = data->getNextId();
     }
@@ -417,7 +533,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Valentina::UnionDetails, doc);
+    VAbstractTool::AddRecord(id, Tool::UnionDetails, doc);
     if (parse == Document::FullParse)
     {
         //Scene doesn't show this tool, so doc will destroy this object.
@@ -460,7 +576,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
                                                                                       point2.toQPointF()));
     qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
 
-    if (typeCreation == Valentina::FromGui)
+    if (typeCreation == Source::FromGui)
     {
         qint32 j = 0, i = 0;
         VDetail newDetail;
@@ -490,19 +606,22 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
         } while (i < d1.RemoveEdge(indexD1).CountNode());
 
         newDetail.setName("Detail");
-        VToolDetail::Create(0, newDetail, scene, doc, data, parse, Valentina::FromTool);
+        newDetail.setWidth(d1.getWidth());
+        VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
 
         {
             VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
             SCASSERT(toolDet != nullptr);
-            toolDet->Remove();
+            bool ask = false;
+            toolDet->Remove(ask);
         }
 
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
         SCASSERT(toolDet != nullptr);
-        toolDet->Remove();
+        bool ask = false;
+        toolDet->Remove(ask);
     }
     else
     {
@@ -565,6 +684,12 @@ void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetDetailFromFile parse detail from file.
+ * @param doc dom document container.
+ * @param domElement tag in xml tree.
+ * @return detail stored in file.
+ */
 QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomElement &domElement)
 {
     QVector<VDetail> vector;
@@ -590,24 +715,24 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                             quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
                             qreal mx = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                             qreal my = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
-                            Valentina::Tools tool;
-                            NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
+                            Tool tool;
+                            NodeDetail nodeType = NodeDetail::Contour;
                             QString t = doc->GetParametrString(element, "type", "NodePoint");
                             if (t == "NodePoint")
                             {
-                                tool = Valentina::NodePoint;
+                                tool = Tool::NodePoint;
                             }
                             else if (t == "NodeArc")
                             {
-                                tool = Valentina::NodeArc;
+                                tool = Tool::NodeArc;
                             }
                             else if (t == "NodeSpline")
                             {
-                                tool = Valentina::NodeSpline;
+                                tool = Tool::NodeSpline;
                             }
                             else if (t == "NodeSplinePath")
                             {
-                                tool = Valentina::NodeSplinePath;
+                                tool = Tool::NodeSplinePath;
                             }
                             d.append(VNodeDetail(id, tool, nodeType, mx, my));
                         }
@@ -621,6 +746,9 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
 void VToolUnionDetails::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
@@ -637,6 +765,9 @@ void VToolUnionDetails::AddToFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
 void VToolUnionDetails::RefreshDataInFile()
 {
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -652,19 +783,29 @@ void VToolUnionDetails::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddDetail add detail to xml file.
+ * @param domElement tag in xml tree.
+ * @param d detail.
+ */
 void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 {
     QDomElement det = doc->createElement(TagDetail);
 
     for (ptrdiff_t i = 0; i < d.CountNode(); ++i)
     {
-        AddNode(det, d[i]);
+        AddNode(det, d.at(i));
     }
 
     domElement.appendChild(det);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddNode add node to xml file.
+ * @param domElement tag in xml tree.
+ * @param node node.
+ */
 void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
@@ -682,18 +823,39 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
     }
     switch (node.getTypeTool())
     {
-        case (Valentina::NodeArc):
+        case (Tool::NodeArc):
             doc->SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
             break;
-        case (Valentina::NodePoint):
+        case (Tool::NodePoint):
             doc->SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
             break;
-        case (Valentina::NodeSpline):
+        case (Tool::NodeSpline):
             doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
             break;
-        case (Valentina::NodeSplinePath):
+        case (Tool::NodeSplinePath):
             doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
             break;
+        case (Tool::ArrowTool):
+        case (Tool::SinglePointTool):
+        case (Tool::EndLineTool):
+        case (Tool::LineTool):
+        case (Tool::AlongLineTool):
+        case (Tool::ShoulderPointTool):
+        case (Tool::NormalTool):
+        case (Tool::BisectorTool):
+        case (Tool::LineIntersectTool):
+        case (Tool::SplineTool):
+        case (Tool::CutSplineTool):
+        case (Tool::CutArcTool):
+        case (Tool::ArcTool):
+        case (Tool::SplinePathTool):
+        case (Tool::CutSplinePathTool):
+        case (Tool::PointOfContact):
+        case (Tool::DetailTool):
+        case (Tool::Height):
+        case (Tool::Triangle):
+        case (Tool::PointOfIntersection):
+        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
@@ -702,6 +864,12 @@ void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateDetail update detail in xml tree.
+ * @param domNode dom node.
+ * @param d detail.
+ * @return return next detail tag in xml tree if exist.
+ */
 QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail &d)
 {
     //QDomNode domNode = domElement.firstChild();
@@ -728,17 +896,13 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToModeling add tool to xml tree.
+ * @param domElement tag in xml tree.
+ */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
-    QDomElement modelingElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
-    if (ok)
-    {
-        modelingElement.appendChild(domElement);
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddUnionDetails *addUnion = new AddUnionDetails(domElement, doc);
+    connect(addUnion, &AddUnionDetails::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(addUnion);
 }

@@ -28,11 +28,14 @@
 
 #include "dialogtool.h"
 #include "../../container/calculator.h"
-#include "../../geometry/vgobject.h"
+#include "../../container/vcontainer.h"
+#include "../../geometry/varc.h"
+#include "../../geometry/vpointf.h"
+#include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
-
-#include <QtWidgets>
 #include "../../../libs/qmuparser/qmuparsererror.h"
+#include "../../widgets/vapplication.h"
+#include "../../xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -106,7 +109,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
         if (i.key() != id)
         {
             VGObject *obj = i.value();
-            if (obj->getType() == GObject::Point && obj->getMode() == Valentina::Calculation)
+            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
             {
                 const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
                 list[point->name()] = i.key();
@@ -117,7 +120,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutArc cut) const
+void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -126,12 +129,12 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
     while (i.hasNext())
     {
         i.next();
-        if (cut == ComboMode::CutArc)
+        if (cut == ComboBoxCutArc::CutArc)
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Arc && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
                 {
                     const VArc *arc = data->GeometricObject<const VArc *>(i.key());
                     list[arc->name()] = i.key();
@@ -143,7 +146,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Arc && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
                 {
                     const VArc *arc = data->GeometricObject<const VArc *>(i.key());
                     list[arc->name()] = i.key();
@@ -161,7 +164,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboMode::
  * @param id don't show id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -170,12 +173,12 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
     while (i.hasNext())
     {
         i.next();
-        if (cut == ComboMode::CutSpline)
+        if (cut == ComboBoxCutSpline::CutSpline)
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Spline && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     list[spl->name()] = i.key();
@@ -187,7 +190,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::Spline && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
                 {
                     const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
                     list[spl->name()] = i.key();
@@ -205,7 +208,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboMod
  * @param id don't show id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -214,12 +217,12 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
     while (i.hasNext())
     {
         i.next();
-        if (cut == ComboMode::CutSpline)
+        if (cut == ComboBoxCutSpline::CutSpline)
         {
             if (i.key() != id + 1 && i.key() != id + 2)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::SplinePath && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     list[splPath->name()] = i.key();
@@ -231,7 +234,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
             if (i.key() != id)
             {
                 VGObject *obj = i.value();
-                if (obj->getType() == GObject::SplinePath && obj->getMode() == Valentina::Calculation)
+                if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
                 {
                     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
                     list[splPath->name()] = i.key();
@@ -453,12 +456,12 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             if (osSeparatorValue)
             {
                 QLocale loc = QLocale::system();
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             else
             {
                 QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
@@ -514,12 +517,12 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
             if (osSeparatorValue)
             {
                 QLocale loc = QLocale::system();
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             else
             {
                 QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result));
+                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             flag = true;
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
@@ -562,7 +565,7 @@ void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
 void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
-                                    ComboMode::ComboBoxCutSpline cut) const
+                                    ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxSplines(box, id, cut);
@@ -580,7 +583,7 @@ void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const qui
  * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
  */
 void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
-                                 ComboMode::ComboBoxCutArc cut) const
+                                 ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxArcs(box, id, cut);
@@ -598,7 +601,7 @@ void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
 void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
-                                        const quint32 &id, ComboMode::ComboBoxCutSpline cut) const
+                                        const quint32 &id, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxSplinesPath(box, id, cut);
@@ -683,7 +686,7 @@ void DialogTool::CheckState()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogTool::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogTool::ChoosedObject(quint32 id, const SceneObject &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);

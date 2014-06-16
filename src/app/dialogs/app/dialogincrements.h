@@ -30,8 +30,9 @@
 #define DIALOGINCREMENTS_H
 
 #include "../tools/dialogtool.h"
-#include "../../xml/vpattern.h"
-#include "../../xml/vindividualmeasurements.h"
+
+class VPattern;
+class VIndividualMeasurements;
 
 namespace Ui
 {

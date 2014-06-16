@@ -29,7 +29,8 @@
 #include "dialogheight.h"
 #include "ui_dialogheight.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -124,9 +125,9 @@ void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogHeight::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogHeight::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         switch (number)

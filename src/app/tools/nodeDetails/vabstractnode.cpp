@@ -28,11 +28,23 @@
 
 #include "vabstractnode.h"
 #include <QDebug>
+#include "../../xml/vpattern.h"
+#include "../../undocommands/adddetnode.h"
+#include "../../widgets/vapplication.h"
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VAbstractNode constructor.
+ * @param doc dom document container.
+ * @param data container with variables.
+ * @param id object id in container.
+ * @param idNode object id in containerNode.
+ * @param idTool id tool.
+ * @param parent parent object.
+ */
 VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
@@ -45,53 +57,33 @@ void VAbstractNode::DeleteNode()
 {
     if (_referens <= 1)
     {
-        //remove from xml file
-        QDomElement domElement = doc->elementById(QString().setNum(id));
-        if (domElement.isElement())
-        {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                if (element.isElement())
-                {
-                    RemoveReferens();//deincrement referens
-                    element.removeChild(domElement);//remove form file
-                    emit toolhaveChange();//set enabled save button
-                }
-                else
-                {
-                    qDebug()<<"parent isn't element"<<Q_FUNC_INFO;
-                }
-            }
-            else
-            {
-                qDebug()<<"parent isNull"<<Q_FUNC_INFO;
-            }
-        }
-        else
-        {
-            qDebug()<<"Can't get element by id form file = "<<id<<Q_FUNC_INFO;
-        }
+        RemoveReferens();//deincrement referens
+    }
+}
+
+void VAbstractNode::RestoreNode()
+{
+    if (_referens <= 1)
+    {
+        RestoreReferens();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddToModeling add tag to modeling tag current pattern peace.
+ * @param domElement tag.
+ */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    QDomElement modelingElement;
-    bool ok = doc->GetActivNodeElement(VPattern::TagModeling, modelingElement);
-    if (ok)
-    {
-        modelingElement.appendChild(domElement);
-    }
-    else
-    {
-        qCritical()<<tr("Can't find tag Modeling")<< Q_FUNC_INFO;
-    }
-    emit toolhaveChange();
+    AddDetNode *addNode = new AddDetNode(domElement, doc);
+    qApp->getUndoStack()->push(addNode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief decrementReferens decrement reference for all parent objects.
+ */
 void VAbstractNode::decrementReferens()
 {
     if (_referens > 0)
@@ -110,5 +102,31 @@ void VAbstractNode::decrementReferens()
                 element.removeChild(domElement);
             }
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::RemoveReferens()
+{
+    if (idTool != 0)
+    {
+        doc->DecrementReferens(idTool);
+    }
+    else
+    {
+        doc->DecrementReferens(idNode);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::RestoreReferens()
+{
+    if (idTool != 0)
+    {
+        doc->IncrementReferens(idTool);
+    }
+    else
+    {
+        doc->IncrementReferens(idNode);
     }
 }

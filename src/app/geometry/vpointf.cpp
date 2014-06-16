@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vpointf.h"
+#include <QPointF>
+#include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -36,8 +38,8 @@
  * @param mx offset name respect to x
  * @param my offset name respect to y
  */
-VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Valentina::Draws mode)
-    :VGObject(GObject::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
+VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Draw mode)
+    :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
 {
     this->_name = name;
 }
@@ -46,7 +48,7 @@ VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idO
 /**
  * @brief VPointF creat empty point
  */
-VPointF::VPointF() :VGObject(GObject::Point, 0, Valentina::Calculation), _mx(0), _my(0), _x(0), _y(0)
+VPointF::VPointF() :VGObject(GOType::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,4 +79,14 @@ VPointF &VPointF::operator =(const VPointF &point)
 QString VPointF::name() const
 {
     return _name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief toQPointF convert to QPointF
+ * @return QPointF point
+ */
+QPointF VPointF::toQPointF() const
+{
+    return QPointF(_x, _y);
 }

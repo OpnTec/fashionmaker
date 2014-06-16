@@ -38,97 +38,31 @@ class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT
 public:
-                   /**
-                    * @brief VToolHeight constructor.
-                    * @param doc dom document container.
-                    * @param data container with variables.
-                    * @param id object id in container.
-                    * @param typeLine line type.
-                    * @param basePointId id base point of projection.
-                    * @param p1LineId id first point of line.
-                    * @param p2LineId id second point of line.
-                    * @param typeCreation way we create this tool.
-                    * @param parent parent object.
-                    */
-                   VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                               const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                               const Valentina::Sources &typeCreation, QGraphicsItem * parent = nullptr);
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+
+    VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const quint32 &basePointId,
+                const quint32 &p1LineId, const quint32 &p2LineId, const Source &typeCreation,
+                QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
-    /**
-     * @brief Create help create tool from GUI.
-     * @param dialog dialog.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     */
     static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    /**
-     * @brief Create help create tool
-     * @param _id tool id, 0 if tool doesn't exist yet.
-     * @param pointName point name.
-     * @param typeLine line type.
-     * @param basePointId id base point of projection.
-     * @param p1LineId id first point of line.
-     * @param p2LineId id second point of line.
-     * @param mx label bias x axis.
-     * @param my label bias y axis.
-     * @param scene pointer to scene.
-     * @param doc dom document container.
-     * @param data container with variables.
-     * @param parse parser file mode.
-     * @param typeCreation way we create this tool.
-     */
     static void    Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                           const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                          VContainer *data, const Document::Documents &parse, const Valentina::Sources &typeCreation);
-    /**
-     * @brief FindPoint find projection base point onto line.
-     * @param line line
-     * @param point base point.
-     * @return point onto line.
-     */
+                          VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void   FullUpdateFromFile();
-    /**
-     * @brief ShowContextMenu show context menu.
-     * @param event context menu event.
-     */
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void   AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void   RefreshDataInFile();
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
     virtual void   SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief p1LineId id first point of line.
-     */
+    /** @brief p1LineId id first point of line. */
     quint32         p1LineId;
-    /**
-     * @brief p2LineId id second point of line.
-     */
+
+    /** @brief p2LineId id second point of line. */
     quint32         p2LineId;
 };
 

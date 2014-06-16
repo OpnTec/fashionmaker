@@ -28,6 +28,8 @@
 
 #include "dialoguniondetails.h"
 #include "ui_dialoguniondetails.h"
+#include "../../geometry/vdetail.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -55,7 +57,7 @@ DialogUnionDetails::~DialogUnionDetails()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogUnionDetails::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogUnionDetails::ChoosedObject(quint32 id, const SceneObject &type)
 {
     if (numberD == 0)
     {
@@ -101,12 +103,12 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
  * @param idDetail id detail
  * @param index index of edge
  */
-void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Valentina::Scenes &type, quint32 &idDetail,
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
                                        ptrdiff_t &index)
 {
     if (idDetail == 0)
     {
-        if (type == Valentina::Detail)
+        if (type == SceneObject::Detail)
         {
             idDetail = id;
             emit ToolTip(tr("Select first point"));
@@ -117,7 +119,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const Valentina::Scene
     {
         return;
     }
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         if (numberP == 0)
         {

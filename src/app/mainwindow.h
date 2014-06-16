@@ -60,7 +60,7 @@ public slots:
     void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
-    void               ActionNewDraw();
+    void               ActionNewPP();
     void               ActionLayout(bool checked);
     void               ActionTable(bool checked);
     void               ActionHistory(bool checked);
@@ -80,7 +80,7 @@ public slots:
     void               ChangedSize(const QString &text);
     void               ChangedHeight(const QString & text);
 
-    void               PatternWasModified();
+    void               PatternWasModified(bool saved);
 
     void               ToolEndLine(bool checked);
     void               ToolLine(bool checked);
@@ -137,10 +137,11 @@ public slots:
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
-	/**
+    /**
      * @brief Edit XML code of pattern
      */
     void               EditPatternCode();
+    void               FullParseFile();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -164,7 +165,7 @@ private:
     VPattern          *doc;
 
     /** @brief tool current tool */
-    Valentina::Tools        tool;
+    Tool        tool;
 
     /** @brief currentScene pointer to current scene. */
     VMainGraphicsScene *currentScene;
@@ -198,7 +199,7 @@ private:
     QString            curFile;
 
     /** @brief mode keep current draw mode. */
-    Valentina::Draws        mode;
+    Draw        mode;
 
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32             currentDrawIndex;
@@ -226,10 +227,10 @@ private:
     void               MinimumScrollBar();
 
     template <typename Dialog, typename Func>
-    void               SetToolButton(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+    void               SetToolButton(bool checked, Tool t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot);
     template <typename Dialog, typename Func, typename Func2>
-    void               SetToolButtonWithApply(bool checked, Valentina::Tools t, const QString &cursor, const QString &toolTip,
+    void               SetToolButtonWithApply(bool checked, Tool t, const QString &cursor, const QString &toolTip,
                                      Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
@@ -249,7 +250,7 @@ private:
     void               CreateActions();
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
-    QString            CheckPathToMeasurements(const QString &path, const Pattern::Measurements &patternType);
+    QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
 };
 
 #endif // MAINWINDOW_H

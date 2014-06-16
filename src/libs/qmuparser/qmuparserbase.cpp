@@ -21,15 +21,16 @@
  ******************************************************************************************************/
 
 #include "qmuparserbase.h"
-#include <QTextStream>
-#include <QtMath>
+//#include <QTextStream>
+
+#ifdef Q_OS_WIN32
+#   include <QtMath> // for M_PI on Windows
+#endif /*Q_OS_WIN32*/
+
 #include <QDebug>
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
-
-#include "qmuparsererror.h"
-#include "qmuparsertokenreader.h"
 
 using namespace std;
 

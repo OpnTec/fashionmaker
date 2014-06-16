@@ -39,85 +39,31 @@ class VToolSinglePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-                 /**
-                  * @brief VToolSinglePoint constructor.
-                  * @param doc dom document container.
-                  * @param data container with variables.
-                  * @param id object id in container.
-                  * @param typeCreation way we create this tool.
-                  * @param parent parent object.
-                  */
-                 VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Valentina::Sources &typeCreation,
-                                   QGraphicsItem * parent = nullptr );
-    /**
-     * @brief setDialog set dialog when user want change tool option.
-     */
+    VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                      const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
     virtual void setDialog();
     static const QString ToolType;
 public slots:
-    /**
-     * @brief FullUpdateFromFile update tool data form file.
-     */
     virtual void FullUpdateFromFile();
-    /**
-     * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
-     * @param newName new name active pattern peace.
-     */
     virtual void ChangedActivDraw(const QString &newName);
-    /**
-     * @brief SetFactor set current scale factor of scene.
-     * @param factor scene scale factor.
-     */
     virtual void SetFactor(qreal factor);
-    /**
-     * @brief ShowContextMenu show context menu.
-     * @param event context menu event.
-     */
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 signals:
     /**
      * @brief FullUpdateTree handle if need update pattern file.
      */
-    void         FullUpdateTree();
+    void         LiteUpdateTree();
 protected:
-    /**
-     * @brief contextMenuEvent handle context menu events.
-     * @param event context menu event.
-     */
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    /**
-     * @brief AddToFile add tag with informations about tool into file.
-     */
     virtual void AddToFile();
-    /**
-     * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
-     */
     virtual void RefreshDataInFile();
-    /**
-     * @brief itemChange handle tool change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief decrementReferens decrement referens parents objects.
-     */
     virtual void decrementReferens();
-    /**
-     * @brief DeleteTool delete tool from file and scene. This tool can't be deleted by now.
-     * @param tool tool what me delete.
-     */
-    virtual void DeleteTool(QGraphicsItem *tool){Q_UNUSED(tool)}
-    /**
-     * @brief SaveDialog save options into file after change in dialog.
-     */
+    virtual void DeleteTool(bool ask = true);
     virtual void SaveDialog(QDomElement &domElement);
 private:
-    /**
-     * @brief setColorLabel change color for label and label line.
-     * @param color new color.
-     */
+    QString namePP;
+    QString mPath;
     void         setColorLabel(const Qt::GlobalColor & color);
 };
 

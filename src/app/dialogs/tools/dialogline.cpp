@@ -29,7 +29,8 @@
 #include "dialogline.h"
 #include "ui_dialogline.h"
 
-#include <QPushButton>
+#include "../../geometry/vpointf.h"
+#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -119,9 +120,9 @@ void DialogLine::DialogAccepted()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogLine::ChoosedObject(quint32 id, const Valentina::Scenes &type)
+void DialogLine::ChoosedObject(quint32 id, const SceneObject &type)
 {
-    if (type == Valentina::Point)
+    if (type == SceneObject::Point)
     {
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         if (number == 0)

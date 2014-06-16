@@ -28,17 +28,18 @@
 
 #include "vdetail.h"
 #include <QDebug>
+#include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail()
     :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
-      width(10)
+      width(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
     :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
-      width(10)
+      width(0)
 {
     this->nodes = nodes;
 }
@@ -72,7 +73,7 @@ void VDetail::Clear()
     my = 0;
     seamAllowance = true;
     closed = true;
-    width = 10;
+    width = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ bool VDetail::Containes(const quint32 &id) const
 {
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        VNodeDetail node = nodes[i];
+        VNodeDetail node = nodes.at(i);
         if (node.getId() == id)
         {
             return true;
@@ -104,7 +105,7 @@ VNodeDetail &VDetail::operator [](ptrdiff_t indx)
 //---------------------------------------------------------------------------------------------------------------------
 const VNodeDetail &VDetail::at(ptrdiff_t indx) const
 {
-    return nodes[indx];
+    return nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,25 +255,26 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
 //---------------------------------------------------------------------------------------------------------------------
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    QList<quint32> list;
     if (nodes.size() == det.CountNode())
     {
-        return list;
+        return QList<quint32>();
     }
 
-    qint32 j = 0;
+    QSet<quint32> set1;
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getId() == det.at(j).getId())
-        {
-            ++j;
-        }
-        else
-        {
-            list.append(nodes[i].getId());
-        }
+        set1.insert(nodes.at(i).getId());
     }
-    return list;
+
+    QSet<quint32> set2;
+    for (qint32 j = 0; j < det.CountNode(); ++j)
+    {
+        set2.insert(det.at(j).getId());
+    }
+
+    QSet<quint32> set3 = set1.subtract(set2);
+
+    return set3.toList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,9 +283,9 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
     QVector<VNodeDetail> list;
     for (ptrdiff_t i = 0; i < nodes.size(); ++i)
     {
-        if (nodes[i].getTypeTool() == Valentina::NodePoint)
+        if (nodes.at(i).getTypeTool() == Tool::NodePoint)
         {
-            list.append(nodes[i]);
+            list.append(nodes.at(i));
         }
     }
     return list;
@@ -294,7 +296,7 @@ ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &
 {
     for (ptrdiff_t i = 0; i < list.size(); ++i)
     {
-        if (list[i].getId() == id)
+        if (list.at(i).getId() == id)
         {
             return i;
         }

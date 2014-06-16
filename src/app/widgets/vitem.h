@@ -39,28 +39,9 @@ class VItem : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VItem default constructor.
-     */
-                VItem ();
-    /**
-     * @brief VItem constructor.
-     * @param numInList index in list of details.
-     * @param parent parent object.
-     */
-                VItem (int numInList, QGraphicsItem * parent = nullptr);
-    /**
-     * @brief VItem constructor.
-     * @param path detail path.
-     * @param numInList index in list of details.
-     * @param parent parent object.
-     */
-                VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = nullptr );
-    /**
-     * @brief Rotate rotate detail on angle in degree.
-     * @param angle angle in degree.
-     */
-    void        Rotate ( qreal angle );
+    VItem ();
+    VItem (int numInList, QGraphicsItem * parent = nullptr);
+    VItem ( const QPainterPath & path, int numInList, QGraphicsItem * parent = nullptr );
     /**
      * @brief getPaper return pointer to paper sheet.
      * @return pointer to paper sheet.
@@ -72,36 +53,17 @@ public:
      */
     void        setPaper(QGraphicsRectItem *value) {paper = value;}
 public slots:
-    /**
-     * @brief LengthChanged handle signal change paper length.
-     */
     void        LengthChanged();
-    /**
-     * @brief SetIndexInList set detail index in list.
-     * @param index index in list.
-     */
     void        SetIndexInList( qint32 index );
 protected:
-    /**
-     * @brief itemChange handle item change.
-     * @param change change.
-     * @param value value.
-     * @return value.
-     */
     QVariant    itemChange ( GraphicsItemChange change, const QVariant &value );
-    /**
-     * @brief checkItemChange change item change. If detail create colission or moved out paper emit signal.
-     */
     void        checkItemChange ();
 private:
     Q_DISABLE_COPY(VItem)
-    /**
-     * @brief numInOutList index in list.
-     */
+    /** @brief numInOutList index in list. */
     qint32      numInOutList;
-    /**
-     * @brief paper pointer to paper item.
-     */
+
+    /** @brief paper pointer to paper item. */
     QGraphicsRectItem*    paper;
 signals:
     /**
@@ -118,6 +80,11 @@ signals:
     void        itemColliding ( QList<QGraphicsItem *> list, int number );
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetIndexInList set detail index in list.
+ * @param index index in list.
+ */
 inline void VItem::SetIndexInList(qint32 index)
 {
     numInOutList = index;

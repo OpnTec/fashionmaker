@@ -563,7 +563,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
         QMessageBox::warning(this, "Error in changes", message);
         return;
     }
-    this->doc->FullUpdateTree();
+    this->doc->LiteParseTree();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

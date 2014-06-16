@@ -29,7 +29,6 @@
 #ifndef VSPLINEPOINT_H
 #define VSPLINEPOINT_H
 
-#include <QMetaType>
 #include "vpointf.h"
 
 /**

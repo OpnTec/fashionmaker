@@ -31,15 +31,7 @@
 
 #include <QGraphicsPathItem>
 
-namespace SimpleArc
-{
-    /**
-     * @brief The Translation enum position point.
-     */
-    enum Translation { FirstPoint, ForthPoint };
-    Q_DECLARE_FLAGS(Translations, Translation)
-}
-Q_DECLARE_OPERATORS_FOR_FLAGS( SimpleArc::Translations )
+enum class SimpleArcPoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleArc class for simple arc. This object used when we cut arc and want show peaces.
@@ -48,13 +40,6 @@ class VSimpleArc : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    /**
-     * @brief VSimpleArc constructor.
-     * @param id arc id.
-     * @param currentColor current color.
-     * @param factor scale factor.
-     * @param parent parent object.
-     */
     VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = nullptr);
 signals:
     /**
@@ -63,34 +48,18 @@ signals:
      */
     void Choosed(quint32 id);
 protected:
-    /**
-     * @brief mouseReleaseEvent handle mouse release events.
-     * @param event mouse release event.
-     */
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    /**
-     * @brief hoverMoveEvent handle hover move events.
-     * @param event hover move event.
-     */
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    /**
-     * @brief hoverLeaveEvent handle hover leave events.
-     * @param event hover leave event.
-     */
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VSimpleArc)
-    /**
-     * @brief id arc id.
-     */
+    /** @brief id arc id. */
     quint32          id;
-    /**
-     * @brief factor scale factor.
-     */
+
+    /** @brief factor scale factor. */
     qreal           *factor;
-    /**
-     * @brief currentColor current color.
-     */
+
+    /** @brief currentColor current color. */
     Qt::GlobalColor *currentColor;
 };
 

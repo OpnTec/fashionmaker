@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vpattern.h"
-
+#include "../tools/vdatatool.h"
 #include "../tools/vtooldetail.h"
 #include "../tools/vtooluniondetails.h"
 #include "../tools/drawTools/drawtools.h"
@@ -35,12 +35,12 @@
 #include "../exception/vexceptionobjecterror.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../exception/vexceptionconversionerror.h"
+#include "../exception/vexceptionemptyparameter.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
-
-#include <QMessageBox>
 #include "../../libs/qmuparser/qmuparsererror.h"
-#include <exception/vexceptionemptyparameter.h>
+#include "../geometry/varc.h"
+#include <QMessageBox>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -70,18 +70,28 @@ const QString VPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
 const QString VPattern::IncrementDescription = QStringLiteral("description");
 
 //---------------------------------------------------------------------------------------------------------------------
-VPattern::VPattern(VContainer *data, QComboBox *comboBoxDraws, Valentina::Draws *mode, QObject *parent)
+VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
+                   VMainGraphicsScene *sceneDetail, QObject *parent)
     : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
-      history(QVector<VToolRecord>()), cursor(0), comboBoxDraws(comboBoxDraws), mode(mode), patternModified(false)
-{}
+      history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), sceneDraw(sceneDraw),
+      sceneDetail(sceneDetail)
+{
+    SCASSERT(sceneDraw != nullptr);
+    SCASSERT(sceneDetail != nullptr);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CreateEmptyFile create minimal empty file.
+ * @param tablePath path to measurement file (standard or individual)
+ */
 void VPattern::CreateEmptyFile(const QString &tablePath)
 {
     if (tablePath.isEmpty())
     {
         throw VException("Path to measurement table empty.");
     }
+    this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
 
     patternElement.appendChild(createComment("Valentina pattern format."));
@@ -108,21 +118,31 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ChangeActivDraw(const QString &name, const Document::Documents &parse)
+/**
+ * @brief ChangeActivPP set new active pattern piece name.
+ * @param name new name.
+ * @param parse parser file mode.
+ */
+void VPattern::ChangeActivPP(const QString &name, const Document &parse)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "ChangeActivDraw", "name draw is empty");
-    if (CheckNameDraw(name))
+    Q_ASSERT_X(name.isEmpty() == false, "ChangeActivPP", "name pattern piece is empty");
+    if (CheckNamePP(name))
     {
         this->nameActivDraw = name;
         if (parse == Document::FullParse)
         {
-            emit ChangedActivDraw(name);
+            emit ChangedActivPP(name);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::GetActivDrawElement(QDomElement &element)
+/**
+ * @brief GetActivDrawElement return draw tag for current pattern peace.
+ * @param element draw tag.
+ * @return true if found.
+ */
+bool VPattern::GetActivDrawElement(QDomElement &element) const
 {
     if (nameActivDraw.isEmpty() == false)
     {
@@ -148,33 +168,31 @@ bool VPattern::GetActivDrawElement(QDomElement &element)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::appendDraw(const QString &name)
+/**
+ * @brief appendPP add new pattern piece.
+ *
+ * Method check if not exist pattern piece with the same name and change name active pattern piece name, send signal
+ * about change pattern piece. Doen't add pattern piece to file structure. This task make SPoint tool.
+ * @param name pattern peace name.
+ * @return true if success.
+ */
+bool VPattern::appendPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "appendDraw", "name draw is empty");
+    Q_ASSERT_X(name.isEmpty() == false, "appendPP", "name pattern piece is empty");
     if (name.isEmpty())
     {
         return false;
     }
-    if (CheckNameDraw(name) == false)
+    if (CheckNamePP(name) == false)
     {
-        QDomElement rootElement = this->documentElement();
-
-        QDomElement drawElement = this->createElement(TagDraw);
-        SetAttribute(drawElement, AttrName, name);
-
-        drawElement.appendChild(createElement(TagCalculation));
-        drawElement.appendChild(createElement(TagModeling));
-        drawElement.appendChild(createElement(TagDetails));
-
-        rootElement.appendChild(drawElement);
-
         if (nameActivDraw.isEmpty())
         {
-            SetActivDraw(name);
+            SetActivPP(name);
         }
         else
         {
-            ChangeActivDraw(name);
+            this->nameActivDraw = name;
+            emit ChangedActivPP(name);
         }
         return true;
     }
@@ -182,6 +200,11 @@ bool VPattern::appendDraw(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetNameDraw change current pattern peace.
+ * @param name pattern peace name.
+ * @return true if success.
+ */
 bool VPattern::SetNameDraw(const QString &name)
 {
     Q_ASSERT_X(name.isEmpty() == false, "SetNameDraw", "name draw is empty");
@@ -203,12 +226,18 @@ bool VPattern::SetNameDraw(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail)
+/**
+ * @brief Parse parse file.
+ * @param parse parser file mode.
+ * @param sceneDraw pointer to draw scene.
+ * @param sceneDetail pointer to details scene.
+ */
+void VPattern::Parse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements, TagVersion};
-    PrepareForParse(parse, sceneDraw, sceneDetail);
+    PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
     {
@@ -224,17 +253,17 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
                         {
                             if (nameActivDraw.isEmpty())
                             {
-                                SetActivDraw(GetParametrString(domElement, AttrName));
+                                SetActivPP(GetParametrString(domElement, AttrName));
                             }
                             else
                             {
-                                ChangeActivDraw(GetParametrString(domElement, AttrName));
+                                ChangeActivPP(GetParametrString(domElement, AttrName));
                             }
-                            comboBoxDraws->addItem(GetParametrString(domElement, AttrName));
+                            patternPieces << GetParametrString(domElement, AttrName);
                         }
                         else
                         {
-                            ChangeActivDraw(GetParametrString(domElement, AttrName), Document::LiteParse);
+                            ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
                         }
                         ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
                         break;
@@ -262,6 +291,11 @@ void VPattern::Parse(const Document::Documents &parse, VMainGraphicsScene *scene
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTool return tool from tool list.
+ * @param id tool id.
+ * @return tool.
+ */
 VDataTool *VPattern::getTool(const quint32 &id)
 {
     if (tools.contains(id))
@@ -277,21 +311,33 @@ VDataTool *VPattern::getTool(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setCursor set cursor.
+ * @param value cursor.
+ */
 void VPattern::setCursor(const quint32 &value)
 {
-    cursor = value;
-    emit ChangedCursor(cursor);
+    if (cursor != value)
+    {
+        cursor = value;
+        emit ChangedCursor(cursor);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setCurrentData set current data set.
+ *
+ * Each time after parsing need set correct data set for current pattern piece. After parsing it is always last.
+ * Current data set for pattern pice it is data set for last object in pattern pice (point, arc, spline, spline path so
+ * on).
+ */
 void VPattern::setCurrentData()
 {
-    if (*mode == Valentina::Calculation)
+    if (*mode == Draw::Calculation)
     {
-        const QString nameDraw = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
-        if (nameActivDraw != nameDraw)
+        if (CountPP() > 1)//don't need upadate data if we have only one pattern piece
         {
-            nameActivDraw = nameDraw;
             quint32 id = 0;
             if (history.size() == 0)
             {
@@ -300,7 +346,7 @@ void VPattern::setCurrentData()
             for (qint32 i = 0; i < history.size(); ++i)
             {
                 const VToolRecord tool = history.at(i);
-                if (tool.getNameDraw() == nameDraw)
+                if (tool.getNameDraw() == nameActivDraw)
                 {
                     id = tool.getId();
                 }
@@ -324,6 +370,11 @@ void VPattern::setCurrentData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AddTool add tool to list tools.
+ * @param id tool id.
+ * @param tool tool.
+ */
 void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -332,6 +383,11 @@ void VPattern::AddTool(const quint32 &id, VDataTool *tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UpdateToolData update tool in list tools.
+ * @param id tool id.
+ * @param data container with variables.
+ */
 void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -342,6 +398,10 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IncrementReferens increment reference parent objects.
+ * @param id parent object id.
+ */
 void VPattern::IncrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -351,6 +411,10 @@ void VPattern::IncrementReferens(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DecrementReferens decrement reference parent objects.
+ * @param id parent object id.
+ */
 void VPattern::DecrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
@@ -360,6 +424,9 @@ void VPattern::DecrementReferens(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief TestUniqueId test exist unique id in pattern file. Each id must be unique.
+ */
 void VPattern::TestUniqueId() const
 {
     QVector<quint32> vector;
@@ -367,6 +434,10 @@ void VPattern::TestUniqueId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SPointActiveDraw return id base point current pattern peace.
+ * @return id base point.
+ */
 quint32 VPattern::SPointActiveDraw()
 {
     QDomElement calcElement;
@@ -390,7 +461,12 @@ quint32 VPattern::SPointActiveDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::CheckNameDraw(const QString &name) const
+/**
+ * @brief CheckNameDraw check if exist pattern peace with this name.
+ * @param name pattern peace name.
+ * @return true if exist.
+ */
+bool VPattern::CheckNamePP(const QString &name) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "CheckNameDraw", "name draw is empty");
     const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
@@ -413,14 +489,24 @@ bool VPattern::CheckNameDraw(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::SetActivDraw(const QString &name)
+/**
+ * @brief SetActivPP set current pattern piece.
+ * @param name pattern peace name.
+ */
+void VPattern::SetActivPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "SetActivDraw", "name draw is empty");
+    Q_ASSERT_X(name.isEmpty() == false, "SetActivPP", "name pattern piece is empty");
     this->nameActivDraw = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element)
+/**
+ * @brief GetActivNodeElement find element in current pattern piece by name.
+ * @param name name tag.
+ * @param element element.
+ * @return true if found.
+ */
+bool VPattern::GetActivNodeElement(const QString &name, QDomElement &element) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "GetActivNodeElement", "name draw is empty");
     QDomElement drawElement;
@@ -481,7 +567,7 @@ void VPattern::SetPath(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Valentina::Units VPattern::MUnit() const
+Unit VPattern::MUnit() const
 {
     QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
     QDomElement element = list.at(0).toElement();
@@ -492,27 +578,27 @@ Valentina::Units VPattern::MUnit() const
         switch (units.indexOf(unit))
         {
             case 0:// mm
-                return Valentina::Mm;
+                return Unit::Mm;
                 break;
             case 1:// cm
-                return Valentina::Cm;
+                return Unit::Cm;
                 break;
             case 2:// in
-                return Valentina::Inch;
+                return Unit::Inch;
                 break;
             default:
-                return Valentina::Cm;
+                return Unit::Cm;
                 break;
         }
     }
     else
     {
-        return Valentina::Cm;
+        return Unit::Cm;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Pattern::Measurements VPattern::MType() const
+MeasurementsType VPattern::MType() const
 {
     QDomNodeList list = elementsByTagName(VPattern::TagMeasurements);
     QDomElement element = list.at(0).toElement();
@@ -523,19 +609,19 @@ Pattern::Measurements VPattern::MType() const
         switch (types.indexOf(type))
         {
             case 0:// standard
-                return Pattern::Standard;
+                return MeasurementsType::Standard;
                 break;
             case 1:// individual
-                return Pattern::Individual;
+                return MeasurementsType::Individual;
                 break;
             default:
-                return Pattern::Individual;
+                return MeasurementsType::Individual;
                 break;
         }
     }
     else
     {
-        return Pattern::Individual;
+        return MeasurementsType::Individual;
     }
 }
 
@@ -551,56 +637,52 @@ bool VPattern::SaveDocument(const QString &fileName)
         e.CriticalMessageBox(tr("Error no unique id."));
         return false;
     }
+
     return VDomDocument::SaveDocument(fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::FullUpdateTree()
+/**
+ * @brief LiteParseTree lite parse file.
+ */
+void VPattern::LiteParseTree()
 {
-    VMainGraphicsScene *scene = nullptr;
     try
     {
-        scene = new VMainGraphicsScene();
-        Parse(Document::LiteParse, scene, scene);
+        Parse(Document::LiteParse);
     }
     catch (const VExceptionObjectError &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error parsing file."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionConversionError &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error can't convert value."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error empty parameter."));
         emit ClearMainWindow();
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error wrong id."));
         emit ClearMainWindow();
         return;
     }
     catch (VException &e)
     {
-        delete scene;
         e.CriticalMessageBox(tr("Error parsing file."));
         emit ClearMainWindow();
         return;
     }
     catch (const std::bad_alloc &)
     {
-        delete scene;
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
@@ -619,27 +701,53 @@ void VPattern::FullUpdateTree()
         return;
     }
 
-    delete scene;
     setCurrentData();
     emit FullUpdateFromFile();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief haveLiteChange we have unsaved change.
+ */
 void VPattern::haveLiteChange()
 {
-    patternModified = true;
     emit patternChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowHistoryTool hightlight tool.
+ * @param id tool id.
+ * @param color hightlight color.
+ * @param enable enable or diasable hightlight.
+ */
 void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
 {
     emit ShowTool(id, color, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::NeedFullParsing()
+{
+    emit UndoCommand();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ClearScene()
+{
+    emit ClearMainWindow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseDrawElement parse draw tag.
+ * @param sceneDraw draw scene.
+ * @param sceneDetail details scene.
+ * @param node node.
+ * @param parse parser file mode.
+ */
 void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
-                                const Document::Documents &parse)
+                                const Document &parse)
 {
     QStringList tags{TagCalculation, TagModeling, TagDetails};
     QDomNode domNode = node.firstChild();
@@ -654,10 +762,10 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
                 {
                     case 0: // TagCalculation
                         data->ClearCalculationGObjects();
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Valentina::Calculation);
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
                         break;
                     case 1: // TagModeling
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Valentina::Modeling);
+                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
                         break;
                     case 2: // TagDetails
                         ParseDetails(sceneDetail, domElement, parse);
@@ -673,13 +781,21 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseDrawMode parse draw tag with draw mode.
+ * @param sceneDraw draw scene.
+ * @param sceneDetail details scene.
+ * @param node node.
+ * @param parse parser file mode.
+ * @param mode draw mode.
+ */
 void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
-                             const Document::Documents &parse, const Valentina::Draws &mode)
+                             const Document &parse, const Draw &mode)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     VMainGraphicsScene *scene = nullptr;
-    if (mode == Valentina::Calculation)
+    if (mode == Draw::Calculation)
     {
         scene = sceneDraw;
     }
@@ -721,8 +837,14 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseDetailElement parse detail tag.
+ * @param sceneDetail detail scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ */
 void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                                  const Document::Documents &parse)
+                                  const Document &parse)
 {
     SCASSERT(sceneDetail != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -751,24 +873,24 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                     const quint32 id = GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
                     const qreal mx = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                     const qreal my = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
-                    const NodeDetail::NodeDetails nodeType = NodeDetail::Contour;
+                    const NodeDetail nodeType = NodeDetail::Contour;
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
-                    Valentina::Tools tool;
+                    Tool tool;
 
                     switch (types.indexOf(t))
                     {
                         case 0: // VToolDetail::NodePoint
-                            tool = Valentina::NodePoint;
+                            tool = Tool::NodePoint;
                             break;
                         case 1: // VToolDetail::NodeArc
-                            tool = Valentina::NodeArc;
+                            tool = Tool::NodeArc;
                             break;
                         case 2: // VToolDetail::NodeSpline
-                            tool = Valentina::NodeSpline;
+                            tool = Tool::NodeSpline;
                             break;
                         case 3: // VToolDetail::NodeSplinePath
-                            tool = Valentina::NodeSplinePath;
+                            tool = Tool::NodeSplinePath;
                             break;
                         default:
                             qDebug()<<"Wrong node type."<<Q_FUNC_INFO;
@@ -778,7 +900,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                 }
             }
         }
-        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Valentina::FromFile);
+        VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -789,8 +911,14 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseDetails parse details tag.
+ * @param sceneDetail detail scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ */
 void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                            const Document::Documents &parse)
+                            const Document &parse)
 {
     SCASSERT(sceneDetail != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -813,8 +941,15 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParsePointElement parse point tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ * @param type type of point.
+ */
 void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                 const Document::Documents &parse, const QString &type)
+                                 const Document &parse, const QString &type)
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -841,14 +976,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
 
                 data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-                VDrawTool::AddRecord(id, Valentina::SinglePointTool, this);
+                VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
                 if (parse != Document::FullParse)
                 {
                     UpdateToolData(id, data);
                 }
                 if (parse == Document::FullParse)
                 {
-                    spoint = new VToolSinglePoint(this, data, id, Valentina::FromFile);
+                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile, nameActivDraw, MPath());
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -881,7 +1016,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolEndLine::Create(id, name, typeLine, f, angle, basePointId,
-                                        mx, my, scene, this, data, parse, Valentina::FromFile);
+                                        mx, my, scene, this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -919,7 +1054,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolAlongLine::Create(id, name, typeLine, f, firstPointId, secondPointId, mx, my, scene, this,
-                                       data, parse, Valentina::FromFile);
+                                       data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -958,7 +1093,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, "0");
 
                 VToolShoulderPoint::Create(id, f, p1Line, p2Line, pShoulder, typeLine, name, mx, my, scene, this,
-                                       data, parse, Valentina::FromFile);
+                                       data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -997,7 +1132,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
                 VToolNormal::Create(id, f, firstPointId, secondPointId, typeLine, name, angle, mx, my, scene,
-                                    this, data, parse, Valentina::FromFile);
+                                    this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -1036,7 +1171,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
 
                 VToolBisector::Create(id, f, firstPointId, secondPointId, thirdPointId,
-                                    typeLine, name, mx, my, scene, this, data, parse, Valentina::FromFile);
+                                    typeLine, name, mx, my, scene, this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -1072,7 +1207,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 p2Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, "0");
 
                 VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name,
-                                            mx, my, scene, this, data, parse, Valentina::FromFile);
+                                            mx, my, scene, this, data, parse, Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1095,7 +1230,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfContact::Create(id, f, center, firstPointId, secondPointId, name, mx, my, scene, this,
-                                            data, parse, Valentina::FromFile);
+                                            data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != radius)
                 {
@@ -1128,8 +1263,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
                 const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
-                                                    Valentina::Modeling));
-                VNodePoint::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
+                                                    Draw::Modeling));
+                VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1152,7 +1287,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
 
                 VToolHeight::Create(id, name, typeLine, basePointId, p1LineId, p2LineId,
-                                    mx, my, scene, this, data, parse, Valentina::FromFile);
+                                    mx, my, scene, this, data, parse, Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1174,7 +1309,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this,
-                                      data, parse, Valentina::FromFile);
+                                      data, parse, Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1194,7 +1329,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
                 VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
-                                                 parse, Valentina::FromFile);
+                                                 parse, Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1214,7 +1349,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 QString f = formula;//need for saving fixed formula;
                 const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
 
-                VToolCutSpline::Create(id, name, f, splineId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                VToolCutSpline::Create(id, name, f, splineId, mx, my, scene, this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -1249,7 +1384,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
 
                 VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, scene, this, data, parse,
-                                           Valentina::FromFile);
+                                           Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -1283,7 +1418,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 QString f = formula;//need for saving fixed formula;
                 const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
 
-                VToolCutArc::Create(id, name, f, arcId, mx, my, scene, this, data, parse, Valentina::FromFile);
+                VToolCutArc::Create(id, name, f, arcId, mx, my, scene, this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula)
                 {
@@ -1313,8 +1448,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseLineElement parse line tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ */
 void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                const Document::Documents &parse)
+                                const Document &parse)
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1326,7 +1467,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
         const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
                                                    VAbstractTool::TypeLineLine);
 
-        VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Valentina::FromFile);
+        VToolLine::Create(id, firstPoint, secondPoint, typeLine, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1337,8 +1478,15 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseSplineElement parse spline tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ * @param type type of spline.
+ */
 void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                  const Document::Documents &parse, const QString &type)
+                                  const Document &parse, const QString &type)
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1361,7 +1509,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
 
                 VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, this, data, parse,
-                                    Valentina::FromFile);
+                                    Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1405,7 +1553,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                     }
                 }
 
-                VToolSplinePath::Create(id, path, scene, this, data, parse, Valentina::FromFile);
+                VToolSplinePath::Create(id, path, scene, this, data, parse, Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1422,9 +1570,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
                 spl->setIdObject(idObject);
-                spl->setMode(Valentina::Modeling);
+                spl->setMode(Draw::Modeling);
                 data->UpdateGObject(id, spl);
-                VNodeSpline::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
+                VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1441,9 +1589,9 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
                 path->setIdObject(idObject);
-                path->setMode(Valentina::Modeling);
+                path->setMode(Draw::Modeling);
                 data->UpdateGObject(id, path);
-                VNodeSplinePath::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
+                VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1459,7 +1607,14 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document::Documents &parse,
+/**
+ * @brief ParseArcElement parse arc tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ * @param type type of spline.
+ */
+void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
                                const QString &type)
 {
     SCASSERT(scene != nullptr);
@@ -1482,7 +1637,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
                 const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
                 QString f2Fix = f2;//need for saving fixed formula;
 
-                VToolArc::Create(id, center, r, f1Fix, f2Fix, scene, this, data, parse, Valentina::FromFile);
+                VToolArc::Create(id, center, r, f1Fix, f2Fix, scene, this, data, parse, Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (r != radius || f1Fix != f1 || f2Fix != f2)
                 {
@@ -1515,9 +1670,9 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
                 arc->setIdObject(idObject);
-                arc->setMode(Valentina::Modeling);
+                arc->setMode(Draw::Modeling);
                 data->UpdateGObject(id, arc);
-                VNodeArc::Create(this, data, id, idObject, parse, Valentina::FromFile, idTool);
+                VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1533,8 +1688,15 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseToolsElement parse tools tag.
+ * @param scene scene.
+ * @param domElement tag in xml tree.
+ * @param parse parser file mode.
+ * @param type type of spline.
+ */
 void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &domElement,
-                                 const Document::Documents &parse, const QString &type)
+                                 const Document &parse, const QString &type)
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1554,7 +1716,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
                 VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
-                                        Valentina::FromFile);
+                                        Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {
@@ -1570,6 +1732,10 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ParseIncrementsElement parse increments tag.
+ * @param node tag in xml tree.
+ */
 void VPattern::ParseIncrementsElement(const QDomNode &node)
 {
     QDomNode domNode = node.firstChild();
@@ -1598,6 +1764,11 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetParametrId return value id attribute.
+ * @param domElement tag in xml tree.
+ * @return id value.
+ */
 quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
@@ -1623,6 +1794,11 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CollectId recursive function, try find id attribute in file. Throw exclusion if find not unique.
+ * @param node tag in xml tree.
+ * @param vector list with ids.
+ */
 void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
 {
     if (node.hasAttribute(VDomDocument::AttrId))
@@ -1646,8 +1822,7 @@ void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsScene *sceneDraw,
-                               VMainGraphicsScene *sceneDetail)
+void VPattern::PrepareForParse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
@@ -1659,7 +1834,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
         nameActivDraw.clear();
         sceneDraw->clear();
         sceneDetail->clear();
-        comboBoxDraws->clear();
+        patternPieces.clear();
         tools.clear();
         cursor = 0;
     }
@@ -1675,7 +1850,7 @@ void VPattern::PrepareForParse(const Document::Documents &parse, VMainGraphicsSc
 void VPattern::UpdateMeasurements()
 {
     const QString path = MPath();
-    if (MType() == Pattern::Standard)
+    if (MType() == MeasurementsType::Standard)
     {
         VStandardMeasurements m(data);
         m.setContent(path);
@@ -1687,4 +1862,62 @@ void VPattern::UpdateMeasurements()
         m.setContent(path);
         m.Measurements();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::GarbageCollector()
+{
+    QHashIterator<quint32, VDataTool*> t(tools);
+    while (t.hasNext()) {
+        t.next();
+        VDataTool *tool = t.value();
+        if(tool->referens() <= 0){
+            QDomElement domElement = elementById(QString().setNum(t.key()));
+            if(domElement.isElement()){
+                QDomNode parent = domElement.parentNode();
+                if(!parent.isNull()){
+                    parent.removeChild(domElement);
+                } else {
+                    qWarning()<<tr("Can't get parent for object id = %1").arg(t.key());
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPattern::GetPPElement(const QString &name)
+{
+    if (name.isEmpty() == false)
+    {
+        const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
+        if (elements.size() == 0)
+        {
+            return QDomElement();
+        }
+        for ( qint32 i = 0; i < elements.count(); i++ )
+        {
+            QDomElement element = elements.at( i ).toElement();
+            if (element.isNull() == false)
+            {
+                if ( element.attribute( AttrName ) == name )
+                {
+                    return element;
+                }
+            }
+        }
+    }
+    return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPattern::CountPP() const
+{
+    const QDomElement rootElement = this->documentElement();
+    if (rootElement.isNull())
+    {
+        return 0;
+    }
+
+    return rootElement.elementsByTagName( TagDraw ).count();
 }
