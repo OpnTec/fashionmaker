@@ -44,14 +44,17 @@ public:
     ConfigurationPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
-    void      LangChenged();
+    void      LangChanged();
+    void      UnitChanged();
 private:
     Q_DISABLE_COPY(ConfigurationPage)
     QCheckBox *autoSaveCheck;
     QSpinBox  *autoTime;
     QComboBox *langCombo;
+    QComboBox *unitCombo;
     QCheckBox *osOptionCheck;
     bool      langChanged;
+    bool      unitChanged;
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
 };
@@ -70,6 +73,41 @@ private:
     QGroupBox *UserGroup();
     QGroupBox *GraphOutputGroup();
     QGroupBox *UndoGroup();
+};
+
+class CommunityPage : public QWidget
+{
+    Q_OBJECT
+public:
+    CommunityPage(QWidget *parent = nullptr);
+    void      Apply();
+private:
+    Q_DISABLE_COPY(CommunityPage)
+    // server name and https connection
+    QLineEdit *server;
+    QCheckBox *secureComm;
+
+    // proxy stuff
+    QCheckBox *useProxy;
+    QLineEdit *proxyAddress;
+    QLineEdit *proxyPort;
+    QLineEdit *proxyUser;
+    QLineEdit *proxyPass;
+
+    // username and password
+    QLineEdit *username;
+    QCheckBox *savePassword;
+    QLineEdit *userpassword;
+
+    static void add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QString label);
+    static void add_lineedit(QLineEdit** theline, QFormLayout *layout, QString value, QString label);
+
+    void ProxyCheckChanged();
+    void PasswordCheckChanged();
+
+    QGroupBox *ServerGroup();
+    QGroupBox *ProxyGroup();
+    QGroupBox *UserGroup();
 };
 
 #endif // PAGES_H

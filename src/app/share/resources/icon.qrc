@@ -54,5 +54,6 @@
         <file>icon/individual.png</file>
         <file>icon/flags/nl.png</file>
         <file>icon/flags/it.png</file>
+        <file>icon/community_config.png</file>
     </qresource>
 </RCC>

@@ -51,6 +51,7 @@ private:
     QStackedWidget    *pagesWidget;
     ConfigurationPage *configurationPage;
     PatternPage       *patternPage;
+    CommunityPage     *communityPage;
     void              createIcons();
     void              Apply();
     void              Ok();

@@ -45,6 +45,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     pagesWidget->addWidget(configurationPage);
     patternPage = new PatternPage();
     pagesWidget->addWidget(patternPage);
+    communityPage = new CommunityPage();
+    pagesWidget->addWidget(communityPage);
 
     QPushButton *applyButton = new QPushButton(tr("Apply"));
     QPushButton *canselButton = new QPushButton(tr("&Cancel"));
@@ -112,6 +114,12 @@ void ConfigDialog::createIcons()
     patternButton->setTextAlignment(Qt::AlignHCenter);
     patternButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
+    QListWidgetItem *communityButton = new QListWidgetItem(contentsWidget);
+    communityButton->setIcon(QIcon("://icon/community_config.png"));
+    communityButton->setText(tr("Community"));
+    communityButton->setTextAlignment(Qt::AlignHCenter);
+    communityButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
     connect(contentsWidget, &QListWidget::currentItemChanged, this, &ConfigDialog::changePage);
 }
 
@@ -125,6 +133,9 @@ void ConfigDialog::Apply()
             break;
         case (1):
             patternPage->Apply();
+            break;
+        case (2):
+            communityPage->Apply();
             break;
         default:
             break;

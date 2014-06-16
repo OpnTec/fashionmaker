@@ -485,7 +485,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
             currentChange=currentChange->next;
         } while (currentChange != nullptr);
     }
-    QMessageBox::information(this, "Changes (not REALLY applied for now)", Changes);
+    QMessageBox::information(this, "Changes : ", Changes);
     // TODO : clear stack and apply
 
     currentChange=this->changeStackRoot;
