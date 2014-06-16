@@ -106,7 +106,7 @@ bool DialogPatternXmlEdit::ApplyAttributeChange(QDomNode domElement, QString nam
     {
         return false;
     }
-    domElement.toElement().setAttribute(name,value);
+    domElement.toElement().setAttribute(name, value);
     return true;
 }
 
@@ -558,7 +558,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
         currentChange=currentChange->next;
     }
     QString message;
-    if (this->CheckChanges(message,newroot) == false)
+    if (this->CheckChanges(message, newroot) == false)
     {
         QMessageBox::warning(this, "Error in changes", message);
         return;
@@ -719,8 +719,8 @@ void DialogPatternXmlEdit::ButtonAddSonClicked()
     {
         return;
     }
-    QString value = QInputDialog::getText(this, tr("Node Value (may be empty)"),tr("Value:"),
-                                          QLineEdit::Normal,"", &ok);
+    QString value = QInputDialog::getText(this, tr("Node Value (may be empty)"), tr("Value:"),
+                                          QLineEdit::Normal, "", &ok);
     if (ok==false)
     {
         return;

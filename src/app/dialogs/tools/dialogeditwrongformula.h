@@ -31,7 +31,8 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
+namespace Ui
+{
 class DialogEditWrongFormula;
 }
 

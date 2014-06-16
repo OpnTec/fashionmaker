@@ -247,6 +247,4 @@ inline QStringList VPattern::getPatternPieces() const
     return patternPieces;
 }
 
-
-
 #endif // VPATTERN_H

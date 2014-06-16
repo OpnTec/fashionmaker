@@ -91,7 +91,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     SetVarFactory(AddVariable, this);
 
     // Add unary operators
-    if(fromUser)
+    if (fromUser)
     {
         DefinePostfixOprt(qApp->PostfixOperator(cm_Oprt), CmUnit);
         DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
@@ -292,7 +292,7 @@ void Calculator::InitCharacterSets()
 qreal Calculator::CmUnit(qreal val)
 {
     qreal unit = val;
-    switch(qApp->patternUnit())
+    switch (qApp->patternUnit())
     {
         case Unit::Mm:
             unit = val * 10.0;
@@ -313,7 +313,7 @@ qreal Calculator::CmUnit(qreal val)
 qreal Calculator::MmUnit(qreal val)
 {
     qreal unit = val;
-    switch(qApp->patternUnit())
+    switch (qApp->patternUnit())
     {
         case Unit::Mm:
             break;
@@ -334,7 +334,7 @@ qreal Calculator::MmUnit(qreal val)
 qreal Calculator::InchUnit(qreal val)
 {
     qreal unit = val;
-    switch(qApp->patternUnit())
+    switch (qApp->patternUnit())
     {
         case Unit::Mm:
             unit = val * 25.4;

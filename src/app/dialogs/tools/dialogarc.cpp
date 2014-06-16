@@ -195,7 +195,7 @@ void DialogArc::DialogApply()
 void DialogArc::SaveData()
 {
     radius = ui->plainTextEditFormula->toPlainText();
-    radius.replace("\n"," ");
+    radius.replace("\n", " ");
     f1 = ui->lineEditF1->text();
     f2 = ui->lineEditF2->text();
     center = getCurrentObjectId(ui->comboBoxBasePoint);

@@ -189,7 +189,7 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
         result = cal->EvalFormula(formula);
         delete cal;
     }
-    catch(qmu::QmuParserError &e)
+    catch (qmu::QmuParserError &e)
     {
         Q_UNUSED(e)
         delete cal;

@@ -176,7 +176,7 @@ void DialogShoulderPoint::SaveData()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n"," ");
+    formula.replace("\n", " ");
     p1Line = getCurrentObjectId(ui->comboBoxP1Line);
     p2Line = getCurrentObjectId(ui->comboBoxP2Line);
     pShoulder = getCurrentObjectId(ui->comboBoxPShoulder);

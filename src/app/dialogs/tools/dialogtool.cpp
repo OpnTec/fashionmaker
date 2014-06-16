@@ -467,7 +467,7 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
             emit ToolTip("");
         }
-        catch(qmu::QmuParserError &e)
+        catch (qmu::QmuParserError &e)
         {
             label->setText(tr("Error"));
             flag = false;
@@ -504,7 +504,7 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
         {
             // Replace line return with spaces for calc
             QString formula = edit->toPlainText();
-            formula.replace("\n"," ");
+            formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
             Calculator *cal = new Calculator(data);
             const qreal result = cal->EvalFormula(formula);
@@ -528,7 +528,7 @@ void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *l
             palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
             emit ToolTip("");
         }
-        catch(qmu::QmuParserError &e)
+        catch (qmu::QmuParserError &e)
         {
             label->setText(tr("Error"));
             flag = false;

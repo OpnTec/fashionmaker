@@ -247,7 +247,7 @@ void DialogBisector::SaveData()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n"," ");
+    formula.replace("\n", " ");
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     thirdPointId = getCurrentObjectId(ui->comboBoxThirdPoint);

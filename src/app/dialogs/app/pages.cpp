@@ -202,9 +202,9 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     QString checkedUnit = settings.value("configuration/unit", "cm").toString();
 
-    this->unitCombo->addItem(tr("Centimeters"),"cm");
-    this->unitCombo->addItem(tr("Milimiters"),"mm");
-    this->unitCombo->addItem(tr("Inches"),"in");
+    this->unitCombo->addItem(tr("Centimeters"), "cm");
+    this->unitCombo->addItem(tr("Milimiters"), "mm");
+    this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit
     qint32 indexUnit = this->unitCombo->findData(checkedUnit);
@@ -368,15 +368,15 @@ void CommunityPage::Apply()
                        QApplication::applicationName());
     settings.setValue("community/server", this->server->text());
     settings.setValue("community/serverSecure", this->secureComm->isChecked());
-    settings.setValue("community/useProxy",this->useProxy->isChecked());
-    settings.setValue("community/proxyAddress",this->proxyAddress->text());
-    settings.setValue("community/proxyPort",this->proxyPort->text());
-    settings.setValue("community/proxyUser",this->proxyUser->text());
-    settings.setValue("community/proxyPass",this->proxyPass->text());
+    settings.setValue("community/useProxy", this->useProxy->isChecked());
+    settings.setValue("community/proxyAddress", this->proxyAddress->text());
+    settings.setValue("community/proxyPort", this->proxyPort->text());
+    settings.setValue("community/proxyUser", this->proxyUser->text());
+    settings.setValue("community/proxyPass", this->proxyPass->text());
 
-    settings.setValue("community/username",this->username->text());
-    settings.setValue("community/savePassword",this->savePassword->isChecked());
-    settings.setValue("community/userpassword",this->userpassword->text());
+    settings.setValue("community/username", this->username->text());
+    settings.setValue("community/savePassword", this->savePassword->isChecked());
+    settings.setValue("community/userpassword", this->userpassword->text());
 
 }
 
@@ -414,10 +414,10 @@ QGroupBox *CommunityPage::ServerGroup()
     QGroupBox *ServerGroup = new QGroupBox(tr("Server"));
     QFormLayout *serverLayout = new QFormLayout;
 
-    CommunityPage::add_lineedit(&this->server,serverLayout,
+    CommunityPage::add_lineedit(&this->server, serverLayout,
            settings.value("community/server", "community.valentina-project.org").toString(), tr("Server name/IP"));
 
-    CommunityPage::add_checkbox(&this->secureComm,serverLayout,
+    CommunityPage::add_checkbox(&this->secureComm, serverLayout,
            settings.value("community/serverSecure", 0).toBool(), tr("Secure connection"));
 
     ServerGroup->setLayout(serverLayout);

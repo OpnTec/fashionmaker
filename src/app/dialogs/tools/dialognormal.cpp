@@ -153,7 +153,7 @@ void DialogNormal::SaveData()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n"," ");
+    formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);

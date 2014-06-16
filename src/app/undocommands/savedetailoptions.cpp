@@ -139,5 +139,3 @@ int SaveDetailOptions::id() const
 {
     return static_cast<int>(UndoCommand::SaveDetailOptions);
 }
-
-

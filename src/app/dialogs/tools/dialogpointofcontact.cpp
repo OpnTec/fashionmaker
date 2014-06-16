@@ -198,7 +198,7 @@ void DialogPointOfContact::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     radius = ui->plainTextEditFormula->toPlainText();
-    radius.replace("\n"," ");
+    radius.replace("\n", " ");
     center = getCurrentObjectId(ui->comboBoxCenter);
     firstPoint = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPoint = getCurrentObjectId(ui->comboBoxSecondPoint);

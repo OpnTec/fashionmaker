@@ -94,7 +94,7 @@ void DialogEndLine::DeployFormulaTextEdit()
        ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
        //Set icon from theme (internal for Windows system)
        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                                         QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+                                       QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
 }
 
@@ -201,7 +201,7 @@ void DialogEndLine::SaveData()
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n"," ");
+    formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
 }

@@ -379,7 +379,7 @@ void MainWindow::ApplyDialog()
 void MainWindow::ToolEndLine(bool checked)
 {
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-                                 &MainWindow::ClosedDialogEndLine,&MainWindow::ApplyDialogEndLine);
+                                 &MainWindow::ClosedDialogEndLine, &MainWindow::ApplyDialogEndLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
