@@ -458,7 +458,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        DeleteTool(this);
+        DeleteTool();
     }
 }
 

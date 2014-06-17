@@ -1594,13 +1594,28 @@ void MainWindow::FullParseFile()
     ui->actionPattern_properties->setEnabled(true);
 
     qint32 index = comboBoxDraws->findText(patternPiece);
-    if ( index != -1 )
-    { // -1 for not found
-        currentDrawChanged(index);
-    }
-    else
+    try
     {
-        currentDrawChanged(0);
+        if ( index != -1 )
+        { // -1 for not found
+            currentDrawChanged(index);
+        }
+        else
+        {
+            currentDrawChanged(0);
+        }
+    }
+    catch (VExceptionBadId &e)
+    {
+        e.CriticalMessageBox(tr("Bad id."), this);
+        Clear();
+        return;
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        Clear();
+        return;
     }
 
     if (comboBoxDraws->count() > 0)
