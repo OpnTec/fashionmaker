@@ -30,6 +30,7 @@
 #define VSPLINEPOINT_H
 
 #include "vpointf.h"
+#include <QMetaType>
 
 /**
  * @brief The VSplinePoint class keep information about point in spline path. Each point have two angles and two

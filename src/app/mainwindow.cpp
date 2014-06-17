@@ -47,6 +47,8 @@
 #include <QScrollBar>
 #include <QFileDialog>
 #include <QSourceLocation>
+#include <QUndoStack>
+#include <QAction>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

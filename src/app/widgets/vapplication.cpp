@@ -40,9 +40,7 @@
 #include <QSettings>
 #include <QUndoStack>
 
-#ifdef Q_OS_WIN32
-#   include <QtMath> // for M_PI on Windows
-#endif /*Q_OS_WIN32*/
+#include <QtMath>
 
 const qreal VApplication::PrintDPI = 96.0;
 

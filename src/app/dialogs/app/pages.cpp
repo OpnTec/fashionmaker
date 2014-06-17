@@ -30,10 +30,22 @@
 #include "../../options.h"
 #include "../../widgets/vapplication.h"
 #include "../../widgets/vmaingraphicsview.h"
+#include <QDir>
+#include <QGroupBox>
+#include <QLabel>
+#include <QSettings>
+#include <QTimer>
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QComboBox>
+#include <QMessageBox>
+#include <QCheckBox>
+#include <QIcon>
+#include <QLineEdit>
 
 //---------------------------------------------------------------------------------------------------------------------
-ConfigurationPage::ConfigurationPage(QWidget *parent):
-    QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), unitCombo(nullptr),
+ConfigurationPage::ConfigurationPage(QWidget *parent)
+    : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), unitCombo(nullptr),
     osOptionCheck(nullptr), langChanged(false), unitChanged(false)
 {
     QGroupBox *saveGroup = SaveGroup();

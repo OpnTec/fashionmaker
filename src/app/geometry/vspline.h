@@ -31,8 +31,9 @@
 
 #include "vpointf.h"
 #include "vgobject.h"
+#include <QLineF>
+#include <QPointF>
 
-class QLineF;
 class QPainterPath;
 
 #define M_2PI   6.28318530717958647692528676655900576

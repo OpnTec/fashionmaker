@@ -29,6 +29,7 @@
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
 #include <QSettings>
+#include <QPushButton>
 #include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------

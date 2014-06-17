@@ -31,6 +31,7 @@
 
 #include "vgobject.h"
 #include "vpointf.h"
+#include <QCoreApplication>
 
 class QPainterPath;
 

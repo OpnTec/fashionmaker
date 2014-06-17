@@ -32,6 +32,9 @@
 #include "vgobject.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
+#include <QCoreApplication>
+#include <QVector>
+#include <QPainterPath>
 
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
 

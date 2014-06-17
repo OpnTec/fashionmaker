@@ -29,6 +29,7 @@
 #include "dialogpatternxmledit.h"
 #include "ui_dialogpatternxmledit.h"
 
+#include <QInputDialog>
 #include <QMessageBox>
 
 const short int DialogPatternXmlEdit::ChangeTypeDelete=1;

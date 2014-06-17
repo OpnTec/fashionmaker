@@ -27,10 +27,16 @@
  *************************************************************************/
 
 #include "configdialog.h"
+#include <QListWidget>
+#include <QtWidgets>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
-    QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr)
+    QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr),
+    communityPage(nullptr)
 {
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);

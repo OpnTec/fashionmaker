@@ -31,6 +31,7 @@
 #include "../../xml/vindividualmeasurements.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QPushButton>
 #include "../../widgets/vapplication.h"
 #include "../../container/vcontainer.h"
 

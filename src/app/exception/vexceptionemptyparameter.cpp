@@ -28,6 +28,7 @@
 
 #include "vexceptionemptyparameter.h"
 #include <QDomElement>
+#include <QTextStream>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

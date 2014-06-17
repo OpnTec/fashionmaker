@@ -31,6 +31,7 @@
 
 #include <QDebug>
 #include "qmuparsertoken.h"
+#include <QtMath>
 
 
 namespace qmu

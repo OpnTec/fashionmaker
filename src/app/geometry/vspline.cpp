@@ -28,6 +28,7 @@
 
 #include "vspline.h"
 #include <QDebug>
+#include <QPainterPath>
 
 #ifdef Q_OS_WIN32
 #   include <QtMath> // for M_PI on Windows

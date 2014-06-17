@@ -30,6 +30,8 @@
 
 #include "../../widgets/vapplication.h"
 #include "../../geometry/vspline.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QPen>
 
 const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");

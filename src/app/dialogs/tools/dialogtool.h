@@ -32,6 +32,7 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include "../../widgets/vapplication.h"
+#include <QPushButton>
 
 class QDoubleSpinBox;
 class QLabel;

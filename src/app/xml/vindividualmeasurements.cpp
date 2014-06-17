@@ -28,6 +28,7 @@
 
 #include "vindividualmeasurements.h"
 #include "../widgets/vapplication.h"
+#include <QDate>
 
 const QString VIndividualMeasurements::AttrValue      = QStringLiteral("value");
 const QString VIndividualMeasurements::TagFamily_name = QStringLiteral("family-name");

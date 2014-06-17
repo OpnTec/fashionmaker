@@ -21,7 +21,7 @@
  ******************************************************************************************************/
 
 #include "qmuparserbase.h"
-//#include <QTextStream>
+#include <QtMath>
 
 #ifdef Q_OS_WIN32
 #   include <QtMath> // for M_PI on Windows

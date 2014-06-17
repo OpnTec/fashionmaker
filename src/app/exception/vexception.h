@@ -26,12 +26,12 @@
  **
  *************************************************************************/
 
-
 #ifndef VEXCEPTION_H
 #define VEXCEPTION_H
 
 #include <QException>
 #include <QString>
+#include <QCoreApplication>
 
 class QWidget;
 

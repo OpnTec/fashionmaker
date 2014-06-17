@@ -30,6 +30,8 @@
 #define PAGES_H
 
 #include <QObject>
+#include <QWidget>
+#include <QFormLayout>
 
 class QCheckBox;
 class QSpinBox;

@@ -30,6 +30,8 @@
 
 #include "../../widgets/vapplication.h"
 #include "../../geometry/varc.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QPen>
 
 const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");

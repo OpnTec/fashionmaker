@@ -30,6 +30,7 @@
 #define VNODEDETAIL_H
 
 #include "../options.h"
+#include <QMetaType>
 
 enum class NodeDetail : char { Contour, Modeling };
 

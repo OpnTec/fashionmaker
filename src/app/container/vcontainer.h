@@ -34,6 +34,8 @@
 #include "../geometry/vdetail.h"
 #include "../geometry/vgobject.h"
 #include "../exception/vexceptionbadid.h"
+#include <QCoreApplication>
+#include <QHash>
 
 /**
  * @brief The VContainer class container of all variables.

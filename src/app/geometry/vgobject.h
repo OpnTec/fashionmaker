@@ -30,6 +30,8 @@
 #define VGOBJECT_H
 
 #include "../options.h"
+#include <QString>
+#include <QtGlobal>
 
 enum class GOType : char { Point, Arc, Spline, SplinePath };
 

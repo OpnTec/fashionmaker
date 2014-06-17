@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vtranslation.h"
+#include <QCoreApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslation VTranslation::translate(const QString &context, const QString &sourceText, const QString &disambiguation,

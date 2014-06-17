@@ -29,7 +29,10 @@
 #include "vtablegraphicsview.h"
 
 #include <QDebug>
+#include <QGraphicsItem>
+#include <QGuiApplication>
 #include <QWheelEvent>
+#include <QScrollBar>
 #include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------

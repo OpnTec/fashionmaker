@@ -36,6 +36,20 @@
 #include "../../../libs/qmuparser/qmuparsererror.h"
 #include "../../widgets/vapplication.h"
 #include "../../xml/vdomdocument.h"
+#include <QTimer>
+#include <QCloseEvent>
+#include <QShowEvent>
+#include <QComboBox>
+#include <QListWidgetItem>
+#include <QLineEdit>
+#include <QTextCursor>
+#include <QPlainTextEdit>
+#include <QLabel>
+#include <QSettings>
+#include <QPushButton>
+#include <QDoubleSpinBox>
+#include <QListWidget>
+#include <QRadioButton>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -715,7 +715,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                             quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, "0");
                             qreal mx = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                             qreal my = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
-                            Tool tool;
+                            Tool tool = Tool::NodePoint;
                             NodeDetail nodeType = NodeDetail::Contour;
                             QString t = doc->GetParametrString(element, "type", "NodePoint");
                             if (t == "NodePoint")

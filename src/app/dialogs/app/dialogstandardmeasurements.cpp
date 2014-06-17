@@ -29,6 +29,7 @@
 #include "dialogstandardmeasurements.h"
 #include "ui_dialogstandardmeasurements.h"
 #include <QDir>
+#include <QPushButton>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../widgets/vapplication.h"
 #include "../../container/vcontainer.h"

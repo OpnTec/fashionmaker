@@ -28,6 +28,9 @@
 
 #include "varc.h"
 #include <QDebug>
+#include <QLineF>
+#include <QPainterPath>
+#include <QPointF>
 
 #ifdef Q_OS_WIN32
 #   include <QtMath> // for M_PI on Windows

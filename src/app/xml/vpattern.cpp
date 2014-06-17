@@ -895,6 +895,7 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
                             break;
                         default:
                             qDebug()<<"Wrong node type."<<Q_FUNC_INFO;
+                            continue;
                             break;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my));

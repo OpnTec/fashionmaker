@@ -37,6 +37,7 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

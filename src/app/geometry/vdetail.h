@@ -30,6 +30,7 @@
 #define VDETAIL_H
 
 #include "vnodedetail.h"
+#include <QString>
 #include <QVector>
 
 class QString;

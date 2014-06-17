@@ -31,6 +31,8 @@
 #include "../widgets/vapplication.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
+#include <QLineF>
+#include <QtAlgorithms>
 
 quint32 VContainer::_id = 0;
 

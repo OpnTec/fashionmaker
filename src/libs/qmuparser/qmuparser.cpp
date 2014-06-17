@@ -27,6 +27,7 @@
 #endif /*Q_OS_WIN32*/
 
 #include <QtGlobal>
+#include <QtMath>
 
 using namespace std;
 
