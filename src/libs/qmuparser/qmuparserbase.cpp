@@ -1450,19 +1450,19 @@ void QmuParserBase::CreateRPN() const
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
-            case cmLAND:
-            case cmLOR:
-            case cmLT:
-            case cmGT:
             case cmLE:
             case cmGE:
             case cmNEQ:
             case cmEQ:
+            case cmLT:
+            case cmGT:
             case cmADD:
             case cmSUB:
             case cmMUL:
             case cmDIV:
             case cmPOW:
+            case cmLAND:
+            case cmLOR:
             case cmASSIGN:
             case cmOPRT_BIN:
                 // A binary operator (user defined or built in) has been found.

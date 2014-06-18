@@ -384,108 +384,91 @@ bool QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok )
         int len = pOprtDef.at ( i ).length();
         if ( pOprtDef.at ( i ) == m_strFormula.mid ( m_iPos, len ) )
         {
-            switch ( i )
+            if (i >= cmLE && i <= cmASSIGN)
             {
-                //case cmAND:
-                //case cmOR:
-                //case cmXOR:
-                case cmLAND:
-                case cmLOR:
-                case cmLT:
-                case cmGT:
-                case cmLE:
-                case cmGE:
-                case cmNEQ:
-                case cmEQ:
-                case cmADD:
-                case cmSUB:
-                case cmMUL:
-                case cmDIV:
-                case cmPOW:
-                case cmASSIGN:
-                    //if (len!=sTok.length())
-                    //  continue;
+                //if (len!=sTok.length())
+                //  continue;
 
-                    // The assignement operator need special treatment
-                    if ( i == cmASSIGN && m_iSynFlags & noASSIGN )
+                // The assignement operator need special treatment
+                if ( i == cmASSIGN && m_iSynFlags & noASSIGN )
+                {
+                    Error ( ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at ( i ) );
+                }
+
+                if ( m_pParser->HasBuiltInOprt() == false)
+                {
+                    continue;
+                }
+                if ( m_iSynFlags & noOPT )
+                {
+                    // Maybe its an infix operator not an operator
+                    // Both operator types can share characters in
+                    // their identifiers
+                    if ( IsInfixOpTok ( a_Tok ) )
                     {
-                        Error ( ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at ( i ) );
+                        return true;
                     }
 
-                    if ( m_pParser->HasBuiltInOprt() == false)
-                    {
-                        continue;
-                    }
-                    if ( m_iSynFlags & noOPT )
-                    {
-                        // Maybe its an infix operator not an operator
-                        // Both operator types can share characters in
-                        // their identifiers
-                        if ( IsInfixOpTok ( a_Tok ) )
-                        {
-                            return true;
-                        }
+                    Error ( ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at ( i ) );
+                }
 
-                        Error ( ecUNEXPECTED_OPERATOR, m_iPos, pOprtDef.at ( i ) );
-                    }
+                m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
+                m_iSynFlags |= ( ( i != cmEND ) && ( i != cmBC ) ) ? noEND : 0;
+            }
+            else if (i == cmBO)
+            {
+                if ( m_iSynFlags & noBO )
+                {
+                    Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
+                }
 
-                    m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
-                    m_iSynFlags |= ( ( i != cmEND ) && ( i != cmBC ) ) ? noEND : 0;
-                    break;
+                if ( m_lastTok.GetCode() == cmFUNC )
+                {
+                    m_iSynFlags = noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
+                }
+                else
+                {
+                    m_iSynFlags = noBC | noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
+                }
 
-                case cmBO:
-                    if ( m_iSynFlags & noBO )
-                    {
-                        Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
-                    }
+                ++m_iBrackets;
+            }
+            else if (i == cmBC)
+            {
+                if ( m_iSynFlags & noBC )
+                {
+                    Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
+                }
 
-                    if ( m_lastTok.GetCode() == cmFUNC )
-                    {
-                        m_iSynFlags = noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
-                    }
-                    else
-                    {
-                        m_iSynFlags = noBC | noOPT | noEND | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
-                    }
+                m_iSynFlags  = noBO | noVAR | noVAL | noFUN | noINFIXOP | noSTR | noASSIGN;
 
-                    ++m_iBrackets;
-                    break;
+                if ( --m_iBrackets < 0 )
+                {
+                    Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
+                }
+            }
+            else if (i == cmELSE)
+            {
+                if ( m_iSynFlags & noELSE )
+                {
+                    Error ( ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at ( i ) );
+                }
 
-                case cmBC:
-                    if ( m_iSynFlags & noBC )
-                    {
-                        Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
-                    }
+                m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
+            }
+            else if (i == cmIF)
+            {
+                if ( m_iSynFlags & noIF )
+                {
+                    Error ( ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at ( i ) );
+                }
 
-                    m_iSynFlags  = noBO | noVAR | noVAL | noFUN | noINFIXOP | noSTR | noASSIGN;
-
-                    if ( --m_iBrackets < 0 )
-                    {
-                        Error ( ecUNEXPECTED_PARENS, m_iPos, pOprtDef.at ( i ) );
-                    }
-                    break;
-
-                case cmELSE:
-                    if ( m_iSynFlags & noELSE )
-                    {
-                        Error ( ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at ( i ) );
-                    }
-
-                    m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
-                    break;
-
-                case cmIF:
-                    if ( m_iSynFlags & noIF )
-                    {
-                        Error ( ecUNEXPECTED_CONDITIONAL, m_iPos, pOprtDef.at ( i ) );
-                    }
-
-                    m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
-                    break;
-
-                default:      // The operator is listed in c_DefaultOprt, but not here. This is a bad thing...
-                    Error ( ecINTERNAL_ERROR );
-            } // switch operator id
+                m_iSynFlags = noBC | noPOSTOP | noEND | noOPT | noIF | noELSE;
+            }
+            else // The operator is listed in c_DefaultOprt, but not here. This is a bad thing...
+            {
+                Error ( ecINTERNAL_ERROR );
+            }
 
             m_iPos += len;
             a_Tok.Set ( static_cast<ECmdCode>(i), pOprtDef.at ( i ) );
