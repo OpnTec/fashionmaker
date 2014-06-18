@@ -80,7 +80,7 @@ CONFIG(debug, debug|release){
                           -Wformat=2 -Wimport \
                           -Winvalid-pch -Wunsafe-loop-optimizations -Wlong-long -Wmissing-format-attribute \
                           -Wmissing-include-dirs -Wpacked -Wredundant-decls -Winline \
-                          -Wswitch-default -Wswitch-enum -Wuninitialized -Wvariadic-macros \
+                          -Wswitch-default -Wuninitialized -Wvariadic-macros \
                           -Wlogical-op -Wnoexcept -Wmissing-noreturn -Wpointer-arith\
                           -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -gdwarf-3 \
                           -ftrapv
