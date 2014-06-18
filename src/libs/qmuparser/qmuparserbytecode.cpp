@@ -355,37 +355,6 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                         bOptimized = true;
                     }
                     break;
-                case cmNEQ:
-                case cmEQ:
-                case cmLOR:
-                case cmASSIGN:
-                case cmBO:
-                case cmBC:
-                case cmIF:
-                case cmELSE:
-                case cmENDIF:
-                case cmARG_SEP:
-                case cmVAR:
-                case cmVAL:
-                case cmVARPOW2:
-                case cmVARPOW3:
-                case cmVARPOW4:
-                case cmVARMUL:
-                case cmPOW2:
-                case cmFUNC:
-                case cmFUNC_STR:
-                case cmFUNC_BULK:
-                case cmSTRING:
-                case cmOPRT_BIN:
-                case cmOPRT_POSTFIX:
-                case cmOPRT_INFIX:
-                case cmEND:
-                case cmUNKNOWN:
-                case cmLE:
-                case cmGE:
-                case cmLT:
-                case cmGT:
-                case cmLAND:
                 default:
                     break;
 

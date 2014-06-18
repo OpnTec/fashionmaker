@@ -335,40 +335,6 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
             case cmOPRT_INFIX:
                 Error(ecINVALID_INFIX_IDENT, -1, a_sName);
                 break;
-            case cmLE:
-            case cmGE:
-            case cmNEQ:
-            case cmEQ:
-            case cmLT:
-            case cmGT:
-            case cmADD:
-            case cmSUB:
-            case cmMUL:
-            case cmDIV:
-            case cmPOW:
-            case cmLAND:
-            case cmLOR:
-            case cmASSIGN:
-            case cmBO:
-            case cmBC:
-            case cmIF:
-            case cmELSE:
-            case cmENDIF:
-            case cmARG_SEP:
-            case cmVAR:
-            case cmVAL:
-            case cmVARPOW2:
-            case cmVARPOW3:
-            case cmVARPOW4:
-            case cmVARMUL:
-            case cmPOW2:
-            case cmFUNC:
-            case cmFUNC_STR:
-            case cmFUNC_BULK:
-            case cmSTRING:
-            case cmOPRT_BIN:
-            case cmEND:
-            case cmUNKNOWN:
             default:
                 Error(ecINVALID_NAME, -1, a_sName);
                 break;
