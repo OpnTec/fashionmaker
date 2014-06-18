@@ -595,22 +595,6 @@ int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
         case cmOPRT_INFIX:
         case cmOPRT_BIN:
             return a_Tok.GetPri();
-        case cmBO:
-        case cmBC:
-        case cmENDIF:
-        case cmVAR:
-        case cmVAL:
-        case cmVARPOW2:
-        case cmVARPOW3:
-        case cmVARPOW4:
-        case cmVARMUL:
-        case cmPOW2:
-        case cmFUNC:
-        case cmFUNC_STR:
-        case cmFUNC_BULK:
-        case cmSTRING:
-        case cmOPRT_POSTFIX:
-        case cmUNKNOWN:
         default:
             Error(ecINTERNAL_ERROR, 5);
             return 999;
@@ -644,27 +628,6 @@ EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) 
             return oaRIGHT;
         case cmOPRT_BIN:
             return a_Tok.GetAssociativity();
-        case cmBO:
-        case cmBC:
-        case cmIF:
-        case cmELSE:
-        case cmENDIF:
-        case cmARG_SEP:
-        case cmVAR:
-        case cmVAL:
-        case cmVARPOW2:
-        case cmVARPOW3:
-        case cmVARPOW4:
-        case cmVARMUL:
-        case cmPOW2:
-        case cmFUNC:
-        case cmFUNC_STR:
-        case cmFUNC_BULK:
-        case cmSTRING:
-        case cmOPRT_POSTFIX:
-        case cmOPRT_INFIX:
-        case cmEND:
-        case cmUNKNOWN:
         default:
             return oaNONE;
     }
