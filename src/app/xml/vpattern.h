@@ -130,7 +130,7 @@ signals:
     /**
      * @brief patternChanged emit if we have unsaved change.
      */
-    void           patternChanged();
+    void           patternChanged(bool saved);
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
@@ -199,6 +199,14 @@ private:
     void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();
     void           GarbageCollector();
+    void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
+    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
+                                          qreal &my, QString &typeLine);
+    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
+                                          qreal &my);
+    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
+    void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
+                                           quint32 &idTool);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
