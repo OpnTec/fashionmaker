@@ -142,7 +142,6 @@ CONFIG(debug, debug|release){
             -Wlong-long \
             -Wmissing-format-attribute \
             -Wswitch-default \
-            -Wswitch-enum \
             -Wuninitialized \
             -Wvariadic-macros \
             -Wlogical-op \
