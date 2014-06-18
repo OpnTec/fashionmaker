@@ -932,58 +932,26 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
     while (stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmIF)
     {
         token_type tok = stOpt.top();
-        switch (tok.GetCode())
+        const ECmdCode code = tok.GetCode();
+
+        if ((code >= cmLE && code <= cmASSIGN) || code == cmOPRT_INFIX || code == cmOPRT_BIN)
         {
-            case cmOPRT_INFIX:
-            case cmOPRT_BIN:
-            case cmLE:
-            case cmGE:
-            case cmNEQ:
-            case cmEQ:
-            case cmLT:
-            case cmGT:
-            case cmADD:
-            case cmSUB:
-            case cmMUL:
-            case cmDIV:
-            case cmPOW:
-            case cmLAND:
-            case cmLOR:
-            case cmASSIGN:
-                if (stOpt.top().GetCode()==cmOPRT_INFIX)
-                {
-                    ApplyFunc(stOpt, stVal, 1);
-                }
-                else
-                {
-                    ApplyBinOprt(stOpt, stVal);
-                }
-                break;
-            case cmELSE:
-                ApplyIfElse(stOpt, stVal);
-                break;
-            case cmBO:
-            case cmBC:
-            case cmIF:
-            case cmENDIF:
-            case cmARG_SEP:
-            case cmVAR:
-            case cmVAL:
-            case cmVARPOW2:
-            case cmVARPOW3:
-            case cmVARPOW4:
-            case cmVARMUL:
-            case cmPOW2:
-            case cmFUNC:
-            case cmFUNC_STR:
-            case cmFUNC_BULK:
-            case cmSTRING:
-            case cmOPRT_POSTFIX:
-            case cmEND:
-            case cmUNKNOWN:
-            default:
-                Error(ecINTERNAL_ERROR);
-                break;
+            if (stOpt.top().GetCode()==cmOPRT_INFIX)
+            {
+                ApplyFunc(stOpt, stVal, 1);
+            }
+            else
+            {
+                ApplyBinOprt(stOpt, stVal);
+            }
+        }
+        else if (code == cmELSE)
+        {
+            ApplyIfElse(stOpt, stVal);
+        }
+        else
+        {
+            Error(ecINTERNAL_ERROR);
         }
     }
 }
