@@ -170,27 +170,6 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
             name = splPath->name();
             break;
         }
-        case (Tool::ArrowTool):
-        case (Tool::SinglePointTool):
-        case (Tool::EndLineTool):
-        case (Tool::LineTool):
-        case (Tool::AlongLineTool):
-        case (Tool::ShoulderPointTool):
-        case (Tool::NormalTool):
-        case (Tool::BisectorTool):
-        case (Tool::LineIntersectTool):
-        case (Tool::SplineTool):
-        case (Tool::CutSplineTool):
-        case (Tool::CutArcTool):
-        case (Tool::ArcTool):
-        case (Tool::SplinePathTool):
-        case (Tool::CutSplinePathTool):
-        case (Tool::PointOfContact):
-        case (Tool::DetailTool):
-        case (Tool::Height):
-        case (Tool::Triangle):
-        case (Tool::PointOfIntersection):
-        case (Tool::UnionDetails):
         default:
             qDebug()<<"Got wrong tools. Ignore.";
             break;
