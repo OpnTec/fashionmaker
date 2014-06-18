@@ -437,19 +437,18 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Eval evaluate formula and show result
- * @param edit lineEdit of formula
+ * @param text formula
  * @param flag flag state of formula
  * @param timer timer of formula
  * @param label label for signal error
  */
-void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label)
 {
-    SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
     QPalette palette = labelEditFormula->palette();
-    if (edit->text().isEmpty())
+    if (text.isEmpty())
     {
         flag = false;
         palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
@@ -458,66 +457,8 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     {
         try
         {
-            const QString formula = qApp->FormulaFromUser(edit->text());
-            Calculator *cal = new Calculator(data);
-            const qreal result = cal->EvalFormula(formula);
-            delete cal;
-
-            QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                               QApplication::applicationName());
-            bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
-
-            if (osSeparatorValue)
-            {
-                QLocale loc = QLocale::system();
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-            }
-            else
-            {
-                QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-            }
-            flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
-            emit ToolTip("");
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            label->setText(tr("Error"));
-            flag = false;
-            palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-            emit ToolTip("Parser error: "+e.GetMsg());
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
-    CheckState();
-    timer->stop();
-    labelEditFormula->setPalette(palette);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label)
-{
-    SCASSERT(edit != nullptr);
-    SCASSERT(timer != nullptr);
-    SCASSERT(label != nullptr);
-    SCASSERT(labelEditFormula != nullptr);
-    QPalette palette = labelEditFormula->palette();
-    if (edit->toPlainText().isEmpty())
-    {
-        flag = false;
-        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-    }
-    else
-    {
-        try
-        {
-            // Replace line return with spaces for calc
-            QString formula = edit->toPlainText();
+            // Replace line return with spaces for calc if exist
+            QString formula = text;
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
             Calculator *cal = new Calculator(data);
@@ -863,7 +804,7 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    Eval(plainTextEditFormula, flagFormula, timerFormula, labelResultCalculation);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
