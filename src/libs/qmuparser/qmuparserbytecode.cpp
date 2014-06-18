@@ -502,39 +502,6 @@ void QmuParserByteCode::Finalize()
                 idx = stElse.pop();
                 m_vRPN[idx].Oprt.offset = i - idx;
                 break;
-            case cmLE:
-            case cmGE:
-            case cmNEQ:
-            case cmEQ:
-            case cmLT:
-            case cmGT:
-            case cmADD:
-            case cmSUB:
-            case cmMUL:
-            case cmDIV:
-            case cmPOW:
-            case cmLAND:
-            case cmLOR:
-            case cmASSIGN:
-            case cmBO:
-            case cmBC:
-            case cmARG_SEP:
-            case cmVAR:
-            case cmVAL:
-            case cmVARPOW2:
-            case cmVARPOW3:
-            case cmVARPOW4:
-            case cmVARMUL:
-            case cmPOW2:
-            case cmFUNC:
-            case cmFUNC_STR:
-            case cmFUNC_BULK:
-            case cmSTRING:
-            case cmOPRT_BIN:
-            case cmOPRT_POSTFIX:
-            case cmOPRT_INFIX:
-            case cmEND:
-            case cmUNKNOWN:
             default:
                 break;
         }

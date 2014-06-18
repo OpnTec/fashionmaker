@@ -1858,28 +1858,6 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
                 case cmENDIF:
                     qDebug() << "ENDIF\n";
                     break;
-                case cmLE:
-                case cmGE:
-                case cmNEQ:
-                case cmEQ:
-                case cmLT:
-                case cmGT:
-                case cmADD:
-                case cmSUB:
-                case cmMUL:
-                case cmDIV:
-                case cmPOW:
-                case cmLAND:
-                case cmLOR:
-                case cmASSIGN:
-                case cmARG_SEP:
-                case cmVARPOW2:
-                case cmVARPOW3:
-                case cmVARPOW4:
-                case cmVARMUL:
-                case cmPOW2:
-                case cmSTRING:
-                case cmOPRT_POSTFIX:
                 default:
                     qDebug() << stOprt.top().GetCode() << " ";
                     break;
