@@ -40,13 +40,13 @@
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0),
-    formulaBaseHeight(ui->plainTextEditFormula->height())
+    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;

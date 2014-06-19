@@ -40,12 +40,13 @@
  */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
-      splinePathId(0), formulaBaseHeight(ui->plainTextEditFormula->height())
+      splinePathId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancel(ui);
     flagFormula = false;

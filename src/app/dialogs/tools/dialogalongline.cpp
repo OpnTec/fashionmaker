@@ -39,12 +39,13 @@
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(ui->plainTextEditFormula->height())
+      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;

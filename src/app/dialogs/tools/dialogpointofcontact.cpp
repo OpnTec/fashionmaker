@@ -39,12 +39,13 @@
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()), radius(QString()),
-      center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(ui->plainTextEditFormula->height())
+      center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;

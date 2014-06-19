@@ -31,12 +31,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()),
-      formulaBaseHeight(ui->plainTextEditFormula->height())
+    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancel(ui);
     flagFormula = false;

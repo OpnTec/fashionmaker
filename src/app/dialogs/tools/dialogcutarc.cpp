@@ -40,12 +40,13 @@
  */
 DialogCutArc::DialogCutArc(const VContainer *data, QWidget *parent)
     : DialogTool(data, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0),
-      formulaBaseHeight(ui->plainTextEditFormula->height())
+      formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
