@@ -37,18 +37,15 @@
  */
 DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
+      formula(QString()), angle(0), firstPointId(0), secondPointId(0),
+      formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+
     InitOkCancelApply(ui);
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
-
     flagFormula = false;
     flagName = false;
     CheckState();

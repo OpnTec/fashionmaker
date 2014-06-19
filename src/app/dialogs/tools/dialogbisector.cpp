@@ -40,16 +40,13 @@
  */
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0), formulaBaseHeight(0)
+      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0),
+      formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -58,8 +55,8 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxPoints(ui->comboBoxThirdPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxPoints(ui->comboBoxThirdPoint);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);

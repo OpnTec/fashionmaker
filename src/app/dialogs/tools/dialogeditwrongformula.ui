@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="labelFormula">
+      <widget class="QLabel" name="labelEditFormula">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -88,7 +88,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
+        <iconset>
          <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
        </property>
        <property name="iconSize">
@@ -120,7 +120,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelResult">
+      <widget class="QLabel" name="labelResultCalculation">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>

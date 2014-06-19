@@ -31,19 +31,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
+    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()),
+      formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResult;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelFormula;
+    InitFormulaUI(ui);
 
     InitOkCancel(ui);
     flagFormula = false;
     CheckState();
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);

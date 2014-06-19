@@ -44,7 +44,8 @@
 DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()),
-      f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0)
+      f2(QString()), formulaBaseHeight(ui->plainTextEditFormula->height()),
+      formulaBaseHeightF1(ui->plainTextEditF1->height()), formulaBaseHeightF2(ui->plainTextEditF2->height())
 {
     ui->setupUi(this);
 
@@ -62,10 +63,6 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
 
     InitOkCancelApply(ui);
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
-    this->formulaBaseHeightF1=ui->plainTextEditF1->height();
-    this->formulaBaseHeightF2=ui->plainTextEditF2->height();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 

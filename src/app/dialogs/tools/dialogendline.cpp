@@ -40,16 +40,12 @@
  */
 DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()), formula(QString()),
-      angle(0), basePointId(0), formulaBaseHeight(0)
+      angle(0), basePointId(0), formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;

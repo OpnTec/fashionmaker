@@ -40,21 +40,17 @@
  */
 DialogCutSpline::DialogCutSpline(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogCutSpline), pointName(QString()), formula(QString()), splineId(0),
-      formulaBaseHeight(0)
+      formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCancel(ui);
 
+    InitOkCancel(ui);
     flagFormula = false;
     flagName = false;
     CheckState();
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
 
     FillComboBoxSplines(ui->comboBoxSpline);
 

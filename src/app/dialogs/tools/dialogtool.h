@@ -276,6 +276,17 @@ protected:
         SCASSERT(bCancel != nullptr);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
     }
+    template <typename T>
+    /**
+     * @brief InitFormulaUI initialise ui object for formula fild
+     * @param ui Dialog container
+     */
+    void             InitFormulaUI(T *ui)
+    {
+        labelResultCalculation = ui->labelResultCalculation;
+        plainTextEditFormula = ui->plainTextEditFormula;
+        labelEditFormula = ui->labelEditFormula;
+    }
     /**
      * @brief associatedTool vdrawtool associated with opened dialog.
      */

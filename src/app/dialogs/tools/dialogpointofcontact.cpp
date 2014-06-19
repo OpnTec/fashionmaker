@@ -39,40 +39,21 @@
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()), radius(QString()),
-      center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(0)
+      center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(ui->plainTextEditFormula->height())
 {
     ui->setupUi(this);
     InitVariables(ui);
-    listWidget = ui->listWidget;
-    labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
 
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
     InitOkCancelApply(ui);
-
-    /*    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
-    connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
-    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCansel != nullptr);
-    connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
-    */
     flagFormula = false;
     flagName = false;
     CheckState();
 
-    FillComboBoxPoints(ui->comboBoxCenter);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+    FillComboBoxPoints(ui->comboBoxCenter);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
