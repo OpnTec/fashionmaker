@@ -96,7 +96,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -189,7 +189,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down"/>
+        <iconset theme="go-down">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -279,7 +281,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -372,7 +374,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down"/>
+        <iconset theme="go-down">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -462,7 +466,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -555,7 +559,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down"/>
+        <iconset theme="go-down">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
