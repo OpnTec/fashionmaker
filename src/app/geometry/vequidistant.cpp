@@ -374,7 +374,7 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
 {
-    Q_ASSERT(points.size() > 0);
+    SCASSERT(points.size() > 0);
     QVector<QPointF> reversePoints;
     for (qint32 i = points.size() - 1; i >= 0; --i)
     {
@@ -386,7 +386,7 @@ QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
-    Q_ASSERT(width > 0);
+    SCASSERT(width > 0);
     QVector<QPointF> points;
     if (line1.p2() != line2.p2())
     {
@@ -436,7 +436,7 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
 {
-    Q_ASSERT(width > 0);
+    SCASSERT(width > 0);
     QLineF paralel = QLineF (SingleParallelPoint(line, 90, width), SingleParallelPoint(QLineF(line.p2(), line.p1()),
                                                                                        -90, width));
     return paralel;
@@ -445,7 +445,7 @@ QLineF VEquidistant::ParallelLine(const QLineF &line, qreal width)
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width)
 {
-    Q_ASSERT(width > 0);
+    SCASSERT(width > 0);
     QLineF pLine = line;
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );

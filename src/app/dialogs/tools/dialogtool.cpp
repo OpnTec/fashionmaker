@@ -569,7 +569,7 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
     qint32 index = box->currentIndex();
-    Q_ASSERT(index != -1);
+    SCASSERT(index != -1);
     if (index != -1)
     {
         return qvariant_cast<quint32>(box->itemData(index));
