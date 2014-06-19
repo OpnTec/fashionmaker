@@ -31,7 +31,6 @@
 
 #include "dialogtool.h"
 
-#define DIALOGBISECTOR_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogBisector;

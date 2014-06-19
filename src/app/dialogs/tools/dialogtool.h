@@ -39,7 +39,6 @@ class QLabel;
 class QRadioButton;
 class QComboBox;
 class QListWidgetItem;
-class QLineEdit;
 class QListWidget;
 class VContainer;
 class QPlainTextEdit;
@@ -134,8 +133,7 @@ protected:
     /** @brief spinBoxAngle spinbox for angle */
     QDoubleSpinBox   *spinBoxAngle;
 
-    /** @brief lineEditFormula linEdit for formula */
-    QLineEdit        *lineEditFormula;
+    /** @brief plainTextEditFormula formula */
     QPlainTextEdit   *plainTextEditFormula;
     /** @brief listWidget listWidget with variables */
     QListWidget      *listWidget;
@@ -205,6 +203,7 @@ protected:
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
     template <typename T>
     void             InitArrow(T *ui)
     {

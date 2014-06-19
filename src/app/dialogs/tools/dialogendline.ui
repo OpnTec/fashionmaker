@@ -189,8 +189,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/theme.qrc">
-         <normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</iconset>
+        <iconset theme="go-down"/>
        </property>
        <property name="iconSize">
         <size>
@@ -677,7 +676,6 @@
  </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
-  <include location="../../share/resources/theme.qrc"/>
  </resources>
  <connections>
   <connection>

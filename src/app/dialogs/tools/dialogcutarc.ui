@@ -144,6 +144,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_formula">
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditFormula">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -173,9 +179,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down.png">
-         <normaloff/>
-        </iconset>
+        <iconset theme="go-down"/>
        </property>
        <property name="iconSize">
         <size>

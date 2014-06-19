@@ -31,8 +31,6 @@
 
 #include "dialogtool.h"
 
-
-#define DIALOGENDLINE_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogEndLine;

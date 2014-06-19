@@ -41,7 +41,6 @@
 #include <QShowEvent>
 #include <QComboBox>
 #include <QListWidgetItem>
-#include <QLineEdit>
 #include <QTextCursor>
 #include <QPlainTextEdit>
 #include <QLabel>
@@ -51,6 +50,8 @@
 #include <QListWidget>
 #include <QRadioButton>
 
+#define DIALOGARC_MAX_FORMULA_HEIGHT 64
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTool create dialog
@@ -59,7 +60,7 @@
  */
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
-      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr),
+      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), plainTextEditFormula(nullptr),
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
@@ -385,12 +386,6 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
     QTextCursor cursor = plainTextEdit->textCursor();
     cursor.insertText(item->text());
     plainTextEdit->setTextCursor(cursor);
-    /*
-    int pos = lineEdit->cursorPosition();
-    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
-    lineEdit->setFocus();
-    lineEdit->setCursorPosition(pos + item->text().size());
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -602,6 +597,27 @@ bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight)
+{
+    SCASSERT(formula != nullptr);
+    SCASSERT(buttonGrowLength != nullptr)
+    if (formula->height() < DIALOGARC_MAX_FORMULA_HEIGHT)
+    {
+        formula->setFixedHeight(DIALOGARC_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        buttonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                                                   QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       formula->setFixedHeight(formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       buttonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillList fill combobox list
  * @param box combobox
@@ -700,7 +716,7 @@ void DialogTool::DialogRejected()
  */
 void DialogTool::FormulaChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
     if (edit)
     {
         ValFormulaChanged(flagFormula, edit, timerFormula);
@@ -897,12 +913,6 @@ void DialogTool::PutVal(QListWidgetItem *item)
     QTextCursor cursor = plainTextEditFormula->textCursor();
     cursor.insertText(item->text());
     plainTextEditFormula->setTextCursor(cursor);
-    /*int pos = plainTextEditFormula->cursorPosition();
-    lineEditFormula->setText(lineEditFormula->text().insert(lineEditFormula->cursorPosition(),
-                                                            item->text()));
-    lineEditFormula->setFocus();
-    lineEditFormula->setCursorPosition(pos + item->text().size());
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------

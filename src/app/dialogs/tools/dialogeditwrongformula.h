@@ -56,6 +56,10 @@ public:
 public slots:
     virtual void DialogAccepted();
     virtual void DialogRejected();
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
 protected:
     virtual void CheckState();
 private:
@@ -64,6 +68,9 @@ private:
 
     /** @brief formula string with formula */
     QString           formula;
+
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeight;
 };
 
 

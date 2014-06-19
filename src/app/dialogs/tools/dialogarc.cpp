@@ -44,9 +44,13 @@
 DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()),
-      f2(QString()), formulaBaseHeight(0)
+      f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0)
 {
     ui->setupUi(this);
+
+    InitVariables(ui);
+
+    plainTextEditFormula = ui->plainTextEditFormula;
 
     timerRadius = new QTimer(this);
     connect(timerRadius, &QTimer::timeout, this, &DialogArc::EvalRadius);
@@ -60,12 +64,12 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     InitOkCancelApply(ui);
 
     this->formulaBaseHeight=ui->plainTextEditFormula->height();
+    this->formulaBaseHeightF1=ui->plainTextEditF1->height();
+    this->formulaBaseHeightF2=ui->plainTextEditF2->height();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
 
     CheckState();
-
-    InitVariables(ui);
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
@@ -76,31 +80,30 @@ DialogArc::DialogArc(const VContainer *data, QWidget *parent)
     connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF2);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
-    connect(ui->lineEditF1, &QLineEdit::textChanged, this, &DialogArc::F1Changed);
-    connect(ui->lineEditF2, &QLineEdit::textChanged, this, &DialogArc::F2Changed);
-    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
+    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, &DialogArc::F2Changed);
 
-    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
+    connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
+    connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DeployFormulaTextEdit()
 {
-    if (ui->plainTextEditFormula->height() < DIALOGARC_MAX_FORMULA_HEIGHT)
-    {
-        ui->plainTextEditFormula->setFixedHeight(DIALOGARC_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
-                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
-    }
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::DeployF1TextEdit()
+{
+    DeployFormula(ui->plainTextEditF1, ui->pushButtonGrowLengthF1, formulaBaseHeightF1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::DeployF2TextEdit()
+{
+    DeployFormula(ui->plainTextEditF2, ui->pushButtonGrowLengthF2, formulaBaseHeightF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,8 +130,13 @@ void DialogArc::SetCenter(const quint32 &value)
  */
 void DialogArc::SetF2(const QString &value)
 {
-    f2 = value;
-    ui->lineEditF2->setText(f2);
+    f2 = qApp->FormulaToUser(value);
+    // increase height if needed.
+    if (f2.length() > 80)
+    {
+        this->DeployF2TextEdit();
+    }
+    ui->plainTextEditF2->setPlainText(f2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,8 +146,13 @@ void DialogArc::SetF2(const QString &value)
  */
 void DialogArc::SetF1(const QString &value)
 {
-    f1 = value;
-    ui->lineEditF1->setText(f1);
+    f1 = qApp->FormulaToUser(value);
+    // increase height if needed.
+    if (f1.length() > 80)
+    {
+        this->DeployF1TextEdit();
+    }
+    ui->plainTextEditF1->setPlainText(f1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,8 +210,10 @@ void DialogArc::SaveData()
 {
     radius = ui->plainTextEditFormula->toPlainText();
     radius.replace("\n", " ");
-    f1 = ui->lineEditF1->text();
-    f2 = ui->lineEditF2->text();
+    f1 = ui->plainTextEditF1->toPlainText();
+    f1.replace("\n", " ");
+    f2 = ui->plainTextEditF2->toPlainText();
+    f2.replace("\n", " ");
     center = getCurrentObjectId(ui->comboBoxBasePoint);
 }
 
@@ -239,7 +254,7 @@ void DialogArc::PutRadius()
  */
 void DialogArc::PutF1()
 {
-    PutValHere(ui->lineEditF1, ui->listWidget);
+    PutValHere(ui->plainTextEditF1, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -248,7 +263,7 @@ void DialogArc::PutF1()
  */
 void DialogArc::PutF2()
 {
-    PutValHere(ui->lineEditF2, ui->listWidget);
+    PutValHere(ui->plainTextEditF2, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,7 +293,7 @@ void DialogArc::RadiusChanged()
 void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
-    ValFormulaChanged(flagF1, ui->lineEditF1, timerF1);
+    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -288,7 +303,7 @@ void DialogArc::F1Changed()
 void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
-    ValFormulaChanged(flagF2, ui->lineEditF2, timerF2);
+    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -320,7 +335,7 @@ void DialogArc::EvalRadius()
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
-    Eval(ui->lineEditF1->text(), flagF1, timerF1, ui->labelResultF1);
+    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,7 +345,7 @@ void DialogArc::EvalF1()
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
-    Eval(ui->lineEditF2->text(), flagF2, timerF2, ui->labelResultF2);
+    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
