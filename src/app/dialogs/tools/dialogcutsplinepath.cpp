@@ -40,14 +40,13 @@
  */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
-      splinePathId(0)
+      splinePathId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    lineEditFormula = ui->lineEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancel(ui);
     flagFormula = false;
@@ -60,7 +59,8 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSplinePath::PutVal);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogCutSplinePath::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSplinePath::NamePointChanged);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogCutSplinePath::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSplinePath::FormulaChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSplinePath::DeployFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,13 @@ void DialogCutSplinePath::setPointName(const QString &value)
 void DialogCutSplinePath::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed. TODO : see if I can get the max number of caracters in one line
+    // of this PlainTextEdit to change 80 to this value
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -126,7 +132,14 @@ void DialogCutSplinePath::ChoosedObject(quint32 id, const SceneObject &type)
 void DialogCutSplinePath::DialogAccepted()
 {
     pointName = ui->lineEditNamePoint->text();
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n", " ");
     splinePathId = getCurrentObjectId(ui->comboBoxSplinePath);
     emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::DeployFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }

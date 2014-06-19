@@ -42,33 +42,27 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
       formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitVariables(ui);
+    InitFormulaUI(ui);
+    labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
-
+    InitOkCancelApply(ui);
     flagFormula = false;
     flagName = false;
-    InitOkCancelApply(ui);
     CheckState();
 
-    FillComboBoxTypeLine(ui->comboBoxLineType);
-    ui->comboBoxLineType->setCurrentIndex(0);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+    FillComboBoxTypeLine(ui->comboBoxLineType);
+    ui->comboBoxLineType->setCurrentIndex(0);
 
-    labelEditNamePoint = ui->labelEditNamePoint;
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogAlongLine::EvalFormula);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
-    InitVariables(ui);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
-
-    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                              QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -80,20 +74,7 @@ void DialogAlongLine::FormulaTextChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::DeployFormulaTextEdit()
 {
-    if (ui->plainTextEditFormula->height() < DIALOGALONLINE_MAX_FORMULA_HEIGHT)
-    {
-        ui->plainTextEditFormula->setFixedHeight(DIALOGALONLINE_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
-                                  QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                                   QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
-    }
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

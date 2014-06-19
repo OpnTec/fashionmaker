@@ -92,27 +92,6 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
             case (Tool::NodeSplinePath):
                 InitTool<VNodeSplinePath>(scene, detail.at(i));
                 break;
-            case (Tool::ArrowTool):
-            case (Tool::SinglePointTool):
-            case (Tool::EndLineTool):
-            case (Tool::LineTool):
-            case (Tool::AlongLineTool):
-            case (Tool::ShoulderPointTool):
-            case (Tool::NormalTool):
-            case (Tool::BisectorTool):
-            case (Tool::LineIntersectTool):
-            case (Tool::SplineTool):
-            case (Tool::CutSplineTool):
-            case (Tool::CutArcTool):
-            case (Tool::ArcTool):
-            case (Tool::SplinePathTool):
-            case (Tool::CutSplinePathTool):
-            case (Tool::PointOfContact):
-            case (Tool::DetailTool):
-            case (Tool::Height):
-            case (Tool::Triangle):
-            case (Tool::PointOfIntersection):
-            case (Tool::UnionDetails):
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
                 break;
@@ -198,27 +177,6 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
                 VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
             }
             break;
-            case (Tool::ArrowTool):
-            case (Tool::SinglePointTool):
-            case (Tool::EndLineTool):
-            case (Tool::LineTool):
-            case (Tool::AlongLineTool):
-            case (Tool::ShoulderPointTool):
-            case (Tool::NormalTool):
-            case (Tool::BisectorTool):
-            case (Tool::LineIntersectTool):
-            case (Tool::SplineTool):
-            case (Tool::CutSplineTool):
-            case (Tool::CutArcTool):
-            case (Tool::ArcTool):
-            case (Tool::SplinePathTool):
-            case (Tool::CutSplinePathTool):
-            case (Tool::PointOfContact):
-            case (Tool::DetailTool):
-            case (Tool::Height):
-            case (Tool::Triangle):
-            case (Tool::PointOfIntersection):
-            case (Tool::UnionDetails):
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
@@ -511,27 +469,6 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
         case (Tool::NodeSplinePath):
             doc->SetAttribute(nod, AttrType, NodeSplinePath);
             break;
-        case (Tool::ArrowTool):
-        case (Tool::SinglePointTool):
-        case (Tool::EndLineTool):
-        case (Tool::LineTool):
-        case (Tool::AlongLineTool):
-        case (Tool::ShoulderPointTool):
-        case (Tool::NormalTool):
-        case (Tool::BisectorTool):
-        case (Tool::LineIntersectTool):
-        case (Tool::SplineTool):
-        case (Tool::CutSplineTool):
-        case (Tool::CutArcTool):
-        case (Tool::ArcTool):
-        case (Tool::SplinePathTool):
-        case (Tool::CutSplinePathTool):
-        case (Tool::PointOfContact):
-        case (Tool::DetailTool):
-        case (Tool::Height):
-        case (Tool::Triangle):
-        case (Tool::PointOfIntersection):
-        case (Tool::UnionDetails):
         default:
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;

@@ -96,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
+    connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
@@ -1565,14 +1566,8 @@ void MainWindow::FullParseFile()
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error parsing file."));
-        msgBox.setInformativeText("std::bad_alloc");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
+        QMessageBox::critical(this, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."), QMessageBox::Ok,
+                              QMessageBox::Ok);
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif

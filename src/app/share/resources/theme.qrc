@@ -40,5 +40,8 @@
         <file alias="24x24/actions/edit-redo.png">icons/win.icon.theme/24x24/actions/edit-redo.png</file>
         <file alias="32x32/actions/edit-redo.png">icons/win.icon.theme/32x32/actions/edit-redo.png</file>
         <file alias="32x32/actions/edit-undo.png">icons/win.icon.theme/32x32/actions/edit-undo.png</file>
+        <file alias="16x16/actions/go-down.png">icons/win.icon.theme/16x16/actions/go-down.png</file>
+        <file alias="24x24/actions/go-down.png">icons/win.icon.theme/24x24/actions/go-down.png</file>
+        <file alias="32x32/actions/go-down.png">icons/win.icon.theme/32x32/actions/go-down.png</file>
     </qresource>
 </RCC>

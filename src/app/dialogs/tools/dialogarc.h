@@ -31,7 +31,6 @@
 
 #include "dialogtool.h"
 
-#define DIALOGARC_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogArc;
@@ -69,6 +68,8 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void DeployFormulaTextEdit();
+    void DeployF1TextEdit();
+    void DeployF2TextEdit();
     virtual void  ValChenged(int row);
     void          PutRadius();
     void          PutF1();
@@ -118,6 +119,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int           formulaBaseHeight;
+    int           formulaBaseHeightF1;
+    int           formulaBaseHeightF2;
 
     void          EvalRadius();
     void          EvalF1();

@@ -32,7 +32,6 @@
 #include "ui_dialogpointofcontact.h"
 #include "dialogtool.h"
 
-#define DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT 64
 namespace Ui
 {
     class DialogPointOfContact;

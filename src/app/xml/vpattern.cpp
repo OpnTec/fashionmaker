@@ -214,7 +214,7 @@ bool VPattern::SetNameDraw(const QString &name)
     {
         nameActivDraw = name;
         element.setAttribute(AttrName, nameActivDraw);
-        emit patternChanged();
+        emit patternChanged(false);
         emit ChangedNameDraw(oldName, nameActivDraw);
         return true;
     }
@@ -558,7 +558,7 @@ void VPattern::SetPath(const QString &path)
     if (element.isElement())
     {
         SetAttribute(element, AttrPath, path);
-        emit patternChanged();
+        emit patternChanged(false);
     }
     else
     {
@@ -687,14 +687,8 @@ void VPattern::LiteParseTree()
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
-        QMessageBox msgBox;
-        msgBox.setWindowTitle(tr("Error!"));
-        msgBox.setText(tr("Error parsing file."));
-        msgBox.setInformativeText("std::bad_alloc");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
+        QMessageBox::critical(nullptr, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."), QMessageBox::Ok,
+                              QMessageBox::Ok);
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
@@ -712,7 +706,7 @@ void VPattern::LiteParseTree()
  */
 void VPattern::haveLiteChange()
 {
-    emit patternChanged();
+    emit patternChanged(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -943,6 +937,29 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx, qreal &my,
+                                      QString &typeLine)
+{
+    PointsCommonAttributes(domElement, id, name, mx, my);
+    typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx, qreal &my)
+{
+    PointsCommonAttributes(domElement, id, mx, my);
+    name = GetParametrString(domElement, VAbstractTool::AttrName, "A");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my)
+{
+    ToolsCommonAttributes(domElement, id);
+    mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
+    my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParsePointElement parse point tag.
  * @param scene scene.
@@ -957,6 +974,11 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
 
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
 
     QStringList points{VToolSinglePoint::ToolType, VToolEndLine::ToolType, VToolAlongLine::ToolType,
                 VToolShoulderPoint::ToolType, VToolNormal::ToolType, VToolBisector::ToolType,
@@ -970,12 +992,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             VToolSinglePoint *spoint = 0;
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "A");
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const qreal x = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
                 const qreal y = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
 
                 data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
                 VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
@@ -1005,12 +1024,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 1: //VToolEndLine::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
 
@@ -1035,21 +1049,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 2: //VToolAlongLine::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
@@ -1073,21 +1080,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 3: //VToolShoulderPoint::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 p1Line = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
@@ -1112,21 +1112,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 4: //VToolNormal::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
@@ -1151,21 +1144,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 5: //VToolBisector::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
@@ -1190,19 +1176,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 6: //VToolLineIntersect::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const quint32 p1Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, "0");
                 const quint32 p2Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, "0");
                 const quint32 p1Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, "0");
@@ -1221,10 +1202,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 7: //VToolPointOfContact::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
                 QString f = radius;//need for saving fixed formula;
                 const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
@@ -1249,21 +1227,17 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 8: //VNodePoint::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                PointsCommonAttributes(domElement, id, mx, my);
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
                 data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
                                                     Draw::Modeling));
                 VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
@@ -1278,12 +1252,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 9: //VToolHeight::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
-                const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
-                                                           VAbstractTool::TypeLineLine);
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
                 const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
                 const quint32 p1LineId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
                 const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
@@ -1301,10 +1270,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 10: //VToolTriangle::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const quint32 axisP1Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, "0");
                 const quint32 axisP2Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, "0");
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
@@ -1323,10 +1289,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 11: //VToolPointOfIntersection::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
                 const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
 
@@ -1343,10 +1306,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
         case 12: //VToolCutSpline::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
@@ -1368,19 +1328,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 13: //VToolCutSplinePath::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
@@ -1403,19 +1358,14 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 14: //VToolCutArc::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const QString name = GetParametrString(domElement, VAbstractTool::AttrName, "");
-                const qreal mx = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx, "10.0"));
-                const qreal my = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy, "15.0"));
+                PointsCommonAttributes(domElement, id, name, mx, my);
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
                 QString f = formula;//need for saving fixed formula;
                 const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
@@ -1437,9 +1387,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
@@ -1461,9 +1409,10 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    quint32 id = 0;
     try
     {
-        const quint32 id = GetParametrId(domElement);
+        ToolsCommonAttributes(domElement, id);
         const quint32 firstPoint = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
         const quint32 secondPoint = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
         const QString typeLine = GetParametrString(domElement, VAbstractTool::AttrTypeLine,
@@ -1477,6 +1426,14 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject, quint32 &idTool)
+{
+    ToolsCommonAttributes(domElement, id);
+    idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
+    idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1494,6 +1451,10 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
+    quint32 id = 0;
+    quint32 idObject = 0;
+    quint32 idTool = 0;
+
     QStringList splines{VToolSpline::ToolType, VToolSplinePath::ToolType, VNodeSpline::ToolType,
                 VNodeSplinePath::ToolType};
     switch (splines.indexOf(type))
@@ -1501,7 +1462,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 0: //VToolSpline::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                ToolsCommonAttributes(domElement, id);
                 const quint32 point1 = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, "0");
                 const quint32 point4 = GetParametrUInt(domElement, VAbstractTool::AttrPoint4, "0");
                 const qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
@@ -1523,7 +1484,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 1: //VToolSplinePath::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                ToolsCommonAttributes(domElement, id);
                 const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
                 VSplinePath *path = new VSplinePath(kCurve);
 
@@ -1567,9 +1528,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 2: //VNodeSpline::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
-                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
+                SplinesCommonAttributes(domElement, id, idObject, idTool);
                 VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
                 spl->setIdObject(idObject);
                 spl->setMode(Draw::Modeling);
@@ -1586,9 +1545,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
         case 3: //VNodeSplinePath::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
-                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
-                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
+                SplinesCommonAttributes(domElement, id, idObject, idTool);
                 VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
                 path->setIdObject(idObject);
                 path->setMode(Draw::Modeling);
@@ -1623,6 +1580,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
+    quint32 id = 0;
     QStringList arcs{VToolArc::ToolType, VNodeArc::ToolType};
 
     switch (arcs.indexOf(type))
@@ -1630,7 +1588,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
         case 0: //VToolArc::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                ToolsCommonAttributes(domElement, id);
                 const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
                 const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
                 QString r = radius;//need for saving fixed formula;
@@ -1658,16 +1616,14 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-                QString message("Message:     " + e.GetMsg() + "\n"+
-                                "Expression:  " + e.GetExpr());
-                excep.AddMoreInformation(message);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
         case 1: //VNodeArc::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                ToolsCommonAttributes(domElement, id);
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
@@ -1704,6 +1660,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
+    quint32 id = 0;
     QStringList tools{VToolUnionDetails::ToolType};
 
     switch (tools.indexOf(type))
@@ -1711,7 +1668,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
         case 0: //VToolUnionDetails::ToolType
             try
             {
-                const quint32 id = GetParametrId(domElement);
+                ToolsCommonAttributes(domElement, id);
                 const quint32 indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
                 const quint32 indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
 
@@ -1887,6 +1844,12 @@ void VPattern::GarbageCollector()
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
+{
+    id = GetParametrId(domElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,24 +31,23 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString())
+    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResult;
-    lineEditFormula = ui->lineEditFormula;
-    labelEditFormula = ui->labelFormula;
+    InitFormulaUI(ui);
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancel(ui);
     flagFormula = false;
     CheckState();
 
-
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
     connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEditWrongFormula::EvalFormula);
-    connect(ui->lineEditFormula, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
+    connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
 
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
@@ -68,7 +67,8 @@ DialogEditWrongFormula::~DialogEditWrongFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::DialogAccepted()
 {
-    formula = ui->lineEditFormula->text();
+    formula = ui->plainTextEditFormula->toPlainText();
+    formula.replace("\n", " ");
     emit DialogClosed(QDialog::Accepted);
     accepted();
 }
@@ -78,6 +78,12 @@ void DialogEditWrongFormula::DialogRejected()
 {
     emit DialogClosed(QDialog::Rejected);
     rejected();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::DeployFormulaTextEdit()
+{
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,7 +97,13 @@ void DialogEditWrongFormula::CheckState()
 void DialogEditWrongFormula::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
-    ui->lineEditFormula->setText(formula);
+    // increase height if needed. TODO : see if I can get the max number of caracters in one line
+    // of this PlainTextEdit to change 80 to this value
+    if (formula.length() > 80)
+    {
+        this->DeployFormulaTextEdit();
+    }
+    ui->plainTextEditFormula->setPlainText(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -189,8 +189,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/theme.qrc">
-         <normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</normaloff>:/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png</iconset>
+        <iconset theme="go-down">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -331,7 +332,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRightUp.png</normaloff>:/icon/24x24/arrowRightUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRightUp.png</normaloff>:/icon/32x32/arrowRightUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -348,7 +349,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeftUp.png</normaloff>:/icon/24x24/arrowLeftUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeftUp.png</normaloff>:/icon/32x32/arrowLeftUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -365,7 +366,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeft.png</normaloff>:/icon/24x24/arrowLeft.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeft.png</normaloff>:/icon/32x32/arrowLeft.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -382,7 +383,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRight.png</normaloff>:/icon/24x24/arrowRight.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRight.png</normaloff>:/icon/32x32/arrowRight.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -405,7 +406,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowUp.png</normaloff>:/icon/24x24/arrowUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowUp.png</normaloff>:/icon/32x32/arrowUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -422,7 +423,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowDown.png</normaloff>:/icon/24x24/arrowDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowDown.png</normaloff>:/icon/32x32/arrowDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -439,7 +440,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeftDown.png</normaloff>:/icon/24x24/arrowLeftDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeftDown.png</normaloff>:/icon/32x32/arrowLeftDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -456,7 +457,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRightDown.png</normaloff>:/icon/24x24/arrowRightDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRightDown.png</normaloff>:/icon/32x32/arrowRightDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -677,7 +678,6 @@
  </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
-  <include location="../../share/resources/theme.qrc"/>
  </resources>
  <connections>
   <connection>

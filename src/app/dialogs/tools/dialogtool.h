@@ -39,7 +39,6 @@ class QLabel;
 class QRadioButton;
 class QComboBox;
 class QListWidgetItem;
-class QLineEdit;
 class QListWidget;
 class VContainer;
 class QPlainTextEdit;
@@ -134,8 +133,7 @@ protected:
     /** @brief spinBoxAngle spinbox for angle */
     QDoubleSpinBox   *spinBoxAngle;
 
-    /** @brief lineEditFormula linEdit for formula */
-    QLineEdit        *lineEditFormula;
+    /** @brief plainTextEditFormula formula */
     QPlainTextEdit   *plainTextEditFormula;
     /** @brief listWidget listWidget with variables */
     QListWidget      *listWidget;
@@ -194,8 +192,7 @@ protected:
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
-    void             Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label);
-    void             Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label);
+    void             Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label);
     void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const;
     void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
@@ -206,6 +203,7 @@ protected:
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
     template <typename T>
     void             InitArrow(T *ui)
     {
@@ -277,6 +275,17 @@ protected:
         QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
         SCASSERT(bCancel != nullptr);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+    }
+    template <typename T>
+    /**
+     * @brief InitFormulaUI initialise ui object for formula fild
+     * @param ui Dialog container
+     */
+    void             InitFormulaUI(T *ui)
+    {
+        labelResultCalculation = ui->labelResultCalculation;
+        plainTextEditFormula = ui->plainTextEditFormula;
+        labelEditFormula = ui->labelEditFormula;
     }
     /**
      * @brief associatedTool vdrawtool associated with opened dialog.

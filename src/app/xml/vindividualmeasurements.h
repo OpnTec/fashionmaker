@@ -29,7 +29,7 @@
 #ifndef VINDIVIDUALMEASUREMENTS_H
 #define VINDIVIDUALMEASUREMENTS_H
 
-#include "vdomdocument.h"
+#include "vabstractmeasurements.h"
 
 /*
    VIT_VERSION is (major << 16) + (minor << 8) + patch.
@@ -41,39 +41,38 @@
 
 enum class SexType : char { Male, Female };
 
-class VIndividualMeasurements:public VDomDocument
+class VIndividualMeasurements:public VAbstractMeasurements
 {
 public:
     VIndividualMeasurements(VContainer *data);
     virtual ~VIndividualMeasurements();
-    Unit    MUnit() const;
-    void    setUnit(const Unit &unit);
-    void    Measurements();
-    QString FamilyName() const;
-    void    setFamilyName(const QString &text);
-    QString GivenName() const;
-    void    setGivenName(const QString &text);
-    QDate   BirthDate() const;
-    void    setBirthDate(const QDate &date);
-    SexType Sex() const;
-    void    setSex(const SexType &sex);
-    QString Mail() const;
-    void    setMail(const QString &text);
-    static const QString AttrValue;
+    void         setUnit(const Unit &unit);
+    virtual void Measurements();
+    QString      FamilyName() const;
+    void         setFamilyName(const QString &text);
+    QString      GivenName() const;
+    void         setGivenName(const QString &text);
+    QDate        BirthDate() const;
+    void         setBirthDate(const QDate &date);
+    SexType      Sex() const;
+    void         setSex(const SexType &sex);
+    QString      Mail() const;
+    void         setMail(const QString &text);
+
     static const QString TagFamily_name;
     static const QString TagGiven_name;
     static const QString TagBirth_date;
     static const QString TagSex;
-    static const QString TagUnit;
     static const QString TagEmail;
     static const QString SexMale;
     static const QString SexFemale;
 
     static QString GenderToStr(const SexType &sex);
     static SexType StrToGender(const QString &sex);
+protected:
+    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
 private:
     Q_DISABLE_COPY(VIndividualMeasurements)
-    void             Measurement(const QString &tag);
 };
 
 #endif // VINDIVIDUALMEASUREMENTS_H

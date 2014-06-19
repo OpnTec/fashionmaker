@@ -43,36 +43,18 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
 {
     ui->setupUi(this);
     InitVariables(ui);
-    listWidget = ui->listWidget;
-    labelResultCalculation = ui->labelResultCalculation;
-    labelDescription = ui->labelDescription;
-    radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-    radioButtonStandardTable = ui->radioButtonStandardTable;
-    radioButtonIncrements = ui->radioButtonIncrements;
-    radioButtonLengthLine = ui->radioButtonLengthLine;
-    radioButtonLengthArc = ui->radioButtonLengthArc;
-    radioButtonLengthCurve = ui->radioButtonLengthSpline;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
     InitOkCancelApply(ui);
-
-    /*    bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
-    connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
-    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCansel != nullptr);
-    connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
-    */
     flagFormula = false;
     flagName = false;
     CheckState();
 
-    FillComboBoxPoints(ui->comboBoxCenter);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+    FillComboBoxPoints(ui->comboBoxCenter);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
@@ -97,9 +79,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
-
-    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,20 +90,7 @@ void DialogPointOfContact::FormulaTextChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::DeployFormulaTextEdit()
 {
-    if (ui->plainTextEditFormula->height() < DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT)
-    {
-        ui->plainTextEditFormula->setFixedHeight(DIALOGPOINTOFCONTACT_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
-                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                    QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
-    }
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

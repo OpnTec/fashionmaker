@@ -61,6 +61,10 @@ public slots:
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
     virtual void      DialogApply(){}
+    /**
+     * @brief DeployFormulaTextEdit grow or shrink formula input
+     */
+    void DeployFormulaTextEdit();
 private:
     Q_DISABLE_COPY(DialogCutSplinePath)
 
@@ -75,6 +79,9 @@ private:
 
     /** @brief splinePathId keep id of splinePath */
     quint32      splinePathId;
+
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeight;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

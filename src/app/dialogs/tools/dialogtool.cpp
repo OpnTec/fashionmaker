@@ -41,7 +41,6 @@
 #include <QShowEvent>
 #include <QComboBox>
 #include <QListWidgetItem>
-#include <QLineEdit>
 #include <QTextCursor>
 #include <QPlainTextEdit>
 #include <QLabel>
@@ -51,6 +50,8 @@
 #include <QListWidget>
 #include <QRadioButton>
 
+#define DIALOGARC_MAX_FORMULA_HEIGHT 64
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTool create dialog
@@ -59,7 +60,7 @@
  */
 DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), timerFormula(nullptr),
-      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), lineEditFormula(nullptr), plainTextEditFormula(nullptr),
+      bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), plainTextEditFormula(nullptr),
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
@@ -385,12 +386,6 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
     QTextCursor cursor = plainTextEdit->textCursor();
     cursor.insertText(item->text());
     plainTextEdit->setTextCursor(cursor);
-    /*
-    int pos = lineEdit->cursorPosition();
-    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
-    lineEdit->setFocus();
-    lineEdit->setCursorPosition(pos + item->text().size());
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -437,19 +432,18 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Eval evaluate formula and show result
- * @param edit lineEdit of formula
+ * @param text formula
  * @param flag flag state of formula
  * @param timer timer of formula
  * @param label label for signal error
  */
-void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
+void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label)
 {
-    SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
     QPalette palette = labelEditFormula->palette();
-    if (edit->text().isEmpty())
+    if (text.isEmpty())
     {
         flag = false;
         palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
@@ -458,66 +452,8 @@ void DialogTool::Eval(QLineEdit *edit, bool &flag, QTimer *timer, QLabel *label)
     {
         try
         {
-            const QString formula = qApp->FormulaFromUser(edit->text());
-            Calculator *cal = new Calculator(data);
-            const qreal result = cal->EvalFormula(formula);
-            delete cal;
-
-            QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                               QApplication::applicationName());
-            bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
-
-            if (osSeparatorValue)
-            {
-                QLocale loc = QLocale::system();
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-            }
-            else
-            {
-                QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
-            }
-            flag = true;
-            palette.setColor(labelEditFormula->foregroundRole(), QColor(76, 76, 76));
-            emit ToolTip("");
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            label->setText(tr("Error"));
-            flag = false;
-            palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-            emit ToolTip("Parser error: "+e.GetMsg());
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
-    CheckState();
-    timer->stop();
-    labelEditFormula->setPalette(palette);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::Eval(QPlainTextEdit *edit, bool &flag, QTimer *timer, QLabel *label)
-{
-    SCASSERT(edit != nullptr);
-    SCASSERT(timer != nullptr);
-    SCASSERT(label != nullptr);
-    SCASSERT(labelEditFormula != nullptr);
-    QPalette palette = labelEditFormula->palette();
-    if (edit->toPlainText().isEmpty())
-    {
-        flag = false;
-        palette.setColor(labelEditFormula->foregroundRole(), Qt::red);
-    }
-    else
-    {
-        try
-        {
-            // Replace line return with spaces for calc
-            QString formula = edit->toPlainText();
+            // Replace line return with spaces for calc if exist
+            QString formula = text;
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
             Calculator *cal = new Calculator(data);
@@ -633,7 +569,7 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
     qint32 index = box->currentIndex();
-    Q_ASSERT(index != -1);
+    SCASSERT(index != -1);
     if (index != -1)
     {
         return qvariant_cast<quint32>(box->itemData(index));
@@ -658,6 +594,27 @@ bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight)
+{
+    SCASSERT(formula != nullptr);
+    SCASSERT(buttonGrowLength != nullptr)
+    if (formula->height() < DIALOGARC_MAX_FORMULA_HEIGHT)
+    {
+        formula->setFixedHeight(DIALOGARC_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        buttonGrowLength->setIcon(QIcon::fromTheme("go-next",
+                                                   QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       formula->setFixedHeight(formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       buttonGrowLength->setIcon(QIcon::fromTheme("go-down",
+                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -759,7 +716,7 @@ void DialogTool::DialogRejected()
  */
 void DialogTool::FormulaChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
     if (edit)
     {
         ValFormulaChanged(flagFormula, edit, timerFormula);
@@ -863,7 +820,7 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    Eval(plainTextEditFormula, flagFormula, timerFormula, labelResultCalculation);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -956,12 +913,6 @@ void DialogTool::PutVal(QListWidgetItem *item)
     QTextCursor cursor = plainTextEditFormula->textCursor();
     cursor.insertText(item->text());
     plainTextEditFormula->setTextCursor(cursor);
-    /*int pos = plainTextEditFormula->cursorPosition();
-    lineEditFormula->setText(lineEditFormula->text().insert(lineEditFormula->cursorPosition(),
-                                                            item->text()));
-    lineEditFormula->setFocus();
-    lineEditFormula->setCursorPosition(pos + item->text().size());
-    */
 }
 
 //---------------------------------------------------------------------------------------------------------------------

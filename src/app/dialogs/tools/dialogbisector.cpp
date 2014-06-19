@@ -40,16 +40,14 @@
  */
 DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogBisector), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0), formulaBaseHeight(0)
+      formula(QString()), firstPointId(0), secondPointId(0), thirdPointId(0),
+      formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -58,8 +56,8 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxPoints(ui->comboBoxThirdPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxPoints(ui->comboBoxThirdPoint);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
@@ -68,9 +66,6 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
-
-    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,20 +77,7 @@ void DialogBisector::FormulaTextChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::DeployFormulaTextEdit()
 {
-    if (ui->plainTextEditFormula->height() < DIALOGBISECTOR_MAX_FORMULA_HEIGHT)
-    {
-        ui->plainTextEditFormula->setFixedHeight(DIALOGBISECTOR_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next",
-                                  QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-next.png")));
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                                   QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
-    }
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -188,7 +188,7 @@ val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
  */
 const VMeasurement VContainer::GetMeasurement(const QString &name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(measurements, name);
 }
 
@@ -200,7 +200,7 @@ const VMeasurement VContainer::GetMeasurement(const QString &name) const
  */
 const VIncrement VContainer::GetIncrement(const QString& name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(increments, name);
 }
 
@@ -212,7 +212,7 @@ const VIncrement VContainer::GetIncrement(const QString& name) const
  */
 qreal VContainer::GetLine(const QString &name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(lengthLines, name);
 }
 
@@ -224,7 +224,7 @@ qreal VContainer::GetLine(const QString &name) const
  */
 qreal VContainer::GetLengthArc(const QString &name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(lengthArcs, name);
 }
 
@@ -236,7 +236,7 @@ qreal VContainer::GetLengthArc(const QString &name) const
  */
 qreal VContainer::GetLengthSpline(const QString &name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(lengthSplines, name);
 }
 
@@ -248,7 +248,7 @@ qreal VContainer::GetLengthSpline(const QString &name) const
  */
 qreal VContainer::GetLineAngle(const QString &name) const
 {
-    Q_ASSERT(name.isEmpty()==false);
+    SCASSERT(name.isEmpty()==false);
     return GetVariable(lineAngles, name);
 }
 
@@ -352,7 +352,7 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
  */
 void VContainer::AddLengthSpline(const QString &name, const qreal &value)
 {
-    Q_ASSERT(name.isEmpty() == false);
+    SCASSERT(name.isEmpty() == false);
     lengthSplines[name] = value;
 }
 
@@ -375,7 +375,7 @@ void VContainer::AddLengthArc(const quint32 &id)
  */
 void VContainer::AddLineAngle(const QString &name, const qreal &value)
 {
-    Q_ASSERT(name.isEmpty() == false);
+    SCASSERT(name.isEmpty() == false);
     lineAngles[name] = value;
 }
 
@@ -560,6 +560,6 @@ void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
  */
 void VContainer::AddLengthLine(const QString &name, const qreal &value)
 {
-    Q_ASSERT(name.isEmpty() == false);
+    SCASSERT(name.isEmpty() == false);
     lengthLines[name] = value;
 }

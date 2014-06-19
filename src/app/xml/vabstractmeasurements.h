@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vstandardmeasurements.h
+ **  @file   vabstractmeasurements.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   8 3, 2014
+ **  @date   18 6, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,25 @@
  **
  *************************************************************************/
 
-#ifndef VSTANDARDMEASUREMENTS_H
-#define VSTANDARDMEASUREMENTS_H
+#ifndef VABSTRACTMEASUREMENTS_H
+#define VABSTRACTMEASUREMENTS_H
 
-#include "vabstractmeasurements.h"
+#include "vdomdocument.h"
 
-/*
-   VST_VERSION is (major << 16) + (minor << 8) + patch.
-*/
-// version without patch part
-#define VST_MIN_VERSION 0x000100
-// max support version of format
-#define VST_VERSION 0x000100
-
-class VStandardMeasurements:public VAbstractMeasurements
+class VAbstractMeasurements : public VDomDocument
 {
 public:
-    VStandardMeasurements(VContainer *data);
-    virtual ~VStandardMeasurements();
-    QString      Description();
-    void         SetSize();
-    void         SetHeight();
-    static const QString TagMeasurement;
-    static const QString TagDescription;
-    static const QString TagSize;
-    static const QString TagHeight;
-    static const QString AttrSize_increase;
-    static const QString AttrHeight_increase;
+    VAbstractMeasurements(VContainer *data);
+    virtual ~VAbstractMeasurements();
+    virtual void Measurements();
+    Unit         MUnit() const;
+    static const QString TagUnit;
+    static const QString AttrValue;
 protected:
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
+    void         Measurement(const QString &tag);
+    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
 private:
-    Q_DISABLE_COPY(VStandardMeasurements)
+    Q_DISABLE_COPY(VAbstractMeasurements)
 };
 
-#endif // VSTANDARDMEASUREMENTS_H
+#endif // VABSTRACTMEASUREMENTS_H

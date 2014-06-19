@@ -34,9 +34,9 @@ AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QS
                                  QUndoCommand *parent)
     : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
 {
-    Q_ASSERT(xml.isNull() == false);
-    Q_ASSERT(namePP.isEmpty() == false);
-    Q_ASSERT(mPath.isEmpty() == false);
+    SCASSERT(xml.isNull() == false);
+    SCASSERT(namePP.isEmpty() == false);
+    SCASSERT(mPath.isEmpty() == false);
     setText(tr("Add pattern piece %1").arg(namePP));
 }
 

@@ -154,6 +154,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_formula">
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditFormula">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -183,7 +189,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down.png">
+        <iconset theme="go-down">
          <normaloff/>
         </iconset>
        </property>
@@ -345,7 +351,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRightUp.png</normaloff>:/icon/24x24/arrowRightUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRightUp.png</normaloff>:/icon/32x32/arrowRightUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -362,7 +368,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeftUp.png</normaloff>:/icon/24x24/arrowLeftUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeftUp.png</normaloff>:/icon/32x32/arrowLeftUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -379,7 +385,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeft.png</normaloff>:/icon/24x24/arrowLeft.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeft.png</normaloff>:/icon/32x32/arrowLeft.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -396,7 +402,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRight.png</normaloff>:/icon/24x24/arrowRight.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRight.png</normaloff>:/icon/32x32/arrowRight.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -419,7 +425,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowUp.png</normaloff>:/icon/24x24/arrowUp.png</iconset>
+                 <normaloff>:/icon/32x32/arrowUp.png</normaloff>:/icon/32x32/arrowUp.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -436,7 +442,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowDown.png</normaloff>:/icon/24x24/arrowDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowDown.png</normaloff>:/icon/32x32/arrowDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -453,7 +459,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowLeftDown.png</normaloff>:/icon/24x24/arrowLeftDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowLeftDown.png</normaloff>:/icon/32x32/arrowLeftDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -470,7 +476,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/24x24/arrowRightDown.png</normaloff>:/icon/24x24/arrowRightDown.png</iconset>
+                 <normaloff>:/icon/32x32/arrowRightDown.png</normaloff>:/icon/32x32/arrowRightDown.png</iconset>
                </property>
                <property name="iconSize">
                 <size>

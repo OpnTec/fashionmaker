@@ -335,40 +335,6 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
             case cmOPRT_INFIX:
                 Error(ecINVALID_INFIX_IDENT, -1, a_sName);
                 break;
-            case cmLE:
-            case cmGE:
-            case cmNEQ:
-            case cmEQ:
-            case cmLT:
-            case cmGT:
-            case cmADD:
-            case cmSUB:
-            case cmMUL:
-            case cmDIV:
-            case cmPOW:
-            case cmLAND:
-            case cmLOR:
-            case cmASSIGN:
-            case cmBO:
-            case cmBC:
-            case cmIF:
-            case cmELSE:
-            case cmENDIF:
-            case cmARG_SEP:
-            case cmVAR:
-            case cmVAL:
-            case cmVARPOW2:
-            case cmVARPOW3:
-            case cmVARPOW4:
-            case cmVARMUL:
-            case cmPOW2:
-            case cmFUNC:
-            case cmFUNC_STR:
-            case cmFUNC_BULK:
-            case cmSTRING:
-            case cmOPRT_BIN:
-            case cmEND:
-            case cmUNKNOWN:
             default:
                 Error(ecINVALID_NAME, -1, a_sName);
                 break;
@@ -629,22 +595,6 @@ int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
         case cmOPRT_INFIX:
         case cmOPRT_BIN:
             return a_Tok.GetPri();
-        case cmBO:
-        case cmBC:
-        case cmENDIF:
-        case cmVAR:
-        case cmVAL:
-        case cmVARPOW2:
-        case cmVARPOW3:
-        case cmVARPOW4:
-        case cmVARMUL:
-        case cmPOW2:
-        case cmFUNC:
-        case cmFUNC_STR:
-        case cmFUNC_BULK:
-        case cmSTRING:
-        case cmOPRT_POSTFIX:
-        case cmUNKNOWN:
         default:
             Error(ecINTERNAL_ERROR, 5);
             return 999;
@@ -678,27 +628,6 @@ EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) 
             return oaRIGHT;
         case cmOPRT_BIN:
             return a_Tok.GetAssociativity();
-        case cmBO:
-        case cmBC:
-        case cmIF:
-        case cmELSE:
-        case cmENDIF:
-        case cmARG_SEP:
-        case cmVAR:
-        case cmVAL:
-        case cmVARPOW2:
-        case cmVARPOW3:
-        case cmVARPOW4:
-        case cmVARMUL:
-        case cmPOW2:
-        case cmFUNC:
-        case cmFUNC_STR:
-        case cmFUNC_BULK:
-        case cmSTRING:
-        case cmOPRT_POSTFIX:
-        case cmOPRT_INFIX:
-        case cmEND:
-        case cmUNKNOWN:
         default:
             return oaNONE;
     }
@@ -875,96 +804,6 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
 
             m_vRPN.AddFun(funTok.GetFuncAddr(), (funTok.GetArgCount()==-1) ? -iArgNumerical : iArgNumerical);
             break;
-        case cmLE:
-            Q_UNREACHABLE();
-            break;
-        case cmGE:
-            Q_UNREACHABLE();
-            break;
-        case cmNEQ:
-            Q_UNREACHABLE();
-            break;
-        case cmEQ:
-            Q_UNREACHABLE();
-            break;
-        case cmLT:
-            Q_UNREACHABLE();
-            break;
-        case cmGT:
-            Q_UNREACHABLE();
-            break;
-        case cmADD:
-            Q_UNREACHABLE();
-            break;
-        case cmSUB:
-            Q_UNREACHABLE();
-            break;
-        case cmMUL:
-            Q_UNREACHABLE();
-            break;
-        case cmDIV:
-            Q_UNREACHABLE();
-            break;
-        case cmPOW:
-            Q_UNREACHABLE();
-            break;
-        case cmLAND:
-            Q_UNREACHABLE();
-            break;
-        case cmLOR:
-            Q_UNREACHABLE();
-            break;
-        case cmASSIGN:
-            Q_UNREACHABLE();
-            break;
-        case cmBO:
-            Q_UNREACHABLE();
-            break;
-        case cmBC:
-            Q_UNREACHABLE();
-            break;
-        case cmIF:
-            Q_UNREACHABLE();
-            break;
-        case cmELSE:
-            Q_UNREACHABLE();
-            break;
-        case cmENDIF:
-            Q_UNREACHABLE();
-            break;
-        case cmARG_SEP:
-            Q_UNREACHABLE();
-            break;
-        case cmVAR:
-            Q_UNREACHABLE();
-            break;
-        case cmVAL:
-            Q_UNREACHABLE();
-            break;
-        case cmVARPOW2:
-            Q_UNREACHABLE();
-            break;
-        case cmVARPOW3:
-            Q_UNREACHABLE();
-            break;
-        case cmVARPOW4:
-            Q_UNREACHABLE();
-            break;
-        case cmVARMUL:
-            Q_UNREACHABLE();
-            break;
-        case cmPOW2:
-            Q_UNREACHABLE();
-            break;
-        case cmSTRING:
-            Q_UNREACHABLE();
-            break;
-        case cmEND:
-            Q_UNREACHABLE();
-            break;
-        case cmUNKNOWN:
-            Q_UNREACHABLE();
-            break;
         default:
             break;
     }
@@ -1056,58 +895,26 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
     while (stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmIF)
     {
         token_type tok = stOpt.top();
-        switch (tok.GetCode())
+        const ECmdCode code = tok.GetCode();
+
+        if ((code >= cmLE && code <= cmASSIGN) || code == cmOPRT_INFIX || code == cmOPRT_BIN)
         {
-            case cmOPRT_INFIX:
-            case cmOPRT_BIN:
-            case cmLE:
-            case cmGE:
-            case cmNEQ:
-            case cmEQ:
-            case cmLT:
-            case cmGT:
-            case cmADD:
-            case cmSUB:
-            case cmMUL:
-            case cmDIV:
-            case cmPOW:
-            case cmLAND:
-            case cmLOR:
-            case cmASSIGN:
-                if (stOpt.top().GetCode()==cmOPRT_INFIX)
-                {
-                    ApplyFunc(stOpt, stVal, 1);
-                }
-                else
-                {
-                    ApplyBinOprt(stOpt, stVal);
-                }
-                break;
-            case cmELSE:
-                ApplyIfElse(stOpt, stVal);
-                break;
-            case cmBO:
-            case cmBC:
-            case cmIF:
-            case cmENDIF:
-            case cmARG_SEP:
-            case cmVAR:
-            case cmVAL:
-            case cmVARPOW2:
-            case cmVARPOW3:
-            case cmVARPOW4:
-            case cmVARMUL:
-            case cmPOW2:
-            case cmFUNC:
-            case cmFUNC_STR:
-            case cmFUNC_BULK:
-            case cmSTRING:
-            case cmOPRT_POSTFIX:
-            case cmEND:
-            case cmUNKNOWN:
-            default:
-                Error(ecINTERNAL_ERROR);
-                break;
+            if (stOpt.top().GetCode()==cmOPRT_INFIX)
+            {
+                ApplyFunc(stOpt, stVal, 1);
+            }
+            else
+            {
+                ApplyBinOprt(stOpt, stVal);
+            }
+        }
+        else if (code == cmELSE)
+        {
+            ApplyIfElse(stOpt, stVal);
+        }
+        else
+        {
+            Error(ecINTERNAL_ERROR);
         }
     }
 }
@@ -1574,19 +1381,19 @@ void QmuParserBase::CreateRPN() const
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
-            case cmLAND:
-            case cmLOR:
-            case cmLT:
-            case cmGT:
             case cmLE:
             case cmGE:
             case cmNEQ:
             case cmEQ:
+            case cmLT:
+            case cmGT:
             case cmADD:
             case cmSUB:
             case cmMUL:
             case cmDIV:
             case cmPOW:
+            case cmLAND:
+            case cmLOR:
             case cmASSIGN:
             case cmOPRT_BIN:
                 // A binary operator (user defined or built in) has been found.
@@ -1982,28 +1789,6 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
                 case cmENDIF:
                     qDebug() << "ENDIF\n";
                     break;
-                case cmLE:
-                case cmGE:
-                case cmNEQ:
-                case cmEQ:
-                case cmLT:
-                case cmGT:
-                case cmADD:
-                case cmSUB:
-                case cmMUL:
-                case cmDIV:
-                case cmPOW:
-                case cmLAND:
-                case cmLOR:
-                case cmASSIGN:
-                case cmARG_SEP:
-                case cmVARPOW2:
-                case cmVARPOW3:
-                case cmVARPOW4:
-                case cmVARMUL:
-                case cmPOW2:
-                case cmSTRING:
-                case cmOPRT_POSTFIX:
                 default:
                     qDebug() << stOprt.top().GetCode() << " ";
                     break;

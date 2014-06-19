@@ -41,14 +41,11 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
 {
     ui->setupUi(this);
     InitVariables(ui);
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
+    InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
+    this->formulaBaseHeight = ui->plainTextEditFormula->height();
+
     InitOkCancelApply(ui);
-
-    this->formulaBaseHeight=ui->plainTextEditFormula->height();
-
     flagFormula = false;
     flagName = false;
     CheckState();
@@ -65,9 +62,6 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
-
-    ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down",
-            QIcon(":/icons/win.icon.theme/icons/win.icon.theme/16x16/actions/go-down.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,18 +73,7 @@ void DialogNormal::FormulaTextChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::DeployFormulaTextEdit()
 {
-    if (ui->plainTextEditFormula->height() < DIALOGNORMAL_MAX_FORMULA_HEIGHT)
-    {
-        ui->plainTextEditFormula->setFixedHeight(DIALOGNORMAL_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-next"));
-    }
-    else
-    {
-       ui->plainTextEditFormula->setFixedHeight(this->formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrowLength->setIcon(QIcon::fromTheme("go-down"));
-    }
+    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
