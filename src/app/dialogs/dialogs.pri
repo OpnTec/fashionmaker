@@ -24,14 +24,17 @@ HEADERS += \
     dialogs/app/dialogincrements.h \
     dialogs/app/dialoghistory.h \
     dialogs/app/configdialog.h \
-    dialogs/app/pages.h \
+    dialogs/app/configpages/pages.h \
     dialogs/app/dialogpatternproperties.h \
     dialogs/app/dialogmeasurements.h \
     dialogs/app/dialogstandardmeasurements.h \
     dialogs/app/dialogindividualmeasurements.h \
     dialogs/app/dialogaboutapp.h \
     dialogs/tools/dialogeditwrongformula.h \
-    dialogs/app/dialogpatternxmledit.h
+    dialogs/app/dialogpatternxmledit.h \
+    dialogs/app/configpages/configurationpage.h \
+    dialogs/app/configpages/patternpage.h \
+    dialogs/app/configpages/communitypage.h
 
 SOURCES += \
     dialogs/tools/dialogtriangle.cpp \
@@ -58,14 +61,16 @@ SOURCES += \
     dialogs/app/dialogincrements.cpp \
     dialogs/app/dialoghistory.cpp \
     dialogs/app/configdialog.cpp \
-    dialogs/app/pages.cpp \
     dialogs/app/dialogpatternproperties.cpp \
     dialogs/app/dialogmeasurements.cpp \
     dialogs/app/dialogstandardmeasurements.cpp \
     dialogs/app/dialogindividualmeasurements.cpp \
     dialogs/app/dialogaboutapp.cpp \
     dialogs/app/dialogpatternxmledit.cpp \
-	dialogs/tools/dialogeditwrongformula.cpp
+    dialogs/tools/dialogeditwrongformula.cpp \
+    dialogs/app/configpages/configurationpage.cpp \
+    dialogs/app/configpages/patternpage.cpp \
+    dialogs/app/configpages/communitypage.cpp
 
 FORMS += \
     dialogs/tools/dialogtriangle.ui \
@@ -96,4 +101,4 @@ FORMS += \
     dialogs/app/dialogindividualmeasurements.ui \
     dialogs/app/dialogaboutapp.ui \
     dialogs/app/dialogpatternxmledit.ui \
-	dialogs/tools/dialogeditwrongformula.ui
+    dialogs/tools/dialogeditwrongformula.ui

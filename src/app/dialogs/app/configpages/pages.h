@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   configdialog.h
+ **  @file   pages.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 2, 2014
  **
@@ -26,35 +26,11 @@
  **
  *************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef PAGES_H
+#define PAGES_H
 
-#include <QDialog>
-#include "configpages/pages.h"
+#include "configurationpage.h"
+#include "patternpage.h"
+#include "communitypage.h"
 
-class QListWidgetItem;
-class QStackedWidget;
-class QListWidget;
-
-class ConfigDialog : public QDialog
-{
-    Q_OBJECT
-public:
-    explicit ConfigDialog(QWidget *parent = nullptr);
-public slots:
-    void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
-protected:
-    virtual void      closeEvent(QCloseEvent *event);
-private:
-    Q_DISABLE_COPY(ConfigDialog)
-    QListWidget       *contentsWidget;
-    QStackedWidget    *pagesWidget;
-    ConfigurationPage *configurationPage;
-    PatternPage       *patternPage;
-    CommunityPage     *communityPage;
-    void              createIcons();
-    void              Apply();
-    void              Ok();
-};
-
-#endif // CONFIGDIALOG_H
+#endif // PAGES_H

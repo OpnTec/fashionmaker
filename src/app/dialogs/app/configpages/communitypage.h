@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   configdialog.h
+ **  @file   communitypage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 2, 2014
+ **  @date   21 6, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,35 +26,50 @@
  **
  *************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef COMMUNITYPAGE_H
+#define COMMUNITYPAGE_H
 
-#include <QDialog>
-#include "configpages/pages.h"
+#include <QObject>
+#include <QWidget>
+#include <QFormLayout>
 
-class QListWidgetItem;
-class QStackedWidget;
-class QListWidget;
+class QCheckBox;
+class QGroupBox;
+class QLineEdit;
 
-class ConfigDialog : public QDialog
+class CommunityPage : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ConfigDialog(QWidget *parent = nullptr);
-public slots:
-    void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
-protected:
-    virtual void      closeEvent(QCloseEvent *event);
+    CommunityPage(QWidget *parent = nullptr);
+    void      Apply();
 private:
-    Q_DISABLE_COPY(ConfigDialog)
-    QListWidget       *contentsWidget;
-    QStackedWidget    *pagesWidget;
-    ConfigurationPage *configurationPage;
-    PatternPage       *patternPage;
-    CommunityPage     *communityPage;
-    void              createIcons();
-    void              Apply();
-    void              Ok();
+    Q_DISABLE_COPY(CommunityPage)
+    // server name and https connection
+    QLineEdit *server;
+    QCheckBox *secureComm;
+
+    // proxy stuff
+    QCheckBox *useProxy;
+    QLineEdit *proxyAddress;
+    QLineEdit *proxyPort;
+    QLineEdit *proxyUser;
+    QLineEdit *proxyPass;
+
+    // username and password
+    QLineEdit *username;
+    QCheckBox *savePassword;
+    QLineEdit *userpassword;
+
+    static void add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QString label);
+    static void add_lineedit(QLineEdit** theline, QFormLayout *layout, QString value, QString label);
+
+    void ProxyCheckChanged();
+    void PasswordCheckChanged();
+
+    QGroupBox *ServerGroup();
+    QGroupBox *ProxyGroup();
+    QGroupBox *UserGroup();
 };
 
-#endif // CONFIGDIALOG_H
+#endif // COMMUNITYPAGE_H

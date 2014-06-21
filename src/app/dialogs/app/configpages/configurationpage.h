@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   configdialog.h
+ **  @file   configurationpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 2, 2014
+ **  @date   21 6, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,35 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef CONFIGURATIONPAGE_H
+#define CONFIGURATIONPAGE_H
 
-#include <QDialog>
-#include "configpages/pages.h"
+#include <QObject>
+#include <QWidget>
 
-class QListWidgetItem;
-class QStackedWidget;
-class QListWidget;
+class QCheckBox;
+class QSpinBox;
+class QComboBox;
+class QGroupBox;
 
-class ConfigDialog : public QDialog
+class ConfigurationPage : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ConfigDialog(QWidget *parent = nullptr);
+    ConfigurationPage(QWidget *parent = nullptr);
+    void      Apply();
 public slots:
-    void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
-protected:
-    virtual void      closeEvent(QCloseEvent *event);
+    void      LangChanged();
+    void      UnitChanged();
 private:
-    Q_DISABLE_COPY(ConfigDialog)
-    QListWidget       *contentsWidget;
-    QStackedWidget    *pagesWidget;
-    ConfigurationPage *configurationPage;
-    PatternPage       *patternPage;
-    CommunityPage     *communityPage;
-    void              createIcons();
-    void              Apply();
-    void              Ok();
+    Q_DISABLE_COPY(ConfigurationPage)
+    QCheckBox *autoSaveCheck;
+    QSpinBox  *autoTime;
+    QComboBox *langCombo;
+    QComboBox *unitCombo;
+    QCheckBox *osOptionCheck;
+    bool      langChanged;
+    bool      unitChanged;
+    QGroupBox *SaveGroup();
+    QGroupBox *LangGroup();
 };
 
-#endif // CONFIGDIALOG_H
+#endif // CONFIGURATIONPAGE_H
