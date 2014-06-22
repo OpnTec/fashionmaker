@@ -34,7 +34,8 @@ HEADERS += \
     dialogs/app/dialogpatternxmledit.h \
     dialogs/app/configpages/configurationpage.h \
     dialogs/app/configpages/patternpage.h \
-    dialogs/app/configpages/communitypage.h
+    dialogs/app/configpages/communitypage.h \
+    dialogs/app/configpages/pathpage.h
 
 SOURCES += \
     dialogs/tools/dialogtriangle.cpp \
@@ -70,7 +71,8 @@ SOURCES += \
     dialogs/tools/dialogeditwrongformula.cpp \
     dialogs/app/configpages/configurationpage.cpp \
     dialogs/app/configpages/patternpage.cpp \
-    dialogs/app/configpages/communitypage.cpp
+    dialogs/app/configpages/communitypage.cpp \
+    dialogs/app/configpages/pathpage.cpp
 
 FORMS += \
     dialogs/tools/dialogtriangle.ui \

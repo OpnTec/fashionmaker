@@ -32,6 +32,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
 #include "../../widgets/vapplication.h"
 #include "../../container/vcontainer.h"
 
@@ -187,7 +188,12 @@ void DialogIndividualMeasurements::CheckState()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    QString path = settings.value("paths/individual_measurements", QDir::homePath()).toString();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
     if (fileName.isEmpty())
     {
         return;

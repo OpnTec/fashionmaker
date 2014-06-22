@@ -1393,10 +1393,13 @@ void MainWindow::ActionDetails(bool checked)
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    QString path = settings.value("paths/pattern", QDir::homePath()).toString();
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = QDir::homePath() + tr("/pattern.val");
+        dir = path + "/" + tr("pattern") + ".val";
     }
     else
     {

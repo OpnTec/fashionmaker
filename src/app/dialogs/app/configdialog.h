@@ -52,7 +52,9 @@ private:
     ConfigurationPage *configurationPage;
     PatternPage       *patternPage;
     CommunityPage     *communityPage;
+    PathPage          *pathPage;
     void              createIcons();
+    void              createIcon(const QString &icon, const QString &text);
     void              Apply();
     void              Ok();
 };

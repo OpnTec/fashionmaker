@@ -36,23 +36,29 @@
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr),
-    communityPage(nullptr)
+    communityPage(nullptr), pathPage(nullptr)
 {
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
     contentsWidget->setIconSize(QSize(96, 84));
     contentsWidget->setMovement(QListView::Static);
     contentsWidget->setMaximumWidth(128);
-    contentsWidget->setMinimumHeight(250);
+    contentsWidget->setMinimumHeight(500);
     contentsWidget->setSpacing(12);
 
     pagesWidget = new QStackedWidget;
+
     configurationPage = new ConfigurationPage();
     pagesWidget->addWidget(configurationPage);
+
     patternPage = new PatternPage();
     pagesWidget->addWidget(patternPage);
+
     communityPage = new CommunityPage();
     pagesWidget->addWidget(communityPage);
+
+    pathPage = new PathPage();
+    pagesWidget->addWidget(pathPage);
 
     QPushButton *applyButton = new QPushButton(tr("Apply"));
     QPushButton *canselButton = new QPushButton(tr("&Cancel"));
@@ -83,6 +89,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     setLayout(mainLayout);
 
     setWindowTitle(tr("Config Dialog"));
+
+    this->setFixedSize(QSize(750, 550));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,25 +116,22 @@ void ConfigDialog::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigDialog::createIcons()
 {
-    QListWidgetItem *configButton = new QListWidgetItem(contentsWidget);
-    configButton->setIcon(QIcon("://icon/config.png"));
-    configButton->setText(tr("Configuration"));
-    configButton->setTextAlignment(Qt::AlignHCenter);
-    configButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-
-    QListWidgetItem *patternButton = new QListWidgetItem(contentsWidget);
-    patternButton->setIcon(QIcon("://icon/pattern_config.png"));
-    patternButton->setText(tr("Pattern"));
-    patternButton->setTextAlignment(Qt::AlignHCenter);
-    patternButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-
-    QListWidgetItem *communityButton = new QListWidgetItem(contentsWidget);
-    communityButton->setIcon(QIcon("://icon/community_config.png"));
-    communityButton->setText(tr("Community"));
-    communityButton->setTextAlignment(Qt::AlignHCenter);
-    communityButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    createIcon("://icon/config.png", tr("Configuration"));
+    createIcon("://icon/pattern_config.png", tr("Pattern"));
+    createIcon("://icon/community_config.png", tr("Community"));
+    createIcon("://icon/path_config.png", tr("Paths"));
 
     connect(contentsWidget, &QListWidget::currentItemChanged, this, &ConfigDialog::changePage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigDialog::createIcon(const QString &icon, const QString &text)
+{
+    QListWidgetItem *button = new QListWidgetItem(contentsWidget);
+    button->setIcon(QIcon(icon));
+    button->setText(text);
+    button->setTextAlignment(Qt::AlignHCenter);
+    button->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -142,6 +147,9 @@ void ConfigDialog::Apply()
             break;
         case (2):
             communityPage->Apply();
+            break;
+        case (3):
+            pathPage->Apply();
             break;
         default:
             break;

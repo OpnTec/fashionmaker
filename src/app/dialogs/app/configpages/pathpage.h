@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   pages.h
+ **  @file   pathpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 2, 2014
+ **  @date   21 6, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,12 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef PAGES_H
-#define PAGES_H
+#ifndef PATHPAGE_H
+#define PATHPAGE_H
 
-#include "configurationpage.h"
-#include "patternpage.h"
-#include "communitypage.h"
-#include "pathpage.h"
+#include <QObject>
+#include <QWidget>
 
-#endif // PAGES_H
+class QGroupBox;
+class QPushButton;
+class QTableWidget;
+
+class PathPage : public QWidget
+{
+    Q_OBJECT
+public:
+    PathPage(QWidget *parent = nullptr);
+    void      Apply();
+public slots:
+    void TableActivated();
+    void DefaultPath();
+    void EditPath();
+private:
+    Q_DISABLE_COPY(PathPage)
+    QPushButton  *defaultButton;
+    QPushButton  *editButton;
+    QTableWidget *pathTable;
+    QGroupBox    *PathGroup();
+    void         InitTable();
+};
+
+#endif // PATHPAGE_H
