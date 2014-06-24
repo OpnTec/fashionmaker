@@ -6,12 +6,13 @@
   !define MUI_VERSION "0.2.2"
   !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
   !define WEBSITE_LINK "https://bitbucket.org/dismine/valentina"
-  !define PUBLISHER "Roman Telezhinsky"
+  !define PUBLISHER "Roman Telezhynskyi"
   CRCCheck On
  
   ; Bij deze moeten we waarschijnlijk een absoluut pad gaan gebruiken
   ; dit moet effe uitgetest worden.
   !include "${NSISDIR}\Contrib\Modern UI\System.nsh"
+  !include "FileAssociation.nsh"
  
 ;--------------------------------
 ;General
@@ -89,6 +90,57 @@
   !insertmacro MUI_LANGUAGE "Ukrainian"
   !insertmacro MUI_LANGUAGE "Czech"
   !insertmacro MUI_LANGUAGE "Hebrew"
+  !insertmacro MUI_LANGUAGE "Italian"
+  !insertmacro MUI_LANGUAGE "Dutch"
+  
+;  !insertmacro MUI_LANGUAGE "Spanish"
+;  !insertmacro MUI_LANGUAGE "SpanishInternational"
+;  !insertmacro MUI_LANGUAGE "SimpChinese"
+;  !insertmacro MUI_LANGUAGE "TradChinese"
+;  !insertmacro MUI_LANGUAGE "Japanese"
+;  !insertmacro MUI_LANGUAGE "Korean" 
+;  !insertmacro MUI_LANGUAGE "Danish"
+;  !insertmacro MUI_LANGUAGE "Swedish"
+;  !insertmacro MUI_LANGUAGE "Norwegian"
+;  !insertmacro MUI_LANGUAGE "NorwegianNynorsk"
+;  !insertmacro MUI_LANGUAGE "Finnish"
+;  !insertmacro MUI_LANGUAGE "Greek"
+;  !insertmacro MUI_LANGUAGE "Portuguese"
+;  !insertmacro MUI_LANGUAGE "PortugueseBR"
+;  !insertmacro MUI_LANGUAGE "Polish"
+;  !insertmacro MUI_LANGUAGE "Slovak"
+;  !insertmacro MUI_LANGUAGE "Croatian"
+;  !insertmacro MUI_LANGUAGE "Bulgarian"
+;  !insertmacro MUI_LANGUAGE "Hungarian"
+;  !insertmacro MUI_LANGUAGE "Thai"
+;  !insertmacro MUI_LANGUAGE "Romanian"
+;  !insertmacro MUI_LANGUAGE "Latvian"
+;  !insertmacro MUI_LANGUAGE "Macedonian"
+;  !insertmacro MUI_LANGUAGE "Estonian"
+;  !insertmacro MUI_LANGUAGE "Turkish"
+;  !insertmacro MUI_LANGUAGE "Lithuanian"
+;  !insertmacro MUI_LANGUAGE "Slovenian"
+;  !insertmacro MUI_LANGUAGE "Serbian"
+;  !insertmacro MUI_LANGUAGE "SerbianLatin"
+;  !insertmacro MUI_LANGUAGE "Arabic"
+;  !insertmacro MUI_LANGUAGE "Farsi"
+;  !insertmacro MUI_LANGUAGE "Indonesian"
+;  !insertmacro MUI_LANGUAGE "Mongolian"
+;  !insertmacro MUI_LANGUAGE "Luxembourgish"
+;  !insertmacro MUI_LANGUAGE "Albanian"
+;  !insertmacro MUI_LANGUAGE "Breton"
+;  !insertmacro MUI_LANGUAGE "Belarusian"
+;  !insertmacro MUI_LANGUAGE "Icelandic"
+;  !insertmacro MUI_LANGUAGE "Malay"
+;  !insertmacro MUI_LANGUAGE "Bosnian"
+;  !insertmacro MUI_LANGUAGE "Kurdish"
+;  !insertmacro MUI_LANGUAGE "Irish"
+;  !insertmacro MUI_LANGUAGE "Uzbek"
+;  !insertmacro MUI_LANGUAGE "Galician"
+;  !insertmacro MUI_LANGUAGE "Afrikaans"
+;  !insertmacro MUI_LANGUAGE "Catalan"
+;  !insertmacro MUI_LANGUAGE "Esperanto"
+;  !insertmacro MUI_LANGUAGE "Asturian"
   !insertmacro MUI_RESERVEFILE_LANGDLL
 
   Function .onInit
@@ -156,6 +208,8 @@ Section "Valentina  (required)"
   WriteRegStr HKCU "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_PRODUCT}."
  
   WriteUninstaller "$INSTDIR\${UNINSTALLER_NAME}"
+  
+  ${registerExtension} "$INSTDIR\${MUI_FILE}.exe" ".val" "Valentina_File"
  
 SectionEnd 
  
@@ -179,6 +233,8 @@ Section "Uninstall"
 ;Delete Uninstaller And Unistall Registry Entries
   DeleteRegKey HKCU "SOFTWARE\${MUI_PRODUCT}"
   DeleteRegKey HKCU "${REG_UNINSTALL}"  
+  
+  ${unregisterExtension} ".val" "Valentina_File"
  
 SectionEnd
  
