@@ -165,6 +165,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
         scene->addItem(point);
         connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolNormal::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);

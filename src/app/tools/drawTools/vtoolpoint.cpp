@@ -157,6 +157,12 @@ void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::Disable(bool disable)
+{
+    DisableItem(this, disable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.

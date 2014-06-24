@@ -147,6 +147,7 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
         doc->IncrementReferens(secondPoint);
@@ -183,6 +184,12 @@ void VToolLine::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::Disable(bool disable)
+{
+    DisableItem(this, disable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

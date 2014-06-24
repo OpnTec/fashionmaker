@@ -239,6 +239,8 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
  */
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
+    quint32 ref = _referens; // store referens
+    _referens = 1; // make available delete pattern piece
     if (doc->CountPP() > 1)
     {
         ContextMenu<DialogSinglePoint>(this, event);
@@ -247,6 +249,7 @@ void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
     {
         ContextMenu<DialogSinglePoint>(this, event, false);
     }
+    _referens = ref; // restore referens. If not restore garbage collector delete point!!!
 }
 
 //---------------------------------------------------------------------------------------------------------------------

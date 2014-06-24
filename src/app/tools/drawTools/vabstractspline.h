@@ -41,6 +41,7 @@ public:
     static const QString TagName;
 public slots:
     virtual void     FullUpdateFromFile ();
+    void             Disable(bool disable);
 signals:
     /**
      * @brief RefreshLine refresh control line.

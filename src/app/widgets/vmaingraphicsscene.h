@@ -47,6 +47,7 @@ public:
     void          setVerScrollBar(const qint32 &value);
     QTransform    transform() const;
     void          setTransform(const QTransform &transform);
+    void          SetDisable(bool enabled);
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
@@ -75,6 +76,7 @@ signals:
      * @param factor scene scale factor.
      */
     void          NewFactor(qreal factor);
+    void          DisableItem(bool disable);
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;

@@ -153,6 +153,7 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSplinePath::Disable);
         doc->AddTool(id, spl);
     }
 }
@@ -184,6 +185,12 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
     connect(moveSplPath, &MoveSplinePath::NeedLiteParsing, doc, &VPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSplPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::Disable(bool disable)
+{
+    DisableItem(this, disable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

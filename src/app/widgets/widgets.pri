@@ -11,7 +11,8 @@ HEADERS += \
     widgets/vsimplesplinepath.h \
     widgets/vsimplearc.h \
     widgets/textdelegate.h \
-    widgets/vtranslation.h
+    widgets/vtranslation.h \
+    widgets/undoevent.h
 
 SOURCES += \
     widgets/vtablegraphicsview.cpp \
@@ -26,4 +27,5 @@ SOURCES += \
     widgets/vsimplesplinepath.cpp \
     widgets/vsimplearc.cpp \
     widgets/textdelegate.cpp \
-    widgets/vtranslation.cpp
+    widgets/vtranslation.cpp \
+    widgets/undoevent.cpp

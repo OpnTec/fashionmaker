@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   deletepatternpiece.cpp
+ **  @file   dialogundo.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 6, 2014
+ **  @date   23 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,42 +26,54 @@
  **
  *************************************************************************/
 
-#include "deletepatternpiece.h"
-#include "../xml/vpattern.h"
-#include "addpatternpiece.h"
+#include "dialogundo.h"
+#include "ui_dialogundo.h"
+#include "../../widgets/vapplication.h"
+#include "../../exception/vexceptionundo.h"
+#include <QCloseEvent>
+#include <QUndoStack>
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
-      previousNode(QDomNode())
+DialogUndo::DialogUndo(QWidget *parent)
+    :QDialog(parent), ui(new Ui::DialogUndo), result(UndoButton::Cancel)
 {
-    setText(tr("Delete pattern piece %1").arg(namePP));
+    ui->setupUi(this);
 
-    QDomElement patternP= doc->GetPPElement(namePP);
-    patternPiece = patternP.cloneNode().toElement();
-    mPath = doc->MPath();
-    previousNode = patternP.previousSibling();//find previous pattern piece
+    connect(ui->pushButtonUndo, &QPushButton::clicked, this, &DialogUndo::Undo);
+    connect(ui->pushButtonFix, &QPushButton::clicked, this, &DialogUndo::Fix);
+    connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::~DeletePatternPiece()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DeletePatternPiece::undo()
+DialogUndo::~DialogUndo()
 {
-    QDomElement rootElement = doc->documentElement();
-    rootElement.insertAfter(patternPiece, previousNode);
-
-    emit NeedFullParsing();
-    doc->ChangedActivPP(namePP);
+    delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DeletePatternPiece::redo()
+void DialogUndo::Undo()
 {
-    QDomElement rootElement = doc->documentElement();
-    QDomElement patternPiece = doc->GetPPElement(namePP);
-    rootElement.removeChild(patternPiece);
-    emit NeedFullParsing();
+    result = UndoButton::Undo;
+    accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogUndo::Fix()
+{
+    result = UndoButton::Fix;
+    accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogUndo::Cancel()
+{
+    result = UndoButton::Cancel;
+    reject();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogUndo::closeEvent(QCloseEvent *event)
+{
+    Cancel();
+    event->accept();
 }

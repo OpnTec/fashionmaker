@@ -142,6 +142,7 @@ public slots:
      */
     void               EditPatternCode();
     void               FullParseFile();
+    void               SetEnabledGUI(bool enabled);
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -153,6 +154,7 @@ protected:
     virtual void       keyPressEvent ( QKeyEvent * event );
     virtual void       showEvent( QShowEvent *event );
     virtual void       closeEvent( QCloseEvent * event );
+    virtual void       customEvent(QEvent * event);
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -214,6 +216,7 @@ private:
     QAction            *recentFileActs[MaxRecentFiles];
     QAction            *separatorAct;
     QTimer             *autoSaveTimer;
+    bool               guiEnabled;
     void               ToolBarOption();
     void               ToolBarDraws();
     void               ToolBarZoom();

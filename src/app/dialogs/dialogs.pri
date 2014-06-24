@@ -35,7 +35,8 @@ HEADERS += \
     dialogs/app/configpages/configurationpage.h \
     dialogs/app/configpages/patternpage.h \
     dialogs/app/configpages/communitypage.h \
-    dialogs/app/configpages/pathpage.h
+    dialogs/app/configpages/pathpage.h \
+    dialogs/app/dialogundo.h
 
 SOURCES += \
     dialogs/tools/dialogtriangle.cpp \
@@ -72,7 +73,8 @@ SOURCES += \
     dialogs/app/configpages/configurationpage.cpp \
     dialogs/app/configpages/patternpage.cpp \
     dialogs/app/configpages/communitypage.cpp \
-    dialogs/app/configpages/pathpage.cpp
+    dialogs/app/configpages/pathpage.cpp \
+    dialogs/app/dialogundo.cpp
 
 FORMS += \
     dialogs/tools/dialogtriangle.ui \
@@ -103,4 +105,5 @@ FORMS += \
     dialogs/app/dialogindividualmeasurements.ui \
     dialogs/app/dialogaboutapp.ui \
     dialogs/app/dialogpatternxmledit.ui \
-    dialogs/tools/dialogeditwrongformula.ui
+    dialogs/tools/dialogeditwrongformula.ui \
+    dialogs/app/dialogundo.ui

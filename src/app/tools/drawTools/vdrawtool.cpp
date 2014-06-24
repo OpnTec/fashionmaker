@@ -30,9 +30,11 @@
 
 #include <qmuparsererror.h>
 #include "dialogs/tools/dialogeditwrongformula.h"
+#include "dialogs/app/dialogundo.h"
 #include "container/calculator.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
+#include "../../exception/vexceptionundo.h"
 
 qreal VDrawTool::factor = 1;
 
@@ -193,21 +195,43 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
     {
         Q_UNUSED(e)
         delete cal;
-        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
-        dialog->setFormula(formula);
-        if (dialog->exec() == QDialog::Accepted)
+
+        DialogUndo *dialogUndo = new DialogUndo();
+        if (dialogUndo->exec() == QDialog::Accepted)
         {
-            formula = dialog->getFormula();
-            //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
-            //Don't know why.
-            delete dialog;
-            Calculator *cal1 = new Calculator(data);
-            result = cal1->EvalFormula(formula);
-            delete cal1;//Here can be memory leak, but dialog already check this formula and probability very low.
+            UndoButton resultUndo = dialogUndo->Result();
+            delete dialogUndo;
+            if (resultUndo == UndoButton::Fix)
+            {
+                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+                dialog->setFormula(formula);
+                if (dialog->exec() == QDialog::Accepted)
+                {
+                    formula = dialog->getFormula();
+                    /* Need delete dialog here because parser in dialog don't allow use correct separator for parsing
+                     * here.
+                     * Don't know why. */
+                    delete dialog;
+                    Calculator *cal1 = new Calculator(data);
+                    result = cal1->EvalFormula(formula);
+                    delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
+                                  * very low. */
+                }
+                else
+                {
+                    delete dialog;
+                    throw;
+                }
+            }
+            else
+            {
+                QString what = QString("Undo wrong formula %1").arg(formula);
+                throw VExceptionUndo(what);
+            }
         }
         else
         {
-            delete dialog;
+            delete dialogUndo;
             throw;
         }
     }

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   deletepatternpiece.cpp
+ **  @file   vexceptionundo.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 6, 2014
+ **  @date   23 6, 2014
  **
  **  @brief
  **  @copyright
@@ -26,42 +26,14 @@
  **
  *************************************************************************/
 
-#include "deletepatternpiece.h"
-#include "../xml/vpattern.h"
-#include "addpatternpiece.h"
+#include "vexceptionundo.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
-      previousNode(QDomNode())
-{
-    setText(tr("Delete pattern piece %1").arg(namePP));
-
-    QDomElement patternP= doc->GetPPElement(namePP);
-    patternPiece = patternP.cloneNode().toElement();
-    mPath = doc->MPath();
-    previousNode = patternP.previousSibling();//find previous pattern piece
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::~DeletePatternPiece()
+VExceptionUndo::VExceptionUndo(const QString &what)
+    :VException(what)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void DeletePatternPiece::undo()
-{
-    QDomElement rootElement = doc->documentElement();
-    rootElement.insertAfter(patternPiece, previousNode);
-
-    emit NeedFullParsing();
-    doc->ChangedActivPP(namePP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DeletePatternPiece::redo()
-{
-    QDomElement rootElement = doc->documentElement();
-    QDomElement patternPiece = doc->GetPPElement(namePP);
-    rootElement.removeChild(patternPiece);
-    emit NeedFullParsing();
-}
+VExceptionUndo::VExceptionUndo(const VExceptionUndo &e)
+    :VException(e)
+{}

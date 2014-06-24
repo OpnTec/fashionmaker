@@ -65,6 +65,7 @@ public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
+    void          Disable(bool disable);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void  AddToFile();

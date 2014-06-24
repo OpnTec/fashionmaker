@@ -157,6 +157,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::DisableItem, toolArc, &VToolArc::Disable);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);
         return toolArc;
@@ -218,6 +219,12 @@ void VToolArc::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::Disable(bool disable)
+{
+    DisableItem(this, disable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

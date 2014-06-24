@@ -237,6 +237,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
         doc->AddTool(id, point);
         doc->AddTool(splPath1id, point);
         doc->AddTool(splPath2id, point);

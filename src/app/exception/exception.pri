@@ -4,7 +4,8 @@ HEADERS += \
     exception/vexceptionconversionerror.h \
     exception/vexceptionbadid.h \
     exception/vexception.h \
-    exception/vexceptionwrongid.h
+    exception/vexceptionwrongid.h \
+    exception/vexceptionundo.h
 
 SOURCES += \
     exception/vexceptionobjecterror.cpp \
@@ -12,4 +13,5 @@ SOURCES += \
     exception/vexceptionconversionerror.cpp \
     exception/vexceptionbadid.cpp \
     exception/vexception.cpp \
-    exception/vexceptionwrongid.cpp
+    exception/vexceptionwrongid.cpp \
+    exception/vexceptionundo.cpp

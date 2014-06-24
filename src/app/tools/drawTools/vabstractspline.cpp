@@ -48,6 +48,12 @@ void VAbstractSpline::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::Disable(bool disable)
+{
+    DisableItem(this, disable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
  * @param newName new name active pattern peace.

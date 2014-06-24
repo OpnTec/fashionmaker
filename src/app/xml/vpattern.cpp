@@ -36,6 +36,8 @@
 #include "../exception/vexceptionwrongid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionundo.h"
+#include "../widgets/undoevent.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"
@@ -650,36 +652,45 @@ void VPattern::LiteParseTree()
 {
     try
     {
+        emit SetEnabledGUI(true);
         Parse(Document::LiteParse);
+    }
+    catch (const VExceptionUndo &e)
+    {
+        Q_UNUSED(e);
+        /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
+         * myself. Later in method customEvent call undo.*/
+        QApplication::postEvent(this, new UndoEvent());
+        return;
     }
     catch (const VExceptionObjectError &e)
     {
         e.CriticalMessageBox(tr("Error parsing file."));
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionConversionError &e)
     {
         e.CriticalMessageBox(tr("Error can't convert value."));
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         e.CriticalMessageBox(tr("Error empty parameter."));
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionWrongId &e)
     {
         e.CriticalMessageBox(tr("Error wrong id."));
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
         e.CriticalMessageBox(tr("Error parsing file."));
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
     catch (const std::bad_alloc &)
@@ -687,12 +698,12 @@ void VPattern::LiteParseTree()
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
-        QMessageBox::critical(nullptr, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."), QMessageBox::Ok,
-                              QMessageBox::Ok);
+        QMessageBox::critical(nullptr, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."),
+                              QMessageBox::Ok, QMessageBox::Ok);
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        emit ClearMainWindow();
+        emit SetEnabledGUI(false);
         return;
     }
 
@@ -731,6 +742,15 @@ void VPattern::NeedFullParsing()
 void VPattern::ClearScene()
 {
     emit ClearMainWindow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::customEvent(QEvent *event)
+{
+    if(event->type() == UNDO_EVENT)
+    {
+        qApp->getUndoStack()->undo();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1008,6 +1028,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
+                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolPoint::Disable);
                     tools[id] = spoint;
                 }
             }

@@ -145,12 +145,15 @@ signals:
     void           ChangedCursor(quint32 id);
     void           ClearMainWindow();
     void           UndoCommand();
+    void           SetEnabledGUI(bool enabled);
 public slots:
     void           LiteParseTree();
     void           haveLiteChange();
     void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
     void           NeedFullParsing();
     void           ClearScene();
+protected:
+    virtual void   customEvent(QEvent * event);
 private:
     Q_DISABLE_COPY(VPattern)
 

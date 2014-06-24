@@ -34,10 +34,12 @@
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionwrongid.h"
+#include "exception/vexceptionundo.h"
 #include "version.h"
 #include "xml/vstandardmeasurements.h"
 #include "xml/vindividualmeasurements.h"
 #include "widgets/vapplication.h"
+#include "widgets/undoevent.h"
 
 #include <QInputDialog>
 #include <QtCore>
@@ -61,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr),
-      autoSaveTimer(nullptr)
+      autoSaveTimer(nullptr), guiEnabled(true)
 {
     CreateActions();
     CreateMenus();
@@ -98,6 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
+    connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
 
@@ -969,6 +972,15 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::customEvent(QEvent *event)
+{
+    if(event->type() == UNDO_EVENT)
+    {
+        qApp->getUndoStack()->undo();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolBarOption enable option toolbar.
  */
@@ -1532,36 +1544,45 @@ void MainWindow::FullParseFile()
 {
     try
     {
+        SetEnabledGUI(true);
         doc->Parse(Document::FullParse);
+    }
+    catch (const VExceptionUndo &e)
+    {
+        Q_UNUSED(e);
+        /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
+         * myself. Later in method customEvent call undo.*/
+        QApplication::postEvent(this, new UndoEvent());
+        return;
     }
     catch (const VExceptionObjectError &e)
     {
         e.CriticalMessageBox(tr("Error parsing file."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionConversionError &e)
     {
         e.CriticalMessageBox(tr("Error can't convert value."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         e.CriticalMessageBox(tr("Error empty parameter."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionWrongId &e)
     {
         e.CriticalMessageBox(tr("Error wrong id."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
         e.CriticalMessageBox(tr("Error parsing file."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (const std::bad_alloc &)
@@ -1574,7 +1595,7 @@ void MainWindow::FullParseFile()
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
 
@@ -1606,13 +1627,13 @@ void MainWindow::FullParseFile()
     catch (VExceptionBadId &e)
     {
         e.CriticalMessageBox(tr("Bad id."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         e.CriticalMessageBox(tr("Error empty parameter."), this);
-        Clear();
+        SetEnabledGUI(false);
         return;
     }
 
@@ -1625,6 +1646,43 @@ void MainWindow::FullParseFile()
         SetEnableTool(false);
     }
     SetEnableWidgets(true);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetEnabledGUI(bool enabled)
+{
+    if (guiEnabled != enabled)
+    {
+        if (enabled == false)
+        {
+            CancelTool();
+        }
+        comboBoxDraws->setEnabled(enabled);
+        ui->actionOptionDraw->setEnabled(enabled);
+        ui->actionSave->setEnabled(enabled);
+        ui->actionSaveAs->setEnabled(enabled);
+        ui->actionPattern_properties->setEnabled(enabled);
+        ui->actionEdit_pattern_code->setEnabled(enabled);
+        ui->actionZoomIn->setEnabled(enabled);
+        ui->actionZoomOut->setEnabled(enabled);
+        ui->actionArrowTool->setEnabled(enabled);
+        ui->actionHistory->setEnabled(enabled);
+        ui->actionNewDraw->setEnabled(enabled);
+        ui->actionDraw->setEnabled(enabled);
+        ui->actionDetails->setEnabled(enabled);
+        ui->actionTable->setEnabled(enabled);
+        guiEnabled = enabled;
+
+        sceneDraw->SetDisable(!enabled);
+        view->setEnabled(enabled);
+
+        SetEnableTool(enabled);
+        ui->toolBarOption->setEnabled(enabled);
+    #ifndef QT_NO_CURSOR
+        QApplication::setOverrideCursor(Qt::ArrowCursor);
+    #endif
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1647,8 +1705,11 @@ void MainWindow::NewPattern()
  */
 void MainWindow::PatternWasModified(bool saved)
 {
-    setWindowModified(!saved);
-    ui->actionSave->setEnabled(!saved);
+    if (guiEnabled)
+    {
+        setWindowModified(!saved);
+        ui->actionSave->setEnabled(!saved);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

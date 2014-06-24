@@ -51,6 +51,7 @@ public slots:
     virtual void            ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void            SetFactor(qreal factor);
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    void                    Disable(bool disable);
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;

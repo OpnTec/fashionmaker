@@ -53,6 +53,7 @@ public slots:
     virtual void     ChangedActivDraw(const QString &newName);
     virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void     SetFactor(qreal factor);
+    void             Disable(bool disable);
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();

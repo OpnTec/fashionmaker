@@ -28,6 +28,8 @@
 
 #include "vmaingraphicsscene.h"
 #include <QGraphicsSceneMouseEvent>
+#include <QList>
+#include <QGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -87,6 +89,12 @@ QTransform VMainGraphicsScene::transform() const
 void VMainGraphicsScene::setTransform(const QTransform &transform)
 {
     _transform = transform;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SetDisable(bool disable)
+{
+    emit DisableItem(disable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
