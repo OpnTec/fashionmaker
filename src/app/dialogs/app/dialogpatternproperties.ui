@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Pattern properties</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../share/resources/icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -72,7 +76,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../share/resources/icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
