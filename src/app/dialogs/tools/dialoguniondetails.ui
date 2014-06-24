@@ -10,6 +10,18 @@
     <height>78</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>244</width>
+    <height>78</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>244</width>
+    <height>78</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Union details</string>
   </property>
