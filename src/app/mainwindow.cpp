@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
-    ToolBarZoom();
+    ToolBarTools();
 
     pattern = new VContainer();
 
@@ -1048,7 +1048,7 @@ void MainWindow::ToolBarDraws()
     ui->actionLayout->setEnabled(false);
 }
 
-void MainWindow::ToolBarZoom()
+void MainWindow::ToolBarTools()
 {
     /*First we will try use Standard Shortcuts from Qt, but because keypad "-" and "+" not the same keys like in main
     keypad, shortcut Ctrl+"-" or "+" from keypad will not working with standard shortcut (QKeySequence::ZoomIn or
@@ -2086,11 +2086,13 @@ void MainWindow::CreateMenus()
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
     ui->menuDrawing->insertAction(ui->actionPattern_properties, undoAction);
+    ui->toolBarTools->addAction(undoAction);
 
     QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuDrawing->insertAction(ui->actionPattern_properties, redoAction);
+    ui->toolBarTools->addAction(redoAction);
 
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);

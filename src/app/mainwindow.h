@@ -219,7 +219,7 @@ private:
     bool               guiEnabled;
     void               ToolBarOption();
     void               ToolBarDraws();
-    void               ToolBarZoom();
+    void               ToolBarTools();
     void               InitToolButtons();
     void               CancelTool();
     void               ArrowTool();
